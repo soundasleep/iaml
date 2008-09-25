@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.openiaml.model; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.openiaml.model.model,
+ org.openiaml.model.model.impl,
+ org.openiaml.model.model.operations,
+ org.openiaml.model.model.operations.impl,
+ org.openiaml.model.model.operations.util,
+ org.openiaml.model.model.util,
+ org.openiaml.model.model.visual,
+ org.openiaml.model.model.visual.impl,
+ org.openiaml.model.model.visual.util,
+ org.openiaml.model.model.wires,
+ org.openiaml.model.model.wires.impl,
+ org.openiaml.model.model.wires.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Eclipse-LazyStart: true

@@ -70,6 +70,7 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="we cannot have InternetApplications inside of other ElementContainers, thus we don't define it as an ApplicationElement"/>
       <details key="comment2" value="but why can we have it as an ActivityEdgeSource? I don't think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA"/>
+      <details key="editor" value="org.openiaml.model.diagram"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
@@ -81,6 +82,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="stores database objects"/>
+      <details key="editor" value="org.openiaml.model.diagram.domain_store"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//DomainObject" containment="true"/>
@@ -89,6 +91,9 @@
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="editor" value="org.openiaml.model.diagram.visual"/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InputForm" eSuperTypes="#//VisibleThing"/>
@@ -105,6 +110,7 @@
         <details key="comment" value="ideally this would be abstract; but we want to have a &quot;wire&quot; diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire..."/>
         <details key="comment2" value="easy visualisation: all composite wires are dashed"/>
         <details key="comment3" value="only composite wires have a name now"/>
+        <details key="editor" value="org.openiaml.model.diagram.wire"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
           eType="#//ApplicationElement" containment="true"/>

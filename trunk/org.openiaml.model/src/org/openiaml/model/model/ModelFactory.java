@@ -116,6 +116,15 @@ public interface ModelFactory extends EFactory {
 	ApplicationElementProperty createApplicationElementProperty();
 
 	/**
+	 * Returns a new object of class '<em>Visible Thing</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Visible Thing</em>'.
+	 * @generated
+	 */
+	VisibleThing createVisibleThing();
+
+	/**
 	 * Returns a new object of class '<em>Internet Application</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

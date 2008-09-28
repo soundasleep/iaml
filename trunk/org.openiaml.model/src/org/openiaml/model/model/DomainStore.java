@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getDomainStore()
- * @model annotation="http://openiaml.org/comment comment='stores database objects'"
+ * @model annotation="http://openiaml.org/comment comment='stores database objects' editor='org.openiaml.model.diagram.domain_store'"
  * @generated
  */
 public interface DomainStore extends ContainsOperations, ContainsEventTriggers, NamedElement {

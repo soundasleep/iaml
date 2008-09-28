@@ -933,10 +933,10 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.VisibleThing <em>Visible Thing</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.VisibleThingImpl <em>Visible Thing</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.VisibleThing
+	 * @see org.openiaml.model.model.impl.VisibleThingImpl
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getVisibleThing()
 	 * @generated
 	 */
@@ -1848,10 +1848,10 @@ public interface ModelPackage extends EPackage {
 		EClass APPLICATION_ELEMENT_PROPERTY = eINSTANCE.getApplicationElementProperty();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.VisibleThing <em>Visible Thing</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.VisibleThingImpl <em>Visible Thing</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.VisibleThing
+		 * @see org.openiaml.model.model.impl.VisibleThingImpl
 		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getVisibleThing()
 		 * @generated
 		 */

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.openiaml.model.model.impl.VisibleThingImpl;
 import org.openiaml.model.model.impl.ApplicationElementContainerImpl;
 
 import org.openiaml.model.model.visual.Page;
@@ -30,7 +31,7 @@ import org.openiaml.model.model.visual.VisualPackage;
  *
  * @generated
  */
-public class PageImpl extends ApplicationElementContainerImpl implements Page {
+public class PageImpl extends VisibleThingImpl implements Page {
 	/**
 	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
 	 * <!-- begin-user-doc -->

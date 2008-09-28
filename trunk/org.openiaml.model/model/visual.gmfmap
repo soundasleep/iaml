@@ -280,7 +280,7 @@
     <domainModel
         href="iaml.ecore#/"/>
     <domainMetaElement
-        href="iaml.ecore#//visual/Page"/>
+        href="iaml.ecore#//VisibleThing"/>
     <palette
         href="visual.gmftool#//@palette"/>
   </diagram>

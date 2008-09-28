@@ -31,7 +31,7 @@ import org.openiaml.model.model.WireEdge;
  * </p>
  *
  * @see org.openiaml.model.model.wires.WiresPackage#getCompositeWire()
- * @model annotation="http://openiaml.org/comment comment='ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire...' comment2='easy visualisation: all composite wires are dashed' comment3='only composite wires have a name now'"
+ * @model annotation="http://openiaml.org/comment comment='ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire...' comment2='easy visualisation: all composite wires are dashed' comment3='only composite wires have a name now' editor='org.openiaml.model.diagram.wire'"
  * @generated
  */
 public interface CompositeWire extends WireEdge, NamedElement {

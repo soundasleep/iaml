@@ -60,10 +60,10 @@
         eType="#//ApplicationElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" abstract="true" interface="true"
-      eSuperTypes="#//ApplicationElementContainer">
+  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ApplicationElementContainer">
     <eAnnotations source="http://openiaml.org/comment">
-      <details key="comment" value="currently this means nothing..."/>
+      <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
+      <details key="editor" value="org.openiaml.model.diagram.visual"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement">
@@ -91,9 +91,6 @@
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="editor" value="org.openiaml.model.diagram.visual"/>
-      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InputForm" eSuperTypes="#//VisibleThing"/>

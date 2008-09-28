@@ -23,7 +23,7 @@
       <editor
          id="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"
          name="%editorName"
-         icon="icons/obj16/VisualDiagramFile.gif"
+         icon="icons/obj16/ModelDiagramFile.gif"
          extensions="iaml_visual_diagram"
          default="true"
          class="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor"
@@ -46,7 +46,7 @@
       <?gmfgen generated="true"?>
   	  <wizard
   	     name="%newWizardName"
-  	     icon="icons/obj16/VisualDiagramFile.gif"
+  	     icon="icons/obj16/ModelDiagramFile.gif"
   	     category="org.eclipse.ui.Examples"
   	     class="org.openiaml.model.model.diagram.visual.part.IamlCreationWizard"
   	     id="org.openiaml.model.model.diagram.visual.part.IamlCreationWizardID">
@@ -303,12 +303,12 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model/visual">
+      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.Page_79"
-               name="%metatype.name.Page_79"
+               id="org.openiaml.model.diagram.visual.VisibleThing_79"
+               name="%metatype.name.VisibleThing_79"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="Page"
+               eclass="VisibleThing"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.PageEditHelper">
             <param name="semanticHint" value="79"/>
          </metamodelType>
@@ -374,13 +374,14 @@
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
-         <specializationType
+         <metamodelType
                id="org.openiaml.model.diagram.visual.Page_1007"
                name="%metatype.name.Page_1007"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.visual.Page_79"/>
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Page"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.Page2EditHelper">
             <param name="semanticHint" value="1007"/>
-         </specializationType>
+         </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
@@ -444,7 +445,7 @@
          </enablement>
       </clientContext> 
       <binding context="Iaml_VisualClientContext">
-         <elementType ref="org.openiaml.model.diagram.visual.Page_79"/>
+         <elementType ref="org.openiaml.model.diagram.visual.VisibleThing_79"/>
          <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_1001"/>
          <elementType ref="org.openiaml.model.diagram.visual.SingleOperation_1002"/>
          <elementType ref="org.openiaml.model.diagram.visual.CompositeOperation_1003"/>
@@ -506,7 +507,7 @@
             priority="normal" 
             contentProvider="org.openiaml.model.model.diagram.visual.navigator.IamlNavigatorContentProvider" 
             labelProvider="org.openiaml.model.model.diagram.visual.navigator.IamlNavigatorLabelProvider"
-            icon="icons/obj16/VisualDiagramFile.gif"
+            icon="icons/obj16/ModelDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
             <or>
@@ -548,7 +549,7 @@
             priority="normal" 
             contentProvider="org.openiaml.model.model.diagram.visual.navigator.IamlDomainNavigatorContentProvider" 
             labelProvider="org.openiaml.model.model.diagram.visual.navigator.IamlDomainNavigatorLabelProvider"
-            icon="icons/obj16/VisualDiagramFile.gif"
+            icon="icons/obj16/ModelDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
             <or>

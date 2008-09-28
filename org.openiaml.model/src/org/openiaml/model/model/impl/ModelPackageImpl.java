@@ -830,7 +830,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(applicationElementPropertyEClass, ApplicationElementProperty.class, "ApplicationElementProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(visibleThingEClass, VisibleThing.class, "VisibleThing", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(visibleThingEClass, VisibleThing.class, "VisibleThing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(internetApplicationEClass, InternetApplication.class, "InternetApplication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInternetApplication_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -861,20 +861,23 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (visibleThingEClass, 
 		   source, 
 		   new String[] {
-			 "comment", "currently this means nothing..."
+			 "comment", "this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor",
+			 "editor", "org.openiaml.model.diagram.visual"
 		   });		
 		addAnnotation
 		  (internetApplicationEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "we cannot have InternetApplications inside of other ElementContainers, thus we don\'t define it as an ApplicationElement",
-			 "comment2", "but why can we have it as an ActivityEdgeSource? I don\'t think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA"
+			 "comment2", "but why can we have it as an ActivityEdgeSource? I don\'t think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA",
+			 "editor", "org.openiaml.model.diagram"
 		   });		
 		addAnnotation
 		  (domainStoreEClass, 
 		   source, 
 		   new String[] {
-			 "comment", "stores database objects"
+			 "comment", "stores database objects",
+			 "editor", "org.openiaml.model.diagram.domain_store"
 		   });
 	}
 

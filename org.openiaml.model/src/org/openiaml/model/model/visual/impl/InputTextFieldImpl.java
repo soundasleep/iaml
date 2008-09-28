@@ -8,6 +8,7 @@ package org.openiaml.model.model.visual.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.openiaml.model.model.impl.VisibleThingImpl;
 import org.openiaml.model.model.impl.ApplicationElementContainerImpl;
 
 import org.openiaml.model.model.visual.InputTextField;
@@ -22,7 +23,7 @@ import org.openiaml.model.model.visual.VisualPackage;
  *
  * @generated
  */
-public class InputTextFieldImpl extends ApplicationElementContainerImpl implements InputTextField {
+public class InputTextFieldImpl extends VisibleThingImpl implements InputTextField {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -70,6 +70,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.COMPOSITE_OPERATION: return createCompositeOperation();
 			case ModelPackage.EVENT_AWARE_OPERATION: return createEventAwareOperation();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY: return createApplicationElementProperty();
+			case ModelPackage.VISIBLE_THING: return createVisibleThing();
 			case ModelPackage.INTERNET_APPLICATION: return createInternetApplication();
 			case ModelPackage.DOMAIN_STORE: return createDomainStore();
 			default:
@@ -175,6 +176,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public ApplicationElementProperty createApplicationElementProperty() {
 		ApplicationElementPropertyImpl applicationElementProperty = new ApplicationElementPropertyImpl();
 		return applicationElementProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VisibleThing createVisibleThing() {
+		VisibleThingImpl visibleThing = new VisibleThingImpl();
+		return visibleThing;
 	}
 
 	/**

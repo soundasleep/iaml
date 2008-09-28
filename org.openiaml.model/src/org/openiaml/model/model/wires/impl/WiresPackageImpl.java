@@ -421,7 +421,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   new String[] {
 			 "comment", "ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire...",
 			 "comment2", "easy visualisation: all composite wires are dashed",
-			 "comment3", "only composite wires have a name now"
+			 "comment3", "only composite wires have a name now",
+			 "editor", "org.openiaml.model.diagram.wire"
 		   });		
 		addAnnotation
 		  (runWireEClass, 

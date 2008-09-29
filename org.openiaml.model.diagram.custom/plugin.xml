@@ -2,10 +2,11 @@
 <?eclipse version="3.2"?>
 <plugin>
 
+	<!-- missing shortcuts for visual -->
 	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
 	  <editpartProvider class="org.openiaml.model.diagram.custom.edit.providers.CustomVisualEditPartProvider">
 	    <Priority name="Low" />
-	    <object class="org.eclipse.gmf.runtime.notation.Node" id="MyOverride">
+	    <object class="org.eclipse.gmf.runtime.notation.Diagram" id="MyOverride">
 	      <method name="getElement()">
 	        <value class="org.openiaml.model.model.VisibleThing"/>
 	      </method>
@@ -15,12 +16,27 @@
 	  </editpartProvider>
 	</extension>
 
+	<!-- missing shortcuts for root -->
 	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
 	  <editpartProvider class="org.openiaml.model.diagram.custom.edit.providers.CustomRootEditPartProvider">
 	    <Priority name="Low" />
-	    <object class="org.eclipse.gmf.runtime.notation.Node" id="MyOverride">
+	    <object class="org.eclipse.gmf.runtime.notation.Diagram" id="MyOverride">
 	      <method name="getElement()">
 	        <value class="org.openiaml.model.model.InternetApplication"/>
+	      </method>
+	    </object>
+	    <context
+           views="MyOverride"/>
+	  </editpartProvider>
+	</extension>
+
+	<!-- missing shortcuts for wire -->
+	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+	  <editpartProvider class="org.openiaml.model.diagram.custom.edit.providers.CustomWireEditPartProvider">
+	    <Priority name="Low" />
+	    <object class="org.eclipse.gmf.runtime.notation.Diagram" id="MyOverride">
+	      <method name="getElement()">
+	        <value class="org.openiaml.model.model.wires.CompositeWire"/>
 	      </method>
 	    </object>
 	    <context

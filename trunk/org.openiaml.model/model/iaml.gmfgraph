@@ -250,6 +250,7 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="SyncWireFigure"
           lineKind="LINE_DASH"
+          sourceDecoration="//@figures.0/@figures.0"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"

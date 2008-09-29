@@ -9,12 +9,10 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.diagram.custom.commands.CreateMissingShortcutsCommand;
+import org.openiaml.model.diagram.custom.commands.CreateMissingVisualShortcutsCommand;
+import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
 import org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.visual.providers.IamlEditPartProvider;
-import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
 
 /**
  * We add some additional functionality to our default edit provider
@@ -53,7 +51,9 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 						
 						// MessageDialog.openInformation(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Warning", "Not yet implemented");
 						
-						ICommand command = new CreateMissingShortcutsCommand((GraphicalEditPart) editpart, IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+						ICommand command = new CreateMissingVisualShortcutsCommand((GraphicalEditPart) editpart, 
+									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT, 
+									PageEditPart.MODEL_ID);
 						
 						try {
 							OperationHistoryFactory.getOperationHistory().execute(command,

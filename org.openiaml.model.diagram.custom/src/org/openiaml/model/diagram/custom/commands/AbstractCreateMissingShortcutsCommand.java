@@ -34,14 +34,14 @@ import org.openiaml.model.model.WireEdge;
  * @author jmwright
  *
  */
-public abstract class CreateMissingShortcutsCommand extends AbstractTransactionalCommand {
+public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTransactionalCommand {
 
 	private EObject rootObject;
 	private GraphicalEditPart selectedElement;
 	private View parentView;
 	private PreferencesHint prefHint;
 
-	public CreateMissingShortcutsCommand(
+	public AbstractCreateMissingShortcutsCommand(
 			GraphicalEditPart root,
 			EObject rootObject,
 			TransactionalEditingDomain editingDomain, 
@@ -54,12 +54,12 @@ public abstract class CreateMissingShortcutsCommand extends AbstractTransactiona
 		this.prefHint = prefHint;
 	}
 
-	public CreateMissingShortcutsCommand(GraphicalEditPart root,
+	public AbstractCreateMissingShortcutsCommand(GraphicalEditPart root,
 			EObject object, PreferencesHint prefHint) {
 		this(root, object, root.getEditingDomain(), (View) root.getModel(), prefHint);
 	}
 
-	public CreateMissingShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint) {
+	public AbstractCreateMissingShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint) {
 		this(root, (EObject) ((Diagram) root.getModel()), prefHint);
 	}
 

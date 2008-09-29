@@ -3,6 +3,8 @@
 <plugin>
 
 	<!-- missing shortcuts for visual -->
+	<!-- Q: will having two providers for the same superclass (VisibleThing <- ApplicationElement) cause problems? -->
+	<!-- A: no. either getElement() is very specific (ignores supertypes) or its done in order. -->
 	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
 	  <editpartProvider class="org.openiaml.model.diagram.custom.edit.providers.CustomVisualEditPartProvider">
 	    <Priority name="Low" />
@@ -44,4 +46,33 @@
 	  </editpartProvider>
 	</extension>
 
+	<!-- missing shortcuts for domain_store -->
+	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+	  <editpartProvider class="org.openiaml.model.diagram.custom.edit.providers.CustomDomainStoreEditPartProvider">
+	    <Priority name="Low" />
+	    <object class="org.eclipse.gmf.runtime.notation.Diagram" id="MyOverride">
+	      <method name="getElement()">
+	        <value class="org.openiaml.model.model.DomainStore"/>
+	      </method>
+	    </object>
+	    <context
+           views="MyOverride"/>
+	  </editpartProvider>
+	</extension>
+
+
+	<!-- missing shortcuts for element -->
+	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+	  <editpartProvider class="org.openiaml.model.diagram.custom.edit.providers.CustomElementEditPartProvider">
+	    <Priority name="Low" />
+	    <object class="org.eclipse.gmf.runtime.notation.Diagram" id="MyOverride">
+	      <method name="getElement()">
+	        <value class="org.openiaml.model.model.ApplicationElement"/>
+	      </method>
+	    </object>
+	    <context
+           views="MyOverride"/>
+	  </editpartProvider>
+	</extension>
+	
 </plugin>

@@ -1,12 +1,18 @@
 package org.openiaml.model.diagram.custom.edit.providers;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.operations.OperationHistoryFactory;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartListener;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.PlatformUI;
+import org.openiaml.model.diagram.custom.commands.CreateMissingShortcutsCommand;
+import org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.visual.providers.IamlEditPartProvider;
 import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
 
@@ -24,18 +30,15 @@ import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
  *
  */
 public class CustomVisualEditPartProvider extends IamlEditPartProvider {
-	// TODO: does our reference to explicitly IamlEditPartProvider
+	// Q: does our reference to explicitly visual.IamlEditPartProvider
 	// prevent it from displaying on alternative EditParts?
+	// A: yes it does.
 	
 	public IGraphicalEditPart createGraphicEditPart(View view) {
 		// install our policy
 		final IGraphicalEditPart part = super.createGraphicEditPart(view);
 
-		// we only want blank objects to have the expand
-		String s = part.getClass().getSimpleName();
-		
-		if (part.getClass().getSimpleName().equals("PageEditPart")) {
-		
+		// we only want the root element to have this functionality
 		if (part instanceof PageEditPart) {
 
 			// do something
@@ -48,19 +51,17 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 				public void partActivated(EditPart editpart) {
 					if (editpart instanceof GraphicalEditPart) {
 						
-						MessageDialog.openInformation(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Warning", "Not yet implemented");
+						// MessageDialog.openInformation(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Warning", "Not yet implemented");
 						
-						/*
-						ICommand command = new CreateMissingShortcutsCommand((GraphicalEditPart) editpart, Uml3DiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+						ICommand command = new CreateMissingShortcutsCommand((GraphicalEditPart) editpart, IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 						
 						try {
 							OperationHistoryFactory.getOperationHistory().execute(command,
 									new NullProgressMonitor(), null);
 						} catch (ExecutionException e) {
-							Uml3DiagramEditorPlugin.getInstance().logError(
+							IamlDiagramEditorPlugin.getInstance().logError(
 									"Unable to refresh shortcuts view", e); //$NON-NLS-1$
 						}
-						*/
 					}
 				}
 
@@ -88,9 +89,7 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 			// so we will ignore this option and just do it through the pseudo-hack below.
 			
 		}
-		
-		}
-		
+				
 		return part;
 	}
 	

@@ -642,7 +642,9 @@
           kind="Pathmaps"/>
     </preferencePages>
   </diagram>
-  <plugin/>
+  <plugin
+      provider="www.openiaml.org"
+      version="0.0.1"/>
   <editor/>
   <navigator>
     <childReferences

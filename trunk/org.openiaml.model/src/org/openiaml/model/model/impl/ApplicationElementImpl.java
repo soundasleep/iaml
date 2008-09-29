@@ -53,7 +53,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *
  * @generated
  */
-public abstract class ApplicationElementImpl extends EObjectImpl implements ApplicationElement {
+public class ApplicationElementImpl extends EObjectImpl implements ApplicationElement {
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

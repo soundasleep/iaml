@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+	  <editpartProvider class="org.openiaml.model.diagram.custom.edit.providers.CustomVisualEditPartProvider">
+	    <Priority name="Low" />
+	    <object class="org.eclipse.gmf.runtime.notation.Node" id="MyOverride">
+	      <method name="getElement()">
+	        <value class="org.openiaml.model.model.VisibleThing"/>
+	      </method>
+	    </object>
+	    <context
+           views="MyOverride"/>
+	  </editpartProvider>
+	</extension>
+
+</plugin>

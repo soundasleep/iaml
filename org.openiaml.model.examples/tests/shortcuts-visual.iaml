@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires">
-  <children xsi:type="iaml.visual:Page" name="a">
+  <children xsi:type="iaml.visual:Page" name="source">
     <eventTriggers name="et2">
       <edges xsi:type="iaml.wires:RunWire" to="//@children.1/@operations.0" name="run2"/>
     </eventTriggers>
   </children>
-  <children xsi:type="iaml.visual:Page" name="b">
+  <children xsi:type="iaml.visual:Page" name="target">
     <operations xsi:type="iaml:SingleOperation" inEdges="//@children.1/@eventTriggers.0/@edges.0 //@children.0/@eventTriggers.0/@edges.0" name="so"/>
     <eventTriggers name="et">
       <edges xsi:type="iaml.wires:RunWire" to="//@children.1/@operations.0" name="run"/>

@@ -22,23 +22,19 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.diagram.visual.edit.commands.IamlCreateShortcutDecorationsCommand;
-import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
 
 /**
+ * This class is now abstract so that we may have multiple similar commands
+ * for each separate editor, e.g. we have both the Visual and Root element 
+ * editors both pointing towards the same Command.
+ * 
  * Most of this code is based on http://www.jevon.org/wiki/GMF_Code_Samples
  * 
  * @author jmwright
  *
  */
-public class CreateMissingShortcutsCommand extends AbstractTransactionalCommand {
+public abstract class CreateMissingShortcutsCommand extends AbstractTransactionalCommand {
 
 	private EObject rootObject;
 	private GraphicalEditPart selectedElement;
@@ -70,6 +66,9 @@ public class CreateMissingShortcutsCommand extends AbstractTransactionalCommand 
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
 		
+		// quick sanity check
+		assert(getEditPartModelId() != null);
+		
 		// get the command to create the shortcuts
 		ICommand command = getCreateShortcutsCommand();
 
@@ -93,7 +92,32 @@ public class CreateMissingShortcutsCommand extends AbstractTransactionalCommand 
 	}
 
 	/**
-	 * Generate the command for creating the shortcuts
+	 * For a given EObject, get all the WireEdges that go out of it
+	 * 
+	 * @param object
+	 * @return
+	 */
+	protected abstract List<WireEdge> getEdgesOut(EObject object);
+	
+	/**
+	 * For a given EObject, get all the WireEdges that come into it
+	 * 
+	 * @param object
+	 * @return
+	 */
+	protected abstract List<WireEdge> getEdgesIn(EObject object);
+	
+	/**
+	 * The MODEL_ID to be placed in the shortcut annotation. 
+	 * For example, PageEditPart.MODEL_ID. 
+	 * Must not be null.
+	 * 
+	 * @return
+	 */
+	protected abstract String getEditPartModelId();
+	
+	/**
+	 * Generate the command for creating the shortcuts.
 	 */
 	protected ICommand getCreateShortcutsCommand() {
 
@@ -101,7 +125,7 @@ public class CreateMissingShortcutsCommand extends AbstractTransactionalCommand 
 		
 		// get all the nodes in the model tree
 		final Diagram rootView = (Diagram) selectedElement.getModel();
-		VisibleThing rootObject = (VisibleThing) rootView.getElement();	// we could actually go further up the heirarchy, i.e. ApplicationElementContainer
+		EObject rootObject = rootView.getElement();
 		
 		// we create a composition of the commands necessary
 		ICommand command = new RefreshElementCommand(rootObject, 
@@ -109,39 +133,11 @@ public class CreateMissingShortcutsCommand extends AbstractTransactionalCommand 
 				rootView);
 
 		// find all connections that should exist for these nodes
-		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
-		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
+		List<WireEdge> connectionsOut = this.getEdgesOut(rootObject); 
+		List<WireEdge> connectionsIn = this.getEdgesIn(rootObject);
+
 		List<EObject> toAdd = new ArrayList<EObject>();
-		
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
-			connectionsOut.addAll( child.getEdges() );
-			// we also look at the backwards references to add incoming shortcuts
-			connectionsIn.addAll( child.getInEdges() );
-		}
-		
-		// EventTrigger
-		for (EventTrigger child : rootObject.getEventTriggers()) {
-			connectionsOut.addAll( child.getEdges() );
-			// EventTriggers can't have incoming connections
-		}
-		
-		// Operation (incl ChainedOperation)
-		for (Operation child : rootObject.getOperations()) {
-			if (child instanceof WireEdgesSource) {
-				connectionsIn.addAll( ((WireEdgesSource) child).getEdges() );
-			}
-			// we also look at the backwards references to add incoming shortcuts
-			connectionsIn.addAll( child.getInEdges() );
-		}
-		
-		// ApplicationElementProperty
-		for (ApplicationElementProperty child : rootObject.getProperties()) {
-			connectionsOut.addAll( child.getEdges() );
-			// new: we now also look at the backwards references to add incoming shortcuts
-			connectionsIn.addAll( child.getInEdges() );
-		}
-		
+
 		// get all connections outwards that we need to add
 		for (WireEdge edge : connectionsOut) {
 			// if the connection is not already displayed with a shortcut
@@ -193,13 +189,12 @@ public class CreateMissingShortcutsCommand extends AbstractTransactionalCommand 
 			command = command.compose(new CreateCommand(
 					selectedElement.getEditingDomain(), viewDescriptor, parentView));
 			command = command.compose(new CreateShortcutDecorationsCommand(
-					selectedElement.getEditingDomain(), parentView, viewDescriptor, PageEditPart.MODEL_ID));
+					selectedElement.getEditingDomain(), parentView, viewDescriptor, this.getEditPartModelId()));
 			
 		}
 
 		return command;
 		
 	}
-
 
 }

@@ -16,4 +16,17 @@ These requirements may be installed through the [http://download.eclipse.org/rel
 
 =Installation=
 
-Now that you have got the IAML plugin installed, you can run through the [Tutorial] to learn how to use the plugin to generate your first modelled Internet application.
+  # In Eclipse, select _Help_ > _Software Updates_ > _Find and Install..._
+  # Add the following remote site:
+{{{
+    Name: IAML Plugin
+    URL:  http://iaml.googlecode.com/svn/trunk/org.openiaml.update/
+}}}
+  # Select the _IAML Modelling Platform_ feature to install
+  # Once it has been installed, restart Eclipse
+
+Now that you have got the IAML plugin installed, you can run through the [Tutorial] to learn how to use the plugin to generate your first modelled Internet application:
+
+  # Create a new blank project
+  # Create a new IAML model by selecting _New..._ > _Examples_ > _Iaml Diagram_
+  # You can now edit the _iaml_diagram_ to create your Internet application visually

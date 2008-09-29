@@ -30,6 +30,7 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.diagram.visual.edit.commands.IamlCreateShortcutDecorationsCommand;
+import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
 
 /**
  * Most of this code is based on http://www.jevon.org/wiki/GMF_Code_Samples
@@ -191,8 +192,8 @@ public class CreateMissingShortcutsCommand extends AbstractTransactionalCommand 
 			// TODO: it would be nice if the newly created elements are not just placed at (0,0)
 			command = command.compose(new CreateCommand(
 					selectedElement.getEditingDomain(), viewDescriptor, parentView));
-			command = command.compose(new IamlCreateShortcutDecorationsCommand(
-					selectedElement.getEditingDomain(), parentView, viewDescriptor));
+			command = command.compose(new CreateShortcutDecorationsCommand(
+					selectedElement.getEditingDomain(), parentView, viewDescriptor, PageEditPart.MODEL_ID));
 			
 		}
 

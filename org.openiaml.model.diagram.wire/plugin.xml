@@ -363,6 +363,16 @@
             <param name="semanticHint" value="1005"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.wire.EventTrigger_1006"
+               name="%metatype.name.EventTrigger_1006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="EventTrigger"
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.EventTriggerEditHelper">
+            <param name="semanticHint" value="1006"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.wire.SyncWire_3001"
@@ -401,6 +411,7 @@
          <elementType ref="org.openiaml.model.diagram.wire.EventAwareOperation_1003"/>
          <elementType ref="org.openiaml.model.diagram.wire.DomainAttribute_1004"/>
          <elementType ref="org.openiaml.model.diagram.wire.InputTextField_1005"/>
+         <elementType ref="org.openiaml.model.diagram.wire.EventTrigger_1006"/>
          <elementType ref="org.openiaml.model.diagram.wire.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.wire.RunWire_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>

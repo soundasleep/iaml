@@ -1,0 +1,19 @@
+#summary How to install releases of the IAML Eclipse Plugin
+#labels Featured
+
+=Introduction=
+
+The IAML plugin is an Eclipse plugin that provides a visual editor for the modelling of Internet applications, as an implementation of our [http://openiaml.org research project]. Following our research emphasis on iterative development, we hope that regularly releasing our plugin will help us focus development and gain valuable feedback from the development community.
+
+=Requirements=
+
+*Currently the plugin only supports Eclipse 3.3 (Europa) and GMF 2.0.1.*
+
+  # Eclipse 3.3 Europa
+  # GMF 2.0.1
+
+These requirements may be installed through the [http://download.eclipse.org/releases/europa/ Europa update site].
+
+=Installation=
+
+Now that you have got the IAML plugin installed, you can run through the [Tutorial] to learn how to use the plugin to generate your first modelled Internet application.

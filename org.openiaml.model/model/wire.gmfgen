@@ -532,7 +532,9 @@
   </diagram>
   <plugin
       iD="org.openiaml.model.diagram.wire"
-      name="Iaml Plugin (Wire)"/>
+      name="Iaml Plugin (Wire)"
+      provider="www.openiaml.org"
+      version="0.0.1"/>
   <editor/>
   <navigator>
     <childReferences

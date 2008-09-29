@@ -457,7 +457,9 @@
   </diagram>
   <plugin
       iD="org.openiaml.model.diagram.element"
-      name="Iaml Plugin (Element)"/>
+      name="Iaml Plugin (Element)"
+      provider="www.openiaml.org"
+      version="0.0.1"/>
   <editor/>
   <navigator>
     <childReferences

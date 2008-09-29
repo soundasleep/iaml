@@ -12,39 +12,29 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.wires.CompositeWire;
 
 /**
- * Implementation of the missing shortcuts for CompositeWire.
- * 
- * @note Yes, this is a copy of CreateMissingVisualShortcutsCommand, 
- * but this is because the Ecore model considers them as two different 
- * entities. (Indeed, we have different editors for each of them.)
+ * Implementation of the missing shortcuts for DomainStore.
  * 
  * @author jmwright
  *
  */
-public class CreateMissingWireShortcutsCommand extends
+public class CreateMissingElementShortcutsCommand extends
 		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	
-	public CreateMissingWireShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
+	public CreateMissingElementShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
 		super(root, prefHint);
 		this.modelId = modelId;
 	}
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		CompositeWire rootObject = (CompositeWire) object;
+		ApplicationElement rootObject = (ApplicationElement) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 		
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
-			connectionsIn.addAll( child.getInEdges() );
-		}
-
 		// EventTrigger doesn't have in edges
 		
 		// Operation (incl ChainedOperation)
@@ -62,15 +52,10 @@ public class CreateMissingWireShortcutsCommand extends
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		CompositeWire rootObject = (CompositeWire) object;
+		ApplicationElement rootObject = (ApplicationElement) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
-			connectionsOut.addAll( child.getEdges() );
-		}
-		
 		// EventTrigger
 		for (EventTrigger child : rootObject.getEventTriggers()) {
 			connectionsOut.addAll( child.getEdges() );

@@ -8,40 +8,37 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.wires.CompositeWire;
 
 /**
- * Implementation of the missing shortcuts for CompositeWire.
- * 
- * @note Yes, this is a copy of CreateMissingVisualShortcutsCommand, 
- * but this is because the Ecore model considers them as two different 
- * entities. (Indeed, we have different editors for each of them.)
+ * Implementation of the missing shortcuts for DomainStore.
  * 
  * @author jmwright
  *
  */
-public class CreateMissingWireShortcutsCommand extends
+public class CreateMissingDomainStoreShortcutsCommand extends
 		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	
-	public CreateMissingWireShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
+	public CreateMissingDomainStoreShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
 		super(root, prefHint);
 		this.modelId = modelId;
 	}
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		CompositeWire rootObject = (CompositeWire) object;
+		DomainStore rootObject = (DomainStore) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 		
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
+		// DomainObject <- ApplicationElement
+		for (DomainObject child : rootObject.getChildren()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 
@@ -62,12 +59,12 @@ public class CreateMissingWireShortcutsCommand extends
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		CompositeWire rootObject = (CompositeWire) object;
+		DomainStore rootObject = (DomainStore) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
+		// DomainObject <- ApplicationElement
+		for (DomainObject child : rootObject.getChildren()) {
 			connectionsOut.addAll( child.getEdges() );
 		}
 		

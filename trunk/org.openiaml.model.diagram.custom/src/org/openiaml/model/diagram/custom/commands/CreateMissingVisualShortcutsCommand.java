@@ -21,7 +21,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *
  */
 public class CreateMissingVisualShortcutsCommand extends
-		CreateMissingShortcutsCommand {
+		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires">
+  <children xsi:type="iaml.visual:Page" name="a">
+    <operations xsi:type="iaml:CompositeOperation" inEdges="//@children.0/@children.0/@edges.0" name="co"/>
+    <children xsi:type="iaml.visual:InputTextField" name="itf">
+      <edges xsi:type="iaml.wires:SyncWire" to="//@children.0/@operations.0" name="containing wire">
+        <operations xsi:type="iaml:SingleOperation" inEdges="//@children.0/@children.0/@edges.1" name="so"/>
+      </edges>
+      <edges xsi:type="iaml.wires:RunWire" to="//@children.0/@children.0/@edges.0/@operations.0" name="wire to appear as shortcut"/>
+    </children>
+  </children>
+  <children xsi:type="iaml.visual:Page" name="b"/>
+</iaml:InternetApplication>

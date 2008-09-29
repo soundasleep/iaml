@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getApplicationElement()
- * @model abstract="true"
+ * @model annotation="http://openiaml.org/comment editor='org.openiaml.model.diagram.element'"
  * @generated
  */
 public interface ApplicationElement extends ContainsOperations, NamedElement, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination {

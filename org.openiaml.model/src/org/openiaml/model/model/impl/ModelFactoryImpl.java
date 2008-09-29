@@ -69,6 +69,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.CHAINED_OPERATION: return createChainedOperation();
 			case ModelPackage.COMPOSITE_OPERATION: return createCompositeOperation();
 			case ModelPackage.EVENT_AWARE_OPERATION: return createEventAwareOperation();
+			case ModelPackage.APPLICATION_ELEMENT: return createApplicationElement();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY: return createApplicationElementProperty();
 			case ModelPackage.VISIBLE_THING: return createVisibleThing();
 			case ModelPackage.INTERNET_APPLICATION: return createInternetApplication();
@@ -166,6 +167,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public EventAwareOperation createEventAwareOperation() {
 		EventAwareOperationImpl eventAwareOperation = new EventAwareOperationImpl();
 		return eventAwareOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ApplicationElement createApplicationElement() {
+		ApplicationElementImpl applicationElement = new ApplicationElementImpl();
+		return applicationElement;
 	}
 
 	/**

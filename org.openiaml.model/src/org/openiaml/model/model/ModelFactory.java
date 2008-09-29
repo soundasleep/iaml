@@ -107,6 +107,15 @@ public interface ModelFactory extends EFactory {
 	EventAwareOperation createEventAwareOperation();
 
 	/**
+	 * Returns a new object of class '<em>Application Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Application Element</em>'.
+	 * @generated
+	 */
+	ApplicationElement createApplicationElement();
+
+	/**
 	 * Returns a new object of class '<em>Application Element Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

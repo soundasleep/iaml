@@ -49,8 +49,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//Operation" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" abstract="true"
-      eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination">
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="editor" value="org.openiaml.model.diagram.element"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
   </eClassifiers>

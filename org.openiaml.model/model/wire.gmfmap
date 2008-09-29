@@ -109,6 +109,24 @@
           href="iaml.gmfgraph#InputTextField"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/eventTriggers"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

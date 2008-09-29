@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xsi:schemaLocation="http://openiaml.org/model/visual http://openiaml.org/model#//visual http://openiaml.org/model/wires http://openiaml.org/model#//wires">
+  <notation:Diagram xmi:id="_m-nA4I3zEd2zTblLGpJsMg" type="Iaml" name="shortcuts-root.iaml_diagram" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_nUg_cI3zEd2zTblLGpJsMg" type="1006">
+      <children xmi:type="notation:Node" xmi:id="_nUg_dI3zEd2zTblLGpJsMg" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nUg_cY3zEd2zTblLGpJsMg"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_nUg_co3zEd2zTblLGpJsMg" diagramLink="_pTemgI3zEd2zTblLGpJsMg" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:Page" href="shortcuts-root.iaml#//@children.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nUg_c43zEd2zTblLGpJsMg" x="216" y="154"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_nrUV4I3zEd2zTblLGpJsMg" type="1006">
+      <children xmi:type="notation:Node" xmi:id="_nrUV5I3zEd2zTblLGpJsMg" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nrUV4Y3zEd2zTblLGpJsMg"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_nrUV4o3zEd2zTblLGpJsMg" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:Page" href="shortcuts-root.iaml#//@children.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nrUV443zEd2zTblLGpJsMg" x="362" y="167"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_m-nA4Y3zEd2zTblLGpJsMg"/>
+    <element xmi:type="iaml:InternetApplication" href="shortcuts-root.iaml#/"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_pTemgI3zEd2zTblLGpJsMg" type="Iaml_Visual" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_sIrSAI3zEd2zTblLGpJsMg" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_sIrSA43zEd2zTblLGpJsMg" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_sIrSAY3zEd2zTblLGpJsMg"/>
+      <element xmi:type="iaml:EventTrigger" href="shortcuts-root.iaml#//@children.0/@eventTriggers.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sIrSAo3zEd2zTblLGpJsMg" x="196" y="198"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_sebfkI3zEd2zTblLGpJsMg" type="1002">
+      <children xmi:type="notation:Node" xmi:id="_sebfk43zEd2zTblLGpJsMg" type="4002"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_sebfkY3zEd2zTblLGpJsMg"/>
+      <element xmi:type="iaml:SingleOperation" href="shortcuts-root.iaml#//@children.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sebfko3zEd2zTblLGpJsMg" x="370" y="198"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_yWYxcI3zEd2zTblLGpJsMg" type="1002">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_yWYxdI3zEd2zTblLGpJsMg" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_yWYxdY3zEd2zTblLGpJsMg" key="modelID" value="Iaml_Visual"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_yWYxc43zEd2zTblLGpJsMg" type="4002"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_yWYxcY3zEd2zTblLGpJsMg"/>
+      <element xmi:type="iaml:SingleOperation" href="shortcuts-root.iaml#//@children.0/@eventTriggers.0/@edges.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yWYxco3zEd2zTblLGpJsMg" x="264" y="60"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_pTemgY3zEd2zTblLGpJsMg"/>
+    <element xmi:type="iaml.visual:Page" href="shortcuts-root.iaml#//@children.0"/>
+    <edges xmi:type="notation:Edge" xmi:id="_tkd6kI3zEd2zTblLGpJsMg" type="3001" source="_sIrSAI3zEd2zTblLGpJsMg" target="_sebfkI3zEd2zTblLGpJsMg">
+      <children xmi:type="notation:Node" xmi:id="_tkd6lY3zEd2zTblLGpJsMg" type="4011">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tkd6lo3zEd2zTblLGpJsMg" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_tkd6kY3zEd2zTblLGpJsMg"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_tkd6ko3zEd2zTblLGpJsMg"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_tkd6k43zEd2zTblLGpJsMg" diagramLink="_uWYfsI3zEd2zTblLGpJsMg" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:SyncWire" href="shortcuts-root.iaml#//@children.0/@eventTriggers.0/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_tkd6lI3zEd2zTblLGpJsMg" points="[20, 4, -154, 4]$[154, 4, -20, 4]"/>
+    </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_uWYfsI3zEd2zTblLGpJsMg" type="Iaml_Wire" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_ulvKUI3zEd2zTblLGpJsMg" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_ulvKU43zEd2zTblLGpJsMg" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_ulvKUY3zEd2zTblLGpJsMg"/>
+      <element xmi:type="iaml:SingleOperation" href="shortcuts-root.iaml#//@children.0/@eventTriggers.0/@edges.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ulvKUo3zEd2zTblLGpJsMg" x="224" y="148"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_wB0t0I3zEd2zTblLGpJsMg" type="1006">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_wCHowI3zEd2zTblLGpJsMg" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_wCHowY3zEd2zTblLGpJsMg" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_wB0t043zEd2zTblLGpJsMg" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_wB0t0Y3zEd2zTblLGpJsMg"/>
+      <element xmi:type="iaml:EventTrigger" href="shortcuts-root.iaml#//@children.0/@eventTriggers.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wB0t0o3zEd2zTblLGpJsMg" x="287" y="287"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_uWYfsY3zEd2zTblLGpJsMg"/>
+    <element xmi:type="iaml.wires:SyncWire" href="shortcuts-root.iaml#//@children.0/@eventTriggers.0/@edges.0"/>
+    <edges xmi:type="notation:Edge" xmi:id="_wiApwI3zEd2zTblLGpJsMg" type="3002" source="_wB0t0I3zEd2zTblLGpJsMg" target="_ulvKUI3zEd2zTblLGpJsMg">
+      <children xmi:type="notation:Node" xmi:id="_wiApxY3zEd2zTblLGpJsMg" type="4008">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wiApxo3zEd2zTblLGpJsMg" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_wiApwY3zEd2zTblLGpJsMg"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_wiApwo3zEd2zTblLGpJsMg"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_wiApw43zEd2zTblLGpJsMg" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:RunWire" href="shortcuts-root.iaml#//@children.0/@eventTriggers.0/@edges.1"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wiApxI3zEd2zTblLGpJsMg" points="[-4, -20, 35, 119]$[6, -146, 45, -7]"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>

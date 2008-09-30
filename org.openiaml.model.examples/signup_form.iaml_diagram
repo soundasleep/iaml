@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xsi:schemaLocation="http://openiaml.org/model/operations http://openiaml.org/model#//operations http://openiaml.org/model/visual http://openiaml.org/model#//visual http://openiaml.org/model/wires http://openiaml.org/model#//wires">
   <notation:Diagram xmi:id="_W_4iAI6xEd2v1cD7xpM9KQ" type="Iaml" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_MSDQ4I6yEd2v1cD7xpM9KQ" type="1006">
+      <children xmi:type="notation:Node" xmi:id="_MSDQ5I6yEd2v1cD7xpM9KQ" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_MSDQ4Y6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_MSDQ4o6yEd2v1cD7xpM9KQ" diagramLink="_MgNosI6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:Page" href="signup_form.iaml#//@children.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MSDQ446yEd2v1cD7xpM9KQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_MSDQ5Y6yEd2v1cD7xpM9KQ" type="1008">
+      <children xmi:type="notation:Node" xmi:id="_MSDQ6Y6yEd2v1cD7xpM9KQ" type="4008"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_MSDQ5o6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_MSDQ546yEd2v1cD7xpM9KQ" hint="Iaml_Store"/>
+      <element xmi:type="iaml:DomainStore" href="signup_form.iaml#//@domainStores.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MSDQ6I6yEd2v1cD7xpM9KQ" x="143"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_W_4iAY6xEd2v1cD7xpM9KQ"/>
     <element xmi:type="iaml:InternetApplication" href="signup_form.iaml#/"/>
   </notation:Diagram>
@@ -303,5 +317,353 @@
       <element xmi:type="iaml.wires:ProvidedParameterWire" href="signup_form.iaml#//@children.0/@children.0/@children.0/@properties.0/@edges.1"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5sec446xEd2v1cD7xpM9KQ" points="[-7, 20, 4, -108]$[18, 128, 29, 0]"/>
     </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_MgNosI6yEd2v1cD7xpM9KQ" type="Iaml_Visual" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_OpmXEI6yEd2v1cD7xpM9KQ" type="1008">
+      <children xmi:type="notation:Node" xmi:id="_OpmXFI6yEd2v1cD7xpM9KQ" type="4008"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_OpmXEY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_OpmXEo6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputForm" href="signup_form.iaml#//@children.0/@children.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OpmXE46yEd2v1cD7xpM9KQ" x="120" y="192"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_OpwIEI6yEd2v1cD7xpM9KQ" type="1004">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_OpwIFI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_OpwIFY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Visual"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_OpwIE46yEd2v1cD7xpM9KQ" type="4004"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_OpwIEY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:DomainObject" href="signup_form.iaml#//@domainStores.0/@children.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OpwIEo6yEd2v1cD7xpM9KQ" x="348" y="192"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_MgNosY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.visual:Page" href="signup_form.iaml#//@children.0"/>
+    <edges xmi:type="notation:Edge" xmi:id="_boDKgI6yEd2v1cD7xpM9KQ" type="3001" source="_OpmXEI6yEd2v1cD7xpM9KQ" target="_OpwIEI6yEd2v1cD7xpM9KQ">
+      <children xmi:type="notation:Node" xmi:id="_boDKhY6yEd2v1cD7xpM9KQ" type="4011">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_boDKho6yEd2v1cD7xpM9KQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_boDKgY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_boDKgo6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_boDKg46yEd2v1cD7xpM9KQ" diagramLink="_b_c94I6yEd2v1cD7xpM9KQ" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_boDKhI6yEd2v1cD7xpM9KQ" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_PpOoEI6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_QWYpAI6yEd2v1cD7xpM9KQ" type="1005">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QWhy8Y6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_QWhy8o6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_QWhy8I6yEd2v1cD7xpM9KQ" type="4005"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_QWYpAY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_QWYpAo6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="signup_form.iaml#//@children.0/@children.0/@children.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QWYpA46yEd2v1cD7xpM9KQ" x="187" y="425"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_QgXrcI6yEd2v1cD7xpM9KQ" type="1005">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QgXrdY6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_QgXrdo6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_QgXrdI6yEd2v1cD7xpM9KQ" type="4005"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_QgXrcY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_QgXrco6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="signup_form.iaml#//@children.0/@children.0/@children.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QgXrc46yEd2v1cD7xpM9KQ" x="205" y="301"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_Qv3gAI6yEd2v1cD7xpM9KQ" type="1004">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QwAp8I6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_QwAp8Y6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_Qv3gBI6yEd2v1cD7xpM9KQ" type="4004"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_Qv3gAY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Qv3gAo6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml:DomainAttribute" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Qv3gA46yEd2v1cD7xpM9KQ" x="408" y="420"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_Q7L_MI6yEd2v1cD7xpM9KQ" type="1004">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Q7L_NY6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Q7L_No6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_Q7L_NI6yEd2v1cD7xpM9KQ" type="4004"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_Q7L_MY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Q7L_Mo6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml:DomainAttribute" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Q7L_M46yEd2v1cD7xpM9KQ" x="408" y="300"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_PpOoEY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@edges.0"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_S7CXEI6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_TdBCwI6yEd2v1cD7xpM9KQ" type="1007">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TdBCxI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TdBCxY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_TdBCw46yEd2v1cD7xpM9KQ" type="4007"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_TdBCwY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:ApplicationElementProperty" href="signup_form.iaml#//@children.0/@children.0/@children.0/@properties.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TdBCwo6yEd2v1cD7xpM9KQ" x="348" y="168"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_TkKzoI6yEd2v1cD7xpM9KQ" type="1011">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TkKzpI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TkKzpY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_TkKzo46yEd2v1cD7xpM9KQ" type="4011"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_TkKzoY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:ChainedOperation" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TkKzoo6yEd2v1cD7xpM9KQ" x="516" y="312"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_TqbMoI6yEd2v1cD7xpM9KQ" type="1006">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Tqk9oI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Tqk9oY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_TqbMo46yEd2v1cD7xpM9KQ" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_TqbMoY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:EventTrigger" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0/@eventTriggers.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TqbMoo6yEd2v1cD7xpM9KQ" x="516" y="420"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_T0HUII6yEd2v1cD7xpM9KQ" type="1011">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_T0HUJI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_T0HUJY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_T0HUI46yEd2v1cD7xpM9KQ" type="4011"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_T0HUIY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:ChainedOperation" href="signup_form.iaml#//@children.0/@children.0/@children.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_T0HUIo6yEd2v1cD7xpM9KQ" x="144" y="420"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_T-sMcI6yEd2v1cD7xpM9KQ" type="1006">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_T-19cI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_T-19cY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_T-sMc46yEd2v1cD7xpM9KQ" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_T-sMcY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:EventTrigger" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_T-sMco6yEd2v1cD7xpM9KQ" x="168" y="312"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_S7CXEY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@children.1/@edges.0"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_Wy2WII6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_WzvuAI6yEd2v1cD7xpM9KQ" type="1008">
+      <children xmi:type="notation:Node" xmi:id="_WzvuA46yEd2v1cD7xpM9KQ" type="4008"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_WzvuAY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml.operations:StartNode" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WzvuAo6yEd2v1cD7xpM9KQ" x="120" y="96"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_WzvuBI6yEd2v1cD7xpM9KQ" type="1010">
+      <children xmi:type="notation:Node" xmi:id="_WzvuB46yEd2v1cD7xpM9KQ" type="4010"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_WzvuBY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml.operations:FinishNode" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0/@operations.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WzvuBo6yEd2v1cD7xpM9KQ" x="324" y="192"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_WzvuCI6yEd2v1cD7xpM9KQ" type="1011">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_WzvuDI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_WzvuDY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_WzvuC46yEd2v1cD7xpM9KQ" type="4011"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_WzvuCY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:ChainedOperation" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WzvuCo6yEd2v1cD7xpM9KQ" x="192" y="240"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_Wy2WIY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:RunWire" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_Y5QpAI6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_Y5QpAY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@children.1/@edges.0"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_aPPkgI6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_aPPkgY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@edges.0"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_bCp-cI6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_bCp-cY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@edges.0"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_b_c94I6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_fNPIgI6yEd2v1cD7xpM9KQ" type="1004">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fNPIhY6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_fNPIho6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_fNPIhI6yEd2v1cD7xpM9KQ" type="4004"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_fNPIgY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_fNPIgo6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml:DomainAttribute" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fNPIg46yEd2v1cD7xpM9KQ" x="180" y="216"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_fUY5YI6yEd2v1cD7xpM9KQ" type="1005">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fUY5ZY6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_fUY5Zo6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_fUY5ZI6yEd2v1cD7xpM9KQ" type="4005"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_fUY5YY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_fUY5Yo6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="signup_form.iaml#//@children.0/@children.0/@children.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fUY5Y46yEd2v1cD7xpM9KQ" x="396" y="216"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_fjS4EI6yEd2v1cD7xpM9KQ" type="1004">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fjS4FY6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_fjS4Fo6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_fjS4FI6yEd2v1cD7xpM9KQ" type="4004"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_fjS4EY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_fjS4Eo6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml:DomainAttribute" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fjS4E46yEd2v1cD7xpM9KQ" x="168" y="372"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_fuxIQI6yEd2v1cD7xpM9KQ" type="1005">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fuxIRY6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_fuxIRo6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_fuxIRI6yEd2v1cD7xpM9KQ" type="4005"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_fuxIQY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_fuxIQo6yEd2v1cD7xpM9KQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="signup_form.iaml#//@children.0/@children.0/@children.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fuxIQ46yEd2v1cD7xpM9KQ" x="396" y="372"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_b_c94Y6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@edges.0"/>
+    <edges xmi:type="notation:Edge" xmi:id="_f29a8I6yEd2v1cD7xpM9KQ" type="3001" source="_fUY5YI6yEd2v1cD7xpM9KQ" target="_fNPIgI6yEd2v1cD7xpM9KQ">
+      <children xmi:type="notation:Node" xmi:id="_f29a9Y6yEd2v1cD7xpM9KQ" type="4014">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_f29a9o6yEd2v1cD7xpM9KQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_f29a8Y6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_f29a8o6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_f29a846yEd2v1cD7xpM9KQ" diagramLink="_hORzMI6yEd2v1cD7xpM9KQ" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@children.0/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_f29a9I6yEd2v1cD7xpM9KQ" points="[-8, -20, 0, 117]$[0, -117, 8, 20]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_f29a946yEd2v1cD7xpM9KQ" type="3001" source="_fuxIQI6yEd2v1cD7xpM9KQ" target="_fjS4EI6yEd2v1cD7xpM9KQ">
+      <children xmi:type="notation:Node" xmi:id="_f29a_I6yEd2v1cD7xpM9KQ" type="4014">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_f29a_Y6yEd2v1cD7xpM9KQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_f29a-I6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_f29a-Y6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_f29a-o6yEd2v1cD7xpM9KQ" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@children.1/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_f29a-46yEd2v1cD7xpM9KQ" points="[-36, 10, 183, -49]$[-182, 49, 37, -10]"/>
+    </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_hORzMI6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_nMp2II6yEd2v1cD7xpM9KQ" type="1011">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_nMp2JI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_nMp2JY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_nMp2I46yEd2v1cD7xpM9KQ" type="4011"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nMp2IY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:ChainedOperation" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nMp2Io6yEd2v1cD7xpM9KQ" x="516" y="375"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_nSweII6yEd2v1cD7xpM9KQ" type="1006">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_nSweJI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_nSweJY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_nSweI46yEd2v1cD7xpM9KQ" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nSweIY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:EventTrigger" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0/@eventTriggers.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nSweIo6yEd2v1cD7xpM9KQ" x="528" y="144"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_nZ6PAI6yEd2v1cD7xpM9KQ" type="1007">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_nZ6PBI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_nZ6PBY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_nZ6PA46yEd2v1cD7xpM9KQ" type="4007"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nZ6PAY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:ApplicationElementProperty" href="signup_form.iaml#//@children.0/@children.0/@children.0/@properties.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nZ6PAo6yEd2v1cD7xpM9KQ" x="312" y="276"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_niHIwI6yEd2v1cD7xpM9KQ" type="1011">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_niHIxI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_niHIxY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_niHIw46yEd2v1cD7xpM9KQ" type="4011"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_niHIwY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:ChainedOperation" href="signup_form.iaml#//@children.0/@children.0/@children.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_niHIwo6yEd2v1cD7xpM9KQ" x="132" y="144"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_nuU_0I6yEd2v1cD7xpM9KQ" type="1006">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_nuU_1I6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_nuU_1Y6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_nuU_046yEd2v1cD7xpM9KQ" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nuU_0Y6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:EventTrigger" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nuU_0o6yEd2v1cD7xpM9KQ" x="132" y="372"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_hORzMY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:SyncWire" href="signup_form.iaml#//@children.0/@children.0/@children.0/@edges.0"/>
+    <edges xmi:type="notation:Edge" xmi:id="_oDohcI6yEd2v1cD7xpM9KQ" type="3002" source="_nSweII6yEd2v1cD7xpM9KQ" target="_niHIwI6yEd2v1cD7xpM9KQ">
+      <children xmi:type="notation:Node" xmi:id="_oDohdY6yEd2v1cD7xpM9KQ" type="4015">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oDohdo6yEd2v1cD7xpM9KQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_oDohcY6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_oDohco6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_oDohc46yEd2v1cD7xpM9KQ" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:RunWire" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0/@eventTriggers.0/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oDohdI6yEd2v1cD7xpM9KQ" points="[12, -20, -135, 232]$[135, -232, -12, 20]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_oDohd46yEd2v1cD7xpM9KQ" type="3006" source="_nZ6PAI6yEd2v1cD7xpM9KQ" target="_nMp2II6yEd2v1cD7xpM9KQ">
+      <children xmi:type="notation:Node" xmi:id="_oDohe46yEd2v1cD7xpM9KQ" type="4018">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oDohfI6yEd2v1cD7xpM9KQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_oDoheI6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_oDoheY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml.wires:ProvidedParameterWire" href="signup_form.iaml#//@children.0/@children.0/@children.0/@properties.0/@edges.1"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oDoheo6yEd2v1cD7xpM9KQ" points="[-23, -8, 212, 0]$[-206, 0, 29, 8]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_oDohfY6yEd2v1cD7xpM9KQ" type="3002" source="_nuU_0I6yEd2v1cD7xpM9KQ" target="_nMp2II6yEd2v1cD7xpM9KQ">
+      <children xmi:type="notation:Node" xmi:id="_oDohgo6yEd2v1cD7xpM9KQ" type="4015">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oDohg46yEd2v1cD7xpM9KQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_oDohfo6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_oDohf46yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_oDohgI6yEd2v1cD7xpM9KQ" diagramLink="_rpRLYI6yEd2v1cD7xpM9KQ" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:RunWire" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oDohgY6yEd2v1cD7xpM9KQ" points="[-20, -8, 281, 107]$[-272, -104, 29, 11]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_oNxU4I6yEd2v1cD7xpM9KQ" type="3003" source="_nZ6PAI6yEd2v1cD7xpM9KQ" target="_oDohfY6yEd2v1cD7xpM9KQ">
+      <children xmi:type="notation:Node" xmi:id="_oNxU5I6yEd2v1cD7xpM9KQ" type="4016">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oNxU5Y6yEd2v1cD7xpM9KQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_oNxU4Y6yEd2v1cD7xpM9KQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_oNxU4o6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml.wires:PropertyToExecutionWire" href="signup_form.iaml#//@children.0/@children.0/@children.0/@properties.0/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oNxU446yEd2v1cD7xpM9KQ" points="[-23, 15, 57, -36]$[-80, 51, 0, 0]"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_oNxU5o6yEd2v1cD7xpM9KQ" id="(0.4982079,0.49593496)"/>
+    </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_rpRLYI6yEd2v1cD7xpM9KQ" type="Iaml_Wire" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_sxibAI6yEd2v1cD7xpM9KQ" type="1008">
+      <children xmi:type="notation:Node" xmi:id="_sxibA46yEd2v1cD7xpM9KQ" type="4008"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_sxibAY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml.operations:StartNode" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sxibAo6yEd2v1cD7xpM9KQ" x="132" y="240"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_sxibBI6yEd2v1cD7xpM9KQ" type="1010">
+      <children xmi:type="notation:Node" xmi:id="_sxibB46yEd2v1cD7xpM9KQ" type="4010"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_sxibBY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml.operations:FinishNode" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0/@operations.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sxibBo6yEd2v1cD7xpM9KQ" x="516" y="240"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_sxsMAI6yEd2v1cD7xpM9KQ" type="1011">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_sxsMBI6yEd2v1cD7xpM9KQ" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_sxsMBY6yEd2v1cD7xpM9KQ" key="modelID" value="Iaml_Wire"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_sxsMA46yEd2v1cD7xpM9KQ" type="4011"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_sxsMAY6yEd2v1cD7xpM9KQ"/>
+      <element xmi:type="iaml:ChainedOperation" href="signup_form.iaml#//@domainStores.0/@children.0/@attributes.0/@operations.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sxsMAo6yEd2v1cD7xpM9KQ" x="324" y="240"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_FW0usI6zEd2v1cD7xpM9KQ" type="Note">
+      <children xmi:type="notation:Node" xmi:id="_FW0us46zEd2v1cD7xpM9KQ" type="DiagramName">
+        <element xsi:nil="true"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_FW0utI6zEd2v1cD7xpM9KQ" type="Description">
+        <element xsi:nil="true"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_FW0usY6zEd2v1cD7xpM9KQ" description="Q: do we want the parameter rendered in here? we would have to start rendering the shortcuts of shortcuts (since the operation 'update') isn't part of this... it belongs to a different element!" fillColor="13369343" lineColor="6737151"/>
+      <element xsi:nil="true"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FW0uso6zEd2v1cD7xpM9KQ" x="274" y="106" width="207"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_rpRLYY6yEd2v1cD7xpM9KQ"/>
+    <element xmi:type="iaml.wires:RunWire" href="signup_form.iaml#//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0"/>
   </notation:Diagram>
 </xmi:XMI>

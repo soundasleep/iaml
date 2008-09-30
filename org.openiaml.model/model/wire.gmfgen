@@ -26,11 +26,13 @@
     <containsShortcutsTo>iaml_visual</containsShortcutsTo>
     <containsShortcutsTo>iaml_wire</containsShortcutsTo>
     <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
+    <containsShortcutsTo>iaml_operation</containsShortcutsTo>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
     <domainDiagramElement
         href="iaml.genmodel#//model/wires/CompositeWire"/>
     <topLevelNodes
@@ -104,6 +106,11 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="OperationOpenDiagramEditPolicy"
+          diagramKind="Iaml_Operation"
+          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/CompositeOperation"/>
@@ -154,6 +161,11 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="OperationOpenDiagramEditPolicy"
+          diagramKind="Iaml_Operation"
+          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/EventAwareOperation"/>
@@ -620,6 +632,11 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="OperationOpenDiagramEditPolicy"
+          diagramKind="Iaml_Operation"
+          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/CompositeChainedOperation"/>

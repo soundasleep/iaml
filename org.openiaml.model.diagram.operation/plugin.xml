@@ -144,17 +144,17 @@
             checkPluginLoaded="false">
          <Priority name="Low"/>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.operation.edit.parts.WrapLabel4EditPart"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
-         </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
             <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.operation.edit.parts.WrapLabel5EditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
             <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.operation.edit.parts.WrapLabel6EditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.operation.edit.parts.WrapLabel7EditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -404,6 +404,16 @@
             <param name="semanticHint" value="1008"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.operation.ChainedOperation_1009"
+               name="%metatype.name.ChainedOperation_1009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ChainedOperation"
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.FinishNode2EditHelper">
+            <param name="semanticHint" value="1009"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.operation.ExecutionWire_3001"
@@ -465,6 +475,7 @@
          <elementType ref="org.openiaml.model.diagram.operation.StartNode_1006"/>
          <elementType ref="org.openiaml.model.diagram.operation.StopNode_1007"/>
          <elementType ref="org.openiaml.model.diagram.operation.FinishNode_1008"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ChainedOperation_1009"/>
          <elementType ref="org.openiaml.model.diagram.operation.ExecutionWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.operation.PropertyToExecutionWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.operation.PropertyToParameterWire_3003"/>

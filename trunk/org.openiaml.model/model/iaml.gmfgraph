@@ -165,6 +165,11 @@
           name="ApplicationElementPropertyFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="224"
+            green="160"
+            blue="224"/>
         <children
             xsi:type="gmfgraph:Label"
             name="ApplicationElementPropertyNameFigure"

@@ -154,9 +154,9 @@
       </viewmap>
       <behaviour
           xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="ElementOpenDiagramEditPolicy"
-          diagramKind="Iaml_Element"
-          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+          editPolicyClassName="DomainObjectOpenDiagramEditPolicy"
+          diagramKind="Iaml_DomainObject"
+          editorID="org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/DomainObject"/>

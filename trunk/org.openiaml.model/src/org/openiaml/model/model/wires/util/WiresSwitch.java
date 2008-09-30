@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 
+import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.wires.*;
 
 /**
@@ -118,6 +119,7 @@ public class WiresSwitch<T> {
 				RunWire runWire = (RunWire)theEObject;
 				T result = caseRunWire(runWire);
 				if (result == null) result = caseCompositeWire(runWire);
+				if (result == null) result = caseWireEdgeDestination(runWire);
 				if (result == null) result = caseWireEdge(runWire);
 				if (result == null) result = caseNamedElement(runWire);
 				if (result == null) result = defaultCase(theEObject);
@@ -147,11 +149,11 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.PROPERTY_TO_EXECUTION_WIRE_WIRE: {
-				PropertyToExecutionWireWire propertyToExecutionWireWire = (PropertyToExecutionWireWire)theEObject;
-				T result = casePropertyToExecutionWireWire(propertyToExecutionWireWire);
-				if (result == null) result = caseSingleWire(propertyToExecutionWireWire);
-				if (result == null) result = caseWireEdge(propertyToExecutionWireWire);
+			case WiresPackage.PROPERTY_TO_EXECUTION_WIRE: {
+				PropertyToExecutionWire propertyToExecutionWire = (PropertyToExecutionWire)theEObject;
+				T result = casePropertyToExecutionWire(propertyToExecutionWire);
+				if (result == null) result = caseSingleWire(propertyToExecutionWire);
+				if (result == null) result = caseWireEdge(propertyToExecutionWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -265,17 +267,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Property To Execution Wire Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Property To Execution Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Property To Execution Wire Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Property To Execution Wire</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePropertyToExecutionWireWire(PropertyToExecutionWireWire object) {
+	public T casePropertyToExecutionWire(PropertyToExecutionWire object) {
 		return null;
 	}
 
@@ -306,6 +308,21 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Wire Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Wire Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWireEdgeDestination(WireEdgeDestination object) {
 		return null;
 	}
 

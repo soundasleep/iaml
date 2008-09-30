@@ -9,24 +9,16 @@ package org.openiaml.model.model.wires.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.openiaml.model.model.ModelPackage;
-
 import org.openiaml.model.model.impl.ModelPackageImpl;
-
 import org.openiaml.model.model.operations.OperationsPackage;
-
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
-
 import org.openiaml.model.model.visual.VisualPackage;
-
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
-
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ExecutionWire;
-import org.openiaml.model.model.wires.PropertyToExecutionWireWire;
+import org.openiaml.model.model.wires.PropertyToExecutionWire;
 import org.openiaml.model.model.wires.PropertyToParameterWire;
 import org.openiaml.model.model.wires.ProvidedParameterWire;
 import org.openiaml.model.model.wires.RunWire;
@@ -96,7 +88,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass propertyToExecutionWireWireEClass = null;
+	private EClass propertyToExecutionWireEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -281,8 +273,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPropertyToExecutionWireWire() {
-		return propertyToExecutionWireWireEClass;
+	public EClass getPropertyToExecutionWire() {
+		return propertyToExecutionWireEClass;
 	}
 
 	/**
@@ -331,7 +323,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		propertyToParameterWireEClass = createEClass(PROPERTY_TO_PARAMETER_WIRE);
 
-		propertyToExecutionWireWireEClass = createEClass(PROPERTY_TO_EXECUTION_WIRE_WIRE);
+		propertyToExecutionWireEClass = createEClass(PROPERTY_TO_EXECUTION_WIRE);
 	}
 
 	/**
@@ -370,10 +362,11 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
 		runWireEClass.getESuperTypes().add(this.getCompositeWire());
+		runWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		executionWireEClass.getESuperTypes().add(this.getSingleWire());
 		providedParameterWireEClass.getESuperTypes().add(this.getSingleWire());
 		propertyToParameterWireEClass.getESuperTypes().add(this.getSingleWire());
-		propertyToExecutionWireWireEClass.getESuperTypes().add(this.getSingleWire());
+		propertyToExecutionWireEClass.getESuperTypes().add(this.getSingleWire());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(singleWireEClass, SingleWire.class, "SingleWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -394,7 +387,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		initEClass(propertyToParameterWireEClass, PropertyToParameterWire.class, "PropertyToParameterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(propertyToExecutionWireWireEClass, PropertyToExecutionWireWire.class, "PropertyToExecutionWireWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(propertyToExecutionWireEClass, PropertyToExecutionWire.class, "PropertyToExecutionWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://openiaml.org/comment

@@ -80,7 +80,7 @@
       <genClasses ecoreClass="iaml.ecore#//wires/ExecutionWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ProvidedParameterWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/PropertyToParameterWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/PropertyToExecutionWireWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/PropertyToExecutionWire"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Operations" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//operations">

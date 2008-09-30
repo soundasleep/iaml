@@ -89,13 +89,13 @@ public interface WiresFactory extends EFactory {
 	PropertyToParameterWire createPropertyToParameterWire();
 
 	/**
-	 * Returns a new object of class '<em>Property To Execution Wire Wire</em>'.
+	 * Returns a new object of class '<em>Property To Execution Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Property To Execution Wire Wire</em>'.
+	 * @return a new object of class '<em>Property To Execution Wire</em>'.
 	 * @generated
 	 */
-	PropertyToExecutionWireWire createPropertyToExecutionWireWire();
+	PropertyToExecutionWire createPropertyToExecutionWire();
 
 	/**
 	 * Returns the package supported by this factory.

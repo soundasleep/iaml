@@ -181,6 +181,30 @@
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/to"/>
   </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/PropertyToExecutionWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( PropertyToExecutionWire )"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#PropertyToExecutionWireName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//WireEdgesSource/edges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="wire.gmftool#//@palette/@tools.0/@tools.5"/>
+    <diagramLink
+        href="iaml.gmfgraph#PropertyToExecutionWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
   <diagram>
     <diagramCanvas
         href="iaml.gmfgraph#model"/>

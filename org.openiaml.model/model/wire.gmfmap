@@ -127,6 +127,23 @@
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/properties"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//ApplicationElementProperty"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ApplicationElementPropertyName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#ApplicationElementProperty"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

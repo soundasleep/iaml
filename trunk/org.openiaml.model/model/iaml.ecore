@@ -43,6 +43,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="subOperations" upperBound="-1"
         eType="#//Operation" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeChainedOperation" eSuperTypes="#//CompositeOperation #//ChainedOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="EventAwareOperation" eSuperTypes="#//CompositeOperation #//ContainsEventTriggers"/>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsOperations" abstract="true"
       interface="true">
@@ -110,6 +111,7 @@
         <details key="comment2" value="easy visualisation: all composite wires are dashed"/>
         <details key="comment3" value="only composite wires have a name now"/>
         <details key="editor" value="org.openiaml.model.diagram.wire"/>
+        <details key="comment4" value="a wire shouldn't have parameters; but the operations contained within need them rendered."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
           eType="#//ApplicationElement" containment="true"/>
@@ -119,6 +121,8 @@
           eType="#//Operation" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
           eType="#//EventTrigger" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+          eType="#//OperationParameter" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//wires/CompositeWire"/>
     <eClassifiers xsi:type="ecore:EClass" name="RunWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">

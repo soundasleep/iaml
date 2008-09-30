@@ -193,6 +193,18 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.COMPOSITE_CHAINED_OPERATION: {
+				CompositeChainedOperation compositeChainedOperation = (CompositeChainedOperation)theEObject;
+				T result = caseCompositeChainedOperation(compositeChainedOperation);
+				if (result == null) result = caseCompositeOperation(compositeChainedOperation);
+				if (result == null) result = caseChainedOperation(compositeChainedOperation);
+				if (result == null) result = caseOperation(compositeChainedOperation);
+				if (result == null) result = caseWireEdgesSource(compositeChainedOperation);
+				if (result == null) result = caseWireEdgeDestination(compositeChainedOperation);
+				if (result == null) result = caseNamedElement(compositeChainedOperation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ModelPackage.EVENT_AWARE_OPERATION: {
 				EventAwareOperation eventAwareOperation = (EventAwareOperation)theEObject;
 				T result = caseEventAwareOperation(eventAwareOperation);
@@ -469,6 +481,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseCompositeOperation(CompositeOperation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composite Chained Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composite Chained Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompositeChainedOperation(CompositeChainedOperation object) {
 		return null;
 	}
 

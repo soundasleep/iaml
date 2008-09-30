@@ -17,6 +17,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
@@ -146,6 +147,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass compositeOperationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass compositeChainedOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -485,6 +493,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCompositeChainedOperation() {
+		return compositeChainedOperationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEventAwareOperation() {
 		return eventAwareOperationEClass;
 	}
@@ -687,6 +704,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		compositeOperationEClass = createEClass(COMPOSITE_OPERATION);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__SUB_OPERATIONS);
 
+		compositeChainedOperationEClass = createEClass(COMPOSITE_CHAINED_OPERATION);
+
 		eventAwareOperationEClass = createEClass(EVENT_AWARE_OPERATION);
 
 		containsOperationsEClass = createEClass(CONTAINS_OPERATIONS);
@@ -762,6 +781,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		chainedOperationEClass.getESuperTypes().add(this.getOperation());
 		chainedOperationEClass.getESuperTypes().add(this.getWireEdgesSource());
 		compositeOperationEClass.getESuperTypes().add(this.getOperation());
+		compositeChainedOperationEClass.getESuperTypes().add(this.getCompositeOperation());
+		compositeChainedOperationEClass.getESuperTypes().add(this.getChainedOperation());
 		eventAwareOperationEClass.getESuperTypes().add(this.getCompositeOperation());
 		eventAwareOperationEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		applicationElementEClass.getESuperTypes().add(this.getContainsOperations());
@@ -816,6 +837,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(compositeOperationEClass, CompositeOperation.class, "CompositeOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeOperation_SubOperations(), this.getOperation(), null, "subOperations", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(compositeChainedOperationEClass, CompositeChainedOperation.class, "CompositeChainedOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(eventAwareOperationEClass, EventAwareOperation.class, "EventAwareOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

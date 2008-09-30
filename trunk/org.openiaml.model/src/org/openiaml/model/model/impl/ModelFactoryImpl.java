@@ -68,6 +68,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.SINGLE_OPERATION: return createSingleOperation();
 			case ModelPackage.CHAINED_OPERATION: return createChainedOperation();
 			case ModelPackage.COMPOSITE_OPERATION: return createCompositeOperation();
+			case ModelPackage.COMPOSITE_CHAINED_OPERATION: return createCompositeChainedOperation();
 			case ModelPackage.EVENT_AWARE_OPERATION: return createEventAwareOperation();
 			case ModelPackage.APPLICATION_ELEMENT: return createApplicationElement();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY: return createApplicationElementProperty();
@@ -157,6 +158,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public CompositeOperation createCompositeOperation() {
 		CompositeOperationImpl compositeOperation = new CompositeOperationImpl();
 		return compositeOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeChainedOperation createCompositeChainedOperation() {
+		CompositeChainedOperationImpl compositeChainedOperation = new CompositeChainedOperationImpl();
+		return compositeChainedOperation;
 	}
 
 	/**

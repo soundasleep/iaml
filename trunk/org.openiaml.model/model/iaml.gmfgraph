@@ -90,6 +90,11 @@
           name="OperationParameterFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="196"
+            green="224"
+            blue="255"/>
         <children
             xsi:type="gmfgraph:Label"
             name="OperationParameterNameFigure"
@@ -339,6 +344,141 @@
       <accessors
           figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="StartNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:RoundedRectangle"
+          name="StopNodeFigure"
+          lineWidth="2"
+          cornerWidth="10"
+          cornerHeight="10">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="212"
+            green="212"
+            blue="212"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StartNodeNameFigure"
+            text="start"/>
+      </actualFigure>
+      <accessors
+          accessor="getFigureStartNodeNameFigure"
+          figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="StopNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:RoundedRectangle"
+          name="StopNodeFigure"
+          lineWidth="2"
+          cornerWidth="10"
+          cornerHeight="10">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="224"
+            green="160"
+            blue="160"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StopNodeNameFigure"
+            text="stop"/>
+      </actualFigure>
+      <accessors
+          accessor="getFigureStopNodeNameFigure"
+          figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="FinishNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:RoundedRectangle"
+          name="StopNodeFigure"
+          lineWidth="2"
+          cornerWidth="10"
+          cornerHeight="10">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="160"
+            green="224"
+            blue="160"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FinishNodeNameFigure"
+            text="finished"/>
+      </actualFigure>
+      <accessors
+          accessor="getFigureFinishNodeNameFigure"
+          figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="CompositeChainedOperationFigure">
+      <actualFigure
+          xsi:type="gmfgraph:RoundedRectangle"
+          name="CompositeChainedOperationFigure"
+          cornerWidth="10"
+          cornerHeight="10">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="240"
+            green="240"
+            blue="240"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CompositeChainedOperationPrefixFigure"
+            text="(composite)"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CompositeChainedOperationNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          accessor="getFigureCompositeChainedOperationNameFigure"
+          figure="//@figures.0/@descriptors.21/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="ExecutionWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ExecutionWireFigure"
+          targetDecoration="//@figures.0/@figures.0"/>
+    </descriptors>
+    <descriptors
+        name="PropertyToParameterWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="PropertyToParameterWireFigure"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PropertyToParameterWireNameFigure"
+            text="prop2param"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.23/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ProvidedParameterWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ProvidedParameterWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ProvidedParameterWireNameFigure"
+            text="param"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -382,6 +522,18 @@
   <nodes
       name="EventAwareOperation"
       figure="EventAwareOperationFigure"/>
+  <nodes
+      name="StartNode"
+      figure="StartNodeFigure"/>
+  <nodes
+      name="StopNode"
+      figure="StopNodeFigure"/>
+  <nodes
+      name="FinishNode"
+      figure="FinishNodeFigure"/>
+  <nodes
+      name="CompositeChainedOperation"
+      figure="CompositeChainedOperationFigure"/>
   <connections
       name="WireEdge"
       figure="WireEdgeFigure"/>
@@ -394,6 +546,15 @@
   <connections
       name="PropertyToExecutionWire"
       figure="PropertyToExecutionWireFigure"/>
+  <connections
+      name="ExecutionWire"
+      figure="ExecutionWireFigure"/>
+  <connections
+      name="PropertyToParameterWire"
+      figure="PropertyToParameterWireFigure"/>
+  <connections
+      name="ProvidedParameterWire"
+      figure="ProvidedParameterWireFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -466,4 +627,30 @@
       name="PropertyToExecutionWireName"
       figure="PropertyToExecutionWireFigure"
       accessor="//@figures.0/@descriptors.17/@accessors.0"/>
+  <labels
+      name="StartNodeName"
+      figure="StartNodeFigure"
+      accessor="//@figures.0/@descriptors.18/@accessors.0"/>
+  <labels
+      name="StopNodeName"
+      figure="StopNodeFigure"
+      accessor="//@figures.0/@descriptors.19/@accessors.0"/>
+  <labels
+      name="FinishNodeName"
+      figure="FinishNodeFigure"
+      accessor="//@figures.0/@descriptors.20/@accessors.0"/>
+  <labels
+      name="CompositeChainedOperationName"
+      figure="CompositeChainedOperationFigure"
+      accessor="//@figures.0/@descriptors.21/@accessors.0"/>
+  <labels
+      name="PropertyToParameterWireName"
+      figure="PropertyToParameterWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.23/@accessors.0"/>
+  <labels
+      name="ProvidedParameterWireName"
+      figure="ProvidedParameterWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.24/@accessors.0"/>
 </gmfgraph:Canvas>

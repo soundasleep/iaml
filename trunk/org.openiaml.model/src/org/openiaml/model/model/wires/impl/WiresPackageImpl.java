@@ -228,6 +228,15 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCompositeWire_Parameters() {
+		return (EReference)compositeWireEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSyncWire() {
 		return syncWireEClass;
 	}
@@ -312,6 +321,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__PROPERTIES);
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__OPERATIONS);
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__EVENT_TRIGGERS);
+		createEReference(compositeWireEClass, COMPOSITE_WIRE__PARAMETERS);
 
 		syncWireEClass = createEClass(SYNC_WIRE);
 
@@ -376,6 +386,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEReference(getCompositeWire_Properties(), theModelPackage.getApplicationElementProperty(), null, "properties", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_Operations(), theModelPackage.getOperation(), null, "operations", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_EventTriggers(), theModelPackage.getEventTrigger(), null, "eventTriggers", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeWire_Parameters(), theModelPackage.getOperationParameter(), null, "parameters", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(syncWireEClass, SyncWire.class, "SyncWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -415,7 +426,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "comment", "ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire...",
 			 "comment2", "easy visualisation: all composite wires are dashed",
 			 "comment3", "only composite wires have a name now",
-			 "editor", "org.openiaml.model.diagram.wire"
+			 "editor", "org.openiaml.model.diagram.wire",
+			 "comment4", "a wire shouldn\'t have parameters; but the operations contained within need them rendered."
 		   });		
 		addAnnotation
 		  (runWireEClass, 

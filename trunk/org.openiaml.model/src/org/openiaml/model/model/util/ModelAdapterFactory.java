@@ -124,6 +124,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createCompositeOperationAdapter();
 			}
 			@Override
+			public Adapter caseCompositeChainedOperation(CompositeChainedOperation object) {
+				return createCompositeChainedOperationAdapter();
+			}
+			@Override
 			public Adapter caseEventAwareOperation(EventAwareOperation object) {
 				return createEventAwareOperationAdapter();
 			}
@@ -354,6 +358,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompositeOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.CompositeChainedOperation <em>Composite Chained Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.CompositeChainedOperation
+	 * @generated
+	 */
+	public Adapter createCompositeChainedOperationAdapter() {
 		return null;
 	}
 

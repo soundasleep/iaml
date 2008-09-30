@@ -10,15 +10,14 @@ import org.eclipse.gmf.runtime.diagram.ui.view.factories.ConnectionViewFactory;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.model.diagram.wire.edit.parts.PropertyToExecutionWireEditPart;
-import org.openiaml.model.model.diagram.wire.edit.parts.WrapLabel4EditPart;
-import org.openiaml.model.model.diagram.wire.edit.parts.WrapLabelEditPart;
+import org.openiaml.model.model.diagram.wire.edit.parts.PropertyToParameterWireEditPart;
+import org.openiaml.model.model.diagram.wire.edit.parts.WrapLabel5EditPart;
 import org.openiaml.model.model.diagram.wire.part.IamlVisualIDRegistry;
 
 /**
  * @generated
  */
-public class PropertyToExecutionWireViewFactory extends ConnectionViewFactory {
+public class PropertyToParameterWireViewFactory extends ConnectionViewFactory {
 
 	/**
 	 * @generated
@@ -38,7 +37,7 @@ public class PropertyToExecutionWireViewFactory extends ConnectionViewFactory {
 			boolean persisted) {
 		if (semanticHint == null) {
 			semanticHint = IamlVisualIDRegistry
-					.getType(PropertyToExecutionWireEditPart.VISUAL_ID);
+					.getType(PropertyToParameterWireEditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
@@ -49,7 +48,7 @@ public class PropertyToExecutionWireViewFactory extends ConnectionViewFactory {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
 		getViewService().createNode(eObjectAdapter, view,
-				IamlVisualIDRegistry.getType(WrapLabel4EditPart.VISUAL_ID),
+				IamlVisualIDRegistry.getType(WrapLabel5EditPart.VISUAL_ID),
 				ViewUtil.APPEND, true, getPreferencesHint());
 	}
 }

@@ -253,7 +253,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getContainsOperations()
 	 * @generated
 	 */
-	int CONTAINS_OPERATIONS = 14;
+	int CONTAINS_OPERATIONS = 15;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -281,7 +281,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getApplicationElement()
 	 * @generated
 	 */
-	int APPLICATION_ELEMENT = 15;
+	int APPLICATION_ELEMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -741,6 +741,70 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.CompositeChainedOperationImpl <em>Composite Chained Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.CompositeChainedOperationImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getCompositeChainedOperation()
+	 * @generated
+	 */
+	int COMPOSITE_CHAINED_OPERATION = 13;
+
+	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CHAINED_OPERATION__IN_EDGES = COMPOSITE_OPERATION__IN_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CHAINED_OPERATION__NAME = COMPOSITE_OPERATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CHAINED_OPERATION__PARAMETERS = COMPOSITE_OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Sub Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CHAINED_OPERATION__SUB_OPERATIONS = COMPOSITE_OPERATION__SUB_OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CHAINED_OPERATION__EDGES = COMPOSITE_OPERATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Composite Chained Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CHAINED_OPERATION_FEATURE_COUNT = COMPOSITE_OPERATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.EventAwareOperationImpl <em>Event Aware Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -748,7 +812,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getEventAwareOperation()
 	 * @generated
 	 */
-	int EVENT_AWARE_OPERATION = 13;
+	int EVENT_AWARE_OPERATION = 14;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -812,7 +876,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getApplicationElementContainer()
 	 * @generated
 	 */
-	int APPLICATION_ELEMENT_CONTAINER = 16;
+	int APPLICATION_ELEMENT_CONTAINER = 17;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -894,7 +958,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getApplicationElementProperty()
 	 * @generated
 	 */
-	int APPLICATION_ELEMENT_PROPERTY = 17;
+	int APPLICATION_ELEMENT_PROPERTY = 18;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -940,7 +1004,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getVisibleThing()
 	 * @generated
 	 */
-	int VISIBLE_THING = 18;
+	int VISIBLE_THING = 19;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1022,7 +1086,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getInternetApplication()
 	 * @generated
 	 */
-	int INTERNET_APPLICATION = 19;
+	int INTERNET_APPLICATION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1095,7 +1159,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getDomainStore()
 	 * @generated
 	 */
-	int DOMAIN_STORE = 20;
+	int DOMAIN_STORE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1380,6 +1444,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeOperation_SubOperations();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.CompositeChainedOperation <em>Composite Chained Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Composite Chained Operation</em>'.
+	 * @see org.openiaml.model.model.CompositeChainedOperation
+	 * @generated
+	 */
+	EClass getCompositeChainedOperation();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.EventAwareOperation <em>Event Aware Operation</em>}'.
@@ -1772,6 +1846,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_OPERATION__SUB_OPERATIONS = eINSTANCE.getCompositeOperation_SubOperations();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.CompositeChainedOperationImpl <em>Composite Chained Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.CompositeChainedOperationImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getCompositeChainedOperation()
+		 * @generated
+		 */
+		EClass COMPOSITE_CHAINED_OPERATION = eINSTANCE.getCompositeChainedOperation();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.EventAwareOperationImpl <em>Event Aware Operation</em>}' class.

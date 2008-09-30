@@ -13,6 +13,7 @@ import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.OperationParameter;
 import org.openiaml.model.model.WireEdge;
 
 /**
@@ -27,11 +28,12 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.wires.CompositeWire#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.CompositeWire#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.CompositeWire#getEventTriggers <em>Event Triggers</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.CompositeWire#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.openiaml.model.model.wires.WiresPackage#getCompositeWire()
- * @model annotation="http://openiaml.org/comment comment='ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire...' comment2='easy visualisation: all composite wires are dashed' comment3='only composite wires have a name now' editor='org.openiaml.model.diagram.wire'"
+ * @model annotation="http://openiaml.org/comment comment='ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire...' comment2='easy visualisation: all composite wires are dashed' comment3='only composite wires have a name now' editor='org.openiaml.model.diagram.wire' comment4='a wire shouldn\'t have parameters; but the operations contained within need them rendered.'"
  * @generated
  */
 public interface CompositeWire extends WireEdge, NamedElement {
@@ -98,5 +100,21 @@ public interface CompositeWire extends WireEdge, NamedElement {
 	 * @generated
 	 */
 	EList<EventTrigger> getEventTriggers();
+
+	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.OperationParameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see org.openiaml.model.model.wires.WiresPackage#getCompositeWire_Parameters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<OperationParameter> getParameters();
 
 } // CompositeWire

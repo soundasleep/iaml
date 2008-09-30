@@ -144,6 +144,130 @@
           href="iaml.gmfgraph#ApplicationElementProperty"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/StartNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( StartNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StartNodeName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#StartNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/StopNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( StopNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StopNodeName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.8"/>
+      <diagramNode
+          href="iaml.gmfgraph#StopNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/FinishNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( FinishNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#FinishNodeName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.9"/>
+      <diagramNode
+          href="iaml.gmfgraph#FinishNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//ChainedOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( ChainedOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ChainedOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.6"/>
+      <diagramNode
+          href="iaml.gmfgraph#ChainedOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//CompositeChainedOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( CompositeChainedOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeChainedOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.10"/>
+      <diagramNode
+          href="iaml.gmfgraph#CompositeChainedOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/parameters"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//OperationParameter"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#OperationParameterName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.14"/>
+      <diagramNode
+          href="iaml.gmfgraph#OperationParameter"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -215,6 +339,73 @@
         href="wire.gmftool#//@palette/@tools.0/@tools.5"/>
     <diagramLink
         href="iaml.gmfgraph#PropertyToExecutionWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ExecutionWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ExecutionWire )"/>
+    <containmentFeature
+        href="iaml.ecore#//WireEdgesSource/edges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="wire.gmftool#//@palette/@tools.0/@tools.11"/>
+    <diagramLink
+        href="iaml.gmfgraph#ExecutionWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/PropertyToParameterWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( PropertyToParameterWire )"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#PropertyToParameterWireName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//WireEdgesSource/edges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="wire.gmftool#//@palette/@tools.0/@tools.12"/>
+    <diagramLink
+        href="iaml.gmfgraph#PropertyToParameterWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ProvidedParameterWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ProvidedParameterWire )"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ProvidedParameterWireName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//WireEdgesSource/edges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="wire.gmftool#//@palette/@tools.0/@tools.13"/>
+    <diagramLink
+        href="iaml.gmfgraph#ProvidedParameterWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

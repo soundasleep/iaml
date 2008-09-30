@@ -171,13 +171,22 @@ public interface WiresPackage extends EPackage {
 	int COMPOSITE_WIRE__EVENT_TRIGGERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_WIRE__PARAMETERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Composite Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 5;
+	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.SyncWireImpl <em>Sync Wire</em>}' class.
@@ -251,6 +260,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYNC_WIRE__EVENT_TRIGGERS = COMPOSITE_WIRE__EVENT_TRIGGERS;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__PARAMETERS = COMPOSITE_WIRE__PARAMETERS;
 
 	/**
 	 * The number of structural features of the '<em>Sync Wire</em>' class.
@@ -333,6 +351,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int RUN_WIRE__EVENT_TRIGGERS = COMPOSITE_WIRE__EVENT_TRIGGERS;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_WIRE__PARAMETERS = COMPOSITE_WIRE__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -565,6 +592,17 @@ public interface WiresPackage extends EPackage {
 	EReference getCompositeWire_EventTriggers();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.wires.CompositeWire#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see org.openiaml.model.model.wires.CompositeWire#getParameters()
+	 * @see #getCompositeWire()
+	 * @generated
+	 */
+	EReference getCompositeWire_Parameters();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.SyncWire <em>Sync Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -697,6 +735,14 @@ public interface WiresPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_WIRE__EVENT_TRIGGERS = eINSTANCE.getCompositeWire_EventTriggers();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_WIRE__PARAMETERS = eINSTANCE.getCompositeWire_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.SyncWireImpl <em>Sync Wire</em>}' class.

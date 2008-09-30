@@ -128,7 +128,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.11"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.10"/>
       <diagramNode
           href="iaml.gmfgraph#StartNode"/>
     </ownedChild>
@@ -148,7 +148,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.12"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.11"/>
       <diagramNode
           href="iaml.gmfgraph#StopNode"/>
     </ownedChild>
@@ -168,9 +168,31 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.13"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.12"/>
       <diagramNode
           href="iaml.gmfgraph#FinishNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/subOperations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//ChainedOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( ChainedOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ChainedOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.2"/>
+      <diagramNode
+          href="iaml.gmfgraph#ChainedOperation"/>
     </ownedChild>
   </nodes>
   <links>
@@ -182,9 +204,9 @@
         href="iaml.ecore#//WireEdgesSource/edges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
+        href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
     <diagramLink
-        href="iaml.gmfgraph#WireEdge"/>
+        href="iaml.gmfgraph#ExecutionWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>
@@ -206,7 +228,7 @@
         href="iaml.ecore#//WireEdgesSource/edges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.10"/>
+        href="operation.gmftool#//@palette/@tools.0/@tools.9"/>
     <diagramLink
         href="iaml.gmfgraph#PropertyToExecutionWire"/>
     <sourceMetaFeature
@@ -230,7 +252,7 @@
         href="iaml.ecore#//WireEdgesSource/edges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.9"/>
+        href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
     <diagramLink
         href="iaml.gmfgraph#PropertyToParameterWire"/>
     <sourceMetaFeature
@@ -254,7 +276,7 @@
         href="iaml.ecore#//WireEdgesSource/edges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
+        href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
     <diagramLink
         href="iaml.gmfgraph#ProvidedParameterWire"/>
     <sourceMetaFeature

@@ -74,6 +74,20 @@
 	  </editpartProvider>
 	</extension>
 	
+	<!-- missing shortcuts for composite object -->
+	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+	  <editpartProvider class="org.openiaml.model.diagram.custom.edit.providers.CustomOperationEditPartProvider">
+	    <Priority name="Low" />
+	    <object class="org.eclipse.gmf.runtime.notation.Diagram" id="MyOverride">
+	      <method name="getElement()">
+	        <value class="org.openiaml.model.model.CompositeOperation"/>
+	      </method>
+	    </object>
+	    <context
+           views="MyOverride"/>
+	  </editpartProvider>
+	</extension>
+	
 	<!-- missing shortcuts for element -->
 	<!-- I think we need to place this last so it is the provider of last resort -->
 	<extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">

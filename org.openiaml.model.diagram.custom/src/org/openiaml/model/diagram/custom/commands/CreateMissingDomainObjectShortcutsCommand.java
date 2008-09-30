@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
@@ -20,24 +20,24 @@ import org.openiaml.model.model.WireEdgesSource;
  * @author jmwright
  *
  */
-public class CreateMissingDomainStoreShortcutsCommand extends
+public class CreateMissingDomainObjectShortcutsCommand extends
 		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	
-	public CreateMissingDomainStoreShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
+	public CreateMissingDomainObjectShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
 		super(root, prefHint);
 		this.modelId = modelId;
 	}
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		DomainStore rootObject = (DomainStore) object;
+		DomainObject rootObject = (DomainObject) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 		
-		// DomainObject <- ApplicationElement
-		for (DomainObject child : rootObject.getChildren()) {
+		// DomainAttribute
+		for (DomainAttribute child : rootObject.getAttributes()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 
@@ -58,12 +58,12 @@ public class CreateMissingDomainStoreShortcutsCommand extends
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		DomainStore rootObject = (DomainStore) object;
+		DomainObject rootObject = (DomainObject) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
-		// DomainObject <- ApplicationElement
-		for (DomainObject child : rootObject.getChildren()) {
+		// DomainAttribute
+		for (DomainAttribute child : rootObject.getAttributes()) {
 			connectionsOut.addAll( child.getEdges() );
 		}
 		

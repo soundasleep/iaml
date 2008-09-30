@@ -70,12 +70,8 @@ public class SyncWireViewFactory extends ConnectionViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-		getViewService()
-				.createNode(
-						eObjectAdapter,
-						view,
-						IamlVisualIDRegistry
-								.getType(SyncWireNameEditPart.VISUAL_ID),
-						ViewUtil.APPEND, true, getPreferencesHint());
+		getViewService().createNode(eObjectAdapter, view,
+				IamlVisualIDRegistry.getType(SyncWireNameEditPart.VISUAL_ID),
+				ViewUtil.APPEND, true, getPreferencesHint());
 	}
 }

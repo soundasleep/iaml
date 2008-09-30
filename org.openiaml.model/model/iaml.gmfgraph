@@ -319,6 +319,21 @@
           accessor="getFigureEventAwareOperationNameFigure"
           figure="//@figures.0/@descriptors.16/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="PropertyToExecutionWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="PropertyToExecutionWireFigure"
+          lineKind="LINE_DOT"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PropertyToExecutionWireNameFigure"
+            text="p2e"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -371,6 +386,9 @@
   <connections
       name="RunWire"
       figure="RunWireFigure"/>
+  <connections
+      name="PropertyToExecutionWire"
+      figure="PropertyToExecutionWireFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -439,4 +457,8 @@
       name="EventAwareOperationName"
       figure="EventAwareOperationFigure"
       accessor="//@figures.0/@descriptors.16/@accessors.0"/>
+  <labels
+      name="PropertyToExecutionWireName"
+      figure="PropertyToExecutionWireFigure"
+      accessor="//@figures.0/@descriptors.17/@accessors.0"/>
 </gmfgraph:Canvas>

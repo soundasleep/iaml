@@ -121,7 +121,7 @@
           eType="#//EventTrigger" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//wires/CompositeWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="RunWire" eSuperTypes="#//wires/CompositeWire">
+    <eClassifiers xsi:type="ecore:EClass" name="RunWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>
@@ -129,7 +129,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="ExecutionWire" eSuperTypes="#//wires/SingleWire"/>
     <eClassifiers xsi:type="ecore:EClass" name="ProvidedParameterWire" eSuperTypes="#//wires/SingleWire"/>
     <eClassifiers xsi:type="ecore:EClass" name="PropertyToParameterWire" eSuperTypes="#//wires/SingleWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PropertyToExecutionWireWire" eSuperTypes="#//wires/SingleWire"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertyToExecutionWire" eSuperTypes="#//wires/SingleWire"/>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
     <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//SingleOperation #//WireEdgesSource"/>

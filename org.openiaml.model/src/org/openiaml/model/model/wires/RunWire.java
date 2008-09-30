@@ -6,6 +6,8 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.WireEdgeDestination;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,5 +19,5 @@ package org.openiaml.model.model.wires;
  * @model annotation="http://openiaml.org/comment comment='RunWire: a composite wire that contains ExecutionWires/etc'"
  * @generated
  */
-public interface RunWire extends CompositeWire {
+public interface RunWire extends CompositeWire, WireEdgeDestination {
 } // RunWire

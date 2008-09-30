@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 
+import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.wires.*;
 
 /**
@@ -103,8 +104,8 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createPropertyToParameterWireAdapter();
 			}
 			@Override
-			public Adapter casePropertyToExecutionWireWire(PropertyToExecutionWireWire object) {
-				return createPropertyToExecutionWireWireAdapter();
+			public Adapter casePropertyToExecutionWire(PropertyToExecutionWire object) {
+				return createPropertyToExecutionWireAdapter();
 			}
 			@Override
 			public Adapter caseWireEdge(WireEdge object) {
@@ -113,6 +114,10 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
+				return createWireEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -233,16 +238,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.PropertyToExecutionWireWire <em>Property To Execution Wire Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.PropertyToExecutionWire <em>Property To Execution Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.PropertyToExecutionWireWire
+	 * @see org.openiaml.model.model.wires.PropertyToExecutionWire
 	 * @generated
 	 */
-	public Adapter createPropertyToExecutionWireWireAdapter() {
+	public Adapter createPropertyToExecutionWireAdapter() {
 		return null;
 	}
 
@@ -271,6 +276,20 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgeDestination <em>Wire Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.WireEdgeDestination
+	 * @generated
+	 */
+	public Adapter createWireEdgeDestinationAdapter() {
 		return null;
 	}
 

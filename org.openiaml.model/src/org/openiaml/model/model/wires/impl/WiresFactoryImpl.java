@@ -67,7 +67,7 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.EXECUTION_WIRE: return createExecutionWire();
 			case WiresPackage.PROVIDED_PARAMETER_WIRE: return createProvidedParameterWire();
 			case WiresPackage.PROPERTY_TO_PARAMETER_WIRE: return createPropertyToParameterWire();
-			case WiresPackage.PROPERTY_TO_EXECUTION_WIRE_WIRE: return createPropertyToExecutionWireWire();
+			case WiresPackage.PROPERTY_TO_EXECUTION_WIRE: return createPropertyToExecutionWire();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -148,9 +148,9 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PropertyToExecutionWireWire createPropertyToExecutionWireWire() {
-		PropertyToExecutionWireWireImpl propertyToExecutionWireWire = new PropertyToExecutionWireWireImpl();
-		return propertyToExecutionWireWire;
+	public PropertyToExecutionWire createPropertyToExecutionWire() {
+		PropertyToExecutionWireImpl propertyToExecutionWire = new PropertyToExecutionWireImpl();
+		return propertyToExecutionWire;
 	}
 
 	/**

@@ -335,13 +335,22 @@ public interface WiresPackage extends EPackage {
 	int RUN_WIRE__EVENT_TRIGGERS = COMPOSITE_WIRE__EVENT_TRIGGERS;
 
 	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_WIRE__IN_EDGES = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Run Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+	int RUN_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ExecutionWireImpl <em>Execution Wire</em>}' class.
@@ -455,14 +464,14 @@ public interface WiresPackage extends EPackage {
 	int PROPERTY_TO_PARAMETER_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.PropertyToExecutionWireWireImpl <em>Property To Execution Wire Wire</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.PropertyToExecutionWireImpl <em>Property To Execution Wire</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.wires.impl.PropertyToExecutionWireWireImpl
-	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getPropertyToExecutionWireWire()
+	 * @see org.openiaml.model.model.wires.impl.PropertyToExecutionWireImpl
+	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getPropertyToExecutionWire()
 	 * @generated
 	 */
-	int PROPERTY_TO_EXECUTION_WIRE_WIRE = 7;
+	int PROPERTY_TO_EXECUTION_WIRE = 7;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' container reference.
@@ -471,7 +480,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TO_EXECUTION_WIRE_WIRE__FROM = SINGLE_WIRE__FROM;
+	int PROPERTY_TO_EXECUTION_WIRE__FROM = SINGLE_WIRE__FROM;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -480,17 +489,16 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TO_EXECUTION_WIRE_WIRE__TO = SINGLE_WIRE__TO;
+	int PROPERTY_TO_EXECUTION_WIRE__TO = SINGLE_WIRE__TO;
 
 	/**
-	 * The number of structural features of the '<em>Property To Execution Wire Wire</em>' class.
+	 * The number of structural features of the '<em>Property To Execution Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TO_EXECUTION_WIRE_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
-
+	int PROPERTY_TO_EXECUTION_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.SingleWire <em>Single Wire</em>}'.
@@ -607,14 +615,14 @@ public interface WiresPackage extends EPackage {
 	EClass getPropertyToParameterWire();
 
 	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.PropertyToExecutionWireWire <em>Property To Execution Wire Wire</em>}'.
+	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.PropertyToExecutionWire <em>Property To Execution Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Property To Execution Wire Wire</em>'.
-	 * @see org.openiaml.model.model.wires.PropertyToExecutionWireWire
+	 * @return the meta object for class '<em>Property To Execution Wire</em>'.
+	 * @see org.openiaml.model.model.wires.PropertyToExecutionWire
 	 * @generated
 	 */
-	EClass getPropertyToExecutionWireWire();
+	EClass getPropertyToExecutionWire();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -741,14 +749,14 @@ public interface WiresPackage extends EPackage {
 		EClass PROPERTY_TO_PARAMETER_WIRE = eINSTANCE.getPropertyToParameterWire();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.PropertyToExecutionWireWireImpl <em>Property To Execution Wire Wire</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.PropertyToExecutionWireImpl <em>Property To Execution Wire</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.wires.impl.PropertyToExecutionWireWireImpl
-		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getPropertyToExecutionWireWire()
+		 * @see org.openiaml.model.model.wires.impl.PropertyToExecutionWireImpl
+		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getPropertyToExecutionWire()
 		 * @generated
 		 */
-		EClass PROPERTY_TO_EXECUTION_WIRE_WIRE = eINSTANCE.getPropertyToExecutionWireWire();
+		EClass PROPERTY_TO_EXECUTION_WIRE = eINSTANCE.getPropertyToExecutionWire();
 
 	}
 

@@ -98,6 +98,15 @@ public interface ModelFactory extends EFactory {
 	CompositeOperation createCompositeOperation();
 
 	/**
+	 * Returns a new object of class '<em>Composite Chained Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Composite Chained Operation</em>'.
+	 * @generated
+	 */
+	CompositeChainedOperation createCompositeChainedOperation();
+
+	/**
 	 * Returns a new object of class '<em>Event Aware Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

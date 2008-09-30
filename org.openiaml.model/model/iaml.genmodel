@@ -37,6 +37,7 @@
     <genClasses ecoreClass="iaml.ecore#//CompositeOperation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/subOperations"/>
     </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//CompositeChainedOperation"/>
     <genClasses ecoreClass="iaml.ecore#//EventAwareOperation"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsOperations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsOperations/operations"/>
@@ -74,6 +75,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/properties"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/operations"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/eventTriggers"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/parameters"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/RunWire"/>

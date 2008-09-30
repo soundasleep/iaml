@@ -58,6 +58,18 @@
       <?gmfgen generated="true"?>
       <objectContribution
             adaptable="false"
+            id="org.openiaml.model.diagram.domain_object.CreateShortcut"
+            objectClass="org.openiaml.model.model.diagram.domain_object.edit.parts.DomainObjectEditPart">
+         <action
+               class="org.openiaml.model.model.diagram.domain_object.part.IamlCreateShortcutAction"
+               enablesFor="1"
+               id="org.openiaml.model.diagram.domain_object.CreateShortcutAction"
+               label="%createShortcutActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>                      
+      <objectContribution
+            adaptable="false"
             id="org.openiaml.model.diagram.domain_object.LoadResource"
             objectClass="org.openiaml.model.model.diagram.domain_object.edit.parts.DomainObjectEditPart">
          <action
@@ -419,11 +431,11 @@
 	   <extension point="org.eclipse.core.expressions.propertyTesters">
       <?gmfgen generated="true"?>
        <propertyTester
-           id="org.openiaml.model.diagram.domain_object.DomainModelElementPropertyTester"
-           type="org.eclipse.emf.ecore.EObject"
+           id="org.openiaml.model.diagram.domain_object.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
            namespace="org.openiaml.model.diagram.domain_object"
-           properties="isDomainModelElement"
-           class="org.openiaml.model.model.diagram.domain_object.part.IamlDomainModelElementTester">
+           properties="isShortcut"
+           class="org.openiaml.model.model.diagram.domain_object.part.IamlShortcutPropertyTester">
        </propertyTester>
    </extension>
 
@@ -460,11 +472,17 @@
         	      <test property="org.eclipse.core.resources.extension" value="model_domain_object_diagram"/>
                </and>
                <instanceof value="org.openiaml.model.model.diagram.domain_object.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.domain_object.isShortcut"/>
+           	   </adapt>
             </or>
          </triggerPoints>
          <possibleChildren>
             <or>
          	   <instanceof value="org.openiaml.model.model.diagram.domain_object.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.domain_object.isShortcut"/>
+           	   </adapt>
             </or>
          </possibleChildren>
          <commonSorter 
@@ -514,6 +532,9 @@
          <enablement>
             <or>
                <instanceof value="org.openiaml.model.model.diagram.domain_object.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.domain_object.isShortcut"/>
+           	   </adapt>
             </or>
          </enablement>
       </actionProvider>
@@ -552,5 +573,21 @@
          contextId="org.openiaml.model.model.diagram.domain_object.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
+   </extension><extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.domain_object.providers.IamlShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+      </decoratorProvider>
    </extension>
+<extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.openiaml.model.diagram.domain_object.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="org.openiaml.model.diagram.domain_object"
+           properties="isDomainModelElement"
+           class="org.openiaml.model.model.diagram.domain_object.part.IamlDomainModelElementTester">
+       </propertyTester>
+   </extension>
+
 </plugin>

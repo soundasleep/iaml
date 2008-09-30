@@ -21,6 +21,16 @@
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
+    <containsShortcutsTo>iaml</containsShortcutsTo>
+    <containsShortcutsTo>iaml_store</containsShortcutsTo>
+    <containsShortcutsTo>iaml_visual</containsShortcutsTo>
+    <containsShortcutsTo>iaml_wire</containsShortcutsTo>
+    <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
+    <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_store</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
     <domainDiagramElement
         href="iaml.genmodel#//model/DomainObject"/>
     <topLevelNodes

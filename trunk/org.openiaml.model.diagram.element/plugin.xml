@@ -58,6 +58,18 @@
       <?gmfgen generated="true"?>
       <objectContribution
             adaptable="false"
+            id="org.openiaml.model.diagram.element.CreateShortcut"
+            objectClass="org.openiaml.model.model.diagram.element.edit.parts.ApplicationElementEditPart">
+         <action
+               class="org.openiaml.model.model.diagram.element.part.IamlCreateShortcutAction"
+               enablesFor="1"
+               id="org.openiaml.model.diagram.element.CreateShortcutAction"
+               label="%createShortcutActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>                      
+      <objectContribution
+            adaptable="false"
             id="org.openiaml.model.diagram.element.LoadResource"
             objectClass="org.openiaml.model.model.diagram.element.edit.parts.ApplicationElementEditPart">
          <action
@@ -408,11 +420,11 @@
 	   <extension point="org.eclipse.core.expressions.propertyTesters">
       <?gmfgen generated="true"?>
        <propertyTester
-           id="org.openiaml.model.diagram.element.DomainModelElementPropertyTester"
-           type="org.eclipse.emf.ecore.EObject"
+           id="org.openiaml.model.diagram.element.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
            namespace="org.openiaml.model.diagram.element"
-           properties="isDomainModelElement"
-           class="org.openiaml.model.model.diagram.element.part.IamlDomainModelElementTester">
+           properties="isShortcut"
+           class="org.openiaml.model.model.diagram.element.part.IamlShortcutPropertyTester">
        </propertyTester>
    </extension>
 
@@ -449,11 +461,17 @@
         	      <test property="org.eclipse.core.resources.extension" value="model_element_diagram"/>
                </and>
                <instanceof value="org.openiaml.model.model.diagram.element.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.element.isShortcut"/>
+           	   </adapt>
             </or>
          </triggerPoints>
          <possibleChildren>
             <or>
          	   <instanceof value="org.openiaml.model.model.diagram.element.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.element.isShortcut"/>
+           	   </adapt>
             </or>
          </possibleChildren>
          <commonSorter 
@@ -503,6 +521,9 @@
          <enablement>
             <or>
                <instanceof value="org.openiaml.model.model.diagram.element.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.element.isShortcut"/>
+           	   </adapt>
             </or>
          </enablement>
       </actionProvider>
@@ -541,5 +562,21 @@
          contextId="org.openiaml.model.model.diagram.element.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
+   </extension><extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.element.providers.IamlShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+      </decoratorProvider>
    </extension>
+<extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.openiaml.model.diagram.element.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="org.openiaml.model.diagram.element"
+           properties="isDomainModelElement"
+           class="org.openiaml.model.model.diagram.element.part.IamlDomainModelElementTester">
+       </propertyTester>
+   </extension>
+
 </plugin>

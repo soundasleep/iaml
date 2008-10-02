@@ -21,10 +21,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.ValueReference;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -39,6 +41,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getEdges <em>Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInValueReferences <em>In Value References</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,6 +157,47 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ValueReference getInValueReferences() {
+		if (eContainerFeatureID != ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES) return null;
+		return (ValueReference)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInValueReferences(ValueReference newInValueReferences, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newInValueReferences, ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInValueReferences(ValueReference newInValueReferences) {
+		if (newInValueReferences != eInternalContainer() || (eContainerFeatureID != ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES && newInValueReferences != null)) {
+			if (EcoreUtil.isAncestor(this, newInValueReferences))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newInValueReferences != null)
+				msgs = ((InternalEObject)newInValueReferences).eInverseAdd(this, ModelPackage.VALUE_REFERENCE__VALUE, ValueReference.class, msgs);
+			msgs = basicSetInValueReferences(newInValueReferences, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES, newInValueReferences, newInValueReferences));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -162,6 +206,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetInValueReferences((ValueReference)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -178,8 +226,24 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES:
+				return basicSetInValueReferences(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES:
+				return eInternalContainer().eInverseRemove(this, ModelPackage.VALUE_REFERENCE__VALUE, ValueReference.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -196,6 +260,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return getEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return getInEdges();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES:
+				return getInValueReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -220,6 +286,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES:
+				setInValueReferences((ValueReference)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -241,6 +310,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES:
+				setInValueReferences((ValueReference)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -259,6 +331,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return edges != null && !edges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES:
+				return getInValueReferences() != null;
 		}
 		return super.eIsSet(featureID);
 	}

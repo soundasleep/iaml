@@ -32,7 +32,10 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.OperationParameter;
+import org.openiaml.model.model.OperationReference;
+import org.openiaml.model.model.ParameterReference;
 import org.openiaml.model.model.SingleOperation;
+import org.openiaml.model.model.ValueReference;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
@@ -210,6 +213,27 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass domainStoreEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass valueReferenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -448,6 +472,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getOperation_CodeBlock() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOperationParameter() {
 		return operationParameterEClass;
 	}
@@ -574,6 +607,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getApplicationElementProperty_InValueReferences() {
+		return (EReference)applicationElementPropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVisibleThing() {
 		return visibleThingEClass;
 	}
@@ -646,6 +688,78 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOperationReference() {
+		return operationReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperationReference_Operation() {
+		return (EReference)operationReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperationReference_ParameterReferences() {
+		return (EReference)operationReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameterReference() {
+		return parameterReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterReference_Parameter() {
+		return (EReference)parameterReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterReference_ValueReference() {
+		return (EReference)parameterReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getValueReference() {
+		return valueReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getValueReference_Value() {
+		return (EReference)valueReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -694,6 +808,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
+		createEAttribute(operationEClass, OPERATION__CODE_BLOCK);
 
 		operationParameterEClass = createEClass(OPERATION_PARAMETER);
 
@@ -718,6 +833,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(applicationElementContainerEClass, APPLICATION_ELEMENT_CONTAINER__CHILDREN);
 
 		applicationElementPropertyEClass = createEClass(APPLICATION_ELEMENT_PROPERTY);
+		createEReference(applicationElementPropertyEClass, APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES);
 
 		visibleThingEClass = createEClass(VISIBLE_THING);
 
@@ -729,6 +845,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainStoreEClass = createEClass(DOMAIN_STORE);
 		createEReference(domainStoreEClass, DOMAIN_STORE__CHILDREN);
 		createEReference(domainStoreEClass, DOMAIN_STORE__PROPERTIES);
+
+		operationReferenceEClass = createEClass(OPERATION_REFERENCE);
+		createEReference(operationReferenceEClass, OPERATION_REFERENCE__OPERATION);
+		createEReference(operationReferenceEClass, OPERATION_REFERENCE__PARAMETER_REFERENCES);
+
+		parameterReferenceEClass = createEClass(PARAMETER_REFERENCE);
+		createEReference(parameterReferenceEClass, PARAMETER_REFERENCE__PARAMETER);
+		createEReference(parameterReferenceEClass, PARAMETER_REFERENCE__VALUE_REFERENCE);
+
+		valueReferenceEClass = createEClass(VALUE_REFERENCE);
+		createEReference(valueReferenceEClass, VALUE_REFERENCE__VALUE);
 	}
 
 	/**
@@ -801,6 +928,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainStoreEClass.getESuperTypes().add(this.getContainsOperations());
 		domainStoreEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		domainStoreEClass.getESuperTypes().add(this.getNamedElement());
+		operationReferenceEClass.getESuperTypes().add(this.getNamedElement());
+		parameterReferenceEClass.getESuperTypes().add(this.getNamedElement());
+		valueReferenceEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -828,6 +958,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(operationEClass, Operation.class, "Operation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Parameters(), this.getOperationParameter(), null, "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_CodeBlock(), ecorePackage.getEString(), "codeBlock", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationParameterEClass, OperationParameter.class, "OperationParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -852,6 +983,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getApplicationElementContainer_Children(), this.getApplicationElement(), null, "children", null, 0, -1, ApplicationElementContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(applicationElementPropertyEClass, ApplicationElementProperty.class, "ApplicationElementProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getApplicationElementProperty_InValueReferences(), this.getValueReference(), this.getValueReference_Value(), "inValueReferences", null, 0, 1, ApplicationElementProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(visibleThingEClass, VisibleThing.class, "VisibleThing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -864,12 +996,25 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getDomainStore_Children(), this.getDomainObject(), null, "children", null, 0, -1, DomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainStore_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, DomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(operationReferenceEClass, OperationReference.class, "OperationReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperationReference_Operation(), this.getOperation(), null, "operation", null, 0, 1, OperationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperationReference_ParameterReferences(), this.getParameterReference(), null, "parameterReferences", null, 0, -1, OperationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(parameterReferenceEClass, ParameterReference.class, "ParameterReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterReference_Parameter(), this.getOperationParameter(), null, "parameter", null, 0, 1, ParameterReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterReference_ValueReference(), this.getValueReference(), null, "valueReference", null, 0, 1, ParameterReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(valueReferenceEClass, ValueReference.class, "ValueReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getValueReference_Value(), this.getApplicationElementProperty(), this.getApplicationElementProperty_InValueReferences(), "value", null, 0, 1, ValueReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
 		// Create annotations
 		// http://openiaml.org/comment
 		createCommentAnnotations();
+		// http://openiaml.org/todo
+		createTodoAnnotations();
 	}
 
 	/**
@@ -885,7 +1030,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "editor", "org.openiaml.model.diagram.element"
-		   });		
+		   });			
 		addAnnotation
 		  (visibleThingEClass, 
 		   source, 
@@ -908,6 +1053,22 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "comment", "stores database objects",
 			 "editor", "org.openiaml.model.diagram.domain_store"
 		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://openiaml.org/todo</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createTodoAnnotations() {
+		String source = "http://openiaml.org/todo";			
+		addAnnotation
+		  (applicationElementPropertyEClass, 
+		   source, 
+		   new String[] {
+			 "todo", "maybe rename? delete subclasses?"
+		   });			
 	}
 
 } //ModelPackageImpl

@@ -75,6 +75,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.VISIBLE_THING: return createVisibleThing();
 			case ModelPackage.INTERNET_APPLICATION: return createInternetApplication();
 			case ModelPackage.DOMAIN_STORE: return createDomainStore();
+			case ModelPackage.OPERATION_REFERENCE: return createOperationReference();
+			case ModelPackage.PARAMETER_REFERENCE: return createParameterReference();
+			case ModelPackage.VALUE_REFERENCE: return createValueReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -228,6 +231,36 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public DomainStore createDomainStore() {
 		DomainStoreImpl domainStore = new DomainStoreImpl();
 		return domainStore;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationReference createOperationReference() {
+		OperationReferenceImpl operationReference = new OperationReferenceImpl();
+		return operationReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterReference createParameterReference() {
+		ParameterReferenceImpl parameterReference = new ParameterReferenceImpl();
+		return parameterReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ValueReference createValueReference() {
+		ValueReferenceImpl valueReference = new ValueReferenceImpl();
+		return valueReference;
 	}
 
 	/**

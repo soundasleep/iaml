@@ -35,6 +35,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//OperationParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="codeBlock" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationParameter" eSuperTypes="#//NamedElement #//WireEdgeDestination"/>
   <eClassifiers xsi:type="ecore:EClass" name="SingleOperation" eSuperTypes="#//Operation"/>
@@ -62,7 +63,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//ApplicationElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination">
+    <eAnnotations source="http://openiaml.org/todo">
+      <details key="todo" value="maybe rename? delete subclasses?"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inValueReferences" eType="#//ValueReference"
+        eOpposite="#//ValueReference/value"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ApplicationElementContainer">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
@@ -91,6 +98,20 @@
         eType="#//DomainObject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationReference" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterReferences" upperBound="-1"
+        eType="#//ParameterReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterReference" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//OperationParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueReference" eType="#//ValueReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueReference" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ApplicationElementProperty"
+        containment="true" eOpposite="#//ApplicationElementProperty/inValueReferences"/>
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">
@@ -123,6 +144,8 @@
           eType="#//EventTrigger" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//OperationParameter" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operationReferences"
+          upperBound="-1" eType="#//OperationReference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//wires/CompositeWire"/>
     <eClassifiers xsi:type="ecore:EClass" name="RunWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
@@ -131,9 +154,21 @@
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExecutionWire" eSuperTypes="#//wires/SingleWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ProvidedParameterWire" eSuperTypes="#//wires/SingleWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PropertyToParameterWire" eSuperTypes="#//wires/SingleWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PropertyToExecutionWire" eSuperTypes="#//wires/SingleWire"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ProvidedParameterWire" eSuperTypes="#//wires/SingleWire">
+      <eAnnotations source="http://openiaml.org/todo">
+        <details key="todo" value="delete?"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertyToParameterWire" eSuperTypes="#//wires/SingleWire">
+      <eAnnotations source="http://openiaml.org/todo">
+        <details key="todo" value="delete?"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertyToExecutionWire" eSuperTypes="#//wires/SingleWire">
+      <eAnnotations source="http://openiaml.org/todo">
+        <details key="todo" value="delete?"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
     <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//SingleOperation #//WireEdgesSource"/>

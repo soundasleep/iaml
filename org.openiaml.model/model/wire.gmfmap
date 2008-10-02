@@ -140,6 +140,9 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.20"/>
       <diagramNode
           href="iaml.gmfgraph#ApplicationElementProperty"/>
     </ownedChild>
@@ -266,6 +269,66 @@
           href="wire.gmftool#//@palette/@tools.0/@tools.14"/>
       <diagramNode
           href="iaml.gmfgraph#OperationParameter"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/operationReferences"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//OperationReference"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#OperationReferenceName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.15"/>
+      <diagramNode
+          href="iaml.gmfgraph#OperationReferenceNode"/>
+      <children>
+        <containmentFeature
+            href="iaml.ecore#//OperationReference/parameterReferences"/>
+        <ownedChild>
+          <domainMetaElement
+              href="iaml.ecore#//ParameterReference"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="iaml.gmfgraph#ParameterReferenceName"/>
+            <features
+                href="iaml.ecore#//NamedElement/name"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="wire.gmftool#//@palette/@tools.0/@tools.16"/>
+          <diagramNode
+              href="iaml.gmfgraph#ParameterReferenceNode"/>
+          <children>
+            <containmentFeature
+                href="iaml.ecore#//ParameterReference/valueReference"/>
+            <ownedChild>
+              <domainMetaElement
+                  href="iaml.ecore#//ValueReference"/>
+              <labelMappings
+                  xsi:type="gmfmap:FeatureLabelMapping">
+                <diagramLabel
+                    href="iaml.gmfgraph#ValueReferenceName"/>
+                <features
+                    href="iaml.ecore#//NamedElement/name"/>
+              </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="wire.gmftool#//@palette/@tools.0/@tools.17"/>
+              <diagramNode
+                  href="iaml.gmfgraph#ValueReferenceNode"/>
+            </ownedChild>
+          </children>
+        </ownedChild>
+      </children>
     </ownedChild>
   </nodes>
   <links>
@@ -412,6 +475,25 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//OperationReference"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ValueToParameterEdgeName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/operationReferences"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="wire.gmftool#//@palette/@tools.0/@tools.19"/>
+    <diagramLink
+        href="iaml.gmfgraph#ValueToParameterEdge"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//OperationReference/operation"/>
   </links>
   <diagram>
     <diagramCanvas

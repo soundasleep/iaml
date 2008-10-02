@@ -237,6 +237,15 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCompositeWire_OperationReferences() {
+		return (EReference)compositeWireEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSyncWire() {
 		return syncWireEClass;
 	}
@@ -322,6 +331,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__OPERATIONS);
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__EVENT_TRIGGERS);
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__PARAMETERS);
+		createEReference(compositeWireEClass, COMPOSITE_WIRE__OPERATION_REFERENCES);
 
 		syncWireEClass = createEClass(SYNC_WIRE);
 
@@ -387,6 +397,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEReference(getCompositeWire_Operations(), theModelPackage.getOperation(), null, "operations", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_EventTriggers(), theModelPackage.getEventTrigger(), null, "eventTriggers", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_Parameters(), theModelPackage.getOperationParameter(), null, "parameters", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeWire_OperationReferences(), theModelPackage.getOperationReference(), null, "operationReferences", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(syncWireEClass, SyncWire.class, "SyncWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -403,6 +414,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		// Create annotations
 		// http://openiaml.org/comment
 		createCommentAnnotations();
+		// http://openiaml.org/todo
+		createTodoAnnotations();
 	}
 
 	/**
@@ -434,6 +447,34 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "comment", "RunWire: a composite wire that contains ExecutionWires/etc"
+		   });			
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://openiaml.org/todo</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createTodoAnnotations() {
+		String source = "http://openiaml.org/todo";					
+		addAnnotation
+		  (providedParameterWireEClass, 
+		   source, 
+		   new String[] {
+			 "todo", "delete?"
+		   });		
+		addAnnotation
+		  (propertyToParameterWireEClass, 
+		   source, 
+		   new String[] {
+			 "todo", "delete?"
+		   });		
+		addAnnotation
+		  (propertyToExecutionWireEClass, 
+		   source, 
+		   new String[] {
+			 "todo", "delete?"
 		   });
 	}
 

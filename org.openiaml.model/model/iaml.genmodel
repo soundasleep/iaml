@@ -30,6 +30,7 @@
     <genClasses ecoreClass="iaml.ecore#//DomainAttribute"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Operation/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Operation/codeBlock"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//OperationParameter"/>
     <genClasses ecoreClass="iaml.ecore#//SingleOperation"/>
@@ -48,7 +49,9 @@
     <genClasses ecoreClass="iaml.ecore#//ApplicationElementContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ApplicationElementContainer/children"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//ApplicationElementProperty"/>
+    <genClasses ecoreClass="iaml.ecore#//ApplicationElementProperty">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ApplicationElementProperty/inValueReferences"/>
+    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//VisibleThing"/>
     <genClasses ecoreClass="iaml.ecore#//InternetApplication">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/properties"/>
@@ -58,6 +61,17 @@
     <genClasses ecoreClass="iaml.ecore#//DomainStore">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/children"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//OperationReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//OperationReference/operation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//OperationReference/parameterReferences"/>
+    </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//ParameterReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ParameterReference/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ParameterReference/valueReference"/>
+    </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//ValueReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ValueReference/value"/>
     </genClasses>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
@@ -76,6 +90,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/operations"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/eventTriggers"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/parameters"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/operationReferences"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/RunWire"/>

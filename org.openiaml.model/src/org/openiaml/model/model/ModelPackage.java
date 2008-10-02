@@ -539,13 +539,22 @@ public interface ModelPackage extends EPackage {
 	int OPERATION__PARAMETERS = WIRE_EDGE_DESTINATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__CODE_BLOCK = WIRE_EDGE_DESTINATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = WIRE_EDGE_DESTINATION_FEATURE_COUNT + 2;
+	int OPERATION_FEATURE_COUNT = WIRE_EDGE_DESTINATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.OperationParameterImpl <em>Operation Parameter</em>}' class.
@@ -622,6 +631,15 @@ public interface ModelPackage extends EPackage {
 	int SINGLE_OPERATION__PARAMETERS = OPERATION__PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SINGLE_OPERATION__CODE_BLOCK = OPERATION__CODE_BLOCK;
+
+	/**
 	 * The number of structural features of the '<em>Single Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -666,6 +684,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHAINED_OPERATION__PARAMETERS = OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAINED_OPERATION__CODE_BLOCK = OPERATION__CODE_BLOCK;
 
 	/**
 	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
@@ -723,6 +750,15 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__PARAMETERS = OPERATION__PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__CODE_BLOCK = OPERATION__CODE_BLOCK;
+
+	/**
 	 * The feature id for the '<em><b>Sub Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -776,6 +812,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_CHAINED_OPERATION__PARAMETERS = COMPOSITE_OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CHAINED_OPERATION__CODE_BLOCK = COMPOSITE_OPERATION__CODE_BLOCK;
 
 	/**
 	 * The feature id for the '<em><b>Sub Operations</b></em>' containment reference list.
@@ -840,6 +885,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT_AWARE_OPERATION__PARAMETERS = COMPOSITE_OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_AWARE_OPERATION__CODE_BLOCK = COMPOSITE_OPERATION__CODE_BLOCK;
 
 	/**
 	 * The feature id for the '<em><b>Sub Operations</b></em>' containment reference list.
@@ -988,13 +1042,22 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_PROPERTY__IN_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>In Value References</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Application Element Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int APPLICATION_ELEMENT_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.VisibleThingImpl <em>Visible Thing</em>}' class.
@@ -1217,6 +1280,136 @@ public interface ModelPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.OperationReferenceImpl <em>Operation Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.OperationReferenceImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getOperationReference()
+	 * @generated
+	 */
+	int OPERATION_REFERENCE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REFERENCE__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REFERENCE__OPERATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Parameter References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REFERENCE__PARAMETER_REFERENCES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Operation Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REFERENCE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.ParameterReferenceImpl <em>Parameter Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.ParameterReferenceImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getParameterReference()
+	 * @generated
+	 */
+	int PARAMETER_REFERENCE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE__PARAMETER = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value Reference</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE__VALUE_REFERENCE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Parameter Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.ValueReferenceImpl <em>Value Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.ValueReferenceImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getValueReference()
+	 * @generated
+	 */
+	int VALUE_REFERENCE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_REFERENCE__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_REFERENCE__VALUE = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Value Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_REFERENCE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1395,6 +1588,17 @@ public interface ModelPackage extends EPackage {
 	EReference getOperation_Parameters();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.Operation#getCodeBlock <em>Code Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Code Block</em>'.
+	 * @see org.openiaml.model.model.Operation#getCodeBlock()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_CodeBlock();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.OperationParameter <em>Operation Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1539,6 +1743,17 @@ public interface ModelPackage extends EPackage {
 	EClass getApplicationElementProperty();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.model.model.ApplicationElementProperty#getInValueReferences <em>In Value References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>In Value References</em>'.
+	 * @see org.openiaml.model.model.ApplicationElementProperty#getInValueReferences()
+	 * @see #getApplicationElementProperty()
+	 * @generated
+	 */
+	EReference getApplicationElementProperty_InValueReferences();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.VisibleThing <em>Visible Thing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1622,6 +1837,91 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDomainStore_Properties();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.OperationReference <em>Operation Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operation Reference</em>'.
+	 * @see org.openiaml.model.model.OperationReference
+	 * @generated
+	 */
+	EClass getOperationReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.model.model.OperationReference#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operation</em>'.
+	 * @see org.openiaml.model.model.OperationReference#getOperation()
+	 * @see #getOperationReference()
+	 * @generated
+	 */
+	EReference getOperationReference_Operation();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.OperationReference#getParameterReferences <em>Parameter References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameter References</em>'.
+	 * @see org.openiaml.model.model.OperationReference#getParameterReferences()
+	 * @see #getOperationReference()
+	 * @generated
+	 */
+	EReference getOperationReference_ParameterReferences();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.ParameterReference <em>Parameter Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Parameter Reference</em>'.
+	 * @see org.openiaml.model.model.ParameterReference
+	 * @generated
+	 */
+	EClass getParameterReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.model.model.ParameterReference#getParameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parameter</em>'.
+	 * @see org.openiaml.model.model.ParameterReference#getParameter()
+	 * @see #getParameterReference()
+	 * @generated
+	 */
+	EReference getParameterReference_Parameter();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.ParameterReference#getValueReference <em>Value Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value Reference</em>'.
+	 * @see org.openiaml.model.model.ParameterReference#getValueReference()
+	 * @see #getParameterReference()
+	 * @generated
+	 */
+	EReference getParameterReference_ValueReference();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.ValueReference <em>Value Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Value Reference</em>'.
+	 * @see org.openiaml.model.model.ValueReference
+	 * @generated
+	 */
+	EClass getValueReference();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.ValueReference#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.openiaml.model.model.ValueReference#getValue()
+	 * @see #getValueReference()
+	 * @generated
+	 */
+	EReference getValueReference_Value();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1800,6 +2100,14 @@ public interface ModelPackage extends EPackage {
 		EReference OPERATION__PARAMETERS = eINSTANCE.getOperation_Parameters();
 
 		/**
+		 * The meta object literal for the '<em><b>Code Block</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__CODE_BLOCK = eINSTANCE.getOperation_CodeBlock();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.OperationParameterImpl <em>Operation Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1932,6 +2240,14 @@ public interface ModelPackage extends EPackage {
 		EClass APPLICATION_ELEMENT_PROPERTY = eINSTANCE.getApplicationElementProperty();
 
 		/**
+		 * The meta object literal for the '<em><b>In Value References</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APPLICATION_ELEMENT_PROPERTY__IN_VALUE_REFERENCES = eINSTANCE.getApplicationElementProperty_InValueReferences();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.VisibleThingImpl <em>Visible Thing</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2000,6 +2316,76 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOMAIN_STORE__PROPERTIES = eINSTANCE.getDomainStore_Properties();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.OperationReferenceImpl <em>Operation Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.OperationReferenceImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getOperationReference()
+		 * @generated
+		 */
+		EClass OPERATION_REFERENCE = eINSTANCE.getOperationReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_REFERENCE__OPERATION = eINSTANCE.getOperationReference_Operation();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter References</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_REFERENCE__PARAMETER_REFERENCES = eINSTANCE.getOperationReference_ParameterReferences();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ParameterReferenceImpl <em>Parameter Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.ParameterReferenceImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getParameterReference()
+		 * @generated
+		 */
+		EClass PARAMETER_REFERENCE = eINSTANCE.getParameterReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER_REFERENCE__PARAMETER = eINSTANCE.getParameterReference_Parameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Reference</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER_REFERENCE__VALUE_REFERENCE = eINSTANCE.getParameterReference_ValueReference();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ValueReferenceImpl <em>Value Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.ValueReferenceImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getValueReference()
+		 * @generated
+		 */
+		EClass VALUE_REFERENCE = eINSTANCE.getValueReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VALUE_REFERENCE__VALUE = eINSTANCE.getValueReference_Value();
 
 	}
 

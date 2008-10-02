@@ -161,6 +161,33 @@ public interface ModelFactory extends EFactory {
 	DomainStore createDomainStore();
 
 	/**
+	 * Returns a new object of class '<em>Operation Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Reference</em>'.
+	 * @generated
+	 */
+	OperationReference createOperationReference();
+
+	/**
+	 * Returns a new object of class '<em>Parameter Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter Reference</em>'.
+	 * @generated
+	 */
+	ParameterReference createParameterReference();
+
+	/**
+	 * Returns a new object of class '<em>Value Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Value Reference</em>'.
+	 * @generated
+	 */
+	ValueReference createValueReference();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

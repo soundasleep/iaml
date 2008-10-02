@@ -168,6 +168,11 @@
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.wire.edit.parts.ValueReferenceName2EditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
       </contributionItemProvider>
    </extension>
 
@@ -458,6 +463,36 @@
             <param name="semanticHint" value="1013"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.wire.OperationReference_1014"
+               name="%metatype.name.OperationReference_1014"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="OperationReference"
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.OperationReferenceEditHelper">
+            <param name="semanticHint" value="1014"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.wire.ParameterReference_2001"
+               name="%metatype.name.ParameterReference_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ParameterReference"
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ParameterReferenceEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.wire.ValueReference_2002"
+               name="%metatype.name.ValueReference_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ValueReference"
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ValueReferenceEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.wire.SyncWire_3001"
@@ -518,6 +553,15 @@
             <param name="semanticHint" value="3006"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <specializationType
+               id="org.openiaml.model.diagram.wire.OperationReference_3007"
+               name="%metatype.name.OperationReference_3007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.openiaml.model.diagram.wire.OperationReference_1014"/>
+            <param name="semanticHint" value="3007"/>
+         </specializationType>
+      </metamodel>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
@@ -544,12 +588,16 @@
          <elementType ref="org.openiaml.model.diagram.wire.ChainedOperation_1011"/>
          <elementType ref="org.openiaml.model.diagram.wire.CompositeChainedOperation_1012"/>
          <elementType ref="org.openiaml.model.diagram.wire.OperationParameter_1013"/>
+         <elementType ref="org.openiaml.model.diagram.wire.OperationReference_1014"/>
+         <elementType ref="org.openiaml.model.diagram.wire.ParameterReference_2001"/>
+         <elementType ref="org.openiaml.model.diagram.wire.ValueReference_2002"/>
          <elementType ref="org.openiaml.model.diagram.wire.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.wire.RunWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.wire.PropertyToExecutionWire_3003"/>
          <elementType ref="org.openiaml.model.diagram.wire.ExecutionWire_3004"/>
          <elementType ref="org.openiaml.model.diagram.wire.PropertyToParameterWire_3005"/>
          <elementType ref="org.openiaml.model.diagram.wire.ProvidedParameterWire_3006"/>
+         <elementType ref="org.openiaml.model.diagram.wire.OperationReference_3007"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

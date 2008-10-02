@@ -35,6 +35,109 @@
     <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
     <domainDiagramElement
         href="iaml.genmodel#//model/wires/CompositeWire"/>
+    <childNodes
+        visualID="2001"
+        editPartClassName="ParameterReferenceEditPart"
+        itemSemanticEditPolicyClassName="ParameterReferenceItemSemanticEditPolicy"
+        notationViewFactoryClassName="ParameterReferenceViewFactory"
+        canonicalEditPolicyClassName="ParameterReferenceCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.1"
+        graphicalNodeEditPolicyClassName="ParameterReferenceGraphicalNodeEditPolicy"
+        createCommandClassName="ParameterReferenceCreateCommand"
+        containers="//@diagram/@topLevelNodes.13">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="ParameterReferenceEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          layoutType="FLOW_LAYOUT"
+          className="ParameterReferenceFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ParameterReferenceFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureParameterReferenceNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ParameterReferenceFigure() {&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(true);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureParameterReferenceNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureParameterReferenceNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureParameterReferenceNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureParameterReferenceNameFigure() {&#xA;&#x9;&#x9;return fFigureParameterReferenceNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 220, 220);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="iaml.genmodel#//model/ParameterReference"/>
+        <containmentMetaFeature
+            href="iaml.genmodel#//model/OperationReference/parameterReferences"/>
+        <childMetaFeature
+            href="iaml.genmodel#//model/OperationReference/parameterReferences"/>
+      </modelFacet>
+      <labels
+          visualID="4015"
+          editPartClassName="ParameterReferenceNameEditPart"
+          itemSemanticEditPolicyClassName="ParameterReferenceNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="ParameterReferenceNameViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureParameterReferenceNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
+    </childNodes>
+    <childNodes
+        visualID="2002"
+        editPartClassName="ValueReference2EditPart"
+        itemSemanticEditPolicyClassName="ValueReference2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="ValueReference2ViewFactory"
+        canonicalEditPolicyClassName="ValueReferenceCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="ValueReferenceGraphicalNodeEditPolicy"
+        createCommandClassName="ValueReference2CreateCommand"
+        containers="//@diagram/@childNodes.0">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="ValueReferenceEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          layoutType="FLOW_LAYOUT"
+          className="ValueReferenceFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ValueReferenceFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureValueReferenceNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ValueReferenceFigure() {&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(true);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureValueReferenceNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureValueReferenceNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureValueReferenceNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureValueReferenceNameFigure() {&#xA;&#x9;&#x9;return fFigureValueReferenceNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 192, 192);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="iaml.genmodel#//model/ValueReference"/>
+        <containmentMetaFeature
+            href="iaml.genmodel#//model/ParameterReference/valueReference"/>
+        <childMetaFeature
+            href="iaml.genmodel#//model/ParameterReference/valueReference"/>
+      </modelFacet>
+      <labels
+          visualID="4014"
+          editPartClassName="ValueReferenceNameEditPart"
+          itemSemanticEditPolicyClassName="ValueReferenceNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="ValueReferenceNameViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureValueReferenceNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
+    </childNodes>
     <topLevelNodes
         visualID="1001"
         editPartClassName="SingleOperationEditPart"
@@ -106,11 +209,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="OperationOpenDiagramEditPolicy"
-          diagramKind="Iaml_Operation"
-          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/CompositeOperation"/>
@@ -161,11 +259,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="OperationOpenDiagramEditPolicy"
-          diagramKind="Iaml_Operation"
-          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/EventAwareOperation"/>
@@ -216,11 +309,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="VisualOpenDiagramEditPolicy"
-          diagramKind="Iaml_Visual"
-          editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/DomainAttribute"/>
@@ -274,11 +362,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="VisualOpenDiagramEditPolicy"
-          diagramKind="Iaml_Visual"
-          editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/visual/InputTextField"/>
@@ -632,11 +715,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="OperationOpenDiagramEditPolicy"
-          diagramKind="Iaml_Operation"
-          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/CompositeChainedOperation"/>
@@ -721,6 +799,57 @@
         </modelFacet>
       </labels>
     </topLevelNodes>
+    <topLevelNodes
+        visualID="1014"
+        editPartClassName="OperationReferenceEditPart"
+        itemSemanticEditPolicyClassName="OperationReferenceItemSemanticEditPolicy"
+        notationViewFactoryClassName="OperationReferenceViewFactory"
+        canonicalEditPolicyClassName="OperationReferenceCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.0"
+        graphicalNodeEditPolicyClassName="OperationReferenceGraphicalNodeEditPolicy"
+        createCommandClassName="OperationReferenceCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="OperationReferenceEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          layoutType="FLOW_LAYOUT"
+          className="OperationReferenceFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class OperationReferenceFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureOperationReferenceNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public OperationReferenceFigure() {&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(true);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureOperationReferenceNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureOperationReferenceNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureOperationReferenceNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureOperationReferenceNameFigure() {&#xA;&#x9;&#x9;return fFigureOperationReferenceNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 240, 240);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="iaml.genmodel#//model/OperationReference"/>
+        <containmentMetaFeature
+            href="iaml.genmodel#//model/wires/CompositeWire/operationReferences"/>
+        <childMetaFeature
+            href="iaml.genmodel#//model/wires/CompositeWire/operationReferences"/>
+      </modelFacet>
+      <labels
+          visualID="4016"
+          editPartClassName="OperationReferenceNameEditPart"
+          itemSemanticEditPolicyClassName="OperationReferenceNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="OperationReferenceNameViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureOperationReferenceNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
     <links
         visualID="3001"
         editPartClassName="SyncWireEditPart"
@@ -740,11 +869,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="WireOpenDiagramEditPolicy"
-          diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
@@ -761,7 +885,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4014"
+          visualID="4017"
           editPartClassName="SyncWireNameEditPart"
           itemSemanticEditPolicyClassName="SyncWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="SyncWireNameViewFactory"
@@ -803,11 +927,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="WireOpenDiagramEditPolicy"
-          diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
@@ -824,7 +943,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4015"
+          visualID="4018"
           editPartClassName="RunWireNameEditPart"
           itemSemanticEditPolicyClassName="RunWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="RunWireNameViewFactory"
@@ -882,7 +1001,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4016"
+          visualID="4019"
           editPartClassName="WrapLabel4EditPart"
           itemSemanticEditPolicyClassName="WrapLabel4ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel4ViewFactory"
@@ -970,7 +1089,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4017"
+          visualID="4020"
           editPartClassName="WrapLabel5EditPart"
           itemSemanticEditPolicyClassName="WrapLabel5ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel5ViewFactory"
@@ -1022,7 +1141,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4018"
+          visualID="4021"
           editPartClassName="WrapLabel6EditPart"
           itemSemanticEditPolicyClassName="WrapLabel6ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel6ViewFactory"
@@ -1032,6 +1151,54 @@
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
             getterName="getFigureProvidedParameterWireNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel">
+          <attributes
+              xsi:type="gmfgen:LabelOffsetAttributes"
+              y="40"/>
+        </viewmap>
+      </labels>
+    </links>
+    <links
+        visualID="3007"
+        editPartClassName="ValueReferenceEditPart"
+        itemSemanticEditPolicyClassName="ValueReferenceItemSemanticEditPolicy"
+        notationViewFactoryClassName="ValueReferenceViewFactory"
+        createCommandClassName="ValueReferenceCreateCommand"
+        reorientCommandClassName="ValueReferenceReorientCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@topLevelNodes.13/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="ValueToParameterEdgeFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ValueToParameterEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureValueToParameterEdgeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ValueToParameterEdgeFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureValueToParameterEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureValueToParameterEdgeNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureValueToParameterEdgeNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureValueToParameterEdgeNameFigure() {&#xA;&#x9;&#x9;return fFigureValueToParameterEdgeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet
+          xsi:type="gmfgen:TypeLinkModelFacet">
+        <metaClass
+            href="iaml.genmodel#//model/OperationReference"/>
+        <containmentMetaFeature
+            href="iaml.genmodel#//model/wires/CompositeWire/operationReferences"/>
+        <childMetaFeature
+            href="iaml.genmodel#//model/wires/CompositeWire/operationReferences"/>
+        <targetMetaFeature
+            href="iaml.genmodel#//model/OperationReference/operation"/>
+      </modelFacet>
+      <labels
+          visualID="4022"
+          editPartClassName="ValueReferenceName2EditPart"
+          itemSemanticEditPolicyClassName="ValueReferenceName2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ValueReferenceName2ViewFactory"
+          readOnly="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureValueToParameterEdgeNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
@@ -1117,6 +1284,35 @@
             title="OperationParameter"
             description="Create new OperationParameter"
             genNodes="//@diagram/@topLevelNodes.12"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="OperationReference"
+            description="Create new OperationReference"
+            genNodes="//@diagram/@topLevelNodes.13"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ParameterReference"
+            description="Create new ParameterReference"
+            genNodes="//@diagram/@childNodes.0"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ValueReference"
+            description="Create new ValueReference"
+            genNodes="//@diagram/@childNodes.1"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ParameterToOperationEdge"
+            description="Create new ParameterToOperationEdge"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ValueToParameterEdge"
+            description="Create new ValueToParameterEdge"
+            genLinks="//@diagram/@links.6"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ApplicationElementProperty"
+            description="Create new ApplicationElementProperty"
+            genNodes="//@diagram/@topLevelNodes.6"/>
       </groups>
     </palette>
     <preferencePages
@@ -1199,6 +1395,15 @@
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.12"/>
     <childReferences
+        parent="//@diagram/@childNodes.0"
+        child="//@diagram/@childNodes.1"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.13"
+        child="//@diagram/@childNodes.0"/>
+    <childReferences
+        parent="//@diagram"
+        child="//@diagram/@topLevelNodes.13"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.0"
         groupName="links"
@@ -2596,6 +2801,107 @@
         referenceType="out_target"
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram"
+        child="//@diagram/@links.6"
+        groupName="links"
+        groupIcon="icons/linksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.0"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.0"
+        child="//@diagram/@links.6"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.1"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.1"
+        child="//@diagram/@links.6"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.2"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.2"
+        child="//@diagram/@links.6"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.7"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.7"
+        child="//@diagram/@links.6"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.8"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.8"
+        child="//@diagram/@links.6"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.9"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.9"
+        child="//@diagram/@links.6"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.10"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.10"
+        child="//@diagram/@links.6"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.11"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.11"
+        child="//@diagram/@links.6"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
   </navigator>
   <diagramUpdater/>
   <propertySheet>

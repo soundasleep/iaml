@@ -29,6 +29,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 
 import org.openiaml.model.model.OperationParameter;
+import org.openiaml.model.model.OperationReference;
 import org.openiaml.model.model.impl.WireEdgeImpl;
 
 import org.openiaml.model.model.wires.CompositeWire;
@@ -47,6 +48,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getOperationReferences <em>Operation References</em>}</li>
  * </ul>
  * </p>
  *
@@ -122,6 +124,16 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @ordered
 	 */
 	protected EList<OperationParameter> parameters;
+
+	/**
+	 * The cached value of the '{@link #getOperationReferences() <em>Operation References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperationReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<OperationReference> operationReferences;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -228,6 +240,18 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<OperationReference> getOperationReferences() {
+		if (operationReferences == null) {
+			operationReferences = new EObjectContainmentEList<OperationReference>(OperationReference.class, this, WiresPackage.COMPOSITE_WIRE__OPERATION_REFERENCES);
+		}
+		return operationReferences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -241,6 +265,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case WiresPackage.COMPOSITE_WIRE__OPERATION_REFERENCES:
+				return ((InternalEList<?>)getOperationReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -265,6 +291,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return getEventTriggers();
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return getParameters();
+			case WiresPackage.COMPOSITE_WIRE__OPERATION_REFERENCES:
+				return getOperationReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -301,6 +329,10 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends OperationParameter>)newValue);
 				return;
+			case WiresPackage.COMPOSITE_WIRE__OPERATION_REFERENCES:
+				getOperationReferences().clear();
+				getOperationReferences().addAll((Collection<? extends OperationReference>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -331,6 +363,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				getParameters().clear();
 				return;
+			case WiresPackage.COMPOSITE_WIRE__OPERATION_REFERENCES:
+				getOperationReferences().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -355,6 +390,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return eventTriggers != null && !eventTriggers.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case WiresPackage.COMPOSITE_WIRE__OPERATION_REFERENCES:
+				return operationReferences != null && !operationReferences.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

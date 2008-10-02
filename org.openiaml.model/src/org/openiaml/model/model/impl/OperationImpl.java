@@ -39,6 +39,7 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getCodeBlock <em>Code Block</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +85,26 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * @ordered
 	 */
 	protected EList<OperationParameter> parameters;
+
+	/**
+	 * The default value of the '{@link #getCodeBlock() <em>Code Block</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCodeBlock()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CODE_BLOCK_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCodeBlock() <em>Code Block</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCodeBlock()
+	 * @generated
+	 * @ordered
+	 */
+	protected String codeBlock = CODE_BLOCK_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,6 +175,27 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getCodeBlock() {
+		return codeBlock;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCodeBlock(String newCodeBlock) {
+		String oldCodeBlock = codeBlock;
+		codeBlock = newCodeBlock;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OPERATION__CODE_BLOCK, oldCodeBlock, codeBlock));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -194,6 +236,8 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return getName();
 			case ModelPackage.OPERATION__PARAMETERS:
 				return getParameters();
+			case ModelPackage.OPERATION__CODE_BLOCK:
+				return getCodeBlock();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -218,6 +262,9 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends OperationParameter>)newValue);
 				return;
+			case ModelPackage.OPERATION__CODE_BLOCK:
+				setCodeBlock((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -239,6 +286,9 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 			case ModelPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
 				return;
+			case ModelPackage.OPERATION__CODE_BLOCK:
+				setCodeBlock(CODE_BLOCK_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -257,6 +307,8 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.OPERATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case ModelPackage.OPERATION__CODE_BLOCK:
+				return CODE_BLOCK_EDEFAULT == null ? codeBlock != null : !CODE_BLOCK_EDEFAULT.equals(codeBlock);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -305,6 +357,8 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", codeBlock: ");
+		result.append(codeBlock);
 		result.append(')');
 		return result.toString();
 	}

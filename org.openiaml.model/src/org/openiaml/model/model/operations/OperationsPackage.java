@@ -97,6 +97,15 @@ public interface OperationsPackage extends EPackage {
 	int START_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_NODE__CODE_BLOCK = ModelPackage.SINGLE_OPERATION__CODE_BLOCK;
+
+	/**
 	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -152,6 +161,15 @@ public interface OperationsPackage extends EPackage {
 	int STOP_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STOP_NODE__CODE_BLOCK = ModelPackage.SINGLE_OPERATION__CODE_BLOCK;
+
+	/**
 	 * The number of structural features of the '<em>Stop Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,6 +216,15 @@ public interface OperationsPackage extends EPackage {
 	int FINISH_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINISH_NODE__CODE_BLOCK = ModelPackage.SINGLE_OPERATION__CODE_BLOCK;
+
+	/**
 	 * The number of structural features of the '<em>Finish Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,6 +269,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SPLIT_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPLIT_NODE__CODE_BLOCK = ModelPackage.SINGLE_OPERATION__CODE_BLOCK;
 
 	/**
 	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
@@ -297,6 +333,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int JOIN_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Code Block</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_NODE__CODE_BLOCK = ModelPackage.SINGLE_OPERATION__CODE_BLOCK;
 
 	/**
 	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.

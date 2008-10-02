@@ -285,6 +285,27 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.OPERATION_REFERENCE: {
+				OperationReference operationReference = (OperationReference)theEObject;
+				T result = caseOperationReference(operationReference);
+				if (result == null) result = caseNamedElement(operationReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.PARAMETER_REFERENCE: {
+				ParameterReference parameterReference = (ParameterReference)theEObject;
+				T result = caseParameterReference(parameterReference);
+				if (result == null) result = caseNamedElement(parameterReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.VALUE_REFERENCE: {
+				ValueReference valueReference = (ValueReference)theEObject;
+				T result = caseValueReference(valueReference);
+				if (result == null) result = caseNamedElement(valueReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -616,6 +637,51 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseDomainStore(DomainStore object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationReference(OperationReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterReference(ParameterReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Value Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Value Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValueReference(ValueReference object) {
 		return null;
 	}
 

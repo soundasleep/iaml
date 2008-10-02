@@ -14,7 +14,7 @@ package org.openiaml.model.model.wires;
  *
  *
  * @see org.openiaml.model.model.wires.WiresPackage#getPropertyToParameterWire()
- * @model
+ * @model annotation="http://openiaml.org/todo todo='delete?'"
  * @generated
  */
 public interface PropertyToParameterWire extends SingleWire {

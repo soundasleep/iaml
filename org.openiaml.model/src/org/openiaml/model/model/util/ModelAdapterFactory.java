@@ -160,6 +160,18 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createDomainStoreAdapter();
 			}
 			@Override
+			public Adapter caseOperationReference(OperationReference object) {
+				return createOperationReferenceAdapter();
+			}
+			@Override
+			public Adapter caseParameterReference(ParameterReference object) {
+				return createParameterReferenceAdapter();
+			}
+			@Override
+			public Adapter caseValueReference(ValueReference object) {
+				return createValueReferenceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -484,6 +496,48 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDomainStoreAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.OperationReference <em>Operation Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.OperationReference
+	 * @generated
+	 */
+	public Adapter createOperationReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ParameterReference <em>Parameter Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ParameterReference
+	 * @generated
+	 */
+	public Adapter createParameterReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ValueReference <em>Value Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ValueReference
+	 * @generated
+	 */
+	public Adapter createValueReferenceAdapter() {
 		return null;
 	}
 

@@ -14,6 +14,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.OperationParameter;
+import org.openiaml.model.model.OperationReference;
 import org.openiaml.model.model.WireEdge;
 
 /**
@@ -29,6 +30,7 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.wires.CompositeWire#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.CompositeWire#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.CompositeWire#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.CompositeWire#getOperationReferences <em>Operation References</em>}</li>
  * </ul>
  * </p>
  *
@@ -116,5 +118,21 @@ public interface CompositeWire extends WireEdge, NamedElement {
 	 * @generated
 	 */
 	EList<OperationParameter> getParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Operation References</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.OperationReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Operation References</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Operation References</em>' containment reference list.
+	 * @see org.openiaml.model.model.wires.WiresPackage#getCompositeWire_OperationReferences()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<OperationReference> getOperationReferences();
 
 } // CompositeWire

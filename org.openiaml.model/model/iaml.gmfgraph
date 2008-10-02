@@ -479,6 +479,94 @@
       <accessors
           figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="OperationReferenceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="OperationReferenceFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="240"
+            blue="240"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="OperationReferenceNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ParameterReferenceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ParameterReferenceFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="220"
+            blue="220"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ParameterReferenceNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ValueReferenceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ValueReferenceFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="192"
+            blue="192"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ValueReferenceNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ParameterToOperationEdgeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ParameterToOperationEdgeFigure"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ParameterToOperationEdgeNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ValueToParameterEdgeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ValueToParameterEdgeFigure"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ValueToParameterEdgeNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -534,6 +622,15 @@
   <nodes
       name="CompositeChainedOperation"
       figure="CompositeChainedOperationFigure"/>
+  <nodes
+      name="OperationReferenceNode"
+      figure="OperationReferenceFigure"/>
+  <nodes
+      name="ParameterReferenceNode"
+      figure="ParameterReferenceFigure"/>
+  <nodes
+      name="ValueReferenceNode"
+      figure="ValueReferenceFigure"/>
   <connections
       name="WireEdge"
       figure="WireEdgeFigure"/>
@@ -555,6 +652,12 @@
   <connections
       name="ProvidedParameterWire"
       figure="ProvidedParameterWireFigure"/>
+  <connections
+      name="ParameterToOperationEdge"
+      figure="ParameterToOperationEdgeFigure"/>
+  <connections
+      name="ValueToParameterEdge"
+      figure="ValueToParameterEdgeFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -653,4 +756,29 @@
       figure="ProvidedParameterWireFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.24/@accessors.0"/>
+  <labels
+      name="OperationReferenceName"
+      figure="OperationReferenceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
+  <labels
+      name="ParameterReferenceName"
+      figure="ParameterReferenceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
+  <labels
+      name="ValueReferenceName"
+      figure="ValueReferenceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
+  <labels
+      name="ParameterToOperationEdgeName"
+      figure="ParameterToOperationEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.28/@accessors.0"/>
+  <labels
+      name="ValueToParameterEdgeName"
+      figure="ValueToParameterEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.29/@accessors.0"/>
 </gmfgraph:Canvas>

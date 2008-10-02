@@ -1,4 +1,4 @@
-package org.openiaml.model.model.diagram.view.factories;
+package org.openiaml.model.model.diagram.domain_object.view.factories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,13 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.HintedDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart;
-import org.openiaml.model.model.diagram.edit.parts.RunWireEditPart;
-import org.openiaml.model.model.diagram.edit.parts.RunWireNameEditPart;
-import org.openiaml.model.model.diagram.part.IamlVisualIDRegistry;
+import org.openiaml.model.model.diagram.domain_object.edit.parts.DomainObjectEditPart;
+import org.openiaml.model.model.diagram.domain_object.part.IamlVisualIDRegistry;
 
 /**
  * @generated
  */
-public class RunWireViewFactory extends ConnectionViewFactory {
+public class RunInstanceWireViewFactory extends ConnectionViewFactory {
 
 	/**
 	 * @generated NOT
@@ -48,20 +46,20 @@ public class RunWireViewFactory extends ConnectionViewFactory {
 			IAdaptable semanticAdapter, String semanticHint, int index,
 			boolean persisted) {
 		if (semanticHint == null) {
-			semanticHint = IamlVisualIDRegistry
-					.getType(RunWireEditPart.VISUAL_ID);
+			semanticHint = org.openiaml.model.model.diagram.domain_object.part.IamlVisualIDRegistry
+					.getType(org.openiaml.model.model.diagram.domain_object.edit.parts.RunInstanceWireEditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
 		// start manual
-		if (!InternetApplicationEditPart.MODEL_ID.equals(IamlVisualIDRegistry
+		if (!DomainObjectEditPart.MODEL_ID.equals(IamlVisualIDRegistry
 				.getModelID(containerView))) {
 			EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
 					.createEAnnotation();
 			shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
 			shortcutAnnotation.getDetails().put(
-					"modelID", InternetApplicationEditPart.MODEL_ID); //$NON-NLS-1$
+					"modelID", DomainObjectEditPart.MODEL_ID); //$NON-NLS-1$
 			view.getEAnnotations().add(shortcutAnnotation);
 		}
 		// end manual
@@ -70,8 +68,12 @@ public class RunWireViewFactory extends ConnectionViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-		getViewService().createNode(eObjectAdapter, view,
-				IamlVisualIDRegistry.getType(RunWireNameEditPart.VISUAL_ID),
-				ViewUtil.APPEND, true, getPreferencesHint());
+		getViewService()
+				.createNode(
+						eObjectAdapter,
+						view,
+						org.openiaml.model.model.diagram.domain_object.part.IamlVisualIDRegistry
+								.getType(org.openiaml.model.model.diagram.domain_object.edit.parts.RunInstanceWireNameEditPart.VISUAL_ID),
+						ViewUtil.APPEND, true, getPreferencesHint());
 	}
 }

@@ -144,7 +144,7 @@
             checkPluginLoaded="false">
          <Priority name="Low"/>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.element.edit.parts.RunWireNameEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.element.edit.parts.RunInstanceWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -339,7 +339,7 @@
                name="%metatype.name.ChainedOperation_1003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.element.edit.helpers.EventAwareOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.element.edit.helpers.ChainedOperationEditHelper">
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
@@ -369,7 +369,7 @@
                name="%metatype.name.RunInstanceWire_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.model.diagram.element.edit.helpers.RunWireEditHelper">
+               edithelper="org.openiaml.model.model.diagram.element.edit.helpers.RunInstanceWireEditHelper">
             <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>

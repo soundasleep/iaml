@@ -13,9 +13,9 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.HintedDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
 import org.openiaml.model.model.diagram.visual.edit.parts.SyncWireEditPart;
 import org.openiaml.model.model.diagram.visual.edit.parts.SyncWireNameEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart;
 import org.openiaml.model.model.diagram.visual.part.IamlVisualIDRegistry;
 
 /**
@@ -55,13 +55,13 @@ public class SyncWireViewFactory extends ConnectionViewFactory {
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
 		// start manual
-		if (!PageEditPart.MODEL_ID.equals(IamlVisualIDRegistry
+		if (!VisibleThingEditPart.MODEL_ID.equals(IamlVisualIDRegistry
 				.getModelID(containerView))) {
 			EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
 					.createEAnnotation();
 			shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
 			shortcutAnnotation.getDetails().put(
-					"modelID", PageEditPart.MODEL_ID); //$NON-NLS-1$
+					"modelID", VisibleThingEditPart.MODEL_ID); //$NON-NLS-1$
 			view.getEAnnotations().add(shortcutAnnotation);
 		}
 		// end manual

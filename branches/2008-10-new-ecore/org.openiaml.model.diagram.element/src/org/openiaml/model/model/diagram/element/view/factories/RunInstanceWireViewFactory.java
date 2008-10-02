@@ -14,14 +14,14 @@ import org.eclipse.gmf.runtime.notation.HintedDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.model.diagram.element.edit.parts.ApplicationElementEditPart;
-import org.openiaml.model.model.diagram.element.edit.parts.RunWireEditPart;
-import org.openiaml.model.model.diagram.element.edit.parts.RunWireNameEditPart;
+import org.openiaml.model.model.diagram.element.edit.parts.RunInstanceWireEditPart;
+import org.openiaml.model.model.diagram.element.edit.parts.RunInstanceWireNameEditPart;
 import org.openiaml.model.model.diagram.element.part.IamlVisualIDRegistry;
 
 /**
  * @generated
  */
-public class RunWireViewFactory extends ConnectionViewFactory {
+public class RunInstanceWireViewFactory extends ConnectionViewFactory {
 
 	/**
 	 * @generated NOT
@@ -49,7 +49,7 @@ public class RunWireViewFactory extends ConnectionViewFactory {
 			boolean persisted) {
 		if (semanticHint == null) {
 			semanticHint = IamlVisualIDRegistry
-					.getType(RunWireEditPart.VISUAL_ID);
+					.getType(RunInstanceWireEditPart.VISUAL_ID);
 			view.setType(semanticHint);
 		}
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
@@ -70,8 +70,11 @@ public class RunWireViewFactory extends ConnectionViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-		getViewService().createNode(eObjectAdapter, view,
-				IamlVisualIDRegistry.getType(RunWireNameEditPart.VISUAL_ID),
+		getViewService().createNode(
+				eObjectAdapter,
+				view,
+				IamlVisualIDRegistry
+						.getType(RunInstanceWireNameEditPart.VISUAL_ID),
 				ViewUtil.APPEND, true, getPreferencesHint());
 	}
 }

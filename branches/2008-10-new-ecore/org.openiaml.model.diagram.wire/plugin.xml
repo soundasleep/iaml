@@ -339,7 +339,7 @@
                name="%metatype.name.ChainedOperation_1003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.EventAwareOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ChainedOperationEditHelper">
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
@@ -349,7 +349,7 @@
                name="%metatype.name.DomainAttribute_1004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainAttribute"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.PageEditHelper">
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.DomainAttributeEditHelper">
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
@@ -389,7 +389,7 @@
                name="%metatype.name.Parameter_1008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Parameter"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.StartNodeEditHelper">
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ParameterEditHelper">
             <param name="semanticHint" value="1008"/>
          </metamodelType>
       </metamodel>
@@ -409,7 +409,7 @@
                name="%metatype.name.RunInstanceWire_3002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.RunWireEditHelper">
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.RunInstanceWireEditHelper">
             <param name="semanticHint" value="3002"/>
          </metamodelType>
       </metamodel>
@@ -419,7 +419,7 @@
                name="%metatype.name.ParameterWire_3003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ParameterWire"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.PropertyToExecutionWireEditHelper">
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ParameterWireEditHelper">
             <param name="semanticHint" value="3003"/>
          </metamodelType>
       </metamodel>

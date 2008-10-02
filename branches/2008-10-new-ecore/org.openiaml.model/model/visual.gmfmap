@@ -72,6 +72,28 @@
   </nodes>
   <nodes>
     <containmentFeature
+        href="iaml.ecore#//ContainsOperations/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//ChainedOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( ChainedOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ChainedOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.5"/>
+      <diagramNode
+          href="iaml.gmfgraph#ChainedOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
         href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
@@ -200,28 +222,6 @@
           href="iaml.gmfgraph#InputTextField"/>
     </ownedChild>
   </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ContainsOperations/operations"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//EventAwareOperation"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( EventAwareOperation )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EventAwareOperationName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.5"/>
-      <diagramNode
-          href="iaml.gmfgraph#EventAwareOperation"/>
-    </ownedChild>
-  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -250,13 +250,13 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/RunWire"/>
+        href="iaml.ecore#//wires/RunInstanceWire"/>
     <domainSpecialization
-        body="self.oclIsTypeOf( RunWire )"/>
+        body="self.oclIsTypeOf( RunInstanceWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#RunWireName"/>
+          href="iaml.gmfgraph#RunInstanceWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
@@ -266,7 +266,7 @@
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.0/@tools.11"/>
     <diagramLink
-        href="iaml.gmfgraph#RunWire"/>
+        href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

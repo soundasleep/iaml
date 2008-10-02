@@ -114,13 +114,13 @@
         href="iaml.ecore#//ContainsOperations/operations"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//EventAwareOperation"/>
+          href="iaml.ecore#//ChainedOperation"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( EventAwareOperation )"/>
+          body="self.oclIsTypeOf( ChainedOperation )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#EventAwareOperationName"/>
+            href="iaml.gmfgraph#ChainedOperationName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
@@ -128,7 +128,7 @@
           xsi:type="gmftool:CreationTool"
           href="domain_store.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
-          href="iaml.gmfgraph#EventAwareOperation"/>
+          href="iaml.gmfgraph#ChainedOperation"/>
     </ownedChild>
   </nodes>
   <links>

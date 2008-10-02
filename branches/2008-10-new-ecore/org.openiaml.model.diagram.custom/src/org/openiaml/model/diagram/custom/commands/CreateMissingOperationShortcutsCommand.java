@@ -6,13 +6,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.OperationParameter;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 

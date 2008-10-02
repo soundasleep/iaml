@@ -1100,6 +1100,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		chainedOperationEClass.getESuperTypes().add(this.getOperation());
 		chainedOperationEClass.getESuperTypes().add(this.getExecutionEdgesSource());
 		compositeOperationEClass.getESuperTypes().add(this.getChainedOperation());
+		compositeOperationEClass.getESuperTypes().add(this.getContainsOperations());
 		applicationElementEClass.getESuperTypes().add(this.getContainsOperations());
 		applicationElementEClass.getESuperTypes().add(this.getNamedElement());
 		applicationElementEClass.getESuperTypes().add(this.getContainsEventTriggers());

@@ -24,7 +24,7 @@ import org.openiaml.model.model.diagram.wire.part.IamlVisualIDRegistry;
 public class SyncWireViewFactory extends ConnectionViewFactory {
 
 	/**
-	 * @generated NOT
+	 * @generated
 	 */
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
@@ -42,7 +42,7 @@ public class SyncWireViewFactory extends ConnectionViewFactory {
 	}
 
 	/**
-	 * @generated NOT
+	 * @generated
 	 */
 	protected void decorateView(View containerView, View view,
 			IAdaptable semanticAdapter, String semanticHint, int index,

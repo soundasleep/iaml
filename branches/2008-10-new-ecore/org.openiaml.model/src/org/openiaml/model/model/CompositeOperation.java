@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getSubOperations <em>Sub Operations</em>}</li>
+ *   <li>{@link org.openiaml.model.model.CompositeOperation#getCompositeOperationWires <em>Composite Operation Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,5 +41,21 @@ public interface CompositeOperation extends Operation {
 	 * @generated
 	 */
 	EList<Operation> getSubOperations();
+
+	/**
+	 * Returns the value of the '<em><b>Composite Operation Wires</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.WireEdge}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Composite Operation Wires</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Composite Operation Wires</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getCompositeOperation_CompositeOperationWires()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<WireEdge> getCompositeOperationWires();
 
 } // CompositeOperation

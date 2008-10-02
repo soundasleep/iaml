@@ -97,13 +97,13 @@ public interface OperationsPackage extends EPackage {
 	int START_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START_NODE__EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
+	int START_NODE__OUT_EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Start Node</em>' class.
@@ -244,13 +244,13 @@ public interface OperationsPackage extends EPackage {
 	int SPLIT_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPLIT_NODE__EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
+	int SPLIT_NODE__OUT_EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Split Node</em>' class.
@@ -299,13 +299,13 @@ public interface OperationsPackage extends EPackage {
 	int JOIN_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JOIN_NODE__EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
+	int JOIN_NODE__OUT_EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Join Node</em>' class.

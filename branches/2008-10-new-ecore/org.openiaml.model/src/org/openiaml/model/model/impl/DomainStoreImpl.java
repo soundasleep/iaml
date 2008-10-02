@@ -30,6 +30,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,6 +44,7 @@ import org.openiaml.model.model.Operation;
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getDomainStoreWires <em>Domain Store Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,6 +110,16 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * @ordered
 	 */
 	protected EList<ApplicationElementProperty> properties;
+
+	/**
+	 * The cached value of the '{@link #getDomainStoreWires() <em>Domain Store Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainStoreWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> domainStoreWires;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -202,6 +214,18 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getDomainStoreWires() {
+		if (domainStoreWires == null) {
+			domainStoreWires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.DOMAIN_STORE__DOMAIN_STORE_WIRES);
+		}
+		return domainStoreWires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -213,6 +237,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_STORE__DOMAIN_STORE_WIRES:
+				return ((InternalEList<?>)getDomainStoreWires()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -235,6 +261,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return getChildren();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				return getProperties();
+			case ModelPackage.DOMAIN_STORE__DOMAIN_STORE_WIRES:
+				return getDomainStoreWires();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -267,6 +295,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
 				return;
+			case ModelPackage.DOMAIN_STORE__DOMAIN_STORE_WIRES:
+				getDomainStoreWires().clear();
+				getDomainStoreWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -294,6 +326,9 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				getProperties().clear();
 				return;
+			case ModelPackage.DOMAIN_STORE__DOMAIN_STORE_WIRES:
+				getDomainStoreWires().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -316,6 +351,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return children != null && !children.isEmpty();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				return properties != null && !properties.isEmpty();
+			case ModelPackage.DOMAIN_STORE__DOMAIN_STORE_WIRES:
+				return domainStoreWires != null && !domainStoreWires.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

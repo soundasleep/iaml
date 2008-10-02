@@ -98,7 +98,7 @@ public interface ModelPackage extends EPackage {
 	int WIRE_EDGE = 1;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -163,13 +163,13 @@ public interface ModelPackage extends EPackage {
 	int WIRE_EDGES_SOURCE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WIRE_EDGES_SOURCE__EDGES = 0;
+	int WIRE_EDGES_SOURCE__OUT_EDGES = 0;
 
 	/**
 	 * The number of structural features of the '<em>Wire Edges Source</em>' class.
@@ -200,13 +200,13 @@ public interface ModelPackage extends EPackage {
 	int EVENT_TRIGGER__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_TRIGGER__EDGES = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int EVENT_TRIGGER__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Event Trigger</em>' class.
@@ -311,13 +311,13 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT__EVENT_TRIGGERS = CONTAINS_OPERATIONS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 2;
+	int APPLICATION_ELEMENT__OUT_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -384,13 +384,13 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT__EDGES = APPLICATION_ELEMENT__EDGES;
+	int DOMAIN_OBJECT__OUT_EDGES = APPLICATION_ELEMENT__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -420,13 +420,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT__ATTRIBUTES = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Domain Object Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Domain Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
+	int DOMAIN_OBJECT_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.DomainAttributeImpl <em>Domain Attribute</em>}' class.
@@ -466,13 +475,13 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_ATTRIBUTE__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ATTRIBUTE__EDGES = APPLICATION_ELEMENT__EDGES;
+	int DOMAIN_ATTRIBUTE__OUT_EDGES = APPLICATION_ELEMENT__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -668,13 +677,13 @@ public interface ModelPackage extends EPackage {
 	int CHAINED_OPERATION__PARAMETERS = OPERATION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHAINED_OPERATION__EDGES = OPERATION_FEATURE_COUNT + 0;
+	int CHAINED_OPERATION__OUT_EDGES = OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Chained Operation</em>' class.
@@ -732,13 +741,22 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__SUB_OPERATIONS = OPERATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Composite Operation Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES = OPERATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 1;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.CompositeChainedOperationImpl <em>Composite Chained Operation</em>}' class.
@@ -787,13 +805,22 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_CHAINED_OPERATION__SUB_OPERATIONS = COMPOSITE_OPERATION__SUB_OPERATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Composite Operation Wires</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CHAINED_OPERATION__EDGES = COMPOSITE_OPERATION_FEATURE_COUNT + 0;
+	int COMPOSITE_CHAINED_OPERATION__COMPOSITE_OPERATION_WIRES = COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CHAINED_OPERATION__OUT_EDGES = COMPOSITE_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Composite Chained Operation</em>' class.
@@ -851,6 +878,15 @@ public interface ModelPackage extends EPackage {
 	int EVENT_AWARE_OPERATION__SUB_OPERATIONS = COMPOSITE_OPERATION__SUB_OPERATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Composite Operation Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_AWARE_OPERATION__COMPOSITE_OPERATION_WIRES = COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES;
+
+	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -906,13 +942,13 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_CONTAINER__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_CONTAINER__EDGES = APPLICATION_ELEMENT__EDGES;
+	int APPLICATION_ELEMENT_CONTAINER__OUT_EDGES = APPLICATION_ELEMENT__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -942,13 +978,22 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_CONTAINER__CHILDREN = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Application Element Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Application Element Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
+	int APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl <em>Application Element Property</em>}' class.
@@ -970,13 +1015,13 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_PROPERTY__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY__EDGES = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int APPLICATION_ELEMENT_PROPERTY__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -1034,13 +1079,13 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__EVENT_TRIGGERS = APPLICATION_ELEMENT_CONTAINER__EVENT_TRIGGERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__EDGES = APPLICATION_ELEMENT_CONTAINER__EDGES;
+	int VISIBLE_THING__OUT_EDGES = APPLICATION_ELEMENT_CONTAINER__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -1068,6 +1113,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int VISIBLE_THING__CHILDREN = APPLICATION_ELEMENT_CONTAINER__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Application Element Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__APPLICATION_ELEMENT_WIRES = APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES;
 
 	/**
 	 * The number of structural features of the '<em>Visible Thing</em>' class.
@@ -1143,13 +1197,22 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Ia Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__IA_WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.DomainStoreImpl <em>Domain Store</em>}' class.
@@ -1207,13 +1270,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_STORE__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Domain Store Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_STORE__DOMAIN_STORE_WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Domain Store</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 4;
+	int DOMAIN_STORE_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
 
 
 	/**
@@ -1248,10 +1320,10 @@ public interface ModelPackage extends EPackage {
 	EClass getWireEdge();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.openiaml.model.model.WireEdge#getFrom <em>From</em>}'.
+	 * Returns the meta object for the reference '{@link org.openiaml.model.model.WireEdge#getFrom <em>From</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>From</em>'.
+	 * @return the meta object for the reference '<em>From</em>'.
 	 * @see org.openiaml.model.model.WireEdge#getFrom()
 	 * @see #getWireEdge()
 	 * @generated
@@ -1301,15 +1373,15 @@ public interface ModelPackage extends EPackage {
 	EClass getWireEdgesSource();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.WireEdgesSource#getEdges <em>Edges</em>}'.
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.WireEdgesSource#getOutEdges <em>Out Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Edges</em>'.
-	 * @see org.openiaml.model.model.WireEdgesSource#getEdges()
+	 * @return the meta object for the reference list '<em>Out Edges</em>'.
+	 * @see org.openiaml.model.model.WireEdgesSource#getOutEdges()
 	 * @see #getWireEdgesSource()
 	 * @generated
 	 */
-	EReference getWireEdgesSource_Edges();
+	EReference getWireEdgesSource_OutEdges();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.EventTrigger <em>Event Trigger</em>}'.
@@ -1362,6 +1434,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDomainObject_Attributes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.DomainObject#getDomainObjectWires <em>Domain Object Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Domain Object Wires</em>'.
+	 * @see org.openiaml.model.model.DomainObject#getDomainObjectWires()
+	 * @see #getDomainObject()
+	 * @generated
+	 */
+	EReference getDomainObject_DomainObjectWires();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.DomainAttribute <em>Domain Attribute</em>}'.
@@ -1444,6 +1527,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeOperation_SubOperations();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeOperation#getCompositeOperationWires <em>Composite Operation Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Composite Operation Wires</em>'.
+	 * @see org.openiaml.model.model.CompositeOperation#getCompositeOperationWires()
+	 * @see #getCompositeOperation()
+	 * @generated
+	 */
+	EReference getCompositeOperation_CompositeOperationWires();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.CompositeChainedOperation <em>Composite Chained Operation</em>}'.
@@ -1529,6 +1623,17 @@ public interface ModelPackage extends EPackage {
 	EReference getApplicationElementContainer_Children();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.ApplicationElementContainer#getApplicationElementWires <em>Application Element Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Application Element Wires</em>'.
+	 * @see org.openiaml.model.model.ApplicationElementContainer#getApplicationElementWires()
+	 * @see #getApplicationElementContainer()
+	 * @generated
+	 */
+	EReference getApplicationElementContainer_ApplicationElementWires();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.ApplicationElementProperty <em>Application Element Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1592,6 +1697,17 @@ public interface ModelPackage extends EPackage {
 	EReference getInternetApplication_DomainStores();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.InternetApplication#getIaWires <em>Ia Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Ia Wires</em>'.
+	 * @see org.openiaml.model.model.InternetApplication#getIaWires()
+	 * @see #getInternetApplication()
+	 * @generated
+	 */
+	EReference getInternetApplication_IaWires();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.DomainStore <em>Domain Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1622,6 +1738,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDomainStore_Properties();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.DomainStore#getDomainStoreWires <em>Domain Store Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Domain Store Wires</em>'.
+	 * @see org.openiaml.model.model.DomainStore#getDomainStoreWires()
+	 * @see #getDomainStore()
+	 * @generated
+	 */
+	EReference getDomainStore_DomainStoreWires();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1674,7 +1801,7 @@ public interface ModelPackage extends EPackage {
 		EClass WIRE_EDGE = eINSTANCE.getWireEdge();
 
 		/**
-		 * The meta object literal for the '<em><b>From</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1718,12 +1845,12 @@ public interface ModelPackage extends EPackage {
 		EClass WIRE_EDGES_SOURCE = eINSTANCE.getWireEdgesSource();
 
 		/**
-		 * The meta object literal for the '<em><b>Edges</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Out Edges</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference WIRE_EDGES_SOURCE__EDGES = eINSTANCE.getWireEdgesSource_Edges();
+		EReference WIRE_EDGES_SOURCE__OUT_EDGES = eINSTANCE.getWireEdgesSource_OutEdges();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.EventTriggerImpl <em>Event Trigger</em>}' class.
@@ -1770,6 +1897,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOMAIN_OBJECT__ATTRIBUTES = eINSTANCE.getDomainObject_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain Object Wires</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES = eINSTANCE.getDomainObject_DomainObjectWires();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DomainAttributeImpl <em>Domain Attribute</em>}' class.
@@ -1848,6 +1983,14 @@ public interface ModelPackage extends EPackage {
 		EReference COMPOSITE_OPERATION__SUB_OPERATIONS = eINSTANCE.getCompositeOperation_SubOperations();
 
 		/**
+		 * The meta object literal for the '<em><b>Composite Operation Wires</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES = eINSTANCE.getCompositeOperation_CompositeOperationWires();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.CompositeChainedOperationImpl <em>Composite Chained Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1922,6 +2065,14 @@ public interface ModelPackage extends EPackage {
 		EReference APPLICATION_ELEMENT_CONTAINER__CHILDREN = eINSTANCE.getApplicationElementContainer_Children();
 
 		/**
+		 * The meta object literal for the '<em><b>Application Element Wires</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES = eINSTANCE.getApplicationElementContainer_ApplicationElementWires();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl <em>Application Element Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1976,6 +2127,14 @@ public interface ModelPackage extends EPackage {
 		EReference INTERNET_APPLICATION__DOMAIN_STORES = eINSTANCE.getInternetApplication_DomainStores();
 
 		/**
+		 * The meta object literal for the '<em><b>Ia Wires</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERNET_APPLICATION__IA_WIRES = eINSTANCE.getInternetApplication_IaWires();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DomainStoreImpl <em>Domain Store</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2000,6 +2159,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOMAIN_STORE__PROPERTIES = eINSTANCE.getDomainStore_Properties();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain Store Wires</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_STORE__DOMAIN_STORE_WIRES = eINSTANCE.getDomainStore_DomainStoreWires();
 
 	}
 

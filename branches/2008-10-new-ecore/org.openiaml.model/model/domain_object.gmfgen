@@ -376,9 +376,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/RunWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/DomainObject/domainObjectWires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/DomainObject/domainObjectWires"/>
         <modelElementSelector
             body="self.oclIsTypeOf( RunWire )"/>
         <sourceMetaFeature
@@ -438,9 +438,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/SyncWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/DomainObject/domainObjectWires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/DomainObject/domainObjectWires"/>
         <modelElementSelector
             body="self.oclIsTypeOf( SyncWire )"/>
         <sourceMetaFeature

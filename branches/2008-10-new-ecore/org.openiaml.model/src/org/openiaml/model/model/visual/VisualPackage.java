@@ -98,13 +98,13 @@ public interface VisualPackage extends EPackage {
 	int PAGE__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE__EDGES = ModelPackage.VISIBLE_THING__EDGES;
+	int PAGE__OUT_EDGES = ModelPackage.VISIBLE_THING__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -132,6 +132,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGE__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Application Element Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__APPLICATION_ELEMENT_WIRES = ModelPackage.VISIBLE_THING__APPLICATION_ELEMENT_WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Url</b></em>' attribute.
@@ -189,13 +198,13 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_FORM__EDGES = ModelPackage.VISIBLE_THING__EDGES;
+	int INPUT_FORM__OUT_EDGES = ModelPackage.VISIBLE_THING__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -223,6 +232,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_FORM__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Application Element Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__APPLICATION_ELEMENT_WIRES = ModelPackage.VISIBLE_THING__APPLICATION_ELEMENT_WIRES;
 
 	/**
 	 * The number of structural features of the '<em>Input Form</em>' class.
@@ -271,13 +289,13 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_TEXT_FIELD__EDGES = ModelPackage.VISIBLE_THING__EDGES;
+	int INPUT_TEXT_FIELD__OUT_EDGES = ModelPackage.VISIBLE_THING__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -305,6 +323,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Application Element Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__APPLICATION_ELEMENT_WIRES = ModelPackage.VISIBLE_THING__APPLICATION_ELEMENT_WIRES;
 
 	/**
 	 * The number of structural features of the '<em>Input Text Field</em>' class.

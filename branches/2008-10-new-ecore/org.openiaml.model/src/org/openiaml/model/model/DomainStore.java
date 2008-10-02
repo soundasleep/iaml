@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.openiaml.model.model.DomainStore#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainStore#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainStore#getDomainStoreWires <em>Domain Store Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,5 +58,21 @@ public interface DomainStore extends ContainsOperations, ContainsEventTriggers, 
 	 * @generated
 	 */
 	EList<ApplicationElementProperty> getProperties();
+
+	/**
+	 * Returns the value of the '<em><b>Domain Store Wires</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.WireEdge}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Domain Store Wires</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Domain Store Wires</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getDomainStore_DomainStoreWires()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<WireEdge> getDomainStoreWires();
 
 } // DomainStore

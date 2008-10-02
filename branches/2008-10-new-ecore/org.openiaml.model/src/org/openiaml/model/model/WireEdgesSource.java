@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.openiaml.model.model.WireEdgesSource#getEdges <em>Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.WireEdgesSource#getOutEdges <em>Out Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,21 +28,21 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface WireEdgesSource extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Edges</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Out Edges</b></em>' reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.WireEdge}.
 	 * It is bidirectional and its opposite is '{@link org.openiaml.model.model.WireEdge#getFrom <em>From</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Edges</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Out Edges</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Edges</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getWireEdgesSource_Edges()
+	 * @return the value of the '<em>Out Edges</em>' reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getWireEdgesSource_OutEdges()
 	 * @see org.openiaml.model.model.WireEdge#getFrom
-	 * @model opposite="from" containment="true"
+	 * @model opposite="from"
 	 * @generated
 	 */
-	EList<WireEdge> getEdges();
+	EList<WireEdge> getOutEdges();
 
 } // WireEdgesSource

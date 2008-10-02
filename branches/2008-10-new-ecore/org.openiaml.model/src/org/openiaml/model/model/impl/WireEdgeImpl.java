@@ -38,6 +38,15 @@ import org.openiaml.model.model.WireEdgesSource;
  */
 public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	/**
+	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFrom()
+	 * @generated
+	 * @ordered
+	 */
+	protected WireEdgesSource from;
+	/**
 	 * The cached value of the '{@link #getTo() <em>To</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,8 +81,24 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * @generated
 	 */
 	public WireEdgesSource getFrom() {
-		if (eContainerFeatureID != ModelPackage.WIRE_EDGE__FROM) return null;
-		return (WireEdgesSource)eContainer();
+		if (from != null && from.eIsProxy()) {
+			InternalEObject oldFrom = (InternalEObject)from;
+			from = (WireEdgesSource)eResolveProxy(oldFrom);
+			if (from != oldFrom) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.WIRE_EDGE__FROM, oldFrom, from));
+			}
+		}
+		return from;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WireEdgesSource basicGetFrom() {
+		return from;
 	}
 
 	/**
@@ -82,7 +107,12 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * @generated
 	 */
 	public NotificationChain basicSetFrom(WireEdgesSource newFrom, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newFrom, ModelPackage.WIRE_EDGE__FROM, msgs);
+		WireEdgesSource oldFrom = from;
+		from = newFrom;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.WIRE_EDGE__FROM, oldFrom, newFrom);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -92,14 +122,12 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * @generated
 	 */
 	public void setFrom(WireEdgesSource newFrom) {
-		if (newFrom != eInternalContainer() || (eContainerFeatureID != ModelPackage.WIRE_EDGE__FROM && newFrom != null)) {
-			if (EcoreUtil.isAncestor(this, newFrom))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+		if (newFrom != from) {
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
+			if (from != null)
+				msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES, WireEdgesSource.class, msgs);
 			if (newFrom != null)
-				msgs = ((InternalEObject)newFrom).eInverseAdd(this, ModelPackage.WIRE_EDGES_SOURCE__EDGES, WireEdgesSource.class, msgs);
+				msgs = ((InternalEObject)newFrom).eInverseAdd(this, ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES, WireEdgesSource.class, msgs);
 			msgs = basicSetFrom(newFrom, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -176,8 +204,8 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.WIRE_EDGE__FROM:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
+				if (from != null)
+					msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES, WireEdgesSource.class, msgs);
 				return basicSetFrom((WireEdgesSource)otherEnd, msgs);
 			case ModelPackage.WIRE_EDGE__TO:
 				if (to != null)
@@ -209,24 +237,11 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
-			case ModelPackage.WIRE_EDGE__FROM:
-				return eInternalContainer().eInverseRemove(this, ModelPackage.WIRE_EDGES_SOURCE__EDGES, WireEdgesSource.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.WIRE_EDGE__FROM:
-				return getFrom();
+				if (resolve) return getFrom();
+				return basicGetFrom();
 			case ModelPackage.WIRE_EDGE__TO:
 				if (resolve) return getTo();
 				return basicGetTo();
@@ -279,7 +294,7 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.WIRE_EDGE__FROM:
-				return getFrom() != null;
+				return from != null;
 			case ModelPackage.WIRE_EDGE__TO:
 				return to != null;
 		}

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +31,7 @@ import org.openiaml.model.model.ModelPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementContainerImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementContainerImpl#getApplicationElementWires <em>Application Element Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +47,16 @@ public abstract class ApplicationElementContainerImpl extends ApplicationElement
 	 * @ordered
 	 */
 	protected EList<ApplicationElement> children;
+
+	/**
+	 * The cached value of the '{@link #getApplicationElementWires() <em>Application Element Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getApplicationElementWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> applicationElementWires;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,11 +94,25 @@ public abstract class ApplicationElementContainerImpl extends ApplicationElement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getApplicationElementWires() {
+		if (applicationElementWires == null) {
+			applicationElementWires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES);
+		}
+		return applicationElementWires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES:
+				return ((InternalEList<?>)getApplicationElementWires()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -101,6 +127,8 @@ public abstract class ApplicationElementContainerImpl extends ApplicationElement
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__CHILDREN:
 				return getChildren();
+			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES:
+				return getApplicationElementWires();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,6 +146,10 @@ public abstract class ApplicationElementContainerImpl extends ApplicationElement
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends ApplicationElement>)newValue);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES:
+				getApplicationElementWires().clear();
+				getApplicationElementWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -133,6 +165,9 @@ public abstract class ApplicationElementContainerImpl extends ApplicationElement
 			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__CHILDREN:
 				getChildren().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES:
+				getApplicationElementWires().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -147,6 +182,8 @@ public abstract class ApplicationElementContainerImpl extends ApplicationElement
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__CHILDREN:
 				return children != null && !children.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES:
+				return applicationElementWires != null && !applicationElementWires.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

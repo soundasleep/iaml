@@ -532,9 +532,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/ExecutionWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/CompositeOperation/compositeOperationWires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/CompositeOperation/compositeOperationWires"/>
         <modelElementSelector
             body="self.oclIsTypeOf( ExecutionWire )"/>
         <sourceMetaFeature
@@ -567,9 +567,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/PropertyToExecutionWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/CompositeOperation/compositeOperationWires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/CompositeOperation/compositeOperationWires"/>
         <modelElementSelector
             body="self.oclIsTypeOf( PropertyToExecutionWire )"/>
         <sourceMetaFeature
@@ -620,9 +620,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/PropertyToParameterWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/CompositeOperation/compositeOperationWires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/CompositeOperation/compositeOperationWires"/>
         <modelElementSelector
             body="self.oclIsTypeOf( PropertyToParameterWire )"/>
         <sourceMetaFeature
@@ -672,9 +672,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/ProvidedParameterWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/CompositeOperation/compositeOperationWires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/CompositeOperation/compositeOperationWires"/>
         <modelElementSelector
             body="self.oclIsTypeOf( ProvidedParameterWire )"/>
         <sourceMetaFeature

@@ -27,28 +27,28 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface WireEdge extends EObject {
 	/**
-	 * Returns the value of the '<em><b>From</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.openiaml.model.model.WireEdgesSource#getEdges <em>Edges</em>}'.
+	 * Returns the value of the '<em><b>From</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.model.model.WireEdgesSource#getOutEdges <em>Out Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>From</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>From</em>' container reference.
+	 * @return the value of the '<em>From</em>' reference.
 	 * @see #setFrom(WireEdgesSource)
 	 * @see org.openiaml.model.model.ModelPackage#getWireEdge_From()
-	 * @see org.openiaml.model.model.WireEdgesSource#getEdges
-	 * @model opposite="edges" required="true" transient="false"
+	 * @see org.openiaml.model.model.WireEdgesSource#getOutEdges
+	 * @model opposite="outEdges" required="true"
 	 * @generated
 	 */
 	WireEdgesSource getFrom();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.model.model.WireEdge#getFrom <em>From</em>}' container reference.
+	 * Sets the value of the '{@link org.openiaml.model.model.WireEdge#getFrom <em>From</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>From</em>' container reference.
+	 * @param value the new value of the '<em>From</em>' reference.
 	 * @see #getFrom()
 	 * @generated
 	 */

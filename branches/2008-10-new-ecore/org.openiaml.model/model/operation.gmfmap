@@ -201,7 +201,7 @@
     <domainSpecialization
         body="self.oclIsTypeOf( ExecutionWire )"/>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//CompositeOperation/compositeOperationWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
@@ -225,7 +225,7 @@
           href="iaml.gmfgraph#PropertyToExecutionWireName"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//CompositeOperation/compositeOperationWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="operation.gmftool#//@palette/@tools.0/@tools.9"/>
@@ -249,7 +249,7 @@
           href="iaml.gmfgraph#PropertyToParameterWireName"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//CompositeOperation/compositeOperationWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
@@ -273,7 +273,7 @@
           href="iaml.gmfgraph#ProvidedParameterWireName"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//CompositeOperation/compositeOperationWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="operation.gmftool#//@palette/@tools.0/@tools.7"/>

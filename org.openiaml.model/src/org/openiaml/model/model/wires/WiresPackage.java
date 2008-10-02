@@ -71,7 +71,7 @@ public interface WiresPackage extends EPackage {
 	int SINGLE_WIRE = 0;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -108,7 +108,7 @@ public interface WiresPackage extends EPackage {
 	int COMPOSITE_WIRE = 1;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -180,13 +180,22 @@ public interface WiresPackage extends EPackage {
 	int COMPOSITE_WIRE__PARAMETERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Wire Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_WIRE__WIRE_WIRES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Composite Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 6;
+	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.SyncWireImpl <em>Sync Wire</em>}' class.
@@ -199,7 +208,7 @@ public interface WiresPackage extends EPackage {
 	int SYNC_WIRE = 2;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -271,6 +280,15 @@ public interface WiresPackage extends EPackage {
 	int SYNC_WIRE__PARAMETERS = COMPOSITE_WIRE__PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Wire Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__WIRE_WIRES = COMPOSITE_WIRE__WIRE_WIRES;
+
+	/**
 	 * The number of structural features of the '<em>Sync Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -290,7 +308,7 @@ public interface WiresPackage extends EPackage {
 	int RUN_WIRE = 3;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -362,6 +380,15 @@ public interface WiresPackage extends EPackage {
 	int RUN_WIRE__PARAMETERS = COMPOSITE_WIRE__PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Wire Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_WIRE__WIRE_WIRES = COMPOSITE_WIRE__WIRE_WIRES;
+
+	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -390,7 +417,7 @@ public interface WiresPackage extends EPackage {
 	int EXECUTION_WIRE = 4;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -427,7 +454,7 @@ public interface WiresPackage extends EPackage {
 	int PROVIDED_PARAMETER_WIRE = 5;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -464,7 +491,7 @@ public interface WiresPackage extends EPackage {
 	int PROPERTY_TO_PARAMETER_WIRE = 6;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -501,7 +528,7 @@ public interface WiresPackage extends EPackage {
 	int PROPERTY_TO_EXECUTION_WIRE = 7;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' container reference.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -601,6 +628,17 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeWire_Parameters();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.wires.CompositeWire#getWireWires <em>Wire Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Wire Wires</em>'.
+	 * @see org.openiaml.model.model.wires.CompositeWire#getWireWires()
+	 * @see #getCompositeWire()
+	 * @generated
+	 */
+	EReference getCompositeWire_WireWires();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.SyncWire <em>Sync Wire</em>}'.
@@ -743,6 +781,14 @@ public interface WiresPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_WIRE__PARAMETERS = eINSTANCE.getCompositeWire_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Wire Wires</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_WIRE__WIRE_WIRES = eINSTANCE.getCompositeWire_WireWires();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.SyncWireImpl <em>Sync Wire</em>}' class.

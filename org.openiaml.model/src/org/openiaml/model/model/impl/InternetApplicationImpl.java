@@ -31,6 +31,7 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,6 +46,7 @@ import org.openiaml.model.model.Operation;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getIaWires <em>Ia Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -120,6 +122,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<DomainStore> domainStores;
+
+	/**
+	 * The cached value of the '{@link #getIaWires() <em>Ia Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIaWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> iaWires;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -226,6 +238,18 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getIaWires() {
+		if (iaWires == null) {
+			iaWires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.INTERNET_APPLICATION__IA_WIRES);
+		}
+		return iaWires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -239,6 +263,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return ((InternalEList<?>)getDomainStores()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__IA_WIRES:
+				return ((InternalEList<?>)getIaWires()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -263,6 +289,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getChildren();
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return getDomainStores();
+			case ModelPackage.INTERNET_APPLICATION__IA_WIRES:
+				return getIaWires();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -299,6 +327,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				getDomainStores().clear();
 				getDomainStores().addAll((Collection<? extends DomainStore>)newValue);
 				return;
+			case ModelPackage.INTERNET_APPLICATION__IA_WIRES:
+				getIaWires().clear();
+				getIaWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -329,6 +361,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				getDomainStores().clear();
 				return;
+			case ModelPackage.INTERNET_APPLICATION__IA_WIRES:
+				getIaWires().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -353,6 +388,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return children != null && !children.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return domainStores != null && !domainStores.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__IA_WIRES:
+				return iaWires != null && !iaWires.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

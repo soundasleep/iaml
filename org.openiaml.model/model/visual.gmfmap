@@ -235,7 +235,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//ApplicationElementContainer/applicationElementWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.0/@tools.10"/>
@@ -261,7 +261,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//ApplicationElementContainer/applicationElementWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.0/@tools.11"/>

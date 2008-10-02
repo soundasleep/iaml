@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +31,7 @@ import org.openiaml.model.model.Operation;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getSubOperations <em>Sub Operations</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getCompositeOperationWires <em>Composite Operation Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +47,16 @@ public class CompositeOperationImpl extends OperationImpl implements CompositeOp
 	 * @ordered
 	 */
 	protected EList<Operation> subOperations;
+
+	/**
+	 * The cached value of the '{@link #getCompositeOperationWires() <em>Composite Operation Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompositeOperationWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> compositeOperationWires;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,11 +94,25 @@ public class CompositeOperationImpl extends OperationImpl implements CompositeOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getCompositeOperationWires() {
+		if (compositeOperationWires == null) {
+			compositeOperationWires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES);
+		}
+		return compositeOperationWires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 				return ((InternalEList<?>)getSubOperations()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
+				return ((InternalEList<?>)getCompositeOperationWires()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -101,6 +127,8 @@ public class CompositeOperationImpl extends OperationImpl implements CompositeOp
 		switch (featureID) {
 			case ModelPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 				return getSubOperations();
+			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
+				return getCompositeOperationWires();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,6 +146,10 @@ public class CompositeOperationImpl extends OperationImpl implements CompositeOp
 				getSubOperations().clear();
 				getSubOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
+				getCompositeOperationWires().clear();
+				getCompositeOperationWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -133,6 +165,9 @@ public class CompositeOperationImpl extends OperationImpl implements CompositeOp
 			case ModelPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 				getSubOperations().clear();
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
+				getCompositeOperationWires().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -147,6 +182,8 @@ public class CompositeOperationImpl extends OperationImpl implements CompositeOp
 		switch (featureID) {
 			case ModelPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 				return subOperations != null && !subOperations.isEmpty();
+			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
+				return compositeOperationWires != null && !compositeOperationWires.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

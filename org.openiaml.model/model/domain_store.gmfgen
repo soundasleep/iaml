@@ -380,9 +380,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/SyncWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/DomainStore/domainStoreWires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/WireEdgesSource/edges"/>
+            href="iaml.genmodel#//model/DomainStore/domainStoreWires"/>
         <sourceMetaFeature
             href="iaml.genmodel#//model/WireEdge/from"/>
         <targetMetaFeature

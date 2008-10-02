@@ -37,7 +37,7 @@ import org.openiaml.model.model.WireEdgesSource;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getEdges <em>Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInEdges <em>In Edges</em>}</li>
  * </ul>
  * </p>
@@ -66,14 +66,14 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment reference list.
+	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEdges()
+	 * @see #getOutEdges()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> edges;
+	protected EList<WireEdge> outEdges;
 
 	/**
 	 * The cached value of the '{@link #getInEdges() <em>In Edges</em>}' reference list.
@@ -130,11 +130,11 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getEdges() {
-		if (edges == null) {
-			edges = new EObjectContainmentWithInverseEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES, ModelPackage.WIRE_EDGE__FROM);
+	public EList<WireEdge> getOutEdges() {
+		if (outEdges == null) {
+			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
 		}
-		return edges;
+		return outEdges;
 	}
 
 	/**
@@ -158,8 +158,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
 		}
@@ -174,8 +174,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES:
-				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
+				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
 		}
@@ -192,8 +192,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__NAME:
 				return getName();
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES:
-				return getEdges();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
+				return getOutEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return getInEdges();
 		}
@@ -212,9 +212,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__NAME:
 				setName((String)newValue);
 				return;
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES:
-				getEdges().clear();
-				getEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
+				getOutEdges().clear();
+				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				getInEdges().clear();
@@ -235,8 +235,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES:
-				getEdges().clear();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
+				getOutEdges().clear();
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				getInEdges().clear();
@@ -255,8 +255,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES:
-				return edges != null && !edges.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
+				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
 		}
@@ -272,7 +272,7 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == WireEdgesSource.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES: return ModelPackage.WIRE_EDGES_SOURCE__EDGES;
+				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
 				default: return -1;
 			}
 		}
@@ -294,7 +294,7 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == WireEdgesSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__EDGES;
+				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES;
 				default: return -1;
 			}
 		}

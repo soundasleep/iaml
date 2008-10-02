@@ -282,7 +282,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.2"/>
@@ -309,7 +309,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.3"/>
@@ -333,7 +333,7 @@
           href="iaml.gmfgraph#PropertyToExecutionWireName"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.5"/>
@@ -352,7 +352,7 @@
     <domainSpecialization
         body="self.oclIsTypeOf( ExecutionWire )"/>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.11"/>
@@ -376,7 +376,7 @@
           href="iaml.gmfgraph#PropertyToParameterWireName"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.12"/>
@@ -400,7 +400,7 @@
           href="iaml.gmfgraph#ProvidedParameterWireName"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.13"/>

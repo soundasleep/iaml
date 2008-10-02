@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +31,7 @@ import org.openiaml.model.model.ModelPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getDomainObjectWires <em>Domain Object Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +47,16 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * @ordered
 	 */
 	protected EList<DomainAttribute> attributes;
+
+	/**
+	 * The cached value of the '{@link #getDomainObjectWires() <em>Domain Object Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainObjectWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> domainObjectWires;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,11 +94,25 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getDomainObjectWires() {
+		if (domainObjectWires == null) {
+			domainObjectWires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES);
+		}
+		return domainObjectWires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
+				return ((InternalEList<?>)getDomainObjectWires()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -101,6 +127,8 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		switch (featureID) {
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return getAttributes();
+			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
+				return getDomainObjectWires();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,6 +146,10 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 				getAttributes().clear();
 				getAttributes().addAll((Collection<? extends DomainAttribute>)newValue);
 				return;
+			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
+				getDomainObjectWires().clear();
+				getDomainObjectWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -133,6 +165,9 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				getAttributes().clear();
 				return;
+			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
+				getDomainObjectWires().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -147,6 +182,8 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		switch (featureID) {
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
+			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
+				return domainObjectWires != null && !domainObjectWires.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

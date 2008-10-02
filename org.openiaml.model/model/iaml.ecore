@@ -8,7 +8,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WireEdge">
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//WireEdgesSource"
-        eOpposite="#//WireEdgesSource/edges"/>
+        eOpposite="#//WireEdgesSource/outEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//WireEdgeDestination"
         eOpposite="#//WireEdgeDestination/inEdges"/>
   </eClassifiers>
@@ -18,8 +18,8 @@
         eType="#//WireEdge" eOpposite="#//WireEdge/to"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WireEdgesSource" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
-        eType="#//WireEdge" containment="true" eOpposite="#//WireEdge/from"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outEdges" upperBound="-1"
+        eType="#//WireEdge" eOpposite="#//WireEdge/from"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventTrigger" eSuperTypes="#//NamedElement #//WireEdgesSource"/>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsEventTriggers" abstract="true"
@@ -30,6 +30,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domainObjectWires" upperBound="-1"
+        eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement">
@@ -42,6 +44,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//Operation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subOperations" upperBound="-1"
         eType="#//Operation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeOperationWires"
+        upperBound="-1" eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeChainedOperation" eSuperTypes="#//CompositeOperation #//ChainedOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="EventAwareOperation" eSuperTypes="#//CompositeOperation #//ContainsEventTriggers"/>
@@ -61,6 +65,8 @@
       eSuperTypes="#//ApplicationElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//ApplicationElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applicationElementWires"
+        upperBound="-1" eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination"/>
   <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ApplicationElementContainer">
@@ -81,6 +87,8 @@
         eType="#//ApplicationElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainStores" upperBound="-1"
         eType="#//DomainStore" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iaWires" upperBound="-1"
+        eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement">
     <eAnnotations source="http://openiaml.org/comment">
@@ -91,6 +99,8 @@
         eType="#//DomainObject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domainStoreWires" upperBound="-1"
+        eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">
@@ -123,6 +133,8 @@
           eType="#//EventTrigger" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//OperationParameter" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="wireWires" upperBound="-1"
+          eType="#//WireEdge" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//wires/CompositeWire"/>
     <eClassifiers xsi:type="ecore:EClass" name="RunWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">

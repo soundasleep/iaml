@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -34,7 +35,7 @@ import org.openiaml.model.model.operations.SplitNode;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.operations.impl.SplitNodeImpl#getEdges <em>Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.SplitNodeImpl#getOutEdges <em>Out Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,15 +43,14 @@ import org.openiaml.model.model.operations.SplitNode;
  */
 public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	/**
-	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment reference list.
+	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEdges()
+	 * @see #getOutEdges()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> edges;
-
+	protected EList<WireEdge> outEdges;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,11 +75,11 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getEdges() {
-		if (edges == null) {
-			edges = new EObjectContainmentWithInverseEList<WireEdge>(WireEdge.class, this, OperationsPackage.SPLIT_NODE__EDGES, ModelPackage.WIRE_EDGE__FROM);
+	public EList<WireEdge> getOutEdges() {
+		if (outEdges == null) {
+			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, OperationsPackage.SPLIT_NODE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
 		}
-		return edges;
+		return outEdges;
 	}
 
 	/**
@@ -91,8 +91,8 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OperationsPackage.SPLIT_NODE__EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
+			case OperationsPackage.SPLIT_NODE__OUT_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -105,8 +105,8 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OperationsPackage.SPLIT_NODE__EDGES:
-				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
+			case OperationsPackage.SPLIT_NODE__OUT_EDGES:
+				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -119,8 +119,8 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationsPackage.SPLIT_NODE__EDGES:
-				return getEdges();
+			case OperationsPackage.SPLIT_NODE__OUT_EDGES:
+				return getOutEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -134,9 +134,9 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationsPackage.SPLIT_NODE__EDGES:
-				getEdges().clear();
-				getEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case OperationsPackage.SPLIT_NODE__OUT_EDGES:
+				getOutEdges().clear();
+				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,8 +150,8 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationsPackage.SPLIT_NODE__EDGES:
-				getEdges().clear();
+			case OperationsPackage.SPLIT_NODE__OUT_EDGES:
+				getOutEdges().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -165,8 +165,8 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationsPackage.SPLIT_NODE__EDGES:
-				return edges != null && !edges.isEmpty();
+			case OperationsPackage.SPLIT_NODE__OUT_EDGES:
+				return outEdges != null && !outEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -180,7 +180,7 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == WireEdgesSource.class) {
 			switch (derivedFeatureID) {
-				case OperationsPackage.SPLIT_NODE__EDGES: return ModelPackage.WIRE_EDGES_SOURCE__EDGES;
+				case OperationsPackage.SPLIT_NODE__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
 				default: return -1;
 			}
 		}
@@ -196,7 +196,7 @@ public class SplitNodeImpl extends SingleOperationImpl implements SplitNode {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == WireEdgesSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__EDGES: return OperationsPackage.SPLIT_NODE__EDGES;
+				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return OperationsPackage.SPLIT_NODE__OUT_EDGES;
 				default: return -1;
 			}
 		}

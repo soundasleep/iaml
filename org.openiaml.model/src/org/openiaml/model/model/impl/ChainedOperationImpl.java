@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -30,7 +31,7 @@ import org.openiaml.model.model.WireEdgesSource;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.impl.ChainedOperationImpl#getEdges <em>Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ChainedOperationImpl#getOutEdges <em>Out Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,15 +39,14 @@ import org.openiaml.model.model.WireEdgesSource;
  */
 public class ChainedOperationImpl extends OperationImpl implements ChainedOperation {
 	/**
-	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment reference list.
+	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEdges()
+	 * @see #getOutEdges()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> edges;
-
+	protected EList<WireEdge> outEdges;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,11 +71,11 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getEdges() {
-		if (edges == null) {
-			edges = new EObjectContainmentWithInverseEList<WireEdge>(WireEdge.class, this, ModelPackage.CHAINED_OPERATION__EDGES, ModelPackage.WIRE_EDGE__FROM);
+	public EList<WireEdge> getOutEdges() {
+		if (outEdges == null) {
+			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.CHAINED_OPERATION__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
 		}
-		return edges;
+		return outEdges;
 	}
 
 	/**
@@ -87,8 +87,8 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.CHAINED_OPERATION__EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.CHAINED_OPERATION__OUT_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -101,8 +101,8 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.CHAINED_OPERATION__EDGES:
-				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.CHAINED_OPERATION__OUT_EDGES:
+				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -115,8 +115,8 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.CHAINED_OPERATION__EDGES:
-				return getEdges();
+			case ModelPackage.CHAINED_OPERATION__OUT_EDGES:
+				return getOutEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -130,9 +130,9 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.CHAINED_OPERATION__EDGES:
-				getEdges().clear();
-				getEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.CHAINED_OPERATION__OUT_EDGES:
+				getOutEdges().clear();
+				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,8 +146,8 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.CHAINED_OPERATION__EDGES:
-				getEdges().clear();
+			case ModelPackage.CHAINED_OPERATION__OUT_EDGES:
+				getOutEdges().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -161,8 +161,8 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.CHAINED_OPERATION__EDGES:
-				return edges != null && !edges.isEmpty();
+			case ModelPackage.CHAINED_OPERATION__OUT_EDGES:
+				return outEdges != null && !outEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -176,7 +176,7 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == WireEdgesSource.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.CHAINED_OPERATION__EDGES: return ModelPackage.WIRE_EDGES_SOURCE__EDGES;
+				case ModelPackage.CHAINED_OPERATION__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
 				default: return -1;
 			}
 		}
@@ -192,7 +192,7 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == WireEdgesSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__EDGES: return ModelPackage.CHAINED_OPERATION__EDGES;
+				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.CHAINED_OPERATION__OUT_EDGES;
 				default: return -1;
 			}
 		}

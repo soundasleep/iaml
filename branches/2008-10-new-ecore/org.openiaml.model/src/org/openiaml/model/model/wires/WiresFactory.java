@@ -53,49 +53,22 @@ public interface WiresFactory extends EFactory {
 	SyncWire createSyncWire();
 
 	/**
-	 * Returns a new object of class '<em>Run Wire</em>'.
+	 * Returns a new object of class '<em>Run Instance Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Run Wire</em>'.
+	 * @return a new object of class '<em>Run Instance Wire</em>'.
 	 * @generated
 	 */
-	RunWire createRunWire();
+	RunInstanceWire createRunInstanceWire();
 
 	/**
-	 * Returns a new object of class '<em>Execution Wire</em>'.
+	 * Returns a new object of class '<em>Parameter Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Execution Wire</em>'.
+	 * @return a new object of class '<em>Parameter Wire</em>'.
 	 * @generated
 	 */
-	ExecutionWire createExecutionWire();
-
-	/**
-	 * Returns a new object of class '<em>Provided Parameter Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Provided Parameter Wire</em>'.
-	 * @generated
-	 */
-	ProvidedParameterWire createProvidedParameterWire();
-
-	/**
-	 * Returns a new object of class '<em>Property To Parameter Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Property To Parameter Wire</em>'.
-	 * @generated
-	 */
-	PropertyToParameterWire createPropertyToParameterWire();
-
-	/**
-	 * Returns a new object of class '<em>Property To Execution Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Property To Execution Wire</em>'.
-	 * @generated
-	 */
-	PropertyToExecutionWire createPropertyToExecutionWire();
+	ParameterWire createParameterWire();
 
 	/**
 	 * Returns the package supported by this factory.

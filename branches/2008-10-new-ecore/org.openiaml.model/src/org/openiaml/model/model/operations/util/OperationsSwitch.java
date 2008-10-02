@@ -10,14 +10,22 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
+import org.openiaml.model.model.ExecutionEdgeDestination;
+import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-
-import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.operations.StopNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,53 +104,49 @@ public class OperationsSwitch<T> {
 			case OperationsPackage.START_NODE: {
 				StartNode startNode = (StartNode)theEObject;
 				T result = caseStartNode(startNode);
-				if (result == null) result = caseSingleOperation(startNode);
 				if (result == null) result = caseWireEdgesSource(startNode);
-				if (result == null) result = caseOperation(startNode);
-				if (result == null) result = caseWireEdgeDestination(startNode);
-				if (result == null) result = caseNamedElement(startNode);
+				if (result == null) result = caseActivityNode(startNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case OperationsPackage.STOP_NODE: {
 				StopNode stopNode = (StopNode)theEObject;
 				T result = caseStopNode(stopNode);
-				if (result == null) result = caseSingleOperation(stopNode);
-				if (result == null) result = caseOperation(stopNode);
 				if (result == null) result = caseWireEdgeDestination(stopNode);
-				if (result == null) result = caseNamedElement(stopNode);
+				if (result == null) result = caseActivityNode(stopNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case OperationsPackage.FINISH_NODE: {
 				FinishNode finishNode = (FinishNode)theEObject;
 				T result = caseFinishNode(finishNode);
-				if (result == null) result = caseSingleOperation(finishNode);
-				if (result == null) result = caseOperation(finishNode);
 				if (result == null) result = caseWireEdgeDestination(finishNode);
-				if (result == null) result = caseNamedElement(finishNode);
+				if (result == null) result = caseActivityNode(finishNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OperationsPackage.SPLIT_NODE: {
-				SplitNode splitNode = (SplitNode)theEObject;
-				T result = caseSplitNode(splitNode);
-				if (result == null) result = caseSingleOperation(splitNode);
-				if (result == null) result = caseWireEdgesSource(splitNode);
-				if (result == null) result = caseOperation(splitNode);
-				if (result == null) result = caseWireEdgeDestination(splitNode);
-				if (result == null) result = caseNamedElement(splitNode);
+			case OperationsPackage.DECISION_NODE: {
+				DecisionNode decisionNode = (DecisionNode)theEObject;
+				T result = caseDecisionNode(decisionNode);
+				if (result == null) result = caseWireEdgesSource(decisionNode);
+				if (result == null) result = caseWireEdgeDestination(decisionNode);
+				if (result == null) result = caseDataFlowEdgeDestination(decisionNode);
+				if (result == null) result = caseActivityNode(decisionNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OperationsPackage.JOIN_NODE: {
-				JoinNode joinNode = (JoinNode)theEObject;
-				T result = caseJoinNode(joinNode);
-				if (result == null) result = caseSingleOperation(joinNode);
-				if (result == null) result = caseWireEdgesSource(joinNode);
-				if (result == null) result = caseOperation(joinNode);
-				if (result == null) result = caseWireEdgeDestination(joinNode);
-				if (result == null) result = caseNamedElement(joinNode);
+			case OperationsPackage.DECISION_OPERATION: {
+				DecisionOperation decisionOperation = (DecisionOperation)theEObject;
+				T result = caseDecisionOperation(decisionOperation);
+				if (result == null) result = caseChainedOperation(decisionOperation);
+				if (result == null) result = caseDataFlowEdgeDestination(decisionOperation);
+				if (result == null) result = caseOperation(decisionOperation);
+				if (result == null) result = caseExecutionEdgesSource(decisionOperation);
+				if (result == null) result = caseWireEdgeDestination(decisionOperation);
+				if (result == null) result = caseNamedElement(decisionOperation);
+				if (result == null) result = caseExecutionEdgeDestination(decisionOperation);
+				if (result == null) result = caseActivityNode(decisionOperation);
+				if (result == null) result = caseDataFlowEdgesSource(decisionOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -196,32 +200,32 @@ public class OperationsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Split Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Decision Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Split Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Decision Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSplitNode(SplitNode object) {
+	public T caseDecisionNode(DecisionNode object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Join Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Decision Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Join Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Decision Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseJoinNode(JoinNode object) {
+	public T caseDecisionOperation(DecisionOperation object) {
 		return null;
 	}
 
@@ -241,6 +245,21 @@ public class OperationsSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Flow Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Flow Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataFlowEdgeDestination(DataFlowEdgeDestination object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -252,6 +271,36 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Execution Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Execution Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExecutionEdgeDestination(ExecutionEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Flow Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Flow Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataFlowEdgesSource(DataFlowEdgesSource object) {
 		return null;
 	}
 
@@ -271,17 +320,32 @@ public class OperationsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Single Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Execution Edges Source</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Single Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Execution Edges Source</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSingleOperation(SingleOperation object) {
+	public T caseExecutionEdgesSource(ExecutionEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Chained Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Chained Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseChainedOperation(ChainedOperation object) {
 		return null;
 	}
 
@@ -297,6 +361,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseWireEdgesSource(WireEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Activity Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Activity Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActivityNode(ActivityNode object) {
 		return null;
 	}
 

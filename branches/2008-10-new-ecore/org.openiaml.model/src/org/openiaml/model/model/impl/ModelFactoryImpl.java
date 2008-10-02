@@ -9,12 +9,29 @@ package org.openiaml.model.model.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.openiaml.model.model.*;
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.DynamicApplicationElementSet;
+import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.ModelFactory;
+import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.SingleOperation;
+import org.openiaml.model.model.StaticValue;
+import org.openiaml.model.model.TemporaryVariable;
+import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,17 +81,21 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.EVENT_TRIGGER: return createEventTrigger();
 			case ModelPackage.DOMAIN_OBJECT: return createDomainObject();
 			case ModelPackage.DOMAIN_ATTRIBUTE: return createDomainAttribute();
-			case ModelPackage.OPERATION_PARAMETER: return createOperationParameter();
+			case ModelPackage.ACTIVITY_NODE: return createActivityNode();
+			case ModelPackage.PARAMETER: return createParameter();
 			case ModelPackage.SINGLE_OPERATION: return createSingleOperation();
 			case ModelPackage.CHAINED_OPERATION: return createChainedOperation();
 			case ModelPackage.COMPOSITE_OPERATION: return createCompositeOperation();
-			case ModelPackage.COMPOSITE_CHAINED_OPERATION: return createCompositeChainedOperation();
-			case ModelPackage.EVENT_AWARE_OPERATION: return createEventAwareOperation();
 			case ModelPackage.APPLICATION_ELEMENT: return createApplicationElement();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY: return createApplicationElementProperty();
+			case ModelPackage.STATIC_VALUE: return createStaticValue();
 			case ModelPackage.VISIBLE_THING: return createVisibleThing();
 			case ModelPackage.INTERNET_APPLICATION: return createInternetApplication();
 			case ModelPackage.DOMAIN_STORE: return createDomainStore();
+			case ModelPackage.DATA_FLOW_EDGE: return createDataFlowEdge();
+			case ModelPackage.TEMPORARY_VARIABLE: return createTemporaryVariable();
+			case ModelPackage.EXECUTION_EDGE: return createExecutionEdge();
+			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET: return createDynamicApplicationElementSet();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -125,9 +146,19 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OperationParameter createOperationParameter() {
-		OperationParameterImpl operationParameter = new OperationParameterImpl();
-		return operationParameter;
+	public ActivityNode createActivityNode() {
+		ActivityNodeImpl activityNode = new ActivityNodeImpl();
+		return activityNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
 	}
 
 	/**
@@ -165,26 +196,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CompositeChainedOperation createCompositeChainedOperation() {
-		CompositeChainedOperationImpl compositeChainedOperation = new CompositeChainedOperationImpl();
-		return compositeChainedOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventAwareOperation createEventAwareOperation() {
-		EventAwareOperationImpl eventAwareOperation = new EventAwareOperationImpl();
-		return eventAwareOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ApplicationElement createApplicationElement() {
 		ApplicationElementImpl applicationElement = new ApplicationElementImpl();
 		return applicationElement;
@@ -198,6 +209,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public ApplicationElementProperty createApplicationElementProperty() {
 		ApplicationElementPropertyImpl applicationElementProperty = new ApplicationElementPropertyImpl();
 		return applicationElementProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StaticValue createStaticValue() {
+		StaticValueImpl staticValue = new StaticValueImpl();
+		return staticValue;
 	}
 
 	/**
@@ -228,6 +249,46 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public DomainStore createDomainStore() {
 		DomainStoreImpl domainStore = new DomainStoreImpl();
 		return domainStore;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataFlowEdge createDataFlowEdge() {
+		DataFlowEdgeImpl dataFlowEdge = new DataFlowEdgeImpl();
+		return dataFlowEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TemporaryVariable createTemporaryVariable() {
+		TemporaryVariableImpl temporaryVariable = new TemporaryVariableImpl();
+		return temporaryVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionEdge createExecutionEdge() {
+		ExecutionEdgeImpl executionEdge = new ExecutionEdgeImpl();
+		return executionEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DynamicApplicationElementSet createDynamicApplicationElementSet() {
+		DynamicApplicationElementSetImpl dynamicApplicationElementSet = new DynamicApplicationElementSetImpl();
+		return dynamicApplicationElementSet;
 	}
 
 	/**

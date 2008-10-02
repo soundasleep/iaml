@@ -15,7 +15,7 @@ import org.openiaml.model.model.WireEdge;
  *
  *
  * @see org.openiaml.model.model.wires.WiresPackage#getSingleWire()
- * @model annotation="http://openiaml.org/comment comment='ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire...'"
+ * @model annotation="http://openiaml.org/comment comment='why do we have SingleWire at all? (following a design pattern?)'"
  * @generated
  */
 public interface SingleWire extends WireEdge {

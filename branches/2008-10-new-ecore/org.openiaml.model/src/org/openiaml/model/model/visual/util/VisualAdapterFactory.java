@@ -8,11 +8,8 @@ package org.openiaml.model.model.visual.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -21,8 +18,10 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-
-import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.VisualPackage;
 
 /**
  * <!-- begin-user-doc -->

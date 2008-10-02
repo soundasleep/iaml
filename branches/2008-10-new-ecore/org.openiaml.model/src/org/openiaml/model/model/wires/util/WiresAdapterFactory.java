@@ -8,16 +8,17 @@ package org.openiaml.model.model.wires.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
-
 import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SingleWire;
+import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,24 +89,12 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createSyncWireAdapter();
 			}
 			@Override
-			public Adapter caseRunWire(RunWire object) {
-				return createRunWireAdapter();
+			public Adapter caseRunInstanceWire(RunInstanceWire object) {
+				return createRunInstanceWireAdapter();
 			}
 			@Override
-			public Adapter caseExecutionWire(ExecutionWire object) {
-				return createExecutionWireAdapter();
-			}
-			@Override
-			public Adapter caseProvidedParameterWire(ProvidedParameterWire object) {
-				return createProvidedParameterWireAdapter();
-			}
-			@Override
-			public Adapter casePropertyToParameterWire(PropertyToParameterWire object) {
-				return createPropertyToParameterWireAdapter();
-			}
-			@Override
-			public Adapter casePropertyToExecutionWire(PropertyToExecutionWire object) {
-				return createPropertyToExecutionWireAdapter();
+			public Adapter caseParameterWire(ParameterWire object) {
+				return createParameterWireAdapter();
 			}
 			@Override
 			public Adapter caseWireEdge(WireEdge object) {
@@ -182,72 +171,30 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.RunWire <em>Run Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.RunInstanceWire <em>Run Instance Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.RunWire
+	 * @see org.openiaml.model.model.wires.RunInstanceWire
 	 * @generated
 	 */
-	public Adapter createRunWireAdapter() {
+	public Adapter createRunInstanceWireAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ExecutionWire <em>Execution Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ParameterWire <em>Parameter Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.ExecutionWire
+	 * @see org.openiaml.model.model.wires.ParameterWire
 	 * @generated
 	 */
-	public Adapter createExecutionWireAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ProvidedParameterWire <em>Provided Parameter Wire</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.ProvidedParameterWire
-	 * @generated
-	 */
-	public Adapter createProvidedParameterWireAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.PropertyToParameterWire <em>Property To Parameter Wire</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.PropertyToParameterWire
-	 * @generated
-	 */
-	public Adapter createPropertyToParameterWireAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.PropertyToExecutionWire <em>Property To Execution Wire</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.PropertyToExecutionWire
-	 * @generated
-	 */
-	public Adapter createPropertyToExecutionWireAdapter() {
+	public Adapter createParameterWireAdapter() {
 		return null;
 	}
 

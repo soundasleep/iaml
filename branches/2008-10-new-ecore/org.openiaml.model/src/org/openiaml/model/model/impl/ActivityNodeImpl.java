@@ -4,29 +4,31 @@
  *
  * $Id$
  */
-package org.openiaml.model.model.wires.impl;
+package org.openiaml.model.model.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.openiaml.model.model.wires.ExecutionWire;
-import org.openiaml.model.model.wires.WiresPackage;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ModelPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Execution Wire</b></em>'.
+ * An implementation of the model object '<em><b>Activity Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ExecutionWireImpl extends SingleWireImpl implements ExecutionWire {
+public class ActivityNodeImpl extends EObjectImpl implements ActivityNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExecutionWireImpl() {
+	protected ActivityNodeImpl() {
 		super();
 	}
 
@@ -37,7 +39,7 @@ public class ExecutionWireImpl extends SingleWireImpl implements ExecutionWire {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return WiresPackage.Literals.EXECUTION_WIRE;
+		return ModelPackage.Literals.ACTIVITY_NODE;
 	}
 
-} //ExecutionWireImpl
+} //ActivityNodeImpl

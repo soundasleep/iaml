@@ -62,13 +62,22 @@ public interface ModelFactory extends EFactory {
 	DomainAttribute createDomainAttribute();
 
 	/**
-	 * Returns a new object of class '<em>Operation Parameter</em>'.
+	 * Returns a new object of class '<em>Activity Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Parameter</em>'.
+	 * @return a new object of class '<em>Activity Node</em>'.
 	 * @generated
 	 */
-	OperationParameter createOperationParameter();
+	ActivityNode createActivityNode();
+
+	/**
+	 * Returns a new object of class '<em>Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter</em>'.
+	 * @generated
+	 */
+	Parameter createParameter();
 
 	/**
 	 * Returns a new object of class '<em>Single Operation</em>'.
@@ -98,24 +107,6 @@ public interface ModelFactory extends EFactory {
 	CompositeOperation createCompositeOperation();
 
 	/**
-	 * Returns a new object of class '<em>Composite Chained Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Composite Chained Operation</em>'.
-	 * @generated
-	 */
-	CompositeChainedOperation createCompositeChainedOperation();
-
-	/**
-	 * Returns a new object of class '<em>Event Aware Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event Aware Operation</em>'.
-	 * @generated
-	 */
-	EventAwareOperation createEventAwareOperation();
-
-	/**
 	 * Returns a new object of class '<em>Application Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,6 +123,15 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	ApplicationElementProperty createApplicationElementProperty();
+
+	/**
+	 * Returns a new object of class '<em>Static Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Static Value</em>'.
+	 * @generated
+	 */
+	StaticValue createStaticValue();
 
 	/**
 	 * Returns a new object of class '<em>Visible Thing</em>'.
@@ -159,6 +159,42 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	DomainStore createDomainStore();
+
+	/**
+	 * Returns a new object of class '<em>Data Flow Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Flow Edge</em>'.
+	 * @generated
+	 */
+	DataFlowEdge createDataFlowEdge();
+
+	/**
+	 * Returns a new object of class '<em>Temporary Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Temporary Variable</em>'.
+	 * @generated
+	 */
+	TemporaryVariable createTemporaryVariable();
+
+	/**
+	 * Returns a new object of class '<em>Execution Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Edge</em>'.
+	 * @generated
+	 */
+	ExecutionEdge createExecutionEdge();
+
+	/**
+	 * Returns a new object of class '<em>Dynamic Application Element Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dynamic Application Element Set</em>'.
+	 * @generated
+	 */
+	DynamicApplicationElementSet createDynamicApplicationElementSet();
 
 	/**
 	 * Returns the package supported by this factory.

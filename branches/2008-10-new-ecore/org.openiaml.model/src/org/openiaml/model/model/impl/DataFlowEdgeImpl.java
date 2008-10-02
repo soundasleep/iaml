@@ -8,30 +8,33 @@ package org.openiaml.model.model.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Wire Edge</b></em>'.
+ * An implementation of the model object '<em><b>Data Flow Edge</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.impl.WireEdgeImpl#getFrom <em>From</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.WireEdgeImpl#getTo <em>To</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DataFlowEdgeImpl#getFrom <em>From</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DataFlowEdgeImpl#getTo <em>To</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class WireEdgeImpl extends EObjectImpl implements WireEdge {
+public class DataFlowEdgeImpl extends EObjectImpl implements DataFlowEdge {
 	/**
 	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -40,7 +43,8 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * @generated
 	 * @ordered
 	 */
-	protected WireEdgesSource from;
+	protected DataFlowEdgesSource from;
+
 	/**
 	 * The cached value of the '{@link #getTo() <em>To</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -49,14 +53,14 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * @generated
 	 * @ordered
 	 */
-	protected WireEdgeDestination to;
+	protected DataFlowEdgeDestination to;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected WireEdgeImpl() {
+	protected DataFlowEdgeImpl() {
 		super();
 	}
 
@@ -67,7 +71,7 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.WIRE_EDGE;
+		return ModelPackage.Literals.DATA_FLOW_EDGE;
 	}
 
 	/**
@@ -75,13 +79,13 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WireEdgesSource getFrom() {
+	public DataFlowEdgesSource getFrom() {
 		if (from != null && from.eIsProxy()) {
 			InternalEObject oldFrom = (InternalEObject)from;
-			from = (WireEdgesSource)eResolveProxy(oldFrom);
+			from = (DataFlowEdgesSource)eResolveProxy(oldFrom);
 			if (from != oldFrom) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.WIRE_EDGE__FROM, oldFrom, from));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.DATA_FLOW_EDGE__FROM, oldFrom, from));
 			}
 		}
 		return from;
@@ -92,7 +96,7 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WireEdgesSource basicGetFrom() {
+	public DataFlowEdgesSource basicGetFrom() {
 		return from;
 	}
 
@@ -101,11 +105,11 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFrom(WireEdgesSource newFrom, NotificationChain msgs) {
-		WireEdgesSource oldFrom = from;
+	public NotificationChain basicSetFrom(DataFlowEdgesSource newFrom, NotificationChain msgs) {
+		DataFlowEdgesSource oldFrom = from;
 		from = newFrom;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.WIRE_EDGE__FROM, oldFrom, newFrom);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DATA_FLOW_EDGE__FROM, oldFrom, newFrom);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -116,18 +120,18 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFrom(WireEdgesSource newFrom) {
+	public void setFrom(DataFlowEdgesSource newFrom) {
 		if (newFrom != from) {
 			NotificationChain msgs = null;
 			if (from != null)
-				msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES, WireEdgesSource.class, msgs);
+				msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS, DataFlowEdgesSource.class, msgs);
 			if (newFrom != null)
-				msgs = ((InternalEObject)newFrom).eInverseAdd(this, ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES, WireEdgesSource.class, msgs);
+				msgs = ((InternalEObject)newFrom).eInverseAdd(this, ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS, DataFlowEdgesSource.class, msgs);
 			msgs = basicSetFrom(newFrom, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.WIRE_EDGE__FROM, newFrom, newFrom));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DATA_FLOW_EDGE__FROM, newFrom, newFrom));
 	}
 
 	/**
@@ -135,13 +139,13 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WireEdgeDestination getTo() {
+	public DataFlowEdgeDestination getTo() {
 		if (to != null && to.eIsProxy()) {
 			InternalEObject oldTo = (InternalEObject)to;
-			to = (WireEdgeDestination)eResolveProxy(oldTo);
+			to = (DataFlowEdgeDestination)eResolveProxy(oldTo);
 			if (to != oldTo) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.WIRE_EDGE__TO, oldTo, to));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.DATA_FLOW_EDGE__TO, oldTo, to));
 			}
 		}
 		return to;
@@ -152,7 +156,7 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WireEdgeDestination basicGetTo() {
+	public DataFlowEdgeDestination basicGetTo() {
 		return to;
 	}
 
@@ -161,11 +165,11 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTo(WireEdgeDestination newTo, NotificationChain msgs) {
-		WireEdgeDestination oldTo = to;
+	public NotificationChain basicSetTo(DataFlowEdgeDestination newTo, NotificationChain msgs) {
+		DataFlowEdgeDestination oldTo = to;
 		to = newTo;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.WIRE_EDGE__TO, oldTo, newTo);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DATA_FLOW_EDGE__TO, oldTo, newTo);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -176,18 +180,18 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTo(WireEdgeDestination newTo) {
+	public void setTo(DataFlowEdgeDestination newTo) {
 		if (newTo != to) {
 			NotificationChain msgs = null;
 			if (to != null)
-				msgs = ((InternalEObject)to).eInverseRemove(this, ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES, WireEdgeDestination.class, msgs);
+				msgs = ((InternalEObject)to).eInverseRemove(this, ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS, DataFlowEdgeDestination.class, msgs);
 			if (newTo != null)
-				msgs = ((InternalEObject)newTo).eInverseAdd(this, ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES, WireEdgeDestination.class, msgs);
+				msgs = ((InternalEObject)newTo).eInverseAdd(this, ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS, DataFlowEdgeDestination.class, msgs);
 			msgs = basicSetTo(newTo, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.WIRE_EDGE__TO, newTo, newTo));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DATA_FLOW_EDGE__TO, newTo, newTo));
 	}
 
 	/**
@@ -198,14 +202,14 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.WIRE_EDGE__FROM:
+			case ModelPackage.DATA_FLOW_EDGE__FROM:
 				if (from != null)
-					msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES, WireEdgesSource.class, msgs);
-				return basicSetFrom((WireEdgesSource)otherEnd, msgs);
-			case ModelPackage.WIRE_EDGE__TO:
+					msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS, DataFlowEdgesSource.class, msgs);
+				return basicSetFrom((DataFlowEdgesSource)otherEnd, msgs);
+			case ModelPackage.DATA_FLOW_EDGE__TO:
 				if (to != null)
-					msgs = ((InternalEObject)to).eInverseRemove(this, ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES, WireEdgeDestination.class, msgs);
-				return basicSetTo((WireEdgeDestination)otherEnd, msgs);
+					msgs = ((InternalEObject)to).eInverseRemove(this, ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS, DataFlowEdgeDestination.class, msgs);
+				return basicSetTo((DataFlowEdgeDestination)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -218,9 +222,9 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.WIRE_EDGE__FROM:
+			case ModelPackage.DATA_FLOW_EDGE__FROM:
 				return basicSetFrom(null, msgs);
-			case ModelPackage.WIRE_EDGE__TO:
+			case ModelPackage.DATA_FLOW_EDGE__TO:
 				return basicSetTo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -234,10 +238,10 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.WIRE_EDGE__FROM:
+			case ModelPackage.DATA_FLOW_EDGE__FROM:
 				if (resolve) return getFrom();
 				return basicGetFrom();
-			case ModelPackage.WIRE_EDGE__TO:
+			case ModelPackage.DATA_FLOW_EDGE__TO:
 				if (resolve) return getTo();
 				return basicGetTo();
 		}
@@ -252,11 +256,11 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.WIRE_EDGE__FROM:
-				setFrom((WireEdgesSource)newValue);
+			case ModelPackage.DATA_FLOW_EDGE__FROM:
+				setFrom((DataFlowEdgesSource)newValue);
 				return;
-			case ModelPackage.WIRE_EDGE__TO:
-				setTo((WireEdgeDestination)newValue);
+			case ModelPackage.DATA_FLOW_EDGE__TO:
+				setTo((DataFlowEdgeDestination)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -270,11 +274,11 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.WIRE_EDGE__FROM:
-				setFrom((WireEdgesSource)null);
+			case ModelPackage.DATA_FLOW_EDGE__FROM:
+				setFrom((DataFlowEdgesSource)null);
 				return;
-			case ModelPackage.WIRE_EDGE__TO:
-				setTo((WireEdgeDestination)null);
+			case ModelPackage.DATA_FLOW_EDGE__TO:
+				setTo((DataFlowEdgeDestination)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -288,12 +292,12 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.WIRE_EDGE__FROM:
+			case ModelPackage.DATA_FLOW_EDGE__FROM:
 				return from != null;
-			case ModelPackage.WIRE_EDGE__TO:
+			case ModelPackage.DATA_FLOW_EDGE__TO:
 				return to != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //WireEdgeImpl
+} //DataFlowEdgeImpl

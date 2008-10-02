@@ -59,14 +59,14 @@ public class CreateMissingOperationShortcutsCommand extends
 
 		// OperationParameter
 		for (OperationParameter child : rootObject.getParameters()) {
-			connectionsOut.addAll( child.getInEdges() );
+			connectionsOut.addAll( child.getOutEdges() );
 		}
 				
 		// Operation (incl ChainedOperation)
 		for (Operation child : rootObject.getSubOperations()) {
 			// not all Operations have outwards edges
 			if (child instanceof WireEdgesSource) {
-				connectionsOut.addAll( ((WireEdgesSource) child).getEdges() );
+				connectionsOut.addAll( ((WireEdgesSource) child).getOutEdges() );
 			}
 		}
 

@@ -63,28 +63,28 @@ public class CreateMissingRootShortcutsCommand extends
 		InternetApplication rootObject = (InternetApplication) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
-
+		
 		// ApplicationElement (incl VisualThing and Page)
 		for (ApplicationElement child : rootObject.getChildren()) {
-			connectionsOut.addAll( child.getEdges() );
+			connectionsOut.addAll( child.getOutEdges() );
 		}
 		
 		// EventTrigger
 		for (EventTrigger child : rootObject.getEventTriggers()) {
-			connectionsOut.addAll( child.getEdges() );
+			connectionsOut.addAll( child.getOutEdges() );
 		}
 		
 		// Operation (incl ChainedOperation)
 		for (Operation child : rootObject.getOperations()) {
 			// not all Operations have outwards edges
 			if (child instanceof WireEdgesSource) {
-				connectionsOut.addAll( ((WireEdgesSource) child).getEdges() );
+				connectionsOut.addAll( ((WireEdgesSource) child).getOutEdges() );
 			}
 		}
 		
 		// ApplicationElementProperty
 		for (ApplicationElementProperty child : rootObject.getProperties()) {
-			connectionsOut.addAll( child.getEdges() );
+			connectionsOut.addAll( child.getOutEdges() );
 		}
 
 		// DomainStore doesn't have out edges

@@ -162,6 +162,7 @@ public class ModelSwitch<T> {
 				T result = caseOperationParameter(operationParameter);
 				if (result == null) result = caseNamedElement(operationParameter);
 				if (result == null) result = caseWireEdgeDestination(operationParameter);
+				if (result == null) result = caseWireEdgesSource(operationParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

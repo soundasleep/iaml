@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -31,10 +32,10 @@ public class CreateMissingElementShortcutsCommand extends
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		ApplicationElement rootObject = (ApplicationElement) object;
+		ApplicationElementContainer rootObject = (ApplicationElementContainer) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-		
+
 		// EventTrigger doesn't have in edges
 		
 		// Operation (incl ChainedOperation)
@@ -52,28 +53,28 @@ public class CreateMissingElementShortcutsCommand extends
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		ApplicationElement rootObject = (ApplicationElement) object;
+		ApplicationElementContainer rootObject = (ApplicationElementContainer) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
 		// EventTrigger
 		for (EventTrigger child : rootObject.getEventTriggers()) {
-			connectionsOut.addAll( child.getEdges() );
+			connectionsOut.addAll( child.getOutEdges() );
 		}
 		
 		// Operation (incl ChainedOperation)
 		for (Operation child : rootObject.getOperations()) {
 			// not all Operations have outwards edges
 			if (child instanceof WireEdgesSource) {
-				connectionsOut.addAll( ((WireEdgesSource) child).getEdges() );
+				connectionsOut.addAll( ((WireEdgesSource) child).getOutEdges() );
 			}
 		}
 		
 		// ApplicationElementProperty
 		for (ApplicationElementProperty child : rootObject.getProperties()) {
-			connectionsOut.addAll( child.getEdges() );
+			connectionsOut.addAll( child.getOutEdges() );
 		}
-
+		
 		return connectionsOut;
 
 	}

@@ -10,28 +10,21 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-
-import org.openiaml.model.model.OperationParameter;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.impl.WireEdgeImpl;
-
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -123,7 +116,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OperationParameter> parameters;
+	protected EList<Parameter> parameters;
 
 	/**
 	 * The cached value of the '{@link #getWireWires() <em>Wire Wires</em>}' containment reference list.
@@ -228,9 +221,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OperationParameter> getParameters() {
+	public EList<Parameter> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<OperationParameter>(OperationParameter.class, this, WiresPackage.COMPOSITE_WIRE__PARAMETERS);
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, WiresPackage.COMPOSITE_WIRE__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -327,7 +320,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return;
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends OperationParameter>)newValue);
+				getParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__WIRE_WIRES:
 				getWireWires().clear();

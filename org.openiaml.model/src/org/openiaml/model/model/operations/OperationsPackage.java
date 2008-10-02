@@ -70,40 +70,13 @@ public interface OperationsPackage extends EPackage {
 	int START_NODE = 0;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_NODE__IN_EDGES = ModelPackage.SINGLE_OPERATION__IN_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_NODE__NAME = ModelPackage.SINGLE_OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
-
-	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START_NODE__OUT_EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
+	int START_NODE__OUT_EDGES = ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
 
 	/**
 	 * The number of structural features of the '<em>Start Node</em>' class.
@@ -112,7 +85,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_NODE_FEATURE_COUNT = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 1;
+	int START_NODE_FEATURE_COUNT = ModelPackage.WIRE_EDGES_SOURCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.StopNodeImpl <em>Stop Node</em>}' class.
@@ -131,25 +104,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOP_NODE__IN_EDGES = ModelPackage.SINGLE_OPERATION__IN_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STOP_NODE__NAME = ModelPackage.SINGLE_OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STOP_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
+	int STOP_NODE__IN_EDGES = ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
 
 	/**
 	 * The number of structural features of the '<em>Stop Node</em>' class.
@@ -158,7 +113,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOP_NODE_FEATURE_COUNT = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
+	int STOP_NODE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_DESTINATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.FinishNodeImpl <em>Finish Node</em>}' class.
@@ -177,25 +132,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FINISH_NODE__IN_EDGES = ModelPackage.SINGLE_OPERATION__IN_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FINISH_NODE__NAME = ModelPackage.SINGLE_OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FINISH_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
+	int FINISH_NODE__IN_EDGES = ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
 
 	/**
 	 * The number of structural features of the '<em>Finish Node</em>' class.
@@ -204,44 +141,17 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FINISH_NODE_FEATURE_COUNT = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
+	int FINISH_NODE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_DESTINATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.SplitNodeImpl <em>Split Node</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl <em>Decision Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.operations.impl.SplitNodeImpl
-	 * @see org.openiaml.model.model.operations.impl.OperationsPackageImpl#getSplitNode()
+	 * @see org.openiaml.model.model.operations.impl.DecisionNodeImpl
+	 * @see org.openiaml.model.model.operations.impl.OperationsPackageImpl#getDecisionNode()
 	 * @generated
 	 */
-	int SPLIT_NODE = 3;
-
-	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPLIT_NODE__IN_EDGES = ModelPackage.SINGLE_OPERATION__IN_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPLIT_NODE__NAME = ModelPackage.SINGLE_OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPLIT_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
+	int DECISION_NODE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -250,26 +160,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SPLIT_NODE__OUT_EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Split Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPLIT_NODE_FEATURE_COUNT = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.JoinNodeImpl <em>Join Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.operations.impl.JoinNodeImpl
-	 * @see org.openiaml.model.model.operations.impl.OperationsPackageImpl#getJoinNode()
-	 * @generated
-	 */
-	int JOIN_NODE = 4;
+	int DECISION_NODE__OUT_EDGES = ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -278,7 +169,44 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JOIN_NODE__IN_EDGES = ModelPackage.SINGLE_OPERATION__IN_EDGES;
+	int DECISION_NODE__IN_EDGES = ModelPackage.WIRE_EDGES_SOURCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>In Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE__IN_FLOWS = ModelPackage.WIRE_EDGES_SOURCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Decision Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE_FEATURE_COUNT = ModelPackage.WIRE_EDGES_SOURCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.DecisionOperationImpl <em>Decision Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.operations.impl.DecisionOperationImpl
+	 * @see org.openiaml.model.model.operations.impl.OperationsPackageImpl#getDecisionOperation()
+	 * @generated
+	 */
+	int DECISION_OPERATION = 4;
+
+	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__IN_EDGES = ModelPackage.CHAINED_OPERATION__IN_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -287,7 +215,34 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JOIN_NODE__NAME = ModelPackage.SINGLE_OPERATION__NAME;
+	int DECISION_OPERATION__NAME = ModelPackage.CHAINED_OPERATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>In Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__IN_FLOWS = ModelPackage.CHAINED_OPERATION__IN_FLOWS;
+
+	/**
+	 * The feature id for the '<em><b>In Executions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__IN_EXECUTIONS = ModelPackage.CHAINED_OPERATION__IN_EXECUTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Out Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__OUT_FLOWS = ModelPackage.CHAINED_OPERATION__OUT_FLOWS;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -296,26 +251,25 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JOIN_NODE__PARAMETERS = ModelPackage.SINGLE_OPERATION__PARAMETERS;
+	int DECISION_OPERATION__PARAMETERS = ModelPackage.CHAINED_OPERATION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Executions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JOIN_NODE__OUT_EDGES = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 0;
+	int DECISION_OPERATION__OUT_EXECUTIONS = ModelPackage.CHAINED_OPERATION__OUT_EXECUTIONS;
 
 	/**
-	 * The number of structural features of the '<em>Join Node</em>' class.
+	 * The number of structural features of the '<em>Decision Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JOIN_NODE_FEATURE_COUNT = ModelPackage.SINGLE_OPERATION_FEATURE_COUNT + 1;
-
+	int DECISION_OPERATION_FEATURE_COUNT = ModelPackage.CHAINED_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.operations.StartNode <em>Start Node</em>}'.
@@ -348,24 +302,24 @@ public interface OperationsPackage extends EPackage {
 	EClass getFinishNode();
 
 	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.operations.SplitNode <em>Split Node</em>}'.
+	 * Returns the meta object for class '{@link org.openiaml.model.model.operations.DecisionNode <em>Decision Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Split Node</em>'.
-	 * @see org.openiaml.model.model.operations.SplitNode
+	 * @return the meta object for class '<em>Decision Node</em>'.
+	 * @see org.openiaml.model.model.operations.DecisionNode
 	 * @generated
 	 */
-	EClass getSplitNode();
+	EClass getDecisionNode();
 
 	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.operations.JoinNode <em>Join Node</em>}'.
+	 * Returns the meta object for class '{@link org.openiaml.model.model.operations.DecisionOperation <em>Decision Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Join Node</em>'.
-	 * @see org.openiaml.model.model.operations.JoinNode
+	 * @return the meta object for class '<em>Decision Operation</em>'.
+	 * @see org.openiaml.model.model.operations.DecisionOperation
 	 * @generated
 	 */
-	EClass getJoinNode();
+	EClass getDecisionOperation();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -420,24 +374,24 @@ public interface OperationsPackage extends EPackage {
 		EClass FINISH_NODE = eINSTANCE.getFinishNode();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.operations.impl.SplitNodeImpl <em>Split Node</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl <em>Decision Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.operations.impl.SplitNodeImpl
-		 * @see org.openiaml.model.model.operations.impl.OperationsPackageImpl#getSplitNode()
+		 * @see org.openiaml.model.model.operations.impl.DecisionNodeImpl
+		 * @see org.openiaml.model.model.operations.impl.OperationsPackageImpl#getDecisionNode()
 		 * @generated
 		 */
-		EClass SPLIT_NODE = eINSTANCE.getSplitNode();
+		EClass DECISION_NODE = eINSTANCE.getDecisionNode();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.operations.impl.JoinNodeImpl <em>Join Node</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.operations.impl.DecisionOperationImpl <em>Decision Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.operations.impl.JoinNodeImpl
-		 * @see org.openiaml.model.model.operations.impl.OperationsPackageImpl#getJoinNode()
+		 * @see org.openiaml.model.model.operations.impl.DecisionOperationImpl
+		 * @see org.openiaml.model.model.operations.impl.OperationsPackageImpl#getDecisionOperation()
 		 * @generated
 		 */
-		EClass JOIN_NODE = eINSTANCE.getJoinNode();
+		EClass DECISION_OPERATION = eINSTANCE.getDecisionOperation();
 
 	}
 

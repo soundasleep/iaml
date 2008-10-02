@@ -7,14 +7,9 @@
 package org.openiaml.model.model.visual.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.openiaml.model.model.impl.VisibleThingImpl;
-import org.openiaml.model.model.impl.ApplicationElementContainerImpl;
-
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
 

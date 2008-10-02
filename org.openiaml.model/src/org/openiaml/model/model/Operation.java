@@ -24,10 +24,10 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface Operation extends WireEdgeDestination, NamedElement {
+public interface Operation extends WireEdgeDestination, NamedElement, DataFlowEdgeDestination, ExecutionEdgeDestination, ActivityNode, DataFlowEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.OperationParameter}.
+	 * The list contents are of type {@link org.openiaml.model.model.Parameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
@@ -39,6 +39,6 @@ public interface Operation extends WireEdgeDestination, NamedElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<OperationParameter> getParameters();
+	EList<Parameter> getParameters();
 
 } // Operation

@@ -8,25 +8,25 @@ package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.openiaml.model.model.wires.PropertyToParameterWire;
+import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Property To Parameter Wire</b></em>'.
+ * An implementation of the model object '<em><b>Parameter Wire</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class PropertyToParameterWireImpl extends SingleWireImpl implements PropertyToParameterWire {
+public class ParameterWireImpl extends SingleWireImpl implements ParameterWire {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PropertyToParameterWireImpl() {
+	protected ParameterWireImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class PropertyToParameterWireImpl extends SingleWireImpl implements Prope
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return WiresPackage.Literals.PROPERTY_TO_PARAMETER_WIRE;
+		return WiresPackage.Literals.PARAMETER_WIRE;
 	}
 
-} //PropertyToParameterWireImpl
+} //ParameterWireImpl

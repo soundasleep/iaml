@@ -4,11 +4,10 @@
  *
  * $Id$
  */
-package org.openiaml.model.model.impl;
+package org.openiaml.model.model.operations.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -16,53 +15,46 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.OperationParameter;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+
+import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.OperationsPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Operation Parameter</b></em>'.
+ * An implementation of the model object '<em><b>Decision Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.impl.OperationParameterImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.OperationParameterImpl#getInEdges <em>In Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.OperationParameterImpl#getOutEdges <em>Out Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl#getOutEdges <em>Out Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl#getInFlows <em>In Flows</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OperationParameterImpl extends EObjectImpl implements OperationParameter {
+public class DecisionNodeImpl extends EObjectImpl implements DecisionNode {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getOutEdges()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+	protected EList<WireEdge> outEdges;
 
 	/**
 	 * The cached value of the '{@link #getInEdges() <em>In Edges</em>}' reference list.
@@ -75,21 +67,21 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	protected EList<WireEdge> inEdges;
 
 	/**
-	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
+	 * The cached value of the '{@link #getInFlows() <em>In Flows</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOutEdges()
+	 * @see #getInFlows()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> outEdges;
+	protected EList<DataFlowEdge> inFlows;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OperationParameterImpl() {
+	protected DecisionNodeImpl() {
 		super();
 	}
 
@@ -100,40 +92,7 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.OPERATION_PARAMETER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.OPERATION_PARAMETER__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<WireEdge> getInEdges() {
-		if (inEdges == null) {
-			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.OPERATION_PARAMETER__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
-		}
-		return inEdges;
+		return OperationsPackage.Literals.DECISION_NODE;
 	}
 
 	/**
@@ -143,9 +102,33 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
-			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.OPERATION_PARAMETER__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
+			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, OperationsPackage.DECISION_NODE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
 		}
 		return outEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<WireEdge> getInEdges() {
+		if (inEdges == null) {
+			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, OperationsPackage.DECISION_NODE__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
+		}
+		return inEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DataFlowEdge> getInFlows() {
+		if (inFlows == null) {
+			inFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, OperationsPackage.DECISION_NODE__IN_FLOWS, ModelPackage.DATA_FLOW_EDGE__TO);
+		}
+		return inFlows;
 	}
 
 	/**
@@ -157,10 +140,12 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
-			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+			case OperationsPackage.DECISION_NODE__OUT_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
+			case OperationsPackage.DECISION_NODE__IN_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case OperationsPackage.DECISION_NODE__IN_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInFlows()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -173,10 +158,12 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
-				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+			case OperationsPackage.DECISION_NODE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
+			case OperationsPackage.DECISION_NODE__IN_EDGES:
+				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case OperationsPackage.DECISION_NODE__IN_FLOWS:
+				return ((InternalEList<?>)getInFlows()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -189,12 +176,12 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.OPERATION_PARAMETER__NAME:
-				return getName();
-			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
-				return getInEdges();
-			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+			case OperationsPackage.DECISION_NODE__OUT_EDGES:
 				return getOutEdges();
+			case OperationsPackage.DECISION_NODE__IN_EDGES:
+				return getInEdges();
+			case OperationsPackage.DECISION_NODE__IN_FLOWS:
+				return getInFlows();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -208,16 +195,17 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.OPERATION_PARAMETER__NAME:
-				setName((String)newValue);
+			case OperationsPackage.DECISION_NODE__OUT_EDGES:
+				getOutEdges().clear();
+				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
-			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
+			case OperationsPackage.DECISION_NODE__IN_EDGES:
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
-			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
-				getOutEdges().clear();
-				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case OperationsPackage.DECISION_NODE__IN_FLOWS:
+				getInFlows().clear();
+				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -231,14 +219,14 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.OPERATION_PARAMETER__NAME:
-				setName(NAME_EDEFAULT);
+			case OperationsPackage.DECISION_NODE__OUT_EDGES:
+				getOutEdges().clear();
 				return;
-			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
+			case OperationsPackage.DECISION_NODE__IN_EDGES:
 				getInEdges().clear();
 				return;
-			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
-				getOutEdges().clear();
+			case OperationsPackage.DECISION_NODE__IN_FLOWS:
+				getInFlows().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -252,12 +240,12 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.OPERATION_PARAMETER__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
-				return inEdges != null && !inEdges.isEmpty();
-			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+			case OperationsPackage.DECISION_NODE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
+			case OperationsPackage.DECISION_NODE__IN_EDGES:
+				return inEdges != null && !inEdges.isEmpty();
+			case OperationsPackage.DECISION_NODE__IN_FLOWS:
+				return inFlows != null && !inFlows.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -271,13 +259,18 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.OPERATION_PARAMETER__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+				case OperationsPackage.DECISION_NODE__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == DataFlowEdgeDestination.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.OPERATION_PARAMETER__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+				case OperationsPackage.DECISION_NODE__IN_FLOWS: return ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActivityNode.class) {
+			switch (derivedFeatureID) {
 				default: return -1;
 			}
 		}
@@ -293,33 +286,22 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ModelPackage.OPERATION_PARAMETER__IN_EDGES;
+				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return OperationsPackage.DECISION_NODE__IN_EDGES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == DataFlowEdgeDestination.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.OPERATION_PARAMETER__OUT_EDGES;
+				case ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS: return OperationsPackage.DECISION_NODE__IN_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActivityNode.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
-
-} //OperationParameterImpl
+} //DecisionNodeImpl

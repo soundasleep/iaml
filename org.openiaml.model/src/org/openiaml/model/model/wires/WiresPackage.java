@@ -298,14 +298,14 @@ public interface WiresPackage extends EPackage {
 	int SYNC_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.RunWireImpl <em>Run Wire</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl <em>Run Instance Wire</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.wires.impl.RunWireImpl
-	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getRunWire()
+	 * @see org.openiaml.model.model.wires.impl.RunInstanceWireImpl
+	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getRunInstanceWire()
 	 * @generated
 	 */
-	int RUN_WIRE = 3;
+	int RUN_INSTANCE_WIRE = 3;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -314,7 +314,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__FROM = COMPOSITE_WIRE__FROM;
+	int RUN_INSTANCE_WIRE__FROM = COMPOSITE_WIRE__FROM;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -323,7 +323,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__TO = COMPOSITE_WIRE__TO;
+	int RUN_INSTANCE_WIRE__TO = COMPOSITE_WIRE__TO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -332,7 +332,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__NAME = COMPOSITE_WIRE__NAME;
+	int RUN_INSTANCE_WIRE__NAME = COMPOSITE_WIRE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -341,7 +341,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__CHILDREN = COMPOSITE_WIRE__CHILDREN;
+	int RUN_INSTANCE_WIRE__CHILDREN = COMPOSITE_WIRE__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -350,7 +350,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__PROPERTIES = COMPOSITE_WIRE__PROPERTIES;
+	int RUN_INSTANCE_WIRE__PROPERTIES = COMPOSITE_WIRE__PROPERTIES;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -359,7 +359,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__OPERATIONS = COMPOSITE_WIRE__OPERATIONS;
+	int RUN_INSTANCE_WIRE__OPERATIONS = COMPOSITE_WIRE__OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
@@ -368,7 +368,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__EVENT_TRIGGERS = COMPOSITE_WIRE__EVENT_TRIGGERS;
+	int RUN_INSTANCE_WIRE__EVENT_TRIGGERS = COMPOSITE_WIRE__EVENT_TRIGGERS;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -377,7 +377,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__PARAMETERS = COMPOSITE_WIRE__PARAMETERS;
+	int RUN_INSTANCE_WIRE__PARAMETERS = COMPOSITE_WIRE__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Wire Wires</b></em>' containment reference list.
@@ -386,7 +386,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__WIRE_WIRES = COMPOSITE_WIRE__WIRE_WIRES;
+	int RUN_INSTANCE_WIRE__WIRE_WIRES = COMPOSITE_WIRE__WIRE_WIRES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -395,26 +395,26 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE__IN_EDGES = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+	int RUN_INSTANCE_WIRE__IN_EDGES = COMPOSITE_WIRE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Run Wire</em>' class.
+	 * The number of structural features of the '<em>Run Instance Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 1;
+	int RUN_INSTANCE_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ExecutionWireImpl <em>Execution Wire</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ParameterWireImpl <em>Parameter Wire</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.wires.impl.ExecutionWireImpl
-	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExecutionWire()
+	 * @see org.openiaml.model.model.wires.impl.ParameterWireImpl
+	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getParameterWire()
 	 * @generated
 	 */
-	int EXECUTION_WIRE = 4;
+	int PARAMETER_WIRE = 4;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -423,7 +423,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_WIRE__FROM = SINGLE_WIRE__FROM;
+	int PARAMETER_WIRE__FROM = SINGLE_WIRE__FROM;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -432,127 +432,16 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_WIRE__TO = SINGLE_WIRE__TO;
+	int PARAMETER_WIRE__TO = SINGLE_WIRE__TO;
 
 	/**
-	 * The number of structural features of the '<em>Execution Wire</em>' class.
+	 * The number of structural features of the '<em>Parameter Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ProvidedParameterWireImpl <em>Provided Parameter Wire</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.wires.impl.ProvidedParameterWireImpl
-	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getProvidedParameterWire()
-	 * @generated
-	 */
-	int PROVIDED_PARAMETER_WIRE = 5;
-
-	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROVIDED_PARAMETER_WIRE__FROM = SINGLE_WIRE__FROM;
-
-	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROVIDED_PARAMETER_WIRE__TO = SINGLE_WIRE__TO;
-
-	/**
-	 * The number of structural features of the '<em>Provided Parameter Wire</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROVIDED_PARAMETER_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.PropertyToParameterWireImpl <em>Property To Parameter Wire</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.wires.impl.PropertyToParameterWireImpl
-	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getPropertyToParameterWire()
-	 * @generated
-	 */
-	int PROPERTY_TO_PARAMETER_WIRE = 6;
-
-	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_TO_PARAMETER_WIRE__FROM = SINGLE_WIRE__FROM;
-
-	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_TO_PARAMETER_WIRE__TO = SINGLE_WIRE__TO;
-
-	/**
-	 * The number of structural features of the '<em>Property To Parameter Wire</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_TO_PARAMETER_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.PropertyToExecutionWireImpl <em>Property To Execution Wire</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.wires.impl.PropertyToExecutionWireImpl
-	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getPropertyToExecutionWire()
-	 * @generated
-	 */
-	int PROPERTY_TO_EXECUTION_WIRE = 7;
-
-	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_TO_EXECUTION_WIRE__FROM = SINGLE_WIRE__FROM;
-
-	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_TO_EXECUTION_WIRE__TO = SINGLE_WIRE__TO;
-
-	/**
-	 * The number of structural features of the '<em>Property To Execution Wire</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_TO_EXECUTION_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
+	int PARAMETER_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.SingleWire <em>Single Wire</em>}'.
@@ -651,54 +540,24 @@ public interface WiresPackage extends EPackage {
 	EClass getSyncWire();
 
 	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.RunWire <em>Run Wire</em>}'.
+	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.RunInstanceWire <em>Run Instance Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Run Wire</em>'.
-	 * @see org.openiaml.model.model.wires.RunWire
+	 * @return the meta object for class '<em>Run Instance Wire</em>'.
+	 * @see org.openiaml.model.model.wires.RunInstanceWire
 	 * @generated
 	 */
-	EClass getRunWire();
+	EClass getRunInstanceWire();
 
 	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ExecutionWire <em>Execution Wire</em>}'.
+	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ParameterWire <em>Parameter Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Execution Wire</em>'.
-	 * @see org.openiaml.model.model.wires.ExecutionWire
+	 * @return the meta object for class '<em>Parameter Wire</em>'.
+	 * @see org.openiaml.model.model.wires.ParameterWire
 	 * @generated
 	 */
-	EClass getExecutionWire();
-
-	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ProvidedParameterWire <em>Provided Parameter Wire</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Provided Parameter Wire</em>'.
-	 * @see org.openiaml.model.model.wires.ProvidedParameterWire
-	 * @generated
-	 */
-	EClass getProvidedParameterWire();
-
-	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.PropertyToParameterWire <em>Property To Parameter Wire</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Property To Parameter Wire</em>'.
-	 * @see org.openiaml.model.model.wires.PropertyToParameterWire
-	 * @generated
-	 */
-	EClass getPropertyToParameterWire();
-
-	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.PropertyToExecutionWire <em>Property To Execution Wire</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Property To Execution Wire</em>'.
-	 * @see org.openiaml.model.model.wires.PropertyToExecutionWire
-	 * @generated
-	 */
-	EClass getPropertyToExecutionWire();
+	EClass getParameterWire();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -801,54 +660,24 @@ public interface WiresPackage extends EPackage {
 		EClass SYNC_WIRE = eINSTANCE.getSyncWire();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.RunWireImpl <em>Run Wire</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl <em>Run Instance Wire</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.wires.impl.RunWireImpl
-		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getRunWire()
+		 * @see org.openiaml.model.model.wires.impl.RunInstanceWireImpl
+		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getRunInstanceWire()
 		 * @generated
 		 */
-		EClass RUN_WIRE = eINSTANCE.getRunWire();
+		EClass RUN_INSTANCE_WIRE = eINSTANCE.getRunInstanceWire();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.ExecutionWireImpl <em>Execution Wire</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.ParameterWireImpl <em>Parameter Wire</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.wires.impl.ExecutionWireImpl
-		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExecutionWire()
+		 * @see org.openiaml.model.model.wires.impl.ParameterWireImpl
+		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getParameterWire()
 		 * @generated
 		 */
-		EClass EXECUTION_WIRE = eINSTANCE.getExecutionWire();
-
-		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.ProvidedParameterWireImpl <em>Provided Parameter Wire</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.wires.impl.ProvidedParameterWireImpl
-		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getProvidedParameterWire()
-		 * @generated
-		 */
-		EClass PROVIDED_PARAMETER_WIRE = eINSTANCE.getProvidedParameterWire();
-
-		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.PropertyToParameterWireImpl <em>Property To Parameter Wire</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.wires.impl.PropertyToParameterWireImpl
-		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getPropertyToParameterWire()
-		 * @generated
-		 */
-		EClass PROPERTY_TO_PARAMETER_WIRE = eINSTANCE.getPropertyToParameterWire();
-
-		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.PropertyToExecutionWireImpl <em>Property To Execution Wire</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.wires.impl.PropertyToExecutionWireImpl
-		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getPropertyToExecutionWire()
-		 * @generated
-		 */
-		EClass PROPERTY_TO_EXECUTION_WIRE = eINSTANCE.getPropertyToExecutionWire();
+		EClass PARAMETER_WIRE = eINSTANCE.getParameterWire();
 
 	}
 

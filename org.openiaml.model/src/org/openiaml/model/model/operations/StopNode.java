@@ -6,7 +6,8 @@
  */
 package org.openiaml.model.model.operations;
 
-import org.openiaml.model.model.SingleOperation;
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.WireEdgeDestination;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,5 +19,5 @@ import org.openiaml.model.model.SingleOperation;
  * @model
  * @generated
  */
-public interface StopNode extends SingleOperation {
+public interface StopNode extends WireEdgeDestination, ActivityNode {
 } // StopNode

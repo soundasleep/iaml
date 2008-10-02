@@ -10,20 +10,17 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
@@ -39,6 +36,8 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutFlows <em>Out Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInFlows <em>In Flows</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +83,26 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
+
+	/**
+	 * The cached value of the '{@link #getOutFlows() <em>Out Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataFlowEdge> outFlows;
+
+	/**
+	 * The cached value of the '{@link #getInFlows() <em>In Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataFlowEdge> inFlows;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,6 +173,30 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DataFlowEdge> getOutFlows() {
+		if (outFlows == null) {
+			outFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS, ModelPackage.DATA_FLOW_EDGE__FROM);
+		}
+		return outFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DataFlowEdge> getInFlows() {
+		if (inFlows == null) {
+			inFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS, ModelPackage.DATA_FLOW_EDGE__TO);
+		}
+		return inFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -162,6 +205,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutFlows()).basicAdd(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInFlows()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -178,6 +225,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS:
+				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
+				return ((InternalEList<?>)getInFlows()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -196,6 +247,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return getOutEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return getInEdges();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS:
+				return getOutFlows();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
+				return getInFlows();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -220,6 +275,14 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS:
+				getOutFlows().clear();
+				getOutFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
+				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
+				getInFlows().clear();
+				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -241,6 +304,12 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS:
+				getOutFlows().clear();
+				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
+				getInFlows().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -259,6 +328,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS:
+				return outFlows != null && !outFlows.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
+				return inFlows != null && !inFlows.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -282,6 +355,18 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				default: return -1;
 			}
 		}
+		if (baseClass == DataFlowEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS: return ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == DataFlowEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS: return ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -301,6 +386,18 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == DataFlowEdgesSource.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == DataFlowEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS;
 				default: return -1;
 			}
 		}

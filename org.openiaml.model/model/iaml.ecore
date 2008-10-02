@@ -34,21 +34,24 @@
         eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//ActivityNode #//DataFlowEdgesSource">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//OperationParameter" containment="true"/>
+        eType="#//Parameter" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationParameter" eSuperTypes="#//NamedElement #//WireEdgeDestination #//WireEdgesSource"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
   <eClassifiers xsi:type="ecore:EClass" name="SingleOperation" eSuperTypes="#//Operation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ChainedOperation" eSuperTypes="#//Operation #//WireEdgesSource"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//Operation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subOperations" upperBound="-1"
-        eType="#//Operation" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChainedOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//ChainedOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//ActivityNode" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="compositeOperationWires"
         upperBound="-1" eType="#//WireEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataEdges" upperBound="-1"
+        eType="#//DataFlowEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executionEdges" upperBound="-1"
+        eType="#//ExecutionEdge" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeChainedOperation" eSuperTypes="#//CompositeOperation #//ChainedOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EventAwareOperation" eSuperTypes="#//CompositeOperation #//ContainsEventTriggers"/>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsOperations" abstract="true"
       interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
@@ -68,7 +71,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="applicationElementWires"
         upperBound="-1" eType="#//WireEdge" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticValue" eSuperTypes="#//NamedElement #//WireEdgesSource #//DataFlowEdgeDestination">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ApplicationElementContainer">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
@@ -102,6 +108,42 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainStoreWires" upperBound="-1"
         eType="#//WireEdge" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DataFlowEdgesSource"
+        eOpposite="#//DataFlowEdgesSource/outFlows"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DataFlowEdgeDestination"
+        eOpposite="#//DataFlowEdgeDestination/inFlows"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdgeDestination" abstract="true"
+      interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inFlows" upperBound="-1"
+        eType="#//DataFlowEdge" eOpposite="#//DataFlowEdge/to"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdgesSource" abstract="true"
+      interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outFlows" upperBound="-1"
+        eType="#//DataFlowEdge" eOpposite="#//DataFlowEdge/from"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemporaryVariable" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ExecutionEdgesSource"
+        eOpposite="#//ExecutionEdgesSource/outExecutions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ExecutionEdgeDestination"
+        eOpposite="#//ExecutionEdgeDestination/inExecutions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdgeDestination" abstract="true"
+      interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inExecutions" upperBound="-1"
+        eType="#//ExecutionEdge" eOpposite="#//ExecutionEdge/to"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdgesSource" abstract="true"
+      interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outExecutions" upperBound="-1"
+        eType="#//ExecutionEdge" eOpposite="#//ExecutionEdge/from"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicApplicationElementSet" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -112,7 +154,7 @@
   <eSubpackages name="wires" nsURI="http://openiaml.org/model/wires" nsPrefix="iaml.wires">
     <eClassifiers xsi:type="ecore:EClass" name="SingleWire" eSuperTypes="#//WireEdge">
       <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="ideally this would be abstract; but we want to have a &quot;wire&quot; diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire..."/>
+        <details key="comment" value="why do we have SingleWire at all? (following a design pattern?)"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//WireEdge #//NamedElement">
@@ -132,26 +174,23 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
           eType="#//EventTrigger" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-          eType="#//OperationParameter" containment="true"/>
+          eType="#//Parameter" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="wireWires" upperBound="-1"
           eType="#//WireEdge" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//wires/CompositeWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="RunWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="RunInstanceWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ExecutionWire" eSuperTypes="#//wires/SingleWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ProvidedParameterWire" eSuperTypes="#//wires/SingleWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PropertyToParameterWire" eSuperTypes="#//wires/SingleWire"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PropertyToExecutionWire" eSuperTypes="#//wires/SingleWire"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterWire" eSuperTypes="#//wires/SingleWire"/>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
-    <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//SingleOperation #//WireEdgesSource"/>
-    <eClassifiers xsi:type="ecore:EClass" name="StopNode" eSuperTypes="#//SingleOperation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//SingleOperation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="SplitNode" eSuperTypes="#//SingleOperation #//WireEdgesSource"/>
-    <eClassifiers xsi:type="ecore:EClass" name="JoinNode" eSuperTypes="#//SingleOperation #//WireEdgesSource"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//WireEdgesSource #//ActivityNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StopNode" eSuperTypes="#//WireEdgeDestination #//ActivityNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//WireEdgeDestination #//ActivityNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//WireEdgesSource #//WireEdgeDestination #//DataFlowEdgeDestination #//ActivityNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//ChainedOperation #//DataFlowEdgeDestination"/>
   </eSubpackages>
 </ecore:EPackage>

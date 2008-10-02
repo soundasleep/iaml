@@ -7,13 +7,12 @@
 package org.openiaml.model.model.wires;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.OperationParameter;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.WireEdge;
 
 /**
@@ -104,7 +103,7 @@ public interface CompositeWire extends WireEdge, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.OperationParameter}.
+	 * The list contents are of type {@link org.openiaml.model.model.Parameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
@@ -116,7 +115,7 @@ public interface CompositeWire extends WireEdge, NamedElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<OperationParameter> getParameters();
+	EList<Parameter> getParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Wire Wires</b></em>' containment reference list.

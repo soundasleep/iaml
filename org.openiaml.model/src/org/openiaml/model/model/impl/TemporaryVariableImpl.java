@@ -10,33 +10,40 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.openiaml.model.model.EventTrigger;
+
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.TemporaryVariable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Event Trigger</b></em>'.
+ * An implementation of the model object '<em><b>Temporary Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.impl.EventTriggerImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.EventTriggerImpl#getOutEdges <em>Out Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.TemporaryVariableImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.TemporaryVariableImpl#getOutFlows <em>Out Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.TemporaryVariableImpl#getInFlows <em>In Flows</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
+public class TemporaryVariableImpl extends EObjectImpl implements TemporaryVariable {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -58,21 +65,31 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
+	 * The cached value of the '{@link #getOutFlows() <em>Out Flows</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOutEdges()
+	 * @see #getOutFlows()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> outEdges;
+	protected EList<DataFlowEdge> outFlows;
+
+	/**
+	 * The cached value of the '{@link #getInFlows() <em>In Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataFlowEdge> inFlows;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EventTriggerImpl() {
+	protected TemporaryVariableImpl() {
 		super();
 	}
 
@@ -83,7 +100,7 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.EVENT_TRIGGER;
+		return ModelPackage.Literals.TEMPORARY_VARIABLE;
 	}
 
 	/**
@@ -104,7 +121,7 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.EVENT_TRIGGER__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEMPORARY_VARIABLE__NAME, oldName, name));
 	}
 
 	/**
@@ -112,11 +129,23 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getOutEdges() {
-		if (outEdges == null) {
-			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.EVENT_TRIGGER__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
+	public EList<DataFlowEdge> getOutFlows() {
+		if (outFlows == null) {
+			outFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS, ModelPackage.DATA_FLOW_EDGE__FROM);
 		}
-		return outEdges;
+		return outFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DataFlowEdge> getInFlows() {
+		if (inFlows == null) {
+			inFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS, ModelPackage.DATA_FLOW_EDGE__TO);
+		}
+		return inFlows;
 	}
 
 	/**
@@ -128,8 +157,10 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutFlows()).basicAdd(otherEnd, msgs);
+			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInFlows()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -142,8 +173,10 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
-				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS:
+				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
+			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
+				return ((InternalEList<?>)getInFlows()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -156,10 +189,12 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.EVENT_TRIGGER__NAME:
+			case ModelPackage.TEMPORARY_VARIABLE__NAME:
 				return getName();
-			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
-				return getOutEdges();
+			case ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS:
+				return getOutFlows();
+			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
+				return getInFlows();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -173,12 +208,16 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.EVENT_TRIGGER__NAME:
+			case ModelPackage.TEMPORARY_VARIABLE__NAME:
 				setName((String)newValue);
 				return;
-			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
-				getOutEdges().clear();
-				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS:
+				getOutFlows().clear();
+				getOutFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
+				return;
+			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
+				getInFlows().clear();
+				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -192,11 +231,14 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.EVENT_TRIGGER__NAME:
+			case ModelPackage.TEMPORARY_VARIABLE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
-				getOutEdges().clear();
+			case ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS:
+				getOutFlows().clear();
+				return;
+			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
+				getInFlows().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -210,10 +252,12 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.EVENT_TRIGGER__NAME:
+			case ModelPackage.TEMPORARY_VARIABLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
-				return outEdges != null && !outEdges.isEmpty();
+			case ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS:
+				return outFlows != null && !outFlows.isEmpty();
+			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
+				return inFlows != null && !inFlows.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -225,9 +269,15 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == DataFlowEdgesSource.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.EVENT_TRIGGER__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+				case ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS: return ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == DataFlowEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS: return ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS;
 				default: return -1;
 			}
 		}
@@ -241,9 +291,15 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == DataFlowEdgesSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.EVENT_TRIGGER__OUT_EDGES;
+				case ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS: return ModelPackage.TEMPORARY_VARIABLE__OUT_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == DataFlowEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS: return ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS;
 				default: return -1;
 			}
 		}
@@ -266,4 +322,4 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 		return result.toString();
 	}
 
-} //EventTriggerImpl
+} //TemporaryVariableImpl

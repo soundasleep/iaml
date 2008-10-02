@@ -53,22 +53,22 @@ public interface OperationsFactory extends EFactory {
 	FinishNode createFinishNode();
 
 	/**
-	 * Returns a new object of class '<em>Split Node</em>'.
+	 * Returns a new object of class '<em>Decision Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Split Node</em>'.
+	 * @return a new object of class '<em>Decision Node</em>'.
 	 * @generated
 	 */
-	SplitNode createSplitNode();
+	DecisionNode createDecisionNode();
 
 	/**
-	 * Returns a new object of class '<em>Join Node</em>'.
+	 * Returns a new object of class '<em>Decision Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Join Node</em>'.
+	 * @return a new object of class '<em>Decision Operation</em>'.
 	 * @generated
 	 */
-	JoinNode createJoinNode();
+	DecisionOperation createDecisionOperation();
 
 	/**
 	 * Returns the package supported by this factory.

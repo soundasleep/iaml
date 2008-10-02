@@ -17,11 +17,8 @@ import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
 import org.openiaml.model.model.wires.CompositeWire;
-import org.openiaml.model.model.wires.ExecutionWire;
-import org.openiaml.model.model.wires.PropertyToExecutionWire;
-import org.openiaml.model.model.wires.PropertyToParameterWire;
-import org.openiaml.model.model.wires.ProvidedParameterWire;
-import org.openiaml.model.model.wires.RunWire;
+import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresFactory;
@@ -60,35 +57,14 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass runWireEClass = null;
+	private EClass runInstanceWireEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass executionWireEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass providedParameterWireEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass propertyToParameterWireEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass propertyToExecutionWireEClass = null;
+	private EClass parameterWireEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -255,8 +231,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRunWire() {
-		return runWireEClass;
+	public EClass getRunInstanceWire() {
+		return runInstanceWireEClass;
 	}
 
 	/**
@@ -264,35 +240,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getExecutionWire() {
-		return executionWireEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getProvidedParameterWire() {
-		return providedParameterWireEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPropertyToParameterWire() {
-		return propertyToParameterWireEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPropertyToExecutionWire() {
-		return propertyToExecutionWireEClass;
+	public EClass getParameterWire() {
+		return parameterWireEClass;
 	}
 
 	/**
@@ -335,15 +284,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		syncWireEClass = createEClass(SYNC_WIRE);
 
-		runWireEClass = createEClass(RUN_WIRE);
+		runInstanceWireEClass = createEClass(RUN_INSTANCE_WIRE);
 
-		executionWireEClass = createEClass(EXECUTION_WIRE);
-
-		providedParameterWireEClass = createEClass(PROVIDED_PARAMETER_WIRE);
-
-		propertyToParameterWireEClass = createEClass(PROPERTY_TO_PARAMETER_WIRE);
-
-		propertyToExecutionWireEClass = createEClass(PROPERTY_TO_EXECUTION_WIRE);
+		parameterWireEClass = createEClass(PARAMETER_WIRE);
 	}
 
 	/**
@@ -381,12 +324,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getWireEdge());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
-		runWireEClass.getESuperTypes().add(this.getCompositeWire());
-		runWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
-		executionWireEClass.getESuperTypes().add(this.getSingleWire());
-		providedParameterWireEClass.getESuperTypes().add(this.getSingleWire());
-		propertyToParameterWireEClass.getESuperTypes().add(this.getSingleWire());
-		propertyToExecutionWireEClass.getESuperTypes().add(this.getSingleWire());
+		runInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
+		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		parameterWireEClass.getESuperTypes().add(this.getSingleWire());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(singleWireEClass, SingleWire.class, "SingleWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -396,20 +336,14 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEReference(getCompositeWire_Properties(), theModelPackage.getApplicationElementProperty(), null, "properties", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_Operations(), theModelPackage.getOperation(), null, "operations", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_EventTriggers(), theModelPackage.getEventTrigger(), null, "eventTriggers", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeWire_Parameters(), theModelPackage.getOperationParameter(), null, "parameters", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeWire_Parameters(), theModelPackage.getParameter(), null, "parameters", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_WireWires(), theModelPackage.getWireEdge(), null, "wireWires", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(syncWireEClass, SyncWire.class, "SyncWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(runWireEClass, RunWire.class, "RunWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(runInstanceWireEClass, RunInstanceWire.class, "RunInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(executionWireEClass, ExecutionWire.class, "ExecutionWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(providedParameterWireEClass, ProvidedParameterWire.class, "ProvidedParameterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(propertyToParameterWireEClass, PropertyToParameterWire.class, "PropertyToParameterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(propertyToExecutionWireEClass, PropertyToExecutionWire.class, "PropertyToExecutionWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(parameterWireEClass, ParameterWire.class, "ParameterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -428,7 +362,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (singleWireEClass, 
 		   source, 
 		   new String[] {
-			 "comment", "ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire..."
+			 "comment", "why do we have SingleWire at all? (following a design pattern?)"
 		   });		
 		addAnnotation
 		  (compositeWireEClass, 
@@ -441,7 +375,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "comment4", "a wire shouldn\'t have parameters; but the operations contained within need them rendered."
 		   });		
 		addAnnotation
-		  (runWireEClass, 
+		  (runInstanceWireEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "RunWire: a composite wire that contains ExecutionWires/etc"

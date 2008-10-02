@@ -178,7 +178,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
+        href="iaml.ecore#//ApplicationElementContainer/applicationElementWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.5"/>
@@ -205,7 +205,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
+        href="iaml.ecore#//ApplicationElementContainer/applicationElementWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.6"/>
@@ -224,7 +224,7 @@
     <domainSpecialization
         body="self.oclIsTypeOf( ParameterWire )"/>
     <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/wireWires"/>
+        href="iaml.ecore#//ApplicationElementContainer/applicationElementWires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.0/@tools.4"/>

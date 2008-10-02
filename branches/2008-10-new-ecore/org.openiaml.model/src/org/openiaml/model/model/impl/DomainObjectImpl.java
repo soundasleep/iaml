@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.ModelPackage;
@@ -30,14 +31,24 @@ import org.openiaml.model.model.WireEdge;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getAttributes <em>Attributes</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getDomainObjectWires <em>Domain Object Wires</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class DomainObjectImpl extends ApplicationElementImpl implements DomainObject {
+	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
+
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -47,16 +58,6 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * @ordered
 	 */
 	protected EList<DomainAttribute> attributes;
-
-	/**
-	 * The cached value of the '{@link #getDomainObjectWires() <em>Domain Object Wires</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainObjectWires()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<WireEdge> domainObjectWires;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,6 +83,18 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getWires() {
+		if (wires == null) {
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.DOMAIN_OBJECT__WIRES);
+		}
+		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<DomainAttribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<DomainAttribute>(DomainAttribute.class, this, ModelPackage.DOMAIN_OBJECT__ATTRIBUTES);
@@ -94,25 +107,13 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getDomainObjectWires() {
-		if (domainObjectWires == null) {
-			domainObjectWires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES);
-		}
-		return domainObjectWires;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModelPackage.DOMAIN_OBJECT__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
-			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
-				return ((InternalEList<?>)getDomainObjectWires()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -125,10 +126,10 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ModelPackage.DOMAIN_OBJECT__WIRES:
+				return getWires();
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return getAttributes();
-			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
-				return getDomainObjectWires();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -142,13 +143,13 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ModelPackage.DOMAIN_OBJECT__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				getAttributes().clear();
 				getAttributes().addAll((Collection<? extends DomainAttribute>)newValue);
-				return;
-			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
-				getDomainObjectWires().clear();
-				getDomainObjectWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -162,11 +163,11 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ModelPackage.DOMAIN_OBJECT__WIRES:
+				getWires().clear();
+				return;
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				getAttributes().clear();
-				return;
-			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
-				getDomainObjectWires().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -180,12 +181,44 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ModelPackage.DOMAIN_OBJECT__WIRES:
+				return wires != null && !wires.isEmpty();
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
-			case ModelPackage.DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES:
-				return domainObjectWires != null && !domainObjectWires.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ContainsWires.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DOMAIN_OBJECT__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ContainsWires.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.DOMAIN_OBJECT__WIRES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //DomainObjectImpl

@@ -27,11 +27,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
         eType="#//EventTrigger" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttribute" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domainObjectWires" upperBound="-1"
-        eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNode"/>
@@ -42,11 +40,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
   <eClassifiers xsi:type="ecore:EClass" name="SingleOperation" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ChainedOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//ChainedOperation #//ContainsOperations">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//ChainedOperation #//ContainsOperations #//ContainsWires">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//ActivityNode" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeOperationWires"
-        upperBound="-1" eType="#//WireEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataEdges" upperBound="-1"
         eType="#//DataFlowEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="executionEdges" upperBound="-1"
@@ -65,11 +61,9 @@
         eType="#//ApplicationElementProperty" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementContainer" abstract="true"
-      eSuperTypes="#//ApplicationElement">
+      eSuperTypes="#//ApplicationElement #//ContainsWires">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//ApplicationElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="applicationElementWires"
-        upperBound="-1" eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
   <eClassifiers xsi:type="ecore:EClass" name="StaticValue" eSuperTypes="#//NamedElement #//WireEdgesSource #//DataFlowEdgeDestination">
@@ -81,7 +75,7 @@
       <details key="editor" value="org.openiaml.model.diagram.visual"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="we cannot have InternetApplications inside of other ElementContainers, thus we don't define it as an ApplicationElement"/>
       <details key="comment2" value="but why can we have it as an ActivityEdgeSource? I don't think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA"/>
@@ -93,10 +87,8 @@
         eType="#//ApplicationElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainStores" upperBound="-1"
         eType="#//DomainStore" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="iaWires" upperBound="-1"
-        eType="#//WireEdge" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="stores database objects"/>
       <details key="editor" value="org.openiaml.model.diagram.domain_store"/>
@@ -105,8 +97,6 @@
         eType="#//DomainObject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domainStoreWires" upperBound="-1"
-        eType="#//WireEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdge">
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DataFlowEdgesSource"
@@ -144,6 +134,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="DynamicApplicationElementSet" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainsWires" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wires" upperBound="-1"
+        eType="#//WireEdge" containment="true"/>
+  </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -157,7 +151,7 @@
         <details key="comment" value="why do we have SingleWire at all? (following a design pattern?)"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//WireEdge #//NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//WireEdge #//NamedElement #//ContainsWires">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="ideally this would be abstract; but we want to have a &quot;wire&quot; diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire..."/>
         <details key="comment2" value="easy visualisation: all composite wires are dashed"/>
@@ -175,8 +169,6 @@
           eType="#//EventTrigger" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//Parameter" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="wireWires" upperBound="-1"
-          eType="#//WireEdge" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//wires/CompositeWire"/>
     <eClassifiers xsi:type="ecore:EClass" name="RunInstanceWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">

@@ -125,6 +125,15 @@ public interface VisualPackage extends EPackage {
 	int PAGE__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,15 +141,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGE__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
-
-	/**
-	 * The feature id for the '<em><b>Application Element Wires</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__APPLICATION_ELEMENT_WIRES = ModelPackage.VISIBLE_THING__APPLICATION_ELEMENT_WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Url</b></em>' attribute.
@@ -225,6 +225,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -232,15 +241,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_FORM__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
-
-	/**
-	 * The feature id for the '<em><b>Application Element Wires</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INPUT_FORM__APPLICATION_ELEMENT_WIRES = ModelPackage.VISIBLE_THING__APPLICATION_ELEMENT_WIRES;
 
 	/**
 	 * The number of structural features of the '<em>Input Form</em>' class.
@@ -316,6 +316,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -323,15 +332,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
-
-	/**
-	 * The feature id for the '<em><b>Application Element Wires</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INPUT_TEXT_FIELD__APPLICATION_ELEMENT_WIRES = ModelPackage.VISIBLE_THING__APPLICATION_ELEMENT_WIRES;
 
 	/**
 	 * The number of structural features of the '<em>Input Text Field</em>' class.

@@ -14,6 +14,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
@@ -104,6 +105,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(page);
 				if (result == null) result = caseApplicationElementContainer(page);
 				if (result == null) result = caseApplicationElement(page);
+				if (result == null) result = caseContainsWires(page);
 				if (result == null) result = caseContainsOperations(page);
 				if (result == null) result = caseNamedElement(page);
 				if (result == null) result = caseContainsEventTriggers(page);
@@ -118,6 +120,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(inputForm);
 				if (result == null) result = caseApplicationElementContainer(inputForm);
 				if (result == null) result = caseApplicationElement(inputForm);
+				if (result == null) result = caseContainsWires(inputForm);
 				if (result == null) result = caseContainsOperations(inputForm);
 				if (result == null) result = caseNamedElement(inputForm);
 				if (result == null) result = caseContainsEventTriggers(inputForm);
@@ -132,6 +135,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(inputTextField);
 				if (result == null) result = caseApplicationElementContainer(inputTextField);
 				if (result == null) result = caseApplicationElement(inputTextField);
+				if (result == null) result = caseContainsWires(inputTextField);
 				if (result == null) result = caseContainsOperations(inputTextField);
 				if (result == null) result = caseNamedElement(inputTextField);
 				if (result == null) result = caseContainsEventTriggers(inputTextField);
@@ -276,6 +280,21 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseApplicationElement(ApplicationElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsWires(ContainsWires object) {
 		return null;
 	}
 

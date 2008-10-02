@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
@@ -107,6 +108,7 @@ public class WiresSwitch<T> {
 				T result = caseCompositeWire(compositeWire);
 				if (result == null) result = caseWireEdge(compositeWire);
 				if (result == null) result = caseNamedElement(compositeWire);
+				if (result == null) result = caseContainsWires(compositeWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -116,6 +118,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseCompositeWire(syncWire);
 				if (result == null) result = caseWireEdge(syncWire);
 				if (result == null) result = caseNamedElement(syncWire);
+				if (result == null) result = caseContainsWires(syncWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -126,6 +129,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseWireEdgeDestination(runInstanceWire);
 				if (result == null) result = caseWireEdge(runInstanceWire);
 				if (result == null) result = caseNamedElement(runInstanceWire);
+				if (result == null) result = caseContainsWires(runInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -243,6 +247,21 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsWires(ContainsWires object) {
 		return null;
 	}
 

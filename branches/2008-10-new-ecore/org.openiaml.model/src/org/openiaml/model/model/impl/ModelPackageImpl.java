@@ -19,6 +19,7 @@ import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -268,6 +269,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	private EClass dynamicApplicationElementSetEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass containsWiresEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -477,15 +485,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDomainObject_DomainObjectWires() {
-		return (EReference)domainObjectEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDomainAttribute() {
 		return domainAttributeEClass;
 	}
@@ -567,7 +566,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeOperation_CompositeOperationWires() {
+	public EReference getCompositeOperation_DataEdges() {
 		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -576,17 +575,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeOperation_DataEdges() {
-		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getCompositeOperation_ExecutionEdges() {
-		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(3);
+		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -641,15 +631,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getApplicationElementContainer_Children() {
 		return (EReference)applicationElementContainerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getApplicationElementContainer_ApplicationElementWires() {
-		return (EReference)applicationElementContainerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -729,15 +710,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInternetApplication_IaWires() {
-		return (EReference)internetApplicationEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDomainStore() {
 		return domainStoreEClass;
 	}
@@ -758,15 +730,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getDomainStore_Properties() {
 		return (EReference)domainStoreEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDomainStore_DomainStoreWires() {
-		return (EReference)domainStoreEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -927,6 +890,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getContainsWires() {
+		return containsWiresEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContainsWires_Wires() {
+		return (EReference)containsWiresEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -970,7 +951,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		domainObjectEClass = createEClass(DOMAIN_OBJECT);
 		createEReference(domainObjectEClass, DOMAIN_OBJECT__ATTRIBUTES);
-		createEReference(domainObjectEClass, DOMAIN_OBJECT__DOMAIN_OBJECT_WIRES);
 
 		domainAttributeEClass = createEClass(DOMAIN_ATTRIBUTE);
 
@@ -987,7 +967,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		compositeOperationEClass = createEClass(COMPOSITE_OPERATION);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__NODES);
-		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__DATA_EDGES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__EXECUTION_EDGES);
 
@@ -999,7 +978,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		applicationElementContainerEClass = createEClass(APPLICATION_ELEMENT_CONTAINER);
 		createEReference(applicationElementContainerEClass, APPLICATION_ELEMENT_CONTAINER__CHILDREN);
-		createEReference(applicationElementContainerEClass, APPLICATION_ELEMENT_CONTAINER__APPLICATION_ELEMENT_WIRES);
 
 		applicationElementPropertyEClass = createEClass(APPLICATION_ELEMENT_PROPERTY);
 
@@ -1012,12 +990,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__PROPERTIES);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__CHILDREN);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__DOMAIN_STORES);
-		createEReference(internetApplicationEClass, INTERNET_APPLICATION__IA_WIRES);
 
 		domainStoreEClass = createEClass(DOMAIN_STORE);
 		createEReference(domainStoreEClass, DOMAIN_STORE__CHILDREN);
 		createEReference(domainStoreEClass, DOMAIN_STORE__PROPERTIES);
-		createEReference(domainStoreEClass, DOMAIN_STORE__DOMAIN_STORE_WIRES);
 
 		dataFlowEdgeEClass = createEClass(DATA_FLOW_EDGE);
 		createEReference(dataFlowEdgeEClass, DATA_FLOW_EDGE__FROM);
@@ -1043,6 +1019,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		dynamicApplicationElementSetEClass = createEClass(DYNAMIC_APPLICATION_ELEMENT_SET);
 		createEAttribute(dynamicApplicationElementSetEClass, DYNAMIC_APPLICATION_ELEMENT_SET__QUERY);
+
+		containsWiresEClass = createEClass(CONTAINS_WIRES);
+		createEReference(containsWiresEClass, CONTAINS_WIRES__WIRES);
 	}
 
 	/**
@@ -1086,6 +1065,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		eventTriggerEClass.getESuperTypes().add(this.getNamedElement());
 		eventTriggerEClass.getESuperTypes().add(this.getWireEdgesSource());
 		domainObjectEClass.getESuperTypes().add(this.getApplicationElement());
+		domainObjectEClass.getESuperTypes().add(this.getContainsWires());
 		domainAttributeEClass.getESuperTypes().add(this.getApplicationElement());
 		operationEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		operationEClass.getESuperTypes().add(this.getNamedElement());
@@ -1101,12 +1081,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		chainedOperationEClass.getESuperTypes().add(this.getExecutionEdgesSource());
 		compositeOperationEClass.getESuperTypes().add(this.getChainedOperation());
 		compositeOperationEClass.getESuperTypes().add(this.getContainsOperations());
+		compositeOperationEClass.getESuperTypes().add(this.getContainsWires());
 		applicationElementEClass.getESuperTypes().add(this.getContainsOperations());
 		applicationElementEClass.getESuperTypes().add(this.getNamedElement());
 		applicationElementEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		applicationElementEClass.getESuperTypes().add(this.getWireEdgesSource());
 		applicationElementEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		applicationElementContainerEClass.getESuperTypes().add(this.getApplicationElement());
+		applicationElementContainerEClass.getESuperTypes().add(this.getContainsWires());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getNamedElement());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getWireEdgesSource());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getWireEdgeDestination());
@@ -1119,9 +1101,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		internetApplicationEClass.getESuperTypes().add(this.getContainsOperations());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		internetApplicationEClass.getESuperTypes().add(this.getNamedElement());
+		internetApplicationEClass.getESuperTypes().add(this.getContainsWires());
 		domainStoreEClass.getESuperTypes().add(this.getContainsOperations());
 		domainStoreEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		domainStoreEClass.getESuperTypes().add(this.getNamedElement());
+		domainStoreEClass.getESuperTypes().add(this.getContainsWires());
 		temporaryVariableEClass.getESuperTypes().add(this.getNamedElement());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
@@ -1152,7 +1136,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(domainObjectEClass, DomainObject.class, "DomainObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainObject_Attributes(), this.getDomainAttribute(), null, "attributes", null, 0, -1, DomainObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainObject_DomainObjectWires(), this.getWireEdge(), null, "domainObjectWires", null, 0, -1, DomainObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainAttributeEClass, DomainAttribute.class, "DomainAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1169,7 +1152,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(compositeOperationEClass, CompositeOperation.class, "CompositeOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeOperation_Nodes(), this.getActivityNode(), null, "nodes", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeOperation_CompositeOperationWires(), this.getWireEdge(), null, "compositeOperationWires", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_DataEdges(), this.getDataFlowEdge(), null, "dataEdges", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_ExecutionEdges(), this.getExecutionEdge(), null, "executionEdges", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1181,7 +1163,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(applicationElementContainerEClass, ApplicationElementContainer.class, "ApplicationElementContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getApplicationElementContainer_Children(), this.getApplicationElement(), null, "children", null, 0, -1, ApplicationElementContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getApplicationElementContainer_ApplicationElementWires(), this.getWireEdge(), null, "applicationElementWires", null, 0, -1, ApplicationElementContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(applicationElementPropertyEClass, ApplicationElementProperty.class, "ApplicationElementProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1194,12 +1175,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getInternetApplication_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInternetApplication_Children(), this.getApplicationElement(), null, "children", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInternetApplication_DomainStores(), this.getDomainStore(), null, "domainStores", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInternetApplication_IaWires(), this.getWireEdge(), null, "iaWires", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainStoreEClass, DomainStore.class, "DomainStore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainStore_Children(), this.getDomainObject(), null, "children", null, 0, -1, DomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainStore_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, DomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainStore_DomainStoreWires(), this.getWireEdge(), null, "domainStoreWires", null, 0, -1, DomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataFlowEdgeEClass, DataFlowEdge.class, "DataFlowEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataFlowEdge_From(), this.getDataFlowEdgesSource(), this.getDataFlowEdgesSource_OutFlows(), "from", null, 1, 1, DataFlowEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1225,6 +1204,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(dynamicApplicationElementSetEClass, DynamicApplicationElementSet.class, "DynamicApplicationElementSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDynamicApplicationElementSet_Query(), ecorePackage.getEString(), "query", null, 0, 1, DynamicApplicationElementSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(containsWiresEClass, ContainsWires.class, "ContainsWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getContainsWires_Wires(), this.getWireEdge(), null, "wires", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

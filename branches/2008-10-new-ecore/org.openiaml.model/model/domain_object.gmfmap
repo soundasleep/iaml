@@ -144,7 +144,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//DomainObject/domainObjectWires"/>
+        href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="domain_object.gmftool#//@palette/@tools.0/@tools.7"/>
@@ -170,7 +170,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//DomainObject/domainObjectWires"/>
+        href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="domain_object.gmftool#//@palette/@tools.0/@tools.6"/>

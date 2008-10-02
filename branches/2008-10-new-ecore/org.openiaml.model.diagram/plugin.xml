@@ -345,10 +345,10 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.EventAwareOperation_1004"
-               name="%metatype.name.EventAwareOperation_1004"
+               id="org.openiaml.model.diagram.ChainedOperation_1004"
+               name="%metatype.name.ChainedOperation_1004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="EventAwareOperation"
+               eclass="ChainedOperation"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.EventAwareOperationEditHelper">
             <param name="semanticHint" value="1004"/>
          </metamodelType>
@@ -405,10 +405,10 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.RunWire_3002"
-               name="%metatype.name.RunWire_3002"
+               id="org.openiaml.model.diagram.RunInstanceWire_3002"
+               name="%metatype.name.RunInstanceWire_3002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="RunWire"
+               eclass="RunInstanceWire"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.RunWireEditHelper">
             <param name="semanticHint" value="3002"/>
          </metamodelType>
@@ -429,13 +429,13 @@
          <elementType ref="org.openiaml.model.diagram.EventTrigger_1001"/>
          <elementType ref="org.openiaml.model.diagram.SingleOperation_1002"/>
          <elementType ref="org.openiaml.model.diagram.CompositeOperation_1003"/>
-         <elementType ref="org.openiaml.model.diagram.EventAwareOperation_1004"/>
+         <elementType ref="org.openiaml.model.diagram.ChainedOperation_1004"/>
          <elementType ref="org.openiaml.model.diagram.DomainObject_1005"/>
          <elementType ref="org.openiaml.model.diagram.Page_1006"/>
          <elementType ref="org.openiaml.model.diagram.ApplicationElementProperty_1007"/>
          <elementType ref="org.openiaml.model.diagram.DomainStore_1008"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_3001"/>
-         <elementType ref="org.openiaml.model.diagram.RunWire_3002"/>
+         <elementType ref="org.openiaml.model.diagram.RunInstanceWire_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

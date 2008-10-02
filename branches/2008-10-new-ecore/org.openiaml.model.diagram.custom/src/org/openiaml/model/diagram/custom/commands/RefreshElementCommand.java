@@ -47,13 +47,13 @@ public class RefreshElementCommand extends AbstractTransactionalCommand {
 		 * registering the view (and all other views) as changed.
 		 * 
 		 * not sure if we can get away with refresh without this.
-		 */
+		 *
 		parentView.setVisible(false);
 		parentView.setVisible(true);
 		// */
 		
 		// from generated DiagramUpdateCommand
-		/* */
+		/* *
 		List editPolicies = CanonicalEditPolicy
 			.getRegisteredEditPolicies(rootObject);
 		for (Iterator it = editPolicies.iterator(); it.hasNext(); ) {

@@ -33,13 +33,10 @@ public class CreateMissingOperationShortcutsCommand extends
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 
-		// OperationParameter
-		for (OperationParameter child : rootObject.getParameters()) {
-			connectionsIn.addAll( child.getInEdges() );
-		}
+		// OperationParameter has no in edges
 		
 		// Operation (incl ChainedOperation)
-		for (Operation child : rootObject.getSubOperations()) {
+		for (Operation child : rootObject.getOperations()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 		
@@ -52,13 +49,10 @@ public class CreateMissingOperationShortcutsCommand extends
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
-		// OperationParameter
-		for (OperationParameter child : rootObject.getParameters()) {
-			connectionsOut.addAll( child.getOutEdges() );
-		}
+		// OperationParameter has no out edges
 				
 		// Operation (incl ChainedOperation)
-		for (Operation child : rootObject.getSubOperations()) {
+		for (Operation child : rootObject.getOperations()) {
 			// not all Operations have outwards edges
 			if (child instanceof WireEdgesSource) {
 				connectionsOut.addAll( ((WireEdgesSource) child).getOutEdges() );

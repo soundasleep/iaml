@@ -16,9 +16,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 
 /**
@@ -28,6 +30,7 @@ import org.openiaml.model.model.WireEdge;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getCompositeOperationWires <em>Composite Operation Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDataEdges <em>Data Edges</em>}</li>
@@ -38,6 +41,16 @@ import org.openiaml.model.model.WireEdge;
  * @generated
  */
 public class CompositeOperationImpl extends ChainedOperationImpl implements CompositeOperation {
+	/**
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Operation> operations;
+
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -102,6 +115,18 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Operation> getOperations() {
+		if (operations == null) {
+			operations = new EObjectContainmentEList<Operation>(Operation.class, this, ModelPackage.COMPOSITE_OPERATION__OPERATIONS);
+		}
+		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ActivityNode> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentEList<ActivityNode>(ActivityNode.class, this, ModelPackage.COMPOSITE_OPERATION__NODES);
@@ -153,6 +178,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
+				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
@@ -173,6 +200,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
+				return getOperations();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return getNodes();
 			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
@@ -194,6 +223,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
+				getOperations().clear();
+				getOperations().addAll((Collection<? extends Operation>)newValue);
+				return;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				getNodes().clear();
 				getNodes().addAll((Collection<? extends ActivityNode>)newValue);
@@ -222,6 +255,9 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
+				getOperations().clear();
+				return;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				getNodes().clear();
 				return;
@@ -246,6 +282,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
+				return operations != null && !operations.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return nodes != null && !nodes.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
@@ -256,6 +294,38 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return executionEdges != null && !executionEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ContainsOperations.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.COMPOSITE_OPERATION__OPERATIONS: return ModelPackage.CONTAINS_OPERATIONS__OPERATIONS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ContainsOperations.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_OPERATIONS__OPERATIONS: return ModelPackage.COMPOSITE_OPERATION__OPERATIONS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //CompositeOperationImpl

@@ -345,70 +345,70 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.DomainObject_1004"
-               name="%metatype.name.DomainObject_1004"
+               id="org.openiaml.model.diagram.visual.ChainedOperation_1004"
+               name="%metatype.name.ChainedOperation_1004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="DomainObject"
+               eclass="ChainedOperation"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainObjectEditHelper">
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.DomainAttribute_1005"
-               name="%metatype.name.DomainAttribute_1005"
+               id="org.openiaml.model.diagram.visual.DomainObject_1005"
+               name="%metatype.name.DomainObject_1005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="DomainAttribute"
+               eclass="DomainObject"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainAttributeEditHelper">
             <param name="semanticHint" value="1005"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.ApplicationElementProperty_1006"
-               name="%metatype.name.ApplicationElementProperty_1006"
+               id="org.openiaml.model.diagram.visual.DomainAttribute_1006"
+               name="%metatype.name.DomainAttribute_1006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ApplicationElementProperty"
+               eclass="DomainAttribute"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ApplicationElementPropertyEditHelper">
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/visual">
+      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.Page_1007"
-               name="%metatype.name.Page_1007"
+               id="org.openiaml.model.diagram.visual.ApplicationElementProperty_1007"
+               name="%metatype.name.ApplicationElementProperty_1007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="Page"
+               eclass="ApplicationElementProperty"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.Page2EditHelper">
             <param name="semanticHint" value="1007"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.InputForm_1008"
-               name="%metatype.name.InputForm_1008"
+               id="org.openiaml.model.diagram.visual.Page_1008"
+               name="%metatype.name.Page_1008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="InputForm"
+               eclass="Page"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.InputFormEditHelper">
             <param name="semanticHint" value="1008"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.InputTextField_1009"
-               name="%metatype.name.InputTextField_1009"
+               id="org.openiaml.model.diagram.visual.InputForm_1009"
+               name="%metatype.name.InputForm_1009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="InputTextField"
+               eclass="InputForm"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.InputTextFieldEditHelper">
             <param name="semanticHint" value="1009"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.EventAwareOperation_1010"
-               name="%metatype.name.EventAwareOperation_1010"
+               id="org.openiaml.model.diagram.visual.InputTextField_1010"
+               name="%metatype.name.InputTextField_1010"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="EventAwareOperation"
+               eclass="InputTextField"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.EventAwareOperationEditHelper">
             <param name="semanticHint" value="1010"/>
          </metamodelType>
@@ -425,10 +425,10 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.RunWire_3002"
-               name="%metatype.name.RunWire_3002"
+               id="org.openiaml.model.diagram.visual.RunInstanceWire_3002"
+               name="%metatype.name.RunInstanceWire_3002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="RunWire"
+               eclass="RunInstanceWire"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.RunWireEditHelper">
             <param name="semanticHint" value="3002"/>
          </metamodelType>
@@ -449,15 +449,15 @@
          <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_1001"/>
          <elementType ref="org.openiaml.model.diagram.visual.SingleOperation_1002"/>
          <elementType ref="org.openiaml.model.diagram.visual.CompositeOperation_1003"/>
-         <elementType ref="org.openiaml.model.diagram.visual.DomainObject_1004"/>
-         <elementType ref="org.openiaml.model.diagram.visual.DomainAttribute_1005"/>
-         <elementType ref="org.openiaml.model.diagram.visual.ApplicationElementProperty_1006"/>
-         <elementType ref="org.openiaml.model.diagram.visual.Page_1007"/>
-         <elementType ref="org.openiaml.model.diagram.visual.InputForm_1008"/>
-         <elementType ref="org.openiaml.model.diagram.visual.InputTextField_1009"/>
-         <elementType ref="org.openiaml.model.diagram.visual.EventAwareOperation_1010"/>
+         <elementType ref="org.openiaml.model.diagram.visual.ChainedOperation_1004"/>
+         <elementType ref="org.openiaml.model.diagram.visual.DomainObject_1005"/>
+         <elementType ref="org.openiaml.model.diagram.visual.DomainAttribute_1006"/>
+         <elementType ref="org.openiaml.model.diagram.visual.ApplicationElementProperty_1007"/>
+         <elementType ref="org.openiaml.model.diagram.visual.Page_1008"/>
+         <elementType ref="org.openiaml.model.diagram.visual.InputForm_1009"/>
+         <elementType ref="org.openiaml.model.diagram.visual.InputTextField_1010"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
-         <elementType ref="org.openiaml.model.diagram.visual.RunWire_3002"/>
+         <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

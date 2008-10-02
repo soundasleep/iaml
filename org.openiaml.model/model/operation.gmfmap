@@ -7,7 +7,7 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//CompositeOperation/subOperations"/>
+        href="iaml.ecore#//ContainsOperations/operations"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//SingleOperation"/>
@@ -29,7 +29,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//CompositeOperation/subOperations"/>
+        href="iaml.ecore#//ContainsOperations/operations"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//CompositeOperation"/>
@@ -51,131 +51,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//CompositeOperation/subOperations"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//CompositeChainedOperation"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( CompositeChainedOperation )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#CompositeChainedOperationName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.4"/>
-      <diagramNode
-          href="iaml.gmfgraph#CompositeChainedOperation"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//CompositeOperation/subOperations"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//EventAwareOperation"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( EventAwareOperation )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EventAwareOperationName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.5"/>
-      <diagramNode
-          href="iaml.gmfgraph#EventAwareOperation"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Operation/parameters"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//OperationParameter"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#OperationParameterName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.0"/>
-      <diagramNode
-          href="iaml.gmfgraph#OperationParameter"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//CompositeOperation/subOperations"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//operations/StartNode"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( StartNode )"/>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StartNodeName"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.10"/>
-      <diagramNode
-          href="iaml.gmfgraph#StartNode"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//CompositeOperation/subOperations"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//operations/StopNode"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( StopNode )"/>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StopNodeName"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.11"/>
-      <diagramNode
-          href="iaml.gmfgraph#StopNode"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//CompositeOperation/subOperations"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//operations/FinishNode"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( FinishNode )"/>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#FinishNodeName"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.12"/>
-      <diagramNode
-          href="iaml.gmfgraph#FinishNode"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//CompositeOperation/subOperations"/>
+        href="iaml.ecore#//ContainsOperations/operations"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//ChainedOperation"/>
@@ -190,101 +66,109 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#ChainedOperation"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//Operation/parameters"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//Parameter"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ParameterName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.0"/>
+      <diagramNode
+          href="iaml.gmfgraph#Parameter"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/StartNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( StartNode )"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.5"/>
+      <diagramNode
+          href="iaml.gmfgraph#StartNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/StopNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( StopNode )"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
+      <diagramNode
+          href="iaml.gmfgraph#StopNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/FinishNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( FinishNode )"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#FinishNode"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/ExecutionWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( ExecutionWire )"/>
+        href="iaml.ecore#//DataFlowEdge"/>
     <containmentFeature
-        href="iaml.ecore#//CompositeOperation/compositeOperationWires"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
-    <diagramLink
-        href="iaml.gmfgraph#ExecutionWire"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="iaml.ecore#//wires/PropertyToExecutionWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( PropertyToExecutionWire )"/>
-    <labelMappings
-        readOnly="true">
-      <diagramLabel
-          href="iaml.gmfgraph#PropertyToExecutionWireName"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//CompositeOperation/compositeOperationWires"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.9"/>
-    <diagramLink
-        href="iaml.gmfgraph#PropertyToExecutionWire"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="iaml.ecore#//wires/PropertyToParameterWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( PropertyToParameterWire )"/>
-    <labelMappings
-        readOnly="true">
-      <diagramLabel
-          href="iaml.gmfgraph#PropertyToParameterWireName"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//CompositeOperation/compositeOperationWires"/>
+        href="iaml.ecore#//CompositeOperation/dataEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
     <diagramLink
-        href="iaml.gmfgraph#PropertyToParameterWire"/>
+        href="iaml.gmfgraph#DataFlowEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//DataFlowEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//DataFlowEdge/to"/>
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/ProvidedParameterWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( ProvidedParameterWire )"/>
-    <labelMappings
-        readOnly="true">
-      <diagramLabel
-          href="iaml.gmfgraph#ProvidedParameterWireName"/>
-    </labelMappings>
+        href="iaml.ecore#//ExecutionEdge"/>
     <containmentFeature
-        href="iaml.ecore#//CompositeOperation/compositeOperationWires"/>
+        href="iaml.ecore#//CompositeOperation/executionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
+        href="operation.gmftool#//@palette/@tools.0/@tools.9"/>
     <diagramLink
-        href="iaml.gmfgraph#ProvidedParameterWire"/>
+        href="iaml.gmfgraph#ExecutionEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//ExecutionEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//ExecutionEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

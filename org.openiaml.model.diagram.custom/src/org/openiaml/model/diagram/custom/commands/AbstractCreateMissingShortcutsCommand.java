@@ -26,7 +26,6 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.wires.SyncWire;
 
 /**
  * This class is now abstract so that we may have multiple similar commands

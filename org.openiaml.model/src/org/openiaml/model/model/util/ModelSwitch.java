@@ -237,6 +237,7 @@ public class ModelSwitch<T> {
 				CompositeOperation compositeOperation = (CompositeOperation)theEObject;
 				T result = caseCompositeOperation(compositeOperation);
 				if (result == null) result = caseChainedOperation(compositeOperation);
+				if (result == null) result = caseContainsOperations(compositeOperation);
 				if (result == null) result = caseOperation(compositeOperation);
 				if (result == null) result = caseExecutionEdgesSource(compositeOperation);
 				if (result == null) result = caseWireEdgeDestination(compositeOperation);

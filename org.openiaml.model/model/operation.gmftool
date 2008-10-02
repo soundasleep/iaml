@@ -10,8 +10,8 @@
         title="model">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="OperationParameter"
-          description="Create new OperationParameter">
+          title="Parameter"
+          description="Create new Parameter">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon
@@ -46,53 +46,8 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="CompositeChainedOperation"
-          description="Create new CompositeChainedOperation">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="EventAwareOperation"
-          description="Create new EventAwareOperation">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="ExecutionWire"
-          description="Create new ExecutionWire">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="ProvidedParameterWire"
-          description="Create new ProvidedParameterWire">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="PropertyToParameterWire"
-          description="Create new PropertyToParameterWire">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="PropertyToExecutionWire"
-          description="Create new PropertyToExecutionWire">
+          title="ChainedOperation"
+          description="Create new ChainedOperation">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon
@@ -120,6 +75,24 @@
           xsi:type="gmftool:CreationTool"
           title="FinishNode"
           description="Create new FinishNode">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DataFlowEdge"
+          description="Create new DataFlowEdge">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ExecutionEdge"
+          description="Create new ExecutionEdge">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon

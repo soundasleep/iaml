@@ -143,21 +143,6 @@
             class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
             checkPluginLoaded="false">
          <Priority name="Low"/>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.operation.edit.parts.WrapLabel5EditPart"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
-         </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.operation.edit.parts.WrapLabel6EditPart"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
-         </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.operation.edit.parts.WrapLabel7EditPart"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
-         </popupContribution>
       </contributionItemProvider>
    </extension>
 
@@ -346,112 +331,72 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.CompositeChainedOperation_1003"
-               name="%metatype.name.CompositeChainedOperation_1003"
+               id="org.openiaml.model.diagram.operation.ChainedOperation_1003"
+               name="%metatype.name.ChainedOperation_1003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="CompositeChainedOperation"
+               eclass="ChainedOperation"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.CompositeChainedOperationEditHelper">
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.EventAwareOperation_1004"
-               name="%metatype.name.EventAwareOperation_1004"
+               id="org.openiaml.model.diagram.operation.Parameter_1004"
+               name="%metatype.name.Parameter_1004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="EventAwareOperation"
+               eclass="Parameter"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.EventAwareOperationEditHelper">
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.OperationParameter_1005"
-               name="%metatype.name.OperationParameter_1005"
+               id="org.openiaml.model.diagram.operation.StartNode_1005"
+               name="%metatype.name.StartNode_1005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="OperationParameter"
+               eclass="StartNode"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.OperationParameterEditHelper">
             <param name="semanticHint" value="1005"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.StartNode_1006"
-               name="%metatype.name.StartNode_1006"
+               id="org.openiaml.model.diagram.operation.StopNode_1006"
+               name="%metatype.name.StopNode_1006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="StartNode"
+               eclass="StopNode"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.StartNodeEditHelper">
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.StopNode_1007"
-               name="%metatype.name.StopNode_1007"
+               id="org.openiaml.model.diagram.operation.FinishNode_1007"
+               name="%metatype.name.FinishNode_1007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="StopNode"
+               eclass="FinishNode"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.StopNodeEditHelper">
             <param name="semanticHint" value="1007"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/operations">
-         <metamodelType
-               id="org.openiaml.model.diagram.operation.FinishNode_1008"
-               name="%metatype.name.FinishNode_1008"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FinishNode"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.FinishNodeEditHelper">
-            <param name="semanticHint" value="1008"/>
-         </metamodelType>
-      </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.ChainedOperation_1009"
-               name="%metatype.name.ChainedOperation_1009"
+               id="org.openiaml.model.diagram.operation.DataFlowEdge_3001"
+               name="%metatype.name.DataFlowEdge_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.FinishNode2EditHelper">
-            <param name="semanticHint" value="1009"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.operation.ExecutionWire_3001"
-               name="%metatype.name.ExecutionWire_3001"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ExecutionWire"
+               eclass="DataFlowEdge"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ExecutionWireEditHelper">
             <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/wires">
+      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.PropertyToExecutionWire_3002"
-               name="%metatype.name.PropertyToExecutionWire_3002"
+               id="org.openiaml.model.diagram.operation.ExecutionEdge_3002"
+               name="%metatype.name.ExecutionEdge_3002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="PropertyToExecutionWire"
+               eclass="ExecutionEdge"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.PropertyToExecutionWireEditHelper">
             <param name="semanticHint" value="3002"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.operation.PropertyToParameterWire_3003"
-               name="%metatype.name.PropertyToParameterWire_3003"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="PropertyToParameterWire"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.PropertyToParameterWireEditHelper">
-            <param name="semanticHint" value="3003"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.operation.ProvidedParameterWire_3004"
-               name="%metatype.name.ProvidedParameterWire_3004"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ProvidedParameterWire"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ProvidedParameterWireEditHelper">
-            <param name="semanticHint" value="3004"/>
          </metamodelType>
       </metamodel>
    </extension>
@@ -469,17 +414,13 @@
          <elementType ref="org.openiaml.model.diagram.operation.CompositeOperation_79"/>
          <elementType ref="org.openiaml.model.diagram.operation.SingleOperation_1001"/>
          <elementType ref="org.openiaml.model.diagram.operation.CompositeOperation_1002"/>
-         <elementType ref="org.openiaml.model.diagram.operation.CompositeChainedOperation_1003"/>
-         <elementType ref="org.openiaml.model.diagram.operation.EventAwareOperation_1004"/>
-         <elementType ref="org.openiaml.model.diagram.operation.OperationParameter_1005"/>
-         <elementType ref="org.openiaml.model.diagram.operation.StartNode_1006"/>
-         <elementType ref="org.openiaml.model.diagram.operation.StopNode_1007"/>
-         <elementType ref="org.openiaml.model.diagram.operation.FinishNode_1008"/>
-         <elementType ref="org.openiaml.model.diagram.operation.ChainedOperation_1009"/>
-         <elementType ref="org.openiaml.model.diagram.operation.ExecutionWire_3001"/>
-         <elementType ref="org.openiaml.model.diagram.operation.PropertyToExecutionWire_3002"/>
-         <elementType ref="org.openiaml.model.diagram.operation.PropertyToParameterWire_3003"/>
-         <elementType ref="org.openiaml.model.diagram.operation.ProvidedParameterWire_3004"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ChainedOperation_1003"/>
+         <elementType ref="org.openiaml.model.diagram.operation.Parameter_1004"/>
+         <elementType ref="org.openiaml.model.diagram.operation.StartNode_1005"/>
+         <elementType ref="org.openiaml.model.diagram.operation.StopNode_1006"/>
+         <elementType ref="org.openiaml.model.diagram.operation.FinishNode_1007"/>
+         <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_3001"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

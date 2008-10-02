@@ -38,7 +38,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//OperationParameter" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationParameter" eSuperTypes="#//NamedElement #//WireEdgeDestination"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationParameter" eSuperTypes="#//NamedElement #//WireEdgeDestination #//WireEdgesSource"/>
   <eClassifiers xsi:type="ecore:EClass" name="SingleOperation" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ChainedOperation" eSuperTypes="#//Operation #//WireEdgesSource"/>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//Operation">

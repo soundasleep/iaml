@@ -26,6 +26,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.OperationParameter;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +37,7 @@ import org.openiaml.model.model.WireEdgeDestination;
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.OperationParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.OperationParameterImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.OperationParameterImpl#getOutEdges <em>Out Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +73,16 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
+
+	/**
+	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> outEdges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,12 +141,26 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getOutEdges() {
+		if (outEdges == null) {
+			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.OPERATION_PARAMETER__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
+		}
+		return outEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -149,6 +175,8 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 		switch (featureID) {
 			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -165,6 +193,8 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 				return getName();
 			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
 				return getInEdges();
+			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+				return getOutEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -185,6 +215,10 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+				getOutEdges().clear();
+				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -203,6 +237,9 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+				getOutEdges().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -219,6 +256,8 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.OPERATION_PARAMETER__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case ModelPackage.OPERATION_PARAMETER__OUT_EDGES:
+				return outEdges != null && !outEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -236,6 +275,12 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 				default: return -1;
 			}
 		}
+		if (baseClass == WireEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.OPERATION_PARAMETER__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -249,6 +294,12 @@ public class OperationParameterImpl extends EObjectImpl implements OperationPara
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ModelPackage.OPERATION_PARAMETER__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == WireEdgesSource.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.OPERATION_PARAMETER__OUT_EDGES;
 				default: return -1;
 			}
 		}

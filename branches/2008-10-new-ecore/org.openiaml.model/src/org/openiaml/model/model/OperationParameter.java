@@ -17,5 +17,5 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface OperationParameter extends NamedElement, WireEdgeDestination {
+public interface OperationParameter extends NamedElement, WireEdgeDestination, WireEdgesSource {
 } // OperationParameter

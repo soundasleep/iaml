@@ -30,14 +30,6 @@ public class SyncWireViewFactory extends ConnectionViewFactory {
 		List styles = new ArrayList();
 		styles.add(NotationFactory.eINSTANCE.createConnectorStyle());
 		styles.add(NotationFactory.eINSTANCE.createFontStyle());
-
-		// add link to wire diagram (added manually)
-		{
-			HintedDiagramLinkStyle diagramFacet = NotationFactory.eINSTANCE
-					.createHintedDiagramLinkStyle();
-			diagramFacet.setHint("Iaml_Wire"); // $NON-NLS-1$
-			styles.add(diagramFacet);
-		}
 		return styles;
 	}
 
@@ -54,17 +46,6 @@ public class SyncWireViewFactory extends ConnectionViewFactory {
 		}
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
-		// add link to wire diagram (added manually)
-		if (!CompositeWireEditPart.MODEL_ID.equals(IamlVisualIDRegistry
-				.getModelID(containerView))) {
-			EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
-					.createEAnnotation();
-			shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
-			shortcutAnnotation.getDetails().put(
-					"modelID", CompositeWireEditPart.MODEL_ID); //$NON-NLS-1$
-			view.getEAnnotations().add(shortcutAnnotation);
-		}
-		// end manual
 		IAdaptable eObjectAdapter = null;
 		EObject eObject = (EObject) semanticAdapter.getAdapter(EObject.class);
 		if (eObject != null) {

@@ -286,17 +286,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1006"
-        editPartClassName="EventAwareOperationEditPart"
-        itemSemanticEditPolicyClassName="EventAwareOperationItemSemanticEditPolicy"
-        notationViewFactoryClassName="EventAwareOperationViewFactory"
-        canonicalEditPolicyClassName="EventAwareOperationCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="EventAwareOperationGraphicalNodeEditPolicy"
-        createCommandClassName="EventAwareOperationCreateCommand">
+        editPartClassName="ChainedOperationEditPart"
+        itemSemanticEditPolicyClassName="ChainedOperationItemSemanticEditPolicy"
+        notationViewFactoryClassName="ChainedOperationViewFactory"
+        canonicalEditPolicyClassName="ChainedOperationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="ChainedOperationGraphicalNodeEditPolicy"
+        createCommandClassName="ChainedOperationCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="EventAwareOperationEditHelper"/>
+          editHelperClassName="ChainedOperationEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -321,9 +321,9 @@
       </modelFacet>
       <labels
           visualID="4006"
-          editPartClassName="EventAwareOperationNameEditPart"
-          itemSemanticEditPolicyClassName="EventAwareOperationNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="EventAwareOperationNameViewFactory"
+          editPartClassName="ChainedOperationNameEditPart"
+          itemSemanticEditPolicyClassName="ChainedOperationNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="ChainedOperationNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>

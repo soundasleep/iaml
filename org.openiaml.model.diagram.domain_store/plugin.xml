@@ -364,7 +364,7 @@
                name="%metatype.name.ChainedOperation_1006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.EventAwareOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.ChainedOperationEditHelper">
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>

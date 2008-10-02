@@ -335,7 +335,7 @@
                name="%metatype.name.ChainedOperation_1003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.CompositeChainedOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ChainedOperationEditHelper">
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
@@ -345,7 +345,7 @@
                name="%metatype.name.Parameter_1004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Parameter"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.EventAwareOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ParameterEditHelper">
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
@@ -355,7 +355,7 @@
                name="%metatype.name.StartNode_1005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="StartNode"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.OperationParameterEditHelper">
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.StartNodeEditHelper">
             <param name="semanticHint" value="1005"/>
          </metamodelType>
       </metamodel>
@@ -365,7 +365,7 @@
                name="%metatype.name.StopNode_1006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="StopNode"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.StartNodeEditHelper">
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.StopNodeEditHelper">
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
@@ -375,7 +375,7 @@
                name="%metatype.name.FinishNode_1007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="FinishNode"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.StopNodeEditHelper">
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.FinishNodeEditHelper">
             <param name="semanticHint" value="1007"/>
          </metamodelType>
       </metamodel>
@@ -385,7 +385,7 @@
                name="%metatype.name.DataFlowEdge_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DataFlowEdge"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ExecutionWireEditHelper">
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.DataFlowEdgeEditHelper">
             <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>
@@ -395,7 +395,7 @@
                name="%metatype.name.ExecutionEdge_3002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ExecutionEdge"
-               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.PropertyToExecutionWireEditHelper">
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ExecutionEdgeEditHelper">
             <param name="semanticHint" value="3002"/>
          </metamodelType>
       </metamodel>

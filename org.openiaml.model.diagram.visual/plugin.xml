@@ -59,7 +59,7 @@
       <objectContribution
             adaptable="false"
             id="org.openiaml.model.diagram.visual.CreateShortcut"
-            objectClass="org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart">
+            objectClass="org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart">
          <action
                class="org.openiaml.model.model.diagram.visual.part.IamlCreateShortcutAction"
                enablesFor="1"
@@ -71,7 +71,7 @@
       <objectContribution
             adaptable="false"
             id="org.openiaml.model.diagram.visual.LoadResource"
-            objectClass="org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart">
+            objectClass="org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart">
          <action
                class="org.openiaml.model.model.diagram.visual.part.IamlLoadResourceAction"
                enablesFor="1"
@@ -149,7 +149,7 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.RunWireNameEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.RunInstanceWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -309,7 +309,7 @@
                name="%metatype.name.VisibleThing_79"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="VisibleThing"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.PageEditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.VisibleThingEditHelper">
             <param name="semanticHint" value="79"/>
          </metamodelType>
       </metamodel>
@@ -349,7 +349,7 @@
                name="%metatype.name.ChainedOperation_1004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainObjectEditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ChainedOperationEditHelper">
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
@@ -359,7 +359,7 @@
                name="%metatype.name.DomainObject_1005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainObject"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainAttributeEditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainObjectEditHelper">
             <param name="semanticHint" value="1005"/>
          </metamodelType>
       </metamodel>
@@ -369,7 +369,7 @@
                name="%metatype.name.DomainAttribute_1006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainAttribute"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ApplicationElementPropertyEditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainAttributeEditHelper">
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
@@ -379,7 +379,7 @@
                name="%metatype.name.ApplicationElementProperty_1007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.Page2EditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ApplicationElementPropertyEditHelper">
             <param name="semanticHint" value="1007"/>
          </metamodelType>
       </metamodel>
@@ -389,7 +389,7 @@
                name="%metatype.name.Page_1008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Page"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.InputFormEditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.PageEditHelper">
             <param name="semanticHint" value="1008"/>
          </metamodelType>
       </metamodel>
@@ -399,7 +399,7 @@
                name="%metatype.name.InputForm_1009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="InputForm"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.InputTextFieldEditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.InputFormEditHelper">
             <param name="semanticHint" value="1009"/>
          </metamodelType>
       </metamodel>
@@ -409,7 +409,7 @@
                name="%metatype.name.InputTextField_1010"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="InputTextField"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.EventAwareOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.InputTextFieldEditHelper">
             <param name="semanticHint" value="1010"/>
          </metamodelType>
       </metamodel>
@@ -429,7 +429,7 @@
                name="%metatype.name.RunInstanceWire_3002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.RunWireEditHelper">
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.RunInstanceWireEditHelper">
             <param name="semanticHint" value="3002"/>
          </metamodelType>
       </metamodel>

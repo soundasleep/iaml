@@ -7,17 +7,17 @@
     domainFileExtension="iaml_visual">
   <diagram
       visualID="79"
-      editPartClassName="PageEditPart"
-      itemSemanticEditPolicyClassName="PageItemSemanticEditPolicy"
-      notationViewFactoryClassName="PageViewFactory"
-      canonicalEditPolicyClassName="PageCanonicalEditPolicy"
+      editPartClassName="VisibleThingEditPart"
+      itemSemanticEditPolicyClassName="VisibleThingItemSemanticEditPolicy"
+      notationViewFactoryClassName="VisibleThingViewFactory"
+      canonicalEditPolicyClassName="VisibleThingCanonicalEditPolicy"
       iconProviderPriority="Low"
       validationProviderPriority="Low">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
         xsi:type="gmfgen:MetamodelType"
-        editHelperClassName="PageEditHelper"/>
+        editHelperClassName="VisibleThingEditHelper"/>
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
@@ -188,17 +188,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1004"
-        editPartClassName="DomainObjectEditPart"
-        itemSemanticEditPolicyClassName="DomainObjectItemSemanticEditPolicy"
-        notationViewFactoryClassName="DomainObjectViewFactory"
-        canonicalEditPolicyClassName="DomainObjectCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DomainObjectGraphicalNodeEditPolicy"
-        createCommandClassName="DomainObjectCreateCommand">
+        editPartClassName="ChainedOperationEditPart"
+        itemSemanticEditPolicyClassName="ChainedOperationItemSemanticEditPolicy"
+        notationViewFactoryClassName="ChainedOperationViewFactory"
+        canonicalEditPolicyClassName="ChainedOperationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="ChainedOperationGraphicalNodeEditPolicy"
+        createCommandClassName="ChainedOperationCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DomainObjectEditHelper"/>
+          editHelperClassName="ChainedOperationEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -218,9 +218,9 @@
       </modelFacet>
       <labels
           visualID="4004"
-          editPartClassName="DomainObjectNameEditPart"
-          itemSemanticEditPolicyClassName="DomainObjectNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="DomainObjectNameViewFactory"
+          editPartClassName="ChainedOperationNameEditPart"
+          itemSemanticEditPolicyClassName="ChainedOperationNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="ChainedOperationNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -237,17 +237,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1005"
-        editPartClassName="DomainAttributeEditPart"
-        itemSemanticEditPolicyClassName="DomainAttributeItemSemanticEditPolicy"
-        notationViewFactoryClassName="DomainAttributeViewFactory"
-        canonicalEditPolicyClassName="DomainAttributeCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DomainAttributeGraphicalNodeEditPolicy"
-        createCommandClassName="DomainAttributeCreateCommand">
+        editPartClassName="DomainObjectEditPart"
+        itemSemanticEditPolicyClassName="DomainObjectItemSemanticEditPolicy"
+        notationViewFactoryClassName="DomainObjectViewFactory"
+        canonicalEditPolicyClassName="DomainObjectCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DomainObjectGraphicalNodeEditPolicy"
+        createCommandClassName="DomainObjectCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DomainAttributeEditHelper"/>
+          editHelperClassName="DomainObjectEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -267,9 +267,9 @@
       </modelFacet>
       <labels
           visualID="4005"
-          editPartClassName="DomainAttributeNameEditPart"
-          itemSemanticEditPolicyClassName="DomainAttributeNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="DomainAttributeNameViewFactory"
+          editPartClassName="DomainObjectNameEditPart"
+          itemSemanticEditPolicyClassName="DomainObjectNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="DomainObjectNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -286,17 +286,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1006"
-        editPartClassName="ApplicationElementPropertyEditPart"
-        itemSemanticEditPolicyClassName="ApplicationElementPropertyItemSemanticEditPolicy"
-        notationViewFactoryClassName="ApplicationElementPropertyViewFactory"
-        canonicalEditPolicyClassName="ApplicationElementPropertyCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="ApplicationElementPropertyGraphicalNodeEditPolicy"
-        createCommandClassName="ApplicationElementPropertyCreateCommand">
+        editPartClassName="DomainAttributeEditPart"
+        itemSemanticEditPolicyClassName="DomainAttributeItemSemanticEditPolicy"
+        notationViewFactoryClassName="DomainAttributeViewFactory"
+        canonicalEditPolicyClassName="DomainAttributeCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DomainAttributeGraphicalNodeEditPolicy"
+        createCommandClassName="DomainAttributeCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="ApplicationElementPropertyEditHelper"/>
+          editHelperClassName="DomainAttributeEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -316,9 +316,9 @@
       </modelFacet>
       <labels
           visualID="4006"
-          editPartClassName="ApplicationElementPropertyNameEditPart"
-          itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
+          editPartClassName="DomainAttributeNameEditPart"
+          itemSemanticEditPolicyClassName="DomainAttributeNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="DomainAttributeNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -335,17 +335,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1007"
-        editPartClassName="Page2EditPart"
-        itemSemanticEditPolicyClassName="Page2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="Page2ViewFactory"
-        canonicalEditPolicyClassName="Page2CanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="PageGraphicalNodeEditPolicy"
-        createCommandClassName="PageCreateCommand">
+        editPartClassName="ApplicationElementPropertyEditPart"
+        itemSemanticEditPolicyClassName="ApplicationElementPropertyItemSemanticEditPolicy"
+        notationViewFactoryClassName="ApplicationElementPropertyViewFactory"
+        canonicalEditPolicyClassName="ApplicationElementPropertyCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="ApplicationElementPropertyGraphicalNodeEditPolicy"
+        createCommandClassName="ApplicationElementPropertyCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="Page2EditHelper"/>
+          editHelperClassName="ApplicationElementPropertyEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -368,9 +368,9 @@
       </modelFacet>
       <labels
           visualID="4007"
-          editPartClassName="PageNameEditPart"
-          itemSemanticEditPolicyClassName="PageNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="PageNameViewFactory"
+          editPartClassName="ApplicationElementPropertyNameEditPart"
+          itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -387,17 +387,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1008"
-        editPartClassName="InputFormEditPart"
-        itemSemanticEditPolicyClassName="InputFormItemSemanticEditPolicy"
-        notationViewFactoryClassName="InputFormViewFactory"
-        canonicalEditPolicyClassName="InputFormCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="InputFormGraphicalNodeEditPolicy"
-        createCommandClassName="InputFormCreateCommand">
+        editPartClassName="PageEditPart"
+        itemSemanticEditPolicyClassName="PageItemSemanticEditPolicy"
+        notationViewFactoryClassName="PageViewFactory"
+        canonicalEditPolicyClassName="PageCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="PageGraphicalNodeEditPolicy"
+        createCommandClassName="PageCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="InputFormEditHelper"/>
+          editHelperClassName="PageEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -422,9 +422,9 @@
       </modelFacet>
       <labels
           visualID="4008"
-          editPartClassName="InputFormNameEditPart"
-          itemSemanticEditPolicyClassName="InputFormNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="InputFormNameViewFactory"
+          editPartClassName="PageNameEditPart"
+          itemSemanticEditPolicyClassName="PageNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="PageNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -441,17 +441,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1009"
-        editPartClassName="InputTextFieldEditPart"
-        itemSemanticEditPolicyClassName="InputTextFieldItemSemanticEditPolicy"
-        notationViewFactoryClassName="InputTextFieldViewFactory"
-        canonicalEditPolicyClassName="InputTextFieldCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="InputTextFieldGraphicalNodeEditPolicy"
-        createCommandClassName="InputTextFieldCreateCommand">
+        editPartClassName="InputFormEditPart"
+        itemSemanticEditPolicyClassName="InputFormItemSemanticEditPolicy"
+        notationViewFactoryClassName="InputFormViewFactory"
+        canonicalEditPolicyClassName="InputFormCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="InputFormGraphicalNodeEditPolicy"
+        createCommandClassName="InputFormCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="InputTextFieldEditHelper"/>
+          editHelperClassName="InputFormEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -476,9 +476,9 @@
       </modelFacet>
       <labels
           visualID="4009"
-          editPartClassName="InputTextFieldNameEditPart"
-          itemSemanticEditPolicyClassName="InputTextFieldNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="InputTextFieldNameViewFactory"
+          editPartClassName="InputFormNameEditPart"
+          itemSemanticEditPolicyClassName="InputFormNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="InputFormNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -495,17 +495,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1010"
-        editPartClassName="EventAwareOperationEditPart"
-        itemSemanticEditPolicyClassName="EventAwareOperationItemSemanticEditPolicy"
-        notationViewFactoryClassName="EventAwareOperationViewFactory"
-        canonicalEditPolicyClassName="EventAwareOperationCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="EventAwareOperationGraphicalNodeEditPolicy"
-        createCommandClassName="EventAwareOperationCreateCommand">
+        editPartClassName="InputTextFieldEditPart"
+        itemSemanticEditPolicyClassName="InputTextFieldItemSemanticEditPolicy"
+        notationViewFactoryClassName="InputTextFieldViewFactory"
+        canonicalEditPolicyClassName="InputTextFieldCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="InputTextFieldGraphicalNodeEditPolicy"
+        createCommandClassName="InputTextFieldCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="EventAwareOperationEditHelper"/>
+          editHelperClassName="InputTextFieldEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -530,9 +530,9 @@
       </modelFacet>
       <labels
           visualID="4010"
-          editPartClassName="EventAwareOperationNameEditPart"
-          itemSemanticEditPolicyClassName="EventAwareOperationNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="EventAwareOperationNameViewFactory"
+          editPartClassName="InputTextFieldNameEditPart"
+          itemSemanticEditPolicyClassName="InputTextFieldNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="InputTextFieldNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -610,16 +610,16 @@
     </links>
     <links
         visualID="3002"
-        editPartClassName="RunWireEditPart"
-        itemSemanticEditPolicyClassName="RunWireItemSemanticEditPolicy"
-        notationViewFactoryClassName="RunWireViewFactory"
-        createCommandClassName="RunWireCreateCommand"
-        reorientCommandClassName="RunWireReorientCommand">
+        editPartClassName="RunInstanceWireEditPart"
+        itemSemanticEditPolicyClassName="RunInstanceWireItemSemanticEditPolicy"
+        notationViewFactoryClassName="RunInstanceWireViewFactory"
+        createCommandClassName="RunInstanceWireCreateCommand"
+        reorientCommandClassName="RunInstanceWireReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="RunWireEditHelper"/>
+          editHelperClassName="RunInstanceWireEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="RunInstanceWireFigure"
@@ -648,9 +648,9 @@
       </modelFacet>
       <labels
           visualID="4012"
-          editPartClassName="RunWireNameEditPart"
-          itemSemanticEditPolicyClassName="RunWireNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="RunWireNameViewFactory"
+          editPartClassName="RunInstanceWireNameEditPart"
+          itemSemanticEditPolicyClassName="RunInstanceWireNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="RunInstanceWireNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ModelPackage;
@@ -31,8 +32,8 @@ import org.openiaml.model.model.WireEdge;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getNodes <em>Nodes</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getCompositeOperationWires <em>Composite Operation Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getExecutionEdges <em>Execution Edges</em>}</li>
  * </ul>
@@ -52,6 +53,16 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	protected EList<Operation> operations;
 
 	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
+
+	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,16 +71,6 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<ActivityNode> nodes;
-
-	/**
-	 * The cached value of the '{@link #getCompositeOperationWires() <em>Composite Operation Wires</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCompositeOperationWires()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<WireEdge> compositeOperationWires;
 
 	/**
 	 * The cached value of the '{@link #getDataEdges() <em>Data Edges</em>}' containment reference list.
@@ -127,11 +128,11 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ActivityNode> getNodes() {
-		if (nodes == null) {
-			nodes = new EObjectContainmentEList<ActivityNode>(ActivityNode.class, this, ModelPackage.COMPOSITE_OPERATION__NODES);
+	public EList<WireEdge> getWires() {
+		if (wires == null) {
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.COMPOSITE_OPERATION__WIRES);
 		}
-		return nodes;
+		return wires;
 	}
 
 	/**
@@ -139,11 +140,11 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getCompositeOperationWires() {
-		if (compositeOperationWires == null) {
-			compositeOperationWires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES);
+	public EList<ActivityNode> getNodes() {
+		if (nodes == null) {
+			nodes = new EObjectContainmentEList<ActivityNode>(ActivityNode.class, this, ModelPackage.COMPOSITE_OPERATION__NODES);
 		}
-		return compositeOperationWires;
+		return nodes;
 	}
 
 	/**
@@ -180,10 +181,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 		switch (featureID) {
 			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPOSITE_OPERATION__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
-			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
-				return ((InternalEList<?>)getCompositeOperationWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
 				return ((InternalEList<?>)getDataEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__EXECUTION_EDGES:
@@ -202,10 +203,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 		switch (featureID) {
 			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
 				return getOperations();
+			case ModelPackage.COMPOSITE_OPERATION__WIRES:
+				return getWires();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return getNodes();
-			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
-				return getCompositeOperationWires();
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
 				return getDataEdges();
 			case ModelPackage.COMPOSITE_OPERATION__EXECUTION_EDGES:
@@ -227,13 +228,13 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				getOperations().clear();
 				getOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				getNodes().clear();
 				getNodes().addAll((Collection<? extends ActivityNode>)newValue);
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
-				getCompositeOperationWires().clear();
-				getCompositeOperationWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
 				getDataEdges().clear();
@@ -258,11 +259,11 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
 				getOperations().clear();
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__WIRES:
+				getWires().clear();
+				return;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				getNodes().clear();
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
-				getCompositeOperationWires().clear();
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
 				getDataEdges().clear();
@@ -284,10 +285,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 		switch (featureID) {
 			case ModelPackage.COMPOSITE_OPERATION__OPERATIONS:
 				return operations != null && !operations.isEmpty();
+			case ModelPackage.COMPOSITE_OPERATION__WIRES:
+				return wires != null && !wires.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return nodes != null && !nodes.isEmpty();
-			case ModelPackage.COMPOSITE_OPERATION__COMPOSITE_OPERATION_WIRES:
-				return compositeOperationWires != null && !compositeOperationWires.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
 				return dataEdges != null && !dataEdges.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__EXECUTION_EDGES:
@@ -309,6 +310,12 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsWires.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.COMPOSITE_OPERATION__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -322,6 +329,12 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 		if (baseClass == ContainsOperations.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_OPERATIONS__OPERATIONS: return ModelPackage.COMPOSITE_OPERATION__OPERATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsWires.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.COMPOSITE_OPERATION__WIRES;
 				default: return -1;
 			}
 		}

@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.ApplicationElementContainer#getChildren <em>Children</em>}</li>
- *   <li>{@link org.openiaml.model.model.ApplicationElementContainer#getApplicationElementWires <em>Application Element Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface ApplicationElementContainer extends ApplicationElement {
+public interface ApplicationElementContainer extends ApplicationElement, ContainsWires {
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElement}.
@@ -41,21 +40,5 @@ public interface ApplicationElementContainer extends ApplicationElement {
 	 * @generated
 	 */
 	EList<ApplicationElement> getChildren();
-
-	/**
-	 * Returns the value of the '<em><b>Application Element Wires</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.WireEdge}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Application Element Wires</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Application Element Wires</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getApplicationElementContainer_ApplicationElementWires()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<WireEdge> getApplicationElementWires();
 
 } // ApplicationElementContainer

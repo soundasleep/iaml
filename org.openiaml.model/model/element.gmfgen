@@ -305,9 +305,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/RunInstanceWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/ApplicationElementContainer/applicationElementWires"/>
+            href="iaml.genmodel#//model/ContainsWires/wires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/ApplicationElementContainer/applicationElementWires"/>
+            href="iaml.genmodel#//model/ContainsWires/wires"/>
         <modelElementSelector
             body="self.oclIsTypeOf( RunInstanceWire )"/>
         <sourceMetaFeature
@@ -366,9 +366,9 @@
         <metaClass
             href="iaml.genmodel#//model/wires/SyncWire"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/ApplicationElementContainer/applicationElementWires"/>
+            href="iaml.genmodel#//model/ContainsWires/wires"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/ApplicationElementContainer/applicationElementWires"/>
+            href="iaml.genmodel#//model/ContainsWires/wires"/>
         <modelElementSelector
             body="self.oclIsTypeOf( SyncWire )"/>
         <sourceMetaFeature

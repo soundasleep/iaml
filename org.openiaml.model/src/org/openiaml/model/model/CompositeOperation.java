@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getNodes <em>Nodes</em>}</li>
- *   <li>{@link org.openiaml.model.model.CompositeOperation#getCompositeOperationWires <em>Composite Operation Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getExecutionEdges <em>Execution Edges</em>}</li>
  * </ul>
@@ -27,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface CompositeOperation extends ChainedOperation, ContainsOperations {
+public interface CompositeOperation extends ChainedOperation, ContainsOperations, ContainsWires {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ActivityNode}.
@@ -43,22 +42,6 @@ public interface CompositeOperation extends ChainedOperation, ContainsOperations
 	 * @generated
 	 */
 	EList<ActivityNode> getNodes();
-
-	/**
-	 * Returns the value of the '<em><b>Composite Operation Wires</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.WireEdge}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Composite Operation Wires</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Composite Operation Wires</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getCompositeOperation_CompositeOperationWires()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<WireEdge> getCompositeOperationWires();
 
 	/**
 	 * Returns the value of the '<em><b>Data Edges</b></em>' containment reference list.

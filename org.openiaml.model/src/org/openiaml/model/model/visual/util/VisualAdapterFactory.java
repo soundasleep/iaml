@@ -14,6 +14,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
@@ -115,6 +116,10 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {
 				return createApplicationElementAdapter();
+			}
+			@Override
+			public Adapter caseContainsWires(ContainsWires object) {
+				return createContainsWiresAdapter();
 			}
 			@Override
 			public Adapter caseApplicationElementContainer(ApplicationElementContainer object) {
@@ -267,6 +272,20 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createApplicationElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsWires <em>Contains Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsWires
+	 * @generated
+	 */
+	public Adapter createContainsWiresAdapter() {
 		return null;
 	}
 

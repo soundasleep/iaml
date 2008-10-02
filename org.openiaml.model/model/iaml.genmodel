@@ -26,7 +26,6 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainObject">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObject/attributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObject/domainObjectWires"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainAttribute"/>
     <genClasses ecoreClass="iaml.ecore#//ActivityNode"/>
@@ -38,7 +37,6 @@
     <genClasses ecoreClass="iaml.ecore#//ChainedOperation"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeOperation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/nodes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/compositeOperationWires"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/dataEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/executionEdges"/>
     </genClasses>
@@ -50,7 +48,6 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//ApplicationElementContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ApplicationElementContainer/children"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ApplicationElementContainer/applicationElementWires"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//ApplicationElementProperty"/>
     <genClasses ecoreClass="iaml.ecore#//StaticValue">
@@ -61,12 +58,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/children"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/domainStores"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/iaWires"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainStore">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/children"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/domainStoreWires"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DataFlowEdge">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DataFlowEdge/from"/>
@@ -92,6 +87,9 @@
     <genClasses ecoreClass="iaml.ecore#//DynamicApplicationElementSet">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DynamicApplicationElementSet/query"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//ContainsWires">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/wires"/>
+    </genClasses>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genClasses ecoreClass="iaml.ecore#//visual/Page">
@@ -109,7 +107,6 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/operations"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/eventTriggers"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/parameters"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/wireWires"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/RunInstanceWire"/>

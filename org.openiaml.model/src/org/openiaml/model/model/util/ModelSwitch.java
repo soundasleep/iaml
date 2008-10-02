@@ -159,6 +159,7 @@ public class ModelSwitch<T> {
 				DomainObject domainObject = (DomainObject)theEObject;
 				T result = caseDomainObject(domainObject);
 				if (result == null) result = caseApplicationElement(domainObject);
+				if (result == null) result = caseContainsWires(domainObject);
 				if (result == null) result = caseContainsOperations(domainObject);
 				if (result == null) result = caseNamedElement(domainObject);
 				if (result == null) result = caseContainsEventTriggers(domainObject);
@@ -238,6 +239,7 @@ public class ModelSwitch<T> {
 				T result = caseCompositeOperation(compositeOperation);
 				if (result == null) result = caseChainedOperation(compositeOperation);
 				if (result == null) result = caseContainsOperations(compositeOperation);
+				if (result == null) result = caseContainsWires(compositeOperation);
 				if (result == null) result = caseOperation(compositeOperation);
 				if (result == null) result = caseExecutionEdgesSource(compositeOperation);
 				if (result == null) result = caseWireEdgeDestination(compositeOperation);
@@ -270,6 +272,7 @@ public class ModelSwitch<T> {
 				ApplicationElementContainer applicationElementContainer = (ApplicationElementContainer)theEObject;
 				T result = caseApplicationElementContainer(applicationElementContainer);
 				if (result == null) result = caseApplicationElement(applicationElementContainer);
+				if (result == null) result = caseContainsWires(applicationElementContainer);
 				if (result == null) result = caseContainsOperations(applicationElementContainer);
 				if (result == null) result = caseNamedElement(applicationElementContainer);
 				if (result == null) result = caseContainsEventTriggers(applicationElementContainer);
@@ -303,6 +306,7 @@ public class ModelSwitch<T> {
 				T result = caseVisibleThing(visibleThing);
 				if (result == null) result = caseApplicationElementContainer(visibleThing);
 				if (result == null) result = caseApplicationElement(visibleThing);
+				if (result == null) result = caseContainsWires(visibleThing);
 				if (result == null) result = caseContainsOperations(visibleThing);
 				if (result == null) result = caseNamedElement(visibleThing);
 				if (result == null) result = caseContainsEventTriggers(visibleThing);
@@ -317,6 +321,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsOperations(internetApplication);
 				if (result == null) result = caseContainsEventTriggers(internetApplication);
 				if (result == null) result = caseNamedElement(internetApplication);
+				if (result == null) result = caseContainsWires(internetApplication);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -326,6 +331,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsOperations(domainStore);
 				if (result == null) result = caseContainsEventTriggers(domainStore);
 				if (result == null) result = caseNamedElement(domainStore);
+				if (result == null) result = caseContainsWires(domainStore);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -382,6 +388,12 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgesSource(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgeDestination(dynamicApplicationElementSet);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.CONTAINS_WIRES: {
+				ContainsWires containsWires = (ContainsWires)theEObject;
+				T result = caseContainsWires(containsWires);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -836,6 +848,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseDynamicApplicationElementSet(DynamicApplicationElementSet object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsWires(ContainsWires object) {
 		return null;
 	}
 

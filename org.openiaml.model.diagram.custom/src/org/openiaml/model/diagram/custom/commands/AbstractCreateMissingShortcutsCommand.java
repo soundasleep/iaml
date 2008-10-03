@@ -179,7 +179,7 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 				}
 			}
 			
-			if (!isVisibleEdge && !toAdd.contains(edge)) {
+			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
 				toAddEdge.add(edge);
 			}
 		}
@@ -216,7 +216,7 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 				}
 			}
 			
-			if (!isVisibleEdge && !toAdd.contains(edge)) {
+			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
 				toAddEdge.add(edge);
 			}
 		
@@ -239,12 +239,14 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		
 		for (EObject newObjectEdge : toAddEdge) {
 			// we should create a relationship edge now too
+			// not sure if this actually works
 			CreateConnectionViewRequest.ConnectionViewDescriptor viewDescriptorEdge = new CreateConnectionViewRequest.ConnectionViewDescriptor(
 					new EObjectAdapter(newObjectEdge), null,
 					prefHint);
 			
 			command = new CreateCommand(
 					selectedElement.getEditingDomain(), viewDescriptorEdge, parentView);
+			doExecute(command);
 			
 		}
 

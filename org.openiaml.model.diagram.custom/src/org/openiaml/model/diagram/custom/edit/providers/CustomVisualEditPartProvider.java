@@ -38,7 +38,7 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 		final IGraphicalEditPart part = super.createGraphicEditPart(view);
 
 		// we only want the root element to have this functionality
-		if (part instanceof PageEditPart) {
+		if (part instanceof VisibleThingEditPart) {
 
 			// do something
 			part.addEditPartListener(new EditPartListener() {

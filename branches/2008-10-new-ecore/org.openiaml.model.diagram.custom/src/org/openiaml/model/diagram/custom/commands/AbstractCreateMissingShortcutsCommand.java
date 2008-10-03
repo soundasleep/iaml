@@ -226,7 +226,7 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		// we now have a list of Actions that we want to add to the current view
 		for (EObject newObject : toAdd) {
 			CreateViewRequest.ViewDescriptor viewDescriptor = new CreateViewRequest.ViewDescriptor(
-					new EObjectAdapter(newObject), Node.class, null,
+					new EObjectAdapter(newObject), Node.class, null,  // tried null->"" with no effect
 					prefHint);
 			
 			// TODO: it would be nice if the newly created elements are not just placed at (0,0)
@@ -237,11 +237,14 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 			doExecute(command);		//execute it now
 		}
 		
+		/*
 		for (EObject newObjectEdge : toAddEdge) {
 			// we should create a relationship edge now too
 			// not sure if this actually works
+			//String type = ElementTypeRegistry.getInstance().getType("org.openiaml.model.diagram.wire.RunInstanceWire_3002");
+			
 			CreateConnectionViewRequest.ConnectionViewDescriptor viewDescriptorEdge = new CreateConnectionViewRequest.ConnectionViewDescriptor(
-					new EObjectAdapter(newObjectEdge), null,
+					new EObjectAdapter(newObjectEdge), null,  // tried null->"" with no effect
 					prefHint);
 			
 			command = new CreateCommand(
@@ -249,6 +252,7 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 			doExecute(command);
 			
 		}
+		*/
 
 		return command;
 		

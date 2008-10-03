@@ -26,13 +26,13 @@
     <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
     <containsShortcutsTo>iaml_operation</containsShortcutsTo>
     <containsShortcutsTo>iaml_element</containsShortcutsTo>
-    <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
+    <shortcutsProvidedFor>Iaml</shortcutsProvidedFor>
+    <shortcutsProvidedFor>Iaml_Wire</shortcutsProvidedFor>
+    <shortcutsProvidedFor>Iaml_Visual</shortcutsProvidedFor>
+    <shortcutsProvidedFor>Iaml_Element</shortcutsProvidedFor>
+    <shortcutsProvidedFor>Iaml_Store</shortcutsProvidedFor>
+    <shortcutsProvidedFor>Iaml_DomainObject</shortcutsProvidedFor>
+    <shortcutsProvidedFor>Iaml_Operation</shortcutsProvidedFor>
     <domainDiagramElement
         href="iaml.genmodel#//model/InternetApplication"/>
     <topLevelNodes

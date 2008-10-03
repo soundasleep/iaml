@@ -140,6 +140,9 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.7"/>
       <diagramNode
           href="iaml.gmfgraph#ApplicationElementProperty"/>
     </ownedChild>

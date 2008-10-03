@@ -39,7 +39,7 @@ public class CreateMissingWireShortcutsCommand extends
 		CompositeWire rootObject = (CompositeWire) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-
+		
 		// ApplicationElement (incl VisualThing and Page)
 		for (ApplicationElement child : rootObject.getChildren()) {
 			connectionsIn.addAll( child.getInEdges() );

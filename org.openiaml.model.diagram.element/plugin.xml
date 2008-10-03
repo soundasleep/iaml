@@ -6,14 +6,14 @@
       <?gmfgen generated="true"?>
       <fileTypes
          type="text"
-         extension="model_element_diagram">
+         extension="iaml_element_diagram">
       </fileTypes>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <?gmfgen generated="true"?>
       <parser
-         type="model_element_diagram"
+         type="iaml_element_diagram"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -24,7 +24,7 @@
          id="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/ModelDiagramFile.gif"
-         extensions="model_element_diagram"
+         extensions="iaml_element_diagram"
          default="true"
          class="org.openiaml.model.model.diagram.element.part.IamlDiagramEditor"
          matchingStrategy="org.openiaml.model.model.diagram.element.part.IamlMatchingStrategy"
@@ -86,7 +86,7 @@
       <?gmfgen generated="true"?>
       <objectContribution
             id="org.openiaml.model.diagram.element.InitDiagram"
-            nameFilter="*.model_element"
+            nameFilter="*.iaml_element"
             objectClass="org.eclipse.core.resources.IFile">
          <action
                label="%initDiagramActionLabel"
@@ -458,7 +458,7 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="model_element_diagram"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_element_diagram"/>
                </and>
                <instanceof value="org.openiaml.model.model.diagram.element.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
@@ -481,7 +481,7 @@
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="model_element_diagram"/>
+        	         <test property="org.eclipse.core.resources.extension" value="iaml_element_diagram"/>
                   </and>
                   <instanceof value="org.openiaml.model.model.diagram.element.navigator.IamlAbstractNavigatorItem"/>
                </or>
@@ -500,7 +500,7 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="model_element"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_element"/>
                </and>
                <and>
                   <instanceof value="org.eclipse.emf.ecore.EObject"/>

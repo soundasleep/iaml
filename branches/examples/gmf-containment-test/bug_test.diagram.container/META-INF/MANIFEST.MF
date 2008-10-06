@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: test.diagram.container.part.TestDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: test.diagram.container.edit.parts, 
+Export-Package: test.diagram.container.edit.parts,
  test.diagram.container.part,
  test.diagram.container.providers
 Require-Bundle: org.eclipse.core.runtime,

@@ -21,6 +21,10 @@
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
+    <containsShortcutsTo>test</containsShortcutsTo>
+    <containsShortcutsTo>test_container</containsShortcutsTo>
+    <shortcutsProvidedFor>test</shortcutsProvidedFor>
+    <shortcutsProvidedFor>test_container</shortcutsProvidedFor>
     <domainDiagramElement
         href="test.genmodel#//test/Container"/>
     <topLevelNodes

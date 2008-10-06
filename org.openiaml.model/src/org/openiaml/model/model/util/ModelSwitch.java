@@ -289,6 +289,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgeDestination(applicationElementProperty);
 				if (result == null) result = caseDataFlowEdgesSource(applicationElementProperty);
 				if (result == null) result = caseDataFlowEdgeDestination(applicationElementProperty);
+				if (result == null) result = caseContainsWires(applicationElementProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

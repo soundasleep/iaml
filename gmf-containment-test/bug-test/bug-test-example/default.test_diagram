@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:test="http://test.com/test">
+  <notation:Diagram xmi:id="_iKanwJNGEd2fcrVFHcxaow" type="Test" name="default.test_diagram" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_iZT_YJNGEd2fcrVFHcxaow" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_iZT_ZJNGEd2fcrVFHcxaow" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_iZT_YZNGEd2fcrVFHcxaow"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_iZT_YpNGEd2fcrVFHcxaow" diagramLink="_ivN98JNGEd2fcrVFHcxaow" hint="Test_Container"/>
+      <element xmi:type="test:Container" href="default.test#//@containers.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iZT_Y5NGEd2fcrVFHcxaow" x="139" y="149"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ikMZsJNGEd2fcrVFHcxaow" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_ikMZtJNGEd2fcrVFHcxaow" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_ikMZsZNGEd2fcrVFHcxaow"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_ikMZspNGEd2fcrVFHcxaow" diagramLink="_jYfkcJNGEd2fcrVFHcxaow" hint="Test_Container"/>
+      <element xmi:type="test:Container" href="default.test#//@containers.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ikMZs5NGEd2fcrVFHcxaow" x="344" y="161"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_iKanwZNGEd2fcrVFHcxaow"/>
+    <element xmi:type="test:Root" href="default.test#/"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_ivN98JNGEd2fcrVFHcxaow" type="Test_Container" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_i7lmAJNGEd2fcrVFHcxaow" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_i7lmA5NGEd2fcrVFHcxaow" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_i7lmAZNGEd2fcrVFHcxaow"/>
+      <element xmi:type="test:Element" href="default.test#//@containers.0/@elements.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_i7lmApNGEd2fcrVFHcxaow" x="163" y="197"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_jFa3cJNGEd2fcrVFHcxaow" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_jFa3c5NGEd2fcrVFHcxaow" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_jFa3cZNGEd2fcrVFHcxaow"/>
+      <element xmi:type="test:Element" href="default.test#//@containers.0/@elements.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jFa3cpNGEd2fcrVFHcxaow" x="345" y="187"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_ivN98ZNGEd2fcrVFHcxaow"/>
+    <element xmi:type="test:Container" href="default.test#//@containers.0"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_jYfkcJNGEd2fcrVFHcxaow" type="Test_Container" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_jgitMJNGEd2fcrVFHcxaow" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_jgitM5NGEd2fcrVFHcxaow" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_jgitMZNGEd2fcrVFHcxaow"/>
+      <element xmi:type="test:Element" href="default.test#//@containers.1/@elements.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jgitMpNGEd2fcrVFHcxaow" x="110" y="282"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_jsdpUJNGEd2fcrVFHcxaow" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_jsdpU5NGEd2fcrVFHcxaow" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_jsdpUZNGEd2fcrVFHcxaow"/>
+      <element xmi:type="test:Element" href="default.test#//@containers.1/@elements.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jsdpUpNGEd2fcrVFHcxaow" x="275" y="278"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_kpaZwJNGEd2fcrVFHcxaow" type="1001">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_kpaZxJNGEd2fcrVFHcxaow" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_kpaZxZNGEd2fcrVFHcxaow" key="modelID" value="Test_Container"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_kpaZw5NGEd2fcrVFHcxaow" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_kpaZwZNGEd2fcrVFHcxaow"/>
+      <element xmi:type="test:Element" href="default.test#//@containers.0/@elements.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kpaZwpNGEd2fcrVFHcxaow" x="100" y="143"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_k6jNEJNGEd2fcrVFHcxaow" type="1001">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_k6jNFJNGEd2fcrVFHcxaow" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_k6jNFZNGEd2fcrVFHcxaow" key="modelID" value="Test_Container"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_k6jNE5NGEd2fcrVFHcxaow" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_k6jNEZNGEd2fcrVFHcxaow"/>
+      <element xmi:type="test:Element" href="default.test#//@containers.0/@elements.1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k6jNEpNGEd2fcrVFHcxaow" x="252" y="144"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_jYfkcZNGEd2fcrVFHcxaow"/>
+    <element xmi:type="test:Container" href="default.test#//@containers.1"/>
+    <edges xmi:type="notation:Edge" xmi:id="_kBBkEJNGEd2fcrVFHcxaow" type="3001" source="_jgitMJNGEd2fcrVFHcxaow" target="_jsdpUJNGEd2fcrVFHcxaow">
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_kBBkEZNGEd2fcrVFHcxaow"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_kBBkEpNGEd2fcrVFHcxaow"/>
+      <element xmi:type="test:Edge" href="default.test#//@containers.1/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_kBBkE5NGEd2fcrVFHcxaow" points="[20, 0, -145, 4]$[165, 16, 0, 20]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_lK7ycJNGEd2fcrVFHcxaow" type="3001" source="_kpaZwJNGEd2fcrVFHcxaow" target="_k6jNEJNGEd2fcrVFHcxaow">
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_lK7ycZNGEd2fcrVFHcxaow"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_lK7ycpNGEd2fcrVFHcxaow"/>
+      <element xmi:type="test:Edge" href="default.test#//@containers.0/@edges.0"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_lK7yc5NGEd2fcrVFHcxaow" points="[20, 2, -132, -14]$[149, -4, -3, -20]"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:test="http://test.com/test">
+  <containers name="A">
+    <edges from="//@containers.0/@elements.0" to="//@containers.0/@elements.1"/>
+    <elements name="e1"/>
+    <elements name="e2"/>
+  </containers>
+  <containers name="B">
+    <edges from="//@containers.1/@elements.0" to="//@containers.1/@elements.1"/>
+    <elements name="e3"/>
+    <elements name="e4"/>
+  </containers>
+</test:Root>

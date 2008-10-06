@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmfmap:Mapping xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmfmap="http://www.eclipse.org/gmf/2006/mappings"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <nodes>
+    <containmentFeature
+        href="test.ecore#//Root/containers"/>
+    <ownedChild>
+      <domainMetaElement
+          href="test.ecore#//Container"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="test.gmfgraph#ContainerName"/>
+        <features
+            href="test.ecore#//Container/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="test.gmftool#//@palette/@tools.0/@tools.0"/>
+      <diagramNode
+          href="test.gmfgraph#Container"/>
+    </ownedChild>
+  </nodes>
+  <diagram>
+    <diagramCanvas
+        href="test.gmfgraph#test"/>
+    <domainModel
+        href="test.ecore#/"/>
+    <domainMetaElement
+        href="test.ecore#//Root"/>
+    <palette
+        href="test.gmftool#//@palette"/>
+  </diagram>
+</gmfmap:Mapping>

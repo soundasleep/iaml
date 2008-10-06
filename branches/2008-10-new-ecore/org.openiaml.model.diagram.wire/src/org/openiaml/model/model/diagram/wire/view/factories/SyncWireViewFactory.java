@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.ConnectionViewFactory;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
-import org.eclipse.gmf.runtime.notation.HintedDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.model.diagram.wire.edit.parts.CompositeWireEditPart;
 import org.openiaml.model.model.diagram.wire.edit.parts.SyncWireEditPart;
 import org.openiaml.model.model.diagram.wire.edit.parts.SyncWireNameEditPart;
 import org.openiaml.model.model.diagram.wire.part.IamlVisualIDRegistry;

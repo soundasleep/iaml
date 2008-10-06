@@ -17,5 +17,5 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface ApplicationElementProperty extends NamedElement, WireEdgesSource, WireEdgeDestination, DataFlowEdgesSource, DataFlowEdgeDestination {
+public interface ApplicationElementProperty extends NamedElement, WireEdgesSource, WireEdgeDestination, DataFlowEdgesSource, DataFlowEdgeDestination, ContainsWires {
 } // ApplicationElementProperty

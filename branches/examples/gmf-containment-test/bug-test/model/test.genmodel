@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bug-test/src"
+    modelPluginID="bug_test" modelName="Test" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>test.ecore</foreignModel>
+  <genPackages prefix="Test" disposableProviderFactory="true" ecorePackage="test.ecore#/">
+    <genClasses image="false" ecoreClass="test.ecore#//EdgeSource"/>
+    <genClasses image="false" ecoreClass="test.ecore#//EdgeDestination"/>
+    <genClasses ecoreClass="test.ecore#//Edge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference test.ecore#//Edge/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference test.ecore#//Edge/to"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="test.ecore#//ContainsEdges">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference test.ecore#//ContainsEdges/edges"/>
+    </genClasses>
+    <genClasses ecoreClass="test.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference test.ecore#//Root/containers"/>
+    </genClasses>
+    <genClasses ecoreClass="test.ecore#//Container">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference test.ecore#//Container/elements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute test.ecore#//Container/name"/>
+    </genClasses>
+    <genClasses ecoreClass="test.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute test.ecore#//Element/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

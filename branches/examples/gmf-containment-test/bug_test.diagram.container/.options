@@ -1,0 +1,7 @@
+# Tracing options for the bug_test.diagram.container plug-in
+
+# Common issues
+bug_test.diagram.container/debug=false
+
+# Visual IDs
+bug_test.diagram.container/debug/visualID=false

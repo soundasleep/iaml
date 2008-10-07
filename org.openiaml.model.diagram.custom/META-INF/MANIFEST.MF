@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.diagram.wire,
  org.openiaml.model.diagram.domain_object,
  org.openiaml.model.diagram.operation
+Bundle-Vendor: www.openiaml.org

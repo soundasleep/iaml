@@ -1,12 +1,21 @@
 <?php
 
+class FailException extends Exception {
+
+}
+
 // TODO: move to PHPUnit?
 class GmfTestRunner {
 	public function runTest(GmfTestCase $test) {
 		$test->setup($this);
 		$this->startNew(get_class($test));
-		$test->run();
+		try {
+			$test->run();
+		} catch (FailException $e) {
+			$this->fail($e->getMessage());
+		}
 	}
+
 	public function printStats() {
 		$total_pass = 0;
 		$total_tests = 0;

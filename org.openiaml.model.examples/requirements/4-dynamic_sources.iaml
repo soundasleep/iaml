@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires">
+  <children xsi:type="iaml.visual:Page" name="page a"/>
+  <children xsi:type="iaml.visual:Page" name="page b"/>
+  <children xsi:type="iaml.visual:Page" name="page c"/>
+  <children xsi:type="iaml:DynamicApplicationElementSet" name="all pages" outEdges="//@children.3/@wires.0" query="xpath:/page[inputform]">
+    <wires xsi:type="iaml.wires:SyncWire" from="//@children.3" to="//@children.4" name="sync"/>
+  </children>
+  <children xsi:type="iaml.visual:Page" name="FieldList" inEdges="//@children.3/@wires.0"/>
+</iaml:InternetApplication>

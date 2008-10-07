@@ -7,9 +7,8 @@
 package org.openiaml.model.model.operations;
 
 import org.openiaml.model.model.ActivityNode;
-import org.openiaml.model.model.DataFlowEdgeDestination;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.ExecutionEdgeDestination;
+import org.openiaml.model.model.ExecutionEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,5 +20,5 @@ import org.openiaml.model.model.WireEdgesSource;
  * @model
  * @generated
  */
-public interface DecisionNode extends WireEdgesSource, WireEdgeDestination, DataFlowEdgeDestination, ActivityNode {
+public interface DecisionNode extends ActivityNode, ExecutionEdgesSource, ExecutionEdgeDestination {
 } // DecisionNode

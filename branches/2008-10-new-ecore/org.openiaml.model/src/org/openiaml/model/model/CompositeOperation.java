@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getExecutionEdges <em>Execution Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.CompositeOperation#getVariables <em>Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,5 +75,21 @@ public interface CompositeOperation extends ChainedOperation, ContainsOperations
 	 * @generated
 	 */
 	EList<ExecutionEdge> getExecutionEdges();
+
+	/**
+	 * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.TemporaryVariable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variables</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getCompositeOperation_Variables()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TemporaryVariable> getVariables();
 
 } // CompositeOperation

@@ -188,6 +188,15 @@ public interface ModelFactory extends EFactory {
 	ExecutionEdge createExecutionEdge();
 
 	/**
+	 * Returns a new object of class '<em>Conditional Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Conditional Edge</em>'.
+	 * @generated
+	 */
+	ConditionalEdge createConditionalEdge();
+
+	/**
 	 * Returns a new object of class '<em>Dynamic Application Element Set</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

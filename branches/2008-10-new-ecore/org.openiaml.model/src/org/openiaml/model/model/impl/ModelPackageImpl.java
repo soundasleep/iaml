@@ -17,6 +17,7 @@ import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -261,6 +262,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass executionEdgesSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass conditionalEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -592,6 +600,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCompositeOperation_Variables() {
+		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getContainsOperations() {
 		return containsOperationsEClass;
 	}
@@ -889,6 +906,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConditionalEdge() {
+		return conditionalEdgeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDynamicApplicationElementSet() {
 		return dynamicApplicationElementSetEClass;
 	}
@@ -995,6 +1021,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__NODES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__DATA_EDGES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__EXECUTION_EDGES);
+		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__VARIABLES);
 
 		containsOperationsEClass = createEClass(CONTAINS_OPERATIONS);
 		createEReference(containsOperationsEClass, CONTAINS_OPERATIONS__OPERATIONS);
@@ -1043,6 +1070,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		executionEdgesSourceEClass = createEClass(EXECUTION_EDGES_SOURCE);
 		createEReference(executionEdgesSourceEClass, EXECUTION_EDGES_SOURCE__OUT_EXECUTIONS);
+
+		conditionalEdgeEClass = createEClass(CONDITIONAL_EDGE);
 
 		dynamicApplicationElementSetEClass = createEClass(DYNAMIC_APPLICATION_ELEMENT_SET);
 		createEAttribute(dynamicApplicationElementSetEClass, DYNAMIC_APPLICATION_ELEMENT_SET__QUERY);
@@ -1139,6 +1168,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		temporaryVariableEClass.getESuperTypes().add(this.getNamedElement());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
+		conditionalEdgeEClass.getESuperTypes().add(this.getExecutionEdge());
+		conditionalEdgeEClass.getESuperTypes().add(this.getNamedElement());
 		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getApplicationElement());
 		shouldntContainWiresEClass.getESuperTypes().add(this.getContainsWires());
 
@@ -1181,6 +1212,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getCompositeOperation_Nodes(), this.getActivityNode(), null, "nodes", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_DataEdges(), this.getDataFlowEdge(), null, "dataEdges", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_ExecutionEdges(), this.getExecutionEdge(), null, "executionEdges", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeOperation_Variables(), this.getTemporaryVariable(), null, "variables", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containsOperationsEClass, ContainsOperations.class, "ContainsOperations", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainsOperations_Operations(), this.getOperation(), null, "operations", null, 0, -1, ContainsOperations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1229,6 +1261,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(executionEdgesSourceEClass, ExecutionEdgesSource.class, "ExecutionEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutionEdgesSource_OutExecutions(), this.getExecutionEdge(), this.getExecutionEdge_From(), "outExecutions", null, 0, -1, ExecutionEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(conditionalEdgeEClass, ConditionalEdge.class, "ConditionalEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(dynamicApplicationElementSetEClass, DynamicApplicationElementSet.class, "DynamicApplicationElementSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDynamicApplicationElementSet_Query(), ecorePackage.getEString(), "query", null, 0, 1, DynamicApplicationElementSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

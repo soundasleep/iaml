@@ -22,6 +22,7 @@ import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.WireEdge;
 
 /**
@@ -36,6 +37,7 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getExecutionEdges <em>Execution Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getVariables <em>Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +93,16 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<ExecutionEdge> executionEdges;
+
+	/**
+	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TemporaryVariable> variables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -176,6 +188,18 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TemporaryVariable> getVariables() {
+		if (variables == null) {
+			variables = new EObjectContainmentEList<TemporaryVariable>(TemporaryVariable.class, this, ModelPackage.COMPOSITE_OPERATION__VARIABLES);
+		}
+		return variables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -189,6 +213,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return ((InternalEList<?>)getDataEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__EXECUTION_EDGES:
 				return ((InternalEList<?>)getExecutionEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
+				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -211,6 +237,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return getDataEdges();
 			case ModelPackage.COMPOSITE_OPERATION__EXECUTION_EDGES:
 				return getExecutionEdges();
+			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
+				return getVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -244,6 +272,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				getExecutionEdges().clear();
 				getExecutionEdges().addAll((Collection<? extends ExecutionEdge>)newValue);
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
+				getVariables().clear();
+				getVariables().addAll((Collection<? extends TemporaryVariable>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -271,6 +303,9 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__EXECUTION_EDGES:
 				getExecutionEdges().clear();
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
+				getVariables().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -293,6 +328,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return dataEdges != null && !dataEdges.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__EXECUTION_EDGES:
 				return executionEdges != null && !executionEdges.isEmpty();
+			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
+				return variables != null && !variables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

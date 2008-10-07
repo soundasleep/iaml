@@ -7,7 +7,7 @@
 package org.openiaml.model.model.operations;
 
 import org.openiaml.model.model.ActivityNode;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.ExecutionEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,5 +19,5 @@ import org.openiaml.model.model.WireEdgesSource;
  * @model
  * @generated
  */
-public interface StartNode extends WireEdgesSource, ActivityNode {
+public interface StartNode extends ActivityNode, ExecutionEdgesSource {
 } // StartNode

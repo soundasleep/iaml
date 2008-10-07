@@ -99,6 +99,11 @@
           href="iaml.ecore#//operations/StartNode"/>
       <domainSpecialization
           body="self.oclIsTypeOf( StartNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StartNodeName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="operation.gmftool#//@palette/@tools.0/@tools.4"/>
@@ -114,6 +119,11 @@
           href="iaml.ecore#//operations/StopNode"/>
       <domainSpecialization
           body="self.oclIsTypeOf( StopNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StopNodeName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="operation.gmftool#//@palette/@tools.0/@tools.5"/>
@@ -129,11 +139,36 @@
           href="iaml.ecore#//operations/FinishNode"/>
       <domainSpecialization
           body="self.oclIsTypeOf( FinishNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#FinishNodeName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#FinishNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/DecisionNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DecisionNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DecisionNodeName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.11"/>
+      <diagramNode
+          href="iaml.gmfgraph#DecisionNode"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -198,6 +233,8 @@
   <links>
     <domainMetaElement
         href="iaml.ecore#//ExecutionEdge"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ExecutionEdge )"/>
     <containmentFeature
         href="iaml.ecore#//CompositeOperation/executionEdges"/>
     <tool
@@ -205,6 +242,32 @@
         href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
     <diagramLink
         href="iaml.gmfgraph#ExecutionEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//ExecutionEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//ExecutionEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//ConditionalEdge"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ConditionalEdge )"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="iaml.gmfgraph#ConditionalEdgeName"/>
+      <features
+          href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/executionEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="operation.gmftool#//@palette/@tools.0/@tools.12"/>
+    <diagramLink
+        href="iaml.gmfgraph#ConditionalEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//ExecutionEdge/from"/>

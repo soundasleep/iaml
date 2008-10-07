@@ -10,15 +10,16 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.model.model.*;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -35,6 +36,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
@@ -392,6 +394,14 @@ public class ModelSwitch<T> {
 			case ModelPackage.EXECUTION_EDGES_SOURCE: {
 				ExecutionEdgesSource executionEdgesSource = (ExecutionEdgesSource)theEObject;
 				T result = caseExecutionEdgesSource(executionEdgesSource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.CONDITIONAL_EDGE: {
+				ConditionalEdge conditionalEdge = (ConditionalEdge)theEObject;
+				T result = caseConditionalEdge(conditionalEdge);
+				if (result == null) result = caseExecutionEdge(conditionalEdge);
+				if (result == null) result = caseNamedElement(conditionalEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -858,6 +868,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseExecutionEdgesSource(ExecutionEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Conditional Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Conditional Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConditionalEdge(ConditionalEdge object) {
 		return null;
 	}
 

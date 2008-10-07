@@ -143,6 +143,11 @@
             class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
             checkPluginLoaded="false">
          <Priority name="Low"/>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.operation.edit.parts.ConditionalEdgeNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
       </contributionItemProvider>
    </extension>
 
@@ -379,6 +384,36 @@
             <param name="semanticHint" value="1007"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/operations">
+         <metamodelType
+               id="org.openiaml.model.diagram.operation.DecisionNode_1008"
+               name="%metatype.name.DecisionNode_1008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DecisionNode"
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.DecisionOperationEditHelper">
+            <param name="semanticHint" value="1008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/operations">
+         <metamodelType
+               id="org.openiaml.model.diagram.operation.DecisionOperation_1009"
+               name="%metatype.name.DecisionOperation_1009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DecisionOperation"
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.TemporaryVariableEditHelper">
+            <param name="semanticHint" value="1009"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.operation.TemporaryVariable_1010"
+               name="%metatype.name.TemporaryVariable_1010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="TemporaryVariable"
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.DecisionNodeEditHelper">
+            <param name="semanticHint" value="1010"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
                id="org.openiaml.model.diagram.operation.DataFlowEdge_3001"
@@ -397,6 +432,16 @@
                eclass="ExecutionEdge"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ExecutionEdgeEditHelper">
             <param name="semanticHint" value="3002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.operation.ConditionalEdge_3003"
+               name="%metatype.name.ConditionalEdge_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ConditionalEdge"
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ConditionalEdgeEditHelper">
+            <param name="semanticHint" value="3003"/>
          </metamodelType>
       </metamodel>
    </extension>
@@ -419,8 +464,12 @@
          <elementType ref="org.openiaml.model.diagram.operation.StartNode_1005"/>
          <elementType ref="org.openiaml.model.diagram.operation.StopNode_1006"/>
          <elementType ref="org.openiaml.model.diagram.operation.FinishNode_1007"/>
+         <elementType ref="org.openiaml.model.diagram.operation.DecisionNode_1008"/>
+         <elementType ref="org.openiaml.model.diagram.operation.DecisionOperation_1009"/>
+         <elementType ref="org.openiaml.model.diagram.operation.TemporaryVariable_1010"/>
          <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_3001"/>
          <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_3002"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ConditionalEdge_3003"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

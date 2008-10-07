@@ -1,9 +1,14 @@
 <?php
 
+// now uses SimpleTest: http://www.lastcraft.com/simple_test.php
+// (licenced under LGPL)
+require_once('../simpletest/unit_tester.php');
+require_once('../simpletest/reporter.php');
+
 require("functions.php");
 require("class.XmlLoader.php");
 require("class.FileFinder.php");
-require("class.GmfTestRunner.php");
+//require("class.GmfTestRunner.php");
 require("class.GmfTestCase.php");
 
 define("GMF_ROOT", "../../org.openiaml.model/model/");
@@ -12,18 +17,8 @@ define("GMF_ROOT", "../../org.openiaml.model/model/");
 $testCases = FileFinder::instance()->match("./", ".php", "case.");
 
 // load each test case
-$runner = new GmfTestRunner();
+$runner =& new GroupTest("All EMF tests");
 foreach ($testCases as $test => $testFile) {
-	try {
-		require("case.$test.php");
-		$class = new $test();
-		if (!($class instanceof GmfTestCase)) {
-			throw new Exception("class $test is not a GmfTestCase");
-		}
-		$runner->runTest($class);
-	} catch (Exception $e) {
-		fatal($e);
-	}
+	$runner->addTestFile("case.$test.php");
 }
-$runner->printStats();
-
+exit($runner->run(new TextReporter()) ? 0 : 1);

@@ -23,7 +23,7 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface DynamicApplicationElementSet extends ContainsOperations, NamedElement, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination {
+public interface DynamicApplicationElementSet extends ApplicationElement {
 	/**
 	 * Returns the value of the '<em><b>Query</b></em>' attribute.
 	 * <!-- begin-user-doc -->

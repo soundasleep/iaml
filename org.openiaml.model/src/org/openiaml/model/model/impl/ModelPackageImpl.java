@@ -1139,11 +1139,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		temporaryVariableEClass.getESuperTypes().add(this.getNamedElement());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
-		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getContainsOperations());
-		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getNamedElement());
-		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getContainsEventTriggers());
-		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getWireEdgesSource());
-		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getApplicationElement());
 		shouldntContainWiresEClass.getESuperTypes().add(this.getContainsWires());
 
 		// Initialize classes and features; add operations and parameters

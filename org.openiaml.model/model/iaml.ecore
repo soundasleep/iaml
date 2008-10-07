@@ -137,7 +137,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outExecutions" upperBound="-1"
         eType="#//ExecutionEdge" eOpposite="#//ExecutionEdge/from"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DynamicApplicationElementSet" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination">
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicApplicationElementSet" eSuperTypes="#//ApplicationElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsWires" abstract="true" interface="true">

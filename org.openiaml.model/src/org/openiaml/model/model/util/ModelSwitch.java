@@ -398,6 +398,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET: {
 				DynamicApplicationElementSet dynamicApplicationElementSet = (DynamicApplicationElementSet)theEObject;
 				T result = caseDynamicApplicationElementSet(dynamicApplicationElementSet);
+				if (result == null) result = caseApplicationElement(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsOperations(dynamicApplicationElementSet);
 				if (result == null) result = caseNamedElement(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsEventTriggers(dynamicApplicationElementSet);

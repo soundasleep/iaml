@@ -138,6 +138,8 @@ public class ModelSwitch<T> {
 			case ModelPackage.WIRE_EDGES_SOURCE: {
 				WireEdgesSource wireEdgesSource = (WireEdgesSource)theEObject;
 				T result = caseWireEdgesSource(wireEdgesSource);
+				if (result == null) result = caseShouldntContainWires(wireEdgesSource);
+				if (result == null) result = caseContainsWires(wireEdgesSource);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -146,6 +148,8 @@ public class ModelSwitch<T> {
 				T result = caseEventTrigger(eventTrigger);
 				if (result == null) result = caseNamedElement(eventTrigger);
 				if (result == null) result = caseWireEdgesSource(eventTrigger);
+				if (result == null) result = caseShouldntContainWires(eventTrigger);
+				if (result == null) result = caseContainsWires(eventTrigger);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -165,6 +169,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(domainObject);
 				if (result == null) result = caseWireEdgesSource(domainObject);
 				if (result == null) result = caseWireEdgeDestination(domainObject);
+				if (result == null) result = caseShouldntContainWires(domainObject);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -177,6 +182,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(domainAttribute);
 				if (result == null) result = caseWireEdgesSource(domainAttribute);
 				if (result == null) result = caseWireEdgeDestination(domainAttribute);
+				if (result == null) result = caseShouldntContainWires(domainAttribute);
+				if (result == null) result = caseContainsWires(domainAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -265,6 +272,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(applicationElement);
 				if (result == null) result = caseWireEdgesSource(applicationElement);
 				if (result == null) result = caseWireEdgeDestination(applicationElement);
+				if (result == null) result = caseShouldntContainWires(applicationElement);
+				if (result == null) result = caseContainsWires(applicationElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -278,6 +287,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(applicationElementContainer);
 				if (result == null) result = caseWireEdgesSource(applicationElementContainer);
 				if (result == null) result = caseWireEdgeDestination(applicationElementContainer);
+				if (result == null) result = caseShouldntContainWires(applicationElementContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -289,6 +299,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgeDestination(applicationElementProperty);
 				if (result == null) result = caseDataFlowEdgesSource(applicationElementProperty);
 				if (result == null) result = caseDataFlowEdgeDestination(applicationElementProperty);
+				if (result == null) result = caseShouldntContainWires(applicationElementProperty);
 				if (result == null) result = caseContainsWires(applicationElementProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -299,6 +310,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(staticValue);
 				if (result == null) result = caseWireEdgesSource(staticValue);
 				if (result == null) result = caseDataFlowEdgeDestination(staticValue);
+				if (result == null) result = caseShouldntContainWires(staticValue);
+				if (result == null) result = caseContainsWires(staticValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -313,6 +326,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(visibleThing);
 				if (result == null) result = caseWireEdgesSource(visibleThing);
 				if (result == null) result = caseWireEdgeDestination(visibleThing);
+				if (result == null) result = caseShouldntContainWires(visibleThing);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -389,12 +403,21 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgesSource(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgeDestination(dynamicApplicationElementSet);
+				if (result == null) result = caseShouldntContainWires(dynamicApplicationElementSet);
+				if (result == null) result = caseContainsWires(dynamicApplicationElementSet);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.CONTAINS_WIRES: {
 				ContainsWires containsWires = (ContainsWires)theEObject;
 				T result = caseContainsWires(containsWires);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.SHOULDNT_CONTAIN_WIRES: {
+				ShouldntContainWires shouldntContainWires = (ShouldntContainWires)theEObject;
+				T result = caseShouldntContainWires(shouldntContainWires);
+				if (result == null) result = caseContainsWires(shouldntContainWires);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -864,6 +887,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsWires(ContainsWires object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Shouldnt Contain Wires</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Shouldnt Contain Wires</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseShouldntContainWires(ShouldntContainWires object) {
 		return null;
 	}
 

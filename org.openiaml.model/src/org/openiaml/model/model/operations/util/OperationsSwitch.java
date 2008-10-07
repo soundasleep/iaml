@@ -12,12 +12,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.operations.*;
@@ -107,6 +109,8 @@ public class OperationsSwitch<T> {
 				T result = caseStartNode(startNode);
 				if (result == null) result = caseWireEdgesSource(startNode);
 				if (result == null) result = caseActivityNode(startNode);
+				if (result == null) result = caseShouldntContainWires(startNode);
+				if (result == null) result = caseContainsWires(startNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -133,6 +137,8 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseWireEdgeDestination(decisionNode);
 				if (result == null) result = caseDataFlowEdgeDestination(decisionNode);
 				if (result == null) result = caseActivityNode(decisionNode);
+				if (result == null) result = caseShouldntContainWires(decisionNode);
+				if (result == null) result = caseContainsWires(decisionNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -227,6 +233,36 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseDecisionOperation(DecisionOperation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsWires(ContainsWires object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Shouldnt Contain Wires</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Shouldnt Contain Wires</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseShouldntContainWires(ShouldntContainWires object) {
 		return null;
 	}
 

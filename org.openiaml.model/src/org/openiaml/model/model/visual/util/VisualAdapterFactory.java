@@ -16,6 +16,7 @@ import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -106,6 +107,14 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createContainsEventTriggersAdapter();
 			}
 			@Override
+			public Adapter caseContainsWires(ContainsWires object) {
+				return createContainsWiresAdapter();
+			}
+			@Override
+			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
+				return createShouldntContainWiresAdapter();
+			}
+			@Override
 			public Adapter caseWireEdgesSource(WireEdgesSource object) {
 				return createWireEdgesSourceAdapter();
 			}
@@ -116,10 +125,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {
 				return createApplicationElementAdapter();
-			}
-			@Override
-			public Adapter caseContainsWires(ContainsWires object) {
-				return createContainsWiresAdapter();
 			}
 			@Override
 			public Adapter caseApplicationElementContainer(ApplicationElementContainer object) {
@@ -286,6 +291,20 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsWiresAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ShouldntContainWires <em>Shouldnt Contain Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ShouldntContainWires
+	 * @generated
+	 */
+	public Adapter createShouldntContainWiresAdapter() {
 		return null;
 	}
 

@@ -24,6 +24,7 @@ import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -36,11 +37,11 @@ import org.openiaml.model.model.WireEdgesSource;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInFlows <em>In Flows</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getWires <em>Wires</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,6 +67,16 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -106,16 +117,6 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * @ordered
 	 */
 	protected EList<DataFlowEdge> inFlows;
-
-	/**
-	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWires()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<WireEdge> wires;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -246,6 +247,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -254,8 +257,6 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return ((InternalEList<?>)getInFlows()).basicRemove(otherEnd, msgs);
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
-				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -270,6 +271,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__NAME:
 				return getName();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
+				return getWires();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -278,8 +281,6 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return getOutFlows();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return getInFlows();
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
-				return getWires();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -295,6 +296,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__NAME:
 				setName((String)newValue);
+				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				getOutEdges().clear();
@@ -312,10 +317,6 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				getInFlows().clear();
 				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
 				return;
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
-				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -331,6 +332,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
+				getWires().clear();
+				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -342,9 +346,6 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				getInFlows().clear();
-				return;
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
-				getWires().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -360,6 +361,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
+				return wires != null && !wires.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -368,8 +371,6 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return outFlows != null && !outFlows.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return inFlows != null && !inFlows.isEmpty();
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
-				return wires != null && !wires.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -381,6 +382,17 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ContainsWires.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == WireEdgesSource.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
@@ -405,12 +417,6 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				default: return -1;
 			}
 		}
-		if (baseClass == ContainsWires.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -421,6 +427,17 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ContainsWires.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == WireEdgesSource.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES;
@@ -442,12 +459,6 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		if (baseClass == DataFlowEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsWires.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES;
 				default: return -1;
 			}
 		}

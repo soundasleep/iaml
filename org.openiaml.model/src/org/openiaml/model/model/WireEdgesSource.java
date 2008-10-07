@@ -24,9 +24,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.openiaml.model.model.ModelPackage#getWireEdgesSource()
  * @model interface="true" abstract="true"
+ *        annotation="http://openiaml.org/comment comment='temporarily contains wires until GMF bug is fixed '"
  * @generated
  */
-public interface WireEdgesSource extends EObject {
+public interface WireEdgesSource extends ShouldntContainWires {
 	/**
 	 * Returns the value of the '<em><b>Out Edges</b></em>' reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.WireEdge}.

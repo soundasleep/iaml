@@ -21,10 +21,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -39,6 +41,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getEventTriggers <em>Event Triggers</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getProperties <em>Properties</em>}</li>
@@ -87,6 +90,16 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * @ordered
 	 */
 	protected EList<EventTrigger> eventTriggers;
+
+	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -187,6 +200,18 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getWires() {
+		if (wires == null) {
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT__WIRES);
+		}
+		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -247,6 +272,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
 				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
@@ -271,6 +298,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return getName();
 			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
 				return getEventTriggers();
+			case ModelPackage.APPLICATION_ELEMENT__WIRES:
+				return getWires();
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
@@ -300,6 +329,10 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
 				getEventTriggers().clear();
 				getEventTriggers().addAll((Collection<? extends EventTrigger>)newValue);
+				return;
+			case ModelPackage.APPLICATION_ELEMENT__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				getOutEdges().clear();
@@ -334,6 +367,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
 				getEventTriggers().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT__WIRES:
+				getWires().clear();
+				return;
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -361,6 +397,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
 				return eventTriggers != null && !eventTriggers.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT__WIRES:
+				return wires != null && !wires.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
@@ -387,6 +425,17 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		if (baseClass == ContainsEventTriggers.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS: return ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsWires.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.APPLICATION_ELEMENT__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (derivedFeatureID) {
 				default: return -1;
 			}
 		}
@@ -421,6 +470,17 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		if (baseClass == ContainsEventTriggers.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS: return ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsWires.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.APPLICATION_ELEMENT__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

@@ -11,6 +11,7 @@ import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 
@@ -35,7 +36,9 @@ public class CreateMissingDomainObjectShortcutsCommand extends
 		DomainObject rootObject = (DomainObject) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-		
+			
+		// StaticValue doesn't have in edges
+
 		// DomainAttribute
 		for (DomainAttribute child : rootObject.getAttributes()) {
 			connectionsIn.addAll( child.getInEdges() );
@@ -61,6 +64,11 @@ public class CreateMissingDomainObjectShortcutsCommand extends
 		DomainObject rootObject = (DomainObject) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
+
+		// StaticValue
+		for (StaticValue child : rootObject.getValues()) {
+			connectionsOut.addAll( child.getOutEdges() );
+		}
 		
 		// DomainAttribute
 		for (DomainAttribute child : rootObject.getAttributes()) {

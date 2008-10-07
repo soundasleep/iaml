@@ -63,7 +63,8 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 	}
 
 	public AbstractCreateMissingShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint) {
-		this(root, (EObject) ((Diagram) root.getModel()), prefHint);
+		// we used to only refresh the EObject of the container, not the actual EObject instance
+		this(root, (EObject) ((Diagram) root.getModel()).getElement(), prefHint);
 	}
 
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
@@ -237,7 +238,6 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 			doExecute(command);		//execute it now
 		}
 		
-		/*
 		for (EObject newObjectEdge : toAddEdge) {
 			// we should create a relationship edge now too
 			// not sure if this actually works
@@ -252,7 +252,6 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 			doExecute(command);
 			
 		}
-		*/
 
 		return command;
 		

@@ -10,6 +10,7 @@ import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 
@@ -34,7 +35,9 @@ public class CreateMissingElementShortcutsCommand extends
 		ApplicationElementContainer rootObject = (ApplicationElementContainer) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-
+	
+		// StaticValue doesn't have in edges
+		
 		// EventTrigger doesn't have in edges
 		
 		// Operation (incl ChainedOperation)
@@ -55,6 +58,11 @@ public class CreateMissingElementShortcutsCommand extends
 		ApplicationElementContainer rootObject = (ApplicationElementContainer) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
+
+		// StaticValue
+		for (StaticValue child : rootObject.getValues()) {
+			connectionsOut.addAll( child.getOutEdges() );
+		}
 
 		// EventTrigger
 		for (EventTrigger child : rootObject.getEventTriggers()) {

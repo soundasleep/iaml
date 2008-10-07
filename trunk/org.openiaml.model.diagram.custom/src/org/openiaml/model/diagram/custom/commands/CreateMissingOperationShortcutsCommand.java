@@ -33,6 +33,8 @@ public class CreateMissingOperationShortcutsCommand extends
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 
+		// TemporaryVariable has no in edges
+
 		// OperationParameter has no in edges
 		
 		// Operation (incl ChainedOperation)
@@ -48,6 +50,8 @@ public class CreateMissingOperationShortcutsCommand extends
 		CompositeOperation rootObject = (CompositeOperation) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
+
+		// TemporaryVariable has no out edges
 
 		// OperationParameter has no out edges
 				

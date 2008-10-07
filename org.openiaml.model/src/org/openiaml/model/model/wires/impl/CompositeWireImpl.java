@@ -24,6 +24,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.impl.WireEdgeImpl;
 import org.openiaml.model.model.wires.CompositeWire;
@@ -43,6 +44,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -128,6 +130,16 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @ordered
 	 */
 	protected EList<Parameter> parameters;
+
+	/**
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StaticValue> values;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -246,6 +258,18 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<StaticValue> getValues() {
+		if (values == null) {
+			values = new EObjectContainmentEList<StaticValue>(StaticValue.class, this, WiresPackage.COMPOSITE_WIRE__VALUES);
+		}
+		return values;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -261,6 +285,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -287,6 +313,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return getEventTriggers();
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return getParameters();
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				return getValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -327,6 +355,10 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends StaticValue>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -360,6 +392,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				getParameters().clear();
 				return;
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				getValues().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -386,6 +421,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return eventTriggers != null && !eventTriggers.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				return values != null && !values.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

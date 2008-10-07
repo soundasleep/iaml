@@ -393,6 +393,16 @@
             <param name="semanticHint" value="1008"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.wire.StaticValue_1009"
+               name="%metatype.name.StaticValue_1009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="StaticValue"
+               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.StaticValueEditHelper">
+            <param name="semanticHint" value="1009"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.wire.SyncWire_3001"
@@ -444,6 +454,7 @@
          <elementType ref="org.openiaml.model.diagram.wire.EventTrigger_1006"/>
          <elementType ref="org.openiaml.model.diagram.wire.ApplicationElementProperty_1007"/>
          <elementType ref="org.openiaml.model.diagram.wire.Parameter_1008"/>
+         <elementType ref="org.openiaml.model.diagram.wire.StaticValue_1009"/>
          <elementType ref="org.openiaml.model.diagram.wire.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.wire.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.wire.ParameterWire_3003"/>

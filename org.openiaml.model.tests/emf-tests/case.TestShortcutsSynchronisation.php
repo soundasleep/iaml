@@ -1,8 +1,6 @@
 <?php
 
 class TestShortcutsSynchronisation extends GmfTestCase {
-	public function collect($xpath, $files) {
-	}
 
 	public function run() {
 		$files = FileFinder::instance()->match(GMF_ROOT, ".gmfgen");

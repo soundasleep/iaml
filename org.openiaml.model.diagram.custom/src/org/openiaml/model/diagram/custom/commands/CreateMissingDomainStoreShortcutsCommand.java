@@ -35,7 +35,7 @@ public class CreateMissingDomainStoreShortcutsCommand extends
 		DomainStore rootObject = (DomainStore) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-
+		
 		// DomainObject <- ApplicationElement
 		for (DomainObject child : rootObject.getChildren()) {
 			connectionsIn.addAll( child.getInEdges() );

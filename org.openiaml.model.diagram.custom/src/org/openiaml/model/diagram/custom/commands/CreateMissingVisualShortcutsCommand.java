@@ -10,6 +10,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
@@ -36,6 +37,8 @@ public class CreateMissingVisualShortcutsCommand extends
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 
+		// StaticValue doesn't have in edges
+		
 		// ApplicationElement (incl VisualThing and Page)
 		for (ApplicationElement child : rootObject.getChildren()) {
 			connectionsIn.addAll( child.getInEdges() );
@@ -61,6 +64,11 @@ public class CreateMissingVisualShortcutsCommand extends
 		VisibleThing rootObject = (VisibleThing) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
+
+		// StaticValue
+		for (StaticValue child : rootObject.getValues()) {
+			connectionsOut.addAll( child.getOutEdges() );
+		}
 
 		// ApplicationElement (incl VisualThing and Page)
 		for (ApplicationElement child : rootObject.getChildren()) {

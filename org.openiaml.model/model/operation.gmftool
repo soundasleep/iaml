@@ -28,15 +28,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ChainedOperation"
-          description="Create new ChainedOperation">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="CompositeOperation"
           description="Create new CompositeOperation">
         <smallIcon
@@ -93,6 +84,24 @@
           xsi:type="gmftool:CreationTool"
           title="ExecutionEdge"
           description="Create new ExecutionEdge">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="TemporaryVariable"
+          description="Create new TemporaryVariable">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DecisionOperation"
+          description="Create new DecisionOperation">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon

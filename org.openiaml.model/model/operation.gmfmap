@@ -44,7 +44,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -66,7 +66,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#ChainedOperation"/>
     </ownedChild>
@@ -101,7 +101,7 @@
           body="self.oclIsTypeOf( StartNode )"/>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#StartNode"/>
     </ownedChild>
@@ -116,7 +116,7 @@
           body="self.oclIsTypeOf( StopNode )"/>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#StopNode"/>
     </ownedChild>
@@ -131,9 +131,51 @@
           body="self.oclIsTypeOf( FinishNode )"/>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#FinishNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsOperations/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/DecisionOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DecisionOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DecisionOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.10"/>
+      <diagramNode
+          href="iaml.gmfgraph#DecisionOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/variables"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//TemporaryVariable"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#TemporaryVariableName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.9"/>
+      <diagramNode
+          href="iaml.gmfgraph#TemporaryVariable"/>
     </ownedChild>
   </nodes>
   <links>
@@ -143,7 +185,7 @@
         href="iaml.ecore#//CompositeOperation/dataEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
+        href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
     <diagramLink
         href="iaml.gmfgraph#DataFlowEdge"/>
     <sourceMetaFeature
@@ -160,7 +202,7 @@
         href="iaml.ecore#//CompositeOperation/executionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.9"/>
+        href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
     <diagramLink
         href="iaml.gmfgraph#ExecutionEdge"/>
     <sourceMetaFeature

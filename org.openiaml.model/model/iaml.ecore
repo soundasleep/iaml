@@ -51,6 +51,8 @@
         eType="#//DataFlowEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="executionEdges" upperBound="-1"
         eType="#//ExecutionEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//TemporaryVariable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsOperations" abstract="true"
       interface="true">

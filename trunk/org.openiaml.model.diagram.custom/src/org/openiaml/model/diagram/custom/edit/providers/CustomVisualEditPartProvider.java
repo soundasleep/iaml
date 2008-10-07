@@ -11,6 +11,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.diagram.custom.commands.CreateMissingVisualShortcutsCommand;
 import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart;
 import org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.visual.providers.IamlEditPartProvider;
 
@@ -37,7 +38,7 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 		final IGraphicalEditPart part = super.createGraphicEditPart(view);
 
 		// we only want the root element to have this functionality
-		if (part instanceof PageEditPart) {
+		if (part instanceof VisibleThingEditPart) {
 
 			// do something
 			part.addEditPartListener(new EditPartListener() {
@@ -53,7 +54,7 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 						
 						ICommand command = new CreateMissingVisualShortcutsCommand((GraphicalEditPart) editpart, 
 									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT, 
-									PageEditPart.MODEL_ID);
+									VisibleThingEditPart.MODEL_ID);
 						
 						try {
 							OperationHistoryFactory.getOperationHistory().execute(command,

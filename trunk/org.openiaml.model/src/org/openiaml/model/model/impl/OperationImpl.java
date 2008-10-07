@@ -10,23 +10,24 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
+import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.OperationParameter;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.WireEdge;
 
 /**
@@ -38,6 +39,9 @@ import org.openiaml.model.model.WireEdge;
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getInFlows <em>In Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getInExecutions <em>In Executions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
@@ -76,6 +80,36 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getInFlows() <em>In Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataFlowEdge> inFlows;
+
+	/**
+	 * The cached value of the '{@link #getInExecutions() <em>In Executions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInExecutions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExecutionEdge> inExecutions;
+
+	/**
+	 * The cached value of the '{@link #getOutFlows() <em>Out Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataFlowEdge> outFlows;
+
+	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,7 +117,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OperationParameter> parameters;
+	protected EList<Parameter> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -142,9 +176,45 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OperationParameter> getParameters() {
+	public EList<DataFlowEdge> getInFlows() {
+		if (inFlows == null) {
+			inFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.OPERATION__IN_FLOWS, ModelPackage.DATA_FLOW_EDGE__TO);
+		}
+		return inFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ExecutionEdge> getInExecutions() {
+		if (inExecutions == null) {
+			inExecutions = new EObjectWithInverseResolvingEList<ExecutionEdge>(ExecutionEdge.class, this, ModelPackage.OPERATION__IN_EXECUTIONS, ModelPackage.EXECUTION_EDGE__TO);
+		}
+		return inExecutions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DataFlowEdge> getOutFlows() {
+		if (outFlows == null) {
+			outFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.OPERATION__OUT_FLOWS, ModelPackage.DATA_FLOW_EDGE__FROM);
+		}
+		return outFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Parameter> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<OperationParameter>(OperationParameter.class, this, ModelPackage.OPERATION__PARAMETERS);
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, ModelPackage.OPERATION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -160,6 +230,12 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 		switch (featureID) {
 			case ModelPackage.OPERATION__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.OPERATION__IN_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInFlows()).basicAdd(otherEnd, msgs);
+			case ModelPackage.OPERATION__IN_EXECUTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInExecutions()).basicAdd(otherEnd, msgs);
+			case ModelPackage.OPERATION__OUT_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutFlows()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -174,6 +250,12 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 		switch (featureID) {
 			case ModelPackage.OPERATION__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.OPERATION__IN_FLOWS:
+				return ((InternalEList<?>)getInFlows()).basicRemove(otherEnd, msgs);
+			case ModelPackage.OPERATION__IN_EXECUTIONS:
+				return ((InternalEList<?>)getInExecutions()).basicRemove(otherEnd, msgs);
+			case ModelPackage.OPERATION__OUT_FLOWS:
+				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
 			case ModelPackage.OPERATION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
@@ -192,6 +274,12 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return getInEdges();
 			case ModelPackage.OPERATION__NAME:
 				return getName();
+			case ModelPackage.OPERATION__IN_FLOWS:
+				return getInFlows();
+			case ModelPackage.OPERATION__IN_EXECUTIONS:
+				return getInExecutions();
+			case ModelPackage.OPERATION__OUT_FLOWS:
+				return getOutFlows();
 			case ModelPackage.OPERATION__PARAMETERS:
 				return getParameters();
 		}
@@ -214,9 +302,21 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 			case ModelPackage.OPERATION__NAME:
 				setName((String)newValue);
 				return;
+			case ModelPackage.OPERATION__IN_FLOWS:
+				getInFlows().clear();
+				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
+				return;
+			case ModelPackage.OPERATION__IN_EXECUTIONS:
+				getInExecutions().clear();
+				getInExecutions().addAll((Collection<? extends ExecutionEdge>)newValue);
+				return;
+			case ModelPackage.OPERATION__OUT_FLOWS:
+				getOutFlows().clear();
+				getOutFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
+				return;
 			case ModelPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends OperationParameter>)newValue);
+				getParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -235,6 +335,15 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return;
 			case ModelPackage.OPERATION__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case ModelPackage.OPERATION__IN_FLOWS:
+				getInFlows().clear();
+				return;
+			case ModelPackage.OPERATION__IN_EXECUTIONS:
+				getInExecutions().clear();
+				return;
+			case ModelPackage.OPERATION__OUT_FLOWS:
+				getOutFlows().clear();
 				return;
 			case ModelPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
@@ -255,6 +364,12 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return inEdges != null && !inEdges.isEmpty();
 			case ModelPackage.OPERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.OPERATION__IN_FLOWS:
+				return inFlows != null && !inFlows.isEmpty();
+			case ModelPackage.OPERATION__IN_EXECUTIONS:
+				return inExecutions != null && !inExecutions.isEmpty();
+			case ModelPackage.OPERATION__OUT_FLOWS:
+				return outFlows != null && !outFlows.isEmpty();
 			case ModelPackage.OPERATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 		}
@@ -274,6 +389,29 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				default: return -1;
 			}
 		}
+		if (baseClass == DataFlowEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.OPERATION__IN_FLOWS: return ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ExecutionEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.OPERATION__IN_EXECUTIONS: return ModelPackage.EXECUTION_EDGE_DESTINATION__IN_EXECUTIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActivityNode.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == DataFlowEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.OPERATION__OUT_FLOWS: return ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -287,6 +425,29 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.NAMED_ELEMENT__NAME: return ModelPackage.OPERATION__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == DataFlowEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS: return ModelPackage.OPERATION__IN_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ExecutionEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.EXECUTION_EDGE_DESTINATION__IN_EXECUTIONS: return ModelPackage.OPERATION__IN_EXECUTIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActivityNode.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == DataFlowEdgesSource.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS: return ModelPackage.OPERATION__OUT_FLOWS;
 				default: return -1;
 			}
 		}

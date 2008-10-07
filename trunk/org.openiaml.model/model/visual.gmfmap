@@ -72,6 +72,28 @@
   </nodes>
   <nodes>
     <containmentFeature
+        href="iaml.ecore#//ContainsOperations/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//ChainedOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( ChainedOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ChainedOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.5"/>
+      <diagramNode
+          href="iaml.gmfgraph#ChainedOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
         href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
@@ -202,24 +224,31 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ContainsOperations/operations"/>
+        href="iaml.ecore#//ApplicationElement/values"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//EventAwareOperation"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( EventAwareOperation )"/>
+          href="iaml.ecore#//StaticValue"/>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
         <diagramLabel
-            href="iaml.gmfgraph#EventAwareOperationName"/>
+            href="iaml.gmfgraph#StaticValueName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueValue"/>
+        <features
+            href="iaml.ecore#//StaticValue/value"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="visual.gmftool#//@palette/@tools.0/@tools.13"/>
       <diagramNode
-          href="iaml.gmfgraph#EventAwareOperation"/>
+          href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
   </nodes>
   <links>
@@ -235,7 +264,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.0/@tools.10"/>
@@ -250,23 +279,42 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/RunWire"/>
+        href="iaml.ecore#//wires/RunInstanceWire"/>
     <domainSpecialization
-        body="self.oclIsTypeOf( RunWire )"/>
+        body="self.oclIsTypeOf( RunInstanceWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#RunWireName"/>
+          href="iaml.gmfgraph#RunInstanceWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.0/@tools.11"/>
     <diagramLink
-        href="iaml.gmfgraph#RunWire"/>
+        href="iaml.gmfgraph#RunInstanceWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ParameterWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ParameterWire )"/>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/wires"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="visual.gmftool#//@palette/@tools.0/@tools.12"/>
+    <diagramLink
+        href="iaml.gmfgraph#ParameterWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

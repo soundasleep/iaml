@@ -6,14 +6,14 @@
       <?gmfgen generated="true"?>
       <fileTypes
          type="text"
-         extension="model_domain_object_diagram">
+         extension="iaml_domain_object_diagram">
       </fileTypes>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <?gmfgen generated="true"?>
       <parser
-         type="model_domain_object_diagram"
+         type="iaml_domain_object_diagram"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -24,7 +24,7 @@
          id="org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/ModelDiagramFile.gif"
-         extensions="model_domain_object_diagram"
+         extensions="iaml_domain_object_diagram"
          default="true"
          class="org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditor"
          matchingStrategy="org.openiaml.model.model.diagram.domain_object.part.IamlMatchingStrategy"
@@ -86,7 +86,7 @@
       <?gmfgen generated="true"?>
       <objectContribution
             id="org.openiaml.model.diagram.domain_object.InitDiagram"
-            nameFilter="*.model_domain_object"
+            nameFilter="*.iaml_domain_object"
             objectClass="org.eclipse.core.resources.IFile">
          <action
                label="%initDiagramActionLabel"
@@ -144,7 +144,7 @@
             checkPluginLoaded="false">
          <Priority name="Low"/>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.domain_object.edit.parts.RunWireNameEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.domain_object.edit.parts.RunInstanceWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -345,11 +345,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object.EventAwareOperation_1004"
-               name="%metatype.name.EventAwareOperation_1004"
+               id="org.openiaml.model.diagram.domain_object.ChainedOperation_1004"
+               name="%metatype.name.ChainedOperation_1004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="EventAwareOperation"
-               edithelper="org.openiaml.model.model.diagram.domain_object.edit.helpers.EventAwareOperationEditHelper">
+               eclass="ChainedOperation"
+               edithelper="org.openiaml.model.model.diagram.domain_object.edit.helpers.ChainedOperationEditHelper">
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
@@ -375,11 +375,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object.RunWire_3001"
-               name="%metatype.name.RunWire_3001"
+               id="org.openiaml.model.diagram.domain_object.RunInstanceWire_3001"
+               name="%metatype.name.RunInstanceWire_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="RunWire"
-               edithelper="org.openiaml.model.model.diagram.domain_object.edit.helpers.RunWireEditHelper">
+               eclass="RunInstanceWire"
+               edithelper="org.openiaml.model.model.diagram.domain_object.edit.helpers.RunInstanceWireEditHelper">
             <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>
@@ -409,10 +409,10 @@
          <elementType ref="org.openiaml.model.diagram.domain_object.EventTrigger_1001"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.SingleOperation_1002"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.CompositeOperation_1003"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.EventAwareOperation_1004"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.ChainedOperation_1004"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.ApplicationElementProperty_1005"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.DomainAttribute_1006"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.RunWire_3001"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.RunInstanceWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.SyncWire_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
@@ -469,7 +469,7 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="model_domain_object_diagram"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_domain_object_diagram"/>
                </and>
                <instanceof value="org.openiaml.model.model.diagram.domain_object.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
@@ -492,7 +492,7 @@
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="model_domain_object_diagram"/>
+        	         <test property="org.eclipse.core.resources.extension" value="iaml_domain_object_diagram"/>
                   </and>
                   <instanceof value="org.openiaml.model.model.diagram.domain_object.navigator.IamlAbstractNavigatorItem"/>
                </or>
@@ -511,7 +511,7 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="model_domain_object"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_domain_object"/>
                </and>
                <and>
                   <instanceof value="org.eclipse.emf.ecore.EObject"/>

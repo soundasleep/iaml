@@ -8,18 +8,23 @@ package org.openiaml.model.model.operations.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
+import org.openiaml.model.model.ExecutionEdgeDestination;
+import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
-
-import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.operations.StopNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,12 +95,24 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 				return createFinishNodeAdapter();
 			}
 			@Override
-			public Adapter caseSplitNode(SplitNode object) {
-				return createSplitNodeAdapter();
+			public Adapter caseDecisionNode(DecisionNode object) {
+				return createDecisionNodeAdapter();
 			}
 			@Override
-			public Adapter caseJoinNode(JoinNode object) {
-				return createJoinNodeAdapter();
+			public Adapter caseDecisionOperation(DecisionOperation object) {
+				return createDecisionOperationAdapter();
+			}
+			@Override
+			public Adapter caseActivityNode(ActivityNode object) {
+				return createActivityNodeAdapter();
+			}
+			@Override
+			public Adapter caseExecutionEdgesSource(ExecutionEdgesSource object) {
+				return createExecutionEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseExecutionEdgeDestination(ExecutionEdgeDestination object) {
+				return createExecutionEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
@@ -106,16 +123,20 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
+			public Adapter caseDataFlowEdgeDestination(DataFlowEdgeDestination object) {
+				return createDataFlowEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseDataFlowEdgesSource(DataFlowEdgesSource object) {
+				return createDataFlowEdgesSourceAdapter();
+			}
+			@Override
 			public Adapter caseOperation(Operation object) {
 				return createOperationAdapter();
 			}
 			@Override
-			public Adapter caseSingleOperation(SingleOperation object) {
-				return createSingleOperationAdapter();
-			}
-			@Override
-			public Adapter caseWireEdgesSource(WireEdgesSource object) {
-				return createWireEdgesSourceAdapter();
+			public Adapter caseChainedOperation(ChainedOperation object) {
+				return createChainedOperationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -180,30 +201,30 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.operations.SplitNode <em>Split Node</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.operations.DecisionNode <em>Decision Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.operations.SplitNode
+	 * @see org.openiaml.model.model.operations.DecisionNode
 	 * @generated
 	 */
-	public Adapter createSplitNodeAdapter() {
+	public Adapter createDecisionNodeAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.operations.JoinNode <em>Join Node</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.operations.DecisionOperation <em>Decision Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.operations.JoinNode
+	 * @see org.openiaml.model.model.operations.DecisionOperation
 	 * @generated
 	 */
-	public Adapter createJoinNodeAdapter() {
+	public Adapter createDecisionOperationAdapter() {
 		return null;
 	}
 
@@ -222,6 +243,20 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DataFlowEdgeDestination <em>Data Flow Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DataFlowEdgeDestination
+	 * @generated
+	 */
+	public Adapter createDataFlowEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -232,6 +267,34 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ExecutionEdgeDestination <em>Execution Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ExecutionEdgeDestination
+	 * @generated
+	 */
+	public Adapter createExecutionEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DataFlowEdgesSource <em>Data Flow Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DataFlowEdgesSource
+	 * @generated
+	 */
+	public Adapter createDataFlowEdgesSourceAdapter() {
 		return null;
 	}
 
@@ -250,30 +313,44 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.SingleOperation <em>Single Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ExecutionEdgesSource <em>Execution Edges Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.SingleOperation
+	 * @see org.openiaml.model.model.ExecutionEdgesSource
 	 * @generated
 	 */
-	public Adapter createSingleOperationAdapter() {
+	public Adapter createExecutionEdgesSourceAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgesSource <em>Wire Edges Source</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ChainedOperation <em>Chained Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.WireEdgesSource
+	 * @see org.openiaml.model.model.ChainedOperation
 	 * @generated
 	 */
-	public Adapter createWireEdgesSourceAdapter() {
+	public Adapter createChainedOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ActivityNode <em>Activity Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ActivityNode
+	 * @generated
+	 */
+	public Adapter createActivityNodeAdapter() {
 		return null;
 	}
 

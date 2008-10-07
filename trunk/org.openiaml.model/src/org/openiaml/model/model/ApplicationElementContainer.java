@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface ApplicationElementContainer extends ApplicationElement {
+public interface ApplicationElementContainer extends ApplicationElement, ContainsWires {
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElement}.

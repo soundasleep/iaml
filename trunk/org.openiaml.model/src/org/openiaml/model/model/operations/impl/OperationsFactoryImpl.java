@@ -9,12 +9,15 @@ package org.openiaml.model.model.operations.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.OperationsFactory;
+import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.operations.StopNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,8 +66,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 			case OperationsPackage.START_NODE: return createStartNode();
 			case OperationsPackage.STOP_NODE: return createStopNode();
 			case OperationsPackage.FINISH_NODE: return createFinishNode();
-			case OperationsPackage.SPLIT_NODE: return createSplitNode();
-			case OperationsPackage.JOIN_NODE: return createJoinNode();
+			case OperationsPackage.DECISION_NODE: return createDecisionNode();
+			case OperationsPackage.DECISION_OPERATION: return createDecisionOperation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -105,9 +108,9 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SplitNode createSplitNode() {
-		SplitNodeImpl splitNode = new SplitNodeImpl();
-		return splitNode;
+	public DecisionNode createDecisionNode() {
+		DecisionNodeImpl decisionNode = new DecisionNodeImpl();
+		return decisionNode;
 	}
 
 	/**
@@ -115,9 +118,9 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JoinNode createJoinNode() {
-		JoinNodeImpl joinNode = new JoinNodeImpl();
-		return joinNode;
+	public DecisionOperation createDecisionOperation() {
+		DecisionOperationImpl decisionOperation = new DecisionOperationImpl();
+		return decisionOperation;
 	}
 
 	/**

@@ -49,21 +49,14 @@ public class RefreshElementCommand extends AbstractTransactionalCommand {
 		// */
 		
 		// from generated DiagramUpdateCommand
-		/*
-		 * the problem with just this command is that it seems to 
-		 * replace element views entirely, not just modify them --
-		 * meaning that every time we open an already-existing
-		 * view (e.g. #1), it loads up a new one (e.g. #4).
-		 * 
-		 * not sure if we can get away with refresh without this.
-		 * 
+		/* *
 		List editPolicies = CanonicalEditPolicy
 			.getRegisteredEditPolicies(rootObject);
 		for (Iterator it = editPolicies.iterator(); it.hasNext(); ) {
 			CanonicalEditPolicy nextEditPolicy = (CanonicalEditPolicy) it.next();
 			nextEditPolicy.refresh();
 		}
-		*/
+		// */
 
 		return CommandResult.newOKCommandResult();
 	}

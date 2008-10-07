@@ -10,27 +10,23 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-
-import org.openiaml.model.model.OperationParameter;
+import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.StaticValue;
+import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.impl.WireEdgeImpl;
-
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -42,11 +38,13 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +70,16 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
 
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
@@ -121,7 +129,17 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OperationParameter> parameters;
+	protected EList<Parameter> parameters;
+
+	/**
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StaticValue> values;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,6 +179,18 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WiresPackage.COMPOSITE_WIRE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<WireEdge> getWires() {
+		if (wires == null) {
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, WiresPackage.COMPOSITE_WIRE__WIRES);
+		}
+		return wires;
 	}
 
 	/**
@@ -216,11 +246,23 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OperationParameter> getParameters() {
+	public EList<Parameter> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<OperationParameter>(OperationParameter.class, this, WiresPackage.COMPOSITE_WIRE__PARAMETERS);
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, WiresPackage.COMPOSITE_WIRE__PARAMETERS);
 		}
 		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<StaticValue> getValues() {
+		if (values == null) {
+			values = new EObjectContainmentEList<StaticValue>(StaticValue.class, this, WiresPackage.COMPOSITE_WIRE__VALUES);
+		}
+		return values;
 	}
 
 	/**
@@ -231,6 +273,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case WiresPackage.COMPOSITE_WIRE__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
@@ -241,6 +285,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -255,6 +301,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 		switch (featureID) {
 			case WiresPackage.COMPOSITE_WIRE__NAME:
 				return getName();
+			case WiresPackage.COMPOSITE_WIRE__WIRES:
+				return getWires();
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				return getChildren();
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
@@ -265,6 +313,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return getEventTriggers();
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return getParameters();
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				return getValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -280,6 +330,10 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 		switch (featureID) {
 			case WiresPackage.COMPOSITE_WIRE__NAME:
 				setName((String)newValue);
+				return;
+			case WiresPackage.COMPOSITE_WIRE__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				getChildren().clear();
@@ -299,7 +353,11 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return;
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends OperationParameter>)newValue);
+				getParameters().addAll((Collection<? extends Parameter>)newValue);
+				return;
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends StaticValue>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -316,6 +374,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case WiresPackage.COMPOSITE_WIRE__WIRES:
+				getWires().clear();
+				return;
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				getChildren().clear();
 				return;
@@ -331,6 +392,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				getParameters().clear();
 				return;
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				getValues().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -345,6 +409,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 		switch (featureID) {
 			case WiresPackage.COMPOSITE_WIRE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case WiresPackage.COMPOSITE_WIRE__WIRES:
+				return wires != null && !wires.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				return children != null && !children.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
@@ -355,6 +421,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return eventTriggers != null && !eventTriggers.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case WiresPackage.COMPOSITE_WIRE__VALUES:
+				return values != null && !values.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -372,6 +440,12 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsWires.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.COMPOSITE_WIRE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -385,6 +459,12 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.NAMED_ELEMENT__NAME: return WiresPackage.COMPOSITE_WIRE__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsWires.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_WIRES__WIRES: return WiresPackage.COMPOSITE_WIRE__WIRES;
 				default: return -1;
 			}
 		}

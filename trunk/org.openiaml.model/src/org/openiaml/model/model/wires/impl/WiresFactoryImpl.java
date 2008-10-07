@@ -9,12 +9,15 @@ package org.openiaml.model.model.wires.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SingleWire;
+import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.model.wires.WiresFactory;
+import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,11 +66,8 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.SINGLE_WIRE: return createSingleWire();
 			case WiresPackage.COMPOSITE_WIRE: return createCompositeWire();
 			case WiresPackage.SYNC_WIRE: return createSyncWire();
-			case WiresPackage.RUN_WIRE: return createRunWire();
-			case WiresPackage.EXECUTION_WIRE: return createExecutionWire();
-			case WiresPackage.PROVIDED_PARAMETER_WIRE: return createProvidedParameterWire();
-			case WiresPackage.PROPERTY_TO_PARAMETER_WIRE: return createPropertyToParameterWire();
-			case WiresPackage.PROPERTY_TO_EXECUTION_WIRE: return createPropertyToExecutionWire();
+			case WiresPackage.RUN_INSTANCE_WIRE: return createRunInstanceWire();
+			case WiresPackage.PARAMETER_WIRE: return createParameterWire();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -108,9 +108,9 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RunWire createRunWire() {
-		RunWireImpl runWire = new RunWireImpl();
-		return runWire;
+	public RunInstanceWire createRunInstanceWire() {
+		RunInstanceWireImpl runInstanceWire = new RunInstanceWireImpl();
+		return runInstanceWire;
 	}
 
 	/**
@@ -118,39 +118,9 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExecutionWire createExecutionWire() {
-		ExecutionWireImpl executionWire = new ExecutionWireImpl();
-		return executionWire;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ProvidedParameterWire createProvidedParameterWire() {
-		ProvidedParameterWireImpl providedParameterWire = new ProvidedParameterWireImpl();
-		return providedParameterWire;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PropertyToParameterWire createPropertyToParameterWire() {
-		PropertyToParameterWireImpl propertyToParameterWire = new PropertyToParameterWireImpl();
-		return propertyToParameterWire;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PropertyToExecutionWire createPropertyToExecutionWire() {
-		PropertyToExecutionWireImpl propertyToExecutionWire = new PropertyToExecutionWireImpl();
-		return propertyToExecutionWire;
+	public ParameterWire createParameterWire() {
+		ParameterWireImpl parameterWire = new ParameterWireImpl();
+		return parameterWire;
 	}
 
 	/**

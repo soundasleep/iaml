@@ -556,9 +556,9 @@
       </viewmap>
       <behaviour
           xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="OperationOpenDiagramEditPolicy"
-          diagramKind="Iaml_Operation"
-          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+          editPolicyClassName="VisualOpenDiagramEditPolicy"
+          diagramKind="Iaml_Visual"
+          editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/visual/InputTextField"/>

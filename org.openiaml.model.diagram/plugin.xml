@@ -379,7 +379,7 @@
                name="%metatype.name.DynamicApplicationElementSet_1007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DynamicApplicationElementSet"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.ApplicationElementPropertyEditHelper">
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.DynamicApplicationElementSetEditHelper">
             <param name="semanticHint" value="1007"/>
          </metamodelType>
       </metamodel>
@@ -389,7 +389,7 @@
                name="%metatype.name.ApplicationElementProperty_1008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.DomainStoreEditHelper">
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.ApplicationElementPropertyEditHelper">
             <param name="semanticHint" value="1008"/>
          </metamodelType>
       </metamodel>
@@ -399,7 +399,7 @@
                name="%metatype.name.DomainStore_1009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainStore"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.DomainStore2EditHelper">
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.DomainStoreEditHelper">
             <param name="semanticHint" value="1009"/>
          </metamodelType>
       </metamodel>

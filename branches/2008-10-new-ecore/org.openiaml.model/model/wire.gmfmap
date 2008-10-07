@@ -167,6 +167,33 @@
           href="iaml.gmfgraph#Parameter"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//wires/CompositeWire/values"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//StaticValue"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueValue"/>
+        <features
+            href="iaml.ecore#//StaticValue/value"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="wire.gmftool#//@palette/@tools.0/@tools.8"/>
+      <diagramNode
+          href="iaml.gmfgraph#StaticValue"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

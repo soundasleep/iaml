@@ -27,6 +27,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.ShouldntContainWires;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -45,6 +46,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -130,6 +132,16 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * @ordered
 	 */
 	protected EList<ApplicationElementProperty> properties;
+
+	/**
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StaticValue> values;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -248,6 +260,18 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<StaticValue> getValues() {
+		if (values == null) {
+			values = new EObjectContainmentEList<StaticValue>(StaticValue.class, this, ModelPackage.APPLICATION_ELEMENT__VALUES);
+		}
+		return values;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -280,6 +304,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__VALUES:
+				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -306,6 +332,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return getInEdges();
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				return getProperties();
+			case ModelPackage.APPLICATION_ELEMENT__VALUES:
+				return getValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -346,6 +374,10 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends StaticValue>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -379,6 +411,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				getProperties().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT__VALUES:
+				getValues().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -405,6 +440,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return inEdges != null && !inEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				return properties != null && !properties.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT__VALUES:
+				return values != null && !values.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -222,6 +222,35 @@
           href="iaml.gmfgraph#InputTextField"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElement/values"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//StaticValue"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueValue"/>
+        <features
+            href="iaml.ecore#//StaticValue/value"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.13"/>
+      <diagramNode
+          href="iaml.gmfgraph#StaticValue"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -267,6 +296,25 @@
         href="visual.gmftool#//@palette/@tools.0/@tools.11"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ParameterWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ParameterWire )"/>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/wires"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="visual.gmftool#//@palette/@tools.0/@tools.12"/>
+    <diagramLink
+        href="iaml.gmfgraph#ParameterWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

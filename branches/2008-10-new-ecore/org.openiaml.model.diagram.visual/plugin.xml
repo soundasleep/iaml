@@ -413,6 +413,16 @@
             <param name="semanticHint" value="1010"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.StaticValue_1011"
+               name="%metatype.name.StaticValue_1011"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="StaticValue"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.StaticValueEditHelper">
+            <param name="semanticHint" value="1011"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_3001"
@@ -431,6 +441,16 @@
                eclass="RunInstanceWire"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.RunInstanceWireEditHelper">
             <param name="semanticHint" value="3002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.ParameterWire_3003"
+               name="%metatype.name.ParameterWire_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ParameterWire"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ParameterWireEditHelper">
+            <param name="semanticHint" value="3003"/>
          </metamodelType>
       </metamodel>
    </extension>
@@ -456,8 +476,10 @@
          <elementType ref="org.openiaml.model.diagram.visual.Page_1008"/>
          <elementType ref="org.openiaml.model.diagram.visual.InputForm_1009"/>
          <elementType ref="org.openiaml.model.diagram.visual.InputTextField_1010"/>
+         <elementType ref="org.openiaml.model.diagram.visual.StaticValue_1011"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
+         <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

@@ -134,6 +134,15 @@ public interface VisualPackage extends EPackage {
 	int PAGE__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
 
 	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__VALUES = ModelPackage.VISIBLE_THING__VALUES;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -234,6 +243,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
 
 	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__VALUES = ModelPackage.VISIBLE_THING__VALUES;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -323,6 +341,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__VALUES = ModelPackage.VISIBLE_THING__VALUES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.

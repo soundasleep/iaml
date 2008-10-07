@@ -190,16 +190,16 @@
         <children
             xsi:type="gmfgraph:Label"
             name="StaticValueNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StaticValueValueFigure"
             text="&lt;...>">
           <font
               xsi:type="gmfgraph:BasicFont"
               faceName="Arial"
               style="BOLD"/>
         </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StaticValueValueFigure"
+            text="&lt;...>"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>

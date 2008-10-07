@@ -46,8 +46,8 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="EventAwareOperation"
-          description="Create new EventAwareOperation">
+          title="ChainedOperation"
+          description="Create new ChainedOperation">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon
@@ -86,8 +86,8 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="RunWire"
-          description="Create new RunWire">
+          title="RunInstanceWire"
+          description="Create new RunInstanceWire">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon
@@ -97,6 +97,15 @@
           xsi:type="gmftool:CreationTool"
           title="DomainStore"
           description="Create new DomainStore">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DynamicApplicationElementSet"
+          description="Create new DynamicApplicationElementSet">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon

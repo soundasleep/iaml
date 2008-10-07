@@ -25,12 +25,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +44,7 @@ import org.openiaml.model.model.Operation;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
@@ -90,6 +93,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
 
 	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -190,6 +203,18 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getWires() {
+		if (wires == null) {
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.INTERNET_APPLICATION__WIRES);
+		}
+		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ApplicationElementProperty> getProperties() {
 		if (properties == null) {
 			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.INTERNET_APPLICATION__PROPERTIES);
@@ -233,6 +258,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__EVENT_TRIGGERS:
 				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -257,6 +284,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getEventTriggers();
 			case ModelPackage.INTERNET_APPLICATION__NAME:
 				return getName();
+			case ModelPackage.INTERNET_APPLICATION__WIRES:
+				return getWires();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return getProperties();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -286,6 +315,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__NAME:
 				setName((String)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
@@ -320,6 +353,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.INTERNET_APPLICATION__WIRES:
+				getWires().clear();
+				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
 				return;
@@ -347,6 +383,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return eventTriggers != null && !eventTriggers.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.INTERNET_APPLICATION__WIRES:
+				return wires != null && !wires.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -376,6 +414,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsWires.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.INTERNET_APPLICATION__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -395,6 +439,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.NAMED_ELEMENT__NAME: return ModelPackage.INTERNET_APPLICATION__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsWires.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.INTERNET_APPLICATION__WIRES;
 				default: return -1;
 			}
 		}

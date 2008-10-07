@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="http://openiaml.org/comment comment='stores database objects' editor='org.openiaml.model.diagram.domain_store'"
  * @generated
  */
-public interface DomainStore extends ContainsOperations, ContainsEventTriggers, NamedElement {
+public interface DomainStore extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires {
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.DomainObject}.

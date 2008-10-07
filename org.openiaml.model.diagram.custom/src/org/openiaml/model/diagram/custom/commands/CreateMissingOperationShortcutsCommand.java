@@ -6,13 +6,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.OperationParameter;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 
@@ -38,13 +33,10 @@ public class CreateMissingOperationShortcutsCommand extends
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 
-		// OperationParameter
-		for (OperationParameter child : rootObject.getParameters()) {
-			connectionsIn.addAll( child.getInEdges() );
-		}
+		// OperationParameter has no in edges
 		
 		// Operation (incl ChainedOperation)
-		for (Operation child : rootObject.getSubOperations()) {
+		for (Operation child : rootObject.getOperations()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 		
@@ -57,16 +49,13 @@ public class CreateMissingOperationShortcutsCommand extends
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
-		// OperationParameter
-		for (OperationParameter child : rootObject.getParameters()) {
-			connectionsOut.addAll( child.getInEdges() );
-		}
+		// OperationParameter has no out edges
 				
 		// Operation (incl ChainedOperation)
-		for (Operation child : rootObject.getSubOperations()) {
+		for (Operation child : rootObject.getOperations()) {
 			// not all Operations have outwards edges
 			if (child instanceof WireEdgesSource) {
-				connectionsOut.addAll( ((WireEdgesSource) child).getEdges() );
+				connectionsOut.addAll( ((WireEdgesSource) child).getOutEdges() );
 			}
 		}
 

@@ -9,21 +9,15 @@ package org.openiaml.model.model.operations.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgesSource;
-
-import org.openiaml.model.model.impl.SingleOperationImpl;
-
+import org.openiaml.model.model.impl.ActivityNodeImpl;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
 
@@ -34,23 +28,22 @@ import org.openiaml.model.model.operations.StartNode;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.operations.impl.StartNodeImpl#getEdges <em>Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.StartNodeImpl#getOutExecutions <em>Out Executions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StartNodeImpl extends SingleOperationImpl implements StartNode {
+public class StartNodeImpl extends ActivityNodeImpl implements StartNode {
 	/**
-	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment reference list.
+	 * The cached value of the '{@link #getOutExecutions() <em>Out Executions</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEdges()
+	 * @see #getOutExecutions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> edges;
-
+	protected EList<ExecutionEdge> outExecutions;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,11 +68,11 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getEdges() {
-		if (edges == null) {
-			edges = new EObjectContainmentWithInverseEList<WireEdge>(WireEdge.class, this, OperationsPackage.START_NODE__EDGES, ModelPackage.WIRE_EDGE__FROM);
+	public EList<ExecutionEdge> getOutExecutions() {
+		if (outExecutions == null) {
+			outExecutions = new EObjectWithInverseResolvingEList<ExecutionEdge>(ExecutionEdge.class, this, OperationsPackage.START_NODE__OUT_EXECUTIONS, ModelPackage.EXECUTION_EDGE__FROM);
 		}
-		return edges;
+		return outExecutions;
 	}
 
 	/**
@@ -91,8 +84,8 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OperationsPackage.START_NODE__EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
+			case OperationsPackage.START_NODE__OUT_EXECUTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutExecutions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -105,8 +98,8 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OperationsPackage.START_NODE__EDGES:
-				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
+			case OperationsPackage.START_NODE__OUT_EXECUTIONS:
+				return ((InternalEList<?>)getOutExecutions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -119,8 +112,8 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationsPackage.START_NODE__EDGES:
-				return getEdges();
+			case OperationsPackage.START_NODE__OUT_EXECUTIONS:
+				return getOutExecutions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -134,9 +127,9 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationsPackage.START_NODE__EDGES:
-				getEdges().clear();
-				getEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case OperationsPackage.START_NODE__OUT_EXECUTIONS:
+				getOutExecutions().clear();
+				getOutExecutions().addAll((Collection<? extends ExecutionEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,8 +143,8 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationsPackage.START_NODE__EDGES:
-				getEdges().clear();
+			case OperationsPackage.START_NODE__OUT_EXECUTIONS:
+				getOutExecutions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -165,8 +158,8 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationsPackage.START_NODE__EDGES:
-				return edges != null && !edges.isEmpty();
+			case OperationsPackage.START_NODE__OUT_EXECUTIONS:
+				return outExecutions != null && !outExecutions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -178,9 +171,9 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == ExecutionEdgesSource.class) {
 			switch (derivedFeatureID) {
-				case OperationsPackage.START_NODE__EDGES: return ModelPackage.WIRE_EDGES_SOURCE__EDGES;
+				case OperationsPackage.START_NODE__OUT_EXECUTIONS: return ModelPackage.EXECUTION_EDGES_SOURCE__OUT_EXECUTIONS;
 				default: return -1;
 			}
 		}
@@ -194,9 +187,9 @@ public class StartNodeImpl extends SingleOperationImpl implements StartNode {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == ExecutionEdgesSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__EDGES: return OperationsPackage.START_NODE__EDGES;
+				case ModelPackage.EXECUTION_EDGES_SOURCE__OUT_EXECUTIONS: return OperationsPackage.START_NODE__OUT_EXECUTIONS;
 				default: return -1;
 			}
 		}

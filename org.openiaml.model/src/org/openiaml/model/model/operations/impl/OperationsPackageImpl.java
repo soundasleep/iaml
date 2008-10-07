@@ -8,27 +8,19 @@ package org.openiaml.model.model.operations.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.openiaml.model.model.ModelPackage;
-
 import org.openiaml.model.model.impl.ModelPackageImpl;
-
+import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
-import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.StopNode;
-
 import org.openiaml.model.model.visual.VisualPackage;
-
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
-
 import org.openiaml.model.model.wires.WiresPackage;
-
 import org.openiaml.model.model.wires.impl.WiresPackageImpl;
 
 /**
@@ -64,14 +56,14 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass splitNodeEClass = null;
+	private EClass decisionNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass joinNodeEClass = null;
+	private EClass decisionOperationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -184,8 +176,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSplitNode() {
-		return splitNodeEClass;
+	public EClass getDecisionNode() {
+		return decisionNodeEClass;
 	}
 
 	/**
@@ -193,8 +185,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getJoinNode() {
-		return joinNodeEClass;
+	public EClass getDecisionOperation() {
+		return decisionOperationEClass;
 	}
 
 	/**
@@ -231,9 +223,9 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		finishNodeEClass = createEClass(FINISH_NODE);
 
-		splitNodeEClass = createEClass(SPLIT_NODE);
+		decisionNodeEClass = createEClass(DECISION_NODE);
 
-		joinNodeEClass = createEClass(JOIN_NODE);
+		decisionOperationEClass = createEClass(DECISION_OPERATION);
 	}
 
 	/**
@@ -267,14 +259,17 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		startNodeEClass.getESuperTypes().add(theModelPackage.getSingleOperation());
-		startNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
-		stopNodeEClass.getESuperTypes().add(theModelPackage.getSingleOperation());
-		finishNodeEClass.getESuperTypes().add(theModelPackage.getSingleOperation());
-		splitNodeEClass.getESuperTypes().add(theModelPackage.getSingleOperation());
-		splitNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
-		joinNodeEClass.getESuperTypes().add(theModelPackage.getSingleOperation());
-		joinNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
+		startNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		startNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
+		stopNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		stopNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		finishNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		finishNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		decisionNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
+		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		decisionOperationEClass.getESuperTypes().add(theModelPackage.getChainedOperation());
+		decisionOperationEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -283,9 +278,9 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		initEClass(finishNodeEClass, FinishNode.class, "FinishNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(splitNodeEClass, SplitNode.class, "SplitNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(decisionNodeEClass, DecisionNode.class, "DecisionNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(joinNodeEClass, JoinNode.class, "JoinNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(decisionOperationEClass, DecisionOperation.class, "DecisionOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //OperationsPackageImpl

@@ -54,13 +54,13 @@
         href="iaml.ecore#//ContainsOperations/operations"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//EventAwareOperation"/>
+          href="iaml.ecore#//ChainedOperation"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( EventAwareOperation )"/>
+          body="self.oclIsTypeOf( ChainedOperation )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#EventAwareOperationName"/>
+            href="iaml.gmfgraph#ChainedOperationName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
@@ -68,7 +68,7 @@
           xsi:type="gmftool:CreationTool"
           href="element.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
-          href="iaml.gmfgraph#EventAwareOperation"/>
+          href="iaml.gmfgraph#ChainedOperation"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -113,23 +113,23 @@
   </nodes>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/RunWire"/>
+        href="iaml.ecore#//wires/RunInstanceWire"/>
     <domainSpecialization
-        body="self.oclIsTypeOf( RunWire )"/>
+        body="self.oclIsTypeOf( RunInstanceWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#RunWireName"/>
+          href="iaml.gmfgraph#RunInstanceWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="element.gmftool#//@palette/@tools.0/@tools.6"/>
     <diagramLink
-        href="iaml.gmfgraph#RunWire"/>
+        href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>
@@ -150,7 +150,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="element.gmftool#//@palette/@tools.0/@tools.5"/>

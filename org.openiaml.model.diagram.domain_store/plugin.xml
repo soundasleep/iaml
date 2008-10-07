@@ -6,14 +6,14 @@
       <?gmfgen generated="true"?>
       <fileTypes
          type="text"
-         extension="model_store_diagram">
+         extension="iaml_store_diagram">
       </fileTypes>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <?gmfgen generated="true"?>
       <parser
-         type="model_store_diagram"
+         type="iaml_store_diagram"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -24,7 +24,7 @@
          id="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/ModelDiagramFile.gif"
-         extensions="model_store_diagram"
+         extensions="iaml_store_diagram"
          default="true"
          class="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditor"
          matchingStrategy="org.openiaml.model.model.diagram.domainstore.part.IamlMatchingStrategy"
@@ -86,7 +86,7 @@
       <?gmfgen generated="true"?>
       <objectContribution
             id="org.openiaml.model.diagram.domain_store.InitDiagram"
-            nameFilter="*.model_store"
+            nameFilter="*.iaml_store"
             objectClass="org.eclipse.core.resources.IFile">
          <action
                label="%initDiagramActionLabel"
@@ -360,11 +360,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_store.EventAwareOperation_1006"
-               name="%metatype.name.EventAwareOperation_1006"
+               id="org.openiaml.model.diagram.domain_store.ChainedOperation_1006"
+               name="%metatype.name.ChainedOperation_1006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="EventAwareOperation"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.EventAwareOperationEditHelper">
+               eclass="ChainedOperation"
+               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.ChainedOperationEditHelper">
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
@@ -396,7 +396,7 @@
          <elementType ref="org.openiaml.model.diagram.domain_store.DomainObject_1003"/>
          <elementType ref="org.openiaml.model.diagram.domain_store.EventTrigger_1004"/>
          <elementType ref="org.openiaml.model.diagram.domain_store.ApplicationElementProperty_1005"/>
-         <elementType ref="org.openiaml.model.diagram.domain_store.EventAwareOperation_1006"/>
+         <elementType ref="org.openiaml.model.diagram.domain_store.ChainedOperation_1006"/>
          <elementType ref="org.openiaml.model.diagram.domain_store.SyncWire_3001"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
@@ -453,7 +453,7 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="model_store_diagram"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_store_diagram"/>
                </and>
                <instanceof value="org.openiaml.model.model.diagram.domainstore.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
@@ -476,7 +476,7 @@
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="model_store_diagram"/>
+        	         <test property="org.eclipse.core.resources.extension" value="iaml_store_diagram"/>
                   </and>
                   <instanceof value="org.openiaml.model.model.diagram.domainstore.navigator.IamlAbstractNavigatorItem"/>
                </or>
@@ -495,7 +495,7 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="model_store"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_store"/>
                </and>
                <and>
                   <instanceof value="org.eclipse.emf.ecore.EObject"/>

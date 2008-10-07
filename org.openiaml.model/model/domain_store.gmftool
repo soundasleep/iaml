@@ -64,8 +64,8 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="EventAwareOperation"
-          description="Create new EventAwareOperation">
+          title="ChainedOperation"
+          description="Create new ChainedOperation">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon

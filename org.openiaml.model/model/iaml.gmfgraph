@@ -7,13 +7,7 @@
       name="Default">
     <figures
         xsi:type="gmfgraph:PolylineDecoration"
-        name="ArrowDecoration"/>
-    <descriptors
-        name="WireEdgeFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="WireEdgeFigure"/>
-    </descriptors>
+        name="MyArrowDecorator"/>
     <descriptors
         name="EventTriggerFigure">
       <actualFigure
@@ -21,52 +15,38 @@
           name="EventTriggerFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="247"
+            green="221"
+            blue="238"/>
         <children
             xsi:type="gmfgraph:Label"
             name="EventTriggerNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="DomainStoreFigure">
-      <actualFigure
-          xsi:type="gmfgraph:RoundedRectangle"
-          name="DomainStoreFigure"
-          lineWidth="2"
-          cornerWidth="10"
-          cornerHeight="10">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="DomainStoreNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureDomainStoreNameFigure"
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DomainObjectFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="DomainObjectFigure">
+          name="DomainObjectFigure"
+          lineWidth="2">
         <layout
             xsi:type="gmfgraph:FlowLayout"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainObjectNameFigure"
-            text="&lt;...>">
-          <font
-              xsi:type="gmfgraph:BasicFont"
-              faceName="Arial"
-              style="BOLD"/>
-        </children>
+            text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DomainAttributeFigure">
@@ -81,209 +61,51 @@
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="OperationParameterFigure">
+        name="ActivityNodeFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="OperationParameterFigure">
+          name="ActivityNodeFigure"/>
+    </descriptors>
+    <descriptors
+        name="ParameterFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ParameterFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="196"
-            green="224"
-            blue="255"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="ITALIC"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="OperationParameterNameFigure"
-            text="&lt;...>">
-          <font
-              xsi:type="gmfgraph:BasicFont"
-              faceName="Arial"
-              style="ITALIC"/>
-        </children>
+            name="ParameterNamePrefix"
+            text="parameter: "/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ParameterNameFigure"
+            text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SingleOperationFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
-          name="SingleOperationFigure"
-          cornerWidth="10"
-          cornerHeight="10">
+          name="SingleOperationFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="SingleOperationNameFigure"
+            name="SimpleOperationNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          accessor="getFigureSingleOperationNameFigure"
-          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="CompositeOperationFigure">
-      <actualFigure
-          xsi:type="gmfgraph:RoundedRectangle"
-          name="CompositeOperationFigure"
-          cornerWidth="10"
-          cornerHeight="10">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CompositeOperationPrefixFigure"
-            text="(composite)"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CompositeOperationNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureCompositeOperationNameFigure"
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.1"/>
-    </descriptors>
-    <descriptors
-        name="ApplicationElementContainerFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="ApplicationElementContainerFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ApplicationElementContainerNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="ApplicationElementPropertyFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="ApplicationElementPropertyFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="224"
-            green="160"
-            blue="224"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ApplicationElementPropertyNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="PageFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="PageFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="240"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="PagePrefixFigure"
-            text="(page)"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="PageNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="PageUrlFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
-      <accessors
-          figure="//@figures.0/@descriptors.10/@actualFigure/@children.2"/>
-    </descriptors>
-    <descriptors
-        name="InputFormFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InputFormFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="255"
-            blue="240"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="InputFormNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="InputTextFieldFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InputTextFieldFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="255"
-            green="240"
-            blue="240"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="InputTextFieldNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="SyncWireFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="SyncWireFigure"
-          lineKind="LINE_DASH"
-          sourceDecoration="//@figures.0/@figures.0"
-          targetDecoration="//@figures.0/@figures.0">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="SyncWireNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.13/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="RunWireFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="RunWireFigure"
-          lineKind="LINE_DASH"
-          targetDecoration="//@figures.0/@figures.0">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="RunWireNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="ChainedOperationFigure">
@@ -303,126 +125,14 @@
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          accessor="getFigureChainedOperationNameFigure"
-          figure="//@figures.0/@descriptors.15/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="EventAwareOperationFigure">
+        name="CompositeOperationFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
-          name="EventAwareOperationFigure"
-          lineKind="LINE_DASH"
-          cornerWidth="10"
-          cornerHeight="10">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="EventAwareOperationPrefixFigure"
-            text="(event aware)"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="EventAwareOperationNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureEventAwareOperationNameFigure"
-          figure="//@figures.0/@descriptors.16/@actualFigure/@children.1"/>
-    </descriptors>
-    <descriptors
-        name="PropertyToExecutionWireFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="PropertyToExecutionWireFigure"
-          lineKind="LINE_DOT"
-          targetDecoration="//@figures.0/@figures.0">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="PropertyToExecutionWireNameFigure"
-            text="p2e"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="StartNodeFigure">
-      <actualFigure
-          xsi:type="gmfgraph:RoundedRectangle"
-          name="StopNodeFigure"
-          lineWidth="2"
-          cornerWidth="10"
-          cornerHeight="10">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="212"
-            green="212"
-            blue="212"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StartNodeNameFigure"
-            text="start"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureStartNodeNameFigure"
-          figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="StopNodeFigure">
-      <actualFigure
-          xsi:type="gmfgraph:RoundedRectangle"
-          name="StopNodeFigure"
-          lineWidth="2"
-          cornerWidth="10"
-          cornerHeight="10">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="224"
-            green="160"
-            blue="160"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StopNodeNameFigure"
-            text="stop"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureStopNodeNameFigure"
-          figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="FinishNodeFigure">
-      <actualFigure
-          xsi:type="gmfgraph:RoundedRectangle"
-          name="StopNodeFigure"
-          lineWidth="2"
-          cornerWidth="10"
-          cornerHeight="10">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="160"
-            green="224"
-            blue="160"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FinishNodeNameFigure"
-            text="finished"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureFinishNodeNameFigure"
-          figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="CompositeChainedOperationFigure">
-      <actualFigure
-          xsi:type="gmfgraph:RoundedRectangle"
-          name="CompositeChainedOperationFigure"
-          cornerWidth="10"
-          cornerHeight="10">
+          name="CompositeOperationFigure"
+          lineKind="LINE_DASH">
         <layout
             xsi:type="gmfgraph:FlowLayout"/>
         <backgroundColor
@@ -432,52 +142,407 @@
             blue="240"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="CompositeChainedOperationPrefixFigure"
-            text="(composite)"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CompositeChainedOperationNameFigure"
+            name="CompositeOperationNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          accessor="getFigureCompositeChainedOperationNameFigure"
-          figure="//@figures.0/@descriptors.21/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="ExecutionWireFigure">
+        name="ApplicationElementFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ApplicationElementFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ApplicationElementNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ApplicationElementPropertyFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ApplicationElementPropertyFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="208"
+            green="185"
+            blue="243"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ApplicationElementPropertyNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="StaticValueFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="StaticValueFigure"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StaticValueNameFigure"
+            text="&lt;...>">
+          <font
+              xsi:type="gmfgraph:BasicFont"
+              faceName="Arial"
+              style="BOLD"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StaticValueValueFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="VisibleThingFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="VisibleThingFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="VisibleThingNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="DomainStoreFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="DomainStoreFigure"
+          lineWidth="2">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="240"
+            green="240"
+            blue="220"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainStoreNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="DataFlowEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="ExecutionWireFigure"
+          name="DataFlowEdgeFigure"
+          lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0"/>
     </descriptors>
     <descriptors
-        name="PropertyToParameterWireFigure">
+        name="TemporaryVariableFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="TemporaryVariableFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="243"
+            green="212"
+            blue="185"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="TemporaryVariableNamePrefix"
+            text="temp: "/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="TemporaryVariableNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="ExecutionEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="PropertyToParameterWireFigure"
+          name="ExecutionEdgeFigure"
+          targetDecoration="//@figures.0/@figures.0"/>
+    </descriptors>
+    <descriptors
+        name="DynamicApplicationElementSetFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="DynamicApplicationElementSetFigure"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="240"
+            green="220"
+            blue="220"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DynamicApplicationElementSetNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DynamicApplicationElementSetQueryFigure"
+            text="&lt;...>">
+          <font
+              xsi:type="gmfgraph:BasicFont"
+              faceName="Arial"
+              style="ITALIC"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.16/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.16/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="PageFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="PageFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="240"
+            green="240"
+            blue="240"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PageNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PageUrlFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.17/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="InputFormFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="InputFormFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="243"
+            green="185"
+            blue="192"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="InputFormNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="InputTextFieldFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="InputTextFieldFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="243"
+            green="229"
+            blue="185"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="InputTextFieldNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="SingleWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="SingleWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0"/>
+    </descriptors>
+    <descriptors
+        name="CompositeWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="CompositeWireFigure"
+          lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="PropertyToParameterWireNameFigure"
-            text="prop2param"/>
+            name="CompositeWireNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="SyncWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="SyncWireFigure"
+          lineKind="LINE_DASH"
+          sourceDecoration="//@figures.0/@figures.0"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SyncWireNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="RunInstanceWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="RunInstanceWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="RunInstanceWireNameFigure"
+            text="&lt;...>"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.23/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="ProvidedParameterWireFigure">
+        name="ParameterWireFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="ProvidedParameterWireFigure"
-          lineKind="LINE_DASH"
+          name="ParameterWireFigure"
+          targetDecoration="//@figures.0/@figures.0"/>
+    </descriptors>
+    <descriptors
+        name="StartNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="StartNodeFigure">
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="154"
+            green="224"
+            blue="142"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StartNodeLabelFigure"
+            text="start"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="StopNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="StopNodeFigure">
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="224"
+            green="144"
+            blue="142"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StopNodeLabelFigure"
+            text="stop"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="FinishNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="FinishNodeFigure">
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="235"
+            green="211"
+            blue="179"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FinishNodeLabelFigure"
+            text="finish"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="DecisionNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="DecisionNodeFigure">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DecisionNodeLabelFigure"
+            text="???"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="DecisionOperationFigure">
+      <actualFigure
+          xsi:type="gmfgraph:RoundedRectangle"
+          name="DecisionOperationFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DecisionOperationNameFigure"
+            text="??? &lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ConditionalEdgeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ConditionalEdgeFigure"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="ProvidedParameterWireNameFigure"
-            text="param"/>
+            name="ConditionalEdgeNameFigure"
+            text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -490,20 +555,41 @@
       name="DomainAttribute"
       figure="DomainAttributeFigure"/>
   <nodes
-      name="OperationParameter"
-      figure="OperationParameterFigure"/>
+      name="ActivityNode"
+      figure="ActivityNodeFigure"/>
+  <nodes
+      name="Parameter"
+      figure="ParameterFigure"/>
   <nodes
       name="SingleOperation"
       figure="SingleOperationFigure"/>
   <nodes
+      name="ChainedOperation"
+      figure="ChainedOperationFigure"/>
+  <nodes
       name="CompositeOperation"
       figure="CompositeOperationFigure"/>
   <nodes
-      name="ApplicationElementContainer"
-      figure="ApplicationElementContainerFigure"/>
+      name="ApplicationElement"
+      figure="ApplicationElementFigure"/>
   <nodes
       name="ApplicationElementProperty"
       figure="ApplicationElementPropertyFigure"/>
+  <nodes
+      name="StaticValue"
+      figure="StaticValueFigure"/>
+  <nodes
+      name="VisibleThing"
+      figure="VisibleThingFigure"/>
+  <nodes
+      name="DomainStore"
+      figure="DomainStoreFigure"/>
+  <nodes
+      name="TemporaryVariable"
+      figure="TemporaryVariableFigure"/>
+  <nodes
+      name="DynamicApplicationElementSet"
+      figure="DynamicApplicationElementSetFigure"/>
   <nodes
       name="Page"
       figure="PageFigure"/>
@@ -514,15 +600,6 @@
       name="InputTextField"
       figure="InputTextFieldFigure"/>
   <nodes
-      name="DomainStore"
-      figure="DomainStoreFigure"/>
-  <nodes
-      name="ChainedOperation"
-      figure="ChainedOperationFigure"/>
-  <nodes
-      name="EventAwareOperation"
-      figure="EventAwareOperationFigure"/>
-  <nodes
       name="StartNode"
       figure="StartNodeFigure"/>
   <nodes
@@ -532,125 +609,149 @@
       name="FinishNode"
       figure="FinishNodeFigure"/>
   <nodes
-      name="CompositeChainedOperation"
-      figure="CompositeChainedOperationFigure"/>
+      name="DecisionNode"
+      figure="DecisionNodeFigure"/>
+  <nodes
+      name="DecisionOperation"
+      figure="DecisionOperationFigure"/>
   <connections
-      name="WireEdge"
-      figure="WireEdgeFigure"/>
+      name="DataFlowEdge"
+      figure="DataFlowEdgeFigure"/>
+  <connections
+      name="ExecutionEdge"
+      figure="ExecutionEdgeFigure"/>
+  <connections
+      name="SingleWire"
+      figure="SingleWireFigure"/>
+  <connections
+      name="CompositeWire"
+      figure="CompositeWireFigure"/>
   <connections
       name="SyncWire"
       figure="SyncWireFigure"/>
   <connections
-      name="RunWire"
-      figure="RunWireFigure"/>
+      name="RunInstanceWire"
+      figure="RunInstanceWireFigure"/>
   <connections
-      name="PropertyToExecutionWire"
-      figure="PropertyToExecutionWireFigure"/>
+      name="ParameterWire"
+      figure="ParameterWireFigure"/>
   <connections
-      name="ExecutionWire"
-      figure="ExecutionWireFigure"/>
-  <connections
-      name="PropertyToParameterWire"
-      figure="PropertyToParameterWireFigure"/>
-  <connections
-      name="ProvidedParameterWire"
-      figure="ProvidedParameterWireFigure"/>
+      name="ConditionalEdge"
+      figure="ConditionalEdgeFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
-      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
-  <labels
-      name="DomainStoreName"
-      figure="DomainStoreFigure"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="DomainObjectName"
       figure="DomainObjectFigure"
-      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="DomainAttributeName"
       figure="DomainAttributeFigure"
-      accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
   <labels
-      name="OperationParameterName"
-      figure="OperationParameterFigure"
-      accessor="//@figures.0/@descriptors.5/@accessors.0"/>
+      name="ParameterName"
+      figure="ParameterFigure"
+      accessor="//@figures.0/@descriptors.4/@accessors.0"/>
   <labels
       name="SingleOperationName"
       figure="SingleOperationFigure"
+      accessor="//@figures.0/@descriptors.5/@accessors.0"/>
+  <labels
+      name="ChainedOperationName"
+      figure="ChainedOperationFigure"
       accessor="//@figures.0/@descriptors.6/@accessors.0"/>
   <labels
       name="CompositeOperationName"
       figure="CompositeOperationFigure"
       accessor="//@figures.0/@descriptors.7/@accessors.0"/>
   <labels
-      name="ApplicationElementContainerName"
-      figure="ApplicationElementContainerFigure"
+      name="ApplicationElementName"
+      figure="ApplicationElementFigure"
       accessor="//@figures.0/@descriptors.8/@accessors.0"/>
   <labels
       name="ApplicationElementPropertyName"
       figure="ApplicationElementPropertyFigure"
       accessor="//@figures.0/@descriptors.9/@accessors.0"/>
   <labels
+      name="StaticValueName"
+      figure="StaticValueFigure"
+      accessor="//@figures.0/@descriptors.10/@accessors.0"/>
+  <labels
+      name="StaticValueValue"
+      figure="StaticValueFigure"
+      accessor="//@figures.0/@descriptors.10/@accessors.1"/>
+  <labels
+      name="VisibleThingName"
+      figure="VisibleThingFigure"
+      accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+  <labels
+      name="DomainStoreName"
+      figure="DomainStoreFigure"
+      accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+  <labels
+      name="TemporaryVariableName"
+      figure="TemporaryVariableFigure"
+      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
+  <labels
+      name="DynamicApplicationElementSetName"
+      figure="DynamicApplicationElementSetFigure"
+      accessor="//@figures.0/@descriptors.16/@accessors.0"/>
+  <labels
+      name="DynamicApplicationElementSetQuery"
+      figure="DynamicApplicationElementSetFigure"
+      accessor="//@figures.0/@descriptors.16/@accessors.1"/>
+  <labels
       name="PageName"
       figure="PageFigure"
-      accessor="//@figures.0/@descriptors.10/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.17/@accessors.0"/>
   <labels
       name="PageUrl"
       figure="PageFigure"
-      accessor="//@figures.0/@descriptors.10/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.17/@accessors.1"/>
   <labels
       name="InputFormName"
       figure="InputFormFigure"
-      accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.18/@accessors.0"/>
   <labels
       name="InputTextFieldName"
       figure="InputTextFieldFigure"
-      accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.19/@accessors.0"/>
+  <labels
+      name="CompositeWireName"
+      figure="CompositeWireFigure"
+      accessor="//@figures.0/@descriptors.21/@accessors.0"/>
   <labels
       name="SyncWireName"
       figure="SyncWireFigure"
-      accessor="//@figures.0/@descriptors.13/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.22/@accessors.0"/>
   <labels
-      name="RunWireName"
-      figure="RunWireFigure"
-      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
+      name="RunInstanceWireName"
+      figure="RunInstanceWireFigure"
+      accessor="//@figures.0/@descriptors.23/@accessors.0"/>
   <labels
-      name="ChainedOperationName"
-      figure="ChainedOperationFigure"
-      accessor="//@figures.0/@descriptors.15/@accessors.0"/>
-  <labels
-      name="EventAwareOperationName"
-      figure="EventAwareOperationFigure"
-      accessor="//@figures.0/@descriptors.16/@accessors.0"/>
-  <labels
-      name="PropertyToExecutionWireName"
-      figure="PropertyToExecutionWireFigure"
-      accessor="//@figures.0/@descriptors.17/@accessors.0"/>
+      name="DecisionOperationName"
+      figure="DecisionOperationFigure"
+      accessor="//@figures.0/@descriptors.29/@accessors.0"/>
   <labels
       name="StartNodeName"
       figure="StartNodeFigure"
-      accessor="//@figures.0/@descriptors.18/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
   <labels
       name="StopNodeName"
       figure="StopNodeFigure"
-      accessor="//@figures.0/@descriptors.19/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
   <labels
       name="FinishNodeName"
       figure="FinishNodeFigure"
-      accessor="//@figures.0/@descriptors.20/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
   <labels
-      name="CompositeChainedOperationName"
-      figure="CompositeChainedOperationFigure"
-      accessor="//@figures.0/@descriptors.21/@accessors.0"/>
+      name="DecisionNodeName"
+      figure="DecisionNodeFigure"
+      accessor="//@figures.0/@descriptors.28/@accessors.0"/>
   <labels
-      name="PropertyToParameterWireName"
-      figure="PropertyToParameterWireFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.23/@accessors.0"/>
-  <labels
-      name="ProvidedParameterWireName"
-      figure="ProvidedParameterWireFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.24/@accessors.0"/>
+      name="ConditionalEdgeName"
+      figure="ConditionalEdgeFigure"
+      accessor="//@figures.0/@descriptors.30/@accessors.0"/>
 </gmfgraph:Canvas>

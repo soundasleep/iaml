@@ -74,13 +74,13 @@
         href="iaml.ecore#//ContainsOperations/operations"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//EventAwareOperation"/>
+          href="iaml.ecore#//ChainedOperation"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( EventAwareOperation )"/>
+          body="self.oclIsTypeOf( ChainedOperation )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#EventAwareOperationName"/>
+            href="iaml.gmfgraph#ChainedOperationName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
@@ -88,7 +88,7 @@
           xsi:type="gmftool:CreationTool"
           href="root.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
-          href="iaml.gmfgraph#EventAwareOperation"/>
+          href="iaml.gmfgraph#ChainedOperationName"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -133,6 +133,35 @@
           href="root.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#Page"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//InternetApplication/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//DynamicApplicationElementSet"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DynamicApplicationElementSet )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DynamicApplicationElementSetName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DynamicApplicationElementSetQuery"/>
+        <features
+            href="iaml.ecore#//DynamicApplicationElementSet/query"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.0/@tools.10"/>
+      <diagramNode
+          href="iaml.gmfgraph#DynamicApplicationElementSet"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -188,7 +217,7 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="root.gmftool#//@palette/@tools.0/@tools.7"/>
@@ -203,23 +232,23 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/RunWire"/>
+        href="iaml.ecore#//wires/RunInstanceWire"/>
     <domainSpecialization
-        body="self.oclIsTypeOf(RunWire)"/>
+        body="self.oclIsTypeOf( RunInstanceWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#RunWireName"/>
+          href="iaml.gmfgraph#RunInstanceWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//WireEdgesSource/edges"/>
+        href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="root.gmftool#//@palette/@tools.0/@tools.8"/>
     <diagramLink
-        href="iaml.gmfgraph#RunWire"/>
+        href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

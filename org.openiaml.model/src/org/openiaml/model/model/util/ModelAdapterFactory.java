@@ -8,12 +8,42 @@ package org.openiaml.model.model.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.openiaml.model.model.*;
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ApplicationElementContainer;
+import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ConditionalEdge;
+import org.openiaml.model.model.ContainsEventTriggers;
+import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
+import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.DynamicApplicationElementSet;
+import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.ExecutionEdgeDestination;
+import org.openiaml.model.model.ExecutionEdgesSource;
+import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.ShouldntContainWires;
+import org.openiaml.model.model.SingleOperation;
+import org.openiaml.model.model.StaticValue;
+import org.openiaml.model.model.TemporaryVariable;
+import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -104,12 +134,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createDomainAttributeAdapter();
 			}
 			@Override
+			public Adapter caseActivityNode(ActivityNode object) {
+				return createActivityNodeAdapter();
+			}
+			@Override
 			public Adapter caseOperation(Operation object) {
 				return createOperationAdapter();
 			}
 			@Override
-			public Adapter caseOperationParameter(OperationParameter object) {
-				return createOperationParameterAdapter();
+			public Adapter caseParameter(Parameter object) {
+				return createParameterAdapter();
 			}
 			@Override
 			public Adapter caseSingleOperation(SingleOperation object) {
@@ -122,14 +156,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCompositeOperation(CompositeOperation object) {
 				return createCompositeOperationAdapter();
-			}
-			@Override
-			public Adapter caseCompositeChainedOperation(CompositeChainedOperation object) {
-				return createCompositeChainedOperationAdapter();
-			}
-			@Override
-			public Adapter caseEventAwareOperation(EventAwareOperation object) {
-				return createEventAwareOperationAdapter();
 			}
 			@Override
 			public Adapter caseContainsOperations(ContainsOperations object) {
@@ -148,6 +174,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createApplicationElementPropertyAdapter();
 			}
 			@Override
+			public Adapter caseStaticValue(StaticValue object) {
+				return createStaticValueAdapter();
+			}
+			@Override
 			public Adapter caseVisibleThing(VisibleThing object) {
 				return createVisibleThingAdapter();
 			}
@@ -158,6 +188,50 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDomainStore(DomainStore object) {
 				return createDomainStoreAdapter();
+			}
+			@Override
+			public Adapter caseDataFlowEdge(DataFlowEdge object) {
+				return createDataFlowEdgeAdapter();
+			}
+			@Override
+			public Adapter caseDataFlowEdgeDestination(DataFlowEdgeDestination object) {
+				return createDataFlowEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseDataFlowEdgesSource(DataFlowEdgesSource object) {
+				return createDataFlowEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseTemporaryVariable(TemporaryVariable object) {
+				return createTemporaryVariableAdapter();
+			}
+			@Override
+			public Adapter caseExecutionEdge(ExecutionEdge object) {
+				return createExecutionEdgeAdapter();
+			}
+			@Override
+			public Adapter caseExecutionEdgeDestination(ExecutionEdgeDestination object) {
+				return createExecutionEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseExecutionEdgesSource(ExecutionEdgesSource object) {
+				return createExecutionEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseConditionalEdge(ConditionalEdge object) {
+				return createConditionalEdgeAdapter();
+			}
+			@Override
+			public Adapter caseDynamicApplicationElementSet(DynamicApplicationElementSet object) {
+				return createDynamicApplicationElementSetAdapter();
+			}
+			@Override
+			public Adapter caseContainsWires(ContainsWires object) {
+				return createContainsWiresAdapter();
+			}
+			@Override
+			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
+				return createShouldntContainWiresAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -292,6 +366,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ActivityNode <em>Activity Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ActivityNode
+	 * @generated
+	 */
+	public Adapter createActivityNodeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -306,16 +394,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.OperationParameter <em>Operation Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.OperationParameter
+	 * @see org.openiaml.model.model.Parameter
 	 * @generated
 	 */
-	public Adapter createOperationParameterAdapter() {
+	public Adapter createParameterAdapter() {
 		return null;
 	}
 
@@ -358,34 +446,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompositeOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.CompositeChainedOperation <em>Composite Chained Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.CompositeChainedOperation
-	 * @generated
-	 */
-	public Adapter createCompositeChainedOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.EventAwareOperation <em>Event Aware Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.EventAwareOperation
-	 * @generated
-	 */
-	public Adapter createEventAwareOperationAdapter() {
 		return null;
 	}
 
@@ -446,6 +506,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.StaticValue <em>Static Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.StaticValue
+	 * @generated
+	 */
+	public Adapter createStaticValueAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.VisibleThing <em>Visible Thing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -484,6 +558,160 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDomainStoreAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DataFlowEdge <em>Data Flow Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DataFlowEdge
+	 * @generated
+	 */
+	public Adapter createDataFlowEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DataFlowEdgeDestination <em>Data Flow Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DataFlowEdgeDestination
+	 * @generated
+	 */
+	public Adapter createDataFlowEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DataFlowEdgesSource <em>Data Flow Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DataFlowEdgesSource
+	 * @generated
+	 */
+	public Adapter createDataFlowEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.TemporaryVariable <em>Temporary Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.TemporaryVariable
+	 * @generated
+	 */
+	public Adapter createTemporaryVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ExecutionEdge <em>Execution Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ExecutionEdge
+	 * @generated
+	 */
+	public Adapter createExecutionEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ExecutionEdgeDestination <em>Execution Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ExecutionEdgeDestination
+	 * @generated
+	 */
+	public Adapter createExecutionEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ExecutionEdgesSource <em>Execution Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ExecutionEdgesSource
+	 * @generated
+	 */
+	public Adapter createExecutionEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ConditionalEdge <em>Conditional Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ConditionalEdge
+	 * @generated
+	 */
+	public Adapter createConditionalEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DynamicApplicationElementSet <em>Dynamic Application Element Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DynamicApplicationElementSet
+	 * @generated
+	 */
+	public Adapter createDynamicApplicationElementSetAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsWires <em>Contains Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsWires
+	 * @generated
+	 */
+	public Adapter createContainsWiresAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ShouldntContainWires <em>Shouldnt Contain Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ShouldntContainWires
+	 * @generated
+	 */
+	public Adapter createShouldntContainWiresAdapter() {
 		return null;
 	}
 

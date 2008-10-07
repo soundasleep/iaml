@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires">
+  <children xsi:type="iaml.visual:Page" name="container">
+    <children xsi:type="iaml.visual:InputForm" name="foo" outEdges="//@children.0/@children.0/@wires.0">
+      <eventTriggers name="edit" outEdges="//@children.0/@children.0/@eventTriggers.0/@wires.0">
+        <wires xsi:type="iaml.wires:RunInstanceWire" from="//@children.0/@children.0/@eventTriggers.0" to="//@children.0/@children.1/@operations.0" name="run" inEdges="//@children.0/@children.0/@wires.0/@values.0/@wires.0"/>
+      </eventTriggers>
+      <wires xsi:type="iaml.wires:SyncWire" from="//@children.0/@children.0" to="//@children.0/@children.1" name="sync">
+        <values name="var" outEdges="//@children.0/@children.0/@wires.0/@values.0/@wires.0" value="42">
+          <wires xsi:type="iaml.wires:ParameterWire" from="//@children.0/@children.0/@wires.0/@values.0" to="//@children.0/@children.0/@eventTriggers.0/@wires.0"/>
+        </values>
+      </wires>
+    </children>
+    <children xsi:type="iaml.visual:InputForm" name="bar" inEdges="//@children.0/@children.0/@wires.0">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="//@children.0/@children.0/@eventTriggers.0/@wires.0" name="printInt">
+        <parameters name="int" outFlows="//@children.0/@children.1/@operations.0/@dataEdges.0 //@children.0/@children.1/@operations.0/@dataEdges.3"/>
+        <operations xsi:type="iaml.operations:DecisionOperation" name="ensure > 41" inFlows="//@children.0/@children.1/@operations.0/@dataEdges.3" inExecutions="//@children.0/@children.1/@operations.0/@executionEdges.1" outExecutions="//@children.0/@children.1/@operations.0/@executionEdges.2"/>
+        <operations xsi:type="iaml:ChainedOperation" name="multiply by 2" inFlows="//@children.0/@children.1/@operations.0/@dataEdges.0" inExecutions="//@children.0/@children.1/@operations.0/@executionEdges.5" outFlows="//@children.0/@children.1/@operations.0/@dataEdges.1" outExecutions="//@children.0/@children.1/@operations.0/@executionEdges.0"/>
+        <operations xsi:type="iaml:ChainedOperation" name="print(int)" inFlows="//@children.0/@children.1/@operations.0/@dataEdges.2" inExecutions="//@children.0/@children.1/@operations.0/@executionEdges.0" outExecutions="//@children.0/@children.1/@operations.0/@executionEdges.3"/>
+        <nodes xsi:type="iaml.operations:StartNode" outExecutions="//@children.0/@children.1/@operations.0/@executionEdges.1"/>
+        <nodes xsi:type="iaml.operations:StopNode" inExecutions="//@children.0/@children.1/@operations.0/@executionEdges.4"/>
+        <nodes xsi:type="iaml.operations:FinishNode" inExecutions="//@children.0/@children.1/@operations.0/@executionEdges.3"/>
+        <nodes xsi:type="iaml.operations:DecisionNode" outExecutions="//@children.0/@children.1/@operations.0/@executionEdges.4 //@children.0/@children.1/@operations.0/@executionEdges.5" inExecutions="//@children.0/@children.1/@operations.0/@executionEdges.2"/>
+        <dataEdges from="//@children.0/@children.1/@operations.0/@parameters.0" to="//@children.0/@children.1/@operations.0/@operations.1"/>
+        <dataEdges from="//@children.0/@children.1/@operations.0/@operations.1" to="//@children.0/@children.1/@operations.0/@variables.0"/>
+        <dataEdges from="//@children.0/@children.1/@operations.0/@variables.0" to="//@children.0/@children.1/@operations.0/@operations.2"/>
+        <dataEdges from="//@children.0/@children.1/@operations.0/@parameters.0" to="//@children.0/@children.1/@operations.0/@operations.0"/>
+        <executionEdges from="//@children.0/@children.1/@operations.0/@operations.1" to="//@children.0/@children.1/@operations.0/@operations.2"/>
+        <executionEdges from="//@children.0/@children.1/@operations.0/@nodes.0" to="//@children.0/@children.1/@operations.0/@operations.0"/>
+        <executionEdges from="//@children.0/@children.1/@operations.0/@operations.0" to="//@children.0/@children.1/@operations.0/@nodes.3"/>
+        <executionEdges from="//@children.0/@children.1/@operations.0/@operations.2" to="//@children.0/@children.1/@operations.0/@nodes.2"/>
+        <executionEdges xsi:type="iaml:ConditionalEdge" from="//@children.0/@children.1/@operations.0/@nodes.3" to="//@children.0/@children.1/@operations.0/@nodes.1" name="no"/>
+        <executionEdges xsi:type="iaml:ConditionalEdge" from="//@children.0/@children.1/@operations.0/@nodes.3" to="//@children.0/@children.1/@operations.0/@operations.1" name="yes"/>
+        <variables name="int2" outFlows="//@children.0/@children.1/@operations.0/@dataEdges.2" inFlows="//@children.0/@children.1/@operations.0/@dataEdges.1"/>
+      </operations>
+    </children>
+  </children>
+</iaml:InternetApplication>

@@ -10,12 +10,16 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
-
 import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SingleWire;
+import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -103,6 +107,7 @@ public class WiresSwitch<T> {
 				T result = caseCompositeWire(compositeWire);
 				if (result == null) result = caseWireEdge(compositeWire);
 				if (result == null) result = caseNamedElement(compositeWire);
+				if (result == null) result = caseContainsWires(compositeWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -112,48 +117,26 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseCompositeWire(syncWire);
 				if (result == null) result = caseWireEdge(syncWire);
 				if (result == null) result = caseNamedElement(syncWire);
+				if (result == null) result = caseContainsWires(syncWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.RUN_WIRE: {
-				RunWire runWire = (RunWire)theEObject;
-				T result = caseRunWire(runWire);
-				if (result == null) result = caseCompositeWire(runWire);
-				if (result == null) result = caseWireEdgeDestination(runWire);
-				if (result == null) result = caseWireEdge(runWire);
-				if (result == null) result = caseNamedElement(runWire);
+			case WiresPackage.RUN_INSTANCE_WIRE: {
+				RunInstanceWire runInstanceWire = (RunInstanceWire)theEObject;
+				T result = caseRunInstanceWire(runInstanceWire);
+				if (result == null) result = caseCompositeWire(runInstanceWire);
+				if (result == null) result = caseWireEdgeDestination(runInstanceWire);
+				if (result == null) result = caseWireEdge(runInstanceWire);
+				if (result == null) result = caseNamedElement(runInstanceWire);
+				if (result == null) result = caseContainsWires(runInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.EXECUTION_WIRE: {
-				ExecutionWire executionWire = (ExecutionWire)theEObject;
-				T result = caseExecutionWire(executionWire);
-				if (result == null) result = caseSingleWire(executionWire);
-				if (result == null) result = caseWireEdge(executionWire);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case WiresPackage.PROVIDED_PARAMETER_WIRE: {
-				ProvidedParameterWire providedParameterWire = (ProvidedParameterWire)theEObject;
-				T result = caseProvidedParameterWire(providedParameterWire);
-				if (result == null) result = caseSingleWire(providedParameterWire);
-				if (result == null) result = caseWireEdge(providedParameterWire);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case WiresPackage.PROPERTY_TO_PARAMETER_WIRE: {
-				PropertyToParameterWire propertyToParameterWire = (PropertyToParameterWire)theEObject;
-				T result = casePropertyToParameterWire(propertyToParameterWire);
-				if (result == null) result = caseSingleWire(propertyToParameterWire);
-				if (result == null) result = caseWireEdge(propertyToParameterWire);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case WiresPackage.PROPERTY_TO_EXECUTION_WIRE: {
-				PropertyToExecutionWire propertyToExecutionWire = (PropertyToExecutionWire)theEObject;
-				T result = casePropertyToExecutionWire(propertyToExecutionWire);
-				if (result == null) result = caseSingleWire(propertyToExecutionWire);
-				if (result == null) result = caseWireEdge(propertyToExecutionWire);
+			case WiresPackage.PARAMETER_WIRE: {
+				ParameterWire parameterWire = (ParameterWire)theEObject;
+				T result = caseParameterWire(parameterWire);
+				if (result == null) result = caseSingleWire(parameterWire);
+				if (result == null) result = caseWireEdge(parameterWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -207,77 +190,32 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Run Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Run Instance Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Run Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Run Instance Wire</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRunWire(RunWire object) {
+	public T caseRunInstanceWire(RunInstanceWire object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Execution Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Execution Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Wire</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExecutionWire(ExecutionWire object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Provided Parameter Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Provided Parameter Wire</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseProvidedParameterWire(ProvidedParameterWire object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Property To Parameter Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Property To Parameter Wire</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePropertyToParameterWire(PropertyToParameterWire object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Property To Execution Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Property To Execution Wire</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePropertyToExecutionWire(PropertyToExecutionWire object) {
+	public T caseParameterWire(ParameterWire object) {
 		return null;
 	}
 
@@ -308,6 +246,21 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsWires(ContainsWires object) {
 		return null;
 	}
 

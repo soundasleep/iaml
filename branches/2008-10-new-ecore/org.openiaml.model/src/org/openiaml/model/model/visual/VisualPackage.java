@@ -98,6 +98,15 @@ public interface VisualPackage extends EPackage {
 	int PAGE__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,15 +132,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGE__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
-
-	/**
-	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__WIRES = ModelPackage.VISIBLE_THING__WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -198,6 +198,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -223,15 +232,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_FORM__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
-
-	/**
-	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INPUT_FORM__WIRES = ModelPackage.VISIBLE_THING__WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -289,6 +289,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -314,15 +323,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
-
-	/**
-	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INPUT_TEXT_FIELD__WIRES = ModelPackage.VISIBLE_THING__WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.

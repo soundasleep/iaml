@@ -24,11 +24,13 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.openiaml.model.model.ContainsEventTriggers;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -43,6 +45,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.DynamicApplicationElementSetImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DynamicApplicationElementSetImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DynamicApplicationElementSetImpl#getEventTriggers <em>Event Triggers</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DynamicApplicationElementSetImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DynamicApplicationElementSetImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DynamicApplicationElementSetImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DynamicApplicationElementSetImpl#getQuery <em>Query</em>}</li>
@@ -91,6 +94,16 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 	 * @ordered
 	 */
 	protected EList<EventTrigger> eventTriggers;
+
+	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -201,6 +214,18 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getWires() {
+		if (wires == null) {
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__WIRES);
+		}
+		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -270,6 +295,8 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS:
 				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__IN_EDGES:
@@ -292,6 +319,8 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 				return getName();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS:
 				return getEventTriggers();
+			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__WIRES:
+				return getWires();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__IN_EDGES:
@@ -321,6 +350,10 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS:
 				getEventTriggers().clear();
 				getEventTriggers().addAll((Collection<? extends EventTrigger>)newValue);
+				return;
+			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__OUT_EDGES:
 				getOutEdges().clear();
@@ -354,6 +387,9 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS:
 				getEventTriggers().clear();
 				return;
+			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__WIRES:
+				getWires().clear();
+				return;
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -381,6 +417,8 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS:
 				return eventTriggers != null && !eventTriggers.isEmpty();
+			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__WIRES:
+				return wires != null && !wires.isEmpty();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__IN_EDGES:
@@ -407,6 +445,17 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 		if (baseClass == ContainsEventTriggers.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS: return ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsWires.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (derivedFeatureID) {
 				default: return -1;
 			}
 		}
@@ -441,6 +490,17 @@ public class DynamicApplicationElementSetImpl extends EObjectImpl implements Dyn
 		if (baseClass == ContainsEventTriggers.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS: return ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsWires.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

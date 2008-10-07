@@ -16,6 +16,7 @@ import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -111,6 +112,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(page);
 				if (result == null) result = caseWireEdgesSource(page);
 				if (result == null) result = caseWireEdgeDestination(page);
+				if (result == null) result = caseShouldntContainWires(page);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -126,6 +128,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(inputForm);
 				if (result == null) result = caseWireEdgesSource(inputForm);
 				if (result == null) result = caseWireEdgeDestination(inputForm);
+				if (result == null) result = caseShouldntContainWires(inputForm);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -141,6 +144,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(inputTextField);
 				if (result == null) result = caseWireEdgesSource(inputTextField);
 				if (result == null) result = caseWireEdgeDestination(inputTextField);
+				if (result == null) result = caseShouldntContainWires(inputTextField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -295,6 +299,21 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsWires(ContainsWires object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Shouldnt Contain Wires</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Shouldnt Contain Wires</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseShouldntContainWires(ShouldntContainWires object) {
 		return null;
 	}
 

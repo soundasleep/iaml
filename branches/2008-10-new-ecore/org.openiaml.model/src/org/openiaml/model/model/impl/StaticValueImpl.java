@@ -19,12 +19,15 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
@@ -37,6 +40,7 @@ import org.openiaml.model.model.WireEdgesSource;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getInFlows <em>In Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getValue <em>Value</em>}</li>
@@ -65,6 +69,16 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -151,6 +165,18 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getWires() {
+		if (wires == null) {
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.STATIC_VALUE__WIRES);
+		}
+		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.STATIC_VALUE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -216,6 +242,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModelPackage.STATIC_VALUE__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.STATIC_VALUE__IN_FLOWS:
@@ -234,6 +262,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 		switch (featureID) {
 			case ModelPackage.STATIC_VALUE__NAME:
 				return getName();
+			case ModelPackage.STATIC_VALUE__WIRES:
+				return getWires();
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.STATIC_VALUE__IN_FLOWS:
@@ -255,6 +285,10 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 		switch (featureID) {
 			case ModelPackage.STATIC_VALUE__NAME:
 				setName((String)newValue);
+				return;
+			case ModelPackage.STATIC_VALUE__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				getOutEdges().clear();
@@ -282,6 +316,9 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 			case ModelPackage.STATIC_VALUE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.STATIC_VALUE__WIRES:
+				getWires().clear();
+				return;
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -305,6 +342,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 		switch (featureID) {
 			case ModelPackage.STATIC_VALUE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.STATIC_VALUE__WIRES:
+				return wires != null && !wires.isEmpty();
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.STATIC_VALUE__IN_FLOWS:
@@ -322,6 +361,17 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ContainsWires.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.STATIC_VALUE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == WireEdgesSource.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.STATIC_VALUE__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
@@ -344,6 +394,17 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ContainsWires.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.STATIC_VALUE__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == WireEdgesSource.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.STATIC_VALUE__OUT_EDGES;

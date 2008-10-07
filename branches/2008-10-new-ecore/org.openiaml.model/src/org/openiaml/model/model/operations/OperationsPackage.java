@@ -70,6 +70,15 @@ public interface OperationsPackage extends EPackage {
 	int START_NODE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_NODE__WIRES = ModelPackage.WIRE_EDGES_SOURCE__WIRES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -152,6 +161,15 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 */
 	int DECISION_NODE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE__WIRES = ModelPackage.WIRE_EDGES_SOURCE__WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.

@@ -37,6 +37,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
@@ -274,6 +275,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass containsWiresEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass shouldntContainWiresEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -908,6 +916,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getShouldntContainWires() {
+		return shouldntContainWiresEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -1022,6 +1039,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		containsWiresEClass = createEClass(CONTAINS_WIRES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__WIRES);
+
+		shouldntContainWiresEClass = createEClass(SHOULDNT_CONTAIN_WIRES);
 	}
 
 	/**
@@ -1062,6 +1081,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		wireEdgesSourceEClass.getESuperTypes().add(this.getShouldntContainWires());
 		eventTriggerEClass.getESuperTypes().add(this.getNamedElement());
 		eventTriggerEClass.getESuperTypes().add(this.getWireEdgesSource());
 		domainObjectEClass.getESuperTypes().add(this.getApplicationElement());
@@ -1094,7 +1114,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		applicationElementPropertyEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
-		applicationElementPropertyEClass.getESuperTypes().add(this.getContainsWires());
 		staticValueEClass.getESuperTypes().add(this.getNamedElement());
 		staticValueEClass.getESuperTypes().add(this.getWireEdgesSource());
 		staticValueEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
@@ -1115,6 +1134,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getWireEdgesSource());
 		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		shouldntContainWiresEClass.getESuperTypes().add(this.getContainsWires());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1209,6 +1229,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(containsWiresEClass, ContainsWires.class, "ContainsWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainsWires_Wires(), this.getWireEdge(), null, "wires", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(shouldntContainWiresEClass, ShouldntContainWires.class, "ShouldntContainWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -1225,6 +1247,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	protected void createCommentAnnotations() {
 		String source = "http://openiaml.org/comment";		
+		addAnnotation
+		  (wireEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "temporarily contains wires until GMF bug is fixed "
+		   });		
 		addAnnotation
 		  (applicationElementEClass, 
 		   source, 
@@ -1252,6 +1280,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "comment", "stores database objects",
 			 "editor", "org.openiaml.model.diagram.domain_store"
+		   });		
+		addAnnotation
+		  (shouldntContainWiresEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "classes that extend this SHOULDN\'T contain wires, but GMF\'s limitations require it (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=249717)"
 		   });
 	}
 

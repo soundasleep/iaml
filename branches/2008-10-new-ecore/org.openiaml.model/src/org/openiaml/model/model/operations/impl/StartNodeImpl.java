@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ModelPackage;
@@ -27,6 +28,7 @@ import org.openiaml.model.model.operations.StartNode;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.openiaml.model.model.operations.impl.StartNodeImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.StartNodeImpl#getOutEdges <em>Out Edges</em>}</li>
  * </ul>
  * </p>
@@ -34,6 +36,15 @@ import org.openiaml.model.model.operations.StartNode;
  * @generated
  */
 public class StartNodeImpl extends EObjectImpl implements StartNode {
+	/**
+	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> wires;
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -60,6 +71,18 @@ public class StartNodeImpl extends EObjectImpl implements StartNode {
 	@Override
 	protected EClass eStaticClass() {
 		return OperationsPackage.Literals.START_NODE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<WireEdge> getWires() {
+		if (wires == null) {
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, OperationsPackage.START_NODE__WIRES);
+		}
+		return wires;
 	}
 
 	/**
@@ -97,6 +120,8 @@ public class StartNodeImpl extends EObjectImpl implements StartNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case OperationsPackage.START_NODE__WIRES:
+				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case OperationsPackage.START_NODE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 		}
@@ -111,6 +136,8 @@ public class StartNodeImpl extends EObjectImpl implements StartNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OperationsPackage.START_NODE__WIRES:
+				return getWires();
 			case OperationsPackage.START_NODE__OUT_EDGES:
 				return getOutEdges();
 		}
@@ -126,6 +153,10 @@ public class StartNodeImpl extends EObjectImpl implements StartNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OperationsPackage.START_NODE__WIRES:
+				getWires().clear();
+				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 			case OperationsPackage.START_NODE__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -142,6 +173,9 @@ public class StartNodeImpl extends EObjectImpl implements StartNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OperationsPackage.START_NODE__WIRES:
+				getWires().clear();
+				return;
 			case OperationsPackage.START_NODE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -157,6 +191,8 @@ public class StartNodeImpl extends EObjectImpl implements StartNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OperationsPackage.START_NODE__WIRES:
+				return wires != null && !wires.isEmpty();
 			case OperationsPackage.START_NODE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 		}

@@ -17,7 +17,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="inEdges" upperBound="-1"
         eType="#//WireEdge" eOpposite="#//WireEdge/to"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WireEdgesSource" abstract="true" interface="true">
+  <eClassifiers xsi:type="ecore:EClass" name="WireEdgesSource" abstract="true" interface="true"
+      eSuperTypes="#//ShouldntContainWires">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="comment" value="temporarily contains wires until GMF bug is fixed "/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outEdges" upperBound="-1"
         eType="#//WireEdge" eOpposite="#//WireEdge/from"/>
   </eClassifiers>
@@ -65,7 +69,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//ApplicationElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination #//DataFlowEdgesSource #//DataFlowEdgeDestination #//ContainsWires"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElementProperty" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
   <eClassifiers xsi:type="ecore:EClass" name="StaticValue" eSuperTypes="#//NamedElement #//WireEdgesSource #//DataFlowEdgeDestination">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -137,6 +141,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="ContainsWires" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wires" upperBound="-1"
         eType="#//WireEdge" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShouldntContainWires" abstract="true"
+      interface="true" eSuperTypes="#//ContainsWires">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="comment" value="classes that extend this SHOULDN'T contain wires, but GMF's limitations require it (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=249717)"/>
+    </eAnnotations>
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">

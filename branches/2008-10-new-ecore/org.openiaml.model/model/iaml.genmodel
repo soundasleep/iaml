@@ -90,6 +90,7 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsWires">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/wires"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//ShouldntContainWires"/>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genClasses ecoreClass="iaml.ecore#//visual/Page">

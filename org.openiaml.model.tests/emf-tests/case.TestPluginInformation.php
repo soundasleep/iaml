@@ -2,20 +2,20 @@
 
 class TestPluginInformation extends GmfTestCase {
 
-	public function run() {
+	public function test() {
 		$files = FileFinder::instance()->match(GMF_ROOT, ".gmfgen");
 
 		foreach ($files as $k => $f) {
 
 			$xml = XmlLoader::instance()->load($f);
 			$plugin = $xml->xpath("//plugin");
-			$this->assert($plugin, "//plugin does not exist");
+			$this->assertTrue($plugin, "//plugin does not exist");
 
 			$this_provider = $plugin[0]["provider"];
 			$this_version = $plugin[0]["version"];
 
-			$this->testProvider($f, $this_provider);
-			$this->testVersion($f, $this_version);
+			$this->testProvider($f, "$this_provider");		// cast SimpleXML to string
+			$this->testVersion($f, "$this_version");		// cast SimpleXML to string
 
 			$this->count++;
 

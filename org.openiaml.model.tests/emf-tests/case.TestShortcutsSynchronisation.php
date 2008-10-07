@@ -2,7 +2,7 @@
 
 class TestShortcutsSynchronisation extends GmfTestCase {
 
-	public function run() {
+	public function test() {
 		$files = FileFinder::instance()->match(GMF_ROOT, ".gmfgen");
 
 		$containsShortcutsTo = false;
@@ -51,7 +51,7 @@ class TestShortcutsSynchronisation extends GmfTestCase {
 		}
 
 		// finally, make sure they are both in sync
-		$this->assert(count($containsShortcutsTo) == count($shortcutsProvidedFor), "containsShortcutsTo is not the same length as shortcutsProvidedFor");
+		$this->assertEquals(count($containsShortcutsTo), count($shortcutsProvidedFor), "containsShortcutsTo is not the same length as shortcutsProvidedFor");
 		foreach ($containsShortcutsTo as $value) {
 			$this->assertInArray($value, $shortcutsProvidedFor);
 		}

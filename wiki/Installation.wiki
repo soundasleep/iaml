@@ -7,10 +7,10 @@ The IAML plugin is an Eclipse plugin that provides a visual editor for the model
 
 =Requirements=
 
-*Currently the plugin only supports Eclipse 3.3 (Europa) and GMF 2.0.1.*
+*Currently the plugin only supports Eclipse 3.3 (Europa) and GMF 2.0.2, until [https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&long_desc_type=allwordssubstr&long_desc=&bug_file_loc_type=allwordssubstr&bug_file_loc=&status_whiteboard_type=allwordssubstr&status_whiteboard=&keywords_type=allwords&keywords=&bug_severity=blocker&bug_severity=critical&bug_severity=major&emailassigned_to1=1&emailreporter1=1&emailqa_contact1=1&emaillongdesc1=1&emailtype1=exact&email1=jevon%40jevon.org&emailtype2=substring&email2=&bugidtype=include&bug_id=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&field0-0-0=noop&type0-0-0=noop&value0-0-0= some bugs] are fixed.*
 
   # Eclipse 3.3 Europa
-  # GMF 2.0.1
+  # GMF 2.0.2
 
 These requirements may be installed through the [http://download.eclipse.org/releases/europa/ Europa update site].
 

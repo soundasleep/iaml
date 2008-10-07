@@ -6,7 +6,7 @@ class GmfTestCase {
 		$this->runner = $runner;
 	}
 	protected function fail($message) {
-		$this->runner->fail($message);
+		throw new FailException($message);		// stop execution immediately
 	}
 	protected function pass($message) {
 		$this->runner->pass($message);
@@ -55,5 +55,25 @@ class GmfTestCase {
 			$message = "expected 'a', got '$b'";
 		}
 		$this->assert($a == $b, $message);
+	}
+
+	// this is a really lazy implementation of a .properties/manifest.mf file reader
+	function loadProperties($file_name) {
+		$this->assert(file_exists($file_name), "'$file_name' does not exist");
+
+		$f = file($file_name);
+
+		$result = array();
+		foreach ($f as $line) {
+			$line = trim($line);
+			$split = explode(": ", $line, 2);
+
+			// NOTE: this will ignore multi-line properties
+			if (count($split) == 2) {
+				$result[$split[0]] = $split[1];
+			}
+		}
+
+		return $result;
 	}
 }

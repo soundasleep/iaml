@@ -14,11 +14,34 @@ class TestPluginInformation extends GmfTestCase {
 			$this_provider = $plugin[0]["provider"];
 			$this_version = $plugin[0]["version"];
 
-			$this->testProvider($k, $this_provider);
-			$this->testVersion($k, $this_version);
+			$this->testProvider($f, $this_provider);
+			$this->testVersion($f, $this_version);
 
 			$this->count++;
 
+		}
+
+		// test the plugin meta informations
+		$manifest = array(
+				// "../../org.openiaml.editor/META-INF/MANIFEST.MF", - feature project
+				"../../org.openiaml.model/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.diagram/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.diagram.custom/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.diagram.domain_object/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.diagram.domain_store/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.diagram.element/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.diagram.operation/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.diagram.visual/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.diagram.wire/META-INF/MANIFEST.MF",
+				"../../org.openiaml.model.edit/META-INF/MANIFEST.MF",
+				// "../../org.openiaml.update/META-INF/MANIFEST.MF", - update site
+			);
+
+		foreach ($manifest as $file) {
+			$manifest = $this->loadProperties($file);
+			$this->testProvider($file, $manifest["Bundle-Vendor"]);
+			$this->testVersion($file, $manifest["Bundle-Version"]);
+			$this->count++;
 		}
 
 	}

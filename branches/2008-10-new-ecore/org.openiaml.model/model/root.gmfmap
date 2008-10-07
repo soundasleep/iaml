@@ -137,6 +137,35 @@
   </nodes>
   <nodes>
     <containmentFeature
+        href="iaml.ecore#//InternetApplication/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//DynamicApplicationElementSet"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DynamicApplicationElementSet )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DynamicApplicationElementSetName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DynamicApplicationElementSetQuery"/>
+        <features
+            href="iaml.ecore#//DynamicApplicationElementSet/query"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.0/@tools.10"/>
+      <diagramNode
+          href="iaml.gmfgraph#DynamicApplicationElementSet"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
         href="iaml.ecore#//InternetApplication/properties"/>
     <ownedChild>
       <domainMetaElement

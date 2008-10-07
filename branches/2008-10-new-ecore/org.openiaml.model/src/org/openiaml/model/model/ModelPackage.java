@@ -1791,7 +1791,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__OPERATIONS = CONTAINS_OPERATIONS__OPERATIONS;
+	int DYNAMIC_APPLICATION_ELEMENT_SET__OPERATIONS = APPLICATION_ELEMENT__OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1800,7 +1800,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__NAME = CONTAINS_OPERATIONS_FEATURE_COUNT + 0;
+	int DYNAMIC_APPLICATION_ELEMENT_SET__NAME = APPLICATION_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
@@ -1809,7 +1809,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS = CONTAINS_OPERATIONS_FEATURE_COUNT + 1;
+	int DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -1818,7 +1818,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 2;
+	int DYNAMIC_APPLICATION_ELEMENT_SET__WIRES = APPLICATION_ELEMENT__WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -1827,7 +1827,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__OUT_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 3;
+	int DYNAMIC_APPLICATION_ELEMENT_SET__OUT_EDGES = APPLICATION_ELEMENT__OUT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -1836,7 +1836,25 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__IN_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 4;
+	int DYNAMIC_APPLICATION_ELEMENT_SET__IN_EDGES = APPLICATION_ELEMENT__IN_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__PROPERTIES = APPLICATION_ELEMENT__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__VALUES = APPLICATION_ELEMENT__VALUES;
 
 	/**
 	 * The feature id for the '<em><b>Query</b></em>' attribute.
@@ -1845,7 +1863,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__QUERY = CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
+	int DYNAMIC_APPLICATION_ELEMENT_SET__QUERY = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Dynamic Application Element Set</em>' class.
@@ -1854,7 +1872,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
+	int DYNAMIC_APPLICATION_ELEMENT_SET_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 
 	/**

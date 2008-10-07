@@ -379,6 +379,81 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
+          className="DynamicApplicationElementSetFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class DynamicApplicationElementSetFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureDynamicApplicationElementSetNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureDynamicApplicationElementSetQueryFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public DynamicApplicationElementSetFigure() {&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(true);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureDynamicApplicationElementSetNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureDynamicApplicationElementSetNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureDynamicApplicationElementSetNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureDynamicApplicationElementSetQueryFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureDynamicApplicationElementSetQueryFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureDynamicApplicationElementSetQueryFigure.setFont(FFIGUREDYNAMICAPPLICATIONELEMENTSETQUERYFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureDynamicApplicationElementSetQueryFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureDynamicApplicationElementSetNameFigure() {&#xA;&#x9;&#x9;return fFigureDynamicApplicationElementSetNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureDynamicApplicationElementSetQueryFigure() {&#xA;&#x9;&#x9;return fFigureDynamicApplicationElementSetQueryFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 240, 220, 220);&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGUREDYNAMICAPPLICATIONELEMENTSETQUERYFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Arial&quot;, 9, org.eclipse.swt.SWT.ITALIC);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="iaml.genmodel#//model/DynamicApplicationElementSet"/>
+        <containmentMetaFeature
+            href="iaml.genmodel#//model/InternetApplication/children"/>
+        <childMetaFeature
+            href="iaml.genmodel#//model/InternetApplication/children"/>
+        <modelElementSelector
+            body="self.oclIsTypeOf( DynamicApplicationElementSet )"/>
+      </modelFacet>
+      <labels
+          visualID="4007"
+          editPartClassName="ApplicationElementPropertyNameEditPart"
+          itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureDynamicApplicationElementSetNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
+      <labels
+          visualID="4008"
+          editPartClassName="DynamicApplicationElementSetQueryEditPart"
+          itemSemanticEditPolicyClassName="DynamicApplicationElementSetQueryItemSemanticEditPolicy"
+          notationViewFactoryClassName="DynamicApplicationElementSetQueryViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureDynamicApplicationElementSetQueryFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="iaml.genmodel#//model/DynamicApplicationElementSet/query"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="1008"
+        editPartClassName="DomainStoreEditPart"
+        itemSemanticEditPolicyClassName="DomainStoreItemSemanticEditPolicy"
+        notationViewFactoryClassName="DomainStoreViewFactory"
+        canonicalEditPolicyClassName="DomainStoreCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DomainStoreGraphicalNodeEditPolicy"
+        createCommandClassName="DomainStoreCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="DomainStoreEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          layoutType="FLOW_LAYOUT"
           className="ApplicationElementPropertyFigure"
           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ApplicationElementPropertyFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureApplicationElementPropertyNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ApplicationElementPropertyFigure() {&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(true);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureApplicationElementPropertyNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureApplicationElementPropertyNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureApplicationElementPropertyNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureApplicationElementPropertyNameFigure() {&#xA;&#x9;&#x9;return fFigureApplicationElementPropertyNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 208, 185, 243);&#xA;&#xA;">
         <attributes
@@ -396,10 +471,10 @@
             href="iaml.genmodel#//model/InternetApplication/properties"/>
       </modelFacet>
       <labels
-          visualID="4007"
-          editPartClassName="ApplicationElementPropertyNameEditPart"
-          itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
+          visualID="4009"
+          editPartClassName="ApplicationElementPropertyName2EditPart"
+          itemSemanticEditPolicyClassName="ApplicationElementPropertyName2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyName2ViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -415,18 +490,18 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1008"
-        editPartClassName="DomainStoreEditPart"
-        itemSemanticEditPolicyClassName="DomainStoreItemSemanticEditPolicy"
-        notationViewFactoryClassName="DomainStoreViewFactory"
-        canonicalEditPolicyClassName="DomainStoreCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DomainStoreGraphicalNodeEditPolicy"
-        createCommandClassName="DomainStoreCreateCommand">
+        visualID="1009"
+        editPartClassName="DomainStore2EditPart"
+        itemSemanticEditPolicyClassName="DomainStore2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="DomainStore2ViewFactory"
+        canonicalEditPolicyClassName="DomainStore2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DomainStore2GraphicalNodeEditPolicy"
+        createCommandClassName="DomainStore2CreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DomainStoreEditHelper"/>
+          editHelperClassName="DomainStore2EditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -453,7 +528,7 @@
             href="iaml.genmodel#//model/InternetApplication/domainStores"/>
       </modelFacet>
       <labels
-          visualID="4008"
+          visualID="4010"
           editPartClassName="DomainStoreNameEditPart"
           itemSemanticEditPolicyClassName="DomainStoreNameItemSemanticEditPolicy"
           notationViewFactoryClassName="DomainStoreNameViewFactory"
@@ -511,7 +586,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4009"
+          visualID="4011"
           editPartClassName="SyncWireNameEditPart"
           itemSemanticEditPolicyClassName="SyncWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="SyncWireNameViewFactory"
@@ -573,7 +648,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4010"
+          visualID="4012"
           editPartClassName="RunInstanceWireNameEditPart"
           itemSemanticEditPolicyClassName="RunInstanceWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="RunInstanceWireNameViewFactory"
@@ -627,7 +702,7 @@
             xsi:type="gmfgen:ToolEntry"
             title="ApplicationElementProperty"
             description="Create new ApplicationElementProperty"
-            genNodes="//@diagram/@topLevelNodes.6"/>
+            genNodes="//@diagram/@topLevelNodes.7"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Page"
@@ -649,7 +724,12 @@
             xsi:type="gmfgen:ToolEntry"
             title="DomainStore"
             description="Create new DomainStore"
-            genNodes="//@diagram/@topLevelNodes.7"/>
+            genNodes="//@diagram/@topLevelNodes.8"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="DynamicApplicationElementSet"
+            description="Create new DynamicApplicationElementSet"
+            genNodes="//@diagram/@topLevelNodes.6"/>
       </groups>
     </palette>
     <preferencePages
@@ -716,6 +796,9 @@
         child="//@diagram/@topLevelNodes.7"/>
     <childReferences
         parent="//@diagram"
+        child="//@diagram/@topLevelNodes.8"/>
+    <childReferences
+        parent="//@diagram"
         child="//@diagram/@links.0"
         groupName="links"
         groupIcon="icons/linksNavigatorGroup.gif"/>
@@ -793,6 +876,18 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.7"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.7"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
         child="//@diagram/@topLevelNodes.0"
         referenceType="in_source"
         groupName="source"
@@ -835,6 +930,18 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.6"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.7"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.7"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"
@@ -918,6 +1025,18 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.7"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.7"
+        child="//@diagram/@links.1"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
         child="//@diagram/@topLevelNodes.0"
         referenceType="in_source"
         groupName="source"
@@ -964,6 +1083,18 @@
         referenceType="out_target"
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.7"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.7"
+        child="//@diagram/@links.1"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
   </navigator>
   <diagramUpdater/>
   <propertySheet>
@@ -990,6 +1121,6 @@
   <expressionProviders>
     <providers
         xsi:type="gmfgen:GenExpressionInterpreter"
-        expressions="//@diagram/@topLevelNodes.1/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.2/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.3/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.4/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.5/@modelFacet/@modelElementSelector //@diagram/@links.0/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector"/>
+        expressions="//@diagram/@topLevelNodes.1/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.2/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.3/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.4/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.5/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.6/@modelFacet/@modelElementSelector //@diagram/@links.0/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector"/>
   </expressionProviders>
 </gmfgen:GenEditorGenerator>

@@ -259,16 +259,15 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		startNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		startNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		stopNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		startNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
 		stopNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		finishNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		stopNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 		finishNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
+		finishNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
+		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 		decisionOperationEClass.getESuperTypes().add(theModelPackage.getChainedOperation());
 		decisionOperationEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
 

@@ -7,7 +7,7 @@
 package org.openiaml.model.model.operations;
 
 import org.openiaml.model.model.ActivityNode;
-import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.ExecutionEdgeDestination;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,5 +19,5 @@ import org.openiaml.model.model.WireEdgeDestination;
  * @model
  * @generated
  */
-public interface FinishNode extends WireEdgeDestination, ActivityNode {
+public interface FinishNode extends ActivityNode, ExecutionEdgeDestination {
 } // FinishNode

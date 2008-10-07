@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.openiaml.model.model.*;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
@@ -96,6 +96,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.DATA_FLOW_EDGE: return createDataFlowEdge();
 			case ModelPackage.TEMPORARY_VARIABLE: return createTemporaryVariable();
 			case ModelPackage.EXECUTION_EDGE: return createExecutionEdge();
+			case ModelPackage.CONDITIONAL_EDGE: return createConditionalEdge();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET: return createDynamicApplicationElementSet();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -280,6 +281,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public ExecutionEdge createExecutionEdge() {
 		ExecutionEdgeImpl executionEdge = new ExecutionEdgeImpl();
 		return executionEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConditionalEdge createConditionalEdge() {
+		ConditionalEdgeImpl conditionalEdge = new ConditionalEdgeImpl();
+		return conditionalEdge;
 	}
 
 	/**

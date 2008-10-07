@@ -10,15 +10,16 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.model.model.*;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -35,6 +36,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
@@ -214,6 +216,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExecutionEdgesSource(ExecutionEdgesSource object) {
 				return createExecutionEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseConditionalEdge(ConditionalEdge object) {
+				return createConditionalEdgeAdapter();
 			}
 			@Override
 			public Adapter caseDynamicApplicationElementSet(DynamicApplicationElementSet object) {
@@ -650,6 +656,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExecutionEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ConditionalEdge <em>Conditional Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ConditionalEdge
+	 * @generated
+	 */
+	public Adapter createConditionalEdgeAdapter() {
 		return null;
 	}
 

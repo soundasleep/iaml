@@ -420,7 +420,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getDynamicApplicationElementSet()
 	 * @generated
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET = 29;
+	int DYNAMIC_APPLICATION_ELEMENT_SET = 30;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.ContainsWires <em>Contains Wires</em>}' class.
@@ -430,7 +430,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getContainsWires()
 	 * @generated
 	 */
-	int CONTAINS_WIRES = 30;
+	int CONTAINS_WIRES = 31;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -459,7 +459,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getShouldntContainWires()
 	 * @generated
 	 */
-	int SHOULDNT_CONTAIN_WIRES = 31;
+	int SHOULDNT_CONTAIN_WIRES = 32;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -1182,13 +1182,22 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__EXECUTION_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 5;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1785,6 +1794,52 @@ public interface ModelPackage extends EPackage {
 	int EXECUTION_EDGES_SOURCE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.ConditionalEdgeImpl <em>Conditional Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.ConditionalEdgeImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getConditionalEdge()
+	 * @generated
+	 */
+	int CONDITIONAL_EDGE = 29;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL_EDGE__FROM = EXECUTION_EDGE__FROM;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL_EDGE__TO = EXECUTION_EDGE__TO;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL_EDGE__NAME = EXECUTION_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Conditional Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL_EDGE_FEATURE_COUNT = EXECUTION_EDGE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2137,6 +2192,17 @@ public interface ModelPackage extends EPackage {
 	EReference getCompositeOperation_ExecutionEdges();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeOperation#getVariables <em>Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Variables</em>'.
+	 * @see org.openiaml.model.model.CompositeOperation#getVariables()
+	 * @see #getCompositeOperation()
+	 * @generated
+	 */
+	EReference getCompositeOperation_Variables();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2485,6 +2551,16 @@ public interface ModelPackage extends EPackage {
 	EReference getExecutionEdgesSource_OutExecutions();
 
 	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.ConditionalEdge <em>Conditional Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Conditional Edge</em>'.
+	 * @see org.openiaml.model.model.ConditionalEdge
+	 * @generated
+	 */
+	EClass getConditionalEdge();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.DynamicApplicationElementSet <em>Dynamic Application Element Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2787,6 +2863,14 @@ public interface ModelPackage extends EPackage {
 		EReference COMPOSITE_OPERATION__EXECUTION_EDGES = eINSTANCE.getCompositeOperation_ExecutionEdges();
 
 		/**
+		 * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_OPERATION__VARIABLES = eINSTANCE.getCompositeOperation_Variables();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3079,6 +3163,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_EDGES_SOURCE__OUT_EXECUTIONS = eINSTANCE.getExecutionEdgesSource_OutExecutions();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ConditionalEdgeImpl <em>Conditional Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.ConditionalEdgeImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getConditionalEdge()
+		 * @generated
+		 */
+		EClass CONDITIONAL_EDGE = eINSTANCE.getConditionalEdge();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DynamicApplicationElementSetImpl <em>Dynamic Application Element Set</em>}' class.

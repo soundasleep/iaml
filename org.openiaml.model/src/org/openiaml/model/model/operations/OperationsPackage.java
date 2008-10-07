@@ -70,22 +70,13 @@ public interface OperationsPackage extends EPackage {
 	int START_NODE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Executions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START_NODE__WIRES = ModelPackage.WIRE_EDGES_SOURCE__WIRES;
-
-	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START_NODE__OUT_EDGES = ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+	int START_NODE__OUT_EXECUTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Start Node</em>' class.
@@ -94,7 +85,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int START_NODE_FEATURE_COUNT = ModelPackage.WIRE_EDGES_SOURCE_FEATURE_COUNT + 0;
+	int START_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.StopNodeImpl <em>Stop Node</em>}' class.
@@ -107,13 +98,13 @@ public interface OperationsPackage extends EPackage {
 	int STOP_NODE = 1;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Executions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STOP_NODE__IN_EDGES = ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+	int STOP_NODE__IN_EXECUTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Stop Node</em>' class.
@@ -122,7 +113,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOP_NODE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_DESTINATION_FEATURE_COUNT + 0;
+	int STOP_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.FinishNodeImpl <em>Finish Node</em>}' class.
@@ -135,13 +126,13 @@ public interface OperationsPackage extends EPackage {
 	int FINISH_NODE = 2;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Executions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FINISH_NODE__IN_EDGES = ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+	int FINISH_NODE__IN_EXECUTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Finish Node</em>' class.
@@ -150,7 +141,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FINISH_NODE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_DESTINATION_FEATURE_COUNT + 0;
+	int FINISH_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl <em>Decision Node</em>}' class.
@@ -163,40 +154,22 @@ public interface OperationsPackage extends EPackage {
 	int DECISION_NODE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Out Executions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECISION_NODE__WIRES = ModelPackage.WIRE_EDGES_SOURCE__WIRES;
+	int DECISION_NODE__OUT_EXECUTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Executions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECISION_NODE__OUT_EDGES = ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECISION_NODE__IN_EDGES = ModelPackage.WIRE_EDGES_SOURCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>In Flows</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECISION_NODE__IN_FLOWS = ModelPackage.WIRE_EDGES_SOURCE_FEATURE_COUNT + 1;
+	int DECISION_NODE__IN_EXECUTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Decision Node</em>' class.
@@ -205,7 +178,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECISION_NODE_FEATURE_COUNT = ModelPackage.WIRE_EDGES_SOURCE_FEATURE_COUNT + 2;
+	int DECISION_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.DecisionOperationImpl <em>Decision Operation</em>}' class.

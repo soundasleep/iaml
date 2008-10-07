@@ -12,17 +12,13 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ChainedOperation;
-import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -107,36 +103,28 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 				return createDecisionOperationAdapter();
 			}
 			@Override
-			public Adapter caseContainsWires(ContainsWires object) {
-				return createContainsWiresAdapter();
-			}
-			@Override
-			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
-				return createShouldntContainWiresAdapter();
-			}
-			@Override
-			public Adapter caseWireEdgesSource(WireEdgesSource object) {
-				return createWireEdgesSourceAdapter();
-			}
-			@Override
 			public Adapter caseActivityNode(ActivityNode object) {
 				return createActivityNodeAdapter();
+			}
+			@Override
+			public Adapter caseExecutionEdgesSource(ExecutionEdgesSource object) {
+				return createExecutionEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseExecutionEdgeDestination(ExecutionEdgeDestination object) {
+				return createExecutionEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
 				return createWireEdgeDestinationAdapter();
 			}
 			@Override
-			public Adapter caseDataFlowEdgeDestination(DataFlowEdgeDestination object) {
-				return createDataFlowEdgeDestinationAdapter();
-			}
-			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseExecutionEdgeDestination(ExecutionEdgeDestination object) {
-				return createExecutionEdgeDestinationAdapter();
+			public Adapter caseDataFlowEdgeDestination(DataFlowEdgeDestination object) {
+				return createDataFlowEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseDataFlowEdgesSource(DataFlowEdgesSource object) {
@@ -145,10 +133,6 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseOperation(Operation object) {
 				return createOperationAdapter();
-			}
-			@Override
-			public Adapter caseExecutionEdgesSource(ExecutionEdgesSource object) {
-				return createExecutionEdgesSourceAdapter();
 			}
 			@Override
 			public Adapter caseChainedOperation(ChainedOperation object) {
@@ -241,34 +225,6 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDecisionOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsWires <em>Contains Wires</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ContainsWires
-	 * @generated
-	 */
-	public Adapter createContainsWiresAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ShouldntContainWires <em>Shouldnt Contain Wires</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ShouldntContainWires
-	 * @generated
-	 */
-	public Adapter createShouldntContainWiresAdapter() {
 		return null;
 	}
 
@@ -381,20 +337,6 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createChainedOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgesSource <em>Wire Edges Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.WireEdgesSource
-	 * @generated
-	 */
-	public Adapter createWireEdgesSourceAdapter() {
 		return null;
 	}
 

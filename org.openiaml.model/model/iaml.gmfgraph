@@ -82,11 +82,15 @@
             style="ITALIC"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="ParameterNamePrefix"
+            text="parameter: "/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="ParameterNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SingleOperationFigure">
@@ -268,11 +272,15 @@
             blue="185"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="TemporaryVariableNamePrefix"
+            text="temp: "/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="TemporaryVariableNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ExecutionEdgeFigure">
@@ -455,6 +463,8 @@
             name="StartNodeLabelFigure"
             text="start"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="StopNodeFigure">
@@ -471,6 +481,8 @@
             name="StopNodeLabelFigure"
             text="stop"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="FinishNodeFigure">
@@ -485,8 +497,10 @@
         <children
             xsi:type="gmfgraph:Label"
             name="FinishNodeLabelFigure"
-            text=""/>
+            text="finish"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DecisionNodeFigure">
@@ -498,6 +512,8 @@
             name="DecisionNodeLabelFigure"
             text="???"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DecisionOperationFigure">
@@ -513,6 +529,20 @@
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ConditionalEdgeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ConditionalEdgeFigure"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ConditionalEdgeNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -605,6 +635,9 @@
   <connections
       name="ParameterWire"
       figure="ParameterWireFigure"/>
+  <connections
+      name="ConditionalEdge"
+      figure="ConditionalEdgeFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -701,4 +734,24 @@
       name="DecisionOperationName"
       figure="DecisionOperationFigure"
       accessor="//@figures.0/@descriptors.29/@accessors.0"/>
+  <labels
+      name="StartNodeName"
+      figure="StartNodeFigure"
+      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
+  <labels
+      name="StopNodeName"
+      figure="StopNodeFigure"
+      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
+  <labels
+      name="FinishNodeName"
+      figure="FinishNodeFigure"
+      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
+  <labels
+      name="DecisionNodeName"
+      figure="DecisionNodeFigure"
+      accessor="//@figures.0/@descriptors.28/@accessors.0"/>
+  <labels
+      name="ConditionalEdgeName"
+      figure="ConditionalEdgeFigure"
+      accessor="//@figures.0/@descriptors.30/@accessors.0"/>
 </gmfgraph:Canvas>

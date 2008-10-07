@@ -139,6 +139,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outExecutions" upperBound="-1"
         eType="#//ExecutionEdge" eOpposite="#//ExecutionEdge/from"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalEdge" eSuperTypes="#//ExecutionEdge #//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicApplicationElementSet" eSuperTypes="#//ApplicationElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -195,10 +196,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="ParameterWire" eSuperTypes="#//wires/SingleWire"/>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
-    <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//WireEdgesSource #//ActivityNode"/>
-    <eClassifiers xsi:type="ecore:EClass" name="StopNode" eSuperTypes="#//WireEdgeDestination #//ActivityNode"/>
-    <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//WireEdgeDestination #//ActivityNode"/>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//WireEdgesSource #//WireEdgeDestination #//DataFlowEdgeDestination #//ActivityNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StopNode" eSuperTypes="#//ActivityNode #//ExecutionEdgeDestination"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//ActivityNode #//ExecutionEdgeDestination"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//ChainedOperation #//DataFlowEdgeDestination"/>
   </eSubpackages>
 </ecore:EPackage>

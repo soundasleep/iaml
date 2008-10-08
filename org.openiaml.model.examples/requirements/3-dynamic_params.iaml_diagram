@@ -24,7 +24,7 @@
       <styles xmi:type="notation:ShapeStyle" xmi:id="_a6nycZQFEd2Z39289aJzpA"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_a6nycpQFEd2Z39289aJzpA" diagramLink="_d-kroJQFEd2Z39289aJzpA" hint="Iaml_Visual"/>
       <element xmi:type="iaml.visual:InputForm" href="3-dynamic_params.iaml#//@children.0/@children.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_a6nyc5QFEd2Z39289aJzpA" x="369" y="240"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_a6nyc5QFEd2Z39289aJzpA" x="384" y="228"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_aANYoZQFEd2Z39289aJzpA"/>
     <element xmi:type="iaml.visual:Page" href="3-dynamic_params.iaml#//@children.0"/>

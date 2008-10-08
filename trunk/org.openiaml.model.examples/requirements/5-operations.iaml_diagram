@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xsi:schemaLocation="http://openiaml.org/model/operations http://openiaml.org/model#//operations http://openiaml.org/model/visual http://openiaml.org/model#//visual">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xsi:schemaLocation="http://openiaml.org/model/operations http://openiaml.org/model#//operations http://openiaml.org/model/visual http://openiaml.org/model#//visual http://openiaml.org/model/wires http://openiaml.org/model#//wires">
   <notation:Diagram xmi:id="_uFRlQJQMEd2SP_4e_ugCFg" type="Iaml" measurementUnit="Pixel">
     <children xmi:type="notation:Node" xmi:id="_uJmEkJQMEd2SP_4e_ugCFg" type="1006">
       <children xmi:type="notation:Node" xmi:id="_uJmElJQMEd2SP_4e_ugCFg" type="4006"/>
@@ -177,5 +177,9 @@
       <element xmi:type="iaml:ConditionalEdge" href="5-operations.iaml#//@children.0/@children.1/@operations.0/@executionEdges.5"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0hmIc5QMEd2SP_4e_ugCFg" points="[-6, 20, -9, -80]$[-41, 102, -44, 2]"/>
     </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_v8uFoJTpEd2XUZBnjnwHsg" type="Iaml_Wire" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_v8uFoZTpEd2XUZBnjnwHsg"/>
+    <element xmi:type="iaml.wires:SyncWire" href="5-operations.iaml#//@children.0/@children.0/@wires.0"/>
   </notation:Diagram>
 </xmi:XMI>

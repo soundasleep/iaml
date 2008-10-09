@@ -2,6 +2,30 @@
 <?eclipse version="3.2"?>
 <plugin>
 
+	<!-- add a right click menu -->
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.diagram.ui.objectContribution.InternetApplicationEditPart"
+            objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart"> <!-- a real class -->
+         <menu 
+            id="ExtensionMenu" 
+            label="&amp;Do" 
+            path="additions"> 
+            <separator name="group1"/>
+         </menu>
+         		<!-- class = our new action class -->
+         <action
+               class="org.openiaml.model.diagram.custom.commands.TestDeriveElementsCommand"
+               definitionId="org.openiaml.test"
+               enablesFor="1"
+               id="org.openiaml.model.diagram.custom.commands.TestDeriveElementsCommand"
+               label="&amp;Derive Elements"
+               menubarPath="ExtensionMenu/group1">
+         </action>
+      </objectContribution>                
+	</extension>
+	
 	<!-- missing shortcuts for visual -->
 	<!-- Q: will having two providers for the same superclass (VisibleThing <- ApplicationElement) cause problems? -->
 	<!-- A: no. either getElement() is very specific (ignores supertypes) or its done in order. -->

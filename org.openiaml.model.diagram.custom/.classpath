@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/ant-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/ant-launcher.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/commons-collections-3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/commons-logging.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/hsqldb.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/jalopy.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/juel-2.1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/log4j-1.2.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/prereqs/velocity-dep-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-1.5.jar" sourcepath="/take"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-examples-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-javac1.5-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-javac1.6-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-rt-1.5.jar" sourcepath="/take"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-script-1.5.jar" sourcepath="/take"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-tests-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-userv-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-userv-rt-1.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>

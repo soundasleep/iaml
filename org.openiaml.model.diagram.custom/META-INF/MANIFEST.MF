@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.diagram.visual,
  org.openiaml.model.diagram.wire,
  org.openiaml.model.diagram.domain_object,
- org.openiaml.model.diagram.operation
+ org.openiaml.model.diagram.operation,
+ ca.ecliptical.emf.xpath
 Bundle-Vendor: www.openiaml.org
 Bundle-ClassPath: lib/prereqs/ant-1.7.0.jar,
  lib/prereqs/ant-launcher.jar,

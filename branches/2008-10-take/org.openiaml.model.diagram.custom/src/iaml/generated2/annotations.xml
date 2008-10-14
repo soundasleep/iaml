@@ -15,7 +15,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>facts2</string> 
+   <string>factsPage_Name</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 
@@ -28,7 +28,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>facts1</string> 
+   <string>factsInternetApplication_Name</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 
@@ -41,7 +41,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>facts3</string> 
+   <string>factsApplicationElementContainer_Children</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 
@@ -55,6 +55,32 @@
   </void> 
   <void method="put"> 
    <string>rule1</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>factsInternetApplication_Children</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>factsInputForm_Name</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 

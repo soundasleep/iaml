@@ -13,7 +13,8 @@ ref InputForm input_form
 ref Page page
 ref InternetApplication app
 ref ApplicationElementContainer aec
-ref NamedElement ne
+ref NamedElement named_element
+ref String string
 //import org.openiaml.model.diagram.custom.takeproxy.*;
 //ref InternetApplicationProxy app
 //ref ApplicationElementProxy another
@@ -24,20 +25,31 @@ ref NamedElement ne
 // for InternetApplication
 @take.compilerhint.class=InternetApplication_Children
 @take.compilerhint.method=getAppChildren
-query app_children[parent,child]
+query app_children[in,out]
 // for ApplicationElementContainer
 @take.compilerhint.class=ApplicationElementContainer_Children
 @take.compilerhint.method=getElementChildren
-query element_children[parent,child]
+query element_children[in,out]
+@take.compilerhint.class=InternetApplication_Name
+@take.compilerhint.slots=app,string
+@take.compilerhint.method=getAppNames
+// query app_name[in,out]
 @take.compilerhint.class=NamedElement_Name
 @take.compilerhint.slots=element,string
-@take.compilerhint.method=getName
-query name[element,string]
-//rule1: if name[app, 'test'] then app_children[app, page] and name[page, 'generated'] and element_children[page, input_form] and name[input_form, 'generated form'] and name[another, 'empty']
-external facts1: name[NamedElement, java.lang.String]
-external facts2: app_children[InternetApplication, ApplicationElement]
-external facts3: element_children[ApplicationElementContainer, ApplicationElement]
-rule1: if name[app, 'test'] then app_children[app, page]
+@take.compilerhint.method=getElementNames
+// query element_name[element,string]
+// this is the query that should exist for our example model
+query input_form_name[form,string]
+// query impossible[element]
+rule1: if app_name[app, 'test'] then app_children[app, page] and page_name[page, 'generated'] and element_children[page, input_form] and input_form_name[input_form, 'generated form']
+// var String X
+// ruleNamed1: if page_element_name[page, X] then element_name[page, X]
+// ruleNamed2: if form_element_name[input_form, X] then element_name[input_form, X]
+external factsPage_Name: page_name[Page, java.lang.String]
+external factsInputForm_Name: input_form_name[InputForm, java.lang.String]
+external factsInternetApplication_Children: app_children[InternetApplication, ApplicationElement]
+external factsApplicationElementContainer_Children: element_children[ApplicationElementContainer, ApplicationElement]
+external factsInternetApplication_Name: app_name[InternetApplication, java.lang.String]
 //
 //
 //

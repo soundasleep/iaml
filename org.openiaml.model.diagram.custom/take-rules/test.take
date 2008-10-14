@@ -1,11 +1,5 @@
 @@dc:creator=jevon wright
 @@dc:date=09/10/2008
-// import org.openiaml.model.model.*;
-// import org.openiaml.model.model.visual.*;
-// var org.openiaml.model.model.InternetApplication app
-// var org.openiaml.model.model.ApplicationElement another 
-// var org.openiaml.model.model.visual.Page page
-// var org.openiaml.model.model.visual.InputForm input_form
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.visual.*;
 ref ApplicationElement another
@@ -13,15 +7,6 @@ var InputForm input_form
 var Page page
 ref InternetApplication app
 ref ApplicationElementContainer aec
-ref NamedElement named_element
-ref String string
-//import org.openiaml.model.diagram.custom.takeproxy.*;
-//ref InternetApplicationProxy app
-//ref ApplicationElementProxy another
-//ref PageProxy page
-//ref InputFormProxy input_form
-//ref ApplicationElementContainerProxy aec
-//ref NamedElementProxy ne
 // for InternetApplication
 @take.compilerhint.class=InternetApplication_Children
 @take.compilerhint.method=getAppChildren
@@ -42,9 +27,6 @@ query element_children[in,out]
 query input_form_name[form,string]
 // query impossible[element]
 rule1: if app_name[app, 'test'] then app_children[app, page] and page_name[page, 'generated'] and element_children[page, input_form] and input_form_name[input_form, 'generated form']
-// var String X
-// ruleNamed1: if page_element_name[page, X] then element_name[page, X]
-// ruleNamed2: if form_element_name[input_form, X] then element_name[input_form, X]
 external factsPage_Name: page_name[Page, java.lang.String]
 external factsInputForm_Name: input_form_name[InputForm, java.lang.String]
 external factsInternetApplication_Children: app_children[InternetApplication, ApplicationElement]
@@ -56,12 +38,15 @@ external factsInternetApplication_Name: app_name[InternetApplication, java.lang.
 //
 //
 //
+// old testing rules
+// var String X
+// ruleNamed1: if page_element_name[page, X] then element_name[page, X]
+// ruleNamed2: if form_element_name[input_form, X] then element_name[input_form, X]
 //
 //
 //
 //
-//
-// example 
+// original take example 
 // var example.nz.org.take.compiler.example1.Customer customer
 // ref example.nz.org.take.compiler.example1.Discount goldCustomerDiscount
 // @take.compilerhint.class=CustomerDiscount

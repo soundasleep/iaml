@@ -184,7 +184,33 @@
    </object> 
   </void> 
   <void method="put"> 
+   <string>rule2__2</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
    <string>factsInternetApplication_Children</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule2__3</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 
@@ -250,6 +276,19 @@
   </void> 
   <void method="put"> 
    <string>rule2_b</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule2__1</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 

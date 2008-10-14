@@ -27,11 +27,15 @@ query element_children[in,out]
 query input_form_name[form,string]
 @take.compilerhint.class=GeneratedAppChildren
 @take.compilerhint.slots=app,element
+// @take.compilerhint.method=getApplicationChildren
 query generated_app_children[in,out]
 // query impossible[element]
 rule1: if app_name[app, 'test'] then rule_2[app]
-rule1_generated: if generated_app_name[app, 'test'] then rule_2[app]
-rule2: if rule_2[app] then rule2_a[app, page] and rule2_b[page, 'generated'] and rule2_c[page, input_form] and rule2_d[input_form, 'generated form']
+rule1_a: if generated_app_name[app, 'test'] then rule_2[app]
+rule2: if rule_2[app] then rule2_a[app, page] 
+rule2__1: if rule2_a[app, page] then rule2_b[page, 'generated'] 
+rule2__2: if rule2_b[page, 'generated'] then rule2_c[page, input_form] 
+rule2__3: if rule2_c[page, input_form] then rule2_d[input_form, 'generated form']
 rule2_a: if rule2_a[app, page] then generated_or_app_children[app, page]
 // decomposition of OR into a separate rule
 generated_or_app_children_1: if app_children[app, page] then generated_or_app_children[app, page]

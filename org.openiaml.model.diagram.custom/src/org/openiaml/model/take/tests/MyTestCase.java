@@ -56,9 +56,11 @@ public class MyTestCase extends TestCase {
 		
 		ResultSet<GeneratedAppChildren> rs = kb.generated_app_children_10(root);
 		// print out the derivation log
+		/*
 		for (DerivationLogEntry e : rs.getDerivationLog()) {
 			System.out.println(e.getName() + ": " + e.getCategory());
 		}
+		*/
 		assertTrue(rs.hasNext());
 		for (GeneratedAppChildren n : new IteratorWrapper<GeneratedAppChildren>(rs)) {
 			System.out.println("hello");

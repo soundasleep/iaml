@@ -1,8 +1,7 @@
 package org.openiaml.model.take.tests;
 
-import iaml.generated2.InternetApplication_Children;
+import iaml.generated2.GeneratedAppChildren;
 import iaml.generated2.KBGenerated;
-import iaml.generated2.NamedElement_Name;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,11 +10,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import junit.framework.TestCase;
+import nz.org.take.rt.DerivationLogEntry;
+import nz.org.take.rt.ResultSet;
 
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.openiaml.model.diagram.custom.commands.TestDeriveElementsCommand;
+import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.Page;
 
 public class MyTestCase extends TestCase {
 	
@@ -31,11 +34,33 @@ public class MyTestCase extends TestCase {
 		root = (InternetApplication) resource.getContents().get(0);
 	}
 	
-	public void test1() throws ExecutionException {
+	/**
+	 * Test the contents of the model.
+	 */
+	public void testModel() {
+		assertEquals(root.getName(), "test");
+		assertEquals(root.getChildren().size(), 1);
+		assertTrue(root.getChildren().get(0) instanceof Page);
+		Page p = (Page) root.getChildren().get(0);
+		assertEquals(p.getName(), "page");
+		assertEquals(p.getChildren().size(), 2);	// two input forms
+		for (ApplicationElement e : p.getChildren()) {
+			assertTrue(e instanceof InputForm);
+		}
+	}
+	
+	public void testDerivePage() {
 		// try deriving command
 		TestDeriveElementsCommand te = new TestDeriveElementsCommand();
 		KBGenerated kb = te.executeKnowledgeBase(root);
-		for (InternetApplication_Children n : new IteratorWrapper<InternetApplication_Children>(kb.getAppChildren(root))) {
+		
+		ResultSet<GeneratedAppChildren> rs = kb.generated_app_children_10(root);
+		// print out the derivation log
+		for (DerivationLogEntry e : rs.getDerivationLog()) {
+			System.out.println(e.getName() + ": " + e.getCategory());
+		}
+		assertTrue(rs.hasNext());
+		for (GeneratedAppChildren n : new IteratorWrapper<GeneratedAppChildren>(rs)) {
 			System.out.println("hello");
 			System.out.println(n);
 		}

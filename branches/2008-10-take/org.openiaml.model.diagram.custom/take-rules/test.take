@@ -25,8 +25,30 @@ query element_children[in,out]
 // query element_name[element,string]
 // this is the query that should exist for our example model
 query input_form_name[form,string]
+@take.compilerhint.class=GeneratedAppChildren
+@take.compilerhint.slots=app,element
+query generated_app_children[in,out]
 // query impossible[element]
-rule1: if app_name[app, 'test'] then app_children[app, page] and page_name[page, 'generated'] and element_children[page, input_form] and input_form_name[input_form, 'generated form']
+rule1: if app_name[app, 'test'] then rule_2[app]
+rule1_generated: if generated_app_name[app, 'test'] then rule_2[app]
+rule2: if rule_2[app] then rule2_a[app, page] and rule2_b[page, 'generated'] and rule2_c[page, input_form] and rule2_d[input_form, 'generated form']
+rule2_a: if rule2_a[app, page] then generated_or_app_children[app, page]
+// decomposition of OR into a separate rule
+generated_or_app_children_1: if app_children[app, page] then generated_or_app_children[app, page]
+generated_or_app_children_2: if generated_app_children[app, page] then generated_or_app_children[app, page]
+rule2_b: if rule2_b[page, 'generated'] then generated_or_page_name[page, 'generated']
+// decomposition of or
+generated_or_page_name_1: if page_name[page, 'generated'] then generated_or_page_name[page, 'generated']
+generated_or_page_name_2: if generated_page_name[page, 'generated'] then generated_or_page_name[page, 'generated']
+rule2_c: if rule2_c[page, input_form] then generated_or_element_children[page, input_form]
+// decomposition of or
+generated_or_element_children_1: if element_children[page, input_form] then generated_or_element_children[page, input_form]
+generated_or_element_children_2: if generated_element_children[page, input_form] then generated_or_element_children[page, input_form]
+rule2_d: if rule2_d[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
+// decomposition of or
+generated_or_input_form_name_1: if input_form_name[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
+generated_or_input_form_name_2: if generated_input_form_name[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
+// decomposition of complicated rule complete 
 external factsPage_Name: page_name[Page, java.lang.String]
 external factsInputForm_Name: input_form_name[InputForm, java.lang.String]
 external factsInternetApplication_Children: app_children[InternetApplication, ApplicationElement]

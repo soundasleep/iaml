@@ -9,8 +9,8 @@
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.visual.*;
 ref ApplicationElement another
-ref InputForm input_form
-ref Page page
+var InputForm input_form
+var Page page
 ref InternetApplication app
 ref ApplicationElementContainer aec
 ref NamedElement named_element

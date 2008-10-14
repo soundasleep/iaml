@@ -14,6 +14,8 @@ import iaml.generated2.InternetApplication_Children;
 import iaml.generated2.InternetApplication_Name;
 import iaml.generated2.KBGenerated;
 import iaml.generated2.NamedElement_Name;
+import iaml.generated2.app_name;
+import iaml.generated2.page_name;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -117,186 +119,6 @@ public class TestDeriveElementsCommand
 
 	}
 
-	/*
-	public class InternetApplicationFactStore implements ExternalFactStore4InternetApplication_Children {
-
-		private InternetApplicationProxy rootObject = null;
-		
-		public InternetApplicationFactStore(InternetApplication rootObject) {
-			this.rootObject = new InternetApplicationProxy(rootObject);
-		}
-
-		@Override
-		public ResourceIterator<InternetApplication_Children> fetch(
-				InternetApplicationProxy slot1,
-				ApplicationElementProxy slot2) {
-			ArrayList<InternetApplication_Children> it = new ArrayList<InternetApplication_Children>();
-			for (ApplicationElementProxy c : rootObject.getChildren())
-				it.add(new InternetApplication_Children(rootObject, c));
-			return new ResourceIteratorWrapper<InternetApplication_Children>(it.iterator());
-		}
-
-	}
-	*/
-	
-	/*
-	private class EMFInternetApplication_ChildrenFactStore implements ExternalFactStore4InternetApplication_Children {
-		private InternetApplication rootObject;
-		public EMFInternetApplication_ChildrenFactStore(InternetApplication r) {
-			this.rootObject = r;
-		}
-		
-		public ResourceIterator<InternetApplication_Children> fetch(
-				InternetApplication slot1, Page slot2) {
-			ArrayList<InternetApplication_Children> it = new ArrayList<InternetApplication_Children>();
-			Iterable<ApplicationElement> r;
-			if (slot1 == null)
-				r = rootObject.getChildren();
-			else
-				r = slot1.getChildren();
-					
-			for (ApplicationElement c : r) {
-				if (c instanceof Page) {
-					Page object = (Page) c;
-					if (slot2 == null || slot2.equals(object))
-						it.add(new InternetApplication_Children(slot1, object));
-				}
-			}
-			return new ResourceIteratorWrapper<InternetApplication_Children>(it.iterator());
-		}	
-	}
-
-	private class EMFNamedElement_NameFactStore implements ExternalFactStore4NamedElement_Name {
-		private InternetApplication rootObject;
-		public EMFNamedElement_NameFactStore(InternetApplication r) {
-			this.rootObject = r;
-		}
-
-		@Override
-		public ResourceIterator<NamedElement_Name> fetch(ApplicationElement element,
-				String string) {
-			if (element == null) {
-				// we need to get ALL named elements!
-				ArrayList<NamedElement_Name> allNamedElements = new ArrayList<NamedElement_Name>();
-				getNamedElements(allNamedElements, rootObject);
-				
-				// find ones we can remove
-				if (string != null) {
-					ArrayList<NamedElement_Name> newList = new ArrayList<NamedElement_Name>();
-					for (NamedElement_Name n : allNamedElements) {
-						if (string.equals(n.string))
-							newList.add(n);
-					}
-					allNamedElements = newList; 
-				}
-				
-				return new ResourceIteratorWrapper<NamedElement_Name>(allNamedElements.iterator());
-			}
-			if (string == null) {
-				return new ResourceIteratorWrapper<NamedElement_Name>(new NamedElement_Name(element, element.getName()));
-			} else {
-				if (string.equals(element.getName())) {
-					return new ResourceIteratorWrapper<NamedElement_Name>(new NamedElement_Name(element, element.getName()));
-				}
-				return null;
-			}
-			// in the future, to retrieve all names, we could write a lazy
-			// emf model traverser
-		}
-
-		private void getNamedElements(ArrayList<NamedElement_Name> result,
-				InternetApplication obj) {
-			// result.add(new NamedElement_Name(obj, obj.getName()));
-			for (ApplicationElement e : obj.getChildren())
-				getNamedElements(result, e);
-			// TODO: etc 
-		}
-
-		private void getNamedElements(ArrayList<NamedElement_Name> result,
-				ApplicationElement obj) {
-			result.add(new NamedElement_Name(obj, obj.getName()));
-			if (obj instanceof ApplicationElementContainer) {
-				for (ApplicationElement e : ((ApplicationElementContainer) obj).getChildren())
-					getNamedElements(result, e);
-			}
-			// TODO: etc 
-		}	
-	}
-
-	private class EMFInternetApplication_NameFactStore implements ExternalFactStore4InternetApplication_Name {
-		private InternetApplication rootObject;
-		public EMFInternetApplication_NameFactStore(InternetApplication r) {
-			this.rootObject = r;
-		}
-
-		@Override
-		public ResourceIterator<InternetApplication_Name> fetch(InternetApplication element,
-				String string) {
-			if (element == null) {
-				// we need to get ALL named elements!
-				ArrayList<InternetApplication_Name> allNamedElements = new ArrayList<InternetApplication_Name>();
-				getNamedElements(allNamedElements, rootObject);
-				
-				// find ones we can remove
-				if (string != null) {
-					ArrayList<InternetApplication_Name> newList = new ArrayList<InternetApplication_Name>();
-					for (InternetApplication_Name n : allNamedElements) {
-						if (string.equals(n.string))
-							newList.add(n);
-					}
-					allNamedElements = newList; 
-				}
-				
-				return new ResourceIteratorWrapper<InternetApplication_Name>(allNamedElements.iterator());
-			}
-			if (string == null) {
-				return new ResourceIteratorWrapper<InternetApplication_Name>(new InternetApplication_Name(element, element.getName()));
-			} else {
-				if (string.equals(element.getName())) {
-					return new ResourceIteratorWrapper<InternetApplication_Name>(new InternetApplication_Name(element, element.getName()));
-				}
-				return null;
-			}
-			// in the future, to retrieve all names, we could write a lazy
-			// emf model traverser
-		}
-
-		private void getNamedElements(ArrayList<InternetApplication_Name> result,
-				InternetApplication obj) {
-			result.add(new InternetApplication_Name(obj, obj.getName()));
-		}
-	}
-	
-	private class EMFApplicationElementContainer_ChildrenFactStore implements ExternalFactStore4ApplicationElementContainer_Children {
-
-		private InternetApplication rootObject;
-		public EMFApplicationElementContainer_ChildrenFactStore(InternetApplication r) {
-			this.rootObject = r;
-		}
-
-		@Override
-		public ResourceIterator<ApplicationElementContainer_Children> fetch(
-				Page slot1, InputForm slot2) {
-			ArrayList<ApplicationElementContainer_Children> it = new ArrayList<ApplicationElementContainer_Children>();
-			Iterable<ApplicationElement> r;
-			if (slot1 == null)
-				r = rootObject.getChildren();
-			else
-				r = slot1.getChildren();
-					
-			for (ApplicationElement c : r) {
-				if (c instanceof InputForm) {
-					InputForm object = (InputForm) c;
-					if (slot2 == null || slot2.equals(object))
-						it.add(new ApplicationElementContainer_Children(slot1, object));
-				}
-			}
-			return new ResourceIteratorWrapper<ApplicationElementContainer_Children>(it.iterator());
-		}	
-
-	}
-	*/
-
 	private InternetApplicationEditPart selectedElement;
 
 	private class DeriveElementsCommand extends AbstractTransactionalCommand {
@@ -318,69 +140,299 @@ public class TestDeriveElementsCommand
 		private class Impl_ExternalFactStore4ApplicationElementContainer_Children
 			extends FactStoreToEMF<Page,InputForm,ApplicationElementContainer_Children>
 			implements ExternalFactStore4ApplicationElementContainer_Children {
-			
-			public Impl_ExternalFactStore4ApplicationElementContainer_Children(InternetApplication ia) {
-				// ideally we would have "//iaml:children[xsi:type='iaml.visual:Page']"
-				// but EMFXpath doesn't provide information about the xsi:type
 
-				/**
-				 * 
-				 what this means:
-				 if (slot1=null, slot2=null)
-				    then get all //children of type Page and get their //children of type InputForm
-				 if (slot1=null, slot2=obj)
-				    then get all //children of type Page and get their //children=obj
-				 if (slot1=obj, slot2=null)
-				    then get all obj//children
-				 if (slot1=obj, slot2=obj2)
-				    then get all obj//children=obj2
-				 */
-				super(ia, "//iaml:children", Page.class, "getChildren",InputForm.class);
+			private InternetApplication ia;
+			public Impl_ExternalFactStore4ApplicationElementContainer_Children(
+					InternetApplication ia) {
+				this.ia = ia;
 			}
+				
+			@Override
+			public ResourceIterator<ApplicationElementContainer_Children> fetch(
+					Page slot1, InputForm slot2) {
+				List<ApplicationElementContainer_Children> listResults = new ArrayList<ApplicationElementContainer_Children>();
+
+				if (slot1 == null) {
+					// get all InputForms in Pages
+					// 1. get all children
+					List<?> results;
+					try {
+						results = query(ia, "//iaml:children");
+					} catch (JaxenException e) {
+						e.printStackTrace();
+						results = new ArrayList(); // empty
+					}
+					
+					// 2. get all Pages
+					List<Page> listPages = new ArrayList<Page>();
+					for (Object o : results) {
+						if (o instanceof Page) {
+							listPages.add((Page) o);
+						}
+					}
+					
+					// 3. get all InputForms in these pages
+					for (Page p : listPages) {
+						for (EObject eo : p.getChildren()) {
+							if (eo instanceof InputForm) {
+								// 4. filter to slot2 if necessary
+								if (slot2 == null || slot2.equals(eo)) {
+									listResults.add(new ApplicationElementContainer_Children(p, (InputForm) eo));
+								}
+							}
+						}
+					}
+				} else {
+					// get all InputForms in a certain Page
+					for (EObject eo : slot1.getChildren()) {
+						if (eo instanceof InputForm) {
+							// 4. filter to slot2 if necessary
+							if (slot2 == null || slot2.equals(eo)) {
+								listResults.add(new ApplicationElementContainer_Children(slot1, (InputForm) eo));
+							}
+						}
+					}
+				}
+				
+				// now return iterator
+				return new ResourceIteratorWrapper<ApplicationElementContainer_Children>(listResults.iterator());
+			}
+
 		}
+
+			
+			private class Impl_ExternalFactStore4InternetApplication_Children
+				extends FactStoreToEMF<InternetApplication,Page,iaml.generated2.InternetApplication_Children>
+				implements ExternalFactStore4InternetApplication_Children {
+
+					private InternetApplication ia;
+					public Impl_ExternalFactStore4InternetApplication_Children(
+							InternetApplication ia) {
+						this.ia = ia;
+					}
+						
+					@Override
+					public ResourceIterator<InternetApplication_Children> fetch(
+							InternetApplication slot1, Page slot2) {
+						List<InternetApplication_Children> listResults = new ArrayList<InternetApplication_Children>();
+
+						if (slot1 == null) {
+							// get all InputForms in Pages
+							// 1. get all children
+							List<?> results;
+							try {
+								results = query(ia, ".");
+							} catch (JaxenException e) {
+								e.printStackTrace();
+								results = new ArrayList(); // empty
+							}
+							
+							// 2. get all Pages
+							List<InternetApplication> listPages = new ArrayList<InternetApplication>();
+							for (Object o : results) {
+								if (o instanceof InternetApplication) {
+									listPages.add((InternetApplication) o);
+								}
+							}
+							
+							// 3. get all InputForms in these pages
+							for (InternetApplication p : listPages) {
+								for (EObject eo : p.getChildren()) {
+									if (eo instanceof Page) {
+										// 4. filter to slot2 if necessary
+										if (slot2 == null || slot2.equals(eo)) {
+											listResults.add(new InternetApplication_Children(p, (Page) eo));
+										}
+									}
+								}
+							}
+						} else {
+							// get all InputForms in a certain Page
+							for (EObject eo : slot1.getChildren()) {
+								if (eo instanceof Page) {
+									// 4. filter to slot2 if necessary
+									if (slot2 == null || slot2.equals(eo)) {
+										listResults.add(new InternetApplication_Children(slot1, (Page) eo));
+									}
+								}
+							}
+						}
+						
+						// now return iterator
+						return new ResourceIteratorWrapper<InternetApplication_Children>(listResults.iterator());
+					}
+
+			}
+						
 			
 		private class Impl_ExternalFactStore4NamedElement_Name
 			extends FactStoreToEMF<InputForm,String,NamedElement_Name>
 			implements ExternalFactStore4NamedElement_Name {
+
+				private InternetApplication ia;
+				public Impl_ExternalFactStore4NamedElement_Name(
+						InternetApplication ia) {
+					this.ia = ia;
+				}
+					
+				@Override
+				public ResourceIterator<NamedElement_Name> fetch(
+						InputForm slot1, String slot2) {
+					List<NamedElement_Name> listResults = new ArrayList<NamedElement_Name>();
+
+					if (slot1 == null) {
+						// get all names in InputForms
+						// 1. get all children
+						List<?> results;
+						try {
+							results = query(ia, "//iaml:children");
+						} catch (JaxenException e) {
+							e.printStackTrace();
+							results = new ArrayList(); // empty
+						}
+						
+						// 2. get all Pages
+						List<InputForm> listPages = new ArrayList<InputForm>();
+						for (Object o : results) {
+							if (o instanceof InputForm) {
+								listPages.add((InputForm) o);
+							}
+						}
+						
+						// 3. get all InputForms in these pages
+						for (InputForm p : listPages) {
+							// 4. filter to slot2 if necessary
+							if (slot2 == null || slot2.equals(p.getName())) {
+								listResults.add(new NamedElement_Name(p, p.getName()));
+							}
+						}
+					} else {
+						// get all InputForms in a certain Page
+						if (slot2 == null || slot2.equals(slot1.getName())) {
+							listResults.add(new NamedElement_Name(slot1, slot1.getName()));
+						}
+
+					}
+					
+					// now return iterator
+					return new ResourceIteratorWrapper<NamedElement_Name>(listResults.iterator());
+				}
 			
-			public Impl_ExternalFactStore4NamedElement_Name(InternetApplication ia) {
-				// ideally we would have "//iaml:children[xsi:type='iaml.visual:Page']"
-				// but EMFXpath doesn't provide information about the xsi:type
-				super(ia, "//iaml:children", InputForm.class, "getName", String.class);
-			}
 		}
 			
 		private class Impl_ExternalFactStore4page_name 
 			extends FactStoreToEMF<Page,String,iaml.generated2.page_name>
 			implements ExternalFactStore4page_name  {
-			
-			public Impl_ExternalFactStore4page_name(InternetApplication ia) {
-				// ideally we would have "//iaml:children[xsi:type='iaml.visual:Page']"
-				// but EMFXpath doesn't provide information about the xsi:type
-				super(ia, "//iaml:children", Page.class, "getName", String.class);
-			}
-		}
-			
-		private class Impl_ExternalFactStore4InternetApplication_Children
-			extends FactStoreToEMF<InternetApplication,Page,iaml.generated2.InternetApplication_Children>
-			implements ExternalFactStore4InternetApplication_Children {
 
-			public Impl_ExternalFactStore4InternetApplication_Children(InternetApplication ia) {
-				super(ia, ".", "getChildren", Page.class);
-			}
+				private InternetApplication ia;
+				public Impl_ExternalFactStore4page_name(
+						InternetApplication ia) {
+					this.ia = ia;
+				}
+					
+				@Override
+				public ResourceIterator<page_name> fetch(Page slot1,
+						String slot2) {
+					List<page_name> listResults = new ArrayList<page_name>();
+
+					if (slot1 == null) {
+						// get all names in InputForms
+						// 1. get all children
+						List<?> results;
+						try {
+							results = query(ia, "//iaml:children");
+						} catch (JaxenException e) {
+							e.printStackTrace();
+							results = new ArrayList(); // empty
+						}
+						
+						// 2. get all Pages
+						List<Page> listPages = new ArrayList<Page>();
+						for (Object o : results) {
+							if (o instanceof Page) {
+								listPages.add((Page) o);
+							}
+						}
+						
+						// 3. get all InputForms in these pages
+						for (Page p : listPages) {
+							// 4. filter to slot2 if necessary
+							if (slot2 == null || slot2.equals(p.getName())) {
+								listResults.add(new page_name(p, p.getName()));
+							}
+						}
+					} else {
+						// get all InputForms in a certain Page
+						if (slot2 == null || slot2.equals(slot1.getName())) {
+							listResults.add(new page_name(slot1, slot1.getName()));
+						}
+
+					}
+					
+					// now return iterator
+					return new ResourceIteratorWrapper<page_name>(listResults.iterator());
+				}
 
 		}
-		
+
 		private class Impl_ExternalFactStore4app_name
 			extends FactStoreToEMF<InternetApplication,String,iaml.generated2.app_name>
 			implements ExternalFactStore4app_name {
-				
-			public Impl_ExternalFactStore4app_name(InternetApplication ia) {
-				super(ia, ".", "getName",String.class);
-			}		
+
+
+				private InternetApplication ia;
+				public Impl_ExternalFactStore4app_name(
+						InternetApplication ia) {
+					this.ia = ia;
+				}
+					
+				@Override
+				public ResourceIterator<app_name> fetch(
+						InternetApplication slot1, String slot2) {
+					List<app_name> listResults = new ArrayList<app_name>();
+
+					if (slot1 == null) {
+						// get all names in InputForms
+						// 1. get all children
+						List<?> results;
+						try {
+							results = query(ia, ".");
+						} catch (JaxenException e) {
+							e.printStackTrace();
+							results = new ArrayList<Object>(); // empty
+						}
+						
+						// 2. get all Pages
+						List<InternetApplication> listPages = new ArrayList<InternetApplication>();
+						for (Object o : results) {
+							if (o instanceof InternetApplication) {
+								listPages.add((InternetApplication) o);
+							}
+						}
+						
+						// 3. get all InputForms in these pages
+						for (InternetApplication p : listPages) {
+							// 4. filter to slot2 if necessary
+							if (slot2 == null || slot2.equals(p.getName())) {
+								listResults.add(new app_name(p, p.getName()));
+							}
+						}
+					} else {
+						// get all InputForms in a certain Page
+						if (slot2 == null || slot2.equals(slot1.getName())) {
+							listResults.add(new app_name(slot1, slot1.getName()));
+						}
+
+					}
+					
+					// now return iterator
+					return new ResourceIteratorWrapper<app_name>(listResults.iterator());
+				}
+
 		}
 			
 		private abstract class FactStoreToEMF<Slot1,Slot2,TakeElement> {
+			/*
 			private InternetApplication root;
 			private String query;
 			private String childrenMethod;
@@ -440,6 +492,7 @@ public class TestDeriveElementsCommand
 				
 				return new ResourceIteratorWrapper<TakeElement>(results.iterator());
 			}
+			*/
 
 			/**
 			 * If we only have one result (e.g. getName() method), we can't really
@@ -596,6 +649,7 @@ public class TestDeriveElementsCommand
 			}
 			
 			// xpath test
+			/*
 			List r = new ArrayList();
 			try {
 				EMFXPath xpath;
@@ -620,6 +674,7 @@ public class TestDeriveElementsCommand
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
 
 			/*
 			// from http://wiki.eclipse.org/FAQ_How_do_I_use_the_context_class_loader_in_Eclipse%3F

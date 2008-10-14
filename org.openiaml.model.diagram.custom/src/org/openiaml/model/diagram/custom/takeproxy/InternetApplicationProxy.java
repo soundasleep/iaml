@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.openiaml.model.model.ApplicationElement;
 
-public class InternetApplicationProxy {
+public class InternetApplicationProxy extends NamedElementProxy  {
 
 	private org.openiaml.model.model.InternetApplication proxyObject;
 	

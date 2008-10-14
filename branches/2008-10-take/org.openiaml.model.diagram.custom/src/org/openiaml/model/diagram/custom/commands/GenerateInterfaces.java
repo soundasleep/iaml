@@ -12,12 +12,13 @@ package org.openiaml.model.diagram.custom.commands;
 
 import java.io.File;
 
-import org.apache.log4j.BasicConfigurator;
 import nz.org.take.KnowledgeBase;
 import nz.org.take.compiler.reference.DefaultCompiler;
 import nz.org.take.compiler.util.jalopy.JalopyCodeFormatter;
 import nz.org.take.nscript.ScriptException;
 import nz.org.take.nscript.ScriptKnowledgeSource;
+
+import org.apache.log4j.BasicConfigurator;
 
 
 /**
@@ -46,12 +47,36 @@ public class GenerateInterfaces {
 			System.out.println(source.getCanonicalPath());
 			ScriptKnowledgeSource KSrc = new ScriptKnowledgeSource(source);
 			kb = KSrc.getKnowledgeBase();
+
+			// compile the interface
+			compiler.setPackageName("iaml.generated2");
+			compiler.setClassName("KBInterface");
+			compiler.compileInterface(kb);
+			
+			// compile the classes
+			compiler.setGenerateDataClassesForQueryPredicates(false);	// ???
+			compiler.setClassName("KBGenerated");
+			compiler.setInterfaceNames("iaml.generated2.KBInterface");
+			compiler.compile(kb);
+
+			// try creating the other classes that aren't part of the 
+			// initially generated source
+			// TODO put this into a separate main
+			/*
+			KnowledgeBaseManager<KB> kbm = new KnowledgeBaseManager<KB>();
+			
+			KB generated_kb = kbm.getKnowledgeBase(
+					KB.class, 
+					new ScriptKnowledgeSource(source),
+					new HashMap<String,Object>()
+//					factStores
+			);
+			*/
+
+		
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}
-		compiler.setPackageName("iaml.generated2");
-		compiler.setClassName("KB");
-		compiler.compileInterface(kb);
 
 	}
 }

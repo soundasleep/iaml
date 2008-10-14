@@ -3,18 +3,22 @@
  */
 package org.openiaml.model.diagram.custom.commands;
 
+import iaml.generated2.ApplicationElementContainer_Children;
+import iaml.generated2.ExternalFactStore4ApplicationElementContainer_Children;
 import iaml.generated2.ExternalFactStore4InternetApplication_Children;
+import iaml.generated2.ExternalFactStore4NamedElement_Name;
+import iaml.generated2.FactStores;
 import iaml.generated2.InternetApplication_Children;
-import iaml.generated2.KB;
+import iaml.generated2.KBGenerated;
+import iaml.generated2.NamedElement_Name;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 
 import javax.script.SimpleBindings;
 
@@ -51,12 +55,11 @@ import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.takeproxy.ApplicationElementProxy;
 import org.openiaml.model.diagram.custom.takeproxy.InternetApplicationProxy;
 import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
-
-import test.nz.org.take.compiler.scenario8.FactStore;
-import test.nz.org.take.compiler.scenario8.Tests;
 
 
 /**
@@ -71,10 +74,17 @@ public class TestDeriveElementsCommand
 			ResourceIterator<T> {
 
 		private Iterator<T> it;
+		
 		public ResourceIteratorWrapper(Iterator<T> it) {
 			this.it = it;
 		}
-				
+		
+		public ResourceIteratorWrapper(T object) {
+			ArrayList<T> temp = new ArrayList<T>();
+			temp.add(object);
+			this.it = temp.iterator();
+		}
+
 		@Override
 		public void close() {
 			// do nothing
@@ -97,6 +107,7 @@ public class TestDeriveElementsCommand
 
 	}
 
+	/*
 	public class InternetApplicationFactStore implements ExternalFactStore4InternetApplication_Children {
 
 		private InternetApplicationProxy rootObject = null;
@@ -114,6 +125,114 @@ public class TestDeriveElementsCommand
 				it.add(new InternetApplication_Children(rootObject, c));
 			return new ResourceIteratorWrapper<InternetApplication_Children>(it.iterator());
 		}
+
+	}
+	*/
+	
+	private class EMFInternetApplication_ChildrenFactStore implements ExternalFactStore4InternetApplication_Children {
+		private InternetApplication rootObject;
+		public EMFInternetApplication_ChildrenFactStore(InternetApplication r) {
+			this.rootObject = r;
+		}
+		
+		@Override
+		public ResourceIterator<InternetApplication_Children> fetch(
+				InternetApplication slot1, ApplicationElement slot2) {
+			ArrayList<InternetApplication_Children> it = new ArrayList<InternetApplication_Children>();
+			Iterable<ApplicationElement> r;
+			if (slot1 == null)
+				r = rootObject.getChildren();
+			else
+				r = slot1.getChildren();
+					
+			for (ApplicationElement c : r) {
+				if (slot2 == null || slot2.equals(c))
+					it.add(new InternetApplication_Children(slot1, c));
+			}
+			return new ResourceIteratorWrapper<InternetApplication_Children>(it.iterator());
+		}	
+	}
+
+	private class EMFNamedElement_NameFactStore implements ExternalFactStore4NamedElement_Name {
+		private InternetApplication rootObject;
+		public EMFNamedElement_NameFactStore(InternetApplication r) {
+			this.rootObject = r;
+		}
+
+		@Override
+		public ResourceIterator<NamedElement_Name> fetch(NamedElement element,
+				String string) {
+			if (element == null) {
+				// we need to get ALL named elements!
+				ArrayList<NamedElement_Name> allNamedElements = new ArrayList<NamedElement_Name>();
+				getNamedElements(allNamedElements, rootObject);
+				
+				// find ones we can remove
+				if (string != null) {
+					ArrayList<NamedElement_Name> newList = new ArrayList<NamedElement_Name>();
+					for (NamedElement_Name n : allNamedElements) {
+						if (string.equals(n.string))
+							newList.add(n);
+					}
+					allNamedElements = newList; 
+				}
+				
+				return new ResourceIteratorWrapper<NamedElement_Name>(allNamedElements.iterator());
+			}
+			if (string == null) {
+				return new ResourceIteratorWrapper<NamedElement_Name>(new NamedElement_Name(element, element.getName()));
+			} else {
+				if (string.equals(element.getName())) {
+					return new ResourceIteratorWrapper<NamedElement_Name>(new NamedElement_Name(element, element.getName()));
+				}
+				return null;
+			}
+			// in the future, to retrieve all names, we could write a lazy
+			// emf model traverser
+		}
+
+		private void getNamedElements(ArrayList<NamedElement_Name> result,
+				InternetApplication obj) {
+			result.add(new NamedElement_Name(obj, obj.getName()));
+			for (ApplicationElement e : obj.getChildren())
+				getNamedElements(result, e);
+			/* TODO: etc */
+		}
+
+		private void getNamedElements(ArrayList<NamedElement_Name> result,
+				ApplicationElement obj) {
+			result.add(new NamedElement_Name(obj, obj.getName()));
+			if (obj instanceof ApplicationElementContainer) {
+				for (ApplicationElement e : ((ApplicationElementContainer) obj).getChildren())
+					getNamedElements(result, e);
+			}
+			/* TODO: etc */
+		}	
+	}
+
+	private class EMFApplicationElementContainer_ChildrenFactStore implements ExternalFactStore4ApplicationElementContainer_Children {
+
+		private InternetApplication rootObject;
+		public EMFApplicationElementContainer_ChildrenFactStore(InternetApplication r) {
+			this.rootObject = r;
+		}
+
+		@Override
+		public ResourceIterator<ApplicationElementContainer_Children> fetch(
+				ApplicationElementContainer slot1, ApplicationElement slot2) {
+			ArrayList<ApplicationElementContainer_Children> it = new ArrayList<ApplicationElementContainer_Children>();
+			Iterable<ApplicationElement> r;
+			if (slot1 == null)
+				r = rootObject.getChildren();
+			else
+				r = slot1.getChildren();
+					
+			for (ApplicationElement c : r) {
+				if (slot2 == null || slot2.equals(c))
+					it.add(new ApplicationElementContainer_Children(slot1, c));
+			}
+			return new ResourceIteratorWrapper<ApplicationElementContainer_Children>(it.iterator());
+		}	
 
 	}
 
@@ -141,11 +260,34 @@ public class TestDeriveElementsCommand
 			BasicConfigurator.resetConfiguration();		// config log4j
 			BasicConfigurator.configure();		// config log4j
 
+			KBGenerated kb;
+			kb = new KBGenerated();
+			
+			// set up fact stores
+			InternetApplication ia = (InternetApplication) rootObject;
+			FactStores.facts1 = new EMFNamedElement_NameFactStore(ia);
+			FactStores.facts2 = new EMFInternetApplication_ChildrenFactStore(ia);
+			FactStores.facts3 = new EMFApplicationElementContainer_ChildrenFactStore(ia);
+			
+			// get out results
+			ResultSet<InternetApplication_Children> rs = kb.getAppChildren();
+			while (rs.hasNext()) {
+				System.out.println("child: " + rs.next());
+			}
+
+			// get out results
+			ResultSet<NamedElement_Name> rs2 = kb.getName();
+			while (rs2.hasNext()) {
+				System.out.println("named element: " + rs2.next());
+			}
+
+			/*
 			// from http://wiki.eclipse.org/FAQ_How_do_I_use_the_context_class_loader_in_Eclipse%3F
 			// change the class loader
 			Thread current = Thread.currentThread();
 			ClassLoader oldLoader = current.getContextClassLoader();
 			
+			/*
 			try {
 				current.setContextClassLoader( getClass().getClassLoader() );
 
@@ -180,6 +322,7 @@ public class TestDeriveElementsCommand
 			} finally {
 				current.setContextClassLoader(oldLoader);
 			}
+			*/
 			
 			if (true)
 				return CommandResult.newOKCommandResult();;

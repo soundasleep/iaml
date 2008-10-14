@@ -6,20 +6,21 @@
 // var org.openiaml.model.model.ApplicationElement another 
 // var org.openiaml.model.model.visual.Page page
 // var org.openiaml.model.model.visual.InputForm input_form
-//import org.openiaml.model.model.*;
-//import org.openiaml.model.model.visual.*;
-//ref org.openiaml.model.model.ApplicationElement another
-//ref org.openiaml.model.model.visual.InputForm input_form
-//ref org.openiaml.model.model.visual.Page page
-//ref org.openiaml.model.model.InternetApplication app
-//ref org.openiaml.model.model.ApplicationElementContainer aec
-import org.openiaml.model.diagram.custom.takeproxy.*;
-ref InternetApplicationProxy app
-ref ApplicationElementProxy another
-ref PageProxy page
-ref InputFormProxy input_form
-ref ApplicationElementContainerProxy aec
-ref NamedElementProxy ne
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.visual.*;
+ref ApplicationElement another
+ref InputForm input_form
+ref Page page
+ref InternetApplication app
+ref ApplicationElementContainer aec
+ref NamedElement ne
+//import org.openiaml.model.diagram.custom.takeproxy.*;
+//ref InternetApplicationProxy app
+//ref ApplicationElementProxy another
+//ref PageProxy page
+//ref InputFormProxy input_form
+//ref ApplicationElementContainerProxy aec
+//ref NamedElementProxy ne
 // for InternetApplication
 @take.compilerhint.class=InternetApplication_Children
 @take.compilerhint.method=getAppChildren
@@ -30,11 +31,12 @@ query app_children[parent,child]
 query element_children[parent,child]
 @take.compilerhint.class=NamedElement_Name
 @take.compilerhint.slots=element,string
+@take.compilerhint.method=getName
 query name[element,string]
 //rule1: if name[app, 'test'] then app_children[app, page] and name[page, 'generated'] and element_children[page, input_form] and name[input_form, 'generated form'] and name[another, 'empty']
-external facts1: name[NamedElementProxy, java.lang.String]
-external facts2: app_children[InternetApplicationProxy, ApplicationElementProxy]
-external facts3: element_children[ApplicationElementContainerProxy, ApplicationElementProxy]
+external facts1: name[NamedElement, java.lang.String]
+external facts2: app_children[InternetApplication, ApplicationElement]
+external facts3: element_children[ApplicationElementContainer, ApplicationElement]
 rule1: if name[app, 'test'] then app_children[app, page]
 //
 //

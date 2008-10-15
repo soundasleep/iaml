@@ -2,7 +2,9 @@
 <gmfgen:GenEditorGenerator xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" domainFileExtension="iaml">
+    xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" domainFileExtension="iaml"
+    dynamicTemplates="true"
+    templateDirectory="/org.openiaml.model/templates/">
   <diagram
       visualID="79"
       editPartClassName="InternetApplicationEditPart"

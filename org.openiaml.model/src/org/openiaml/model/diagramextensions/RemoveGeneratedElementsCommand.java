@@ -1,11 +1,16 @@
 package org.openiaml.model.diagramextensions;
 
+import java.util.ArrayList;
+
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.operations.AbstractOperation;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.workspace.CompositeEMFOperation;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
@@ -26,7 +31,6 @@ public class RemoveGeneratedElementsCommand extends AbstractTransactionalCommand
 
 	private EObject rootObject;
 	private EditPart selectedElement;
-	private View parentView;
 	private PreferencesHint prefHint;
 	private IProgressMonitor monitor;
 	private IAdaptable info;
@@ -35,21 +39,13 @@ public class RemoveGeneratedElementsCommand extends AbstractTransactionalCommand
 			EditPart root,
 			EObject rootObject,
 			TransactionalEditingDomain editingDomain, 
-			View parentView,
 			PreferencesHint prefHint) {			
-		super(editingDomain, "Removing generated elements", getWorkspaceFiles(parentView)); //$NON-NLS-1$
+		super(editingDomain, "Removing generated elements", getWorkspaceFiles( new ArrayList() )); //$NON-NLS-1$
 		selectedElement = root;
-		this.parentView = parentView;
 		this.rootObject = rootObject;
 		this.prefHint = prefHint;
 	}
 
-	public RemoveGeneratedElementsCommand(EditPart root,
-			EObject object, TransactionalEditingDomain editingDomain, PreferencesHint prefHint) {
-		this(root, object, editingDomain, (View) root.getModel(), prefHint);
-		//this(root, object, root.getEditingDomain(), (View) root.getModel(), prefHint);
-	}
-	
 	/**
 	 * A helper method to help us execute lots of steps easily
 	 * 
@@ -57,11 +53,11 @@ public class RemoveGeneratedElementsCommand extends AbstractTransactionalCommand
 	 * @throws ExecutionException
 	 * @see doExecuteWithResult()
 	 */
-	protected void doExecute(ICommand command) throws ExecutionException {
+	protected void doExecute(AbstractOperation command) throws ExecutionException {
 		OperationHistoryFactory.getOperationHistory().execute(command,
 				monitor, info);
 	}
-
+	
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
@@ -103,6 +99,8 @@ public class RemoveGeneratedElementsCommand extends AbstractTransactionalCommand
 		for (GeneratedElement e : element.getGeneratedBy().getGeneratedElements()) {
 			// ignore the current one, since we are deleting it anyway
 			if (!element.equals(e)) {
+				System.out.println("un-isGenerating " + e);
+
 				// set isGenerated to false
 				SetValueCommand sv = new SetValueCommand(new SetRequest(e, ModelPackage.eINSTANCE.getGeneratedElement_IsGenerated(), false));
 				doExecute(sv);
@@ -132,11 +130,16 @@ public class RemoveGeneratedElementsCommand extends AbstractTransactionalCommand
 	 */
 	private void deleteGeneratesElements(GeneratesElements element) throws ExecutionException {
 		
+		CompositeEMFOperation cc = new CompositeEMFOperation(this.getEditingDomain(), "delete related elements");
+		
 		for (GeneratedElement e : element.getGeneratedElements()) {
+			System.out.println("destroying element " + e);
 			DestroyElementCommand de = new DestroyElementCommand(new DestroyElementRequest(e, false));
-			doExecute(de);
-			
+			cc.add(de);			
 		}
 		
+		doExecute(cc);
+		
 	}
+
 }

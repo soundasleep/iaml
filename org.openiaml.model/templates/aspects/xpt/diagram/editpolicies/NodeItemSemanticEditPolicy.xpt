@@ -4,6 +4,6 @@
 «EXTENSION xpt::GenModelUtils»
 
 «AROUND destroySemanticElement FOR gmfgen::GenNode-»
-	«targetDef.proceed()»
 	cc.add(new org.openiaml.model.diagramextensions.DeleteGeneratedElementsCommand(req, getHost()));
+	«targetDef.proceed()»
 «ENDAROUND»

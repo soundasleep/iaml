@@ -9,6 +9,8 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.commands.CreateMissingVisualShortcutsCommand;
 import org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart;
 import org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin;
@@ -62,6 +64,21 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 							IamlDiagramEditorPlugin.getInstance().logError(
 									"Unable to refresh shortcuts view", e); //$NON-NLS-1$
 						}
+
+						//MessageDialog.openInformation(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Warning", "Not yet implemented. But here are the objects we have: editPart=" + editpart);
+
+						// generate missing elements
+						ICommand command2 = new CreateMissingVisualElementsCommand((GraphicalEditPart) editpart, 
+								IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+					
+						try {
+							OperationHistoryFactory.getOperationHistory().execute(command2,
+									new NullProgressMonitor(), null);
+						} catch (ExecutionException e) {
+							IamlDiagramEditorPlugin.getInstance().logError(
+									"Unable to refresh shortcuts view", e); //$NON-NLS-1$
+						}
+						
 					}
 				}
 

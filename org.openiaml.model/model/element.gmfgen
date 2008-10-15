@@ -5,7 +5,9 @@
     xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" packageNamePrefix="org.openiaml.model.model.diagram.element"
     modelID="Iaml_Element"
     diagramFileExtension="iaml_element_diagram"
-    domainFileExtension="iaml_element">
+    domainFileExtension="iaml_element"
+    dynamicTemplates="true"
+    templateDirectory="/org.openiaml.model/templates/">
   <diagram
       visualID="79"
       editPartClassName="ApplicationElementEditPart"

@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.diagram.custom.commands.CreateMissingWireShortcutsCommand;
+import org.openiaml.model.diagram.custom.commands.shortcuts.CreateMissingWireShortcutsCommand;
 import org.openiaml.model.model.diagram.wire.edit.parts.CompositeWireEditPart;
 import org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.wire.providers.IamlEditPartProvider;

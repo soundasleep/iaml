@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.commands;
+package org.openiaml.model.diagram.custom.commands.shortcuts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
-import org.openiaml.model.model.ApplicationElementContainer;
-import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 
@@ -20,33 +17,28 @@ import org.openiaml.model.model.WireEdgesSource;
  * @author jmwright
  *
  */
-public class CreateMissingElementShortcutsCommand extends
+public class CreateMissingOperationShortcutsCommand extends
 		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	
-	public CreateMissingElementShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
+	public CreateMissingOperationShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
 		super(root, prefHint);
 		this.modelId = modelId;
 	}
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		ApplicationElementContainer rootObject = (ApplicationElementContainer) object;
+		CompositeOperation rootObject = (CompositeOperation) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-	
-		// StaticValue doesn't have in edges
-		
-		// EventTrigger doesn't have in edges
+
+		// TemporaryVariable has no in edges
+
+		// OperationParameter has no in edges
 		
 		// Operation (incl ChainedOperation)
 		for (Operation child : rootObject.getOperations()) {
-			connectionsIn.addAll( child.getInEdges() );
-		}
-		
-		// ApplicationElementProperty
-		for (ApplicationElementProperty child : rootObject.getProperties()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 		
@@ -55,20 +47,14 @@ public class CreateMissingElementShortcutsCommand extends
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		ApplicationElementContainer rootObject = (ApplicationElementContainer) object;
+		CompositeOperation rootObject = (CompositeOperation) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
-		// StaticValue
-		for (StaticValue child : rootObject.getValues()) {
-			connectionsOut.addAll( child.getOutEdges() );
-		}
+		// TemporaryVariable has no out edges
 
-		// EventTrigger
-		for (EventTrigger child : rootObject.getEventTriggers()) {
-			connectionsOut.addAll( child.getOutEdges() );
-		}
-		
+		// OperationParameter has no out edges
+				
 		// Operation (incl ChainedOperation)
 		for (Operation child : rootObject.getOperations()) {
 			// not all Operations have outwards edges
@@ -76,12 +62,7 @@ public class CreateMissingElementShortcutsCommand extends
 				connectionsOut.addAll( ((WireEdgesSource) child).getOutEdges() );
 			}
 		}
-		
-		// ApplicationElementProperty
-		for (ApplicationElementProperty child : rootObject.getProperties()) {
-			connectionsOut.addAll( child.getOutEdges() );
-		}
-		
+
 		return connectionsOut;
 
 	}

@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.commands;
+package org.openiaml.model.diagram.custom.commands.shortcuts;
 
 import java.util.Collections;
 import java.util.List;

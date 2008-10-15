@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.edit.providers;
+package org.openiaml.model.diagram.custom.commands.generation;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;

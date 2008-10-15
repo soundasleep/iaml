@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.commands;
+package org.openiaml.model.diagram.custom.commands.shortcuts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,41 +6,38 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
-import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 
 /**
- * Implementation of the missing shortcuts for VisibleThings 
+ * Implementation of the missing shortcuts for DomainStore.
  * 
  * @author jmwright
  *
  */
-public class CreateMissingVisualShortcutsCommand extends
+public class CreateMissingDomainStoreShortcutsCommand extends
 		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	
-	public CreateMissingVisualShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
+	public CreateMissingDomainStoreShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
 		super(root, prefHint);
 		this.modelId = modelId;
 	}
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		VisibleThing rootObject = (VisibleThing) object;
+		DomainStore rootObject = (DomainStore) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-
-		// StaticValue doesn't have in edges
 		
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
+		// DomainObject <- ApplicationElement
+		for (DomainObject child : rootObject.getChildren()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 
@@ -55,23 +52,18 @@ public class CreateMissingVisualShortcutsCommand extends
 		for (ApplicationElementProperty child : rootObject.getProperties()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
-
+		
 		return connectionsIn;
 	}
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		VisibleThing rootObject = (VisibleThing) object;
+		DomainStore rootObject = (DomainStore) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
-		// StaticValue
-		for (StaticValue child : rootObject.getValues()) {
-			connectionsOut.addAll( child.getOutEdges() );
-		}
-
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
+		// DomainObject <- ApplicationElement
+		for (DomainObject child : rootObject.getChildren()) {
 			connectionsOut.addAll( child.getOutEdges() );
 		}
 		

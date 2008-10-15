@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.commands;
+package org.openiaml.model.diagram.custom.commands.shortcuts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,46 +6,41 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
-import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.wires.CompositeWire;
 
 /**
- * Implementation of the missing shortcuts for CompositeWire.
- * 
- * @note Yes, this is a copy of CreateMissingVisualShortcutsCommand, 
- * but this is because the Ecore model considers them as two different 
- * entities. (Indeed, we have different editors for each of them.)
+ * Implementation of the missing shortcuts for DomainStore.
  * 
  * @author jmwright
  *
  */
-public class CreateMissingWireShortcutsCommand extends
+public class CreateMissingDomainObjectShortcutsCommand extends
 		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	
-	public CreateMissingWireShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
+	public CreateMissingDomainObjectShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
 		super(root, prefHint);
 		this.modelId = modelId;
 	}
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		CompositeWire rootObject = (CompositeWire) object;
+		DomainObject rootObject = (DomainObject) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-		
+			
 		// StaticValue doesn't have in edges
-		
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
+
+		// DomainAttribute
+		for (DomainAttribute child : rootObject.getAttributes()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 
@@ -61,17 +56,12 @@ public class CreateMissingWireShortcutsCommand extends
 			connectionsIn.addAll( child.getInEdges() );
 		}
 		
-		// add wire edges, though this is more of a sanity check
-		for (WireEdge w : rootObject.getWires()) {
-			connectionsIn.add( w );
-		}
-		
 		return connectionsIn;
 	}
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		CompositeWire rootObject = (CompositeWire) object;
+		DomainObject rootObject = (DomainObject) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
@@ -79,9 +69,9 @@ public class CreateMissingWireShortcutsCommand extends
 		for (StaticValue child : rootObject.getValues()) {
 			connectionsOut.addAll( child.getOutEdges() );
 		}
-
-		// ApplicationElement (incl VisualThing and Page)
-		for (ApplicationElement child : rootObject.getChildren()) {
+		
+		// DomainAttribute
+		for (DomainAttribute child : rootObject.getAttributes()) {
 			connectionsOut.addAll( child.getOutEdges() );
 		}
 		
@@ -101,11 +91,6 @@ public class CreateMissingWireShortcutsCommand extends
 		// ApplicationElementProperty
 		for (ApplicationElementProperty child : rootObject.getProperties()) {
 			connectionsOut.addAll( child.getOutEdges() );
-		}
-
-		// add wire edges, though this is more of a sanity check
-		for (WireEdge w : rootObject.getWires()) {
-			connectionsOut.add( w );
 		}
 
 		return connectionsOut;

@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.commands;
+package org.openiaml.model.diagram.custom.commands.shortcuts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,41 +6,38 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
+import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 
 /**
- * Implementation of the missing shortcuts for DomainStore.
+ * Implementation of the missing shortcuts for InternetApplications
  * 
  * @author jmwright
  *
  */
-public class CreateMissingDomainObjectShortcutsCommand extends
+public class CreateMissingRootShortcutsCommand extends
 		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	
-	public CreateMissingDomainObjectShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
+	public CreateMissingRootShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
 		super(root, prefHint);
 		this.modelId = modelId;
 	}
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		DomainObject rootObject = (DomainObject) object;
+		InternetApplication rootObject = (InternetApplication) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
-			
-		// StaticValue doesn't have in edges
 
-		// DomainAttribute
-		for (DomainAttribute child : rootObject.getAttributes()) {
+		// ApplicationElement (incl VisualThing and Page)
+		for (ApplicationElement child : rootObject.getChildren()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 
@@ -56,22 +53,19 @@ public class CreateMissingDomainObjectShortcutsCommand extends
 			connectionsIn.addAll( child.getInEdges() );
 		}
 		
+		// DomainStore doesn't have in edges
+		
 		return connectionsIn;
 	}
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		DomainObject rootObject = (DomainObject) object;
+		InternetApplication rootObject = (InternetApplication) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
-
-		// StaticValue
-		for (StaticValue child : rootObject.getValues()) {
-			connectionsOut.addAll( child.getOutEdges() );
-		}
 		
-		// DomainAttribute
-		for (DomainAttribute child : rootObject.getAttributes()) {
+		// ApplicationElement (incl VisualThing and Page)
+		for (ApplicationElement child : rootObject.getChildren()) {
 			connectionsOut.addAll( child.getOutEdges() );
 		}
 		
@@ -93,8 +87,9 @@ public class CreateMissingDomainObjectShortcutsCommand extends
 			connectionsOut.addAll( child.getOutEdges() );
 		}
 
-		return connectionsOut;
+		// DomainStore doesn't have out edges
 
+		return connectionsOut;
 	}
 
 	@Override

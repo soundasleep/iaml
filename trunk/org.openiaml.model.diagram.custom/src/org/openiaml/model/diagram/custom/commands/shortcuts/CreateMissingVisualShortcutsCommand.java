@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.commands;
+package org.openiaml.model.diagram.custom.commands.shortcuts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,33 +9,36 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.StaticValue;
+import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
 
 /**
- * Implementation of the missing shortcuts for InternetApplications
+ * Implementation of the missing shortcuts for VisibleThings 
  * 
  * @author jmwright
  *
  */
-public class CreateMissingRootShortcutsCommand extends
+public class CreateMissingVisualShortcutsCommand extends
 		AbstractCreateMissingShortcutsCommand {
 
 	private String modelId;
 	
-	public CreateMissingRootShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
+	public CreateMissingVisualShortcutsCommand(GraphicalEditPart root, PreferencesHint prefHint, String modelId) {
 		super(root, prefHint);
 		this.modelId = modelId;
 	}
 	
 	@Override
 	protected List<WireEdge> getEdgesIn(EObject object) {
-		InternetApplication rootObject = (InternetApplication) object;
+		VisibleThing rootObject = (VisibleThing) object;
 		
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 
+		// StaticValue doesn't have in edges
+		
 		// ApplicationElement (incl VisualThing and Page)
 		for (ApplicationElement child : rootObject.getChildren()) {
 			connectionsIn.addAll( child.getInEdges() );
@@ -52,18 +55,21 @@ public class CreateMissingRootShortcutsCommand extends
 		for (ApplicationElementProperty child : rootObject.getProperties()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
-		
-		// DomainStore doesn't have in edges
-		
+
 		return connectionsIn;
 	}
 
 	@Override
 	protected List<WireEdge> getEdgesOut(EObject object) {
-		InternetApplication rootObject = (InternetApplication) object;
+		VisibleThing rootObject = (VisibleThing) object;
 		
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
-		
+
+		// StaticValue
+		for (StaticValue child : rootObject.getValues()) {
+			connectionsOut.addAll( child.getOutEdges() );
+		}
+
 		// ApplicationElement (incl VisualThing and Page)
 		for (ApplicationElement child : rootObject.getChildren()) {
 			connectionsOut.addAll( child.getOutEdges() );
@@ -87,9 +93,8 @@ public class CreateMissingRootShortcutsCommand extends
 			connectionsOut.addAll( child.getOutEdges() );
 		}
 
-		// DomainStore doesn't have out edges
-
 		return connectionsOut;
+
 	}
 
 	@Override

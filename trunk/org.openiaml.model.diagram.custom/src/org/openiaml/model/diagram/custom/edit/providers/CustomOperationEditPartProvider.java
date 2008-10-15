@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.diagram.custom.commands.CreateMissingOperationShortcutsCommand;
+import org.openiaml.model.diagram.custom.commands.shortcuts.CreateMissingOperationShortcutsCommand;
 import org.openiaml.model.model.diagram.operation.edit.parts.CompositeOperationEditPart;
 import org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.operation.providers.IamlEditPartProvider;

@@ -2,62 +2,70 @@
 @@dc:date=09/10/2008
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.visual.*;
+import org.openiaml.model.take.tests.*
 ref ApplicationElement another
 var InputForm input_form
 var Page page
+ref Page page_ref_temp
 ref InternetApplication app
 ref ApplicationElementContainer aec
+ref PageWrapper page_wrapper
 // for InternetApplication
-@take.compilerhint.class=InternetApplication_Children
-@take.compilerhint.method=getAppChildren
-query app_children[in,out]
+//@take.compilerhint.class=InternetApplication_Children
+//@take.compilerhint.method=getAppChildren
+//query app_children[in,out]
 // for ApplicationElementContainer
-@take.compilerhint.class=ApplicationElementContainer_Children
-@take.compilerhint.method=getElementChildren
-query element_children[in,out]
+//@take.compilerhint.class=ApplicationElementContainer_Children
+//@take.compilerhint.method=getElementChildren
+//query element_children[in,out]
 @take.compilerhint.class=InternetApplication_Name
 @take.compilerhint.slots=app,string
-@take.compilerhint.method=getAppNames
-// query app_name[in,out]
-@take.compilerhint.class=NamedElement_Name
-@take.compilerhint.slots=element,string
-@take.compilerhint.method=getElementNames
+@take.compilerhint.method=getAppName
+query app_name[in,out]
+//@take.compilerhint.class=NamedElement_Name
+//@take.compilerhint.slots=element,string
+//@take.compilerhint.method=getElementNames
 // query element_name[element,string]
 // this is the query that should exist for our example model
-query input_form_name[form,string]
+//query input_form_name[in,out]
 @take.compilerhint.class=GeneratedAppChildren
 @take.compilerhint.slots=app,element
-// @take.compilerhint.method=getApplicationChildren
+@take.compilerhint.method=getApplicationChildren
 query generated_app_children[in,out]
+@take.compilerhint.class=TestFromExternal
+@take.compilerhint.slots=app,string
+@take.compilerhint.method=getTestFromExternal
+query test_from_external[in,out]
 // query impossible[element]
-rule1: if app_name[app, 'test'] then rule_2[app]
-rule1_a: if generated_app_name[app, 'test'] then rule_2[app]
-rule2: if rule_2[app] then rule2_a[app, page] 
-rule2__1: if rule2_a[app, page] then rule2_b[page, 'generated'] 
-rule2__2: if rule2_b[page, 'generated'] then rule2_c[page, input_form] 
-rule2__3: if rule2_c[page, input_form] then rule2_d[input_form, 'generated form']
-rule2_a: if rule2_a[app, page] then generated_or_app_children[app, page]
-// decomposition of OR into a separate rule
-generated_or_app_children_1: if app_children[app, page] then generated_or_app_children[app, page]
-generated_or_app_children_2: if generated_app_children[app, page] then generated_or_app_children[app, page]
-rule2_b: if rule2_b[page, 'generated'] then generated_or_page_name[page, 'generated']
-// decomposition of or
-generated_or_page_name_1: if page_name[page, 'generated'] then generated_or_page_name[page, 'generated']
-generated_or_page_name_2: if generated_page_name[page, 'generated'] then generated_or_page_name[page, 'generated']
-rule2_c: if rule2_c[page, input_form] then generated_or_element_children[page, input_form]
-// decomposition of or
-generated_or_element_children_1: if element_children[page, input_form] then generated_or_element_children[page, input_form]
-generated_or_element_children_2: if generated_element_children[page, input_form] then generated_or_element_children[page, input_form]
-rule2_d: if rule2_d[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
-// decomposition of or
-generated_or_input_form_name_1: if input_form_name[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
-generated_or_input_form_name_2: if generated_input_form_name[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
-// decomposition of complicated rule complete 
+// the old query (other elements have been removed)
+// rule1: if app_name[app, 'test'] then rule_2[app]
+// this rule can't handle [page] var, but can handle [page_ref_temp] ref
+// this rule can't compile unless we have the fact_temp_page below
+rule_test: if app_name[app, 'test'] then generated_app_children[app, page_wrapper]
+// fact_temp_page: page_name[page_ref_temp, 'test'] 
+// this rule works fine
+rule_test_external: if app_name[app, 'test'] then test_from_external[app, 'hello world']
 external factsPage_Name: page_name[Page, java.lang.String]
 external factsInputForm_Name: input_form_name[InputForm, java.lang.String]
 external factsInternetApplication_Children: app_children[InternetApplication, ApplicationElement]
 external factsApplicationElementContainer_Children: element_children[ApplicationElementContainer, ApplicationElement]
 external factsInternetApplication_Name: app_name[InternetApplication, java.lang.String]
+// test some really obvious facts
+@take.compilerhint.class=TestQueryB
+@take.compilerhint.slots=app
+@take.compilerhint.method=getTestQueryB
+query b[in]
+test1: if a[app] then b[app]
+fact1: a[app]
+// another test
+//@take.compilerhint.class=TestQueryB
+//@take.compilerhint.slots=app
+//@take.compilerhint.method=getTestQueryB
+//query test2_b[out]
+//test2_1: if test2_a[app] then test2_b[app]
+//test2_2: if test2_c[app] then test2_d[app]
+//test2_3: if test2_a[app] then test2_d[app]
+//fact1: test2_a[app]
 //
 //
 //

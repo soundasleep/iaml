@@ -66,7 +66,7 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 						}
 
 						// generate missing elements
-						ICommand command2 = new CreateMissingVisualElementsCommand((GraphicalEditPart) editpart, 
+						ICommand command2 = new CreateMissingSyncWireElementsCommand((GraphicalEditPart) editpart, 
 								IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
 								IamlDiagramEditorPlugin.ID
 								);

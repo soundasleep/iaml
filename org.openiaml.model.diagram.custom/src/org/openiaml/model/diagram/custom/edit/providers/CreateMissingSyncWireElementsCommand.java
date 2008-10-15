@@ -28,7 +28,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.wires.SyncWire;
 
-public class CreateMissingVisualElementsCommand extends AbstractTransactionalCommand {
+public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalCommand {
 
 	private EObject rootObject;
 	private GraphicalEditPart selectedElement;
@@ -38,7 +38,7 @@ public class CreateMissingVisualElementsCommand extends AbstractTransactionalCom
 	private IAdaptable info;
 	private String editorId;
 
-	public CreateMissingVisualElementsCommand(
+	public CreateMissingSyncWireElementsCommand(
 			GraphicalEditPart root,
 			EObject rootObject,
 			TransactionalEditingDomain editingDomain, 
@@ -53,12 +53,12 @@ public class CreateMissingVisualElementsCommand extends AbstractTransactionalCom
 		this.editorId = editorId;
 	}
 
-	public CreateMissingVisualElementsCommand(GraphicalEditPart root,
+	public CreateMissingSyncWireElementsCommand(GraphicalEditPart root,
 			EObject object, PreferencesHint prefHint, String editorId) {
 		this(root, object, root.getEditingDomain(), (View) root.getModel(), prefHint, editorId);
 	}
 
-	public CreateMissingVisualElementsCommand(GraphicalEditPart root, PreferencesHint prefHint, String editorId) {
+	public CreateMissingSyncWireElementsCommand(GraphicalEditPart root, PreferencesHint prefHint, String editorId) {
 		// we used to only refresh the EObject of the container, not the actual EObject instance
 		this(root, (EObject) ((Diagram) root.getModel()).getElement(), prefHint, editorId);
 	}

@@ -65,18 +65,18 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 									"Unable to refresh shortcuts view", e); //$NON-NLS-1$
 						}
 
-						//MessageDialog.openInformation(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Warning", "Not yet implemented. But here are the objects we have: editPart=" + editpart);
-
 						// generate missing elements
 						ICommand command2 = new CreateMissingVisualElementsCommand((GraphicalEditPart) editpart, 
-								IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+								IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+								IamlDiagramEditorPlugin.ID
+								);
 					
 						try {
 							OperationHistoryFactory.getOperationHistory().execute(command2,
 									new NullProgressMonitor(), null);
 						} catch (ExecutionException e) {
 							IamlDiagramEditorPlugin.getInstance().logError(
-									"Unable to refresh shortcuts view", e); //$NON-NLS-1$
+									"Unable to create missing elements", e); //$NON-NLS-1$
 						}
 						
 					}

@@ -62,6 +62,21 @@ public class CustomDomainObjectEditPartProvider extends IamlEditPartProvider {
 							IamlDiagramEditorPlugin.getInstance().logError(
 									"Unable to refresh shortcuts view", e); //$NON-NLS-1$
 						}
+
+						// generate missing elements
+						ICommand command2 = new CreateMissingVisualElementsCommand((GraphicalEditPart) editpart, 
+								IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+								IamlDiagramEditorPlugin.ID
+								);
+					
+						try {
+							OperationHistoryFactory.getOperationHistory().execute(command2,
+									new NullProgressMonitor(), null);
+						} catch (ExecutionException e) {
+							IamlDiagramEditorPlugin.getInstance().logError(
+									"Unable to create missing elements", e); //$NON-NLS-1$
+						}
+						
 					}
 				}
 

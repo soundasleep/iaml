@@ -12,21 +12,20 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.diagram.visual.edit.commands.SyncWireCreateCommand;
-import org.openiaml.model.model.diagram.visual.providers.IamlElementTypes;
 import org.openiaml.model.model.wires.SyncWire;
 
 public class CreateMissingVisualElementsCommand extends AbstractTransactionalCommand {
@@ -37,28 +36,31 @@ public class CreateMissingVisualElementsCommand extends AbstractTransactionalCom
 	private PreferencesHint prefHint;
 	private IProgressMonitor monitor;
 	private IAdaptable info;
+	private String editorId;
 
 	public CreateMissingVisualElementsCommand(
 			GraphicalEditPart root,
 			EObject rootObject,
 			TransactionalEditingDomain editingDomain, 
 			View parentView,
-			PreferencesHint prefHint) {			
+			PreferencesHint prefHint,
+			String editorId) {			
 		super(editingDomain, "Refresh element view", getWorkspaceFiles(parentView)); //$NON-NLS-1$
 		selectedElement = root;
 		this.parentView = parentView;
 		this.rootObject = rootObject;
 		this.prefHint = prefHint;
+		this.editorId = editorId;
 	}
 
 	public CreateMissingVisualElementsCommand(GraphicalEditPart root,
-			EObject object, PreferencesHint prefHint) {
-		this(root, object, root.getEditingDomain(), (View) root.getModel(), prefHint);
+			EObject object, PreferencesHint prefHint, String editorId) {
+		this(root, object, root.getEditingDomain(), (View) root.getModel(), prefHint, editorId);
 	}
 
-	public CreateMissingVisualElementsCommand(GraphicalEditPart root, PreferencesHint prefHint) {
+	public CreateMissingVisualElementsCommand(GraphicalEditPart root, PreferencesHint prefHint, String editorId) {
 		// we used to only refresh the EObject of the container, not the actual EObject instance
-		this(root, (EObject) ((Diagram) root.getModel()).getElement(), prefHint);
+		this(root, (EObject) ((Diagram) root.getModel()).getElement(), prefHint, editorId);
 	}
 
 	/**
@@ -80,33 +82,35 @@ public class CreateMissingVisualElementsCommand extends AbstractTransactionalCom
 		this.monitor = monitor;
 		this.info = info;
 		
-		Assert.isTrue(rootObject instanceof VisibleThing);
-		
-		VisibleThing vt = (VisibleThing) rootObject;
-		
 		// debug message
 		// MessageDialog.openInformation(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Warning", "Not yet implemented. But here are the objects we have: object=" + this.rootObject + " view=" + this.parentView);
-		
-		for (ApplicationElement e : vt.getChildren()) {
-			
-			// get all the input forms
-			if (e instanceof ApplicationElementContainer) {
-				ApplicationElementContainer f = (ApplicationElementContainer) e;
-				
-				// get all the wires
-				for (WireEdge w : f.getOutEdges()) {
-					// get all the sync wires
-					
-					if (w instanceof SyncWire && ((SyncWire) w).getTo() instanceof ApplicationElementContainer) {
-						// sync up these elements
-						doSyncWires((ApplicationElementContainer) w.getFrom(), (ApplicationElementContainer) w.getTo());
-						// and back again
-						doSyncWires((ApplicationElementContainer) w.getTo(), (ApplicationElementContainer) w.getFrom());
-					}
-				}
-				
+		if (rootObject instanceof InternetApplication) {
+			InternetApplication vt = (InternetApplication) rootObject;
+
+			for (ApplicationElement e : vt.getChildren()) {
+				handleChild(e);
 			}
-			
+		}
+		if (rootObject instanceof ApplicationElementContainer) {
+			ApplicationElementContainer vt = (ApplicationElementContainer) rootObject;
+
+			for (ApplicationElement e : vt.getChildren()) {
+				handleChild(e);
+			}
+		}
+		if (rootObject instanceof DomainStore) {
+			DomainStore vt = (DomainStore) rootObject;
+
+			for (ApplicationElement e : vt.getChildren()) {
+				handleChild(e);
+			}
+		}
+		if (rootObject instanceof DomainObject) {
+			DomainObject vt = (DomainObject) rootObject;
+
+			for (ApplicationElement e : vt.getAttributes()) {
+				handleChild(e);
+			}
 		}
 		
 		/*
@@ -129,6 +133,27 @@ public class CreateMissingVisualElementsCommand extends AbstractTransactionalCom
 		
 	}
 	
+	private void handleChild(ApplicationElement e) throws ExecutionException {
+		// get all the input forms
+		if (e instanceof ApplicationElementContainer) {
+			ApplicationElementContainer f = (ApplicationElementContainer) e;
+			
+			// get all the wires
+			for (WireEdge w : f.getOutEdges()) {
+				// get all the sync wires
+				
+				if (w instanceof SyncWire && ((SyncWire) w).getTo() instanceof ApplicationElementContainer) {
+					// sync up these elements
+					doSyncWires((ApplicationElementContainer) w.getFrom(), (ApplicationElementContainer) w.getTo());
+					// and back again
+					doSyncWires((ApplicationElementContainer) w.getTo(), (ApplicationElementContainer) w.getFrom());
+				}
+			}
+			
+		}
+		
+	}
+	
 	/**
 	 * A SyncWire between a source and a target: all of the components in the
 	 * source should be linked up with the target. needs to be called twice to
@@ -148,7 +173,7 @@ public class CreateMissingVisualElementsCommand extends AbstractTransactionalCom
 				if (!elementsAreAlreadySyncWire(c, mapTarget)) {
 					// map them together
 					//CreateRelationshipCommand cc = new CreateRelationshipCommand(new CreateRelationshipRequest( c, c, mapTarget, IamlElementTypes.SyncWire_3001, ModelPackage.eINSTANCE.getContainsWires_Wires() ));
-					CreateElementCommand cc = new SyncWireCreateCommand(new CreateRelationshipRequest( rootObject, c, mapTarget, IamlElementTypes.SyncWire_3001 ), c, mapTarget );
+					CreateElementCommand cc = getSyncWireCreateCommand(new CreateRelationshipRequest( rootObject, c, mapTarget, getSyncWireEditType() ), c, mapTarget );
 					doExecute(cc);
 					
 					SyncWire createdElement = (SyncWire) cc.getNewElement();
@@ -160,6 +185,59 @@ public class CreateMissingVisualElementsCommand extends AbstractTransactionalCom
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Because we don't want to be duplicating logic, we use this to select which command
+	 * in particular we actually want for a given editor.
+	 * 
+	 * @see #editorId
+	 * @param cr
+	 * @param source
+	 * @param target
+	 * @return
+	 * @throws ExecutionException if editorId was unexpected
+	 */
+	private CreateElementCommand getSyncWireCreateCommand(CreateRelationshipRequest cr, EObject source, EObject target) throws ExecutionException {
+		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
+			return new org.openiaml.model.model.diagram.visual.edit.commands.SyncWireCreateCommand(cr, source, target);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
+			return new org.openiaml.model.model.diagram.domainstore.edit.commands.SyncWireCreateCommand(cr, source, target);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
+			return new org.openiaml.model.model.diagram.domain_object.edit.commands.SyncWireCreateCommand(cr, source, target);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
+			return new org.openiaml.model.model.diagram.edit.commands.SyncWireCreateCommand(cr, source, target);
+		}
+		
+		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
+	}
+	
+	/**
+	 * Because we don't want to be duplicating logic, we use this to select which element type
+	 * in particular we actually want for a given editor.
+	 * 
+	 * @see #editorId
+	 * @return
+	 * @throws ExecutionException if editorId was unexpected
+	 */
+	private IElementType getSyncWireEditType() throws ExecutionException {
+		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.SyncWire_3001;
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.SyncWire_3001;
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.SyncWire_3002;
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.providers.IamlElementTypes.SyncWire_3001;
+		}
+		
+		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
 	}
 	
 	/**

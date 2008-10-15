@@ -3,6 +3,7 @@ package org.openiaml.model.diagram.custom.edit.providers;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartListener;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
@@ -10,7 +11,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.diagram.custom.commands.generation.CreateMissingSyncWireElementsCommand;
+import org.openiaml.model.diagram.custom.commands.generation.RemoveGeneratedElementsCommand;
 import org.openiaml.model.diagram.custom.commands.shortcuts.CreateMissingVisualShortcutsCommand;
+import org.openiaml.model.model.diagram.visual.edit.parts.SyncWireEditPart;
 import org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart;
 import org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.visual.providers.IamlEditPartProvider;
@@ -36,6 +39,60 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 	public IGraphicalEditPart createGraphicEditPart(View view) {
 		// install our policy
 		final IGraphicalEditPart part = super.createGraphicEditPart(view);
+		System.out.println("createGraphicEditPart " + part);
+		if (part instanceof SyncWireEditPart) {
+			part.addEditPartListener(new EditPartListener() {
+				@Override
+				public void removingChild(EditPart child, int index) {
+					
+					// cycle over children in the editpart
+					System.out.println("removing [SyncWireEditPart] child " + child);
+					for (Object obj : child.getChildren()) {
+						if (obj instanceof EObject) {
+							EObject rootObject = (EObject) obj;
+							
+							ICommand command = new RemoveGeneratedElementsCommand(child,
+									rootObject,
+									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT
+									);
+						
+							try {
+								OperationHistoryFactory.getOperationHistory().execute(command,
+										new NullProgressMonitor(), null);
+							} catch (ExecutionException e) {
+								IamlDiagramEditorPlugin.getInstance().logError(
+										"Unable to possibly remove generated elements", e); //$NON-NLS-1$
+							}
+
+							// do something here
+						}
+					}
+				}
+
+				@Override
+				public void childAdded(EditPart child, int index) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void partActivated(EditPart editpart) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void partDeactivated(EditPart editpart) {
+					System.out.println("partDeactivated " + editpart);
+				}
+
+				@Override
+				public void selectedStateChanged(EditPart editpart) {
+					// TODO Auto-generated method stub
+					
+				}				
+			});
+		}
 
 		// we only want the root element to have this functionality
 		if (part instanceof VisibleThingEditPart) {
@@ -87,6 +144,31 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 
 				@Override
 				public void removingChild(EditPart child, int index) {
+					// NOTE: unfortunately, removingChild only works for nodes, and not for edges!!
+					// so we will probably have to create our own DeleteElementCommands
+					
+					// cycle over children in the editpart
+					System.out.println("removing child " + child);
+					for (Object obj : child.getChildren()) {
+						if (obj instanceof EObject) {
+							EObject rootObject = (EObject) obj;
+							
+							ICommand command = new RemoveGeneratedElementsCommand(child,
+									rootObject,
+									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT
+									);
+						
+							try {
+								OperationHistoryFactory.getOperationHistory().execute(command,
+										new NullProgressMonitor(), null);
+							} catch (ExecutionException e) {
+								IamlDiagramEditorPlugin.getInstance().logError(
+										"Unable to possibly remove generated elements", e); //$NON-NLS-1$
+							}
+
+							// do something here
+						}
+					}
 				}
 
 				@Override

@@ -25,6 +25,8 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
+import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.WireEdge;
 
 /**
@@ -110,6 +112,20 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 	 * @return
 	 */
 	protected abstract List<WireEdge> getEdgesIn(EObject object);
+
+	protected List<WireEdge> getGeneratedWires(EObject object) {
+		List<WireEdge> list = new ArrayList<WireEdge>();
+		
+		if (object instanceof GeneratesElements) {
+			// add all the edges that we generated
+			for (GeneratedElement g : ((GeneratesElements) object).getGeneratedElements()) {
+				if (g instanceof WireEdge)
+					list.add((WireEdge) g);
+			}
+		}
+		
+		return list;
+	}
 	
 	/**
 	 * The MODEL_ID to be placed in the shortcut annotation. 
@@ -144,6 +160,10 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		// hack
 		connectionsOut.addAll(connectionsIn);
 		connectionsIn.addAll(connectionsOut);
+
+		// add all generated wires
+		connectionsOut.addAll( this.getGeneratedWires(rootObject) );
+		connectionsIn.addAll( this.getGeneratedWires(rootObject) );
 
 		List<EObject> toAdd = new ArrayList<EObject>();
 		List<EObject> toAddEdge = new ArrayList<EObject>();

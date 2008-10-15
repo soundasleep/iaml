@@ -9,6 +9,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
@@ -60,7 +61,7 @@ public class CreateMissingWireShortcutsCommand extends
 			connectionsIn.addAll( child.getInEdges() );
 		}
 		
-		// add wire edges (these should be shortcuts on both edges)
+		// add wire edges, though this is more of a sanity check
 		for (WireEdge w : rootObject.getWires()) {
 			connectionsIn.add( w );
 		}
@@ -102,7 +103,7 @@ public class CreateMissingWireShortcutsCommand extends
 			connectionsOut.addAll( child.getOutEdges() );
 		}
 
-		// add wire edges (these should be shortcuts on both edges)
+		// add wire edges, though this is more of a sanity check
 		for (WireEdge w : rootObject.getWires()) {
 			connectionsOut.add( w );
 		}

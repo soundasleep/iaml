@@ -4,39 +4,21 @@
 package org.openiaml.model.diagram.custom.commands;
 
 import iaml.generated2.ApplicationElementContainer_Children;
-import iaml.generated2.ExternalFactStore4ApplicationElementContainer_Children;
-import iaml.generated2.ExternalFactStore4InternetApplication_Children;
-import iaml.generated2.ExternalFactStore4NamedElement_Name;
-import iaml.generated2.ExternalFactStore4app_name;
+import iaml.generated2.ExternalFactStore4InternetApplication_Name;
+import iaml.generated2.ExternalFactStore4app_children;
+import iaml.generated2.ExternalFactStore4element_children;
+import iaml.generated2.ExternalFactStore4input_form_name;
 import iaml.generated2.ExternalFactStore4page_name;
 import iaml.generated2.FactStores;
-import iaml.generated2.InternetApplication_Children;
-import iaml.generated2.InternetApplication_Name;
+import iaml.generated2.GeneratedAppChildren;
 import iaml.generated2.KBGenerated;
 import iaml.generated2.NamedElement_Name;
-import iaml.generated2.app_name;
 import iaml.generated2.page_name;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.script.SimpleBindings;
-
-import nz.org.take.KnowledgeBase;
-import nz.org.take.TakeException;
-import nz.org.take.compiler.reference.DefaultCompiler;
-import nz.org.take.compiler.util.DefaultLocation;
-import nz.org.take.compiler.util.DefaultNameGenerator;
-import nz.org.take.compiler.util.jalopy.JalopyCodeFormatter;
-import nz.org.take.deployment.KnowledgeBaseManager;
-import nz.org.take.nscript.ScriptKnowledgeSource;
 import nz.org.take.rt.ResourceIterator;
 import nz.org.take.rt.ResultSet;
 
@@ -46,7 +28,6 @@ import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -69,7 +50,6 @@ import org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Page;
-import org.openiaml.model.model.visual.VisualPackage;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -123,7 +103,7 @@ public class TestDeriveElementsCommand
 
 	private class Impl_ExternalFactStore4ApplicationElementContainer_Children
 		extends FactStoreToEMF<Page,InputForm,ApplicationElementContainer_Children>
-		implements ExternalFactStore4ApplicationElementContainer_Children {
+		implements ExternalFactStore4element_children {
 
 		private InternetApplication ia;
 		public Impl_ExternalFactStore4ApplicationElementContainer_Children(
@@ -132,9 +112,9 @@ public class TestDeriveElementsCommand
 		}
 			
 		@Override
-		public ResourceIterator<ApplicationElementContainer_Children> fetch(
-				Page slot1, InputForm slot2) {
-			List<ApplicationElementContainer_Children> listResults = new ArrayList<ApplicationElementContainer_Children>();
+		public ResourceIterator<iaml.generated2.element_children> fetch(
+				ApplicationElementContainer slot1, ApplicationElement slot2) {
+			List<iaml.generated2.element_children> listResults = new ArrayList<iaml.generated2.element_children>();
 
 			if (slot1 == null) {
 				// get all InputForms in Pages
@@ -161,7 +141,7 @@ public class TestDeriveElementsCommand
 						if (eo instanceof InputForm) {
 							// 4. filter to slot2 if necessary
 							if (slot2 == null || slot2.equals(eo)) {
-								listResults.add(new ApplicationElementContainer_Children(p, (InputForm) eo));
+								listResults.add(new iaml.generated2.element_children(p, (InputForm) eo));
 							}
 						}
 					}
@@ -172,14 +152,14 @@ public class TestDeriveElementsCommand
 					if (eo instanceof InputForm) {
 						// 4. filter to slot2 if necessary
 						if (slot2 == null || slot2.equals(eo)) {
-							listResults.add(new ApplicationElementContainer_Children(slot1, (InputForm) eo));
+							listResults.add(new iaml.generated2.element_children(slot1, (InputForm) eo));
 						}
 					}
 				}
 			}
 			
 			// now return iterator
-			return new ResourceIteratorWrapper<ApplicationElementContainer_Children>(listResults.iterator());
+			return new ResourceIteratorWrapper<iaml.generated2.element_children>(listResults.iterator());
 		}
 
 	}
@@ -187,7 +167,7 @@ public class TestDeriveElementsCommand
 		
 		private class Impl_ExternalFactStore4InternetApplication_Children
 			extends FactStoreToEMF<InternetApplication,Page,iaml.generated2.InternetApplication_Children>
-			implements ExternalFactStore4InternetApplication_Children {
+			implements ExternalFactStore4app_children {
 
 				private InternetApplication ia;
 				public Impl_ExternalFactStore4InternetApplication_Children(
@@ -196,9 +176,9 @@ public class TestDeriveElementsCommand
 				}
 					
 				@Override
-				public ResourceIterator<InternetApplication_Children> fetch(
-						InternetApplication slot1, Page slot2) {
-					List<InternetApplication_Children> listResults = new ArrayList<InternetApplication_Children>();
+				public ResourceIterator<iaml.generated2.app_children> fetch(
+						InternetApplication slot1, ApplicationElement slot2) {
+					List<iaml.generated2.app_children> listResults = new ArrayList<iaml.generated2.app_children>();
 
 					if (slot1 == null) {
 						// get all InputForms in Pages
@@ -225,7 +205,7 @@ public class TestDeriveElementsCommand
 								if (eo instanceof Page) {
 									// 4. filter to slot2 if necessary
 									if (slot2 == null || slot2.equals(eo)) {
-										listResults.add(new InternetApplication_Children(p, (Page) eo));
+										listResults.add(new iaml.generated2.app_children(p, (Page) eo));
 									}
 								}
 							}
@@ -236,14 +216,14 @@ public class TestDeriveElementsCommand
 							if (eo instanceof Page) {
 								// 4. filter to slot2 if necessary
 								if (slot2 == null || slot2.equals(eo)) {
-									listResults.add(new InternetApplication_Children(slot1, (Page) eo));
+									listResults.add(new iaml.generated2.app_children(slot1, (Page) eo));
 								}
 							}
 						}
 					}
 					
 					// now return iterator
-					return new ResourceIteratorWrapper<InternetApplication_Children>(listResults.iterator());
+					return new ResourceIteratorWrapper<iaml.generated2.app_children>(listResults.iterator());
 				}
 
 		}
@@ -251,7 +231,7 @@ public class TestDeriveElementsCommand
 		
 	private class Impl_ExternalFactStore4NamedElement_Name
 		extends FactStoreToEMF<InputForm,String,NamedElement_Name>
-		implements ExternalFactStore4NamedElement_Name {
+		implements ExternalFactStore4input_form_name {
 
 			private InternetApplication ia;
 			public Impl_ExternalFactStore4NamedElement_Name(
@@ -260,9 +240,9 @@ public class TestDeriveElementsCommand
 			}
 				
 			@Override
-			public ResourceIterator<NamedElement_Name> fetch(
+			public ResourceIterator<iaml.generated2.input_form_name> fetch(
 					InputForm slot1, String slot2) {
-				List<NamedElement_Name> listResults = new ArrayList<NamedElement_Name>();
+				List<iaml.generated2.input_form_name> listResults = new ArrayList<iaml.generated2.input_form_name>();
 
 				if (slot1 == null) {
 					// get all names in InputForms
@@ -287,19 +267,19 @@ public class TestDeriveElementsCommand
 					for (InputForm p : listPages) {
 						// 4. filter to slot2 if necessary
 						if (slot2 == null || slot2.equals(p.getName())) {
-							listResults.add(new NamedElement_Name(p, p.getName()));
+							listResults.add(new iaml.generated2.input_form_name(p, p.getName()));
 						}
 					}
 				} else {
 					// get all InputForms in a certain Page
 					if (slot2 == null || slot2.equals(slot1.getName())) {
-						listResults.add(new NamedElement_Name(slot1, slot1.getName()));
+						listResults.add(new iaml.generated2.input_form_name(slot1, slot1.getName()));
 					}
 
 				}
 				
 				// now return iterator
-				return new ResourceIteratorWrapper<NamedElement_Name>(listResults.iterator());
+				return new ResourceIteratorWrapper<iaml.generated2.input_form_name>(listResults.iterator());
 			}
 		
 	}
@@ -361,7 +341,7 @@ public class TestDeriveElementsCommand
 
 	private class Impl_ExternalFactStore4app_name
 		extends FactStoreToEMF<InternetApplication,String,iaml.generated2.app_name>
-		implements ExternalFactStore4app_name {
+		implements ExternalFactStore4InternetApplication_Name {
 
 
 			private InternetApplication ia;
@@ -371,9 +351,9 @@ public class TestDeriveElementsCommand
 			}
 				
 			@Override
-			public ResourceIterator<app_name> fetch(
+			public ResourceIterator<iaml.generated2.InternetApplication_Name> fetch(
 					InternetApplication slot1, String slot2) {
-				List<app_name> listResults = new ArrayList<app_name>();
+				List<iaml.generated2.InternetApplication_Name> listResults = new ArrayList<iaml.generated2.InternetApplication_Name>();
 
 				if (slot1 == null) {
 					// get all names in InputForms
@@ -398,19 +378,19 @@ public class TestDeriveElementsCommand
 					for (InternetApplication p : listPages) {
 						// 4. filter to slot2 if necessary
 						if (slot2 == null || slot2.equals(p.getName())) {
-							listResults.add(new app_name(p, p.getName()));
+							listResults.add(new iaml.generated2.InternetApplication_Name(p, p.getName()));
 						}
 					}
 				} else {
 					// get all InputForms in a certain Page
 					if (slot2 == null || slot2.equals(slot1.getName())) {
-						listResults.add(new app_name(slot1, slot1.getName()));
+						listResults.add(new iaml.generated2.InternetApplication_Name(slot1, slot1.getName()));
 					}
 
 				}
 				
 				// now return iterator
-				return new ResourceIteratorWrapper<app_name>(listResults.iterator());
+				return new ResourceIteratorWrapper<iaml.generated2.InternetApplication_Name>(listResults.iterator());
 			}
 
 	}
@@ -570,17 +550,18 @@ public class TestDeriveElementsCommand
 
 			// get out results
 			System.out.println("results:");
-			ResultSet<InternetApplication_Children> rs = kb.getAppChildren(ia);
+			ResultSet<GeneratedAppChildren> rs = kb.getApplicationChildren(ia);
 			while (rs.hasNext()) {
 				System.out.println("+ child: " + rs.next());
 			}
 
+			/*
 			// get out results
 			ResultSet<NamedElement_Name> rs2 = kb.getElementNames();
 			while (rs2.hasNext()) {
 				System.out.println("+ named element: " + rs2.next());
 			}		
-			
+			*/
 
 			return CommandResult.newOKCommandResult();
 		}

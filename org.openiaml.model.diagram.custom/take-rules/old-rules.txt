@@ -1,0 +1,22 @@
+rule1_a: if generated_app_name[app, 'test'] then rule_2[app]
+rule2: if rule_2[app] then rule2_a[app, page] 
+//rule2__1: if rule2_a[app, page] then rule2_b[page, 'generated'] 
+//rule2__2: if rule2_b[page, 'generated'] then rule2_c[page, input_form] 
+//rule2__3: if rule2_c[page, input_form] then rule2_d[input_form, 'generated form']
+rule2_a: if rule2_a[app, page] then generated_or_app_children[app, page]
+// decomposition of OR into a separate rule
+// generated_or_app_children_1: if app_children[app, page] then generated_or_app_children[app, page]
+generated_or_app_children_2: if generated_app_children[app, page] then generated_or_app_children[app, page]
+rule2_b: if rule2_b[page, 'generated'] then generated_or_page_name[page, 'generated']
+// decomposition of or
+generated_or_page_name_1: if page_name[page, 'generated'] then generated_or_page_name[page, 'generated']
+generated_or_page_name_2: if generated_page_name[page, 'generated'] then generated_or_page_name[page, 'generated']
+rule2_c: if rule2_c[page, input_form] then generated_or_element_children[page, input_form]
+// decomposition of or
+generated_or_element_children_1: if element_children[page, input_form] then generated_or_element_children[page, input_form]
+generated_or_element_children_2: if generated_element_children[page, input_form] then generated_or_element_children[page, input_form]
+rule2_d: if rule2_d[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
+// decomposition of or
+generated_or_input_form_name_1: if input_form_name[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
+generated_or_input_form_name_2: if generated_input_form_name[input_form, 'generated form'] then generated_or_input_form_name[input_form, 'generated form']
+// decomposition of complicated rule complete 

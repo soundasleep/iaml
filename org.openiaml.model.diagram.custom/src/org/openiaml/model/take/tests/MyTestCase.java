@@ -1,7 +1,10 @@
 package org.openiaml.model.take.tests;
 
 import iaml.generated2.GeneratedAppChildren;
+import iaml.generated2.InternetApplication_Name;
 import iaml.generated2.KBGenerated;
+import iaml.generated2.TestFromExternal;
+import iaml.generated2.TestQueryB;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,7 +57,28 @@ public class MyTestCase extends TestCase {
 		TestDeriveElementsCommand te = new TestDeriveElementsCommand();
 		KBGenerated kb = te.executeKnowledgeBase(root);
 		
-		ResultSet<GeneratedAppChildren> rs = kb.generated_app_children_10(root);
+		ResultSet<GeneratedAppChildren> rs = kb.getApplicationChildren(root);
+		// print out the derivation log
+		System.out.println("count = " + rs.getDerivationController().getDerivationCount());
+		System.out.println("depth = " + rs.getDerivationController().getDepth());
+		for (DerivationLogEntry e : rs.getDerivationLog()) {
+			System.out.println(e.getName() + ": " + e.getCategory());
+		}
+		assertTrue(rs.hasNext());
+		for (GeneratedAppChildren n : new IteratorWrapper<GeneratedAppChildren>(rs)) {
+			System.out.println("testDerivePage> " + n);
+		}
+	}
+
+	/**
+	 * This should just query the external facts source
+	 */
+	public void testGetAppName() {
+		// try deriving command
+		TestDeriveElementsCommand te = new TestDeriveElementsCommand();
+		KBGenerated kb = te.executeKnowledgeBase(root);
+		
+		ResultSet<InternetApplication_Name> rs = kb.getAppName(root);
 		// print out the derivation log
 		/*
 		for (DerivationLogEntry e : rs.getDerivationLog()) {
@@ -62,12 +86,53 @@ public class MyTestCase extends TestCase {
 		}
 		*/
 		assertTrue(rs.hasNext());
-		for (GeneratedAppChildren n : new IteratorWrapper<GeneratedAppChildren>(rs)) {
-			System.out.println("hello");
-			System.out.println(n);
-		}
+		InternetApplication_Name b = rs.next();
+		assertEquals(b.app, root);
+		assertEquals(b.string, "test");		// the app's name should be test
+		assertFalse(rs.hasNext());
 	}
-	
+
+	/**
+	 * This should just query the external facts source, and then
+	 *  derive an additional property about it
+	 */
+	public void testDeriveFromExternal() {
+		// try deriving command
+		TestDeriveElementsCommand te = new TestDeriveElementsCommand();
+		KBGenerated kb = te.executeKnowledgeBase(root);
+		
+		ResultSet<TestFromExternal> rs = kb.getTestFromExternal(root);
+		// print out the derivation log
+		/*
+		for (DerivationLogEntry e : rs.getDerivationLog()) {
+			System.out.println(e.getName() + ": " + e.getCategory());
+		}
+		*/
+		assertTrue(rs.hasNext());
+		TestFromExternal b = rs.next();
+		assertEquals(b.app, root);
+		assertEquals(b.string, "hello world");		// the app's name should be test
+		assertFalse(rs.hasNext());
+	}
+
+	public void testDeriveSimpleFact() {
+		// try deriving command
+		TestDeriveElementsCommand te = new TestDeriveElementsCommand();
+		KBGenerated kb = te.executeKnowledgeBase(root);
+		
+		ResultSet<TestQueryB> rs = kb.getTestQueryB(root);
+		// print out the derivation log
+		/*
+		for (DerivationLogEntry e : rs.getDerivationLog()) {
+			System.out.println(e.getName() + ": " + e.getCategory());
+		}
+		*/
+		assertTrue(rs.hasNext());
+		TestQueryB b = rs.next();
+		assertEquals(b.app, root);
+		assertFalse(rs.hasNext());
+	}
+
 	private class IteratorWrapper<T> implements Iterable<T> {
 		private Iterator<T> it;
 		public IteratorWrapper(Iterator<T> it) {

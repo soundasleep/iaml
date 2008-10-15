@@ -4,7 +4,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" packageNamePrefix="org.openiaml.model.model.diagram.visual"
     modelID="Iaml_Visual"
-    domainFileExtension="iaml_visual">
+    domainFileExtension="iaml_visual"
+    dynamicTemplates="true"
+    templateDirectory="/org.openiaml.model/templates/">
   <diagram
       visualID="79"
       editPartClassName="VisibleThingEditPart"

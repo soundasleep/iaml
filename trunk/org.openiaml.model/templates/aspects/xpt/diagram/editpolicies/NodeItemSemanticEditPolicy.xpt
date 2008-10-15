@@ -5,5 +5,5 @@
 
 «AROUND destroySemanticElement FOR gmfgen::GenNode-»
 	«targetDef.proceed()»
-	System.out.println("hello, world!");
+	cc.add(new org.openiaml.model.diagramextensions.DeleteGeneratedElementsCommand(req));
 «ENDAROUND»

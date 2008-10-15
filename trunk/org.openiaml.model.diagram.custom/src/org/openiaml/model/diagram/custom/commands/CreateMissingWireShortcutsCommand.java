@@ -60,6 +60,11 @@ public class CreateMissingWireShortcutsCommand extends
 			connectionsIn.addAll( child.getInEdges() );
 		}
 		
+		// add wire edges (these should be shortcuts on both edges)
+		for (WireEdge w : rootObject.getWires()) {
+			connectionsIn.add( w );
+		}
+		
 		return connectionsIn;
 	}
 
@@ -95,6 +100,11 @@ public class CreateMissingWireShortcutsCommand extends
 		// ApplicationElementProperty
 		for (ApplicationElementProperty child : rootObject.getProperties()) {
 			connectionsOut.addAll( child.getOutEdges() );
+		}
+
+		// add wire edges (these should be shortcuts on both edges)
+		for (WireEdge w : rootObject.getWires()) {
+			connectionsOut.add( w );
 		}
 
 		return connectionsOut;

@@ -94,6 +94,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/wires"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ShouldntContainWires"/>
+    <genClasses image="false" ecoreClass="iaml.ecore#//GeneratedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratedElement/generatedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/isGenerated"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//GeneratesElements">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratesElements/generatedElements"/>
+    </genClasses>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genClasses ecoreClass="iaml.ecore#//visual/Page">

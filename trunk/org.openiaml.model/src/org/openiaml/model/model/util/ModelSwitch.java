@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.*;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
@@ -122,12 +123,14 @@ public class ModelSwitch<T> {
 			case ModelPackage.NAMED_ELEMENT: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
+				if (result == null) result = caseGeneratedElement(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.WIRE_EDGE: {
 				WireEdge wireEdge = (WireEdge)theEObject;
 				T result = caseWireEdge(wireEdge);
+				if (result == null) result = caseGeneratedElement(wireEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -150,6 +153,7 @@ public class ModelSwitch<T> {
 				T result = caseEventTrigger(eventTrigger);
 				if (result == null) result = caseNamedElement(eventTrigger);
 				if (result == null) result = caseWireEdgesSource(eventTrigger);
+				if (result == null) result = caseGeneratedElement(eventTrigger);
 				if (result == null) result = caseShouldntContainWires(eventTrigger);
 				if (result == null) result = caseContainsWires(eventTrigger);
 				if (result == null) result = defaultCase(theEObject);
@@ -171,6 +175,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(domainObject);
 				if (result == null) result = caseWireEdgesSource(domainObject);
 				if (result == null) result = caseWireEdgeDestination(domainObject);
+				if (result == null) result = caseGeneratesElements(domainObject);
+				if (result == null) result = caseGeneratedElement(domainObject);
 				if (result == null) result = caseShouldntContainWires(domainObject);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -184,6 +190,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(domainAttribute);
 				if (result == null) result = caseWireEdgesSource(domainAttribute);
 				if (result == null) result = caseWireEdgeDestination(domainAttribute);
+				if (result == null) result = caseGeneratesElements(domainAttribute);
+				if (result == null) result = caseGeneratedElement(domainAttribute);
 				if (result == null) result = caseShouldntContainWires(domainAttribute);
 				if (result == null) result = caseContainsWires(domainAttribute);
 				if (result == null) result = defaultCase(theEObject);
@@ -204,6 +212,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseExecutionEdgeDestination(operation);
 				if (result == null) result = caseActivityNode(operation);
 				if (result == null) result = caseDataFlowEdgesSource(operation);
+				if (result == null) result = caseGeneratedElement(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -213,6 +222,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(parameter);
 				if (result == null) result = caseDataFlowEdgesSource(parameter);
 				if (result == null) result = caseDataFlowEdgeDestination(parameter);
+				if (result == null) result = caseGeneratedElement(parameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -226,6 +236,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseExecutionEdgeDestination(singleOperation);
 				if (result == null) result = caseActivityNode(singleOperation);
 				if (result == null) result = caseDataFlowEdgesSource(singleOperation);
+				if (result == null) result = caseGeneratedElement(singleOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -240,6 +251,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseExecutionEdgeDestination(chainedOperation);
 				if (result == null) result = caseActivityNode(chainedOperation);
 				if (result == null) result = caseDataFlowEdgesSource(chainedOperation);
+				if (result == null) result = caseGeneratedElement(chainedOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -257,6 +269,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseExecutionEdgeDestination(compositeOperation);
 				if (result == null) result = caseActivityNode(compositeOperation);
 				if (result == null) result = caseDataFlowEdgesSource(compositeOperation);
+				if (result == null) result = caseGeneratedElement(compositeOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -274,6 +287,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(applicationElement);
 				if (result == null) result = caseWireEdgesSource(applicationElement);
 				if (result == null) result = caseWireEdgeDestination(applicationElement);
+				if (result == null) result = caseGeneratesElements(applicationElement);
+				if (result == null) result = caseGeneratedElement(applicationElement);
 				if (result == null) result = caseShouldntContainWires(applicationElement);
 				if (result == null) result = caseContainsWires(applicationElement);
 				if (result == null) result = defaultCase(theEObject);
@@ -289,6 +304,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(applicationElementContainer);
 				if (result == null) result = caseWireEdgesSource(applicationElementContainer);
 				if (result == null) result = caseWireEdgeDestination(applicationElementContainer);
+				if (result == null) result = caseGeneratesElements(applicationElementContainer);
+				if (result == null) result = caseGeneratedElement(applicationElementContainer);
 				if (result == null) result = caseShouldntContainWires(applicationElementContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -301,6 +318,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgeDestination(applicationElementProperty);
 				if (result == null) result = caseDataFlowEdgesSource(applicationElementProperty);
 				if (result == null) result = caseDataFlowEdgeDestination(applicationElementProperty);
+				if (result == null) result = caseGeneratedElement(applicationElementProperty);
 				if (result == null) result = caseShouldntContainWires(applicationElementProperty);
 				if (result == null) result = caseContainsWires(applicationElementProperty);
 				if (result == null) result = defaultCase(theEObject);
@@ -312,6 +330,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(staticValue);
 				if (result == null) result = caseWireEdgesSource(staticValue);
 				if (result == null) result = caseDataFlowEdgeDestination(staticValue);
+				if (result == null) result = caseGeneratedElement(staticValue);
 				if (result == null) result = caseShouldntContainWires(staticValue);
 				if (result == null) result = caseContainsWires(staticValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -328,6 +347,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(visibleThing);
 				if (result == null) result = caseWireEdgesSource(visibleThing);
 				if (result == null) result = caseWireEdgeDestination(visibleThing);
+				if (result == null) result = caseGeneratesElements(visibleThing);
+				if (result == null) result = caseGeneratedElement(visibleThing);
 				if (result == null) result = caseShouldntContainWires(visibleThing);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -339,6 +360,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(internetApplication);
 				if (result == null) result = caseNamedElement(internetApplication);
 				if (result == null) result = caseContainsWires(internetApplication);
+				if (result == null) result = caseGeneratesElements(internetApplication);
+				if (result == null) result = caseGeneratedElement(internetApplication);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -349,12 +372,15 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(domainStore);
 				if (result == null) result = caseNamedElement(domainStore);
 				if (result == null) result = caseContainsWires(domainStore);
+				if (result == null) result = caseGeneratesElements(domainStore);
+				if (result == null) result = caseGeneratedElement(domainStore);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.DATA_FLOW_EDGE: {
 				DataFlowEdge dataFlowEdge = (DataFlowEdge)theEObject;
 				T result = caseDataFlowEdge(dataFlowEdge);
+				if (result == null) result = caseGeneratedElement(dataFlowEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -376,12 +402,14 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(temporaryVariable);
 				if (result == null) result = caseDataFlowEdgesSource(temporaryVariable);
 				if (result == null) result = caseDataFlowEdgeDestination(temporaryVariable);
+				if (result == null) result = caseGeneratedElement(temporaryVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.EXECUTION_EDGE: {
 				ExecutionEdge executionEdge = (ExecutionEdge)theEObject;
 				T result = caseExecutionEdge(executionEdge);
+				if (result == null) result = caseGeneratedElement(executionEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -402,6 +430,7 @@ public class ModelSwitch<T> {
 				T result = caseConditionalEdge(conditionalEdge);
 				if (result == null) result = caseExecutionEdge(conditionalEdge);
 				if (result == null) result = caseNamedElement(conditionalEdge);
+				if (result == null) result = caseGeneratedElement(conditionalEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -414,6 +443,8 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgesSource(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgeDestination(dynamicApplicationElementSet);
+				if (result == null) result = caseGeneratesElements(dynamicApplicationElementSet);
+				if (result == null) result = caseGeneratedElement(dynamicApplicationElementSet);
 				if (result == null) result = caseShouldntContainWires(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsWires(dynamicApplicationElementSet);
 				if (result == null) result = defaultCase(theEObject);
@@ -429,6 +460,18 @@ public class ModelSwitch<T> {
 				ShouldntContainWires shouldntContainWires = (ShouldntContainWires)theEObject;
 				T result = caseShouldntContainWires(shouldntContainWires);
 				if (result == null) result = caseContainsWires(shouldntContainWires);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.GENERATED_ELEMENT: {
+				GeneratedElement generatedElement = (GeneratedElement)theEObject;
+				T result = caseGeneratedElement(generatedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.GENERATES_ELEMENTS: {
+				GeneratesElements generatesElements = (GeneratesElements)theEObject;
+				T result = caseGeneratesElements(generatesElements);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -928,6 +971,36 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseShouldntContainWires(ShouldntContainWires object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generated Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generated Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGeneratedElement(GeneratedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGeneratesElements(GeneratesElements object) {
 		return null;
 	}
 

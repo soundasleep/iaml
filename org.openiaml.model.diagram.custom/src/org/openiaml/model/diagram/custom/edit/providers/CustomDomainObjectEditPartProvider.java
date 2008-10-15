@@ -3,6 +3,7 @@ package org.openiaml.model.diagram.custom.edit.providers;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartListener;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
@@ -10,6 +11,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.diagram.custom.commands.generation.CreateMissingSyncWireElementsCommand;
+import org.openiaml.model.diagram.custom.commands.generation.RemoveGeneratedElementsCommand;
 import org.openiaml.model.diagram.custom.commands.shortcuts.CreateMissingDomainObjectShortcutsCommand;
 import org.openiaml.model.model.diagram.domain_object.edit.parts.DomainObjectEditPart;
 import org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin;
@@ -87,8 +89,29 @@ public class CustomDomainObjectEditPartProvider extends IamlEditPartProvider {
 
 				@Override
 				public void removingChild(EditPart child, int index) {
-				}
+					// cycle over children in the editpart
+					for (Object obj : child.getChildren()) {
+						if (obj instanceof EObject) {
+							EObject rootObject = (EObject) obj;
+							
+							ICommand command = new RemoveGeneratedElementsCommand(child,
+									rootObject,
+									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT
+									);
+						
+							try {
+								OperationHistoryFactory.getOperationHistory().execute(command,
+										new NullProgressMonitor(), null);
+							} catch (ExecutionException e) {
+								IamlDiagramEditorPlugin.getInstance().logError(
+										"Unable to possibly remove generated elements", e); //$NON-NLS-1$
+							}
 
+							// do something here
+						}
+					}
+				}
+				
 				@Override
 				public void selectedStateChanged(EditPart editpart) {
 				}

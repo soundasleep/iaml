@@ -16,9 +16,11 @@ import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
+import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -145,6 +147,7 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseExecutionEdgeDestination(decisionOperation);
 				if (result == null) result = caseActivityNode(decisionOperation);
 				if (result == null) result = caseDataFlowEdgesSource(decisionOperation);
+				if (result == null) result = caseGeneratedElement(decisionOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -239,6 +242,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseWireEdgeDestination(WireEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generated Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generated Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGeneratedElement(GeneratedElement object) {
 		return null;
 	}
 

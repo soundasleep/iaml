@@ -11,9 +11,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -99,6 +102,7 @@ public class WiresSwitch<T> {
 				SingleWire singleWire = (SingleWire)theEObject;
 				T result = caseSingleWire(singleWire);
 				if (result == null) result = caseWireEdge(singleWire);
+				if (result == null) result = caseGeneratedElement(singleWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -108,6 +112,8 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseWireEdge(compositeWire);
 				if (result == null) result = caseNamedElement(compositeWire);
 				if (result == null) result = caseContainsWires(compositeWire);
+				if (result == null) result = caseGeneratesElements(compositeWire);
+				if (result == null) result = caseGeneratedElement(compositeWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -118,6 +124,8 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseWireEdge(syncWire);
 				if (result == null) result = caseNamedElement(syncWire);
 				if (result == null) result = caseContainsWires(syncWire);
+				if (result == null) result = caseGeneratesElements(syncWire);
+				if (result == null) result = caseGeneratedElement(syncWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -129,6 +137,8 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseWireEdge(runInstanceWire);
 				if (result == null) result = caseNamedElement(runInstanceWire);
 				if (result == null) result = caseContainsWires(runInstanceWire);
+				if (result == null) result = caseGeneratesElements(runInstanceWire);
+				if (result == null) result = caseGeneratedElement(runInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -137,6 +147,7 @@ public class WiresSwitch<T> {
 				T result = caseParameterWire(parameterWire);
 				if (result == null) result = caseSingleWire(parameterWire);
 				if (result == null) result = caseWireEdge(parameterWire);
+				if (result == null) result = caseGeneratedElement(parameterWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -220,6 +231,21 @@ public class WiresSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generated Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generated Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGeneratedElement(GeneratedElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Wire Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -261,6 +287,21 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsWires(ContainsWires object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGeneratesElements(GeneratesElements object) {
 		return null;
 	}
 

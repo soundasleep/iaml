@@ -45,7 +45,7 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 			View parentView,
 			PreferencesHint prefHint,
 			String editorId) {			
-		super(editingDomain, "Refresh element view", getWorkspaceFiles(parentView)); //$NON-NLS-1$
+		super(editingDomain, "Create missing SyncWire elements", getWorkspaceFiles(parentView)); //$NON-NLS-1$
 		selectedElement = root;
 		this.parentView = parentView;
 		this.rootObject = rootObject;
@@ -144,9 +144,9 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 				
 				if (w instanceof SyncWire && ((SyncWire) w).getTo() instanceof ApplicationElementContainer) {
 					// sync up these elements
-					doSyncWires((ApplicationElementContainer) w.getFrom(), (ApplicationElementContainer) w.getTo());
+					doSyncWires((ApplicationElementContainer) w.getFrom(), (ApplicationElementContainer) w.getTo(), (SyncWire) w);
 					// and back again
-					doSyncWires((ApplicationElementContainer) w.getTo(), (ApplicationElementContainer) w.getFrom());
+					doSyncWires((ApplicationElementContainer) w.getTo(), (ApplicationElementContainer) w.getFrom(), (SyncWire) w);
 				}
 			}
 			
@@ -163,8 +163,8 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	 * @param target
 	 * @throws ExecutionException 
 	 */
-	protected void doSyncWires(ApplicationElementContainer source, ApplicationElementContainer target) throws ExecutionException {
-		// first, source --> target
+	protected void doSyncWires(ApplicationElementContainer source, ApplicationElementContainer target, SyncWire generatedBy) throws ExecutionException {
+		// map each of the children in the source
 		for (ApplicationElement c : source.getChildren()) {
 			ApplicationElement mapTarget = getChildMatch(c, target);
 			if (mapTarget != null) {
@@ -182,6 +182,15 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 					// set sync wire parameters
 					SetValueCommand sv = new SetValueCommand(new SetRequest(createdElement, ModelPackage.eINSTANCE.getNamedElement_Name(), "sync[generated]"));
 					doExecute(sv);
+
+					// set isGenerated parameter
+					SetValueCommand sv2 = new SetValueCommand(new SetRequest(createdElement, ModelPackage.eINSTANCE.getGeneratedElement_IsGenerated(), true));
+					doExecute(sv2);
+					
+					// set generatedBy parameter
+					SetValueCommand sv3 = new SetValueCommand(new SetRequest(createdElement, ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy(), generatedBy));
+					doExecute(sv3);
+
 				}
 			}
 		}

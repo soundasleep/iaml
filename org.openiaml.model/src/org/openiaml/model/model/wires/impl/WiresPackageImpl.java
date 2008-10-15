@@ -324,6 +324,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getWireEdge());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getContainsWires());
+		compositeWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
 		runInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());

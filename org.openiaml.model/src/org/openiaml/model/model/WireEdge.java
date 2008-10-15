@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface WireEdge extends EObject {
+public interface WireEdge extends GeneratedElement {
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.openiaml.model.model.WireEdgesSource#getOutEdges <em>Out Edges</em>}'.

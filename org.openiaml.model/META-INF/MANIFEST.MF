@@ -23,5 +23,9 @@ Export-Package: org.openiaml.model.diagramextensions,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.gef,
- org.eclipse.gmf.runtime.emf.type.core
+ org.eclipse.gmf.runtime.emf.type.core,
+ org.eclipse.gmf,
+ org.eclipse.gmf.runtime.notation,
+ org.eclipse.gmf.runtime.diagram.core,
+ org.eclipse.gmf.runtime.diagram.ui
 Eclipse-LazyStart: true

@@ -73,27 +73,6 @@ public class CustomElementEditPartProvider extends IamlEditPartProvider {
 
 				@Override
 				public void removingChild(EditPart child, int index) {
-					// cycle over children in the editpart
-					for (Object obj : child.getChildren()) {
-						if (obj instanceof EObject) {
-							EObject rootObject = (EObject) obj;
-							
-							ICommand command = new RemoveGeneratedElementsCommand(child,
-									rootObject,
-									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT
-									);
-						
-							try {
-								OperationHistoryFactory.getOperationHistory().execute(command,
-										new NullProgressMonitor(), null);
-							} catch (ExecutionException e) {
-								IamlDiagramEditorPlugin.getInstance().logError(
-										"Unable to possibly remove generated elements", e); //$NON-NLS-1$
-							}
-
-							// do something here
-						}
-					}
 				}
 
 				@Override

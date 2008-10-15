@@ -39,60 +39,6 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 	public IGraphicalEditPart createGraphicEditPart(View view) {
 		// install our policy
 		final IGraphicalEditPart part = super.createGraphicEditPart(view);
-		System.out.println("createGraphicEditPart " + part);
-		if (part instanceof SyncWireEditPart) {
-			part.addEditPartListener(new EditPartListener() {
-				@Override
-				public void removingChild(EditPart child, int index) {
-					
-					// cycle over children in the editpart
-					System.out.println("removing [SyncWireEditPart] child " + child);
-					for (Object obj : child.getChildren()) {
-						if (obj instanceof EObject) {
-							EObject rootObject = (EObject) obj;
-							
-							ICommand command = new RemoveGeneratedElementsCommand(child,
-									rootObject,
-									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT
-									);
-						
-							try {
-								OperationHistoryFactory.getOperationHistory().execute(command,
-										new NullProgressMonitor(), null);
-							} catch (ExecutionException e) {
-								IamlDiagramEditorPlugin.getInstance().logError(
-										"Unable to possibly remove generated elements", e); //$NON-NLS-1$
-							}
-
-							// do something here
-						}
-					}
-				}
-
-				@Override
-				public void childAdded(EditPart child, int index) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void partActivated(EditPart editpart) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void partDeactivated(EditPart editpart) {
-					System.out.println("partDeactivated " + editpart);
-				}
-
-				@Override
-				public void selectedStateChanged(EditPart editpart) {
-					// TODO Auto-generated method stub
-					
-				}				
-			});
-		}
 
 		// we only want the root element to have this functionality
 		if (part instanceof VisibleThingEditPart) {
@@ -144,31 +90,6 @@ public class CustomVisualEditPartProvider extends IamlEditPartProvider {
 
 				@Override
 				public void removingChild(EditPart child, int index) {
-					// NOTE: unfortunately, removingChild only works for nodes, and not for edges!!
-					// so we will probably have to create our own DeleteElementCommands
-					
-					// cycle over children in the editpart
-					System.out.println("removing child " + child);
-					for (Object obj : child.getChildren()) {
-						if (obj instanceof EObject) {
-							EObject rootObject = (EObject) obj;
-							
-							ICommand command = new RemoveGeneratedElementsCommand(child,
-									rootObject,
-									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT
-									);
-						
-							try {
-								OperationHistoryFactory.getOperationHistory().execute(command,
-										new NullProgressMonitor(), null);
-							} catch (ExecutionException e) {
-								IamlDiagramEditorPlugin.getInstance().logError(
-										"Unable to possibly remove generated elements", e); //$NON-NLS-1$
-							}
-
-							// do something here
-						}
-					}
 				}
 
 				@Override

@@ -1,0 +1,19 @@
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
+«EXTENSION xpt::diagram::Utils»
+«EXTENSION xpt::GenModelUtils»
+
+/**
+ * We have to redefine the entire command, because there are no
+ * extension points which we can use.
+ */
+«AROUND getDestroyElementCommand FOR gmfgen::TypeLinkModelFacet-»
+	«EXPAND xpt::Common::generatedMemberComment»
+protected org.eclipse.gef.commands.Command getDestroyElementCommand(org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest req) {
+	org.eclipse.gef.commands.CompoundCommand cc = new org.eclipse.gef.commands.CompoundCommand();
+	// this has to come first, too, so that we don't lose our references from the DestroyElementCommand
+	cc.add(new org.openiaml.model.diagramextensions.DeleteGeneratedElementsCommand(req, getHost()));
+	cc.add(getGEFWrapper(new org.eclipse.gmf.runtime.emf.type.core.commands.DestroyElementCommand(req)));
+	return cc;
+}
+«ENDAROUND»

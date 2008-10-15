@@ -10,13 +10,11 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest;
-//import org.openiaml.model.diagram.custom.commands.generation.RemoveGeneratedElementsCommand;
-//import org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin;
 
 /**
  * @author jmwright
@@ -39,9 +37,17 @@ public class DeleteGeneratedElementsCommand extends Command {
 		this.request = req;
 		this.editPart = editPart;
 		// calculate the proper editPart
-		ShapeNodeEditPart part = (ShapeNodeEditPart) editPart;
-		this.editingDomain = part.getEditingDomain();
-		this.editPart = part.getParent();
+		if (editPart instanceof GraphicalEditPart) {
+			GraphicalEditPart part = (GraphicalEditPart) editPart;
+			this.editingDomain = part.getEditingDomain();
+			this.editPart = part.getParent();
+		} else if (editPart instanceof ConnectionEditPart) {
+			ConnectionEditPart part = (ConnectionEditPart) editPart;
+			this.editingDomain = part.getEditingDomain();
+			this.editPart = part.getParent();
+		} else {
+			throw new RuntimeException("I don't know what to do with editParts of type " + editPart.getClass());
+		}
 	}
 
 

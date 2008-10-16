@@ -89,6 +89,15 @@ public interface WiresPackage extends EPackage {
 	int SINGLE_WIRE__IS_GENERATED = ModelPackage.WIRE_EDGE__IS_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SINGLE_WIRE__ID = ModelPackage.WIRE_EDGE__ID;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -142,6 +151,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_WIRE__IS_GENERATED = ModelPackage.WIRE_EDGE__IS_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_WIRE__ID = ModelPackage.WIRE_EDGE__ID;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -289,6 +307,15 @@ public interface WiresPackage extends EPackage {
 	int SYNC_WIRE__IS_GENERATED = COMPOSITE_WIRE__IS_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__ID = COMPOSITE_WIRE__ID;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -432,6 +459,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int RUN_INSTANCE_WIRE__IS_GENERATED = COMPOSITE_WIRE__IS_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_INSTANCE_WIRE__ID = COMPOSITE_WIRE__ID;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -586,6 +622,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER_WIRE__IS_GENERATED = SINGLE_WIRE__IS_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_WIRE__ID = SINGLE_WIRE__ID;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.

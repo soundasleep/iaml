@@ -98,6 +98,15 @@ public interface VisualPackage extends EPackage {
 	int PAGE__IS_GENERATED = ModelPackage.VISIBLE_THING__IS_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__ID = ModelPackage.VISIBLE_THING__ID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -243,6 +252,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__IS_GENERATED = ModelPackage.VISIBLE_THING__IS_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__ID = ModelPackage.VISIBLE_THING__ID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -377,6 +395,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__IS_GENERATED = ModelPackage.VISIBLE_THING__IS_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__ID = ModelPackage.VISIBLE_THING__ID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

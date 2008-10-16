@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires">
+  <children xsi:type="iaml.visual:Page" name="page1" outEdges="//@children.0/@wires.0">
+    <wires xsi:type="iaml.wires:SyncWire" from="//@children.0" to="//@children.1" name="sync" generatedElements="//@children.0/@children.0/@wires.0"/>
+    <children xsi:type="iaml.visual:InputForm" name="if" outEdges="//@children.0/@children.0/@wires.0">
+      <wires xsi:type="iaml.wires:SyncWire" generatedBy="//@children.0/@wires.0" isGenerated="true" from="//@children.0/@children.0" to="//@children.1/@children.0" name="sync[generated]"/>
+    </children>
+  </children>
+  <children xsi:type="iaml.visual:Page" name="page2" inEdges="//@children.0/@wires.0">
+    <children xsi:type="iaml.visual:InputTextField" name="if" inEdges="//@children.0/@children.0/@wires.0"/>
+  </children>
+</iaml:InternetApplication>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires">
+  <children xsi:type="iaml.visual:Page" name="page">
+    <eventTriggers name="event trigger">
+      <edges xsi:type="iaml.wires:RunWire" to="//@domainStores.0/@children.0/@attributes.0" name="runWire to show as shortcut"/>
+    </eventTriggers>
+  </children>
+  <domainStores name="domain store">
+    <children name="domain object">
+      <attributes name="target domain attribute" inEdges="//@children.0/@eventTriggers.0/@edges.0"/>
+    </children>
+  </domainStores>
+</iaml:InternetApplication>

@@ -1,9 +1,7 @@
 package org.openiaml.model.diagram.custom.commands.shortcuts;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
@@ -12,7 +10,6 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -257,14 +254,16 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 					selectedElement.getEditingDomain(), parentView, viewDescriptor, this.getEditPartModelId()));
 			doExecute(command);		//execute it now
 			
-			// once its executed, we can get the EObject 
+			/*
+			 * this code allows us to directly get the EObject created by the CreateCommand 
+			 * (and if it can't be rendered, view will be null)
+			 *
 			View view = (View) viewDescriptor.getAdapter(View.class);
 			if (view != null) {
 				EObject created = view.getElement();
 				EcoreUtil.setID(created, new Date().toString() + "-" + new Random().nextInt(1048576));
 			}
-			
-			// test: try 
+			*/
 		}
 		
 		for (EObject newObjectEdge : toAddEdge) {

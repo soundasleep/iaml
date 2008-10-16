@@ -12,7 +12,7 @@
 protected org.eclipse.gef.commands.Command getDestroyElementCommand(org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest req) {
 	org.eclipse.gef.commands.CompoundCommand cc = new org.eclipse.gef.commands.CompoundCommand();
 	// this has to come first, too, so that we don't lose our references from the DestroyElementCommand
-	cc.add(new org.openiaml.model.diagramextensions.DeleteGeneratedElementsCommand(req, getHost()));
+	cc.add(new org.openiaml.model.diagramextensions.HandleDeletingGeneratedElementsCommand(req, getHost()));
 	cc.add(getGEFWrapper(new org.eclipse.gmf.runtime.emf.type.core.commands.DestroyElementCommand(req)));
 	return cc;
 }

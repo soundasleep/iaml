@@ -17,10 +17,13 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest;
 
 /**
+ * A command that handles deleting unnecessary generated
+ * elements from a model when its source element is deleted.
+ * 
  * @author jmwright
  *
  */
-public class DeleteGeneratedElementsCommand extends Command {
+public class HandleDeletingGeneratedElementsCommand extends Command {
 
 	private DestroyElementRequest request;
 	private EditPart editPart;
@@ -33,7 +36,7 @@ public class DeleteGeneratedElementsCommand extends Command {
 	 * @param req
 	 * @param editPart 
 	 */
-	public DeleteGeneratedElementsCommand(DestroyElementRequest req, EditPart editPart) {
+	public HandleDeletingGeneratedElementsCommand(DestroyElementRequest req, EditPart editPart) {
 		this.request = req;
 		this.editPart = editPart;
 		// calculate the proper editPart

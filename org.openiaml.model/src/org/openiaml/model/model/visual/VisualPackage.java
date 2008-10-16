@@ -152,6 +152,15 @@ public interface VisualPackage extends EPackage {
 	int PAGE__GENERATED_ELEMENTS = ModelPackage.VISIBLE_THING__GENERATED_ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -288,6 +297,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__GENERATED_ELEMENTS = ModelPackage.VISIBLE_THING__GENERATED_ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -413,6 +431,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__GENERATED_ELEMENTS = ModelPackage.VISIBLE_THING__GENERATED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.

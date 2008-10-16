@@ -50,6 +50,7 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getProperties <em>Properties</em>}</li>
  * </ul>
@@ -147,6 +148,26 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * @ordered
 	 */
 	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
@@ -342,6 +363,27 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverridden(boolean newOverridden) {
+		boolean oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_STORE__OVERRIDDEN, oldOverridden, overridden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<DomainObject> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.DOMAIN_STORE__CHILDREN);
@@ -429,6 +471,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return getWires();
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
 				return getGeneratedElements();
+			case ModelPackage.DOMAIN_STORE__OVERRIDDEN:
+				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				return getChildren();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
@@ -471,6 +515,9 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				getGeneratedElements().clear();
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
+			case ModelPackage.DOMAIN_STORE__OVERRIDDEN:
+				setOverridden(((Boolean)newValue).booleanValue());
+				return;
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends DomainObject>)newValue);
@@ -512,6 +559,9 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
+			case ModelPackage.DOMAIN_STORE__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				getChildren().clear();
 				return;
@@ -544,6 +594,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return wires != null && !wires.isEmpty();
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
+			case ModelPackage.DOMAIN_STORE__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				return children != null && !children.isEmpty();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
@@ -587,6 +639,7 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 		if (baseClass == GeneratesElements.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case ModelPackage.DOMAIN_STORE__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -628,6 +681,7 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 		if (baseClass == GeneratesElements.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.DOMAIN_STORE__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -648,6 +702,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 		result.append(isGenerated);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", overridden: ");
+		result.append(overridden);
 		result.append(')');
 		return result.toString();
 	}

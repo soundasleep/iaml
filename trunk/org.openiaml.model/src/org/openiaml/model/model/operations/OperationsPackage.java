@@ -218,6 +218,15 @@ public interface OperationsPackage extends EPackage {
 	int DECISION_OPERATION__IS_GENERATED = ModelPackage.CHAINED_OPERATION__IS_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__ID = ModelPackage.CHAINED_OPERATION__ID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

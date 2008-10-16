@@ -1,7 +1,9 @@
 package org.openiaml.model.diagram.custom.commands.shortcuts;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
@@ -10,6 +12,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -77,13 +80,9 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		assert(getEditPartModelId() != null);
 		
 		// get the command to create the shortcuts
-		ICommand command = getCreateShortcutsCommand();
+		// this will also execute the commands
+		getCreateShortcutsCommand();
 
-		// try executing it
-		// exceptions will pass through
-		OperationHistoryFactory.getOperationHistory().execute(command,
-				monitor, info);
-		
 		// after creating everything, issue a new command: refresh elements
 
 		// refresh the view
@@ -141,7 +140,7 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 	 * Generate the command for creating the shortcuts.
 	 * @throws ExecutionException 
 	 */
-	protected ICommand getCreateShortcutsCommand() throws ExecutionException {
+	protected void getCreateShortcutsCommand() throws ExecutionException {
 
 		Assert.isTrue(selectedElement.getModel() instanceof Diagram);
 		
@@ -252,11 +251,20 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 					prefHint);
 			
 			// TODO: it would be nice if the newly created elements are not just placed at (0,0)
-			command = command.compose(new CreateCommand(
-					selectedElement.getEditingDomain(), viewDescriptor, parentView));
+			command = new CreateCommand(
+					selectedElement.getEditingDomain(), viewDescriptor, parentView);
 			command = command.compose(new CreateShortcutDecorationsCommand(
 					selectedElement.getEditingDomain(), parentView, viewDescriptor, this.getEditPartModelId()));
 			doExecute(command);		//execute it now
+			
+			// once its executed, we can get the EObject 
+			View view = (View) viewDescriptor.getAdapter(View.class);
+			if (view != null) {
+				EObject created = view.getElement();
+				EcoreUtil.setID(created, new Date().toString() + "-" + new Random().nextInt(1048576));
+			}
+			
+			// test: try 
 		}
 		
 		for (EObject newObjectEdge : toAddEdge) {
@@ -274,7 +282,7 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 			
 		}
 
-		return command;
+		return;
 		
 	}
 

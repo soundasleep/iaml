@@ -53,8 +53,6 @@ public class DeleteGeneratedElementsCommand extends Command {
 
 	@Override
 	public void execute() {
-		System.out.println("deleting " + request + " editPart= " + editPart);
-	
 		// sanity checks
 		Assert.isNotNull(request);
 		Assert.isNotNull(editPart);

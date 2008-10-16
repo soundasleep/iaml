@@ -7,7 +7,6 @@
 package org.openiaml.model.model.operations.impl;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -15,7 +14,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
-import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.OperationsFactory;
+import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.operations.StopNode;
 
 /**
  * <!-- begin-user-doc -->

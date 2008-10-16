@@ -7,15 +7,35 @@
 package org.openiaml.model.model.impl;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Random;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.openiaml.model.model.*;
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ConditionalEdge;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.DynamicApplicationElementSet;
+import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.ModelFactory;
+import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.SingleOperation;
+import org.openiaml.model.model.StaticValue;
+import org.openiaml.model.model.TemporaryVariable;
+import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->

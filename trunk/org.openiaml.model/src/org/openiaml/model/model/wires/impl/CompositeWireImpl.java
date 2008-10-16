@@ -43,6 +43,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getOperations <em>Operations</em>}</li>
@@ -94,6 +95,26 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @ordered
 	 */
 	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
@@ -217,6 +238,27 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			generatedElements = new EObjectWithInverseResolvingEList<GeneratedElement>(GeneratedElement.class, this, WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
 		}
 		return generatedElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverridden(boolean newOverridden) {
+		boolean oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WiresPackage.COMPOSITE_WIRE__OVERRIDDEN, oldOverridden, overridden));
 	}
 
 	/**
@@ -348,6 +390,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return getWires();
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return getGeneratedElements();
+			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
+				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				return getChildren();
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
@@ -383,6 +427,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
+				return;
+			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
+				setOverridden(((Boolean)newValue).booleanValue());
 				return;
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				getChildren().clear();
@@ -429,6 +476,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
+			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				getChildren().clear();
 				return;
@@ -465,6 +515,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return wires != null && !wires.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
+			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				return children != null && !children.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
@@ -503,6 +555,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 		if (baseClass == GeneratesElements.class) {
 			switch (derivedFeatureID) {
 				case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -531,6 +584,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 		if (baseClass == GeneratesElements.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return WiresPackage.COMPOSITE_WIRE__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -549,6 +603,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", overridden: ");
+		result.append(overridden);
 		result.append(')');
 		return result.toString();
 	}

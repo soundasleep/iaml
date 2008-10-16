@@ -23,6 +23,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
@@ -133,25 +134,28 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 		
 	}
 	
-	private void handleChild(ApplicationElement e) throws ExecutionException {
-		// get all the input forms
-		if (e instanceof ApplicationElementContainer) {
-			ApplicationElementContainer f = (ApplicationElementContainer) e;
+	private void handleChild(GeneratesElements e) throws ExecutionException {
+		// don't generate elements if it has been overridden
+		if (!e.isOverridden()) {
 			
-			// get all the wires
-			for (WireEdge w : f.getOutEdges()) {
-				// get all the sync wires
+			// get all the input forms
+			if (e instanceof ApplicationElementContainer) {
+				ApplicationElementContainer f = (ApplicationElementContainer) e;
 				
-				if (w instanceof SyncWire && ((SyncWire) w).getTo() instanceof ApplicationElementContainer) {
-					// sync up these elements
-					doSyncWires((ApplicationElementContainer) w.getFrom(), (ApplicationElementContainer) w.getTo(), (SyncWire) w);
-					// and back again
-					doSyncWires((ApplicationElementContainer) w.getTo(), (ApplicationElementContainer) w.getFrom(), (SyncWire) w);
+				// get all the wires
+				for (WireEdge w : f.getOutEdges()) {
+					// get all the sync wires
+					
+					if (w instanceof SyncWire && ((SyncWire) w).getTo() instanceof ApplicationElementContainer) {
+						// sync up these elements
+						doSyncWires((ApplicationElementContainer) w.getFrom(), (ApplicationElementContainer) w.getTo(), (SyncWire) w);
+						// and back again
+						doSyncWires((ApplicationElementContainer) w.getTo(), (ApplicationElementContainer) w.getFrom(), (SyncWire) w);
+					}
 				}
+				
 			}
-			
 		}
-		
 	}
 	
 	/**

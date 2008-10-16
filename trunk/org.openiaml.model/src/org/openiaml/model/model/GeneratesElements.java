@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.GeneratesElements#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.GeneratesElements#isOverridden <em>Overridden</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,5 +45,31 @@ public interface GeneratesElements extends EObject {
 	 * @generated
 	 */
 	EList<GeneratedElement> getGeneratedElements();
+
+	/**
+	 * Returns the value of the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Overridden</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Overridden</em>' attribute.
+	 * @see #setOverridden(boolean)
+	 * @see org.openiaml.model.model.ModelPackage#getGeneratesElements_Overridden()
+	 * @model
+	 * @generated
+	 */
+	boolean isOverridden();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.GeneratesElements#isOverridden <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Overridden</em>' attribute.
+	 * @see #isOverridden()
+	 * @generated
+	 */
+	void setOverridden(boolean value);
 
 } // GeneratesElements

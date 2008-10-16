@@ -93,6 +93,11 @@ public class RemoveGeneratedElementsCommand extends AbstractTransactionalCommand
 	 */
 	private void deleteGeneratedElement(GeneratedElement element) throws ExecutionException {
 		
+		// mark the parent as overridden
+		SetValueCommand sv2 = new SetValueCommand(new SetRequest(element.getGeneratedBy(), ModelPackage.eINSTANCE.getGeneratesElements_Overridden(), true));
+		doExecute(sv2);
+		
+		// mark all of the parents elements as not generated
 		for (GeneratedElement e : element.getGeneratedBy().getGeneratedElements()) {
 			// ignore the current one, since we are deleting it anyway
 			if (!element.equals(e)) {
@@ -121,6 +126,10 @@ public class RemoveGeneratedElementsCommand extends AbstractTransactionalCommand
 			// generated elements
 			// (this will probably break some edges...)
 			// (but EMF may just delete these edges by itself, if we don't do anything.)
+	 * 
+	 * NOTE this only deletes elements that are generated directly by this element;
+	 * it won't delete overridden elements or old elements that were generated
+	 * and then overridden. (May be an issue to tackle later?)
 	 * 
 	 * @param element
 	 * @throws ExecutionException 

@@ -51,6 +51,7 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
@@ -149,6 +150,26 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -354,6 +375,27 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverridden(boolean newOverridden) {
+		boolean oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.INTERNET_APPLICATION__OVERRIDDEN, oldOverridden, overridden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ApplicationElementProperty> getProperties() {
 		if (properties == null) {
 			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.INTERNET_APPLICATION__PROPERTIES);
@@ -455,6 +497,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getWires();
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return getGeneratedElements();
+			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
+				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return getProperties();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -498,6 +542,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
+				setOverridden(((Boolean)newValue).booleanValue());
 				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
@@ -544,6 +591,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
+			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
 				return;
@@ -579,6 +629,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return wires != null && !wires.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -624,6 +676,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		if (baseClass == GeneratesElements.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -665,6 +718,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		if (baseClass == GeneratesElements.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.INTERNET_APPLICATION__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -685,6 +739,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		result.append(isGenerated);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", overridden: ");
+		result.append(overridden);
 		result.append(')');
 		return result.toString();
 	}

@@ -50,6 +50,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getValues <em>Values</em>}</li>
  * </ul>
@@ -167,6 +168,26 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * @ordered
 	 */
 	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -386,6 +407,27 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverridden(boolean newOverridden) {
+		boolean oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN, oldOverridden, overridden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ApplicationElementProperty> getProperties() {
 		if (properties == null) {
 			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.APPLICATION_ELEMENT__PROPERTIES);
@@ -485,6 +527,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return getInEdges();
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				return getGeneratedElements();
+			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
+				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				return getProperties();
 			case ModelPackage.APPLICATION_ELEMENT__VALUES:
@@ -535,6 +579,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				getGeneratedElements().clear();
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
+				setOverridden(((Boolean)newValue).booleanValue());
+				return;
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
@@ -582,6 +629,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				getProperties().clear();
 				return;
@@ -618,6 +668,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return inEdges != null && !inEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__VALUES:
@@ -678,6 +730,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		if (baseClass == GeneratesElements.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -736,6 +789,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		if (baseClass == GeneratesElements.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -756,6 +810,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		result.append(isGenerated);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", overridden: ");
+		result.append(overridden);
 		result.append(')');
 		return result.toString();
 	}

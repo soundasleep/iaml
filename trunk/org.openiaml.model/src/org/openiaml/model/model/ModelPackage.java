@@ -751,13 +751,22 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -766,7 +775,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Application Element</em>' class.
@@ -775,7 +784,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -857,6 +866,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT__GENERATED_ELEMENTS = APPLICATION_ELEMENT__GENERATED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -974,6 +992,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_ATTRIBUTE__GENERATED_ELEMENTS = APPLICATION_ELEMENT__GENERATED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1543,6 +1570,15 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_CONTAINER__GENERATED_ELEMENTS = APPLICATION_ELEMENT__GENERATED_ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1813,6 +1849,15 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__GENERATED_ELEMENTS = APPLICATION_ELEMENT_CONTAINER__GENERATED_ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__OVERRIDDEN = APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1912,13 +1957,22 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
+	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1927,7 +1981,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Domain Stores</b></em>' containment reference list.
@@ -1936,7 +1990,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
@@ -1945,7 +1999,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -2011,13 +2065,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_STORE__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_STORE__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
+	int DOMAIN_STORE__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -2026,7 +2089,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+	int DOMAIN_STORE__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Domain Store</em>' class.
@@ -2035,7 +2098,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int DOMAIN_STORE_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference.
@@ -2399,6 +2462,15 @@ public interface ModelPackage extends EPackage {
 	int DYNAMIC_APPLICATION_ELEMENT_SET__GENERATED_ELEMENTS = APPLICATION_ELEMENT__GENERATED_ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2455,13 +2527,22 @@ public interface ModelPackage extends EPackage {
 	int GENERATES_ELEMENTS__GENERATED_ELEMENTS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATES_ELEMENTS__OVERRIDDEN = 1;
+
+	/**
 	 * The number of structural features of the '<em>Generates Elements</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATES_ELEMENTS_FEATURE_COUNT = 1;
+	int GENERATES_ELEMENTS_FEATURE_COUNT = 2;
 
 
 	/**
@@ -3200,6 +3281,17 @@ public interface ModelPackage extends EPackage {
 	EReference getGeneratesElements_GeneratedElements();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.GeneratesElements#isOverridden <em>Overridden</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Overridden</em>'.
+	 * @see org.openiaml.model.model.GeneratesElements#isOverridden()
+	 * @see #getGeneratesElements()
+	 * @generated
+	 */
+	EAttribute getGeneratesElements_Overridden();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3850,6 +3942,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference GENERATES_ELEMENTS__GENERATED_ELEMENTS = eINSTANCE.getGeneratesElements_GeneratedElements();
+
+		/**
+		 * The meta object literal for the '<em><b>Overridden</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERATES_ELEMENTS__OVERRIDDEN = eINSTANCE.getGeneratesElements_Overridden();
 
 	}
 

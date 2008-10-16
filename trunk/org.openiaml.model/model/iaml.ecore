@@ -162,6 +162,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="GeneratesElements" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="generatedElements" upperBound="-1"
         eType="#//GeneratedElement" eOpposite="#//GeneratedElement/generatedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">

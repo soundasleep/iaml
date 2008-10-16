@@ -16,6 +16,7 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.commands.CreateCommand;
+import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
@@ -81,6 +82,7 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		getCreateShortcutsCommand();
 
 		// after creating everything, issue a new command: refresh elements
+		/*
 
 		// refresh the view
 		// from Uml3DiagramUpdateCommand
@@ -90,7 +92,9 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		
 		OperationHistoryFactory.getOperationHistory().execute(command2,
 				monitor, info);
+		*/
 
+		// TODO: make this CommandResult actually reflect something useful
 		return CommandResult.newOKCommandResult();
 	}
 
@@ -240,6 +244,8 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		
 		}
 
+		List<CreateViewRequest.ViewDescriptor> viewAdapters = new ArrayList<CreateViewRequest.ViewDescriptor>();
+		
 		// create a shortcut displaying it
 		// we now have a list of Actions that we want to add to the current view
 		for (EObject newObject : toAdd) {
@@ -247,23 +253,20 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 					new EObjectAdapter(newObject), Node.class, null,  // tried null->"" with no effect
 					prefHint);
 			
-			// TODO: it would be nice if the newly created elements are not just placed at (0,0)
+			// create element
 			command = new CreateCommand(
 					selectedElement.getEditingDomain(), viewDescriptor, parentView);
+			
+			// add shortcut
 			command = command.compose(new CreateShortcutDecorationsCommand(
 					selectedElement.getEditingDomain(), parentView, viewDescriptor, this.getEditPartModelId()));
-			doExecute(command);		//execute it now
 			
-			/*
-			 * this code allows us to directly get the EObject created by the CreateCommand 
-			 * (and if it can't be rendered, view will be null)
-			 *
-			View view = (View) viewDescriptor.getAdapter(View.class);
-			if (view != null) {
-				EObject created = view.getElement();
-				EcoreUtil.setID(created, new Date().toString() + "-" + new Random().nextInt(1048576));
-			}
-			*/
+			// execute
+			doExecute(command);		// execute it now
+
+			// save the descriptor for later
+			viewAdapters.add(viewDescriptor);
+
 		}
 		
 		for (EObject newObjectEdge : toAddEdge) {
@@ -278,8 +281,20 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 			command = new CreateCommand(
 					selectedElement.getEditingDomain(), viewDescriptorEdge, parentView);
 			doExecute(command);
-			
+
+			// save the descriptor for later
+			viewAdapters.add(viewDescriptorEdge);
+
 		}
+		
+		// now that we've created all of our elements, we can move the generated ones
+		// this will automatically reposition elements into a line,
+		// AND also refresh the view
+		// AND also show all of the connections between shortcut elements
+		DeferredLayoutCommand dlc = new DeferredLayoutCommand(selectedElement.getEditingDomain(),
+				viewAdapters,
+				selectedElement);
+		doExecute(dlc);
 
 		return;
 		

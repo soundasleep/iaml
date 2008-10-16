@@ -1,0 +1,25 @@
+<%@jet imports="org.eclipse.jet.xpath.* org.openiaml.model.model.* org.openiaml.model.model.operations.* org.openiaml.model.model.visual.* org.openiaml.model.model.wires.* org.eclipse.emf.ecore.*" %>
+<%-- 
+  print out a child (recursively), depending on the type of $child.
+--%>
+<%
+EObject child;
+
+child = (EObject) context.getVariable("child");
+context.setVariable("isInputForm", (child instanceof InputForm ? "true" : ""));
+%>
+<c:if test="$isInputForm">
+	<li>
+		<c:include template="templates/visual/input-form.jet" passVariables="child" />
+	</li>
+</c:if>
+
+<%
+child = (EObject) context.getVariable("child");
+context.setVariable("isInputTextField", (child instanceof InputTextField ? "true" : ""));
+%>
+<c:if test="$isInputTextField">
+	<li>
+		<c:include template="templates/visual/input-text-field.jet" passVariables="child" />
+	</li>
+</c:if>

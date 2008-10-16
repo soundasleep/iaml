@@ -1,0 +1,19 @@
+<%@jet imports="org.eclipse.jet.xpath.* org.openiaml.model.model.* org.openiaml.model.model.operations.* org.openiaml.model.model.visual.* org.openiaml.model.model.wires.* org.eclipse.emf.ecore.*" %>
+<%-- 
+  print out a page.
+--%>
+<html>
+<head>
+	<title><c:get select="$child/@name" default="(untitled page)" /></title>
+</head>
+<body>
+<h1><c:get select="$child/@name" default="(untitled page)" /></h1>
+
+<ol>
+	<c:iterate select="$child/children" var="child">
+		<c:include template="templates/switch-children.jet" />
+	</c:iterate>
+</ol>
+
+</body>
+</html>

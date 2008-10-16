@@ -1,0 +1,11 @@
+<%@jet imports="org.eclipse.jet.xpath.* org.openiaml.model.model.* org.openiaml.model.model.operations.* org.openiaml.model.model.visual.* org.openiaml.model.model.wires.* org.eclipse.emf.ecore.*" %>
+<%-- 
+  print out an input text field.
+--%>
+<div>
+<label>
+	<c:get select="$child/@name" default="(untitled field)" />
+	
+	<input type="text" id="$child/@id" name="$child/@id" />
+</label>
+</div>

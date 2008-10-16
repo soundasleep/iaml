@@ -5,5 +5,7 @@ Bundle-SymbolicName: org.openiaml.model.codegen.jet;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Localization: plugin
 Bundle-Vendor: 
-Require-Bundle: org.eclipse.jet
+Require-Bundle: org.eclipse.jet,
+ org.eclipse.emf,
+ org.openiaml.model
 Bundle-ClassPath: .,bin/

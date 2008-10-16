@@ -9,7 +9,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;

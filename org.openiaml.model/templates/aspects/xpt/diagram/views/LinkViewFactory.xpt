@@ -1,0 +1,65 @@
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
+«EXTENSION xpt::diagram::Utils»
+«EXTENSION xpt::diagram::ViewmapAttributesUtils»
+
+/**
+ * We have to redefine the entire template, because there are no
+ * extension points which we can use.
+ */
+«AROUND LinkViewFactory FOR gmfgen::GenLink-»
+«EXPAND xpt::Common::copyright FOR getDiagram().editorGen-»
+package «getDiagram().notationViewFactoriesPackageName»;
+
+«EXPAND xpt::Common::generatedClassComment»
+public class «notationViewFactoryClassName» extends org.eclipse.gmf.runtime.diagram.ui.view.factories.ConnectionViewFactory {
+
+	«EXPAND xpt::Common::generatedMemberComment»
+	protected java.util.List createStyles(org.eclipse.gmf.runtime.notation.View view) {
+		java.util.List styles = new java.util.ArrayList();
+		«IF !isFixedForeground(viewmap)-»
+		styles.add(org.eclipse.gmf.runtime.notation.NotationFactory.eINSTANCE.createConnectorStyle());
+		«ELSE-»
+		styles.add(org.eclipse.gmf.runtime.notation.NotationFactory.eINSTANCE.createRoutingStyle());
+		«ENDIF-»
+		«IF !isFixedFont(viewmap)-»
+		styles.add(org.eclipse.gmf.runtime.notation.NotationFactory.eINSTANCE.createFontStyle());
+		«ENDIF-»
+		
+		// our addition: linking styles
+		«EXPAND xpt::diagram::views::Utils::addLinkedDiagramStyle("styles")-»
+		// end our addition
+		
+		«EXPAND xpt::diagram::views::Utils::addCustomStyles("styles")-»
+		return styles;
+	}
+
+	«EXPAND xpt::Common::generatedMemberComment»
+	protected void decorateView(org.eclipse.gmf.runtime.notation.View containerView, org.eclipse.gmf.runtime.notation.View view,
+			org.eclipse.core.runtime.IAdaptable semanticAdapter, String semanticHint, int index, boolean persisted) {
+		«EXPAND xpt::diagram::views::Utils::updateSemanticHint-»
+		super.decorateView(containerView, view, semanticAdapter, semanticHint, index, persisted);
+		
+		// we also have to add stuff here
+		«EXPAND addShortcut-»
+		// end our addition
+		
+		«EXPAND xpt::diagram::views::Utils::foregroundColour("view") FOR viewmap-»
+		«IF labels.size() > 0-»
+		org.eclipse.core.runtime.IAdaptable eObjectAdapter = null;
+			«EXPAND xpt::diagram::views::Utils::domainElementAdapter("eObjectAdapter") FOR modelFacet-»
+			«EXPAND xpt::diagram::views::Utils::createChildNode FOREACH labels-»
+		«ENDIF-»
+	}
+	«EXPAND additions-»
+}
+«ENDAROUND» 
+
+«DEFINE additions FOR gmfgen::GenLink»«ENDDEFINE»
+
+«DEFINE addShortcut FOR gmfgen::GenLink-»
+	if (!«getDiagram().getEditPartQualifiedClassName()».MODEL_ID.equals(
+			«getDiagram().getVisualIDRegistryQualifiedClassName()».getModelID(containerView))) {
+		«EXPAND xpt::Common::addShortcutAnnotation("view") FOR getDiagram()-»
+	}
+«ENDDEFINE»

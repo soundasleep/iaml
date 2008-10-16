@@ -20,4 +20,6 @@ such as ws:file, ws:folder and ws:project
    the case of non-XML input models, the dump may look quite different.
 --%>
 
-<ws:file template="templates/dump.jet" path="{$org.eclipse.jet.resource.project.name}/output/dump.xml"/>
+<!--ws:file template="templates/dump.jet" path="{$org.eclipse.jet.resource.project.name}/output/dump.xml"/ -->
+
+<ws:file template="templates/sitemap.jet" path="{$org.eclipse.jet.resource.project.name}/output/sitemap.html"/> 

@@ -7,7 +7,6 @@
 package org.openiaml.model.model.wires.impl;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;

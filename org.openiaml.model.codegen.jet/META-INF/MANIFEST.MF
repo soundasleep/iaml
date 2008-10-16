@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.openiaml.model.codegen.jet
+Bundle-SymbolicName: org.openiaml.model.codegen.jet;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Localization: plugin
+Bundle-Vendor: 
+Require-Bundle: org.eclipse.jet
+Bundle-ClassPath: .,bin/

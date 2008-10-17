@@ -1,0 +1,24 @@
+<%@jet imports="org.eclipse.jet.xpath.* org.openiaml.model.model.* org.openiaml.model.model.operations.* org.openiaml.model.model.visual.* org.openiaml.model.model.wires.* org.eclipse.emf.ecore.*" %>
+<%-- 
+  print out an input form.
+--%>
+<form id="<c:get select="$child/@id" default="" />">
+<h2><c:get select="$child/@name" default="(untitled form)" /></h2>
+
+<c:setVariable var="oldChild" select="$child" />
+<c:iterate select="$child/children" var="child">
+	<c:include template="templates/switch-children.jet" />
+</c:iterate>
+<c:setVariable var="child" select="$oldChild" />
+
+<ul>
+<c:iterate select="$child/wires" var="wire">
+	Wire: <c:get select="$wire/@name" />
+	<c:if test="$wire/@isGenerated">
+		(generated)
+	</c:if>
+</c:iterate>
+</ul>
+
+<input type="submit" />
+</form>

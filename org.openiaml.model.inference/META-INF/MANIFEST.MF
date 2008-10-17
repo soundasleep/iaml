@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Inference Plug-in
+Bundle-SymbolicName: org.openiaml.model.inference
+Bundle-Version: 0.0.3
+Require-Bundle: org.eclipse.emf,
+ org.openiaml.model,
+ org.eclipse.core.runtime
+Export-Package: org.openiaml.model.inference

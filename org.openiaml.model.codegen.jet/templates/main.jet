@@ -1,0 +1,27 @@
+<%@taglib prefix="ws" id="org.eclipse.jet.workspaceTags" %>
+<%-- Main entry point for org.openiaml.model.codegen.jet --%>
+
+<%-- 
+TODO: traverse input model, performing calculations and storing 
+the results as model annotations via c:set tag 
+--%>
+
+
+<%--
+TODO: traverse annotated model, performing text generation actions 
+such as ws:file, ws:folder and ws:project 
+--%>
+   
+
+<%-- For debug purposes, dump the annotated input model in 
+   the root of the project containing the original input model.
+   
+   Note that model formatting may not be identical, and that in
+   the case of non-XML input models, the dump may look quite different.
+--%>
+
+<!--ws:file template="templates/dump.jet" path="{$org.eclipse.jet.resource.project.name}/output/dump.xml"/ -->
+
+<ws:file template="templates/sitemap.jet" path="{$org.eclipse.jet.resource.project.name}/output/sitemap.html"/>
+
+<ws:copyFile src="resources/default.css" target="{$org.eclipse.jet.resource.project.name}/output/default.css" /> 

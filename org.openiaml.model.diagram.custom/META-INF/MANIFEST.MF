@@ -11,5 +11,7 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.diagram.visual,
  org.openiaml.model.diagram.wire,
  org.openiaml.model.diagram.domain_object,
- org.openiaml.model.diagram.operation
+ org.openiaml.model.diagram.operation,
+ org.eclipse.jet,
+ org.openiaml.model.inference
 Bundle-Vendor: www.openiaml.org

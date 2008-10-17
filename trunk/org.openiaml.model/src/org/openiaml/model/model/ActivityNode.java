@@ -6,7 +6,6 @@
  */
 package org.openiaml.model.model;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,5 +17,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ActivityNode extends EObject {
+public interface ActivityNode extends GeneratedElement {
 } // ActivityNode

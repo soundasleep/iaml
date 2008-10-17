@@ -104,6 +104,10 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 				return createDecisionOperationAdapter();
 			}
 			@Override
+			public Adapter caseGeneratedElement(GeneratedElement object) {
+				return createGeneratedElementAdapter();
+			}
+			@Override
 			public Adapter caseActivityNode(ActivityNode object) {
 				return createActivityNodeAdapter();
 			}
@@ -118,10 +122,6 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
 				return createWireEdgeDestinationAdapter();
-			}
-			@Override
-			public Adapter caseGeneratedElement(GeneratedElement object) {
-				return createGeneratedElementAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {

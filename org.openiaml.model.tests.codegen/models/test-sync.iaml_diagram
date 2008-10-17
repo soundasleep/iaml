@@ -16,28 +16,28 @@
       <children xmi:type="notation:Node" xmi:id="_TtQ40JvlEd2kwtE5h-GOuQ" type="4010"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_Ts994ZvlEd2kwtE5h-GOuQ"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Ts994pvlEd2kwtE5h-GOuQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#visual.11d0841c753.10"/>
+      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#name1"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ts9945vlEd2kwtE5h-GOuQ" x="156" y="192"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_U2bgUJvlEd2kwtE5h-GOuQ" type="1010">
       <children xmi:type="notation:Node" xmi:id="_U2bgVJvlEd2kwtE5h-GOuQ" type="4010"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_U2bgUZvlEd2kwtE5h-GOuQ"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_U2bgUpvlEd2kwtE5h-GOuQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#visual.11d0841c753.11"/>
+      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#name2"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_U2bgU5vlEd2kwtE5h-GOuQ" x="357" y="188"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_VOuEgJvlEd2kwtE5h-GOuQ" type="1010">
       <children xmi:type="notation:Node" xmi:id="_VOuEhJvlEd2kwtE5h-GOuQ" type="4010"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_VOuEgZvlEd2kwtE5h-GOuQ"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_VOuEgpvlEd2kwtE5h-GOuQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#visual.11d0841c753.12"/>
+      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#name3"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VOuEg5vlEd2kwtE5h-GOuQ" x="364" y="344"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_VnUKsJvlEd2kwtE5h-GOuQ" type="1010">
       <children xmi:type="notation:Node" xmi:id="_VnUKtJvlEd2kwtE5h-GOuQ" type="4010"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_VnUKsZvlEd2kwtE5h-GOuQ"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_VnUKspvlEd2kwtE5h-GOuQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#visual.11d0841c753.13"/>
+      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#name4"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VnUKs5vlEd2kwtE5h-GOuQ" x="369" y="473"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_sRA0EJvoEd2kwtE5h-GOuQ" type="1009">
@@ -51,7 +51,7 @@
       <children xmi:type="notation:Node" xmi:id="_vWKAFJvoEd2kwtE5h-GOuQ" type="4010"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_vWKAEZvoEd2kwtE5h-GOuQ"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_vWKAEpvoEd2kwtE5h-GOuQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#visual.11d0841c753.53"/>
+      <element xmi:type="iaml.visual:InputTextField" href="test-sync.iaml#unrelated-field"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vWKAE5voEd2kwtE5h-GOuQ" x="543" y="441"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_SNmc4ZvlEd2kwtE5h-GOuQ"/>

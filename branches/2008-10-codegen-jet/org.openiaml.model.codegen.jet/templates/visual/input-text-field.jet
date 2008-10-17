@@ -9,4 +9,14 @@
 	<%-- jwebunit complains that it can't find this field, because it is not in a single form --%>
 	<input type="text" id="<c:get select="$child/@id" default="???" />" name="<c:get select="$child/@id" default="???" />" />
 </label>
+
+<ul>
+<c:iterate select="$child/wires" var="wire">
+	Wire: <c:get select="$wire/@name" />
+	<c:if test="$wire/@isGenerated">
+		(generated)
+	</c:if>
+</c:iterate>
+</ul>
+
 </div>

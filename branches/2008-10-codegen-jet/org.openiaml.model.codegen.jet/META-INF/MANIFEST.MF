@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.openiaml.model.codegen.jet
+Bundle-Name: Iaml Codegen (Jet) Plugin
 Bundle-SymbolicName: org.openiaml.model.codegen.jet;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.0.3
 Bundle-Localization: plugin
 Bundle-Vendor: 
 Require-Bundle: org.eclipse.jet,

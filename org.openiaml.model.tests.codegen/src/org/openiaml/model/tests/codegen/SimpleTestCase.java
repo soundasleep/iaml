@@ -13,6 +13,8 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
+import net.sourceforge.jwebunit.junit.WebTestCase;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -31,7 +33,7 @@ import org.eclipse.jet.JET2Platform;
  * @author jmwright
  *
  */
-public class SimpleTestCase extends TestCase {
+public class SimpleTestCase extends WebTestCase {
 	
 	private final String PROJECT_NAME = "testing-" + this.getClass().getSimpleName();
 	private IProject project;
@@ -43,6 +45,9 @@ public class SimpleTestCase extends TestCase {
 	protected void setUp() throws Exception {
 		project = createProject();
 		doTransform("models/simple.iaml");
+
+		// set test context
+		getTestContext().setBaseUrl("file:///" + project.getLocation());
 	}
 
 	/**
@@ -83,11 +88,16 @@ public class SimpleTestCase extends TestCase {
 		return project;
 	}
 	
-	public void testSitemap() throws Throwable {
+	public void testSitemap() {
 		
 		IFile sitemap = project.getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
+
+		System.out.println(sitemap.getProjectRelativePath().toString());
+		beginAt(sitemap.getProjectRelativePath().toString());
+		assertTitleMatch("untitled");
+		assertTitleMatch("sitemap");
+
 	}
 	
 	/**

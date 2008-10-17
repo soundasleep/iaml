@@ -1226,6 +1226,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectEClass.getESuperTypes().add(this.getContainsWires());
 		domainAttributeEClass.getESuperTypes().add(this.getApplicationElement());
+		activityNodeEClass.getESuperTypes().add(this.getGeneratedElement());
 		operationEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		operationEClass.getESuperTypes().add(this.getNamedElement());
 		operationEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());

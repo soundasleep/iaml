@@ -201,6 +201,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.ACTIVITY_NODE: {
 				ActivityNode activityNode = (ActivityNode)theEObject;
 				T result = caseActivityNode(activityNode);
+				if (result == null) result = caseGeneratedElement(activityNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

@@ -106,6 +106,7 @@ public class OperationsSwitch<T> {
 				T result = caseStartNode(startNode);
 				if (result == null) result = caseActivityNode(startNode);
 				if (result == null) result = caseExecutionEdgesSource(startNode);
+				if (result == null) result = caseGeneratedElement(startNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,6 +115,7 @@ public class OperationsSwitch<T> {
 				T result = caseStopNode(stopNode);
 				if (result == null) result = caseActivityNode(stopNode);
 				if (result == null) result = caseExecutionEdgeDestination(stopNode);
+				if (result == null) result = caseGeneratedElement(stopNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -122,6 +124,7 @@ public class OperationsSwitch<T> {
 				T result = caseFinishNode(finishNode);
 				if (result == null) result = caseActivityNode(finishNode);
 				if (result == null) result = caseExecutionEdgeDestination(finishNode);
+				if (result == null) result = caseGeneratedElement(finishNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -131,6 +134,7 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseActivityNode(decisionNode);
 				if (result == null) result = caseExecutionEdgesSource(decisionNode);
 				if (result == null) result = caseExecutionEdgeDestination(decisionNode);
+				if (result == null) result = caseGeneratedElement(decisionNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

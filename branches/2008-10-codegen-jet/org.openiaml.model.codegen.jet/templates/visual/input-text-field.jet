@@ -6,6 +6,7 @@
 <label>
 	<c:get select="$child/@name" default="(untitled field)" />
 	
-	<input type="text" id="$child/@id" name="$child/@id" />
+	<%-- jwebunit complains that it can't find this field, because it is not in a single form --%>
+	<input type="text" id="<c:get select="$child/@id" default="???" />" name="<c:get select="$child/@id" default="???" />" />
 </label>
 </div>

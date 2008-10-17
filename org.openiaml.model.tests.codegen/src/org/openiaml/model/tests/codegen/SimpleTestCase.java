@@ -7,71 +7,88 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jet.JET2Platform;
 
 /**
- * How to set up the JET/JUnit tests:
- * 
- * <ol>
- *  <li>Follow the instructions at http://www.jevon.org/wiki/Setting_up_an_EMF/JET_testing_project_with_JUnit_and_Eclipse
- *  <li>Make sure that your "JUnit plugin test" run settings have a valid
- *    different workspace directory!
- *  <li>Make sure that this workspace has, already existing, a project named
- *    RUNTIME_WORKSPACE
- *    (or you may get 'Resource Not Found' Jet Exceptions)
- *  <li>Output will then go into the RUNTIME_PROJECT/output directory (or as defined
- *    in the .jet files)
+ * The JET/Junit test framework now manages everything for you. It will
+ * automatically create empty projects to be compiled to.
  * 
  * @author jmwright
  *
  */
 public class SimpleTestCase extends TestCase {
 	
-	private final String RUNTIME_PROJECT = "testing/"; 
+	private final String PROJECT_NAME = "testing-" + this.getClass().getSimpleName();
+	private IProject project;
+	private IProgressMonitor monitor = new NullProgressMonitor();
 	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	protected void setUp() throws Exception {
+		project = createProject();
+		doTransform("models/simple.iaml");
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	protected void tearDown() throws Exception {
+		// delete this project automatically
+		project.delete(false, monitor);
 	}
 	
 	/**
-	 * unfortunately I don't know how to get access to an IFile (I think 
-	 * IFiles are for workspace files only anyway), so we have to
-	 * load the file manually and then config JET to emulate a workspace 
-	 * being there.
+	 * Create a new project in our testing environment,
+	 * allowing JET to output there.
 	 * 
-	 * @throws Throwable 
+	 * TODO it might be helpful to *copy* the desired
+	 * model file directly into this new project -- this way,
+	 * we can get an IFile directly.
+	 * 
+	 * @see #PROJECT_NAME
+	 * @return the created project
+	 * @throws CoreException
 	 */
-	public void test1() throws Throwable {
-		// it would be nice to get resources via the bundle, but I don't know enough
-		// about bundle loading to get an IFile, or a File, from a URL, which is what
-		// getBundle().getResource() returns (but in "bundleresource://.." form)
-		// doTransform(Platform.getBundle("org.openiaml.model.tests.codegen").getResource("tests/simple.iaml"), new File("/output"));
+	protected IProject createProject() throws CoreException {
+		// create a new project automatically
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot root = workspace.getRoot();
+		IProject project = root.getProject(PROJECT_NAME);
+		// delete any existing ones
+		if (project.exists()) {
+			project.delete(false, monitor);
+		}
 		
-		doTransform("models/simple.iaml", ".");
+		// create it
+		project.create(monitor);
+		assertTrue(project.exists());
+		project.open(monitor);
 		
-		// workspace location = Platform.getInstanceLocation().getURL()
+		return project;
 	}
-
+	
+	public void testSitemap() throws Throwable {
+		
+		IFile sitemap = project.getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		
+	}
 	
 	/**
 	 * Do the transformation and make sure it succeeded.
@@ -79,17 +96,17 @@ public class SimpleTestCase extends TestCase {
 	 * @param inputFile
 	 * @throws Throwable if it did not succeed
 	 */
-	private void doTransform(String inputFile, String outputDir) throws Throwable {
-		IStatus test = doTransform(inputFile, outputDir, new NullProgressMonitor());
+	private void doTransform(String inputFile) throws Exception {
+		IStatus test = doTransform(inputFile, PROJECT_NAME, monitor);
 		if (!test.isOK()) {
 			for (IStatus s : test.getChildren()) {
 				System.err.println(s);		// print out the status errors
 				if (s.getException() != null)
-					throw s.getException();
+					throw new RuntimeException("transformation failed", s.getException());	// we will only crash on the first one
 			}
 			
 			if (test.getException() != null) {
-				throw test.getException();	// force an exception
+				throw new RuntimeException("transformation failed", test.getException());	// force an exception
 			}
 			assertTrue(test.getMessage(), false);	// force a fail
 		}
@@ -117,7 +134,7 @@ public class SimpleTestCase extends TestCase {
 		Map<String,Object> variables = new HashMap<String,Object>();
 		
 		// we need to set this parameter ourselves
-		variables.put("org.eclipse.jet.resource.project.name", RUNTIME_PROJECT);
+		variables.put("org.eclipse.jet.resource.project.name", outputDir);
 		// set any other parameters here
 		
 		// run the transformation on a certain JET plugin, loading the data as XML

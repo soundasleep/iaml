@@ -1588,13 +1588,22 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>shouldnt parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__SHOULDNT_PARAMETERS = CHAINED_OPERATION_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 6;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3025,6 +3034,17 @@ public interface ModelPackage extends EPackage {
 	EReference getCompositeOperation_Variables();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeOperation#get_shouldnt_parameters <em>shouldnt parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>shouldnt parameters</em>'.
+	 * @see org.openiaml.model.model.CompositeOperation#get_shouldnt_parameters()
+	 * @see #getCompositeOperation()
+	 * @generated
+	 */
+	EReference getCompositeOperation__shouldnt_parameters();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3766,6 +3786,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_OPERATION__VARIABLES = eINSTANCE.getCompositeOperation_Variables();
+
+		/**
+		 * The meta object literal for the '<em><b>shouldnt parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_OPERATION__SHOULDNT_PARAMETERS = eINSTANCE.getCompositeOperation__shouldnt_parameters();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}' class.

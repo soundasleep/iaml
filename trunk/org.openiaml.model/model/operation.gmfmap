@@ -213,6 +213,23 @@
           href="iaml.gmfgraph#TemporaryVariable"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/_shouldnt_parameters"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//ApplicationElementProperty"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ApplicationElementPropertyName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#ApplicationElementProperty"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>

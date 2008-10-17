@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -38,6 +39,7 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getExecutionEdges <em>Execution Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#get_shouldnt_parameters <em>shouldnt parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,6 +105,16 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<TemporaryVariable> variables;
+
+	/**
+	 * The cached value of the '{@link #get_shouldnt_parameters() <em>shouldnt parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_shouldnt_parameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ApplicationElementProperty> _shouldnt_parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -200,6 +212,18 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ApplicationElementProperty> get_shouldnt_parameters() {
+		if (_shouldnt_parameters == null) {
+			_shouldnt_parameters = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PARAMETERS);
+		}
+		return _shouldnt_parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -215,6 +239,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return ((InternalEList<?>)getExecutionEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
 				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PARAMETERS:
+				return ((InternalEList<?>)get_shouldnt_parameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -239,6 +265,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return getExecutionEdges();
 			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
 				return getVariables();
+			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PARAMETERS:
+				return get_shouldnt_parameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -276,6 +304,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				getVariables().clear();
 				getVariables().addAll((Collection<? extends TemporaryVariable>)newValue);
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PARAMETERS:
+				get_shouldnt_parameters().clear();
+				get_shouldnt_parameters().addAll((Collection<? extends ApplicationElementProperty>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -306,6 +338,9 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
 				getVariables().clear();
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PARAMETERS:
+				get_shouldnt_parameters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -330,6 +365,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return executionEdges != null && !executionEdges.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__VARIABLES:
 				return variables != null && !variables.isEmpty();
+			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PARAMETERS:
+				return _shouldnt_parameters != null && !_shouldnt_parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

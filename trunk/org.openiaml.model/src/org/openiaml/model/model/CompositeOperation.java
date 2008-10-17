@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getExecutionEdges <em>Execution Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.openiaml.model.model.CompositeOperation#get_shouldnt_parameters <em>shouldnt parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,5 +92,21 @@ public interface CompositeOperation extends ChainedOperation, ContainsOperations
 	 * @generated
 	 */
 	EList<TemporaryVariable> getVariables();
+
+	/**
+	 * Returns the value of the '<em><b>shouldnt parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>shouldnt parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>shouldnt parameters</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getCompositeOperation__shouldnt_parameters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ApplicationElementProperty> get_shouldnt_parameters();
 
 } // CompositeOperation

@@ -329,7 +329,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated 
+	 * @generated
 	 */
 	public ModelPackage getModelPackage() {
 		return (ModelPackage)getEPackage();

@@ -14,5 +14,14 @@
 	<c:include template="templates/switch-children.jet" />
 </c:iterate>
 
+<ul>
+<c:iterate select="$child/wires" var="wire">
+	Wire: <c:get select="$wire/@name" />
+	<c:if test="$wire/@isGenerated">
+		(generated)
+	</c:if>
+</c:iterate>
+</ul>
+
 </body>
 </html>

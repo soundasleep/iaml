@@ -22,9 +22,12 @@ import org.openiaml.model.model.wires.SyncWire;
  */
 public class CreateMissingElements {
 	
-	private EObject rootObject;
 	private ICreateElements parent;
 
+	public CreateMissingElements(ICreateElements parent) {
+		this.parent = parent;
+	}
+	
 	/**
 	 * Use inference (or whatever) to create missing elements in the model.
 	 * The ICreateElements parent will actually create any elements needed.
@@ -33,16 +36,16 @@ public class CreateMissingElements {
 	 * @param rootObject
 	 * @throws InferenceException 
 	 */
-	public void create(ICreateElements parent, EObject rootObject) throws InferenceException {
-		
-		this.rootObject = rootObject;
-		this.parent = parent;
+	public void create(EObject rootObject) throws InferenceException {
 
 		if (rootObject instanceof InternetApplication) {
 			InternetApplication vt = (InternetApplication) rootObject;
 
 			for (ApplicationElement e : vt.getChildren()) {
 				handleChild(e);
+				
+				// recursive
+				create(e);
 			}
 		}
 		if (rootObject instanceof ApplicationElementContainer) {
@@ -50,6 +53,9 @@ public class CreateMissingElements {
 
 			for (ApplicationElement e : vt.getChildren()) {
 				handleChild(e);
+				
+				// recursive
+				create(e);
 			}
 		}
 		if (rootObject instanceof DomainStore) {
@@ -57,6 +63,9 @@ public class CreateMissingElements {
 
 			for (ApplicationElement e : vt.getChildren()) {
 				handleChild(e);
+				
+				// recursive
+				create(e);
 			}
 		}
 		if (rootObject instanceof DomainObject) {
@@ -64,6 +73,9 @@ public class CreateMissingElements {
 
 			for (ApplicationElement e : vt.getAttributes()) {
 				handleChild(e);
+				
+				// recursive
+				create(e);
 			}
 		}
 				
@@ -83,9 +95,9 @@ public class CreateMissingElements {
 					
 					if (w instanceof SyncWire && ((SyncWire) w).getTo() instanceof ApplicationElementContainer) {
 						// sync up these elements
-						doSyncWires((ApplicationElementContainer) w.getFrom(), (ApplicationElementContainer) w.getTo(), (SyncWire) w);
+						doSyncWires(f, (ApplicationElementContainer) w.getFrom(), (ApplicationElementContainer) w.getTo(), (SyncWire) w);
 						// and back again
-						doSyncWires((ApplicationElementContainer) w.getTo(), (ApplicationElementContainer) w.getFrom(), (SyncWire) w);
+						doSyncWires(f, (ApplicationElementContainer) w.getTo(), (ApplicationElementContainer) w.getFrom(), (SyncWire) w);
 					}
 				}
 				
@@ -103,7 +115,7 @@ public class CreateMissingElements {
 	 * @param target
 	 * @throws InferenceException 
 	 */
-	protected void doSyncWires(ApplicationElementContainer source, ApplicationElementContainer target, SyncWire generatedBy) throws InferenceException {
+	protected void doSyncWires(WireEdgesSource container, ApplicationElementContainer source, ApplicationElementContainer target, SyncWire generatedBy) throws InferenceException {
 		// map each of the children in the source
 		for (ApplicationElement c : source.getChildren()) {
 			ApplicationElement mapTarget = getChildMatch(c, target);
@@ -113,7 +125,7 @@ public class CreateMissingElements {
 				if (!elementsAreAlreadySyncWire(c, mapTarget)) {
 					// map them together
 					
-					SyncWire wire = parent.createSyncWire((WireEdgesSource) rootObject, c, mapTarget);
+					SyncWire wire = parent.createSyncWire(container, c, mapTarget);
 					Assert.isTrue(wire != null);
 					
 					// set sync wire parameters

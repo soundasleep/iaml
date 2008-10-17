@@ -81,9 +81,9 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 		this.monitor = monitor;
 		this.info = info;
 		
-		CreateMissingElements ce = new CreateMissingElements();
+		CreateMissingElements ce = new CreateMissingElements(this);
 		try {
-			ce.create(this, rootObject);
+			ce.create(rootObject);
 		} catch (InferenceException e) {
 			throw new ExecutionException("unexpected exception when trying to infer missing elements", e);
 		}

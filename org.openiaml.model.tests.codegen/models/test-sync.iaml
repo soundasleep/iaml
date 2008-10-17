@@ -11,5 +11,7 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.8" from="visual.11d0841c753.12" to="visual.11d0841c753.13" name="sync3"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.11d0841c753.13" name="name4" inEdges="wires.11d0841c753.8"/>
+    <children xsi:type="iaml.visual:InputForm" id="visual.11d0841c753.2b" name="form that shouldn't exist (but jwebunit complains otherwise)"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d0841c753.53" name="unrelated-field"/>
   </children>
 </iaml:InternetApplication>

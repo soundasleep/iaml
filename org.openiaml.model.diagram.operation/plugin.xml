@@ -416,6 +416,16 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
+               id="org.openiaml.model.diagram.operation.ApplicationElementProperty_1011"
+               name="%metatype.name.ApplicationElementProperty_1011"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ApplicationElementProperty"
+               edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ApplicationElementPropertyEditHelper">
+            <param name="semanticHint" value="1011"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
                id="org.openiaml.model.diagram.operation.DataFlowEdge_3001"
                name="%metatype.name.DataFlowEdge_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -467,6 +477,7 @@
          <elementType ref="org.openiaml.model.diagram.operation.DecisionNode_1008"/>
          <elementType ref="org.openiaml.model.diagram.operation.DecisionOperation_1009"/>
          <elementType ref="org.openiaml.model.diagram.operation.TemporaryVariable_1010"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ApplicationElementProperty_1011"/>
          <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_3001"/>
          <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_3002"/>
          <elementType ref="org.openiaml.model.diagram.operation.ConditionalEdge_3003"/>

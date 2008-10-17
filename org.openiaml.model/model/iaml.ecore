@@ -54,6 +54,8 @@
         eType="#//ExecutionEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
         eType="#//TemporaryVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_shouldnt_parameters" upperBound="-1"
+        eType="#//ApplicationElementProperty" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsOperations" abstract="true"
       interface="true">

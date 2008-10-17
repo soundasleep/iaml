@@ -7,6 +7,10 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jet.JET2Platform;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -61,9 +65,17 @@ public class GenerateCodeAction implements IViewActionDelegate {
 	 */
 	private IStatus generateCodeFrom(IFile o, IAction action, IProgressMonitor monitor) {
 		if (o.getFileExtension().equals("iaml")) {
+			
+			// try and load the file directly
+			ResourceSet resourceSet = new ResourceSetImpl();
+			Resource resource = resourceSet.getResource(URI.createFileURI(o.getLocation().toString()), true);
+
 			Map<String,Object> variables = new HashMap<String,Object>();
-			variables.put("somevar", "a variable");
-			return JET2Platform.runTransformOnResource("org.openiaml.model.codegen.jet", o, variables, monitor);
+			
+			// we have to set this manually as well
+			variables.put("org.eclipse.jet.resource.project.name", o.getProject().getName());
+			
+			return JET2Platform.runTransformOnObject("org.openiaml.model.codegen.jet", resource, variables, monitor);
 		}
 		
 		return null;

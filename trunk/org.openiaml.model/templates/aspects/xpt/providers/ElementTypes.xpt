@@ -20,24 +20,45 @@
 	
 	«EXPAND xpt::Common::generatedMemberComment»
 	public static org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand 
-			getCreateCommand(org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest request, 
+			getCreateNodeCommand(org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest request, 
 			org.eclipse.emf.ecore.EClass elementType) {
 			
-			if (elementType == null)
-				return null;
+		if (elementType == null)
+			return null;
 
-			«EXPAND elementCreateCommand FOREACH getElements()-»
+			«EXPAND elementCreateNodeCommand FOREACH getElements()-»
+		
+		return null;
+	} 
+
+	«EXPAND xpt::Common::generatedMemberComment»
+	public static org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand 
+			getCreateEdgeCommand(org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest request, 
+			org.eclipse.emf.ecore.EClass elementType,
+			org.eclipse.emf.ecore.EObject source,
+			org.eclipse.emf.ecore.EObject target) {
+			
+		if (elementType == null)
+			return null;
+
+			«EXPAND elementCreateEdgeCommand FOREACH getElements()-»
 		
 		return null;
 	} 
 «ENDAROUND»
 
-// we have to expand it twice, depending on what type it is
-«DEFINE elementCreateCommand FOR gmfgen::GenNode-»
-	«EXPAND elementCreateCommandType(elementType, getDiagram()) FOR elementType-»
+
+// we have to expand it depending on what type it is
+«DEFINE elementCreateNodeCommand FOR gmfgen::GenNode-»
+	«EXPAND elementCreateNodeCommandType(elementType, getDiagram()) FOR elementType-»
 «ENDDEFINE»
 
-«DEFINE elementCreateCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::MetamodelType-»
+// other possible: gmfgen::GenLink, gmfgen::GenDiagram
+// default element: blank
+«DEFINE elementCreateNodeCommand FOR gmfgen::GenCommonBase-»
+«ENDDEFINE»
+
+«DEFINE elementCreateNodeCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::MetamodelType-»
 	«IF null != elementType-»
 		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetaClass()»)) {
 			return new «diagram.editCommandsPackageName».«elementType.getMetaClass().ecoreClass.name»CreateCommand(request);
@@ -45,7 +66,7 @@
 	«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE elementCreateCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::SpecializationType-»
+«DEFINE elementCreateNodeCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::SpecializationType-»
 	«IF null != elementType-»
 		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetamodelClass()»)) {
 			return new «diagram.editCommandsPackageName».«elementType.getMetamodelClass().ecoreClass.name»CreateCommand(request);
@@ -53,6 +74,30 @@
 	«ENDIF-»
 «ENDDEFINE»
 
-// other possible: gmfgen::GenLink, gmfgen::GenDiagram
-«DEFINE elementCreateCommand FOR gmfgen::GenCommonBase-»
+
+// we have to expand it twice, depending on what type it is
+«DEFINE elementCreateEdgeCommand FOR gmfgen::GenLink-»
+	«EXPAND elementCreateEdgeCommandType(elementType, getDiagram()) FOR elementType-»
 «ENDDEFINE»
+
+// other possible: gmfgen::GenNode, gmfgen::GenDiagram
+// default element: blank
+«DEFINE elementCreateEdgeCommand FOR gmfgen::GenCommonBase-»
+«ENDDEFINE»
+
+«DEFINE elementCreateEdgeCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::MetamodelType-»
+	«IF null != elementType-»
+		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetaClass()»)) {
+			return new «diagram.editCommandsPackageName».«elementType.getMetaClass().ecoreClass.name»CreateCommand(request, source, target);
+		}
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE elementCreateEdgeCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::SpecializationType-»
+	«IF null != elementType-»
+		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetamodelClass()»)) {
+			return new «diagram.editCommandsPackageName».«elementType.getMetamodelClass().ecoreClass.name»CreateCommand(request, source, target);
+		}
+	«ENDIF-»
+«ENDDEFINE»
+

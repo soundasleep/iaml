@@ -45,6 +45,8 @@
 		
 		return null;
 	} 
+	
+	«EXPAND getElementReverse-»
 «ENDAROUND»
 
 
@@ -101,3 +103,41 @@
 	«ENDIF-»
 «ENDDEFINE»
 
+
+/**
+ * Copied from getElement() in ElementTypes.xpt
+ */
+«DEFINE getElementReverse FOR gmfgen::GenDiagram-»
+	private static java.util.Map<org.eclipse.emf.ecore.EClass, org.eclipse.gmf.runtime.emf.type.core.IElementType> elementsReverse;
+
+	«EXPAND xpt::Common::generatedMemberComment("Get the associated IElementType for this editor that renders a particular EClass in the model.")»
+public static org.eclipse.gmf.runtime.emf.type.core.IElementType getElementType(org.eclipse.emf.ecore.EClass hint) {
+	if (elementsReverse == null) {
+		elementsReverse = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EClass, org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		«EXPAND bindUniqueIdentifierToNamedElementReverse(getUniqueIdentifier()) FOR domainDiagramElement-»
+		«FOREACH getNodes() AS node-»
+			«EXPAND bindUniqueIdentifierToNamedElementReverse(node.getUniqueIdentifier()) FOR node.modelFacet-»
+		«ENDFOREACH-»
+		«FOREACH links AS link-»
+			«EXPAND bindUniqueIdentifierToNamedElementReverse(link.getUniqueIdentifier()) FOR link.modelFacet-»
+		«ENDFOREACH-»
+	}
+	return elementsReverse.get(hint);
+}
+«ENDDEFINE»
+
+«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR genmodel::GenClass»
+	elementsReverse.put(«getQualifiedPackageInterfaceName(genPackage)».eINSTANCE.get«getClassifierAccessorName()»(), «id»);
+«ENDDEFINE»
+
+«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::ModelFacet»
+	«ERROR "Unsupported model facet: " + this-»
+«ENDDEFINE»
+
+«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::TypeModelFacet»
+	«EXPAND bindUniqueIdentifierToNamedElementReverse(id) FOR metaClass-»
+«ENDDEFINE»
+
+«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::FeatureLinkModelFacet»
+	elementsReverse.put(«EXPAND xpt::Common::metaFeatureAccessor FOR metaFeature», «id»);
+«ENDDEFINE»

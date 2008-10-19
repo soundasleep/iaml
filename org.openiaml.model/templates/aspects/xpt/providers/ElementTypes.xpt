@@ -1,0 +1,58 @@
+/**
+ * We want an easy way to refer to commands programatically.
+ * This also allows us to remove the ".command" package export
+ * requirement!
+ *
+ * It would be nice if this was in a separate file though, but
+ * I'm not sure how to make GMF do this yet.
+ */
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
+«EXTENSION xpt::diagram::Utils»
+«EXTENSION xpt::GenModelUtils»
+
+/**
+ * Add our extensions in the "additions"
+ */
+«AROUND additions FOR gmfgen::GenDiagram-»
+	«targetDef.proceed()»
+	
+	«EXPAND xpt::Common::generatedMemberComment»
+	public static org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand 
+			getCreateCommand(org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest request, 
+			org.eclipse.emf.ecore.EClass elementType) {
+			
+			if (elementType == null)
+				return null;
+
+			«EXPAND elementCreateCommand FOREACH getElements()-»
+		
+		return null;
+	} 
+«ENDAROUND»
+
+// we have to expand it twice, depending on what type it is
+«DEFINE elementCreateCommand FOR gmfgen::GenNode-»
+	«EXPAND elementCreateCommandType(elementType, getDiagram()) FOR elementType-»
+«ENDDEFINE»
+
+«DEFINE elementCreateCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::MetamodelType-»
+	«IF null != elementType-»
+		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetaClass()»)) {
+			return new «diagram.editCommandsPackageName».«elementType.getMetaClass().ecoreClass.name»CreateCommand(request);
+		}
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE elementCreateCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::SpecializationType-»
+	«IF null != elementType-»
+		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetamodelClass()»)) {
+			return new «diagram.editCommandsPackageName».«elementType.getMetamodelClass().ecoreClass.name»CreateCommand(request);
+		}
+	«ENDIF-»
+«ENDDEFINE»
+
+// other possible: gmfgen::GenLink, gmfgen::GenDiagram
+«DEFINE elementCreateCommand FOR gmfgen::GenCommonBase-»
+«ENDDEFINE»

@@ -116,7 +116,14 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	@Override
 	public void setValue(EObject element, EStructuralFeature reference, Object value) throws InferenceException {
 		try {
-			SetValueCommand sv = new SetValueCommand(new SetRequest(element, reference, value));
+			if (element == null)
+				return;
+			
+			SetValueCommand sv = new SetValueCommand(new SetRequest(getEditingDomain(), element, reference, value));
+			if (sv == null) {
+				// we can't do anything because the diagram editor won't allow us to create it currently
+				return;
+			}
 			doExecute(sv);
 		} catch (ExecutionException e) {
 			throw new InferenceException(e);
@@ -131,7 +138,14 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	public EObject createElement(EObject container, EClass elementType, EStructuralFeature ignored)
 			throws InferenceException {
 		try {
-			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest( container, getDiagramEditType(elementType) ), elementType );
+			if (container == null)
+				return null;
+			
+			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest(getEditingDomain(), container, getDiagramEditType(elementType) ), elementType );
+			if (cc == null) {
+				// we can't do anything because the diagram editor won't allow us to create it currently
+				return null;
+			}
 			doExecute(cc);
 			
 			EObject createdElement = cc.getNewElement();
@@ -150,7 +164,14 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	public EObject createRelationship(EObject container, EClass elementType,
 			EObject source, EObject target, EStructuralFeature ignored, EStructuralFeature ignored2, EStructuralFeature ignored3) throws InferenceException {
 		try {
-			CreateElementCommand cc = getDiagramCreateRelationshipCommand(new CreateRelationshipRequest( container, source, target, getDiagramEditType(elementType) ), elementType, source, target );
+			if (container == null || source == null || target == null)
+				return null;
+			
+			CreateElementCommand cc = getDiagramCreateRelationshipCommand(new CreateRelationshipRequest(getEditingDomain(), container, source, target, getDiagramEditType(elementType) ), elementType, source, target );
+			if (cc == null) {
+				// we can't do anything because the diagram editor won't allow us to create it currently
+				return null;
+			}
 			doExecute(cc);
 			
 			EObject createdElement = cc.getNewElement();

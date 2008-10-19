@@ -141,6 +141,8 @@ public class CreateMissingElements {
 	 * @throws InferenceException 
 	 */
 	private void handleSyncWire(SyncWire root) throws InferenceException {
+		if (root == null) return;
+		
 		// don't generate elements if it has been overridden
 		if (!root.isOverridden()) {
 			
@@ -198,13 +200,16 @@ public class CreateMissingElements {
 	private ApplicationElementProperty getApplicationElementProperty(
 			SyncWire root, InputTextField to, String string) throws InferenceException {
 
+		if (root == null) return null;
+		
 		for (ApplicationElementProperty property : to.getProperties()) {
 			if (property.getName().equals(string))
 				return property;
 		}
 		
 		// nothing found: create a new one
-		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(to, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
+		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(to, ModelPackage.eINSTANCE.getApplicationElementProperty(), WiresPackage.eINSTANCE.getCompositeWire_Properties());
+		if (property == null) return null;
 		markAsGenerated(root, property);
 		setElementName(property, string);
 		
@@ -222,13 +227,16 @@ public class CreateMissingElements {
 	private ApplicationElementProperty getApplicationElementProperty(InputTextField root,
 			InputTextField to, String string) throws InferenceException {
 
+		if (root == null) return null;
+		
 		for (ApplicationElementProperty property : to.getProperties()) {
 			if (property.getName().equals(string))
 				return property;
 		}
 		
 		// nothing found: create a new one
-		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(to, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
+		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(to, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties());
+		if (property == null) return null;
 		markAsGenerated(root, property);
 		setElementName(property, string);
 		
@@ -246,8 +254,11 @@ public class CreateMissingElements {
 			EventTrigger event,
 			CompositeOperation operation, ApplicationElementProperty parameter) throws InferenceException {
 
+		if (container == null) return;
+		
 		// does a runinstance wire exist?
 		RunInstanceWire rwi = getRunInstanceWire(container, event, operation, "run");
+		if (rwi == null) return;
 		
 		// does a parameter wire exist?
 		ParameterWire pw = getParameterWire(container, rwi, parameter);
@@ -274,7 +285,8 @@ public class CreateMissingElements {
 		}
 		
 		// nothing found: create a new one
-		ParameterWire pw = (ParameterWire) parent.createRelationship(container, WiresPackage.eINSTANCE.getParameterWire(), rwi, parameter, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		ParameterWire pw = (ParameterWire) parent.createRelationship(container, WiresPackage.eINSTANCE.getParameterWire(), parameter, rwi, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		if (pw == null) return null;
 		markAsGenerated(container, pw);
 		
 		return pw;
@@ -302,7 +314,8 @@ public class CreateMissingElements {
 		}
 		
 		// nothing found: create a new one
-		RunInstanceWire rwi = (RunInstanceWire) (ParameterWire) parent.createRelationship(container, WiresPackage.eINSTANCE.getRunInstanceWire(), event, operation, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		RunInstanceWire rwi = (RunInstanceWire) parent.createRelationship(container, WiresPackage.eINSTANCE.getRunInstanceWire(), event, operation, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		if (rwi == null) return null;
 		markAsGenerated(container, rwi);
 		setElementName(rwi, name);
 		
@@ -324,6 +337,7 @@ public class CreateMissingElements {
 
 		// it's not there, so we better create it
 		EventTrigger event = (EventTrigger) parent.createElement(from, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
+		if (event == null) return null;
 		markAsGenerated(from, event);
 		setElementName(event, string);
 		
@@ -350,6 +364,7 @@ public class CreateMissingElements {
 		
 		// it's not there, so we better create it
 		CompositeOperation operation = (CompositeOperation) parent.createElement(from, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
+		if (operation == null) return null;
 		markAsGenerated(from, operation);
 		setElementName(operation, string);
 		
@@ -387,6 +402,10 @@ public class CreateMissingElements {
 	private ExecutionEdge connectExecutionEdge(CompositeOperation container,
 			ExecutionEdgesSource source, ExecutionEdgeDestination target) throws InferenceException {
 		
+		if (container == null) return null;
+		if (source == null) return null;
+		if (target == null) return null;
+		
 		ExecutionEdge edge = (ExecutionEdge) parent.createRelationship(container, ModelPackage.eINSTANCE.getExecutionEdge(), source, target, ModelPackage.eINSTANCE.getCompositeOperation_ExecutionEdges(), ModelPackage.eINSTANCE.getExecutionEdge_From(), ModelPackage.eINSTANCE.getExecutionEdge_To());
 		return edge;
 		
@@ -394,6 +413,10 @@ public class CreateMissingElements {
 
 	private DataFlowEdge connectDataEdge(CompositeOperation container,
 			DataFlowEdgesSource source, DataFlowEdgeDestination target) throws InferenceException {
+		
+		if (container == null) return null;
+		if (source == null) return null;
+		if (target == null) return null;
 		
 		DataFlowEdge edge = (DataFlowEdge) parent.createRelationship(container, ModelPackage.eINSTANCE.getDataFlowEdge(), source, target, ModelPackage.eINSTANCE.getCompositeOperation_DataEdges(), ModelPackage.eINSTANCE.getDataFlowEdge_From(), ModelPackage.eINSTANCE.getDataFlowEdge_To());
 		return edge;
@@ -414,6 +437,8 @@ public class CreateMissingElements {
 	 * @throws InferenceException 
 	 */
 	private void markAsGenerated(GeneratesElements by, GeneratedElement element) throws InferenceException {
+		if (element == null) return;
+
 		parent.setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_IsGenerated(), true);
 		parent.setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy(), by);
 	}
@@ -425,6 +450,8 @@ public class CreateMissingElements {
 	 * @throws InferenceException
 	 */
 	private void handleFieldValueProperty(InputTextField field) throws InferenceException {
+		if (field == null) return;
+		
 		// don't generate elements if it has been overridden
 		if (!field.isOverridden()) {
 			
@@ -434,6 +461,8 @@ public class CreateMissingElements {
 	}
 
 	private void handleChild(GeneratesElements e) throws InferenceException {
+		if (e == null) return;
+		
 		// don't generate elements if it has been overridden
 		if (!e.isOverridden()) {
 			
@@ -468,6 +497,8 @@ public class CreateMissingElements {
 	 * @throws InferenceException 
 	 */
 	protected void doSyncWires(ContainsWires container, ApplicationElementContainer source, ApplicationElementContainer target, SyncWire generatedBy) throws InferenceException {
+		if (container == null) return;
+		
 		// map each of the children in the source
 		for (ApplicationElement child : source.getChildren()) {
 			ApplicationElement mapTarget = getChildMatch(child, target);
@@ -502,6 +533,8 @@ public class CreateMissingElements {
 	 */
 	private boolean elementsAreAlreadySyncWire(ApplicationElement c,
 			ApplicationElement mapTarget) {
+	
+		if (c == null) return false;
 		
 		for (WireEdge w : c.getOutEdges()) {
 			if (w.getTo().equals(mapTarget) && w instanceof SyncWire)
@@ -525,6 +558,8 @@ public class CreateMissingElements {
 	 * @return an ApplicationElement, or null if none match
 	 */
 	private ApplicationElement getChildMatch(ApplicationElement source, ApplicationElementContainer targetParent) {
+		if (targetParent == null) return null;
+		
 		for (ApplicationElement c : targetParent.getChildren()) {
 			if (childrenMapUp(source, c))
 				return c;

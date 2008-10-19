@@ -16,5 +16,9 @@ public class InferenceException extends Exception {
 	public InferenceException(Exception e) {
 		super(e);
 	}
+	
+	public InferenceException(String message) {
+		super(message);
+	}
 
 }

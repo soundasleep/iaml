@@ -266,16 +266,17 @@ public class CreateMissingElements {
 	}
 
 	/**
+	 * TODO swap the order of these two around
 	 * @param container
-	 * @param rwi
-	 * @param parameter
+	 * @param rwi target
+	 * @param parameter source
 	 * @return
 	 * @throws InferenceException 
 	 */
 	private ParameterWire getParameterWire(SyncWire container,
 			RunInstanceWire rwi, ApplicationElementProperty parameter) throws InferenceException {
 
-		for (WireEdge w : container.getWires()) {
+		for (WireEdge w : parameter.getOutEdges()) {
 			if (w instanceof ParameterWire) {
 				ParameterWire pw = (ParameterWire) w;
 				if (pw.getFrom().equals(parameter) && pw.getTo().equals(rwi)) {
@@ -303,7 +304,7 @@ public class CreateMissingElements {
 	private RunInstanceWire getRunInstanceWire(SyncWire container,
 			EventTrigger event, CompositeOperation operation, String name) throws InferenceException {
 
-		for (WireEdge w : container.getWires()) {
+		for (WireEdge w : event.getOutEdges()) {
 			if (w instanceof RunInstanceWire) {
 				RunInstanceWire rwi = (RunInstanceWire) w;
 				if (rwi.getFrom().equals(event) && rwi.getTo().equals(operation) && 

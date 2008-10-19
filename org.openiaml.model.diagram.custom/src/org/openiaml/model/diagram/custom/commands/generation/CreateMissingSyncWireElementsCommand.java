@@ -4,6 +4,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -15,6 +16,7 @@ import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCo
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
+import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -22,10 +24,6 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.wires.SyncWire;
 
 public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalCommand implements ICreateElements {
 
@@ -36,7 +34,7 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	private IProgressMonitor monitor;
 	private IAdaptable info;
 	private String editorId;
-
+	
 	public CreateMissingSyncWireElementsCommand(
 			GraphicalEditPart root,
 			EObject rootObject,
@@ -111,59 +109,6 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 		
 	}
 
-	/**
-	 * Because we don't want to be duplicating logic, we use this to select which command
-	 * in particular we actually want for a given editor.
-	 * 
-	 * @see #editorId
-	 * @param cr
-	 * @param source
-	 * @param target
-	 * @return
-	 * @throws ExecutionException if editorId was unexpected
-	 */
-	private CreateElementCommand getSyncWireCreateCommand(CreateRelationshipRequest cr, EObject source, EObject target) throws ExecutionException {
-		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
-			return new org.openiaml.model.model.diagram.visual.edit.commands.SyncWireCreateCommand(cr, source, target);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
-			return new org.openiaml.model.model.diagram.domainstore.edit.commands.SyncWireCreateCommand(cr, source, target);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
-			return new org.openiaml.model.model.diagram.domain_object.edit.commands.SyncWireCreateCommand(cr, source, target);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
-			return new org.openiaml.model.model.diagram.edit.commands.SyncWireCreateCommand(cr, source, target);
-		}
-		
-		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
-	}
-	
-	/**
-	 * Because we don't want to be duplicating logic, we use this to select which element type
-	 * in particular we actually want for a given editor.
-	 * 
-	 * @see #editorId
-	 * @return
-	 * @throws ExecutionException if editorId was unexpected
-	 */
-	private IElementType getSyncWireEditType() throws ExecutionException {
-		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.SyncWire_3001;
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.SyncWire_3001;
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.SyncWire_3002;
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.providers.IamlElementTypes.SyncWire_3001;
-		}
-		
-		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
-	}
-
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.inference.ICreateElements#setValue(org.openiaml.model.model.wires.SyncWire, org.eclipse.emf.ecore.EReference, java.lang.Object)
@@ -180,17 +125,16 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	}
 
 	/* (non-Javadoc)
-	 * @see org.openiaml.model.inference.ICreateElements#createSyncWire(org.openiaml.model.model.ContainsWires, org.openiaml.model.model.WireEdgesSource, org.openiaml.model.model.WireEdgeDestination)
+	 * @see org.openiaml.model.inference.ICreateElements#createElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass)
 	 */
 	@Override
-	public SyncWire createSyncWire(ContainsWires container,
-			WireEdgesSource source, WireEdgeDestination target)
+	public EObject createElement(EObject container, EClass elementType, EStructuralFeature ignored)
 			throws InferenceException {
 		try {
-			CreateElementCommand cc = getSyncWireCreateCommand(new CreateRelationshipRequest( container, source, target, getSyncWireEditType() ), source, target );
+			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest( container, getDiagramEditType(elementType) ), elementType );
 			doExecute(cc);
 			
-			SyncWire createdElement = (SyncWire) cc.getNewElement();
+			EObject createdElement = cc.getNewElement();
 			
 			return createdElement;
 		} catch (ExecutionException e) {
@@ -198,4 +142,98 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 		}
 	}
 
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.inference.ICreateElements#createRelationship(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject)
+	 */
+	@Override
+	public EObject createRelationship(EObject container, EClass elementType,
+			EObject source, EObject target, EStructuralFeature ignored, EStructuralFeature ignored2, EStructuralFeature ignored3) throws InferenceException {
+		try {
+			CreateElementCommand cc = getDiagramCreateRelationshipCommand(new CreateRelationshipRequest( container, source, target, getDiagramEditType(elementType) ), elementType, source, target );
+			doExecute(cc);
+			
+			EObject createdElement = cc.getNewElement();
+			
+			return createdElement;
+		} catch (ExecutionException e) {
+			throw new InferenceException(e);
+		}
+	}
+
+	/**
+	 * @param createRelationshipRequest
+	 * @param source
+	 * @param target
+	 * @param target 
+	 * @return
+	 * @throws ExecutionException 
+	 */
+	private CreateElementCommand getDiagramCreateRelationshipCommand(
+			CreateRelationshipRequest request,
+			EClass elementType, EObject source, EObject target) throws ExecutionException {
+		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
+		}
+		
+		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
+
+	}
+
+	/**
+	 * @param elementType
+	 * @return
+	 * @throws ExecutionException 
+	 */
+	private IElementType getDiagramEditType(EClass elementType) throws ExecutionException {
+		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getElementType(elementType);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getElementType(elementType);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getElementType(elementType);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.providers.IamlElementTypes.getElementType(elementType);
+		}
+		
+		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
+	}
+
+	/**
+	 * @param createElementRequest
+	 * @param elementType
+	 * @return
+	 * @throws ExecutionException 
+	 */
+	private CreateElementCommand getDiagramCreateNodeCommand(
+			CreateElementRequest request, EClass elementType) throws ExecutionException {
+		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
+		}
+		
+		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
+		
+	}
+	
 }

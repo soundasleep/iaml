@@ -1,14 +1,19 @@
 package org.openiaml.model.diagram.custom.actions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,12 +28,10 @@ import org.eclipse.ui.IViewPart;
 import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.model.wires.WiresFactory;
+import org.openiaml.model.model.impl.ModelFactoryImpl;
+import org.openiaml.model.model.operations.impl.OperationsFactoryImpl;
+import org.openiaml.model.model.visual.impl.VisualFactoryImpl;
 import org.openiaml.model.model.wires.impl.WiresFactoryImpl;
 
 /**
@@ -118,26 +121,6 @@ public class GenerateCodeAction implements IViewActionDelegate, ICreateElements 
 	}
 
 	/* (non-Javadoc)
-	 * @see org.openiaml.model.inference.ICreateElements#createSyncWire(org.openiaml.model.model.ContainsWires, org.openiaml.model.model.WireEdgesSource, org.openiaml.model.model.WireEdgeDestination)
-	 */
-	@Override
-	public SyncWire createSyncWire(ContainsWires container,
-			WireEdgesSource source, WireEdgeDestination target)
-			throws InferenceException {
-		
-		// we will just let ecore do it
-		WiresFactory factory = WiresFactoryImpl.init();
-		SyncWire wire = factory.createSyncWire();
-		wire.setFrom(source);
-		wire.setTo(target);
-		
-		container.getWires().add(wire);
-		
-		return wire;
-		
-	}
-
-	/* (non-Javadoc)
 	 * @see org.openiaml.model.inference.ICreateElements#setValue(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object)
 	 */
 	@Override
@@ -146,6 +129,103 @@ public class GenerateCodeAction implements IViewActionDelegate, ICreateElements 
 
 		// we will just let ecore do it
 		element.eSet(reference, value);		
+	}
+	
+	private List<EFactory> factories = null;
+	private List<EFactory> getFactories() {
+		if (factories == null) {
+			factories = new ArrayList<EFactory>();
+			factories.add(ModelFactoryImpl.init());
+			factories.add(WiresFactoryImpl.init());
+			factories.add(OperationsFactoryImpl.init());
+			factories.add(VisualFactoryImpl.init());
+		}
+		return factories;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.inference.ICreateElements#createElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass)
+	 */
+	@Override
+	public EObject createElement(EObject container, EClass elementType, EStructuralFeature feature)
+			throws InferenceException {
+		
+		// sanity check
+		Assert.isNotNull(container);
+		Assert.isNotNull(elementType);
+		Assert.isNotNull(feature);
+		
+		// try all the factories
+		EObject object = null;
+		for (EFactory factory : getFactories()) {
+			try {
+				object = factory.create(elementType);
+				break;
+			} catch (IllegalArgumentException e) {
+				// continue
+			}
+		}
+		
+		if (object == null)
+			throw new IllegalArgumentException("Unknown class type '" + elementType + "' - am I missing a factory?");
+		
+		// we now need to set its container
+		Object f = container.eGet(feature);
+		if (!(f instanceof List)) {
+			throw new IllegalArgumentException("The structural feature '" + feature + "' of object '" + container + "' cannot contain anything - it isn't a list.");
+		}
+		List containerList = (List) f;
+		containerList.add(object);
+		
+		return object;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.inference.ICreateElements#createRelationship(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject)
+	 */
+	@Override
+	public EObject createRelationship(EObject container, EClass elementType,
+			EObject source, EObject target, EStructuralFeature containerFeature, EStructuralFeature sourceFeature, EStructuralFeature targetFeature) throws InferenceException {
+		
+		// sanity check
+		Assert.isNotNull(container);
+		Assert.isNotNull(elementType);
+		Assert.isNotNull(source);
+		Assert.isNotNull(target);
+		Assert.isNotNull(containerFeature);
+		Assert.isNotNull(sourceFeature);
+		Assert.isNotNull(targetFeature);
+		
+		// try all the factories
+		EObject object = null;
+		for (EFactory factory : getFactories()) {
+			try {
+				object = factory.create(elementType);
+				break;
+			} catch (IllegalArgumentException e) {
+				// continue
+			}
+		}
+		
+		if (object == null)
+			throw new IllegalArgumentException("Unknown class type '" + elementType + "' - am I missing a factory?");
+		
+		// we now need to set its container
+		Object f = container.eGet(containerFeature);
+		if (!(f instanceof List)) {
+			throw new IllegalArgumentException("The container structural feature '" + containerFeature + "' of object '" + container + "' cannot contain anything - it isn't a list.");
+		}
+		List containerList = (List) f;
+		containerList.add(object);
+
+		// we now need to set its source feature
+		object.eSet(sourceFeature, source);
+		
+		// we now need to set its target feature
+		object.eSet(targetFeature, target);
+
+		return object;
+		
 	}
 
 }

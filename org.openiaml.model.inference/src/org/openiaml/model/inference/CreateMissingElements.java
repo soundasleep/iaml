@@ -10,6 +10,7 @@ import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -28,12 +29,14 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.StopNode;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * This is meant to be an engine that supports creating elements
@@ -201,7 +204,7 @@ public class CreateMissingElements {
 		}
 		
 		// nothing found: create a new one
-		ApplicationElementProperty property = parent.createApplicationElementProperty(to);
+		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(to, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
 		markAsGenerated(root, property);
 		setElementName(property, string);
 		
@@ -225,7 +228,7 @@ public class CreateMissingElements {
 		}
 		
 		// nothing found: create a new one
-		ApplicationElementProperty property = parent.createApplicationElementProperty(to);
+		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(to, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
 		markAsGenerated(root, property);
 		setElementName(property, string);
 		
@@ -271,7 +274,7 @@ public class CreateMissingElements {
 		}
 		
 		// nothing found: create a new one
-		ParameterWire pw = parent.createParameterWire(container, rwi, parameter);
+		ParameterWire pw = (ParameterWire) parent.createRelationship(container, WiresPackage.eINSTANCE.getParameterWire(), rwi, parameter, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 		markAsGenerated(container, pw);
 		
 		return pw;
@@ -299,7 +302,7 @@ public class CreateMissingElements {
 		}
 		
 		// nothing found: create a new one
-		RunInstanceWire rwi = parent.createRunInstanceWire(container, event, operation);
+		RunInstanceWire rwi = (RunInstanceWire) (ParameterWire) parent.createRelationship(container, WiresPackage.eINSTANCE.getRunInstanceWire(), event, operation, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 		markAsGenerated(container, rwi);
 		setElementName(rwi, name);
 		
@@ -320,7 +323,7 @@ public class CreateMissingElements {
 		}
 
 		// it's not there, so we better create it
-		EventTrigger event = parent.createEventTrigger(from);
+		EventTrigger event = (EventTrigger) parent.createElement(from, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
 		markAsGenerated(from, event);
 		setElementName(event, string);
 		
@@ -346,24 +349,24 @@ public class CreateMissingElements {
 		}
 		
 		// it's not there, so we better create it
-		CompositeOperation operation = parent.createCompositeOperation(from);
+		CompositeOperation operation = (CompositeOperation) parent.createElement(from, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
 		markAsGenerated(from, operation);
 		setElementName(operation, string);
 		
 		// what should this operation contain?
 		// TODO should update and refresh really be the same thing?
 		if (string.equals("update") || string.equals("refresh")) {
-			StartNode startNode = parent.createStartNode(operation);
+			StartNode startNode = (StartNode) parent.createElement(operation, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes());
 			markAsGenerated(from, startNode);
 			
-			StopNode stopNode = parent.createStopNode(operation);
+			StopNode stopNode = (StopNode) parent.createElement(operation, OperationsPackage.eINSTANCE.getStopNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes());
 			markAsGenerated(from, stopNode);
 			
-			ChainedOperation setPropertyOp = parent.createChainedOperation(operation);
+			ChainedOperation setPropertyOp = (ChainedOperation) parent.createElement(operation, ModelPackage.eINSTANCE.getChainedOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations());
 			markAsGenerated(from, setPropertyOp);
 			setElementName(setPropertyOp, "setPropertyToValue");
 			
-			Parameter param = parent.createParameter(operation);
+			Parameter param = (Parameter) parent.createElement(operation, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getCompositeOperation__shouldnt_parameters());
 			markAsGenerated(from, param);
 			setElementName(param, "setValueTo");
 			
@@ -382,19 +385,17 @@ public class CreateMissingElements {
 	}
 
 	private ExecutionEdge connectExecutionEdge(CompositeOperation container,
-			ExecutionEdgesSource source, ExecutionEdgeDestination target) {
-		// TODO Auto-generated method stub
+			ExecutionEdgesSource source, ExecutionEdgeDestination target) throws InferenceException {
 		
-		ExecutionEdge edge = parent.createExecutionEdge(container, source, target);
+		ExecutionEdge edge = (ExecutionEdge) parent.createRelationship(container, ModelPackage.eINSTANCE.getExecutionEdge(), source, target, ModelPackage.eINSTANCE.getCompositeOperation_ExecutionEdges(), ModelPackage.eINSTANCE.getExecutionEdge_From(), ModelPackage.eINSTANCE.getExecutionEdge_To());
 		return edge;
 		
 	}
 
 	private DataFlowEdge connectDataEdge(CompositeOperation container,
-			DataFlowEdgesSource source, DataFlowEdgeDestination target) {
-		// TODO Auto-generated method stub
+			DataFlowEdgesSource source, DataFlowEdgeDestination target) throws InferenceException {
 		
-		DataFlowEdge edge = parent.createDataFlowEdge(container, source, target);
+		DataFlowEdge edge = (DataFlowEdge) parent.createRelationship(container, ModelPackage.eINSTANCE.getDataFlowEdge(), source, target, ModelPackage.eINSTANCE.getCompositeOperation_DataEdges(), ModelPackage.eINSTANCE.getDataFlowEdge_From(), ModelPackage.eINSTANCE.getDataFlowEdge_To());
 		return edge;
 		
 	}
@@ -466,17 +467,17 @@ public class CreateMissingElements {
 	 * @param target
 	 * @throws InferenceException 
 	 */
-	protected void doSyncWires(WireEdgesSource container, ApplicationElementContainer source, ApplicationElementContainer target, SyncWire generatedBy) throws InferenceException {
+	protected void doSyncWires(ContainsWires container, ApplicationElementContainer source, ApplicationElementContainer target, SyncWire generatedBy) throws InferenceException {
 		// map each of the children in the source
-		for (ApplicationElement c : source.getChildren()) {
-			ApplicationElement mapTarget = getChildMatch(c, target);
+		for (ApplicationElement child : source.getChildren()) {
+			ApplicationElement mapTarget = getChildMatch(child, target);
 			if (mapTarget != null) {
 				// we have an element to map to
 				// is it already mapped?
-				if (!elementsAreAlreadySyncWire(c, mapTarget)) {
+				if (!elementsAreAlreadySyncWire(child, mapTarget)) {
 					// map them together
 					
-					SyncWire wire = parent.createSyncWire(container, c, mapTarget);
+					SyncWire wire = (SyncWire) parent.createRelationship(container, WiresPackage.eINSTANCE.getSyncWire(), child, mapTarget, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 					Assert.isTrue(wire != null);
 					
 					// set sync wire parameters

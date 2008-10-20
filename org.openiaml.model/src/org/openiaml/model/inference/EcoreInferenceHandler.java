@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 /**
  * an ecore-based inference handler.
  * 
- * TODO I guess this should be placed in a separate package. 
  * @author jmwright
  *
  */
@@ -66,48 +65,20 @@ public class EcoreInferenceHandler implements ICreateElements {
 		if (object == null)
 			throw new IllegalArgumentException("Unknown class type '" + elementType + "' - am I missing a factory?");
 		
-		// if CompositeOperation.isSuperTypeOf ( _operations)		
+		// we now need to set its container
+		// check can be contained: : http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
 		if (!((EReference) feature).getEReferenceType().isSuperTypeOf(elementType)) {
 			throw new IllegalArgumentException("Reference type '" + feature.getName() + "' (type " + ((EReference) feature).getEReferenceType().getName() + ") cannot store types of " + elementType.getName()); 
 		}
 		
-		// we now need to set its container
 		if (feature.isMany()) {
 			// assume feature is list: http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
 			EList<Object> containerList = (EList<Object>) container.eGet(feature, false);
-			try {
-				containerList.add(object);
-			} catch (ArrayStoreException e) {
-				ClassLoader objectCL = object.getClass().getClassLoader();
-				ClassLoader containerCL = container.getClass().getClassLoader();
-				ClassLoader containerListCL = containerList.getClass().getClassLoader();
-				if (objectCL != containerListCL) {
-					// this is why they can't be stored: different classLoaders
-					System.out.println("object CL: " + objectCL);
-					System.out.println("container CL: " + containerCL);
-					System.out.println("containerList CL: " + containerListCL);
-					throw new InferenceException("the object '" + object + "' cannot be stored in '" + containerList + "' because their classloaders are different.", e);
-				}
-				throw e;
-			}
+			containerList.add(object);
 		} else {
 			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + feature);
 		}
-		
-		/*
-		Object f = container.eGet(feature);
-		if (f instanceof EList) {
-			EList<Object> containerList = (EList<Object>) f;
-			containerList.add(object);
-		} else if (f instanceof EReference) {
-			EReference ref = (EReference) f;
-			ref.eContents().add(object);
-		} else {
-			throw new IllegalArgumentException("The structural feature '" + feature + "' (resolved to '" + f + "') of object '" + container + "' cannot contain anything - it isn't an EList or EReference.");
-		}
-		EReferenceImpl fx;
-		*/
-		
+
 		return object;
 	}
 
@@ -133,17 +104,19 @@ public class EcoreInferenceHandler implements ICreateElements {
 		
 		if (object == null)
 			throw new IllegalArgumentException("Unknown class type '" + elementType + "' - am I missing a factory?");
-		
+
 		// we now need to set its container
-		Object f = container.eGet(containerFeature, false);
-		if (f instanceof EList) {
-			EList<Object> containerList = (EList<Object>) f;
+		// check can be contained: : http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
+		if (!((EReference) containerFeature).getEReferenceType().isSuperTypeOf(elementType)) {
+			throw new IllegalArgumentException("Reference type '" + containerFeature.getName() + "' (type " + ((EReference) containerFeature).getEReferenceType().getName() + ") cannot store types of " + elementType.getName()); 
+		}
+		
+		if (containerFeature.isMany()) {
+			// assume feature is list: http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
+			EList<Object> containerList = (EList<Object>) container.eGet(containerFeature, false);
 			containerList.add(object);
-		} else if (f instanceof EReference) {
-			EReference ref = (EReference) f;
-			ref.eContents().add(object);
 		} else {
-			throw new IllegalArgumentException("The container structural feature '" + containerFeature + "' (resolved to '" + f + "') of object '" + container + "' cannot contain anything - it isn't a EList or EReference.");
+			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + containerFeature);
 		}
 
 		// we now need to set its source feature

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.openiaml.model.codegen.oaw
+Bundle-SymbolicName: org.openiaml.model.codegen.oaw; singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle:  org.openarchitectureware.dependencies

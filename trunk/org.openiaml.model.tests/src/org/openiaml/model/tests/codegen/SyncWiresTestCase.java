@@ -6,6 +6,7 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
+import org.openiaml.model.tests.JetWebTestCase;
 
 /**
  * Test SyncWires

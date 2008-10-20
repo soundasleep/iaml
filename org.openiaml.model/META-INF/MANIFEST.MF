@@ -8,6 +8,7 @@ Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.openiaml.model.diagramextensions,
+ org.openiaml.model.inference,
  org.openiaml.model.model,
  org.openiaml.model.model.impl,
  org.openiaml.model.model.operations,

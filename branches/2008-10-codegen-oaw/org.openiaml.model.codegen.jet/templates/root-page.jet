@@ -1,0 +1,27 @@
+<%@jet imports="org.eclipse.jet.xpath.* org.openiaml.model.model.* org.openiaml.model.model.operations.* org.openiaml.model.model.visual.* org.openiaml.model.model.wires.* org.eclipse.emf.ecore.*" %>
+<%-- 
+  print out a page.
+--%>
+<html>
+<head>
+	<title><c:get select="$child/@name" default="(untitled page)" /></title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
+<h1><c:get select="$child/@name" default="(untitled page)" /></h1>
+
+<c:iterate select="$child/children" var="child">
+	<c:include template="templates/switch-children.jet" />
+</c:iterate>
+
+<ul>
+<c:iterate select="$child/wires" var="wire">
+	Wire: <c:get select="$wire/@name" />
+	<c:if test="$wire/@isGenerated">
+		(generated)
+	</c:if>
+</c:iterate>
+</ul>
+
+</body>
+</html>

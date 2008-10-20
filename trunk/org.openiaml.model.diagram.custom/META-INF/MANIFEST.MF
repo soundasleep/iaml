@@ -12,6 +12,6 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.diagram.wire,
  org.openiaml.model.diagram.domain_object,
  org.openiaml.model.diagram.operation,
- org.eclipse.jet,
- org.openiaml.model.inference
+ org.eclipse.jet
 Bundle-Vendor: www.openiaml.org
+Export-Package: org.openiaml.model.diagram.custom.actions

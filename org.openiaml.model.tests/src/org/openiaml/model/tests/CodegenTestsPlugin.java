@@ -1,4 +1,4 @@
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 

@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getOperation()
- * @model interface="true" abstract="true"
+ * @model abstract="true"
  * @generated
  */
 public interface Operation extends WireEdgeDestination, NamedElement, DataFlowEdgeDestination, ExecutionEdgeDestination, ActivityNode, DataFlowEdgesSource {

@@ -625,7 +625,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeOperation__shouldnt_parameters() {
+	public EReference getCompositeOperation__shouldnt_properties() {
 		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1110,7 +1110,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__DATA_EDGES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__EXECUTION_EDGES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__VARIABLES);
-		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__SHOULDNT_PARAMETERS);
+		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__SHOULDNT_PROPERTIES);
 
 		containsOperationsEClass = createEClass(CONTAINS_OPERATIONS);
 		createEReference(containsOperationsEClass, CONTAINS_OPERATIONS__OPERATIONS);
@@ -1305,7 +1305,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(activityNodeEClass, ActivityNode.class, "ActivityNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(operationEClass, Operation.class, "Operation", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(operationEClass, Operation.class, "Operation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1319,7 +1319,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getCompositeOperation_DataEdges(), this.getDataFlowEdge(), null, "dataEdges", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_ExecutionEdges(), this.getExecutionEdge(), null, "executionEdges", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_Variables(), this.getTemporaryVariable(), null, "variables", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeOperation__shouldnt_parameters(), this.getApplicationElementProperty(), null, "_shouldnt_parameters", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeOperation__shouldnt_properties(), this.getApplicationElementProperty(), null, "_shouldnt_properties", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containsOperationsEClass, ContainsOperations.class, "ContainsOperations", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainsOperations_Operations(), this.getOperation(), null, "operations", null, 0, -1, ContainsOperations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

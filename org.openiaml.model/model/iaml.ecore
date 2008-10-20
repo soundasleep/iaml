@@ -38,8 +38,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" eSuperTypes="#//GeneratedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" interface="true"
-      eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//ActivityNode #//DataFlowEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//ActivityNode #//DataFlowEdgesSource">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
   </eClassifiers>

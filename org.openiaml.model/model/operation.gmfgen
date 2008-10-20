@@ -579,9 +579,9 @@
         <metaClass
             href="iaml.genmodel#//model/ApplicationElementProperty"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/CompositeOperation/_shouldnt_parameters"/>
+            href="iaml.genmodel#//model/CompositeOperation/_shouldnt_properties"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/CompositeOperation/_shouldnt_parameters"/>
+            href="iaml.genmodel#//model/CompositeOperation/_shouldnt_properties"/>
       </modelFacet>
       <labels
           visualID="4011"

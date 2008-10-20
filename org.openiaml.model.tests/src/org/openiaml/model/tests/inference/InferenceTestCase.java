@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.inference;
 
+import java.util.List;
+
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
@@ -10,9 +12,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.jaxen.JaxenException;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.ModelPackage;
+
+import ca.ecliptical.emf.xpath.EMFXPath;
 
 /**
  * @author jmwright
@@ -34,6 +38,46 @@ public abstract class InferenceTestCase extends TestCase {
 		assertNotNull(resource);
 		assertEquals("there should only be one contents in the model file", resource.getContents().size(), 1);
 		return resource.getContents().get(0);
+	}
+
+	/**
+	 * Perform an XPath-like query on an EMF object
+	 * 
+	 * @param root
+	 * @param query
+	 * @return
+	 * @throws JaxenException
+	 */
+	public static List<Object> query(final EObject root, String query) throws JaxenException {
+		EMFXPath xpath = new EMFXPath(query);
+		xpath.addNamespace("iaml", ModelPackage.eNS_URI);
+		xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+		return xpath.selectNodes(root);
+	}
+	
+	/**
+	 * Helper method: print out a list of objects
+	 * @param obj
+	 */
+	protected void dump(List<Object> obj) {
+		for (Object o : obj) 
+			EMFXPath.dump(o, System.out);
+		System.out.println("-");
+	}
+	
+	/**
+	 * Helper method: perform a query, but assert that there is only
+	 * one result returned, and it is of type EObject
+	 * 
+	 * @param root
+	 * @param query
+	 * @return
+	 * @throws JaxenException 
+	 */
+	protected EObject queryOne(EObject root, String query) throws JaxenException {
+		List<Object> q = query(root, query);
+		assertEquals(q.size(), 1);
+		return (EObject) q.get(0);
 	}
 	
 }

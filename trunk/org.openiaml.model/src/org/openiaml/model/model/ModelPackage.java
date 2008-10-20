@@ -333,10 +333,10 @@ public interface ModelPackage extends EPackage {
 	int ACTIVITY_NODE = 8;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.Operation <em>Operation</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.OperationImpl <em>Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.Operation
+	 * @see org.openiaml.model.model.impl.OperationImpl
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getOperation()
 	 * @generated
 	 */
@@ -1615,13 +1615,13 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>shouldnt parameters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>shouldnt properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__SHOULDNT_PARAMETERS = CHAINED_OPERATION_FEATURE_COUNT + 6;
+	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
@@ -3061,15 +3061,15 @@ public interface ModelPackage extends EPackage {
 	EReference getCompositeOperation_Variables();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeOperation#get_shouldnt_parameters <em>shouldnt parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeOperation#get_shouldnt_properties <em>shouldnt properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>shouldnt parameters</em>'.
-	 * @see org.openiaml.model.model.CompositeOperation#get_shouldnt_parameters()
+	 * @return the meta object for the containment reference list '<em>shouldnt properties</em>'.
+	 * @see org.openiaml.model.model.CompositeOperation#get_shouldnt_properties()
 	 * @see #getCompositeOperation()
 	 * @generated
 	 */
-	EReference getCompositeOperation__shouldnt_parameters();
+	EReference getCompositeOperation__shouldnt_properties();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}'.
@@ -3725,10 +3725,10 @@ public interface ModelPackage extends EPackage {
 		EClass ACTIVITY_NODE = eINSTANCE.getActivityNode();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.Operation <em>Operation</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.OperationImpl <em>Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.Operation
+		 * @see org.openiaml.model.model.impl.OperationImpl
 		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getOperation()
 		 * @generated
 		 */
@@ -3815,12 +3815,12 @@ public interface ModelPackage extends EPackage {
 		EReference COMPOSITE_OPERATION__VARIABLES = eINSTANCE.getCompositeOperation_Variables();
 
 		/**
-		 * The meta object literal for the '<em><b>shouldnt parameters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>shouldnt properties</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPOSITE_OPERATION__SHOULDNT_PARAMETERS = eINSTANCE.getCompositeOperation__shouldnt_parameters();
+		EReference COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = eINSTANCE.getCompositeOperation__shouldnt_properties();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}' class.

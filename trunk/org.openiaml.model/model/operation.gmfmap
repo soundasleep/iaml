@@ -215,7 +215,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//CompositeOperation/_shouldnt_parameters"/>
+        href="iaml.ecore#//CompositeOperation/_shouldnt_properties"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//ApplicationElementProperty"/>

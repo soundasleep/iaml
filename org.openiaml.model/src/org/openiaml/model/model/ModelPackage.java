@@ -333,10 +333,10 @@ public interface ModelPackage extends EPackage {
 	int ACTIVITY_NODE = 8;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.impl.OperationImpl <em>Operation</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.Operation <em>Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.impl.OperationImpl
+	 * @see org.openiaml.model.model.Operation
 	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getOperation()
 	 * @generated
 	 */
@@ -3725,10 +3725,10 @@ public interface ModelPackage extends EPackage {
 		EClass ACTIVITY_NODE = eINSTANCE.getActivityNode();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.impl.OperationImpl <em>Operation</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.Operation <em>Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.impl.OperationImpl
+		 * @see org.openiaml.model.model.Operation
 		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getOperation()
 		 * @generated
 		 */

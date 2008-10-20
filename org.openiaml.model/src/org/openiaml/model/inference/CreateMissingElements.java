@@ -337,7 +337,7 @@ public class CreateMissingElements {
 		}
 
 		// it's not there, so we better create it
-		EventTrigger event = (EventTrigger) parent.createElement(from, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
+		EventTrigger event = (EventTrigger) parent.createElement(from, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers());
 		if (event == null) return null;
 		markAsGenerated(from, event);
 		setElementName(event, string);
@@ -364,7 +364,7 @@ public class CreateMissingElements {
 		}
 		
 		// it's not there, so we better create it
-		CompositeOperation operation = (CompositeOperation) parent.createElement(from, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
+		CompositeOperation operation = (CompositeOperation) parent.createElement(from, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations());
 		if (operation == null) return null;
 		markAsGenerated(from, operation);
 		setElementName(operation, string);
@@ -382,7 +382,7 @@ public class CreateMissingElements {
 			markAsGenerated(from, setPropertyOp);
 			setElementName(setPropertyOp, "setPropertyToValue");
 			
-			Parameter param = (Parameter) parent.createElement(operation, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getCompositeOperation__shouldnt_parameters());
+			Parameter param = (Parameter) parent.createElement(operation, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getOperation_Parameters());
 			markAsGenerated(from, param);
 			setElementName(param, "setValueTo");
 			

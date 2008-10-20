@@ -38,7 +38,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" eSuperTypes="#//GeneratedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//ActivityNode #//DataFlowEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" interface="true"
+      eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//ActivityNode #//DataFlowEdgesSource">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
   </eClassifiers>
@@ -54,7 +55,7 @@
         eType="#//ExecutionEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
         eType="#//TemporaryVariable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="_shouldnt_parameters" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_shouldnt_properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsOperations" abstract="true"

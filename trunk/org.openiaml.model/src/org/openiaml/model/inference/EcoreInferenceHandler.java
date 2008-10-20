@@ -3,28 +3,14 @@
  */
 package org.openiaml.model.inference;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.openiaml.model.inference.ICreateElements;
-import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.operations.OperationsPackage;
-import org.openiaml.model.model.visual.VisualPackage;
-import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * an ecore-based inference handler.
@@ -80,28 +66,29 @@ public class EcoreInferenceHandler implements ICreateElements {
 		if (object == null)
 			throw new IllegalArgumentException("Unknown class type '" + elementType + "' - am I missing a factory?");
 		
+		// if CompositeOperation.isSuperTypeOf ( _operations)		
+		if (!((EReference) feature).getEReferenceType().isSuperTypeOf(elementType)) {
+			throw new IllegalArgumentException("Reference type '" + feature.getName() + "' (type " + ((EReference) feature).getEReferenceType().getName() + ") cannot store types of " + elementType.getName()); 
+		}
+		
 		// we now need to set its container
-		if (feature instanceof EReference) {
-			Object f = container.eGet(feature, false);
-			if (f instanceof EList) {
-				EList<Object> containerList = (EList<Object>) f;
-				try {
-					containerList.add(object);
-				} catch (ArrayStoreException e) {
-					ClassLoader objectCL = object.getClass().getClassLoader();
-					ClassLoader containerCL = container.getClass().getClassLoader();
-					ClassLoader containerListCL = containerList.getClass().getClassLoader();
-					if (objectCL != containerListCL) {
-						// this is why they can't be stored: different classLoaders
-						System.out.println("object CL: " + objectCL);
-						System.out.println("container CL: " + containerCL);
-						System.out.println("containerList CL: " + containerListCL);
-						throw new InferenceException("the object '" + object + "' cannot be stored in '" + containerList + "' because their classloaders are different.", e);
-					}
-					throw e;
+		if (feature.isMany()) {
+			// assume feature is list: http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
+			EList<Object> containerList = (EList<Object>) container.eGet(feature, false);
+			try {
+				containerList.add(object);
+			} catch (ArrayStoreException e) {
+				ClassLoader objectCL = object.getClass().getClassLoader();
+				ClassLoader containerCL = container.getClass().getClassLoader();
+				ClassLoader containerListCL = containerList.getClass().getClassLoader();
+				if (objectCL != containerListCL) {
+					// this is why they can't be stored: different classLoaders
+					System.out.println("object CL: " + objectCL);
+					System.out.println("container CL: " + containerCL);
+					System.out.println("containerList CL: " + containerListCL);
+					throw new InferenceException("the object '" + object + "' cannot be stored in '" + containerList + "' because their classloaders are different.", e);
 				}
-			} else {
-				throw new IllegalArgumentException("I don't know what to do with a resolved EReference of: " + f);
+				throw e;
 			}
 		} else {
 			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + feature);

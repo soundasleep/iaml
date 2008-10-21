@@ -5,15 +5,20 @@ package org.openiaml.model.tests;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -21,7 +26,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jet.JET2Platform;
+import org.openiaml.model.codegen.oaw.CodeGenerationRunner;
 
 /**
  * The JET/Junit test framework now manages everything for you. It will
@@ -118,6 +125,85 @@ public abstract class JetWebTestCase extends WebTestCase {
 	}
 	
 	/**
+	 * Transform a model file into some code generated output. This currently contains the logic on
+	 * which code generation solution to use.
+	 */
+	protected IStatus doTransform(String filename, String outputDir, IProgressMonitor monitor) throws IOException, URISyntaxException, CoreException {
+		// which transform to use?
+		// return doTransformJET(filename, outputDir, monitor);
+		return doTransformOAW(filename, outputDir, monitor);
+	}
+	
+	/**
+	 * Set up transformation for openArchitectureWare. In particular, copies the model file from the
+	 * development platform to the runtime platform, because we cannot refer to models
+	 * external to the runtime platform (all model inputs are prefixed with 'platform:/resource/').
+	 */
+	protected IStatus doTransformOAW(String filename, String outputDir, IProgressMonitor monitor) throws FileNotFoundException, CoreException {
+		// we can't use platform:/ resource, because we are trying to refer to a resource
+		// that doesn't exist in this platform.
+		// so we need to copy it to our local platform and execute it from there
+		String tempName = "temp.iaml";
+		IFile file = project.getFile(tempName);		// create file in the project
+		
+		FileInputStream fis = new FileInputStream(filename);
+		file.create(fis, true, monitor);		// copy file
+		
+		assertTrue(file.exists());		// file should now exist
+		
+		// now we can do the transform
+		return doTransformOAWWorkflow( project.getName() + "/" + tempName, project.getWorkspace().getRoot().getLocation().toString() + "/" + outputDir, monitor);
+	}
+
+	
+	/**
+	 * Transform a filename using OpenArchitectureWare. It also forces
+	 * a filesystem refresh of the particular project directory,
+	 * and does not stop until the refresh is complete.
+	 */
+	protected IStatus doTransformOAWWorkflow(String filename, String outputDir,
+			IProgressMonitor monitor) throws CoreException {
+		
+		CodeGenerationRunner runner = new CodeGenerationRunner();		
+		runner.generateCode(filename, outputDir);
+		
+		// once generated, we need to refresh the workspace
+		// we need to *force* refresh the workspace
+		
+		class HaltProgressMonitor extends NullProgressMonitor {
+			@Override
+			public void setCanceled(boolean cancelled) {
+				isDone = true;	// bail early
+				super.setCanceled(cancelled);
+			}
+
+			private boolean isDone = false;
+			public synchronized boolean isDone() {
+				return isDone;
+			}
+
+			@Override
+			public void done() {
+				isDone = true;
+				super.done();
+			}
+		}
+		
+		HaltProgressMonitor m = new HaltProgressMonitor();
+		project.refreshLocal(IResource.DEPTH_INFINITE, m);
+		try {
+			while (!m.isDone()) {
+				Thread.sleep(300);
+			}
+		} catch (InterruptedException e) {
+			return new Status(Status.ERROR, "org.openiaml.model.tests", "refresh thread was interrupted", e);
+		}
+
+		return Status.OK_STATUS;
+		
+	}
+
+	/**
 	 * Transform a filename using JET. The generation options are defined
 	 * by the JET plugin.
 	 * 
@@ -125,9 +211,8 @@ public abstract class JetWebTestCase extends WebTestCase {
 	 * @param monitor A monitor
 	 * @return The status of the transform
 	 * @throws IOException 
-	 * @throws URISyntaxException 
 	 */
-	protected IStatus doTransform(String filename, String outputDir, IProgressMonitor monitor) throws IOException, URISyntaxException {
+	protected IStatus doTransformJET(String filename, String outputDir, IProgressMonitor monitor) throws IOException {
 		File f = new File(filename);
 		assertTrue("file " + filename + " exists", f.exists());
 		assertTrue("file " + filename + " can be read", f.canRead());
@@ -149,7 +234,7 @@ public abstract class JetWebTestCase extends WebTestCase {
 	}	
 
 	/**
-	 * Open a file and return its entire contents as a string
+	 * Helper method: open a file and return its entire contents as a string
 	 * 
 	 * @param f The file to read
 	 * @return The contents of the file

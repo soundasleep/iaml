@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.openiaml.model.codegen.oaw
+Bundle-Name: Oaw Codegen Plugin for Iaml
 Bundle-SymbolicName: org.openiaml.model.codegen.oaw;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.0.3
 Require-Bundle: org.openarchitectureware.dependencies,
  org.openiaml.model
+Export-Package: org.openiaml.model.codegen.oaw

@@ -6,7 +6,7 @@
 	«EXPAND expandPage FOREACH children»
 	
 	«REM»create a sitemap«ENDREM»
-	«FILE "sitemap.html"»
+	«FILE "output/sitemap.html"»
 		<html>
 		<head>
 			<title>sitemap</title>
@@ -37,7 +37,7 @@
 «ENDDEFINE»
 
 «DEFINE expandPage FOR model::visual::Page»
-	«FILE id+".html"»
+	«FILE "output/"+id+".html"»
 		<html>
 		<head>
 			<title>«pageTitle()»</title>

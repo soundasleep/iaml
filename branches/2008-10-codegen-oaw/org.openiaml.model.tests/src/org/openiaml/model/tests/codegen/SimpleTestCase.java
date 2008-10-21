@@ -22,6 +22,13 @@ public class SimpleTestCase extends JetWebTestCase {
 	}
 	
 	public void testSitemap() {
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		// test
+		
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests;
+package org.openiaml.model.tests.codegen;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +36,7 @@ import org.openiaml.model.codegen.oaw.CodeGenerationRunner;
  * @author jmwright
  *
  */
-public abstract class JetWebTestCase extends WebTestCase {
+public abstract class CodegenWebTestCase extends WebTestCase {
 	
 	private IProject project;
 	private IProgressMonitor monitor = new NullProgressMonitor();

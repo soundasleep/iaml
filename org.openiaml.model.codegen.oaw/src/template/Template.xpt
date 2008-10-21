@@ -9,7 +9,7 @@
 	«FILE "output/sitemap.html"»
 		<html>
 		<head>
-			<title>sitemap</title>
+			<title>web application '«pageTitle()»': sitemap</title>
 		</head>
 		
 		<body>
@@ -44,6 +44,7 @@
 		</head>
 		
 		<body>
+		<h1>«pageTitle()»</h1>
 		
 		</body>
 		</html>

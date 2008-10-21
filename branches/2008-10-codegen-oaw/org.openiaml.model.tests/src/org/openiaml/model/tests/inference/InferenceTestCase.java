@@ -3,7 +3,12 @@
  */
 package org.openiaml.model.tests.inference;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -64,6 +69,14 @@ public abstract class InferenceTestCase extends TestCase {
 			EMFXPath.dump(o, System.out);
 		System.out.println("-");
 	}
+
+	/**
+	 * Helper method: print out an objects
+	 * @param obj
+	 */
+	protected void dump(Object o) {
+		EMFXPath.dump(o, System.out);
+	}
 	
 	/**
 	 * Helper method: perform a query, but assert that there is only
@@ -79,5 +92,16 @@ public abstract class InferenceTestCase extends TestCase {
 		assertEquals(q.size(), 1);
 		return (EObject) q.get(0);
 	}
-	
+
+	/**
+	 * Save the changed, inferred model to a file for later reference.
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	protected void saveInferredModel() throws FileNotFoundException, IOException {
+		File tempJavaFile = new File("infer-output/" + this.getClass().getSimpleName() + ".iaml");
+		Map<?,?> options = resource.getResourceSet().getLoadOptions();
+		resource.save(new FileOutputStream(tempJavaFile), options);
+	}
 }

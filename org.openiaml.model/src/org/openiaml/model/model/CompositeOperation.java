@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface CompositeOperation extends ChainedOperation, ContainsOperations, ContainsWires {
+public interface CompositeOperation extends ChainedOperation, ContainsOperations, ContainsWires, GeneratesElements {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ActivityNode}.

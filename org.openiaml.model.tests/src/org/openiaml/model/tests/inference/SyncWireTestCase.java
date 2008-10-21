@@ -3,12 +3,7 @@
  */
 package org.openiaml.model.tests.inference;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
@@ -19,6 +14,7 @@ import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.StopNode;
@@ -111,7 +107,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 			assertEquals(prelude, outProp.getName(), "fieldValue");
 			
 			// this property should belong to an application element with a different name
-			assertNotSame(prelude, outProp.getParent().getName(), "name" + i);
+			assertNotSame(prelude, ((NamedElement) outProp.eContainer()).getName(), "name" + i);
 			
 			// finally, the op should go to the stop node above
 			assertEquals(prelude, setProp.getOutExecutions().size(), 1);

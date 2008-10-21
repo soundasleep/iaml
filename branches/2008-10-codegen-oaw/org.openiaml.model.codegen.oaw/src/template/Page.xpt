@@ -1,0 +1,50 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/* default = nothing */
+«DEFINE expandPage FOR model::ApplicationElement»
+«ENDDEFINE»
+
+«DEFINE expandPage FOR model::visual::Page»
+	«FILE "output/"+id+".html"»
+		<html>
+		<head>
+			<title>«pageTitle()»</title>
+			<link rel="stylesheet" type="text/css" href="default.css" />
+		</head>
+		
+		<body>
+		<h1>«pageTitle()»</h1>
+		
+		<form id="unnecessary_form_because_of_jwebunit">
+		«EXPAND expandChild FOREACH children»
+		</form>
+		
+		</body>
+		</html>
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE expandChild FOR model::ApplicationElement»
+«ENDDEFINE»
+
+«DEFINE expandChild FOR model::visual::InputForm»
+	<form id="«id»">
+		<h2>«formName()»</h2>
+		
+		«EXPAND expandChild FOREACH children»
+	
+		<input type="submit">
+	</form>
+«ENDDEFINE»
+
+«DEFINE expandChild FOR model::visual::InputTextField»
+	<div>
+	<label>
+		«textFieldName()»
+		
+		<input type="text" id="«id»" name="«id»">
+	</label>
+	</div>
+«ENDDEFINE»

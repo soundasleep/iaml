@@ -7,4 +7,9 @@ pageTitle(model::InternetApplication this) :
 
 pageTitle(model::visual::Page this) :
 	if name == null || name == "" then id else name;
+
+formName(model::visual::InputForm this) :
+	if (name == null || name == "") then "(untitled form)" else name;
 	
+textFieldName(model::visual::InputTextField this) :
+	if (name == null || name == "") then "(untitled field)" else name;

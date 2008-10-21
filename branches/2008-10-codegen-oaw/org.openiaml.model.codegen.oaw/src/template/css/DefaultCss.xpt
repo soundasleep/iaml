@@ -1,0 +1,26 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE defaultCss FOR model::InternetApplication»
+html,input {
+	font-family: Calibri, Arial;
+	font-size: 1em;
+}
+html {
+	margin: 5px;
+	padding: 0;
+}
+h1,h2,h3,h4,h5,h6,form { margin: 0; padding: 0; }
+
+ul,ol,p {
+	line-height: 1.3em;
+}
+
+form {
+	border: 1px solid #ccc;
+	padding: 5px;
+	width: 50%;
+	background: #eee;
+}
+«ENDDEFINE»

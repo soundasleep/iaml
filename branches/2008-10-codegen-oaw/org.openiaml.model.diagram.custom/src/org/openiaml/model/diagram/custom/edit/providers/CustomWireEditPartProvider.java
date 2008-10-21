@@ -9,6 +9,7 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
+import org.openiaml.model.diagram.custom.commands.generation.InferMissingElementsCommand;
 import org.openiaml.model.diagram.custom.commands.shortcuts.CreateMissingWireShortcutsCommand;
 import org.openiaml.model.model.diagram.wire.edit.parts.CompositeWireEditPart;
 import org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorPlugin;
@@ -62,6 +63,21 @@ public class CustomWireEditPartProvider extends IamlEditPartProvider {
 							IamlDiagramEditorPlugin.getInstance().logError(
 									"Unable to refresh shortcuts view", e); //$NON-NLS-1$
 						}
+						
+						// generate missing elements
+						ICommand command2 = new InferMissingElementsCommand((GraphicalEditPart) editpart, 
+								IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+								IamlDiagramEditorPlugin.ID
+								);
+					
+						try {
+							OperationHistoryFactory.getOperationHistory().execute(command2,
+									new NullProgressMonitor(), null);
+						} catch (ExecutionException e) {
+							IamlDiagramEditorPlugin.getInstance().logError(
+									"Unable to create missing elements", e); //$NON-NLS-1$
+						}
+
 					}
 				}
 

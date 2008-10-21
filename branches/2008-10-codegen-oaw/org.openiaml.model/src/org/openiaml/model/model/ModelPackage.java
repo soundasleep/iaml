@@ -1579,13 +1579,31 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__WIRES = CHAINED_OPERATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__GENERATED_ELEMENTS = CHAINED_OPERATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__OVERRIDDEN = CHAINED_OPERATION_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__NODES = CHAINED_OPERATION_FEATURE_COUNT + 2;
+	int COMPOSITE_OPERATION__NODES = CHAINED_OPERATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Data Edges</b></em>' containment reference list.
@@ -1594,7 +1612,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__DATA_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 3;
+	int COMPOSITE_OPERATION__DATA_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Execution Edges</b></em>' containment reference list.
@@ -1603,7 +1621,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__EXECUTION_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 4;
+	int COMPOSITE_OPERATION__EXECUTION_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -1612,7 +1630,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 5;
+	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>shouldnt properties</b></em>' containment reference list.
@@ -1621,7 +1639,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 6;
+	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
@@ -1630,7 +1648,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 7;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.

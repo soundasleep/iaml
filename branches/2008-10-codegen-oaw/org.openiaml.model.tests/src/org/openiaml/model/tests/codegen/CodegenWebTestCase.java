@@ -38,6 +38,8 @@ import org.openiaml.model.codegen.oaw.CodeGenerationRunner;
  */
 public abstract class CodegenWebTestCase extends WebTestCase {
 	
+	public final String PLUGIN_ID = "org.openiaml.model.tests";
+	
 	private IProject project;
 	private IProgressMonitor monitor = new NullProgressMonitor();
 	
@@ -195,7 +197,7 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 				Thread.sleep(300);
 			}
 		} catch (InterruptedException e) {
-			return new Status(Status.ERROR, "org.openiaml.model.tests", "refresh thread was interrupted", e);
+			return new Status(Status.ERROR, PLUGIN_ID, "refresh thread was interrupted", e);
 		}
 
 		return Status.OK_STATUS;

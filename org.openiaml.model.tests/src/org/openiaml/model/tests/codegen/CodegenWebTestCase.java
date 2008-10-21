@@ -155,7 +155,7 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 		assertTrue(file.exists());		// file should now exist
 		
 		// now we can do the transform
-		return doTransformOAWWorkflow( project.getName() + "/" + tempName, project.getWorkspace().getRoot().getLocation().toString() + "/" + outputDir, monitor);
+		return doTransformOAWWorkflow(file, monitor);
 	}
 
 	
@@ -164,11 +164,11 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	 * a filesystem refresh of the particular project directory,
 	 * and does not stop until the refresh is complete.
 	 */
-	protected IStatus doTransformOAWWorkflow(String filename, String outputDir,
+	protected IStatus doTransformOAWWorkflow(IFile filename,
 			IProgressMonitor monitor) throws CoreException {
 		
 		ICodeGenerator runner = new OawCodeGenerator();		
-		runner.generateCode(filename, outputDir);
+		runner.generateCode(filename);
 		
 		// once generated, we need to refresh the workspace before
 		// we can carry on testing (normally, we would just let Eclipse automatically
@@ -217,10 +217,10 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	 * @return The status of the transform
 	 * @throws IOException 
 	 */
-	protected IStatus doTransformJET(String filename, String outputDir, IProgressMonitor monitor) throws IOException {
+	protected IStatus doTransformJET(IFile filename, IProgressMonitor monitor) throws IOException {
 		
 		ICodeGenerator jet = new JetCodeGenerator(monitor);
-		return jet.generateCode(filename, outputDir);
+		return jet.generateCode(filename);
 		
 	}	
 

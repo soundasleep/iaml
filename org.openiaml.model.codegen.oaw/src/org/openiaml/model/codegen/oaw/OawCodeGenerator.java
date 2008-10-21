@@ -6,6 +6,7 @@ package org.openiaml.model.codegen.oaw;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.openarchitectureware.workflow.WorkflowRunner;
@@ -21,15 +22,13 @@ public class OawCodeGenerator implements ICodeGenerator {
 	/**
 	 * Generate code for a given model file into a given output directory
 	 * 
-	 * @param modelFile
-	 * @param outputDir
 	 */
-	public IStatus generateCode(String modelFile, String outputDir) {
-
+	public IStatus generateCode(IFile file) {
+		
 		String wfFile = "src/workflow/generator.oaw";
 		Map<String,String> properties = new HashMap<String,String>();
-		properties.put("model", modelFile);
-		properties.put("src-gen", outputDir);
+		properties.put("model", file.getFullPath().toString());
+		properties.put("src-gen", file.getProject().getLocation().toString());	// have to get absolute filename for output dir
 		Map<String,Object> slotContents = new HashMap<String,Object>();
 		new WorkflowRunner().run(wfFile,
 			new NullProgressMonitor(), properties, slotContents);

@@ -1,12 +1,17 @@
 package org.openiaml.model.diagram.custom.actions;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.util.Date;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -23,6 +28,7 @@ import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.jet.JetCodeGenerator;
+import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
@@ -92,38 +98,43 @@ public class GenerateCodeAction implements IViewActionDelegate {
 				
 				// output the temporary changed model to an external file
 				// so we can do code generation
-				File tempFile;
-				try {
-					tempFile = File.createTempFile("temp-iaml-gen", ".iaml");
-				} catch (IOException e) {
-					return new Status(Status.ERROR, PLUGIN_ID, "Could not create temporary file.", e);
+				IFile tempFile = null;
+				for (int i = 0; i < 1000; i++) {
+					tempFile = o.getProject().getFile("temp-iaml-gen" + i + ".iaml");
+					if (!tempFile.exists()) {
+						break;
+					}
+				}
+
+				if (tempFile == null || tempFile.exists()) {
+					return new Status(Status.ERROR, PLUGIN_ID, "Could not create temporary file.");
 				}
 				
-				// save to xmi with EMF				
+				// create a temporary file to output to
+				File tempJavaFile = File.createTempFile("temp-iaml", ".iaml");
 				Map<?,?> options = resourceSet.getLoadOptions();
-				try {
-					resource.save(new FileOutputStream(tempFile), options);
-				} catch (FileNotFoundException e) {
-					return new Status(Status.ERROR, PLUGIN_ID, "File not found: " + tempFile, e);
-				} catch (IOException e) {
-					return new Status(Status.ERROR, PLUGIN_ID, "IO Exception", e);
-				}
+				resource.save(new FileOutputStream(tempJavaFile), options);
 				
+				// now load it in as an IFile
+				tempFile.create(new FileInputStream(tempJavaFile), true, monitor);
+		
 				// create code generator instance
-				ICodeGenerator codegen = new JetCodeGenerator(monitor);
-				IStatus status = codegen.generateCode(tempFile.getAbsolutePath(), o.getProject().getName());
+				ICodeGenerator codegen = new OawCodeGenerator();
+				IStatus status = codegen.generateCode(tempFile);
 				
 				// now delete the generated model file
-				if (!tempFile.delete() && status.isOK()) {
-					// return new MultiStatus(PLUGIN_ID, Status.WARNING, new IStatus[] { status }, "Could not delete temporary file: " + modelFile, null);
-					return new Status(Status.WARNING, PLUGIN_ID, "Could not delete temporary file: " + tempFile);
-				}
+				// TODO this would probably go well in a finally block
+				tempFile.delete(false, monitor);
+				tempJavaFile.delete();
 				
 				return status;
 			}
 		} catch (InferenceException e) {
-			// int severity, String pluginId, String message, Throwable exception
 			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed", e);
+		} catch (IOException e) {
+			return new Status(IStatus.ERROR, PLUGIN_ID, "IO exception", e);
+		} catch (CoreException e) {
+			return new Status(IStatus.ERROR, PLUGIN_ID, "Core exception", e);
 		}
 		
 		return null;

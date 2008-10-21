@@ -20,6 +20,9 @@ safeName(model::NamedElement this) :
 safeName(String s) :
 	s.replaceAll("[^A-Za-z0-9]", "_");
 
+safeName(emf::EObject this) :
+	"unexpected eobject " + this;
+
 operationName(model::WireEdgeDestination this) : 
 	"impossible";
 

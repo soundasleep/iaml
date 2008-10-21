@@ -10,39 +10,55 @@
 /* the event handlers are not actually defined here - they have to be defined elsewhere in the page */
 «DEFINE expandEventTriggers FOR model::EventTrigger»
 	«IF name=="edit"»
-		onChange="«EXPAND callOperations FOREACH outEdges» return false;"
+		onChange="«EXPAND callOperations(false) FOREACH outEdges» return false;"
+	«ENDIF»
+«ENDDEFINE»
+
+/* if we are expanding inline a function already */
+«DEFINE expandEventTriggersInline FOR emf::EObject»
+	// cannot expand for non-event object
+«ENDDEFINE»
+
+«DEFINE expandEventTriggersInline FOR model::ContainsEventTriggers»
+	«EXPAND expandEventTriggersInline FOREACH eventTriggers»
+«ENDDEFINE»
+
+«DEFINE expandEventTriggersInline FOR model::EventTrigger»
+	// expanding inline event trigger «name»
+	«IF name=="edit"»
+		«EXPAND callOperations(true) FOREACH outEdges»
 	«ENDIF»
 «ENDDEFINE»
 
 /* default: don't know what to do with a wire */
-«DEFINE callOperations FOR model::WireEdge»
+«DEFINE callOperations(Boolean inline) FOR model::WireEdge»
 	«ERROR "unknown wire edge connected to edit trigger: " + this»
 «ENDDEFINE»
 
 /* run a command with some parameters */
-«DEFINE callOperations FOR model::wires::RunInstanceWire»
-	do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
+«DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire»
+	do_«operationName(to)»(«EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»);
 «ENDDEFINE»
 
 /* ditto: check or error? */
-«DEFINE callOperationParameters FOR model::WireEdge»
+«DEFINE callOperationParameters(Boolean inline) FOR model::WireEdge»
 	«ERROR "unknown in edge: " + this»
 «ENDDEFINE»
 
 /* making sure that the parameter wire is from a parameter... */
-«DEFINE callOperationParameters FOR model::wires::ParameterWire»
-	«EXPAND callOperationParametersSource FOR from»
+«DEFINE callOperationParameters(Boolean inline) FOR model::wires::ParameterWire»
+	«EXPAND callOperationParametersSource(inline) FOR from»
 «ENDDEFINE»
 
 /* ditto: check or error? */
-«DEFINE callOperationParametersSource FOR model::WireEdgesSource»
+«DEFINE callOperationParametersSource(Boolean inline) FOR model::WireEdgesSource»
 	«ERROR "unknown parameter wire source: " + this»
 «ENDDEFINE»
 
 /* what is the runtime value of the parameter? */
-«DEFINE callOperationParametersSource FOR model::ApplicationElementProperty»
+«DEFINE callOperationParametersSource(Boolean inline) FOR model::ApplicationElementProperty»
 	«IF name == "fieldValue"»
-		this.value
+		«IF !inline»this«ELSE»document.getElementById('«safeName(eContainer)»')«ENDIF».value
 	«ELSE»
 		«ERROR "unknown application element property type: " + name»
 	«ENDIF»

@@ -1,25 +1,51 @@
-«IMPORT metamodel»
+«IMPORT iaml»
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE main FOR Model»
-	«EXPAND javaClass FOREACH entities()»
+«DEFINE main FOR model::InternetApplication»
+	«EXPAND expandPage FOREACH children»
+	
+	«REM»create a sitemap«ENDREM»
+	«FILE "sitemap.html"»
+		<html>
+		<head>
+			<title>sitemap</title>
+		</head>
+		
+		<body>
+		<h1>Sitemap</h1>
+		<ol>
+			«EXPAND expandSitemapPage FOREACH children»
+		</ol>
+		</body>
+		</html>
+	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE javaClass FOR Entity»
-	«FILE name+".java"»
-		public class «name» {
-			«FOREACH features AS f»
-				private «f.type.name» «f.name»;
-				
-				public void «f.setter()»(«f.type.name» «f.name») {
-					this.«f.name» = «f.name»;
-				}
-				
-				public «f.type.name» «f.getter()»() {
-					return «f.name»;
-				}
-			«ENDFOREACH»
-		}
+/* default = nothing */
+«DEFINE expandSitemapPage FOR model::ApplicationElement»
+«ENDDEFINE»
+
+«DEFINE expandSitemapPage FOR model::visual::Page»
+<li>
+	<a href="«id».html">«name»</a>
+</li>
+«ENDDEFINE»
+
+/* default = nothing */
+«DEFINE expandPage FOR model::ApplicationElement»
+«ENDDEFINE»
+
+«DEFINE expandPage FOR model::visual::Page»
+	«FILE id+".html"»
+		<html>
+		<head>
+			<title>«pageTitle()»</title>
+		</head>
+		
+		<body>
+		
+		</body>
+		</html>
 	«ENDFILE»
 «ENDDEFINE»

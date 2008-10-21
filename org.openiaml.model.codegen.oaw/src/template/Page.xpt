@@ -71,10 +71,15 @@
 
 «DEFINE expandOperation FOR model::CompositeOperation»
 	/* composite operation */
+	var running_«safeName()» = false;
 	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "») {
 		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
 		// operation: «name»
-		«EXPAND doExecutionFlow FOR startNode()»
+		if (running_«safeName()» == false) {
+			running_«safeName()» = true;		// prevent loops
+			«EXPAND doExecutionFlow FOR startNode()»
+			running_«safeName()» = false;
+		}
 	}
 «ENDDEFINE»
 
@@ -114,6 +119,12 @@
 	«IF name == "setPropertyToValue"»
 		«REM»outflowTarget == inflowTarget«ENDREM»
 		«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from»;
+		
+		«REM»
+			now we expand all the event triggers for the source element that contains the fieldValue: 
+			if any of them have an eventTrigger, they should be called if necessary
+		«ENDREM»
+		«EXPAND EventTrigger::expandEventTriggersInline FOR outFlows.first().to.eContainer»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
 		«operationName()»(/* todo: parameters */);

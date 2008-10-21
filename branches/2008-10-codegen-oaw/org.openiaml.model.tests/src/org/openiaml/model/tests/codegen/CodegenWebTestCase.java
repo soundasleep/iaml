@@ -27,7 +27,9 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jet.JET2Platform;
-import org.openiaml.model.codegen.oaw.CodeGenerationRunner;
+import org.openiaml.model.codegen.ICodeGenerator;
+import org.openiaml.model.codegen.jet.JetCodeGenerator;
+import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 
 /**
  * The JET/Junit test framework now manages everything for you. It will
@@ -165,12 +167,14 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	protected IStatus doTransformOAWWorkflow(String filename, String outputDir,
 			IProgressMonitor monitor) throws CoreException {
 		
-		CodeGenerationRunner runner = new CodeGenerationRunner();		
+		ICodeGenerator runner = new OawCodeGenerator();		
 		runner.generateCode(filename, outputDir);
 		
-		// once generated, we need to refresh the workspace
-		// we need to *force* refresh the workspace
+		// once generated, we need to refresh the workspace before
+		// we can carry on testing (normally, we would just let Eclipse automatically
+		// refresh the resources)
 		
+		// we need to *force* refresh the workspace
 		class HaltProgressMonitor extends NullProgressMonitor {
 			@Override
 			public void setCanceled(boolean cancelled) {
@@ -214,42 +218,11 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	 * @throws IOException 
 	 */
 	protected IStatus doTransformJET(String filename, String outputDir, IProgressMonitor monitor) throws IOException {
-		File f = new File(filename);
-		assertTrue("file " + filename + " exists", f.exists());
-		assertTrue("file " + filename + " can be read", f.canRead());
-
-		if (!(f.exists() && f.canRead()))
-			throw new IOException("Cannot read file " + filename);
-		String fileContents = openFile(f);
 		
-		Map<String,Object> variables = new HashMap<String,Object>();
+		ICodeGenerator jet = new JetCodeGenerator(monitor);
+		return jet.generateCode(filename, outputDir);
 		
-		// we need to set this parameter ourselves
-		variables.put("org.eclipse.jet.resource.project.name", outputDir);
-		// set any other parameters here
-		
-		// run the transformation on a certain JET plugin, loading the data as XML
-		// (although the JET plugin should define the real loader)
-		return JET2Platform.runTransformOnString("org.openiaml.model.codegen.jet", 
-				fileContents, "xml", variables, monitor);
 	}	
-
-	/**
-	 * Helper method: open a file and return its entire contents as a string
-	 * 
-	 * @param f The file to read
-	 * @return The contents of the file
-	 * @throws IOException If the file could not be opened
-	 */
-	private String openFile(File f) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(f));
-		StringBuffer sb = new StringBuffer();
-		String s = null;
-		while ((s = br.readLine()) != null) {
-			sb.append(s);
-		}
-		return sb.toString();
-	}
 
 	/**
 	 * @return the project

@@ -1,6 +1,9 @@
 package org.openiaml.model.diagram.custom.actions;
 
-import java.util.HashMap;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -13,12 +16,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.jet.JET2Platform;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
+import org.openiaml.model.codegen.ICodeGenerator;
+import org.openiaml.model.codegen.jet.JetCodeGenerator;
 import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
@@ -56,7 +60,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 					if (!status.isOK()) {
 						// TODO remove this reference to the plugin and remove the reference in plugin.xml
 						IamlDiagramEditorPlugin.getInstance().logError(
-								"Could not generate code for " + o, status.getException()); //$NON-NLS-1$
+								"Could not generate code for " + o + ": " + status.getMessage(), status.getException()); //$NON-NLS-1$
 					}
 				}
 			}
@@ -85,21 +89,47 @@ public class GenerateCodeAction implements IViewActionDelegate {
 					CreateMissingElements ce = new CreateMissingElements(handler);
 					ce.create(model);
 				}
-	
-				Map<String,Object> variables = new HashMap<String,Object>();
 				
-				// we have to set this manually as well
-				variables.put("org.eclipse.jet.resource.project.name", o.getProject().getName());
+				// output the temporary changed model to an external file
+				// so we can do code generation
+				File tempFile;
+				try {
+					tempFile = File.createTempFile("temp-iaml-gen", ".iaml");
+				} catch (IOException e) {
+					return new Status(Status.ERROR, PLUGIN_ID, "Could not create temporary file.", e);
+				}
 				
-				return JET2Platform.runTransformOnObject("org.openiaml.model.codegen.jet", resource, variables, monitor);
+				// save to xmi with EMF				
+				Map<?,?> options = resourceSet.getLoadOptions();
+				try {
+					resource.save(new FileOutputStream(tempFile), options);
+				} catch (FileNotFoundException e) {
+					return new Status(Status.ERROR, PLUGIN_ID, "File not found: " + tempFile, e);
+				} catch (IOException e) {
+					return new Status(Status.ERROR, PLUGIN_ID, "IO Exception", e);
+				}
+				
+				// create code generator instance
+				ICodeGenerator codegen = new JetCodeGenerator(monitor);
+				IStatus status = codegen.generateCode(tempFile.getAbsolutePath(), o.getProject().getName());
+				
+				// now delete the generated model file
+				if (!tempFile.delete() && status.isOK()) {
+					// return new MultiStatus(PLUGIN_ID, Status.WARNING, new IStatus[] { status }, "Could not delete temporary file: " + modelFile, null);
+					return new Status(Status.WARNING, PLUGIN_ID, "Could not delete temporary file: " + tempFile);
+				}
+				
+				return status;
 			}
 		} catch (InferenceException e) {
 			// int severity, String pluginId, String message, Throwable exception
-			return new Status(IStatus.ERROR, "org.openiaml.model.diagram.custom", "Inference failed", e);
+			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed", e);
 		}
 		
 		return null;
 	}
+	
+	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
 
 	Object[] selection;
 

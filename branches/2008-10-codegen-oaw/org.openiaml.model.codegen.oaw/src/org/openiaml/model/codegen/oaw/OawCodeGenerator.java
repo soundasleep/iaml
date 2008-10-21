@@ -6,14 +6,17 @@ package org.openiaml.model.codegen.oaw;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.monitor.NullProgressMonitor;
+import org.openiaml.model.codegen.ICodeGenerator;
 
 /**
  * @author jmwright
  *
  */
-public class CodeGenerationRunner {
+public class OawCodeGenerator implements ICodeGenerator {
 	
 	/**
 	 * Generate code for a given model file into a given output directory
@@ -21,7 +24,7 @@ public class CodeGenerationRunner {
 	 * @param modelFile
 	 * @param outputDir
 	 */
-	public void generateCode(String modelFile, String outputDir) {
+	public IStatus generateCode(String modelFile, String outputDir) {
 
 		String wfFile = "src/workflow/generator.oaw";
 		Map<String,String> properties = new HashMap<String,String>();
@@ -30,6 +33,8 @@ public class CodeGenerationRunner {
 		Map<String,Object> slotContents = new HashMap<String,Object>();
 		new WorkflowRunner().run(wfFile,
 			new NullProgressMonitor(), properties, slotContents);
+		
+		return Status.OK_STATUS;
 			
 	}
 }

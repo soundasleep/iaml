@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -34,8 +35,9 @@ public class JetCodeGenerator implements ICodeGenerator {
 	 * @see org.openiaml.model.codegen.ICodeGenerator#generateCode(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public IStatus generateCode(String filename, String outputDir) {
+	public IStatus generateCode(IFile file) {
 
+		/*
 		File f = new File(filename);
 
 		if (!(f.exists() && f.canRead()))
@@ -49,6 +51,7 @@ public class JetCodeGenerator implements ICodeGenerator {
 		
 		Map<String,Object> variables = new HashMap<String,Object>();
 		
+		/*
 		// we need to set this parameter ourselves
 		variables.put("org.eclipse.jet.resource.project.name", outputDir);
 		// set any other parameters here
@@ -57,6 +60,12 @@ public class JetCodeGenerator implements ICodeGenerator {
 		// (although the JET plugin should define the real loader)
 		return JET2Platform.runTransformOnString("org.openiaml.model.codegen.jet", 
 				fileContents, "xml", variables, monitor);
+				*/
+		
+		// can we do this automatically now?
+		// TODO check and remove comment block above
+		Map<String,Object> variables = new HashMap<String,Object>();
+		return JET2Platform.runTransformOnResource("org.openiaml.model.codegen.jet", file, variables, monitor);
 
 	}
 

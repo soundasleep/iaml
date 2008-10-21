@@ -25,17 +25,11 @@ public class JetCodeGenerator implements ICodeGenerator {
 	
 	public static final String PLUGIN_ID = "org.openiaml.model.codegen.jet";
 	
-	private IProgressMonitor monitor;
-
-	public JetCodeGenerator(IProgressMonitor monitor) {
-		this.monitor = monitor;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.codegen.ICodeGenerator#generateCode(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public IStatus generateCode(IFile file) {
+	public IStatus generateCode(IFile file, IProgressMonitor monitor) {
 
 		/*
 		File f = new File(filename);

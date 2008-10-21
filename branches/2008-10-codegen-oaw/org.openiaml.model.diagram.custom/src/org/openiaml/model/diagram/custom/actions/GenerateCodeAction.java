@@ -120,7 +120,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 		
 				// create code generator instance
 				ICodeGenerator codegen = new OawCodeGenerator();
-				IStatus status = codegen.generateCode(tempFile);
+				IStatus status = codegen.generateCode(tempFile, monitor);
 				
 				// now delete the generated model file
 				// TODO this would probably go well in a finally block

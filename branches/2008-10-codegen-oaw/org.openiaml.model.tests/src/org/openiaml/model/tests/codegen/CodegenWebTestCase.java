@@ -168,7 +168,7 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 			IProgressMonitor monitor) throws CoreException {
 		
 		ICodeGenerator runner = new OawCodeGenerator();		
-		runner.generateCode(filename);
+		runner.generateCode(filename, monitor);
 		
 		// once generated, we need to refresh the workspace before
 		// we can carry on testing (normally, we would just let Eclipse automatically
@@ -219,8 +219,8 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	 */
 	protected IStatus doTransformJET(IFile filename, IProgressMonitor monitor) throws IOException {
 		
-		ICodeGenerator jet = new JetCodeGenerator(monitor);
-		return jet.generateCode(filename);
+		ICodeGenerator jet = new JetCodeGenerator();
+		return jet.generateCode(filename, monitor);
 		
 	}	
 

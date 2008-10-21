@@ -4,6 +4,7 @@
 package org.openiaml.model.codegen;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 
 /**
@@ -20,6 +21,6 @@ public interface ICodeGenerator {
 	 * @param modelFile
 	 * @param outputDir
 	 */
-	public IStatus generateCode(IFile modelFile);
+	public IStatus generateCode(IFile modelFile, IProgressMonitor monitor);
 	
 }

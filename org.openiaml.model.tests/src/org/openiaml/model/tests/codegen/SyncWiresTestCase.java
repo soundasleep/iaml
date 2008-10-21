@@ -6,7 +6,6 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.tests.JetWebTestCase;
 
 /**
  * Test SyncWires
@@ -14,7 +13,7 @@ import org.openiaml.model.tests.JetWebTestCase;
  * @author jmwright
  *
  */
-public class SyncWiresTestCase extends JetWebTestCase {
+public class SyncWiresTestCase extends CodegenWebTestCase {
 	
 	protected void setUp() throws Exception {
 		super.setUp();

@@ -15,9 +15,6 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.StopNode;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
-
-import ca.ecliptical.emf.xpath.EMFXPath;
 
 /**
  * Tests inference of sync wires.

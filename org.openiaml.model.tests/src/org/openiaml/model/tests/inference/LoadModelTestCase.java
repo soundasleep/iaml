@@ -24,6 +24,9 @@ public class LoadModelTestCase extends InferenceTestCase {
 		assertNotNull(model);
 		
 		root = (InternetApplication) model;
+
+		// write out this inferred model for reference
+		saveInferredModel();
 	}
 
 	protected void tearDown() throws Exception {

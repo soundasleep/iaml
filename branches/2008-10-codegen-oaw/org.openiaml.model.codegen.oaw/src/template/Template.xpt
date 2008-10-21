@@ -34,6 +34,6 @@
 
 «DEFINE expandSitemapPage FOR model::visual::Page»
 <li>
-	<a href="«id».html">«name»</a>
+	<a href="«safeName(id)».html">«name»</a>
 </li>
 «ENDDEFINE»

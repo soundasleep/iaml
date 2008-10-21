@@ -397,7 +397,7 @@ public class CreateMissingElements {
 			markAsGenerated(from, flow2);
 		}
 		
-		return null;
+		return operation;
 	}
 
 	private ExecutionEdge connectExecutionEdge(CompositeOperation container,

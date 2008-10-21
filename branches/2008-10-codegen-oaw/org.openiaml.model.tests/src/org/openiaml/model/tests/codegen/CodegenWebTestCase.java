@@ -65,7 +65,7 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	
 	/**
 	 * Create a new project in our testing environment,
-	 * allowing JET to output there.
+	 * allowing our code generator to output there.
 	 * 
 	 * TODO it might be helpful to *copy* the desired
 	 * model file directly into this new project -- this way,

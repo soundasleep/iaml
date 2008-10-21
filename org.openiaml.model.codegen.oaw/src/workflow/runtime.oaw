@@ -7,9 +7,7 @@
 	<!-- set up EMF for standalone execution -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
 		<platformUri value=".."/>
-       	<!-- doesn't load sub packages: <registerEcoreFile value="src/metamodel/iaml.ecore"/> -->
-       	<registerGeneratedEPackage value="org.openiaml.model.model.ModelPackage" />
-       	<!-- not needed: <registerGeneratedEPackage value="org.openiaml.model.model.visual.VisualPackage" /> -->
+       	<registerGeneratedEPackage value="org.openiaml.model.model.ModelPackage" /><!-- loads subpackages -->
 	</bean>
 
 	<!-- load model and store it in slot 'model' -->

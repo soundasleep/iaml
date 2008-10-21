@@ -12,12 +12,15 @@
 		<head>
 			<title>«pageTitle()»</title>
 			<link rel="stylesheet" type="text/css" href="default.css" />
+			<script language="Javascript">
+				«EXPAND expandOperations FOR this»
+			</script>
 		</head>
 		
 		<body>
 		<h1>«pageTitle()»</h1>
 		
-		<form id="unnecessary_form_because_of_jwebunit">
+		<form id="unnecessary_form_because_of_jwebunit_or_html_standard">
 		«EXPAND expandChild FOREACH children»
 		</form>
 		
@@ -30,7 +33,7 @@
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputForm»
-	<form id="«id»">
+	<form id="«id»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers»>
 		<h2>«formName()»</h2>
 		
 		«EXPAND expandChild FOREACH children»
@@ -44,7 +47,62 @@
 	<label>
 		«textFieldName()»
 		
-		<input type="text" id="«id»" name="«id»">
+		<input type="text" id="«id»" name="«id»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers»>
 	</label>
 	</div>
+«ENDDEFINE»
+
+/* expand out the operations for the page */
+«DEFINE expandOperations FOR model::ContainsOperations»
+	«EXPAND expandOperation FOREACH operations»
+«ENDDEFINE»
+
+«DEFINE expandOperations FOR model::ApplicationElementContainer»
+	«EXPAND expandOperation FOREACH operations»
+	«EXPAND expandOperations FOREACH children»
+«ENDDEFINE»
+
+«DEFINE expandOperation FOR model::Operation»
+	/* simple operation */
+	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "») {
+		alert("«name»");
+	}
+«ENDDEFINE»
+
+«DEFINE expandOperation FOR model::CompositeOperation»
+	/* composite operation */
+	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "») {
+		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
+		alert("«name»");
+		«EXPAND doExecutionFlow FOR startNode()»
+	}
+«ENDDEFINE»
+
+«DEFINE expandParameters FOR model::Parameter»
+	«safeName()»
+«ENDDEFINE»
+
+/* I don't know how in JS we are supposed to handle multiple out edges yet... but we'll get there ;) */
+«DEFINE doExecutionFlow FOR model::operations::StartNode»
+	// flow starts here
+	«FOREACH outExecutions AS e»
+		«EXPAND doExecutionFlowNext FOR e.to»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE doExecutionFlow FOR model::ActivityNode»
+	// nothing for an activity node
+«ENDDEFINE»
+
+/* an edge that is the end (both StartNode and FinishNode also fall into this) */
+«DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination»
+	// do nothing
+«ENDDEFINE»
+
+/* a chained operation: carry on */
+«DEFINE doExecutionFlowNext FOR model::ChainedOperation»
+	alert("operation «name»");
+	«FOREACH outExecutions AS e»
+		«EXPAND doExecutionFlowNext FOR e.to»
+	«ENDFOREACH»
 «ENDDEFINE»

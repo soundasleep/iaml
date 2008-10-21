@@ -1,0 +1,48 @@
+«IMPORT iaml»
+
+/* expand EventTriggers when they are attached to a child. */
+/* perhaps a better way of doing this would be to create a secondary model (using model extensions)
+   which is then used to generate the application more straightforward. */
+/* or even iaml --> [phpModel] --> phpOutput, although this reduces little complexity */
+«EXTENSION template::GeneratorExtensions»
+
+/* we are in an input element, and we have to register event handlers */
+/* the event handlers are not actually defined here - they have to be defined elsewhere in the page */
+«DEFINE expandEventTriggers FOR model::EventTrigger»
+	«IF name=="edit"»
+		onChange="«EXPAND callOperations FOREACH wires» return false;"
+	«ENDIF»
+«ENDDEFINE»
+
+/* default: don't know what to do with a wire */
+«DEFINE callOperations FOR model::WireEdge»
+«ENDDEFINE»
+
+/* run a command with some parameters */
+«DEFINE callOperations FOR model::wires::RunInstanceWire»
+	do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
+«ENDDEFINE»
+
+/* ditto: check or error? */
+«DEFINE callOperationParameters FOR model::WireEdge»
+	«ERROR "unknown in edge: " + this»
+«ENDDEFINE»
+
+/* making sure that the parameter wire is from a parameter... */
+«DEFINE callOperationParameters FOR model::wires::ParameterWire»
+	«EXPAND callOperationParametersSource FOR from»
+«ENDDEFINE»
+
+/* ditto: check or error? */
+«DEFINE callOperationParametersSource FOR model::WireEdgesSource»
+	«ERROR "unknown parameter wire source: " + this»
+«ENDDEFINE»
+
+/* what is the runtime value of the parameter? */
+«DEFINE callOperationParametersSource FOR model::ApplicationElementProperty»
+	«IF name == "fieldValue"»
+		this.value
+	«ELSE»
+		«ERROR "unknown application element property type: " + name»
+	«ENDIF»
+«ENDDEFINE»

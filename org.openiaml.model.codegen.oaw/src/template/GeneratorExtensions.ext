@@ -13,3 +13,16 @@ formName(model::visual::InputForm this) :
 	
 textFieldName(model::visual::InputTextField this) :
 	if (name == null || name == "") then "(untitled field)" else name;
+	
+safeName(model::NamedElement this) :
+	id.replaceAll("[^A-Za-z0-9]", "_");
+
+operationName(model::WireEdgeDestination this) : 
+	"impossible";
+
+operationName(model::Operation this) :
+	safeName(this);
+
+/* get the start node for an operation */
+startNode(model::CompositeOperation this) :
+	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );

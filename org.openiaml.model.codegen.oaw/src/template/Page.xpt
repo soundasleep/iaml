@@ -7,7 +7,7 @@
 «ENDDEFINE»
 
 «DEFINE expandPage FOR model::visual::Page»
-	«FILE "output/"+id+".html"»
+	«FILE "output/"+safeName(id)+".html"»
 		<html>
 		<head>
 			<title>«pageTitle()»</title>
@@ -33,7 +33,7 @@
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputForm»
-	<form id="«id»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers»>
+	<form id="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers»>
 		<h2>«formName()»</h2>
 		
 		«EXPAND expandChild FOREACH children»
@@ -47,7 +47,7 @@
 	<label>
 		«textFieldName()»
 		
-		<input type="text" id="«id»" name="«id»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers»>
+		<input type="text" id="«safeName(id)»" name="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers»>
 	</label>
 	</div>
 «ENDDEFINE»
@@ -65,7 +65,7 @@
 «DEFINE expandOperation FOR model::Operation»
 	/* simple operation */
 	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "») {
-		alert("«name»");
+		alert("simple operation: «name»");
 	}
 «ENDDEFINE»
 
@@ -73,7 +73,7 @@
 	/* composite operation */
 	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "») {
 		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
-		alert("«name»");
+		// operation: «name»
 		«EXPAND doExecutionFlow FOR startNode()»
 	}
 «ENDDEFINE»
@@ -96,13 +96,44 @@
 
 /* an edge that is the end (both StartNode and FinishNode also fall into this) */
 «DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination»
-	// do nothing
+	// do nothing «this»
 «ENDDEFINE»
 
 /* a chained operation: carry on */
 «DEFINE doExecutionFlowNext FOR model::ChainedOperation»
-	alert("operation «name»");
+	// chained operation «name»
+	«EXPAND expandOperationContents FOR this»
 	«FOREACH outExecutions AS e»
 		«EXPAND doExecutionFlowNext FOR e.to»
 	«ENDFOREACH»
+«ENDDEFINE»
+
+/* expand the definition of an operation, assumed to be called as part of an existing function call */
+«DEFINE expandOperationContents FOR model::Operation»
+	«REM»special operation names«ENDREM»
+	«IF name == "setPropertyToValue"»
+		«REM»outflowTarget == inflowTarget«ENDREM»
+		«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from»;
+	«ELSE»
+		«REM»an existing function on this page«ENDREM»
+		«operationName()»(/* todo: parameters */);
+	«ENDIF»
+«ENDDEFINE»
+
+/* data flows out */
+«DEFINE setPropertyToValueOutflowTarget FOR model::DataFlowEdgeDestination»
+	«ERROR "unknown data flow edge destination for setPropertyToValue: " + this»
+«ENDDEFINE»
+
+«DEFINE setPropertyToValueOutflowTarget FOR model::ApplicationElementProperty»
+	document.getElementById('«safeName(( (model::NamedElement) eContainer).id)»').value
+«ENDDEFINE»
+
+/* data flows in */
+«DEFINE setPropertyToValueInflowTarget FOR model::DataFlowEdgesSource»
+	«ERROR "unknown data flow edge source for setPropertyToValue: " + this»
+«ENDDEFINE»
+
+«DEFINE setPropertyToValueInflowTarget FOR model::Parameter»
+	«safeName()»
 «ENDDEFINE»

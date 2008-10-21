@@ -10,12 +10,13 @@
 /* the event handlers are not actually defined here - they have to be defined elsewhere in the page */
 «DEFINE expandEventTriggers FOR model::EventTrigger»
 	«IF name=="edit"»
-		onChange="«EXPAND callOperations FOREACH wires» return false;"
+		onChange="«EXPAND callOperations FOREACH outEdges» return false;"
 	«ENDIF»
 «ENDDEFINE»
 
 /* default: don't know what to do with a wire */
 «DEFINE callOperations FOR model::WireEdge»
+	«ERROR "unknown wire edge connected to edit trigger: " + this»
 «ENDDEFINE»
 
 /* run a command with some parameters */

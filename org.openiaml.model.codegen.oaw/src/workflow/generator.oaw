@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <workflow>
 	<!-- using a local file for testing generation locally -->
-	<property name="model" value="org.openiaml.model.codegen.oaw/src/sync-wires.complete.iaml" />
+	<property name="model" value="org.openiaml.model.codegen.oaw/src/SyncWireTestCase.iaml" />
 	<property name="src-gen" value="src-gen" />
 	
 	<!-- set up EMF for standalone execution -->

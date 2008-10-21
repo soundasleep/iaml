@@ -1,10 +1,6 @@
-import metamodel;
+import iaml;
 
 extension metamodel::Extensions reexport;
 
-getter(Feature this) :
-	"get"+name.toFirstUpper();
-	
-setter(Feature this) :
-	"set"+name.toFirstUpper();
-	
+pageTitle(model::visual::Page this) :
+	name.toFirstUpper();

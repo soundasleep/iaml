@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <workflow>
-	<property name="model" value="org.openiaml.model.codegen.oaw/src/Model.xmi" />
+	<property name="model" value="org.openiaml.model.codegen.oaw/src/simple.iaml" />
 	<property name="src-gen" value="src-gen" />
 	
 	<!-- set up EMF for standalone execution -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
 		<platformUri value=".."/>
+       	<!-- doesn't load sub packages: <registerEcoreFile value="src/metamodel/iaml.ecore"/> -->
+       	<registerGeneratedEPackage value="org.openiaml.model.model.ModelPackage" />
+       	<!-- not needed: <registerGeneratedEPackage value="org.openiaml.model.model.visual.VisualPackage" /> -->
 	</bean>
 
 	<!-- load model and store it in slot 'model' -->
@@ -14,7 +17,7 @@
 		<modelSlot value="model" />
 	</component>
 
-	<!-- check model -->
+	<!-- check model (and load metamodel) -->
 	<component class="oaw.check.CheckComponent">
 		<metaModel id="mm"
 			class="org.eclipse.m2t.type.emf.EmfRegistryMetaModel"/>
@@ -22,13 +25,14 @@
 		<emfAllChildrenSlot value="model" />
 	</component>
 
-	<!--  generate code -->
+	<!-- generate code -->
 	<component class="org.openarchitectureware.xpand2.Generator">
 		<metaModel idRef="mm"/>
 		<expand
 			value="template::Template::main FOR model" />
 		<outlet path="${src-gen}" >
-			<postprocessor class="org.openarchitectureware.xpand2.output.JavaBeautifier" />
+			<!-- postprocessor class="org.openarchitectureware.xpand2.output.JavaBeautifier" / -->
 		</outlet>
 	</component>
+
 </workflow>

@@ -1,7 +1,4 @@
-import metamodel;
+import iaml;
 
-Model model(Type this) :
+model::InternetApplication parent(model::ApplicationElement this) :
 	eContainer;
-	
-List[Entity] entities(Model this) :
-	types.typeSelect(Entity);

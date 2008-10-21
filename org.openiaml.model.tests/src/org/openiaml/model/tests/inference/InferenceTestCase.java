@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -20,6 +18,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.tests.codegen.CodegenWebTestCase;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -27,7 +26,7 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  * @author jmwright
  *
  */
-public abstract class InferenceTestCase extends TestCase {
+public abstract class InferenceTestCase extends CodegenWebTestCase {
 
 	protected InternetApplication root;
 	protected Resource resource;
@@ -98,10 +97,12 @@ public abstract class InferenceTestCase extends TestCase {
 	 * 
 	 * @throws FileNotFoundException
 	 * @throws IOException
+	 * @returns the generated model file
 	 */
-	protected void saveInferredModel() throws FileNotFoundException, IOException {
+	protected File saveInferredModel() throws FileNotFoundException, IOException {
 		File tempJavaFile = new File("infer-output/" + this.getClass().getSimpleName() + ".iaml");
 		Map<?,?> options = resource.getResourceSet().getLoadOptions();
 		resource.save(new FileOutputStream(tempJavaFile), options);
+		return tempJavaFile;
 	}
 }

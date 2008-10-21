@@ -2,5 +2,9 @@ import iaml;
 
 extension metamodel::Extensions reexport;
 
+pageTitle(model::InternetApplication this) :
+	if name == null || name == "" then "(untitled application)" else name.toFirstUpper();
+
 pageTitle(model::visual::Page this) :
-	name.toFirstUpper();
+	if name == null || name == "" then id else name;
+	

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d2918ebce.326">
+  <children xsi:type="iaml.visual:Page" id="visual.11d2918ec99.16e" name="page1" outEdges="wires.11d2918eca9.159">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d2918eca9.159" from="visual.11d2918ec99.16e" to="visual.11d2918ec99.16f" name="sync1"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.17c" name="text1" generatedElements="model.11d2918ebce.57c"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.17d" name="text2" generatedElements="model.11d2918ebce.57d"/>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.11d2918ec99.16f" name="page2" outEdges="wires.11d2918eca9.15a" inEdges="wires.11d2918eca9.159">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d2918eca9.15a" from="visual.11d2918ec99.16f" to="visual.11d2918ec99.170" name="sync2"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.19c" name="text1" generatedElements="model.11d2918ebce.57e"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.19d" name="text3" generatedElements="model.11d2918ebce.57f"/>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.11d2918ec99.170" name="page3" outEdges="wires.11d2918eca9.15b" inEdges="wires.11d2918eca9.15a">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d2918eca9.15b" from="visual.11d2918ec99.170" to="visual.11d2918ec99.258" name="sync3"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.1c9" name="text1" generatedElements="model.11d2918ebce.355">
+      <properties generatedBy="visual.11d2918ec99.1c9" isGenerated="true" id="model.11d2918ebce.355" name="fieldValue"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.1ca" name="text3" outEdges="wires.11d2918eca9.f2" generatedElements="model.11d2918ebce.356 model.11d2918ebce.386 model.11d2918ebce.388 model.11d2918ebce.38a model.11d2918ebce.38b">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d2918eca9.f8" generatedBy="visual.11d2918ec99.1ca" isGenerated="true" id="model.11d2918ebce.386" name="update" generatedElements="model.11d2918ebce.387 model.11d2918ebce.394 model.11d2918ebce.3e3 model.11d2918ebce.44d model.11d2918ebce.4d2 model.11d2918ebce.581">
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.386" isGenerated="true" id="model.11d2918ebce.387" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.386" isGenerated="true" id="model.11d2918ebce.394" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.386" isGenerated="true" id="model.11d2918ebce.3e3" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.386" isGenerated="true" id="model.11d2918ebce.44d" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.386" isGenerated="true" id="model.11d2918ebce.4d2" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.386" isGenerated="true" id="model.11d2918ebce.581" name="setPropertyToValue"/>
+      </operations>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d2918eca9.f6" generatedBy="visual.11d2918ec99.1ca" isGenerated="true" id="model.11d2918ebce.388" name="refresh" generatedElements="model.11d2918ebce.389 model.11d2918ebce.395 model.11d2918ebce.3e4 model.11d2918ebce.44e model.11d2918ebce.4d3 model.11d2918ebce.582">
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.388" isGenerated="true" id="model.11d2918ebce.389" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.388" isGenerated="true" id="model.11d2918ebce.395" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.388" isGenerated="true" id="model.11d2918ebce.3e4" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.388" isGenerated="true" id="model.11d2918ebce.44e" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.388" isGenerated="true" id="model.11d2918ebce.4d3" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.388" isGenerated="true" id="model.11d2918ebce.582" name="setPropertyToValue"/>
+      </operations>
+      <eventTriggers generatedBy="visual.11d2918ec99.1ca" isGenerated="true" id="model.11d2918ebce.38a" name="edit" outEdges="wires.11d2918eca9.f5">
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11d2918eca9.f2" isGenerated="true" id="wires.11d2918eca9.f5" from="model.11d2918ebce.38a" to="model.11d2918ebce.38c" name="run"/>
+      </eventTriggers>
+      <eventTriggers generatedBy="visual.11d2918ec99.1ca" isGenerated="true" id="model.11d2918ebce.38b" name="change" outEdges="wires.11d2918eca9.f7">
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11d2918eca9.f2" isGenerated="true" id="wires.11d2918eca9.f7" from="model.11d2918ebce.38b" to="model.11d2918ebce.38f" name="run"/>
+      </eventTriggers>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d2918eca9.f2" from="visual.11d2918ec99.1ca" to="visual.11d2918ec99.225" name="syncBridge" generatedElements="wires.11d2918eca9.f5 wires.11d2918eca9.f7 wires.11d2918eca9.f6 model.11d2918ebce.580"/>
+      <properties generatedBy="visual.11d2918ec99.1ca" isGenerated="true" id="model.11d2918ebce.356" name="fieldValue"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.1cb" name="text2" generatedElements="model.11d2918ebce.357">
+      <properties generatedBy="visual.11d2918ec99.1cb" isGenerated="true" id="model.11d2918ebce.357" name="fieldValue"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.225" name="newtext" inEdges="wires.11d2918eca9.f2" generatedElements="model.11d2918ebce.38c model.11d2918ebce.38f model.11d2918ebce.392 model.11d2918ebce.393 model.11d2918ebce.583">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d2918eca9.f5" generatedBy="visual.11d2918ec99.225" isGenerated="true" id="model.11d2918ebce.38c" name="update" generatedElements="model.11d2918ebce.584 model.11d2918ebce.585">
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.38e" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.398" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.3e7" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.451" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.4d6" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.38c" isGenerated="true" id="model.11d2918ebce.585" name="setPropertyToValue"/>
+      </operations>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d2918eca9.f7" generatedBy="visual.11d2918ec99.225" isGenerated="true" id="model.11d2918ebce.38f" name="refresh" generatedElements="model.11d2918ebce.586 model.11d2918ebce.587">
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.391" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.39a" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.3e9" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.453" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.4d8" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.38f" isGenerated="true" id="model.11d2918ebce.587" name="setPropertyToValue"/>
+      </operations>
+      <eventTriggers generatedBy="visual.11d2918ec99.225" isGenerated="true" id="model.11d2918ebce.392" name="edit" outEdges="wires.11d2918eca9.f8">
+        <wires xsi:type="iaml.wires:RunInstanceWire" isGenerated="true" id="wires.11d2918eca9.f8" from="model.11d2918ebce.392" to="model.11d2918ebce.386" name="run"/>
+      </eventTriggers>
+      <eventTriggers generatedBy="visual.11d2918ec99.225" isGenerated="true" id="model.11d2918ebce.393" name="change" outEdges="wires.11d2918eca9.f6">
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11d2918eca9.f2" isGenerated="true" id="wires.11d2918eca9.f6" from="model.11d2918ebce.393" to="model.11d2918ebce.388" name="run"/>
+      </eventTriggers>
+    </children>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.11d2918ec99.258" name="page4" outEdges="wires.11d2918eca9.15c" inEdges="wires.11d2918eca9.15b">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d2918eca9.15c" from="visual.11d2918ec99.258" to="visual.11d2918ec99.2cf" name="sync4"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.285" name="newText" outEdges="wires.11d2918eca9.100" generatedElements="model.11d2918ebce.491">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d2918eca9.10c" isGenerated="true" id="model.11d2918ebce.3ed" name="update" generatedElements="model.11d2918ebce.493 model.11d2918ebce.4d9 model.11d2918ebce.588">
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.3ef" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.3fe" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.458" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3ed" isGenerated="true" id="model.11d2918ebce.493" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3ed" isGenerated="true" id="model.11d2918ebce.4d9" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3ed" isGenerated="true" id="model.11d2918ebce.588" name="setPropertyToValue"/>
+      </operations>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d2918eca9.10a" isGenerated="true" id="model.11d2918ebce.3f0" name="refresh" generatedElements="model.11d2918ebce.494 model.11d2918ebce.4da model.11d2918ebce.589">
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.3f2" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.400" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.45a" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f0" isGenerated="true" id="model.11d2918ebce.494" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f0" isGenerated="true" id="model.11d2918ebce.4da" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f0" isGenerated="true" id="model.11d2918ebce.589" name="setPropertyToValue"/>
+      </operations>
+      <eventTriggers isGenerated="true" id="model.11d2918ebce.3f3" name="edit" outEdges="wires.11d2918eca9.109">
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11d2918eca9.100" isGenerated="true" id="wires.11d2918eca9.109" from="model.11d2918ebce.3f3" to="model.11d2918ebce.3f5" name="run" inEdges="wires.11d2918eca9.125"/>
+      </eventTriggers>
+      <eventTriggers isGenerated="true" id="model.11d2918ebce.3f4" name="change" outEdges="wires.11d2918eca9.10b">
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11d2918eca9.100" isGenerated="true" id="wires.11d2918eca9.10b" from="model.11d2918ebce.3f4" to="model.11d2918ebce.3f8" name="run" inEdges="wires.11d2918eca9.127"/>
+      </eventTriggers>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d2918eca9.100" from="visual.11d2918ec99.285" to="visual.11d2918ec99.286" name="sync4" generatedElements="wires.11d2918eca9.109 wires.11d2918eca9.10b model.11d2918ebce.492 wires.11d2918eca9.125 wires.11d2918eca9.126 wires.11d2918eca9.127 wires.11d2918eca9.128"/>
+      <properties generatedBy="visual.11d2918ec99.285" isGenerated="true" id="model.11d2918ebce.491" name="fieldValue" outEdges="wires.11d2918eca9.125 wires.11d2918eca9.126">
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.11d2918eca9.100" isGenerated="true" id="wires.11d2918eca9.125" from="model.11d2918ebce.491" to="wires.11d2918eca9.109"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.11d2918eca9.100" isGenerated="true" id="wires.11d2918eca9.126" from="model.11d2918ebce.491" to="wires.11d2918eca9.10a"/>
+      </properties>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.286" name="text5" inEdges="wires.11d2918eca9.100" generatedElements="model.11d2918ebce.3f5 model.11d2918ebce.3f8 model.11d2918ebce.3fb model.11d2918ebce.3fc">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d2918eca9.109" generatedBy="visual.11d2918ec99.286" isGenerated="true" id="model.11d2918ebce.3f5" name="update" generatedElements="model.11d2918ebce.495 model.11d2918ebce.4db model.11d2918ebce.58a">
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.3f7" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.403" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.45d" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f5" isGenerated="true" id="model.11d2918ebce.495" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f5" isGenerated="true" id="model.11d2918ebce.4db" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f5" isGenerated="true" id="model.11d2918ebce.58a" name="setPropertyToValue"/>
+      </operations>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d2918eca9.10b" generatedBy="visual.11d2918ec99.286" isGenerated="true" id="model.11d2918ebce.3f8" name="refresh" generatedElements="model.11d2918ebce.496 model.11d2918ebce.4dc model.11d2918ebce.58b">
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.3fa" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.405" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" isGenerated="true" id="model.11d2918ebce.45f" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f8" isGenerated="true" id="model.11d2918ebce.496" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f8" isGenerated="true" id="model.11d2918ebce.4dc" name="setPropertyToValue"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11d2918ebce.3f8" isGenerated="true" id="model.11d2918ebce.58b" name="setPropertyToValue"/>
+      </operations>
+      <eventTriggers generatedBy="visual.11d2918ec99.286" isGenerated="true" id="model.11d2918ebce.3fb" name="edit" outEdges="wires.11d2918eca9.10c">
+        <wires xsi:type="iaml.wires:RunInstanceWire" isGenerated="true" id="wires.11d2918eca9.10c" from="model.11d2918ebce.3fb" to="model.11d2918ebce.3ed" name="run" inEdges="wires.11d2918eca9.128"/>
+      </eventTriggers>
+      <eventTriggers generatedBy="visual.11d2918ec99.286" isGenerated="true" id="model.11d2918ebce.3fc" name="change" outEdges="wires.11d2918eca9.10a">
+        <wires xsi:type="iaml.wires:RunInstanceWire" isGenerated="true" id="wires.11d2918eca9.10a" from="model.11d2918ebce.3fc" to="model.11d2918ebce.3f0" name="run" inEdges="wires.11d2918eca9.126"/>
+      </eventTriggers>
+      <properties generatedBy="wires.11d2918eca9.100" isGenerated="true" id="model.11d2918ebce.492" name="fieldValue" outEdges="wires.11d2918eca9.127 wires.11d2918eca9.128">
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.11d2918eca9.100" isGenerated="true" id="wires.11d2918eca9.127" from="model.11d2918ebce.492" to="wires.11d2918eca9.10b"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.11d2918eca9.100" isGenerated="true" id="wires.11d2918eca9.128" from="model.11d2918ebce.492" to="wires.11d2918eca9.10c"/>
+      </properties>
+    </children>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.11d2918ec99.2cf" name="page5" inEdges="wires.11d2918eca9.15c">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.338" name="text5" generatedElements="model.11d2918ebce.58c"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d2918ec99.33a" name="text6" generatedElements="model.11d2918ebce.58d"/>
+  </children>
+</iaml:InternetApplication>

@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Random;
 
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
@@ -32,7 +33,7 @@ import org.openiaml.model.codegen.oaw.OawCodeGenerator;
  *
  */
 public abstract class CodegenWebTestCase extends WebTestCase {
-	
+
 	public final String PLUGIN_ID = "org.openiaml.model.tests";
 	
 	private IProject project;
@@ -76,7 +77,7 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 		IProject project = root.getProject(getProjectName());
 		// delete any existing ones
 		if (project.exists()) {
-			project.delete(false, monitor);
+			project.delete(true, monitor);
 		}
 		
 		// create it
@@ -95,7 +96,7 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	 * @return
 	 */
 	public String getProjectName() {
-		return "testing-" + this.getClass().getSimpleName();
+		return "testing-" + this.getClass().getSimpleName() + "-" + new Random().nextInt(1024);
 	}
 
 	/**
@@ -207,5 +208,19 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	public IProject getProject() {
 		return project;
 	}
+
+	
+	/**
+	 * I'm not sure why this method is deprecated, but I am simply wrapping it here
+	 * so Eclipse doesn't complain about our deprecated method usage.
+	 * 
+	 * @see net.sourceforge.jwebunit.junit.WebTestCase#assertFormElementEquals(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void assertFormElementEquals(String formElementName,
+			String expectedValue) {
+		super.assertFormElementEquals(formElementName, expectedValue);
+	}
+	
 	
 }

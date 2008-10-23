@@ -100,6 +100,7 @@ public class SyncWiresTestCase extends InferenceTestCase {
 		assertFormElementEquals("name4", testingText3);
 		
 		// an unrelated field shouldn't change
+		// currently fails here, because htmlunit can't find fields outside the current form/the first form?
 		assertFormElementEquals("unrelated-field", "");
 
 	}

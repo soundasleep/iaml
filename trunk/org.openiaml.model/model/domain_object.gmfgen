@@ -564,7 +564,7 @@
       iD="org.openiaml.model.diagram.domain_object"
       name="Iaml Plugin (Domain Object)"
       provider="www.openiaml.org"
-      version="0.0.2"/>
+      version="0.0.3"/>
   <editor/>
   <navigator>
     <childReferences

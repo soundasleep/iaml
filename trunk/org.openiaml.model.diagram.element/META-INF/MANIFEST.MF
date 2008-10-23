@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.openiaml.model.diagram.element; singleton:=true
-Bundle-Version: 0.0.2
+Bundle-Version: 0.0.3
 Bundle-ClassPath: .
 Bundle-Activator: org.openiaml.model.model.diagram.element.part.IamlDiagramEditorPlugin
-Bundle-Vendor: %providerName
+Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Export-Package: org.openiaml.model.model.diagram.element.edit.parts,
  org.openiaml.model.model.diagram.element.part,

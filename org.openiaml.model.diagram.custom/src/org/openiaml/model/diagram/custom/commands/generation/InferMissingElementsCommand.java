@@ -35,6 +35,11 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand im
 	private IAdaptable info;
 	private String editorId;
 	
+	/**
+	 * Temporary toggle switch to disable automatic element inferring  
+	 */
+	public boolean isDisabled = true;
+	
 	public InferMissingElementsCommand(
 			GraphicalEditPart root,
 			EObject rootObject,
@@ -79,11 +84,13 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand im
 		this.monitor = monitor;
 		this.info = info;
 		
-		CreateMissingElements ce = new CreateMissingElements(this);
-		try {
-			ce.create(rootObject);
-		} catch (InferenceException e) {
-			throw new ExecutionException("unexpected exception when trying to infer missing elements", e);
+		if (!isDisabled) {
+			CreateMissingElements ce = new CreateMissingElements(this);
+			try {
+				ce.create(rootObject);
+			} catch (InferenceException e) {
+				throw new ExecutionException("unexpected exception when trying to infer missing elements", e);
+			}
 		}
 		
 		// debug message

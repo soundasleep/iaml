@@ -18,11 +18,19 @@
 
    <url>
       <discovery label="Europa Discovery Site" url="http://download.eclipse.org/releases/europa/"/>
+      <discovery label="OpenArchitectureWare Milestones Update Site" url="http://www.openarchitectureware.org/updatesite/milestone/site.xml"/>
+      <discovery label="Ecliptical Software Update Site" url="http://www.eclipticalsoftware.com/updates"/>
    </url>
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.gef"/>
+      <import plugin="org.eclipse.gmf.runtime.emf.type.core"/>
+      <import plugin="org.eclipse.gmf"/>
+      <import plugin="org.eclipse.gmf.runtime.notation"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.core"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.core.expressions"/>
       <import plugin="org.eclipse.jface"/>
@@ -35,21 +43,18 @@
       <import plugin="org.eclipse.gmf.runtime.emf.core"/>
       <import plugin="org.eclipse.gmf.runtime.emf.commands.core"/>
       <import plugin="org.eclipse.gmf.runtime.emf.ui.properties"/>
-      <import plugin="org.eclipse.gmf.runtime.diagram.ui"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.properties"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.providers"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.providers.ide"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.render"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide"/>
+      <import plugin="org.openiaml.model"/>
+      <import plugin="org.openiaml.model.edit"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.gmf.runtime.draw2d.ui"/>
       <import plugin="org.eclipse.draw2d"/>
-      <import plugin="org.eclipse.gef"/>
       <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.openiaml.model"/>
-      <import plugin="org.openiaml.model.edit"/>
-      <import plugin="org.eclipse.gmf"/>
       <import plugin="org.openiaml.model.diagram"/>
       <import plugin="org.openiaml.model.diagram.domain_store"/>
       <import plugin="org.openiaml.model.diagram.element"/>
@@ -57,6 +62,8 @@
       <import plugin="org.openiaml.model.diagram.wire"/>
       <import plugin="org.openiaml.model.diagram.domain_object"/>
       <import plugin="org.openiaml.model.diagram.operation"/>
+      <import plugin="org.openiaml.model.codegen.oaw"/>
+      <import plugin="org.openarchitectureware.dependencies"/>
    </requires>
 
    <plugin

@@ -4,7 +4,6 @@ Bundle-Name: Codegen Tests Plug-in
 Bundle-SymbolicName: org.openiaml.model.tests.codegen
 Bundle-Version: 0.0.3
 Require-Bundle: org.junit,
- org.eclipse.jet,
  org.eclipse.ui,
  org.eclipse.core.runtime,
  org.openiaml.model.diagram,

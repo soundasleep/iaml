@@ -11,8 +11,13 @@ The IAML plugin is an Eclipse plugin that provides a visual editor for the model
 
   # Eclipse 3.3 Europa
   # GMF 2.0.2
+  # [http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare 4.3]
 
-These requirements may be installed through the [http://download.eclipse.org/releases/europa/ Europa update site].
+For testing:
+
+  # [http://www.eclipticalsoftware.com/emf/xpath/ XPath Support for EMF]
+
+These requirements may be installed through the [http://download.eclipse.org/releases/europa/ Europa update site]. (They also might be installed with the installation process.)
 
 =Installation=
 

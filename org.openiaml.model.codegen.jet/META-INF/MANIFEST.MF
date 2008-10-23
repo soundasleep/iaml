@@ -7,5 +7,8 @@ Bundle-Localization: plugin
 Bundle-Vendor: 
 Require-Bundle: org.eclipse.jet,
  org.eclipse.emf,
- org.openiaml.model
+ org.openiaml.model,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources
 Bundle-ClassPath: .,bin/
+Export-Package: org.openiaml.model.codegen.jet

@@ -10,6 +10,7 @@ import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -119,6 +120,21 @@ public class CreateMissingElements {
 			
 			handleWires(vt);
 		}
+		
+		if (rootObject instanceof ContainsOperations) {
+			for (Operation op : ((ContainsOperations) rootObject).getOperations()) {
+				if (op instanceof CompositeOperation) {
+					// recursive
+					create(op);
+				}
+			}
+		}
+		
+		if (rootObject instanceof CompositeOperation) {
+			CompositeOperation vt = (CompositeOperation) rootObject;
+			
+			handleCompositeOperation(vt);
+		}
 				
 	}
 	
@@ -192,76 +208,50 @@ public class CreateMissingElements {
 	}
 
 	/**
-	 * @param to
-	 * @param string
+	 * @param container
+	 * @param propertyName
 	 * @return
 	 * @throws InferenceException 
 	 */
 	private ApplicationElementProperty getApplicationElementProperty(
-			SyncWire root, InputTextField to, String string) throws InferenceException {
+			GeneratesElements generatedBy, InputTextField container, String propertyName) throws InferenceException {
 
-		if (root == null) return null;
+		if (generatedBy == null) return null;
 		
-		for (ApplicationElementProperty property : to.getProperties()) {
-			if (property.getName().equals(string))
+		for (ApplicationElementProperty property : container.getProperties()) {
+			if (property.getName().equals(propertyName))
 				return property;
 		}
 		
 		// nothing found: create a new one
-		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(to, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties());
+		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties());
 		if (property == null) return null;
-		markAsGenerated(root, property);
-		setElementName(property, string);
+		markAsGenerated(generatedBy, property);
+		setElementName(property, propertyName);
 		
 		return property;
 		
 	}
 
-
-	/**
-	 * @param field
-	 * @param field2
-	 * @param string
-	 * @throws InferenceException 
-	 */
-	private ApplicationElementProperty getApplicationElementProperty(InputTextField root,
-			InputTextField to, String string) throws InferenceException {
-
-		if (root == null) return null;
-		
-		for (ApplicationElementProperty property : to.getProperties()) {
-			if (property.getName().equals(string))
-				return property;
-		}
-		
-		// nothing found: create a new one
-		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(to, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties());
-		if (property == null) return null;
-		markAsGenerated(root, property);
-		setElementName(property, string);
-		
-		return property;
-		
-	}	
-	
 	/**
 	 * @param fromEdit
 	 * @param toUpdate
 	 * @param fromValue
 	 * @throws InferenceException 
 	 */
-	private void connectEventToOperationWithParameter(SyncWire container,
+	private ParameterWire connectEventToOperationWithParameter(SyncWire container,
 			EventTrigger event,
 			CompositeOperation operation, ApplicationElementProperty parameter) throws InferenceException {
 
-		if (container == null) return;
+		if (container == null) return null;
 		
 		// does a runinstance wire exist?
 		RunInstanceWire rwi = getRunInstanceWire(container, event, operation, "run");
-		if (rwi == null) return;
+		if (rwi == null) return null;
 		
 		// does a parameter wire exist?
 		ParameterWire pw = getParameterWire(container, rwi, parameter);
+		return pw;
 		
 	}
 
@@ -369,35 +359,54 @@ public class CreateMissingElements {
 		markAsGenerated(from, operation);
 		setElementName(operation, string);
 		
+		handleCompositeOperation(operation);
+		
+		return operation;
+	}
+	
+	/**
+	 * Generate the contents of a given composite operation
+	 * 
+	 * @param operation
+	 * @param fieldValue
+	 * @throws InferenceException
+	 */
+	private void handleCompositeOperation(CompositeOperation operation) throws InferenceException {
+		String string = operation.getName();
+		
+		// get a fieldValue: the composite operation operates on a *local* element
+		// so this will be the composite operations' parents' fieldValue
+		ApplicationElementProperty fieldValue = getApplicationElementProperty(operation, (InputTextField) operation.eContainer(), "fieldValue");
+		
 		// what should this operation contain?
 		// TODO should update and refresh really be the same thing?
 		if (string.equals("update") || string.equals("refresh")) {
 			StartNode startNode = (StartNode) parent.createElement(operation, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes());
-			markAsGenerated(from, startNode);
+			markAsGenerated(operation, startNode);
 			
 			StopNode stopNode = (StopNode) parent.createElement(operation, OperationsPackage.eINSTANCE.getStopNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes());
-			markAsGenerated(from, stopNode);
+			markAsGenerated(operation, stopNode);
 			
 			ChainedOperation setPropertyOp = (ChainedOperation) parent.createElement(operation, ModelPackage.eINSTANCE.getChainedOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations());
-			markAsGenerated(from, setPropertyOp);
+			markAsGenerated(operation, setPropertyOp);
 			setElementName(setPropertyOp, "setPropertyToValue");
 			
 			Parameter param = (Parameter) parent.createElement(operation, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getOperation_Parameters());
-			markAsGenerated(from, param);
+			markAsGenerated(operation, param);
 			setElementName(param, "setValueTo");
 			
 			// connect them together
 			ExecutionEdge edge = connectExecutionEdge(operation, startNode, setPropertyOp);
-			markAsGenerated(from, edge);
+			markAsGenerated(operation, edge);
 			ExecutionEdge edge2 = connectExecutionEdge(operation, setPropertyOp, stopNode);
-			markAsGenerated(from, edge2);
+			markAsGenerated(operation, edge2);
 			DataFlowEdge flow = connectDataEdge(operation, param, setPropertyOp);
-			markAsGenerated(from, flow);
+			markAsGenerated(operation, flow);
 			DataFlowEdge flow2 = connectDataEdge(operation, setPropertyOp, fieldValue);
-			markAsGenerated(from, flow2);
+			markAsGenerated(operation, flow2);
 		}
 		
-		return null;
+		return;
 	}
 
 	private ExecutionEdge connectExecutionEdge(CompositeOperation container,

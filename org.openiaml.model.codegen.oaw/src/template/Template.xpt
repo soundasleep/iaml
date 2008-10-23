@@ -1,0 +1,39 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE main FOR model::InternetApplication»
+	«EXPAND Page::expandPage FOREACH children»
+	
+	«REM»create a sitemap«ENDREM»
+	«FILE "output/sitemap.html"»
+		<html>
+		<head>
+			<title>web application '«pageTitle()»': sitemap</title>
+			<link rel="stylesheet" type="text/css" href="default.css" />
+		</head>
+		
+		<body>
+		<h1>Sitemap</h1>
+		<ol>
+			«EXPAND expandSitemapPage FOREACH children»
+		</ol>
+		</body>
+		</html>
+	«ENDFILE»
+
+	«REM»create the css manually«ENDREM»
+	«FILE "output/default.css"»
+		«EXPAND css::DefaultCss::defaultCss»
+	«ENDFILE»
+«ENDDEFINE»
+
+/* default = nothing */
+«DEFINE expandSitemapPage FOR model::ApplicationElement»
+«ENDDEFINE»
+
+«DEFINE expandSitemapPage FOR model::visual::Page»
+<li>
+	<a href="«safeName(id)».html">«name»</a>
+</li>
+«ENDDEFINE»

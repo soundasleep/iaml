@@ -25,7 +25,7 @@ import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 
-public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalCommand implements ICreateElements {
+public class InferMissingElementsCommand extends AbstractTransactionalCommand implements ICreateElements {
 
 	private EObject rootObject;
 	private GraphicalEditPart selectedElement;
@@ -35,14 +35,14 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	private IAdaptable info;
 	private String editorId;
 	
-	public CreateMissingSyncWireElementsCommand(
+	public InferMissingElementsCommand(
 			GraphicalEditPart root,
 			EObject rootObject,
 			TransactionalEditingDomain editingDomain, 
 			View parentView,
 			PreferencesHint prefHint,
 			String editorId) {			
-		super(editingDomain, "Create missing SyncWire elements", getWorkspaceFiles(parentView)); //$NON-NLS-1$
+		super(editingDomain, "Infer missing model elements", getWorkspaceFiles(parentView)); //$NON-NLS-1$
 		selectedElement = root;
 		this.parentView = parentView;
 		this.rootObject = rootObject;
@@ -50,12 +50,12 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 		this.editorId = editorId;
 	}
 
-	public CreateMissingSyncWireElementsCommand(GraphicalEditPart root,
+	public InferMissingElementsCommand(GraphicalEditPart root,
 			EObject object, PreferencesHint prefHint, String editorId) {
 		this(root, object, root.getEditingDomain(), (View) root.getModel(), prefHint, editorId);
 	}
 
-	public CreateMissingSyncWireElementsCommand(GraphicalEditPart root, PreferencesHint prefHint, String editorId) {
+	public InferMissingElementsCommand(GraphicalEditPart root, PreferencesHint prefHint, String editorId) {
 		// we used to only refresh the EObject of the container, not the actual EObject instance
 		this(root, (EObject) ((Diagram) root.getModel()).getElement(), prefHint, editorId);
 	}
@@ -193,6 +193,12 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	private CreateElementCommand getDiagramCreateRelationshipCommand(
 			CreateRelationshipRequest request,
 			EClass elementType, EObject source, EObject target) throws ExecutionException {
+		if (this.editorId.equals(org.openiaml.model.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.element.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.wire.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
+		}
 		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
 		}
@@ -216,6 +222,12 @@ public class CreateMissingSyncWireElementsCommand extends AbstractTransactionalC
 	 * @throws ExecutionException 
 	 */
 	private IElementType getDiagramEditType(EClass elementType) throws ExecutionException {
+		if (this.editorId.equals(org.openiaml.model.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.element.providers.IamlElementTypes.getElementType(elementType);
+		}
+		if (this.editorId.equals(org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.wire.providers.IamlElementTypes.getElementType(elementType);
+		}
 		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getElementType(elementType);
 		}

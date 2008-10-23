@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.diagram.custom.commands.generation.CreateMissingSyncWireElementsCommand;
+import org.openiaml.model.diagram.custom.commands.generation.InferMissingElementsCommand;
 import org.openiaml.model.diagram.custom.commands.shortcuts.CreateMissingRootShortcutsCommand;
 import org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
@@ -65,7 +65,7 @@ public class CustomRootEditPartProvider extends IamlEditPartProvider {
 						}
 
 						// generate missing elements
-						ICommand command2 = new CreateMissingSyncWireElementsCommand((GraphicalEditPart) editpart, 
+						ICommand command2 = new InferMissingElementsCommand((GraphicalEditPart) editpart, 
 								IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
 								IamlDiagramEditorPlugin.ID
 								);

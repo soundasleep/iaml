@@ -107,20 +107,20 @@
 	<extension point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="false"
-            id="org.openiaml.model.codegen.jet.objectContribution1"
+            id="org.openiaml.model.codegen.objectContribution1"
             objectClass="org.eclipse.core.resources.IResource">
          <menu
-               id="org.openiaml.model.codegen.jet.menu1"
+               id="org.openiaml.model.codegen.menu1"
                label="label">
             <separator
-                  name="org.openiaml.model.codegen.jet.separator1">
+                  name="org.openiaml.model.codegen.separator1">
             </separator>
          </menu>
          <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeAction"
                id="org.openiaml.model.codegen.jet.action1"
-               label="Generate code from Openiaml model with JET"
-               menubarPath="org.openiaml.model.codegen.jet.menu1">
+               label="Generate code from model"
+               menubarPath="org.openiaml.model.codegen.menu1">
          </action>
       </objectContribution>                    
 	</extension>

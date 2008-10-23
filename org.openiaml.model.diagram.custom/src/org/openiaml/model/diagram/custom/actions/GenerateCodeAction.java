@@ -1,9 +1,17 @@
 package org.openiaml.model.diagram.custom.actions;
 
-import java.util.HashMap;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.util.Date;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -13,12 +21,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.jet.JET2Platform;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
+import org.openiaml.model.codegen.ICodeGenerator;
+import org.openiaml.model.codegen.jet.JetCodeGenerator;
+import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
@@ -56,7 +66,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 					if (!status.isOK()) {
 						// TODO remove this reference to the plugin and remove the reference in plugin.xml
 						IamlDiagramEditorPlugin.getInstance().logError(
-								"Could not generate code for " + o, status.getException()); //$NON-NLS-1$
+								"Could not generate code for " + o + ": " + status.getMessage(), status.getException()); //$NON-NLS-1$
 					}
 				}
 			}
@@ -85,21 +95,52 @@ public class GenerateCodeAction implements IViewActionDelegate {
 					CreateMissingElements ce = new CreateMissingElements(handler);
 					ce.create(model);
 				}
-	
-				Map<String,Object> variables = new HashMap<String,Object>();
 				
-				// we have to set this manually as well
-				variables.put("org.eclipse.jet.resource.project.name", o.getProject().getName());
+				// output the temporary changed model to an external file
+				// so we can do code generation
+				IFile tempFile = null;
+				for (int i = 0; i < 1000; i++) {
+					tempFile = o.getProject().getFile("temp-iaml-gen" + i + ".iaml");
+					if (!tempFile.exists()) {
+						break;
+					}
+				}
+
+				if (tempFile == null || tempFile.exists()) {
+					return new Status(Status.ERROR, PLUGIN_ID, "Could not create temporary file.");
+				}
 				
-				return JET2Platform.runTransformOnObject("org.openiaml.model.codegen.jet", resource, variables, monitor);
+				// create a temporary file to output to
+				File tempJavaFile = File.createTempFile("temp-iaml", ".iaml");
+				Map<?,?> options = resourceSet.getLoadOptions();
+				resource.save(new FileOutputStream(tempJavaFile), options);
+				
+				// now load it in as an IFile
+				tempFile.create(new FileInputStream(tempJavaFile), true, monitor);
+		
+				// create code generator instance
+				ICodeGenerator codegen = new OawCodeGenerator();
+				IStatus status = codegen.generateCode(tempFile, monitor);
+				
+				// now delete the generated model file
+				// TODO this would probably go well in a finally block
+				tempFile.delete(false, monitor);
+				tempJavaFile.delete();
+				
+				return status;
 			}
 		} catch (InferenceException e) {
-			// int severity, String pluginId, String message, Throwable exception
-			return new Status(IStatus.ERROR, "org.openiaml.model.diagram.custom", "Inference failed", e);
+			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed", e);
+		} catch (IOException e) {
+			return new Status(IStatus.ERROR, PLUGIN_ID, "IO exception", e);
+		} catch (CoreException e) {
+			return new Status(IStatus.ERROR, PLUGIN_ID, "Core exception", e);
 		}
 		
 		return null;
 	}
+	
+	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
 
 	Object[] selection;
 

@@ -502,7 +502,7 @@
       iD="org.openiaml.model.diagram.element"
       name="Iaml Plugin (Element)"
       provider="www.openiaml.org"
-      version="0.0.2"/>
+      version="0.0.3"/>
   <editor/>
   <navigator>
     <childReferences

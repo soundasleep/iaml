@@ -8,11 +8,14 @@ package org.openiaml.model.model.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -21,6 +24,8 @@ import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.TemporaryVariable;
@@ -35,6 +40,8 @@ import org.openiaml.model.model.WireEdge;
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getExecutionEdges <em>Execution Edges</em>}</li>
@@ -65,6 +72,36 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<WireEdge> wires;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
@@ -164,6 +201,39 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<GeneratedElement> getGeneratedElements() {
+		if (generatedElements == null) {
+			generatedElements = new EObjectWithInverseResolvingEList<GeneratedElement>(GeneratedElement.class, this, ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
+		}
+		return generatedElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverridden(boolean newOverridden) {
+		boolean oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN, oldOverridden, overridden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ActivityNode> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentEList<ActivityNode>(ActivityNode.class, this, ModelPackage.COMPOSITE_OPERATION__NODES);
@@ -224,6 +294,21 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -231,6 +316,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
+				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
@@ -257,6 +344,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return getOperations();
 			case ModelPackage.COMPOSITE_OPERATION__WIRES:
 				return getWires();
+			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
+				return getGeneratedElements();
+			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
+				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return getNodes();
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
@@ -287,6 +378,13 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
+			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
+				return;
+			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
+				setOverridden(((Boolean)newValue).booleanValue());
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				getNodes().clear();
@@ -326,6 +424,12 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				return;
+			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				getNodes().clear();
 				return;
@@ -357,6 +461,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return operations != null && !operations.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
+				return generatedElements != null && !generatedElements.isEmpty();
+			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return nodes != null && !nodes.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
@@ -390,6 +498,13 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				default: return -1;
 			}
 		}
+		if (baseClass == GeneratesElements.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -412,7 +527,30 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				default: return -1;
 			}
 		}
+		if (baseClass == GeneratesElements.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (overridden: ");
+		result.append(overridden);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CompositeOperationImpl

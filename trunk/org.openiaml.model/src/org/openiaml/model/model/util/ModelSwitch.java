@@ -263,6 +263,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseChainedOperation(compositeOperation);
 				if (result == null) result = caseContainsOperations(compositeOperation);
 				if (result == null) result = caseContainsWires(compositeOperation);
+				if (result == null) result = caseGeneratesElements(compositeOperation);
 				if (result == null) result = caseOperation(compositeOperation);
 				if (result == null) result = caseExecutionEdgesSource(compositeOperation);
 				if (result == null) result = caseWireEdgeDestination(compositeOperation);

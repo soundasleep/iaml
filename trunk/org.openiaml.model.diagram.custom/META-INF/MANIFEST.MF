@@ -13,7 +13,6 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.diagram.domain_object,
  org.openiaml.model.diagram.operation,
  org.eclipse.jet,
- org.openiaml.model.codegen.jet,
  org.openiaml.model.codegen.oaw
 Bundle-Vendor: www.openiaml.org
 Export-Package: org.openiaml.model.diagram.custom.actions

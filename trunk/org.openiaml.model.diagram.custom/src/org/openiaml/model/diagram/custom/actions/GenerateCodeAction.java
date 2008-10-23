@@ -2,12 +2,8 @@ package org.openiaml.model.diagram.custom.actions;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
-import java.util.Date;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -27,7 +23,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.openiaml.model.codegen.ICodeGenerator;
-import org.openiaml.model.codegen.jet.JetCodeGenerator;
 import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.EcoreInferenceHandler;

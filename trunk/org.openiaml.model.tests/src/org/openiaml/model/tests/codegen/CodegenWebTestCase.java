@@ -3,15 +3,10 @@
  */
 package org.openiaml.model.tests.codegen;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
 
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
@@ -26,9 +21,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jet.JET2Platform;
 import org.openiaml.model.codegen.ICodeGenerator;
-import org.openiaml.model.codegen.jet.JetCodeGenerator;
 import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 
 /**
@@ -207,22 +200,6 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 		return Status.OK_STATUS;
 		
 	}
-
-	/**
-	 * Transform a filename using JET. The generation options are defined
-	 * by the JET plugin.
-	 * 
-	 * @param filename The file to transform
-	 * @param monitor A monitor
-	 * @return The status of the transform
-	 * @throws IOException 
-	 */
-	protected IStatus doTransformJET(IFile filename, IProgressMonitor monitor) throws IOException {
-		
-		ICodeGenerator jet = new JetCodeGenerator();
-		return jet.generateCode(filename, monitor);
-		
-	}	
 
 	/**
 	 * @return the project

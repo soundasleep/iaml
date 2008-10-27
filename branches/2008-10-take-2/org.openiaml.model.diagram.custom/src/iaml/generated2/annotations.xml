@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+ <object class="java.util.HashMap"> 
+  <void method="put"> 
+   <string>___global_annotations</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>test1</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>factsPage_Name</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>factsInternetApplication_Name</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>factsApplicationElementContainer_Children</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule_test_external</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>factsInternetApplication_Children</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>fact1</string> 
+   <object class="java.util.HashMap"/> 
+  </void> 
+  <void method="put"> 
+   <string>rule_test</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>factsInputForm_Name</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 

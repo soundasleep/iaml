@@ -1,0 +1,34 @@
+import iaml;
+
+extension metamodel::Extensions reexport;
+
+pageTitle(model::InternetApplication this) :
+	if name == null || name == "" then "(untitled application)" else name.toFirstUpper();
+
+pageTitle(model::visual::Page this) :
+	if name == null || name == "" then id else name;
+
+formName(model::visual::InputForm this) :
+	if (name == null || name == "") then "(untitled form)" else name;
+	
+textFieldName(model::visual::InputTextField this) :
+	if (name == null || name == "") then "(untitled field)" else name;
+	
+safeName(model::NamedElement this) :
+	safeName(id);
+
+safeName(String s) :
+	s.replaceAll("[^A-Za-z0-9]", "_");
+
+safeName(emf::EObject this) :
+	"unexpected eobject " + this;
+
+operationName(model::WireEdgeDestination this) : 
+	"impossible";
+
+operationName(model::Operation this) :
+	safeName(this);
+
+/* get the start node for an operation */
+startNode(model::CompositeOperation this) :
+	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );

@@ -54,7 +54,8 @@ public class GenerateInterfaces {
 			compiler.compileInterface(kb);
 			
 			// compile the classes
-			compiler.setGenerateDataClassesForQueryPredicates(false);	// ???
+			// this may fail: class generation requires two passes
+			compiler.setGenerateDataClassesForQueryPredicates(true);	// ??? does nothing
 			compiler.setClassName("KBGenerated");
 			compiler.setInterfaceNames("iaml.generated2.KBInterface");
 			compiler.compile(kb);

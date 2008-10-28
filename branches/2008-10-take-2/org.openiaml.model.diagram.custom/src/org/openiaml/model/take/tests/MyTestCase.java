@@ -25,7 +25,7 @@ import org.openiaml.model.model.visual.Page;
 
 /**
  * Here we will temporarily test the Take integration, to make sure it operates as expected.
- * TODO move into the testing plugin.
+ * TODO move into the testing plugin once we get the tests working.
  * 
  * @author jmwright
  *
@@ -34,6 +34,9 @@ public class MyTestCase extends TestCase {
 	
 	InternetApplication root;
 
+	/**
+	 * Load the example model.
+	 */
 	public void setUp() throws IOException {
 		XMIResourceImpl resource = new XMIResourceImpl();
 		File source = new File("src/org/openiaml/model/take/tests/test.iaml");
@@ -45,7 +48,7 @@ public class MyTestCase extends TestCase {
 	}
 	
 	/**
-	 * Test the contents of the model.
+	 * Tests loading the content of the model. (passes)
 	 */
 	public void testModel() {
 		assertEquals(root.getName(), "test");
@@ -58,27 +61,12 @@ public class MyTestCase extends TestCase {
 			assertTrue(e instanceof InputForm);
 		}
 	}
-	
-	public void testDerivePage() {
-		// try deriving command
-		TestDeriveElementsCommand te = new TestDeriveElementsCommand();
-		KBGenerated kb = te.executeKnowledgeBase(root);
-		
-		ResultSet<GeneratedAppChildren> rs = kb.getApplicationChildren(root);
-		// print out the derivation log
-		System.out.println("count = " + rs.getDerivationController().getDerivationCount());
-		System.out.println("depth = " + rs.getDerivationController().getDepth());
-		for (DerivationLogEntry e : rs.getDerivationLog()) {
-			System.out.println(e.getName() + ": " + e.getCategory());
-		}
-		assertTrue(rs.hasNext());
-		for (GeneratedAppChildren n : new IteratorWrapper<GeneratedAppChildren>(rs)) {
-			System.out.println("testDerivePage> " + n);
-		}
-	}
+
 
 	/**
-	 * This should just query the external facts source
+	 * This should just query the external facts source. (passes)
+	 * 
+	 * - app_name[app, 'test']
 	 */
 	public void testGetAppName() {
 		// try deriving command
@@ -86,22 +74,47 @@ public class MyTestCase extends TestCase {
 		KBGenerated kb = te.executeKnowledgeBase(root);
 		
 		ResultSet<InternetApplication_Name> rs = kb.getAppName(root);
-		// print out the derivation log
-		/*
-		for (DerivationLogEntry e : rs.getDerivationLog()) {
-			System.out.println(e.getName() + ": " + e.getCategory());
-		}
-		*/
 		assertTrue(rs.hasNext());
 		InternetApplication_Name b = rs.next();
 		assertEquals(b.app, root);
 		assertEquals(b.string, "test");		// the app's name should be test
 		assertFalse(rs.hasNext());
+	}	
+	
+	/**
+	 * Tests deriving pages. (fails)
+	 * Because our InternetApplication has a name "test", we should get a generated page ("page_wrapper")
+	 * 
+	 * - if app_name[app, 'test'] then generated_app_children[app, page_wrapper]
+	 * 
+	 */
+	public void testDerivePage() {
+		// try deriving command
+		TestDeriveElementsCommand te = new TestDeriveElementsCommand();
+		KBGenerated kb = te.executeKnowledgeBase(root);
+		
+		ResultSet<GeneratedAppChildren> rs = kb.getApplicationChildren(root);
+		assertTrue(rs.hasNext());	// there should be at least one generated page
+		// (but instead, it is crashing with a NullPointerException)
+		for (GeneratedAppChildren n : new IteratorWrapper<GeneratedAppChildren>(rs)) {
+			System.out.println("testDerivePage> " + n);
+			System.out.println("generated element: " + n.element);
+		}
+
+		// print out the derivation log
+		System.out.println("count = " + rs.getDerivationController().getDerivationCount());
+		System.out.println("depth = " + rs.getDerivationController().getDepth());
+		for (DerivationLogEntry e : rs.getDerivationLog()) {
+			System.out.println(e.getName() + ": " + e.getCategory());
+		}
+	
 	}
 
 	/**
 	 * This should just query the external facts source, and then
-	 *  derive an additional property about it
+	 * derive an additional property about it ('test_from_external') (fails)
+	 *  
+	 * - rule_test_external: if app_name[app, 'test'] then test_from_external[app, 'hello world']
 	 */
 	public void testDeriveFromExternal() {
 		// try deriving command
@@ -122,6 +135,12 @@ public class MyTestCase extends TestCase {
 		assertFalse(rs.hasNext());
 	}
 
+	/**
+	 * Try a simple derivation. Expected: b[app] (fails)
+	 * 
+	 * - test1: if a[app] then b[app]
+	 * - fact1: a[app]
+	 */
 	public void testDeriveSimpleFact() {
 		// try deriving command
 		TestDeriveElementsCommand te = new TestDeriveElementsCommand();
@@ -140,6 +159,13 @@ public class MyTestCase extends TestCase {
 		assertFalse(rs.hasNext());
 	}
 
+	/**
+	 * A simple wrapper to wrap around a ResourceIterator so we can get a normal iterator() from it.
+	 * TODO make Take's ResourceIterator also Iterable
+	 * 
+	 * @author jmwright
+	 * @param <T>
+	 */
 	private class IteratorWrapper<T> implements Iterable<T> {
 		private Iterator<T> it;
 		public IteratorWrapper(Iterator<T> it) {

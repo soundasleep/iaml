@@ -10,41 +10,27 @@ ref Page page_ref_temp
 ref InternetApplication app
 ref ApplicationElementContainer aec
 ref PageWrapper page_wrapper
-// for InternetApplication
-//@take.compilerhint.class=InternetApplication_Children
-//@take.compilerhint.method=getAppChildren
-//query app_children[in,out]
-// for ApplicationElementContainer
-//@take.compilerhint.class=ApplicationElementContainer_Children
-//@take.compilerhint.method=getElementChildren
-//query element_children[in,out]
+//
 @take.compilerhint.class=InternetApplication_Name
 @take.compilerhint.slots=app,string
 @take.compilerhint.method=getAppName
 query app_name[in,out]
-//@take.compilerhint.class=NamedElement_Name
-//@take.compilerhint.slots=element,string
-//@take.compilerhint.method=getElementNames
-// query element_name[element,string]
-// this is the query that should exist for our example model
-//query input_form_name[in,out]
+//
 @take.compilerhint.class=GeneratedAppChildren
 @take.compilerhint.slots=app,element
 @take.compilerhint.method=getApplicationChildren
 query generated_app_children[in,out]
+//
 @take.compilerhint.class=TestFromExternal
 @take.compilerhint.slots=app,string
 @take.compilerhint.method=getTestFromExternal
 query test_from_external[in,out]
-// query impossible[element]
-// the old query (other elements have been removed)
-// rule1: if app_name[app, 'test'] then rule_2[app]
-// this rule can't handle [page] var, but can handle [page_ref_temp] ref
-// this rule can't compile unless we have the fact_temp_page below
+// 
+// rules
 rule_test: if app_name[app, 'test'] then generated_app_children[app, page_wrapper]
-// fact_temp_page: page_name[page_ref_temp, 'test'] 
-// this rule works fine
 rule_test_external: if app_name[app, 'test'] then test_from_external[app, 'hello world']
+//
+// external fact stores
 external factsPage_Name: page_name[Page, java.lang.String]
 external factsInputForm_Name: input_form_name[InputForm, java.lang.String]
 external factsInternetApplication_Children: app_children[InternetApplication, ApplicationElement]
@@ -66,27 +52,3 @@ fact1: a[app]
 //test2_2: if test2_c[app] then test2_d[app]
 //test2_3: if test2_a[app] then test2_d[app]
 //fact1: test2_a[app]
-//
-//
-//
-//
-//
-//
-// old testing rules
-// var String X
-// ruleNamed1: if page_element_name[page, X] then element_name[page, X]
-// ruleNamed2: if form_element_name[input_form, X] then element_name[input_form, X]
-//
-//
-//
-//
-// original take example 
-// var example.nz.org.take.compiler.example1.Customer customer
-// ref example.nz.org.take.compiler.example1.Discount goldCustomerDiscount
-// @take.compilerhint.class=CustomerDiscount
-// @take.compilerhint.slots=customer,discount
-// @take.compilerhint.method=getDiscount
-// query discount[in,out]
-// rules
-// rule1: if category[customer,'gold'] then discount[customer,goldCustomerDiscount] 
-// rule2: if 500<customer.turnover then category[customer,'gold']

@@ -10,11 +10,11 @@
 	<classpathentry exported="true" kind="lib" path="lib/prereqs/juel-2.1.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/prereqs/log4j-1.2.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/prereqs/velocity-dep-1.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/take-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-1.5.jar" sourcepath="/take"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-examples-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-javac1.5-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-javac1.6-1.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/take-rt-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-rt-1.5.jar" sourcepath="/take"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-script-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-tests-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-userv-1.5.jar"/>

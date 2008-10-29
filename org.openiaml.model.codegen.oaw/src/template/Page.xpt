@@ -3,68 +3,66 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* default = nothing */
-«DEFINE expandPage FOR model::ApplicationElement»
+«DEFINE expandPage FOR model::ApplicationElement-»
 «ENDDEFINE»
 
-«DEFINE expandPage FOR model::visual::Page»
-	«FILE "output/"+safeName(id)+".html"»
+«DEFINE expandPage FOR model::visual::Page-»
+	«FILE "output/"+safeName(id)+".html"-»
 		<html>
 		<head>
 			<title>«pageTitle()»</title>
 			<link rel="stylesheet" type="text/css" href="default.css" />
 			<script language="Javascript">
-				«EXPAND expandOperations FOR this»
+				«EXPAND expandOperations FOR this-»
 			</script>
 		</head>
 		
 		<body>
 		<h1>«pageTitle()»</h1>
 		
-		<form id="unnecessary_form_because_of_jwebunit_or_html_standard">
-		«EXPAND expandChild FOREACH children»
-		</form>
+		«EXPAND expandChild FOREACH children-»
 		
 		</body>
 		</html>
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE expandChild FOR model::ApplicationElement»
+«DEFINE expandChild FOR model::ApplicationElement-»
 «ENDDEFINE»
 
-«DEFINE expandChild FOR model::visual::InputForm»
-	<form id="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers»>
+«DEFINE expandChild FOR model::visual::InputForm-»
+	<form id="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
 		<h2>«formName()»</h2>
 		
-		«EXPAND expandChild FOREACH children»
+		«EXPAND expandChild FOREACH children-»
 	
 		<input type="submit">
 	</form>
 «ENDDEFINE»
 
-«DEFINE expandChild FOR model::visual::InputTextField»
+«DEFINE expandChild FOR model::visual::InputTextField-»
 	<div>
 	<label id="label_«safeName(id)»">
 		«textFieldName()»
 		
-		<input type="text" id="«safeName(id)»" name="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers»>
+		<input type="text" id="«safeName(id)»" name="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
 	</label>
 	</div>
 «ENDDEFINE»
 
 /* expand out the operations for the page */
-«DEFINE expandOperations FOR model::ContainsOperations»
-	«EXPAND expandOperation FOREACH operations»
+«DEFINE expandOperations FOR model::ContainsOperations-»
+	«EXPAND expandOperation FOREACH operations-»
 «ENDDEFINE»
 
-«DEFINE expandOperations FOR model::ApplicationElementContainer»
-	«EXPAND expandOperation FOREACH operations»
-	«EXPAND expandOperations FOREACH children»
+«DEFINE expandOperations FOR model::ApplicationElementContainer-»
+	«EXPAND expandOperation FOREACH operations-»
+	«EXPAND expandOperations FOREACH children-»
 «ENDDEFINE»
 
-«DEFINE expandOperation FOR model::Operation»
+«DEFINE expandOperation FOR model::Operation-»
 	/* simple operation */
-	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "») {
+	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
 		alert("simple operation: «name»");
 	}
 «ENDDEFINE»
@@ -72,59 +70,59 @@
 «DEFINE expandOperation FOR model::CompositeOperation»
 	/* composite operation */
 	var running_«safeName()» = false;
-	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "») {
+	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
 		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
 		// operation: «name»
-		if (running_«safeName()» == false) {
-			running_«safeName()» = true;		// prevent loops
-			«EXPAND doExecutionFlow FOR startNode()»
-			running_«safeName()» = false;
+		if (running_«safeName()-» == false) {
+			running_«safeName()-» = true;		// prevent loops
+			«EXPAND doExecutionFlow FOR startNode()-»
+			running_«safeName()-» = false;
 		}
 	}
 «ENDDEFINE»
 
-«DEFINE expandParameters FOR model::Parameter»
-	«safeName()»
+«DEFINE expandParameters FOR model::Parameter-»
+	«safeName()-»
 «ENDDEFINE»
 
 /* I don't know how in JS we are supposed to handle multiple out edges yet... but we'll get there ;) */
-«DEFINE doExecutionFlow FOR model::operations::StartNode»
+«DEFINE doExecutionFlow FOR model::operations::StartNode-»
 	// flow starts here
-	«FOREACH outExecutions AS e»
-		«EXPAND doExecutionFlowNext FOR e.to»
+	«FOREACH outExecutions AS e-»
+		«EXPAND doExecutionFlowNext FOR e.to-»
 	«ENDFOREACH»
 «ENDDEFINE»
 
-«DEFINE doExecutionFlow FOR model::ActivityNode»
+«DEFINE doExecutionFlow FOR model::ActivityNode-»
 	// nothing for an activity node
 «ENDDEFINE»
 
 /* an edge that is the end (both StartNode and FinishNode also fall into this) */
-«DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination»
-	// do nothing «this»
+«DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-»
+	// do nothing «this-»
 «ENDDEFINE»
 
 /* a chained operation: carry on */
-«DEFINE doExecutionFlowNext FOR model::ChainedOperation»
-	// chained operation «name»
-	«EXPAND expandOperationContents FOR this»
-	«FOREACH outExecutions AS e»
-		«EXPAND doExecutionFlowNext FOR e.to»
+«DEFINE doExecutionFlowNext FOR model::ChainedOperation-»
+	// chained operation «name-»
+	«EXPAND expandOperationContents FOR this-»
+	«FOREACH outExecutions AS e-»
+		«EXPAND doExecutionFlowNext FOR e.to-»
 	«ENDFOREACH»
 «ENDDEFINE»
 
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
-«DEFINE expandOperationContents FOR model::Operation»
+«DEFINE expandOperationContents FOR model::Operation-»
 	«REM»special operation names«ENDREM»
-	«IF name == "setPropertyToValue"»
+	«IF name == "setPropertyToValue"-»
 		«REM»outflowTarget == inflowTarget«ENDREM»
-		«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from»;
+		«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
 		
 		«REM»
 			now we expand all the event triggers for the source element that contains the fieldValue: 
 			if any of them have an eventTrigger, they should be called if necessary
 		«ENDREM»
-		«EXPAND EventTrigger::expandEventTriggersInline FOR outFlows.first().to.eContainer»
+		«EXPAND EventTrigger::expandEventTriggersInline FOR outFlows.first().to.eContainer-»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
 		«operationName()»(/* todo: parameters */);

@@ -6,6 +6,8 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 import java.util.Random;
 
+import net.sourceforge.jwebunit.api.IElement;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.inference.CreateMissingElements;
@@ -74,70 +76,119 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
-		goSitemapThenPage(sitemap, "page1");
+		{
+			goSitemapThenPage(sitemap, "page1");
+			
+			// fill in a field on page 1
+			String label_text1 = getLabelIDForText("text1");
+			String label_text2 = getLabelIDForText("text2");
+			
+			assertLabelPresent(label_text1);
+			assertLabelPresent(label_text2);
+			setLabeledFormElementField(label_text1, testingText);
+		}
 		
-		// fill in a field on page 1
-		assertLabelPresent("text1");
-		assertLabelPresent("text2");
-		setTextField("text1", testingText);
+		{
+			// go to page2
+			goSitemapThenPage(sitemap, "page2");
+	
+			// check text1 field has changed
+			String label_text1 = getLabelIDForText("text1");
+			String label_text3 = getLabelIDForText("text3");
+			
+			assertLabelPresent(label_text1);
+			assertLabelPresent(label_text3);
+			assertLabeledFieldEquals(label_text1, testingText);
+		}
 		
-		// go to page2
-		goSitemapThenPage(sitemap, "page2");
+		{
+			// go to page3
+			goSitemapThenPage(sitemap, "page3");
+			
+			// check text1 field has changed
+			String label_text1 = getLabelIDForText("text1");
+			String label_text3 = getLabelIDForText("text3");
+			
+			assertLabelPresent(label_text1);
+			assertLabelPresent(label_text3);
+			assertLabeledFieldEquals(label_text1, testingText);
+		}
+			
+		{
+			// go to page 2
+			goSitemapThenPage(sitemap, "page2");
+			
+			// change field
+			String label_text3 = getLabelIDForText("text3");
+			
+			assertLabelPresent(label_text3);
+			setLabeledFormElementField(label_text3, testingText2);
+		}
 
-		// check text1 field has changed
-		assertLabelPresent("text1");
-		assertLabelPresent("text3");
-		assertLabeledFieldEquals("text1", testingText);
+		{
+			// go to page 3
+			goSitemapThenPage(sitemap, "page3");
+			
+			// check fields have synced
+			String label_text3 = getLabelIDForText("text3");
+			String label_newText = getLabelIDForText("newText");
 
-		// go to page3
-		goSitemapThenPage(sitemap, "page3");
+			assertLabelPresent(label_text3);
+			assertLabeledFieldEquals(label_text3, testingText2);
+			assertLabelPresent(label_newText);
+			assertLabeledFieldEquals(label_newText, testingText2);
+		}
 		
-		// check text1 field has changed
-		assertLabelPresent("text1");
-		assertLabelPresent("text3");
-		assertLabeledFieldEquals("text1", testingText);
-		
-		// go to page 2
-		goSitemapThenPage(sitemap, "page2");
-		
-		// change field
-		assertLabelPresent("text3");
-		setLabeledFormElementField("text3", testingText2);
+		{
+			// go to page 4 - it should still sync over even if the fields are only sync'd up on the page itself
+			goSitemapThenPage(sitemap, "page4");
+			
+			// check fields have synced
+			String label_text5 = getLabelIDForText("text5");
+			String label_newText = getLabelIDForText("newText");
 
-		// go to page 3
-		goSitemapThenPage(sitemap, "page3");
+			assertLabelPresent(label_newText);
+			assertLabeledFieldEquals(label_newText, testingText2);
+			assertLabelPresent(label_text5);
+			assertLabeledFieldEquals(label_text5, testingText2);
+		}
 		
-		// check fields have synced
-		assertLabelPresent("text3");
-		assertLabeledFieldEquals("text3", testingText2);
-		assertLabelPresent("newText");
-		assertLabeledFieldEquals("newText", testingText2);
-		
-		// go to page 4 - it should still sync over even if the fields are only sync'd up on the page itself
-		goSitemapThenPage(sitemap, "page4");
-		
-		// check fields have synced
-		assertLabelPresent("newText");
-		assertLabeledFieldEquals("newText", testingText2);
-		assertLabelPresent("text5");
-		assertLabeledFieldEquals("text5", testingText2);
-		
-		// go to page 5 and check this one
-		goSitemapThenPage(sitemap, "page5");
-		assertLabelPresent("text5");
-		assertLabeledFieldEquals("text5", testingText2);
-		
-		// lets change it, why not
-		setLabeledFormElementField("text5", testingText3);
+		{
+			// go to page 5 and check this one
+			goSitemapThenPage(sitemap, "page5");
 
-		// it should change something on page 2
-		goSitemapThenPage(sitemap, "page2");
+			String label_text5 = getLabelIDForText("text5");
+
+			assertLabelPresent(label_text5);
+			assertLabeledFieldEquals(label_text5, testingText2);
+			
+			// lets change it, why not
+			setLabeledFormElementField(label_text5, testingText3);
+		}
 		
-		// check fields have synced
-		assertLabelPresent("text3");
-		assertLabeledFieldEquals("text3", testingText3);
+		{
+			// it should change something on page 2
+			goSitemapThenPage(sitemap, "page2");
 
+			String label_text3 = getLabelIDForText("text3");
 
+			// check fields have synced
+			assertLabelPresent(label_text3);
+			assertLabeledFieldEquals(label_text3, testingText3);
+		}
+		
+	}
+	
+	/**
+	 * We need some way of working out the label ID that contains 
+	 * a particular string.
+	 * 
+	 * @param text
+	 * @return
+	 */
+	protected String getLabelIDForText(String text) {
+		IElement element = getElementByXPath("//*[contains(text(),'" + text + "')]");
+		return element.getAttribute("id");
 	}
 
 	/**

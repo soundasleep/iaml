@@ -22,6 +22,8 @@
 		
 		«EXPAND expandChild FOREACH children-»
 		
+		<div id="debug">			
+		<div>
 		</body>
 		</html>
 	«ENDFILE»

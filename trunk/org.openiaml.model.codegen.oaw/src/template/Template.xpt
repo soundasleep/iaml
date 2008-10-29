@@ -26,6 +26,14 @@
 	«FILE "output/default.css"»
 		«EXPAND css::DefaultCss::defaultCss»
 	«ENDFILE»
+
+	«FILE "output/js/prototype.js"»
+		«EXPAND js::PrototypeJs::prototypeJs»
+	«ENDFILE»
+
+	«FILE "output/default.js"»
+		«EXPAND js::DefaultJs::defaultJs»
+	«ENDFILE»
 «ENDDEFINE»
 
 /* default = nothing */

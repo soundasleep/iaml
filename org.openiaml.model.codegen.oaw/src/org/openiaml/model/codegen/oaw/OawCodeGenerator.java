@@ -23,7 +23,8 @@ import org.openiaml.model.codegen.ICodeGenerator;
 public class OawCodeGenerator implements ICodeGenerator {
 	
 	/**
-	 * Generate code for a given model file into a given output directory
+	 * Generate code for a given model file into a given output directory.
+	 * Does NOT deal with inference.
 	 * 
 	 */
 	public IStatus generateCode(IFile file, IProgressMonitor monitor) {

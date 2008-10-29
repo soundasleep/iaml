@@ -1,0 +1,83 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE defaultJs FOR model::InternetApplication»
+
+var debug_message_saved = "";
+function debug(msg) {
+	var debug_string = "<li>" + msg + "\n";
+	if (document.getElementById('debug')) {
+		document.getElementById('debug').innerHTML += debug_message_saved + debug_string;
+		debug_message_saved = "";
+	} else {
+		debug_message_saved += debug_string;
+	}
+}
+
+/**
+ * Populate all of the fields on the page.
+ */
+function populateFields() {
+	// get all fields on the page
+	debug("populating fields...");
+	populateAll(document.getElementsByTagName("input"));
+	populateAll(document.getElementsByTagName("textarea"));
+}
+
+/**
+ * Populate all of the fields in the list, based on .id and .value
+ */
+function populateAll(fields) {
+	var i;
+	for (i = 0; i < fields.length; i++) {
+		var cookieName = "field_" + fields[i].id;
+		if (readCookie(cookieName) != null) {
+			debug("field " + fields[i].id + " (cookie name " + cookieName + ") set to value " + readCookie(cookieName));
+			fields[i].value = readCookie(cookieName);
+		}
+	}
+}
+
+/**
+ * Save the value of a particular field
+ */
+function setField(field) {
+	debug("saving cookie for " + field.id);
+	createCookie("field_" + field.id, field.value, 30);
+}
+
+// ---------
+
+/**
+ * Copied from http://www.quirksmode.org/js/cookies.html
+ */
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
+/* page onload functions */
+populateFields();
+
+«ENDDEFINE»

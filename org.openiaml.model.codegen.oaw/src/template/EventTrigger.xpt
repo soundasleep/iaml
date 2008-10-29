@@ -38,7 +38,15 @@
 
 /* run a command with some parameters */
 «DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire»
-	do_«operationName(to)»(«EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»);
+	«IF onCurrentPage(from, to)»
+		// on current page (wire id = «id»)
+		do_«operationName(to)»(«EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»);
+	«ELSE»
+		// not on current page (wire id = «id»)
+		store_event('«containingPage(to).id»', 'do_«operationName(to)»'
+			«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
+		);
+	«ENDIF»
 «ENDDEFINE»
 
 /* ditto: check or error? */

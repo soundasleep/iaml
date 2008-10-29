@@ -22,18 +22,15 @@
 		</html>
 	«ENDFILE»
 
-	«REM»create the css manually«ENDREM»
-	«FILE "output/default.css"»
-		«EXPAND css::DefaultCss::defaultCss»
-	«ENDFILE»
+	«REM»create other files manually«ENDREM»
+	«FILE "output/default.css"»«EXPAND css::DefaultCss::defaultCss»«ENDFILE»
 
-	«FILE "output/js/prototype.js"»
-		«EXPAND js::PrototypeJs::prototypeJs»
-	«ENDFILE»
+	«FILE "output/js/prototype.js"»«EXPAND js::PrototypeJs::prototypeJs»«ENDFILE»
 
-	«FILE "output/default.js"»
-		«EXPAND js::DefaultJs::defaultJs»
-	«ENDFILE»
+	«FILE "output/default.js"»«EXPAND js::DefaultJs::defaultJs»«ENDFILE»
+
+	«FILE "output/store_event.php"»«EXPAND php::StoreEventsPhp::storeEventsPhp»«ENDFILE»
+
 «ENDDEFINE»
 
 /* default = nothing */
@@ -42,6 +39,6 @@
 
 «DEFINE expandSitemapPage FOR model::visual::Page»
 <li>
-	<a href="«safeName(id)».html">«name»</a>
+	<a href="«safeName(id)».php">«name»</a>
 </li>
 «ENDDEFINE»

@@ -77,31 +77,30 @@ public class SyncWiresTestCase extends InferenceTestCase {
 		setTextField("name1", testingText);
 
 		// why is this deprecated? o_O
-		assertFormElementEquals("name1", testingText);
+		assertTextFieldEquals("name1", testingText);
 		System.out.println(this.getPageSource());
 		
 		// it should sync over automatically
-		assertFormElementEquals("name2", testingText);
+		assertTextFieldEquals("name2", testingText);
 		
 		// and with the other elements as well
 		assertFormElementPresent("name3");
 		assertFormElementPresent("name4");
-		assertFormElementEquals("name3", testingText);	// tests element chaining
-		assertFormElementEquals("name4", testingText);
+		assertTextFieldEquals("name3", testingText);	// tests element chaining
+		assertTextFieldEquals("name4", testingText);
 		
 		// edit some other fields on the same page
 		setTextField("name3", testingText2);
-		assertFormElementEquals("name3", testingText2);	// tests element chaining + skipping
-		assertFormElementEquals("name1", testingText2);
+		assertTextFieldEquals("name3", testingText2);	// tests element chaining + skipping
+		assertTextFieldEquals("name1", testingText2);
 		
 		// one to four
 		setTextField("name1", testingText3);
-		assertFormElementEquals("name1", testingText3);
-		assertFormElementEquals("name4", testingText3);
+		assertTextFieldEquals("name1", testingText3);
+		assertTextFieldEquals("name4", testingText3);
 		
 		// an unrelated field shouldn't change
-		// currently fails here, because htmlunit can't find fields outside the current form/the first form?
-		assertFormElementEquals("unrelated-field", "");
+		assertTextFieldEquals("unrelated_field", "");
 
 	}
 }

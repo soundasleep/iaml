@@ -208,19 +208,5 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 	public IProject getProject() {
 		return project;
 	}
-
-	
-	/**
-	 * I'm not sure why this method is deprecated, but I am simply wrapping it here
-	 * so Eclipse doesn't complain about our deprecated method usage.
-	 * 
-	 * @see net.sourceforge.jwebunit.junit.WebTestCase#assertFormElementEquals(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public void assertFormElementEquals(String formElementName,
-			String expectedValue) {
-		super.assertFormElementEquals(formElementName, expectedValue);
-	}
-	
 	
 }

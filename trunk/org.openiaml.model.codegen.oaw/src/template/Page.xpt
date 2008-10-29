@@ -7,17 +7,28 @@
 «ENDDEFINE»
 
 «DEFINE expandPage FOR model::visual::Page-»
-	«FILE "output/"+safeName(id)+".html"-»
+	«FILE "output/"+safeName(id)+".php"-»
 		<html>
 		<head>
 			<title>«pageTitle()»</title>
 			<link rel="stylesheet" type="text/css" href="default.css" />
+			<script language="Javascript" src="js/prototype.js"></script>
+			<script language="Javascript" src="default.js"></script>
 			<script language="Javascript">
 				«EXPAND expandOperations FOR this-»
+				
+				// this needs to be loaded *after* the page has loaded
+				function loadStoredEvents() {
+					<?php 
+					«EXPAND php::EventsPhp::eventsPhp FOR this-» 
+					?>
+				}
 			</script>
 		</head>
 		
-		<body>
+		<body onLoad="loadStoredEvents()">
+		<div style="font-size:small; text-align: right;"><a href="sitemap.html">sitemap</a></div>
+		
 		<h1>«pageTitle()»</h1>
 		
 		«EXPAND expandChild FOREACH children-»

@@ -4,6 +4,20 @@
 
 «DEFINE defaultJs FOR model::InternetApplication»
 
+/* approach #2: use event queues stored on the server, if the function is
+   not available on the current page */
+function store_event(page_id, event_name, arg0) {
+	new Ajax.Request('store_event.php?page_id=' + page_id + '&event_name=' + event_name + "&arg0=" + arg0,
+  {
+    method:'get',
+    onSuccess: function(transport){
+      // var response = transport.responseText || "no response text";
+      // alert("Success! \n\n" + response);
+    },
+    onFailure: function(){ alert('Something went wrong...') }
+  });
+}
+
 var debug_message_saved = "";
 function debug(msg) {
 	var debug_string = "<li>" + msg + "\n";

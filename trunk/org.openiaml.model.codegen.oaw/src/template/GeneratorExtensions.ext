@@ -28,6 +28,24 @@ operationName(model::WireEdgeDestination this) :
 
 operationName(model::Operation this) :
 	safeName(this);
+	
+/* is this operation contained in the current page? */
+model::visual::Page containingPage(model::visual::Page element) :
+	element;
+	
+model::visual::Page containingPage(model::Operation element) :
+	containingPage(element.eContainer);
+
+model::visual::Page containingPage(model::NamedElement element) :
+	containingPage(element.eContainer);
+
+/* default for any EObject */
+model::visual::Page containingPage(emf::EObject element) :
+	null;
+
+onCurrentPage(model::WireEdgesSource pageElement, model::WireEdgeDestination target) :
+	containingPage(pageElement) != null && 
+	containingPage(pageElement) == containingPage(target);
 
 /* get the start node for an operation */
 startNode(model::CompositeOperation this) :

@@ -1,0 +1,31 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE storeEventsPhp FOR model::InternetApplication-»
+<?php
+
+$page_id = $_GET["page_id"] or die("no page id");
+$event_name = $_GET["event_name"] or die("no event name");
+$arg0 = $_GET["arg0"] or die("no arg0");
+
+// first, make sure the table exists
+$db = new PDO('sqlite:test.db') or die("could not open db");
+$s = $db->prepare("SELECT * FROM stored_events");
+if (!$s) {
+	// create the table
+	$q = $db->query("CREATE TABLE stored_events (
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			page_id VARCHAR(64) NOT NULL,
+			event_name VARCHAR(64) NOT NULL,
+			arg0 BLOB
+		);") or die("could not create table: " . print_r($db->errorInfo(), true));
+}
+
+// then insert it
+$s = $db->prepare("INSERT INTO stored_events (page_id, event_name, arg0) VALUES (?, ?, ?)") or die("could not prepare query: " . print_r($db->errorInfo(), true));
+$s->execute(array($page_id, $event_name, $arg0)) or die("could not execute insert query: " . print_r($db->errorInfo(), true));
+echo "ok";
+
+?>
+«ENDDEFINE»

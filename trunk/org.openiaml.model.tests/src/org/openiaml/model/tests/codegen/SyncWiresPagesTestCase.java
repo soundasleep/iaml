@@ -77,65 +77,65 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 		goSitemapThenPage(sitemap, "page1");
 		
 		// fill in a field on page 1
-		assertFormElementWithLabelPresent("text1");
-		assertFormElementWithLabelPresent("text2");
+		assertLabelPresent("text1");
+		assertLabelPresent("text2");
 		setTextField("text1", testingText);
 		
 		// go to page2
 		goSitemapThenPage(sitemap, "page2");
 
 		// check text1 field has changed
-		assertFormElementWithLabelPresent("text1");
-		assertFormElementWithLabelPresent("text3");
-		assertFormElementWithLabelEquals("text1", testingText);
+		assertLabelPresent("text1");
+		assertLabelPresent("text3");
+		assertLabeledFieldEquals("text1", testingText);
 
 		// go to page3
 		goSitemapThenPage(sitemap, "page3");
 		
 		// check text1 field has changed
-		assertFormElementWithLabelPresent("text1");
-		assertFormElementWithLabelPresent("text3");
-		assertFormElementWithLabelEquals("text1", testingText);
+		assertLabelPresent("text1");
+		assertLabelPresent("text3");
+		assertLabeledFieldEquals("text1", testingText);
 		
 		// go to page 2
 		goSitemapThenPage(sitemap, "page2");
 		
 		// change field
-		assertFormElementWithLabelPresent("text3");
-		setTextFieldWithLabel("text3", testingText2);
+		assertLabelPresent("text3");
+		setLabeledFormElementField("text3", testingText2);
 
 		// go to page 3
 		goSitemapThenPage(sitemap, "page3");
 		
 		// check fields have synced
-		assertFormElementWithLabelPresent("text3");
-		assertFormElementWithLabelEquals("text3", testingText2);
-		assertFormElementWithLabelPresent("newText");
-		assertFormElementWithLabelEquals("newText", testingText2);
+		assertLabelPresent("text3");
+		assertLabeledFieldEquals("text3", testingText2);
+		assertLabelPresent("newText");
+		assertLabeledFieldEquals("newText", testingText2);
 		
 		// go to page 4 - it should still sync over even if the fields are only sync'd up on the page itself
 		goSitemapThenPage(sitemap, "page4");
 		
 		// check fields have synced
-		assertFormElementWithLabelPresent("newText");
-		assertFormElementWithLabelEquals("newText", testingText2);
-		assertFormElementWithLabelPresent("text5");
-		assertFormElementWithLabelEquals("text5", testingText2);
+		assertLabelPresent("newText");
+		assertLabeledFieldEquals("newText", testingText2);
+		assertLabelPresent("text5");
+		assertLabeledFieldEquals("text5", testingText2);
 		
 		// go to page 5 and check this one
 		goSitemapThenPage(sitemap, "page5");
-		assertFormElementWithLabelPresent("text5");
-		assertFormElementWithLabelEquals("text5", testingText2);
+		assertLabelPresent("text5");
+		assertLabeledFieldEquals("text5", testingText2);
 		
 		// lets change it, why not
-		setTextFieldWithLabel("text5", testingText3);
+		setLabeledFormElementField("text5", testingText3);
 
 		// it should change something on page 2
 		goSitemapThenPage(sitemap, "page2");
 		
 		// check fields have synced
-		assertFormElementWithLabelPresent("text3");
-		assertFormElementWithLabelEquals("text3", testingText3);
+		assertLabelPresent("text3");
+		assertLabeledFieldEquals("text3", testingText3);
 
 
 	}
@@ -148,7 +148,7 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 	 * @param inputName
 	 * @param value
 	 */
-	protected void setTextFieldWithLabel(String inputName, String value) {
+	protected void xsetTextFieldWithLabel(String inputName, String value) {
 		// currently no way to do it in JWebUnit
 		setTextField(inputName, value);
 	}
@@ -161,7 +161,7 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 	 * @param formElementName
 	 * @param expectedValue
 	 */
-	protected void assertFormElementWithLabelEquals(String formElementName,
+	protected void xassertFormElementWithLabelEquals(String formElementName,
 			String expectedValue) {
 		// currently no way to do it in JWebUnit
 		assertFormElementEquals(formElementName, expectedValue);
@@ -175,7 +175,7 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 	 * 
 	 * @param formElementName
 	 */
-	protected void assertFormElementWithLabelPresent(String formElementName) {
+	protected void xassertFormElementWithLabelPresent(String formElementName) {
 		// currently no way to do it in JWebUnit
 		assertFormElementPresent(formElementName);
 		

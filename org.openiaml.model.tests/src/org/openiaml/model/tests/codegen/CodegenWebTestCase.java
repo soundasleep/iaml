@@ -46,7 +46,7 @@ public abstract class CodegenWebTestCase extends WebTestCase {
 		project = createProject();
 
 		// set test context
-		getTestContext().setBaseUrl("file:///" + project.getLocation());
+		getTestContext().setBaseUrl("http://localhost:8080/junit-workspace/" + project.getName() + "/");
 	}
 
 	/**

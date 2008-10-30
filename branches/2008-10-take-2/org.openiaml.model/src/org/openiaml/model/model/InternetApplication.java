@@ -74,5 +74,8 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 * @generated
 	 */
 	EList<DomainStore> getDomainStores();
+	
+	/**hack */
+	String getName();
 
 } // InternetApplication

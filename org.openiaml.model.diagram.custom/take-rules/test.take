@@ -3,52 +3,12 @@
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.take.tests.*
-ref ApplicationElement another
-var InputForm input_form
+
 var Page page
-ref Page page_ref_temp
-ref InternetApplication app
-ref ApplicationElementContainer aec
-ref PageWrapper page_wrapper
-//
-@take.compilerhint.class=InternetApplication_Name
-@take.compilerhint.slots=app,string
-@take.compilerhint.method=getAppName
-query app_name[in,out]
-//
-@take.compilerhint.class=GeneratedAppChildren
-@take.compilerhint.slots=app,element
-@take.compilerhint.method=getApplicationChildren
-query generated_app_children[in,out]
-//
-@take.compilerhint.class=TestFromExternal
-@take.compilerhint.slots=app,string
-@take.compilerhint.method=getTestFromExternal
-query test_from_external[in,out]
-// 
-// rules
-rule_test: if app_name[app, 'test'] then generated_app_children[app, page_wrapper]
-rule_test_external: if app_name[app, 'test'] then test_from_external[app, 'hello world']
-//
-// external fact stores
-external factsPage_Name: page_name[Page, java.lang.String]
-external factsInputForm_Name: input_form_name[InputForm, java.lang.String]
-external factsInternetApplication_Children: app_children[InternetApplication, ApplicationElement]
-external factsApplicationElementContainer_Children: element_children[ApplicationElementContainer, ApplicationElement]
-external factsInternetApplication_Name: app_name[InternetApplication, java.lang.String]
-// test some really obvious facts
-@take.compilerhint.class=TestQueryB
-@take.compilerhint.slots=app
-@take.compilerhint.method=getTestQueryB
-query b[in]
-test1: if a[app] then b[app]
-fact1: a[app]
-// another test
-//@take.compilerhint.class=TestQueryB
-//@take.compilerhint.slots=app
-//@take.compilerhint.method=getTestQueryB
-//query test2_b[out]
-//test2_1: if test2_a[app] then test2_b[app]
-//test2_2: if test2_c[app] then test2_d[app]
-//test2_3: if test2_a[app] then test2_d[app]
-//fact1: test2_a[app]
+var InternetApplication app
+
+@take.compilerhint.class=ActionGeneratePage
+@take.compilerhint.slots=app,page
+@take.compilerhint.method=getPagesToGenerate
+query doGenerate[in,out]
+rule1: if app.name=='test' and children[app, page] and page.name=='generated' then doGenerate[app,page]  

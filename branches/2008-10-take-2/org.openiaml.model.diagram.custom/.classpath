@@ -15,7 +15,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/take-javac1.5-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-javac1.6-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-rt-1.5.jar" sourcepath="/take"/>
-	<classpathentry exported="true" kind="lib" path="lib/take-script-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/take-script-1.5.jar" sourcepath="/take"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-tests-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-userv-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/take-userv-rt-1.5.jar"/>

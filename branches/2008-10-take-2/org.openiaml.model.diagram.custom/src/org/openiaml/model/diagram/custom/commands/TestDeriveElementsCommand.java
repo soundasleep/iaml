@@ -3,18 +3,7 @@
  */
 package org.openiaml.model.diagram.custom.commands;
 
-import iaml.generated2.ExternalFactStore4InternetApplication_Name;
-import iaml.generated2.ExternalFactStore4app_children;
-import iaml.generated2.ExternalFactStore4element_children;
-import iaml.generated2.ExternalFactStore4input_form_name;
-import iaml.generated2.ExternalFactStore4page_name;
-import iaml.generated2.FactStores;
-import iaml.generated2.GeneratedAppChildren;
-import iaml.generated2.InternetApplication_Name;
 import iaml.generated2.KBGenerated;
-import iaml.generated2.element_children;
-import iaml.generated2.input_form_name;
-import iaml.generated2.page_name;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,14 +32,10 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.model.visual.InputForm;
-import org.openiaml.model.model.visual.Page;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -102,6 +87,7 @@ public class TestDeriveElementsCommand
 
 	private InternetApplicationEditPart selectedElement;
 
+	/*
 	private class Impl_ExternalFactStore4element_children
 		extends FactStoreToEMF<Page,InputForm,element_children>
 		implements ExternalFactStore4element_children {
@@ -395,6 +381,7 @@ public class TestDeriveElementsCommand
 			}
 
 	}
+	*/
 		
 	private abstract class FactStoreToEMF<Slot1,Slot2,TakeElement> {
 		/*
@@ -551,10 +538,14 @@ public class TestDeriveElementsCommand
 
 			// get out results
 			System.out.println("results:");
+			/*
 			ResultSet<GeneratedAppChildren> rs = kb.getApplicationChildren(ia);
 			while (rs.hasNext()) {
 				System.out.println("+ child: " + rs.next());
 			}
+			*/
+			if (true)
+				throw new RuntimeException("not implemented");
 
 			/*
 			// get out results
@@ -577,6 +568,7 @@ public class TestDeriveElementsCommand
 		
 		// set up fact stores
 		final InternetApplication ia = (InternetApplication) rootObject;
+		/*
 		FactStores.factsApplicationElementContainer_Children =
 			new Impl_ExternalFactStore4element_children(ia);
 		FactStores.factsInputForm_Name =
@@ -587,6 +579,7 @@ public class TestDeriveElementsCommand
 			new Impl_ExternalFactStore4InternetApplication_Children(ia);
 		FactStores.factsInternetApplication_Name = 
 			new Impl_ExternalFactStore4app_name(ia);
+			*/
 		
 		// the rule compilation and evaluation is done lazily
 		return kb;

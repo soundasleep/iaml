@@ -50,5 +50,8 @@ public interface Page extends VisibleThing {
 	 * @generated
 	 */
 	void setUrl(String value);
+	
+	/** hack */
+	String getName();
 
 } // Page

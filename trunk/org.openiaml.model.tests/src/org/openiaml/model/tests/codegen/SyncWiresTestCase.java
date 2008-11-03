@@ -76,9 +76,7 @@ public class SyncWiresTestCase extends InferenceTestCase {
 		assertFormElementPresent("name2");
 		setTextField("name1", testingText);
 
-		// why is this deprecated? o_O
 		assertTextFieldEquals("name1", testingText);
-		System.out.println(this.getPageSource());
 		
 		// it should sync over automatically
 		assertTextFieldEquals("name2", testingText);

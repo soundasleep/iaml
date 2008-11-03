@@ -5,6 +5,7 @@ import org.openiaml.model.model.visual.*;
 import org.openiaml.model.take.tests.*
 
 var Page page
+ref Page page_ref
 var InternetApplication app
 
 @take.compilerhint.class=ActionGeneratePage
@@ -24,17 +25,20 @@ query generate_generated_page[in,in]
 rule4: if app.name=='test' then generate_generated_page[app, page]
 
 @take.compilerhint.class=ActionHasGeneratedPage
-//@take.compilerhint.slots=app,page
-@take.compilerhint.slots=app
+@take.compilerhint.slots=app,page
+//@take.compilerhint.slots=app
 @take.compilerhint.method=getHasGeneratedPages
-//query has_page[in,out]
-query has_page[in]
+query children2[in,out]
+//query has_page[in]
 // errors::
 // rule5: if app.name=='test' then has_page[app, page] and page.name=='generated page'
-rule5: if app.name=='test' then has_page[app]
+//rule5: if app.name=='test' then has_page[app]
+rule5_new: if app.name=='test' then children2[app, page] and name[page, 'generated']
+// get additional existing children
+rule_children: if children[app, page] then children2[app, page]
 // fails: rule6: if has_generated_page[app] then children[app,page] and page.name=='generated'
 // compiles OK: but does nothing (i.e. does not generate)
-rule6: if children[app,page] and page.name=='generated' then has_page[app]
+//rule6: if children[app,page] and page.name=='generated' then has_page[app]
 // ?? rule7: if has_generated_page[app] then page.name=='generated' and children[app, page]
 
 // errors: (trying to stop rule inference)
@@ -50,3 +54,24 @@ rule10: if app.name=='test' and not already_has_generated_page[app] then needs_g
 // try to stop unnecessary page generation: succeeds!
 //rule10_a: if children[app, page] and page.name=='page' then already_has_generated_page[app]
 rule10_stop: if children[app, page] and page.name=='generated' then already_has_generated_page[app]
+
+// try generate page automatically
+@take.compilerhint.class=CreatePage
+@take.compilerhint.slots=page
+@take.compilerhint.method=createPage
+// query create_page[in,out]
+query create_page[out]
+//rule10_a: if needs_generated_page[app] then create_page[page]
+//rule10_b: if needs_generated_page[app] and create_page[page] then children[app, page]
+//rule10_c: if needs_generated_page[app] and create_page[page] and children[app, page] then name[page,'generated']
+// final query cannot use == (get), needs [] (set)
+// doesn't do anything
+rule10_a: if needs_generated_page[app] then create_page[page] and children[app, page] and name[page,'generated']
+// try breaking it up
+// the following also does nothing, but makes createPage require a parameter
+//rule10_a: if needs_generated_page[app] then create_for_page[app,page] 
+//rule10_a_0: if create_for_page[app,page] then create_page[page]
+//rule10_a_1: if create_for_page[app,page] then children[app, page]
+//rule10_a_2: if create_for_page[app,page] then name[page,'generated']
+
+

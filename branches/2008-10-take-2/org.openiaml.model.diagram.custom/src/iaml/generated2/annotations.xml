@@ -15,7 +15,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>rule5</string> 
+   <string>rule5_new</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 
@@ -54,7 +54,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>rule6</string> 
+   <string>rule_children</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 

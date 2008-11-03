@@ -1,7 +1,9 @@
 package org.openiaml.model.take.tests;
 
 import iaml.generated2.ActionGeneratePage;
+import iaml.generated2.ActionHasGeneratedPage;
 import iaml.generated2.KBGenerated;
+import iaml.generated2.NeedsGeneratedPage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -75,6 +77,60 @@ public class MyTestCase extends TestCase {
 			ActionGeneratePage r = rs.next();
 			System.out.println("r = " + r);
 		}
+	}	
+
+	/**
+	 * This should just query the external facts source. (passes)
+	 * 
+	 * - app_name[app, 'test']
+	 */
+	public void testGetAppName2() {
+		// try deriving command
+		TestDeriveElementsCommand te = new TestDeriveElementsCommand();		
+		KBGenerated kb = te.executeKnowledgeBase(root);
+		
+		int beforeSize = root.getChildren().size();
+		
+		ResultSet<ActionHasGeneratedPage> rs = kb.getHasGeneratedPages(root);
+		assertTrue(rs.hasNext());
+		while (rs.hasNext()) {
+			ActionHasGeneratedPage r = rs.next();
+			System.out.println("r = " + r);
+			//assertNotSame(root, r.app);		// always true, i.e. it doesn't clone IApp
+		}
+		
+		// did it change the children of the InternetApplication?
+		int afterSize = root.getChildren().size();
+		
+		assertNotSame(beforeSize, afterSize);
+		
+	}	
+
+	/**
+	 * This should just query the external facts source. (passes)
+	 * 
+	 * - app_name[app, 'test']
+	 */
+	public void testGetNeededPages() {
+		// try deriving command
+		TestDeriveElementsCommand te = new TestDeriveElementsCommand();		
+		KBGenerated kb = te.executeKnowledgeBase(root);
+		
+		int beforeSize = root.getChildren().size();
+		
+		ResultSet<NeedsGeneratedPage> rs = kb.getPagesNeededToGenerate(root);
+		assertTrue(rs.hasNext());
+		while (rs.hasNext()) {
+			NeedsGeneratedPage r = rs.next();
+			System.out.println("r = " + r);
+			//assertNotSame(root, r.app);		// always true, i.e. it doesn't clone IApp
+		}
+		
+		// did it change the children of the InternetApplication?
+		int afterSize = root.getChildren().size();
+		
+		assertNotSame(beforeSize, afterSize);
+		
 	}	
 	
 	/**

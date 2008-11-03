@@ -7,7 +7,14 @@ Require-Bundle: org.eclipse.gmf,
  org.eclipse.gmf.runtime.diagram.ui,
  org.openiaml.model.diagram,
  org.junit,
- ca.ecliptical.emf.xpath
+ ca.ecliptical.emf.xpath,
+ org.openiaml.model.codegen.oaw,
+ org.openiaml.model.diagram.domain_object,
+ org.openiaml.model.diagram.domain_store,
+ org.openiaml.model.diagram.element,
+ org.openiaml.model.diagram.operation,
+ org.openiaml.model.diagram.visual,
+ org.openiaml.model.diagram.wire
 Bundle-Vendor: www.openiaml.org
 Export-Package: org.openiaml.model.diagram.custom.actions
 Bundle-ClassPath: lib/prereqs/ant-1.7.0.jar,

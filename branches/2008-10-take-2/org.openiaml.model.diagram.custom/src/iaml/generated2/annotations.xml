@@ -15,7 +15,111 @@
    </object> 
   </void> 
   <void method="put"> 
+   <string>rule5</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule4</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule10</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule6</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
    <string>rule1</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule10_a</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule3</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule2</string> 
+   <object class="java.util.HashMap"> 
+    <void method="put"> 
+     <string>dc:creator</string> 
+     <string>jevon wright</string> 
+    </void> 
+    <void method="put"> 
+     <string>dc:date</string> 
+     <string>09/10/2008</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>rule10_stop</string> 
    <object class="java.util.HashMap"> 
     <void method="put"> 
      <string>dc:creator</string> 

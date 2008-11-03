@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import nz.org.take.rt.ResourceIterator;
-import nz.org.take.rt.ResultSet;
 
 import org.apache.log4j.BasicConfigurator;
 import org.eclipse.core.commands.ExecutionException;

@@ -11,4 +11,42 @@ var InternetApplication app
 @take.compilerhint.slots=app,page
 @take.compilerhint.method=getPagesToGenerate
 query doGenerate[in,out]
-rule1: if app.name=='test' and children[app, page] and page.name=='generated' then doGenerate[app,page]  
+rule1: if app.name=='test' and children[app, page] and page.name=='generated' then doGenerate[app,page]
+
+rule2: if app.name=='test' and page.name=='generated' then children[app, page]
+
+rule3: if app.name=='test' then page.name=='generated' and children[app, page]
+
+@take.compilerhint.class=ActionGeneratePageNew
+@take.compilerhint.slots=app,page
+@take.compilerhint.method=getPagesToGenerateNew
+query generate_generated_page[in,in]
+rule4: if app.name=='test' then generate_generated_page[app, page]
+
+@take.compilerhint.class=ActionHasGeneratedPage
+//@take.compilerhint.slots=app,page
+@take.compilerhint.slots=app
+@take.compilerhint.method=getHasGeneratedPages
+//query has_page[in,out]
+query has_page[in]
+// errors::
+// rule5: if app.name=='test' then has_page[app, page] and page.name=='generated page'
+rule5: if app.name=='test' then has_page[app]
+// fails: rule6: if has_generated_page[app] then children[app,page] and page.name=='generated'
+// compiles OK: but does nothing (i.e. does not generate)
+rule6: if children[app,page] and page.name=='generated' then has_page[app]
+// ?? rule7: if has_generated_page[app] then page.name=='generated' and children[app, page]
+
+// errors: (trying to stop rule inference)
+//rule8: if app.name=='test' and children[app, page] and page.name=='page' then not has_page[app,page]
+
+@take.compilerhint.class=NeedsGeneratedPage
+@take.compilerhint.slots=app
+@take.compilerhint.method=getPagesNeededToGenerate
+query needs_generated_page[in]
+
+rule10: if app.name=='test' and not already_has_generated_page[app] then needs_generated_page[app]
+
+// try to stop unnecessary page generation: succeeds!
+//rule10_a: if children[app, page] and page.name=='page' then already_has_generated_page[app]
+rule10_stop: if children[app, page] and page.name=='generated' then already_has_generated_page[app]

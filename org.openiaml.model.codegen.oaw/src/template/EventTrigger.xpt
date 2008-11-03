@@ -39,10 +39,10 @@
 /* run a command with some parameters */
 «DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire»
 	«IF onCurrentPage(from, to)»
-		// on current page (wire id = «id»)
+		«REM»// on current page (wire id = «id»)«ENDREM»
 		do_«operationName(to)»(«EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»);
 	«ELSE»
-		// not on current page (wire id = «id»)
+		«REM»// not on current page (wire id = «id»)«ENDREM»
 		store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);

@@ -4,6 +4,12 @@
 
 «DEFINE eventsPhp FOR model::visual::Page»
 
+function log_message($msg) {
+	$fp = fopen("php.log", "a");
+	fwrite($fp, date("Y-m-d H:i:s") . " $msg\n");
+	fclose($fp);
+}
+
 /**
  * Expand all possible events for the current page.
  */
@@ -20,13 +26,16 @@ if (!$s) {
 		);") or die("could not create table: " . print_r($db->errorInfo(), true));
 }
 
+log_message("finding events for page id «id»");
 $s = $db->prepare("SELECT * FROM stored_events WHERE page_id=?") or die("could not get stored events: " . print_r($db->errorInfo(), true));
 $s->execute(array("«id»")) or die("could not execute select query: " . print_r($db->errorInfo(), true));
 foreach ($s->fetchAll() as $row) {
+	log_message("found event $row[id]: event_name=$row[event_name] arg0=$row[arg0]");
 	echo $row["event_name"] . "(\"" . $row["arg0"] . "\"); // from db " . $row["id"] . "\n";
 }
 
 // delete all the events for this page now
+log_message("deleting all events for page «id»");
 $s = $db->prepare("DELETE FROM stored_events WHERE page_id=?") or die("could not delete stored events: " . print_r($db->errorInfo(), true));
 $s->execute(array("«id»")) or die("could not execute delete query: " . print_r($db->errorInfo(), true));
 

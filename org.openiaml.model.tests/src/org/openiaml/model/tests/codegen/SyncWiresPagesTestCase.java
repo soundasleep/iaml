@@ -6,6 +6,8 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 import java.util.Random;
 
+import junit.framework.ComparisonFailure;
+
 import net.sourceforge.jwebunit.api.IElement;
 
 import org.eclipse.core.resources.IFile;
@@ -48,7 +50,10 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 		super.tearDown();
 	}
 	
-	protected void goSitemapThenPage(IFile sitemap, String pageText) {
+	protected void goSitemapThenPage(IFile sitemap, String pageText) throws InterruptedException {
+		// sleep a little bit first, so ajax calls can continue
+		Thread.sleep(100);	// TODO probably not necessary?
+		
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 		
@@ -62,9 +67,11 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 	 * tests a single page that have multiple InputTextFields on them
 	 * for a sync wire: when one field changes, the others
 	 * should as well.
+	 * @throws InterruptedException 
 	 * 
 	 */
-	public void testSyncAcrossPages() {
+	public void testSyncAcrossPages() throws InterruptedException {
+		try {
 		String testingText = new Date().toString();
 		String testingText2 = "random" + new Random().nextInt(32768);
 		String testingText3 = "kittens" + new Random().nextInt(32768);
@@ -86,8 +93,26 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 			assertLabelPresent(label_text1);
 			assertLabelPresent(label_text2);
 			setLabeledFormElementField(label_text1, testingText);
+			assertTextFieldEquals("visual_11d293c2f82_4c", testingText);
 		}
-		
+
+		if (true)
+			throw new ComparisonFailure(testingText3, testingText3, testingText3);
+
+
+		// check that the value is still there
+		{
+			goSitemapThenPage(sitemap, "page1");
+			
+			// fill in a field on page 1
+			String label_text1 = getLabelIDForText("text1");
+			String label_text2 = getLabelIDForText("text2");
+			
+			assertLabelPresent(label_text1);
+			assertLabelPresent(label_text2);
+			assertTextFieldEquals("visual_11d293c2f82_4c", testingText);
+		}
+
 		{
 			// go to page2
 			goSitemapThenPage(sitemap, "page2");
@@ -176,8 +201,16 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 			assertLabelPresent(label_text3);
 			assertLabeledFieldEquals(label_text3, testingText3);
 		}
+		} catch (ComparisonFailure e) {
+			// print out the source code
+			System.out.println(getTester().getPageSource());
+			// throw out any response text too
+			Thread.sleep(400);		// wait a little bit for any ajax
+			throw new RuntimeException("Comparison failure when doing AJAX. ResponseText = " + getElementById("response").getTextContent(), e);
+		}
 		
 	}
+	
 	
 	/**
 	 * We need some way of working out the label ID that contains 
@@ -191,44 +224,4 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 		return element.getAttribute("id");
 	}
 
-	/**
-	 * In our code generation, we don't want to currently have to worry about what the IDs
-	 * of the elements are -- only what they are called when displayed to the user
-	 * (i.e. their label).
-	 * 
-	 * @param inputName
-	 * @param value
-	 */
-	protected void xsetTextFieldWithLabel(String inputName, String value) {
-		// currently no way to do it in JWebUnit
-		setTextField(inputName, value);
-	}
-
-	/**
-	 * In our code generation, we don't want to currently have to worry about what the IDs
-	 * of the elements are -- only what they are called when displayed to the user
-	 * (i.e. their label).
-
-	 * @param formElementName
-	 * @param expectedValue
-	 */
-	protected void xassertFormElementWithLabelEquals(String formElementName,
-			String expectedValue) {
-		// currently no way to do it in JWebUnit
-		assertFormElementEquals(formElementName, expectedValue);
-		
-	}
-
-	/**
-	 * In our code generation, we don't want to currently have to worry about what the IDs
-	 * of the elements are -- only what they are called when displayed to the user
-	 * (i.e. their label).
-	 * 
-	 * @param formElementName
-	 */
-	protected void xassertFormElementWithLabelPresent(String formElementName) {
-		// currently no way to do it in JWebUnit
-		assertFormElementPresent(formElementName);
-		
-	}
 }

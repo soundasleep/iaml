@@ -1,0 +1,33 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+
+#declare any global variables here
+
+
+rule "Create empty domain store"
+		
+	when
+		#conditions
+		ie : ICreateElements(  )
+		a : InternetApplication ( name == "test" )
+	then 
+		#actions
+		System.out.println("debug: " + a);
+		DomainStore ds = (DomainStore) ie.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
+		ds.setName("test domain store");
+		
+end
+
+rule "Your Second Rule"
+	#include attributes such as "salience" here...
+	when
+		#conditions
+	then 
+		#actions
+		
+end

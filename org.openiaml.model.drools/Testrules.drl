@@ -184,7 +184,7 @@ end
 
 rule "Create components of 'update' operation"
 	when
-		o : CompositeOperation(overridden == false, name == "update")
+		o : CompositeOperation(overridden == false, (name == "update" || name == "refresh"))
 		field : ApplicationElementProperty( eContainer == o.eContainer, name == "fieldValue" )
 
 	then
@@ -223,3 +223,5 @@ rule "Create components of 'update' operation"
 		insert(edge2);
 
 end
+
+

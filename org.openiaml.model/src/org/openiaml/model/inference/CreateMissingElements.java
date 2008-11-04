@@ -4,7 +4,9 @@
 package org.openiaml.model.inference;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -52,10 +54,45 @@ import org.openiaml.model.model.wires.WiresPackage;
  */
 public class CreateMissingElements {
 	
-	private ICreateElements parent;
+	private EcoreCreateElementsHelper parent;
 
-	public CreateMissingElements(ICreateElements parent) {
+	public CreateMissingElements(EcoreCreateElementsHelper parent) {
 		this.parent = parent;
+	}
+	
+	/**
+	 * Wraps an ICreateElements with some helper methods
+	 * 
+	 * @see EcoreCreateElementsHelper
+	 * @param targetClass
+	 */
+	public CreateMissingElements(final ICreateElements targetClass) {
+		// just wrap it
+		this.parent = new EcoreCreateElementsHelper() {
+
+			@Override
+			public EObject createElement(EObject container, EClass elementType,
+					EStructuralFeature containerFeature)
+					throws InferenceException {
+				return targetClass.createElement(container, elementType, containerFeature);
+			}
+
+			@Override
+			public EObject createRelationship(EObject container,
+					EClass elementType, EObject source, EObject target,
+					EStructuralFeature containerFeature,
+					EStructuralFeature sourceFeature,
+					EStructuralFeature targetFeature) throws InferenceException {
+				return targetClass.createRelationship(container, elementType, source, target, containerFeature, sourceFeature, targetFeature);
+			}
+
+			@Override
+			public void setValue(EObject element, EStructuralFeature reference,
+					Object value) throws InferenceException {
+				targetClass.setValue(element, reference, value);
+			}
+			
+		};
 	}
 	
 	/**
@@ -224,9 +261,8 @@ public class CreateMissingElements {
 		}
 		
 		// nothing found: create a new one
-		ApplicationElementProperty property = (ApplicationElementProperty) parent.createElement(container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties());
+		ApplicationElementProperty property = parent.generatedApplicationElementProperty(generatedBy, container);
 		if (property == null) return null;
-		markAsGenerated(generatedBy, property);
 		setElementName(property, propertyName);
 		
 		return property;
@@ -354,9 +390,8 @@ public class CreateMissingElements {
 		}
 		
 		// it's not there, so we better create it
-		CompositeOperation operation = (CompositeOperation) parent.createElement(from, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations());
+		CompositeOperation operation = parent.generatedCompositeOperation(from, from);
 		if (operation == null) return null;
-		markAsGenerated(from, operation);
 		setElementName(operation, string);
 		
 		handleCompositeOperation(operation);
@@ -381,18 +416,13 @@ public class CreateMissingElements {
 		// what should this operation contain?
 		// TODO should update and refresh really be the same thing?
 		if (string.equals("update") || string.equals("refresh")) {
-			StartNode startNode = (StartNode) parent.createElement(operation, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes());
-			markAsGenerated(operation, startNode);
+			StartNode startNode = parent.generatedStartNode(operation, operation); 
+			StopNode stopNode = parent.generatedStopNode(operation, operation);
 			
-			StopNode stopNode = (StopNode) parent.createElement(operation, OperationsPackage.eINSTANCE.getStopNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes());
-			markAsGenerated(operation, stopNode);
-			
-			ChainedOperation setPropertyOp = (ChainedOperation) parent.createElement(operation, ModelPackage.eINSTANCE.getChainedOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations());
-			markAsGenerated(operation, setPropertyOp);
+			ChainedOperation setPropertyOp = parent.generatedChainedOperation(operation, operation); 
 			setElementName(setPropertyOp, "setPropertyToValue");
 			
-			Parameter param = (Parameter) parent.createElement(operation, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getOperation_Parameters());
-			markAsGenerated(operation, param);
+			Parameter param = parent.generatedParameter(operation, operation);
 			setElementName(param, "setValueTo");
 			
 			// connect them together

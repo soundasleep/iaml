@@ -83,7 +83,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 				Resource resource = resourceSet.getResource(URI.createFileURI(o.getLocation().toString()), true);
 				
 				// load the inference elements manager
-				ICreateElements handler = new EcoreInferenceHandler(resource);
+				EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
 				
 				// do inference on the model
 				for (EObject model : resource.getContents()) {

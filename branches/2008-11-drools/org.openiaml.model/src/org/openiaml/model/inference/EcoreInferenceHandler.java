@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
  * @author jmwright
  *
  */
-public class EcoreInferenceHandler implements ICreateElements {
+public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements ICreateElements {
 
 	private Resource resource;
 	

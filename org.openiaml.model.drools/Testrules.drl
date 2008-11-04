@@ -31,10 +31,53 @@ rule "Create empty domain store"
 		
 end
 
-function void connectEventToOperationWithParameter(ICreateElements ie, WireEdge root, EventTrigger event, Operation operation, ApplicationElementProperty parameter) {
-	// empty for now
-}
+rule "Create sync wire components: run instance wire from source.edit to target.update"
+	when
+		ie : ICreateElements( )
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+	
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		System.out.println(drools.getRule().getName() + ": " + sw); 
+	
+		RunInstanceWire rw = (RunInstanceWire) ie.createRelationship(sw, WiresPackage.eINSTANCE.getRunInstanceWire(), event, operation, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		rw.setName("run");
+		rw.setIsGenerated(true);
+		rw.setGeneratedBy(sw);
+		insert(rw);
 
+end
+
+rule "Create sync wire components: connect parameter wire to: run instance wire from source.edit to target.update"
+	when
+		ie : ICreateElements( )
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" ) 
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		wire : RunInstanceWire( from == event, to == operation, name == "run" ) from sw.wires
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = (ParameterWire) ie.createRelationship(sw, WiresPackage.eINSTANCE.getParameterWire(), field, wire, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		pw.setIsGenerated(true);
+		pw.setGeneratedBy(sw);
+		insert(pw);
+
+end
+
+/*
 rule "Create sync wire components"
 	when
 		ie : ICreateElements( )
@@ -63,6 +106,7 @@ rule "Create sync wire components"
 		not (RunInstanceWire( from == sourceEdit, to == targetUpdate, name == "run" ) from sw.wires)
 		
 	then
+
 		RunInstanceWire rw = (RunInstanceWire) ie.createRelationship(sw, WiresPackage.eINSTANCE.getRunInstanceWire(), sourceEdit, targetUpdate, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 		rw.setName("run");
 		rw.setIsGenerated(true);
@@ -76,15 +120,16 @@ rule "Create sync wire components"
 		connectEventToOperationWithParameter(ie, sw, targetChange, sourceRefresh, sourceField);
 		connectEventToOperationWithParameter(ie, sw, sourceChange, targetRefresh, targetField);
 		connectEventToOperationWithParameter(ie, sw, targetEdit, sourceUpdate, targetField);
-		*/
+		/
 		
 end
+*/
 
 rule "Create field value for input text field"
 	when
 		ie : ICreateElements( )
 		f : InputTextField( overridden == false )
-		not (ApplicationElementProperty( name=="fieldValue" ) from f.properties)
+		not (ApplicationElementProperty( eContainer == f, name=="fieldValue" ))
 			
 	then
 		ApplicationElementProperty fieldValue = (ApplicationElementProperty) ie.createElement( f, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties() );
@@ -92,6 +137,69 @@ rule "Create field value for input text field"
 		fieldValue.setIsGenerated(true);
 		fieldValue.setGeneratedBy(f);
 		insert(fieldValue);
+		
+end
+
+rule "Create 'edit' event trigger for input text field"
+	when
+		ie : ICreateElements( )
+		f : InputTextField( overridden == false )
+		not (EventTrigger( eContainer == f, name=="edit" ))
+			
+	then
+		// debug
+		System.out.println(drools.getRule().getName() + ": " + f); 
+
+		EventTrigger event = (EventTrigger) ie.createElement( f, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
+		event.setName("edit");
+		event.setIsGenerated(true);
+		event.setGeneratedBy(f);
+		insert(event);
+		
+end
+
+rule "Create 'change' event trigger for input text field"
+	when
+		ie : ICreateElements( )
+		f : InputTextField( overridden == false )
+		not (EventTrigger( eContainer == f, name=="change" ))
+			
+	then
+		EventTrigger event = (EventTrigger) ie.createElement( f, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
+		event.setName("change");
+		event.setIsGenerated(true);
+		event.setGeneratedBy(f);
+		insert(event);
+		
+end
+
+rule "Create 'update' operation for input text field"
+	when
+		ie : ICreateElements( )
+		f : InputTextField( overridden == false )
+		not (Operation( eContainer == f, name=="update" ))
+			
+	then
+		CompositeOperation operation = (CompositeOperation) ie.createElement( f, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+		operation.setName("update");
+		operation.setIsGenerated(true);
+		operation.setGeneratedBy(f);
+		insert(operation);
+		
+end
+
+rule "Create 'refresh' operation for input text field"
+	when
+		ie : ICreateElements( )
+		f : InputTextField( overridden == false )
+		not (Operation( eContainer == f, name=="refresh" ))
+			
+	then
+		CompositeOperation operation = (CompositeOperation) ie.createElement( f, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+		operation.setName("refresh");
+		operation.setIsGenerated(true);
+		operation.setGeneratedBy(f);
+		insert(operation);
 		
 end
 

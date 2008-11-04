@@ -3,6 +3,7 @@ package org.openiaml.model.take.tests;
 import iaml.generated2.ActionGeneratePage;
 import iaml.generated2.ActionHasGeneratedPage;
 import iaml.generated2.CreatePage;
+import iaml.generated2.CreatePageDetails;
 import iaml.generated2.KBGenerated;
 import iaml.generated2.NeedsGeneratedPage;
 
@@ -119,10 +120,10 @@ public class MyTestCase extends TestCase {
 		
 		int beforeSize = root.getChildren().size();
 		
-		ResultSet<NeedsGeneratedPage> rs = kb.getPagesNeededToGenerate(root);
+		ResultSet<CreatePageDetails> rs = kb.getCreatePageDetails(root);
 		assertTrue(rs.hasNext());
 		while (rs.hasNext()) {
-			NeedsGeneratedPage r = rs.next();
+			CreatePageDetails r = rs.next();
 			System.out.println("r = " + r);
 			//assertNotSame(root, r.app);		// always true, i.e. it doesn't clone IApp
 		}
@@ -140,6 +141,7 @@ public class MyTestCase extends TestCase {
 	 * 
 	 * - app_name[app, 'test']
 	 */
+	/*
 	public void testCreatePages() {
 		// try deriving command
 		TestDeriveElementsCommand te = new TestDeriveElementsCommand();		
@@ -161,6 +163,7 @@ public class MyTestCase extends TestCase {
 		assertNotSame(beforeSize, afterSize);
 		
 	}	
+	*/
 	
 	/**
 	 * Tests deriving pages. (fails)

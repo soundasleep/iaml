@@ -44,34 +44,14 @@ rule_children: if children[app, page] then children2[app, page]
 // errors: (trying to stop rule inference)
 //rule8: if app.name=='test' and children[app, page] and page.name=='page' then not has_page[app,page]
 
-@take.compilerhint.class=NeedsGeneratedPage
-@take.compilerhint.slots=app
-@take.compilerhint.method=getPagesNeededToGenerate
-query needs_generated_page[in]
+@take.compilerhint.class=CreatePageDetails
+@take.compilerhint.slots=app,page,name
+@take.compilerhint.method=getCreatePageDetails
+query create_page_details[in,out,out]
 
-rule10: if app.name=='test' and not already_has_generated_page[app] then needs_generated_page[app]
+rule10: if app.name=='test' and not already_has_generated_page[app] then create_page_details[app,page,'generated']
 
 // try to stop unnecessary page generation: succeeds!
 //rule10_a: if children[app, page] and page.name=='page' then already_has_generated_page[app]
 rule10_stop: if children[app, page] and page.name=='generated' then already_has_generated_page[app]
-
-// try generate page automatically
-@take.compilerhint.class=CreatePage
-@take.compilerhint.slots=page
-@take.compilerhint.method=createPage
-// query create_page[in,out]
-query create_page[out]
-//rule10_a: if needs_generated_page[app] then create_page[page]
-//rule10_b: if needs_generated_page[app] and create_page[page] then children[app, page]
-//rule10_c: if needs_generated_page[app] and create_page[page] and children[app, page] then name[page,'generated']
-// final query cannot use == (get), needs [] (set)
-// doesn't do anything
-rule10_a: if needs_generated_page[app] then create_page[page] and children[app, page] and name[page,'generated']
-// try breaking it up
-// the following also does nothing, but makes createPage require a parameter
-//rule10_a: if needs_generated_page[app] then create_for_page[app,page] 
-//rule10_a_0: if create_for_page[app,page] then create_page[page]
-//rule10_a_1: if create_for_page[app,page] then children[app, page]
-//rule10_a_2: if create_for_page[app,page] then name[page,'generated']
-
 

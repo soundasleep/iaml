@@ -1,0 +1,6 @@
+import iaml;
+
+extension metamodel::Extensions;
+
+context model::InternetApplication ERROR "No pages in internet application" :
+	children.exists( e | model::visual::Page.isInstance(e) );

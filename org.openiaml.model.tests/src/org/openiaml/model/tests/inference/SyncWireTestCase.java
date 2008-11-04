@@ -73,8 +73,8 @@ public class SyncWireTestCase extends InferenceTestCase {
 		// get all 'update' operations
 		List<Object> updates = query(root, "//iaml:operations[iaml:name='update']");
 		
-		// there are 4 input texts => there should be 4 update operations
-		assertEquals(updates.size(), 4);
+		// there are 4 input texts => there should be at least 4 update operations
+		assertGreaterEq(4, updates.size());
 		
 		int i = 0;
 		for (Object obj : updates) {
@@ -116,6 +116,10 @@ public class SyncWireTestCase extends InferenceTestCase {
 			
 			assertEquals(prelude, stop, finalNode);
 		}
+	}
+
+	private void assertGreaterEq(int expected, int actual) {
+		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual > expected);
 	}
 	
 }

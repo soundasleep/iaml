@@ -142,8 +142,8 @@ public class CreateMissingElementsWithDrools {
         });
         
         //go !
-        workingMemory.insert( root );
-        workingMemory.insert( handler );
+        workingMemory.insert( root );        
+        workingMemory.setGlobal("handler", handler);
         workingMemory.fireAllRules();   
         
 	}

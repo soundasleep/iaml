@@ -10,20 +10,19 @@ import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
 
 #declare any global variables here
+global EcoreCreateElementsHelper handler;
 # can we define ICreateElements as a global variable?
 
 rule "Create empty domain store"
 		
 	when
 		#conditions
-		ie : ICreateElements( )
 		a : InternetApplication ( name == "test" )
 		not (DomainStore( name=="test domain store") from a.domainStores)
 		// how do we know when not to create the domainstore?
 	then 
 		#actions
-		System.out.println("debug: " + a);
-		DomainStore ds = (DomainStore) ie.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
+		DomainStore ds = (DomainStore) handler.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
 		ds.setName("test domain store");
 		ds.setIsGenerated(true);
 		ds.setGeneratedBy(a);
@@ -33,7 +32,6 @@ end
 
 rule "Create sync wire components: run instance wire from source.edit to target.update"
 	when
-		ie : ICreateElements( )
 		sw : SyncWire(overridden == false)
 		source : InputTextField( ) from sw.from
 		target : InputTextField( ) from sw.to
@@ -44,9 +42,7 @@ rule "Create sync wire components: run instance wire from source.edit to target.
 		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
 		
 	then
-		System.out.println(drools.getRule().getName() + ": " + sw); 
-	
-		RunInstanceWire rw = (RunInstanceWire) ie.createRelationship(sw, WiresPackage.eINSTANCE.getRunInstanceWire(), event, operation, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		RunInstanceWire rw = (RunInstanceWire) handler.createRelationship(sw, WiresPackage.eINSTANCE.getRunInstanceWire(), event, operation, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 		rw.setName("run");
 		rw.setIsGenerated(true);
 		rw.setGeneratedBy(sw);
@@ -56,7 +52,6 @@ end
 
 rule "Create sync wire components: connect parameter wire to: run instance wire from source.edit to target.update"
 	when
-		ie : ICreateElements( )
 		sw : SyncWire(overridden == false)
 		source : InputTextField( ) from sw.from
 		target : InputTextField( ) from sw.to
@@ -70,7 +65,7 @@ rule "Create sync wire components: connect parameter wire to: run instance wire 
 		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
 		
 	then
-		ParameterWire pw = (ParameterWire) ie.createRelationship(sw, WiresPackage.eINSTANCE.getParameterWire(), field, wire, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		ParameterWire pw = (ParameterWire) handler.createRelationship(sw, WiresPackage.eINSTANCE.getParameterWire(), field, wire, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 		pw.setIsGenerated(true);
 		pw.setGeneratedBy(sw);
 		insert(pw);
@@ -127,88 +122,104 @@ end
 
 rule "Create field value for input text field"
 	when
-		ie : ICreateElements( )
 		f : InputTextField( overridden == false )
 		not (ApplicationElementProperty( eContainer == f, name=="fieldValue" ))
 			
 	then
-		ApplicationElementProperty fieldValue = (ApplicationElementProperty) ie.createElement( f, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties() );
+		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(f, f);
 		fieldValue.setName("fieldValue");
-		fieldValue.setIsGenerated(true);
-		fieldValue.setGeneratedBy(f);
 		insert(fieldValue);
 		
 end
 
 rule "Create 'edit' event trigger for input text field"
 	when
-		ie : ICreateElements( )
 		f : InputTextField( overridden == false )
 		not (EventTrigger( eContainer == f, name=="edit" ))
 			
 	then
-		// debug
-		System.out.println(drools.getRule().getName() + ": " + f); 
+		// debug: System.out.println(drools.getRule().getName() + ": " + f); 
 
-		EventTrigger event = (EventTrigger) ie.createElement( f, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
+		EventTrigger event = handler.generatedEventTrigger(f, f);
 		event.setName("edit");
-		event.setIsGenerated(true);
-		event.setGeneratedBy(f);
 		insert(event);
 		
 end
 
 rule "Create 'change' event trigger for input text field"
 	when
-		ie : ICreateElements( )
 		f : InputTextField( overridden == false )
 		not (EventTrigger( eContainer == f, name=="change" ))
 			
 	then
-		EventTrigger event = (EventTrigger) ie.createElement( f, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
+		EventTrigger event = handler.generatedEventTrigger(f, f);
 		event.setName("change");
-		event.setIsGenerated(true);
-		event.setGeneratedBy(f);
 		insert(event);
 		
 end
 
 rule "Create 'update' operation for input text field"
 	when
-		ie : ICreateElements( )
 		f : InputTextField( overridden == false )
 		not (Operation( eContainer == f, name=="update" ))
 			
 	then
-		CompositeOperation operation = (CompositeOperation) ie.createElement( f, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
 		operation.setName("update");
-		operation.setIsGenerated(true);
-		operation.setGeneratedBy(f);
 		insert(operation);
 		
 end
 
 rule "Create 'refresh' operation for input text field"
 	when
-		ie : ICreateElements( )
 		f : InputTextField( overridden == false )
 		not (Operation( eContainer == f, name=="refresh" ))
 			
 	then
-		CompositeOperation operation = (CompositeOperation) ie.createElement( f, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
 		operation.setName("refresh");
-		operation.setIsGenerated(true);
-		operation.setGeneratedBy(f);
 		insert(operation);
 		
 end
 
-rule "Your Second Rule"
-	#include attributes such as "salience" here...
+rule "Create components of 'update' operation"
 	when
-		#conditions
-	then 
-		#actions
-		
-end
+		o : CompositeOperation(overridden == false, name == "update")
+		field : ApplicationElementProperty( eContainer == o.eContainer, name == "fieldValue" )
 
+	then
+		Parameter parameter = handler.generatedParameter(o, o);
+		parameter.setName("setValueTo");
+		insert(parameter);
+		
+		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		op.setName("setPropertyToValue");
+		insert(op);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		insert(start);
+		
+		StopNode stop = handler.generatedStopNode(o, o);
+		insert(stop);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		data1.setFrom(parameter);
+		data1.setTo(op);
+		insert(data1);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		data2.setFrom(op);
+		data2.setTo(field);
+		insert(data2);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		edge1.setFrom(start);
+		edge1.setTo(op);
+		insert(edge1);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		edge2.setFrom(op);
+		edge2.setTo(stop);
+		insert(edge2);
+
+end

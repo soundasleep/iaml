@@ -30,6 +30,29 @@ rule "Create empty domain store"
 		
 end
 
+function boolean syncMatches(NamedElement e1, NamedElement e2) {
+	return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
+}
+
+rule "Sync wires between pages should create sync wires between all elements inside each page that match"
+	when
+		p1 : Page( )
+		p2 : Page(this != p1)
+		source : SyncWire(overridden == false, from == p1, to == p2)
+		
+		e1 : ApplicationElement( eContainer == p1 )
+		e2 : ApplicationElement( eContainer == p2, eval(syncMatches(e1, e2)) )
+	
+		not(SyncWire( from == e1, to == e2, name == "sync", eContainer == source ))
+		not(SyncWire( from == e2, to == e1, name == "sync", eContainer == source ))
+		
+	then
+		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
+		sw.setName("sync");
+		insert(sw);
+		
+end
+
 rule "Create sync wire components: run instance wire from source.edit to target.update"
 	when
 		sw : SyncWire(overridden == false)

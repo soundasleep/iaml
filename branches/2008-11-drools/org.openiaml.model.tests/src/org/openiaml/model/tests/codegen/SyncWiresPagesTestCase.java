@@ -92,27 +92,14 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 			assertLabelPresent(label_text2);
 			setLabeledFormElementField(label_text1, testingText);
 			assertTextFieldEquals("visual_11d293c2f82_4c", testingText);
-		}
-
-		if (true)
-			throw new ComparisonFailure(testingText3, testingText3, testingText3);
-
-
-		// check that the value is still there
-		{
-			goSitemapThenPage(sitemap, "page1");
 			
-			// fill in a field on page 1
-			String label_text1 = getLabelIDForText("text1");
-			String label_text2 = getLabelIDForText("text2");
-			
-			assertLabelPresent(label_text1);
-			assertLabelPresent(label_text2);
-			assertTextFieldEquals("visual_11d293c2f82_4c", testingText);
+			// there should be a debug message saying it is saving
+			assertTextPresent("store_event called");
 		}
 
 		{
 			// go to page2
+			// page2 has "text1" and should be in sync too
 			goSitemapThenPage(sitemap, "page2");
 	
 			// check text1 field has changed
@@ -199,12 +186,11 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 			assertLabelPresent(label_text3);
 			assertLabeledFieldEquals(label_text3, testingText3);
 		}
-		} catch (ComparisonFailure e) {
+		} catch (Error e) {
 			// print out the source code
 			System.out.println(getTester().getPageSource());
 			// throw out any response text too
-			Thread.sleep(400);		// wait a little bit for any ajax
-			throw new RuntimeException("Comparison failure when doing AJAX. ResponseText = " + getElementById("response").getTextContent(), e);
+			throw new RuntimeException("Response = '" + getElementById("response").getTextContent() + "' Debug='" + getElementById("debug").getTextContent() + "'", e);
 		}
 		
 	}

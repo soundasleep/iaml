@@ -7,22 +7,24 @@
 /* approach #2: use event queues stored on the server, if the function is
    not available on the current page */
 function store_event(page_id, event_name, arg0) {
-	$('response').innerHTML = 'meow';
+	debug("meow");
 	var url = 'store_event.php?page_id=' + page_id + '&event_name=' + event_name + "&arg0=" + arg0;
 	document.getElementById('response').innerHTML = 'testing $ function';
-	$('response').innerHTML = 'creating ajax request to url: ' + url;
+	debug("creating ajax request to url: " + url);
 	new Ajax.Request(url,
   {
     method:'get',
     onSuccess: function(transport){
       	var response = transport.responseText || "no response text";
+      	debug("success: " + response);
       	document.getElementById('response').innerHTML = response;
       // alert("Success! \n\n" + response);
     },
     onFailure: function(transport){ alert('Something went wrong...');
-    $('response').innerHTML = 'something went wrong ' + response.responseText;
+    	debug("something went wrong: " + response.responseText);
      }
   });
+  debug("store_event called");
 }
 
 var debug_message_saved = "";

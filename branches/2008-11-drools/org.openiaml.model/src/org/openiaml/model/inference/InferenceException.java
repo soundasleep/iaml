@@ -25,7 +25,7 @@ public class InferenceException extends Exception {
 	 * @param message
 	 * @param e
 	 */
-	public InferenceException(String message, ArrayStoreException e) {
+	public InferenceException(String message, Exception e) {
 		super(message, e);
 	}
 

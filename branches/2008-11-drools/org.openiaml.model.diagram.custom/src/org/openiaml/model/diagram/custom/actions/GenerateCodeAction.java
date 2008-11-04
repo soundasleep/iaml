@@ -24,9 +24,8 @@ import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.oaw.OawCodeGenerator;
-import org.openiaml.model.inference.CreateMissingElements;
+import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 
@@ -87,7 +86,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 				
 				// do inference on the model
 				for (EObject model : resource.getContents()) {
-					CreateMissingElements ce = new CreateMissingElements(handler);
+					CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
 					ce.create(model);
 				}
 				

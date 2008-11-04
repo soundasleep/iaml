@@ -40,6 +40,9 @@
 		<div>
 		
 		<div id="response">empty</div>
+		
+		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
+		<div id="ajax_monitor"></div>
 		</body>
 		</html>
 	«ENDFILE»

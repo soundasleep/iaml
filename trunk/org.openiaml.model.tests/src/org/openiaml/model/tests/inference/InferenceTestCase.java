@@ -88,7 +88,7 @@ public abstract class InferenceTestCase extends CodegenWebTestCase {
 	 */
 	protected EObject queryOne(EObject root, String query) throws JaxenException {
 		List<Object> q = query(root, query);
-		assertEquals(q.size(), 1);
+		assertEquals("queryOne for '" + query + "' had no results", 1, q.size());
 		return (EObject) q.get(0);
 	}
 

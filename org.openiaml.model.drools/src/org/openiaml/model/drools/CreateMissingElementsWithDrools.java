@@ -15,7 +15,9 @@ import org.drools.event.ObjectRetractedEvent;
 import org.drools.event.ObjectUpdatedEvent;
 import org.drools.event.WorkingMemoryEventListener;
 import org.drools.rule.Package;
+import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -46,13 +48,18 @@ public class CreateMissingElementsWithDrools {
 	/**
 	 * Do the inference using Drools.
 	 * 
-	 * @param root
+	 * @param model
 	 * @throws Exception 
 	 */
-	public void create(InternetApplication root) throws Exception {
+	public void create(EObject model) throws InferenceException {
 
     	//load up the rulebase
-        RuleBase ruleBase = readRule();
+        RuleBase ruleBase;
+		try {
+			ruleBase = readRule();
+		} catch (Exception e) {
+			throw new InferenceException("could not load rulebase: " + e.getMessage(), e);
+		}
         final WorkingMemory workingMemory = ruleBase.newStatefulSession();
         
         // automatically insert new objects based on a given object
@@ -142,7 +149,7 @@ public class CreateMissingElementsWithDrools {
         });
         
         //go !
-        workingMemory.insert( root );        
+        workingMemory.insert( model );        
         workingMemory.setGlobal("handler", handler);
         workingMemory.fireAllRules();   
         

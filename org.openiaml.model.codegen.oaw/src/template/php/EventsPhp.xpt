@@ -8,13 +8,21 @@ function log_message($msg) {
 	$fp = fopen("php.log", "a");
 	fwrite($fp, date("Y-m-d H:i:s") . " $msg\n");
 	fclose($fp);
+	
+	// also echo to debug
+	echo "\$('response').innerHTML = \"" . htmlentities($msg) . "\";\n";
+}
+
+function local_die($message) {
+	log_message("DEATH: $message");
+	die($message);
 }
 
 /**
  * Expand all possible events for the current page.
  */
 // first, make sure the table exists
-$db = new PDO('sqlite:test.db') or die("could not open db");
+$db = new PDO('sqlite:test.db') or local_die("could not open db");
 $s = $db->prepare("SELECT * FROM stored_events");
 if (!$s) {
 	// create the table
@@ -23,12 +31,12 @@ if (!$s) {
 			page_id VARCHAR(64) NOT NULL,
 			event_name VARCHAR(64) NOT NULL,
 			arg0 BLOB
-		);") or die("could not create table: " . print_r($db->errorInfo(), true));
+		);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
 }
 
 log_message("finding events for page id «id»");
-$s = $db->prepare("SELECT * FROM stored_events WHERE page_id=?") or die("could not get stored events: " . print_r($db->errorInfo(), true));
-$s->execute(array("«id»")) or die("could not execute select query: " . print_r($db->errorInfo(), true));
+$s = $db->prepare("SELECT * FROM stored_events WHERE page_id=?") or local_die("could not get stored events: " . print_r($db->errorInfo(), true));
+$s->execute(array("«id»")) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
 foreach ($s->fetchAll() as $row) {
 	log_message("found event $row[id]: event_name=$row[event_name] arg0=$row[arg0]");
 	echo $row["event_name"] . "(\"" . $row["arg0"] . "\"); // from db " . $row["id"] . "\n";
@@ -36,7 +44,7 @@ foreach ($s->fetchAll() as $row) {
 
 // delete all the events for this page now
 log_message("deleting all events for page «id»");
-$s = $db->prepare("DELETE FROM stored_events WHERE page_id=?") or die("could not delete stored events: " . print_r($db->errorInfo(), true));
-$s->execute(array("«id»")) or die("could not execute delete query: " . print_r($db->errorInfo(), true));
+$s = $db->prepare("DELETE FROM stored_events WHERE page_id=?") or local_die("could not delete stored events: " . print_r($db->errorInfo(), true));
+$s->execute(array("«id»")) or local_die("could not execute delete query: " . print_r($db->errorInfo(), true));
 
 «ENDDEFINE»

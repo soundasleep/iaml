@@ -8,7 +8,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-lang-2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-logging-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/cssparser-0.9.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/reqs/htmlunit-2.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/reqs/htmlunit-2.3.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/Desktop/htmlunit-2.3-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/htmlunit-core-js-2.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/junit-3.8.2.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/.m2/repository/junit/junit/3.8.2/junit-3.8.2-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/log4j-1.2.13.jar"/>
@@ -22,7 +22,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/reqs/xercesImpl-2.8.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/xml-apis-1.0.b2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jwebunit-core-2.1-SNAPSHOT.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk/jwebunit-core"/>
-	<classpathentry exported="true" kind="lib" path="lib/jwebunit-htmlunit-plugin-2.1-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jwebunit-htmlunit-plugin-2.1-SNAPSHOT.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk/jwebunit-htmlunit-plugin"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>

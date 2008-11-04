@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
-import org.openiaml.model.drools.CreateMissingElementsWithDrools;
+import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -48,7 +48,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 		
 		// we now try to do inference
 		ICreateElements handler = new EcoreInferenceHandler(resource);
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
+		CreateMissingElements ce = new CreateMissingElements(handler);
 		ce.create(root);
 		
 		// write out this inferred model for reference

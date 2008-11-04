@@ -33,19 +33,71 @@ end
 rule "Create sync wire components: run instance wire from source.edit to target.update"
 	when
 		sw : SyncWire(overridden == false)
-		source : InputTextField( ) from sw.from
+		source : InputTextField( ) from sw.from  
 		target : InputTextField( ) from sw.to
-	
+		
 		event : EventTrigger( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
-	
+		
 		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
 		
 	then
-		RunInstanceWire rw = (RunInstanceWire) handler.createRelationship(sw, WiresPackage.eINSTANCE.getRunInstanceWire(), event, operation, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		rw.setIsGenerated(true);
-		rw.setGeneratedBy(sw);
+		insert(rw);
+
+end
+
+rule "Create sync wire components: run instance wire from target.edit to source.update"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from  
+		source : InputTextField( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+rule "Create sync wire components: run instance wire from source.change to target.refresh"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from  
+		target : InputTextField( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="change" )
+		operation : Operation( eContainer == target, name=="refresh" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+rule "Create sync wire components: run instance wire from target.change to source.refresh"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from  
+		source : InputTextField( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="change" )
+		operation : Operation( eContainer == target, name=="refresh" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
 		insert(rw);
 
 end
@@ -56,69 +108,75 @@ rule "Create sync wire components: connect parameter wire to: run instance wire 
 		source : InputTextField( ) from sw.from
 		target : InputTextField( ) from sw.to
 	
-		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" ) 
 		event : EventTrigger( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
-		
-		wire : RunInstanceWire( from == event, to == operation, name == "run" ) from sw.wires
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
 		
 	then
-		ParameterWire pw = (ParameterWire) handler.createRelationship(sw, WiresPackage.eINSTANCE.getParameterWire(), field, wire, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
-		pw.setIsGenerated(true);
-		pw.setGeneratedBy(sw);
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
 		insert(pw);
 
 end
 
-/*
-rule "Create sync wire components"
+rule "Create sync wire components: connect parameter wire to: run instance wire from target.edit to source.update"
 	when
-		ie : ICreateElements( )
-		sw : SyncWire( overridden == false )
-		source : InputTextField( ) from sw.from
-		target : InputTextField( ) from sw.to
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from
+		source : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
-		// should probably break this rule up into multiple separate ones
-		
-		// fields
-		sourceField : ApplicationElementProperty( name=="fieldValue" ) from source.properties 
-		targetField : ApplicationElementProperty( name=="fieldValue" ) from target.properties
-		
-		// operations
-		sourceUpdate : CompositeOperation( name=="update" ) from source.operations
-		targetUpdate : CompositeOperation( name=="update" ) from target.operations
-		sourceRefresh : CompositeOperation( name=="refresh" ) from source.operations
-		targetRefresh : CompositeOperation( name=="refresh" ) from target.operations
-		
-		// events
-		sourceEdit : EventTrigger( name=="edit" ) from source.eventTriggers
-		targetEdit : EventTrigger( name=="edit" ) from target.eventTriggers
-		sourceChange : EventTrigger( name=="change" ) from source.eventTriggers
-		targetChange : EventTrigger( name=="change" ) from target.eventTriggers
-		
-		not (RunInstanceWire( from == sourceEdit, to == targetUpdate, name == "run" ) from sw.wires)
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
 		
 	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
 
-		RunInstanceWire rw = (RunInstanceWire) ie.createRelationship(sw, WiresPackage.eINSTANCE.getRunInstanceWire(), sourceEdit, targetUpdate, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
-		rw.setName("run");
-		rw.setIsGenerated(true);
-		rw.setGeneratedBy(sw);
-		insert(rw);
-		 
-	
-		// connect all of these fields up
-		/*
-		connectEventToOperationWithParameter(ie, sw, sourceEdit, targetUpdate, sourceField);
-		connectEventToOperationWithParameter(ie, sw, targetChange, sourceRefresh, sourceField);
-		connectEventToOperationWithParameter(ie, sw, sourceChange, targetRefresh, targetField);
-		connectEventToOperationWithParameter(ie, sw, targetEdit, sourceUpdate, targetField);
-		/
-		
 end
-*/
+
+rule "Create sync wire components: connect parameter wire to: run instance wire from source.change to target.refresh"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="change" )
+		operation : Operation( eContainer == target, name=="refresh" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
+
+end
+
+rule "Create sync wire components: connect parameter wire to: run instance wire from target.change to source.refresh"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from
+		source : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="change" )
+		operation : Operation( eContainer == target, name=="refresh" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
+
+end
 
 rule "Create field value for input text field"
 	when

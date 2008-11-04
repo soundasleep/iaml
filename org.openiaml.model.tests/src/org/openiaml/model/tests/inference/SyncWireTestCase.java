@@ -146,7 +146,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 		InputTextField name2 = (InputTextField) queryOne(root, "//iaml:children[iaml:name='name2']");
 		
 		EventTrigger name1edit = (EventTrigger) queryOne(name1, "iaml:eventTriggers[iaml:name='edit']");
-		EventTrigger name2edit = (EventTrigger) queryOne(name1, "iaml:eventTriggers[iaml:name='edit']");
+		EventTrigger name2edit = (EventTrigger) queryOne(name2, "iaml:eventTriggers[iaml:name='edit']");
 		EventTrigger name1change = (EventTrigger) queryOne(name1, "iaml:eventTriggers[iaml:name='change']");
 		EventTrigger name2change = (EventTrigger) queryOne(name2, "iaml:eventTriggers[iaml:name='change']");
 		
@@ -209,14 +209,14 @@ public class SyncWireTestCase extends InferenceTestCase {
 		}
 		
 		// make sure we've got all of these
-		assertNotNull( name1editRun );
-		assertNotNull( name2editRun );
-		assertNotNull( name1changeRun );
-		assertNotNull( name2changeRun );
-		assertNotNull( name1editParam );
-		assertNotNull( name2editParam );
-		assertNotNull( name1changeParam );
-		assertNotNull( name2changeParam );
+		assertNotNull( "name1editRun not null", name1editRun );
+		assertNotNull( "name2editRun not null", name2editRun );
+		assertNotNull( "name1changeRun not null", name1changeRun );
+		assertNotNull( "name2changeRun not null", name2changeRun );
+		assertNotNull( "name1editParam not null", name1editParam );
+		assertNotNull( "name2editParam not null", name2editParam );
+		assertNotNull( "name1changeParam not null", name1changeParam );
+		assertNotNull( "name2changeParam not null", name2changeParam );
 		
 	}
 

@@ -32,7 +32,9 @@ if (!$s) {
 // then insert it
 $s = $db->prepare("INSERT INTO stored_events (page_id, event_name, arg0) VALUES (?, ?, ?)") or die("could not prepare query: " . print_r($db->errorInfo(), true));
 $s->execute(array($page_id, $event_name, $arg0)) or die("could not execute insert query: " . print_r($db->errorInfo(), true));
+$s = null;
 log_message("adding page_id=$page_id, event_name=$event_name, arg0=$arg0");
+
 echo "ok";
 
 ?>

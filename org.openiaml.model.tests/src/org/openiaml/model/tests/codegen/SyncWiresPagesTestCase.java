@@ -6,6 +6,7 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 import java.util.Random;
 
+import junit.framework.AssertionFailedError;
 import junit.framework.ComparisonFailure;
 import net.sourceforge.jwebunit.api.IElement;
 
@@ -48,11 +49,41 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 		super.tearDown();
 	}
 	
-	protected void goSitemapThenPage(IFile sitemap, String pageText) throws InterruptedException {
+	/**
+	 * Have we loaded at least one page (so we can find an ajax_monitor if necessary)?
+	 */
+	private boolean hasLoaded = false;
+	protected void goSitemapThenPage(IFile sitemap, String pageText) throws Exception {
 		// sleep a little bit first, so ajax calls can continue
-		Thread.sleep(1000);	// TODO probably not necessary?
+		if (hasLoaded) {
+			if (getElementById("ajax_monitor") == null) {
+				Thread.sleep(2000);	// sleep for way too long, since we don't know when it will finish
+			} else {
+				int cycles = 0;
+				while (cycles < 500) {		// max 15 seconds
+					try {
+						IElement monitor = getElementById("ajax_monitor");
+						String text = monitor.getTextContent();
+						if (text != null && new Integer(text) == 0)		// all ajax calls have finished
+							break;		// completed; we can carry on the test case
+						
+						if (text.length() > 6 && text.substring(0, 6).equals("failed"))
+							throw new Exception("Ajax loading failed: " + monitor.getTextContent());
+					
+						// carry on sleeping
+						Thread.sleep(30);
+					} catch (AssertionFailedError e) {
+						// the monitor was not found
+						Thread.sleep(300);
+					}
+					cycles++;
+				}
+				
+			}
+		}
 		
 		beginAt(sitemap.getProjectRelativePath().toString());
+		hasLoaded = true;		// we have now loaded a page
 		assertTitleMatch("sitemap");
 		
 		assertLinkPresentWithText(pageText);
@@ -65,10 +96,10 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 	 * tests a single page that have multiple InputTextFields on them
 	 * for a sync wire: when one field changes, the others
 	 * should as well.
-	 * @throws InterruptedException 
+	 * @throws Exception 
 	 * 
 	 */
-	public void testSyncAcrossPages() throws InterruptedException {
+	public void testSyncAcrossPages() throws Exception {
 		try {
 		String testingText = new Date().toString();
 		String testingText2 = "random" + new Random().nextInt(32768);

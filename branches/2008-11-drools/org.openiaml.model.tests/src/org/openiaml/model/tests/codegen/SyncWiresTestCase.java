@@ -31,7 +31,7 @@ public class SyncWiresTestCase extends InferenceTestCase {
 		root = (InternetApplication) model;
 		
 		// we now try to do inference
-		ICreateElements handler = new EcoreInferenceHandler(resource);
+		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
 		CreateMissingElements ce = new CreateMissingElements(handler);
 		ce.create(root);
 		

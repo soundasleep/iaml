@@ -8,22 +8,29 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.inference.CreateMissingElements;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.StopNode;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SyncWire;
 
 /**
  * Tests inference of sync wires.
+ * The model test case is of name1<-->name2<-->name3<-->name4.
  * 
+ * @model models/test-sync.iaml
  * @author jmwright
  *
  */
@@ -117,8 +124,109 @@ public class SyncWireTestCase extends InferenceTestCase {
 			assertEquals(prelude, stop, finalNode);
 		}
 	}
+	
+	public void testWires() throws JaxenException {
+		// get all 'update' operations
+		//List<Object> syncWires = query(root, "//iaml:wires[xsi:type='iaml.wires:SyncWire']");
+		List<Object> syncWires = query(root, "//iaml:wires[contains(iaml:name, 'sync')]");
+		
+		// there are exactly three sync wires
+		assertEquals(3, syncWires.size());
+	}
+	
+	public void testSyncWire1() throws JaxenException {
+		// get the first sync wire
+		List<Object> syncWires = query(root, "//iaml:wires[iaml:name='sync1']");
+		assertEquals(1, syncWires.size());	// there is only one
+		
+		SyncWire wire = (SyncWire) syncWires.get(0);		// get the first one
+		
+		// get the referenced operations of sync1
+		InputTextField name1 = (InputTextField) queryOne(root, "//iaml:children[iaml:name='name1']");
+		InputTextField name2 = (InputTextField) queryOne(root, "//iaml:children[iaml:name='name2']");
+		
+		EventTrigger name1edit = (EventTrigger) queryOne(name1, "iaml:eventTriggers[iaml:name='edit']");
+		EventTrigger name2edit = (EventTrigger) queryOne(name1, "iaml:eventTriggers[iaml:name='edit']");
+		EventTrigger name1change = (EventTrigger) queryOne(name1, "iaml:eventTriggers[iaml:name='change']");
+		EventTrigger name2change = (EventTrigger) queryOne(name2, "iaml:eventTriggers[iaml:name='change']");
+		
+		Operation name1update = (Operation) queryOne(name1, "iaml:operations[iaml:name='update']");
+		Operation name2update = (Operation) queryOne(name2, "iaml:operations[iaml:name='update']");
+		Operation name1refresh = (Operation) queryOne(name1, "iaml:operations[iaml:name='refresh']");
+		Operation name2refresh = (Operation) queryOne(name2, "iaml:operations[iaml:name='refresh']");
+		
+		ApplicationElementProperty name1value = (ApplicationElementProperty) queryOne(name1, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty name2value = (ApplicationElementProperty) queryOne(name2, "iaml:properties[iaml:name='fieldValue']");
+		
+		// none of these can ever be null because queryOne() also calls assert(size>1)
 
-	private void assertGreaterEq(int expected, int actual) {
+		// this wire should contain 8 wires
+		/*
+		 *   [name1]         [name2]
+		 *  edit ------------> update
+		 *  update <---------- edit
+		 *  change ----------> refresh
+		 *  refresh <--------- change
+		 * 
+		 * + parameter wires for both
+		 */
+		assertEquals(8, wire.getWires().size());
+		
+		// run instance wires
+		WireEdge name1editRun = null;
+		WireEdge name2editRun = null;
+		WireEdge name1changeRun = null;
+		WireEdge name2changeRun = null;
+		WireEdge name1editParam = null;
+		WireEdge name2editParam = null;
+		WireEdge name1changeParam = null;
+		WireEdge name2changeParam = null;
+		// get RunInstanceWires first
+		for (WireEdge w : wire.getWires()) {
+			if (w instanceof RunInstanceWire) {
+				if (w.getFrom().equals(name1edit) && w.getTo().equals(name2update) )
+					name1editRun = w;
+				if (w.getFrom().equals(name2edit) && w.getTo().equals(name1update) )
+					name2editRun = w;
+				if (w.getFrom().equals(name1change) && w.getTo().equals(name2refresh) )
+					name1changeRun = w;
+				if (w.getFrom().equals(name2change) && w.getTo().equals(name1refresh) )
+					name2changeRun = w;
+			}
+		}
+		// then ParameterWires
+		for (WireEdge w : wire.getWires()) {
+			if (w instanceof ParameterWire) {
+				if (w.getFrom().equals(name1value) && w.getTo().equals(name1editRun) )
+					name1editParam = w;
+				if (w.getFrom().equals(name2value) && w.getTo().equals(name2editRun) )
+					name2editParam = w;
+				if (w.getFrom().equals(name1value) && w.getTo().equals(name1changeRun) )
+					name1changeParam = w;
+				if (w.getFrom().equals(name2value) && w.getTo().equals(name2changeRun) )
+					name2changeParam = w;
+			}
+		}
+		
+		// make sure we've got all of these
+		assertNotNull( name1editRun );
+		assertNotNull( name2editRun );
+		assertNotNull( name1changeRun );
+		assertNotNull( name2changeRun );
+		assertNotNull( name1editParam );
+		assertNotNull( name2editParam );
+		assertNotNull( name1changeParam );
+		assertNotNull( name2changeParam );
+		
+	}
+
+	/**
+	 * Helper method: assert A >= B.
+	 * 
+	 * @param expected expected value (B)
+	 * @param actual actual value (A)
+	 */
+	protected void assertGreaterEq(int expected, int actual) {
 		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual > expected);
 	}
 	

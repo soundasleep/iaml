@@ -5,21 +5,93 @@ package org.openiaml.model.drools
 import org.openiaml.model.inference.*;
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
 
 #declare any global variables here
-
+# can we define ICreateElements as a global variable?
 
 rule "Create empty domain store"
 		
 	when
 		#conditions
-		ie : ICreateElements(  )
+		ie : ICreateElements( )
 		a : InternetApplication ( name == "test" )
+		not (DomainStore( name=="test domain store") from a.domainStores)
+		// how do we know when not to create the domainstore?
 	then 
 		#actions
 		System.out.println("debug: " + a);
 		DomainStore ds = (DomainStore) ie.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
 		ds.setName("test domain store");
+		ds.setIsGenerated(true);
+		ds.setGeneratedBy(a);
+		insert(ds); // possibly infer new knowledge (this is probably necessary)
+		
+end
+
+function void connectEventToOperationWithParameter(ICreateElements ie, WireEdge root, EventTrigger event, Operation operation, ApplicationElementProperty parameter) {
+	// empty for now
+}
+
+rule "Create sync wire components"
+	when
+		ie : ICreateElements( )
+		sw : SyncWire( overridden == false )
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+		
+		// should probably break this rule up into multiple separate ones
+		
+		// fields
+		sourceField : ApplicationElementProperty( name=="fieldValue" ) from source.properties 
+		targetField : ApplicationElementProperty( name=="fieldValue" ) from target.properties
+		
+		// operations
+		sourceUpdate : CompositeOperation( name=="update" ) from source.operations
+		targetUpdate : CompositeOperation( name=="update" ) from target.operations
+		sourceRefresh : CompositeOperation( name=="refresh" ) from source.operations
+		targetRefresh : CompositeOperation( name=="refresh" ) from target.operations
+		
+		// events
+		sourceEdit : EventTrigger( name=="edit" ) from source.eventTriggers
+		targetEdit : EventTrigger( name=="edit" ) from target.eventTriggers
+		sourceChange : EventTrigger( name=="change" ) from source.eventTriggers
+		targetChange : EventTrigger( name=="change" ) from target.eventTriggers
+		
+		not (RunInstanceWire( from == sourceEdit, to == targetUpdate, name == "run" ) from sw.wires)
+		
+	then
+		RunInstanceWire rw = (RunInstanceWire) ie.createRelationship(sw, WiresPackage.eINSTANCE.getRunInstanceWire(), sourceEdit, targetUpdate, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		rw.setName("run");
+		rw.setIsGenerated(true);
+		rw.setGeneratedBy(sw);
+		insert(rw);
+		 
+	
+		// connect all of these fields up
+		/*
+		connectEventToOperationWithParameter(ie, sw, sourceEdit, targetUpdate, sourceField);
+		connectEventToOperationWithParameter(ie, sw, targetChange, sourceRefresh, sourceField);
+		connectEventToOperationWithParameter(ie, sw, sourceChange, targetRefresh, targetField);
+		connectEventToOperationWithParameter(ie, sw, targetEdit, sourceUpdate, targetField);
+		*/
+		
+end
+
+rule "Create field value for input text field"
+	when
+		ie : ICreateElements( )
+		f : InputTextField( overridden == false )
+		not (ApplicationElementProperty( name=="fieldValue" ) from f.properties)
+			
+	then
+		ApplicationElementProperty fieldValue = (ApplicationElementProperty) ie.createElement( f, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties() );
+		fieldValue.setName("fieldValue");
+		fieldValue.setIsGenerated(true);
+		fieldValue.setGeneratedBy(f);
+		insert(fieldValue);
 		
 end
 
@@ -31,3 +103,4 @@ rule "Your Second Rule"
 		#actions
 		
 end
+

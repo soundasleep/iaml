@@ -50,7 +50,7 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 	
 	protected void goSitemapThenPage(IFile sitemap, String pageText) throws InterruptedException {
 		// sleep a little bit first, so ajax calls can continue
-		Thread.sleep(100);	// TODO probably not necessary?
+		Thread.sleep(1000);	// TODO probably not necessary?
 		
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
@@ -178,6 +178,7 @@ public class SyncWiresPagesTestCase extends InferenceTestCase {
 		
 		{
 			// it should change something on page 2
+			// if this fails, it is because it cannot chain text5-->newText-->text3
 			goSitemapThenPage(sitemap, "page2");
 
 			String label_text3 = getLabelIDForText("text3");

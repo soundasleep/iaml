@@ -6,7 +6,7 @@
 
 function log_message($msg) {
 	$fp = fopen("php.log", "a");
-	fwrite($fp, date("Y-m-d H:i:s") . " $msg\n");
+	fwrite($fp, date("Y-m-d H:i:s") . " events.php: $msg\n");
 	fclose($fp);
 	
 	// also echo to debug

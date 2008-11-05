@@ -21,7 +21,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.inference.CreateMissingElements;
+import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 
@@ -85,7 +85,7 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand im
 		this.info = info;
 		
 		if (!isDisabled) {
-			CreateMissingElements ce = new CreateMissingElements(this);
+			CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(this);
 			try {
 				ce.create(rootObject);
 			} catch (InferenceException e) {

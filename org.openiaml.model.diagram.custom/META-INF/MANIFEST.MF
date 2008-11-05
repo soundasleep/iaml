@@ -12,6 +12,7 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.diagram.wire,
  org.openiaml.model.diagram.domain_object,
  org.openiaml.model.diagram.operation,
- org.openiaml.model.codegen.oaw
+ org.openiaml.model.codegen.oaw,
+ org.openiaml.model.drools
 Bundle-Vendor: www.openiaml.org
 Export-Package: org.openiaml.model.diagram.custom.actions

@@ -8,9 +8,8 @@ import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.model.inference.CreateMissingElements;
+import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -32,7 +31,7 @@ public class SyncWiresTestCase extends InferenceTestCase {
 		
 		// we now try to do inference
 		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
-		CreateMissingElements ce = new CreateMissingElements(handler);
+		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
 		ce.create(root);
 		
 		// write out this inferred model for reference

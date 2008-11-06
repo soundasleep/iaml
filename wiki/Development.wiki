@@ -6,39 +6,39 @@ IAML is primarly developed in the Eclipse environment, and heavily based on many
 
 =Requirements=
 
-# [http://archive.eclipse.org/eclipse/downloads/drops/R-3.3.2-200802211800/index.php Eclipse 3.3 SDK Europa]
-# Java 1.6
+  # [http://archive.eclipse.org/eclipse/downloads/drops/R-3.3.2-200802211800/index.php Eclipse 3.3 SDK Europa]
+  # Java 1.6
 
-Through the *Europa update site*:
+Through the *Europa update site:*
 
-# Graphical Editors > Graphical Editing Framework SDK 3.3.2
-# Models > Eclipse Modeling Framework (EMF) Extender SDK 2.3.2
-# Models > Graphical Modeling Framework 2.0.2
-# Models > UML2 End-User Features
-# + all required features
+  # Graphical Editors > Graphical Editing Framework SDK 3.3.2
+  # Models > Eclipse Modeling Framework (EMF) Extender SDK 2.3.2
+  # Models > Graphical Modeling Framework 2.0.2
+  # Models > UML2 End-User Features
+  # + all required features
 
-[http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare]:
+*[http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare]:*
 {{{
 Name:  OpenArchitectureWare update site
 URL:   http://www.openarchitectureware.org/updatesite/milestone/site.xml
 }}}
-# OpenArchitectureWare SDK 4.3
+  # OpenArchitectureWare SDK 4.3
 
-[http://www.eclipticalsoftware.com/emf/xpath/ XPath Support for EMF]:
+*[http://www.eclipticalsoftware.com/emf/xpath/ XPath Support for EMF]:*
 {{{
 Name:  Ecliptical Software update site
 URL:   http://www.eclipticalsoftware.com/updates
 }}}
-# XPath Support for EMF 2.0.1
+  # XPath Support for EMF 2.0.1
 
 In the future this guide will also contain information on topics such as:
 
-# Plugin Overview
-# Building
-# Testing
-# Deploying
-# Contributing
-# Extending
-# Integrating
+  # Plugin Overview
+  # Building
+  # Testing
+  # Deploying
+  # Contributing
+  # Extending
+  # Integrating
 
 For now you can see the [PluginIDs] of each of the modelling plugins.

@@ -7,7 +7,7 @@ The development of this [Development IAML Eclipse plugin] is based on an iterati
 I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Development] significantly in order to test and validate the majority of the plugin. Though I'm not yet sure how to test the usability of Eclipse :)
 
 ==Release 0.1==
-(Released)
+([http://journals.jevon.org/users/jevon-phd/entry/16760 Released])
   # Initial IAML model that can describe initial requirements
   # Usability improvements
     * Display shortcut elements for referenced elements
@@ -50,3 +50,4 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 
 ==Release 1.0==
   # Focus on Usability
+  # Implement code generation in another language (JSP?)

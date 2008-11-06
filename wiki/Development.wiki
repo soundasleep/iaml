@@ -1,5 +1,5 @@
 #summary How to set up a development environment.
-#labels Featured
+#labels Featured,Development,Phase-Implementation
 
 =Introduction=
 IAML is primarly developed in the Eclipse environment, and heavily based on many of its sub projects.

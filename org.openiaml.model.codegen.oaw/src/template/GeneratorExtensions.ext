@@ -13,9 +13,24 @@ formName(model::visual::InputForm this) :
 	
 textFieldName(model::visual::InputTextField this) :
 	if (name == null || name == "") then "(untitled field)" else name;
+
+safeName(model::visual::Page this) :
+	if (eContainer == null) then safeName(id) else safeName(eContainer) + "_page_" + safeName(name);
+
+safeName(model::visual::InputTextField this) :
+	if (eContainer == null) then safeName(id) else safeName(eContainer) + "_text_" + safeName(name);
+
+safeName(model::Operation this) :
+	if (eContainer == null) then safeName(id) else safeName(eContainer) + "_op_" + safeName(name);
+
+safeName(model::wires::SyncWire this) :
+	if (eContainer == null) then safeName(id) else safeName(eContainer) + "_sync_" + safeName(name);
+
+safeName(model::wires::ParameterWire this) :
+	if (eContainer == null) then safeName(id) else safeName(eContainer) + "_param_" + safeName(id);
 	
 safeName(model::NamedElement this) :
-	safeName(id);
+	if (eContainer == null) then safeName(id) else safeName(eContainer) + "_" + safeName(name);
 
 safeName(String s) :
 	s.replaceAll("[^A-Za-z0-9]", "_");

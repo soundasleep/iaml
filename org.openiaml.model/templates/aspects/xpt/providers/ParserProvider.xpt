@@ -57,7 +57,7 @@
 	   * @see java.text.MessageFormat#setFormat(int, java.text.Format)
 	   * @generated
 	   */
-	  protected java.text.MessageFormat createViewProcessor(String viewPattern) {
+	  protected java.text.MessageFormat createAnyProcessor(String viewPattern) {
 	    /**
 	     * Jevon modification: add a ",formatters:0=full.Class,1=another.Class"
 	     */
@@ -89,6 +89,16 @@
 	    
 	    // default
 	    return new java.text.MessageFormat(viewPattern);
+	  }
+	  
+	  protected java.text.MessageFormat createViewProcessor(String viewPattern) {
+	  	return createAnyProcessor(viewPattern);
+	  }
+	  protected java.text.MessageFormat createEditProcessor(String viewPattern) {
+	  	return createAnyProcessor(viewPattern);
+	  }
+	  protected java.text.MessageFormat createEditorProcessor(String viewPattern) {
+	  	return createAnyProcessor(viewPattern);
 	  }
   
 	}

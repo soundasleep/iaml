@@ -731,6 +731,7 @@
   <labels
       name="SyncWireDerived"
       figure="SyncWireFigure"
+      affixedParentSide="WEST"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.22/@accessors.1"/>
   <labels

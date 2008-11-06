@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openiaml.model.model.InternetApplication#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getDomainStores <em>Domain Stores</em>}</li>
+ *   <li>{@link org.openiaml.model.model.InternetApplication#getRuntimeUrl <em>Runtime Url</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,5 +75,32 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 * @generated
 	 */
 	EList<DomainStore> getDomainStores();
+
+	/**
+	 * Returns the value of the '<em><b>Runtime Url</b></em>' attribute.
+	 * The default value is <code>"http://localhost:8080/output/"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Runtime Url</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Runtime Url</em>' attribute.
+	 * @see #setRuntimeUrl(String)
+	 * @see org.openiaml.model.model.ModelPackage#getInternetApplication_RuntimeUrl()
+	 * @model default="http://localhost:8080/output/"
+	 * @generated
+	 */
+	String getRuntimeUrl();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.InternetApplication#getRuntimeUrl <em>Runtime Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Runtime Url</em>' attribute.
+	 * @see #getRuntimeUrl()
+	 * @generated
+	 */
+	void setRuntimeUrl(String value);
 
 } // InternetApplication

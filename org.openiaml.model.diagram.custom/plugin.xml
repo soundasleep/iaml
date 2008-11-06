@@ -103,23 +103,35 @@
 	  </editpartProvider>
 	</extension>
 	
-	<!-- right click > generate code with JET -->
+	<!-- right click > generate code -->
 	<extension point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="false"
             id="org.openiaml.model.codegen.objectContribution1"
+            nameFilter="*.iaml"
             objectClass="org.eclipse.core.resources.IResource">
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
          <menu
                id="org.openiaml.model.codegen.menu1"
-               label="label">
+               path="additions"
+               label="&amp;IAML Tools">
             <separator
-                  name="org.openiaml.model.codegen.separator1">
+                  name="group1">
             </separator>
          </menu>
          <action
+               class="org.openiaml.model.diagram.custom.actions.GenerateCodeActionAndView"
+               id="org.openiaml.model.codegen.jet.action2"
+               label="Generate code and load in browser"
+               menubarPath="org.openiaml.model.codegen.menu1">
+         </action>
+
+         <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeAction"
                id="org.openiaml.model.codegen.jet.action1"
-               label="Generate code from model"
+               label="Generate code"
                menubarPath="org.openiaml.model.codegen.menu1">
          </action>
       </objectContribution>                    

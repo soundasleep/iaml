@@ -2200,13 +2200,22 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Runtime Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3248,6 +3257,17 @@ public interface ModelPackage extends EPackage {
 	EReference getInternetApplication_DomainStores();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.InternetApplication#getRuntimeUrl <em>Runtime Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Runtime Url</em>'.
+	 * @see org.openiaml.model.model.InternetApplication#getRuntimeUrl()
+	 * @see #getInternetApplication()
+	 * @generated
+	 */
+	EAttribute getInternetApplication_RuntimeUrl();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.DomainStore <em>Domain Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3973,6 +3993,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INTERNET_APPLICATION__DOMAIN_STORES = eINSTANCE.getInternetApplication_DomainStores();
+
+		/**
+		 * The meta object literal for the '<em><b>Runtime Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTERNET_APPLICATION__RUNTIME_URL = eINSTANCE.getInternetApplication_RuntimeUrl();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DomainStoreImpl <em>Domain Store</em>}' class.

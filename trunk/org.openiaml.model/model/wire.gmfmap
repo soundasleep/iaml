@@ -201,6 +201,7 @@
         body="self.oclIsTypeOf( SyncWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
+        readOnly="true"
         viewPattern="{0},formatters:0=org.openiaml.model.diagramextensions.IsGeneratedFormat">
       <diagramLabel
           href="iaml.gmfgraph#SyncWireDerived"/>
@@ -209,10 +210,13 @@
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern=""
-        editPattern="">
+        viewPattern="{0}{1},formatters:0=org.openiaml.model.diagramextensions.IsGeneratedFormat"
+        editorPattern="{0}{1},formatters:0=org.openiaml.model.diagramextensions.DefaultFalseFormat"
+        editPattern="{0}{1},formatters:0=org.openiaml.model.diagramextensions.DefaultFalseFormat">
       <diagramLabel
           href="iaml.gmfgraph#SyncWireName"/>
+      <features
+          href="iaml.ecore#//GeneratedElement/isGenerated"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>

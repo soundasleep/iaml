@@ -14,7 +14,7 @@ import java.text.FieldPosition;
  *
  */
 public class IsGeneratedFormat extends ChoiceFormat {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	public IsGeneratedFormat() {
@@ -38,5 +38,5 @@ public class IsGeneratedFormat extends ChoiceFormat {
 	public void applyPattern(String newPattern) {
 		// just do nothing with the new pattern (it's most likely null, thanks to the constructor)
 	}
-
+	
 }

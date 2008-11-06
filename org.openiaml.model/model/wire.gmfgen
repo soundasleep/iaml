@@ -593,8 +593,6 @@
             editorPattern=""
             editPattern="">
           <metaFeatures
-              href="iaml.genmodel#//model/GeneratedElement/isGenerated"/>
-          <metaFeatures
               href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>

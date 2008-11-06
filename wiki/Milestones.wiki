@@ -1,0 +1,52 @@
+#summary Planned development milestones for the IAML plugin
+#labels Featured,Phase-QA
+
+=Introduction=
+The development of this [Development IAML Eclipse plugin] is based on an iterative approach. In particular, large iterations (minor versions) which are then broken down into smaller iterations (revisions, spikes). These iterations are also designed to be synchronised with my [http://journals.jevon.org/users/jevon-phd PhD]. 
+
+I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Development] significantly in order to test and validate the majority of the plugin. Though I'm not yet sure how to test the usability of Eclipse :)
+
+==Release 0.1==
+(Released)
+  # Initial IAML model that can describe initial requirements
+  # Usability improvements
+    * Display shortcut elements for referenced elements
+  # Look into rule engines for element inference
+  # Testing
+    * Initial testing of code generation
+    * Initial testing of element inference
+    * Testing of plugin structure
+  # Code generation 
+    * Basic HTML/PHP genereation
+  # Set up [Installation update site]
+
+==Release 0.2==
+([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.2 Outstanding issues])
+  # Publish milestones
+  # Expand IAML model
+  # Usability improvements
+  # Code generation
+    * Clean up structure of code generation plugin
+    * Operation deep chaining
+    * Can generate all elements of the initial requirements
+  # Testing
+    * Test operational modelling and generation
+  # Development
+    * Set up automated build and release
+    * Automated testing in build script
+
+==Release 0.3+==
+([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.3 Outstanding issues])
+  # Complete IAML model
+  # Code generation of IAML model
+  # Development
+    * Integration with CruiseControl
+    * Code coverage with [http://emma.sourceforge.net/ Emma] and [http://www.eclemma.org/ EclEmma]
+
+==Release 0.9==
+  # Usability
+    * Can migrate models between different versions
+  # Can implement [http://openiaml.org Ticket 2.0]
+
+==Release 1.0==
+  # Focus on Usability

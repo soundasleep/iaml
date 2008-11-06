@@ -420,9 +420,15 @@
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
+            name="SyncWireDerivedFigure"
+            text=""/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="SyncWireNameFigure"
             text="&lt;...>"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.22/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
     </descriptors>
@@ -722,6 +728,11 @@
       name="CompositeWireName"
       figure="CompositeWireFigure"
       accessor="//@figures.0/@descriptors.21/@accessors.0"/>
+  <labels
+      name="SyncWireDerived"
+      figure="SyncWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.22/@accessors.1"/>
   <labels
       name="SyncWireName"
       figure="SyncWireFigure"

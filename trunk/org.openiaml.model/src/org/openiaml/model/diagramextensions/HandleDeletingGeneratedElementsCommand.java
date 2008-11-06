@@ -37,6 +37,9 @@ public class HandleDeletingGeneratedElementsCommand extends Command {
 	 * @param editPart 
 	 */
 	public HandleDeletingGeneratedElementsCommand(DestroyElementRequest req, EditPart editPart) {
+		
+		java.text.Format f;
+		
 		this.request = req;
 		this.editPart = editPart;
 		// calculate the proper editPart

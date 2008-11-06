@@ -24,6 +24,13 @@ URL:   http://www.openarchitectureware.org/updatesite/milestone/site.xml
 }}}
   # OpenArchitectureWare SDK 4.3
 
+*[http://www.jboss.org/drools/ JBoss Drools]:*
+{{{
+Name:  JBoss Drools update site
+URL:   http://downloads.jboss.com/drools/updatesite3.3/ 
+}}}
+  # JBoss Drools Workbench 4.0.7
+
 *[http://www.eclipticalsoftware.com/emf/xpath/ XPath Support for EMF]:*
 {{{
 Name:  Ecliptical Software update site

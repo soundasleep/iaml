@@ -56,6 +56,7 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRuntimeUrl <em>Runtime Url</em>}</li>
  * </ul>
  * </p>
  *
@@ -221,6 +222,26 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<DomainStore> domainStores;
+
+	/**
+	 * The default value of the '{@link #getRuntimeUrl() <em>Runtime Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRuntimeUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String RUNTIME_URL_EDEFAULT = "http://localhost:8080/output/";
+
+	/**
+	 * The cached value of the '{@link #getRuntimeUrl() <em>Runtime Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRuntimeUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected String runtimeUrl = RUNTIME_URL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -474,6 +495,27 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getRuntimeUrl() {
+		return runtimeUrl;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRuntimeUrl(String newRuntimeUrl) {
+		String oldRuntimeUrl = runtimeUrl;
+		runtimeUrl = newRuntimeUrl;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.INTERNET_APPLICATION__RUNTIME_URL, oldRuntimeUrl, runtimeUrl));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -549,6 +591,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getChildren();
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return getDomainStores();
+			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
+				return getRuntimeUrl();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -605,6 +649,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				getDomainStores().clear();
 				getDomainStores().addAll((Collection<? extends DomainStore>)newValue);
 				return;
+			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
+				setRuntimeUrl((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -653,6 +700,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				getDomainStores().clear();
 				return;
+			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
+				setRuntimeUrl(RUNTIME_URL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -689,6 +739,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return children != null && !children.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return domainStores != null && !domainStores.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
+				return RUNTIME_URL_EDEFAULT == null ? runtimeUrl != null : !RUNTIME_URL_EDEFAULT.equals(runtimeUrl);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -797,6 +849,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		result.append(name);
 		result.append(", overridden: ");
 		result.append(overridden);
+		result.append(", runtimeUrl: ");
+		result.append(runtimeUrl);
 		result.append(')');
 		return result.toString();
 	}

@@ -32,11 +32,16 @@ import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 /**
  * Action to generate code from an .iaml file
  * 
- * @see org.openiaml.model.codegen.jet
+ * @see org.openiaml.model.codegen.oaw
  * @author jmwright
  *
  */
 public class GenerateCodeAction implements IViewActionDelegate {
+
+	/**
+	 * The loaded model.
+	 */
+	private EObject model = null;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
@@ -52,6 +57,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 	 */
 	@Override
 	public void run(IAction action) {
+		model = null;
 		
 		if (selection != null) {
 			for (Object o : selection) {
@@ -73,7 +79,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 	 * @param monitor 
 	 * @return 
 	 */
-	private IStatus generateCodeFrom(IFile o, IAction action, IProgressMonitor monitor) {
+	protected IStatus generateCodeFrom(IFile o, IAction action, IProgressMonitor monitor) {
 		try {
 			if (o.getFileExtension().equals("iaml")) {
 				
@@ -84,11 +90,15 @@ public class GenerateCodeAction implements IViewActionDelegate {
 				// load the inference elements manager
 				EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
 				
-				// do inference on the model
-				for (EObject model : resource.getContents()) {
-					CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-					ce.create(model);
+				// we can only do one model
+				if (resource.getContents().size() != 1) {
+					return new Status(IStatus.ERROR, PLUGIN_ID, "Could not transform model: unexpected number of model elements in file (expected: 1, found: " + resource.getContents().size() + ")");
 				}
+				
+				// do inference on the model
+				model = resource.getContents().get(0);
+				CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
+				ce.create(model);
 				
 				// output the temporary changed model to an external file
 				// so we can do code generation
@@ -147,6 +157,10 @@ public class GenerateCodeAction implements IViewActionDelegate {
 		if (selection instanceof IStructuredSelection) {
 			this.selection = ((IStructuredSelection) selection).toArray();
 		}
+	}
+
+	public EObject getLoadedModel() {
+		return model;
 	}
 
 }

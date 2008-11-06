@@ -98,6 +98,8 @@
         eType="#//ApplicationElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainStores" upperBound="-1"
         eType="#//DomainStore" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtimeUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="http://localhost:8080/output/"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements">
     <eAnnotations source="http://openiaml.org/comment">

@@ -70,7 +70,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 		// the semantics specified in our .vsd file
 		EObject update = queryOne(name1, "iaml:operations[iaml:name='update']");
 		assertTrue(update instanceof CompositeOperation);
-		List<Object> nodes = query(update, "iaml:nodes");
+		List<?> nodes = query(update, "iaml:nodes");
 		assertEquals(nodes.size(), 2);
 		assertTrue(nodes.get(0) instanceof StartNode);
 		assertTrue(nodes.get(1) instanceof StopNode);
@@ -78,7 +78,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 	
 	public void testAllUpdates() throws JaxenException {
 		// get all 'update' operations
-		List<Object> updates = query(root, "//iaml:operations[iaml:name='update']");
+		List<?> updates = query(root, "//iaml:operations[iaml:name='update']");
 		
 		// there are 4 input texts => there should be at least 4 update operations
 		assertGreaterEq(4, updates.size());
@@ -91,7 +91,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 			assertEquals(prelude, update.getName(), "update");
 			
 			// has a start node
-			List<Object> nodes = query(update, "iaml:nodes");
+			List<?> nodes = query(update, "iaml:nodes");
 			assertEquals(prelude, nodes.size(), 2);
 			assertTrue(prelude, nodes.get(0) instanceof StartNode);
 			assertTrue(prelude, nodes.get(1) instanceof StopNode);
@@ -128,7 +128,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 	public void testWires() throws JaxenException {
 		// get all 'update' operations
 		//List<Object> syncWires = query(root, "//iaml:wires[xsi:type='iaml.wires:SyncWire']");
-		List<Object> syncWires = query(root, "//iaml:wires[contains(iaml:name, 'sync')]");
+		List<?> syncWires = query(root, "//iaml:wires[contains(iaml:name, 'sync')]");
 		
 		// there are exactly three sync wires
 		assertEquals(3, syncWires.size());
@@ -136,7 +136,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 	
 	public void testSyncWire1() throws JaxenException {
 		// get the first sync wire
-		List<Object> syncWires = query(root, "//iaml:wires[iaml:name='sync1']");
+		List<?> syncWires = query(root, "//iaml:wires[iaml:name='sync1']");
 		assertEquals(1, syncWires.size());	// there is only one
 		
 		SyncWire wire = (SyncWire) syncWires.get(0);		// get the first one

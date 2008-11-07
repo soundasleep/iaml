@@ -6,3 +6,4 @@ Bundle-Version: 0.1.0
 Require-Bundle: org.openarchitectureware.dependencies,
  org.openiaml.model
 Export-Package: org.openiaml.model.codegen.oaw
+Bundle-Vendor: www.openiaml.org

@@ -40,7 +40,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		String modelFile = "models/test-sync.iaml";
+		String modelFile = ROOT + "inference/SyncWireTestCase.iaml";
 		EObject model = loadModelDirectly(modelFile);
 		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
 		assertNotNull(model);

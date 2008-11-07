@@ -14,7 +14,7 @@ public class SimpleTestCase extends ModelTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		doTransform("models/simple.iaml");
+		doTransform(ROOT + "codegen/SimpleTestCase.iaml");
 	}
 
 	protected void tearDown() throws Exception {

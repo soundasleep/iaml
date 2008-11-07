@@ -1,0 +1,208 @@
+<!--
+	Based on a build script from http://rcpquickstart.com/2007/08/06/running-automated-tests-with-pde-build/.	
+-->
+<!--
+	This program and the accompanying materials are made available
+	under the terms of the Eclipse Public License v1.0 which
+	accompanies this distribution, and is available at
+  	http://www.eclipse.org/legal/epl-v10.html
+	
+	This build script creates a build directory containing the plugins
+	and features to be built, and then kicks off the PDE build process.
+	It also runs a simple unit test using the Eclipse Testing Framework
+	and produces coverage analysis using EMMA.
+	
+	The script can be run inside the Eclipse IDE by choosing 
+	Run As -> Ant Build from the context menu. It could obviously be
+	run outside of the IDE if you have ANT installed on your path.
+	
+	If you have any questions about this build, feel free to contact me
+	at patrick@rcpquickstart.com.
+-->
+<project name="org.openiaml.model.build" default="build">
+	<property file="build.properties" />
+	<property name="buildDirectory" value="build" />
+	<property name="eclipseLocation" value="c:/eclipse-33-2" />
+	<property name="eclipseBaseURL" value="file:///c:/eclipse-33-2" />
+	<property name="equinoxLauncherPluginVersion" value="1.0.0.v20070606" />
+	<property name="pdeBuildPluginVersion" value="3.3.0.v20070612" />
+	<property name="buildLabel" value="foo" />
+	<property name="buildId" value="bar" />
+	<property name="testDirectory" value="testdir" />
+	
+	<!--
+	TODO: throw errors if the .jars etc referenced below do not exist
+	-->
+	
+	<!--
+	${eclipse-home} will have to be set as part of the build parameters
+	<property name="eclipse-home" value="${testDirectory}/eclipse"/>
+	-->
+
+	<!-- Set up EMMA location and instrumentation path -->
+	<!--
+	<path id="emma.lib">
+		<pathelement location="lib/emma.jar" />
+		<pathelement location="lib/emma_ant.jar" />
+	</path>
+	<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+	-->
+
+	<path id="instrument.classpath">
+		<fileset dir="${eclipse-home}/plugins">
+			<include name="org.openiaml.*.jar" />
+		</fileset>
+	</path>
+
+	<!--
+		PDE Build expects that the build directory contains a "plugins" 
+		directory and a "features" directory. These directories should contain
+		the various plug-ins and features to be built.
+		
+		It's possible to use the CVS checkout process that is built into 
+		PDE Build. This would be done with map files and is beyond the 
+		scope of this tutorial. 
+		
+		This script simply copies the projects directly from your workspace
+		into the appropriate build directory folders. Replace this with 
+		whatever process works for you.
+	-->
+	<target name="init">
+		<mkdir dir="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}/plugins" />
+		<mkdir dir="${buildDirectory}/features" />
+		<copy todir="${buildDirectory}/plugins">
+			<fileset dir="../">
+				<include name="org.openiaml.*/**" />
+				<exclude name="org.openiaml.model.edit/**" />
+				<exclude name="org.openiaml.model.build/**" />
+				<exclude name="org.openiaml.model.diagram*/**" />
+			</fileset>
+		</copy>
+		<copy todir="${buildDirectory}/features">
+			<fileset dir="../">
+				<include name="org.openiaml.model.edit/**" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<!--
+		This target actually executes the PDE Build process by launching the 
+		Eclipse antRunner application.
+	-->
+	<target name="pde-build">
+		<!--
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+		 replace with following for Eclipse 3.2 
+		<java classname="org.eclipse.core.launcher.Main" fork="true" failonerror="true">	
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="${eclipseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<arg value="-DeclipseBaseURL='${eclipseBaseURL}'" />
+			<classpath>
+				<pathelement location="${eclipseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+				 replace with following for Eclipse 3.2 
+				 <pathelement location="${eclipseLocation}/startup.jar" />
+			</classpath>
+		</java>
+		-->
+		
+	</target>
+
+	<target name="test">
+
+		<!-- 
+			Create the test environment needed to run unit tests using the 
+			Eclipse Testing Framework. The test environment consists of three
+			parts.
+			
+			1. A complete version of the Eclipse SDK.
+			2. The Eclipse Testing Framework itself.
+			3. The production and test plug-ins that make up your application.
+		-->
+		<!--
+			First, we will unzip an archived version of the Eclipse SDK. It is 
+			important to start with a "clean" version of the SDK. If you copy a 
+			previously run instance of Eclipse, you will bring along a lot of 
+			metadata and config info that will slow down your build and complicate
+			the running of JUnits.
+		<unzip src="eclipse-SDK-3.3-win32.zip" dest="${testDirectory}"/>
+		-->
+			
+		<!-- 
+			Add Eclipse Testing Framework
+		-->
+		<unzip src="eclipse-test-framework-3.3.2.zip" dest="${testDirectory}"/>
+		
+		<!-- 
+			Unzip the product created above. Note that the extract code must then
+			be copied into the "eclipse" directory containing the SDK and the ETF.
+		-->
+		<unzip src="${buildDirectory}/${buildLabel}/${buildId}-win32.win32.x86.zip" dest="${testDirectory}"/>
+		<move todir="${eclipse-home}">
+			<fileset dir="${testDirectory}/${archivePrefix}">
+				<include name="*/**" />
+			</fileset>
+		</move>
+
+		<!-- 
+			Instrument the code using EMMA 
+		-->
+		<!--
+		<emma enabled="true">
+			<instr instrpathref="instrument.classpath" mode="overwrite" metadatafile="${coverageDirectory}/metadata.emma" >
+				<filter file="emma-filters.txt" />
+			</instr>
+		</emma>
+		-->
+
+		<!-- 
+			Run the test.
+		-->
+		<property name="library-file" value="${eclipse-home}/plugins/org.eclipse.test_3.2.0/library.xml"/>
+		<ant target="core-test" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="os" value="${baseos}"/>
+			<property name="ws" value="${basews}"/>
+			<property name="arch" value="${basearch}"/>
+			<property name="data-dir" value="${eclipse-home}/junit-workspace -clean" />
+			<property name="plugin-name" value="com.rcpquickstart.helloworld.test" />
+			<property name="classname" value="com.rcpquickstart.helloworld.HelloWorldModelTest" />
+			<!--<property name="extraVMargs" value="-Demma.coverage.out.file=${coverageDirectory}/coverage.emma -Dosgi.parentClassloader=ext" />-->
+		</ant>
+		
+		<!-- 
+			Collect all test results into single file and move to results directory.
+		-->
+		<ant target="collect" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="includes" value="com*.xml" />
+			<property name="output-file" value="test-results.xml" />
+		</ant>
+		<move file="${eclipse-home}/test-results.xml" todir="${testResultsDirectory}" />
+		
+		<!-- 
+			Produce coverage analysis docs using EMMA 
+		-->
+		<!--
+		<emma enabled="true">
+			<report sourcepath="${instrument.classpath}">
+				<fileset dir="${coverageDirectory}">
+					<include name="*.emma" />
+				</fileset>
+
+				<txt outfile="${coverageDirectory}/coverage.txt" />
+				<html outfile="${coverageDirectory}/coverage.html" />
+			</report>
+		</emma>
+		-->
+	</target>
+
+	<target name="clean">
+		<!--
+		<delete dir="${buildDirectory}" />
+		-->
+	</target>
+
+	<target name="build" depends="clean, init, pde-build, test" />
+</project>

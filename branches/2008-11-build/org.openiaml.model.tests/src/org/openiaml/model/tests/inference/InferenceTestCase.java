@@ -52,7 +52,7 @@ public abstract class InferenceTestCase extends CodegenWebTestCase {
 	 * @return
 	 * @throws JaxenException
 	 */
-	public static List<Object> query(final EObject root, String query) throws JaxenException {
+	public static List<?> query(final EObject root, String query) throws JaxenException {
 		EMFXPath xpath = new EMFXPath(query);
 		xpath.addNamespace("iaml", ModelPackage.eNS_URI);
 		xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -87,7 +87,7 @@ public abstract class InferenceTestCase extends CodegenWebTestCase {
 	 * @throws JaxenException 
 	 */
 	protected EObject queryOne(EObject root, String query) throws JaxenException {
-		List<Object> q = query(root, query);
+		List<?> q = query(root, query);
 		assertEquals("queryOne for '" + query + "' had no results", 1, q.size());
 		return (EObject) q.get(0);
 	}

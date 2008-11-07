@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,7 +32,7 @@ import org.openiaml.model.codegen.oaw.OawCodeGenerator;
  * @author jmwright
  *
  */
-public abstract class CodegenWebTestCase extends WebTestCase {
+public abstract class ModelTestCase extends WebTestCase {
 
 	public final String PLUGIN_ID = "org.openiaml.model.tests";
 	

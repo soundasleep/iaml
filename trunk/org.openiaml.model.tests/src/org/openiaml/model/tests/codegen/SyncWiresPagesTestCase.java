@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.InferenceTestCase;
 
 /**
  * Test SyncWires across multiple pages

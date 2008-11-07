@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.tests.InferenceTestCase;
 
 /**
  * Tests loading the model.

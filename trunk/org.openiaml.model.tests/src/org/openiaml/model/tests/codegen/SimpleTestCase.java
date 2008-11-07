@@ -4,12 +4,13 @@
 package org.openiaml.model.tests.codegen;
 
 import org.eclipse.core.resources.IFile;
+import org.openiaml.model.tests.ModelTestCase;
 
 /**
  * @author jmwright
  *
  */
-public class SimpleTestCase extends CodegenWebTestCase {
+public class SimpleTestCase extends ModelTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();

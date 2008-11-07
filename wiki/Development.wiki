@@ -38,6 +38,12 @@ URL:   http://www.eclipticalsoftware.com/updates
 }}}
   # XPath Support for EMF 2.0.1
 
+*[http://subclipse.tigris.org Subclipse]:*
+{{{
+Name:  Subclipse 1.2.x update site
+URL:   http://subclipse.tigris.org/update_1.2.x
+}}}
+
 In the future this guide will also contain information on topics such as:
 
   # Plugin Overview

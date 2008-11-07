@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.inference;
+package org.openiaml.model.tests;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.tests.codegen.CodegenWebTestCase;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -26,7 +25,7 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  * @author jmwright
  *
  */
-public abstract class InferenceTestCase extends CodegenWebTestCase {
+public abstract class InferenceTestCase extends ModelTestCase {
 
 	protected InternetApplication root;
 	protected Resource resource;
@@ -52,7 +51,7 @@ public abstract class InferenceTestCase extends CodegenWebTestCase {
 	 * @return
 	 * @throws JaxenException
 	 */
-	public static List<Object> query(final EObject root, String query) throws JaxenException {
+	public static List<?> query(final EObject root, String query) throws JaxenException {
 		EMFXPath xpath = new EMFXPath(query);
 		xpath.addNamespace("iaml", ModelPackage.eNS_URI);
 		xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -87,7 +86,7 @@ public abstract class InferenceTestCase extends CodegenWebTestCase {
 	 * @throws JaxenException 
 	 */
 	protected EObject queryOne(EObject root, String query) throws JaxenException {
-		List<Object> q = query(root, query);
+		List<?> q = query(root, query);
 		assertEquals("queryOne for '" + query + "' had no results", 1, q.size());
 		return (EObject) q.get(0);
 	}

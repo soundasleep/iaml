@@ -35,6 +35,7 @@ import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 public abstract class ModelTestCase extends WebTestCase {
 
 	public final String PLUGIN_ID = "org.openiaml.model.tests";
+	public final String ROOT = "src/org/openiaml/model/tests/";
 	
 	private IProject project;
 	private IProgressMonitor monitor = new NullProgressMonitor();

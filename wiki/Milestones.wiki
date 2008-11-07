@@ -25,12 +25,18 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Publish milestones
   # Expand IAML model
   # Usability improvements
+    * Add progress monitors for inference and code generation
+    * Propogation of generated element deletion (element override)
+    * Sharing single EditingDomain instance across all editors
+  # Inference
+    * If the children of a SyncWire are created manually without creating the SyncWire, automatically generate the SyncWire + test cases
   # Code generation
     * Clean up structure of code generation plugin
     * Operation deep chaining
     * Can generate all elements of the initial requirements
   # Testing
     * Test operational modelling and generation
+    * Test cases for code generation of all modelling elements
   # Development
     * Set up automated build and release
     * Automated testing in build script

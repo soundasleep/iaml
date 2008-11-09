@@ -102,6 +102,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		File tempJavaFile = new File("infer-output/" + this.getClass().getSimpleName() + ".iaml");
 		Map<?,?> options = resource.getResourceSet().getLoadOptions();
 		resource.save(new FileOutputStream(tempJavaFile), options);
+		System.out.println("inferred model saved to: " + tempJavaFile.getAbsolutePath());
 		return tempJavaFile;
 	}
 }

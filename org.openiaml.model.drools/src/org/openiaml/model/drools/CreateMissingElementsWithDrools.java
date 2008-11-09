@@ -24,6 +24,8 @@ import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
@@ -118,6 +120,25 @@ public class CreateMissingElementsWithDrools {
 					}
 				}
 				
+				// DomainStore
+				if (obj.getObject() instanceof DomainStore) {
+					DomainStore a = (DomainStore) obj.getObject();
+					for (DomainObject child : a.getChildren()) {
+						workingMemory.insert( child );
+					}
+					for (ApplicationElementProperty child : a.getProperties()) {
+						workingMemory.insert( child );
+					}
+				}				
+
+				// DomainObject
+				if (obj.getObject() instanceof DomainObject) {
+					DomainObject a = (DomainObject) obj.getObject();
+					for (DomainAttribute child : a.getAttributes()) {
+						workingMemory.insert( child );
+					}
+				}
+
 				// InternetApplication
 				if (obj.getObject() instanceof InternetApplication) {
 					InternetApplication a = (InternetApplication) obj.getObject();

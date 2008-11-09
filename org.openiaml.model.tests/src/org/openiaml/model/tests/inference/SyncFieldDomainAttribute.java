@@ -7,23 +7,14 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
-import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.ChainedOperation;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.operations.StartNode;
-import org.openiaml.model.model.operations.StopNode;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
@@ -43,26 +34,8 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 
 	protected InternetApplication root;
 	
-	// TODO refactor out
 	protected void setUp() throws Exception {
-		String modelFile = ROOT + "inference/SyncFieldDomainAttribute.iaml";
-		EObject model = loadModelDirectly(modelFile);
-		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
-		assertNotNull(model);
-		
-		root = (InternetApplication) model;
-		
-		// we now try to do inference
-		ICreateElements handler = new EcoreInferenceHandler(resource);
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-		ce.create(root);
-		
-		// write out this inferred model for reference
-		saveInferredModel();
-	}
-	
-	protected void tearDown() throws Exception {
-		// empty
+		root = loadAndInfer(ROOT + "inference/SyncFieldDomainAttribute.iaml");
 	}
 	
 	public void testInference() throws JaxenException {
@@ -94,52 +67,5 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		assertEquals(paramWire.getFrom(), fieldValue);
 		assertEquals(paramWire.getTo(), runWire);
 	}
-
-	/**
-	 * It's not possible to do something like //iaml:wire[iaml:from='id']
-	 * so we need to parse them manually?
-	 * 
-	 * @param container
-	 * @param fromElement
-	 * @param wireName
-	 * @return the wire found or null
-	 * @throws JaxenException 
-	 */
-	private WireEdge getWireFrom(Page container, EObject fromElement,
-			String wireName) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires[iaml:name='" + wireName + "']");
-		for (Object o : wires) {
-			if (o instanceof WireEdge && ((WireEdge) o).getFrom().equals(fromElement))
-				return (WireEdge) o;
-		}
-		
-		fail("no wire found");
-		return null;
-	}
-
-	/**
-	 * It's not possible to do something like //iaml:wire[iaml:from='id']
-	 * so we need to parse them manually?
-	 * 
-	 * @param container
-	 * @param fromElement
-	 * @param toElement
-	 * @return the wire found or null
-	 * @throws JaxenException 
-	 */
-	private WireEdge getWireFromTo(Page container, EObject fromElement, EObject toElement) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof WireEdge) {
-				WireEdge w = (WireEdge) o;
-				if (w.getFrom().equals(fromElement) && w.getTo().equals(toElement))
-					return w;
-			}
-		}
-		
-		fail("no wire found");
-		return null;
-	}
-	
 	
 }

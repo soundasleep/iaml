@@ -213,6 +213,18 @@ rule "Create field value for input text field"
 		
 end
 
+rule "Create field value for domain attribute"
+	when
+		f : DomainAttribute( overridden == false )
+		not (ApplicationElementProperty( eContainer == f, name=="fieldValue" ))
+			
+	then
+		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(f, f);
+		fieldValue.setName("fieldValue");
+		insert(fieldValue);
+		
+end
+
 rule "Create 'edit' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )

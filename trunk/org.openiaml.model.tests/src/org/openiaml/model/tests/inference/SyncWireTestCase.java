@@ -40,24 +40,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		String modelFile = ROOT + "inference/SyncWireTestCase.iaml";
-		EObject model = loadModelDirectly(modelFile);
-		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
-		assertNotNull(model);
-		
-		root = (InternetApplication) model;
-		
-		// we now try to do inference
-		ICreateElements handler = new EcoreInferenceHandler(resource);
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-		ce.create(root);
-		
-		// write out this inferred model for reference
-		saveInferredModel();
-	}
-	
-	protected void tearDown() throws Exception {
-		// empty
+		root = loadAndInfer(ROOT + "inference/SyncWireTestCase.iaml");
 	}
 	
 	public void testName1toName2() throws JaxenException {

@@ -16,8 +16,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.jaxen.JaxenException;
+import org.openiaml.model.drools.CreateMissingElementsWithDrools;
+import org.openiaml.model.inference.EcoreInferenceHandler;
+import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.WireEdge;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -27,8 +31,28 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  */
 public abstract class InferenceTestCase extends ModelTestCase {
 
-	protected InternetApplication root;
 	protected Resource resource;
+
+	/**
+	 * Load a model file and perform inference on it.
+	 */
+	protected InternetApplication loadAndInfer(String modelFile) throws Exception {
+		EObject model = loadModelDirectly(modelFile);
+		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
+		assertNotNull(model);
+		
+		InternetApplication root = (InternetApplication) model;
+		
+		// we now try to do inference
+		ICreateElements handler = new EcoreInferenceHandler(resource);
+		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
+		ce.create(root);
+		
+		// write out this inferred model for reference
+		saveInferredModel();	
+		
+		return root;
+	}
 	
 	/**
 	 * Load a model file directly.
@@ -105,4 +129,75 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		System.out.println("inferred model saved to: " + tempJavaFile.getAbsolutePath());
 		return tempJavaFile;
 	}
+
+
+	/**
+	 * It's not possible to do something like //iaml:wire[iaml:from='id']
+	 * so we need to parse them manually?
+	 * 
+	 * @param container
+	 * @param fromElement
+	 * @param wireName
+	 * @return the wire found or null
+	 * @throws JaxenException 
+	 */
+	protected WireEdge getWireFrom(EObject container, EObject fromElement,
+			String wireName) throws JaxenException {
+		List<?> wires = query(container, "//iaml:wires[iaml:name='" + wireName + "']");
+		for (Object o : wires) {
+			if (o instanceof WireEdge && ((WireEdge) o).getFrom().equals(fromElement))
+				return (WireEdge) o;
+		}
+		
+		fail("no wire found");
+		return null;
+	}
+
+	/**
+	 * It's not possible to do something like //iaml:wire[iaml:from='id']
+	 * so we need to parse them manually?
+	 * 
+	 * @param container
+	 * @param fromElement
+	 * @param toElement
+	 * @return the wire found or null
+	 * @throws JaxenException 
+	 */
+	protected WireEdge getWireFromTo(EObject container, EObject fromElement, EObject toElement) throws JaxenException {
+		List<?> wires = query(container, "//iaml:wires");
+		for (Object o : wires) {
+			if (o instanceof WireEdge) {
+				WireEdge w = (WireEdge) o;
+				if (w.getFrom().equals(fromElement) && w.getTo().equals(toElement))
+					return w;
+			}
+		}
+		
+		fail("no wire found");
+		return null;
+	}
+
+	/**
+	 * It's not possible to do something like //iaml:wire[iaml:from='id']
+	 * so we need to parse them manually?
+	 * 
+	 * @param container
+	 * @param fromElement
+	 * @return the wire found or null
+	 * @throws JaxenException 
+	 */
+	protected WireEdge getWireFrom(EObject container, EObject fromElement) throws JaxenException {
+		List<?> wires = query(container, "//iaml:wires");
+		for (Object o : wires) {
+			if (o instanceof WireEdge) {
+				WireEdge w = (WireEdge) o;
+				if (w.getFrom().equals(fromElement))
+					return w;
+			}
+		}
+		
+		fail("no wire found");
+		return null;
+	}
+	
 }

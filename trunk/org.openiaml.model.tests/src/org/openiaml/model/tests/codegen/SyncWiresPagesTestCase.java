@@ -25,6 +25,8 @@ import org.openiaml.model.tests.InferenceTestCase;
  */
 public class SyncWiresPagesTestCase extends InferenceTestCase {
 	
+	protected InternetApplication root;
+	
 	protected void setUp() throws Exception {
 		String modelFile = ROOT + "codegen/SyncWiresPagesTestCase.iaml";
 		EObject model = loadModelDirectly(modelFile);

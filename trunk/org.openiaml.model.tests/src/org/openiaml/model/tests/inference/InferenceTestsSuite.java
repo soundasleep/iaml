@@ -21,6 +21,7 @@ public class InferenceTestsSuite {
 
         suite.addTestSuite(LoadModelTestCase.class);
         suite.addTestSuite(SyncWireTestCase.class);
+        suite.addTestSuite(SyncFieldDomainAttribute.class);
 
         return suite; 
    }

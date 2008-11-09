@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.inference;
 
+import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
@@ -37,7 +38,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  */
 public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
-	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, InputTextField container) throws InferenceException {
+	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, ApplicationElement container) throws InferenceException {
 		ApplicationElementProperty fieldValue = (ApplicationElementProperty) createElement( container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties() );
 		fieldValue.setIsGenerated(true);
 		fieldValue.setGeneratedBy(by);

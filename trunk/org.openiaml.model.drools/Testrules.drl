@@ -36,8 +36,8 @@ function boolean syncMatches(NamedElement e1, NamedElement e2) {
 
 rule "Sync wires between pages should create sync wires between all elements inside each page that match"
 	when
-		p1 : Page( )
-		p2 : Page(this != p1)
+		p1 : ApplicationElement( )
+		p2 : ApplicationElement(this != p1)
 		source : SyncWire(overridden == false, from == p1, to == p2)
 		
 		e1 : ApplicationElement( eContainer == p1 )
@@ -56,8 +56,8 @@ end
 rule "Create sync wire components: run instance wire from source.edit to target.update"
 	when
 		sw : SyncWire(overridden == false)
-		source : InputTextField( ) from sw.from  
-		target : InputTextField( ) from sw.to
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
 		
 		event : EventTrigger( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
@@ -227,9 +227,33 @@ rule "Create 'edit' event trigger for input text field"
 		
 end
 
+rule "Create 'edit' event trigger for domain attribute"
+	when
+		f : DomainAttribute( overridden == false )
+		not (EventTrigger( eContainer == f, name=="edit" ))
+			
+	then
+		EventTrigger event = handler.generatedEventTrigger(f, f);
+		event.setName("edit");
+		insert(event);
+		
+end
+
 rule "Create 'change' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )
+		not (EventTrigger( eContainer == f, name=="change" ))
+			
+	then
+		EventTrigger event = handler.generatedEventTrigger(f, f);
+		event.setName("change");
+		insert(event);
+		
+end
+
+rule "Create 'change' event trigger for domain attribute"
+	when
+		f : DomainAttribute( overridden == false )
 		not (EventTrigger( eContainer == f, name=="change" ))
 			
 	then
@@ -251,9 +275,33 @@ rule "Create 'update' operation for input text field"
 		
 end
 
+rule "Create 'update' operation for domain attribute"
+	when
+		f : DomainAttribute( overridden == false )
+		not (Operation( eContainer == f, name=="update" ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		operation.setName("update");
+		insert(operation);
+		
+end
+
 rule "Create 'refresh' operation for input text field"
 	when
 		f : InputTextField( overridden == false )
+		not (Operation( eContainer == f, name=="refresh" ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		operation.setName("refresh");
+		insert(operation);
+		
+end
+
+rule "Create 'refresh' operation for domain attribute"
+	when
+		f : DomainAttribute( overridden == false )
 		not (Operation( eContainer == f, name=="refresh" ))
 			
 	then

@@ -2,7 +2,7 @@
 #labels Featured,Development,Phase-Implementation
 
 =Introduction=
-IAML is primarly developed in the Eclipse environment, and heavily based on many of its sub projects.
+IAML is primarly developed in the Eclipse environment, and heavily based on many of its sub projects. It is based on Eclipse 3.3/GMF 2.0.2 until [https://bugs.eclipse.org/bugs/buglist.cgi?email1=jevon%40jevon.org&emailtype1=exact&emailassigned_to1=1&emailreporter1=1 some bugs are fixed] or we find workarounds.
 
 =Requirements=
 
@@ -16,6 +16,9 @@ Through the *Europa update site:*
   # Models > Graphical Modeling Framework 2.0.2
   # Models > UML2 End-User Features
   # + all required features
+
+*[http://www.eclipse.org/modeling/gmf/ GMF]:*
+  # Download the GMF SDK 2.0.2 (the [http://download.eclipse.org/modeling/gmf/updates/releases/ update site] doesn't include the full source) and extract into your Eclipse directory
 
 *[http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare]:*
 {{{

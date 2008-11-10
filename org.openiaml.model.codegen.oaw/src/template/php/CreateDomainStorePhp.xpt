@@ -1,0 +1,39 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * PHP code for creating the domain store.
+ */
+«DEFINE createDomainStorePhp FOR model::DomainStore»
+	// DomainStore "«name»"
+
+	// first, make sure the table exists
+	$db = new PDO('sqlite:«safeName()».db') or local_die("could not open db '«safeName()».db'");
+	
+	// now cycle through all DomainObjects in this DomainStore
+	«EXPAND createDomainObjectPhp FOREACH children»
+	
+	// close connection
+	$db = null;
+«ENDDEFINE»
+
+/**
+ * Expand a DomainObject into a SQL table.
+ */
+«DEFINE createDomainObjectPhp FOR model::DomainObject»
+	$s = $db->prepare("SELECT * FROM «safeName(name)»");
+	if (!$s) {
+		// create the table
+		$q = $db->query("CREATE TABLE «safeName(name)» (
+				«EXPAND createDomainAttributePhp FOREACH attributes SEPARATOR ", "»
+			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+	}
+«ENDDEFINE»
+
+/**
+ * Expand a DomainAttribute into a SQL row.
+ */
+«DEFINE createDomainAttributePhp FOR model::DomainAttribute»
+	«safeName(name)» VARCHAR(255) NOT NULL
+«ENDDEFINE»

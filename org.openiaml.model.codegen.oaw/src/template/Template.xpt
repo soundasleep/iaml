@@ -31,6 +31,10 @@
 
 	«FILE "output/store_event.php"»«EXPAND php::StoreEventsPhp::storeEventsPhp»«ENDFILE»
 
+	«FILE "output/create_database.php"-»
+<?php
+«EXPAND php::CreateDomainStorePhp::createDomainStorePhp FOREACH domainStores-»
+	«ENDFILE»
 «ENDDEFINE»
 
 /* default = nothing */

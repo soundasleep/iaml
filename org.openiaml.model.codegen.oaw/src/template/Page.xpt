@@ -10,7 +10,8 @@
 	«FILE "output/"+safeName(id)+".php"-»
 		<?php
 		// include header code
-		«EXPAND php::HeaderPhp::headerPhp FOR this-» 
+		«EXPAND php::HeaderPhp::headerPhp FOR this-»
+		require("create_database.php");		// ensure DB exists
 		?>
 		<html>
 		<head>

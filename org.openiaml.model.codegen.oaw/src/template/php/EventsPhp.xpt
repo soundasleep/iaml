@@ -8,7 +8,7 @@
  * Expand all possible events for the current page.
  */
 // first, make sure the table exists
-$db = new PDO('sqlite:test.db') or local_die("could not open db");
+$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
 $s = $db->prepare("SELECT * FROM stored_events");
 if (!$s) {
 	// create the table

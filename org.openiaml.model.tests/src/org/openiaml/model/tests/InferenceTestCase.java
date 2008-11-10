@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import junit.framework.AssertionFailedError;
-
 import net.sourceforge.jwebunit.api.IElement;
 
 import org.eclipse.core.resources.IFile;
@@ -24,6 +23,7 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
@@ -255,6 +255,20 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			throw e;	// carry on throwing
 		}
 		
+	}
+	
+	/**
+	 * Get the "safe name" of the given element.
+	 * 
+	 * TODO add a test case that makes sure this method is synchronised
+	 * with the one in the codegen extensions. OR add the safeName()
+	 * method to all elements in the model.
+	 * 
+	 * @param e
+	 * @return
+	 */
+	public String safeName(GeneratedElement e) {
+		return e.getId().replaceAll("[^A-Za-z0-9]", "_");
 	}
 	
 }

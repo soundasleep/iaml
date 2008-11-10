@@ -17,7 +17,7 @@ $event_name = $_GET["event_name"] or die("no event name");
 $arg0 = $_GET["arg0"] or die("no arg0");
 
 // first, make sure the table exists
-$db = new PDO('sqlite:test.db') or die("could not open db");
+$db = new PDO('sqlite:stored_events.db') or die("could not open db");
 $s = $db->prepare("SELECT * FROM stored_events");
 if (!$s) {
 	// create the table

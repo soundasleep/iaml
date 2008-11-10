@@ -1,0 +1,185 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+
+function boolean syncMatches(NamedElement e1, NamedElement e2) {
+	return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
+}
+
+rule "Sync wires between pages should create sync wires between all elements inside each page that match"
+	when
+		p1 : ApplicationElement( )
+		p2 : ApplicationElement(this != p1)
+		source : SyncWire(overridden == false, from == p1, to == p2)
+		
+		e1 : ApplicationElement( eContainer == p1 )
+		e2 : ApplicationElement( eContainer == p2, eval(syncMatches(e1, e2)) )
+	
+		not(SyncWire( from == e1, to == e2, name == "sync", eContainer == source ))
+		not(SyncWire( from == e2, to == e1, name == "sync", eContainer == source ))
+		
+	then
+		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
+		sw.setName("sync");
+		insert(sw);
+		
+end
+
+rule "Run instance wire from source.edit to target.update"
+	when
+		sw : SyncWire(overridden == false)
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+rule "Run instance wire from target.edit to source.update"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from  
+		source : InputTextField( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+rule "Run instance wire from source.change to target.refresh"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from  
+		target : InputTextField( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="change" )
+		operation : Operation( eContainer == target, name=="refresh" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+rule "Run instance wire from target.change to source.refresh"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from  
+		source : InputTextField( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="change" )
+		operation : Operation( eContainer == target, name=="refresh" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+rule "Connect parameter wire to: run instance wire from source.edit to target.update"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
+
+end
+
+rule "Connect parameter wire to: run instance wire from target.edit to source.update"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from
+		source : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
+
+end
+
+rule "Connect parameter wire to: run instance wire from source.change to target.refresh"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="change" )
+		operation : Operation( eContainer == target, name=="refresh" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
+
+end
+
+rule "Connect parameter wire to: run instance wire from target.change to source.refresh"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from
+		source : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="change" )
+		operation : Operation( eContainer == target, name=="refresh" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
+
+end
+

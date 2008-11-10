@@ -5,6 +5,8 @@ package org.openiaml.model.drools;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Arrays;
+import java.util.List;
 
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
@@ -55,12 +57,12 @@ public class CreateMissingElementsWithDrools {
 	 */
 	public void create(EObject model) throws InferenceException {
 
-    	//load up the rulebase
+    	// load up the rulebase
         RuleBase ruleBase;
 		try {
 			ruleBase = readRule();
 		} catch (Exception e) {
-			throw new InferenceException("could not load rulebase: " + e.getMessage(), e);
+			throw new InferenceException("Could not load rulebase: " + e.getMessage(), e);
 		}
         final WorkingMemory workingMemory = ruleBase.newStatefulSession();
         
@@ -176,40 +178,74 @@ public class CreateMissingElementsWithDrools {
         
 	}
 
+	public List<String> ruleFiles = Arrays.asList(
+			"/rules/base.drl",
+			"/rules/sync-wires.drl",
+			"/rules/events.drl",
+			"/rules/operations.drl"
+			);
+	
 	/**
+	 * Get the list of rule files used.
+	 * 
+	 * @see #addRuleFile(String)
+	 * @return
+	 */
+	public List<String> getRuleFiles() {
+		return ruleFiles;
+	}
+	
+	/**
+	 * Add a rule file, relative to this loaded class.
+	 * 
+	 * @see #getRuleFiles()
+	 * @deprecated not tested
+	 * @param filename
+	 */
+	public void addRuleFile(String filename) {
+		ruleFiles.add(filename);
+	}
+	
+	/**
+	 * Get the RuleBase from the rules provided.
 	 * Copied from sample DroolsTest.java.
 	 * 
+	 * @see #getRuleFiles()
 	 * @return
 	 * @throws Exception 
 	 */
 	private RuleBase readRule() throws Exception {
-
-		//read in the source
-		Reader source = new InputStreamReader( CreateMissingElementsWithDrools.class.getResourceAsStream( "/Testrules.drl" ) );
 		
-		//optionally read in the DSL (if you are using it).
-		//Reader dsl = new InputStreamReader( DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
-
-		//Use package builder to build up a rule package.
-		//An alternative lower level class called "DrlParser" can also be used...
-		
-		PackageBuilder builder = new PackageBuilder();
-
-		//this wil parse and compile in one step
-		//NOTE: There are 2 methods here, the one argument one is for normal DRL.
-		builder.addPackageFromDrl( source );
-
-		//Use the following instead of above if you are using a DSL:
-		//builder.addPackageFromDrl( source, dsl );
-		
-		//get the compiled package (which is serializable)
-		Package pkg = builder.getPackage();
-		
-		//add the package to a rulebase (deploy the rule package).
 		RuleBase ruleBase = RuleBaseFactory.newRuleBase();
-		ruleBase.addPackage( pkg );
-		return ruleBase;
 
+		for (String ruleFile : getRuleFiles()) {
+	
+			//read in the source
+			Reader source = new InputStreamReader( CreateMissingElementsWithDrools.class.getResourceAsStream( ruleFile ) );
+			
+			//optionally read in the DSL (if you are using it).
+			//Reader dsl = new InputStreamReader( DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
+	
+			//Use package builder to build up a rule package.
+			//An alternative lower level class called "DrlParser" can also be used...
+			
+			PackageBuilder builder = new PackageBuilder();
+	
+			//this wil parse and compile in one step
+			//NOTE: There are 2 methods here, the one argument one is for normal DRL.
+			builder.addPackageFromDrl( source );
+	
+			//Use the following instead of above if you are using a DSL:
+			//builder.addPackageFromDrl( source, dsl );
+			
+			//get the compiled package (which is serializable)
+			Package pkg = builder.getPackage();
+			
+			//add the package to a rulebase (deploy the rule package).
+			ruleBase.addPackage( pkg );
+		}
+		
+		return ruleBase;
 		
 	}
 

@@ -1,0 +1,56 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+
+rule "Create empty domain store"
+		
+	when
+		#conditions
+		a : InternetApplication ( name == "test" )
+		not (DomainStore( name=="test domain store") from a.domainStores)
+		// how do we know when not to create the domainstore?
+	then 
+		#actions
+		DomainStore ds = (DomainStore) handler.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
+		ds.setName("test domain store");
+		ds.setIsGenerated(true);
+		ds.setGeneratedBy(a);
+		insert(ds); // possibly infer new knowledge (this is necessary)
+		
+end
+
+rule "Create field value for input text field"
+	when
+		f : InputTextField( overridden == false )
+		not (ApplicationElementProperty( eContainer == f, name=="fieldValue" ))
+			
+	then
+		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(f, f);
+		fieldValue.setName("fieldValue");
+		insert(fieldValue);
+		
+end
+
+rule "Create field value for domain attribute"
+	when
+		f : DomainAttribute( overridden == false )
+		not (ApplicationElementProperty( eContainer == f, name=="fieldValue" ))
+			
+	then
+		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(f, f);
+		fieldValue.setName("fieldValue");
+		insert(fieldValue);
+		
+end
+
+

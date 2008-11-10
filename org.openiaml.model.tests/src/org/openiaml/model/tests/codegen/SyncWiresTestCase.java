@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.tests.InferenceTestCase;
+import org.openiaml.model.tests.CodegenTestCase;
 
 /**
  * Test SyncWires
@@ -19,32 +19,12 @@ import org.openiaml.model.tests.InferenceTestCase;
  * @author jmwright
  *
  */
-public class SyncWiresTestCase extends InferenceTestCase {
+public class SyncWiresTestCase extends CodegenTestCase {
 	
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		String modelFile = ROOT + "codegen/SyncWiresTestCase.iaml";
-		EObject model = loadModelDirectly(modelFile);
-		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
-		assertNotNull(model);
-
-		root = (InternetApplication) model;
-		
-		// we now try to do inference
-		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-		ce.create(root);
-		
-		// write out this inferred model for reference
-		String outModel = saveInferredModel().getAbsolutePath();
-
-		super.setUp();		// create project
-		doTransform(outModel);	// output to project
-	}
-
-	protected void tearDown() throws Exception {
-		super.tearDown();
+		root = loadAndCodegen(ROOT + "codegen/SyncWiresTestCase.iaml");
 	}
 	
 	/**

@@ -3,16 +3,12 @@
  */
 package org.openiaml.model.tests.codegen;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
-import java.util.Random;
 
-import junit.framework.AssertionFailedError;
-import junit.framework.ComparisonFailure;
 import net.sourceforge.jwebunit.api.IElement;
 
 import org.eclipse.core.resources.IFile;
@@ -21,7 +17,7 @@ import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.tests.InferenceTestCase;
+import org.openiaml.model.tests.CodegenTestCase;
 
 /**
  * Test just a single SyncWire with a InputTextField to a DomainAttribute
@@ -29,29 +25,12 @@ import org.openiaml.model.tests.InferenceTestCase;
  * @author jmwright
  *
  */
-public class SyncFieldDomainAttribute extends InferenceTestCase {
+public class SyncFieldDomainAttribute extends CodegenTestCase {
 	
 	protected InternetApplication root;
 	
-	// TODO refactor out
 	protected void setUp() throws Exception {
-		String modelFile = ROOT + "codegen/SyncFieldDomainAttribute.iaml";
-		EObject model = loadModelDirectly(modelFile);
-		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
-		assertNotNull(model);
-
-		root = (InternetApplication) model;
-		
-		// we now try to do inference
-		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-		ce.create(root);
-		
-		// write out this inferred model for reference
-		String outModel = saveInferredModel().getAbsolutePath();
-
-		super.setUp();		// create project
-		doTransform(outModel);	// output to project
+		root = loadAndCodegen(ROOT + "codegen/SyncFieldDomainAttribute.iaml");
 	}
 	
 	/**

@@ -124,7 +124,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 			assertTrue(rs.next());	// there should be one value
 			
 			// it should be our testing text
-			assertEquals(rs.getString("field1"), testingText);
+			assertEquals(rs.getString("attribute"), testingText);
 			
 			// there should not be any more values in the database
 			assertFalse(rs.next());

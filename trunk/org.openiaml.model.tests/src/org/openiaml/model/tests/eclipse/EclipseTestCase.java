@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.gef.RequestConstants;
+import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -116,6 +118,24 @@ public class EclipseTestCase extends ModelTestCase {
 		assertNotNull("domain store exists", store);
 		assertNotNull("last signup user exists", page4);
 
+		// try opening up the domain store
+		// based on org.eclipse.gef.tools.SelectEditPartTracker#performOpen()
+		SelectionRequest request = new SelectionRequest();
+		request.setLocation(store.getLocation());
+		request.setModifiers(0 /*getCurrentInput().getModifiers()*/);
+		request.setType(RequestConstants.REQ_OPEN);
+		store.performRequest(request);
+
+		// we should have loaded up a new editor
+		IWorkbenchPage page9 = PlatformUI.getWorkbench()
+			.getActiveWorkbenchWindow().getActivePage();
+		IEditorPart ep2 = page9.getActiveEditor();
+		assertNotNull("has active editor part", ep2);
+		// if this is actually an ErrorEditPart, then an error has occured 
+		// (but it may not be obvious in the log what it is)
+		assertTrue("active editor is our plugin, but is " + ep2, ep2 instanceof IamlDiagramEditor);
+
+		
 	}
 
 	

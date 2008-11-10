@@ -32,7 +32,10 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 	
 	/**
 	 * Make sure that the database is initially empty (and can be loaded 
-	 * through SQLite)
+	 * through SQLite). It then goes into the only page in this 
+	 * InternetApplication and changes its value. It then checks to make
+	 * sure this value persists over multiple page refreshes, and
+	 * exists in the database.
 	 */
 	public void testDatabaseIsEmpty() throws Exception {
 		// get the DomainStore in this app
@@ -106,18 +109,6 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 			assertFalse(rs.next());
 		}
 		
-	}
-		
-	/**
-	 * We need some way of working out the label ID that contains 
-	 * a particular string.
-	 * 
-	 * @param text
-	 * @return
-	 */
-	protected String getLabelIDForText(String text) {
-		IElement element = getElementByXPath("//*[contains(text(),'" + text + "')]");
-		return element.getAttribute("id");
 	}
 
 }

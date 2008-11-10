@@ -23,6 +23,7 @@ public class CodegenTestsSuite {
         suite.addTestSuite(SyncWiresTestCase.class);
         suite.addTestSuite(SyncWiresPagesTestCase.class);
         suite.addTestSuite(SyncFieldDomainAttribute.class);
+        suite.addTestSuite(SyncFormDomainObject.class);
 
         return suite; 
    }

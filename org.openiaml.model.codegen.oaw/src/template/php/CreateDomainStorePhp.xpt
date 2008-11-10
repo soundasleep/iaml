@@ -35,5 +35,5 @@
  * Expand a DomainAttribute into a SQL row.
  */
 «DEFINE createDomainAttributePhp FOR model::DomainAttribute»
-	«safeName(name)» VARCHAR(255) NOT NULL
+	«safeName(name)» VARCHAR(255) NULL
 «ENDDEFINE»

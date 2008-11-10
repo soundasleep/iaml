@@ -169,18 +169,5 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		}
 		
 	}
-	
-	
-	/**
-	 * We need some way of working out the label ID that contains 
-	 * a particular string.
-	 * 
-	 * @param text
-	 * @return
-	 */
-	protected String getLabelIDForText(String text) {
-		IElement element = getElementByXPath("//*[contains(text(),'" + text + "')]");
-		return element.getAttribute("id");
-	}
 
 }

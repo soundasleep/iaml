@@ -10,6 +10,8 @@ package org.openiaml.model.inference;
  */
 public class InferenceException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @param e
 	 */

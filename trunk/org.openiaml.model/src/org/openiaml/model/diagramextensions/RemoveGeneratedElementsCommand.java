@@ -37,7 +37,7 @@ public class RemoveGeneratedElementsCommand extends AbstractTransactionalCommand
 			EObject rootObject,
 			TransactionalEditingDomain editingDomain, 
 			PreferencesHint prefHint) {			
-		super(editingDomain, "Removing generated elements", getWorkspaceFiles( new ArrayList() )); //$NON-NLS-1$
+		super(editingDomain, "Removing generated elements", getWorkspaceFiles( new ArrayList<Object>() )); //$NON-NLS-1$
 		selectedElement = root;
 		this.rootObject = rootObject;
 		this.prefHint = prefHint;

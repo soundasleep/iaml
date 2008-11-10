@@ -1,7 +1,5 @@
 package org.openiaml.model.tests.codegen;
 
-import org.openiaml.model.tests.codegen.SimpleTestCase;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

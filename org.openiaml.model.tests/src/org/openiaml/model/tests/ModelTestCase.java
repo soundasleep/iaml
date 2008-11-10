@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,8 +38,8 @@ public abstract class ModelTestCase extends WebTestCase {
 	public final String PLUGIN_ID = "org.openiaml.model.tests";
 	public final String ROOT = "src/org/openiaml/model/tests/";
 	
-	private IProject project;
-	private IProgressMonitor monitor = new NullProgressMonitor();
+	protected IProject project;
+	protected IProgressMonitor monitor = new NullProgressMonitor();
 	
 	/**
 	 * @throws java.lang.Exception
@@ -198,6 +199,8 @@ public abstract class ModelTestCase extends WebTestCase {
 	 * Transform a filename using OpenArchitectureWare. It also forces
 	 * a filesystem refresh of the particular project directory,
 	 * and does not stop until the refresh is complete.
+	 * 
+	 * TODO refactor into CodegenTestCase
 	 */
 	protected IStatus doTransformOAWWorkflow(IFile filename,
 			IProgressMonitor monitor) throws CoreException {
@@ -218,6 +221,31 @@ public abstract class ModelTestCase extends WebTestCase {
 	 */
 	public IProject getProject() {
 		return project;
+	}
+	
+	/**
+	 * Copy a local file into the Eclipse workspace. Makes sure it doesn't
+	 * already exist, and that it does exist once this method is completed.
+	 * 
+	 * @param sourceName
+	 * @param target
+	 * @return the target file
+	 * @throws Exception
+	 */
+	protected IFile copyFileIntoWorkspace(String sourceName, IFile target) throws Exception {
+		// first, copy local file into project workspace
+		File sourceFile = new File(sourceName);
+		assertTrue("source file exists", sourceFile.exists());
+
+		assertFalse("target file should not exist yet", target.exists());
+		
+		// copy
+		target.create(new FileInputStream(sourceFile), true, monitor);
+		
+		// check
+		assertTrue("target file should now exist", target.exists());
+		
+		return target;
 	}
 	
 }

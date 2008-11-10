@@ -10,10 +10,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.AssertionFailedError;
-import net.sourceforge.jwebunit.api.IElement;
-
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,12 +27,20 @@ import org.openiaml.model.model.WireEdge;
 import ca.ecliptical.emf.xpath.EMFXPath;
 
 /**
+ * Inference-specific test cases.
+ * 
+ * @see CodegenTestCase
  * @author jmwright
  *
  */
 public abstract class InferenceTestCase extends ModelTestCase {
 
 	protected Resource resource;
+	
+	/**
+	 * When inference is done, the model is saved to this file.
+	 */
+	protected File inferredModel;
 
 	/**
 	 * Load a model file and perform inference on it.
@@ -54,7 +58,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		ce.create(root);
 		
 		// write out this inferred model for reference
-		saveInferredModel();	
+		inferredModel = saveInferredModel();	
 		
 		return root;
 	}
@@ -204,58 +208,6 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		fail("no wire found");
 		return null;
 	}
-
-	// TODO move methods below into separate CodegenTestCase
-	
-	/**
-	 * Have we loaded at least one page (so we can find an ajax_monitor if necessary)?
-	 */
-	private boolean hasLoaded = false;
-	protected void goSitemapThenPage(IFile sitemap, String pageText) throws Exception {
-		// sleep a little bit first, so ajax calls can continue
-		if (hasLoaded) {
-			if (getElementById("ajax_monitor") == null) {
-				Thread.sleep(2000);	// sleep for way too long, since we don't know when it will finish
-			} else {
-				int cycles = 0;
-				while (cycles < 500) {		// max 15 seconds
-					try {
-						IElement monitor = getElementById("ajax_monitor");
-						String text = monitor.getTextContent();
-						if (text != null && (text.isEmpty() || new Integer(text) == 0))		// all ajax calls have finished
-							break;		// completed; we can carry on the test case
-						
-						if (text.length() > 6 && text.substring(0, 6).equals("failed"))
-							throw new Exception("Ajax loading failed: " + monitor.getTextContent());
-					
-						// carry on sleeping
-						Thread.sleep(30);
-					} catch (AssertionFailedError e) {
-						// the monitor was not found
-						Thread.sleep(300);
-					}
-					cycles++;
-				}
-				
-			}
-		}
-		
-		beginAt(sitemap.getProjectRelativePath().toString());
-		hasLoaded = true;		// we have now loaded a page
-		assertTitleMatch("sitemap");
-		
-		assertLinkPresentWithText(pageText);
-		clickLinkWithText(pageText);
-		try {
-			assertTitleMatch(pageText);
-		} catch (AssertionFailedError e) {
-			// something went wrong in the page execution, or
-			// the output is mangled HTML: output page source for debug purposes
-			System.out.println(this.getPageSource());
-			throw e;	// carry on throwing
-		}
-		
-	}
 	
 	/**
 	 * Get the "safe name" of the given element.
@@ -269,6 +221,15 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 */
 	public String safeName(GeneratedElement e) {
 		return e.getId().replaceAll("[^A-Za-z0-9]", "_");
+	}
+
+	/**
+	 * Get the file representing the saved post-inference model.
+	 * 
+	 * @return
+	 */
+	public File getInferredModel() {
+		return inferredModel;
 	}
 	
 }

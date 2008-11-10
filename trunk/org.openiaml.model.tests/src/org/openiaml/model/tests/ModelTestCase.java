@@ -153,23 +153,14 @@ public abstract class ModelTestCase extends WebTestCase {
 		return doTransformOAWWorkflow(file, monitor);
 	}
 
-	
 	/**
-	 * Transform a filename using OpenArchitectureWare. It also forces
-	 * a filesystem refresh of the particular project directory,
-	 * and does not stop until the refresh is complete.
+	 * Force a complete refresh of the entire project, and
+	 * halt execution until it's completed.
+	 * 
+	 * @return
+	 * @throws CoreException
 	 */
-	protected IStatus doTransformOAWWorkflow(IFile filename,
-			IProgressMonitor monitor) throws CoreException {
-		
-		ICodeGenerator runner = new OawCodeGenerator();		
-		runner.generateCode(filename, monitor);
-		
-		// once generated, we need to refresh the workspace before
-		// we can carry on testing (normally, we would just let Eclipse automatically
-		// refresh the resources)
-		
-		// we need to *force* refresh the workspace
+	protected IStatus refreshProject() throws CoreException {
 		class HaltProgressMonitor extends NullProgressMonitor {
 			@Override
 			public void setCanceled(boolean cancelled) {
@@ -200,7 +191,26 @@ public abstract class ModelTestCase extends WebTestCase {
 		}
 
 		return Status.OK_STATUS;
+				
+	}
+	
+	/**
+	 * Transform a filename using OpenArchitectureWare. It also forces
+	 * a filesystem refresh of the particular project directory,
+	 * and does not stop until the refresh is complete.
+	 */
+	protected IStatus doTransformOAWWorkflow(IFile filename,
+			IProgressMonitor monitor) throws CoreException {
 		
+		ICodeGenerator runner = new OawCodeGenerator();		
+		runner.generateCode(filename, monitor);
+		
+		// once generated, we need to refresh the workspace before
+		// we can carry on testing (normally, we would just let Eclipse automatically
+		// refresh the resources)
+		
+		// we need to *force* refresh the workspace
+		return refreshProject();
 	}
 
 	/**

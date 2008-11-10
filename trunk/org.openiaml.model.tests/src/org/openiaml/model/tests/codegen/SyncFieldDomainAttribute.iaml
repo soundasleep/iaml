@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d83490915.266">
+  <children xsi:type="iaml.visual:Page" id="visual.11d83490a0f.dd" name="page">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.f0" name="single-text-field" outEdges="wires.11d83490a7c.85">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.85" from="visual.11d83490a0f.f0" to="model.11d83490915.28e" name="syncField"/>
+    </children>
+  </children>
+  <domainStores id="model.11d83490915.26b" name="store">
+    <children id="model.11d83490915.274" name="domain">
+      <attributes id="model.11d83490915.28e" name="attribute" inEdges="wires.11d83490a7c.85"/>
+    </children>
+  </domainStores>
+</iaml:InternetApplication>

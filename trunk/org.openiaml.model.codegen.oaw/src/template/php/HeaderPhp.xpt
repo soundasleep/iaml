@@ -1,0 +1,37 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE headerPhp FOR model::visual::Page»
+
+function log_message($msg, $also_debug = true) {
+	$fp = fopen("php.log", "a");
+	fwrite($fp, date("Y-m-d H:i:s") . " header.php: $msg\n");
+	fclose($fp);
+	
+	// also echo to debug
+	if ($also_debug) {
+		echo "\$('response').innerHTML = \"" . htmlentities($msg) . "\";\n";
+	}
+}
+
+function local_die($message) {
+	log_message("DEATH: $message");
+	die($message);
+}
+
+// make sure that the db exists for stored_events
+$db = new PDO('sqlite:test.db') or local_die("could not open db");
+$s = $db->prepare("SELECT * FROM stored_events");
+if (!$s) {
+	// create the table
+	$q = $db->query("CREATE TABLE stored_events (
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			page_id VARCHAR(64) NOT NULL,
+			event_name VARCHAR(64) NOT NULL,
+			arg0 BLOB
+		);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+	log_message("table for stored_events created", false);
+}
+
+«ENDDEFINE»

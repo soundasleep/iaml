@@ -22,7 +22,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 
 ==Release 0.2==
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.2 Outstanding issues])
-  # Publish milestones
+  # ~~Publish milestones~~
   # Expand IAML model
   # Usability improvements
     * Add progress monitors for inference and code generation
@@ -48,6 +48,9 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Development
     * Integration with CruiseControl
     * Code coverage with [http://emma.sourceforge.net/ Emma] and [http://www.eclemma.org/ EclEmma]
+  # Extensibility
+    * New code generation rules using oAW
+    * New inference rules using Drools
 
 ==Release 0.9==
   # Usability
@@ -57,3 +60,5 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 ==Release 1.0==
   # Focus on Usability
   # Implement code generation in another language (JSP?)
+  # Extensibility
+    * New model elements

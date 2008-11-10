@@ -99,7 +99,7 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * @return
 	 */
 	protected String getLabelIDForText(String text) {
-		IElement element = getElementByXPath("//*[contains(text(),'" + text + "')]");
+		IElement element = getElementByXPath("//label[contains(text(),'" + text + "')]");
 		return element.getAttribute("id");
 	}	
 }

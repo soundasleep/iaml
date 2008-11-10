@@ -7,9 +7,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
-import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;

@@ -95,7 +95,7 @@ echo "ok";
  * Expand out each DomainStore.
  */
 «DEFINE expandDomainStore FOR model::DomainStore»
-	«EXPAND expandDomainObject(safeName(this.name)) FOREACH children»
+	«EXPAND expandDomainObject(safeName(this.id)) FOREACH children»
 «ENDDEFINE»
 
 /**
@@ -110,7 +110,7 @@ echo "ok";
  */
 «DEFINE expandDomainAttribute(String db_name, String table_name) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeName(id)»") {
-		$db_name = "«db_name»";
+		$db_name = "sqlite:«db_name».db";
 		$table_name = "«table_name»";
 		$row_name = "«safeName(name)»";
 		

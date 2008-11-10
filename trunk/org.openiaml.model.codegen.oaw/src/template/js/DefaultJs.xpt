@@ -19,9 +19,11 @@ function store_event(page_id, event_name, arg0) {
       	document.getElementById('response').innerHTML = response;
       	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
     },
-    onFailure: function(transport){ alert('Something went wrong...');
-    	debug("something went wrong: " + response.responseText);
+    onFailure: function(transport){ 
+      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
+    	debug("something went wrong: " + transport.responseText);
       	$('ajax_monitor').innerHTML = 'failed: ' + response.responseText;		// for speeding up testing
+    	alert('Something went wrong...');	// alert is last so we can continue execution
      }
   });
   debug("store_event called");
@@ -41,9 +43,11 @@ function store_db(attribute_id, arg0) {
       	document.getElementById('response').innerHTML = response;
       	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
     },
-    onFailure: function(transport){ alert('Something went wrong...');
-    	debug("something went wrong: " + response.responseText);
+    onFailure: function(transport){ 
+      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
+    	debug("something went wrong: " + transport.responseText);
       	$('ajax_monitor').innerHTML = 'failed: ' + response.responseText;		// for speeding up testing
+    	alert('Something went wrong...');	// alert is last so we can continue execution
      }
   });
   debug("store_db called");	

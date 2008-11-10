@@ -38,6 +38,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='page']");
 		InputTextField field = (InputTextField) queryOne(page, "//iaml:children[iaml:name='single-text-field']");
 		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='syncField']");
+		assertNotNull(wire);
 		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='store']");
 		DomainObject obj = (DomainObject) queryOne(store, "//iaml:children[iaml:name='domain']");
 		DomainAttribute attribute = (DomainAttribute) queryOne(obj, "//iaml:attributes[iaml:name='attribute']");

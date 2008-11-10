@@ -8,6 +8,10 @@
 
 «DEFINE expandPage FOR model::visual::Page-»
 	«FILE "output/"+safeName(id)+".php"-»
+		<?php
+		// include header code
+		«EXPAND php::HeaderPhp::headerPhp FOR this-» 
+		?>
 		<html>
 		<head>
 			<title>«pageTitle()»</title>

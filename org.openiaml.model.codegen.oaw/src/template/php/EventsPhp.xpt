@@ -4,20 +4,6 @@
 
 «DEFINE eventsPhp FOR model::visual::Page»
 
-function log_message($msg) {
-	$fp = fopen("php.log", "a");
-	fwrite($fp, date("Y-m-d H:i:s") . " events.php: $msg\n");
-	fclose($fp);
-	
-	// also echo to debug
-	echo "\$('response').innerHTML = \"" . htmlentities($msg) . "\";\n";
-}
-
-function local_die($message) {
-	log_message("DEATH: $message");
-	die($message);
-}
-
 /**
  * Expand all possible events for the current page.
  */

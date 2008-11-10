@@ -33,9 +33,6 @@ operationName(model::Operation this) :
 model::visual::Page containingPage(model::visual::Page element) :
 	element;
 	
-model::visual::Page containingPage(model::Operation element) :
-	containingPage(element.eContainer);
-
 model::visual::Page containingPage(model::NamedElement element) :
 	containingPage(element.eContainer);
 

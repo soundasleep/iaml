@@ -24,6 +24,7 @@ public class CodegenTestsSuite {
         suite.addTestSuite(SimpleTestCase.class);
         suite.addTestSuite(SyncWiresTestCase.class);
         suite.addTestSuite(SyncWiresPagesTestCase.class);
+        suite.addTestSuite(SyncFieldDomainAttribute.class);
 
         return suite; 
    }

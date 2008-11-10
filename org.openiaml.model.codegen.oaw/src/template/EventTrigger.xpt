@@ -36,16 +36,28 @@
 	«ERROR "unknown wire edge connected to edit trigger: " + this»
 «ENDDEFINE»
 
-/* run a command with some parameters */
+/* 
+ * run a command with some parameters. this could be in inline JS or a JS block.
+ * RunInstanceWire: event --> operation 
+ */
 «DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire»
-	«IF onCurrentPage(from, to)»
-		«REM»// on current page (wire id = «id»)«ENDREM»
-		do_«operationName(to)»(«EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»);
-	«ELSE»
-		«REM»// not on current page (wire id = «id»)«ENDREM»
-		store_event('«containingPage(to).id»', 'do_«operationName(to)»'
+	«IF to.eContainer.metaType.isAssignableFrom( model::visual::InputTextField )»
+		«IF onCurrentPage(from, to)»
+			«REM»// on current page (wire id = «id»)«ENDREM»
+			do_«operationName(to)»(«EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»);
+		«ELSE»
+			«REM»// not on current page (wire id = «id»)«ENDREM»
+			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
+				«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
+			);
+		«ENDIF»
+	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )»
+		«REM»direct field --> domain attribute«ENDREM»
+		store_db('«safeName(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
-		);
+		);  
+	«ELSE»
+		alert('unknown target operation type «to.eContainer.metaType.name»');
 	«ENDIF»
 «ENDDEFINE»
 

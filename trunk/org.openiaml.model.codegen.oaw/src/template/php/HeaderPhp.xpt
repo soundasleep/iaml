@@ -21,7 +21,7 @@ function local_die($message) {
 }
 
 // make sure that the db exists for stored_events
-$db = new PDO('sqlite:test.db') or local_die("could not open db");
+$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
 $s = $db->prepare("SELECT * FROM stored_events");
 if (!$s) {
 	// create the table

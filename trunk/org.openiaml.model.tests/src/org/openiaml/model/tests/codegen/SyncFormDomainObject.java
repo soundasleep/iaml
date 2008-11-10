@@ -10,8 +10,6 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.Random;
 
-import net.sourceforge.jwebunit.api.IElement;
-
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;

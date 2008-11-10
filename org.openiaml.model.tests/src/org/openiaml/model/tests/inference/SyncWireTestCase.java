@@ -128,13 +128,9 @@ public class SyncWireTestCase extends InferenceTestCase {
 		
 		EventTrigger name1edit = (EventTrigger) queryOne(name1, "iaml:eventTriggers[iaml:name='edit']");
 		EventTrigger name2edit = (EventTrigger) queryOne(name2, "iaml:eventTriggers[iaml:name='edit']");
-		EventTrigger name1change = (EventTrigger) queryOne(name1, "iaml:eventTriggers[iaml:name='change']");
-		EventTrigger name2change = (EventTrigger) queryOne(name2, "iaml:eventTriggers[iaml:name='change']");
 		
 		Operation name1update = (Operation) queryOne(name1, "iaml:operations[iaml:name='update']");
 		Operation name2update = (Operation) queryOne(name2, "iaml:operations[iaml:name='update']");
-		Operation name1refresh = (Operation) queryOne(name1, "iaml:operations[iaml:name='refresh']");
-		Operation name2refresh = (Operation) queryOne(name2, "iaml:operations[iaml:name='refresh']");
 		
 		ApplicationElementProperty name1value = (ApplicationElementProperty) queryOne(name1, "iaml:properties[iaml:name='fieldValue']");
 		ApplicationElementProperty name2value = (ApplicationElementProperty) queryOne(name2, "iaml:properties[iaml:name='fieldValue']");
@@ -151,17 +147,13 @@ public class SyncWireTestCase extends InferenceTestCase {
 		 * 
 		 * + parameter wires for both
 		 */
-		assertEquals(8, wire.getWires().size());
+		assertEquals(4, wire.getWires().size());
 		
 		// run instance wires
 		WireEdge name1editRun = null;
 		WireEdge name2editRun = null;
-		WireEdge name1changeRun = null;
-		WireEdge name2changeRun = null;
 		WireEdge name1editParam = null;
 		WireEdge name2editParam = null;
-		WireEdge name1changeParam = null;
-		WireEdge name2changeParam = null;
 		// get RunInstanceWires first
 		for (WireEdge w : wire.getWires()) {
 			if (w instanceof RunInstanceWire) {
@@ -169,10 +161,6 @@ public class SyncWireTestCase extends InferenceTestCase {
 					name1editRun = w;
 				if (w.getFrom().equals(name2edit) && w.getTo().equals(name1update) )
 					name2editRun = w;
-				if (w.getFrom().equals(name1change) && w.getTo().equals(name2refresh) )
-					name1changeRun = w;
-				if (w.getFrom().equals(name2change) && w.getTo().equals(name1refresh) )
-					name2changeRun = w;
 			}
 		}
 		// then ParameterWires
@@ -182,22 +170,14 @@ public class SyncWireTestCase extends InferenceTestCase {
 					name1editParam = w;
 				if (w.getFrom().equals(name2value) && w.getTo().equals(name2editRun) )
 					name2editParam = w;
-				if (w.getFrom().equals(name1value) && w.getTo().equals(name1changeRun) )
-					name1changeParam = w;
-				if (w.getFrom().equals(name2value) && w.getTo().equals(name2changeRun) )
-					name2changeParam = w;
 			}
 		}
 		
 		// make sure we've got all of these
 		assertNotNull( "name1editRun not null", name1editRun );
 		assertNotNull( "name2editRun not null", name2editRun );
-		assertNotNull( "name1changeRun not null", name1changeRun );
-		assertNotNull( "name2changeRun not null", name2changeRun );
 		assertNotNull( "name1editParam not null", name1editParam );
 		assertNotNull( "name2editParam not null", name2editParam );
-		assertNotNull( "name1changeParam not null", name1changeParam );
-		assertNotNull( "name2changeParam not null", name2changeParam );
 		
 	}
 

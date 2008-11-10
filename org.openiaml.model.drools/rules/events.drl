@@ -38,27 +38,3 @@ rule "Create 'edit' event trigger for domain attribute"
 		
 end
 
-rule "Create 'change' event trigger for input text field"
-	when
-		f : InputTextField( overridden == false )
-		not (EventTrigger( eContainer == f, name=="change" ))
-			
-	then
-		EventTrigger event = handler.generatedEventTrigger(f, f);
-		event.setName("change");
-		insert(event);
-		
-end
-
-rule "Create 'change' event trigger for domain attribute"
-	when
-		f : DomainAttribute( overridden == false )
-		not (EventTrigger( eContainer == f, name=="change" ))
-			
-	then
-		EventTrigger event = handler.generatedEventTrigger(f, f);
-		event.setName("change");
-		insert(event);
-		
-end
-

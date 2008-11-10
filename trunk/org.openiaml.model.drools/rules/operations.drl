@@ -37,30 +37,6 @@ rule "Create 'update' operation for domain attribute"
 		
 end
 
-rule "Create 'refresh' operation for input text field"
-	when
-		f : InputTextField( overridden == false )
-		not (Operation( eContainer == f, name=="refresh" ))
-			
-	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
-		operation.setName("refresh");
-		insert(operation);
-		
-end
-
-rule "Create 'refresh' operation for domain attribute"
-	when
-		f : DomainAttribute( overridden == false )
-		not (Operation( eContainer == f, name=="refresh" ))
-			
-	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
-		operation.setName("refresh");
-		insert(operation);
-		
-end
-
 rule "Create components of 'update' operation"
 	when
 		o : CompositeOperation(overridden == false, (name == "update" || name == "refresh"))

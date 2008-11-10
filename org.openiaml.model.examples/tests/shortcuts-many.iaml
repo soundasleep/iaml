@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d03fdd412.1b">
-  <children xsi:type="iaml.visual:Page" id="visual.11d03fdd4ce.41" name="container">
-    <children xsi:type="iaml.visual:InputForm" id="visual.11d03fdd4ce.42" name="form1" outEdges="wires.11d03fdd4dd.11">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d03fdd4dd.11" from="visual.11d03fdd4ce.42" to="visual.11d03fdd4ce.44" name="sync" generatedElements="wires.11d03fdd4dd.12 wires.11d0400506f.60 wires.11d0400506f.61 wires.11d0400506f.62"/>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d03fdd4ce.43" name="t1" outEdges="wires.11d03fdd4dd.12">
-        <wires xsi:type="iaml.wires:SyncWire" generatedBy="wires.11d03fdd4dd.11" isGenerated="true" id="wires.11d03fdd4dd.12" from="visual.11d03fdd4ce.43" to="visual.11d03fdd4ce.45" name="sync[generated]"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d889e30c6.210">
+  <children xsi:type="iaml.visual:Page" id="visual.11d889e3114.115" name="page">
+    <children xsi:type="iaml.visual:InputForm" id="visual.11d889e3114.11b" name="form1">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.12f" name="f1" outEdges="wires.11d889e3162.4b">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.11d889e3162.4b" from="visual.11d889e3114.12f" to="visual.11d889e3114.19d" name="s1"/>
       </children>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d0400506f.132" name="t2" outEdges="wires.11d0400506f.60">
-        <wires xsi:type="iaml.wires:SyncWire" generatedBy="wires.11d03fdd4dd.11" isGenerated="true" id="wires.11d0400506f.60" from="visual.11d0400506f.132" to="visual.11d0400506f.199" name="sync[generated]"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.130" name="f2" outEdges="wires.11d889e3162.4c">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.11d889e3162.4c" from="visual.11d889e3114.130" to="visual.11d889e3114.19e" name="s2"/>
       </children>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d0400506f.133" name="t3" outEdges="wires.11d0400506f.61">
-        <wires xsi:type="iaml.wires:SyncWire" generatedBy="wires.11d03fdd4dd.11" isGenerated="true" id="wires.11d0400506f.61" from="visual.11d0400506f.133" to="visual.11d0400506f.19a" name="sync[generated]"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.131" name="f3" outEdges="wires.11d889e3162.4d">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.11d889e3162.4d" from="visual.11d889e3114.131" to="visual.11d889e3114.19f" name="s3"/>
       </children>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d0400506f.134" name="t4" outEdges="wires.11d0400506f.62">
-        <wires xsi:type="iaml.wires:SyncWire" generatedBy="wires.11d03fdd4dd.11" isGenerated="true" id="wires.11d0400506f.62" from="visual.11d0400506f.134" to="visual.11d0400506f.19b" name="sync[generated]"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.14a" name="f4" outEdges="wires.11d889e3162.4e">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.11d889e3162.4e" from="visual.11d889e3114.14a" to="visual.11d889e3114.1a0" name="s4"/>
       </children>
     </children>
-    <children xsi:type="iaml.visual:InputForm" id="visual.11d03fdd4ce.44" name="form2" inEdges="wires.11d03fdd4dd.11">
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d03fdd4ce.45" name="t1" inEdges="wires.11d03fdd4dd.12"/>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d0400506f.199" name="t2" inEdges="wires.11d0400506f.60"/>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d0400506f.19a" name="t3" inEdges="wires.11d0400506f.61"/>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d0400506f.19b" name="t4" inEdges="wires.11d0400506f.62"/>
+    <children xsi:type="iaml.visual:InputForm" id="visual.11d889e3114.167" name="form2">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.19d" name="t1" inEdges="wires.11d889e3162.4b"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.19e" name="t2" inEdges="wires.11d889e3162.4c"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.19f" name="t3" inEdges="wires.11d889e3162.4d"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.1a0" name="t4" inEdges="wires.11d889e3162.4e"/>
     </children>
   </children>
 </iaml:InternetApplication>

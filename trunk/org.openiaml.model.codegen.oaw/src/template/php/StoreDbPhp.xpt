@@ -16,6 +16,11 @@ function log_message($msg) {
 	fclose($fp);
 }
 
+function local_die($msg) {
+	log_message("ERROR: $msg"); 
+	die($msg);
+}
+
 // get the http:// url to this application
 function get_baseurl() {
 	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
@@ -34,7 +39,7 @@ function store_event($page_id, $event_name, $arg0) {
 	log_message("store_db.php calling $url");
 	$r = file_get_contents($url);
 	if ($r != "ok")
-		throw new Exception("store_event failed: " + $r); 
+		local_die("store_event failed: " + $r);
 		
 	return true;
 }
@@ -48,14 +53,14 @@ function store_db($attribute_id, $arg0) {
 	log_message("store_db.php calling $url");
 	$r = file_get_contents($url);
 	if ($r != "ok")
-		throw new Exception("store_db failed: " + $r); 
+		local_die("store_db failed: " + $r); 
 		
 	return true;
 }
 
 log_message("store_db.php? " . print_r($_GET, true));
-$attribute_id = $_GET["attribute_id"] or die("no attribute id");
-$arg0 = $_GET["arg0"] or die("no arg0");
+$attribute_id = $_GET["attribute_id"] or local_die("no attribute id");
+$arg0 = $_GET["arg0"] or local_die("no arg0");
 
 // find the table name
 $db_name = false;
@@ -64,22 +69,27 @@ $row_name = false;
 «EXPAND expandDomainStore FOREACH domainStores»
 
 if (!$db_name)
-	die("no db found");
+	local_die("no db found");
 if (!$table_name)
-	die("no table found (db=$db_name)");
+	local_die("no table found (db=$db_name)");
 if (!$row_name)
-	die("no row found (table=$table_name)");
+	local_die("no row found (table=$table_name)");
 
 // connect to the database source
-$db = new PDO($db_name) or die("could not open db '$db_name'");
+$db = new PDO($db_name) or local_die("could not open db '$db_name'");
 
-// delete existing values
-$q = $db->query("DELETE FROM $table_name WHERE 1") or die("could not delete existing values: " . print_r($db->errorInfo(), true));
-log_message("store_db.php: deleting all values from db=$db_name, table=$table_name, row=$row_name");
+// does anything exist?
+$results = $db->query("SELECT * FROM $table_name") or local_die("could not look for existing values in '$table_name': " .print_r($db->errorInfo(), true));
+if ($results->fetch()) {
+	// yes: update all existing
+	$s = $db->prepare("UPDATE $table_name SET $row_name = ?") or local_die("could not prepare update query: " . print_r($db->errorInfo(), true));
+} else {
+	// no: insert new
+	$s = $db->prepare("INSERT INTO $table_name ($row_name) VALUES (?)") or local_die("could not prepare insert query: " . print_r($db->errorInfo(), true));
+}
 
-// insert new
-$s = $db->prepare("INSERT INTO $table_name ($row_name) VALUES (?)") or die("could not prepare query: " . print_r($db->errorInfo(), true));
-$s->execute(array($arg0)) or die("could not execute insert query: " . print_r($db->errorInfo(), true));
+// update all existing
+$s->execute(array($arg0)) or local_die("could not execute query: " . print_r($db->errorInfo(), true));
 
 // done
 $s = null;
@@ -153,7 +163,7 @@ echo "ok";
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);  
 	«ELSE»
-		alert('unknown target operation type «to.eContainer.metaType.name»');
+		local_die('unknown target operation type «to.eContainer.metaType.name»');
 	«ENDIF»
 «ENDDEFINE»
 

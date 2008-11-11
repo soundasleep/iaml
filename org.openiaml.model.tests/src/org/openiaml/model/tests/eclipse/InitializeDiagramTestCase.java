@@ -51,9 +51,9 @@ public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
 		assertEquals("there should only be 4 children", 4, editor.getDiagramEditPart().getChildren().size());
 
 		// check the contents
-		ShapeNodeEditPart page = assertHasRootPage(editor, "page");
-		assertHasRootEventTrigger(editor, "et");
-		assertHasRootOperation(editor, "op");
+		ShapeNodeEditPart page = assertHasPage(editor, "page");
+		assertHasEventTrigger(editor, "et");
+		assertHasOperation(editor, "op");
 
 		// open the domain store
 		IEditorPart ep2 = openDiagram(page);

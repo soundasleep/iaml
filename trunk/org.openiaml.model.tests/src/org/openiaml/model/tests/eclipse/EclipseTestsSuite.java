@@ -3,6 +3,8 @@ package org.openiaml.model.tests.eclipse;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.openiaml.model.tests.eclipse.shortcuts.EclipseShortcutsTestSuite;
+
 /**
  * All tests for the Eclipse editors.
  * 
@@ -22,6 +24,9 @@ public class EclipseTestsSuite {
         suite.addTestSuite(LoadDiagramTestCase.class);
         suite.addTestSuite(OpenSubDiagramTestCase.class);
         suite.addTestSuite(InitializeDiagramTestCase.class);
+        
+        // add the shortcut tests
+        suite.addTest(EclipseShortcutsTestSuite.suite());
 
         return suite; 
    }

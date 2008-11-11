@@ -1,0 +1,4 @@
+import iaml;
+
+model::InternetApplication parent(model::ApplicationElement this) :
+	eContainer;

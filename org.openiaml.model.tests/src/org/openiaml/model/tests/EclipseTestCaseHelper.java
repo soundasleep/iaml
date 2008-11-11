@@ -325,7 +325,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			}
 		}
 		
-		fail("assertHasRunInstanceWire: no connection found between '" + source + "' and '" + target + "'. found: " + found);
+		fail("assertHasRunInstanceWire: no connection found between '" + source + "' and '" + target + "' with name '" + name + "'. found: " + found);
 		return null;
 	}
 

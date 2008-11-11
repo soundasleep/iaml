@@ -24,6 +24,8 @@ public class EclipseShortcutsTestSuite {
         suite.addTestSuite(ShortcutsElementTestCase.class);
         suite.addTestSuite(ShortcutsManyTestCase.class);
         suite.addTestSuite(ShortcutsOperationTestCase.class);
+        suite.addTestSuite(ShortcutsRootTestCase.class);
+        suite.addTestSuite(ShortcutsWireTestCase.class);
 
         return suite; 
    }

@@ -5,7 +5,9 @@ package org.openiaml.model.tests.eclipse;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
@@ -53,6 +55,10 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 		assertEquals("active editor is the domain store plugin", 
 				"org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditor", 
 				ep2.getClass().getName());
+
+		// close editors
+		((DiagramDocumentEditor) ep2).close(false);
+		((DiagramDocumentEditor) editor).close(false);
 		
 	}
 

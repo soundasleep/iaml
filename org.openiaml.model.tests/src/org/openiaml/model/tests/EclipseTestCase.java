@@ -51,9 +51,10 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	 * Create a project.
 	 * 
 	 * @throws CoreException
+	 * @throws Exception 
 	 * @see {@link #createProject()} 
 	 */
-	public void setUp() throws CoreException {
+	public void setUp() throws Exception {
 		// create the project
 		project = createProject();
 	}

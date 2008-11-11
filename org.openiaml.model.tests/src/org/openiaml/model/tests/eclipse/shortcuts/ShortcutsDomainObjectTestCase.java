@@ -3,12 +3,8 @@
  */
 package org.openiaml.model.tests.eclipse.shortcuts;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.ui.IEditorPart;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Tests domain object shortcuts.
@@ -17,33 +13,17 @@ import org.openiaml.model.tests.EclipseTestCaseHelper;
  * @author jmwright
  *
  */
-public class ShortcutsDomainObjectTestCase extends EclipseTestCaseHelper {
+public class ShortcutsDomainObjectTestCase extends ShortcutsTestCase {
 
-	public static final String ROOT = "src/org/openiaml/model/tests/eclipse/shortcuts/";
-	public static final String MODEL = "shortcuts-domain_object.iaml";
-	public static final String DIAGRAM = MODEL + "_diagram";
+	public String getModel() {
+		return "shortcuts-domain_object.iaml";
+	}
+	
+	protected DiagramDocumentEditor editor_page;
+	protected DiagramDocumentEditor editor_store;
+	protected DiagramDocumentEditor editor_object;
 	
 	public void testLoadModel() throws Exception {
-		// copy our local file into the project
-		IFile targetModel = project.getFile(MODEL);
-		copyFileIntoWorkspace(ROOT + MODEL,
-				targetModel);
-		IFile targetDiagram = project.getFile(DIAGRAM);
-		
-		// initialise diagram
-		assertFalse("the target diagram should not exist yet", targetDiagram.exists());
-		initializeModelFile(targetModel, targetDiagram);
-		assertTrue("the target diagram should have been created", targetDiagram.exists());
-
-		// load up the editor
-		IEditorPart ep = loadDiagramFile(targetDiagram);
-
-		// if this is actually an ErrorEditPart, then an error has occured 
-		// (but it may not be obvious in the log what it is)
-		assertTrue("active editor is our plugin, but is " + ep, ep instanceof IamlDiagramEditor);
-		
-		// find what elements are displayed
-		IamlDiagramEditor editor = (IamlDiagramEditor) ep;
 
 		// there should be four children
 		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
@@ -53,7 +33,7 @@ public class ShortcutsDomainObjectTestCase extends EclipseTestCaseHelper {
 		ShapeNodeEditPart store = assertHasDomainStore(editor, "domain store");
 
 		// open the domain store
-		DiagramDocumentEditor editor_store = openDiagram(store);
+		editor_store = openDiagram(store);
 
 		assertEquals("active editor is the domain store plugin", 
 				"org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditor", 
@@ -64,7 +44,7 @@ public class ShortcutsDomainObjectTestCase extends EclipseTestCaseHelper {
 		ShapeNodeEditPart object = assertHasDomainObject(editor_store, "domain object");
 		
 		// open up the domain object
-		DiagramDocumentEditor editor_object = openDiagram(object);
+		editor_object = openDiagram(object);
 
 		assertEquals("active editor is the domain store plugin", 
 				"org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditor", 
@@ -80,13 +60,8 @@ public class ShortcutsDomainObjectTestCase extends EclipseTestCaseHelper {
 		assertShortcut(event);
 		assertNotShortcut(attribute);
 		
-		// close editors 
-		// TODO move into tearDown()
-		editor_object.close(false);
-		editor_store.close(false);
-		
 		// open 'page' editor
-		DiagramDocumentEditor editor_page = openDiagram(page);
+		editor_page = openDiagram(page);
 		
 		assertEquals("active editor is the domain store plugin", 
 				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
@@ -101,11 +76,24 @@ public class ShortcutsDomainObjectTestCase extends EclipseTestCaseHelper {
 		assertHasRunInstanceWire(editor_page, event2, attribute2, "runWire");
 		assertNotShortcut(event2);
 		assertShortcut(attribute2);
-
-		// close final editors
-		editor_page.close(false);
-		editor.close(false);
 		
+	}
+	
+	/**
+	 * Close loaded editors.
+	 * @throws Exception 
+	 */
+	public void tearDown() throws Exception {
+		if (editor_object != null)
+			editor_object.close(false);
+		
+		if (editor_store != null)
+			editor_store.close(false);
+		
+		if (editor_page != null)
+			editor_page.close(false);
+		
+		super.tearDown();
 	}
 
 }

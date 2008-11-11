@@ -19,11 +19,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
@@ -74,11 +74,11 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	 * @param sourcePart
 	 * @return
 	 */
-	protected DiagramDocumentEditor openDiagram(ShapeNodeEditPart sourcePart) throws Exception {
+	protected DiagramDocumentEditor openDiagram(EditPart sourcePart) throws Exception {
 
 		// based on org.eclipse.gef.tools.SelectEditPartTracker#performOpen()
 		SelectionRequest request = new SelectionRequest();
-		request.setLocation(sourcePart.getLocation());
+		request.setLocation(null);		// the location isn't actually required
 		request.setModifiers(0 /*getCurrentInput().getModifiers()*/);
 		request.setType(RequestConstants.REQ_OPEN);
 		sourcePart.performRequest(request);

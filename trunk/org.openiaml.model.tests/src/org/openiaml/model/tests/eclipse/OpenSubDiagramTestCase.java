@@ -10,35 +10,25 @@ import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
- * Emulate right click > initialise diagram.
+ * Tests opening a sub-diagram of a model diagram in Eclipse.
  * 
  * @author jmwright
  *
  */
-public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
+public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 
-	/**
-	 * Tests loading the model file with the editor.
-	 * 
-	 * @throws Exception
-	 */
 	public void testLoadModel() throws Exception {
 		// copy our local file into the project
-		IFile targetModel = project.getFile("shortcuts-root.iaml");
-		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/shortcuts-root.iaml",
+		IFile targetModel = project.getFile("generation-sync-multiple.iaml");
+		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml",
 				targetModel);
-		
-		IFile targetDiagram = project.getFile("shortcuts-root.iaml_diagram");
-		assertFalse("the target diagram should not exist yet", targetDiagram.exists());
+		IFile targetDiagram = project.getFile("generation-sync-multiple.iaml_diagram");
+		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml_diagram",
+				targetDiagram);
 
-		// initialise the model
-		initializeModelFile(targetModel, targetDiagram);
-		
-		assertTrue("the target diagram should have been created", targetDiagram.exists());
-		
 		// load up the editor
 		IEditorPart ep = loadDiagramFile(targetDiagram);
-		
+
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
 		assertTrue("active editor is our plugin, but is " + ep, ep instanceof IamlDiagramEditor);
@@ -48,20 +38,23 @@ public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
 
 		// there should be four children
 		assertEquals("there should only be 4 children", 4, editor.getDiagramEditPart().getChildren().size());
-
+		
 		// check the contents
-		ShapeNodeEditPart page = assertHasRootPage(editor, "page");
-		assertHasRootEventTrigger(editor, "et");
-		assertHasRootOperation(editor, "op");
+		ShapeNodeEditPart page1 = assertHasRootPage(editor, "page1");
+		ShapeNodeEditPart page2 = assertHasRootPage(editor, "page2");
+		ShapeNodeEditPart store = assertHasRootDomainStore(editor, "domainStore");
+		ShapeNodeEditPart page4 = assertHasRootPage(editor, "last signup user");
 
 		// open the domain store
-		IEditorPart ep2 = openDiagram(page);
+		IEditorPart ep2 = openDiagram(store);
 
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
+		assertEquals("active editor is the domain store plugin", 
+				"org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditor", 
 				ep2.getClass().getName());
+		
 	}
+
 	
 }

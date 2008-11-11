@@ -4,11 +4,15 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.openiaml.model.tests.codegen.CodegenTestsSuite;
+import org.openiaml.model.tests.eclipse.EclipseTestsSuite;
 import org.openiaml.model.tests.inference.InferenceTestsSuite;
 
 /**
  * All tests.
  * 
+ * @see InferenceTestsSuite
+ * @see CodegenTestsSuite
+ * @see EclipseTestsSuite
  * @author jmwright
  *
  */
@@ -24,6 +28,7 @@ public class AllTests {
 
         suite.addTest(InferenceTestsSuite.suite());
         suite.addTest(CodegenTestsSuite.suite());
+        suite.addTest(EclipseTestsSuite.suite());
 
         return suite; 
    }

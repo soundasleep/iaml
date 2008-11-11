@@ -20,6 +20,10 @@ public class EclipseShortcutsTestSuite {
         TestSuite suite = new TestSuite("Shortcuts");
 
         suite.addTestSuite(ShortcutsDomainObjectTestCase.class);
+        suite.addTestSuite(ShortcutsDomainStoreTestCase.class);
+        suite.addTestSuite(ShortcutsElementTestCase.class);
+        suite.addTestSuite(ShortcutsManyTestCase.class);
+        suite.addTestSuite(ShortcutsOperationTestCase.class);
 
         return suite; 
    }

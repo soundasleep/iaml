@@ -7,7 +7,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
@@ -42,10 +41,10 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 		assertEquals("there should only be 4 children", 4, editor.getDiagramEditPart().getChildren().size());
 		
 		// check the contents
-		ShapeNodeEditPart page1 = assertHasRootPage(editor, "page1");
-		ShapeNodeEditPart page2 = assertHasRootPage(editor, "page2");
-		ShapeNodeEditPart store = assertHasRootDomainStore(editor, "domainStore");
-		ShapeNodeEditPart page4 = assertHasRootPage(editor, "last signup user");
+		ShapeNodeEditPart page1 = assertHasPage(editor, "page1");
+		ShapeNodeEditPart page2 = assertHasPage(editor, "page2");
+		ShapeNodeEditPart store = assertHasDomainStore(editor, "domainStore");
+		ShapeNodeEditPart page4 = assertHasPage(editor, "last signup user");
 
 		// open the domain store
 		IEditorPart ep2 = openDiagram(store);

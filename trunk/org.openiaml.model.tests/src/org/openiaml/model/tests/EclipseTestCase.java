@@ -24,6 +24,7 @@ import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -72,7 +73,7 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	 * @param sourcePart
 	 * @return
 	 */
-	protected IEditorPart openDiagram(ShapeNodeEditPart sourcePart) throws Exception {
+	protected DiagramDocumentEditor openDiagram(ShapeNodeEditPart sourcePart) throws Exception {
 
 		// based on org.eclipse.gef.tools.SelectEditPartTracker#performOpen()
 		SelectionRequest request = new SelectionRequest();
@@ -82,12 +83,14 @@ public abstract class EclipseTestCase extends ModelTestCase {
 		sourcePart.performRequest(request);
 
 		// we should have loaded up a new editor
-		IWorkbenchPage page9 = PlatformUI.getWorkbench()
+		IWorkbenchPage activePage = PlatformUI.getWorkbench()
 			.getActiveWorkbenchWindow().getActivePage();
-		IEditorPart ep2 = page9.getActiveEditor();
-		assertNotNull("has active editor part", ep2);
+		IEditorPart editor = activePage.getActiveEditor();
+		assertNotNull("has active editor part", editor);
 		
-		return ep2;
+		assertTrue("active editor is not an DiagramDocumentEditor, but is a " + editor, editor instanceof DiagramDocumentEditor);
+		
+		return (DiagramDocumentEditor) editor;
 		
 	}
 	

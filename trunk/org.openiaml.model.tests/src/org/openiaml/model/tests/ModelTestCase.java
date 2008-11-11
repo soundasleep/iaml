@@ -235,15 +235,15 @@ public abstract class ModelTestCase extends WebTestCase {
 	protected IFile copyFileIntoWorkspace(String sourceName, IFile target) throws Exception {
 		// first, copy local file into project workspace
 		File sourceFile = new File(sourceName);
-		assertTrue("source file exists", sourceFile.exists());
+		assertTrue("source file '" + sourceFile + "' exists", sourceFile.exists());
 
-		assertFalse("target file should not exist yet", target.exists());
+		assertFalse("target file '" + target + "' should not exist yet", target.exists());
 		
 		// copy
 		target.create(new FileInputStream(sourceFile), true, monitor);
 		
 		// check
-		assertTrue("target file should now exist", target.exists());
+		assertTrue("target file '" + target + "' should now exist", target.exists());
 		
 		return target;
 	}

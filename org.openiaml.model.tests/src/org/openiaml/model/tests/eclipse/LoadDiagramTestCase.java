@@ -5,6 +5,7 @@ package org.openiaml.model.tests.eclipse;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IEditorPart;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
@@ -44,6 +45,9 @@ public class LoadDiagramTestCase extends EclipseTestCaseHelper {
 		ShapeNodeEditPart page2 = assertHasRootPage(editor, "page2");
 		ShapeNodeEditPart store = assertHasRootDomainStore(editor, "domainStore");
 		ShapeNodeEditPart page4 = assertHasRootPage(editor, "last signup user");
+
+		// close editors
+		((DiagramDocumentEditor) editor).close(false);
 
 	}
 

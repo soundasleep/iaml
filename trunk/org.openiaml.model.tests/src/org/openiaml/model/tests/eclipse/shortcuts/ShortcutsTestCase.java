@@ -9,9 +9,8 @@ import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
- * Tests shortcut generation.
+ * Sets up and tears down shortcut test cases.
  * 
- * @model shortcuts-domain_object.iaml
  * @author jmwright
  *
  */

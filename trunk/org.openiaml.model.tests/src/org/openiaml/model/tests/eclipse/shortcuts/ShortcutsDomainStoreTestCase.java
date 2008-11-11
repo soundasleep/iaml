@@ -13,19 +13,18 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  * @author jmwright
  *
  */
-public class ShortcutsDomainObjectTestCase extends ShortcutsTestCase {
+public class ShortcutsDomainStoreTestCase extends ShortcutsTestCase {
 
 	public String getModel() {
-		return "shortcuts-domain_object.iaml";
+		return "shortcuts-domain_store.iaml";
 	}
 	
 	protected DiagramDocumentEditor editor_page;
 	protected DiagramDocumentEditor editor_store;
-	protected DiagramDocumentEditor editor_object;
 	
 	public void testLoadModel() throws Exception {
 
-		// there should be four children
+		// there should be two children
 		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
 		
 		// check the contents
@@ -38,27 +37,18 @@ public class ShortcutsDomainObjectTestCase extends ShortcutsTestCase {
 		assertEquals("active editor is the domain store plugin", 
 				"org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditor", 
 				editor_store.getClass().getName());
-
-		// it should have a domain object
-		assertEquals("there should be 1 children", 1, editor_store.getDiagramEditPart().getChildren().size());
-		ShapeNodeEditPart object = assertHasDomainObject(editor_store, "domain object");
-		
-		// open up the domain object
-		editor_object = openDiagram(object);
-
-		assertEquals("active editor is the domain store plugin", 
-				"org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditor", 
-				editor_object.getClass().getName());
 		
 		// it should have a domain attribute connected to an event trigger
-		assertEquals("there should be 2 children", 2, editor_object.getDiagramEditPart().getChildren().size());
-		ShapeNodeEditPart attribute = assertHasDomainAttribute(editor_object, "domain attribute");
-		ShapeNodeEditPart event = assertHasEventTrigger(editor_object, "event trigger");
+		assertEquals("there should be 3 children", 3, editor_store.getDiagramEditPart().getChildren().size());
+		ShapeNodeEditPart child = assertHasDomainObject(editor_store, "child");
+		ShapeNodeEditPart event1 = assertHasEventTrigger(editor_store, "et1");
+		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_store, "et2");
 		
 		// they should be connected
-		assertHasRunInstanceWire(editor_object, event, attribute, "runWire");
-		assertShortcut(event);
-		assertNotShortcut(attribute);
+		assertHasSyncWire(editor_store, event1, child, "syncWire");
+		assertNotShortcut(child);
+		assertShortcut(event1);
+		assertNotShortcut(event2);
 		
 		// open 'page' editor
 		editor_page = openDiagram(page);
@@ -69,17 +59,18 @@ public class ShortcutsDomainObjectTestCase extends ShortcutsTestCase {
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEquals("there should be 2 children", 2, editor_page.getDiagramEditPart().getChildren().size());
-		ShapeNodeEditPart attribute2 = assertHasDomainAttribute(editor_page, "domain attribute");
-		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_page, "event trigger");
+		ShapeNodeEditPart et1 = assertHasEventTrigger(editor_page, "et1");
+		ShapeNodeEditPart obj = assertHasDomainObject(editor_page, "child");
 
 		// they should be connected
-		assertHasRunInstanceWire(editor_page, event2, attribute2, "runWire");
-		assertNotShortcut(event2);
-		assertShortcut(attribute2);
-
-		assertSameReferencedElement(event, event2);
-		assertSameReferencedElement(attribute, attribute2);
-
+		assertHasSyncWire(editor_page, et1, obj, "syncWire");
+		assertNotShortcut(et1);
+		assertShortcut(obj);
+		
+		// they should be the same element
+		assertSameReferencedElement(et1, event1);
+		assertSameReferencedElement(child, obj);
+		
 	}
 	
 	/**
@@ -87,9 +78,6 @@ public class ShortcutsDomainObjectTestCase extends ShortcutsTestCase {
 	 * @throws Exception 
 	 */
 	public void tearDown() throws Exception {
-		if (editor_object != null)
-			editor_object.close(false);
-		
 		if (editor_store != null)
 			editor_store.close(false);
 		

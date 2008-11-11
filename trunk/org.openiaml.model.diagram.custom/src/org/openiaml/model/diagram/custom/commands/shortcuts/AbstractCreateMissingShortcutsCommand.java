@@ -27,9 +27,13 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.diagram.custom.commands.RefreshElementCommand;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
 
 /**
  * This class is now abstract so that we may have multiple similar commands
@@ -114,6 +118,50 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 	 */
 	protected abstract List<WireEdge> getEdgesIn(EObject object);
 
+	/**
+	 * For a given EObject, get all the ExecutionEdges that go out of it.
+	 * Default empty because not all diagram editors can display these edges.
+	 * 
+	 * @param object
+	 * @return
+	 */
+	protected List<ExecutionEdge> getExecutionEdgesOut(EObject object) {
+		return new ArrayList<ExecutionEdge>();	// default empty
+	}
+	
+	/**
+	 * For a given EObject, get all the ExecutionEdges that come into it.
+	 * Default empty because not all diagram editors can display these edges.
+	 * 
+	 * @param object
+	 * @return
+	 */
+	protected List<ExecutionEdge> getExecutionEdgesIn(EObject object) {
+		return new ArrayList<ExecutionEdge>();	// default empty		
+	}
+	
+	/**
+	 * For a given EObject, get all the DataFlowEdges that go out of it.
+	 * Default empty because not all diagram editors can display these edges.
+	 * 
+	 * @param object
+	 * @return
+	 */
+	protected List<DataFlowEdge> getFlowEdgesOut(EObject object) {
+		return new ArrayList<DataFlowEdge>();	// default empty		
+	}
+	
+	/**
+	 * For a given EObject, get all the DataFlowEdges that come into it.
+	 * Default empty because not all diagram editors can display these edges.
+	 * 
+	 * @param object
+	 * @return
+	 */
+	protected List<DataFlowEdge> getFlowEdgesIn(EObject object) {
+		return new ArrayList<DataFlowEdge>();	// default empty		
+	}
+	
 	protected List<WireEdge> getGeneratedWires(EObject object) {
 		List<WireEdge> list = new ArrayList<WireEdge>();
 		
@@ -168,82 +216,15 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 
 		List<EObject> toAdd = new ArrayList<EObject>();
 		List<EObject> toAddEdge = new ArrayList<EObject>();
-
-		// get all connections outwards that we need to add
-		for (WireEdge edge : connectionsOut) {
-			// if the connection is not already displayed with a shortcut
-			boolean isVisible = false;
-			for (Object o : selectedElement.getChildren()) {
-				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Node) {
-					Node onode = (Node) ((EditPart) o).getModel();
-					
-					if (edge.getTo() == onode.getElement()) {
-						isVisible = true;
-						break;
-					}
-				}
-			}
-			
-			if (!isVisible && !toAdd.contains(edge.getTo())) {
-				toAdd.add(edge.getTo());
-			}
-
-			// if the edge is not already displayed with a shortcut
-			boolean isVisibleEdge = false;
-			for (Object o : selectedElement.getChildren()) {
-				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Edge) {
-					Edge onode = (Edge) ((EditPart) o).getModel();
-					
-					if (edge == onode.getElement()) {
-						isVisibleEdge = true;
-						break;
-					}
-				}
-			}
-			
-			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
-				toAddEdge.add(edge);
-			}
-		}
 		
-		// get all connections inwards that we need to add
-		for (WireEdge edge : connectionsIn) {
-			// if the connection is not already displayed with a shortcut
-			boolean isVisible = false;
-			for (Object o : selectedElement.getChildren()) {
-				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Node) {
-					Node onode = (Node) ((EditPart) o).getModel();
-					
-					if (edge.getFrom() == onode.getElement()) {
-						isVisible = true;
-						break;
-					}
-				}
-			}
-			
-			if (!isVisible && !toAdd.contains(edge.getFrom())) {
-				toAdd.add(edge.getFrom());
-			}
-
-			// if the edge is not already displayed with a shortcut
-			boolean isVisibleEdge = false;
-			for (Object o : selectedElement.getChildren()) {
-				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Edge) {
-					Edge onode = (Edge) ((EditPart) o).getModel();
-					
-					if (edge == onode.getElement()) {
-						isVisibleEdge = true;
-						break;
-					}
-				}
-			}
-			
-			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
-				toAddEdge.add(edge);
-			}
+		// get all the nodes and edges we want to add
+		addWireEdgesOut(toAdd, toAddEdge, connectionsOut);
+		addWireEdgesIn(toAdd, toAddEdge, connectionsIn);
+		addExecutionEdgesOut(toAdd, toAddEdge, getExecutionEdgesOut(rootObject));
+		addExecutionEdgesIn(toAdd, toAddEdge, getExecutionEdgesIn(rootObject));
+		addFlowEdgesOut(toAdd, toAddEdge, getFlowEdgesOut(rootObject));
+		addFlowEdgesIn(toAdd, toAddEdge, getFlowEdgesIn(rootObject));
 		
-		}
-
 		List<CreateViewRequest.ViewDescriptor> viewAdapters = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		
 		// create a shortcut displaying it
@@ -298,6 +279,274 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 
 		return;
 		
+	}
+
+	/**
+	 * Get all the EObjects (nodes and edges) that we want to add.
+	 * 
+	 * TODO refactor and clean up this class. 
+	 * 
+	 * @param toAdd
+	 * @param toAddEdge
+	 * @param connectionsOut
+	 */
+	protected void addWireEdgesOut(List<EObject> toAdd, List<EObject> toAddEdge, List<WireEdge> connectionsOut) {
+		// get all connections outwards that we need to add
+		for (WireEdge edge : connectionsOut) {
+			// if the connection is not already displayed with a shortcut
+			boolean isVisible = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Node) {
+					Node onode = (Node) ((EditPart) o).getModel();
+					
+					if (edge.getTo() == onode.getElement()) {
+						isVisible = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisible && !toAdd.contains(edge.getTo())) {
+				toAdd.add(edge.getTo());
+			}
+
+			// if the edge is not already displayed with a shortcut
+			boolean isVisibleEdge = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Edge) {
+					Edge onode = (Edge) ((EditPart) o).getModel();
+					
+					if (edge == onode.getElement()) {
+						isVisibleEdge = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
+				toAddEdge.add(edge);
+			}
+		}		
+	}
+
+
+	protected void addWireEdgesIn(List<EObject> toAdd, List<EObject> toAddEdge, List<WireEdge> connectionsIn) {
+		// get all connections inwards that we need to add
+		for (WireEdge edge : connectionsIn) {
+			// if the connection is not already displayed with a shortcut
+			boolean isVisible = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Node) {
+					Node onode = (Node) ((EditPart) o).getModel();
+					
+					if (edge.getFrom() == onode.getElement()) {
+						isVisible = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisible && !toAdd.contains(edge.getFrom())) {
+				toAdd.add(edge.getFrom());
+			}
+
+			// if the edge is not already displayed with a shortcut
+			boolean isVisibleEdge = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Edge) {
+					Edge onode = (Edge) ((EditPart) o).getModel();
+					
+					if (edge == onode.getElement()) {
+						isVisibleEdge = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
+				toAddEdge.add(edge);
+			}
+		
+		}
+	}
+	
+
+	/**
+	 * Get all the EObjects (nodes and edges) that we want to add.
+	 * 
+	 * TODO refactor and clean up this class. 
+	 * 
+	 * @param toAdd
+	 * @param toAddEdge
+	 * @param connectionsOut
+	 */
+	protected void addExecutionEdgesOut(List<EObject> toAdd, List<EObject> toAddEdge, List<ExecutionEdge> connectionsOut) {
+		// get all connections outwards that we need to add
+		for (ExecutionEdge edge : connectionsOut) {
+			// if the connection is not already displayed with a shortcut
+			boolean isVisible = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Node) {
+					Node onode = (Node) ((EditPart) o).getModel();
+					
+					if (edge.getTo() == onode.getElement()) {
+						isVisible = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisible && !toAdd.contains(edge.getTo())) {
+				toAdd.add(edge.getTo());
+			}
+
+			// if the edge is not already displayed with a shortcut
+			boolean isVisibleEdge = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Edge) {
+					Edge onode = (Edge) ((EditPart) o).getModel();
+					
+					if (edge == onode.getElement()) {
+						isVisibleEdge = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
+				toAddEdge.add(edge);
+			}
+		}		
+	}
+
+
+	protected void addExecutionEdgesIn(List<EObject> toAdd, List<EObject> toAddEdge, List<ExecutionEdge> connectionsIn) {
+		// get all connections inwards that we need to add
+		for (ExecutionEdge edge : connectionsIn) {
+			// if the connection is not already displayed with a shortcut
+			boolean isVisible = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Node) {
+					Node onode = (Node) ((EditPart) o).getModel();
+					
+					if (edge.getFrom() == onode.getElement()) {
+						isVisible = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisible && !toAdd.contains(edge.getFrom())) {
+				toAdd.add(edge.getFrom());
+			}
+
+			// if the edge is not already displayed with a shortcut
+			boolean isVisibleEdge = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Edge) {
+					Edge onode = (Edge) ((EditPart) o).getModel();
+					
+					if (edge == onode.getElement()) {
+						isVisibleEdge = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
+				toAddEdge.add(edge);
+			}
+		
+		}
+	}
+
+	/**
+	 * Get all the EObjects (nodes and edges) that we want to add.
+	 * 
+	 * TODO refactor and clean up this class. 
+	 * 
+	 * @param toAdd
+	 * @param toAddEdge
+	 * @param connectionsOut
+	 */
+	protected void addFlowEdgesOut(List<EObject> toAdd, List<EObject> toAddEdge, List<DataFlowEdge> connectionsOut) {
+		// get all connections outwards that we need to add
+		for (DataFlowEdge edge : connectionsOut) {
+			// if the connection is not already displayed with a shortcut
+			boolean isVisible = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Node) {
+					Node onode = (Node) ((EditPart) o).getModel();
+					
+					if (edge.getTo() == onode.getElement()) {
+						isVisible = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisible && !toAdd.contains(edge.getTo())) {
+				toAdd.add(edge.getTo());
+			}
+
+			// if the edge is not already displayed with a shortcut
+			boolean isVisibleEdge = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Edge) {
+					Edge onode = (Edge) ((EditPart) o).getModel();
+					
+					if (edge == onode.getElement()) {
+						isVisibleEdge = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
+				toAddEdge.add(edge);
+			}
+		}		
+	}
+
+
+	protected void addFlowEdgesIn(List<EObject> toAdd, List<EObject> toAddEdge, List<DataFlowEdge> connectionsIn) {
+		// get all connections inwards that we need to add
+		for (DataFlowEdge edge : connectionsIn) {
+			// if the connection is not already displayed with a shortcut
+			boolean isVisible = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Node) {
+					Node onode = (Node) ((EditPart) o).getModel();
+					
+					if (edge.getFrom() == onode.getElement()) {
+						isVisible = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisible && !toAdd.contains(edge.getFrom())) {
+				toAdd.add(edge.getFrom());
+			}
+
+			// if the edge is not already displayed with a shortcut
+			boolean isVisibleEdge = false;
+			for (Object o : selectedElement.getChildren()) {
+				if (o instanceof EditPart && ((EditPart) o).getModel() instanceof Edge) {
+					Edge onode = (Edge) ((EditPart) o).getModel();
+					
+					if (edge == onode.getElement()) {
+						isVisibleEdge = true;
+						break;
+					}
+				}
+			}
+			
+			if (!isVisibleEdge && !toAddEdge.contains(edge)) {
+				toAddEdge.add(edge);
+			}
+		
+		}
 	}
 
 	/**

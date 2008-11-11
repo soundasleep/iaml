@@ -5,6 +5,7 @@ package org.openiaml.model.tests;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
@@ -16,9 +17,15 @@ import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SyncWire;
 
 /**
  * Adds some helper assert...() methods to the EclipseTestCase.
@@ -88,6 +95,77 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		}
 		// failed
 		fail("assertHasPage: no page '" + pageName + "' found.");
+		return null;
+	}
+
+	/**
+	 * Look at the editor's children to see if an InputForm is being displayed.
+	 * 
+	 * @param root
+	 * @param formName
+	 * @return
+	 */
+	protected ShapeNodeEditPart assertHasInputForm(DiagramDocumentEditor root, String formName) {
+		for (Object o : root.getDiagramEditPart().getChildren()) {
+			if (o instanceof ShapeNodeEditPart) {
+				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
+				EObject obj = s.resolveSemanticElement();
+				if (obj instanceof InputForm) {
+					InputForm p = (InputForm) obj;
+					if (p.getName().equals(formName))
+						return s;
+				}
+			}
+		}
+		// failed
+		fail("assertHasInputForm: no input form '" + formName + "' found.");
+		return null;
+	}
+
+	/**
+	 * Look at the editor's children to see if an InputForm is being displayed.
+	 * 
+	 * @param root
+	 * @param textName
+	 * @return
+	 */
+	protected ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName) {
+		for (Object o : root.getDiagramEditPart().getChildren()) {
+			if (o instanceof ShapeNodeEditPart) {
+				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
+				EObject obj = s.resolveSemanticElement();
+				if (obj instanceof InputTextField) {
+					InputTextField p = (InputTextField) obj;
+					if (p.getName().equals(textName))
+						return s;
+				}
+			}
+		}
+		// failed
+		fail("assertHasInputTextField: no input text field '" + textName + "' found.");
+		return null;
+	}
+
+
+	/**
+	 * Look at the editor's children to see if a StartNode is being displayed.
+	 * Note that we can't specify which StartNode to look for.
+	 * 
+	 * @param root
+	 * @return
+	 */
+	protected ShapeNodeEditPart assertHasStartNode(DiagramDocumentEditor root) {
+		for (Object o : root.getDiagramEditPart().getChildren()) {
+			if (o instanceof ShapeNodeEditPart) {
+				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
+				EObject obj = s.resolveSemanticElement();
+				if (obj instanceof StartNode) {
+					return s;
+				}
+			}
+		}
+		// failed
+		fail("assertHasStartNode: no start node found.");
 		return null;
 	}
 
@@ -249,6 +327,77 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		
 		fail("assertHasRunInstanceWire: no connection found between '" + source + "' and '" + target + "'. found: " + found);
 		return null;
+	}
+
+
+	/**
+	 * Assert that a RunInstanceWire exists between two elements in the editor. 
+	 */
+	protected ConnectionNodeEditPart assertHasSyncWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+		String found = "";
+		
+		for (Object c : editor.getDiagramEditPart().getConnections()) {
+			if (c instanceof ConnectionNodeEditPart) {
+				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
+				EObject element = connection.resolveSemanticElement();
+				if (element instanceof SyncWire) {
+					SyncWire w = (SyncWire) element;
+					if (connection.getSource().equals(source) && 
+							connection.getTarget().equals(target) && w.getName().equals(name))
+						return connection;	// found it
+					found += ", " + w.getName();
+				}
+			}
+		}
+		
+		fail("assertHasSyncWire: no connection found between '" + source + "' and '" + target + "'. found: " + found);
+		return null;
+	}
+
+	/**
+	 * Assert that an ExecutionEdge exists between two elements in the editor. 
+	 */
+	protected ConnectionNodeEditPart assertHasExecutionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target) {
+		
+		for (Object c : editor.getDiagramEditPart().getConnections()) {
+			if (c instanceof ConnectionNodeEditPart) {
+				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
+				EObject element = connection.resolveSemanticElement();
+				if (element instanceof ExecutionEdge) {
+					if (connection.getSource().equals(source) && 
+							connection.getTarget().equals(target))
+						return connection;	// found it
+				}
+			}
+		}
+		
+		fail("assertHasExecutionEdge: no connection found between '" + source + "' and '" + target + "'");
+		return null;
+	}
+	
+	/**
+	 * Assert that these two EditParts refer to the same semantic element.
+	 */
+	protected void assertSameReferencedElement(EditPart a, EditPart b) {
+		// TODO remove XXX checks. even though the two elements DO
+		// refer to the same semantic element, because we do not yet
+		// share editing domains, they are loaded as different instances
+		// and thus cannot be considered equal.
+		// or at the very least, .equals() returns false because they are different instances.
+		
+		if (a instanceof ConnectionEditPart && b instanceof ConnectionEditPart) {
+			assertEquals(
+					((GeneratedElement) ((ConnectionEditPart) a).resolveSemanticElement()).getId(), 
+					((GeneratedElement) ((ConnectionEditPart) b).resolveSemanticElement()).getId());
+			// XXX assertEquals(((ConnectionEditPart) a).resolveSemanticElement(), ((ConnectionEditPart) b).resolveSemanticElement());
+		} else if (a instanceof ShapeNodeEditPart && b instanceof ShapeNodeEditPart) {
+			assertEquals(
+					((GeneratedElement) ((ShapeNodeEditPart) a).resolveSemanticElement()).getId(), 
+					((GeneratedElement) ((ShapeNodeEditPart) b).resolveSemanticElement()).getId());
+			// XXX assertEquals(((ShapeNodeEditPart) a).resolveSemanticElement(), ((ShapeNodeEditPart) b).resolveSemanticElement());
+		} else {
+			fail("a and b are not of the same type of part. a='" + a + "', b='" + b + "'");
+		}
 	}
 	
 }

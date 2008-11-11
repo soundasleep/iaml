@@ -111,8 +111,6 @@
             nameFilter="*.iaml"
             objectClass="org.eclipse.core.resources.IResource">
 
-		<!-- more than one popup extension is displayed in reverse order:
-		     a documented bug of eclipse -->
          <menu
                id="org.openiaml.model.codegen.menu1"
                path="additions"
@@ -121,6 +119,15 @@
                   name="group1">
             </separator>
          </menu>
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.model.diagram.custom.actions.MigrateModelAction"
+               id="org.openiaml.model.codegen.jet.action3"
+               label="Migrate to latest version"
+               menubarPath="org.openiaml.model.codegen.menu1">
+         </action>
+
          <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeActionAndView"
                id="org.openiaml.model.codegen.jet.action2"

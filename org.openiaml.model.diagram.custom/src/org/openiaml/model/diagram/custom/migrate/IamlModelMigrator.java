@@ -37,9 +37,9 @@ public interface IamlModelMigrator {
 	 * 
 	 * @param doc The model to migrate
 	 * @param monitor A progress monitor (unused)
-	 * @return An input stream of the new model
+	 * @return The newly created XML model
 	 * @throws MigrationException
 	 */
-	public InputStream migrate(Document doc, IProgressMonitor monitor)
+	public Document migrate(Document doc, IProgressMonitor monitor)
 		throws MigrationException;
 }

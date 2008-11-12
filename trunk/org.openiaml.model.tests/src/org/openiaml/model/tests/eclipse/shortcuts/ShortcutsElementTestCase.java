@@ -13,7 +13,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  * @author jmwright
  *
  */
-public class ShortcutsElementTestCase extends ShortcutsTestCase {
+public class ShortcutsElementTestCase extends AbstractShortcutsTestCase {
 
 	public String getModel() {
 		return "shortcuts-element.iaml";

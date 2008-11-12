@@ -13,7 +13,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  * @author jmwright
  *
  */
-public class ShortcutsManyTestCase extends ShortcutsTestCase {
+public class ShortcutsManyTestCase extends AbstractShortcutsTestCase {
 
 	public String getModel() {
 		return "shortcuts-many.iaml";

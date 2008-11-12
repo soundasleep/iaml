@@ -32,8 +32,6 @@ import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
 
 /**
  * This class is now abstract so that we may have multiple similar commands

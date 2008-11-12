@@ -52,30 +52,14 @@ public class ExportImagePartsAction implements IViewActionDelegate {
 		if (selection != null) {
 			for (Object o : selection) {
 				if (o instanceof IFile) {
-					diagramFile = (IFile) o;
-					
+
 					try {
-						// we need to load this model diagram
-						// based on EclipseTestCase#loadDiagramFile(IFile)
-						// try loading it up with Eclipse
-						ResourceSet resSet = new ResourceSetImpl();          
-						Resource res = resSet.getResource(URI.createPlatformResourceURI(diagramFile.getFullPath().toString(), false), true);
-						IamlDiagramEditorUtil.openDiagram( res );
-						
-						// get the active workbench editor part
-						// based on IamlDiagramEditorUtil#openDiagram()
-						IWorkbenchPage page = PlatformUI.getWorkbench()
-							.getActiveWorkbenchWindow().getActivePage();
-						DiagramDocumentEditor editor = (DiagramDocumentEditor) page.getActiveEditor();
-						
-						// export all of the images
-						imagesSaved = 0;
-						recurseExportDiagram(editor);
-						
-					} catch (Exception e) {
+						doExport((IFile) o);
+					
+					} catch (ExportImageException e) {
 						IamlDiagramEditorPlugin.getInstance().logError("Could not copy image to '" + generateImageDestination() + "': " + e.getMessage(), e);
 					}
-					
+										
 				}
 			}
 		}
@@ -198,6 +182,48 @@ public class ExportImagePartsAction implements IViewActionDelegate {
 		if (selection instanceof IStructuredSelection) {
 			this.selection = ((IStructuredSelection) selection).toArray();
 		}
+	}
+
+	/**
+	 * Do the export
+	 * 
+	 * @param targetDiagram
+	 * @throws ExportImageException if anything went wrong
+	 */
+	public void doExport(IFile targetDiagram) throws ExportImageException {
+		diagramFile = targetDiagram;
+		
+		try {
+			// we need to load this model diagram
+			// based on EclipseTestCase#loadDiagramFile(IFile)
+			// try loading it up with Eclipse
+			ResourceSet resSet = new ResourceSetImpl();          
+			Resource res = resSet.getResource(URI.createPlatformResourceURI(diagramFile.getFullPath().toString(), false), true);
+			IamlDiagramEditorUtil.openDiagram( res );
+			
+			// get the active workbench editor part
+			// based on IamlDiagramEditorUtil#openDiagram()
+			IWorkbenchPage page = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage();
+			DiagramDocumentEditor editor = (DiagramDocumentEditor) page.getActiveEditor();
+			
+			// export all of the images
+			imagesSaved = 0;
+			recurseExportDiagram(editor);
+		} catch (Exception e) {
+			throw new ExportImageException(e);
+		}
+
+	}
+	
+	public static class ExportImageException extends Exception {
+
+		private static final long serialVersionUID = 1L;
+
+		public ExportImageException(Exception e) {
+			super(e);
+		}
+		
 	}
 
 }

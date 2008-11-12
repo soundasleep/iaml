@@ -25,6 +25,7 @@ public class EclipseTestsSuite {
         suite.addTestSuite(LoadDiagramTestCase.class);
         suite.addTestSuite(OpenSubDiagramTestCase.class);
         suite.addTestSuite(InitializeDiagramTestCase.class);
+        suite.addTestSuite(ExportImagesTestCase.class);
         
         // add the shortcut tests
         suite.addTest(EclipseShortcutsTestSuite.suite());

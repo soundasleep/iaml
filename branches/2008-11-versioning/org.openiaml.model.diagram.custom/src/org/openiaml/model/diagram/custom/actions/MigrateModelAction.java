@@ -12,6 +12,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -94,10 +95,9 @@ public class MigrateModelAction implements IViewActionDelegate {
 					}
 					
 					// get the file
-					IFile target = source.getParent().getFile(
+					IFile target = source.getProject().getFile(
 							source.getProjectRelativePath().removeLastSegments(1).append(destination)
 						);
-					System.out.println(target);
 					
 					if (target.exists()) {
 						IamlDiagramEditorPlugin.getInstance().logError(
@@ -296,12 +296,77 @@ public class MigrateModelAction implements IViewActionDelegate {
 				throw new MigrationException(e);
 			}
 		}
+
+		protected List<String> deletedIds;
 		
 		protected void recurseOverDocument(Document input, Document output) {
+			// reset deleted list
+			deletedIds = new ArrayList<String>();
+			
+			// recurse over the document, adding elements and translating
+			// where necessary
 			recurseOverDocument( input.getDocumentElement(), output, output );
 			
+			// go over all deleted elements and remove them from all
+			// referenced attributes
+			removeDeletedReferences(output.getDocumentElement());
 		}
 		
+		/**
+		 * We need to be able to handle removed references. Because
+		 * a reference may be deleted either at the start or end of the document,
+		 * and before or after we have translated any references to it,
+		 * we must remove deleted references <em>after</em> the translation
+		 * process has been completed.
+		 * 
+		 * This may be quite slow.
+		 * 
+		 * @param element
+		 */
+		protected void removeDeletedReferences(Element element) {
+			for (String id : deletedIds) {
+				System.out.println("removing reference " + id);
+				
+				for (int i = 0; i < element.getAttributes().getLength(); i++) {
+					String attrName = element.getAttributes().item(i).getNodeName();
+					String attrValue = element.getAttributes().item(i).getNodeValue();
+					
+					// does this attribute have it?
+					if (attrValue.equals(id)) {
+						element.removeAttribute(attrName);
+					} else if (attrValue.indexOf(id + " ") == 0) {
+						// starts with it
+						element.setAttribute(attrName, attrValue.substring( attrValue.indexOf(id + " " )));
+					} else if (attrValue.indexOf(" " + id) > 0) {
+						// ends with it
+						element.setAttribute(attrName, attrValue.substring( 0, attrValue.indexOf(" " + id )));
+					}
+					
+				}
+			}
+			
+			// process over child nodes
+			for (int i = 0; i < element.getChildNodes().getLength(); i++) {
+				Node n = element.getChildNodes().item(i);
+				if (n instanceof Element) {
+					removeDeletedReferences((Element) n);
+				}
+			}
+		}
+		
+		/**
+		 * Calculate the old and new IDs for this element, add the
+		 * mapping (for future references), and add it as a deleted reference.
+		 * 
+		 * @param element
+		 */
+		protected void addDeletedReference(Element element) {
+			String oldId = calculateOldId(element);
+			String newId = getMigratedId(oldId);
+			idMap.put(oldId, newId);
+			deletedIds.add(newId);
+		}
+
 		private int idCounter = 0;
 		
 		protected void recurseOverDocument(Element element,
@@ -318,6 +383,8 @@ public class MigrateModelAction implements IViewActionDelegate {
 			// an <operation> can no longer contain <wires>
 			if (nodeName.equals("wires") && output.getNodeName().equals("operations")) {
 				// TODO add warning!
+				System.err.println("<operation> can no longer contain <wires>");
+				addDeletedReference(element);
 				return;
 			}
 			
@@ -360,6 +427,7 @@ public class MigrateModelAction implements IViewActionDelegate {
 				if (xsiType.equals("iaml.wires:PropertyToExecutionWire")) {
 					// TODO warning!
 					System.err.println("no more type iaml.wires:PropertyToExecutionWire");
+					addDeletedReference(element);
 					return;
 				}
 				

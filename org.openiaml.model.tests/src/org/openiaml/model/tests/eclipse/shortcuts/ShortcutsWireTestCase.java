@@ -34,9 +34,7 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 		// open the domain store
 		editor_page = openDiagram(page);
 
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
-				editor_page.getClass().getName());
+		assertEditorVisual(editor_page);
 
 		// there are lots of children because the event triggers here
 		// also reference the operations inside the wire
@@ -60,9 +58,7 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 		// open up wire
 		editor_wire = openDiagram(wire);
 		
-		assertEquals("active editor is the wire plugin", 
-				"org.openiaml.model.model.diagram.wire.part.IamlDiagramEditor", 
-				editor_wire.getClass().getName());
+		assertEditorWire(editor_wire);
 		
 		// it should have two operations and two event triggers
 		assertEquals("there should be 4 children", 4, editor_wire.getDiagramEditPart().getChildren().size());

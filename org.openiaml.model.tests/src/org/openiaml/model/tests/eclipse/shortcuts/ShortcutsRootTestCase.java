@@ -43,9 +43,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		// open the page
 		editor_page = openDiagram(page);
 
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
-				editor_page.getClass().getName());
+		assertEditorVisual(editor_page);
 
 		// it should have a domain object
 		assertEquals("there should be 2 children", 2, editor_page.getDiagramEditPart().getChildren().size());

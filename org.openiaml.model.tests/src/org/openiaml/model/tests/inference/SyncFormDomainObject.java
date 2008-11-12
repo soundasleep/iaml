@@ -34,6 +34,7 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		root = loadAndInfer(ROOT + "inference/SyncFormDomainObject.iaml");
 	}
 	
+	@SuppressWarnings("unused")
 	public void testInference() throws JaxenException {
 		Page page = (Page) queryOne(root, "iaml:children[iaml:name='page1']");
 		InputForm form = (InputForm) queryOne(page, "iaml:children[iaml:name='form1']");		

@@ -247,8 +247,6 @@ public class Migrate0To1 implements IamlModelMigrator {
 						xsiType.equals("iaml.operations:StopNode") ||
 						xsiType.equals("iaml.operations:FinishNode")) {
 					xsiType = "iaml:ChainedOperation";
-					// TODO add this warning in the final result (so the 
-					// user can view it)
 					// we can't add an attribute that isn't in the EMF model
 					// e.setAttribute("migratedWarning", "operations can no longer be StartNode, StopNode or FinishNode");
 					errors.add( new ExpectedMigrationException( this, element, "Operations can no longer be of type StartNode, StopNode or FinishNode; operation changed to ChainedOperation" ) );

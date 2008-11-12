@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.eclipse.shortcuts;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IEditorPart;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
@@ -40,7 +41,7 @@ public abstract class AbstractShortcutsTestCase extends EclipseTestCaseHelper {
 
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
-		assertTrue("active editor is our plugin, but is " + ep, ep instanceof IamlDiagramEditor);
+		assertEditorRoot((DiagramDocumentEditor) ep);
 		
 		// find what elements are displayed
 		editor = (IamlDiagramEditor) ep;

@@ -33,9 +33,7 @@ public class ShortcutsOperationTestCase extends AbstractShortcutsTestCase {
 		// open the page
 		editor_page = openDiagram(page);
 
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
-				editor_page.getClass().getName());
+		assertEditorVisual(editor_page);
 
 		// note that even though there is an executionedge from chained -> final,
 		// it should not display
@@ -46,9 +44,7 @@ public class ShortcutsOperationTestCase extends AbstractShortcutsTestCase {
 		// open up the operation
 		editor_operation = openDiagram(composite);
 
-		assertEquals("active editor is the operation plugin", 
-				"org.openiaml.model.model.diagram.operation.part.IamlDiagramEditor", 
-				editor_operation.getClass().getName());
+		assertEditorOperation(editor_operation);
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEquals("there should be 3 children", 3, editor_operation.getDiagramEditPart().getChildren().size());

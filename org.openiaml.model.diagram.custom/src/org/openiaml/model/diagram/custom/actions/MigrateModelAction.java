@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,15 +19,18 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
+import org.openiaml.model.diagram.custom.migrate.ExpectedMigrationException;
 import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
 import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
 import org.openiaml.model.diagram.custom.migrate.MigrationException;
@@ -111,8 +115,17 @@ public class MigrateModelAction implements IViewActionDelegate {
 					IStatus status = migrateModel(source, target, new NullProgressMonitor());
 					if (!status.isOK()) {
 						// TODO remove this reference to the plugin and remove the reference in plugin.xml
-						IamlDiagramEditorPlugin.getInstance().logError(
-								"Could not migrate '" + source + "' to '" + target + "': " + status.getMessage(), status.getException());
+						IamlDiagramEditorPlugin.getInstance().getLog().log( status );
+						
+						// warn or error
+						if (status.getSeverity() == IStatus.WARNING) {
+							// msg
+							MessageDialog.openWarning( PlatformUI.getWorkbench().getDisplay().getActiveShell() ,
+									"Model migration warning", status.getChildren().length + " errors occured during model migration. Please check the error log to review them.");
+						} else {
+							MessageDialog.openError( PlatformUI.getWorkbench().getDisplay().getActiveShell() ,
+									"Model migration failed", "Could not migrate model. Please check the error log.");
+						}
 					}
 					
 				}
@@ -166,11 +179,14 @@ public class MigrateModelAction implements IViewActionDelegate {
 			// load the initial document
 			Document doc = loadDocument(input.getContents());
 			
+			// initialise an error log
+			List<ExpectedMigrationException> errors = new ArrayList<ExpectedMigrationException>();
+			
 			// try each of them
 			for (IamlModelMigrator m : migrators) {
 				if (m.isVersion(doc)) {
 					// we want to migrate it with this migrator
-					doc = m.migrate(doc, monitor);
+					doc = m.migrate(doc, monitor, errors);
 					
 				}
 			}
@@ -198,12 +214,23 @@ public class MigrateModelAction implements IViewActionDelegate {
             
             // delete original file
             f.delete();
-			
+            
+            // do we have any warnings/errors?
+            if (errors.isEmpty()) {
+            	return Status.OK_STATUS;
+            }
+            
+            // compile a multi status
+            MultiStatus s = new MultiStatus(PLUGIN_ID, Status.WARNING, errors.size() + " problems occured when migrating model", null);
+            for (ExpectedMigrationException e : errors) {
+            	s.add( new Status(Status.WARNING, PLUGIN_ID, e.getMessage(), e) );
+            }
+
+            return s;
+
 		} catch (Exception e) {
 			return new Status(Status.ERROR, PLUGIN_ID, "Could not migrate model: " + e.getMessage(), e);
-		}
-		
-		return Status.OK_STATUS;
+		}		
 	}
 	
 	/**

@@ -3,7 +3,7 @@
  */
 package org.openiaml.model.diagram.custom.migrate;
 
-import java.io.InputStream;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
@@ -37,9 +37,15 @@ public interface IamlModelMigrator {
 	 * 
 	 * @param doc The model to migrate
 	 * @param monitor A progress monitor (unused)
+	 * @param errors A log of expected problems (e.g. removed elements)
 	 * @return The newly created XML model
 	 * @throws MigrationException
 	 */
-	public Document migrate(Document doc, IProgressMonitor monitor)
+	public Document migrate(Document doc, IProgressMonitor monitor, List<ExpectedMigrationException> errors)
 		throws MigrationException;
+
+	/**
+	 * @return The name of this migrator
+	 */
+	public String getName();
 }

@@ -64,7 +64,7 @@ public class Migrate0To1 implements IamlModelMigrator {
 	 * @see org.openiaml.model.diagram.custom.actions.MigrateModelAction.IamlModelMigrator#migrate(org.eclipse.core.resources.IFile, org.eclipse.core.resources.IFile, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Document migrate(Document inputDoc, IProgressMonitor monitor)
+	public Document migrate(Document inputDoc, IProgressMonitor monitor, List<ExpectedMigrationException> errors)
 			throws MigrationException {
 		try {
 			// create the new document (output)
@@ -75,7 +75,7 @@ public class Migrate0To1 implements IamlModelMigrator {
 			// cycle through each element and add "id" attributes
 			// and map their "id" attribute to their original position
 			idMap = new HashMap<String,String>();
-			recurseOverDocument(inputDoc, newDoc);
+			recurseOverDocument(inputDoc, newDoc, errors);
 			
 			// we now have our new model
 			return newDoc;
@@ -100,13 +100,13 @@ public class Migrate0To1 implements IamlModelMigrator {
 	 * @param input
 	 * @param output
 	 */
-	protected void recurseOverDocument(Document input, Document output) {
+	protected void recurseOverDocument(Document input, Document output, List<ExpectedMigrationException> errors) {
 		// reset deleted list
 		deletedIds = new ArrayList<String>();
 		
 		// recurse over the document, adding elements and translating
 		// where necessary
-		recurseOverDocument( input.getDocumentElement(), output, output );
+		recurseOverDocument( input.getDocumentElement(), output, output, errors );
 		
 		// go over all deleted elements and remove them from all
 		// referenced attributes
@@ -183,7 +183,7 @@ public class Migrate0To1 implements IamlModelMigrator {
 	 * @param document
 	 */
 	protected void recurseOverDocument(Element element,
-			Node output, Document document) {
+			Node output, Document document, List<ExpectedMigrationException> errors) {
 		String nodeName = element.getNodeName();
 		
 		// <edges> --> <wires>
@@ -193,9 +193,8 @@ public class Migrate0To1 implements IamlModelMigrator {
 		Element e = document.createElement( nodeName );
 		
 		// an <operation> can no longer contain <wires>
-		if (nodeName.equals("wires") && output.getNodeName().equals("operations")) {
-			// TODO add warning!
-			System.err.println("<operation> can no longer contain <wires>");
+		if (element.getNodeName().equals("edges") && output.getNodeName().equals("operations")) {
+			errors.add( new ExpectedMigrationException( this, element, "<operation> can no longer contain <edges>" ) );
 			addDeletedReference(element);
 			return;
 		}
@@ -236,8 +235,7 @@ public class Migrate0To1 implements IamlModelMigrator {
 
 			// PropertyToExecutionWire has been removed
 			if (xsiType.equals("iaml.wires:PropertyToExecutionWire")) {
-				// TODO warning!
-				System.err.println("no more type iaml.wires:PropertyToExecutionWire");
+				errors.add( new ExpectedMigrationException( this, element, "Type PropertyToExecutionWire no longer exists" ) );
 				addDeletedReference(element);
 				return;
 			}
@@ -253,6 +251,7 @@ public class Migrate0To1 implements IamlModelMigrator {
 					// user can view it)
 					// we can't add an attribute that isn't in the EMF model
 					// e.setAttribute("migratedWarning", "operations can no longer be StartNode, StopNode or FinishNode");
+					errors.add( new ExpectedMigrationException( this, element, "Operations can no longer be of type StartNode, StopNode or FinishNode; operation changed to ChainedOperation" ) );
 				}
 			}
 
@@ -263,7 +262,7 @@ public class Migrate0To1 implements IamlModelMigrator {
 		for (int i = 0; i < element.getChildNodes().getLength(); i++) {
 			Node n = element.getChildNodes().item(i);
 			if (n.getNodeType() == Node.ELEMENT_NODE) {
-				recurseOverDocument((Element) n, e, document);
+				recurseOverDocument((Element) n, e, document, errors);
 			} else {					
 				// e.appendChild(document.adoptNode(n));	// this also adds the children of the node, which we don't want 
 			}

@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
@@ -36,6 +37,14 @@ import org.openiaml.model.model.wires.SyncWire;
  */
 public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 
+	public void assertExists(IFile file) {
+		assertTrue("File '" + file + "' should exist", file.exists());
+	}
+	
+	public void assertNotExists(IFile file) {
+		assertFalse("File '" + file + "' should not exist", file.exists());
+	}
+	
 	/**
 	 * Assert that the given edit part is a shortcut element.
 	 */

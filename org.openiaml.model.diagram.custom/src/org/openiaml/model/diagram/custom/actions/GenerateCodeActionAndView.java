@@ -1,38 +1,18 @@
 package org.openiaml.model.diagram.custom.actions;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.codegen.ICodeGenerator;
-import org.openiaml.model.codegen.oaw.OawCodeGenerator;
-import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 
 /**
  * Action to generate code from an .iaml file, and then

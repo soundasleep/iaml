@@ -14,7 +14,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  * @author jmwright
  *
  */
-public class ShortcutsWireTestCase extends ShortcutsTestCase {
+public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 
 	public String getModel() {
 		return "shortcuts-wire.iaml";

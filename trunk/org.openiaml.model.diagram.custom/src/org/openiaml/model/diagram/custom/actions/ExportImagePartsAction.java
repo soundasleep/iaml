@@ -1,38 +1,22 @@
 package org.openiaml.model.diagram.custom.actions;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.RequestConstants;
+import org.eclipse.gef.requests.SelectionRequest;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
@@ -40,13 +24,8 @@ import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.diagram.custom.migrate.ExpectedMigrationException;
-import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
-import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
-import org.openiaml.model.diagram.custom.migrate.MigrationException;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
-import org.w3c.dom.Document;
 
 /**
  * Export all of the images in a model diagram to multiple image files
@@ -73,10 +52,9 @@ public class ExportImagePartsAction implements IViewActionDelegate {
 		if (selection != null) {
 			for (Object o : selection) {
 				if (o instanceof IFile) {
-					IFile diagramFile = (IFile) o;
-					IPath destination = diagramFile.getLocation().removeFileExtension().addFileExtension("png");
+					diagramFile = (IFile) o;
+					
 					try {
-						
 						// we need to load this model diagram
 						// based on EclipseTestCase#loadDiagramFile(IFile)
 						// try loading it up with Eclipse
@@ -88,19 +66,123 @@ public class ExportImagePartsAction implements IViewActionDelegate {
 						// based on IamlDiagramEditorUtil#openDiagram()
 						IWorkbenchPage page = PlatformUI.getWorkbench()
 							.getActiveWorkbenchWindow().getActivePage();
-						DiagramDocumentEditor ep = (DiagramDocumentEditor) page.getActiveEditor();
+						DiagramDocumentEditor editor = (DiagramDocumentEditor) page.getActiveEditor();
 						
-						CopyToImageUtil img = new CopyToImageUtil();
-						IProgressMonitor monitor = new NullProgressMonitor();
-						img.copyToImage(ep.getDiagramEditPart(), destination, ImageFileFormat.PNG, monitor);
+						// export all of the images
+						imagesSaved = 0;
+						recurseExportDiagram(editor);
+						
 					} catch (Exception e) {
-						IamlDiagramEditorPlugin.getInstance().logError("Could not copy image to '" + destination + "': " + e.getMessage(), e);
+						IamlDiagramEditorPlugin.getInstance().logError("Could not copy image to '" + generateImageDestination() + "': " + e.getMessage(), e);
 					}
 					
 				}
 			}
 		}
 
+	}
+	
+	/**
+	 * Recursively export elements in this diagram. Closes the editor once it is complete.
+	 * 
+	 * @param part
+	 * @throws CoreException 
+	 */
+	protected void recurseExportDiagram(DiagramDocumentEditor editor) throws CoreException {
+		DiagramEditPart part = editor.getDiagramEditPart();
+		IPath destination = generateImageDestination();
+		
+		// save this image if there is something in it
+		if (part.getChildren().size() > 0) {
+			CopyToImageUtil img = new CopyToImageUtil();
+			IProgressMonitor monitor = new NullProgressMonitor();
+			img.copyToImage(part, destination, ImageFileFormat.PNG, monitor);
+			imagesSaved++;
+		}
+		
+		// get children
+		for (Object obj : part.getChildren()) {
+			if (imagesSaved >= MAX_IMAGES) {
+				break;		// halt
+			}			
+
+			if (obj instanceof EditPart) {
+				EditPart child = (EditPart) obj;
+				
+				DiagramDocumentEditor newEd = openSubDiagram(child);
+				if (newEd == null || newEd == editor) {
+					// didn't do anything: continue
+					continue;
+				}
+				
+				// export this diagram editor
+				recurseExportDiagram(newEd);
+			}
+		}
+			
+		// close the editor once we're done
+		editor.close(false);
+		
+	}
+	
+	/**
+	 * Maximum number of images it will export.
+	 */
+	public static final int MAX_IMAGES = 5;
+	protected int imagesSaved = 0;
+	
+	/**
+	 * The original model diagram file. Used to generate the image filenames.
+	 */
+	protected IFile diagramFile = null;
+	
+	/**
+	 * Generate an image destination that shouldn't exist.
+	 * 
+	 * @return
+	 */
+	protected IPath generateImageDestination() {
+		// TODO Auto-generated method stub
+		IPath container = diagramFile.getLocation().removeLastSegments(1);
+		String extension = diagramFile.getFileExtension();
+		String fileName = diagramFile.getName();
+		String append = imagesSaved == 0 ? "" : "-" + imagesSaved;
+		String newFileName = fileName.substring(0, fileName.length() - extension.length() - 1) + append + ".png"; 
+
+		IPath destination = container.append(newFileName);
+		
+		return destination;
+	}
+
+	/**
+	 * Open the given diagram part.
+	 * Based on EclipseTestCase#openDiagram(EditPart)
+	 * 
+	 * @param sourcePart
+	 * @returns the opened DiagramDocumentEditor, or null if it can't be opened.
+	 *   it may return the same DiagramDocumentEditor if the load failed.
+	 *   it is up to the client to close this new editor.
+	 */
+	protected DiagramDocumentEditor openSubDiagram(EditPart sourcePart) {
+		
+		// based on org.eclipse.gef.tools.SelectEditPartTracker#performOpen()
+		SelectionRequest request = new SelectionRequest();
+		request.setLocation(null);		// the location isn't actually required
+		request.setModifiers(0 /*getCurrentInput().getModifiers()*/);
+		request.setType(RequestConstants.REQ_OPEN);
+		if (!sourcePart.understandsRequest(request)) {
+			return null;
+		}
+		
+		sourcePart.performRequest(request);
+
+		// we should have loaded up a new editor
+		IWorkbenchPage activePage = PlatformUI.getWorkbench()
+			.getActiveWorkbenchWindow().getActivePage();
+		IEditorPart editor = activePage.getActiveEditor();
+
+		return (DiagramDocumentEditor) editor;
+		
 	}
 	
 	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";

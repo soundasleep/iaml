@@ -39,7 +39,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Assert that the given edit part is a shortcut element.
 	 */
-	protected void assertShortcut(ShapeNodeEditPart part) {
+	public void assertShortcut(ShapeNodeEditPart part) {
 		View view = (View) part.getModel();
 		assertNotNull("part '" + part + "' does not have a shortcut annotation", view.getEAnnotation("Shortcut"));
 	}
@@ -47,7 +47,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Assert that the given edit part is a shortcut element.
 	 */
-	protected void assertNotShortcut(ShapeNodeEditPart part) {
+	public void assertNotShortcut(ShapeNodeEditPart part) {
 		View view = (View) part.getModel();
 		assertNull("part '" + part + "' has a shortcut annotation", view.getEAnnotation("Shortcut"));
 	}
@@ -55,7 +55,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Assert that the given edit part is openable, that is, it has an Open Diagram Hint
 	 */
-	protected void assertOpenable(ShapeNodeEditPart part) {
+	public void assertOpenable(ShapeNodeEditPart part) {
 		View view = (View) part.getModel();
 		Style link = view.getStyle(NotationPackage.eINSTANCE
 				.getHintedDiagramLinkStyle());
@@ -66,7 +66,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Assert that the given edit part is not openable, that is, it does not have an Open Diagram Hint
 	 */
-	protected void assertNotOpenable(ShapeNodeEditPart part) {
+	public void assertNotOpenable(ShapeNodeEditPart part) {
 		View view = (View) part.getModel();
 		Style link = view.getStyle(NotationPackage.eINSTANCE
 				.getHintedDiagramLinkStyle());
@@ -81,7 +81,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasPage(DiagramDocumentEditor root, String pageName) {
+	public ShapeNodeEditPart assertHasPage(DiagramDocumentEditor root, String pageName) {
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
@@ -105,7 +105,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param formName
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasInputForm(DiagramDocumentEditor root, String formName) {
+	public ShapeNodeEditPart assertHasInputForm(DiagramDocumentEditor root, String formName) {
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
@@ -129,7 +129,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param textName
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName) {
+	public ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName) {
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
@@ -154,7 +154,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param root
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasStartNode(DiagramDocumentEditor root) {
+	public ShapeNodeEditPart assertHasStartNode(DiagramDocumentEditor root) {
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
@@ -176,7 +176,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasDomainStore(DiagramDocumentEditor root, String storeName) {
+	public ShapeNodeEditPart assertHasDomainStore(DiagramDocumentEditor root, String storeName) {
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
@@ -203,7 +203,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasEventTrigger(DiagramDocumentEditor root, String eventName) {
+	public ShapeNodeEditPart assertHasEventTrigger(DiagramDocumentEditor root, String eventName) {
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
@@ -230,7 +230,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasDomainAttribute(DiagramDocumentEditor root, String attrName) {
+	public ShapeNodeEditPart assertHasDomainAttribute(DiagramDocumentEditor root, String attrName) {
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
@@ -257,7 +257,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasDomainObject(DiagramDocumentEditor root, String objectName) {
+	public ShapeNodeEditPart assertHasDomainObject(DiagramDocumentEditor root, String objectName) {
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
@@ -284,7 +284,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	protected ShapeNodeEditPart assertHasOperation(DiagramDocumentEditor root, String operationName) {
+	public ShapeNodeEditPart assertHasOperation(DiagramDocumentEditor root, String operationName) {
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
@@ -308,7 +308,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Assert that a RunInstanceWire exists between two elements in the editor. 
 	 */
-	protected ConnectionNodeEditPart assertHasRunInstanceWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+	public ConnectionNodeEditPart assertHasRunInstanceWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
 		String found = "";
 		
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
@@ -333,7 +333,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Assert that a RunInstanceWire exists between two elements in the editor. 
 	 */
-	protected ConnectionNodeEditPart assertHasSyncWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+	public ConnectionNodeEditPart assertHasSyncWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
 		String found = "";
 		
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
@@ -357,7 +357,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Assert that an ExecutionEdge exists between two elements in the editor. 
 	 */
-	protected ConnectionNodeEditPart assertHasExecutionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target) {
+	public ConnectionNodeEditPart assertHasExecutionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target) {
 		
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
 			if (c instanceof ConnectionNodeEditPart) {
@@ -378,7 +378,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Assert that these two EditParts refer to the same semantic element.
 	 */
-	protected void assertSameReferencedElement(EditPart a, EditPart b) {
+	public void assertSameReferencedElement(EditPart a, EditPart b) {
 		// TODO remove XXX checks. even though the two elements DO
 		// refer to the same semantic element, because we do not yet
 		// share editing domains, they are loaded as different instances

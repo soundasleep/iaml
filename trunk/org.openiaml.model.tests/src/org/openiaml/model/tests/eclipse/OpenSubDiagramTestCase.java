@@ -45,6 +45,12 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 		ShapeNodeEditPart page2 = assertHasPage(editor, "page2");
 		ShapeNodeEditPart store = assertHasDomainStore(editor, "domainStore");
 		ShapeNodeEditPart page4 = assertHasPage(editor, "last signup user");
+		
+		// stop warnings
+		assertNotNull(page1);
+		assertNotNull(page2);
+		assertNotNull(store);
+		assertNotNull(page4);
 
 		// open the domain store
 		IEditorPart ep2 = openDiagram(store);

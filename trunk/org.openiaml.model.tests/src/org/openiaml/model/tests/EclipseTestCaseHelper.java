@@ -400,4 +400,57 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		}
 	}
 	
+	/**
+	 * Assert the given editor is from the root plugin.
+	 */
+	public void assertEditorRoot(DiagramDocumentEditor editor) {
+		assertEquals("active editor is the root plugin", 
+				"org.openiaml.model.model.diagram.part.IamlDiagramEditor", 
+				editor.getClass().getName());
+	}
+	
+	/**
+	 * Assert the given editor is from the visual plugin.
+	 */
+	public void assertEditorVisual(DiagramDocumentEditor editor) {
+		assertEquals("active editor is the visual plugin", 
+				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
+				editor.getClass().getName());
+	}
+	
+	/**
+	 * Assert the given editor is from the operation plugin.
+	 */
+	public void assertEditorOperation(DiagramDocumentEditor editor) {
+		assertEquals("active editor is the operation plugin", 
+				"org.openiaml.model.model.diagram.operation.part.IamlDiagramEditor", 
+				editor.getClass().getName());
+	}
+	
+	/**
+	 * Assert the given editor is from the domainstore plugin.
+	 */
+	public void assertEditorDomainStore(DiagramDocumentEditor editor) {
+		assertEquals("active editor is the domain store plugin", 
+				"org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditor", 
+				editor.getClass().getName());
+	}
+	
+	/**
+	 * Assert the given editor is from the domain_object plugin.
+	 */
+	public void assertEditorDomainObject(DiagramDocumentEditor editor) {
+		assertEquals("active editor is the domain object plugin", 
+				"org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditor", 
+				editor.getClass().getName());
+	}
+	
+	/**
+	 * Assert the given editor is from the wire plugin.
+	 */
+	public void assertEditorWire(DiagramDocumentEditor editor) {
+		assertEquals("active editor is the wire plugin", 
+				"org.openiaml.model.model.diagram.wire.part.IamlDiagramEditor", 
+				editor.getClass().getName());
+	}
 }

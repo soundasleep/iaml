@@ -32,10 +32,8 @@ public class ShortcutsElementTestCase extends AbstractShortcutsTestCase {
 
 		// open the domain store
 		editor_page = openDiagram(page);
-
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
-				editor_page.getClass().getName());
+		
+		assertEditorVisual(editor_page);
 
 		// it should have a domain object
 		assertEquals("there should be 3 children", 3, editor_page.getDiagramEditPart().getChildren().size());
@@ -52,10 +50,7 @@ public class ShortcutsElementTestCase extends AbstractShortcutsTestCase {
 		// open up the domain object
 		editor_form = openDiagram(form);
 		
-		// TODO refactor this into assertVisualPlugin(form)
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
-				editor_form.getClass().getName());
+		assertEditorVisual(editor_form);
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEquals("there should be 3 children", 3, editor_form.getDiagramEditPart().getChildren().size());

@@ -117,7 +117,7 @@ public abstract class EclipseTestCase extends ModelTestCase {
 		final Resource diagramResource = resourceSet.createResource(diagramModelURI);
 		final EObject modelRoot = (EObject) modelResource.getContents().get(0);
 		
-		List affectedFiles = new LinkedList();
+		List<Object> affectedFiles = new LinkedList<Object>();
 		affectedFiles.add(diagramFile);
 		TransactionalEditingDomain myEditingDomain = GMFEditingDomainFactory.INSTANCE
 			.createEditingDomain();

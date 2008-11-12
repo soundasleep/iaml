@@ -1,11 +1,27 @@
 package org.openiaml.model.diagram.custom.actions;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
@@ -23,6 +39,8 @@ import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * Action to migrate an old .iaml file to a new .iaml file
@@ -52,7 +70,7 @@ public class MigrateModelAction implements IViewActionDelegate {
 				if (o instanceof IFile) {
 					IFile source = (IFile) o;
 					// we need to get a new file
-					IPath containerPath = source.getLocation().removeLastSegments(1);
+					IPath containerPath = source.getFullPath().removeLastSegments(1);
 					String fileName = source.getName();
 					String fileExtension = source.getFileExtension();
 					// generate unique name
@@ -77,12 +95,20 @@ public class MigrateModelAction implements IViewActionDelegate {
 					
 					// get the file
 					IFile target = source.getParent().getFile(
-							source.getFullPath().removeLastSegments(1).append(destination)
+							source.getProjectRelativePath().removeLastSegments(1).append(destination)
 						);
+					System.out.println(target);
 					
 					if (target.exists()) {
 						IamlDiagramEditorPlugin.getInstance().logError(
 								"The target model file already exists.", null); //$NON-NLS-1$
+						return;
+					}
+					
+					// must not be the same file
+					if (source.getLocation().toString().equals(target.getLocation().toString())) {
+						IamlDiagramEditorPlugin.getInstance().logError(
+								"Cannot write to the same file.", null); //$NON-NLS-1$
 						return;
 					}
 					
@@ -138,17 +164,29 @@ public class MigrateModelAction implements IViewActionDelegate {
 			ArrayList<IamlModelMigrator> migrators = new ArrayList<IamlModelMigrator>();
 			migrators.add(new Migrate0To1());
 			
+			// load the initial document
+			Document doc = loadDocument(input.getContents());
+			
 			// try each of them
-			InputStream source = input.getContents();
 			for (IamlModelMigrator m : migrators) {
-				if (m.isVersion(source)) {
+				System.out.println("checking model migrator " + m);
+				if (m.isVersion(doc)) {
+					System.out.println("doing migration " + m);
+					System.out.println("checking again:" + m.isVersion(doc));
 					// we want to migrate it
-					InputStream target = m.migrate(source, monitor);
+					InputStream target = m.migrate(doc, monitor);
 					
 					// write this to the file
-					output.setContents(target, true, false, monitor);
+					if (output.exists()) {
+						// replace
+						output.setContents(target, true, false, monitor);
+					} else {
+						// insert
+						output.create(target, true, monitor);
+					}
 					
 					// then reload the file for the next round
+					doc = loadDocument(output.getContents());
 					
 					// we now want to pipe the target and source together
 					
@@ -159,6 +197,22 @@ public class MigrateModelAction implements IViewActionDelegate {
 		}
 		
 		return Status.OK_STATUS;
+	}
+	
+	public Document loadDocument(InputStream source) throws MigrationException {
+		try {
+			// load the model version
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(source);
+			
+			// done
+			source.close();
+			
+			return doc;
+		} catch (Exception e) {
+			throw new MigrationException(e);
+		}
 	}
 	
 	/**
@@ -172,19 +226,20 @@ public class MigrateModelAction implements IViewActionDelegate {
 	 */
 	protected class Migrate0To1 implements IamlModelMigrator {
 
+		private Document doc;
+
+		public String toString() {
+			return "Migrator 0.0 to 0.1 [" + super.toString() + "]";
+		}
+		
 		/**
 		 * TODO write up what defines a 0.0 model 
 		 * 
 		 * @see org.openiaml.model.diagram.custom.actions.MigrateModelAction.IamlModelMigrator#isVersion(org.eclipse.core.resources.IFile)
 		 */
 		@Override
-		public boolean isVersion(InputStream source) throws MigrationException {
+		public boolean isVersion(Document doc) throws MigrationException {
 			try {
-				// load the model version
-				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-				DocumentBuilder db = dbf.newDocumentBuilder();
-				Document doc = db.parse(source);
-				
 				// get parameters
 				String nsPackage = doc.getDocumentElement().getAttribute("xmlns:iaml");
 				String rootId = doc.getDocumentElement().getAttribute("id");
@@ -206,21 +261,207 @@ public class MigrateModelAction implements IViewActionDelegate {
 		 * @see org.openiaml.model.diagram.custom.actions.MigrateModelAction.IamlModelMigrator#migrate(org.eclipse.core.resources.IFile, org.eclipse.core.resources.IFile, org.eclipse.core.runtime.IProgressMonitor)
 		 */
 		@Override
-		public InputStream migrate(InputStream input, IProgressMonitor monitor)
+		public InputStream migrate(Document doc, IProgressMonitor monitor)
 				throws MigrationException {
 			try {
-				// load the model version
-				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-				DocumentBuilder db = dbf.newDocumentBuilder();
-				Document doc = db.parse(input);
+				// create the new document (output)
+				DocumentBuilderFactory dbf2 = DocumentBuilderFactory.newInstance();
+				DocumentBuilder db2 = dbf2.newDocumentBuilder();
+				Document doc2 = db2.newDocument();
 				
-				// TODO continue implementation
-				return null;
+				// cycle through each element and add "id" attributes
+				// and map their "id" attribute to their original position
+				idMap = new HashMap<String,String>();
+				recurseOverDocument(doc, doc2);
+
+	            TransformerFactory transfac = TransformerFactory.newInstance();
+	            Transformer trans = transfac.newTransformer();
+	            trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");	// omit '<?xml version="1.0"?>'
+	            trans.setOutputProperty(OutputKeys.INDENT, "yes");
+
+	            // TODO clean this up into a piped input/output stream setup?
+				File f = File.createTempFile("test", "iaml");
+				f.deleteOnExit();		// delete when done
+				FileWriter sw = new FileWriter(f);
+	            StreamResult result = new StreamResult(sw);
+	            DOMSource source = new DOMSource(doc2);
+	            trans.transform(source, result);
+	            sw.close();
+
+	            // done: load this output file as an input stream for the next migrator
+	            FileInputStream fout = new FileInputStream(f);
+	            return fout;
 	
 			} catch (Exception e) {
 				throw new MigrationException(e);
 			}
 		}
+		
+		protected void recurseOverDocument(Document input, Document output) {
+			recurseOverDocument( input.getDocumentElement(), output, output );
+			
+		}
+		
+		private int idCounter = 0;
+		
+		protected void recurseOverDocument(Element element,
+				Node output, Document document) {
+			String nodeName = element.getNodeName();
+			
+			// special cases
+			// *.edges --> *.wires
+			if (element.getNodeName().equals("edges")) {
+				nodeName = "wires";
+			}
+			Element e = document.createElement( nodeName );
+			
+			// an <operation> can no longer contain <wires>
+			if (nodeName.equals("wires") && output.getNodeName().equals("operations")) {
+				// TODO add warning!
+				return;
+			}
+			
+			// cycle over attributes
+			// TODO add a wrapper to make this iterable
+			for (int i = 0; i < element.getAttributes().getLength(); i++) {
+				Node n = element.getAttributes().item(i);
+				String value = n.getNodeValue();
+				
+				// should we replace IDs?
+				if (value.indexOf("//@") >= 0) {
+					value = replaceReferences(value);
+				}
+				
+				e.setAttribute( n.getNodeName(), value );
+			}
+			
+			// does it have an id?
+			if (element.getAttribute("id").isEmpty()) {
+				String oldId = calculateOldId(element);
+				String newId = getMigratedId(oldId);
+				idMap.put(oldId, newId);
+				e.setAttribute("id", newId);
+			}
+			
+			// should we replace the xsi:type?
+			if (!element.getAttribute("xsi:type").isEmpty()) {
+				// RunWire --> RunInstanceWire
+				String xsiType = element.getAttribute("xsi:type");
+				if (xsiType.equals("iaml.wires:RunWire")) {
+					xsiType = "iaml.wires:RunInstanceWire";
+				}
+
+				// ProvidedParameterWire --> ParameterWire
+				if (xsiType.equals("iaml.wires:ProvidedParameterWire")) {
+					xsiType = "iaml.wires:ParameterWire";
+				}
+
+				// PropertyToExecutionWire has been removed
+				if (xsiType.equals("iaml.wires:PropertyToExecutionWire")) {
+					// TODO warning!
+					System.err.println("no more type iaml.wires:PropertyToExecutionWire");
+					return;
+				}
+				
+				// we can no longer have operations that are StartNodes:
+				// replace with a normal operation
+				if (element.getNodeName().equals("operations")) {
+					if (xsiType.equals("iaml.operations:StartNode") ||
+							xsiType.equals("iaml.operations:StopNode") ||
+							xsiType.equals("iaml.operations:FinishNode")) {
+						xsiType = "iaml:ChainedOperation";
+						// TODO add this warning in the final result (so the 
+						// user can view it)
+						// we can't add an attribute that isn't in the EMF model
+						// e.setAttribute("migratedWarning", "operations can no longer be StartNode, StopNode or FinishNode");
+					}
+				}
+
+				e.setAttribute("xsi:type", xsiType);
+			}
+			
+			// recurse over children
+			for (int i = 0; i < element.getChildNodes().getLength(); i++) {
+				Node n = element.getChildNodes().item(i);
+				if (n.getNodeType() == Node.ELEMENT_NODE) {
+					recurseOverDocument((Element) n, e, document);
+				} else {					
+					// e.appendChild(document.adoptNode(n));	// this also adds the children of the node, which we don't want 
+				}
+			}
+			
+			output.appendChild(e);
+		}
+		
+		/**
+		 * Replace "//@foo.1/@bar.2 //@car.3" with "id1 id2"
+		 * 
+		 * @param value
+		 * @return
+		 */
+		private String replaceReferences(String value) {
+			// multiple references in here?
+			String[] references = value.split(" ");
+			String newValue = "";
+			for (String ref : references) {
+				newValue += getMigratedId(ref) + " ";
+			}
+			return newValue.trim();
+		}
+
+		/**
+		 * Calculate what would be the old ID for this element.
+		 * 
+		 * @param element
+		 * @return
+		 */
+		private String calculateOldId(Element element) {
+			Node n = element.getParentNode();
+			if (n == null || n instanceof Document || !(n instanceof Element)) {
+				return "/";		// root
+			}
+			return calculateOldId((Element) n) + "/@" + element.getNodeName() + "." + getNodeIndex(element);
+		}
+		
+		
+		/**
+		 * Get the migrated ID for this element. In some cases the element
+		 * will be referenced before the "id" attribute can be added;
+		 * in others, the references will occur after the "id" attribute
+		 * has been added.
+		 * 
+		 * @param oldId
+		 * @return
+		 */
+		private String getMigratedId(String oldId) {
+			if (idMap.containsKey(oldId)) {
+				return idMap.get(oldId);
+			}
+			String newId = "migrated" + idCounter++;
+			idMap.put(oldId, newId);
+			return newId;
+		}
+
+		/**
+		 * @param element
+		 * @return
+		 */
+		private int getNodeIndex(Element element) {
+			Node n = element.getParentNode();
+			int count = 0;
+			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
+				Node nn = n.getChildNodes().item(i);
+				if (nn.getNodeName().equals(element.getNodeName())) {
+					if (nn.equals(element))
+						return count;
+					count++;
+				}
+			}
+			// should never get this far
+			throw new RuntimeException("Could not find frequency of node '" + element + "'");
+		}
+
+		protected Map<String,String> idMap;
 		
 	}
 	
@@ -237,21 +478,13 @@ public class MigrateModelAction implements IViewActionDelegate {
 	public interface IamlModelMigrator {
 		/**
 		 * Is the given file a model of this version?
-		 * 
-		 * @param source
-		 * @return
 		 */
-		public boolean isVersion(InputStream source) throws MigrationException;
+		public boolean isVersion(Document doc) throws MigrationException;
 		
 		/**
 		 * Migrate a file to the next version.
-		 * 
-		 * @param input
-		 * @param output
-		 * @param monitor
-		 * @throws MigrationException
 		 */
-		public InputStream migrate(InputStream input, IProgressMonitor monitor)
+		public InputStream migrate(Document doc, IProgressMonitor monitor)
 			throws MigrationException;
 	}
 	

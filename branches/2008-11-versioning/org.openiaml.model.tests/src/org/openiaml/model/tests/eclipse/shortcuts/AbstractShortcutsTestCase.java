@@ -14,7 +14,7 @@ import org.openiaml.model.tests.EclipseTestCaseHelper;
  * @author jmwright
  *
  */
-public abstract class ShortcutsTestCase extends EclipseTestCaseHelper {
+public abstract class AbstractShortcutsTestCase extends EclipseTestCaseHelper {
 
 	public static final String ROOT = "src/org/openiaml/model/tests/eclipse/shortcuts/";
 	

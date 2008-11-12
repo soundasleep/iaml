@@ -111,8 +111,6 @@
             nameFilter="*.iaml"
             objectClass="org.eclipse.core.resources.IResource">
 
-		<!-- more than one popup extension is displayed in reverse order:
-		     a documented bug of eclipse -->
          <menu
                id="org.openiaml.model.diagram.custom.menu1"
                path="additions"
@@ -121,13 +119,9 @@
                   name="group1">
             </separator>
          </menu>
-         <action
-               class="org.openiaml.model.diagram.custom.actions.MigrateModelAction"
-               id="org.openiaml.model.diagram.custom.action3"
-               label="Migrate model to latest version"
-               menubarPath="org.openiaml.model.diagram.custom.menu1">
-         </action>
 
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
          <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeActionAndView"
                id="org.openiaml.model.diagram.custom.action2"
@@ -141,8 +135,43 @@
                label="Generate code"
                menubarPath="org.openiaml.model.diagram.custom.menu1">
          </action>
-      </objectContribution>                    
-	</extension>
 
+         <action
+               class="org.openiaml.model.diagram.custom.actions.MigrateModelAction"
+               id="org.openiaml.model.diagram.custom.action3"
+               label="Migrate model to latest version"
+               menubarPath="org.openiaml.model.diagram.custom.menu1">
+         </action>
+
+      </objectContribution>                    
+
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.model.codegen.objectContribution2"
+            nameFilter="*.iaml_diagram"
+            objectClass="org.eclipse.core.resources.IResource">
+
+         <menu
+               id="org.openiaml.model.diagram.custom.menu2"
+               path="additions"
+               label="&amp;IAML Diagram Tools">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+
+         <action
+               class="org.openiaml.model.diagram.custom.actions.ExportImagePartsAction"
+               id="org.openiaml.model.diagram.custom.menu2.action1"
+               label="Export all diagram parts to PNG images"
+               menubarPath="org.openiaml.model.diagram.custom.menu2">
+         </action>
+
+      </objectContribution>
+      
+	</extension>
 
 </plugin>

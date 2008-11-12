@@ -114,7 +114,7 @@
 		<!-- more than one popup extension is displayed in reverse order:
 		     a documented bug of eclipse -->
          <menu
-               id="org.openiaml.model.codegen.menu1"
+               id="org.openiaml.model.diagram.custom.menu1"
                path="additions"
                label="&amp;IAML Tools">
             <separator
@@ -122,17 +122,24 @@
             </separator>
          </menu>
          <action
+               class="org.openiaml.model.diagram.custom.actions.MigrateModelAction"
+               id="org.openiaml.model.diagram.custom.action3"
+               label="Migrate model to latest version"
+               menubarPath="org.openiaml.model.diagram.custom.menu1">
+         </action>
+
+         <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeActionAndView"
-               id="org.openiaml.model.codegen.jet.action2"
+               id="org.openiaml.model.diagram.custom.action2"
                label="Generate code and load in browser"
-               menubarPath="org.openiaml.model.codegen.menu1">
+               menubarPath="org.openiaml.model.diagram.custom.menu1">
          </action>
 
          <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeAction"
-               id="org.openiaml.model.codegen.jet.action1"
+               id="org.openiaml.model.diagram.custom.action1"
                label="Generate code"
-               menubarPath="org.openiaml.model.codegen.menu1">
+               menubarPath="org.openiaml.model.diagram.custom.menu1">
          </action>
       </objectContribution>                    
 	</extension>

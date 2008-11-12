@@ -18,7 +18,7 @@ Through the *Europa update site:*
   # + all required features
 
 *[http://www.eclipse.org/modeling/gmf/ GMF]:*
-  # Download the GMF SDK 2.0.2 (the [http://download.eclipse.org/modeling/gmf/updates/releases/ update site] doesn't include the full source) and extract into your Eclipse directory
+  # Download the [http://www.eclipse.org/modeling/download.php?file=/modeling/gmf/gmf/downloads/drops/2.0.2/R200802250200/GMF-sdk-2.0.2.zip GMF SDK 2.0.2] (the [http://download.eclipse.org/modeling/gmf/updates/releases/ update site] doesn't include the full source) and extract into your Eclipse directory
 
 *[http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare]:*
 {{{

@@ -1,10 +1,18 @@
 package org.openiaml.model.diagram.custom.actions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
@@ -106,6 +114,7 @@ public class MigrateModelAction implements IViewActionDelegate {
 						IamlDiagramEditorPlugin.getInstance().logError(
 								"Could not migrate '" + source + "' to '" + target + "': " + status.getMessage(), status.getException());
 					}
+					
 				}
 			}
 		}
@@ -161,26 +170,37 @@ public class MigrateModelAction implements IViewActionDelegate {
 			for (IamlModelMigrator m : migrators) {
 				if (m.isVersion(doc)) {
 					// we want to migrate it with this migrator
-					InputStream target = m.migrate(doc, monitor);
-					
-					// write this to the file
-					if (output.exists()) {
-						// replace
-						output.setContents(target, true, false, monitor);
-					} else {
-						// insert
-						output.create(target, true, monitor);
-					}
-					
-					// then reload the file for the next round
-					doc = loadDocument(output.getContents());
-					
-					// we now want to pipe the target and source together
+					doc = m.migrate(doc, monitor);
 					
 				}
 			}
+			
+			// once we are done, write the final document to the new model
+			// IFiles cannot handle OutputStreams so we can either create a threaded
+			// piped input/output stream, or we can just write it temporarily
+			// to a file and reload it (or even a string -- but this could run out of memory)
+            TransformerFactory transfac = TransformerFactory.newInstance();
+            Transformer trans = transfac.newTransformer();
+            trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");	// omit '<?xml version="1.0"?>'
+            trans.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            // TODO clean this up into a piped input/output stream setup?
+			File f = File.createTempFile("test", "iaml");
+			FileWriter sw = new FileWriter(f);
+            StreamResult result = new StreamResult(sw);
+            DOMSource source = new DOMSource(doc);
+            trans.transform(source, result);
+            sw.close();
+            
+            // now pipe this new file into the desired target file
+            FileInputStream fout = new FileInputStream(f);
+            output.create(fout, true, monitor);
+            
+            // delete original file
+            f.delete();
+			
 		} catch (Exception e) {
-			return new Status(Status.ERROR, PLUGIN_ID, "Could not load migrated model: " + e.getMessage(), e);
+			return new Status(Status.ERROR, PLUGIN_ID, "Could not migrate model: " + e.getMessage(), e);
 		}
 		
 		return Status.OK_STATUS;

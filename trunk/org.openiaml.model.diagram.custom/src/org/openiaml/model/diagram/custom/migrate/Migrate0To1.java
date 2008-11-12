@@ -1,9 +1,5 @@
 package org.openiaml.model.diagram.custom.migrate;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,11 +7,6 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
@@ -34,8 +25,8 @@ import org.w3c.dom.Node;
  */
 public class Migrate0To1 implements IamlModelMigrator {
 
-	public String toString() {
-		return "Migrator 0.0 to 0.1 [" + super.toString() + "]";
+	public String getName() {
+		return "Migrator 0.0 to 0.1";
 	}
 	
 	/**
@@ -73,42 +64,30 @@ public class Migrate0To1 implements IamlModelMigrator {
 	 * @see org.openiaml.model.diagram.custom.actions.MigrateModelAction.IamlModelMigrator#migrate(org.eclipse.core.resources.IFile, org.eclipse.core.resources.IFile, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public InputStream migrate(Document doc, IProgressMonitor monitor)
+	public Document migrate(Document inputDoc, IProgressMonitor monitor)
 			throws MigrationException {
 		try {
 			// create the new document (output)
-			DocumentBuilderFactory dbf2 = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db2 = dbf2.newDocumentBuilder();
-			Document doc2 = db2.newDocument();
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document newDoc = db.newDocument();
 			
 			// cycle through each element and add "id" attributes
 			// and map their "id" attribute to their original position
 			idMap = new HashMap<String,String>();
-			recurseOverDocument(doc, doc2);
-
-            TransformerFactory transfac = TransformerFactory.newInstance();
-            Transformer trans = transfac.newTransformer();
-            trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");	// omit '<?xml version="1.0"?>'
-            trans.setOutputProperty(OutputKeys.INDENT, "yes");
-
-            // TODO clean this up into a piped input/output stream setup?
-			File f = File.createTempFile("test", "iaml");
-			f.deleteOnExit();		// delete when done
-			FileWriter sw = new FileWriter(f);
-            StreamResult result = new StreamResult(sw);
-            DOMSource source = new DOMSource(doc2);
-            trans.transform(source, result);
-            sw.close();
-
-            // done: load this output file as an input stream for the next migrator
-            FileInputStream fout = new FileInputStream(f);
-            return fout;
+			recurseOverDocument(inputDoc, newDoc);
+			
+			// we now have our new model
+			return newDoc;
 
 		} catch (Exception e) {
 			throw new MigrationException(e);
 		}
 	}
 
+	/**
+	 * @see #removeDeletedReferences(Element)
+	 */
 	protected List<String> deletedIds;
 	
 	/**
@@ -187,6 +166,9 @@ public class Migrate0To1 implements IamlModelMigrator {
 		deletedIds.add(newId);
 	}
 
+	/**
+	 * For generating new migration IDs
+	 */
 	private int idCounter = 0;
 	
 	/**
@@ -219,7 +201,6 @@ public class Migrate0To1 implements IamlModelMigrator {
 		}
 		
 		// cycle over attributes
-		// TODO add a wrapper to make this iterable
 		for (int i = 0; i < element.getAttributes().getLength(); i++) {
 			Node n = element.getAttributes().item(i);
 			String value = n.getNodeValue();

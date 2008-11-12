@@ -110,6 +110,12 @@
         eType="#//DomainObject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+        eType="#//DerivedView">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdge" eSuperTypes="#//GeneratedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DataFlowEdgesSource"
@@ -170,12 +176,35 @@
         eType="#//GeneratedElement" eOpposite="#//GeneratedElement/generatedBy"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DerivedView" eSuperTypes="#//ApplicationElement #//ContainsWires">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="added" value="0.2"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//DomainAttribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainObjectInstance" eSuperTypes="#//ApplicationElement #//ContainsWires">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="added" value="0.2"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceVariable" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="added" value="0.2"/>
+      <details key="comment" value="represents instance variables, as part of an operation, that are later assigned to DomainObjectInstances through InstanceWires"/>
+    </eAnnotations>
+  </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InputForm" eSuperTypes="#//VisibleThing"/>
     <eClassifiers xsi:type="ecore:EClass" name="InputTextField" eSuperTypes="#//VisibleThing"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="wires" nsURI="http://openiaml.org/model/wires" nsPrefix="iaml.wires">
     <eClassifiers xsi:type="ecore:EClass" name="SingleWire" eSuperTypes="#//WireEdge">
@@ -210,7 +239,51 @@
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterWire" eSuperTypes="#//wires/SingleWire"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterWire" eSuperTypes="#//wires/SingleWire">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="added" value="0.2"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NavigateWire" eSuperTypes="#//wires/CompositeWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CreateWire" eSuperTypes="#//wires/CompositeWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetWire" eSuperTypes="#//wires/CompositeWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UpdateWire" eSuperTypes="#//wires/CompositeWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SaveWire" eSuperTypes="#//wires/CompositeWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinkWire" eSuperTypes="#//wires/CompositeWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FilterWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="1"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
     <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource"/>

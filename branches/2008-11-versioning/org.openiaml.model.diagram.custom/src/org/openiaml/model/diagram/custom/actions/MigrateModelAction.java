@@ -154,7 +154,7 @@ public class MigrateModelAction implements IViewActionDelegate {
 	 * @param monitor
 	 * @return
 	 */
-	protected IStatus migrateModel(IFile input, IFile output, IProgressMonitor monitor) {
+	public IStatus migrateModel(IFile input, IFile output, IProgressMonitor monitor) {
 		// sanity
 		assert(input.exists());
 		assert(!output.exists());
@@ -169,11 +169,8 @@ public class MigrateModelAction implements IViewActionDelegate {
 			
 			// try each of them
 			for (IamlModelMigrator m : migrators) {
-				System.out.println("checking model migrator " + m);
 				if (m.isVersion(doc)) {
-					System.out.println("doing migration " + m);
-					System.out.println("checking again:" + m.isVersion(doc));
-					// we want to migrate it
+					// we want to migrate it with this migrator
 					InputStream target = m.migrate(doc, monitor);
 					
 					// write this to the file
@@ -199,6 +196,18 @@ public class MigrateModelAction implements IViewActionDelegate {
 		return Status.OK_STATUS;
 	}
 	
+	/**
+	 * Eclipse can't handle the RewindableInputStream that the XML reader
+	 * uses, and throws an IOException(read error). This happens because
+	 * we are trying to read the same XML file multiple times.
+	 * 
+	 * In this method we load the model up once and only once per file. The
+	 * loaded document is instead passed to the migrators.
+	 * 
+	 * @param source
+	 * @return
+	 * @throws MigrationException
+	 */
 	public Document loadDocument(InputStream source) throws MigrationException {
 		try {
 			// load the model version
@@ -225,8 +234,6 @@ public class MigrateModelAction implements IViewActionDelegate {
 	 *
 	 */
 	protected class Migrate0To1 implements IamlModelMigrator {
-
-		private Document doc;
 
 		public String toString() {
 			return "Migrator 0.0 to 0.1 [" + super.toString() + "]";

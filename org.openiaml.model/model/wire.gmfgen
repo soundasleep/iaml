@@ -780,7 +780,7 @@
       iD="org.openiaml.model.diagram.wire"
       name="Iaml Plugin (Wire)"
       provider="www.openiaml.org"
-      version="0.0.3"/>
+      version="0.1.0"/>
   <editor/>
   <navigator>
     <childReferences

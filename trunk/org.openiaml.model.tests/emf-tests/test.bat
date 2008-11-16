@@ -1,1 +1,0 @@
-@php -f test.php

@@ -3,29 +3,16 @@
  */
 package org.openiaml.model.tests.release;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
-import junit.framework.TestCase;
-
+import org.openiaml.model.tests.XmlTestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /**
  * Tests .mf and plugin.xml files of the specified plugins
@@ -33,7 +20,7 @@ import org.xml.sax.SAXException;
  * @author jmwright
  *
  */
-public class PluginsTestCase extends TestCase {
+public class PluginsTestCase extends XmlTestCase {
 
 	public static final String GMF_ROOT = "../org.openiaml.model/model/";
 	/**
@@ -68,7 +55,8 @@ public class PluginsTestCase extends TestCase {
 		"org.openiaml.model.drools",
 		"org.openiaml.model.edit",
 	};
-	private Map<String,Properties> loadedManifests = new HashMap<String,Properties>(); 
+	private Map<String,Properties> loadedManifests = new HashMap<String,Properties>();
+	private List<String> shortcuts; 
 	
 	/**
 	 * Load up all the .gmfgen's and MANIFEST.MFs from all of our plugins.
@@ -86,6 +74,18 @@ public class PluginsTestCase extends TestCase {
 		for (String plugin : PLUGINS) {
 			String manifest = PLUGIN_ROOT + plugin + "/META-INF/MANIFEST.MF";
 			loadedManifests.put( manifest, loadProperties(manifest) );
+		}
+	
+		// load up shortcuts
+		shortcuts = new ArrayList<String>();
+		
+		// lets find the first one
+		Document doc = firstDocument(loadedGmfgens);
+		NodeList nodes = xpath(doc, "//diagram/containsShortcutsTo");
+		for (int i = 0; i < nodes.getLength(); i++) {
+			String value = ((Element) nodes.item(i)).getFirstChild().getNodeValue();
+			if (!shortcuts.contains(value))
+				shortcuts.add(value);
 		}
 	}
 	
@@ -142,56 +142,39 @@ public class PluginsTestCase extends TestCase {
 	}
 	
 	/**
-	 * Apply an XPath query to an XML document.
+	 * Make sure that each .gmfgen contains shortcuts to
+	 * all other .gmfgens
 	 */
-	public NodeList xpath(Document doc, String query) throws XPathExpressionException {
-		XPathFactory factory = XPathFactory.newInstance();
-		XPath xpath = factory.newXPath();
-		XPathExpression expr = xpath.compile(query);
-		NodeList result = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-		return result;
-	}
-	
-	/**
-	 * Get the first node result from an XPath query.
-	 */
-	public Element xpathFirst(Document doc, String query) throws XPathExpressionException {
-		return (Element) xpath(doc, query).item(0);
-	}
-	
-	public Document firstDocument(Map<?,Document> map) {
-		return map.values().iterator().next();
-	}
-	
-	/**
-	 * Load a properties file.
-	 */
-	public Properties loadProperties(String manifest) throws FileNotFoundException, IOException {
-		Properties p = new Properties();
-		p.load(new FileInputStream(manifest));
-		return p;
-	}
-	
-	/**
-	 * Load an XML document.
-	 */
-	public Document loadDocument(String filename) throws FileNotFoundException, ParserConfigurationException, SAXException, IOException {
-		return loadDocument( new FileInputStream(filename) );
-	}
+	public void testContainsShortcutsTo() throws Exception {
+		// now test them all
+		for (String file : loadedGmfgens.keySet()) {
+			Document doc = loadedGmfgens.get(file);
+			NodeList nodes = xpath(doc, "//diagram/containsShortcutsTo");
+			assertEquals(nodes.getLength(), shortcuts.size());
+			for (int i = 0; i < nodes.getLength(); i++) {
+				String value = ((Element) nodes.item(i)).getFirstChild().getNodeValue();
+				assertTrue( file + ": contains " + value, shortcuts.contains(value) );
+			}
+		}
 
+	}
+	
 	/**
-	 * Load an XML document.
+	 * Make sure that each .gmfgen contains shortcuts to
+	 * all other .gmfgens
 	 */
-	public Document loadDocument(InputStream source) throws ParserConfigurationException, SAXException, IOException {
-		// load the model version
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		DocumentBuilder db = dbf.newDocumentBuilder();
-		Document doc = db.parse(source);
-		
-		// done
-		source.close();
-		
-		return doc;
+	public void testContainsProvidedFor() throws Exception {
+		// now test them all
+		for (String file : loadedGmfgens.keySet()) {
+			Document doc = loadedGmfgens.get(file);
+			NodeList nodes = xpath(doc, "//diagram/shortcutsProvidedFor");
+			assertEquals(nodes.getLength(), shortcuts.size());
+			for (int i = 0; i < nodes.getLength(); i++) {
+				String value = ((Element) nodes.item(i)).getFirstChild().getNodeValue();
+				assertTrue( file + ": contains " + value, shortcuts.contains(value) );
+			}
+		}
+
 	}
 	
 }

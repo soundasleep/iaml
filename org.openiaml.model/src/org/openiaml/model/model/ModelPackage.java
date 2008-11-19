@@ -805,13 +805,40 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT__DOMAIN_OBJECTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT__DOMAIN_VIEWS = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT__DOMAIN_INSTANCES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -820,7 +847,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Application Element</em>' class.
@@ -829,7 +856,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -929,6 +956,33 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1064,6 +1118,33 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_ATTRIBUTE__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1597,13 +1678,40 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__OVERRIDDEN = CHAINED_OPERATION_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__DOMAIN_OBJECTS = CHAINED_OPERATION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__DOMAIN_VIEWS = CHAINED_OPERATION_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__DOMAIN_INSTANCES = CHAINED_OPERATION_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__NODES = CHAINED_OPERATION_FEATURE_COUNT + 4;
+	int COMPOSITE_OPERATION__NODES = CHAINED_OPERATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Data Edges</b></em>' containment reference list.
@@ -1612,7 +1720,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__DATA_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 5;
+	int COMPOSITE_OPERATION__DATA_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Execution Edges</b></em>' containment reference list.
@@ -1621,7 +1729,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__EXECUTION_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 6;
+	int COMPOSITE_OPERATION__EXECUTION_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -1630,7 +1738,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 7;
+	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>shouldnt properties</b></em>' containment reference list.
@@ -1639,7 +1747,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 8;
+	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
@@ -1648,7 +1756,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 9;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1748,6 +1856,33 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_CONTAINER__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_CONTAINER__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_CONTAINER__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1867,13 +2002,22 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_PROPERTY__IN_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE = NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Application Element Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int APPLICATION_ELEMENT_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference.
@@ -2056,6 +2200,33 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__OVERRIDDEN = APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__DOMAIN_OBJECTS = APPLICATION_ELEMENT_CONTAINER__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__DOMAIN_VIEWS = APPLICATION_ELEMENT_CONTAINER__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__DOMAIN_INSTANCES = APPLICATION_ELEMENT_CONTAINER__DOMAIN_INSTANCES;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2173,13 +2344,40 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__DOMAIN_OBJECTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__DOMAIN_VIEWS = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__DOMAIN_INSTANCES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2188,7 +2386,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Domain Stores</b></em>' containment reference list.
@@ -2197,7 +2395,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Runtime Url</b></em>' attribute.
@@ -2206,7 +2404,25 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Sites</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__SITES = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__SESSIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
@@ -2215,7 +2431,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -2317,13 +2533,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_STORE__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_STORE__VIEWS = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Domain Store</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int DOMAIN_STORE_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference.
@@ -2741,6 +2966,33 @@ public interface ModelPackage extends EPackage {
 	int DYNAMIC_APPLICATION_ELEMENT_SET__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2813,6 +3065,425 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERATES_ELEMENTS_FEATURE_COUNT = 2;
+
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.DerivedViewImpl <em>Derived View</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.DerivedViewImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getDerivedView()
+	 * @generated
+	 */
+	int DERIVED_VIEW = 35;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__OPERATIONS = APPLICATION_ELEMENT__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Generated By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__GENERATED_BY = APPLICATION_ELEMENT__GENERATED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__IS_GENERATED = APPLICATION_ELEMENT__IS_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__ID = APPLICATION_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__NAME = APPLICATION_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__WIRES = APPLICATION_ELEMENT__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__OUT_EDGES = APPLICATION_ELEMENT__OUT_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__IN_EDGES = APPLICATION_ELEMENT__IN_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__GENERATED_ELEMENTS = APPLICATION_ELEMENT__GENERATED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__PROPERTIES = APPLICATION_ELEMENT__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__VALUES = APPLICATION_ELEMENT__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__ATTRIBUTES = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Str Query</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__STR_QUERY = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Derived View</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl <em>Domain Object Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.DomainObjectInstanceImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getDomainObjectInstance()
+	 * @generated
+	 */
+	int DOMAIN_OBJECT_INSTANCE = 36;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__OPERATIONS = APPLICATION_ELEMENT__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Generated By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__GENERATED_BY = APPLICATION_ELEMENT__GENERATED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__IS_GENERATED = APPLICATION_ELEMENT__IS_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__ID = APPLICATION_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__NAME = APPLICATION_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__WIRES = APPLICATION_ELEMENT__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__OUT_EDGES = APPLICATION_ELEMENT__OUT_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__IN_EDGES = APPLICATION_ELEMENT__IN_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__GENERATED_ELEMENTS = APPLICATION_ELEMENT__GENERATED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__PROPERTIES = APPLICATION_ELEMENT__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__VALUES = APPLICATION_ELEMENT__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__ATTRIBUTES = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Str Query</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__STR_QUERY = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Domain Object Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.PageRequestImpl <em>Page Request</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.PageRequestImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getPageRequest()
+	 * @generated
+	 */
+	int PAGE_REQUEST = 37;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_REQUEST__PARAMETERS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Page Request</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_REQUEST_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.VisitorAgentImpl <em>Visitor Agent</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.VisitorAgentImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getVisitorAgent()
+	 * @generated
+	 */
+	int VISITOR_AGENT = 38;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISITOR_AGENT__PROPERTIES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Visitor Agent</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISITOR_AGENT_FEATURE_COUNT = 1;
 
 
 	/**
@@ -3183,6 +3854,17 @@ public interface ModelPackage extends EPackage {
 	EClass getApplicationElementProperty();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.ApplicationElementProperty#getDefaultValue <em>Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Value</em>'.
+	 * @see org.openiaml.model.model.ApplicationElementProperty#getDefaultValue()
+	 * @see #getApplicationElementProperty()
+	 * @generated
+	 */
+	EAttribute getApplicationElementProperty_DefaultValue();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.StaticValue <em>Static Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3268,6 +3950,28 @@ public interface ModelPackage extends EPackage {
 	EAttribute getInternetApplication_RuntimeUrl();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.InternetApplication#getSites <em>Sites</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sites</em>'.
+	 * @see org.openiaml.model.model.InternetApplication#getSites()
+	 * @see #getInternetApplication()
+	 * @generated
+	 */
+	EReference getInternetApplication_Sites();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.InternetApplication#getSessions <em>Sessions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sessions</em>'.
+	 * @see org.openiaml.model.model.InternetApplication#getSessions()
+	 * @see #getInternetApplication()
+	 * @generated
+	 */
+	EReference getInternetApplication_Sessions();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.DomainStore <em>Domain Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3298,6 +4002,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDomainStore_Properties();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.DomainStore#getViews <em>Views</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Views</em>'.
+	 * @see org.openiaml.model.model.DomainStore#getViews()
+	 * @see #getDomainStore()
+	 * @generated
+	 */
+	EReference getDomainStore_Views();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.DataFlowEdge <em>Data Flow Edge</em>}'.
@@ -3593,6 +4308,112 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getGeneratesElements_Overridden();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.DerivedView <em>Derived View</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Derived View</em>'.
+	 * @see org.openiaml.model.model.DerivedView
+	 * @generated
+	 */
+	EClass getDerivedView();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.DerivedView#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Attributes</em>'.
+	 * @see org.openiaml.model.model.DerivedView#getAttributes()
+	 * @see #getDerivedView()
+	 * @generated
+	 */
+	EReference getDerivedView_Attributes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.DerivedView#getStrQuery <em>Str Query</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Str Query</em>'.
+	 * @see org.openiaml.model.model.DerivedView#getStrQuery()
+	 * @see #getDerivedView()
+	 * @generated
+	 */
+	EAttribute getDerivedView_StrQuery();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.DomainObjectInstance <em>Domain Object Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Domain Object Instance</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance
+	 * @generated
+	 */
+	EClass getDomainObjectInstance();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.DomainObjectInstance#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Attributes</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getAttributes()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_Attributes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.DomainObjectInstance#getStrQuery <em>Str Query</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Str Query</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getStrQuery()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EAttribute getDomainObjectInstance_StrQuery();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.PageRequest <em>Page Request</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Page Request</em>'.
+	 * @see org.openiaml.model.model.PageRequest
+	 * @generated
+	 */
+	EClass getPageRequest();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.PageRequest#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Parameters</em>'.
+	 * @see org.openiaml.model.model.PageRequest#getParameters()
+	 * @see #getPageRequest()
+	 * @generated
+	 */
+	EReference getPageRequest_Parameters();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.VisitorAgent <em>Visitor Agent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Visitor Agent</em>'.
+	 * @see org.openiaml.model.model.VisitorAgent
+	 * @generated
+	 */
+	EClass getVisitorAgent();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.VisitorAgent#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Properties</em>'.
+	 * @see org.openiaml.model.model.VisitorAgent#getProperties()
+	 * @see #getVisitorAgent()
+	 * @generated
+	 */
+	EReference getVisitorAgent_Properties();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -3933,6 +4754,14 @@ public interface ModelPackage extends EPackage {
 		EClass APPLICATION_ELEMENT_PROPERTY = eINSTANCE.getApplicationElementProperty();
 
 		/**
+		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE = eINSTANCE.getApplicationElementProperty_DefaultValue();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.StaticValueImpl <em>Static Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4003,6 +4832,22 @@ public interface ModelPackage extends EPackage {
 		EAttribute INTERNET_APPLICATION__RUNTIME_URL = eINSTANCE.getInternetApplication_RuntimeUrl();
 
 		/**
+		 * The meta object literal for the '<em><b>Sites</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERNET_APPLICATION__SITES = eINSTANCE.getInternetApplication_Sites();
+
+		/**
+		 * The meta object literal for the '<em><b>Sessions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERNET_APPLICATION__SESSIONS = eINSTANCE.getInternetApplication_Sessions();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DomainStoreImpl <em>Domain Store</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4027,6 +4872,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOMAIN_STORE__PROPERTIES = eINSTANCE.getDomainStore_Properties();
+
+		/**
+		 * The meta object literal for the '<em><b>Views</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_STORE__VIEWS = eINSTANCE.getDomainStore_Views();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DataFlowEdgeImpl <em>Data Flow Edge</em>}' class.
@@ -4277,6 +5130,94 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GENERATES_ELEMENTS__OVERRIDDEN = eINSTANCE.getGeneratesElements_Overridden();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DerivedViewImpl <em>Derived View</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.DerivedViewImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getDerivedView()
+		 * @generated
+		 */
+		EClass DERIVED_VIEW = eINSTANCE.getDerivedView();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DERIVED_VIEW__ATTRIBUTES = eINSTANCE.getDerivedView_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Str Query</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DERIVED_VIEW__STR_QUERY = eINSTANCE.getDerivedView_StrQuery();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl <em>Domain Object Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.DomainObjectInstanceImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getDomainObjectInstance()
+		 * @generated
+		 */
+		EClass DOMAIN_OBJECT_INSTANCE = eINSTANCE.getDomainObjectInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__ATTRIBUTES = eINSTANCE.getDomainObjectInstance_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Str Query</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_OBJECT_INSTANCE__STR_QUERY = eINSTANCE.getDomainObjectInstance_StrQuery();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.PageRequestImpl <em>Page Request</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.PageRequestImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getPageRequest()
+		 * @generated
+		 */
+		EClass PAGE_REQUEST = eINSTANCE.getPageRequest();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PAGE_REQUEST__PARAMETERS = eINSTANCE.getPageRequest_Parameters();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.VisitorAgentImpl <em>Visitor Agent</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.VisitorAgentImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getVisitorAgent()
+		 * @generated
+		 */
+		EClass VISITOR_AGENT = eINSTANCE.getVisitorAgent();
+
+		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VISITOR_AGENT__PROPERTIES = eINSTANCE.getVisitorAgent_Properties();
 
 	}
 

@@ -17,10 +17,17 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.CreateWire;
+import org.openiaml.model.model.wires.LinkWire;
+import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SaveWire;
+import org.openiaml.model.model.wires.SelectWire;
+import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.model.wires.UpdateWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
@@ -98,6 +105,34 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParameterWire(ParameterWire object) {
 				return createParameterWireAdapter();
+			}
+			@Override
+			public Adapter caseCreateWire(CreateWire object) {
+				return createCreateWireAdapter();
+			}
+			@Override
+			public Adapter caseSetWire(SetWire object) {
+				return createSetWireAdapter();
+			}
+			@Override
+			public Adapter caseUpdateWire(UpdateWire object) {
+				return createUpdateWireAdapter();
+			}
+			@Override
+			public Adapter caseSaveWire(SaveWire object) {
+				return createSaveWireAdapter();
+			}
+			@Override
+			public Adapter caseLinkWire(LinkWire object) {
+				return createLinkWireAdapter();
+			}
+			@Override
+			public Adapter caseNavigateWire(NavigateWire object) {
+				return createNavigateWireAdapter();
+			}
+			@Override
+			public Adapter caseSelectWire(SelectWire object) {
+				return createSelectWireAdapter();
 			}
 			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
@@ -210,6 +245,104 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.CreateWire <em>Create Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.CreateWire
+	 * @generated
+	 */
+	public Adapter createCreateWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.SetWire <em>Set Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.SetWire
+	 * @generated
+	 */
+	public Adapter createSetWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.UpdateWire <em>Update Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.UpdateWire
+	 * @generated
+	 */
+	public Adapter createUpdateWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.SaveWire <em>Save Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.SaveWire
+	 * @generated
+	 */
+	public Adapter createSaveWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.LinkWire <em>Link Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.LinkWire
+	 * @generated
+	 */
+	public Adapter createLinkWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.NavigateWire <em>Navigate Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.NavigateWire
+	 * @generated
+	 */
+	public Adapter createNavigateWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.SelectWire <em>Select Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.SelectWire
+	 * @generated
+	 */
+	public Adapter createSelectWireAdapter() {
 		return null;
 	}
 

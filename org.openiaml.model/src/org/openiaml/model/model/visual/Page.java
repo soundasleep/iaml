@@ -7,6 +7,7 @@
 package org.openiaml.model.model.visual;
 
 import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.scopes.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,10 +22,10 @@ import org.openiaml.model.model.VisibleThing;
  * </p>
  *
  * @see org.openiaml.model.model.visual.VisualPackage#getPage()
- * @model
+ * @model annotation="http://openiaml.org/comment comment='Scope supertype added in 0.2' comment2='represents the scope Window'"
  * @generated
  */
-public interface Page extends VisibleThing {
+public interface Page extends VisibleThing, Scope {
 	/**
 	 * Returns the value of the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->

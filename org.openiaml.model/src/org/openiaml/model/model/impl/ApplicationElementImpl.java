@@ -16,12 +16,16 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DerivedView;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -33,6 +37,7 @@ import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.scopes.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,6 +57,9 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getDomainObjects <em>Domain Objects</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getDomainViews <em>Domain Views</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getDomainInstances <em>Domain Instances</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getValues <em>Values</em>}</li>
  * </ul>
@@ -209,6 +217,36 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainObjects()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DomainObject> domainObjects;
+
+	/**
+	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainViews()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DerivedView> domainViews;
+
+	/**
+	 * The cached value of the '{@link #getDomainInstances() <em>Domain Instances</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DomainObjectInstance> domainInstances;
 
 	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -470,6 +508,42 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DomainObject> getDomainObjects() {
+		if (domainObjects == null) {
+			domainObjects = new EObjectResolvingEList<DomainObject>(DomainObject.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS);
+		}
+		return domainObjects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DerivedView> getDomainViews() {
+		if (domainViews == null) {
+			domainViews = new EObjectResolvingEList<DerivedView>(DerivedView.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS);
+		}
+		return domainViews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DomainObjectInstance> getDomainInstances() {
+		if (domainInstances == null) {
+			domainInstances = new EObjectResolvingEList<DomainObjectInstance>(DomainObjectInstance.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES);
+		}
+		return domainInstances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ApplicationElementProperty> getProperties() {
 		if (properties == null) {
 			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.APPLICATION_ELEMENT__PROPERTIES);
@@ -573,6 +647,12 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return getGeneratedElements();
 			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
 				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS:
+				return getDomainObjects();
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS:
+				return getDomainViews();
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES:
+				return getDomainInstances();
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				return getProperties();
 			case ModelPackage.APPLICATION_ELEMENT__VALUES:
@@ -629,6 +709,18 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
 				setOverridden(((Boolean)newValue).booleanValue());
 				return;
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS:
+				getDomainObjects().clear();
+				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
+				return;
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS:
+				getDomainViews().clear();
+				getDomainViews().addAll((Collection<? extends DerivedView>)newValue);
+				return;
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES:
+				getDomainInstances().clear();
+				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
+				return;
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
@@ -682,6 +774,15 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS:
+				getDomainObjects().clear();
+				return;
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS:
+				getDomainViews().clear();
+				return;
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES:
+				getDomainInstances().clear();
+				return;
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				getProperties().clear();
 				return;
@@ -722,6 +823,12 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS:
+				return domainObjects != null && !domainObjects.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS:
+				return domainViews != null && !domainViews.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES:
+				return domainInstances != null && !domainInstances.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__VALUES:
@@ -787,6 +894,14 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				default: return -1;
 			}
 		}
+		if (baseClass == Scope.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS;
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS;
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -844,6 +959,14 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == Scope.class) {
+			switch (baseFeatureID) {
+				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS;
+				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

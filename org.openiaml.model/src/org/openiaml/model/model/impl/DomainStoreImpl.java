@@ -20,12 +20,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
@@ -54,6 +56,7 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getViews <em>Views</em>}</li>
  * </ul>
  * </p>
  *
@@ -209,6 +212,16 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * @ordered
 	 */
 	protected EList<ApplicationElementProperty> properties;
+
+	/**
+	 * The cached value of the '{@link #getViews() <em>Views</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getViews()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DerivedView> views;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -450,6 +463,18 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DerivedView> getViews() {
+		if (views == null) {
+			views = new EObjectResolvingEList<DerivedView>(DerivedView.class, this, ModelPackage.DOMAIN_STORE__VIEWS);
+		}
+		return views;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -521,6 +546,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return getChildren();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				return getProperties();
+			case ModelPackage.DOMAIN_STORE__VIEWS:
+				return getViews();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -573,6 +600,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
 				return;
+			case ModelPackage.DOMAIN_STORE__VIEWS:
+				getViews().clear();
+				getViews().addAll((Collection<? extends DerivedView>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -618,6 +649,9 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				getProperties().clear();
 				return;
+			case ModelPackage.DOMAIN_STORE__VIEWS:
+				getViews().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -652,6 +686,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return children != null && !children.isEmpty();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				return properties != null && !properties.isEmpty();
+			case ModelPackage.DOMAIN_STORE__VIEWS:
+				return views != null && !views.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

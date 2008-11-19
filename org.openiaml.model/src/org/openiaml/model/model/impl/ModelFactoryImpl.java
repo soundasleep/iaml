@@ -20,8 +20,10 @@ import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
@@ -30,11 +32,13 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 
 /**
@@ -101,6 +105,10 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.EXECUTION_EDGE: return createExecutionEdge();
 			case ModelPackage.CONDITIONAL_EDGE: return createConditionalEdge();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET: return createDynamicApplicationElementSet();
+			case ModelPackage.DERIVED_VIEW: return createDerivedView();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE: return createDomainObjectInstance();
+			case ModelPackage.PAGE_REQUEST: return createPageRequest();
+			case ModelPackage.VISITOR_AGENT: return createVisitorAgent();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -324,6 +332,46 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		DynamicApplicationElementSetImpl dynamicApplicationElementSet = new DynamicApplicationElementSetImpl();
 		generateID(dynamicApplicationElementSet);
 		return dynamicApplicationElementSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DerivedView createDerivedView() {
+		DerivedViewImpl derivedView = new DerivedViewImpl();
+		return derivedView;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DomainObjectInstance createDomainObjectInstance() {
+		DomainObjectInstanceImpl domainObjectInstance = new DomainObjectInstanceImpl();
+		return domainObjectInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PageRequest createPageRequest() {
+		PageRequestImpl pageRequest = new PageRequestImpl();
+		return pageRequest;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VisitorAgent createVisitorAgent() {
+		VisitorAgentImpl visitorAgent = new VisitorAgentImpl();
+		return visitorAgent;
 	}
 
 	/**

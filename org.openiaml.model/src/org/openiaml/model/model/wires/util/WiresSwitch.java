@@ -17,10 +17,17 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.CreateWire;
+import org.openiaml.model.model.wires.LinkWire;
+import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SaveWire;
+import org.openiaml.model.model.wires.SelectWire;
+import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.model.wires.UpdateWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
@@ -150,6 +157,91 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case WiresPackage.CREATE_WIRE: {
+				CreateWire createWire = (CreateWire)theEObject;
+				T result = caseCreateWire(createWire);
+				if (result == null) result = caseCompositeWire(createWire);
+				if (result == null) result = caseWireEdge(createWire);
+				if (result == null) result = caseNamedElement(createWire);
+				if (result == null) result = caseContainsWires(createWire);
+				if (result == null) result = caseGeneratesElements(createWire);
+				if (result == null) result = caseGeneratedElement(createWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.SET_WIRE: {
+				SetWire setWire = (SetWire)theEObject;
+				T result = caseSetWire(setWire);
+				if (result == null) result = caseCompositeWire(setWire);
+				if (result == null) result = caseWireEdge(setWire);
+				if (result == null) result = caseNamedElement(setWire);
+				if (result == null) result = caseContainsWires(setWire);
+				if (result == null) result = caseGeneratesElements(setWire);
+				if (result == null) result = caseGeneratedElement(setWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.UPDATE_WIRE: {
+				UpdateWire updateWire = (UpdateWire)theEObject;
+				T result = caseUpdateWire(updateWire);
+				if (result == null) result = caseCompositeWire(updateWire);
+				if (result == null) result = caseWireEdge(updateWire);
+				if (result == null) result = caseNamedElement(updateWire);
+				if (result == null) result = caseContainsWires(updateWire);
+				if (result == null) result = caseGeneratesElements(updateWire);
+				if (result == null) result = caseGeneratedElement(updateWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.SAVE_WIRE: {
+				SaveWire saveWire = (SaveWire)theEObject;
+				T result = caseSaveWire(saveWire);
+				if (result == null) result = caseCompositeWire(saveWire);
+				if (result == null) result = caseWireEdge(saveWire);
+				if (result == null) result = caseNamedElement(saveWire);
+				if (result == null) result = caseContainsWires(saveWire);
+				if (result == null) result = caseGeneratesElements(saveWire);
+				if (result == null) result = caseGeneratedElement(saveWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.LINK_WIRE: {
+				LinkWire linkWire = (LinkWire)theEObject;
+				T result = caseLinkWire(linkWire);
+				if (result == null) result = caseCompositeWire(linkWire);
+				if (result == null) result = caseWireEdge(linkWire);
+				if (result == null) result = caseNamedElement(linkWire);
+				if (result == null) result = caseContainsWires(linkWire);
+				if (result == null) result = caseGeneratesElements(linkWire);
+				if (result == null) result = caseGeneratedElement(linkWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.NAVIGATE_WIRE: {
+				NavigateWire navigateWire = (NavigateWire)theEObject;
+				T result = caseNavigateWire(navigateWire);
+				if (result == null) result = caseCompositeWire(navigateWire);
+				if (result == null) result = caseWireEdge(navigateWire);
+				if (result == null) result = caseNamedElement(navigateWire);
+				if (result == null) result = caseContainsWires(navigateWire);
+				if (result == null) result = caseGeneratesElements(navigateWire);
+				if (result == null) result = caseGeneratedElement(navigateWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.SELECT_WIRE: {
+				SelectWire selectWire = (SelectWire)theEObject;
+				T result = caseSelectWire(selectWire);
+				if (result == null) result = caseCompositeWire(selectWire);
+				if (result == null) result = caseWireEdgeDestination(selectWire);
+				if (result == null) result = caseWireEdge(selectWire);
+				if (result == null) result = caseNamedElement(selectWire);
+				if (result == null) result = caseContainsWires(selectWire);
+				if (result == null) result = caseGeneratesElements(selectWire);
+				if (result == null) result = caseGeneratedElement(selectWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -226,6 +318,111 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterWire(ParameterWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Create Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Create Wire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCreateWire(CreateWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Set Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Set Wire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSetWire(SetWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Update Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Update Wire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdateWire(UpdateWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Save Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Save Wire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSaveWire(SaveWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Link Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Link Wire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLinkWire(LinkWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Navigate Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Navigate Wire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNavigateWire(NavigateWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Select Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Select Wire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSelectWire(SelectWire object) {
 		return null;
 	}
 

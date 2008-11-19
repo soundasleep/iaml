@@ -5,6 +5,26 @@
     xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" domainFileExtension="iaml"
     dynamicTemplates="true"
     templateDirectory="/org.openiaml.model/templates/">
+  <audits>
+    <categories
+        id="org.openiaml.model.model.diagram.audits"
+        name="Root Audits"
+        path="//@audits/@categories.0"
+        audits="//@audits/@rules.0"/>
+    <rules
+        name="no empty page names"
+        id="org.openiaml.model.model.diagram.audit.page.empty"
+        message="page name cannot be empty"
+        category="//@audits/@categories.0">
+      <rule
+          body="not(self.name = '')"/>
+      <target
+          xsi:type="gmfgen:GenDomainElementTarget">
+        <element
+            href="iaml.genmodel#//model/visual/Page"/>
+      </target>
+    </rules>
+  </audits>
   <diagram
       visualID="79"
       editPartClassName="InternetApplicationEditPart"
@@ -12,7 +32,9 @@
       notationViewFactoryClassName="InternetApplicationViewFactory"
       canonicalEditPolicyClassName="InternetApplicationCanonicalEditPolicy"
       iconProviderPriority="Low"
-      validationProviderPriority="Low">
+      validationProviderPriority="Medium"
+      validationEnabled="true"
+      validationDecorators="true">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
@@ -1123,6 +1145,6 @@
   <expressionProviders>
     <providers
         xsi:type="gmfgen:GenExpressionInterpreter"
-        expressions="//@diagram/@topLevelNodes.1/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.2/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.3/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.4/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.5/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.6/@modelFacet/@modelElementSelector //@diagram/@links.0/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector"/>
+        expressions="//@diagram/@topLevelNodes.1/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.2/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.3/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.4/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.5/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.6/@modelFacet/@modelElementSelector //@diagram/@links.0/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector //@audits/@rules.0/@rule"/>
   </expressionProviders>
 </gmfgen:GenEditorGenerator>

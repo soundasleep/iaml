@@ -71,6 +71,69 @@ public interface WiresFactory extends EFactory {
 	ParameterWire createParameterWire();
 
 	/**
+	 * Returns a new object of class '<em>Create Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Create Wire</em>'.
+	 * @generated
+	 */
+	CreateWire createCreateWire();
+
+	/**
+	 * Returns a new object of class '<em>Set Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Set Wire</em>'.
+	 * @generated
+	 */
+	SetWire createSetWire();
+
+	/**
+	 * Returns a new object of class '<em>Update Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Update Wire</em>'.
+	 * @generated
+	 */
+	UpdateWire createUpdateWire();
+
+	/**
+	 * Returns a new object of class '<em>Save Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Save Wire</em>'.
+	 * @generated
+	 */
+	SaveWire createSaveWire();
+
+	/**
+	 * Returns a new object of class '<em>Link Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Link Wire</em>'.
+	 * @generated
+	 */
+	LinkWire createLinkWire();
+
+	/**
+	 * Returns a new object of class '<em>Navigate Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Navigate Wire</em>'.
+	 * @generated
+	 */
+	NavigateWire createNavigateWire();
+
+	/**
+	 * Returns a new object of class '<em>Select Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Select Wire</em>'.
+	 * @generated
+	 */
+	SelectWire createSelectWire();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

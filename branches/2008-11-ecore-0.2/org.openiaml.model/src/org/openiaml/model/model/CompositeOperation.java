@@ -7,6 +7,7 @@
 package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
+import org.openiaml.model.model.scopes.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,10 +26,10 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getCompositeOperation()
- * @model
+ * @model annotation="http://openiaml.org/comment comment='Scope supertype added in 0.2'"
  * @generated
  */
-public interface CompositeOperation extends ChainedOperation, ContainsOperations, ContainsWires, GeneratesElements {
+public interface CompositeOperation extends ChainedOperation, ContainsOperations, ContainsWires, GeneratesElements, Scope {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ActivityNode}.

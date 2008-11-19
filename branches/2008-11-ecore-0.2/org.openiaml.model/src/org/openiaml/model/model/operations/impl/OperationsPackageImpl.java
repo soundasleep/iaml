@@ -18,6 +18,7 @@ import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.StopNode;
+import org.openiaml.model.model.scopes.impl.PackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -125,18 +126,21 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
 		VisualPackageImpl theVisualPackage = (VisualPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) instanceof VisualPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) : VisualPackage.eINSTANCE);
 		WiresPackageImpl theWiresPackage = (WiresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) instanceof WiresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) : WiresPackage.eINSTANCE);
+		PackageImpl thePackage = (PackageImpl)(EPackage.Registry.INSTANCE.getEPackage(org.openiaml.model.model.scopes.Package.eNS_URI) instanceof PackageImpl ? EPackage.Registry.INSTANCE.getEPackage(org.openiaml.model.model.scopes.Package.eNS_URI) : org.openiaml.model.model.scopes.Package.eINSTANCE);
 
 		// Create package meta-data objects
 		theOperationsPackage.createPackageContents();
 		theModelPackage.createPackageContents();
 		theVisualPackage.createPackageContents();
 		theWiresPackage.createPackageContents();
+		thePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theOperationsPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
 		theVisualPackage.initializePackageContents();
 		theWiresPackage.initializePackageContents();
+		thePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theOperationsPackage.freeze();

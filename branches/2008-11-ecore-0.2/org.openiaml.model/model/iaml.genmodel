@@ -169,7 +169,8 @@
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionOperation"/>
     </nestedGenPackages>
-    <nestedGenPackages disposableProviderFactory="true" ecorePackage="iaml.ecore#//scopes">
+    <nestedGenPackages prefix="" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
+        ecorePackage="iaml.ecore#//scopes">
       <genClasses image="false" ecoreClass="iaml.ecore#//scopes/Scope">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//scopes/Scope/domainObjects"/>

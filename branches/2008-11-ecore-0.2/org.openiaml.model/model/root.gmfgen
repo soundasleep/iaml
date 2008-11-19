@@ -10,11 +10,11 @@
         id="org.openiaml.model.model.diagram.audits"
         name="Root Audits"
         path="//@audits/@categories.0"
-        audits="//@audits/@rules.0"/>
+        audits="//@audits/@rules.0 //@audits/@rules.1"/>
     <rules
-        name="no empty page names"
+        name="Page name cannot be blank"
         id="org.openiaml.model.model.diagram.audit.page.empty"
-        message="page name cannot be empty"
+        message="Page name cannot be blank"
         category="//@audits/@categories.0">
       <rule
           body="not(self.name = '')"/>
@@ -22,6 +22,19 @@
           xsi:type="gmfgen:GenDomainElementTarget">
         <element
             href="iaml.genmodel#//model/visual/Page"/>
+      </target>
+    </rules>
+    <rules
+        name="Operation name cannot be blank"
+        id="org.openiaml.model.model.diagram.audit.operation.empty"
+        message="Operation name cannot be blank"
+        category="//@audits/@categories.0">
+      <rule
+          body="not(self.name = '')"/>
+      <target
+          xsi:type="gmfgen:GenDomainElementTarget">
+        <element
+            href="iaml.genmodel#//model/Operation"/>
       </target>
     </rules>
   </audits>
@@ -32,7 +45,7 @@
       notationViewFactoryClassName="InternetApplicationViewFactory"
       canonicalEditPolicyClassName="InternetApplicationCanonicalEditPolicy"
       iconProviderPriority="Low"
-      validationProviderPriority="Medium"
+      validationProviderPriority="Low"
       validationEnabled="true"
       validationDecorators="true">
     <diagramRunTimeClass
@@ -1145,6 +1158,6 @@
   <expressionProviders>
     <providers
         xsi:type="gmfgen:GenExpressionInterpreter"
-        expressions="//@diagram/@topLevelNodes.1/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.2/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.3/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.4/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.5/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.6/@modelFacet/@modelElementSelector //@diagram/@links.0/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector //@audits/@rules.0/@rule"/>
+        expressions="//@diagram/@topLevelNodes.1/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.2/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.3/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.4/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.5/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.6/@modelFacet/@modelElementSelector //@diagram/@links.0/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector //@audits/@rules.0/@rule //@audits/@rules.1/@rule"/>
   </expressionProviders>
 </gmfgen:GenEditorGenerator>

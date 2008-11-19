@@ -270,16 +270,27 @@
       id="org.openiaml.model.model.diagram.audits"
       name="Root Audits">
     <audits
-        name="no empty page names"
+        name="Page name cannot be blank"
         id="org.openiaml.model.model.diagram.audit.page.empty"
-        severity="WARNING"
-        message="page name cannot be empty">
+        message="Page name cannot be blank">
       <rule
-          body="not(self.name = 'kittens')"/>
+          body="not(self.name = '')"/>
       <target
           xsi:type="gmfmap:DomainElementTarget">
         <element
             href="iaml.ecore#//visual/Page"/>
+      </target>
+    </audits>
+    <audits
+        name="Operation name cannot be blank"
+        id="org.openiaml.model.model.diagram.audit.operation.empty"
+        message="Operation name cannot be blank">
+      <rule
+          body="not(self.name = '')"/>
+      <target
+          xsi:type="gmfmap:DomainElementTarget">
+        <element
+            href="iaml.ecore#//Operation"/>
       </target>
     </audits>
   </audits>

@@ -266,4 +266,21 @@
     <palette
         href="root.gmftool#//@palette"/>
   </diagram>
+  <audits
+      id="org.openiaml.model.model.diagram.audits"
+      name="Root Audits">
+    <audits
+        name="no empty page names"
+        id="org.openiaml.model.model.diagram.audit.page.empty"
+        severity="WARNING"
+        message="page name cannot be empty">
+      <rule
+          body="not(self.name = 'kittens')"/>
+      <target
+          xsi:type="gmfmap:DomainElementTarget">
+        <element
+            href="iaml.ecore#//visual/Page"/>
+      </target>
+    </audits>
+  </audits>
 </gmfmap:Mapping>

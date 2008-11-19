@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension
+         point="org.openarchitectureware.adapter.emf.check.checks">
+      <metaModel
+            nsURI="http://openiaml.org/model">
+         <checkFile
+               path="src/metamodel/Checks.chk">
+         </checkFile>
+      </metaModel>
+   </extension>
   
 </plugin>

@@ -4,6 +4,7 @@ Bundle-Name: Oaw Codegen Plugin for Iaml
 Bundle-SymbolicName: org.openiaml.model.codegen.oaw;singleton:=true
 Bundle-Version: 0.1.0
 Require-Bundle: org.openarchitectureware.dependencies,
- org.openiaml.model
+ org.openiaml.model,
+ org.openarchitectureware.adapter.emf.check
 Export-Package: org.openiaml.model.codegen.oaw
 Bundle-Vendor: www.openiaml.org

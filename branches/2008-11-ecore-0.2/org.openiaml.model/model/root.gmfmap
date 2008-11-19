@@ -266,32 +266,4 @@
     <palette
         href="root.gmftool#//@palette"/>
   </diagram>
-  <audits
-      id="org.openiaml.model.model.diagram.audits"
-      name="Root Audits">
-    <audits
-        name="Page name cannot be blank"
-        id="org.openiaml.model.model.diagram.audit.page.empty"
-        message="Page name cannot be blank">
-      <rule
-          body="not(self.name = '')"/>
-      <target
-          xsi:type="gmfmap:DomainElementTarget">
-        <element
-            href="iaml.ecore#//visual/Page"/>
-      </target>
-    </audits>
-    <audits
-        name="Operation name cannot be blank"
-        id="org.openiaml.model.model.diagram.audit.operation.empty"
-        message="Operation name cannot be blank">
-      <rule
-          body="not(self.name = '')"/>
-      <target
-          xsi:type="gmfmap:DomainElementTarget">
-        <element
-            href="iaml.ecore#//Operation"/>
-      </target>
-    </audits>
-  </audits>
 </gmfmap:Mapping>

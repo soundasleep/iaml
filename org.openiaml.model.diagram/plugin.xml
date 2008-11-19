@@ -636,48 +636,8 @@
       <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
       <persistent value="true"/>
    </extension>
-<extension point="org.eclipse.emf.validation.constraintProviders">
-      <?gmfgen generated="true"?>
-            <category id="org.openiaml.model.model.diagram.audits" mandatory="false" name="Root Audits">
-         <![CDATA[]]>
-      </category>
-      <constraintProvider cache="true">
-         <package namespaceUri="http://openiaml.org/model/visual"/>
-         <package namespaceUri="http://openiaml.org/model"/>
-               <constraints categories="org.openiaml.model.model.diagram.audits">
-                  <constraint id="org.openiaml.model.model.diagram.audit.page.empty"
-            lang="OCL"
-            name="Page name cannot be blank"
-            mode="Batch"
-            severity="ERROR" statusCode="200">
-            <![CDATA[not(self.name = '')]]>
-            <description><![CDATA[]]></description>
-            <message><![CDATA[Page name cannot be blank]]></message>
-            <target class="model.visual.Page"/>
-         </constraint>
-                  <constraint id="org.openiaml.model.model.diagram.audit.operation.empty"
-            lang="OCL"
-            name="Operation name cannot be blank"
-            mode="Batch"
-            severity="ERROR" statusCode="200">
-            <![CDATA[not(self.name = '')]]>
-            <description><![CDATA[]]></description>
-            <message><![CDATA[Operation name cannot be blank]]></message>
-            <target class="model.Operation"/>
-         </constraint>
-                  </constraints>
-      </constraintProvider>
-   </extension>
-<extension point="org.eclipse.emf.validation.constraintBindings">
-      <?gmfgen generated="true"?>
-                  <clientContext default="false" id="org.openiaml.model.diagram.DefaultCtx">
-         <selector class="org.openiaml.model.model.diagram.providers.IamlValidationProvider$DefaultCtx1"/>
-      </clientContext>
-      <binding context="org.openiaml.model.diagram.DefaultCtx">
-                  <constraint ref="org.openiaml.model.diagram.org.openiaml.model.model.diagram.audit.page.empty"/>
-                  <constraint ref="org.openiaml.model.diagram.org.openiaml.model.model.diagram.audit.operation.empty"/>
-               </binding>
-               </extension><extension id="ValidationContributionItemProvider" name="Validation"
+
+<extension id="ValidationContributionItemProvider" name="Validation"
       point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
       <?gmfgen generated="true"?>
       <contributionItemProvider

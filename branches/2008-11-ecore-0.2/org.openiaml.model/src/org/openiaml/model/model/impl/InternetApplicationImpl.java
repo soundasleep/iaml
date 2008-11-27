@@ -10,20 +10,15 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -41,8 +36,8 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.scopes.Scope;
+import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
-import org.openiaml.model.model.scopes.SiteScope;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,7 +62,6 @@ import org.openiaml.model.model.scopes.SiteScope;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRuntimeUrl <em>Runtime Url</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getSites <em>Sites</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getSessions <em>Sessions</em>}</li>
  * </ul>
  * </p>
@@ -284,16 +278,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected String runtimeUrl = RUNTIME_URL_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSites() <em>Sites</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSites()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<SiteScope> sites;
 
 	/**
 	 * The cached value of the '{@link #getSessions() <em>Sessions</em>}' reference list.
@@ -614,18 +598,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<SiteScope> getSites() {
-		if (sites == null) {
-			sites = new EObjectResolvingEList<SiteScope>(SiteScope.class, this, ModelPackage.INTERNET_APPLICATION__SITES);
-		}
-		return sites;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Session> getSessions() {
 		if (sessions == null) {
 			sessions = new EObjectResolvingEList<Session>(Session.class, this, ModelPackage.INTERNET_APPLICATION__SESSIONS);
@@ -721,8 +693,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getDomainStores();
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				return getRuntimeUrl();
-			case ModelPackage.INTERNET_APPLICATION__SITES:
-				return getSites();
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				return getSessions();
 		}
@@ -796,10 +766,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl((String)newValue);
 				return;
-			case ModelPackage.INTERNET_APPLICATION__SITES:
-				getSites().clear();
-				getSites().addAll((Collection<? extends SiteScope>)newValue);
-				return;
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				getSessions().clear();
 				getSessions().addAll((Collection<? extends Session>)newValue);
@@ -864,9 +830,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl(RUNTIME_URL_EDEFAULT);
 				return;
-			case ModelPackage.INTERNET_APPLICATION__SITES:
-				getSites().clear();
-				return;
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				getSessions().clear();
 				return;
@@ -914,8 +877,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return domainStores != null && !domainStores.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				return RUNTIME_URL_EDEFAULT == null ? runtimeUrl != null : !RUNTIME_URL_EDEFAULT.equals(runtimeUrl);
-			case ModelPackage.INTERNET_APPLICATION__SITES:
-				return sites != null && !sites.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				return sessions != null && !sessions.isEmpty();
 		}
@@ -964,9 +925,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS;
-				case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS;
-				case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES;
+				case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS: return ScopesPackage.SCOPE__DOMAIN_OBJECTS;
+				case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS: return ScopesPackage.SCOPE__DOMAIN_VIEWS;
+				case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES: return ScopesPackage.SCOPE__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
@@ -1015,9 +976,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS;
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS;
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES: return ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES;
+				case ScopesPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS;
+				case ScopesPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS;
+				case ScopesPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

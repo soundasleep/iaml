@@ -8,25 +8,25 @@ package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.openiaml.model.model.wires.UpdateWire;
+import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Update Wire</b></em>'.
+ * An implementation of the model object '<em><b>Commit Wire</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class UpdateWireImpl extends CompositeWireImpl implements UpdateWire {
+public class CommitWireImpl extends CompositeWireImpl implements CommitWire {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UpdateWireImpl() {
+	protected CommitWireImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class UpdateWireImpl extends CompositeWireImpl implements UpdateWire {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return WiresPackage.Literals.UPDATE_WIRE;
+		return WiresPackage.Literals.COMMIT_WIRE;
 	}
 
-} //UpdateWireImpl
+} //CommitWireImpl

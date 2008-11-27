@@ -14,6 +14,7 @@ import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.scopes.Scope;
+import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -21,17 +22,17 @@ import org.openiaml.model.model.scopes.Session;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.openiaml.model.model.scopes.Package
+ * @see org.openiaml.model.model.scopes.ScopesPackage
  * @generated
  */
-public class AdapterFactory extends AdapterFactoryImpl {
+public class ScopesAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static org.openiaml.model.model.scopes.Package modelPackage;
+	protected static ScopesPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -39,9 +40,9 @@ public class AdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AdapterFactory() {
+	public ScopesAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = org.openiaml.model.model.scopes.Package.eINSTANCE;
+			modelPackage = ScopesPackage.eINSTANCE;
 		}
 	}
 
@@ -70,8 +71,8 @@ public class AdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Switch<Adapter> modelSwitch =
-		new Switch<Adapter>() {
+	protected ScopesSwitch<Adapter> modelSwitch =
+		new ScopesSwitch<Adapter>() {
 			@Override
 			public Adapter caseScope(Scope object) {
 				return createScopeAdapter();
@@ -123,20 +124,6 @@ public class AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScopeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.scopes.SiteScope <em>Site Scope</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.scopes.SiteScope
-	 * @generated
-	 */
-	public Adapter createSiteScopeAdapter() {
 		return null;
 	}
 
@@ -208,4 +195,4 @@ public class AdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //AdapterFactory
+} //ScopesAdapterFactory

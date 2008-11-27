@@ -8,25 +8,25 @@ package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.openiaml.model.model.wires.SaveWire;
+import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Save Wire</b></em>'.
+ * An implementation of the model object '<em><b>Condition Wire</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class SaveWireImpl extends CompositeWireImpl implements SaveWire {
+public class ConditionWireImpl extends CompositeWireImpl implements ConditionWire {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SaveWireImpl() {
+	protected ConditionWireImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class SaveWireImpl extends CompositeWireImpl implements SaveWire {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return WiresPackage.Literals.SAVE_WIRE;
+		return WiresPackage.Literals.CONDITION_WIRE;
 	}
 
-} //SaveWireImpl
+} //ConditionWireImpl

@@ -8,25 +8,25 @@ package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.openiaml.model.model.wires.LinkWire;
+import org.openiaml.model.model.wires.FindWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Link Wire</b></em>'.
+ * An implementation of the model object '<em><b>Find Wire</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class LinkWireImpl extends CompositeWireImpl implements LinkWire {
+public class FindWireImpl extends CompositeWireImpl implements FindWire {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LinkWireImpl() {
+	protected FindWireImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class LinkWireImpl extends CompositeWireImpl implements LinkWire {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return WiresPackage.Literals.LINK_WIRE;
+		return WiresPackage.Literals.FIND_WIRE;
 	}
 
-} //LinkWireImpl
+} //FindWireImpl

@@ -9,13 +9,13 @@ package org.openiaml.model.model.wires;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Save Wire</b></em>'.
+ * A representation of the model object '<em><b>Condition Wire</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.openiaml.model.model.wires.WiresPackage#getSaveWire()
+ * @see org.openiaml.model.model.wires.WiresPackage#getConditionWire()
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface SaveWire extends CompositeWire {
-} // SaveWire
+public interface ConditionWire extends CompositeWire {
+} // ConditionWire

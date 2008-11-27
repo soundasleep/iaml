@@ -8,25 +8,25 @@ package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.openiaml.model.model.wires.CreateWire;
+import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Create Wire</b></em>'.
+ * An implementation of the model object '<em><b>Show Wire</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class CreateWireImpl extends CompositeWireImpl implements CreateWire {
+public class ShowWireImpl extends CompositeWireImpl implements ShowWire {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CreateWireImpl() {
+	protected ShowWireImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class CreateWireImpl extends CompositeWireImpl implements CreateWire {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return WiresPackage.Literals.CREATE_WIRE;
+		return WiresPackage.Literals.SHOW_WIRE;
 	}
 
-} //CreateWireImpl
+} //ShowWireImpl

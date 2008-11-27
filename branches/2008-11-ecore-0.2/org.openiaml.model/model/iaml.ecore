@@ -114,12 +114,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtimeUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="http://localhost:8080/output/"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sites" upperBound="-1"
-        eType="#//scopes/SiteScope">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
         eType="#//scopes/Session">
       <eAnnotations source="http://openiaml.org/comment">
@@ -297,29 +291,20 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CreateWire" eSuperTypes="#//wires/CompositeWire">
+    <eClassifiers xsi:type="ecore:EClass" name="FindWire" eSuperTypes="#//wires/CompositeWire">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SetWire" eSuperTypes="#//wires/CompositeWire">
+    <eClassifiers xsi:type="ecore:EClass" name="ShowWire" eSuperTypes="#//wires/CompositeWire">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="UpdateWire" eSuperTypes="#//wires/CompositeWire">
+    <eClassifiers xsi:type="ecore:EClass" name="CommitWire" eSuperTypes="#//wires/CompositeWire">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SaveWire" eSuperTypes="#//wires/CompositeWire">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LinkWire" eSuperTypes="#//wires/CompositeWire">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
+        <details key="comment" value="&quot;Commit&quot; is the same as &quot;Update&quot;, isn't it?"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NavigateWire" eSuperTypes="#//wires/CompositeWire">
@@ -327,13 +312,19 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SelectWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="FilterWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
+        <details key="comment" value="parameters can be provided by ParameterWires"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
           defaultValueLiteral="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionWire" eSuperTypes="#//wires/CompositeWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
@@ -357,16 +348,6 @@
           eType="#//DerivedView"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="domainInstances" upperBound="-1"
           eType="#//DomainObjectInstance"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SiteScope" eSuperTypes="#//NamedElement #//scopes/Scope #//ContainsOperations">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
-          eType="#//scopes/Session">
-        <eAnnotations source="http://openiaml.org/comment">
-          <details key="added" value="0.2"/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
-          eType="#//ApplicationElement"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//scopes/Scope #//ContainsOperations">
       <eStructuralFeatures xsi:type="ecore:EReference" name="agent" eType="#//VisitorAgent"

@@ -26,7 +26,7 @@ import org.openiaml.model.model.VisitorAgent;
  * </ul>
  * </p>
  *
- * @see org.openiaml.model.model.scopes.Package#getSession()
+ * @see org.openiaml.model.model.scopes.ScopesPackage#getSession()
  * @model
  * @generated
  */
@@ -41,7 +41,7 @@ public interface Session extends NamedElement, Scope, ContainsOperations {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Agent</em>' containment reference.
 	 * @see #setAgent(VisitorAgent)
-	 * @see org.openiaml.model.model.scopes.Package#getSession_Agent()
+	 * @see org.openiaml.model.model.scopes.ScopesPackage#getSession_Agent()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -67,7 +67,7 @@ public interface Session extends NamedElement, Scope, ContainsOperations {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Components</em>' reference list.
-	 * @see org.openiaml.model.model.scopes.Package#getSession_Components()
+	 * @see org.openiaml.model.model.scopes.ScopesPackage#getSession_Components()
 	 * @model
 	 * @generated
 	 */

@@ -11,7 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.openiaml.model.model.scopes.Factory;
+import org.openiaml.model.model.scopes.ScopesFactory;
+import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -20,24 +21,24 @@ import org.openiaml.model.model.scopes.Session;
  * <!-- end-user-doc -->
  * @generated
  */
-public class FactoryImpl extends EFactoryImpl implements Factory {
+public class ScopesFactoryImpl extends EFactoryImpl implements ScopesFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static Factory init() {
+	public static ScopesFactory init() {
 		try {
-			Factory theFactory = (Factory)EPackage.Registry.INSTANCE.getEFactory("http://openiaml.org/model/scopes"); 
-			if (theFactory != null) {
-				return theFactory;
+			ScopesFactory theScopesFactory = (ScopesFactory)EPackage.Registry.INSTANCE.getEFactory("http://openiaml.org/model/scopes"); 
+			if (theScopesFactory != null) {
+				return theScopesFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new FactoryImpl();
+		return new ScopesFactoryImpl();
 	}
 
 	/**
@@ -46,7 +47,7 @@ public class FactoryImpl extends EFactoryImpl implements Factory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FactoryImpl() {
+	public ScopesFactoryImpl() {
 		super();
 	}
 
@@ -58,7 +59,7 @@ public class FactoryImpl extends EFactoryImpl implements Factory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case org.openiaml.model.model.scopes.Package.SESSION: return createSession();
+			case ScopesPackage.SESSION: return createSession();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -79,8 +80,19 @@ public class FactoryImpl extends EFactoryImpl implements Factory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.openiaml.model.model.scopes.Package getPackage() {
-		return (org.openiaml.model.model.scopes.Package)getEPackage();
+	public ScopesPackage getScopesPackage() {
+		return (ScopesPackage)getEPackage();
 	}
 
-} //FactoryImpl
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static ScopesPackage getPackage() {
+		return ScopesPackage.eINSTANCE;
+	}
+
+} //ScopesFactoryImpl

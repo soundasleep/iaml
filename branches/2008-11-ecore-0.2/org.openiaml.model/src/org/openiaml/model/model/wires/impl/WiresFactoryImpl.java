@@ -14,18 +14,17 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
-import org.openiaml.model.model.wires.CreateWire;
-import org.openiaml.model.model.wires.LinkWire;
+import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.FilterWire;
+import org.openiaml.model.model.wires.FindWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
-import org.openiaml.model.model.wires.SaveWire;
-import org.openiaml.model.model.wires.SelectWire;
-import org.openiaml.model.model.wires.SetWire;
+import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.model.wires.UpdateWire;
 import org.openiaml.model.model.wires.WiresFactory;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -78,13 +77,12 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.SYNC_WIRE: return createSyncWire();
 			case WiresPackage.RUN_INSTANCE_WIRE: return createRunInstanceWire();
 			case WiresPackage.PARAMETER_WIRE: return createParameterWire();
-			case WiresPackage.CREATE_WIRE: return createCreateWire();
-			case WiresPackage.SET_WIRE: return createSetWire();
-			case WiresPackage.UPDATE_WIRE: return createUpdateWire();
-			case WiresPackage.SAVE_WIRE: return createSaveWire();
-			case WiresPackage.LINK_WIRE: return createLinkWire();
+			case WiresPackage.FIND_WIRE: return createFindWire();
+			case WiresPackage.SHOW_WIRE: return createShowWire();
+			case WiresPackage.COMMIT_WIRE: return createCommitWire();
 			case WiresPackage.NAVIGATE_WIRE: return createNavigateWire();
-			case WiresPackage.SELECT_WIRE: return createSelectWire();
+			case WiresPackage.FILTER_WIRE: return createFilterWire();
+			case WiresPackage.CONDITION_WIRE: return createConditionWire();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -150,9 +148,9 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CreateWire createCreateWire() {
-		CreateWireImpl createWire = new CreateWireImpl();
-		return createWire;
+	public FindWire createFindWire() {
+		FindWireImpl findWire = new FindWireImpl();
+		return findWire;
 	}
 
 	/**
@@ -160,9 +158,9 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SetWire createSetWire() {
-		SetWireImpl setWire = new SetWireImpl();
-		return setWire;
+	public ShowWire createShowWire() {
+		ShowWireImpl showWire = new ShowWireImpl();
+		return showWire;
 	}
 
 	/**
@@ -170,29 +168,9 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UpdateWire createUpdateWire() {
-		UpdateWireImpl updateWire = new UpdateWireImpl();
-		return updateWire;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SaveWire createSaveWire() {
-		SaveWireImpl saveWire = new SaveWireImpl();
-		return saveWire;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LinkWire createLinkWire() {
-		LinkWireImpl linkWire = new LinkWireImpl();
-		return linkWire;
+	public CommitWire createCommitWire() {
+		CommitWireImpl commitWire = new CommitWireImpl();
+		return commitWire;
 	}
 
 	/**
@@ -210,9 +188,19 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SelectWire createSelectWire() {
-		SelectWireImpl selectWire = new SelectWireImpl();
-		return selectWire;
+	public FilterWire createFilterWire() {
+		FilterWireImpl filterWire = new FilterWireImpl();
+		return filterWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConditionWire createConditionWire() {
+		ConditionWireImpl conditionWire = new ConditionWireImpl();
+		return conditionWire;
 	}
 
 	/**

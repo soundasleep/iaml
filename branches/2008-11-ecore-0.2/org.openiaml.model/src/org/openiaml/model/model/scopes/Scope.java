@@ -28,7 +28,7 @@ import org.openiaml.model.model.DomainObjectInstance;
  * </ul>
  * </p>
  *
- * @see org.openiaml.model.model.scopes.Package#getScope()
+ * @see org.openiaml.model.model.scopes.ScopesPackage#getScope()
  * @model interface="true" abstract="true"
  * @generated
  */
@@ -43,7 +43,7 @@ public interface Scope extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domain Objects</em>' reference list.
-	 * @see org.openiaml.model.model.scopes.Package#getScope_DomainObjects()
+	 * @see org.openiaml.model.model.scopes.ScopesPackage#getScope_DomainObjects()
 	 * @model
 	 * @generated
 	 */
@@ -59,7 +59,7 @@ public interface Scope extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domain Views</em>' reference list.
-	 * @see org.openiaml.model.model.scopes.Package#getScope_DomainViews()
+	 * @see org.openiaml.model.model.scopes.ScopesPackage#getScope_DomainViews()
 	 * @model
 	 * @generated
 	 */
@@ -75,7 +75,7 @@ public interface Scope extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domain Instances</em>' reference list.
-	 * @see org.openiaml.model.model.scopes.Package#getScope_DomainInstances()
+	 * @see org.openiaml.model.model.scopes.ScopesPackage#getScope_DomainInstances()
 	 * @model
 	 * @generated
 	 */

@@ -9,7 +9,6 @@ package org.openiaml.model.model;
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.Session;
-import org.openiaml.model.model.scopes.SiteScope;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,6 @@ import org.openiaml.model.model.scopes.SiteScope;
  *   <li>{@link org.openiaml.model.model.InternetApplication#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getRuntimeUrl <em>Runtime Url</em>}</li>
- *   <li>{@link org.openiaml.model.model.InternetApplication#getSites <em>Sites</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getSessions <em>Sessions</em>}</li>
  * </ul>
  * </p>
@@ -108,22 +106,6 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 * @generated
 	 */
 	void setRuntimeUrl(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Sites</b></em>' reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.scopes.SiteScope}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sites</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sites</em>' reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getInternetApplication_Sites()
-	 * @model annotation="http://openiaml.org/comment added='0.2'"
-	 * @generated
-	 */
-	EList<SiteScope> getSites();
 
 	/**
 	 * Returns the value of the '<em><b>Sessions</b></em>' reference list.

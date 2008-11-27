@@ -2407,22 +2407,13 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
-	 * The feature id for the '<em><b>Sites</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERNET_APPLICATION__SITES = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
-
-	/**
 	 * The feature id for the '<em><b>Sessions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__SESSIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
+	int INTERNET_APPLICATION__SESSIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
@@ -2431,7 +2422,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3950,17 +3941,6 @@ public interface ModelPackage extends EPackage {
 	EAttribute getInternetApplication_RuntimeUrl();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.InternetApplication#getSites <em>Sites</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sites</em>'.
-	 * @see org.openiaml.model.model.InternetApplication#getSites()
-	 * @see #getInternetApplication()
-	 * @generated
-	 */
-	EReference getInternetApplication_Sites();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.InternetApplication#getSessions <em>Sessions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4830,14 +4810,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INTERNET_APPLICATION__RUNTIME_URL = eINSTANCE.getInternetApplication_RuntimeUrl();
-
-		/**
-		 * The meta object literal for the '<em><b>Sites</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INTERNET_APPLICATION__SITES = eINSTANCE.getInternetApplication_Sites();
 
 		/**
 		 * The meta object literal for the '<em><b>Sessions</b></em>' reference list feature.

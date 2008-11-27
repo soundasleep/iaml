@@ -71,49 +71,31 @@ public interface WiresFactory extends EFactory {
 	ParameterWire createParameterWire();
 
 	/**
-	 * Returns a new object of class '<em>Create Wire</em>'.
+	 * Returns a new object of class '<em>Find Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Create Wire</em>'.
+	 * @return a new object of class '<em>Find Wire</em>'.
 	 * @generated
 	 */
-	CreateWire createCreateWire();
+	FindWire createFindWire();
 
 	/**
-	 * Returns a new object of class '<em>Set Wire</em>'.
+	 * Returns a new object of class '<em>Show Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Set Wire</em>'.
+	 * @return a new object of class '<em>Show Wire</em>'.
 	 * @generated
 	 */
-	SetWire createSetWire();
+	ShowWire createShowWire();
 
 	/**
-	 * Returns a new object of class '<em>Update Wire</em>'.
+	 * Returns a new object of class '<em>Commit Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Update Wire</em>'.
+	 * @return a new object of class '<em>Commit Wire</em>'.
 	 * @generated
 	 */
-	UpdateWire createUpdateWire();
-
-	/**
-	 * Returns a new object of class '<em>Save Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Save Wire</em>'.
-	 * @generated
-	 */
-	SaveWire createSaveWire();
-
-	/**
-	 * Returns a new object of class '<em>Link Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Link Wire</em>'.
-	 * @generated
-	 */
-	LinkWire createLinkWire();
+	CommitWire createCommitWire();
 
 	/**
 	 * Returns a new object of class '<em>Navigate Wire</em>'.
@@ -125,13 +107,22 @@ public interface WiresFactory extends EFactory {
 	NavigateWire createNavigateWire();
 
 	/**
-	 * Returns a new object of class '<em>Select Wire</em>'.
+	 * Returns a new object of class '<em>Filter Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Select Wire</em>'.
+	 * @return a new object of class '<em>Filter Wire</em>'.
 	 * @generated
 	 */
-	SelectWire createSelectWire();
+	FilterWire createFilterWire();
+
+	/**
+	 * Returns a new object of class '<em>Condition Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Condition Wire</em>'.
+	 * @generated
+	 */
+	ConditionWire createConditionWire();
 
 	/**
 	 * Returns the package supported by this factory.

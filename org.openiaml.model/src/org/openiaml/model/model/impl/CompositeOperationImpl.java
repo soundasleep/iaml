@@ -35,6 +35,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.scopes.Scope;
+import org.openiaml.model.model.scopes.ScopesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -614,9 +615,9 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS;
-				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS;
-				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES;
+				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS: return ScopesPackage.SCOPE__DOMAIN_OBJECTS;
+				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS: return ScopesPackage.SCOPE__DOMAIN_VIEWS;
+				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES: return ScopesPackage.SCOPE__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
@@ -651,9 +652,9 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS;
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS;
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES;
+				case ScopesPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS;
+				case ScopesPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS;
+				case ScopesPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

@@ -38,6 +38,7 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.scopes.Scope;
+import org.openiaml.model.model.scopes.ScopesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -896,9 +897,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS;
-				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS;
-				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES;
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS: return ScopesPackage.SCOPE__DOMAIN_OBJECTS;
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS: return ScopesPackage.SCOPE__DOMAIN_VIEWS;
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES: return ScopesPackage.SCOPE__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
@@ -964,9 +965,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS;
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS;
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES;
+				case ScopesPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+				case ScopesPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS;
+				case ScopesPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

@@ -14,6 +14,7 @@ import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.scopes.Scope;
+import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -26,17 +27,17 @@ import org.openiaml.model.model.scopes.Session;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.openiaml.model.model.scopes.Package
+ * @see org.openiaml.model.model.scopes.ScopesPackage
  * @generated
  */
-public class Switch<T> {
+public class ScopesSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static org.openiaml.model.model.scopes.Package modelPackage;
+	protected static ScopesPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -44,9 +45,9 @@ public class Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Switch() {
+	public ScopesSwitch() {
 		if (modelPackage == null) {
-			modelPackage = org.openiaml.model.model.scopes.Package.eINSTANCE;
+			modelPackage = ScopesPackage.eINSTANCE;
 		}
 	}
 
@@ -90,13 +91,13 @@ public class Switch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case org.openiaml.model.model.scopes.Package.SCOPE: {
+			case ScopesPackage.SCOPE: {
 				Scope scope = (Scope)theEObject;
 				T result = caseScope(scope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case org.openiaml.model.model.scopes.Package.SESSION: {
+			case ScopesPackage.SESSION: {
 				Session session = (Session)theEObject;
 				T result = caseSession(session);
 				if (result == null) result = caseNamedElement(session);
@@ -200,4 +201,4 @@ public class Switch<T> {
 		return null;
 	}
 
-} //Switch
+} //ScopesSwitch

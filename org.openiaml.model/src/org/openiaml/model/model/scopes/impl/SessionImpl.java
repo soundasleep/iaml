@@ -34,6 +34,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.VisitorAgent;
 
 import org.openiaml.model.model.scopes.Scope;
+import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -205,7 +206,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return org.openiaml.model.model.scopes.Package.Literals.SESSION;
+		return ScopesPackage.Literals.SESSION;
 	}
 
 	/**
@@ -219,7 +220,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 			generatedBy = (GeneratesElements)eResolveProxy(oldGeneratedBy);
 			if (generatedBy != oldGeneratedBy) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY, oldGeneratedBy, generatedBy));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ScopesPackage.SESSION__GENERATED_BY, oldGeneratedBy, generatedBy));
 			}
 		}
 		return generatedBy;
@@ -243,7 +244,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 		GeneratesElements oldGeneratedBy = generatedBy;
 		generatedBy = newGeneratedBy;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY, oldGeneratedBy, newGeneratedBy);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__GENERATED_BY, oldGeneratedBy, newGeneratedBy);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -265,7 +266,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY, newGeneratedBy, newGeneratedBy));
+			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__GENERATED_BY, newGeneratedBy, newGeneratedBy));
 	}
 
 	/**
@@ -286,7 +287,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 		boolean oldIsGenerated = isGenerated;
 		isGenerated = newIsGenerated;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, org.openiaml.model.model.scopes.Package.SESSION__IS_GENERATED, oldIsGenerated, isGenerated));
+			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__IS_GENERATED, oldIsGenerated, isGenerated));
 	}
 
 	/**
@@ -307,7 +308,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, org.openiaml.model.model.scopes.Package.SESSION__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__ID, oldId, id));
 	}
 
 	/**
@@ -328,7 +329,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, org.openiaml.model.model.scopes.Package.SESSION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__NAME, oldName, name));
 	}
 
 	/**
@@ -338,7 +339,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 */
 	public EList<DomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectResolvingEList<DomainObject>(DomainObject.class, this, org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_OBJECTS);
+			domainObjects = new EObjectResolvingEList<DomainObject>(DomainObject.class, this, ScopesPackage.SESSION__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -350,7 +351,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 */
 	public EList<DerivedView> getDomainViews() {
 		if (domainViews == null) {
-			domainViews = new EObjectResolvingEList<DerivedView>(DerivedView.class, this, org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_VIEWS);
+			domainViews = new EObjectResolvingEList<DerivedView>(DerivedView.class, this, ScopesPackage.SESSION__DOMAIN_VIEWS);
 		}
 		return domainViews;
 	}
@@ -362,7 +363,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 */
 	public EList<DomainObjectInstance> getDomainInstances() {
 		if (domainInstances == null) {
-			domainInstances = new EObjectResolvingEList<DomainObjectInstance>(DomainObjectInstance.class, this, org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_INSTANCES);
+			domainInstances = new EObjectResolvingEList<DomainObjectInstance>(DomainObjectInstance.class, this, ScopesPackage.SESSION__DOMAIN_INSTANCES);
 		}
 		return domainInstances;
 	}
@@ -374,7 +375,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 */
 	public EList<Operation> getOperations() {
 		if (operations == null) {
-			operations = new EObjectContainmentEList<Operation>(Operation.class, this, org.openiaml.model.model.scopes.Package.SESSION__OPERATIONS);
+			operations = new EObjectContainmentEList<Operation>(Operation.class, this, ScopesPackage.SESSION__OPERATIONS);
 		}
 		return operations;
 	}
@@ -397,7 +398,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 		VisitorAgent oldAgent = agent;
 		agent = newAgent;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, org.openiaml.model.model.scopes.Package.SESSION__AGENT, oldAgent, newAgent);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__AGENT, oldAgent, newAgent);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -412,14 +413,14 @@ public class SessionImpl extends EObjectImpl implements Session {
 		if (newAgent != agent) {
 			NotificationChain msgs = null;
 			if (agent != null)
-				msgs = ((InternalEObject)agent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - org.openiaml.model.model.scopes.Package.SESSION__AGENT, null, msgs);
+				msgs = ((InternalEObject)agent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__AGENT, null, msgs);
 			if (newAgent != null)
-				msgs = ((InternalEObject)newAgent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - org.openiaml.model.model.scopes.Package.SESSION__AGENT, null, msgs);
+				msgs = ((InternalEObject)newAgent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__AGENT, null, msgs);
 			msgs = basicSetAgent(newAgent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, org.openiaml.model.model.scopes.Package.SESSION__AGENT, newAgent, newAgent));
+			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__AGENT, newAgent, newAgent));
 	}
 
 	/**
@@ -429,7 +430,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 */
 	public EList<ApplicationElement> getComponents() {
 		if (components == null) {
-			components = new EObjectResolvingEList<ApplicationElement>(ApplicationElement.class, this, org.openiaml.model.model.scopes.Package.SESSION__COMPONENTS);
+			components = new EObjectResolvingEList<ApplicationElement>(ApplicationElement.class, this, ScopesPackage.SESSION__COMPONENTS);
 		}
 		return components;
 	}
@@ -442,7 +443,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY:
+			case ScopesPackage.SESSION__GENERATED_BY:
 				if (generatedBy != null)
 					msgs = ((InternalEObject)generatedBy).eInverseRemove(this, ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS, GeneratesElements.class, msgs);
 				return basicSetGeneratedBy((GeneratesElements)otherEnd, msgs);
@@ -458,11 +459,11 @@ public class SessionImpl extends EObjectImpl implements Session {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY:
+			case ScopesPackage.SESSION__GENERATED_BY:
 				return basicSetGeneratedBy(null, msgs);
-			case org.openiaml.model.model.scopes.Package.SESSION__OPERATIONS:
+			case ScopesPackage.SESSION__OPERATIONS:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
-			case org.openiaml.model.model.scopes.Package.SESSION__AGENT:
+			case ScopesPackage.SESSION__AGENT:
 				return basicSetAgent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -476,26 +477,26 @@ public class SessionImpl extends EObjectImpl implements Session {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY:
+			case ScopesPackage.SESSION__GENERATED_BY:
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
-			case org.openiaml.model.model.scopes.Package.SESSION__IS_GENERATED:
+			case ScopesPackage.SESSION__IS_GENERATED:
 				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
-			case org.openiaml.model.model.scopes.Package.SESSION__ID:
+			case ScopesPackage.SESSION__ID:
 				return getId();
-			case org.openiaml.model.model.scopes.Package.SESSION__NAME:
+			case ScopesPackage.SESSION__NAME:
 				return getName();
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_OBJECTS:
+			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				return getDomainObjects();
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_VIEWS:
+			case ScopesPackage.SESSION__DOMAIN_VIEWS:
 				return getDomainViews();
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_INSTANCES:
+			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
 				return getDomainInstances();
-			case org.openiaml.model.model.scopes.Package.SESSION__OPERATIONS:
+			case ScopesPackage.SESSION__OPERATIONS:
 				return getOperations();
-			case org.openiaml.model.model.scopes.Package.SESSION__AGENT:
+			case ScopesPackage.SESSION__AGENT:
 				return getAgent();
-			case org.openiaml.model.model.scopes.Package.SESSION__COMPONENTS:
+			case ScopesPackage.SESSION__COMPONENTS:
 				return getComponents();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -510,38 +511,38 @@ public class SessionImpl extends EObjectImpl implements Session {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY:
+			case ScopesPackage.SESSION__GENERATED_BY:
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__IS_GENERATED:
+			case ScopesPackage.SESSION__IS_GENERATED:
 				setIsGenerated(((Boolean)newValue).booleanValue());
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__ID:
+			case ScopesPackage.SESSION__ID:
 				setId((String)newValue);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__NAME:
+			case ScopesPackage.SESSION__NAME:
 				setName((String)newValue);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_OBJECTS:
+			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
 				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_VIEWS:
+			case ScopesPackage.SESSION__DOMAIN_VIEWS:
 				getDomainViews().clear();
 				getDomainViews().addAll((Collection<? extends DerivedView>)newValue);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_INSTANCES:
+			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
 				getDomainInstances().clear();
 				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__OPERATIONS:
+			case ScopesPackage.SESSION__OPERATIONS:
 				getOperations().clear();
 				getOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__AGENT:
+			case ScopesPackage.SESSION__AGENT:
 				setAgent((VisitorAgent)newValue);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__COMPONENTS:
+			case ScopesPackage.SESSION__COMPONENTS:
 				getComponents().clear();
 				getComponents().addAll((Collection<? extends ApplicationElement>)newValue);
 				return;
@@ -557,34 +558,34 @@ public class SessionImpl extends EObjectImpl implements Session {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY:
+			case ScopesPackage.SESSION__GENERATED_BY:
 				setGeneratedBy((GeneratesElements)null);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__IS_GENERATED:
+			case ScopesPackage.SESSION__IS_GENERATED:
 				setIsGenerated(IS_GENERATED_EDEFAULT);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__ID:
+			case ScopesPackage.SESSION__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__NAME:
+			case ScopesPackage.SESSION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_OBJECTS:
+			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_VIEWS:
+			case ScopesPackage.SESSION__DOMAIN_VIEWS:
 				getDomainViews().clear();
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_INSTANCES:
+			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
 				getDomainInstances().clear();
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__OPERATIONS:
+			case ScopesPackage.SESSION__OPERATIONS:
 				getOperations().clear();
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__AGENT:
+			case ScopesPackage.SESSION__AGENT:
 				setAgent((VisitorAgent)null);
 				return;
-			case org.openiaml.model.model.scopes.Package.SESSION__COMPONENTS:
+			case ScopesPackage.SESSION__COMPONENTS:
 				getComponents().clear();
 				return;
 		}
@@ -599,25 +600,25 @@ public class SessionImpl extends EObjectImpl implements Session {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case org.openiaml.model.model.scopes.Package.SESSION__GENERATED_BY:
+			case ScopesPackage.SESSION__GENERATED_BY:
 				return generatedBy != null;
-			case org.openiaml.model.model.scopes.Package.SESSION__IS_GENERATED:
+			case ScopesPackage.SESSION__IS_GENERATED:
 				return isGenerated != IS_GENERATED_EDEFAULT;
-			case org.openiaml.model.model.scopes.Package.SESSION__ID:
+			case ScopesPackage.SESSION__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case org.openiaml.model.model.scopes.Package.SESSION__NAME:
+			case ScopesPackage.SESSION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_OBJECTS:
+			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				return domainObjects != null && !domainObjects.isEmpty();
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_VIEWS:
+			case ScopesPackage.SESSION__DOMAIN_VIEWS:
 				return domainViews != null && !domainViews.isEmpty();
-			case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_INSTANCES:
+			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
 				return domainInstances != null && !domainInstances.isEmpty();
-			case org.openiaml.model.model.scopes.Package.SESSION__OPERATIONS:
+			case ScopesPackage.SESSION__OPERATIONS:
 				return operations != null && !operations.isEmpty();
-			case org.openiaml.model.model.scopes.Package.SESSION__AGENT:
+			case ScopesPackage.SESSION__AGENT:
 				return agent != null;
-			case org.openiaml.model.model.scopes.Package.SESSION__COMPONENTS:
+			case ScopesPackage.SESSION__COMPONENTS:
 				return components != null && !components.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -632,15 +633,15 @@ public class SessionImpl extends EObjectImpl implements Session {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
-				case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_OBJECTS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS;
-				case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_VIEWS: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS;
-				case org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_INSTANCES: return org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES;
+				case ScopesPackage.SESSION__DOMAIN_OBJECTS: return ScopesPackage.SCOPE__DOMAIN_OBJECTS;
+				case ScopesPackage.SESSION__DOMAIN_VIEWS: return ScopesPackage.SCOPE__DOMAIN_VIEWS;
+				case ScopesPackage.SESSION__DOMAIN_INSTANCES: return ScopesPackage.SCOPE__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
 		if (baseClass == ContainsOperations.class) {
 			switch (derivedFeatureID) {
-				case org.openiaml.model.model.scopes.Package.SESSION__OPERATIONS: return ModelPackage.CONTAINS_OPERATIONS__OPERATIONS;
+				case ScopesPackage.SESSION__OPERATIONS: return ModelPackage.CONTAINS_OPERATIONS__OPERATIONS;
 				default: return -1;
 			}
 		}
@@ -656,15 +657,15 @@ public class SessionImpl extends EObjectImpl implements Session {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_OBJECTS: return org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_OBJECTS;
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_VIEWS: return org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_VIEWS;
-				case org.openiaml.model.model.scopes.Package.SCOPE__DOMAIN_INSTANCES: return org.openiaml.model.model.scopes.Package.SESSION__DOMAIN_INSTANCES;
+				case ScopesPackage.SCOPE__DOMAIN_OBJECTS: return ScopesPackage.SESSION__DOMAIN_OBJECTS;
+				case ScopesPackage.SCOPE__DOMAIN_VIEWS: return ScopesPackage.SESSION__DOMAIN_VIEWS;
+				case ScopesPackage.SCOPE__DOMAIN_INSTANCES: return ScopesPackage.SESSION__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
 		if (baseClass == ContainsOperations.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_OPERATIONS__OPERATIONS: return org.openiaml.model.model.scopes.Package.SESSION__OPERATIONS;
+				case ModelPackage.CONTAINS_OPERATIONS__OPERATIONS: return ScopesPackage.SESSION__OPERATIONS;
 				default: return -1;
 			}
 		}

@@ -4,25 +4,33 @@
  *
  * $Id$
  */
-package org.openiaml.model.model.operations.impl;
+package org.openiaml.model.model.scopes.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.openiaml.model.model.ModelPackage;
+
 import org.openiaml.model.model.impl.ModelPackageImpl;
-import org.openiaml.model.model.operations.DecisionNode;
-import org.openiaml.model.model.operations.DecisionOperation;
-import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.OperationsFactory;
+
 import org.openiaml.model.model.operations.OperationsPackage;
-import org.openiaml.model.model.operations.StartNode;
-import org.openiaml.model.model.operations.StopNode;
+
+import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
+
+import org.openiaml.model.model.scopes.Scope;
+import org.openiaml.model.model.scopes.ScopesFactory;
 import org.openiaml.model.model.scopes.ScopesPackage;
-import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
+import org.openiaml.model.model.scopes.Session;
+
 import org.openiaml.model.model.visual.VisualPackage;
+
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
+
 import org.openiaml.model.model.wires.WiresPackage;
+
 import org.openiaml.model.model.wires.impl.WiresPackageImpl;
 
 /**
@@ -31,41 +39,20 @@ import org.openiaml.model.model.wires.impl.WiresPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class OperationsPackageImpl extends EPackageImpl implements OperationsPackage {
+public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass startNodeEClass = null;
+	private EClass scopeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass stopNodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass finishNodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass decisionNodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass decisionOperationEClass = null;
+	private EClass sessionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -78,12 +65,12 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.openiaml.model.model.operations.OperationsPackage#eNS_URI
+	 * @see org.openiaml.model.model.scopes.ScopesPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private OperationsPackageImpl() {
-		super(eNS_URI, OperationsFactory.eINSTANCE);
+	private ScopesPackageImpl() {
+		super(eNS_URI, ScopesFactory.eINSTANCE);
 	}
 
 	/**
@@ -115,11 +102,11 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static OperationsPackage init() {
-		if (isInited) return (OperationsPackage)EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI);
+	public static ScopesPackage init() {
+		if (isInited) return (ScopesPackage)EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new OperationsPackageImpl());
+		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ScopesPackageImpl());
 
 		isInited = true;
 
@@ -127,26 +114,26 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
 		VisualPackageImpl theVisualPackage = (VisualPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) instanceof VisualPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) : VisualPackage.eINSTANCE);
 		WiresPackageImpl theWiresPackage = (WiresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) instanceof WiresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) : WiresPackage.eINSTANCE);
-		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) : ScopesPackage.eINSTANCE);
+		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theOperationsPackage.createPackageContents();
+		theScopesPackage.createPackageContents();
 		theModelPackage.createPackageContents();
 		theVisualPackage.createPackageContents();
 		theWiresPackage.createPackageContents();
-		theScopesPackage.createPackageContents();
+		theOperationsPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theOperationsPackage.initializePackageContents();
+		theScopesPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
 		theVisualPackage.initializePackageContents();
 		theWiresPackage.initializePackageContents();
-		theScopesPackage.initializePackageContents();
+		theOperationsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theOperationsPackage.freeze();
+		theScopesPackage.freeze();
 
-		return theOperationsPackage;
+		return theScopesPackage;
 	}
 
 	/**
@@ -154,8 +141,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStartNode() {
-		return startNodeEClass;
+	public EClass getScope() {
+		return scopeEClass;
 	}
 
 	/**
@@ -163,8 +150,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStopNode() {
-		return stopNodeEClass;
+	public EReference getScope_DomainObjects() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -172,8 +159,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFinishNode() {
-		return finishNodeEClass;
+	public EReference getScope_DomainViews() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -181,8 +168,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDecisionNode() {
-		return decisionNodeEClass;
+	public EReference getScope_DomainInstances() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -190,8 +177,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDecisionOperation() {
-		return decisionOperationEClass;
+	public EClass getSession() {
+		return sessionEClass;
 	}
 
 	/**
@@ -199,8 +186,26 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OperationsFactory getOperationsFactory() {
-		return (OperationsFactory)getEFactoryInstance();
+	public EReference getSession_Agent() {
+		return (EReference)sessionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSession_Components() {
+		return (EReference)sessionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScopesFactory getScopesFactory() {
+		return (ScopesFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -222,15 +227,14 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		isCreated = true;
 
 		// Create classes and their features
-		startNodeEClass = createEClass(START_NODE);
+		scopeEClass = createEClass(SCOPE);
+		createEReference(scopeEClass, SCOPE__DOMAIN_OBJECTS);
+		createEReference(scopeEClass, SCOPE__DOMAIN_VIEWS);
+		createEReference(scopeEClass, SCOPE__DOMAIN_INSTANCES);
 
-		stopNodeEClass = createEClass(STOP_NODE);
-
-		finishNodeEClass = createEClass(FINISH_NODE);
-
-		decisionNodeEClass = createEClass(DECISION_NODE);
-
-		decisionOperationEClass = createEClass(DECISION_OPERATION);
+		sessionEClass = createEClass(SESSION);
+		createEReference(sessionEClass, SESSION__AGENT);
+		createEReference(sessionEClass, SESSION__COMPONENTS);
 	}
 
 	/**
@@ -264,28 +268,42 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		startNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		startNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
-		stopNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		stopNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
-		finishNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		finishNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
-		decisionOperationEClass.getESuperTypes().add(theModelPackage.getChainedOperation());
-		decisionOperationEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
+		sessionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		sessionEClass.getESuperTypes().add(this.getScope());
+		sessionEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(scopeEClass, Scope.class, "Scope", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScope_DomainObjects(), theModelPackage.getDomainObject(), null, "domainObjects", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_DomainViews(), theModelPackage.getDerivedView(), null, "domainViews", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_DomainInstances(), theModelPackage.getDomainObjectInstance(), null, "domainInstances", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(stopNodeEClass, StopNode.class, "StopNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSession_Agent(), theModelPackage.getVisitorAgent(), null, "agent", null, 0, 1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSession_Components(), theModelPackage.getApplicationElement(), null, "components", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(finishNodeEClass, FinishNode.class, "FinishNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(decisionNodeEClass, DecisionNode.class, "DecisionNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(decisionOperationEClass, DecisionOperation.class, "DecisionOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		// Create annotations
+		// http://openiaml.org/comment
+		createCommentAnnotations();
 	}
 
-} //OperationsPackageImpl
+	/**
+	 * Initializes the annotations for <b>http://openiaml.org/comment</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createCommentAnnotations() {
+		String source = "http://openiaml.org/comment";		
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] {
+			 "added", "0.2",
+			 "comment", "other scopes: iaml:InternetApplication, [...], iaml.visual:Page, iaml.visual:Frame, iaml:ApplicationElement, iaml:Operation",
+			 "comment2", "(it makes sense to put these scopes in here, because they are scoped in terms of visual terms)",
+			 "comment3", "some scopes aren\'t here: Host, Organisation, we can add these in later."
+		   });
+	}
+
+} //ScopesPackageImpl

@@ -9,13 +9,13 @@ package org.openiaml.model.model.wires;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Set Wire</b></em>'.
+ * A representation of the model object '<em><b>Show Wire</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.openiaml.model.model.wires.WiresPackage#getSetWire()
+ * @see org.openiaml.model.model.wires.WiresPackage#getShowWire()
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface SetWire extends CompositeWire {
-} // SetWire
+public interface ShowWire extends CompositeWire {
+} // ShowWire

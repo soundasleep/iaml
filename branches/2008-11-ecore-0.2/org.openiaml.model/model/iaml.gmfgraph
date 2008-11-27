@@ -544,6 +544,101 @@
       <accessors
           figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="FilterWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="FilterWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FilterWireNameFigure"
+            text="filter"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FilterWireQueryFigure"
+            text="any"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.31/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.31/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="FindWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="FindWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FindWireNameFigure"
+            text="find"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ShowWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ShowWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ShowWireNameFigure"
+            text="show"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.33/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="NavigateWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="NavigateWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="NavigateWireNameFigure"
+            text="navigate"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.34/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="CommitWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="CommitWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CommitWireNameFigure"
+            text="commit"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.35/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ConditionWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ConditionWireFigure"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ConditionWireNameFigure"
+            text="condition"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.36/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -638,6 +733,24 @@
   <connections
       name="ConditionalEdge"
       figure="ConditionalEdgeFigure"/>
+  <connections
+      name="FilterWire"
+      figure="FilterWireFigure"/>
+  <connections
+      name="FindWire"
+      figure="FindWireFigure"/>
+  <connections
+      name="ShowWire"
+      figure="ShowWireFigure"/>
+  <connections
+      name="NavigateWire"
+      figure="NavigateWireFigure"/>
+  <connections
+      name="CommitWire"
+      figure="CommitWireFigure"/>
+  <connections
+      name="ConditionWire"
+      figure="ConditionWireFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -754,4 +867,32 @@
       name="ConditionalEdgeName"
       figure="ConditionalEdgeFigure"
       accessor="//@figures.0/@descriptors.30/@accessors.0"/>
+  <labels
+      name="FilterWireName"
+      figure="FilterWireFigure"
+      accessor="//@figures.0/@descriptors.31/@accessors.0"/>
+  <labels
+      name="FilterWireQuery"
+      figure="FilterWireFigure"
+      accessor="//@figures.0/@descriptors.31/@accessors.1"/>
+  <labels
+      name="FindWireName"
+      figure="FindWireFigure"
+      accessor="//@figures.0/@descriptors.32/@accessors.0"/>
+  <labels
+      name="ShowWireName"
+      figure="ShowWireFigure"
+      accessor="//@figures.0/@descriptors.33/@accessors.0"/>
+  <labels
+      name="NavigateWireName"
+      figure="NavigateWireFigure"
+      accessor="//@figures.0/@descriptors.34/@accessors.0"/>
+  <labels
+      name="CommitWireName"
+      figure="CommitWireFigure"
+      accessor="//@figures.0/@descriptors.35/@accessors.0"/>
+  <labels
+      name="ConditionWireName"
+      figure="ConditionWireFigure"
+      accessor="//@figures.0/@descriptors.36/@accessors.0"/>
 </gmfgraph:Canvas>

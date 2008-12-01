@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.VisitorAgent;
 
 /**
@@ -30,7 +31,7 @@ import org.openiaml.model.model.VisitorAgent;
  * @model
  * @generated
  */
-public interface Session extends NamedElement, Scope, ContainsOperations {
+public interface Session extends NamedElement, Scope, ContainsOperations, VisibleThing {
 	/**
 	 * Returns the value of the '<em><b>Agent</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

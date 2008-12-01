@@ -779,6 +779,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getVisibleThing_Sessions() {
+		return (EReference)visibleThingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInternetApplication() {
 		return internetApplicationEClass;
 	}
@@ -1292,6 +1301,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(staticValueEClass, STATIC_VALUE__VALUE);
 
 		visibleThingEClass = createEClass(VISIBLE_THING);
+		createEReference(visibleThingEClass, VISIBLE_THING__SESSIONS);
 
 		internetApplicationEClass = createEClass(INTERNET_APPLICATION);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__PROPERTIES);
@@ -1529,6 +1539,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getStaticValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, StaticValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(visibleThingEClass, VisibleThing.class, "VisibleThing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVisibleThing_Sessions(), theScopesPackage.getSession(), null, "sessions", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(internetApplicationEClass, InternetApplication.class, "InternetApplication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInternetApplication_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1644,6 +1655,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "comment", "this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor",
 			 "editor", "org.openiaml.model.diagram.visual"
+		   });		
+		addAnnotation
+		  (getVisibleThing_Sessions(), 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
 		   });		
 		addAnnotation
 		  (internetApplicationEClass, 

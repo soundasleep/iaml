@@ -224,6 +224,15 @@ public interface VisualPackage extends EPackage {
 	int PAGE__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
 
 	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
+
+	/**
 	 * The feature id for the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -405,6 +414,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
 
 	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
+
+	/**
 	 * The number of structural features of the '<em>Input Form</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -575,6 +593,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
 
 	/**
 	 * The number of structural features of the '<em>Input Text Field</em>' class.
@@ -750,6 +777,15 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
 
 	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
+
+	/**
 	 * The number of structural features of the '<em>Button</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -920,6 +956,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int FRAME__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
 
 	/**
 	 * The number of structural features of the '<em>Frame</em>' class.

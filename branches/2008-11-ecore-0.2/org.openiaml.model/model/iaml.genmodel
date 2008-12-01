@@ -58,7 +58,9 @@
     <genClasses ecoreClass="iaml.ecore#//StaticValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//StaticValue/value"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//VisibleThing"/>
+    <genClasses ecoreClass="iaml.ecore#//VisibleThing">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/sessions"/>
+    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//InternetApplication">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/children"/>

@@ -108,7 +108,7 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	void setRuntimeUrl(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Sessions</b></em>' reference list.
+	 * Returns the value of the '<em><b>Sessions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.scopes.Session}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -116,9 +116,10 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sessions</em>' reference list.
+	 * @return the value of the '<em>Sessions</em>' containment reference list.
 	 * @see org.openiaml.model.model.ModelPackage#getInternetApplication_Sessions()
-	 * @model annotation="http://openiaml.org/comment added='0.2'"
+	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment added='0.2'"
 	 * @generated
 	 */
 	EList<Session> getSessions();

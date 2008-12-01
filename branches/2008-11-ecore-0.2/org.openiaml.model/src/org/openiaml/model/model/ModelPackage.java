@@ -2407,7 +2407,7 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
-	 * The feature id for the '<em><b>Sessions</b></em>' reference list.
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3941,10 +3941,10 @@ public interface ModelPackage extends EPackage {
 	EAttribute getInternetApplication_RuntimeUrl();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.InternetApplication#getSessions <em>Sessions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.InternetApplication#getSessions <em>Sessions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sessions</em>'.
+	 * @return the meta object for the containment reference list '<em>Sessions</em>'.
 	 * @see org.openiaml.model.model.InternetApplication#getSessions()
 	 * @see #getInternetApplication()
 	 * @generated
@@ -4812,7 +4812,7 @@ public interface ModelPackage extends EPackage {
 		EAttribute INTERNET_APPLICATION__RUNTIME_URL = eINSTANCE.getInternetApplication_RuntimeUrl();
 
 		/**
-		 * The meta object literal for the '<em><b>Sessions</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Sessions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

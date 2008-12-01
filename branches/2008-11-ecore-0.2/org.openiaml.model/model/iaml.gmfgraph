@@ -639,6 +639,46 @@
       <accessors
           figure="//@figures.0/@descriptors.36/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="SessionFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="SessionFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="255"
+            blue="240"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SessionNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.37/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="LoginHandlerFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="LoginHandlerFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="192"
+            blue="255"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="LoginHandlerNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -709,6 +749,12 @@
   <nodes
       name="DecisionOperation"
       figure="DecisionOperationFigure"/>
+  <nodes
+      name="Session"
+      figure="SessionFigure"/>
+  <nodes
+      name="LoginHandler"
+      figure="LoginHandlerFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -895,4 +941,12 @@
       name="ConditionWireName"
       figure="ConditionWireFigure"
       accessor="//@figures.0/@descriptors.36/@accessors.0"/>
+  <labels
+      name="SessionName"
+      figure="SessionFigure"
+      accessor="//@figures.0/@descriptors.37/@accessors.0"/>
+  <labels
+      name="LoginHandlerName"
+      figure="LoginHandlerFigure"
+      accessor="//@figures.0/@descriptors.38/@accessors.0"/>
 </gmfgraph:Canvas>

@@ -403,6 +403,16 @@
             <param name="semanticHint" value="1009"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/scopes">
+         <metamodelType
+               id="org.openiaml.model.diagram.Session_1010"
+               name="%metatype.name.Session_1010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Session"
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.SessionEditHelper">
+            <param name="semanticHint" value="1010"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.SyncWire_3001"
@@ -445,6 +455,7 @@
          <elementType ref="org.openiaml.model.diagram.DynamicApplicationElementSet_1007"/>
          <elementType ref="org.openiaml.model.diagram.ApplicationElementProperty_1008"/>
          <elementType ref="org.openiaml.model.diagram.DomainStore_1009"/>
+         <elementType ref="org.openiaml.model.diagram.Session_1010"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.RunInstanceWire_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>

@@ -115,7 +115,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtimeUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="http://localhost:8080/output/"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
-        eType="#//scopes/Session">
+        eType="#//scopes/Session" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>

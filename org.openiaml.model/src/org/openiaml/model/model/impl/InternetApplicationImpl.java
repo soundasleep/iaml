@@ -280,7 +280,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	protected String runtimeUrl = RUNTIME_URL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSessions() <em>Sessions</em>}' reference list.
+	 * The cached value of the '{@link #getSessions() <em>Sessions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSessions()
@@ -600,7 +600,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 */
 	public EList<Session> getSessions() {
 		if (sessions == null) {
-			sessions = new EObjectResolvingEList<Session>(Session.class, this, ModelPackage.INTERNET_APPLICATION__SESSIONS);
+			sessions = new EObjectContainmentEList<Session>(Session.class, this, ModelPackage.INTERNET_APPLICATION__SESSIONS);
 		}
 		return sessions;
 	}
@@ -648,6 +648,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return ((InternalEList<?>)getDomainStores()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
+				return ((InternalEList<?>)getSessions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

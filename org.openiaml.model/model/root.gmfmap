@@ -204,6 +204,26 @@
           href="iaml.gmfgraph#DomainStore"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//InternetApplication/sessions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//scopes/Session"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#SessionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.0/@tools.11"/>
+      <diagramNode
+          href="iaml.gmfgraph#Session"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

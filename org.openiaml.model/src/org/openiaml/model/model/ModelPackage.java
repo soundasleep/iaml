@@ -2254,13 +2254,22 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__CHILDREN = APPLICATION_ELEMENT_CONTAINER__CHILDREN;
 
 	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__SESSIONS = APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Visible Thing</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING_FEATURE_COUNT = APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 0;
+	int VISIBLE_THING_FEATURE_COUNT = APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3887,6 +3896,17 @@ public interface ModelPackage extends EPackage {
 	EClass getVisibleThing();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.VisibleThing#getSessions <em>Sessions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Sessions</em>'.
+	 * @see org.openiaml.model.model.VisibleThing#getSessions()
+	 * @see #getVisibleThing()
+	 * @generated
+	 */
+	EReference getVisibleThing_Sessions();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.InternetApplication <em>Internet Application</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4768,6 +4788,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VISIBLE_THING = eINSTANCE.getVisibleThing();
+
+		/**
+		 * The meta object literal for the '<em><b>Sessions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VISIBLE_THING__SESSIONS = eINSTANCE.getVisibleThing_Sessions();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.InternetApplicationImpl <em>Internet Application</em>}' class.

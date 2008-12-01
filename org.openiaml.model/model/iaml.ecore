@@ -95,6 +95,12 @@
       <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
       <details key="editor" value="org.openiaml.model.diagram.visual"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
+        eType="#//scopes/Session" containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements #//scopes/Scope">
     <eAnnotations source="http://openiaml.org/comment">
@@ -349,7 +355,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="domainInstances" upperBound="-1"
           eType="#//DomainObjectInstance"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//scopes/Scope #//ContainsOperations">
+    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//scopes/Scope #//ContainsOperations #//VisibleThing">
       <eStructuralFeatures xsi:type="ecore:EReference" name="agent" eType="#//VisitorAgent"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"

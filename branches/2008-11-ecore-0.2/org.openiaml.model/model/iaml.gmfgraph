@@ -678,7 +678,7 @@
         <children
             xsi:type="gmfgraph:Label"
             name="LoginHandlerTypeFigure"
-            text="&lt;...>"/>
+            text="[type = ?]"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>

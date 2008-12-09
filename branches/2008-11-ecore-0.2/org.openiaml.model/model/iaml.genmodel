@@ -187,11 +187,13 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//components">
-      <genClasses image="false" ecoreClass="iaml.ecore#//components/LoginHandler"/>
-      <genClasses ecoreClass="iaml.ecore#//components/LoginHandlerKey">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//components/LoginHandlerKey/secretKey"/>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//components/LoginHandlerTypes">
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//components/LoginHandlerTypes/SECRET_KEY"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//components/LoginHandlerTypes/DOMAIN_OBJECT"/>
+      </genEnums>
+      <genClasses image="false" ecoreClass="iaml.ecore#//components/LoginHandler">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//components/LoginHandler/type"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//components/LoginHandlerDomainObject"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

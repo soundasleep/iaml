@@ -154,12 +154,12 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQueryEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQuery2EditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQueryEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -468,6 +468,16 @@
             <param name="semanticHint" value="1012"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/components">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.LoginHandler_1013"
+               name="%metatype.name.LoginHandler_1013"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LoginHandler"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.LoginHandlerEditHelper">
+            <param name="semanticHint" value="1013"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_3001"
@@ -583,6 +593,7 @@
          <elementType ref="org.openiaml.model.diagram.visual.InputTextField_1010"/>
          <elementType ref="org.openiaml.model.diagram.visual.StaticValue_1011"/>
          <elementType ref="org.openiaml.model.diagram.visual.Session_1012"/>
+         <elementType ref="org.openiaml.model.diagram.visual.LoginHandler_1013"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>

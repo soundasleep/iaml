@@ -23,8 +23,6 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.components.LoginHandlerDomainObject;
-import org.openiaml.model.model.components.LoginHandlerKey;
 import org.openiaml.model.model.scopes.Scope;
 
 /**
@@ -119,44 +117,6 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ComponentsPackage.LOGIN_HANDLER_KEY: {
-				LoginHandlerKey loginHandlerKey = (LoginHandlerKey)theEObject;
-				T result = caseLoginHandlerKey(loginHandlerKey);
-				if (result == null) result = caseLoginHandler(loginHandlerKey);
-				if (result == null) result = caseApplicationElementContainer(loginHandlerKey);
-				if (result == null) result = caseApplicationElement(loginHandlerKey);
-				if (result == null) result = caseContainsWires(loginHandlerKey);
-				if (result == null) result = caseContainsOperations(loginHandlerKey);
-				if (result == null) result = caseNamedElement(loginHandlerKey);
-				if (result == null) result = caseContainsEventTriggers(loginHandlerKey);
-				if (result == null) result = caseWireEdgesSource(loginHandlerKey);
-				if (result == null) result = caseWireEdgeDestination(loginHandlerKey);
-				if (result == null) result = caseGeneratesElements(loginHandlerKey);
-				if (result == null) result = caseScope(loginHandlerKey);
-				if (result == null) result = caseGeneratedElement(loginHandlerKey);
-				if (result == null) result = caseShouldntContainWires(loginHandlerKey);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ComponentsPackage.LOGIN_HANDLER_DOMAIN_OBJECT: {
-				LoginHandlerDomainObject loginHandlerDomainObject = (LoginHandlerDomainObject)theEObject;
-				T result = caseLoginHandlerDomainObject(loginHandlerDomainObject);
-				if (result == null) result = caseLoginHandler(loginHandlerDomainObject);
-				if (result == null) result = caseApplicationElementContainer(loginHandlerDomainObject);
-				if (result == null) result = caseApplicationElement(loginHandlerDomainObject);
-				if (result == null) result = caseContainsWires(loginHandlerDomainObject);
-				if (result == null) result = caseContainsOperations(loginHandlerDomainObject);
-				if (result == null) result = caseNamedElement(loginHandlerDomainObject);
-				if (result == null) result = caseContainsEventTriggers(loginHandlerDomainObject);
-				if (result == null) result = caseWireEdgesSource(loginHandlerDomainObject);
-				if (result == null) result = caseWireEdgeDestination(loginHandlerDomainObject);
-				if (result == null) result = caseGeneratesElements(loginHandlerDomainObject);
-				if (result == null) result = caseScope(loginHandlerDomainObject);
-				if (result == null) result = caseGeneratedElement(loginHandlerDomainObject);
-				if (result == null) result = caseShouldntContainWires(loginHandlerDomainObject);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -173,36 +133,6 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseLoginHandler(LoginHandler object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Login Handler Key</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Login Handler Key</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLoginHandlerKey(LoginHandlerKey object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Login Handler Domain Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Login Handler Domain Object</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLoginHandlerDomainObject(LoginHandlerDomainObject object) {
 		return null;
 	}
 

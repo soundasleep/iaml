@@ -23,8 +23,6 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.components.LoginHandlerDomainObject;
-import org.openiaml.model.model.components.LoginHandlerKey;
 import org.openiaml.model.model.scopes.Scope;
 
 /**
@@ -86,14 +84,6 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLoginHandler(LoginHandler object) {
 				return createLoginHandlerAdapter();
-			}
-			@Override
-			public Adapter caseLoginHandlerKey(LoginHandlerKey object) {
-				return createLoginHandlerKeyAdapter();
-			}
-			@Override
-			public Adapter caseLoginHandlerDomainObject(LoginHandlerDomainObject object) {
-				return createLoginHandlerDomainObjectAdapter();
 			}
 			@Override
 			public Adapter caseContainsOperations(ContainsOperations object) {
@@ -174,34 +164,6 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLoginHandlerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.components.LoginHandlerKey <em>Login Handler Key</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.components.LoginHandlerKey
-	 * @generated
-	 */
-	public Adapter createLoginHandlerKeyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.components.LoginHandlerDomainObject <em>Login Handler Domain Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.components.LoginHandlerDomainObject
-	 * @generated
-	 */
-	public Adapter createLoginHandlerDomainObjectAdapter() {
 		return null;
 	}
 

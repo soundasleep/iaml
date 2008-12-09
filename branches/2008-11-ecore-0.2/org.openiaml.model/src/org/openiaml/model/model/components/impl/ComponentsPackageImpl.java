@@ -8,34 +8,22 @@ package org.openiaml.model.model.components.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.openiaml.model.model.ModelPackage;
-
 import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.components.LoginHandlerDomainObject;
-import org.openiaml.model.model.components.LoginHandlerKey;
-
+import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.impl.ModelPackageImpl;
-
 import org.openiaml.model.model.operations.OperationsPackage;
-
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
-
 import org.openiaml.model.model.scopes.ScopesPackage;
-
 import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
-
 import org.openiaml.model.model.visual.VisualPackage;
-
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
-
 import org.openiaml.model.model.wires.WiresPackage;
-
 import org.openiaml.model.model.wires.impl.WiresPackageImpl;
 
 /**
@@ -57,14 +45,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass loginHandlerKeyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass loginHandlerDomainObjectEClass = null;
+	private EEnum loginHandlerTypesEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -165,8 +146,8 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLoginHandlerKey() {
-		return loginHandlerKeyEClass;
+	public EAttribute getLoginHandler_Type() {
+		return (EAttribute)loginHandlerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -174,17 +155,8 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLoginHandlerKey_SecretKey() {
-		return (EAttribute)loginHandlerKeyEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getLoginHandlerDomainObject() {
-		return loginHandlerDomainObjectEClass;
+	public EEnum getLoginHandlerTypes() {
+		return loginHandlerTypesEEnum;
 	}
 
 	/**
@@ -216,11 +188,10 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 
 		// Create classes and their features
 		loginHandlerEClass = createEClass(LOGIN_HANDLER);
+		createEAttribute(loginHandlerEClass, LOGIN_HANDLER__TYPE);
 
-		loginHandlerKeyEClass = createEClass(LOGIN_HANDLER_KEY);
-		createEAttribute(loginHandlerKeyEClass, LOGIN_HANDLER_KEY__SECRET_KEY);
-
-		loginHandlerDomainObjectEClass = createEClass(LOGIN_HANDLER_DOMAIN_OBJECT);
+		// Create enums
+		loginHandlerTypesEEnum = createEEnum(LOGIN_HANDLER_TYPES);
 	}
 
 	/**
@@ -255,16 +226,15 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 
 		// Add supertypes to classes
 		loginHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElementContainer());
-		loginHandlerKeyEClass.getESuperTypes().add(this.getLoginHandler());
-		loginHandlerDomainObjectEClass.getESuperTypes().add(this.getLoginHandler());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(loginHandlerEClass, LoginHandler.class, "LoginHandler", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(loginHandlerEClass, LoginHandler.class, "LoginHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLoginHandler_Type(), this.getLoginHandlerTypes(), "type", null, 1, 1, LoginHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(loginHandlerKeyEClass, LoginHandlerKey.class, "LoginHandlerKey", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLoginHandlerKey_SecretKey(), ecorePackage.getEString(), "secretKey", null, 0, 1, LoginHandlerKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(loginHandlerDomainObjectEClass, LoginHandlerDomainObject.class, "LoginHandlerDomainObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		// Initialize enums and add enum literals
+		initEEnum(loginHandlerTypesEEnum, LoginHandlerTypes.class, "LoginHandlerTypes");
+		addEEnumLiteral(loginHandlerTypesEEnum, LoginHandlerTypes.SECRET_KEY);
+		addEEnumLiteral(loginHandlerTypesEEnum, LoginHandlerTypes.DOMAIN_OBJECT);
 
 		// Create annotations
 		// http://openiaml.org/comment

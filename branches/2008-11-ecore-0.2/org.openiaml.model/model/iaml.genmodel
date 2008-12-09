@@ -185,5 +185,13 @@
             ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/components"/>
       </genClasses>
     </nestedGenPackages>
+    <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"
+        disposableProviderFactory="true" ecorePackage="iaml.ecore#//components">
+      <genClasses image="false" ecoreClass="iaml.ecore#//components/LoginHandler"/>
+      <genClasses ecoreClass="iaml.ecore#//components/LoginHandlerKey">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//components/LoginHandlerKey/secretKey"/>
+      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//components/LoginHandlerDomainObject"/>
+    </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

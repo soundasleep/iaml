@@ -52,6 +52,8 @@ import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
 import org.openiaml.model.model.scopes.ScopesPackage;
@@ -402,6 +404,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		WiresPackageImpl theWiresPackage = (WiresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) instanceof WiresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) : WiresPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) : ScopesPackage.eINSTANCE);
+		ComponentsPackageImpl theComponentsPackage = (ComponentsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) instanceof ComponentsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) : ComponentsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theModelPackage.createPackageContents();
@@ -409,6 +412,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		theWiresPackage.createPackageContents();
 		theOperationsPackage.createPackageContents();
 		theScopesPackage.createPackageContents();
+		theComponentsPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theModelPackage.initializePackageContents();
@@ -416,6 +420,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		theWiresPackage.initializePackageContents();
 		theOperationsPackage.initializePackageContents();
 		theScopesPackage.initializePackageContents();
+		theComponentsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theModelPackage.freeze();
@@ -1399,12 +1404,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		WiresPackage theWiresPackage = (WiresPackage)EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI);
 		OperationsPackage theOperationsPackage = (OperationsPackage)EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI);
 		ScopesPackage theScopesPackage = (ScopesPackage)EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI);
+		ComponentsPackage theComponentsPackage = (ComponentsPackage)EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theVisualPackage);
 		getESubpackages().add(theWiresPackage);
 		getESubpackages().add(theOperationsPackage);
 		getESubpackages().add(theScopesPackage);
+		getESubpackages().add(theComponentsPackage);
 
 		// Create type parameters
 

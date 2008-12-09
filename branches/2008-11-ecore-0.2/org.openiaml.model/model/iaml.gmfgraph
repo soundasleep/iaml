@@ -675,9 +675,15 @@
             xsi:type="gmfgraph:Label"
             name="LoginHandlerNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="LoginHandlerTypeFigure"
+            text="&lt;...>"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -949,4 +955,8 @@
       name="LoginHandlerName"
       figure="LoginHandlerFigure"
       accessor="//@figures.0/@descriptors.38/@accessors.0"/>
+  <labels
+      name="LoginHandlerType"
+      figure="LoginHandlerFigure"
+      accessor="//@figures.0/@descriptors.38/@accessors.1"/>
 </gmfgraph:Canvas>

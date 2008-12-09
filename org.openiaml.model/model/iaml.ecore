@@ -366,10 +366,13 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.2"/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" abstract="true" eSuperTypes="#//ApplicationElementContainer"/>
-    <eClassifiers xsi:type="ecore:EClass" name="LoginHandlerKey" eSuperTypes="#//components/LoginHandler">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="secretKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="LoginHandlerTypes">
+      <eLiterals name="SECRET_KEY"/>
+      <eLiterals name="DOMAIN_OBJECT" value="1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LoginHandlerDomainObject" eSuperTypes="#//components/LoginHandler"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//ApplicationElementContainer">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
+          eType="#//components/LoginHandlerTypes"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

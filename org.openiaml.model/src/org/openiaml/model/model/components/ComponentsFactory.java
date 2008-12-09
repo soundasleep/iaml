@@ -26,22 +26,13 @@ public interface ComponentsFactory extends EFactory {
 	ComponentsFactory eINSTANCE = org.openiaml.model.model.components.impl.ComponentsFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Login Handler Key</em>'.
+	 * Returns a new object of class '<em>Login Handler</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Login Handler Key</em>'.
+	 * @return a new object of class '<em>Login Handler</em>'.
 	 * @generated
 	 */
-	LoginHandlerKey createLoginHandlerKey();
-
-	/**
-	 * Returns a new object of class '<em>Login Handler Domain Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Login Handler Domain Object</em>'.
-	 * @generated
-	 */
-	LoginHandlerDomainObject createLoginHandlerDomainObject();
+	LoginHandler createLoginHandler();
 
 	/**
 	 * Returns the package supported by this factory.

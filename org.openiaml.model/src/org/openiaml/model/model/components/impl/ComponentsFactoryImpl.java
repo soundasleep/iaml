@@ -7,14 +7,15 @@
 package org.openiaml.model.model.components.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
-import org.openiaml.model.model.components.LoginHandlerDomainObject;
-import org.openiaml.model.model.components.LoginHandlerKey;
+import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.components.LoginHandlerTypes;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,8 +61,7 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ComponentsPackage.LOGIN_HANDLER_KEY: return createLoginHandlerKey();
-			case ComponentsPackage.LOGIN_HANDLER_DOMAIN_OBJECT: return createLoginHandlerDomainObject();
+			case ComponentsPackage.LOGIN_HANDLER: return createLoginHandler();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -72,9 +72,14 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LoginHandlerKey createLoginHandlerKey() {
-		LoginHandlerKeyImpl loginHandlerKey = new LoginHandlerKeyImpl();
-		return loginHandlerKey;
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case ComponentsPackage.LOGIN_HANDLER_TYPES:
+				return createLoginHandlerTypesFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
 	}
 
 	/**
@@ -82,9 +87,44 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LoginHandlerDomainObject createLoginHandlerDomainObject() {
-		LoginHandlerDomainObjectImpl loginHandlerDomainObject = new LoginHandlerDomainObjectImpl();
-		return loginHandlerDomainObject;
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case ComponentsPackage.LOGIN_HANDLER_TYPES:
+				return convertLoginHandlerTypesToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LoginHandler createLoginHandler() {
+		LoginHandlerImpl loginHandler = new LoginHandlerImpl();
+		return loginHandler;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LoginHandlerTypes createLoginHandlerTypesFromString(EDataType eDataType, String initialValue) {
+		LoginHandlerTypes result = LoginHandlerTypes.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLoginHandlerTypesToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

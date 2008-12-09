@@ -272,6 +272,38 @@
           href="iaml.gmfgraph#Session"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElementContainer/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//components/LoginHandler"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( LoginHandler )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#LoginHandlerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="[type = {1}]"
+          editorPattern="[type = {1}]"
+          editPattern="[type = {1}]">
+        <diagramLabel
+            href="iaml.gmfgraph#LoginHandlerType"/>
+        <features
+            href="iaml.ecore#//components/LoginHandler/type"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.21"/>
+      <diagramNode
+          href="iaml.gmfgraph#LoginHandler"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

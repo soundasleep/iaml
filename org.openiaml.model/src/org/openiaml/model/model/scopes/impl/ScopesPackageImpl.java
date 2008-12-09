@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.openiaml.model.model.ModelPackage;
 
+import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.impl.ModelPackageImpl;
 
 import org.openiaml.model.model.operations.OperationsPackage;
@@ -115,6 +117,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		VisualPackageImpl theVisualPackage = (VisualPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) instanceof VisualPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) : VisualPackage.eINSTANCE);
 		WiresPackageImpl theWiresPackage = (WiresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) instanceof WiresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) : WiresPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
+		ComponentsPackageImpl theComponentsPackage = (ComponentsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) instanceof ComponentsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) : ComponentsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theScopesPackage.createPackageContents();
@@ -122,6 +125,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		theVisualPackage.createPackageContents();
 		theWiresPackage.createPackageContents();
 		theOperationsPackage.createPackageContents();
+		theComponentsPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theScopesPackage.initializePackageContents();
@@ -129,6 +133,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		theVisualPackage.initializePackageContents();
 		theWiresPackage.initializePackageContents();
 		theOperationsPackage.initializePackageContents();
+		theComponentsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theScopesPackage.freeze();

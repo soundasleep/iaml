@@ -362,4 +362,14 @@
           eType="#//ApplicationElement"/>
     </eClassifiers>
   </eSubpackages>
+  <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="added" value="0.2"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" abstract="true" eSuperTypes="#//ApplicationElementContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LoginHandlerKey" eSuperTypes="#//components/LoginHandler">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="secretKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LoginHandlerDomainObject" eSuperTypes="#//components/LoginHandler"/>
+  </eSubpackages>
 </ecore:EPackage>

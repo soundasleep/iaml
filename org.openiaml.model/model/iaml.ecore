@@ -126,6 +126,8 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loginHandlers" upperBound="-1"
+        eType="#//components/LoginHandler" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements">
     <eAnnotations source="http://openiaml.org/comment">

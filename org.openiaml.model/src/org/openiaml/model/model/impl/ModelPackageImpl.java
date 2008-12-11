@@ -847,6 +847,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getInternetApplication_LoginHandlers() {
+		return (EReference)internetApplicationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDomainStore() {
 		return domainStoreEClass;
 	}
@@ -1314,6 +1323,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__DOMAIN_STORES);
 		createEAttribute(internetApplicationEClass, INTERNET_APPLICATION__RUNTIME_URL);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__SESSIONS);
+		createEReference(internetApplicationEClass, INTERNET_APPLICATION__LOGIN_HANDLERS);
 
 		domainStoreEClass = createEClass(DOMAIN_STORE);
 		createEReference(domainStoreEClass, DOMAIN_STORE__CHILDREN);
@@ -1554,6 +1564,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getInternetApplication_DomainStores(), this.getDomainStore(), null, "domainStores", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInternetApplication_RuntimeUrl(), ecorePackage.getEString(), "runtimeUrl", "http://localhost:8080/output/", 0, 1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInternetApplication_Sessions(), theScopesPackage.getSession(), null, "sessions", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInternetApplication_LoginHandlers(), theComponentsPackage.getLoginHandler(), null, "loginHandlers", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainStoreEClass, DomainStore.class, "DomainStore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainStore_Children(), this.getDomainObject(), null, "children", null, 0, -1, DomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

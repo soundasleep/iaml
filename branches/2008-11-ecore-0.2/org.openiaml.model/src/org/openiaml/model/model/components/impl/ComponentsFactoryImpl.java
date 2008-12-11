@@ -103,10 +103,11 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public LoginHandler createLoginHandler() {
 		LoginHandlerImpl loginHandler = new LoginHandlerImpl();
+		generateID(loginHandler);
 		return loginHandler;
 	}
 

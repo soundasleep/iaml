@@ -869,10 +869,6 @@
             title="LoginHandler"
             description="Create new LoginHandler"
             genNodes="//@diagram/@topLevelNodes.10"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="Kittens"
-            description="Create new Kittens"/>
       </groups>
     </palette>
     <preferencePages

@@ -628,24 +628,19 @@
          contextId="org.openiaml.model.model.diagram.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
-   </extension><extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+   </extension><extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
       <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlValidationDecoratorProvider">
-         <Priority name="Lowest"/>
-         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
-         <context decoratorTargets="PRIMARY_VIEW"/>
-      </decoratorProvider>
+      <contributionItemProvider
+         class="org.openiaml.model.model.diagram.providers.IamlValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
    </extension>
-<extension point="org.eclipse.core.expressions.propertyTesters">
-      <?gmfgen generated="true"?>
-       <propertyTester
-           id="org.openiaml.model.diagram.DomainModelElementPropertyTester"
-           type="org.eclipse.emf.ecore.EObject"
-           namespace="org.openiaml.model.diagram"
-           properties="isDomainModelElement"
-           class="org.openiaml.model.model.diagram.part.IamlDomainModelElementTester">
-       </propertyTester>
-   </extension><extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+<extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
       <?gmfgen generated="true"?>
       <MarkerNavigationProvider class="org.openiaml.model.model.diagram.providers.IamlMarkerNavigationProvider">
          <MarkerType name="org.openiaml.model.diagram.diagnostic"/>
@@ -658,18 +653,13 @@
       <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
       <persistent value="true"/>
    </extension>
-
-<extension id="ValidationContributionItemProvider" name="Validation"
-      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+<extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
       <?gmfgen generated="true"?>
-      <contributionItemProvider
-         class="org.openiaml.model.model.diagram.providers.IamlValidationProvider">
-         <Priority name="Low"/>
-         <partContribution id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID">
-            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
-            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
-         </partContribution>
-      </contributionItemProvider>
+      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
    </extension>
 <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
       <?gmfgen generated="true"?>
@@ -677,7 +667,15 @@
          <Priority name="Lowest"/>
       </decoratorProvider>
    </extension>
-
-
+<extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.openiaml.model.diagram.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="org.openiaml.model.diagram"
+           properties="isDomainModelElement"
+           class="org.openiaml.model.model.diagram.part.IamlDomainModelElementTester">
+       </propertyTester>
+   </extension>
 
 </plugin>

@@ -45,7 +45,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
   <eClassifiers xsi:type="ecore:EClass" name="SingleOperation" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ChainedOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//ChainedOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//scopes/Scope">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//ChainedOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//Scope">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="Scope supertype added in 0.2"/>
     </eAnnotations>
@@ -65,7 +65,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//Operation" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination #//GeneratesElements #//scopes/Scope">
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination #//GeneratesElements #//Scope">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="editor" value="org.openiaml.model.diagram.element"/>
       <details key="comment" value="Scope supertype added in 0.2"/>
@@ -102,7 +102,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements #//scopes/Scope">
+  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements #//Scope">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="we cannot have InternetApplications inside of other ElementContainers, thus we don't define it as an ApplicationElement"/>
       <details key="comment2" value="but why can we have it as an ActivityEdgeSource? I don't think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA"/>
@@ -127,7 +127,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="loginHandlers" upperBound="-1"
-        eType="#//components/LoginHandler" containment="true"/>
+        eType="#//components/LoginHandler" containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements">
     <eAnnotations source="http://openiaml.org/comment">
@@ -238,8 +242,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ApplicationElementProperty"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domainObjects" upperBound="-1"
+        eType="#//DomainObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domainViews" upperBound="-1"
+        eType="#//DerivedView" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domainInstances" upperBound="-1"
+        eType="#//DomainObjectInstance" containment="true"/>
+  </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
-    <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing #//scopes/Scope">
+    <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing #//Scope">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="Scope supertype added in 0.2"/>
         <details key="comment2" value="represents the scope Window"/>
@@ -253,7 +265,7 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//VisibleThing #//scopes/Scope">
+    <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//VisibleThing #//Scope">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
@@ -342,26 +354,18 @@
     <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//ChainedOperation #//DataFlowEdgeDestination"/>
   </eSubpackages>
-  <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="iaml.scopes">
+  <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="scopes">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.2"/>
       <details key="comment" value="other scopes: iaml:InternetApplication, [...], iaml.visual:Page, iaml.visual:Frame, iaml:ApplicationElement, iaml:Operation"/>
       <details key="comment2" value="(it makes sense to put these scopes in here, because they are scoped in terms of visual terms)"/>
       <details key="comment3" value="some scopes aren't here: Host, Organisation, we can add these in later."/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" interface="true">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="domainObjects" upperBound="-1"
-          eType="#//DomainObject"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="domainViews" upperBound="-1"
-          eType="#//DerivedView"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="domainInstances" upperBound="-1"
-          eType="#//DomainObjectInstance"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//scopes/Scope #//ContainsOperations #//VisibleThing">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="agent" eType="#//VisitorAgent"
-          containment="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
+          eType="#//VisitorAgent" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
-          eType="#//ApplicationElement"/>
+          eType="#//ApplicationElement" containment="true"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">

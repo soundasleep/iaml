@@ -43,6 +43,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
@@ -342,6 +343,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass visitorAgentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scopeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1234,6 +1242,42 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getScope() {
+		return scopeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_DomainObjects() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_DomainViews() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_DomainInstances() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -1384,6 +1428,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		visitorAgentEClass = createEClass(VISITOR_AGENT);
 		createEReference(visitorAgentEClass, VISITOR_AGENT__PROPERTIES);
+
+		scopeEClass = createEClass(SCOPE);
+		createEReference(scopeEClass, SCOPE__DOMAIN_OBJECTS);
+		createEReference(scopeEClass, SCOPE__DOMAIN_VIEWS);
+		createEReference(scopeEClass, SCOPE__DOMAIN_INSTANCES);
 	}
 
 	/**
@@ -1453,14 +1502,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		compositeOperationEClass.getESuperTypes().add(this.getContainsOperations());
 		compositeOperationEClass.getESuperTypes().add(this.getContainsWires());
 		compositeOperationEClass.getESuperTypes().add(this.getGeneratesElements());
-		compositeOperationEClass.getESuperTypes().add(theScopesPackage.getScope());
+		compositeOperationEClass.getESuperTypes().add(this.getScope());
 		applicationElementEClass.getESuperTypes().add(this.getContainsOperations());
 		applicationElementEClass.getESuperTypes().add(this.getNamedElement());
 		applicationElementEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		applicationElementEClass.getESuperTypes().add(this.getWireEdgesSource());
 		applicationElementEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		applicationElementEClass.getESuperTypes().add(this.getGeneratesElements());
-		applicationElementEClass.getESuperTypes().add(theScopesPackage.getScope());
+		applicationElementEClass.getESuperTypes().add(this.getScope());
 		applicationElementContainerEClass.getESuperTypes().add(this.getApplicationElement());
 		applicationElementContainerEClass.getESuperTypes().add(this.getContainsWires());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getNamedElement());
@@ -1477,7 +1526,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		internetApplicationEClass.getESuperTypes().add(this.getNamedElement());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsWires());
 		internetApplicationEClass.getESuperTypes().add(this.getGeneratesElements());
-		internetApplicationEClass.getESuperTypes().add(theScopesPackage.getScope());
+		internetApplicationEClass.getESuperTypes().add(this.getScope());
 		domainStoreEClass.getESuperTypes().add(this.getContainsOperations());
 		domainStoreEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		domainStoreEClass.getESuperTypes().add(this.getNamedElement());
@@ -1626,6 +1675,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(visitorAgentEClass, VisitorAgent.class, "VisitorAgent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVisitorAgent_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, VisitorAgent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(scopeEClass, Scope.class, "Scope", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScope_DomainObjects(), this.getDomainObject(), null, "domainObjects", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_DomainViews(), this.getDerivedView(), null, "domainViews", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_DomainInstances(), this.getDomainObjectInstance(), null, "domainInstances", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -1696,6 +1750,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   });		
 		addAnnotation
 		  (getInternetApplication_Sessions(), 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (getInternetApplication_LoginHandlers(), 
 		   source, 
 		   new String[] {
 			 "added", "0.2"

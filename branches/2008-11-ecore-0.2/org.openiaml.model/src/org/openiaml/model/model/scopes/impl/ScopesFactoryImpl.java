@@ -71,11 +71,10 @@ public class ScopesFactoryImpl extends EFactoryImpl implements ScopesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public Session createSession() {
 		SessionImpl session = new SessionImpl();
-		generateID(session);
 		return session;
 	}
 

@@ -9,30 +9,19 @@ package org.openiaml.model.model.scopes.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.openiaml.model.model.ModelPackage;
-
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.impl.ModelPackageImpl;
-
 import org.openiaml.model.model.operations.OperationsPackage;
-
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
-
-import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.ScopesFactory;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
-
 import org.openiaml.model.model.visual.VisualPackage;
-
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
-
 import org.openiaml.model.model.wires.WiresPackage;
-
 import org.openiaml.model.model.wires.impl.WiresPackageImpl;
 
 /**
@@ -42,13 +31,6 @@ import org.openiaml.model.model.wires.impl.WiresPackageImpl;
  * @generated
  */
 public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass scopeEClass = null;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,42 +128,6 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getScope() {
-		return scopeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getScope_DomainObjects() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getScope_DomainViews() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getScope_DomainInstances() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSession() {
 		return sessionEClass;
 	}
@@ -191,7 +137,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSession_Agent() {
+	public EReference getSession_Agents() {
 		return (EReference)sessionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -232,13 +178,8 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		scopeEClass = createEClass(SCOPE);
-		createEReference(scopeEClass, SCOPE__DOMAIN_OBJECTS);
-		createEReference(scopeEClass, SCOPE__DOMAIN_VIEWS);
-		createEReference(scopeEClass, SCOPE__DOMAIN_INSTANCES);
-
 		sessionEClass = createEClass(SESSION);
-		createEReference(sessionEClass, SESSION__AGENT);
+		createEReference(sessionEClass, SESSION__AGENTS);
 		createEReference(sessionEClass, SESSION__COMPONENTS);
 	}
 
@@ -274,19 +215,13 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		// Add supertypes to classes
 		sessionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		sessionEClass.getESuperTypes().add(this.getScope());
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
-		sessionEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		sessionEClass.getESuperTypes().add(theModelPackage.getScope());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(scopeEClass, Scope.class, "Scope", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScope_DomainObjects(), theModelPackage.getDomainObject(), null, "domainObjects", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_DomainViews(), theModelPackage.getDerivedView(), null, "domainViews", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_DomainInstances(), theModelPackage.getDomainObjectInstance(), null, "domainInstances", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSession_Agent(), theModelPackage.getVisitorAgent(), null, "agent", null, 0, 1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSession_Components(), theModelPackage.getApplicationElement(), null, "components", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSession_Agents(), theModelPackage.getVisitorAgent(), null, "agents", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSession_Components(), theModelPackage.getApplicationElement(), null, "components", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// http://openiaml.org/comment

@@ -242,7 +242,7 @@
         <diagramLabel
             href="iaml.gmfgraph#LoginHandlerType"/>
         <features
-            href="iaml.ecore#//GeneratedElement/id"/>
+            href="iaml.ecore#//components/LoginHandler/type"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

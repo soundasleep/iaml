@@ -6,9 +6,8 @@
  */
 package org.openiaml.model.model.visual;
 
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.VisibleThing;
-
-import org.openiaml.model.model.scopes.Scope;
 
 /**
  * <!-- begin-user-doc -->

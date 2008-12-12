@@ -200,6 +200,10 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand im
 	private CreateElementCommand getDiagramCreateRelationshipCommand(
 			CreateRelationshipRequest request,
 			EClass elementType, EObject source, EObject target) throws ExecutionException {
+		/*
+		 * If any of these methods do not exist, make sure dynamic templates
+		 * are enabled for the .gmfgens.
+		 */
 		if (this.editorId.equals(org.openiaml.model.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.element.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
 		}
@@ -229,6 +233,10 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand im
 	 * @throws ExecutionException 
 	 */
 	private IElementType getDiagramEditType(EClass elementType) throws ExecutionException {
+		/*
+		 * If any of these methods do not exist, make sure dynamic templates
+		 * are enabled for the .gmfgens.
+		 */
 		if (this.editorId.equals(org.openiaml.model.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.element.providers.IamlElementTypes.getElementType(elementType);
 		}
@@ -259,6 +267,10 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand im
 	 */
 	private CreateElementCommand getDiagramCreateNodeCommand(
 			CreateElementRequest request, EClass elementType) throws ExecutionException {
+		/*
+		 * If any of these methods do not exist, make sure dynamic templates
+		 * are enabled for the .gmfgens.
+		 */
 		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
 		}

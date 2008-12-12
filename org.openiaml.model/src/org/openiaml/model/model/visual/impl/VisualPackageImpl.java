@@ -274,7 +274,6 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
-		ScopesPackage theScopesPackage = (ScopesPackage)EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -282,12 +281,12 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		// Add supertypes to classes
 		pageEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
-		pageEClass.getESuperTypes().add(theScopesPackage.getScope());
+		pageEClass.getESuperTypes().add(theModelPackage.getScope());
 		inputFormEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		inputTextFieldEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		frameEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
-		frameEClass.getESuperTypes().add(theScopesPackage.getScope());
+		frameEClass.getESuperTypes().add(theModelPackage.getScope());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

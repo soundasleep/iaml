@@ -7,7 +7,6 @@
 package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
-import org.openiaml.model.model.scopes.Scope;
 
 /**
  * <!-- begin-user-doc -->

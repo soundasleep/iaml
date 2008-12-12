@@ -658,9 +658,9 @@
       </labels>
       <labels
           visualID="4013"
-          editPartClassName="LoginHandlerIdEditPart"
-          itemSemanticEditPolicyClassName="LoginHandlerIdItemSemanticEditPolicy"
-          notationViewFactoryClassName="LoginHandlerIdViewFactory"
+          editPartClassName="LoginHandlerTypeEditPart"
+          itemSemanticEditPolicyClassName="LoginHandlerTypeItemSemanticEditPolicy"
+          notationViewFactoryClassName="LoginHandlerTypeViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -671,7 +671,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="iaml.genmodel#//model/GeneratedElement/id"/>
+              href="iaml.genmodel#//model/components/LoginHandler/type"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -869,6 +869,10 @@
             title="LoginHandler"
             description="Create new LoginHandler"
             genNodes="//@diagram/@topLevelNodes.10"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Kittens"
+            description="Create new Kittens"/>
       </groups>
     </palette>
     <preferencePages
@@ -1033,18 +1037,6 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
-        child="//@diagram/@topLevelNodes.9"
-        referenceType="out_target"
-        groupName="target"
-        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.9"
-        child="//@diagram/@links.0"
-        referenceType="in_source"
-        groupName="incoming links"
-        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.0"
         child="//@diagram/@topLevelNodes.10"
         referenceType="out_target"
         groupName="target"
@@ -1111,18 +1103,6 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.7"
-        child="//@diagram/@links.0"
-        referenceType="out_target"
-        groupName="outgoing links"
-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.0"
-        child="//@diagram/@topLevelNodes.9"
-        referenceType="in_source"
-        groupName="source"
-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.9"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"
@@ -1230,18 +1210,6 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.1"
-        child="//@diagram/@topLevelNodes.9"
-        referenceType="out_target"
-        groupName="target"
-        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.9"
-        child="//@diagram/@links.1"
-        referenceType="in_source"
-        groupName="incoming links"
-        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.1"
         child="//@diagram/@topLevelNodes.10"
         referenceType="out_target"
         groupName="target"
@@ -1308,18 +1276,6 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.7"
-        child="//@diagram/@links.1"
-        referenceType="out_target"
-        groupName="outgoing links"
-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.1"
-        child="//@diagram/@topLevelNodes.9"
-        referenceType="in_source"
-        groupName="source"
-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.9"
         child="//@diagram/@links.1"
         referenceType="out_target"
         groupName="outgoing links"

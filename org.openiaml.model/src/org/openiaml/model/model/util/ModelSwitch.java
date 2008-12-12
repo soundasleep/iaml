@@ -41,6 +41,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
@@ -50,7 +51,6 @@ import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.scopes.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -534,6 +534,12 @@ public class ModelSwitch<T> {
 			case ModelPackage.VISITOR_AGENT: {
 				VisitorAgent visitorAgent = (VisitorAgent)theEObject;
 				T result = caseVisitorAgent(visitorAgent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.SCOPE: {
+				Scope scope = (Scope)theEObject;
+				T result = caseScope(scope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

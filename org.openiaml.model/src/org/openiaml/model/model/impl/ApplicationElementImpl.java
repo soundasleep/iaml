@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
@@ -32,13 +31,12 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.scopes.Scope;
-import org.openiaml.model.model.scopes.ScopesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -220,7 +218,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' reference list.
+	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDomainObjects()
@@ -230,7 +228,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	protected EList<DomainObject> domainObjects;
 
 	/**
-	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' reference list.
+	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDomainViews()
@@ -240,7 +238,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	protected EList<DerivedView> domainViews;
 
 	/**
-	 * The cached value of the '{@link #getDomainInstances() <em>Domain Instances</em>}' reference list.
+	 * The cached value of the '{@link #getDomainInstances() <em>Domain Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDomainInstances()
@@ -511,7 +509,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 */
 	public EList<DomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectResolvingEList<DomainObject>(DomainObject.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS);
+			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -523,7 +521,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 */
 	public EList<DerivedView> getDomainViews() {
 		if (domainViews == null) {
-			domainViews = new EObjectResolvingEList<DerivedView>(DerivedView.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS);
+			domainViews = new EObjectContainmentEList<DerivedView>(DerivedView.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS);
 		}
 		return domainViews;
 	}
@@ -535,7 +533,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 */
 	public EList<DomainObjectInstance> getDomainInstances() {
 		if (domainInstances == null) {
-			domainInstances = new EObjectResolvingEList<DomainObjectInstance>(DomainObjectInstance.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES);
+			domainInstances = new EObjectContainmentEList<DomainObjectInstance>(DomainObjectInstance.class, this, ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES);
 		}
 		return domainInstances;
 	}
@@ -609,6 +607,12 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS:
+				return ((InternalEList<?>)getDomainObjects()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS:
+				return ((InternalEList<?>)getDomainViews()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES:
+				return ((InternalEList<?>)getDomainInstances()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__VALUES:
@@ -897,9 +901,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS: return ScopesPackage.SCOPE__DOMAIN_OBJECTS;
-				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS: return ScopesPackage.SCOPE__DOMAIN_VIEWS;
-				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES: return ScopesPackage.SCOPE__DOMAIN_INSTANCES;
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS: return ModelPackage.SCOPE__DOMAIN_OBJECTS;
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS: return ModelPackage.SCOPE__DOMAIN_VIEWS;
+				case ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES: return ModelPackage.SCOPE__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
@@ -965,9 +969,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
-				case ScopesPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS;
-				case ScopesPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS;
-				case ScopesPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES;
+				case ModelPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_OBJECTS;
+				case ModelPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_VIEWS;
+				case ModelPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.APPLICATION_ELEMENT__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

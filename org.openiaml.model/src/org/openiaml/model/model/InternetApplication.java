@@ -8,7 +8,6 @@ package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -138,6 +137,7 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 * @return the value of the '<em>Login Handlers</em>' containment reference list.
 	 * @see org.openiaml.model.model.ModelPackage#getInternetApplication_LoginHandlers()
 	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment added='0.2'"
 	 * @generated
 	 */
 	EList<LoginHandler> getLoginHandlers();

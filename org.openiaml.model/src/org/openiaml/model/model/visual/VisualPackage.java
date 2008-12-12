@@ -170,7 +170,7 @@ public interface VisualPackage extends EPackage {
 	int PAGE__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -179,7 +179,7 @@ public interface VisualPackage extends EPackage {
 	int PAGE__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -188,7 +188,7 @@ public interface VisualPackage extends EPackage {
 	int PAGE__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -360,7 +360,7 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -369,7 +369,7 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -378,7 +378,7 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -541,7 +541,7 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -550,7 +550,7 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -559,7 +559,7 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -723,7 +723,7 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -732,7 +732,7 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -741,7 +741,7 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -904,7 +904,7 @@ public interface VisualPackage extends EPackage {
 	int FRAME__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -913,7 +913,7 @@ public interface VisualPackage extends EPackage {
 	int FRAME__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -922,7 +922,7 @@ public interface VisualPackage extends EPackage {
 	int FRAME__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' reference list.
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

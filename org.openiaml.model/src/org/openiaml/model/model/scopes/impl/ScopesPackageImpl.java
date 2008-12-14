@@ -217,6 +217,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		sessionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
 		sessionEClass.getESuperTypes().add(theModelPackage.getScope());
+		sessionEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

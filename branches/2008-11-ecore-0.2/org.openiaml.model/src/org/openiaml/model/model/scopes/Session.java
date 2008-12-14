@@ -11,6 +11,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Scope;
+import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.VisitorAgent;
 
 /**
@@ -30,7 +31,7 @@ import org.openiaml.model.model.VisitorAgent;
  * @model
  * @generated
  */
-public interface Session extends NamedElement, ContainsOperations, Scope {
+public interface Session extends NamedElement, ContainsOperations, Scope, VisibleThing {
 	/**
 	 * Returns the value of the '<em><b>Agents</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.VisitorAgent}.

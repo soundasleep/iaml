@@ -12,14 +12,14 @@ import org.openiaml.model.tests.CodegenTestCase;
  * is authenticating against a key.
  * 
  * InternetApplication
- *   Page "home"
- *   Session
+ *   Page "Home"
+ *   Session "My Session"
  *     LoginHandler type=key [in=42, set=myKey, navigate"login"=viewkey, navigate"logout"=home]
  *     StaticValue key=42
- *     FieldValue myKey
- *   Page "viewkey"
- *     TextField "key"
- *       sync'd with myKey
+ *     FieldValue "my login key"
+ *   Page "View Page"
+ *     TextField "current login key"
+ *       sync'd with "my login key"
  * 
  * @see LoginHandlerKey.png
  * @author jmwright

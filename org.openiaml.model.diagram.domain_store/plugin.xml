@@ -428,7 +428,6 @@
       <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
          <includes>
             <contentExtension pattern="org.openiaml.model.diagram.domain_store.resourceContent"/>
-			<contentExtension pattern="org.openiaml.model.diagram.domain_store.domainResourceContent"/>
             <contentExtension pattern="org.openiaml.model.diagram.domain_store.navigatorLinkHelper"/>
          </includes>
       </viewerContentBinding>
@@ -482,33 +481,6 @@
                </or>
             </parentExpression>
          </commonSorter>
-      </navigatorContent>
-      <navigatorContent
-            id="org.openiaml.model.diagram.domain_store.domainResourceContent" 
-            name="%domainNavigatorContentName" 
-            priority="normal" 
-            contentProvider="org.openiaml.model.model.diagram.domainstore.navigator.IamlDomainNavigatorContentProvider" 
-            labelProvider="org.openiaml.model.model.diagram.domainstore.navigator.IamlDomainNavigatorLabelProvider"
-            icon="icons/obj16/ModelDiagramFile.gif"
-            activeByDefault="true">
-         <triggerPoints>
-            <or>
-	           <and>
-    	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="iaml_store"/>
-               </and>
-               <and>
-                  <instanceof value="org.eclipse.emf.ecore.EObject"/>
-                  <test property="org.openiaml.model.diagram.domain_store.isDomainModelElement"/>
-               </and>
-            </or>
-         </triggerPoints>
-         <possibleChildren>
-            <and>
-       	       <instanceof value="org.eclipse.emf.ecore.EObject"/>
-       	       <test property="org.openiaml.model.diagram.domain_store.isDomainModelElement"/>
-       	    </and>
-         </possibleChildren>
       </navigatorContent>
       <actionProvider
             id="org.openiaml.model.diagram.domain_store.navigatorActionProvider"
@@ -565,16 +537,7 @@
          <context decoratorTargets="PRIMARY_VIEW"/>
       </decoratorProvider>
    </extension>
-<extension point="org.eclipse.core.expressions.propertyTesters">
-      <?gmfgen generated="true"?>
-       <propertyTester
-           id="org.openiaml.model.diagram.domain_store.DomainModelElementPropertyTester"
-           type="org.eclipse.emf.ecore.EObject"
-           namespace="org.openiaml.model.diagram.domain_store"
-           properties="isDomainModelElement"
-           class="org.openiaml.model.model.diagram.domainstore.part.IamlDomainModelElementTester">
-       </propertyTester>
-   </extension><extension id="ValidationContributionItemProvider" name="Validation"
+<extension id="ValidationContributionItemProvider" name="Validation"
       point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
       <?gmfgen generated="true"?>
       <contributionItemProvider

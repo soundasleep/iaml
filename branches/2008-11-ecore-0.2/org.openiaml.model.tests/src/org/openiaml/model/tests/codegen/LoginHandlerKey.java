@@ -30,9 +30,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		if (true)
-			throw new Exception("This model has not yet been created.");
-		root = loadAndCodegen(ROOT + "codegen/SyncWiresTestCase.iaml");
+		root = loadAndCodegen(ROOT + "codegen/LoginHandlerKey.iaml");
 	}
 	
 	/**
@@ -61,8 +59,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 
-		clickLinkWithText("home");
-		assertTitleMatch("home");
+		clickLinkWithText("Home");
+		assertTitleMatch("Home");
 		assertNoProblem();
 
 	}

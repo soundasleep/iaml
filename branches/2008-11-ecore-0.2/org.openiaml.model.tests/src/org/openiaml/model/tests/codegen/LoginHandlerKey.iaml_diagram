@@ -13,7 +13,7 @@
       <styles xmi:type="notation:ShapeStyle" xmi:id="_R5RNp8oyEd2d78Kh2kjuVw"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_R5RNqMoyEd2d78Kh2kjuVw" diagramLink="_vXe_IMoyEd2VwqjonuTn2w" hint="Iaml_Visual"/>
       <element xmi:type="scopes:Session" href="LoginHandlerKey.iaml#scopes.11e1a0c9c91.5"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R5RNqcoyEd2d78Kh2kjuVw" x="288" y="108"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R5RNqcoyEd2d78Kh2kjuVw" x="300" y="108"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_J2OHwMozEd2VwqjonuTn2w" type="1011">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_J2XRssozEd2VwqjonuTn2w" source="Shortcut">
@@ -91,7 +91,7 @@
       <styles xmi:type="notation:ConnectorStyle" xmi:id="_BmtIocozEd2VwqjonuTn2w"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_BmtIosozEd2VwqjonuTn2w"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_BmtIo8ozEd2VwqjonuTn2w" hint="Iaml_Wire"/>
-      <element xmi:type="iaml.wires:NavigateWire" href="LoginHandlerKey.iaml#//@sessions.0/@children.1/@wires.0"/>
+      <element xmi:type="iaml.wires:NavigateWire" href="LoginHandlerKey.iaml#wires.11e3802c67f.8"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BmtIpMozEd2VwqjonuTn2w" points="[-44, -4, 172, -3]$[-160, -4, 56, -3]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_BoDMcMozEd2VwqjonuTn2w" id="(0.23404256,0.525)"/>
     </edges>
@@ -102,7 +102,7 @@
       <styles xmi:type="notation:ConnectorStyle" xmi:id="_DVIZUcozEd2VwqjonuTn2w"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_DVIZUsozEd2VwqjonuTn2w"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_DVIZU8ozEd2VwqjonuTn2w" hint="Iaml_Wire"/>
-      <element xmi:type="iaml.wires:FindWire" href="LoginHandlerKey.iaml#//@sessions.0/@children.1/@wires.1"/>
+      <element xmi:type="iaml.wires:FindWire" href="LoginHandlerKey.iaml#wires.11e3802c67f.9"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_DVIZVMozEd2VwqjonuTn2w" points="[-32, 20, 235, -148]$[-223, 165, 44, -3]"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_FFMBsMozEd2VwqjonuTn2w" type="3003" source="_91KJoMoyEd2VwqjonuTn2w" target="_715noMoyEd2VwqjonuTn2w">
@@ -118,7 +118,7 @@
       <styles xmi:type="notation:ConnectorStyle" xmi:id="_JgUJMcozEd2VwqjonuTn2w"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_JgUJMsozEd2VwqjonuTn2w"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_JgUJM8ozEd2VwqjonuTn2w" hint="Iaml_Wire"/>
-      <element xmi:type="iaml.wires:NavigateWire" href="LoginHandlerKey.iaml#//@sessions.0/@children.1/@wires.2"/>
+      <element xmi:type="iaml.wires:NavigateWire" href="LoginHandlerKey.iaml#wires.11e3802c67f.a"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JgUJNMozEd2VwqjonuTn2w" points="[16, -20, -113, 148]$[131, -148, 2, 20]"/>
     </edges>
   </notation:Diagram>

@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import net.sourceforge.jwebunit.junit.WebTestCase;
@@ -98,7 +100,7 @@ public abstract class ModelTestCase extends WebTestCase {
 	 * @return
 	 */
 	public String getProjectName() {
-		return "testing-" + this.getClass().getSimpleName() + "-" + new Random().nextInt(1024);
+		return "test." + this.getClass().getSimpleName() + "." + new SimpleDateFormat("yyMMddHHmmss").format(new Date());
 	}
 
 	/**

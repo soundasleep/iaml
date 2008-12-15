@@ -16,7 +16,7 @@ import org.openiaml.model.model.InternetApplication;
  *
  */
 public class CodegenTestCase extends InferenceTestCase {
-
+	
 	/**
 	 * Load a model and perform code generation.
 	 * 

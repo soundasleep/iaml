@@ -124,6 +124,13 @@
         <diagramLabel
             href="iaml.gmfgraph#CancelNodeName"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#CancelNodeText"/>
+        <features
+            href="iaml.ecore#//operations/CancelNode/exceptionText"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="operation.gmftool#//@palette/@tools.0/@tools.5"/>

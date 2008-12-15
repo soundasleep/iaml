@@ -4,6 +4,7 @@
 package org.openiaml.model.inference;
 
 import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
@@ -14,6 +15,7 @@ import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratesElements;
+import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
@@ -22,6 +24,8 @@ import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.StopNode;
+import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -119,6 +123,20 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		wire.setIsGenerated(true);
 		wire.setGeneratedBy(by);
 		return wire;
+	}
+
+	public Page generatedPage(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
+		Page page = (Page) createElement( container, VisualPackage.eINSTANCE.getPage(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		page.setIsGenerated(true);
+		page.setGeneratedBy(by);
+		return page;
+	}
+
+	public Page generatedPage(GeneratesElements by, InternetApplication container) throws InferenceException {
+		Page page = (Page) createElement( container, VisualPackage.eINSTANCE.getPage(), ModelPackage.eINSTANCE.getInternetApplication_Children() );
+		page.setIsGenerated(true);
+		page.setGeneratedBy(by);
+		return page;
 	}
 
 }

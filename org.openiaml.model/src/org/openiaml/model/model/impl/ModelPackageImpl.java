@@ -1519,7 +1519,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		applicationElementPropertyEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
 		staticValueEClass.getESuperTypes().add(this.getNamedElement());
 		staticValueEClass.getESuperTypes().add(this.getWireEdgesSource());
-		staticValueEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
+		staticValueEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		visibleThingEClass.getESuperTypes().add(this.getApplicationElementContainer());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsOperations());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsEventTriggers());
@@ -1545,6 +1545,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		derivedViewEClass.getESuperTypes().add(this.getContainsWires());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getContainsWires());
+		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

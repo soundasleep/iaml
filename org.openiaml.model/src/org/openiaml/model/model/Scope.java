@@ -8,8 +8,6 @@ package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Scope</b></em>'.
@@ -28,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface Scope extends EObject {
+public interface Scope extends GeneratesElements {
 	/**
 	 * Returns the value of the '<em><b>Domain Objects</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.DomainObject}.

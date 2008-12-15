@@ -21,11 +21,14 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
-import org.openiaml.model.model.operations.StopNode;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
+import org.openiaml.model.model.wires.FindWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -76,6 +79,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 
+	public DecisionOperation generatedDecisionOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
+		DecisionOperation operation = (DecisionOperation) createElement( container, OperationsPackage.eINSTANCE.getDecisionOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+		operation.setIsGenerated(true);
+		operation.setGeneratedBy(by);
+		return operation;
+	}
+	
 	public StartNode generatedStartNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		StartNode node = (StartNode) createElement( container, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
 		node.setIsGenerated(true);
@@ -83,8 +93,15 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 
-	public StopNode generatedStopNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
-		StopNode node = (StopNode) createElement( container, OperationsPackage.eINSTANCE.getStopNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+	public CancelNode generatedStopNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		CancelNode node = (CancelNode) createElement( container, OperationsPackage.eINSTANCE.getCancelNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+		node.setIsGenerated(true);
+		node.setGeneratedBy(by);
+		return node;
+	}
+
+	public FinishNode generatedFinishNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		FinishNode node = (FinishNode) createElement( container, OperationsPackage.eINSTANCE.getFinishNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
 		node.setIsGenerated(true);
 		node.setGeneratedBy(by);
 		return node;
@@ -120,6 +137,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public SyncWire generatedSyncWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
 		SyncWire wire = (SyncWire) createRelationship(container, WiresPackage.eINSTANCE.getSyncWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		wire.setIsGenerated(true);
+		wire.setGeneratedBy(by);
+		return wire;
+	}
+
+	public FindWire generatedFindWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
+		FindWire wire = (FindWire) createRelationship(container, WiresPackage.eINSTANCE.getFindWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 		wire.setIsGenerated(true);
 		wire.setGeneratedBy(by);
 		return wire;

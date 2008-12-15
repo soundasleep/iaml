@@ -170,7 +170,7 @@
     <nestedGenPackages prefix="Operations" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//operations">
       <genClasses ecoreClass="iaml.ecore#//operations/StartNode"/>
-      <genClasses ecoreClass="iaml.ecore#//operations/StopNode"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/CancelNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/FinishNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionOperation"/>

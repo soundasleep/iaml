@@ -103,6 +103,7 @@ public class ComponentsSwitch<T> {
 				LoginHandler loginHandler = (LoginHandler)theEObject;
 				T result = caseLoginHandler(loginHandler);
 				if (result == null) result = caseApplicationElementContainer(loginHandler);
+				if (result == null) result = caseGeneratesElements(loginHandler);
 				if (result == null) result = caseApplicationElement(loginHandler);
 				if (result == null) result = caseContainsWires(loginHandler);
 				if (result == null) result = caseContainsOperations(loginHandler);
@@ -110,7 +111,6 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(loginHandler);
 				if (result == null) result = caseWireEdgesSource(loginHandler);
 				if (result == null) result = caseWireEdgeDestination(loginHandler);
-				if (result == null) result = caseGeneratesElements(loginHandler);
 				if (result == null) result = caseScope(loginHandler);
 				if (result == null) result = caseGeneratedElement(loginHandler);
 				if (result == null) result = caseShouldntContainWires(loginHandler);

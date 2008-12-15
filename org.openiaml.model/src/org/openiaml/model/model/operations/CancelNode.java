@@ -11,13 +11,13 @@ import org.openiaml.model.model.ExecutionEdgeDestination;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Stop Node</b></em>'.
+ * A representation of the model object '<em><b>Cancel Node</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.openiaml.model.model.operations.OperationsPackage#getStopNode()
+ * @see org.openiaml.model.model.operations.OperationsPackage#getCancelNode()
  * @model
  * @generated
  */
-public interface StopNode extends ActivityNode, ExecutionEdgeDestination {
-} // StopNode
+public interface CancelNode extends ActivityNode, ExecutionEdgeDestination {
+} // CancelNode

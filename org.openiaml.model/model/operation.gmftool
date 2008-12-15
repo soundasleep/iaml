@@ -55,8 +55,8 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="StopNode"
-          description="Create new StopNode">
+          title="CancelNode"
+          description="Create new CancelNode">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon

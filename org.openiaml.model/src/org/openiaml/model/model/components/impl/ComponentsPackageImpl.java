@@ -226,6 +226,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 
 		// Add supertypes to classes
 		loginHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElementContainer());
+		loginHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(loginHandlerEClass, LoginHandler.class, "LoginHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

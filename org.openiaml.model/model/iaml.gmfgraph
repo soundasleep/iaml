@@ -467,19 +467,19 @@
           figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="StopNodeFigure">
+        name="CancelNodeFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="StopNodeFigure">
+          name="CancelNodeFigure">
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="224"
+            red="255"
             green="144"
             blue="142"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="StopNodeLabelFigure"
-            text="stop"/>
+            name="CancelNodeLabelFigure"
+            text="cancel"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
@@ -744,8 +744,8 @@
       name="StartNode"
       figure="StartNodeFigure"/>
   <nodes
-      name="StopNode"
-      figure="StopNodeFigure"/>
+      name="CancelNode"
+      figure="CancelNodeFigure"/>
   <nodes
       name="FinishNode"
       figure="FinishNodeFigure"/>
@@ -904,8 +904,8 @@
       figure="StartNodeFigure"
       accessor="//@figures.0/@descriptors.25/@accessors.0"/>
   <labels
-      name="StopNodeName"
-      figure="StopNodeFigure"
+      name="CancelNodeName"
+      figure="CancelNodeFigure"
       accessor="//@figures.0/@descriptors.26/@accessors.0"/>
   <labels
       name="FinishNodeName"

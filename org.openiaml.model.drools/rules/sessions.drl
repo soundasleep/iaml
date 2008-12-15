@@ -43,3 +43,207 @@ rule "Create 'login' page for LoginHandlers [InternetApplication]"
 		insert(login);
 		
 end
+
+rule "Create 'logout' page for LoginHandlers"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope )
+		not (Page (eContainer == scope, name=="logout" ))
+			
+	then
+
+		Page login = handler.generatedPage(login_handler, scope);
+		login.setName("logout");
+		insert(login);
+		
+end
+
+rule "Create 'access' event for all pages in a Session"
+	when
+		scope : Session( )
+		page : Page( eContainer == scope )
+		not (EventTrigger (eContainer == page, name=="access" ))
+					
+	then
+	
+		EventTrigger access = handler.generatedEventTrigger(scope, page);
+		access.setName("access");
+		insert(access);
+		
+end
+
+rule "Create 'key' property for LoginHandler[type = key]s"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope )
+		not (ApplicationElementProperty (eContainer == scope, 
+			name=="current login key" ) )
+		# the value may not be called "current login key"
+		not (FindWire( name == "set", from == login_handler, to != null ))
+					
+	then
+
+		ApplicationElementProperty key = handler.generatedApplicationElementProperty(login_handler, scope);
+		key.setName("current login key");
+		insert(key);
+		
+end
+
+rule "Connect 'key' property to LoginHandler"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope )
+		key : ApplicationElementProperty (eContainer == scope,
+			name == "current login key")
+		not (FindWire( from == login_handler, to == key, name == "set") )
+
+	then
+
+		FindWire wire = handler.generatedFindWire(login_handler, scope, login_handler, key);
+		key.setName("set");
+		insert(key);
+		
+end
+
+rule "Create 'check key' operation for LoginHandler[type = key]"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		not (Operation( eContainer == scope, name == "check key") )
+					
+	then
+	
+		CompositeOperation op = handler.generatedCompositeOperation( login_handler, scope );
+		op.setName("check key");
+		insert(op);
+end
+
+rule "Connect 'access' event to 'check key' operation"
+	when
+		scope : Session( )
+		page : Page( eContainer == scope )
+		access : EventTrigger( name == "access", eContainer == page )
+		check : CompositeOperation( name == "check key", eContainer == scope )
+		not (RunInstanceWire( from == access, to == check ))
+		
+	then
+		RunInstanceWire wire = handler.generatedRunInstanceWire(scope, page, access, check);
+		wire.setName("run");
+		insert(wire);	
+	
+end
+
+rule "Connect 'current login key' parameter to 'check key' operation run wire"
+	when
+		scope : Session( )
+		page : Page( eContainer == scope )
+		access : EventTrigger( name == "access", eContainer == page )
+		check : CompositeOperation( name == "check key", eContainer == scope )
+		value : ApplicationElementProperty(name == "current login key" )
+		wire : RunInstanceWire( from == access, to == check )
+		not (ParameterWire( from == value, to == wire ))
+		
+	then
+		ParameterWire param = handler.generatedParameterWire(scope, page, value, wire);
+		insert(param);
+
+end
+
+rule "Connect login key variable parameter to 'check key' operation run wire"
+	when
+		scope : Session( )
+		page : Page( eContainer == scope )
+		access : EventTrigger( name == "access", eContainer == page )
+		check : CompositeOperation( name == "check key", eContainer == scope )
+		
+		# this is a custom parameter
+		login_handler : LoginHandler( eContainer == scope )
+		value : ApplicationElementProperty( )
+		mySetWire : FindWire( from == login_handler, to == value, name == "set" )
+		
+		wire : RunInstanceWire( from == access, to == check )
+		not (ParameterWire( from == value, to == wire ))
+		
+	then
+		ParameterWire param = handler.generatedParameterWire(scope, page, value, wire);
+		insert(param);	
+
+end
+
+rule "Create contents of 'check key' operation for LoginHandler[type=key]"
+	when
+		scope : Session( )
+		o : CompositeOperation( name == "check key", eContainer == scope )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		
+		expected : StaticValue( ) 
+		expected_param : ParameterWire( from == expected, to == login_handler )
+	
+	then
+		Parameter parameter = handler.generatedParameter(o, o);
+		parameter.setName("current key value");
+		insert(parameter);
+		
+		DecisionOperation op = handler.generatedDecisionOperation(o, o);
+		op.setName("equal?");
+		insert(op);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		insert(start);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		insert(finish);
+		
+		# not ok
+		StopNode stop = handler.generatedStopNode(o, o);
+		# TODO add exception details
+		insert(stop);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		data1.setFrom(parameter);
+		data1.setTo(op);
+		insert(data1);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		data2.setFrom(expected);
+		data2.setTo(op);
+		insert(data2);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		edge1.setFrom(start);
+		edge1.setTo(op);
+		insert(edge1);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		edge2.setFrom(op);
+		edge2.setTo(finish);
+		insert(edge2);
+		
+		# not ok	
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
+		edge3.setFrom(op);
+		edge3.setTo(stop);
+		insert(edge3);
+
+end
+
+rule "Connect expected login key with check key operation"
+	when 
+		scope : Session( )
+		page : Page( eContainer == scope )
+		access : EventTrigger( name == "access", eContainer == page )
+		check : CompositeOperation( name == "check key", eContainer == scope )
+		wire : RunInstanceWire( from == access, to == check )
+		login_handler : LoginHandler( eContainer == scope )
+		
+		expected : StaticValue( ) 
+		expected_param : ParameterWire( from == expected, to == login_handler )
+		
+		not (ParameterWire(from == expected, to == check ))	
+	
+	then
+		#ParameterWire param = handler.generatedParameterWire(login_handler, page, expected, 
+	
+end

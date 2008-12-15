@@ -55,6 +55,8 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getDomainObjects <em>Domain Objects</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getDomainViews <em>Domain Views</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getDomainInstances <em>Domain Instances</em>}</li>
@@ -62,8 +64,6 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInEdges <em>In Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getGeneratedElements <em>Generated Elements</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getChildren <em>Children</em>}</li>
@@ -157,6 +157,36 @@ public class SessionImpl extends EObjectImpl implements Session {
 	protected EList<Operation> operations;
 
 	/**
+	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -225,36 +255,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
-
-	/**
-	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGeneratedElements()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<GeneratedElement> generatedElements;
-
-	/**
-	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOverridden()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean OVERRIDDEN_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOverridden()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -672,12 +672,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 				if (generatedBy != null)
 					msgs = ((InternalEObject)generatedBy).eInverseRemove(this, ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS, GeneratesElements.class, msgs);
 				return basicSetGeneratedBy((GeneratesElements)otherEnd, msgs);
+			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 			case ScopesPackage.SESSION__OUT_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
 			case ScopesPackage.SESSION__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
-			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -694,6 +694,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return basicSetGeneratedBy(null, msgs);
 			case ScopesPackage.SESSION__OPERATIONS:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
+				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				return ((InternalEList<?>)getDomainObjects()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__DOMAIN_VIEWS:
@@ -708,8 +710,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
-			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
-				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__VALUES:
@@ -745,6 +745,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getName();
 			case ScopesPackage.SESSION__OPERATIONS:
 				return getOperations();
+			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
+				return getGeneratedElements();
+			case ScopesPackage.SESSION__OVERRIDDEN:
+				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
 			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				return getDomainObjects();
 			case ScopesPackage.SESSION__DOMAIN_VIEWS:
@@ -759,10 +763,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getOutEdges();
 			case ScopesPackage.SESSION__IN_EDGES:
 				return getInEdges();
-			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
-				return getGeneratedElements();
-			case ScopesPackage.SESSION__OVERRIDDEN:
-				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
 			case ScopesPackage.SESSION__PROPERTIES:
 				return getProperties();
 			case ScopesPackage.SESSION__VALUES:
@@ -804,6 +804,13 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getOperations().clear();
 				getOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
+			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
+				return;
+			case ScopesPackage.SESSION__OVERRIDDEN:
+				setOverridden(((Boolean)newValue).booleanValue());
+				return;
 			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
 				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
@@ -831,13 +838,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__IN_EDGES:
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
-				return;
-			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
-				getGeneratedElements().clear();
-				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
-				return;
-			case ScopesPackage.SESSION__OVERRIDDEN:
-				setOverridden(((Boolean)newValue).booleanValue());
 				return;
 			case ScopesPackage.SESSION__PROPERTIES:
 				getProperties().clear();
@@ -890,6 +890,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__OPERATIONS:
 				getOperations().clear();
 				return;
+			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				return;
+			case ScopesPackage.SESSION__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
 				return;
@@ -910,12 +916,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return;
 			case ScopesPackage.SESSION__IN_EDGES:
 				getInEdges().clear();
-				return;
-			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
-				getGeneratedElements().clear();
-				return;
-			case ScopesPackage.SESSION__OVERRIDDEN:
-				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
 			case ScopesPackage.SESSION__PROPERTIES:
 				getProperties().clear();
@@ -957,6 +957,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ScopesPackage.SESSION__OPERATIONS:
 				return operations != null && !operations.isEmpty();
+			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
+				return generatedElements != null && !generatedElements.isEmpty();
+			case ScopesPackage.SESSION__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				return domainObjects != null && !domainObjects.isEmpty();
 			case ScopesPackage.SESSION__DOMAIN_VIEWS:
@@ -971,10 +975,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return outEdges != null && !outEdges.isEmpty();
 			case ScopesPackage.SESSION__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
-			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
-				return generatedElements != null && !generatedElements.isEmpty();
-			case ScopesPackage.SESSION__OVERRIDDEN:
-				return overridden != OVERRIDDEN_EDEFAULT;
 			case ScopesPackage.SESSION__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ScopesPackage.SESSION__VALUES:
@@ -1001,6 +1001,13 @@ public class SessionImpl extends EObjectImpl implements Session {
 		if (baseClass == ContainsOperations.class) {
 			switch (derivedFeatureID) {
 				case ScopesPackage.SESSION__OPERATIONS: return ModelPackage.CONTAINS_OPERATIONS__OPERATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == GeneratesElements.class) {
+			switch (derivedFeatureID) {
+				case ScopesPackage.SESSION__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case ScopesPackage.SESSION__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -1041,13 +1048,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
-		if (baseClass == GeneratesElements.class) {
-			switch (derivedFeatureID) {
-				case ScopesPackage.SESSION__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
-				case ScopesPackage.SESSION__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
-				default: return -1;
-			}
-		}
 		if (baseClass == ApplicationElement.class) {
 			switch (derivedFeatureID) {
 				case ScopesPackage.SESSION__PROPERTIES: return ModelPackage.APPLICATION_ELEMENT__PROPERTIES;
@@ -1080,6 +1080,13 @@ public class SessionImpl extends EObjectImpl implements Session {
 		if (baseClass == ContainsOperations.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_OPERATIONS__OPERATIONS: return ScopesPackage.SESSION__OPERATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == GeneratesElements.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ScopesPackage.SESSION__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ScopesPackage.SESSION__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -1117,13 +1124,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ScopesPackage.SESSION__IN_EDGES;
-				default: return -1;
-			}
-		}
-		if (baseClass == GeneratesElements.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ScopesPackage.SESSION__GENERATED_ELEMENTS;
-				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ScopesPackage.SESSION__OVERRIDDEN;
 				default: return -1;
 			}
 		}

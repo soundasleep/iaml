@@ -7,6 +7,7 @@
 package org.openiaml.model.model.components;
 
 import org.openiaml.model.model.ApplicationElementContainer;
+import org.openiaml.model.model.GeneratesElements;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +25,7 @@ import org.openiaml.model.model.ApplicationElementContainer;
  * @model
  * @generated
  */
-public interface LoginHandler extends ApplicationElementContainer {
+public interface LoginHandler extends ApplicationElementContainer, GeneratesElements {
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

@@ -2,7 +2,7 @@ import iaml;
 
 extension metamodel::Extensions;
 
-// TODO add test case
+// TODO add test cases for model validation
 context model::InternetApplication ERROR "No pages in internet application" :
 	children.exists( e | model::visual::Page.isInstance(e) );
 
@@ -11,3 +11,6 @@ context model::visual::Page ERROR "Page must have a name" :
 	
 context model::Operation ERROR "Operation must have a name" :
 	name.length > 0;
+	
+context model::components::LoginHandler ERROR "A login handler [type=key] must have an incoming parameter for the key (e.g. a StaticValue)" :
+	inEdges.exists ( e | model::wires::ParameterWire.isInstance(e) ); 

@@ -13,13 +13,13 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.impl.ModelPackageImpl;
+import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
-import org.openiaml.model.model.operations.StopNode;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
@@ -46,7 +46,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass stopNodeEClass = null;
+	private EClass cancelNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -168,8 +168,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStopNode() {
-		return stopNodeEClass;
+	public EClass getCancelNode() {
+		return cancelNodeEClass;
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		// Create classes and their features
 		startNodeEClass = createEClass(START_NODE);
 
-		stopNodeEClass = createEClass(STOP_NODE);
+		cancelNodeEClass = createEClass(CANCEL_NODE);
 
 		finishNodeEClass = createEClass(FINISH_NODE);
 
@@ -271,8 +271,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		// Add supertypes to classes
 		startNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
 		startNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
-		stopNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		stopNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		cancelNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		cancelNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 		finishNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
 		finishNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
@@ -284,7 +284,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		// Initialize classes and features; add operations and parameters
 		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(stopNodeEClass, StopNode.class, "StopNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(cancelNodeEClass, CancelNode.class, "CancelNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(finishNodeEClass, FinishNode.class, "FinishNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

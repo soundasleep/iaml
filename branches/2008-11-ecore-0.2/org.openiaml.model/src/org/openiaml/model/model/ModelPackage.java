@@ -2074,13 +2074,13 @@ public interface ModelPackage extends EPackage {
 	int STATIC_VALUE__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>In Flows</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Flows</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_VALUE__IN_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int STATIC_VALUE__OUT_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3506,13 +3506,31 @@ public interface ModelPackage extends EPackage {
 	int SCOPE = 39;
 
 	/**
+	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__GENERATED_ELEMENTS = GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__OVERRIDDEN = GENERATES_ELEMENTS__OVERRIDDEN;
+
+	/**
 	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__DOMAIN_OBJECTS = 0;
+	int SCOPE__DOMAIN_OBJECTS = GENERATES_ELEMENTS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
@@ -3521,7 +3539,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__DOMAIN_VIEWS = 1;
+	int SCOPE__DOMAIN_VIEWS = GENERATES_ELEMENTS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
@@ -3530,7 +3548,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__DOMAIN_INSTANCES = 2;
+	int SCOPE__DOMAIN_INSTANCES = GENERATES_ELEMENTS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
@@ -3539,7 +3557,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = 3;
+	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 3;
 
 
 	/**

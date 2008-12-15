@@ -342,7 +342,7 @@ public class ModelSwitch<T> {
 				T result = caseStaticValue(staticValue);
 				if (result == null) result = caseNamedElement(staticValue);
 				if (result == null) result = caseWireEdgesSource(staticValue);
-				if (result == null) result = caseDataFlowEdgeDestination(staticValue);
+				if (result == null) result = caseDataFlowEdgesSource(staticValue);
 				if (result == null) result = caseGeneratedElement(staticValue);
 				if (result == null) result = caseShouldntContainWires(staticValue);
 				if (result == null) result = caseContainsWires(staticValue);
@@ -540,6 +540,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.SCOPE: {
 				Scope scope = (Scope)theEObject;
 				T result = caseScope(scope);
+				if (result == null) result = caseGeneratesElements(scope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

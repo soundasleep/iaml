@@ -99,6 +99,10 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 				return createContainsOperationsAdapter();
 			}
 			@Override
+			public Adapter caseGeneratesElements(GeneratesElements object) {
+				return createGeneratesElementsAdapter();
+			}
+			@Override
 			public Adapter caseScope(Scope object) {
 				return createScopeAdapter();
 			}
@@ -121,10 +125,6 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
 				return createWireEdgeDestinationAdapter();
-			}
-			@Override
-			public Adapter caseGeneratesElements(GeneratesElements object) {
-				return createGeneratesElementsAdapter();
 			}
 			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {

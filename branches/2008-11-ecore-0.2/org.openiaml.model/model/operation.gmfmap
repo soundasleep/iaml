@@ -116,19 +116,19 @@
         href="iaml.ecore#//CompositeOperation/nodes"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//operations/StopNode"/>
+          href="iaml.ecore#//operations/CancelNode"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( StopNode )"/>
+          body="self.oclIsTypeOf( CancelNode )"/>
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#StopNodeName"/>
+            href="iaml.gmfgraph#CancelNodeName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="operation.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
-          href="iaml.gmfgraph#StopNode"/>
+          href="iaml.gmfgraph#CancelNode"/>
     </ownedChild>
   </nodes>
   <nodes>

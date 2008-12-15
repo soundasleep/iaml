@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.operations.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -177,6 +178,15 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCancelNode_ExceptionText() {
+		return (EAttribute)cancelNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFinishNode() {
 		return finishNodeEClass;
 	}
@@ -230,6 +240,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		startNodeEClass = createEClass(START_NODE);
 
 		cancelNodeEClass = createEClass(CANCEL_NODE);
+		createEAttribute(cancelNodeEClass, CANCEL_NODE__EXCEPTION_TEXT);
 
 		finishNodeEClass = createEClass(FINISH_NODE);
 
@@ -285,6 +296,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cancelNodeEClass, CancelNode.class, "CancelNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCancelNode_ExceptionText(), ecorePackage.getEString(), "exceptionText", null, 0, 1, CancelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(finishNodeEClass, FinishNode.class, "FinishNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

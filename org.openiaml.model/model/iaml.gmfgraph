@@ -480,9 +480,15 @@
             xsi:type="gmfgraph:Label"
             name="CancelNodeLabelFigure"
             text="cancel"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CancelNodeTextLabelFigure"
+            text="&lt;...>"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="FinishNodeFigure">
@@ -959,4 +965,8 @@
       name="LoginHandlerType"
       figure="LoginHandlerFigure"
       accessor="//@figures.0/@descriptors.38/@accessors.1"/>
+  <labels
+      name="CancelNodeText"
+      figure="CancelNodeFigure"
+      accessor="//@figures.0/@descriptors.26/@accessors.1"/>
 </gmfgraph:Canvas>

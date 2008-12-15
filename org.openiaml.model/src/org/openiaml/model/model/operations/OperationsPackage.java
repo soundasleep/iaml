@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.operations;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -161,13 +162,22 @@ public interface OperationsPackage extends EPackage {
 	int CANCEL_NODE__IN_EXECUTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Exception Text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CANCEL_NODE__EXCEPTION_TEXT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Cancel Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CANCEL_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 1;
+	int CANCEL_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.FinishNodeImpl <em>Finish Node</em>}' class.
@@ -418,6 +428,17 @@ public interface OperationsPackage extends EPackage {
 	EClass getCancelNode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.operations.CancelNode#getExceptionText <em>Exception Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exception Text</em>'.
+	 * @see org.openiaml.model.model.operations.CancelNode#getExceptionText()
+	 * @see #getCancelNode()
+	 * @generated
+	 */
+	EAttribute getCancelNode_ExceptionText();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.operations.FinishNode <em>Finish Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -488,6 +509,14 @@ public interface OperationsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CANCEL_NODE = eINSTANCE.getCancelNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Exception Text</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CANCEL_NODE__EXCEPTION_TEXT = eINSTANCE.getCancelNode_ExceptionText();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.operations.impl.FinishNodeImpl <em>Finish Node</em>}' class.

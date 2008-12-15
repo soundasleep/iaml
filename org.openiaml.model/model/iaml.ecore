@@ -349,7 +349,9 @@
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
     <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource"/>
-    <eClassifiers xsi:type="ecore:EClass" name="CancelNode" eSuperTypes="#//ActivityNode #//ExecutionEdgeDestination"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CancelNode" eSuperTypes="#//ActivityNode #//ExecutionEdgeDestination">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//ActivityNode #//ExecutionEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//ChainedOperation #//DataFlowEdgeDestination"/>

@@ -8,6 +8,7 @@ package org.openiaml.model.model.operations.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -35,6 +37,7 @@ import org.openiaml.model.model.operations.OperationsPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.operations.impl.CancelNodeImpl#getInExecutions <em>In Executions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.CancelNodeImpl#getExceptionText <em>Exception Text</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +53,25 @@ public class CancelNodeImpl extends ActivityNodeImpl implements CancelNode {
 	 * @ordered
 	 */
 	protected EList<ExecutionEdge> inExecutions;
+
+	/**
+	 * The default value of the '{@link #getExceptionText() <em>Exception Text</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExceptionText()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EXCEPTION_TEXT_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getExceptionText() <em>Exception Text</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExceptionText()
+	 * @generated
+	 * @ordered
+	 */
+	protected String exceptionText = EXCEPTION_TEXT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,6 +102,27 @@ public class CancelNodeImpl extends ActivityNodeImpl implements CancelNode {
 			inExecutions = new EObjectWithInverseResolvingEList<ExecutionEdge>(ExecutionEdge.class, this, OperationsPackage.CANCEL_NODE__IN_EXECUTIONS, ModelPackage.EXECUTION_EDGE__TO);
 		}
 		return inExecutions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getExceptionText() {
+		return exceptionText;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExceptionText(String newExceptionText) {
+		String oldExceptionText = exceptionText;
+		exceptionText = newExceptionText;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.CANCEL_NODE__EXCEPTION_TEXT, oldExceptionText, exceptionText));
 	}
 
 	/**
@@ -121,6 +164,8 @@ public class CancelNodeImpl extends ActivityNodeImpl implements CancelNode {
 		switch (featureID) {
 			case OperationsPackage.CANCEL_NODE__IN_EXECUTIONS:
 				return getInExecutions();
+			case OperationsPackage.CANCEL_NODE__EXCEPTION_TEXT:
+				return getExceptionText();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -138,6 +183,9 @@ public class CancelNodeImpl extends ActivityNodeImpl implements CancelNode {
 				getInExecutions().clear();
 				getInExecutions().addAll((Collection<? extends ExecutionEdge>)newValue);
 				return;
+			case OperationsPackage.CANCEL_NODE__EXCEPTION_TEXT:
+				setExceptionText((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -153,6 +201,9 @@ public class CancelNodeImpl extends ActivityNodeImpl implements CancelNode {
 			case OperationsPackage.CANCEL_NODE__IN_EXECUTIONS:
 				getInExecutions().clear();
 				return;
+			case OperationsPackage.CANCEL_NODE__EXCEPTION_TEXT:
+				setExceptionText(EXCEPTION_TEXT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -167,6 +218,8 @@ public class CancelNodeImpl extends ActivityNodeImpl implements CancelNode {
 		switch (featureID) {
 			case OperationsPackage.CANCEL_NODE__IN_EXECUTIONS:
 				return inExecutions != null && !inExecutions.isEmpty();
+			case OperationsPackage.CANCEL_NODE__EXCEPTION_TEXT:
+				return EXCEPTION_TEXT_EDEFAULT == null ? exceptionText != null : !EXCEPTION_TEXT_EDEFAULT.equals(exceptionText);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -201,6 +254,22 @@ public class CancelNodeImpl extends ActivityNodeImpl implements CancelNode {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (exceptionText: ");
+		result.append(exceptionText);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CancelNodeImpl

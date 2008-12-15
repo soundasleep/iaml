@@ -196,9 +196,9 @@ rule "Create contents of 'check key' operation for LoginHandler[type=key]"
 		insert(finish);
 		
 		# not ok
-		StopNode stop = handler.generatedStopNode(o, o);
-		# TODO add exception details
-		insert(stop);
+		CancelNode cancel = handler.generatedCancelNode(o, o);
+		cancel.setExceptionText("key check failed");
+		insert(cancel);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
 		data1.setFrom(parameter);
@@ -224,12 +224,12 @@ rule "Create contents of 'check key' operation for LoginHandler[type=key]"
 		# not ok	
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
 		edge3.setFrom(op);
-		edge3.setTo(stop);
+		edge3.setTo(cancel);
 		insert(edge3);
 
 end
 
-rule "Connect expected login key with check key operation"
+rule "Connect expected login key as parameter to check key operation"
 	when 
 		scope : Session( )
 		page : Page( eContainer == scope )
@@ -244,6 +244,7 @@ rule "Connect expected login key with check key operation"
 		not (ParameterWire(from == expected, to == check ))	
 	
 	then
-		#ParameterWire param = handler.generatedParameterWire(login_handler, page, expected, 
+		ParameterWire param = handler.generatedParameterWire(login_handler, page, expected, wire);
+		insert(param);
 	
 end

@@ -16,29 +16,37 @@ import org.w3c.dom.Node;
 /**
  * Migrate model version 0.1 to version 0.2
  *
- * In the future most of this functionality may be refactored into an abstract superclass.
+ * In the future most of this functionality should be refactored into an abstract superclass.
  *
  * Changes in model version 0.2:
  * 
  * <ol>
  *   <li>New wires:
- *     <ol>FilterWire</ol>
- *     <ol>FindWire</ol>
- *     <ol>ShowWire</ol>
- *     <ol>NavigateWire</ol>
- *     <ol>CommitWire</ol>
- *     <ol>ConditionWire</ol>
- *   </li>
- *   <li>New visual emenets:
- *     <ol>Button</ol>
- *     <ol>Frame</ol>
- *   </li>
+ *   <ol>
+ *     <li>FilterWire</li>
+ *     <li>FindWire</li>
+ *     <li>ShowWire</li>
+ *     <li>NavigateWire</li>
+ *     <li>CommitWire</li>
+ *     <li>ConditionWire</li>
+ *   </ol></li>
+ *   <li>New visual elements:
+ *   <ol>
+ *     <li>Button</li>
+ *     <li>Frame</li>
+ *   </ol></li>
  *   <li>New elements:
- *     <ol>abstract Scope</ol>
- *     <ol>Session</ol>
- *     <ol>PageRequest</ol>
- *     <ol>UserAgent</ol>
- *   </li>
+ *   <ol>
+ *     <li>abstract Scope</li>
+ *     <li>Session</li>
+ *     <li>PageRequest</li>
+ *     <li>UserAgent</li>
+ *     <li>LoginHandler</li>
+ *   </ol></li>
+ *   <li>
+ *   <ol>Renamed elements:
+ *     <li>StopNode --> CancelNode</li>
+ *   </ol></li>
  * </ol>
  *
  * @see #isVersion(Document) for what defines this model

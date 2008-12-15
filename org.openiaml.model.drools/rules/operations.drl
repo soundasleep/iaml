@@ -12,7 +12,6 @@ import org.openiaml.model.model.operations.*;
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
-
 rule "Create 'update' operation for input text field"
 	when
 		f : InputTextField( overridden == false )
@@ -54,8 +53,8 @@ rule "Create components of 'update' operation"
 		StartNode start = handler.generatedStartNode(o, o);
 		insert(start);
 		
-		StopNode stop = handler.generatedStopNode(o, o);
-		insert(stop);
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		insert(finish);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
 		data1.setFrom(parameter);
@@ -74,7 +73,7 @@ rule "Create components of 'update' operation"
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
 		edge2.setFrom(op);
-		edge2.setTo(stop);
+		edge2.setTo(finish);
 		insert(edge2);
 
 end

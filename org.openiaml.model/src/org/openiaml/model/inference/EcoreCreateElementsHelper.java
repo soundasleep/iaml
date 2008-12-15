@@ -93,7 +93,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 
-	public CancelNode generatedStopNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
+	public CancelNode generatedCancelNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		CancelNode node = (CancelNode) createElement( container, OperationsPackage.eINSTANCE.getCancelNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
 		node.setIsGenerated(true);
 		node.setGeneratedBy(by);

@@ -146,60 +146,66 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public FindWire createFindWire() {
 		FindWireImpl findWire = new FindWireImpl();
+		generateID(findWire);
 		return findWire;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public ShowWire createShowWire() {
 		ShowWireImpl showWire = new ShowWireImpl();
+		generateID(showWire);
 		return showWire;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public CommitWire createCommitWire() {
 		CommitWireImpl commitWire = new CommitWireImpl();
+		generateID(commitWire);
 		return commitWire;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public NavigateWire createNavigateWire() {
 		NavigateWireImpl navigateWire = new NavigateWireImpl();
+		generateID(navigateWire);
 		return navigateWire;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public FilterWire createFilterWire() {
 		FilterWireImpl filterWire = new FilterWireImpl();
+		generateID(filterWire);
 		return filterWire;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public ConditionWire createConditionWire() {
 		ConditionWireImpl conditionWire = new ConditionWireImpl();
+		generateID(conditionWire);
 		return conditionWire;
 	}
 

@@ -112,20 +112,22 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Button createButton() {
 		ButtonImpl button = new ButtonImpl();
+		generateID(button);
 		return button;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Frame createFrame() {
 		FrameImpl frame = new FrameImpl();
+		generateID(frame);
 		return frame;
 	}
 

@@ -337,40 +337,44 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public DerivedView createDerivedView() {
 		DerivedViewImpl derivedView = new DerivedViewImpl();
+		generateID(derivedView);
 		return derivedView;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public DomainObjectInstance createDomainObjectInstance() {
 		DomainObjectInstanceImpl domainObjectInstance = new DomainObjectInstanceImpl();
+		generateID(domainObjectInstance);
 		return domainObjectInstance;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public PageRequest createPageRequest() {
 		PageRequestImpl pageRequest = new PageRequestImpl();
+		generateID(pageRequest);
 		return pageRequest;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public VisitorAgent createVisitorAgent() {
 		VisitorAgentImpl visitorAgent = new VisitorAgentImpl();
+		generateID(visitorAgent);
 		return visitorAgent;
 	}
 

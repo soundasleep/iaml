@@ -84,6 +84,10 @@ public class LoginHandlerKey extends CodegenTestCase {
 	/**
 	 * The site should have a logout page, that presents a problem (since
 	 * we're not yet authenticated).
+	 * 
+	 * Normally the user wouldn't see the "logout" link, but we should
+	 * check that if they access it manually without being authenticated,
+	 * that an error is thrown.
 	 */
 	public void testHasLogoutPage() {
 		IFile sitemap = getProject().getFile("output/sitemap.html");

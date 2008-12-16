@@ -180,17 +180,17 @@ echo "ok";
 		store_db('«safeName(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);  
+	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::scopes::Session )-»
+		«REM»a function run on in this session«ENDREM»
+		do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
 	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::visual::Page )-»
 		«REM»a function run on a page«ENDREM»
 		«IF from.eContainer == to.eContainer-»
 			«REM»a function run on *this* page«ENDREM»
 			do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
 		«ELSE-»
-			«ERROR "Cannot run a server-side function on another page"-»
+			«ERROR "Cannot run a server-side function '" + this + "' on another page (this page = '" + from.eContainer + "', target page = '" + to.eContainer + "')"-»
 		«ENDIF-»
-	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::scopes::Session )-»
-		«REM»a function run on in this session«ENDREM»
-		do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
 	«ELSE-»
 		local_die('unknown target operation type «to.eContainer.metaType.name» for «this»');
 	«ENDIF»

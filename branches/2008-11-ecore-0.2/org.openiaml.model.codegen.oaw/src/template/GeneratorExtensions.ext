@@ -51,7 +51,10 @@ onCurrentPage(model::WireEdgesSource pageElement, model::WireEdgeDestination tar
  * - Any operations contained in the direct parent scope (if any)
  */
 allContainerOperations(model::ApplicationElementContainer this) :
-	operations.addAll( children.allContainerOperations().flatten() ).addAll( possibleParentOperations(eContainer) ) ;
+	// we have to toSet() it so that we *clone* the list of operations, and not
+	// add operations to the list directly
+	// see http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=11142 
+	operations.toSet().addAll( children.allContainerOperations() ).addAll( possibleParentOperations(eContainer) );
 
 allContainerOperations(model::ApplicationElement this) :
 	operations;

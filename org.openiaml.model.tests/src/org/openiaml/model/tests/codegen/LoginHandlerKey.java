@@ -243,14 +243,14 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * helper method: Assert that there has been a problem.
 	 */
 	protected void assertProblem() {
-		assertTextPresent("error");
+		assertMatch("(Error|error|Exception|exception)");
 	}
 	
 	/**
 	 * Helper method: Assert that there has not been a problem.
 	 */
 	protected void assertNoProblem() {
-		assertTextNotPresent("error");
+		assertNoMatch("(Error|error|Exception|exception)");
 	}
 	
 }

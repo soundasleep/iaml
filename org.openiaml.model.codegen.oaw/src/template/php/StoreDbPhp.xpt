@@ -213,7 +213,12 @@ echo "ok";
 	«IF name == "fieldValue"»
 		$arg0 /* the new value is already store in this variable */
 	«ELSE»
-		get_application_element_property("«safeName()-»")
+		«IF eContainer.metaType.isAssignableFrom( model::scopes::Session )»
+			/* a property from our session */
+			require_session("«safeName()-»")
+		«ELSE»
+			get_application_property("«safeName()-»")
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 

@@ -17,5 +17,5 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface ChainedOperation extends Operation, ExecutionEdgesSource {
+public interface ChainedOperation extends Operation, ExecutionEdgesSource, WireEdgesSource {
 } // ChainedOperation

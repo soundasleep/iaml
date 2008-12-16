@@ -9,6 +9,7 @@ package org.openiaml.model.model.scopes;
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.VisibleThing;
@@ -31,7 +32,7 @@ import org.openiaml.model.model.VisitorAgent;
  * @model
  * @generated
  */
-public interface Session extends NamedElement, ContainsOperations, Scope, VisibleThing {
+public interface Session extends NamedElement, ContainsOperations, Scope, VisibleThing, ContainsWires {
 	/**
 	 * Returns the value of the '<em><b>Agents</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.VisitorAgent}.

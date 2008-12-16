@@ -96,6 +96,31 @@ function setField(field) {
 	createCookie("field_" + field.id, field.value, 30);
 }
 
+/**
+ * Is every element in the array equal?
+ */ 
+function is_array_equal(a) {
+	if (a.length <= 1)
+		return true;
+		
+	for (var i = 1; i < a.length; i++) {
+		if (a[0] != a[i])
+			return false;
+	}
+	
+	return true;
+}
+
+/**
+ * Define an exception class.
+ */
+function IamlJavascriptException(message) {
+	this.message = message;
+	
+	this.getMessage = function() { return message; }
+	this.toString = function() { return "IamlJavascriptException: " + message; } 
+}
+
 // ---------
 
 /**

@@ -31,6 +31,8 @@
 				«EXPAND js::DefaultJs::defaultJs FOR this-»
 			</script>
 			<script language="Javascript">
+				var try_catch_depth = 0;
+			
 				«EXPAND expandOperations FOR this-»
 				
 				// this needs to be loaded *after* the page has loaded
@@ -51,17 +53,11 @@
 		<?php
 		/* expand any fail error messages */
 		if (require_get("fail")) {
-			$e = @unserialize(require_get("fail"));
-			if ($e) {
 ?>
 	<div class="error">
-		<p>An exception occured: <i><?php echo $e; ?></i></p>
-		<blockquote>
-			<pre><?php echo $e->getTraceAsString(); ?></pre>
-		</blockquote>
+		<p>An exception occured: <i><?php echo htmlspecialchars(require_get("fail")); ?></i></p>
 	</div>
 <?php 
-			}
 		}
 		?>
 		
@@ -111,8 +107,8 @@
 «ENDDEFINE»
 
 «DEFINE expandOperations FOR model::ApplicationElementContainer-»
-	«EXPAND expandOperation FOREACH operations-»
-	«EXPAND expandOperations FOREACH children-»
+	// expanding operations for «this»
+	«EXPAND expandOperation FOREACH allContainerOperations()-»
 «ENDDEFINE»
 
 «DEFINE expandOperation FOR model::Operation-»
@@ -123,14 +119,41 @@
 «ENDDEFINE»
 
 «DEFINE expandOperation FOR model::CompositeOperation»
-	/* composite operation */
+	/** composite operation "«name»" */
 	var running_«safeName()» = false;
 	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
 		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
 		// operation: «name»
 		if (running_«safeName()-» == false) {
 			running_«safeName()-» = true;		// prevent loops
-			«EXPAND doExecutionFlow FOR startNode()-»
+			
+			// has this operation got a fail handler?
+			«IF getFailEdge() != null»
+				// fail edge «getFailEdge()»
+				try {
+					try_catch_depth++;
+			«ENDIF»
+			
+			// execute the operation
+			// if we are at the root try/catch, catch the exception explicitly
+			if (try_catch_depth == 0 «IF getFailEdge() != null»&& false«ENDIF» ) {
+				try {
+					«EXPAND doExecutionFlow FOR startNode()-»
+				} catch (e if e instanceof IamlJavascriptException) {
+					alert("Exception: " + e);
+				}
+			} else {
+				«EXPAND doExecutionFlow FOR startNode()-»
+			}					
+
+			«IF getFailEdge() != null»
+					try_catch_depth--;
+				} catch (e if e instanceof IamlJavascriptException) {
+					debug("Caught exception " + e);
+					«EXPAND expandFailEdge FOR getFailEdge()»
+				}
+			«ENDIF»
+
 			running_«safeName()-» = false;
 		}
 	}
@@ -157,6 +180,12 @@
 	// do nothing «this-»
 «ENDDEFINE»
 
+«DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»
+	«IF exceptionText.length > 0»
+		throw new IamlJavascriptException("«exceptionText»");
+	«ENDIF»
+«ENDDEFINE»
+
 /* a chained operation: carry on */
 «DEFINE doExecutionFlowNext FOR model::ChainedOperation-»
 	// chained operation «name-»
@@ -166,12 +195,23 @@
 	«ENDFOREACH»
 «ENDDEFINE»
 
+/* a decision operation: expandOperationContents will continue the execution flow */
+«DEFINE doExecutionFlowNext FOR model::operations::DecisionOperation-»
+	// decision operation «name-»
+	«EXPAND expandOperationContents FOR this-»
+«ENDDEFINE»
+
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
 «DEFINE expandOperationContents FOR model::Operation-»
 	«REM»special operation names«ENDREM»
 	«IF name == "setPropertyToValue"-»
 		«REM»outflowTarget == inflowTarget«ENDREM»
-		«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+		// outFlows first to = «outFlows.first().to»
+		«IF outFlows.first().to.eContainer.metaType.isAssignableFrom( model::scopes::Session )»
+			set_session("«safeName(outFlows.first().to)-»", «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
+		«ELSE»
+			«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+		«ENDIF»
 		
 		«REM»
 			now we expand all the event triggers for the source element that contains the fieldValue: 
@@ -180,8 +220,28 @@
 		«EXPAND EventTrigger::expandEventTriggersInline FOR outFlows.first().to.eContainer-»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
-		«operationName()»(/* todo: parameters */);
+		«ERROR "Unknown client-side function to expand: " + this»
 	«ENDIF»
+«ENDDEFINE»
+
+/* expand the definition of an operation, assumed to be called as part of an existing function call */
+«DEFINE expandOperationContents FOR model::operations::DecisionOperation-»
+	«REM»compare operations«ENDREM»
+	if (
+	«IF name == "equal?"-»
+		«REM»check all inflow targets are identical«ENDREM»
+		is_array_equal(new Array(«EXPAND expandCheckInflows FOREACH inFlows SEPARATOR ", "»))
+	«ELSE»
+		«REM»??? who knows«ENDREM»
+		«ERROR "Unknown decision operation '" + this + "'"»
+	«ENDIF»
+	) {
+		// passed (exactly one pass)
+		«EXPAND doExecutionFlowNext FOR passedExectionFlow().to»
+	} else {
+		// failed (exactly one fail)
+		«EXPAND doExecutionFlowNext FOR failedExectionFlow().to»
+	}
 «ENDDEFINE»
 
 /* data flows out */
@@ -189,7 +249,7 @@
 	«ERROR "unknown data flow edge destination for setPropertyToValue: " + this»
 «ENDDEFINE»
 
-«DEFINE setPropertyToValueOutflowTarget FOR model::ApplicationElementProperty»
+«DEFINE setPropertyToValueOutflowTarget FOR model::ApplicationElementProperty»	
 	document.getElementById('«safeName(( (model::NamedElement) eContainer).id)»').value
 «ENDDEFINE»
 
@@ -200,4 +260,42 @@
 
 «DEFINE setPropertyToValueInflowTarget FOR model::Parameter»
 	«safeName()»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflows FOR model::DataFlowEdge-»
+	«EXPAND expandCheckInflowsName FOR from-»
+«ENDDEFINE»
+
+/** get the data for the elements we are checking */
+«DEFINE expandCheckInflowsName FOR model::DataFlowEdgesSource-»
+	«ERROR "Unknown data inflow source " + this»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::Parameter-»
+	«safeName()-»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::ApplicationElementProperty-»
+	«IF eContainer.metaType.isAssignableFrom( model::scopes::Session )»
+		/* a property from our session */
+		require_session("«safeName()-»")
+	«ELSE»
+		get_application_property("«safeName()-»")
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::StaticValue-»
+	"«value-»"
+«ENDDEFINE»
+
+/** fail edges */
+«DEFINE expandFailEdge FOR model::WireEdge-»
+	«ERROR "Cannot expand the fail edge '" + this + "'"»
+«ENDDEFINE»
+
+«DEFINE expandFailEdge FOR model::wires::NavigateWire-»
+	// we need to navigate to the fail page
+	var url = "«safeName(to)».php?fail=" + e; /* TODO urlencode me */
+	debug("Redirecting to '" + url + "'");
+	document.location.href = url;
 «ENDDEFINE»

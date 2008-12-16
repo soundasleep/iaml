@@ -231,6 +231,9 @@ rule "Create contents of 'check key' operation for LoginHandler[type=key]"
 
 end
 
+/*
+We don't want the expected login key to connect to the operation: it is already
+explicitly defined in the Operation itself.
 rule "Connect expected login key as parameter to check key operation"
 	when 
 		scope : Session( )
@@ -250,6 +253,7 @@ rule "Connect expected login key as parameter to check key operation"
 		insert(param);
 	
 end
+*/
 
 /* it's possible in the future that this method should be split up. */
 rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
@@ -290,7 +294,7 @@ rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
 		click.setName("click");
 		insert(click);
 		
-		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, scope);
+		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, login);
 		loginOperation.setName("do login");
 		insert(loginOperation);
 		
@@ -381,7 +385,7 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		login : Page (eContainer == container, name=="login" )
-		login_operation : CompositeOperation( eContainer == scope, name == "do login" )		
+		login_operation : CompositeOperation( eContainer == login, name == "do login" )		
 		login_target : Page ( ) 
 		login_wire : NavigateWire( from == login_handler, to == login_target, name == "login" )
 

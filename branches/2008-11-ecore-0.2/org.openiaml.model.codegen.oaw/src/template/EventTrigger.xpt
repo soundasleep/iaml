@@ -29,6 +29,8 @@
 	// expanding inline event trigger «name»
 	«IF name=="edit"»
 		«EXPAND callOperations(true) FOREACH outEdges»
+	«ELSE»
+		«ERROR "Unknown client-side event trigger " + this»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -41,25 +43,27 @@
  * run a command with some parameters. this could be in inline JS or a JS block.
  * RunInstanceWire: event --> operation 
  */
-«DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire»
-	«IF to.eContainer.metaType.isAssignableFrom( model::visual::InputTextField )»
-		«IF onCurrentPage(from, to)»
+«DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire-»
+	/* eContainer == «to.eContainer» */
+	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
+		«REM»VisibleThing includes InputTextField and Page«ENDREM»
+		«IF onCurrentPage(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
 			do_«operationName(to)»(«EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»);
-		«ELSE»
+		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 				«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
 			);
-		«ENDIF»
-	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )»
+		«ENDIF-»
+	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )-»
 		«REM»direct field --> domain attribute«ENDREM»
 		store_db('«safeName(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
-		);  
-	«ELSE»
+		); 
+	«ELSE-»
 		alert('unknown target operation type «to.eContainer.metaType.name»');
-	«ENDIF»
+	«ENDIF-»
 «ENDDEFINE»
 
 /* ditto: check or error? */
@@ -79,11 +83,11 @@
 
 /* what is the runtime value of the parameter? */
 «DEFINE callOperationParametersSource(Boolean inline) FOR model::ApplicationElementProperty»
-	«IF name == "fieldValue"»
+		«IF name == "fieldValue"»
 		«IF !inline»this«ELSE»document.getElementById('«safeName(eContainer)»')«ENDIF».value
-	«ELSE»
-		get_application_element_property("«safeName()-»")
-	«ENDIF»
+			«ELSE»
+			get_application_element_property("«safeName()-»")
+		«ENDIF»
 «ENDDEFINE»
 
 «DEFINE callOperationParametersSource(Boolean inline) FOR model::StaticValue»

@@ -13,6 +13,9 @@ formName(model::visual::InputForm this) :
 	
 textFieldName(model::visual::InputTextField this) :
 	if (name == null || name == "") then "(untitled field)" else name;
+
+buttonName(model::visual::Button this) :
+	if (name == null || name == "") then "Submit Query" else name;
 	
 safeName(model::NamedElement this) :
 	safeName(id);

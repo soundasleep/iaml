@@ -11,7 +11,8 @@
 «DEFINE expandEventTriggers FOR model::EventTrigger»
 	«IF name=="edit"»
 		onChange="«EXPAND callOperations(false) FOREACH outEdges» return false;"
-		«REM»setField(this);«ENDREM»
+	«ELSEIF name=="click"»
+		onClick="«EXPAND callOperations(false) FOREACH outEdges» return false;"
 	«ENDIF»
 «ENDDEFINE»
 

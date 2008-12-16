@@ -26,6 +26,9 @@ import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.FindWire;
@@ -171,4 +174,25 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 
+	public InputForm generatedInputForm(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
+		InputForm form = (InputForm) createElement( container, VisualPackage.eINSTANCE.getInputForm(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		form.setIsGenerated(true);
+		form.setGeneratedBy(by);
+		return form;
+	}
+
+	public InputTextField generatedInputTextField(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
+		InputTextField form = (InputTextField) createElement( container, VisualPackage.eINSTANCE.getInputTextField(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		form.setIsGenerated(true);
+		form.setGeneratedBy(by);
+		return form;
+	}
+	
+	public Button generatedButton(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
+		Button form = (Button) createElement( container, VisualPackage.eINSTANCE.getButton(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		form.setIsGenerated(true);
+		form.setGeneratedBy(by);
+		return form;
+	}
+	
 }

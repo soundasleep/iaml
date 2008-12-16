@@ -133,7 +133,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTitleMatch("sitemap");
 
 		clickLinkWithText("login");
-		setTextField("key", "42");
+		String loginId = getLabelIDForText("login key");
+		setLabeledFormElementField(loginId, "42");
 		submit();		// submit the form
 		
 		// we should now be on the viewkey page
@@ -166,7 +167,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTitleMatch("sitemap");
 
 		clickLinkWithText("login");
-		setTextField("key", "42");
+		String loginId = getLabelIDForText("login key");
+		setLabeledFormElementField(loginId, "42");
 		submit();		// submit the form
 		
 		// we should now be on the viewkey page
@@ -213,7 +215,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertProblem();		// we should have been warned
 
 		// lets set the fields
-		setTextField("key", "42");
+		String loginId = getLabelIDForText("login key");
+		setLabeledFormElementField(loginId, "42");
 		submit();		// submit the form
 
 		// we should now be on the viewkey page
@@ -231,6 +234,51 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertNoProblem();
 		assertTextPresent("42");
 		
+		// now we logout		
+		beginAt(sitemap.getProjectRelativePath().toString());
+		assertTitleMatch("sitemap");
+
+		clickLinkWithText("logout");
+		
+		// we should now be on the home page
+		assertTitleMatch("home");
+		assertNoProblem();
+		
+	}
+
+	/**
+	 * Test that we are actually comparing the login keys
+	 */
+	public void testTryInvalidLogin() {
+		IFile sitemap = getProject().getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+
+		beginAt(sitemap.getProjectRelativePath().toString());
+		assertTitleMatch("sitemap");
+
+		clickLinkWithText("login");
+		assertTitleMatch("login");
+		assertNoProblem();		// we should be fine
+
+		// lets set the fields
+		String loginId = getLabelIDForText("login key");
+		setLabeledFormElementField(loginId, "44");	// INVALID
+		submit();		// submit the form
+
+		// we should now be on the login page again
+		assertTitleMatch("login");
+		assertProblem();		// with a problem
+		assertTextNotPresent("42");		// it should not be on the page
+
+		// lets set the fields again
+		setLabeledFormElementField(loginId, "42");	// VALID
+		submit();		// submit the form
+
+		// we should now be on the right page
+		assertTitleMatch("viewkey");
+		assertNoProblem();		// no problems now
+		assertTextPresent("42");
+
 		// now we logout		
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");

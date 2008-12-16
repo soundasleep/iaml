@@ -74,7 +74,11 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 		if (feature.isMany()) {
 			// assume feature is list: http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
 			EList<Object> containerList = (EList<Object>) container.eGet(feature, false);
-			containerList.add(object);
+			try {
+				containerList.add(object);
+			} catch (ArrayStoreException e) {
+				throw new RuntimeException("Could not insert an element '" + elementType.getName() + "' into feature '" + feature.getName() + "': " + e, e);
+			}
 		} else {
 			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + feature);
 		}
@@ -114,7 +118,11 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 		if (containerFeature.isMany()) {
 			// assume feature is list: http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
 			EList<Object> containerList = (EList<Object>) container.eGet(containerFeature, false);
-			containerList.add(object);
+			try {
+				containerList.add(object);
+			} catch (ArrayStoreException e) {
+				throw new RuntimeException("Could not insert a relationship '" + elementType.getName() + "' into container feature '" + containerFeature.getName() + "': " + e, e);
+			}
 		} else {
 			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + containerFeature);
 		}

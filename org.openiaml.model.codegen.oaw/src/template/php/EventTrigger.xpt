@@ -7,6 +7,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE pageEvents FOR model::EventTrigger-»
+	// EventTrigger «this»
 	«IF name == "access"-»
 		«EXPAND StoreDbPhp::callOperations FOREACH outEdges-»
 	«ELSE-»
@@ -161,7 +162,7 @@
 «ENDDEFINE»
 
 «DEFINE expandFailEdge FOR model::wires::NavigateWire-»
-	// we need to navigate
+	// we need to navigate to the fail page
 	$url = "«safeName(to)».php?fail=" . urlencode(serialize($e));
 	log_message("Redirecting to '$url'");
 	header("Location: $url");

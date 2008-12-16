@@ -41,11 +41,13 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * Have we loaded at least one page (so we can find an ajax_monitor if necessary)?
 	 */
 	private boolean hasLoaded = false;
-
+	
 	/**
-	 * Go to the sitemap page, and then click on a particular page title.
-	 */ 
-	protected void goSitemapThenPage(IFile sitemap, String pageText) throws Exception {
+	 * Wait for all of the Ajax monitors to return.
+	 * 
+	 * @throws Exception
+	 */
+	protected void waitForAjax() throws Exception {
 		// sleep a little bit first, so ajax calls can continue
 		if (hasLoaded) {
 			if (getElementById("ajax_monitor") == null) {
@@ -74,6 +76,14 @@ public class CodegenTestCase extends InferenceTestCase {
 			}
 		}
 		
+	}
+
+	/**
+	 * Go to the sitemap page, and then click on a particular page title.
+	 */ 
+	protected void goSitemapThenPage(IFile sitemap, String pageText) throws Exception {
+		waitForAjax();
+
 		beginAt(sitemap.getProjectRelativePath().toString());
 		hasLoaded = true;		// we have now loaded a page
 		assertTitleMatch("sitemap");

@@ -70,6 +70,9 @@
 		
 		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
 		<div id="ajax_monitor"></div>
+		
+		<pre>$_SESSION = <?php echo print_r($_SESSION); ?></pre>
+		<pre>$_GET = <?php echo print_r($_GET); ?></pre>
 		</body>
 		</html>
 	«ENDFILE»
@@ -138,12 +141,34 @@
 			// if we are at the root try/catch, catch the exception explicitly
 			if (try_catch_depth == 0 «IF getFailEdge() != null»&& false«ENDIF» ) {
 				try {
+					// get chained functions
+					var function_queue = function() {
+						// continue with any chained operations
+						«EXPAND continueChainedOperations FOR this-»
+					}
+					var function_queue_queued = false;
+				
 					«EXPAND doExecutionFlow FOR startNode()-»
+					
+					// should we still run the chained functions?
+					if (!function_queue_queued)
+						function_queue();
 				} catch (e if e instanceof IamlJavascriptException) {
 					alert("Exception: " + e);
 				}
 			} else {
+				// get chained functions
+				var function_queue = function() {
+					// continue with any chained operations
+					«EXPAND continueChainedOperations FOR this-»
+				}
+				var function_queue_queued = false;
+			
 				«EXPAND doExecutionFlow FOR startNode()-»
+				
+				// should we still run the chained functions?
+				if (!function_queue_queued)
+					function_queue();
 			}					
 
 			«IF getFailEdge() != null»
@@ -186,32 +211,34 @@
 	«ENDIF»
 «ENDDEFINE»
 
-/* a chained operation: carry on */
+/* a chained operation (or decision operation): expandOperationContents will continue the execution flow */
 «DEFINE doExecutionFlowNext FOR model::ChainedOperation-»
 	// chained operation «name-»
-	«EXPAND expandOperationContents FOR this-»
-	«FOREACH outExecutions AS e-»
-		«EXPAND doExecutionFlowNext FOR e.to-»
-	«ENDFOREACH»
-«ENDDEFINE»
-
-/* a decision operation: expandOperationContents will continue the execution flow */
-«DEFINE doExecutionFlowNext FOR model::operations::DecisionOperation-»
-	// decision operation «name-»
 	«EXPAND expandOperationContents FOR this-»
 «ENDDEFINE»
 
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
-«DEFINE expandOperationContents FOR model::Operation-»
+«DEFINE expandOperationContents FOR model::ChainedOperation-»
 	«REM»special operation names«ENDREM»
 	«IF name == "setPropertyToValue"-»
 		«REM»outflowTarget == inflowTarget«ENDREM»
 		// outFlows first to = «outFlows.first().to»
 		«IF outFlows.first().to.eContainer.metaType.isAssignableFrom( model::scopes::Session )»
-			set_session("«safeName(outFlows.first().to)-»", «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
+			set_session("«safeName(outFlows.first().to)-»", «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»,
+				function_queue);		// pass it a function queue to execute afterwards
+			function_queue_queued = true;		// we are waiting for it to return to execute the function queue
 		«ELSE»
 			«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+
 		«ENDIF»
+
+		«REM»
+			in the future, we might want to make this into a function that is passed
+			to ajax calls and executed once the call is successful.
+		«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND doExecutionFlowNext FOR e.to-»
+		«ENDFOREACH»
 		
 		«REM»
 			now we expand all the event triggers for the source element that contains the fieldValue: 
@@ -296,6 +323,23 @@
 «DEFINE expandFailEdge FOR model::wires::NavigateWire-»
 	// we need to navigate to the fail page
 	var url = "«safeName(to)».php?fail=" + e; /* TODO urlencode me */
-	debug("Redirecting to '" + url + "'");
-	document.location.href = url;
+	debug("Redirecting to '" + url + "' (fail)");
+	window.location = url;
 «ENDDEFINE»
+
+/** continue operation execution */
+«DEFINE continueChainedOperations FOR model::CompositeOperation-»
+	«EXPAND continueChainedOperations FOREACH outEdges»
+«ENDDEFINE»
+
+«DEFINE continueChainedOperations FOR model::WireEdge»
+	«ERROR "Cannot continue a chained operation for " + this»
+«ENDDEFINE»
+
+«DEFINE continueChainedOperations FOR model::wires::NavigateWire»
+	// navigate to another page
+	var url = "«safeName(to)».php";
+	debug("Redirecting to '" + url + "'");
+	window.location = url;
+«ENDDEFINE»
+

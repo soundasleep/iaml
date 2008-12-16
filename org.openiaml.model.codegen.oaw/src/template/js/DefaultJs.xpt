@@ -53,6 +53,37 @@ function store_db(attribute_id, arg0) {
   debug("store_db called");	
 }
 
+/* save a session variable (only one attribute) */
+function set_session(id, arg0, function_queue) {
+	var url = 'set_session.php?id=' + escape(id) + '&arg0=' + escape(arg0);
+	debug("creating ajax request to url: " + url);
+	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) + 1;		// increment ajax counter
+	new Ajax.Request(url,
+  {
+    method:'get',
+    onSuccess: function(transport){
+      	var response = transport.responseText || "no response text";
+      	debug("success: " + response);
+      	document.getElementById('response').innerHTML = response;
+      	
+      	// execute the function queue
+      	if (function_queue) {
+      		debug('executing function queue');
+      		function_queue();
+      	}
+
+      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
+    },
+    onFailure: function(transport){ 
+      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
+    	debug("something went wrong: " + transport.responseText);
+      	$('ajax_monitor').innerHTML = 'failed: ' + response.responseText;		// for speeding up testing
+    	alert('Something went wrong...');	// alert is last so we can continue execution
+     }
+  });
+  debug("set_session called");	
+}
+
 var debug_message_saved = "";
 function debug(msg) {
 	var debug_string = "<li>" + msg + "\n";

@@ -66,7 +66,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	}
 	
 	/**
-	 * The site should have a viewkey page, that presents a problem(since
+	 * The site should have a viewkey page, that presents a problem (since
 	 * we're not yet authenticated).
 	 */
 	public void testHasViewkeyPage() {

@@ -106,6 +106,12 @@
 	«ENDFOREACH»
 «ENDDEFINE»
 
+/* a decision operation: expandOperationContents will continue the execution flow */
+«DEFINE doExecutionFlowNext FOR model::operations::DecisionOperation-»
+	// decision operation «name-»
+	«EXPAND expandOperationContents FOR this-»
+«ENDDEFINE»
+
 «DEFINE expandOperationContents FOR model::Operation-»
 	// ERROR "Unknown operation to expand: " + this
 «ENDDEFINE»
@@ -117,7 +123,7 @@
 	«IF name == "equal?"-»
 		«REM»check all inflow targets are identical«ENDREM»
 		«EXPAND expandCheckInflows FOREACH inFlows SEPARATOR " == "»
-	«ELSEIF false»«REM»TODO remove«ENDREM»
+	«ELSE»
 		«REM»??? who knows«ENDREM»
 		«ERROR "Unknown decision operation '" + this + "'"»
 	«ENDIF»
@@ -163,7 +169,7 @@
 
 «DEFINE expandFailEdge FOR model::wires::NavigateWire-»
 	// we need to navigate to the fail page
-	$url = "«safeName(to)».php?fail=" . urlencode(serialize($e));
+	$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage());
 	log_message("Redirecting to '$url'");
 	header("Location: $url");
 	die;

@@ -74,3 +74,13 @@ passedExectionFlow(model::operations::DecisionOperation this) :
 failedExectionFlow(model::operations::DecisionOperation this) :
 	outExecutions.selectFirst( flow | flow.to.metaType.isAssignableFrom(model::operations::CancelNode) );
 
+/** does this operation have a "fail" edge? */
+getFailEdge(model::CompositeOperation this) :
+	outEdges.selectFirst( e | e.isFailEdge() ) ;
+
+isFailEdge(model::WireEdge this ) :
+	false;
+	
+isFailEdge(model::wires::CompositeWire this ) :
+	name == "fail" ;
+	

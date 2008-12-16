@@ -170,6 +170,22 @@ rule "Connect login key variable parameter to 'check key' operation run wire"
 
 end
 
+rule "Connect 'fail' wire from 'check key' operation to Login Page"
+	when
+		container : ContainsWires( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login : Page (eContainer == container, name=="login" )
+		check : CompositeOperation( name == "check key", eContainer == scope )
+		not (CompositeWire( from == check, to == login, name == "fail") )
+	
+	then
+		NavigateWire fail = handler.generatedNavigateWire(scope, scope, check, login);
+		fail.setName("fail");
+		insert(fail);
+		
+end
+
 rule "Create contents of 'check key' operation for LoginHandler[type=key]"
 	when
 		scope : Session( )
@@ -197,7 +213,7 @@ rule "Create contents of 'check key' operation for LoginHandler[type=key]"
 		
 		# not ok
 		CancelNode cancel = handler.generatedCancelNode(o, o);
-		cancel.setExceptionText("key check failed");
+		cancel.setExceptionText("Error: Key check failed. You may need to login.");
 		insert(cancel);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);

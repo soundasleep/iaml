@@ -254,13 +254,16 @@ public class ModelSwitch<T> {
 				T result = caseChainedOperation(chainedOperation);
 				if (result == null) result = caseOperation(chainedOperation);
 				if (result == null) result = caseExecutionEdgesSource(chainedOperation);
+				if (result == null) result = caseWireEdgesSource(chainedOperation);
 				if (result == null) result = caseWireEdgeDestination(chainedOperation);
 				if (result == null) result = caseNamedElement(chainedOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(chainedOperation);
 				if (result == null) result = caseExecutionEdgeDestination(chainedOperation);
 				if (result == null) result = caseActivityNode(chainedOperation);
 				if (result == null) result = caseDataFlowEdgesSource(chainedOperation);
+				if (result == null) result = caseShouldntContainWires(chainedOperation);
 				if (result == null) result = caseGeneratedElement(chainedOperation);
+				if (result == null) result = caseContainsWires(chainedOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -274,12 +277,14 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseScope(compositeOperation);
 				if (result == null) result = caseOperation(compositeOperation);
 				if (result == null) result = caseExecutionEdgesSource(compositeOperation);
+				if (result == null) result = caseWireEdgesSource(compositeOperation);
 				if (result == null) result = caseWireEdgeDestination(compositeOperation);
 				if (result == null) result = caseNamedElement(compositeOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(compositeOperation);
 				if (result == null) result = caseExecutionEdgeDestination(compositeOperation);
 				if (result == null) result = caseActivityNode(compositeOperation);
 				if (result == null) result = caseDataFlowEdgesSource(compositeOperation);
+				if (result == null) result = caseShouldntContainWires(compositeOperation);
 				if (result == null) result = caseGeneratedElement(compositeOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

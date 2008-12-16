@@ -18,7 +18,7 @@
 		
 		// expand any operations (both in this page and in any surrounding scopes)
 		«EXPAND php::EventTrigger::expandOperations FOR this-»
-		
+	
 		?>
 		<html>
 		<head>
@@ -45,6 +45,23 @@
 		<div style="font-size:small; text-align: right;"><a href="sitemap.html">sitemap</a></div>
 		
 		<h1>«pageTitle()»</h1>
+		
+		<?php
+		/* expand any fail error messages */
+		if (require_get("fail")) {
+			$e = @unserialize(require_get("fail"));
+			if ($e) {
+?>
+	<div class="error">
+		<p>An exception occured: <i><?php echo $e; ?></i></p>
+		<blockquote>
+			<pre><?php echo $e->getTraceAsString(); ?></pre>
+		</blockquote>
+	</div>
+<?php 
+			}
+		}
+		?>
 		
 		«EXPAND expandChild FOREACH children-»
 		

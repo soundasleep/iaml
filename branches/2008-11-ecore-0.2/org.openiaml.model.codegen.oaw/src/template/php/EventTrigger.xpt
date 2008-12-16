@@ -39,7 +39,7 @@
 «ENDDEFINE»
 
 «DEFINE expandOperation FOR model::CompositeOperation»
-	/* composite operation */
+	/** composite operation "«name»" */
 	$running_«safeName()» = false;
 	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
 		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
@@ -47,7 +47,23 @@
 		global $running_«safeName()-»;
 		if ($running_«safeName()-» == false) {
 			$running_«safeName()-» = true;		// prevent loops
+			
+			// has this operation got a fail handler?
+			«IF getFailEdge() != null»
+				// fail edge «getFailEdge()»
+				try {
+			«ENDIF»
+			
+			// execute the operation
 			«EXPAND doExecutionFlow FOR startNode()-»
+
+			«IF getFailEdge() != null»
+				} catch (IamlRuntimeException $e) {
+					log_message("Caught exception $e");
+					«EXPAND expandFailEdge FOR getFailEdge()»
+				}
+			«ENDIF»
+			
 			$running_«safeName()-» = false;
 		}
 	}
@@ -72,6 +88,12 @@
 /* an edge that is the end (both StartNode and FinishNode also fall into this) */
 «DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-»
 	// do nothing «this-»
+«ENDDEFINE»
+
+«DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»
+	«IF exceptionText.length > 0»
+		throw new IamlRuntimeException("«exceptionText»");
+	«ENDIF»
 «ENDDEFINE»
 
 /* a chained operation: carry on */
@@ -121,9 +143,28 @@
 «ENDDEFINE»
 
 «DEFINE expandCheckInflowsName FOR model::ApplicationElementProperty-»
-	get_application_property("«safeName()-»")
+	«IF eContainer.metaType.isAssignableFrom( model::scopes::Session )»
+		/* a property from our session */
+		require_session("«safeName()-»")
+	«ELSE»
+		get_application_property("«safeName()-»")
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE expandCheckInflowsName FOR model::StaticValue-»
 	"«value-»"
 «ENDDEFINE»
+
+/** fail edges */
+«DEFINE expandFailEdge FOR model::WireEdge-»
+	«ERROR "Cannot expand the fail edge '" + this + "'"»
+«ENDDEFINE»
+
+«DEFINE expandFailEdge FOR model::wires::NavigateWire-»
+	// we need to navigate
+	$url = "«safeName(to)».php?fail=" . urlencode(serialize($e));
+	log_message("Redirecting to '$url'");
+	header("Location: $url");
+	die;
+«ENDDEFINE»
+

@@ -399,6 +399,24 @@ public interface OperationsPackage extends EPackage {
 	int DECISION_OPERATION__OUT_EXECUTIONS = ModelPackage.CHAINED_OPERATION__OUT_EXECUTIONS;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__WIRES = ModelPackage.CHAINED_OPERATION__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__OUT_EDGES = ModelPackage.CHAINED_OPERATION__OUT_EDGES;
+
+	/**
 	 * The number of structural features of the '<em>Decision Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

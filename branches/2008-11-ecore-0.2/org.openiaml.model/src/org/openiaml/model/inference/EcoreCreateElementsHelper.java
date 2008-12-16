@@ -29,6 +29,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.FindWire;
+import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -144,6 +145,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public FindWire generatedFindWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
 		FindWire wire = (FindWire) createRelationship(container, WiresPackage.eINSTANCE.getFindWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		wire.setIsGenerated(true);
+		wire.setGeneratedBy(by);
+		return wire;
+	}
+	
+	public NavigateWire generatedNavigateWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
+		NavigateWire wire = (NavigateWire) createRelationship(container, WiresPackage.eINSTANCE.getNavigateWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 		wire.setIsGenerated(true);
 		wire.setGeneratedBy(by);
 		return wire;

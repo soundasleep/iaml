@@ -12,6 +12,13 @@
 		// include header code
 		«EXPAND php::HeaderPhp::headerPhp FOR this-»
 		require("create_database.php");		// ensure DB exists
+		
+		// run any event triggers for this page
+		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
+		
+		// expand any operations (both in this page and in any surrounding scopes)
+		«EXPAND php::EventTrigger::expandOperations FOR this-»
+		
 		?>
 		<html>
 		<head>

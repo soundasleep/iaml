@@ -169,19 +169,30 @@ echo "ok";
  * run a command with some parameters. this could be in inline JS or a JS block.
  * RunInstanceWire: event --> operation 
  */
-«DEFINE callOperations FOR model::wires::RunInstanceWire»
-	«IF to.eContainer.metaType.isAssignableFrom( model::visual::InputTextField )»
+«DEFINE callOperations FOR model::wires::RunInstanceWire-»
+	«IF to.eContainer.metaType.isAssignableFrom( model::visual::InputTextField )-»
 		«REM»// not on current page (wire id = «id»)«ENDREM»
 		store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);
-	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )»
+	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )-»
 		«REM»direct field --> domain attribute«ENDREM»
 		store_db('«safeName(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);  
-	«ELSE»
-		local_die('unknown target operation type «to.eContainer.metaType.name»');
+	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::visual::Page )-»
+		«REM»a function run on a page«ENDREM»
+		«IF from.eContainer == to.eContainer-»
+			«REM»a function run on *this* page«ENDREM»
+			do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
+		«ELSE-»
+			«ERROR "Cannot run a server-side function on another page"-»
+		«ENDIF-»
+	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::scopes::Session )-»
+		«REM»a function run on in this session«ENDREM»
+		do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
+	«ELSE-»
+		local_die('unknown target operation type «to.eContainer.metaType.name» for «this»');
 	«ENDIF»
 «ENDDEFINE»
 
@@ -202,6 +213,10 @@ echo "ok";
 	«IF name == "fieldValue"»
 		$arg0 /* the new value is already store in this variable */
 	«ELSE»
-		«ERROR "unknown application element property type: " + name»
+		get_application_element_property("«safeName()-»")
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE callOperationParametersSource FOR model::StaticValue»
+	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»

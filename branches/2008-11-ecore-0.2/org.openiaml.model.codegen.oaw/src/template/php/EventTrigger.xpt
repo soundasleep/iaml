@@ -1,0 +1,129 @@
+«IMPORT iaml»
+
+/**
+ * TODO clarify all the different event expansions: e.g.
+ * EventTrigger for Javascript, server-side PHP, HTML, etc
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE pageEvents FOR model::EventTrigger-»
+	«IF name == "access"-»
+		«EXPAND StoreDbPhp::callOperations FOREACH outEdges-»
+	«ELSE-»
+		// I don't know what to do with page event "«name»"
+	«ENDIF-»
+«ENDDEFINE»
+
+/* this is a direct copy from Page.xpt */
+
+/* expand out the operations for the page */
+«DEFINE expandOperations FOR emf::EObject-»
+	«ERROR "can't expand operations for something that has none!"»
+«ENDDEFINE»
+
+/* this includes Page and Session */
+«DEFINE expandOperations FOR model::ContainsOperations-»
+	«EXPAND expandOperation FOREACH operations-»
+«ENDDEFINE»
+
+«DEFINE expandOperations FOR model::ApplicationElementContainer-»
+	// expanding operations for «this»
+	«EXPAND expandOperation FOREACH allContainerOperations()-»
+«ENDDEFINE»
+
+«DEFINE expandOperation FOR model::Operation-»
+	/* simple operation */
+	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
+		log_message("simple operation: «name»");
+	}
+«ENDDEFINE»
+
+«DEFINE expandOperation FOR model::CompositeOperation»
+	/* composite operation */
+	$running_«safeName()» = false;
+	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
+		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
+		// operation: «name»
+		global $running_«safeName()-»;
+		if ($running_«safeName()-» == false) {
+			$running_«safeName()-» = true;		// prevent loops
+			«EXPAND doExecutionFlow FOR startNode()-»
+			$running_«safeName()-» = false;
+		}
+	}
+«ENDDEFINE»
+
+«DEFINE expandParameters FOR model::Parameter-»
+	$«safeName()-»
+«ENDDEFINE»
+
+/* I don't know how in JS we are supposed to handle multiple out edges yet... but we'll get there ;) */
+«DEFINE doExecutionFlow FOR model::operations::StartNode-»
+	// flow starts here
+	«FOREACH outExecutions AS e-»
+		«EXPAND doExecutionFlowNext FOR e.to-»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE doExecutionFlow FOR model::ActivityNode-»
+	// nothing for an activity node
+«ENDDEFINE»
+
+/* an edge that is the end (both StartNode and FinishNode also fall into this) */
+«DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-»
+	// do nothing «this-»
+«ENDDEFINE»
+
+/* a chained operation: carry on */
+«DEFINE doExecutionFlowNext FOR model::ChainedOperation-»
+	// chained operation «name-»
+	«EXPAND expandOperationContents FOR this-»
+	«FOREACH outExecutions AS e-»
+		«EXPAND doExecutionFlowNext FOR e.to-»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE expandOperationContents FOR model::Operation-»
+	// ERROR "Unknown operation to expand: " + this
+«ENDDEFINE»
+
+/* expand the definition of an operation, assumed to be called as part of an existing function call */
+«DEFINE expandOperationContents FOR model::operations::DecisionOperation-»
+	«REM»compare operations«ENDREM»
+	if (
+	«IF name == "equal?"-»
+		«REM»check all inflow targets are identical«ENDREM»
+		«EXPAND expandCheckInflows FOREACH inFlows SEPARATOR " == "»
+	«ELSEIF false»«REM»TODO remove«ENDREM»
+		«REM»??? who knows«ENDREM»
+		«ERROR "Unknown decision operation '" + this + "'"»
+	«ENDIF»
+	) {
+		// passed (exactly one pass)
+		«EXPAND doExecutionFlowNext FOR passedExectionFlow().to»
+	} else {
+		// failed (exactly one fail)
+		«EXPAND doExecutionFlowNext FOR failedExectionFlow().to»
+	}
+«ENDDEFINE»
+
+«DEFINE expandCheckInflows FOR model::DataFlowEdge-»
+	«EXPAND expandCheckInflowsName FOR from-»
+«ENDDEFINE»
+
+/** get the data for the elements we are checking */
+«DEFINE expandCheckInflowsName FOR model::DataFlowEdgesSource-»
+	«ERROR "Unknown data inflow source " + this»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::Parameter-»
+	$«safeName()-»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::ApplicationElementProperty-»
+	get_application_property("«safeName()-»")
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::StaticValue-»
+	"«value-»"
+«ENDDEFINE»

@@ -8,7 +8,9 @@
 
 «DEFINE expandPage FOR model::visual::Page-»
 	«FILE "output/"+safeName(id)+".php"-»
-		<?php
+<?php
+		/* generated page "«name-»" */
+
 		// include header code
 		«EXPAND php::HeaderPhp::headerPhp FOR this-»
 		require("create_database.php");		// ensure DB exists
@@ -85,19 +87,22 @@
 		<h2>«formName()»</h2>
 		
 		«EXPAND expandChild FOREACH children-»
-	
-		<input type="submit">
 	</form>
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputTextField-»
 	<div>
-	<label id="label_«safeName(id)»">
+	<label id="label_«safeName(id)-»">
 		«textFieldName()»
 		
 		<input type="text" id="«safeName(id)»" name="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
 	</label>
 	</div>
+«ENDDEFINE»
+
+/* currently, a "Button" == a submit button. */
+«DEFINE expandChild FOR model::visual::Button-»
+	<input type="submit" id="button_«safeName(id)-»" value="«buttonName()»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-» />
 «ENDDEFINE»
 
 /* expand out the operations for the page */

@@ -133,30 +133,13 @@ rule "Connect 'access' event to 'check key' operation"
 	
 end
 
-rule "Connect 'current login key' parameter to 'check key' operation run wire"
-	when
-		scope : Session( )
-		page : Page( eContainer == scope )
-		access : EventTrigger( name == "access", eContainer == page )
-		check : CompositeOperation( name == "check key", eContainer == scope )
-		value : ApplicationElementProperty(name == "current login key" )
-		wire : RunInstanceWire( from == access, to == check )
-		not (ParameterWire( from == value, to == wire ))
-		
-	then
-		ParameterWire param = handler.generatedParameterWire(scope, page, value, wire);
-		insert(param);
-
-end
-
-rule "Connect login key variable parameter to 'check key' operation run wire"
+rule "Connect 'login key' parameter to 'check key' operation run wire"
 	when
 		scope : Session( )
 		page : Page( eContainer == scope )
 		access : EventTrigger( name == "access", eContainer == page )
 		check : CompositeOperation( name == "check key", eContainer == scope )
 		
-		# this is a custom parameter
 		login_handler : LoginHandler( eContainer == scope )
 		value : ApplicationElementProperty( )
 		mySetWire : FindWire( from == login_handler, to == value, name == "set" )
@@ -194,6 +177,9 @@ rule "Create contents of 'check key' operation for LoginHandler[type=key]"
 		
 		expected : StaticValue( ) 
 		expected_param : ParameterWire( from == expected, to == login_handler )
+		
+		not (StartNode( eContainer == o))
+		not (FinishNode( eContainer == o))
 	
 	then
 		Parameter parameter = handler.generatedParameter(o, o);
@@ -264,3 +250,147 @@ rule "Connect expected login key as parameter to check key operation"
 		insert(param);
 	
 end
+
+/* it's possible in the future that this method should be split up. */
+rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login : Page (eContainer == container, name=="login" )
+
+		value : ApplicationElementProperty( )
+		mySetWire : FindWire( from == login_handler, to == value, name == "set" )
+
+		expected : StaticValue( ) 
+		expected_param : ParameterWire( from == expected, to == login_handler )
+
+		not (InputForm( eContainer == login ))
+			
+	then
+		InputForm form = handler.generatedInputForm(login_handler, login);
+		form.setName("login form");
+		insert(form);
+		
+		InputTextField field = handler.generatedInputTextField(form, form);
+		field.setName("login key");		# login field name
+		insert(field);
+
+		# field has a value
+		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(field, field);
+		fieldValue.setName("fieldValue");
+		insert(fieldValue);
+
+		Button button = handler.generatedButton(form, form);
+		button.setName("Login");
+		insert(button);
+				
+		# button has an event
+		EventTrigger click = handler.generatedEventTrigger(button, button);
+		click.setName("click");
+		insert(click);
+		
+		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, scope);
+		loginOperation.setName("do login");
+		insert(loginOperation);
+		
+		# connect button click to login operation
+		RunInstanceWire runClick = handler.generatedRunInstanceWire(login_handler, login, click, loginOperation);
+		runClick.setName("run");
+		insert(runClick);
+		
+		# connect field value as parameter
+		ParameterWire clickParam = handler.generatedParameterWire(login_handler, login, fieldValue, runClick);
+		insert(clickParam);
+		
+		# create contents of login operation
+		Parameter parameter = handler.generatedParameter(loginOperation, loginOperation);
+		parameter.setName("provided key");
+		insert(parameter);
+		
+		DecisionOperation op = handler.generatedDecisionOperation(loginOperation, loginOperation);
+		op.setName("equal?");
+		insert(op);
+		
+		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
+		insert(start);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(loginOperation, loginOperation);
+		insert(finish);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(loginOperation, loginOperation);
+		cancel.setExceptionText("Invalid key.");
+		insert(cancel);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
+		data1.setFrom(parameter);
+		data1.setTo(op);
+		insert(data1);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
+		data2.setFrom(expected);
+		data2.setTo(op);
+		insert(data2);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		edge1.setFrom(start);
+		edge1.setTo(op);
+		insert(edge1);
+		
+		# not ok	
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		edge2.setFrom(op);
+		edge2.setTo(cancel);
+		insert(edge2);
+
+		# ok: set value operation
+		ChainedOperation setProperty = handler.generatedChainedOperation(loginOperation, loginOperation);
+		setProperty.setName("setPropertyToValue");
+		insert(setProperty);
+		
+		DataFlowEdge data3 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
+		data3.setFrom(parameter);
+		data3.setTo(setProperty);
+		insert(data3);
+
+		DataFlowEdge data4 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
+		data4.setFrom(setProperty);
+		data4.setTo(value);
+		insert(data4);
+
+		# ok
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		edge3.setFrom(op);
+		edge3.setTo(setProperty);
+		insert(edge3);
+
+		# finish
+		ExecutionEdge edge4 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		edge4.setFrom(setProperty);
+		edge4.setTo(finish);
+		insert(edge4);
+				
+end
+
+/* it's possible in the future that this method should be split up. */
+rule "Connect successful 'login' operation to navigate to final 'login' page"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login : Page (eContainer == container, name=="login" )
+		login_operation : CompositeOperation( eContainer == scope, name == "do login" )		
+		login_target : Page ( ) 
+		login_wire : NavigateWire( from == login_handler, to == login_target, name == "login" )
+
+		not (NavigateWire(from == login_operation, to == login_target))
+			
+	then
+		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, login_operation, login_target);
+		wire.setName("navigate on successful login");
+		insert(wire);
+				
+end
+

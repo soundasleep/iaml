@@ -116,7 +116,6 @@ log_message("store_db.php: adding attribute_id=$attribute_id, arg0=$arg0 into db
 log_message("done");
 echo "ok";
 
-?>
 «ENDDEFINE»
 
 /** 

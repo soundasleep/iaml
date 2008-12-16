@@ -37,5 +37,4 @@ log_message("adding page_id=$page_id, event_name=$event_name, arg0=$arg0");
 
 echo "ok";
 
-?>
 «ENDDEFINE»

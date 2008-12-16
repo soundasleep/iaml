@@ -124,20 +124,24 @@ public class LoginHandlerKey extends CodegenTestCase {
 	/**
 	 * We can login; and then we can logout by going through the
 	 * sitemap (since our model doesn't have a link to logout yet.)
+	 * @throws Exception 
 	 */
-	public void testCanLoginLogoutFromSitemap() {
+	public void testCanLoginLogoutFromSitemap() throws Exception {
+		try {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("login");
+		
+		// by using goSitemapThenPage(), we will check for Ajax monitors
+		goSitemapThenPage(sitemap, "login");
+		assertNoProblem();
+		
 		String loginId = getLabelIDForText("login key");
 		setLabeledFormElementField(loginId, "42");
 		submit();		// submit the form
+		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the viewkey page
+		assertEquals("viewkey", getPageTitle());
 		assertTitleMatch("viewkey");
 		assertNoProblem();
 		
@@ -150,6 +154,12 @@ public class LoginHandlerKey extends CodegenTestCase {
 		// we should now be on the home page
 		assertTitleMatch("home");
 		assertNoProblem();
+		
+		} catch (Error e) {
+			// TODO remove this catch/try block
+			System.out.println( getPageSource() );		// let us debug the page source
+			throw e;		// continue throwing
+		}
 
 	}
 	
@@ -303,6 +313,13 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 */
 	protected void assertNoProblem() {
 		assertNoMatch("(Error|error|Exception|exception)");
+	}
+	
+	/**
+	 * Helper method: Get the current page title.
+	 */
+	protected String getPageTitle() {
+		return getElementByXPath("//title").getTextContent(); 
 	}
 	
 }

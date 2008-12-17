@@ -132,7 +132,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// by using goSitemapThenPage(), we will check for Ajax monitors
-		goSitemapThenPage(sitemap, "login");
+		beginAtSitemapThenPage(sitemap, "login");
 		assertNoProblem();
 		
 		String loginId = getLabelIDForText("login key");
@@ -146,10 +146,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertNoProblem();
 		
 		// now we just quickly go logout		
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("logout");
+		gotoSitemapThenPage(sitemap, "logout");
+		assertNoProblem();
 		
 		// we should now be on the home page
 		assertTitleMatch("home");
@@ -169,7 +167,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * We navigate to it again to check it's still there;
 	 * Then we logout.
 	 */
-	public void testLoginLogoutCheckViewkey() {
+	public void testLoginLogoutCheckViewkey() throws Exception {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
@@ -189,18 +187,12 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTextPresent("42");
 		
 		// go back to the viewkey page
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-		clickLinkWithText("viewkey");
-		assertTitleMatch("viewkey");
+		gotoSitemapThenPage(sitemap, "viewkey");
 		assertNoProblem();
 		assertTextPresent("42");
 		
 		// now we logout		
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("logout");
+		gotoSitemapThenPage(sitemap, "logout");
 		
 		// we should now be on the home page
 		assertTitleMatch("home");
@@ -212,7 +204,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * We try to view the viewkey page, but we get asked to login.
 	 * We login, check the viewkey page works, and then logout again.
 	 */
-	public void testTryViewkeyThenLogin() {
+	public void testTryViewkeyThenLogin() throws Exception {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
@@ -237,18 +229,12 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTextPresent("42");
 		
 		// go back to the viewkey page
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-		clickLinkWithText("viewkey");
-		assertTitleMatch("viewkey");
+		gotoSitemapThenPage(sitemap, "viewkey");
 		assertNoProblem();
 		assertTextPresent("42");
 		
 		// now we logout		
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("logout");
+		gotoSitemapThenPage(sitemap, "logout");
 		
 		// we should now be on the home page
 		assertTitleMatch("home");
@@ -259,7 +245,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	/**
 	 * Test that we are actually comparing the login keys
 	 */
-	public void testTryInvalidLogin() {
+	public void testTryInvalidLogin() throws Exception {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
@@ -290,10 +276,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTextPresent("42");
 
 		// now we logout		
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("logout");
+		gotoSitemapThenPage(sitemap, "logout");
 		
 		// we should now be on the home page
 		assertTitleMatch("home");

@@ -79,12 +79,42 @@ public class CodegenTestCase extends InferenceTestCase {
 	}
 
 	/**
-	 * Go to the sitemap page, and then click on a particular page title.
+	 * Begin at the sitemap page, and then click on a particular page title.
+	 * 
+	 * NOTE that this resets the current WebClient context, which can cause
+	 * the client to lose sessions/cookies. If this is undesirable,
+	 * use {@link #gotoSitemapThenPage(IFile, String)}.
 	 */ 
-	protected void goSitemapThenPage(IFile sitemap, String pageText) throws Exception {
+	protected void beginAtSitemapThenPage(IFile sitemap, String pageText) throws Exception {
 		waitForAjax();
 
 		beginAt(sitemap.getProjectRelativePath().toString());
+		hasLoaded = true;		// we have now loaded a page
+		assertTitleMatch("sitemap");
+		
+		assertLinkPresentWithText(pageText);
+		clickLinkWithText(pageText);
+		try {
+			assertTitleMatch(pageText);
+		} catch (AssertionFailedError e) {
+			// something went wrong in the page execution, or
+			// the output is mangled HTML: output page source for debug purposes
+			System.out.println(this.getPageSource());
+			throw e;	// carry on throwing
+		}
+		
+	}
+	
+	/**
+	 * Go to the sitemap page, and then click on a particular page title.
+	 * 
+	 * If you want the client to be reset (e.g. delete cookies, sessions),
+	 * use {@link #beginAtSitemapThenPage(IFile, String)}.
+	 */ 
+	protected void gotoSitemapThenPage(IFile sitemap, String pageText) throws Exception {
+		waitForAjax();
+
+		gotoPage(sitemap.getProjectRelativePath().toString());
 		hasLoaded = true;		// we have now loaded a page
 		assertTitleMatch("sitemap");
 		

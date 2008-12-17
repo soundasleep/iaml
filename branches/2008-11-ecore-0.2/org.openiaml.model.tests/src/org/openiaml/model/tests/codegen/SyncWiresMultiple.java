@@ -32,7 +32,7 @@ public class SyncWiresMultiple extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// go to page1
-		goSitemapThenPage(sitemap, "page1");
+		beginAtSitemapThenPage(sitemap, "page1");
 		
 		// fill in name and email
 		String testName = "name " + new Date().toString();
@@ -48,7 +48,7 @@ public class SyncWiresMultiple extends CodegenTestCase {
 		}
 		
 		// go to page2
-		goSitemapThenPage(sitemap, "page2");
+		beginAtSitemapThenPage(sitemap, "page2");
 		
 		// should have changed
 		{
@@ -65,7 +65,7 @@ public class SyncWiresMultiple extends CodegenTestCase {
 		}
 		
 		// if we now go to the last signup user page, it should appear there
-		goSitemapThenPage(sitemap, "last signup user");
+		beginAtSitemapThenPage(sitemap, "last signup user");
 		
 		// should have changed
 		{

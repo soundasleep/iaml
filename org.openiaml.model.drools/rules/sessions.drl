@@ -399,6 +399,23 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 				
 end
 
+rule "Connect failed 'login' operation to navigate back to 'login'"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login : Page (eContainer == container, name=="login" )
+		login_operation : CompositeOperation( eContainer == login, name == "do login" )		
+
+		not (NavigateWire(from == login_operation, to == login, name == "fail"))
+			
+	then
+		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, login_operation, login);
+		wire.setName("fail");
+		insert(wire);
+		
+end
+
 rule "Create 'do logout' operation in session"
 	when
 		container : InternetApplication( )

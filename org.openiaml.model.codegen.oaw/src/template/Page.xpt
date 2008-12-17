@@ -50,6 +50,8 @@
 		
 		<h1>«pageTitle()»</h1>
 		
+		<div id="runtime_errors"><!-- any runtime errors go into here --></div>
+		
 		<?php
 		/* expand any fail error messages */
 		if (require_get("fail")) {
@@ -71,8 +73,6 @@
 		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
 		<div id="ajax_monitor"></div>
 		
-		<pre>$_SESSION = <?php echo print_r($_SESSION); ?></pre>
-		<pre>$_GET = <?php echo print_r($_GET); ?></pre>
 		</body>
 		</html>
 	«ENDFILE»
@@ -154,7 +154,8 @@
 					if (!function_queue_queued)
 						function_queue();
 				} catch (e if e instanceof IamlJavascriptException) {
-					alert("Exception: " + e);
+					// unexpected exception
+					alert("Unexpected exception: " + e);
 				}
 			} else {
 				// get chained functions

@@ -25,3 +25,7 @@ context model::operations::DecisionOperation ERROR "A compare decision operation
 
 context model::operations::DecisionOperation ERROR "A DecisionOperation can only have at most two out execution edges" :
 	outExecutions.size <= 2;
+	
+context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a StaticValue [from=" + from + "]":
+	!model::StaticValue.isInstance(from) &&
+	!model::StaticValue.isInstance(to);

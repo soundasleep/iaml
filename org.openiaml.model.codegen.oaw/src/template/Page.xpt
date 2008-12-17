@@ -46,7 +46,7 @@
 		</head>
 		
 		<body onLoad="loadStoredEvents()">
-		<div style="font-size:small; text-align: right;"><a href="sitemap.html">sitemap</a></div>
+		<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
 		
 		<h1>«pageTitle()»</h1>
 		
@@ -285,6 +285,11 @@
 	«ERROR "unknown data flow edge source for setPropertyToValue: " + this»
 «ENDDEFINE»
 
+// TODO need to wrap value in some sort of encoding algorithm
+«DEFINE setPropertyToValueInflowTarget FOR model::StaticValue»
+	"«value-»" /* static value "«safeName()-»" */ 
+«ENDDEFINE»
+
 «DEFINE setPropertyToValueInflowTarget FOR model::Parameter»
 	«safeName()»
 «ENDDEFINE»
@@ -337,9 +342,13 @@
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations FOR model::wires::NavigateWire»
-	// navigate to another page
-	var url = "«safeName(to)».php";
-	debug("Redirecting to '" + url + "'");
-	window.location = url;
+	«IF name != "fail"»
+		// navigate to another page
+		var url = "«safeName(to)».php";
+		debug("Redirecting to '" + url + "'");
+		window.location = url;
+	«ELSE»
+		// ignoring fail wire
+	«ENDIF»
 «ENDDEFINE»
 

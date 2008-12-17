@@ -31,6 +31,7 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 
 /**
@@ -51,6 +52,7 @@ import org.openiaml.model.model.TemporaryVariable;
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getExecutionEdges <em>Execution Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#get_shouldnt_properties <em>shouldnt properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -176,6 +178,16 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<ApplicationElementProperty> _shouldnt_properties;
+
+	/**
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StaticValue> values;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -342,6 +354,18 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<StaticValue> getValues() {
+		if (values == null) {
+			values = new EObjectContainmentEList<StaticValue>(StaticValue.class, this, ModelPackage.COMPOSITE_OPERATION__VALUES);
+		}
+		return values;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -380,6 +404,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PROPERTIES:
 				return ((InternalEList<?>)get_shouldnt_properties()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPOSITE_OPERATION__VALUES:
+				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -414,6 +440,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return getVariables();
 			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PROPERTIES:
 				return get_shouldnt_properties();
+			case ModelPackage.COMPOSITE_OPERATION__VALUES:
+				return getValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -470,6 +498,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				get_shouldnt_properties().clear();
 				get_shouldnt_properties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends StaticValue>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -515,6 +547,9 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PROPERTIES:
 				get_shouldnt_properties().clear();
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__VALUES:
+				getValues().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -549,6 +584,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return variables != null && !variables.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__SHOULDNT_PROPERTIES:
 				return _shouldnt_properties != null && !_shouldnt_properties.isEmpty();
+			case ModelPackage.COMPOSITE_OPERATION__VALUES:
+				return values != null && !values.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

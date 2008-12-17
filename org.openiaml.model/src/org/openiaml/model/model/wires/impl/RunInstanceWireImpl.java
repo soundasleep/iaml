@@ -8,6 +8,7 @@ package org.openiaml.model.model.wires.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -33,6 +35,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +51,25 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
+
+	/**
+	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int PRIORITY_EDEFAULT = 0;
+	/**
+	 * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected int priority = PRIORITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,6 +100,27 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
 		}
 		return inEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getPriority() {
+		return priority;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPriority(int newPriority) {
+		int oldPriority = priority;
+		priority = newPriority;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WiresPackage.RUN_INSTANCE_WIRE__PRIORITY, oldPriority, priority));
 	}
 
 	/**
@@ -119,6 +162,8 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 		switch (featureID) {
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				return getInEdges();
+			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
+				return new Integer(getPriority());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -136,6 +181,9 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
+				setPriority(((Integer)newValue).intValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -151,6 +199,9 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
+				setPriority(PRIORITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -165,6 +216,8 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 		switch (featureID) {
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
+				return priority != PRIORITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -199,6 +252,22 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (priority: ");
+		result.append(priority);
+		result.append(')');
+		return result.toString();
 	}
 
 } //RunInstanceWireImpl

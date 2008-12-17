@@ -305,4 +305,18 @@ public class ChainedOperationImpl extends OperationImpl implements ChainedOperat
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.model.ChainedOperation#getLastChainedOperation()
+	 */
+	@Override
+	public ChainedOperation getLastChainedOperation() {
+		for (WireEdge wire : getWires()) {
+			if (wire.getTo() instanceof ChainedOperation) {
+				// chain along
+				return ((ChainedOperation) wire.getTo()).getLastChainedOperation();
+			}
+		}
+		return this;
+	}
+
 } //ChainedOperationImpl

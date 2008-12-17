@@ -110,8 +110,12 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * 
 	 * If you want the client to be reset (e.g. delete cookies, sessions),
 	 * use {@link #beginAtSitemapThenPage(IFile, String)}.
+	 * 
+	 * @param sitemap the sitemap url to start from
+	 * @param pageText the page text link to click
+	 * @param expected the expected page title on the new page, if different from the page text link
 	 */ 
-	protected void gotoSitemapThenPage(IFile sitemap, String pageText) throws Exception {
+	protected void gotoSitemapThenPage(IFile sitemap, String pageText, String expectedTitle) throws Exception {
 		waitForAjax();
 
 		gotoPage(sitemap.getProjectRelativePath().toString());
@@ -121,7 +125,7 @@ public class CodegenTestCase extends InferenceTestCase {
 		assertLinkPresentWithText(pageText);
 		clickLinkWithText(pageText);
 		try {
-			assertTitleMatch(pageText);
+			assertEquals(expectedTitle, getPageTitle());		// could be different
 		} catch (AssertionFailedError e) {
 			// something went wrong in the page execution, or
 			// the output is mangled HTML: output page source for debug purposes
@@ -129,6 +133,19 @@ public class CodegenTestCase extends InferenceTestCase {
 			throw e;	// carry on throwing
 		}
 		
+	}
+	
+	/**
+	 * Go to the sitemap page, and then click on a particular page title.
+	 * 
+	 * If you want the client to be reset (e.g. delete cookies, sessions),
+	 * use {@link #beginAtSitemapThenPage(IFile, String)}.
+	 * 
+	 * @param sitemap the sitemap url to start from
+	 * @param pageText the page text link to click
+	 */ 
+	protected void gotoSitemapThenPage(IFile sitemap, String pageText) throws Exception {
+		gotoSitemapThenPage(sitemap, pageText, pageText);
 	}
 	
 	/**
@@ -141,5 +158,14 @@ public class CodegenTestCase extends InferenceTestCase {
 	protected String getLabelIDForText(String text) {
 		IElement element = getElementByXPath("//label[contains(text(),'" + text + "')]");
 		return element.getAttribute("id");
-	}	
+	}
+	
+	/**
+	 * Helper method: Get the current page title.
+	 */
+	protected String getPageTitle() {
+		return getElementByXPath("//title").getTextContent(); 
+	}
+	
+	
 }

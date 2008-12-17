@@ -129,6 +129,7 @@ rule "Connect 'access' event to 'check key' operation"
 	then
 		RunInstanceWire wire = handler.generatedRunInstanceWire(scope, page, access, check);
 		wire.setName("run");
+		wire.setPriority(100);	// high priority
 		insert(wire);	
 	
 end
@@ -398,3 +399,116 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 				
 end
 
+rule "Create 'do logout' operation in session"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		logout : Page ( eContainer == scope, name == "logout" )
+	
+		not (CompositeOperation ( eContainer == logout, name == "do logout" ))
+
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(login_handler, scope);
+		operation.setName("do logout");
+		insert(operation); 
+		
+end 
+
+rule "Connect 'access' operation for logout page to 'do logout' operation"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		logout : Page ( eContainer == scope, name == "logout" )
+		logout_operation : CompositeOperation ( eContainer == scope, name == "do logout" )
+		
+		access : EventTrigger ( eContainer == logout, name == "access" )
+		# we can't add it to the end of the 'check key' operation, because then
+		# all operations will have to run it as well.
+		# add it to the end of the access operation chain
+		
+		not (RunInstanceWire( from == access, to == logout_operation ))
+	
+	then 
+		RunInstanceWire wire = handler.generatedRunInstanceWire(login_handler, logout, access, logout_operation);
+		wire.setName("run logout operation");
+		insert(wire);
+
+end 
+
+rule "Connect new navigate wire from logout to logout destination"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		logout : Page ( eContainer == scope, name == "logout" )
+		logout_operation : CompositeOperation ( eContainer == scope, name == "do logout" )
+		# add it at the end of the operation chain (final_operation may == logout_operation)
+		# in this case, we want all accesses to "do logout" to always redirect to "home" (for example)
+		final_operation : CompositeOperation ( this == logout_operation.lastChainedOperation )
+		destination : Page ( )
+		logout_wire : NavigateWire( from == login_handler, to == destination, name == "logout" )
+		
+		not (NavigateWire( from == final_operation, to == destination ))
+	
+	then
+		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, final_operation, destination);
+		wire.setName("navigate on successful logout");
+		insert(wire);
+		
+end
+
+rule "Create contents of 'do logout' operation for LoginHandler[type=key]"
+	when
+		scope : Session( )
+		o : CompositeOperation( name == "do logout", eContainer == scope )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+
+		value : ApplicationElementProperty( )
+		mySetWire : FindWire( from == login_handler, to == value, name == "set" )
+		
+		not (StartNode( eContainer == o))
+		not (FinishNode( eContainer == o))
+	
+	then
+		# create a 'null' value
+		StaticValue myNull = handler.generatedStaticValue(o, o);
+		myNull.setName("reset value");
+		myNull.setValue("null");
+		insert(myNull);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		insert(start);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		insert(finish);
+		
+		# setPropertyToValue
+		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		op.setName("setPropertyToValue");
+		insert(op);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		data1.setFrom(myNull);
+		data1.setTo(op);
+		insert(data1);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		data2.setFrom(op);
+		data2.setTo(value);
+		insert(data2);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		edge1.setFrom(start);
+		edge1.setTo(op);
+		insert(edge1);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		edge2.setFrom(op);
+		edge2.setTo(finish);
+		insert(edge2);
+
+end

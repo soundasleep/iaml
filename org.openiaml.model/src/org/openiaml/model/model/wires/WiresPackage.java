@@ -588,13 +588,22 @@ public interface WiresPackage extends EPackage {
 	int RUN_INSTANCE_WIRE__IN_EDGES = COMPOSITE_WIRE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_INSTANCE_WIRE__PRIORITY = COMPOSITE_WIRE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Run Instance Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_INSTANCE_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 1;
+	int RUN_INSTANCE_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ParameterWireImpl <em>Parameter Wire</em>}' class.
@@ -1727,6 +1736,17 @@ public interface WiresPackage extends EPackage {
 	EClass getRunInstanceWire();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.wires.RunInstanceWire#getPriority <em>Priority</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Priority</em>'.
+	 * @see org.openiaml.model.model.wires.RunInstanceWire#getPriority()
+	 * @see #getRunInstanceWire()
+	 * @generated
+	 */
+	EAttribute getRunInstanceWire_Priority();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ParameterWire <em>Parameter Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1938,6 +1958,14 @@ public interface WiresPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RUN_INSTANCE_WIRE = eINSTANCE.getRunInstanceWire();
+
+		/**
+		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RUN_INSTANCE_WIRE__PRIORITY = eINSTANCE.getRunInstanceWire_Priority();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.ParameterWireImpl <em>Parameter Wire</em>}' class.

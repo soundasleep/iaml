@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getExecutionEdges <em>Execution Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#get_shouldnt_properties <em>shouldnt properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.CompositeOperation#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,5 +109,21 @@ public interface CompositeOperation extends ChainedOperation, ContainsOperations
 	 * @generated
 	 */
 	EList<ApplicationElementProperty> get_shouldnt_properties();
+
+	/**
+	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.StaticValue}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Values</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getCompositeOperation_Values()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<StaticValue> getValues();
 
 } // CompositeOperation

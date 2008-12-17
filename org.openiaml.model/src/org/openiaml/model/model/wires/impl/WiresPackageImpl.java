@@ -299,6 +299,15 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRunInstanceWire_Priority() {
+		return (EAttribute)runInstanceWireEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParameterWire() {
 		return parameterWireEClass;
 	}
@@ -425,6 +434,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		syncWireEClass = createEClass(SYNC_WIRE);
 
 		runInstanceWireEClass = createEClass(RUN_INSTANCE_WIRE);
+		createEAttribute(runInstanceWireEClass, RUN_INSTANCE_WIRE__PRIORITY);
 
 		parameterWireEClass = createEClass(PARAMETER_WIRE);
 		createEAttribute(parameterWireEClass, PARAMETER_WIRE__PARAMETER_NAME);
@@ -506,6 +516,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEClass(syncWireEClass, SyncWire.class, "SyncWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(runInstanceWireEClass, RunInstanceWire.class, "RunInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRunInstanceWire_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, RunInstanceWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterWireEClass, ParameterWire.class, "ParameterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameterWire_ParameterName(), ecorePackage.getEString(), "parameterName", null, 0, 1, ParameterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -558,6 +569,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "comment", "RunWire: a composite wire that contains ExecutionWires/etc"
+		   });		
+		addAnnotation
+		  (getRunInstanceWire_Priority(), 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
 		   });		
 		addAnnotation
 		  (getParameterWire_ParameterName(), 

@@ -90,6 +90,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * that an error is thrown.
 	 */
 	public void testHasLogoutPage() {
+		try {
+			
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
@@ -98,6 +100,11 @@ public class LoginHandlerKey extends CodegenTestCase {
 
 		clickLinkWithText("logout");
 		assertProblem();	// who knows where we are?
+		
+		} catch (Error e) {
+			System.out.println(getPageSource());
+			throw e;
+		}
 
 	}
 
@@ -145,12 +152,13 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTitleMatch("viewkey");
 		assertNoProblem();
 		
-		// now we just quickly go logout		
-		gotoSitemapThenPage(sitemap, "logout");
+		// now we just quickly go logout
+		gotoSitemapThenPage(sitemap, "logout", "Home");
 		assertNoProblem();
 		
 		// we should now be on the home page
-		assertTitleMatch("home");
+		assertEquals("Home", getPageTitle());
+		assertTitleMatch("Home");
 		assertNoProblem();
 		
 		} catch (Error e) {
@@ -192,10 +200,10 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTextPresent("42");
 		
 		// now we logout		
-		gotoSitemapThenPage(sitemap, "logout");
+		gotoSitemapThenPage(sitemap, "logout", "Home");
 		
 		// we should now be on the home page
-		assertTitleMatch("home");
+		assertTitleMatch("Home");
 		assertNoProblem();
 
 	}
@@ -234,10 +242,10 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTextPresent("42");
 		
 		// now we logout		
-		gotoSitemapThenPage(sitemap, "logout");
+		gotoSitemapThenPage(sitemap, "logout", "Home");
 		
 		// we should now be on the home page
-		assertTitleMatch("home");
+		assertTitleMatch("Home");
 		assertNoProblem();
 		
 	}
@@ -276,10 +284,10 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertTextPresent("42");
 
 		// now we logout		
-		gotoSitemapThenPage(sitemap, "logout");
+		gotoSitemapThenPage(sitemap, "logout", "Home");
 		
 		// we should now be on the home page
-		assertTitleMatch("home");
+		assertTitleMatch("Home");
 		assertNoProblem();
 		
 	}
@@ -297,12 +305,5 @@ public class LoginHandlerKey extends CodegenTestCase {
 	protected void assertNoProblem() {
 		assertNoMatch("(Error|error|Exception|exception)");
 	}
-	
-	/**
-	 * Helper method: Get the current page title.
-	 */
-	protected String getPageTitle() {
-		return getElementByXPath("//title").getTextContent(); 
-	}
-	
+
 }

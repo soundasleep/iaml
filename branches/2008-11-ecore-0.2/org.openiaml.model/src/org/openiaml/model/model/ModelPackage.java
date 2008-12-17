@@ -1777,13 +1777,22 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__VALUES = CHAINED_OPERATION_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 11;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3871,6 +3880,17 @@ public interface ModelPackage extends EPackage {
 	EReference getCompositeOperation__shouldnt_properties();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeOperation#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Values</em>'.
+	 * @see org.openiaml.model.model.CompositeOperation#getValues()
+	 * @see #getCompositeOperation()
+	 * @generated
+	 */
+	EReference getCompositeOperation_Values();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4835,6 +4855,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = eINSTANCE.getCompositeOperation__shouldnt_properties();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_OPERATION__VALUES = eINSTANCE.getCompositeOperation_Values();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}' class.

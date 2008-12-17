@@ -41,6 +41,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/executionEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/variables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/_shouldnt_properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/values"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsOperations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsOperations/operations"/>
@@ -153,7 +154,9 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/values"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/RunInstanceWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/RunInstanceWire">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/RunInstanceWire/priority"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ParameterWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ParameterWire/parameterName"/>
       </genClasses>

@@ -9,7 +9,8 @@
 «DEFINE pageEvents FOR model::EventTrigger-»
 	// EventTrigger «this»
 	«IF name == "access"-»
-		«EXPAND StoreDbPhp::callOperations FOREACH outEdges-»
+		// RunInstanceWires sorted by priority
+		«EXPAND StoreDbPhp::callOperations FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	«ELSE-»
 		// I don't know what to do with page event "«name»"
 	«ENDIF-»
@@ -58,6 +59,9 @@
 			// execute the operation
 			«EXPAND doExecutionFlow FOR startNode()-»
 
+			// continue chained operations
+			«EXPAND continueChainedOperations FOR this»
+			
 			«IF getFailEdge() != null»
 				} catch (IamlRuntimeException $e) {
 					log_message("Caught exception $e");
@@ -94,6 +98,8 @@
 «DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»
 	«IF exceptionText.length > 0»
 		throw new IamlRuntimeException("«exceptionText»");
+	«ELSE»
+		// ignored cancel node "«this»"
 	«ENDIF»
 «ENDDEFINE»
 
@@ -104,16 +110,51 @@
 	«FOREACH outExecutions AS e-»
 		«EXPAND doExecutionFlowNext FOR e.to-»
 	«ENDFOREACH»
+	
+	// continue chained operations
+	«EXPAND continueChainedOperations FOR this»
 «ENDDEFINE»
 
 /* a decision operation: expandOperationContents will continue the execution flow */
 «DEFINE doExecutionFlowNext FOR model::operations::DecisionOperation-»
 	// decision operation «name-»
 	«EXPAND expandOperationContents FOR this-»
+
+	// continue chained operations
+	«EXPAND continueChainedOperations FOR this»
 «ENDDEFINE»
 
 «DEFINE expandOperationContents FOR model::Operation-»
-	// ERROR "Unknown operation to expand: " + this
+	«ERROR "Unknown operation to expand: " + this»
+«ENDDEFINE»
+
+/* expand the definition of an operation, assumed to be called as part of an existing function call */
+«DEFINE expandOperationContents FOR model::ChainedOperation-»
+	«REM»special operation names«ENDREM»
+	«IF name == "setPropertyToValue"-»
+		«REM»outflowTarget == inflowTarget«ENDREM»
+		// outFlows first to = «outFlows.first().to»
+		«IF outFlows.first().to.eContainer.metaType.isAssignableFrom( model::scopes::Session )»
+			$_SESSION["«safeName(outFlows.first().to)-»"] = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+		«ELSE»
+			queue_set_application_property("«outFlows.first().to.eContainer.safeName()»", «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
+		«ENDIF»
+
+		«REM»
+			in the future, we might want to make this into a function that is passed
+			to ajax calls and executed once the call is successful.
+		«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND doExecutionFlowNext FOR e.to-»
+		«ENDFOREACH»
+		
+		«REM»
+			here may be a good place to connect any chained EventTriggers
+		«ENDREM»
+	«ELSE»
+		«REM»an existing function on this page«ENDREM»
+		«ERROR "Unknown server-side function to expand: " + this»
+	«ENDIF»
 «ENDDEFINE»
 
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
@@ -134,6 +175,20 @@
 		// failed (exactly one fail)
 		«EXPAND doExecutionFlowNext FOR failedExectionFlow().to»
 	}
+«ENDDEFINE»
+
+/* data flows in */
+«DEFINE setPropertyToValueInflowTarget FOR model::DataFlowEdgesSource»
+	«ERROR "unknown data flow edge source for server setPropertyToValue: " + this»
+«ENDDEFINE»
+
+// TODO need to wrap value in some sort of encoding algorithm
+«DEFINE setPropertyToValueInflowTarget FOR model::StaticValue»
+	"«value-»" /* static value "«safeName()-»" */ 
+«ENDDEFINE»
+
+«DEFINE setPropertyToValueInflowTarget FOR model::Parameter»
+	«safeName()»
 «ENDDEFINE»
 
 «DEFINE expandCheckInflows FOR model::DataFlowEdge-»
@@ -170,8 +225,28 @@
 «DEFINE expandFailEdge FOR model::wires::NavigateWire-»
 	// we need to navigate to the fail page
 	$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage());
-	log_message("Redirecting to '$url'");
+	log_message("Redirecting to '$url' (fail)");
 	header("Location: $url");
 	die;
 «ENDDEFINE»
 
+/** continue operation execution */
+«DEFINE continueChainedOperations FOR model::ChainedOperation-»
+	«EXPAND continueChainedOperations FOREACH outEdges»
+«ENDDEFINE»
+
+«DEFINE continueChainedOperations FOR model::WireEdge»
+	«ERROR "Cannot continue a chained operation for " + this»
+«ENDDEFINE»
+
+«DEFINE continueChainedOperations FOR model::wires::NavigateWire»
+	«IF name != "fail"»
+		// navigate to another page
+		$url = "«safeName(to)».php";
+		log_message("Redirecting to '$url'");
+		header("Location: $url");
+		die;
+	«ELSE»
+		// ignoring fail wire
+	«ENDIF»
+«ENDDEFINE»

@@ -39,6 +39,8 @@
 
 	«FILE "output/set_session.php"»«EXPAND php::SetSessionPhp::setSessionPhp»«ENDFILE»
 
+	«FILE "output/clear_session.php"»«EXPAND php::ClearSessionPhp::clearSessionPhp»«ENDFILE»
+
 	«FILE "output/create_database.php"-»
 <?php
 «EXPAND php::CreateDomainStorePhp::createDomainStorePhp FOREACH domainStores-»

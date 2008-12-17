@@ -59,6 +59,8 @@
         eType="#//TemporaryVariable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="_shouldnt_properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//StaticValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsOperations" abstract="true"
       interface="true">
@@ -303,6 +305,11 @@
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="added" value="0.2"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterWire" eSuperTypes="#//wires/SingleWire">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">

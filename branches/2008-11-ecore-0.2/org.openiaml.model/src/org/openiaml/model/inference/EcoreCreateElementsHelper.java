@@ -19,6 +19,7 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.operations.CancelNode;
@@ -88,6 +89,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		operation.setIsGenerated(true);
 		operation.setGeneratedBy(by);
 		return operation;
+	}
+	
+	public StaticValue generatedStaticValue(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		StaticValue value = (StaticValue) createElement( container, ModelPackage.eINSTANCE.getStaticValue(), ModelPackage.eINSTANCE.getCompositeOperation_Values() );
+		value.setIsGenerated(true);
+		value.setGeneratedBy(by);
+		return value;
 	}
 	
 	public StartNode generatedStartNode(GeneratesElements by, CompositeOperation container) throws InferenceException {

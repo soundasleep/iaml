@@ -1,0 +1,22 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE clearSessionPhp FOR model::InternetApplication-»
+<?php
+/**
+ * Clear the existing session.
+ */
+ 
+«EXPAND HeaderPhp::headerPhp FOR this-»
+
+log_message("clear_session.php? " . print_r($_GET, true));
+
+foreach ($_SESSION as $k => $v) {
+	$_SESSION[$k] = "";
+}
+
+echo "ok";
+log_message("clear_session.php completed");
+
+«ENDDEFINE»

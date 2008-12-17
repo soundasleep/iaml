@@ -3,8 +3,11 @@
  */
 package org.openiaml.model.tests;
 
+import java.net.NetPermission;
+
 import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.api.IElement;
+import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
@@ -89,7 +92,6 @@ public class CodegenTestCase extends InferenceTestCase {
 		waitForAjax();
 
 		beginAt(sitemap.getProjectRelativePath().toString());
-		hasLoaded = true;		// we have now loaded a page
 		assertTitleMatch("sitemap");
 		
 		assertLinkPresentWithText(pageText);
@@ -103,6 +105,15 @@ public class CodegenTestCase extends InferenceTestCase {
 			throw e;	// carry on throwing
 		}
 		
+	}
+	
+	/**
+	 * We extend {@link WebTestCase#beginAt(String)} to also set
+	 * {@link #hasLoaded} to true (to help Ajax navigation).
+	 */
+	public void beginAt(String url) {
+		super.beginAt(url);
+		hasLoaded = true;		// we have now loaded a page
 	}
 	
 	/**

@@ -45,7 +45,7 @@ public class SyncFormDomainObject extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// go to page1
-		goSitemapThenPage(sitemap, "page1");
+		beginAtSitemapThenPage(sitemap, "page1");
 		
 		// the values should all be empty first
 		String field1id = getLabelIDForText("field1");
@@ -64,7 +64,7 @@ public class SyncFormDomainObject extends CodegenTestCase {
 		assertLabeledFieldEquals(field2id, testingText2);
 		
 		// reload the page
-		goSitemapThenPage(sitemap, "page1");
+		beginAtSitemapThenPage(sitemap, "page1");
 
 		// the values should still be the same
 		assertLabeledFieldEquals(field1id, testingText1);

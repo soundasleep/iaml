@@ -138,7 +138,6 @@ public class LoginHandlerKey extends CodegenTestCase {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
-		// by using goSitemapThenPage(), we will check for Ajax monitors
 		beginAtSitemapThenPage(sitemap, "login");
 		assertNoProblem();
 		
@@ -186,9 +185,10 @@ public class LoginHandlerKey extends CodegenTestCase {
 		String loginId = getLabelIDForText("login key");
 		setLabeledFormElementField(loginId, "42");
 		submit();		// submit the form
+		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the viewkey page
-		assertTitleMatch("viewkey");
+		assertEquals("viewkey", getPageTitle());
 		assertNoProblem();
 		
 		// it should be present
@@ -228,9 +228,10 @@ public class LoginHandlerKey extends CodegenTestCase {
 		String loginId = getLabelIDForText("login key");
 		setLabeledFormElementField(loginId, "42");
 		submit();		// submit the form
+		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the viewkey page
-		assertTitleMatch("viewkey");
+		assertEquals("viewkey", getPageTitle());
 		assertNoProblem();
 		
 		// it should be present
@@ -268,6 +269,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 		String loginId = getLabelIDForText("login key");
 		setLabeledFormElementField(loginId, "44");	// INVALID
 		submit();		// submit the form
+		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the login page again
 		assertTitleMatch("login");
@@ -277,6 +279,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 		// lets set the fields again
 		setLabeledFormElementField(loginId, "42");	// VALID
 		submit();		// submit the form
+		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the right page
 		assertTitleMatch("viewkey");

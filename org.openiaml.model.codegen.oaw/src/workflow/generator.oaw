@@ -30,7 +30,7 @@
 		<expand
 			value="template::Template::main FOR model" />
 		<outlet path="${src-gen}" >
-			<!-- postprocessor class="org.openarchitectureware.xpand2.output.JavaBeautifier" / -->
+			<postprocessor class="org.openiaml.model.codegen.oaw.IACleanerBeautifier" />
 		</outlet>
 	</component>
 

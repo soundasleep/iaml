@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.codegen.oaw;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -24,13 +25,19 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 	@Override
 	public void afterClose(FileHandle file) {
 		try {
+			// copy original
 			IACleaner cleaner = new IACleaner();
+			String original = cleaner.readFile(file.getTargetFile());
+			FileWriter fw = new FileWriter( new File(file.getTargetFile().getAbsolutePath() + ".orig") );
+			fw.write(original);
+			fw.close();
+			
 			String out = cleaner.cleanScript( file.getTargetFile() );
 			
 			// rewrite the file
-			FileWriter fw = new FileWriter(file.getTargetFile());
-			fw.write(out);
-			fw.close();
+			FileWriter fw2 = new FileWriter(file.getTargetFile());
+			fw2.write(out);
+			fw2.close();
 		} catch (IOException e) {
 			throw new RuntimeException("IO Exception during prettifier: " + e.getMessage(), e);
 		} catch (CleanerException e) {

@@ -43,6 +43,8 @@ public abstract class ModelTestCase extends WebTestCase {
 	protected IProject project;
 	protected IProgressMonitor monitor = new NullProgressMonitor();
 	
+	public String BASE_URL = "http://localhost:8080/junit-workspace/";
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -50,7 +52,7 @@ public abstract class ModelTestCase extends WebTestCase {
 		project = createProject();
 
 		// set test context
-		getTestContext().setBaseUrl("http://localhost:8080/junit-workspace/" + project.getName() + "/");
+		getTestContext().setBaseUrl(BASE_URL + project.getName() + "/");
 	}
 
 	/**

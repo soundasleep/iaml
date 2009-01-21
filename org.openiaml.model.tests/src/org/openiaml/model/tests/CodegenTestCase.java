@@ -112,7 +112,11 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * {@link #hasLoaded} to true (to help Ajax navigation).
 	 */
 	public void beginAt(String url) {
-		super.beginAt(url);
+		try {
+			super.beginAt(url);
+		} catch (RuntimeException e) {
+			throw new RuntimeException("Cannot connect to '" + url + "' relative to '" + BASE_URL + "'", e);	// for debugging
+		}
 		hasLoaded = true;		// we have now loaded a page
 	}
 	

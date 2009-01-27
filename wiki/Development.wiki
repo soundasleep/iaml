@@ -47,6 +47,13 @@ Name:  Subclipse 1.2.x update site
 URL:   http://subclipse.tigris.org/update_1.2.x
 }}}
 
+If you also wish to install the components necessary for profiling the project, install the following additional components from the *Europa update site:*
+
+  # Testing and Performance > TPTP Platform Project 4.4.100
+  # Testing and Performance > TPTP Testing Tools Project 43.200
+  # Testing and Performance > TPTP Tracing and Profiling Tools Project 4.3.100
+  # + all required features
+
 In the future this guide will also contain information on topics such as:
 
   # Plugin Overview
@@ -56,5 +63,6 @@ In the future this guide will also contain information on topics such as:
   # Contributing
   # Extending
   # Integrating
+  # Profiling
 
 For now you can see the [PluginIDs] of each of the modelling plugins.

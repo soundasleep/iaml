@@ -4,8 +4,12 @@
 package org.openiaml.model.tests.eclipse;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.ILogListener;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
@@ -17,6 +21,9 @@ import org.openiaml.model.tests.EclipseTestCaseHelper;
 public class LoadDiagramTestCase extends EclipseTestCaseHelper {
 
 	public void testLoadModel() throws Exception {
+		// register errors
+		addLogListener();
+
 		// copy our local file into the project
 		IFile targetModel = project.getFile("generation-sync-multiple.iaml");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml",
@@ -24,8 +31,7 @@ public class LoadDiagramTestCase extends EclipseTestCaseHelper {
 		IFile targetDiagram = project.getFile("generation-sync-multiple.iaml_diagram");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml_diagram",
 				targetDiagram);
-
-		// load up the editor
+		
 		DiagramDocumentEditor editor = (DiagramDocumentEditor) loadDiagramFile(targetDiagram);
 		assertEditorRoot(editor);
 

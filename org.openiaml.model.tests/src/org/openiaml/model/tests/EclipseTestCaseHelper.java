@@ -4,6 +4,9 @@
 package org.openiaml.model.tests;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.ILogListener;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
@@ -462,4 +465,27 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				"org.openiaml.model.model.diagram.wire.part.IamlDiagramEditor", 
 				editor.getClass().getName());
 	}
+	
+	/**
+	 * Before jumping into an Eclipse test, this method should be called
+	 * so we can catch any exceptions that occur during loading, and 
+	 * print them out to the log.
+	 */
+	protected void addLogListener() {
+		Platform.addLogListener(new ILogListener() {
+			@Override
+			public void logging(IStatus status, String plugin) {
+				// rethrow if exception is caught
+				if (status.getSeverity() == IStatus.ERROR) {
+					// JUnit won't actually catch this, because the Platform is
+					// in a different thread. however we will still get the 
+					// stack trace in System.err so this remains somewhat useful.
+					throw new RuntimeException(status.getMessage(), status.getException());
+				} else {				
+					// otherwise just print out the error
+					System.err.println(status);
+				}
+			}});
+	}
+	
 }

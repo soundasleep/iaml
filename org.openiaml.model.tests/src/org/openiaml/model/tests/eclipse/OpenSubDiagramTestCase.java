@@ -19,6 +19,9 @@ import org.openiaml.model.tests.EclipseTestCaseHelper;
 public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 
 	public void testLoadModel() throws Exception {
+		// register errors
+		addLogListener();
+
 		// copy our local file into the project
 		IFile targetModel = project.getFile("generation-sync-multiple.iaml");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml",

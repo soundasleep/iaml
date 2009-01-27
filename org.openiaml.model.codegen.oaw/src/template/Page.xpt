@@ -65,9 +65,7 @@
 		
 		«EXPAND expandChild FOREACH children-»
 		
-		<div id="debug">			
-		<div>
-		
+		<div id="debug"></div>
 		<div id="response">empty</div>
 		
 		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
@@ -119,7 +117,7 @@
 			
 			«REM»any static values?«ENDREM»
 			«EXPAND staticInitialValues FOREACH inEdges» 
-
+			«EXPAND staticInitialValues FOREACH outEdges» 
 		>
 		
 		<script>
@@ -129,6 +127,7 @@
 
 				«REM»any application element properties to change?«ENDREM»
 				«EXPAND outgoingValues FOREACH outEdges»
+				«EXPAND outgoingValues FOREACH inEdges»
 
 				return false;
 			}
@@ -152,10 +151,13 @@
    property as the value */
 «DEFINE staticInitialValues FOR model::wires::SyncWire»
 	«EXPAND staticInitialValue FOR from»
+	«EXPAND staticInitialValue FOR to»
 «ENDDEFINE»
 
 /* ignore: todo refactor */
 «DEFINE staticInitialValue FOR model::WireEdgesSource»
+«ENDDEFINE»
+«DEFINE staticInitialValue FOR model::WireEdgeDestination»
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */
@@ -176,10 +178,13 @@
 /* if it connects to a SyncWire that is an ApplicationElementProperty, use this
    property as the destination */
 «DEFINE outgoingValues FOR model::wires::SyncWire»
+	«EXPAND outgoingValue FOR from»
 	«EXPAND outgoingValue FOR to»
 «ENDDEFINE»
 
 /* ignore: todo refactor */
+«DEFINE outgoingValue FOR model::WireEdgesSource»
+«ENDDEFINE»
 «DEFINE outgoingValue FOR model::WireEdgeDestination»
 «ENDDEFINE»
 
@@ -187,10 +192,10 @@
 «DEFINE outgoingValue FOR model::ApplicationElementProperty»
 	«IF containingSession(this) == null»
 		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
-		set_application_value("«safeName(containingSession(this))»_«safeNameString(id)»", this.value);
+		set_application_value("«safeName(containingSession(this))»_«safeNameString(id)»", obj.value);
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
-		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", this.value);
+		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", obj.value);
 	«ENDIF»
 «ENDDEFINE»
 

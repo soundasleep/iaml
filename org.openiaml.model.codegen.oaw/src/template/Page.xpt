@@ -7,7 +7,7 @@
 «ENDDEFINE»
 
 «DEFINE expandPage FOR model::visual::Page-»
-	«FILE "output/"+safeName(id)+".php"-»
+	«FILE "output/"+safeNameString(id)+".php"-»
 <?php
 		/* generated page "«name-»" */
 
@@ -82,7 +82,7 @@
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputForm-»
-	<form id="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
+	<form id="«safeNameString(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
 		<h2>«formName()»</h2>
 		
 		«EXPAND expandChild FOREACH children-»
@@ -91,17 +91,45 @@
 
 «DEFINE expandChild FOR model::visual::InputTextField-»
 	<div>
-	<label id="label_«safeName(id)-»">
+	<label id="label_«safeNameString(id)-»">
 		«textFieldName()»
 		
-		<input type="text" id="«safeName(id)»" name="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
+		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»
+			«REM»any static values?«ENDREM»
+			«EXPAND staticInitialValues FOREACH inEdges» 
+		>
 	</label>
 	</div>
 «ENDDEFINE»
 
+/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
+«DEFINE staticInitialValues FOR model::WireEdge»
+«ENDDEFINE»
+
+/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
+   property as the value */
+«DEFINE staticInitialValues FOR model::wires::SyncWire»
+	«EXPAND staticInitialValue FOR from»
+«ENDDEFINE»
+
+/* ignore: todo refactor */
+«DEFINE staticInitialValue FOR model::WireEdgesSource»
+«ENDDEFINE»
+
+/* we have a property to provide */
+«DEFINE staticInitialValue FOR model::ApplicationElementProperty»
+	«IF containingSession(this) == null»
+		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+	«ELSE»
+		«REM»contained in a Session: a session value«ENDREM»
+		value="<?php echo htmlspecialchars(get_session_value("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+	«ENDIF»
+«ENDDEFINE»
+
 /* currently, a "Button" == a submit button. */
 «DEFINE expandChild FOR model::visual::Button-»
-	<input type="submit" id="button_«safeName(id)-»" value="«buttonName()»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-» />
+	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-» />
 «ENDDEFINE»
 
 /* expand out the operations for the page */
@@ -278,7 +306,7 @@
 «ENDDEFINE»
 
 «DEFINE setPropertyToValueOutflowTarget FOR model::ApplicationElementProperty»	
-	document.getElementById('«safeName(( (model::NamedElement) eContainer).id)»').value
+	document.getElementById('«safeNameString(( (model::NamedElement) eContainer).id)»').value
 «ENDDEFINE»
 
 /* data flows in */

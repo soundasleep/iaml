@@ -122,24 +122,24 @@ echo "ok";
  * Expand out each DomainStore.
  */
 «DEFINE expandDomainStore FOR model::DomainStore»
-	«EXPAND expandDomainObject(safeName(this.id)) FOREACH children»
+	«EXPAND expandDomainObject(safeNameString(this.id)) FOREACH children»
 «ENDDEFINE»
 
 /**
  * Expand out each DomainObject.
  */
 «DEFINE expandDomainObject(String db_name) FOR model::DomainObject»
-	«EXPAND expandDomainAttribute(db_name, safeName(this.name)) FOREACH attributes»
+	«EXPAND expandDomainAttribute(db_name, safeNameString(this.name)) FOREACH attributes»
 «ENDDEFINE»
 
 /**
  * Expand out each DomainAttribute.
  */
 «DEFINE expandDomainAttribute(String db_name, String table_name) FOR model::DomainAttribute»
-	if ($attribute_id == "«safeName(id)»") {
+	if ($attribute_id == "«safeNameString(id)»") {
 		$db_name = "sqlite:«db_name».db";
 		$table_name = "«table_name»";
-		$row_name = "«safeName(name)»";
+		$row_name = "«safeNameString(name)»";
 		
 		// are there any onEdit operations for this attribute that we
 		// have to then call?
@@ -176,7 +176,7 @@ echo "ok";
 		);
 	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )-»
 		«REM»direct field --> domain attribute«ENDREM»
-		store_db('«safeName(((model::DomainAttribute) to.eContainer).id)»'
+		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);  
 	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::scopes::Session )-»

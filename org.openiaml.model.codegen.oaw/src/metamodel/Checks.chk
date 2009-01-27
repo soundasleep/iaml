@@ -29,3 +29,11 @@ context model::operations::DecisionOperation ERROR "A DecisionOperation can only
 context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a StaticValue [from=" + from + "]":
 	!model::StaticValue.isInstance(from) &&
 	!model::StaticValue.isInstance(to);
+
+context model::wires::SyncWire ERROR "A SyncWire cannot connect to itself":
+	from != to;
+
+context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two ApplicationElementProperties":
+	!(model::ApplicationElementProperty.isInstance(from) && 
+	model::ApplicationElementProperty.isInstance(to));
+	

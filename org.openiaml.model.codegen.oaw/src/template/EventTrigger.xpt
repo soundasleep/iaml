@@ -58,7 +58,7 @@
 		«ENDIF-»
 	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )-»
 		«REM»direct field --> domain attribute«ENDREM»
-		store_db('«safeName(((model::DomainAttribute) to.eContainer).id)»'
+		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSE-»

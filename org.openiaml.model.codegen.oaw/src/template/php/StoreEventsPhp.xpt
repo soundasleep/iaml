@@ -12,9 +12,9 @@ function log_message($msg) {
 }
 
 log_message("store_event.php? " . print_r($_GET, true));
-$page_id = $_GET["page_id"] or die("no page id");
-$event_name = $_GET["event_name"] or die("no event name");
-$arg0 = $_GET["arg0"] or die("no arg0");
+$page_id = $_GET["page_id"] or local_die("no page id");
+$event_name = $_GET["event_name"] or local_die("no event name");
+$arg0 = $_GET["arg0"] or local_die("no arg0");
 
 // first, make sure the table exists
 $db = new PDO('sqlite:stored_events.db') or die("could not open db");

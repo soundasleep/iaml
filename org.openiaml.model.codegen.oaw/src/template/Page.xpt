@@ -192,7 +192,7 @@
 «DEFINE outgoingValue FOR model::ApplicationElementProperty»
 	«IF containingSession(this) == null»
 		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
-		set_application_value("«safeName(containingSession(this))»_«safeNameString(id)»", obj.value);
+		set_application_value("«safeNameString(id)»", obj.value);
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
 		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", obj.value);
@@ -204,7 +204,7 @@
 	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
 			onChange="return onChange_«safeNameString(id)»(this);"
 			onClick="return onClick_«safeNameString(id)»(this);"
-		/>
+		>
 	
 	<script>
 		function onChange_«safeNameString(id)»(obj) {
@@ -258,7 +258,7 @@
 			
 			// execute the operation
 			// if we are at the root try/catch, catch the exception explicitly
-			if (try_catch_depth == 0 «IF getFailEdge() != null»&& false«ENDIF» ) {
+			if (try_catch_depth == 0 «IF getFailEdge() != null»&& false /* we have a fail edge -- run the "else" block */«ENDIF» ) {
 				try {
 					// get chained functions
 					var function_queue = function() {
@@ -343,13 +343,21 @@
 	«IF name == "setPropertyToValue"-»
 		«REM»outflowTarget == inflowTarget«ENDREM»
 		// outFlows first to = «outFlows.first().to»
-		«IF outFlows.first().to.eContainer.metaType.isAssignableFrom( model::scopes::Session )»
-			set_session("«safeName(outFlows.first().to)-»", «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»,
-				function_queue);		// pass it a function queue to execute afterwards
+		«IF isInputTextField(outFlows.first().to.eContainer)»
+			// set a variable in the current page (assumed)
+			«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+		«ELSEIF containingSession(outFlows.first().to) == null»
+			«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+			set_application_value("«safeName(outFlows.first().to)»", 
+				«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-», 
+				function_queue);
 			function_queue_queued = true;		// we are waiting for it to return to execute the function queue
 		«ELSE»
-			«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
-
+			«REM»contained in a Session: a session value«ENDREM»
+			set_session("«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)»", 
+				«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-», 
+				function_queue);
+			function_queue_queued = true;		// we are waiting for it to return to execute the function queue
 		«ENDIF»
 
 		«REM»
@@ -428,9 +436,9 @@
 «ENDDEFINE»
 
 «DEFINE expandCheckInflowsName FOR model::ApplicationElementProperty-»
-	«IF eContainer.metaType.isAssignableFrom( model::scopes::Session )»
+	«IF containingSession(this) != null»
 		/* a property from our session */
-		require_session("«safeName()-»")
+		require_session("«safeName(containingSession(this))»_«safeName()-»")
 	«ELSE»
 		get_application_property("«safeName()-»")
 	«ENDIF»

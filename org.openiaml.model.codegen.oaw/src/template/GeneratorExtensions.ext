@@ -97,13 +97,23 @@ isFailEdge(model::wires::CompositeWire this ) :
 model::scopes::Session containingSession(emf::EObject this) :
 	null;
 
-model::scopes::Session containingSession(model::ApplicationElement this) :
+model::scopes::Session containingSession(model::NamedElement this) :
 	containingSession(eContainer);
-
+	
 model::scopes::Session containingSession(model::scopes::Session this) :
 	this;
 
 model::scopes::Session containingSession(model::InternetApplication this) :
 	null;
 
+isVisibleThing(emf::EObject this) :
+	model::VisibleThing.isInstance(this);
+isDomainAttribute(emf::EObject this) :
+	model::DomainAttribute.isInstance(this);	
+isSession(emf::EObject this) :
+	model::scopes::Session.isInstance(this);	
+isPage(emf::EObject this) :
+	model::visual::Page.isInstance(this);	
+isInputTextField(emf::EObject this) :
+	model::visual::InputTextField.isInstance(this);	
 	

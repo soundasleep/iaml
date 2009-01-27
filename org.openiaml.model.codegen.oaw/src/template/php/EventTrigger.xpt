@@ -134,8 +134,8 @@
 	«IF name == "setPropertyToValue"-»
 		«REM»outflowTarget == inflowTarget«ENDREM»
 		// outFlows first to = «outFlows.first().to»
-		«IF outFlows.first().to.eContainer.metaType.isAssignableFrom( model::scopes::Session )»
-			$_SESSION["«safeName(outFlows.first().to)-»"] = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+		«IF containingSession(outFlows.first().to) != null»
+			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
 		«ELSE»
 			queue_set_application_property("«outFlows.first().to.eContainer.safeName()»", «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
 		«ENDIF»
@@ -205,9 +205,9 @@
 «ENDDEFINE»
 
 «DEFINE expandCheckInflowsName FOR model::ApplicationElementProperty-»
-	«IF eContainer.metaType.isAssignableFrom( model::scopes::Session )»
+	«IF containingSession(this) != null»
 		/* a property from our session */
-		require_session("«safeName()-»")
+		require_session("«safeName(containingSession(this))»_«safeName()-»")
 	«ELSE»
 		get_application_property("«safeName()-»")
 	«ENDIF»

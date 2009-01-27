@@ -54,4 +54,36 @@ class IamlRuntimeException extends Exception {
 	} 
 }
 
+/**
+ * Get a global application value stored in the database.
+ */
+function get_application_value($id, $default) {
+	global $db;
+	
+	// make sure the table is there
+	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
+	if (!$s) {
+		// create the table
+		$q = $db->query("CREATE TABLE global_values (
+				id INT AUTO_INCREMENT PRIMARY KEY,
+				value_id VARCHAR(64) NOT NULL,
+				arg0 BLOB
+			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+		log_message("table for global_values created", false);
+		
+		return $default;
+	}
+
+	// get the value
+	$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
+	$row = $s->fetch();
+	
+	if (!$row) {
+		// empty
+		return $default;		
+	} else {
+		return $row["arg0"];
+	}	
+}
+
 «ENDDEFINE»

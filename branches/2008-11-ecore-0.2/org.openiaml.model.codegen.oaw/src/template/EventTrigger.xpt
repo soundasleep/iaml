@@ -8,11 +8,10 @@
 
 /* we are in an input element, and we have to register event handlers */
 /* the event handlers are not actually defined here - they have to be defined elsewhere in the page */
-«DEFINE expandEventTriggers FOR model::EventTrigger»
-	«IF name=="edit"»
-		onChange="«EXPAND callOperations(false) FOREACH outEdges» return false;"
-	«ELSEIF name=="click"»
-		onClick="«EXPAND callOperations(false) FOREACH outEdges» return false;"
+«DEFINE expandEventTriggers(String type) FOR model::EventTrigger»
+	«IF name==type»
+		«REM»the Page call worries about which ones to place where«ENDREM»
+		«EXPAND callOperations(false) FOREACH outEdges»
 	«ENDIF»
 «ENDDEFINE»
 

@@ -82,7 +82,26 @@
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputForm-»
-	<form id="«safeNameString(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
+	<form id="«safeNameString(id)»" 
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+		>
+		
+		<script>
+			function onChange_«safeNameString(id)»(obj) {
+				// expand all onChanges
+				«EXPAND EventTrigger::expandEventTriggers("edit") FOREACH eventTriggers-»
+
+				return false;
+			}
+			
+			function onClick_«safeNameString(id)»(obj) {
+				// expand all onClicks
+				«EXPAND EventTrigger::expandEventTriggers("click") FOREACH eventTriggers-»
+			
+				return false;
+			}
+		</script>
 		<h2>«formName()»</h2>
 		
 		«EXPAND expandChild FOREACH children-»
@@ -94,10 +113,33 @@
 	<label id="label_«safeNameString(id)-»">
 		«textFieldName()»
 		
-		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»
+		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»"
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+			
 			«REM»any static values?«ENDREM»
 			«EXPAND staticInitialValues FOREACH inEdges» 
+
 		>
+		
+		<script>
+			function onChange_«safeNameString(id)»(obj) {
+				// expand all onChanges
+				«EXPAND EventTrigger::expandEventTriggers("edit") FOREACH eventTriggers-»
+
+				«REM»any application element properties to change?«ENDREM»
+				«EXPAND outgoingValues FOREACH outEdges»
+
+				return false;
+			}
+			
+			function onClick_«safeNameString(id)»(obj) {
+				// expand all onClicks
+				«EXPAND EventTrigger::expandEventTriggers("click") FOREACH eventTriggers-»
+			
+				return false;
+			}
+		</script>
 	</label>
 	</div>
 «ENDDEFINE»
@@ -116,20 +158,64 @@
 «DEFINE staticInitialValue FOR model::WireEdgesSource»
 «ENDDEFINE»
 
-/* we have a property to provide */
+/* we have a property to provide [in PHP] */
 «DEFINE staticInitialValue FOR model::ApplicationElementProperty»
 	«IF containingSession(this) == null»
 		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
-		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+		value="<?php echo htmlspecialchars(get_application_value("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
-		value="<?php echo htmlspecialchars(get_session_value("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+	«ENDIF»
+«ENDDEFINE»
+
+/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
+«DEFINE outgoingValues FOR model::WireEdge»
+«ENDDEFINE»
+
+/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
+   property as the destination */
+«DEFINE outgoingValues FOR model::wires::SyncWire»
+	«EXPAND outgoingValue FOR to»
+«ENDDEFINE»
+
+/* ignore: todo refactor */
+«DEFINE outgoingValue FOR model::WireEdgeDestination»
+«ENDDEFINE»
+
+/* we have a property to set [in Javascript] */
+«DEFINE outgoingValue FOR model::ApplicationElementProperty»
+	«IF containingSession(this) == null»
+		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+		set_application_value("«safeName(containingSession(this))»_«safeNameString(id)»", this.value);
+	«ELSE»
+		«REM»contained in a Session: a session value«ENDREM»
+		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", this.value);
 	«ENDIF»
 «ENDDEFINE»
 
 /* currently, a "Button" == a submit button. */
 «DEFINE expandChild FOR model::visual::Button-»
-	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-» />
+	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+		/>
+	
+	<script>
+		function onChange_«safeNameString(id)»(obj) {
+			// expand all onChanges
+			«EXPAND EventTrigger::expandEventTriggers("edit") FOREACH eventTriggers-»
+			
+			return false;
+		}
+		
+		function onClick_«safeNameString(id)»(obj) {
+			// expand all onClicks
+			«EXPAND EventTrigger::expandEventTriggers("click") FOREACH eventTriggers-»
+
+			return false;
+		}
+	</script>
 «ENDDEFINE»
 
 /* expand out the operations for the page */

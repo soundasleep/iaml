@@ -41,6 +41,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/executionEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/variables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/_shouldnt_properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/values"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsOperations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsOperations/operations"/>
@@ -58,14 +59,16 @@
     <genClasses ecoreClass="iaml.ecore#//StaticValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//StaticValue/value"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//VisibleThing"/>
+    <genClasses ecoreClass="iaml.ecore#//VisibleThing">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/sessions"/>
+    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//InternetApplication">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/children"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/domainStores"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//InternetApplication/runtimeUrl"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sites"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sessions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sessions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/loginHandlers"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainStore">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/children"/>
@@ -124,6 +127,11 @@
     <genClasses ecoreClass="iaml.ecore#//VisitorAgent">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//VisitorAgent/properties"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//Scope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/domainObjects"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/domainViews"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/domainInstances"/>
+    </genClasses>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genClasses ecoreClass="iaml.ecore#//visual/Page">
@@ -146,48 +154,48 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/values"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/RunInstanceWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/RunInstanceWire">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/RunInstanceWire/priority"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ParameterWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ParameterWire/parameterName"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//wires/CreateWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/SetWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/UpdateWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/SaveWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/LinkWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/FindWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/ShowWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/CommitWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/NavigateWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/SelectWire">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/query"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/limit"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/FilterWire">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/FilterWire/query"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/FilterWire/limit"/>
       </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//wires/ConditionWire"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Operations" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//operations">
       <genClasses ecoreClass="iaml.ecore#//operations/StartNode"/>
-      <genClasses ecoreClass="iaml.ecore#//operations/StopNode"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/CancelNode">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/CancelNode/exceptionText"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//operations/FinishNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionOperation"/>
     </nestedGenPackages>
-    <nestedGenPackages disposableProviderFactory="true" ecorePackage="iaml.ecore#//scopes">
-      <genClasses image="false" ecoreClass="iaml.ecore#//scopes/Scope">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//scopes/Scope/domainObjects"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//scopes/Scope/domainViews"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//scopes/Scope/domainInstances"/>
-      </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//scopes/SiteScope">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//scopes/SiteScope/sessions"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//scopes/SiteScope/components"/>
-      </genClasses>
+    <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
+        ecorePackage="iaml.ecore#//scopes">
       <genClasses ecoreClass="iaml.ecore#//scopes/Session">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/agent"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/agents"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/components"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"
+        disposableProviderFactory="true" ecorePackage="iaml.ecore#//components">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//components/LoginHandlerTypes">
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//components/LoginHandlerTypes/SECRET_KEY"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//components/LoginHandlerTypes/DOMAIN_OBJECT"/>
+      </genEnums>
+      <genClasses image="false" ecoreClass="iaml.ecore#//components/LoginHandler">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//components/LoginHandler/type"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

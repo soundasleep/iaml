@@ -23,8 +23,10 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
+import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
@@ -37,12 +39,15 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -177,6 +182,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(domainObject);
 				if (result == null) result = caseWireEdgeDestination(domainObject);
 				if (result == null) result = caseGeneratesElements(domainObject);
+				if (result == null) result = caseScope(domainObject);
 				if (result == null) result = caseGeneratedElement(domainObject);
 				if (result == null) result = caseShouldntContainWires(domainObject);
 				if (result == null) result = defaultCase(theEObject);
@@ -192,6 +198,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(domainAttribute);
 				if (result == null) result = caseWireEdgeDestination(domainAttribute);
 				if (result == null) result = caseGeneratesElements(domainAttribute);
+				if (result == null) result = caseScope(domainAttribute);
 				if (result == null) result = caseGeneratedElement(domainAttribute);
 				if (result == null) result = caseShouldntContainWires(domainAttribute);
 				if (result == null) result = caseContainsWires(domainAttribute);
@@ -247,13 +254,16 @@ public class ModelSwitch<T> {
 				T result = caseChainedOperation(chainedOperation);
 				if (result == null) result = caseOperation(chainedOperation);
 				if (result == null) result = caseExecutionEdgesSource(chainedOperation);
+				if (result == null) result = caseWireEdgesSource(chainedOperation);
 				if (result == null) result = caseWireEdgeDestination(chainedOperation);
 				if (result == null) result = caseNamedElement(chainedOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(chainedOperation);
 				if (result == null) result = caseExecutionEdgeDestination(chainedOperation);
 				if (result == null) result = caseActivityNode(chainedOperation);
 				if (result == null) result = caseDataFlowEdgesSource(chainedOperation);
+				if (result == null) result = caseShouldntContainWires(chainedOperation);
 				if (result == null) result = caseGeneratedElement(chainedOperation);
+				if (result == null) result = caseContainsWires(chainedOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -264,14 +274,17 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsOperations(compositeOperation);
 				if (result == null) result = caseContainsWires(compositeOperation);
 				if (result == null) result = caseGeneratesElements(compositeOperation);
+				if (result == null) result = caseScope(compositeOperation);
 				if (result == null) result = caseOperation(compositeOperation);
 				if (result == null) result = caseExecutionEdgesSource(compositeOperation);
+				if (result == null) result = caseWireEdgesSource(compositeOperation);
 				if (result == null) result = caseWireEdgeDestination(compositeOperation);
 				if (result == null) result = caseNamedElement(compositeOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(compositeOperation);
 				if (result == null) result = caseExecutionEdgeDestination(compositeOperation);
 				if (result == null) result = caseActivityNode(compositeOperation);
 				if (result == null) result = caseDataFlowEdgesSource(compositeOperation);
+				if (result == null) result = caseShouldntContainWires(compositeOperation);
 				if (result == null) result = caseGeneratedElement(compositeOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -291,6 +304,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(applicationElement);
 				if (result == null) result = caseWireEdgeDestination(applicationElement);
 				if (result == null) result = caseGeneratesElements(applicationElement);
+				if (result == null) result = caseScope(applicationElement);
 				if (result == null) result = caseGeneratedElement(applicationElement);
 				if (result == null) result = caseShouldntContainWires(applicationElement);
 				if (result == null) result = caseContainsWires(applicationElement);
@@ -308,6 +322,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(applicationElementContainer);
 				if (result == null) result = caseWireEdgeDestination(applicationElementContainer);
 				if (result == null) result = caseGeneratesElements(applicationElementContainer);
+				if (result == null) result = caseScope(applicationElementContainer);
 				if (result == null) result = caseGeneratedElement(applicationElementContainer);
 				if (result == null) result = caseShouldntContainWires(applicationElementContainer);
 				if (result == null) result = defaultCase(theEObject);
@@ -332,7 +347,7 @@ public class ModelSwitch<T> {
 				T result = caseStaticValue(staticValue);
 				if (result == null) result = caseNamedElement(staticValue);
 				if (result == null) result = caseWireEdgesSource(staticValue);
-				if (result == null) result = caseDataFlowEdgeDestination(staticValue);
+				if (result == null) result = caseDataFlowEdgesSource(staticValue);
 				if (result == null) result = caseGeneratedElement(staticValue);
 				if (result == null) result = caseShouldntContainWires(staticValue);
 				if (result == null) result = caseContainsWires(staticValue);
@@ -351,6 +366,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(visibleThing);
 				if (result == null) result = caseWireEdgeDestination(visibleThing);
 				if (result == null) result = caseGeneratesElements(visibleThing);
+				if (result == null) result = caseScope(visibleThing);
 				if (result == null) result = caseGeneratedElement(visibleThing);
 				if (result == null) result = caseShouldntContainWires(visibleThing);
 				if (result == null) result = defaultCase(theEObject);
@@ -364,6 +380,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(internetApplication);
 				if (result == null) result = caseContainsWires(internetApplication);
 				if (result == null) result = caseGeneratesElements(internetApplication);
+				if (result == null) result = caseScope(internetApplication);
 				if (result == null) result = caseGeneratedElement(internetApplication);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -447,6 +464,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgeDestination(dynamicApplicationElementSet);
 				if (result == null) result = caseGeneratesElements(dynamicApplicationElementSet);
+				if (result == null) result = caseScope(dynamicApplicationElementSet);
 				if (result == null) result = caseGeneratedElement(dynamicApplicationElementSet);
 				if (result == null) result = caseShouldntContainWires(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsWires(dynamicApplicationElementSet);
@@ -475,6 +493,59 @@ public class ModelSwitch<T> {
 			case ModelPackage.GENERATES_ELEMENTS: {
 				GeneratesElements generatesElements = (GeneratesElements)theEObject;
 				T result = caseGeneratesElements(generatesElements);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.DERIVED_VIEW: {
+				DerivedView derivedView = (DerivedView)theEObject;
+				T result = caseDerivedView(derivedView);
+				if (result == null) result = caseApplicationElement(derivedView);
+				if (result == null) result = caseContainsWires(derivedView);
+				if (result == null) result = caseContainsOperations(derivedView);
+				if (result == null) result = caseNamedElement(derivedView);
+				if (result == null) result = caseContainsEventTriggers(derivedView);
+				if (result == null) result = caseWireEdgesSource(derivedView);
+				if (result == null) result = caseWireEdgeDestination(derivedView);
+				if (result == null) result = caseGeneratesElements(derivedView);
+				if (result == null) result = caseScope(derivedView);
+				if (result == null) result = caseGeneratedElement(derivedView);
+				if (result == null) result = caseShouldntContainWires(derivedView);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE: {
+				DomainObjectInstance domainObjectInstance = (DomainObjectInstance)theEObject;
+				T result = caseDomainObjectInstance(domainObjectInstance);
+				if (result == null) result = caseApplicationElement(domainObjectInstance);
+				if (result == null) result = caseContainsWires(domainObjectInstance);
+				if (result == null) result = caseContainsOperations(domainObjectInstance);
+				if (result == null) result = caseNamedElement(domainObjectInstance);
+				if (result == null) result = caseContainsEventTriggers(domainObjectInstance);
+				if (result == null) result = caseWireEdgesSource(domainObjectInstance);
+				if (result == null) result = caseWireEdgeDestination(domainObjectInstance);
+				if (result == null) result = caseGeneratesElements(domainObjectInstance);
+				if (result == null) result = caseScope(domainObjectInstance);
+				if (result == null) result = caseGeneratedElement(domainObjectInstance);
+				if (result == null) result = caseShouldntContainWires(domainObjectInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.PAGE_REQUEST: {
+				PageRequest pageRequest = (PageRequest)theEObject;
+				T result = casePageRequest(pageRequest);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.VISITOR_AGENT: {
+				VisitorAgent visitorAgent = (VisitorAgent)theEObject;
+				T result = caseVisitorAgent(visitorAgent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.SCOPE: {
+				Scope scope = (Scope)theEObject;
+				T result = caseScope(scope);
+				if (result == null) result = caseGeneratesElements(scope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1004,6 +1075,81 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseGeneratesElements(GeneratesElements object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Derived View</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Derived View</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDerivedView(DerivedView object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Object Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Object Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainObjectInstance(DomainObjectInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Page Request</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Page Request</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePageRequest(PageRequest object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Visitor Agent</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Visitor Agent</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVisitorAgent(VisitorAgent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScope(Scope object) {
 		return null;
 	}
 

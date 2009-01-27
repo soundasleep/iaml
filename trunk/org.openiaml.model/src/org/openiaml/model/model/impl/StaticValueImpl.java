@@ -10,22 +10,17 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
-import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.ShouldntContainWires;
@@ -46,7 +41,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getOutEdges <em>Out Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getInFlows <em>In Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
@@ -145,14 +140,14 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	protected EList<WireEdge> outEdges;
 
 	/**
-	 * The cached value of the '{@link #getInFlows() <em>In Flows</em>}' reference list.
+	 * The cached value of the '{@link #getOutFlows() <em>Out Flows</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInFlows()
+	 * @see #getOutFlows()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataFlowEdge> inFlows;
+	protected EList<DataFlowEdge> outFlows;
 
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -345,11 +340,11 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DataFlowEdge> getInFlows() {
-		if (inFlows == null) {
-			inFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.STATIC_VALUE__IN_FLOWS, ModelPackage.DATA_FLOW_EDGE__TO);
+	public EList<DataFlowEdge> getOutFlows() {
+		if (outFlows == null) {
+			outFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.STATIC_VALUE__OUT_FLOWS, ModelPackage.DATA_FLOW_EDGE__FROM);
 		}
-		return inFlows;
+		return outFlows;
 	}
 
 	/**
@@ -388,8 +383,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				return basicSetGeneratedBy((GeneratesElements)otherEnd, msgs);
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
-			case ModelPackage.STATIC_VALUE__IN_FLOWS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInFlows()).basicAdd(otherEnd, msgs);
+			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutFlows()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -408,8 +403,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.STATIC_VALUE__IN_FLOWS:
-				return ((InternalEList<?>)getInFlows()).basicRemove(otherEnd, msgs);
+			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
+				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -435,8 +430,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				return getWires();
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return getOutEdges();
-			case ModelPackage.STATIC_VALUE__IN_FLOWS:
-				return getInFlows();
+			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
+				return getOutFlows();
 			case ModelPackage.STATIC_VALUE__VALUE:
 				return getValue();
 		}
@@ -472,9 +467,9 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
-			case ModelPackage.STATIC_VALUE__IN_FLOWS:
-				getInFlows().clear();
-				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
+			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
+				getOutFlows().clear();
+				getOutFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
 				return;
 			case ModelPackage.STATIC_VALUE__VALUE:
 				setValue((String)newValue);
@@ -509,8 +504,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
-			case ModelPackage.STATIC_VALUE__IN_FLOWS:
-				getInFlows().clear();
+			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
+				getOutFlows().clear();
 				return;
 			case ModelPackage.STATIC_VALUE__VALUE:
 				setValue(VALUE_EDEFAULT);
@@ -539,8 +534,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				return wires != null && !wires.isEmpty();
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
-			case ModelPackage.STATIC_VALUE__IN_FLOWS:
-				return inFlows != null && !inFlows.isEmpty();
+			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
+				return outFlows != null && !outFlows.isEmpty();
 			case ModelPackage.STATIC_VALUE__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
@@ -571,9 +566,9 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				default: return -1;
 			}
 		}
-		if (baseClass == DataFlowEdgeDestination.class) {
+		if (baseClass == DataFlowEdgesSource.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.STATIC_VALUE__IN_FLOWS: return ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS;
+				case ModelPackage.STATIC_VALUE__OUT_FLOWS: return ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS;
 				default: return -1;
 			}
 		}
@@ -604,9 +599,9 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				default: return -1;
 			}
 		}
-		if (baseClass == DataFlowEdgeDestination.class) {
+		if (baseClass == DataFlowEdgesSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS: return ModelPackage.STATIC_VALUE__IN_FLOWS;
+				case ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS: return ModelPackage.STATIC_VALUE__OUT_FLOWS;
 				default: return -1;
 			}
 		}

@@ -14,7 +14,9 @@
       notationViewFactoryClassName="CompositeOperationViewFactory"
       canonicalEditPolicyClassName="CompositeOperationCanonicalEditPolicy"
       iconProviderPriority="Low"
-      validationProviderPriority="Low">
+      validationProviderPriority="Low"
+      validationEnabled="true"
+      validationDecorators="true">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
@@ -311,21 +313,21 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1006"
-        editPartClassName="StopNodeEditPart"
-        itemSemanticEditPolicyClassName="StopNodeItemSemanticEditPolicy"
-        notationViewFactoryClassName="StopNodeViewFactory"
-        canonicalEditPolicyClassName="StopNodeCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="StopNodeGraphicalNodeEditPolicy"
-        createCommandClassName="StopNodeCreateCommand">
+        editPartClassName="CancelNodeEditPart"
+        itemSemanticEditPolicyClassName="CancelNodeItemSemanticEditPolicy"
+        notationViewFactoryClassName="CancelNodeViewFactory"
+        canonicalEditPolicyClassName="CancelNodeCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="CancelNodeGraphicalNodeEditPolicy"
+        createCommandClassName="CancelNodeCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="StopNodeEditHelper"/>
+          editHelperClassName="CancelNodeEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
-          className="StopNodeFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StopNodeFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureStopNodeLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StopNodeFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStopNodeLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureStopNodeLabelFigure.setText(&quot;stop&quot;);&#xA;&#xA;this.add(fFigureStopNodeLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureStopNodeLabelFigure() {&#xA;&#x9;&#x9;return fFigureStopNodeLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 224, 144, 142);&#xA;&#xA;">
+          className="CancelNodeFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class CancelNodeFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureCancelNodeLabelFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureCancelNodeTextLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public CancelNodeFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureCancelNodeLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureCancelNodeLabelFigure.setText(&quot;cancel&quot;);&#xA;&#xA;this.add(fFigureCancelNodeLabelFigure);&#xA;&#xA;&#xA;&#xA;fFigureCancelNodeTextLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureCancelNodeTextLabelFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureCancelNodeTextLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureCancelNodeLabelFigure() {&#xA;&#x9;&#x9;return fFigureCancelNodeLabelFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureCancelNodeTextLabelFigure() {&#xA;&#x9;&#x9;return fFigureCancelNodeTextLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 144, 142);&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
@@ -334,13 +336,13 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="iaml.genmodel#//model/operations/StopNode"/>
+            href="iaml.genmodel#//model/operations/CancelNode"/>
         <containmentMetaFeature
             href="iaml.genmodel#//model/CompositeOperation/nodes"/>
         <childMetaFeature
             href="iaml.genmodel#//model/CompositeOperation/nodes"/>
         <modelElementSelector
-            body="self.oclIsTypeOf( StopNode )"/>
+            body="self.oclIsTypeOf( CancelNode )"/>
       </modelFacet>
       <labels
           visualID="4006"
@@ -353,8 +355,26 @@
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureStopNodeLabelFigure"
+            getterName="getFigureCancelNodeLabelFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+      </labels>
+      <labels
+          visualID="4007"
+          editPartClassName="CancelNodeExceptionTextEditPart"
+          itemSemanticEditPolicyClassName="CancelNodeExceptionTextItemSemanticEditPolicy"
+          notationViewFactoryClassName="CancelNodeExceptionTextViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureCancelNodeTextLabelFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="iaml.genmodel#//model/operations/CancelNode/exceptionText"/>
+        </modelFacet>
       </labels>
     </topLevelNodes>
     <topLevelNodes
@@ -391,7 +411,7 @@
             body="self.oclIsTypeOf( FinishNode )"/>
       </modelFacet>
       <labels
-          visualID="4007"
+          visualID="4008"
           editPartClassName="WrapLabel3EditPart"
           itemSemanticEditPolicyClassName="WrapLabel3ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel3ViewFactory"
@@ -407,17 +427,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1008"
-        editPartClassName="DecisionOperationEditPart"
-        itemSemanticEditPolicyClassName="DecisionOperationItemSemanticEditPolicy"
-        notationViewFactoryClassName="DecisionOperationViewFactory"
-        canonicalEditPolicyClassName="DecisionOperationCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DecisionOperationGraphicalNodeEditPolicy"
-        createCommandClassName="DecisionOperationCreateCommand">
+        editPartClassName="DecisionNodeEditPart"
+        itemSemanticEditPolicyClassName="DecisionNodeItemSemanticEditPolicy"
+        notationViewFactoryClassName="DecisionNodeViewFactory"
+        canonicalEditPolicyClassName="DecisionNodeCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DecisionNodeGraphicalNodeEditPolicy"
+        createCommandClassName="DecisionNodeCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DecisionOperationEditHelper"/>
+          editHelperClassName="DecisionNodeEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="DecisionNodeFigure"
@@ -436,7 +456,7 @@
             body="self.oclIsTypeOf( DecisionNode )"/>
       </modelFacet>
       <labels
-          visualID="4008"
+          visualID="4009"
           editPartClassName="WrapLabel4EditPart"
           itemSemanticEditPolicyClassName="WrapLabel4ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel4ViewFactory"
@@ -452,17 +472,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1009"
-        editPartClassName="TemporaryVariableEditPart"
-        itemSemanticEditPolicyClassName="TemporaryVariableItemSemanticEditPolicy"
-        notationViewFactoryClassName="TemporaryVariableViewFactory"
-        canonicalEditPolicyClassName="TemporaryVariableCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="TemporaryVariableGraphicalNodeEditPolicy"
-        createCommandClassName="TemporaryVariableCreateCommand">
+        editPartClassName="DecisionOperationEditPart"
+        itemSemanticEditPolicyClassName="DecisionOperationItemSemanticEditPolicy"
+        notationViewFactoryClassName="DecisionOperationViewFactory"
+        canonicalEditPolicyClassName="DecisionOperationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DecisionOperationGraphicalNodeEditPolicy"
+        createCommandClassName="DecisionOperationCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="TemporaryVariableEditHelper"/>
+          editHelperClassName="DecisionOperationEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -482,7 +502,7 @@
             body="self.oclIsTypeOf( DecisionOperation )"/>
       </modelFacet>
       <labels
-          visualID="4009"
+          visualID="4010"
           editPartClassName="DecisionOperationNameEditPart"
           itemSemanticEditPolicyClassName="DecisionOperationNameItemSemanticEditPolicy"
           notationViewFactoryClassName="DecisionOperationNameViewFactory"
@@ -502,17 +522,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1010"
-        editPartClassName="DecisionNodeEditPart"
-        itemSemanticEditPolicyClassName="DecisionNodeItemSemanticEditPolicy"
-        notationViewFactoryClassName="DecisionNodeViewFactory"
-        canonicalEditPolicyClassName="DecisionNodeCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DecisionNodeGraphicalNodeEditPolicy"
-        createCommandClassName="DecisionNodeCreateCommand">
+        editPartClassName="TemporaryVariableEditPart"
+        itemSemanticEditPolicyClassName="TemporaryVariableItemSemanticEditPolicy"
+        notationViewFactoryClassName="TemporaryVariableViewFactory"
+        canonicalEditPolicyClassName="TemporaryVariableCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="TemporaryVariableGraphicalNodeEditPolicy"
+        createCommandClassName="TemporaryVariableCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DecisionNodeEditHelper"/>
+          editHelperClassName="TemporaryVariableEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -533,7 +553,7 @@
             href="iaml.genmodel#//model/CompositeOperation/variables"/>
       </modelFacet>
       <labels
-          visualID="4010"
+          visualID="4011"
           editPartClassName="TemporaryVariableNameEditPart"
           itemSemanticEditPolicyClassName="TemporaryVariableNameItemSemanticEditPolicy"
           notationViewFactoryClassName="TemporaryVariableNameViewFactory"
@@ -584,7 +604,7 @@
             href="iaml.genmodel#//model/CompositeOperation/_shouldnt_properties"/>
       </modelFacet>
       <labels
-          visualID="4011"
+          visualID="4012"
           editPartClassName="ApplicationElementPropertyNameEditPart"
           itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
           notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
@@ -705,7 +725,7 @@
             href="iaml.genmodel#//model/ExecutionEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4012"
+          visualID="4013"
           editPartClassName="ConditionalEdgeNameEditPart"
           itemSemanticEditPolicyClassName="ConditionalEdgeNameItemSemanticEditPolicy"
           notationViewFactoryClassName="ConditionalEdgeNameViewFactory"
@@ -757,8 +777,8 @@
             genNodes="//@diagram/@topLevelNodes.4"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="StopNode"
-            description="Create new StopNode"
+            title="CancelNode"
+            description="Create new CancelNode"
             genNodes="//@diagram/@topLevelNodes.5"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
@@ -834,7 +854,8 @@
       provider="www.openiaml.org"
       version="0.1.0"/>
   <editor/>
-  <navigator>
+  <navigator
+      generateDomainModelNavigator="false">
     <childReferences
         child="//@diagram"/>
     <childReferences

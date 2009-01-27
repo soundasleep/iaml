@@ -13,16 +13,22 @@ formName(model::visual::InputForm this) :
 	
 textFieldName(model::visual::InputTextField this) :
 	if (name == null || name == "") then "(untitled field)" else name;
+
+buttonName(model::visual::Button this) :
+	if (name == null || name == "") then "Submit Query" else name;
 	
 safeName(model::NamedElement this) :
-	safeName(id);
-
-safeName(String s) :
-	s.replaceAll("[^A-Za-z0-9]", "_");
+	safeNameString(id);
 
 safeName(emf::EObject this) :
 	"unexpected eobject " + this;
 
+safeNameString(String s) :
+	s.replaceAll("[^A-Za-z0-9]", "_");
+
+escapeString(String s) :
+	s.replaceAll("[\"]", "\\\"");
+	
 operationName(model::WireEdgeDestination this) : 
 	"impossible";
 
@@ -44,6 +50,70 @@ onCurrentPage(model::WireEdgesSource pageElement, model::WireEdgeDestination tar
 	containingPage(pageElement) != null && 
 	containingPage(pageElement) == containingPage(target);
 
+/**
+ * Get all the operations that may be referenced in a container. In particular:
+ * - Any operations in the page/container
+ * - Any operations in the elements contained in this page/container
+ * - Any operations contained in the direct parent scope (if any)
+ */
+allContainerOperations(model::ApplicationElementContainer this) :
+	// we have to toSet() it so that we *clone* the list of operations, and not
+	// add operations to the list directly
+	// see http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=11142 
+	operations.toSet().addAll( children.allContainerOperations() ).addAll( possibleParentOperations(eContainer) );
+
+allContainerOperations(model::ApplicationElement this) :
+	operations;
+
+/* for a page that is part of a session/scope */
+possibleParentOperations(model::scopes::Session this ) :
+	operations;
+
+possibleParentOperations(emf::EObject this ) :
+	{};
+
 /* get the start node for an operation */
 startNode(model::CompositeOperation this) :
 	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );
+
+/* get the next execution flow for a decision operation that has passed */
+passedExectionFlow(model::operations::DecisionOperation this) :
+	outExecutions.selectFirst( flow | !flow.to.metaType.isAssignableFrom(model::operations::CancelNode) );
+
+failedExectionFlow(model::operations::DecisionOperation this) :
+	outExecutions.selectFirst( flow | flow.to.metaType.isAssignableFrom(model::operations::CancelNode) );
+
+/** does this operation have a "fail" edge? */
+getFailEdge(model::CompositeOperation this) :
+	outEdges.selectFirst( e | e.isFailEdge() ) ;
+
+isFailEdge(model::WireEdge this ) :
+	false;
+	
+isFailEdge(model::wires::CompositeWire this ) :
+	name == "fail" ;
+
+/** get the containing session of the given element, or null if none */
+model::scopes::Session containingSession(emf::EObject this) :
+	null;
+
+model::scopes::Session containingSession(model::NamedElement this) :
+	containingSession(eContainer);
+	
+model::scopes::Session containingSession(model::scopes::Session this) :
+	this;
+
+model::scopes::Session containingSession(model::InternetApplication this) :
+	null;
+
+isVisibleThing(emf::EObject this) :
+	model::VisibleThing.isInstance(this);
+isDomainAttribute(emf::EObject this) :
+	model::DomainAttribute.isInstance(this);	
+isSession(emf::EObject this) :
+	model::scopes::Session.isInstance(this);	
+isPage(emf::EObject this) :
+	model::visual::Page.isInstance(this);	
+isInputTextField(emf::EObject this) :
+	model::visual::InputTextField.isInstance(this);	
+	

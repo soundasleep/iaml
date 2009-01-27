@@ -16,8 +16,8 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
-import org.openiaml.model.model.operations.StopNode;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -54,7 +54,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 		List<?> nodes = query(update, "iaml:nodes");
 		assertEquals(nodes.size(), 2);
 		assertTrue(nodes.get(0) instanceof StartNode);
-		assertTrue(nodes.get(1) instanceof StopNode);
+		assertTrue(nodes.get(1) instanceof FinishNode);
 	}
 	
 	public void testAllUpdates() throws JaxenException {
@@ -75,11 +75,11 @@ public class SyncWireTestCase extends InferenceTestCase {
 			List<?> nodes = query(update, "iaml:nodes");
 			assertEquals(prelude, nodes.size(), 2);
 			assertTrue(prelude, nodes.get(0) instanceof StartNode);
-			assertTrue(prelude, nodes.get(1) instanceof StopNode);
+			assertTrue(prelude, nodes.get(1) instanceof FinishNode);
 			
 			// -- traverse from start node --
 			StartNode start = (StartNode) nodes.get(0);
-			StopNode stop = (StopNode) nodes.get(1);
+			FinishNode stop = (FinishNode) nodes.get(1);
 			
 			// start node should go to 'setPropertyToValue'
 			assertEquals(prelude, start.getOutExecutions().size(), 1);
@@ -100,7 +100,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 			
 			// finally, the op should go to the stop node above
 			assertEquals(prelude, setProp.getOutExecutions().size(), 1);
-			StopNode finalNode = (StopNode) setProp.getOutExecutions().get(0).getTo();
+			FinishNode finalNode = (FinishNode) setProp.getOutExecutions().get(0).getTo();
 			
 			assertEquals(prelude, stop, finalNode);
 		}

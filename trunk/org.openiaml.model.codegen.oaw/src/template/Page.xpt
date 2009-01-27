@@ -7,11 +7,20 @@
 «ENDDEFINE»
 
 «DEFINE expandPage FOR model::visual::Page-»
-	«FILE "output/"+safeName(id)+".php"-»
-		<?php
+	«FILE "output/"+safeNameString(id)+".php"-»
+<?php
+		/* generated page "«name-»" */
+
 		// include header code
 		«EXPAND php::HeaderPhp::headerPhp FOR this-»
 		require("create_database.php");		// ensure DB exists
+		
+		// run any event triggers for this page
+		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
+		
+		// expand any operations (both in this page and in any surrounding scopes)
+		«EXPAND php::EventTrigger::expandOperations FOR this-»
+	
 		?>
 		<html>
 		<head>
@@ -22,6 +31,8 @@
 				«EXPAND js::DefaultJs::defaultJs FOR this-»
 			</script>
 			<script language="Javascript">
+				var try_catch_depth = 0;
+			
 				«EXPAND expandOperations FOR this-»
 				
 				// this needs to be loaded *after* the page has loaded
@@ -35,19 +46,31 @@
 		</head>
 		
 		<body onLoad="loadStoredEvents()">
-		<div style="font-size:small; text-align: right;"><a href="sitemap.html">sitemap</a></div>
+		<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
 		
 		<h1>«pageTitle()»</h1>
 		
+		<div id="runtime_errors"><!-- any runtime errors go into here --></div>
+		
+		<?php
+		/* expand any fail error messages */
+		if (require_get("fail")) {
+?>
+	<div class="error">
+		<p>An exception occured: <i><?php echo htmlspecialchars(require_get("fail")); ?></i></p>
+	</div>
+<?php 
+		}
+		?>
+		
 		«EXPAND expandChild FOREACH children-»
 		
-		<div id="debug">			
-		<div>
-		
+		<div id="debug"></div>
 		<div id="response">empty</div>
 		
 		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
 		<div id="ajax_monitor"></div>
+		
 		</body>
 		</html>
 	«ENDFILE»
@@ -57,23 +80,147 @@
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputForm-»
-	<form id="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
+	<form id="«safeNameString(id)»" 
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+		>
+		
+		<script>
+			function onChange_«safeNameString(id)»(obj) {
+				// expand all onChanges
+				«EXPAND EventTrigger::expandEventTriggers("edit") FOREACH eventTriggers-»
+
+				return false;
+			}
+			
+			function onClick_«safeNameString(id)»(obj) {
+				// expand all onClicks
+				«EXPAND EventTrigger::expandEventTriggers("click") FOREACH eventTriggers-»
+			
+				return false;
+			}
+		</script>
 		<h2>«formName()»</h2>
 		
 		«EXPAND expandChild FOREACH children-»
-	
-		<input type="submit">
 	</form>
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputTextField-»
 	<div>
-	<label id="label_«safeName(id)»">
+	<label id="label_«safeNameString(id)-»">
 		«textFieldName()»
 		
-		<input type="text" id="«safeName(id)»" name="«safeName(id)»" «EXPAND EventTrigger::expandEventTriggers FOREACH eventTriggers-»>
+		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»"
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+			
+			«REM»any static values?«ENDREM»
+			«EXPAND staticInitialValues FOREACH inEdges» 
+			«EXPAND staticInitialValues FOREACH outEdges» 
+		>
+		
+		<script>
+			function onChange_«safeNameString(id)»(obj) {
+				// expand all onChanges
+				«EXPAND EventTrigger::expandEventTriggers("edit") FOREACH eventTriggers-»
+
+				«REM»any application element properties to change?«ENDREM»
+				«EXPAND outgoingValues FOREACH outEdges»
+				«EXPAND outgoingValues FOREACH inEdges»
+
+				return false;
+			}
+			
+			function onClick_«safeNameString(id)»(obj) {
+				// expand all onClicks
+				«EXPAND EventTrigger::expandEventTriggers("click") FOREACH eventTriggers-»
+			
+				return false;
+			}
+		</script>
 	</label>
 	</div>
+«ENDDEFINE»
+
+/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
+«DEFINE staticInitialValues FOR model::WireEdge»
+«ENDDEFINE»
+
+/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
+   property as the value */
+«DEFINE staticInitialValues FOR model::wires::SyncWire»
+	«EXPAND staticInitialValue FOR from»
+	«EXPAND staticInitialValue FOR to»
+«ENDDEFINE»
+
+/* ignore: todo refactor */
+«DEFINE staticInitialValue FOR model::WireEdgesSource»
+«ENDDEFINE»
+«DEFINE staticInitialValue FOR model::WireEdgeDestination»
+«ENDDEFINE»
+
+/* we have a property to provide [in PHP] */
+«DEFINE staticInitialValue FOR model::ApplicationElementProperty»
+	«IF containingSession(this) == null»
+		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+		value="<?php echo htmlspecialchars(get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+	«ELSE»
+		«REM»contained in a Session: a session value«ENDREM»
+		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+	«ENDIF»
+«ENDDEFINE»
+
+/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
+«DEFINE outgoingValues FOR model::WireEdge»
+«ENDDEFINE»
+
+/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
+   property as the destination */
+«DEFINE outgoingValues FOR model::wires::SyncWire»
+	«EXPAND outgoingValue FOR from»
+	«EXPAND outgoingValue FOR to»
+«ENDDEFINE»
+
+/* ignore: todo refactor */
+«DEFINE outgoingValue FOR model::WireEdgesSource»
+«ENDDEFINE»
+«DEFINE outgoingValue FOR model::WireEdgeDestination»
+«ENDDEFINE»
+
+/* we have a property to set [in Javascript] */
+«DEFINE outgoingValue FOR model::ApplicationElementProperty»
+	«IF containingSession(this) == null»
+		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+		set_application_value("«safeNameString(id)»", obj.value);
+	«ELSE»
+		«REM»contained in a Session: a session value«ENDREM»
+		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", obj.value);
+	«ENDIF»
+«ENDDEFINE»
+
+/* currently, a "Button" == a submit button. */
+«DEFINE expandChild FOR model::visual::Button-»
+	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+		>
+	
+	<script>
+		function onChange_«safeNameString(id)»(obj) {
+			// expand all onChanges
+			«EXPAND EventTrigger::expandEventTriggers("edit") FOREACH eventTriggers-»
+			
+			return false;
+		}
+		
+		function onClick_«safeNameString(id)»(obj) {
+			// expand all onClicks
+			«EXPAND EventTrigger::expandEventTriggers("click") FOREACH eventTriggers-»
+
+			return false;
+		}
+	</script>
 «ENDDEFINE»
 
 /* expand out the operations for the page */
@@ -82,8 +229,8 @@
 «ENDDEFINE»
 
 «DEFINE expandOperations FOR model::ApplicationElementContainer-»
-	«EXPAND expandOperation FOREACH operations-»
-	«EXPAND expandOperations FOREACH children-»
+	// expanding operations for «this»
+	«EXPAND expandOperation FOREACH allContainerOperations()-»
 «ENDDEFINE»
 
 «DEFINE expandOperation FOR model::Operation-»
@@ -94,14 +241,64 @@
 «ENDDEFINE»
 
 «DEFINE expandOperation FOR model::CompositeOperation»
-	/* composite operation */
+	/** composite operation "«name»" */
 	var running_«safeName()» = false;
 	function do_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
 		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
 		// operation: «name»
 		if (running_«safeName()-» == false) {
 			running_«safeName()-» = true;		// prevent loops
-			«EXPAND doExecutionFlow FOR startNode()-»
+			
+			// has this operation got a fail handler?
+			«IF getFailEdge() != null»
+				// fail edge «getFailEdge()»
+				try {
+					try_catch_depth++;
+			«ENDIF»
+			
+			// execute the operation
+			// if we are at the root try/catch, catch the exception explicitly
+			if (try_catch_depth == 0 «IF getFailEdge() != null»&& false /* we have a fail edge -- run the "else" block */«ENDIF» ) {
+				try {
+					// get chained functions
+					var function_queue = function() {
+						// continue with any chained operations
+						«EXPAND continueChainedOperations FOR this-»
+					}
+					var function_queue_queued = false;
+				
+					«EXPAND doExecutionFlow FOR startNode()-»
+					
+					// should we still run the chained functions?
+					if (!function_queue_queued)
+						function_queue();
+				} catch (e if e instanceof IamlJavascriptException) {
+					// unexpected exception
+					alert("Unexpected exception: " + e);
+				}
+			} else {
+				// get chained functions
+				var function_queue = function() {
+					// continue with any chained operations
+					«EXPAND continueChainedOperations FOR this-»
+				}
+				var function_queue_queued = false;
+			
+				«EXPAND doExecutionFlow FOR startNode()-»
+				
+				// should we still run the chained functions?
+				if (!function_queue_queued)
+					function_queue();
+			}					
+
+			«IF getFailEdge() != null»
+					try_catch_depth--;
+				} catch (e if e instanceof IamlJavascriptException) {
+					debug("Caught exception " + e);
+					«EXPAND expandFailEdge FOR getFailEdge()»
+				}
+			«ENDIF»
+
 			running_«safeName()-» = false;
 		}
 	}
@@ -128,21 +325,48 @@
 	// do nothing «this-»
 «ENDDEFINE»
 
-/* a chained operation: carry on */
+«DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»
+	«IF exceptionText.length > 0»
+		throw new IamlJavascriptException("«exceptionText»");
+	«ENDIF»
+«ENDDEFINE»
+
+/* a chained operation (or decision operation): expandOperationContents will continue the execution flow */
 «DEFINE doExecutionFlowNext FOR model::ChainedOperation-»
 	// chained operation «name-»
 	«EXPAND expandOperationContents FOR this-»
-	«FOREACH outExecutions AS e-»
-		«EXPAND doExecutionFlowNext FOR e.to-»
-	«ENDFOREACH»
 «ENDDEFINE»
 
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
-«DEFINE expandOperationContents FOR model::Operation-»
+«DEFINE expandOperationContents FOR model::ChainedOperation-»
 	«REM»special operation names«ENDREM»
 	«IF name == "setPropertyToValue"-»
 		«REM»outflowTarget == inflowTarget«ENDREM»
-		«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+		// outFlows first to = «outFlows.first().to»
+		«IF isInputTextField(outFlows.first().to.eContainer)»
+			// set a variable in the current page (assumed)
+			«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+		«ELSEIF containingSession(outFlows.first().to) == null»
+			«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+			set_application_value("«safeName(outFlows.first().to)»", 
+				«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-», 
+				function_queue);
+			function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+		«ELSE»
+			«REM»contained in a Session: a session value«ENDREM»
+			set_session("«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)»", 
+				«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-», 
+				function_queue);
+			function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+		«ENDIF»
+
+		«REM»
+			in the future, we might want to make this into a function that is passed
+			to ajax calls and executed once the call is successful.
+		«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND doExecutionFlowNext FOR e.to-»
+		«ENDFOREACH»
 		
 		«REM»
 			now we expand all the event triggers for the source element that contains the fieldValue: 
@@ -151,8 +375,28 @@
 		«EXPAND EventTrigger::expandEventTriggersInline FOR outFlows.first().to.eContainer-»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
-		«operationName()»(/* todo: parameters */);
+		«ERROR "Unknown client-side function to expand: " + this»
 	«ENDIF»
+«ENDDEFINE»
+
+/* expand the definition of an operation, assumed to be called as part of an existing function call */
+«DEFINE expandOperationContents FOR model::operations::DecisionOperation-»
+	«REM»compare operations«ENDREM»
+	if (
+	«IF name == "equal?"-»
+		«REM»check all inflow targets are identical«ENDREM»
+		is_array_equal(new Array(«EXPAND expandCheckInflows FOREACH inFlows SEPARATOR ", "»))
+	«ELSE»
+		«REM»??? who knows«ENDREM»
+		«ERROR "Unknown decision operation '" + this + "'"»
+	«ENDIF»
+	) {
+		// passed (exactly one pass)
+		«EXPAND doExecutionFlowNext FOR passedExectionFlow().to»
+	} else {
+		// failed (exactly one fail)
+		«EXPAND doExecutionFlowNext FOR failedExectionFlow().to»
+	}
 «ENDDEFINE»
 
 /* data flows out */
@@ -160,8 +404,8 @@
 	«ERROR "unknown data flow edge destination for setPropertyToValue: " + this»
 «ENDDEFINE»
 
-«DEFINE setPropertyToValueOutflowTarget FOR model::ApplicationElementProperty»
-	document.getElementById('«safeName(( (model::NamedElement) eContainer).id)»').value
+«DEFINE setPropertyToValueOutflowTarget FOR model::ApplicationElementProperty»	
+	document.getElementById('«safeNameString(( (model::NamedElement) eContainer).id)»').value
 «ENDDEFINE»
 
 /* data flows in */
@@ -169,6 +413,70 @@
 	«ERROR "unknown data flow edge source for setPropertyToValue: " + this»
 «ENDDEFINE»
 
+// TODO need to wrap value in some sort of encoding algorithm
+«DEFINE setPropertyToValueInflowTarget FOR model::StaticValue»
+	"«value-»" /* static value "«safeName()-»" */ 
+«ENDDEFINE»
+
 «DEFINE setPropertyToValueInflowTarget FOR model::Parameter»
 	«safeName()»
 «ENDDEFINE»
+
+«DEFINE expandCheckInflows FOR model::DataFlowEdge-»
+	«EXPAND expandCheckInflowsName FOR from-»
+«ENDDEFINE»
+
+/** get the data for the elements we are checking */
+«DEFINE expandCheckInflowsName FOR model::DataFlowEdgesSource-»
+	«ERROR "Unknown data inflow source " + this»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::Parameter-»
+	«safeName()-»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::ApplicationElementProperty-»
+	«IF containingSession(this) != null»
+		/* a property from our session */
+		require_session("«safeName(containingSession(this))»_«safeName()-»")
+	«ELSE»
+		get_application_property("«safeName()-»")
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::StaticValue-»
+	"«value-»"
+«ENDDEFINE»
+
+/** fail edges */
+«DEFINE expandFailEdge FOR model::WireEdge-»
+	«ERROR "Cannot expand the fail edge '" + this + "'"»
+«ENDDEFINE»
+
+«DEFINE expandFailEdge FOR model::wires::NavigateWire-»
+	// we need to navigate to the fail page
+	var url = "«safeName(to)».php?fail=" + e; /* TODO urlencode me */
+	debug("Redirecting to '" + url + "' (fail)");
+	window.location = url;
+«ENDDEFINE»
+
+/** continue operation execution */
+«DEFINE continueChainedOperations FOR model::CompositeOperation-»
+	«EXPAND continueChainedOperations FOREACH outEdges»
+«ENDDEFINE»
+
+«DEFINE continueChainedOperations FOR model::WireEdge»
+	«ERROR "Cannot continue a chained operation for " + this»
+«ENDDEFINE»
+
+«DEFINE continueChainedOperations FOR model::wires::NavigateWire»
+	«IF name != "fail"»
+		// navigate to another page
+		var url = "«safeName(to)».php";
+		debug("Redirecting to '" + url + "'");
+		window.location = url;
+	«ELSE»
+		// ignoring fail wire
+	«ENDIF»
+«ENDDEFINE»
+

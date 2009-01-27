@@ -35,13 +35,13 @@ public interface OperationsFactory extends EFactory {
 	StartNode createStartNode();
 
 	/**
-	 * Returns a new object of class '<em>Stop Node</em>'.
+	 * Returns a new object of class '<em>Cancel Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Stop Node</em>'.
+	 * @return a new object of class '<em>Cancel Node</em>'.
 	 * @generated
 	 */
-	StopNode createStopNode();
+	CancelNode createCancelNode();
 
 	/**
 	 * Returns a new object of class '<em>Finish Node</em>'.

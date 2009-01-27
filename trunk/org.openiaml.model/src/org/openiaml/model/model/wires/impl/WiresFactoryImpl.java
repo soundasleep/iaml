@@ -14,9 +14,15 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.FilterWire;
+import org.openiaml.model.model.wires.FindWire;
+import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresFactory;
@@ -71,6 +77,12 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.SYNC_WIRE: return createSyncWire();
 			case WiresPackage.RUN_INSTANCE_WIRE: return createRunInstanceWire();
 			case WiresPackage.PARAMETER_WIRE: return createParameterWire();
+			case WiresPackage.FIND_WIRE: return createFindWire();
+			case WiresPackage.SHOW_WIRE: return createShowWire();
+			case WiresPackage.COMMIT_WIRE: return createCommitWire();
+			case WiresPackage.NAVIGATE_WIRE: return createNavigateWire();
+			case WiresPackage.FILTER_WIRE: return createFilterWire();
+			case WiresPackage.CONDITION_WIRE: return createConditionWire();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,6 +141,72 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 		ParameterWireImpl parameterWire = new ParameterWireImpl();
 		generateID(parameterWire);
 		return parameterWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public FindWire createFindWire() {
+		FindWireImpl findWire = new FindWireImpl();
+		generateID(findWire);
+		return findWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ShowWire createShowWire() {
+		ShowWireImpl showWire = new ShowWireImpl();
+		generateID(showWire);
+		return showWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public CommitWire createCommitWire() {
+		CommitWireImpl commitWire = new CommitWireImpl();
+		generateID(commitWire);
+		return commitWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public NavigateWire createNavigateWire() {
+		NavigateWireImpl navigateWire = new NavigateWireImpl();
+		generateID(navigateWire);
+		return navigateWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public FilterWire createFilterWire() {
+		FilterWireImpl filterWire = new FilterWireImpl();
+		generateID(filterWire);
+		return filterWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ConditionWire createConditionWire() {
+		ConditionWireImpl conditionWire = new ConditionWireImpl();
+		generateID(conditionWire);
+		return conditionWire;
 	}
 
 	/**

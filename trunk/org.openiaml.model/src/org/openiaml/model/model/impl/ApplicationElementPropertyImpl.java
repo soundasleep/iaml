@@ -46,6 +46,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInFlows <em>In Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getDefaultValue <em>Default Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -171,6 +172,26 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * @ordered
 	 */
 	protected EList<DataFlowEdge> inFlows;
+
+	/**
+	 * The default value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultValue = DEFAULT_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -367,6 +388,27 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDefaultValue() {
+		return defaultValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultValue(String newDefaultValue) {
+		String oldDefaultValue = defaultValue;
+		defaultValue = newDefaultValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE, oldDefaultValue, defaultValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getWires() {
 		if (wires == null) {
 			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES);
@@ -450,6 +492,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return getOutFlows();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return getInFlows();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE:
+				return getDefaultValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -495,6 +539,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				getInFlows().clear();
 				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE:
+				setDefaultValue((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -534,6 +581,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				getInFlows().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE:
+				setDefaultValue(DEFAULT_VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -564,6 +614,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return outFlows != null && !outFlows.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return inFlows != null && !inFlows.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE:
+				return DEFAULT_VALUE_EDEFAULT == null ? defaultValue != null : !DEFAULT_VALUE_EDEFAULT.equals(defaultValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -674,6 +726,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		result.append(id);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", defaultValue: ");
+		result.append(defaultValue);
 		result.append(')');
 		return result.toString();
 	}

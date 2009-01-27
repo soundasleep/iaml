@@ -433,7 +433,6 @@
       <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
          <includes>
             <contentExtension pattern="org.openiaml.model.diagram.element.resourceContent"/>
-			<contentExtension pattern="org.openiaml.model.diagram.element.domainResourceContent"/>
             <contentExtension pattern="org.openiaml.model.diagram.element.navigatorLinkHelper"/>
          </includes>
       </viewerContentBinding>
@@ -488,33 +487,6 @@
             </parentExpression>
          </commonSorter>
       </navigatorContent>
-      <navigatorContent
-            id="org.openiaml.model.diagram.element.domainResourceContent" 
-            name="%domainNavigatorContentName" 
-            priority="normal" 
-            contentProvider="org.openiaml.model.model.diagram.element.navigator.IamlDomainNavigatorContentProvider" 
-            labelProvider="org.openiaml.model.model.diagram.element.navigator.IamlDomainNavigatorLabelProvider"
-            icon="icons/obj16/ModelDiagramFile.gif"
-            activeByDefault="true">
-         <triggerPoints>
-            <or>
-	           <and>
-    	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="iaml_element"/>
-               </and>
-               <and>
-                  <instanceof value="org.eclipse.emf.ecore.EObject"/>
-                  <test property="org.openiaml.model.diagram.element.isDomainModelElement"/>
-               </and>
-            </or>
-         </triggerPoints>
-         <possibleChildren>
-            <and>
-       	       <instanceof value="org.eclipse.emf.ecore.EObject"/>
-       	       <test property="org.openiaml.model.diagram.element.isDomainModelElement"/>
-       	    </and>
-         </possibleChildren>
-      </navigatorContent>
       <actionProvider
             id="org.openiaml.model.diagram.element.navigatorActionProvider"
             class="org.openiaml.model.model.diagram.element.navigator.IamlNavigatorActionProvider">
@@ -562,21 +534,47 @@
          contextId="org.openiaml.model.model.diagram.element.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
-   </extension><extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+   </extension><extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.element.providers.IamlValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+<extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="org.openiaml.model.model.diagram.element.providers.IamlValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+<extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.element.providers.IamlMarkerNavigationProvider">
+         <MarkerType name="org.openiaml.model.diagram.element.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+<extension id="diagnostic" name="Iaml Plugin (Element) problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>
+<extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
       <?gmfgen generated="true"?>
       <decoratorProvider class="org.openiaml.model.model.diagram.element.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
       </decoratorProvider>
    </extension>
-<extension point="org.eclipse.core.expressions.propertyTesters">
-      <?gmfgen generated="true"?>
-       <propertyTester
-           id="org.openiaml.model.diagram.element.DomainModelElementPropertyTester"
-           type="org.eclipse.emf.ecore.EObject"
-           namespace="org.openiaml.model.diagram.element"
-           properties="isDomainModelElement"
-           class="org.openiaml.model.model.diagram.element.part.IamlDomainModelElementTester">
-       </propertyTester>
-   </extension>
+
+
+
 
 </plugin>

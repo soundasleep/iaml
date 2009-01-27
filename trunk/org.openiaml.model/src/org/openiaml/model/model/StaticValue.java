@@ -23,7 +23,7 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface StaticValue extends NamedElement, WireEdgesSource, DataFlowEdgeDestination {
+public interface StaticValue extends NamedElement, WireEdgesSource, DataFlowEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

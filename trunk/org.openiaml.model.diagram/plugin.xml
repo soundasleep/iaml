@@ -403,6 +403,26 @@
             <param name="semanticHint" value="1009"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/scopes">
+         <metamodelType
+               id="org.openiaml.model.diagram.Session_1010"
+               name="%metatype.name.Session_1010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Session"
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.SessionEditHelper">
+            <param name="semanticHint" value="1010"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/components">
+         <metamodelType
+               id="org.openiaml.model.diagram.LoginHandler_1011"
+               name="%metatype.name.LoginHandler_1011"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LoginHandler"
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.LoginHandlerEditHelper">
+            <param name="semanticHint" value="1011"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.SyncWire_3001"
@@ -445,6 +465,8 @@
          <elementType ref="org.openiaml.model.diagram.DynamicApplicationElementSet_1007"/>
          <elementType ref="org.openiaml.model.diagram.ApplicationElementProperty_1008"/>
          <elementType ref="org.openiaml.model.diagram.DomainStore_1009"/>
+         <elementType ref="org.openiaml.model.diagram.Session_1010"/>
+         <elementType ref="org.openiaml.model.diagram.LoginHandler_1011"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.RunInstanceWire_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
@@ -606,7 +628,40 @@
          contextId="org.openiaml.model.model.diagram.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
-   </extension><extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+   </extension><extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="org.openiaml.model.model.diagram.providers.IamlValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+<extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.providers.IamlMarkerNavigationProvider">
+         <MarkerType name="org.openiaml.model.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+<extension id="diagnostic" name="Iaml Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>
+<extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+<extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
       <?gmfgen generated="true"?>
       <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>

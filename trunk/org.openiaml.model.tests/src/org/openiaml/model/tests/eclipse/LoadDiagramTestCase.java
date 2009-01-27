@@ -17,6 +17,9 @@ import org.openiaml.model.tests.EclipseTestCaseHelper;
 public class LoadDiagramTestCase extends EclipseTestCaseHelper {
 
 	public void testLoadModel() throws Exception {
+		// register errors
+		addLogListener();
+
 		// copy our local file into the project
 		IFile targetModel = project.getFile("generation-sync-multiple.iaml");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml",
@@ -24,8 +27,7 @@ public class LoadDiagramTestCase extends EclipseTestCaseHelper {
 		IFile targetDiagram = project.getFile("generation-sync-multiple.iaml_diagram");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml_diagram",
 				targetDiagram);
-
-		// load up the editor
+		
 		DiagramDocumentEditor editor = (DiagramDocumentEditor) loadDiagramFile(targetDiagram);
 		assertEditorRoot(editor);
 

@@ -3,8 +3,6 @@
  */
 package org.openiaml.model.tests;
 
-import java.net.NetPermission;
-
 import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.api.IElement;
 import net.sourceforge.jwebunit.junit.WebTestCase;

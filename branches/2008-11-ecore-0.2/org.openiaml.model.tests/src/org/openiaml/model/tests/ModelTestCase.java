@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 import net.sourceforge.jwebunit.junit.WebTestCase;
 

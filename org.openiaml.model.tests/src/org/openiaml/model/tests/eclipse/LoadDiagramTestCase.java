@@ -4,12 +4,8 @@
 package org.openiaml.model.tests.eclipse;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.ILogListener;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.ui.statushandlers.StatusManager;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**

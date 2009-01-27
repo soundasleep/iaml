@@ -480,7 +480,9 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 					// JUnit won't actually catch this, because the Platform is
 					// in a different thread. however we will still get the 
 					// stack trace in System.err so this remains somewhat useful.
-					throw new RuntimeException(status.getMessage(), status.getException());
+					//throw new RuntimeException(status.getMessage(), status.getException());
+					System.err.println(status);
+					status.getException().printStackTrace(System.err);
 				} else {				
 					// otherwise just print out the error
 					System.err.println(status);

@@ -9,25 +9,23 @@ package org.openiaml.model.model.visual.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.openiaml.model.model.ModelPackage;
-
+import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.impl.ModelPackageImpl;
-
 import org.openiaml.model.model.operations.OperationsPackage;
-
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
-
+import org.openiaml.model.model.scopes.ScopesPackage;
+import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
+import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
-
 import org.openiaml.model.model.wires.WiresPackage;
-
 import org.openiaml.model.model.wires.impl.WiresPackageImpl;
 
 /**
@@ -57,6 +55,20 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * @generated
 	 */
 	private EClass inputTextFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass buttonEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass frameEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -118,18 +130,24 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
 		WiresPackageImpl theWiresPackage = (WiresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) instanceof WiresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) : WiresPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
+		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) : ScopesPackage.eINSTANCE);
+		ComponentsPackageImpl theComponentsPackage = (ComponentsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) instanceof ComponentsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) : ComponentsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theVisualPackage.createPackageContents();
 		theModelPackage.createPackageContents();
 		theWiresPackage.createPackageContents();
 		theOperationsPackage.createPackageContents();
+		theScopesPackage.createPackageContents();
+		theComponentsPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theVisualPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
 		theWiresPackage.initializePackageContents();
 		theOperationsPackage.initializePackageContents();
+		theScopesPackage.initializePackageContents();
+		theComponentsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theVisualPackage.freeze();
@@ -178,6 +196,24 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getButton() {
+		return buttonEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFrame() {
+		return frameEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public VisualFactory getVisualFactory() {
 		return (VisualFactory)getEFactoryInstance();
 	}
@@ -207,6 +243,10 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		inputFormEClass = createEClass(INPUT_FORM);
 
 		inputTextFieldEClass = createEClass(INPUT_TEXT_FIELD);
+
+		buttonEClass = createEClass(BUTTON);
+
+		frameEClass = createEClass(FRAME);
 	}
 
 	/**
@@ -241,8 +281,12 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		// Add supertypes to classes
 		pageEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		pageEClass.getESuperTypes().add(theModelPackage.getScope());
 		inputFormEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		inputTextFieldEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		frameEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		frameEClass.getESuperTypes().add(theModelPackage.getScope());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -251,6 +295,43 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		initEClass(inputFormEClass, InputForm.class, "InputForm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(inputTextFieldEClass, InputTextField.class, "InputTextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(buttonEClass, Button.class, "Button", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(frameEClass, Frame.class, "Frame", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Create annotations
+		// http://openiaml.org/comment
+		createCommentAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://openiaml.org/comment</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createCommentAnnotations() {
+		String source = "http://openiaml.org/comment";		
+		addAnnotation
+		  (pageEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "Scope supertype added in 0.2",
+			 "comment2", "represents the scope Window"
+		   });		
+		addAnnotation
+		  (buttonEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (frameEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });
 	}
 
 } //VisualPackageImpl

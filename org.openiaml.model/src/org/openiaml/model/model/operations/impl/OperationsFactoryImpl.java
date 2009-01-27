@@ -14,13 +14,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
-import org.openiaml.model.model.operations.StopNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case OperationsPackage.START_NODE: return createStartNode();
-			case OperationsPackage.STOP_NODE: return createStopNode();
+			case OperationsPackage.CANCEL_NODE: return createCancelNode();
 			case OperationsPackage.FINISH_NODE: return createFinishNode();
 			case OperationsPackage.DECISION_NODE: return createDecisionNode();
 			case OperationsPackage.DECISION_OPERATION: return createDecisionOperation();
@@ -92,10 +92,10 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public StopNode createStopNode() {
-		StopNodeImpl stopNode = new StopNodeImpl();
-		generateID(stopNode);
-		return stopNode;
+	public CancelNode createCancelNode() {
+		CancelNodeImpl cancelNode = new CancelNodeImpl();
+		generateID(cancelNode);
+		return cancelNode;
 	}
 
 	/**

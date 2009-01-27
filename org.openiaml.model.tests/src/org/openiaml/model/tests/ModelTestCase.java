@@ -8,7 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
@@ -41,6 +42,8 @@ public abstract class ModelTestCase extends WebTestCase {
 	protected IProject project;
 	protected IProgressMonitor monitor = new NullProgressMonitor();
 	
+	public String BASE_URL = "http://localhost:8080/junit-workspace/";
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -48,7 +51,7 @@ public abstract class ModelTestCase extends WebTestCase {
 		project = createProject();
 
 		// set test context
-		getTestContext().setBaseUrl("http://localhost:8080/junit-workspace/" + project.getName() + "/");
+		getTestContext().setBaseUrl(BASE_URL + project.getName() + "/");
 	}
 
 	/**
@@ -98,7 +101,7 @@ public abstract class ModelTestCase extends WebTestCase {
 	 * @return
 	 */
 	public String getProjectName() {
-		return "testing-" + this.getClass().getSimpleName() + "-" + new Random().nextInt(1024);
+		return "test." + this.getClass().getSimpleName() + "." + new SimpleDateFormat("yyMMddHHmmss").format(new Date());
 	}
 
 	/**

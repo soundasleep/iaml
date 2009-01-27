@@ -9,7 +9,7 @@
  */
 // first, make sure the table exists
 $db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
-$s = $db->prepare("SELECT * FROM stored_events");
+$s = $db->prepare("SELECT * FROM stored_events LIMIT 1");
 if (!$s) {
 	// create the table
 	$q = $db->query("CREATE TABLE stored_events (

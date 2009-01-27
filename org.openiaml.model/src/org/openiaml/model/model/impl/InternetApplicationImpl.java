@@ -10,23 +10,21 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DerivedView;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
@@ -35,7 +33,10 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.scopes.Session;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,10 +54,15 @@ import org.openiaml.model.model.WireEdge;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainObjects <em>Domain Objects</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainViews <em>Domain Views</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainInstances <em>Domain Instances</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRuntimeUrl <em>Runtime Url</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getSessions <em>Sessions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getLoginHandlers <em>Login Handlers</em>}</li>
  * </ul>
  * </p>
  *
@@ -194,6 +200,36 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainObjects()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DomainObject> domainObjects;
+
+	/**
+	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainViews()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DerivedView> domainViews;
+
+	/**
+	 * The cached value of the '{@link #getDomainInstances() <em>Domain Instances</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DomainObjectInstance> domainInstances;
+
+	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,6 +278,26 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected String runtimeUrl = RUNTIME_URL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSessions() <em>Sessions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSessions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Session> sessions;
+
+	/**
+	 * The cached value of the '{@link #getLoginHandlers() <em>Login Handlers</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLoginHandlers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<LoginHandler> loginHandlers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -459,6 +515,42 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DomainObject> getDomainObjects() {
+		if (domainObjects == null) {
+			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS);
+		}
+		return domainObjects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DerivedView> getDomainViews() {
+		if (domainViews == null) {
+			domainViews = new EObjectContainmentEList<DerivedView>(DerivedView.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS);
+		}
+		return domainViews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DomainObjectInstance> getDomainInstances() {
+		if (domainInstances == null) {
+			domainInstances = new EObjectContainmentEList<DomainObjectInstance>(DomainObjectInstance.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES);
+		}
+		return domainInstances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ApplicationElementProperty> getProperties() {
 		if (properties == null) {
 			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.INTERNET_APPLICATION__PROPERTIES);
@@ -516,6 +608,30 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Session> getSessions() {
+		if (sessions == null) {
+			sessions = new EObjectContainmentEList<Session>(Session.class, this, ModelPackage.INTERNET_APPLICATION__SESSIONS);
+		}
+		return sessions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<LoginHandler> getLoginHandlers() {
+		if (loginHandlers == null) {
+			loginHandlers = new EObjectContainmentEList<LoginHandler>(LoginHandler.class, this, ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS);
+		}
+		return loginHandlers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -548,12 +664,22 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
+				return ((InternalEList<?>)getDomainObjects()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
+				return ((InternalEList<?>)getDomainViews()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
+				return ((InternalEList<?>)getDomainInstances()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return ((InternalEList<?>)getDomainStores()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
+				return ((InternalEList<?>)getSessions()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
+				return ((InternalEList<?>)getLoginHandlers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -585,6 +711,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getGeneratedElements();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
+				return getDomainObjects();
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
+				return getDomainViews();
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
+				return getDomainInstances();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return getProperties();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -593,6 +725,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getDomainStores();
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				return getRuntimeUrl();
+			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
+				return getSessions();
+			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
+				return getLoginHandlers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -637,6 +773,18 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				setOverridden(((Boolean)newValue).booleanValue());
 				return;
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
+				getDomainObjects().clear();
+				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
+				getDomainViews().clear();
+				getDomainViews().addAll((Collection<? extends DerivedView>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
+				getDomainInstances().clear();
+				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
+				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
@@ -651,6 +799,14 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl((String)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
+				getSessions().clear();
+				getSessions().addAll((Collection<? extends Session>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
+				getLoginHandlers().clear();
+				getLoginHandlers().addAll((Collection<? extends LoginHandler>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -691,6 +847,15 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
+				getDomainObjects().clear();
+				return;
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
+				getDomainViews().clear();
+				return;
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
+				getDomainInstances().clear();
+				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
 				return;
@@ -702,6 +867,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl(RUNTIME_URL_EDEFAULT);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
+				getSessions().clear();
+				return;
+			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
+				getLoginHandlers().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -733,6 +904,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
+				return domainObjects != null && !domainObjects.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
+				return domainViews != null && !domainViews.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
+				return domainInstances != null && !domainInstances.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -741,6 +918,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return domainStores != null && !domainStores.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				return RUNTIME_URL_EDEFAULT == null ? runtimeUrl != null : !RUNTIME_URL_EDEFAULT.equals(runtimeUrl);
+			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
+				return sessions != null && !sessions.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
+				return loginHandlers != null && !loginHandlers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -785,6 +966,14 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
+		if (baseClass == Scope.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS: return ModelPackage.SCOPE__DOMAIN_OBJECTS;
+				case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS: return ModelPackage.SCOPE__DOMAIN_VIEWS;
+				case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES: return ModelPackage.SCOPE__DOMAIN_INSTANCES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -825,6 +1014,14 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.INTERNET_APPLICATION__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == Scope.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS;
+				case ModelPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS;
+				case ModelPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

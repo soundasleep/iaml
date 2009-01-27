@@ -15,7 +15,9 @@
       notationViewFactoryClassName="ApplicationElementViewFactory"
       canonicalEditPolicyClassName="ApplicationElementCanonicalEditPolicy"
       iconProviderPriority="Low"
-      validationProviderPriority="Low">
+      validationProviderPriority="Low"
+      validationEnabled="true"
+      validationDecorators="true">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
@@ -504,7 +506,8 @@
       provider="www.openiaml.org"
       version="0.1.0"/>
   <editor/>
-  <navigator>
+  <navigator
+      generateDomainModelNavigator="false">
     <childReferences
         child="//@diagram"/>
     <childReferences

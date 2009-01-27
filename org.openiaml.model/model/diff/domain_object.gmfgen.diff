@@ -1,0 +1,62 @@
+--- domain_object.gmfgen	2008-12-09 16:52:19.388776800 +1300
++++ copies/domain_object.gmfgen	2008-12-09 16:13:07.139918400 +1300
+@@ -166,6 +166,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="OperationOpenDiagramEditPolicy"
++          diagramKind="Iaml_Operation"
++          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/CompositeOperation"/>
+@@ -219,6 +224,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="OperationOpenDiagramEditPolicy"
++          diagramKind="Iaml_Operation"
++          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/ChainedOperation"/>
+@@ -320,6 +330,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="ElementOpenDiagramEditPolicy"
++          diagramKind="Iaml_Element"
++          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/DomainAttribute"/>
+@@ -366,6 +381,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="WireOpenDiagramEditPolicy"
++          diagramKind="Iaml_Wire"
++          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
+       <modelFacet
+           xsi:type="gmfgen:TypeLinkModelFacet">
+         <metaClass
+@@ -423,6 +443,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="WireOpenDiagramEditPolicy"
++          diagramKind="Iaml_Wire"
++          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
+       <modelFacet
+           xsi:type="gmfgen:TypeLinkModelFacet">
+         <metaClass

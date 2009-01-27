@@ -170,6 +170,33 @@ public interface VisualPackage extends EPackage {
 	int PAGE__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__DOMAIN_INSTANCES = ModelPackage.VISIBLE_THING__DOMAIN_INSTANCES;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -195,6 +222,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGE__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Url</b></em>' attribute.
@@ -324,6 +360,33 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__DOMAIN_INSTANCES = ModelPackage.VISIBLE_THING__DOMAIN_INSTANCES;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -349,6 +412,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_FORM__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
 
 	/**
 	 * The number of structural features of the '<em>Input Form</em>' class.
@@ -469,6 +541,33 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__DOMAIN_INSTANCES = ModelPackage.VISIBLE_THING__DOMAIN_INSTANCES;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -496,6 +595,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
 
 	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
+
+	/**
 	 * The number of structural features of the '<em>Input Text Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -503,6 +611,369 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.visual.impl.ButtonImpl <em>Button</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.visual.impl.ButtonImpl
+	 * @see org.openiaml.model.model.visual.impl.VisualPackageImpl#getButton()
+	 * @generated
+	 */
+	int BUTTON = 3;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__OPERATIONS = ModelPackage.VISIBLE_THING__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Generated By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__GENERATED_BY = ModelPackage.VISIBLE_THING__GENERATED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__IS_GENERATED = ModelPackage.VISIBLE_THING__IS_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__ID = ModelPackage.VISIBLE_THING__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__NAME = ModelPackage.VISIBLE_THING__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__OUT_EDGES = ModelPackage.VISIBLE_THING__OUT_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__IN_EDGES = ModelPackage.VISIBLE_THING__IN_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__GENERATED_ELEMENTS = ModelPackage.VISIBLE_THING__GENERATED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__DOMAIN_INSTANCES = ModelPackage.VISIBLE_THING__DOMAIN_INSTANCES;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__VALUES = ModelPackage.VISIBLE_THING__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
+
+	/**
+	 * The number of structural features of the '<em>Button</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.visual.impl.FrameImpl <em>Frame</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.visual.impl.FrameImpl
+	 * @see org.openiaml.model.model.visual.impl.VisualPackageImpl#getFrame()
+	 * @generated
+	 */
+	int FRAME = 4;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__OPERATIONS = ModelPackage.VISIBLE_THING__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Generated By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__GENERATED_BY = ModelPackage.VISIBLE_THING__GENERATED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__IS_GENERATED = ModelPackage.VISIBLE_THING__IS_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__ID = ModelPackage.VISIBLE_THING__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__NAME = ModelPackage.VISIBLE_THING__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__OUT_EDGES = ModelPackage.VISIBLE_THING__OUT_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__IN_EDGES = ModelPackage.VISIBLE_THING__IN_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__GENERATED_ELEMENTS = ModelPackage.VISIBLE_THING__GENERATED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING__DOMAIN_OBJECTS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING__DOMAIN_VIEWS;
+
+	/**
+	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__DOMAIN_INSTANCES = ModelPackage.VISIBLE_THING__DOMAIN_INSTANCES;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__PROPERTIES = ModelPackage.VISIBLE_THING__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__VALUES = ModelPackage.VISIBLE_THING__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__CHILDREN = ModelPackage.VISIBLE_THING__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
+
+	/**
+	 * The number of structural features of the '<em>Frame</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
 
 
 	/**
@@ -545,6 +1016,26 @@ public interface VisualPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInputTextField();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.visual.Button <em>Button</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Button</em>'.
+	 * @see org.openiaml.model.model.visual.Button
+	 * @generated
+	 */
+	EClass getButton();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.visual.Frame <em>Frame</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Frame</em>'.
+	 * @see org.openiaml.model.model.visual.Frame
+	 * @generated
+	 */
+	EClass getFrame();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -605,6 +1096,26 @@ public interface VisualPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INPUT_TEXT_FIELD = eINSTANCE.getInputTextField();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.visual.impl.ButtonImpl <em>Button</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.visual.impl.ButtonImpl
+		 * @see org.openiaml.model.model.visual.impl.VisualPackageImpl#getButton()
+		 * @generated
+		 */
+		EClass BUTTON = eINSTANCE.getButton();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.visual.impl.FrameImpl <em>Frame</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.visual.impl.FrameImpl
+		 * @see org.openiaml.model.model.visual.impl.VisualPackageImpl#getFrame()
+		 * @generated
+		 */
+		EClass FRAME = eINSTANCE.getFrame();
 
 	}
 

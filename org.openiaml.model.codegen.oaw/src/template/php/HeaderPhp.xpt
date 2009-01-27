@@ -2,9 +2,15 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE headerPhp FOR model::visual::Page»
+«DEFINE headerPhp FOR emf::EObject»
 
+session_start();
+
+$log_unique_id = sprintf("%04x", rand(0,0xffff));
 function log_message($msg, $also_debug = true) {
+	global $log_unique_id;
+	$msg = "[$log_unique_id] $msg";		// append a unique ID to help us track requests
+	
 	$fp = fopen("php.log", "a");
 	fwrite($fp, date("Y-m-d H:i:s") . " header.php: $msg\n");
 	fclose($fp);
@@ -32,6 +38,52 @@ if (!$s) {
 			arg0 BLOB
 		);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
 	log_message("table for stored_events created", false);
+}
+
+function require_session($var, $default = "") {
+	return isset($_SESSION[$var]) ? $_SESSION[$var] : $default;
+}
+
+function require_get($var, $default = "") {
+	return isset($_GET[$var]) ? $_GET[$var] : $default;
+}
+
+class IamlRuntimeException extends Exception {
+	public function __construct($message = "") {
+		parent::__construct($message);
+	} 
+}
+
+/**
+ * Get a global application value stored in the database.
+ */
+function get_application_value($id, $default) {
+	global $db;
+	
+	// make sure the table is there
+	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
+	if (!$s) {
+		// create the table
+		$q = $db->query("CREATE TABLE global_values (
+				id INT AUTO_INCREMENT PRIMARY KEY,
+				value_id VARCHAR(64) NOT NULL,
+				arg0 BLOB
+			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+		log_message("table for global_values created", false);
+		
+		return $default;
+	}
+
+	// get the value
+	$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
+	$row = $s->fetch();
+	
+	if (!$row) {
+		// empty
+		return $default;		
+	} else {
+		return $row["arg0"];
+	}	
 }
 
 «ENDDEFINE»

@@ -22,10 +22,10 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getApplicationElement()
- * @model annotation="http://openiaml.org/comment editor='org.openiaml.model.diagram.element'"
+ * @model annotation="http://openiaml.org/comment editor='org.openiaml.model.diagram.element' comment='Scope supertype added in 0.2'"
  * @generated
  */
-public interface ApplicationElement extends ContainsOperations, NamedElement, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination, GeneratesElements {
+public interface ApplicationElement extends ContainsOperations, NamedElement, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination, GeneratesElements, Scope {
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.

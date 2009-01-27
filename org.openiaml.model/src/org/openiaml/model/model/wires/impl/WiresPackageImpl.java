@@ -6,19 +6,30 @@
  */
 package org.openiaml.model.model.wires.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.impl.ModelPackageImpl;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
+import org.openiaml.model.model.scopes.ScopesPackage;
+import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
+import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.FilterWire;
+import org.openiaml.model.model.wires.FindWire;
+import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresFactory;
@@ -65,6 +76,48 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	private EClass parameterWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass findWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass showWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass commitWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass navigateWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass filterWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass conditionWireEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -126,18 +179,24 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
 		VisualPackageImpl theVisualPackage = (VisualPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) instanceof VisualPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) : VisualPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
+		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) : ScopesPackage.eINSTANCE);
+		ComponentsPackageImpl theComponentsPackage = (ComponentsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) instanceof ComponentsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) : ComponentsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theWiresPackage.createPackageContents();
 		theModelPackage.createPackageContents();
 		theVisualPackage.createPackageContents();
 		theOperationsPackage.createPackageContents();
+		theScopesPackage.createPackageContents();
+		theComponentsPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theWiresPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
 		theVisualPackage.initializePackageContents();
 		theOperationsPackage.initializePackageContents();
+		theScopesPackage.initializePackageContents();
+		theComponentsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theWiresPackage.freeze();
@@ -240,8 +299,98 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRunInstanceWire_Priority() {
+		return (EAttribute)runInstanceWireEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParameterWire() {
 		return parameterWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParameterWire_ParameterName() {
+		return (EAttribute)parameterWireEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFindWire() {
+		return findWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getShowWire() {
+		return showWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCommitWire() {
+		return commitWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNavigateWire() {
+		return navigateWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFilterWire() {
+		return filterWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFilterWire_Query() {
+		return (EAttribute)filterWireEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFilterWire_Limit() {
+		return (EAttribute)filterWireEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConditionWire() {
+		return conditionWireEClass;
 	}
 
 	/**
@@ -285,8 +434,24 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		syncWireEClass = createEClass(SYNC_WIRE);
 
 		runInstanceWireEClass = createEClass(RUN_INSTANCE_WIRE);
+		createEAttribute(runInstanceWireEClass, RUN_INSTANCE_WIRE__PRIORITY);
 
 		parameterWireEClass = createEClass(PARAMETER_WIRE);
+		createEAttribute(parameterWireEClass, PARAMETER_WIRE__PARAMETER_NAME);
+
+		findWireEClass = createEClass(FIND_WIRE);
+
+		showWireEClass = createEClass(SHOW_WIRE);
+
+		commitWireEClass = createEClass(COMMIT_WIRE);
+
+		navigateWireEClass = createEClass(NAVIGATE_WIRE);
+
+		filterWireEClass = createEClass(FILTER_WIRE);
+		createEAttribute(filterWireEClass, FILTER_WIRE__QUERY);
+		createEAttribute(filterWireEClass, FILTER_WIRE__LIMIT);
+
+		conditionWireEClass = createEClass(CONDITION_WIRE);
 	}
 
 	/**
@@ -329,6 +494,13 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		runInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		parameterWireEClass.getESuperTypes().add(this.getSingleWire());
+		findWireEClass.getESuperTypes().add(this.getCompositeWire());
+		showWireEClass.getESuperTypes().add(this.getCompositeWire());
+		commitWireEClass.getESuperTypes().add(this.getCompositeWire());
+		navigateWireEClass.getESuperTypes().add(this.getCompositeWire());
+		filterWireEClass.getESuperTypes().add(this.getCompositeWire());
+		filterWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		conditionWireEClass.getESuperTypes().add(this.getCompositeWire());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(singleWireEClass, SingleWire.class, "SingleWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -344,8 +516,24 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEClass(syncWireEClass, SyncWire.class, "SyncWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(runInstanceWireEClass, RunInstanceWire.class, "RunInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRunInstanceWire_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, RunInstanceWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterWireEClass, ParameterWire.class, "ParameterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getParameterWire_ParameterName(), ecorePackage.getEString(), "parameterName", null, 0, 1, ParameterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(findWireEClass, FindWire.class, "FindWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(showWireEClass, ShowWire.class, "ShowWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(commitWireEClass, CommitWire.class, "CommitWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(navigateWireEClass, NavigateWire.class, "NavigateWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(filterWireEClass, FilterWire.class, "FilterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFilterWire_Query(), ecorePackage.getEString(), "query", null, 0, 1, FilterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFilterWire_Limit(), ecorePackage.getEInt(), "limit", "1", 0, 1, FilterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(conditionWireEClass, ConditionWire.class, "ConditionWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -381,6 +569,56 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "comment", "RunWire: a composite wire that contains ExecutionWires/etc"
+		   });		
+		addAnnotation
+		  (getRunInstanceWire_Priority(), 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (getParameterWire_ParameterName(), 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (findWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (showWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (commitWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.2",
+			 "comment", "\"Commit\" is the same as \"Update\", isn\'t it?"
+		   });		
+		addAnnotation
+		  (navigateWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (filterWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.2",
+			 "comment", "parameters can be provided by ParameterWires"
+		   });		
+		addAnnotation
+		  (conditionWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
 		   });
 	}
 

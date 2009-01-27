@@ -17,5 +17,15 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface ChainedOperation extends Operation, ExecutionEdgesSource {
+public interface ChainedOperation extends Operation, ExecutionEdgesSource, WireEdgesSource {
+
+	/**
+	 * Follow this operation and find out which operation can be
+	 * considered "last" in the chain.
+	 * 
+	 * @generated NOT
+	 * @return the last ChainedOperation in this chain, or this if this the last operation
+	 */
+	public ChainedOperation getLastChainedOperation();
+	
 } // ChainedOperation

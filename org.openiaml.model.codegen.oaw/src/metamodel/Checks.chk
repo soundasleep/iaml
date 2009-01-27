@@ -2,6 +2,38 @@ import iaml;
 
 extension metamodel::Extensions;
 
-// TODO add test case
+// TODO add test cases for model validation
+// both through Eclipse and through manual test cases (code generation)
 context model::InternetApplication ERROR "No pages in internet application" :
 	children.exists( e | model::visual::Page.isInstance(e) );
+
+context model::visual::Page ERROR "Page must have a name" :
+	name.length > 0;
+	
+context model::Operation ERROR "Operation must have a name" :
+	name.length > 0;
+	
+context model::components::LoginHandler ERROR "A login handler [type=key] must have an incoming parameter for the key (e.g. a StaticValue)" :
+	inEdges.exists ( e | model::wires::ParameterWire.isInstance(e) );
+
+context model::wires::RunInstanceWire ERROR "A run instance wire can only connect to an operation" :
+	model::Operation.isInstance( to );
+
+context model::operations::DecisionOperation ERROR "A compare decision operation must have at least two data flows in to compare" :
+	(name == "equal?" && inFlows.size >= 2) 
+	|| (name != "equal?"); 
+
+context model::operations::DecisionOperation ERROR "A DecisionOperation can only have at most two out execution edges" :
+	outExecutions.size <= 2;
+	
+context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a StaticValue [from=" + from + "]":
+	!model::StaticValue.isInstance(from) &&
+	!model::StaticValue.isInstance(to);
+
+context model::wires::SyncWire ERROR "A SyncWire cannot connect to itself":
+	from != to;
+
+context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two ApplicationElementProperties":
+	!(model::ApplicationElementProperty.isInstance(from) && 
+	model::ApplicationElementProperty.isInstance(to));
+	

@@ -26,14 +26,19 @@ import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.scopes.Session;
 
 /**
  * Uses Drools to infer new elements.
@@ -153,6 +158,31 @@ public class CreateMissingElementsWithDrools {
 					for (DomainStore child : a.getDomainStores()) {
 						workingMemory.insert( child );
 					}
+					for (Session child : a.getSessions()) {
+						workingMemory.insert( child );
+					}
+				}
+				
+				// Scope
+				if (obj.getObject() instanceof Scope) {
+					Scope a = (Scope) obj.getObject();
+					for (DomainObjectInstance child : a.getDomainInstances()) {
+						workingMemory.insert( child );
+					}
+					for (DomainObject child : a.getDomainObjects()) {
+						workingMemory.insert( child );
+					}
+					for (DerivedView child : a.getDomainViews()) {
+						workingMemory.insert( child );
+					}
+				}
+				
+				// Session
+				if (obj.getObject() instanceof Session) {
+					Session a = (Session) obj.getObject();
+					for (ApplicationElement child : a.getComponents()) {
+						workingMemory.insert( child );
+					}
 				}
 
 			}
@@ -182,6 +212,7 @@ public class CreateMissingElementsWithDrools {
 			"/rules/base.drl",
 			"/rules/sync-wires.drl",
 			"/rules/events.drl",
+			"/rules/sessions.drl",
 			"/rules/operations.drl"
 			);
 	

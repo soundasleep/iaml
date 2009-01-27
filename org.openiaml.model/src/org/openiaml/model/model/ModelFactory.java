@@ -206,6 +206,42 @@ public interface ModelFactory extends EFactory {
 	DynamicApplicationElementSet createDynamicApplicationElementSet();
 
 	/**
+	 * Returns a new object of class '<em>Derived View</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Derived View</em>'.
+	 * @generated
+	 */
+	DerivedView createDerivedView();
+
+	/**
+	 * Returns a new object of class '<em>Domain Object Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Domain Object Instance</em>'.
+	 * @generated
+	 */
+	DomainObjectInstance createDomainObjectInstance();
+
+	/**
+	 * Returns a new object of class '<em>Page Request</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Page Request</em>'.
+	 * @generated
+	 */
+	PageRequest createPageRequest();
+
+	/**
+	 * Returns a new object of class '<em>Visitor Agent</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Visitor Agent</em>'.
+	 * @generated
+	 */
+	VisitorAgent createVisitorAgent();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

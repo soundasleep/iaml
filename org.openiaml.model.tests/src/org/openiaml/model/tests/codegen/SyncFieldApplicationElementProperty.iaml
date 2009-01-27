@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11e431f8a70.d">
+  <children xsi:type="iaml.visual:Page" id="visual.11e431f8b2b.2" name="container">
+    <properties id="model.11e431f8a70.26" name="value" outEdges="wires.11e431f8b2b.d">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11e431f8b2b.d" from="model.11e431f8a70.26" to="visual.11e431f8b2b.c" name="sync"/>
+    </properties>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11e431f8b2b.c" name="field1" inEdges="wires.11e431f8b2b.d"/>
+  </children>
+</iaml:InternetApplication>

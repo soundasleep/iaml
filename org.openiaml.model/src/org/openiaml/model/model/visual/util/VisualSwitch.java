@@ -18,10 +18,13 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -105,7 +108,9 @@ public class VisualSwitch<T> {
 				Page page = (Page)theEObject;
 				T result = casePage(page);
 				if (result == null) result = caseVisibleThing(page);
+				if (result == null) result = caseScope(page);
 				if (result == null) result = caseApplicationElementContainer(page);
+				if (result == null) result = caseGeneratesElements(page);
 				if (result == null) result = caseApplicationElement(page);
 				if (result == null) result = caseContainsWires(page);
 				if (result == null) result = caseContainsOperations(page);
@@ -113,7 +118,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(page);
 				if (result == null) result = caseWireEdgesSource(page);
 				if (result == null) result = caseWireEdgeDestination(page);
-				if (result == null) result = caseGeneratesElements(page);
 				if (result == null) result = caseGeneratedElement(page);
 				if (result == null) result = caseShouldntContainWires(page);
 				if (result == null) result = defaultCase(theEObject);
@@ -132,6 +136,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(inputForm);
 				if (result == null) result = caseWireEdgeDestination(inputForm);
 				if (result == null) result = caseGeneratesElements(inputForm);
+				if (result == null) result = caseScope(inputForm);
 				if (result == null) result = caseGeneratedElement(inputForm);
 				if (result == null) result = caseShouldntContainWires(inputForm);
 				if (result == null) result = defaultCase(theEObject);
@@ -150,8 +155,47 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(inputTextField);
 				if (result == null) result = caseWireEdgeDestination(inputTextField);
 				if (result == null) result = caseGeneratesElements(inputTextField);
+				if (result == null) result = caseScope(inputTextField);
 				if (result == null) result = caseGeneratedElement(inputTextField);
 				if (result == null) result = caseShouldntContainWires(inputTextField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case VisualPackage.BUTTON: {
+				Button button = (Button)theEObject;
+				T result = caseButton(button);
+				if (result == null) result = caseVisibleThing(button);
+				if (result == null) result = caseApplicationElementContainer(button);
+				if (result == null) result = caseApplicationElement(button);
+				if (result == null) result = caseContainsWires(button);
+				if (result == null) result = caseContainsOperations(button);
+				if (result == null) result = caseNamedElement(button);
+				if (result == null) result = caseContainsEventTriggers(button);
+				if (result == null) result = caseWireEdgesSource(button);
+				if (result == null) result = caseWireEdgeDestination(button);
+				if (result == null) result = caseGeneratesElements(button);
+				if (result == null) result = caseScope(button);
+				if (result == null) result = caseGeneratedElement(button);
+				if (result == null) result = caseShouldntContainWires(button);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case VisualPackage.FRAME: {
+				Frame frame = (Frame)theEObject;
+				T result = caseFrame(frame);
+				if (result == null) result = caseVisibleThing(frame);
+				if (result == null) result = caseScope(frame);
+				if (result == null) result = caseApplicationElementContainer(frame);
+				if (result == null) result = caseGeneratesElements(frame);
+				if (result == null) result = caseApplicationElement(frame);
+				if (result == null) result = caseContainsWires(frame);
+				if (result == null) result = caseContainsOperations(frame);
+				if (result == null) result = caseNamedElement(frame);
+				if (result == null) result = caseContainsEventTriggers(frame);
+				if (result == null) result = caseWireEdgesSource(frame);
+				if (result == null) result = caseWireEdgeDestination(frame);
+				if (result == null) result = caseGeneratedElement(frame);
+				if (result == null) result = caseShouldntContainWires(frame);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -201,6 +245,36 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseInputTextField(InputTextField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Button</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Button</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseButton(Button object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Frame</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Frame</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFrame(Frame object) {
 		return null;
 	}
 
@@ -306,6 +380,21 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseGeneratesElements(GeneratesElements object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScope(Scope object) {
 		return null;
 	}
 

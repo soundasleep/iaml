@@ -1,0 +1,38 @@
+--- operation.gmfgen	2008-12-09 16:52:29.310778800 +1300
++++ copies/operation.gmfgen	2008-12-09 16:13:07.139918400 +1300
+@@ -115,6 +115,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="OperationOpenDiagramEditPolicy"
++          diagramKind="Iaml_Operation"
++          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/CompositeOperation"/>
+@@ -168,6 +173,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="OperationOpenDiagramEditPolicy"
++          diagramKind="Iaml_Operation"
++          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/ChainedOperation"/>
+@@ -221,6 +231,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="OperationOpenDiagramEditPolicy"
++          diagramKind="Iaml_Operation"
++          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/Parameter"/>

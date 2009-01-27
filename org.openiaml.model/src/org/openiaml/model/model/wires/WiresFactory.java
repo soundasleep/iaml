@@ -71,6 +71,60 @@ public interface WiresFactory extends EFactory {
 	ParameterWire createParameterWire();
 
 	/**
+	 * Returns a new object of class '<em>Find Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Find Wire</em>'.
+	 * @generated
+	 */
+	FindWire createFindWire();
+
+	/**
+	 * Returns a new object of class '<em>Show Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Show Wire</em>'.
+	 * @generated
+	 */
+	ShowWire createShowWire();
+
+	/**
+	 * Returns a new object of class '<em>Commit Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Commit Wire</em>'.
+	 * @generated
+	 */
+	CommitWire createCommitWire();
+
+	/**
+	 * Returns a new object of class '<em>Navigate Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Navigate Wire</em>'.
+	 * @generated
+	 */
+	NavigateWire createNavigateWire();
+
+	/**
+	 * Returns a new object of class '<em>Filter Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Filter Wire</em>'.
+	 * @generated
+	 */
+	FilterWire createFilterWire();
+
+	/**
+	 * Returns a new object of class '<em>Condition Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Condition Wire</em>'.
+	 * @generated
+	 */
+	ConditionWire createConditionWire();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

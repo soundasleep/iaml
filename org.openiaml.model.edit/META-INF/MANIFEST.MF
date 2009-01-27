@@ -8,8 +8,10 @@ Bundle-Activator: org.openiaml.model.model.provider.IamlEditPlugin$Implementatio
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.openiaml.model.model.operations.provider,
+Export-Package: org.openiaml.model.model.components.provider,
+ org.openiaml.model.model.operations.provider,
  org.openiaml.model.model.provider,
+ org.openiaml.model.model.scopes.provider,
  org.openiaml.model.model.visual.provider,
  org.openiaml.model.model.wires.provider
 Require-Bundle: org.eclipse.core.runtime,

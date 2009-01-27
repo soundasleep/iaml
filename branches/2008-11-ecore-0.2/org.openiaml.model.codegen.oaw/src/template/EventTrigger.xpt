@@ -55,7 +55,7 @@
 				«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
-	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )-»
+	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»

@@ -169,20 +169,20 @@ echo "ok";
  * RunInstanceWire: event --> operation 
  */
 «DEFINE callOperations FOR model::wires::RunInstanceWire-»
-	«IF to.eContainer.metaType.isAssignableFrom( model::visual::InputTextField )-»
+	«IF isInputTextField(to.eContainer)-»
 		«REM»// not on current page (wire id = «id»)«ENDREM»
 		store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);
-	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::DomainAttribute )-»
+	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);  
-	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::scopes::Session )-»
+	«ELSEIF isSession(to.eContainer)-»
 		«REM»a function run on in this session«ENDREM»
 		do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
-	«ELSEIF to.eContainer.metaType.isAssignableFrom( model::visual::Page )-»
+	«ELSEIF isPage(to.eContainer)-»
 		«REM»a function run on a page«ENDREM»
 		«IF from.eContainer == to.eContainer-»
 			«REM»a function run on *this* page«ENDREM»
@@ -212,9 +212,9 @@ echo "ok";
 	«IF name == "fieldValue"»
 		$arg0 /* the new value is already store in this variable */
 	«ELSE»
-		«IF eContainer.metaType.isAssignableFrom( model::scopes::Session )»
+		«IF containingSession(this) != null»
 			/* a property from our session */
-			require_session("«safeName()-»")
+			require_session("«safeName(containingSession(this))»_«safeName()-»")
 		«ELSE»
 			get_application_property("«safeName()-»")
 		«ENDIF»

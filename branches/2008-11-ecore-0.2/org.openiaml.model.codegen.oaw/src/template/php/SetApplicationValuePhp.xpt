@@ -11,8 +11,8 @@
 «EXPAND HeaderPhp::headerPhp FOR this-»
 
 log_message("set_application_value.php? " . print_r($_GET, true));
-$id = $_GET["id"] or die("no id");
-$arg0 = $_GET["arg0"] or die("no arg0");
+$id = $_GET["id"] or local_die("no id");
+$arg0 = $_GET["arg0"] or local_die("no arg0");
 
 // set
 global $db;
@@ -27,6 +27,9 @@ if (!$s) {
 			arg0 BLOB
 		);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
 	log_message("table for global_values created", false);
+
+	// re-prepare
+	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
 }
 
 // does anything exist?

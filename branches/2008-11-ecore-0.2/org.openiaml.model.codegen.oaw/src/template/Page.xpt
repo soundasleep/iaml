@@ -164,7 +164,7 @@
 «DEFINE staticInitialValue FOR model::ApplicationElementProperty»
 	«IF containingSession(this) == null»
 		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
-		value="<?php echo htmlspecialchars(get_application_value("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+		value="<?php echo htmlspecialchars(get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
 		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"

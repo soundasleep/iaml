@@ -16,16 +16,20 @@ public class CodegenTestsSuite {
 	 * 
 	 * @return
 	 */
-    public static Test suite() { 
-        TestSuite suite = new TestSuite("Code Generation");
-
-        suite.addTestSuite(SimpleTestCase.class);
-        suite.addTestSuite(SyncWiresTestCase.class);
-        suite.addTestSuite(SyncWiresPagesTestCase.class);
-        suite.addTestSuite(SyncFieldDomainAttribute.class);
-        suite.addTestSuite(SyncFormDomainObject.class);
-
-        return suite; 
-   }
+	public static Test suite() {
+		TestSuite suite = new TestSuite("Code Generation");
+		//$JUnit-BEGIN$
+		suite.addTestSuite(SimpleTestCase.class);
+		suite.addTestSuite(SyncFieldDomainAttribute.class);
+		suite.addTestSuite(SyncStaticValueField.class);
+		suite.addTestSuite(SyncWiresPagesTestCase.class);
+		suite.addTestSuite(LoginHandlerKey.class);
+		suite.addTestSuite(SyncFormDomainObject.class);
+		suite.addTestSuite(SyncFieldApplicationElementProperty.class);
+		suite.addTestSuite(SyncWiresMultiple.class);
+		suite.addTestSuite(SyncWiresTestCase.class);
+		//$JUnit-END$
+		return suite;
+	}
 
 }

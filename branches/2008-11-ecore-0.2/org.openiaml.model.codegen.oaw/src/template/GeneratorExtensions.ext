@@ -18,14 +18,17 @@ buttonName(model::visual::Button this) :
 	if (name == null || name == "") then "Submit Query" else name;
 	
 safeName(model::NamedElement this) :
-	safeName(id);
-
-safeName(String s) :
-	s.replaceAll("[^A-Za-z0-9]", "_");
+	safeNameString(id);
 
 safeName(emf::EObject this) :
 	"unexpected eobject " + this;
 
+safeNameString(String s) :
+	s.replaceAll("[^A-Za-z0-9]", "_");
+
+escapeString(String s) :
+	s.replaceAll("[\"]", "\\\"");
+	
 operationName(model::WireEdgeDestination this) : 
 	"impossible";
 
@@ -89,4 +92,18 @@ isFailEdge(model::WireEdge this ) :
 	
 isFailEdge(model::wires::CompositeWire this ) :
 	name == "fail" ;
+
+/** get the containing session of the given element, or null if none */
+model::scopes::Session containingSession(emf::EObject this) :
+	null;
+
+model::scopes::Session containingSession(model::ApplicationElement this) :
+	containingSession(eContainer);
+
+model::scopes::Session containingSession(model::scopes::Session this) :
+	this;
+
+model::scopes::Session containingSession(model::InternetApplication this) :
+	null;
+
 	

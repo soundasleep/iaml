@@ -22,10 +22,10 @@
  * Expand a DomainObject into a SQL table.
  */
 «DEFINE createDomainObjectPhp FOR model::DomainObject»
-	$s = $db->prepare("SELECT * FROM «safeName(name)»");
+	$s = $db->prepare("SELECT * FROM «safeNameString(name)»");
 	if (!$s) {
 		// create the table
-		$q = $db->query("CREATE TABLE «safeName(name)» (
+		$q = $db->query("CREATE TABLE «safeNameString(name)» (
 				«EXPAND createDomainAttributePhp FOREACH attributes SEPARATOR ", "»
 			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
 	}
@@ -35,5 +35,5 @@
  * Expand a DomainAttribute into a SQL row.
  */
 «DEFINE createDomainAttributePhp FOR model::DomainAttribute»
-	«safeName(name)» VARCHAR(255) NULL
+	«safeNameString(name)» VARCHAR(255) NULL
 «ENDDEFINE»

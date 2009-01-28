@@ -691,6 +691,32 @@
       <accessors
           figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="FileDomainStoreFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="FileDomainStoreFigure"
+          lineWidth="2"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="240"
+            green="240"
+            blue="220"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FileDomainStoreNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -767,6 +793,9 @@
   <nodes
       name="LoginHandler"
       figure="LoginHandlerFigure"/>
+  <nodes
+      name="FileDomainStore"
+      figure="FileDomainStoreFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -969,4 +998,8 @@
       name="CancelNodeText"
       figure="CancelNodeFigure"
       accessor="//@figures.0/@descriptors.26/@accessors.1"/>
+  <labels
+      name="FileDomainStoreName"
+      figure="FileDomainStoreFigure"
+      accessor="//@figures.0/@descriptors.39/@accessors.0"/>
 </gmfgraph:Canvas>

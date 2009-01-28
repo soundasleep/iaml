@@ -4,30 +4,42 @@
  *
  * $Id$
  */
-package org.openiaml.model.model.operations.impl;
+package org.openiaml.model.model.domain.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import org.openiaml.model.FileReference;
 import org.openiaml.model.model.ModelPackage;
+
 import org.openiaml.model.model.components.ComponentsPackage;
+
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
+
+import org.openiaml.model.model.domain.DomainFactory;
 import org.openiaml.model.model.domain.DomainPackage;
-import org.openiaml.model.model.domain.impl.DomainPackageImpl;
+import org.openiaml.model.model.domain.FileDomainStore;
+
 import org.openiaml.model.model.impl.ModelPackageImpl;
-import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.DecisionNode;
-import org.openiaml.model.model.operations.DecisionOperation;
-import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.OperationsFactory;
+
 import org.openiaml.model.model.operations.OperationsPackage;
-import org.openiaml.model.model.operations.StartNode;
+
+import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
+
 import org.openiaml.model.model.scopes.ScopesPackage;
+
 import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
+
 import org.openiaml.model.model.visual.VisualPackage;
+
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
+
 import org.openiaml.model.model.wires.WiresPackage;
+
 import org.openiaml.model.model.wires.impl.WiresPackageImpl;
 
 /**
@@ -36,41 +48,20 @@ import org.openiaml.model.model.wires.impl.WiresPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class OperationsPackageImpl extends EPackageImpl implements OperationsPackage {
+public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass startNodeEClass = null;
+	private EClass fileDomainStoreEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass cancelNodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass finishNodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass decisionNodeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass decisionOperationEClass = null;
+	private EDataType fileReferenceEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -83,12 +74,12 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.openiaml.model.model.operations.OperationsPackage#eNS_URI
+	 * @see org.openiaml.model.model.domain.DomainPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private OperationsPackageImpl() {
-		super(eNS_URI, OperationsFactory.eINSTANCE);
+	private DomainPackageImpl() {
+		super(eNS_URI, DomainFactory.eINSTANCE);
 	}
 
 	/**
@@ -120,11 +111,11 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static OperationsPackage init() {
-		if (isInited) return (OperationsPackage)EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI);
+	public static DomainPackage init() {
+		if (isInited) return (DomainPackage)EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI);
 
 		// Obtain or create and register package
-		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new OperationsPackageImpl());
+		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new DomainPackageImpl());
 
 		isInited = true;
 
@@ -132,32 +123,32 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
 		VisualPackageImpl theVisualPackage = (VisualPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) instanceof VisualPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) : VisualPackage.eINSTANCE);
 		WiresPackageImpl theWiresPackage = (WiresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) instanceof WiresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) : WiresPackage.eINSTANCE);
+		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) : ScopesPackage.eINSTANCE);
 		ComponentsPackageImpl theComponentsPackage = (ComponentsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) instanceof ComponentsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) : ComponentsPackage.eINSTANCE);
-		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) : DomainPackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theOperationsPackage.createPackageContents();
+		theDomainPackage.createPackageContents();
 		theModelPackage.createPackageContents();
 		theVisualPackage.createPackageContents();
 		theWiresPackage.createPackageContents();
+		theOperationsPackage.createPackageContents();
 		theScopesPackage.createPackageContents();
 		theComponentsPackage.createPackageContents();
-		theDomainPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theOperationsPackage.initializePackageContents();
+		theDomainPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
 		theVisualPackage.initializePackageContents();
 		theWiresPackage.initializePackageContents();
+		theOperationsPackage.initializePackageContents();
 		theScopesPackage.initializePackageContents();
 		theComponentsPackage.initializePackageContents();
-		theDomainPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theOperationsPackage.freeze();
+		theDomainPackage.freeze();
 
-		return theOperationsPackage;
+		return theDomainPackage;
 	}
 
 	/**
@@ -165,8 +156,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStartNode() {
-		return startNodeEClass;
+	public EClass getFileDomainStore() {
+		return fileDomainStoreEClass;
 	}
 
 	/**
@@ -174,8 +165,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCancelNode() {
-		return cancelNodeEClass;
+	public EAttribute getFileDomainStore_TempTypeString() {
+		return (EAttribute)fileDomainStoreEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -183,8 +174,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCancelNode_ExceptionText() {
-		return (EAttribute)cancelNodeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getFileDomainStore_File() {
+		return (EAttribute)fileDomainStoreEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -192,8 +183,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFinishNode() {
-		return finishNodeEClass;
+	public EDataType getFileReference() {
+		return fileReferenceEDataType;
 	}
 
 	/**
@@ -201,26 +192,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDecisionNode() {
-		return decisionNodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDecisionOperation() {
-		return decisionOperationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OperationsFactory getOperationsFactory() {
-		return (OperationsFactory)getEFactoryInstance();
+	public DomainFactory getDomainFactory() {
+		return (DomainFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -242,16 +215,12 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		isCreated = true;
 
 		// Create classes and their features
-		startNodeEClass = createEClass(START_NODE);
+		fileDomainStoreEClass = createEClass(FILE_DOMAIN_STORE);
+		createEAttribute(fileDomainStoreEClass, FILE_DOMAIN_STORE__TEMP_TYPE_STRING);
+		createEAttribute(fileDomainStoreEClass, FILE_DOMAIN_STORE__FILE);
 
-		cancelNodeEClass = createEClass(CANCEL_NODE);
-		createEAttribute(cancelNodeEClass, CANCEL_NODE__EXCEPTION_TEXT);
-
-		finishNodeEClass = createEClass(FINISH_NODE);
-
-		decisionNodeEClass = createEClass(DECISION_NODE);
-
-		decisionOperationEClass = createEClass(DECISION_OPERATION);
+		// Create data types
+		fileReferenceEDataType = createEDataType(FILE_REFERENCE);
 	}
 
 	/**
@@ -285,29 +254,15 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		startNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		startNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
-		cancelNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		cancelNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
-		finishNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		finishNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
-		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
-		decisionOperationEClass.getESuperTypes().add(theModelPackage.getChainedOperation());
-		decisionOperationEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
+		fileDomainStoreEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(fileDomainStoreEClass, FileDomainStore.class, "FileDomainStore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFileDomainStore_TempTypeString(), ecorePackage.getEString(), "tempTypeString", null, 0, 1, FileDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFileDomainStore_File(), this.getFileReference(), "file", null, 1, 1, FileDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(cancelNodeEClass, CancelNode.class, "CancelNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCancelNode_ExceptionText(), ecorePackage.getEString(), "exceptionText", null, 0, 1, CancelNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(finishNodeEClass, FinishNode.class, "FinishNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(decisionNodeEClass, DecisionNode.class, "DecisionNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(decisionOperationEClass, DecisionOperation.class, "DecisionOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		// Initialize data types
+		initEDataType(fileReferenceEDataType, FileReference.class, "FileReference", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 	}
 
-} //OperationsPackageImpl
+} //DomainPackageImpl

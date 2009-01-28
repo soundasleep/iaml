@@ -7,13 +7,17 @@ Bundle-ClassPath: .
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.openiaml.model.codegen,
+Export-Package: org.openiaml.model,
+ org.openiaml.model.codegen,
  org.openiaml.model.diagramextensions,
  org.openiaml.model.inference,
  org.openiaml.model.model,
  org.openiaml.model.model.components,
  org.openiaml.model.model.components.impl,
  org.openiaml.model.model.components.util,
+ org.openiaml.model.model.domain,
+ org.openiaml.model.model.domain.impl,
+ org.openiaml.model.model.domain.util,
  org.openiaml.model.model.impl,
  org.openiaml.model.model.operations,
  org.openiaml.model.model.operations.impl,

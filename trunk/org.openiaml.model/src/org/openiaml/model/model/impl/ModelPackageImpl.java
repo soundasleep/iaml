@@ -55,6 +55,8 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
+import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.domain.impl.DomainPackageImpl;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
 import org.openiaml.model.model.scopes.ScopesPackage;
@@ -413,6 +415,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) : ScopesPackage.eINSTANCE);
 		ComponentsPackageImpl theComponentsPackage = (ComponentsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) instanceof ComponentsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) : ComponentsPackage.eINSTANCE);
+		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) : DomainPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theModelPackage.createPackageContents();
@@ -421,6 +424,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		theOperationsPackage.createPackageContents();
 		theScopesPackage.createPackageContents();
 		theComponentsPackage.createPackageContents();
+		theDomainPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theModelPackage.initializePackageContents();
@@ -429,6 +433,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		theOperationsPackage.initializePackageContents();
 		theScopesPackage.initializePackageContents();
 		theComponentsPackage.initializePackageContents();
+		theDomainPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theModelPackage.freeze();
@@ -866,6 +871,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getInternetApplication_LoginHandlers() {
 		return (EReference)internetApplicationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInternetApplication_FileDomainStores() {
+		return (EReference)internetApplicationEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1378,6 +1392,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(internetApplicationEClass, INTERNET_APPLICATION__RUNTIME_URL);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__SESSIONS);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__LOGIN_HANDLERS);
+		createEReference(internetApplicationEClass, INTERNET_APPLICATION__FILE_DOMAIN_STORES);
 
 		domainStoreEClass = createEClass(DOMAIN_STORE);
 		createEReference(domainStoreEClass, DOMAIN_STORE__CHILDREN);
@@ -1474,6 +1489,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		OperationsPackage theOperationsPackage = (OperationsPackage)EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI);
 		ScopesPackage theScopesPackage = (ScopesPackage)EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI);
 		ComponentsPackage theComponentsPackage = (ComponentsPackage)EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI);
+		DomainPackage theDomainPackage = (DomainPackage)EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theVisualPackage);
@@ -1481,6 +1497,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		getESubpackages().add(theOperationsPackage);
 		getESubpackages().add(theScopesPackage);
 		getESubpackages().add(theComponentsPackage);
+		getESubpackages().add(theDomainPackage);
 
 		// Create type parameters
 
@@ -1627,6 +1644,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getInternetApplication_RuntimeUrl(), ecorePackage.getEString(), "runtimeUrl", "http://localhost:8080/output/", 0, 1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInternetApplication_Sessions(), theScopesPackage.getSession(), null, "sessions", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInternetApplication_LoginHandlers(), theComponentsPackage.getLoginHandler(), null, "loginHandlers", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInternetApplication_FileDomainStores(), theDomainPackage.getFileDomainStore(), null, "fileDomainStores", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainStoreEClass, DomainStore.class, "DomainStore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainStore_Children(), this.getDomainObject(), null, "children", null, 0, -1, DomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

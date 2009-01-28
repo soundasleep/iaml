@@ -8,6 +8,7 @@ package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.FileDomainStore;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -24,6 +25,7 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.InternetApplication#getRuntimeUrl <em>Runtime Url</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getSessions <em>Sessions</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getLoginHandlers <em>Login Handlers</em>}</li>
+ *   <li>{@link org.openiaml.model.model.InternetApplication#getFileDomainStores <em>File Domain Stores</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,5 +143,21 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 * @generated
 	 */
 	EList<LoginHandler> getLoginHandlers();
+
+	/**
+	 * Returns the value of the '<em><b>File Domain Stores</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.domain.FileDomainStore}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>File Domain Stores</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>File Domain Stores</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getInternetApplication_FileDomainStores()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<FileDomainStore> getFileDomainStores();
 
 } // InternetApplication

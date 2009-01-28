@@ -25,3 +25,17 @@ in.
 (I think)
 
 -- TODO: Documentation to be expanded
+
+process:
+
+- edit .ecore
+- reload .genmodel
+- generate Model code
+- generate Edit code
+- organise Model imports
+- open .gmfmap
+- [edit]
+- generate .gmfgen
+- $ apply root
+- refresh root.gmfgen
+- generate diagram code

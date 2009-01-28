@@ -2470,13 +2470,22 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__LOGIN_HANDLERS = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
 
 	/**
+	 * The feature id for the '<em><b>File Domain Stores</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__FILE_DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
+
+	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -4104,6 +4113,17 @@ public interface ModelPackage extends EPackage {
 	EReference getInternetApplication_LoginHandlers();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.InternetApplication#getFileDomainStores <em>File Domain Stores</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>File Domain Stores</em>'.
+	 * @see org.openiaml.model.model.InternetApplication#getFileDomainStores()
+	 * @see #getInternetApplication()
+	 * @generated
+	 */
+	EReference getInternetApplication_FileDomainStores();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.DomainStore <em>Domain Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5037,6 +5057,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INTERNET_APPLICATION__LOGIN_HANDLERS = eINSTANCE.getInternetApplication_LoginHandlers();
+
+		/**
+		 * The meta object literal for the '<em><b>File Domain Stores</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERNET_APPLICATION__FILE_DOMAIN_STORES = eINSTANCE.getInternetApplication_FileDomainStores();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DomainStoreImpl <em>Domain Store</em>}' class.

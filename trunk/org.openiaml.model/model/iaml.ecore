@@ -134,6 +134,8 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fileDomainStores" upperBound="-1"
+        eType="#//domain/FileDomainStore" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements">
     <eAnnotations source="http://openiaml.org/comment">
@@ -388,6 +390,14 @@
     <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
           eType="#//components/LoginHandlerTypes"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="domain" nsURI="http://openiaml.org/model/domain" nsPrefix="iaml.domain">
+    <eClassifiers xsi:type="ecore:EDataType" name="FileReference" instanceClassName="org.openiaml.model.FileReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FileDomainStore" eSuperTypes="#//NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempTypeString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1"
+          eType="#//domain/FileReference"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

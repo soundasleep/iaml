@@ -251,6 +251,28 @@
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//InternetApplication/fileDomainStores"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/FileDomainStore"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( FileDomainStore )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#FileDomainStoreName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.0/@tools.13"/>
+      <diagramNode
+          href="iaml.gmfgraph#FileDomainStore"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

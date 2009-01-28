@@ -69,6 +69,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//InternetApplication/runtimeUrl"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sessions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/loginHandlers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/fileDomainStores"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainStore">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/children"/>
@@ -196,6 +197,14 @@
       </genEnums>
       <genClasses image="false" ecoreClass="iaml.ecore#//components/LoginHandler">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//components/LoginHandler/type"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Domain" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
+        ecorePackage="iaml.ecore#//domain">
+      <genDataTypes ecoreDataType="iaml.ecore#//domain/FileReference"/>
+      <genClasses ecoreClass="iaml.ecore#//domain/FileDomainStore">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/FileDomainStore/tempTypeString"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/FileDomainStore/file"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

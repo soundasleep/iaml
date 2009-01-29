@@ -123,6 +123,13 @@
 		<!-- more than one popup extension is displayed in reverse order:
 		     a documented bug of eclipse -->
          <action
+               class="org.openiaml.model.diagram.custom.actions.InferEntireModelAction"
+               id="org.openiaml.model.diagram.custom.action4"
+               label="Infer all elements in-place"
+               menubarPath="org.openiaml.model.diagram.custom.menu1">
+         </action>
+
+         <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeActionAndView"
                id="org.openiaml.model.diagram.custom.action2"
                label="Generate code and load in browser"

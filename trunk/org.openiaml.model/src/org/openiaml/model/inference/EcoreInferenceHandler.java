@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
 /**
- * an ecore-based inference handler.
+ * An ecore-based inference handler.
  * 
  * @author jmwright
  *

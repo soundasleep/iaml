@@ -23,6 +23,7 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.domain.DomainPackage;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -87,6 +88,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	public static List<?> query(final EObject root, String query) throws JaxenException {
 		EMFXPath xpath = new EMFXPath(query);
 		xpath.addNamespace("iaml", ModelPackage.eNS_URI);
+		xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);
 		xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		return xpath.selectNodes(root);
 	}

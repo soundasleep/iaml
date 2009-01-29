@@ -5,9 +5,9 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.85" from="visual.11d83490a0f.f0" to="model.11d83490915.28e" name="syncField"/>
     </children>
   </children>
-  <domainStores id="model.11d83490915.26b" name="store">
-    <children id="model.11d83490915.274" name="domain">
-      <attributes id="model.11d83490915.28e" name="attribute" inEdges="wires.11d83490a7c.85"/>
+  <domainStores xsi:type="iaml:DomainStore" id="model.11d83490915.26b" name="store">
+    <children xsi:type="iaml:DomainObject" id="model.11d83490915.274" name="domain">
+      <attributes xsi:type="iaml:DomainAttribute" id="model.11d83490915.28e" name="attribute" inEdges="wires.11d83490a7c.85"/>
     </children>
   </domainStores>
 </iaml:InternetApplication>

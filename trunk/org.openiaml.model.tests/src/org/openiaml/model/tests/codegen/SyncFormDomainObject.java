@@ -69,6 +69,7 @@ public class SyncFormDomainObject extends CodegenTestCase {
 		// the values should still be the same
 		assertLabeledFieldEquals(field1id, testingText1);
 		assertLabeledFieldEquals(field2id, testingText2);
+		waitForAjax();	 // wait for ajax calls if necessary
 				
 		// check the database
 		{
@@ -85,14 +86,19 @@ public class SyncFormDomainObject extends CodegenTestCase {
 			ResultSet rs = stat.executeQuery("SELECT * FROM form1;");
 			assertTrue(rs.next());	// there should be one value
 			
-			// it should be our testing text
-			assertEquals(rs.getString("field1"), testingText1);
-			assertEquals(rs.getString("field2"), testingText2);
-			assertNotSame(rs.getString("field3"), testingText1);	// it shouldn't be either of these
-			assertNotSame(rs.getString("field3"), testingText2);	// it shouldn't be either of these
-			
+			String field1 = rs.getString("field1");
+			String field2 = rs.getString("field2");
+			String field3 = rs.getString("field3");
+
 			// there should not be any more values in the database
 			assertFalse(rs.next());
+
+			// it should be our testing text
+			assertEquals(testingText1, field1);
+			assertEquals(testingText2, field2);
+			assertNotSame(testingText1, field3);	// it shouldn't be either of these
+			assertNotSame(testingText2, field3);	// it shouldn't be either of these
+			
 		}
 		
 	}

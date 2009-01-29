@@ -5,8 +5,8 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d889e3162.24" from="model.11d889e30c6.12b" to="model.11d889e30c6.13d" name="syncWire"/>
     </eventTriggers>
   </children>
-  <domainStores id="model.11d889e30c6.124" name="domain store">
+  <domainStores xsi:type="iaml:DomainStore" id="model.11d889e30c6.124" name="domain store">
     <eventTriggers id="model.11d889e30c6.147" name="et2"/>
-    <children id="model.11d889e30c6.13d" name="child" inEdges="wires.11d889e3162.24"/>
+    <children xsi:type="iaml:DomainObject" id="model.11d889e30c6.13d" name="child" inEdges="wires.11d889e3162.24"/>
   </domainStores>
 </iaml:InternetApplication>

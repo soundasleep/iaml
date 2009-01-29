@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.inference;
 
+import java.util.List;
+
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.DomainAttribute;
@@ -40,8 +42,13 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='syncField']");
 		assertNotNull(wire);
 		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='store']");
-		DomainObject obj = (DomainObject) queryOne(store, "//iaml:children[iaml:name='domain']");
-		DomainAttribute attribute = (DomainAttribute) queryOne(obj, "//iaml:attributes[iaml:name='attribute']");
+		
+		// in v0.2 we moved DomainStore from root (iaml) to the 'domain'
+		// subpackage (iaml.domain). as such, the 'children' attribute
+		// now apparently resides in iaml.domain.
+		// DomainObject obj = (DomainObject) queryOne(store, "//iaml:children[iaml:name='domain']");
+		DomainObject obj = (DomainObject) queryOne(store, "//iaml.domain:children[iaml:name='domain']");
+		DomainAttribute attribute = (DomainAttribute) queryOne(obj, "//iaml.domain:attributes[iaml:name='attribute']");
 		
 		// field should now have an edit event
 		EventTrigger editEvent = (EventTrigger) queryOne(field, "iaml:eventTriggers[iaml:name='edit']");

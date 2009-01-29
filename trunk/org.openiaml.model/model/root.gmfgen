@@ -530,6 +530,8 @@
             href="iaml.genmodel#//model/InternetApplication/domainStores"/>
         <childMetaFeature
             href="iaml.genmodel#//model/InternetApplication/domainStores"/>
+        <modelElementSelector
+            body="self.oclIsTypeOf( DomainStore )"/>
       </modelFacet>
       <labels
           visualID="4010"
@@ -704,9 +706,9 @@
         <metaClass
             href="iaml.genmodel#//model/domain/FileDomainStore"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/InternetApplication/fileDomainStores"/>
+            href="iaml.genmodel#//model/InternetApplication/domainStores"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/InternetApplication/fileDomainStores"/>
+            href="iaml.genmodel#//model/InternetApplication/domainStores"/>
         <modelElementSelector
             body="self.oclIsTypeOf( FileDomainStore )"/>
       </modelFacet>
@@ -1472,6 +1474,6 @@
   <expressionProviders>
     <providers
         xsi:type="gmfgen:GenExpressionInterpreter"
-        expressions="//@diagram/@topLevelNodes.1/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.2/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.3/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.4/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.5/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.6/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.11/@modelFacet/@modelElementSelector //@diagram/@links.0/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector"/>
+        expressions="//@diagram/@topLevelNodes.1/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.2/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.3/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.4/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.5/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.6/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.8/@modelFacet/@modelElementSelector //@diagram/@topLevelNodes.11/@modelFacet/@modelElementSelector //@diagram/@links.0/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector"/>
   </expressionProviders>
 </gmfgen:GenEditorGenerator>

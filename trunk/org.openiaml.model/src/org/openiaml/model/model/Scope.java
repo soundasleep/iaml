@@ -7,6 +7,7 @@
 package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
+import org.openiaml.model.model.domain.AbstractDomainObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
 public interface Scope extends GeneratesElements {
 	/**
 	 * Returns the value of the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.DomainObject}.
+	 * The list contents are of type {@link org.openiaml.model.model.domain.AbstractDomainObject}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Domain Objects</em>' containment reference list isn't clear,
@@ -39,9 +40,10 @@ public interface Scope extends GeneratesElements {
 	 * @return the value of the '<em>Domain Objects</em>' containment reference list.
 	 * @see org.openiaml.model.model.ModelPackage#getScope_DomainObjects()
 	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment changed='0.2 to extend the abstract counterpart'"
 	 * @generated
 	 */
-	EList<DomainObject> getDomainObjects();
+	EList<AbstractDomainObject> getDomainObjects();
 
 	/**
 	 * Returns the value of the '<em><b>Domain Views</b></em>' containment reference list.

@@ -51,6 +51,9 @@ import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.domain.AbstractDomainAttribute;
+import org.openiaml.model.model.domain.AbstractDomainObject;
+import org.openiaml.model.model.domain.AbstractDomainStore;
 
 /**
  * <!-- begin-user-doc -->
@@ -174,6 +177,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.DOMAIN_OBJECT: {
 				DomainObject domainObject = (DomainObject)theEObject;
 				T result = caseDomainObject(domainObject);
+				if (result == null) result = caseAbstractDomainObject(domainObject);
 				if (result == null) result = caseApplicationElement(domainObject);
 				if (result == null) result = caseContainsWires(domainObject);
 				if (result == null) result = caseContainsOperations(domainObject);
@@ -191,6 +195,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.DOMAIN_ATTRIBUTE: {
 				DomainAttribute domainAttribute = (DomainAttribute)theEObject;
 				T result = caseDomainAttribute(domainAttribute);
+				if (result == null) result = caseAbstractDomainAttribute(domainAttribute);
 				if (result == null) result = caseApplicationElement(domainAttribute);
 				if (result == null) result = caseContainsOperations(domainAttribute);
 				if (result == null) result = caseNamedElement(domainAttribute);
@@ -388,6 +393,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.DOMAIN_STORE: {
 				DomainStore domainStore = (DomainStore)theEObject;
 				T result = caseDomainStore(domainStore);
+				if (result == null) result = caseAbstractDomainStore(domainStore);
 				if (result == null) result = caseContainsOperations(domainStore);
 				if (result == null) result = caseContainsEventTriggers(domainStore);
 				if (result == null) result = caseNamedElement(domainStore);
@@ -1150,6 +1156,51 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseScope(Scope object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Domain Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Domain Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractDomainObject(AbstractDomainObject object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Domain Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Domain Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractDomainAttribute(AbstractDomainAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Domain Store</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Domain Store</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractDomainStore(AbstractDomainStore object) {
 		return null;
 	}
 

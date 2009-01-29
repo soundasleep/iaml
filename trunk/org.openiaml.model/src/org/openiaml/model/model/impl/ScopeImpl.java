@@ -10,25 +10,20 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Scope;
+import org.openiaml.model.model.domain.AbstractDomainObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,7 +81,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DomainObject> domainObjects;
+	protected EList<AbstractDomainObject> domainObjects;
 
 	/**
 	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
@@ -165,9 +160,9 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainObject> getDomainObjects() {
+	public EList<AbstractDomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.SCOPE__DOMAIN_OBJECTS);
+			domainObjects = new EObjectContainmentEList<AbstractDomainObject>(AbstractDomainObject.class, this, ModelPackage.SCOPE__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -271,7 +266,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return;
 			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
+				getDomainObjects().addAll((Collection<? extends AbstractDomainObject>)newValue);
 				return;
 			case ModelPackage.SCOPE__DOMAIN_VIEWS:
 				getDomainViews().clear();

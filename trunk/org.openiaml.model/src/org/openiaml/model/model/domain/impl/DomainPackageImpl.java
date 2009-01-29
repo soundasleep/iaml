@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.openiaml.model.FileReference;
@@ -20,8 +21,13 @@ import org.openiaml.model.model.components.ComponentsPackage;
 
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 
+import org.openiaml.model.model.domain.AbstractDomainAttribute;
+import org.openiaml.model.model.domain.AbstractDomainObject;
+import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.domain.DomainFactory;
 import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.domain.FileDomainAttribute;
+import org.openiaml.model.model.domain.FileDomainObject;
 import org.openiaml.model.model.domain.FileDomainStore;
 
 import org.openiaml.model.model.impl.ModelPackageImpl;
@@ -54,7 +60,42 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass abstractDomainStoreEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractDomainObjectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractDomainAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass fileDomainStoreEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fileDomainObjectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fileDomainAttributeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,6 +197,69 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractDomainStore() {
+		return abstractDomainStoreEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractDomainStore_Children() {
+		return (EReference)abstractDomainStoreEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractDomainStore_Properties() {
+		return (EReference)abstractDomainStoreEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractDomainStore_Views() {
+		return (EReference)abstractDomainStoreEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractDomainObject() {
+		return abstractDomainObjectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractDomainObject_Attributes() {
+		return (EReference)abstractDomainObjectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractDomainAttribute() {
+		return abstractDomainAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFileDomainStore() {
 		return fileDomainStoreEClass;
 	}
@@ -165,7 +269,7 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFileDomainStore_TempTypeString() {
+	public EAttribute getFileDomainStore_File() {
 		return (EAttribute)fileDomainStoreEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -174,8 +278,17 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFileDomainStore_File() {
-		return (EAttribute)fileDomainStoreEClass.getEStructuralFeatures().get(1);
+	public EClass getFileDomainObject() {
+		return fileDomainObjectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFileDomainAttribute() {
+		return fileDomainAttributeEClass;
 	}
 
 	/**
@@ -215,9 +328,22 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		abstractDomainStoreEClass = createEClass(ABSTRACT_DOMAIN_STORE);
+		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__CHILDREN);
+		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__PROPERTIES);
+		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__VIEWS);
+
+		abstractDomainObjectEClass = createEClass(ABSTRACT_DOMAIN_OBJECT);
+		createEReference(abstractDomainObjectEClass, ABSTRACT_DOMAIN_OBJECT__ATTRIBUTES);
+
+		abstractDomainAttributeEClass = createEClass(ABSTRACT_DOMAIN_ATTRIBUTE);
+
 		fileDomainStoreEClass = createEClass(FILE_DOMAIN_STORE);
-		createEAttribute(fileDomainStoreEClass, FILE_DOMAIN_STORE__TEMP_TYPE_STRING);
 		createEAttribute(fileDomainStoreEClass, FILE_DOMAIN_STORE__FILE);
+
+		fileDomainObjectEClass = createEClass(FILE_DOMAIN_OBJECT);
+
+		fileDomainAttributeEClass = createEClass(FILE_DOMAIN_ATTRIBUTE);
 
 		// Create data types
 		fileReferenceEDataType = createEDataType(FILE_REFERENCE);
@@ -254,15 +380,64 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		fileDomainStoreEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
+		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsEventTriggers());
+		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsWires());
+		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		abstractDomainObjectEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
+		abstractDomainObjectEClass.getESuperTypes().add(theModelPackage.getContainsWires());
+		abstractDomainAttributeEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
+		fileDomainStoreEClass.getESuperTypes().add(this.getAbstractDomainStore());
+		fileDomainObjectEClass.getESuperTypes().add(this.getAbstractDomainObject());
+		fileDomainAttributeEClass.getESuperTypes().add(this.getAbstractDomainAttribute());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(abstractDomainStoreEClass, AbstractDomainStore.class, "AbstractDomainStore", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractDomainStore_Children(), this.getAbstractDomainObject(), null, "children", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDomainStore_Properties(), theModelPackage.getApplicationElementProperty(), null, "properties", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDomainStore_Views(), theModelPackage.getDerivedView(), null, "views", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractDomainObjectEClass, AbstractDomainObject.class, "AbstractDomainObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractDomainObject_Attributes(), this.getAbstractDomainAttribute(), null, "attributes", null, 0, -1, AbstractDomainObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractDomainAttributeEClass, AbstractDomainAttribute.class, "AbstractDomainAttribute", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(fileDomainStoreEClass, FileDomainStore.class, "FileDomainStore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFileDomainStore_TempTypeString(), ecorePackage.getEString(), "tempTypeString", null, 0, 1, FileDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFileDomainStore_File(), this.getFileReference(), "file", null, 1, 1, FileDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fileDomainObjectEClass, FileDomainObject.class, "FileDomainObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(fileDomainAttributeEClass, FileDomainAttribute.class, "FileDomainAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize data types
 		initEDataType(fileReferenceEDataType, FileReference.class, "FileReference", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+
+		// Create annotations
+		// http://openiaml.org/comment
+		createCommentAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://openiaml.org/comment</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createCommentAnnotations() {
+		String source = "http://openiaml.org/comment";		
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (getAbstractDomainStore_Views(), 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });
 	}
 
 } //DomainPackageImpl

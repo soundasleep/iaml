@@ -10,9 +10,23 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ContainsEventTriggers;
+import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.Scope;
+import org.openiaml.model.model.ShouldntContainWires;
+import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.domain.AbstractDomainAttribute;
+import org.openiaml.model.model.domain.AbstractDomainObject;
+import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.domain.FileDomainAttribute;
+import org.openiaml.model.model.domain.FileDomainObject;
 import org.openiaml.model.model.domain.FileDomainStore;
 
 /**
@@ -72,8 +86,36 @@ public class DomainAdapterFactory extends AdapterFactoryImpl {
 	protected DomainSwitch<Adapter> modelSwitch =
 		new DomainSwitch<Adapter>() {
 			@Override
+			public Adapter caseAbstractDomainStore(AbstractDomainStore object) {
+				return createAbstractDomainStoreAdapter();
+			}
+			@Override
+			public Adapter caseAbstractDomainObject(AbstractDomainObject object) {
+				return createAbstractDomainObjectAdapter();
+			}
+			@Override
+			public Adapter caseAbstractDomainAttribute(AbstractDomainAttribute object) {
+				return createAbstractDomainAttributeAdapter();
+			}
+			@Override
 			public Adapter caseFileDomainStore(FileDomainStore object) {
 				return createFileDomainStoreAdapter();
+			}
+			@Override
+			public Adapter caseFileDomainObject(FileDomainObject object) {
+				return createFileDomainObjectAdapter();
+			}
+			@Override
+			public Adapter caseFileDomainAttribute(FileDomainAttribute object) {
+				return createFileDomainAttributeAdapter();
+			}
+			@Override
+			public Adapter caseContainsOperations(ContainsOperations object) {
+				return createContainsOperationsAdapter();
+			}
+			@Override
+			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
+				return createContainsEventTriggersAdapter();
 			}
 			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
@@ -82,6 +124,34 @@ public class DomainAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseContainsWires(ContainsWires object) {
+				return createContainsWiresAdapter();
+			}
+			@Override
+			public Adapter caseGeneratesElements(GeneratesElements object) {
+				return createGeneratesElementsAdapter();
+			}
+			@Override
+			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
+				return createShouldntContainWiresAdapter();
+			}
+			@Override
+			public Adapter caseWireEdgesSource(WireEdgesSource object) {
+				return createWireEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
+				return createWireEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseScope(Scope object) {
+				return createScopeAdapter();
+			}
+			@Override
+			public Adapter caseApplicationElement(ApplicationElement object) {
+				return createApplicationElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -104,6 +174,48 @@ public class DomainAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.AbstractDomainStore <em>Abstract Domain Store</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.domain.AbstractDomainStore
+	 * @generated
+	 */
+	public Adapter createAbstractDomainStoreAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.AbstractDomainObject <em>Abstract Domain Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.domain.AbstractDomainObject
+	 * @generated
+	 */
+	public Adapter createAbstractDomainObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.AbstractDomainAttribute <em>Abstract Domain Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.domain.AbstractDomainAttribute
+	 * @generated
+	 */
+	public Adapter createAbstractDomainAttributeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.FileDomainStore <em>File Domain Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -114,6 +226,62 @@ public class DomainAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFileDomainStoreAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.FileDomainObject <em>File Domain Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.domain.FileDomainObject
+	 * @generated
+	 */
+	public Adapter createFileDomainObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.FileDomainAttribute <em>File Domain Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.domain.FileDomainAttribute
+	 * @generated
+	 */
+	public Adapter createFileDomainAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsOperations <em>Contains Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsOperations
+	 * @generated
+	 */
+	public Adapter createContainsOperationsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsEventTriggers <em>Contains Event Triggers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsEventTriggers
+	 * @generated
+	 */
+	public Adapter createContainsEventTriggersAdapter() {
 		return null;
 	}
 
@@ -142,6 +310,104 @@ public class DomainAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsWires <em>Contains Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsWires
+	 * @generated
+	 */
+	public Adapter createContainsWiresAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.GeneratesElements <em>Generates Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.GeneratesElements
+	 * @generated
+	 */
+	public Adapter createGeneratesElementsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ShouldntContainWires <em>Shouldnt Contain Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ShouldntContainWires
+	 * @generated
+	 */
+	public Adapter createShouldntContainWiresAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgesSource <em>Wire Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.WireEdgesSource
+	 * @generated
+	 */
+	public Adapter createWireEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgeDestination <em>Wire Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.WireEdgeDestination
+	 * @generated
+	 */
+	public Adapter createWireEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Scope <em>Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.Scope
+	 * @generated
+	 */
+	public Adapter createScopeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ApplicationElement <em>Application Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ApplicationElement
+	 * @generated
+	 */
+	public Adapter createApplicationElementAdapter() {
 		return null;
 	}
 

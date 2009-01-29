@@ -423,6 +423,16 @@
             <param name="semanticHint" value="1011"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/domain">
+         <metamodelType
+               id="org.openiaml.model.diagram.FileDomainStore_1012"
+               name="%metatype.name.FileDomainStore_1012"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="FileDomainStore"
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.FileDomainStoreEditHelper">
+            <param name="semanticHint" value="1012"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.SyncWire_3001"
@@ -467,6 +477,7 @@
          <elementType ref="org.openiaml.model.diagram.DomainStore_1009"/>
          <elementType ref="org.openiaml.model.diagram.Session_1010"/>
          <elementType ref="org.openiaml.model.diagram.LoginHandler_1011"/>
+         <elementType ref="org.openiaml.model.diagram.FileDomainStore_1012"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.RunInstanceWire_3002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>

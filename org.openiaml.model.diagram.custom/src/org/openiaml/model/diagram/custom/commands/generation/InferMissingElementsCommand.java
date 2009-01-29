@@ -4,28 +4,21 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.eclipse.gmf.runtime.emf.type.core.IElementType;
-import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
-import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
-import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
-import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
-import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
+import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.InferenceException;
 
-public class InferMissingElementsCommand extends AbstractTransactionalCommand implements ICreateElements {
+public class InferMissingElementsCommand extends AbstractTransactionalCommand {
 
 	private EObject rootObject;
 	private GraphicalEditPart selectedElement;
@@ -83,13 +76,15 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand im
 
 		this.monitor = monitor;
 		this.info = info;
-		
+
+		EcoreCreateElementsHelper helper = new GmfInferenceHandler(monitor, info, editorId, getEditingDomain());
+
 		if (!isDisabled) {
-			CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(this);
+			CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(helper);
 			try {
 				ce.create(rootObject);
 			} catch (InferenceException e) {
-				throw new ExecutionException("unexpected exception when trying to infer missing elements", e);
+				throw new ExecutionException("Unexpected exception when trying to infer missing elements", e);
 			}
 		}
 		
@@ -113,178 +108,6 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand im
 		*/
 		
 		return CommandResult.newOKCommandResult();
-		
-	}
-
-
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.inference.ICreateElements#setValue(org.openiaml.model.model.wires.SyncWire, org.eclipse.emf.ecore.EReference, java.lang.Object)
-	 */
-	@Override
-	public void setValue(EObject element, EStructuralFeature reference, Object value) throws InferenceException {
-		try {
-			if (element == null)
-				return;
-			
-			SetValueCommand sv = new SetValueCommand(new SetRequest(getEditingDomain(), element, reference, value));
-			if (sv == null) {
-				// we can't do anything because the diagram editor won't allow us to create it currently
-				return;
-			}
-			doExecute(sv);
-		} catch (ExecutionException e) {
-			throw new InferenceException(e);
-		}
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.inference.ICreateElements#createElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass)
-	 */
-	@Override
-	public EObject createElement(EObject container, EClass elementType, EStructuralFeature ignored)
-			throws InferenceException {
-		try {
-			if (container == null)
-				return null;
-			
-			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest(getEditingDomain(), container, getDiagramEditType(elementType) ), elementType );
-			if (cc == null) {
-				// we can't do anything because the diagram editor won't allow us to create it currently
-				return null;
-			}
-			doExecute(cc);
-			
-			EObject createdElement = cc.getNewElement();
-			
-			return createdElement;
-		} catch (ExecutionException e) {
-			throw new InferenceException(e);
-		}
-	}
-
-
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.inference.ICreateElements#createRelationship(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject)
-	 */
-	@Override
-	public EObject createRelationship(EObject container, EClass elementType,
-			EObject source, EObject target, EStructuralFeature ignored, EStructuralFeature ignored2, EStructuralFeature ignored3) throws InferenceException {
-		try {
-			if (container == null || source == null || target == null)
-				return null;
-			
-			CreateElementCommand cc = getDiagramCreateRelationshipCommand(new CreateRelationshipRequest(getEditingDomain(), container, source, target, getDiagramEditType(elementType) ), elementType, source, target );
-			if (cc == null) {
-				// we can't do anything because the diagram editor won't allow us to create it currently
-				return null;
-			}
-			doExecute(cc);
-			
-			EObject createdElement = cc.getNewElement();
-			
-			return createdElement;
-		} catch (ExecutionException e) {
-			throw new InferenceException(e);
-		}
-	}
-
-	/**
-	 * @param createRelationshipRequest
-	 * @param source
-	 * @param target
-	 * @param target 
-	 * @return
-	 * @throws ExecutionException 
-	 */
-	private CreateElementCommand getDiagramCreateRelationshipCommand(
-			CreateRelationshipRequest request,
-			EClass elementType, EObject source, EObject target) throws ExecutionException {
-		/*
-		 * If any of these methods do not exist, make sure dynamic templates
-		 * are enabled for the .gmfgens.
-		 */
-		if (this.editorId.equals(org.openiaml.model.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.element.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.wire.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
-		}
-		
-		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
-
-	}
-
-	/**
-	 * @param elementType
-	 * @return
-	 * @throws ExecutionException 
-	 */
-	private IElementType getDiagramEditType(EClass elementType) throws ExecutionException {
-		/*
-		 * If any of these methods do not exist, make sure dynamic templates
-		 * are enabled for the .gmfgens.
-		 */
-		if (this.editorId.equals(org.openiaml.model.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.element.providers.IamlElementTypes.getElementType(elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.wire.providers.IamlElementTypes.getElementType(elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getElementType(elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getElementType(elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getElementType(elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.providers.IamlElementTypes.getElementType(elementType);
-		}
-		
-		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
-	}
-
-	/**
-	 * @param createElementRequest
-	 * @param elementType
-	 * @return
-	 * @throws ExecutionException 
-	 */
-	private CreateElementCommand getDiagramCreateNodeCommand(
-			CreateElementRequest request, EClass elementType) throws ExecutionException {
-		/*
-		 * If any of these methods do not exist, make sure dynamic templates
-		 * are enabled for the .gmfgens.
-		 */
-		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
-		}
-		
-		throw new ExecutionException("Unknown editor ID: "  + this.editorId);
 		
 	}
 	

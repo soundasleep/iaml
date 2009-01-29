@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.eclipse.migration;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 
 /**
@@ -36,5 +38,19 @@ public class MigrateSignupForm extends AbstractMigrateTestCase {
 	public String getModelMigrated() {
 		return "signup_form2.iaml";
 	}
+
+	/**
+	 * We actually expect there to be some warnings.
+	 */
+	@Override
+	protected void assertStatusOK(IStatus status) throws Exception {
+		if (status.getSeverity() == IStatus.WARNING && status instanceof MultiStatus) {
+			return;
+		}
+		// if not a multi-warning status, continue
+		super.assertStatusOK(status);
+	}
+	
+	
 	
 }

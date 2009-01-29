@@ -4,6 +4,8 @@
 package org.openiaml.model.tests.eclipse.migration;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.ui.IEditorPart;
 import org.openiaml.model.diagram.custom.actions.MigrateModelAction;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
@@ -45,8 +47,9 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 		// migrate the model
 		assertFalse("the target model should not exist yet", targetModel.exists());
 		MigrateModelAction a = new MigrateModelAction();
-		a.migrateModel(sourceModel, targetModel, monitor);
-		assertTrue("the target diagram should have been created", targetModel.exists());
+		IStatus status = a.migrateModel(sourceModel, targetModel, monitor);
+		assertStatusOK(status);
+		assertTrue("the target model should have been created", targetModel.exists());
 
 		// initialise the diagram
 		assertFalse("the target diagram should not exist yet", targetDiagram.exists());
@@ -64,6 +67,35 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 		editor = (IamlDiagramEditor) ep;
 	}
 	
+	/**
+	 * Assert that the IStatus is ok.
+	 * 
+	 * @param status
+	 * @throws Exception if there was a Throwable in the IStatus
+	 */
+	protected void assertStatusOK(IStatus status) throws Exception {
+		if (!status.isOK()) {
+			if (status.getException() != null) {
+				// rethrow
+				throw new RuntimeException(status.getMessage(), status.getException());
+			}
+			
+			if (status.isMultiStatus()) {
+				// build up the message to alert the developer
+				MultiStatus ms = (MultiStatus) status;
+				StringBuffer msg = new StringBuffer();
+				msg.append("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
+				for (IStatus s : ms.getChildren()) {
+					msg.append("\n").append(s.getMessage());
+				}
+				fail(msg.toString());
+			}
+			
+			// default fail
+			fail("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
+		}
+	}
+
 	/**
 	 * @return getModel() + "_diagram"
 	 */

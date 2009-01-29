@@ -33,6 +33,7 @@ import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.migrate.ExpectedMigrationException;
 import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
 import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
+import org.openiaml.model.diagram.custom.migrate.Migrate1To2;
 import org.openiaml.model.diagram.custom.migrate.MigrationException;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
@@ -175,6 +176,11 @@ public class MigrateModelAction implements IViewActionDelegate {
 			// get all the migrators
 			ArrayList<IamlModelMigrator> migrators = new ArrayList<IamlModelMigrator>();
 			migrators.add(new Migrate0To1());
+			migrators.add(new Migrate0To1());
+			migrators.add(new Migrate0To1());
+			migrators.add(new Migrate0To1());
+			migrators.add(new Migrate0To1());
+			migrators.add(new Migrate1To2());
 			
 			// load the initial document
 			Document doc = loadDocument(input.getContents());

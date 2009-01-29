@@ -7,13 +7,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.domain.AbstractDomainAttribute;
 
 /**
  * Implementation of the missing shortcuts for DomainStore.
@@ -40,7 +40,7 @@ public class CreateMissingDomainObjectShortcutsCommand extends
 		// StaticValue doesn't have in edges
 
 		// DomainAttribute
-		for (DomainAttribute child : rootObject.getAttributes()) {
+		for (AbstractDomainAttribute child : rootObject.getAttributes()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 
@@ -71,7 +71,7 @@ public class CreateMissingDomainObjectShortcutsCommand extends
 		}
 		
 		// DomainAttribute
-		for (DomainAttribute child : rootObject.getAttributes()) {
+		for (AbstractDomainAttribute child : rootObject.getAttributes()) {
 			connectionsOut.addAll( child.getOutEdges() );
 		}
 		

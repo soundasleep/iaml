@@ -49,9 +49,13 @@ public class Migrate0To1 implements IamlModelMigrator {
 
 			if (nsPackage.equals("http://openiaml.org/model") && 
 					rootId.isEmpty()) {
-				// this is us!
+				// this is us! (version 0.0)
 				return true;
 			}
+			
+			// always return true for now TODO remove me!
+			if (true)
+				return true;
 		} catch (Exception e) {
 			throw new MigrationException(e);
 		}

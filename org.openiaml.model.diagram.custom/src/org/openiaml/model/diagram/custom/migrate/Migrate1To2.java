@@ -35,6 +35,20 @@ import org.w3c.dom.Node;
  *     <li>Button</li>
  *     <li>Frame</li>
  *   </ol></li>
+ *   <li>New domain elements:
+ *   <ol>
+ *     <li>abstract AbstractDomainStore</li>
+ *     <li>abstract AbstractDomainObject</li>
+ *     <li>abstract AbstractDomainAttribute</li>
+ *     <li>type FileReference</li>
+ *     <li>FileDomainStore</li>
+ *   </ol></li>
+ *   <li>Domain element changes: (requires migration)
+ *   <ol>
+ *     <li>DomainStore now extends AbstractDomainStore</li>
+ *     <li>DomainObject now extends AbstractDomainObject</li>
+ *     <li>DomainAttribute now extends AbstractDomainAttribute</li>
+ *   </ol></li>
  *   <li>New elements:
  *   <ol>
  *     <li>abstract Scope</li>
@@ -44,7 +58,7 @@ import org.w3c.dom.Node;
  *     <li>LoginHandler</li>
  *   </ol></li>
  *   <li>
- *   <ol>Renamed elements:
+ *   <ol>Renamed elements: (requires migration)
  *     <li>StopNode --> CancelNode</li>
  *   </ol></li>
  * </ol>
@@ -56,6 +70,10 @@ import org.w3c.dom.Node;
  */
 public class Migrate1To2 implements IamlModelMigrator {
 
+	public final String XSI = "http://www.w3.org/2001/XMLSchema-instance";
+	public final String IAML = "http://openiaml.org/model";
+	public final String IAML_DOMAIN = "http://openiaml.org/model/domain";
+	
 	public String getName() {
 		return "Migrator 0.1 to 0.2";
 	}
@@ -73,11 +91,6 @@ public class Migrate1To2 implements IamlModelMigrator {
 	 */
 	@Override
 	public boolean isVersion(Document doc) throws MigrationException {
-		// we will always ignore this version for now, until 
-		// we actually implement the migration action
-		if (true)
-			return false;
-		
 		try {
 			// get parameters
 			String nsPackage = doc.getDocumentElement().getAttribute("xmlns:iaml");
@@ -85,7 +98,7 @@ public class Migrate1To2 implements IamlModelMigrator {
 
 			if (nsPackage.equals("http://openiaml.org/model") && 
 					!rootId.isEmpty()) {
-				// this is us!
+				// this is us! (version 0.1) 
 				return true;
 			}
 		} catch (Exception e) {
@@ -101,9 +114,6 @@ public class Migrate1To2 implements IamlModelMigrator {
 	@Override
 	public Document migrate(Document inputDoc, IProgressMonitor monitor, List<ExpectedMigrationException> errors)
 			throws MigrationException {
-		
-		// TODO implement migrate code from 0.1 to 0.2
-		
 		try {
 			// create the new document (output)
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -216,6 +226,13 @@ public class Migrate1To2 implements IamlModelMigrator {
 	 * 
 	 * <b>NOTE:</b> This is where all the logic for migration is stored.
 	 * 
+	 * TODO refactor this out, e.g. into cycleOverAttributes() etc,
+	 * that can be extended where required by migrators. This should
+	 * reduce the complexity and chance of errors.
+	 * 
+	 * TODO add a test case which purposefully migrates the model
+	 * twice.
+	 * 
 	 * @param element
 	 * @param output
 	 * @param document
@@ -223,72 +240,44 @@ public class Migrate1To2 implements IamlModelMigrator {
 	protected void recurseOverDocument(Element element,
 			Node output, Document document, List<ExpectedMigrationException> errors) {
 		String nodeName = element.getNodeName();
-		
-		// <edges> --> <wires>
-		if (element.getNodeName().equals("edges")) {
-			nodeName = "wires";
-		}
+
+		Element parentNode = (element.getParentNode() != null && element.getParentNode() instanceof Element) ?
+				(Element) element.getParentNode() : null;
+
 		Element e = document.createElement( nodeName );
-		
-		// an <operation> can no longer contain <wires>
-		if (element.getNodeName().equals("edges") && output.getNodeName().equals("operations")) {
-			errors.add( new ExpectedMigrationException( this, element, "<operation> can no longer contain <edges>" ) );
-			addDeletedReference(element);
-			return;
+
+		// <domainStores> --> <domainStores xsi:type="iaml:DomainStore">
+		if (element.getNodeName().equals("domainStores") && element.getAttribute("xsi:type").isEmpty()) {
+			e.setAttribute("xsi:type", "iaml:DomainStore");
 		}
-		
+
+		// <children> --> <children xsi:type="iaml:DomainObject">
+		if (element.getNodeName().equals("children") && element.getAttribute("xsi:type").isEmpty()
+				&& parentNode != null && parentNode.getNodeName().equals("domainStores")) {
+			e.setAttribute("xsi:type", "iaml:DomainObject");
+		}
+
+		// <attributes> --> <attributes xsi:type="iaml:DomainAttribute">
+		if (element.getNodeName().equals("attributes") && element.getAttribute("xsi:type").isEmpty()) {
+			e.setAttribute("xsi:type", "iaml:DomainAttribute");
+		}
+
 		// cycle over attributes
 		for (int i = 0; i < element.getAttributes().getLength(); i++) {
 			Node n = element.getAttributes().item(i);
 			String value = n.getNodeValue();
 			
-			// should we replace IDs?
-			if (value.indexOf("//@") >= 0) {
-				value = replaceReferences(value);
-			}
-			
 			e.setAttribute( n.getNodeName(), value );
-		}
-		
-		// does it have an id?
-		if (element.getAttribute("id").isEmpty()) {
-			String oldId = calculateOldId(element);
-			String newId = getMigratedId(oldId);
-			idMap.put(oldId, newId);
-			e.setAttribute("id", newId);
 		}
 		
 		// should we replace the xsi:type?
 		if (!element.getAttribute("xsi:type").isEmpty()) {
-			// RunWire --> RunInstanceWire
 			String xsiType = element.getAttribute("xsi:type");
-			if (xsiType.equals("iaml.wires:RunWire")) {
-				xsiType = "iaml.wires:RunInstanceWire";
-			}
 
-			// ProvidedParameterWire --> ParameterWire
-			if (xsiType.equals("iaml.wires:ProvidedParameterWire")) {
-				xsiType = "iaml.wires:ParameterWire";
-			}
-
-			// PropertyToExecutionWire has been removed
-			if (xsiType.equals("iaml.wires:PropertyToExecutionWire")) {
-				errors.add( new ExpectedMigrationException( this, element, "Type PropertyToExecutionWire no longer exists" ) );
-				addDeletedReference(element);
-				return;
-			}
-			
-			// we can no longer have operations that are StartNodes:
-			// replace with a normal operation
-			if (element.getNodeName().equals("operations")) {
-				if (xsiType.equals("iaml.operations:StartNode") ||
-						xsiType.equals("iaml.operations:StopNode") ||
-						xsiType.equals("iaml.operations:FinishNode")) {
-					xsiType = "iaml:ChainedOperation";
-					// we can't add an attribute that isn't in the EMF model
-					// e.setAttribute("migratedWarning", "operations can no longer be StartNode, StopNode or FinishNode");
-					errors.add( new ExpectedMigrationException( this, element, "Operations can no longer be of type StartNode, StopNode or FinishNode; operation changed to ChainedOperation" ) );
-				}
+			// <nodes xsi:type="iaml.operations:StopNode"> 
+			// --> <nodes xsi:type="iaml.operations:CancelNode">
+			if (e.getNodeName().equals("nodes") && element.getAttribute("xsi:type").equals("iaml.operations:StopNode")) {
+				e.setAttribute("xsi:type", "iaml.operations:CancelNode");
 			}
 
 			e.setAttribute("xsi:type", xsiType);
@@ -307,22 +296,6 @@ public class Migrate1To2 implements IamlModelMigrator {
 		output.appendChild(e);
 	}
 	
-	/**
-	 * Replace "//@foo.1/@bar.2 //@car.3" with "id1 id2"
-	 * 
-	 * @param value
-	 * @return
-	 */
-	private String replaceReferences(String value) {
-		// multiple references in here?
-		String[] references = value.split(" ");
-		String newValue = "";
-		for (String ref : references) {
-			newValue += getMigratedId(ref) + " ";
-		}
-		return newValue.trim();
-	}
-
 	/**
 	 * Calculate what would be the old ID for this element.
 	 * 

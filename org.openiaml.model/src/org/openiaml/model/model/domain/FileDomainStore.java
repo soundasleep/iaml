@@ -7,6 +7,8 @@
 package org.openiaml.model.model.domain;
 
 import org.openiaml.model.FileReference;
+import org.openiaml.model.inference.EcoreCreateElementsHelper;
+import org.openiaml.model.inference.InferenceException;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,5 +52,14 @@ public interface FileDomainStore extends AbstractDomainStore {
 	 * @generated
 	 */
 	void setFile(FileReference value);
+
+	/**
+	 * Regenerate elements, based on changes in the FileReference, if needed.
+	 * 
+	 * @generated NOT
+	 * @throws InferenceException if something bad happens
+	 * @return true if the model has changed
+	 */
+	boolean refreshMappings(EcoreCreateElementsHelper handler) throws InferenceException;
 
 } // FileDomainStore

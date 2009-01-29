@@ -10,6 +10,10 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.openiaml.model.FileReference;
+import org.openiaml.model.inference.EcoreCreateElementsHelper;
+import org.openiaml.model.inference.InferenceException;
+import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.FileDomainStore;
 
@@ -158,6 +162,25 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 		result.append(file);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * Does the real work of refreshing the mapping between elements
+	 * to the source database, based on changes in the FileReference, if needed.
+	 * 
+	 * @generated NOT 
+	 * @see org.openiaml.model.model.domain.FileDomainStore#refreshMappings(org.openiaml.model.inference.EcoreCreateElementsHelper)
+	 */
+	@Override
+	public boolean refreshMappings(EcoreCreateElementsHelper handler)
+			throws InferenceException {
+		
+		// for now, just create a new element
+		CompositeOperation co = handler.generatedCompositeOperation(this, this);
+		handler.setValue(co, ModelPackage.eINSTANCE.getNamedElement_Name(), "test");
+		
+		return true;
+		
 	}
 
 } //FileDomainStoreImpl

@@ -15,8 +15,8 @@ public class InferenceException extends Exception {
 	/**
 	 * @param e
 	 */
-	public InferenceException(Exception e) {
-		super(e);
+	public InferenceException(Throwable e) {
+		super(e.getMessage(), e);
 	}
 	
 	public InferenceException(String message) {
@@ -25,10 +25,10 @@ public class InferenceException extends Exception {
 
 	/**
 	 * @param message
-	 * @param e
+	 * @param throwable
 	 */
-	public InferenceException(String message, Exception e) {
-		super(message, e);
+	public InferenceException(String message, Throwable throwable) {
+		super(message, throwable);
 	}
 
 }

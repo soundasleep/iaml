@@ -181,4 +181,38 @@
       
 	</extension>
 
+	<!-- add a 'refresh mappings' command to FileDomainStore elements -->
+	<!-- following http://wiki.eclipse.org/GMF_Tutorial_Part_3 -->
+		
+	<extension point="org.eclipse.ui.commands">
+		<category name="IAML" description="Commands related to IAML diagrams." 
+			id="org.openiaml.model.diagram.custom.commands.iaml"/>
+		<command categoryId="org.openiaml.model.diagram.custom.commands.iaml" 
+			description="Refreshes the mappings of FileDomainStore elements" 
+			id="org.openiaml.model.diagram.custom.commands.iaml.refresh"
+			name="Refresh mappings">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.model.diagram.custom.commands.iaml.refresh.menu"
+            objectClass="org.openiaml.model.model.diagram.edit.parts.FileDomainStoreEditPart">
+         <menu 
+            id="ModelActions" 
+            label="&amp;IAML Model" 
+            path="actions"> 
+            <separator name="group1" />
+         </menu>
+         <action
+               class="org.openiaml.model.diagram.custom.actions.RefreshMappingsAction"
+               enablesFor="1"
+               id="org.openiaml.model.diagram.custom.actions.refresh"
+               label="&amp;Subtopic"
+               menubarPath="ModelActions/group1">
+         </action>
+      </objectContribution>                    
+	</extension>
+
 </plugin>

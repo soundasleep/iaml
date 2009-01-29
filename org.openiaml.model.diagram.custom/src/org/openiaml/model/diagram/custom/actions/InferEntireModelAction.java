@@ -22,8 +22,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
-import org.openiaml.model.codegen.ICodeGenerator;
-import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.InferenceException;

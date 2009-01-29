@@ -29,7 +29,7 @@
       <styles xmi:type="notation:LineStyle" xmi:id="_NwC1guwTEd2lsvoKggsckQ"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_NwC1g-wTEd2lsvoKggsckQ" hint="Iaml_Store"/>
       <element xmi:type="iaml:DomainStore" href="generation-sync-multiple.iaml#model.11d83490915.30d"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NwC1hOwTEd2lsvoKggsckQ" x="456" y="72"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NwC1hOwTEd2lsvoKggsckQ" x="264" y="180"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Nq-vQewTEd2lsvoKggsckQ"/>
     <element xmi:type="iaml:InternetApplication" href="generation-sync-multiple.iaml#model.11d83490915.308"/>

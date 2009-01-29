@@ -1,14 +1,7 @@
 package org.openiaml.model.diagram.custom.migrate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -68,11 +61,7 @@ import org.w3c.dom.Node;
  * @author jmwright
  *
  */
-public class Migrate1To2 implements IamlModelMigrator {
-
-	public final String XSI = "http://www.w3.org/2001/XMLSchema-instance";
-	public final String IAML = "http://openiaml.org/model";
-	public final String IAML_DOMAIN = "http://openiaml.org/model/domain";
+public class Migrate1To2 extends DomBasedMigrator implements IamlModelMigrator {
 	
 	public String getName() {
 		return "Migrator 0.1 to 0.2";
@@ -109,248 +98,81 @@ public class Migrate1To2 implements IamlModelMigrator {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.openiaml.model.diagram.custom.actions.MigrateModelAction.IamlModelMigrator#migrate(org.eclipse.core.resources.IFile, org.eclipse.core.resources.IFile, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#getRenamedNode(java.lang.String, org.w3c.dom.Element, java.util.List)
 	 */
 	@Override
-	public Document migrate(Document inputDoc, IProgressMonitor monitor, List<ExpectedMigrationException> errors)
-			throws MigrationException {
-		try {
-			// create the new document (output)
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document newDoc = db.newDocument();
-			
-			// cycle through each element and add "id" attributes
-			// and map their "id" attribute to their original position
-			idMap = new HashMap<String,String>();
-			recurseOverDocument(inputDoc, newDoc, errors);
-			
-			// we now have our new model
-			return newDoc;
-
-		} catch (Exception e) {
-			throw new MigrationException(e);
-		}
-	}
-
-	/**
-	 * @see #removeDeletedReferences(Element)
-	 */
-	protected List<String> deletedIds;
-	
-	/**
-	 * Do the model migration, and then remove referenced
-	 * element attributes that have been deleted during the
-	 * migration process.
-	 * 
-	 * @see #recurseOverDocument(Element, Node, Document)
-	 * @see #removeDeletedReferences(Element)
-	 * @param input
-	 * @param output
-	 */
-	protected void recurseOverDocument(Document input, Document output, List<ExpectedMigrationException> errors) {
-		// reset deleted list
-		deletedIds = new ArrayList<String>();
+	public String getRenamedNode(String nodeName, Element element,
+			List<ExpectedMigrationException> errors) {
 		
-		// recurse over the document, adding elements and translating
-		// where necessary
-		recurseOverDocument( input.getDocumentElement(), output, output, errors );
-		
-		// go over all deleted elements and remove them from all
-		// referenced attributes
-		removeDeletedReferences(output.getDocumentElement());
+		// does nothing
+		return nodeName;
 	}
-	
-	/**
-	 * We need to be able to handle removed references. Because
-	 * a reference may be deleted either at the start or end of the document,
-	 * and before or after we have translated any references to it,
-	 * we must remove deleted references <em>after</em> the translation
-	 * process has been completed.
-	 * 
-	 * This may be quite slow.
-	 * 
-	 * @param element
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#handleAttribute(java.lang.String, java.lang.String, org.w3c.dom.Element, java.util.List)
 	 */
-	protected void removeDeletedReferences(Element element) {
-		for (String id : deletedIds) {
-			for (int i = 0; i < element.getAttributes().getLength(); i++) {
-				String attrName = element.getAttributes().item(i).getNodeName();
-				String attrValue = element.getAttributes().item(i).getNodeValue();
-				
-				// does this attribute have it?
-				if (attrValue.equals(id)) {
-					element.removeAttribute(attrName);
-				} else if (attrValue.indexOf(id + " ") == 0) {
-					// starts with it
-					element.setAttribute(attrName, attrValue.substring( attrValue.indexOf(id + " " )));
-				} else if (attrValue.indexOf(" " + id) > 0) {
-					// ends with it
-					element.setAttribute(attrName, attrValue.substring( 0, attrValue.indexOf(" " + id )));
-				}
-				
-			}
+	@Override
+	public String handleAttribute(String name, String value, Element element,
+			List<ExpectedMigrationException> errors) {
+
+		// does nothing		
+		return value;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#replaceType(org.w3c.dom.Element, java.lang.String, java.util.List)
+	 */
+	@Override
+	public String replaceType(Element element, String xsiType,
+			List<ExpectedMigrationException> errors) {
+
+		// <nodes xsi:type="iaml.operations:StopNode"> 
+		// --> <nodes xsi:type="iaml.operations:CancelNode">
+		if (element.getNodeName().equals("nodes") && xsiType.equals("iaml.operations:StopNode")) {
+			xsiType = "iaml.operations:CancelNode";
 		}
+
+		return xsiType;
 		
-		// process over child nodes
-		for (int i = 0; i < element.getChildNodes().getLength(); i++) {
-			Node n = element.getChildNodes().item(i);
-			if (n instanceof Element) {
-				removeDeletedReferences((Element) n);
-			}
-		}
-	}
-	
-	/**
-	 * Calculate the old and new IDs for this element, add the
-	 * mapping (for future references), and add it as a deleted reference.
-	 * 
-	 * @param element
-	 */
-	protected void addDeletedReference(Element element) {
-		String oldId = calculateOldId(element);
-		String newId = getMigratedId(oldId);
-		idMap.put(oldId, newId);
-		deletedIds.add(newId);
 	}
 
-	/**
-	 * For generating new migration IDs
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#shouldDeleteNode(org.w3c.dom.Element, org.w3c.dom.Node, java.util.List)
 	 */
-	private int idCounter = 0;
-	
-	/**
-	 * Here we recurse over a document, doing the actual migration.
-	 * We can rename, remove or add nodes, and change attributes or
-	 * types (xsi:type).
-	 * 
-	 * <b>NOTE:</b> This is where all the logic for migration is stored.
-	 * 
-	 * TODO refactor this out, e.g. into cycleOverAttributes() etc,
-	 * that can be extended where required by migrators. This should
-	 * reduce the complexity and chance of errors.
-	 * 
-	 * TODO add a test case which purposefully migrates the model
-	 * twice.
-	 * 
-	 * @param element
-	 * @param output
-	 * @param document
+	@Override
+	public boolean shouldDeleteNode(Element element, Node parent,
+			List<ExpectedMigrationException> errors) {
+
+		// does nothing		
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#handleElement(org.w3c.dom.Element, org.w3c.dom.Element, java.util.List)
 	 */
-	protected void recurseOverDocument(Element element,
-			Node output, Document document, List<ExpectedMigrationException> errors) {
-		String nodeName = element.getNodeName();
-
-		Element parentNode = (element.getParentNode() != null && element.getParentNode() instanceof Element) ?
-				(Element) element.getParentNode() : null;
-
-		Element e = document.createElement( nodeName );
+	@Override
+	public void handleElement(Element old, Element element,
+			List<ExpectedMigrationException> errors) {
+		
+		Element parentNode = (old.getParentNode() != null && old.getParentNode() instanceof Element) ?
+				(Element) old.getParentNode() : null;
 
 		// <domainStores> --> <domainStores xsi:type="iaml:DomainStore">
-		if (element.getNodeName().equals("domainStores") && element.getAttribute("xsi:type").isEmpty()) {
-			e.setAttribute("xsi:type", "iaml:DomainStore");
+		if (old.getNodeName().equals("domainStores") && old.getAttribute("xsi:type").isEmpty()) {
+			element.setAttribute("xsi:type", "iaml:DomainStore");
 		}
 
 		// <children> --> <children xsi:type="iaml:DomainObject">
-		if (element.getNodeName().equals("children") && element.getAttribute("xsi:type").isEmpty()
+		if (old.getNodeName().equals("children") && old.getAttribute("xsi:type").isEmpty()
 				&& parentNode != null && parentNode.getNodeName().equals("domainStores")) {
-			e.setAttribute("xsi:type", "iaml:DomainObject");
+			element.setAttribute("xsi:type", "iaml:DomainObject");
 		}
 
 		// <attributes> --> <attributes xsi:type="iaml:DomainAttribute">
-		if (element.getNodeName().equals("attributes") && element.getAttribute("xsi:type").isEmpty()) {
-			e.setAttribute("xsi:type", "iaml:DomainAttribute");
+		if (old.getNodeName().equals("attributes") && old.getAttribute("xsi:type").isEmpty()) {
+			element.setAttribute("xsi:type", "iaml:DomainAttribute");
 		}
 
-		// cycle over attributes
-		for (int i = 0; i < element.getAttributes().getLength(); i++) {
-			Node n = element.getAttributes().item(i);
-			String value = n.getNodeValue();
-			
-			e.setAttribute( n.getNodeName(), value );
-		}
-		
-		// should we replace the xsi:type?
-		if (!element.getAttribute("xsi:type").isEmpty()) {
-			String xsiType = element.getAttribute("xsi:type");
-
-			// <nodes xsi:type="iaml.operations:StopNode"> 
-			// --> <nodes xsi:type="iaml.operations:CancelNode">
-			if (e.getNodeName().equals("nodes") && element.getAttribute("xsi:type").equals("iaml.operations:StopNode")) {
-				e.setAttribute("xsi:type", "iaml.operations:CancelNode");
-			}
-
-			e.setAttribute("xsi:type", xsiType);
-		}
-		
-		// recurse over children
-		for (int i = 0; i < element.getChildNodes().getLength(); i++) {
-			Node n = element.getChildNodes().item(i);
-			if (n.getNodeType() == Node.ELEMENT_NODE) {
-				recurseOverDocument((Element) n, e, document, errors);
-			} else {					
-				// e.appendChild(document.adoptNode(n));	// this also adds the children of the node, which we don't want 
-			}
-		}
-		
-		output.appendChild(e);
 	}
-	
-	/**
-	 * Calculate what would be the old ID for this element.
-	 * 
-	 * @param element
-	 * @return
-	 */
-	private String calculateOldId(Element element) {
-		Node n = element.getParentNode();
-		if (n == null || n instanceof Document || !(n instanceof Element)) {
-			return "/";		// root
-		}
-		return calculateOldId((Element) n) + "/@" + element.getNodeName() + "." + getNodeIndex(element);
-	}
-	
-	
-	/**
-	 * Get the migrated ID for this element. In some cases the element
-	 * will be referenced before the "id" attribute can be added;
-	 * in others, the references will occur after the "id" attribute
-	 * has been added.
-	 * 
-	 * @param oldId
-	 * @return
-	 */
-	private String getMigratedId(String oldId) {
-		if (idMap.containsKey(oldId)) {
-			return idMap.get(oldId);
-		}
-		String newId = "migrated" + idCounter++;
-		idMap.put(oldId, newId);
-		return newId;
-	}
-
-	/**
-	 * @param element
-	 * @return
-	 */
-	private int getNodeIndex(Element element) {
-		Node n = element.getParentNode();
-		int count = 0;
-		for (int i = 0; i < n.getChildNodes().getLength(); i++) {
-			Node nn = n.getChildNodes().item(i);
-			if (nn.getNodeName().equals(element.getNodeName())) {
-				if (nn.equals(element))
-					return count;
-				count++;
-			}
-		}
-		// should never get this far
-		throw new RuntimeException("Could not find frequency of node '" + element + "'");
-	}
-
-	/**
-	 * A map of old IDs ("//@foo.0") to new IDs ("foo1")
-	 */
-	protected Map<String,String> idMap;
 	
 }

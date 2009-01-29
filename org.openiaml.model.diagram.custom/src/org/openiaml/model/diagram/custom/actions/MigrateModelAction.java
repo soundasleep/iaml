@@ -174,13 +174,7 @@ public class MigrateModelAction implements IViewActionDelegate {
 		
 		try {
 			// get all the migrators
-			ArrayList<IamlModelMigrator> migrators = new ArrayList<IamlModelMigrator>();
-			migrators.add(new Migrate0To1());
-			migrators.add(new Migrate0To1());
-			migrators.add(new Migrate0To1());
-			migrators.add(new Migrate0To1());
-			migrators.add(new Migrate0To1());
-			migrators.add(new Migrate1To2());
+			List<IamlModelMigrator> migrators = getMigrators();
 			
 			// load the initial document
 			Document doc = loadDocument(input.getContents());
@@ -239,6 +233,23 @@ public class MigrateModelAction implements IViewActionDelegate {
 		}		
 	}
 	
+	/**
+	 * Get all of the migrators registered in the system.
+	 * They should be returned in order of migration, e.g. a
+	 * version 3-4 migrator should appear before a 5-6 migrator,
+	 * and after a 2-3 migrator.
+	 * 
+	 * In the future this might be implemented as an extension point.
+	 * 
+	 * @return A list of available model migrators.
+	 */
+	public List<IamlModelMigrator> getMigrators() {
+		List<IamlModelMigrator> migrators = new ArrayList<IamlModelMigrator>();
+		migrators.add(new Migrate0To1());
+		migrators.add(new Migrate1To2());
+		return migrators;
+	}
+
 	/**
 	 * Eclipse can't handle the RewindableInputStream that the XML reader
 	 * uses, and throws an IOException(read error). This happens because

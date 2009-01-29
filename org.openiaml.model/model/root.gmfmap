@@ -190,6 +190,8 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainStore"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DomainStore )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -253,7 +255,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/fileDomainStores"/>
+        href="iaml.ecore#//InternetApplication/domainStores"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//domain/FileDomainStore"/>

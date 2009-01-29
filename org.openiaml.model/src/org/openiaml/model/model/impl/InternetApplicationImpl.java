@@ -23,9 +23,7 @@ import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -36,7 +34,8 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.domain.FileDomainStore;
+import org.openiaml.model.model.domain.AbstractDomainObject;
+import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -64,7 +63,6 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRuntimeUrl <em>Runtime Url</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getSessions <em>Sessions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getLoginHandlers <em>Login Handlers</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getFileDomainStores <em>File Domain Stores</em>}</li>
  * </ul>
  * </p>
  *
@@ -209,7 +207,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DomainObject> domainObjects;
+	protected EList<AbstractDomainObject> domainObjects;
 
 	/**
 	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
@@ -259,7 +257,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DomainStore> domainStores;
+	protected EList<AbstractDomainStore> domainStores;
 
 	/**
 	 * The default value of the '{@link #getRuntimeUrl() <em>Runtime Url</em>}' attribute.
@@ -300,16 +298,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<LoginHandler> loginHandlers;
-
-	/**
-	 * The cached value of the '{@link #getFileDomainStores() <em>File Domain Stores</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFileDomainStores()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<FileDomainStore> fileDomainStores;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -527,9 +515,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainObject> getDomainObjects() {
+	public EList<AbstractDomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS);
+			domainObjects = new EObjectContainmentEList<AbstractDomainObject>(AbstractDomainObject.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -587,9 +575,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainStore> getDomainStores() {
+	public EList<AbstractDomainStore> getDomainStores() {
 		if (domainStores == null) {
-			domainStores = new EObjectContainmentEList<DomainStore>(DomainStore.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES);
+			domainStores = new EObjectContainmentEList<AbstractDomainStore>(AbstractDomainStore.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES);
 		}
 		return domainStores;
 	}
@@ -637,18 +625,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			loginHandlers = new EObjectContainmentEList<LoginHandler>(LoginHandler.class, this, ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS);
 		}
 		return loginHandlers;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<FileDomainStore> getFileDomainStores() {
-		if (fileDomainStores == null) {
-			fileDomainStores = new EObjectContainmentEList<FileDomainStore>(FileDomainStore.class, this, ModelPackage.INTERNET_APPLICATION__FILE_DOMAIN_STORES);
-		}
-		return fileDomainStores;
 	}
 
 	/**
@@ -704,8 +680,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getSessions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
 				return ((InternalEList<?>)getLoginHandlers()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__FILE_DOMAIN_STORES:
-				return ((InternalEList<?>)getFileDomainStores()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -755,8 +729,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getSessions();
 			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
 				return getLoginHandlers();
-			case ModelPackage.INTERNET_APPLICATION__FILE_DOMAIN_STORES:
-				return getFileDomainStores();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -803,7 +775,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
+				getDomainObjects().addAll((Collection<? extends AbstractDomainObject>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
 				getDomainViews().clear();
@@ -823,7 +795,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				getDomainStores().clear();
-				getDomainStores().addAll((Collection<? extends DomainStore>)newValue);
+				getDomainStores().addAll((Collection<? extends AbstractDomainStore>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl((String)newValue);
@@ -835,10 +807,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
 				getLoginHandlers().clear();
 				getLoginHandlers().addAll((Collection<? extends LoginHandler>)newValue);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__FILE_DOMAIN_STORES:
-				getFileDomainStores().clear();
-				getFileDomainStores().addAll((Collection<? extends FileDomainStore>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -906,9 +874,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
 				getLoginHandlers().clear();
 				return;
-			case ModelPackage.INTERNET_APPLICATION__FILE_DOMAIN_STORES:
-				getFileDomainStores().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -957,8 +922,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return sessions != null && !sessions.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
 				return loginHandlers != null && !loginHandlers.isEmpty();
-			case ModelPackage.INTERNET_APPLICATION__FILE_DOMAIN_STORES:
-				return fileDomainStores != null && !fileDomainStores.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.domain.impl.AbstractDomainAttributeImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ import org.openiaml.model.model.ModelPackage;
  *
  * @generated
  */
-public class DomainAttributeImpl extends ApplicationElementImpl implements DomainAttribute {
+public class DomainAttributeImpl extends AbstractDomainAttributeImpl implements DomainAttribute {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

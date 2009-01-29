@@ -35,6 +35,24 @@ public interface DomainFactory extends EFactory {
 	FileDomainStore createFileDomainStore();
 
 	/**
+	 * Returns a new object of class '<em>File Domain Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>File Domain Object</em>'.
+	 * @generated
+	 */
+	FileDomainObject createFileDomainObject();
+
+	/**
+	 * Returns a new object of class '<em>File Domain Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>File Domain Attribute</em>'.
+	 * @generated
+	 */
+	FileDomainAttribute createFileDomainAttribute();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

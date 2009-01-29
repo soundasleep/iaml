@@ -23,7 +23,6 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
@@ -33,6 +32,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
+import org.openiaml.model.model.domain.AbstractDomainObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -107,7 +107,7 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DomainObject> domainObjects;
+	protected EList<AbstractDomainObject> domainObjects;
 
 	/**
 	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
@@ -258,9 +258,9 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainObject> getDomainObjects() {
+	public EList<AbstractDomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS);
+			domainObjects = new EObjectContainmentEList<AbstractDomainObject>(AbstractDomainObject.class, this, ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -468,7 +468,7 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
+				getDomainObjects().addAll((Collection<? extends AbstractDomainObject>)newValue);
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS:
 				getDomainViews().clear();

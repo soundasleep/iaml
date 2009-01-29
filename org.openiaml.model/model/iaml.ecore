@@ -32,11 +32,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
         eType="#//EventTrigger" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//DomainAttribute" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//domain/AbstractDomainObject">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="changed" value="0.2 to extend the abstract counterpart"/>
+    </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//domain/AbstractDomainAttribute">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="changed" value="0.2 to extend the abstract counterpart"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" eSuperTypes="#//GeneratedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//ActivityNode #//DataFlowEdgesSource">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
@@ -115,9 +120,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//ApplicationElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainStores" upperBound="-1"
-        eType="#//DomainStore" containment="true">
+        eType="#//domain/AbstractDomainStore" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="not sure if this is necessary anymore... because now objects are stored as part of their scopes"/>
+        <details key="changed" value="0.2 to extend the abstract counterpart"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtimeUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -134,24 +140,13 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fileDomainStores" upperBound="-1"
-        eType="#//domain/FileDomainStore" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//domain/AbstractDomainStore">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="stores database objects"/>
       <details key="editor" value="org.openiaml.model.diagram.domain_store"/>
+      <details key="changed" value="0.2 to extend the abstract counterpart"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//DomainObject" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//ApplicationElementProperty" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
-        eType="#//DerivedView">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdge" eSuperTypes="#//GeneratedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DataFlowEdgesSource"
@@ -248,7 +243,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainObjects" upperBound="-1"
-        eType="#//DomainObject" containment="true"/>
+        eType="#//domain/AbstractDomainObject" containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="changed" value="0.2 to extend the abstract counterpart"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainViews" upperBound="-1"
         eType="#//DerivedView" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainInstances" upperBound="-1"
@@ -393,11 +392,35 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="domain" nsURI="http://openiaml.org/model/domain" nsPrefix="iaml.domain">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="added" value="0.2"/>
+    </eAnnotations>
     <eClassifiers xsi:type="ecore:EDataType" name="FileReference" instanceClassName="org.openiaml.model.FileReference"/>
-    <eClassifiers xsi:type="ecore:EClass" name="FileDomainStore" eSuperTypes="#//NamedElement">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempTypeString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainStore" abstract="true"
+        eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+          eType="#//domain/AbstractDomainObject" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//ApplicationElementProperty" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+          eType="#//DerivedView">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="added" value="0.2"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainObject" abstract="true"
+        eSuperTypes="#//ApplicationElement #//ContainsWires">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//domain/AbstractDomainAttribute" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainAttribute" abstract="true"
+        eSuperTypes="#//ApplicationElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FileDomainStore" eSuperTypes="#//domain/AbstractDomainStore">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1"
           eType="#//domain/FileReference"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FileDomainObject" eSuperTypes="#//domain/AbstractDomainObject"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FileDomainAttribute" eSuperTypes="#//domain/AbstractDomainAttribute"/>
   </eSubpackages>
 </ecore:EPackage>

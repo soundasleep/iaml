@@ -16,6 +16,8 @@ import org.openiaml.model.FileReference;
 import org.openiaml.model.impl.FileReferenceImpl;
 import org.openiaml.model.model.domain.DomainFactory;
 import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.domain.FileDomainAttribute;
+import org.openiaml.model.model.domain.FileDomainObject;
 import org.openiaml.model.model.domain.FileDomainStore;
 
 /**
@@ -63,6 +65,8 @@ public class DomainFactoryImpl extends EFactoryImpl implements DomainFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case DomainPackage.FILE_DOMAIN_STORE: return createFileDomainStore();
+			case DomainPackage.FILE_DOMAIN_OBJECT: return createFileDomainObject();
+			case DomainPackage.FILE_DOMAIN_ATTRIBUTE: return createFileDomainAttribute();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -106,6 +110,26 @@ public class DomainFactoryImpl extends EFactoryImpl implements DomainFactory {
 	public FileDomainStore createFileDomainStore() {
 		FileDomainStoreImpl fileDomainStore = new FileDomainStoreImpl();
 		return fileDomainStore;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FileDomainObject createFileDomainObject() {
+		FileDomainObjectImpl fileDomainObject = new FileDomainObjectImpl();
+		return fileDomainObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FileDomainAttribute createFileDomainAttribute() {
+		FileDomainAttributeImpl fileDomainAttribute = new FileDomainAttributeImpl();
+		return fileDomainAttribute;
 	}
 
 	/**

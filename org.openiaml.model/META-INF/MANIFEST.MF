@@ -10,6 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.openiaml.model,
  org.openiaml.model.codegen,
  org.openiaml.model.diagramextensions,
+ org.openiaml.model.impl,
  org.openiaml.model.inference,
  org.openiaml.model.model,
  org.openiaml.model.model.components,

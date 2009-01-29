@@ -27,17 +27,16 @@ import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.AbstractDomainAttribute;
+import org.openiaml.model.model.domain.AbstractDomainObject;
+import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -128,9 +127,9 @@ public class CreateMissingElementsWithDrools {
 				}
 				
 				// DomainStore
-				if (obj.getObject() instanceof DomainStore) {
-					DomainStore a = (DomainStore) obj.getObject();
-					for (DomainObject child : a.getChildren()) {
+				if (obj.getObject() instanceof AbstractDomainStore) {
+					AbstractDomainStore a = (AbstractDomainStore) obj.getObject();
+					for (AbstractDomainObject child : a.getChildren()) {
 						workingMemory.insert( child );
 					}
 					for (ApplicationElementProperty child : a.getProperties()) {
@@ -139,9 +138,9 @@ public class CreateMissingElementsWithDrools {
 				}				
 
 				// DomainObject
-				if (obj.getObject() instanceof DomainObject) {
-					DomainObject a = (DomainObject) obj.getObject();
-					for (DomainAttribute child : a.getAttributes()) {
+				if (obj.getObject() instanceof AbstractDomainObject) {
+					AbstractDomainObject a = (AbstractDomainObject) obj.getObject();
+					for (AbstractDomainAttribute child : a.getAttributes()) {
 						workingMemory.insert( child );
 					}
 				}
@@ -155,7 +154,7 @@ public class CreateMissingElementsWithDrools {
 					for (ApplicationElement child : a.getChildren()) {
 						workingMemory.insert( child );
 					}
-					for (DomainStore child : a.getDomainStores()) {
+					for (AbstractDomainStore child : a.getDomainStores()) {
 						workingMemory.insert( child );
 					}
 					for (Session child : a.getSessions()) {
@@ -169,7 +168,7 @@ public class CreateMissingElementsWithDrools {
 					for (DomainObjectInstance child : a.getDomainInstances()) {
 						workingMemory.insert( child );
 					}
-					for (DomainObject child : a.getDomainObjects()) {
+					for (AbstractDomainObject child : a.getDomainObjects()) {
 						workingMemory.insert( child );
 					}
 					for (DerivedView child : a.getDomainViews()) {

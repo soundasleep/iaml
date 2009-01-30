@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.command.CreateChildCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
@@ -22,6 +23,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
+import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 
 /**
@@ -58,16 +60,18 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	 * @see org.openiaml.model.inference.ICreateElements#createElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature)
 	 */
 	@Override
-	public EObject createElement(EObject container, EClass elementType,
+	public EObject createElement(final EObject container, EClass elementType,
 			EStructuralFeature containerFeature) throws InferenceException {
 		try {
 			if (container == null)
-				return null;
+				// return null;
+				throw new InferenceException("Cannot create an element in a null container");
 			
 			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest(getEditingDomain(), container, getDiagramEditType(elementType) ), elementType );
 			if (cc == null) {
 				// we can't do anything because the diagram editor won't allow us to create it currently
-				return null;
+				//return null;
+				throw new InferenceException("Cannot create an element " + elementType + " in the editing domain " + getEditingDomain());
 			}
 			doExecute(cc);
 			
@@ -97,12 +101,14 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 			throws InferenceException {
 		try {
 			if (container == null || source == null || target == null)
-				return null;
+				//return null;
+				throw new InferenceException("Cannot create a relationship in a null container, source or target");
 			
 			CreateElementCommand cc = getDiagramCreateRelationshipCommand(new CreateRelationshipRequest(getEditingDomain(), container, source, target, getDiagramEditType(elementType) ), elementType, source, target );
 			if (cc == null) {
 				// we can't do anything because the diagram editor won't allow us to create it currently
-				return null;
+				//return null;
+				throw new InferenceException("Cannot create a relationship " + elementType + " in the editing domain " + getEditingDomain());
 			}
 			doExecute(cc);
 			
@@ -122,12 +128,14 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 			Object value) throws InferenceException {
 		try {
 			if (element == null)
-				return;
+				//return;
+				throw new InferenceException("Cannot set a value on a null element");
 			
 			SetValueCommand sv = new SetValueCommand(new SetRequest(getEditingDomain(), element, reference, value));
 			if (sv == null) {
 				// we can't do anything because the diagram editor won't allow us to create it currently
-				return;
+				//return;
+				throw new InferenceException("Cannot set a value " + reference + " on the element " + element);
 			}
 			doExecute(sv);
 		} catch (ExecutionException e) {

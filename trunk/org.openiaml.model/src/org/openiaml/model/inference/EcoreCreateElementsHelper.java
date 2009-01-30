@@ -23,6 +23,10 @@ import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.domain.FileDomainAttribute;
+import org.openiaml.model.model.domain.FileDomainObject;
+import org.openiaml.model.model.domain.FileDomainStore;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -193,6 +197,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		Button button = (Button) createElement( container, VisualPackage.eINSTANCE.getButton(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
 		setGeneratedBy(button, by);
 		return button;
+	}
+	
+	public FileDomainObject generatedFileDomainObject(GeneratesElements by, FileDomainStore container) throws InferenceException {
+		FileDomainObject object = (FileDomainObject) createElement( container, DomainPackage.eINSTANCE.getFileDomainObject(), DomainPackage.eINSTANCE.getAbstractDomainStore_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+	
+	public FileDomainAttribute generatedFileDomainAttribute(GeneratesElements by, FileDomainObject container) throws InferenceException {
+		FileDomainAttribute object = (FileDomainAttribute) createElement( container, DomainPackage.eINSTANCE.getFileDomainAttribute(), DomainPackage.eINSTANCE.getAbstractDomainObject_Attributes() );
+		setGeneratedBy(object, by);
+		return object;
 	}
 	
 }

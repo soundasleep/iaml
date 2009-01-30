@@ -6,6 +6,12 @@
  */
 package org.openiaml.model.model.domain.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -14,7 +20,11 @@ import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.domain.AbstractDomainAttribute;
+import org.openiaml.model.model.domain.AbstractDomainObject;
 import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.domain.FileDomainAttribute;
+import org.openiaml.model.model.domain.FileDomainObject;
 import org.openiaml.model.model.domain.FileDomainStore;
 
 /**
@@ -168,6 +178,19 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 	 * Does the real work of refreshing the mapping between elements
 	 * to the source database, based on changes in the FileReference, if needed.
 	 * 
+	 * This file domain store is based on a properties file, which
+	 * will be represented in the model like so:
+	 * 
+	 * <pre>
+	 * FileDomainStore [foo.properties]
+	 * - FileDomainObject [properties]
+	 *   - FileDomainAttribute [name='prop1' value='value1']
+	 *   - FileDomainAttribute [name='prop2' value='value2']
+	 *   - ...
+	 * </pre>
+	 * 
+	 * That is, there is only one DomainObject but many Attributes.
+	 * 
 	 * @generated NOT 
 	 * @see org.openiaml.model.model.domain.FileDomainStore#refreshMappings(org.openiaml.model.inference.EcoreCreateElementsHelper)
 	 */
@@ -175,11 +198,100 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 	public boolean refreshMappings(EcoreCreateElementsHelper handler)
 			throws InferenceException {
 		
+		try {
+			if (getFile() == null)
+				throw new InferenceException("No file to map to");
+			File f = getFile().toFile();
+			if (!f.exists())
+				throw new InferenceException("File does not exist: " + f);
+			if (!f.canRead())
+				throw new InferenceException("Cannot read file: " + f);
+			Properties props = new Properties();
+			props.load(new FileInputStream(f));
+			
+			// create and load the domain object if necessary
+			refreshFileDomainObject(handler, props);
+			
+		} catch (FileNotFoundException e) {
+			throw new InferenceException(e);
+		} catch (IOException e) {
+			throw new InferenceException(e);
+		}
+		
 		// for now, just create a new element
 		CompositeOperation co = handler.generatedCompositeOperation(this, this);
 		handler.setValue(co, ModelPackage.eINSTANCE.getNamedElement_Name(), "test");
 		
 		return true;
+		
+	}
+
+	/**
+	 * Create or update the FileDomainObject for this file; cycle over
+	 * properties and insert FileDomainAttributes where necessary.
+	 * 
+	 * @param handler
+	 * @param props
+	 * @return
+	 * @throws InferenceException
+	 * @generated NOT 
+	 */
+	protected FileDomainObject refreshFileDomainObject(EcoreCreateElementsHelper handler, Properties props) throws InferenceException {
+		FileDomainObject fdo = null;
+		
+		// existing one
+		for (AbstractDomainObject ado : this.getChildren()) {
+			if (ado instanceof FileDomainObject && ((FileDomainObject) ado).getName().equals("properties")) {
+				fdo = (FileDomainObject) ado;
+				break;
+			}
+		}
+		
+		// create a new one
+		if (fdo == null) {
+			fdo = handler.generatedFileDomainObject(this, this);
+		}
+		
+		// cycle over properties
+		for (String key : props.stringPropertyNames()) {
+			refreshFileDomainAttribute(fdo, handler, key);
+		}
+		
+		return fdo;
+	}
+
+	/**
+	 * Create or update the FileDomainAttribute for this attribute.
+	 * 
+	 * @param fdo
+	 * @param handler
+	 * @param key
+	 * @return 
+	 * @generated NOT 
+	 * @throws InferenceException 
+	 */
+	protected FileDomainAttribute refreshFileDomainAttribute(FileDomainObject fdo,
+			EcoreCreateElementsHelper handler, String key) throws InferenceException {
+		
+		FileDomainAttribute fda = null;
+		
+		// existing one
+		for (AbstractDomainAttribute ado : fdo.getAttributes()) {
+			if (ado instanceof AbstractDomainAttribute && ((AbstractDomainAttribute) ado).getName().equals("properties")) {
+				fda = (FileDomainAttribute) ado;
+				break;
+			}
+		}
+		
+		// create a new one
+		if (fda == null) {
+			fda = handler.generatedFileDomainAttribute(fdo, fdo);
+		}
+		
+		// refresh it (the name)
+		handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), key);
+		
+		return fda;
 		
 	}
 

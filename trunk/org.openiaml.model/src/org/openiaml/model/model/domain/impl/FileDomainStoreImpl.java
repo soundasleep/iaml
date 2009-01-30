@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.openiaml.model.FileReference;
@@ -199,9 +200,12 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 			throws InferenceException {
 		
 		try {
+			// we need to get the relative path
+			URI relativePath = this.eResource().getURI();
+			
 			if (getFile() == null)
 				throw new InferenceException("No file to map to");
-			File f = getFile().toFile();
+			File f = getFile().toFile(relativePath);
 			if (!f.exists())
 				throw new InferenceException("File does not exist: " + f);
 			if (!f.canRead())

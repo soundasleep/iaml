@@ -5,6 +5,8 @@ package org.openiaml.model.impl;
 
 import java.io.File;
 
+import org.eclipse.emf.common.CommonPlugin;
+import org.eclipse.emf.common.util.URI;
 import org.openiaml.model.FileReference;
 
 /**
@@ -34,11 +36,14 @@ public class FileReferenceImpl implements FileReference {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.openiaml.model.FileReference#toFile()
+	 * @see org.openiaml.model.FileReference#toFile(org.eclipse.emf.common.util.URI)
 	 */
 	@Override
-	public File toFile() {
-		return new File(fileName);
+	public File toFile(URI relativePath) {
+		URI self = URI.createURI(fileName);
+		URI resolved = self.resolve(relativePath);
+		URI tofs = CommonPlugin.resolve(resolved);
+		return new File(tofs.toFileString());
 	}
 
 }

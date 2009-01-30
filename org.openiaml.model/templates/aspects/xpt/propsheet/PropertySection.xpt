@@ -61,13 +61,29 @@
 						org.eclipse.swt.widgets.Shell shell = org.eclipse.ui.PlatformUI.getWorkbench().getDisplay()
 								.getActiveShell();
 						org.eclipse.swt.widgets.FileDialog dialog = new org.eclipse.swt.widgets.FileDialog(shell, org.eclipse.swt.SWT.OPEN);
+						
+						// set the default path
+						org.eclipse.emf.common.util.URI uri = ((org.eclipse.emf.ecore.EObject) object).eResource().getURI();
+						org.eclipse.emf.common.util.URI resolved = CommonPlugin.resolve(uri);
+						resolved = resolved.trimFileExtension();	// remove the file part
+						dialog.setFilterPath( resolved.toFileString() );
+						
+						// set the default file
+						// (the FileDialog also handles absolute/relative files)
 						dialog.setFileName(valueHandler.toString(getValue()));
+						
 						String fileSelected = dialog.open();
 						if (fileSelected == null) {
 							return getValue();
 						}
+						
+						// extract out the source path to make it relative
+						org.eclipse.emf.common.util.URI deres = org.eclipse.emf.common.util.URI.createFileURI(fileSelected).deresolve(resolved);
+						
+						fileSelected = deres.toString();
 
 						return valueHandler.toValue(fileSelected);
+
 					}
 
 				};

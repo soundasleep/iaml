@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
@@ -59,6 +60,7 @@ public class RefreshMappingsAction implements IViewActionDelegate {
 						// TODO remove this reference to the plugin and remove the reference in plugin.xml
 						IamlDiagramEditorPlugin.getInstance().logError(
 								"Could not refresh mappings for " + o + ": " + status.getMessage(), status.getException()); //$NON-NLS-1$
+						MessageDialog.openError(IamlDiagramEditorPlugin.getInstance().getWorkbench().getDisplay().getActiveShell(), "Error", status.getMessage());
 					}
 				}
 			}
@@ -89,7 +91,7 @@ public class RefreshMappingsAction implements IViewActionDelegate {
 			return Status.OK_STATUS;
 	
 		} catch (InferenceException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed", e);
+			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed: " + e.getMessage(), e);
 		}
 			/*
 		} catch (IOException e) {

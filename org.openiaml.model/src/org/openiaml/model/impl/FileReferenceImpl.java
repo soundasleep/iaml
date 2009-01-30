@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.impl;
 
+import java.io.File;
+
 import org.openiaml.model.FileReference;
 
 /**
@@ -29,6 +31,14 @@ public class FileReferenceImpl implements FileReference {
 	@Override
 	public String toString() {
 		return fileName;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.FileReference#toFile()
+	 */
+	@Override
+	public File toFile() {
+		return new File(fileName);
 	}
 
 }

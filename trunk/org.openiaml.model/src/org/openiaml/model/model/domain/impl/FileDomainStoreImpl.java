@@ -281,7 +281,7 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 		
 		// existing one
 		for (AbstractDomainAttribute ado : fdo.getAttributes()) {
-			if (ado instanceof AbstractDomainAttribute && ((AbstractDomainAttribute) ado).getName().equals("properties")) {
+			if (ado instanceof AbstractDomainAttribute && "properties".equals(((AbstractDomainAttribute) ado).getName())) {
 				fda = (FileDomainAttribute) ado;
 				break;
 			}

@@ -1,5 +1,8 @@
 package org.openiaml.model.diagram.custom.actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -11,6 +14,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
+import org.openiaml.model.diagram.custom.commands.EmfInferenceHandler;
 import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.diagram.edit.parts.FileDomainStoreEditPart;
@@ -81,11 +85,19 @@ public class RefreshMappingsAction implements IViewActionDelegate {
 				throw new InferenceException("Object was not a FileDomainStore");
 			
 			FileDomainStore fds = (FileDomainStore) obj;
+			/*
 			fds.refreshMappings(new GmfInferenceHandler(
 					monitor,
-					null,	/* IAdapter == null, though it should be linked to the monitor somehow */
+					null,	// IAdapter == null, though it should be linked to the monitor somehow
 					IamlDiagramEditorPlugin.ID,
 					fd.getEditingDomain()
+			));
+			*/
+			fds.refreshMappings(new EmfInferenceHandler(
+					fd.getEditingDomain(), 
+					new ArrayList<Object>(), /* affected files */
+					monitor, 
+					null /* IAdapter == null */
 			));
 				
 			return Status.OK_STATUS;

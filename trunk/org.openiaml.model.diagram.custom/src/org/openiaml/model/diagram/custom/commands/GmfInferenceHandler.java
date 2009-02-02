@@ -67,7 +67,10 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 				// return null;
 				throw new InferenceException("Cannot create an element in a null container");
 			
-			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest(getEditingDomain(), container, getDiagramEditType(elementType) ), elementType );
+			IElementType et = getDiagramEditType(elementType);
+			et = org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getElementType(elementType);
+			
+			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest(getEditingDomain(), container, et ), elementType );
 			if (cc == null) {
 				// we can't do anything because the diagram editor won't allow us to create it currently
 				//return null;

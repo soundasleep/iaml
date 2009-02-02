@@ -52,9 +52,11 @@
 					// based on CellEditor
 					// org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createEDataTypeCellEditor(EDataType
 					// eDataType, Composite composite)
+					«EXPAND xpt::Common::generatedMemberComment»
 					protected EDataTypeValueHandler valueHandler = new EDataTypeValueHandler(
 							dataType);
 
+					«EXPAND xpt::Common::generatedMemberComment»
 					@Override
 					protected Object openDialogBox(org.eclipse.swt.widgets.Control cellEditorWindow) {
 

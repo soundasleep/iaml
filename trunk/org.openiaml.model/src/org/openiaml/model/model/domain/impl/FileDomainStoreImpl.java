@@ -222,10 +222,6 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 			throw new InferenceException(e);
 		}
 		
-		// for now, just create a new element
-		CompositeOperation co = handler.generatedCompositeOperation(this, this);
-		handler.setValue(co, ModelPackage.eINSTANCE.getNamedElement_Name(), "test");
-		
 		return true;
 		
 	}
@@ -256,7 +252,10 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 		if (fdo == null) {
 			fdo = handler.generatedFileDomainObject(this, this);
 		}
-		
+
+		// refresh it (the name)
+		handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
+
 		// cycle over properties
 		for (String key : props.stringPropertyNames()) {
 			refreshFileDomainAttribute(fdo, handler, key);

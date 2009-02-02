@@ -478,6 +478,26 @@
             <param name="semanticHint" value="1013"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/domain">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.FileDomainObject_1014"
+               name="%metatype.name.FileDomainObject_1014"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="FileDomainObject"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FileDomainObjectEditHelper">
+            <param name="semanticHint" value="1014"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/domain">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.FileDomainAttribute_1015"
+               name="%metatype.name.FileDomainAttribute_1015"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="FileDomainAttribute"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FileDomainAttributeEditHelper">
+            <param name="semanticHint" value="1015"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_3001"
@@ -594,6 +614,8 @@
          <elementType ref="org.openiaml.model.diagram.visual.StaticValue_1011"/>
          <elementType ref="org.openiaml.model.diagram.visual.Session_1012"/>
          <elementType ref="org.openiaml.model.diagram.visual.LoginHandler_1013"/>
+         <elementType ref="org.openiaml.model.diagram.visual.FileDomainObject_1014"/>
+         <elementType ref="org.openiaml.model.diagram.visual.FileDomainAttribute_1015"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>

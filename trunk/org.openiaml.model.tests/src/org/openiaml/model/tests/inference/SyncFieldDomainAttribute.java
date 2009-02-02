@@ -3,8 +3,6 @@
  */
 package org.openiaml.model.tests.inference;
 
-import java.util.List;
-
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.DomainAttribute;

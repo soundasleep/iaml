@@ -304,6 +304,44 @@
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElementContainer/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/FileDomainObject"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( FileDomainObject )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#FileDomainObjectName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#FileDomainObject"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElementContainer/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/FileDomainAttribute"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( FileDomainAttribute )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#FileDomainAttributeName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#FileDomainAttribute"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

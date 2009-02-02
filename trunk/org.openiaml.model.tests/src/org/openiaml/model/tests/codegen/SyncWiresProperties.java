@@ -61,7 +61,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// go to page1
-		beginAtSitemapThenPage(sitemap, "target");
+		beginAtSitemapThenPage(sitemap, "container");
 		
 		// there should be some fields inferred automatically
 		String fruitId = getLabelIDForText("fruit");
@@ -110,7 +110,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// go to page1
-		beginAtSitemapThenPage(sitemap, "target");
+		beginAtSitemapThenPage(sitemap, "container");
 		
 		// there should be some fields inferred automatically
 		String fruitId = getLabelIDForText("fruit");
@@ -135,7 +135,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// go to page1
-		beginAtSitemapThenPage(sitemap, "target");
+		beginAtSitemapThenPage(sitemap, "container");
 		
 		// there should be some fields inferred automatically
 		String newFruit = "fruit " + new Date().toString();
@@ -150,7 +150,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		}
 		
 		// reload the page
-		gotoSitemapThenPage(sitemap, "target");
+		gotoSitemapThenPage(sitemap, "container");
 		
 		// check it
 		{
@@ -174,7 +174,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// go to page1
-		beginAtSitemapThenPage(sitemap, "target");
+		beginAtSitemapThenPage(sitemap, "container");
 		
 		// there should be some fields inferred automatically
 		String newAnimal = "animal " + new Date().toString();
@@ -197,7 +197,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		assertEquals("The property should have changed in the file.", p.getProperty("animal", "[did not exist]"), newAnimal);
 		
 		// reload the page
-		gotoSitemapThenPage(sitemap, "target");
+		gotoSitemapThenPage(sitemap, "container");
 		
 		// go back and reset it
 		{

@@ -18,11 +18,12 @@ public class InferenceTestsSuite {
 	 */
     public static Test suite() { 
         TestSuite suite = new TestSuite("Inference");
-
+		//$JUnit-BEGIN$
         suite.addTestSuite(LoadModelTestCase.class);
         suite.addTestSuite(SyncWireTestCase.class);
         suite.addTestSuite(SyncFieldDomainAttribute.class);
-
+        suite.addTestSuite(SyncWireProperties.class);
+		//$JUnit-END$
         return suite; 
    }
 

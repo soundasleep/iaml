@@ -28,6 +28,7 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(SyncFieldApplicationElementProperty.class);
 		suite.addTestSuite(SyncWiresMultiple.class);
 		suite.addTestSuite(SyncWiresTestCase.class);
+		suite.addTestSuite(SyncWiresProperties.class);
 		//$JUnit-END$
 		return suite;
 	}

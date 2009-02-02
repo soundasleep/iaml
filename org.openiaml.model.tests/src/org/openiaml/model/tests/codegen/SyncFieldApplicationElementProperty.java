@@ -25,7 +25,7 @@ public class SyncFieldApplicationElementProperty extends CodegenTestCase {
 		root = loadAndCodegen(ROOT + "codegen/SyncFieldApplicationElementProperty.iaml");
 	}
 	
-	public void testSyncOnPage() {
+	public void testSyncOnPage() throws Exception {
 		String testingText = new Date().toString();
 		String testingText2 = this.toString();
 		String testingText3 = "random" + new Random().nextInt(32768);
@@ -38,12 +38,7 @@ public class SyncFieldApplicationElementProperty extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
 		{
-			beginAt(sitemap.getProjectRelativePath().toString());
-			assertTitleMatch("sitemap");
-			
-			assertLinkPresentWithText("container");
-			clickLinkWithText("container");
-			assertTitleMatch("container");
+			beginAtSitemapThenPage(sitemap, "container");
 			
 			// fill in a field
 			String fieldId = getLabelIDForText("field1");
@@ -54,12 +49,7 @@ public class SyncFieldApplicationElementProperty extends CodegenTestCase {
 		
 		// reload the page and make sure it's still there
 		{
-			beginAt(sitemap.getProjectRelativePath().toString());
-			assertTitleMatch("sitemap");
-			
-			assertLinkPresentWithText("container");
-			clickLinkWithText("container");
-			assertTitleMatch("container");
+			gotoSitemapThenPage(sitemap, "container");
 			
 			// check the field
 			String fieldId = getLabelIDForText("field1");

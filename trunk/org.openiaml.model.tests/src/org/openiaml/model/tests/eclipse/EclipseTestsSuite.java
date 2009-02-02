@@ -21,11 +21,13 @@ public class EclipseTestsSuite {
 	 */
     public static Test suite() { 
         TestSuite suite = new TestSuite("Eclipse Editors");
-
+		//$JUnit-BEGIN$
         suite.addTestSuite(LoadDiagramTestCase.class);
         suite.addTestSuite(OpenSubDiagramTestCase.class);
         suite.addTestSuite(InitializeDiagramTestCase.class);
         suite.addTestSuite(ExportImagesTestCase.class);
+        suite.addTestSuite(BreadcrumbTestCase.class);
+		//$JUnit-END$
         
         // add the shortcut tests
         suite.addTest(EclipseShortcutsTestSuite.suite());
@@ -33,7 +35,7 @@ public class EclipseTestsSuite {
         // add the migration tests
         suite.addTest(MigrateTestSuite.suite());
 
-        return suite; 
+        return suite;
    }
 
 }

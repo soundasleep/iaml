@@ -75,7 +75,8 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	 * @return
 	 */
 	protected DiagramDocumentEditor openDiagram(EditPart sourcePart) throws Exception {
-
+		assertNotNull(sourcePart);
+		
 		// based on org.eclipse.gef.tools.SelectEditPartTracker#performOpen()
 		SelectionRequest request = new SelectionRequest();
 		request.setLocation(null);		// the location isn't actually required

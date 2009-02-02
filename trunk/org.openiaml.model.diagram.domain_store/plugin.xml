@@ -368,6 +368,16 @@
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/domain">
+         <metamodelType
+               id="org.openiaml.model.diagram.domain_store.FileDomainObject_1007"
+               name="%metatype.name.FileDomainObject_1007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="FileDomainObject"
+               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.FileDomainObjectEditHelper">
+            <param name="semanticHint" value="1007"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.domain_store.SyncWire_3001"
@@ -397,6 +407,7 @@
          <elementType ref="org.openiaml.model.diagram.domain_store.EventTrigger_1004"/>
          <elementType ref="org.openiaml.model.diagram.domain_store.ApplicationElementProperty_1005"/>
          <elementType ref="org.openiaml.model.diagram.domain_store.ChainedOperation_1006"/>
+         <elementType ref="org.openiaml.model.diagram.domain_store.FileDomainObject_1007"/>
          <elementType ref="org.openiaml.model.diagram.domain_store.SyncWire_3001"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>

@@ -131,6 +131,23 @@
           href="iaml.gmfgraph#ChainedOperation"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//domain/AbstractDomainStore/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/FileDomainObject"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#FileDomainObjectName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#FileDomainObject"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

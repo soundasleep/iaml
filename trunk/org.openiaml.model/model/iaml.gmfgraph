@@ -717,6 +717,43 @@
       <accessors
           figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="FileDomainObjectFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="FileDomainObjectFigure"
+          lineWidth="2"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FileDomainObjectNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="FileDomainAttributeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="FileDomainAttributeFigure"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FileDomainAttributeNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -796,6 +833,12 @@
   <nodes
       name="FileDomainStore"
       figure="FileDomainStoreFigure"/>
+  <nodes
+      name="FileDomainObject"
+      figure="FileDomainObjectFigure"/>
+  <nodes
+      name="FileDomainAttribute"
+      figure="FileDomainAttributeFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1002,4 +1045,12 @@
       name="FileDomainStoreName"
       figure="FileDomainStoreFigure"
       accessor="//@figures.0/@descriptors.39/@accessors.0"/>
+  <labels
+      name="FileDomainObjectName"
+      figure="FileDomainObjectFigure"
+      accessor="//@figures.0/@descriptors.40/@accessors.0"/>
+  <labels
+      name="FileDomainAttributeName"
+      figure="FileDomainAttributeFigure"
+      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
 </gmfgraph:Canvas>

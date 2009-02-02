@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11f391350b3.d">
   <children xsi:type="iaml.visual:Page" id="visual.11f3913517e.10" name="container">
     <children xsi:type="iaml.visual:InputForm" id="visual.11f3913517e.17" name="target form" outEdges="wires.11f391b3e18.c">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11f391b3e18.c" from="visual.11f3913517e.17" to="domain.11f3913518d.22" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11f391b3e18.c" from="visual.11f3913517e.17" to="domain.11f3913518d.22" name="sync properties"/>
     </children>
   </children>
   <domainStores xsi:type="iaml.domain:FileDomainStore" id="domain.11f3913518d.1f" name="properties file" generatedElements="domain.11f3913518d.22" file="SyncWiresProperties.properties">

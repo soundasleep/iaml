@@ -122,7 +122,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 */
 	protected EObject queryOne(EObject root, String query) throws JaxenException {
 		List<?> q = query(root, query);
-		assertEquals("queryOne for '" + query + "' had no results", 1, q.size());
+		assertEquals("queryOne for '" + query + "' did not return one result", 1, q.size());
 		return (EObject) q.get(0);
 	}
 

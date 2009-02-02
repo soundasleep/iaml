@@ -8,6 +8,7 @@ import org.openiaml.model.model.impl.*;
 import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
@@ -52,5 +53,25 @@ rule "Create field value for domain attribute"
 		insert(fieldValue);
 		
 end
+
+rule "Empty forms connected by SyncWires create sync'd elements automatically"
+	when
+		wire : SyncWire( overridden == false )
+		form : InputForm( overridden == false )
+		domain : AbstractDomainObject( )
+		attribute : AbstractDomainAttribute( eContainer == domain, attributeName : name )
+		not (VisibleThing( eContainer == form, name == attributeName ))
+		not (SyncWire( from == attribute, to.eContainer == form ))
+		
+	then
+		InputTextField field = handler.generatedInputTextField(wire, form);
+		field.setName(attribute.getName());
+		insert(field);
+		
+		SyncWire wire2 = handler.generatedSyncWire(wire, form, attribute, field);
+		wire2.setName("sync");
+		insert(wire2);
+		
+end 
 
 

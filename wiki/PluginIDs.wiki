@@ -42,3 +42,15 @@ iaml_domain_object
 Iaml_DomainObject
 org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorID
 }}}
+
+iaml_file_domain_store
+{{{
+Iaml_FileDomainStore
+org.openiaml.model.model.diagram.file_domain_store.part.IamlDiagramEditorID
+}}}
+
+iaml_file_domain_object
+{{{
+Iaml_FileDomainObject
+org.openiaml.model.model.diagram.file_domain_object.part.IamlDiagramEditorID
+}}}

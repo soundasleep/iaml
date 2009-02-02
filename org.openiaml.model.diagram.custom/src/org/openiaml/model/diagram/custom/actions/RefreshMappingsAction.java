@@ -14,8 +14,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
-import org.openiaml.model.diagram.custom.commands.EmfInferenceHandler;
 import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
+import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.diagram.edit.parts.FileDomainStoreEditPart;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
@@ -97,7 +97,8 @@ public class RefreshMappingsAction implements IViewActionDelegate {
 					fd.getEditingDomain(), 
 					new ArrayList<Object>(), /* affected files */
 					monitor, 
-					null /* IAdapter == null */
+					null /* IAdapter == null */,
+					obj.eResource()	/* eResource */
 			));
 				
 			return Status.OK_STATUS;

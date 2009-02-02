@@ -245,7 +245,8 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 		
 		// existing one
 		for (AbstractDomainObject ado : this.getChildren()) {
-			if (ado instanceof FileDomainObject && ((FileDomainObject) ado).getName().equals("properties")) {
+			if (ado instanceof FileDomainObject && 
+					"properties".equals(((FileDomainObject) ado).getName())) {
 				fdo = (FileDomainObject) ado;
 				break;
 			}

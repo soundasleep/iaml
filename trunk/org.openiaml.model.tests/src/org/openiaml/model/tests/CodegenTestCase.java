@@ -42,6 +42,7 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * Have we loaded at least one page (so we can find an ajax_monitor if necessary)?
 	 */
 	private boolean hasLoaded = false;
+	private boolean hasBegun;
 	
 	/**
 	 * Wait for all of the Ajax monitors to return.
@@ -82,7 +83,7 @@ public class CodegenTestCase extends InferenceTestCase {
 	/**
 	 * Begin at the sitemap page, and then click on a particular page title.
 	 * 
-	 * NOTE that this resets the current WebClient context, which can cause
+	 * <b>NOTE</b> that this resets the current WebClient context, which can cause
 	 * the client to lose sessions/cookies. If this is undesirable,
 	 * use {@link #gotoSitemapThenPage(IFile, String)}.
 	 */ 
@@ -108,6 +109,10 @@ public class CodegenTestCase extends InferenceTestCase {
 	/**
 	 * We extend {@link WebTestCase#beginAt(String)} to also set
 	 * {@link #hasLoaded} to true (to help Ajax navigation).
+	 * 
+	 * <b>NOTE</b> that this resets the current WebClient context, which can cause
+	 * the client to lose sessions/cookies. If this is undesirable,
+	 * use {@link #gotoSitemapThenPage(IFile, String)}.
 	 */
 	public void beginAt(String url) {
 		try {
@@ -116,6 +121,7 @@ public class CodegenTestCase extends InferenceTestCase {
 			throw new RuntimeException("Cannot connect to '" + url + "' relative to '" + BASE_URL + "'", e);	// for debugging
 		}
 		hasLoaded = true;		// we have now loaded a page
+		hasBegun = true;		// we have begun somewhere
 	}
 	
 	/**
@@ -129,6 +135,11 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * @param expected the expected page title on the new page, if different from the page text link
 	 */ 
 	protected void gotoSitemapThenPage(IFile sitemap, String pageText, String expectedTitle) throws Exception {
+		// we can't goto the sitemap if we haven't begun the session yet
+		// (sanity check)
+		if (!hasBegun)
+			throw new RuntimeException("You cannot gotoSitemap() for a session that hasn't started yet. Use beginAt or beginAtSitemapThenPage instead.");
+	
 		waitForAjax();
 
 		gotoPage(sitemap.getProjectRelativePath().toString());

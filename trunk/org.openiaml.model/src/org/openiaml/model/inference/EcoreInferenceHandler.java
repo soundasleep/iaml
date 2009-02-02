@@ -15,6 +15,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 /**
  * An ecore-based inference handler.
  * 
+ * <b>NOTE:</b> if you are doing inference within an existing EMF
+ * instance, you should be using {@link EmfInferenceHandler} instead.
+ * 
+ * @see EmfInferenceHandler
  * @author jmwright
  *
  */

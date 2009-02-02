@@ -66,7 +66,7 @@
 						
 						// set the default path
 						org.eclipse.emf.common.util.URI uri = ((org.eclipse.emf.ecore.EObject) object).eResource().getURI();
-						org.eclipse.emf.common.util.URI resolved = CommonPlugin.resolve(uri);
+						org.eclipse.emf.common.util.URI resolved = org.eclipse.emf.common.CommonPlugin.resolve(uri);
 						resolved = resolved.trimFileExtension();	// remove the file part
 						dialog.setFilterPath( resolved.toFileString() );
 						

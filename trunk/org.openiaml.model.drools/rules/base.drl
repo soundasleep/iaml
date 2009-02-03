@@ -44,7 +44,7 @@ end
 
 rule "Create field value for domain attribute"
 	when
-		f : DomainAttribute( overridden == false )
+		f : AbstractDomainAttribute( overridden == false )
 		not (ApplicationElementProperty( eContainer == f, name=="fieldValue" ))
 			
 	then

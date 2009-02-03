@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference;
 import java.util.List;
 
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.domain.FileDomainAttribute;
@@ -14,6 +15,8 @@ import org.openiaml.model.model.domain.FileDomainStore;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.InferenceTestCase;
 
@@ -76,6 +79,32 @@ public class SyncWireProperties extends InferenceTestCase {
 		assertTrue(sw1.isIsGenerated());
 		assertTrue(sw2.isIsGenerated());
 		assertTrue(sw3.isIsGenerated());
+		
+		// there should be RunInstanceWires on each of these attributes
+		// (following from SyncFormDomainObject)
+		
+		// fields should have fieldValues
+		ApplicationElementProperty value1 = (ApplicationElementProperty) queryOne(f1, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty value2 = (ApplicationElementProperty) queryOne(f2, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty value3 = (ApplicationElementProperty) queryOne(f3, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty valuea1 = (ApplicationElementProperty) queryOne(a1, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty valuea2 = (ApplicationElementProperty) queryOne(a2, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty valuea3 = (ApplicationElementProperty) queryOne(a3, "iaml:properties[iaml:name='fieldValue']");
+		
+		// these field values should be parameters to run instance wires
+		ParameterWire pw1 = (ParameterWire) getWireFrom(root, value1);
+		assertTrue(pw1.toString(), pw1.getTo() instanceof RunInstanceWire);
+		ParameterWire pw2 = (ParameterWire) getWireFrom(root, value2);
+		assertTrue(pw2.toString(), pw2.getTo() instanceof RunInstanceWire);
+		ParameterWire pw3 = (ParameterWire) getWireFrom(root, value3);
+		assertTrue(pw3.toString(), pw3.getTo() instanceof RunInstanceWire);
+		ParameterWire pwa1 = (ParameterWire) getWireFrom(root, valuea1);
+		assertTrue(pwa1.toString(), pwa1.getTo() instanceof RunInstanceWire);
+		ParameterWire pwa2 = (ParameterWire) getWireFrom(root, valuea2);
+		assertTrue(pwa2.toString(), pwa2.getTo() instanceof RunInstanceWire);
+		ParameterWire pwa3 = (ParameterWire) getWireFrom(root, valuea3);
+		assertTrue(pwa3.toString(), pwa3.getTo() instanceof RunInstanceWire);
+		
 	}
 	
 	protected NamedElement getNodeWithName(List<?> nodes, String name) {

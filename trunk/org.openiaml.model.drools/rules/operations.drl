@@ -8,6 +8,7 @@ import org.openiaml.model.model.impl.*;
 import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
@@ -24,9 +25,9 @@ rule "Create 'update' operation for input text field"
 		
 end
 
-rule "Create 'update' operation for domain attribute"
+rule "Create 'update' operation for abstractdomain attribute"
 	when
-		f : DomainAttribute( overridden == false )
+		f : AbstractDomainAttribute( overridden == false )
 		not (Operation( eContainer == f, name=="update" ))
 			
 	then

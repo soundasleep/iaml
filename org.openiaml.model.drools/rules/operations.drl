@@ -25,7 +25,7 @@ rule "Create 'update' operation for input text field"
 		
 end
 
-rule "Create 'update' operation for abstractdomain attribute"
+rule "Create 'update' operation for abstract domain attribute"
 	when
 		f : AbstractDomainAttribute( overridden == false )
 		not (Operation( eContainer == f, name=="update" ))

@@ -115,12 +115,12 @@ public class SyncWireProperties extends InferenceTestCase {
 		}
 		
 		// test for 'access' events and 'initialize' operations (new)
-		EventTrigger access1 = (EventTrigger) queryOne(f1, "iaml:events[iaml:name='access']");
-		EventTrigger access2 = (EventTrigger) queryOne(f2, "iaml:events[iaml:name='access']");
-		EventTrigger access3 = (EventTrigger) queryOne(f3, "iaml:events[iaml:name='access']");
-		Operation op1 = (Operation) queryOne(f1, "iaml:operations[iaml:name='initialise']");
-		Operation op2 = (Operation) queryOne(f2, "iaml:operations[iaml:name='initialise']");
-		Operation op3 = (Operation) queryOne(f3, "iaml:operations[iaml:name='initialise']");
+		EventTrigger access1 = (EventTrigger) queryOne(f1, "iaml:eventTriggers[iaml:name='access']");
+		EventTrigger access2 = (EventTrigger) queryOne(f2, "iaml:eventTriggers[iaml:name='access']");
+		EventTrigger access3 = (EventTrigger) queryOne(f3, "iaml:eventTriggers[iaml:name='access']");
+		Operation op1 = (Operation) queryOne(f1, "iaml:operations[iaml:name='update']");
+		Operation op2 = (Operation) queryOne(f2, "iaml:operations[iaml:name='update']");
+		Operation op3 = (Operation) queryOne(f3, "iaml:operations[iaml:name='update']");
 		
 		// these field values should be parameters to run instance wires
 		{
@@ -129,8 +129,8 @@ public class SyncWireProperties extends InferenceTestCase {
 			RunInstanceWire rw3 = (RunInstanceWire) getWireFromTo(root, access3, op3);
 
 			ParameterWire pw1 = (ParameterWire) getWireFromTo(root, valuea1, rw1);
-			ParameterWire pw2 = (ParameterWire) getWireFromTo(root, valuea1, rw2);
-			ParameterWire pw3 = (ParameterWire) getWireFromTo(root, valuea1, rw3);
+			ParameterWire pw2 = (ParameterWire) getWireFromTo(root, valuea2, rw2);
+			ParameterWire pw3 = (ParameterWire) getWireFromTo(root, valuea3, rw3);
 			
 			assertNotNull(pw1);
 			assertNotNull(pw2);
@@ -140,27 +140,29 @@ public class SyncWireProperties extends InferenceTestCase {
 	}
 
 	/**
-	 * Test the contents of each initialise operation. 
+	 * Test the contents of each update operation, used to
+	 * initialise the field at access.
+	 *  
 	 * Same as {@link SyncWireTestCase#testAllUpdates()}.
 	 * 
 	 * @throws JaxenException
 	 */
-	public void testAllInitialises() throws JaxenException {
+	public void testAllUpdates() throws JaxenException {
 		// get all 'initialise' operations
-		List<?> inits = query(root, "//iaml:operations[iaml:name='initialise']");
+		List<?> updates = query(root, "//iaml:operations[iaml:name='update']");
 		
 		// there are 3 input texts => there should be at least 3 initialise operations
-		assertGreaterEq(4, inits.size());
+		assertGreaterEq(4, updates.size());
 		
 		int i = 0;
-		for (Object obj : inits) {
+		for (Object obj : updates) {
 			i++;
 			String prelude = "'initialise' operation #" + i;
-			CompositeOperation init = (CompositeOperation) obj;	// should be a composite operation
-			assertEquals(prelude, init.getName(), "update");
+			CompositeOperation update = (CompositeOperation) obj;	// should be a composite operation
+			assertEquals(prelude, update.getName(), "update");
 			
 			// has a start node
-			List<?> nodes = query(init, "iaml:nodes");
+			List<?> nodes = query(update, "iaml:nodes");
 			assertEquals(prelude, nodes.size(), 2);
 			assertTrue(prelude, nodes.get(0) instanceof StartNode);
 			assertTrue(prelude, nodes.get(1) instanceof FinishNode);

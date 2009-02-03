@@ -39,3 +39,14 @@ rule "Create 'edit' event trigger for abstract domain attribute"
 		
 end
 
+rule "Create 'access' event trigger for input text field"
+	when
+		f : InputTextField( overridden == false )
+		not (EventTrigger( eContainer == f, name=="access" ))
+			
+	then
+		EventTrigger event = handler.generatedEventTrigger(f, f);
+		event.setName("access");
+		insert(event);
+		
+end

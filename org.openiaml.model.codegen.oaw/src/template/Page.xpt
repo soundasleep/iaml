@@ -14,6 +14,7 @@
 		// include header code
 		«EXPAND php::includes::HeaderPhp::headerPhp FOR this-»
 		require("create_database.php");		// ensure DB exists
+		require("properties_file.php");
 		
 		// run any event triggers for this page
 		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
@@ -138,6 +139,9 @@
 			
 				return false;
 			}
+			
+			«REM»any on-access events?«ENDREM»
+			«EXPAND js::Operations::expandEventTriggers("access") FOREACH eventTriggers-»
 		</script>
 	</label>
 	</div>

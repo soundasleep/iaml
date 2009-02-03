@@ -207,8 +207,8 @@ echo "ok";
 		store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);
-	«ELSEIF isDomainAttribute(to.eContainer)-»
-		«REM»direct field --> domain attribute«ENDREM»
+	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
+		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		);  

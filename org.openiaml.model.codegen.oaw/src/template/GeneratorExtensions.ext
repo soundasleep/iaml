@@ -46,9 +46,10 @@ model::visual::Page containingPage(model::NamedElement element) :
 model::visual::Page containingPage(emf::EObject element) :
 	null;
 
-onCurrentPage(model::WireEdgesSource pageElement, model::WireEdgeDestination target) :
-	containingPage(pageElement) != null && 
-	containingPage(pageElement) == containingPage(target);
+/* is [target] on the same page as [source]? */ 
+onCurrentPage(model::WireEdgesSource source, model::WireEdgeDestination target) :
+	containingPage(source) != null && 
+	containingPage(source) == containingPage(target);
 
 /**
  * Get all the operations that may be referenced in a container. In particular:
@@ -106,10 +107,16 @@ model::scopes::Session containingSession(model::scopes::Session this) :
 model::scopes::Session containingSession(model::InternetApplication this) :
 	null;
 
+/** find the FileDomainStore for a given FileDomainAttribute */
+model::domain::FileDomainStore getFileDomainStore(model::domain::FileDomainAttribute this) :
+	getFileDomainObject(this).eContainer;
+model::domain::FileDomainObject getFileDomainObject(model::domain::FileDomainAttribute this) :
+	eContainer;
+	
 isVisibleThing(emf::EObject this) :
 	model::VisibleThing.isInstance(this);
-isDomainAttribute(emf::EObject this) :
-	model::DomainAttribute.isInstance(this);	
+isAbstractDomainAttribute(emf::EObject this) :
+	model::domain::AbstractDomainAttribute.isInstance(this);	
 isSession(emf::EObject this) :
 	model::scopes::Session.isInstance(this);	
 isPage(emf::EObject this) :

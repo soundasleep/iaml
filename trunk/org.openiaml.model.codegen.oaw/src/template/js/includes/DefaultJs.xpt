@@ -4,12 +4,32 @@
 
 «DEFINE defaultJs FOR emf::EObject»
 
+function ajaxIncrement() {
+	var monitor = $('ajax_monitor');
+	if (monitor == null)
+		throw new IamlJavascriptException("ajax_monitor ID was null (increment)");
+	monitor.innerHTML = (1 * monitor.innerHTML) + 1;
+}
+
+function ajaxDecrement() {
+	var monitor = $('ajax_monitor');
+	if (monitor == null)
+		throw new IamlJavascriptException("ajax_monitor ID was null (decrement)");
+	monitor.innerHTML = (1 * monitor.innerHTML) - 1;
+}
+
+function ajaxFailed(fail) {
+	debug("something went wrong: " + transport.responseText);
+  	$('ajax_monitor').innerHTML = fail;		// for speeding up testing
+	alert('Something went wrong: ' + fail);	// alert is last so we can continue execution
+}
+
 /* approach #2: use event queues stored on the server, if the function is
    not available on the current page */
 function store_event(page_id, event_name, arg0) {
 	var url = 'store_event.php?page_id=' + escape(page_id) + '&event_name=' + escape(event_name) + "&arg0=" + escape(arg0);
 	debug("creating ajax request to url: " + url);
-	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) + 1;		// increment ajax counter
+	ajaxIncrement();
 	new Ajax.Request(url,
   {
     method:'get',
@@ -17,13 +37,11 @@ function store_event(page_id, event_name, arg0) {
       	var response = transport.responseText || "no response text";
       	debug("success: " + response);
       	document.getElementById('response').innerHTML = response;
-      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
+      	ajaxDecrement();
     },
     onFailure: function(transport){ 
-      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
-    	debug("something went wrong: " + transport.responseText);
-      	$('ajax_monitor').innerHTML = 'store_event failed at ' + url + ': ' + response.responseText;		// for speeding up testing
-    	alert('Something went wrong...');	// alert is last so we can continue execution
+		var fail = 'store_event failed at ' + url + ': ' + response.responseText;
+		ajaxFailed(fail);		
      }
   });
   debug("store_event called");
@@ -33,7 +51,7 @@ function store_event(page_id, event_name, arg0) {
 function store_db(attribute_id, arg0) {
 	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&arg0=' + escape(arg0);
 	debug("creating ajax request to url: " + url);
-	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) + 1;		// increment ajax counter
+	ajaxIncrement();
 	new Ajax.Request(url,
   {
     method:'get',
@@ -41,13 +59,11 @@ function store_db(attribute_id, arg0) {
       	var response = transport.responseText || "no response text";
       	debug("success: " + response);
       	document.getElementById('response').innerHTML = response;
-      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
+      	ajaxDecrement();
     },
     onFailure: function(transport){ 
-      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
-    	debug("something went wrong: " + transport.responseText);
-      	$('ajax_monitor').innerHTML = 'store_db failed at ' + url + ': ' + response.responseText;		// for speeding up testing
-    	alert('Something went wrong...');	// alert is last so we can continue execution
+		var fail = 'store_db failed at ' + url + ': ' + response.responseText;
+		ajaxFailed(fail);		
      }
   });
   debug("store_db called");	
@@ -57,7 +73,7 @@ function store_db(attribute_id, arg0) {
 function set_session(id, arg0, function_queue) {
 	var url = 'set_session.php?id=' + escape(id) + '&arg0=' + escape(arg0);
 	debug("creating ajax request to url: " + url);
-	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) + 1;		// increment ajax counter
+	ajaxIncrement();
 	new Ajax.Request(url,
   {
     method:'get',
@@ -72,13 +88,11 @@ function set_session(id, arg0, function_queue) {
       		function_queue();
       	}
 
-      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
+      	ajaxDecrement();
     },
     onFailure: function(transport){ 
-      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
-    	debug("something went wrong: " + transport.responseText);
-      	$('ajax_monitor').innerHTML = 'set_session failed at ' + url + ': ' + response.responseText;		// for speeding up testing
-    	alert('Something went wrong...');	// alert is last so we can continue execution
+		var fail = 'set_session failed at ' + url + ': ' + response.responseText;
+		ajaxFailed(fail);		
      }
   });
   debug("set_session called");	
@@ -88,7 +102,7 @@ function set_session(id, arg0, function_queue) {
 function set_application_value(id, arg0, function_queue) {
 	var url = 'set_application_value.php?id=' + escape(id) + '&arg0=' + escape(arg0);
 	debug("creating ajax request to url: " + url);
-	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) + 1;		// increment ajax counter
+	ajaxIncrement();
 	new Ajax.Request(url,
   {
     method:'get',
@@ -103,13 +117,11 @@ function set_application_value(id, arg0, function_queue) {
       		function_queue();
       	}
 
-      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
+      	ajaxDecrement();
     },
     onFailure: function(transport){ 
-      	$('ajax_monitor').innerHTML = (1 * $('ajax_monitor').innerHTML) - 1;		// decrement ajax counter
-    	debug("something went wrong: " + transport.responseText);
-      	$('ajax_monitor').innerHTML = 'set_application_value failed at ' + url + ': ' + response.responseText;		// for speeding up testing
-    	alert('Something went wrong...');	// alert is last so we can continue execution
+		var fail = 'set_application_value failed at ' + url + ': ' + response.responseText;
+		ajaxFailed(fail);		
      }
   });
   debug("set_application_value called");	

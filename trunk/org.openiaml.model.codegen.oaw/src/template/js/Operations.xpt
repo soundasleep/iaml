@@ -31,6 +31,8 @@
 	// expanding inline event trigger «name»
 	«IF name=="edit"»
 		«EXPAND callOperations(true) FOREACH outEdges»
+	«ELSEIF name=="access"»
+		// we don't expand 'access' events inline
 	«ELSE»
 		«ERROR "Unknown client-side event trigger " + this»
 	«ENDIF»
@@ -49,52 +51,84 @@
 	/* eContainer == «to.eContainer» */
 	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
 		«REM»VisibleThing includes InputTextField and Page«ENDREM»
+		«REM»
+			is both source and target on the same page? NOTE this
+			will also return true for Event-->Operation if they are
+			both on the same page.
+		«ENDREM»
 		«IF onCurrentPage(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND callOperationParameters(this, inline) FOREACH inEdges SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
-				«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
+				«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
-	«ELSEIF isDomainAttribute(to.eContainer)-»
+	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
 		«REM»direct field --> domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF inEdges.size>0», «EXPAND callOperationParameters(inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
+			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSE-»
-		alert('unknown target operation type «to.eContainer.metaType.name»');
+		alert('unknown target operation type in «to.eContainer.metaType.name»');
+		«ERROR "Unknown target operation type in '" + to.eContainer.metaType.name + "'"» 
 	«ENDIF-»
 «ENDDEFINE»
 
 /* ditto: check or error? */
-«DEFINE callOperationParameters(Boolean inline) FOR model::WireEdge»
+«DEFINE callOperationParameters(model::WireEdge wire, Boolean inline) FOR model::WireEdge»
 	«ERROR "unknown in edge: " + this»
 «ENDDEFINE»
 
 /* making sure that the parameter wire is from a parameter... */
-«DEFINE callOperationParameters(Boolean inline) FOR model::wires::ParameterWire»
-	«EXPAND callOperationParametersSource(inline) FOR from»
+«DEFINE callOperationParameters(model::WireEdge wire, Boolean inline) FOR model::wires::ParameterWire»
+	«EXPAND callOperationParametersSource(wire, inline) FOR from»
 «ENDDEFINE»
 
 /* ditto: check or error? */
-«DEFINE callOperationParametersSource(Boolean inline) FOR model::WireEdgesSource»
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::WireEdgesSource»
 	«ERROR "unknown parameter wire source: " + this»
 «ENDDEFINE»
 
 /* what is the runtime value of the parameter? */
-«DEFINE callOperationParametersSource(Boolean inline) FOR model::ApplicationElementProperty»
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::ApplicationElementProperty»
 	«IF name == "fieldValue"»
-		document.getElementById('«safeName(eContainer)»').value
+		«REM»where is this value stored? is it available on the current page?«ENDREM»
+		«IF onCurrentPage(wire.from, this)» 
+			document.getElementById('«safeName(eContainer)»').value
+		«ELSE»
+			«REM»
+				it's not on the current page. it could be anywhere!
+				but we want it NOW, so we can't just ask the 
+				server. we have to find out where it is.
+			«ENDREM»			
+			«EXPAND remoteParameterSource(wire, inline, this) FOR this.eContainer-»
+		«ENDIF»
 	«ELSE»
 		get_application_element_property("«safeName()-»")
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE callOperationParametersSource(Boolean inline) FOR model::StaticValue»
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::StaticValue»
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
+
+/* a remote data source */
+«DEFINE remoteParameterSource(model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR emf::EObject»
+	«ERROR "Cannot find a remote parameter source for " + this»
+«ENDDEFINE» 
+
+«DEFINE remoteParameterSource(model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::domain::FileDomainAttribute»
+	"<?php 
+		// remote parameter source from a .properties file
+		$db_name = "«getFileDomainStore(this).file-»";
+		$row_name = "«safeNameString(this.name)-»";
+		$properties = load_properties($db_name);
+		$value = get_property($properties, $row_name);
+		echo htmlspecialchars($value); 
+	?>" 
+«ENDDEFINE» 
 
 /* expand out the operations for the page */
 «DEFINE expandOperations FOR model::ContainsOperations-»

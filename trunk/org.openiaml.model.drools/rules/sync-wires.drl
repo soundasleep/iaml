@@ -35,6 +35,7 @@ rule "Sync wires between pages should create sync wires between all elements ins
 		
 end
 
+# Ideally, these two commands would be joined together into one
 rule "Run instance wire from source.edit to target.update"
 	when
 		sw : SyncWire(overridden == false)
@@ -71,6 +72,7 @@ rule "Run instance wire from target.edit to source.update"
 
 end
 
+# Ideally, these two commands would be joined together into one
 rule "Connect parameter wire to: run instance wire from source.edit to target.update"
 	when
 		sw : SyncWire(overridden == false)
@@ -109,4 +111,78 @@ rule "Connect parameter wire to: run instance wire from target.edit to source.up
 
 end
 
+# Ideally, these two commands would be joined together into one
+rule "Run instance wire from source.access to source.update"
+	when
+		sw : SyncWire(overridden == false)
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="access" )
+		operation : Operation( eContainer == source, name=="update" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
 
+end
+
+rule "Run instance wire from target.access to target.update"
+	when
+		sw : SyncWire(overridden == false)
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == target, name=="access" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+# Ideally, these two commands would be joined together into one
+rule "Connect parameter wire to: run instance wire from source.access to source.update"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="access" )
+		operation : Operation( eContainer == source, name=="update" )
+		field : ApplicationElementProperty( eContainer == target, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
+
+end
+
+rule "Connect parameter wire to: run instance wire from target.access to target.update"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == target, name=="access" )
+		operation : Operation( eContainer == target, name=="update" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		insert(pw);
+
+end

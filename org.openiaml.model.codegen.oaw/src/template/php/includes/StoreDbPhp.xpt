@@ -9,6 +9,7 @@
  */
  
 require("create_database.php");	// init db if necessary
+require("properties_file.php");	// properties loading code
 
 function log_message($msg) {
 	$fp = fopen("php.log", "a");
@@ -81,33 +82,47 @@ $trace = isset($_GET["trace"]) ? explode(",", $_GET["trace"]) : array();
 $trace[] = $attribute_id;
 
 // find the table name
+$db_type = null;
 $db_name = false;
 $table_name = false;
 $row_name = false;
 «EXPAND expandDomainStore FOREACH domainStores»
 
-if (!$db_name)
-	local_die("no db found");
-if (!$table_name)
-	local_die("no table found (db=$db_name)");
-if (!$row_name)
-	local_die("no row found (table=$table_name)");
-
-// connect to the database source
-$db = new PDO($db_name) or local_die("could not open db '$db_name'");
-
-// does anything exist?
-$results = $db->query("SELECT * FROM $table_name") or local_die("could not look for existing values in '$table_name': " .print_r($db->errorInfo(), true));
-if ($results->fetch()) {
-	// yes: update all existing
-	$s = $db->prepare("UPDATE $table_name SET $row_name = ?") or local_die("could not prepare update query: " . print_r($db->errorInfo(), true));
+if ($db_type == "pdo") {
+	if (!$db_name)
+		local_die("no $db_type db found");
+	if (!$table_name)
+		local_die("no $db_type table found (db=$db_name)");
+	if (!$row_name)
+		local_die("no $db_type row found (table=$table_name)");
+	
+	// connect to the database source
+	$db = new PDO($db_name) or local_die("could not open $db_type db '$db_name'");
+	
+	// does anything exist?
+	$results = $db->query("SELECT * FROM $table_name") or local_die("could not look for existing values in $db_type '$table_name': " .print_r($db->errorInfo(), true));
+	if ($results->fetch()) {
+		// yes: update all existing
+		$s = $db->prepare("UPDATE $table_name SET $row_name = ?") or local_die("could not prepare $db_type update query: " . print_r($db->errorInfo(), true));
+	} else {
+		// no: insert new
+		$s = $db->prepare("INSERT INTO $table_name ($row_name) VALUES (?)") or local_die("could not prepare $db_type insert query: " . print_r($db->errorInfo(), true));
+	}
+	
+	// update all existing
+	$s->execute(array($arg0)) or local_die("could not execute query: " . print_r($db->errorInfo(), true));
+} elseif ($db_type == "properties") {
+	if (!$db_name)
+		local_die("no $db_type db found");
+	if (!$row_name)
+		local_die("no $db_type row found (table=$table_name)");
+	
+	$properties = load_properties($db_name);
+	$properties = set_property($db_name, $properties, $row_name, $arg0); 
+	
 } else {
-	// no: insert new
-	$s = $db->prepare("INSERT INTO $table_name ($row_name) VALUES (?)") or local_die("could not prepare insert query: " . print_r($db->errorInfo(), true));
+	throw new IamlRuntimeException("Unknown domain store type: $db_type");
 }
-
-// update all existing
-$s->execute(array($arg0)) or local_die("could not execute query: " . print_r($db->errorInfo(), true));
 
 // done
 $s = null;
@@ -121,24 +136,42 @@ echo "ok";
 /** 
  * Expand out each DomainStore.
  */
-«DEFINE expandDomainStore FOR model::DomainStore»
-	«EXPAND expandDomainObject(safeNameString(this.id)) FOREACH children»
+«DEFINE expandDomainStore FOR model::domain::AbstractDomainStore» 
+	«EXPAND expandDomainObject(this) FOREACH children»
 «ENDDEFINE»
 
 /**
  * Expand out each DomainObject.
  */
-«DEFINE expandDomainObject(String db_name) FOR model::DomainObject»
-	«EXPAND expandDomainAttribute(db_name, safeNameString(this.name)) FOREACH attributes»
+«DEFINE expandDomainObject(model::domain::AbstractDomainStore store) FOR model::domain::AbstractDomainObject»
+	«EXPAND expandDomainAttribute(store, this) FOREACH attributes»
 «ENDDEFINE»
 
 /**
  * Expand out each DomainAttribute.
  */
-«DEFINE expandDomainAttribute(String db_name, String table_name) FOR model::DomainAttribute»
+«DEFINE expandDomainAttribute(model::domain::AbstractDomainStore store, model::domain::AbstractDomainObject object) FOR model::domain::AbstractDomainAttribute»
+	«ERROR "Cannot expand AbstractDomainAttribute " + this + " (store=" + store + ") (object=" + object + ")"»
+«ENDDEFINE»
+
+«DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
-		$db_name = "sqlite:«db_name».db";
-		$table_name = "«table_name»";
+		$db_type = "pdo";
+		$db_name = "sqlite:«safeNameString(store.id)».db";
+		$table_name = "«safeNameString(object.id)»";
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+	}
+«ENDDEFINE»
+
+«DEFINE expandDomainAttribute(model::domain::FileDomainStore store, model::domain::FileDomainObject object) FOR model::domain::FileDomainAttribute»
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "properties";
+		$db_name = "«store.file»";
+		$table_name = null;
 		$row_name = "«safeNameString(name)»";
 		
 		// are there any onEdit operations for this attribute that we

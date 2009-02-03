@@ -5,6 +5,10 @@
 /**
  * PHP code for creating the domain store.
  */
+«DEFINE createDomainStorePhp FOR model::domain::AbstractDomainStore»
+	«ERROR "Cannot expand createDomainStorePhp for AbstractDomainStore " + this»
+«ENDDEFINE»
+
 «DEFINE createDomainStorePhp FOR model::DomainStore»
 	// DomainStore "«name»"
 
@@ -18,9 +22,18 @@
 	$db = null;
 «ENDDEFINE»
 
+«DEFINE createDomainStorePhp FOR model::domain::FileDomainStore»
+	// FileDomainStore "«name»"
+	// we don't need to create anything, it is handled automatically
+«ENDDEFINE»
+
 /**
  * Expand a DomainObject into a SQL table.
- */
+ */ 
+«DEFINE createDomainObjectPhp FOR model::domain::AbstractDomainObject»
+	«ERROR "Cannot expand createDomainObjectPhp for AbstractDomainObject " + this»
+«ENDDEFINE»
+
 «DEFINE createDomainObjectPhp FOR model::DomainObject»
 	$s = $db->prepare("SELECT * FROM «safeNameString(name)»");
 	if (!$s) {
@@ -34,6 +47,10 @@
 /**
  * Expand a DomainAttribute into a SQL row.
  */
+«DEFINE createDomainAttributePhp FOR model::domain::AbstractDomainAttribute»
+	«ERROR "Cannot expand createDomainAttributePhp for AbstractDomainAttribute " + this»
+«ENDDEFINE»
+
 «DEFINE createDomainAttributePhp FOR model::DomainAttribute»
 	«safeNameString(name)» VARCHAR(255) NULL
 «ENDDEFINE»

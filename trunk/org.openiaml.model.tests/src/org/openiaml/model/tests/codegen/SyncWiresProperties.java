@@ -50,6 +50,21 @@ public class SyncWiresProperties extends CodegenTestCase {
 	}
 	
 	/**
+	 * Copy the properties file into the local project workspace.
+	 * 
+	 * @see #PROPERTIES
+	 * @return
+	 * @throws Exception
+	 */
+	protected IFile copyProperties() throws Exception {
+		// copy file
+		IFile target = getProject().getFile("output/" + PROPERTIES);
+		copyFileIntoWorkspace(ROOT + "codegen/" + PROPERTIES, target);
+		
+		return target;
+	}
+	
+	/**
 	 * Since the target form has no elements in it, they will be inferred
 	 * from the sync wire.
 	 * 
@@ -84,21 +99,6 @@ public class SyncWiresProperties extends CodegenTestCase {
 		
 		// it should exist
 		assertTrue("Properties file should be copied over", target.exists());
-	}
-	
-	/**
-	 * Copy the properties file into the local project workspace.
-	 * 
-	 * @see #PROPERTIES
-	 * @return
-	 * @throws Exception
-	 */
-	protected IFile copyProperties() throws Exception {
-		// copy file
-		IFile target = getProject().getFile(PROPERTIES);
-		copyFileIntoWorkspace(ROOT + PROPERTIES, target);
-		
-		return target;
 	}
 
 	public void testPropertiesInitial() throws Exception {

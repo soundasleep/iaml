@@ -72,7 +72,7 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 		
 		// we should now be able to fill in a field
 		// and the result will stay the same when we reload the page
-		beginAtSitemapThenPage(sitemap, "page");
+		gotoSitemapThenPage(sitemap, "page");
 		String fieldID = getLabelIDForText("single-text-field");
 		String testingText = new Date().toString();
 		
@@ -84,11 +84,11 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 		
 		// reload the page and make sure it's the same
 		// TODO add reloadPage() to JWebUnit
-		beginAtSitemapThenPage(sitemap, "page");
+		gotoSitemapThenPage(sitemap, "page");
 		assertLabeledFieldEquals(fieldID, testingText);
 		
 		// and again
-		beginAtSitemapThenPage(sitemap, "page");
+		gotoSitemapThenPage(sitemap, "page");
 		assertLabeledFieldEquals(fieldID, testingText);
 
 		// check the database

@@ -65,7 +65,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		{
 			// go to page2
 			// page2 has "text1" and should be in sync too
-			beginAtSitemapThenPage(sitemap, "page2");
+			gotoSitemapThenPage(sitemap, "page2");
 	
 			// check text1 field has changed
 			String label_text1 = getLabelIDForText("text1");
@@ -78,7 +78,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		
 		{
 			// go to page3
-			beginAtSitemapThenPage(sitemap, "page3");
+			gotoSitemapThenPage(sitemap, "page3");
 			
 			// check text1 field has changed
 			String label_text1 = getLabelIDForText("text1");
@@ -91,7 +91,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 			
 		{
 			// go to page 2
-			beginAtSitemapThenPage(sitemap, "page2");
+			gotoSitemapThenPage(sitemap, "page2");
 			
 			// change field
 			String label_text3 = getLabelIDForText("text3");
@@ -102,7 +102,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 
 		{
 			// go to page 3
-			beginAtSitemapThenPage(sitemap, "page3");
+			gotoSitemapThenPage(sitemap, "page3");
 			
 			// check fields have synced
 			String label_text3 = getLabelIDForText("text3");
@@ -116,7 +116,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		
 		{
 			// go to page 4 - it should still sync over even if the fields are only sync'd up on the page itself
-			beginAtSitemapThenPage(sitemap, "page4");
+			gotoSitemapThenPage(sitemap, "page4");
 			
 			// check fields have synced
 			String label_text5 = getLabelIDForText("text5");
@@ -130,7 +130,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		
 		{
 			// go to page 5 and check this one
-			beginAtSitemapThenPage(sitemap, "page5");
+			gotoSitemapThenPage(sitemap, "page5");
 
 			String label_text5 = getLabelIDForText("text5");
 
@@ -147,7 +147,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		try	{
 			// it should change something on page 2
 			// if this fails, it is because it cannot chain text5-->newText-->text3
-			beginAtSitemapThenPage(sitemap, "page2");
+			gotoSitemapThenPage(sitemap, "page2");
 
 			String label_text3 = getLabelIDForText("text3");
 
@@ -158,6 +158,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 			fail();
 		} catch (ComparisonFailure e) {
 			// expected until operation chaining is completed
+			System.err.println("[Expected exception caught]: expected until operation chaining is completed: " + e);
 		}
 		
 		} catch (Error e) {

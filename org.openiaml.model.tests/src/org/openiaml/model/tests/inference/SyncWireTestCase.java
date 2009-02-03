@@ -181,14 +181,4 @@ public class SyncWireTestCase extends InferenceTestCase {
 		
 	}
 
-	/**
-	 * Helper method: assert A >= B.
-	 * 
-	 * @param expected expected value (B)
-	 * @param actual actual value (A)
-	 */
-	protected void assertGreaterEq(int expected, int actual) {
-		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual > expected);
-	}
-	
 }

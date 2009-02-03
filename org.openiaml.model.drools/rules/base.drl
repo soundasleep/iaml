@@ -2,6 +2,7 @@
 package org.openiaml.model.drools
 
 #list any import classes here.
+import org.eclipse.emf.ecore.*;
 import org.openiaml.model.inference.*;
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.impl.*;
@@ -56,12 +57,12 @@ end
 
 rule "Empty forms connected by SyncWires create sync'd elements automatically"
 	when
-		wire : SyncWire( overridden == false )
 		form : InputForm( overridden == false )
 		domain : AbstractDomainObject( )
 		attribute : AbstractDomainAttribute( eContainer == domain, attributeName : name )
+		wire : SyncWire( overridden == false, from == form, to == domain )
 		not (VisibleThing( eContainer == form, name == attributeName ))
-		not (SyncWire( from == attribute, to.eContainer == form ))
+		not (SyncWire( from == attribute, to != null, to.eContainer == form ))
 		
 	then
 		InputTextField field = handler.generatedInputTextField(wire, form);

@@ -137,17 +137,15 @@ public class SyncWireTestCase extends InferenceTestCase {
 		
 		// none of these can ever be null because queryOne() also calls assert(size>1)
 
-		// this wire should contain 8 wires
+		// this wire should contain at least 4 wires
 		/*
 		 *   [name1]         [name2]
 		 *  edit ------------> update
 		 *  update <---------- edit
-		 *  change ----------> refresh
-		 *  refresh <--------- change
 		 * 
 		 * + parameter wires for both
 		 */
-		assertEquals(4, wire.getWires().size());
+		assertGreaterEq(4, wire.getWires().size());
 		
 		// run instance wires
 		WireEdge name1editRun = null;

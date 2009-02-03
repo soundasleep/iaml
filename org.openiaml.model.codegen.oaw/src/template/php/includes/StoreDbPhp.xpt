@@ -158,7 +158,7 @@ echo "ok";
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		$db_name = "sqlite:«safeNameString(store.id)».db";
-		$table_name = "«safeNameString(object.id)»";
+		$table_name = "«safeNameString(object.name)»";
 		$row_name = "«safeNameString(name)»";
 		
 		// are there any onEdit operations for this attribute that we

@@ -2,7 +2,7 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE storeDbPhp FOR model::InternetApplication-»
+«DEFINE propertiesFilePhp FOR model::InternetApplication-»
 <?php
 /**
  * Wrapper to access .properties files.
@@ -12,7 +12,7 @@ function load_properties($db_name) {
 	// properties file doesn't exist
 	if (!file_exists($db_name)) {
 		log_message("properties file $db_name doesn't exist.");
-		return new array();	
+		return array();	
 	}
 
 	// load the properties file

@@ -64,7 +64,7 @@ public class SyncFormDomainObject extends CodegenTestCase {
 		assertLabeledFieldEquals(field2id, testingText2);
 		
 		// reload the page
-		beginAtSitemapThenPage(sitemap, "page1");
+		gotoSitemapThenPage(sitemap, "page1");
 
 		// the values should still be the same
 		assertLabeledFieldEquals(field1id, testingText1);

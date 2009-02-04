@@ -150,9 +150,12 @@ public class CodegenTestCase extends InferenceTestCase {
 		clickLinkWithText(pageText);
 		try {
 			assertEquals(expectedTitle, getPageTitle());		// could be different
-		} catch (AssertionFailedError e) {
+		} catch (Exception e) {
 			// something went wrong in the page execution, or
 			// the output is mangled HTML: output page source for debug purposes
+			System.out.println(this.getPageSource());
+			throw e;	// carry on throwing
+		} catch (AssertionFailedError e) {
 			System.out.println(this.getPageSource());
 			throw e;	// carry on throwing
 		}

@@ -3,8 +3,11 @@
  */
 package org.openiaml.model.tests;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -35,7 +38,6 @@ import org.xml.sax.SAXException;
  */
 public class XmlTestCase extends TestCase {
 
-	
 	/**
 	 * Apply an XPath query to an XML document.
 	 */
@@ -88,5 +90,38 @@ public class XmlTestCase extends TestCase {
 		
 		return doc;
 	}
+
+	/**
+	 * Assert that the given file exists.
+	 * 
+	 * @param source
+	 */
+	public void assertFileExists(File source) {
+		assertTrue("File '" + source.getAbsolutePath() + "' doesn't exist.", source.exists());
+	}
 	
+	/**
+	 * Read in a file into a string.
+	 * 
+	 * @throws IOException if an IO exception occurs
+	 */
+	public static String readFile(File sourceFile) throws IOException {
+		if (!sourceFile.exists()) {
+			throw new IOException("File " + sourceFile.getAbsolutePath() + " does not exist.");
+		}
+		
+		int bufSize = 128;
+		StringBuffer sb = new StringBuffer(bufSize);
+		BufferedReader reader = new BufferedReader(new FileReader(sourceFile), bufSize);
+				
+		char[] chars = new char[bufSize];
+		int numRead = 0;
+		while ((numRead = reader.read(chars)) > -1) {
+			sb.append(String.valueOf(chars).substring(0, numRead));	
+		}
+		
+		reader.close();
+		return sb.toString();
+	}
+
 }

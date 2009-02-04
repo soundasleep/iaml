@@ -196,5 +196,29 @@ public class CodegenTestCase extends InferenceTestCase {
 		return getElementByXPath("//title").getTextContent(); 
 	}
 	
+	/**
+	 * Assert that the value in a given element is null/empty/zero.
+	 * 
+	 * @param e the element
+	 */
+	protected void assertEmpty(IElement e) {
+		assertTrue( "Element " + e + " expected to be empty: was " + e.getTextContent(),
+				e.getTextContent() == null || 
+				e.getTextContent().isEmpty() ||
+				(Integer.parseInt(e.getTextContent())) == 0 );
+	}
+	
+	/**
+	 * Assert that no remote calls have occured when loading the currente
+	 * page.
+	 * @throws Exception 
+	 */
+	protected void assertNoRemoteCalls() throws Exception {
+		waitForAjax();
+		assertEmpty(getElementById("counter_store_db"));
+		assertEmpty(getElementById("counter_store_event"));
+		assertEmpty(getElementById("counter_set_session"));
+		assertEmpty(getElementById("counter_set_application_value"));		
+	}
 	
 }

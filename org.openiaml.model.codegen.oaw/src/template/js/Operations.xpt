@@ -119,6 +119,14 @@
 	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
+«DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::visual::InputTextField»
+	«REM»
+		we are trying to find the remote parameter source for a field that isn't on the current page!
+		what are we supposed to do??
+	«ENDREM»
+	null
+«ENDDEFINE»
+
 «DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::domain::FileDomainAttribute»
 	"<?php 
 		// remote parameter source from a .properties file
@@ -292,7 +300,13 @@
 		// outFlows first to = «outFlows.first().to»
 		«IF isInputTextField(outFlows.first().to.eContainer)»
 			// set a variable in the current page (assumed)
-			«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+			var value = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+			if (value !== null) {
+				// ignore null parameters
+				// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
+				// will populate this field
+				«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = value;
+			}
 		«ELSEIF containingSession(outFlows.first().to) == null»
 			«REM»contained in a Page or InternetApplication: a static value«ENDREM»
 			set_application_value("«safeName(outFlows.first().to)»", 

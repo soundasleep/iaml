@@ -6,8 +6,6 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 import java.util.Properties;
 
-import net.sourceforge.jwebunit.api.IElement;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.openiaml.model.model.InternetApplication;
@@ -149,23 +147,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		beginAtSitemapThenPage(sitemap, "container");
 		
 		// no ajax methods should have been called
-		waitForAjax();
-		assertEmpty(getElementById("counter_store_db"));
-		assertEmpty(getElementById("counter_store_event"));
-		assertEmpty(getElementById("counter_set_session"));
-		assertEmpty(getElementById("counter_set_application_value"));
-	}
-	
-	/**
-	 * Assert that the value in a given element is empty/zero.
-	 * 
-	 * @param e the element
-	 */
-	private void assertEmpty(IElement e) {
-		assertTrue( "Element " + e + " expected to be empty: was " + e.getTextContent(),
-				e.getTextContent() == null || 
-				e.getTextContent().isEmpty() ||
-				(Integer.parseInt(e.getTextContent())) == 0 );
+		assertNoRemoteCalls();
 	}
 
 	public void testPropertiesPersist() throws Exception {

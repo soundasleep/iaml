@@ -270,7 +270,7 @@ function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
 
-/* page onload functions */
+/* page onload functions (called before the page is fully loaded) */
 populateFields();
 
 «ENDDEFINE»

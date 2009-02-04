@@ -6,6 +6,8 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 import java.util.Properties;
 
+import net.sourceforge.jwebunit.api.IElement;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.openiaml.model.model.InternetApplication;
@@ -126,7 +128,46 @@ public class SyncWiresProperties extends CodegenTestCase {
 		assertLabeledFieldEquals(animalId, "cat");
 		assertLabeledFieldEquals(countryId, "New Zealand");
 	}
+
+	/**
+	 * When we load a properties page, it shouldn't be calling
+	 * the database yet, because the data should be coming from
+	 * init --> access, which doesn't call the update operation 
+	 * (which we define as calling the edit trigger every time)
+	 * 
+	 * @throws Exception
+	 */
+	public void testPropertiesStayLocal() throws Exception {
+		// copy properties
+		copyProperties();
+
+		// go to sitemap
+		IFile sitemap = getProject().getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		
+		// go to page1
+		beginAtSitemapThenPage(sitemap, "container");
+		
+		// no ajax methods should have been called
+		waitForAjax();
+		assertEmpty(getElementById("counter_store_db"));
+		assertEmpty(getElementById("counter_store_event"));
+		assertEmpty(getElementById("counter_set_session"));
+		assertEmpty(getElementById("counter_set_application_value"));
+	}
 	
+	/**
+	 * Assert that the value in a given element is empty/zero.
+	 * 
+	 * @param e the element
+	 */
+	private void assertEmpty(IElement e) {
+		assertTrue( "Element " + e + " expected to be empty: was " + e.getTextContent(),
+				e.getTextContent() == null || 
+				e.getTextContent().isEmpty() ||
+				(Integer.parseInt(e.getTextContent())) == 0 );
+	}
+
 	public void testPropertiesPersist() throws Exception {
 		// copy properties
 		copyProperties();
@@ -137,6 +178,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		
 		// go to page1
 		beginAtSitemapThenPage(sitemap, "container");
+		waitForAjax();
 		
 		// there should be some fields inferred automatically
 		String newFruit = "fruit " + new Date().toString();
@@ -152,6 +194,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		
 		// reload the page
 		gotoSitemapThenPage(sitemap, "container");
+		waitForAjax();
 		
 		// check it
 		{

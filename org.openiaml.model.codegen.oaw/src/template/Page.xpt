@@ -76,7 +76,13 @@
 		<div id="response">empty</div>
 		
 		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
-		<div id="ajax_monitor"></div>
+		<div id="debug_monitors">
+			<div id="ajax_monitor"></div>
+			<div id="counter_store_db"></div>
+			<div id="counter_store_event"></div>
+			<div id="counter_set_session"></div>
+			<div id="counter_set_application_value"></div>
+		</div>
 		<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
 		
 		</body>
@@ -93,7 +99,8 @@
 			onClick="return onClick_«safeNameString(id)»(this);"
 		>
 		
-		<script>
+		<script language="Javascript" type="text/javascript">
+		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
 				// expand all onChanges
 				«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
@@ -107,6 +114,7 @@
 			
 				return false;
 			}
+		/* ]]> */
 		</script>
 		<h2>«formName()»</h2>
 		
@@ -128,7 +136,8 @@
 			«EXPAND staticInitialValues FOREACH outEdges» 
 		>
 		
-		<script>
+		<script language="Javascript" type="text/javascript">
+		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
 				// expand all onChanges
 				«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
@@ -149,6 +158,7 @@
 			
 			«REM»any on-access events?«ENDREM»
 			«EXPAND js::Operations::expandEventTriggers("access") FOREACH eventTriggers-»
+		/* ]]> */
 		</script>
 	</label>
 	</div>
@@ -217,7 +227,8 @@
 			onClick="return onClick_«safeNameString(id)»(this);"
 		>
 	
-	<script>
+	<script language="Javascript" type="text/javascript">
+	/* <![CDATA[ */
 		function onChange_«safeNameString(id)»(obj) {
 			// expand all onChanges
 			«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
@@ -231,6 +242,7 @@
 
 			return false;
 		}
+	/* ]]> */
 	</script>
 «ENDDEFINE»
 

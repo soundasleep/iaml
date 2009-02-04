@@ -112,7 +112,7 @@ rule "Connect parameter wire to: run instance wire from target.edit to source.up
 end
 
 # Ideally, these two commands would be joined together into one
-rule "Run instance wire from source.access to source.init"
+rule "Run instance wire from source.access to source.init, when we have a value to provide as a parameter"
 	when
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( ) from sw.from  
@@ -120,6 +120,7 @@ rule "Run instance wire from source.access to source.init"
 		
 		event : EventTrigger( eContainer == source, name=="access" )
 		operation : Operation( eContainer == source, name=="init" )
+		field : ApplicationElementProperty( eContainer == target, name=="fieldValue" )
 		
 		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
 		
@@ -130,7 +131,7 @@ rule "Run instance wire from source.access to source.init"
 
 end
 
-rule "Run instance wire from target.access to target.init"
+rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter"
 	when
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( ) from sw.from  
@@ -138,6 +139,7 @@ rule "Run instance wire from target.access to target.init"
 		
 		event : EventTrigger( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
 		
 		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
 		

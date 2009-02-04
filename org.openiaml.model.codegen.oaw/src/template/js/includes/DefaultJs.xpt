@@ -5,6 +5,10 @@
 «DEFINE defaultJs FOR emf::EObject»
 
 var stored_ajax_monitor = 0;
+var stored_counter = { 'store_db' : 0, 
+	'store_event' : 0, 
+	'set_session' : 0, 
+	'set_application_value' : 0 };
 
 /**
  * If we are calling Ajax calls before the page has even completely
@@ -21,6 +25,12 @@ function initAjaxMonitor() {
 		
 	monitor.innerHTML = stored_ajax_monitor;
 	stored_ajax_monitor = null;
+	
+	$('counter_store_db').innerHTML = stored_counter['store_db'];
+	$('counter_store_event').innerHTML = stored_counter['store_event'];
+	$('counter_set_session').innerHTML = stored_counter['set_session'];
+	$('counter_set_application_value').innerHTML = stored_counter['set_application_value'];
+	stored_counter = null;
 }
 
 function ajaxIncrement() {
@@ -35,7 +45,7 @@ function ajaxIncrement() {
 function ajaxDecrement() {
 	var monitor = $('ajax_monitor');
 	if (monitor == null) {
-		stored_ajax_monitor++;
+		stored_ajax_monitor--;
 	} else {
 		monitor.innerHTML = (1 * monitor.innerHTML) - 1;
 	}
@@ -46,9 +56,19 @@ function ajaxFailed(fail) {
 	throw new IamlJavascriptException("AJAX called failed: " + fail);
 }
 
+function counterIncrement(id) {
+	var counter = $('counter_' + id);
+	if (counter == null) {
+		stored_counter[id]++;
+	} else {
+		counter.innerHTML = (1 * counter.innerHTML) + 1;
+	}
+}
+
 /* approach #2: use event queues stored on the server, if the function is
    not available on the current page */
 function store_event(page_id, event_name, arg0) {
+	counterIncrement('store_event');
 	var url = 'store_event.php?page_id=' + escape(page_id) + '&event_name=' + escape(event_name) + "&arg0=" + escape(arg0);
 	debug("creating ajax request to url: " + url);
 	ajaxIncrement();
@@ -71,6 +91,7 @@ function store_event(page_id, event_name, arg0) {
 
 /* save directly to database (only one attribute) */
 function store_db(attribute_id, arg0) {
+	counterIncrement('store_db');
 	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&arg0=' + escape(arg0);
 	debug("creating ajax request to url: " + url);
 	ajaxIncrement();
@@ -93,6 +114,7 @@ function store_db(attribute_id, arg0) {
 
 /* save a session variable (only one attribute) */
 function set_session(id, arg0, function_queue) {
+	counterIncrement('set_session');
 	var url = 'set_session.php?id=' + escape(id) + '&arg0=' + escape(arg0);
 	debug("creating ajax request to url: " + url);
 	ajaxIncrement();
@@ -122,6 +144,7 @@ function set_session(id, arg0, function_queue) {
 
 /* save a session variable (only one attribute) */
 function set_application_value(id, arg0, function_queue) {
+	counterIncrement('set_application_value');
 	var url = 'set_application_value.php?id=' + escape(id) + '&arg0=' + escape(arg0);
 	debug("creating ajax request to url: " + url);
 	ajaxIncrement();

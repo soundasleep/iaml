@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.openiaml.model.tests.XmlTestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -179,6 +180,105 @@ public class PluginsTestCase extends XmlTestCase {
 			}
 		}
 
+	}
+	
+	protected class DiagramUniqueness {
+		
+		private List<String> editPolicyClassNames = new ArrayList<String>();
+		private List<String> diagramKinds = new ArrayList<String>();
+		private List<String> editorIDs = new ArrayList<String>();
+		private List<Node> nodes = new ArrayList<Node>();
+		
+
+		/**
+		 * Check a given set of attributes for the appropriate uniqueness.
+		 * 
+		 * @param prefix a prefix to put at the beginning of any assertions
+		 * @param node Behaviour node
+		 * @param editPolicyClassName
+		 * @param diagramKind
+		 * @param editorID
+		 */
+		public void check(String prefix, Node node, String editPolicyClassName, String diagramKind,
+				String editorID) {
+			// make sure that either ALL of these elements exist
+			// at the same place, or that NONE of them exist anywhere
+			
+			int a = editPolicyClassNames.indexOf(editPolicyClassName);
+			int b = diagramKinds.indexOf(diagramKind);
+			int c = editorIDs.indexOf(editorID);
+			
+			if (a == b && b == c) {
+				// the same: ok!
+				if (a == -1) {
+					// it didn't exist already
+					editPolicyClassNames.add(editPolicyClassName);
+					diagramKinds.add(diagramKind);
+					editorIDs.add(editorID);
+					nodes.add(node);
+				}
+			} else {
+				// something was inconsistent
+				if (a != -1) {
+					// editPolicyClassName already existed
+					fail(prefix + "editPolicyClassName for " + node + " already existed in node " + nodes.get(a));
+				}
+				if (b != -1) {
+					// diagramKind already existed
+					fail(prefix + "diagramKind for " + node + " already existed in node " + nodes.get(b));
+				}
+				if (c != -1) {
+					// editorID already existed
+					fail(prefix + "editorID for " + node + " already existed in node " + nodes.get(c));
+				}
+			}
+		}
+		
+	}
+	
+	/**
+	 * Test each OpenDiagramPolicy to make sure it is sufficiently
+	 * unique within the .gmfgen.
+	 * 
+	 * That is, all different editors in a .gmfgen have the exact same
+	 * editorClass, editorID and diagramKind.
+	 * 
+	 * @throws Exception
+	 */
+	public void testOpenDiagramUniqueness() throws Exception {
+		int checks = 0;
+		
+		// get all gmfgens
+		for (String file : loadedGmfgens.keySet()) {
+			Document doc = loadedGmfgens.get(file);
+			DiagramUniqueness du = new DiagramUniqueness();
+			
+			// get all top level nodes
+			NodeList nodes = xpath(doc, "//diagram/topLevelNodes");
+			
+			for (int i = 0; i < nodes.getLength(); i++) {
+				NodeList behaviours = xpath(nodes.item(i), "behaviour");
+				for (int j = 0; j < behaviours.getLength(); j++) {
+					// assume each Behaviour is an OpenDiagramPolicy
+					// (since we can't get xsi:type from xpath)
+					Node b = behaviours.item(j);
+					String editPolicyClassName = b.getAttributes().getNamedItem("editPolicyClassName").getNodeValue();
+					String diagramKind = b.getAttributes().getNamedItem("diagramKind").getNodeValue();
+					String editorID = b.getAttributes().getNamedItem("editorID").getNodeValue();
+					
+					assertTrue("editPolicyClassName is empty for " + b, !editPolicyClassName.isEmpty());
+					assertTrue("diagramKind is empty for " + b, !diagramKind.isEmpty());
+					assertTrue("editorID is empty for " + b, !editorID.isEmpty());
+					
+					du.check("[" + file + "] ", b, editPolicyClassName, diagramKind, editorID);
+					checks++;
+				}
+				
+			}
+		}
+		
+		// we should have checked at least one
+		assertTrue("We didn't check any OpenDiagramPolicies", checks != 0);
 	}
 	
 }

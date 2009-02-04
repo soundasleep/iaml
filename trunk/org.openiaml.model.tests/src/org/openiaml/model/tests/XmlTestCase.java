@@ -26,6 +26,7 @@ import junit.framework.TestCase;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -41,7 +42,7 @@ public class XmlTestCase extends TestCase {
 	/**
 	 * Apply an XPath query to an XML document.
 	 */
-	public NodeList xpath(Document doc, String query) throws XPathExpressionException {
+	public NodeList xpath(Node doc, String query) throws XPathExpressionException {
 		XPathFactory factory = XPathFactory.newInstance();
 		XPath xpath = factory.newXPath();
 		XPathExpression expr = xpath.compile(query);

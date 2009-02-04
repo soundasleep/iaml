@@ -90,8 +90,7 @@ public class SyncWiresTestCase extends CodegenTestCase {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
+		beginAtSitemapThenPage(sitemap, "on-page");
 
 		// no ajax methods should have been called
 		assertNoRemoteCalls();

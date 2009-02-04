@@ -21,7 +21,8 @@ if (!$s) {
 }
 
 log_message("finding events for page id «id»");
-$s = $db->prepare("SELECT * FROM stored_events WHERE page_id=?") or local_die("could not get stored events: " . print_r($db->errorInfo(), true));
+// make sure its in ascending order, so we get them back in the order they were inserted
+$s = $db->prepare("SELECT * FROM stored_events WHERE page_id=? ORDER BY id ASC") or local_die("could not get stored events: " . print_r($db->errorInfo(), true));
 $s->execute(array("«id»")) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
 foreach ($s->fetchAll() as $row) {
 	log_message("found event $row[id]: event_name=$row[event_name] arg0=$row[arg0]");

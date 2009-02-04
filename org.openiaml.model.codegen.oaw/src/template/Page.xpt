@@ -49,16 +49,18 @@
 				
 				// this needs to be loaded *after* the page has loaded
 				function loadStoredEvents() {
-					$('response').innerHTML = "before loadStoredEvents...";
-					<?php 
-					«EXPAND php::includes::EventsPhp::eventsPhp FOR this-» 
-					?>
 					
 					// expand all onLoad functions
 					for (var i = 0; i < stored_onload_functions.length; i++) {
 						var f = stored_onload_functions[i];
 						f();
 					}
+
+					$('response').innerHTML = "before loadStoredEvents...";
+					<?php 
+					«EXPAND php::includes::EventsPhp::eventsPhp FOR this-» 
+					?>
+
 				}
 			/* ]]> */
 			</script>

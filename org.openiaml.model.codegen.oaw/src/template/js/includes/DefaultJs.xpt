@@ -4,24 +4,46 @@
 
 «DEFINE defaultJs FOR emf::EObject»
 
-function ajaxIncrement() {
+var stored_ajax_monitor = 0;
+
+/**
+ * If we are calling Ajax calls before the page has even completely
+ * loaded, we need to either (1) store them until the page has loaded,
+ * or (2) execute them and keep a track of outstanding calls.
+ *
+ * In this implementation, we execute them and keep a track, populating
+ * the monitor once it has been loaded.
+ */
+function initAjaxMonitor() {
 	var monitor = $('ajax_monitor');
 	if (monitor == null)
-		throw new IamlJavascriptException("ajax_monitor ID was null (increment)");
-	monitor.innerHTML = (1 * monitor.innerHTML) + 1;
+		throw new IamlJavascriptException("ajax_monitor ID was null (init)");
+		
+	monitor.innerHTML = stored_ajax_monitor;
+	stored_ajax_monitor = null;
+}
+
+function ajaxIncrement() {
+	var monitor = $('ajax_monitor');
+	if (monitor == null) {
+		stored_ajax_monitor++;
+	} else {
+		monitor.innerHTML = (1 * monitor.innerHTML) + 1;
+	}
 }
 
 function ajaxDecrement() {
 	var monitor = $('ajax_monitor');
-	if (monitor == null)
-		throw new IamlJavascriptException("ajax_monitor ID was null (decrement)");
-	monitor.innerHTML = (1 * monitor.innerHTML) - 1;
+	if (monitor == null) {
+		stored_ajax_monitor++;
+	} else {
+		monitor.innerHTML = (1 * monitor.innerHTML) - 1;
+	}
 }
 
 function ajaxFailed(fail) {
 	debug("something went wrong: " + transport.responseText);
-  	$('ajax_monitor').innerHTML = fail;		// for speeding up testing
-	alert('Something went wrong: ' + fail);	// alert is last so we can continue execution
+	throw new IamlJavascriptException("AJAX called failed: " + fail);
 }
 
 /* approach #2: use event queues stored on the server, if the function is

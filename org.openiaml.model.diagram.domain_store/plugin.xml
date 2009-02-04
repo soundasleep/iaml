@@ -6,14 +6,14 @@
       <?gmfgen generated="true"?>
       <fileTypes
          type="text"
-         extension="iaml_store_diagram">
+         extension="iaml_domain_store_diagram">
       </fileTypes>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <?gmfgen generated="true"?>
       <parser
-         type="iaml_store_diagram"
+         type="iaml_domain_store_diagram"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -21,14 +21,14 @@
    <extension point="org.eclipse.ui.editors">
       <?gmfgen generated="true"?>
       <editor
-         id="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID"
+         id="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/ModelDiagramFile.gif"
-         extensions="iaml_store_diagram"
+         extensions="iaml_domain_store_diagram"
          default="true"
-         class="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditor"
-         matchingStrategy="org.openiaml.model.model.diagram.domainstore.part.IamlMatchingStrategy"
-         contributorClass="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramActionBarContributor">
+         class="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditor"
+         matchingStrategy="org.openiaml.model.model.diagram.domain_store.part.IamlMatchingStrategy"
+         contributorClass="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramActionBarContributor">
       </editor>
    </extension>
    
@@ -36,7 +36,7 @@
       <?gmfgen generated="true"?>
       <context
          description="%context.description"
-         id="org.openiaml.model.model.diagram.domainstore.ui.diagramContext"
+         id="org.openiaml.model.model.diagram.domain_store.ui.diagramContext"
          name="%context.name"
          parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
       </context>
@@ -48,8 +48,8 @@
   	     name="%newWizardName"
   	     icon="icons/obj16/ModelDiagramFile.gif"
   	     category="org.eclipse.ui.Examples"
-  	     class="org.openiaml.model.model.diagram.domainstore.part.IamlCreationWizard"
-  	     id="org.openiaml.model.model.diagram.domainstore.part.IamlCreationWizardID">
+  	     class="org.openiaml.model.model.diagram.domain_store.part.IamlCreationWizard"
+  	     id="org.openiaml.model.model.diagram.domain_store.part.IamlCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
    </extension>
@@ -59,9 +59,9 @@
       <objectContribution
             adaptable="false"
             id="org.openiaml.model.diagram.domain_store.CreateShortcut"
-            objectClass="org.openiaml.model.model.diagram.domainstore.edit.parts.DomainStoreEditPart">
+            objectClass="org.openiaml.model.model.diagram.domain_store.edit.parts.DomainStoreEditPart">
          <action
-               class="org.openiaml.model.model.diagram.domainstore.part.IamlCreateShortcutAction"
+               class="org.openiaml.model.model.diagram.domain_store.part.IamlCreateShortcutAction"
                enablesFor="1"
                id="org.openiaml.model.diagram.domain_store.CreateShortcutAction"
                label="%createShortcutActionLabel"
@@ -71,9 +71,9 @@
       <objectContribution
             adaptable="false"
             id="org.openiaml.model.diagram.domain_store.LoadResource"
-            objectClass="org.openiaml.model.model.diagram.domainstore.edit.parts.DomainStoreEditPart">
+            objectClass="org.openiaml.model.model.diagram.domain_store.edit.parts.DomainStoreEditPart">
          <action
-               class="org.openiaml.model.model.diagram.domainstore.part.IamlLoadResourceAction"
+               class="org.openiaml.model.model.diagram.domain_store.part.IamlLoadResourceAction"
                enablesFor="1"
                id="org.openiaml.model.diagram.domain_store.LoadResourceAction"
                label="%loadResourceActionLabel"
@@ -86,11 +86,11 @@
       <?gmfgen generated="true"?>
       <objectContribution
             id="org.openiaml.model.diagram.domain_store.InitDiagram"
-            nameFilter="*.iaml_store"
+            nameFilter="*.iaml_domain_store"
             objectClass="org.eclipse.core.resources.IFile">
          <action
                label="%initDiagramActionLabel"
-               class="org.openiaml.model.model.diagram.domainstore.part.IamlInitDiagramFileAction"
+               class="org.openiaml.model.model.diagram.domain_store.part.IamlInitDiagramFileAction"
                menubarPath="additions"
                enablesFor="1"
                id="org.openiaml.model.diagram.domain_store.InitDiagramAction">
@@ -102,9 +102,9 @@
       <?gmfgen generated="true"?>
       <GlobalActionHandlerProvider
          class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
-         id="Iaml_StorePresentation">
+         id="Iaml_DomainStorePresentation">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="delete"/>
             </ElementType>
@@ -115,9 +115,9 @@
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
          class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
-         id="Iaml_StorePresentationIDE">
+         id="Iaml_DomainStorePresentationIDE">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="bookmark"/>
             </ElementType>
@@ -125,9 +125,9 @@
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
             class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
-            id="Iaml_StoreRender">
+            id="Iaml_DomainStoreRender">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="cut"/>
                <GlobalActionId actionId="copy"/>
@@ -144,16 +144,53 @@
             checkPluginLoaded="false">
          <Priority name="Low"/>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.domainstore.edit.parts.SyncWireNameEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.domain_store.edit.parts.SyncWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
       </contributionItemProvider>
    </extension>
 
+   <extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="org.openiaml.model.model.diagram.domain_store.providers.IamlValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.domain_store.providers.IamlMarkerNavigationProvider">
+         <MarkerType name="org.openiaml.model.diagram.domain_store.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Iaml Plugin (Domain Store) problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.domain_store.providers.IamlValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
    <extension point="org.eclipse.core.runtime.preferences">
       <?gmfgen generated="true"?>
-      <initializer class="org.openiaml.model.model.diagram.domainstore.preferences.DiagramPreferenceInitializer"/>
+      <initializer class="org.openiaml.model.model.diagram.domain_store.preferences.DiagramPreferenceInitializer"/>
    </extension>
 
    <extension point="org.eclipse.ui.preferencePages">
@@ -161,31 +198,31 @@
       <page
             id="org.openiaml.model.diagram.general"
             name="%preference.page.title.org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.domainstore.preferences.DiagramGeneralPreferencePage">
+            class="org.openiaml.model.model.diagram.domain_store.preferences.DiagramGeneralPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.appearance"
             name="%preference.page.title.org.openiaml.model.diagram.appearance"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.domainstore.preferences.DiagramAppearancePreferencePage">
+            class="org.openiaml.model.model.diagram.domain_store.preferences.DiagramAppearancePreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.connections"
             name="%preference.page.title.org.openiaml.model.diagram.connections"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.domainstore.preferences.DiagramConnectionsPreferencePage">
+            class="org.openiaml.model.model.diagram.domain_store.preferences.DiagramConnectionsPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.printing"
             name="%preference.page.title.org.openiaml.model.diagram.printing"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.domainstore.preferences.DiagramPrintingPreferencePage">
+            class="org.openiaml.model.model.diagram.domain_store.preferences.DiagramPrintingPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.rulersAndGrid"
             name="%preference.page.title.org.openiaml.model.diagram.rulersAndGrid"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.domainstore.preferences.DiagramRulersAndGridPreferencePage">
+            class="org.openiaml.model.model.diagram.domain_store.preferences.DiagramRulersAndGridPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.pathmaps"
@@ -199,7 +236,7 @@
       <?gmfgen generated="true"?>
       <propertyContributor
             contributorId="org.openiaml.model.diagram.domain_store"
-            labelProvider="org.openiaml.model.model.diagram.domainstore.sheet.IamlSheetLabelProvider">
+            labelProvider="org.openiaml.model.model.diagram.domain_store.sheet.IamlSheetLabelProvider">
          <propertyCategory category="domain"/>
          <propertyCategory category="visual"/>
          <propertyCategory category="extra"/>
@@ -250,19 +287,19 @@
          <propertySection
             id="property.section.domain" 
             tab="property.tab.domain"
-            class="org.openiaml.model.model.diagram.domainstore.sheet.IamlPropertySection">
+            class="org.openiaml.model.model.diagram.domain_store.sheet.IamlPropertySection">
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
-            <input type="org.openiaml.model.model.diagram.domainstore.navigator.IamlAbstractNavigatorItem"/>
+            <input type="org.openiaml.model.model.diagram.domain_store.navigator.IamlAbstractNavigatorItem"/>
          </propertySection>
       </propertySections>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
       <?gmfgen generated="true"?>
-      <viewProvider class="org.openiaml.model.model.diagram.domainstore.providers.IamlViewProvider">
+      <viewProvider class="org.openiaml.model.model.diagram.domain_store.providers.IamlViewProvider">
          <Priority name="Lowest"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Store"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_DomainStore"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
       </viewProvider>
@@ -270,30 +307,37 @@
 
    <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
       <?gmfgen generated="true"?>
-      <editpartProvider class="org.openiaml.model.model.diagram.domainstore.providers.IamlEditPartProvider">
+      <editpartProvider class="org.openiaml.model.model.diagram.domain_store.providers.IamlEditPartProvider">
          <Priority name="Lowest"/>
       </editpartProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
       <?gmfgen generated="true"?>
-      <modelingAssistantProvider class="org.openiaml.model.model.diagram.domainstore.providers.IamlModelingAssistantProvider">
+      <modelingAssistantProvider class="org.openiaml.model.model.diagram.domain_store.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
       </modelingAssistantProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
       <?gmfgen generated="true"?>
-      <IconProvider class="org.openiaml.model.model.diagram.domainstore.providers.IamlIconProvider">
+      <IconProvider class="org.openiaml.model.model.diagram.domain_store.providers.IamlIconProvider">
          <Priority name="Low"/>
       </IconProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
       <?gmfgen generated="true"?>
-      <ParserProvider class="org.openiaml.model.model.diagram.domainstore.providers.IamlParserProvider">
+      <ParserProvider class="org.openiaml.model.model.diagram.domain_store.providers.IamlParserProvider">
          <Priority name="Lowest"/>
       </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.domain_store.providers.IamlShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+      </decoratorProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
@@ -304,7 +348,7 @@
                name="%metatype.name.DomainStore_79"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainStore"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.DomainStoreEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domain_store.edit.helpers.DomainStoreEditHelper">
             <param name="semanticHint" value="79"/>
          </metamodelType>
       </metamodel>
@@ -314,7 +358,7 @@
                name="%metatype.name.CompositeOperation_1001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeOperation"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.CompositeOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domain_store.edit.helpers.CompositeOperationEditHelper">
             <param name="semanticHint" value="1001"/>
          </metamodelType>
       </metamodel>
@@ -324,7 +368,7 @@
                name="%metatype.name.SingleOperation_1002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SingleOperation"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.SingleOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domain_store.edit.helpers.SingleOperationEditHelper">
             <param name="semanticHint" value="1002"/>
          </metamodelType>
       </metamodel>
@@ -334,7 +378,7 @@
                name="%metatype.name.DomainObject_1003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainObject"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.DomainObjectEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domain_store.edit.helpers.DomainObjectEditHelper">
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
@@ -344,7 +388,7 @@
                name="%metatype.name.EventTrigger_1004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.EventTriggerEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domain_store.edit.helpers.EventTriggerEditHelper">
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
@@ -354,7 +398,7 @@
                name="%metatype.name.ApplicationElementProperty_1005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.ApplicationElementPropertyEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domain_store.edit.helpers.ApplicationElementPropertyEditHelper">
             <param name="semanticHint" value="1005"/>
          </metamodelType>
       </metamodel>
@@ -364,7 +408,7 @@
                name="%metatype.name.ChainedOperation_1006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.ChainedOperationEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domain_store.edit.helpers.ChainedOperationEditHelper">
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
@@ -374,7 +418,7 @@
                name="%metatype.name.SyncWire_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SyncWire"
-               edithelper="org.openiaml.model.model.diagram.domainstore.edit.helpers.SyncWireEditHelper">
+               edithelper="org.openiaml.model.model.diagram.domain_store.edit.helpers.SyncWireEditHelper">
             <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>
@@ -382,14 +426,14 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
       <?gmfgen generated="true"?>
-      <clientContext id="Iaml_StoreClientContext">
+      <clientContext id="Iaml_DomainStoreClientContext">
          <enablement>
             <test
                property="org.eclipse.gmf.runtime.emf.core.editingDomain"
                value="org.openiaml.model.diagram.domain_store.EditingDomain"/>
          </enablement>
       </clientContext> 
-      <binding context="Iaml_StoreClientContext">
+      <binding context="Iaml_DomainStoreClientContext">
          <elementType ref="org.openiaml.model.diagram.domain_store.DomainStore_79"/>
          <elementType ref="org.openiaml.model.diagram.domain_store.CompositeOperation_1001"/>
          <elementType ref="org.openiaml.model.diagram.domain_store.SingleOperation_1002"/>
@@ -408,7 +452,7 @@
            type="org.eclipse.emf.common.ui.URIEditorInput"
            namespace="org.openiaml.model.diagram.domain_store"
            properties="isURIEditorInput"
-           class="org.openiaml.model.model.diagram.domainstore.part.IamlUriEditorInputTester">
+           class="org.openiaml.model.model.diagram.domain_store.part.IamlUriEditorInputTester">
        </propertyTester>
    </extension>
 
@@ -419,7 +463,7 @@
            type="org.eclipse.gmf.runtime.notation.View"
            namespace="org.openiaml.model.diagram.domain_store"
            properties="isShortcut"
-           class="org.openiaml.model.model.diagram.domainstore.part.IamlShortcutPropertyTester">
+           class="org.openiaml.model.model.diagram.domain_store.part.IamlShortcutPropertyTester">
        </propertyTester>
    </extension>
 
@@ -444,17 +488,17 @@
             id="org.openiaml.model.diagram.domain_store.resourceContent" 
             name="%navigatorContentName" 
             priority="normal" 
-            contentProvider="org.openiaml.model.model.diagram.domainstore.navigator.IamlNavigatorContentProvider" 
-            labelProvider="org.openiaml.model.model.diagram.domainstore.navigator.IamlNavigatorLabelProvider"
+            contentProvider="org.openiaml.model.model.diagram.domain_store.navigator.IamlNavigatorContentProvider" 
+            labelProvider="org.openiaml.model.model.diagram.domain_store.navigator.IamlNavigatorLabelProvider"
             icon="icons/obj16/ModelDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="iaml_store_diagram"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_domain_store_diagram"/>
                </and>
-               <instanceof value="org.openiaml.model.model.diagram.domainstore.navigator.IamlAbstractNavigatorItem"/>
+               <instanceof value="org.openiaml.model.model.diagram.domain_store.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.domain_store.isShortcut"/>
            	   </adapt>
@@ -462,7 +506,7 @@
          </triggerPoints>
          <possibleChildren>
             <or>
-         	   <instanceof value="org.openiaml.model.model.diagram.domainstore.navigator.IamlAbstractNavigatorItem"/>
+         	   <instanceof value="org.openiaml.model.model.diagram.domain_store.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.domain_store.isShortcut"/>
            	   </adapt>
@@ -470,24 +514,24 @@
          </possibleChildren>
          <commonSorter 
                id="org.openiaml.model.diagram.domain_store.navigatorSorter" 
-               class="org.openiaml.model.model.diagram.domainstore.navigator.IamlNavigatorSorter">
+               class="org.openiaml.model.model.diagram.domain_store.navigator.IamlNavigatorSorter">
             <parentExpression>
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="iaml_store_diagram"/>
+        	         <test property="org.eclipse.core.resources.extension" value="iaml_domain_store_diagram"/>
                   </and>
-                  <instanceof value="org.openiaml.model.model.diagram.domainstore.navigator.IamlAbstractNavigatorItem"/>
+                  <instanceof value="org.openiaml.model.model.diagram.domain_store.navigator.IamlAbstractNavigatorItem"/>
                </or>
             </parentExpression>
          </commonSorter>
       </navigatorContent>
       <actionProvider
             id="org.openiaml.model.diagram.domain_store.navigatorActionProvider"
-            class="org.openiaml.model.model.diagram.domainstore.navigator.IamlNavigatorActionProvider">
+            class="org.openiaml.model.model.diagram.domain_store.navigator.IamlNavigatorActionProvider">
          <enablement>
             <or>
-               <instanceof value="org.openiaml.model.model.diagram.domainstore.navigator.IamlAbstractNavigatorItem"/>
+               <instanceof value="org.openiaml.model.model.diagram.domain_store.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.domain_store.isShortcut"/>
            	   </adapt>
@@ -500,7 +544,7 @@
       <?gmfgen generated="true"?>
       <linkHelper
             id="org.openiaml.model.diagram.domain_store.navigatorLinkHelper"
-            class="org.openiaml.model.model.diagram.domainstore.navigator.IamlNavigatorLinkHelper">
+            class="org.openiaml.model.model.diagram.domain_store.navigator.IamlNavigatorLinkHelper">
          <editorInputEnablement>
             <and>
                <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
@@ -508,7 +552,7 @@
             </and>
          </editorInputEnablement>
          <selectionEnablement>
-            <instanceof value="org.openiaml.model.model.diagram.domainstore.navigator.IamlAbstractNavigatorItem"/>
+            <instanceof value="org.openiaml.model.model.diagram.domain_store.navigator.IamlAbstractNavigatorItem"/>
          </selectionEnablement>
       </linkHelper>
    </extension>
@@ -516,60 +560,18 @@
       <?gmfgen generated="true"?>
       <command
          categoryId="org.eclipse.ui.category.edit"
-         defaultHandler="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramUpdateCommand"
+         defaultHandler="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramUpdateCommand"
          description="%update.diagram.description"
-         id="org.openiaml.model.model.diagram.domainstore.updateDiagram"
+         id="org.openiaml.model.model.diagram.domain_store.updateDiagram"
          name="%update.diagram.name"/>
    </extension>
    
    <extension point="org.eclipse.ui.bindings">
       <?gmfgen generated="true"?>
       <key 
-         commandId="org.openiaml.model.model.diagram.domainstore.updateDiagram"
-         contextId="org.openiaml.model.model.diagram.domainstore.ui.diagramContext"
+         commandId="org.openiaml.model.model.diagram.domain_store.updateDiagram"
+         contextId="org.openiaml.model.model.diagram.domain_store.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
-   </extension><extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
-      <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.domainstore.providers.IamlValidationDecoratorProvider">
-         <Priority name="Lowest"/>
-         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
-         <context decoratorTargets="PRIMARY_VIEW"/>
-      </decoratorProvider>
    </extension>
-<extension id="ValidationContributionItemProvider" name="Validation"
-      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
-      <?gmfgen generated="true"?>
-      <contributionItemProvider
-         class="org.openiaml.model.model.diagram.domainstore.providers.IamlValidationProvider">
-         <Priority name="Low"/>
-         <partContribution id="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID">
-            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
-            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
-         </partContribution>
-      </contributionItemProvider>
-   </extension>
-<extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
-      <?gmfgen generated="true"?>
-      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.domainstore.providers.IamlMarkerNavigationProvider">
-         <MarkerType name="org.openiaml.model.diagram.domain_store.diagnostic"/>
-         <Priority name="Lowest"/>
-      </MarkerNavigationProvider>
-   </extension>
-<extension id="diagnostic" name="Iaml Plugin (Domain Store) problems" point="org.eclipse.core.resources.markers">
-      <?gmfgen generated="true"?>
-      <super type="org.eclipse.core.resources.problemmarker"/>
-      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
-      <persistent value="true"/>
-   </extension>
-<extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
-      <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.domainstore.providers.IamlShortcutsDecoratorProvider">
-         <Priority name="Lowest"/>
-      </decoratorProvider>
-   </extension>
-
-
-
-
 </plugin>

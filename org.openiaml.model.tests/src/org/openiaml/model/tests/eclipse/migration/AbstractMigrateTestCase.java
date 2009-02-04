@@ -61,7 +61,7 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
-		assertTrue("active editor is our plugin, but is " + ep, ep instanceof IamlDiagramEditor);
+		assertEditorRoot(ep);
 		
 		// find what elements are displayed
 		editor = (IamlDiagramEditor) ep;

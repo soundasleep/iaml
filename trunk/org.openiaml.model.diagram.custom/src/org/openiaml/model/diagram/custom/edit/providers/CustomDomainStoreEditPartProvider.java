@@ -11,9 +11,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.diagram.custom.commands.generation.InferMissingElementsCommand;
 import org.openiaml.model.diagram.custom.commands.shortcuts.CreateMissingDomainStoreShortcutsCommand;
-import org.openiaml.model.model.diagram.domainstore.edit.parts.DomainStoreEditPart;
-import org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.model.diagram.domainstore.providers.IamlEditPartProvider;
+import org.openiaml.model.model.diagram.domain_store.edit.parts.DomainStoreEditPart;
+import org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorPlugin;
+import org.openiaml.model.model.diagram.domain_store.providers.IamlEditPartProvider;
 
 /**
  * We add some additional functionality to our default edit provider

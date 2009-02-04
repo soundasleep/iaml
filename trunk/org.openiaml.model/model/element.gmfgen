@@ -27,7 +27,6 @@
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
     <containsShortcutsTo>iaml</containsShortcutsTo>
-    <containsShortcutsTo>iaml_store</containsShortcutsTo>
     <containsShortcutsTo>iaml_visual</containsShortcutsTo>
     <containsShortcutsTo>iaml_wire</containsShortcutsTo>
     <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
@@ -35,8 +34,8 @@
     <containsShortcutsTo>iaml_element</containsShortcutsTo>
     <containsShortcutsTo>iaml_file_domain_store</containsShortcutsTo>
     <containsShortcutsTo>iaml_file_domain_object</containsShortcutsTo>
+    <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
@@ -44,6 +43,7 @@
     <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_file_domain_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_file_domain_object</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
     <domainDiagramElement
         href="iaml.genmodel#//model/ApplicationElement"/>
     <topLevelNodes

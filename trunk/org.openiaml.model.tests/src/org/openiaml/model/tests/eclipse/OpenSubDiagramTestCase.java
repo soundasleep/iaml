@@ -60,9 +60,7 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
-		assertEquals("active editor is the domain store plugin", 
-				"org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditor", 
-				ep2.getClass().getName());
+		assertEditorDomainStore(ep2);
 
 		// close editors
 		((DiagramDocumentEditor) ep2).close(false);

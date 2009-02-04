@@ -18,13 +18,13 @@ public class MigrateSignupForm extends AbstractMigrateTestCase {
 
 	public void testLoadModel() throws Exception {
 
-		// there should be four children
+		// there should be two children
 		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasPage(editor, "SignupForm");
 		ShapeNodeEditPart store = assertHasDomainStore(editor, "domain store");
-
+		
 		// here we could open the page/stores and see what they contain
 		assertNotNull(page);
 		assertNotNull(store);

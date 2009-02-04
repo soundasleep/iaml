@@ -68,7 +68,6 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 				throw new InferenceException("Cannot create an element in a null container");
 			
 			IElementType et = getDiagramEditType(elementType);
-			et = org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getElementType(elementType);
 			
 			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest(getEditingDomain(), container, et ), elementType );
 			if (cc == null) {
@@ -201,8 +200,8 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
 		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domain_store.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
 		}
 		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
@@ -234,8 +233,8 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getElementType(elementType);
 		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getElementType(elementType);
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domain_store.providers.IamlElementTypes.getElementType(elementType);
 		}
 		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getElementType(elementType);
@@ -262,8 +261,8 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		if (this.editorId.equals(org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
 		}
-		if (this.editorId.equals(org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.model.diagram.domainstore.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
+		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorPlugin.ID)) {
+			return org.openiaml.model.model.diagram.domain_store.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);
 		}
 		if (this.editorId.equals(org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.model.diagram.domain_object.providers.IamlElementTypes.getCreateNodeCommand(request, elementType);

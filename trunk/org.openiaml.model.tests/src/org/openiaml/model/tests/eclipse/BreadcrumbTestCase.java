@@ -37,7 +37,7 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
-		assertTrue("active editor is our plugin, but is " + ep, ep instanceof IamlDiagramEditor);
+		assertEditorRoot(ep);
 		
 		// find what elements are displayed
 		IamlDiagramEditor editor = (IamlDiagramEditor) ep;
@@ -56,9 +56,7 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
-				ep2.getClass().getName());
+		assertEditorVisual(ep2);
 
 		{
 			org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart iep 
@@ -76,9 +74,7 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
-				formd.getClass().getName());
+		assertEditorVisual(formd);
 
 		{
 			org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart iep 
@@ -96,9 +92,7 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 
 		// if this is actually an ErrorEditPart, then an error has occured 
 		// (but it may not be obvious in the log what it is)
-		assertEquals("active editor is the visual plugin", 
-				"org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor", 
-				formd2.getClass().getName());
+		assertEditorVisual(formd2);
 
 		{
 			org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart iep 

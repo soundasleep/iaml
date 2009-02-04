@@ -79,4 +79,22 @@ public class SyncWiresTestCase extends CodegenTestCase {
 		assertTextFieldEquals("unrelated_field", "");
 
 	}
+	
+	/**
+	 * Because all of these fields are on the current page,
+	 * we must make sure that no remote functions have been
+	 * called.
+	 */
+	public void testPropertiesStayLocal() throws Exception {
+		// go to sitemap
+		IFile sitemap = getProject().getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+
+		beginAt(sitemap.getProjectRelativePath().toString());
+		assertTitleMatch("sitemap");
+
+		// no ajax methods should have been called
+		assertNoRemoteCalls();
+	}
+	
 }

@@ -40,6 +40,12 @@
 				var try_catch_depth = 0;
 			
 				«EXPAND js::Operations::expandOperations FOR this-»
+
+				/* actual page onload functions (called ONCE the page is fully loaded) */
+				var stored_onload_functions = new Array();
+				function addOnloadFunction(f) {
+					stored_onload_functions.push(f);
+				}
 				
 				// this needs to be loaded *after* the page has loaded
 				function loadStoredEvents() {
@@ -47,6 +53,12 @@
 					<?php 
 					«EXPAND php::includes::EventsPhp::eventsPhp FOR this-» 
 					?>
+					
+					// expand all onLoad functions
+					for (var i = 0; i < stored_onload_functions.length; i++) {
+						var f = stored_onload_functions[i];
+						f();
+					}
 				}
 			/* ]]> */
 			</script>
@@ -157,7 +169,9 @@
 			}
 			
 			«REM»any on-access events?«ENDREM»
-			«EXPAND js::Operations::expandEventTriggers("access") FOREACH eventTriggers-»
+			addOnloadFunction( function() {
+				«EXPAND js::Operations::expandEventTriggers("access") FOREACH eventTriggers-»
+			} );
 		/* ]]> */
 		</script>
 	</label>

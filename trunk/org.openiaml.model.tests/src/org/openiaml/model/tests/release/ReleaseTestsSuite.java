@@ -18,9 +18,10 @@ public class ReleaseTestsSuite {
 	 */
     public static Test suite() { 
         TestSuite suite = new TestSuite("Release Quality");
-
+		//$JUnit-BEGIN$
         suite.addTestSuite(PluginsTestCase.class);
-        
+        suite.addTestSuite(EcoreTestCase.class);
+		//$JUnit-END$
         return suite; 
    }
 

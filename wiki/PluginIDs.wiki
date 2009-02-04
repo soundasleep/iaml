@@ -31,10 +31,10 @@ Iaml_Operation
 org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID
 }}}
 
-iaml_store
+iaml_domain_store
 {{{
-Iaml_Store
-org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID
+Iaml_DomainStore
+org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorID
 }}}
 
 iaml_domain_object

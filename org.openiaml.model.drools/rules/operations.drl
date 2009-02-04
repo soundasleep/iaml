@@ -37,9 +37,21 @@ rule "Create 'update' operation for abstract domain attribute"
 		
 end
 
-rule "Create components of 'update' operation"
+rule "Create 'init' operation for input text field"
 	when
-		o : CompositeOperation(overridden == false, (name == "update" || name == "refresh"))
+		f : InputTextField( overridden == false )
+		not (Operation( eContainer == f, name=="init" ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		operation.setName("init");
+		insert(operation);
+		
+end
+
+rule "Create components of 'update', 'refresh', 'init' operations"
+	when
+		o : CompositeOperation(overridden == false, (name == "update" || name == "refresh" || name == "init"))
 		field : ApplicationElementProperty( eContainer == o.eContainer, name == "fieldValue" )
 
 	then

@@ -49,6 +49,7 @@ public class SyncWiresMultiple extends CodegenTestCase {
 		
 		// go to page2
 		gotoSitemapThenPage(sitemap, "page2");
+		waitForAjax();
 		
 		// should have changed
 		{
@@ -66,6 +67,7 @@ public class SyncWiresMultiple extends CodegenTestCase {
 		
 		// if we now go to the last signup user page, it should appear there
 		gotoSitemapThenPage(sitemap, "last signup user");
+		waitForAjax();
 		
 		// should have changed
 		{

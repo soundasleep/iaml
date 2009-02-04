@@ -23,15 +23,20 @@
 		«EXPAND php::EventTrigger::expandOperations FOR this-»
 	
 		?>
+		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+			"http://www.w3.org/TR/html4/loose.dtd">
 		<html>
 		<head>
 			<title>«pageTitle()»</title>
-			<link rel="stylesheet" type="text/css" href="default.css" />
-			<script language="Javascript" src="js/prototype.js"></script>
-			<script language="Javascript">
+			<link rel="stylesheet" type="text/css" href="default.css">
+			<script language="Javascript" type="text/javascript" src="js/prototype.js"></script>
+			<script language="Javascript" type="text/javascript">
+			/* <![CDATA[ */
 				«EXPAND js::includes::DefaultJs::defaultJs FOR this-»
+			/* ]]> */
 			</script>
-			<script language="Javascript">
+			<script language="Javascript" type="text/javascript">
+			/* <![CDATA[ */
 				var try_catch_depth = 0;
 			
 				«EXPAND js::Operations::expandOperations FOR this-»
@@ -43,6 +48,7 @@
 					«EXPAND php::includes::EventsPhp::eventsPhp FOR this-» 
 					?>
 				}
+			/* ]]> */
 			</script>
 		</head>
 		
@@ -71,7 +77,7 @@
 		
 		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
 		<div id="ajax_monitor"></div>
-		<script>initAjaxMonitor();</script>
+		<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
 		
 		</body>
 		</html>

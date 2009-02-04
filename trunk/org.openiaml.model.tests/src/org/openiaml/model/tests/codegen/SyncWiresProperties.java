@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
@@ -191,6 +192,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		// open up the properties file
 		waitForAjax();
 		Properties p = new Properties();
+		target.refreshLocal(IResource.DEPTH_INFINITE, monitor);	// refresh
 		p.load(target.getContents());
 		
 		// check it has changed

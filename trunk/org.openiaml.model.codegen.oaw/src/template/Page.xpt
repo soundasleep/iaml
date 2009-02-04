@@ -71,6 +71,7 @@
 		
 		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
 		<div id="ajax_monitor"></div>
+		<script>initAjaxMonitor();</script>
 		
 		</body>
 		</html>

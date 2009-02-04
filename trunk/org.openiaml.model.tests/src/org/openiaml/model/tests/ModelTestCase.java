@@ -258,7 +258,7 @@ public abstract class ModelTestCase extends WebTestCase {
 	 * @param actual actual value (A)
 	 */
 	protected void assertGreaterEq(int expected, int actual) {
-		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual > expected);
+		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual >= expected);
 	}
 	
 }

@@ -118,9 +118,9 @@ public class SyncWireProperties extends InferenceTestCase {
 		EventTrigger access1 = (EventTrigger) queryOne(f1, "iaml:eventTriggers[iaml:name='access']");
 		EventTrigger access2 = (EventTrigger) queryOne(f2, "iaml:eventTriggers[iaml:name='access']");
 		EventTrigger access3 = (EventTrigger) queryOne(f3, "iaml:eventTriggers[iaml:name='access']");
-		Operation op1 = (Operation) queryOne(f1, "iaml:operations[iaml:name='update']");
-		Operation op2 = (Operation) queryOne(f2, "iaml:operations[iaml:name='update']");
-		Operation op3 = (Operation) queryOne(f3, "iaml:operations[iaml:name='update']");
+		Operation op1 = (Operation) queryOne(f1, "iaml:operations[iaml:name='init']");
+		Operation op2 = (Operation) queryOne(f2, "iaml:operations[iaml:name='init']");
+		Operation op3 = (Operation) queryOne(f3, "iaml:operations[iaml:name='init']");
 		
 		// these field values should be parameters to run instance wires
 		{
@@ -140,30 +140,30 @@ public class SyncWireProperties extends InferenceTestCase {
 	}
 
 	/**
-	 * Test the contents of each update operation, used to
+	 * Test the contents of each init operation, used to
 	 * initialise the field at access.
 	 *  
 	 * Same as {@link SyncWireTestCase#testAllUpdates()}.
 	 * 
 	 * @throws JaxenException
 	 */
-	public void testAllUpdates() throws JaxenException {
+	public void testAllInitialises() throws JaxenException {
 		// get all 'initialise' operations
-		List<?> updates = query(root, "//iaml:operations[iaml:name='update']");
+		List<?> inits = query(root, "//iaml:operations[iaml:name='init']");
 		
 		// there are 3 input texts => there should be at least 3 initialise operations
-		assertGreaterEq(4, updates.size());
+		assertGreaterEq(3, inits.size());
 		
 		int i = 0;
-		for (Object obj : updates) {
+		for (Object obj : inits) {
 			i++;
 			String prelude = "'initialise' operation #" + i;
-			CompositeOperation update = (CompositeOperation) obj;	// should be a composite operation
-			assertEquals(prelude, update.getName(), "update");
+			CompositeOperation init = (CompositeOperation) obj;	// should be a composite operation
+			assertEquals(prelude, init.getName(), "init");
 			
 			// has a start node
-			List<?> nodes = query(update, "iaml:nodes");
-			assertEquals(prelude, nodes.size(), 2);
+			List<?> nodes = query(init, "iaml:nodes");
+			assertEquals(prelude, 2, nodes.size());
 			assertTrue(prelude, nodes.get(0) instanceof StartNode);
 			assertTrue(prelude, nodes.get(1) instanceof FinishNode);
 			

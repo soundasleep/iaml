@@ -112,14 +112,14 @@ rule "Connect parameter wire to: run instance wire from target.edit to source.up
 end
 
 # Ideally, these two commands would be joined together into one
-rule "Run instance wire from source.access to source.update"
+rule "Run instance wire from source.access to source.init"
 	when
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( ) from sw.from  
 		target : ContainsOperations( ) from sw.to
 		
 		event : EventTrigger( eContainer == source, name=="access" )
-		operation : Operation( eContainer == source, name=="update" )
+		operation : Operation( eContainer == source, name=="init" )
 		
 		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
 		
@@ -130,14 +130,14 @@ rule "Run instance wire from source.access to source.update"
 
 end
 
-rule "Run instance wire from target.access to target.update"
+rule "Run instance wire from target.access to target.init"
 	when
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( ) from sw.from  
 		target : ContainsOperations( ) from sw.to
 		
 		event : EventTrigger( eContainer == target, name=="access" )
-		operation : Operation( eContainer == target, name=="update" )
+		operation : Operation( eContainer == target, name=="init" )
 		
 		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
 		
@@ -149,14 +149,14 @@ rule "Run instance wire from target.access to target.update"
 end
 
 # Ideally, these two commands would be joined together into one
-rule "Connect parameter wire to: run instance wire from source.access to source.update"
+rule "Connect parameter wire to: run instance wire from source.access to source.init"
 	when
 		sw : SyncWire(overridden == false)
 		source : InputTextField( ) from sw.from
 		target : InputTextField( ) from sw.to
 	
 		event : EventTrigger( eContainer == source, name=="access" )
-		operation : Operation( eContainer == source, name=="update" )
+		operation : Operation( eContainer == source, name=="init" )
 		field : ApplicationElementProperty( eContainer == target, name=="fieldValue" )
 		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
@@ -168,14 +168,14 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 
 end
 
-rule "Connect parameter wire to: run instance wire from target.access to target.update"
+rule "Connect parameter wire to: run instance wire from target.access to target.init"
 	when
 		sw : SyncWire(overridden == false)
 		source : InputTextField( ) from sw.from
 		target : InputTextField( ) from sw.to
 	
 		event : EventTrigger( eContainer == target, name=="access" )
-		operation : Operation( eContainer == target, name=="update" )
+		operation : Operation( eContainer == target, name=="init" )
 		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
 		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		

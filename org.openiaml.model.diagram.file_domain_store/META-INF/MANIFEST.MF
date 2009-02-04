@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.openiaml.model.diagram.file_domain_store; singleton:=tr
 Bundle-Version: 0.1.0
 Bundle-ClassPath: .
 Bundle-Activator: org.openiaml.model.model.diagram.file_domain_store.part.IamlDiagramEditorPlugin
-Bundle-Vendor: %providerName
+Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Export-Package: org.openiaml.model.model.diagram.file_domain_store.edit.parts,
  org.openiaml.model.model.diagram.file_domain_store.part,

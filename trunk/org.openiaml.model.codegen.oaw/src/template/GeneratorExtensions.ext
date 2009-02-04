@@ -112,6 +112,21 @@ model::domain::FileDomainStore getFileDomainStore(model::domain::FileDomainAttri
 	getFileDomainObject(this).eContainer;
 model::domain::FileDomainObject getFileDomainObject(model::domain::FileDomainAttribute this) :
 	eContainer;
+
+model::DomainStore getDomainStore(model::DomainAttribute this) :
+	getDomainObject(this).eContainer;
+model::DomainObject getDomainObject(model::DomainAttribute this) :
+	eContainer;
+
+/** for a given setPropertyToValue operation, should we be calling
+  additional event triggers? */
+shouldExpandEventTriggers(model::ChainedOperation this ) :
+	getOperationName( eContainer ) == "update";
+
+getOperationName(model::Operation this) :
+	name;
+getOperationName(emf::EObject this) :
+	"[no operation name for an EObject]";
 	
 isVisibleThing(emf::EObject this) :
 	model::VisibleThing.isInstance(this);

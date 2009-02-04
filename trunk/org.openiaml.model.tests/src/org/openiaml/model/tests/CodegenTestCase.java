@@ -53,7 +53,8 @@ public class CodegenTestCase extends InferenceTestCase {
 		// sleep a little bit first, so ajax calls can continue
 		if (hasLoaded) {
 			if (getElementById("ajax_monitor") == null) {
-				Thread.sleep(2000);	// sleep for way too long, since we don't know when it will finish
+				throw new RuntimeException("Ajax monitor did not exist, even though we expected it to.");
+				// Thread.sleep(2000);	// sleep for way too long, since we don't know when it will finish
 			} else {
 				int cycles = 0;
 				while (cycles < 500) {		// max 15 seconds
@@ -149,7 +150,8 @@ public class CodegenTestCase extends InferenceTestCase {
 		assertLinkPresentWithText(pageText);
 		clickLinkWithText(pageText);
 		try {
-			assertEquals(expectedTitle, getPageTitle());		// could be different
+			assertTitleEquals(expectedTitle);
+			// assertEquals(expectedTitle, getPageTitle());		// could be different
 		} catch (Exception e) {
 			// something went wrong in the page execution, or
 			// the output is mangled HTML: output page source for debug purposes

@@ -34,13 +34,13 @@
 	«ELSEIF name=="access"»
 		// we don't expand 'access' events inline
 	«ELSE»
-		«ERROR "Unknown client-side event trigger " + this»
+		«EXPAND exception FOR throwException("Unknown client-side event trigger: " + this)»
 	«ENDIF»
 «ENDDEFINE»
 
 /* default: don't know what to do with a wire */
 «DEFINE callOperations(Boolean inline) FOR model::WireEdge»
-	«ERROR "unknown wire edge connected to edit trigger: " + this»
+	«EXPAND exception FOR throwException("Unknown wire edge connected to edit trigger: " + this)»
 «ENDDEFINE»
 
 /* 
@@ -72,7 +72,7 @@
 		); 
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
-		«ERROR "Unknown target operation type in '" + to.eContainer.metaType.name + "'"» 
+		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
 	«ENDIF-»
 «ENDDEFINE»
 
@@ -88,7 +88,7 @@
 
 /* ditto: check or error? */
 «DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::WireEdgesSource»
-	«ERROR "unknown parameter wire source: " + this»
+	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
 /* what is the runtime value of the parameter? */
@@ -103,7 +103,7 @@
 				but we want it NOW, so we can't just ask the 
 				server. we have to find out where it is.
 			«ENDREM»			
-			«EXPAND remoteParameterSource(wire, inline, this) FOR this.eContainer-»
+			«EXPAND remoteParameterSource(false, wire, inline, this) FOR this.eContainer-»
 		«ENDIF»
 	«ELSE»
 		get_application_element_property("«safeName()-»")
@@ -115,18 +115,58 @@
 «ENDDEFINE»
 
 /* a remote data source */
-«DEFINE remoteParameterSource(model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR emf::EObject»
-	«ERROR "Cannot find a remote parameter source for " + this»
-«ENDDEFINE» 
+«DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR emf::EObject»
+	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
+«ENDDEFINE»
 
-«DEFINE remoteParameterSource(model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::domain::FileDomainAttribute»
+«DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::domain::FileDomainAttribute»
 	"<?php 
 		// remote parameter source from a .properties file
 		$db_name = "«getFileDomainStore(this).file-»";
 		$row_name = "«safeNameString(this.name)-»";
 		$properties = load_properties($db_name);
-		$value = get_property($properties, $row_name);
+		$value = get_property($properties, $row_name, null);
+		«IF require»
+			// the value is required
+			if ($value === null) {
+				throw new IamlRuntimeException("Could not fetch row '$row_name' from properties database '$db_name': no results found");
+			}
+		«ENDIF»
 		echo htmlspecialchars($value); 
+	?>" 
+«ENDDEFINE» 
+
+«DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::DomainAttribute»
+	"<?php 
+		// remote parameter source from a database file
+		$db_name = "sqlite:«safeNameString(getDomainStore(this).id)».db";
+		$table_name = "«safeNameString(getDomainObject(this).name)»";
+		$row_name = "«safeNameString(this.name)»";
+		
+		// TODO: put this into a function
+		if (!$db_name)
+			local_die("no $db_type db found");
+		if (!$table_name)
+			local_die("no $db_type table found (db=$db_name)");
+		if (!$row_name)
+			local_die("no $db_type row found (table=$table_name)");
+		
+		// connect to the database source
+		$db = new PDO($db_name) or local_die("could not open $db_type db '$db_name'");
+		
+		// does anything exist?
+		$results = $db->query("SELECT $row_name FROM $table_name") or local_die("could not look for existing values in $db_type '$table_name': " .print_r($db->errorInfo(), true));
+		if ($row = $results->fetch()) {
+			// update
+			echo htmlspecialchars($row[$row_name]);
+		} else {
+			// empty
+			«IF require»
+				throw new IamlRuntimeException("Could not fetch row '$row_name' from table '$table_name' from database '$db_name': no results found");
+			«ELSE»
+				// not required
+			«ENDIF»
+		}		
 	?>" 
 «ENDDEFINE» 
 
@@ -279,7 +319,11 @@
 			now we expand all the event triggers for the source element that contains the fieldValue: 
 			if any of them have an eventTrigger, they should be called if necessary
 		«ENDREM»
-		«EXPAND expandEventTriggersInline FOR outFlows.first().to.eContainer-»
+		«IF shouldExpandEventTriggers(this)»
+			«EXPAND expandEventTriggersInline FOR outFlows.first().to.eContainer-»
+		«ELSE»
+			// we don't call additional events for «eContainer» 
+		«ENDIF»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
 		«ERROR "Unknown client-side function to expand: " + this»
@@ -317,7 +361,7 @@
 
 /* data flows in */
 «DEFINE setPropertyToValueInflowTarget FOR model::DataFlowEdgesSource»
-	«ERROR "unknown data flow edge source for setPropertyToValue: " + this»
+	«EXPAND exception FOR throwException("Unknown data flow edge source for setPropertyToValue: " + this)»
 «ENDDEFINE»
 
 // TODO need to wrap value in some sort of encoding algorithm
@@ -335,7 +379,7 @@
 
 /** get the data for the elements we are checking */
 «DEFINE expandCheckInflowsName FOR model::DataFlowEdgesSource-»
-	«ERROR "Unknown data inflow source " + this»
+	«EXPAND exception FOR throwException("Unknown data inflow edge source: " + this)»
 «ENDDEFINE»
 
 «DEFINE expandCheckInflowsName FOR model::Parameter-»
@@ -357,7 +401,7 @@
 
 /** fail edges */
 «DEFINE expandFailEdge FOR model::WireEdge-»
-	«ERROR "Cannot expand the fail edge '" + this + "'"»
+	«EXPAND exception FOR throwException("Cannot expand the unknown fail edge: " + this)»
 «ENDDEFINE»
 
 «DEFINE expandFailEdge FOR model::wires::NavigateWire-»
@@ -373,7 +417,7 @@
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations FOR model::WireEdge»
-	«ERROR "Cannot continue a chained operation for " + this»
+	«EXPAND exception FOR throwException("Cannot continue a chained operation for: " + this)»
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations FOR model::wires::NavigateWire»
@@ -385,4 +429,7 @@
 	«ELSE»
 		// ignoring fail wire
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
 «ENDDEFINE»

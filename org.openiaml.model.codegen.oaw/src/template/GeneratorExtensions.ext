@@ -123,4 +123,10 @@ isPage(emf::EObject this) :
 	model::visual::Page.isInstance(this);	
 isInputTextField(emf::EObject this) :
 	model::visual::InputTextField.isInstance(this);	
-	
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+String throwException(String message) :
+	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.throwException(java.lang.String);

@@ -47,4 +47,9 @@ public class OawCodeGenerator implements ICodeGenerator {
 		return Status.OK_STATUS;
 			
 	}
+	
+	public static void throwException(String message) {
+		throw new RuntimeException(message);
+	}
+	
 }

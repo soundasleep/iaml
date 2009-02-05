@@ -823,11 +823,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="FileDomainObjectOpenDiagramEditPolicy"
-          diagramKind="Iaml_FileDomainObject"
-          editorID="org.openiaml.model.model.diagram.file_domain_object.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/domain/FileDomainObject"/>
@@ -1570,8 +1565,8 @@
             genNodes="//@diagram/@topLevelNodes.11"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="LoginHandler"
-            description="Create new LoginHandler"
+            title="LoginHandlerKey"
+            description="Create new LoginHandlerKey"
             genNodes="//@diagram/@topLevelNodes.12"/>
       </groups>
     </palette>

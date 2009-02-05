@@ -823,6 +823,11 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="FileDomainObjectOpenDiagramEditPolicy"
+          diagramKind="Iaml_FileDomainObject"
+          editorID="org.openiaml.model.model.diagram.file_domain_object.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/domain/FileDomainObject"/>

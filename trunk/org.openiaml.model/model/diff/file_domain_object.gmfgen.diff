@@ -1,6 +1,18 @@
---- domain_store.gmfgen	2009-02-05 14:50:41.148844900 +1300
-+++ copies/domain_store.gmfgen	2009-02-05 14:50:29.789397200 +1300
-@@ -69,6 +69,11 @@
+--- file_domain_object.gmfgen	2009-02-05 14:50:47.617636300 +1300
++++ copies/file_domain_object.gmfgen	2009-02-05 14:50:29.789397200 +1300
+@@ -218,6 +218,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="OperationOpenDiagramEditPolicy"
++          diagramKind="Iaml_Operation"
++          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/ChainedOperation"/>
+@@ -271,6 +276,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,19 +24,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -172,6 +177,11 @@
+@@ -370,6 +380,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
 +      <behaviour
 +          xsi:type="gmfgen:OpenDiagramBehaviour"
-+          editPolicyClassName="DomainObjectOpenDiagramEditPolicy"
-+          diagramKind="Iaml_DomainObject"
-+          editorID="org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorID"/>
-       <modelFacet>
++          editPolicyClassName="WireOpenDiagramEditPolicy"
++          diagramKind="Iaml_Wire"
++          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
+       <modelFacet
+           xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-             href="iaml.genmodel#//model/DomainObject"/>
-@@ -373,6 +383,11 @@
+@@ -427,6 +442,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

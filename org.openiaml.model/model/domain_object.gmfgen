@@ -497,41 +497,57 @@
             xsi:type="gmfgen:ToolEntry"
             title="EventTrigger"
             description="Create new EventTrigger"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/EventTrigger.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/EventTrigger.gif"
             genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="DomainAttribute"
             description="Create new DomainAttribute"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainAttribute.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainAttribute.gif"
             genNodes="//@diagram/@topLevelNodes.5"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="SingleOperation"
             description="Create new SingleOperation"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SingleOperation.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SingleOperation.gif"
             genNodes="//@diagram/@topLevelNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="CompositeOperation"
             description="Create new CompositeOperation"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeOperation.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeOperation.gif"
             genNodes="//@diagram/@topLevelNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="ChainedOperation"
             description="Create new ChainedOperation"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ChainedOperation.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ChainedOperation.gif"
             genNodes="//@diagram/@topLevelNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="ApplicationElementProperty"
             description="Create new ApplicationElementProperty"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ApplicationElementProperty.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ApplicationElementProperty.gif"
             genNodes="//@diagram/@topLevelNodes.4"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="SyncWire"
             description="Create new SyncWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
             genLinks="//@diagram/@links.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="RunInstanceWire"
             description="Create new RunInstanceWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
             genLinks="//@diagram/@links.0"/>
       </groups>
     </palette>

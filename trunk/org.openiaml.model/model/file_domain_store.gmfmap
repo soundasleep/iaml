@@ -20,7 +20,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="file_domain_store.gmftool#//@palette/@tools.0/@tools.0"/>
+          href="file_domain_store.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#FileDomainObject"/>
     </ownedChild>

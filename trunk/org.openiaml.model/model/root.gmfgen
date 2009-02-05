@@ -524,8 +524,8 @@
       </viewmap>
       <behaviour
           xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="OpenDiagramEditPolicyStore"
-          diagramKind="Iaml_Store"
+          editPolicyClassName="DomainStoreOpenDiagramEditPolicy"
+          diagramKind="Iaml_DomainStore"
           editorID="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass

@@ -1,6 +1,6 @@
---- wire.gmfgen	2008-12-09 16:52:38.092141200 +1300
-+++ copies/wire.gmfgen	2008-12-09 16:13:07.155543600 +1300
-@@ -115,6 +115,11 @@
+--- wire.gmfgen	2009-02-05 14:51:03.336486900 +1300
++++ copies/wire.gmfgen	2009-02-05 14:50:29.805022300 +1300
+@@ -119,6 +119,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,7 +12,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -271,6 +276,11 @@
+@@ -275,6 +280,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -24,7 +24,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/visual/InputTextField"/>
-@@ -543,6 +553,11 @@
+@@ -547,6 +557,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -36,7 +36,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -603,6 +618,11 @@
+@@ -607,6 +622,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -48,3 +48,96 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
+@@ -878,30 +898,6 @@
+         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+     <childReferences
+         parent="//@diagram/@links.0"
+-        child="//@diagram/@topLevelNodes.1"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.1"
+-        child="//@diagram/@links.0"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.0"
+-        child="//@diagram/@topLevelNodes.2"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.2"
+-        child="//@diagram/@links.0"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.0"
+         child="//@diagram/@topLevelNodes.3"
+         referenceType="in_source"
+         groupName="source"
+@@ -1039,30 +1035,6 @@
+         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+     <childReferences
+         parent="//@diagram/@links.1"
+-        child="//@diagram/@topLevelNodes.1"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.1"
+-        child="//@diagram/@links.1"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.1"
+-        child="//@diagram/@topLevelNodes.2"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.2"
+-        child="//@diagram/@links.1"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.1"
+         child="//@diagram/@topLevelNodes.3"
+         referenceType="in_source"
+         groupName="source"
+@@ -1200,30 +1172,6 @@
+         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+     <childReferences
+         parent="//@diagram/@links.2"
+-        child="//@diagram/@topLevelNodes.1"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.1"
+-        child="//@diagram/@links.2"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.2"
+-        child="//@diagram/@topLevelNodes.2"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.2"
+-        child="//@diagram/@links.2"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.2"
+         child="//@diagram/@topLevelNodes.3"
+         referenceType="in_source"
+         groupName="source"

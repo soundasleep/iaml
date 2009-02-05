@@ -1,6 +1,6 @@
---- element.gmfgen	2008-12-09 16:52:25.529480400 +1300
-+++ copies/element.gmfgen	2008-12-09 16:13:07.139918400 +1300
-@@ -116,6 +116,11 @@
+--- element.gmfgen	2009-02-05 14:50:44.773868100 +1300
++++ copies/element.gmfgen	2009-02-05 14:50:29.789397200 +1300
+@@ -120,6 +120,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,7 +12,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -319,6 +324,11 @@
+@@ -323,6 +328,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -24,7 +24,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -376,6 +386,11 @@
+@@ -380,6 +390,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

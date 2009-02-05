@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -16,6 +17,12 @@ import java.util.Properties;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -93,12 +100,38 @@ public class XmlTestCase extends TestCase {
 	}
 
 	/**
+	 * Try saving an XML document.
+	 */
+	public void saveDocument(Document doc, File target) throws IOException, TransformerException {
+        TransformerFactory transfac = TransformerFactory.newInstance();
+        Transformer trans = transfac.newTransformer();
+        trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");	// omit '<?xml version="1.0"?>'
+        trans.setOutputProperty(OutputKeys.INDENT, "yes");
+
+        // TODO clean this up into a piped input/output stream setup?
+		FileWriter sw = new FileWriter(target);
+        StreamResult result = new StreamResult(sw);
+        DOMSource source = new DOMSource(doc);
+        trans.transform(source, result);
+        sw.close();
+	}
+	
+	/**
 	 * Assert that the given file exists.
 	 * 
 	 * @param source
 	 */
 	public void assertFileExists(File source) {
-		assertTrue("File '" + source.getAbsolutePath() + "' doesn't exist.", source.exists());
+		assertFileExists("", source);
+	}
+	
+	/**
+	 * Assert that the given file exists.
+	 * 
+	 * @param source
+	 */
+	public void assertFileExists(String prefix, File source) {
+		assertTrue(prefix + "File '" + source.getAbsolutePath() + "' doesn't exist.", source.exists());
 	}
 	
 	/**
@@ -125,4 +158,14 @@ public class XmlTestCase extends TestCase {
 		return sb.toString();
 	}
 
+	/**
+	 * Helper method: assert A >= B.
+	 * 
+	 * @param expected expected value (B)
+	 * @param actual actual value (A)
+	 */
+	protected void assertGreaterEq(int expected, int actual) {
+		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual >= expected);
+	}
+	
 }

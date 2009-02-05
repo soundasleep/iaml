@@ -438,7 +438,7 @@
             description="Create new EventTrigger"
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/EventTrigger.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/EventTrigger.gif"
-            genNodes="//@diagram/@topLevelNodes.0 //@diagram/@topLevelNodes.4"/>
+            genNodes="//@diagram/@topLevelNodes.4"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="SingleOperation"
@@ -472,7 +472,8 @@
             title="FileDomainObject"
             description="Create new FileDomainObject"
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/FileDomainObject.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/FileDomainObject.gif"/>
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/FileDomainObject.gif"
+            genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="SyncWire"

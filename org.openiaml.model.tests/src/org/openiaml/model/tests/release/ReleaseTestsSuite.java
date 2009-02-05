@@ -21,6 +21,7 @@ public class ReleaseTestsSuite {
 		//$JUnit-BEGIN$
         suite.addTestSuite(PluginsTestCase.class);
         suite.addTestSuite(EcoreTestCase.class);
+        suite.addTestSuite(GmfToolTestCase.class);
 		//$JUnit-END$
         return suite; 
    }

@@ -107,7 +107,7 @@ public class GmfToolTestCase extends XmlTestCase {
 				}
 				
 				// the icon should exist
-				assertFileExists(prefix, new File( "../" + largeIcon.getAttribute("bundle") + "/" + smallIcon.getAttribute("path") ));				
+				assertFileExists(prefix, new File( "../" + largeIcon.getAttribute("bundle") + "/" + largeIcon.getAttribute("path") ));				
 
 			}
 			

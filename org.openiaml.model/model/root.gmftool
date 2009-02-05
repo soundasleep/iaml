@@ -122,8 +122,8 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="LoginHandler"
-          description="Create new LoginHandler">
+          title="LoginHandlerKey"
+          description="Create new LoginHandlerKey">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon

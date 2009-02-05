@@ -339,7 +339,7 @@
       </viewmap>
       <behaviour
           xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="VisualOpenDiagramEditPolicy"
+          editPolicyClassName="OpenDiagramEditPolicyVisual"
           diagramKind="Iaml_Visual"
           editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet>
@@ -524,9 +524,9 @@
       </viewmap>
       <behaviour
           xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="DomainStoreOpenDiagramEditPolicy"
-          diagramKind="Iaml_DomainStore"
-          editorID="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorID"/>
+          editPolicyClassName="OpenDiagramEditPolicyStore"
+          diagramKind="Iaml_Store"
+          editorID="org.openiaml.model.model.diagram.domainstore.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/DomainStore"/>
@@ -582,7 +582,7 @@
       </viewmap>
       <behaviour
           xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="VisualOpenDiagramEditPolicy"
+          editPolicyClassName="OpenDiagramEditPolicyVisual"
           diagramKind="Iaml_Visual"
           editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet>
@@ -706,11 +706,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="FileDomainStoreOpenDiagramEditPolicy"
-          diagramKind="Iaml_FileDomainStore"
-          editorID="org.openiaml.model.model.diagram.file_domain_store.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/domain/FileDomainStore"/>
@@ -931,8 +926,8 @@
             genNodes="//@diagram/@topLevelNodes.9"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="LoginHandler"
-            description="Create new LoginHandler"
+            title="LoginHandlerKey"
+            description="Create new LoginHandlerKey"
             genNodes="//@diagram/@topLevelNodes.10"/>
         <entries
             xsi:type="gmfgen:ToolEntry"

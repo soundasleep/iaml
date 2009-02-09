@@ -913,8 +913,8 @@
             xsi:type="gmfgen:ToolEntry"
             title="Page"
             description="Create new Page"
-            largeIconPath="/org.openiaml.model/icons/full/obj32/html.png"
-            smallIconPath="/org.openiaml.model/icons/full/obj16/html.png"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Page.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Page.gif"
             genNodes="//@diagram/@topLevelNodes.5"/>
         <entries
             xsi:type="gmfgen:ToolEntry"

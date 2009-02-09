@@ -92,12 +92,12 @@
           description="Create new Page">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/html.png"
-            bundle="org.openiaml.model"/>
+            path="icons/full/obj16/Page.gif"
+            bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/html.png"
-            bundle="org.openiaml.model"/>
+            path="icons/full/obj32/Page.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"

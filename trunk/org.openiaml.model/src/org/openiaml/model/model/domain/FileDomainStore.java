@@ -6,6 +6,10 @@
  */
 package org.openiaml.model.model.domain;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.openiaml.model.ExtendedProperties;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.InferenceException;
@@ -61,5 +65,16 @@ public interface FileDomainStore extends AbstractDomainStore {
 	 * @return true if the model has changed
 	 */
 	boolean refreshMappings(EcoreCreateElementsHelper handler) throws InferenceException;
+
+	/**
+	 * Get the properties file referenced by the FileReference.
+	 * @throws InferenceException 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * 
+	 * @see #getFile()
+	 * @generated NOT
+	 */
+	ExtendedProperties getPropertiesFile() throws InferenceException, FileNotFoundException, IOException;
 
 } // FileDomainStore

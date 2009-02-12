@@ -16,10 +16,10 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.openiaml.model.ExtendedProperties;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.domain.AbstractDomainAttribute;
 import org.openiaml.model.model.domain.AbstractDomainObject;
@@ -200,18 +200,7 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 			throws InferenceException {
 		
 		try {
-			// we need to get the relative path
-			URI relativePath = this.eResource().getURI();
-			
-			if (getFile() == null)
-				throw new InferenceException("No file to map to");
-			File f = getFile().toFile(relativePath);
-			if (!f.exists())
-				throw new InferenceException("File does not exist: " + f);
-			if (!f.canRead())
-				throw new InferenceException("Cannot read file: " + f);
-			Properties props = new Properties();
-			props.load(new FileInputStream(f));
+			Properties props = getPropertiesFile();
 			
 			// create and load the domain object if necessary
 			refreshFileDomainObject(handler, props);
@@ -297,6 +286,27 @@ public class FileDomainStoreImpl extends AbstractDomainStoreImpl implements File
 		
 		return fda;
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.model.domain.FileDomainStore#getPropertiesFile()
+	 */
+	@Override
+	public ExtendedProperties getPropertiesFile() throws InferenceException, FileNotFoundException, IOException {
+		// we need to get the relative path
+		URI relativePath = this.eResource().getURI();
+		
+		if (getFile() == null)
+			throw new InferenceException("No file to map to");
+		File f = getFile().toFile(relativePath);
+		if (!f.exists())
+			throw new InferenceException("File does not exist: " + f);
+		if (!f.canRead())
+			throw new InferenceException("Cannot read file: " + f);
+		ExtendedProperties props = new ExtendedProperties();
+		props.load(new FileInputStream(f));
+
+		return props;
 	}
 
 } //FileDomainStoreImpl

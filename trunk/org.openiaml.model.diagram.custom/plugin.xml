@@ -214,6 +214,16 @@
 			 <selection class="org.openiaml.model.model.diagram.edit.parts.FileDomainStoreEditPart">
 			 </selection>
          </action>
+         
+         <action
+               class="org.openiaml.model.diagram.custom.actions.RefreshMappingsActionWithDrools"
+               enablesFor="1"
+               id="org.openiaml.model.diagram.custom.actions.refresh"
+               label="&amp;Refresh Mappings with Drools"
+               menubarPath="ModelActions/group1">
+			 <selection class="org.openiaml.model.model.diagram.edit.parts.FileDomainStoreEditPart">
+			 </selection>
+         </action>
       </objectContribution>                    
 	</extension>
 

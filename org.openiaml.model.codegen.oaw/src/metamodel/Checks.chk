@@ -37,3 +37,15 @@ context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two 
 	!(model::ApplicationElementProperty.isInstance(from) && 
 	model::ApplicationElementProperty.isInstance(to));
 	
+context model::DomainStore ERROR "DomainStores can only contain DomainObjects" :
+	!model::DomainObject.isInstance( children.forAll( e | model::domain::AbstractDomainObject.isInstance(e) ) );
+
+context model::DomainObject ERROR "DomainObjects can only contain DomainAttributes" :
+	!model::DomainAttribute.isInstance( attributes.forAll( e | model::domain::AbstractDomainAttribute.isInstance(e) ) );
+
+context model::domain::FileDomainStore ERROR "FileDomainStores can only contain FileDomainObjects" :
+	!model::domain::FileDomainObject.isInstance( children.forAll( e | model::domain::AbstractDomainObject.isInstance(e) ) );
+
+context model::domain::FileDomainObject ERROR "FileDomainObjects can only contain FileDomainAttributes" :
+	!model::domain::FileDomainAttribute.isInstance( attributes.forAll( e | model::domain::AbstractDomainAttribute.isInstance(e) ) );
+

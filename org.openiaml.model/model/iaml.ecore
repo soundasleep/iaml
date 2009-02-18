@@ -397,7 +397,7 @@
     </eAnnotations>
     <eClassifiers xsi:type="ecore:EDataType" name="FileReference" instanceClassName="org.openiaml.model.FileReference"/>
     <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainStore" abstract="true"
-        eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements">
+        eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//ContainsWires #//GeneratesElements http://www.eclipse.org/emf/2002/Ecore#//EClass">
       <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
           eType="#//domain/AbstractDomainObject" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"

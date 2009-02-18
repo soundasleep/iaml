@@ -382,9 +382,9 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		// Add supertypes to classes
 		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
 		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsEventTriggers());
-		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		abstractDomainStoreEClass.getESuperTypes().add(ecorePackage.getEClass());
 		abstractDomainObjectEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
 		abstractDomainObjectEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		abstractDomainAttributeEClass.getESuperTypes().add(theModelPackage.getApplicationElement());

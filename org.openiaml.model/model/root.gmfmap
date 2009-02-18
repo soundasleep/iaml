@@ -197,7 +197,7 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainStoreName"/>
         <features
-            href="iaml.ecore#//NamedElement/name"/>
+            href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -266,7 +266,7 @@
         <diagramLabel
             href="iaml.gmfgraph#FileDomainStoreName"/>
         <features
-            href="iaml.ecore#//NamedElement/name"/>
+            href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

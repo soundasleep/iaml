@@ -7,14 +7,13 @@
 package org.openiaml.model.model.domain;
 
 import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.ecore.EClass;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.GeneratesElements;
-import org.openiaml.model.model.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +33,7 @@ import org.openiaml.model.model.NamedElement;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractDomainStore extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, GeneratesElements {
+public interface AbstractDomainStore extends ContainsOperations, ContainsEventTriggers, ContainsWires, GeneratesElements, EClass {
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.domain.AbstractDomainObject}.

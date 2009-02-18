@@ -40,5 +40,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf,
  org.eclipse.gmf.runtime.notation,
  org.eclipse.gmf.runtime.diagram.core,
- org.eclipse.gmf.runtime.diagram.ui
+ org.eclipse.gmf.runtime.diagram.ui,
+ org.eclipse.emf.codegen,
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.emf.codegen.ecore.ui,
+ org.eclipse.emf.codegen.ui
 Eclipse-LazyStart: true

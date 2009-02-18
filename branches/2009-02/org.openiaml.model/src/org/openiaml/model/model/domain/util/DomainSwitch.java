@@ -9,6 +9,9 @@ package org.openiaml.model.model.domain.util;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -108,10 +111,12 @@ public class DomainSwitch<T> {
 				T result = caseAbstractDomainStore(abstractDomainStore);
 				if (result == null) result = caseContainsOperations(abstractDomainStore);
 				if (result == null) result = caseContainsEventTriggers(abstractDomainStore);
-				if (result == null) result = caseNamedElement(abstractDomainStore);
 				if (result == null) result = caseContainsWires(abstractDomainStore);
 				if (result == null) result = caseGeneratesElements(abstractDomainStore);
-				if (result == null) result = caseGeneratedElement(abstractDomainStore);
+				if (result == null) result = caseEClass(abstractDomainStore);
+				if (result == null) result = caseEClassifier(abstractDomainStore);
+				if (result == null) result = caseENamedElement(abstractDomainStore);
+				if (result == null) result = caseEModelElement(abstractDomainStore);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -155,10 +160,12 @@ public class DomainSwitch<T> {
 				if (result == null) result = caseAbstractDomainStore(fileDomainStore);
 				if (result == null) result = caseContainsOperations(fileDomainStore);
 				if (result == null) result = caseContainsEventTriggers(fileDomainStore);
-				if (result == null) result = caseNamedElement(fileDomainStore);
 				if (result == null) result = caseContainsWires(fileDomainStore);
 				if (result == null) result = caseGeneratesElements(fileDomainStore);
-				if (result == null) result = caseGeneratedElement(fileDomainStore);
+				if (result == null) result = caseEClass(fileDomainStore);
+				if (result == null) result = caseEClassifier(fileDomainStore);
+				if (result == null) result = caseENamedElement(fileDomainStore);
+				if (result == null) result = caseEModelElement(fileDomainStore);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -379,6 +386,66 @@ public class DomainSwitch<T> {
 	 * @generated
 	 */
 	public T caseGeneratesElements(GeneratesElements object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EModel Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EModel Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEModelElement(EModelElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>ENamed Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>ENamed Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseENamedElement(ENamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EClassifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EClassifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEClassifier(EClassifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EClass</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EClass</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEClass(EClass object) {
 		return null;
 	}
 

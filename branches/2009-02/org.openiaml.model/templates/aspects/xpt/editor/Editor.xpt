@@ -1,0 +1,28 @@
+/**
+ * We extend the editor to automatically validate the entire model
+ * every time the model is saved.
+ */
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
+«EXTENSION xpt::editor::Utils»
+
+/**
+ * Add our extensions in the "constructor" (additions isn't actually in the class definition)
+ */
+«AROUND constructor FOR gmfgen::GenEditorView-»
+	«targetDef.proceed()»
+	
+	«EXPAND xpt::Common::generatedMemberComment»
+	public void doSave(org.eclipse.core.runtime.IProgressMonitor progressMonitor) {
+		super.doSave(progressMonitor);
+		
+		// once saved, force validation (Jevon edit)
+		«REM»
+			should be defaultValidateActionClassName(), not 'ValidateAction' literal,
+			but I don't know how to get from a GenEditorView to a GenDiagram
+		«ENDREM»
+		«editorGen.editor.packageName».ValidateAction.runValidation(this.getDiagramEditPart(), this.getDiagram());
+	}
+
+«ENDAROUND»

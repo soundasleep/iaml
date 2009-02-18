@@ -1,0 +1,83 @@
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.eclipse.emf.ecore.*;
+import java.util.*;
+import java.io.*;
+import org.openiaml.model.*;
+import org.openiaml.model.model.*;	// for ModelPackage
+import org.openiaml.model.model.domain.*;
+
+import org.openiaml.model.inference.*;		// for handler
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+
+/*
+rule "Refresh FileDomainStore mappings"
+		
+	when
+		p : Properties ( )
+		fds : FileDomainStore ( overridden == false, propertiesFile == p )
+		not ( FileDomainObject ( eContainer == fds, name == "properties" ))
+
+	then
+		FileDomainObject fdo = handler.generatedFileDomainObject(fds, fds);
+		fdo.setName("properties");
+		insert(fdo);
+		
+end
+*/
+
+rule "Refresh FileDomainStore mappings (2)"
+		
+	when
+		$fds : FileDomainStore ( overridden == false )
+		p : ExtendedProperties ( ) from $fds.propertiesFile
+		not ( FileDomainObject ( eContainer == $fds, name == "properties" ))
+
+	then
+		FileDomainObject fdo = handler.generatedFileDomainObject($fds, $fds);
+		handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
+		insert(fdo);
+		
+end
+
+/*
+this rule doesn't work unless you also insert() all the Properties.
+
+rule "Refresh FileDomainObject mappings"
+		
+	when
+		$p : Properties ( )
+		$key : String ( ) from $p.stringPropertyNames 
+		fds : FileDomainStore ( overridden == false, propertiesFile == $p )
+		fdo : FileDomainObject ( eContainer == fds, name == "properties" )
+		not ( FileDomainAttribute ( eContainer == fdo, name == $key ))
+
+	then
+		FileDomainAttribute fda = handler.generatedFileDomainAttribute(fdo, fdo);
+		handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
+		insert(fda);
+		
+end
+*/
+
+// unfortunately $p.stringPropertyNames() cannot be iterated over.
+// this is either because Drools expects getFieldName(), or it cannot
+// iterate over Set or Collection
+rule "Refresh FileDomainObject mappings (2)"
+		
+	when
+		$fds : FileDomainStore ( overridden == false )
+		$p : ExtendedProperties ( ) from $fds.propertiesFile
+		$key : String ( ) from $p.propertyNames
+		fdo : FileDomainObject ( eContainer == $fds, name == "properties" )
+		not ( FileDomainAttribute ( eContainer == fdo, name == $key ))
+
+	then
+		FileDomainAttribute fda = handler.generatedFileDomainAttribute(fdo, fdo);
+		handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
+		insert(fda);
+		
+end

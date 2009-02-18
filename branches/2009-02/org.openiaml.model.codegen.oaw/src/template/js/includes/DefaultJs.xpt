@@ -1,0 +1,276 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE defaultJs FOR emf::EObject»
+
+var stored_ajax_monitor = 0;
+var stored_counter = { 'store_db' : 0, 
+	'store_event' : 0, 
+	'set_session' : 0, 
+	'set_application_value' : 0 };
+
+/**
+ * If we are calling Ajax calls before the page has even completely
+ * loaded, we need to either (1) store them until the page has loaded,
+ * or (2) execute them and keep a track of outstanding calls.
+ *
+ * In this implementation, we execute them and keep a track, populating
+ * the monitor once it has been loaded.
+ */
+function initAjaxMonitor() {
+	var monitor = $('ajax_monitor');
+	if (monitor == null)
+		throw new IamlJavascriptException("ajax_monitor ID was null (init)");
+		
+	monitor.innerHTML = stored_ajax_monitor;
+	stored_ajax_monitor = null;
+	
+	$('counter_store_db').innerHTML = stored_counter['store_db'];
+	$('counter_store_event').innerHTML = stored_counter['store_event'];
+	$('counter_set_session').innerHTML = stored_counter['set_session'];
+	$('counter_set_application_value').innerHTML = stored_counter['set_application_value'];
+	stored_counter = null;
+}
+
+function ajaxIncrement() {
+	var monitor = $('ajax_monitor');
+	if (monitor == null) {
+		stored_ajax_monitor++;
+	} else {
+		monitor.innerHTML = (1 * monitor.innerHTML) + 1;
+	}
+}
+
+function ajaxDecrement() {
+	var monitor = $('ajax_monitor');
+	if (monitor == null) {
+		stored_ajax_monitor--;
+	} else {
+		monitor.innerHTML = (1 * monitor.innerHTML) - 1;
+	}
+}
+
+function ajaxFailed(fail) {
+	debug("something went wrong: " + transport.responseText);
+	throw new IamlJavascriptException("AJAX called failed: " + fail);
+}
+
+function counterIncrement(id) {
+	var counter = $('counter_' + id);
+	if (counter == null) {
+		stored_counter[id]++;
+	} else {
+		counter.innerHTML = (1 * counter.innerHTML) + 1;
+	}
+}
+
+/* approach #2: use event queues stored on the server, if the function is
+   not available on the current page */
+function store_event(page_id, event_name, arg0) {
+	counterIncrement('store_event');
+	var url = 'store_event.php?page_id=' + escape(page_id) + '&event_name=' + escape(event_name) + "&arg0=" + escape(arg0);
+	debug("creating ajax request to url: " + url);
+	ajaxIncrement();
+	new Ajax.Request(url,
+  {
+    method:'get',
+    onSuccess: function(transport){
+      	var response = transport.responseText || "no response text";
+      	debug("success: " + response);
+      	document.getElementById('response').innerHTML = response;
+      	ajaxDecrement();
+    },
+    onFailure: function(transport){ 
+		var fail = 'store_event failed at ' + url + ': ' + response.responseText;
+		ajaxFailed(fail);		
+     }
+  });
+  debug("store_event called");
+}
+
+/* save directly to database (only one attribute) */
+function store_db(attribute_id, arg0) {
+	counterIncrement('store_db');
+	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&arg0=' + escape(arg0);
+	debug("creating ajax request to url: " + url);
+	ajaxIncrement();
+	new Ajax.Request(url,
+  {
+    method:'get',
+    onSuccess: function(transport){
+      	var response = transport.responseText || "no response text";
+      	debug("success: " + response);
+      	document.getElementById('response').innerHTML = response;
+      	ajaxDecrement();
+    },
+    onFailure: function(transport){ 
+		var fail = 'store_db failed at ' + url + ': ' + response.responseText;
+		ajaxFailed(fail);		
+     }
+  });
+  debug("store_db called");	
+}
+
+/* save a session variable (only one attribute) */
+function set_session(id, arg0, function_queue) {
+	counterIncrement('set_session');
+	var url = 'set_session.php?id=' + escape(id) + '&arg0=' + escape(arg0);
+	debug("creating ajax request to url: " + url);
+	ajaxIncrement();
+	new Ajax.Request(url,
+  {
+    method:'get',
+    onSuccess: function(transport){
+      	var response = transport.responseText || "no response text";
+      	debug("success: " + response);
+      	document.getElementById('response').innerHTML = response;
+      	
+      	// execute the function queue
+      	if (function_queue) {
+      		debug('executing function queue');
+      		function_queue();
+      	}
+
+      	ajaxDecrement();
+    },
+    onFailure: function(transport){ 
+		var fail = 'set_session failed at ' + url + ': ' + response.responseText;
+		ajaxFailed(fail);		
+     }
+  });
+  debug("set_session called");	
+}
+
+/* save a session variable (only one attribute) */
+function set_application_value(id, arg0, function_queue) {
+	counterIncrement('set_application_value');
+	var url = 'set_application_value.php?id=' + escape(id) + '&arg0=' + escape(arg0);
+	debug("creating ajax request to url: " + url);
+	ajaxIncrement();
+	new Ajax.Request(url,
+  {
+    method:'get',
+    onSuccess: function(transport){
+      	var response = transport.responseText || "no response text";
+      	debug("success: " + response);
+      	document.getElementById('response').innerHTML = response;
+      	
+      	// execute the function queue
+      	if (function_queue) {
+      		debug('executing function queue');
+      		function_queue();
+      	}
+
+      	ajaxDecrement();
+    },
+    onFailure: function(transport){ 
+		var fail = 'set_application_value failed at ' + url + ': ' + response.responseText;
+		ajaxFailed(fail);		
+     }
+  });
+  debug("set_application_value called");	
+}
+
+var debug_message_saved = "";
+function debug(msg) {
+	var debug_string = "<li>" + msg + "\n";
+	if (document.getElementById('debug')) {
+		document.getElementById('debug').innerHTML += debug_message_saved + debug_string;
+		debug_message_saved = "";
+	} else {
+		debug_message_saved += debug_string;
+	}
+}
+
+/**
+ * Populate all of the fields on the page.
+ */
+function populateFields() {
+	// get all fields on the page
+	debug("populating fields...");
+	populateAll(document.getElementsByTagName("input"));
+	populateAll(document.getElementsByTagName("textarea"));
+}
+
+/**
+ * Populate all of the fields in the list, based on .id and .value
+ */
+function populateAll(fields) {
+	var i;
+	for (i = 0; i < fields.length; i++) {
+		var cookieName = "field_" + fields[i].id;
+		if (readCookie(cookieName) != null) {
+			debug("field " + fields[i].id + " (cookie name " + cookieName + ") set to value " + readCookie(cookieName));
+			fields[i].value = readCookie(cookieName);
+		}
+	}
+}
+
+/**
+ * Save the value of a particular field
+ */
+function setField(field) {
+	debug("saving cookie for " + field.id);
+	createCookie("field_" + field.id, field.value, 30);
+}
+
+/**
+ * Is every element in the array equal?
+ */ 
+function is_array_equal(a) {
+	if (a.length <= 1)
+		return true;
+		
+	for (var i = 1; i < a.length; i++) {
+		if (a[0] != a[i])
+			return false;
+	}
+	
+	return true;
+}
+
+/**
+ * Define an exception class.
+ */
+function IamlJavascriptException(message) {
+	this.message = message;
+	
+	this.getMessage = function() { return message; }
+	this.toString = function() { return "IamlJavascriptException: " + message; } 
+}
+
+// ---------
+
+/**
+ * Copied from http://www.quirksmode.org/js/cookies.html
+ */
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
+/* page onload functions (called before the page is fully loaded) */
+populateFields();
+
+«ENDDEFINE»

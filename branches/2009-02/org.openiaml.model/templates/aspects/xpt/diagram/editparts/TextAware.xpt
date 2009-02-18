@@ -1,0 +1,36 @@
+/**
+ * Add a isGenerated "/derived" property to all GeneratedElements that
+ * are generated.
+ */
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
+«EXTENSION xpt::diagram::ViewmapAttributesUtils»
+
+/**
+ * We have to redefine the entire command, because there are no
+ * extension points which we can use.
+ */
+«AROUND getLabelText FOR gmfgen::GenCommonBase-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	protected String getLabelText() {
+		String text = null;
+		org.eclipse.emf.ecore.EObject parserElement = getParserElement();
+		if (parserElement != null && getParser() != null) {
+			text = getParser().getPrintString(
+				new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter(parserElement),
+				getParserOptions().intValue());
+		}
+		if (text == null || text.length() == 0) {
+			text = defaultText;
+		}
+		
+		// Jevon addition: add "/derived" text
+		if (getParserElement() instanceof org.openiaml.model.model.GeneratedElement) {
+			if (((org.openiaml.model.model.GeneratedElement) getParserElement()).isIsGenerated()) {
+				text = "/" + text;
+			}
+		}		
+		
+		return text;
+	}
+«ENDAROUND»

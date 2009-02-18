@@ -1,0 +1,264 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/* default = nothing */
+«DEFINE expandPage FOR model::ApplicationElement-»
+«ENDDEFINE»
+
+«DEFINE expandPage FOR model::visual::Page-»
+	«FILE "output/"+safeNameString(id)+".php"-»
+<?php
+		/* generated page "«name-»" */
+
+		// include header code
+		«EXPAND php::includes::HeaderPhp::headerPhp FOR this-»
+		require("create_database.php");		// ensure DB exists
+		require("properties_file.php");
+		
+		// run any event triggers for this page
+		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
+		
+		// expand any operations (both in this page and in any surrounding scopes)
+		«EXPAND php::EventTrigger::expandOperations FOR this-»
+	
+		?>
+		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+			"http://www.w3.org/TR/html4/loose.dtd">
+		<html>
+		<head>
+			<title>«pageTitle()»</title>
+			<link rel="stylesheet" type="text/css" href="default.css">
+			<script language="Javascript" type="text/javascript" src="js/prototype.js"></script>
+			<script language="Javascript" type="text/javascript">
+			/* <![CDATA[ */
+				«EXPAND js::includes::DefaultJs::defaultJs FOR this-»
+			/* ]]> */
+			</script>
+			<script language="Javascript" type="text/javascript">
+			/* <![CDATA[ */
+				var try_catch_depth = 0;
+			
+				«EXPAND js::Operations::expandOperations FOR this-»
+
+				/* actual page onload functions (called ONCE the page is fully loaded) */
+				var stored_onload_functions = new Array();
+				function addOnloadFunction(f) {
+					stored_onload_functions.push(f);
+				}
+				
+				// this needs to be loaded *after* the page has loaded
+				function loadStoredEvents() {
+					
+					// expand all onLoad functions
+					for (var i = 0; i < stored_onload_functions.length; i++) {
+						var f = stored_onload_functions[i];
+						f();
+					}
+
+					$('response').innerHTML = "before loadStoredEvents...";
+					<?php 
+					«EXPAND php::includes::EventsPhp::eventsPhp FOR this-» 
+					?>
+
+				}
+			/* ]]> */
+			</script>
+		</head>
+		
+		<body onLoad="loadStoredEvents()">
+		<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
+		
+		<h1>«pageTitle()»</h1>
+		
+		<div id="runtime_errors"><!-- any runtime errors go into here --></div>
+		
+		<?php
+		/* expand any fail error messages */
+		if (require_get("fail")) {
+?>
+	<div class="error">
+		<p>An exception occured: <i><?php echo htmlspecialchars(require_get("fail")); ?></i></p>
+	</div>
+<?php 
+		}
+		?>
+		
+		«EXPAND expandChild FOREACH children-»
+		
+		<div id="debug"></div>
+		<div id="response">empty</div>
+		
+		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
+		<div id="debug_monitors">
+			<div id="ajax_monitor"></div>
+			<div id="counter_store_db"></div>
+			<div id="counter_store_event"></div>
+			<div id="counter_set_session"></div>
+			<div id="counter_set_application_value"></div>
+		</div>
+		<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
+		
+		</body>
+		</html>
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE expandChild FOR model::ApplicationElement-»
+«ENDDEFINE»
+
+«DEFINE expandChild FOR model::visual::InputForm-»
+	<form id="«safeNameString(id)»" 
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+		>
+		
+		<script language="Javascript" type="text/javascript">
+		/* <![CDATA[ */
+			function onChange_«safeNameString(id)»(obj) {
+				// expand all onChanges
+				«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
+
+				return false;
+			}
+			
+			function onClick_«safeNameString(id)»(obj) {
+				// expand all onClicks
+				«EXPAND js::Operations::expandEventTriggers("click") FOREACH eventTriggers-»
+			
+				return false;
+			}
+		/* ]]> */
+		</script>
+		<h2>«formName()»</h2>
+		
+		«EXPAND expandChild FOREACH children-»
+	</form>
+«ENDDEFINE»
+
+«DEFINE expandChild FOR model::visual::InputTextField-»
+	<div>
+	<label id="label_«safeNameString(id)-»">
+		«textFieldName()»
+		
+		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»"
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+			
+			«REM»any static values?«ENDREM»
+			«EXPAND staticInitialValues FOREACH inEdges» 
+			«EXPAND staticInitialValues FOREACH outEdges» 
+		>
+		
+		<script language="Javascript" type="text/javascript">
+		/* <![CDATA[ */
+			function onChange_«safeNameString(id)»(obj) {
+				// expand all onChanges
+				«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
+
+				«REM»any application element properties to change?«ENDREM»
+				«EXPAND outgoingValues FOREACH outEdges»
+				«EXPAND outgoingValues FOREACH inEdges»
+
+				return false;
+			}
+			
+			function onClick_«safeNameString(id)»(obj) {
+				// expand all onClicks
+				«EXPAND js::Operations::expandEventTriggers("click") FOREACH eventTriggers-»
+			
+				return false;
+			}
+			
+			«REM»any on-access events?«ENDREM»
+			addOnloadFunction( function() {
+				«EXPAND js::Operations::expandEventTriggers("access") FOREACH eventTriggers-»
+			} );
+		/* ]]> */
+		</script>
+	</label>
+	</div>
+«ENDDEFINE»
+
+/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
+«DEFINE staticInitialValues FOR model::WireEdge»
+«ENDDEFINE»
+
+/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
+   property as the value */
+«DEFINE staticInitialValues FOR model::wires::SyncWire»
+	«EXPAND staticInitialValue FOR from»
+	«EXPAND staticInitialValue FOR to»
+«ENDDEFINE»
+
+/* ignore: todo refactor */
+«DEFINE staticInitialValue FOR model::WireEdgesSource»
+«ENDDEFINE»
+«DEFINE staticInitialValue FOR model::WireEdgeDestination»
+«ENDDEFINE»
+
+/* we have a property to provide [in PHP] */
+«DEFINE staticInitialValue FOR model::ApplicationElementProperty»
+	«IF containingSession(this) == null»
+		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+		value="<?php echo htmlspecialchars(get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+	«ELSE»
+		«REM»contained in a Session: a session value«ENDREM»
+		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+	«ENDIF»
+«ENDDEFINE»
+
+/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
+«DEFINE outgoingValues FOR model::WireEdge»
+«ENDDEFINE»
+
+/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
+   property as the destination */
+«DEFINE outgoingValues FOR model::wires::SyncWire»
+	«EXPAND outgoingValue FOR from»
+	«EXPAND outgoingValue FOR to»
+«ENDDEFINE»
+
+/* ignore: todo refactor */
+«DEFINE outgoingValue FOR model::WireEdgesSource»
+«ENDDEFINE»
+«DEFINE outgoingValue FOR model::WireEdgeDestination»
+«ENDDEFINE»
+
+/* we have a property to set [in Javascript] */
+«DEFINE outgoingValue FOR model::ApplicationElementProperty»
+	«IF containingSession(this) == null»
+		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+		set_application_value("«safeNameString(id)»", obj.value);
+	«ELSE»
+		«REM»contained in a Session: a session value«ENDREM»
+		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", obj.value);
+	«ENDIF»
+«ENDDEFINE»
+
+/* currently, a "Button" == a submit button. */
+«DEFINE expandChild FOR model::visual::Button-»
+	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+		>
+	
+	<script language="Javascript" type="text/javascript">
+	/* <![CDATA[ */
+		function onChange_«safeNameString(id)»(obj) {
+			// expand all onChanges
+			«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
+			
+			return false;
+		}
+		
+		function onClick_«safeNameString(id)»(obj) {
+			// expand all onClicks
+			«EXPAND js::Operations::expandEventTriggers("click") FOREACH eventTriggers-»
+
+			return false;
+		}
+	/* ]]> */
+	</script>
+«ENDDEFINE»
+

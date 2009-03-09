@@ -48,30 +48,21 @@ public class TestGranularity extends XmlTestCase {
 	public void testGranularity() throws Exception {
 		loadAllPackages(ModelPackage.eINSTANCE);
 
-		// distance from InternetApplication to Operation
-		int d = dijkstra("InternetApplication", "AbstractDomainAttribute");
-		System.out.println("Distance from InternetApplication to AbstractDomainAttribute: " + d);
-		/*
-		int d = dijkstra("CompositeOperation", "InternetApplication");
-		System.out.println("Distance from CompositeOperation to InternetApplication: " + d);
-		*/
-
-		/*
-		int d2 = dijkstra("InternetApplication", "LoginHandler");
-		System.out.println("Distance from InternetApplication to LoginHandler: " + d2);
-		*/
-
-		/*
-		// start with InternetApplication
-		granularise("InternetApplication", 0);
-		
-		// print everything out
-		for (EClass c : granularity.keySet()) {
-			int g = granularity.get(c);
-			System.out.println(c.getName() + ": " + g);
+		// lets find out all distances from InternetApplication
+		for (EClass c : loaded) {
+			int d = dijkstra("InternetApplication", c); 
+			System.out.println("InternetApplication \\rightarrow " + c.getName() + ": " + d);
 		}
-		*/
 		
+	}
+
+	/**
+	 * @param string
+	 * @param c
+	 * @return
+	 */
+	private int dijkstra(String string, EClass c) {
+		return dijkstra(findLoaded(string), c);
 	}
 
 	/**
@@ -116,7 +107,6 @@ public class TestGranularity extends XmlTestCase {
 			for (EClass n : getNeighbours(u)) {
 				// where the neighbour is still in the queue
 				if (queue.contains(n)) {
-					System.out.println(u + " is connected to " + n);
 					int alt = distance.get(u) + distanceBetween(u, n);	// fixed distance of 1
 					if (alt < distance.get(n)) {
 						distance.put(n, alt);
@@ -126,16 +116,6 @@ public class TestGranularity extends XmlTestCase {
 			}
  		}
 		
-		for (EClass src : previous.keySet()) {
-			if (previous.get(src) != null) {
-				System.out.println("[ " + src.getName() + " -> " + previous.get(src).getName() + " ] = " + distance.get(src));
-			} else {
-				System.out.println("[ " + src.getName() + " -> null ] = " + distance.get(src));
-			}
-		}
-		for (EClass src : distance.keySet()) {
-			System.out.println("< " + src.getName() + " -> " + distance.get(src));
-		}
 		return distance.get(target);
 	}
 
@@ -244,117 +224,6 @@ public class TestGranularity extends XmlTestCase {
 		throw new RuntimeException("Could not find loaded class with name " + name);
 	}
 
-	/**
-	 * @param name name of class to granularise
-	 * @param i
-	 */
-	private void granularise(String name, int i) {
-		for (EClass c : loaded) {
-			if (c.getName().equals(name)) {
-				// found it
-				granularise(c, i);
-			}
-		}
-	}
-
-	/**
-	 * @param c
-	 * @param i
-	 */
-	private void granularise(EClass c, int i) {
-		List<EClass> stack = new ArrayList<EClass>();
-		granularise(c, i, stack);
-	}
-
-	/**
-	 * @param c
-	 * @param i
-	 */
-	private void granularise(EClass c, int i, List<EClass> stack) {
-		// ignore GeneratedElement and GeneratesElements
-		if (c.equals( ModelPackage.eINSTANCE.getGeneratedElement() ) ||
-				c.equals( ModelPackage.eINSTANCE.getGeneratesElements() )) {
-			// skip
-			return;
-		}
-
-		// bail on infinite loops
-		if (!stack.isEmpty() && c.equals( stack.get(stack.size() - 1) )) {
-			for (EClass s : stack) {
-				System.out.println("> " + s);
-			}
-			System.out.println("last reference: " + lastReference + " belonging to " + lastReference.getContainerClass());
-			throw new RuntimeException("Double loop with class " + c);
-		}
-		
-		if (i > 150) {
-			for (EClass s : stack) {
-				System.out.println("> " + s);
-			}
-			throw new RuntimeException("Infinite granularity loop with class " + c);
-		}
-		
-		// if non-abstract, increase granularity
-		if (!c.isAbstract() && !c.isInterface()) {
-			i++;
-		}
-
-		// do we already have it?
-		if (granularity.containsKey(c)) {
-			// only replace it if the granularity is lower
-			if (granularity.get(c) > i) {
-				System.out.println("replaced granularity for " + c + " from " + granularity.get(c) + " to " + i);
-				granularity.put(c, i);
-			}
-		} else {
-			// put it in
-			granularity.put(c, i);
-		}
-		
-		// all super types should be +1
-		for (EClass type : c.getEAllSuperTypes()) {
-			List<EClass> s2 = new ArrayList<EClass>(stack);
-			s2.add(c);
-			granularise(type, i + 1, s2);
-		}
-
-		// find all subtypes
-		/*
-		 * possibly not necessary to force?
-		 * 
-		for (EClass type : loaded) {
-			if (!type.equals(c) && type.getEAllSuperTypes().contains(c) ) {
-				// a subtype
-				List<EClass> s2 = new ArrayList<EClass>(stack);
-				s2.add(c);
-				granularise(type, i, s2);
-			}
-		}
-		*/
-		
-		// get all references
-		for (EReference r : c.getEAllReferences()) {
-			
-			// don't do references of multiplicity 1 that have
-			// EOpposite set.
-			
-			// reasoning: this is the 
-			// GeneratedElement/GeneratesElements problem.
-			
-			if (!(r.getUpperBound() == 1 && r.getEOpposite() != null)) {
-				
-				// don't do self-contained references (e.g. a Session can contain Sessions)
-				if (!r.getEReferenceType().equals(c)) {
-					
-					List<EClass> s2 = new ArrayList<EClass>(stack);
-					s2.add(c);
-					lastReference = r;
-					granularise(r.getEReferenceType(), i + 1, s2);
-					
-				}
-			}
-		}
-	}
 
 	
 }

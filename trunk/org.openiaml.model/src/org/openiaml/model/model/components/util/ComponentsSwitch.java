@@ -18,7 +18,6 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -111,7 +110,6 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(loginHandler);
 				if (result == null) result = caseWireEdgesSource(loginHandler);
 				if (result == null) result = caseWireEdgeDestination(loginHandler);
-				if (result == null) result = caseScope(loginHandler);
 				if (result == null) result = caseGeneratedElement(loginHandler);
 				if (result == null) result = caseShouldntContainWires(loginHandler);
 				if (result == null) result = defaultCase(theEObject);
@@ -268,21 +266,6 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseGeneratesElements(GeneratesElements object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scope</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scope</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScope(Scope object) {
 		return null;
 	}
 

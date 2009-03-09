@@ -806,40 +806,13 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLICATION_ELEMENT__DOMAIN_OBJECTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLICATION_ELEMENT__DOMAIN_VIEWS = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLICATION_ELEMENT__DOMAIN_INSTANCES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
+	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -848,7 +821,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
+	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Application Element</em>' class.
@@ -857,7 +830,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
+	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -957,33 +930,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT__OVERRIDDEN = DomainPackage.ABSTRACT_DOMAIN_OBJECT__OVERRIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT__DOMAIN_OBJECTS = DomainPackage.ABSTRACT_DOMAIN_OBJECT__DOMAIN_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT__DOMAIN_VIEWS = DomainPackage.ABSTRACT_DOMAIN_OBJECT__DOMAIN_VIEWS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT__DOMAIN_INSTANCES = DomainPackage.ABSTRACT_DOMAIN_OBJECT__DOMAIN_INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1119,33 +1065,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_ATTRIBUTE__OVERRIDDEN = DomainPackage.ABSTRACT_DOMAIN_ATTRIBUTE__OVERRIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_ATTRIBUTE__DOMAIN_OBJECTS = DomainPackage.ABSTRACT_DOMAIN_ATTRIBUTE__DOMAIN_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_ATTRIBUTE__DOMAIN_VIEWS = DomainPackage.ABSTRACT_DOMAIN_ATTRIBUTE__DOMAIN_VIEWS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_ATTRIBUTE__DOMAIN_INSTANCES = DomainPackage.ABSTRACT_DOMAIN_ATTRIBUTE__DOMAIN_INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1895,33 +1814,6 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLICATION_ELEMENT_CONTAINER__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLICATION_ELEMENT_CONTAINER__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLICATION_ELEMENT_CONTAINER__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2235,33 +2127,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int VISIBLE_THING__OVERRIDDEN = APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBLE_THING__DOMAIN_OBJECTS = APPLICATION_ELEMENT_CONTAINER__DOMAIN_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBLE_THING__DOMAIN_VIEWS = APPLICATION_ELEMENT_CONTAINER__DOMAIN_VIEWS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBLE_THING__DOMAIN_INSTANCES = APPLICATION_ELEMENT_CONTAINER__DOMAIN_INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -3012,33 +2877,6 @@ public interface ModelPackage extends EPackage {
 	int DYNAMIC_APPLICATION_ELEMENT_SET__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3223,33 +3061,6 @@ public interface ModelPackage extends EPackage {
 	int DERIVED_VIEW__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DERIVED_VIEW__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DERIVED_VIEW__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DERIVED_VIEW__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3402,33 +3213,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT_INSTANCE__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT_INSTANCE__DOMAIN_OBJECTS = APPLICATION_ELEMENT__DOMAIN_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT_INSTANCE__DOMAIN_VIEWS = APPLICATION_ELEMENT__DOMAIN_VIEWS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT_INSTANCE__DOMAIN_INSTANCES = APPLICATION_ELEMENT__DOMAIN_INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.

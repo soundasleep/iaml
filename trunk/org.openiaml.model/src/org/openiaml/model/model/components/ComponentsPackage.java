@@ -172,33 +172,6 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__OVERRIDDEN = ModelPackage.APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGIN_HANDLER__DOMAIN_OBJECTS = ModelPackage.APPLICATION_ELEMENT_CONTAINER__DOMAIN_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGIN_HANDLER__DOMAIN_VIEWS = ModelPackage.APPLICATION_ELEMENT_CONTAINER__DOMAIN_VIEWS;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGIN_HANDLER__DOMAIN_INSTANCES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__DOMAIN_INSTANCES;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

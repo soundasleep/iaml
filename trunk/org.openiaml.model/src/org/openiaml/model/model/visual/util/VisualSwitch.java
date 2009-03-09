@@ -136,7 +136,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(inputForm);
 				if (result == null) result = caseWireEdgeDestination(inputForm);
 				if (result == null) result = caseGeneratesElements(inputForm);
-				if (result == null) result = caseScope(inputForm);
 				if (result == null) result = caseGeneratedElement(inputForm);
 				if (result == null) result = caseShouldntContainWires(inputForm);
 				if (result == null) result = defaultCase(theEObject);
@@ -155,7 +154,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(inputTextField);
 				if (result == null) result = caseWireEdgeDestination(inputTextField);
 				if (result == null) result = caseGeneratesElements(inputTextField);
-				if (result == null) result = caseScope(inputTextField);
 				if (result == null) result = caseGeneratedElement(inputTextField);
 				if (result == null) result = caseShouldntContainWires(inputTextField);
 				if (result == null) result = defaultCase(theEObject);
@@ -174,7 +172,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(button);
 				if (result == null) result = caseWireEdgeDestination(button);
 				if (result == null) result = caseGeneratesElements(button);
-				if (result == null) result = caseScope(button);
 				if (result == null) result = caseGeneratedElement(button);
 				if (result == null) result = caseShouldntContainWires(button);
 				if (result == null) result = defaultCase(theEObject);

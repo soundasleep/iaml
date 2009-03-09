@@ -186,7 +186,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(domainObject);
 				if (result == null) result = caseWireEdgeDestination(domainObject);
 				if (result == null) result = caseGeneratesElements(domainObject);
-				if (result == null) result = caseScope(domainObject);
 				if (result == null) result = caseGeneratedElement(domainObject);
 				if (result == null) result = caseShouldntContainWires(domainObject);
 				if (result == null) result = defaultCase(theEObject);
@@ -203,7 +202,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(domainAttribute);
 				if (result == null) result = caseWireEdgeDestination(domainAttribute);
 				if (result == null) result = caseGeneratesElements(domainAttribute);
-				if (result == null) result = caseScope(domainAttribute);
 				if (result == null) result = caseGeneratedElement(domainAttribute);
 				if (result == null) result = caseShouldntContainWires(domainAttribute);
 				if (result == null) result = caseContainsWires(domainAttribute);
@@ -309,7 +307,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(applicationElement);
 				if (result == null) result = caseWireEdgeDestination(applicationElement);
 				if (result == null) result = caseGeneratesElements(applicationElement);
-				if (result == null) result = caseScope(applicationElement);
 				if (result == null) result = caseGeneratedElement(applicationElement);
 				if (result == null) result = caseShouldntContainWires(applicationElement);
 				if (result == null) result = caseContainsWires(applicationElement);
@@ -327,7 +324,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(applicationElementContainer);
 				if (result == null) result = caseWireEdgeDestination(applicationElementContainer);
 				if (result == null) result = caseGeneratesElements(applicationElementContainer);
-				if (result == null) result = caseScope(applicationElementContainer);
 				if (result == null) result = caseGeneratedElement(applicationElementContainer);
 				if (result == null) result = caseShouldntContainWires(applicationElementContainer);
 				if (result == null) result = defaultCase(theEObject);
@@ -371,7 +367,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(visibleThing);
 				if (result == null) result = caseWireEdgeDestination(visibleThing);
 				if (result == null) result = caseGeneratesElements(visibleThing);
-				if (result == null) result = caseScope(visibleThing);
 				if (result == null) result = caseGeneratedElement(visibleThing);
 				if (result == null) result = caseShouldntContainWires(visibleThing);
 				if (result == null) result = defaultCase(theEObject);
@@ -470,7 +465,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgeDestination(dynamicApplicationElementSet);
 				if (result == null) result = caseGeneratesElements(dynamicApplicationElementSet);
-				if (result == null) result = caseScope(dynamicApplicationElementSet);
 				if (result == null) result = caseGeneratedElement(dynamicApplicationElementSet);
 				if (result == null) result = caseShouldntContainWires(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsWires(dynamicApplicationElementSet);
@@ -513,7 +507,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(derivedView);
 				if (result == null) result = caseWireEdgeDestination(derivedView);
 				if (result == null) result = caseGeneratesElements(derivedView);
-				if (result == null) result = caseScope(derivedView);
 				if (result == null) result = caseGeneratedElement(derivedView);
 				if (result == null) result = caseShouldntContainWires(derivedView);
 				if (result == null) result = defaultCase(theEObject);
@@ -530,7 +523,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(domainObjectInstance);
 				if (result == null) result = caseWireEdgeDestination(domainObjectInstance);
 				if (result == null) result = caseGeneratesElements(domainObjectInstance);
-				if (result == null) result = caseScope(domainObjectInstance);
 				if (result == null) result = caseGeneratedElement(domainObjectInstance);
 				if (result == null) result = caseShouldntContainWires(domainObjectInstance);
 				if (result == null) result = defaultCase(theEObject);

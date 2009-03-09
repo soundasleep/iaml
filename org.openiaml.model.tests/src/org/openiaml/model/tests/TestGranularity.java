@@ -48,6 +48,20 @@ public class TestGranularity extends XmlTestCase {
 	public void testGranularity() throws Exception {
 		loadAllPackages(ModelPackage.eINSTANCE);
 
+		// distance from InternetApplication to Operation
+		int d = dijkstra("InternetApplication", "AbstractDomainAttribute");
+		System.out.println("Distance from InternetApplication to AbstractDomainAttribute: " + d);
+		/*
+		int d = dijkstra("CompositeOperation", "InternetApplication");
+		System.out.println("Distance from CompositeOperation to InternetApplication: " + d);
+		*/
+
+		/*
+		int d2 = dijkstra("InternetApplication", "LoginHandler");
+		System.out.println("Distance from InternetApplication to LoginHandler: " + d2);
+		*/
+
+		/*
 		// start with InternetApplication
 		granularise("InternetApplication", 0);
 		
@@ -56,7 +70,178 @@ public class TestGranularity extends XmlTestCase {
 			int g = granularity.get(c);
 			System.out.println(c.getName() + ": " + g);
 		}
+		*/
 		
+	}
+
+	/**
+	 * @param string
+	 * @param string2
+	 * @return
+	 */
+	private int dijkstra(String string, String string2) {
+		return dijkstra(findLoaded(string), findLoaded(string2));
+	}
+
+	/**
+	 * @param source
+	 * @param target
+	 */
+	private int dijkstra(EClass source, EClass target) {
+		int infinity = 5000;
+		Map<EClass, Integer> distance = new HashMap<EClass, Integer>();
+		// previous is probably not necessary if we don't need to
+		// find the path taken
+		Map<EClass, EClass> previous = new HashMap<EClass, EClass>();
+		
+		// initialise
+		for (EClass c : loaded) {
+			distance.put(c, infinity);
+			previous.put(c, null);
+		}
+		
+		// distance from source to source = 0
+		distance.put(source, 0);
+		
+		// queue of all elements in the graph to look through
+		List<EClass> queue = new ArrayList<EClass>();
+		queue.addAll( loaded );
+		
+		while (!queue.isEmpty()) {
+			// more elements to process
+			EClass u = smallestDistance(queue, distance);
+			queue.remove(u);
+			
+			// for each neighbour in u
+			for (EClass n : getNeighbours(u)) {
+				// where the neighbour is still in the queue
+				if (queue.contains(n)) {
+					System.out.println(u + " is connected to " + n);
+					int alt = distance.get(u) + distanceBetween(u, n);	// fixed distance of 1
+					if (alt < distance.get(n)) {
+						distance.put(n, alt);
+						previous.put(n, u);
+					}
+				}
+			}
+ 		}
+		
+		for (EClass src : previous.keySet()) {
+			if (previous.get(src) != null) {
+				System.out.println("[ " + src.getName() + " -> " + previous.get(src).getName() + " ] = " + distance.get(src));
+			} else {
+				System.out.println("[ " + src.getName() + " -> null ] = " + distance.get(src));
+			}
+		}
+		for (EClass src : distance.keySet()) {
+			System.out.println("< " + src.getName() + " -> " + distance.get(src));
+		}
+		return distance.get(target);
+	}
+
+	/**
+	 * @param u
+	 * @param n
+	 * @return
+	 */
+	private Integer distanceBetween(EClass u, EClass n) {
+		return 1;
+	}
+
+	/**
+	 * @param u
+	 * @param n
+	 * @return
+	 */
+	private Integer distanceBetweenOld(EClass u, EClass n) {
+		// make sure n actually belongs to u
+		for (EClass supertypes : u.getEAllSuperTypes()) {
+			if (supertypes.equals(n))
+				return 1;
+		}
+		
+		for (EReference ref : u.getEAllReferences()) {
+			if (ref.getUpperBound() == -1 && ref.getEReferenceType().equals(n)) {
+				return 1;
+			}
+		}
+		
+		throw new RuntimeException(n.getName() + " is not connected to " + u.getName());
+	}
+
+	/**
+	 * the "neighbours" of a class are those that are more concrete
+	 * than the given class.
+	 * 
+	 * @param u
+	 * @return
+	 */
+	private List<EClass> getNeighbours(EClass u) {
+		List<EClass> r = new ArrayList<EClass>();
+		
+		// neighbours of a class include all of the supertypes...
+		/*
+		 * no they don't. this would say that an Operation is
+		 * more concrete than a CompositeOperation
+		r.addAll( u.getEAllSuperTypes() );
+		*/
+		//r.addAll( u.getEAllSuperTypes() );
+		
+		// they actually include the subtypes...
+		for (EClass c : loaded) {
+			if (c.getEAllSuperTypes().contains(u) ) {
+				r.add(c);
+			}
+		}
+		
+		// ... and all types of contained multiple references
+		for (EReference ref : u.getEAllReferences()) {
+			// that actually BELONG to this class
+			//if (ref.getContainerClass().equals(u)) {
+				if (ref.getUpperBound() == -1) {
+					r.add( ref.getEReferenceType() );
+				}
+			//}
+		}
+		
+		// remove all GeneratedElement/GeneratesElements
+		r.remove(ModelPackage.eINSTANCE.getGeneratedElement());
+		r.remove(ModelPackage.eINSTANCE.getGeneratesElements());
+		
+		return r;
+	}
+
+	/**
+	 * Find the element in queue with the smallest distance.
+	 * 
+	 * @param queue
+	 * @param distance
+	 * @return
+	 */
+	private EClass smallestDistance(List<EClass> queue,
+			Map<EClass, Integer> distance) {
+		EClass result = queue.get(0);	// first = default
+		for (EClass c : queue) {
+			if (distance.get(c) < distance.get(result)) {
+				result = c;
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Find a loaded class.
+	 * 
+	 * @param name
+	 * @return
+	 */
+	private EClass findLoaded(String name) {
+		for (EClass c : loaded) {
+			if (c.getName().equals(name)) {
+				return c;
+			}
+		}
+		throw new RuntimeException("Could not find loaded class with name " + name);
 	}
 
 	/**

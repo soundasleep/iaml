@@ -51,7 +51,7 @@ public class TestGranularity extends XmlTestCase {
 		// lets find out all distances from InternetApplication
 		for (EClass c : loaded) {
 			int d = dijkstra("InternetApplication", c); 
-			System.out.println("InternetApplication \\rightarrow " + c.getName() + ": " + d);
+			System.out.println("InternetApplication -> " + c.getName() + ": " + d);
 		}
 		
 	}
@@ -116,7 +116,32 @@ public class TestGranularity extends XmlTestCase {
 			}
  		}
 		
+		// print out the path from source to target
+		printOutPath(source, target, previous);
+		
 		return distance.get(target);
+	}
+
+	/**
+	 * Print out the path from source to target
+	 * 
+	 * @param source
+	 * @param target
+	 * @param previous
+	 */
+	private void printOutPath(EClass source, EClass target,
+			Map<EClass, EClass> previous) {
+		EClass cur = target;
+		String buf = source.getName();
+		int i = 0;
+		while (cur != source && cur != null && i < 50) {
+			buf = cur.getName() + " -> " + buf;
+			cur = previous.get(cur);
+			i++;
+		}
+		if (cur == null)
+			buf = "[no path]";
+		System.out.println(buf);
 	}
 
 	/**

@@ -11,12 +11,15 @@ import java.util.List;
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.WorkingMemory;
+import org.drools.compiler.DrlParser;
 import org.drools.compiler.PackageBuilder;
 import org.drools.event.ObjectInsertedEvent;
 import org.drools.event.ObjectRetractedEvent;
 import org.drools.event.ObjectUpdatedEvent;
 import org.drools.event.WorkingMemoryEventListener;
+import org.drools.lang.descr.PackageDescr;
 import org.drools.rule.Package;
+import org.drools.xml.XmlDumper;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
@@ -204,7 +207,7 @@ public class CreateMissingElementsWithDrools {
         workingMemory.insert( model );        
         workingMemory.setGlobal("handler", handler);
         workingMemory.fireAllRules();   
-        
+
 	}
 
 	public List<String> ruleFiles = Arrays.asList(
@@ -258,7 +261,7 @@ public class CreateMissingElementsWithDrools {
 	
 			//Use package builder to build up a rule package.
 			//An alternative lower level class called "DrlParser" can also be used...
-			
+
 			PackageBuilder builder = new PackageBuilder();
 	
 			//this wil parse and compile in one step
@@ -273,6 +276,7 @@ public class CreateMissingElementsWithDrools {
 			
 			//add the package to a rulebase (deploy the rule package).
 			ruleBase.addPackage( pkg );
+	
 		}
 		
 		return ruleBase;

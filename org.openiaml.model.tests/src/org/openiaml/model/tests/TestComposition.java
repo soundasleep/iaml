@@ -54,10 +54,16 @@ public class TestComposition extends XmlTestCase {
 		loadAllPackages(ModelPackage.eINSTANCE);
 
 		// lets find out all distances from InternetApplication
+		/*
 		for (EClass c : loaded) {
 			int d = dijkstra("InternetApplication", c); 
 			System.out.println("InternetApplication -> " + c.getName() + ": " + d);
 		}
+		*/
+		String a = "InputTextField";
+		String b = "CompositeOperation";
+		System.out.println(a + " -> " + b + ": " + dijkstra(a, b));
+		System.out.println(b + " -> " + a + ": " + dijkstra(b, a));
 		
 	}
 
@@ -216,6 +222,7 @@ public class TestComposition extends XmlTestCase {
 			//if (ref.getContainerClass().equals(u)) {
 				if (!ref.getEReferenceType().equals(ModelPackage.eINSTANCE.getGeneratesElements())
 						&& !ref.getEReferenceType().equals(ModelPackage.eINSTANCE.getGeneratedElement())
+						&& ref.isContainment() /* no reverse inEdges etc */
 						&& ref.getUpperBound() == -1 ) {
 					r.add( ref.getEReferenceType() );
 					

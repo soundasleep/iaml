@@ -71,12 +71,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// more XML (specific to our use in IAML)
 			
 			Document d = loadDocument(source);
-			NodeList rhs = xpath(d, "//rhs");
+			NodeList rhsList = xpath(d, "//rhs");
 			
-			for (int i = 0; i < rhs.getLength(); i++) {
-				Text n = (Text) rhs.item(i).getFirstChild();
-				System.out.println(n.getData());
-				n.setData("testing");	// create the new nodes in here
+			for (int i = 0; i < rhsList.getLength(); i++) {
+				Text n = (Text) rhsList.item(i).getFirstChild();
+				String rhs = n.getData();
+				n.setData("");	// empty the node
+				
+				Element t = d.createElement("source");
+				n.getParentNode().appendChild(t);
+				Text t2 = d.createTextNode(rhs);
+				t.appendChild(t2);
 			}
 			
 			// out.create(source, true, monitor);

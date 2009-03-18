@@ -12,7 +12,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -482,6 +484,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 				parseJava(document, originalNode.getParentNode(), sourceCode);
 			}
 			
+			// work out the logic formula defined by each rule
+			investigateLogic(document, name);
+			
 			// out.create(source, true, monitor);
 			saveDocument(document, out.getLocation().toFile());
 
@@ -491,6 +496,67 @@ public class DumpDroolsXml extends InferenceTestCase {
 	}
 	
 	/**
+	 * Investigate XML rules to calculate their logic formulas.
+	 * TODO move all of this into separate classes (if necessary)
+	 * 
+	 * @param document
+	 * @param name
+	 */
+	private void investigateLogic(Document document, String name) throws Exception {
+		List<String> logicRules = new ArrayList<String>();
+		
+		// parse over each rule
+		NodeList rules = xpath(document, "//rule");
+		for (int i = 0; i < rules.getLength(); i++) {
+			String logic = "";
+			Element rule = (Element) rules.item(i);
+			
+			Element lhs = xpathFirst(rule, "lhs");
+			Element rhs = xpathFirst(rule, "rhs");
+			
+			for (int j = 0; j < lhs.getChildNodes().getLength(); j++) {
+				Node p2 = lhs.getChildNodes().item(j);
+				if (p2 instanceof Element) {
+					Element p = (Element) p2;
+					if (p.getNodeName().equals("pattern")) {
+						logic += logic.isEmpty() ? "" : ", ";
+						logic += p.getAttribute("object-type");
+					} else if (p.getNodeName().equals("not")) {
+						logic += logic.isEmpty() ? "" : ", ";
+						logic += "not ";
+						logic += ((Element) p.getChildNodes().item(0)).getAttribute("object-type");
+					}
+				}
+			}
+			
+			logic += " --> ";
+			// find the handler rules
+			NodeList generatedElements = xpath(rhs, "statement/assignment/statement/variable[@name='handler']/method");
+			for (int j = 0; j < generatedElements.getLength(); j++) {
+				Element g = (Element) generatedElements.item(j);
+				assertEquals("method", g.getNodeName());
+				logic += logic.isEmpty() ? "" : ", ";
+				logic += g.getAttribute("name");
+			}
+			
+			logicRules.add(logic);
+		}
+		
+		// concatenate down
+		StringBuffer out = new StringBuffer();
+		out.append("<html><h1>" + name + " rules</h1><p>\n\n<ol>\n");
+		for (String r : logicRules) {
+			out.append("<li>" + r + "</li>\n");
+		}
+		out.append("\n</ol></html>\n");
+		
+		// output to name-logic.html
+		IFile outFile = project.getFile(name + ".logic.html");
+		InputStream source = new ByteArrayInputStream(out.toString().getBytes("UTF-8"));
+		outFile.create(source, true, monitor);
+	}
+
+	/*
 	 * Helper methods, copied directly from XmlTestCase. TODO move these out into a different class.
 	 */
 
@@ -622,5 +688,6 @@ public class DumpDroolsXml extends InferenceTestCase {
 	protected void assertGreaterEq(int expected, int actual) {
 		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual >= expected);
 	}
+	
 	
 }

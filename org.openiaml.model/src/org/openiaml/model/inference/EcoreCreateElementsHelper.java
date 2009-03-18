@@ -12,6 +12,7 @@ import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
@@ -73,6 +74,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_IsGenerated(), true);
 	}
 
+	public DomainStore generatedDomainStore(GeneratesElements by, InternetApplication container) throws InferenceException {
+		DomainStore event = (DomainStore) createElement( container, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
+		setGeneratedBy(event, by);
+		return event;
+	}
+	
 	public EventTrigger generatedEventTrigger(GeneratesElements by, ContainsEventTriggers container) throws InferenceException {
 		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
 		setGeneratedBy(event, by);

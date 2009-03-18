@@ -58,48 +58,46 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * the given node.
 	 * 
 	 * Generates:
+	 * <pre>
 	 * RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
-	 * <statement>
-	 *   <assignment>
-	 *     <set-variable name="rw" type="RunInstanceWire" />
-	 *     <statement>
-	 *       <variable name="handler">
-	 *         <method name="generatedRunInstanceWire">
-	 *           <argument-list>...</argument-list>
-	 *         </method>
-	 *       </variable>
-	 *     </statement>
-	 *   </assignment>
-	 * </statement>
+     * &lt;statement&gt;
+     *   &lt;assignment&gt;
+     *     &lt;set-variable name="rw" type="RunInstanceWire" /&gt;
+     *     &lt;statement&gt;
+     *       &lt;variable name="handler"&gt;
+     *         &lt;method name="generatedRunInstanceWire"&gt;
+     *           &lt;argument-list&gt;...&lt;/argument-list&gt;
+     *         &lt;/method&gt;
+     *       &lt;/variable&gt;
+     *     &lt;/statement&gt;
+     *   &lt;/assignment&gt;
+     * &lt;/statement&gt;
+     * 
+     * rw.setName("run");
+     * &lt;statement&gt;
+     *   &lt;variable name="rw"&gt;
+     *    &lt;method name="insert"&gt;
+     *      &lt;argument-list&gt;
+     *            &lt;string-argument value="run" /&gt;
+     *        &lt;/argument-list&gt;
+     *    &lt;/method&gt;
+     *   &lt;/variable&gt;
+     * &lt;/statement&gt;
+     * 
+     * insert(rw);
+     * &lt;statement&gt;
+     *   &lt;method name="insert"&gt;
+     *    &lt;argument-list&gt;
+     *        &lt;variable-argument name="rw" /&gt;
+     *      &lt;/argument-list&gt;
+     *   &lt;/method&gt;
+     * &lt;/statement&gt;
+	 * </pre>
 	 * 
-	 * rw.setName("run");
-	 * <statement>
-	 *   <variable name="rw">
-	 *   	<method name="insert">
-	 *   		<argument-list>
-	 *        		<string-argument value="run" />
-	 *     		</argument-list>
-	 *  	</method>
-	 *   </variable>
-	 * </statement>
-	 * 
-	 * insert(rw);
-	 * <statement>
-	 *   <method name="insert">
-	 *   	<argument-list>
-	 *        <variable-argument name="rw" />
-	 *      </argument-list>
-	 *   </method>
-	 * </statement>
-	 * 
-	 * 				Text n = (Text) rhsList.item(i).getFirstChild();
-				String rhs = n.getData();
-				n.setData("");	// empty the node
-				
-				Element t = d.createElement("source");
-				n.getParentNode().appendChild(t);
-				Text t2 = d.createTextNode(rhs);
-				t.appendChild(t2);
+	 * <p><b>NOTE</b> All comments will be stripped out first, so
+	 * any string that contains //, /* and # will be destroyed.
+	 * There is also no support for nested method calls, or
+	 * casting.</p>
 	 * 
 	 * @param parent
 	 * @param java
@@ -109,6 +107,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// first, lets just destroy all comments
 			java = java.replaceAll("//[^\n]*\n", "");
 			java = java.replaceAll("/\\*.+\\*/", "");
+			java = java.replaceAll("#[^\n]*\n", "");
 			
 			// parse out all strings
 			java = parseOutStrings(java);

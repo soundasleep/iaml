@@ -11,6 +11,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * An interface to something that creates elements.
  * 
  * Q: why not use one of the existing interfaces, e.g. ModelFactory?
+ * 
+ * Example implementations: {@link org.openiaml.model.inference.EcoreCreateElementsHelper}
+ * 
  * @author jmwright
  *
  */

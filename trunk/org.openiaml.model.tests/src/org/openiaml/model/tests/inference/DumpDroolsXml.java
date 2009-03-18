@@ -12,11 +12,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -453,6 +456,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 		DroolsXmlDumper dump = new DroolsXmlDumper();
 		Map<String,String> results = dump.getRuleXmls();
 	
+		Set<LogicRule> allRules = new HashSet<LogicRule>();
+		
 		for (String f : results.keySet()) {
 			
 			String name = f.substring(f.lastIndexOf("/"));
@@ -485,16 +490,187 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			
 			// work out the logic formula defined by each rule
-			investigateLogic(document, name);
+			List<LogicRule> rules = investigateLogic(document, name);
+			allRules.addAll(rules);
 			
 			// out.create(source, true, monitor);
 			saveDocument(document, out.getLocation().toFile());
 
 		}
 		
+		// output out the rules in a prolog format
+		outputPrologStratification(allRules);
+		
 		refreshProject();
 	}
 	
+	/**
+	 * Create all the prolog rules that are necessary to work out
+	 * stratification.
+	 * 
+	 * @param allRules
+	 */
+	public void outputPrologStratification(Set<LogicRule> allRules) throws Exception {
+		StringBuffer pl = new StringBuffer();
+		
+		/*
+		 * First, lets define the rules.
+		 * 
+		 *   a, b -> c
+		 * changes to:
+		 *   strat_1(OutA, OutB, OutC) :- strat(a, OutA), strat(b, OutB), strat(c, outC), C >= A, C >= B.
+		 */
+		int i = 0;
+		for (LogicRule r : allRules) {
+			i++;
+			
+			// strat_1(OutA, ...) :-
+			pl.append("strat_").append(i).append("(");
+			Set<String> unique = uniqueElementsInRule(r);
+			
+			int z = 0;
+			for (String element_name : unique) {
+				if (z != 0) pl.append(", ");
+				pl.append("Out" + element_name);
+				z++;
+			}
+			pl.append(") :- ");
+			
+			// strat(a, OutA), 
+			for (LogicElement e : r.head) {
+				if (e instanceof LogicTerm) {
+					String t = ((LogicTerm) e).name;
+					pl.append("strat(" + undercase(t) + ", Out" + t + "), ");
+				} else if (e instanceof LogicNotTerm) {
+					String t = ((LogicNotTerm) e).term.name;
+					pl.append("strat(" + undercase(t) + ", Out" + t + "), ");
+				}
+			}
+			for (LogicElement e : r.body) {
+				if (e instanceof LogicTerm) {
+					String t = ((LogicTerm) e).name;
+					pl.append("strat(" + undercase(t) + ", Out" + t + "), ");
+				} else {
+					throw new RuntimeException("Body should only contain LogicTerms");
+				}
+			}
+			
+			// X >= Y, X > Y, ...
+			for (LogicElement f : r.body) {
+				String t2 = ((LogicTerm) f).name;
+				for (LogicElement e : r.head) {
+					if (e instanceof LogicTerm) {
+						// X >= Y
+						String t = ((LogicTerm) e).name;
+						pl.append("Out" + t2 + " >= Out" + t + ", ");
+					} else if (e instanceof LogicNotTerm) {
+						String t = ((LogicNotTerm) e).term.name;
+						// X > Y
+						pl.append("Out" + t2 + " > Out" + t + ", ");
+					}
+				}
+			}			
+			
+			pl.append("true.\n");		// end the rule
+		}
+		pl.append("\n");
+		
+		// now we create a rule which will specify all the strat values
+		Set<String> allUnique = new HashSet<String>();
+		for (LogicRule r : allRules) {
+			allUnique.addAll(uniqueElementsInRule(r));
+		}
+		
+		// head: valid(OutA, OutB, OutC, ...) :-
+		pl.append("valid(");
+		{
+			int z = 0;
+			for (String term : allUnique) {
+				if (z != 0) pl.append(", ");
+				pl.append("Out" + term);
+				z++;
+			}
+		}
+		pl.append(") :- ");
+		
+		// body: each rule
+		i = 0;
+		for (LogicRule r : allRules) {
+			if (i != 0) pl.append(", ");
+			i++;
+			pl.append("strat_").append(i).append("(");
+			Set<String> unique = uniqueElementsInRule(r);
+
+			int z = 0;
+			for (String element_name : unique) {
+				if (z != 0) pl.append(", ");
+				pl.append("Out" + element_name);
+				z++;
+			}
+			pl.append(")");
+		}
+		
+		pl.append(".\n\n");
+		
+		// finally, we list out all possible values of every strat
+		for (String term : allUnique) {
+			for (int j = 0; j < 10; j++) {
+				pl.append("strat(").append(undercase(term)).append(", ").append(j).append(").\n");
+			}
+		}
+		
+		// write to file
+		IFile outFile = project.getFile("strat.pl");
+		InputStream stream = new ByteArrayInputStream(pl.toString().getBytes("UTF-8"));
+		System.out.println("Writing " + outFile + "...");
+		outFile.create(stream, true, monitor);
+	}
+	
+	/**
+	 * Get a list of all the unique elements mentioned in both the
+	 * head and body of this rule. 
+	 */
+	private Set<String> uniqueElementsInRule(LogicRule r) {
+		Set<String> s = new HashSet<String>();
+		for (LogicElement e : r.head) {
+			if (e instanceof LogicTerm) {
+				s.add(((LogicTerm) e).name);
+			} else if (e instanceof LogicNotTerm) {
+				s.add(((LogicNotTerm) e).term.name);
+			} else {
+				throw new RuntimeException("Unknown logic element type " + e.getClass());
+			}
+		}
+		for (LogicElement e : r.body) {
+			if (e instanceof LogicTerm) {
+				s.add(((LogicTerm) e).name);
+			} else if (e instanceof LogicNotTerm) {
+				s.add(((LogicNotTerm) e).term.name);
+			} else {
+				throw new RuntimeException("Unknown logic element type " + e.getClass());
+			}
+		}
+		return s;
+	}
+	
+	/**
+	 * Change MyFoo to my_foo
+	 * @param a
+	 */
+	private String undercase(String a) {
+		String out = "";
+		for (int i = 0; i < a.length(); i++) {
+			char c = a.charAt(i);
+			if (i != 0 && (c >= 'A' && c <= 'Z')) {
+				// uppercase char 
+				out += "_" + Character.toLowerCase(c);
+			} else {
+				out += Character.toLowerCase(c);
+			}
+		}
+		return out;
+	}
+
 	protected class LogicTerm extends LogicElement {
 		public String name;
 		
@@ -506,7 +682,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return name;
 		}
 		
-		public String toString() { return name; }		
+		public String toString() { return name; }
+		
+		@Override
+		public boolean equals(Object obj) {
+			return obj instanceof LogicTerm && 
+			((LogicTerm) obj).name.equals(this.name);
+		}
+
+		@Override
+		public int hashCode() {
+			return ("LogicTerm" + name.hashCode()).hashCode();
+		}
 	}
 	
 	protected class LogicNotTerm extends LogicElement {
@@ -521,7 +708,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 
 		public String toString() { return "not(" + term + ")"; }		
-		
+
+		@Override
+		public boolean equals(Object obj) {
+			return obj instanceof LogicNotTerm && 
+			((LogicNotTerm) obj).term.equals(this.term);
+		}
+
+		@Override
+		public int hashCode() {
+			return ("LogicNotTerm" + term.hashCode()).hashCode();
+		}
 	}
 	
 	protected abstract class LogicElement {
@@ -534,6 +731,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public List<LogicElement> head = new ArrayList<LogicElement>();
 		public List<LogicElement> body = new ArrayList<LogicElement>();
 			
+		@Override
+		public boolean equals(Object obj) {
+			return obj instanceof LogicRule && 
+			((LogicRule) obj).head.equals(this.head) && 
+			((LogicRule) obj).body.equals(this.body); 
+		}
+
+		@Override
+		public int hashCode() {
+			return ("LogicRule" + head.hashCode() + body.hashCode()).hashCode();
+		}
+
 		/**
 		 * Cycle through generated elements in the body
 		 * and remove those that are not(..) in the head.
@@ -583,7 +792,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @param document
 	 * @param name
 	 */
-	private void investigateLogic(Document document, String name) throws Exception {
+	private List<LogicRule> investigateLogic(Document document, String name) throws Exception {
 		List<LogicRule> logicRules = new ArrayList<LogicRule>();
 		
 		// parse over each rule
@@ -641,6 +850,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 		IFile outFile = project.getFile(name + ".logic.html");
 		InputStream source = new ByteArrayInputStream(out.toString().getBytes("UTF-8"));
 		outFile.create(source, true, monitor);
+		
+		return logicRules;
 	}
 
 	/*

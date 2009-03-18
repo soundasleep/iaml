@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -35,7 +36,6 @@ import org.openiaml.model.drools.DroolsXmlDumper;
 import org.openiaml.model.tests.InferenceTestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
@@ -105,16 +105,64 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @param java
 	 */
 	public void parseJava(Document document, Node parent, String java) {
-		// expect that no strings contain ;s
-		String[] lines = java.split(";");
-		for (String javaLine : lines) {
-			Element line = document.createElement("statement");
-			parent.appendChild(line);
+		try {
+			// first, lets just destroy all comments
+			java = java.replaceAll("//[^\n]*\n", "");
+			java = java.replaceAll("/\\*.+\\*/", "");
 			
-			parseJavaEquals(document, line, javaLine); 
+			// parse out all strings
+			java = parseOutStrings(java);
+			
+			// expect that no strings contain ;s or .s
+			String[] lines = java.split(";");
+			for (String javaLine : lines) {
+				javaLine = javaLine.trim();
+				if (!javaLine.isEmpty()) {
+					Element line = document.createElement("statement");
+					parent.appendChild(line);
+					
+					parseJavaEquals(document, line, javaLine);
+				}
+			}
+		} catch (RuntimeException e) {
+			// print out the source code for debugging
+			System.err.println(java);
+			throw e;		// rethrow
 		}
 	}
 	
+	private Map<String,String> parsedOutStrings;
+	
+	/**
+	 * Parse out all strings in the java code.
+	 * We assume that this code has no comments in it, and all strings are
+	 * ""s, and there are no \"s.
+	 * 
+	 * @param java
+	 * @return
+	 */
+	private String parseOutStrings(String java) {
+		parsedOutStrings = new HashMap<String,String>();
+
+		int i = 0;
+		while (java.indexOf("\"") != -1) {
+			// find boundaries
+			int start = java.indexOf("\"");
+			int end = java.indexOf("\"", start + 1);
+			if (end == -1)
+				throw new RuntimeException("Cannot find the ending string after " + java.substring(start));
+			
+			// take it out
+			String name = "_string" + i++;
+			String value = java.substring(start + 1, end);
+			parsedOutStrings.put(name, value);
+			java = java.replace("\"" + value + "\"", name);
+			
+		}
+		
+		return java;
+	}
+
 	/**
 	 * Parse a statement "a=b"
 	 * 
@@ -216,21 +264,24 @@ public class DumpDroolsXml extends InferenceTestCase {
 		String[] arguments = string.split(",");
 		for (String argument : arguments) {
 			argument = argument.trim();
-			if (argument.indexOf("\"") != -1) {
-				// a string
-				Element a = document.createElement("string-argument");
-				a.setAttribute("value", argument.substring(1, argument.length() - 1));
-				argumentList.appendChild(a);
-			} else if (argument.matches("-?[0-9]+(\\.?[0-9]+)")) {
+			if (argument.matches("-?[0-9]+(\\.?[0-9]+)")) {
 				// a number
 				Element a = document.createElement("number-argument");
 				a.setAttribute("value", argument);
 				argumentList.appendChild(a);
 			} else {
-				// a variable
-				Element a = document.createElement("variable-argument");
-				a.setAttribute("name", argument);
-				argumentList.appendChild(a);
+				// a variable or a string
+				if (parsedOutStrings.containsKey(argument)) {
+					// yes, it was a string
+					Element a = document.createElement("string-argument");
+					a.setAttribute("value", parsedOutStrings.get(argument));
+					argumentList.appendChild(a);
+				} else {
+					// no, it's actually a variable
+					Element a = document.createElement("variable-argument");
+					a.setAttribute("name", argument);
+					argumentList.appendChild(a);
+				}
 			}
 		}
 		
@@ -283,10 +334,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 		assertEquals( "123", root.getAttribute("attr") );
 		
 		// test parsing some simple code
-		parseJava(d, root, "RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);		rw.setName(\"run\");		insert(rw);");
+		parseJava(d, root, "// a comment\nRunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);		rw.setName(\"run\");		insert(rw); insert(\"a complicated string. with full stops. and line breaks;\");");
 		
 		NodeList statements = xpath(root, "statement");
-		assertEquals(3, statements.getLength());
+		assertEquals(4, statements.getLength());
 		
 		// first statement
 		// RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
@@ -375,6 +426,24 @@ public class DumpDroolsXml extends InferenceTestCase {
 			Element argument = (Element) argumentList.getChildNodes().item(0);
 			assertEquals("variable-argument", argument.getNodeName());
 			assertEquals("rw", argument.getAttribute("name"));
+		}		
+		
+		// fourth statement
+		// insert("a complicated string. with full stops. and line breaks;");
+		{
+			Element statement = (Element) statements.item(3);
+			
+			Element method = xpathFirst(statement, "method");
+			assertEquals(1, method.getAttributes().getLength());
+			assertEquals("insert", method.getAttribute("name"));
+			
+			Element argumentList = xpathFirst(method, "argument-list");
+			assertEquals(0, argumentList.getAttributes().getLength());
+			assertEquals(1, argumentList.getChildNodes().getLength());
+			
+			Element argument = (Element) argumentList.getChildNodes().item(0);
+			assertEquals("string-argument", argument.getNodeName());
+			assertEquals("a complicated string. with full stops. and line breaks;", argument.getAttribute("value"));
 		}
 		
 	}
@@ -397,22 +466,25 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// load the created XML and replace the <rhs> with 
 			// more XML (specific to our use in IAML)
 			
-			Document d = loadDocument(source);
-			NodeList rhsList = xpath(d, "//rhs");
+			Document document = loadDocument(source);
+			NodeList rhsList = xpath(document, "//rhs");
 			
 			for (int i = 0; i < rhsList.getLength(); i++) {
-				Text n = (Text) rhsList.item(i).getFirstChild();
-				String rhs = n.getData();
-				n.setData("");	// empty the node
+				Text originalNode = (Text) rhsList.item(i).getFirstChild();
+				String sourceCode = originalNode.getData();
+				originalNode.setData("");	// empty the node
 				
-				Element t = d.createElement("source");
-				n.getParentNode().appendChild(t);
-				Text t2 = d.createTextNode(rhs);
+				Element t = document.createElement("source");
+				originalNode.getParentNode().appendChild(t);
+				Text t2 = document.createTextNode(sourceCode);
 				t.appendChild(t2);
+				
+				// lets create the statements here
+				parseJava(document, originalNode.getParentNode(), sourceCode);
 			}
 			
 			// out.create(source, true, monitor);
-			saveDocument(d, out.getLocation().toFile());
+			saveDocument(document, out.getLocation().toFile());
 
 		}
 		

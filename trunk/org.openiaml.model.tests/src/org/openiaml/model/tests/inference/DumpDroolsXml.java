@@ -495,6 +495,87 @@ public class DumpDroolsXml extends InferenceTestCase {
 		refreshProject();
 	}
 	
+	protected class LogicTerm extends LogicElement {
+		public String name;
+		
+		public LogicTerm(String name) {
+			this.name = name;
+		}
+
+		public String toHtml() {
+			return name;
+		}
+		
+		public String toString() { return name; }		
+	}
+	
+	protected class LogicNotTerm extends LogicElement {
+		public LogicTerm term;
+		
+		public LogicNotTerm(LogicTerm term) {
+			this.term = term;
+		}
+
+		public String toHtml() {
+			return "not(" + term.toHtml() + ")";
+		}
+
+		public String toString() { return "not(" + term + ")"; }		
+		
+	}
+	
+	protected abstract class LogicElement {
+
+		public abstract String toHtml();
+		
+	}
+	
+	protected class LogicRule {
+		public List<LogicElement> head = new ArrayList<LogicElement>();
+		public List<LogicElement> body = new ArrayList<LogicElement>();
+			
+		/**
+		 * Cycle through generated elements in the body
+		 * and remove those that are not(..) in the head.
+		 * 
+		 * i.e. "A, not(B) -> B" should be simplified to
+		 * "A -> B"
+		 * 
+		 * Currently only concerns itself with element names
+		 */
+		public void removeGeneratedElements() {
+			List<LogicElement> elementsToRemove = new ArrayList<LogicElement>();
+			
+			for (LogicElement e : body) {
+				String name = ((LogicTerm) e).name;
+				// is it in the head?
+				for (LogicElement f : head) {
+					if (f instanceof LogicNotTerm && ((LogicNotTerm) f).term.name.equals(name)) {
+						// found it; remove it and skip
+						elementsToRemove.add(f);
+						continue;
+					}
+				}
+			}
+			
+			for (LogicElement n : elementsToRemove) {
+				head.remove(n);
+			}
+		}
+		
+		public String toHtml() {
+			String head = "";
+			for (LogicElement e : this.head) {
+				head += (head.isEmpty() ? "" : ", ") + e.toHtml();
+			}
+			String body = "";
+			for (LogicElement e : this.body) {
+				body += (body.isEmpty() ? "" : ", ") + e.toHtml();
+			}
+			return head + " -> " + body;
+		}
+	}
+	
 	/**
 	 * Investigate XML rules to calculate their logic formulas.
 	 * TODO move all of this into separate classes (if necessary)
@@ -503,12 +584,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @param name
 	 */
 	private void investigateLogic(Document document, String name) throws Exception {
-		List<String> logicRules = new ArrayList<String>();
+		List<LogicRule> logicRules = new ArrayList<LogicRule>();
 		
 		// parse over each rule
 		NodeList rules = xpath(document, "//rule");
 		for (int i = 0; i < rules.getLength(); i++) {
-			String logic = "";
+			LogicRule logic = new LogicRule();
 			Element rule = (Element) rules.item(i);
 			
 			Element lhs = xpathFirst(rule, "lhs");
@@ -519,34 +600,40 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (p2 instanceof Element) {
 					Element p = (Element) p2;
 					if (p.getNodeName().equals("pattern")) {
-						logic += logic.isEmpty() ? "" : ", ";
-						logic += p.getAttribute("object-type");
+						LogicTerm t = new LogicTerm(p.getAttribute("object-type"));
+						logic.head.add(t);
 					} else if (p.getNodeName().equals("not")) {
-						logic += logic.isEmpty() ? "" : ", ";
-						logic += "not ";
-						logic += ((Element) p.getChildNodes().item(0)).getAttribute("object-type");
+						Element actualP = xpathFirst(p, "pattern"); 
+						LogicTerm t = new LogicTerm(actualP.getAttribute("object-type"));
+						logic.head.add(new LogicNotTerm(t));
 					}
 				}
 			}
 			
-			logic += " --> ";
 			// find the handler rules
+			// we assume that rule bodies only generate elements using
+			// handler.generatedXXX(...)
 			NodeList generatedElements = xpath(rhs, "statement/assignment/statement/variable[@name='handler']/method");
 			for (int j = 0; j < generatedElements.getLength(); j++) {
 				Element g = (Element) generatedElements.item(j);
 				assertEquals("method", g.getNodeName());
-				logic += logic.isEmpty() ? "" : ", ";
-				logic += g.getAttribute("name");
+				String methodName = g.getAttribute("name");;
+				if (methodName.startsWith("generated")) {
+					methodName = methodName.substring("generated".length());
+				}
+				LogicTerm t = new LogicTerm(methodName);
+				logic.body.add(t);
 			}
 			
+			logic.removeGeneratedElements();
 			logicRules.add(logic);
 		}
 		
 		// concatenate down
 		StringBuffer out = new StringBuffer();
 		out.append("<html><h1>" + name + " rules</h1><p>\n\n<ol>\n");
-		for (String r : logicRules) {
-			out.append("<li>" + r + "</li>\n");
+		for (LogicRule r : logicRules) {
+			out.append("<li>" + r.toHtml() + "</li>\n");
 		}
 		out.append("\n</ol></html>\n");
 		

@@ -23,10 +23,13 @@ rule "Create empty domain store"
 		// how do we know when not to create the domainstore?
 	then 
 		#actions
-		DomainStore ds = (DomainStore) handler.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
+		// DomainStore ds = (DomainStore) handler.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
+		// ds.setIsGenerated(true);
+		// ds.setGeneratedBy(a);
+		
+		DomainStore ds = handler.generatedDomainStore( a, a );
 		ds.setName("test domain store");
-		ds.setIsGenerated(true);
-		ds.setGeneratedBy(a);
+		
 		insert(ds); // possibly infer new knowledge (this is necessary)
 		
 end

@@ -12,7 +12,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,9 +35,12 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.drools.DroolsXmlDumper;
 import org.openiaml.model.tests.InferenceTestCase;
+import org.openiaml.model.tests.TestComposition;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -501,9 +503,55 @@ public class DumpDroolsXml extends InferenceTestCase {
 		// output out the rules in a prolog format
 		outputPrologStratification(allRules);
 		
+		// check each rule for composition
+		checkRulesCompositionGraph(allRules);
+		
 		refreshProject();
 	}
 	
+	/**
+	 * Check each rule to make sure that there is a path from head to
+	 * body, but no path from body to head.
+	 * 
+	 * Ignores negated() rules in body.
+	 * 
+	 * @param allRules
+	 */
+	private void checkRulesCompositionGraph(Set<LogicRule> allRules) {
+		TestComposition comp = new TestComposition();
+		
+		for (LogicRule r : allRules) {
+			// get the element with the highest distance from InternetApplication
+			int max_d = -1;
+			LogicTerm maxTerm = null;
+			for (LogicElement e : r.head) {
+				if (!(e instanceof LogicNotTerm)) {
+					LogicTerm t = (LogicTerm) e;
+					int d = comp.dijkstra("InternetApplication", t.name);
+					if (d > max_d) {
+						maxTerm = t;
+						max_d = d;
+					}
+				}
+			}
+			
+			// now check each element in the rule body
+			for (LogicElement e : r.body) {
+				if (e instanceof LogicTerm) {
+					// even if it fails, we want to continue evaluating the model
+					try { 
+						comp.checkDijkstra(maxTerm.name, ((LogicTerm) e).name);
+					} catch (AssertionFailedError ex) {
+						System.out.println(ex.getMessage());		// temporary TODO remove
+					}
+				} else {
+					throw new RuntimeException("Element " + e + " should have been a LogicTerm.");
+				}
+			}
+		}
+
+	}
+
 	/**
 	 * Create all the prolog rules that are necessary to work out
 	 * stratification.

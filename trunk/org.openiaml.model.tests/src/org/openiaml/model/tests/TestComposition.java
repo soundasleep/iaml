@@ -31,28 +31,11 @@ public class TestComposition extends XmlTestCase {
 
 	public static final String ROOT = "../org.openiaml.model/model/";
 
-	List<EClass> loaded = new ArrayList<EClass>();
-	Map<EClass, Integer> granularity = new HashMap<EClass, Integer>();
+	private static final int INFINITE = 5000;
 
-	private EReference lastReference;
-	
-	protected void loadAllPackages(EPackage p) {
-		for (EObject o : p.eContents()) {
-			if (o instanceof EPackage) {
-				loadAllPackages((EPackage) o);
-			} else if (o instanceof EClass) {
-				loaded.add((EClass) o);
-			} else if (o instanceof EAnnotation || o instanceof EEnum || o instanceof EDataType) {
-				// ignore
-			} else {
-				throw new RuntimeException("Cannot load package element of type " + o.getClass() + ": " + o);
-			}
-		}
-	}
+	Map<EClass, Integer> granularity = new HashMap<EClass, Integer>();
 	
 	public void testComposition() throws Exception {
-		loadAllPackages(ModelPackage.eINSTANCE);
-
 		// lets find out all distances from InternetApplication
 		/*
 		for (EClass c : loaded) {
@@ -66,13 +49,40 @@ public class TestComposition extends XmlTestCase {
 		System.out.println(b + " -> " + a + ": " + dijkstra(b, a));
 		
 	}
+	
+	/**
+	 * {@link org.openiaml.model.tests.inference.DumpDroolsXml} instantiates
+	 * this class and uses this method to check that there is a path
+	 * from head to body, but no path from body to head.
+	 * 
+	 * @param source
+	 * @param target
+	 */
+	public void checkDijkstra(String source, String target) {
+		int d1 = dijkstra(source, target);
+		int d2 = dijkstra(target, source);
+		
+		assertNotEquals(source + " -> " + target + " should not be infinite. " + getLastPath(), d1, INFINITE);
+		assertEquals(target + " -> " + source + " should be infinite. " + getLastPath(), INFINITE, d2);
+		
+	}
+
+	/**
+	 * @param string
+	 * @param a
+	 * @param b
+	 */
+	public void assertNotEquals(String message, int a, int b) {
+		if (a == b)
+			fail(message + ": " + a + " should not have been " + b);
+	}
 
 	/**
 	 * @param string
 	 * @param c
 	 * @return
 	 */
-	private int dijkstra(String string, EClass c) {
+	public int dijkstra(String string, EClass c) {
 		return dijkstra(findLoaded(string), c);
 	}
 
@@ -81,7 +91,7 @@ public class TestComposition extends XmlTestCase {
 	 * @param string2
 	 * @return
 	 */
-	private int dijkstra(String string, String string2) {
+	public int dijkstra(String string, String string2) {
 		return dijkstra(findLoaded(string), findLoaded(string2));
 	}
 
@@ -89,8 +99,9 @@ public class TestComposition extends XmlTestCase {
 	 * @param source
 	 * @param target
 	 */
-	private int dijkstra(EClass source, EClass target) {
-		int infinity = 5000;
+	public int dijkstra(EClass source, EClass target) {
+		List<EClass> loaded = getLoadedClasses();
+		
 		Map<EClass, Integer> distance = new HashMap<EClass, Integer>();
 		// previous is probably not necessary if we don't need to
 		// find the path taken
@@ -98,7 +109,7 @@ public class TestComposition extends XmlTestCase {
 		
 		// initialise
 		for (EClass c : loaded) {
-			distance.put(c, infinity);
+			distance.put(c, INFINITE);
 			previous.put(c, null);
 		}
 		
@@ -128,19 +139,21 @@ public class TestComposition extends XmlTestCase {
  		}
 		
 		// print out the path from source to target
-		printOutPath(source, target, previous);
+		lastPath = compilePath(source, target, previous); 
 		
 		return distance.get(target);
 	}
+	
+	protected String lastPath = null;
 
 	/**
-	 * Print out the path from source to target
+	 * Compile the path from source to target
 	 * 
 	 * @param source
 	 * @param target
 	 * @param previous
 	 */
-	private void printOutPath(EClass source, EClass target,
+	private String compilePath(EClass source, EClass target,
 			Map<EClass, EClass> previous) {
 		EClass cur = target;
 		String buf = source.getName();
@@ -152,7 +165,7 @@ public class TestComposition extends XmlTestCase {
 		}
 		if (cur == null)
 			buf = "[no path]";
-		System.out.println(buf);
+		return buf;
 	}
 
 	/**
@@ -193,6 +206,8 @@ public class TestComposition extends XmlTestCase {
 	 * @return
 	 */
 	private List<EClass> getNeighbours(EClass u) {
+		List<EClass> loaded = getLoadedClasses();
+
 		Set<EClass> r = new HashSet<EClass>();
 		
 		// neighbours of a class include all of the supertypes...
@@ -271,14 +286,49 @@ public class TestComposition extends XmlTestCase {
 	 * @return
 	 */
 	private EClass findLoaded(String name) {
+		List<EClass> loaded = getLoadedClasses();
+		
 		for (EClass c : loaded) {
 			if (c.getName().equals(name)) {
 				return c;
 			}
 		}
+		
+		System.err.println(loaded);
 		throw new RuntimeException("Could not find loaded class with name " + name);
 	}
 
-
+	/**
+	 * Singleton pattern that loads all elements in the root package.
+	 *  
+	 * @return
+	 */
+	public List<EClass> getLoadedClasses() {
+		if (_loaded.isEmpty()) {
+			loadPackage(ModelPackage.eINSTANCE);
+		}
+		
+		return _loaded;
+	}
 	
+	private void loadPackage(EPackage p) {
+		for (EObject o : p.eContents()) {
+			if (o instanceof EPackage) {
+				loadPackage((EPackage) o);
+			} else if (o instanceof EClass) {
+				_loaded.add((EClass) o);
+			} else if (o instanceof EAnnotation || o instanceof EEnum || o instanceof EDataType) {
+				// ignore
+			} else {
+				throw new RuntimeException("Cannot load package element of type " + o.getClass() + ": " + o);
+			}
+		}		
+	}
+
+	private List<EClass> _loaded = new ArrayList<EClass>();
+
+	public String getLastPath() {
+		return lastPath;
+	}
+
 }

@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +40,7 @@ import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.drools.DroolsXmlDumper;
+import org.openiaml.model.tests.DijkstraAlgorithm;
 import org.openiaml.model.tests.InferenceTestCase;
 import org.openiaml.model.tests.TestComposition;
 import org.w3c.dom.Document;
@@ -55,7 +57,7 @@ import org.xml.sax.SAXException;
  *
  */
 public class DumpDroolsXml extends InferenceTestCase {
-	
+
 	public void setUp() throws Exception {
 		super.setUp();		// set up project
 	}
@@ -506,9 +508,113 @@ public class DumpDroolsXml extends InferenceTestCase {
 		// check each rule for composition
 		checkRulesCompositionGraph(allRules);
 		
+		// find rule cycles
+		findStratCycleRules(allRules);
+		
 		refreshProject();
 	}
 	
+	/**
+	 * Create a graph of the stratification rules, and check for
+	 * any cycles.
+	 * 
+	 * @param allRules
+	 */
+	protected void findStratCycleRules(Set<LogicRule> allRules) {
+		
+		Map<String, List<String>> graphGt = new HashMap<String, List<String>>();
+		Map<String, List<String>> graphGtEq = new HashMap<String, List<String>>();
+		
+		//List<StratElement> graph = new ArrayList<StratElement>();
+		
+		Set<String> sources = new HashSet<String>();
+		
+		// first, create the graph
+		for (LogicRule r : allRules) {
+			// r: a, b, not(c), not(d) -> d, e
+			// into: a->d, b->d, not(c)->d, a->e, b->e, not(c)->e
+			
+			List<LogicElement> headWithoutNots = removeInsertedElements(r.head, r.body);
+			for (LogicElement h : headWithoutNots) {
+				for (LogicElement b2 : r.body) {
+					LogicTerm b = (LogicTerm) b2;
+					if (h instanceof LogicNotTerm) {
+						LogicNotTerm t = (LogicNotTerm) h;
+						addIntoMap(graphGt, t.term.name, b.name);
+						addIntoMap(graphGt, t.term.name, b.name + "!target");
+						addIntoMap(graphGt, t.term.name + "!target", b.name); // although we are not starting from source!target, we still need this as an edge in the graph
+						//graphGtTargets.add(b.name + "!target");
+						sources.add(t.term.name);
+						sources.add(b.name);
+					} else {
+						LogicTerm t = (LogicTerm) h;
+						addIntoMap(graphGtEq, t.name, b.name);
+						addIntoMap(graphGtEq, t.name, b.name + "!target");
+						addIntoMap(graphGt, t.name + "!target", b.name);
+						//graphGtEqTargets.add(b.name + "!target");
+						sources.add(t.name);
+						sources.add(b.name);
+					}
+				}
+			}
+		}
+		
+		// now for every possible class, see if there is a cycle
+		for (String from : sources) {
+			StratificationCycleChecker scc = new StratificationCycleChecker(graphGt, graphGtEq);
+			int d = scc.dijkstra(from, from + "!target");
+			String path = scc.getLastPath();
+			System.out.println(from + " -> " + from + "!target strat: " + d + ": " + path);
+		}
+		
+	}
+
+	/**
+	 * @param doubleMap
+	 * @param key
+	 * @param value
+	 */
+	private void addIntoMap(Map<String, List<String>> doubleMap, String key,
+			String value) {
+		List<String> r = doubleMap.get(key);
+		if (r == null) {
+			doubleMap.put(key, new ArrayList<String>());
+		}
+		doubleMap.get(key).add(value);
+	}
+
+	/**
+	 * Remove not(e) elements from the head that are asserted in the body.
+	 * 
+	 * @param head
+	 * @param body
+	 * @return
+	 */
+	private List<LogicElement> removeInsertedElements(List<LogicElement> head,
+			List<LogicElement> body) {
+		List<LogicElement> elements = new ArrayList<LogicElement>();
+		
+		for (LogicElement h : head) {
+			if (h instanceof LogicNotTerm) {
+				LogicNotTerm t = (LogicNotTerm) h;
+				boolean found = false;
+				for (LogicElement b : body) {
+					if (((LogicTerm) b).name.equals(t.term.name)) {
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					elements.add(h);
+				}
+			} else {
+				elements.add(h);
+			}
+		}
+		return elements;
+		
+	}
+
 	/**
 	 * Check each rule to make sure that there is a path from head to
 	 * body, but no path from body to head.
@@ -517,7 +623,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * 
 	 * @param allRules
 	 */
-	private void checkRulesCompositionGraph(Set<LogicRule> allRules) {
+	protected void checkRulesCompositionGraph(Set<LogicRule> allRules) {
 		TestComposition comp = new TestComposition();
 		
 		for (LogicRule r : allRules) {
@@ -1035,5 +1141,100 @@ public class DumpDroolsXml extends InferenceTestCase {
 		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual >= expected);
 	}
 	
+	protected class StratificationCycleChecker extends DijkstraAlgorithm<String> {
+
+		public Map<String, List<String>> graphGt;
+		public Map<String, List<String>> graphGtEquals;
+		
+		public StratificationCycleChecker(Map<String, List<String>> graphGt, Map<String, List<String>> graphGtEquals) {
+			this.graphGt = graphGt;
+			this.graphGtEquals = graphGtEquals;
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.DijkstraAlgorithm#getEdges()
+		 */
+		@Override
+		protected Collection<String> getEdges() {
+			if (edgeCache == null) {
+				edgeCache = new HashSet<String>();
+				edgeCache.addAll(graphGt.keySet());
+				edgeCache.addAll(graphGtEquals.keySet());
+				for (String k : graphGt.keySet()) {
+					edgeCache.addAll(graphGt.get(k));
+				}
+				for (String k : graphGtEquals.keySet()) {
+					edgeCache.addAll(graphGtEquals.get(k));
+				}
+			}
+			return edgeCache;
+		}
+		
+		private Set<String> edgeCache = null;
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.DijkstraAlgorithm#getNeighbours(java.lang.Object)
+		 */
+		@Override
+		public List<String> getNeighbours(String u) {
+			List<String> a = graphGt.get(u);
+			List<String> b = graphGtEquals.get(u);
+			
+			if (a == null) {
+				if (b == null) {
+					return new ArrayList<String>();
+				} else {
+					List<String> bc = cloneList(b);
+					bc.remove(u);
+					return bc;
+				}
+			} else {
+				if (b == null) {
+					List<String> ac = cloneList(a);
+					ac.remove(u);
+					return ac;
+				} else {
+					// make a copy
+					List<String> ac = cloneList(a);
+					ac.addAll(b);
+					ac.remove(u);
+					return ac;
+				}
+			}
+		}
+
+		/**
+		 * @param a
+		 * @return
+		 */
+		private List<String> cloneList(List<String> a) {
+			List<String> r = new ArrayList<String>();
+			r.addAll(a);
+			return r;
+		}
+
+		/**
+		 * We modify this to return a huge value for >=, and a small
+		 * value for >, so hopefully we will prefer to find paths of
+		 * > (which we are searching for)
+		 */
+		@Override
+		public int distanceBetween(String from, String to) {
+			List<String> gt = graphGt.get(from);
+			if (gt != null && gt.contains(to)) {
+				return 1;		// >
+			}
+			// it must be in the other graph
+			List<String> eq = graphGtEquals.get(from);
+			if (eq != null && eq.contains(to)) {
+				return 1000;	// >=
+			}
+			// we should never get here
+			throw new RuntimeException("There is no distance between " + from + " and " + to + ", as they are not connected.");
+		}
+
+		
+		
+	}
 	
 }

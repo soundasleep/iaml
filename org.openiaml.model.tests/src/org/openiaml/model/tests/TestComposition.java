@@ -31,7 +31,6 @@ public class TestComposition extends XmlTestCase {
 
 	public static final String ROOT = "../org.openiaml.model/model/";
 
-	private static final int INFINITE = 5000;
 	private CompositionDijkstra dj = new CompositionDijkstra();
 
 	Map<EClass, Integer> granularity = new HashMap<EClass, Integer>();
@@ -61,10 +60,10 @@ public class TestComposition extends XmlTestCase {
 	 */
 	public void checkDijkstra(String source, String target) {
 		int d1 = dj.dijkstra(source, target);
-		assertNotEquals(source + " -> " + target + " should not be infinite. " + dj.getLastPath(), d1, INFINITE);
+		assertNotEquals(source + " -> " + target + " should not be infinite. " + dj.getLastPath(), d1, dj.INFINITE);
 
 		int d2 = dj.dijkstra(target, source);
-		assertEquals(target + " -> " + source + " should be infinite. " + dj.getLastPath(), INFINITE, d2);
+		assertEquals(target + " -> " + source + " should be infinite. " + dj.getLastPath(), dj.INFINITE, d2);
 		
 	}
 

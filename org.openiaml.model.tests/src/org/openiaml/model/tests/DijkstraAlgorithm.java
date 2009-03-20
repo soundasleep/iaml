@@ -4,6 +4,7 @@
 package org.openiaml.model.tests;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,14 +19,15 @@ import java.util.Map;
  */
 public abstract class DijkstraAlgorithm<T> {
 
-	private static final int INFINITE = 5000;
+	/** Static value for an infinite path (i.e. no path exists) */
+	public static final int INFINITE = 9000;
 
 	/**
 	 * Get all of the edges (nodes) involved in this graph.
 	 * 
 	 * @return
 	 */
-	protected abstract List<T> getEdges();
+	protected abstract Collection<T> getEdges();
 	
 	/**
 	 * @param source
@@ -71,6 +73,9 @@ public abstract class DijkstraAlgorithm<T> {
 		// print out the path from source to target
 		lastPath = compilePath(source, target, previous); 
 		
+		if (distance.get(target) == null) {
+			throw new NullPointerException("No target named '" + target + "' found.");
+		}
 		return distance.get(target);
 	}
 	
@@ -86,13 +91,14 @@ public abstract class DijkstraAlgorithm<T> {
 	public String compilePath(T source, T target,
 			Map<T, T> previous) {
 		T cur = target;
-		String buf = translateToString(source);
 		int i = 0;
+		String buf = "";
 		while (cur != source && cur != null && i < 50) {
-			buf = translateToString(cur) + " -> " + buf;
+			buf = " -> " + translateToString(cur) + buf;
 			cur = previous.get(cur);
 			i++;
 		}
+		buf = translateToString(source) + buf;
 		if (cur == null)
 			buf = "[no path]";
 		return buf;

@@ -20,7 +20,7 @@ import java.util.Map;
 public abstract class DijkstraAlgorithm<T> {
 
 	/** Static value for an infinite path (i.e. no path exists) */
-	public static final int INFINITE = 2 << 24;
+	private static final int INFINITE = 2 << 24;
 
 	/**
 	 * Get all of the edges (nodes) involved in this graph.

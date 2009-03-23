@@ -526,6 +526,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 		Map<String, List<String>> graphGtEq = new HashMap<String, List<String>>();
 		
 		//List<StratElement> graph = new ArrayList<StratElement>();
+		List<StratReason> reasonGt = new ArrayList<StratReason>();
+		List<StratReason> reasonGtEq = new ArrayList<StratReason>();
 		
 		Set<String> sources = new HashSet<String>();
 		
@@ -540,17 +542,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 					LogicTerm b = (LogicTerm) b2;
 					if (h instanceof LogicNotTerm) {
 						LogicNotTerm t = (LogicNotTerm) h;
-						addIntoMap(graphGt, t.term.name, b.name);
-						addIntoMap(graphGt, t.term.name, b.name + "!target");
-						addIntoMap(graphGt, t.term.name + "!target", b.name); // although we are not starting from source!target, we still need this as an edge in the graph
+						addIntoMap(graphGt, t.term.name, b.name, reasonGt, b.reason);
+						addIntoMap(graphGt, t.term.name, b.name + "!target", reasonGt, b.reason);
+						addIntoMap(graphGt, t.term.name + "!target", b.name, reasonGt, b.reason); // although we are not starting from source!target, we still need this as an edge in the graph
 						//graphGtTargets.add(b.name + "!target");
 						sources.add(t.term.name);
 						sources.add(b.name);
 					} else {
 						LogicTerm t = (LogicTerm) h;
-						addIntoMap(graphGtEq, t.name, b.name);
-						addIntoMap(graphGtEq, t.name, b.name + "!target");
-						addIntoMap(graphGt, t.name + "!target", b.name);
+						addIntoMap(graphGtEq, t.name, b.name, reasonGtEq, b.reason);
+						addIntoMap(graphGtEq, t.name, b.name + "!target", reasonGtEq, b.reason);
+						addIntoMap(graphGtEq, t.name + "!target", b.name, reasonGtEq, b.reason);
 						//graphGtEqTargets.add(b.name + "!target");
 						sources.add(t.name);
 						sources.add(b.name);
@@ -561,7 +563,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 		// now for every possible class, see if there is a cycle
 		for (String from : sources) {
-			StratificationCycleChecker scc = new StratificationCycleChecker(graphGt, graphGtEq);
+			StratificationCycleChecker scc = new StratificationCycleCheckerWithExplanation(graphGt, graphGtEq, reasonGt, reasonGtEq);
 			int d = scc.dijkstra(from, from + "!target");
 			if (d == -1) {
 				System.out.println(from + " -> " + from + "!target strat: no path found");
@@ -579,12 +581,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @param value
 	 */
 	private void addIntoMap(Map<String, List<String>> doubleMap, String key,
-			String value) {
+			String value, List<StratReason> reasonList, String reason) {
 		List<String> r = doubleMap.get(key);
 		if (r == null) {
 			doubleMap.put(key, new ArrayList<String>());
 		}
 		doubleMap.get(key).add(value);
+		
+		/*
+		 * Also add it to the reason list.
+		 */
+		reasonList.add(new StratReason( key, value, reason ));
 	}
 
 	/**
@@ -832,7 +839,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 	protected class LogicTerm extends LogicElement {
 		public String name;
 		
-		public LogicTerm(String name) {
+		public LogicTerm(String name, String reason) {
+			super(reason);
 			this.name = name;
 		}
 
@@ -857,7 +865,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 	protected class LogicNotTerm extends LogicElement {
 		public LogicTerm term;
 		
-		public LogicNotTerm(LogicTerm term) {
+		public LogicNotTerm(LogicTerm term, String reason) {
+			super(reason);
 			this.term = term;
 		}
 
@@ -882,6 +891,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 	protected abstract class LogicElement {
 
 		public abstract String toHtml();
+		
+		public String reason;
+		
+		public LogicElement(String reason) {
+			this.reason = reason;
+		}
 		
 	}
 	
@@ -958,6 +973,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		for (int i = 0; i < rules.getLength(); i++) {
 			LogicRule logic = new LogicRule();
 			Element rule = (Element) rules.item(i);
+			String reason = rule.getAttribute("name");
 			
 			Element lhs = xpathFirst(rule, "lhs");
 			Element rhs = xpathFirst(rule, "rhs");
@@ -967,12 +983,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (p2 instanceof Element) {
 					Element p = (Element) p2;
 					if (p.getNodeName().equals("pattern")) {
-						LogicTerm t = new LogicTerm(p.getAttribute("object-type"));
+						LogicTerm t = new LogicTerm(p.getAttribute("object-type"), reason);
 						logic.head.add(t);
 					} else if (p.getNodeName().equals("not")) {
 						Element actualP = xpathFirst(p, "pattern"); 
-						LogicTerm t = new LogicTerm(actualP.getAttribute("object-type"));
-						logic.head.add(new LogicNotTerm(t));
+						LogicTerm t = new LogicTerm(actualP.getAttribute("object-type"), reason);
+						logic.head.add(new LogicNotTerm(t, reason));
 					}
 				}
 			}
@@ -988,7 +1004,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (methodName.startsWith("generated")) {
 					methodName = methodName.substring("generated".length());
 				}
-				LogicTerm t = new LogicTerm(methodName);
+				LogicTerm t = new LogicTerm(methodName, reason);
 				logic.body.add(t);
 			}
 			
@@ -1236,11 +1252,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// we should never get here
 			throw new RuntimeException("There is no distance between " + from + " and " + to + ", as they are not connected.");
 		}
-
-		@Override
-		public String compilePath(String source, String target,
+		
+		/**
+		 * Compile the last path, but as a list of elements, rather than
+		 * a string.
+		 */
+		protected List<String> compilePathList(String source, String target,
 				Map<String, String> previous) {
-			
+
 			List<String> path = new ArrayList<String>();
 			int i = 0;
 			String cur = target;
@@ -1250,11 +1269,22 @@ public class DumpDroolsXml extends InferenceTestCase {
 				i++;
 			}
 			if (path.isEmpty()) {
-				return "[no path]";
+				return null;
 			}
 			if (cur != null) {
 				path.add(source);
 			}
+			
+			return path;
+			
+		}
+
+		@Override
+		public String compilePath(String source, String target,
+				Map<String, String> previous) {
+			List<String> path = compilePathList(source, target, previous);
+			if (path == null)
+				return "[no path]";
 			
 			// now, reverse-compile this into a string
 			String buf = "";
@@ -1278,7 +1308,109 @@ public class DumpDroolsXml extends InferenceTestCase {
 			
 			return buf;
 		}
+		
+	}
+	
+	/**
+	 * Represents a stratification statement, i.e. from (>|>=) to, because: reason (usually a rule name)
+	 * @author jmwright
+	 *
+	 */
+	protected class StratReason {
 
+		public String from;
+		public String to;
+		public String reason;
+		
+		/**
+		 * @param from
+		 * @param to
+		 * @param reason
+		 */
+		public StratReason(String from, String to, String reason) {
+			this.from = from;
+			this.to = to;
+			this.reason = reason;
+		}
+		
+	}
+	
+	protected class StratificationCycleCheckerWithExplanation extends StratificationCycleChecker {
+
+		private List<StratReason> reasonGt;
+		private List<StratReason> reasonGtEquals;
+		
+		/**
+		 * Default constructor. Add the explanations for each graph map.
+		 * 
+		 * @param graphGt
+		 * @param graphGtEquals
+		 * @param reasonGt 
+		 * @param reasonGtEquals 
+		 */
+		public StratificationCycleCheckerWithExplanation(
+				Map<String, List<String>> graphGt,
+				Map<String, List<String>> graphGtEquals,
+				List<StratReason> reasonGt, 
+				List<StratReason> reasonGtEquals) {
+			super(graphGt, graphGtEquals);
+			this.reasonGt = reasonGt;
+			this.reasonGtEquals = reasonGtEquals;
+			
+		}
+
+		@Override
+		public String compilePath(String source, String target,
+				Map<String, String> previous) {
+			String buf = super.compilePath(source, target, previous);
+			
+			List<String> path = compilePathList(source, target, previous);
+			if (path == null)
+				return "[no path]";
+			
+			// now, reverse-compile this into a string
+			String reasoning = "";
+			for (int j = path.size() - 1; j >= 0; j--) {
+				String e = path.get(j);
+				if (j != 0) {
+					String next = path.get(j-1);	// it's next, since the list is backwards
+					// is the link from prev to e a > or >= ?
+					// > is first, since > is given the lowest value and
+					// thus found first
+					if (graphGt.get(e) != null && graphGt.get(e).contains(next)) {
+						// e > next
+						reasoning += "- " + e + " > " + next + ": " + getReason(reasonGt, e, next) + "\n";
+					} else if (graphGtEquals.get(e) != null && graphGtEquals.get(e).contains(next)) {
+						reasoning += "- " + e + " >= " + next + ": " + getReason(reasonGtEquals, e, next) + "\n";
+					} else {
+						reasoning += "- " + e + " >= " + next + ": ???\n";
+					}
+				}
+			}
+			
+			return buf + "\n" + reasoning;
+			
+		}
+
+		/**
+		 * Search the given list for an element from 'from' to 'to',
+		 * and provide the reason provided.
+		 * 
+		 * @param list
+		 * @param from
+		 * @param to
+		 * @return null if no reason found.
+		 */
+		private String getReason(List<StratReason> list, String from,
+				String to) {
+			for (StratReason r : list) {
+				if (r.from.equals(from) && r.to.equals(to)) {
+					return r.reason;
+				}
+			}
+			return null;
+		}
+		
 		
 		
 	}

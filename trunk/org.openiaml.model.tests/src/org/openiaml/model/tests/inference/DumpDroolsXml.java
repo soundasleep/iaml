@@ -563,8 +563,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 		for (String from : sources) {
 			StratificationCycleChecker scc = new StratificationCycleChecker(graphGt, graphGtEq);
 			int d = scc.dijkstra(from, from + "!target");
-			String path = scc.getLastPath();
-			System.out.println(from + " -> " + from + "!target strat: " + d + ": " + path);
+			if (d == -1) {
+				System.out.println(from + " -> " + from + "!target strat: no path found");
+			} else {
+				String path = scc.getLastPath();
+				System.out.println(from + " -> " + from + "!target strat: " + d + ": " + path);				
+			}
 		}
 		
 	}
@@ -1231,6 +1235,48 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			// we should never get here
 			throw new RuntimeException("There is no distance between " + from + " and " + to + ", as they are not connected.");
+		}
+
+		@Override
+		public String compilePath(String source, String target,
+				Map<String, String> previous) {
+			
+			List<String> path = new ArrayList<String>();
+			int i = 0;
+			String cur = target;
+			while (cur != source && cur != null && i < 50) {
+				path.add(cur);
+				cur = previous.get(cur);
+				i++;
+			}
+			if (path.isEmpty()) {
+				return "[no path]";
+			}
+			if (cur != null) {
+				path.add(source);
+			}
+			
+			// now, reverse-compile this into a string
+			String buf = "";
+			for (int j = path.size() - 1; j >= 0; j--) {
+				String e = path.get(j);
+				buf += e;
+				if (j != 0) {
+					String next = path.get(j-1);	// it's next, since the list is backwards
+					// is the link from prev to e a > or >= ?
+					// > is first, since > is given the lowest value and
+					// thus found first
+					if (graphGt.get(e) != null && graphGt.get(e).contains(next)) {
+						buf += " > ";
+					} else if (graphGtEquals.get(e) != null && graphGtEquals.get(e).contains(next)) {
+						buf += " >= ";
+					} else {
+						buf += " ??? ";
+					}
+				}
+			}
+			
+			return buf;
 		}
 
 		

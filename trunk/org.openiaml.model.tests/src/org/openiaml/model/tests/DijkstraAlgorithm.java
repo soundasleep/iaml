@@ -20,7 +20,7 @@ import java.util.Map;
 public abstract class DijkstraAlgorithm<T> {
 
 	/** Static value for an infinite path (i.e. no path exists) */
-	public static final int INFINITE = 9000;
+	public static final int INFINITE = 2 << 24;
 
 	/**
 	 * Get all of the edges (nodes) involved in this graph.
@@ -30,6 +30,10 @@ public abstract class DijkstraAlgorithm<T> {
 	protected abstract Collection<T> getEdges();
 	
 	/**
+	 * Get the shortest path distance between source and target.
+	 * Returns -1 if no path can be found.
+	 * The last path found is stored in {@link #getLastPath()}.
+	 * 
 	 * @param source
 	 * @param target
 	 */
@@ -75,6 +79,10 @@ public abstract class DijkstraAlgorithm<T> {
 		
 		if (distance.get(target) == null) {
 			throw new NullPointerException("No target named '" + target + "' found.");
+		}
+		
+		if (distance.get(target) == INFINITE) {
+			return -1;
 		}
 		return distance.get(target);
 	}

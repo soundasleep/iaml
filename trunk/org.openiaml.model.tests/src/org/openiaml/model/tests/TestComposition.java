@@ -60,10 +60,10 @@ public class TestComposition extends XmlTestCase {
 	 */
 	public void checkDijkstra(String source, String target) {
 		int d1 = dj.dijkstra(source, target);
-		assertNotEquals(source + " -> " + target + " should not be infinite. " + dj.getLastPath(), d1, dj.INFINITE);
+		assertNotEquals(source + " -> " + target + " should not be infinite. " + dj.getLastPath(), d1, -1);
 
 		int d2 = dj.dijkstra(target, source);
-		assertEquals(target + " -> " + source + " should be infinite. " + dj.getLastPath(), dj.INFINITE, d2);
+		assertEquals(target + " -> " + source + " should be infinite. " + dj.getLastPath(), -1, d2);
 		
 	}
 

@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.codegen;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
@@ -142,7 +144,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertNoProblem();
 		
 		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "42");
+		setLabeledFormElementField(loginId, "key42");
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
 		
@@ -183,7 +185,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 
 		clickLinkWithText("login");
 		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "42");
+		setLabeledFormElementField(loginId, "key42");
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
 		
@@ -192,12 +194,12 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertNoProblem();
 		
 		// it should be present
-		assertTextPresent("42");
+		assertTextPresent("key42");
 		
 		// go back to the viewkey page
 		gotoSitemapThenPage(sitemap, "viewkey");
 		assertNoProblem();
-		assertTextPresent("42");
+		assertTextPresent("key42");
 		
 		// now we logout		
 		gotoSitemapThenPage(sitemap, "logout", "Home");
@@ -226,7 +228,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 
 		// lets set the fields
 		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "42");
+		setLabeledFormElementField(loginId, "key42");
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
 
@@ -235,12 +237,12 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertNoProblem();
 		
 		// it should be present
-		assertTextPresent("42");
+		assertTextPresent("key42");
 		
 		// go back to the viewkey page
 		gotoSitemapThenPage(sitemap, "viewkey");
 		assertNoProblem();
-		assertTextPresent("42");
+		assertTextPresent("key42");
 		
 		// now we logout		
 		gotoSitemapThenPage(sitemap, "logout", "Home");
@@ -267,24 +269,24 @@ public class LoginHandlerKey extends CodegenTestCase {
 
 		// lets set the fields
 		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "44");	// INVALID
+		setLabeledFormElementField(loginId, "key44");	// INVALID
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the login page again
 		assertTitleMatch("login");
 		assertProblem();		// with a problem
-		assertTextNotPresent("42");		// it should not be on the page
+		assertTextNotPresent("key42");		// it should not be on the page
 
 		// lets set the fields again
-		setLabeledFormElementField(loginId, "42");	// VALID
+		setLabeledFormElementField(loginId, "key42");	// VALID
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the right page
 		assertTitleMatch("viewkey");
 		assertNoProblem();		// no problems now
-		assertTextPresent("42");
+		assertTextPresent("key42");
 
 		// now we logout		
 		gotoSitemapThenPage(sitemap, "logout", "Home");

@@ -25,7 +25,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # ~~[Milestones Publish milestones]~~
   # [Model0_2 Expand IAML model]
   # Usability improvements
-    * Add progress monitors for inference and code generation
+    * [http://code.google.com/p/iaml/issues/detail?id=23 Add progress monitors for inference and code generation]
     * Propogation of generated element deletion (element override)
     * Sharing single EditingDomain instance across all editors
   # Inference

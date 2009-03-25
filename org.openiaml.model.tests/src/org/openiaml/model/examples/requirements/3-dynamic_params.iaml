@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires">
-  <children xsi:type="iaml.visual:Page" name="container">
-    <children xsi:type="iaml.visual:InputForm" name="foo" outEdges="//@children.0/@children.0/@wires.0">
-      <eventTriggers name="edit" outEdges="//@children.0/@children.0/@eventTriggers.0/@wires.0">
-        <wires xsi:type="iaml.wires:RunInstanceWire" from="//@children.0/@children.0/@eventTriggers.0" to="//@children.0/@children.1/@operations.0" name="run" inEdges="//@children.0/@children.0/@properties.0/@wires.0"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
+  <children xsi:type="iaml.visual:Page" id="migrated1" name="container">
+    <children xsi:type="iaml.visual:InputForm" id="migrated3" name="foo" outEdges="migrated2">
+      <eventTriggers id="migrated5" name="edit" outEdges="migrated4">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="migrated4" from="migrated5" to="migrated7" name="run" inEdges="migrated6"/>
       </eventTriggers>
-      <wires xsi:type="iaml.wires:SyncWire" from="//@children.0/@children.0" to="//@children.0/@children.1" name="sync"/>
-      <properties name="fieldValue" outEdges="//@children.0/@children.0/@properties.0/@wires.0">
-        <wires xsi:type="iaml.wires:ParameterWire" from="//@children.0/@children.0/@properties.0" to="//@children.0/@children.0/@eventTriggers.0/@wires.0"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="migrated2" from="migrated3" to="migrated8" name="sync"/>
+      <properties id="migrated9" name="fieldValue" outEdges="migrated6">
+        <wires xsi:type="iaml.wires:ParameterWire" id="migrated6" from="migrated9" to="migrated4"/>
       </properties>
     </children>
-    <children xsi:type="iaml.visual:InputForm" name="bar" inEdges="//@children.0/@children.0/@wires.0">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="//@children.0/@children.0/@eventTriggers.0/@wires.0" name="printInt(int)"/>
+    <children xsi:type="iaml.visual:InputForm" id="migrated8" name="bar" inEdges="migrated2">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="migrated4" id="migrated7" name="printInt(int)"/>
     </children>
   </children>
 </iaml:InternetApplication>

@@ -8,7 +8,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 
 ==Release 0.1==
 ([http://journals.jevon.org/users/jevon-phd/entry/16760 Released])
-  # Initial IAML model that can describe initial requirements
+  # [Model0.1 Initial IAML model] that can describe initial requirements
   # Usability improvements
     * Display shortcut elements for referenced elements
   # Look into rule engines for element inference

@@ -3,8 +3,6 @@
  */
 package org.openiaml.model.tests.codegen;
 
-import junit.framework.AssertionFailedError;
-
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;

@@ -240,6 +240,15 @@ function IamlJavascriptException(message) {
 	this.toString = function() { return "IamlJavascriptException: " + message; } 
 }
 
+/**
+ * Throw an exception, but implemented as a function so we can
+ * throw exceptions when passing parameters.
+ */
+function throwJavascriptException(message) {
+	throw new IamlJavascriptException(message);
+	return false;
+}
+
 // ---------
 
 /**

@@ -44,6 +44,29 @@
 	}
 «ENDDEFINE»
 
+/* if an InternetApplication directly contains an AbstractObject,
+   we still process it anyway. */
+«DEFINE createDomainObjectPhp_Root FOR model::ApplicationElement»
+«ENDDEFINE»
+
+«DEFINE createDomainObjectPhp_Root FOR model::DomainObject»
+	// root DomainObject "«name»"
+
+	// first, make sure the table exists
+	$db = new PDO('sqlite:internet_application.db') or local_die("could not open db '«safeName()».db'");
+	
+	// now cycle through this DomainObject
+	«EXPAND createDomainObjectPhp FOR this»
+	
+	// close connection
+	$db = null;
+«ENDDEFINE»
+
+«DEFINE createDomainObjectPhp_Root FOR model::domain::FileDomainObject»
+	// FileDomainObject "«name»"
+	// we don't need to create anything, it is handled automatically
+«ENDDEFINE»
+
 /**
  * Expand a DomainAttribute into a SQL row.
  */

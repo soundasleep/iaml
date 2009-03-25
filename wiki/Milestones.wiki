@@ -22,8 +22,8 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 
 ==Release 0.2==
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.2 Outstanding issues])
-  # ~~Publish milestones~~
-  # Expand IAML model
+  # ~~[Milestones Publish milestones]~~
+  # [Model0.2 Expand IAML model]
   # Usability improvements
     * Add progress monitors for inference and code generation
     * Propogation of generated element deletion (element override)
@@ -43,8 +43,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 
 ==Release 0.3+==
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.3 Outstanding issues])
-  # Complete IAML model
-  # Code generation of IAML model
+  # [Model0.3 Complete IAML model]
   # Development
     * Integration with CruiseControl
     * Code coverage with [http://emma.sourceforge.net/ Emma] and [http://www.eclemma.org/ EclEmma]

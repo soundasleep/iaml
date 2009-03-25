@@ -8,7 +8,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 
 ==Release 0.1==
 ([http://journals.jevon.org/users/jevon-phd/entry/16760 Released])
-  # [Model0.1 Initial IAML model] that can describe initial requirements
+  # [Model0_1 Initial IAML model] that can describe initial requirements
   # Usability improvements
     * Display shortcut elements for referenced elements
   # Look into rule engines for element inference
@@ -23,7 +23,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 ==Release 0.2==
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.2 Outstanding issues])
   # ~~[Milestones Publish milestones]~~
-  # [Model0.2 Expand IAML model]
+  # [Model0_2 Expand IAML model]
   # Usability improvements
     * Add progress monitors for inference and code generation
     * Propogation of generated element deletion (element override)
@@ -37,16 +37,16 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Testing
     * Test operational modelling and generation
     * Test cases for code generation of all modelling elements
-  # Development
-    * Set up automated build and release
-    * Automated testing in build script
 
 ==Release 0.3+==
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.3 Outstanding issues])
-  # [Model0.3 Complete IAML model]
+  # [Model0_3 Complete IAML model]
   # Development
+    * [http://code.google.com/p/iaml/issues/detail?id=21 Set up automated build and release]
+    * Automated testing in build script
     * Integration with CruiseControl
     * Code coverage with [http://emma.sourceforge.net/ Emma] and [http://www.eclemma.org/ EclEmma]
+    * [http://code.google.com/p/iaml/issues/detail?id=22 Javadoc documentation generation]
   # Extensibility
     * New code generation rules using oAW
     * New inference rules using Drools

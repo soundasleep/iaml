@@ -141,7 +141,13 @@ isInputTextField(emf::EObject this) :
 
 /** 
  * a hack way to create backtrace-able errors
- * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540
+ * to use: «EXPAND exception FOR throwException("Your message goes here")»
+ * AND add this anywhere in your template file: (very important)
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»
+   
  */
 String throwException(String message) :
 	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.throwException(java.lang.String);

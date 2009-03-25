@@ -87,6 +87,7 @@ $db_name = false;
 $table_name = false;
 $row_name = false;
 «EXPAND expandDomainStore FOREACH domainStores»
+«EXPAND expandDomainObjectRoot FOREACH children»
 
 if ($db_type == "pdo") {
 	if (!$db_name)
@@ -151,7 +152,7 @@ echo "ok";
  * Expand out each DomainAttribute.
  */
 «DEFINE expandDomainAttribute(model::domain::AbstractDomainStore store, model::domain::AbstractDomainObject object) FOR model::domain::AbstractDomainAttribute»
-	«ERROR "Cannot expand AbstractDomainAttribute " + this + " (store=" + store + ") (object=" + object + ")"»
+	«EXPAND exception FOR throwException("Cannot expand AbstractDomainAttribute " + this + " (store=" + store + ") (object=" + object + ")")»
 «ENDDEFINE»
 
 «DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
@@ -171,6 +172,46 @@ echo "ok";
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";
+		$table_name = null;
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+	}
+«ENDDEFINE»
+
+/* if an InternetApplication directly contains an AbstractObject,
+   we still process it anyway. */
+«DEFINE expandDomainObjectRoot FOR model::ApplicationElement»
+	«REM»empty«ENDREM»
+«ENDDEFINE»
+
+«DEFINE expandDomainObjectRoot FOR model::domain::AbstractDomainObject»
+	«EXPAND expandDomainAttributeRoot(this) FOREACH attributes»
+«ENDDEFINE»
+
+«DEFINE expandDomainAttributeRoot(model::domain::AbstractDomainObject object) FOR model::domain::AbstractDomainAttribute»
+	«EXPAND exception FOR throwException("Cannot expand expandDomainAttributeRoot " + this + " (object=" + object + ")")»
+«ENDDEFINE»
+
+«DEFINE expandDomainAttributeRoot(model::DomainObject object) FOR model::DomainAttribute»
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "pdo";
+		$db_name = "sqlite:internet_application.db";
+		$table_name = "«safeNameString(object.name)»";
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+	}
+«ENDDEFINE»
+
+«DEFINE expandDomainAttributeRoot(model::domain::FileDomainObject object) FOR model::domain::FileDomainAttribute»
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "properties";
+		$db_name = "internet_application.properties";
 		$table_name = null;
 		$row_name = "«safeNameString(name)»";
 		
@@ -256,4 +297,7 @@ echo "ok";
 
 «DEFINE callOperationParametersSource FOR model::StaticValue»
 	"«value-»" /* static value "«name-»" */
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
 «ENDDEFINE»

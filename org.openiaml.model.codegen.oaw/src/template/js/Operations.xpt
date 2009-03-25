@@ -121,16 +121,23 @@
 
 «DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::visual::InputTextField»
 	«REM»
-		we are trying to find the remote parameter source for a field that isn't on the current page!
-		what are we supposed to do??
+		TODO we are trying to find the remote parameter source for a field that isn't on the current page! what are we supposed to do??
 	«ENDREM»
+	/* throwJavascriptException("I don't know how to find the remote parameter source for a field that isn't on the current page.") */
 	null
 «ENDDEFINE»
 
 «DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::domain::FileDomainAttribute»
 	"<?php 
 		// remote parameter source from a .properties file
-		$db_name = "«getFileDomainStore(this).file-»";
+		$db_type = "FileDomainObject";
+		«IF model::domain::FileDomainStore.isInstance(getFileDomainStore(this))»
+			$db_name = "«getFileDomainStore(this).file-»";
+		«ELSEIF model::InternetApplication.isInstance(getFileDomainStore(this))»
+			$db_name = "internet_application.properties";
+		«ELSE»
+			«EXPAND exception FOR throwException("Remote parameter source '" + getFileDomainStore(this) + "' was not a FileDomainStore.")»
+		«ENDIF»
 		$row_name = "«safeNameString(this.name)-»";
 		$properties = load_properties($db_name);
 		$value = get_property($properties, $row_name, null);
@@ -147,7 +154,14 @@
 «DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::DomainAttribute»
 	"<?php 
 		// remote parameter source from a database file
-		$db_name = "sqlite:«safeNameString(getDomainStore(this).id)».db";
+		$db_type = "DomainObject";
+		«IF model::DomainStore.isInstance(getDomainStore(this))»
+			$db_name = "sqlite:«safeNameString(getDomainStore(this).id)».db";
+		«ELSEIF model::InternetApplication.isInstance(getDomainStore(this))»
+			$db_name = "sqlite:internet_application.db";
+		«ELSE»
+			«EXPAND exception FOR throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore.")»
+		«ENDIF»
 		$table_name = "«safeNameString(getDomainObject(this).name)»";
 		$row_name = "«safeNameString(this.name)»";
 		

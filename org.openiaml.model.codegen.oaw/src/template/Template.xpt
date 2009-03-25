@@ -42,6 +42,7 @@
 	«FILE "output/create_database.php"-»
 <?php
 «EXPAND php::CreateDomainStorePhp::createDomainStorePhp FOREACH domainStores-»
+«EXPAND php::CreateDomainStorePhp::createDomainObjectPhp_Root FOREACH children-»
 	«ENDFILE»
 «ENDDEFINE»
 

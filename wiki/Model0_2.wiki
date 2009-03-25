@@ -16,6 +16,15 @@ This model version adds real support for persistency (Properties files and datab
 
 The rest of the release provides more robust components, with model quality tests, release tests, and improved user interfaces with icons and breadcrumbs.
 
+In particular, the model should be able to support the following _initial requirements_ (each requires a link to a graphical representation, inference tests, and runtime tests):
+  # Form synchronisation
+  # Bidirectional wires
+  # Wire composition
+  # Static wire parameters
+  # Dynamic wire parameters
+  # Dynamic wire sources
+  # Operations
+
 =Elements=
 
   * *Session*: an abstract representation of a "Session". Any ApplicationElementProperties stored in this session will not be available outside of the current user.

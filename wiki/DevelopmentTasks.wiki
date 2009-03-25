@@ -1,0 +1,28 @@
+#summary Common development tasks.
+#labels Development,Phase-Implementation
+
+=Common Tasks=
+
+This page will ideally have information on how to achieve various common development tasks.
+
+==Adding a new model element==
+
+  # Define what the model element will help achieve
+  # Add the model element to the .ecore
+    # Regenerate model, edit code
+    # Run test cases to ensure model structure is still valid
+  # Add *runtime* test cases to identify what the new element will do
+    # First, add runtime test cases (_.tests.codegen_)
+    # Add test cases to CodegenTestsSuite
+  # Add the model element to graphical editors
+    # Edit .gmfgraph, .gmfmap, .gmfgen (where necessary)
+    # Regenerate editors and re-run test cases
+  # Using these new editors, create the sample models for the *runtime* test cases above
+  # Add *inference* test cases (_.tests.inference_)
+  # Add inference rules (_.drools_) to satisfy the *inference* test cases
+  # Modify OAW code generation rules to satisfy the *runtime* test cases
+
+Other development tasks still to document:
+
+  # Creating a new graphical editor
+  # Model migration: creating new model versions

@@ -1,6 +1,8 @@
 #summary Summary of model version 0.1.
 #labels Phase-Design,Development
 
+0.0 | *0.1* | [Model0_2 0.2 >]
+
 =Model 0.1=
 
   * [http://iaml.googlecode.com/svn/tags/version-0.1.0/org.openiaml.model/model/iaml.ecore Model .ecore]

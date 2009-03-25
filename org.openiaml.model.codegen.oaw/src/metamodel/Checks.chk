@@ -1,5 +1,7 @@
 import iaml;
 
+// NOTE: checks cannot have a semicolon in the exception, otherwise the 
+// OAW parser won't be able to parse beyond it
 extension metamodel::Extensions;
 
 // TODO add test cases for model validation
@@ -49,3 +51,11 @@ context model::domain::FileDomainStore ERROR "FileDomainStores can only contain 
 context model::domain::FileDomainObject ERROR "FileDomainObjects can only contain FileDomainAttributes" :
 	!model::domain::FileDomainAttribute.isInstance( attributes.forAll( e | model::domain::AbstractDomainAttribute.isInstance(e) ) );
 
+context model::VisibleThing ERROR "VisibleThings cannot directly contain AbstractDomainStores, they should be in the root" :
+	!children.exists( e | model::domain::AbstractDomainStore.isInstance(e) );
+
+context model::VisibleThing ERROR "VisibleThings cannot directly contain AbstractDomainObjects, they should be in AbstractDomainStores" :
+	!children.exists( e | model::domain::AbstractDomainObject.isInstance(e) );
+
+context model::VisibleThing ERROR "VisibleThings cannot directly contain AbstractDomainAttributes, they should be in AbstractDomainObjects" :
+	!children.exists( e | model::domain::AbstractDomainAttribute.isInstance(e) );

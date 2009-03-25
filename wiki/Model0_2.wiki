@@ -1,7 +1,7 @@
 #summary Summary of model version 0.2.
 #labels Phase-Design,Development
 
-[Model_01 < 0.1] | *0.2* | [Model0_3 0.3 >]
+[Model0_1 < 0.1] | *0.2* | [Model0_3 0.3 >]
 
 =Model 0.2=
 

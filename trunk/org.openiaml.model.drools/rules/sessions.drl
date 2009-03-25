@@ -79,7 +79,8 @@ rule "Create 'key' property for LoginHandler[type = key]s"
 		not (ApplicationElementProperty (eContainer == scope, 
 			name=="current login key" ) )
 		# the value may not be called "current login key"
-		not (FindWire( name == "set", from == login_handler, to != null ))
+		# not (FindWire( name == "set", from == login_handler, to != null ))
+		  # ^^ disabled to satisfy stratification constraint
 					
 	then
 

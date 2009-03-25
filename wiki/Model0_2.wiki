@@ -1,0 +1,25 @@
+#summary Summary of model version 0.2.
+#labels Phase-Design,Development
+
+[Model_01 < 0.1] | *0.2* | [Model0_3 0.3 >]
+
+=Model 0.2=
+
+  * Model .ecore
+  * Inference tests
+  * Runtime tests
+  * Migration code
+
+=Introduction=
+
+This model version adds real support for persistency (Properties files and databases), support for sessions, and complex components for login/logout.
+
+The rest of the release provides more robust components, with model quality tests, release tests, and improved user interfaces with icons and breadcrumbs.
+
+=Elements=
+
+  * *Session*: an abstract representation of a "Session". Any ApplicationElementProperties stored in this session will not be available outside of the current user.
+  * *AbstractDomainObject*: DomainObjects are abstracted away, and we now have DomainObject for SimpleDB databases, and FileDomainObject for .properties files.
+  * *LoginHandler*: a component which deals with login/logout. Must be placed in a Session.
+
+(More accurate documentation on these elements is required.)

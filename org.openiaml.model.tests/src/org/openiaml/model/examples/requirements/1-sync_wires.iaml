@@ -10,9 +10,9 @@
         <wires xsi:type="iaml.wires:SyncWire" id="migrated8" from="migrated9" to="migrated10" name="sync"/>
       </children>
     </children>
-    <children xsi:type="iaml:DomainObject" id="migrated4" name="UserObject" inEdges="migrated2">
-      <attributes xsi:type="iaml:DomainAttribute" id="migrated7" name="f_name" inEdges="migrated5"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="migrated10" name="pass_hash" inEdges="migrated8"/>
-    </children>
+  </children>
+  <children xsi:type="iaml:DomainObject" id="migrated4" name="UserObject" inEdges="migrated2">
+    <attributes xsi:type="iaml:DomainAttribute" id="migrated7" name="f_name" inEdges="migrated5"/>
+    <attributes xsi:type="iaml:DomainAttribute" id="migrated10" name="pass_hash" inEdges="migrated8"/>
   </children>
 </iaml:InternetApplication>

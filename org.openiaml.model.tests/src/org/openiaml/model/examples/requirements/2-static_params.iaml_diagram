@@ -88,7 +88,7 @@
       <styles xmi:type="notation:ShapeStyle" xmi:id="_9QxosRmbEd6Bbd9MGRXJ5w"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_9QxoshmbEd6Bbd9MGRXJ5w" diagramLink="_Hly7wBmcEd6Bbd9MGRXJ5w" hint="Iaml_Operation"/>
       <element xmi:type="iaml:CompositeOperation" href="2-static_params.iaml#model.1203bbadb5b.53d"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9QxosxmbEd6Bbd9MGRXJ5w" x="36" y="228"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9QxosxmbEd6Bbd9MGRXJ5w" x="48" y="228"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="__jG3sBmbEd6Bbd9MGRXJ5w" type="1011">
       <children xmi:type="notation:Node" xmi:id="__jjjoBmbEd6Bbd9MGRXJ5w" type="4011"/>

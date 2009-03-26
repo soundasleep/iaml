@@ -34,6 +34,7 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(Requirement1SyncWires.class);
 		suite.addTestSuite(Requirement2StaticParams.class);
 		suite.addTestSuite(Requirement3DynamicParams.class);
+		suite.addTestSuite(Requirement4DynamicSources.class);
 
 		return suite;
 	}

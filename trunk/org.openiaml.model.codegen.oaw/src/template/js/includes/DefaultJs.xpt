@@ -65,28 +65,81 @@ function counterIncrement(id) {
 	}
 }
 
+/**
+ * To prevent store_event queues becoming out of order, we
+ * do a client-side fix of creating a client-side queue. When more
+ * than one request is active, they are queued up, and
+ * then called later in succession after each request returns.
+ * queued_store_events is an array of functions to call.
+ */
+var queued_store_events = new Array();
+var store_event_queued = false;
+
 /* approach #2: use event queues stored on the server, if the function is
    not available on the current page */
 function store_event(page_id, event_name, arg0) {
-	counterIncrement('store_event');
 	var url = 'store_event.php?page_id=' + escape(page_id) + '&event_name=' + escape(event_name) + "&arg0=" + escape(arg0);
-	debug("creating ajax request to url: " + url);
-	ajaxIncrement();
-	new Ajax.Request(url,
-  {
-    method:'get',
-    onSuccess: function(transport){
-      	var response = transport.responseText || "no response text";
-      	debug("success: " + response);
-      	document.getElementById('response').innerHTML = response;
-      	ajaxDecrement();
-    },
-    onFailure: function(transport){ 
-		var fail = 'store_event failed at ' + url + ': ' + response.responseText;
-		ajaxFailed(fail);		
-     }
-  });
+	store_event_function = function() {
+		counterIncrement('store_event');
+		debug("creating ajax request to url: " + url);
+		ajaxIncrement();
+		new Ajax.Request(url,
+	  {
+	    method:'get',
+	    onSuccess: function(transport){
+	      	var response = transport.responseText || "no response text";
+	      	debug("success: " + response);
+	      	document.getElementById('response').innerHTML = response;
+	      	// run BEFORE decrementing, so counter will never be 0
+	      	next_store_event();	
+	      	ajaxDecrement();
+	    },
+	    onFailure: function(transport){ 
+			var fail = 'store_event failed at ' + url + ': ' + response.responseText;
+	      	next_store_event();
+			ajaxFailed(fail);		
+	     }
+	  });
+  }
+  if (store_event_queued) {
+  	// we're currently in a queue
+  	debug(" -- adding to queue: " + url);
+  	queued_store_events.push(store_event_function); // add it to the queue
+  } else {
+    // otherwise, run it now
+    store_event_queued = true;	// enable queueing
+    debug(" -- running now: " + url);
+    store_event_function();
+  }
   debug("store_event called");
+}
+
+/**
+ * Get a store_event event from the queue to execute, or
+ * do nothing.
+ */
+function next_store_event() {
+	debug("next store event..");
+	if (store_event_queued) {
+		if (queued_store_events.length != 0) {
+			var queued_function = queued_store_events.shift();	// get first off queue
+			debug(" -- -- running next in queue");
+			queued_function();
+		} else {
+			store_event_queued = false;		// disable queueing when empty
+			debug(" -- -- queue empty");
+		}
+	} else {
+		// if the queue isn't empty, we should run it anyway
+		if (queued_store_events.length != 0) {
+			store_event_queued = true;
+			var queued_function = queued_store_events.shift();
+			debug(" -- -- found orphan queue event");
+			queued_function();
+		} else {
+			debug(" -- nothing found in queue");
+		}
+	}
 }
 
 /* save directly to database (only one attribute) */

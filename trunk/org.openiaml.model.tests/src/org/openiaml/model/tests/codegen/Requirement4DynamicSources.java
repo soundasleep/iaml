@@ -93,7 +93,7 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 
 		// 'page c' should have been set
 		waitForAjax();
-		gotoSitemapThenPage(sitemap, "FieldList");
+		gotoSitemapThenPage(sitemap, "page c");
 		
 		{
 			// there should be an element called value

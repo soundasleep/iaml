@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
   <children xsi:type="iaml.visual:Page" id="visual.1203bbadbb8.85c" name="new">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.879" name="value">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1203bbadbb8.152" id="model.1203bbadb5b.53d" name="setValue"/>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1203bbadbb8.152" id="model.1203bbadb5b.53d" name="init"/>
       <eventTriggers id="model.1203bbadb5b.53c" name="access" outEdges="wires.1203bbadbb8.152">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1203bbadbb8.152" from="model.1203bbadb5b.53c" to="model.1203bbadb5b.53d" name="run" inEdges="wires.1203bbadbb8.153"/>
       </eventTriggers>

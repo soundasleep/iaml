@@ -101,7 +101,34 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 			assertNotNull(target);
 			assertLabeledFieldEquals(target, test3);
 		}
+		
+		// going to the 'unrelated' page
+		// it shouldn't be sync'd since it doesn't match the xpath
+		waitForAjax();
+		gotoSitemapThenPage(sitemap, "unrelated");
+		
+		String test4 = "an unrelated change " + new Random().nextDouble();
+		{
+			// set target to another string
+			String target = getLabelIDForText("target");
+			assertNotNull(target);
+			assertLabeledFieldNotEquals(target, test1);
+			assertLabeledFieldNotEquals(target, test2);
+			assertLabeledFieldNotEquals(target, test3);
+			setLabeledFormElementField(target, test4);
+		}
 
+		// 'page c' should not have changed
+		waitForAjax();
+		gotoSitemapThenPage(sitemap, "page c");
+		
+		{
+			// there should be an element called value
+			String target = getLabelIDForText("target");
+			assertNotNull(target);
+			assertLabeledFieldEquals(target, test3);
+		}
+		
 	}
 
 }

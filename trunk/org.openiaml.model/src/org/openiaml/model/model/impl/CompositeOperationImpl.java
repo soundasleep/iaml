@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DerivedView;
@@ -47,6 +49,7 @@ import org.openiaml.model.model.domain.AbstractDomainObject;
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDomainObjects <em>Domain Objects</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDomainViews <em>Domain Views</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDomainInstances <em>Domain Instances</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getExecutionEdges <em>Execution Edges</em>}</li>
@@ -128,6 +131,16 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<DomainObjectInstance> domainInstances;
+
+	/**
+	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Condition> conditions;
 
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
@@ -294,6 +307,18 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Condition> getConditions() {
+		if (conditions == null) {
+			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.COMPOSITE_OPERATION__CONDITIONS);
+		}
+		return conditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ActivityNode> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentEList<ActivityNode>(ActivityNode.class, this, ModelPackage.COMPOSITE_OPERATION__NODES);
@@ -394,6 +419,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return ((InternalEList<?>)getDomainViews()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
 				return ((InternalEList<?>)getDomainInstances()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
+				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
@@ -430,6 +457,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return getDomainViews();
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
 				return getDomainInstances();
+			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
+				return getConditions();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return getNodes();
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
@@ -477,6 +506,10 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
 				getDomainInstances().clear();
 				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
+				return;
+			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
+				getConditions().clear();
+				getConditions().addAll((Collection<? extends Condition>)newValue);
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				getNodes().clear();
@@ -532,6 +565,9 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
 				getDomainInstances().clear();
 				return;
+			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
+				getConditions().clear();
+				return;
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				getNodes().clear();
 				return;
@@ -574,6 +610,8 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				return domainViews != null && !domainViews.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
 				return domainInstances != null && !domainInstances.isEmpty();
+			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
+				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
 				return nodes != null && !nodes.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__DATA_EDGES:
@@ -618,6 +656,12 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsConditions.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.COMPOSITE_OPERATION__CONDITIONS: return ModelPackage.CONTAINS_CONDITIONS__CONDITIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -646,6 +690,12 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				case ModelPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS;
 				case ModelPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS;
 				case ModelPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsConditions.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return ModelPackage.COMPOSITE_OPERATION__CONDITIONS;
 				default: return -1;
 			}
 		}

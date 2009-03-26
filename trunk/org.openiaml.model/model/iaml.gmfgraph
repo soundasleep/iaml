@@ -754,6 +754,22 @@
       <accessors
           figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="CompositeConditionFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Ellipse"
+          name="CompositeConditionFigure"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CompositeConditionNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -839,6 +855,9 @@
   <nodes
       name="FileDomainAttribute"
       figure="FileDomainAttributeFigure"/>
+  <nodes
+      name="CompositeCondition"
+      figure="CompositeConditionFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1053,4 +1072,8 @@
       name="FileDomainAttributeName"
       figure="FileDomainAttributeFigure"
       accessor="//@figures.0/@descriptors.41/@accessors.0"/>
+  <labels
+      name="CompositeConditionName"
+      figure="CompositeConditionFigure"
+      accessor="//@figures.0/@descriptors.42/@accessors.0"/>
 </gmfgraph:Canvas>

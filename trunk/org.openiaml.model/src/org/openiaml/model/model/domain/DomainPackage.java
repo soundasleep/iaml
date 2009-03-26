@@ -300,6 +300,15 @@ public interface DomainPackage extends EPackage {
 	int ABSTRACT_DOMAIN_OBJECT__OVERRIDDEN = ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_OBJECT__CONDITIONS = ModelPackage.APPLICATION_ELEMENT__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -443,6 +452,15 @@ public interface DomainPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_DOMAIN_ATTRIBUTE__OVERRIDDEN = ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_ATTRIBUTE__CONDITIONS = ModelPackage.APPLICATION_ELEMENT__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -717,6 +735,15 @@ public interface DomainPackage extends EPackage {
 	int FILE_DOMAIN_OBJECT__OVERRIDDEN = ABSTRACT_DOMAIN_OBJECT__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_DOMAIN_OBJECT__CONDITIONS = ABSTRACT_DOMAIN_OBJECT__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -860,6 +887,15 @@ public interface DomainPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_DOMAIN_ATTRIBUTE__OVERRIDDEN = ABSTRACT_DOMAIN_ATTRIBUTE__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_DOMAIN_ATTRIBUTE__CONDITIONS = ABSTRACT_DOMAIN_ATTRIBUTE__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.

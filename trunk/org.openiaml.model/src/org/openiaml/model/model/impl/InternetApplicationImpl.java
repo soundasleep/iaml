@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DerivedView;
@@ -57,6 +59,7 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainObjects <em>Domain Objects</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainViews <em>Domain Views</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainInstances <em>Domain Instances</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
@@ -228,6 +231,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<DomainObjectInstance> domainInstances;
+
+	/**
+	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Condition> conditions;
 
 	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -551,6 +564,18 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Condition> getConditions() {
+		if (conditions == null) {
+			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.INTERNET_APPLICATION__CONDITIONS);
+		}
+		return conditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ApplicationElementProperty> getProperties() {
 		if (properties == null) {
 			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.INTERNET_APPLICATION__PROPERTIES);
@@ -670,6 +695,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getDomainViews()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
 				return ((InternalEList<?>)getDomainInstances()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
+				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -717,6 +744,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getDomainViews();
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
 				return getDomainInstances();
+			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
+				return getConditions();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return getProperties();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -784,6 +813,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
 				getDomainInstances().clear();
 				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
+				getConditions().clear();
+				getConditions().addAll((Collection<? extends Condition>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
@@ -856,6 +889,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
 				getDomainInstances().clear();
 				return;
+			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
+				getConditions().clear();
+				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
 				return;
@@ -910,6 +946,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return domainViews != null && !domainViews.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
 				return domainInstances != null && !domainInstances.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
+				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -974,6 +1012,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsConditions.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.INTERNET_APPLICATION__CONDITIONS: return ModelPackage.CONTAINS_CONDITIONS__CONDITIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1022,6 +1066,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				case ModelPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS;
 				case ModelPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS;
 				case ModelPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsConditions.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return ModelPackage.INTERNET_APPLICATION__CONDITIONS;
 				default: return -1;
 			}
 		}

@@ -15,8 +15,11 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ConditionalEdge;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -186,6 +189,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(domainObject);
 				if (result == null) result = caseWireEdgeDestination(domainObject);
 				if (result == null) result = caseGeneratesElements(domainObject);
+				if (result == null) result = caseContainsConditions(domainObject);
 				if (result == null) result = caseGeneratedElement(domainObject);
 				if (result == null) result = caseShouldntContainWires(domainObject);
 				if (result == null) result = defaultCase(theEObject);
@@ -202,6 +206,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(domainAttribute);
 				if (result == null) result = caseWireEdgeDestination(domainAttribute);
 				if (result == null) result = caseGeneratesElements(domainAttribute);
+				if (result == null) result = caseContainsConditions(domainAttribute);
 				if (result == null) result = caseGeneratedElement(domainAttribute);
 				if (result == null) result = caseShouldntContainWires(domainAttribute);
 				if (result == null) result = caseContainsWires(domainAttribute);
@@ -278,6 +283,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsWires(compositeOperation);
 				if (result == null) result = caseGeneratesElements(compositeOperation);
 				if (result == null) result = caseScope(compositeOperation);
+				if (result == null) result = caseContainsConditions(compositeOperation);
 				if (result == null) result = caseOperation(compositeOperation);
 				if (result == null) result = caseExecutionEdgesSource(compositeOperation);
 				if (result == null) result = caseWireEdgesSource(compositeOperation);
@@ -307,6 +313,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(applicationElement);
 				if (result == null) result = caseWireEdgeDestination(applicationElement);
 				if (result == null) result = caseGeneratesElements(applicationElement);
+				if (result == null) result = caseContainsConditions(applicationElement);
 				if (result == null) result = caseGeneratedElement(applicationElement);
 				if (result == null) result = caseShouldntContainWires(applicationElement);
 				if (result == null) result = caseContainsWires(applicationElement);
@@ -324,6 +331,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(applicationElementContainer);
 				if (result == null) result = caseWireEdgeDestination(applicationElementContainer);
 				if (result == null) result = caseGeneratesElements(applicationElementContainer);
+				if (result == null) result = caseContainsConditions(applicationElementContainer);
 				if (result == null) result = caseGeneratedElement(applicationElementContainer);
 				if (result == null) result = caseShouldntContainWires(applicationElementContainer);
 				if (result == null) result = defaultCase(theEObject);
@@ -367,6 +375,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(visibleThing);
 				if (result == null) result = caseWireEdgeDestination(visibleThing);
 				if (result == null) result = caseGeneratesElements(visibleThing);
+				if (result == null) result = caseContainsConditions(visibleThing);
 				if (result == null) result = caseGeneratedElement(visibleThing);
 				if (result == null) result = caseShouldntContainWires(visibleThing);
 				if (result == null) result = defaultCase(theEObject);
@@ -381,6 +390,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsWires(internetApplication);
 				if (result == null) result = caseGeneratesElements(internetApplication);
 				if (result == null) result = caseScope(internetApplication);
+				if (result == null) result = caseContainsConditions(internetApplication);
 				if (result == null) result = caseGeneratedElement(internetApplication);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -465,6 +475,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgeDestination(dynamicApplicationElementSet);
 				if (result == null) result = caseGeneratesElements(dynamicApplicationElementSet);
+				if (result == null) result = caseContainsConditions(dynamicApplicationElementSet);
 				if (result == null) result = caseGeneratedElement(dynamicApplicationElementSet);
 				if (result == null) result = caseShouldntContainWires(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsWires(dynamicApplicationElementSet);
@@ -507,6 +518,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(derivedView);
 				if (result == null) result = caseWireEdgeDestination(derivedView);
 				if (result == null) result = caseGeneratesElements(derivedView);
+				if (result == null) result = caseContainsConditions(derivedView);
 				if (result == null) result = caseGeneratedElement(derivedView);
 				if (result == null) result = caseShouldntContainWires(derivedView);
 				if (result == null) result = defaultCase(theEObject);
@@ -523,6 +535,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(domainObjectInstance);
 				if (result == null) result = caseWireEdgeDestination(domainObjectInstance);
 				if (result == null) result = caseGeneratesElements(domainObjectInstance);
+				if (result == null) result = caseContainsConditions(domainObjectInstance);
 				if (result == null) result = caseGeneratedElement(domainObjectInstance);
 				if (result == null) result = caseShouldntContainWires(domainObjectInstance);
 				if (result == null) result = defaultCase(theEObject);
@@ -544,6 +557,40 @@ public class ModelSwitch<T> {
 				Scope scope = (Scope)theEObject;
 				T result = caseScope(scope);
 				if (result == null) result = caseGeneratesElements(scope);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.CONDITION: {
+				Condition condition = (Condition)theEObject;
+				T result = caseCondition(condition);
+				if (result == null) result = caseWireEdgesSource(condition);
+				if (result == null) result = caseDataFlowEdgesSource(condition);
+				if (result == null) result = caseActivityNode(condition);
+				if (result == null) result = caseNamedElement(condition);
+				if (result == null) result = caseShouldntContainWires(condition);
+				if (result == null) result = caseGeneratedElement(condition);
+				if (result == null) result = caseContainsWires(condition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.COMPOSITE_CONDITION: {
+				CompositeCondition compositeCondition = (CompositeCondition)theEObject;
+				T result = caseCompositeCondition(compositeCondition);
+				if (result == null) result = caseContainsConditions(compositeCondition);
+				if (result == null) result = caseCondition(compositeCondition);
+				if (result == null) result = caseWireEdgesSource(compositeCondition);
+				if (result == null) result = caseDataFlowEdgesSource(compositeCondition);
+				if (result == null) result = caseActivityNode(compositeCondition);
+				if (result == null) result = caseNamedElement(compositeCondition);
+				if (result == null) result = caseShouldntContainWires(compositeCondition);
+				if (result == null) result = caseGeneratedElement(compositeCondition);
+				if (result == null) result = caseContainsWires(compositeCondition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.CONTAINS_CONDITIONS: {
+				ContainsConditions containsConditions = (ContainsConditions)theEObject;
+				T result = caseContainsConditions(containsConditions);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1148,6 +1195,51 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseScope(Scope object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCondition(Condition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composite Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composite Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompositeCondition(CompositeCondition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsConditions(ContainsConditions object) {
 		return null;
 	}
 

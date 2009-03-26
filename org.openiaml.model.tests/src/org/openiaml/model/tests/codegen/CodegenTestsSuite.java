@@ -16,9 +16,9 @@ public class CodegenTestsSuite {
 	 * 
 	 * @return
 	 */
-	public static Test suite() {
+	public static Test suite() { 
 		TestSuite suite = new TestSuite("Code Generation");
-		//$JUnit-BEGIN$
+
 		suite.addTestSuite(SimpleTestCase.class);
 		suite.addTestSuite(SyncFieldDomainAttribute.class);
 		suite.addTestSuite(SyncStaticValueField.class);
@@ -29,7 +29,10 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(SyncWiresMultiple.class);
 		suite.addTestSuite(SyncWiresTestCase.class);
 		suite.addTestSuite(SyncWiresProperties.class);
-		//$JUnit-END$
+		
+		// initial requirements (model 0.2)
+		suite.addTestSuite(Requirement1SyncWires.class);
+
 		return suite;
 	}
 

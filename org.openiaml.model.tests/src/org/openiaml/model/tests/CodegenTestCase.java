@@ -221,4 +221,34 @@ public class CodegenTestCase extends InferenceTestCase {
 		assertEmpty(getElementById("counter_set_application_value"));		
 	}
 	
+
+	/**
+	 * Assert that a given labelled field does NOT equal the current value.
+	 * 
+	 * TODO move into JWebUnit.
+	 * 
+	 * @param id
+	 * @param value
+	 */
+	protected void assertLabeledFieldNotEquals(String id, String value) {
+		IElement e = getElementById(id);
+		assertNotNull(e);
+		assertNotEquals(e.getAttribute("value"), value);
+	}
+
+	/**
+	 * Assert that the given elements are NOT equal, i.e. !a.equals(b).
+	 * 
+	 * @param a
+	 * @param b
+	 */
+	private void assertNotEquals(String a, String b) {
+		if (a == null) {
+			assertTrue("'" + a + "' should not equal '" + b + "'", b != null);
+		} else {
+			assertTrue("'" + a + "' should not equal '" + b + "'", a.equals(b));
+		}
+	}
+
+	
 }

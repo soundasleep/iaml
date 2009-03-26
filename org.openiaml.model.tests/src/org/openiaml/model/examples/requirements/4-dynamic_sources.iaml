@@ -14,4 +14,7 @@
   <children xsi:type="iaml.visual:Page" id="migrated6" name="FieldList" inEdges="migrated4">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.458" name="target"/>
   </children>
+  <children xsi:type="iaml.visual:Page" id="visual.1204501d03b.1a" name="unrelated">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1204501d03b.8a" name="target"/>
+  </children>
 </iaml:InternetApplication>

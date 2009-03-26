@@ -36,6 +36,13 @@
       <element xmi:type="iaml.visual:Page" href="4-dynamic_sources.iaml#migrated6"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XpaxtxjyEd6Bbd9MGRXJ5w" x="495" y="111"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_1qqakBpZEd6OFMgQAL5WwQ" type="1006">
+      <children xmi:type="notation:Node" xmi:id="_1qqalBpZEd6OFMgQAL5WwQ" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_1qqakRpZEd6OFMgQAL5WwQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_1qqakhpZEd6OFMgQAL5WwQ" diagramLink="_2EJRkBpZEd6OFMgQAL5WwQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:Page" href="4-dynamic_sources.iaml#visual.1204501d03b.1a"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1qqakxpZEd6OFMgQAL5WwQ" x="308" y="228"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Xk9IYRjyEd6Bbd9MGRXJ5w"/>
     <element xmi:type="iaml:InternetApplication" href="4-dynamic_sources.iaml#migrated0"/>
   </notation:Diagram>
@@ -98,5 +105,16 @@
   <notation:Diagram xmi:id="_Fmp6UBjzEd6Bbd9MGRXJ5w" type="Iaml_Visual" measurementUnit="Pixel">
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Fmp6URjzEd6Bbd9MGRXJ5w"/>
     <element xmi:type="iaml.visual:InputTextField" href="4-dynamic_sources.iaml#visual.1203bbadbb8.458"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_2EJRkBpZEd6OFMgQAL5WwQ" type="Iaml_Visual" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_2p_woBpZEd6OFMgQAL5WwQ" type="1010">
+      <children xmi:type="notation:Node" xmi:id="_2qJhoxpZEd6OFMgQAL5WwQ" type="4010"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_2qJhoBpZEd6OFMgQAL5WwQ"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_2qJhoRpZEd6OFMgQAL5WwQ" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="4-dynamic_sources.iaml#visual.1204501d03b.8a"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2qJhohpZEd6OFMgQAL5WwQ" x="149" y="191"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_2EJRkRpZEd6OFMgQAL5WwQ"/>
+    <element xmi:type="iaml.visual:Page" href="4-dynamic_sources.iaml#visual.1204501d03b.1a"/>
   </notation:Diagram>
 </xmi:XMI>

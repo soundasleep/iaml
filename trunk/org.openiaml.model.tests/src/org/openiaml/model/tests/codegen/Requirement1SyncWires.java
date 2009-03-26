@@ -5,8 +5,6 @@ package org.openiaml.model.tests.codegen;
 
 import java.util.Date;
 
-import net.sourceforge.jwebunit.api.IElement;
-
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
@@ -60,36 +58,6 @@ public class Requirement1SyncWires extends CodegenTestCase {
 			assertLabeledFieldEquals(passId, testPassword);
 		}
 		
-	}
-
-	/**
-	 * Assert that a given labelled field does NOT equal the current value.
-	 * 
-	 * TODO move into JWebUnit.
-	 * 
-	 * @param id
-	 * @param value
-	 */
-	protected void assertLabeledFieldNotEquals(String id, String value) {
-		IElement e = getElementById(id);
-		assertNotNull(e);
-		assertNotEquals(e.getAttribute("value"), value);
-	}
-
-	/**
-	 * Assert that the given elements are NOT equal, i.e. !a.equals(b).
-	 * 
-	 * TODO move into a superclass.
-	 * 
-	 * @param a
-	 * @param b
-	 */
-	private void assertNotEquals(String a, String b) {
-		if (a == null) {
-			assertTrue("'" + a + "' should not equal '" + b + "'", b != null);
-		} else {
-			assertTrue("'" + a + "' should not equal '" + b + "'", a.equals(b));
-		}
 	}
 
 }

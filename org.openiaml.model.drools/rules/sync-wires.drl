@@ -188,3 +188,30 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		insert(pw);
 
 end
+
+function boolean connects(WireEdge wire, Object a, Object b) {
+	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
+		(wire.getFrom().equals(b) && wire.getTo().equals(a));
+}
+
+rule "Test: SyncWire between A to B, and B to C, means there should be a SyncWire from A to C"
+	when
+		container : ContainsWires ( )
+		
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		aw : SyncWire( eval(connects(aw, a, b)), eContainer == container )
+		bw : SyncWire( eval(connects(bw, b, c)) )
+		not (cw : SyncWire( eval(connects(cw, c, a))) )
+		
+	then
+		SyncWire newWire = handler.generatedSyncWire(aw, container, a, c);
+		newWire.setName("chained sync from: " + aw.getName() + " and: " + bw.getName()); 
+		insert(newWire);
+		
+		// still need to connect conditions
+	
+end
+

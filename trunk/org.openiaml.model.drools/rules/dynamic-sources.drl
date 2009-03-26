@@ -1,0 +1,75 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.eclipse.emf.ecore.*;
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.domain.*;
+import ca.ecliptical.emf.xpath.*;
+import java.util.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+
+function boolean isXPath(String query) {
+	return query.startsWith("xpath:");
+}
+
+/**
+ * Could this potentially be an XPath match?
+ * 
+ * In particular, we take a query /a/b[c]/d[e] and
+ * consider /a/b/d as potential matches. /a/b[c]/d[e] will become
+ * the ConditionWire.
+ *
+ * Note we have to use the same XPath expressions as test
+ * cases, i.e. //iaml:children[@name], not //Page
+ */
+function boolean potentialXPathMatch(EObject container, DynamicApplicationElementSet ds, Page target) {
+	String query = ds.getQuery();
+	if (!query.startsWith("xpath:"))
+		throw new RuntimeException("potentialXPathMatch was called without an xpath: query: '" + query + "'");
+
+	// remove prefix		
+	query = query.substring("xpath:".length());
+	
+	// remove all conditionals
+	// TODO note this will fail if we have a[a[b]], though I don't think this is possible in XPath anyway 	
+	query = query.replaceAll("\\[([^\\]]+)\\]", "");
+	
+	// evaluate xpath using EMFXPath
+	EMFXPath xpath = new EMFXPath(query);
+	xpath.addNamespace("iaml", ModelPackage.eNS_URI);
+	xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);
+	xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+	List results = xpath.selectNodes(container);
+
+	if (results.contains(target)) {
+		return true;
+	}
+	
+	return false;
+}
+
+rule "Connect SyncWires for a dynamic source, referenced by XPath"
+		
+	when
+		container : InternetApplication ( )
+		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		source : Page ( ) 
+		sw : SyncWire ( from == ds, to == source )	# TODO add a reverse rule
+		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
+		not ( SyncWire( from == source, to == target ) )
+		not ( SyncWire( from == target, to == source ) )
+		
+	then 
+		SyncWire sw2 = handler.generatedSyncWire( container, container, source, target );
+		sw2.setName("dynamic sync");
+		insert(sw2);
+		
+end

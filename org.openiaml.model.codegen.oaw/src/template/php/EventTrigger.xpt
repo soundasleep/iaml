@@ -151,9 +151,12 @@
 		«REM»
 			here may be a good place to connect any chained EventTriggers
 		«ENDREM»
+	«ELSEIF name == "javascriptAlert"»
+		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
+		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
-		«ERROR "Unknown server-side function to expand: " + this»
+		«EXPAND exception FOR throwException("Unknown server-side function to expand '" + name + "': " + this)»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -249,4 +252,7 @@
 	«ELSE»
 		// ignoring fail wire
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
 «ENDDEFINE»

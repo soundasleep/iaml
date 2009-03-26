@@ -352,9 +352,16 @@
 		«ELSE»
 			// we don't call additional events for «eContainer» 
 		«ENDIF»
+	«ELSEIF name == "javascriptAlert"»
+		// throw an alert box
+		// NOTE: alert boxes currently aren't owned by any element; they are a direct
+		// hack to display something immediately. eventually, this should be replaced
+		// with a generic alert(), that will render an alert box in the most appropriate
+		// way for the alert container. 
+		alert(«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
-		«ERROR "Unknown client-side function to expand: " + this»
+		«EXPAND exception FOR throwException("Unknown client-side function to expand '" + name + "': " + this)»
 	«ENDIF»
 «ENDDEFINE»
 

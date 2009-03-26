@@ -212,7 +212,8 @@ public class CreateMissingElementsWithDrools {
 			"/rules/sync-wires.drl",
 			"/rules/events.drl",
 			"/rules/sessions.drl",
-			"/rules/operations.drl"
+			"/rules/operations.drl",
+			"/rules/dynamic-sources.drl"
 			);
 	
 	/**

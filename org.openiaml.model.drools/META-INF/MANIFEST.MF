@@ -4,7 +4,8 @@ Bundle-Name: Drools Rules for Openiaml
 Bundle-SymbolicName: org.openiaml.model.drools
 Bundle-Version: 0.1.0
 Export-Package: org.openiaml.model.drools
-Require-Bundle: org.openiaml.model
+Require-Bundle: org.openiaml.model,
+ ca.ecliptical.emf.xpath
 Bundle-ClassPath: lib/reqs/ant-1.6.5.jar,
  lib/reqs/antlr-runtime-3.0.jar,
  lib/reqs/ant-nodeps-1.6.5.jar,

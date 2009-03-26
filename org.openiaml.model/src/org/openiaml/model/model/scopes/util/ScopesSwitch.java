@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -115,6 +116,7 @@ public class ScopesSwitch<T> {
 				if (result == null) result = caseContainsEventTriggers(session);
 				if (result == null) result = caseWireEdgesSource(session);
 				if (result == null) result = caseWireEdgeDestination(session);
+				if (result == null) result = caseContainsConditions(session);
 				if (result == null) result = caseShouldntContainWires(session);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -210,6 +212,21 @@ public class ScopesSwitch<T> {
 	 * @generated
 	 */
 	public T caseWireEdgeDestination(WireEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsConditions(ContainsConditions object) {
 		return null;
 	}
 

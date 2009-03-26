@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -125,6 +126,7 @@ public class DomainSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(abstractDomainObject);
 				if (result == null) result = caseWireEdgeDestination(abstractDomainObject);
 				if (result == null) result = caseGeneratesElements(abstractDomainObject);
+				if (result == null) result = caseContainsConditions(abstractDomainObject);
 				if (result == null) result = caseGeneratedElement(abstractDomainObject);
 				if (result == null) result = caseShouldntContainWires(abstractDomainObject);
 				if (result == null) result = defaultCase(theEObject);
@@ -140,6 +142,7 @@ public class DomainSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(abstractDomainAttribute);
 				if (result == null) result = caseWireEdgeDestination(abstractDomainAttribute);
 				if (result == null) result = caseGeneratesElements(abstractDomainAttribute);
+				if (result == null) result = caseContainsConditions(abstractDomainAttribute);
 				if (result == null) result = caseGeneratedElement(abstractDomainAttribute);
 				if (result == null) result = caseShouldntContainWires(abstractDomainAttribute);
 				if (result == null) result = caseContainsWires(abstractDomainAttribute);
@@ -171,6 +174,7 @@ public class DomainSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(fileDomainObject);
 				if (result == null) result = caseWireEdgeDestination(fileDomainObject);
 				if (result == null) result = caseGeneratesElements(fileDomainObject);
+				if (result == null) result = caseContainsConditions(fileDomainObject);
 				if (result == null) result = caseGeneratedElement(fileDomainObject);
 				if (result == null) result = caseShouldntContainWires(fileDomainObject);
 				if (result == null) result = defaultCase(theEObject);
@@ -187,6 +191,7 @@ public class DomainSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(fileDomainAttribute);
 				if (result == null) result = caseWireEdgeDestination(fileDomainAttribute);
 				if (result == null) result = caseGeneratesElements(fileDomainAttribute);
+				if (result == null) result = caseContainsConditions(fileDomainAttribute);
 				if (result == null) result = caseGeneratedElement(fileDomainAttribute);
 				if (result == null) result = caseShouldntContainWires(fileDomainAttribute);
 				if (result == null) result = caseContainsWires(fileDomainAttribute);
@@ -419,6 +424,21 @@ public class DomainSwitch<T> {
 	 * @generated
 	 */
 	public T caseWireEdgeDestination(WireEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsConditions(ContainsConditions object) {
 		return null;
 	}
 

@@ -806,13 +806,22 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -821,7 +830,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Application Element</em>' class.
@@ -830,7 +839,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -930,6 +939,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT__OVERRIDDEN = DomainPackage.ABSTRACT_DOMAIN_OBJECT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT__CONDITIONS = DomainPackage.ABSTRACT_DOMAIN_OBJECT__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1065,6 +1083,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_ATTRIBUTE__OVERRIDDEN = DomainPackage.ABSTRACT_DOMAIN_ATTRIBUTE__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE__CONDITIONS = DomainPackage.ABSTRACT_DOMAIN_ATTRIBUTE__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1652,13 +1679,22 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__DOMAIN_INSTANCES = CHAINED_OPERATION_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__CONDITIONS = CHAINED_OPERATION_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__NODES = CHAINED_OPERATION_FEATURE_COUNT + 6;
+	int COMPOSITE_OPERATION__NODES = CHAINED_OPERATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Data Edges</b></em>' containment reference list.
@@ -1667,7 +1703,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__DATA_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 7;
+	int COMPOSITE_OPERATION__DATA_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Execution Edges</b></em>' containment reference list.
@@ -1676,7 +1712,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__EXECUTION_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 8;
+	int COMPOSITE_OPERATION__EXECUTION_EDGES = CHAINED_OPERATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -1685,7 +1721,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 9;
+	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>shouldnt properties</b></em>' containment reference list.
@@ -1694,7 +1730,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 10;
+	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1703,7 +1739,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__VALUES = CHAINED_OPERATION_FEATURE_COUNT + 11;
+	int COMPOSITE_OPERATION__VALUES = CHAINED_OPERATION_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
@@ -1712,7 +1748,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 12;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1812,6 +1848,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_CONTAINER__CONDITIONS = APPLICATION_ELEMENT__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -2129,6 +2174,15 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__OVERRIDDEN = APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__CONDITIONS = APPLICATION_ELEMENT_CONTAINER__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2282,13 +2336,22 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__DOMAIN_INSTANCES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2297,7 +2360,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Domain Stores</b></em>' containment reference list.
@@ -2306,7 +2369,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
+	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Runtime Url</b></em>' attribute.
@@ -2315,7 +2378,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
+	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
@@ -2324,7 +2387,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__SESSIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
+	int INTERNET_APPLICATION__SESSIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Login Handlers</b></em>' containment reference list.
@@ -2333,7 +2396,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__LOGIN_HANDLERS = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
+	int INTERNET_APPLICATION__LOGIN_HANDLERS = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
 
 	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
@@ -2342,7 +2405,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -2877,6 +2940,15 @@ public interface ModelPackage extends EPackage {
 	int DYNAMIC_APPLICATION_ELEMENT_SET__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__CONDITIONS = APPLICATION_ELEMENT__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3061,6 +3133,15 @@ public interface ModelPackage extends EPackage {
 	int DERIVED_VIEW__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_VIEW__CONDITIONS = APPLICATION_ELEMENT__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3213,6 +3294,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT_INSTANCE__OVERRIDDEN = APPLICATION_ELEMENT__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__CONDITIONS = APPLICATION_ELEMENT__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -3379,6 +3469,271 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 3;
+
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.ConditionImpl <em>Condition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.ConditionImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getCondition()
+	 * @generated
+	 */
+	int CONDITION = 40;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__WIRES = WIRE_EDGES_SOURCE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__OUT_EDGES = WIRE_EDGES_SOURCE__OUT_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Out Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__OUT_FLOWS = WIRE_EDGES_SOURCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Generated By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__GENERATED_BY = WIRE_EDGES_SOURCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__IS_GENERATED = WIRE_EDGES_SOURCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__ID = WIRE_EDGES_SOURCE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__NAME = WIRE_EDGES_SOURCE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Condition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION_FEATURE_COUNT = WIRE_EDGES_SOURCE_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.ContainsConditions <em>Contains Conditions</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.ContainsConditions
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getContainsConditions()
+	 * @generated
+	 */
+	int CONTAINS_CONDITIONS = 42;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINS_CONDITIONS__CONDITIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Contains Conditions</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINS_CONDITIONS_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.CompositeConditionImpl <em>Composite Condition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.impl.CompositeConditionImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getCompositeCondition()
+	 * @generated
+	 */
+	int COMPOSITE_CONDITION = 41;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__CONDITIONS = CONTAINS_CONDITIONS__CONDITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__WIRES = CONTAINS_CONDITIONS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__OUT_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Out Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__OUT_FLOWS = CONTAINS_CONDITIONS_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Generated By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__GENERATED_BY = CONTAINS_CONDITIONS_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__IS_GENERATED = CONTAINS_CONDITIONS_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__ID = CONTAINS_CONDITIONS_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__NAME = CONTAINS_CONDITIONS_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__NODES = CONTAINS_CONDITIONS_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Data Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__DATA_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Execution Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__EXECUTION_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__VARIABLES = CONTAINS_CONDITIONS_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>shouldnt properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__SHOULDNT_PROPERTIES = CONTAINS_CONDITIONS_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__PARAMETERS = CONTAINS_CONDITIONS_FEATURE_COUNT + 13;
+
+	/**
+	 * The number of structural features of the '<em>Composite Condition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
 
 
 	/**
@@ -4332,6 +4687,124 @@ public interface ModelPackage extends EPackage {
 	EReference getScope_DomainInstances();
 
 	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.Condition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Condition</em>'.
+	 * @see org.openiaml.model.model.Condition
+	 * @generated
+	 */
+	EClass getCondition();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.CompositeCondition <em>Composite Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Composite Condition</em>'.
+	 * @see org.openiaml.model.model.CompositeCondition
+	 * @generated
+	 */
+	EClass getCompositeCondition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see org.openiaml.model.model.CompositeCondition#getNodes()
+	 * @see #getCompositeCondition()
+	 * @generated
+	 */
+	EReference getCompositeCondition_Nodes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#getDataEdges <em>Data Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Data Edges</em>'.
+	 * @see org.openiaml.model.model.CompositeCondition#getDataEdges()
+	 * @see #getCompositeCondition()
+	 * @generated
+	 */
+	EReference getCompositeCondition_DataEdges();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#getExecutionEdges <em>Execution Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Execution Edges</em>'.
+	 * @see org.openiaml.model.model.CompositeCondition#getExecutionEdges()
+	 * @see #getCompositeCondition()
+	 * @generated
+	 */
+	EReference getCompositeCondition_ExecutionEdges();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#getVariables <em>Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Variables</em>'.
+	 * @see org.openiaml.model.model.CompositeCondition#getVariables()
+	 * @see #getCompositeCondition()
+	 * @generated
+	 */
+	EReference getCompositeCondition_Variables();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#get_shouldnt_properties <em>shouldnt properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>shouldnt properties</em>'.
+	 * @see org.openiaml.model.model.CompositeCondition#get_shouldnt_properties()
+	 * @see #getCompositeCondition()
+	 * @generated
+	 */
+	EReference getCompositeCondition__shouldnt_properties();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Values</em>'.
+	 * @see org.openiaml.model.model.CompositeCondition#getValues()
+	 * @see #getCompositeCondition()
+	 * @generated
+	 */
+	EReference getCompositeCondition_Values();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see org.openiaml.model.model.CompositeCondition#getParameters()
+	 * @see #getCompositeCondition()
+	 * @generated
+	 */
+	EReference getCompositeCondition_Parameters();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.ContainsConditions <em>Contains Conditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Contains Conditions</em>'.
+	 * @see org.openiaml.model.model.ContainsConditions
+	 * @generated
+	 */
+	EClass getContainsConditions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.ContainsConditions#getConditions <em>Conditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Conditions</em>'.
+	 * @see org.openiaml.model.model.ContainsConditions#getConditions()
+	 * @see #getContainsConditions()
+	 * @generated
+	 */
+	EReference getContainsConditions_Conditions();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5152,6 +5625,100 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCOPE__DOMAIN_INSTANCES = eINSTANCE.getScope_DomainInstances();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ConditionImpl <em>Condition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.ConditionImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getCondition()
+		 * @generated
+		 */
+		EClass CONDITION = eINSTANCE.getCondition();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.CompositeConditionImpl <em>Composite Condition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.impl.CompositeConditionImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getCompositeCondition()
+		 * @generated
+		 */
+		EClass COMPOSITE_CONDITION = eINSTANCE.getCompositeCondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_CONDITION__NODES = eINSTANCE.getCompositeCondition_Nodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Edges</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_CONDITION__DATA_EDGES = eINSTANCE.getCompositeCondition_DataEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Execution Edges</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_CONDITION__EXECUTION_EDGES = eINSTANCE.getCompositeCondition_ExecutionEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_CONDITION__VARIABLES = eINSTANCE.getCompositeCondition_Variables();
+
+		/**
+		 * The meta object literal for the '<em><b>shouldnt properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_CONDITION__SHOULDNT_PROPERTIES = eINSTANCE.getCompositeCondition__shouldnt_properties();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_CONDITION__VALUES = eINSTANCE.getCompositeCondition_Values();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_CONDITION__PARAMETERS = eINSTANCE.getCompositeCondition_Parameters();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.ContainsConditions <em>Contains Conditions</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.ContainsConditions
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getContainsConditions()
+		 * @generated
+		 */
+		EClass CONTAINS_CONDITIONS = eINSTANCE.getContainsConditions();
+
+		/**
+		 * The meta object literal for the '<em><b>Conditions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTAINS_CONDITIONS__CONDITIONS = eINSTANCE.getContainsConditions_Conditions();
 
 	}
 

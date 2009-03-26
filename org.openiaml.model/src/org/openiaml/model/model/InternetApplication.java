@@ -32,7 +32,7 @@ import org.openiaml.model.model.scopes.Session;
  * @model annotation="http://openiaml.org/comment comment='we cannot have InternetApplications inside of other ElementContainers, thus we don\'t define it as an ApplicationElement' comment2='but why can we have it as an ActivityEdgeSource? I don\'t think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA' editor='org.openiaml.model.diagram'"
  * @generated
  */
-public interface InternetApplication extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, GeneratesElements, Scope {
+public interface InternetApplication extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, GeneratesElements, Scope, ContainsConditions {
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.

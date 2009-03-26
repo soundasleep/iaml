@@ -16,8 +16,11 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ConditionalEdge;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -352,6 +355,27 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass scopeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass conditionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass compositeConditionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass containsConditionsEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1256,6 +1280,105 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCondition() {
+		return conditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCompositeCondition() {
+		return compositeConditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeCondition_Nodes() {
+		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeCondition_DataEdges() {
+		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeCondition_ExecutionEdges() {
+		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeCondition_Variables() {
+		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeCondition__shouldnt_properties() {
+		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeCondition_Values() {
+		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeCondition_Parameters() {
+		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getContainsConditions() {
+		return containsConditionsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContainsConditions_Conditions() {
+		return (EReference)containsConditionsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -1408,6 +1531,20 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(scopeEClass, SCOPE__DOMAIN_OBJECTS);
 		createEReference(scopeEClass, SCOPE__DOMAIN_VIEWS);
 		createEReference(scopeEClass, SCOPE__DOMAIN_INSTANCES);
+
+		conditionEClass = createEClass(CONDITION);
+
+		compositeConditionEClass = createEClass(COMPOSITE_CONDITION);
+		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__NODES);
+		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__DATA_EDGES);
+		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__EXECUTION_EDGES);
+		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__VARIABLES);
+		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__SHOULDNT_PROPERTIES);
+		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__VALUES);
+		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__PARAMETERS);
+
+		containsConditionsEClass = createEClass(CONTAINS_CONDITIONS);
+		createEReference(containsConditionsEClass, CONTAINS_CONDITIONS__CONDITIONS);
 	}
 
 	/**
@@ -1480,12 +1617,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		compositeOperationEClass.getESuperTypes().add(this.getContainsWires());
 		compositeOperationEClass.getESuperTypes().add(this.getGeneratesElements());
 		compositeOperationEClass.getESuperTypes().add(this.getScope());
+		compositeOperationEClass.getESuperTypes().add(this.getContainsConditions());
 		applicationElementEClass.getESuperTypes().add(this.getContainsOperations());
 		applicationElementEClass.getESuperTypes().add(this.getNamedElement());
 		applicationElementEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		applicationElementEClass.getESuperTypes().add(this.getWireEdgesSource());
 		applicationElementEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		applicationElementEClass.getESuperTypes().add(this.getGeneratesElements());
+		applicationElementEClass.getESuperTypes().add(this.getContainsConditions());
 		applicationElementContainerEClass.getESuperTypes().add(this.getApplicationElement());
 		applicationElementContainerEClass.getESuperTypes().add(this.getContainsWires());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getNamedElement());
@@ -1503,6 +1642,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		internetApplicationEClass.getESuperTypes().add(this.getContainsWires());
 		internetApplicationEClass.getESuperTypes().add(this.getGeneratesElements());
 		internetApplicationEClass.getESuperTypes().add(this.getScope());
+		internetApplicationEClass.getESuperTypes().add(this.getContainsConditions());
 		domainStoreEClass.getESuperTypes().add(theDomainPackage.getAbstractDomainStore());
 		dataFlowEdgeEClass.getESuperTypes().add(this.getGeneratedElement());
 		temporaryVariableEClass.getESuperTypes().add(this.getNamedElement());
@@ -1518,6 +1658,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getContainsWires());
 		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
+		conditionEClass.getESuperTypes().add(this.getWireEdgesSource());
+		conditionEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
+		conditionEClass.getESuperTypes().add(this.getActivityNode());
+		conditionEClass.getESuperTypes().add(this.getNamedElement());
+		compositeConditionEClass.getESuperTypes().add(this.getContainsConditions());
+		compositeConditionEClass.getESuperTypes().add(this.getCondition());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1649,6 +1795,20 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getScope_DomainObjects(), theDomainPackage.getAbstractDomainObject(), null, "domainObjects", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_DomainViews(), this.getDerivedView(), null, "domainViews", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_DomainInstances(), this.getDomainObjectInstance(), null, "domainInstances", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(compositeConditionEClass, CompositeCondition.class, "CompositeCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompositeCondition_Nodes(), this.getActivityNode(), null, "nodes", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeCondition_DataEdges(), this.getDataFlowEdge(), null, "dataEdges", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeCondition_ExecutionEdges(), this.getExecutionEdge(), null, "executionEdges", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeCondition_Variables(), this.getTemporaryVariable(), null, "variables", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeCondition__shouldnt_properties(), this.getApplicationElementProperty(), null, "_shouldnt_properties", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeCondition_Values(), this.getStaticValue(), null, "values", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeCondition_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(containsConditionsEClass, ContainsConditions.class, "ContainsConditions", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getContainsConditions_Conditions(), this.getCondition(), null, "conditions", null, 0, -1, ContainsConditions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1792,6 +1952,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "changed", "0.2 to extend the abstract counterpart"
+		   });		
+		addAnnotation
+		  (conditionEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.2"
+		   });		
+		addAnnotation
+		  (compositeConditionEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.2"
+		   });		
+		addAnnotation
+		  (containsConditionsEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.2"
 		   });
 	}
 

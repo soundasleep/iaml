@@ -172,6 +172,15 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__OVERRIDDEN = ModelPackage.APPLICATION_ELEMENT_CONTAINER__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_HANDLER__CONDITIONS = ModelPackage.APPLICATION_ELEMENT_CONTAINER__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

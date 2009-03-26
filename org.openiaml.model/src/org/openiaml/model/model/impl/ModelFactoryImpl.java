@@ -17,6 +17,7 @@ import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.DataFlowEdge;
@@ -109,6 +110,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE: return createDomainObjectInstance();
 			case ModelPackage.PAGE_REQUEST: return createPageRequest();
 			case ModelPackage.VISITOR_AGENT: return createVisitorAgent();
+			case ModelPackage.COMPOSITE_CONDITION: return createCompositeCondition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -376,6 +378,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		VisitorAgentImpl visitorAgent = new VisitorAgentImpl();
 		generateID(visitorAgent);
 		return visitorAgent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeCondition createCompositeCondition() {
+		CompositeConditionImpl compositeCondition = new CompositeConditionImpl();
+		return compositeCondition;
 	}
 
 	/**

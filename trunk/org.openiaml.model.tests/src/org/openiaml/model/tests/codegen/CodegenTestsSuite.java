@@ -32,6 +32,8 @@ public class CodegenTestsSuite {
 		
 		// initial requirements (model 0.2)
 		suite.addTestSuite(Requirement1SyncWires.class);
+		suite.addTestSuite(Requirement2StaticParams.class);
+		suite.addTestSuite(Requirement3DynamicParams.class);
 
 		return suite;
 	}

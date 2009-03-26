@@ -90,15 +90,15 @@ public class SyncFormDomainObject extends CodegenTestCase {
 			String field2 = rs.getString("field2");
 			String field3 = rs.getString("field3");
 
-			// there should not be any more values in the database
-			assertFalse(rs.next());
-
 			// it should be our testing text
 			assertEquals(testingText1, field1);
 			assertEquals(testingText2, field2);
 			assertNotSame(testingText1, field3);	// it shouldn't be either of these
 			assertNotSame(testingText2, field3);	// it shouldn't be either of these
-			
+
+			// there should not be any more values in the database
+			assertFalse(rs.next());
+
 		}
 		
 	}

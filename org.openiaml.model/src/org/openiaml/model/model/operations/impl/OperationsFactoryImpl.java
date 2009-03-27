@@ -136,10 +136,11 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public DecisionCondition createDecisionCondition() {
 		DecisionConditionImpl decisionCondition = new DecisionConditionImpl();
+		generateID(decisionCondition);
 		return decisionCondition;
 	}
 

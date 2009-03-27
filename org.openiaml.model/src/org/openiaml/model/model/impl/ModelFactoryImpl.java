@@ -383,10 +383,11 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public CompositeCondition createCompositeCondition() {
 		CompositeConditionImpl compositeCondition = new CompositeConditionImpl();
+		generateID(compositeCondition);
 		return compositeCondition;
 	}
 

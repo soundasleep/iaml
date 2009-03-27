@@ -260,47 +260,51 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="1005"
-        editPartClassName="DecisionNodeEditPart"
-        itemSemanticEditPolicyClassName="DecisionNodeItemSemanticEditPolicy"
-        notationViewFactoryClassName="DecisionNodeViewFactory"
-        canonicalEditPolicyClassName="DecisionNodeCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DecisionNodeGraphicalNodeEditPolicy"
-        createCommandClassName="DecisionNodeCreateCommand">
+        editPartClassName="DecisionConditionEditPart"
+        itemSemanticEditPolicyClassName="DecisionConditionItemSemanticEditPolicy"
+        notationViewFactoryClassName="DecisionConditionViewFactory"
+        canonicalEditPolicyClassName="DecisionConditionCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DecisionConditionGraphicalNodeEditPolicy"
+        createCommandClassName="DecisionConditionCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DecisionNodeEditHelper"/>
+          editHelperClassName="DecisionConditionEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
-          className="DecisionNodeFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class DecisionNodeFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureDecisionNodeLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public DecisionNodeFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureDecisionNodeLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureDecisionNodeLabelFigure.setText(&quot;???&quot;);&#xA;&#xA;this.add(fFigureDecisionNodeLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureDecisionNodeLabelFigure() {&#xA;&#x9;&#x9;return fFigureDecisionNodeLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          className="DecisionConditionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class DecisionConditionFigure extends org.eclipse.draw2d.Ellipse {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureDecisionConditionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public DecisionConditionFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureDecisionConditionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureDecisionConditionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureDecisionConditionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureDecisionConditionNameFigure() {&#xA;&#x9;&#x9;return fFigureDecisionConditionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <modelFacet>
         <metaClass
-            href="iaml.genmodel#//model/operations/DecisionNode"/>
+            href="iaml.genmodel#//model/operations/DecisionCondition"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/CompositeCondition/nodes"/>
+            href="iaml.genmodel#//model/ContainsConditions/conditions"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/CompositeCondition/nodes"/>
+            href="iaml.genmodel#//model/ContainsConditions/conditions"/>
         <modelElementSelector
-            body="self.oclIsTypeOf( DecisionNode )"/>
+            body="self.oclIsTypeOf( DecisionCondition )"/>
       </modelFacet>
       <labels
           visualID="4006"
-          editPartClassName="WrapLabel4EditPart"
-          itemSemanticEditPolicyClassName="WrapLabel4ItemSemanticEditPolicy"
-          notationViewFactoryClassName="WrapLabel4ViewFactory"
-          readOnly="true"
+          editPartClassName="DecisionConditionNameEditPart"
+          itemSemanticEditPolicyClassName="DecisionConditionNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="DecisionConditionNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureDecisionNodeLabelFigure"
+            getterName="getFigureDecisionConditionNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
       </labels>
     </topLevelNodes>
     <topLevelNodes
@@ -462,9 +466,9 @@
         <metaClass
             href="iaml.genmodel#//model/ExecutionEdge"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
+            href="iaml.genmodel#//model/CompositeCondition/executionEdges"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
+            href="iaml.genmodel#//model/CompositeCondition/executionEdges"/>
         <modelElementSelector
             body="self.oclIsTypeOf( ExecutionEdge )"/>
         <sourceMetaFeature
@@ -497,9 +501,9 @@
         <metaClass
             href="iaml.genmodel#//model/ConditionalEdge"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
+            href="iaml.genmodel#//model/CompositeCondition/executionEdges"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
+            href="iaml.genmodel#//model/CompositeCondition/executionEdges"/>
         <modelElementSelector
             body="self.oclIsTypeOf( ConditionalEdge )"/>
         <sourceMetaFeature
@@ -611,8 +615,7 @@
             title="DecisionNode"
             description="Create new DecisionNode"
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DecisionNode.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DecisionNode.gif"
-            genNodes="//@diagram/@topLevelNodes.4"/>
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DecisionNode.gif"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="ConditionalEdge"
@@ -620,6 +623,13 @@
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionalEdge.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionalEdge.gif"
             genLinks="//@diagram/@links.2"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="DecisionCondition"
+            description="Create new DecisionCondition"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DecisionCondition.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DecisionCondition.gif"
+            genNodes="//@diagram/@topLevelNodes.4"/>
       </groups>
     </palette>
     <preferencePages
@@ -733,6 +743,18 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.0"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.4"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"

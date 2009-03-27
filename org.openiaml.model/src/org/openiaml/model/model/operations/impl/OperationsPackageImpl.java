@@ -17,6 +17,7 @@ import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.impl.DomainPackageImpl;
 import org.openiaml.model.model.impl.ModelPackageImpl;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -71,6 +72,13 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * @generated
 	 */
 	private EClass decisionOperationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass decisionConditionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -219,6 +227,15 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDecisionCondition() {
+		return decisionConditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public OperationsFactory getOperationsFactory() {
 		return (OperationsFactory)getEFactoryInstance();
 	}
@@ -252,6 +269,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		decisionNodeEClass = createEClass(DECISION_NODE);
 
 		decisionOperationEClass = createEClass(DECISION_OPERATION);
+
+		decisionConditionEClass = createEClass(DECISION_CONDITION);
 	}
 
 	/**
@@ -296,6 +315,10 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 		decisionOperationEClass.getESuperTypes().add(theModelPackage.getChainedOperation());
 		decisionOperationEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
+		decisionConditionEClass.getESuperTypes().add(theModelPackage.getCondition());
+		decisionConditionEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
+		decisionConditionEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		decisionConditionEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -308,6 +331,28 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		initEClass(decisionNodeEClass, DecisionNode.class, "DecisionNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(decisionOperationEClass, DecisionOperation.class, "DecisionOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(decisionConditionEClass, DecisionCondition.class, "DecisionCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Create annotations
+		// http://openiaml.org/comment
+		createCommentAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://openiaml.org/comment</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createCommentAnnotations() {
+		String source = "http://openiaml.org/comment";		
+		addAnnotation
+		  (decisionConditionEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.2"
+		   });
 	}
 
 } //OperationsPackageImpl

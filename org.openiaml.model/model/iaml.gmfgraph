@@ -770,6 +770,19 @@
       <accessors
           figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="DecisionConditionFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Ellipse"
+          name="DecisionConditionFigure">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DecisionConditionNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -858,6 +871,9 @@
   <nodes
       name="CompositeCondition"
       figure="CompositeConditionFigure"/>
+  <nodes
+      name="DecisionCondition"
+      figure="DecisionConditionFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1076,4 +1092,8 @@
       name="CompositeConditionName"
       figure="CompositeConditionFigure"
       accessor="//@figures.0/@descriptors.42/@accessors.0"/>
+  <labels
+      name="DecisionConditionName"
+      figure="DecisionConditionFigure"
+      accessor="//@figures.0/@descriptors.43/@accessors.0"/>
 </gmfgraph:Canvas>

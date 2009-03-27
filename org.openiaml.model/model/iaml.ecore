@@ -395,6 +395,11 @@
     <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//ActivityNode #//ExecutionEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//ChainedOperation #//DataFlowEdgeDestination"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionCondition" eSuperTypes="#//Condition #//ExecutionEdgesSource #//ExecutionEdgeDestination #//DataFlowEdgeDestination">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.2"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="scopes">
     <eAnnotations source="http://openiaml.org/comment">

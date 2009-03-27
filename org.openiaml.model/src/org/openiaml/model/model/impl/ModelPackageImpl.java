@@ -1664,6 +1664,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		conditionEClass.getESuperTypes().add(this.getNamedElement());
 		compositeConditionEClass.getESuperTypes().add(this.getContainsConditions());
 		compositeConditionEClass.getESuperTypes().add(this.getCondition());
+		compositeConditionEClass.getESuperTypes().add(this.getGeneratesElements());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

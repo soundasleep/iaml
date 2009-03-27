@@ -57,6 +57,8 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#isIsGenerated <em>Is Generated</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getExecutionEdges <em>Execution Edges</em>}</li>
@@ -179,6 +181,36 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
@@ -445,6 +477,39 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<GeneratedElement> getGeneratedElements() {
+		if (generatedElements == null) {
+			generatedElements = new EObjectWithInverseResolvingEList<GeneratedElement>(GeneratedElement.class, this, ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
+		}
+		return generatedElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverridden(boolean newOverridden) {
+		boolean oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN, oldOverridden, overridden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ActivityNode> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentEList<ActivityNode>(ActivityNode.class, this, ModelPackage.COMPOSITE_CONDITION__NODES);
@@ -541,6 +606,8 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				if (generatedBy != null)
 					msgs = ((InternalEObject)generatedBy).eInverseRemove(this, ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS, GeneratesElements.class, msgs);
 				return basicSetGeneratedBy((GeneratesElements)otherEnd, msgs);
+			case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -563,6 +630,8 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_CONDITION__GENERATED_BY:
 				return basicSetGeneratedBy(null, msgs);
+			case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS:
+				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_CONDITION__DATA_EDGES:
@@ -606,6 +675,10 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				return getId();
 			case ModelPackage.COMPOSITE_CONDITION__NAME:
 				return getName();
+			case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS:
+				return getGeneratedElements();
+			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
+				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				return getNodes();
 			case ModelPackage.COMPOSITE_CONDITION__DATA_EDGES:
@@ -660,6 +733,13 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				return;
 			case ModelPackage.COMPOSITE_CONDITION__NAME:
 				setName((String)newValue);
+				return;
+			case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
+				return;
+			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
+				setOverridden(((Boolean)newValue).booleanValue());
 				return;
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				getNodes().clear();
@@ -725,6 +805,12 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 			case ModelPackage.COMPOSITE_CONDITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				return;
+			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				getNodes().clear();
 				return;
@@ -774,6 +860,10 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case ModelPackage.COMPOSITE_CONDITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS:
+				return generatedElements != null && !generatedElements.isEmpty();
+			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				return nodes != null && !nodes.isEmpty();
 			case ModelPackage.COMPOSITE_CONDITION__DATA_EDGES:
@@ -846,6 +936,13 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				default: return -1;
 			}
 		}
+		if (baseClass == GeneratesElements.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -903,6 +1000,13 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				default: return -1;
 			}
 		}
+		if (baseClass == GeneratesElements.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -922,6 +1026,8 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 		result.append(id);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", overridden: ");
+		result.append(overridden);
 		result.append(')');
 		return result.toString();
 	}

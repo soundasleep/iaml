@@ -16,6 +16,11 @@ import java.util.*;
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
+function boolean connects(WireEdge wire, Object a, Object b) {
+	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
+		(wire.getFrom().equals(b) && wire.getTo().equals(a));
+}
+
 function boolean isXPath(String query) {
 	return query.startsWith("xpath:");
 }
@@ -62,14 +67,144 @@ rule "Connect SyncWires for a dynamic source, referenced by XPath"
 		container : InternetApplication ( )
 		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
 		source : Page ( ) 
-		sw : SyncWire ( from == ds, to == source )	# TODO add a reverse rule
+		sw : SyncWire ( eval(connects(sw, ds, source)) )
 		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
-		not ( SyncWire( from == source, to == target ) )
-		not ( SyncWire( from == target, to == source ) )
+		not ( tw : SyncWire( eval(connects(tw, source, target)) ) )
 		
 	then 
 		SyncWire sw2 = handler.generatedSyncWire( container, container, source, target );
 		sw2.setName("dynamic sync");
 		insert(sw2);
 		
+end
+
+rule "Create the Condition for an XPath set"
+
+	when
+		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false )
+		not ( CompositeCondition(eContainer == ds, name == 'xpath' ) )
+	
+	then
+		CompositeCondition c = handler.generatedCompositeCondition(ds, ds);
+		c.setName("xpath");
+		insert(c);
+	
+end
+
+rule "Create the contents of the XPath condition"
+	
+	when
+		container : InternetApplication( )
+		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		source : Page ( ) 
+		sw : SyncWire ( eval(connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(connects(tw, source, target)) )
+		o : CompositeCondition ( eContainer == ds, name == "xpath" )
+		cw : ConditionWire ( from == o, to == tw )
+		
+		not ( StartNode( eContainer == o ))
+	
+	then
+		# create contents
+		Parameter parameter = handler.generatedParameter(o, o);
+		parameter.setName("element");
+		insert(parameter);
+
+		Parameter xpath = handler.generatedParameter(o, o);
+		xpath.setName("xpath");
+		insert(xpath);
+		
+		DecisionCondition dc = handler.generatedDecisionCondition(o, o);
+		dc.setName("xpathMatch");
+		insert(dc);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		insert(start);
+		
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		insert(finish);
+		
+		CancelNode cancel = handler.generatedCancelNode(o, o);
+		insert(cancel);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		data1.setFrom(parameter);
+		data1.setTo(dc);
+		insert(data1);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		data2.setFrom(xpath);
+		data2.setTo(dc);
+		insert(data2);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		edge1.setFrom(start);
+		edge1.setTo(dc);
+		insert(edge1);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		edge2.setFrom(dc);
+		edge2.setTo(finish);
+		insert(edge2);
+
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
+		edge3.setFrom(dc);
+		edge3.setTo(cancel);
+		insert(edge3);
+
+end
+
+rule "Create the XPath ConditionWire for generated SyncWires"
+	when
+		container : InternetApplication( )
+		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		source : Page ( ) 
+		sw : SyncWire ( eval(connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(connects(tw, source, target)) )
+		condition : CompositeCondition ( eContainer == ds )
+		not (ConditionWire ( from == condition, to == tw ))
+	
+	then
+		ConditionWire cw = handler.generatedConditionWire( container, container, condition, tw );
+		cw.setName("xpath condition");
+		insert(cw);
+	
+end
+
+rule "Connect XPath dynamic source as a parameter to the new ConditionWire"
+	when
+		container : InternetApplication( )
+		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		source : Page ( ) 
+		sw : SyncWire ( eval(connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(connects(tw, source, target)) )
+		condition : CompositeCondition ( eContainer == ds )
+		cw : ConditionWire (from == condition, to == tw )
+		not (ParameterWire (from == ds, to == cw ))
+	
+	then
+		ParameterWire pw = handler.generatedParameterWire( container, container, ds, cw);
+		insert(pw);		 
+	
+end
+
+rule "Connect target element as a parameter to the new ConditionWire"
+	when
+		container : InternetApplication( )
+		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		source : Page ( ) 
+		sw : SyncWire ( eval(connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(connects(tw, source, target)) )
+		condition : CompositeCondition ( eContainer == ds )
+		cw : ConditionWire (from == condition, to == tw )
+		not (ParameterWire (from == target, to == cw ))
+	
+	then
+		ParameterWire pw = handler.generatedParameterWire( container, container, target, cw);
+		insert(pw);
+	
 end

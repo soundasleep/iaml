@@ -126,6 +126,7 @@ public class WiresSwitch<T> {
 				SyncWire syncWire = (SyncWire)theEObject;
 				T result = caseSyncWire(syncWire);
 				if (result == null) result = caseCompositeWire(syncWire);
+				if (result == null) result = caseWireEdgeDestination(syncWire);
 				if (result == null) result = caseWireEdge(syncWire);
 				if (result == null) result = caseNamedElement(syncWire);
 				if (result == null) result = caseContainsWires(syncWire);
@@ -221,6 +222,7 @@ public class WiresSwitch<T> {
 				ConditionWire conditionWire = (ConditionWire)theEObject;
 				T result = caseConditionWire(conditionWire);
 				if (result == null) result = caseCompositeWire(conditionWire);
+				if (result == null) result = caseWireEdgeDestination(conditionWire);
 				if (result == null) result = caseWireEdge(conditionWire);
 				if (result == null) result = caseNamedElement(conditionWire);
 				if (result == null) result = caseContainsWires(conditionWire);

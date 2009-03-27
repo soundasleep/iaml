@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="http://openiaml.org/comment comment='added in 0.2'"
  * @generated
  */
-public interface CompositeCondition extends ContainsConditions, Condition {
+public interface CompositeCondition extends ContainsConditions, Condition, GeneratesElements {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ActivityNode}.

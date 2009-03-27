@@ -425,13 +425,22 @@ public interface WiresPackage extends EPackage {
 	int SYNC_WIRE__VALUES = COMPOSITE_WIRE__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__IN_EDGES = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Sync Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYNC_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+	int SYNC_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl <em>Run Instance Wire</em>}' class.
@@ -1621,13 +1630,22 @@ public interface WiresPackage extends EPackage {
 	int CONDITION_WIRE__VALUES = COMPOSITE_WIRE__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION_WIRE__IN_EDGES = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Condition Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONDITION_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+	int CONDITION_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 1;
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.SingleWire <em>Single Wire</em>}'.

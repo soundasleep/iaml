@@ -496,6 +496,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
+		syncWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		runInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		parameterWireEClass.getESuperTypes().add(this.getSingleWire());
@@ -506,6 +507,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		filterWireEClass.getESuperTypes().add(this.getCompositeWire());
 		filterWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		conditionWireEClass.getESuperTypes().add(this.getCompositeWire());
+		conditionWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(singleWireEClass, SingleWire.class, "SingleWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

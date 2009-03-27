@@ -155,7 +155,7 @@
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>
     <containmentFeature
-        href="iaml.ecore#//CompositeCondition/dataEdges"/>
+        href="iaml.ecore#//CompositeOperation/dataEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="condition.gmftool#//@palette/@tools.0/@tools.7"/>

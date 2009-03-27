@@ -6,6 +6,8 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.WireEdgeDestination;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,5 +19,5 @@ package org.openiaml.model.model.wires;
  * @model
  * @generated
  */
-public interface SyncWire extends CompositeWire {
+public interface SyncWire extends CompositeWire, WireEdgeDestination {
 } // SyncWire

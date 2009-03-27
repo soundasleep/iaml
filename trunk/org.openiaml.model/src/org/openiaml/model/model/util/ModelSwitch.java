@@ -578,6 +578,7 @@ public class ModelSwitch<T> {
 				T result = caseCompositeCondition(compositeCondition);
 				if (result == null) result = caseContainsConditions(compositeCondition);
 				if (result == null) result = caseCondition(compositeCondition);
+				if (result == null) result = caseGeneratesElements(compositeCondition);
 				if (result == null) result = caseWireEdgesSource(compositeCondition);
 				if (result == null) result = caseDataFlowEdgesSource(compositeCondition);
 				if (result == null) result = caseActivityNode(compositeCondition);

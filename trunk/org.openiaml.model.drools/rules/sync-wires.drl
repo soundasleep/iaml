@@ -16,6 +16,11 @@ function boolean syncMatches(NamedElement e1, NamedElement e2) {
 	return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
 }
 
+function boolean connects(WireEdge wire, Object a, Object b) {
+	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
+		(wire.getFrom().equals(b) && wire.getTo().equals(a));
+}
+
 rule "Sync wires between pages should create sync wires between all elements inside each page that match"
 	when
 		p1 : ApplicationElement( )
@@ -188,11 +193,6 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		insert(pw);
 
 end
-
-function boolean connects(WireEdge wire, Object a, Object b) {
-	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
-		(wire.getFrom().equals(b) && wire.getTo().equals(a));
-}
 
 rule "Test: SyncWire between A to B, and B to C, means there should be a SyncWire from A to C"
 	when

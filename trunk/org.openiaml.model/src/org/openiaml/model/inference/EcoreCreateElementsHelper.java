@@ -7,7 +7,9 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -29,6 +31,7 @@ import org.openiaml.model.model.domain.FileDomainAttribute;
 import org.openiaml.model.model.domain.FileDomainObject;
 import org.openiaml.model.model.domain.FileDomainStore;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationsPackage;
@@ -38,6 +41,7 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
+import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.FindWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
@@ -96,6 +100,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		Parameter parameter = (Parameter) createElement( container, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getOperation_Parameters() );
 		setGeneratedBy(parameter, by);
 		return parameter;
+	}	
+	
+	public Parameter generatedParameter(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		Parameter parameter = (Parameter) createElement( container, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getCompositeCondition_Parameters() );
+		setGeneratedBy(parameter, by);
+		return parameter;
 	}
 
 	public ChainedOperation generatedChainedOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
@@ -134,6 +144,24 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 
+	public StartNode generatedStartNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		StartNode node = (StartNode) createElement( container, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
+	public CancelNode generatedCancelNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		CancelNode node = (CancelNode) createElement( container, OperationsPackage.eINSTANCE.getCancelNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
+	public FinishNode generatedFinishNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		FinishNode node = (FinishNode) createElement( container, OperationsPackage.eINSTANCE.getFinishNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
 	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		DataFlowEdge edge = (DataFlowEdge) createElement( container, ModelPackage.eINSTANCE.getDataFlowEdge(), ModelPackage.eINSTANCE.getCompositeOperation_DataEdges() );
 		setGeneratedBy(edge, by);
@@ -142,6 +170,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		ExecutionEdge edge = (ExecutionEdge) createElement( container, ModelPackage.eINSTANCE.getExecutionEdge(), ModelPackage.eINSTANCE.getCompositeOperation_ExecutionEdges() );
+		setGeneratedBy(edge, by);
+		return edge;
+	}
+
+	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		DataFlowEdge edge = (DataFlowEdge) createElement( container, ModelPackage.eINSTANCE.getDataFlowEdge(), ModelPackage.eINSTANCE.getCompositeCondition_DataEdges() );
+		setGeneratedBy(edge, by);
+		return edge;
+	}
+
+	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		ExecutionEdge edge = (ExecutionEdge) createElement( container, ModelPackage.eINSTANCE.getExecutionEdge(), ModelPackage.eINSTANCE.getCompositeCondition_ExecutionEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
@@ -217,5 +257,23 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(object, by);
 		return object;
 	}
-	
+
+	public CompositeCondition generatedCompositeCondition(GeneratesElements by, ContainsConditions container) throws InferenceException {
+		CompositeCondition object = (CompositeCondition) createElement( container, ModelPackage.eINSTANCE.getCompositeCondition(), ModelPackage.eINSTANCE.getContainsConditions_Conditions() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+
+	public DecisionCondition generatedDecisionCondition(GeneratesElements by, ContainsConditions container) throws InferenceException {
+		DecisionCondition object = (DecisionCondition) createElement( container, OperationsPackage.eINSTANCE.getDecisionCondition(), ModelPackage.eINSTANCE.getContainsConditions_Conditions() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+
+	public ConditionWire generatedConditionWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
+		ConditionWire wire = (ConditionWire) createRelationship(container, WiresPackage.eINSTANCE.getConditionWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		setGeneratedBy(wire, by);
+		return wire;
+	}
+
 }

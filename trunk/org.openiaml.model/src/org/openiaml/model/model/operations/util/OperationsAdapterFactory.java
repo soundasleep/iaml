@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -24,6 +25,7 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -107,6 +109,10 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 				return createDecisionOperationAdapter();
 			}
 			@Override
+			public Adapter caseDecisionCondition(DecisionCondition object) {
+				return createDecisionConditionAdapter();
+			}
+			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
 				return createGeneratedElementAdapter();
 			}
@@ -157,6 +163,10 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseChainedOperation(ChainedOperation object) {
 				return createChainedOperationAdapter();
+			}
+			@Override
+			public Adapter caseCondition(Condition object) {
+				return createConditionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -245,6 +255,20 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDecisionOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.operations.DecisionCondition <em>Decision Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.operations.DecisionCondition
+	 * @generated
+	 */
+	public Adapter createDecisionConditionAdapter() {
 		return null;
 	}
 
@@ -413,6 +437,20 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createChainedOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Condition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.Condition
+	 * @generated
+	 */
+	public Adapter createConditionAdapter() {
 		return null;
 	}
 

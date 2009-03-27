@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -24,6 +25,7 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -160,6 +162,23 @@ public class OperationsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OperationsPackage.DECISION_CONDITION: {
+				DecisionCondition decisionCondition = (DecisionCondition)theEObject;
+				T result = caseDecisionCondition(decisionCondition);
+				if (result == null) result = caseCondition(decisionCondition);
+				if (result == null) result = caseExecutionEdgesSource(decisionCondition);
+				if (result == null) result = caseExecutionEdgeDestination(decisionCondition);
+				if (result == null) result = caseDataFlowEdgeDestination(decisionCondition);
+				if (result == null) result = caseWireEdgesSource(decisionCondition);
+				if (result == null) result = caseDataFlowEdgesSource(decisionCondition);
+				if (result == null) result = caseActivityNode(decisionCondition);
+				if (result == null) result = caseNamedElement(decisionCondition);
+				if (result == null) result = caseShouldntContainWires(decisionCondition);
+				if (result == null) result = caseGeneratedElement(decisionCondition);
+				if (result == null) result = caseContainsWires(decisionCondition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -236,6 +255,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseDecisionOperation(DecisionOperation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Decision Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Decision Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDecisionCondition(DecisionCondition object) {
 		return null;
 	}
 
@@ -416,6 +450,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseChainedOperation(ChainedOperation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCondition(Condition object) {
 		return null;
 	}
 

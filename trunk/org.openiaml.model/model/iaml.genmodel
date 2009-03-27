@@ -186,6 +186,7 @@
       <genClasses ecoreClass="iaml.ecore#//operations/FinishNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionOperation"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/DecisionCondition"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//scopes">

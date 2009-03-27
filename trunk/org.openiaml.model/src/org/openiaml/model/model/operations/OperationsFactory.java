@@ -71,6 +71,15 @@ public interface OperationsFactory extends EFactory {
 	DecisionOperation createDecisionOperation();
 
 	/**
+	 * Returns a new object of class '<em>Decision Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Decision Condition</em>'.
+	 * @generated
+	 */
+	DecisionCondition createDecisionCondition();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

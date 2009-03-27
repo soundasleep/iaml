@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -71,6 +72,7 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 			case OperationsPackage.FINISH_NODE: return createFinishNode();
 			case OperationsPackage.DECISION_NODE: return createDecisionNode();
 			case OperationsPackage.DECISION_OPERATION: return createDecisionOperation();
+			case OperationsPackage.DECISION_CONDITION: return createDecisionCondition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,6 +131,16 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 		DecisionOperationImpl decisionOperation = new DecisionOperationImpl();
 		generateID(decisionOperation);
 		return decisionOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DecisionCondition createDecisionCondition() {
+		DecisionConditionImpl decisionCondition = new DecisionConditionImpl();
+		return decisionCondition;
 	}
 
 	/**

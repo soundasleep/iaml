@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EClass;
@@ -65,7 +66,12 @@ public class ModelTestCase extends TestCase {
 	 * can have generated IDs, are generated.
 	 */
 	public void testGeneratedIDs() {
-		iterateGeneratedIDs(ModelPackage.eINSTANCE);
+		try {
+			iterateGeneratedIDs(ModelPackage.eINSTANCE);
+		} catch (AssertionFailedError e) {
+			System.err.println(e.getMessage());
+			throw e;
+		}
 	}
 	
 	/**
@@ -91,7 +97,7 @@ public class ModelTestCase extends TestCase {
 				if (obj instanceof GeneratedElement) {
 					GeneratedElement ge = (GeneratedElement) obj;
 					
-					assertNotEmpty("element '" + ge + "' should have a generated ID.", ge.getId());
+					assertNotEmpty("element '" + ge.getClass().getPackage().getName() + "." + ge.getClass().getSimpleName() + "' should have a generated ID.", ge.getId());
 				}
 			}
 		}

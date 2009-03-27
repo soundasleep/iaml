@@ -394,11 +394,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.condition.DecisionNode_1005"
-               name="%metatype.name.DecisionNode_1005"
+               id="org.openiaml.model.diagram.condition.DecisionCondition_1005"
+               name="%metatype.name.DecisionCondition_1005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="DecisionNode"
-               edithelper="org.openiaml.model.model.diagram.condition.edit.helpers.DecisionNodeEditHelper">
+               eclass="DecisionCondition"
+               edithelper="org.openiaml.model.model.diagram.condition.edit.helpers.DecisionConditionEditHelper">
             <param name="semanticHint" value="1005"/>
          </metamodelType>
       </metamodel>
@@ -469,7 +469,7 @@
          <elementType ref="org.openiaml.model.diagram.condition.StartNode_1002"/>
          <elementType ref="org.openiaml.model.diagram.condition.CancelNode_1003"/>
          <elementType ref="org.openiaml.model.diagram.condition.FinishNode_1004"/>
-         <elementType ref="org.openiaml.model.diagram.condition.DecisionNode_1005"/>
+         <elementType ref="org.openiaml.model.diagram.condition.DecisionCondition_1005"/>
          <elementType ref="org.openiaml.model.diagram.condition.TemporaryVariable_1006"/>
          <elementType ref="org.openiaml.model.diagram.condition.ApplicationElementProperty_1007"/>
          <elementType ref="org.openiaml.model.diagram.condition.DataFlowEdge_3001"/>

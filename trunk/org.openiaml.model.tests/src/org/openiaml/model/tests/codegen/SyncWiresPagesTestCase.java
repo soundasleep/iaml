@@ -146,8 +146,12 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		// allow the test case to fail.
 		try	{
 			// it should change something on page 2
-			// if this fails, it is because it cannot chain text5-->newText-->text3
+			// if this fails, it is because it cannot chain 
+			// page5.text5-->page4.text5-->page4.newText-->
+			//    page3.newText-->page3.text3-->page2.text3
+			// (note the on-page syncs)
 			gotoSitemapThenPage(sitemap, "page2");
+			waitForAjax();
 
 			String label_text3 = getLabelIDForText("text3");
 

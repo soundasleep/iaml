@@ -214,3 +214,100 @@ rule "Test: SyncWire between A to B, and B to C, means there should be a SyncWir
 		// still need to connect conditions
 	
 end
+
+rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
+	when
+		sw : SyncWire(overridden == false)
+		target : ContainsEventTriggers( ) from sw.from  
+		source : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
+		condition : Condition ( )
+		originalConditionWire : ConditionWire( from == condition, to == sw )
+		
+		not (ConditionWire (eContainer == originalConditionWire, from == condition, to == run )) 
+		
+	then
+		ConditionWire cw = handler.generatedConditionWire( originalConditionWire, originalConditionWire, condition, run );
+		cw.setName("copied condition: " + originalConditionWire.getName());
+		insert(cw);
+
+end
+
+rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires"
+	when
+		sw : SyncWire(overridden == false)
+		target : ContainsEventTriggers( ) from sw.from  
+		source : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
+		condition : Condition ( )
+		originalConditionWire : ConditionWire( from == condition, to == sw )
+		
+		cw : ConditionWire (eContainer == originalConditionWire, from == condition, to == run ) 
+		
+		paramSource : WireEdgesSource ( )
+		paramWire : ParameterWire( from == paramSource, to == originalConditionWire )
+		not (ParameterWire (eContainer == originalConditionWire, from == paramSource, to == cw ))
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire( originalConditionWire, originalConditionWire, paramSource, cw );
+		//cw.setName("copied parameter: " + paramWire.getName());
+		insert(cw);
+
+end
+
+
+rule "Connect ConditionWires to RunInstanceWires created by SyncWires (reverse)"
+	when
+		sw : SyncWire(overridden == false)
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
+		condition : Condition ( )
+		originalConditionWire : ConditionWire( from == condition, to == sw )
+		
+		not (ConditionWire (eContainer == originalConditionWire, from == condition, to == run )) 
+		
+	then
+		ConditionWire cw = handler.generatedConditionWire( originalConditionWire, originalConditionWire, condition, run );
+		cw.setName("copied condition: " + originalConditionWire.getName());
+		insert(cw);
+
+end
+
+rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (reverse)"
+	when
+		sw : SyncWire(overridden == false)
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
+		condition : Condition ( )
+		originalConditionWire : ConditionWire( from == condition, to == sw )
+		
+		cw : ConditionWire (eContainer == originalConditionWire, from == condition, to == run ) 
+		
+		paramSource : WireEdgesSource ( )
+		paramWire : ParameterWire( from == paramSource, to == originalConditionWire )
+		not (ParameterWire (eContainer == originalConditionWire, from == paramSource, to == cw ))
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire( originalConditionWire, originalConditionWire, paramSource, cw );
+		//cw.setName("copied parameter: " + paramWire.getName());
+		insert(cw);
+
+end

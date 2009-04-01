@@ -126,6 +126,7 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 			// there should be an element called value
 			String target = getLabelIDForText("target");
 			assertNotNull(target);
+			assertLabeledFieldNotEquals(target, test4);
 			assertLabeledFieldEquals(target, test3);
 		}
 		

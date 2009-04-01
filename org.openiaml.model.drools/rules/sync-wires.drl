@@ -194,7 +194,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 
 end
 
-rule "Test: SyncWire between A to B, and B to C, means there should be a SyncWire from A to C"
+rule "Test: SyncWire between A to B, and B to C, means there should be a SyncWire from A to C (Page)"
 	when
 		container : ContainsWires ( )
 		
@@ -214,4 +214,3 @@ rule "Test: SyncWire between A to B, and B to C, means there should be a SyncWir
 		// still need to connect conditions
 	
 end
-

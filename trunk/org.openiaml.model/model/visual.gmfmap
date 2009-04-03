@@ -342,6 +342,29 @@
           href="iaml.gmfgraph#FileDomainAttribute"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsConditions/conditions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//CompositeCondition"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( CompositeCondition )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.22"/>
+      <diagramNode
+          href="iaml.gmfgraph#CompositeCondition"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

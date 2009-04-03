@@ -23,6 +23,8 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.domain.DomainPackage;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
@@ -166,7 +168,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 
 	/**
 	 * It's not possible to do something like //iaml:wire[iaml:from='id']
-	 * so we need to parse them manually?
+	 * so we need to parse them manually.
 	 * 
 	 * @param container
 	 * @param fromElement
@@ -174,7 +176,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @return the wire found or null
 	 * @throws JaxenException 
 	 */
-	protected WireEdge getWireFromTo(EObject container, EObject fromElement, EObject toElement) throws JaxenException {
+	protected WireEdge getWireFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
 		List<?> wires = query(container, "//iaml:wires");
 		for (Object o : wires) {
 			if (o instanceof WireEdge) {
@@ -184,7 +186,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			}
 		}
 		
-		fail("no wire found");
+		fail("No wire found between [" + container + "] and [" + fromElement + "]");
 		return null;
 	}
 

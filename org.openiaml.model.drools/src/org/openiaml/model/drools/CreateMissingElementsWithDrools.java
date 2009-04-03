@@ -23,6 +23,8 @@ import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -103,6 +105,14 @@ public class CreateMissingElementsWithDrools {
 				if (obj.getObject() instanceof ContainsWires) {
 					ContainsWires a = (ContainsWires) obj.getObject();
 					for (WireEdge child : a.getWires()) {
+						workingMemory.insert( child );
+					}
+				}
+				
+				// ContainsConditions
+				if (obj.getObject() instanceof ContainsConditions) {
+					ContainsConditions a = (ContainsConditions) obj.getObject();
+					for (Condition child : a.getConditions()) {
 						workingMemory.insert( child );
 					}
 				}
@@ -213,7 +223,8 @@ public class CreateMissingElementsWithDrools {
 			"/rules/events.drl",
 			"/rules/sessions.drl",
 			"/rules/operations.drl",
-			"/rules/dynamic-sources.drl"
+			"/rules/dynamic-sources.drl",
+			"/rules/conditions.drl"
 			);
 	
 	/**

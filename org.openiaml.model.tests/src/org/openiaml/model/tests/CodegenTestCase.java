@@ -231,9 +231,14 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * @param value
 	 */
 	protected void assertLabeledFieldNotEquals(String id, String value) {
-		IElement e = getElementById(id);
-		assertNotNull(e);
-		assertNotEquals(e.getAttribute("value"), value);
+		boolean failed = true;
+		try {
+			assertLabeledFieldEquals(id, value);
+			failed = false;
+		} catch (AssertionFailedError e) {
+			// expected
+		}
+		assertTrue("value of field for label [" + id + "] shouldn't be [" + value + "]", failed);
 	}
 
 	/**
@@ -242,7 +247,7 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * @param a
 	 * @param b
 	 */
-	private void assertNotEquals(String a, String b) {
+	protected void assertNotEquals(String a, String b) {
 		if (a == null) {
 			assertTrue("'" + a + "' should not equal '" + b + "'", b != null);
 		} else {

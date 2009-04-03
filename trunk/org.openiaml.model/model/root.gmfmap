@@ -349,6 +349,32 @@
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/to"/>
   </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ConditionWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ConditionWire )"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="iaml.gmfgraph#ConditionWireName"/>
+      <features
+          href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/wires"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="root.gmftool#//@palette/@tools.0/@tools.15"/>
+    <diagramLink
+        href="iaml.gmfgraph#ConditionWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
   <diagram>
     <diagramCanvas
         href="iaml.gmfgraph#model"/>

@@ -41,6 +41,8 @@
 			
 				«EXPAND js::Operations::expandOperations FOR this-»
 
+				«EXPAND js::Conditions::expandConditions FOR this-»
+
 				/* actual page onload functions (called ONCE the page is fully loaded) */
 				var stored_onload_functions = new Array();
 				function addOnloadFunction(f) {

@@ -49,6 +49,12 @@
  */
 «DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire-»
 	/* eContainer == «to.eContainer» */
+	
+	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
+		/* expand conditions */
+		if («EXPAND Conditions::conditionWires(this, inline) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+	«ENDIF»
+
 	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
 		«REM»VisibleThing includes InputTextField and Page«ENDREM»
 		«REM»
@@ -58,30 +64,29 @@
 		«ENDREM»
 		«IF onCurrentPage(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND callOperationParameters(this, inline) FOREACH inEdges SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
-				«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
+				«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
 	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
 		«REM»direct field --> domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges SEPARATOR ", "»«ENDIF»
+			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
 		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
 	«ENDIF-»
+
+	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
+		}
+	«ENDIF»
 «ENDDEFINE»
 
 /* ditto: check or error? */
-«DEFINE callOperationParameters(model::WireEdge wire, Boolean inline) FOR model::WireEdge»
-	«ERROR "unknown in edge: " + this»
-«ENDDEFINE»
-
-/* making sure that the parameter wire is from a parameter... */
 «DEFINE callOperationParameters(model::WireEdge wire, Boolean inline) FOR model::wires::ParameterWire»
 	«EXPAND callOperationParametersSource(wire, inline) FOR from»
 «ENDDEFINE»

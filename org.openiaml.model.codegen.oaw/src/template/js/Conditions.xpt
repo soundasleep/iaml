@@ -1,0 +1,61 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline) FOR model::wires::ConditionWire»
+	condition_«conditionName(from)»(
+		«EXPAND Operations::callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+	)
+«ENDDEFINE»
+
+/* expand out the conditions for the page */
+«DEFINE expandConditions FOR model::ContainsConditions»
+	«EXPAND expandCondition FOREACH conditions»
+«ENDDEFINE»
+
+«DEFINE expandCondition FOR model::Condition-»
+	«EXPAND exception FOR throwException("Cannot expand an abstract Condition.")»
+«ENDDEFINE»
+
+«DEFINE expandCondition FOR model::CompositeCondition»
+	/** composite condition "«name»" */
+	function condition_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
+		«REM»here we would expand out the data flow of the condition, etc«ENDREM»
+				
+		«EXPAND doExecutionFlow FOR startNode()-»
+
+		return false;
+	}
+«ENDDEFINE»
+
+«DEFINE expandParameters FOR model::Parameter-»
+	«safeName()-»
+«ENDDEFINE»
+
+/* I don't know how in JS we are supposed to handle multiple out edges yet... but we'll get there ;) */
+«DEFINE doExecutionFlow FOR model::operations::StartNode-»
+	// flow starts here
+	«FOREACH outExecutions AS e-»
+		«EXPAND doExecutionFlowNext FOR e.to-»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE doExecutionFlow FOR model::ActivityNode-»
+	// nothing for an activity node
+«ENDDEFINE»
+
+/* an edge that is the end (both StartNode and FinishNode also fall into this) */
+«DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-»
+	// do nothing «this-»
+«ENDDEFINE»
+
+«DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»
+	return false; /* condition failed: «exceptionText» */
+«ENDDEFINE»
+
+«DEFINE doExecutionFlowNext FOR model::operations::FinishNode-»
+	return true; /* condition passed */
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

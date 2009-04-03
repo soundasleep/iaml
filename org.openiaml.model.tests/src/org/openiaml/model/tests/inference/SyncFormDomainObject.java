@@ -42,13 +42,13 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		InputTextField field2 = (InputTextField) queryOne(form, "iaml:children[iaml:name='field2']");
 		
 		DomainStore store = (DomainStore) queryOne(root, "iaml:domainStores[iaml:name='domainStore1']");
-		DomainObject obj = (DomainObject) queryOne(store, "iaml:children[iaml:name='form1']");
-		DomainAttribute attr1 = (DomainAttribute) queryOne(obj, "iaml:attributes[iaml:name='field1']");
-		DomainAttribute attr2 = (DomainAttribute) queryOne(obj, "iaml:attributes[iaml:name='field2']");
+		DomainObject obj = (DomainObject) queryOne(store, "iaml.domain:children[iaml:name='form1']");
+		DomainAttribute attr1 = (DomainAttribute) queryOne(obj, "iaml.domain:attributes[iaml:name='field1']");
+		DomainAttribute attr2 = (DomainAttribute) queryOne(obj, "iaml.domain:attributes[iaml:name='field2']");
 		
 		// there should be a SyncWire from field1 to attr1
-		SyncWire sw1 = (SyncWire) getWireFromTo(form, field1, attr1);
-		SyncWire sw2 = (SyncWire) getWireFromTo(form, field2, attr2);
+		SyncWire sw1 = (SyncWire) getWireBidirectional(form, field1, attr1);
+		SyncWire sw2 = (SyncWire) getWireBidirectional(form, field2, attr2);
 		
 		// fields should now have an edit event
 		EventTrigger editf1 = (EventTrigger) queryOne(field1, "iaml:eventTriggers[iaml:name='edit']");

@@ -10,11 +10,11 @@
 
 /* expand out the conditions for the page */
 «DEFINE expandConditions FOR model::ContainsConditions»
-	«EXPAND expandCondition FOREACH conditions»
+	«EXPAND expandCondition FOREACH getRoot().getAllConditions()»
 «ENDDEFINE»
 
 «DEFINE expandCondition FOR model::Condition-»
-	«EXPAND exception FOR throwException("Cannot expand an abstract Condition.")»
+	«EXPAND exception FOR throwException("Cannot expand an abstract Condition: " + this)»
 «ENDDEFINE»
 
 «DEFINE expandCondition FOR model::CompositeCondition»
@@ -22,7 +22,7 @@
 	function condition_«safeName()»(«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-») {
 		«REM»here we would expand out the data flow of the condition, etc«ENDREM»
 				
-		«EXPAND doExecutionFlow FOR startNode()-»
+		«EXPAND doExecutionFlow FOR startNodeCondition()-»
 
 		return false;
 	}

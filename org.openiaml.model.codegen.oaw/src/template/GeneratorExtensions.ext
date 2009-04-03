@@ -83,7 +83,7 @@ possibleParentOperations(emf::EObject this ) :
 startNode(model::CompositeOperation this) :
 	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );
 
-startNode(model::CompositeCondition this) :
+startNodeCondition(model::CompositeCondition this) :
 	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );
 
 /* get the next execution flow for a decision operation that has passed */
@@ -147,6 +147,34 @@ isPage(emf::EObject this) :
 	model::visual::Page.isInstance(this);	
 isInputTextField(emf::EObject this) :
 	model::visual::InputTextField.isInstance(this);	
+
+/* get the root InternetApplication */
+model::InternetApplication getRoot(emf::EObject this) :
+	getRoot(eContainer);
+
+model::InternetApplication getRoot(model::InternetApplication this) :
+	this;
+
+cached List[model::Condition] getAllConditions(model::InternetApplication this) :
+	conditions.toSet().union( eAllContents.getAllConditions() ).typeSelect( model::Condition );
+
+cached List[model::Condition] getAllConditions(emf::EObject this) :
+	null;
+
+cached List[model::Condition] getAllConditions(model::Condition this) :
+	this;
+
+/*
+cached List[model::Condition] getAllConditions(model::WireEdge this) :
+	from.getAllConditions().union(to.getAllConditions());
+
+cached List[model::Condition] getAllConditions(model::WireEdgesSource this) :
+	outEdges.getAllConditions();
+
+cached List[model::Condition] getAllConditions(model::WireEdgeDestination this) :
+	inEdges.getAllConditions();
+*/
+
 
 /** 
  * a hack way to create backtrace-able errors

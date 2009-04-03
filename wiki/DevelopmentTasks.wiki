@@ -22,6 +22,8 @@ This page will ideally have information on how to achieve various common develop
   # Add inference rules (_.drools_) to satisfy the *inference* test cases
   # Modify OAW code generation rules to satisfy the *runtime* test cases
 
+If the development of the *runtime* code generation rules is getting to complex, break the problem into smaller models. For each of these models, make an inference test case; once this test case passes, make a runtime test case.
+
 From [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model/model/scripts/readme.txt?spec=svn538&r=464 readme.txt r464]:
 
   # edit .ecore

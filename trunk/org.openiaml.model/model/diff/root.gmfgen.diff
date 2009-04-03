@@ -1,6 +1,6 @@
---- root.gmfgen	2009-02-05 14:50:57.805201500 +1300
-+++ copies/root.gmfgen	2009-02-05 14:50:29.805022300 +1300
-@@ -168,6 +168,11 @@
+--- root.gmfgen	2009-04-03 16:27:51.286172300 +1300
++++ copies/root.gmfgen	2009-04-03 16:27:29.571870300 +1300
+@@ -170,6 +170,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,7 +12,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -274,6 +279,11 @@
+@@ -276,6 +281,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -24,7 +24,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainObject"/>
-@@ -327,6 +337,11 @@
+@@ -329,6 +339,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -36,7 +36,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/visual/Page"/>
-@@ -507,6 +522,11 @@
+@@ -509,6 +524,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -48,7 +48,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainStore"/>
-@@ -560,6 +580,11 @@
+@@ -562,6 +582,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -60,7 +60,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/scopes/Session"/>
-@@ -681,6 +706,11 @@
+@@ -683,6 +708,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -72,7 +72,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/domain/FileDomainStore"/>
-@@ -729,6 +759,11 @@
+@@ -733,6 +763,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="ConditionOpenDiagramEditPolicy"
++          diagramKind="Iaml_Condition"
++          editorID="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/CompositeCondition"/>
+@@ -781,6 +816,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -84,7 +96,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -786,6 +821,11 @@
+@@ -838,6 +878,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

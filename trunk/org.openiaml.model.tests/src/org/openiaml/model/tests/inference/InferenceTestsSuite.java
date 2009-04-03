@@ -22,8 +22,10 @@ public class InferenceTestsSuite {
         suite.addTestSuite(LoadModelTestCase.class);
         suite.addTestSuite(SyncWireTestCase.class);
         suite.addTestSuite(SyncFieldDomainAttribute.class);
+        suite.addTestSuite(SyncFormDomainObject.class);
         suite.addTestSuite(SyncWireProperties.class);
         suite.addTestSuite(ConditionWireFalse.class);
+        suite.addTestSuite(ConditionWireFalseServer.class);
 		//$JUnit-END$
         return suite; 
    }

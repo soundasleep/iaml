@@ -25,13 +25,12 @@ rule "Sync wires between pages should create sync wires between all elements ins
 	when
 		p1 : ApplicationElement( )
 		p2 : ApplicationElement(this != p1)
-		source : SyncWire(overridden == false, from == p1, to == p2)
+		source : SyncWire(overridden == false, eval(connects(source, p1, p2)) )
 		
 		e1 : ApplicationElement( eContainer == p1 )
 		e2 : ApplicationElement( eContainer == p2, eval(syncMatches(e1, e2)) )
 	
-		not(SyncWire( from == e1, to == e2, name == "sync", eContainer == source ))
-		not(SyncWire( from == e2, to == e1, name == "sync", eContainer == source ))
+		not (sw : SyncWire( name == "sync", eContainer == source, eval(connects( sw, e1, e2)) ))
 		
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
@@ -40,7 +39,8 @@ rule "Sync wires between pages should create sync wires between all elements ins
 		
 end
 
-# Ideally, these two commands would be joined together into one
+# Ideally, these two commands would be joined together into one.
+# TODO achieve this using eval(connects())
 rule "Run instance wire from source.edit to target.update"
 	when
 		sw : SyncWire(overridden == false)
@@ -211,6 +211,33 @@ rule "SyncWire between A to B, and B to C, means there should be a SyncWire from
 		newWire.setName("chained sync from: " + aw.getName() + " and: " + bw.getName()); 
 		insert(newWire);
 		
-		// still need to connect conditions
-	
+end
+
+rule "Copy ConditionWires connected to SyncWires on further expanded SyncWires"
+	when
+
+		# the containing elements	
+		source : ApplicationElement( )   
+		target : ApplicationElement( ) 
+		sw : SyncWire( eval(connects(sw, source, target)) )
+		
+		# the elements contained
+		e1 : ApplicationElement( eContainer == source )
+		e2 : ApplicationElement( eContainer == target, eval(syncMatches(e1, e2)) )
+		esw : SyncWire( name == "sync", eval(connects(esw, e1, e2)), overridden == false )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionWire( from == condition, to == sw )
+
+		# and there isn't one on the element sync wire
+		not (ecw : ConditionWire( from == condition, to == esw )) 
+		
+	then
+		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
+		ecw.setName("copied condition: " + cw.getName());
+		insert(ecw);
+		
+		// still need to copy parameters		
+
 end

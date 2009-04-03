@@ -153,6 +153,11 @@
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.edit.parts.ConditionWireNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
       </contributionItemProvider>
    </extension>
 
@@ -463,6 +468,16 @@
             <param name="semanticHint" value="3002"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.ConditionWire_3003"
+               name="%metatype.name.ConditionWire_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ConditionWire"
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.ConditionWireEditHelper">
+            <param name="semanticHint" value="3003"/>
+         </metamodelType>
+      </metamodel>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
@@ -491,6 +506,7 @@
          <elementType ref="org.openiaml.model.diagram.CompositeCondition_1013"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.RunInstanceWire_3002"/>
+         <elementType ref="org.openiaml.model.diagram.ConditionWire_3003"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

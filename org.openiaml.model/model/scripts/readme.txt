@@ -45,18 +45,4 @@ Process to make diffs:
    and not the original .gmfgens (which have been reverted).
 
 ---
-Development process of modifying the ECore model:
-
-- edit .ecore
-- reload .genmodel
-- generate Model code
-- generate Edit code
-- organise Model imports
-- open .gmfmap
-- [edit gmfmap]
-- generate .gmfgen
-- $ apply root
-- refresh root.gmfgen
-- generate diagram code
-
-(TODO put this into the Wiki.)
+Development process of modifying the ECore model: http://code.google.com/p/iaml/wiki/DevelopmentTasks

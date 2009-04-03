@@ -154,12 +154,12 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireNameEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQueryEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQueryEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQuery2EditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -498,6 +498,16 @@
             <param name="semanticHint" value="1015"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.CompositeCondition_1016"
+               name="%metatype.name.CompositeCondition_1016"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CompositeCondition"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.CompositeConditionEditHelper">
+            <param name="semanticHint" value="1016"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_3001"
@@ -616,6 +626,7 @@
          <elementType ref="org.openiaml.model.diagram.visual.LoginHandler_1013"/>
          <elementType ref="org.openiaml.model.diagram.visual.FileDomainObject_1014"/>
          <elementType ref="org.openiaml.model.diagram.visual.FileDomainAttribute_1015"/>
+         <elementType ref="org.openiaml.model.diagram.visual.CompositeCondition_1016"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>

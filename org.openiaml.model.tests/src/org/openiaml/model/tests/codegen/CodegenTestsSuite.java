@@ -29,6 +29,7 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(SyncWiresMultiple.class);
 		suite.addTestSuite(SyncWiresTestCase.class);
 		suite.addTestSuite(SyncWiresProperties.class);
+		suite.addTestSuite(ConditionWireFalse.class);
 		
 		// initial requirements (model 0.2)
 		suite.addTestSuite(Requirement1SyncWires.class);

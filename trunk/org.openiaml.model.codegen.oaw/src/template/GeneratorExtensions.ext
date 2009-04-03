@@ -30,9 +30,15 @@ escapeString(String s) :
 	s.replaceAll("[\"]", "\\\"");
 	
 operationName(model::WireEdgeDestination this) : 
-	"impossible";
+	"invalid_operation";
 
 operationName(model::Operation this) :
+	safeName(this);
+
+conditionName(emf::EObject this ) :
+	"invalid_condition";
+
+conditionName(model::Condition this) :
 	safeName(this);
 	
 /* is this operation contained in the current page? */
@@ -75,6 +81,9 @@ possibleParentOperations(emf::EObject this ) :
 
 /* get the start node for an operation */
 startNode(model::CompositeOperation this) :
+	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );
+
+startNode(model::CompositeCondition this) :
 	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );
 
 /* get the next execution flow for a decision operation that has passed */

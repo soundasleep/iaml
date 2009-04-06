@@ -32,13 +32,18 @@ if (!$s) {
 	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
 }
 
+// execute the query with the parameter
+$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
+
 // does anything exist?
 if ($s->fetch()) {
 	// yes: update all existing
 	$s = $db->prepare("UPDATE global_values SET arg0=? WHERE value_id=?") or local_die("could not prepare update query: " . print_r($db->errorInfo(), true));
+	log_message("Updating existing: " . $id);
 } else {
 	// no: insert new
 	$s = $db->prepare("INSERT INTO global_values (arg0, value_id) VALUES (?, ?)") or local_die("could not prepare insert query: " . print_r($db->errorInfo(), true));
+	log_message("Inserting new: " . $id);
 }
 
 // update all existing

@@ -80,20 +80,14 @@ public class SyncWiresTestCase extends CodegenTestCase {
 
 	}
 	
-	/**
+	/*
 	 * Because all of these fields are on the current page,
 	 * we must make sure that no remote functions have been
 	 * called.
+	 * 
+	 * BUT since they are not stored in a Session, but on the
+	 * Server, we must still keep the values of these fields on the
+	 * server.
 	 */
-	public void testPropertiesStayLocal() throws Exception {
-		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
-		beginAtSitemapThenPage(sitemap, "on-page");
-
-		// no ajax methods should have been called
-		assertNoRemoteCalls();
-	}
-	
 }

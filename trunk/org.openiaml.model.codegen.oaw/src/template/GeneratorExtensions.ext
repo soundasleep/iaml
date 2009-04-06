@@ -148,6 +148,14 @@ isPage(emf::EObject this) :
 isInputTextField(emf::EObject this) :
 	model::visual::InputTextField.isInstance(this);	
 
+/* get failed/passed out edges from a given DecisionCondition */
+getFailEdges(model::operations::DecisionCondition this):
+	outExecutions.select( e | e.to.metaType.isAssignableFrom(model::operations::CancelNode) );
+	/* TODO one day, this will also include OutExecutions[name=cancel|fail|N] */
+
+getPassEdges(model::operations::DecisionCondition this):
+	outExecutions.removeAll( getFailEdges() );	/* everything that didn't fail */	
+
 /* get the root InternetApplication */
 model::InternetApplication getRoot(emf::EObject this) :
 	getRoot(eContainer);
@@ -163,19 +171,7 @@ cached List[model::Condition] getAllConditions(emf::EObject this) :
 
 cached List[model::Condition] getAllConditions(model::Condition this) :
 	this;
-
-/*
-cached List[model::Condition] getAllConditions(model::WireEdge this) :
-	from.getAllConditions().union(to.getAllConditions());
-
-cached List[model::Condition] getAllConditions(model::WireEdgesSource this) :
-	outEdges.getAllConditions();
-
-cached List[model::Condition] getAllConditions(model::WireEdgeDestination this) :
-	inEdges.getAllConditions();
-*/
-
-
+	
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

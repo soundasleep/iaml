@@ -169,43 +169,28 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 	
 	then
 		ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
-		cw.setName("xpath condition");
+		cw.setName("xpath condition (source)");
 		insert(cw);
-	
-end
 
-rule "Connect XPath dynamic source as a parameter to the new ConditionWire"
-	when
-		container : InternetApplication( )
-		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
-		source : Page ( ) 
-		sw : SyncWire ( eval(connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
-		tw : SyncWire ( eval(connects(tw, source, target)) )
-		condition : CompositeCondition ( eContainer == ds )
-		cw : ConditionWire (from == condition, to == tw )
-		not (ParameterWire (from == ds, to == cw ))
-	
-	then
-		ParameterWire pw = handler.generatedParameterWire( ds, ds, ds, cw);
+		ParameterWire pw = handler.generatedParameterWire( cw, cw, ds, cw);
+		pw.setName("[xpath] from ds 1");
 		insert(pw);		 
+
+		ParameterWire pw2 = handler.generatedParameterWire( cw, cw, source, cw);
+		pw.setName("[xpath] from source");
+		insert(pw2);
+
+		ConditionWire cwt = handler.generatedConditionWire( ds, ds, condition, tw );
+		cwt.setName("xpath condition (target)");
+		insert(cwt);
+
+		ParameterWire pwt = handler.generatedParameterWire( cw, cw, ds, cwt);
+		pw.setName("[xpath] from ds 2");
+		insert(pwt);		 
+
+		ParameterWire pwt2 = handler.generatedParameterWire( cw, cw, target, cwt);
+		insert(pwt2);
+		pw.setName("[xpath] from target");
 	
 end
 
-rule "Connect target element as a parameter to the new ConditionWire"
-	when
-		container : InternetApplication( )
-		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
-		source : Page ( ) 
-		sw : SyncWire ( eval(connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
-		tw : SyncWire ( eval(connects(tw, source, target)) )
-		condition : CompositeCondition ( eContainer == ds )
-		cw : ConditionWire (from == condition, to == tw )
-		not (ParameterWire (from == target, to == cw ))
-	
-	then
-		ParameterWire pw = handler.generatedParameterWire( ds, ds, target, cw);
-		insert(pw);
-	
-end

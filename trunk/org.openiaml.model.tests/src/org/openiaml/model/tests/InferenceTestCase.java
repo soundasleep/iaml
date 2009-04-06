@@ -7,8 +7,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -188,6 +190,63 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		
 		fail("No wire found between [" + fromElement + "] and [" + toElement + "]");
 		return null;
+	}
+
+	/**
+	 * It's not possible to do something like //iaml:wire[iaml:from='id']
+	 * so we need to parse them manually.
+	 * 
+	 * @param container
+	 * @param fromElement
+	 * @param toElement
+	 * @return the wire found or throws an exception
+	 * @throws JaxenException 
+	 */
+	protected Set<WireEdge> getWiresFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
+		Set<WireEdge> results = new HashSet<WireEdge>();
+		List<?> wires = query(container, "//iaml:wires");
+		for (Object o : wires) {
+			if (o instanceof WireEdge) {
+				WireEdge w = (WireEdge) o;
+				if (w.getFrom().equals(fromElement) && w.getTo().equals(toElement)) {
+					results.add(w);
+				}
+			}
+		}
+		
+		if (results.isEmpty()) {		
+			fail("No wires found between [" + fromElement + "] and [" + toElement + "]");
+		}
+
+		return results;
+	}
+
+	/**
+	 * It's not possible to do something like //iaml:wire[iaml:from='id']
+	 * so we need to parse them manually.
+	 * 
+	 * @param container
+	 * @param toElement
+	 * @return the wire found or null
+	 * @throws JaxenException 
+	 */
+	protected Set<WireEdge> getWiresTo(EObject container, WireEdgeDestination toElement) throws JaxenException {
+		Set<WireEdge> results = new HashSet<WireEdge>();
+		List<?> wires = query(container, "//iaml:wires");
+		for (Object o : wires) {
+			if (o instanceof WireEdge) {
+				WireEdge w = (WireEdge) o;
+				if (w.getTo().equals(toElement)) {
+					results.add(w);
+				}
+			}
+		}
+		
+		if (results.isEmpty()) {		
+			fail("No wires found ti [" + toElement + "]");
+		}
+
+		return results;
 	}
 
 	/**

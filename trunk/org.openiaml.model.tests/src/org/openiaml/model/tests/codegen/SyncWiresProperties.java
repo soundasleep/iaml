@@ -127,28 +127,16 @@ public class SyncWiresProperties extends CodegenTestCase {
 		assertLabeledFieldEquals(countryId, "New Zealand");
 	}
 
-	/**
+	/*
 	 * When we load a properties page, it shouldn't be calling
 	 * the database yet, because the data should be coming from
 	 * init --> access, which doesn't call the update operation 
 	 * (which we define as calling the edit trigger every time)
 	 * 
-	 * @throws Exception
+	 * BUT since they are not stored in a Session, but on the
+	 * Server, we must still keep the values of these fields on the
+	 * server.
 	 */
-	public void testPropertiesStayLocal() throws Exception {
-		// copy properties
-		copyProperties();
-
-		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page1
-		beginAtSitemapThenPage(sitemap, "container");
-		
-		// no ajax methods should have been called
-		assertNoRemoteCalls();
-	}
 
 	public void testPropertiesPersist() throws Exception {
 		// copy properties

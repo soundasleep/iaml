@@ -6,6 +6,8 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 import java.util.Random;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
@@ -121,13 +123,18 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		// 'page c' should not have changed
 		waitForAjax();
 		gotoSitemapThenPage(sitemap, "page c");
-		
+
+		try
 		{
 			// there should be an element called value
 			String target = getLabelIDForText("target");
 			assertNotNull(target);
 			assertLabeledFieldNotEquals(target, test4);
 			assertLabeledFieldEquals(target, test3);
+		}
+		catch (AssertionFailedError e) {
+			System.out.println( getPageSource() );
+			throw e;
 		}
 		
 	}

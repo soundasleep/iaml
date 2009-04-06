@@ -31,6 +31,7 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(SyncWiresProperties.class);
 		suite.addTestSuite(ConditionWireFalse.class);
 		suite.addTestSuite(ConditionWireFalseServer.class);
+		suite.addTestSuite(ReloadPage.class);
 		
 		// initial requirements (model 0.2)
 		suite.addTestSuite(Requirement1SyncWires.class);

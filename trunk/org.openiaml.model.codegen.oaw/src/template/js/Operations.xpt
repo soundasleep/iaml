@@ -337,6 +337,9 @@
 				// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
 				// will populate this field
 				«EXPAND setPropertyToValueOutflowTarget FOR outFlows.first().to» = value;
+				
+				// set server/session variables too
+				«EXPAND template::Page::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
 			}
 		«ELSEIF containingSession(outFlows.first().to) == null»
 			«REM»contained in a Page or InternetApplication: a static value«ENDREM»

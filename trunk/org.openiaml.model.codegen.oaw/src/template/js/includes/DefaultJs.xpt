@@ -79,8 +79,16 @@ var store_event_queued = false;
    not available on the current page */
 function store_event(page_id, event_name, arg0) {
 	var url = 'store_event.php?page_id=' + escape(page_id) + '&event_name=' + escape(event_name) + "&arg0=" + escape(arg0);
+	execute_queued_url(url, 'store_event', false);
+}
+
+/**
+ * We refactor the queued functionality so that _any_ remote call
+ * will be queued up properly.
+ */
+function execute_queued_url(url, counter, function_queue) {
 	store_event_function = function() {
-		counterIncrement('store_event');
+		counterIncrement(counter);
 		debug("creating ajax request to url: " + url);
 		ajaxIncrement();
 		new Ajax.Request(url,
@@ -91,6 +99,13 @@ function store_event(page_id, event_name, arg0) {
 	      	debug("success: " + response);
 	      	document.getElementById('response').innerHTML = response;
 	      	// run BEFORE decrementing, so counter will never be 0
+
+	      	// execute the function queue (if any)
+	      	if (function_queue) {
+	      		debug('executing function queue');
+	      		function_queue();
+	      	}
+	      	
 	      	next_store_event();	
 	      	ajaxDecrement();
 	    },
@@ -195,34 +210,10 @@ function set_session(id, arg0, function_queue) {
   debug("set_session called");	
 }
 
-/* save a session variable (only one attribute) */
+/* save a server variable (only one attribute) */
 function set_application_value(id, arg0, function_queue) {
-	counterIncrement('set_application_value');
 	var url = 'set_application_value.php?id=' + escape(id) + '&arg0=' + escape(arg0);
-	debug("creating ajax request to url: " + url);
-	ajaxIncrement();
-	new Ajax.Request(url,
-  {
-    method:'get',
-    onSuccess: function(transport){
-      	var response = transport.responseText || "no response text";
-      	debug("success: " + response);
-      	document.getElementById('response').innerHTML = response;
-      	
-      	// execute the function queue
-      	if (function_queue) {
-      		debug('executing function queue');
-      		function_queue();
-      	}
-
-      	ajaxDecrement();
-    },
-    onFailure: function(transport){ 
-		var fail = 'set_application_value failed at ' + url + ': ' + response.responseText;
-		ajaxFailed(fail);		
-     }
-  });
-  debug("set_application_value called");	
+	execute_queued_url(url, 'set_application_value', function_queue);
 }
 
 var debug_message_saved = "";

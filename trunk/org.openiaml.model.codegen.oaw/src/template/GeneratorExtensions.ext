@@ -40,6 +40,9 @@ conditionName(emf::EObject this ) :
 
 conditionName(model::Condition this) :
 	safeName(this);
+
+isXPath(model::DynamicApplicationElementSet this) :
+	query.startsWith("xpath:");
 	
 /* is this operation contained in the current page? */
 model::visual::Page containingPage(model::visual::Page element) :
@@ -164,13 +167,26 @@ model::InternetApplication getRoot(model::InternetApplication this) :
 	this;
 
 cached List[model::Condition] getAllConditions(model::InternetApplication this) :
-	conditions.toSet().union( eAllContents.getAllConditions() ).typeSelect( model::Condition );
+	conditions.toSet().union( eAllContents.getAllConditions() ).reject( e | e == null );
 
 cached List[model::Condition] getAllConditions(emf::EObject this) :
 	null;
 
 cached List[model::Condition] getAllConditions(model::Condition this) :
 	this;
+
+List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetApplication this) :
+	children.typeSelect( model::DynamicApplicationElementSet ).toSet()
+		.union( eAllContents.getAllDynamicElements() ).reject( e | e == null );
+
+List[model::Condition] getAllDynamicElements(emf::EObject this) :
+	null;
+
+List[model::Condition] getAllDynamicElements(model::DynamicApplicationElementSet this) :
+	this;
+
+List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
+	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);
 	
 /** 
  * a hack way to create backtrace-able errors

@@ -21,7 +21,7 @@
 		
 		// expand any operations (both in this page and in any surrounding scopes)
 		«EXPAND php::EventTrigger::expandOperations FOR this-»
-	
+		
 		?>
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 			"http://www.w3.org/TR/html4/loose.dtd">
@@ -33,6 +33,18 @@
 			<script language="Javascript" type="text/javascript">
 			/* <![CDATA[ */
 				«EXPAND js::includes::DefaultJs::defaultJs FOR this-»
+				
+				«REM»
+				/* load site XML (if requested) */
+				var site_xml = null;
+				function get_site_xml() {
+					if (site_xml == null) {
+						site_xml = load_xml("<?php echo escape_javascript_string(file_get_contents("site_layout.xml")); ?>");
+					}
+					return site_xml;
+				}
+				«ENDREM»
+				
 			/* ]]> */
 			</script>
 			<script language="Javascript" type="text/javascript">
@@ -42,6 +54,8 @@
 				«EXPAND js::Operations::expandOperations FOR this-»
 
 				«EXPAND js::Conditions::expandConditions FOR this-»
+
+				«EXPAND js::DynamicElements::expandDynamicElements FOR this-»
 
 				/* actual page onload functions (called ONCE the page is fully loaded) */
 				var stored_onload_functions = new Array();

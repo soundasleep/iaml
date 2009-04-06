@@ -237,7 +237,39 @@ rule "Copy ConditionWires connected to SyncWires on further expanded SyncWires"
 		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
 		ecw.setName("copied condition: " + cw.getName());
 		insert(ecw);
+
+end
+
+rule "Copy ParameterWires connected to ConditionWires connected to SyncWires on further expanded SyncWires"
+	when
+
+		# the containing elements	
+		source : ApplicationElement( )   
+		target : ApplicationElement( ) 
+		sw : SyncWire( eval(connects(sw, source, target)) )
 		
-		// still need to copy parameters		
+		# the elements contained
+		e1 : ApplicationElement( eContainer == source )
+		e2 : ApplicationElement( eContainer == target, eval(syncMatches(e1, e2)) )
+		esw : SyncWire( name == "sync", eval(connects(esw, e1, e2)), overridden == false )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionWire( from == condition, to == sw )
+		
+		# the generated condition wire
+		ecw : ConditionWire( from == condition, to == esw )
+		
+		# there is a parameter on the condition wire
+		parameter : WireEdgesSource( )
+		pw : ParameterWire( from == parameter, to == cw )
+
+		# and there isn't one on the element sync wire
+		not (epw : ParameterWire( from == parameter, to == ecw )) 
+		
+	then
+		# create it
+		ParameterWire epw = handler.generatedParameterWire( cw, cw, parameter, ecw );
+		insert(epw);
 
 end

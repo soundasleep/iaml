@@ -48,6 +48,7 @@ function boolean potentialXPathMatch(EObject container, DynamicApplicationElemen
 	query = query.replaceAll("\\[([^\\]]+)\\]", "");
 	
 	// evaluate xpath using EMFXPath
+	// TODO move this into Java code (to reduce redunancy of the following code)
 	EMFXPath xpath = new EMFXPath(query);
 	xpath.addNamespace("iaml", ModelPackage.eNS_URI);
 	xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);
@@ -167,7 +168,7 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		not (ConditionWire ( from == condition, to == tw ))
 	
 	then
-		ConditionWire cw = handler.generatedConditionWire( container, container, condition, tw );
+		ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
 		cw.setName("xpath condition");
 		insert(cw);
 	
@@ -186,7 +187,7 @@ rule "Connect XPath dynamic source as a parameter to the new ConditionWire"
 		not (ParameterWire (from == ds, to == cw ))
 	
 	then
-		ParameterWire pw = handler.generatedParameterWire( container, container, ds, cw);
+		ParameterWire pw = handler.generatedParameterWire( ds, ds, ds, cw);
 		insert(pw);		 
 	
 end
@@ -204,7 +205,7 @@ rule "Connect target element as a parameter to the new ConditionWire"
 		not (ParameterWire (from == target, to == cw ))
 	
 	then
-		ParameterWire pw = handler.generatedParameterWire( container, container, target, cw);
+		ParameterWire pw = handler.generatedParameterWire( ds, ds, target, cw);
 		insert(pw);
 	
 end

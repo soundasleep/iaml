@@ -109,7 +109,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 	public void testWires() throws JaxenException {
 		// get all 'update' operations
 		//List<Object> syncWires = query(root, "//iaml:wires[xsi:type='iaml.wires:SyncWire']");
-		List<?> syncWires = query(root, "//iaml:wires[contains(iaml:name, 'sync')]");
+		List<?> syncWires = query(root, "//iaml:wires[contains(iaml:name, 'sync') and contains(eClass(), 'SyncWire')]");
 		
 		// there are exactly three sync wires
 		assertEquals(3, syncWires.size());

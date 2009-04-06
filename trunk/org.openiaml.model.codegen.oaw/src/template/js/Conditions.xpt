@@ -5,7 +5,7 @@
 «DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline) FOR model::wires::ConditionWire»
 	/* ConditionWire: «this-» */
 	condition_«conditionName(from)»(
-		«EXPAND Operations::callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+		«EXPAND Operations::callOperationParameters(wire, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
 	)
 «ENDDEFINE»
 

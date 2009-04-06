@@ -168,29 +168,32 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		not (ConditionWire ( from == condition, to == tw ))
 	
 	then
-		ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
-		cw.setName("xpath condition (source)");
-		insert(cw);
-
-		ParameterWire pw = handler.generatedParameterWire( cw, cw, ds, cw);
-		pw.setName("[xpath] from ds 1");
-		insert(pw);		 
-
-		ParameterWire pw2 = handler.generatedParameterWire( cw, cw, source, cw);
-		pw.setName("[xpath] from source");
-		insert(pw2);
+		# could put this into a separate rule
+		if (sw.isIsGenerated()) {
+			ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
+			cw.setName("xpath condition (source)");
+			insert(cw);
+	
+			ParameterWire pw = handler.generatedParameterWire( cw, cw, ds, cw);
+			pw.setName("[xpath] from ds 1");
+			insert(pw);		 
+	
+			ParameterWire pw2 = handler.generatedParameterWire( cw, cw, source, cw);
+			pw2.setName("[xpath] from source");
+			insert(pw2);
+		}
 
 		ConditionWire cwt = handler.generatedConditionWire( ds, ds, condition, tw );
 		cwt.setName("xpath condition (target)");
 		insert(cwt);
 
-		ParameterWire pwt = handler.generatedParameterWire( cw, cw, ds, cwt);
-		pw.setName("[xpath] from ds 2");
+		ParameterWire pwt = handler.generatedParameterWire( cwt, cwt, ds, cwt);
+		pwt.setName("[xpath] from ds 2");
 		insert(pwt);		 
 
-		ParameterWire pwt2 = handler.generatedParameterWire( cw, cw, target, cwt);
+		ParameterWire pwt2 = handler.generatedParameterWire( cwt, cwt, target, cwt);
+		pwt2.setName("[xpath] from target");
 		insert(pwt2);
-		pw.setName("[xpath] from target");
-	
+
 end
 

@@ -151,6 +151,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		
 	then
 		ParameterWire param = handler.generatedParameterWire(scope, page, value, wire);
+		param.setName("[sessions] 'login key' parameter to 'check key'");
 		insert(param);	
 
 end
@@ -307,6 +308,7 @@ rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
 		
 		# connect field value as parameter
 		ParameterWire clickParam = handler.generatedParameterWire(login_handler, login, fieldValue, runClick);
+		clickParam.setName("[sessions] field value as param");
 		insert(clickParam);
 		
 		# create contents of login operation

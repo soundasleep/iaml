@@ -165,7 +165,15 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
 		tw : SyncWire ( eval(connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
-		not (ConditionWire ( from == condition, to == tw ))
+		not (
+			sw_cw : ConditionWire ( from == condition, to == tw ) and
+			sw_pw : ParameterWire ( from == ds, to == sw_cw ) and
+			sw_pw2 : ParameterWire ( from == source, to == sw_cw ) and
+
+			tw_cw : ConditionWire ( from == condition, to == tw ) and
+			tw_pw : ParameterWire ( from == ds, to == tw_cw ) and
+			tw_pw2 : ParameterWire ( from == target, to == tw_cw )
+		)
 	
 	then
 		# could put this into a separate rule
@@ -173,7 +181,7 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 			ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
 			cw.setName("xpath condition (source)");
 			insert(cw);
-	
+
 			ParameterWire pw = handler.generatedParameterWire( cw, cw, ds, cw);
 			pw.setName("[xpath] from ds 1");
 			insert(pw);		 
@@ -181,6 +189,7 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 			ParameterWire pw2 = handler.generatedParameterWire( cw, cw, source, cw);
 			pw2.setName("[xpath] from source");
 			insert(pw2);
+
 		}
 
 		ConditionWire cwt = handler.generatedConditionWire( ds, ds, condition, tw );

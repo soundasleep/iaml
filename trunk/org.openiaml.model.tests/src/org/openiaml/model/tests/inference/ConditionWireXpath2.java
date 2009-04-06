@@ -3,26 +3,19 @@
  */
 package org.openiaml.model.tests.inference;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import junit.framework.AssertionFailedError;
-
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.tests.InferenceTestCase;
+import org.openiaml.model.tests.InferenceTestCaseWithConditionWires;
 
 /**
  * Tests inference of the ConditionWires involved with dynamic xpath sets.
@@ -33,7 +26,7 @@ import org.openiaml.model.tests.InferenceTestCase;
  * @author jmwright
  *
  */
-public class ConditionWireXpath2 extends InferenceTestCase {
+public class ConditionWireXpath2 extends InferenceTestCaseWithConditionWires {
 
   protected InternetApplication root;
   
@@ -62,7 +55,6 @@ public class ConditionWireXpath2 extends InferenceTestCase {
     // the XPathSet should create SyncWire matches between all pages
     SyncWire sw1 = (SyncWire) getWireBidirectional(root, page1, page2);
     SyncWire sw2 = (SyncWire) getWireBidirectional(root, page1, page3);
-    SyncWire sw_chained = (SyncWire) getWireBidirectional(root, page2, page3);
     
     // we can now investigate the SyncWires themselves, and make sure
     // they have the conditions attached too
@@ -82,8 +74,6 @@ public class ConditionWireXpath2 extends InferenceTestCase {
     RunInstanceWire rw2_1 = (RunInstanceWire) getWireFromTo(wire, f2edit, f1update);
     RunInstanceWire rw1_3 = (RunInstanceWire) getWireFromTo(wire, f1edit, f3update);
     RunInstanceWire rw3_1 = (RunInstanceWire) getWireFromTo(wire, f3edit, f1update);
-    RunInstanceWire rw2_3 = (RunInstanceWire) getWireFromTo(wire, f2edit, f3update);
-    RunInstanceWire rw3_2 = (RunInstanceWire) getWireFromTo(wire, f3edit, f2update);
     
     // condition wires all over!
     ConditionWire cw1_2 = (ConditionWire) getWireFromTo(page1, cond, rw1_2);
@@ -128,189 +118,7 @@ public class ConditionWireXpath2 extends InferenceTestCase {
     checkParameterCount(2, cw2_1);
     checkParameterCount(2, cw1_3);
     checkParameterCount(2, cw3_1);
-    
-    // at the very least, the chained sync wire (page2<--sync-->page3)
-    // should have two condition wires incoming
-    getConditionWireFromToWithParameters(root, cond, sw_chained, dae, page2, page3);
-
-    // and the RunWires between page2 and page3 should also have two condition wires
-    getConditionWireFromToWithParameters(root, cond, rw2_3, dae, page2, page3);
-    getConditionWireFromToWithParameters(root, cond, rw3_2, dae, page3, page2);
-    
+      
   }
-
-	/**
-	 * Ensure there are only a given number of parameters for a 
-	 * ConditionWire.
-	 */
-	private void checkParameterCount(int i, ConditionWire cw) {
-		int counted = 0;
-		List<ParameterWire> results = new ArrayList<ParameterWire>();
-		
-		for (WireEdge w : cw.getInEdges()) {
-			if (w instanceof ParameterWire) {
-				counted++;
-				results.add((ParameterWire) w);
-			}
-		}
-		
-		if (counted != i) {
-			// print out list
-			for (ParameterWire w : results) {
-				System.err.println(w);
-			}
-			fail("Expected " + i + " parameters into ConditionWire '" + cw + "': found " + counted);
-		}
-	}
-
-	/**
-	 * Check that there are no ConditionWires from cond to root, with
-	 * the given page as a Parameter
-	 * @throws JaxenException 
-	 */
-	private void checkNotConditionParameter(InternetApplication root,
-			CompositeCondition cond, RunInstanceWire rw, Page page) throws JaxenException {
-
-		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
-		for (WireEdge wire : conditions) {
-			ConditionWire condition = (ConditionWire) wire;
-			
-			Set<WireEdge> params = getWiresTo(root, condition);
-			for (WireEdge p : params) {
-				ParameterWire param = (ParameterWire) p;
-				if (param.getFrom().equals(page)) {
-					fail("Did not expect a ConditionWire with Page '" + page + "' as a parameter.");
-				}
-			}
-		}
-		
-	}
-
-	/**
-	 * @param root2
-	 * @param cond
-	 * @param rw1_2
-	 * @param dae
-	 * @param page1
-	 * @param page2
-	 * @throws JaxenException 
-	 */
-	private void getConditionWireFromToWithParameters(InternetApplication root,
-			CompositeCondition cond, RunInstanceWire rw,
-			DynamicApplicationElementSet dae, Page page1, Page page2) throws JaxenException {
-		
-		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
-		// should only be two conditions: page1 matches xpath, page2 matches xpath
-		assertEquals(2, conditions.size());
-		
-		boolean checksPage1 = false;
-		boolean checksPage2 = false;
-		
-		for (WireEdge wire : conditions) {
-			ConditionWire cw = (ConditionWire) wire;
-			
-			// all wires should have a parameter from the set (xpath)
-			ParameterWire pw_set = (ParameterWire) getWireFromTo(root, dae, cw);
-			
-			// but one wire should have page1, the other should have page2
-			if (hasWireFromTo(root, page1, cw)) {
-				checksPage1 = true;
-			}
-			if (hasWireFromTo(root, page2, cw)) {
-				checksPage2 = true;
-			}
-		}
-		
-		assertTrue("Page1 should be connected", checksPage1);
-		assertTrue("Page2 should be connected", checksPage2);
-		
-	}
-
-
-	/**
-	 * @param root2
-	 * @param cond
-	 * @param rw1_2
-	 * @param dae
-	 * @param page1
-	 * @param page2
-	 * @throws JaxenException 
-	 */
-	private void getConditionWireFromToWithParameters(InternetApplication root,
-			CompositeCondition cond, SyncWire rw,
-			DynamicApplicationElementSet dae, Page page1, Page page2) throws JaxenException {
-		
-		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
-		// should only be two condition: page1 matches xpath, page2 matches xpath
-		assertEquals(2, conditions.size());
-		
-		boolean checksPage1 = false;
-		boolean checksPage2 = false;
-		
-		for (WireEdge wire : conditions) {
-			ConditionWire cw = (ConditionWire) wire;
-			
-			// all wires should have a parameter from the set (xpath)
-			ParameterWire pw_set = (ParameterWire) getWireFromTo(root, dae, cw);
-			
-			// but one wire should have page1, the other should have page2
-			if (hasWireFromTo(root, page1, cw)) {
-				checksPage1 = true;
-			}
-			if (hasWireFromTo(root, page2, cw)) {
-				checksPage2 = true;
-			}
-		}
-		
-		assertTrue("Page1 should be connected", checksPage1);
-		assertTrue("Page2 should be connected", checksPage2);
-		
-	}
-	/**
-	 * @param root2
-	 * @param page1
-	 * @param cw
-	 * @return
-	 * @throws JaxenException 
-	 */
-	private boolean hasWireFromTo(InternetApplication root2, Page page1,
-			ConditionWire cw) throws JaxenException {
-		try {
-			getWireFromTo(root2, page1, cw);
-			return true;
-		} catch (AssertionFailedError e) {
-			return false;
-		}
-	}
-  
-  /*
-	protected void assertConnections(InternetApplication root, Condition cond, RunInstanceWire rw, DynamicApplicationElementSet dae, Page page1, Page page2) throws JaxenException {
-		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
-		assertEquals(2, conditions.size());
-
-		boolean hasPage1 = false;
-		boolean hasPage2 = false;
-		for (WireEdge wire : conditions) {
-			ConditionWire cw = (ConditionWire) wire;  
-			getWireFromTo(root, dae, cw);
-			Set<WireEdge> in = getWiresTo(root, cw);
-			for (WireEdge w : in) {
-				if (w.getFrom().equals(page1)) {
-					assertFalse(hasPage1);
-					hasPage1 = true;
-				}
-				if (w.getFrom().equals(page2)) {
-					assertFalse(hasPage2);
-					hasPage1 = true;
-				}
-			}
-		}
-		
-		assertTrue(hasPage1);
-		assertTrue(hasPage2);
-	    
-	}
-	*/
-  	
   
 }

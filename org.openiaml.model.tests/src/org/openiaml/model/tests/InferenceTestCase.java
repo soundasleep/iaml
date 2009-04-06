@@ -96,7 +96,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		return xpath.selectNodes(root);
 	}
-	
+
 	/**
 	 * Helper method: print out a list of objects
 	 * @param obj

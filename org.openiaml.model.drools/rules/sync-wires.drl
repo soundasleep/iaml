@@ -93,6 +93,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		pw.setName("[sync] run instance parameter (source.edit)"); 
 		insert(pw);
 
 end
@@ -112,6 +113,7 @@ rule "Connect parameter wire to: run instance wire from target.edit to source.up
 		
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		pw.setName("[sync] run instance parameter (target.edit)"); 
 		insert(pw);
 
 end
@@ -171,6 +173,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 		
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		pw.setName("[sync] run instance parameter (source.access)"); 
 		insert(pw);
 
 end
@@ -189,7 +192,8 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
 		
 	then
-		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire);
+		pw.setName("[sync] run instance parameter (target.access)"); 
 		insert(pw);
 
 end

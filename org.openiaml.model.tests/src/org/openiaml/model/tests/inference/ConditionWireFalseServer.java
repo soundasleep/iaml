@@ -3,16 +3,11 @@
  */
 package org.openiaml.model.tests.inference;
 
-import java.util.List;
-
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;

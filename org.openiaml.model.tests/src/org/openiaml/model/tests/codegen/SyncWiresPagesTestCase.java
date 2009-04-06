@@ -66,6 +66,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 			// go to page2
 			// page2 has "text1" and should be in sync too
 			gotoSitemapThenPage(sitemap, "page2");
+			waitForAjax();
 	
 			// check text1 field has changed
 			String label_text1 = getLabelIDForText("text1");
@@ -79,6 +80,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		{
 			// go to page3
 			gotoSitemapThenPage(sitemap, "page3");
+			waitForAjax();
 			
 			// check text1 field has changed
 			String label_text1 = getLabelIDForText("text1");
@@ -92,6 +94,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		{
 			// go to page 2
 			gotoSitemapThenPage(sitemap, "page2");
+			waitForAjax();
 			
 			// change field
 			String label_text3 = getLabelIDForText("text3");
@@ -103,6 +106,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		{
 			// go to page 3
 			gotoSitemapThenPage(sitemap, "page3");
+			waitForAjax();
 			
 			// check fields have synced
 			String label_text3 = getLabelIDForText("text3");
@@ -117,6 +121,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		{
 			// go to page 4 - it should still sync over even if the fields are only sync'd up on the page itself
 			gotoSitemapThenPage(sitemap, "page4");
+			waitForAjax();
 			
 			// check fields have synced
 			String label_text5 = getLabelIDForText("text5");
@@ -131,6 +136,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		{
 			// go to page 5 and check this one
 			gotoSitemapThenPage(sitemap, "page5");
+			waitForAjax();
 
 			String label_text5 = getLabelIDForText("text5");
 

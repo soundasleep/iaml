@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.inference;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import junit.framework.AssertionFailedError;
@@ -25,6 +27,8 @@ import org.openiaml.model.tests.InferenceTestCase;
 /**
  * Tests inference of the ConditionWires involved with dynamic xpath sets.
  * In particular, this test case looks into when we have an additional page, page3.
+ * 
+ * TODO reformat source code
  * 
  * @author jmwright
  *
@@ -87,37 +91,100 @@ public class ConditionWireXpath2 extends InferenceTestCase {
     ConditionWire cw1_3 = (ConditionWire) getWireFromTo(page1, cond, rw1_3);
     ConditionWire cw3_1 = (ConditionWire) getWireFromTo(page1, cond, rw3_1);
     // these elements will have *two* condition wires
-    //ConditionWire cw2_3 = (ConditionWire) getWireFromTo(page1, cond, rw2_3);
-    //ConditionWire cw3_2 = (ConditionWire) getWireFromTo(page1, cond, rw3_2);
-   
+    /*
+    ConditionWire cw2_3 = (ConditionWire) getWireFromTo(page1, cond, rw2_3);
+    ConditionWire cw3_2 = (ConditionWire) getWireFromTo(page1, cond, rw3_2);
+    */
+
+    // for p1<-->p2 and p1<-->p3, since page1 is connected directly with
+    // the DynamicSet, p1 should not be a condition in any sync wire
+    checkNotConditionParameter(root, cond, rw1_2, page1);
+    checkNotConditionParameter(root, cond, rw2_1, page1);
+    checkNotConditionParameter(root, cond, rw1_3, page1);
+    checkNotConditionParameter(root, cond, rw3_1, page1);
+    
     // and parameters connecting up the sets...
     ParameterWire pw1_2 = (ParameterWire) getWireFromTo(root, dae, cw1_2);
     ParameterWire pw2_1 = (ParameterWire) getWireFromTo(root, dae, cw2_1);
     ParameterWire pw1_3 = (ParameterWire) getWireFromTo(root, dae, cw1_3);
     ParameterWire pw3_1 = (ParameterWire) getWireFromTo(root, dae, cw3_1);
-    //ParameterWire pw2_3 = (ParameterWire) getWireFromTo(root, dae, cw2_3);
-    //ParameterWire pw3_2 = (ParameterWire) getWireFromTo(root, dae, cw3_2);
+    /*
+    ParameterWire pw2_3 = (ParameterWire) getWireFromTo(root, dae, cw2_3);
+    ParameterWire pw3_2 = (ParameterWire) getWireFromTo(root, dae, cw3_2);
+    */
     
-    // ... and the source elements 
+    // ... and the target elements 
     ParameterWire pw1_2b = (ParameterWire) getWireFromTo(root, page2, cw1_2);
-    ParameterWire pw2_1b = (ParameterWire) getWireFromTo(root, page1, cw2_1);
+    ParameterWire pw2_1b = (ParameterWire) getWireFromTo(root, page2, cw2_1);
     ParameterWire pw1_3b = (ParameterWire) getWireFromTo(root, page3, cw1_3);
-    ParameterWire pw3_1b = (ParameterWire) getWireFromTo(root, page1, cw3_1);
-    //ParameterWire pw2_3b = (ParameterWire) getWireFromTo(root, page3, cw2_3);
-    //ParameterWire pw3_2b = (ParameterWire) getWireFromTo(root, page2, cw3_2);
+    ParameterWire pw3_1b = (ParameterWire) getWireFromTo(root, page3, cw3_1);
+    /*
+    ParameterWire pw2_3b = (ParameterWire) getWireFromTo(root, page3, cw2_3);
+    ParameterWire pw3_2b = (ParameterWire) getWireFromTo(root, page2, cw3_2);
+    */
+    
+    // there should only be two parameters in these condition wires
+    checkParameterCount(2, cw1_2);
+    checkParameterCount(2, cw2_1);
+    checkParameterCount(2, cw1_3);
+    checkParameterCount(2, cw3_1);
     
     // at the very least, the chained sync wire (page2<--sync-->page3)
     // should have two condition wires incoming
     getConditionWireFromToWithParameters(root, cond, sw_chained, dae, page2, page3);
 
-    //getConditionWireFromToWithParameters(root, cond, rw1_2, dae, page1, page2);
-    //getConditionWireFromToWithParameters(root, cond, rw2_1, dae, page2, page1);
-    //getConditionWireFromToWithParameters(root, cond, rw1_3, dae, page1, page3);
-    //getConditionWireFromToWithParameters(root, cond, rw3_1, dae, page3, page1);
+    // and the RunWires between page2 and page3 should also have two condition wires
     getConditionWireFromToWithParameters(root, cond, rw2_3, dae, page2, page3);
     getConditionWireFromToWithParameters(root, cond, rw3_2, dae, page3, page2);
-        
+    
   }
+
+	/**
+	 * Ensure there are only a given number of parameters for a 
+	 * ConditionWire.
+	 */
+	private void checkParameterCount(int i, ConditionWire cw) {
+		int counted = 0;
+		List<ParameterWire> results = new ArrayList<ParameterWire>();
+		
+		for (WireEdge w : cw.getInEdges()) {
+			if (w instanceof ParameterWire) {
+				counted++;
+				results.add((ParameterWire) w);
+			}
+		}
+		
+		if (counted != i) {
+			// print out list
+			for (ParameterWire w : results) {
+				System.err.println(w);
+			}
+			fail("Expected " + i + " parameters into ConditionWire '" + cw + "': found " + counted);
+		}
+	}
+
+	/**
+	 * Check that there are no ConditionWires from cond to root, with
+	 * the given page as a Parameter
+	 * @throws JaxenException 
+	 */
+	private void checkNotConditionParameter(InternetApplication root,
+			CompositeCondition cond, RunInstanceWire rw, Page page) throws JaxenException {
+
+		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
+		for (WireEdge wire : conditions) {
+			ConditionWire condition = (ConditionWire) wire;
+			
+			Set<WireEdge> params = getWiresTo(root, condition);
+			for (WireEdge p : params) {
+				ParameterWire param = (ParameterWire) p;
+				if (param.getFrom().equals(page)) {
+					fail("Did not expect a ConditionWire with Page '" + page + "' as a parameter.");
+				}
+			}
+		}
+		
+	}
 
 	/**
 	 * @param root2

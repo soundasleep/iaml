@@ -73,8 +73,13 @@ public class ConditionWireXpath extends InferenceTestCase {
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
 		ParameterWire param1 = (ParameterWire) getWireFromTo(root, dae, srcCw);
 		ParameterWire param2 = (ParameterWire) getWireFromTo(root, dae, targetCw);
-		ParameterWire param3 = (ParameterWire) getWireFromTo(root, page2, srcCw);
-		ParameterWire param4 = (ParameterWire) getWireFromTo(root, page2, targetCw);
+		
+		/**
+		 * cannot test these now, since cond->src will have TWO wires.
+		 * @see ConditionWireXpath2
+		 */ 
+		// ParameterWire param3 = (ParameterWire) getWireFromTo(root, page2, srcCw);
+		// ParameterWire param4 = (ParameterWire) getWireFromTo(root, page2, targetCw);
 		
 		/*
 		 * An interesting idea is that if we have:
@@ -94,8 +99,10 @@ public class ConditionWireXpath extends InferenceTestCase {
 		assertNotNull(targetCw);
 		assertNotNull(param1);
 		assertNotNull(param2);
+		/*
 		assertNotNull(param3);
 		assertNotNull(param4);
+		*/
 
 	}
 	

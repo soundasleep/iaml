@@ -344,7 +344,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterWire" eSuperTypes="#//wires/SingleWire">
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterWire" eSuperTypes="#//wires/SingleWire #//NamedElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://openiaml.org/comment">
           <details key="added" value="0.2"/>

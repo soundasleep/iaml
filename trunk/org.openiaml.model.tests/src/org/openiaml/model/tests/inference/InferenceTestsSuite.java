@@ -26,6 +26,7 @@ public class InferenceTestsSuite {
         suite.addTestSuite(SyncWireProperties.class);
         suite.addTestSuite(ConditionWireFalse.class);
         suite.addTestSuite(ConditionWireFalseServer.class);
+        suite.addTestSuite(ConditionWireXpath.class);
 		//$JUnit-END$
         return suite; 
    }

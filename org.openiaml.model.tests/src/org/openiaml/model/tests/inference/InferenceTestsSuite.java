@@ -29,7 +29,6 @@ public class InferenceTestsSuite {
         suite.addTestSuite(ConditionWireXpath.class);
         suite.addTestSuite(ConditionWireXpath2.class);
         suite.addTestSuite(Requirement4DynamicSources.class);
-        suite.addTestSuite(ChainedSyncWires.class);
 		//$JUnit-END$
         return suite; 
    }

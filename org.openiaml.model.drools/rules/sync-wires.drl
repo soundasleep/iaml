@@ -8,6 +8,7 @@ import org.openiaml.model.model.impl.*;
 import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
+import java.util.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
@@ -198,7 +199,118 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 
 end
 
-rule "SyncWire between A to B, and B to C, means there should be a SyncWire from A to C (Page)"
+/**
+ * I think that chained SyncWires are generally impossible. Consider:
+ * 
+ *   page1 <--> page2 <--> unrelated
+ *   condition on both SyncWires, matching (page1, page2)
+ * 
+ * If we allow for chaining, then the condition 
+ *   condition[page2, unrelated]
+ * will be copied onto
+ *   condition[page1, page2]
+ * which means the SyncWire will never satisfy all its conditions.
+ *
+ * --
+ *
+ * I think that chained SyncWires are only possible *when* each
+ * SyncWire has identical Conditions, so we don't have to combine
+ * the two conditions together into something impossible.
+ *
+ * However, trying to implement this did nothing. I think it is because
+ * without adding more information to the model, you cannot chain.
+ * The information you'd be adding is stuff like ChainedSyncWire, but
+ * this defeats the purpose of having it in the model, because this should
+ * be handled by the code generation instead.
+ */
+
+/*
+
+function List getParameters(ConditionWire a) {
+	List<Object> result = new ArrayList<Object>();
+	for (WireEdge w : a.getInEdges()) {
+		if (w instanceof ParameterWire) {
+			result.add(w.getFrom());
+		}
+	}
+	return result;
+}
+
+function List getConditions(SyncWire a) {
+	List<Object> result = new ArrayList<Object>();
+	for (WireEdge w : a.getInEdges()) {
+		if (w instanceof ConditionWire) {
+			result.add(w);
+		}
+	}
+	return result;
+}
+
+function boolean identicalParameters(ConditionWire a, ConditionWire b) {
+
+	List<Object> a_params = getParameters(a);
+	List<Object> b_params = getParameters(b);
+	if (a_params.size() != b_params.size()) {
+		return false;	// quick check
+	}
+	
+	for (Object x : b_params) {
+		if (a_params.contains(x)) {
+			if (true)
+			throw new RuntimeException("kittens are tasty");
+			a_params.remove(x);
+			continue;
+		}
+		return false;	// param 'x' from 'b' was not found in 'a'
+	}
+
+	return true;	// all parameters were found
+}
+
+/*
+ * Evaluate the two SyncWires for their Conditions. This is only true
+ * if each SyncWire has the _same_ conditions with the _same_
+ * Parameter sources.
+ *
+function boolean identicalConditions(SyncWire a, SyncWire b) {
+	List<Object> a_conditions = getConditions(a);
+	List<Object> b_conditions = getConditions(b);
+	if (a_conditions.size() != b_conditions.size()) {
+		return false;	// quick check
+	}
+	System.out.println("a conditions: " + a_conditions);
+	System.out.println("b conditions: " + b_conditions);
+	
+	for (Object x : b_conditions) {
+		ConditionWire xc = (ConditionWire) x;
+		
+		// find an a_conditions which has the same parameters
+		boolean found_condition = false;
+		
+		for (int i = 0; i < a_conditions.size(); i++) {
+			boolean found = false;
+			ConditionWire cur = (ConditionWire) a_conditions.get(i);
+			if ((cur.getFrom().equals(xc.getFrom()))) {
+				// Conditions are the same
+				if (identicalParameters(cur, xc)) {
+					// parameters are the same
+					found_condition = true;
+					found = true;
+					break;		// stop and break out
+				}
+			}
+			if (found) break;	// stop
+		}
+		
+		if (!found_condition)	
+			return false; // param 'x' from 'b' was not found in 'a'
+	}
+
+	return true;	// all parameters were found
+
+}
+
+rule "Chained SyncWires: between A to B, and B to C, means there should be a SyncWire from A to C (Page)"
 	when
 		container : ContainsWires ( )
 		
@@ -208,7 +320,10 @@ rule "SyncWire between A to B, and B to C, means there should be a SyncWire from
 		
 		as : SyncWire( eval(connects(as, a, b)), eContainer == container )
 		bs : SyncWire( eval(connects(bs, b, c)) )
-		not (cs : SyncWire( eval(connects(cs, c, a))) )
+		
+		eval(identicalConditions(as, bs))
+		
+		not (cs : SyncWire( eval(connects(cs, c, a)) ) )
 		
 	then
 		SyncWire newWire = handler.generatedSyncWire(as, container, a, c);
@@ -228,6 +343,8 @@ rule "Chained SyncWires: Cascade conditions from A to C"
 		as : SyncWire( eval(connects(as, a, b)) )
 		bs : SyncWire( eval(connects(bs, b, c)) )
 		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+
+		eval(identicalConditions(as, bs))
 		
 		# there is a condition
 		cond : Condition ( )
@@ -236,10 +353,10 @@ rule "Chained SyncWires: Cascade conditions from A to C"
 		aw : ConditionWire ( from == cond, to == as )
 		
 		# but this generated wire does not
-		not (ConditionWire ( from == cond, to == cs, generatedBy == as )) 
-		
+		not (ConditionWire ( from == cond, to == cs, generatedBy == aw ))
+	
 	then
-		ConditionWire newWire = handler.generatedConditionWire(as, as, cond, cs);
+		ConditionWire newWire = handler.generatedConditionWire(aw, aw, cond, cs);
 		newWire.setName("copied chained condition [from a]: " + aw.getId()); 
 		insert(newWire);
 		
@@ -252,7 +369,7 @@ rule "Chained SyncWires: Cascade conditions from A to C"
 		for (WireEdge w : aw.getInEdges()) {
 			if (w instanceof ParameterWire) {
 				ParameterWire src = (ParameterWire) w;
-				ParameterWire newPw = handler.generatedParameterWire(as, as, src.getFrom(), newWire);
+				ParameterWire newPw = handler.generatedParameterWire(aw, aw, src.getFrom(), newWire);
 				newPw.setName("[chained a] from " + w.getId());
 				insert(newPw);  
 			}
@@ -260,7 +377,7 @@ rule "Chained SyncWires: Cascade conditions from A to C"
 		
 end
 
-rule "Chained SyncWires: Cascade conditions from B to C"
+rule "Chained SyncWires: Cascade conditions from B to C" 
 	when
 		
 		# we have three pages in Sync
@@ -271,6 +388,8 @@ rule "Chained SyncWires: Cascade conditions from B to C"
 		as : SyncWire( eval(connects(as, a, b)) )
 		bs : SyncWire( eval(connects(bs, b, c)) )
 		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+
+		eval(identicalConditions(as, bs))
 		
 		# there is a condition
 		cond : Condition ( )
@@ -279,10 +398,10 @@ rule "Chained SyncWires: Cascade conditions from B to C"
 		bw : ConditionWire ( from == cond, to == bs )
 		
 		# but this generated wire does not
-		not (ConditionWire ( from == cond, to == cs, generatedBy == bs )) 
+		not (ConditionWire ( from == cond, to == cs, generatedBy == bw ))
 		
 	then
-		ConditionWire newWire = handler.generatedConditionWire(bs, bs, cond, cs);
+		ConditionWire newWire = handler.generatedConditionWire(bw, bw, cond, cs);
 		newWire.setName("copied chained condition [from b]: " + bw.getId()); 
 		insert(newWire);
 		
@@ -291,7 +410,7 @@ rule "Chained SyncWires: Cascade conditions from B to C"
 		for (WireEdge w : bw.getInEdges()) {
 			if (w instanceof ParameterWire) {
 				ParameterWire src = (ParameterWire) w;
-				ParameterWire newPw = handler.generatedParameterWire(bs, bs, src.getFrom(), newWire);
+				ParameterWire newPw = handler.generatedParameterWire(bw, bw, src.getFrom(), newWire);
 				newPw.setName("[chained b] from " + w.getId());
 				insert(newPw);  
 			}

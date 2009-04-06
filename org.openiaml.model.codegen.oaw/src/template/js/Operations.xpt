@@ -119,6 +119,18 @@
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
 
+/* we are in JS mode. TODO document when we are switching in/out of it */
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::DynamicApplicationElementSet»
+	/* dynamic element set "«name-»" */
+	get_dynamic_elements_«safeName()-»()
+«ENDDEFINE»
+
+/* we are in JS mode. TODO document when we are switching in/out of it */
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::visual::Page»
+	/* Page "«name-»" */
+	new Visual_Page("«id-»", "«name-»")
+«ENDDEFINE»
+
 /* a remote data source */
 «DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR emf::EObject»
 	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»

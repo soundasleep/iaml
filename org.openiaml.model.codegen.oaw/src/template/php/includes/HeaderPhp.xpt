@@ -86,4 +86,13 @@ function get_application_value($id, $default) {
 	}	
 }
 
+function escape_javascript_string($string) {
+	$string = htmlspecialchars($string);
+	$string = str_replace("\\", "\\\\", $string);
+	$string = str_replace("\n", "\\n", $string);
+	$string = str_replace("\r", "\\r", $string);
+	$string = str_replace("\t", "\\t", $string);
+	return $string;
+}
+
 «ENDDEFINE»

@@ -284,6 +284,72 @@ function is_array_equal(a) {
 }
 
 /**
+ * Load a string of XML as an XML document using an XML parser.
+ *
+ * Based on http://www.w3schools.com/Xml/xml_parser.asp.
+ *
+ * The Firefox parser does not catch all exceptions, so we can
+ * try to catch any parsing exceptions.
+ */
+function load_xml(text) {
+	try {
+		// Internet Explorer
+		var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+		xmlDoc.async = "false";
+		return xmlDoc.loadXML(text);
+	} catch (e) { }
+
+	// Firefox
+	var parser = new DOMParser();
+	return parser.parseFromString(text, "text/xml");
+	
+	// nothing
+	// throw new IamlJavascriptException("Could not load XML, no XML loader found.");
+}
+
+/**
+ * Comparison function: xpathMatch(a, b)
+ * Returns true if 'a' matches the xpath of 'b', or 'b' matches the 
+ * xpath of 'a' (order doesn't matter).
+ */
+function xpathMatch(a, b) {
+	var id = null;
+	var ids = null;
+	
+	if (a instanceof Array) {
+		ids = a;
+	}
+	if (b instanceof Array) {
+		ids = b;
+	}
+	if (a instanceof Visual_Page) {
+		id = a.getID();
+	}
+	if (b instanceof Visual_Page) {
+		id = b.getID();
+	}
+	
+	// make sure we have id and path
+	if (id == null) {
+		throw new IamlJavascriptException("Cannot compare xpath: ID is null."); 
+	}
+	if (ids == null) {
+		throw new IamlJavascriptException("Cannot compare xpath: List of results is null."); 
+	}
+	
+	debug("Querying XML XPath for ID: '" + id + "'");
+	
+	// is the ID in this list?
+	for (var i = 0; i < ids.length; i++) {
+		if (ids[i] == id) {
+			return true;	// found it
+		}
+	}
+
+	return false;	// not found
+}
+
+/**
  * Define an exception class.
  */
 function IamlJavascriptException(message) {
@@ -300,6 +366,18 @@ function IamlJavascriptException(message) {
 function throwJavascriptException(message) {
 	throw new IamlJavascriptException(message);
 	return false;
+}
+
+/**
+ * Represents a Page: by ID and name
+ */
+function Visual_Page(id, name) {
+	this.id = id;
+	this.name = name;
+	
+	this.getID = function() { return id; }
+	this.getName = function() { return name; }
+	this.toString = function() { return "Page: id=" + id + " name=" + name; }
 }
 
 // ---------

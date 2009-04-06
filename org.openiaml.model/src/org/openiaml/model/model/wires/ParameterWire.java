@@ -6,6 +6,8 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.NamedElement;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +25,7 @@ package org.openiaml.model.model.wires;
  * @model
  * @generated
  */
-public interface ParameterWire extends SingleWire {
+public interface ParameterWire extends SingleWire, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Parameter Name</b></em>' attribute.

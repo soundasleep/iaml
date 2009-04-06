@@ -670,13 +670,22 @@ public interface WiresPackage extends EPackage {
 	int PARAMETER_WIRE__TO = SINGLE_WIRE__TO;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_WIRE__NAME = SINGLE_WIRE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_WIRE__PARAMETER_NAME = SINGLE_WIRE_FEATURE_COUNT + 0;
+	int PARAMETER_WIRE__PARAMETER_NAME = SINGLE_WIRE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Parameter Wire</em>' class.
@@ -685,7 +694,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 1;
+	int PARAMETER_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.FindWireImpl <em>Find Wire</em>}' class.

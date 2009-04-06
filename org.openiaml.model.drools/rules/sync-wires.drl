@@ -202,18 +202,144 @@ rule "SyncWire between A to B, and B to C, means there should be a SyncWire from
 		b : Page ( eval(a != b) )
 		c : Page ( eval(b != c), eval(a != c) )
 		
-		aw : SyncWire( eval(connects(aw, a, b)), eContainer == container )
-		bw : SyncWire( eval(connects(bw, b, c)) )
-		not (cw : SyncWire( eval(connects(cw, c, a))) )
+		as : SyncWire( eval(connects(as, a, b)), eContainer == container )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		not (cs : SyncWire( eval(connects(cs, c, a))) )
 		
 	then
-		SyncWire newWire = handler.generatedSyncWire(aw, container, a, c);
-		newWire.setName("chained sync from: " + aw.getName() + " and: " + bw.getName()); 
+		SyncWire newWire = handler.generatedSyncWire(as, container, a, c);
+		newWire.setName("chained sync from: " + as.getId() + " to: " + bs.getId()); 
 		insert(newWire);
 		
 end
 
-rule "Copy ConditionWires connected to SyncWires on further expanded SyncWires"
+rule "Chained SyncWires: Cascade conditions from A to C"
+	when
+		
+		# we have three pages in Sync
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)) )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+		
+		# there is a condition
+		cond : Condition ( )
+		
+		# one of the pages has a ConditionWire
+		aw : ConditionWire ( from == cond, to == as )
+		
+		# but this generated wire does not
+		not (ConditionWire ( from == cond, to == cs, generatedBy == as )) 
+		
+	then
+		ConditionWire newWire = handler.generatedConditionWire(as, as, cond, cs);
+		newWire.setName("copied chained condition [from a]: " + aw.getId()); 
+		insert(newWire);
+		
+end
+
+rule "Chained SyncWires: Cascade conditions from B to C"
+	when
+		
+		# we have three pages in Sync
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)) )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+		
+		# there is a condition
+		cond : Condition ( )
+		
+		# one of the pages has a ConditionWire
+		bw : ConditionWire ( from == cond, to == bs )
+		
+		# but this generated wire does not
+		not (ConditionWire ( from == cond, to == cs, generatedBy == bs )) 
+		
+	then
+		ConditionWire newWire = handler.generatedConditionWire(bs, bs, cond, cs);
+		newWire.setName("copied chained condition [from b]: " + bw.getId()); 
+		insert(newWire);
+		
+end
+
+rule "Chained SyncWires: Cascade parameters from A to C"
+	when
+		
+		# we have three pages in Sync
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)) )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+		
+		# there is a condition
+		cond : Condition ( )
+		
+		# two of the pages have ConditionWires
+		aw : ConditionWire ( from == cond, to == as )
+		cw : ConditionWire ( from == cond, to == cs, generatedBy == as )
+		
+		# there is a parameter
+		param : WireEdgesSource ( )
+		
+		# one of them has a ParameterWire
+		ap : ParameterWire ( from == param, to == aw )
+		
+		# but this generated wire does not
+		not (ParameterWire ( from == param, to == cw, generatedBy == as )) 
+		
+	then
+		ParameterWire newWire = handler.generatedParameterWire(as, as, param, cw);
+		newWire.setName("[chained] param from [a]: " + ap.getId());
+		insert(newWire);
+		
+end
+
+rule "Chained SyncWires: Cascade parameters from B to C"
+	when
+		
+		# we have three pages in Sync
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)) )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+		
+		# there is a condition
+		cond : Condition ( )
+		
+		# two of the pages have ConditionWires
+		bw : ConditionWire ( from == cond, to == bs )
+		cw : ConditionWire ( from == cond, to == cs, generatedBy == bs )
+		
+		# there is a parameter
+		param : WireEdgesSource ( )
+		
+		# one of them has a ParameterWire
+		bp : ParameterWire ( from == param, to == bw )
+		
+		# but this generated wire does not
+		not (ParameterWire ( from == param, to == cw, generatedBy == bs )) 
+		
+	then
+		ParameterWire newWire = handler.generatedParameterWire(bs, bs, param, cw);
+		newWire.setName("[chained] param from [b]: " + bp.getId());
+		insert(newWire);
+		
+end
+
+rule "Cascaded SyncWires: Conditions from parent to child"
 	when
 
 		# the containing elements	
@@ -231,16 +357,16 @@ rule "Copy ConditionWires connected to SyncWires on further expanded SyncWires"
 		cw : ConditionWire( from == condition, to == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : ConditionWire( from == condition, to == esw )) 
+		not (ecw : ConditionWire( generatedBy == cw, from == condition, to == esw )) 
 		
 	then
 		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
-		ecw.setName("copied condition: " + cw.getName());
+		ecw.setName("[copied] from: " + cw.getId());
 		insert(ecw);
 
 end
 
-rule "Copy ParameterWires connected to ConditionWires connected to SyncWires on further expanded SyncWires"
+rule "Cascaded SyncWires: Parameters from parent to child"
 	when
 
 		# the containing elements	
@@ -258,18 +384,19 @@ rule "Copy ParameterWires connected to ConditionWires connected to SyncWires on 
 		cw : ConditionWire( from == condition, to == sw )
 		
 		# the generated condition wire
-		ecw : ConditionWire( from == condition, to == esw )
+		ecw : ConditionWire( generatedBy == cw, from == condition, to == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : WireEdgesSource( )
 		pw : ParameterWire( from == parameter, to == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : ParameterWire( from == parameter, to == ecw )) 
+		not (epw : ParameterWire( generatedBy == cw, from == parameter, to == ecw )) 
 		
 	then
 		# create it
 		ParameterWire epw = handler.generatedParameterWire( cw, cw, parameter, ecw );
+		epw.setName("[copied] from: " + pw.getId());
 		insert(epw);
 
 end

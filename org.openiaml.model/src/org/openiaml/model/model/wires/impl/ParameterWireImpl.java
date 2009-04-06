@@ -10,6 +10,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -20,6 +22,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.openiaml.model.model.wires.impl.ParameterWireImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.ParameterWireImpl#getParameterName <em>Parameter Name</em>}</li>
  * </ul>
  * </p>
@@ -27,6 +30,24 @@ import org.openiaml.model.model.wires.WiresPackage;
  * @generated
  */
 public class ParameterWireImpl extends SingleWireImpl implements ParameterWire {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getParameterName() <em>Parameter Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -70,6 +91,27 @@ public class ParameterWireImpl extends SingleWireImpl implements ParameterWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WiresPackage.PARAMETER_WIRE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getParameterName() {
 		return parameterName;
 	}
@@ -94,6 +136,8 @@ public class ParameterWireImpl extends SingleWireImpl implements ParameterWire {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case WiresPackage.PARAMETER_WIRE__NAME:
+				return getName();
 			case WiresPackage.PARAMETER_WIRE__PARAMETER_NAME:
 				return getParameterName();
 		}
@@ -108,6 +152,9 @@ public class ParameterWireImpl extends SingleWireImpl implements ParameterWire {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case WiresPackage.PARAMETER_WIRE__NAME:
+				setName((String)newValue);
+				return;
 			case WiresPackage.PARAMETER_WIRE__PARAMETER_NAME:
 				setParameterName((String)newValue);
 				return;
@@ -123,6 +170,9 @@ public class ParameterWireImpl extends SingleWireImpl implements ParameterWire {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case WiresPackage.PARAMETER_WIRE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case WiresPackage.PARAMETER_WIRE__PARAMETER_NAME:
 				setParameterName(PARAMETER_NAME_EDEFAULT);
 				return;
@@ -138,6 +188,8 @@ public class ParameterWireImpl extends SingleWireImpl implements ParameterWire {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case WiresPackage.PARAMETER_WIRE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WiresPackage.PARAMETER_WIRE__PARAMETER_NAME:
 				return PARAMETER_NAME_EDEFAULT == null ? parameterName != null : !PARAMETER_NAME_EDEFAULT.equals(parameterName);
 		}
@@ -150,11 +202,45 @@ public class ParameterWireImpl extends SingleWireImpl implements ParameterWire {
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.PARAMETER_WIRE__NAME: return ModelPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.NAMED_ELEMENT__NAME: return WiresPackage.PARAMETER_WIRE__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (parameterName: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", parameterName: ");
 		result.append(parameterName);
 		result.append(')');
 		return result.toString();

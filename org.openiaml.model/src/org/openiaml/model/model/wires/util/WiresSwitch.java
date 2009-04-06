@@ -152,6 +152,7 @@ public class WiresSwitch<T> {
 				ParameterWire parameterWire = (ParameterWire)theEObject;
 				T result = caseParameterWire(parameterWire);
 				if (result == null) result = caseSingleWire(parameterWire);
+				if (result == null) result = caseNamedElement(parameterWire);
 				if (result == null) result = caseWireEdge(parameterWire);
 				if (result == null) result = caseGeneratedElement(parameterWire);
 				if (result == null) result = defaultCase(theEObject);

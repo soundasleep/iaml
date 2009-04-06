@@ -239,6 +239,21 @@ rule "Chained SyncWires: Cascade conditions from A to C"
 		newWire.setName("copied chained condition [from a]: " + aw.getId()); 
 		insert(newWire);
 		
+		// also copy over all Parameters explicitly 
+		// if we try to do this implicitly, then we get the problem where
+		// a<--sync-->b, b<--sync-->c, and the same condition is
+		// used for both sync wires; as a result, parameters to both
+		// incoming sync wires are merged together into one wire
+		// TODO this can probably be achieved though.
+		for (WireEdge w : aw.getInEdges()) {
+			if (w instanceof ParameterWire) {
+				ParameterWire src = (ParameterWire) w;
+				ParameterWire newPw = handler.generatedParameterWire(as, as, src.getFrom(), newWire);
+				newPw.setName("[chained a] from " + w.getId());
+				insert(newPw);  
+			}
+		}
+		
 end
 
 rule "Chained SyncWires: Cascade conditions from B to C"
@@ -267,8 +282,20 @@ rule "Chained SyncWires: Cascade conditions from B to C"
 		newWire.setName("copied chained condition [from b]: " + bw.getId()); 
 		insert(newWire);
 		
+		// also copy over all Parameters explicitly 
+		// TODO see note above
+		for (WireEdge w : bw.getInEdges()) {
+			if (w instanceof ParameterWire) {
+				ParameterWire src = (ParameterWire) w;
+				ParameterWire newPw = handler.generatedParameterWire(bs, bs, src.getFrom(), newWire);
+				newPw.setName("[chained b] from " + w.getId());
+				insert(newPw);  
+			}
+		}
+		
 end
 
+/*
 rule "Chained SyncWires: Cascade parameters from A to C"
 	when
 		
@@ -338,6 +365,7 @@ rule "Chained SyncWires: Cascade parameters from B to C"
 		insert(newWire);
 		
 end
+*/
 
 rule "Cascaded SyncWires: Conditions from parent to child"
 	when

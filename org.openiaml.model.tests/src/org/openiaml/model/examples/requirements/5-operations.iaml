@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
   <children xsi:type="iaml.visual:Page" id="migrated1" name="container">
-    <children xsi:type="iaml.visual:InputForm" id="migrated3" name="foo" outEdges="migrated2">
-      <eventTriggers id="migrated5" name="edit" outEdges="migrated4">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="migrated4" from="migrated5" to="migrated7" name="run" inEdges="migrated6"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fa" name="setToHello">
+      <eventTriggers id="model.1207ff82f9b.1ae" name="edit" outEdges="wires.1207ff8322b.4d">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1207ff8322b.4d" from="model.1207ff82f9b.1ae" to="model.1207ff82f9b.1bf" name="run" inEdges="wires.1207ff8322b.4e"/>
       </eventTriggers>
-      <wires xsi:type="iaml.wires:SyncWire" id="migrated2" from="migrated3" to="migrated8" name="sync">
-        <values id="migrated9" name="var" outEdges="migrated6" value="42">
-          <wires xsi:type="iaml.wires:ParameterWire" id="migrated6" from="migrated9" to="migrated4"/>
-        </values>
-      </wires>
+      <values id="model.1207ff82f9b.319" name="value" outEdges="wires.1207ff8322b.4e" value="hello">
+        <wires xsi:type="iaml.wires:ParameterWire" id="wires.1207ff8322b.4e" from="model.1207ff82f9b.319" to="wires.1207ff8322b.4d"/>
+      </values>
     </children>
-    <children xsi:type="iaml.visual:InputForm" id="migrated8" name="bar" inEdges="migrated2">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="migrated4" id="migrated7" name="printInt">
-        <parameters id="migrated12" name="int" outFlows="migrated10 migrated11"/>
-        <operations xsi:type="iaml.operations:DecisionOperation" id="migrated15" name="ensure > 41" inFlows="migrated11" inExecutions="migrated13" outExecutions="migrated14"/>
-        <operations xsi:type="iaml:ChainedOperation" id="migrated19" name="multiply by 2" inFlows="migrated10" inExecutions="migrated16" outFlows="migrated18" outExecutions="migrated17"/>
-        <operations xsi:type="iaml:ChainedOperation" id="migrated22" name="print(int)" inFlows="migrated20" inExecutions="migrated17" outExecutions="migrated21"/>
-        <nodes xsi:type="iaml.operations:StartNode" id="migrated23" outExecutions="migrated13"/>
-        <nodes xsi:type="iaml.operations:CancelNode" id="migrated25" inExecutions="migrated24"/>
-        <nodes xsi:type="iaml.operations:FinishNode" id="migrated26" inExecutions="migrated21"/>
-        <nodes xsi:type="iaml.operations:DecisionNode" id="migrated27" outExecutions="migrated24 migrated16" inExecutions="migrated14"/>
-        <dataEdges id="migrated10" from="migrated12" to="migrated19"/>
-        <dataEdges id="migrated18" from="migrated19" to="migrated28"/>
-        <dataEdges id="migrated20" from="migrated28" to="migrated22"/>
-        <dataEdges id="migrated11" from="migrated12" to="migrated15"/>
-        <executionEdges id="migrated17" from="migrated19" to="migrated22"/>
-        <executionEdges id="migrated13" from="migrated23" to="migrated15"/>
-        <executionEdges id="migrated14" from="migrated15" to="migrated27"/>
-        <executionEdges id="migrated21" from="migrated22" to="migrated26"/>
-        <executionEdges xsi:type="iaml:ConditionalEdge" id="migrated24" from="migrated27" to="migrated25" name="no"/>
-        <executionEdges xsi:type="iaml:ConditionalEdge" id="migrated16" from="migrated27" to="migrated19" name="yes"/>
-        <variables id="migrated28" name="int2" outFlows="migrated20" inFlows="migrated18"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fb" name="target">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1207ff8322b.4d wires.1207ff8322b.61" id="model.1207ff82f9b.1bf" name="set to a static value">
+        <parameters id="model.1207ff82f9b.1f8" name="value" outFlows="model.1207ff82f9b.269"/>
+        <operations xsi:type="iaml:ChainedOperation" id="model.1207ff82f9b.1fd" name="setPropertyToValue" inFlows="model.1207ff82f9b.269" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" outExecutions="model.1207ff82f9b.1ff"/>
+        <nodes xsi:type="iaml.operations:StartNode" id="operations.1207ff832b7.63" outExecutions="model.1207ff82f9b.1fe"/>
+        <nodes xsi:type="iaml.operations:FinishNode" id="operations.1207ff832b7.64" inExecutions="model.1207ff82f9b.1ff"/>
+        <dataEdges id="model.1207ff82f9b.269" from="model.1207ff82f9b.1f8" to="model.1207ff82f9b.1fd"/>
+        <dataEdges id="model.1207ff82f9b.26a" from="model.1207ff82f9b.1fd" to="model.1207ff82f9b.22d"/>
+        <executionEdges id="model.1207ff82f9b.1fe" from="operations.1207ff832b7.63" to="model.1207ff82f9b.1fd"/>
+        <executionEdges id="model.1207ff82f9b.1ff" from="model.1207ff82f9b.1fd" to="operations.1207ff832b7.64"/>
       </operations>
+      <properties id="model.1207ff82f9b.22d" name="fieldValue" inFlows="model.1207ff82f9b.26a"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.251" name="setToWorld">
+      <eventTriggers id="model.1207ff82f9b.38c" name="edit" outEdges="wires.1207ff8322b.61">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1207ff8322b.61" from="model.1207ff82f9b.38c" to="model.1207ff82f9b.1bf" name="run2" inEdges="wires.1207ff8322b.62"/>
+      </eventTriggers>
+      <values id="model.1207ff82f9b.38d" name="value" outEdges="wires.1207ff8322b.62" value="world!">
+        <wires xsi:type="iaml.wires:ParameterWire" id="wires.1207ff8322b.62" from="model.1207ff82f9b.38d" to="wires.1207ff8322b.61"/>
+      </values>
     </children>
   </children>
 </iaml:InternetApplication>

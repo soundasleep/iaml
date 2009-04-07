@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d08ec91b9.e">
+  <children xsi:type="iaml.visual:Page" id="visual.11d08ec9217.1" name="container">
+    <children xsi:type="iaml.visual:InputForm" id="visual.11d08ec9217.13" name="if1" outEdges="wires.11d08ec9217.6">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d08ec9217.6" from="visual.11d08ec9217.13" to="visual.11d08ec9217.14" name="sync" generatedElements="wires.11d08ec9217.55 wires.11d08ec9217.56 wires.11d08ec9217.57"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d08ec9217.8e" name="field1" outEdges="wires.11d08ec9217.55">
+        <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d08ec9217.278" id="model.11d08ec91b9.126" name="update">
+          <parameters id="model.11d08ec91b9.b53" name="setValueTo" outFlows="model.11d08ec91b9.c96"/>
+          <operations xsi:type="iaml:ChainedOperation" id="model.11d08ec91b9.c95" name="setPropertyToValue" inFlows="model.11d08ec91b9.c96" inExecutions="model.11d08ec91b9.c97" outFlows="model.11d08f9698b.151" outExecutions="model.11d08ec91b9.c98"/>
+          <nodes xsi:type="iaml.operations:StartNode" outExecutions="model.11d08ec91b9.c97"/>
+          <nodes xsi:type="iaml.operations:StopNode" inExecutions="model.11d08ec91b9.c98"/>
+          <dataEdges id="model.11d08ec91b9.c96" from="model.11d08ec91b9.b53" to="model.11d08ec91b9.c95"/>
+          <dataEdges id="model.11d08f9698b.151" from="model.11d08ec91b9.c95" to="model.11d08ec91b9.66d"/>
+          <executionEdges id="model.11d08ec91b9.c97" from="//@children.0/@children.0/@children.0/@operations.0/@nodes.0" to="model.11d08ec91b9.c95"/>
+          <executionEdges id="model.11d08ec91b9.c98" from="model.11d08ec91b9.c95" to="//@children.0/@children.0/@children.0/@operations.0/@nodes.1"/>
+        </operations>
+        <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d08ec9217.279" id="model.11d08ec91b9.127" name="refresh"/>
+        <eventTriggers id="model.11d08ec91b9.db" name="edit" outEdges="wires.11d08ec9217.27a">
+          <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d08ec9217.27a" from="model.11d08ec91b9.db" to="model.11d08ec91b9.23a" name="doSync" inEdges="wires.11d08ec9217.5b3"/>
+        </eventTriggers>
+        <eventTriggers id="model.11d08ec91b9.125" name="change" outEdges="wires.11d08ec9217.277">
+          <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d08ec9217.277" from="model.11d08ec91b9.125" to="model.11d08ec91b9.239" name="doSync" inEdges="wires.11d08ec9217.5b4"/>
+        </eventTriggers>
+        <wires xsi:type="iaml.wires:SyncWire" generatedBy="wires.11d08ec9217.6" isGenerated="true" id="wires.11d08ec9217.55" from="visual.11d08ec9217.8e" to="visual.11d08ec9217.19a" name="sync[generated]"/>
+        <properties id="model.11d08ec91b9.51c" name="fieldValue" outEdges="wires.11d08ec9217.5b3 wires.11d08ec9217.5b4">
+          <wires xsi:type="iaml.wires:ParameterWire" id="wires.11d08ec9217.5b3" from="model.11d08ec91b9.51c" to="wires.11d08ec9217.27a"/>
+          <wires xsi:type="iaml.wires:ParameterWire" id="wires.11d08ec9217.5b4" from="model.11d08ec91b9.51c" to="wires.11d08ec9217.277"/>
+        </properties>
+      </children>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d08ec9217.8f" name="field2" outEdges="wires.11d08ec9217.56">
+        <wires xsi:type="iaml.wires:SyncWire" generatedBy="wires.11d08ec9217.6" isGenerated="true" id="wires.11d08ec9217.56" from="visual.11d08ec9217.8f" to="visual.11d08ec9217.19b" name="sync[generated]"/>
+      </children>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d08ec9217.db" name="field3" outEdges="wires.11d08ec9217.57">
+        <wires xsi:type="iaml.wires:SyncWire" generatedBy="wires.11d08ec9217.6" isGenerated="true" id="wires.11d08ec9217.57" from="visual.11d08ec9217.db" to="visual.11d08ec9217.19c" name="sync[generated]"/>
+      </children>
+    </children>
+    <children xsi:type="iaml.visual:InputForm" id="visual.11d08ec9217.14" name="if2" inEdges="wires.11d08ec9217.6">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d08ec9217.19a" name="field1" inEdges="wires.11d08ec9217.55">
+        <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d08ec9217.277" id="model.11d08ec91b9.239" name="refresh">
+          <parameters id="model.11d08f9698b.792" name="setValueTo" outFlows="model.11d08f9698b.793"/>
+          <operations xsi:type="iaml:ChainedOperation" id="model.11d08f9698b.56f" name="setPropertyToValue" inFlows="model.11d08f9698b.793" inExecutions="model.11d08f9698b.795" outFlows="model.11d08f9698b.794" outExecutions="model.11d08f9698b.796"/>
+          <nodes xsi:type="iaml.operations:StartNode" outExecutions="model.11d08f9698b.795"/>
+          <nodes xsi:type="iaml.operations:StopNode" inExecutions="model.11d08f9698b.796"/>
+          <dataEdges id="model.11d08f9698b.793" from="model.11d08f9698b.792" to="model.11d08f9698b.56f"/>
+          <dataEdges id="model.11d08f9698b.794" from="model.11d08f9698b.56f" to="model.11d08ec91b9.66d"/>
+          <executionEdges id="model.11d08f9698b.795" from="//@children.0/@children.1/@children.0/@operations.0/@nodes.0" to="model.11d08f9698b.56f"/>
+          <executionEdges id="model.11d08f9698b.796" from="model.11d08f9698b.56f" to="//@children.0/@children.1/@children.0/@operations.0/@nodes.1"/>
+        </operations>
+        <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d08ec9217.27a" id="model.11d08ec91b9.23a" name="update"/>
+        <eventTriggers id="model.11d08ec91b9.236" name="edit" outEdges="wires.11d08ec9217.278">
+          <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d08ec9217.278" from="model.11d08ec91b9.236" to="model.11d08ec91b9.126" name="doSync" inEdges="wires.11d08ec9217.4eb"/>
+        </eventTriggers>
+        <eventTriggers id="model.11d08ec91b9.237" name="change" outEdges="wires.11d08ec9217.279">
+          <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d08ec9217.279" from="model.11d08ec91b9.237" to="model.11d08ec91b9.127" name="doSync" inEdges="wires.11d08ec9217.4ec"/>
+        </eventTriggers>
+        <properties id="model.11d08ec91b9.66d" name="fieldValue" outEdges="wires.11d08ec9217.4eb wires.11d08ec9217.4ec" inFlows="model.11d08f9698b.151 model.11d08f9698b.794">
+          <wires xsi:type="iaml.wires:ParameterWire" id="wires.11d08ec9217.4eb" from="model.11d08ec91b9.66d" to="wires.11d08ec9217.278"/>
+          <wires xsi:type="iaml.wires:ParameterWire" id="wires.11d08ec9217.4ec" from="model.11d08ec91b9.66d" to="wires.11d08ec9217.279"/>
+        </properties>
+      </children>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d08ec9217.19b" name="field2" inEdges="wires.11d08ec9217.56"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d08ec9217.19c" name="field3" inEdges="wires.11d08ec9217.57"/>
+    </children>
+  </children>
+</iaml:InternetApplication>

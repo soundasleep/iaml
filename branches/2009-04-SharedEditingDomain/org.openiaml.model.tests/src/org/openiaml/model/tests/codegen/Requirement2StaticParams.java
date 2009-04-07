@@ -1,0 +1,59 @@
+/**
+ * 
+ */
+package org.openiaml.model.tests.codegen;
+
+import org.eclipse.core.resources.IFile;
+import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.tests.CodegenTestCase;
+
+/**
+ * Tests requirement 2: static value parameters
+ * 
+ * @model ../examples/requirements/2-static_params.iaml
+ * @author jmwright
+ *
+ */
+public class Requirement2StaticParams extends CodegenTestCase {
+	
+	protected InternetApplication root;
+	
+	protected void setUp() throws Exception {
+		root = loadAndCodegen(ROOT + "../examples/requirements/2-static_params.iaml");
+	}
+	
+	public void testRequirement() throws Exception {
+		// go to sitemap
+		IFile sitemap = getProject().getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		
+		// go to page
+		beginAtSitemapThenPage(sitemap, "new");
+		
+		{
+			// there should be an element called value
+			String valueID = getLabelIDForText("value");
+			assertNotNull(valueID);
+			
+			// it should be set to a static value as a parameter
+			// value.onAccess -> setValue(static_value)
+			assertLabeledFieldEquals(valueID, "value goes here");
+		}
+
+		// reload, it should still be there
+		gotoSitemapThenPage(sitemap, "new");
+		waitForAjax();
+		
+		{
+			// there should be an element called value
+			String valueID = getLabelIDForText("value");
+			assertNotNull(valueID);
+			
+			// it should be set to a static value as a parameter
+			// value.onAccess -> setValue(static_value)
+			assertLabeledFieldEquals(valueID, "value goes here");
+		}
+		
+	}
+
+}

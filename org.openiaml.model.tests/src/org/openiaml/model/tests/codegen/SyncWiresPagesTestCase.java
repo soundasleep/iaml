@@ -6,7 +6,7 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 import java.util.Random;
 
-import junit.framework.ComparisonFailure;
+import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
@@ -147,29 +147,19 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 			setLabeledFormElementField(label_text5, testingText3);
 		}
 		
-		// TODO: this block currently fails, because deep operation chaining is not
-		// supported. this needs to be supported, but for version 0.1.0 we will
-		// allow the test case to fail.
-		try	{
-			// it should change something on page 2
-			// if this fails, it is because it cannot chain 
-			// page5.text5-->page4.text5-->page4.newText-->
-			//    page3.newText-->page3.text3-->page2.text3
-			// (note the on-page syncs)
-			gotoSitemapThenPage(sitemap, "page2");
-			waitForAjax();
+		// it should change something on page 2
+		// if this fails, it is because it cannot chain 
+		// page5.text5-->page4.text5-->page4.newText-->
+		//    page3.newText-->page3.text3-->page2.text3
+		// (note the on-page syncs)
+		gotoSitemapThenPage(sitemap, "page2");
+		waitForAjax();
 
-			String label_text3 = getLabelIDForText("text3");
+		String label_text3 = getLabelIDForText("text3");
 
-			// check fields have synced
-			assertLabelPresent(label_text3);
-			assertLabeledFieldEquals(label_text3, testingText3);
-			
-			fail();
-		} catch (ComparisonFailure e) {
-			// expected until operation chaining is completed
-			System.err.println("[Expected exception caught]: expected until operation chaining is completed: " + e);
-		}
+		// check fields have synced
+		assertLabelPresent(label_text3);
+		assertLabeledFieldEquals(label_text3, testingText3);
 		
 		} catch (Error e) {
 			// print out the source code

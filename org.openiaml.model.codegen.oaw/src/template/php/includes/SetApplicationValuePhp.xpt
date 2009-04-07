@@ -14,43 +14,7 @@ log_message("set_application_value.php? " . print_r($_GET, true));
 $id = $_GET["id"] or local_die("no id");
 $arg0 = $_GET["arg0"] or local_die("no arg0");
 
-// set
-global $db;
-
-// make sure the table is there
-$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
-if (!$s) {
-	// create the table
-	$q = $db->query("CREATE TABLE global_values (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			value_id VARCHAR(64) NOT NULL,
-			arg0 BLOB
-		);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
-	log_message("table for global_values created", false);
-
-	// re-prepare
-	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
-}
-
-// execute the query with the parameter
-$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
-
-// does anything exist?
-if ($s->fetch()) {
-	// yes: update all existing
-	$s = $db->prepare("UPDATE global_values SET arg0=? WHERE value_id=?") or local_die("could not prepare update query: " . print_r($db->errorInfo(), true));
-	log_message("Updating existing: " . $id);
-} else {
-	// no: insert new
-	$s = $db->prepare("INSERT INTO global_values (arg0, value_id) VALUES (?, ?)") or local_die("could not prepare insert query: " . print_r($db->errorInfo(), true));
-	log_message("Inserting new: " . $id);
-}
-
-// update all existing
-$s->execute(array($arg0, $id)) or local_die("could not execute query: " . print_r($db->errorInfo(), true));
-
-// done
-$s = null;
+set_application_value($id, $arg0);
 log_message("set_application_value.php: setting id=$id, arg0=$arg0");
 
 echo "ok";

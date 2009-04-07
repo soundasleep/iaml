@@ -47,8 +47,9 @@
 		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
 		// operation: «name»
 		global $running_«safeName()-»;
-		if ($running_«safeName()-» == false) {
+		if ($running_«safeName()-» == false && !has_running_function("«safeName()-»")) {
 			$running_«safeName()-» = true;		// prevent loops
+			add_running_function("«safeName()-»");
 			
 			// has this operation got a fail handler?
 			«IF getFailEdge() != null»
@@ -70,6 +71,7 @@
 			«ENDIF»
 			
 			$running_«safeName()-» = false;
+			remove_running_function("«safeName()-»");
 		}
 	}
 «ENDDEFINE»
@@ -137,7 +139,7 @@
 		«IF containingSession(outFlows.first().to) != null»
 			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
 		«ELSE»
-			queue_set_application_property("«outFlows.first().to.eContainer.safeName()»", «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
+			set_application_value("«outFlows.first().to.safeName()»", «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
 		«ENDIF»
 
 		«REM»
@@ -151,6 +153,11 @@
 		«REM»
 			here may be a good place to connect any chained EventTriggers
 		«ENDREM»
+		«IF shouldExpandEventTriggers(this)»
+			«EXPAND expandEventTriggersInline FOR outFlows.first().to.eContainer-»
+		«ELSE»
+			// we don't call additional events for «eContainer» 
+		«ENDIF»
 	«ELSEIF name == "javascriptAlert"»
 		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
 		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
@@ -191,7 +198,7 @@
 «ENDDEFINE»
 
 «DEFINE setPropertyToValueInflowTarget FOR model::Parameter»
-	«safeName()»
+	$«safeName()»
 «ENDDEFINE»
 
 «DEFINE expandCheckInflows FOR model::DataFlowEdge-»
@@ -253,6 +260,99 @@
 		// ignoring fail wire
 	«ENDIF»
 «ENDDEFINE»
+
+/* if we are expanding inline a function already */
+«DEFINE expandEventTriggersInline FOR emf::EObject»
+	// cannot expand for non-event object
+«ENDDEFINE»
+
+«DEFINE expandEventTriggersInline FOR model::ContainsEventTriggers»
+	«EXPAND expandEventTriggersInline FOREACH eventTriggers»
+«ENDDEFINE»
+
+«DEFINE expandEventTriggersInline FOR model::EventTrigger»
+	// expanding inline event trigger «name»
+	«IF name=="edit"»
+		«EXPAND callOperations(true) FOREACH outEdges»
+	«ELSEIF name=="access"»
+		// we don't expand 'access' events inline
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown client-side event trigger: " + this)»
+	«ENDIF»
+«ENDDEFINE»
+
+
+/* default: don't know what to do with a wire */
+«DEFINE callOperations(Boolean inline) FOR model::WireEdge»
+	«EXPAND exception FOR throwException("Unknown wire edge connected to edit trigger: " + this)»
+«ENDDEFINE»
+
+/* 
+ * run a command with some parameters. this could be in inline JS or a JS block.
+ * RunInstanceWire: event --> operation 
+ */
+«DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire-»
+	/* eContainer == «to.eContainer» */
+	
+	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
+		/* expand conditions */
+		if («EXPAND Conditions::conditionWires(this, inline) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+	«ENDIF»
+
+	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
+		«REM»VisibleThing includes InputTextField and Page«ENDREM»
+		«REM»
+			is both source and target on the same page? NOTE this
+			will also return true for Event-->Operation if they are
+			both on the same page.
+		«ENDREM»
+		«IF onCurrentPage(from, to)-»
+			«REM»// on current page (wire id = «id»)«ENDREM»
+			do_«operationName(to)»(«EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
+		«ELSE-»
+			«REM»// not on current page (wire id = «id»)«ENDREM»
+			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
+				«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+			);
+			«REM»				
+			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
+			«ENDREM»
+		«ENDIF-»
+	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
+		«REM»direct field --> domain attribute«ENDREM»
+		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
+			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+		); 
+	«ELSE-»
+		alert('unknown target operation type in «to.eContainer.metaType.name»');
+		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
+	«ENDIF-»
+
+	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
+		}
+	«ENDIF»
+«ENDDEFINE»
+
+
+/* ditto: check or error? */
+«DEFINE callOperationParameters(model::WireEdge wire, Boolean inline) FOR model::wires::ParameterWire»
+	«EXPAND callOperationParametersSource(wire, inline) FOR from»
+«ENDDEFINE»
+
+/* ditto: check or error? */
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::WireEdgesSource»
+	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
+«ENDDEFINE»
+
+/* what is the runtime value of the parameter? */
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::ApplicationElementProperty»
+	get_application_value("«safeName()-»", null)
+«ENDDEFINE»
+
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::StaticValue»
+	"«value-»" /* static value "«name-»" */
+«ENDDEFINE»
+
 
 «DEFINE exception FOR Object»
 «ENDDEFINE»

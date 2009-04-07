@@ -67,9 +67,12 @@
 			do_«operationName(to)»(«EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
-			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
+			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
 				«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 			);
+			«REM»				
+			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
+			«ENDREM»
 		«ENDIF-»
 	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
 		«REM»direct field --> domain attribute«ENDREM»

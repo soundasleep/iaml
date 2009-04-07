@@ -22,6 +22,29 @@
 		// expand any operations (both in this page and in any surrounding scopes)
 		«EXPAND php::EventTrigger::expandOperations FOR this-»
 		
+		// allow remote execution of operations
+		if (require_get("operation", "")) {
+			$operation_name = "do_" . require_get("operation");
+			$arg0 = require_get("arg0");
+			$arg1 = require_get("arg1");
+			
+			// any running functions? (prevent infinite loops)
+			$running = require_get("running");
+			if ($running) {
+				$r = explode(",", $running);
+				foreach ($r as $fun) {
+					add_running_function($fun);
+				}
+			}
+
+			log_message("page «name»: remote operation $operation_name($arg0, $arg1)");
+			$operation_name($arg0, $arg1);
+			log_message("page «name»: remote operation $operation_name($arg0, $arg1) complete");
+			
+			echo "ok";
+			die;
+		}
+				
 		?>
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 			"http://www.w3.org/TR/html4/loose.dtd">
@@ -112,6 +135,7 @@
 			<div id="counter_store_event"></div>
 			<div id="counter_set_session"></div>
 			<div id="counter_set_application_value"></div>
+			<div id="counter_remote_event"></div>
 		</div>
 		<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
 		

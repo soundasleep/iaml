@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xsi:schemaLocation="http://openiaml.org/model/visual http://openiaml.org/model#//visual">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xsi:schemaLocation="http://openiaml.org/model/visual http://openiaml.org/model#//visual http://openiaml.org/model/wires http://openiaml.org/model#//wires">
   <notation:Diagram xmi:id="_to6kQBjxEd6Bbd9MGRXJ5w" type="Iaml" measurementUnit="Pixel">
     <children xmi:type="notation:Node" xmi:id="_ziEwABjxEd6Bbd9MGRXJ5w" type="1006">
       <children xmi:type="notation:Node" xmi:id="_ziEwBBjxEd6Bbd9MGRXJ5w" type="4006"/>
@@ -15,7 +15,7 @@
       <styles xmi:type="notation:LineStyle" xmi:id="_SealAxj1Ed6Bbd9MGRXJ5w"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_SealBBj1Ed6Bbd9MGRXJ5w" diagramLink="_Gr1N4BmcEd6Bbd9MGRXJ5w" hint="Iaml_DomainObject"/>
       <element xmi:type="iaml:DomainObject" href="1-sync_wires.iaml#migrated4"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SealBRj1Ed6Bbd9MGRXJ5w" x="108" y="132"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SealBRj1Ed6Bbd9MGRXJ5w" x="96" y="108"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_to6kQRjxEd6Bbd9MGRXJ5w"/>
     <element xmi:type="iaml:InternetApplication" href="1-sync_wires.iaml#migrated0"/>
@@ -68,6 +68,38 @@
     <element xmi:type="iaml.visual:InputForm" href="1-sync_wires.iaml#migrated3"/>
   </notation:Diagram>
   <notation:Diagram xmi:id="_UJaHMBj1Ed6Bbd9MGRXJ5w" type="Iaml_Visual" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_nkJEgCNcEd6iQ6UPoTYDlA" type="1010">
+      <children xmi:type="notation:Node" xmi:id="_nkSOcyNcEd6iQ6UPoTYDlA" type="4010"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nkSOcCNcEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_nkSOcSNcEd6iQ6UPoTYDlA" diagramLink="_nonU0CNcEd6iQ6UPoTYDlA" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="1-sync_wires.iaml#migrated6"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nkSOciNcEd6iQ6UPoTYDlA" x="336" y="168"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_nkSOdCNcEd6iQ6UPoTYDlA" type="1010">
+      <children xmi:type="notation:Node" xmi:id="_nkSOeCNcEd6iQ6UPoTYDlA" type="4010"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nkSOdSNcEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_nkSOdiNcEd6iQ6UPoTYDlA" diagramLink="_nrJEYCNcEd6iQ6UPoTYDlA" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="1-sync_wires.iaml#migrated9"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nkSOdyNcEd6iQ6UPoTYDlA" x="336" y="276"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_nkSOeSNcEd6iQ6UPoTYDlA" type="1006">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_nkb_cSNcEd6iQ6UPoTYDlA" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_nkb_ciNcEd6iQ6UPoTYDlA" key="modelID" value="Iaml_Visual"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_nkb_cCNcEd6iQ6UPoTYDlA" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nkSOeiNcEd6iQ6UPoTYDlA"/>
+      <element xmi:type="iaml:DomainAttribute" href="1-sync_wires.iaml#migrated7"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nkSOeyNcEd6iQ6UPoTYDlA" x="168" y="168"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_nkb_cyNcEd6iQ6UPoTYDlA" type="1006">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_nkb_dyNcEd6iQ6UPoTYDlA" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_nkb_eCNcEd6iQ6UPoTYDlA" key="modelID" value="Iaml_Visual"/>
+      </eAnnotations>
+      <children xmi:type="notation:Node" xmi:id="_nkb_diNcEd6iQ6UPoTYDlA" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_nkb_dCNcEd6iQ6UPoTYDlA"/>
+      <element xmi:type="iaml:DomainAttribute" href="1-sync_wires.iaml#migrated10"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nkb_dSNcEd6iQ6UPoTYDlA" x="156" y="276"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_UJaHMRj1Ed6Bbd9MGRXJ5w"/>
     <element xmi:type="iaml.visual:InputForm" href="1-sync_wires.iaml#migrated3"/>
   </notation:Diagram>
@@ -78,5 +110,33 @@
   <notation:Diagram xmi:id="_Gr1N4BmcEd6Bbd9MGRXJ5w" type="Iaml_DomainObject" measurementUnit="Pixel">
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Gr1N4RmcEd6Bbd9MGRXJ5w"/>
     <element xmi:type="iaml:DomainObject" href="1-sync_wires.iaml#migrated4"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_nonU0CNcEd6iQ6UPoTYDlA" type="Iaml_Visual" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_nonU0SNcEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml.visual:InputTextField" href="1-sync_wires.iaml#migrated6"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_nrJEYCNcEd6iQ6UPoTYDlA" type="Iaml_Visual" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_nrJEYSNcEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml.visual:InputTextField" href="1-sync_wires.iaml#migrated9"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_n962cCNcEd6iQ6UPoTYDlA" type="Iaml_Element" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_n962cSNcEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml:DomainAttribute" href="1-sync_wires.iaml#migrated7"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_oRlZUCNcEd6iQ6UPoTYDlA" type="Iaml_Element" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_oRlZUSNcEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml:DomainAttribute" href="1-sync_wires.iaml#migrated10"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_rKzpMCNcEd6iQ6UPoTYDlA" type="Iaml_Wire" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_rKzpMSNcEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml.wires:SyncWire" href="1-sync_wires.iaml#migrated2"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_uYvk0CNcEd6iQ6UPoTYDlA" type="Iaml_Element" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_uYvk0SNcEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml:DomainAttribute" href="1-sync_wires.iaml#migrated7"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_ud9cACNcEd6iQ6UPoTYDlA" type="Iaml_Element" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_ud9cASNcEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml:DomainAttribute" href="1-sync_wires.iaml#migrated10"/>
   </notation:Diagram>
 </xmi:XMI>

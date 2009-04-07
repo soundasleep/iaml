@@ -38,6 +38,7 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(Requirement2StaticParams.class);
 		suite.addTestSuite(Requirement3DynamicParams.class);
 		suite.addTestSuite(Requirement4DynamicSources.class);
+		suite.addTestSuite(Requirement6Conditions.class);
 
 		return suite;
 	}

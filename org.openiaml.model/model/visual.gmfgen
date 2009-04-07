@@ -8,12 +8,13 @@
     dynamicTemplates="true"
     templateDirectory="/org.openiaml.model/templates/">
   <diagram
-      visualID="79"
+      visualID="1001"
       editPartClassName="VisibleThingEditPart"
       itemSemanticEditPolicyClassName="VisibleThingItemSemanticEditPolicy"
       notationViewFactoryClassName="VisibleThingViewFactory"
       canonicalEditPolicyClassName="VisibleThingCanonicalEditPolicy"
       iconProviderPriority="Low"
+      editingDomainID="org.openiaml.model.diagram.SharedEditingDomain"
       validationProviderPriority="Low"
       validationEnabled="true"
       validationDecorators="true">
@@ -48,7 +49,7 @@
     <domainDiagramElement
         href="iaml.genmodel#//model/VisibleThing"/>
     <topLevelNodes
-        visualID="1001"
+        visualID="102001"
         editPartClassName="EventTriggerEditPart"
         itemSemanticEditPolicyClassName="EventTriggerItemSemanticEditPolicy"
         notationViewFactoryClassName="EventTriggerViewFactory"
@@ -80,7 +81,7 @@
             href="iaml.genmodel#//model/ContainsEventTriggers/eventTriggers"/>
       </modelFacet>
       <labels
-          visualID="4001"
+          visualID="105001"
           editPartClassName="EventTriggerNameEditPart"
           itemSemanticEditPolicyClassName="EventTriggerNameItemSemanticEditPolicy"
           notationViewFactoryClassName="EventTriggerNameViewFactory"
@@ -99,7 +100,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1002"
+        visualID="102002"
         editPartClassName="SingleOperationEditPart"
         itemSemanticEditPolicyClassName="SingleOperationItemSemanticEditPolicy"
         notationViewFactoryClassName="SingleOperationViewFactory"
@@ -130,7 +131,7 @@
             body="self.oclIsTypeOf( SingleOperation )"/>
       </modelFacet>
       <labels
-          visualID="4002"
+          visualID="105002"
           editPartClassName="SingleOperationNameEditPart"
           itemSemanticEditPolicyClassName="SingleOperationNameItemSemanticEditPolicy"
           notationViewFactoryClassName="SingleOperationNameViewFactory"
@@ -150,7 +151,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1003"
+        visualID="102003"
         editPartClassName="CompositeOperationEditPart"
         itemSemanticEditPolicyClassName="CompositeOperationItemSemanticEditPolicy"
         notationViewFactoryClassName="CompositeOperationViewFactory"
@@ -189,7 +190,7 @@
             body="self.oclIsTypeOf( CompositeOperation )"/>
       </modelFacet>
       <labels
-          visualID="4003"
+          visualID="105003"
           editPartClassName="CompositeOperationNameEditPart"
           itemSemanticEditPolicyClassName="CompositeOperationNameItemSemanticEditPolicy"
           notationViewFactoryClassName="CompositeOperationNameViewFactory"
@@ -208,7 +209,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1004"
+        visualID="102004"
         editPartClassName="ChainedOperationEditPart"
         itemSemanticEditPolicyClassName="ChainedOperationItemSemanticEditPolicy"
         notationViewFactoryClassName="ChainedOperationViewFactory"
@@ -242,7 +243,7 @@
             body="self.oclIsTypeOf( ChainedOperation )"/>
       </modelFacet>
       <labels
-          visualID="4004"
+          visualID="105004"
           editPartClassName="ChainedOperationNameEditPart"
           itemSemanticEditPolicyClassName="ChainedOperationNameItemSemanticEditPolicy"
           notationViewFactoryClassName="ChainedOperationNameViewFactory"
@@ -261,7 +262,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1005"
+        visualID="102005"
         editPartClassName="DomainObjectEditPart"
         itemSemanticEditPolicyClassName="DomainObjectItemSemanticEditPolicy"
         notationViewFactoryClassName="DomainObjectViewFactory"
@@ -300,7 +301,7 @@
             body="self.oclIsTypeOf( DomainObject )"/>
       </modelFacet>
       <labels
-          visualID="4005"
+          visualID="105005"
           editPartClassName="DomainObjectNameEditPart"
           itemSemanticEditPolicyClassName="DomainObjectNameItemSemanticEditPolicy"
           notationViewFactoryClassName="DomainObjectNameViewFactory"
@@ -319,7 +320,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1006"
+        visualID="102006"
         editPartClassName="DomainAttributeEditPart"
         itemSemanticEditPolicyClassName="DomainAttributeItemSemanticEditPolicy"
         notationViewFactoryClassName="DomainAttributeViewFactory"
@@ -350,7 +351,7 @@
             body="self.oclIsTypeOf( DomainAttribute )"/>
       </modelFacet>
       <labels
-          visualID="4006"
+          visualID="105006"
           editPartClassName="DomainAttributeNameEditPart"
           itemSemanticEditPolicyClassName="DomainAttributeNameItemSemanticEditPolicy"
           notationViewFactoryClassName="DomainAttributeNameViewFactory"
@@ -369,7 +370,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1007"
+        visualID="102007"
         editPartClassName="ApplicationElementPropertyEditPart"
         itemSemanticEditPolicyClassName="ApplicationElementPropertyItemSemanticEditPolicy"
         notationViewFactoryClassName="ApplicationElementPropertyViewFactory"
@@ -406,7 +407,7 @@
             href="iaml.genmodel#//model/ApplicationElement/properties"/>
       </modelFacet>
       <labels
-          visualID="4007"
+          visualID="105007"
           editPartClassName="ApplicationElementPropertyNameEditPart"
           itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
           notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
@@ -425,7 +426,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1008"
+        visualID="102008"
         editPartClassName="PageEditPart"
         itemSemanticEditPolicyClassName="PageItemSemanticEditPolicy"
         notationViewFactoryClassName="PageViewFactory"
@@ -464,7 +465,7 @@
             body="self.oclIsTypeOf( Page )"/>
       </modelFacet>
       <labels
-          visualID="4008"
+          visualID="105008"
           editPartClassName="PageNameEditPart"
           itemSemanticEditPolicyClassName="PageNameItemSemanticEditPolicy"
           notationViewFactoryClassName="PageNameViewFactory"
@@ -483,7 +484,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1009"
+        visualID="102009"
         editPartClassName="InputFormEditPart"
         itemSemanticEditPolicyClassName="InputFormItemSemanticEditPolicy"
         notationViewFactoryClassName="InputFormViewFactory"
@@ -522,7 +523,7 @@
             body="self.oclIsTypeOf( InputForm )"/>
       </modelFacet>
       <labels
-          visualID="4009"
+          visualID="105009"
           editPartClassName="InputFormNameEditPart"
           itemSemanticEditPolicyClassName="InputFormNameItemSemanticEditPolicy"
           notationViewFactoryClassName="InputFormNameViewFactory"
@@ -541,7 +542,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1010"
+        visualID="102010"
         editPartClassName="InputTextFieldEditPart"
         itemSemanticEditPolicyClassName="InputTextFieldItemSemanticEditPolicy"
         notationViewFactoryClassName="InputTextFieldViewFactory"
@@ -580,7 +581,7 @@
             body="self.oclIsTypeOf( InputTextField )"/>
       </modelFacet>
       <labels
-          visualID="4010"
+          visualID="105010"
           editPartClassName="InputTextFieldNameEditPart"
           itemSemanticEditPolicyClassName="InputTextFieldNameItemSemanticEditPolicy"
           notationViewFactoryClassName="InputTextFieldNameViewFactory"
@@ -599,7 +600,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1011"
+        visualID="102011"
         editPartClassName="StaticValueEditPart"
         itemSemanticEditPolicyClassName="StaticValueItemSemanticEditPolicy"
         notationViewFactoryClassName="StaticValueViewFactory"
@@ -628,7 +629,7 @@
             href="iaml.genmodel#//model/ApplicationElement/values"/>
       </modelFacet>
       <labels
-          visualID="4011"
+          visualID="105011"
           editPartClassName="StaticValueNameEditPart"
           itemSemanticEditPolicyClassName="StaticValueNameItemSemanticEditPolicy"
           notationViewFactoryClassName="StaticValueNameViewFactory"
@@ -651,7 +652,7 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="4012"
+          visualID="105012"
           editPartClassName="StaticValueValueEditPart"
           itemSemanticEditPolicyClassName="StaticValueValueItemSemanticEditPolicy"
           notationViewFactoryClassName="StaticValueValueViewFactory"
@@ -671,7 +672,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1012"
+        visualID="102012"
         editPartClassName="SessionEditPart"
         itemSemanticEditPolicyClassName="SessionItemSemanticEditPolicy"
         notationViewFactoryClassName="SessionViewFactory"
@@ -708,7 +709,7 @@
             href="iaml.genmodel#//model/VisibleThing/sessions"/>
       </modelFacet>
       <labels
-          visualID="4013"
+          visualID="105013"
           editPartClassName="SessionNameEditPart"
           itemSemanticEditPolicyClassName="SessionNameItemSemanticEditPolicy"
           notationViewFactoryClassName="SessionNameViewFactory"
@@ -728,7 +729,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1013"
+        visualID="102013"
         editPartClassName="LoginHandlerEditPart"
         itemSemanticEditPolicyClassName="LoginHandlerItemSemanticEditPolicy"
         notationViewFactoryClassName="LoginHandlerViewFactory"
@@ -762,7 +763,7 @@
             body="self.oclIsTypeOf( LoginHandler )"/>
       </modelFacet>
       <labels
-          visualID="4014"
+          visualID="105014"
           editPartClassName="LoginHandlerNameEditPart"
           itemSemanticEditPolicyClassName="LoginHandlerNameItemSemanticEditPolicy"
           notationViewFactoryClassName="LoginHandlerNameViewFactory"
@@ -780,7 +781,7 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="4015"
+          visualID="105015"
           editPartClassName="LoginHandlerTypeEditPart"
           itemSemanticEditPolicyClassName="LoginHandlerTypeItemSemanticEditPolicy"
           notationViewFactoryClassName="LoginHandlerTypeViewFactory"
@@ -802,7 +803,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1014"
+        visualID="102014"
         editPartClassName="FileDomainObjectEditPart"
         itemSemanticEditPolicyClassName="FileDomainObjectItemSemanticEditPolicy"
         notationViewFactoryClassName="FileDomainObjectViewFactory"
@@ -841,7 +842,7 @@
             body="self.oclIsTypeOf( FileDomainObject )"/>
       </modelFacet>
       <labels
-          visualID="4016"
+          visualID="105016"
           editPartClassName="FileDomainObjectNameEditPart"
           itemSemanticEditPolicyClassName="FileDomainObjectNameItemSemanticEditPolicy"
           notationViewFactoryClassName="FileDomainObjectNameViewFactory"
@@ -860,7 +861,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1015"
+        visualID="102015"
         editPartClassName="FileDomainAttributeEditPart"
         itemSemanticEditPolicyClassName="FileDomainAttributeItemSemanticEditPolicy"
         notationViewFactoryClassName="FileDomainAttributeViewFactory"
@@ -891,7 +892,7 @@
             body="self.oclIsTypeOf( FileDomainAttribute )"/>
       </modelFacet>
       <labels
-          visualID="4017"
+          visualID="105017"
           editPartClassName="FileDomainAttributeNameEditPart"
           itemSemanticEditPolicyClassName="FileDomainAttributeNameItemSemanticEditPolicy"
           notationViewFactoryClassName="FileDomainAttributeNameViewFactory"
@@ -910,7 +911,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1016"
+        visualID="102016"
         editPartClassName="CompositeConditionEditPart"
         itemSemanticEditPolicyClassName="CompositeConditionItemSemanticEditPolicy"
         notationViewFactoryClassName="CompositeConditionViewFactory"
@@ -946,7 +947,7 @@
             body="self.oclIsTypeOf( CompositeCondition )"/>
       </modelFacet>
       <labels
-          visualID="4018"
+          visualID="105018"
           editPartClassName="CompositeConditionNameEditPart"
           itemSemanticEditPolicyClassName="CompositeConditionNameItemSemanticEditPolicy"
           notationViewFactoryClassName="CompositeConditionNameViewFactory"
@@ -966,7 +967,7 @@
       </labels>
     </topLevelNodes>
     <links
-        visualID="3001"
+        visualID="104001"
         editPartClassName="SyncWireEditPart"
         itemSemanticEditPolicyClassName="SyncWireItemSemanticEditPolicy"
         notationViewFactoryClassName="SyncWireViewFactory"
@@ -1005,7 +1006,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4019"
+          visualID="106001"
           editPartClassName="SyncWireNameEditPart"
           itemSemanticEditPolicyClassName="SyncWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="SyncWireNameViewFactory"
@@ -1028,7 +1029,7 @@
       </labels>
     </links>
     <links
-        visualID="3002"
+        visualID="104002"
         editPartClassName="RunInstanceWireEditPart"
         itemSemanticEditPolicyClassName="RunInstanceWireItemSemanticEditPolicy"
         notationViewFactoryClassName="RunInstanceWireViewFactory"
@@ -1067,7 +1068,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4020"
+          visualID="106002"
           editPartClassName="RunInstanceWireNameEditPart"
           itemSemanticEditPolicyClassName="RunInstanceWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="RunInstanceWireNameViewFactory"
@@ -1090,7 +1091,7 @@
       </labels>
     </links>
     <links
-        visualID="3003"
+        visualID="104003"
         editPartClassName="ParameterWireEditPart"
         itemSemanticEditPolicyClassName="ParameterWireItemSemanticEditPolicy"
         notationViewFactoryClassName="ParameterWireViewFactory"
@@ -1125,7 +1126,7 @@
       </modelFacet>
     </links>
     <links
-        visualID="3004"
+        visualID="104004"
         editPartClassName="FilterWireEditPart"
         itemSemanticEditPolicyClassName="FilterWireItemSemanticEditPolicy"
         notationViewFactoryClassName="FilterWireViewFactory"
@@ -1164,10 +1165,10 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4021"
-          editPartClassName="FilterWireQueryEditPart"
-          itemSemanticEditPolicyClassName="FilterWireQueryItemSemanticEditPolicy"
-          notationViewFactoryClassName="FilterWireQueryViewFactory"
+          visualID="106003"
+          editPartClassName="FilterWireNameEditPart"
+          itemSemanticEditPolicyClassName="FilterWireNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="FilterWireNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -1186,10 +1187,10 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="4022"
-          editPartClassName="FilterWireQuery2EditPart"
-          itemSemanticEditPolicyClassName="FilterWireQuery2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="FilterWireQuery2ViewFactory"
+          visualID="106004"
+          editPartClassName="FilterWireQueryEditPart"
+          itemSemanticEditPolicyClassName="FilterWireQueryItemSemanticEditPolicy"
+          notationViewFactoryClassName="FilterWireQueryViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -1209,7 +1210,7 @@
       </labels>
     </links>
     <links
-        visualID="3005"
+        visualID="104005"
         editPartClassName="FindWireEditPart"
         itemSemanticEditPolicyClassName="FindWireItemSemanticEditPolicy"
         notationViewFactoryClassName="FindWireViewFactory"
@@ -1248,7 +1249,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4023"
+          visualID="106005"
           editPartClassName="FindWireNameEditPart"
           itemSemanticEditPolicyClassName="FindWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="FindWireNameViewFactory"
@@ -1271,7 +1272,7 @@
       </labels>
     </links>
     <links
-        visualID="3006"
+        visualID="104006"
         editPartClassName="ShowWireEditPart"
         itemSemanticEditPolicyClassName="ShowWireItemSemanticEditPolicy"
         notationViewFactoryClassName="ShowWireViewFactory"
@@ -1310,7 +1311,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4024"
+          visualID="106006"
           editPartClassName="ShowWireNameEditPart"
           itemSemanticEditPolicyClassName="ShowWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="ShowWireNameViewFactory"
@@ -1333,7 +1334,7 @@
       </labels>
     </links>
     <links
-        visualID="3007"
+        visualID="104007"
         editPartClassName="NavigateWireEditPart"
         itemSemanticEditPolicyClassName="NavigateWireItemSemanticEditPolicy"
         notationViewFactoryClassName="NavigateWireViewFactory"
@@ -1372,7 +1373,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4025"
+          visualID="106007"
           editPartClassName="NavigateWireNameEditPart"
           itemSemanticEditPolicyClassName="NavigateWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="NavigateWireNameViewFactory"
@@ -1395,7 +1396,7 @@
       </labels>
     </links>
     <links
-        visualID="3008"
+        visualID="104008"
         editPartClassName="CommitWireEditPart"
         itemSemanticEditPolicyClassName="CommitWireItemSemanticEditPolicy"
         notationViewFactoryClassName="CommitWireViewFactory"
@@ -1434,7 +1435,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4026"
+          visualID="106008"
           editPartClassName="CommitWireNameEditPart"
           itemSemanticEditPolicyClassName="CommitWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="CommitWireNameViewFactory"
@@ -1457,7 +1458,7 @@
       </labels>
     </links>
     <links
-        visualID="3009"
+        visualID="104009"
         editPartClassName="ConditionWireEditPart"
         itemSemanticEditPolicyClassName="ConditionWireItemSemanticEditPolicy"
         notationViewFactoryClassName="ConditionWireViewFactory"
@@ -1496,7 +1497,7 @@
             href="iaml.genmodel#//model/WireEdge/to"/>
       </modelFacet>
       <labels
-          visualID="4027"
+          visualID="106009"
           editPartClassName="ConditionWireNameEditPart"
           itemSemanticEditPolicyClassName="ConditionWireNameItemSemanticEditPolicy"
           notationViewFactoryClassName="ConditionWireNameViewFactory"

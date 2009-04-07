@@ -1,0 +1,23 @@
+/**
+ * We extend plugin.xml to automatically provide a SharedEditingDomain.
+ * Based on http://wiki.eclipse.org/index.php/GMF_Tips#Sharing_single_EditingDomain_instance_across_several_diagrams
+ */
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
+«EXTENSION xpt::editor::Utils»
+«EXTENSION xpt::GenEditorGenerator»
+
+/**
+ * "Declare EditingDomain with the shared EditingDomain ID (see step 5.) inside plugin.xml for generated for diagram1."
+ */
+«AROUND additions FOR gmfgen::GenPlugin-»
+	«IF editorGen.modelID=="Iaml"»
+   <extension
+         point="org.eclipse.emf.transaction.editingDomains">
+      <editingDomain
+            factory="org.eclipse.emf.workspace.WorkspaceEditingDomainFactory"
+            id="«editorGen.diagram.editingDomainID»"/>
+   </extension>
+	«ENDIF»
+«ENDAROUND»

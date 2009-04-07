@@ -1,0 +1,26 @@
+
+/** 
+ * this: 
+ * 1. replaces the page iaml.XXX.DiagramElement with iaml.DiagramElement;
+ * 2. removes the first two numbers from the Element number, so Operation_102001 becomes Operation_2001
+ */
+replaceWithSharedID(String uniqueID) :
+	uniqueID.replaceAll("org.openiaml.model.diagram.([a-z]+).", "org.openiaml.model.diagram.")
+		.removeSharedID();
+
+/* takes 'foo.X_123456' and returns '123456'. */
+getSharedID(String x) :
+	x.replaceAll("[^0-9]", "");
+//	x.toString().substring(x.length() - 6, 6);
+// this code doesn't work. complains with "Couldn't find operation 'substring(EInt,EInt)' for EString"
+	
+/* takes 'foo.X_123456' and returns 'foo.X_'. */
+getPackageName(String x) :
+	x.replaceAll("[0-9]", "");
+//	x.toString().substring(0, x.length() - 8);
+
+/* takes 'foo.X_123456' and returns 'foo.X_3456'. */
+removeSharedID(String x) :
+	getPackageName(x) + getSharedID(x).replaceFirst("[0-9]", "").replaceFirst("[0-9]", "");
+		// can't use substring() here either
+		

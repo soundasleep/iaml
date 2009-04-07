@@ -154,12 +154,12 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQueryEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQuery2EditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQueryEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -189,6 +189,43 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
       </contributionItemProvider>
+   </extension>
+
+   <extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="org.openiaml.model.model.diagram.visual.providers.IamlValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.visual.providers.IamlMarkerNavigationProvider">
+         <MarkerType name="org.openiaml.model.diagram.visual.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Iaml Plugin (Visual) problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.visual.providers.IamlValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
    </extension>
 
    <extension point="org.eclipse.core.runtime.preferences">
@@ -336,306 +373,425 @@
       </ParserProvider>
    </extension>
 
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.visual.providers.IamlShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+      </decoratorProvider>
+   </extension>
+
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model">
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.VisibleThing_79"
-               name="%metatype.name.VisibleThing_79"
+               id="org.openiaml.model.diagram.visual.VisibleThing_1001"
+               name="%metatype.name.VisibleThing_1001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="VisibleThing"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.VisibleThingEditHelper">
-            <param name="semanticHint" value="79"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.EventTrigger_1001"
-               name="%metatype.name.EventTrigger_1001"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="EventTrigger"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.EventTriggerEditHelper">
             <param name="semanticHint" value="1001"/>
          </metamodelType>
       </metamodel>
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.SingleOperation_1002"
-               name="%metatype.name.SingleOperation_1002"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.EventTrigger_102001"
+               name="%metatype.name.EventTrigger_102001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="SingleOperation"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.SingleOperationEditHelper">
-            <param name="semanticHint" value="1002"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.EventTrigger_2001"/>
+            <param name="semanticHint" value="102001"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.CompositeOperation_1003"
-               name="%metatype.name.CompositeOperation_1003"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.SingleOperation_102002"
+               name="%metatype.name.SingleOperation_102002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="CompositeOperation"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.CompositeOperationEditHelper">
-            <param name="semanticHint" value="1003"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.SingleOperation_2002"/>
+            <param name="semanticHint" value="102002"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.ChainedOperation_1004"
-               name="%metatype.name.ChainedOperation_1004"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.CompositeOperation_102003"
+               name="%metatype.name.CompositeOperation_102003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ChainedOperationEditHelper">
-            <param name="semanticHint" value="1004"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.CompositeOperation_2003"/>
+            <param name="semanticHint" value="102003"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.DomainObject_1005"
-               name="%metatype.name.DomainObject_1005"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.ChainedOperation_102004"
+               name="%metatype.name.ChainedOperation_102004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="DomainObject"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainObjectEditHelper">
-            <param name="semanticHint" value="1005"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.ChainedOperation_2004"/>
+            <param name="semanticHint" value="102004"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.DomainAttribute_1006"
-               name="%metatype.name.DomainAttribute_1006"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.DomainObject_102005"
+               name="%metatype.name.DomainObject_102005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="DomainAttribute"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainAttributeEditHelper">
-            <param name="semanticHint" value="1006"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.DomainObject_2005"/>
+            <param name="semanticHint" value="102005"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.ApplicationElementProperty_1007"
-               name="%metatype.name.ApplicationElementProperty_1007"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.DomainAttribute_102006"
+               name="%metatype.name.DomainAttribute_102006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ApplicationElementPropertyEditHelper">
-            <param name="semanticHint" value="1007"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.DomainAttribute_2006"/>
+            <param name="semanticHint" value="102006"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+      <metamodel nsURI="http://openiaml.org/model">
+         <specializationType
+               id="org.openiaml.model.diagram.visual.ApplicationElementProperty_102007"
+               name="%metatype.name.ApplicationElementProperty_102007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.ApplicationElementProperty_2007"/>
+            <param name="semanticHint" value="102007"/>
+         </specializationType>
+      </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/visual">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.Page_1008"
-               name="%metatype.name.Page_1008"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.Page_102008"
+               name="%metatype.name.Page_102008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="Page"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.PageEditHelper">
-            <param name="semanticHint" value="1008"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.Page_2008"/>
+            <param name="semanticHint" value="102008"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/visual">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.InputForm_1009"
-               name="%metatype.name.InputForm_1009"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.InputForm_102009"
+               name="%metatype.name.InputForm_102009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="InputForm"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.InputFormEditHelper">
-            <param name="semanticHint" value="1009"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.InputForm_2009"/>
+            <param name="semanticHint" value="102009"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/visual">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.InputTextField_1010"
-               name="%metatype.name.InputTextField_1010"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.InputTextField_102010"
+               name="%metatype.name.InputTextField_102010"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="InputTextField"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.InputTextFieldEditHelper">
-            <param name="semanticHint" value="1010"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.InputTextField_2010"/>
+            <param name="semanticHint" value="102010"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.StaticValue_1011"
-               name="%metatype.name.StaticValue_1011"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.StaticValue_102011"
+               name="%metatype.name.StaticValue_102011"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="StaticValue"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.StaticValueEditHelper">
-            <param name="semanticHint" value="1011"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.StaticValue_2011"/>
+            <param name="semanticHint" value="102011"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/scopes">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.Session_1012"
-               name="%metatype.name.Session_1012"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.Session_102012"
+               name="%metatype.name.Session_102012"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="Session"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.SessionEditHelper">
-            <param name="semanticHint" value="1012"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.Session_2012"/>
+            <param name="semanticHint" value="102012"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/components">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.LoginHandler_1013"
-               name="%metatype.name.LoginHandler_1013"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.LoginHandler_102013"
+               name="%metatype.name.LoginHandler_102013"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="LoginHandler"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.LoginHandlerEditHelper">
-            <param name="semanticHint" value="1013"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.LoginHandler_2013"/>
+            <param name="semanticHint" value="102013"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/domain">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.FileDomainObject_1014"
-               name="%metatype.name.FileDomainObject_1014"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.FileDomainObject_102014"
+               name="%metatype.name.FileDomainObject_102014"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FileDomainObject"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FileDomainObjectEditHelper">
-            <param name="semanticHint" value="1014"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.FileDomainObject_2014"/>
+            <param name="semanticHint" value="102014"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/domain">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.FileDomainAttribute_1015"
-               name="%metatype.name.FileDomainAttribute_1015"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.FileDomainAttribute_102015"
+               name="%metatype.name.FileDomainAttribute_102015"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FileDomainAttribute"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FileDomainAttributeEditHelper">
-            <param name="semanticHint" value="1015"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.FileDomainAttribute_2015"/>
+            <param name="semanticHint" value="102015"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.CompositeCondition_1016"
-               name="%metatype.name.CompositeCondition_1016"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.CompositeCondition_102016"
+               name="%metatype.name.CompositeCondition_102016"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="CompositeCondition"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.CompositeConditionEditHelper">
-            <param name="semanticHint" value="1016"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.CompositeCondition_2016"/>
+            <param name="semanticHint" value="102016"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.SyncWire_3001"
-               name="%metatype.name.SyncWire_3001"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.SyncWire_104001"
+               name="%metatype.name.SyncWire_104001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="SyncWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.SyncWireEditHelper">
-            <param name="semanticHint" value="3001"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.SyncWire_4001"/>
+            <param name="semanticHint" value="104001"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.RunInstanceWire_3002"
-               name="%metatype.name.RunInstanceWire_3002"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.RunInstanceWire_104002"
+               name="%metatype.name.RunInstanceWire_104002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.RunInstanceWireEditHelper">
-            <param name="semanticHint" value="3002"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.RunInstanceWire_4002"/>
+            <param name="semanticHint" value="104002"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.ParameterWire_3003"
-               name="%metatype.name.ParameterWire_3003"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.ParameterWire_104003"
+               name="%metatype.name.ParameterWire_104003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ParameterWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ParameterWireEditHelper">
-            <param name="semanticHint" value="3003"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.ParameterWire_4003"/>
+            <param name="semanticHint" value="104003"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.FilterWire_3004"
-               name="%metatype.name.FilterWire_3004"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.FilterWire_104004"
+               name="%metatype.name.FilterWire_104004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FilterWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FilterWireEditHelper">
-            <param name="semanticHint" value="3004"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.FilterWire_4004"/>
+            <param name="semanticHint" value="104004"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.FindWire_3005"
-               name="%metatype.name.FindWire_3005"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.FindWire_104005"
+               name="%metatype.name.FindWire_104005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FindWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FindWireEditHelper">
-            <param name="semanticHint" value="3005"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.FindWire_4005"/>
+            <param name="semanticHint" value="104005"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.ShowWire_3006"
-               name="%metatype.name.ShowWire_3006"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.ShowWire_104006"
+               name="%metatype.name.ShowWire_104006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ShowWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ShowWireEditHelper">
-            <param name="semanticHint" value="3006"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.ShowWire_4006"/>
+            <param name="semanticHint" value="104006"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.NavigateWire_3007"
-               name="%metatype.name.NavigateWire_3007"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.NavigateWire_104007"
+               name="%metatype.name.NavigateWire_104007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="NavigateWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.NavigateWireEditHelper">
-            <param name="semanticHint" value="3007"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.NavigateWire_4007"/>
+            <param name="semanticHint" value="104007"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.CommitWire_3008"
-               name="%metatype.name.CommitWire_3008"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.CommitWire_104008"
+               name="%metatype.name.CommitWire_104008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="CommitWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.CommitWireEditHelper">
-            <param name="semanticHint" value="3008"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.CommitWire_4008"/>
+            <param name="semanticHint" value="104008"/>
+         </specializationType>
       </metamodel>
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
       <metamodel nsURI="http://openiaml.org/model/wires">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.ConditionWire_3009"
-               name="%metatype.name.ConditionWire_3009"
+         <specializationType
+               id="org.openiaml.model.diagram.visual.ConditionWire_104009"
+               name="%metatype.name.ConditionWire_104009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ConditionWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ConditionWireEditHelper">
-            <param name="semanticHint" value="3009"/>
-         </metamodelType>
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="org.openiaml.model.diagram.ConditionWire_4009"/>
+            <param name="semanticHint" value="104009"/>
+         </specializationType>
       </metamodel>
+	
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
       <?gmfgen generated="true"?>
-      <clientContext id="Iaml_VisualClientContext">
+      <!-- force all contexts to Iaml: SharedEditingDomain -->
+      <clientContext id="IamlClientContext">
          <enablement>
             <test
                property="org.eclipse.gmf.runtime.emf.core.editingDomain"
-               value="org.openiaml.model.diagram.visual.EditingDomain"/>
+               value="org.openiaml.model.diagram.SharedEditingDomain"/>
          </enablement>
       </clientContext> 
-      <binding context="Iaml_VisualClientContext">
-         <elementType ref="org.openiaml.model.diagram.visual.VisibleThing_79"/>
-         <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_1001"/>
-         <elementType ref="org.openiaml.model.diagram.visual.SingleOperation_1002"/>
-         <elementType ref="org.openiaml.model.diagram.visual.CompositeOperation_1003"/>
-         <elementType ref="org.openiaml.model.diagram.visual.ChainedOperation_1004"/>
-         <elementType ref="org.openiaml.model.diagram.visual.DomainObject_1005"/>
-         <elementType ref="org.openiaml.model.diagram.visual.DomainAttribute_1006"/>
-         <elementType ref="org.openiaml.model.diagram.visual.ApplicationElementProperty_1007"/>
-         <elementType ref="org.openiaml.model.diagram.visual.Page_1008"/>
-         <elementType ref="org.openiaml.model.diagram.visual.InputForm_1009"/>
-         <elementType ref="org.openiaml.model.diagram.visual.InputTextField_1010"/>
-         <elementType ref="org.openiaml.model.diagram.visual.StaticValue_1011"/>
-         <elementType ref="org.openiaml.model.diagram.visual.Session_1012"/>
-         <elementType ref="org.openiaml.model.diagram.visual.LoginHandler_1013"/>
-         <elementType ref="org.openiaml.model.diagram.visual.FileDomainObject_1014"/>
-         <elementType ref="org.openiaml.model.diagram.visual.FileDomainAttribute_1015"/>
-         <elementType ref="org.openiaml.model.diagram.visual.CompositeCondition_1016"/>
-         <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
-         <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
-         <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>
-         <elementType ref="org.openiaml.model.diagram.visual.FilterWire_3004"/>
-         <elementType ref="org.openiaml.model.diagram.visual.FindWire_3005"/>
-         <elementType ref="org.openiaml.model.diagram.visual.ShowWire_3006"/>
-         <elementType ref="org.openiaml.model.diagram.visual.NavigateWire_3007"/>
-         <elementType ref="org.openiaml.model.diagram.visual.CommitWire_3008"/>
-         <elementType ref="org.openiaml.model.diagram.visual.ConditionWire_3009"/>
+      <!-- force all contexts to Iaml: SharedEditingDomain -->
+      <binding context="IamlClientContext">
+         <elementType ref="org.openiaml.model.diagram.visual.VisibleThing_1001"/>
+         <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_102001"/>
+         <elementType ref="org.openiaml.model.diagram.visual.SingleOperation_102002"/>
+         <elementType ref="org.openiaml.model.diagram.visual.CompositeOperation_102003"/>
+         <elementType ref="org.openiaml.model.diagram.visual.ChainedOperation_102004"/>
+         <elementType ref="org.openiaml.model.diagram.visual.DomainObject_102005"/>
+         <elementType ref="org.openiaml.model.diagram.visual.DomainAttribute_102006"/>
+         <elementType ref="org.openiaml.model.diagram.visual.ApplicationElementProperty_102007"/>
+         <elementType ref="org.openiaml.model.diagram.visual.Page_102008"/>
+         <elementType ref="org.openiaml.model.diagram.visual.InputForm_102009"/>
+         <elementType ref="org.openiaml.model.diagram.visual.InputTextField_102010"/>
+         <elementType ref="org.openiaml.model.diagram.visual.StaticValue_102011"/>
+         <elementType ref="org.openiaml.model.diagram.visual.Session_102012"/>
+         <elementType ref="org.openiaml.model.diagram.visual.LoginHandler_102013"/>
+         <elementType ref="org.openiaml.model.diagram.visual.FileDomainObject_102014"/>
+         <elementType ref="org.openiaml.model.diagram.visual.FileDomainAttribute_102015"/>
+         <elementType ref="org.openiaml.model.diagram.visual.CompositeCondition_102016"/>
+         <elementType ref="org.openiaml.model.diagram.visual.SyncWire_104001"/>
+         <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_104002"/>
+         <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_104003"/>
+         <elementType ref="org.openiaml.model.diagram.visual.FilterWire_104004"/>
+         <elementType ref="org.openiaml.model.diagram.visual.FindWire_104005"/>
+         <elementType ref="org.openiaml.model.diagram.visual.ShowWire_104006"/>
+         <elementType ref="org.openiaml.model.diagram.visual.NavigateWire_104007"/>
+         <elementType ref="org.openiaml.model.diagram.visual.CommitWire_104008"/>
+         <elementType ref="org.openiaml.model.diagram.visual.ConditionWire_104009"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>
@@ -767,47 +923,6 @@
          contextId="org.openiaml.model.model.diagram.visual.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
-   </extension><extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
-      <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.visual.providers.IamlValidationDecoratorProvider">
-         <Priority name="Lowest"/>
-         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
-         <context decoratorTargets="PRIMARY_VIEW"/>
-      </decoratorProvider>
    </extension>
-<extension id="ValidationContributionItemProvider" name="Validation"
-      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
-      <?gmfgen generated="true"?>
-      <contributionItemProvider
-         class="org.openiaml.model.model.diagram.visual.providers.IamlValidationProvider">
-         <Priority name="Low"/>
-         <partContribution id="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID">
-            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
-            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
-         </partContribution>
-      </contributionItemProvider>
-   </extension>
-<extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
-      <?gmfgen generated="true"?>
-      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.visual.providers.IamlMarkerNavigationProvider">
-         <MarkerType name="org.openiaml.model.diagram.visual.diagnostic"/>
-         <Priority name="Lowest"/>
-      </MarkerNavigationProvider>
-   </extension>
-<extension id="diagnostic" name="Iaml Plugin (Visual) problems" point="org.eclipse.core.resources.markers">
-      <?gmfgen generated="true"?>
-      <super type="org.eclipse.core.resources.problemmarker"/>
-      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
-      <persistent value="true"/>
-   </extension>
-<extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
-      <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.visual.providers.IamlShortcutsDecoratorProvider">
-         <Priority name="Lowest"/>
-      </decoratorProvider>
-   </extension>
-
-
-
-
+	
 </plugin>

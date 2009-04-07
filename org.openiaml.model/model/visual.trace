@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace:TraceModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:trace="http://www.eclipse.org/gmf/2006/Trace">
+  <nodeTraces
+      visualID="102001"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'EventTrigger') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ContainsEventTriggers') and _containmentMF_.name = 'eventTriggers')">
+    <nodeLabelTraces
+        visualID="105001"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102002"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'SingleOperation') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ContainsOperations') and _containmentMF_.name = 'operations')">
+    <nodeLabelTraces
+        visualID="105002"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102003"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'CompositeOperation') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ContainsOperations') and _containmentMF_.name = 'operations')">
+    <nodeLabelTraces
+        visualID="105003"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102004"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ChainedOperation') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ContainsOperations') and _containmentMF_.name = 'operations')">
+    <nodeLabelTraces
+        visualID="105004"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102005"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'DomainObject') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementContainer') and _containmentMF_.name = 'children')">
+    <nodeLabelTraces
+        visualID="105005"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102006"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'DomainAttribute') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementContainer') and _containmentMF_.name = 'children')">
+    <nodeLabelTraces
+        visualID="105006"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102007"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementProperty') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElement') and _containmentMF_.name = 'properties')">
+    <nodeLabelTraces
+        visualID="105007"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102008"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/visual' and _eClass_.name = 'Page') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementContainer') and _containmentMF_.name = 'children')">
+    <nodeLabelTraces
+        visualID="105008"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102009"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/visual' and _eClass_.name = 'InputForm') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementContainer') and _containmentMF_.name = 'children')">
+    <nodeLabelTraces
+        visualID="105009"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102010"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/visual' and _eClass_.name = 'InputTextField') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementContainer') and _containmentMF_.name = 'children')">
+    <nodeLabelTraces
+        visualID="105010"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102011"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'StaticValue') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElement') and _containmentMF_.name = 'values')">
+    <nodeLabelTraces
+        visualID="105011"
+        queryText="true"/>
+    <nodeLabelTraces
+        visualID="105012"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102012"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/scopes' and _eClass_.name = 'Session') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'VisibleThing') and _containmentMF_.name = 'sessions')">
+    <nodeLabelTraces
+        visualID="105013"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102013"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/components' and _eClass_.name = 'LoginHandler') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementContainer') and _containmentMF_.name = 'children')">
+    <nodeLabelTraces
+        visualID="105014"
+        queryText="true"/>
+    <nodeLabelTraces
+        visualID="105015"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102014"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/domain' and _eClass_.name = 'FileDomainObject') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementContainer') and _containmentMF_.name = 'children')">
+    <nodeLabelTraces
+        visualID="105016"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102015"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/domain' and _eClass_.name = 'FileDomainAttribute') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ApplicationElementContainer') and _containmentMF_.name = 'children')">
+    <nodeLabelTraces
+        visualID="105017"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="102016"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'CompositeCondition') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model' and _eClass_.name = 'ContainsConditions') and _containmentMF_.name = 'conditions')">
+    <nodeLabelTraces
+        visualID="105018"
+        queryText="true"/>
+  </nodeTraces>
+  <linkTraces
+      visualID="104001"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'SyncWire')">
+    <linkLabelTraces
+        visualID="106001"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="104002"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'RunInstanceWire')">
+    <linkLabelTraces
+        visualID="106002"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="104003"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'ParameterWire')"/>
+  <linkTraces
+      visualID="104004"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'FilterWire')">
+    <linkLabelTraces
+        visualID="106003"
+        queryText="true"/>
+    <linkLabelTraces
+        visualID="106004"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="104005"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'FindWire')">
+    <linkLabelTraces
+        visualID="106005"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="104006"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'ShowWire')">
+    <linkLabelTraces
+        visualID="106006"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="104007"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'NavigateWire')">
+    <linkLabelTraces
+        visualID="106007"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="104008"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'CommitWire')">
+    <linkLabelTraces
+        visualID="106008"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="104009"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://openiaml.org/model/wires' and _eClass_.name = 'ConditionWire')">
+    <linkLabelTraces
+        visualID="106009"
+        queryText="true"/>
+  </linkTraces>
+</trace:TraceModel>

@@ -1,0 +1,116 @@
+/**
+ * We extend plugin.xml to register SharedEditingDomains.
+ * Based on http://wiki.eclipse.org/index.php/GMF_Tips#Sharing_single_EditingDomain_instance_across_several_diagrams
+ */
+
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
+«EXTENSION xpt::diagram::Utils»
+«EXTENSION xpt::GenModelUtils»
+«EXTENSION MyUtils»
+
+/**
+ * Replace the elementType where necessary.
+ * "Only one metamodelType could be registered for each EClass in scope of one EditingDomain."
+ */
+«AROUND elementType FOR gmfgen::MetamodelType-»
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	«IF diagramElement.visualID < 100000»
+		«REM»use the original XML«ENDREM»
+		«targetDef.proceed()»
+	«ELSE»
+		«REM»replace with specialisation«ENDREM»
+      <metamodel nsURI="«getMetaClass().genPackage.ecorePackage.nsURI»">
+         <specializationType
+               id="«uniqueIdentifier»"
+«IF null != displayName-»
+               name="%metatype.name.«diagramElement.getUniqueIdentifier()»"
+«ENDIF-»
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               edithelper="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+            <specializes id="«replaceWithSharedID(uniqueIdentifier)»"/>
+            <param name="semanticHint" value="«diagramElement.visualID»"/>
+         </specializationType>
+      </metamodel>
+	«ENDIF»
+«ENDAROUND»
+
+/**
+ * We have to redefine the entire command.
+ */
+«AROUND extensions FOR gmfgen::GenDiagram-»
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
+      «EXPAND xpt::Common::xmlGeneratedTag»
+      <viewProvider class="«getNotationViewProviderQualifiedClassName()»">
+         <Priority name="«notationViewProviderPriority»"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="«editorGen.modelID»"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      «EXPAND xpt::Common::xmlGeneratedTag»
+      <editpartProvider class="«getEditPartProviderQualifiedClassName()»">
+         <Priority name="«editPartProviderPriority»"/>
+      </editpartProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
+      «EXPAND xpt::Common::xmlGeneratedTag»
+      <modelingAssistantProvider class="«getModelingAssistantProviderQualifiedClassName()»">
+         <Priority name="«modelingAssistantProviderPriority»"/>
+      </modelingAssistantProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
+      «EXPAND xpt::Common::xmlGeneratedTag»
+      <IconProvider class="«getIconProviderQualifiedClassName()»">
+         <Priority name="«iconProviderPriority»"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
+      «EXPAND xpt::Common::xmlGeneratedTag»
+      <ParserProvider class="«getParserProviderQualifiedClassName()»">
+         <Priority name="«parserProviderPriority»"/>
+      </ParserProvider>
+   </extension>
+«IF generateShortcutIcon()-»
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      «EXPAND xpt::Common::xmlGeneratedTag»
+      <decoratorProvider class="«getShortcutsDecoratorProviderQualifiedClassName()»">
+         <Priority name="«shortcutsDecoratorProviderPriority»"/>
+      </decoratorProvider>
+   </extension>
+«ENDIF-»
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
+      «EXPAND xpt::Common::xmlGeneratedTag»
+«FOREACH getElements() AS e-»
+«EXPAND xpt::providers::extensions::elementTypeSafe FOR e.elementType-»
+«ENDFOREACH-»
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
+      «EXPAND xpt::Common::xmlGeneratedTag»
+      <!-- force all contexts to Iaml: SharedEditingDomain -->
+      <clientContext id="IamlClientContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="«editingDomainID»"/>
+         </enablement>
+      </clientContext> 
+      <!-- force all contexts to Iaml: SharedEditingDomain -->
+      <binding context="IamlClientContext">
+«FOREACH getElements() AS e-»
+         <elementType ref="«e.elementType.uniqueIdentifier»"/>
+«ENDFOREACH-»
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+«ENDAROUND»

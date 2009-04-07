@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xsi:schemaLocation="http://openiaml.org/model/operations http://openiaml.org/model#//operations http://openiaml.org/model/visual http://openiaml.org/model#//visual http://openiaml.org/model/wires http://openiaml.org/model#//wires">
+  <notation:Diagram xmi:id="_YEu3kCNZEd6iQ6UPoTYDlA" type="Iaml" name="6-conditions.iaml_diagram" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_YZJoYCNZEd6iQ6UPoTYDlA" type="1006">
+      <children xmi:type="notation:Node" xmi:id="_YZcjUCNZEd6iQ6UPoTYDlA" type="4006"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_YZJoYSNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_YZJoYiNZEd6iQ6UPoTYDlA" diagramLink="_Y58BQCNZEd6iQ6UPoTYDlA" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:Page" href="6-conditions.iaml#visual.1207ff8316f.25"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YZJoYyNZEd6iQ6UPoTYDlA" x="241" y="201"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_YEu3kSNZEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml:InternetApplication" href="6-conditions.iaml#model.1207ff82f9b.28"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_Y58BQCNZEd6iQ6UPoTYDlA" type="Iaml_Visual" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_ZWsOsCNZEd6iQ6UPoTYDlA" type="1010">
+      <children xmi:type="notation:Node" xmi:id="_ZW_JoCNZEd6iQ6UPoTYDlA" type="4010"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_ZWsOsSNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_ZWsOsiNZEd6iQ6UPoTYDlA" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="6-conditions.iaml#visual.1207ff8316f.2b"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZWsOsyNZEd6iQ6UPoTYDlA" x="141" y="208"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_Z24KoCNZEd6iQ6UPoTYDlA" type="1010">
+      <children xmi:type="notation:Node" xmi:id="_Z24KpCNZEd6iQ6UPoTYDlA" type="4010"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_Z24KoSNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Z24KoiNZEd6iQ6UPoTYDlA" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="6-conditions.iaml#visual.1207ff8316f.2e"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Z24KoyNZEd6iQ6UPoTYDlA" x="317" y="211"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bKeggCNZEd6iQ6UPoTYDlA" type="1016">
+      <children xmi:type="notation:Node" xmi:id="_bK7McCNZEd6iQ6UPoTYDlA" type="4018"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_bKeggSNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_bKeggiNZEd6iQ6UPoTYDlA" diagramLink="_gORxkCNZEd6iQ6UPoTYDlA" hint="Iaml_Condition"/>
+      <element xmi:type="iaml:CompositeCondition" href="6-conditions.iaml#model.1207ff82f9b.3a"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bKoRgCNZEd6iQ6UPoTYDlA" x="216" y="84"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_Y58BQSNZEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml.visual:Page" href="6-conditions.iaml#visual.1207ff8316f.25"/>
+    <edges xmi:type="notation:Edge" xmi:id="_aXXBgCNZEd6iQ6UPoTYDlA" type="3001" source="_ZWsOsCNZEd6iQ6UPoTYDlA" target="_Z24KoCNZEd6iQ6UPoTYDlA">
+      <children xmi:type="notation:Node" xmi:id="_aXgygCNZEd6iQ6UPoTYDlA" type="4019">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_aXgygSNZEd6iQ6UPoTYDlA" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_aXXBgSNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_aXXBgiNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_aXXBgyNZEd6iQ6UPoTYDlA" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:SyncWire" href="6-conditions.iaml#wires.1207ff8322b.3"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_aXXBhCNZEd6iQ6UPoTYDlA" points="[24, 3, -152, 0]$[176, 3, 0, 0]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_czrS8CNZEd6iQ6UPoTYDlA" type="3009" source="_bKeggCNZEd6iQ6UPoTYDlA" target="_aXXBgCNZEd6iQ6UPoTYDlA">
+      <children xmi:type="notation:Node" xmi:id="_cz1D8CNZEd6iQ6UPoTYDlA" type="4027">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cz1D8SNZEd6iQ6UPoTYDlA" y="40"/>
+      </children>
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_czrS8SNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_czrS8iNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_czrS8yNZEd6iQ6UPoTYDlA" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:ConditionWire" href="6-conditions.iaml#wires.1207ff8322b.5"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_czrS9CNZEd6iQ6UPoTYDlA" points="[-4, 20, 3, -110]$[44, 130, 51, 0]"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_c1KgsCNZEd6iQ6UPoTYDlA" id="(0.6,0.20779221)"/>
+    </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_gORxkCNZEd6iQ6UPoTYDlA" type="Iaml_Condition" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_gmuGwCNZEd6iQ6UPoTYDlA" type="1002">
+      <children xmi:type="notation:Node" xmi:id="_gnKysCNZEd6iQ6UPoTYDlA" type="4002"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_gmuGwSNZEd6iQ6UPoTYDlA"/>
+      <element xmi:type="iaml.operations:StartNode" href="6-conditions.iaml#operations.1207ff832b7.9"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gmuGwiNZEd6iQ6UPoTYDlA" x="240" y="156"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_g17AYCNZEd6iQ6UPoTYDlA" type="1003">
+      <children xmi:type="notation:Node" xmi:id="_g2EKUCNZEd6iQ6UPoTYDlA" type="4003"/>
+      <children xmi:type="notation:Node" xmi:id="_g2N7UCNZEd6iQ6UPoTYDlA" type="4004"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_g17AYSNZEd6iQ6UPoTYDlA"/>
+      <element xmi:type="iaml.operations:CancelNode" href="6-conditions.iaml#operations.1207ff832b7.b"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g17AYiNZEd6iQ6UPoTYDlA" x="220" y="294"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_gORxkSNZEd6iQ6UPoTYDlA"/>
+    <element xmi:type="iaml:CompositeCondition" href="6-conditions.iaml#model.1207ff82f9b.3a"/>
+    <edges xmi:type="notation:Edge" xmi:id="_hyt_0CNZEd6iQ6UPoTYDlA" type="3002" source="_gmuGwCNZEd6iQ6UPoTYDlA" target="_g17AYCNZEd6iQ6UPoTYDlA">
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_hyt_0SNZEd6iQ6UPoTYDlA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_hyt_0iNZEd6iQ6UPoTYDlA"/>
+      <element xmi:type="iaml:ExecutionEdge" href="6-conditions.iaml#model.1207ff82f9b.4d"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hyt_0yNZEd6iQ6UPoTYDlA" points="[-3, 20, 19, -126]$[-21, 126, 1, -20]"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>

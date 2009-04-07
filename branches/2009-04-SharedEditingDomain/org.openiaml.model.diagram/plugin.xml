@@ -161,6 +161,43 @@
       </contributionItemProvider>
    </extension>
 
+   <extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="org.openiaml.model.model.diagram.providers.IamlValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.providers.IamlMarkerNavigationProvider">
+         <MarkerType name="org.openiaml.model.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Iaml Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
    <extension point="org.eclipse.core.runtime.preferences">
       <?gmfgen generated="true"?>
       <initializer class="org.openiaml.model.model.diagram.preferences.DiagramPreferenceInitializer"/>
@@ -306,182 +343,1040 @@
       </ParserProvider>
    </extension>
 
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+      </decoratorProvider>
+   </extension>
+
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model">
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.InternetApplication_79"
-               name="%metatype.name.InternetApplication_79"
+               id="org.openiaml.model.diagram.InternetApplication_1000"
+               name="%metatype.name.InternetApplication_1000"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="InternetApplication"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.InternetApplicationEditHelper">
-            <param name="semanticHint" value="79"/>
+            <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.EventTrigger_1001"
-               name="%metatype.name.EventTrigger_1001"
+               id="org.openiaml.model.diagram.EventTrigger_2001"
+               name="%metatype.name.EventTrigger_2001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.EventTriggerEditHelper">
-            <param name="semanticHint" value="1001"/>
+            <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.SingleOperation_1002"
-               name="%metatype.name.SingleOperation_1002"
+               id="org.openiaml.model.diagram.SingleOperation_2002"
+               name="%metatype.name.SingleOperation_2002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SingleOperation"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.SingleOperationEditHelper">
-            <param name="semanticHint" value="1002"/>
+            <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.CompositeOperation_1003"
-               name="%metatype.name.CompositeOperation_1003"
+               id="org.openiaml.model.diagram.CompositeOperation_2003"
+               name="%metatype.name.CompositeOperation_2003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeOperation"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.CompositeOperationEditHelper">
-            <param name="semanticHint" value="1003"/>
+            <param name="semanticHint" value="2003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.ChainedOperation_1004"
-               name="%metatype.name.ChainedOperation_1004"
+               id="org.openiaml.model.diagram.ChainedOperation_2004"
+               name="%metatype.name.ChainedOperation_2004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ChainedOperation"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.ChainedOperationEditHelper">
-            <param name="semanticHint" value="1004"/>
+            <param name="semanticHint" value="2004"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.DomainObject_1005"
-               name="%metatype.name.DomainObject_1005"
+               id="org.openiaml.model.diagram.DomainObject_2005"
+               name="%metatype.name.DomainObject_2005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainObject"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.DomainObjectEditHelper">
-            <param name="semanticHint" value="1005"/>
+            <param name="semanticHint" value="2005"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/visual">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
-               id="org.openiaml.model.diagram.Page_1006"
-               name="%metatype.name.Page_1006"
+               id="org.openiaml.model.diagram.Page_2008"
+               name="%metatype.name.Page_2008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Page"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.PageEditHelper">
-            <param name="semanticHint" value="1006"/>
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.ApplicationElementPropertyEditHelper">
+            <param name="semanticHint" value="2008"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.DynamicApplicationElementSet_1007"
-               name="%metatype.name.DynamicApplicationElementSet_1007"
+               id="org.openiaml.model.diagram.DynamicApplicationElementSet_2007"
+               name="%metatype.name.DynamicApplicationElementSet_2007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DynamicApplicationElementSet"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.DynamicApplicationElementSetEditHelper">
-            <param name="semanticHint" value="1007"/>
+            <param name="semanticHint" value="2007"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.ApplicationElementProperty_1008"
-               name="%metatype.name.ApplicationElementProperty_1008"
+               id="org.openiaml.model.diagram.ApplicationElementProperty_2006"
+               name="%metatype.name.ApplicationElementProperty_2006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.ApplicationElementPropertyEditHelper">
-            <param name="semanticHint" value="1008"/>
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.PageEditHelper">
+            <param name="semanticHint" value="2006"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.DomainStore_1009"
-               name="%metatype.name.DomainStore_1009"
+               id="org.openiaml.model.diagram.DomainStore_2009"
+               name="%metatype.name.DomainStore_2009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainStore"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.DomainStoreEditHelper">
-            <param name="semanticHint" value="1009"/>
+            <param name="semanticHint" value="2009"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/scopes">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model/scopes">
          <metamodelType
-               id="org.openiaml.model.diagram.Session_1010"
-               name="%metatype.name.Session_1010"
+               id="org.openiaml.model.diagram.Session_2010"
+               name="%metatype.name.Session_2010"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Session"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.SessionEditHelper">
-            <param name="semanticHint" value="1010"/>
+            <param name="semanticHint" value="2010"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/components">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model/components">
          <metamodelType
-               id="org.openiaml.model.diagram.LoginHandler_1011"
-               name="%metatype.name.LoginHandler_1011"
+               id="org.openiaml.model.diagram.LoginHandler_2011"
+               name="%metatype.name.LoginHandler_2011"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="LoginHandler"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.LoginHandlerEditHelper">
-            <param name="semanticHint" value="1011"/>
+            <param name="semanticHint" value="2011"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/domain">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model/domain">
          <metamodelType
-               id="org.openiaml.model.diagram.FileDomainStore_1012"
-               name="%metatype.name.FileDomainStore_1012"
+               id="org.openiaml.model.diagram.FileDomainStore_2012"
+               name="%metatype.name.FileDomainStore_2012"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="FileDomainStore"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.FileDomainStoreEditHelper">
-            <param name="semanticHint" value="1012"/>
+            <param name="semanticHint" value="2012"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model">
          <metamodelType
-               id="org.openiaml.model.diagram.CompositeCondition_1013"
-               name="%metatype.name.CompositeCondition_1013"
+               id="org.openiaml.model.diagram.CompositeCondition_2013"
+               name="%metatype.name.CompositeCondition_2013"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeCondition"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.CompositeConditionEditHelper">
-            <param name="semanticHint" value="1013"/>
+            <param name="semanticHint" value="2013"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/wires">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.SyncWire_3001"
-               name="%metatype.name.SyncWire_3001"
+               id="org.openiaml.model.diagram.SyncWire_4001"
+               name="%metatype.name.SyncWire_4001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SyncWire"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.SyncWireEditHelper">
-            <param name="semanticHint" value="3001"/>
+            <param name="semanticHint" value="4001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/wires">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.RunInstanceWire_3002"
-               name="%metatype.name.RunInstanceWire_3002"
+               id="org.openiaml.model.diagram.RunInstanceWire_4002"
+               name="%metatype.name.RunInstanceWire_4002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunInstanceWire"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.RunInstanceWireEditHelper">
-            <param name="semanticHint" value="3002"/>
+            <param name="semanticHint" value="4002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/wires">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+			<!-- switch metamodel types, since we are using SharedEditingDomains -->
+	
+		
+		      <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.ConditionWire_3003"
-               name="%metatype.name.ConditionWire_3003"
+               id="org.openiaml.model.diagram.ConditionWire_4003"
+               name="%metatype.name.ConditionWire_4003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ConditionWire"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.ConditionWireEditHelper">
-            <param name="semanticHint" value="3003"/>
+            <param name="semanticHint" value="4003"/>
          </metamodelType>
       </metamodel>
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
       <?gmfgen generated="true"?>
+      <!-- force all contexts to Iaml: SharedEditingDomain -->
       <clientContext id="IamlClientContext">
          <enablement>
             <test
@@ -489,24 +1384,25 @@
                value="org.openiaml.model.diagram.EditingDomain"/>
          </enablement>
       </clientContext> 
+      <!-- force all contexts to Iaml: SharedEditingDomain -->
       <binding context="IamlClientContext">
-         <elementType ref="org.openiaml.model.diagram.InternetApplication_79"/>
-         <elementType ref="org.openiaml.model.diagram.EventTrigger_1001"/>
-         <elementType ref="org.openiaml.model.diagram.SingleOperation_1002"/>
-         <elementType ref="org.openiaml.model.diagram.CompositeOperation_1003"/>
-         <elementType ref="org.openiaml.model.diagram.ChainedOperation_1004"/>
-         <elementType ref="org.openiaml.model.diagram.DomainObject_1005"/>
-         <elementType ref="org.openiaml.model.diagram.Page_1006"/>
-         <elementType ref="org.openiaml.model.diagram.DynamicApplicationElementSet_1007"/>
-         <elementType ref="org.openiaml.model.diagram.ApplicationElementProperty_1008"/>
-         <elementType ref="org.openiaml.model.diagram.DomainStore_1009"/>
-         <elementType ref="org.openiaml.model.diagram.Session_1010"/>
-         <elementType ref="org.openiaml.model.diagram.LoginHandler_1011"/>
-         <elementType ref="org.openiaml.model.diagram.FileDomainStore_1012"/>
-         <elementType ref="org.openiaml.model.diagram.CompositeCondition_1013"/>
-         <elementType ref="org.openiaml.model.diagram.SyncWire_3001"/>
-         <elementType ref="org.openiaml.model.diagram.RunInstanceWire_3002"/>
-         <elementType ref="org.openiaml.model.diagram.ConditionWire_3003"/>
+         <elementType ref="org.openiaml.model.diagram.InternetApplication_1000"/>
+         <elementType ref="org.openiaml.model.diagram.EventTrigger_2001"/>
+         <elementType ref="org.openiaml.model.diagram.SingleOperation_2002"/>
+         <elementType ref="org.openiaml.model.diagram.CompositeOperation_2003"/>
+         <elementType ref="org.openiaml.model.diagram.ChainedOperation_2004"/>
+         <elementType ref="org.openiaml.model.diagram.DomainObject_2005"/>
+         <elementType ref="org.openiaml.model.diagram.Page_2008"/>
+         <elementType ref="org.openiaml.model.diagram.DynamicApplicationElementSet_2007"/>
+         <elementType ref="org.openiaml.model.diagram.ApplicationElementProperty_2006"/>
+         <elementType ref="org.openiaml.model.diagram.DomainStore_2009"/>
+         <elementType ref="org.openiaml.model.diagram.Session_2010"/>
+         <elementType ref="org.openiaml.model.diagram.LoginHandler_2011"/>
+         <elementType ref="org.openiaml.model.diagram.FileDomainStore_2012"/>
+         <elementType ref="org.openiaml.model.diagram.CompositeCondition_2013"/>
+         <elementType ref="org.openiaml.model.diagram.SyncWire_4001"/>
+         <elementType ref="org.openiaml.model.diagram.RunInstanceWire_4002"/>
+         <elementType ref="org.openiaml.model.diagram.ConditionWire_4003"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>
@@ -529,6 +1425,17 @@
            namespace="org.openiaml.model.diagram"
            properties="isShortcut"
            class="org.openiaml.model.model.diagram.part.IamlShortcutPropertyTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.openiaml.model.diagram.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="org.openiaml.model.diagram"
+           properties="isDomainModelElement"
+           class="org.openiaml.model.model.diagram.part.IamlDomainModelElementTester">
        </propertyTester>
    </extension>
 
@@ -666,54 +1573,13 @@
          contextId="org.openiaml.model.model.diagram.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
-   </extension><extension id="ValidationContributionItemProvider" name="Validation"
-      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
-      <?gmfgen generated="true"?>
-      <contributionItemProvider
-         class="org.openiaml.model.model.diagram.providers.IamlValidationProvider">
-         <Priority name="Low"/>
-         <partContribution id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID">
-            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
-            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
-         </partContribution>
-      </contributionItemProvider>
    </extension>
-<extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
-      <?gmfgen generated="true"?>
-      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.providers.IamlMarkerNavigationProvider">
-         <MarkerType name="org.openiaml.model.diagram.diagnostic"/>
-         <Priority name="Lowest"/>
-      </MarkerNavigationProvider>
+	
+   <extension
+         point="org.eclipse.emf.transaction.editingDomains">
+      <editingDomain
+            factory="org.eclipse.emf.workspace.WorkspaceEditingDomainFactory"
+            id="org.openiaml.model.diagram.SharedEditingDomain"/>
    </extension>
-<extension id="diagnostic" name="Iaml Plugin problems" point="org.eclipse.core.resources.markers">
-      <?gmfgen generated="true"?>
-      <super type="org.eclipse.core.resources.problemmarker"/>
-      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
-      <persistent value="true"/>
-   </extension>
-<extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
-      <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlValidationDecoratorProvider">
-         <Priority name="Lowest"/>
-         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
-         <context decoratorTargets="PRIMARY_VIEW"/>
-      </decoratorProvider>
-   </extension>
-<extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
-      <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlShortcutsDecoratorProvider">
-         <Priority name="Lowest"/>
-      </decoratorProvider>
-   </extension>
-<extension point="org.eclipse.core.expressions.propertyTesters">
-      <?gmfgen generated="true"?>
-       <propertyTester
-           id="org.openiaml.model.diagram.DomainModelElementPropertyTester"
-           type="org.eclipse.emf.ecore.EObject"
-           namespace="org.openiaml.model.diagram"
-           properties="isDomainModelElement"
-           class="org.openiaml.model.model.diagram.part.IamlDomainModelElementTester">
-       </propertyTester>
-   </extension>
-
+	
 </plugin>

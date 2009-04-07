@@ -6,8 +6,6 @@ package org.openiaml.model.tests.codegen;
 import java.util.Date;
 import java.util.Random;
 
-import junit.framework.AssertionFailedError;
-
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;

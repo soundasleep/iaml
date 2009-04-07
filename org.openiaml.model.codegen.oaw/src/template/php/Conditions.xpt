@@ -48,7 +48,7 @@
 «ENDDEFINE»
 
 «DEFINE expandParameters FOR model::Parameter-»
-	«safeName()-»
+	$«safeName()-»
 «ENDDEFINE»
 
 /* I don't know how in JS we are supposed to handle multiple out edges yet... but we'll get there ;) */
@@ -111,7 +111,7 @@
 «ENDDEFINE»
 
 «DEFINE inflowTarget FOR model::Parameter»
-	«safeName()»
+	$«safeName()»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

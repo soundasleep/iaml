@@ -31,9 +31,12 @@ $url = get_request_base() . "/" . $existing_pages[$container]
 log_message("Remote call to: $url");
 
 $result = file_get_contents($url);
-//if (trim($result) != "ok") {
-	throw new IamlRuntimeException("Remote call to '$url' failed.", $result); 
-//}
+if (strpos(strtolower($result), "Fatal error") !== false) {
+	throw new IamlRuntimeException("Remote call to '$url' failed: Fatal error.", $result);
+} 
+if (strpos(strtolower($result), "Warning") !== false) {
+	throw new IamlRuntimeException("Remote call to '$url' failed: Warning.", $result);
+} 
 echo $result;
 
 log_message("call_remote_event.php complete");

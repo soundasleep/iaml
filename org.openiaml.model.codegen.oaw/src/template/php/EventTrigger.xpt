@@ -353,6 +353,17 @@
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
 
+/* we are in PHP mode. TODO document when we are switching in/out of it */
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::DynamicApplicationElementSet»
+	/* dynamic element set "«name-»" */
+	get_dynamic_elements_«safeName()-»()
+«ENDDEFINE»
+
+/* we are in PHP mode. TODO document when we are switching in/out of it */
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::visual::Page»
+	/* Page "«name-»" */
+	new Visual_Page("«id-»", "«name-»")
+«ENDDEFINE»
 
 «DEFINE exception FOR Object»
 «ENDDEFINE»

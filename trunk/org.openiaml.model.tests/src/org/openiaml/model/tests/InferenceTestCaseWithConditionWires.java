@@ -4,7 +4,6 @@
 package org.openiaml.model.tests;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +14,6 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;

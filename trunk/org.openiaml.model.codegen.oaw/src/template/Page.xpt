@@ -21,6 +21,12 @@
 		
 		// expand any operations (both in this page and in any surrounding scopes)
 		«EXPAND php::EventTrigger::expandOperations FOR this-»
+
+		// expand all conditions
+		«EXPAND php::Conditions::expandConditions  FOR this-»
+
+		// expand any dynamic element sources
+		«EXPAND php::DynamicElements::expandDynamicElements FOR this-»
 		
 		// allow remote execution of operations
 		if (require_get("operation", "")) {

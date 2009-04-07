@@ -5,30 +5,66 @@
 
 =Model 0.2=
 
-  * Model .ecore
-  * Inference tests
-  * Runtime tests
-  * Migration code
-
 =Introduction=
 
 This model version adds real support for persistency (Properties files and databases), support for sessions, and complex components for login/logout.
 
-The rest of the release provides more robust components, with model quality tests, release tests, and improved user interfaces with icons and breadcrumbs.
+It also finalises the implementation of the _initial requirements_ with example models that are used in inference, code generation and runtime tests, as documented below.
 
-In particular, the model should be able to support the following _initial requirements_ (each requires a link to a graphical representation, inference tests, and runtime tests):
-  # Form synchronisation
-  # Bidirectional wires
-  # Wire composition
-  # Static wire parameters
-  # Dynamic wire parameters
-  # Dynamic wire sources
-  # Operations
+The rest of the plugin adds [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/model/ModelTestsSuite.java?r=570 model quality tests], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/ReleaseTestsSuite.java?r=570 release quality tests], and improved user interfaces with [http://code.google.com/p/iaml/issues/detail?id=18 icons] and [http://code.google.com/p/iaml/issues/detail?id=17 breadcrumbs].
 
-=Elements=
+==Form synchronisation, bidirectional wires==
+|| *Description* || The value of elements (currently only text fields) will be synchronised whenever they are changed with elements connected by SyncWires. SyncWires are bidirectional. ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/1-sync_wires.iaml requirements/1-sync_wires.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/Requirement1SyncWires.java Requirement1SyncWires.java] ||
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/1-sync_wires-2.png
+
+==Static wire parameters==
+|| *Description* || Parameters can be provided to RunInstanceWires (which run operations when an event is triggered) that are static values. ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/2-static_params.iaml requirements/2-static_params.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/Requirement2StaticParams.java Requirement2StaticParams.java] ||
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/2-static_params-2.png
+
+==Dynamic wire parameters==
+|| *Description* || Parameters can be provided to RunInstanceWires (which run operations when an event is triggered) that are determined at runtime. In this case, the value of a text field (_fieldValue_). ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/3-dynamic_params.iaml requirements/3-dynamic_params.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/Requirement3DynamicParams.java Requirement3DynamicParams.java] ||
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/3-dynamic_params-2.png
+
+==Dynamic wire sources==
+|| *Description* || Parameters can be provided to RunInstanceWires (which run operations when an event is triggered) that are determined at runtime. In this case, the value of a text field (_fieldValue_). ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/4-dynamic_sources.iaml requirements/4-dynamic_sources.iaml] ||
+|| *Inference Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/Requirement4DynamicSources.java Requirement4DynamicSources.java] ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/Requirement4DynamicSources.java Requirement4DynamicSources.java] ||
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/4-dynamic_sources.png
+
+==Operations==
+|| *Description* || We can compose operations out of primitives similar to UML activity diagrams. ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/5-operations.iaml requirements/5-operations.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/Requirement5Operations.java Requirement5Operations.java] ||
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/5-operations-3.png
+
+==Simple conditions==
+|| *Description* || We can compose conditions out of primitives similar to UML activity diagrams. ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/6-conditions.iaml requirements/6-conditions.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/Requirement6Conditions.java Requirement6Conditions.java] ||
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/6-conditions-1.png http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/6-conditions-2.png
+
+=New Elements=
 
   * *Session*: an abstract representation of a "Session". Any ApplicationElementProperties stored in this session will not be available outside of the current user.
   * *AbstractDomainObject*: DomainObjects are abstracted away, and we now have DomainObject for SimpleDB databases, and FileDomainObject for .properties files.
   * *LoginHandler*: a component which deals with login/logout. Must be placed in a Session.
 
-(More accurate documentation on these elements is required.)
+These elements are all new elements introduced in Model 0.2, and will be documented (similarly to the initial requirements above) in [Model0_3 Model 0.3].

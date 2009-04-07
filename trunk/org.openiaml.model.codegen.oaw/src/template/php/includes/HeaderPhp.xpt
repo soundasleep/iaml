@@ -48,17 +48,32 @@ function require_get($var, $default = "") {
 	return isset($_GET[$var]) ? $_GET[$var] : $default;
 }
 
+/**
+ * If the current address is http://foo.com/foo/bar.php, we want to
+ * get out http://foo.com/foo
+ */
+function get_request_base() {
+	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
+}
+function get_baseurl() {
+	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
+}
+
 class IamlRuntimeException extends Exception {
-	public function __construct($message = "") {
+	var $more_info;
+	
+	public function __construct($message = "", $more_info = "") {
 		parent::__construct($message);
+		$this->more_info = $more_info;
 	} 
 }
 
 /**
- * Get a global application value stored in the database.
+ * Set a global application value stored in the database.
  */
 function get_application_value($id, $default) {
 	global $db;
+	$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
 	
 	// make sure the table is there
 	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
@@ -86,6 +101,68 @@ function get_application_value($id, $default) {
 	}	
 }
 
+/**
+ * Set a global application value stored in the database.
+ */
+function set_application_value($id, $value) {
+	global $db;
+	$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
+	
+	// make sure the table is there
+	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
+	if (!$s) {
+		// create the table
+		$q = $db->query("CREATE TABLE global_values (
+				id INTEGER PRIMARY KEY AUTOINCREMENT,
+				value_id VARCHAR(64) NOT NULL,
+				arg0 BLOB
+			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+		log_message("table for global_values created", false);
+	
+		// re-prepare
+		$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
+	}
+	
+	// execute the query with the parameter
+	$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
+	
+	// does anything exist?
+	if ($s->fetch()) {
+		// yes: update all existing
+		$s = $db->prepare("UPDATE global_values SET arg0=? WHERE value_id=?") or local_die("could not prepare update query: " . print_r($db->errorInfo(), true));
+		log_message("Updating existing: " . $id);
+	} else {
+		// no: insert new
+		$s = $db->prepare("INSERT INTO global_values (arg0, value_id) VALUES (?, ?)") or local_die("could not prepare insert query: " . print_r($db->errorInfo(), true));
+		log_message("Inserting new: " . $id);
+	}
+	
+	// update all existing
+	$s->execute(array($value, $id)) or local_die("could not execute query: " . print_r($db->errorInfo(), true));
+	
+	// done
+	$s = null;
+	
+	if (get_application_value($id, "not " . $value) != $value) {
+		throw new IamlRuntimeException("The application value '$id' was not saved (value='$value').");
+	}
+
+}
+
+function call_remote_event($container, $id, $arg0 = "", $arg1 = "") {
+	$url = get_request_base() . "/" . 'call_remote_event.php?container=' . urlencode($container) 
+		. '&operation_name=' . urlencode($id)
+		. '&arg0=' . urlencode($arg0)
+		. '&arg1=' . urlencode($arg1);
+	
+	// get all running functions
+	$url .= "&running=" . urlencode(implode(",", array_keys(get_running_functions())));
+	
+	log_message("[php side] calling remote url: $url");
+	$result = file_get_contents($url);
+	log_message("[php side] remote call to $url successful");
+}
+
 function escape_javascript_string($string) {
 	$string = htmlspecialchars($string);
 	$string = str_replace("\\", "\\\\", $string);
@@ -93,6 +170,27 @@ function escape_javascript_string($string) {
 	$string = str_replace("\r", "\\r", $string);
 	$string = str_replace("\t", "\\t", $string);
 	return $string;
+}
+
+/**
+ * For preventing infinite loops (hopefully)
+ */
+$running_functions = array();
+function add_running_function($function_id) {
+	global $running_functions;
+	$running_functions[$function_id] = true;
+}
+function remove_running_function($function_id) {
+	global $running_functions;
+	unset($running_functions[$function_id]);
+}
+function has_running_function($function_id) {
+	global $running_functions;
+	return isset($running_functions[$function_id]);
+}
+function get_running_functions() {
+	global $running_functions;
+	return $running_functions;
 }
 
 «ENDDEFINE»

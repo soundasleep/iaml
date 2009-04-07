@@ -83,7 +83,6 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 		setLabeledFormElementField(fieldID, testingText);
 		
 		// reload the page and make sure it's the same
-		// TODO add reloadPage() to JWebUnit
 		gotoSitemapThenPage(sitemap, "page");
 		assertLabeledFieldEquals(fieldID, testingText);
 		

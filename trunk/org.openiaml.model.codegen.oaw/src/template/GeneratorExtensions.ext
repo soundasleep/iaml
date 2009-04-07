@@ -134,7 +134,10 @@ model::DomainObject getDomainObject(model::DomainAttribute this) :
   additional event triggers? */
 shouldExpandEventTriggers(model::ChainedOperation this ) :
 	getOperationName( eContainer ) == "update";
-
+	
+shouldExpandEventTriggersServer(model::ChainedOperation this ) :
+	shouldExpandEventTriggers(this);
+	
 getOperationName(model::Operation this) :
 	name;
 getOperationName(emf::EObject this) :
@@ -166,6 +169,7 @@ model::InternetApplication getRoot(emf::EObject this) :
 model::InternetApplication getRoot(model::InternetApplication this) :
 	this;
 
+/** get all Conditions in the InternetApplication */
 cached List[model::Condition] getAllConditions(model::InternetApplication this) :
 	conditions.toSet().union( eAllContents.getAllConditions() ).reject( e | e == null );
 
@@ -175,6 +179,7 @@ cached List[model::Condition] getAllConditions(emf::EObject this) :
 cached List[model::Condition] getAllConditions(model::Condition this) :
 	this;
 
+/** get all Conditions in the InternetApplication */
 List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetApplication this) :
 	children.typeSelect( model::DynamicApplicationElementSet ).toSet()
 		.union( eAllContents.getAllDynamicElements() ).reject( e | e == null );
@@ -185,9 +190,10 @@ List[model::Condition] getAllDynamicElements(emf::EObject this) :
 List[model::Condition] getAllDynamicElements(model::DynamicApplicationElementSet this) :
 	this;
 
+/** find all actual matches for the given DynamicApplicationSet in a given root */
 List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
 	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);
-	
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

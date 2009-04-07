@@ -52,27 +52,6 @@ function store_event($page_id, $event_name, $arg0) {
 	return true;
 }
 
-function store_db($attribute_id, $arg0) {
-	global $trace;
-	// have we already called this store_event? if so, bail
-	if (in_array($attribute_id, $trace)) {
-		log_message("breaking out of possibly infinite store_db loop: $attribute_id");
-		return;
-	}
-	
-	/*
-	 * a simple solution (but not scalable TODO): create a new HTTP request to store the event.
-	 * a better solution is obiously to store the new event in this same page.
-	 */	
-	$url = get_baseurl() . "/store_db.php?attribute_id=".urlencode($attribute_id)."&arg0=".urlencode($arg0)."&trace=".urlencode(implode(",", $trace));
-	log_message("store_db.php calling $url");
-	$r = file_get_contents($url);
-	if ($r != "ok")
-		local_die("store_db failed: " + $r); 
-		
-	return true;
-}
-
 log_message("store_db.php? " . print_r($_GET, true));
 $attribute_id = $_GET["attribute_id"] or local_die("no attribute id");
 $arg0 = $_GET["arg0"] or local_die("no arg0");

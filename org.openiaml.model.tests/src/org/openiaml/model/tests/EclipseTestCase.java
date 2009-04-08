@@ -60,6 +60,13 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	}
 	
 	/**
+	 * When we close the test case, we should also close the project.
+	 */
+	public void tearDown() throws Exception {
+		project.close(monitor);
+	}
+	
+	/**
 	 * Make sure the Eclipse UI exists and is running.
 	 */
 	public void testRunning() {

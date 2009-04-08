@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import org.openiaml.model.tests.XmlTestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -279,6 +281,40 @@ public class PluginsTestCase extends XmlTestCase {
 		
 		// we should have checked at least one
 		assertTrue("We didn't check any OpenDiagramPolicies", checks != 0);
+	}
+	
+	/**
+	 * Make sure that plugin IDs are unique across all diagram editors.
+	 * 
+	 * @throws XPathExpressionException
+	 */
+	public void testGmfgenPluginIds() throws XPathExpressionException {
+		List<String> foundIDs = new ArrayList<String>();
+		
+		// now lets test each .gmfgen
+		for (String file : loadedGmfgens.keySet()) {
+			Document doc = loadedGmfgens.get(file);
+			String id = xpathFirst(doc, "//plugin").getAttribute("iD");
+			assertFalse(file + ": found a duplicate Plugin ID '" + id + "'", foundIDs.contains(id));
+			foundIDs.add(id);
+		}		
+	}
+	
+	/**
+	 * Make sure that plugin names are unique across all diagram editors.
+	 * 
+	 * @throws XPathExpressionException
+	 */
+	public void testGmfgenPluginNames() throws XPathExpressionException {
+		List<String> foundNames = new ArrayList<String>();
+		
+		// now lets test each .gmfgen
+		for (String file : loadedGmfgens.keySet()) {
+			Document doc = loadedGmfgens.get(file);
+			String name = xpathFirst(doc, "//plugin").getAttribute("name");
+			assertFalse(file + ": found a duplicate Plugin name '" + name + "'", foundNames.contains(name));
+			foundNames.add(name);
+		}		
 	}
 	
 }

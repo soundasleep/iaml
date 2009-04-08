@@ -26,7 +26,7 @@ import org.openiaml.model.tests.InferenceTestCaseWithConditionWires;
  * @author jmwright
  *
  */
-public class ConditionWireXpath2 extends InferenceTestCaseWithConditionWires {
+public class ConditionWireXpathThreePages extends InferenceTestCaseWithConditionWires {
 
   protected InternetApplication root;
   

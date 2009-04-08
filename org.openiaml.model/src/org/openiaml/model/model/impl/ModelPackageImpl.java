@@ -1127,6 +1127,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getGeneratedElement_GeneratedRule() {
+		return (EAttribute)generatedElementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getGeneratesElements() {
 		return generatesElementsEClass;
 	}
@@ -1508,6 +1517,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(generatedElementEClass, GENERATED_ELEMENT__GENERATED_BY);
 		createEAttribute(generatedElementEClass, GENERATED_ELEMENT__IS_GENERATED);
 		createEAttribute(generatedElementEClass, GENERATED_ELEMENT__ID);
+		createEAttribute(generatedElementEClass, GENERATED_ELEMENT__GENERATED_RULE);
 
 		generatesElementsEClass = createEClass(GENERATES_ELEMENTS);
 		createEReference(generatesElementsEClass, GENERATES_ELEMENTS__GENERATED_ELEMENTS);
@@ -1773,6 +1783,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getGeneratedElement_GeneratedBy(), this.getGeneratesElements(), this.getGeneratesElements_GeneratedElements(), "generatedBy", null, 0, 1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratedElement_IsGenerated(), ecorePackage.getEBoolean(), "isGenerated", null, 0, 1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratedElement_Id(), ecorePackage.getEString(), "id", null, 0, 1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeneratedElement_GeneratedRule(), ecorePackage.getEString(), "generatedRule", null, 0, 1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(generatesElementsEClass, GeneratesElements.class, "GeneratesElements", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGeneratesElements_GeneratedElements(), this.getGeneratedElement(), this.getGeneratedElement_GeneratedBy(), "generatedElements", null, 0, -1, GeneratesElements.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1917,6 +1928,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "comment", "classes that extend this SHOULDN\'T contain wires, but GMF\'s limitations require it (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=249717)"
+		   });		
+		addAnnotation
+		  (getGeneratedElement_GeneratedRule(), 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.2. used to register the source of the rule that created this element"
 		   });		
 		addAnnotation
 		  (derivedViewEClass, 

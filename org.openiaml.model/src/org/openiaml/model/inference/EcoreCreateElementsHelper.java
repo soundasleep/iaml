@@ -72,10 +72,21 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	 * @param fieldValue
 	 * @param by
 	 */
-	private void setGeneratedBy(GeneratedElement element,
+	public void setGeneratedBy(GeneratedElement element,
 			GeneratesElements by) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy(), by);
 		setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_IsGenerated(), true);
+	}
+	
+	/**
+	 * Sets the "generatedRule" property of a GeneratedElement.
+	 * 
+	 * @param element
+	 * @param ruleName
+	 * @throws InferenceException
+	 */
+	public void setGeneratedRule(GeneratedElement element, String ruleName) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_GeneratedRule(), ruleName);
 	}
 
 	public DomainStore generatedDomainStore(GeneratesElements by, InternetApplication container) throws InferenceException {

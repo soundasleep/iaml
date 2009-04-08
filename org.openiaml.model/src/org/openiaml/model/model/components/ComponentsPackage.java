@@ -109,6 +109,15 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__ID = ModelPackage.APPLICATION_ELEMENT_CONTAINER__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_HANDLER__GENERATED_RULE = ModelPackage.APPLICATION_ELEMENT_CONTAINER__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -99,6 +99,15 @@ public interface WiresPackage extends EPackage {
 	int SINGLE_WIRE__ID = ModelPackage.WIRE_EDGE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SINGLE_WIRE__GENERATED_RULE = ModelPackage.WIRE_EDGE__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -161,6 +170,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_WIRE__ID = ModelPackage.WIRE_EDGE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_WIRE__GENERATED_RULE = ModelPackage.WIRE_EDGE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -315,6 +333,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYNC_WIRE__ID = COMPOSITE_WIRE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -478,6 +505,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int RUN_INSTANCE_WIRE__ID = COMPOSITE_WIRE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_INSTANCE_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -652,6 +688,15 @@ public interface WiresPackage extends EPackage {
 	int PARAMETER_WIRE__ID = SINGLE_WIRE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_WIRE__GENERATED_RULE = SINGLE_WIRE__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -732,6 +777,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIND_WIRE__ID = COMPOSITE_WIRE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIND_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -888,6 +942,15 @@ public interface WiresPackage extends EPackage {
 	int SHOW_WIRE__ID = COMPOSITE_WIRE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHOW_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1040,6 +1103,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMMIT_WIRE__ID = COMPOSITE_WIRE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMIT_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -1196,6 +1268,15 @@ public interface WiresPackage extends EPackage {
 	int NAVIGATE_WIRE__ID = COMPOSITE_WIRE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATE_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1348,6 +1429,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILTER_WIRE__ID = COMPOSITE_WIRE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -1529,6 +1619,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONDITION_WIRE__ID = COMPOSITE_WIRE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.

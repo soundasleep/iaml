@@ -107,6 +107,15 @@ public interface VisualPackage extends EPackage {
 	int PAGE__ID = ModelPackage.VISIBLE_THING__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__GENERATED_RULE = ModelPackage.VISIBLE_THING__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -306,6 +315,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__ID = ModelPackage.VISIBLE_THING__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__GENERATED_RULE = ModelPackage.VISIBLE_THING__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -467,6 +485,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__ID = ModelPackage.VISIBLE_THING__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__GENERATED_RULE = ModelPackage.VISIBLE_THING__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -633,6 +660,15 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__ID = ModelPackage.VISIBLE_THING__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__GENERATED_RULE = ModelPackage.VISIBLE_THING__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -794,6 +830,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int FRAME__ID = ModelPackage.VISIBLE_THING__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__GENERATED_RULE = ModelPackage.VISIBLE_THING__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

@@ -98,6 +98,15 @@ public interface ScopesPackage extends EPackage {
 	int SESSION__ID = ModelPackage.NAMED_ELEMENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SESSION__GENERATED_RULE = ModelPackage.NAMED_ELEMENT__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

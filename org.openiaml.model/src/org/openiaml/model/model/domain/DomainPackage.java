@@ -119,13 +119,22 @@ public interface DomainPackage extends EPackage {
 	int ABSTRACT_DOMAIN_STORE__ID = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_STORE__GENERATED_RULE = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE__NAME = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 4;
+	int ABSTRACT_DOMAIN_STORE__NAME = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -134,7 +143,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE__WIRES = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
+	int ABSTRACT_DOMAIN_STORE__WIRES = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -143,7 +152,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE__GENERATED_ELEMENTS = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
+	int ABSTRACT_DOMAIN_STORE__GENERATED_ELEMENTS = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -152,7 +161,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE__OVERRIDDEN = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+	int ABSTRACT_DOMAIN_STORE__OVERRIDDEN = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -161,7 +170,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE__CHILDREN = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int ABSTRACT_DOMAIN_STORE__CHILDREN = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -170,7 +179,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE__PROPERTIES = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int ABSTRACT_DOMAIN_STORE__PROPERTIES = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Views</b></em>' reference list.
@@ -179,7 +188,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE__VIEWS = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int ABSTRACT_DOMAIN_STORE__VIEWS = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Domain Store</em>' class.
@@ -188,7 +197,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE_FEATURE_COUNT = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int ABSTRACT_DOMAIN_STORE_FEATURE_COUNT = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.domain.impl.AbstractDomainObjectImpl <em>Abstract Domain Object</em>}' class.
@@ -235,6 +244,15 @@ public interface DomainPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_DOMAIN_OBJECT__ID = ModelPackage.APPLICATION_ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_OBJECT__GENERATED_RULE = ModelPackage.APPLICATION_ELEMENT__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -391,6 +409,15 @@ public interface DomainPackage extends EPackage {
 	int ABSTRACT_DOMAIN_ATTRIBUTE__ID = ModelPackage.APPLICATION_ELEMENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_ATTRIBUTE__GENERATED_RULE = ModelPackage.APPLICATION_ELEMENT__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,6 +572,15 @@ public interface DomainPackage extends EPackage {
 	int FILE_DOMAIN_STORE__ID = ABSTRACT_DOMAIN_STORE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_DOMAIN_STORE__GENERATED_RULE = ABSTRACT_DOMAIN_STORE__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -670,6 +706,15 @@ public interface DomainPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_DOMAIN_OBJECT__ID = ABSTRACT_DOMAIN_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_DOMAIN_OBJECT__GENERATED_RULE = ABSTRACT_DOMAIN_OBJECT__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -824,6 +869,15 @@ public interface DomainPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_DOMAIN_ATTRIBUTE__ID = ABSTRACT_DOMAIN_ATTRIBUTE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_DOMAIN_ATTRIBUTE__GENERATED_RULE = ABSTRACT_DOMAIN_ATTRIBUTE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

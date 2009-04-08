@@ -38,6 +38,17 @@ public class CodegenTestCase extends InferenceTestCase {
 		return root;
 	}
 	
+	/**
+	 * When we close the test case, we should also close the project.
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		if (getProject() != null) {
+			getProject().close(monitor);
+		}
+		super.tearDown();
+	}
+
 	/** 
 	 * Have we loaded at least one page (so we can find an ajax_monitor if necessary)?
 	 */

@@ -27,8 +27,9 @@ public class InferenceTestsSuite {
         suite.addTestSuite(ConditionWireFalse.class);
         suite.addTestSuite(ConditionWireFalseServer.class);
         suite.addTestSuite(ConditionWireXpath.class);
-        suite.addTestSuite(ConditionWireXpath2.class);
+        suite.addTestSuite(ConditionWireXpathThreePages.class);
         suite.addTestSuite(Requirement4DynamicSources.class);
+        suite.addTestSuite(SavedRuleSources.class);
 		//$JUnit-END$
         return suite; 
    }

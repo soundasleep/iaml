@@ -3,14 +3,11 @@
  */
 package org.openiaml.model.drools;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
 
-import org.drools.FactException;
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.WorkingMemory;
@@ -40,7 +37,6 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.domain.AbstractDomainAttribute;
 import org.openiaml.model.model.domain.AbstractDomainObject;
 import org.openiaml.model.model.domain.AbstractDomainStore;
-import org.openiaml.model.model.domain.FileDomainStore;
 import org.openiaml.model.model.scopes.Session;
 
 /**

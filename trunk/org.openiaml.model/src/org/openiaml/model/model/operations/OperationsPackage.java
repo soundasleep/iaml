@@ -98,6 +98,15 @@ public interface OperationsPackage extends EPackage {
 	int START_NODE__ID = ModelPackage.ACTIVITY_NODE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START_NODE__GENERATED_RULE = ModelPackage.ACTIVITY_NODE__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>Out Executions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -151,6 +160,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CANCEL_NODE__ID = ModelPackage.ACTIVITY_NODE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CANCEL_NODE__GENERATED_RULE = ModelPackage.ACTIVITY_NODE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>In Executions</b></em>' reference list.
@@ -217,6 +235,15 @@ public interface OperationsPackage extends EPackage {
 	int FINISH_NODE__ID = ModelPackage.ACTIVITY_NODE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINISH_NODE__GENERATED_RULE = ModelPackage.ACTIVITY_NODE__GENERATED_RULE;
+
+	/**
 	 * The feature id for the '<em><b>In Executions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -270,6 +297,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECISION_NODE__ID = ModelPackage.ACTIVITY_NODE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE__GENERATED_RULE = ModelPackage.ACTIVITY_NODE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Out Executions</b></em>' reference list.
@@ -343,6 +379,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECISION_OPERATION__ID = ModelPackage.CHAINED_OPERATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__GENERATED_RULE = ModelPackage.CHAINED_OPERATION__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -488,6 +533,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECISION_CONDITION__ID = ModelPackage.CONDITION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_CONDITION__GENERATED_RULE = ModelPackage.CONDITION__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

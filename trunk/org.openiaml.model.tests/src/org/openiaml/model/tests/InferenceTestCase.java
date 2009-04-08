@@ -46,11 +46,23 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * When inference is done, the model is saved to this file.
 	 */
 	protected File inferredModel;
-
+	
 	/**
 	 * Load a model file and perform inference on it.
 	 */
 	protected InternetApplication loadAndInfer(String modelFile) throws Exception {
+		return loadAndInfer(modelFile, false);
+	}
+
+	/**
+	 * Load a model file and perform inference on it.
+	 *
+	 * @see CreateMissingElementsWithDrools#create(EObject, boolean)
+	 * @param logRuleSource Log the rule source of inserted elements.
+	 * @return
+	 * @throws Exception
+	 */
+	protected InternetApplication loadAndInfer(String modelFile, boolean logRuleSource) throws Exception {
 		EObject model = loadModelDirectly(modelFile);
 		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
 		assertNotNull(model);
@@ -60,14 +72,14 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		// we now try to do inference
 		ICreateElements handler = new EcoreInferenceHandler(resource);
 		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-		ce.create(root);
+		ce.create(root, logRuleSource);
 		
 		// write out this inferred model for reference
 		inferredModel = saveInferredModel();	
 		
 		return root;
 	}
-	
+
 	/**
 	 * Load a model file directly.
 	 * Assumes that it will only contain one element (and tests this with JUnit).

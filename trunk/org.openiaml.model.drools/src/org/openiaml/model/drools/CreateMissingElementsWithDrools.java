@@ -12,6 +12,7 @@ import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.WorkingMemory;
 import org.drools.compiler.PackageBuilder;
+import org.drools.event.DefaultWorkingMemoryEventListener;
 import org.drools.event.ObjectInsertedEvent;
 import org.drools.event.ObjectRetractedEvent;
 import org.drools.event.ObjectUpdatedEvent;
@@ -31,6 +32,7 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
@@ -56,12 +58,24 @@ public class CreateMissingElementsWithDrools {
 	}
 
 	/**
+	 * Do the inference using Drools. Does not log the source rule.
+	 * 
+	 * @see #create(EObject, boolean)
+	 * @param model
+	 * @throws InferenceException
+	 */
+	public void create(EObject model) throws InferenceException {
+		create(model, false);
+	}
+	
+	/**
 	 * Do the inference using Drools.
 	 * 
 	 * @param model
+	 * @param logRuleSource if true, the source rule of inserted elements will be added
 	 * @throws Exception 
 	 */
-	public void create(EObject model) throws InferenceException {
+	public void create(EObject model, boolean logRuleSource) throws InferenceException {
 
     	// load up the rulebase
         RuleBase ruleBase;
@@ -208,11 +222,33 @@ public class CreateMissingElementsWithDrools {
 				
 			}
         	
-        });
+        });        
         
         //go !
         workingMemory.insert( model );        
         workingMemory.setGlobal("handler", handler);
+        
+        /*
+         * This simply adds the Rule source for inserted elements
+         * (where possible).
+         */
+        if (logRuleSource) {
+	        workingMemory.addEventListener(new DefaultWorkingMemoryEventListener() {
+	
+				@Override
+				public void objectInserted(ObjectInsertedEvent event) {
+					if (event.getObject() instanceof GeneratedElement) {
+						GeneratedElement e = (GeneratedElement) event.getObject();
+						try {
+							handler.setGeneratedRule(e, event.getPropagationContext().getRuleOrigin().getName());
+						} catch (InferenceException e1) {
+							throw new RuntimeException(e1.getMessage(), e1);
+						}
+					}
+				}
+	        });
+        }
+        
         workingMemory.fireAllRules();   
 
 	}

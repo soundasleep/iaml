@@ -41,6 +41,12 @@ URL:   http://www.eclipticalsoftware.com/updates
 }}}
   # XPath Support for EMF 2.0.1
 
+*[http://code.google.com/p/iacleaner/ iacleaner]:*
+{{{
+Name:  Iacleaner update site
+URL:   http://iacleaner.googlecode.com/svn/trunk/org.openiaml.iacleaner.update/site.xml
+}}}
+
 *[http://subclipse.tigris.org Subclipse]:*
 {{{
 Name:  Subclipse 1.2.x update site

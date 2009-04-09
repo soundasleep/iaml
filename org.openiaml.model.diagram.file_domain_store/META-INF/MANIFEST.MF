@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.openiaml.model.diagram.file_domain_store; singleton:=true
-Bundle-Version: 0.1.0
+Bundle-Version: 0.2.0
 Bundle-ClassPath: .
 Bundle-Activator: org.openiaml.model.model.diagram.file_domain_store.part.IamlDiagramEditorPlugin
 Bundle-Vendor: www.openiaml.org

@@ -1719,7 +1719,7 @@
       iD="org.openiaml.model.diagram.visual"
       name="Iaml Plugin (Visual)"
       provider="www.openiaml.org"
-      version="0.1.0"/>
+      version="0.2.0"/>
   <editor/>
   <navigator
       generateDomainModelNavigator="false">

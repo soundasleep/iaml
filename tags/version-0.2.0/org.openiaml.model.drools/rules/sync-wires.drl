@@ -1,0 +1,553 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import java.util.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+
+function boolean syncMatches(NamedElement e1, NamedElement e2) {
+	return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
+}
+
+function boolean connects(WireEdge wire, Object a, Object b) {
+	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
+		(wire.getFrom().equals(b) && wire.getTo().equals(a));
+}
+
+rule "Sync wires between pages should create sync wires between all elements inside each page that match"
+	when
+		p1 : ApplicationElement( )
+		p2 : ApplicationElement(this != p1)
+		source : SyncWire(overridden == false, eval(connects(source, p1, p2)) )
+		
+		e1 : ApplicationElement( eContainer == p1 )
+		e2 : ApplicationElement( eContainer == p2, eval(syncMatches(e1, e2)) )
+	
+		not (sw : SyncWire( name == "sync", eContainer == source, eval(connects( sw, e1, e2)) ))
+		
+	then
+		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
+		sw.setName("sync");
+		insert(sw);
+		
+end
+
+# Ideally, these two commands would be joined together into one.
+# TODO achieve this using eval(connects())
+rule "Run instance wire from source.edit to target.update"
+	when
+		sw : SyncWire(overridden == false)
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+rule "Run instance wire from target.edit to source.update"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from  
+		source : InputTextField( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+# Ideally, these two commands would be joined together into one
+rule "Connect parameter wire to: run instance wire from source.edit to target.update"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		pw.setName("[sync] run instance parameter (source.edit)"); 
+		insert(pw);
+
+end
+
+rule "Connect parameter wire to: run instance wire from target.edit to source.update"
+	when
+		sw : SyncWire(overridden == false)
+		target : InputTextField( ) from sw.from
+		source : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		pw.setName("[sync] run instance parameter (target.edit)"); 
+		insert(pw);
+
+end
+
+# Ideally, these two commands would be joined together into one
+rule "Run instance wire from source.access to source.init, when we have a value to provide as a parameter"
+	when
+		sw : SyncWire(overridden == false)
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == source, name=="access" )
+		operation : Operation( eContainer == source, name=="init" )
+		field : ApplicationElementProperty( eContainer == target, name=="fieldValue" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter"
+	when
+		sw : SyncWire(overridden == false)
+		source : ContainsEventTriggers( ) from sw.from  
+		target : ContainsOperations( ) from sw.to
+		
+		event : EventTrigger( eContainer == target, name=="access" )
+		operation : Operation( eContainer == target, name=="init" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		rw.setName("run");
+		insert(rw);
+
+end
+
+# Ideally, these two commands would be joined together into one
+rule "Connect parameter wire to: run instance wire from source.access to source.init"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == source, name=="access" )
+		operation : Operation( eContainer == source, name=="init" )
+		field : ApplicationElementProperty( eContainer == target, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		pw.setName("[sync] run instance parameter (source.access)"); 
+		insert(pw);
+
+end
+
+rule "Connect parameter wire to: run instance wire from target.access to target.init"
+	when
+		sw : SyncWire(overridden == false)
+		source : InputTextField( ) from sw.from
+		target : InputTextField( ) from sw.to
+	
+		event : EventTrigger( eContainer == target, name=="access" )
+		operation : Operation( eContainer == target, name=="init" )
+		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire);
+		pw.setName("[sync] run instance parameter (target.access)"); 
+		insert(pw);
+
+end
+
+/**
+ * I think that chained SyncWires are generally impossible. Consider:
+ * 
+ *   page1 <--> page2 <--> unrelated
+ *   condition on both SyncWires, matching (page1, page2)
+ * 
+ * If we allow for chaining, then the condition 
+ *   condition[page2, unrelated]
+ * will be copied onto
+ *   condition[page1, page2]
+ * which means the SyncWire will never satisfy all its conditions.
+ *
+ * --
+ *
+ * I think that chained SyncWires are only possible *when* each
+ * SyncWire has identical Conditions, so we don't have to combine
+ * the two conditions together into something impossible.
+ *
+ * However, trying to implement this did nothing. I think it is because
+ * without adding more information to the model, you cannot chain.
+ * The information you'd be adding is stuff like ChainedSyncWire, but
+ * this defeats the purpose of having it in the model, because this should
+ * be handled by the code generation instead.
+ */
+
+/*
+
+function List getParameters(ConditionWire a) {
+	List<Object> result = new ArrayList<Object>();
+	for (WireEdge w : a.getInEdges()) {
+		if (w instanceof ParameterWire) {
+			result.add(w.getFrom());
+		}
+	}
+	return result;
+}
+
+function List getConditions(SyncWire a) {
+	List<Object> result = new ArrayList<Object>();
+	for (WireEdge w : a.getInEdges()) {
+		if (w instanceof ConditionWire) {
+			result.add(w);
+		}
+	}
+	return result;
+}
+
+function boolean identicalParameters(ConditionWire a, ConditionWire b) {
+
+	List<Object> a_params = getParameters(a);
+	List<Object> b_params = getParameters(b);
+	if (a_params.size() != b_params.size()) {
+		return false;	// quick check
+	}
+	
+	for (Object x : b_params) {
+		if (a_params.contains(x)) {
+			if (true)
+			throw new RuntimeException("kittens are tasty");
+			a_params.remove(x);
+			continue;
+		}
+		return false;	// param 'x' from 'b' was not found in 'a'
+	}
+
+	return true;	// all parameters were found
+}
+
+/*
+ * Evaluate the two SyncWires for their Conditions. This is only true
+ * if each SyncWire has the _same_ conditions with the _same_
+ * Parameter sources.
+ *
+function boolean identicalConditions(SyncWire a, SyncWire b) {
+	List<Object> a_conditions = getConditions(a);
+	List<Object> b_conditions = getConditions(b);
+	if (a_conditions.size() != b_conditions.size()) {
+		return false;	// quick check
+	}
+	System.out.println("a conditions: " + a_conditions);
+	System.out.println("b conditions: " + b_conditions);
+	
+	for (Object x : b_conditions) {
+		ConditionWire xc = (ConditionWire) x;
+		
+		// find an a_conditions which has the same parameters
+		boolean found_condition = false;
+		
+		for (int i = 0; i < a_conditions.size(); i++) {
+			boolean found = false;
+			ConditionWire cur = (ConditionWire) a_conditions.get(i);
+			if ((cur.getFrom().equals(xc.getFrom()))) {
+				// Conditions are the same
+				if (identicalParameters(cur, xc)) {
+					// parameters are the same
+					found_condition = true;
+					found = true;
+					break;		// stop and break out
+				}
+			}
+			if (found) break;	// stop
+		}
+		
+		if (!found_condition)	
+			return false; // param 'x' from 'b' was not found in 'a'
+	}
+
+	return true;	// all parameters were found
+
+}
+
+rule "Chained SyncWires: between A to B, and B to C, means there should be a SyncWire from A to C (Page)"
+	when
+		container : ContainsWires ( )
+		
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)), eContainer == container )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		
+		eval(identicalConditions(as, bs))
+		
+		not (cs : SyncWire( eval(connects(cs, c, a)) ) )
+		
+	then
+		SyncWire newWire = handler.generatedSyncWire(as, container, a, c);
+		newWire.setName("chained sync from: " + as.getId() + " to: " + bs.getId()); 
+		insert(newWire);
+		
+end
+
+rule "Chained SyncWires: Cascade conditions from A to C"
+	when
+		
+		# we have three pages in Sync
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)) )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+
+		eval(identicalConditions(as, bs))
+		
+		# there is a condition
+		cond : Condition ( )
+		
+		# one of the pages has a ConditionWire
+		aw : ConditionWire ( from == cond, to == as )
+		
+		# but this generated wire does not
+		not (ConditionWire ( from == cond, to == cs, generatedBy == aw ))
+	
+	then
+		ConditionWire newWire = handler.generatedConditionWire(aw, aw, cond, cs);
+		newWire.setName("copied chained condition [from a]: " + aw.getId()); 
+		insert(newWire);
+		
+		// also copy over all Parameters explicitly 
+		// if we try to do this implicitly, then we get the problem where
+		// a<--sync-->b, b<--sync-->c, and the same condition is
+		// used for both sync wires; as a result, parameters to both
+		// incoming sync wires are merged together into one wire
+		// TODO this can probably be achieved though.
+		for (WireEdge w : aw.getInEdges()) {
+			if (w instanceof ParameterWire) {
+				ParameterWire src = (ParameterWire) w;
+				ParameterWire newPw = handler.generatedParameterWire(aw, aw, src.getFrom(), newWire);
+				newPw.setName("[chained a] from " + w.getId());
+				insert(newPw);  
+			}
+		}
+		
+end
+
+rule "Chained SyncWires: Cascade conditions from B to C" 
+	when
+		
+		# we have three pages in Sync
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)) )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+
+		eval(identicalConditions(as, bs))
+		
+		# there is a condition
+		cond : Condition ( )
+		
+		# one of the pages has a ConditionWire
+		bw : ConditionWire ( from == cond, to == bs )
+		
+		# but this generated wire does not
+		not (ConditionWire ( from == cond, to == cs, generatedBy == bw ))
+		
+	then
+		ConditionWire newWire = handler.generatedConditionWire(bw, bw, cond, cs);
+		newWire.setName("copied chained condition [from b]: " + bw.getId()); 
+		insert(newWire);
+		
+		// also copy over all Parameters explicitly 
+		// TODO see note above
+		for (WireEdge w : bw.getInEdges()) {
+			if (w instanceof ParameterWire) {
+				ParameterWire src = (ParameterWire) w;
+				ParameterWire newPw = handler.generatedParameterWire(bw, bw, src.getFrom(), newWire);
+				newPw.setName("[chained b] from " + w.getId());
+				insert(newPw);  
+			}
+		}
+		
+end
+
+/*
+rule "Chained SyncWires: Cascade parameters from A to C"
+	when
+		
+		# we have three pages in Sync
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)) )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+		
+		# there is a condition
+		cond : Condition ( )
+		
+		# two of the pages have ConditionWires
+		aw : ConditionWire ( from == cond, to == as )
+		cw : ConditionWire ( from == cond, to == cs, generatedBy == as )
+		
+		# there is a parameter
+		param : WireEdgesSource ( )
+		
+		# one of them has a ParameterWire
+		ap : ParameterWire ( from == param, to == aw )
+		
+		# but this generated wire does not
+		not (ParameterWire ( from == param, to == cw, generatedBy == as )) 
+		
+	then
+		ParameterWire newWire = handler.generatedParameterWire(as, as, param, cw);
+		newWire.setName("[chained] param from [a]: " + ap.getId());
+		insert(newWire);
+		
+end
+
+rule "Chained SyncWires: Cascade parameters from B to C"
+	when
+		
+		# we have three pages in Sync
+		a : Page ( )
+		b : Page ( eval(a != b) )
+		c : Page ( eval(b != c), eval(a != c) )
+		
+		as : SyncWire( eval(connects(as, a, b)) )
+		bs : SyncWire( eval(connects(bs, b, c)) )
+		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
+		
+		# there is a condition
+		cond : Condition ( )
+		
+		# two of the pages have ConditionWires
+		bw : ConditionWire ( from == cond, to == bs )
+		cw : ConditionWire ( from == cond, to == cs, generatedBy == bs )
+		
+		# there is a parameter
+		param : WireEdgesSource ( )
+		
+		# one of them has a ParameterWire
+		bp : ParameterWire ( from == param, to == bw )
+		
+		# but this generated wire does not
+		not (ParameterWire ( from == param, to == cw, generatedBy == bs )) 
+		
+	then
+		ParameterWire newWire = handler.generatedParameterWire(bs, bs, param, cw);
+		newWire.setName("[chained] param from [b]: " + bp.getId());
+		insert(newWire);
+		
+end
+*/
+
+rule "Cascaded SyncWires: Conditions from parent to child"
+	when
+
+		# the containing elements	
+		source : ApplicationElement( )   
+		target : ApplicationElement( ) 
+		sw : SyncWire( eval(connects(sw, source, target)) )
+		
+		# the elements contained
+		e1 : ApplicationElement( eContainer == source )
+		e2 : ApplicationElement( eContainer == target, eval(syncMatches(e1, e2)) )
+		esw : SyncWire( name == "sync", eval(connects(esw, e1, e2)), overridden == false )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionWire( from == condition, to == sw )
+
+		# and there isn't one on the element sync wire
+		not (ecw : ConditionWire( generatedBy == cw, from == condition, to == esw )) 
+		
+	then
+		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
+		ecw.setName("[copied] from: " + cw.getId());
+		insert(ecw);
+
+end
+
+rule "Cascaded SyncWires: Parameters from parent to child"
+	when
+
+		# the containing elements	
+		source : ApplicationElement( )   
+		target : ApplicationElement( ) 
+		sw : SyncWire( eval(connects(sw, source, target)) )
+		
+		# the elements contained
+		e1 : ApplicationElement( eContainer == source )
+		e2 : ApplicationElement( eContainer == target, eval(syncMatches(e1, e2)) )
+		esw : SyncWire( name == "sync", eval(connects(esw, e1, e2)), overridden == false )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionWire( from == condition, to == sw )
+		
+		# the generated condition wire
+		ecw : ConditionWire( generatedBy == cw, from == condition, to == esw )
+		
+		# there is a parameter on the condition wire
+		parameter : WireEdgesSource( )
+		pw : ParameterWire( from == parameter, to == cw )
+
+		# and there isn't one on the element sync wire
+		not (epw : ParameterWire( generatedBy == cw, from == parameter, to == ecw )) 
+		
+	then
+		# create it
+		ParameterWire epw = handler.generatedParameterWire( cw, cw, parameter, ecw );
+		epw.setName("[copied] from: " + pw.getId());
+		insert(epw);
+
+end

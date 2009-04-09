@@ -1,0 +1,22 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE setApplicationValuePhp FOR model::InternetApplication-»
+<?php
+/**
+ * For setting an application value.
+ */
+ 
+«EXPAND HeaderPhp::headerPhp FOR this-»
+
+log_message("set_application_value.php? " . print_r($_GET, true));
+$id = $_GET["id"] or local_die("no id");
+$arg0 = $_GET["arg0"] or local_die("no arg0");
+
+set_application_value($id, $arg0);
+log_message("set_application_value.php: setting id=$id, arg0=$arg0");
+
+echo "ok";
+
+«ENDDEFINE»

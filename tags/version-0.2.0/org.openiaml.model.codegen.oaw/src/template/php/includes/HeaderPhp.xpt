@@ -1,0 +1,260 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE headerPhp FOR emf::EObject»
+
+session_start();
+
+$log_unique_id = sprintf("%04x", rand(0,0xffff));
+function log_message($msg, $also_debug = true) {
+	global $log_unique_id;
+	$msg = "[$log_unique_id] $msg";		// append a unique ID to help us track requests
+	
+	$fp = fopen("php.log", "a");
+	fwrite($fp, date("Y-m-d H:i:s") . " header.php: $msg\n");
+	fclose($fp);
+	
+	// also echo to debug
+	if ($also_debug) {
+		echo "\$('response').innerHTML = \"" . htmlentities($msg) . "\";\n";
+	}
+}
+
+function local_die($message) {
+	log_message("DEATH: $message");
+	die($message);
+}
+
+// make sure that the db exists for stored_events
+$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
+$s = $db->prepare("SELECT * FROM stored_events");
+if (!$s) {
+	// create the table
+	$q = $db->query("CREATE TABLE stored_events (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			page_id VARCHAR(64) NOT NULL,
+			event_name VARCHAR(64) NOT NULL,
+			arg0 BLOB
+		);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+	log_message("table for stored_events created", false);
+}
+
+function require_session($var, $default = "") {
+	return isset($_SESSION[$var]) ? $_SESSION[$var] : $default;
+}
+
+function require_get($var, $default = "") {
+	return isset($_GET[$var]) ? $_GET[$var] : $default;
+}
+
+/**
+ * If the current address is http://foo.com/foo/bar.php, we want to
+ * get out http://foo.com/foo
+ */
+function get_request_base() {
+	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
+}
+function get_baseurl() {
+	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
+}
+
+class IamlRuntimeException extends Exception {
+	var $more_info;
+	
+	public function __construct($message = "", $more_info = "") {
+		parent::__construct($message);
+		$this->more_info = $more_info;
+	} 
+}
+
+/**
+ * Set a global application value stored in the database.
+ */
+function get_application_value($id, $default) {
+	global $db;
+	$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
+	
+	// make sure the table is there
+	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
+	if (!$s) {
+		// create the table
+		$q = $db->query("CREATE TABLE global_values (
+				id INT AUTO_INCREMENT PRIMARY KEY,
+				value_id VARCHAR(64) NOT NULL,
+				arg0 BLOB
+			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+		log_message("table for global_values created", false);
+		
+		return $default;
+	}
+
+	// get the value
+	$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
+	$row = $s->fetch();
+	
+	if (!$row) {
+		// empty
+		return $default;		
+	} else {
+		return $row["arg0"];
+	}	
+}
+
+/**
+ * Set a global application value stored in the database.
+ */
+function set_application_value($id, $value) {
+	global $db;
+	$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
+	
+	// make sure the table is there
+	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
+	if (!$s) {
+		// create the table
+		$q = $db->query("CREATE TABLE global_values (
+				id INTEGER PRIMARY KEY AUTOINCREMENT,
+				value_id VARCHAR(64) NOT NULL,
+				arg0 BLOB
+			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+		log_message("table for global_values created", false);
+	
+		// re-prepare
+		$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
+	}
+	
+	// execute the query with the parameter
+	$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
+	
+	// does anything exist?
+	if ($s->fetch()) {
+		// yes: update all existing
+		$s = $db->prepare("UPDATE global_values SET arg0=? WHERE value_id=?") or local_die("could not prepare update query: " . print_r($db->errorInfo(), true));
+		log_message("Updating existing: " . $id);
+	} else {
+		// no: insert new
+		$s = $db->prepare("INSERT INTO global_values (arg0, value_id) VALUES (?, ?)") or local_die("could not prepare insert query: " . print_r($db->errorInfo(), true));
+		log_message("Inserting new: " . $id);
+	}
+	
+	// update all existing
+	$s->execute(array($value, $id)) or local_die("could not execute query: " . print_r($db->errorInfo(), true));
+	
+	// done
+	$s = null;
+	
+	if (get_application_value($id, "not " . $value) != $value) {
+		throw new IamlRuntimeException("The application value '$id' was not saved (value='$value').");
+	}
+
+}
+
+function call_remote_event($container, $id, $arg0 = "", $arg1 = "") {
+	$url = get_request_base() . "/" . 'call_remote_event.php?container=' . urlencode($container) 
+		. '&operation_name=' . urlencode($id)
+		. '&arg0=' . urlencode($arg0)
+		. '&arg1=' . urlencode($arg1);
+	
+	// get all running functions
+	$url .= "&running=" . urlencode(implode(",", array_keys(get_running_functions())));
+	
+	log_message("[php side] calling remote url: $url");
+	$result = file_get_contents($url);
+	log_message("[php side] remote call to $url successful");
+}
+
+function escape_javascript_string($string) {
+	$string = htmlspecialchars($string);
+	$string = str_replace("\\", "\\\\", $string);
+	$string = str_replace("\n", "\\n", $string);
+	$string = str_replace("\r", "\\r", $string);
+	$string = str_replace("\t", "\\t", $string);
+	return $string;
+}
+
+/**
+ * For preventing infinite loops (hopefully)
+ */
+$running_functions = array();
+function add_running_function($function_id) {
+	global $running_functions;
+	$running_functions[$function_id] = true;
+}
+function remove_running_function($function_id) {
+	global $running_functions;
+	unset($running_functions[$function_id]);
+}
+function has_running_function($function_id) {
+	global $running_functions;
+	return isset($running_functions[$function_id]);
+}
+function get_running_functions() {
+	global $running_functions;
+	return $running_functions;
+}
+
+/**
+ * Dynamic application element set stuff.
+ */
+/**
+ * Comparison function: xpathMatch(a, b)
+ * Returns true if 'a' matches the xpath of 'b', or 'b' matches the 
+ * xpath of 'a' (order doesn't matter).
+ */
+function xpathMatch($a, $b) {
+	$id = null;
+	$ids = null;
+	
+	if (is_array($a)) {
+		$ids = $a;
+	}
+	if (is_array($b)) {
+		$ids = $b;
+	}
+	if ($a instanceof Visual_Page) {
+		$id = $a->getID();
+	}
+	if ($b instanceof Visual_Page) {
+		$id = $b->getID();
+	}
+	
+	// make sure we have id and path
+	if ($id == null) {
+		throw new IamlRuntimeException("Cannot compare xpath: ID is null."); 
+	}
+	if ($ids == null) {
+		throw new IamlRuntimeException("Cannot compare xpath: List of results is null."); 
+	}
+	
+	log_message("Querying XML XPath for ID: '" + id + "'");
+	
+	// is the ID in this list?
+	if (in_array($id, $ids)) {
+		return true; 		// found it
+	}
+	
+	return false;	// not found
+}
+
+/**
+ * Represents a Page: by ID and name
+ */
+class Visual_Page {
+	var $id;
+	var $name;
+	
+	public function __construct($id, $name) {
+		$this->id = $id;
+		$this->name = $name;
+	}
+	
+	public function getID() {
+		return $this->id;
+	}
+	
+	public function getName() {
+		return $this->name;
+	}
+}
+ 
+«ENDDEFINE»

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11f62b78f3d.ea">
+  <children xsi:type="iaml.visual:Page" id="visual.11f62b790e2.26" name="Container">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11f62b790e2.3c" name="Username Text Field" outEdges="wires.11f631b1795.46" generatedElements="model.11f631b16ea.425 model.11f631b16ea.426 model.11f631b16ea.427 model.11f631b16ea.428 model.11f631b16ea.429">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11f631b1795.cc" generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.425" name="init" generatedElements="model.11f631b16ea.430 model.11f631b16ea.431 operations.11f631b1795.35 operations.11f631b1795.36 model.11f631b16ea.432 model.11f631b16ea.433 model.11f631b16ea.434 model.11f631b16ea.435">
+        <parameters generatedBy="model.11f631b16ea.425" isGenerated="true" id="model.11f631b16ea.430" name="setValueTo" outFlows="model.11f631b16ea.432"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11f631b16ea.425" isGenerated="true" id="model.11f631b16ea.431" name="setPropertyToValue" inFlows="model.11f631b16ea.432" inExecutions="model.11f631b16ea.434" outFlows="model.11f631b16ea.433" outExecutions="model.11f631b16ea.435"/>
+        <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.11f631b16ea.425" isGenerated="true" id="operations.11f631b1795.35" outExecutions="model.11f631b16ea.434"/>
+        <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.11f631b16ea.425" isGenerated="true" id="operations.11f631b1795.36" inExecutions="model.11f631b16ea.435"/>
+        <dataEdges generatedBy="model.11f631b16ea.425" isGenerated="true" id="model.11f631b16ea.432" from="model.11f631b16ea.430" to="model.11f631b16ea.431"/>
+        <dataEdges generatedBy="model.11f631b16ea.425" isGenerated="true" id="model.11f631b16ea.433" from="model.11f631b16ea.431" to="model.11f631b16ea.429"/>
+        <executionEdges generatedBy="model.11f631b16ea.425" isGenerated="true" id="model.11f631b16ea.434" from="operations.11f631b1795.35" to="model.11f631b16ea.431"/>
+        <executionEdges generatedBy="model.11f631b16ea.425" isGenerated="true" id="model.11f631b16ea.435" from="model.11f631b16ea.431" to="operations.11f631b1795.36"/>
+      </operations>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11f631b1795.ca" generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.426" name="update" generatedElements="model.11f631b16ea.42a model.11f631b16ea.42b operations.11f631b1795.33 operations.11f631b1795.34 model.11f631b16ea.42c model.11f631b16ea.42d model.11f631b16ea.42e model.11f631b16ea.42f">
+        <parameters generatedBy="model.11f631b16ea.426" isGenerated="true" id="model.11f631b16ea.42a" name="setValueTo" outFlows="model.11f631b16ea.42c"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11f631b16ea.426" isGenerated="true" id="model.11f631b16ea.42b" name="setPropertyToValue" inFlows="model.11f631b16ea.42c" inExecutions="model.11f631b16ea.42e" outFlows="model.11f631b16ea.42d" outExecutions="model.11f631b16ea.42f"/>
+        <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.11f631b16ea.426" isGenerated="true" id="operations.11f631b1795.33" outExecutions="model.11f631b16ea.42e"/>
+        <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.11f631b16ea.426" isGenerated="true" id="operations.11f631b1795.34" inExecutions="model.11f631b16ea.42f"/>
+        <dataEdges generatedBy="model.11f631b16ea.426" isGenerated="true" id="model.11f631b16ea.42c" from="model.11f631b16ea.42a" to="model.11f631b16ea.42b"/>
+        <dataEdges generatedBy="model.11f631b16ea.426" isGenerated="true" id="model.11f631b16ea.42d" from="model.11f631b16ea.42b" to="model.11f631b16ea.429"/>
+        <executionEdges generatedBy="model.11f631b16ea.426" isGenerated="true" id="model.11f631b16ea.42e" from="operations.11f631b1795.33" to="model.11f631b16ea.42b"/>
+        <executionEdges generatedBy="model.11f631b16ea.426" isGenerated="true" id="model.11f631b16ea.42f" from="model.11f631b16ea.42b" to="operations.11f631b1795.34"/>
+      </operations>
+      <eventTriggers generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.427" name="access" outEdges="wires.11f631b1795.cc"/>
+      <eventTriggers generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.428" name="edit" outEdges="wires.11f631b1795.ce"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11f631b1795.46" from="visual.11f62b790e2.3c" to="model.11f631b16ea.179" name="Sync" generatedElements="wires.11f631b1795.ca wires.11f631b1795.cb wires.11f631b1795.cc wires.11f631b1795.cd wires.11f631b1795.ce wires.11f631b1795.cf">
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11f631b1795.46" isGenerated="true" id="wires.11f631b1795.ca" from="model.11f631b16ea.41d" to="model.11f631b16ea.426" name="run" inEdges="wires.11f631b1795.cb"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.11f631b1795.46" isGenerated="true" id="wires.11f631b1795.cb" from="model.11f631b16ea.41e" to="wires.11f631b1795.ca"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11f631b1795.46" isGenerated="true" id="wires.11f631b1795.cc" from="model.11f631b16ea.427" to="model.11f631b16ea.425" name="run" inEdges="wires.11f631b1795.cd"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.11f631b1795.46" isGenerated="true" id="wires.11f631b1795.cd" from="model.11f631b16ea.41e" to="wires.11f631b1795.cc"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11f631b1795.46" isGenerated="true" id="wires.11f631b1795.ce" from="model.11f631b16ea.428" to="model.11f631b16ea.41c" name="run" inEdges="wires.11f631b1795.cf"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.11f631b1795.46" isGenerated="true" id="wires.11f631b1795.cf" from="model.11f631b16ea.429" to="wires.11f631b1795.ce"/>
+      </wires>
+      <properties generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.429" name="fieldValue" outEdges="wires.11f631b1795.cf" inFlows="model.11f631b16ea.42d model.11f631b16ea.433"/>
+    </children>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.11f631b1795.149" name="Broken Validation">
+    <children xsi:type="iaml.visual:InputForm" id="visual.11f631b1795.18e" name="Form1" outEdges="wires.11f631b1795.8d" inEdges="wires.11f631b1795.8d">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11f631b1795.8d" from="visual.11f631b1795.18e" to="visual.11f631b1795.18e" name="Sync"/>
+    </children>
+    <children xsi:type="iaml.visual:Page" id="visual.11f631b1795.1bc"/>
+  </children>
+  <domainStores xsi:type="iaml:DomainStore" id="model.11f62b78f3d.10b" name="File Domain Store">
+    <children xsi:type="iaml:DomainObject" id="model.11f631b16ea.114" name="User">
+      <attributes xsi:type="iaml:DomainAttribute" id="model.11f631b16ea.179" name="Username" inEdges="wires.11f631b1795.46" generatedElements="model.11f631b16ea.41c model.11f631b16ea.41d model.11f631b16ea.41e">
+        <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11f631b1795.ce" generatedBy="model.11f631b16ea.179" isGenerated="true" id="model.11f631b16ea.41c" name="update" generatedElements="model.11f631b16ea.41f model.11f631b16ea.420 operations.11f631b1795.31 operations.11f631b1795.32 model.11f631b16ea.421 model.11f631b16ea.422 model.11f631b16ea.423 model.11f631b16ea.424">
+          <parameters generatedBy="model.11f631b16ea.41c" isGenerated="true" id="model.11f631b16ea.41f" name="setValueTo" outFlows="model.11f631b16ea.421"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.11f631b16ea.41c" isGenerated="true" id="model.11f631b16ea.420" name="setPropertyToValue" inFlows="model.11f631b16ea.421" inExecutions="model.11f631b16ea.423" outFlows="model.11f631b16ea.422" outExecutions="model.11f631b16ea.424"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.11f631b16ea.41c" isGenerated="true" id="operations.11f631b1795.31" outExecutions="model.11f631b16ea.423"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.11f631b16ea.41c" isGenerated="true" id="operations.11f631b1795.32" inExecutions="model.11f631b16ea.424"/>
+          <dataEdges generatedBy="model.11f631b16ea.41c" isGenerated="true" id="model.11f631b16ea.421" from="model.11f631b16ea.41f" to="model.11f631b16ea.420"/>
+          <dataEdges generatedBy="model.11f631b16ea.41c" isGenerated="true" id="model.11f631b16ea.422" from="model.11f631b16ea.420" to="model.11f631b16ea.41e"/>
+          <executionEdges generatedBy="model.11f631b16ea.41c" isGenerated="true" id="model.11f631b16ea.423" from="operations.11f631b1795.31" to="model.11f631b16ea.420"/>
+          <executionEdges generatedBy="model.11f631b16ea.41c" isGenerated="true" id="model.11f631b16ea.424" from="model.11f631b16ea.420" to="operations.11f631b1795.32"/>
+        </operations>
+        <eventTriggers generatedBy="model.11f631b16ea.179" isGenerated="true" id="model.11f631b16ea.41d" name="edit" outEdges="wires.11f631b1795.ca"/>
+        <properties generatedBy="model.11f631b16ea.179" isGenerated="true" id="model.11f631b16ea.41e" name="fieldValue" outEdges="wires.11f631b1795.cb wires.11f631b1795.cd" inFlows="model.11f631b16ea.422"/>
+      </attributes>
+    </children>
+  </domainStores>
+</iaml:InternetApplication>

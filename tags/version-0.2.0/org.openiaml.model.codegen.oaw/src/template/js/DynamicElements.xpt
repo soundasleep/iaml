@@ -1,0 +1,26 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/* expand out all dynamic elements for the page */
+«DEFINE expandDynamicElements FOR model::ContainsConditions»
+	«EXPAND expandDynamicElement FOREACH getRoot().getAllDynamicElements()»
+«ENDDEFINE»
+
+«DEFINE expandDynamicElement FOR model::DynamicApplicationElementSet-»
+	function get_dynamic_elements_«safeName()»() {
+		/* return a list of all the IDs that match this query "«query-»" */
+		return new Array(«EXPAND getElementID FOREACH resolveDynamicSet(getRoot(), this) SEPARATOR ", "»);
+	}
+«ENDDEFINE»
+
+«DEFINE getElementID FOR model::NamedElement-»
+	"«id-»"
+«ENDDEFINE»
+
+«DEFINE getElementID FOR emf::EObject-»
+	«EXPAND exception FOR throwException("Cannot expand DynamicElement for EObject: " + this)»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

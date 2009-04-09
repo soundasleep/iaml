@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Codegen Tests Plug-in
-Bundle-SymbolicName: org.openiaml.model.tests.codegen
+Bundle-Name: Iaml Tests Plug-in
+Bundle-SymbolicName: org.openiaml.model.tests
 Bundle-Version: 0.2.0
 Require-Bundle: org.junit,
  org.eclipse.ui,

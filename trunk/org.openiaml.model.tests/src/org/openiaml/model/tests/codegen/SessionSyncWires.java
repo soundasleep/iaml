@@ -12,7 +12,6 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests sessions: sync wires across session boundaries.
  * 
- * @model ../examples/requirements/1-sync_wires.iaml 
  * @author jmwright
  *
  */

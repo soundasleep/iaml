@@ -200,7 +200,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			}
 		}
 		
-		fail("No wire found between [" + fromElement + "] and [" + toElement + "]");
+		fail("No wire found from [" + fromElement + "] to [" + toElement + "]");
 		return null;
 	}
 

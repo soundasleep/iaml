@@ -8,6 +8,8 @@ import org.openiaml.model.model.impl.*;
 import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.eclipse.emf.ecore.*;
 import java.util.*;
 
 #declare any global variables here
@@ -20,6 +22,21 @@ function boolean syncMatches(NamedElement e1, NamedElement e2) {
 function boolean connects(WireEdge wire, Object a, Object b) {
 	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
 		(wire.getFrom().equals(b) && wire.getTo().equals(a));
+}
+
+function Session containingSession(EObject e) {
+	if (e.eContainer() == null) {
+		return null;
+	}
+	if (e.eContainer() instanceof Session) {
+		return (Session) e.eContainer();
+	}
+	return containingSession(e.eContainer());
+}
+
+function boolean containingSessionEquals(EObject e, Session s) {
+	Session actual = containingSession(e);
+	return s.equals(actual);
 }
 
 rule "Sync wires between pages should create sync wires between all elements inside each page that match"
@@ -551,3 +568,93 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		insert(epw);
 
 end
+
+# SyncWires do not connect the fields together; they can _also_
+# connect the Pages together.
+rule "Connect Session.init to incoming SyncWires debug"
+	when
+		session : Session ( overridden == false )
+		sw : SyncWire( overridden == false )
+		sourcePage : ContainsEventTriggers( eval(!containingSessionEquals(sourcePage, session)) )  
+		targetPage : ContainsOperations( eval(containingSessionEquals(targetPage, session)) )
+		eval( connects(sw, sourcePage, targetPage ))
+
+		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
+		targetElement : ContainsOperations( eContainer == targetPage )
+		eval( connects(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( eContainer == sourceElement, name == "edit" )
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, name == "init" )
+	
+	then
+		System.out.println("session = " + session + "\nsource=" + sourceElement 
+			+ "\ntarget=" + targetElement + "\nevent= " + event 
+			+ "\noperation=" + operation + "\ninite = " + inite
+			+ "\nrw = " + rw);
+end
+		
+rule "Connect Session.init to incoming SyncWires (contained in Pages)"
+	when
+		session : Session ( overridden == false )
+		sw : SyncWire( overridden == false )
+		sourcePage : ContainsEventTriggers( eval(!containingSessionEquals(sourcePage, session)) )  
+		targetPage : ContainsOperations( eval(containingSessionEquals(targetPage, session)) )
+		eval( connects(sw, sourcePage, targetPage ))
+
+		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
+		targetElement : ContainsOperations( eContainer == targetPage )
+		eval( connects(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( eContainer == sourceElement, name == "edit" )
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, name == "init" )
+		
+		not (RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
+		rw2.setName("run");
+		insert(rw2);
+		
+end
+
+rule "Connect parameter for Session.init to incoming SyncWires (contained in Pages)"
+	when
+		session : Session ( overridden == false )
+		sw : SyncWire( overridden == false )
+		sourcePage : ContainsEventTriggers( eval(!containingSessionEquals(sourcePage, session)) )  
+		targetPage : ContainsOperations( eval(containingSessionEquals(targetPage, session)) )
+		eval( connects(sw, sourcePage, targetPage ))
+
+		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
+		targetElement : ContainsOperations( eContainer == targetPage )
+		eval( connects(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( eContainer == sourceElement, name == "edit" )
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, name == "init" )
+
+		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
+		
+		field : ApplicationElementProperty( eContainer == sourceElement, name=="fieldValue" )
+		pw : ParameterWire( eContainer == sw2, from == field, to == rw ) 
+
+		not( ParameterWire( eContainer == sw2, from == field, to == initrw ))  
+		
+	then
+		ParameterWire pw2 = handler.generatedParameterWire(sw, sw, field, initrw);
+		insert(pw2);		
+end
+
+
+

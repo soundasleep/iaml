@@ -7,12 +7,22 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE pageEvents FOR model::EventTrigger-»
-	// EventTrigger «this»
+	// Page EventTrigger «this»
 	«IF name == "access"-»
 		// RunInstanceWires sorted by priority
-		«EXPAND includes::StoreDbPhp::callOperations FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+		«EXPAND callOperations(false, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	«ELSE-»
 		// I don't know what to do with page event "«name»"
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE sessionEvents FOR model::EventTrigger-»
+	// Session EventTrigger «this»
+	«IF name == "init"-»
+		// RunInstanceWires sorted by priority
+		«EXPAND callOperations(false, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+	«ELSE-»
+		// I don't know what to do with session event "«name»"
 	«ENDIF-»
 «ENDDEFINE»
 
@@ -273,7 +283,7 @@
 «DEFINE expandEventTriggersInline FOR model::EventTrigger»
 	// expanding inline event trigger «name»
 	«IF name=="edit"»
-		«EXPAND callOperations(true) FOREACH outEdges»
+		«EXPAND callOperations(true, false) FOREACH outEdges»
 	«ELSEIF name=="access"»
 		// we don't expand 'access' events inline
 	«ELSE»
@@ -283,20 +293,26 @@
 
 
 /* default: don't know what to do with a wire */
-«DEFINE callOperations(Boolean inline) FOR model::WireEdge»
+«DEFINE callOperations(Boolean inline, Boolean inStoreDb) FOR model::WireEdge»
 	«EXPAND exception FOR throwException("Unknown wire edge connected to edit trigger: " + this)»
 «ENDDEFINE»
 
 /* 
  * run a command with some parameters. this could be in inline JS or a JS block.
  * RunInstanceWire: event --> operation 
+ *
+ * inStoreDb is set if we are calling operations as a result of storing a value
+ * in the database. instead of defining a new function 'get_db_param(...)' and
+ * using this as a parameter source,
+ * we instead use '$arg0', which we expect will be set already.
+ * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
  */
-«DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire-»
+«DEFINE callOperations(Boolean inline, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»
 	/* eContainer == «to.eContainer» */
 	
 	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
 		/* expand conditions */
-		if («EXPAND Conditions::conditionWires(this, inline) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+		if («EXPAND Conditions::conditionWires(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
 	«ENDIF»
 
 	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
@@ -308,20 +324,20 @@
 		«ENDREM»
 		«IF onCurrentPage(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
-				«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+				«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 			«ENDREM»
 		«ENDIF-»
 	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
-		«REM»direct field --> domain attribute«ENDREM»
+		«REM»direct field -->  abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
@@ -335,42 +351,46 @@
 
 
 /* ditto: check or error? */
-«DEFINE callOperationParameters(model::WireEdge wire, Boolean inline) FOR model::wires::ParameterWire»
-	«EXPAND callOperationParametersSource(wire, inline) FOR from»
+«DEFINE callOperationParameters(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::wires::ParameterWire»
+	«EXPAND callOperationParametersSource(wire, inline, inStoreDb) FOR from»
 «ENDDEFINE»
 
 /* ditto: check or error? */
-«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::WireEdgesSource»
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::WireEdgesSource»
 	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
 /* what is the runtime value of the parameter? */
-«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::ApplicationElementProperty»
-	«IF name == "fieldValue"»
-		«REM»is this a session value?«ENDREM»
-		«IF containingSession(this) != null» 
-			/* a property from our session */
-			require_session("«safeName(containingSession(this))»_«safeName()-»")
-		«ELSE»
-			get_application_value("«safeName()-»", null)		
-		«ENDIF»
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::ApplicationElementProperty»
+	«IF inStoreDb»
+		$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
 	«ELSE»
-		get_application_value("«safeName()-»", null)
+		«IF name == "fieldValue"»
+			«REM»is this a session value?«ENDREM»
+			«IF containingSession(this) != null» 
+				/* a property from our session */
+				require_session("«safeName(containingSession(this))»_«safeName()-»")
+			«ELSE»
+				get_application_value("«safeName()-»", null)		
+			«ENDIF»
+		«ELSE»
+			get_application_value("«safeName()-»", null)
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::StaticValue»
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue»
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
 
 /* we are in PHP mode. TODO document when we are switching in/out of it */
-«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::DynamicApplicationElementSet»
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»
 	/* dynamic element set "«name-»" */
 	get_dynamic_elements_«safeName()-»()
 «ENDDEFINE»
 
 /* we are in PHP mode. TODO document when we are switching in/out of it */
-«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::visual::Page»
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::Page»
 	/* Page "«name-»" */
 	new Visual_Page("«id-»", "«name-»")
 «ENDDEFINE»

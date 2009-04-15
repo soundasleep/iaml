@@ -2,10 +2,10 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline) FOR model::wires::ConditionWire»
+«DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline, Boolean inStoreDb) FOR model::wires::ConditionWire»
 	/* ConditionWire: «this-» */
 	condition_«conditionName(from)»(
-		«EXPAND EventTrigger::callOperationParameters(wire, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+		«EXPAND EventTrigger::callOperationParameters(wire, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
 	)
 «ENDDEFINE»
 

@@ -8,7 +8,7 @@
  * For setting an application value.
  */
  
-«EXPAND HeaderPhp::headerPhp FOR this-»
+require("header.php");
 
 log_message("set_application_value.php? " . print_r($_GET, true));
 $id = $_GET["id"] or local_die("no id");

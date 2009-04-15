@@ -8,46 +8,42 @@
  * For storing a single value into the database (attribute id).
  */
  
+require("header.php");
 require("create_database.php");	// init db if necessary
 require("properties_file.php");	// properties loading code
 
-function log_message($msg) {
-	$fp = fopen("php.log", "a");
-	fwrite($fp, date("Y-m-d H:i:s") . " store_db.php: $msg\n");
-	fclose($fp);
-}
-
-function local_die($msg) {
-	log_message("ERROR: $msg"); 
-	die($msg);
-}
-
-// get the http:// url to this application
-function get_baseurl() {
-	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
-}
+// queue up any log messages
+queue_log_messages(true);
 
 /**
  * Recursive functions in PHP. See default.js for Javascript implementations of these.
  * TODO add test cases to make sure these are both identical.
  */
 function store_event($page_id, $event_name, $arg0) {
-	global $trace;
-	// have we already called this store_event? if so, bail
-	if (in_array($page_id, $trace)) {
-		log_message("breaking out of possibly infinite store_event loop: $page_id");
-		return;
+	// not sure how often this will actually be called: we block on operations
+	/*
+	register_running_functions();
+	
+	$function_id = "store_event_" . $page_id . "_" . $event_name;
+	if (has_running_function($function_id)) {
+		log_message("Breaking out of infinite loop: $function_id");
+		return false;
 	}
+	*/
 	
 	/*
 	 * a simple solution (but not scalable TODO): create a new HTTP request to store the event.
-	 * a better solution is obiously to store the new event in this same page.
+	 * a better solution is obviously to store the new event in this same page.
 	 */	
-	$url = get_baseurl() . "/store_event.php?page_id=".urlencode($page_id)."&event_name=".urlencode($event_name)."&arg0=".urlencode($arg0)."&trace=".urlencode(implode(",", $trace));
-	log_message("store_db.php calling $url");
-	$r = file_get_contents($url);
-	if ($r != "ok")
-		local_die("store_event failed: " + $r);
+	$url = get_baseurl() . "/store_event.php?page_id=" . urlencode($page_id)
+		. "&event_name=" . urlencode($event_name)
+		. "&arg0=" . urlencode($arg0);
+		
+	log_message("store_db.php:store_event calling $url");
+	$result = call_remote_url($url);
+
+	if (trim($result) != "ok")
+		local_die("store_db failed: \"" . $result . "\"");
 		
 	return true;
 }
@@ -57,8 +53,7 @@ $attribute_id = $_GET["attribute_id"] or local_die("no attribute id");
 $arg0 = $_GET["arg0"] or local_die("no arg0");
 
 // anti-infinite-loop trace tracking
-$trace = isset($_GET["trace"]) ? explode(",", $_GET["trace"]) : array();
-$trace[] = $attribute_id;
+add_running_function($attribute_id);
 
 // find the table name
 $db_type = null;
@@ -200,82 +195,13 @@ echo "ok";
 	}
 «ENDDEFINE»
 
-/* ----------------------- */
-/* TODO put into separate file */
- 
 /**
  * Expand out any event triggers.
  */
 «DEFINE expandDomainAttributeEvents FOR model::EventTrigger»
 	«IF name=="edit"»
-		«EXPAND callOperations FOREACH outEdges»
+		«EXPAND template::php::EventTrigger::callOperations(false, true) FOREACH outEdges»
 	«ENDIF»
-«ENDDEFINE»
-
-/* default: don't know what to do with a wire */
-«DEFINE callOperations FOR model::WireEdge»
-	«ERROR "unknown wire edge connected to edit trigger: " + this»
-«ENDDEFINE»
-
-/* 
- * run a command with some parameters. this could be in inline JS or a JS block.
- * RunInstanceWire: event --> operation 
- */
-«DEFINE callOperations FOR model::wires::RunInstanceWire-»
-	«IF isInputTextField(to.eContainer)-»
-		«REM»// not on current page (wire id = «id»)«ENDREM»
-		store_event('«containingPage(to).id»', 'do_«operationName(to)»'
-			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
-		);
-	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
-		«REM»direct field --> abstract domain attribute«ENDREM»
-		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF inEdges.size>0», «EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»«ENDIF»
-		);  
-	«ELSEIF isSession(to.eContainer)-»
-		«REM»a function run on in this session«ENDREM»
-		do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
-	«ELSEIF isPage(to.eContainer)-»
-		«REM»a function run on a page«ENDREM»
-		«IF from.eContainer == to.eContainer-»
-			«REM»a function run on *this* page«ENDREM»
-			do_«operationName(to)»(«EXPAND callOperationParameters FOREACH inEdges SEPARATOR ", "»);
-		«ELSE-»
-			«ERROR "Cannot run a server-side function '" + this + "' on another page (this page = '" + from.eContainer + "', target page = '" + to.eContainer + "')"-»
-		«ENDIF-»
-	«ELSE-»
-		local_die('unknown target operation type «to.eContainer.metaType.name» for «this»');
-	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE callOperationParameters FOR model::WireEdge»
-	«ERROR "unknown in edge: " + this»
-«ENDDEFINE»
-
-/* making sure that the parameter wire is from a parameter... */
-«DEFINE callOperationParameters FOR model::wires::ParameterWire»
-	«EXPAND callOperationParametersSource FOR from»
-«ENDDEFINE»
-
-«DEFINE callOperationParametersSource FOR model::WireEdgesSource»
-	«ERROR "unknown parameter wire source: " + this»
-«ENDDEFINE»
-
-«DEFINE callOperationParametersSource FOR model::ApplicationElementProperty»
-	«IF name == "fieldValue"»
-		$arg0 /* the new value is already store in this variable */
-	«ELSE»
-		«IF containingSession(this) != null»
-			/* a property from our session */
-			require_session("«safeName(containingSession(this))»_«safeName()-»")
-		«ELSE»
-			get_application_property("«safeName()-»")
-		«ENDIF»
-	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE callOperationParametersSource FOR model::StaticValue»
-	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

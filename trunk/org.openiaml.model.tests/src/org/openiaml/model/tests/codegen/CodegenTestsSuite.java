@@ -40,6 +40,10 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(Requirement4DynamicSources.class);
 		suite.addTestSuite(Requirement5Operations.class);
 		suite.addTestSuite(Requirement6Conditions.class);
+		
+		// session tests
+		suite.addTestSuite(SessionSinglePage.class);
+		suite.addTestSuite(SessionSyncWires.class);
 
 		return suite;
 	}

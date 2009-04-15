@@ -59,3 +59,10 @@ context model::VisibleThing ERROR "VisibleThings cannot directly contain Abstrac
 
 context model::VisibleThing ERROR "VisibleThings cannot directly contain AbstractDomainAttributes, they should be in AbstractDomainObjects" :
 	!children.exists( e | model::domain::AbstractDomainAttribute.isInstance(e) );
+
+context model::scopes::Session ERROR "Sessions cannot directly contain InputTextFields" :
+	!children.exists( e | model::visual::InputTextField.isInstance(e) );
+
+context model::scopes::Session ERROR "Sessions cannot directly contain InputForms" :
+	!children.exists( e | model::visual::InputForm.isInstance(e) );
+	

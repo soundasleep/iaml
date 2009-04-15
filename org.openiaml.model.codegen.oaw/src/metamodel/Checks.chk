@@ -7,7 +7,8 @@ extension metamodel::Extensions;
 // TODO add test cases for model validation
 // both through Eclipse and through manual test cases (code generation)
 context model::InternetApplication ERROR "No pages in internet application" :
-	children.exists( e | model::visual::Page.isInstance(e) );
+	children.exists( e | model::visual::Page.isInstance(e) )
+	|| sessions.exists( e | e.children.exists( f | model::visual::Page.isInstance( f )) );
 
 context model::visual::Page ERROR "Page must have a name" :
 	name.length > 0;

@@ -12,7 +12,6 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests sessions: an element on a single page.
  * 
- * @model ../examples/requirements/1-sync_wires.iaml 
  * @author jmwright
  *
  */

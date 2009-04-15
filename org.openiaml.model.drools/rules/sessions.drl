@@ -532,3 +532,15 @@ rule "Create contents of 'do logout' operation for LoginHandler[type=key]"
 		insert(edge2);
 
 end
+
+rule "Create 'init' event for Sessions"
+	when
+		session : Session( overridden == false )
+		not (EventTrigger( eContainer == session, name == "init" ))
+		
+	then
+		EventTrigger event = handler.generatedEventTrigger(session, session);
+		event.setName("init");
+		insert(event);
+	
+end

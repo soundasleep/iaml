@@ -30,6 +30,7 @@ public class InferenceTestsSuite {
         suite.addTestSuite(ConditionWireXpathThreePages.class);
         suite.addTestSuite(Requirement4DynamicSources.class);
         suite.addTestSuite(SavedRuleSources.class);
+        suite.addTestSuite(SessionSyncWires.class);
 		//$JUnit-END$
         return suite; 
    }

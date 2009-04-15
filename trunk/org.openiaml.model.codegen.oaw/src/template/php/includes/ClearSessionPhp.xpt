@@ -8,7 +8,7 @@
  * Clear the existing session.
  */
  
-«EXPAND HeaderPhp::headerPhp FOR this-»
+require("header.php");
 
 log_message("clear_session.php? " . print_r($_GET, true));
 

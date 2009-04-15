@@ -2,7 +2,8 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE headerPhp FOR emf::EObject»
+«DEFINE headerPhp FOR model::InternetApplication»
+<?php
 
 session_start();
 
@@ -17,7 +18,37 @@ function log_message($msg, $also_debug = true) {
 	
 	// also echo to debug
 	if ($also_debug) {
-		echo "\$('response').innerHTML = \"" . htmlentities($msg) . "\";\n";
+		global $enable_queue_log_messages;
+		global $queue_log_messages;
+		$message = "\$('response').innerHTML = \"" . htmlentities($msg) . "\";\n";
+		if ($enable_queue_log_messages) {
+			$queue_log_messages .= $message;
+		} else {
+			echo $message;
+		}
+	}
+}
+
+$enable_queue_log_messages = false;
+$queue_log_messages = "";
+/**
+ * If we output _after_ session_start(), but _before_ <html>, it's
+ * likely we will end up making the resulting page invalid (which means
+ * JWebUnit cannot access the <title> etc). So we allow log
+ * messages to be queued up.
+ *
+ * @see log_message()
+ */ 
+function queue_log_messages($on) {
+	global $enable_queue_log_messages;
+	global $queue_log_messages;
+	
+	if ($on) {
+		$enable_queue_log_messages = true;
+		$queue_log_messages = "";
+	} else {
+		$enable_queue_log_messages = false;
+		echo $queue_log_messages;
 	}
 }
 
@@ -149,12 +180,11 @@ function set_application_value($id, $value) {
 
 }
 
-function call_remote_event($container, $id, $arg0 = "", $arg1 = "") {
-	$url = get_request_base() . "/" . 'call_remote_event.php?container=' . urlencode($container) 
-		. '&operation_name=' . urlencode($id)
-		. '&arg0=' . urlencode($arg0)
-		. '&arg1=' . urlencode($arg1);
-	
+/**
+ * Wraps the URL with functionality to prevent infinite loops, and
+ * also copy the session ID.
+ */
+function call_remote_url($url) {
 	// get all running functions
 	$url .= "&running=" . urlencode(implode(",", array_keys(get_running_functions())));
 	
@@ -174,6 +204,17 @@ function call_remote_event($container, $id, $arg0 = "", $arg1 = "") {
 	session_start();
 	
 	log_message("[php side] remote call to $url successful");
+	
+	return $result;
+}
+
+function call_remote_event($container, $id, $arg0 = "", $arg1 = "") {
+	$url = get_request_base() . "/" . 'call_remote_event.php?container=' . urlencode($container) 
+		. '&operation_name=' . urlencode($id)
+		. '&arg0=' . urlencode($arg0)
+		. '&arg1=' . urlencode($arg1);
+	
+	return call_remote_url($url);
 }
 
 function escape_javascript_string($string) {
@@ -204,6 +245,15 @@ function has_running_function($function_id) {
 function get_running_functions() {
 	global $running_functions;
 	return $running_functions;
+}
+function register_running_functions() {
+	$running = require_get("running");
+	if ($running) {
+		$r = explode(",", $running);
+		foreach ($r as $fun) {
+			add_running_function($fun);
+		}
+	}
 }
 
 /**

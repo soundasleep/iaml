@@ -8,7 +8,7 @@
  * Call a remote event.
  */
  
-«EXPAND HeaderPhp::headerPhp FOR this-»
+require("header.php");
 
 log_message("call_remote_event.php? " . print_r($_GET, true));
 $container = require_get("container");

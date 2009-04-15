@@ -12,12 +12,23 @@
 		/* generated page "«name-»" */
 
 		// include header code
-		«EXPAND php::includes::HeaderPhp::headerPhp FOR this-»
+		require("header.php");		// include header code
 		require("create_database.php");		// ensure DB exists
 		require("properties_file.php");
 		
+		// queue up any log messages
+		queue_log_messages(true);
+		
 		// run any event triggers for this page
 		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
+		
+		// run any event triggers for this session
+		«IF containingSession() != null»
+		if (!require_session("session_init", false)) {
+			$_SESSION["session_init"] = true; /* this MUST execute before we start any events, or else we can easily call ourselves and get stuck in an infinite loop */
+			«EXPAND php::EventTrigger::sessionEvents FOREACH containingSession().eventTriggers-»
+		}
+		«ENDIF»
 		
 		// expand any operations (both in this page and in any surrounding scopes)
 		«EXPAND php::EventTrigger::expandOperations FOR this-»
@@ -35,13 +46,7 @@
 			$arg1 = require_get("arg1");
 			
 			// any running functions? (prevent infinite loops)
-			$running = require_get("running");
-			if ($running) {
-				$r = explode(",", $running);
-				foreach ($r as $fun) {
-					add_running_function($fun);
-				}
-			}
+			register_running_functions();
 
 			log_message("page «name»: remote operation $operation_name($arg0, $arg1)");
 			$operation_name($arg0, $arg1);
@@ -112,6 +117,7 @@
 		</head>
 		
 		<body onLoad="loadStoredEvents()">
+		<?php queue_log_messages(false); /* re-enable log messages */ ?>
 		<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
 		
 		<h1>«pageTitle()»</h1>

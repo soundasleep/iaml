@@ -4,6 +4,8 @@
     <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.b" name="field1"/>
   </children>
   <sessions id="scopes.120a748ed3d.2" name="my session">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.1a" name="field2"/>
+    <children xsi:type="iaml.visual:Page" id="visual.120a748ebb7.318" name="inside">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.362" name="field2"/>
+    </children>
   </sessions>
 </iaml:InternetApplication>

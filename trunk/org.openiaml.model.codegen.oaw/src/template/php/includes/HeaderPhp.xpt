@@ -6,7 +6,7 @@
 
 session_start();
 
-$log_unique_id = sprintf("%04x", rand(0,0xffff));
+$log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
 function log_message($msg, $also_debug = true) {
 	global $log_unique_id;
 	$msg = "[$log_unique_id] $msg";		// append a unique ID to help us track requests
@@ -158,8 +158,21 @@ function call_remote_event($container, $id, $arg0 = "", $arg1 = "") {
 	// get all running functions
 	$url .= "&running=" . urlencode(implode(",", array_keys(get_running_functions())));
 	
+	// copy over session parameters
+	$url .= "&" . get_sid();		// directly from PHP, so we don't need to set session_id() ourselves
+	
 	log_message("[php side] calling remote url: $url");
+	
+	// stop current session: the default PHP session handler blocks to prevent concurrent access
+	$old_id = session_id();
+	session_write_close();
+	
 	$result = file_get_contents($url);
+	
+	// restart the session once complete
+	session_id($old_id);
+	session_start();
+	
 	log_message("[php side] remote call to $url successful");
 }
 
@@ -255,6 +268,14 @@ class Visual_Page {
 	public function getName() {
 		return $this->name;
 	}
+}
+
+/**
+ * For some reason, SID isn't being set.
+ * This forces it.
+ */
+function get_sid() {
+	return session_name() . "=" . session_id();
 }
  
 «ENDDEFINE»

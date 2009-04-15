@@ -19,7 +19,7 @@ $running = require_get("running", "");	// optional stacktrace
 
 /* check to make sure it's in an existing page */
 $existing_pages = array(
-	«EXPAND allPageNames FOREACH children.typeSelect(model::visual::Page) SEPARATOR ", "»
+	«EXPAND allPageNames FOREACH getAllPages() SEPARATOR ", "»
 );
 if (!isset($existing_pages[$container])) {
 	local_die("Container '$container' was not found in existing pages.");
@@ -28,13 +28,28 @@ if (!isset($existing_pages[$container])) {
 /* let's call it through a HTTP request */
 $url = get_request_base() . "/" . $existing_pages[$container]
 	. "?operation=" . urlencode($operation_name) . "&arg0=" . urlencode($arg0) . "&arg1=" . urlencode($arg1) . "&running=" . urlencode($running);
+
+// copy over session parameters
+$url .= "&" . get_sid();		// directly from PHP, so we don't need to set session_id() ourselves
+
 log_message("Remote call to: $url");
 
+// stop current session: the default PHP session handler blocks to prevent concurrent access
+$old_id = session_id();
+session_write_close();
+
 $result = file_get_contents($url);
+
+// restart the session once complete
+session_id($old_id);
+session_start();
+
 if (strpos(strtolower($result), "Fatal error") !== false) {
+	// TODO add test case to make sure we will catch this exception
 	throw new IamlRuntimeException("Remote call to '$url' failed: Fatal error.", $result);
 } 
 if (strpos(strtolower($result), "Warning") !== false) {
+	// TODO add test case to make sure we will catch this exception
 	throw new IamlRuntimeException("Remote call to '$url' failed: Warning.", $result);
 } 
 echo $result;

@@ -179,6 +179,16 @@ cached List[model::Condition] getAllConditions(emf::EObject this) :
 cached List[model::Condition] getAllConditions(model::Condition this) :
 	this;
 
+/** get all Pages in the InternetApplication */
+cached List[model::visual::Page] getAllPages(model::InternetApplication this) :
+	children.typeSelect(model::visual::Page).toSet().union( eAllContents.getAllPages() ).reject( e | e == null );
+
+cached List[model::visual::Page] getAllPages(emf::EObject this) :
+	null;
+
+cached List[model::visual::Page] getAllPages(model::visual::Page this) :
+	this;
+	
 /** get all Conditions in the InternetApplication */
 List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetApplication this) :
 	children.typeSelect( model::DynamicApplicationElementSet ).toSet()

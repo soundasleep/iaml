@@ -346,7 +346,17 @@
 
 /* what is the runtime value of the parameter? */
 «DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::ApplicationElementProperty»
-	get_application_value("«safeName()-»", null)
+	«IF name == "fieldValue"»
+		«REM»is this a session value?«ENDREM»
+		«IF containingSession(this) != null» 
+			/* a property from our session */
+			require_session("«safeName(containingSession(this))»_«safeName()-»")
+		«ELSE»
+			get_application_value("«safeName()-»", null)		
+		«ENDIF»
+	«ELSE»
+		get_application_value("«safeName()-»", null)
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::StaticValue»

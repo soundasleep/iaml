@@ -45,6 +45,7 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(SessionSinglePage.class);
 		suite.addTestSuite(SessionSyncWires.class);
 		suite.addTestSuite(SessionInit.class);
+		suite.addTestSuite(SessionSyncInSession.class);
 
 		return suite;
 	}

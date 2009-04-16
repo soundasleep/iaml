@@ -161,7 +161,6 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertNoProblem();
 		
 		} catch (Error e) {
-			// TODO remove this catch/try block
 			System.out.println( getPageSource() );		// let us debug the page source
 			throw e;		// continue throwing
 		}

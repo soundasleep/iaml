@@ -322,7 +322,7 @@
 			will also return true for Event-->Operation if they are
 			both on the same page.
 		«ENDREM»
-		«IF onCurrentPage(from, to)-»
+		«IF availableInCurrentScript(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
 			do_«operationName(to)»(«EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
 		«ELSE-»
@@ -365,16 +365,21 @@
 	«IF inStoreDb»
 		$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
 	«ELSE»
-		«IF name == "fieldValue"»
-			«REM»is this a session value?«ENDREM»
-			«IF containingSession(this) != null» 
-				/* a property from our session */
-				require_session("«safeName(containingSession(this))»_«safeName()-»")
-			«ELSE»
-				get_application_value("«safeName()-»", null)		
-			«ENDIF»
+		«REM»
+			values stored in sessions will not always be called 'fieldValue';
+			perhaps fieldValue is only those stored as part of InputTextFields, etc.
+		«ENDREM»
+		«IF containingSession(this) != null»
+			/* a property from our session */
+			require_session("«safeName(containingSession(this))»_«safeName()-»")
 		«ELSE»
-			get_application_value("«safeName()-»", null)
+			«IF name == "fieldValue"»
+				get_application_value("«safeName()-»", null)		
+			«ELSE»
+				«REM»it's not in the current session, or a fieldValue; what could it be?!«ENDREM»
+				throwJavascriptException("Unknown parameter source for parameter '«name»': «this-»") &&
+				get_application_value("«safeName()-»", null)
+			«ENDIF»
 		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»

@@ -60,6 +60,16 @@ onCurrentPage(model::WireEdgesSource source, model::WireEdgeDestination target) 
 	containingPage(source) != null && 
 	containingPage(source) == containingPage(target);
 
+/* is [target] in the same session as [source]? */ 
+onCurrentSession(model::WireEdgesSource source, model::WireEdgeDestination target) :
+	containingSession(source) != null && 
+	containingSession(source) == containingSession(target);
+
+/* is [target] available in the same _script_ as [source]? */
+availableInCurrentScript(model::WireEdgesSource source, model::WireEdgeDestination target) :
+	onCurrentPage(source, target) ||
+	onCurrentSession(source, target);
+
 /**
  * Get all the operations that may be referenced in a container. In particular:
  * - Any operations in the page/container

@@ -65,10 +65,20 @@ onCurrentSession(model::WireEdgesSource source, model::WireEdgeDestination targe
 	containingSession(source) != null && 
 	containingSession(source) == containingSession(target);
 
-/* is [target] available in the same _script_ as [source]? */
+/**
+ * is [target] available in the same _script_ as [source]?
+ * this is true if onCurrentPage() is true, or
+ * it is an operation that will also be included in the current page.
+ *
+ * if the target container is a session, this is all the operations
+ * within the session. 
+ *
+ * this is based on allContainerOperations() and possibleParentOperations(). 
+ */
 availableInCurrentScript(model::WireEdgesSource source, model::WireEdgeDestination target) :
 	onCurrentPage(source, target) ||
-	onCurrentSession(source, target);
+	(containingSession(source) != null && target.eContainer.metaType.isAssignableFrom(model::scopes::Session) &&
+		containingSession(target) == target.eContainer);
 
 /**
  * Get all the operations that may be referenced in a container. In particular:

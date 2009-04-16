@@ -101,6 +101,7 @@
 
 /* what is the runtime value of the parameter? */
 «DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::ApplicationElementProperty»
+	/* wire = «wire», from = «wire.from», to = «wire.to» */
 	«IF name == "fieldValue"»
 		«REM»where is this value stored? is it available on the current page?«ENDREM»
 		«IF onCurrentPage(wire.from, this)» 
@@ -237,6 +238,9 @@
 		// operation: «name»
 		if (running_«safeName()-» == false) {
 			running_«safeName()-» = true;		// prevent loops
+
+			// temporary variables (if any)
+			«EXPAND temporaryVariable FOREACH variables.typeSelect(model::TemporaryVariable)»			
 			
 			// has this operation got a fail handler?
 			«IF getFailEdge() != null»
@@ -291,6 +295,10 @@
 			running_«safeName()-» = false;
 		}
 	}
+«ENDDEFINE»
+
+«DEFINE temporaryVariable FOR model::TemporaryVariable»
+	temp_«safeName()-» = null;	/* temporary variable '«safeNameString(name)-»' */
 «ENDDEFINE»
 
 «DEFINE expandParameters FOR model::Parameter-»
@@ -375,6 +383,14 @@
 		«ELSE»
 			// we don't call additional events for «eContainer» 
 		«ENDIF»
+	«ELSEIF name == "set"»
+		«REM»set a temporary variable«ENDREM»
+		temp_«safeName(outFlows.first().to)» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+
+		«REM»continue«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND doExecutionFlowNext FOR e.to-»
+		«ENDFOREACH»
 	«ELSEIF name == "javascriptAlert"»
 		// throw an alert box
 		// NOTE: alert boxes currently aren't owned by any element; they are a direct
@@ -382,6 +398,11 @@
 		// with a generic alert(), that will render an alert box in the most appropriate
 		// way for the alert container. 
 		alert(«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
+
+		«REM»continue«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND doExecutionFlowNext FOR e.to-»
+		«ENDFOREACH»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
 		«EXPAND exception FOR throwException("Unknown client-side function to expand '" + name + "': " + this)»
@@ -428,7 +449,11 @@
 «ENDDEFINE»
 
 «DEFINE setPropertyToValueInflowTarget FOR model::Parameter»
-	«safeName()»
+	«safeName()-»
+«ENDDEFINE»
+
+«DEFINE setPropertyToValueInflowTarget FOR model::TemporaryVariable»
+	temp_«safeName()-»
 «ENDDEFINE»
 
 «DEFINE expandCheckInflows FOR model::DataFlowEdge-»
@@ -442,6 +467,10 @@
 
 «DEFINE expandCheckInflowsName FOR model::Parameter-»
 	«safeName()-»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::TemporaryVariable-»
+	temp_«safeName()-»
 «ENDDEFINE»
 
 «DEFINE expandCheckInflowsName FOR model::ApplicationElementProperty-»

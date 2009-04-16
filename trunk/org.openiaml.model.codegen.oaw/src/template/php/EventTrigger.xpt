@@ -67,6 +67,9 @@
 				try {
 			«ENDIF»
 			
+			// temporary variables (if any)
+			«EXPAND temporaryVariable FOREACH variables.typeSelect(model::TemporaryVariable)»			
+			
 			// execute the operation
 			«EXPAND doExecutionFlow FOR startNode()-»
 
@@ -84,6 +87,10 @@
 			remove_running_function("«safeName()-»");
 		}
 	}
+«ENDDEFINE»
+
+«DEFINE temporaryVariable FOR model::TemporaryVariable»
+	$temp_«safeName()-» = null;	/* temporary variable '«safeNameString(name)-»' */
 «ENDDEFINE»
 
 «DEFINE expandParameters FOR model::Parameter-»
@@ -168,9 +175,22 @@
 		«ELSE»
 			// we don't call additional events for «eContainer» 
 		«ENDIF»
+	«ELSEIF name == "set"»
+		«REM»set a temporary variable«ENDREM»
+		$temp_«safeName(outFlows.first().to)» = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+
+		«REM»continue«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND doExecutionFlowNext FOR e.to-»
+		«ENDFOREACH»
 	«ELSEIF name == "javascriptAlert"»
 		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
 		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»);
+
+		«REM»continue«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND doExecutionFlowNext FOR e.to-»
+		«ENDFOREACH»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
 		«EXPAND exception FOR throwException("Unknown server-side function to expand '" + name + "': " + this)»
@@ -199,7 +219,7 @@
 
 /* data flows in */
 «DEFINE setPropertyToValueInflowTarget FOR model::DataFlowEdgesSource»
-	«ERROR "unknown data flow edge source for server setPropertyToValue: " + this»
+	«EXPAND exception FOR throwException("Unknown data flow edge source for server setPropertyToValue: " + this)»
 «ENDDEFINE»
 
 // TODO need to wrap value in some sort of encoding algorithm
@@ -211,17 +231,25 @@
 	$«safeName()»
 «ENDDEFINE»
 
+«DEFINE setPropertyToValueInflowTarget FOR model::TemporaryVariable»
+	$temp_«safeName()»
+«ENDDEFINE»
+
 «DEFINE expandCheckInflows FOR model::DataFlowEdge-»
 	«EXPAND expandCheckInflowsName FOR from-»
 «ENDDEFINE»
 
 /** get the data for the elements we are checking */
 «DEFINE expandCheckInflowsName FOR model::DataFlowEdgesSource-»
-	«ERROR "Unknown data inflow source " + this»
+	«EXPAND exception FOR throwException("Unknown data inflow source for server expandCheckInflowsName: " + this)»
 «ENDDEFINE»
 
 «DEFINE expandCheckInflowsName FOR model::Parameter-»
 	$«safeName()-»
+«ENDDEFINE»
+
+«DEFINE expandCheckInflowsName FOR model::TemporaryVariable-»
+	$temp_«safeName()-»
 «ENDDEFINE»
 
 «DEFINE expandCheckInflowsName FOR model::ApplicationElementProperty-»

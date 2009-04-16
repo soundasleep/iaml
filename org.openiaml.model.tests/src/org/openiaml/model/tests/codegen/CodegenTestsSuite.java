@@ -48,6 +48,9 @@ public class CodegenTestsSuite {
 		suite.addTestSuite(SessionSyncInSession.class);
 		suite.addTestSuite(SessionSyncWiresMultiple.class);
 
+		// other model 0.3 tests
+		suite.addTestSuite(DataFlowTemporaryVariable.class);
+
 		return suite;
 	}
 

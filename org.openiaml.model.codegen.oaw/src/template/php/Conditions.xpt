@@ -36,17 +36,6 @@
 	}
 «ENDDEFINE»
 
-«DEFINE expandCondition FOR model::operations::DecisionCondition»
-	/** decision condition "«name»" */
-	function decision_condition_«safeName()»() {
-		«IF name=="xpathMatch"»
-			
-		«ELSE»
-			«EXPAND exception FOR throwException("Cannot expand DecisionCondition '" + name + "': " + name)»
-		«ENDIF»
-	}
-«ENDDEFINE»
-
 «DEFINE expandParameters FOR model::Parameter-»
 	$«safeName()-»
 «ENDDEFINE»
@@ -72,6 +61,18 @@
 	// DecisionCondition «this»
 	«IF name=="xpathMatch"»
 		if (!xpathMatch(«EXPAND getInflows FOREACH inFlows SEPARATOR ","»)) {
+			«REM»continue expanding following conditions (if any)«ENDREM»
+			«FOREACH getFailEdges() AS e-»
+				«EXPAND doExecutionFlowNext FOR e.to-»
+			«ENDFOREACH»
+		} else {
+			«REM»continue expanding following conditions (if any)«ENDREM»
+			«FOREACH getPassEdges() AS e-»
+				«EXPAND doExecutionFlowNext FOR e.to-»
+			«ENDFOREACH»
+		}
+	«ELSEIF name=="emailAddress"»
+		if (!emailAddressMatch(«EXPAND getInflows FOREACH inFlows SEPARATOR ","»)) {
 			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getFailEdges() AS e-»
 				«EXPAND doExecutionFlowNext FOR e.to-»

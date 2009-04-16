@@ -60,6 +60,10 @@ onCurrentPage(model::WireEdgesSource source, model::WireEdgeDestination target) 
 	containingPage(source) != null && 
 	containingPage(source) == containingPage(target);
 
+onCurrentPage(emf::EObject source, model::WireEdgeDestination target) :
+	containingPage(source) != null && 
+	containingPage(source) == containingPage(target);
+
 /* is [target] in the same session as [source]? */ 
 onCurrentSession(model::WireEdgesSource source, model::WireEdgeDestination target) :
 	containingSession(source) != null && 

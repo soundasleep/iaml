@@ -5,10 +5,8 @@ package org.openiaml.model.tests.codegen;
 
 import java.util.Date;
 import java.util.Properties;
-import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
@@ -23,7 +21,7 @@ public class PropertiesFileWithInputForm extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/DatabaseWithInputForm.iaml");
+		root = loadAndCodegen(ROOT + "codegen/PropertiesFileWithInputForm.iaml");
 	}
 	
 	public void testWithoutForm() throws Exception {

@@ -1,0 +1,87 @@
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
+«EXTENSION xpt::diagram::editpolicies::Utils»
+«EXTENSION xpt::GenModelUtils»
+
+/**
+ * Originally, if you created a shortcut to ApplicationElementProperty in
+ * a CompositeOperation diagram editor, and you tried to create a
+ * DataFlowEdge _from_ that ApplicationElementProperty, it couldn't
+ * be created -- the AEP cannot contain DataFlowEdges, even though the
+ * source CompositeOperation contains them.
+ *
+ * This extension makes GMF consider the host element for link containment,
+ * and not just the target element.
+ *
+ * To resolve http://code.google.com/p/iaml/issues/detail?id=34
+ */
+
+/**
+ * We have to redefine the entire command, because there are no
+ * extension points which we can use.
+ */
+«AROUND startLinkCommands(gmfgen::TypeModelFacet typeModelFacet) FOR gmfgen::GenLink-»
+/* start Jevon customisation: allow links to be contained in non-direct elements */
+if («getDiagram().getElementTypesQualifiedClassName()».«getUniqueIdentifier()» == req.getElementType()) {
+	«IF createStartLinkCommand(typeModelFacet)-»
+	return getGEFWrapper(new «getCreateCommandQualifiedClassName()»(req,
+		«IF createStartIncomingLinkCommand(typeModelFacet)-»
+			req.getTarget(), req.getSource()
+		«ELSE-»
+			req.getSource(), req.getTarget()
+		«ENDIF-»
+		, getPotentialHostElements()
+	));
+	«ELSE-»
+	return null;
+	«ENDIF-»
+}
+/* end Jevon customisation: allow links to be contained in non-direct elements */
+«ENDAROUND»
+
+«AROUND completeLinkCommands(gmfgen::TypeModelFacet typeModelFacet) FOR gmfgen::GenLink-»
+/* start Jevon customisation: allow links to be contained in non-direct elements */
+if («getDiagram().getElementTypesQualifiedClassName()».«getUniqueIdentifier()» == req.getElementType()) {
+	«IF createCompleteLinkCommand(typeModelFacet)-»
+	return getGEFWrapper(new «getCreateCommandQualifiedClassName()»(req,
+		«IF createCompleteOutgoingLinkCommand(typeModelFacet)-»
+			req.getTarget(), req.getSource()
+		«ELSE-»
+			req.getSource(), req.getTarget()
+		«ENDIF-»
+		, getPotentialHostElements()
+	));
+	«ELSE-»
+	return null;
+	«ENDIF-»
+}
+/* end Jevon customisation: allow links to be contained in non-direct elements */
+«ENDAROUND»
+
+/**
+ * Add a method to get all potential container elements in the given
+ * view.
+ *
+ * See http://code.google.com/p/iaml/issues/detail?id=34
+ */
+«AROUND createLinkCommands(gmfgen::GenDiagram diagram) FOR gmfgen::TypeModelFacet-»
+	«targetDef.proceed()»
+
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: Search the current diagram editor for potential containment elements too. See http://code.google.com/p/iaml/issues/detail?id=34")»
+	protected java.util.List<org.eclipse.emf.ecore.EObject> getPotentialHostElements() {
+		java.util.List<org.eclipse.emf.ecore.EObject> myList = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+		org.eclipse.gef.EditPart p = getHost();
+		while (p != null) {
+			if (p.getModel() instanceof org.eclipse.gmf.runtime.notation.View) {
+				org.eclipse.emf.ecore.EObject obj = org.eclipse.gmf.runtime.diagram.core.util.ViewUtil.resolveSemanticElement((org.eclipse.gmf.runtime.notation.View) p.getModel());
+				if (obj != null) {
+					// skip unresolvable elements
+					myList.add( obj );
+				}
+			}
+			p = p.getParent();
+		}
+		return myList;
+	}
+
+«ENDAROUND» 

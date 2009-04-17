@@ -1,0 +1,38 @@
+#summary Summary of model version 0.3.
+#labels Phase-Design,Development
+
+[Model0_2 < 0.2] | *0.3* | [Model0_4 0.4 >]
+
+=Model 0.3=
+
+=Introduction=
+
+TODO
+
+==Sessions==
+|| *Description* || ApplicationElementProperties stored within a Session (i.e. text field values, login keys) are only available to a single session user. When the session is closed, the values are lost. ||
+|| *Models* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/ Session*.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/ Session*.java] ||
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/images/SessionSyncWires.png 
+
+==Operation/Condition Modelling (2)==
+
+|| *Temporary Variables* ||
+|| *Description* || Within operation or condition modelling, these represent temporary variables. When the operation is finished, the values will have been lost. ||
+|| *Execution Flow* ||
+|| *Description* || Within operation or condition modelling, the _execution flow_ models the order in which operations are executed. If an operation has multiple outwards ExecutionEdges, they are run in series (ideally they would be parallel). ||
+|| *Data Flow* ||
+|| *Description* || Within operation or condition modelling, the _data flow_ models the flow of dat between elements; for example, from a parameter to a temporary variable, or as a parameter to an operation. ||
+|| *Start Node* ||
+|| *Description* || An operation or condition starts at the start node. ||
+|| *Finish Node* ||
+|| *Description* || An operation completes at the finish node. In conditions, this means the condition has passed. ||
+|| *Cancel Node* ||
+|| *Description* || If the operation has not completed successfully, then the cancel node acts as a failure or exception-throwing element. In conditions, this means the condition has failed. ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.iaml DataFlowTemporaryVariable.iaml] ||
+|| *Inference Tests* || No inference ||
+|| *Runtime Tests* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.java  DataFlowTemporaryVariable.java] ||
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/DataFlowTemporaryVariable-4.png

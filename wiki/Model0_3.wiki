@@ -19,20 +19,26 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 
 ==Operation/Condition Modelling (2)==
 
-|| *Temporary Variables* ||
+*Temporary Variables*
 || *Description* || Within operation or condition modelling, these represent temporary variables. When the operation is finished, the values will have been lost. ||
-|| *Execution Flow* ||
+
+*Execution Flow*
 || *Description* || Within operation or condition modelling, the _execution flow_ models the order in which operations are executed. If an operation has multiple outwards ExecutionEdges, they are run in series (ideally they would be parallel). ||
-|| *Data Flow* ||
+
+*Data Flow*
 || *Description* || Within operation or condition modelling, the _data flow_ models the flow of dat between elements; for example, from a parameter to a temporary variable, or as a parameter to an operation. ||
-|| *Start Node* ||
+
+*Start Node*
 || *Description* || An operation or condition starts at the start node. ||
-|| *Finish Node* ||
+
+*Finish Node*
 || *Description* || An operation completes at the finish node. In conditions, this means the condition has passed. ||
-|| *Cancel Node* ||
-|| *Description* || If the operation has not completed successfully, then the cancel node acts as a failure or exception-throwing element. In conditions, this means the condition has failed. ||
+
+*Cancel Node*
+|| *Description* || If the operation has not completed successfully, then the cancel node acts as a failure or exception-throwing element. The value provided is the exception message thrown. In conditions, this means the condition has failed. ||
+
 || *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.iaml DataFlowTemporaryVariable.iaml] ||
 || *Inference Tests* || No inference ||
 || *Runtime Tests* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.java  DataFlowTemporaryVariable.java] ||
 
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/images/DataFlowTemporaryVariable-4.png
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/images/DataFlowTemporaryVariable-4.png

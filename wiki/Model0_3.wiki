@@ -39,6 +39,6 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 
 || *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.iaml DataFlowTemporaryVariable.iaml] ||
 || *Inference Tests* || No inference ||
-|| *Runtime Tests* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.java  DataFlowTemporaryVariable.java] ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.java  DataFlowTemporaryVariable.java] ||
 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/images/DataFlowTemporaryVariable-4.png

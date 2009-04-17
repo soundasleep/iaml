@@ -36,6 +36,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 
+import org.openiaml.model.model.domain.AbstractDomainAttribute;
 import org.openiaml.model.model.domain.AbstractDomainObject;
 import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.domain.DomainPackage;
@@ -60,6 +61,7 @@ import org.openiaml.model.model.domain.DomainPackage;
  *   <li>{@link org.openiaml.model.model.domain.impl.AbstractDomainStoreImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.domain.impl.AbstractDomainStoreImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.domain.impl.AbstractDomainStoreImpl#getViews <em>Views</em>}</li>
+ *   <li>{@link org.openiaml.model.model.domain.impl.AbstractDomainStoreImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -245,6 +247,16 @@ public abstract class AbstractDomainStoreImpl extends EObjectImpl implements Abs
 	 * @ordered
 	 */
 	protected EList<DerivedView> views;
+
+	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AbstractDomainAttribute> attributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -519,6 +531,18 @@ public abstract class AbstractDomainStoreImpl extends EObjectImpl implements Abs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<AbstractDomainAttribute> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentEList<AbstractDomainAttribute>(AbstractDomainAttribute.class, this, DomainPackage.ABSTRACT_DOMAIN_STORE__ATTRIBUTES);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -555,6 +579,8 @@ public abstract class AbstractDomainStoreImpl extends EObjectImpl implements Abs
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case DomainPackage.ABSTRACT_DOMAIN_STORE__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+			case DomainPackage.ABSTRACT_DOMAIN_STORE__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -594,6 +620,8 @@ public abstract class AbstractDomainStoreImpl extends EObjectImpl implements Abs
 				return getProperties();
 			case DomainPackage.ABSTRACT_DOMAIN_STORE__VIEWS:
 				return getViews();
+			case DomainPackage.ABSTRACT_DOMAIN_STORE__ATTRIBUTES:
+				return getAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -653,6 +681,10 @@ public abstract class AbstractDomainStoreImpl extends EObjectImpl implements Abs
 				getViews().clear();
 				getViews().addAll((Collection<? extends DerivedView>)newValue);
 				return;
+			case DomainPackage.ABSTRACT_DOMAIN_STORE__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends AbstractDomainAttribute>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -704,6 +736,9 @@ public abstract class AbstractDomainStoreImpl extends EObjectImpl implements Abs
 			case DomainPackage.ABSTRACT_DOMAIN_STORE__VIEWS:
 				getViews().clear();
 				return;
+			case DomainPackage.ABSTRACT_DOMAIN_STORE__ATTRIBUTES:
+				getAttributes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -742,6 +777,8 @@ public abstract class AbstractDomainStoreImpl extends EObjectImpl implements Abs
 				return properties != null && !properties.isEmpty();
 			case DomainPackage.ABSTRACT_DOMAIN_STORE__VIEWS:
 				return views != null && !views.isEmpty();
+			case DomainPackage.ABSTRACT_DOMAIN_STORE__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

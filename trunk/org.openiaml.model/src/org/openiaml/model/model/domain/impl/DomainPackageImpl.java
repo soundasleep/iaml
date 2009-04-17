@@ -233,6 +233,15 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAbstractDomainStore_Attributes() {
+		return (EReference)abstractDomainStoreEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAbstractDomainObject() {
 		return abstractDomainObjectEClass;
 	}
@@ -332,6 +341,7 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__CHILDREN);
 		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__PROPERTIES);
 		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__VIEWS);
+		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__ATTRIBUTES);
 
 		abstractDomainObjectEClass = createEClass(ABSTRACT_DOMAIN_OBJECT);
 		createEReference(abstractDomainObjectEClass, ABSTRACT_DOMAIN_OBJECT__ATTRIBUTES);
@@ -397,6 +407,7 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		initEReference(getAbstractDomainStore_Children(), this.getAbstractDomainObject(), null, "children", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDomainStore_Properties(), theModelPackage.getApplicationElementProperty(), null, "properties", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDomainStore_Views(), theModelPackage.getDerivedView(), null, "views", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDomainStore_Attributes(), this.getAbstractDomainAttribute(), null, "attributes", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractDomainObjectEClass, AbstractDomainObject.class, "AbstractDomainObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractDomainObject_Attributes(), this.getAbstractDomainAttribute(), null, "attributes", null, 0, -1, AbstractDomainObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -437,6 +448,13 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (getAbstractDomainStore_Attributes(), 
+		   source, 
+		   new String[] {
+			 "added", "0.3",
+			 "reason", "why can a data store only contain tables? why can\'t they also contain single values?"
 		   });
 	}
 

@@ -450,6 +450,13 @@
           <details key="added" value="0.2"/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//domain/AbstractDomainAttribute" containment="true">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="added" value="0.3"/>
+          <details key="reason" value="why can a data store only contain tables? why can't they also contain single values?"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainObject" abstract="true"
         eSuperTypes="#//ApplicationElement #//ContainsWires">

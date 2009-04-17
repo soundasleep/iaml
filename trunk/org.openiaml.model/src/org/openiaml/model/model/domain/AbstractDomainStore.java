@@ -27,6 +27,7 @@ import org.openiaml.model.model.NamedElement;
  *   <li>{@link org.openiaml.model.model.domain.AbstractDomainStore#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.domain.AbstractDomainStore#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.domain.AbstractDomainStore#getViews <em>Views</em>}</li>
+ *   <li>{@link org.openiaml.model.model.domain.AbstractDomainStore#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,5 +83,22 @@ public interface AbstractDomainStore extends ContainsOperations, ContainsEventTr
 	 * @generated
 	 */
 	EList<DerivedView> getViews();
+
+	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.domain.AbstractDomainAttribute}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
+	 * @see org.openiaml.model.model.domain.DomainPackage#getAbstractDomainStore_Attributes()
+	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment added='0.3' reason='why can a data store only contain tables? why can\'t they also contain single values?'"
+	 * @generated
+	 */
+	EList<AbstractDomainAttribute> getAttributes();
 
 } // AbstractDomainStore

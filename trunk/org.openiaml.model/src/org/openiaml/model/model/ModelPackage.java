@@ -2687,6 +2687,15 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_STORE__VIEWS = DomainPackage.ABSTRACT_DOMAIN_STORE__VIEWS;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_STORE__ATTRIBUTES = DomainPackage.ABSTRACT_DOMAIN_STORE__ATTRIBUTES;
+
+	/**
 	 * The number of structural features of the '<em>Domain Store</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

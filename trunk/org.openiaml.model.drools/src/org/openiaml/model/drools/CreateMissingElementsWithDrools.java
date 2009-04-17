@@ -150,10 +150,13 @@ public class CreateMissingElementsWithDrools {
 					}
 				}
 				
-				// DomainStore
+				// AbstractDomainStore
 				if (obj.getObject() instanceof AbstractDomainStore) {
 					AbstractDomainStore a = (AbstractDomainStore) obj.getObject();
 					for (AbstractDomainObject child : a.getChildren()) {
+						workingMemory.insert( child );
+					}
+					for (AbstractDomainAttribute child : a.getAttributes()) {
 						workingMemory.insert( child );
 					}
 					for (ApplicationElementProperty child : a.getProperties()) {
@@ -161,7 +164,7 @@ public class CreateMissingElementsWithDrools {
 					}
 				}				
 
-				// DomainObject
+				// AbstractDomainObject
 				if (obj.getObject() instanceof AbstractDomainObject) {
 					AbstractDomainObject a = (AbstractDomainObject) obj.getObject();
 					for (AbstractDomainAttribute child : a.getAttributes()) {

@@ -3,11 +3,18 @@
  */
 package org.openiaml.model.tests;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Properties;
+
 import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.api.IElement;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.openiaml.model.model.InternetApplication;
 
 /**
@@ -266,5 +273,52 @@ public class CodegenTestCase extends InferenceTestCase {
 		}
 	}
 
+	
+	/**
+	 * Load a database in the given database file, and execute
+	 * a SQL query against it.
+	 * 
+	 * @param dbName database file to load
+	 * @param query SQL query to execute
+	 * @return the SQL result set
+	 * @throws Exception
+	 */
+	protected ResultSet loadDatabaseQuery(String dbName, String query) throws Exception {
+		// wait for ajax calls if necessary
+		waitForAjax();
+		
+		// refresh the workspace
+		assertTrue(refreshProject().isOK());
+		
+		IFile db = getProject().getFile(dbName);
+		assertTrue("db '" + dbName + "' should exist at: " + db, db.exists());
+
+		Class.forName("org.sqlite.JDBC");
+		Connection conn = DriverManager.getConnection("jdbc:sqlite:" + db.getLocation());
+		Statement stat = conn.createStatement();
+
+		ResultSet rs = stat.executeQuery(query);
+
+		return rs;
+	}
+	
+	/**
+	 * Load a properties file in the testing workspace.
+	 * 
+	 * @param filename properties file to load
+	 * @return the loaded properties
+	 * @throws Exception
+	 */
+	protected Properties loadProperties(String filename) throws Exception {
+		waitForAjax();
+		IFile target = project.getFile(filename);
+		assertTrue("File '" + target + "' exists", target.exists());
+		
+		Properties p = new Properties();
+		target.refreshLocal(IResource.DEPTH_INFINITE, monitor);	// refresh
+		p.load(target.getContents());
+
+		return p;
+	}
 	
 }

@@ -307,6 +307,32 @@
             path="icons/full/obj32/CompositeCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="FileDomainAttribute"
+          description="Create new FileDomainAttribute">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/FileDomainAttribute.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/FileDomainAttribute.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="FileDomainObject"
+          description="Create new FileDomainObject">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/FileDomainObject.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/FileDomainObject.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

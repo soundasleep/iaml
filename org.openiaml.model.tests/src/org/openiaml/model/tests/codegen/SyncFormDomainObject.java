@@ -69,21 +69,10 @@ public class SyncFormDomainObject extends CodegenTestCase {
 		// the values should still be the same
 		assertLabeledFieldEquals(field1id, testingText1);
 		assertLabeledFieldEquals(field2id, testingText2);
-		waitForAjax();	 // wait for ajax calls if necessary
 				
 		// check the database
 		{
-			// refresh the workspace
-			assertTrue(refreshProject().isOK());
-			
-			IFile db = getProject().getFile(dbName);
-			assertTrue("db '" + dbName + "' should now exist", db.exists());
-
-			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + db.getLocation());
-			Statement stat = conn.createStatement();
-	
-			ResultSet rs = stat.executeQuery("SELECT * FROM form1;");
+			ResultSet rs = loadDatabaseQuery(dbName, "SELECT * FROM form1;");
 			assertTrue(rs.next());	// there should be one value
 			
 			String field1 = rs.getString("field1");

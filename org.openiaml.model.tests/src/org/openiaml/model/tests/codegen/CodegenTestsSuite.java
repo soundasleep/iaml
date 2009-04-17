@@ -50,6 +50,8 @@ public class CodegenTestsSuite {
 
 		// other model 0.3 tests
 		suite.addTestSuite(DataFlowTemporaryVariable.class);
+		suite.addTestSuite(DatabaseWithInputForm.class);
+		suite.addTestSuite(PropertiesFileWithInputForm.class);
 
 		return suite;
 	}

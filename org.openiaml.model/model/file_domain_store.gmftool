@@ -99,6 +99,19 @@
             path="icons/full/obj32/SyncWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="FileDomainAttribute"
+          description="Create new FileDomainAttribute">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/FileDomainAttribute.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/FileDomainAttribute.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

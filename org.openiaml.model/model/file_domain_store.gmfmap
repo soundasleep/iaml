@@ -131,6 +131,26 @@
           href="iaml.gmfgraph#ApplicationElementProperty"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//domain/AbstractDomainStore/attributes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/FileDomainAttribute"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#FileDomainAttributeName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="file_domain_store.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#FileDomainAttribute"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

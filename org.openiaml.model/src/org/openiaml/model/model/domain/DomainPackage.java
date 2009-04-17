@@ -191,13 +191,22 @@ public interface DomainPackage extends EPackage {
 	int ABSTRACT_DOMAIN_STORE__VIEWS = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DOMAIN_STORE__ATTRIBUTES = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Domain Store</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DOMAIN_STORE_FEATURE_COUNT = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int ABSTRACT_DOMAIN_STORE_FEATURE_COUNT = ModelPackage.CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.domain.impl.AbstractDomainObjectImpl <em>Abstract Domain Object</em>}' class.
@@ -644,6 +653,15 @@ public interface DomainPackage extends EPackage {
 	int FILE_DOMAIN_STORE__VIEWS = ABSTRACT_DOMAIN_STORE__VIEWS;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_DOMAIN_STORE__ATTRIBUTES = ABSTRACT_DOMAIN_STORE__ATTRIBUTES;
+
+	/**
 	 * The feature id for the '<em><b>File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1033,6 +1051,17 @@ public interface DomainPackage extends EPackage {
 	EReference getAbstractDomainStore_Views();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.domain.AbstractDomainStore#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see org.openiaml.model.model.domain.AbstractDomainStore#getAttributes()
+	 * @see #getAbstractDomainStore()
+	 * @generated
+	 */
+	EReference getAbstractDomainStore_Attributes();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.domain.AbstractDomainObject <em>Abstract Domain Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1170,6 +1199,14 @@ public interface DomainPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_DOMAIN_STORE__VIEWS = eINSTANCE.getAbstractDomainStore_Views();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_DOMAIN_STORE__ATTRIBUTES = eINSTANCE.getAbstractDomainStore_Attributes();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.domain.impl.AbstractDomainObjectImpl <em>Abstract Domain Object</em>}' class.

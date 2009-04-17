@@ -5,8 +5,6 @@ package org.openiaml.model.tests.inference;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;

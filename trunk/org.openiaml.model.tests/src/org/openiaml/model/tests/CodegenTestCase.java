@@ -310,7 +310,12 @@ public class CodegenTestCase extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	protected Properties loadProperties(String filename) throws Exception {
+		// wait for ajax calls if necessary
 		waitForAjax();
+		
+		// refresh the workspace
+		assertTrue(refreshProject().isOK());
+
 		IFile target = project.getFile(filename);
 		assertTrue("File '" + target + "' exists", target.exists());
 		

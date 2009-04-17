@@ -168,7 +168,11 @@
 				throw new IamlRuntimeException("Could not fetch row '$row_name' from properties database '$db_name': no results found");
 			}
 		«ENDIF»
-		echo "\"" . htmlspecialchars($value) . "\""; 
+		if ($value !== null) {
+			echo "\"" . htmlspecialchars($value) . "\"";
+		} else {
+			echo "null";	/* signifies that we shouldn't change anything */
+		} 
 	?>
 «ENDDEFINE» 
 

@@ -111,8 +111,12 @@ echo "ok";
 /** 
  * Expand out each DomainStore.
  */
-«DEFINE expandDomainStore FOR model::domain::AbstractDomainStore» 
+«DEFINE expandDomainStore FOR model::domain::AbstractDomainStore»
+	/* Domain Store «this.name» */ 
 	«EXPAND expandDomainObject(this) FOREACH children»
+	
+	/* Sole attributes */
+	«EXPAND soleAttribute(this) FOREACH attributes» 
 «ENDDEFINE»
 
 /**
@@ -143,6 +147,39 @@ echo "ok";
 «ENDDEFINE»
 
 «DEFINE expandDomainAttribute(model::domain::FileDomainStore store, model::domain::FileDomainObject object) FOR model::domain::FileDomainAttribute»
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "properties";
+		$db_name = "«store.file»";
+		$table_name = null;
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+	}
+«ENDDEFINE»
+
+/**
+ * Expand out each solo DomainAttribute.
+ */
+«DEFINE soleAttribute(model::domain::AbstractDomainStore store) FOR model::domain::AbstractDomainAttribute»
+	«EXPAND exception FOR throwException("Cannot expand AbstractDomainAttribute " + this + " (store=" + store + ")")»
+«ENDDEFINE»
+
+«DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute»
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "pdo";
+		$db_name = "sqlite:«safeNameString(store.id)».db";
+		$table_name = "single_values";
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+	}
+«ENDDEFINE»
+
+«DEFINE soleAttribute(model::domain::FileDomainStore store) FOR model::domain::FileDomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";

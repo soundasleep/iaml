@@ -3,6 +3,9 @@
 «EXTENSION xpt::diagram::Utils»
 «EXTENSION xpt::GenModelUtils»
 
+/**
+ * TODO: what is this extension used for?
+ */
 «AROUND destroySemanticElement FOR gmfgen::GenNode-»
 	cc.add(new org.openiaml.model.diagramextensions.HandleDeletingGeneratedElementsCommand(req, getHost()));
 	«targetDef.proceed()»

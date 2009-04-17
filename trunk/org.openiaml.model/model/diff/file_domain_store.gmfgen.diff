@@ -1,6 +1,6 @@
---- file_domain_store.gmfgen	2009-02-05 14:50:51.070783400 +1300
-+++ copies/file_domain_store.gmfgen	2009-02-05 14:50:29.789397200 +1300
-@@ -69,6 +69,11 @@
+--- file_domain_store.gmfgen	2009-04-17 15:51:17.165526400 +1200
++++ copies/file_domain_store.gmfgen	2009-04-17 15:51:02.509088800 +1200
+@@ -71,6 +71,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,7 +12,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/domain/FileDomainObject"/>
-@@ -170,6 +175,11 @@
+@@ -172,6 +177,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -24,7 +24,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/ChainedOperation"/>
-@@ -223,6 +233,11 @@
+@@ -225,6 +235,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -36,7 +36,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -373,6 +388,11 @@
+@@ -377,6 +392,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="ElementOpenDiagramEditPolicy"
++          diagramKind="Iaml_Element"
++          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/domain/FileDomainAttribute"/>
+@@ -423,6 +443,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

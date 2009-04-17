@@ -149,11 +149,22 @@ model::domain::FileDomainStore getFileDomainStore(model::domain::FileDomainAttri
 model::domain::FileDomainObject getFileDomainObject(model::domain::FileDomainAttribute this) :
 	eContainer;
 
+model::DomainStore getDomainStore(model::DomainStore this) :
+	this;
+model::DomainStore getDomainStore(model::DomainObject this) :
+	getDomainStore(eContainer);
 model::DomainStore getDomainStore(model::DomainAttribute this) :
-	getDomainObject(this).eContainer;
-model::DomainObject getDomainObject(model::DomainAttribute this) :
-	eContainer;
+	getDomainStore(eContainer);
+model::DomainStore getDomainStore(emf::EObject this) :
+	null;
 
+model::DomainObject getDomainObject(model::DomainObject this) :
+	this;
+model::DomainObject getDomainObject(model::DomainAttribute this) :
+	getDomainObject(eContainer);
+model::DomainObject getDomainObject(emf::EObject this) :
+	null;
+	
 /** for a given setPropertyToValue operation, should we be calling
   additional event triggers? */
 shouldExpandEventTriggers(model::ChainedOperation this ) :

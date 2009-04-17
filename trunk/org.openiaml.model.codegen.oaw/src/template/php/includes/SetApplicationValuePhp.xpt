@@ -11,8 +11,8 @@
 require("header.php");
 
 log_message("set_application_value.php? " . print_r($_GET, true));
-$id = $_GET["id"] or local_die("no id");
-$arg0 = $_GET["arg0"] or local_die("no arg0");
+$id = $_GET["id"] or throw_new_IamlRuntimeException("no id");
+$arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
 
 set_application_value($id, $arg0);
 log_message("set_application_value.php: setting id=$id, arg0=$arg0");

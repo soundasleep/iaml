@@ -149,7 +149,7 @@
 «ENDDEFINE»
 
 «DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::domain::FileDomainAttribute»
-	"<?php 
+	<?php 
 		// remote parameter source from a .properties file
 		$db_type = "FileDomainObject";
 		«IF model::domain::FileDomainStore.isInstance(getFileDomainStore(this))»
@@ -168,49 +168,53 @@
 				throw new IamlRuntimeException("Could not fetch row '$row_name' from properties database '$db_name': no results found");
 			}
 		«ENDIF»
-		echo htmlspecialchars($value); 
-	?>" 
+		echo "\"" . htmlspecialchars($value) . "\""; 
+	?>
 «ENDDEFINE» 
 
 «DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::DomainAttribute»
-	"<?php 
+	<?php 
 		// remote parameter source from a database file
 		$db_type = "DomainObject";
-		«IF model::DomainStore.isInstance(getDomainStore(this))»
+		«IF getDomainStore(this) != null»
 			$db_name = "sqlite:«safeNameString(getDomainStore(this).id)».db";
-		«ELSEIF model::InternetApplication.isInstance(getDomainStore(this))»
-			$db_name = "sqlite:internet_application.db";
 		«ELSE»
-			«EXPAND exception FOR throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore.")»
+			/* default database, for attributes without stores */
+			$db_name = "sqlite:internet_application.db";
 		«ENDIF»
-		$table_name = "«safeNameString(getDomainObject(this).name)»";
+		«IF getDomainObject(this) != null»
+			$table_name = "«safeNameString(getDomainObject(this).name)»";
+		«ELSE»
+			/* default table name, for attributes without objects */
+			$table_name = "single_values";
+		«ENDIF»
 		$row_name = "«safeNameString(this.name)»";
 		
 		// TODO: put this into a function
 		if (!$db_name)
-			local_die("no $db_type db found");
+			throw new IamlRuntimeException("no $db_type db found");
 		if (!$table_name)
-			local_die("no $db_type table found (db=$db_name)");
+			throw new IamlRuntimeException("no $db_type table found (db=$db_name)");
 		if (!$row_name)
-			local_die("no $db_type row found (table=$table_name)");
+			throw new IamlRuntimeException("no $db_type row found (table=$table_name)");
 		
 		// connect to the database source
-		$db = new PDO($db_name) or local_die("could not open $db_type db '$db_name'");
+		$db = new PDO($db_name) or throw_new_IamlRuntimeException("could not open $db_type db '$db_name'");
 		
 		// does anything exist?
-		$results = $db->query("SELECT $row_name FROM $table_name") or local_die("could not look for existing values in $db_type '$table_name': " .print_r($db->errorInfo(), true));
+		$results = $db->query("SELECT $row_name FROM $table_name") or throw_new_IamlRuntimeException("could not look for existing values in $db_type '$table_name': " .print_r($db->errorInfo(), true));
 		if ($row = $results->fetch()) {
 			// update
-			echo htmlspecialchars($row[$row_name]);
+			echo "\"" . htmlspecialchars($row[$row_name]) . "\"";
 		} else {
 			// empty
 			«IF require»
 				throw new IamlRuntimeException("Could not fetch row '$row_name' from table '$table_name' from database '$db_name': no results found");
 			«ELSE»
-				// not required
+				echo "null";	/* signifies that we shouldn't change anything */
 			«ENDIF»
 		}		
-	?>" 
+	?> 
 «ENDDEFINE» 
 
 /* expand out the operations for the page */
@@ -352,6 +356,19 @@
 				// set server/session variables too
 				«EXPAND template::Page::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
 			}
+		«ELSEIF isAbstractDomainAttribute(outFlows.first().to.eContainer)-»
+			«REM»direct field --> domain attribute«ENDREM»
+			var value = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
+			if (value !== null) {
+				// ignore null parameters
+				// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
+				// will populate this field
+				store_db('«safeNameString(((model::DomainAttribute) outFlows.first().to.eContainer).id)»',
+					value);
+
+				// set server/session variables too
+				«EXPAND template::Page::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
+			} 
 		«ELSEIF containingSession(outFlows.first().to) == null»
 			«REM»contained in a Page or InternetApplication: a static value«ENDREM»
 			set_application_value("«safeName(outFlows.first().to)»", 

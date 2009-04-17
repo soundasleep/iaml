@@ -43,14 +43,14 @@ function store_event($page_id, $event_name, $arg0) {
 	$result = call_remote_url($url);
 
 	if (trim($result) != "ok")
-		local_die("store_db failed: \"" . $result . "\"");
+		throw new IamlRuntimeException("store_db failed: \"" . $result . "\"");
 		
 	return true;
 }
 
 log_message("store_db.php? " . print_r($_GET, true));
-$attribute_id = $_GET["attribute_id"] or local_die("no attribute id");
-$arg0 = $_GET["arg0"] or local_die("no arg0");
+$attribute_id = $_GET["attribute_id"] or throw_new_IamlRuntimeException("no attribute id");
+$arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
 
 // anti-infinite-loop trace tracking
 add_running_function($attribute_id);
@@ -65,32 +65,32 @@ $row_name = false;
 
 if ($db_type == "pdo") {
 	if (!$db_name)
-		local_die("no $db_type db found");
+		throw new IamlRuntimeException("no $db_type db found");
 	if (!$table_name)
-		local_die("no $db_type table found (db=$db_name)");
+		throw new IamlRuntimeException("no $db_type table found (db=$db_name)");
 	if (!$row_name)
-		local_die("no $db_type row found (table=$table_name)");
+		throw new IamlRuntimeException("no $db_type row found (table=$table_name)");
 	
 	// connect to the database source
-	$db = new PDO($db_name) or local_die("could not open $db_type db '$db_name'");
+	$db = new PDO($db_name) or throw_new_IamlRuntimeException("could not open $db_type db '$db_name'");
 	
 	// does anything exist?
-	$results = $db->query("SELECT * FROM $table_name") or local_die("could not look for existing values in $db_type '$table_name': " .print_r($db->errorInfo(), true));
+	$results = $db->query("SELECT * FROM $table_name") or throw_new_IamlRuntimeException("could not look for existing values in $db_type '$table_name': " .print_r($db->errorInfo(), true));
 	if ($results->fetch()) {
 		// yes: update all existing
-		$s = $db->prepare("UPDATE $table_name SET $row_name = ?") or local_die("could not prepare $db_type update query: " . print_r($db->errorInfo(), true));
+		$s = $db->prepare("UPDATE $table_name SET $row_name = ?") or throw_new_IamlRuntimeException("could not prepare $db_type update query: " . print_r($db->errorInfo(), true));
 	} else {
 		// no: insert new
-		$s = $db->prepare("INSERT INTO $table_name ($row_name) VALUES (?)") or local_die("could not prepare $db_type insert query: " . print_r($db->errorInfo(), true));
+		$s = $db->prepare("INSERT INTO $table_name ($row_name) VALUES (?)") or throw_new_IamlRuntimeException("could not prepare $db_type insert query: " . print_r($db->errorInfo(), true));
 	}
 	
 	// update all existing
-	$s->execute(array($arg0)) or local_die("could not execute query: " . print_r($db->errorInfo(), true));
+	$s->execute(array($arg0)) or throw_new_IamlRuntimeException("could not execute query: " . print_r($db->errorInfo(), true));
 } elseif ($db_type == "properties") {
 	if (!$db_name)
-		local_die("no $db_type db found");
+		throw new IamlRuntimeException("no $db_type db found");
 	if (!$row_name)
-		local_die("no $db_type row found (table=$table_name)");
+		throw new IamlRuntimeException("no $db_type row found (table=$table_name)");
 	
 	$properties = load_properties($db_name);
 	$properties = set_property($db_name, $properties, $row_name, $arg0); 

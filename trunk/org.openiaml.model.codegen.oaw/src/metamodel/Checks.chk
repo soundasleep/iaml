@@ -67,3 +67,6 @@ context model::scopes::Session ERROR "Sessions cannot directly contain InputText
 context model::scopes::Session ERROR "Sessions cannot directly contain InputForms" :
 	!children.exists( e | model::visual::InputForm.isInstance(e) );
 	
+context model::domain::AbstractDomainObject ERROR "You cannot have a DomainObject called single_values (reserved word)" :
+	name != "single_values";
+	

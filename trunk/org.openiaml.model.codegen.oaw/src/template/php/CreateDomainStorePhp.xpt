@@ -6,17 +6,28 @@
  * PHP code for creating the domain store.
  */
 «DEFINE createDomainStorePhp FOR model::domain::AbstractDomainStore»
-	«ERROR "Cannot expand createDomainStorePhp for AbstractDomainStore " + this»
+	«EXPAND exception FOR throwException("Cannot expand createDomainStorePhp for AbstractDomainStore " + this)»
 «ENDDEFINE»
 
 «DEFINE createDomainStorePhp FOR model::DomainStore»
 	// DomainStore "«name»"
 
 	// first, make sure the table exists
-	$db = new PDO('sqlite:«safeName()».db') or local_die("could not open db '«safeName()».db'");
+	$db = new PDO('sqlite:«safeName()».db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
 	
 	// now cycle through all DomainObjects in this DomainStore
 	«EXPAND createDomainObjectPhp FOREACH children»
+
+	// sole attributes
+	«IF attributes.size > 0»
+		$s = $db->prepare("SELECT * FROM single_values");
+		if (!$s) {
+			// create the table
+			$q = $db->query("CREATE TABLE single_values (
+					«EXPAND createDomainAttributePhp FOREACH attributes SEPARATOR ", "»
+				);") or throw_new_IamlRuntimeException("could not create single_values table: " . print_r($db->errorInfo(), true));
+		}	
+	«ENDIF»
 	
 	// close connection
 	$db = null;
@@ -31,7 +42,7 @@
  * Expand a DomainObject into a SQL table.
  */ 
 «DEFINE createDomainObjectPhp FOR model::domain::AbstractDomainObject»
-	«ERROR "Cannot expand createDomainObjectPhp for AbstractDomainObject " + this»
+	«EXPAND exception FOR throwException("Cannot expand createDomainObjectPhp for AbstractDomainObject " + this)»
 «ENDDEFINE»
 
 «DEFINE createDomainObjectPhp FOR model::DomainObject»
@@ -40,7 +51,7 @@
 		// create the table
 		$q = $db->query("CREATE TABLE «safeNameString(name)» (
 				«EXPAND createDomainAttributePhp FOREACH attributes SEPARATOR ", "»
-			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+			);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db->errorInfo(), true));
 	}
 «ENDDEFINE»
 
@@ -53,7 +64,7 @@
 	// root DomainObject "«name»"
 
 	// first, make sure the table exists
-	$db = new PDO('sqlite:internet_application.db') or local_die("could not open db '«safeName()».db'");
+	$db = new PDO('sqlite:internet_application.db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
 	
 	// now cycle through this DomainObject
 	«EXPAND createDomainObjectPhp FOR this»
@@ -71,9 +82,12 @@
  * Expand a DomainAttribute into a SQL row.
  */
 «DEFINE createDomainAttributePhp FOR model::domain::AbstractDomainAttribute»
-	«ERROR "Cannot expand createDomainAttributePhp for AbstractDomainAttribute " + this»
+	«EXPAND exception FOR throwException("Cannot expand createDomainAttributePhp for AbstractDomainAttribute " + this)»
 «ENDDEFINE»
 
 «DEFINE createDomainAttributePhp FOR model::DomainAttribute»
 	«safeNameString(name)» VARCHAR(255) NULL
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
 «ENDDEFINE»

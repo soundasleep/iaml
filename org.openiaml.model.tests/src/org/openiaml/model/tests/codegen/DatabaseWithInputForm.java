@@ -57,10 +57,10 @@ public class DatabaseWithInputForm extends CodegenTestCase {
 		
 		// let's check the database
 		ResultSet rs = loadDatabaseQuery("output/model_120b1f587bf_3cf.db", 
-				"SELECT * FROM single_values WHERE name='value1';");
+				"SELECT value1 FROM single_values;");
 		assertTrue(rs.next());	// there should be one value
 		
-		String value = rs.getString("value");
+		String value = rs.getString("value1");
 		assertEquals(value, text);
 		
 		// there should not be any more values in the database
@@ -101,10 +101,10 @@ public class DatabaseWithInputForm extends CodegenTestCase {
 
 		// let's check the database
 		ResultSet rs = loadDatabaseQuery("output/model_120b1f587bf_3cf.db", 
-				"SELECT * FROM single_values WHERE name='value2';");
+				"SELECT value2 FROM single_values;");
 		assertTrue(rs.next());	// there should be one value
 		
-		String value = rs.getString("value");
+		String value = rs.getString("value2");
 		assertEquals(value, text);
 		
 		// there should not be any more values in the database

@@ -29,6 +29,14 @@ function log_message($msg, $also_debug = true) {
 	}
 }
 
+/**
+ * For some reason, we can't have '$x = $a or throw new Ex()'
+ * so we need to wrap it in a function.
+ */
+function throw_new_IamlRuntimeException($message) {
+	throw new IamlRuntimeException($message);
+}
+
 $enable_queue_log_messages = false;
 $queue_log_messages = "";
 /**
@@ -52,13 +60,8 @@ function queue_log_messages($on) {
 	}
 }
 
-function local_die($message) {
-	log_message("DEATH: $message");
-	die($message);
-}
-
 // make sure that the db exists for stored_events
-$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
+$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 $s = $db->prepare("SELECT * FROM stored_events");
 if (!$s) {
 	// create the table
@@ -67,7 +70,7 @@ if (!$s) {
 			page_id VARCHAR(64) NOT NULL,
 			event_name VARCHAR(64) NOT NULL,
 			arg0 BLOB
-		);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+		);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db->errorInfo(), true));
 	log_message("table for stored_events created", false);
 }
 
@@ -104,7 +107,7 @@ class IamlRuntimeException extends Exception {
  */
 function get_application_value($id, $default) {
 	global $db;
-	$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
+	$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 	
 	// make sure the table is there
 	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
@@ -114,14 +117,14 @@ function get_application_value($id, $default) {
 				id INT AUTO_INCREMENT PRIMARY KEY,
 				value_id VARCHAR(64) NOT NULL,
 				arg0 BLOB
-			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+			);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db->errorInfo(), true));
 		log_message("table for global_values created", false);
 		
 		return $default;
 	}
 
 	// get the value
-	$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
+	$s->execute(array($id)) or throw_new_IamlRuntimeException("could not execute select query: " . print_r($db->errorInfo(), true));
 	$row = $s->fetch();
 	
 	if (!$row) {
@@ -137,7 +140,7 @@ function get_application_value($id, $default) {
  */
 function set_application_value($id, $value) {
 	global $db;
-	$db = new PDO('sqlite:stored_events.db') or local_die("could not open db");
+	$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 	
 	// make sure the table is there
 	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
@@ -147,7 +150,7 @@ function set_application_value($id, $value) {
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				value_id VARCHAR(64) NOT NULL,
 				arg0 BLOB
-			);") or local_die("could not create table: " . print_r($db->errorInfo(), true));
+			);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db->errorInfo(), true));
 		log_message("table for global_values created", false);
 	
 		// re-prepare
@@ -155,21 +158,21 @@ function set_application_value($id, $value) {
 	}
 	
 	// execute the query with the parameter
-	$s->execute(array($id)) or local_die("could not execute select query: " . print_r($db->errorInfo(), true));
+	$s->execute(array($id)) or throw_new_IamlRuntimeException("could not execute select query: " . print_r($db->errorInfo(), true));
 	
 	// does anything exist?
 	if ($s->fetch()) {
 		// yes: update all existing
-		$s = $db->prepare("UPDATE global_values SET arg0=? WHERE value_id=?") or local_die("could not prepare update query: " . print_r($db->errorInfo(), true));
+		$s = $db->prepare("UPDATE global_values SET arg0=? WHERE value_id=?") or throw_new_IamlRuntimeException("could not prepare update query: " . print_r($db->errorInfo(), true));
 		log_message("Updating existing: " . $id);
 	} else {
 		// no: insert new
-		$s = $db->prepare("INSERT INTO global_values (arg0, value_id) VALUES (?, ?)") or local_die("could not prepare insert query: " . print_r($db->errorInfo(), true));
+		$s = $db->prepare("INSERT INTO global_values (arg0, value_id) VALUES (?, ?)") or throw_new_IamlRuntimeException("could not prepare insert query: " . print_r($db->errorInfo(), true));
 		log_message("Inserting new: " . $id);
 	}
 	
 	// update all existing
-	$s->execute(array($value, $id)) or local_die("could not execute query: " . print_r($db->errorInfo(), true));
+	$s->execute(array($value, $id)) or throw_new_IamlRuntimeException("could not execute query: " . print_r($db->errorInfo(), true));
 	
 	// done
 	$s = null;

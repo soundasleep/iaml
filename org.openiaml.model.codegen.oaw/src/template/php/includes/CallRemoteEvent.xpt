@@ -22,7 +22,7 @@ $existing_pages = array(
 	«EXPAND allPageNames FOREACH getAllPages() SEPARATOR ", "»
 );
 if (!isset($existing_pages[$container])) {
-	local_die("Container '$container' was not found in existing pages.");
+	throw new IamlRuntimeException("Container '$container' was not found in existing pages.");
 }
 
 /* let's call it through a HTTP request */

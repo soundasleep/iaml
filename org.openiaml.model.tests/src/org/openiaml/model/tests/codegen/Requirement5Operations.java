@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.codegen;
 
-import java.util.Date;
 import java.util.Random;
 
 import org.eclipse.core.resources.IFile;

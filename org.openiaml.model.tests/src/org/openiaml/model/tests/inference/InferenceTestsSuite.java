@@ -24,6 +24,8 @@ public class InferenceTestsSuite {
         suite.addTestSuite(SyncFieldDomainAttribute.class);
         suite.addTestSuite(SyncFormDomainObject.class);
         suite.addTestSuite(SyncWireProperties.class);
+        
+        // model 0.2
         suite.addTestSuite(ConditionWireFalse.class);
         suite.addTestSuite(ConditionWireFalseServer.class);
         suite.addTestSuite(ConditionWireXpath.class);
@@ -31,6 +33,10 @@ public class InferenceTestsSuite {
         suite.addTestSuite(Requirement4DynamicSources.class);
         suite.addTestSuite(SavedRuleSources.class);
         suite.addTestSuite(SessionSyncWires.class);
+        
+        // model 0.3
+        suite.addTestSuite(DatabaseWithInputForm.class);
+        suite.addTestSuite(PropertiesFileWithInputForm.class);
 		//$JUnit-END$
         return suite; 
    }

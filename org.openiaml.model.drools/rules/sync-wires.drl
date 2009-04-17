@@ -20,6 +20,10 @@ function boolean syncMatches(NamedElement e1, NamedElement e2) {
 }
 
 function boolean connects(WireEdge wire, Object a, Object b) {
+	if (wire.getFrom() == null)
+		throw new NullPointerException("Wire '" + wire + "'.from = null");
+	if (wire.getTo() == null)
+		throw new NullPointerException("Wire '" + wire + "'.to = null");
 	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
 		(wire.getFrom().equals(b) && wire.getTo().equals(a));
 }

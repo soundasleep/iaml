@@ -1682,6 +1682,20 @@
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeCondition.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeCondition.gif"
             genNodes="//@diagram/@topLevelNodes.15"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="FileDomainAttribute"
+            description="Create new FileDomainAttribute"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/FileDomainAttribute.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/FileDomainAttribute.gif"
+            genNodes="//@diagram/@topLevelNodes.14"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="FileDomainObject"
+            description="Create new FileDomainObject"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/FileDomainObject.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/FileDomainObject.gif"
+            genNodes="//@diagram/@topLevelNodes.13"/>
       </groups>
     </palette>
     <preferencePages

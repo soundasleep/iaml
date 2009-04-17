@@ -319,6 +319,9 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.24"/>
       <diagramNode
           href="iaml.gmfgraph#FileDomainObject"/>
     </ownedChild>
@@ -338,6 +341,9 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.23"/>
       <diagramNode
           href="iaml.gmfgraph#FileDomainAttribute"/>
     </ownedChild>

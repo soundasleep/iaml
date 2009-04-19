@@ -48,6 +48,9 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		assertShortcut(event1);
 		assertNotShortcut(event2);
 		
+		editor_store.close(false);
+		editor_store = null;
+		
 		// open 'page' editor
 		editor_page = openDiagram(page);
 		
@@ -66,6 +69,9 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		// they should be the same element
 		assertSameReferencedElement(et1, event1);
 		assertSameReferencedElement(child, obj);
+		
+		editor_page.close(false);
+		editor_page = null;
 		
 	}
 	

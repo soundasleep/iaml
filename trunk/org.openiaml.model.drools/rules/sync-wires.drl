@@ -575,32 +575,6 @@ end
 
 # SyncWires do not connect the fields together; they can _also_
 # connect the Pages together.
-rule "Connect Session.init to incoming SyncWires debug"
-	when
-		session : Session ( overridden == false )
-		sw : SyncWire( overridden == false )
-		sourcePage : ContainsEventTriggers( eval(!containingSessionEquals(sourcePage, session)) )  
-		targetPage : ContainsOperations( eval(containingSessionEquals(targetPage, session)) )
-		eval( connects(sw, sourcePage, targetPage ))
-
-		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
-		targetElement : ContainsOperations( eContainer == targetPage )
-		eval( connects(sw2, sourceElement, targetElement ))
-
-		event : EventTrigger( eContainer == sourceElement, name == "edit" )
-		operation : Operation( eContainer == targetElement, name == "update" )
-
-		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, name == "init" )
-	
-	then
-		System.out.println("session = " + session + "\nsource=" + sourceElement 
-			+ "\ntarget=" + targetElement + "\nevent= " + event 
-			+ "\noperation=" + operation + "\ninite = " + inite
-			+ "\nrw = " + rw);
-end
-		
 rule "Connect Session.init to incoming SyncWires (contained in Pages)"
 	when
 		session : Session ( overridden == false )

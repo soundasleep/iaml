@@ -40,29 +40,41 @@ public class OawCodeGenerator implements ICodeGenerator {
 	 */
 	public IStatus generateCode(IFile file, IProgressMonitor monitor) {
 		
-		// we can't set the property to get the correct logger, because Eclipse
-		// instantiates the logger before we even have the chance to.
-		// and we can't have a .properties file, because this is the .propertiues
-		// from the context of the classloader (Eclipse)
+		/*
+		 * We have to do some magic to enable OAW logging to go through
+		 * our own class. We have to provide this information to 
+		 * commons.logging directly.
+		 * 
+		 * Based on http://oaw-forum.itemis.de/forum/viewtopic.php?forum=1&showtopic=1486 (german)
+		 */
+		ClassLoader oldcl = Thread.currentThread().getContextClassLoader();
 		
-		// System.setProperty("org.apache.commons.logging.LogFactory", "org.openiaml.model.codegen.oaw.OawCodeGenerator.MyLogFactory");
-		
-		String wfFile = "src/workflow/generator.oaw";
-		Map<String,String> properties = new HashMap<String,String>();
-		properties.put("model", file.getFullPath().toString());
-		properties.put("src-gen", file.getProject().getLocation().toString());	// have to get absolute filename for output dir
-		Map<String,Object> slotContents = new HashMap<String,Object>();
-		new WorkflowRunner().run(wfFile,
-			new ProgressMonitorAdapter(monitor), properties, slotContents);
-		
-		// refresh output folder
 		try {
-			file.getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
-		} catch (CoreException e) {
-			return new Status(Status.WARNING, "org.openiaml.model.codegen.oaw", "Could not refresh local project", e);
+			// to enable custom logging
+			Thread.currentThread().setContextClassLoader(OawCodeGenerator.class.getClassLoader());
+			MyLog.registerToLogFactory();
+			
+			String wfFile = "src/workflow/generator.oaw";
+			Map<String,String> properties = new HashMap<String,String>();
+			properties.put("model", file.getFullPath().toString());
+			properties.put("src-gen", file.getProject().getLocation().toString());	// have to get absolute filename for output dir
+			Map<String,Object> slotContents = new HashMap<String,Object>();
+			new WorkflowRunner().run(wfFile,
+				new ProgressMonitorAdapter(monitor), properties, slotContents);
+			
+			// refresh output folder
+			try {
+				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+			} catch (CoreException e) {
+				return new Status(Status.WARNING, "org.openiaml.model.codegen.oaw", "Could not refresh local project", e);
+			}
+			
+			return Status.OK_STATUS;
+		} finally {
+			// reset the classloader/log
+			Thread.currentThread().setContextClassLoader(oldcl);
+			MyLog.unregisterFromLogFactory();
 		}
-		
-		return Status.OK_STATUS;
 			
 	}
 	

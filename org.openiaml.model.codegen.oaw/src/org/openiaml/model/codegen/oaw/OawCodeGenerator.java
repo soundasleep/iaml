@@ -33,6 +33,8 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  */
 public class OawCodeGenerator implements ICodeGenerator {
 	
+	public static final String PLUGIN_ID = "org.openiaml.model.codegen.oaw"; 
+	
 	/**
 	 * Generate code for a given model file into a given output directory.
 	 * Does NOT deal with inference.
@@ -52,7 +54,7 @@ public class OawCodeGenerator implements ICodeGenerator {
 		try {
 			// to enable custom logging
 			Thread.currentThread().setContextClassLoader(OawCodeGenerator.class.getClassLoader());
-			MyLog.registerToLogFactory();
+			CustomOAWLog.registerToLogFactory();
 			
 			String wfFile = "src/workflow/generator.oaw";
 			Map<String,String> properties = new HashMap<String,String>();
@@ -66,14 +68,17 @@ public class OawCodeGenerator implements ICodeGenerator {
 			try {
 				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
 			} catch (CoreException e) {
-				return new Status(Status.WARNING, "org.openiaml.model.codegen.oaw", "Could not refresh local project", e);
+				return new Status(Status.WARNING, PLUGIN_ID, "Could not refresh local project", e);
 			}
 			
+			if (CustomOAWLog.hasErrors()) {
+				return CustomOAWLog.getErrors();
+			}
 			return Status.OK_STATUS;
 		} finally {
 			// reset the classloader/log
 			Thread.currentThread().setContextClassLoader(oldcl);
-			MyLog.unregisterFromLogFactory();
+			CustomOAWLog.unregisterFromLogFactory();
 		}
 			
 	}

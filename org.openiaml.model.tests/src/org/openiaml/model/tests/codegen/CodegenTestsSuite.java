@@ -1,5 +1,7 @@
 package org.openiaml.model.tests.codegen;
 
+import org.openiaml.model.tests.codegen.oaw.OawTestsSuite;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -18,7 +20,10 @@ public class CodegenTestsSuite {
 	 */
 	public static Test suite() { 
 		TestSuite suite = new TestSuite("Code Generation");
-
+		
+		// OAW-specific tests
+		suite.addTest(OawTestsSuite.suite());
+		
 		suite.addTestSuite(SimpleTestCase.class);
 		suite.addTestSuite(SyncFieldDomainAttribute.class);
 		suite.addTestSuite(SyncStaticValueField.class);

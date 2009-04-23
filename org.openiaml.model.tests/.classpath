@@ -7,7 +7,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-httpclient-3.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-io-1.3.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-lang-2.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-logging-1.1.1.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/Desktop/Downloads/commons-logging-1.1.1-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/cssparser-0.9.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/htmlunit-2.3.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/Desktop/htmlunit-2.3-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/htmlunit-core-js-2.2.jar"/>

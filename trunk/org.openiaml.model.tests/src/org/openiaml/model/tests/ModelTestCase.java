@@ -104,25 +104,36 @@ public abstract class ModelTestCase extends WebTestCase {
 		return "test." + this.getClass().getSimpleName() + "." + new SimpleDateFormat("yyMMddHHmmss").format(new Date());
 	}
 
+	protected IStatus transformStatus = null;
+	
+	/**
+	 * Store the last IStatus of doTransform().
+	 * @see #doTransform(String)
+	 */
+	public IStatus getTransformStatus() {
+		return transformStatus;
+	}
+
 	/**
 	 * Do the transformation and make sure it succeeded.
+	 * The result of the transformation is stored in {@link #getTransformStatus()}.
 	 * 
 	 * @param inputFile
 	 * @throws Throwable if it did not succeed
 	 */
 	protected void doTransform(String inputFile) throws Exception {
-		IStatus test = doTransform(inputFile, getProjectName(), monitor);
-		if (!test.isOK()) {
-			for (IStatus s : test.getChildren()) {
+		transformStatus = doTransform(inputFile, getProjectName(), monitor);
+		if (!transformStatus.isOK()) {
+			for (IStatus s : transformStatus.getChildren()) {
 				System.err.println(s);		// print out the status errors
 				if (s.getException() != null)
 					throw new RuntimeException("transformation failed", s.getException());	// we will only crash on the first one
 			}
 			
-			if (test.getException() != null) {
-				throw new RuntimeException("transformation failed", test.getException());	// force an exception
+			if (transformStatus.getException() != null) {
+				throw new RuntimeException("transformation failed", transformStatus.getException());	// force an exception
 			}
-			assertTrue(test.getMessage(), false);	// force a fail
+			assertTrue(transformStatus.getMessage(), false);	// force a fail
 		}
 	}
 	
@@ -209,7 +220,12 @@ public abstract class ModelTestCase extends WebTestCase {
 			IProgressMonitor monitor) throws CoreException {
 		
 		ICodeGenerator runner = new OawCodeGenerator();		
-		runner.generateCode(filename, monitor);
+		IStatus status = runner.generateCode(filename, monitor);
+		
+		if (!status.isOK()) {
+			// bail early
+			return status;
+		}
 		
 		// once generated, we need to refresh the workspace before
 		// we can carry on testing (normally, we would just let Eclipse automatically

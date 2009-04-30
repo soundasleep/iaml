@@ -1,9 +1,9 @@
 package org.openiaml.model.tests.codegen;
 
-import org.openiaml.model.tests.codegen.oaw.OawTestsSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.openiaml.model.tests.codegen.oaw.OawTestsSuite;
 
 /**
  * All tests for code generation.
@@ -23,40 +23,11 @@ public class CodegenTestsSuite {
 		
 		// OAW-specific tests
 		suite.addTest(OawTestsSuite.suite());
-		
-		suite.addTestSuite(SimpleTestCase.class);
-		suite.addTestSuite(SyncFieldDomainAttribute.class);
-		suite.addTestSuite(SyncStaticValueField.class);
-		suite.addTestSuite(SyncWiresPagesTestCase.class);
-		suite.addTestSuite(LoginHandlerKey.class);
-		suite.addTestSuite(SyncFormDomainObject.class);
-		suite.addTestSuite(SyncFieldApplicationElementProperty.class);
-		suite.addTestSuite(SyncWiresMultiple.class);
-		suite.addTestSuite(SyncWiresTestCase.class);
-		suite.addTestSuite(SyncWiresProperties.class);
-		suite.addTestSuite(ConditionWireFalse.class);
-		suite.addTestSuite(ConditionWireFalseServer.class);
-		suite.addTestSuite(ReloadPage.class);
-		
-		// initial requirements (model 0.2)
-		suite.addTestSuite(Requirement1SyncWires.class);
-		suite.addTestSuite(Requirement2StaticParams.class);
-		suite.addTestSuite(Requirement3DynamicParams.class);
-		suite.addTestSuite(Requirement4DynamicSources.class);
-		suite.addTestSuite(Requirement5Operations.class);
-		suite.addTestSuite(Requirement6Conditions.class);
-		
-		// session tests
-		suite.addTestSuite(SessionSinglePage.class);
-		suite.addTestSuite(SessionSyncWires.class);
-		suite.addTestSuite(SessionInit.class);
-		suite.addTestSuite(SessionSyncInSession.class);
-		suite.addTestSuite(SessionSyncWiresMultiple.class);
 
-		// other model 0.3 tests
-		suite.addTestSuite(DataFlowTemporaryVariable.class);
-		suite.addTestSuite(DatabaseWithInputForm.class);
-		suite.addTestSuite(PropertiesFileWithInputForm.class);
+		// different model versions
+		suite.addTest(Codegen0_1Suite.suite());
+		suite.addTest(Codegen0_2Suite.suite());
+		suite.addTest(Codegen0_3Suite.suite());
 
 		return suite;
 	}

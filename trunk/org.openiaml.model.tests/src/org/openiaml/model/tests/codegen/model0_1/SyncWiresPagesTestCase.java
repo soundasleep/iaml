@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_1;
 
 import java.util.Date;
 import java.util.Random;
@@ -21,7 +21,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/SyncWiresPagesTestCase.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncWiresPagesTestCase.iaml");
 	}
 	
 	/**

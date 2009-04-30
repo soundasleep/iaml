@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_1;
 
 import java.util.Date;
 import java.util.Properties;
@@ -47,7 +47,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 	protected final String PROPERTIES = "SyncWiresProperties.properties";
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/SyncWiresProperties.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncWiresProperties.iaml");
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 	protected IFile copyProperties() throws Exception {
 		// copy file
 		IFile target = getProject().getFile("output/" + PROPERTIES);
-		copyFileIntoWorkspace(ROOT + "codegen/" + PROPERTIES, target);
+		copyFileIntoWorkspace(ROOT + "codegen/model0_1/" + PROPERTIES, target);
 		
 		return target;
 	}

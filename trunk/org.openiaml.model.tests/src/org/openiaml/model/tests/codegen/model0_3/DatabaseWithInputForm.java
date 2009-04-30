@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_3;
 
 import java.sql.ResultSet;
 import java.util.Date;
@@ -21,7 +21,7 @@ public class DatabaseWithInputForm extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/DatabaseWithInputForm.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_3/DatabaseWithInputForm.iaml");
 	}
 	
 	public void testWithoutForm() throws Exception {

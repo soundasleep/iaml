@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_2;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -23,7 +23,7 @@ public class ConditionWireFalseServer extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/ConditionWireFalseServer.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_2/ConditionWireFalseServer.iaml");
 	}
 	
 	public void testFalseCondition() throws Exception {

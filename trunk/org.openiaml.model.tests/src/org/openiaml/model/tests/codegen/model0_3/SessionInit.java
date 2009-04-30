@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_3;
 
 import java.util.Date;
 
@@ -20,7 +20,7 @@ public class SessionInit extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/SessionInit.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_3/SessionInit.iaml");
 	}
 	
 	public void testRequirement() throws Exception {

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_2;
 
 import java.util.Date;
 
@@ -20,7 +20,7 @@ public class ConditionWireFalse extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/ConditionWireFalse.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_2/ConditionWireFalse.iaml");
 	}
 	
 	public void testFalseCondition() throws Exception {

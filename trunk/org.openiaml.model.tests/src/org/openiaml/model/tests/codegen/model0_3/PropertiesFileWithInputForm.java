@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_3;
 
 import java.util.Date;
 import java.util.Properties;
@@ -21,7 +21,7 @@ public class PropertiesFileWithInputForm extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/PropertiesFileWithInputForm.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_3/PropertiesFileWithInputForm.iaml");
 	}
 	
 	public void testWithoutForm() throws Exception {

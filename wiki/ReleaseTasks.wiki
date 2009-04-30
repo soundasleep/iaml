@@ -1,0 +1,19 @@
+#summary Common tasks involved with releasing a new version.
+#labels Development,Phase-Implementation
+
+[DevelopmentTasks]
+
+=Releasing a new plugin version=
+
+This page briefly describes the steps involved with releasing a new plugin version. Ideally in the future this will be part of an [http://code.google.com/p/iaml/issues/detail?id=37 automated release script].
+
+Given that we want to upgrade the plugin to a new version number:
+
+  # For each .gmfgen,
+    # Update _Editor Generator/Plugin/Version_ to the new version
+    # Regenerate diagram code
+  # Diff all _plugin/META-INF/MANIFEST.MF_ and replace _Bundle-Vendor: %providerName_ with _Bundle-Vendor: www.openiaml.org_
+  # Update the _MANIFEST.MF_ in all other plugins
+  # Run all unit tests, especially those in _ReleaseTestsSuite_ and _ModelTestsSuite_
+  # Commit changes to SVN
+  # Update the feature.xml and site.xml (instructions to be continued)

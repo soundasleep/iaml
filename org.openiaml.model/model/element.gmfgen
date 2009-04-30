@@ -524,7 +524,7 @@
       iD="org.openiaml.model.diagram.element"
       name="Iaml Plugin (Element)"
       provider="www.openiaml.org"
-      version="0.2.0"/>
+      version="0.2.1"/>
   <editor/>
   <navigator
       generateDomainModelNavigator="false">

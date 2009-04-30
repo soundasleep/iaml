@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_1;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
@@ -20,7 +20,7 @@ public class SyncStaticValueField extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/SyncStaticValueField.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncStaticValueField.iaml");
 	}
 	
 	public void testSync() throws Exception {

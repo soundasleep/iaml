@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_2;
 
 import java.util.Date;
 
@@ -21,7 +21,7 @@ public class ReloadPage extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/ReloadPage.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_2/ReloadPage.iaml");
 	}
 	
 	public void testServerReload() throws Exception {

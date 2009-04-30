@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +25,7 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/SyncFieldDomainAttribute.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncFieldDomainAttribute.iaml");
 	}
 	
 	/**

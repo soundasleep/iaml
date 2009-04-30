@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_1;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.ModelTestCase;
@@ -14,7 +14,7 @@ public class SimpleTestCase extends ModelTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		doTransform(ROOT + "codegen/SimpleTestCase.iaml");
+		doTransform(ROOT + "codegen/model0_1/SimpleTestCase.iaml");
 	}
 
 	protected void tearDown() throws Exception {

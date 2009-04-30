@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_3;
 
 import java.util.Date;
 
@@ -10,17 +10,17 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * Tests sessions: sync wires across session boundaries.
+ * Tests sessions: an element on a single page.
  * 
  * @author jmwright
  *
  */
-public class SessionSyncWires extends CodegenTestCase {
+public class SessionSinglePage extends CodegenTestCase {
 	
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/SessionSyncWires.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_3/SessionSinglePage.iaml");
 	}
 	
 	public void testRequirement() throws Exception {
@@ -33,9 +33,9 @@ public class SessionSyncWires extends CodegenTestCase {
 		
 		String outside = "outside " + new Date().toString();
 		{
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, "");
-			setLabeledFormElementField(target, outside);
+			String field1 = getLabelIDForText("field1");
+			assertLabeledFieldEquals(field1, "");
+			setLabeledFormElementField(field1, outside);
 		}
 		
 		// go to session
@@ -43,34 +43,41 @@ public class SessionSyncWires extends CodegenTestCase {
 		
 		String inside = "inside " + new Date().toString();
 		{
-			// should have changed
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, outside);
-			setLabeledFormElementField(target, inside);
+			String field2 = getLabelIDForText("field2");
+			assertLabeledFieldEquals(field2, "");
+			setLabeledFormElementField(field2, inside);
 		}
 		
 		// reload page
 		gotoSitemapThenPage(sitemap, "outside");
 		{
-			// should have changed
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, inside);
+			// should be the same
+			String field1 = getLabelIDForText("field1");
+			assertLabeledFieldEquals(field1, outside);
+		}
+
+		// reload session
+		gotoSitemapThenPage(sitemap, "inside");
+		{
+			// should be the same
+			String field2 = getLabelIDForText("field2");
+			assertLabeledFieldEquals(field2, inside);
 		}
 
 		// *restart* entire session
 		beginAtSitemapThenPage(sitemap, "outside");
 		{
 			// should be the same
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, inside);
+			String field1 = getLabelIDForText("field1");
+			assertLabeledFieldEquals(field1, outside);
 		}
 
 		// restart session
 		gotoSitemapThenPage(sitemap, "inside");
 		{
 			// should have been lost
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, inside);	// should still be sync'd to outside
+			String field2 = getLabelIDForText("field2");
+			assertLabeledFieldEquals(field2, "");
 		}	
 		
 	}

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_3;
 
 import java.util.Date;
 
@@ -23,7 +23,7 @@ public class SessionSyncWiresMultiple extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/SessionSyncWiresMultiple.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_3/SessionSyncWiresMultiple.iaml");
 	}
 	
 	public void testRequirement() throws Exception {

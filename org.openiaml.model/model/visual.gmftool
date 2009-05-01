@@ -192,28 +192,28 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="FilterWire"
-          description="Create new FilterWire">
+          title="SelectWire"
+          description="Create new SelectWire">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/FilterWire.gif"
+            path="icons/full/obj16/SelectWire.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/FilterWire.gif"
+            path="icons/full/obj32/SelectWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="FindWire"
-          description="Create new FindWire">
+          title="SetWire"
+          description="Create new SetWire">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/FindWire.gif"
+            path="icons/full/obj16/SetWire.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/FindWire.gif"
+            path="icons/full/obj32/SetWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

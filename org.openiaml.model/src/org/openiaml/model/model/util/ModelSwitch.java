@@ -28,6 +28,7 @@ import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
@@ -592,6 +593,23 @@ public class ModelSwitch<T> {
 			case ModelPackage.CONTAINS_CONDITIONS: {
 				ContainsConditions containsConditions = (ContainsConditions)theEObject;
 				T result = caseContainsConditions(containsConditions);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE: {
+				DomainAttributeInstance domainAttributeInstance = (DomainAttributeInstance)theEObject;
+				T result = caseDomainAttributeInstance(domainAttributeInstance);
+				if (result == null) result = caseApplicationElement(domainAttributeInstance);
+				if (result == null) result = caseContainsOperations(domainAttributeInstance);
+				if (result == null) result = caseNamedElement(domainAttributeInstance);
+				if (result == null) result = caseContainsEventTriggers(domainAttributeInstance);
+				if (result == null) result = caseWireEdgesSource(domainAttributeInstance);
+				if (result == null) result = caseWireEdgeDestination(domainAttributeInstance);
+				if (result == null) result = caseGeneratesElements(domainAttributeInstance);
+				if (result == null) result = caseContainsConditions(domainAttributeInstance);
+				if (result == null) result = caseGeneratedElement(domainAttributeInstance);
+				if (result == null) result = caseShouldntContainWires(domainAttributeInstance);
+				if (result == null) result = caseContainsWires(domainAttributeInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1241,6 +1259,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsConditions(ContainsConditions object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Attribute Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Attribute Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainAttributeInstance(DomainAttributeInstance object) {
 		return null;
 	}
 

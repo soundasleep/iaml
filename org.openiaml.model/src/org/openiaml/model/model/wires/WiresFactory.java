@@ -71,13 +71,13 @@ public interface WiresFactory extends EFactory {
 	ParameterWire createParameterWire();
 
 	/**
-	 * Returns a new object of class '<em>Find Wire</em>'.
+	 * Returns a new object of class '<em>Set Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Find Wire</em>'.
+	 * @return a new object of class '<em>Set Wire</em>'.
 	 * @generated
 	 */
-	FindWire createFindWire();
+	SetWire createSetWire();
 
 	/**
 	 * Returns a new object of class '<em>Show Wire</em>'.
@@ -107,13 +107,13 @@ public interface WiresFactory extends EFactory {
 	NavigateWire createNavigateWire();
 
 	/**
-	 * Returns a new object of class '<em>Filter Wire</em>'.
+	 * Returns a new object of class '<em>Select Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Filter Wire</em>'.
+	 * @return a new object of class '<em>Select Wire</em>'.
 	 * @generated
 	 */
-	FilterWire createFilterWire();
+	SelectWire createSelectWire();
 
 	/**
 	 * Returns a new object of class '<em>Condition Wire</em>'.

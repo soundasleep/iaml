@@ -154,17 +154,17 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQueryEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FilterWireQuery2EditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQueryEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.FindWireNameEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SetWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -540,21 +540,21 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.FilterWire_3004"
-               name="%metatype.name.FilterWire_3004"
+               id="org.openiaml.model.diagram.visual.SelectWire_3004"
+               name="%metatype.name.SelectWire_3004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FilterWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FilterWireEditHelper">
+               eclass="SelectWire"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.SelectWireEditHelper">
             <param name="semanticHint" value="3004"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.FindWire_3005"
-               name="%metatype.name.FindWire_3005"
+               id="org.openiaml.model.diagram.visual.SetWire_3005"
+               name="%metatype.name.SetWire_3005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FindWire"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FindWireEditHelper">
+               eclass="SetWire"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.SetWireEditHelper">
             <param name="semanticHint" value="3005"/>
          </metamodelType>
       </metamodel>
@@ -630,8 +630,8 @@
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>
-         <elementType ref="org.openiaml.model.diagram.visual.FilterWire_3004"/>
-         <elementType ref="org.openiaml.model.diagram.visual.FindWire_3005"/>
+         <elementType ref="org.openiaml.model.diagram.visual.SelectWire_3004"/>
+         <elementType ref="org.openiaml.model.diagram.visual.SetWire_3005"/>
          <elementType ref="org.openiaml.model.diagram.visual.ShowWire_3006"/>
          <elementType ref="org.openiaml.model.diagram.visual.NavigateWire_3007"/>
          <elementType ref="org.openiaml.model.diagram.visual.CommitWire_3008"/>

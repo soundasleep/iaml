@@ -444,22 +444,22 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/FilterWire"/>
+        href="iaml.ecore#//wires/SelectWire"/>
     <domainSpecialization
-        body="self.oclIsTypeOf( FilterWire )"/>
+        body="self.oclIsTypeOf( SelectWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#FilterWireName"/>
+          href="iaml.gmfgraph#SelectWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#FilterWireQuery"/>
+          href="iaml.gmfgraph#SelectWireQuery"/>
       <features
-          href="iaml.ecore#//wires/FilterWire/query"/>
+          href="iaml.ecore#//wires/SelectWire/query"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
@@ -467,7 +467,7 @@
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.0/@tools.14"/>
     <diagramLink
-        href="iaml.gmfgraph#FilterWire"/>
+        href="iaml.gmfgraph#SelectWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>
@@ -477,13 +477,13 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/FindWire"/>
+        href="iaml.ecore#//wires/SetWire"/>
     <domainSpecialization
-        body="self.oclIsTypeOf( FindWire )"/>
+        body="self.oclIsTypeOf( SetWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#FindWireName"/>
+          href="iaml.gmfgraph#SetWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
@@ -493,7 +493,7 @@
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.0/@tools.15"/>
     <diagramLink
-        href="iaml.gmfgraph#FindWire"/>
+        href="iaml.gmfgraph#SetWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

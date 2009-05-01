@@ -551,36 +551,37 @@
           figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="FilterWireFigure">
+        name="SelectWireFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="FilterWireFigure"
+          name="SelectWireFigure"
           lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="FilterWireNameFigure"
+            name="SelectWireNameFigure"
             text="filter"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="FilterWireQueryFigure"
+            name="SelectWireQueryFigure"
             text="any"/>
       </actualFigure>
       <accessors
+          accessor="getFigureSelectWireNameFigure"
           figure="//@figures.0/@descriptors.31/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.31/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
-        name="FindWireFigure">
+        name="SetWireFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="FindWireFigure"
+          name="SetWireFigure"
           lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="FindWireNameFigure"
+            name="SetWireNameFigure"
             text="find"/>
       </actualFigure>
       <accessors
@@ -899,11 +900,11 @@
       name="ConditionalEdge"
       figure="ConditionalEdgeFigure"/>
   <connections
-      name="FilterWire"
-      figure="FilterWireFigure"/>
+      name="SelectWire"
+      figure="SelectWireFigure"/>
   <connections
-      name="FindWire"
-      figure="FindWireFigure"/>
+      name="SetWire"
+      figure="SetWireFigure"/>
   <connections
       name="ShowWire"
       figure="ShowWireFigure"/>
@@ -1033,16 +1034,16 @@
       figure="ConditionalEdgeFigure"
       accessor="//@figures.0/@descriptors.30/@accessors.0"/>
   <labels
-      name="FilterWireName"
-      figure="FilterWireFigure"
+      name="SelectWireName"
+      figure="SelectWireFigure"
       accessor="//@figures.0/@descriptors.31/@accessors.0"/>
   <labels
-      name="FilterWireQuery"
-      figure="FilterWireFigure"
+      name="SelectWireQuery"
+      figure="SelectWireFigure"
       accessor="//@figures.0/@descriptors.31/@accessors.1"/>
   <labels
-      name="FindWireName"
-      figure="FindWireFigure"
+      name="SetWireName"
+      figure="SetWireFigure"
       accessor="//@figures.0/@descriptors.32/@accessors.0"/>
   <labels
       name="ShowWireName"

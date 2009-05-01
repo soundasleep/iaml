@@ -19,11 +19,11 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.FilterWire;
-import org.openiaml.model.model.wires.FindWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SelectWire;
+import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -106,8 +106,8 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createParameterWireAdapter();
 			}
 			@Override
-			public Adapter caseFindWire(FindWire object) {
-				return createFindWireAdapter();
+			public Adapter caseSetWire(SetWire object) {
+				return createSetWireAdapter();
 			}
 			@Override
 			public Adapter caseShowWire(ShowWire object) {
@@ -122,8 +122,8 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createNavigateWireAdapter();
 			}
 			@Override
-			public Adapter caseFilterWire(FilterWire object) {
-				return createFilterWireAdapter();
+			public Adapter caseSelectWire(SelectWire object) {
+				return createSelectWireAdapter();
 			}
 			@Override
 			public Adapter caseConditionWire(ConditionWire object) {
@@ -244,16 +244,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.FindWire <em>Find Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.SetWire <em>Set Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.FindWire
+	 * @see org.openiaml.model.model.wires.SetWire
 	 * @generated
 	 */
-	public Adapter createFindWireAdapter() {
+	public Adapter createSetWireAdapter() {
 		return null;
 	}
 
@@ -300,16 +300,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.FilterWire <em>Filter Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.SelectWire <em>Select Wire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.FilterWire
+	 * @see org.openiaml.model.model.wires.SelectWire
 	 * @generated
 	 */
-	public Adapter createFilterWireAdapter() {
+	public Adapter createSelectWireAdapter() {
 		return null;
 	}
 

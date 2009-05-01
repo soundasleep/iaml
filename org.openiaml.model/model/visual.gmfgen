@@ -1126,20 +1126,20 @@
     </links>
     <links
         visualID="3004"
-        editPartClassName="FilterWireEditPart"
-        itemSemanticEditPolicyClassName="FilterWireItemSemanticEditPolicy"
-        notationViewFactoryClassName="FilterWireViewFactory"
-        createCommandClassName="FilterWireCreateCommand"
-        reorientCommandClassName="FilterWireReorientCommand">
+        editPartClassName="SelectWireEditPart"
+        itemSemanticEditPolicyClassName="SelectWireItemSemanticEditPolicy"
+        notationViewFactoryClassName="SelectWireViewFactory"
+        createCommandClassName="SelectWireCreateCommand"
+        reorientCommandClassName="SelectWireReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="FilterWireEditHelper"/>
+          editHelperClassName="SelectWireEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
-          className="FilterWireFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class FilterWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureFilterWireNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureFilterWireQueryFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public FilterWireFigure() {&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureFilterWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureFilterWireNameFigure.setText(&quot;filter&quot;);&#xA;&#xA;this.add(fFigureFilterWireNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureFilterWireQueryFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureFilterWireQueryFigure.setText(&quot;any&quot;);&#xA;&#xA;this.add(fFigureFilterWireQueryFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureFilterWireNameFigure() {&#xA;&#x9;&#x9;return fFigureFilterWireNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureFilterWireQueryFigure() {&#xA;&#x9;&#x9;return fFigureFilterWireQueryFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          className="SelectWireFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SelectWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSelectWireNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSelectWireQueryFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SelectWireFigure() {&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSelectWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSelectWireNameFigure.setText(&quot;filter&quot;);&#xA;&#xA;this.add(fFigureSelectWireNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureSelectWireQueryFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSelectWireQueryFigure.setText(&quot;any&quot;);&#xA;&#xA;this.add(fFigureSelectWireQueryFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSelectWireNameFigure() {&#xA;&#x9;&#x9;return fFigureSelectWireNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSelectWireQueryFigure() {&#xA;&#x9;&#x9;return fFigureSelectWireQueryFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
@@ -1151,13 +1151,13 @@
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
-            href="iaml.genmodel#//model/wires/FilterWire"/>
+            href="iaml.genmodel#//model/wires/SelectWire"/>
         <containmentMetaFeature
             href="iaml.genmodel#//model/ContainsWires/wires"/>
         <childMetaFeature
             href="iaml.genmodel#//model/ContainsWires/wires"/>
         <modelElementSelector
-            body="self.oclIsTypeOf( FilterWire )"/>
+            body="self.oclIsTypeOf( SelectWire )"/>
         <sourceMetaFeature
             href="iaml.genmodel#//model/WireEdge/from"/>
         <targetMetaFeature
@@ -1165,15 +1165,15 @@
       </modelFacet>
       <labels
           visualID="4021"
-          editPartClassName="FilterWireQueryEditPart"
-          itemSemanticEditPolicyClassName="FilterWireQueryItemSemanticEditPolicy"
-          notationViewFactoryClassName="FilterWireQueryViewFactory"
+          editPartClassName="SelectWireNameEditPart"
+          itemSemanticEditPolicyClassName="SelectWireNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="SelectWireNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureFilterWireNameFigure"
+            getterName="getFigureSelectWireNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
@@ -1187,15 +1187,15 @@
       </labels>
       <labels
           visualID="4022"
-          editPartClassName="FilterWireQuery2EditPart"
-          itemSemanticEditPolicyClassName="FilterWireQuery2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="FilterWireQuery2ViewFactory"
+          editPartClassName="SelectWireQueryEditPart"
+          itemSemanticEditPolicyClassName="SelectWireQueryItemSemanticEditPolicy"
+          notationViewFactoryClassName="SelectWireQueryViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureFilterWireQueryFigure"
+            getterName="getFigureSelectWireQueryFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
@@ -1204,26 +1204,26 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="iaml.genmodel#//model/wires/FilterWire/query"/>
+              href="iaml.genmodel#//model/wires/SelectWire/query"/>
         </modelFacet>
       </labels>
     </links>
     <links
         visualID="3005"
-        editPartClassName="FindWireEditPart"
-        itemSemanticEditPolicyClassName="FindWireItemSemanticEditPolicy"
-        notationViewFactoryClassName="FindWireViewFactory"
-        createCommandClassName="FindWireCreateCommand"
-        reorientCommandClassName="FindWireReorientCommand">
+        editPartClassName="SetWireEditPart"
+        itemSemanticEditPolicyClassName="SetWireItemSemanticEditPolicy"
+        notationViewFactoryClassName="SetWireViewFactory"
+        createCommandClassName="SetWireCreateCommand"
+        reorientCommandClassName="SetWireReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="FindWireEditHelper"/>
+          editHelperClassName="SetWireEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
-          className="FindWireFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class FindWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureFindWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public FindWireFigure() {&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureFindWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureFindWireNameFigure.setText(&quot;find&quot;);&#xA;&#xA;this.add(fFigureFindWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureFindWireNameFigure() {&#xA;&#x9;&#x9;return fFigureFindWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          className="SetWireFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SetWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSetWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SetWireFigure() {&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSetWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSetWireNameFigure.setText(&quot;find&quot;);&#xA;&#xA;this.add(fFigureSetWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSetWireNameFigure() {&#xA;&#x9;&#x9;return fFigureSetWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
@@ -1235,13 +1235,13 @@
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
-            href="iaml.genmodel#//model/wires/FindWire"/>
+            href="iaml.genmodel#//model/wires/SetWire"/>
         <containmentMetaFeature
             href="iaml.genmodel#//model/ContainsWires/wires"/>
         <childMetaFeature
             href="iaml.genmodel#//model/ContainsWires/wires"/>
         <modelElementSelector
-            body="self.oclIsTypeOf( FindWire )"/>
+            body="self.oclIsTypeOf( SetWire )"/>
         <sourceMetaFeature
             href="iaml.genmodel#//model/WireEdge/from"/>
         <targetMetaFeature
@@ -1249,15 +1249,15 @@
       </modelFacet>
       <labels
           visualID="4023"
-          editPartClassName="FindWireNameEditPart"
-          itemSemanticEditPolicyClassName="FindWireNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="FindWireNameViewFactory"
+          editPartClassName="SetWireNameEditPart"
+          itemSemanticEditPolicyClassName="SetWireNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="SetWireNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureFindWireNameFigure"
+            getterName="getFigureSetWireNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
@@ -1621,17 +1621,17 @@
             genNodes="//@diagram/@topLevelNodes.10"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="FilterWire"
-            description="Create new FilterWire"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/FilterWire.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/FilterWire.gif"
+            title="SelectWire"
+            description="Create new SelectWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SelectWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SelectWire.gif"
             genLinks="//@diagram/@links.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="FindWire"
-            description="Create new FindWire"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/FindWire.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/FindWire.gif"
+            title="SetWire"
+            description="Create new SetWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SetWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SetWire.gif"
             genLinks="//@diagram/@links.4"/>
         <entries
             xsi:type="gmfgen:ToolEntry"

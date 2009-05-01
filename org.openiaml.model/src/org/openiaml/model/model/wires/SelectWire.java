@@ -10,22 +10,22 @@ import org.openiaml.model.model.WireEdgeDestination;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Filter Wire</b></em>'.
+ * A representation of the model object '<em><b>Select Wire</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.openiaml.model.model.wires.FilterWire#getQuery <em>Query</em>}</li>
- *   <li>{@link org.openiaml.model.model.wires.FilterWire#getLimit <em>Limit</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.SelectWire#getQuery <em>Query</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.SelectWire#getLimit <em>Limit</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.openiaml.model.model.wires.WiresPackage#getFilterWire()
+ * @see org.openiaml.model.model.wires.WiresPackage#getSelectWire()
  * @model annotation="http://openiaml.org/comment added='0.2' comment='parameters can be provided by ParameterWires'"
  * @generated
  */
-public interface FilterWire extends CompositeWire, WireEdgeDestination {
+public interface SelectWire extends CompositeWire, WireEdgeDestination {
 	/**
 	 * Returns the value of the '<em><b>Query</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ public interface FilterWire extends CompositeWire, WireEdgeDestination {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Query</em>' attribute.
 	 * @see #setQuery(String)
-	 * @see org.openiaml.model.model.wires.WiresPackage#getFilterWire_Query()
+	 * @see org.openiaml.model.model.wires.WiresPackage#getSelectWire_Query()
 	 * @model
 	 * @generated
 	 */
 	String getQuery();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.model.model.wires.FilterWire#getQuery <em>Query</em>}' attribute.
+	 * Sets the value of the '{@link org.openiaml.model.model.wires.SelectWire#getQuery <em>Query</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Query</em>' attribute.
@@ -63,14 +63,14 @@ public interface FilterWire extends CompositeWire, WireEdgeDestination {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Limit</em>' attribute.
 	 * @see #setLimit(int)
-	 * @see org.openiaml.model.model.wires.WiresPackage#getFilterWire_Limit()
+	 * @see org.openiaml.model.model.wires.WiresPackage#getSelectWire_Limit()
 	 * @model default="1"
 	 * @generated
 	 */
 	int getLimit();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.model.model.wires.FilterWire#getLimit <em>Limit</em>}' attribute.
+	 * Sets the value of the '{@link org.openiaml.model.model.wires.SelectWire#getLimit <em>Limit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Limit</em>' attribute.
@@ -79,4 +79,4 @@ public interface FilterWire extends CompositeWire, WireEdgeDestination {
 	 */
 	void setLimit(int value);
 
-} // FilterWire
+} // SelectWire

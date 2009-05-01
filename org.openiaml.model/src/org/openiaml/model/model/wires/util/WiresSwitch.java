@@ -19,11 +19,11 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.FilterWire;
-import org.openiaml.model.model.wires.FindWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SelectWire;
+import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -158,15 +158,15 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.FIND_WIRE: {
-				FindWire findWire = (FindWire)theEObject;
-				T result = caseFindWire(findWire);
-				if (result == null) result = caseCompositeWire(findWire);
-				if (result == null) result = caseWireEdge(findWire);
-				if (result == null) result = caseNamedElement(findWire);
-				if (result == null) result = caseContainsWires(findWire);
-				if (result == null) result = caseGeneratesElements(findWire);
-				if (result == null) result = caseGeneratedElement(findWire);
+			case WiresPackage.SET_WIRE: {
+				SetWire setWire = (SetWire)theEObject;
+				T result = caseSetWire(setWire);
+				if (result == null) result = caseCompositeWire(setWire);
+				if (result == null) result = caseWireEdge(setWire);
+				if (result == null) result = caseNamedElement(setWire);
+				if (result == null) result = caseContainsWires(setWire);
+				if (result == null) result = caseGeneratesElements(setWire);
+				if (result == null) result = caseGeneratedElement(setWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -206,16 +206,16 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.FILTER_WIRE: {
-				FilterWire filterWire = (FilterWire)theEObject;
-				T result = caseFilterWire(filterWire);
-				if (result == null) result = caseCompositeWire(filterWire);
-				if (result == null) result = caseWireEdgeDestination(filterWire);
-				if (result == null) result = caseWireEdge(filterWire);
-				if (result == null) result = caseNamedElement(filterWire);
-				if (result == null) result = caseContainsWires(filterWire);
-				if (result == null) result = caseGeneratesElements(filterWire);
-				if (result == null) result = caseGeneratedElement(filterWire);
+			case WiresPackage.SELECT_WIRE: {
+				SelectWire selectWire = (SelectWire)theEObject;
+				T result = caseSelectWire(selectWire);
+				if (result == null) result = caseCompositeWire(selectWire);
+				if (result == null) result = caseWireEdgeDestination(selectWire);
+				if (result == null) result = caseWireEdge(selectWire);
+				if (result == null) result = caseNamedElement(selectWire);
+				if (result == null) result = caseContainsWires(selectWire);
+				if (result == null) result = caseGeneratesElements(selectWire);
+				if (result == null) result = caseGeneratedElement(selectWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -312,17 +312,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Find Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Set Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Find Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Set Wire</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFindWire(FindWire object) {
+	public T caseSetWire(SetWire object) {
 		return null;
 	}
 
@@ -372,17 +372,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Filter Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Select Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Filter Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Select Wire</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFilterWire(FilterWire object) {
+	public T caseSelectWire(SelectWire object) {
 		return null;
 	}
 

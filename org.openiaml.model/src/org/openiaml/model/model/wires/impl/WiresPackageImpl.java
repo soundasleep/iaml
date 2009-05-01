@@ -26,11 +26,11 @@ import org.openiaml.model.model.visual.impl.VisualPackageImpl;
 import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.FilterWire;
-import org.openiaml.model.model.wires.FindWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SelectWire;
+import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -84,7 +84,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass findWireEClass = null;
+	private EClass setWireEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,7 +112,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass filterWireEClass = null;
+	private EClass selectWireEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -331,8 +331,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFindWire() {
-		return findWireEClass;
+	public EClass getSetWire() {
+		return setWireEClass;
 	}
 
 	/**
@@ -367,8 +367,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFilterWire() {
-		return filterWireEClass;
+	public EClass getSelectWire() {
+		return selectWireEClass;
 	}
 
 	/**
@@ -376,8 +376,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFilterWire_Query() {
-		return (EAttribute)filterWireEClass.getEStructuralFeatures().get(0);
+	public EAttribute getSelectWire_Query() {
+		return (EAttribute)selectWireEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -385,8 +385,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFilterWire_Limit() {
-		return (EAttribute)filterWireEClass.getEStructuralFeatures().get(1);
+	public EAttribute getSelectWire_Limit() {
+		return (EAttribute)selectWireEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -444,7 +444,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		parameterWireEClass = createEClass(PARAMETER_WIRE);
 		createEAttribute(parameterWireEClass, PARAMETER_WIRE__PARAMETER_NAME);
 
-		findWireEClass = createEClass(FIND_WIRE);
+		setWireEClass = createEClass(SET_WIRE);
 
 		showWireEClass = createEClass(SHOW_WIRE);
 
@@ -452,9 +452,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		navigateWireEClass = createEClass(NAVIGATE_WIRE);
 
-		filterWireEClass = createEClass(FILTER_WIRE);
-		createEAttribute(filterWireEClass, FILTER_WIRE__QUERY);
-		createEAttribute(filterWireEClass, FILTER_WIRE__LIMIT);
+		selectWireEClass = createEClass(SELECT_WIRE);
+		createEAttribute(selectWireEClass, SELECT_WIRE__QUERY);
+		createEAttribute(selectWireEClass, SELECT_WIRE__LIMIT);
 
 		conditionWireEClass = createEClass(CONDITION_WIRE);
 	}
@@ -501,12 +501,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		parameterWireEClass.getESuperTypes().add(this.getSingleWire());
 		parameterWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		findWireEClass.getESuperTypes().add(this.getCompositeWire());
+		setWireEClass.getESuperTypes().add(this.getCompositeWire());
 		showWireEClass.getESuperTypes().add(this.getCompositeWire());
 		commitWireEClass.getESuperTypes().add(this.getCompositeWire());
 		navigateWireEClass.getESuperTypes().add(this.getCompositeWire());
-		filterWireEClass.getESuperTypes().add(this.getCompositeWire());
-		filterWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		selectWireEClass.getESuperTypes().add(this.getCompositeWire());
+		selectWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		conditionWireEClass.getESuperTypes().add(this.getCompositeWire());
 		conditionWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 
@@ -529,7 +529,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEClass(parameterWireEClass, ParameterWire.class, "ParameterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameterWire_ParameterName(), ecorePackage.getEString(), "parameterName", null, 0, 1, ParameterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(findWireEClass, FindWire.class, "FindWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(setWireEClass, SetWire.class, "SetWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(showWireEClass, ShowWire.class, "ShowWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -537,9 +537,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		initEClass(navigateWireEClass, NavigateWire.class, "NavigateWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(filterWireEClass, FilterWire.class, "FilterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFilterWire_Query(), ecorePackage.getEString(), "query", null, 0, 1, FilterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFilterWire_Limit(), ecorePackage.getEInt(), "limit", "1", 0, 1, FilterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(selectWireEClass, SelectWire.class, "SelectWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSelectWire_Query(), ecorePackage.getEString(), "query", null, 0, 1, SelectWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSelectWire_Limit(), ecorePackage.getEInt(), "limit", "1", 0, 1, SelectWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionWireEClass, ConditionWire.class, "ConditionWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -591,7 +591,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "added", "0.2"
 		   });		
 		addAnnotation
-		  (findWireEClass, 
+		  (setWireEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
@@ -616,7 +616,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "added", "0.2"
 		   });		
 		addAnnotation
-		  (filterWireEClass, 
+		  (selectWireEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.2",

@@ -371,6 +371,50 @@
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElementContainer/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//DomainObjectInstance"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DomainObjectInstance )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainObjectInstanceName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.25"/>
+      <diagramNode
+          href="iaml.gmfgraph#DomainObjectInstance"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElementContainer/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//DomainAttributeInstance"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DomainAttributeInstance )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeInstanceName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.26"/>
+      <diagramNode
+          href="iaml.gmfgraph#DomainAttributeInstance"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

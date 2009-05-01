@@ -508,6 +508,26 @@
             <param name="semanticHint" value="1016"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.2">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.DomainObjectInstance_1017"
+               name="%metatype.name.DomainObjectInstance_1017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DomainObjectInstance"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainObjectInstanceEditHelper">
+            <param name="semanticHint" value="1017"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.2">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.DomainAttributeInstance_1018"
+               name="%metatype.name.DomainAttributeInstance_1018"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DomainAttributeInstance"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainAttributeInstanceEditHelper">
+            <param name="semanticHint" value="1018"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_3001"
@@ -627,6 +647,8 @@
          <elementType ref="org.openiaml.model.diagram.visual.FileDomainObject_1014"/>
          <elementType ref="org.openiaml.model.diagram.visual.FileDomainAttribute_1015"/>
          <elementType ref="org.openiaml.model.diagram.visual.CompositeCondition_1016"/>
+         <elementType ref="org.openiaml.model.diagram.visual.DomainObjectInstance_1017"/>
+         <elementType ref="org.openiaml.model.diagram.visual.DomainAttributeInstance_1018"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>

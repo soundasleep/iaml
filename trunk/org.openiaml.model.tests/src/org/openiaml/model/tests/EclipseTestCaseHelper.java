@@ -50,19 +50,27 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 	
 	/**
+	 * Is the given part a shortcut element?
+	 * 
+	 * @param part
+	 * @return
+	 */
+	public boolean isShortcut(ShapeNodeEditPart part) {
+		return null != ((View) part.getModel()).getEAnnotation("Shortcut");
+	}
+	
+	/**
 	 * Assert that the given edit part is a shortcut element.
 	 */
 	public void assertShortcut(ShapeNodeEditPart part) {
-		View view = (View) part.getModel();
-		assertNotNull("part '" + part + "' does not have a shortcut annotation", view.getEAnnotation("Shortcut"));
+		assertTrue("part '" + part + "' does not have a shortcut annotation", isShortcut(part));
 	}
 
 	/**
 	 * Assert that the given edit part is a shortcut element.
 	 */
 	public void assertNotShortcut(ShapeNodeEditPart part) {
-		View view = (View) part.getModel();
-		assertNull("part '" + part + "' has a shortcut annotation", view.getEAnnotation("Shortcut"));
+		assertFalse("part '" + part + "' has a shortcut annotation", isShortcut(part));
 	}
 	
 	/**
@@ -101,8 +109,10 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof Page) {
 					Page p = (Page) obj;
-					if (p.getName().equals(pageName))
+					if (p.getName().equals(pageName)) {
+						assertNotNull(s);
 						return s;
+					}
 				}
 			}
 		}
@@ -125,8 +135,10 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof InputForm) {
 					InputForm p = (InputForm) obj;
-					if (p.getName().equals(formName))
+					if (p.getName().equals(formName)) {
+						assertNotNull(s);
 						return s;
+					}
 				}
 			}
 		}
@@ -138,19 +150,27 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Look at the editor's children to see if an InputForm is being displayed.
 	 * 
+	 * @see #isShortcut(ShapeNodeEditPart)
 	 * @param root
 	 * @param textName
+	 * @param checkShortcut should we check to see if the element has a shortcut?
+	 * @param shortcutRequired if checkShortcut is true, only search for parts where isShortcut(part) = shortcutRequired
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName) {
+	public ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName, boolean checkShortcut, boolean shortcutRequired) {
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				EObject obj = s.resolveSemanticElement();
-				if (obj instanceof InputTextField) {
-					InputTextField p = (InputTextField) obj;
-					if (p.getName().equals(textName))
-						return s;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (obj instanceof InputTextField) {
+						InputTextField p = (InputTextField) obj;
+						if (p.getName().equals(textName)) {
+							assertNotNull(s);
+							return s;
+						}
+					}
 				}
 			}
 		}
@@ -159,7 +179,19 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return null;
 	}
 
-
+	/**
+	 * Simply calls {@link #assertHasInputTextField(DiagramDocumentEditor, String, boolean, boolean)},
+	 * does not check the EditPart for shortcuts.
+	 * 
+	 * @see #assertHasInputTextField(DiagramDocumentEditor, String, boolean, boolean)
+	 * @param root
+	 * @param textName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName) {
+		return assertHasInputTextField(root, textName, false, false);
+	}
+	
 	/**
 	 * Look at the editor's children to see if a StartNode is being displayed.
 	 * Note that we can't specify which StartNode to look for.
@@ -173,6 +205,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof StartNode) {
+					assertNotNull(s);
 					return s;
 				}
 			}
@@ -198,8 +231,10 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof DomainStore) {
 					DomainStore p = (DomainStore) obj;
-					if (p.getName().equals(storeName))
+					if (p.getName().equals(storeName)) {
+						assertNotNull(s);
 						return s;
+					}
 					found += p.getName() + ",";
 				}
 			}
@@ -225,8 +260,10 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof EventTrigger) {
 					EventTrigger p = (EventTrigger) obj;
-					if (p.getName().equals(eventName))
+					if (p.getName().equals(eventName)) {
+						assertNotNull(s);
 						return s;
+					}
 					found += p.getName() + ",";
 				}
 			}
@@ -252,8 +289,10 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof DomainAttribute) {
 					DomainAttribute p = (DomainAttribute) obj;
-					if (p.getName().equals(attrName))
+					if (p.getName().equals(attrName)) {
+						assertNotNull(s);
 						return s;
+					}
 					found += p.getName() + ",";
 				}
 			}
@@ -279,8 +318,10 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof DomainObject) {
 					DomainObject p = (DomainObject) obj;
-					if (p.getName().equals(objectName))
+					if (p.getName().equals(objectName)) {
+						assertNotNull(s);
 						return s;
+					}
 					found += p.getName() + ",";
 				}
 			}
@@ -306,8 +347,10 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof Operation) {
 					Operation p = (Operation) obj;
-					if (p.getName().equals(operationName))
+					if (p.getName().equals(operationName)) {
+						assertNotNull(s);
 						return s;
+					}
 					found += p.getName() + ",";
 				}
 			}

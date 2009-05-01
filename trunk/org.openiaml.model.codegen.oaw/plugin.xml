@@ -4,7 +4,7 @@
    <extension
          point="org.openarchitectureware.adapter.emf.check.checks">
       <metaModel
-            nsURI="http://openiaml.org/model">
+            nsURI="http://openiaml.org/model0.2">
          <checkFile
                path="src/metamodel/Checks.chk">
          </checkFile>

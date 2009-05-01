@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120a748ea9e.c7">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120a748ea9e.c7">
   <sessions id="scopes.120a748ed3d.de" name="session">
     <eventTriggers id="model.120a748ea9e.d9" name="init" outEdges="wires.120a748ec72.9b">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.120a748ec72.9b" from="model.120a748ea9e.d9" to="model.120a748ea9e.ec" name="run on init" inEdges="wires.120a748ec72.9d"/>

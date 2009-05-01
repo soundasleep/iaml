@@ -19,7 +19,7 @@ public class MigrateTestSuite {
     public static Test suite() { 
         TestSuite suite = new TestSuite("Migration");
 
-        suite.addTestSuite(MigrateSignupForm.class);
+        suite.addTestSuite(Migrate0_1SignupForm.class);
 
         return suite; 
    }

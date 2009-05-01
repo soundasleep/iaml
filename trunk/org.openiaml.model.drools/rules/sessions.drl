@@ -96,11 +96,11 @@ rule "Connect 'key' property to LoginHandler"
 		login_handler : LoginHandler( eContainer == scope )
 		key : ApplicationElementProperty (eContainer == scope,
 			name == "current login key")
-		not (FindWire( from == login_handler, to == key, name == "set") )
+		not (SetWire( from == login_handler, to == key, name == "set") )
 
 	then
 
-		FindWire wire = handler.generatedFindWire(login_handler, scope, login_handler, key);
+		SetWire wire = handler.generatedSetWire(login_handler, scope, login_handler, key);
 		key.setName("set");
 		insert(key);
 		
@@ -144,7 +144,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		
 		login_handler : LoginHandler( eContainer == scope )
 		value : ApplicationElementProperty( )
-		mySetWire : FindWire( from == login_handler, to == value, name == "set" )
+		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 		
 		wire : RunInstanceWire( from == access, to == check )
 		not (ParameterWire( from == value, to == wire ))
@@ -267,7 +267,7 @@ rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
 		login : Page (eContainer == container, name=="login" )
 
 		value : ApplicationElementProperty( )
-		mySetWire : FindWire( from == login_handler, to == value, name == "set" )
+		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 
 		expected : StaticValue( ) 
 		expected_param : ParameterWire( from == expected, to == login_handler )
@@ -486,7 +486,7 @@ rule "Create contents of 'do logout' operation for LoginHandler[type=key]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 
 		value : ApplicationElementProperty( )
-		mySetWire : FindWire( from == login_handler, to == value, name == "set" )
+		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 		
 		not (StartNode( eContainer == o))
 		not (FinishNode( eContainer == o))

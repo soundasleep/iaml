@@ -15,7 +15,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  * @author jmwright
  *
  */
-public class MigrateSignupForm extends AbstractMigrateTestCase {
+public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 
 	protected DiagramDocumentEditor editor_page = null;
 	protected DiagramDocumentEditor editor_store = null;
@@ -80,11 +80,11 @@ public class MigrateSignupForm extends AbstractMigrateTestCase {
 	}
 	
 	public String getModel() {
-		return "signup_form.iaml";
+		return "signup-form-0_1.iaml";
 	}
 	
 	public String getModelMigrated() {
-		return "signup_form2.iaml";
+		return "signup-form-0_1-migrated.iaml";
 	}
 
 	/**

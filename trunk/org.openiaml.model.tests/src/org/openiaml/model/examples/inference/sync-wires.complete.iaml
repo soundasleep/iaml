@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d08ec91b9.e">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d08ec91b9.e">
   <children xsi:type="iaml.visual:Page" id="visual.11d08ec9217.1" name="container">
     <children xsi:type="iaml.visual:InputForm" id="visual.11d08ec9217.13" name="if1" outEdges="wires.11d08ec9217.6">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d08ec9217.6" from="visual.11d08ec9217.13" to="visual.11d08ec9217.14" name="sync" generatedElements="wires.11d08ec9217.55 wires.11d08ec9217.56 wires.11d08ec9217.57"/>

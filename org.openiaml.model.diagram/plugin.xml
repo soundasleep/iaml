@@ -308,7 +308,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.InternetApplication_79"
                name="%metatype.name.InternetApplication_79"
@@ -318,7 +318,7 @@
             <param name="semanticHint" value="79"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.EventTrigger_1001"
                name="%metatype.name.EventTrigger_1001"
@@ -328,7 +328,7 @@
             <param name="semanticHint" value="1001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.SingleOperation_1002"
                name="%metatype.name.SingleOperation_1002"
@@ -338,7 +338,7 @@
             <param name="semanticHint" value="1002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.CompositeOperation_1003"
                name="%metatype.name.CompositeOperation_1003"
@@ -348,7 +348,7 @@
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.ChainedOperation_1004"
                name="%metatype.name.ChainedOperation_1004"
@@ -358,7 +358,7 @@
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.DomainObject_1005"
                name="%metatype.name.DomainObject_1005"
@@ -378,7 +378,7 @@
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.DynamicApplicationElementSet_1007"
                name="%metatype.name.DynamicApplicationElementSet_1007"
@@ -388,7 +388,7 @@
             <param name="semanticHint" value="1007"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.ApplicationElementProperty_1008"
                name="%metatype.name.ApplicationElementProperty_1008"
@@ -398,7 +398,7 @@
             <param name="semanticHint" value="1008"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.DomainStore_1009"
                name="%metatype.name.DomainStore_1009"
@@ -438,7 +438,7 @@
             <param name="semanticHint" value="1012"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.CompositeCondition_1013"
                name="%metatype.name.CompositeCondition_1013"

@@ -303,7 +303,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.element.ApplicationElement_79"
                name="%metatype.name.ApplicationElement_79"
@@ -313,7 +313,7 @@
             <param name="semanticHint" value="79"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.element.SingleOperation_1001"
                name="%metatype.name.SingleOperation_1001"
@@ -323,7 +323,7 @@
             <param name="semanticHint" value="1001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.element.CompositeOperation_1002"
                name="%metatype.name.CompositeOperation_1002"
@@ -333,7 +333,7 @@
             <param name="semanticHint" value="1002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.element.ChainedOperation_1003"
                name="%metatype.name.ChainedOperation_1003"
@@ -343,7 +343,7 @@
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.element.ApplicationElementProperty_1004"
                name="%metatype.name.ApplicationElementProperty_1004"
@@ -353,7 +353,7 @@
             <param name="semanticHint" value="1004"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.element.EventTrigger_1005"
                name="%metatype.name.EventTrigger_1005"

@@ -313,7 +313,7 @@
             <param name="semanticHint" value="79"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.wire.SingleOperation_1001"
                name="%metatype.name.SingleOperation_1001"
@@ -323,7 +323,7 @@
             <param name="semanticHint" value="1001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.wire.CompositeOperation_1002"
                name="%metatype.name.CompositeOperation_1002"
@@ -333,7 +333,7 @@
             <param name="semanticHint" value="1002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.wire.ChainedOperation_1003"
                name="%metatype.name.ChainedOperation_1003"
@@ -343,7 +343,7 @@
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.wire.DomainAttribute_1004"
                name="%metatype.name.DomainAttribute_1004"
@@ -363,7 +363,7 @@
             <param name="semanticHint" value="1005"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.wire.EventTrigger_1006"
                name="%metatype.name.EventTrigger_1006"
@@ -373,7 +373,7 @@
             <param name="semanticHint" value="1006"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.wire.ApplicationElementProperty_1007"
                name="%metatype.name.ApplicationElementProperty_1007"
@@ -383,7 +383,7 @@
             <param name="semanticHint" value="1007"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.wire.Parameter_1008"
                name="%metatype.name.Parameter_1008"
@@ -393,7 +393,7 @@
             <param name="semanticHint" value="1008"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.wire.StaticValue_1009"
                name="%metatype.name.StaticValue_1009"

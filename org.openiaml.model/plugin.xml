@@ -12,7 +12,7 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://openiaml.org/model" 
+       uri = "http://openiaml.org/model0.2" 
        class = "org.openiaml.model.model.ModelPackage"
        genModel = "model/iaml.genmodel" /> 
   </extension>
@@ -28,6 +28,34 @@
     <package 
        uri = "http://openiaml.org/model/wires" 
        class = "org.openiaml.model.model.wires.WiresPackage"
+       genModel = "model/iaml.genmodel" /> 
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://openiaml.org/model/operations" 
+       class = "org.openiaml.model.model.operations.OperationsPackage"
+       genModel = "model/iaml.genmodel" /> 
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://openiaml.org/model/scopes" 
+       class = "org.openiaml.model.model.scopes.ScopesPackage"
+       genModel = "model/iaml.genmodel" /> 
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://openiaml.org/model/components" 
+       class = "org.openiaml.model.model.components.ComponentsPackage"
+       genModel = "model/iaml.genmodel" /> 
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://openiaml.org/model/domain" 
+       class = "org.openiaml.model.model.domain.DomainPackage"
        genModel = "model/iaml.genmodel" /> 
   </extension>
 

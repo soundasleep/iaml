@@ -307,7 +307,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.CompositeOperation_79"
                name="%metatype.name.CompositeOperation_79"
@@ -317,7 +317,7 @@
             <param name="semanticHint" value="79"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.SingleOperation_1001"
                name="%metatype.name.SingleOperation_1001"
@@ -327,7 +327,7 @@
             <param name="semanticHint" value="1001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <specializationType
                id="org.openiaml.model.diagram.operation.CompositeOperation_1002"
                name="%metatype.name.CompositeOperation_1002"
@@ -336,7 +336,7 @@
             <param name="semanticHint" value="1002"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.ChainedOperation_1003"
                name="%metatype.name.ChainedOperation_1003"
@@ -346,7 +346,7 @@
             <param name="semanticHint" value="1003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.Parameter_1004"
                name="%metatype.name.Parameter_1004"
@@ -406,7 +406,7 @@
             <param name="semanticHint" value="1009"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.TemporaryVariable_1010"
                name="%metatype.name.TemporaryVariable_1010"
@@ -416,7 +416,7 @@
             <param name="semanticHint" value="1010"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.ApplicationElementProperty_1011"
                name="%metatype.name.ApplicationElementProperty_1011"
@@ -426,7 +426,7 @@
             <param name="semanticHint" value="1011"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.DataFlowEdge_3001"
                name="%metatype.name.DataFlowEdge_3001"
@@ -436,7 +436,7 @@
             <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.ExecutionEdge_3002"
                name="%metatype.name.ExecutionEdge_3002"
@@ -446,7 +446,7 @@
             <param name="semanticHint" value="3002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
                id="org.openiaml.model.diagram.operation.ConditionalEdge_3003"
                name="%metatype.name.ConditionalEdge_3003"

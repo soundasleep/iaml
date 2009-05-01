@@ -42,7 +42,7 @@ public interface ModelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://openiaml.org/model";
+	String eNS_URI = "http://openiaml.org/model0.2";
 
 	/**
 	 * The package namespace name.

@@ -55,7 +55,6 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		}
 	}
 
-
 	/**
 	 * @see #removeDeletedReferences(Element)
 	 */
@@ -168,8 +167,8 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		
 		// replace the node name?
 		nodeName = getRenamedNode(nodeName, element, errors);
-		
-		Element e = document.createElement( nodeName );
+
+		Element e = createElement(document, nodeName);
 		
 		// do anything fancy with the element?
 		handleElement(element, e, errors);
@@ -221,6 +220,17 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		output.appendChild(e);
 	}
 	
+	/**
+	 * Create a new element. By default, just creates an element
+	 * with the default namespace.
+	 * 
+	 * @param nodeName
+	 * @return
+	 */
+	protected Element createElement(Document document, String nodeName) {
+		return document.createElement( nodeName );
+	}
+
 	/**
 	 * Do anything special to this element. Doesn't have to do anything.
 	 * 

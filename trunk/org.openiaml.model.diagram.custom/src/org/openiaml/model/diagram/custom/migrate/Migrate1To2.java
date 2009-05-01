@@ -17,8 +17,8 @@ import org.w3c.dom.Node;
  *   <li>New wires:
  *   <ol>
  *     <li>FilterWire</li>
- *     <li>FindWire</li>
- *     <li>ShowWire</li>
+ *     <li>SetWire</li>
+ *     <li>SelectWire</li>
  *     <li>NavigateWire</li>
  *     <li>CommitWire</li>
  *     <li>ConditionWire</li>
@@ -174,5 +174,15 @@ public class Migrate1To2 extends DomBasedMigrator implements IamlModelMigrator {
 		}
 
 	}
+
+	/**
+	 * Models of version 0.2 have a different namespace
+	 */
+	@Override
+	protected Element createElement(Document document, String nodeName) {
+		return document.createElementNS("http://openiaml.org/model0.2", nodeName);
+	}
+	
+	
 	
 }

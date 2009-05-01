@@ -20,6 +20,12 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 	protected DiagramDocumentEditor editor_page = null;
 	protected DiagramDocumentEditor editor_store = null;
 	
+	/**
+	 * The model is migrated, initialised and loaded in 
+	 * {@link #setUp()}.
+	 * 
+	 * @throws Exception
+	 */
 	public void testLoadModel() throws Exception {
 
 		// there should be two children

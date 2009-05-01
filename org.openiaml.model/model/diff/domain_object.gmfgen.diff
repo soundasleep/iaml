@@ -1,6 +1,6 @@
---- domain_object.gmfgen	2009-02-05 14:50:38.258201400 +1300
-+++ copies/domain_object.gmfgen	2009-02-05 14:50:29.789397200 +1300
-@@ -170,6 +170,11 @@
+--- domain_object.gmfgen	2009-05-01 17:09:05.897939200 +1200
++++ copies/domain_object.gmfgen	2009-05-01 17:08:53.288402800 +1200
+@@ -172,6 +172,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,19 +12,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -223,6 +228,11 @@
-         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-       </viewmap>
-+      <behaviour
-+          xsi:type="gmfgen:OpenDiagramBehaviour"
-+          editPolicyClassName="OperationOpenDiagramEditPolicy"
-+          diagramKind="Iaml_Operation"
-+          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
-       <modelFacet>
-         <metaClass
-             href="iaml.genmodel#//model/ChainedOperation"/>
-@@ -324,6 +334,11 @@
+@@ -326,6 +331,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -36,7 +24,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainAttribute"/>
-@@ -370,6 +385,11 @@
+@@ -372,6 +382,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -48,7 +36,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -427,6 +447,11 @@
+@@ -429,6 +444,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

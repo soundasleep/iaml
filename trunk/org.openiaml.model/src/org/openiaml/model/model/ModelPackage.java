@@ -3566,7 +3566,7 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE__VALUES = APPLICATION_ELEMENT__VALUES;
 
 	/**
-	 * The feature id for the '<em><b>Attributes</b></em>' reference list.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5025,10 +5025,10 @@ public interface ModelPackage extends EPackage {
 	EClass getDomainObjectInstance();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.DomainObjectInstance#getAttributes <em>Attributes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.DomainObjectInstance#getAttributes <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Attributes</em>'.
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
 	 * @see org.openiaml.model.model.DomainObjectInstance#getAttributes()
 	 * @see #getDomainObjectInstance()
 	 * @generated
@@ -6004,7 +6004,7 @@ public interface ModelPackage extends EPackage {
 		EClass DOMAIN_OBJECT_INSTANCE = eINSTANCE.getDomainObjectInstance();
 
 		/**
-		 * The meta object literal for the '<em><b>Attributes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

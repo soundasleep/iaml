@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface DomainObjectInstance extends ApplicationElement, ContainsWires {
 	/**
-	 * Returns the value of the '<em><b>Attributes</b></em>' reference list.
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.DomainAttributeInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -35,9 +35,10 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires 
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Attributes</em>' reference list.
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Attributes()
-	 * @model annotation="http://openiaml.org/comment changed='0.3: changed from DomainAttribute to DomainAttributeInstance'"
+	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment changed='0.3: changed from DomainAttribute to DomainAttributeInstance'"
 	 * @generated
 	 */
 	EList<DomainAttributeInstance> getAttributes();

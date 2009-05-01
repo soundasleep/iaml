@@ -9,10 +9,13 @@ package org.openiaml.model.model.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.ModelPackage;
@@ -33,7 +36,7 @@ import org.openiaml.model.model.ModelPackage;
  */
 public class DomainObjectInstanceImpl extends ApplicationElementImpl implements DomainObjectInstance {
 	/**
-	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' reference list.
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAttributes()
@@ -88,7 +91,7 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 */
 	public EList<DomainAttributeInstance> getAttributes() {
 		if (attributes == null) {
-			attributes = new EObjectResolvingEList<DomainAttributeInstance>(DomainAttributeInstance.class, this, ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES);
+			attributes = new EObjectContainmentEList<DomainAttributeInstance>(DomainAttributeInstance.class, this, ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES);
 		}
 		return attributes;
 	}
@@ -112,6 +115,20 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 		strQuery = newStrQuery;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY, oldStrQuery, strQuery));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

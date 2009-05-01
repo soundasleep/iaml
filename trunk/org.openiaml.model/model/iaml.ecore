@@ -225,7 +225,7 @@
       <details key="added" value="0.2"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//DomainAttributeInstance">
+        eType="#//DomainAttributeInstance" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="0.3: changed from DomainAttribute to DomainAttributeInstance"/>
       </eAnnotations>

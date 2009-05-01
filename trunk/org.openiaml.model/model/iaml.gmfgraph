@@ -784,6 +784,43 @@
       <accessors
           figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="DomainObjectInstanceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="DomainObjectInstanceFigure"
+          lineWidth="2"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainObjectInstanceNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="DomainAttributeInstanceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="DomainAttributeInstanceFigure"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeInstanceNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -875,6 +912,12 @@
   <nodes
       name="DecisionCondition"
       figure="DecisionConditionFigure"/>
+  <nodes
+      name="DomainObjectInstance"
+      figure="DomainObjectInstanceFigure"/>
+  <nodes
+      name="DomainAttributeInstance"
+      figure="DomainAttributeInstanceFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1097,4 +1140,12 @@
       name="DecisionConditionName"
       figure="DecisionConditionFigure"
       accessor="//@figures.0/@descriptors.43/@accessors.0"/>
+  <labels
+      name="DomainObjectInstanceName"
+      figure="DomainObjectInstanceFigure"
+      accessor="//@figures.0/@descriptors.44/@accessors.0"/>
+  <labels
+      name="DomainAttributeInstanceName"
+      figure="DomainAttributeInstanceFigure"
+      accessor="//@figures.0/@descriptors.45/@accessors.0"/>
 </gmfgraph:Canvas>

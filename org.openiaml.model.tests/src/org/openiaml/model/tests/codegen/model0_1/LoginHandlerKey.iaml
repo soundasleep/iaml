@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11e19f1adf3.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11e19f1adf3.1">
   <children xsi:type="iaml.visual:Page" id="visual.11e19f1b1ea.2" name="Home" inEdges="wires.11e3802c67f.a"/>
   <sessions id="scopes.11e1a0c9c91.5" name="my session">
     <properties id="model.11e37b8d89c.17" name="my login key" outEdges="wires.11e37df5bde.d" inEdges="wires.11e3802c67f.9">
@@ -13,7 +13,7 @@
     </children>
     <children xsi:type="iaml.components:LoginHandler" id="components.11e37b8d957.3" name="Login Handler" outEdges="wires.11e3802c67f.8 wires.11e3802c67f.9 wires.11e3802c67f.a" inEdges="wires.11e37b8d957.6">
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.11e3802c67f.8" from="components.11e37b8d957.3" to="visual.11e37b8d948.d" name="login"/>
-      <wires xsi:type="iaml.wires:FindWire" id="wires.11e3802c67f.9" from="components.11e37b8d957.3" to="model.11e37b8d89c.17" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.11e3802c67f.9" from="components.11e37b8d957.3" to="model.11e37b8d89c.17" name="set"/>
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.11e3802c67f.a" from="components.11e37b8d957.3" to="visual.11e19f1b1ea.2" name="logout"/>
     </children>
   </sessions>

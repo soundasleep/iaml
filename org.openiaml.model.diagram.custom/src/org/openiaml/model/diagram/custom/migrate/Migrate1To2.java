@@ -14,6 +14,7 @@ import org.w3c.dom.Node;
  * Changes in model version 0.2:
  * 
  * <ol>
+ *   <li><b>Root namespace changed to "http://openiaml.org/model0.2"</b>: {@link #createElement(Document, String)}</li>
  *   <li>New wires:
  *   <ol>
  *     <li>FilterWire</li>
@@ -176,7 +177,7 @@ public class Migrate1To2 extends DomBasedMigrator implements IamlModelMigrator {
 	}
 
 	/**
-	 * Models of version 0.2 have a different namespace
+	 * Models of version 0.2 have a different namespace.
 	 */
 	@Override
 	protected Element createElement(Document document, String nodeName) {

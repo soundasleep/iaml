@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
-    nsURI="http://openiaml.org/model" nsPrefix="iaml">
+    nsURI="http://openiaml.org/model0.2" nsPrefix="iaml">
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" interface="true"
       eSuperTypes="#//GeneratedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -225,7 +225,11 @@
       <details key="added" value="0.2"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//DomainAttribute"/>
+        eType="#//DomainAttributeInstance">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="changed" value="0.3: changed from DomainAttribute to DomainAttributeInstance"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="strQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PageRequest">
@@ -289,6 +293,11 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
         eType="#//Condition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAttributeInstance" eSuperTypes="#//ApplicationElement">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="added" value="0.3"/>
+    </eAnnotations>
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing #//Scope">
@@ -356,7 +365,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="FindWire" eSuperTypes="#//wires/CompositeWire">
+    <eClassifiers xsi:type="ecore:EClass" name="SetWire" eSuperTypes="#//wires/CompositeWire">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
@@ -377,7 +386,7 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="FilterWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="SelectWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
         <details key="comment" value="parameters can be provided by ParameterWires"/>

@@ -28,6 +28,7 @@ import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
@@ -285,6 +286,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseContainsConditions(ContainsConditions object) {
 				return createContainsConditionsAdapter();
+			}
+			@Override
+			public Adapter caseDomainAttributeInstance(DomainAttributeInstance object) {
+				return createDomainAttributeInstanceAdapter();
 			}
 			@Override
 			public Adapter caseAbstractDomainObject(AbstractDomainObject object) {
@@ -917,6 +922,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsConditionsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DomainAttributeInstance <em>Domain Attribute Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DomainAttributeInstance
+	 * @generated
+	 */
+	public Adapter createDomainAttributeInstanceAdapter() {
 		return null;
 	}
 

@@ -23,6 +23,7 @@ import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
@@ -111,6 +112,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.PAGE_REQUEST: return createPageRequest();
 			case ModelPackage.VISITOR_AGENT: return createVisitorAgent();
 			case ModelPackage.COMPOSITE_CONDITION: return createCompositeCondition();
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE: return createDomainAttributeInstance();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -389,6 +391,17 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		CompositeConditionImpl compositeCondition = new CompositeConditionImpl();
 		generateID(compositeCondition);
 		return compositeCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public DomainAttributeInstance createDomainAttributeInstance() {
+		DomainAttributeInstanceImpl domainAttributeInstance = new DomainAttributeInstanceImpl();
+		generateID(domainAttributeInstance);
+		return domainAttributeInstance;
 	}
 
 	/**

@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
 public interface DomainObjectInstance extends ApplicationElement, ContainsWires {
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.DomainAttribute}.
+	 * The list contents are of type {@link org.openiaml.model.model.DomainAttributeInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Attributes</em>' reference list isn't clear,
@@ -37,10 +37,10 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires 
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Attributes</em>' reference list.
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Attributes()
-	 * @model
+	 * @model annotation="http://openiaml.org/comment changed='0.3: changed from DomainAttribute to DomainAttributeInstance'"
 	 * @generated
 	 */
-	EList<DomainAttribute> getAttributes();
+	EList<DomainAttributeInstance> getAttributes();
 
 	/**
 	 * Returns the value of the '<em><b>Str Query</b></em>' attribute.

@@ -8,25 +8,25 @@ package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.openiaml.model.model.wires.FindWire;
+import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Find Wire</b></em>'.
+ * An implementation of the model object '<em><b>Set Wire</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class FindWireImpl extends CompositeWireImpl implements FindWire {
+public class SetWireImpl extends CompositeWireImpl implements SetWire {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FindWireImpl() {
+	protected SetWireImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class FindWireImpl extends CompositeWireImpl implements FindWire {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return WiresPackage.Literals.FIND_WIRE;
+		return WiresPackage.Literals.SET_WIRE;
 	}
 
-} //FindWireImpl
+} //SetWireImpl

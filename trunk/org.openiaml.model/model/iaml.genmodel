@@ -140,6 +140,7 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsConditions">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsConditions/conditions"/>
     </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//DomainAttributeInstance"/>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genClasses ecoreClass="iaml.ecore#//visual/Page">
@@ -168,13 +169,13 @@
       <genClasses ecoreClass="iaml.ecore#//wires/ParameterWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ParameterWire/parameterName"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//wires/FindWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/SetWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ShowWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/CommitWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/NavigateWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/FilterWire">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/FilterWire/query"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/FilterWire/limit"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/SelectWire">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/query"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/limit"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ConditionWire"/>
     </nestedGenPackages>

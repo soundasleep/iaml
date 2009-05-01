@@ -9,16 +9,11 @@ package org.openiaml.model.model.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
-import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.ModelPackage;
 
@@ -45,7 +40,7 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DomainAttribute> attributes;
+	protected EList<DomainAttributeInstance> attributes;
 
 	/**
 	 * The default value of the '{@link #getStrQuery() <em>Str Query</em>}' attribute.
@@ -91,9 +86,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainAttribute> getAttributes() {
+	public EList<DomainAttributeInstance> getAttributes() {
 		if (attributes == null) {
-			attributes = new EObjectResolvingEList<DomainAttribute>(DomainAttribute.class, this, ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES);
+			attributes = new EObjectResolvingEList<DomainAttributeInstance>(DomainAttributeInstance.class, this, ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES);
 		}
 		return attributes;
 	}
@@ -146,7 +141,7 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 		switch (featureID) {
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES:
 				getAttributes().clear();
-				getAttributes().addAll((Collection<? extends DomainAttribute>)newValue);
+				getAttributes().addAll((Collection<? extends DomainAttributeInstance>)newValue);
 				return;
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY:
 				setStrQuery((String)newValue);

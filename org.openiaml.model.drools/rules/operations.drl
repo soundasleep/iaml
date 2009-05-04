@@ -37,6 +37,18 @@ rule "Create 'update' operation for abstract domain attribute"
 		
 end
 
+rule "Create 'update' operation for domain attribute instance"
+	when
+		f : DomainAttributeInstance( overridden == false )
+		not (Operation( eContainer == f, name=="update" ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		operation.setName("update");
+		insert(operation);
+		
+end
+
 rule "Create 'init' operation for input text field"
 	when
 		f : InputTextField( overridden == false )

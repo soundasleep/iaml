@@ -363,9 +363,17 @@
 			«ENDREM»
 		«ENDIF-»
 	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
-		«REM»direct field -->  abstract domain attribute«ENDREM»
+		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+		); 
+	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
+		«REM»direct field --> domain attribute instance«ENDREM»
+		store_domain_attribute_«safeNameString(((model::DomainAttributeInstance) to.eContainer).id)»(
+			«EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+			«IF inEdges.typeSelect(model::wires::ParameterWire).size > 1»
+				«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
+			«ENDIF»
 		); 
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');

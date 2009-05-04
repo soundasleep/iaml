@@ -3,11 +3,24 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* expand out all domain attribute instances for the page */
+«DEFINE expandDomainAttributes FOR model::InternetApplication»
+	«EXPAND getDomainAttribute FOREACH getAllDomainAttributeInstances()»
+	«EXPAND storeDomainAttribute FOREACH getAllDomainAttributeInstances()»
+«ENDDEFINE»
 «DEFINE expandDomainAttributes FOR model::visual::Page»
-	«EXPAND expandDomainAttribute FOREACH getRoot().getAllDomainAttributeInstances()»
+	«EXPAND expandDomainAttributes FOR getRoot()»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttribute FOR model::DomainAttributeInstance-»
+«DEFINE expandDomainObjects FOR model::InternetApplication»
+	«EXPAND getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
+	«EXPAND storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
+«ENDDEFINE»
+«DEFINE expandDomainObjects FOR model::visual::Page»
+	«EXPAND expandDomainObjects FOR getRoot()»
+«ENDDEFINE»
+
+/* code to get domain attributes */
+«DEFINE getDomainAttribute FOR model::DomainAttributeInstance-»
 	function get_attribute_instance_«safeName()»() {
 		/* return the current value for attribute id '«id»' */
 		«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
@@ -27,7 +40,7 @@
 	}
 «ENDDEFINE»
 
-«DEFINE expandDomainObject FOR model::DomainObjectInstance-»
+«DEFINE getDomainObject FOR model::DomainObjectInstance-»
 	function get_object_instance_«safeName()»() {
 		/* get the object instance '«id»' */
 		/* not contained in an object instance; select it manually */
@@ -89,6 +102,65 @@
 «DEFINE selectDatabaseStore FOR model::DomainStore»
 	$db = new PDO('sqlite:«safeNameString(id)».db') 
 		or throw_new_IamlRuntimeException("Could not open DomainStore '«this»'");
+«ENDDEFINE»
+
+/* code to _save_ attributes */
+«DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-»
+	function store_domain_attribute_«safeName()»($arg0) {
+		/* store a value into attribute id '«id»' */
+		«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
+			/* contained in an object instance '«eContainer»': get it from the instance */
+			store_object_instance_«safeName(eContainer)»("«safeNameString(name)-»", $arg0);
+		«ELSE»
+			/* not contained in an object instance; select it manually */
+			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+				throw new IamlRuntimeException("No selection wires exist for attribute instance '«this»'");
+			«ELSE»
+				$attribute_name = "«safeNameString(name)-»";
+				«EXPAND evaluateSelectWireStore FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+			«ENDIF»
+		«ENDIF»
+	}
+«ENDDEFINE»
+
+«DEFINE storeDomainObject FOR model::DomainObjectInstance-»
+	function store_object_instance_«safeName()»($attribute_name, $arg0) {
+		/* store a value into object id '«id»' */
+		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+			throw new IamlRuntimeException("No selection wires exist for attribute instance '«this»'");
+		«ELSE»
+			«EXPAND evaluateSelectWireStore FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+		«ENDIF»
+	}
+«ENDDEFINE»
+
+«DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»
+	/* selection wire «this» (for storing values), assumes $arg0 exists */
+	
+	// where are we loading it from? sets $db
+	«EXPAND selectDatabase FOR from»
+	
+	// create query
+	$query = "UPDATE «safeNameString(((model::DomainObject) from).name)»
+		SET $attribute_name = ?
+		WHERE " . «EXPAND getQuery FOR this-»;
+	$args = array($arg0);
+	$args += array(«EXPAND template::php::EventTrigger::callOperationParameters(this, false, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
+	
+	// execute query
+	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+	$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+«ENDDEFINE»
+
+/** to find the relevant domain attribute set method */
+«DEFINE findSetDomainAttributeMethod FOR model::InternetApplication» 
+	«EXPAND findDomainAttribute FOREACH getAllDomainAttributeInstances()»
+«ENDDEFINE»
+
+«DEFINE findDomainAttribute FOR model::DomainAttributeInstance»
+	if ($id == "«safeNameString(id)-»") {
+		store_domain_attribute_«safeNameString(id)-»($arg0);
+	}
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

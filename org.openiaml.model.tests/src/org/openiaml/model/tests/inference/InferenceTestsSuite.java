@@ -13,6 +13,7 @@ public class InferenceTestsSuite {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.
+	 * TODO split all of the inference tests into separate packages
 	 * 
 	 * @return
 	 */
@@ -37,6 +38,7 @@ public class InferenceTestsSuite {
         // model 0.3
         suite.addTestSuite(DatabaseWithInputForm.class);
         suite.addTestSuite(PropertiesFileWithInputForm.class);
+        suite.addTestSuite(SelectField.class);
 		//$JUnit-END$
         return suite; 
    }

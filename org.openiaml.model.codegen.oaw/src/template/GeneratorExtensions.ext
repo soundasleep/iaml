@@ -182,6 +182,8 @@ isVisibleThing(emf::EObject this) :
 	model::VisibleThing.isInstance(this);
 isAbstractDomainAttribute(emf::EObject this) :
 	model::domain::AbstractDomainAttribute.isInstance(this);	
+isDomainAttributeInstance(emf::EObject this) :
+	model::DomainAttributeInstance.isInstance(this);	
 isSession(emf::EObject this) :
 	model::scopes::Session.isInstance(this);	
 isPage(emf::EObject this) :

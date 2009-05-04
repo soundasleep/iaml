@@ -11,6 +11,10 @@ import org.openiaml.model.tests.codegen.model0_3.FailingOperation;
 import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandler;
 import org.openiaml.model.tests.codegen.model0_3.PropertiesFileWithInputForm;
 import org.openiaml.model.tests.codegen.model0_3.SelectField;
+import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromDynamicQuery;
+import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromObject;
+import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromObjectQuery;
+import org.openiaml.model.tests.codegen.model0_3.SelectFieldQuery;
 import org.openiaml.model.tests.codegen.model0_3.SessionInit;
 import org.openiaml.model.tests.codegen.model0_3.SessionSinglePage;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncInSession;
@@ -46,6 +50,10 @@ public class Codegen0_3Suite {
 		
 		// select/instance tests
 		suite.addTestSuite(SelectField.class);
+		suite.addTestSuite(SelectFieldFromObject.class);
+		suite.addTestSuite(SelectFieldQuery.class);
+		suite.addTestSuite(SelectFieldFromObjectQuery.class);
+		suite.addTestSuite(SelectFieldFromDynamicQuery.class);
 
 		// other model 0.3 tests
 		suite.addTestSuite(DataFlowTemporaryVariable.class);

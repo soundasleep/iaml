@@ -18,21 +18,21 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * @author jmwright
  *
  */
-public class SelectField extends DatabaseCodegenTestCase {
+public class SelectFieldFromObject extends DatabaseCodegenTestCase {
 	
-	private static final String FIRST_NAME = "Test User";
+	private static final String FIRST_NAME = "SelectField FromObject";
 	
 	protected InternetApplication root;
 
 	@Override
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/SelectField.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_3/SelectFieldFromObject.iaml");
 		super.setUp();
 	}
 	
 	@Override
 	protected String getDatabaseName() {
-		return "output/model_12109331eea_e3e.db";
+		return "output/model_12109331eea_1083.db";
 	}
 
 	@Override
@@ -54,40 +54,6 @@ public class SelectField extends DatabaseCodegenTestCase {
 	}
 	
 	/**
-	 * Let's not try and reload/restart the web application yet;
-	 * let's just access the database straight away.
-	 *  
-	 * @throws Exception
-	 */
-	public void testSelectInstant() throws Exception {
-
-		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
-		
-		// there should be a text field 'editname'
-		String field = getLabelIDForText("editname");
-		
-		// it should have the first (and only) value in the database
-		assertLabeledFieldEquals(field, FIRST_NAME);
-		
-		// if we change it, this value should be stored between pages		
-		String newValue = "a new value " + new Date().toString();
-		setLabeledFormElementField(field, newValue);
-		assertLabeledFieldEquals(field, newValue);
-
-		// check the database
-		ResultSet rs = executeQuery("SELECT * FROM User");
-		assertTrue(rs.next());
-		assertEquals(newValue, rs.getString("name"));
-		assertFalse(rs.next());
-		
-	}
-	
-	/**
 	 * Test attribute instances, even over page reloads and
 	 * session restarts.
 	 * 
@@ -103,7 +69,7 @@ public class SelectField extends DatabaseCodegenTestCase {
 		beginAtSitemapThenPage(sitemap, "container");
 		
 		// there should be a text field 'editname'
-		String field = getLabelIDForText("editname");
+		String field = getLabelIDForText("textfield");
 		
 		// it should have the first (and only) value in the database
 		assertLabeledFieldEquals(field, FIRST_NAME);
@@ -116,14 +82,14 @@ public class SelectField extends DatabaseCodegenTestCase {
 		// reload page, it should be stored
 		reloadPage(sitemap, "container");		
 		{
-			String field2 = getLabelIDForText("editname");
+			String field2 = getLabelIDForText("textfield");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
 		// *restart* session, it should be stored
 		restartSession(sitemap, "container");
 		{
-			String field2 = getLabelIDForText("editname");
+			String field2 = getLabelIDForText("textfield");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		

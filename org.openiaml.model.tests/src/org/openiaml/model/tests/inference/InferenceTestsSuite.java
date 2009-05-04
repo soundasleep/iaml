@@ -39,6 +39,7 @@ public class InferenceTestsSuite {
         suite.addTestSuite(DatabaseWithInputForm.class);
         suite.addTestSuite(PropertiesFileWithInputForm.class);
         suite.addTestSuite(SelectField.class);
+        suite.addTestSuite(SelectFieldFromObject.class);
 		//$JUnit-END$
         return suite; 
    }

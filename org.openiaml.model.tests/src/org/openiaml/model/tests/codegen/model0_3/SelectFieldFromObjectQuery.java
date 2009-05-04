@@ -13,20 +13,18 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
- * Tests instances: Selecting only one field from any property.
+ * Tests instances: Selecting a field using a query.
  * 
  * @author jmwright
  *
  */
-public class SelectField extends DatabaseCodegenTestCase {
-	
-	private static final String FIRST_NAME = "Test User";
+public class SelectFieldFromObjectQuery extends DatabaseCodegenTestCase {
 	
 	protected InternetApplication root;
 
 	@Override
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/SelectField.iaml");
+		root = loadAndCodegen(ROOT + "codegen/model0_3/SelectFieldFromObject.iaml");
 		super.setUp();
 	}
 	
@@ -39,7 +37,10 @@ public class SelectField extends DatabaseCodegenTestCase {
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
 		s.add("CREATE TABLE User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (12, '" + FIRST_NAME + "', 'test@jevon.org', 'test')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (12, 'User One', 'test1@jevon.org', 'test1')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (22, 'User Two', 'test2@jevon.org', 'test2')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (42, 'User Three', 'test3@jevon.org', 'test3')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (82, 'User Four', 'test4@jevon.org', 'test4')");
 		return s;
 	}
 
@@ -47,44 +48,10 @@ public class SelectField extends DatabaseCodegenTestCase {
 	 * Make sure the database contains the expected data.
 	 */
 	public void testDatabase() throws Exception {
-		ResultSet rs = executeQuery("SELECT * FROM User");
+		ResultSet rs = executeQuery("SELECT * FROM User WHERE id=42");
 		assertTrue(rs.next());
-		assertEquals(rs.getString("name"), FIRST_NAME);
+		assertEquals(rs.getString("name"), "User Three");
 		assertFalse(rs.next());
-	}
-	
-	/**
-	 * Let's not try and reload/restart the web application yet;
-	 * let's just access the database straight away.
-	 *  
-	 * @throws Exception
-	 */
-	public void testSelectInstant() throws Exception {
-
-		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
-		
-		// there should be a text field 'editname'
-		String field = getLabelIDForText("editname");
-		
-		// it should have the first (and only) value in the database
-		assertLabeledFieldEquals(field, FIRST_NAME);
-		
-		// if we change it, this value should be stored between pages		
-		String newValue = "a new value " + new Date().toString();
-		setLabeledFormElementField(field, newValue);
-		assertLabeledFieldEquals(field, newValue);
-
-		// check the database
-		ResultSet rs = executeQuery("SELECT * FROM User");
-		assertTrue(rs.next());
-		assertEquals(newValue, rs.getString("name"));
-		assertFalse(rs.next());
-		
 	}
 	
 	/**
@@ -103,10 +70,10 @@ public class SelectField extends DatabaseCodegenTestCase {
 		beginAtSitemapThenPage(sitemap, "container");
 		
 		// there should be a text field 'editname'
-		String field = getLabelIDForText("editname");
+		String field = getLabelIDForText("textfield");
 		
 		// it should have the first (and only) value in the database
-		assertLabeledFieldEquals(field, FIRST_NAME);
+		assertLabeledFieldEquals(field, "User Three");
 		
 		// if we change it, this value should be stored between pages		
 		String newValue = "a new value " + new Date().toString();
@@ -116,21 +83,32 @@ public class SelectField extends DatabaseCodegenTestCase {
 		// reload page, it should be stored
 		reloadPage(sitemap, "container");		
 		{
-			String field2 = getLabelIDForText("editname");
+			String field2 = getLabelIDForText("textfield");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
 		// *restart* session, it should be stored
 		restartSession(sitemap, "container");
 		{
-			String field2 = getLabelIDForText("editname");
+			String field2 = getLabelIDForText("textfield");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
-		ResultSet rs = executeQuery("SELECT * FROM User");
-		assertTrue(rs.next());
-		assertEquals(newValue, rs.getString("name"));
-		assertFalse(rs.next());
+		// check the database
+		{
+			ResultSet rs = executeQuery("SELECT * FROM User WHERE id=42");
+			assertTrue(rs.next());
+			assertEquals(newValue, rs.getString("name"));
+			assertFalse(rs.next());
+		}
+		
+		// make sure it hasn't changed other values
+		{
+			ResultSet rs = executeQuery("SELECT * FROM User WHERE id=82");
+			assertTrue(rs.next());
+			assertEquals("User Four", rs.getString("name"));
+			assertFalse(rs.next());
+		}
 		
 	}
 

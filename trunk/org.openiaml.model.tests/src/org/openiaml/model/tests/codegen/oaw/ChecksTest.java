@@ -15,10 +15,15 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  *
  */
-public class ChecksTest  extends CodegenTestCase {
+public class ChecksTest extends CodegenTestCase {
 	
 	protected InternetApplication root;
-	
+
+	@Override
+	protected void setUp() throws Exception {
+		// do nothing: each checks test method will set up the model itself
+	}
+
 	/**
 	 * Calls {@link #loadAndCodegen(String)}, but it is expected
 	 * that this will fail with an AssertionFailedError.
@@ -87,5 +92,5 @@ public class ChecksTest  extends CodegenTestCase {
 		
 		assertStatusMatches(s, "No pages in internet application");
 	}
-	
+
 }

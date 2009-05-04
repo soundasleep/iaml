@@ -21,7 +21,7 @@ public class ReloadPage extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_2/ReloadPage.iaml");
+		root = loadAndCodegen(ReloadPage.class);
 	}
 	
 	public void testServerReload() throws Exception {

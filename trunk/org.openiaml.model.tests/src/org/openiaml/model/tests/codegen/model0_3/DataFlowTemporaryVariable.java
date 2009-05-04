@@ -20,7 +20,7 @@ public class DataFlowTemporaryVariable extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/DataFlowTemporaryVariable.iaml");
+		root = loadAndCodegen(DataFlowTemporaryVariable.class);
 	}
 	
 	public void testRequirement() throws Exception {

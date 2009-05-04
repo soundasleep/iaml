@@ -23,7 +23,7 @@ public class SessionSyncWiresMultiple extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/SessionSyncWiresMultiple.iaml");
+		root = loadAndCodegen(SessionSyncWiresMultiple.class);
 	}
 	
 	public void testRequirement() throws Exception {

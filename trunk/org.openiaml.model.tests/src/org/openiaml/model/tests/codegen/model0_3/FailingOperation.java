@@ -18,7 +18,7 @@ public class FailingOperation extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/FailingOperation.iaml");
+		root = loadAndCodegen(FailingOperation.class);
 	}
 	
 	public void testFailingOperation() throws Exception {

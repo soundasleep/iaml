@@ -21,7 +21,7 @@ public class SyncWiresTestCase extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncWiresTestCase.iaml");
+		root = loadAndCodegen(SyncWiresTestCase.class);
 	}
 	
 	/**

@@ -23,7 +23,7 @@ public class SyncWiresMultiple extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncWiresMultiple.iaml");
+		root = loadAndCodegen(SyncWiresMultiple.class);
 	}
 	
 	public void testCase() throws Exception {

@@ -20,7 +20,7 @@ public class SessionSinglePage extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/SessionSinglePage.iaml");
+		root = loadAndCodegen(SessionSinglePage.class);
 	}
 	
 	public void testRequirement() throws Exception {

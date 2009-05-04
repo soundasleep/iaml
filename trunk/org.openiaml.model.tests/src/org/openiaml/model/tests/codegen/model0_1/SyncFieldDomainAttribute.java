@@ -25,7 +25,7 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncFieldDomainAttribute.iaml");
+		root = loadAndCodegen(SyncFieldDomainAttribute.class);
 	}
 	
 	/**

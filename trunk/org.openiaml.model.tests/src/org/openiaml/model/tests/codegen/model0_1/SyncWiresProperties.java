@@ -47,7 +47,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 	protected final String PROPERTIES = "SyncWiresProperties.properties";
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncWiresProperties.iaml");
+		root = loadAndCodegen(SyncWiresProperties.class);
 	}
 	
 	/**

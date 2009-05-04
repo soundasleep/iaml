@@ -25,9 +25,9 @@ public class SelectField extends DatabaseCodegenTestCase {
 	protected InternetApplication root;
 
 	@Override
-	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/SelectField.iaml");
-		super.setUp();
+	public void setUp() throws Exception {
+		root = loadAndCodegen(SelectField.class);
+		initialiseDatabase();
 	}
 	
 	@Override

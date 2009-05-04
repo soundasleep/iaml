@@ -45,7 +45,7 @@ public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 	 * This must be called by subclasses if they wish to have the database
 	 * initialised.
 	 */
-	protected void setUp() throws Exception {
+	public void initialiseDatabase() throws Exception {
 		// lets create a database
 		Class.forName("org.sqlite.JDBC");
 		IFile db = getProject().getFile(getDatabaseName());

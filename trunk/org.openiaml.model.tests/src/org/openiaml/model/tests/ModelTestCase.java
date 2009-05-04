@@ -48,6 +48,9 @@ public abstract class ModelTestCase extends WebTestCase {
 	 * @throws java.lang.Exception
 	 */
 	protected void setUp() throws Exception {
+		// parent setup
+		super.setUp();
+		
 		project = createProject();
 
 		// set test context

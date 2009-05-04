@@ -84,7 +84,7 @@
 		«REM»an empty query«ENDREM»
 		"1"
 	«ELSE-»
-		"«query-» /* direct query */
+		"«query-»" /* direct query */
 	«ENDIF-»
 «ENDDEFINE»
 
@@ -148,7 +148,10 @@
 		SET $attribute_name = ?
 		WHERE " . «EXPAND getQuery FOR this-»;
 	$args = array($arg0);
-	$args += array(«EXPAND template::php::EventTrigger::callOperationParameters(this, false, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
+	$args2 = array(«EXPAND template::php::EventTrigger::callOperationParameters(this, false, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
+	foreach ($args2 as $k) {
+		$args[] = $k;
+	}
 	
 	// execute query
 	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));

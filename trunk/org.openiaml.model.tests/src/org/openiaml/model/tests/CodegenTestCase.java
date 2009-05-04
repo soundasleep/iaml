@@ -26,6 +26,13 @@ import org.openiaml.model.model.InternetApplication;
 public class CodegenTestCase extends InferenceTestCase {
 	
 	/**
+	 * Prevent setUp() being called outside of code generation.
+	 */
+	protected void setUp() throws Exception {
+		throw new RuntimeException("setUp should not be called manually; use loadAndCodegen() instead");
+	}
+	
+	/**
 	 * Load a model and perform code generation.
 	 * 
 	 * @see #loadAndInfer(String)
@@ -43,6 +50,23 @@ public class CodegenTestCase extends InferenceTestCase {
 		doTransform(outModel);	// output to project
 		
 		return root;
+	}
+	
+	/**
+	 * Automagically load the model file (.iaml) for this given
+	 * test class.
+	 * 
+	 * @see #loadAndCodegen(String)
+	 * @param class1 The test class to load a model for.
+	 * @return the loaded and compiled InternetApplication
+	 */
+	protected InternetApplication loadAndCodegen(
+			Class<?> class1) throws Exception {
+		if (class1.getPackage().getName().contains("model0_3")) {
+			return loadAndCodegen(ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml");
+		}
+		fail("Could not work out an IAML model for class: " + class1);
+		return null;
 	}
 	
 	/**

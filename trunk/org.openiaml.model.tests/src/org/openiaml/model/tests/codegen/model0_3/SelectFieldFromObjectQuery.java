@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.tests.CodegenTestCase;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
@@ -23,24 +24,24 @@ public class SelectFieldFromObjectQuery extends DatabaseCodegenTestCase {
 	protected InternetApplication root;
 
 	@Override
-	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/SelectFieldFromObject.iaml");
-		super.setUp();
+	public void setUp() throws Exception {
+		root = loadAndCodegen(SelectFieldFromObjectQuery.class);
+		initialiseDatabase();
 	}
-	
+
 	@Override
 	protected String getDatabaseName() {
-		return "output/model_12109331eea_e3e.db";
+		return "output/model_12109331eea_1083.db";
 	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
 		s.add("CREATE TABLE User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (12, 'User One', 'test1@jevon.org', 'test1')");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (22, 'User Two', 'test2@jevon.org', 'test2')");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (42, 'User Three', 'test3@jevon.org', 'test3')");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (82, 'User Four', 'test4@jevon.org', 'test4')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (13, 'User One', 'test1@jevon.org', 'test1')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (23, 'User Two', 'test2@jevon.org', 'test2')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (43, 'User Three', 'test3@jevon.org', 'test3')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (83, 'User Four', 'test4@jevon.org', 'test4')");
 		return s;
 	}
 
@@ -48,7 +49,7 @@ public class SelectFieldFromObjectQuery extends DatabaseCodegenTestCase {
 	 * Make sure the database contains the expected data.
 	 */
 	public void testDatabase() throws Exception {
-		ResultSet rs = executeQuery("SELECT * FROM User WHERE id=42");
+		ResultSet rs = executeQuery("SELECT * FROM User WHERE id=43");
 		assertTrue(rs.next());
 		assertEquals(rs.getString("name"), "User Three");
 		assertFalse(rs.next());
@@ -96,7 +97,7 @@ public class SelectFieldFromObjectQuery extends DatabaseCodegenTestCase {
 		
 		// check the database
 		{
-			ResultSet rs = executeQuery("SELECT * FROM User WHERE id=42");
+			ResultSet rs = executeQuery("SELECT * FROM User WHERE id=43");
 			assertTrue(rs.next());
 			assertEquals(newValue, rs.getString("name"));
 			assertFalse(rs.next());
@@ -104,7 +105,7 @@ public class SelectFieldFromObjectQuery extends DatabaseCodegenTestCase {
 		
 		// make sure it hasn't changed other values
 		{
-			ResultSet rs = executeQuery("SELECT * FROM User WHERE id=82");
+			ResultSet rs = executeQuery("SELECT * FROM User WHERE id=83");
 			assertTrue(rs.next());
 			assertEquals("User Four", rs.getString("name"));
 			assertFalse(rs.next());

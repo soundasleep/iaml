@@ -41,6 +41,8 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 || *Inference Tests* || No inference ||
 || *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.java  DataFlowTemporaryVariable.java] ||
 
+For a discussion of possible operation components and pre-defined composite operations, see [IamlOperations] or [IamlCompositeOperations].
+
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/images/DataFlowTemporaryVariable-4.png
 
 ==Buttons==

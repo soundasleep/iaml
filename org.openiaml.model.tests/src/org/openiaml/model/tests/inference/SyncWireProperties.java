@@ -40,7 +40,7 @@ public class SyncWireProperties extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/SyncWiresProperties.iaml");
+		root = loadAndInfer(SyncWireProperties.class);
 	}
 	
 	public void testInference() throws JaxenException {

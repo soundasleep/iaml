@@ -28,7 +28,7 @@ public class ConditionWireXpath extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/ConditionWireXpath.iaml", false);
+		root = loadAndInfer(ConditionWireXpath.class);
 	}
 
 	public void testInference() throws JaxenException {

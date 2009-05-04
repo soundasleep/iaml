@@ -29,7 +29,7 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/PropertiesFileWithInputForm.iaml");
+		root = loadAndInfer(PropertiesFileWithInputForm.class);
 	}
 	
 	public void testInferenceWithoutForm() throws JaxenException {

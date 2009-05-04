@@ -31,7 +31,7 @@ public class SyncFormDomainObject extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/SyncFormDomainObject.iaml");
+		root = loadAndInfer(SyncFormDomainObject.class);
 	}
 	
 	@SuppressWarnings("unused")

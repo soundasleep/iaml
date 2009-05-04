@@ -29,7 +29,7 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/DatabaseWithInputForm.iaml");
+		root = loadAndInfer(DatabaseWithInputForm.class);
 	}
 	
 	public void testInferenceWithoutForm() throws JaxenException {

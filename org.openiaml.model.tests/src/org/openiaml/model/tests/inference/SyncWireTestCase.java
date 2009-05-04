@@ -37,7 +37,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/SyncWireTestCase.iaml");
+		root = loadAndInfer(SyncWireTestCase.class);
 	}
 	
 	public void testName1toName2() throws JaxenException {

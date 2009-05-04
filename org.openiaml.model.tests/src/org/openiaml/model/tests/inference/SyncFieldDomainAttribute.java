@@ -31,7 +31,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/SyncFieldDomainAttribute.iaml");
+		root = loadAndInfer(SyncFieldDomainAttribute.class);
 	}
 	
 	public void testInference() throws JaxenException {

@@ -5,7 +5,7 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11f391b3e18.c" from="visual.11f3913517e.17" to="domain.11f3913518d.22" name="sync properties"/>
     </children>
   </children>
-  <domainStores xsi:type="iaml.domain:FileDomainStore" id="domain.11f3913518d.1f" name="properties file" generatedElements="domain.11f3913518d.22" file="SyncWiresProperties.properties">
+  <domainStores xsi:type="iaml.domain:FileDomainStore" id="domain.11f3913518d.1f" name="properties file" generatedElements="domain.11f3913518d.22" file="SyncWireProperties.properties">
     <children xsi:type="iaml.domain:FileDomainObject" generatedBy="domain.11f3913518d.1f" isGenerated="true" id="domain.11f3913518d.22" name="properties" inEdges="wires.11f391b3e18.c" generatedElements="domain.11f3913518d.23 domain.11f3913518d.24 domain.11f3913518d.25">
       <attributes xsi:type="iaml.domain:FileDomainAttribute" generatedBy="domain.11f3913518d.22" isGenerated="true" id="domain.11f3913518d.23" name="fruit"/>
       <attributes xsi:type="iaml.domain:FileDomainAttribute" generatedBy="domain.11f3913518d.22" isGenerated="true" id="domain.11f3913518d.24" name="animal"/>

@@ -31,7 +31,7 @@ public class SelectFieldFromObject extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/SelectFieldFromObject.iaml", true);
+		root = loadAndInfer(SelectFieldFromObject.class, true);
 	}
 	
 	public void testInference() throws Exception {

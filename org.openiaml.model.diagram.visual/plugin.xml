@@ -154,12 +154,12 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireNameEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQueryEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQueryEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQuery2EditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -528,6 +528,16 @@
             <param name="semanticHint" value="1018"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/visual">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.Button_1019"
+               name="%metatype.name.Button_1019"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Button"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ButtonEditHelper">
+            <param name="semanticHint" value="1019"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_3001"
@@ -649,6 +659,7 @@
          <elementType ref="org.openiaml.model.diagram.visual.CompositeCondition_1016"/>
          <elementType ref="org.openiaml.model.diagram.visual.DomainObjectInstance_1017"/>
          <elementType ref="org.openiaml.model.diagram.visual.DomainAttributeInstance_1018"/>
+         <elementType ref="org.openiaml.model.diagram.visual.Button_1019"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>

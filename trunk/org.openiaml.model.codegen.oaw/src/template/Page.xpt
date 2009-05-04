@@ -34,11 +34,14 @@
 		«EXPAND php::EventTrigger::expandOperations FOR this-»
 
 		// expand all conditions
-		«EXPAND php::Conditions::expandConditions  FOR this-»
+		«EXPAND php::Conditions::expandConditions FOR this-»
 
 		// expand any dynamic element sources
 		«EXPAND php::DynamicElements::expandDynamicElements FOR this-»
 		
+		// expand any domain attribute instsances
+		«EXPAND php::DomainInstance::expandDomainAttributes FOR this-»
+
 		// allow remote execution of operations
 		if (require_get("operation", "")) {
 			$operation_name = "do_" . require_get("operation");
@@ -301,6 +304,11 @@
 		«REM»contained in a Session: a session value«ENDREM»
 		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE staticInitialValue FOR model::DomainAttributeInstance»
+	«REM»from a domain attribute instance.«ENDREM»
+	value="<?php echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>"
 «ENDDEFINE»
 
 /* ignore. todo: refactor this to a model extension to only select viable SyncWires */

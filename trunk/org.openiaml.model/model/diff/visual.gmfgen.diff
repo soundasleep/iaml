@@ -1,5 +1,5 @@
---- visual.gmfgen	2009-05-01 17:09:31.617018400 +1200
-+++ copies/visual.gmfgen	2009-05-01 17:08:53.304028000 +1200
+--- visual.gmfgen	2009-05-04 16:28:17.463191200 +1200
++++ copies/visual.gmfgen	2009-05-04 16:28:12.056872000 +1200
 @@ -173,6 +173,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
@@ -120,7 +120,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainObjectInstance"/>
-@@ -1042,6 +1092,11 @@
+@@ -1047,6 +1097,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="VisualOpenDiagramEditPolicy"
++          diagramKind="Iaml_Visual"
++          editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/visual/Button"/>
+@@ -1095,6 +1150,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -132,7 +144,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1099,6 +1154,11 @@
+@@ -1152,6 +1212,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -144,7 +156,12 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1191,6 +1251,11 @@
+@@ -1240,10 +1305,15 @@
+       <viewmap
+           xsi:type="gmfgen:InnerClassViewmap"
+           className="SelectWireFigure"
+-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SelectWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSelectWireNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSelectWireQueryFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SelectWireFigure() {&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSelectWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSelectWireNameFigure.setText(&quot;select&quot;);&#xA;&#xA;this.add(fFigureSelectWireNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureSelectWireQueryFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSelectWireQueryFigure.setText(&quot;any&quot;);&#xA;&#xA;this.add(fFigureSelectWireQueryFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSelectWireNameFigure() {&#xA;&#x9;&#x9;return fFigureSelectWireNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSelectWireQueryFigure() {&#xA;&#x9;&#x9;return fFigureSelectWireQueryFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
++          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SelectWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSelectWireNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSelectWireQueryFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SelectWireFigure() {&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSelectWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSelectWireNameFigure.setText(&quot;filter&quot;);&#xA;&#xA;this.add(fFigureSelectWireNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureSelectWireQueryFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSelectWireQueryFigure.setText(&quot;any&quot;);&#xA;&#xA;this.add(fFigureSelectWireQueryFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSelectWireNameFigure() {&#xA;&#x9;&#x9;return fFigureSelectWireNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSelectWireQueryFigure() {&#xA;&#x9;&#x9;return fFigureSelectWireQueryFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -156,7 +173,12 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1270,6 +1335,11 @@
+@@ -1319,10 +1389,15 @@
+       <viewmap
+           xsi:type="gmfgen:InnerClassViewmap"
+           className="SetWireFigure"
+-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SetWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSetWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SetWireFigure() {&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSetWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSetWireNameFigure.setText(&quot;set&quot;);&#xA;&#xA;this.add(fFigureSetWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSetWireNameFigure() {&#xA;&#x9;&#x9;return fFigureSetWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
++          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SetWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureSetWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SetWireFigure() {&#xA;&#x9;&#x9;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSetWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureSetWireNameFigure.setText(&quot;find&quot;);&#xA;&#xA;this.add(fFigureSetWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureSetWireNameFigure() {&#xA;&#x9;&#x9;return fFigureSetWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -168,7 +190,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1327,6 +1397,11 @@
+@@ -1380,6 +1455,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -180,7 +202,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1384,6 +1459,11 @@
+@@ -1437,6 +1517,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -192,7 +214,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1441,6 +1521,11 @@
+@@ -1494,6 +1579,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -204,7 +226,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1498,6 +1583,11 @@
+@@ -1551,6 +1641,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

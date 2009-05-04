@@ -1,5 +1,5 @@
---- root.gmfgen	2009-04-03 16:27:51.286172300 +1300
-+++ copies/root.gmfgen	2009-04-03 16:27:29.571870300 +1300
+--- root.gmfgen	2009-05-04 16:28:20.681982400 +1200
++++ copies/root.gmfgen	2009-05-04 16:28:12.041246800 +1200
 @@ -170,6 +170,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
@@ -97,6 +97,18 @@
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
 @@ -838,6 +878,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="OpenDiagramEditPolicyWire"
++          diagramKind="Iaml_Wire"
++          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
+       <modelFacet
+           xsi:type="gmfgen:TypeLinkModelFacet">
+         <metaClass
+@@ -952,6 +997,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

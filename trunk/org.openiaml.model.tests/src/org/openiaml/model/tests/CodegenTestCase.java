@@ -351,4 +351,18 @@ public class CodegenTestCase extends InferenceTestCase {
 		beginAtSitemapThenPage(sitemap, pageText);
 	}
 	
+	/**
+	 * Helper method: Assert that there has been a problem.
+	 */
+	protected void assertProblem() {
+		assertMatch("(Error|error|Exception|exception)");
+	}
+	
+	/**
+	 * Helper method: Assert that there has not been a problem.
+	 */
+	protected void assertNoProblem() {
+		assertNoMatch("(Error|error|Exception|exception)");
+	}
+
 }

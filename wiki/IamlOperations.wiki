@@ -3,9 +3,11 @@
 
 =Introduction=
 
-When composing CompositeOperations out of the elemental building blocks of [Model0_2 operation modelling] (StartNodes, FinishNodes, DataFlowEdges, ChainedOperations), there are particular ChainedOperations which are designed to have fixed intent in a generated web application. Their intent is based on their _name_, and we summarise these operations below.
+When composing [IamlCompositeOperations CompositeOperations] out of the elemental building blocks of [Model0_2 operation modelling] (StartNodes, FinishNodes, DataFlowEdges, ChainedOperations), there are particular ChainedOperations which are designed to have fixed intent in a generated web application. Their intent is based on their _name_, and we summarise these operations below.
 
 The current implementation of these operations are implemented in the OAW templates [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/template/js/Operations.xpt?r=595#337 templates/js/Operations.xpt#expandOperationContents(model::ChainedOperation)] (for Javascript) and [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/template/php/EventTrigger.xpt?r=595#150 templates/php/EventTrigger.xpt#expandOperationContents(model::ChainedOperation)] (for PHP).
+
+*Also see* [IamlCompositeOperations] for an overview of pre-defined composite operations.
 
 ==setPropertyToValue==
 

@@ -224,15 +224,37 @@ cached List[model::visual::Page] getAllPages(emf::EObject this) :
 cached List[model::visual::Page] getAllPages(model::visual::Page this) :
 	this;
 	
-/** get all Conditions in the InternetApplication */
+/** get all Dynamic Element Sets in the InternetApplication */
 List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetApplication this) :
 	children.typeSelect( model::DynamicApplicationElementSet ).toSet()
 		.union( eAllContents.getAllDynamicElements() ).reject( e | e == null );
 
-List[model::Condition] getAllDynamicElements(emf::EObject this) :
+List[model::DynamicApplicationElementSet] getAllDynamicElements(emf::EObject this) :
 	null;
 
-List[model::Condition] getAllDynamicElements(model::DynamicApplicationElementSet this) :
+List[model::DynamicApplicationElementSet] getAllDynamicElements(model::DynamicApplicationElementSet this) :
+	this;
+
+/** get all Domain Attribute Instances in the InternetApplication */
+List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
+	children.typeSelect( model::DomainAttributeInstance ).toSet()
+		.union( eAllContents.getAllDomainAttributeInstances() ).reject( e | e == null );
+
+List[model::DomainAttributeInstance] getAllDomainAttributeInstances(emf::EObject this) :
+	null;
+
+List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::DomainAttributeInstance this) :
+	this;
+
+/** get all Domain Object Instances in the InternetApplication */
+List[model::DomainObjectInstance] getAllDomainObjectInstances(model::InternetApplication this) :
+	children.typeSelect( model::DomainObjectInstance ).toSet()
+		.union( eAllContents.getAllDomainObjectInstances() ).reject( e | e == null );
+
+List[model::DomainObjectInstance] getAllDomainObjectInstances(emf::EObject this) :
+	null;
+
+List[model::DomainObjectInstance] getAllDomainObjectInstances(model::DomainObjectInstance this) :
 	this;
 
 /** find all actual matches for the given DynamicApplicationSet in a given root */

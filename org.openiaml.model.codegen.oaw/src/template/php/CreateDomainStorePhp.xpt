@@ -15,7 +15,7 @@
 	// first, make sure the table exists
 	$db = new PDO('sqlite:«safeName()».db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
 	
-	// now cycle through all DomainObjects in this DomainStore
+	// now cycle through all DomainObjects in this DomainStore to create each of them
 	«EXPAND createDomainObjectPhp FOREACH children»
 
 	// sole attributes

@@ -3,13 +3,12 @@
  */
 package org.openiaml.model.tests.codegen.model0_3;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
@@ -57,6 +56,7 @@ public class SelectField extends DatabaseCodegenTestCase {
 	}
 	
 	public void testSelect() throws Exception {
+
 		// go to sitemap
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
@@ -78,14 +78,14 @@ public class SelectField extends DatabaseCodegenTestCase {
 		// reload page, it should be stored
 		reloadPage(sitemap, "container");		
 		{
-			String field2 = getLabelIDForText("value");
+			String field2 = getLabelIDForText("editname");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
 		// *restart* session, it should be stored
 		restartSession(sitemap, "container");
 		{
-			String field2 = getLabelIDForText("value");
+			String field2 = getLabelIDForText("editname");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
@@ -93,6 +93,7 @@ public class SelectField extends DatabaseCodegenTestCase {
 		assertTrue(rs.next());
 		assertEquals(rs.getString("name"), newValue);
 		assertFalse(rs.next());
+		
 	}
 
 }

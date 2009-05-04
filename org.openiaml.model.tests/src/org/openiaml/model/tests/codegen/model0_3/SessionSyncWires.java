@@ -58,14 +58,14 @@ public class SessionSyncWires extends CodegenTestCase {
 		}
 
 		// *restart* entire session
-		beginAtSitemapThenPage(sitemap, "outside");
+		restartSession(sitemap, "outside");
 		{
 			// should be the same
 			String target = getLabelIDForText("target");
 			assertLabeledFieldEquals(target, inside);
 		}
 
-		// restart session
+		// re-enter session
 		gotoSitemapThenPage(sitemap, "inside");
 		{
 			// should have been lost

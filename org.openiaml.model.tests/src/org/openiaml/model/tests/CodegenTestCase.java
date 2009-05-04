@@ -326,4 +326,29 @@ public class CodegenTestCase extends InferenceTestCase {
 		return p;
 	}
 	
+	/**
+	 * Reload a page (but do not lose the session information).
+	 * 
+	 * @see #restartSession(IFile, String)
+	 * @param sitemap the sitemap to reload at
+	 * @param pageText the destination page to load
+	 * @throws Exception
+	 */
+	protected void reloadPage(IFile sitemap, String pageText) throws Exception {
+		gotoSitemapThenPage(sitemap, pageText);
+	}
+	
+	/**
+	 * Restart an entire session. Existing session information will
+	 * be lost.
+	 * 
+	 * @see #reloadPage(IFile, String)
+	 * @param sitemap the sitemap to reload at
+	 * @param pageText the destination page to load
+	 * @throws Exception
+	 */
+	protected void restartSession(IFile sitemap, String pageText) throws Exception {
+		beginAtSitemapThenPage(sitemap, pageText);
+	}
+	
 }

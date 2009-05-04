@@ -21,7 +21,7 @@ public class DatabaseWithInputForm extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/DatabaseWithInputForm.iaml");
+		root = loadAndCodegen(DatabaseWithInputForm.class);
 	}
 	
 	public void testWithoutForm() throws Exception {

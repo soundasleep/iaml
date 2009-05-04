@@ -20,7 +20,7 @@ public class SyncStaticValueField extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncStaticValueField.iaml");
+		root = loadAndCodegen(SyncStaticValueField.class);
 	}
 	
 	public void testSync() throws Exception {

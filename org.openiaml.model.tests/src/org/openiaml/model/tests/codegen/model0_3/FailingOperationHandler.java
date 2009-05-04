@@ -19,7 +19,7 @@ public class FailingOperationHandler extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/FailingOperationHandler.iaml");
+		root = loadAndCodegen(FailingOperationHandler.class);
 	}
 	
 	public void testFailingOperation() throws Exception {

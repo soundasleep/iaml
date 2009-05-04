@@ -23,7 +23,7 @@ public class ConditionWireFalseServer extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_2/ConditionWireFalseServer.iaml");
+		root = loadAndCodegen(ConditionWireFalseServer.class);
 	}
 	
 	public void testFalseCondition() throws Exception {

@@ -23,7 +23,7 @@ public class SyncFormDomainObject extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_1/SyncFormDomainObject.iaml");
+		root = loadAndCodegen(SyncFormDomainObject.class);
 	}
 	
 	public void testCase() throws Exception {

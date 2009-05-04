@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.tests.CodegenTestCase;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**

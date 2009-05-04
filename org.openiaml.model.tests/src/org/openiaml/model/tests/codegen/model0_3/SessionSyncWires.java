@@ -20,7 +20,7 @@ public class SessionSyncWires extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/SessionSyncWires.iaml");
+		root = loadAndCodegen(SessionSyncWires.class);
 	}
 	
 	public void testRequirement() throws Exception {

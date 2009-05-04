@@ -20,7 +20,7 @@ public class SessionSyncInSession extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_3/SessionSyncInSession.iaml");
+		root = loadAndCodegen(SessionSyncInSession.class);
 	}
 	
 	public void testRequirement() throws Exception {

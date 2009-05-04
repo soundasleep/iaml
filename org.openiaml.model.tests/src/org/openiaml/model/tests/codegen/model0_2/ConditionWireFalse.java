@@ -20,7 +20,7 @@ public class ConditionWireFalse extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndCodegen(ROOT + "codegen/model0_2/ConditionWireFalse.iaml");
+		root = loadAndCodegen(ConditionWireFalse.class);
 	}
 	
 	public void testFalseCondition() throws Exception {
@@ -49,6 +49,11 @@ public class ConditionWireFalse extends CodegenTestCase {
 		// and also backwards
 		String testString2 = "a second value " + new Date().toString();
 		{
+			// TODO for some reason, this call sometimes throws a NullPointerException. 
+			// but it's erratic and is thrown within the Apache XML project.
+			// however, generally running the test case again will let it pass.
+			// the page source between each page does not change either.
+			// plus, it is retrieved successfully above.
 			String targetId = getLabelIDForText("target");
 			assertNotNull(targetId);
 			assertLabeledFieldNotEquals(targetId, testString2);

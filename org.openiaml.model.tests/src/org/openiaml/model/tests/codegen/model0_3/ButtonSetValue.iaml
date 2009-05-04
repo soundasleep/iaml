@@ -7,7 +7,7 @@
       </properties>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.e8" name="target">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12109331f38.1c wires.12109331f38.3c wires.12109331f38.86" id="model.12109331eea.b2" name="update"/>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12109331f38.1c wires.12109331f38.3c" id="model.12109331eea.b2" name="update"/>
       <properties id="model.12109331eea.70" name="fieldValue"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12109331f38.f0" name="copy value over to target">
@@ -25,12 +25,15 @@
     </children>
   </children>
   <children xsi:type="iaml.visual:Page" id="visual.12109331f38.321" name="implicit">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.346" name="source" outEdges="wires.12109331f38.96">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.96" from="visual.12109331f38.346" to="wires.12109331f38.86"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.346" name="source" outEdges="wires.12109331f38.96 wires.12109331f38.5a5">
+      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.96" from="visual.12109331f38.346"/>
+      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.5a5" from="visual.12109331f38.346" to="wires.12109331f38.5a4"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.347" name="target"/>
-    <children xsi:type="iaml.visual:Button" id="visual.12109331f38.348" name="copy over implicitly" outEdges="wires.12109331f38.86">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12109331f38.86" from="visual.12109331f38.348" to="model.12109331eea.b2" name="onClick" inEdges="wires.12109331f38.96"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.347" name="target">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12109331f38.5a4" id="model.12109331eea.d95" name="update"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12109331f38.348" name="copy over implicitly" outEdges="wires.12109331f38.5a4">
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12109331f38.5a4" from="visual.12109331f38.348" to="model.12109331eea.d95" name="click" inEdges="wires.12109331f38.5a5"/>
     </children>
   </children>
 </iaml:InternetApplication>

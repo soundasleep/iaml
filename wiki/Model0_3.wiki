@@ -42,3 +42,14 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 || *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/DataFlowTemporaryVariable.java  DataFlowTemporaryVariable.java] ||
 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/images/DataFlowTemporaryVariable-4.png
+
+==Buttons==
+|| *Description* || These represent clickable "buttons" in the user interface. ||
+|| *Models* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/ButtonNavigate.iaml ButtonNavigate.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/ButtonSetValue.iaml ButtonSetValue.iaml] ||
+|| *Inference Tests* || No inference ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/ButtonNavigate.java ButtonNavigate.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/ButtonSetValue.java ButtonSetValue.java] ||
+
+If a Button contains an EventTrigger labelled _click_ or _onClick_, this EventTrigger will be called when the button is clicked or selected.
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/ButtonSetValue-6.png
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/ButtonSetValue-7.png

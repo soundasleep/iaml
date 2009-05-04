@@ -821,6 +821,26 @@
       <accessors
           figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="ButtonFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ButtonFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="240"
+            green="240"
+            blue="240"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ButtonNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -918,6 +938,9 @@
   <nodes
       name="DomainAttributeInstance"
       figure="DomainAttributeInstanceFigure"/>
+  <nodes
+      name="Button"
+      figure="ButtonFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1148,4 +1171,8 @@
       name="DomainAttributeInstanceName"
       figure="DomainAttributeInstanceFigure"
       accessor="//@figures.0/@descriptors.45/@accessors.0"/>
+  <labels
+      name="ButtonName"
+      figure="ButtonFigure"
+      accessor="//@figures.0/@descriptors.46/@accessors.0"/>
 </gmfgraph:Canvas>

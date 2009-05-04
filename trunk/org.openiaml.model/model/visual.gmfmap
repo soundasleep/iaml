@@ -415,6 +415,28 @@
           href="iaml.gmfgraph#DomainAttributeInstance"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElementContainer/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/Button"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Button )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ButtonName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.27"/>
+      <diagramNode
+          href="iaml.gmfgraph#Button"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

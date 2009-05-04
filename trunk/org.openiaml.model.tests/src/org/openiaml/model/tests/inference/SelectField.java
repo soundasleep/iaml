@@ -30,7 +30,7 @@ public class SelectField extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/SelectField.iaml", true);
+		root = loadAndInfer(SelectField.class, true);
 	}
 	
 	public void testInference() throws Exception {

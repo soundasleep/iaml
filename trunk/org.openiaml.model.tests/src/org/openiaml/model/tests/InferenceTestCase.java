@@ -55,6 +55,33 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	}
 
 	/**
+	 * Automagically load the model file (.iaml) for this given
+	 * test class.
+	 * 
+	 * @see #loadAndCodegen(String)
+	 * @param class1 The test class to load a model for.
+	 * @return the loaded and inferred InternetApplication
+	 */
+	protected InternetApplication loadAndInfer(
+			Class<?> class1) throws Exception {
+		return loadAndInfer(class1, false);
+	}
+	
+	/**
+	 * Automagically load the model file (.iaml) for this given
+	 * test class.
+	 * 
+	 * @see #loadAndCodegen(String)
+	 * @param class1 The test class to load a model for.
+	 * @param logRuleSource Log the rule source of inserted elements.
+	 * @return the loaded and inferred InternetApplication
+	 */
+	protected InternetApplication loadAndInfer(
+			Class<?> class1, boolean logRuleSource) throws Exception {
+		return loadAndInfer(ROOT + "inference/" + class1.getSimpleName() + ".iaml", logRuleSource);
+	}
+	
+	/**
 	 * Load a model file and perform inference on it.
 	 *
 	 * @see CreateMissingElementsWithDrools#create(EObject, boolean)

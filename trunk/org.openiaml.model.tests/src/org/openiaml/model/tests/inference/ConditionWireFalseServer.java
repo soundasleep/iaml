@@ -27,7 +27,7 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/ConditionWireFalseServer.iaml");
+		root = loadAndInfer(ConditionWireFalseServer.class);
 	}
 	
 	public void testInference() throws JaxenException {

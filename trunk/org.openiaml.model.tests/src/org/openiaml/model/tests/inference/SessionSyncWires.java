@@ -28,7 +28,7 @@ public class SessionSyncWires extends CodegenTestCase {
 	protected InternetApplication root;
 	
 	protected void setUp() throws Exception {
-		root = loadAndInfer(ROOT + "inference/SessionSyncWires.iaml", true);
+		root = loadAndInfer(SessionSyncWires.class, true);
 	}
 	
 	public void testInference() throws Exception {

@@ -560,7 +560,7 @@
         <children
             xsi:type="gmfgraph:Label"
             name="SelectWireNameFigure"
-            text="filter"/>
+            text="select"/>
         <children
             xsi:type="gmfgraph:Label"
             name="SelectWireQueryFigure"
@@ -582,7 +582,7 @@
         <children
             xsi:type="gmfgraph:Label"
             name="SetWireNameFigure"
-            text="find"/>
+            text="set"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>

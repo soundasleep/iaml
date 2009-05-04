@@ -39,7 +39,7 @@ public class SessionInit extends CodegenTestCase {
 		}
 		
 		// reload page
-		gotoSitemapThenPage(sitemap, "container");
+		reloadPage(sitemap, "container");
 		
 		{
 			String field = getLabelIDForText("value");
@@ -47,7 +47,7 @@ public class SessionInit extends CodegenTestCase {
 		}
 		
 		// *restart* session
-		beginAtSitemapThenPage(sitemap, "container");
+		restartSession(sitemap, "container");
 		
 		String newValue2 = "another new value " + new Date().toString();
 		{
@@ -57,13 +57,12 @@ public class SessionInit extends CodegenTestCase {
 		}
 
 		// reload page
-		gotoSitemapThenPage(sitemap, "container");
+		reloadPage(sitemap, "container");
 		
 		{
 			String field = getLabelIDForText("value");
 			assertLabeledFieldEquals(field, newValue2);
 		}
-
 
 	}
 

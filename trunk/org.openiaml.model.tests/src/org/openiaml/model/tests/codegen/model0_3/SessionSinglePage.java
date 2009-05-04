@@ -49,15 +49,15 @@ public class SessionSinglePage extends CodegenTestCase {
 		}
 		
 		// reload page
-		gotoSitemapThenPage(sitemap, "outside");
+		reloadPage(sitemap, "outside");
 		{
 			// should be the same
 			String field1 = getLabelIDForText("field1");
 			assertLabeledFieldEquals(field1, outside);
 		}
 
-		// reload session
-		gotoSitemapThenPage(sitemap, "inside");
+		// re-enter session
+		reloadPage(sitemap, "inside");
 		{
 			// should be the same
 			String field2 = getLabelIDForText("field2");
@@ -65,15 +65,15 @@ public class SessionSinglePage extends CodegenTestCase {
 		}
 
 		// *restart* entire session
-		beginAtSitemapThenPage(sitemap, "outside");
+		restartSession(sitemap, "outside");
 		{
 			// should be the same
 			String field1 = getLabelIDForText("field1");
 			assertLabeledFieldEquals(field1, outside);
 		}
 
-		// restart session
-		gotoSitemapThenPage(sitemap, "inside");
+		// re-enter session
+		reloadPage(sitemap, "inside");
 		{
 			// should have been lost
 			String field2 = getLabelIDForText("field2");

@@ -84,7 +84,7 @@ public class SessionSyncInSession extends CodegenTestCase {
 		}
 		
 		// *restart* entire session
-		beginAtSitemapThenPage(sitemap, "page3");
+		restartSession(sitemap, "page3");
 		String text3 = "the final change " + new Date().toString();
 		{
 			// should have been lost

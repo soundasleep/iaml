@@ -90,7 +90,7 @@ public class SessionSyncWiresMultiple extends CodegenTestCase {
 		}
 
 		// *restart* entire session
-		beginAtSitemapThenPage(sitemap, "outside1");
+		restartSession(sitemap, "outside1");
 		{
 			// should not have been lost
 			String target = getLabelIDForText("target");
@@ -98,7 +98,7 @@ public class SessionSyncWiresMultiple extends CodegenTestCase {
 		}
 
 		// *restart* entire session, but go to session page
-		beginAtSitemapThenPage(sitemap, "inside2");
+		restartSession(sitemap, "inside2");
 		{
 			// should be resurrected
 			String target = getLabelIDForText("target");

@@ -45,7 +45,7 @@ public class ButtonSetValue extends CodegenTestCase {
 		String target = getLabelIDForText("target");
 		
 		// set the source value
-		String text = "buttonSetValue " + new Date().toString();
+		String text = "buttonSetValue explicit " + new Date().toString();
 		setLabeledFormElementField(source, text);
 		
 		// the target should not have changed yet
@@ -65,6 +65,80 @@ public class ButtonSetValue extends CodegenTestCase {
 		assertLabeledFieldEquals(target, "empty");
 		assertLabeledFieldEquals(source, text);
 		
+		// if we reload the page, the values should still be there
+		reloadPage(sitemap, "container");
+		{
+			String source2 = getLabelIDForText("source");
+			String target2 = getLabelIDForText("target");
+			assertLabeledFieldEquals(source2, text);
+			assertLabeledFieldEquals(target2, "empty");
+		}
+
+		// if we restart the session, the values should still be there
+		restartSession(sitemap, "container");
+		{
+			String source2 = getLabelIDForText("source");
+			String target2 = getLabelIDForText("target");
+			assertLabeledFieldEquals(source2, text);
+			assertLabeledFieldEquals(target2, "empty");
+		}
+
+	}
+	
+	/**
+	 * Implicitly call the update operation.
+	 * 
+	 * @throws Exception
+	 */
+	public void testImplicitCopy() throws Exception {
+		// go to sitemap
+		IFile sitemap = getProject().getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		
+		// go to page
+		beginAtSitemapThenPage(sitemap, "implicit");
+		
+		// there should be one buttons here
+		assertButtonPresentWithText("copy over implicitly");
+		assertButtonNotPresentWithText("reset target");
+		
+		// and two text fields
+		String source = getLabelIDForText("source");
+		String target = getLabelIDForText("target");
+		
+		// set the source value
+		String text = "buttonSetValue implicit " + new Date().toString();
+		setLabeledFormElementField(source, text);
+		
+		// the target should not have changed yet
+		assertLabeledFieldNotEquals(target, text);
+		
+		// but now we click the button
+		clickButtonWithText("copy over implicitly");
+		
+		// and now it should have changed
+		assertLabeledFieldEquals(target, text);
+		assertLabeledFieldEquals(source, text);
+		
+		// if we reload the page, the values should still be there
+		reloadPage(sitemap, "implicit");
+		{			
+			assertTitleEquals("implicit");
+			String source2 = getLabelIDForText("source");
+			String target2 = getLabelIDForText("target");
+			assertLabeledFieldEquals(source2, text);
+			assertLabeledFieldEquals(target2, text);
+		}
+
+		// if we restart the session, the values should still be there
+		restartSession(sitemap, "implicit");
+		{
+			assertTitleEquals("implicit");
+			String source2 = getLabelIDForText("source");
+			String target2 = getLabelIDForText("target");
+			assertLabeledFieldEquals(source2, text);
+			assertLabeledFieldEquals(target2, text);
+		}
 	}
 	
 }

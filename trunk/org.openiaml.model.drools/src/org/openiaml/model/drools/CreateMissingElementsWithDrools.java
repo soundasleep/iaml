@@ -30,6 +30,7 @@ import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DerivedView;
+import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
@@ -211,6 +212,14 @@ public class CreateMissingElementsWithDrools {
 					}
 				}
 
+				// DomainObjectInstance
+				if (obj.getObject() instanceof DomainObjectInstance) {
+					DomainObjectInstance a = (DomainObjectInstance) obj.getObject();
+					for (DomainAttributeInstance child : a.getAttributes()) {
+						workingMemory.insert( child );
+					}
+				}
+				
 			}
 
 			@Override

@@ -50,6 +50,9 @@
 			«EXPAND evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 			// get just the first result
 			$row = $rs->fetch();
+			if (!$row) {
+				throw new IamlRuntimeException("No results found for query '$query'");
+			}
 			$obj = array();
 			foreach ($row as $key => $value) {
 				$obj[$key] = $value;
@@ -160,6 +163,9 @@
 «DEFINE findDomainAttribute FOR model::DomainAttributeInstance»
 	if ($id == "«safeNameString(id)-»") {
 		store_domain_attribute_«safeNameString(id)-»($arg0);
+		log_message("set_application_value.php: succeeded");
+		echo "ok";
+		die;
 	}
 «ENDDEFINE»
 

@@ -1,5 +1,10 @@
 package org.openiaml.model.tests.codegen;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+import org.openiaml.model.tests.codegen.model0_3.ButtonNavigate;
+import org.openiaml.model.tests.codegen.model0_3.ButtonSetValue;
 import org.openiaml.model.tests.codegen.model0_3.DataFlowTemporaryVariable;
 import org.openiaml.model.tests.codegen.model0_3.DatabaseWithInputForm;
 import org.openiaml.model.tests.codegen.model0_3.PropertiesFileWithInputForm;
@@ -8,9 +13,6 @@ import org.openiaml.model.tests.codegen.model0_3.SessionSinglePage;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncInSession;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncWires;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncWiresMultiple;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Code generation tests: model version 0.3
@@ -34,6 +36,10 @@ public class Codegen0_3Suite {
 		suite.addTestSuite(SessionInit.class);
 		suite.addTestSuite(SessionSyncInSession.class);
 		suite.addTestSuite(SessionSyncWiresMultiple.class);
+		
+		// button tests
+		suite.addTestSuite(ButtonNavigate.class);
+		suite.addTestSuite(ButtonSetValue.class);
 
 		// other model 0.3 tests
 		suite.addTestSuite(DataFlowTemporaryVariable.class);

@@ -239,6 +239,10 @@ List[model::Condition] getAllDynamicElements(model::DynamicApplicationElementSet
 List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
 	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);
 
+/** get the fieldValue of the text field, or null if none exists. */
+getFieldValue(model::visual::InputTextField this) :
+	properties.selectFirst( e | e.name == "fieldValue" );
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

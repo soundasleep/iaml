@@ -245,6 +245,37 @@
 	</div>
 «ENDDEFINE»
 
+/* currently, a "Button" == a submit button. */
+«DEFINE expandChild FOR model::visual::Button-»
+	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+		>
+	
+	<script language="Javascript" type="text/javascript">
+	/* <![CDATA[ */
+		function onChange_«safeNameString(id)»(obj) {
+			// expand all onChanges
+			«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
+			
+			return false;
+		}
+		
+		function onClick_«safeNameString(id)»(obj) {
+			// expand all onClicks
+			«EXPAND js::Operations::expandEventTriggers("click") FOREACH eventTriggers-»
+			«EXPAND js::Operations::expandEventTriggers("onClick") FOREACH eventTriggers-»
+
+			// implicit operations
+			«EXPAND js::Operations::expandImplicitEventTriggersButton FOREACH outEdges-»
+			«EXPAND js::Operations::expandImplicitEventTriggersButton FOREACH outEdges-»
+
+			return false;
+		}
+	/* ]]> */
+	</script>
+«ENDDEFINE»
+
 /* ignore. todo: refactor this to a model extension to only select viable SyncWires */
 «DEFINE staticInitialValues FOR model::WireEdge»
 «ENDDEFINE»
@@ -304,30 +335,3 @@
 		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", document.getElementById('«safeName(container)-»').value);
 	«ENDIF»
 «ENDDEFINE»
-
-/* currently, a "Button" == a submit button. */
-«DEFINE expandChild FOR model::visual::Button-»
-	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
-			onChange="return onChange_«safeNameString(id)»(this);"
-			onClick="return onClick_«safeNameString(id)»(this);"
-		>
-	
-	<script language="Javascript" type="text/javascript">
-	/* <![CDATA[ */
-		function onChange_«safeNameString(id)»(obj) {
-			// expand all onChanges
-			«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
-			
-			return false;
-		}
-		
-		function onClick_«safeNameString(id)»(obj) {
-			// expand all onClicks
-			«EXPAND js::Operations::expandEventTriggers("click") FOREACH eventTriggers-»
-
-			return false;
-		}
-	/* ]]> */
-	</script>
-«ENDDEFINE»
-

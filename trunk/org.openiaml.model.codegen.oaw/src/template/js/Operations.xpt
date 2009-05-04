@@ -18,6 +18,23 @@
 	«ENDIF»
 «ENDDEFINE»
 
+/* implicit triggers for a button: navigate, run instance wires */
+«DEFINE expandImplicitEventTriggersButton FOR model::WireEdge»
+«ENDDEFINE»
+
+«DEFINE expandImplicitEventTriggersButton FOR model::wires::NavigateWire»
+	«IF (name == "click" || name == "onClick")»
+		/* expanding implicit trigger (navigate) */
+		«EXPAND callOperations(false) FOR this»
+	«ENDIF» 
+«ENDDEFINE»
+«DEFINE expandImplicitEventTriggersButton FOR model::wires::RunInstanceWire»
+	«IF (name == "click" || name == "onClick")»
+		/* expanding implicit trigger (run) */
+		«EXPAND callOperations(false) FOR this»
+	«ENDIF» 
+«ENDDEFINE»
+
 /* if we are expanding inline a function already */
 «DEFINE expandEventTriggersInline FOR emf::EObject»
 	// cannot expand for non-event object
@@ -89,6 +106,13 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE callOperations(Boolean inline) FOR model::wires::NavigateWire-»
+	// navigating to a new page
+	var url = "«safeName(to)».php";
+	debug("Redirecting to '" + url + "'");
+	window.location = url;
+«ENDDEFINE»
+
 /* ditto: check or error? */
 «DEFINE callOperationParameters(model::WireEdge wire, Boolean inline) FOR model::wires::ParameterWire»
 	«EXPAND callOperationParametersSource(wire, inline) FOR from»
@@ -97,6 +121,15 @@
 /* ditto: check or error? */
 «DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::WireEdgesSource»
 	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
+«ENDDEFINE»
+
+/* text fields can be a parameter source: it refers to their 'fieldValue' property */
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::visual::InputTextField»
+	«IF getFieldValue(this) != null»
+		«EXPAND callOperationParametersSource(wire, inline) FOR getFieldValue(this)»
+	«ELSE»
+		«EXPAND exception FOR throwException("No 'fieldValue' property found in the InputTextField '" + this + "', which is being used as a Parameter source.")»
+	«ENDIF» 
 «ENDDEFINE»
 
 /* what is the runtime value of the parameter? */

@@ -7,7 +7,10 @@ import org.openiaml.model.tests.codegen.model0_3.ButtonNavigate;
 import org.openiaml.model.tests.codegen.model0_3.ButtonSetValue;
 import org.openiaml.model.tests.codegen.model0_3.DataFlowTemporaryVariable;
 import org.openiaml.model.tests.codegen.model0_3.DatabaseWithInputForm;
+import org.openiaml.model.tests.codegen.model0_3.FailingOperation;
+import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandler;
 import org.openiaml.model.tests.codegen.model0_3.PropertiesFileWithInputForm;
+import org.openiaml.model.tests.codegen.model0_3.SelectField;
 import org.openiaml.model.tests.codegen.model0_3.SessionInit;
 import org.openiaml.model.tests.codegen.model0_3.SessionSinglePage;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncInSession;
@@ -40,11 +43,16 @@ public class Codegen0_3Suite {
 		// button tests
 		suite.addTestSuite(ButtonNavigate.class);
 		suite.addTestSuite(ButtonSetValue.class);
+		
+		// select/instance tests
+		suite.addTestSuite(SelectField.class);
 
 		// other model 0.3 tests
 		suite.addTestSuite(DataFlowTemporaryVariable.class);
 		suite.addTestSuite(DatabaseWithInputForm.class);
 		suite.addTestSuite(PropertiesFileWithInputForm.class);
+		suite.addTestSuite(FailingOperation.class);
+		suite.addTestSuite(FailingOperationHandler.class);
 
 		return suite;
 	}

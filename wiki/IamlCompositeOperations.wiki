@@ -1,0 +1,24 @@
+#summary Discussions on the types of Operations used in IAML.
+#labels EndUser
+
+=Introduction=
+
+Composite Operations are operations which are composed of [IamlOperations smaller operations]. IAML defines a number of pre-defined composite operations which automatically generate their contents (unless [IamlInference the generation is disabled]). Their intent is based on their _name_, and we summarise these operations below.
+
+The current implementation of these operations are implemented in the Drools rule files  [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/operations.drl#52 operations.drl]. They are also implemented in [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sessions.drl sessions.drl] temporarily, but this needs to be refactored out (TODO).
+
+*Also see* [IamlOperations] for an overview of the pre-defined operation components.
+
+==update, refresh, init==
+
+|| *Sample model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/SyncWireTestCase.iaml SyncWireTestCase.iaml] ||
+|| *Runtime tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/SyncWireTestCase.java SyncWireTestCase.java] ||
+|| *Added in* || [Model0_1 Model 0.1] ||
+
+This will set the [IamlApplicationElementProperties _fieldValue_ of the containing object] to a particular value (the incoming parameter).
+
+===Default operation contents===
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/composite_operations/images/UpdateOperation.png
+
+===Sample Usage==
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/composite_operations/images/UpdateOperationUsage.png

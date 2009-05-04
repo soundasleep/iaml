@@ -216,6 +216,19 @@
             path="icons/full/obj32/ConditionWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="NavigateWire"
+          description="Create new NavigateWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/NavigateWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/NavigateWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

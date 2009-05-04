@@ -1,0 +1,22 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/* expand out all domain attribute instances for the page */
+«DEFINE expandDomainAttributes FOR model::visual::Page»
+	«EXPAND storeDomainAttribute FOREACH getRoot().getAllDomainAttributeInstances()»
+«ENDDEFINE»
+«DEFINE expandDomainObjects FOR model::visual::Page»
+	/* empty */
+«ENDDEFINE»
+
+/* code to _save_ attributes */
+/* calls the server */
+«DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-»
+	function store_domain_attribute_«safeName()»(arg0) {
+		set_domain_attribute("«safeNameString(id)-»", arg0);
+	}
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

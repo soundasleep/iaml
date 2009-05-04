@@ -55,6 +55,46 @@ public class SelectField extends DatabaseCodegenTestCase {
 		assertFalse(rs.next());
 	}
 	
+	/**
+	 * Let's not try and reload/restart the web application yet;
+	 * let's just access the database straight away.
+	 *  
+	 * @throws Exception
+	 */
+	public void testSelectInstant() throws Exception {
+
+		// go to sitemap
+		IFile sitemap = getProject().getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		
+		// go to page
+		beginAtSitemapThenPage(sitemap, "container");
+		
+		// there should be a text field 'editname'
+		String field = getLabelIDForText("editname");
+		
+		// it should have the first (and only) value in the database
+		assertLabeledFieldEquals(field, FIRST_NAME);
+		
+		// if we change it, this value should be stored between pages		
+		String newValue = "a new value " + new Date().toString();
+		setLabeledFormElementField(field, newValue);
+		assertLabeledFieldEquals(field, newValue);
+
+		// check the database
+		ResultSet rs = executeQuery("SELECT * FROM User");
+		assertTrue(rs.next());
+		assertEquals(newValue, rs.getString("name"));
+		assertFalse(rs.next());
+		
+	}
+	
+	/**
+	 * Test attribute instances, even over page reloads and
+	 * session restarts.
+	 * 
+	 * @throws Exception
+	 */
 	public void testSelect() throws Exception {
 
 		// go to sitemap
@@ -91,7 +131,7 @@ public class SelectField extends DatabaseCodegenTestCase {
 		
 		ResultSet rs = executeQuery("SELECT * FROM User");
 		assertTrue(rs.next());
-		assertEquals(rs.getString("name"), newValue);
+		assertEquals(newValue, rs.getString("name"));
 		assertFalse(rs.next());
 		
 	}

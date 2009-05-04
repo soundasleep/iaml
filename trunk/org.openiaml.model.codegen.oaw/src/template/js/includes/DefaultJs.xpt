@@ -176,6 +176,11 @@ function set_application_value(id, arg0, function_queue) {
 	execute_queued_url(url, 'set_application_value', function_queue);
 }
 
+/* save a domain instance variable */
+function set_domain_attribute(id, arg0, function_queue) {
+	var url = 'set_domain_attribute.php?id=' + escape(id) + '&arg0=' + escape(arg0);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
+}
 
 /* call a remote operation (only one attribute) */
 function call_remote_event(container, operation_name, arg0, arg1) {

@@ -74,6 +74,7 @@ public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 	 */
 	protected ResultSet executeQuery(String sql) throws Exception {
 		// refresh the workspace first, in case the database is new
+		waitForAjax();
 		refreshProject();
 		
 		// lets create a database

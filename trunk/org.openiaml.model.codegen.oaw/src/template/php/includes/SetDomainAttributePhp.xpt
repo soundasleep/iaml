@@ -1,0 +1,28 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE setDomainAttributePhp FOR model::InternetApplication-»
+<?php
+/**
+ * For setting a domain attribute instance.
+ */
+ 
+require("header.php");
+
+log_message("set_domain_attribute.php? " . print_r($_GET, true));
+$id = $_GET["id"] or throw_new_IamlRuntimeException("no id");
+$arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
+
+// set_domain_attribute($id, $arg0);
+«EXPAND template::php::DomainInstance::findSetDomainAttributeMethod FOR this»
+
+log_message("set_application_value.php: setting id=$id, arg0=$arg0");
+
+echo "ok";
+
+/* expand out all domain attribute setting code in the application. */
+«EXPAND template::php::DomainInstance::expandDomainAttributes FOR this»
+«EXPAND template::php::DomainInstance::expandDomainObjects FOR this»
+
+«ENDDEFINE»

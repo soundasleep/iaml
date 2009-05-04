@@ -39,8 +39,9 @@
 		// expand any dynamic element sources
 		«EXPAND php::DynamicElements::expandDynamicElements FOR this-»
 		
-		// expand any domain attribute instsances
+		// expand any domain instances
 		«EXPAND php::DomainInstance::expandDomainAttributes FOR this-»
+		«EXPAND php::DomainInstance::expandDomainObjects FOR this-»
 
 		// allow remote execution of operations
 		if (require_get("operation", "")) {
@@ -88,11 +89,18 @@
 			/* <![CDATA[ */
 				var try_catch_depth = 0;
 			
+				// operations
 				«EXPAND js::Operations::expandOperations FOR this-»
 
+				// conditions
 				«EXPAND js::Conditions::expandConditions FOR this-»
 
+				// dynamic elements
 				«EXPAND js::DynamicElements::expandDynamicElements FOR this-»
+
+				// domain instances
+				«EXPAND js::DomainInstance::expandDomainAttributes FOR this-»
+				«EXPAND js::DomainInstance::expandDomainObjects FOR this-»
 
 				/* actual page onload functions (called ONCE the page is fully loaded) */
 				var stored_onload_functions = new Array();
@@ -150,6 +158,7 @@
 			<div id="counter_store_event"></div>
 			<div id="counter_set_session"></div>
 			<div id="counter_set_application_value"></div>
+			<div id="counter_set_domain_attribute"></div>
 			<div id="counter_remote_event"></div>
 		</div>
 		<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>

@@ -1,6 +1,10 @@
 /**
  * Add a isGenerated "/derived" property to all GeneratedElements that
  * are generated.
+ *
+ * ALSO: Disable resetting font colours (from user preferences, etc)
+ * From http://dev.eclipse.org/newslists/news.eclipse.modeling.gmf/msg16145.html
+ *
  */
 «IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
 «IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
@@ -34,3 +38,15 @@
 		return text;
 	}
 «ENDAROUND»
+
+«AROUND setFontColor FOR gmfgen::GenCommonBase-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: Disable refreshing the font color.")»
+	protected void setFontColor(org.eclipse.swt.graphics.Color color) {
+		// some weird logic: if we can edit this field, then
+		// we should be able to change its color. (makes some sense?)
+		// NOTE: this also means all editable fields will be black by default.
+		if (isEditable())
+			getFigure().setForegroundColor(color);
+	}
+«ENDAROUND»
+

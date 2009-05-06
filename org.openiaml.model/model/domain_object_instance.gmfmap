@@ -100,7 +100,7 @@
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#CompositeConditionParentName"/>
+            href="iaml.gmfgraph#CompositeOperationParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

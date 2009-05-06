@@ -419,8 +419,7 @@
           editPartClassName="WrapLabel4EditPart"
           itemSemanticEditPolicyClassName="WrapLabel4ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel4ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

@@ -4,8 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" packageNamePrefix="org.openiaml.model.model.diagram.domain_object_instance"
     modelID="Iaml_DomainObjectInstance"
-    diagramFileExtension="iaml_domain_object_instance"
-    domainFileExtension="iaml"
+    diagramFileExtension="iaml_domain_object_instance_diagram"
+    domainFileExtension="iaml_domain_object_instance"
     dynamicTemplates="true"
     templateDirectory="/org.openiaml.model/templates/">
   <diagram
@@ -105,8 +105,7 @@
           editPartClassName="WrapLabelEditPart"
           itemSemanticEditPolicyClassName="WrapLabelItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabelViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -174,8 +173,7 @@
           editPartClassName="WrapLabel2EditPart"
           itemSemanticEditPolicyClassName="WrapLabel2ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel2ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -242,8 +240,7 @@
           editPartClassName="WrapLabel3EditPart"
           itemSemanticEditPolicyClassName="WrapLabel3ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel3ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -318,13 +315,12 @@
           editPartClassName="WrapLabel4EditPart"
           itemSemanticEditPolicyClassName="WrapLabel4ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel4ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureCompositeConditionParentNameFigure"
+            getterName="getFigureCompositeOperationParentNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel">
           <attributes
               xsi:type="gmfgen:StyleAttributes"
@@ -394,8 +390,7 @@
           editPartClassName="WrapLabel5EditPart"
           itemSemanticEditPolicyClassName="WrapLabel5ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel5ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

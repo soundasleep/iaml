@@ -29,8 +29,8 @@
 		
 		«EXPAND impl::diagram::editparts::NodeEditPart::getPrimaryShapeMethod FOR className-»
 		
-		«EXPAND xpt::Common::generatedMemberComment("Extends the normal generated Figure class with one that can handle notification events, to render changes in the model.\n\nUnfortunately, GMF generates the Viewmap as part of the .gmfgen directly, so we cannot modify the generated code here; we have to extend it in this way. It's not ideal.")»
-		protected class Extended«className» extends «className» {
+		«EXPAND xpt::Common::generatedMemberComment("Extends the normal generated Figure class with one that can handle notification events, to render changes in the model.\n\nUnfortunately, GMF generates the Viewmap as part of the .gmfgen directly, so we cannot modify the generated code here; we have to extend it in this way. Its not ideal.")»
+		public class Extended«className» extends «className» {
 			
 			«EXPAND xpt::Common::generatedMemberComment»
 			private org.eclipse.emf.ecore.EObject resolvedObject;
@@ -65,7 +65,7 @@
 				// only refresh if it makes sense
 				if (resolvedObject != null &&
 						resolvedObject.eContainer() != null &&
-						resolvedObject.eContainer() instanceof NamedElement) {
+						resolvedObject.eContainer() instanceof org.openiaml.model.model.NamedElement) {
 						
 					// get the parent
 					org.openiaml.model.model.NamedElement parent = (org.openiaml.model.model.NamedElement) resolvedObject.eContainer();

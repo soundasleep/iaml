@@ -18,6 +18,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="visual.gmftool#//@palette/@tools.0/@tools.0"/>
@@ -40,6 +45,11 @@
             href="iaml.gmfgraph#SingleOperationName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#SingleOperationParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -90,6 +100,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ChainedOperationParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="visual.gmftool#//@palette/@tools.0/@tools.5"/>
@@ -111,6 +126,11 @@
             href="iaml.gmfgraph#DomainObjectName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainObjectParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -134,6 +154,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="visual.gmftool#//@palette/@tools.0/@tools.2"/>
@@ -153,6 +178,11 @@
             href="iaml.gmfgraph#ApplicationElementPropertyName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ApplicationElementPropertyParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -198,6 +228,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#InputFormParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="visual.gmftool#//@palette/@tools.0/@tools.8"/>
@@ -219,6 +254,11 @@
             href="iaml.gmfgraph#InputTextFieldName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#InputTextFieldParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -369,6 +409,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="visual.gmftool#//@palette/@tools.0/@tools.22"/>
@@ -434,6 +479,11 @@
             href="iaml.gmfgraph#ButtonName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ButtonParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

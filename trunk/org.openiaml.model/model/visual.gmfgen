@@ -438,6 +438,11 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="ElementOpenDiagramEditPolicy"
+          diagramKind="Iaml_Element"
+          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/DomainAttribute"/>
@@ -483,6 +488,11 @@
               xsi:type="gmfgen:StyleAttributes"
               fixedForeground="true"/>
         </viewmap>
+        <behaviour
+            xsi:type="gmfgen:OpenDiagramBehaviour"
+            editPolicyClassName="ElementOpenDiagramEditPolicy"
+            diagramKind="Iaml_Element"
+            editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes
@@ -509,11 +519,6 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          editPolicyClassName="VisualOpenDiagramEditPolicy"
-          diagramKind="Iaml_Visual"
-          editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/ApplicationElementProperty"/>
@@ -557,11 +562,6 @@
               xsi:type="gmfgen:StyleAttributes"
               fixedForeground="true"/>
         </viewmap>
-        <behaviour
-            xsi:type="gmfgen:OpenDiagramBehaviour"
-            editPolicyClassName="VisualOpenDiagramEditPolicy"
-            diagramKind="Iaml_Visual"
-            editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes
@@ -1252,6 +1252,11 @@
         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="ElementOpenDiagramEditPolicy"
+          diagramKind="Iaml_Element"
+          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/DomainAttributeInstance"/>
@@ -1274,6 +1279,11 @@
             xsi:type="gmfgen:ParentAssignedViewmap"
             getterName="getFigureDomainAttributeInstanceNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <behaviour
+            xsi:type="gmfgen:OpenDiagramBehaviour"
+            editPolicyClassName="ElementOpenDiagramEditPolicy"
+            diagramKind="Iaml_Element"
+            editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures

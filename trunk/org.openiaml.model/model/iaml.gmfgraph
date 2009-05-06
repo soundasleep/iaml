@@ -48,9 +48,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="gray"/>
         <font
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
@@ -62,7 +59,11 @@
         <children
             xsi:type="gmfgraph:Label"
             name="DomainObjectParentNameFigure"
-            text="[none]"/>
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
@@ -77,9 +78,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="gray"/>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainAttributeNameFigure"
@@ -87,7 +85,11 @@
         <children
             xsi:type="gmfgraph:Label"
             name="DomainAttributeParentNameFigure"
-            text="[none]"/>
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
@@ -218,7 +220,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="ApplicationElementFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="ApplicationElementNameFigure"
@@ -265,16 +268,16 @@
           name="StaticValueFigure"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StaticValueNameFigure"
-            text="&lt;...>">
-          <font
-              xsi:type="gmfgraph:BasicFont"
-              faceName="Arial"
-              style="BOLD"/>
-        </children>
+            text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StaticValueValueFigure"
@@ -291,7 +294,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="VisibleThingFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="VisibleThingNameFigure"
@@ -307,7 +311,8 @@
           name="DomainStoreFigure"
           lineWidth="2">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="240"
@@ -339,7 +344,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="TemporaryVariableFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="243"
@@ -371,7 +377,8 @@
           name="DynamicApplicationElementSetFigure"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="240"
@@ -402,7 +409,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="PageFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="240"
@@ -550,6 +558,9 @@
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
           name="StartNodeFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="154"
@@ -568,6 +579,9 @@
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
           name="CancelNodeFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
@@ -592,6 +606,9 @@
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
           name="FinishNodeFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="235"
@@ -610,6 +627,9 @@
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
           name="DecisionNodeFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="DecisionNodeLabelFigure"
@@ -624,7 +644,8 @@
           xsi:type="gmfgraph:RoundedRectangle"
           name="DecisionOperationFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="DecisionOperationNameFigure"
@@ -654,6 +675,9 @@
           name="SelectWireFigure"
           lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="SelectWireNameFigure"
@@ -749,7 +773,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="SessionFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
@@ -769,7 +794,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="LoginHandlerFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
@@ -797,7 +823,8 @@
           lineWidth="2"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="240"
@@ -823,7 +850,8 @@
           lineWidth="2"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <font
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
@@ -843,7 +871,8 @@
           name="FileDomainAttributeFigure"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="FileDomainAttributeNameFigure"
@@ -884,6 +913,9 @@
       <actualFigure
           xsi:type="gmfgraph:Ellipse"
           name="DecisionConditionFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="DecisionConditionNameFigure"
@@ -900,7 +932,8 @@
           lineWidth="2"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <font
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
@@ -920,7 +953,8 @@
           name="DomainAttributeInstanceFigure"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainAttributeInstanceNameFigure"

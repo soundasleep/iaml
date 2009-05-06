@@ -1,6 +1,6 @@
---- wire.gmfgen	2009-02-05 14:51:03.336486900 +1300
-+++ copies/wire.gmfgen	2009-02-05 14:50:29.805022300 +1300
-@@ -119,6 +119,11 @@
+--- wire.gmfgen	2009-05-06 18:16:44.468875000 +1200
++++ copies/wire.gmfgen	2009-05-06 18:16:08.281375000 +1200
+@@ -139,6 +139,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,7 +12,43 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -275,6 +280,11 @@
+@@ -183,6 +188,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="OperationOpenDiagramEditPolicy"
++            diagramKind="Iaml_Operation"
++            editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -277,6 +287,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="ElementOpenDiagramEditPolicy"
++          diagramKind="Iaml_Element"
++          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/DomainAttribute"/>
+@@ -322,6 +337,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="ElementOpenDiagramEditPolicy"
++            diagramKind="Iaml_Element"
++            editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -348,6 +368,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -24,7 +60,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/visual/InputTextField"/>
-@@ -547,6 +557,11 @@
+@@ -393,6 +418,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="VisualOpenDiagramEditPolicy"
++            diagramKind="Iaml_Visual"
++            editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -673,6 +703,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -36,7 +84,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -607,6 +622,11 @@
+@@ -733,6 +768,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -48,7 +96,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -878,30 +898,6 @@
+@@ -1022,30 +1062,6 @@
          groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
      <childReferences
          parent="//@diagram/@links.0"
@@ -79,7 +127,7 @@
          child="//@diagram/@topLevelNodes.3"
          referenceType="in_source"
          groupName="source"
-@@ -1039,30 +1035,6 @@
+@@ -1183,30 +1199,6 @@
          groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
      <childReferences
          parent="//@diagram/@links.1"
@@ -110,7 +158,7 @@
          child="//@diagram/@topLevelNodes.3"
          referenceType="in_source"
          groupName="source"
-@@ -1200,30 +1172,6 @@
+@@ -1344,30 +1336,6 @@
          groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
      <childReferences
          parent="//@diagram/@links.2"

@@ -63,6 +63,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeOperationParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="visual.gmftool#//@palette/@tools.0/@tools.4"/>

@@ -1336,41 +1336,51 @@
   <labels
       name="EventTriggerParentName"
       figure="EventTriggerFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.1"/>
   <labels
       name="DomainObjectParentName"
       figure="DomainObjectFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.1"/>
   <labels
       name="DomainAttributeParentName"
       figure="DomainAttributeFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.2/@accessors.1"/>
   <labels
       name="SingleOperationParentName"
       figure="SingleOperationFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.5/@accessors.1"/>
   <labels
       name="ChainedOperationParentName"
       figure="ChainedOperationFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.6/@accessors.1"/>
   <labels
       name="ApplicationElementPropertyParentName"
       figure="ApplicationElementPropertyFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.9/@accessors.1"/>
   <labels
       name="InputFormParentName"
       figure="InputFormFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.18/@accessors.1"/>
   <labels
       name="InputTextFieldParentName"
       figure="InputTextFieldFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.19/@accessors.1"/>
   <labels
       name="CompositeConditionParentName"
       figure="CompositeConditionFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.42/@accessors.1"/>
   <labels
       name="ButtonParentName"
       figure="ButtonFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.46/@accessors.1"/>
 </gmfgraph:Canvas>

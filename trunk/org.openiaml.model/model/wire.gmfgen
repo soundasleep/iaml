@@ -101,8 +101,7 @@
           editPartClassName="WrapLabelEditPart"
           itemSemanticEditPolicyClassName="WrapLabelItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabelViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -252,8 +251,7 @@
           editPartClassName="WrapLabel3EditPart"
           itemSemanticEditPolicyClassName="WrapLabel3ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel3ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -325,8 +323,7 @@
           editPartClassName="WrapLabel4EditPart"
           itemSemanticEditPolicyClassName="WrapLabel4ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel4ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -406,8 +403,7 @@
           editPartClassName="WrapLabel5EditPart"
           itemSemanticEditPolicyClassName="WrapLabel5ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel5ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -481,8 +477,7 @@
           editPartClassName="WrapLabel6EditPart"
           itemSemanticEditPolicyClassName="WrapLabel6ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel6ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -550,8 +545,7 @@
           editPartClassName="WrapLabel7EditPart"
           itemSemanticEditPolicyClassName="WrapLabel7ItemSemanticEditPolicy"
           notationViewFactoryClassName="WrapLabel7ViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

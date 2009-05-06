@@ -1,6 +1,6 @@
---- element.gmfgen	2009-02-05 14:50:44.773868100 +1300
-+++ copies/element.gmfgen	2009-02-05 14:50:29.789397200 +1300
-@@ -120,6 +120,11 @@
+--- element.gmfgen	2009-05-06 18:16:31.906375000 +1200
++++ copies/element.gmfgen	2009-05-06 18:16:08.265750000 +1200
+@@ -140,6 +140,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,7 +12,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -323,6 +328,11 @@
+@@ -184,6 +189,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="OperationOpenDiagramEditPolicy"
++            diagramKind="Iaml_Operation"
++            editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -414,6 +424,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -24,7 +36,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -380,6 +390,11 @@
+@@ -471,6 +486,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

@@ -1,6 +1,6 @@
---- domain_object_instance.gmfgen	2009-05-01 17:09:03.085403200 +1200
-+++ copies/domain_object_instance.gmfgen	2009-05-01 17:08:53.288402800 +1200
-@@ -226,6 +226,11 @@
+--- domain_object_instance.gmfgen	2009-05-06 18:16:21.156375000 +1200
++++ copies/domain_object_instance.gmfgen	2009-05-06 18:16:08.265750000 +1200
+@@ -280,6 +280,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,7 +12,31 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -377,6 +382,11 @@
+@@ -325,6 +330,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="OperationOpenDiagramEditPolicy"
++            diagramKind="Iaml_Operation"
++            editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -419,6 +429,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="ElementOpenDiagramEditPolicy"
++          diagramKind="Iaml_Element"
++          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/DomainAttributeInstance"/>
+@@ -467,6 +482,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -24,7 +48,19 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -434,6 +444,11 @@
+@@ -498,6 +518,11 @@
+               xsi:type="gmfgen:LabelOffsetAttributes"
+               y="40"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="WireOpenDiagramEditPolicy"
++            diagramKind="Iaml_Wire"
++            editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
+         <modelFacet
+             xsi:type="gmfgen:FeatureLabelModelFacet">
+           <metaFeatures
+@@ -524,6 +549,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

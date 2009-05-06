@@ -1,5 +1,5 @@
---- domain_store.gmfgen	2009-04-17 15:51:20.431193200 +1200
-+++ copies/domain_store.gmfgen	2009-04-17 15:51:02.415337600 +1200
+--- domain_store.gmfgen	2009-05-06 18:16:29.297000000 +1200
++++ copies/domain_store.gmfgen	2009-05-06 18:16:08.265750000 +1200
 @@ -71,6 +71,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
@@ -12,7 +12,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -174,6 +179,11 @@
+@@ -115,6 +120,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="OperationOpenDiagramEditPolicy"
++            diagramKind="Iaml_Operation"
++            editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -209,6 +219,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -24,7 +36,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainObject"/>
-@@ -377,6 +387,11 @@
+@@ -252,6 +267,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="DomainObjectOpenDiagramEditPolicy"
++            diagramKind="Iaml_DomainObject"
++            editorID="org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -484,6 +504,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -36,7 +60,19 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainAttribute"/>
-@@ -423,6 +438,11 @@
+@@ -527,6 +552,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="ElementOpenDiagramEditPolicy"
++            diagramKind="Iaml_Element"
++            editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <links
+@@ -548,6 +578,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

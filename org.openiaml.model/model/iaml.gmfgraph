@@ -14,7 +14,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="EventTriggerFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="247"
@@ -24,9 +25,19 @@
             xsi:type="gmfgraph:Label"
             name="EventTriggerNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="EventTriggerParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DomainObjectFigure">
@@ -35,7 +46,11 @@
           name="DomainObjectFigure"
           lineWidth="2">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="gray"/>
         <font
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
@@ -44,9 +59,15 @@
             xsi:type="gmfgraph:Label"
             name="DomainObjectNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainObjectParentNameFigure"
+            text="[none]"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DomainAttributeFigure">
@@ -54,14 +75,24 @@
           xsi:type="gmfgraph:Rectangle"
           name="DomainAttributeFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="gray"/>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainAttributeNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeParentNameFigure"
+            text="[none]"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ActivityNodeFigure">
@@ -98,14 +129,25 @@
           xsi:type="gmfgraph:RoundedRectangle"
           name="SingleOperationFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="SimpleOperationNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SingleOperationParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ChainedOperationFigure">
@@ -113,7 +155,8 @@
           xsi:type="gmfgraph:RoundedRectangle"
           name="ChainedOperationFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="240"
@@ -123,9 +166,19 @@
             xsi:type="gmfgraph:Label"
             name="ChainedOperationNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ChainedOperationParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="CompositeOperationFigure">
@@ -148,7 +201,11 @@
         <children
             xsi:type="gmfgraph:Label"
             name="CompositeOperationParentNameFigure"
-            text="[none]"/>
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
@@ -176,7 +233,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="ApplicationElementPropertyFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="208"
@@ -186,9 +244,19 @@
             xsi:type="gmfgraph:Label"
             name="ApplicationElementPropertyNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ApplicationElementPropertyParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="StaticValueFigure">
@@ -360,7 +428,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="InputFormFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="243"
@@ -370,9 +439,19 @@
             xsi:type="gmfgraph:Label"
             name="InputFormNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="InputFormParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.18/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="InputTextFieldFigure">
@@ -380,7 +459,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="InputTextFieldFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="243"
@@ -390,9 +470,19 @@
             xsi:type="gmfgraph:Label"
             name="InputTextFieldNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="InputTextFieldParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.19/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SingleWireFigure">
@@ -769,14 +859,25 @@
           name="CompositeConditionFigure"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
             name="CompositeConditionNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CompositeConditionParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DecisionConditionFigure">
@@ -834,7 +935,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="ButtonFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="240"
@@ -844,9 +946,19 @@
             xsi:type="gmfgraph:Label"
             name="ButtonNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ButtonParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.46/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -1187,4 +1299,44 @@
       figure="CompositeOperationFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.7/@accessors.1"/>
+  <labels
+      name="EventTriggerParentName"
+      figure="EventTriggerFigure"
+      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+  <labels
+      name="DomainObjectParentName"
+      figure="DomainObjectFigure"
+      accessor="//@figures.0/@descriptors.1/@accessors.1"/>
+  <labels
+      name="DomainAttributeParentName"
+      figure="DomainAttributeFigure"
+      accessor="//@figures.0/@descriptors.2/@accessors.1"/>
+  <labels
+      name="SingleOperationParentName"
+      figure="SingleOperationFigure"
+      accessor="//@figures.0/@descriptors.5/@accessors.1"/>
+  <labels
+      name="ChainedOperationParentName"
+      figure="ChainedOperationFigure"
+      accessor="//@figures.0/@descriptors.6/@accessors.1"/>
+  <labels
+      name="ApplicationElementPropertyParentName"
+      figure="ApplicationElementPropertyFigure"
+      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
+  <labels
+      name="InputFormParentName"
+      figure="InputFormFigure"
+      accessor="//@figures.0/@descriptors.18/@accessors.1"/>
+  <labels
+      name="InputTextFieldParentName"
+      figure="InputTextFieldFigure"
+      accessor="//@figures.0/@descriptors.19/@accessors.1"/>
+  <labels
+      name="CompositeConditionParentName"
+      figure="CompositeConditionFigure"
+      accessor="//@figures.0/@descriptors.42/@accessors.1"/>
+  <labels
+      name="ButtonParentName"
+      figure="ButtonFigure"
+      accessor="//@figures.0/@descriptors.46/@accessors.1"/>
 </gmfgraph:Canvas>

@@ -144,9 +144,15 @@
             xsi:type="gmfgraph:Label"
             name="CompositeOperationNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CompositeOperationParentNameFigure"
+            text="[none]"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ApplicationElementFigure">
@@ -1175,4 +1181,9 @@
       name="ButtonName"
       figure="ButtonFigure"
       accessor="//@figures.0/@descriptors.46/@accessors.0"/>
+  <labels
+      name="CompositeOperationParentName"
+      figure="CompositeOperationFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.7/@accessors.1"/>
 </gmfgraph:Canvas>

@@ -134,7 +134,8 @@
           name="CompositeOperationFigure"
           lineKind="LINE_DASH">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="240"

@@ -20,6 +20,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#SingleOperationParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="element.gmftool#//@palette/@tools.0/@tools.1"/>
@@ -41,6 +46,11 @@
             href="iaml.gmfgraph#CompositeOperationName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeOperationParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -64,6 +74,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ChainedOperationParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="element.gmftool#//@palette/@tools.0/@tools.3"/>
@@ -84,6 +99,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ApplicationElementPropertyParentName"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="element.gmftool#//@palette/@tools.0/@tools.4"/>
@@ -103,6 +123,11 @@
             href="iaml.gmfgraph#EventTriggerName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

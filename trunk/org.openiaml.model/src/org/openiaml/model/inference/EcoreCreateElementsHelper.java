@@ -103,13 +103,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public EventTrigger generatedEventTrigger(GeneratesElements by, ContainsEventTriggers container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
+		EventTrigger event = createEventTrigger(container);
 		setGeneratedBy(event, by);
 		return event;
 	}
 	
 	public CompositeOperation generatedCompositeOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
-		CompositeOperation operation = (CompositeOperation) createElement( container, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+		CompositeOperation operation = createCompositeOperation(container);
 		setGeneratedBy(operation, by);
 		return operation;
 	}
@@ -313,5 +313,16 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	public void setName(NamedElement element, String value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getNamedElement_Name(), value);
 	}
+
+	public CompositeOperation createCompositeOperation(ContainsOperations container) throws InferenceException {
+		CompositeOperation operation = (CompositeOperation) createElement( container, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+		return operation;
+	}
+
+	public EventTrigger createEventTrigger(ContainsEventTriggers container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
+		return event;
+	}
+
 
 }

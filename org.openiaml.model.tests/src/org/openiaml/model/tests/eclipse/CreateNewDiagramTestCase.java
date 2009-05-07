@@ -68,21 +68,4 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		return URI.createPlatformResourceURI(project.getFile(filename).getFullPath().toString(), true);
 	}
 	
-	public void setUp() throws Exception {
-		super.setUp();
-		
-		// register errors
-		// TODO should this go into a global setUp()?
-		addLogListener();
-	}
-	
-	// TODO put this into superclass
-	public void tearDown() throws Exception {
-		// close all editors
-		PlatformUI.getWorkbench()
-			.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
-		
-		super.tearDown();
-	}
-	
 }

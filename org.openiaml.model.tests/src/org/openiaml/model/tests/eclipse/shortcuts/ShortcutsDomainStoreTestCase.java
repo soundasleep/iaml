@@ -23,6 +23,7 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 	protected DiagramDocumentEditor editor_store;
 	
 	public void testLoadModel() throws Exception {
+		initializeModelFile();
 
 		// there should be two children
 		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());

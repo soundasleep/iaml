@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.inference;
 
+import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -21,6 +22,7 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.StaticValue;
@@ -90,11 +92,16 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public DomainStore generatedDomainStore(GeneratesElements by, InternetApplication container) throws InferenceException {
-		DomainStore event = (DomainStore) createElement( container, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
-		setGeneratedBy(event, by);
-		return event;
+		DomainStore ds = createDomainStore(container);
+		setGeneratedBy(ds, by);
+		return ds;
 	}
 	
+	public DomainStore createDomainStore(InternetApplication container) throws InferenceException {
+		DomainStore ds = (DomainStore) createElement( container, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
+		return ds;
+	}
+
 	public EventTrigger generatedEventTrigger(GeneratesElements by, ContainsEventTriggers container) throws InferenceException {
 		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
 		setGeneratedBy(event, by);
@@ -210,7 +217,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 	
 	public SyncWire generatedSyncWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
-		SyncWire wire = (SyncWire) createRelationship(container, WiresPackage.eINSTANCE.getSyncWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		SyncWire wire = createSyncWire(container, source, target);
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -228,13 +235,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public Page generatedPage(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
-		Page page = (Page) createElement( container, VisualPackage.eINSTANCE.getPage(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		Page page = createPage(container);
 		setGeneratedBy(page, by);
 		return page;
 	}
 
 	public Page generatedPage(GeneratesElements by, InternetApplication container) throws InferenceException {
-		Page page = (Page) createElement( container, VisualPackage.eINSTANCE.getPage(), ModelPackage.eINSTANCE.getInternetApplication_Children() );
+		Page page = createPage(container);
 		setGeneratedBy(page, by);
 		return page;
 	}
@@ -285,6 +292,26 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		ConditionWire wire = (ConditionWire) createRelationship(container, WiresPackage.eINSTANCE.getConditionWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;
+	}
+
+	public Page createPage(InternetApplication container) throws InferenceException {
+		Page page = (Page) createElement( container, VisualPackage.eINSTANCE.getPage(), ModelPackage.eINSTANCE.getInternetApplication_Children() );
+		return page;
+	}
+	
+	public Page createPage(ApplicationElementContainer container) throws InferenceException {
+		Page page = (Page) createElement( container, VisualPackage.eINSTANCE.getPage(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		return page;
+	}
+
+	public SyncWire createSyncWire(ContainsWires container, WireEdgesSource source,
+			WireEdgeDestination target) throws InferenceException {
+		SyncWire wire = (SyncWire) createRelationship(container, WiresPackage.eINSTANCE.getSyncWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		return wire;
+	}
+
+	public void setName(NamedElement element, String value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getNamedElement_Name(), value);
 	}
 
 }

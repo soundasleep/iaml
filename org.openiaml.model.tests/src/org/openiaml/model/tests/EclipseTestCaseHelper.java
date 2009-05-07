@@ -140,7 +140,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject obj = s.resolveSemanticElement();
 				if (obj instanceof Page) {
 					Page p = (Page) obj;
-					if (p.getName().equals(pageName)) {
+					if (p.getName() != null && p.getName().equals(pageName)) {
 						assertNotNull(s);
 						return s;
 					}

@@ -1,6 +1,10 @@
 /**
  * We extend the editor to automatically validate the entire model
  * every time the model is saved.
+ *
+ * ALSO: Add a method closeBlocking(), which closes the current editor
+ * and blocks the calling thread until it is closed. (Useful for
+ * testing.)
  */
 «IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
 «IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
@@ -13,16 +17,28 @@
 «AROUND constructor FOR gmfgen::GenEditorView-»
 	«targetDef.proceed()»
 	
-	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: When we save the model, we automatically revalidate the model.")»
 	public void doSave(org.eclipse.core.runtime.IProgressMonitor progressMonitor) {
 		super.doSave(progressMonitor);
 		
-		// once saved, force validation (Jevon edit)
+		// once saved, force validation
 		«REM»
 			should be defaultValidateActionClassName(), not 'ValidateAction' literal,
 			but I don't know how to get from a GenEditorView to a GenDiagram
 		«ENDREM»
 		«editorGen.editor.packageName».ValidateAction.runValidation(this.getDiagramEditPart(), this.getDiagram());
 	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: Add a method to close the current editor window, but block until it is complete.\n\nNot intended to be used except during testing.\n\n@see #close(boolean)")»
+	public void closeBlocking(final boolean save) {
+		enableSanityChecking(false);
 
+		org.eclipse.swt.widgets.Display display= getSite().getShell().getDisplay();
+		display.syncExec(new java.lang.Runnable() {
+			public void run() {
+				if (getGraphicalViewer() != null)
+					getSite().getPage().closeEditor(«className».this, save);
+			}
+		});
+	}
 «ENDAROUND»

@@ -1,93 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xsi:schemaLocation="http://openiaml.org/model/visual http://openiaml.org/model#//visual">
-  <notation:Diagram xmi:id="_Nq-vQOwTEd2lsvoKggsckQ" type="Iaml" measurementUnit="Pixel">
-    <children xmi:type="notation:Node" xmi:id="_NwC1cOwTEd2lsvoKggsckQ" type="1006">
-      <children xmi:type="notation:Node" xmi:id="_NwC1dOwTEd2lsvoKggsckQ" type="4006"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_NwC1cewTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_NwC1cuwTEd2lsvoKggsckQ" diagramLink="_O7mCkOwTEd2lsvoKggsckQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:Page" href="generation-sync-multiple.iaml#visual.11d83490a0f.11f"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NwC1c-wTEd2lsvoKggsckQ" x="108" y="72"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_NwC1dewTEd2lsvoKggsckQ" type="1006">
-      <children xmi:type="notation:Node" xmi:id="_NwC1eewTEd2lsvoKggsckQ" type="4006"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_NwC1duwTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_NwC1d-wTEd2lsvoKggsckQ" diagramLink="_QEdvIOwTEd2lsvoKggsckQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:Page" href="generation-sync-multiple.iaml#visual.11d83490a0f.120"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NwC1eOwTEd2lsvoKggsckQ" x="120" y="180"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_NwC1euwTEd2lsvoKggsckQ" type="1006">
-      <children xmi:type="notation:Node" xmi:id="_NwC1fuwTEd2lsvoKggsckQ" type="4006"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_NwC1e-wTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_NwC1fOwTEd2lsvoKggsckQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:Page" href="generation-sync-multiple.iaml#visual.11d83490a0f.121"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NwC1fewTEd2lsvoKggsckQ" x="252" y="72"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_NwC1f-wTEd2lsvoKggsckQ" type="1009">
-      <children xmi:type="notation:Node" xmi:id="_NwC1hewTEd2lsvoKggsckQ" type="4010"/>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_NwC1gOwTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:FillStyle" xmi:id="_NwC1gewTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:LineStyle" xmi:id="_NwC1guwTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_NwC1g-wTEd2lsvoKggsckQ" hint="Iaml_Store"/>
-      <element xmi:type="iaml:DomainStore" href="generation-sync-multiple.iaml#model.11d83490915.30d"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NwC1hOwTEd2lsvoKggsckQ" x="264" y="180"/>
-    </children>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_Nq-vQewTEd2lsvoKggsckQ"/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml="http://openiaml.org/model0.2" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation">
+  <notation:Diagram xmi:id="_X_C4QDqwEd6CDuP6W38FGg" type="Iaml" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_X_C4QTqwEd6CDuP6W38FGg"/>
     <element xmi:type="iaml:InternetApplication" href="generation-sync-multiple.iaml#model.11d83490915.308"/>
   </notation:Diagram>
-  <notation:Diagram xmi:id="_O7mCkOwTEd2lsvoKggsckQ" type="Iaml_Visual" measurementUnit="Pixel">
-    <children xmi:type="notation:Node" xmi:id="_O-IZMOwTEd2lsvoKggsckQ" type="1009">
-      <children xmi:type="notation:Node" xmi:id="_O-IZNOwTEd2lsvoKggsckQ" type="4009"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_O-IZMewTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_O-IZMuwTEd2lsvoKggsckQ" diagramLink="_PU7voOwTEd2lsvoKggsckQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputForm" href="generation-sync-multiple.iaml#visual.11d83490a0f.12d"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O-IZM-wTEd2lsvoKggsckQ" x="144" y="180"/>
-    </children>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_O7mCkewTEd2lsvoKggsckQ"/>
-    <element xmi:type="iaml.visual:Page" href="generation-sync-multiple.iaml#visual.11d83490a0f.11f"/>
-  </notation:Diagram>
-  <notation:Diagram xmi:id="_PU7voOwTEd2lsvoKggsckQ" type="Iaml_Visual" measurementUnit="Pixel">
-    <children xmi:type="notation:Node" xmi:id="_PWICcOwTEd2lsvoKggsckQ" type="1010">
-      <children xmi:type="notation:Node" xmi:id="_PWICdOwTEd2lsvoKggsckQ" type="4010"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_PWICcewTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_PWICcuwTEd2lsvoKggsckQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputTextField" href="generation-sync-multiple.iaml#visual.11d83490a0f.19f"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PWICc-wTEd2lsvoKggsckQ" x="180" y="96"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_PWICdewTEd2lsvoKggsckQ" type="1010">
-      <children xmi:type="notation:Node" xmi:id="_PWICeewTEd2lsvoKggsckQ" type="4010"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_PWICduwTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_PWICd-wTEd2lsvoKggsckQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputTextField" href="generation-sync-multiple.iaml#visual.11d83490a0f.1a0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PWICeOwTEd2lsvoKggsckQ" x="168" y="204"/>
-    </children>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_PU7voewTEd2lsvoKggsckQ"/>
-    <element xmi:type="iaml.visual:InputForm" href="generation-sync-multiple.iaml#visual.11d83490a0f.12d"/>
-  </notation:Diagram>
-  <notation:Diagram xmi:id="_QEdvIOwTEd2lsvoKggsckQ" type="Iaml_Visual" measurementUnit="Pixel">
-    <children xmi:type="notation:Node" xmi:id="_QFg4AOwTEd2lsvoKggsckQ" type="1009">
-      <children xmi:type="notation:Node" xmi:id="_QFg4BOwTEd2lsvoKggsckQ" type="4009"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_QFg4AewTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_QFg4AuwTEd2lsvoKggsckQ" hint="Iaml_Visual"/>
-      <element xmi:type="iaml.visual:InputForm" href="generation-sync-multiple.iaml#visual.11d83490a0f.147"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QFg4A-wTEd2lsvoKggsckQ" x="312" y="132"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_QFg4BewTEd2lsvoKggsckQ" type="1005">
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QFg4DOwTEd2lsvoKggsckQ" source="Shortcut">
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_QFg4DewTEd2lsvoKggsckQ" key="modelID" value="Iaml_Visual"/>
-      </eAnnotations>
-      <children xmi:type="notation:Node" xmi:id="_QFg4C-wTEd2lsvoKggsckQ" type="4005"/>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_QFg4BuwTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:FillStyle" xmi:id="_QFg4B-wTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:LineStyle" xmi:id="_QFg4COwTEd2lsvoKggsckQ"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_QFg4CewTEd2lsvoKggsckQ" diagramLink="_Q50CwOwTEd2lsvoKggsckQ" hint="Iaml_DomainObject"/>
-      <element xmi:type="iaml:DomainObject" href="generation-sync-multiple.iaml#model.11d83490915.35e"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QFg4CuwTEd2lsvoKggsckQ" x="168" y="300"/>
-    </children>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_QEdvIewTEd2lsvoKggsckQ"/>
-    <element xmi:type="iaml.visual:Page" href="generation-sync-multiple.iaml#visual.11d83490a0f.120"/>
-  </notation:Diagram>
-  <notation:Diagram xmi:id="_Q50CwOwTEd2lsvoKggsckQ" type="Iaml_DomainObject" measurementUnit="Pixel">
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_Q50CwewTEd2lsvoKggsckQ"/>
-    <element xmi:type="iaml:DomainObject" href="generation-sync-multiple.iaml#model.11d83490915.35e"/>
+  <notation:Diagram xmi:id="_Z19WkDqwEd6CDuP6W38FGg" type="Iaml_DomainStore" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_Z19WkTqwEd6CDuP6W38FGg"/>
+    <element xmi:type="iaml:DomainStore" href="generation-sync-multiple.iaml#model.11d83490915.30d"/>
   </notation:Diagram>
 </xmi:XMI>

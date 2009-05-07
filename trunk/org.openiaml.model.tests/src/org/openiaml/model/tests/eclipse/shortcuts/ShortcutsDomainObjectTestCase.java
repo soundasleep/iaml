@@ -26,7 +26,7 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 	public void testLoadModel() throws Exception {
 		initializeModelFile();
 
-		// there should be four children
+		// there should be two children
 		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
 		
 		// check the contents

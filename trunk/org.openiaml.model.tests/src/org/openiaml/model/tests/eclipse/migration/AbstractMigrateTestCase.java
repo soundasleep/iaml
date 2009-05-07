@@ -33,10 +33,15 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 	
 	public IamlDiagramEditor editor;
 	
-	public void setUp() throws Exception {
-		// set up project
-		super.setUp();
-		
+	/**
+	 * Migrate the model file from the model given in {@link #getModel()}.
+	 * 
+	 * This isn't placed in setUp() as {@link #testRunning()} was failing
+	 * from files being created from before.
+	 * 
+	 * @throws Exception
+	 */
+	public void migrateModel() throws Exception {
 		// copy our local file into the project
 		IFile sourceModel = project.getFile(getModel());
 		copyFileIntoWorkspace(ROOT + getModel(),

@@ -7,7 +7,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
@@ -18,6 +22,8 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
@@ -25,6 +31,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -35,12 +42,36 @@ import org.openiaml.model.model.wires.SyncWire;
 /**
  * Adds some helper assert...() methods to the EclipseTestCase.
  * 
+ * This also allows errors to be logged directly to the console,
+ * set up in {@link #setUp()}.
+ * 
  * @see EclipseTestCase
  * @author jmwright
  *
  */
 public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 
+	/**
+	 * Add an error log listener.
+	 */
+	public void setUp() throws Exception {
+		super.setUp();
+		
+		// register errors
+		addLogListener();
+	}
+	
+	/**
+	 * Close all active editors.
+	 */
+	public void tearDown() throws Exception {
+		// close all editors
+		PlatformUI.getWorkbench()
+			.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
+		
+		super.tearDown();
+	}
+	
 	public void assertExists(IFile file) {
 		assertTrue("File '" + file + "' should exist", file.exists());
 	}
@@ -531,7 +562,50 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 					// otherwise just print out the error
 					System.err.println(status);
 				}
+				setLastError(status);
 			}});
 	}
 	
+	private IStatus lastErrorStatus = null;
+	
+	/**
+	 * When we add a log listener ({@link #addLogListener()}, this
+	 * method keeps track of the last reported error, hopefully
+	 * so we can add stack traces and the like.
+	 * 
+	 * @param status the last status found
+	 */
+	protected void setLastError(IStatus status) {
+		lastErrorStatus = status;
+	}
+	
+	/**
+	 * Check that the given part is not an ErrorPart.
+	 * If it is, see whatever status was thrown last ({@link #setLastError(IStatus)},
+	 * and throw an exception so we can trace it.
+	 * 
+	 * @param part
+	 */
+	protected void checkNotErrorPart(IEditorPart part) {
+		// we cannot directly 'instanceof', because ErrorEditorPart is
+		// in an internal package
+		if (part.getClass().getSimpleName().equals("ErrorEditorPart")) {
+			if (lastErrorStatus == null) {
+				throw new RuntimeException("Loaded part is an ErrorEditorPart (no exception): " + part);
+			} else {
+				throw new RuntimeException(lastErrorStatus.getMessage() + ": " + part, lastErrorStatus.getException());
+			}
+		}
+	}
+	
+	/**
+	 * Load a diagram file in Eclipse. 
+	 * Also checks that it is not an ErrorEditorPart.
+	 * @see EclipseTestCase#loadDiagramFile(IFile)
+	 */
+	protected IEditorPart loadDiagramFile(IFile diagramFile) throws Exception {
+		IEditorPart part = super.loadDiagramFile(diagramFile);
+		checkNotErrorPart(part);
+		return part;
+	}
 }

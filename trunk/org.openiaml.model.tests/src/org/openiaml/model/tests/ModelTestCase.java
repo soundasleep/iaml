@@ -69,11 +69,12 @@ public abstract class ModelTestCase extends WebTestCase {
 	 * Create a new project in our testing environment,
 	 * allowing our code generator to output there.
 	 * 
-	 * TODO it might be helpful to *copy* the desired
-	 * model file directly into this new project -- this way,
-	 * we can get an IFile directly.
+	 * We can also copy files directly from our testing environment
+	 * to this new project by using
+	 * {@link #copyFileIntoWorkspace(String, IFile)}.
 	 * 
-	 * @see #PROJECT_NAME
+	 * @see #getProjectName()
+	 * @see #copyFileIntoWorkspace(String, IFile)
 	 * @return the created project
 	 * @throws CoreException
 	 */
@@ -96,6 +97,13 @@ public abstract class ModelTestCase extends WebTestCase {
 		return project;
 	}
 
+	/**
+	 * A counter of projects created, so we don't run into a case
+	 * where the same project is created in the same second.
+	 * 
+	 * @see #getProjectName()
+	 */
+	public static int projectCounter = 0;
 	
 	/**
 	 * Get the project name which will be created, 
@@ -104,7 +112,7 @@ public abstract class ModelTestCase extends WebTestCase {
 	 * @return
 	 */
 	public String getProjectName() {
-		return "test." + this.getClass().getSimpleName() + "." + new SimpleDateFormat("yyMMddHHmmss").format(new Date());
+		return "test." + this.getClass().getSimpleName() + "." + new SimpleDateFormat("yyMMddHHmmss").format(new Date()) + projectCounter++;
 	}
 
 	protected IStatus transformStatus = null;

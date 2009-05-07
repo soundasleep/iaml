@@ -27,7 +27,8 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 	 * @throws Exception
 	 */
 	public void testLoadModel() throws Exception {
-
+		migrateModel();
+		
 		// there should be two children
 		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
 		
@@ -47,6 +48,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 	 * @throws Exception
 	 */
 	public void testOpenSubdiagrams() throws Exception {
+		migrateModel();
 
 		// there should be two children
 		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());

@@ -22,8 +22,9 @@
 	@Override
 	public org.eclipse.gef.EditPart getTargetEditPart(org.eclipse.gef.Request request) {
 		if (understandsRequest(request)) {
-			// are we on a node?
-			if (getHost() instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart) {
+			// are we on a node or link?
+			if (getHost() instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart ||
+					getHost() instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart) {
 				return getHost();
 			}
 			

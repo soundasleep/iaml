@@ -17,7 +17,17 @@
  */
 «AROUND createNodeShape(gmfgen::GenNode node) FOR gmfgen::InnerClassViewmap-»
 	«REM»only expand for classes which we can support«ENDREM»
-	«IF className=="CompositeOperationFigure"»
+	«IF className == "CompositeOperationFigure"
+		|| className == "DomainObjectFigure" 
+		|| className == "DomainAttributeFigure" 
+		|| className == "SingleOperationFigure" 
+		|| className == "ChainedOperationFigure" 
+		|| className == "ApplicationElementPropertyFigure" 
+		|| className == "InputFormFigure" 
+		|| className == "InputTextFieldFigure" 
+		|| className == "CompositeConditionFigure" 
+		|| className == "ButtonFigure" 
+		|| className == "EventTriggerFigure"»
 		«EXPAND xpt::Common::generatedMemberComment("Jevon modification: we extend createNodeShape to use our extended class.")»
 		protected org.eclipse.draw2d.IFigure createNodeShape() {
 			«className» figure = new Extended«className»();
@@ -72,8 +82,39 @@
 					String parentName = parent.getName();
 						
 				«REM»this is pretty fragile, but there is no way to access the contents of the .gmfmap from the generated .gmfgen viewmap.«ENDREM»
+				«REM»also, I can't do EString.substring(EInt, EInt) for some reason, and struggling to add a generator extension.«ENDREM»
 				«IF className=="CompositeOperationFigure"»
 					getFigureCompositeOperationParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="DomainObjectFigure"»
+					getFigureDomainObjectParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="DomainAttributeFigure"»
+					getFigureDomainAttributeParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="SingleOperationFigure"»
+					getFigureSingleOperationParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="ChainedOperationFigure"»
+					getFigureChainedOperationParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="ApplicationElementPropertyFigure"»
+					getFigureApplicationElementPropertyNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="InputFormFigure"»
+					getFigureInputFormParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="InputTextFieldFigure"»
+					getFigureInputTextFieldParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="CompositeConditionFigure"»
+					getFigureCompositeConditionParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="ButtonFigure"»
+					getFigureButtonParentNameFigure().setText(parentName);
+				«ENDIF»
+				«IF className=="EventTriggerFigure"»
+					getFigureEventTriggerParentNameFigure().setText(parentName);
 				«ENDIF»
 				}
 			}

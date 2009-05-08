@@ -430,9 +430,9 @@
         <metaClass
             href="iaml.genmodel#//model/DomainAttribute"/>
         <containmentMetaFeature
-            href="iaml.genmodel#//model/domain/AbstractDomainObject/attributes"/>
+            href="iaml.genmodel#//model/DomainObject/attributes"/>
         <childMetaFeature
-            href="iaml.genmodel#//model/domain/AbstractDomainObject/attributes"/>
+            href="iaml.genmodel#//model/DomainObject/attributes"/>
       </modelFacet>
       <labels
           visualID="4011"

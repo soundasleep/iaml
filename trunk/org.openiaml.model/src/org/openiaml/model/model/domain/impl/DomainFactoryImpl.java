@@ -19,9 +19,8 @@ import org.openiaml.model.impl.FileReferenceImpl;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.domain.DomainFactory;
 import org.openiaml.model.model.domain.DomainPackage;
-import org.openiaml.model.model.domain.FileDomainAttribute;
-import org.openiaml.model.model.domain.FileDomainObject;
-import org.openiaml.model.model.domain.FileDomainStore;
+import org.openiaml.model.model.domain.DomainStoreTypes;
+import org.openiaml.model.model.domain.EmptyDomainPackageClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,9 +66,7 @@ public class DomainFactoryImpl extends EFactoryImpl implements DomainFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DomainPackage.FILE_DOMAIN_STORE: return createFileDomainStore();
-			case DomainPackage.FILE_DOMAIN_OBJECT: return createFileDomainObject();
-			case DomainPackage.FILE_DOMAIN_ATTRIBUTE: return createFileDomainAttribute();
+			case DomainPackage.EMPTY_DOMAIN_PACKAGE_CLASS: return createEmptyDomainPackageClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -83,6 +80,8 @@ public class DomainFactoryImpl extends EFactoryImpl implements DomainFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case DomainPackage.DOMAIN_STORE_TYPES:
+				return createDomainStoreTypesFromString(eDataType, initialValue);
 			case DomainPackage.FILE_REFERENCE:
 				return createFileReferenceFromString(eDataType, initialValue);
 			default:
@@ -98,6 +97,8 @@ public class DomainFactoryImpl extends EFactoryImpl implements DomainFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case DomainPackage.DOMAIN_STORE_TYPES:
+				return convertDomainStoreTypesToString(eDataType, instanceValue);
 			case DomainPackage.FILE_REFERENCE:
 				return convertFileReferenceToString(eDataType, instanceValue);
 			default:
@@ -108,34 +109,31 @@ public class DomainFactoryImpl extends EFactoryImpl implements DomainFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public FileDomainStore createFileDomainStore() {
-		FileDomainStoreImpl fileDomainStore = new FileDomainStoreImpl();
-		generateID(fileDomainStore);
-		return fileDomainStore;
+	public EmptyDomainPackageClass createEmptyDomainPackageClass() {
+		EmptyDomainPackageClassImpl emptyDomainPackageClass = new EmptyDomainPackageClassImpl();
+		return emptyDomainPackageClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public FileDomainObject createFileDomainObject() {
-		FileDomainObjectImpl fileDomainObject = new FileDomainObjectImpl();
-		generateID(fileDomainObject);
-		return fileDomainObject;
+	public DomainStoreTypes createDomainStoreTypesFromString(EDataType eDataType, String initialValue) {
+		DomainStoreTypes result = DomainStoreTypes.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public FileDomainAttribute createFileDomainAttribute() {
-		FileDomainAttributeImpl fileDomainAttribute = new FileDomainAttributeImpl();
-		generateID(fileDomainAttribute);
-		return fileDomainAttribute;
+	public String convertDomainStoreTypesToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

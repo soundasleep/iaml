@@ -179,12 +179,14 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 			String name = n.getNodeName();
 			String value = n.getNodeValue();
 			
-			// should we modify it somehow?
-			value = handleAttribute(name, value, element, errors);
-			if (value == null)
-				return;
-			
-			e.setAttribute( name, value );
+			if (!shouldDeleteAttribute(element, e, name, value, errors)) {
+				// should we modify it somehow?
+				value = handleAttribute(name, value, element, errors);
+				if (value == null)
+					return;		// element has been deleted; don't add it
+				
+				e.setAttribute( name, value );
+			}
 		}
 		
 		// does it have an id?
@@ -200,11 +202,13 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		if (!element.getAttribute("xsi:type").isEmpty()) {
 			String xsiType = element.getAttribute("xsi:type");
 			
-			xsiType = replaceType(element, xsiType, errors);
-			if (xsiType == null)
-				return;
-			
-			e.setAttribute("xsi:type", xsiType);
+			if (!shouldDeleteAttribute(element, e, "xsi:type", xsiType, errors)) {
+				xsiType = replaceType(element, xsiType, errors);
+				if (xsiType == null)
+					return;		// element has been deleted; don't add it
+				
+				e.setAttribute("xsi:type", xsiType);
+			}
 		}
 		
 		// recurse over children
@@ -244,45 +248,81 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	/**
 	 * Should we replace the xsi:type of this element?
 	 * 
+	 * By default, just returns the current xsi:type.
+	 * 
 	 * @param element The original element
 	 * @param xsiType The current xsi:type
 	 * @param errors The list of errors to insert errors into
 	 * @return The new xsi:type, or null if the element has been deleted
 	 */
-	public abstract String replaceType(Element element, String xsiType, List<ExpectedMigrationException> errors) ;
+	public String replaceType(Element element, String xsiType, List<ExpectedMigrationException> errors) {
+		return xsiType;
+	}
 
 	/**
 	 * Should we do something with this attribute?
+	 * 
+	 * By default, just returns the old attribute value.
 	 * 
 	 * @param name The attribute name
 	 * @param value The old attribute value
 	 * @param element The original element
 	 * @param errors The list of errors to insert errors into
-	 * @return The new attribute value
+	 * @return The new attribute value, or null if the containing element has been deleted
 	 */
-	public abstract String handleAttribute(String name, String value, Element element, List<ExpectedMigrationException> errors);
+	public String handleAttribute(String name, String value, Element element, List<ExpectedMigrationException> errors) {
+		return value;
+	}
 
 	/**
 	 * Should this node be deleted? If it is deleted, a warning
 	 * will be logged.
+	 * 
+	 * By default, returns false.
 	 * 
 	 * @param element The original element
 	 * @param parent The destination parent node
 	 * @param errors The list of errors to insert errors into
 	 * @return True if it should be deleted; false otherwise.
 	 */
-	public abstract boolean shouldDeleteNode(Element element, Node parent, List<ExpectedMigrationException> errors);
+	public boolean shouldDeleteNode(Element element, Node parent, List<ExpectedMigrationException> errors) {
+		return false;
+	}
 
 	/**
 	 * Should the node be renamed?
+	 * 
+	 * By default, returns the original element name.
 	 * 
 	 * @param nodeName The element name (equal to element.getNodeName())
 	 * @param element The original element
 	 * @param errors The list of errors to insert errors into
 	 * @return the new name of the node
 	 */
-	public abstract String getRenamedNode(String nodeName, Element element, List<ExpectedMigrationException> errors);
+	public String getRenamedNode(String nodeName, Element element, List<ExpectedMigrationException> errors) {
+		return nodeName;
+	}
 
+	/**
+	 * By default, all attributes in the old element are added
+	 * to the new element. Override this method otherwise.
+	 * 
+	 * Returns false by default.
+	 * 
+	 * This method is not called for "id" attributes, but is called
+	 * for "xsi:type" attributes.
+	 * 
+	 * @param element The original element
+	 * @param target The destination element
+	 * @param name The attribute name
+	 * @param value The attribute value
+	 * @param errors The list of errors to insert errors into
+	 * @return True if this attribute should be deleted; false otherwise
+	 */
+	public boolean shouldDeleteAttribute(Element element, Element target, String name, String value, List<ExpectedMigrationException> errors) {
+		return false;
+	}
+	
 	/**
 	 * Calculate what would be the old ID for this element.
 	 * 

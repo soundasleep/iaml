@@ -188,7 +188,7 @@
 		<category name="IAML" description="Commands related to IAML diagrams." 
 			id="org.openiaml.model.diagram.custom.commands.iaml"/>
 		<command categoryId="org.openiaml.model.diagram.custom.commands.iaml" 
-			description="Refreshes the mappings of FileDomainStore elements" 
+			description="Refreshes the mappings of DomainStore elements" 
 			id="org.openiaml.model.diagram.custom.commands.iaml.refresh"
 			name="Refresh mappings">
 		</command>
@@ -211,7 +211,7 @@
                id="org.openiaml.model.diagram.custom.actions.refresh"
                label="&amp;Refresh Mappings"
                menubarPath="ModelActions/group1">
-			 <selection class="org.openiaml.model.model.diagram.edit.parts.FileDomainStoreEditPart">
+			 <selection class="org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart">
 			 </selection>
          </action>
          
@@ -221,7 +221,7 @@
                id="org.openiaml.model.diagram.custom.actions.refresh"
                label="&amp;Refresh Mappings with Drools"
                menubarPath="ModelActions/group1">
-			 <selection class="org.openiaml.model.model.diagram.edit.parts.FileDomainStoreEditPart">
+			 <selection class="org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart">
 			 </selection>
          </action>
       </objectContribution>                    

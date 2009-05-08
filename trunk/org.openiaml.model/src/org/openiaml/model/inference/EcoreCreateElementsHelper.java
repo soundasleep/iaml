@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.inference;
 
-import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -15,6 +14,8 @@ import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
@@ -28,10 +29,6 @@ import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.domain.DomainPackage;
-import org.openiaml.model.model.domain.FileDomainAttribute;
-import org.openiaml.model.model.domain.FileDomainObject;
-import org.openiaml.model.model.domain.FileDomainStore;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionOperation;
@@ -264,18 +261,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return button;
 	}
 	
-	public FileDomainObject generatedFileDomainObject(GeneratesElements by, FileDomainStore container) throws InferenceException {
-		FileDomainObject object = (FileDomainObject) createElement( container, DomainPackage.eINSTANCE.getFileDomainObject(), DomainPackage.eINSTANCE.getAbstractDomainStore_Children() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-	
-	public FileDomainAttribute generatedFileDomainAttribute(GeneratesElements by, FileDomainObject container) throws InferenceException {
-		FileDomainAttribute object = (FileDomainAttribute) createElement( container, DomainPackage.eINSTANCE.getFileDomainAttribute(), DomainPackage.eINSTANCE.getAbstractDomainObject_Attributes() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
 	public CompositeCondition generatedCompositeCondition(GeneratesElements by, ContainsConditions container) throws InferenceException {
 		CompositeCondition object = (CompositeCondition) createElement( container, ModelPackage.eINSTANCE.getCompositeCondition(), ModelPackage.eINSTANCE.getContainsConditions_Conditions() );
 		setGeneratedBy(object, by);
@@ -324,5 +309,16 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 
+	public DomainObject generatedDomainObject(GeneratesElements by, DomainStore container) throws InferenceException {
+		DomainObject object = (DomainObject) createElement( container, ModelPackage.eINSTANCE.getDomainObject(), ModelPackage.eINSTANCE.getDomainStore_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+
+	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainObject container) throws InferenceException {
+		DomainAttribute object = (DomainAttribute) createElement( container, ModelPackage.eINSTANCE.getDomainAttribute(), ModelPackage.eINSTANCE.getDomainObject_Attributes() );
+		setGeneratedBy(object, by);
+		return object;
+	}
 
 }

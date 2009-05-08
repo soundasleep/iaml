@@ -27,6 +27,7 @@ import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DerivedView;
+import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
@@ -41,7 +42,6 @@ import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.domain.AbstractDomainObject;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
@@ -218,7 +218,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDomainObject> domainObjects;
+	protected EList<DomainObject> domainObjects;
 
 	/**
 	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
@@ -518,9 +518,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractDomainObject> getDomainObjects() {
+	public EList<DomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<AbstractDomainObject>(AbstractDomainObject.class, this, ScopesPackage.SESSION__DOMAIN_OBJECTS);
+			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ScopesPackage.SESSION__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -889,7 +889,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return;
 			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends AbstractDomainObject>)newValue);
+				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
 				return;
 			case ScopesPackage.SESSION__DOMAIN_VIEWS:
 				getDomainViews().clear();

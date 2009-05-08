@@ -118,8 +118,6 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObject"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( DomainObject )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -145,8 +143,6 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainAttribute"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( DomainAttribute )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -351,50 +347,6 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//domain/FileDomainObject"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( FileDomainObject )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#FileDomainObjectName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.24"/>
-      <diagramNode
-          href="iaml.gmfgraph#FileDomainObject"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//domain/FileDomainAttribute"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( FileDomainAttribute )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#FileDomainAttributeName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.23"/>
-      <diagramNode
-          href="iaml.gmfgraph#FileDomainAttribute"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//ContainsConditions/conditions"/>
     <ownedChild>
       <domainMetaElement
@@ -438,7 +390,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.25"/>
+          href="visual.gmftool#//@palette/@tools.0/@tools.23"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObjectInstance"/>
     </ownedChild>
@@ -460,7 +412,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.26"/>
+          href="visual.gmftool#//@palette/@tools.0/@tools.24"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttributeInstance"/>
     </ownedChild>
@@ -487,7 +439,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.27"/>
+          href="visual.gmftool#//@palette/@tools.0/@tools.25"/>
       <diagramNode
           href="iaml.gmfgraph#Button"/>
     </ownedChild>

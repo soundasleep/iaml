@@ -3,8 +3,14 @@
  */
 package org.openiaml.model.tests.eclipse.migration;
 
+import java.util.List;
+
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
+import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
+import org.openiaml.model.diagram.custom.migrate.Migrate1To2;
+import org.openiaml.model.diagram.custom.migrate.Migrate2To3;
 
 /**
  * Tests migrating a very old model version. 
@@ -18,12 +24,20 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 	protected DiagramDocumentEditor editor_page = null;
 	
 	/**
-	 * The model is migrated, initialised and loaded in 
-	 * {@link #setUp()}.
+	 * Test to see which migrators were actually used.
 	 * 
 	 * @throws Exception
 	 */
+	public void testMigratorsUsed() throws Exception {
+		List<IamlModelMigrator> used = migrateModelOnly();
+		assertClassNotIn(Migrate0To1.class, used);
+		assertClassIn(Migrate1To2.class, used);
+	}
+	
+	
 	public void testLoadModel() throws Exception {
+		migrateModel();
+		
 		// there should be five children (five pages)
 		assertEquals("there should be 5 children", 5, editor.getDiagramEditPart().getChildren().size());
 		
@@ -41,6 +55,8 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 	 * @throws Exception
 	 */
 	public void testOpenSubdiagramsPage1() throws Exception {
+		migrateModel();
+		
 		// open the diagram
 		ShapeNodeEditPart page = assertHasPage(editor, "page1");
 		assertNotNull(page);
@@ -59,6 +75,8 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 	}
 
 	public void testOpenSubdiagramsPage2() throws Exception {
+		migrateModel();
+		
 		// open the diagram
 		ShapeNodeEditPart page = assertHasPage(editor, "page2");
 		assertNotNull(page);

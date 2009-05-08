@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.command.CreateChildCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
@@ -23,7 +22,6 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 
 /**

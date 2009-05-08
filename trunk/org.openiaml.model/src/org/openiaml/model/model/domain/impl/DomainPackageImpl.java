@@ -6,46 +6,27 @@
  */
 package org.openiaml.model.model.domain.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.ModelPackage;
-
 import org.openiaml.model.model.components.ComponentsPackage;
-
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
-
-import org.openiaml.model.model.domain.AbstractDomainAttribute;
-import org.openiaml.model.model.domain.AbstractDomainObject;
-import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.domain.DomainFactory;
 import org.openiaml.model.model.domain.DomainPackage;
-import org.openiaml.model.model.domain.FileDomainAttribute;
-import org.openiaml.model.model.domain.FileDomainObject;
-import org.openiaml.model.model.domain.FileDomainStore;
-
+import org.openiaml.model.model.domain.DomainStoreTypes;
+import org.openiaml.model.model.domain.EmptyDomainPackageClass;
 import org.openiaml.model.model.impl.ModelPackageImpl;
-
 import org.openiaml.model.model.operations.OperationsPackage;
-
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
-
 import org.openiaml.model.model.scopes.ScopesPackage;
-
 import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
-
 import org.openiaml.model.model.visual.VisualPackage;
-
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
-
 import org.openiaml.model.model.wires.WiresPackage;
-
 import org.openiaml.model.model.wires.impl.WiresPackageImpl;
 
 /**
@@ -60,42 +41,14 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abstractDomainStoreEClass = null;
+	private EClass emptyDomainPackageClassEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abstractDomainObjectEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass abstractDomainAttributeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass fileDomainStoreEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass fileDomainObjectEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass fileDomainAttributeEClass = null;
+	private EEnum domainStoreTypesEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,8 +150,8 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAbstractDomainStore() {
-		return abstractDomainStoreEClass;
+	public EClass getEmptyDomainPackageClass() {
+		return emptyDomainPackageClassEClass;
 	}
 
 	/**
@@ -206,98 +159,8 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDomainStore_Children() {
-		return (EReference)abstractDomainStoreEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractDomainStore_Properties() {
-		return (EReference)abstractDomainStoreEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractDomainStore_Views() {
-		return (EReference)abstractDomainStoreEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractDomainStore_Attributes() {
-		return (EReference)abstractDomainStoreEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAbstractDomainObject() {
-		return abstractDomainObjectEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractDomainObject_Attributes() {
-		return (EReference)abstractDomainObjectEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAbstractDomainAttribute() {
-		return abstractDomainAttributeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFileDomainStore() {
-		return fileDomainStoreEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFileDomainStore_File() {
-		return (EAttribute)fileDomainStoreEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFileDomainObject() {
-		return fileDomainObjectEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFileDomainAttribute() {
-		return fileDomainAttributeEClass;
+	public EEnum getDomainStoreTypes() {
+		return domainStoreTypesEEnum;
 	}
 
 	/**
@@ -337,23 +200,10 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		abstractDomainStoreEClass = createEClass(ABSTRACT_DOMAIN_STORE);
-		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__CHILDREN);
-		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__PROPERTIES);
-		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__VIEWS);
-		createEReference(abstractDomainStoreEClass, ABSTRACT_DOMAIN_STORE__ATTRIBUTES);
+		emptyDomainPackageClassEClass = createEClass(EMPTY_DOMAIN_PACKAGE_CLASS);
 
-		abstractDomainObjectEClass = createEClass(ABSTRACT_DOMAIN_OBJECT);
-		createEReference(abstractDomainObjectEClass, ABSTRACT_DOMAIN_OBJECT__ATTRIBUTES);
-
-		abstractDomainAttributeEClass = createEClass(ABSTRACT_DOMAIN_ATTRIBUTE);
-
-		fileDomainStoreEClass = createEClass(FILE_DOMAIN_STORE);
-		createEAttribute(fileDomainStoreEClass, FILE_DOMAIN_STORE__FILE);
-
-		fileDomainObjectEClass = createEClass(FILE_DOMAIN_OBJECT);
-
-		fileDomainAttributeEClass = createEClass(FILE_DOMAIN_ATTRIBUTE);
+		// Create enums
+		domainStoreTypesEEnum = createEEnum(DOMAIN_STORE_TYPES);
 
 		// Create data types
 		fileReferenceEDataType = createEDataType(FILE_REFERENCE);
@@ -382,44 +232,19 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
-		// Obtain other dependent packages
-		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
-
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
-		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsEventTriggers());
-		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getContainsWires());
-		abstractDomainStoreEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
-		abstractDomainObjectEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
-		abstractDomainObjectEClass.getESuperTypes().add(theModelPackage.getContainsWires());
-		abstractDomainAttributeEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
-		fileDomainStoreEClass.getESuperTypes().add(this.getAbstractDomainStore());
-		fileDomainObjectEClass.getESuperTypes().add(this.getAbstractDomainObject());
-		fileDomainAttributeEClass.getESuperTypes().add(this.getAbstractDomainAttribute());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(abstractDomainStoreEClass, AbstractDomainStore.class, "AbstractDomainStore", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractDomainStore_Children(), this.getAbstractDomainObject(), null, "children", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractDomainStore_Properties(), theModelPackage.getApplicationElementProperty(), null, "properties", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractDomainStore_Views(), theModelPackage.getDerivedView(), null, "views", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractDomainStore_Attributes(), this.getAbstractDomainAttribute(), null, "attributes", null, 0, -1, AbstractDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(emptyDomainPackageClassEClass, EmptyDomainPackageClass.class, "EmptyDomainPackageClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(abstractDomainObjectEClass, AbstractDomainObject.class, "AbstractDomainObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractDomainObject_Attributes(), this.getAbstractDomainAttribute(), null, "attributes", null, 0, -1, AbstractDomainObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(abstractDomainAttributeEClass, AbstractDomainAttribute.class, "AbstractDomainAttribute", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(fileDomainStoreEClass, FileDomainStore.class, "FileDomainStore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFileDomainStore_File(), this.getFileReference(), "file", null, 1, 1, FileDomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(fileDomainObjectEClass, FileDomainObject.class, "FileDomainObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(fileDomainAttributeEClass, FileDomainAttribute.class, "FileDomainAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		// Initialize enums and add enum literals
+		initEEnum(domainStoreTypesEEnum, DomainStoreTypes.class, "DomainStoreTypes");
+		addEEnumLiteral(domainStoreTypesEEnum, DomainStoreTypes.RELATIONAL_DB);
+		addEEnumLiteral(domainStoreTypesEEnum, DomainStoreTypes.PROPERTIES_FILE);
 
 		// Initialize data types
 		initEDataType(fileReferenceEDataType, FileReference.class, "FileReference", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -444,17 +269,10 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 			 "added", "0.2"
 		   });		
 		addAnnotation
-		  (getAbstractDomainStore_Views(), 
+		  (domainStoreTypesEEnum, 
 		   source, 
 		   new String[] {
-			 "added", "0.2"
-		   });		
-		addAnnotation
-		  (getAbstractDomainStore_Attributes(), 
-		   source, 
-		   new String[] {
-			 "added", "0.3",
-			 "reason", "why can a data store only contain tables? why can\'t they also contain single values?"
+			 "added", "0.3"
 		   });
 	}
 

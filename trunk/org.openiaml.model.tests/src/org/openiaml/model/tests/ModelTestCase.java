@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
@@ -286,6 +287,36 @@ public abstract class ModelTestCase extends WebTestCase {
 	 */
 	protected void assertGreaterEq(int expected, int actual) {
 		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual >= expected);
+	}
+	
+	
+	/**
+	 * Assert an instance of a class is in a given list.
+	 * 
+	 * @param class1 class to check
+	 * @param used list of class instances
+	 */
+	protected void assertClassIn(Class<?> class1,
+			List<?> used) {
+		for (Object m : used) {
+			if (m.getClass().equals(class1))
+				return;
+		}
+		fail("Migrator '" + class1.getSimpleName() + "' should be found in list of used migrators: " + used);
+	}
+
+	/**
+	 * Assert an instance of a class is not in a given list. 
+	 * 
+	 * @param class1 class to check
+	 * @param used list of class instances
+	 */
+	protected void assertClassNotIn(Class<?> class1,
+			List<?> used) {
+		for (Object m : used) {
+			if (m.getClass().equals(class1))
+				fail("Migrator '" + class1.getSimpleName() + "' should not be found in list of used migrators: " + used);
+		}
 	}
 	
 }

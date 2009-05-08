@@ -24,7 +24,9 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsEventTriggers">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsEventTriggers/eventTriggers"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//DomainObject"/>
+    <genClasses ecoreClass="iaml.ecore#//DomainObject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObject/attributes"/>
+    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainAttribute"/>
     <genClasses ecoreClass="iaml.ecore#//ActivityNode"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Operation">
@@ -68,7 +70,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sessions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/loginHandlers"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//DomainStore"/>
+    <genClasses ecoreClass="iaml.ecore#//DomainStore">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/children"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/properties"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/views"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/attributes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainStore/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainStore/type"/>
+    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DataFlowEdge">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DataFlowEdge/from"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DataFlowEdge/to"/>
@@ -210,23 +219,12 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Domain" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//domain">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//domain/DomainStoreTypes">
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//domain/DomainStoreTypes/RELATIONAL_DB"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//domain/DomainStoreTypes/PROPERTIES_FILE"/>
+      </genEnums>
       <genDataTypes ecoreDataType="iaml.ecore#//domain/FileReference"/>
-      <genClasses image="false" ecoreClass="iaml.ecore#//domain/AbstractDomainStore">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/AbstractDomainStore/children"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/AbstractDomainStore/properties"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//domain/AbstractDomainStore/views"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/AbstractDomainStore/attributes"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="iaml.ecore#//domain/AbstractDomainObject">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/AbstractDomainObject/attributes"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="iaml.ecore#//domain/AbstractDomainAttribute"/>
-      <genClasses ecoreClass="iaml.ecore#//domain/FileDomainStore">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/FileDomainStore/file"/>
-      </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//domain/FileDomainObject"/>
-      <genClasses ecoreClass="iaml.ecore#//domain/FileDomainAttribute"/>
+      <genClasses ecoreClass="iaml.ecore#//domain/EmptyDomainPackageClass"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

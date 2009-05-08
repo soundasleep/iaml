@@ -3,10 +3,15 @@
  */
 package org.openiaml.model.tests.eclipse.migration;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
+import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
+import org.openiaml.model.diagram.custom.migrate.Migrate1To2;
 
 /**
  * Tests migrating a very old model version. 
@@ -19,6 +24,16 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 
 	protected DiagramDocumentEditor editor_page = null;
 	protected DiagramDocumentEditor editor_store = null;
+	
+	/**
+	 * Test to see which migrators were actually used.
+	 * 
+	 * @throws Exception
+	 */
+	public void testMigratorsUsed() throws Exception {
+		List<IamlModelMigrator> used = migrateModelOnly();
+		assertClassIn(Migrate0To1.class, used);
+	}
 	
 	/**
 	 * The model is migrated, initialised and loaded in 

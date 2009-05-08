@@ -13,8 +13,11 @@ public class MigrationException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public MigrationException(Exception e) {
-		super(e);
+	public MigrationException(Throwable e) {
+		super(e.getMessage(), e);
 	}
 	
+	public MigrationException(String message, Throwable e) {
+		super(message, e);
+	}
 }

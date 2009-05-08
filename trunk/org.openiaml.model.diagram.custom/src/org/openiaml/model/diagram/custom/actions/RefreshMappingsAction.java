@@ -15,9 +15,10 @@ import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.diagram.edit.parts.FileDomainStoreEditPart;
+import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.model.domain.FileDomainStore;
+import org.openiaml.model.model.domain.DomainStoreTypes;
 
 /**
  * A temporary action which infers the entire model, and places
@@ -55,8 +56,8 @@ public class RefreshMappingsAction implements IViewActionDelegate {
 		
 		if (selection != null) {
 			for (Object o : selection) {
-				if (o instanceof FileDomainStoreEditPart) {
-					FileDomainStoreEditPart fd = (FileDomainStoreEditPart) o;
+				if (o instanceof DomainStoreEditPart) {
+					DomainStoreEditPart fd = (DomainStoreEditPart) o;
 					IStatus status = refreshMappings(fd, action, new NullProgressMonitor());
 					if (!status.isOK()) {
 						// TODO remove this reference to the plugin and remove the reference in plugin.xml
@@ -75,14 +76,19 @@ public class RefreshMappingsAction implements IViewActionDelegate {
 	 * @param monitor 
 	 * @return 
 	 */
-	protected IStatus refreshMappings(FileDomainStoreEditPart fd, IAction action, IProgressMonitor monitor) {
+	protected IStatus refreshMappings(DomainStoreEditPart fd, IAction action, IProgressMonitor monitor) {
 		try {
 		
 			EObject obj = fd.resolveSemanticElement();
-			if (!(obj instanceof FileDomainStore))
-				throw new InferenceException("Object was not a FileDomainStore");
+			if (!(obj instanceof DomainStore))
+				throw new InferenceException("Object was not a DomainStore");	
 			
-			FileDomainStore fds = (FileDomainStore) obj;
+			DomainStore fds = (DomainStore) obj;
+			
+			if (!fds.getType().equals(DomainStoreTypes.PROPERTIES_FILE)) {
+				throw new InferenceException("Can only refresh mappings of Properties files: actual type was '" + fds.getType() + "'");	
+			}
+			
 			/*
 			fds.refreshMappings(new GmfInferenceHandler(
 					monitor,

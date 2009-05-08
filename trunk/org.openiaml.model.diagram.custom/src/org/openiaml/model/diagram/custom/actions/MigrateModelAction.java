@@ -32,9 +32,8 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.migrate.ExpectedMigrationException;
 import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
-import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
-import org.openiaml.model.diagram.custom.migrate.Migrate1To2;
 import org.openiaml.model.diagram.custom.migrate.MigrationException;
+import org.openiaml.model.diagram.custom.migrate.MigratorRegistry;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
 import org.w3c.dom.Document;
@@ -48,6 +47,8 @@ import org.w3c.dom.Document;
  */
 public class MigrateModelAction implements IViewActionDelegate {
 
+	private List<IamlModelMigrator> migratorsUsed;
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
 	 */
@@ -173,6 +174,9 @@ public class MigrateModelAction implements IViewActionDelegate {
 		assert(!output.exists());
 		
 		try {
+			// reset list of used migrators
+			migratorsUsed = new ArrayList<IamlModelMigrator>();
+			
 			// get all the migrators
 			List<IamlModelMigrator> migrators = getMigrators();
 			
@@ -185,9 +189,11 @@ public class MigrateModelAction implements IViewActionDelegate {
 			// try each of them
 			for (IamlModelMigrator m : migrators) {
 				if (m.isVersion(doc)) {
+					// add to list of migrators used
+					migratorsUsed.add(m);
+
 					// we want to migrate it with this migrator
 					doc = m.migrate(doc, monitor, errors);
-					
 				}
 			}
 			
@@ -244,10 +250,7 @@ public class MigrateModelAction implements IViewActionDelegate {
 	 * @return A list of available model migrators.
 	 */
 	public List<IamlModelMigrator> getMigrators() {
-		List<IamlModelMigrator> migrators = new ArrayList<IamlModelMigrator>();
-		migrators.add(new Migrate0To1());
-		migrators.add(new Migrate1To2());
-		return migrators;
+		return MigratorRegistry.getMigrators();
 	}
 
 	/**
@@ -291,6 +294,15 @@ public class MigrateModelAction implements IViewActionDelegate {
 		if (selection instanceof IStructuredSelection) {
 			this.selection = ((IStructuredSelection) selection).toArray();
 		}
+	}
+
+	/**
+	 * Get a list of all the model migrators used in this action.
+	 * 
+	 * @return A list of used model migrators
+	 */
+	public List<IamlModelMigrator> getMigratorsUsed() {
+		return migratorsUsed;
 	}
 
 }

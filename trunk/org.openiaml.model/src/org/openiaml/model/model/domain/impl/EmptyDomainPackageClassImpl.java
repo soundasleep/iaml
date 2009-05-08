@@ -8,25 +8,27 @@ package org.openiaml.model.model.domain.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.openiaml.model.model.domain.DomainPackage;
-import org.openiaml.model.model.domain.FileDomainAttribute;
+import org.openiaml.model.model.domain.EmptyDomainPackageClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>File Domain Attribute</b></em>'.
+ * An implementation of the model object '<em><b>Empty Domain Package Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class FileDomainAttributeImpl extends AbstractDomainAttributeImpl implements FileDomainAttribute {
+public class EmptyDomainPackageClassImpl extends EObjectImpl implements EmptyDomainPackageClass {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FileDomainAttributeImpl() {
+	protected EmptyDomainPackageClassImpl() {
 		super();
 	}
 
@@ -37,7 +39,7 @@ public class FileDomainAttributeImpl extends AbstractDomainAttributeImpl impleme
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DomainPackage.Literals.FILE_DOMAIN_ATTRIBUTE;
+		return DomainPackage.Literals.EMPTY_DOMAIN_PACKAGE_CLASS;
 	}
 
-} //FileDomainAttributeImpl
+} //EmptyDomainPackageClassImpl

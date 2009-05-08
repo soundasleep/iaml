@@ -25,7 +25,9 @@ import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DerivedView;
+import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
+import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -36,8 +38,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.domain.AbstractDomainObject;
-import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -231,7 +231,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDomainObject> domainObjects;
+	protected EList<DomainObject> domainObjects;
 
 	/**
 	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
@@ -291,7 +291,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDomainStore> domainStores;
+	protected EList<DomainStore> domainStores;
 
 	/**
 	 * The default value of the '{@link #getRuntimeUrl() <em>Runtime Url</em>}' attribute.
@@ -570,9 +570,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractDomainObject> getDomainObjects() {
+	public EList<DomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<AbstractDomainObject>(AbstractDomainObject.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS);
+			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -642,9 +642,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractDomainStore> getDomainStores() {
+	public EList<DomainStore> getDomainStores() {
 		if (domainStores == null) {
-			domainStores = new EObjectContainmentEList<AbstractDomainStore>(AbstractDomainStore.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES);
+			domainStores = new EObjectContainmentEList<DomainStore>(DomainStore.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES);
 		}
 		return domainStores;
 	}
@@ -851,7 +851,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends AbstractDomainObject>)newValue);
+				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
 				getDomainViews().clear();
@@ -875,7 +875,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				getDomainStores().clear();
-				getDomainStores().addAll((Collection<? extends AbstractDomainStore>)newValue);
+				getDomainStores().addAll((Collection<? extends DomainStore>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl((String)newValue);

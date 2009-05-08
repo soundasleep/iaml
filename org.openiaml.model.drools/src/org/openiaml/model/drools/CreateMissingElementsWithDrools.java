@@ -39,9 +39,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.domain.AbstractDomainAttribute;
-import org.openiaml.model.model.domain.AbstractDomainObject;
-import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.scopes.Session;
 
 /**

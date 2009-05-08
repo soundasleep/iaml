@@ -433,24 +433,14 @@
             <param name="semanticHint" value="1011"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/domain">
-         <metamodelType
-               id="org.openiaml.model.diagram.FileDomainStore_1012"
-               name="%metatype.name.FileDomainStore_1012"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FileDomainStore"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.FileDomainStoreEditHelper">
-            <param name="semanticHint" value="1012"/>
-         </metamodelType>
-      </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.CompositeCondition_1013"
-               name="%metatype.name.CompositeCondition_1013"
+               id="org.openiaml.model.diagram.CompositeCondition_1012"
+               name="%metatype.name.CompositeCondition_1012"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeCondition"
                edithelper="org.openiaml.model.model.diagram.edit.helpers.CompositeConditionEditHelper">
-            <param name="semanticHint" value="1013"/>
+            <param name="semanticHint" value="1012"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -517,8 +507,7 @@
          <elementType ref="org.openiaml.model.diagram.DomainStore_1009"/>
          <elementType ref="org.openiaml.model.diagram.Session_1010"/>
          <elementType ref="org.openiaml.model.diagram.LoginHandler_1011"/>
-         <elementType ref="org.openiaml.model.diagram.FileDomainStore_1012"/>
-         <elementType ref="org.openiaml.model.diagram.CompositeCondition_1013"/>
+         <elementType ref="org.openiaml.model.diagram.CompositeCondition_1012"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.ConditionWire_3003"/>

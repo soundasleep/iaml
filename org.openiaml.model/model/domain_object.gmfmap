@@ -138,7 +138,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//domain/AbstractDomainObject/attributes"/>
+        href="iaml.ecore#//DomainObject/attributes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainAttribute"/>

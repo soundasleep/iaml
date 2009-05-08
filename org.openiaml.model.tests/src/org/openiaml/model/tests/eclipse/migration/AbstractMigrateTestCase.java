@@ -3,11 +3,14 @@
  */
 package org.openiaml.model.tests.eclipse.migration;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.ui.IEditorPart;
 import org.openiaml.model.diagram.custom.actions.MigrateModelAction;
+import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
@@ -24,6 +27,7 @@ import org.openiaml.model.tests.EclipseTestCaseHelper;
  * Based on ShortcutsTestCase.
  * 
  * @see #getModel()
+ * @see #migrateModel()
  * @author jmwright
  *
  */
@@ -32,22 +36,24 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 	public static final String ROOT = "src/org/openiaml/model/tests/eclipse/migration/";
 	
 	public IamlDiagramEditor editor;
+
+	private IFile sourceModel;
+	private IFile targetModel;
+	private IFile targetDiagram;
 	
 	/**
-	 * Migrate the model file from the model given in {@link #getModel()}.
+	 * Only migrate the model; do not initialise the diagram.
 	 * 
-	 * This isn't placed in setUp() as {@link #testRunning()} was failing
-	 * from files being created from before.
-	 * 
+	 * @see #migrateModel()
 	 * @throws Exception
 	 */
-	public void migrateModel() throws Exception {
+	public List<IamlModelMigrator> migrateModelOnly() throws Exception {
 		// copy our local file into the project
-		IFile sourceModel = project.getFile(getModel());
-		copyFileIntoWorkspace(ROOT + getModel(),
+		sourceModel = project.getFile(getModel());
+		copyFileIntoWorkspace(ROOT + getSourceModel(),
 				sourceModel);
-		IFile targetModel = project.getFile(getModelMigrated());
-		IFile targetDiagram = project.getFile(getDiagram());
+		targetModel = project.getFile(getModelMigrated());
+		targetDiagram = project.getFile(getDiagram());
 		
 		// migrate the model
 		assertFalse("the target model should not exist yet", targetModel.exists());
@@ -55,7 +61,25 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 		IStatus status = a.migrateModel(sourceModel, targetModel, monitor);
 		assertStatusOK(status);
 		assertTrue("the target model should have been created", targetModel.exists());
-
+		
+		// return list of migrators used
+		return a.getMigratorsUsed();
+	}
+	
+	/**
+	 * Migrate the model file from the model given in {@link #getModel()}.
+	 * 
+	 * Uses {@link #migrateModelOnly()} to actually migrate the file.
+	 * 
+	 * This isn't placed in setUp() as {@link #testRunning()} was failing
+	 * from files being created from before.
+	 * 
+	 * @see #migrateModelOnly()
+	 * @throws Exception
+	 */
+	public List<IamlModelMigrator> migrateModel() throws Exception {
+		List<IamlModelMigrator> used = migrateModelOnly();
+		
 		// initialise the diagram
 		assertFalse("the target diagram should not exist yet", targetDiagram.exists());
 		initializeModelFile(targetModel, targetDiagram);
@@ -70,8 +94,23 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 		
 		// find what elements are displayed
 		editor = (IamlDiagramEditor) ep;
+		
+		// return list of migrators used
+		return used;
 	}
 	
+	/**
+	 * Usually this will just return {@link #getModel()}, but
+	 * if the source model is stored in a different place
+	 * in our testing environment, we will have to override this.
+	 * 
+	 * @see #getModel()
+	 * @return The location of the source model in the testing environment
+	 */
+	public String getSourceModel() {
+		return getModel();
+	}
+
 	/**
 	 * Assert that the IStatus is ok.
 	 * 

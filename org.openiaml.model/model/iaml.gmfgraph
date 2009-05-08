@@ -58,6 +58,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="DomainObjectTypeFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="DomainObjectParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -67,6 +71,8 @@
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
     </descriptors>
@@ -816,72 +822,6 @@
           figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
-        name="FileDomainStoreFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="FileDomainStoreFigure"
-          lineWidth="2"
-          lineKind="LINE_DASH">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="220"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="BOLD"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FileDomainStoreNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="FileDomainObjectFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="FileDomainObjectFigure"
-          lineWidth="2"
-          lineKind="LINE_DASH">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="BOLD"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FileDomainObjectNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="FileDomainAttributeFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="FileDomainAttributeFigure"
-          lineKind="LINE_DASH">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FileDomainAttributeNameFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
         name="CompositeConditionFigure">
       <actualFigure
           xsi:type="gmfgraph:Ellipse"
@@ -904,9 +844,9 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.42/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.39/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DecisionConditionFigure">
@@ -922,7 +862,7 @@
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DomainObjectInstanceFigure">
@@ -944,7 +884,7 @@
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DomainAttributeInstanceFigure">
@@ -961,7 +901,7 @@
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="ButtonFigure">
@@ -990,9 +930,9 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.46/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.43/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -1070,15 +1010,6 @@
   <nodes
       name="LoginHandler"
       figure="LoginHandlerFigure"/>
-  <nodes
-      name="FileDomainStore"
-      figure="FileDomainStoreFigure"/>
-  <nodes
-      name="FileDomainObject"
-      figure="FileDomainObjectFigure"/>
-  <nodes
-      name="FileDomainAttribute"
-      figure="FileDomainAttributeFigure"/>
   <nodes
       name="CompositeCondition"
       figure="CompositeConditionFigure"/>
@@ -1297,37 +1228,25 @@
       figure="CancelNodeFigure"
       accessor="//@figures.0/@descriptors.26/@accessors.1"/>
   <labels
-      name="FileDomainStoreName"
-      figure="FileDomainStoreFigure"
-      accessor="//@figures.0/@descriptors.39/@accessors.0"/>
-  <labels
-      name="FileDomainObjectName"
-      figure="FileDomainObjectFigure"
-      accessor="//@figures.0/@descriptors.40/@accessors.0"/>
-  <labels
-      name="FileDomainAttributeName"
-      figure="FileDomainAttributeFigure"
-      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
-  <labels
       name="CompositeConditionName"
       figure="CompositeConditionFigure"
-      accessor="//@figures.0/@descriptors.42/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.39/@accessors.0"/>
   <labels
       name="DecisionConditionName"
       figure="DecisionConditionFigure"
-      accessor="//@figures.0/@descriptors.43/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.40/@accessors.0"/>
   <labels
       name="DomainObjectInstanceName"
       figure="DomainObjectInstanceFigure"
-      accessor="//@figures.0/@descriptors.44/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
   <labels
       name="DomainAttributeInstanceName"
       figure="DomainAttributeInstanceFigure"
-      accessor="//@figures.0/@descriptors.45/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.42/@accessors.0"/>
   <labels
       name="ButtonName"
       figure="ButtonFigure"
-      accessor="//@figures.0/@descriptors.46/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.43/@accessors.0"/>
   <labels
       name="CompositeOperationParentName"
       figure="CompositeOperationFigure"
@@ -1377,10 +1296,14 @@
       name="CompositeConditionParentName"
       figure="CompositeConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.42/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.39/@accessors.1"/>
   <labels
       name="ButtonParentName"
       figure="ButtonFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.46/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.43/@accessors.1"/>
+  <labels
+      name="DomainObjectType"
+      figure="DomainObjectFigure"
+      accessor="//@figures.0/@descriptors.1/@accessors.2"/>
 </gmfgraph:Canvas>

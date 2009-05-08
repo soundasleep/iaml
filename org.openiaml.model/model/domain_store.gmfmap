@@ -61,7 +61,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//domain/AbstractDomainStore/children"/>
+        href="iaml.ecore#//DomainStore/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObject"/>
@@ -111,7 +111,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//domain/AbstractDomainStore/properties"/>
+        href="iaml.ecore#//DomainStore/properties"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//ApplicationElementProperty"/>
@@ -163,7 +163,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//domain/AbstractDomainStore/attributes"/>
+        href="iaml.ecore#//DomainStore/attributes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainAttribute"/>

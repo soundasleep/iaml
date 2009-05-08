@@ -154,12 +154,12 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQueryEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQuery2EditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQueryEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -478,64 +478,44 @@
             <param name="semanticHint" value="1013"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/domain">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.FileDomainObject_1014"
-               name="%metatype.name.FileDomainObject_1014"
+               id="org.openiaml.model.diagram.visual.CompositeCondition_1014"
+               name="%metatype.name.CompositeCondition_1014"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FileDomainObject"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FileDomainObjectEditHelper">
+               eclass="CompositeCondition"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.CompositeConditionEditHelper">
             <param name="semanticHint" value="1014"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/domain">
+      <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.FileDomainAttribute_1015"
-               name="%metatype.name.FileDomainAttribute_1015"
+               id="org.openiaml.model.diagram.visual.DomainObjectInstance_1015"
+               name="%metatype.name.DomainObjectInstance_1015"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="FileDomainAttribute"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.FileDomainAttributeEditHelper">
+               eclass="DomainObjectInstance"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainObjectInstanceEditHelper">
             <param name="semanticHint" value="1015"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.CompositeCondition_1016"
-               name="%metatype.name.CompositeCondition_1016"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="CompositeCondition"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.CompositeConditionEditHelper">
-            <param name="semanticHint" value="1016"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.DomainObjectInstance_1017"
-               name="%metatype.name.DomainObjectInstance_1017"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="DomainObjectInstance"
-               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainObjectInstanceEditHelper">
-            <param name="semanticHint" value="1017"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
-         <metamodelType
-               id="org.openiaml.model.diagram.visual.DomainAttributeInstance_1018"
-               name="%metatype.name.DomainAttributeInstance_1018"
+               id="org.openiaml.model.diagram.visual.DomainAttributeInstance_1016"
+               name="%metatype.name.DomainAttributeInstance_1016"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainAttributeInstance"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.DomainAttributeInstanceEditHelper">
-            <param name="semanticHint" value="1018"/>
+            <param name="semanticHint" value="1016"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.Button_1019"
-               name="%metatype.name.Button_1019"
+               id="org.openiaml.model.diagram.visual.Button_1017"
+               name="%metatype.name.Button_1017"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Button"
                edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.ButtonEditHelper">
-            <param name="semanticHint" value="1019"/>
+            <param name="semanticHint" value="1017"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -654,12 +634,10 @@
          <elementType ref="org.openiaml.model.diagram.visual.StaticValue_1011"/>
          <elementType ref="org.openiaml.model.diagram.visual.Session_1012"/>
          <elementType ref="org.openiaml.model.diagram.visual.LoginHandler_1013"/>
-         <elementType ref="org.openiaml.model.diagram.visual.FileDomainObject_1014"/>
-         <elementType ref="org.openiaml.model.diagram.visual.FileDomainAttribute_1015"/>
-         <elementType ref="org.openiaml.model.diagram.visual.CompositeCondition_1016"/>
-         <elementType ref="org.openiaml.model.diagram.visual.DomainObjectInstance_1017"/>
-         <elementType ref="org.openiaml.model.diagram.visual.DomainAttributeInstance_1018"/>
-         <elementType ref="org.openiaml.model.diagram.visual.Button_1019"/>
+         <elementType ref="org.openiaml.model.diagram.visual.CompositeCondition_1014"/>
+         <elementType ref="org.openiaml.model.diagram.visual.DomainObjectInstance_1015"/>
+         <elementType ref="org.openiaml.model.diagram.visual.DomainAttributeInstance_1016"/>
+         <elementType ref="org.openiaml.model.diagram.visual.Button_1017"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_3001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_3002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_3003"/>

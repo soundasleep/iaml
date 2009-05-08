@@ -117,8 +117,6 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObject"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf(DomainObject)"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -220,8 +218,6 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainStore"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( DomainStore )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -285,28 +281,6 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/domainStores"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//domain/FileDomainStore"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( FileDomainStore )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#FileDomainStoreName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.13"/>
-      <diagramNode
-          href="iaml.gmfgraph#FileDomainStore"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//ContainsConditions/conditions"/>
     <ownedChild>
       <domainMetaElement
@@ -327,7 +301,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.14"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.13"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -400,7 +374,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.0/@tools.15"/>
+        href="root.gmftool#//@palette/@tools.0/@tools.14"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionWire"/>
     <sourceMetaFeature
@@ -426,7 +400,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.0/@tools.16"/>
+        href="root.gmftool#//@palette/@tools.0/@tools.15"/>
     <diagramLink
         href="iaml.gmfgraph#NavigateWire"/>
     <sourceMetaFeature

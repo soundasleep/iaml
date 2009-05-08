@@ -19,11 +19,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.DerivedView;
+import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Scope;
-import org.openiaml.model.model.domain.AbstractDomainObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,7 +81,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDomainObject> domainObjects;
+	protected EList<DomainObject> domainObjects;
 
 	/**
 	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
@@ -160,9 +160,9 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractDomainObject> getDomainObjects() {
+	public EList<DomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<AbstractDomainObject>(AbstractDomainObject.class, this, ModelPackage.SCOPE__DOMAIN_OBJECTS);
+			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.SCOPE__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -266,7 +266,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return;
 			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends AbstractDomainObject>)newValue);
+				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
 				return;
 			case ModelPackage.SCOPE__DOMAIN_VIEWS:
 				getDomainViews().clear();

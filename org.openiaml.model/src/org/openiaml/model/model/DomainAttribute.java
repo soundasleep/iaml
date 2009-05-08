@@ -6,7 +6,6 @@
  */
 package org.openiaml.model.model;
 
-import org.openiaml.model.model.domain.AbstractDomainAttribute;
 
 
 /**
@@ -16,8 +15,8 @@ import org.openiaml.model.model.domain.AbstractDomainAttribute;
  *
  *
  * @see org.openiaml.model.model.ModelPackage#getDomainAttribute()
- * @model annotation="http://openiaml.org/comment changed='0.2 to extend the abstract counterpart'"
+ * @model annotation="http://openiaml.org/comment changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute'"
  * @generated
  */
-public interface DomainAttribute extends AbstractDomainAttribute {
+public interface DomainAttribute extends ApplicationElement {
 } // DomainAttribute

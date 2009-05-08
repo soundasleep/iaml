@@ -7,12 +7,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.domain.AbstractDomainObject;
 
 /**
  * Implementation of the missing shortcuts for DomainStore.
@@ -37,7 +37,7 @@ public class CreateMissingDomainStoreShortcutsCommand extends
 		List<WireEdge> connectionsIn = new ArrayList<WireEdge>();
 		
 		// DomainObject <- ApplicationElement
-		for (AbstractDomainObject child : rootObject.getChildren()) {
+		for (DomainObject child : rootObject.getChildren()) {
 			connectionsIn.addAll( child.getInEdges() );
 		}
 
@@ -63,7 +63,7 @@ public class CreateMissingDomainStoreShortcutsCommand extends
 		List<WireEdge> connectionsOut = new ArrayList<WireEdge>();
 
 		// DomainObject <- ApplicationElement
-		for (AbstractDomainObject child : rootObject.getChildren()) {
+		for (DomainObject child : rootObject.getChildren()) {
 			connectionsOut.addAll( child.getOutEdges() );
 		}
 		

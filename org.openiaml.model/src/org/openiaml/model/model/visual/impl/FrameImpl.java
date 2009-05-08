@@ -7,20 +7,19 @@
 package org.openiaml.model.model.visual.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.DerivedView;
+import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Scope;
-import org.openiaml.model.model.domain.AbstractDomainObject;
 import org.openiaml.model.model.impl.VisibleThingImpl;
-
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.VisualPackage;
 
@@ -48,7 +47,7 @@ public class FrameImpl extends VisibleThingImpl implements Frame {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDomainObject> domainObjects;
+	protected EList<DomainObject> domainObjects;
 	/**
 	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -92,9 +91,9 @@ public class FrameImpl extends VisibleThingImpl implements Frame {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractDomainObject> getDomainObjects() {
+	public EList<DomainObject> getDomainObjects() {
 		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<AbstractDomainObject>(AbstractDomainObject.class, this, VisualPackage.FRAME__DOMAIN_OBJECTS);
+			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, VisualPackage.FRAME__DOMAIN_OBJECTS);
 		}
 		return domainObjects;
 	}
@@ -170,7 +169,7 @@ public class FrameImpl extends VisibleThingImpl implements Frame {
 		switch (featureID) {
 			case VisualPackage.FRAME__DOMAIN_OBJECTS:
 				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends AbstractDomainObject>)newValue);
+				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
 				return;
 			case VisualPackage.FRAME__DOMAIN_VIEWS:
 				getDomainViews().clear();

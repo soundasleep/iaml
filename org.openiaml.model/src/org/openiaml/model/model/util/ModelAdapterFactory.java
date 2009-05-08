@@ -55,9 +55,6 @@ import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.domain.AbstractDomainAttribute;
-import org.openiaml.model.model.domain.AbstractDomainObject;
-import org.openiaml.model.model.domain.AbstractDomainStore;
 
 /**
  * <!-- begin-user-doc -->
@@ -290,18 +287,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDomainAttributeInstance(DomainAttributeInstance object) {
 				return createDomainAttributeInstanceAdapter();
-			}
-			@Override
-			public Adapter caseAbstractDomainObject(AbstractDomainObject object) {
-				return createAbstractDomainObjectAdapter();
-			}
-			@Override
-			public Adapter caseAbstractDomainAttribute(AbstractDomainAttribute object) {
-				return createAbstractDomainAttributeAdapter();
-			}
-			@Override
-			public Adapter caseAbstractDomainStore(AbstractDomainStore object) {
-				return createAbstractDomainStoreAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -936,48 +921,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDomainAttributeInstanceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.AbstractDomainObject <em>Abstract Domain Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.domain.AbstractDomainObject
-	 * @generated
-	 */
-	public Adapter createAbstractDomainObjectAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.AbstractDomainAttribute <em>Abstract Domain Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.domain.AbstractDomainAttribute
-	 * @generated
-	 */
-	public Adapter createAbstractDomainAttributeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.AbstractDomainStore <em>Abstract Domain Store</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.domain.AbstractDomainStore
-	 * @generated
-	 */
-	public Adapter createAbstractDomainStoreAdapter() {
 		return null;
 	}
 

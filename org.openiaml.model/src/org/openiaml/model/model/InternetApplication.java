@@ -8,7 +8,6 @@ package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.domain.AbstractDomainStore;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -67,7 +66,7 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 
 	/**
 	 * Returns the value of the '<em><b>Domain Stores</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.domain.AbstractDomainStore}.
+	 * The list contents are of type {@link org.openiaml.model.model.DomainStore}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Domain Stores</em>' containment reference list isn't clear,
@@ -80,7 +79,7 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 *        annotation="http://openiaml.org/comment comment='not sure if this is necessary anymore... because now objects are stored as part of their scopes' changed='0.2 to extend the abstract counterpart'"
 	 * @generated
 	 */
-	EList<AbstractDomainStore> getDomainStores();
+	EList<DomainStore> getDomainStores();
 
 	/**
 	 * Returns the value of the '<em><b>Runtime Url</b></em>' attribute.

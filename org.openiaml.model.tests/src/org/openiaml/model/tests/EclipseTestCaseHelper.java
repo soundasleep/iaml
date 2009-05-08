@@ -7,11 +7,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
@@ -22,7 +18,6 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
@@ -31,8 +26,8 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -152,6 +147,33 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return null;
 	}
 
+	
+	/**
+	 * Look at the editor's children to see if a Session is being displayed.
+	 * 
+	 * @param root
+	 * @param sessionName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasSession(DiagramDocumentEditor root, String sessionName) {
+		for (Object o : root.getDiagramEditPart().getChildren()) {
+			if (o instanceof ShapeNodeEditPart) {
+				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
+				EObject obj = s.resolveSemanticElement();
+				if (obj instanceof Session) {
+					Session p = (Session) obj;
+					if (p.getName() != null && p.getName().equals(sessionName)) {
+						assertNotNull(s);
+						return s;
+					}
+				}
+			}
+		}
+		// failed
+		fail("assertHasSession: no Session '" + sessionName + "' found.");
+		return null;
+	}
+	
 	/**
 	 * Look at the editor's children to see if an InputForm is being displayed.
 	 * 
@@ -608,4 +630,16 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		checkNotErrorPart(part);
 		return part;
 	}
+	
+	/**
+	 * Check the number of children nodes in this editor.
+	 * 
+	 * @param i
+	 * @param sub
+	 */
+	protected void assertChildren(int i, DiagramDocumentEditor sub) {
+		assertEquals("There should be " + i + " children in editor '" + sub.getTitle() + "'", i, sub.getDiagramEditPart().getChildren().size());
+	}
+
+	
 }

@@ -32,12 +32,12 @@ end
 rule "Refresh FileDomainStore mappings (2)"
 		
 	when
-		$fds : FileDomainStore ( overridden == false )
+		$fds : DomainStore ( overridden == false, type == DomainStoreTypes.PROPERTIES_FILE )
 		p : ExtendedProperties ( ) from $fds.propertiesFile
-		not ( FileDomainObject ( eContainer == $fds, name == "properties" ))
+		not ( DomainObject ( eContainer == $fds, name == "properties" ))
 
 	then
-		FileDomainObject fdo = handler.generatedFileDomainObject($fds, $fds);
+		DomainObject fdo = handler.generatedDomainObject($fds, $fds);
 		handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
 		insert(fdo);
 		
@@ -69,14 +69,14 @@ end
 rule "Refresh FileDomainObject mappings (2)"
 		
 	when
-		$fds : FileDomainStore ( overridden == false )
+		$fds : DomainStore ( overridden == false, type == DomainStoreTypes.PROPERTIES_FILE )
 		$p : ExtendedProperties ( ) from $fds.propertiesFile
 		$key : String ( ) from $p.propertyNames
-		fdo : FileDomainObject ( eContainer == $fds, name == "properties" )
-		not ( FileDomainAttribute ( eContainer == fdo, name == $key ))
+		fdo : DomainObject ( eContainer == $fds, name == "properties" )
+		not ( DomainAttribute ( eContainer == fdo, name == $key ))
 
 	then
-		FileDomainAttribute fda = handler.generatedFileDomainAttribute(fdo, fdo);
+		DomainAttribute fda = handler.generatedDomainAttribute(fdo, fdo);
 		handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
 		insert(fda);
 		

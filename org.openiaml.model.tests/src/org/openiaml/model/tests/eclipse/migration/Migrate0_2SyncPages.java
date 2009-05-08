@@ -10,7 +10,6 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
 import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
 import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
 import org.openiaml.model.diagram.custom.migrate.Migrate1To2;
-import org.openiaml.model.diagram.custom.migrate.Migrate2To3;
 
 /**
  * Tests migrating a very old model version. 

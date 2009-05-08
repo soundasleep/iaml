@@ -1,10 +1,12 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.inference;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
@@ -18,25 +20,25 @@ import org.openiaml.model.tests.InferenceTestCase;
 
 /**
  * Tests inference of database sources.
- * 
+ *
  * @author jmwright
  *
  */
 public class PropertiesFileWithInputForm extends InferenceTestCase {
 
 	protected InternetApplication root;
-	
+
 	protected void setUp() throws Exception {
 		root = loadAndInfer(PropertiesFileWithInputForm.class);
 	}
-	
+
 	public void testInferenceWithoutForm() throws JaxenException {
 		// [already in model]
-		FileDomainStore store = (FileDomainStore) queryOne(root, "//iaml:domainStores[iaml:name='a properties file']");
+		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='a properties file']");
 		// the store should only have two attributes
 		assertEquals(2, store.getAttributes().size());
-		FileDomainAttribute attribute = (FileDomainAttribute) queryOne(store, "iaml.domain:attributes[iaml:name='value1']");
-		
+		DomainAttribute attribute = (DomainAttribute) queryOne(store, "iaml:attributes[iaml:name='value1']");
+
 		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='without form']");
 		InputTextField source = (InputTextField) queryOne(page, "iaml:children[iaml:name='target']");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, source, attribute);
@@ -49,7 +51,7 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		Operation targetOp = (Operation) queryOne(attribute, "iaml:operations[iaml:name='update']");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);
-		
+
 		// there should be a run wire between these two
 		RunInstanceWire srcRw = (RunInstanceWire) getWireFromTo(wire, srcEdit, targetOp);
 		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
@@ -57,23 +59,23 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		// both should have fieldValues
 		ApplicationElementProperty textValue = (ApplicationElementProperty) queryOne(source, "iaml:properties[iaml:name='fieldValue']");
 		ApplicationElementProperty attrValue = (ApplicationElementProperty) queryOne(attribute, "iaml:properties[iaml:name='fieldValue']");
-		
+
 		// they should be parameters
 		ParameterWire textPw = (ParameterWire) getWireFromTo(wire, textValue, srcRw);
 		ParameterWire attrPw = (ParameterWire) getWireFromTo(wire, attrValue, targetRw);
-		
+
 		// remove warnings
 		assertNotNull(textPw);
 		assertNotNull(attrPw);
 	}
-	
+
 	public void testInferenceWithForm() throws Exception {
 		// [already in model]
-		FileDomainStore store = (FileDomainStore) queryOne(root, "//iaml:domainStores[iaml:name='a properties file']");
+		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='a properties file']");
 		// the store should only have two attributes
 		assertEquals(2, store.getAttributes().size());
-		FileDomainAttribute attribute = (FileDomainAttribute) queryOne(store, "iaml.domain:attributes[iaml:name='value2']");
-		
+		DomainAttribute attribute = (DomainAttribute) queryOne(store, "iaml:attributes[iaml:name='value2']");
+
 		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='with form']");
 		InputForm form = (InputForm) queryOne(page, "iaml:children[iaml:name='a form']");
 		InputTextField source = (InputTextField) queryOne(form, "iaml:children[iaml:name='target']");
@@ -87,7 +89,7 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		Operation targetOp = (Operation) queryOne(attribute, "iaml:operations[iaml:name='update']");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);
-		
+
 		// there should be a run wire between these two
 		RunInstanceWire srcRw = (RunInstanceWire) getWireFromTo(wire, srcEdit, targetOp);
 		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
@@ -95,14 +97,14 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		// both should have fieldValues
 		ApplicationElementProperty textValue = (ApplicationElementProperty) queryOne(source, "iaml:properties[iaml:name='fieldValue']");
 		ApplicationElementProperty attrValue = (ApplicationElementProperty) queryOne(attribute, "iaml:properties[iaml:name='fieldValue']");
-		
+
 		// they should be parameters
 		ParameterWire textPw = (ParameterWire) getWireFromTo(wire, textValue, srcRw);
 		ParameterWire attrPw = (ParameterWire) getWireFromTo(wire, attrValue, targetRw);
-		
+
 		// remove warnings
 		assertNotNull(textPw);
 		assertNotNull(attrPw);
 	}
-	
+
 }

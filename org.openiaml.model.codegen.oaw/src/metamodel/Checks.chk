@@ -40,34 +40,13 @@ context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two 
 	!(model::ApplicationElementProperty.isInstance(from) && 
 	model::ApplicationElementProperty.isInstance(to));
 	
-context model::DomainStore ERROR "DomainStores can only contain DomainObjects" :
-	!model::DomainObject.isInstance( children.forAll( e | model::domain::AbstractDomainObject.isInstance(e) ) );
-
-context model::DomainObject ERROR "DomainObjects can only contain DomainAttributes" :
-	!model::DomainAttribute.isInstance( attributes.forAll( e | model::domain::AbstractDomainAttribute.isInstance(e) ) );
-
-context model::domain::FileDomainStore ERROR "FileDomainStores can only contain FileDomainObjects" :
-	!model::domain::FileDomainObject.isInstance( children.forAll( e | model::domain::AbstractDomainObject.isInstance(e) ) );
-
-context model::domain::FileDomainObject ERROR "FileDomainObjects can only contain FileDomainAttributes" :
-	!model::domain::FileDomainAttribute.isInstance( attributes.forAll( e | model::domain::AbstractDomainAttribute.isInstance(e) ) );
-
-context model::VisibleThing ERROR "VisibleThings cannot directly contain AbstractDomainStores, they should be in the root" :
-	!children.exists( e | model::domain::AbstractDomainStore.isInstance(e) );
-
-context model::VisibleThing ERROR "VisibleThings cannot directly contain AbstractDomainObjects, they should be in AbstractDomainStores" :
-	!children.exists( e | model::domain::AbstractDomainObject.isInstance(e) );
-
-context model::VisibleThing ERROR "VisibleThings cannot directly contain AbstractDomainAttributes, they should be in AbstractDomainObjects" :
-	!children.exists( e | model::domain::AbstractDomainAttribute.isInstance(e) );
-
 context model::scopes::Session ERROR "Sessions cannot directly contain InputTextFields" :
 	!children.exists( e | model::visual::InputTextField.isInstance(e) );
 
 context model::scopes::Session ERROR "Sessions cannot directly contain InputForms" :
 	!children.exists( e | model::visual::InputForm.isInstance(e) );
 	
-context model::domain::AbstractDomainObject ERROR "You cannot have a DomainObject called single_values (reserved word)" :
+context model::DomainObject ERROR "You cannot have a DomainObject called single_values (reserved word)" :
 	name != "single_values";
 
 context model::DomainAttributeInstance ERROR "A DomainAttributeInstance cannot have more than one selection" :
@@ -77,5 +56,5 @@ context model::DomainObjectInstance ERROR "A DomainObjectInstance cannot have mo
 	inEdges.typeSelect(model::wires::SelectWire).size <= 1;
 	
 context model::wires::SelectWire ERROR "A SelectWire must come from a valid DomainObject":
-	model::domain::AbstractDomainObject.isInstance(from);	
+	model::DomainObject.isInstance(from);	
 	

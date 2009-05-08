@@ -3,6 +3,11 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE main FOR model::InternetApplication»
+	«REM»to test that when we throw exceptions, we can actually catch them«ENDREM»
+	«IF name=="__test throw exception"»
+		«EXPAND exception FOR throwException("We should be able to catch this exception.")» 
+	«ENDIF»
+
 	«EXPAND Page::expandPage FOREACH children»
 
 	«EXPAND expandSession FOREACH sessions»

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests;
 
@@ -33,7 +33,7 @@ import ca.ecliptical.emf.xpath.EMFXPath;
 
 /**
  * Inference-specific test cases.
- * 
+ *
  * @see CodegenTestCase
  * @author jmwright
  *
@@ -41,12 +41,12 @@ import ca.ecliptical.emf.xpath.EMFXPath;
 public abstract class InferenceTestCase extends ModelTestCase {
 
 	protected Resource resource;
-	
+
 	/**
 	 * When inference is done, the model is saved to this file.
 	 */
 	protected File inferredModel;
-	
+
 	/**
 	 * Load a model file and perform inference on it.
 	 */
@@ -57,7 +57,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	/**
 	 * Automagically load the model file (.iaml) for this given
 	 * test class.
-	 * 
+	 *
 	 * @see #loadAndCodegen(String)
 	 * @param class1 The test class to load a model for.
 	 * @return the loaded and inferred InternetApplication
@@ -66,11 +66,11 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			Class<?> class1) throws Exception {
 		return loadAndInfer(class1, false);
 	}
-	
+
 	/**
 	 * Automagically load the model file (.iaml) for this given
 	 * test class.
-	 * 
+	 *
 	 * @see #loadAndCodegen(String)
 	 * @param class1 The test class to load a model for.
 	 * @param logRuleSource Log the rule source of inserted elements.
@@ -80,7 +80,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			Class<?> class1, boolean logRuleSource) throws Exception {
 		return loadAndInfer(ROOT + "inference/" + class1.getSimpleName() + ".iaml", logRuleSource);
 	}
-	
+
 	/**
 	 * Load a model file and perform inference on it.
 	 *
@@ -93,17 +93,17 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		EObject model = loadModelDirectly(modelFile);
 		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
 		assertNotNull(model);
-		
+
 		InternetApplication root = (InternetApplication) model;
-		
+
 		// we now try to do inference
 		ICreateElements handler = new EcoreInferenceHandler(resource);
 		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
 		ce.create(root, logRuleSource);
-		
+
 		// write out this inferred model for reference
-		inferredModel = saveInferredModel();	
-		
+		inferredModel = saveInferredModel();
+
 		return root;
 	}
 
@@ -112,7 +112,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * Assumes that it will only contain one element (and tests this with JUnit).
 	 */
 	protected EObject loadModelDirectly(String filename) {
-		ResourceSet resourceSet = new ResourceSetImpl(); 
+		ResourceSet resourceSet = new ResourceSetImpl();
 		URI uri = URI.createFileURI(filename);
 		resource = resourceSet.getResource(uri, true);
 		assertNotNull(resource);
@@ -122,7 +122,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 
 	/**
 	 * Perform an XPath-like query on an EMF object
-	 * 
+	 *
 	 * @param root
 	 * @param query
 	 * @return
@@ -131,7 +131,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	public static List<?> query(final EObject root, String query) throws JaxenException {
 		EMFXPath xpath = new EMFXPath(query);
 		xpath.addNamespace("iaml", ModelPackage.eNS_URI);
-		xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);
+		// xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);
 		xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		return xpath.selectNodes(root);
 	}
@@ -141,7 +141,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @param obj
 	 */
 	protected void dump(List<Object> obj) {
-		for (Object o : obj) 
+		for (Object o : obj)
 			EMFXPath.dump(o, System.out);
 		System.out.println("-");
 	}
@@ -153,15 +153,15 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	protected void dump(Object o) {
 		EMFXPath.dump(o, System.out);
 	}
-	
+
 	/**
 	 * Helper method: perform a query, but assert that there is only
 	 * one result returned, and it is of type EObject
-	 * 
+	 *
 	 * @param root
 	 * @param query
 	 * @return
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	protected EObject queryOne(EObject root, String query) throws JaxenException {
 		List<?> q = query(root, query);
@@ -171,7 +171,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 
 	/**
 	 * Save the changed, inferred model to a file for later reference.
-	 * 
+	 *
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @returns the generated model file
@@ -188,12 +188,12 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	/**
 	 * It's not possible to do something like //iaml:wire[iaml:from='id']
 	 * so we need to parse them manually?
-	 * 
+	 *
 	 * @param container
 	 * @param fromElement
 	 * @param wireName
 	 * @return the wire found or null
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	protected WireEdge getWireFrom(EObject container, EObject fromElement,
 			String wireName) throws JaxenException {
@@ -202,7 +202,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			if (o instanceof WireEdge && ((WireEdge) o).getFrom().equals(fromElement))
 				return (WireEdge) o;
 		}
-		
+
 		fail("no wire found");
 		return null;
 	}
@@ -210,12 +210,12 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	/**
 	 * It's not possible to do something like //iaml:wire[iaml:from='id']
 	 * so we need to parse them manually.
-	 * 
+	 *
 	 * @param container
 	 * @param fromElement
 	 * @param toElement
 	 * @return the wire found or null
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	protected WireEdge getWireFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
 		List<?> wires = query(container, "//iaml:wires");
@@ -226,7 +226,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 					return w;
 			}
 		}
-		
+
 		fail("No wire found from [" + fromElement + "] to [" + toElement + "]");
 		return null;
 	}
@@ -234,12 +234,12 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	/**
 	 * It's not possible to do something like //iaml:wire[iaml:from='id']
 	 * so we need to parse them manually.
-	 * 
+	 *
 	 * @param container
 	 * @param fromElement
 	 * @param toElement
 	 * @return the wire found or throws an exception
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	protected Set<WireEdge> getWiresFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
 		Set<WireEdge> results = new HashSet<WireEdge>();
@@ -252,8 +252,8 @@ public abstract class InferenceTestCase extends ModelTestCase {
 				}
 			}
 		}
-		
-		if (results.isEmpty()) {		
+
+		if (results.isEmpty()) {
 			fail("No wires found between [" + fromElement + "] and [" + toElement + "]");
 		}
 
@@ -263,11 +263,11 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	/**
 	 * It's not possible to do something like //iaml:wire[iaml:from='id']
 	 * so we need to parse them manually.
-	 * 
+	 *
 	 * @param container
 	 * @param toElement
 	 * @return the wire found or null
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	protected Set<WireEdge> getWiresTo(EObject container, WireEdgeDestination toElement) throws JaxenException {
 		Set<WireEdge> results = new HashSet<WireEdge>();
@@ -280,8 +280,8 @@ public abstract class InferenceTestCase extends ModelTestCase {
 				}
 			}
 		}
-		
-		if (results.isEmpty()) {		
+
+		if (results.isEmpty()) {
 			fail("No wires found ti [" + toElement + "]");
 		}
 
@@ -290,12 +290,12 @@ public abstract class InferenceTestCase extends ModelTestCase {
 
 	/**
 	 * For bidirectional wires.
-	 * 
+	 *
 	 * @param container
 	 * @param element1
 	 * @param element2
 	 * @return the wire found or null
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	protected WireEdge getWireBidirectional(EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
 		List<?> wires = query(container, "//iaml:wires");
@@ -308,19 +308,19 @@ public abstract class InferenceTestCase extends ModelTestCase {
 					return w;
 			}
 		}
-		
+
 		fail("No wire found between [" + element1 + "] and [" + element2 + "]");
 		return null;
 	}
-	
+
 	/**
 	 * It's not possible to do something like //iaml:wire[iaml:from='id']
 	 * so we need to parse them manually?
-	 * 
+	 *
 	 * @param container
 	 * @param fromElement
 	 * @return the wire found or null
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	protected WireEdge getWireFrom(EObject container, EObject fromElement) throws JaxenException {
 		List<?> wires = query(container, "//iaml:wires");
@@ -331,18 +331,18 @@ public abstract class InferenceTestCase extends ModelTestCase {
 					return w;
 			}
 		}
-		
+
 		fail("no wire found");
 		return null;
 	}
-	
+
 	/**
 	 * Get the "safe name" of the given element.
-	 * 
+	 *
 	 * TODO add a test case that makes sure this method is synchronised
 	 * with the one in the codegen extensions. OR add the safeName()
 	 * method to all elements in the model.
-	 * 
+	 *
 	 * @param e
 	 * @return
 	 */
@@ -352,11 +352,11 @@ public abstract class InferenceTestCase extends ModelTestCase {
 
 	/**
 	 * Get the file representing the saved post-inference model.
-	 * 
+	 *
 	 * @return
 	 */
 	public File getInferredModel() {
 		return inferredModel;
 	}
-	
+
 }

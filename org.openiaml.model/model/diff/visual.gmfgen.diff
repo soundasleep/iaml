@@ -1,6 +1,6 @@
---- visual.gmfgen	2009-05-06 18:16:41.906375000 +1200
-+++ copies/visual.gmfgen	2009-05-06 18:16:08.281375000 +1200
-@@ -209,6 +209,11 @@
+--- visual.gmfgen	2009-05-08 16:19:59.088393200 +1200
++++ copies/visual.gmfgen	2009-05-08 16:19:20.462898800 +1200
+@@ -207,6 +207,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -12,7 +12,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -253,6 +258,11 @@
+@@ -251,6 +256,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -24,7 +24,7 @@
        </labels>
      </topLevelNodes>
      <topLevelNodes
-@@ -350,6 +360,11 @@
+@@ -347,6 +357,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -36,7 +36,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainObject"/>
-@@ -395,6 +410,11 @@
+@@ -389,6 +404,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -48,7 +48,7 @@
        </labels>
      </topLevelNodes>
      <topLevelNodes
-@@ -418,6 +438,11 @@
+@@ -412,6 +432,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -60,7 +60,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainAttribute"/>
-@@ -463,6 +488,11 @@
+@@ -454,6 +479,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -72,7 +72,7 @@
        </labels>
      </topLevelNodes>
      <topLevelNodes
-@@ -558,6 +588,11 @@
+@@ -548,6 +578,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -84,7 +84,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/visual/Page"/>
-@@ -611,6 +646,11 @@
+@@ -601,6 +636,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -96,7 +96,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/visual/InputForm"/>
-@@ -656,6 +696,11 @@
+@@ -645,6 +685,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -108,7 +108,7 @@
        </labels>
      </topLevelNodes>
      <topLevelNodes
-@@ -682,6 +727,11 @@
+@@ -671,6 +716,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -120,7 +120,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/visual/InputTextField"/>
-@@ -727,6 +777,11 @@
+@@ -715,6 +765,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -132,7 +132,7 @@
        </labels>
      </topLevelNodes>
      <topLevelNodes
-@@ -824,6 +879,11 @@
+@@ -812,6 +867,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -144,19 +144,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/scopes/Session"/>
-@@ -950,6 +1010,11 @@
-         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-       </viewmap>
-+      <behaviour
-+          xsi:type="gmfgen:OpenDiagramBehaviour"
-+          editPolicyClassName="FileDomainObjectOpenDiagramEditPolicy"
-+          diagramKind="Iaml_FileDomainObject"
-+          editorID="org.openiaml.model.model.diagram.file_domain_object.part.IamlDiagramEditorID"/>
-       <modelFacet>
-         <metaClass
-             href="iaml.genmodel#//model/domain/FileDomainObject"/>
-@@ -1050,6 +1115,11 @@
+@@ -935,6 +995,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -168,7 +156,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeCondition"/>
-@@ -1096,6 +1166,11 @@
+@@ -980,6 +1045,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -180,7 +168,7 @@
        </labels>
      </topLevelNodes>
      <topLevelNodes
-@@ -1122,6 +1197,11 @@
+@@ -1006,6 +1076,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -192,7 +180,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainObjectInstance"/>
-@@ -1172,6 +1252,11 @@
+@@ -1056,6 +1131,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -204,7 +192,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/DomainAttributeInstance"/>
-@@ -1194,6 +1279,11 @@
+@@ -1078,6 +1158,11 @@
              xsi:type="gmfgen:ParentAssignedViewmap"
              getterName="getFigureDomainAttributeInstanceNameFigure"
              figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
@@ -216,7 +204,7 @@
          <modelFacet
              xsi:type="gmfgen:FeatureLabelModelFacet">
            <metaFeatures
-@@ -1225,6 +1315,11 @@
+@@ -1109,6 +1194,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -228,7 +216,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/visual/Button"/>
-@@ -1270,6 +1365,11 @@
+@@ -1153,6 +1243,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -240,7 +228,7 @@
        </labels>
      </topLevelNodes>
      <links
-@@ -1291,6 +1391,11 @@
+@@ -1174,6 +1269,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -252,7 +240,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1348,6 +1453,11 @@
+@@ -1231,6 +1331,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -264,7 +252,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1436,10 +1546,15 @@
+@@ -1319,10 +1424,15 @@
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
            className="SelectWireFigure"
@@ -281,7 +269,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1515,10 +1630,15 @@
+@@ -1398,10 +1508,15 @@
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
            className="SetWireFigure"
@@ -298,7 +286,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1576,6 +1696,11 @@
+@@ -1459,6 +1574,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -310,7 +298,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1633,6 +1758,11 @@
+@@ -1516,6 +1636,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -322,7 +310,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1690,6 +1820,11 @@
+@@ -1573,6 +1698,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>
@@ -334,7 +322,7 @@
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet">
          <metaClass
-@@ -1747,6 +1882,11 @@
+@@ -1630,6 +1760,11 @@
          <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
        </viewmap>

@@ -166,8 +166,16 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 	
 	/**
 	 * What file do we want to migrate the model to?
+	 * By default, this takes the value from {@link #getModel()}
+	 * and appends "-migrated", i.e. "foo.iaml" becomes
+	 * "foo-migrated".
+	 * 
 	 * @return
 	 */
-	public abstract String getModelMigrated();
+	public String getModelMigrated() {
+		String file = getModel().replace(".iaml", "-migrated.iaml");
+		assertNotSame(file, getModel());	// sanity check
+		return file;
+	}
 
 }

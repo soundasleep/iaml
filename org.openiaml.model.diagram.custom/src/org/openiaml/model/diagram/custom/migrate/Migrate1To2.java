@@ -99,28 +99,6 @@ public class Migrate1To2 extends DomBasedMigrator implements IamlModelMigrator {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#getRenamedNode(java.lang.String, org.w3c.dom.Element, java.util.List)
-	 */
-	@Override
-	public String getRenamedNode(String nodeName, Element element,
-			List<ExpectedMigrationException> errors) {
-		
-		// does nothing
-		return nodeName;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#handleAttribute(java.lang.String, java.lang.String, org.w3c.dom.Element, java.util.List)
-	 */
-	@Override
-	public String handleAttribute(String name, String value, Element element,
-			List<ExpectedMigrationException> errors) {
-
-		// does nothing		
-		return value;
-	}
-
-	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#replaceType(org.w3c.dom.Element, java.lang.String, java.util.List)
 	 */
 	@Override
@@ -135,17 +113,6 @@ public class Migrate1To2 extends DomBasedMigrator implements IamlModelMigrator {
 
 		return xsiType;
 		
-	}
-
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#shouldDeleteNode(org.w3c.dom.Element, org.w3c.dom.Node, java.util.List)
-	 */
-	@Override
-	public boolean shouldDeleteNode(Element element, Node parent,
-			List<ExpectedMigrationException> errors) {
-
-		// does nothing		
-		return false;
 	}
 
 	/* (non-Javadoc)
@@ -183,7 +150,5 @@ public class Migrate1To2 extends DomBasedMigrator implements IamlModelMigrator {
 	protected Element createElement(Document document, String nodeName) {
 		return document.createElementNS("http://openiaml.org/model0.2", nodeName);
 	}
-	
-	
 	
 }

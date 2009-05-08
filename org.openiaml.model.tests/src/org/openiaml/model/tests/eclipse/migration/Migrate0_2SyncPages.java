@@ -112,10 +112,6 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		return "codegen-sync-pages-0_2.iaml";
 	}
 	
-	public String getModelMigrated() {
-		return "codegen-sync-pages-0_2-migrated.iaml";
-	}
-
 	/*
 	 * We don't expect there to be any warnings, so we
 	 * don't override {@link #assertStatusOK(IStatus)}.

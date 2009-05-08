@@ -143,12 +143,6 @@ model::scopes::Session containingSession(model::scopes::Session this) :
 model::scopes::Session containingSession(model::InternetApplication this) :
 	null;
 
-/** find the FileDomainStore for a given FileDomainAttribute */
-model::domain::FileDomainStore getFileDomainStore(model::domain::FileDomainAttribute this) :
-	getFileDomainObject(this).eContainer;
-model::domain::FileDomainObject getFileDomainObject(model::domain::FileDomainAttribute this) :
-	eContainer;
-
 model::DomainStore getDomainStore(model::DomainStore this) :
 	this;
 model::DomainStore getDomainStore(model::DomainObject this) :
@@ -180,8 +174,8 @@ getOperationName(emf::EObject this) :
 	
 isVisibleThing(emf::EObject this) :
 	model::VisibleThing.isInstance(this);
-isAbstractDomainAttribute(emf::EObject this) :
-	model::domain::AbstractDomainAttribute.isInstance(this);	
+isDomainAttribute(emf::EObject this) :
+	model::DomainAttribute.isInstance(this);	
 isDomainAttributeInstance(emf::EObject this) :
 	model::DomainAttributeInstance.isInstance(this);	
 isSession(emf::EObject this) :
@@ -190,6 +184,9 @@ isPage(emf::EObject this) :
 	model::visual::Page.isInstance(this);	
 isInputTextField(emf::EObject this) :
 	model::visual::InputTextField.isInstance(this);	
+
+isPropertiesFile(model::DomainStore store) :
+	store != null && store.type != null && store.type.toString() == "PROPERTIES_FILE";
 
 /* get failed/passed out edges from a given DecisionCondition */
 getFailEdges(model::operations::DecisionCondition this):

@@ -13,7 +13,7 @@
     </children>
     <attributes xsi:type="iaml:DomainAttribute" id="model.1211dec6fa1.64" name="normal domain attribute"/>
   </domainStores>
-  <domainStores xsi:type="iaml.domain:FileDomainStore" id="domain.1211dec6fff.2" name="file domain store">
+  <domainStores xsi:type="iaml.domain:FileDomainStore" id="domain.1211dec6fff.2" name="file domain store" file="test1.properties">
     <children xsi:type="iaml.domain:FileDomainObject" id="domain.1211dec6fff.44" name="file domain object">
       <attributes xsi:type="iaml.domain:FileDomainAttribute" id="domain.1211dec6fff.74" name="another fda"/>
     </children>

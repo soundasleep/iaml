@@ -48,7 +48,7 @@ end
 
 rule "Create field value for domain attribute"
 	when
-		f : AbstractDomainAttribute( overridden == false )
+		f : DomainAttribute( overridden == false )
 		not (ApplicationElementProperty( eContainer == f, name=="fieldValue" ))
 			
 	then
@@ -61,8 +61,8 @@ end
 rule "Empty forms connected by SyncWires create sync'd elements automatically"
 	when
 		form : InputForm( overridden == false )
-		domain : AbstractDomainObject( )
-		attribute : AbstractDomainAttribute( eContainer == domain, attributeName : name )
+		domain : DomainObject( )
+		attribute : DomainAttribute( eContainer == domain, attributeName : name )
 		wire : SyncWire( overridden == false, from == form, to == domain )
 		not (VisibleThing( eContainer == form, name == attributeName ))
 		not (SyncWire( from == attribute, to != null, to.eContainer == form ))

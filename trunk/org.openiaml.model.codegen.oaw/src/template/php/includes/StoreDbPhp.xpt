@@ -111,7 +111,7 @@ echo "ok";
 /** 
  * Expand out each DomainStore.
  */
-«DEFINE expandDomainStore FOR model::domain::AbstractDomainStore»
+«DEFINE expandDomainStore FOR model::DomainStore»
 	/* Domain Store «this.name» */ 
 	«EXPAND expandDomainObject(this) FOREACH children»
 	
@@ -122,18 +122,22 @@ echo "ok";
 /**
  * Expand out each DomainObject.
  */
-«DEFINE expandDomainObject(model::domain::AbstractDomainStore store) FOR model::domain::AbstractDomainObject»
+«DEFINE expandDomainObject(model::DomainStore store) FOR model::DomainObject»
 	«EXPAND expandDomainAttribute(store, this) FOREACH attributes»
 «ENDDEFINE»
 
 /**
  * Expand out each DomainAttribute.
  */
-«DEFINE expandDomainAttribute(model::domain::AbstractDomainStore store, model::domain::AbstractDomainObject object) FOR model::domain::AbstractDomainAttribute»
-	«EXPAND exception FOR throwException("Cannot expand AbstractDomainAttribute " + this + " (store=" + store + ") (object=" + object + ")")»
+«DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
+	«IF isPropertiesFile(store)»
+		«EXPAND expandDomainAttributeProperties(store, object) FOR this»
+	«ELSE»
+		«EXPAND expandDomainAttributeDatabase(store, object) FOR this»
+	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
+«DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		$db_name = "sqlite:«safeNameString(store.id)».db";
@@ -146,7 +150,7 @@ echo "ok";
 	}
 «ENDDEFINE»
 
-«DEFINE expandDomainAttribute(model::domain::FileDomainStore store, model::domain::FileDomainObject object) FOR model::domain::FileDomainAttribute»
+«DEFINE expandDomainAttributeProperties(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";
@@ -162,11 +166,15 @@ echo "ok";
 /**
  * Expand out each solo DomainAttribute.
  */
-«DEFINE soleAttribute(model::domain::AbstractDomainStore store) FOR model::domain::AbstractDomainAttribute»
-	«EXPAND exception FOR throwException("Cannot expand AbstractDomainAttribute " + this + " (store=" + store + ")")»
+«DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute»
+	«IF isPropertiesFile(store)»
+		«EXPAND soleAttributeProperties(store) FOR this»
+	«ELSE»
+		«EXPAND soleAttributeDatabase(store) FOR this»
+	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute»
+«DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		$db_name = "sqlite:«safeNameString(store.id)».db";
@@ -179,7 +187,7 @@ echo "ok";
 	}
 «ENDDEFINE»
 
-«DEFINE soleAttribute(model::domain::FileDomainStore store) FOR model::domain::FileDomainAttribute»
+«DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";
@@ -198,15 +206,19 @@ echo "ok";
 	«REM»empty«ENDREM»
 «ENDDEFINE»
 
-«DEFINE expandDomainObjectRoot FOR model::domain::AbstractDomainObject»
+«DEFINE expandDomainObjectRoot FOR model::DomainObject»
 	«EXPAND expandDomainAttributeRoot(this) FOREACH attributes»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttributeRoot(model::domain::AbstractDomainObject object) FOR model::domain::AbstractDomainAttribute»
-	«EXPAND exception FOR throwException("Cannot expand expandDomainAttributeRoot " + this + " (object=" + object + ")")»
+«DEFINE expandDomainAttributeRoot(model::DomainObject object) FOR model::DomainAttribute»
+	«IF isPropertiesFile(getDomainStore(this))»
+		«EXPAND expandDomainAttributeRootProperties(object) FOR this»
+	«ELSE»
+		«EXPAND expandDomainAttributeRootDatabase(object) FOR this»
+	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttributeRoot(model::DomainObject object) FOR model::DomainAttribute»
+«DEFINE expandDomainAttributeRootDatabase(model::DomainObject object) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		$db_name = "sqlite:internet_application.db";
@@ -219,7 +231,7 @@ echo "ok";
 	}
 «ENDDEFINE»
 
-«DEFINE expandDomainAttributeRoot(model::domain::FileDomainObject object) FOR model::domain::FileDomainAttribute»
+«DEFINE expandDomainAttributeRootProperties(model::DomainObject object) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "internet_application.properties";

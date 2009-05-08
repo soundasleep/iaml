@@ -3,6 +3,7 @@ package org.openiaml.model.tests.codegen;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.openiaml.model.tests.codegen.oaw.ChecksTest;
 import org.openiaml.model.tests.codegen.oaw.OawTestsSuite;
 
 /**
@@ -21,6 +22,9 @@ public class CodegenTestsSuite {
 	public static Test suite() { 
 		TestSuite suite = new TestSuite("Code Generation");
 		
+		// make sure we can catch exceptions
+        suite.addTestSuite(TestExceptionHandling.class);
+
 		// OAW-specific tests
 		suite.addTest(OawTestsSuite.suite());
 

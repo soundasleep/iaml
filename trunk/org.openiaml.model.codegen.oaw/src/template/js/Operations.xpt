@@ -91,7 +91,7 @@
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 			«ENDREM»
 		«ENDIF-»
-	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
+	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
@@ -189,16 +189,24 @@
 	null
 «ENDDEFINE»
 
-«DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::domain::FileDomainAttribute»
+«DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::DomainAttribute»
+	«IF isPropertiesFile(getDomainStore(this))»
+		«EXPAND remoteParameterSourceProperties(require, wire, inline, property) FOR this»
+	«ELSE»
+		«EXPAND remoteParameterSourceDatabase(require, wire, inline, property) FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE remoteParameterSourceProperties(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::DomainAttribute»
 	<?php 
 		// remote parameter source from a .properties file
 		$db_type = "FileDomainObject";
-		«IF model::domain::FileDomainStore.isInstance(getFileDomainStore(this))»
-			$db_name = "«getFileDomainStore(this).file-»";
-		«ELSEIF model::InternetApplication.isInstance(getFileDomainStore(this))»
+		«IF model::DomainStore.isInstance(getDomainStore(this))»
+			$db_name = "«getDomainStore(this).file-»";
+		«ELSEIF model::InternetApplication.isInstance(getDomainStore(this))»
 			$db_name = "internet_application.properties";
 		«ELSE»
-			«EXPAND exception FOR throwException("Remote parameter source '" + getFileDomainStore(this) + "' was not a FileDomainStore.")»
+			«EXPAND exception FOR throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore or InternetApplication.")»
 		«ENDIF»
 		$row_name = "«safeNameString(this.name)-»";
 		$properties = load_properties($db_name);
@@ -217,7 +225,7 @@
 	?>
 «ENDDEFINE» 
 
-«DEFINE remoteParameterSource(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::DomainAttribute»
+«DEFINE remoteParameterSourceDatabase(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::DomainAttribute»
 	<?php 
 		// remote parameter source from a database file
 		$db_type = "DomainObject";
@@ -401,7 +409,7 @@
 				// set server/session variables too
 				«EXPAND template::Page::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
 			}
-		«ELSEIF isAbstractDomainAttribute(outFlows.first().to.eContainer)-»
+		«ELSEIF isDomainAttribute(outFlows.first().to.eContainer)-»
 			«REM»direct field --> domain attribute«ENDREM»
 			var value = «EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»;
 			if (value !== null) {

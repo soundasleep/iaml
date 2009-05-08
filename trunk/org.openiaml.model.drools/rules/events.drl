@@ -27,9 +27,9 @@ rule "Create 'edit' event trigger for input text field"
 		
 end
 
-rule "Create 'edit' event trigger for abstract domain attribute"
+rule "Create 'edit' event trigger for domain attribute"
 	when
-		f : AbstractDomainAttribute( overridden == false )
+		f : DomainAttribute( overridden == false )
 		not (EventTrigger( eContainer == f, name=="edit" ))
 			
 	then

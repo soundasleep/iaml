@@ -362,7 +362,7 @@
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 			«ENDREM»
 		«ENDIF-»
-	«ELSEIF isAbstractDomainAttribute(to.eContainer)-»
+	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			«IF inEdges.size>0», «EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»

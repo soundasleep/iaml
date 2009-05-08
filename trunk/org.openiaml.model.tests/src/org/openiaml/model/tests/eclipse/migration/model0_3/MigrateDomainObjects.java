@@ -142,6 +142,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		DomainStore store = (DomainStore) part.resolveSemanticElement();
 		assertEquals(store.getName(), "file domain store");
 		assertEquals(store.getType(), DomainStoreTypes.PROPERTIES_FILE);
+		assertEquals(store.getFile(), "test1.properties");
 		
 		// open diagram
 		DiagramDocumentEditor sub = openDiagram(part);

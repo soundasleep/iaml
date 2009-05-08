@@ -15,6 +15,7 @@ import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.domain.DomainStoreTypes;
+import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.tests.eclipse.migration.AbstractMigrateTestCase;
 
 /**
@@ -27,6 +28,32 @@ import org.openiaml.model.tests.eclipse.migration.AbstractMigrateTestCase;
 public class MigrateDomainObjects extends AbstractMigrateTestCase {
 
 	protected DiagramDocumentEditor editor_page = null;
+
+	public String getModel() {
+		return "FileDomainObjects.iaml";
+	}
+	
+	/**
+	 * TODO put this into an abstract method to generate 
+	 * migrated names by default
+	 */
+	public String getModelMigrated() {
+		return "FileDomainObjects-migrated.iaml";
+	}
+
+	/**
+	 * We override this because we are in a sub-folder of the
+	 * main migrate tests.
+	 */
+	@Override
+	public String getSourceModel() {
+		return "model0_3/" + getModel();
+	}
+	
+	/*
+	 * We don't expect there to be any warnings, so we
+	 * don't override {@link #assertStatusOK(IStatus)}.
+	 */
 	
 	/**
 	 * Test to see which migrators were actually used.
@@ -100,31 +127,173 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		
 		sub.close(false);
 	}
-	
-	public String getModel() {
-		return "FileDomainObjects.iaml";
-	}
-	
-	/**
-	 * TODO put this into an abstract method to generate 
-	 * migrated names by default
-	 */
-	public String getModelMigrated() {
-		return "FileDomainObjects-migrated.iaml";
-	}
 
 	/**
-	 * We override this because we are in a sub-folder of the
-	 * main migrate tests.
+	 * Test the file domain store sub-editor.
+	 * 
+	 * @throws Exception
 	 */
-	@Override
-	public String getSourceModel() {
-		return "model0_3/" + getModel();
+	public void testFileDomainStore() throws Exception {
+		migrateModel();
+		
+		ShapeNodeEditPart part = assertHasDomainStore(editor, "file domain store");
+		assertNotNull(part);
+		
+		DomainStore store = (DomainStore) part.resolveSemanticElement();
+		assertEquals(store.getName(), "file domain store");
+		assertEquals(store.getType(), DomainStoreTypes.PROPERTIES_FILE);
+		
+		// open diagram
+		DiagramDocumentEditor sub = openDiagram(part);
+		assertEditorDomainStore(sub);
+		
+		// check contents
+		assertChildren(2, sub);
+		{
+			ShapeNodeEditPart p = assertHasDomainObject(sub, "file domain object");
+			assertNotNull(p);
+			
+			DomainObject obj = (DomainObject) p.resolveSemanticElement();
+			assertEquals(obj.getName(), "file domain object");
+		}
+		{
+			ShapeNodeEditPart p = assertHasDomainAttribute(sub, "file domain attribute");
+			assertNotNull(p);
+			
+			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
+			assertEquals(obj.getName(), "file domain attribute");
+		}
+		
+		sub.close(false);
 	}
 	
-	/*
-	 * We don't expect there to be any warnings, so we
-	 * don't override {@link #assertStatusOK(IStatus)}.
+
+	/**
+	 * Test the page sub-editor.
+	 * 
+	 * @throws Exception
 	 */
+	public void testPage() throws Exception {
+		migrateModel();
+		
+		ShapeNodeEditPart part = assertHasPage(editor, "a page");
+		assertNotNull(part);
+		
+		Page page = (Page) part.resolveSemanticElement();
+		assertEquals(page.getName(), "a page");
+		
+		// open diagram
+		DiagramDocumentEditor sub = openDiagram(part);
+		assertEditorVisual(sub);
+		
+		// check contents
+		assertChildren(4, sub);
+		{
+			ShapeNodeEditPart p = assertHasDomainObject(sub, "do");
+			assertNotNull(p);
+			
+			DomainObject obj = (DomainObject) p.resolveSemanticElement();
+			assertEquals(obj.getName(), "do");
+		}
+		{
+			ShapeNodeEditPart p = assertHasDomainAttribute(sub, "da");
+			assertNotNull(p);
+			
+			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
+			assertEquals(obj.getName(), "da");
+		}
+		{
+			ShapeNodeEditPart p = assertHasDomainObject(sub, "fo");
+			assertNotNull(p);
+			
+			DomainObject obj = (DomainObject) p.resolveSemanticElement();
+			assertEquals(obj.getName(), "fo");
+		}
+		{
+			ShapeNodeEditPart p = assertHasDomainAttribute(sub, "fa");
+			assertNotNull(p);
+			
+			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
+			assertEquals(obj.getName(), "fa");
+		}
+		
+		sub.close(false);
+	}
+	
+	/**
+	 * Test the domain store sub-editor, and then the domain
+	 * object sub-editor.
+	 * 
+	 * @throws Exception
+	 */
+	public void testNormalDomainStoreObject() throws Exception {
+		migrateModel();
+		
+		ShapeNodeEditPart part = assertHasDomainStore(editor, "normal domain store");
+		assertNotNull(part);
+		
+		// open diagram
+		DiagramDocumentEditor sub = openDiagram(part);
+		assertEditorDomainStore(sub);
+		
+		// check contents
+		ShapeNodeEditPart p2 = assertHasDomainObject(sub, "normal domain object");
+		assertNotNull(p2);
+		
+		// open diagram
+		DiagramDocumentEditor sub2 = openDiagram(p2);
+		assertEditorDomainObject(sub2);
+		
+		// check contents
+		assertChildren(1, sub2);
+		{
+			ShapeNodeEditPart p = assertHasDomainAttribute(sub2, "another normal attribute");
+			assertNotNull(p);
+			
+			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
+			assertEquals(obj.getName(), "another normal attribute");
+		}
+		
+		sub2.close(false);
+		sub.close(false);
+	}
+	
+	/**
+	 * Test the file store sub-editor, and then the file
+	 * object sub-editor.
+	 * 
+	 * @throws Exception
+	 */
+	public void testFileDomainStoreObject() throws Exception {
+		migrateModel();
+		
+		ShapeNodeEditPart part = assertHasDomainStore(editor, "file domain store");
+		assertNotNull(part);
+		
+		// open diagram
+		DiagramDocumentEditor sub = openDiagram(part);
+		assertEditorDomainStore(sub);
+		
+		// check contents
+		ShapeNodeEditPart p2 = assertHasDomainObject(sub, "file domain object");
+		assertNotNull(p2);
+		
+		// open diagram
+		DiagramDocumentEditor sub2 = openDiagram(p2);
+		assertEditorDomainObject(sub2);
+		
+		// check contents
+		assertChildren(1, sub2);
+		{
+			ShapeNodeEditPart p = assertHasDomainAttribute(sub2, "another fda");
+			assertNotNull(p);
+			
+			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
+			assertEquals(obj.getName(), "another fda");
+		}
+		
+		sub2.close(false);
+		sub.close(false);
+	}
 	
 }

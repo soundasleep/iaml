@@ -105,10 +105,6 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 	public String getModel() {
 		return "signup-form-0_1.iaml";
 	}
-	
-	public String getModelMigrated() {
-		return "signup-form-0_1-migrated.iaml";
-	}
 
 	/**
 	 * We actually expect there to be some warnings.

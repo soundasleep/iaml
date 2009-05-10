@@ -5,7 +5,9 @@ package org.openiaml.model.tests.release;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
 import org.w3c.dom.Document;
@@ -22,21 +24,6 @@ public class GmfToolTestCase extends XmlTestCase {
 
 	public static final String XSI_NS = "http://www.w3.org/2001/XMLSchema-instance";
 
-	public static final String GMF_ROOT = "../org.openiaml.model/model/";
-	/**
-	 * All .gmfgen files in this project.
-	 */
-	public static final String[] GMFTOOLS = new String[] { 
-		GMF_ROOT + "domain_object.gmftool",
-		GMF_ROOT + "domain_store.gmftool",
-		GMF_ROOT + "element.gmftool",
-		GMF_ROOT + "file_domain_object.gmftool",
-		GMF_ROOT + "file_domain_store.gmftool",
-		GMF_ROOT + "operation.gmftool",
-		GMF_ROOT + "root.gmftool",
-		GMF_ROOT + "visual.gmftool",
-		GMF_ROOT + "wire.gmftool",
-	};
 	private Map<String,Document> loadedGmftools = new HashMap<String,Document>(); 
 
 	/**
@@ -47,11 +34,34 @@ public class GmfToolTestCase extends XmlTestCase {
 		super.setUp();
 		
 		// load all .gmftool's
-		for (String gmftool : GMFTOOLS) {
+		for (String gmftool : getGmfTools()) {
 			loadedGmftools.put( gmftool, loadDocument(gmftool) );
 		}
 	}
 	
+	/**
+	 * Create a list of gmftools from {@link PluginsTestCase}.
+	 * 
+	 * @return
+	 */
+	private Set<String> getGmfTools() {
+		Set<String> tools = new HashSet<String>();
+		for (String gmfgen : PluginsTestCase.GMFGENS) {
+			tools.add(gmfgen.replace(".gmfgen", ".gmftool"));
+		}
+		return tools;
+	}
+
+	/**
+	 * There should be the same number of tools specified here
+	 * as in {@link PluginsTestCase}.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGmfToolMatch() throws Exception {
+		assertEquals(getGmfTools().size(), PluginsTestCase.GMFGENS.length);
+	}
+
 	/**
 	 * Check .gmftools for icons. If the .gmftool does not
 	 * specify an icon, one is specified automatically, and the

@@ -32,8 +32,6 @@
     <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
     <containsShortcutsTo>iaml_operation</containsShortcutsTo>
     <containsShortcutsTo>iaml_element</containsShortcutsTo>
-    <containsShortcutsTo>iaml_file_domain_store</containsShortcutsTo>
-    <containsShortcutsTo>iaml_file_domain_object</containsShortcutsTo>
     <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
     <containsShortcutsTo>iaml_condition</containsShortcutsTo>
     <containsShortcutsTo>iaml_domain_object_instance</containsShortcutsTo>
@@ -43,8 +41,6 @@
     <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_file_domain_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_file_domain_object</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>

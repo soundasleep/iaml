@@ -33,6 +33,7 @@
     <containsShortcutsTo>iaml_element</containsShortcutsTo>
     <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
     <containsShortcutsTo>iaml_condition</containsShortcutsTo>
+    <containsShortcutsTo>iaml_domain_object_instance</containsShortcutsTo>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
@@ -41,6 +42,7 @@
     <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
     <domainDiagramElement
         href="iaml.genmodel#//model/CompositeCondition"/>
     <topLevelNodes

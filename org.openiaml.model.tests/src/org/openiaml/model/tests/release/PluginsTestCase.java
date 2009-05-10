@@ -30,11 +30,11 @@ public class PluginsTestCase extends XmlTestCase {
 	 * All .gmfgen files in this project.
 	 */
 	public static final String[] GMFGENS = new String[] { 
+		GMF_ROOT + "condition.gmfgen",
 		GMF_ROOT + "domain_object.gmfgen",
+		GMF_ROOT + "domain_object_instance.gmfgen",
 		GMF_ROOT + "domain_store.gmfgen",
 		GMF_ROOT + "element.gmfgen",
-		GMF_ROOT + "file_domain_object.gmfgen",
-		GMF_ROOT + "file_domain_store.gmfgen",
 		GMF_ROOT + "operation.gmfgen",
 		GMF_ROOT + "root.gmfgen",
 		GMF_ROOT + "visual.gmfgen",
@@ -51,11 +51,11 @@ public class PluginsTestCase extends XmlTestCase {
 		"org.openiaml.model.codegen.oaw",
 		"org.openiaml.model.diagram",
 		"org.openiaml.model.diagram.custom",
+		"org.openiaml.model.diagram.condition",
 		"org.openiaml.model.diagram.domain_object",
+		"org.openiaml.model.diagram.domain_object_instance",
 		"org.openiaml.model.diagram.domain_store",
 		"org.openiaml.model.diagram.element",
-		"org.openiaml.model.diagram.file_domain_store",
-		"org.openiaml.model.diagram.file_domain_object",
 		"org.openiaml.model.diagram.operation",
 		"org.openiaml.model.diagram.visual",
 		"org.openiaml.model.diagram.wire",
@@ -164,6 +164,17 @@ public class PluginsTestCase extends XmlTestCase {
 			}
 		}
 
+	}
+	
+	/**
+	 * Each different .gmfgen should have a different diagram
+	 * file name, so there should be identical numbers of 
+	 * shortcut names.
+	 * 
+	 * @throws Exception
+	 */
+	public void testCorrectNumberOfShortcuts() throws Exception {
+		assertEquals(shortcuts.size(), GMFGENS.length);
 	}
 	
 	/**

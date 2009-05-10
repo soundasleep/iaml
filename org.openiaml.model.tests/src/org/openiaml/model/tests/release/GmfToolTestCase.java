@@ -22,19 +22,19 @@ import org.w3c.dom.NodeList;
  */
 public class GmfToolTestCase extends XmlTestCase {
 
-	private Map<String,Document> loadedGmftools = new HashMap<String,Document>(); 
-
 	/**
-	 * Load up all the .gmfgen's and MANIFEST.MFs from all of our plugins.
+	 * Load up all the .gmftool's
 	 * 
 	 */
-	public void setUp() throws Exception {
-		super.setUp();
+	public static Map<String,Document> getGmfTools() throws Exception {
+		Map<String,Document> loaded = new HashMap<String,Document>();
 		
 		// load all .gmftool's
-		for (String gmftool : getGmfTools()) {
-			loadedGmftools.put( gmftool, loadDocument(gmftool) );
+		for (String map : getToolList()) {
+			loaded.put( map, loadDocument(map) );
 		}
+		
+		return loaded;
 	}
 	
 	/**
@@ -42,7 +42,7 @@ public class GmfToolTestCase extends XmlTestCase {
 	 * 
 	 * @return
 	 */
-	private Set<String> getGmfTools() {
+	private static Set<String> getToolList() {
 		Set<String> tools = new HashSet<String>();
 		for (String gmfgen : PluginsTestCase.GMFGENS) {
 			tools.add(gmfgen.replace(".gmfgen", ".gmftool"));
@@ -70,9 +70,11 @@ public class GmfToolTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testGmfTools() throws Exception {
-		for (String file : loadedGmftools.keySet()) {
+		Map<String,Document> loaded = getGmfTools();
+		
+		for (String file : loaded.keySet()) {
 			boolean changed = false;
-			Document doc = loadedGmftools.get(file);
+			Document doc = loaded.get(file);
 			NodeList nl = xpath(doc, "//palette/tools");
 			
 			assertEquals("There should be exactly one //tools entry", nl.getLength(), 1);

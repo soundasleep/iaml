@@ -283,15 +283,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="LoginHandlerKey"
-          description="Create new LoginHandlerKey">
+          title="LoginHandler"
+          description="Create new LoginHandler">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/LoginHandlerKey.gif"
+            path="icons/full/obj16/LoginHandler.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/LoginHandlerKey.gif"
+            path="icons/full/obj32/LoginHandler.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

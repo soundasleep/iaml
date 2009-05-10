@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.release;
 
+import java.util.Map;
+
 import org.openiaml.model.tests.XmlTestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -145,5 +147,32 @@ public class ParentNamesTestCase extends XmlTestCase {
 			assertEquals(label.getAttribute("elementIcon"), "false");
 		}
 	}
+	
+	/**
+	 * All ParentName mappings in .gmfmaps are read-only.
+	 * 
+	 * @throws Exception
+	 */
+	public void testMappingReadOnly() throws Exception {
+		for (String filename : getGmfMaps().keySet()) {
+			Document doc = getGmfMaps().get(filename);
+
+			IterableNodeList nodes = xpath(doc, "/Mapping/nodes/ownedChild/labelMappings/diagramLabel[contains(@href, 'ParentName')]");
+			for (Element node : nodes) {
+				Element parent = (Element) node.getParentNode();
+				assertEquals(filename + ": ParentName '" + node + "' must be read-only.", parent.getAttribute("readOnly"), "true");
+			}
+		}
+
+	}
+
+	/**
+	 * Loads the gmfmaps from {@link GmfMapTestCase}.
+	 */
+	public Map<String,Document> getGmfMaps() throws Exception {
+		return GmfMapTestCase.getGmfMaps();
+	}
+	
+	
 	
 }

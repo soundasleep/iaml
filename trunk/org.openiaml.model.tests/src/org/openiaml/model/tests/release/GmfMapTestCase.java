@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.AssertionFailedError;
-
 import org.openiaml.model.tests.XmlTestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,7 +27,7 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * Load up all the .gmfmap's
 	 * 
 	 */
-	public Map<String,Document> getGmfMaps() throws Exception {
+	public static Map<String,Document> getGmfMaps() throws Exception {
 		Map<String,Document> loaded = new HashMap<String,Document>();
 		
 		// load all .gmftool's
@@ -54,7 +52,7 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * 
 	 * @return
 	 */
-	private Set<String> getMapList() {
+	private static Set<String> getMapList() {
 		Set<String> tools = new HashSet<String>();
 		for (String gmfgen : PluginsTestCase.GMFGENS) {
 			tools.add(gmfgen.replace(".gmfgen", ".gmfmap"));
@@ -113,7 +111,7 @@ public class GmfMapTestCase extends XmlTestCase {
 				assertFalse(filename + ": OCL '" + ocl + "' already exists for containment '" + containment + "'", loadedContainers.get(containment).contains(ocl));
 				
 				// no existing OCL must be blank (i.e. an empty OCL from a previous containment mapping)
-				assertNotEquals(filename + ": containment '" + containment + "' contains a non-constrained previous containment mapping", loadedContainers.get(containment).size(), 0);
+				assertNotEqual(filename + ": containment '" + containment + "' contains a non-constrained previous containment mapping", loadedContainers.get(containment).size(), 0);
 			} else {
 				// add it
 				List<String> newList = new ArrayList<String>();
@@ -188,6 +186,44 @@ public class GmfMapTestCase extends XmlTestCase {
 				// finally, check the tool matches
 				// IF it has a toolnode
 				Element toolNode = (Element) hasXpathFirst(node, "ownedChild/tool");
+				
+				if (toolNode != null) {
+					// visual.gmftool#//@palette/@tools.0/@tools.22
+					String tool = toolNode.getAttribute("href");
+					
+					assertToolMappingMatches(filename, elementName, tool);
+				}
+			}
+			
+			IterableNodeList links = xpath(doc, "/Mapping/links");
+			for (Element link : links) {
+				// all nodes must be contained somewhere
+				Element domainMetaElement = (Element) xpathFirst(link, "domainMetaElement");
+				
+				// iaml.ecore#//EventTrigger
+				String elementName = domainMetaElement.getAttribute("href");
+				
+				IterableNodeList labels = xpath(link, "labelMappings");
+				for (Element label : labels) {
+					Element diagramLabel = (Element) xpathFirst(label, "diagramLabel");
+					
+					// iaml.gmfgraph#EventTriggerName
+					String labelName = diagramLabel.getAttribute("href");
+					
+					assertLabelMappingMatches(filename, elementName, labelName);
+				}
+				
+				// make sure the diagramNode matches too
+				Element diagramNode = (Element) xpathFirst(link, "diagramLink");
+				
+				// iaml.gmfgraph#EventTrigger
+				String dnode = diagramNode.getAttribute("href");
+				
+				assertNodeMappingMatches(filename, elementName, dnode);
+				
+				// finally, check the tool matches
+				// IF it has a toolnode
+				Element toolNode = (Element) hasXpathFirst(link, "tool");
 				
 				if (toolNode != null) {
 					// visual.gmftool#//@palette/@tools.0/@tools.22

@@ -22,8 +22,6 @@ import org.w3c.dom.NodeList;
  */
 public class GmfToolTestCase extends XmlTestCase {
 
-	public static final String XSI_NS = "http://www.w3.org/2001/XMLSchema-instance";
-
 	private Map<String,Document> loadedGmftools = new HashMap<String,Document>(); 
 
 	/**

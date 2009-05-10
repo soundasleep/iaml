@@ -141,7 +141,7 @@
             vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="SimpleOperationNameFigure"
+            name="SingleOperationNameFigure"
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
@@ -574,11 +574,9 @@
             blue="142"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="StartNodeLabelFigure"
+            name="StartNodeLabel"
             text="start"/>
       </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="CancelNodeFigure">
@@ -595,15 +593,13 @@
             blue="142"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="CancelNodeLabelFigure"
+            name="CancelNodeLabel"
             text="cancel"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="CancelNodeTextLabelFigure"
+            name="CancelNodeTextFigure"
             text="&lt;...>"/>
       </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
     </descriptors>
@@ -622,11 +618,9 @@
             blue="179"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="FinishNodeLabelFigure"
+            name="FinishNodeLabel"
             text="finish"/>
       </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DecisionNodeFigure">
@@ -638,7 +632,7 @@
             vertical="true"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="DecisionNodeLabelFigure"
+            name="DecisionNodeNameFigure"
             text="???"/>
       </actualFigure>
       <accessors
@@ -1164,18 +1158,6 @@
       figure="DecisionOperationFigure"
       accessor="//@figures.0/@descriptors.29/@accessors.0"/>
   <labels
-      name="StartNodeName"
-      figure="StartNodeFigure"
-      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
-  <labels
-      name="CancelNodeName"
-      figure="CancelNodeFigure"
-      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
-  <labels
-      name="FinishNodeName"
-      figure="FinishNodeFigure"
-      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
-  <labels
       name="DecisionNodeName"
       figure="DecisionNodeFigure"
       accessor="//@figures.0/@descriptors.28/@accessors.0"/>
@@ -1226,7 +1208,7 @@
   <labels
       name="CancelNodeText"
       figure="CancelNodeFigure"
-      accessor="//@figures.0/@descriptors.26/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
   <labels
       name="CompositeConditionName"
       figure="CompositeConditionFigure"

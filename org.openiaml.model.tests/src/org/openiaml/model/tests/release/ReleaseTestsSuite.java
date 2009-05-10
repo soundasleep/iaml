@@ -22,6 +22,8 @@ public class ReleaseTestsSuite {
         suite.addTestSuite(PluginsTestCase.class);
         suite.addTestSuite(EcoreTestCase.class);
         suite.addTestSuite(GmfToolTestCase.class);
+        suite.addTestSuite(GmfGraphTestCase.class);
+        suite.addTestSuite(ParentNamesTestCase.class);
 		//$JUnit-END$
         return suite; 
    }

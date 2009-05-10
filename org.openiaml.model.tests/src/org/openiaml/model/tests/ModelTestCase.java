@@ -139,13 +139,14 @@ public abstract class ModelTestCase extends WebTestCase {
 			for (IStatus s : transformStatus.getChildren()) {
 				System.err.println(s);		// print out the status errors
 				if (s.getException() != null)
-					throw new RuntimeException("transformation failed", s.getException());	// we will only crash on the first one
+					throw new TransformationException("Transformation failed: " + s.getException().getMessage(), s.getException());	// we will only crash on the first one
 			}
 			
 			if (transformStatus.getException() != null) {
-				throw new RuntimeException("transformation failed", transformStatus.getException());	// force an exception
+				throw new TransformationException("Transformation failed: " + transformStatus.getException().getMessage(), transformStatus.getException());	// force an exception
 			}
-			assertTrue(transformStatus.getMessage(), false);	// force a fail
+			// force a fail
+			throw new TransformationException(transformStatus.getMessage());
 		}
 	}
 	
@@ -319,4 +320,25 @@ public abstract class ModelTestCase extends WebTestCase {
 		}
 	}
 	
+	/**
+	 * An exception has occured while transforming the model.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public class TransformationException extends Exception {
+
+		private static final long serialVersionUID = 1L;
+		
+		public TransformationException(String message, Throwable e) {
+			super(message, e);
+		}
+		public TransformationException(Throwable e) {
+			super(e.getMessage(), e);
+		}
+		public TransformationException(String message) {
+			super(message);
+		}
+		
+	}
 }

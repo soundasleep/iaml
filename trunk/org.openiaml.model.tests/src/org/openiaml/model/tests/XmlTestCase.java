@@ -61,7 +61,20 @@ public class XmlTestCase extends TestCase {
 	 * Get the first node result from an XPath query.
 	 */
 	public Element xpathFirst(Document doc, String query) throws XPathExpressionException {
-		return (Element) xpath(doc, query).item(0);
+		assertNotNull("Cannot find the xpath for a null document", doc);
+		Element e = (Element) xpath(doc, query).item(0);
+		assertNotNull("Could not find result for query '" + query + "'", e);
+		return e;
+	}
+	
+	/**
+	 * Get the first node result from an XPath query.
+	 */
+	public Element xpathFirst(Element e, String query) throws XPathExpressionException {
+		assertNotNull("Cannot find the xpath for a null element", e);
+		Element e2 = (Element) xpath(e, query).item(0);
+		assertNotNull("Could not find result for query '" + query + "'", e2);
+		return e2;
 	}
 	
 	public Document firstDocument(Map<?,Document> map) {

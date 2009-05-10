@@ -27,7 +27,6 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.domain.DomainPackage;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 

@@ -3,8 +3,6 @@
  */
 package org.openiaml.model.tests.codegen.oaw;
 
-import junit.framework.AssertionFailedError;
-
 import org.eclipse.core.runtime.IStatus;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
@@ -36,7 +34,7 @@ public class ChecksTest extends CodegenTestCase {
 		try {
 			root = loadAndCodegen(filename);
 			passed = false;
-		} catch (AssertionFailedError e) {
+		} catch (TransformationException e) {
 			// expected
 		}
 		assertTrue("Code-generation should not pass.", passed);

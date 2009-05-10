@@ -84,10 +84,22 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 	@Override
 	protected void log(int type, Object message, Throwable t) {
 		super.log(type, message, t);
+		
+		/** should we retrieve the original Throwable from OAW?
+		 * OAW mangles up thrown exceptions within code, so we have to
+		 * use a workaround.
+		 * 
+		 * @see {@link org.openiaml.model.codegen.oaw.OawCodeGenerator#throwException(String message)}
+		 */
+		if (type >= LOG_LEVEL_ERROR && t == null && message instanceof String) {			
+			Throwable original = OawCodeGenerator.getExceptionForMessage(message.toString());
+			if (original != null) {
+				t = original;	// replace
+			}
+		}
 
 		// catch any Error (or higher) messages
 		if (type >= LOG_LEVEL_ERROR) {
-			System.out.println("adding error " + message);
 			errors.add(new Status(Status.ERROR, PLUGIN_ID, message.toString(), t));
 		}
 	}

@@ -3,7 +3,6 @@ package org.openiaml.model.tests.codegen;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.openiaml.model.tests.codegen.oaw.ChecksTest;
 import org.openiaml.model.tests.codegen.oaw.OawTestsSuite;
 
 /**

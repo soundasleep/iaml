@@ -21,7 +21,6 @@ import org.openiaml.model.tests.CodegenTestCase;
  *     TextField "current login key"
  *       sync'd with "my login key"
  * 
- * @see TestExceptionHandling.png
  * @author jmwright
  *
  */

@@ -3,9 +3,6 @@
  */
 package org.openiaml.model.tests.codegen;
 
-import junit.framework.AssertionFailedError;
-
-import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
@@ -26,21 +23,35 @@ public class TestExceptionHandling extends CodegenTestCase {
 	}
 
 	/**
-	 * The site should have a login page.
-	 * @throws Exception 
+	 * Make sure that when an exception is thrown, operation halts. 
 	 */
 	public void testExceptionThrowing() throws Exception {
-		// method is done in setUp();
-
 		boolean passed = false;
 		try {
 			root = loadAndCodegen(ROOT + "codegen/ThrowException.iaml");
-		} catch (AssertionFailedError e) {
+		} catch (TransformationException e) {
 			// pass
 			passed = true;
 		}
 		assertTrue("An exception should have been thrown.", passed);
 	}
 
+	/**
+	 * When an exception is thrown, we should be able to read it.
+	 */
+	public void testExceptionInvestgation() throws Exception {
+		TransformationException ex = null;
+		try {
+			root = loadAndCodegen(ROOT + "codegen/ThrowException.iaml");
+		} catch (TransformationException e) {
+			// pass
+			ex = e;
+		}
+		assertNotNull("An exception should have been thrown.", ex);
+
+		assertNotNull(ex.getCause());
+		assertEquals("We should be able to catch this exception.", ex.getCause().getMessage());
+		
+	}
 
 }

@@ -108,7 +108,7 @@
           xsi:type="gmftool:CreationTool"
           href="root.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
-          href="iaml.gmfgraph#ChainedOperationName"/>
+          href="iaml.gmfgraph#ChainedOperation"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -117,6 +117,8 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObject"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DomainObject )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel

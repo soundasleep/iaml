@@ -131,4 +131,63 @@ public class GmfToolTestCase extends XmlTestCase {
 		}
 	}
 	
+	/**
+	 * In each .gmftool, there should be exactly one mapping to
+	 * a node in the .gmfmap. 
+	 * 
+	 * @throws Exception
+	 */
+	public void testCheckAllToolsMapped() throws Exception {
+		Map<String,Document> loaded = getGmfTools();
+		
+		for (String filename : loaded.keySet()) {
+			Document gmftool = loaded.get(filename);
+			Document gmfmap = loadGmfmap(filename);
+			
+			IterableNodeList tools = xpath(gmftool, "/ToolRegistry/palette/tools/tools");
+			for (Element tool : tools) {
+				// EventTrigger
+				String toolName = tool.getAttribute("title");
+				
+				// should match either a node..
+				IterableNodeList matches = xpath(gmfmap, "/Mapping/nodes/ownedChild/domainMetaElement[contains(@href, '" + toolName + "')]");
+				boolean matched = false;
+				for (Element match : matches) {
+					String href = match.getAttribute("href");
+					if (href.endsWith(toolName)) {
+						assertFalse(filename + ": More than one mapping for tool '" + toolName + "'", matched);
+						matched = true;
+					}
+				}
+
+				// or a link
+				IterableNodeList matches2 = xpath(gmfmap, "/Mapping/links/domainMetaElement[contains(@href, '" + toolName + "')]");
+				for (Element match : matches2) {
+					String href = match.getAttribute("href");
+					if (href.endsWith(toolName)) {
+						assertFalse(filename + ": More than one mapping for tool '" + toolName + "'", matched);
+						matched = true;
+					}
+				}
+				
+				assertTrue(filename + ": Tool '" + toolName + "' did not match any mappings.", matched);
+				
+			}
+		}
+	}
+
+	/**
+	 * Load a corresponding .gmfmap for a .gmftool.
+	 * Assumed to be the same filename as the .gmftool, except
+	 * replacing the file extension.
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	private Document loadGmfmap(String filename) throws Exception {
+		String f = filename.replace(".gmftool", ".gmfmap");
+		assertNotEqual("'" + filename + "' does not have gmftool extension", f, filename);
+		return loadDocument(f);
+	}
+	
 }

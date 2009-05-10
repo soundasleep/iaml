@@ -12,10 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -302,7 +300,7 @@ public class XmlTestCase extends TestCase {
 	 * 
 	 * @param string
 	 */
-	public void assertNotEquals(String message, Object a, Object b) {
+	public void assertNotEqual(String message, Object a, Object b) {
 		if (a == null) {
 			assertNotNull(message + ", expected not equal: '" + a + "' and: '" + b + "'", b);
 		} else {

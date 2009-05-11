@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.release;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -142,6 +143,27 @@ public class PluginsTestCase extends XmlTestCase {
 		// now lets test each manifest.mf
 		for (String file : loadedManifests.keySet()) {
 			Properties properties = loadedManifests.get(file);
+			
+			if (properties.get("Bundle-Vendor").equals("%providerName")) {
+				// lets rewrite it manually
+				/*
+				 * this code mucks up the entire properties file, so we
+				 * will replace it in the file manually.
+				properties.setProperty("Bundle-Vendor", version);
+				
+				System.out.println("Writing new MANIFEST.MF for file '" + file + "'...");
+				properties.store(new FileWriter(new File(file)), "Unknown comments");
+				 */
+				String pfile = readFile(new File(file));
+				pfile = pfile.replace("Bundle-Vendor: %providerName", "Bundle-Vendor: " + version);
+				System.out.println("Writing new MANIFEST.MF for file '" + file + "'...");
+				writeFile(new File(file), pfile);
+				
+				// reload
+				properties = loadProperties(file);
+				loadedManifests.put(file, properties);				
+			}
+			
 			assertEquals( file + ": expected equal vendor",
 					version,
 					properties.get("Bundle-Vendor"));

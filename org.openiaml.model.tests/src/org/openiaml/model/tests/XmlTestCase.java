@@ -4,6 +4,7 @@
 package org.openiaml.model.tests;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -217,9 +219,9 @@ public class XmlTestCase extends TestCase {
 	/**
 	 * Load a properties file.
 	 */
-	public Properties loadProperties(String manifest) throws FileNotFoundException, IOException {
+	public Properties loadProperties(String file) throws FileNotFoundException, IOException {
 		Properties p = new Properties();
-		p.load(new FileInputStream(manifest));
+		p.load(new FileInputStream(file));
 		return p;
 	}
 	
@@ -302,6 +304,18 @@ public class XmlTestCase extends TestCase {
 		
 		reader.close();
 		return sb.toString();
+	}
+	
+	/**
+	 * Write a string to a file. If the file exists, it will be
+	 * overwritten. 
+	 * 
+	 * @throws IOException if an IO exception occurs
+	 */
+	public static void writeFile(File file, String data) throws IOException {
+		Writer output = new BufferedWriter(new FileWriter(file));
+		output.write(data);
+		output.close();
 	}
 
 	/**

@@ -98,7 +98,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		// we now try to do inference
 		ICreateElements handler = new EcoreInferenceHandler(resource);
 		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-		ce.create(root, logRuleSource);
+		ce.create(root, logRuleSource, monitor);
 
 		// write out this inferred model for reference
 		inferredModel = saveInferredModel();

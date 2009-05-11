@@ -82,7 +82,7 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand {
 		if (!isDisabled) {
 			CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(helper);
 			try {
-				ce.create(rootObject);
+				ce.create(rootObject, monitor);
 			} catch (InferenceException e) {
 				throw new ExecutionException("Unexpected exception when trying to infer missing elements", e);
 			}

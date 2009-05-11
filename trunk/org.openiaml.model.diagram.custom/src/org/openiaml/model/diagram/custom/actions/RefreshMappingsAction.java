@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -78,7 +79,8 @@ public class RefreshMappingsAction implements IViewActionDelegate {
 	 */
 	protected IStatus refreshMappings(DomainStoreEditPart fd, IAction action, IProgressMonitor monitor) {
 		try {
-		
+			monitor.beginTask("Refreshing DomainStore mappings", 100);
+			
 			EObject obj = fd.resolveSemanticElement();
 			if (!(obj instanceof DomainStore))
 				throw new InferenceException("Object was not a DomainStore");	
@@ -100,11 +102,13 @@ public class RefreshMappingsAction implements IViewActionDelegate {
 			fds.refreshMappings(new EmfInferenceHandler(
 					fd.getEditingDomain(), 
 					new ArrayList<Object>(), /* affected files */
-					monitor, 
+					new SubProgressMonitor(monitor, 100), 
 					null /* IAdapter == null */,
 					obj.eResource()	/* eResource */
 			));
-				
+			
+			monitor.done();
+			
 			return Status.OK_STATUS;
 	
 		} catch (InferenceException e) {

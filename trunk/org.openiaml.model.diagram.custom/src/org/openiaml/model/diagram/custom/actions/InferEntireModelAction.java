@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -84,6 +85,7 @@ public class InferEntireModelAction implements IViewActionDelegate {
 	protected IStatus inferEntireModel(IFile o, IAction action, IProgressMonitor monitor) {
 		try {
 			if (o.getFileExtension().equals("iaml")) {
+				monitor.beginTask("Inferring model in file '" + o.getName() + "'", 50);
 				
 				// try and load the file directly
 				ResourceSet resourceSet = new ResourceSetImpl();
@@ -100,7 +102,7 @@ public class InferEntireModelAction implements IViewActionDelegate {
 				// do inference on the model
 				model = resource.getContents().get(0);
 				CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-				ce.create(model);
+				ce.create(model, new SubProgressMonitor(monitor, 45));
 
 				// output the temporary changed model to an external file
 				// so we can move it back later
@@ -128,6 +130,9 @@ public class InferEntireModelAction implements IViewActionDelegate {
 				o.delete(true, monitor);
 				tempFile.move(o.getFullPath(), true, monitor);
 				tempJavaFile.delete();
+				
+				// finished
+				monitor.done();
 				
 				return Status.OK_STATUS;
 			}

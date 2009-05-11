@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openarchitectureware.workflow.WorkflowRunner;
@@ -45,6 +46,12 @@ public class OawCodeGenerator implements ICodeGenerator {
 		// reset exception-key map
 		resetKeyToExceptionMap();
 		
+		// we need to guess how many files this method will create,
+		// so we can try and have some sort of progress monitor.
+		int filesToCreate = guessNumberOfFilesToCreate(file);
+		
+		monitor.beginTask("Generating code from '" + file.getName() + "'", filesToCreate * 2);
+		
 		/*
 		 * We have to do some magic to enable OAW logging to go through
 		 * our own class. We have to provide this information to 
@@ -59,6 +66,10 @@ public class OawCodeGenerator implements ICodeGenerator {
 			Thread.currentThread().setContextClassLoader(OawCodeGenerator.class.getClassLoader());
 			CustomOAWLog.registerToLogFactory();
 			
+			// notify the logger of our monitor, so we can keep track
+			// of created files
+			CustomOAWLog.setMonitor(monitor);
+			
 			String wfFile = "src/workflow/generator.oaw";
 			Map<String,String> properties = new HashMap<String,String>();
 			properties.put("model", file.getFullPath().toString());
@@ -69,7 +80,7 @@ public class OawCodeGenerator implements ICodeGenerator {
 			
 			// refresh output folder
 			try {
-				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, filesToCreate));
 			} catch (CoreException e) {
 				return new Status(Status.WARNING, PLUGIN_ID, "Could not refresh local project", e);
 			}
@@ -82,10 +93,26 @@ public class OawCodeGenerator implements ICodeGenerator {
 			// reset the classloader/log
 			Thread.currentThread().setContextClassLoader(oldcl);
 			CustomOAWLog.unregisterFromLogFactory();
+			
+			// the monitor is done
+			monitor.done();
 		}
 			
 	}
 	
+	/**
+	 * Guess how many files we are going to create. 
+	 * Unfortunately without loading the IFile directly I'm not
+	 * sure this can be reliably determined, so we will just
+	 * guess '100'.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	protected int guessNumberOfFilesToCreate(IFile file) {
+		return 100;
+	}
+
 	/**
 	 * <p>
 	 * Construct a RuntimeException with the given message, and throw it.

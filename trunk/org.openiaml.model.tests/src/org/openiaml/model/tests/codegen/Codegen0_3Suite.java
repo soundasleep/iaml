@@ -20,6 +20,7 @@ import org.openiaml.model.tests.codegen.model0_3.SessionSinglePage;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncInSession;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncWires;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncWiresMultiple;
+import org.openiaml.model.tests.codegen.model0_3.TestProgressMonitor;
 
 /**
  * Code generation tests: model version 0.3
@@ -61,6 +62,7 @@ public class Codegen0_3Suite {
 		suite.addTestSuite(PropertiesFileWithInputForm.class);
 		suite.addTestSuite(FailingOperation.class);
 		suite.addTestSuite(FailingOperationHandler.class);
+		suite.addTestSuite(TestProgressMonitor.class);
 
 		return suite;
 	}

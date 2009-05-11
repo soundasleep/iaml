@@ -22,19 +22,22 @@ import org.w3c.dom.NodeList;
  */
 public class GmfToolTestCase extends XmlTestCase {
 
+	public static Map<String,Document> loadedTools; 
+	
 	/**
 	 * Load up all the .gmftool's
 	 * 
 	 */
 	public static Map<String,Document> getGmfTools() throws Exception {
-		Map<String,Document> loaded = new HashMap<String,Document>();
-		
-		// load all .gmftool's
-		for (String map : getToolList()) {
-			loaded.put( map, loadDocument(map) );
+		if (loadedTools == null) {
+			loadedTools = new HashMap<String,Document>();
+			
+			// load all .gmftool's
+			for (String map : getToolList()) {
+				loadedTools.put( map, loadDocument(map) );
+			}
 		}
-		
-		return loaded;
+		return loadedTools;
 	}
 	
 	/**

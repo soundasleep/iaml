@@ -117,7 +117,7 @@
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#StartNodeName"/>
+            href="iaml.gmfgraph#StartNodeLabel"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -137,7 +137,7 @@
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#CancelNodeName"/>
+            href="iaml.gmfgraph#CancelNodeLabel"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
@@ -164,7 +164,7 @@
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#FinishNodeName"/>
+            href="iaml.gmfgraph#FinishNodeLabel"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

@@ -574,9 +574,11 @@
             blue="142"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="StartNodeLabel"
+            name="StartNodeLabelFigure"
             text="start"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="CancelNodeFigure">
@@ -593,7 +595,7 @@
             blue="142"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="CancelNodeLabel"
+            name="CancelNodeLabelFigure"
             text="cancel"/>
         <children
             xsi:type="gmfgraph:Label"
@@ -602,6 +604,8 @@
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="FinishNodeFigure">
@@ -618,9 +622,11 @@
             blue="179"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="FinishNodeLabel"
+            name="FinishNodeLabelFigure"
             text="finish"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DecisionNodeFigure">
@@ -1288,4 +1294,16 @@
       name="DomainObjectType"
       figure="DomainObjectFigure"
       accessor="//@figures.0/@descriptors.1/@accessors.2"/>
+  <labels
+      name="CancelNodeLabel"
+      figure="CancelNodeFigure"
+      accessor="//@figures.0/@descriptors.26/@accessors.1"/>
+  <labels
+      name="FinishNodeLabel"
+      figure="FinishNodeFigure"
+      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
+  <labels
+      name="StartNodeLabel"
+      figure="StartNodeFigure"
+      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
 </gmfgraph:Canvas>

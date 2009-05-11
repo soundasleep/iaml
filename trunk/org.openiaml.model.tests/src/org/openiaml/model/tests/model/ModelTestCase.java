@@ -39,7 +39,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  */
 public class ModelTestCase extends TestCase {
 
-	private Map<EPackage,EFactory> factoryMap = null;
+	private static Map<EPackage,EFactory> factoryMap;
 	
 	/**
 	 * Set up a map of all available packages to their
@@ -50,15 +50,18 @@ public class ModelTestCase extends TestCase {
 	 * sure that any new packages will throw an assertion rather
 	 * than being silently ignored.
 	 */
-	protected void setUp() {
-		factoryMap = new HashMap<EPackage,EFactory>();
-		factoryMap.put( ModelPackage.eINSTANCE , ModelFactory.eINSTANCE );
-		factoryMap.put( VisualPackage.eINSTANCE , VisualFactory.eINSTANCE );
-		factoryMap.put( ScopesPackage.eINSTANCE , ScopesFactory.eINSTANCE );
-		factoryMap.put( OperationsPackage.eINSTANCE , OperationsFactory.eINSTANCE );
-		factoryMap.put( WiresPackage.eINSTANCE , WiresFactory.eINSTANCE );
-		factoryMap.put( ComponentsPackage.eINSTANCE , ComponentsFactory.eINSTANCE );
-		factoryMap.put( DomainPackage.eINSTANCE , DomainFactory.eINSTANCE );
+	public static Map<EPackage,EFactory> getFactoryMap() {
+		if (factoryMap == null) {
+			factoryMap = new HashMap<EPackage,EFactory>();
+			factoryMap.put( ModelPackage.eINSTANCE , ModelFactory.eINSTANCE );
+			factoryMap.put( VisualPackage.eINSTANCE , VisualFactory.eINSTANCE );
+			factoryMap.put( ScopesPackage.eINSTANCE , ScopesFactory.eINSTANCE );
+			factoryMap.put( OperationsPackage.eINSTANCE , OperationsFactory.eINSTANCE );
+			factoryMap.put( WiresPackage.eINSTANCE , WiresFactory.eINSTANCE );
+			factoryMap.put( ComponentsPackage.eINSTANCE , ComponentsFactory.eINSTANCE );
+			factoryMap.put( DomainPackage.eINSTANCE , DomainFactory.eINSTANCE );
+		}
+		return factoryMap;
 	}
 
 	/**
@@ -90,7 +93,7 @@ public class ModelTestCase extends TestCase {
 				EClass target = (EClass) c;
 				
 				// we should know of the factory to create the model element
-				EFactory factory = factoryMap.get( target.getEPackage() );
+				EFactory factory = getFactoryMap().get( target.getEPackage() );
 				assertNotNull("Couldn't find a factory for package: " + target.getEPackage(), factory);
 				EObject obj = factory.create( target );
 				

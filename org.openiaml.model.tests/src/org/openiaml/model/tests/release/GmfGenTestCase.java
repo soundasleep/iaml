@@ -29,19 +29,22 @@ import org.w3c.dom.Element;
  */
 public class GmfGenTestCase extends XmlTestCase {
 
+	private static Map<String,Document> loadedGens;
+	
 	/**
 	 * Load up all the .gmfmap's
 	 * 
 	 */
 	public static Map<String,Document> getGmfGens() throws Exception {
-		Map<String,Document> loaded = new HashMap<String,Document>();
-		
-		// load all .gmftool's
-		for (String map : getGenList()) {
-			loaded.put( map, loadDocument(map) );
+		if (loadedGens == null) {
+			loadedGens = new HashMap<String,Document>();
+			
+			// load all .gmftool's
+			for (String map : getGenList()) {
+				loadedGens.put( map, loadDocument(map) );
+			}
 		}
-		
-		return loaded;
+		return loadedGens;
 	}
 		
 	/**
@@ -263,6 +266,8 @@ public class GmfGenTestCase extends XmlTestCase {
 				editor.isSuperTypeOf(meta));
 	}
 
+	private Map<String, EClass> foundClasses = new HashMap<String, EClass>();
+	
 	/**
 	 * Get the root EClass of the given modelID. Iterates over
 	 * existing .gmfgens.
@@ -271,6 +276,9 @@ public class GmfGenTestCase extends XmlTestCase {
 	 * @return
 	 */
 	private EClass getEditorEClass(String modelID) throws Exception {
+		if (foundClasses.containsKey(modelID))
+			return foundClasses.get(modelID);
+		
 		for (Document doc : getGmfGens().values()) {
 			Element root = xpathFirst(doc, "/GenEditorGenerator");
 			if (root.getAttribute("modelID").equals(modelID)) { 
@@ -280,13 +288,17 @@ public class GmfGenTestCase extends XmlTestCase {
 				// trim to last /
 				href = href.substring(href.lastIndexOf("/") + 1);
 				
-				return resolveSimpleEClass(href);
+				EClass result = resolveSimpleEClass(href);
+				foundClasses.put(modelID, result);
+				return result;
 			}			
 		}
 		
 		fail("Could not find Editor EClass for model ID '" + modelID + "'");
 		return null;
 	}
+	
+	private Map<String, EClass> resolvedClasses = new HashMap<String, EClass>();
 
 	/**
 	 * Resolve a simple meta element. This assumes that the same
@@ -299,11 +311,17 @@ public class GmfGenTestCase extends XmlTestCase {
 	 * @return
 	 */
 	private EClass resolveSimpleEClass(String metaElementName) {
+		if (resolvedClasses.containsKey(metaElementName)) {
+			return resolvedClasses.get(metaElementName);
+		}
+		
 		for (EPackage pkg : ModelTestCase.getFactoryMap().keySet()) {
 			EClassifier cf = pkg.getEClassifier(metaElementName);
 			if (cf != null && cf instanceof EClass) {
 				// found it!
-				return (EClass) cf;
+				EClass result = (EClass) cf;
+				resolvedClasses.put(metaElementName, result);
+				return result;
 			}
 		}
 		fail("Could not resolve simple EClass name '" + metaElementName + "'");

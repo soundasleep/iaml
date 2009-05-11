@@ -36,7 +36,7 @@
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#StartNodeName"/>
+            href="iaml.gmfgraph#StartNodeLabel"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -54,16 +54,16 @@
       <domainSpecialization
           body="self.oclIsTypeOf( CancelNode )"/>
       <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#CancelNodeName"/>
-      </labelMappings>
-      <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="iaml.gmfgraph#CancelNodeText"/>
         <features
             href="iaml.ecore#//operations/CancelNode/exceptionText"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CancelNodeLabel"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -83,7 +83,7 @@
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#FinishNodeName"/>
+            href="iaml.gmfgraph#FinishNodeLabel"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

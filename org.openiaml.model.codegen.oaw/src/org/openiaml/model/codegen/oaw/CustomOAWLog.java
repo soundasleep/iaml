@@ -9,9 +9,11 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.SimpleLog;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 
 /**
  * <p>A special logger that controls OAW logs, and saves a copy of all Errors
@@ -37,7 +39,11 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 
 	/** A list of all errors parsed by this logger. */
 	private static List<IStatus> errors = null;
-	
+
+	/** For keeping track and monitoring progress of file creation */
+	private static IProgressMonitor monitor;
+	private static SubProgressMonitor lastSubMonitor;
+
 	public static final String PLUGIN_ID = org.openiaml.model.codegen.oaw.OawCodeGenerator.PLUGIN_ID;
 	
 	/**
@@ -76,6 +82,15 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 		} else {
 			System.setProperty("org.apache.commons.logging.Log", lastLogFactory);
 		}
+
+		if (lastSubMonitor != null) {
+			lastSubMonitor.done();		// finish last file
+			lastSubMonitor = null;
+		}
+		if (monitor != null) {
+			monitor.done();
+			monitor = null;
+		}
 	}
 	
 	/**
@@ -101,6 +116,27 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 		// catch any Error (or higher) messages
 		if (type >= LOG_LEVEL_ERROR) {
 			errors.add(new Status(Status.ERROR, PLUGIN_ID, message.toString(), t));
+		}
+		
+		// log file references
+		String str = message.toString();
+		if (monitor != null && str.startsWith("Opening file : ")) {
+			String file = "unknown";
+			if (str.contains("\\")) {
+				// windows
+				file = str.substring(str.lastIndexOf("\\") + 1);
+			} else {
+				// other
+				file = str.substring(str.lastIndexOf("/") + 1);
+			}
+			
+			// last file was created
+			if (monitor != null) {
+				monitor.worked(1);
+			}
+			
+			// a new file is being created
+			monitor.subTask("Creating file " + file + "...");			
 		}
 	}
 
@@ -130,5 +166,16 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 	public static boolean hasErrors() {
 		return errors.size() != 0;
 	}
-	
+
+	/**
+	 * Set a monitor that we can use to notify of progress through
+	 * creating files.
+	 * 
+	 * @param monitor
+	 */
+	public static void setMonitor(IProgressMonitor monitor) {
+		CustomOAWLog.monitor = monitor;
+		lastSubMonitor = null;
+	}
+
 }

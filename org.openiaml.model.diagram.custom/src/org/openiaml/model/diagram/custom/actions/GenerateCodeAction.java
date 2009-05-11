@@ -4,24 +4,31 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
@@ -56,22 +63,65 @@ public class GenerateCodeAction implements IViewActionDelegate {
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
 	@Override
-	public void run(IAction action) {
+	public void run(final IAction action) {
 		model = null;
+		
+		final List<IFile> ifiles = new ArrayList<IFile>();
 		
 		if (selection != null) {
 			for (Object o : selection) {
 				if (o instanceof IFile) {
-					IStatus status = generateCodeFrom((IFile) o, action, new NullProgressMonitor());
-					if (!status.isOK()) {
-						// TODO remove this reference to the plugin and remove the reference in plugin.xml
-						IamlDiagramEditorPlugin.getInstance().logError(
-								"Could not generate code for " + o + ": " + status.getMessage(), status.getException()); //$NON-NLS-1$
-					}
+					ifiles.add((IFile) o);
 				}
 			}
 		}
+		
+		/**
+		 * Create a progress display monitor, and actually
+		 * execute the code generation.
+		 */
+		try {
+			PlatformUI.getWorkbench().getProgressService().
+			busyCursorWhile(new IRunnableWithProgress() {
+			    public void run(IProgressMonitor monitor) {
+			    	int scale = 4000;
+			    	
+			    	monitor.beginTask("Generating code", ifiles.size() * scale);
+			    	
+			    	for (IFile f : ifiles) {
+			    		// create a new sub-progress
+			    		IProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1 * scale);
+			    		
+						IStatus status = generateCodeFrom(f, action, subMonitor);
+						if (!status.isOK()) {
+							IStatus multi = new MultiStatus(PLUGIN_ID, Status.ERROR, new IStatus[] { status }, "Could not generate code for '" + f.getName() + "': " + status.getMessage(), status.getException());							
+							Platform.getLog(getDefaultPlugin().getBundle()).log(multi);
+							
+							monitor.done();
+							return;
+						}
+			    	}
+			    	
+			    	monitor.done();
+			    }
+			});
+		} catch (InvocationTargetException e) {
+			getDefaultPlugin().logError(e.getMessage(), e);
+		} catch (InterruptedException e) {
+			getDefaultPlugin().logError(e.getMessage(), e);
+		}
 
+	}
+	
+	/**
+	 * Get the default editor plugin, which we will use to log errors and the like.
+	 * 
+	 * TODO remove this direct reference and remove IamlDiagramEditorPlugin from the plugin.xml.
+	 * 
+	 * @return
+	 */
+	public IamlDiagramEditorPlugin getDefaultPlugin() {
+		return IamlDiagramEditorPlugin.getInstance();
 	}
 	
 	/**
@@ -82,6 +132,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 	protected IStatus generateCodeFrom(IFile o, IAction action, IProgressMonitor monitor) {
 		try {
 			if (o.getFileExtension().equals("iaml")) {
+				monitor.beginTask("Generating code for file '" + o.getName() + "'", 100);
 				
 				// try and load the file directly
 				ResourceSet resourceSet = new ResourceSetImpl();
@@ -98,7 +149,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 				// do inference on the model
 				model = resource.getContents().get(0);
 				CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
-				ce.create(model);
+				ce.create(model, new SubProgressMonitor(monitor, 45));
 				
 				// output the temporary changed model to an external file
 				// so we can do code generation
@@ -120,18 +171,23 @@ public class GenerateCodeAction implements IViewActionDelegate {
 				resource.save(new FileOutputStream(tempJavaFile), options);
 				
 				// now load it in as an IFile
-				tempFile.create(new FileInputStream(tempJavaFile), true, monitor);
+				tempFile.create(new FileInputStream(tempJavaFile), true, new SubProgressMonitor(monitor, 5));
 		
 				// create code generator instance
 				ICodeGenerator codegen = new OawCodeGenerator();
-				IStatus status = codegen.generateCode(tempFile, monitor);
+				IStatus status = codegen.generateCode(tempFile, new SubProgressMonitor(monitor, 50));
 				
 				// now delete the generated model file
 				// TODO this would probably go well in a finally block
 				tempFile.delete(false, monitor);
 				tempJavaFile.delete();
 				
+				// finished
+				monitor.done();
+				
 				return status;
+			} else {
+				return new Status(IStatus.ERROR, PLUGIN_ID, "File '" + o.getName() + "' does not have an .iaml extension.");
 			}
 		} catch (InferenceException e) {
 			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed", e);
@@ -140,8 +196,6 @@ public class GenerateCodeAction implements IViewActionDelegate {
 		} catch (CoreException e) {
 			return new Status(IStatus.ERROR, PLUGIN_ID, "Core exception", e);
 		}
-		
-		return null;
 	}
 	
 	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";

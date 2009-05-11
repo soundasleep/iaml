@@ -18,6 +18,8 @@ import org.drools.event.ObjectRetractedEvent;
 import org.drools.event.ObjectUpdatedEvent;
 import org.drools.event.WorkingMemoryEventListener;
 import org.drools.rule.Package;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
@@ -68,8 +70,14 @@ public abstract class DroolsInferenceEngine {
 	 * @param model
 	 * @throws InferenceException
 	 */
-	public void create(EObject model) throws InferenceException {
-		create(model, false);
+	public void create(EObject model, IProgressMonitor monitor) throws InferenceException {
+		create(model, false, monitor);
+	}
+	
+	private IProgressMonitor subProgressMonitor;
+	
+	public IProgressMonitor getSubprogressMonitor() {
+		return subProgressMonitor;
 	}
 	
 	/**
@@ -77,10 +85,14 @@ public abstract class DroolsInferenceEngine {
 	 * 
 	 * @param model
 	 * @param logRuleSource if true, the source rule of inserted elements will be added
+	 * @param monitor a progress monitor
 	 * @throws Exception 
 	 */
-	public void create(EObject model, boolean logRuleSource) throws InferenceException {
+	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor) throws InferenceException {
 
+		monitor.beginTask("Inferring model using Drools", 100);
+		monitor.subTask("Loading rulebase");
+		
     	// load up the rulebase
         RuleBase ruleBase;
 		try {
@@ -89,6 +101,9 @@ public abstract class DroolsInferenceEngine {
 			throw new InferenceException("Could not load rulebase: " + e.getMessage(), e);
 		}
         final WorkingMemory workingMemory = ruleBase.newStatefulSession();
+        
+        monitor.worked(5);
+        monitor.subTask("Inserting initial model");
         
         // automatically insert new objects based on a given object
         workingMemory.addEventListener( new WorkingMemoryEventListener() {
@@ -103,6 +118,16 @@ public abstract class DroolsInferenceEngine {
         	 */
 			@Override
 			public void objectInserted(ObjectInsertedEvent obj) {
+				// increment a progress monitor
+				if (getSubprogressMonitor() != null) {
+					getSubprogressMonitor().worked(1);
+					/*
+					if (obj.getObject() instanceof EObject) {
+						getSubprogressMonitor().subTask("Inserting " + ((EObject) obj.getObject()).eClass().getName());						
+					}
+					*/
+				}
+				
 				// ContainsEventTriggers
 				if (obj.getObject() instanceof ContainsEventTriggers) {
 					ContainsEventTriggers a = (ContainsEventTriggers) obj.getObject();
@@ -236,11 +261,19 @@ public abstract class DroolsInferenceEngine {
 				
 			}
         	
-        });        
+        });   
+        
+        // set up the sub progress monitor
+        subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 45);
         
         //go !
-        workingMemory.insert( model );        
+        workingMemory.insert( model );
+        subProgressMonitor.done();
+        subProgressMonitor = null;
+        
         workingMemory.setGlobal("handler", handler);
+        
+        monitor.subTask("Inferring new model elements");
         
         /*
          * This simply adds the Rule source for inserted elements
@@ -263,7 +296,11 @@ public abstract class DroolsInferenceEngine {
 	        });
         }
         
-        workingMemory.fireAllRules();   
+        subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
+        workingMemory.fireAllRules();
+        subProgressMonitor.done();	// completed
+        
+        monitor.done();
 
 	}
 
@@ -343,4 +380,83 @@ public abstract class DroolsInferenceEngine {
 		
 	}
 
+	/**
+	 * Copied <i>directly</i> from org.eclipse.team.internal.core.InfiniteSubProgressMonitor.
+	 * 
+	 * Provides an infinite progress monitor by subdividing by half repeatedly.
+	 * 
+	 * The ticks parameter represents the number of ticks shown in the progress dialog
+	 * (or propogated up to a parent IProgressMonitor). The totalWork parameter provided
+	 * in actually a hint used to determine how work is translated into ticks.
+	 * The number of totalWork that can actually be worked is n*totalWork/2 where
+	 * 2^n = totalWork. What this means is that if you provide a totalWork of 32 (2^5) than
+	 * the maximum number of ticks is 5*32/2 = 80.
+	 * 
+	 */
+	public class InfiniteSubProgressMonitor extends SubProgressMonitor {
+
+		int totalWork;
+		int halfWay;
+		int currentIncrement;
+		int nextProgress;
+		int worked;
+			
+		/**
+		 * Constructor for InfiniteSubProgressMonitor.
+		 * @param monitor
+		 * @param ticks
+		 */
+		public InfiniteSubProgressMonitor(IProgressMonitor monitor, int ticks) {
+			this(monitor, ticks, 0);
+		}
+
+		/**
+		 * Constructor for InfiniteSubProgressMonitor.
+		 * @param monitor
+		 * @param ticks
+		 * @param style
+		 */
+		public InfiniteSubProgressMonitor(IProgressMonitor monitor, int ticks, int style) {
+			super(monitor, ticks, style);
+		}
+		
+		public void beginTask(String name, int totalWork) {
+			super.beginTask(name, totalWork);
+			this.totalWork = totalWork;
+			this.halfWay = totalWork / 2;
+			this.currentIncrement = 1;
+			this.nextProgress = currentIncrement;
+			this.worked = 0;
+		}
+		
+		public void worked(int work) {
+			if (worked >= totalWork) return;
+			if (--nextProgress <= 0) {
+				super.worked(1);
+				worked++;
+				if (worked >= halfWay) {
+					// we have passed the current halfway point, so double the
+					// increment and reset the halfway point.
+					currentIncrement *= 2;
+					halfWay += (totalWork - halfWay) / 2;				
+				}
+				// reset the progress counter to another full increment
+				nextProgress = currentIncrement;
+			}			
+		}
+
+		/**
+		 * Don't allow clearing of the subtask. This will stop the flickering
+		 * of the subtask in the progress dialogs.
+		 * 
+		 * @see IProgressMonitor#subTask(String)
+		 */
+		public void subTask(String name) {
+			if(name != null && ! name.equals("")) { //$NON-NLS-1$
+				super.subTask(name);
+			}
+		}
+
+	}
+	
 }

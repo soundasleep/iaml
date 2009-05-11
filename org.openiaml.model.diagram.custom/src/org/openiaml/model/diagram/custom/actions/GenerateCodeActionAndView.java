@@ -25,6 +25,9 @@ import org.openiaml.model.model.InternetApplication;
 public class GenerateCodeActionAndView extends GenerateCodeAction implements IViewActionDelegate {
 	
 	/**
+	 * Extends {@link GenerateCodeAction} to also open a new
+	 * web browser window when the code has finished generating.
+	 * 
 	 * @param o
 	 * @param monitor 
 	 * @return 

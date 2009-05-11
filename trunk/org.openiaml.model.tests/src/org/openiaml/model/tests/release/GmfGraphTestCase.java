@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
+import org.openiaml.model.tests.xpath.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * Tests the .gmfgraph.
@@ -44,11 +44,10 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testAllLabelsAreInRoot() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		NodeList nl = xpath(gmfgraph, "//descriptors/actualFigure/children");
+		IterableNodeList nl = xpath(gmfgraph, "//descriptors/actualFigure/children");
 		
 		assertNotSame("We should have at least one label node", nl.getLength(), 0);
-		for (int i = 0; i < nl.getLength(); i++) {
-			Element child = (Element) nl.item(i);
+		for (Element child : nl) {
 			if (child.getAttribute("xsi:type").equals("gmfgraph:Label")) {
 				String childName = child.getAttribute("name");
 				// only consider labels which are called XXXFigure
@@ -73,11 +72,10 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testAllNodesAndLinks() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		NodeList nl = xpath(gmfgraph, "/Canvas/figures/descriptors");
+		IterableNodeList nl = xpath(gmfgraph, "/Canvas/figures/descriptors");
 		
 		assertNotSame("We should have at least one node", nl.getLength(), 0);
-		for (int i = 0; i < nl.getLength(); i++) {
-			Element child = (Element) nl.item(i);
+		for (Element child : nl) {
 			String name = child.getAttribute("name");	// ButtonFigure
 			
 			// it should have a node
@@ -103,11 +101,10 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testRootLabelAccessors() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		NodeList nl = xpath(gmfgraph, "//labels[@accessor]");
+		IterableNodeList nl = xpath(gmfgraph, "//labels[@accessor]");
 		
 		assertNotSame("We should have at least one label node", nl.getLength(), 0);
-		for (int i = 0; i < nl.getLength(); i++) {
-			Element child = (Element) nl.item(i);
+		for (Element child : nl) {
 			String childName = child.getAttribute("name");
 			
 			// it should resolve to an <accessors>
@@ -133,12 +130,11 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testUniqueDescriptors() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		NodeList nl = xpath(gmfgraph, "/Canvas/figures/descriptors");
+		IterableNodeList nl = xpath(gmfgraph, "/Canvas/figures/descriptors");
 		
 		assertNotSame("We should have at least one descriptor node", nl.getLength(), 0);
 		Set<String> found = new HashSet<String>();
-		for (int i = 0; i < nl.getLength(); i++) {
-			Element child = (Element) nl.item(i);
+		for (Element child : nl) {
 			String childName = child.getAttribute("name");
 			
 			assertFalse("More than one descriptor found for '" + childName + "'", found.contains(childName));
@@ -153,12 +149,11 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testUniqueNodes() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		NodeList nl = xpath(gmfgraph, "/Canvas/nodes");
+		IterableNodeList nl = xpath(gmfgraph, "/Canvas/nodes");
 		
 		assertNotSame("We should have at least one node node", nl.getLength(), 0);
 		Set<String> found = new HashSet<String>();
-		for (int i = 0; i < nl.getLength(); i++) {
-			Element child = (Element) nl.item(i);
+		for (Element child : nl) {
 			String childName = child.getAttribute("name");
 			
 			assertFalse("More than one node found for '" + childName + "'", found.contains(childName));
@@ -173,12 +168,11 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testUniqueConnections() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		NodeList nl = xpath(gmfgraph, "/Canvas/connections");
+		IterableNodeList nl = xpath(gmfgraph, "/Canvas/connections");
 		
 		assertNotSame("We should have at least one connection node", nl.getLength(), 0);
 		Set<String> found = new HashSet<String>();
-		for (int i = 0; i < nl.getLength(); i++) {
-			Element child = (Element) nl.item(i);
+		for (Element child : nl) {
 			String childName = child.getAttribute("name");
 
 			assertFalse("More than one connection found for '" + childName + "'", found.contains(childName));
@@ -193,12 +187,11 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testUniqueLabels() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		NodeList nl = xpath(gmfgraph, "/Canvas/labels");
+		IterableNodeList nl = xpath(gmfgraph, "/Canvas/labels");
 		
 		assertNotSame("We should have at least one label node", nl.getLength(), 0);
 		Set<String> found = new HashSet<String>();
-		for (int i = 0; i < nl.getLength(); i++) {
-			Element child = (Element) nl.item(i);
+		for (Element child : nl) {
 			String childName = child.getAttribute("name");
 			
 			assertFalse("More than one label found for '" + childName + "'", found.contains(childName));

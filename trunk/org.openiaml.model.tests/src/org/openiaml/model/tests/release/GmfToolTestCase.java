@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
+import org.openiaml.model.tests.xpath.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * Tests .mf and plugin.xml files of the specified plugins
@@ -78,12 +78,12 @@ public class GmfToolTestCase extends XmlTestCase {
 		for (String file : loaded.keySet()) {
 			boolean changed = false;
 			Document doc = loaded.get(file);
-			NodeList nl = xpath(doc, "//palette/tools");
+			IterableNodeList nl = xpath(doc, "//palette/tools");
 			
 			assertEquals("There should be exactly one //tools entry", nl.getLength(), 1);
 			Element root = (Element) nl.item(0);
 			
-			NodeList tools = xpath(root, "tools");
+			IterableNodeList tools = xpath(root, "tools");
 			assertNotSame("There should be at least one subtool entry", tools.getLength(), 0);
 			
 			for (int i = 0; i < tools.getLength(); i++) {

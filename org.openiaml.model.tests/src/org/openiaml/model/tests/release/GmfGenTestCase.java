@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.tests.model.ModelTestCase;
+import org.openiaml.model.tests.xpath.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

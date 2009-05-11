@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
@@ -27,6 +29,12 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.oaw.OawCodeGenerator;
+import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
+import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.XpathTestCase;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * The JET/Junit test framework now manages everything for you. It will
@@ -35,7 +43,7 @@ import org.openiaml.model.codegen.oaw.OawCodeGenerator;
  * @author jmwright
  *
  */
-public abstract class ModelTestCase extends WebTestCase {
+public abstract class ModelTestCase extends WebTestCase implements XpathTestCase {
 
 	public final String PLUGIN_ID = "org.openiaml.model.tests";
 	public final String ROOT = "src/org/openiaml/model/tests/";
@@ -341,4 +349,62 @@ public abstract class ModelTestCase extends WebTestCase {
 		}
 		
 	}
+	
+
+	/**
+	 * XPath helper methods.
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase
+	 */
+	private XpathTestCase xpath = new DefaultXpathTestCase();
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Element, java.lang.String)
+	 */
+	@Override
+	public Element hasXpathFirst(Element e, String query)
+			throws XPathExpressionException {
+		return xpath.hasXpathFirst(e, query);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Document, java.lang.String)
+	 */
+	@Override
+	public Element hasXpathFirst(Document e, String query)
+			throws XPathExpressionException {
+		return xpath.hasXpathFirst(e, query);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#xpath(org.w3c.dom.Node, java.lang.String)
+	 */
+	@Override
+	public IterableNodeList xpath(Node doc, String query)
+			throws XPathExpressionException {
+		return xpath.xpath(doc, query);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#xpathFirst(org.w3c.dom.Document, java.lang.String)
+	 */
+	@Override
+	public Element xpathFirst(Document doc, String query)
+			throws XPathExpressionException {
+		return xpath.xpathFirst(doc, query);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#xpathFirst(org.w3c.dom.Element, java.lang.String)
+	 */
+	@Override
+	public Element xpathFirst(Element e, String query)
+			throws XPathExpressionException {
+		return xpath.xpathFirst(e, query);
+	}
+
+	
 }

@@ -6,9 +6,9 @@ package org.openiaml.model.tests.release;
 import java.util.Map;
 
 import org.openiaml.model.tests.XmlTestCase;
+import org.openiaml.model.tests.xpath.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * Tests model files for the ParentNames
@@ -58,10 +58,9 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 */
 	public void testAllParents() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		NodeList nl = xpath(gmfgraph, "//actualFigure/children[contains(@name, 'ParentNameFigure')]");
+		IterableNodeList nl = xpath(gmfgraph, "//actualFigure/children[contains(@name, 'ParentNameFigure')]");
 		
-		for (int i = 0; i < nl.getLength(); i++) {
-			Element child = (Element) nl.item(i);
+		for (Element child : nl) {
 			String childName = child.getAttribute("name");
 			
 			// go up:

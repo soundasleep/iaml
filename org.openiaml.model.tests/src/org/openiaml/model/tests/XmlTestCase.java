@@ -13,9 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -28,18 +25,16 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import junit.framework.TestCase;
 
+import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
+import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.XpathTestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -49,127 +44,7 @@ import org.xml.sax.SAXException;
  * @author jmwright
  *
  */
-public class XmlTestCase extends TestCase {
-
-	/**
-	 * Wraps {@link org.w3c.dom.NodeList} with the Iterable interface.
-	 * 
-	 * @author jmwright
-	 *
-	 */
-	public class IterableNodeList implements NodeList, Iterable<Element> {
-		private List<Element> elements;
-	
-		public IterableNodeList(NodeList nl) {
-			elements = new ArrayList<Element>();
-			for (int i = 0; i < nl.getLength(); i++) {
-				elements.add((Element) nl.item(i));
-			}
-		}
-
-		/* (non-Javadoc)
-		 * @see java.lang.Iterable#iterator()
-		 */
-		@Override
-		public Iterator<Element> iterator() {
-			return elements.iterator();
-		}
-
-		/* (non-Javadoc)
-		 * @see org.w3c.dom.NodeList#getLength()
-		 */
-		@Override
-		public int getLength() {
-			return elements.size();
-		}
-
-		/* (non-Javadoc)
-		 * @see org.w3c.dom.NodeList#item(int)
-		 */
-		@Override
-		public Node item(int index) {
-			return elements.get(index);
-		}
-		
-		/**
-		 * Is this NodeList empty? (Additional method.)
-		 * 
-		 * @return true if this list is empty
-		 */
-		public boolean isEmpty() {
-			return elements.isEmpty();
-		}
-
-		/**
-		 * Add all of the elements in the given list to this list.
-		 * 
-		 * @param list
-		 */
-		public void addAll(IterableNodeList list) {
-			for (Element e : list) {
-				elements.add(e);
-			}
-		}
-	}
-	
-	/**
-	 * Apply an XPath query to an XML document.
-	 */
-	public IterableNodeList xpath(Node doc, String query) throws XPathExpressionException {
-		XPathFactory factory = XPathFactory.newInstance();
-		XPath xpath = factory.newXPath();
-		XPathExpression expr = xpath.compile(query);
-		NodeList result = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-		return new IterableNodeList(result);
-	}
-	
-	/**
-	 * Get the first node result from an XPath query.
-	 */
-	public Element xpathFirst(Document doc, String query) throws XPathExpressionException {
-		assertNotNull("Cannot find the xpath for a null document", doc);
-		Element e = (Element) xpath(doc, query).item(0);
-		assertNotNull("Could not find result for query '" + query + "'", e);
-		return e;
-	}
-	
-	/**
-	 * Get the first node result from an XPath query.
-	 */
-	public Element xpathFirst(Element e, String query) throws XPathExpressionException {
-		assertNotNull("Cannot find the xpath for a null element", e);
-		Element e2 = (Element) xpath(e, query).item(0);
-		assertNotNull("Could not find result for query '" + query + "'", e2);
-		return e2;
-	}
-	
-	/**
-	 * Get the first node result from an XPath query.
-	 * 
-	 * @returns the found node, or null if none is found (or more than one is found)
-	 */
-	public Element hasXpathFirst(Element e, String query) throws XPathExpressionException {
-		assertNotNull("Cannot find the xpath for a null element", e);
-		NodeList nl = xpath(e, query);
-		if (nl.getLength() == 1) {
-			return (Element) nl.item(0);
-		}
-		return null;
-	}
-	
-	/**
-	 * Get the first node result from an XPath query.
-	 * 
-	 * @returns the found node, or null if none is found (or more than one is found)
-	 */
-	public Element hasXpathFirst(Document e, String query) throws XPathExpressionException {
-		assertNotNull("Cannot find the xpath for a null element", e);
-		NodeList nl = xpath(e, query);
-		if (nl.getLength() == 1) {
-			return (Element) nl.item(0);
-		}
-		return null;
-	}
+public class XmlTestCase extends TestCase implements XpathTestCase {
 	
 	/**
 	 * Resolve an EMF query like '//@figures.0/@descriptors.29/@accessors.0'
@@ -341,5 +216,59 @@ public class XmlTestCase extends TestCase {
 		}
 	}
 
-	
+	/**
+	 * XPath helper methods.
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase
+	 */
+	private XpathTestCase xpath = new DefaultXpathTestCase();
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Element, java.lang.String)
+	 */
+	@Override
+	public Element hasXpathFirst(Element e, String query)
+			throws XPathExpressionException {
+		return xpath.hasXpathFirst(e, query);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Document, java.lang.String)
+	 */
+	@Override
+	public Element hasXpathFirst(Document e, String query)
+			throws XPathExpressionException {
+		return xpath.hasXpathFirst(e, query);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#xpath(org.w3c.dom.Node, java.lang.String)
+	 */
+	@Override
+	public IterableNodeList xpath(Node doc, String query)
+			throws XPathExpressionException {
+		return xpath.xpath(doc, query);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#xpathFirst(org.w3c.dom.Document, java.lang.String)
+	 */
+	@Override
+	public Element xpathFirst(Document doc, String query)
+			throws XPathExpressionException {
+		return xpath.xpathFirst(doc, query);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.xpath.XpathTestCase#xpathFirst(org.w3c.dom.Element, java.lang.String)
+	 */
+	@Override
+	public Element xpathFirst(Element e, String query)
+			throws XPathExpressionException {
+		return xpath.xpathFirst(e, query);
+	}
+
 }

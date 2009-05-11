@@ -30,11 +30,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import junit.framework.AssertionFailedError;
 
@@ -43,10 +38,10 @@ import org.openiaml.model.drools.DroolsXmlDumper;
 import org.openiaml.model.tests.DijkstraAlgorithm;
 import org.openiaml.model.tests.InferenceTestCase;
 import org.openiaml.model.tests.TestComposition;
+import org.openiaml.model.tests.xpath.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
@@ -344,7 +339,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		// test parsing some simple code
 		parseJava(d, root, "// a comment\nRunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);		rw.setName(\"run\");		insert(rw); insert(\"a complicated string. with full stops. and line breaks;\");");
 		
-		NodeList statements = xpath(root, "statement");
+		IterableNodeList statements = xpath(root, "statement");
 		assertEquals(4, statements.getLength());
 		
 		// first statement
@@ -477,10 +472,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// more XML (specific to our use in IAML)
 			
 			Document document = loadDocument(source);
-			NodeList rhsList = xpath(document, "//rhs");
+			IterableNodeList rhsList = xpath(document, "//rhs");
 			
-			for (int i = 0; i < rhsList.getLength(); i++) {
-				Text originalNode = (Text) rhsList.item(i).getFirstChild();
+			for (Element rhs : rhsList) {
+				Text originalNode = (Text) rhs.getFirstChild();
 				String sourceCode = originalNode.getData();
 				originalNode.setData("");	// empty the node
 				
@@ -969,10 +964,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 		List<LogicRule> logicRules = new ArrayList<LogicRule>();
 		
 		// parse over each rule
-		NodeList rules = xpath(document, "//rule");
-		for (int i = 0; i < rules.getLength(); i++) {
+		IterableNodeList rules = xpath(document, "//rule");
+		for (Element rule : rules) {
 			LogicRule logic = new LogicRule();
-			Element rule = (Element) rules.item(i);
 			String reason = rule.getAttribute("name");
 			
 			Element lhs = xpathFirst(rule, "lhs");
@@ -996,9 +990,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// find the handler rules
 			// we assume that rule bodies only generate elements using
 			// handler.generatedXXX(...)
-			NodeList generatedElements = xpath(rhs, "statement/assignment/statement/variable[@name='handler']/method");
-			for (int j = 0; j < generatedElements.getLength(); j++) {
-				Element g = (Element) generatedElements.item(j);
+			IterableNodeList generatedElements = xpath(rhs, "statement/assignment/statement/variable[@name='handler']/method");
+			for (Element g : generatedElements) {
 				assertEquals("method", g.getNodeName());
 				String methodName = g.getAttribute("name");;
 				if (methodName.startsWith("generated")) {
@@ -1028,35 +1021,6 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return logicRules;
 	}
 
-	/*
-	 * Helper methods, copied directly from XmlTestCase. TODO move these out into a different class.
-	 */
-
-	/**
-	 * Apply an XPath query to an XML document.
-	 */
-	public NodeList xpath(Node doc, String query) throws XPathExpressionException {
-		XPathFactory factory = XPathFactory.newInstance();
-		XPath xpath = factory.newXPath();
-		XPathExpression expr = xpath.compile(query);
-		NodeList result = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-		return result;
-	}
-	
-	/**
-	 * Get the first node result from an XPath query.
-	 */
-	public Element xpathFirst(Document doc, String query) throws XPathExpressionException {
-		return (Element) xpath(doc, query).item(0);
-	}
-	
-	/*
-	 * Get the first node result from an XPath query.
-	 */
-	public Element xpathFirst(Element doc, String query) throws XPathExpressionException {
-		return (Element) xpath(doc, query).item(0);
-	}
-	
 	public Document firstDocument(Map<?,Document> map) {
 		return map.values().iterator().next();
 	}

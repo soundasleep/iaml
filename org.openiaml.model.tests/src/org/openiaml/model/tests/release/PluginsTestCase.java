@@ -13,10 +13,10 @@ import java.util.Properties;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.openiaml.model.tests.XmlTestCase;
+import org.openiaml.model.tests.xpath.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * Tests .mf and plugin.xml files of the specified plugins
@@ -89,9 +89,9 @@ public class PluginsTestCase extends XmlTestCase {
 		
 		// lets find the first one
 		Document doc = firstDocument(loadedGmfgens);
-		NodeList nodes = xpath(doc, "//diagram/containsShortcutsTo");
-		for (int i = 0; i < nodes.getLength(); i++) {
-			String value = ((Element) nodes.item(i)).getFirstChild().getNodeValue();
+		IterableNodeList nodes = xpath(doc, "//diagram/containsShortcutsTo");
+		for (Element node : nodes) {
+			String value = node.getFirstChild().getNodeValue();
 			if (!shortcuts.contains(value))
 				shortcuts.add(value);
 		}
@@ -178,10 +178,10 @@ public class PluginsTestCase extends XmlTestCase {
 		// now test them all
 		for (String file : loadedGmfgens.keySet()) {
 			Document doc = loadedGmfgens.get(file);
-			NodeList nodes = xpath(doc, "//diagram/containsShortcutsTo");
+			IterableNodeList nodes = xpath(doc, "//diagram/containsShortcutsTo");
 			assertEquals(nodes.getLength(), shortcuts.size());
-			for (int i = 0; i < nodes.getLength(); i++) {
-				String value = ((Element) nodes.item(i)).getFirstChild().getNodeValue();
+			for (Element node : nodes) {
+				String value = node.getFirstChild().getNodeValue();
 				assertTrue( file + ": contains " + value, shortcuts.contains(value) );
 			}
 		}
@@ -207,10 +207,10 @@ public class PluginsTestCase extends XmlTestCase {
 		// now test them all
 		for (String file : loadedGmfgens.keySet()) {
 			Document doc = loadedGmfgens.get(file);
-			NodeList nodes = xpath(doc, "//diagram/shortcutsProvidedFor");
+			IterableNodeList nodes = xpath(doc, "//diagram/shortcutsProvidedFor");
 			assertEquals(nodes.getLength(), shortcuts.size());
-			for (int i = 0; i < nodes.getLength(); i++) {
-				String value = ((Element) nodes.item(i)).getFirstChild().getNodeValue();
+			for (Element node : nodes) {
+				String value = node.getFirstChild().getNodeValue();
 				assertTrue( file + ": contains " + value, shortcuts.contains(value) );
 			}
 		}
@@ -289,14 +289,13 @@ public class PluginsTestCase extends XmlTestCase {
 			DiagramUniqueness du = new DiagramUniqueness();
 			
 			// get all top level nodes
-			NodeList nodes = xpath(doc, "//diagram/topLevelNodes");
+			IterableNodeList nodes = xpath(doc, "//diagram/topLevelNodes");
 			
-			for (int i = 0; i < nodes.getLength(); i++) {
-				NodeList behaviours = xpath(nodes.item(i), "behaviour");
-				for (int j = 0; j < behaviours.getLength(); j++) {
+			for (Element node : nodes) {
+				IterableNodeList behaviours = xpath(node, "behaviour");
+				for (Element b : behaviours) {
 					// assume each Behaviour is an OpenDiagramPolicy
 					// (since we can't get xsi:type from xpath)
-					Node b = behaviours.item(j);
 					String editPolicyClassName = b.getAttributes().getNamedItem("editPolicyClassName").getNodeValue();
 					String diagramKind = b.getAttributes().getNamedItem("diagramKind").getNodeValue();
 					String editorID = b.getAttributes().getNamedItem("editorID").getNodeValue();

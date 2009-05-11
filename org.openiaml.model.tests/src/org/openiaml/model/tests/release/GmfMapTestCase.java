@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
+import org.openiaml.model.tests.xpath.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * Tests all .gmfmaps
@@ -84,10 +84,9 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @param loadedContainers containment features found
 	 * @throws Exception
 	 */
-	private void iterateOverNodes(String filename, NodeList nodes, Map<String, List<String>> loadedContainers, String constraintXpath)
+	private void iterateOverNodes(String filename, IterableNodeList nodes, Map<String, List<String>> loadedContainers, String constraintXpath)
 			throws Exception {
-		for (int i = 0; i < nodes.getLength(); i++) {
-			Element node = (Element) nodes.item(i);
+		for (Element node : nodes) {
 			// all nodes must be contained somewher
 			Element containNode = (Element) xpathFirst(node, "containmentFeature");
 			String containment = containNode.getAttribute("href"); 
@@ -143,10 +142,10 @@ public class GmfMapTestCase extends XmlTestCase {
 			
 			Document doc = getGmfMaps().get(filename);
 			
-			NodeList nodes = xpath(doc, "/Mapping/nodes");
+			IterableNodeList nodes = xpath(doc, "/Mapping/nodes");
 			iterateOverNodes(filename, nodes, loadedContainers, "ownedChild/domainSpecialization");
 
-			NodeList links = xpath(doc, "/Mapping/links");
+			IterableNodeList links = xpath(doc, "/Mapping/links");
 			iterateOverNodes(filename, links, loadedContainers, "domainSpecialization");
 			
 		}

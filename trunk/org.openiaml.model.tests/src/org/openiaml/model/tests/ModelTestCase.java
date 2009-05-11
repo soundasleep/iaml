@@ -45,13 +45,13 @@ import org.w3c.dom.Node;
  */
 public abstract class ModelTestCase extends WebTestCase implements XpathTestCase {
 
-	public final String PLUGIN_ID = "org.openiaml.model.tests";
-	public final String ROOT = "src/org/openiaml/model/tests/";
+	public static final String PLUGIN_ID = "org.openiaml.model.tests";
+	public static final String ROOT = "src/org/openiaml/model/tests/";
 	
 	protected IProject project;
-	protected IProgressMonitor monitor = new NullProgressMonitor();
+	protected IProgressMonitor monitor;
 	
-	public String BASE_URL = "http://localhost:8080/junit-workspace/";
+	public static final String BASE_URL = "http://localhost:8080/junit-workspace/";
 	
 	/**
 	 * @throws java.lang.Exception
@@ -59,6 +59,8 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	protected void setUp() throws Exception {
 		// parent setup
 		super.setUp();
+		
+		monitor = new NullProgressMonitor();
 		
 		project = createProject();
 
@@ -72,6 +74,17 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	protected void tearDown() throws Exception {
 		// delete this project automatically
 		// project.delete(false, monitor); -- usually we would want to see the output?
+		
+		// remove reference to project
+		if (project != null) {
+			project.close(monitor);
+			project = null;
+		}
+		
+		monitor = null;
+		transformStatus = null;
+		
+		super.tearDown();
 	}
 	
 	/**
@@ -355,7 +368,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 * XPath helper methods.
 	 * @see org.openiaml.model.tests.xpath.XpathTestCase
 	 */
-	private XpathTestCase xpath = new DefaultXpathTestCase();
+	private static XpathTestCase xpath = new DefaultXpathTestCase();
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Element, java.lang.String)

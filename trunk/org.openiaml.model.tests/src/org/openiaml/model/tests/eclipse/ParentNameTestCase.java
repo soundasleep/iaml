@@ -273,4 +273,15 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		return URI.createPlatformResourceURI(project.getFile(filename).getFullPath().toString(), true);
 	}
 	
+	public void tearDown() throws Exception {
+		if (editor != null) {
+			editor.close(false);
+			editor = null;
+		}
+		
+		root = null;
+		
+		super.tearDown();		
+	}
+	
 }

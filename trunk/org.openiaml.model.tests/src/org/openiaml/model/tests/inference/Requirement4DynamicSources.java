@@ -12,7 +12,6 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.InferenceTestCaseWithConditionWires;
@@ -27,9 +26,8 @@ import org.openiaml.model.tests.InferenceTestCaseWithConditionWires;
  */
 public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWires {
 
-	protected InternetApplication root;
-	
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndInfer(ROOT + "../examples/requirements/4-dynamic_sources.iaml");
 	}
 	

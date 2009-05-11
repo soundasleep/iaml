@@ -6,7 +6,6 @@ package org.openiaml.model.tests.inference;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -24,9 +23,8 @@ import org.openiaml.model.tests.InferenceTestCase;
  */
 public class ConditionWireFalseServer extends InferenceTestCase {
 
-	protected InternetApplication root;
-	
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndInfer(ConditionWireFalseServer.class);
 	}
 	

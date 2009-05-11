@@ -39,6 +39,8 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  */
 public abstract class InferenceTestCase extends ModelTestCase {
 
+	protected InternetApplication root;
+	
 	protected Resource resource;
 
 	/**
@@ -357,5 +359,16 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	public File getInferredModel() {
 		return inferredModel;
 	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		// remove reference to resource
+		resource = null;
+		
+		root = null;
+		
+		super.tearDown();
+	}
+	
 
 }

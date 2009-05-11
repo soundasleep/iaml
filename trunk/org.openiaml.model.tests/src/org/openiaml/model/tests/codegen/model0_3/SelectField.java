@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
@@ -22,10 +21,9 @@ public class SelectField extends DatabaseCodegenTestCase {
 	
 	private static final String FIRST_NAME = "Test User";
 	
-	protected InternetApplication root;
-
 	@Override
 	public void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(SelectField.class);
 		initialiseDatabase();
 	}

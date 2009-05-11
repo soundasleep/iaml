@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
@@ -20,10 +19,9 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  */
 public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 
-	protected InternetApplication root;
-
 	@Override
 	public void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(SelectFieldFromDynamicQuery.class);
 		initialiseDatabase();
 	}

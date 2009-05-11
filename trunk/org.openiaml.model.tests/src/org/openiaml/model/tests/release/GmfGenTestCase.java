@@ -29,22 +29,19 @@ import org.w3c.dom.Element;
  *
  */
 public class GmfGenTestCase extends XmlTestCase {
-
-	private static Map<String,Document> loadedGens;
 	
 	/**
 	 * Load up all the .gmfmap's
 	 * 
 	 */
-	public static Map<String,Document> getGmfGens() throws Exception {
-		if (loadedGens == null) {
-			loadedGens = new HashMap<String,Document>();
-			
-			// load all .gmftool's
-			for (String map : getGenList()) {
-				loadedGens.put( map, loadDocument(map) );
-			}
+	public Map<String,Document> getGmfGens() throws Exception {
+		Map<String,Document> loadedGens = new HashMap<String,Document>();
+		
+		// load all .gmftool's
+		for (String map : getGenList()) {
+			loadedGens.put( map, loadDocument(map) );
 		}
+		
 		return loadedGens;
 	}
 		

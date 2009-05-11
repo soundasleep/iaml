@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -42,11 +41,11 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class SyncWiresProperties extends CodegenTestCase {
-	
-	protected InternetApplication root;
-	protected final String PROPERTIES = "SyncWiresProperties.properties";
+
+	protected static final String PROPERTIES = "SyncWiresProperties.properties";
 	
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(SyncWiresProperties.class);
 	}
 	

@@ -25,10 +25,17 @@ import org.openiaml.model.model.InternetApplication;
  */
 public abstract class CodegenTestCase extends InferenceTestCase {
 	
+	protected InternetApplication root;
+
 	/**
 	 * Prevent setUp() being called outside of code generation.
+	 * 
+	 * Subclasses should not call setUp(), because the parent
+	 * setUp() creates a project etc. We instead want
+	 * the code in {@link #loadAndCodegen(Class)} to create
+	 * the project.
 	 */
-	protected abstract void setUp() throws Exception;
+	//protected abstract void setUp() throws Exception;
 	
 	/**
 	 * Load a model and perform code generation.
@@ -78,9 +85,11 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-		if (getProject() != null) {
-			getProject().close(monitor);
+		// remove reference to InternetApplication
+		if (root != null) {
+			root = null;
 		}
+		
 		super.tearDown();
 	}
 

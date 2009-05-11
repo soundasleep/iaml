@@ -10,7 +10,6 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
@@ -28,9 +27,8 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class SelectFieldFromObject extends CodegenTestCase {
 
-	protected InternetApplication root;
-
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndInfer(SelectFieldFromObject.class, true);
 	}
 

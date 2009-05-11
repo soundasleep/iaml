@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.codegen.model0_1;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -26,9 +25,8 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class LoginHandlerKey extends CodegenTestCase {
 	
-	protected InternetApplication root;
-	
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(LoginHandlerKey.class);
 	}
 	

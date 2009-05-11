@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.codegen.model0_2;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -15,10 +14,9 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class Requirement2StaticParams extends CodegenTestCase {
-	
-	protected InternetApplication root;
-	
+
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(ROOT + "../examples/requirements/2-static_params.iaml");
 	}
 	

@@ -22,7 +22,7 @@ public class EcoreTestCase extends XmlTestCase {
 	 */
 	public void testOawEcore() throws Exception {
 		File source = new File("../org.openiaml.model/model/iaml.ecore");
-		File target = new File("../org.openiaml.model.codegen.oaw/src/metamodel/iaml.ecore");
+		File target = new File("../org.openiaml.model.codegen.oaw/src/metamodel/iaml-current.ecore");
 		
 		assertFileExists(source);
 		assertFileExists(target);

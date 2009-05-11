@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -17,10 +16,9 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class DatabaseWithInputForm extends CodegenTestCase {
-	
-	protected InternetApplication root;
-	
+
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(DatabaseWithInputForm.class);
 	}
 	

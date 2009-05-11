@@ -11,7 +11,6 @@ import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -21,10 +20,9 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class SyncFieldDomainAttribute extends CodegenTestCase {
-	
-	protected InternetApplication root;
-	
+
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(SyncFieldDomainAttribute.class);
 	}
 	

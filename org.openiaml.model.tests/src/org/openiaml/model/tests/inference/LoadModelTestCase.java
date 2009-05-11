@@ -16,9 +16,9 @@ import org.openiaml.model.tests.InferenceTestCase;
  */
 public class LoadModelTestCase extends InferenceTestCase {
 
-	protected InternetApplication root;
-	
 	protected void setUp() throws Exception {
+		super.setUp();
+		
 		String modelFile = ROOT + "inference/LoadModelTestCase.iaml";
 		EObject model = loadModelDirectly(modelFile);
 		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
@@ -28,10 +28,6 @@ public class LoadModelTestCase extends InferenceTestCase {
 
 		// write out this inferred model for reference
 		saveInferredModel();
-	}
-
-	protected void tearDown() throws Exception {
-		// empty
 	}
 	
 	public void testContents() {

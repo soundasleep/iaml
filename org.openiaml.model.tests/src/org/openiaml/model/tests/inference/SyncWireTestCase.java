@@ -11,7 +11,6 @@ import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
@@ -34,9 +33,8 @@ import org.openiaml.model.tests.InferenceTestCase;
  */
 public class SyncWireTestCase extends InferenceTestCase {
 
-	protected InternetApplication root;
-	
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndInfer(SyncWireTestCase.class);
 	}
 	

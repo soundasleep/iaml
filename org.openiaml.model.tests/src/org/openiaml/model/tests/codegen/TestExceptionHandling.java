@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.codegen;
 
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /** 
@@ -14,13 +13,6 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class TestExceptionHandling extends CodegenTestCase {
-	
-	protected InternetApplication root;
-	
-	@Override
-	protected void setUp() throws Exception {
-		// do nothing
-	}
 
 	/**
 	 * Make sure that when an exception is thrown, operation halts. 

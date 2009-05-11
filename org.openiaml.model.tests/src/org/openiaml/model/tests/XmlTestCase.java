@@ -220,7 +220,7 @@ public class XmlTestCase extends TestCase implements XpathTestCase {
 	 * XPath helper methods.
 	 * @see org.openiaml.model.tests.xpath.XpathTestCase
 	 */
-	private XpathTestCase xpath = new DefaultXpathTestCase();
+	private static XpathTestCase xpath = new DefaultXpathTestCase();
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Element, java.lang.String)

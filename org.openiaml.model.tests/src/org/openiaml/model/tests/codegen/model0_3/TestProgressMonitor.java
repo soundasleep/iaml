@@ -9,7 +9,6 @@ import java.util.List;
 import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /** 
@@ -20,18 +19,11 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class TestProgressMonitor extends CodegenTestCase {
-	
-	protected InternetApplication root;
-	
-	@Override
-	protected void setUp() throws Exception {
-		// do nothing
-	}
 
 	/**
 	 * Make sure that when an exception is thrown, operation halts. 
 	 */
-	public void testDisplaysFileProgress() throws Exception {
+	public void testDisplaysProgress() throws Exception {
 		final List<String> subtasks = new ArrayList<String>();
 		
 		// set up a special monitor

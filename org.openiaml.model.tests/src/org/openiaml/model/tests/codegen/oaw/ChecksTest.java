@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.codegen.oaw;
 
 import org.eclipse.core.runtime.IStatus;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -14,12 +13,10 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class ChecksTest extends CodegenTestCase {
-	
-	protected InternetApplication root;
 
 	@Override
 	protected void setUp() throws Exception {
-		// do nothing: each checks test method will set up the model itself
+		super.setUp();
 	}
 
 	/**

@@ -23,22 +23,18 @@ import org.w3c.dom.Element;
  */
 public class GmfMapTestCase extends XmlTestCase {
 
-	private static Map<String,Document> loadedMaps;
-	
-	
 	/**
 	 * Load up all the .gmfmap's
 	 * 
 	 */
-	public static Map<String,Document> getGmfMaps() throws Exception {
-		if (loadedMaps == null) {
-			loadedMaps = new HashMap<String,Document>();
-			
-			// load all .gmftool's
-			for (String map : getMapList()) {
-				loadedMaps.put( map, loadDocument(map) );
-			}
+	public Map<String,Document> getGmfMaps() throws Exception {
+		Map<String,Document> loadedMaps = new HashMap<String,Document>();
+		
+		// load all .gmftool's
+		for (String map : getMapList()) {
+			loadedMaps.put( map, loadDocument(map) );
 		}
+
 		return loadedMaps;
 	}
 	
@@ -48,7 +44,7 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @see GmfToolTestCase#getGmfTools
 	 */
 	public Map<String,Document> getGmfTools() throws Exception {
-		return GmfToolTestCase.getGmfTools();
+		return new GmfToolTestCase().getGmfTools();
 	}
 	
 	/**

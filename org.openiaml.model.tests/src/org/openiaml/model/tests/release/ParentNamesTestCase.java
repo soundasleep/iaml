@@ -169,7 +169,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 * Loads the gmfmaps from {@link GmfMapTestCase}.
 	 */
 	public Map<String,Document> getGmfMaps() throws Exception {
-		return GmfMapTestCase.getGmfMaps();
+		return new GmfMapTestCase().getGmfMaps();
 	}
 	
 	

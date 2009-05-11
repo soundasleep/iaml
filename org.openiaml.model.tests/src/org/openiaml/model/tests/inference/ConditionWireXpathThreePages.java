@@ -7,7 +7,6 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -28,9 +27,8 @@ import org.openiaml.model.tests.InferenceTestCaseWithConditionWires;
  */
 public class ConditionWireXpathThreePages extends InferenceTestCaseWithConditionWires {
 
-  protected InternetApplication root;
-  
   protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndInfer(ConditionWireXpathThreePages.class);
   }
   

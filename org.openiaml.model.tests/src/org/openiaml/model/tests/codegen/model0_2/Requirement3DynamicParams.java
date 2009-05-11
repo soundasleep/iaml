@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -18,10 +17,9 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class Requirement3DynamicParams extends CodegenTestCase {
-	
-	protected InternetApplication root;
-	
+
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(ROOT + "../examples/requirements/3-dynamic_params.iaml");
 	}
 	

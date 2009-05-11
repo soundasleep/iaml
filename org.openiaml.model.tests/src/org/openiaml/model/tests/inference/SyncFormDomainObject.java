@@ -9,7 +9,6 @@ import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -28,9 +27,8 @@ import org.openiaml.model.tests.InferenceTestCase;
  */
 public class SyncFormDomainObject extends InferenceTestCase {
 
-	protected InternetApplication root;
-
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndInfer(SyncFormDomainObject.class);
 	}
 

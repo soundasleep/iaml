@@ -9,7 +9,6 @@ import java.util.Random;
 import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -20,10 +19,9 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class Requirement4DynamicSources extends CodegenTestCase {
-	
-	protected InternetApplication root;
-	
+
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndCodegen(ROOT + "../examples/requirements/4-dynamic_sources.iaml");
 	}
 	

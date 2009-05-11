@@ -97,6 +97,14 @@ public class PluginsTestCase extends XmlTestCase {
 		}
 	}
 	
+	public void tearDown() throws Exception {
+		loadedGmfgens = null;
+		loadedManifests = null;
+		shortcuts = null;
+		
+		super.tearDown();
+	}
+	
 	/**
 	 * Test the version tags of each of these files.
 	 * 

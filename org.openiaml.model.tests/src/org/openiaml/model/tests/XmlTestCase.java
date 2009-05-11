@@ -56,10 +56,13 @@ public class XmlTestCase extends TestCase {
 	 *
 	 */
 	public class IterableNodeList implements NodeList, Iterable<Element> {
-		private NodeList nl;
-		
-		public IterableNodeList(NodeList elements) {
-			this.nl = elements;
+		private List<Element> elements;
+	
+		public IterableNodeList(NodeList nl) {
+			elements = new ArrayList<Element>();
+			for (int i = 0; i < nl.getLength(); i++) {
+				elements.add((Element) nl.item(i));
+			}
 		}
 
 		/* (non-Javadoc)
@@ -67,11 +70,7 @@ public class XmlTestCase extends TestCase {
 		 */
 		@Override
 		public Iterator<Element> iterator() {
-			List<Element> e = new ArrayList<Element>();
-			for (int i = 0; i < nl.getLength(); i++) {
-				e.add((Element) nl.item(i));
-			}
-			return e.iterator();
+			return elements.iterator();
 		}
 
 		/* (non-Javadoc)
@@ -79,7 +78,7 @@ public class XmlTestCase extends TestCase {
 		 */
 		@Override
 		public int getLength() {
-			return nl.getLength();
+			return elements.size();
 		}
 
 		/* (non-Javadoc)
@@ -87,7 +86,27 @@ public class XmlTestCase extends TestCase {
 		 */
 		@Override
 		public Node item(int index) {
-			return nl.item(index);
+			return elements.get(index);
+		}
+		
+		/**
+		 * Is this NodeList empty? (Additional method.)
+		 * 
+		 * @return true if this list is empty
+		 */
+		public boolean isEmpty() {
+			return elements.isEmpty();
+		}
+
+		/**
+		 * Add all of the elements in the given list to this list.
+		 * 
+		 * @param list
+		 */
+		public void addAll(IterableNodeList list) {
+			for (Element e : list) {
+				elements.add(e);
+			}
 		}
 	}
 	

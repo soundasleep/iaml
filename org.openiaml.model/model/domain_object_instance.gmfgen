@@ -509,11 +509,6 @@
               xsi:type="gmfgen:LabelOffsetAttributes"
               y="40"/>
         </viewmap>
-        <behaviour
-            xsi:type="gmfgen:OpenDiagramBehaviour"
-            editPolicyClassName="WireOpenDiagramEditPolicy"
-            diagramKind="Iaml_Wire"
-            editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures

@@ -24,6 +24,7 @@ public class ReleaseTestsSuite {
         suite.addTestSuite(GmfGraphTestCase.class);
         suite.addTestSuite(GmfToolTestCase.class);
         suite.addTestSuite(GmfMapTestCase.class);
+        suite.addTestSuite(GmfGenTestCase.class);
         suite.addTestSuite(ParentNamesTestCase.class);
 		//$JUnit-END$
         return suite; 

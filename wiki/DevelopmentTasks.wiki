@@ -42,4 +42,5 @@ Other development tasks still to document:
 
   # Creating a new graphical editor
   # Model migration: creating new model versions
+  # [DevelopmentTests Running test cases]
   # [ReleaseTasks Releasing and publishing a new version]

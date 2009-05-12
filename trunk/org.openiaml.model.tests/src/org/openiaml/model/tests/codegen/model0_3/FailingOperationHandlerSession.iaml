@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109dbdceb.19">
+  <children xsi:type="iaml.visual:Page" id="visual.12109dbdd39.37" name="expected failure page" inEdges="wires.121370d7b40.23"/>
+  <children xsi:type="iaml.visual:Page" id="visual.121370d7b40.6" name="normal page"/>
+  <sessions id="scopes.121370d7b50.1" name="containing session" outEdges="wires.121370d7b40.23">
+    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.121370d7b40.11" id="model.121370d7af2.33" name="instant failure">
+      <nodes xsi:type="iaml.operations:StartNode" id="operations.121370d7b50.19" outExecutions="model.121370d7af2.82"/>
+      <nodes xsi:type="iaml.operations:CancelNode" id="operations.121370d7b50.1b" inExecutions="model.121370d7af2.82" exceptionText="an expected failure message"/>
+      <executionEdges id="model.121370d7af2.82" from="operations.121370d7b50.19" to="operations.121370d7b50.1b"/>
+    </operations>
+    <eventTriggers id="model.121370d7af2.29" name="access" outEdges="wires.121370d7b40.11">
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.121370d7b40.11" from="model.121370d7af2.29" to="model.121370d7af2.33" name="run"/>
+    </eventTriggers>
+    <wires xsi:type="iaml.wires:NavigateWire" id="wires.121370d7b40.b" name="fail"/>
+    <wires xsi:type="iaml.wires:NavigateWire" id="wires.121370d7b40.23" from="scopes.121370d7b50.1" to="visual.12109dbdd39.37" name="fail"/>
+    <children xsi:type="iaml.visual:Page" id="visual.121370d7b40.18" name="session page"/>
+  </sessions>
+</iaml:InternetApplication>

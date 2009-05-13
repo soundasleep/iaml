@@ -86,7 +86,7 @@ function store_event(page_id, event_name, arg0) {
  * We refactor the queued functionality so that _any_ remote call
  * will be queued up properly.
  */
-function execute_queued_url(url, counter, function_queue) {
+function execute_queued_url(url, counter, function_queue, allow_instructions) {
 	store_event_function = function() {
 		counterIncrement(counter);
 		debug("creating ajax request to url: " + url);
@@ -106,12 +106,43 @@ function execute_queued_url(url, counter, function_queue) {
 	      		function_queue();
 	      	}
 	      	
+	      	// are there any instructions in here?
+	      	if (allow_instructions) {
+	      		debug('executing instructions');
+	      		var inst_list = response.split("\n");
+	      		for (var i = 0; i < inst_list.length; i++) {
+	      			var inst = trim(inst_list[i]);
+	      			if (inst) {
+	      				var bits = inst.split(" ");
+	      				switch (bits[0]) {
+	      					case "ok":
+	      						debug("[instruction] ok");
+	      						break;		// nothing
+	      					
+	      					case "set_value":
+	      						if (bits.length != 3) {
+	      							throw new IamlJavascriptException("set_value instruction called with incorrect number of arguments: expected 3, found " + bits.length);
+	      						}
+	      						var element_id = decodeURIComponent(bits[1]);
+	      						var value = decodeURIComponent(bits[2]);
+	      						debug("[instruction] set value(" + element_id + ")");
+	      						document.getElementById(element_id).value = value;
+	      						break;
+	      					
+	      					default:
+	      						throw new IamlJavascriptException("Unknown instruction '" + inst + "'");
+	      				}
+	      			}
+	      		}  
+	      	} 
+	      	
 	      	next_store_event();	
 	      	ajaxDecrement();
 	    },
 	    onFailure: function(transport){ 
 			var fail = 'Ajax failed at ' + url + ': ' + transport.responseText || "no response text";
 			debug("FAILURE: " + fail);
+			alert(fail);
 	      	next_store_event();
 			ajaxFailed(fail);		
 	     }
@@ -160,35 +191,36 @@ function next_store_event() {
 
 /* save directly to database (only one attribute) */
 function store_db(attribute_id, arg0) {
-	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&arg0=' + escape(arg0);
-	execute_queued_url(url, 'store_db', false);
+	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
+	execute_queued_url(url, 'store_db', false, false);
 }
 
 /* save a session variable (only one attribute) */
 function set_session(id, arg0, function_queue) {
-	var url = 'set_session.php?id=' + escape(id) + '&arg0=' + escape(arg0);
-	execute_queued_url(url, 'set_session', function_queue);
+	var url = 'set_session.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
+	execute_queued_url(url, 'set_session', function_queue, false);
 }
 
 /* save a server variable (only one attribute) */
 function set_application_value(id, arg0, function_queue) {
-	var url = 'set_application_value.php?id=' + escape(id) + '&arg0=' + escape(arg0);
-	execute_queued_url(url, 'set_application_value', function_queue);
+	var url = 'set_application_value.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
+	execute_queued_url(url, 'set_application_value', function_queue, true /* allow instructions */);
 }
 
 /* save a domain instance variable */
 function set_domain_attribute(id, arg0, function_queue) {
-	var url = 'set_domain_attribute.php?id=' + escape(id) + '&arg0=' + escape(arg0);
-	execute_queued_url(url, 'set_domain_attribute', function_queue);
+	var url = 'set_domain_attribute.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
+	execute_queued_url(url, 'set_domain_attribute', function_queue, false);
 }
 
 /* call a remote operation (only one attribute) */
 function call_remote_event(container, operation_name, arg0, arg1) {
 	var url = 'call_remote_event.php?container=' + escape(container) 
+		+ '&page=' + escape(page_id) 
 		+ '&operation_name=' + escape(operation_name)
 		+ '&arg0=' + escape(arg0)
 		+ '&arg1=' + escape(arg1);
-	execute_queued_url(url, 'remote_event', false);
+	execute_queued_url(url, 'remote_event', false, false);
 }
 
 var debug_message_saved = "";
@@ -247,6 +279,13 @@ function is_array_equal(a) {
 	}
 	
 	return true;
+}
+
+/**
+ * Trim whitespace.
+ */
+function trim(str) {
+	return str.replace(/^\s\s*/, "").replace(/\s\s*$/, "");
 }
 
 /**

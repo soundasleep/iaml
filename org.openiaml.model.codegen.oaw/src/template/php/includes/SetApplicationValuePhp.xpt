@@ -10,8 +10,22 @@
  
 require("header.php");
 
+// queue up any log messages
+queue_log_messages(true);
+
 log_message("set_application_value.php? " . print_r($_GET, true));
+
+// expand any domain instances
+«EXPAND template::php::DomainInstance::expandDomainAttributes FOR this-»
+«EXPAND template::php::DomainInstance::expandDomainObjects FOR this-»
+
+// the property to set
 $id = $_GET["id"] or throw_new_IamlRuntimeException("no id");
+
+// the current page ID we are on
+$page_id = $_GET["page"] or throw_new_IamlRuntimeException("no page id");
+
+// the value to set the property to
 $arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
 
 set_application_value($id, $arg0);
@@ -19,4 +33,101 @@ log_message("set_application_value.php: setting id=$id, arg0=$arg0");
 
 echo "ok";
 
+/* Is there additional actions we should do on the client-side once this
+ * property has changed? */
+«EXPAND potentialUpdatesRequired FOREACH allApplicationElementProperties(this)»
+
+«ENDDEFINE»
+
+«DEFINE potentialUpdatesRequired FOR model::ApplicationElementProperty»
+	if ($id == "«safeName()-»") {
+		/* Property "«name-»" («id-») */
+		
+		«REM»is this property used as the input for a SelectWire?«ENDREM»
+		«REM»is this property's parent used as the input for a SelectWire?«ENDREM»
+		«IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField)»
+			«EXPAND potentialContainerUpdates FOR (model::visual::InputTextField) eContainer»
+		«ENDIF»
+	}
+«ENDDEFINE»
+
+«DEFINE potentialContainerUpdates FOR model::visual::InputTextField»
+	«EXPAND potentialUpdates FOREACH outEdges»
+«ENDDEFINE»
+
+«DEFINE potentialUpdates FOR model::WireEdge»
+	«EXPAND exception FOR throwException("Unknown potential update wire edge: " + this)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdates FOR model::wires::ParameterWire»
+	/* ParameterWire "«this-»" */
+	«EXPAND potentialUpdatesParameter FOR to»
+«ENDDEFINE»
+«DEFINE potentialUpdates FOR model::wires::SyncWire»
+	/* SyncWire "«this-»" */
+	«EXPAND potentialUpdatesParameter FOR from»
+	«EXPAND potentialUpdatesParameter FOR to»
+«ENDDEFINE»
+
+«DEFINE potentialUpdatesParameter FOR model::WireEdgesSource»
+	/* ignore «this» */
+«ENDDEFINE»
+«DEFINE potentialUpdatesParameter FOR model::WireEdgeDestination»
+	/* ignore «this» */
+«ENDDEFINE»
+
+«DEFINE potentialUpdatesParameter FOR model::wires::SelectWire»
+	/* SelectWire "«this-»" */
+	«EXPAND potentialUpdateDestination FOR to»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDestination FOR model::WireEdgeDestination»
+	«EXPAND exception FOR throwException("Unknown update wire edge destination: " + this)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDestination FOR model::DomainObjectInstance»
+	/* DomainObjectInstance "«this-»" */
+	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»
+	/* DomainAttributeInstance "«this-»" */
+	$value = get_attribute_instance_«safeName()»();
+	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDesinationWires FOR model::wires::SyncWire»
+	/* SyncWire "«this-»" */
+	«EXPAND outgoingValue FOR from»
+	«EXPAND outgoingValue FOR to»
+«ENDDEFINE»
+
+«DEFINE outgoingValue FOR model::WireEdgesSource»
+«ENDDEFINE»
+«DEFINE outgoingValue FOR model::WireEdgeDestination»
+«ENDDEFINE»
+«DEFINE outgoingValue FOR model::visual::InputTextField»
+	«EXPAND outgoingValue FOREACH properties.select(e|e.name=="fieldValue")»
+«ENDDEFINE»
+
+«DEFINE outgoingValue FOR model::ApplicationElementProperty»
+	if ($page_id == "«safeNameString(containingPage(this).id)-»") {
+		/* the property "«this»" needs to be updated on the client */
+		«IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField)»
+			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::InputTextField) eContainer).id)»): '$value'");
+			log_message("set_value " 
+				. escape_parameter_string("«safeNameString(((model::visual::InputTextField) eContainer).id)»")
+				. " "
+				. escape_parameter_string($value));
+			echo "\nset_value " 
+				. escape_parameter_string("«safeNameString(((model::visual::InputTextField) eContainer).id)»")
+				. " "
+				. escape_parameter_string($value);				
+		«ENDIF»
+	}
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
 «ENDDEFINE»

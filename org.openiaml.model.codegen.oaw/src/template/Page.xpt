@@ -10,7 +10,7 @@
 	«FILE "output/"+safeNameString(id)+".php"-»
 <?php
 		/* generated page "«name-»" */
-
+		
 		// include header code
 		require("header.php");		// include header code
 		require("create_database.php");		// ensure DB exists
@@ -18,6 +18,9 @@
 		
 		// queue up any log messages
 		queue_log_messages(true);
+
+		// initialise default values for any fields
+		«EXPAND initialiseDefaultValues FOREACH children»
 		
 		// run any event triggers for this session
 		«IF containingSession() != null»
@@ -96,6 +99,11 @@
 		<head>
 			<title>«pageTitle()»</title>
 			<link rel="stylesheet" type="text/css" href="default.css">
+			<script language="Javascript" type="text/javascript">
+			/* <![CDATA[ */
+				var page_id = "«safeNameString(id)-»";
+			/* ]]> */
+			</script>
 			<script language="Javascript" type="text/javascript" src="js/prototype.js"></script>
 			<script language="Javascript" type="text/javascript">
 			/* <![CDATA[ */
@@ -261,6 +269,7 @@
 				«REM»any application element properties to change? (both on client and server)«ENDREM»
 				«EXPAND outgoingValues(this) FOREACH outEdges»
 				«EXPAND outgoingValues(this) FOREACH inEdges»
+				«REM»it may be required to outgoingValues(this) FOREACH properties.outEdges«ENDREM»
 				
 				// server values
 				«REM»save a value for myself (which is not covered by an outEdge/inEdge) to the server/session?«ENDREM»
@@ -378,5 +387,26 @@
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
 		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", document.getElementById('«safeName(container)-»').value);
+	«ENDIF»
+«ENDDEFINE»
+
+/* default values that we should set before we access this page */
+«DEFINE initialiseDefaultValues FOR model::ApplicationElement»
+«ENDDEFINE»
+
+«DEFINE initialiseDefaultValues FOR model::ApplicationElementContainer»
+	«EXPAND initialiseDefaultValues FOREACH children»
+«ENDDEFINE»
+
+«DEFINE initialiseDefaultValues FOR model::visual::InputTextField»
+	/* text field "«this.name-»" */
+	«EXPAND initialiseDefaultValueProperty FOREACH properties.select(e|e.name=="fieldValue")»
+	«EXPAND initialiseDefaultValues FOREACH children»
+«ENDDEFINE»
+
+«DEFINE initialiseDefaultValueProperty FOR model::ApplicationElementProperty»
+	«IF defaultValue != null && defaultValue.length > 0»
+		initialize_application_value_default("«safeName()-»",
+			"«escapePhpString(defaultValue)-»");		«REM»TODO encode«ENDREM»	
 	«ENDIF»
 «ENDDEFINE»

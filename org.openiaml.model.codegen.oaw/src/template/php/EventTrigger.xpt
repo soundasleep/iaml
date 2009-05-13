@@ -420,6 +420,11 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::InputTextField»
+	/* implicitly from InputTextField */
+	«EXPAND callOperationParametersSource(wire, inline, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»
+«ENDDEFINE»
+
 «DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue»
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»

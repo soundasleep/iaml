@@ -3,8 +3,15 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* expand out all domain attribute instances for the page */
+«DEFINE expandDomainAttributes FOR model::InternetApplication»
+	«EXPAND storeDomainAttribute FOREACH getAllDomainAttributeInstances()»
+«ENDDEFINE»
 «DEFINE expandDomainAttributes FOR model::visual::Page»
 	«EXPAND storeDomainAttribute FOREACH getRoot().getAllDomainAttributeInstances()»
+«ENDDEFINE»
+
+«DEFINE expandDomainObjects FOR model::InternetApplication»
+	/* empty */
 «ENDDEFINE»
 «DEFINE expandDomainObjects FOR model::visual::Page»
 	/* empty */

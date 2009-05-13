@@ -70,14 +70,14 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		// reload page, it should be stored
 		reloadPage(sitemap, "container");		
 		{
-			String field2 = getLabelIDForText("textfield");
+			String field2 = getLabelIDForText("edit name");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
 		// *restart* session, it should be stored
 		restartSession(sitemap, "container");
 		{
-			String field2 = getLabelIDForText("textfield");
+			String field2 = getLabelIDForText("edit name");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
@@ -124,9 +124,10 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		
 		// change the select field
 		setLabeledFormElementField(select, "target@jevon.org");
+		waitForAjax();
 		
 		// the name should change
-		assertLabeledFieldEquals(select, "User Two");
+		assertLabeledFieldEquals(field, "User Two");
 		
 		// if we change it, this value should be stored between pages		
 		String newValue = "another name change " + new Date().toString();
@@ -136,14 +137,14 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		// reload page, it should be stored
 		reloadPage(sitemap, "container");		
 		{
-			String field2 = getLabelIDForText("textfield");
+			String field2 = getLabelIDForText("edit name");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
 		// *restart* session, it should be stored
 		restartSession(sitemap, "container");
 		{
-			String field2 = getLabelIDForText("textfield");
+			String field2 = getLabelIDForText("edit name");
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		

@@ -29,6 +29,10 @@ safeNameString(String s) :
 escapeString(String s) :
 	s.replaceAll("[\"]", "\\\"");
 	
+/* TODO not a complete encoding, misses \r\n\t\v\f\[0-7]{1,3}\x[0-9A-Fa-f]{1,2} and perhaps unicode too */
+escapePhpString(String s):
+	s.replaceAll("[\\\\]", "\\\\").replaceAll("[\"]", "\\\"").replaceAll("[$]", "\\$");
+	
 operationName(model::WireEdgeDestination this) : 
 	"invalid_operation";
 
@@ -98,6 +102,16 @@ allContainerOperations(model::ApplicationElementContainer this) :
 
 allContainerOperations(model::ApplicationElement this) :
 	operations;
+
+/** All of the ApplicationElementProperties stored within this InternetApplication */
+List[model::ApplicationElementProperty] allApplicationElementProperties(model::InternetApplication this) :
+	properties.toSet().union( eAllContents.allApplicationElementProperties() ).reject( e | e == null );
+
+List[model::ApplicationElementProperty] allApplicationElementProperties(emf::EObject this) :
+	null;
+
+List[model::ApplicationElementProperty] allApplicationElementProperties(model::ApplicationElementProperty this) :
+	this;
 
 /* for a page that is part of a session/scope */
 possibleParentOperations(model::scopes::Session this ) :

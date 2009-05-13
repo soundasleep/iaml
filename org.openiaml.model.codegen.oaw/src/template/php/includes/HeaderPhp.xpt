@@ -34,6 +34,10 @@ function log_message($msg, $also_debug = true) {
  * so we need to wrap it in a function.
  */
 function throw_new_IamlRuntimeException($message) {
+	/* re-enable log messages, if they were disabled */
+	queue_log_messages(false); 
+	
+	/* throw an exception */
 	throw new IamlRuntimeException($message);
 }
 
@@ -184,6 +188,17 @@ function set_application_value($id, $value) {
 }
 
 /**
+ * If the given value ID does not yet exist, insert the give
+ * default value into the database.
+ */
+function initialize_application_value_default($id, $default) {
+	if (get_application_value($id, null) === null) {
+		log_message("Initializing default '$id' to '$default'");
+		set_application_value($id, $default);
+	}
+}
+
+/**
  * Wraps the URL with functionality to prevent infinite loops, and
  * also copy the session ID.
  */
@@ -227,6 +242,14 @@ function escape_javascript_string($string) {
 	$string = str_replace("\r", "\\r", $string);
 	$string = str_replace("\t", "\\t", $string);
 	return $string;
+}
+
+function escape_parameter_string($string) {
+	return rawurlencode($string);
+}
+
+function unescape_parameter_string($string) {
+	return rawurldecode($string);
 }
 
 /**

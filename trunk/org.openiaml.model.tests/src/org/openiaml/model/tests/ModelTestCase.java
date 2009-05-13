@@ -167,7 +167,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 				throw new TransformationException("Transformation failed: " + transformStatus.getException().getMessage(), transformStatus.getException());	// force an exception
 			}
 			// force a fail
-			throw new TransformationException(transformStatus.getMessage());
+			throw new TransformationException("Transformation did not pass successfully: " + transformStatus.getMessage());
 		}
 	}
 	

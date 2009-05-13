@@ -37,7 +37,7 @@
 	«FILE "output/site_layout.xml"-»«EXPAND xml::SiteLayout::siteLayout-»«ENDFILE-»
 
 	«FILE "output/js/prototype.js"»«EXPAND js::includes::PrototypeJs::prototypeJs»«ENDFILE»
-	«FILE "output/default.js"»«EXPAND js::includes::DefaultJs::defaultJs»«ENDFILE»
+	«REM»«FILE "output/default.js"»«EXPAND js::includes::DefaultJs::defaultJs»«ENDFILE»«ENDREM»
 	«FILE "output/exception.php"»«EXPAND php::includes::Exception::exceptionPhp»«ENDFILE»
 
 	«FILE "output/header.php"»«EXPAND php::includes::HeaderPhp::headerPhp»«ENDFILE»

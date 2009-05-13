@@ -563,7 +563,7 @@
 
 «DEFINE expandFailEdge FOR model::wires::NavigateWire-»
 	// we need to navigate to the fail page
-	var url = "«safeName(to)».php?fail=" + e; /* TODO urlencode me */
+	var url = "«safeName(to)».php?fail=" + encodeURIComponent(e);
 	debug("Redirecting to '" + url + "' (fail)");
 	window.location = url;
 «ENDDEFINE»

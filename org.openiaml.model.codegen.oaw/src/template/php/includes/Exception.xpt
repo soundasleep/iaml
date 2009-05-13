@@ -31,6 +31,25 @@ $fail = require_get("fail", "No exception specified");
 		An exception occured:
 		<span><?php echo htmlspecialchars($fail); ?>
 	</div>
+
+	«REM»
+	I don't really want to put this debug code here, but 
+	until issue 43 is resolved, this will have to stay TODO.
+	«ENDREM»
+	<div id="debug"></div>
+	<div id="response">empty</div>
+	
+	<!-- for test cases to improve speed: an outstanding ajax calls counter -->
+	<div id="debug_monitors">
+		<div id="ajax_monitor"></div>
+		<div id="counter_store_db"></div>
+		<div id="counter_store_event"></div>
+		<div id="counter_set_session"></div>
+		<div id="counter_set_application_value"></div>
+		<div id="counter_set_domain_attribute"></div>
+		<div id="counter_remote_event"></div>
+	</div>
+
 </body>
 </html>
 «ENDDEFINE»

@@ -11,6 +11,8 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+
 /**
  * Tests instances: Selecting only one field from any property.
  * 
@@ -167,4 +169,49 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		
 	}
 
+	/**
+	 * Test changing the field value to something that doesn't exist
+	 * in the database.
+	 *  
+	 * @throws Exception
+	 */
+	public void testSelectMissing() throws Exception {
+		// go to sitemap
+		IFile sitemap = getProject().getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		
+		// go to page
+		beginAtSitemapThenPage(sitemap, "container");		
+		String select = getLabelIDForText("select email");
+		
+		// set it to something that doesnt exist
+		setLabeledFormElementField(select, "missing@jevon.org");
+		waitForAjax();
+		
+		// we should now be on an exception page (redirected)
+		assertTitleEquals("An exception occured");
+		assertTextPresent("Could not find any value instance for attribute");
+		assertProblem();
+		
+		// if we reload the page, we will get back to the same error page
+		try {
+			beginAtSitemapThenPage(sitemap, "container");
+			fail("We should not be able to load page 'container' back again");
+		} catch (FailingHttpStatusCodeException e) {
+			// we should instantly have an exception occur
+			// expected
+			assertTitleEquals("An exception occured");
+			assertTextPresent("Could not find any value instance for attribute");
+			assertProblem();
+		}
+		
+		// this value should not have been inserted into the database
+		{
+			ResultSet rs = executeQuery("SELECT * FROM User WHERE email='missing@jevon.org'");
+			assertFalse("missing@jevon.org should not have been inserted into the database.", rs.next());
+		}
+		
+	}
+
+	
 }

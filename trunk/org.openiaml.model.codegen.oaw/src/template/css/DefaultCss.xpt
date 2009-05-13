@@ -24,6 +24,16 @@ form {
 	background: #eee;
 }
 
+.exception {
+	width: 80%;
+	background: #fcc;
+	border: 1px solid #c66;
+	padding: 1em;
+	margin: 1em auto;
+	font-weight: bold;
+}
+.exception span { font-weight: normal; }
+
 /* debug css */
 div#debug {
 	border: 1px solid #666;

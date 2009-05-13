@@ -87,13 +87,23 @@ echo "ok";
 
 «DEFINE potentialUpdateDestination FOR model::DomainObjectInstance»
 	/* DomainObjectInstance "«this-»" */
+	$object = get_object_instance_«safeName()»(); // parameters are from server-side
+	«EXPAND potentialUpdateDestinationAttributes FOREACH attributes»
+	
 	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
 	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»
 	/* DomainAttributeInstance "«this-»" */
-	$value = get_attribute_instance_«safeName()»();
+	$value = get_attribute_instance_«safeName()»(); // parameters are from server-side
+	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance»
+	/* attribute "«name»" («this») */
+	$value = $object["«safeNameString(name)-»"];
 	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
 	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
 «ENDDEFINE»

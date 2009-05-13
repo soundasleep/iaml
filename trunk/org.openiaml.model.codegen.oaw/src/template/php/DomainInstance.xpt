@@ -34,6 +34,9 @@
 			«ELSE»
 				«EXPAND evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 				$row = $rs->fetch();
+				if (!$row) {
+					throw new IamlRuntimeException("Could not find any value instance for attribute '«id»'");
+				}
 				return $row["«name-»"];
 			«ENDIF»
 		«ENDIF»

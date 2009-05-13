@@ -6,6 +6,8 @@ package org.openiaml.model.tests.codegen.model0_3;
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+
 /**
  * Tests a failing operation.
  * 
@@ -25,10 +27,16 @@ public class FailingOperation extends CodegenTestCase {
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// go to page
-		beginAtSitemapThenPage(sitemap, "page");
-		
-		// we should instantly have an exception occur
-		assertProblem();
+		try {
+			beginAtSitemapThenPage(sitemap, "page");
+			fail("We should not be able to load page 'page'");
+		} catch (FailingHttpStatusCodeException e) {
+			// we should instantly have an exception occur
+			// expected
+			
+			assertTextPresent("an expected failure message");
+			assertProblem();
+		}
 	}
 	
 }

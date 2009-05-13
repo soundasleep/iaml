@@ -19,15 +19,44 @@
 		// queue up any log messages
 		queue_log_messages(true);
 		
-		// run any event triggers for this page
-		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
-		
 		// run any event triggers for this session
 		«IF containingSession() != null»
 		if (!require_session("session_init", false)) {
 			$_SESSION["session_init"] = true; /* this MUST execute before we start any events, or else we can easily call ourselves and get stuck in an infinite loop */
+
+			«REM»any fail/exception handlers?«ENDREM»
+			«IF getFailHandler(containingSession()) != null»
+				try {
+			«ENDIF»
 			«EXPAND php::EventTrigger::sessionEvents FOREACH containingSession().eventTriggers-»
+			«IF getFailHandler(containingSession()) != null»
+				} catch (IamlRuntimeException $e) {
+					// only expand the first fail handler
+					«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(containingSession())»
+				}
+			«ENDIF»
 		}
+		«ENDIF»
+		
+		// run any event triggers for this page
+		«REM»any fail/exception handlers?«ENDREM»
+		«REM»TODO refactor session code into getFailHandler(Page)«ENDREM»
+		«IF getFailHandler(this) != null»
+			try {
+		«ELSEIF containingSession() != null && getFailHandler(containingSession()) != null»
+			try {
+		«ENDIF»
+		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
+		«IF getFailHandler(this) != null»
+			} catch (IamlRuntimeException $e) {
+				// only expand the first fail handler [page handler]
+				«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(this)»
+			}
+		«ELSEIF containingSession() != null && getFailHandler(containingSession()) != null»
+			} catch (IamlRuntimeException $e) {
+				// only expand the first fail handler [session handler]
+				«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(containingSession())»
+			}
 		«ENDIF»
 		
 		// expand any operations (both in this page and in any surrounding scopes)

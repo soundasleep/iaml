@@ -138,21 +138,46 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 
 	/**
 	 * Begin at the sitemap page, and then click on a particular page title.
+	 * This method also checks that the destination page is the same as the
+	 * target page; if not, use {@link #beginAtSitemapThenPage(IFile, String, String)}.
 	 * 
 	 * <b>NOTE</b> that this resets the current WebClient context, which can cause
 	 * the client to lose sessions/cookies. If this is undesirable,
 	 * use {@link #gotoSitemapThenPage(IFile, String)}.
+	 * 
+	 * @see #beginAtSitemapThenPage(IFile, String, String)
+	 * @param sitemap the location of the sitemap file
+	 * @param pageTitle the page title to select from the sitemap
+	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
 	 */ 
-	protected void beginAtSitemapThenPage(IFile sitemap, String pageText) throws Exception {
+	protected void beginAtSitemapThenPage(IFile sitemap, String pageTitle) throws Exception {
+		beginAtSitemapThenPage(sitemap, pageTitle, pageTitle);
+	}
+	
+	/**
+	 * Begin at the sitemap page, and then click on a particular page title.
+	 * This method checks to see the destination page title is the same as
+	 * expectedPageTitle.
+	 * 
+	 * <b>NOTE</b> that this resets the current WebClient context, which can cause
+	 * the client to lose sessions/cookies. If this is undesirable,
+	 * use {@link #gotoSitemapThenPage(IFile, String)}.
+	 * 
+	 * @see #beginAtSitemapThenPage(IFile, String, String)
+	 * @param sitemap the location of the sitemap file
+	 * @param pageTitle the page title to select from the sitemap
+	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
+	 */ 
+	protected void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle) throws Exception {
 		waitForAjax();
 
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 		
-		assertLinkPresentWithText(pageText);
-		clickLinkWithText(pageText);
+		assertLinkPresentWithText(pageTitle);
+		clickLinkWithText(pageTitle);
 		try {
-			assertTitleMatch(pageText);
+			assertTitleMatch(expectedPageTitle);
 		} catch (AssertionFailedError e) {
 			// something went wrong in the page execution, or
 			// the output is mangled HTML: output page source for debug purposes

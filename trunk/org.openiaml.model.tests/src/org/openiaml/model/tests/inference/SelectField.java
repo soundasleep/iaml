@@ -27,6 +27,7 @@ import org.openiaml.model.tests.CodegenTestCase;
 public class SelectField extends CodegenTestCase {
 
 	protected void setUp() throws Exception {
+		super.setUp();
 		root = loadAndInfer(SelectField.class, true);
 	}
 

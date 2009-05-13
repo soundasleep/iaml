@@ -142,7 +142,8 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 	    onFailure: function(transport){ 
 			var fail = 'Ajax failed at ' + url + ': ' + transport.responseText || "no response text";
 			debug("FAILURE: " + fail);
-			alert(fail);
+			//alert(fail);
+			root_alert(fail);
 	      	next_store_event();
 			ajaxFailed(fail);		
 	     }
@@ -159,6 +160,10 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
     store_event_function();
   }
   debug("store_event called");
+}
+
+function root_alert(a) {
+	alert(a);
 }
 
 /**

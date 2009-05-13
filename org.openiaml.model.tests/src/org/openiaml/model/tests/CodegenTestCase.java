@@ -320,6 +320,23 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 		}
 		assertTrue("value of field for label [" + id + "] shouldn't be [" + value + "]", failed);
 	}
+	
+	/**
+	 * Assert that a label with the given text is NOT present.
+	 * 
+	 * @see #getLabelIDForText(String)
+	 * @param text label text to search for
+	 */
+	protected void assertLabelNotPresent(String text) {
+		IElement element;
+		try {
+			element = getElementByXPath("//label[contains(text(),'" + text + "')]");
+		} catch (AssertionFailedError e) {
+			// expected
+			element = null;
+		}
+		assertNull("Label with text '" + text + "' should not be present: " + element, element);
+	}
 
 	/**
 	 * Assert that the given elements are NOT equal, i.e. !a.equals(b).

@@ -6,6 +6,8 @@
 <?php
 
 session_start();
+ob_start();		/* we will implicitly flush at the end (needed for redirections when input_text_field values cannot be found) */
+set_exception_handler('default_exception_handler');			/* default exception handler */
 
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
 function log_message($msg, $also_debug = true) {
@@ -361,6 +363,14 @@ class Visual_Page {
  */
 function get_sid() {
 	return session_name() . "=" . session_id();
+}
+
+function default_exception_handler($e) {
+	// no fail handler has caught me yet
+	$url = "exception.php?fail=" . urlencode($e->getMessage());
+	log_message("[default exception handler] Redirecting to '$url' (fail)");
+	header("Location: $url");
+	die;
 }
  
 «ENDDEFINE»

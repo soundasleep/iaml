@@ -1,0 +1,36 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE exceptionPhp FOR model::InternetApplication-»
+<?php
+/**
+ * A standard exception page.
+ */
+
+header('HTTP/1.1 503 Service Unavailable');
+
+require("header.php");
+
+// queue up any log messages
+queue_log_messages(true);
+
+log_message("exception.php? " . print_r($_GET, true));
+$fail = require_get("fail", "No exception specified"); 
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>An exception occured</title>
+	<link rel="stylesheet" type="text/css" href="default.css">
+</head>
+		
+<body>
+	<div class="exception">
+		An exception occured:
+		<span><?php echo htmlspecialchars($fail); ?>
+	</div>
+</body>
+</html>
+«ENDDEFINE»

@@ -10,7 +10,6 @@
 	«FILE "output/"+safeNameString(id)+".php"-»
 <?php
 		/* generated page "«name-»" */
-		
 		// include header code
 		require("header.php");		// include header code
 		require("create_database.php");		// ensure DB exists
@@ -18,7 +17,25 @@
 		
 		// queue up any log messages
 		queue_log_messages(true);
+		
+		// a default fail handler for this page?
+		«IF getFailHandler(this) != null»
+		function page_fail_handler($e) {
+			«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(this)»
+			die;
+		}
+		set_exception_handler('page_fail_handler');
+		«ENDIF»
 
+		// a default fail handler for this session?
+		«IF containingSession() != null && getFailHandler(containingSession()) != null»
+		function session_fail_handler($e) {
+			«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(containingSession())»
+			die;
+		}
+		set_exception_handler('session_fail_handler');
+		«ENDIF»
+		
 		// initialise default values for any fields
 		«EXPAND initialiseDefaultValues FOREACH children»
 		
@@ -42,25 +59,8 @@
 		«ENDIF»
 		
 		// run any event triggers for this page
-		«REM»any fail/exception handlers?«ENDREM»
-		«REM»TODO refactor session code into getFailHandler(Page)«ENDREM»
-		«IF getFailHandler(this) != null»
-			try {
-		«ELSEIF containingSession() != null && getFailHandler(containingSession()) != null»
-			try {
-		«ENDIF»
+		// exceptions are now covered by the exception handlers above
 		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
-		«IF getFailHandler(this) != null»
-			} catch (IamlRuntimeException $e) {
-				// only expand the first fail handler [page handler]
-				«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(this)»
-			}
-		«ELSEIF containingSession() != null && getFailHandler(containingSession()) != null»
-			} catch (IamlRuntimeException $e) {
-				// only expand the first fail handler [session handler]
-				«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(containingSession())»
-			}
-		«ENDIF»
 		
 		// expand any operations (both in this page and in any surrounding scopes)
 		«EXPAND php::EventTrigger::expandOperations FOR this-»

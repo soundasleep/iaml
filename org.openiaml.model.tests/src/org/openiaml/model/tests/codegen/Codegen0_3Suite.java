@@ -14,10 +14,14 @@ import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandlerSessionC
 import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandlerSessionMultiple;
 import org.openiaml.model.tests.codegen.model0_3.PropertiesFileWithInputForm;
 import org.openiaml.model.tests.codegen.model0_3.SelectField;
+import org.openiaml.model.tests.codegen.model0_3.SelectFieldExplicit;
+import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromDynamicObject;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromDynamicQuery;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromObject;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromObjectQuery;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldQuery;
+import org.openiaml.model.tests.codegen.model0_3.SelectMissing;
+import org.openiaml.model.tests.codegen.model0_3.SelectMissingExpected;
 import org.openiaml.model.tests.codegen.model0_3.SessionInit;
 import org.openiaml.model.tests.codegen.model0_3.SessionSinglePage;
 import org.openiaml.model.tests.codegen.model0_3.SessionSyncInSession;
@@ -58,6 +62,10 @@ public class Codegen0_3Suite {
 		suite.addTestSuite(SelectFieldQuery.class);
 		suite.addTestSuite(SelectFieldFromObjectQuery.class);
 		suite.addTestSuite(SelectFieldFromDynamicQuery.class);
+		suite.addTestSuite(SelectFieldFromDynamicObject.class);
+		suite.addTestSuite(SelectFieldExplicit.class);
+		suite.addTestSuite(SelectMissing.class);
+		suite.addTestSuite(SelectMissingExpected.class);
 
 		// other model 0.3 tests
 		suite.addTestSuite(DataFlowTemporaryVariable.class);

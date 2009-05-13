@@ -35,7 +35,20 @@ echo "ok";
 
 /* Is there additional actions we should do on the client-side once this
  * property has changed? */
-«EXPAND potentialUpdatesRequired FOREACH allApplicationElementProperties(this)»
+try {
+	«EXPAND potentialUpdatesRequired FOREACH allApplicationElementProperties(this)»
+} catch (IamlRuntimeException $e) {
+	// redirect to the exception page
+	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
+	log_message(print_r($e, true));
+	log_message("[update exception handler] Redirecting to '$url' (fail)");
+
+	log_message("redirect " 
+		. escape_parameter_string($url));
+	echo "\nredirect " 
+		. escape_parameter_string($url);				
+	die;
+}
 
 «ENDDEFINE»
 

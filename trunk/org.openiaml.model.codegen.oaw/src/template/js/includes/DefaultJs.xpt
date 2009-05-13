@@ -116,6 +116,9 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 	      				var bits = inst.split(" ");
 	      				switch (bits[0]) {
 	      					case "ok":
+	      						if (bits.length != 1) {
+	      							throw new IamlJavascriptException("ok instruction called with incorrect number of arguments: expected 1, found " + bits.length);
+	      						}
 	      						debug("[instruction] ok");
 	      						break;		// nothing
 	      					
@@ -127,6 +130,15 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 	      						var value = decodeURIComponent(bits[2]);
 	      						debug("[instruction] set value(" + element_id + ")");
 	      						document.getElementById(element_id).value = value;
+	      						break;
+	      					
+	      					case "redirect":
+	      						if (bits.length != 2) {
+	      							throw new IamlJavascriptException("redirect instruction called with incorrect number of arguments: expected 2, found " + bits.length);
+	      						}
+	      						var url = decodeURIComponent(bits[1]);
+	      						debug("[instruction] redirect(" + url + ")");
+	      						window.location = url;
 	      						break;
 	      					
 	      					default:

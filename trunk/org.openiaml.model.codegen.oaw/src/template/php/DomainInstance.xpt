@@ -21,7 +21,7 @@
 
 /* code to get domain attributes */
 «DEFINE getDomainAttribute FOR model::DomainAttributeInstance-»
-	function get_attribute_instance_«safeName()»() {
+	function get_attribute_instance_«safeName()»($default = false) {
 		/* return the current value for attribute id '«id»' */
 		«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
@@ -35,7 +35,9 @@
 				«EXPAND evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 				$row = $rs->fetch();
 				if (!$row) {
-					throw new IamlRuntimeException("Could not find any value instance for attribute '«id»'");
+					if ($default === false)					
+						throw new IamlRuntimeException("Could not find any value instance for attribute '«id»'");
+					return $default;
 				}
 				return $row["«name-»"];
 			«ENDIF»

@@ -126,7 +126,7 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 						Thread.sleep(30);
 					} catch (AssertionFailedError e) {
 						// the monitor was not found
-						Thread.sleep(300);
+						Thread.sleep(30);
 					}
 					cycles++;
 				}

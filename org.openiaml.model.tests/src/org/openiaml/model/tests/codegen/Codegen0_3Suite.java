@@ -9,6 +9,9 @@ import org.openiaml.model.tests.codegen.model0_3.DataFlowTemporaryVariable;
 import org.openiaml.model.tests.codegen.model0_3.DatabaseWithInputForm;
 import org.openiaml.model.tests.codegen.model0_3.FailingOperation;
 import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandler;
+import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandlerSession;
+import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandlerSessionContained;
+import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandlerSessionMultiple;
 import org.openiaml.model.tests.codegen.model0_3.PropertiesFileWithInputForm;
 import org.openiaml.model.tests.codegen.model0_3.SelectField;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromDynamicQuery;
@@ -62,6 +65,9 @@ public class Codegen0_3Suite {
 		suite.addTestSuite(PropertiesFileWithInputForm.class);
 		suite.addTestSuite(FailingOperation.class);
 		suite.addTestSuite(FailingOperationHandler.class);
+		suite.addTestSuite(FailingOperationHandlerSession.class);
+		suite.addTestSuite(FailingOperationHandlerSessionMultiple.class);
+		suite.addTestSuite(FailingOperationHandlerSessionContained.class);
 		suite.addTestSuite(TestProgressMonitor.class);
 
 		return suite;

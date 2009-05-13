@@ -8,7 +8,7 @@
 
 «DEFINE pageEvents FOR model::EventTrigger-»
 	// Page EventTrigger «this»
-	«IF name == "access"-»
+	«IF name == "init" || name == "access"-»
 		// RunInstanceWires sorted by priority
 		«EXPAND callOperations(false, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	«ELSE-»
@@ -18,7 +18,7 @@
 
 «DEFINE sessionEvents FOR model::EventTrigger-»
 	// Session EventTrigger «this»
-	«IF name == "init"-»
+	«IF name == "init" || name == "access"-»
 		// RunInstanceWires sorted by priority
 		«EXPAND callOperations(false, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	«ELSE-»

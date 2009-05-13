@@ -264,6 +264,9 @@ List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::Dyn
 getFieldValue(model::visual::InputTextField this) :
 	properties.selectFirst( e | e.name == "fieldValue" );
 
+getFailHandler(model::WireEdgesSource this) :
+	outEdges.select( w | w.isFailEdge()).first();
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

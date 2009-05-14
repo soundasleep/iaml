@@ -882,9 +882,15 @@
             xsi:type="gmfgraph:Label"
             name="DomainObjectInstanceNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainObjectInstanceAutosaveFigure"
+            text="autosave: true"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DomainAttributeInstanceFigure">
@@ -933,6 +939,21 @@
           figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.43/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="NewInstanceWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="NewInstanceWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="NewInstanceWireNameFigure"
+            text="new instance"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -1067,6 +1088,9 @@
   <connections
       name="ConditionWire"
       figure="ConditionWireFigure"/>
+  <connections
+      name="NewInstanceWire"
+      figure="NewInstanceWireFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -1306,4 +1330,12 @@
       name="StartNodeLabel"
       figure="StartNodeFigure"
       accessor="//@figures.0/@descriptors.25/@accessors.0"/>
+  <labels
+      name="NewInstanceWireName"
+      figure="NewInstanceWireFigure"
+      accessor="//@figures.0/@descriptors.44/@accessors.0"/>
+  <labels
+      name="DomainObjectInstanceAutosave"
+      figure="DomainObjectInstanceFigure"
+      accessor="//@figures.0/@descriptors.41/@accessors.1"/>
 </gmfgraph:Canvas>

@@ -20,6 +20,7 @@ import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
@@ -232,6 +233,18 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case WiresPackage.NEW_INSTANCE_WIRE: {
+				NewInstanceWire newInstanceWire = (NewInstanceWire)theEObject;
+				T result = caseNewInstanceWire(newInstanceWire);
+				if (result == null) result = caseCompositeWire(newInstanceWire);
+				if (result == null) result = caseWireEdge(newInstanceWire);
+				if (result == null) result = caseNamedElement(newInstanceWire);
+				if (result == null) result = caseContainsWires(newInstanceWire);
+				if (result == null) result = caseGeneratesElements(newInstanceWire);
+				if (result == null) result = caseGeneratedElement(newInstanceWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -398,6 +411,21 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseConditionWire(ConditionWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>New Instance Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>New Instance Wire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNewInstanceWire(NewInstanceWire object) {
 		return null;
 	}
 

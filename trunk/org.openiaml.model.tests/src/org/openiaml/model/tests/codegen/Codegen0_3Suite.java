@@ -12,11 +12,16 @@ import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandler;
 import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandlerSession;
 import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandlerSessionContained;
 import org.openiaml.model.tests.codegen.model0_3.FailingOperationHandlerSessionMultiple;
+import org.openiaml.model.tests.codegen.model0_3.NewInstanceAttributeSession;
+import org.openiaml.model.tests.codegen.model0_3.NewInstanceAttributeSessionAutosave;
+import org.openiaml.model.tests.codegen.model0_3.NewInstanceObject;
+import org.openiaml.model.tests.codegen.model0_3.NewInstanceObjectAutosave;
 import org.openiaml.model.tests.codegen.model0_3.PropertiesFileWithInputForm;
 import org.openiaml.model.tests.codegen.model0_3.SelectField;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldExplicit;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromDynamicObject;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromDynamicQuery;
+import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromDynamicQueryAutosave;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromObject;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromObjectQuery;
 import org.openiaml.model.tests.codegen.model0_3.SelectFieldQuery;
@@ -66,6 +71,13 @@ public class Codegen0_3Suite {
 		suite.addTestSuite(SelectFieldExplicit.class);
 		suite.addTestSuite(SelectMissing.class);
 		suite.addTestSuite(SelectMissingExpected.class);
+		
+		// new instance/autosave tests
+		suite.addTestSuite(SelectFieldFromDynamicQueryAutosave.class);
+		suite.addTestSuite(NewInstanceObject.class);
+		suite.addTestSuite(NewInstanceObjectAutosave.class);
+		suite.addTestSuite(NewInstanceAttributeSession.class);
+		suite.addTestSuite(NewInstanceAttributeSessionAutosave.class);
 
 		// other model 0.3 tests
 		suite.addTestSuite(DataFlowTemporaryVariable.class);

@@ -3610,13 +3610,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE__STR_QUERY = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Autosave</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__AUTOSAVE = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Domain Object Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.PageRequestImpl <em>Page Request</em>}' class.
@@ -4187,13 +4196,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_ATTRIBUTE_INSTANCE__VALUES = APPLICATION_ELEMENT__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>Autosave</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Domain Attribute Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ATTRIBUTE_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
+	int DOMAIN_ATTRIBUTE_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 
 	/**
@@ -5150,6 +5168,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getDomainObjectInstance_StrQuery();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.DomainObjectInstance#isAutosave <em>Autosave</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Autosave</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#isAutosave()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EAttribute getDomainObjectInstance_Autosave();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.PageRequest <em>Page Request</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5361,6 +5390,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDomainAttributeInstance();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.DomainAttributeInstance#isAutosave <em>Autosave</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Autosave</em>'.
+	 * @see org.openiaml.model.model.DomainAttributeInstance#isAutosave()
+	 * @see #getDomainAttributeInstance()
+	 * @generated
+	 */
+	EAttribute getDomainAttributeInstance_Autosave();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -6179,6 +6219,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute DOMAIN_OBJECT_INSTANCE__STR_QUERY = eINSTANCE.getDomainObjectInstance_StrQuery();
 
 		/**
+		 * The meta object literal for the '<em><b>Autosave</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_OBJECT_INSTANCE__AUTOSAVE = eINSTANCE.getDomainObjectInstance_Autosave();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.PageRequestImpl <em>Page Request</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6351,6 +6399,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DOMAIN_ATTRIBUTE_INSTANCE = eINSTANCE.getDomainAttributeInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Autosave</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE = eINSTANCE.getDomainAttributeInstance_Autosave();
 
 	}
 

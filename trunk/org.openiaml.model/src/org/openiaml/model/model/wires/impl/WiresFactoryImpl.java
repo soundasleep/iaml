@@ -18,6 +18,7 @@ import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
@@ -83,6 +84,7 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.NAVIGATE_WIRE: return createNavigateWire();
 			case WiresPackage.SELECT_WIRE: return createSelectWire();
 			case WiresPackage.CONDITION_WIRE: return createConditionWire();
+			case WiresPackage.NEW_INSTANCE_WIRE: return createNewInstanceWire();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -207,6 +209,17 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 		ConditionWireImpl conditionWire = new ConditionWireImpl();
 		generateID(conditionWire);
 		return conditionWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public NewInstanceWire createNewInstanceWire() {
+		NewInstanceWireImpl newInstanceWire = new NewInstanceWireImpl();
+		generateID(newInstanceWire);
+		return newInstanceWire;
 	}
 
 	/**

@@ -1288,6 +1288,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDomainObjectInstance_Autosave() {
+		return (EAttribute)domainObjectInstanceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPageRequest() {
 		return pageRequestEClass;
 	}
@@ -1468,6 +1477,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDomainAttributeInstance_Autosave() {
+		return (EAttribute)domainAttributeInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -1617,6 +1635,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectInstanceEClass = createEClass(DOMAIN_OBJECT_INSTANCE);
 		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__ATTRIBUTES);
 		createEAttribute(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__STR_QUERY);
+		createEAttribute(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__AUTOSAVE);
 
 		pageRequestEClass = createEClass(PAGE_REQUEST);
 		createEReference(pageRequestEClass, PAGE_REQUEST__PARAMETERS);
@@ -1644,6 +1663,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(containsConditionsEClass, CONTAINS_CONDITIONS__CONDITIONS);
 
 		domainAttributeInstanceEClass = createEClass(DOMAIN_ATTRIBUTE_INSTANCE);
+		createEAttribute(domainAttributeInstanceEClass, DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE);
 	}
 
 	/**
@@ -1899,6 +1919,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(domainObjectInstanceEClass, DomainObjectInstance.class, "DomainObjectInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainObjectInstance_Attributes(), this.getDomainAttributeInstance(), null, "attributes", null, 0, -1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainObjectInstance_StrQuery(), ecorePackage.getEString(), "strQuery", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainObjectInstance_Autosave(), ecorePackage.getEBoolean(), "autosave", "true", 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pageRequestEClass, PageRequest.class, "PageRequest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPageRequest_Parameters(), this.getApplicationElementProperty(), null, "parameters", null, 0, -1, PageRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1926,6 +1947,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getContainsConditions_Conditions(), this.getCondition(), null, "conditions", null, 0, -1, ContainsConditions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainAttributeInstanceEClass, DomainAttributeInstance.class, "DomainAttributeInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDomainAttributeInstance_Autosave(), ecorePackage.getEBoolean(), "autosave", "true", 0, 1, DomainAttributeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -2085,6 +2107,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "changed", "0.3: changed from DomainAttribute to DomainAttributeInstance"
 		   });		
 		addAnnotation
+		  (getDomainObjectInstance_Autosave(), 
+		   source, 
+		   new String[] {
+			 "added", "0.3"
+		   });		
+		addAnnotation
 		  (pageRequestEClass, 
 		   source, 
 		   new String[] {
@@ -2128,6 +2156,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   });		
 		addAnnotation
 		  (domainAttributeInstanceEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.3"
+		   });		
+		addAnnotation
+		  (getDomainAttributeInstance_Autosave(), 
 		   source, 
 		   new String[] {
 			 "added", "0.3"

@@ -27,6 +27,7 @@ import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
@@ -120,6 +121,13 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	private EClass conditionWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass newInstanceWireEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -403,6 +411,15 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNewInstanceWire() {
+		return newInstanceWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public WiresFactory getWiresFactory() {
 		return (WiresFactory)getEFactoryInstance();
 	}
@@ -457,6 +474,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		createEAttribute(selectWireEClass, SELECT_WIRE__LIMIT);
 
 		conditionWireEClass = createEClass(CONDITION_WIRE);
+
+		newInstanceWireEClass = createEClass(NEW_INSTANCE_WIRE);
 	}
 
 	/**
@@ -509,6 +528,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		selectWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		conditionWireEClass.getESuperTypes().add(this.getCompositeWire());
 		conditionWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		newInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(singleWireEClass, SingleWire.class, "SingleWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -542,6 +562,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEAttribute(getSelectWire_Limit(), ecorePackage.getEInt(), "limit", "1", 0, 1, SelectWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionWireEClass, ConditionWire.class, "ConditionWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(newInstanceWireEClass, NewInstanceWire.class, "NewInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -627,6 +649,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (newInstanceWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.3"
 		   });
 	}
 

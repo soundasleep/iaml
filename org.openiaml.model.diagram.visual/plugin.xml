@@ -154,12 +154,12 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireNameEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQueryEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQueryEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.SelectWireQuery2EditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -185,6 +185,11 @@
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
             <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.ConditionWireNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="org.openiaml.model.model.diagram.visual.edit.parts.NewInstanceWireNameEditPart"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
@@ -608,6 +613,16 @@
             <param name="semanticHint" value="3009"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.NewInstanceWire_3010"
+               name="%metatype.name.NewInstanceWire_3010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="NewInstanceWire"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.NewInstanceWireEditHelper">
+            <param name="semanticHint" value="3010"/>
+         </metamodelType>
+      </metamodel>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
@@ -647,6 +662,7 @@
          <elementType ref="org.openiaml.model.diagram.visual.NavigateWire_3007"/>
          <elementType ref="org.openiaml.model.diagram.visual.CommitWire_3008"/>
          <elementType ref="org.openiaml.model.diagram.visual.ConditionWire_3009"/>
+         <elementType ref="org.openiaml.model.diagram.visual.NewInstanceWire_3010"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

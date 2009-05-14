@@ -392,6 +392,16 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="autosave: {1}"
+          editorPattern=""
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainObjectInstanceAutosave"/>
+        <features
+            href="iaml.ecore#//DomainObjectInstance/autosave"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="visual.gmftool#//@palette/@tools.0/@tools.23"/>
@@ -675,6 +685,33 @@
         href="visual.gmftool#//@palette/@tools.0/@tools.19"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/NewInstanceWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( NewInstanceWire )"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#NewInstanceWireName"/>
+      <features
+          href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/wires"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="visual.gmftool#//@palette/@tools.0/@tools.26"/>
+    <diagramLink
+        href="iaml.gmfgraph#NewInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

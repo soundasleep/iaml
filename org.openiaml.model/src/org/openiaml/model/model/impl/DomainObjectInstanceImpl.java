@@ -29,6 +29,7 @@ import org.openiaml.model.model.ModelPackage;
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getStrQuery <em>Str Query</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#isAutosave <em>Autosave</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,6 +65,26 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * @ordered
 	 */
 	protected String strQuery = STR_QUERY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAutosave() <em>Autosave</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAutosave()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean AUTOSAVE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isAutosave() <em>Autosave</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAutosave()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean autosave = AUTOSAVE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,6 +143,27 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isAutosave() {
+		return autosave;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAutosave(boolean newAutosave) {
+		boolean oldAutosave = autosave;
+		autosave = newAutosave;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE, oldAutosave, autosave));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -143,6 +185,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return getAttributes();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY:
 				return getStrQuery();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
+				return isAutosave() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -163,6 +207,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY:
 				setStrQuery((String)newValue);
 				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
+				setAutosave(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -181,6 +228,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY:
 				setStrQuery(STR_QUERY_EDEFAULT);
 				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
+				setAutosave(AUTOSAVE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -197,6 +247,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return attributes != null && !attributes.isEmpty();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY:
 				return STR_QUERY_EDEFAULT == null ? strQuery != null : !STR_QUERY_EDEFAULT.equals(strQuery);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
+				return autosave != AUTOSAVE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -213,6 +265,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (strQuery: ");
 		result.append(strQuery);
+		result.append(", autosave: ");
+		result.append(autosave);
 		result.append(')');
 		return result.toString();
 	}

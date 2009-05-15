@@ -281,6 +281,15 @@ getFieldValue(model::visual::InputTextField this) :
 getFailHandler(model::WireEdgesSource this) :
 	outEdges.select( w | w.isFailEdge()).first();
 
+isAutosaveOff(model::DomainAttributeInstance this) :
+	autosave == false || isAutosaveOff(eContainer);
+
+isAutosaveOff(model::DomainObjectInstance this) :
+	autosave == false;
+	
+isAutosaveOff(emf::EObject this):
+	false;
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

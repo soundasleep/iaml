@@ -129,6 +129,37 @@
 			«ENDIF»
 		«ENDIF»
 	}
+
+	«IF isAutosaveOff(this)»
+	/* for elements with 'autosave' off */
+	function queue_store_domain_attribute_«safeName()»($arg0) {
+		/* queue store a value into attribute id '«id»' */
+		«IF containingSession(this) != null»
+			$_SESSION["instance_queue_«safeName()-»"] = $arg0;
+		«ELSE»
+			set_application_value("instance_queue_«safeName()-»", $arg0);
+		«ENDIF»
+	}
+	
+	function save_queued_store_domain_attribute_«safeName()»() {
+		/* execute the actual save for attribute id '«id»' */
+		«IF containingSession(this) != null»
+			/* contained within a session */
+			$arg0 = require_session("instance_queue_«safeName()-»", false);
+			if ($arg0 !== false) {
+				// lets set it
+				store_domain_attribute_«safeName()-»($arg0);
+			}
+		«ELSE»
+			/* contained within a page */
+			$arg0 = get_application_value("instance_queue_«safeName()-»", false);
+			if ($arg0 !== false) {
+				// lets set it
+				store_domain_attribute_«safeName()-»($arg0);
+			}
+		«ENDIF»
+	}
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE storeDomainObject FOR model::DomainObjectInstance-»

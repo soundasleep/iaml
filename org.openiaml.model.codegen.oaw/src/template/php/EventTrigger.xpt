@@ -369,12 +369,7 @@
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
-		store_domain_attribute_«safeNameString(((model::DomainAttributeInstance) to.eContainer).id)»(
-			«EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
-			«IF inEdges.typeSelect(model::wires::ParameterWire).size > 1»
-				«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
-			«ENDIF»
-		); 
+		«EXPAND operationDomainAttributeInstance(inline, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
 		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
@@ -385,6 +380,35 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE operationDomainAttributeInstance(Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::WireEdgeDestination»
+	«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»
+«ENDDEFINE»
+
+«DEFINE operationDomainAttributeInstance(Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation»
+	/* domain attribute instance: wire = «wire», attribute = «attribute», this = «this» */
+	«IF name=="save"»
+		«REM»"save" operation for DomainAttribute«ENDREM»
+		save_queued_store_domain_attribute_«safeNameString(attribute.id)»();
+	«ELSE»
+		«IF isAutosaveOff(attribute)»
+			«REM»queue it up for hopefully saving it later«ENDREM»
+			queue_store_domain_attribute_«safeNameString(attribute.id)»(
+				«EXPAND callOperationParameters(wire, inline, inStoreDb) FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+				«IF wire.inEdges.typeSelect(model::wires::ParameterWire).size > 1»
+					«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
+				«ENDIF»
+			);
+		«ELSE»
+			«REM»set it right now«ENDREM»
+			store_domain_attribute_«safeNameString(attribute.id)»(
+				«EXPAND callOperationParameters(wire, inline, inStoreDb) FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+				«IF wire.inEdges.typeSelect(model::wires::ParameterWire).size > 1»
+					«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
+				«ENDIF»
+			);
+		«ENDIF»
+	«ENDIF» 
+«ENDDEFINE»
 
 /* ditto: check or error? */
 «DEFINE callOperationParameters(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::wires::ParameterWire»

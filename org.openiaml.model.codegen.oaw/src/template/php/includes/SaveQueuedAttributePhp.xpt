@@ -1,0 +1,34 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE saveQueuedAttribute FOR model::InternetApplication-»
+<?php
+/**
+ * Saving queued stored attributes.
+ */
+ 
+require("header.php");
+
+// queue up any log messages
+queue_log_messages(true);
+
+log_message("save_queued_attribute.php? " . print_r($_GET, true));
+$id = $_GET["id"] or throw_new_IamlRuntimeException("no id");
+$page_id = $_GET["page"] or throw_new_IamlRuntimeException("no page");
+
+log_message("save_queued_attribute.php: setting id=$id, page_id=$page_id");
+
+«EXPAND template::php::DomainInstance::expandDomainAttributes FOR this»
+«EXPAND template::php::DomainInstance::expandDomainObjects FOR this»
+
+// TODO probably a security risk
+$function_name = 'save_queued_store_domain_attribute_' . $id;
+
+// execute queued
+$function_name();
+
+// output any instructions
+echo "ok";
+
+«ENDDEFINE»

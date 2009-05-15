@@ -178,4 +178,12 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 		return file;
 	}
 
+	protected IFile getTargetModel() {
+		return targetModel;
+	}
+
+	protected IFile getTargetDiagram() {
+		return targetDiagram;
+	}
+
 }

@@ -3,14 +3,17 @@
  */
 package org.openiaml.model.tests.eclipse.migration.model0_3;
 
+import java.io.File;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
 import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
 import org.openiaml.model.diagram.custom.migrate.Migrate1To2;
 import org.openiaml.model.diagram.custom.migrate.Migrate2To3;
+import org.openiaml.model.impl.FileReferenceImpl;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
@@ -142,7 +145,12 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		DomainStore store = (DomainStore) part.resolveSemanticElement();
 		assertEquals(store.getName(), "file domain store");
 		assertEquals(store.getType(), DomainStoreTypes.PROPERTIES_FILE);
-		assertEquals(store.getFile(), "test1.properties");
+		
+		// we need to get a URI
+		URI relative = store.eResource().getURI();
+		File desired = FileReferenceImpl.resolveFilePath(relative, "test1.properties");
+		File actual = store.getFile().toFile(relative);
+		assertEquals("The desired and actual FileReferences do not resolve to the same location: actual = '" + actual + "', desired = '" + desired + "'", actual, desired);
 		
 		// open diagram
 		DiagramDocumentEditor sub = openDiagram(part);

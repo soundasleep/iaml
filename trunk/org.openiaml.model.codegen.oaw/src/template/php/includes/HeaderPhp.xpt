@@ -9,8 +9,6 @@ session_start();
 ob_start();		/* we will implicitly flush at the end (needed for redirections when input_text_field values cannot be found) */
 set_exception_handler('default_exception_handler');			/* default exception handler */
 
-define('NEW_OBJECT', '[a new object]');
-
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
 function log_message($msg, $also_debug = true) {
 	global $log_unique_id;

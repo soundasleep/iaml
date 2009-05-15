@@ -246,7 +246,7 @@ function save_queued_store_domain_attribute(id, function_queue) {
 }
 
 function save_queued_store_domain_object(id, function_queue) {
-	var url = 'save_queued_object.php?id=' + escape(id) + '&page=' + escape(page_id);
+	var url = 'save_queued_store_domain_object.php?id=' + escape(id) + '&page=' + escape(page_id);
 	execute_queued_url(url, 'queued_store_object', function_queue, true);
 }
 

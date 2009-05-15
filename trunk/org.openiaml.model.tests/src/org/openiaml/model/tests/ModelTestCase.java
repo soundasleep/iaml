@@ -164,17 +164,21 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	protected void doTransform(String inputFile) throws Exception {
 		transformStatus = doTransform(inputFile, getProjectName(), monitor);
 		if (!transformStatus.isOK()) {
+			String firstMessage = null;
 			for (IStatus s : transformStatus.getChildren()) {
 				System.err.println(s);		// print out the status errors
 				if (s.getException() != null)
 					throw new TransformationException("Transformation failed: " + s.getException().getMessage(), s.getException());	// we will only crash on the first one
+				if (s.getMessage() != null && !s.getMessage().trim().isEmpty()) {
+					firstMessage = s.getMessage();
+				}
 			}
 			
 			if (transformStatus.getException() != null) {
 				throw new TransformationException("Transformation failed: " + transformStatus.getException().getMessage(), transformStatus.getException());	// force an exception
 			}
 			// force a fail
-			throw new TransformationException("Transformation did not pass successfully: " + transformStatus.getMessage());
+			throw new TransformationException("Transformation did not pass successfully: " + transformStatus.getMessage() + (firstMessage == null ? "" : ", first message: " + firstMessage));
 		}
 	}
 	

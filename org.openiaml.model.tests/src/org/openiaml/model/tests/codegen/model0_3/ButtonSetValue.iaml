@@ -25,8 +25,7 @@
     </children>
   </children>
   <children xsi:type="iaml.visual:Page" id="visual.12109331f38.321" name="implicit">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.346" name="source two" outEdges="wires.12109331f38.96 wires.12109331f38.5a5">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.96" from="visual.12109331f38.346"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.346" name="source two" outEdges="wires.12109331f38.5a5">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.5a5" from="visual.12109331f38.346" to="wires.12109331f38.5a4"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.347" name="target two">

@@ -58,3 +58,10 @@ context model::DomainObjectInstance ERROR "A DomainObjectInstance cannot have mo
 context model::wires::SelectWire ERROR "A SelectWire must come from a valid DomainObject":
 	model::DomainObject.isInstance(from);	
 	
+context model::WireEdge ERROR "A WireEdge must have a 'from'" :
+	from != null;
+
+context model::WireEdge ERROR "A WireEdge must have a 'to'" :
+	to != null;
+	
+	

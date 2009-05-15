@@ -39,8 +39,8 @@ public class ButtonSetValue extends CodegenTestCase {
 		assertButtonPresentWithText("reset target");
 		
 		// and two text fields
-		String source = getLabelIDForText("source");
-		String target = getLabelIDForText("target");
+		String source = getLabelIDForText("source one");
+		String target = getLabelIDForText("target one");
 		
 		// set the source value
 		String text = "buttonSetValue explicit " + new Date().toString();
@@ -66,8 +66,8 @@ public class ButtonSetValue extends CodegenTestCase {
 		// if we reload the page, the values should still be there
 		reloadPage(sitemap, "container");
 		{
-			String source2 = getLabelIDForText("source");
-			String target2 = getLabelIDForText("target");
+			String source2 = getLabelIDForText("source one");
+			String target2 = getLabelIDForText("target one");
 			assertLabeledFieldEquals(source2, text);
 			assertLabeledFieldEquals(target2, "empty");
 		}
@@ -75,8 +75,8 @@ public class ButtonSetValue extends CodegenTestCase {
 		// if we restart the session, the values should still be there
 		restartSession(sitemap, "container");
 		{
-			String source2 = getLabelIDForText("source");
-			String target2 = getLabelIDForText("target");
+			String source2 = getLabelIDForText("source one");
+			String target2 = getLabelIDForText("target one");
 			assertLabeledFieldEquals(source2, text);
 			assertLabeledFieldEquals(target2, "empty");
 		}
@@ -101,8 +101,8 @@ public class ButtonSetValue extends CodegenTestCase {
 		assertButtonNotPresentWithText("reset target");
 		
 		// and two text fields
-		String source = getLabelIDForText("source");
-		String target = getLabelIDForText("target");
+		String source = getLabelIDForText("source two");
+		String target = getLabelIDForText("target two");
 		
 		// set the source value
 		String text = "buttonSetValue implicit " + new Date().toString();
@@ -122,8 +122,8 @@ public class ButtonSetValue extends CodegenTestCase {
 		reloadPage(sitemap, "implicit");
 		{			
 			assertTitleEquals("implicit");
-			String source2 = getLabelIDForText("source");
-			String target2 = getLabelIDForText("target");
+			String source2 = getLabelIDForText("source two");
+			String target2 = getLabelIDForText("target two");
 			assertLabeledFieldEquals(source2, text);
 			assertLabeledFieldEquals(target2, text);
 		}
@@ -132,8 +132,8 @@ public class ButtonSetValue extends CodegenTestCase {
 		restartSession(sitemap, "implicit");
 		{
 			assertTitleEquals("implicit");
-			String source2 = getLabelIDForText("source");
-			String target2 = getLabelIDForText("target");
+			String source2 = getLabelIDForText("source two");
+			String target2 = getLabelIDForText("target two");
 			assertLabeledFieldEquals(source2, text);
 			assertLabeledFieldEquals(target2, text);
 		}

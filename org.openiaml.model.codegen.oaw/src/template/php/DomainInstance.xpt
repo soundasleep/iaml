@@ -54,7 +54,7 @@
 				throw new IamlRuntimeException("No selection or new instance wires exist for object instance '«id»'");
 			«ELSE»
 				// return a "new" object
-				«EXPAND getNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+				return get_new_domain_object_«safeName()-»(«IF isAutosaveOff()»false«ENDIF»);
 			«ENDIF»
 		«ELSE»
 			«EXPAND evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
@@ -70,17 +70,25 @@
 			return $obj;
 		«ENDIF»
 	}
+
+	«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«EXPAND getNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE getNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»
-	«IF isAutosaveOff()»
-		/* autosave is off: don't insert it into the db yet */
-		return NEW_OBJECT;
-	«ELSE»
-		/* autosave is on: insert a new object into the db */
+	function get_new_domain_object_«safeName()-»($force = true) {
 		«IF containingSession() != null»
 			// in the session
 			if (require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
+				// force creation?
+				«IF isAutosaveOff()»
+					if ($force == false) {
+						// don't force creation; return a default
+						return «EXPAND newDomainObjectTemplate FOR wire.from»;
+					}
+				«ENDIF»
+			
 				// insert a new one
 				log_message("Inserting new domain object [session] '«safeNameString(name)»' ('«safeNameString(id)»')");
 				
@@ -129,6 +137,14 @@
 		«ELSE»
 			// in the page
 			if (get_application_value('new_object_«safeNameString(id)-»', false) === false) {
+				// force creation?
+				«IF isAutosaveOff()»
+					if ($force == false) {
+						// don't force creation; return a default
+						return «EXPAND newDomainObjectTemplate FOR wire.from»;
+					}
+				«ENDIF»
+
 				// insert a new one
 				log_message("Inserting new domain object [page] '«safeNameString(name)»' ('«safeNameString(id)»')");
 				
@@ -175,7 +191,22 @@
 			}
 			return $obj;
 		«ENDIF»
-	«ENDIF»
+	}
+«ENDDEFINE»
+
+«DEFINE newDomainObjectTemplate FOR model::WireEdgesSource»
+	«EXPAND exception FOR throwException("Cannot get domain object template for object: " + this)»
+«ENDDEFINE»
+
+«DEFINE newDomainObjectTemplate FOR model::DomainObject»
+	array(
+		"_is_new" => true,
+		«EXPAND newDomainAttributeTemplate FOREACH attributes SEPARATOR ", "»
+	);
+«ENDDEFINE»
+
+«DEFINE newDomainAttributeTemplate FOR model::DomainAttribute»
+	"«safeNameString(name)-»" => "" /* TODO eventually put the default value in here */
 «ENDDEFINE»
 
 «DEFINE evaluateSelectWire FOR model::wires::SelectWire»
@@ -287,53 +318,37 @@
 			«EXPAND evaluateSelectWireStore FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 		«ENDIF»
 	}
+	
+	function save_queued_store_domain_object_«safeName()-»() {
+		/* save a queued domain object instance */
+		«EXPAND queuedDomainObjectStore FOREACH attributes»
+	}
+«ENDDEFINE»
+
+«DEFINE queuedDomainObjectStore FOR model::DomainAttributeInstance»
+	save_queued_store_domain_attribute_«safeNameString(id)-»(); /* attribute "«safeNameString(name)-»" */
 «ENDDEFINE»
 
 «DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»
-	«IF containingSession() != null»
-		// in the session
-
-		// it should already be created
-		$new_id = require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»');
-		log_message("updating existing session new object $new_id");
+	// it should already be created, or this will create a new one
+	$existing = get_new_domain_object_«safeName()-»(true);	/* force creation */
+	$new_id = $existing["id"];
+	log_message("updating existing new object '$new_id', attribute = '$attribute_name'");
+	
+	// where are we loading it from? sets $db
+	«EXPAND selectDatabase FOR wire.from»
 		
-		// where are we loading it from? sets $db
-		«EXPAND selectDatabase FOR wire.from»
+	// create query
+	$query = "UPDATE «safeNameString(((model::DomainObject) wire.from).name)»
+		SET $attribute_name = ?
+		WHERE id = ?";
+	
+	$args = array($arg0, $new_id);
 			
-		// create query
-		$query = "UPDATE «safeNameString(((model::DomainObject) wire.from).name)»
-			SET $attribute_name = ?
-			WHERE id = ?";
-		
-		$args = array($arg0, $new_id);
-				
-		// execute query
-		$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
-		$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
-	«ELSE»
-		// in the page
-
-		// it should already be created
-		$new_id = get_application_value('new_object_«safeNameString(id)-»', false);
-		if ($new_id === false) {
-			throw new IamlRuntimeException("We shouldn't have an empty new object ID: «safeNameString(id)-»");
-		}
-		log_message("updating existing page new object $new_id");
-		
-		// where are we loading it from? sets $db
-		«EXPAND selectDatabase FOR wire.from»
-			
-		// create query
-		$query = "UPDATE «safeNameString(((model::DomainObject) wire.from).name)»
-			SET $attribute_name = ?
-			WHERE id = ?";
-		
-		$args = array($arg0, $new_id);
-				
-		// execute query
-		$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
-		$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
-	«ENDIF»
+	// execute query
+	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+	$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+	log_message("attribute '$attribute_name' set to '$arg0'");
 «ENDDEFINE»
 
 «DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»

@@ -99,6 +99,9 @@
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
 		«EXPAND operationDomainAttributeInstance(inline, this, (model::DomainAttributeInstance) to.eContainer) FOR to»
+	«ELSEIF isDomainObjectInstance(to.eContainer)-»
+		«REM»direct field --> domain object instance«ENDREM»
+		«EXPAND operationDomainObjectInstance(inline, this, (model::DomainObjectInstance) to.eContainer) FOR to»
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
 		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
@@ -116,7 +119,7 @@
 	/* domain attribute instance: wire = «wire», attribute = «attribute», this = «this» */
 	«IF name=="save"»
 		«REM»"save" operation for DomainAttribute«ENDREM»
-		save_queued_store_domain_attribute_«safeNameString(attribute.id)»();
+		save_queued_store_domain_attribute('«safeNameString(attribute.id)»');
 	«ELSE»
 		«IF isAutosaveOff(attribute)»
 			«REM»queue it up for hopefully saving it later«ENDREM»
@@ -138,6 +141,18 @@
 	«ENDIF» 
 «ENDDEFINE»
 
+«DEFINE operationDomainObjectInstance(Boolean inline, model::wires::RunInstanceWire wire, model::DomainObjectInstance object) FOR model::WireEdgeDestination»
+	«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»
+«ENDDEFINE»
+«DEFINE operationDomainObjectInstance(Boolean inline, model::wires::RunInstanceWire wire, model::DomainObjectInstance object) FOR model::Operation»
+	/* domain object instance: wire = «wire», object = «object», this = «this» */
+	«IF name=="save"»
+		«REM»"save" operation for DomainAttribute«ENDREM»
+		save_queued_store_domain_object('«safeNameString(object.id)»');
+	«ELSE»
+		«EXPAND exception FOR throwException("Cannot expand a non-save operation for DomainObjectInstance: " + this)»
+	«ENDIF» 
+«ENDDEFINE»
 
 «DEFINE callOperations(Boolean inline) FOR model::wires::NavigateWire-»
 	// navigating to a new page

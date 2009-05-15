@@ -27,10 +27,13 @@
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$obj = get_object_instance_«safeName(eContainer)»();
 			return $obj["«name-»"];
+		«ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+			/* sourced from a new instance wire */
+			return get_new_attribute_instance_«safeName()-»();
 		«ELSE»
 			/* not contained in an object instance; select it manually */
 			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-				throw new IamlRuntimeException("No selection wires exist for attribute instance '«this»'");
+				throw new IamlRuntimeException("No selection wires exist for getting attribute instance '«this»'");
 			«ELSE»
 				«EXPAND evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 				$row = $rs->fetch();
@@ -42,6 +45,76 @@
 				return $row["«name-»"];
 			«ENDIF»
 		«ENDIF»
+	}
+	
+	«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«EXPAND getNewAttributeInstance(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE getNewAttributeInstance(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance»
+	/** Get an instance of an attribute */
+	function get_new_attribute_instance_«safeName()-»($force = true) {
+		«IF containingSession() != null»
+			// in the session
+			if (require_session('new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
+				// force creation?
+				«IF isAutosaveOff()»
+					if ($force == false) {
+						// don't force creation; return a default
+						return "";	/* TODO put in actual default for attribute "«safeNameString(name)-»" */
+					}
+				«ENDIF»
+			
+				// insert a new one
+				log_message("Inserting new domain attribute [session] '«safeNameString(name)»' ('«safeNameString(id)»')");
+				
+				// where are we loading it from? sets $db
+				«EXPAND selectDatabase FOR wire.from»
+				
+				// create query
+				$query = "INSERT INTO «safeNameString(((model::DomainObject) wire.from).name)»
+					DEFAULT VALUES";
+				
+				// execute query
+				$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+				$rs->execute() or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+
+				// get the inserted id
+				$new_id = $db->lastInsertId("id");
+				log_message("new session variable id: $new_id");
+
+				// add a link to this
+				$_SESSION['new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»'] = $new_id;
+			}
+				
+			// return the newly inserted object
+			«EXPAND selectDatabase FOR wire.from»
+			
+			// create query
+			$query = "SELECT «safeNameString(name)» FROM «safeNameString(((model::DomainObject) wire.from).name)»
+				WHERE id=?";
+			$args = array(require_session('new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»'));
+			log_message("selecting previously created new session object: " . print_r($args, true));
+
+			// execute query
+			$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+			$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+			
+			// get just the first result
+			$row = $rs->fetch();
+			if (!$row) {
+				throw new IamlRuntimeException("No results found for query '$query'");
+			}
+			
+			$obj = array();
+			foreach ($row as $key => $value) {
+				$obj[$key] = $value;
+			}
+			return $obj["«safeNameString(name)»"];
+		«ELSE»
+			«EXPAND exception FOR throwException("TODO not completed yet")»
+		«ENDIF»	
 	}
 «ENDDEFINE»
 
@@ -264,7 +337,12 @@
 		«ELSE»
 			/* not contained in an object instance; select it manually */
 			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-				throw new IamlRuntimeException("No selection wires exist for attribute instance '«safeNameString(id)-»'");
+				«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+				throw new IamlRuntimeException("No selection wires exist for setting attribute instance '«safeNameString(id)-»'");
+				«ELSE»
+					// set the current "new" object
+					«EXPAND setNewDomainAttribute(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+				«ENDIF»
 			«ELSE»
 				$attribute_name = "«safeNameString(name)-»";
 				«EXPAND evaluateSelectWireStore FOR inEdges.typeSelect(model::wires::SelectWire).first()»
@@ -304,12 +382,49 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE setNewDomainAttribute(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance-»
+	// it should already be created, or this will create a new one
+	$existing = get_new_attribute_instance_«safeName()-»(true);	/* force creation */
+
+	«IF containingSession(this) != null»
+		/* contained within a session */
+		$new_id = require_session("new_attribute_«safeName(containingSession())»_«safeName()-»", false);
+		if ($new_id === false) {
+			throw new IamlRuntimeException("Unexpectedly got an empty new session attribute");
+		}
+	«ELSE»
+		/* contained within a page */
+		$new_id = get_application_value("new_attribute_«safeName()-»", false);
+		if ($new_id === false) {
+			throw new IamlRuntimeException("Unexpectedly got an empty new page attribute");
+		}
+	«ENDIF»
+
+	$attribute_name = "«safeNameString(name)-»";
+	log_message("updating existing new attribute '$new_id', attribute = '$attribute_name'");
+	
+	// where are we loading it from? sets $db
+	«EXPAND selectDatabase FOR wire.from»
+		
+	// create query
+	$query = "UPDATE «safeNameString(((model::DomainObject) wire.from).name)»
+		SET $attribute_name = ?
+		WHERE id = ?";
+	
+	$args = array($arg0, $new_id);
+			
+	// execute query
+	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+	$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+	log_message("attribute '$attribute_name' set to '$arg0'");
+«ENDDEFINE»
+
 «DEFINE storeDomainObject FOR model::DomainObjectInstance-»
 	function store_object_instance_«safeName()»($attribute_name, $arg0) {
 		/* store a value into object id '«id»' */
 		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
 			«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
-				throw new IamlRuntimeException("No selection wires exist for object instance '«id»'");
+				throw new IamlRuntimeException("No selection wires exist for setting object instance '«id»'");
 			«ELSE»
 				// set the current "new" object
 				«EXPAND setNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»

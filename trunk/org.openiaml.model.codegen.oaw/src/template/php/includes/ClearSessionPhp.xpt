@@ -13,7 +13,7 @@ require("header.php");
 log_message("clear_session.php? " . print_r($_GET, true));
 
 foreach ($_SESSION as $k => $v) {
-	$_SESSION[$k] = "";
+	unset($_SESSION[$k]);
 }
 
 echo "ok";

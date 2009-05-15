@@ -261,6 +261,12 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="strQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autosave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PageRequest">
     <eAnnotations source="http://openiaml.org/comment">
@@ -328,6 +334,12 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.3"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autosave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing #//Scope">
@@ -428,6 +440,11 @@
     <eClassifiers xsi:type="ecore:EClass" name="ConditionWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NewInstanceWire" eSuperTypes="#//wires/CompositeWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.3"/>
       </eAnnotations>
     </eClassifiers>
   </eSubpackages>

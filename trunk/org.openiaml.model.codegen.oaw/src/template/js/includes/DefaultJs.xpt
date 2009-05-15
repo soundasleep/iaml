@@ -95,59 +95,64 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 	  {
 	    method:'get',
 	    onSuccess: function(transport){
-	      	var response = transport.responseText || "no response text";
-	      	debug("success: " + response);
-	      	document.getElementById('response').innerHTML = response;
-	      	// run BEFORE decrementing, so counter will never be 0
-
-	      	// execute the function queue (if any)
-	      	if (function_queue) {
-	      		debug('executing function queue');
-	      		function_queue();
-	      	}
-	      	
-	      	// are there any instructions in here?
-	      	if (allow_instructions) {
-	      		debug('executing instructions');
-	      		var inst_list = response.split("\n");
-	      		for (var i = 0; i < inst_list.length; i++) {
-	      			var inst = trim(inst_list[i]);
-	      			if (inst) {
-	      				var bits = inst.split(" ");
-	      				switch (bits[0]) {
-	      					case "ok":
-	      						if (bits.length != 1) {
-	      							throw new IamlJavascriptException("ok instruction called with incorrect number of arguments: expected 1, found " + bits.length);
-	      						}
-	      						debug("[instruction] ok");
-	      						break;		// nothing
-	      					
-	      					case "set_value":
-	      						if (bits.length != 3) {
-	      							throw new IamlJavascriptException("set_value instruction called with incorrect number of arguments: expected 3, found " + bits.length);
-	      						}
-	      						var element_id = decodeURIComponent(bits[1]);
-	      						var value = decodeURIComponent(bits[2]);
-	      						debug("[instruction] set value(" + element_id + ")");
-	      						document.getElementById(element_id).value = value;
-	      						break;
-	      					
-	      					case "redirect":
-	      						if (bits.length != 2) {
-	      							throw new IamlJavascriptException("redirect instruction called with incorrect number of arguments: expected 2, found " + bits.length);
-	      						}
-	      						var url = decodeURIComponent(bits[1]);
-	      						debug("[instruction] redirect(" + url + ")");
-	      						window.location = url;
-	      						break;
-	      					
-	      					default:
-	      						throw new IamlJavascriptException("Unknown instruction '" + inst + "'");
-	      				}
-	      			}
-	      		}  
-	      	} 
-	      	
+	    	try {
+		      	var response = transport.responseText || "no response text";
+		      	debug("success: " + response);
+		      	document.getElementById('response').innerHTML = response;
+		      	// run BEFORE decrementing, so counter will never be 0
+	
+		      	// execute the function queue (if any)
+		      	if (function_queue) {
+		      		debug('executing function queue');
+		      		function_queue();
+		      	}
+		      	
+		      	// are there any instructions in here?
+		      	if (allow_instructions) {
+		      		debug('executing instructions');
+		      		var inst_list = response.split("\n");
+		      		for (var i = 0; i < inst_list.length; i++) {
+		      			var inst = trim(inst_list[i]);
+		      			if (inst) {
+		      				var bits = inst.split(" ");
+		      				switch (bits[0]) {
+		      					case "ok":
+		      						if (bits.length != 1) {
+		      							throw new IamlJavascriptException("ok instruction called with incorrect number of arguments: expected 1, found " + bits.length);
+		      						}
+		      						debug("[instruction] ok");
+		      						break;		// nothing
+		      					
+		      					case "set_value":
+		      						if (bits.length != 3) {
+		      							throw new IamlJavascriptException("set_value instruction called with incorrect number of arguments: expected 3, found " + bits.length);
+		      						}
+		      						var element_id = decodeURIComponent(bits[1]);
+		      						var value = decodeURIComponent(bits[2]);
+		      						debug("[instruction] set value(" + element_id + ")");
+		      						document.getElementById(element_id).value = value;
+		      						break;
+		      					
+		      					case "redirect":
+		      						if (bits.length != 2) {
+		      							throw new IamlJavascriptException("redirect instruction called with incorrect number of arguments: expected 2, found " + bits.length);
+		      						}
+		      						var url = decodeURIComponent(bits[1]);
+		      						debug("[instruction] redirect(" + url + ")");
+		      						window.location = url;
+		      						break;
+		      					
+		      					default:
+		      						throw new IamlJavascriptException("Unknown instruction '" + inst + "'");
+		      				}
+		      			}
+		      		}  
+		      	} 
+		    } catch (e if e instanceof IamlJavascriptException) {
+		    	debug("Exception within AJAX: " + e);
+		    	alert("Exception within AJAX: " + e);
+		    }
+		      	
 	      	next_store_event();	
 	      	ajaxDecrement();
 	    },
@@ -228,6 +233,21 @@ function set_application_value(id, arg0, function_queue) {
 function set_domain_attribute(id, arg0, function_queue) {
 	var url = 'set_domain_attribute.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
 	execute_queued_url(url, 'set_domain_attribute', function_queue, false);
+}
+
+/* save a domain instance variable (queued) */
+function set_queued_domain_attribute(id, arg0, function_queue) {
+	set_application_value("instance_queue_" + id, arg0, function_queue);
+}
+
+function save_queued_store_domain_attribute(id, function_queue) {
+	var url = 'save_queued_attribute.php?id=' + escape(id) + '&page=' + escape(page_id);
+	execute_queued_url(url, 'queued_store_attribute', function_queue, true);
+}
+
+function save_queued_store_domain_object(id, function_queue) {
+	var url = 'save_queued_object.php?id=' + escape(id) + '&page=' + escape(page_id);
+	execute_queued_url(url, 'queued_store_object', function_queue, true);
 }
 
 /* call a remote operation (only one attribute) */

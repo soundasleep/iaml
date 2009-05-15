@@ -23,6 +23,15 @@
 	function store_domain_attribute_«safeName()»(arg0) {
 		set_domain_attribute("«safeNameString(id)-»", arg0);
 	}
+	
+	/* for attributes with 'autosave' set to false */
+	function queue_store_domain_attribute_«safeName()»(arg0) {
+		set_queued_domain_attribute("«safeNameString(id)-»", arg0);
+	}
+	
+	function save_queued_store_domain_attribute_«safeName()»() {
+		save_queued_store_domain_attribute("«safeNameString(id)-»");
+	}
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

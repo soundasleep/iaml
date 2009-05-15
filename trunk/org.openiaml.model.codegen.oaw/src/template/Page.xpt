@@ -197,6 +197,8 @@
 			<div id="counter_set_application_value"></div>
 			<div id="counter_set_domain_attribute"></div>
 			<div id="counter_remote_event"></div>
+			<div id="counter_queued_store_attribute"></div>
+			<div id="counter_queued_store_object"></div>
 		</div>
 		<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
 		

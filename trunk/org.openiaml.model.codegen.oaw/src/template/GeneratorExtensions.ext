@@ -304,3 +304,6 @@ isAutosaveOff(emf::EObject this):
  */
 String throwException(String message) :
 	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.throwException(java.lang.String);
+
+String _instrument(String destination, String filename, String location) :
+	JAVA org.openiaml.model.codegen.oaw.coverage.InstrumentOawCode.instrument(java.lang.String, java.lang.String, java.lang.String);

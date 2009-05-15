@@ -28,6 +28,46 @@ public class SelectFieldFromDynamicQueryAutosave extends DatabaseCodegenTestCase
 		initialiseDatabase();
 	}
 	
+	/**
+	 * Override this method so we can try and do instrumentation/code
+	 * coverage.
+	 * 
+	 * Unfortunately this doesn't work yet, because it appears the runtime
+	 * test environment uses pre-compiled templates. We need some way to
+	 * reload the templates manually, but this is too much work.
+	 * So, instead we will use {@link org.openiaml.model.codegen.oaw.coverage.RunInstrumentation} to
+	 * manually instrument the code.
+	 * 
+	 * @see org.openiaml.model.codegen.oaw.coverage.InstrumentOawCode
+	 */
+	/*
+	protected IStatus doTransformOAW_old(String filename, String outputDir,
+			IProgressMonitor monitor) throws FileNotFoundException,
+			CoreException {
+		try {
+			File dir = new File("../org.openiaml.model.codegen.oaw/src/template");
+			InstrumentOawCode inst = new InstrumentOawCode();
+			
+			// we need to do some refreshing
+			refreshProject();
+			
+			try {
+				// instrument
+				inst.preInstrumentTemplates(dir, ROOT + "instrument/");
+				
+				return super.doTransformOAW(filename, outputDir, monitor);
+			} finally {
+				// revert
+				inst.postInstrumentTemplates(dir);
+			}
+		} catch (InstrumentationException e) {
+			// wrap as a runtime exception and throw, because we
+			// can't directly throw it from this method
+			throw new RuntimeException(e);
+		}
+	}
+	*/
+
 	@Override
 	protected String getDatabaseName() {
 		return "output/model_12109331eea_1083.db";

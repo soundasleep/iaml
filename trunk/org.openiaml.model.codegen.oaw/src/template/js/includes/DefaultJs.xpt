@@ -235,11 +235,6 @@ function set_domain_attribute(id, arg0, function_queue) {
 	execute_queued_url(url, 'set_domain_attribute', function_queue, false);
 }
 
-/* save a domain instance variable (queued) */
-function set_queued_domain_attribute(id, arg0, function_queue) {
-	set_application_value("instance_queue_" + id, arg0, function_queue);
-}
-
 function save_queued_store_domain_attribute(id, function_queue) {
 	var url = 'save_queued_attribute.php?id=' + escape(id) + '&page=' + escape(page_id);
 	execute_queued_url(url, 'queued_store_attribute', function_queue, true);

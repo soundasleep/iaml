@@ -211,6 +211,7 @@
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputForm-»
+	<?php queue_log_messages(true); ?>
 	<form id="«safeNameString(id)»" 
 			onChange="return onChange_«safeNameString(id)»(this);"
 			onClick="return onClick_«safeNameString(id)»(this);"
@@ -237,9 +238,11 @@
 		
 		«EXPAND expandChild FOREACH children-»
 	</form>
+	<?php queue_log_messages(false); ?>
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputTextField-»
+	<?php queue_log_messages(true); ?>
 	<div>
 	<label id="label_«safeNameString(id)-»">
 		«textFieldName()»
@@ -295,10 +298,12 @@
 		</script>
 	</label>
 	</div>
+	<?php queue_log_messages(false); ?>
 «ENDDEFINE»
 
 /* currently, a "Button" == a submit button. */
 «DEFINE expandChild FOR model::visual::Button-»
+	<?php queue_log_messages(true); ?>
 	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
 			onChange="return onChange_«safeNameString(id)»(this);"
 			onClick="return onClick_«safeNameString(id)»(this);"
@@ -325,6 +330,7 @@
 		}
 	/* ]]> */
 	</script>
+	<?php queue_log_messages(false); ?>
 «ENDDEFINE»
 
 /* ignore. todo: refactor this to a model extension to only select viable SyncWires */

@@ -17,6 +17,7 @@ queue_log_messages(true);
 
 log_message("exception.php? " . print_r($_GET, true));
 $fail = require_get("fail", "No exception specified"); 
+$trace = require_get("trace", "No trace specified");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
@@ -30,6 +31,11 @@ $fail = require_get("fail", "No exception specified");
 	<div class="exception">
 		An exception occured:
 		<span><?php echo htmlspecialchars($fail); ?>
+		
+		<p>
+			Stacktrace:
+			<blockquote><pre><?php echo htmlspecialchars($trace); ?></pre></blockquote>
+		</p>
 	</div>
 
 	«REM»

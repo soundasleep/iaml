@@ -272,7 +272,7 @@
 
 «DEFINE expandFailEdge FOR model::wires::NavigateWire-»
 	// we need to navigate to the fail page
-	$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage());
+	$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage()) . "&trace=" . urlencode($e->getTraceAsString());
 	log_message("Redirecting to '$url' (fail)");
 	header("Location: $url");
 	die;

@@ -53,6 +53,12 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	
 	public static final String BASE_URL = "http://localhost:8080/junit-workspace/";
 	
+	/** 
+	 * TODO a temporary variable to make sure we don't set up
+	 * the same project twice.
+	 */
+	protected boolean isSetup = false;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -63,6 +69,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		monitor = new NullProgressMonitor();
 		
 		project = createProject();
+		isSetup = true;
 
 		// set test context
 		getTestContext().setBaseUrl(BASE_URL + project.getName() + "/");

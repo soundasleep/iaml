@@ -51,7 +51,12 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 		// write out this inferred model for reference
 		String outModel = getInferredModel().getAbsolutePath();
 
-		super.setUp();		// create project
+		if (!isSetup) {
+			// TODO remove this in the future
+			// we don't want this method to create the project; it should be created already
+			throw new RuntimeException("This test case should have called setUp() already [this creates the project]");
+			// super.setUp();		// create project
+		}
 		doTransform(outModel);	// output to project
 		
 		return root;

@@ -50,7 +50,12 @@
 		/* get the object instance '«id»' */
 		/* not contained in an object instance; select it manually */
 		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-			throw new IamlRuntimeException("No selection wires exist for object instance '«this»'");
+			«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+				throw new IamlRuntimeException("No selection or new instance wires exist for object instance '«id»'");
+			«ELSE»
+				// return a "new" object
+				«EXPAND getNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+			«ENDIF»
 		«ELSE»
 			«EXPAND evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 			// get just the first result
@@ -65,6 +70,112 @@
 			return $obj;
 		«ENDIF»
 	}
+«ENDDEFINE»
+
+«DEFINE getNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»
+	«IF isAutosaveOff()»
+		/* autosave is off: don't insert it into the db yet */
+		return NEW_OBJECT;
+	«ELSE»
+		/* autosave is on: insert a new object into the db */
+		«IF containingSession() != null»
+			// in the session
+			if (require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
+				// insert a new one
+				log_message("Inserting new domain object [session] '«safeNameString(name)»' ('«safeNameString(id)»')");
+				
+				// where are we loading it from? sets $db
+				«EXPAND selectDatabase FOR wire.from»
+				
+				// create query
+				$query = "INSERT INTO «safeNameString(((model::DomainObject) wire.from).name)»
+					DEFAULT VALUES";
+				
+				// execute query
+				$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+				$rs->execute() or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+
+				// get the inserted id
+				$new_id = $db->lastInsertId("id");
+				log_message("new session variable id: $new_id");
+
+				// add a link to this
+				$_SESSION['new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»'] = $new_id;
+			}
+				
+			// return the newly inserted object
+			«EXPAND selectDatabase FOR wire.from»
+			
+			// create query
+			$query = "SELECT * FROM «safeNameString(((model::DomainObject) wire.from).name)»
+				WHERE id=?";
+			$args = array(require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»'));
+			log_message("selecting previously created new session object: " . print_r($args, true));
+
+			// execute query
+			$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+			$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+			
+			// get just the first result
+			$row = $rs->fetch();
+			if (!$row) {
+				throw new IamlRuntimeException("No results found for query '$query'");
+			}
+			$obj = array();
+			foreach ($row as $key => $value) {
+				$obj[$key] = $value;
+			}
+			return $obj;
+		«ELSE»
+			// in the page
+			if (get_application_value('new_object_«safeNameString(id)-»', false) === false) {
+				// insert a new one
+				log_message("Inserting new domain object [page] '«safeNameString(name)»' ('«safeNameString(id)»')");
+				
+				// where are we loading it from? sets $db
+				«EXPAND selectDatabase FOR wire.from»
+				
+				// create query
+				$query = "INSERT INTO «safeNameString(((model::DomainObject) wire.from).name)»
+					DEFAULT VALUES";
+				
+				// execute query
+				$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+				$rs->execute() or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+
+				// get the inserted id
+				$new_id = $db->lastInsertId("id");
+				log_message("new page variable id: $new_id");
+
+				// add a link to this
+				set_application_value('new_object_«safeNameString(id)-»', $new_id);
+			}
+				
+			// return the newly inserted object
+			«EXPAND selectDatabase FOR wire.from»
+			
+			// create query
+			$query = "SELECT * FROM «safeNameString(((model::DomainObject) wire.from).name)»
+				WHERE id=?";
+			$args = array(get_application_value('new_object_«safeNameString(id)-»', 'missing'));
+			log_message("selecting previously created new page object: " . print_r($args, true));
+
+			// execute query
+			$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+			$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+			
+			// get just the first result
+			$row = $rs->fetch();
+			if (!$row) {
+				throw new IamlRuntimeException("No results found for query '$query'");
+			}
+			$obj = array();
+			foreach ($row as $key => $value) {
+				$obj[$key] = $value;
+			}
+			return $obj;
+		«ENDIF»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE evaluateSelectWire FOR model::wires::SelectWire»
@@ -109,7 +220,7 @@
 
 «DEFINE selectDatabaseStore FOR model::DomainStore»
 	$db = new PDO('sqlite:«safeNameString(id)».db') 
-		or throw_new_IamlRuntimeException("Could not open DomainStore '«this»'");
+		or throw_new_IamlRuntimeException("Could not open DomainStore '«id»'");
 «ENDDEFINE»
 
 /* code to _save_ attributes */
@@ -122,7 +233,7 @@
 		«ELSE»
 			/* not contained in an object instance; select it manually */
 			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-				throw new IamlRuntimeException("No selection wires exist for attribute instance '«this»'");
+				throw new IamlRuntimeException("No selection wires exist for attribute instance '«safeNameString(id)-»'");
 			«ELSE»
 				$attribute_name = "«safeNameString(name)-»";
 				«EXPAND evaluateSelectWireStore FOR inEdges.typeSelect(model::wires::SelectWire).first()»
@@ -166,11 +277,63 @@
 	function store_object_instance_«safeName()»($attribute_name, $arg0) {
 		/* store a value into object id '«id»' */
 		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-			throw new IamlRuntimeException("No selection wires exist for attribute instance '«this»'");
+			«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+				throw new IamlRuntimeException("No selection wires exist for object instance '«id»'");
+			«ELSE»
+				// set the current "new" object
+				«EXPAND setNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+			«ENDIF»
 		«ELSE»
 			«EXPAND evaluateSelectWireStore FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 		«ENDIF»
 	}
+«ENDDEFINE»
+
+«DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»
+	«IF containingSession() != null»
+		// in the session
+
+		// it should already be created
+		$new_id = require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»');
+		log_message("updating existing session new object $new_id");
+		
+		// where are we loading it from? sets $db
+		«EXPAND selectDatabase FOR wire.from»
+			
+		// create query
+		$query = "UPDATE «safeNameString(((model::DomainObject) wire.from).name)»
+			SET $attribute_name = ?
+			WHERE id = ?";
+		
+		$args = array($arg0, $new_id);
+				
+		// execute query
+		$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+		$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+	«ELSE»
+		// in the page
+
+		// it should already be created
+		$new_id = get_application_value('new_object_«safeNameString(id)-»', false);
+		if ($new_id === false) {
+			throw new IamlRuntimeException("We shouldn't have an empty new object ID: «safeNameString(id)-»");
+		}
+		log_message("updating existing page new object $new_id");
+		
+		// where are we loading it from? sets $db
+		«EXPAND selectDatabase FOR wire.from»
+			
+		// create query
+		$query = "UPDATE «safeNameString(((model::DomainObject) wire.from).name)»
+			SET $attribute_name = ?
+			WHERE id = ?";
+		
+		$args = array($arg0, $new_id);
+				
+		// execute query
+		$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
+		$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»

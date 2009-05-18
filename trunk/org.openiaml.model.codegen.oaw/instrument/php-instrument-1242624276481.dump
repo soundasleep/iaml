@@ -1,0 +1,104 @@
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\Page.xpt:
+	9:FILE "output/"+safeNameString(id)+".php"-: 3
+	422:DEFINE _instrument_template FOR Object: 114
+	408:DEFINE initialiseDefaultValues FOR model::visual::InputTextField: 3
+	390:DEFINE outgoingValue(model::ApplicationElement container) FOR model::ApplicationElementProperty: 30
+	391:IF containingSession(this) == null: 30
+	243:DEFINE expandChild FOR model::visual::InputTextField-: 6
+	336:DEFINE staticInitialValues FOR model::WireEdge: 3
+	353:DEFINE staticInitialValue FOR model::ApplicationElementProperty: 6
+	354:IF containingSession(this) == null: 6
+	369:DEFINE outgoingValues(model::ApplicationElement container) FOR model::WireEdge: 3
+	341:DEFINE staticInitialValues FOR model::wires::SyncWire: 3
+	363:DEFINE staticInitialValue FOR model::DomainAttributeInstance: 3
+	349:DEFINE staticInitialValue FOR model::WireEdgeDestination: 3
+	374:DEFINE outgoingValues(model::ApplicationElement container) FOR model::wires::SyncWire: 3
+	380:DEFINE outgoingValue(model::ApplicationElement container) FOR model::WireEdgesSource: 6
+	209:DEFINE expandChild FOR model::ApplicationElement-: 3
+	304:DEFINE expandChild FOR model::visual::Button-: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\Template.xpt:
+	42:FILE "output/header.php": 6
+	89:DEFINE _instrument_template FOR Object: 15
+	54:FILE "output/create_database.php": 3
+	51:FILE "output/properties_file.php": 3
+	46:FILE "output/set_application_value.php": 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\HeaderPhp.xpt:
+	4:DEFINE headerPhp FOR model::InternetApplication: 6
+	379:DEFINE _instrument_template FOR Object: 6
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\CreateDatabasePhp.xpt:
+	4:DEFINE createDatabasePhp FOR model::InternetApplication: 3
+	36:DEFINE _instrument_template FOR Object: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt:
+	4:DEFINE createDomainStorePhp FOR model::DomainStore: 3
+	86:DEFINE _instrument_template FOR Object: 6
+	58:DEFINE createDomainObjectPhp_Root FOR model::ApplicationElement: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\PropertiesFilePhp.xpt:
+	4:DEFINE propertiesFilePhp FOR model::InternetApplication-: 3
+	87:DEFINE _instrument_template FOR Object: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt:
+	52:DEFINE expandOperation FOR model::CompositeOperation: 15
+	471:DEFINE _instrument_template FOR Object: 15
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt:
+	330:DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-: 6
+	506:DEFINE _instrument_template FOR Object: 21
+	352:IF isAutosaveOff(this): 6
+	17:DEFINE expandDomainObjects FOR model::visual::Page: 3
+	13:DEFINE expandDomainObjects FOR model::InternetApplication: 6
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\includes\DefaultJs.xpt:
+	4:DEFINE defaultJs FOR emf::EObject: 3
+	468:DEFINE _instrument_template FOR Object: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\Operations.xpt:
+	317:DEFINE expandOperations FOR model::ApplicationElementContainer-: 3
+	633:DEFINE _instrument_template FOR Object: 552
+	329:DEFINE expandOperation FOR model::CompositeOperation: 18
+	400:DEFINE expandParameters FOR model::Parameter-: 12
+	611:DEFINE continueChainedOperations FOR model::CompositeOperation-: 36
+	405:DEFINE doExecutionFlow FOR model::operations::StartNode-: 36
+	407:FOREACH outExecutions AS e-: 24
+	428:DEFINE doExecutionFlowNext FOR model::ChainedOperation-: 24
+	434:DEFINE expandOperationContents FOR model::ChainedOperation-: 24
+	436:IF name == "setPropertyToValue"-: 24
+	439:IF isInputTextField(outFlows.first().to.eContainer): 24
+	560:DEFINE setPropertyToValueInflowTarget FOR model::Parameter: 24
+	546:DEFINE setPropertyToValueOutflowTarget FOR model::ApplicationElementProperty: 24
+	482:FOREACH outExecutions AS e-: 24
+	417:DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-: 24
+	492:ELSE: 12
+	490:IF shouldExpandEventTriggers(this): 12
+	42:DEFINE expandEventTriggersInline FOR model::ContainsEventTriggers: 12
+	46:DEFINE expandEventTriggersInline FOR model::EventTrigger: 24
+	50:ELSEIF name=="access": 12
+	48:IF name=="edit": 12
+	66:DEFINE callOperations(Boolean inline) FOR model::wires::RunInstanceWire-: 12
+	98:ELSEIF isDomainAttributeInstance(to.eContainer)-: 12
+	117:DEFINE operationDomainAttributeInstance(Boolean inline, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation: 12
+	122:ELSE: 9
+	123:IF isAutosaveOff(attribute): 9
+	164:DEFINE callOperationParameters(model::WireEdge wire, Boolean inline) FOR model::wires::ParameterWire: 9
+	183:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline) FOR model::ApplicationElementProperty: 9
+	185:IF name == "fieldValue": 9
+	187:IF onCurrentPage(wire.from, this): 9
+	13:DEFINE expandEventTriggers(String type) FOR model::EventTrigger: 36
+	14:IF name==type: 12
+	30:DEFINE expandImplicitEventTriggersButton FOR model::wires::RunInstanceWire: 3
+	31:IF (name == "click" || name == "onClick"): 3
+	119:IF name=="save": 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\Conditions.xpt:
+	12:DEFINE expandConditions FOR model::ContainsConditions: 3
+	120:DEFINE _instrument_template FOR Object: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DynamicElements.xpt:
+	5:DEFINE expandDynamicElements FOR model::ContainsConditions: 3
+	27:DEFINE _instrument_template FOR Object: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt:
+	8:DEFINE expandDomainAttributes FOR model::visual::Page: 3
+	43:DEFINE _instrument_template FOR Object: 12
+	21:DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-: 3
+	30:ELSE: 3
+	15:DEFINE expandDomainObjects FOR model::visual::Page: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\EventsPhp.xpt:
+	4:DEFINE eventsPhp FOR model::visual::Page: 3
+	39:DEFINE _instrument_template FOR Object: 3
+C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt:
+	4:DEFINE setApplicationValuePhp FOR model::InternetApplication-: 3
+	157:DEFINE _instrument_template FOR Object: 18
+	54:DEFINE potentialUpdatesRequired FOR model::ApplicationElementProperty: 15

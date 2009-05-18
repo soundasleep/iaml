@@ -24,6 +24,12 @@ import java.util.Map;
 public class InstrumentOawCode {
 
 	/**
+	 * A special string to enable output instrumentation. This line
+	 * should only be added to files that have actually been instrumented.
+	 */
+	public static final String ENABLE_OUTPUT_INSTRUMENTATION = "__enable_output_instrumentation__";
+	
+	/**
 	 * The results of the instrumentation. If this is null
 	 * when accessed, a new instrumentation file is created.
 	 */
@@ -97,12 +103,67 @@ public class InstrumentOawCode {
 		filename = filename.replace("\\", "\\\\\\\\");
 		String destDir = destinationDir.getAbsolutePath().replace("\\", "\\\\\\\\");
 		
-		input = input.replaceAll("«((DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH)[^'»]*?)»", "«$1»«EXPAND _instrument_template FOR _instrument('" + destDir + "', '" + filename + "', '$1')»");
+		input = input.replaceAll("«((DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH)[^'»]*?)»", "«$1»«EXPAND _instrument_template FOR _instrument('" + destDir + "', '" + filename + "', '__LINE_NUMBER__:$1')»");
 
 		// add the instrumentation code at the bottom
 		input += "\n\n«DEFINE _instrument_template FOR Object»«ENDDEFINE»";
 		
+		// replace all FILE templates with special tags to enable
+		// output code coverage
+		input = input.replaceAll("«(FILE[^'»]*?)»", "«$1»" + ENABLE_OUTPUT_INSTRUMENTATION);
+		
+		// output code coverage
+		input = input.replaceAll("«((DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH)[^'»]*?)»", "«$1»__output_instrument(" + destDir + ";" + filename + ";__LINE_NUMBER__:$1)__");
+		
+		// replace all line numbers
+		input = replaceLineNumbers(input);
+		
 		return input;
+	}
+
+	/**
+	 * Replace all __LINE_NUMBER__ with the line number in the file.
+	 * 
+	 * @param input
+	 * @return
+	 */
+	protected String replaceLineNumbers(String input) {
+		String buffer = input; // content taken from here..
+		String output = ""; // ..and placed into here
+		int currentCount = 0;
+		
+		while (true) {
+			int pos = buffer.indexOf("__LINE_NUMBER__");
+			if (pos == -1) {
+				output += buffer;
+				return output; 
+			}
+			String before = buffer.substring(0, pos);
+			buffer = buffer.substring(pos + "__LINE_NUMBER__".length());
+			int count = countOccurrences(before, '\n');
+			currentCount += count;
+			output += before + currentCount;
+		}
+	}
+
+	/**
+	 * Count the occurrences of a given character in the given
+	 * string.
+	 * 
+	 * @param before
+	 * @param c
+	 * @return
+	 */
+	private int countOccurrences(String before, char c) {
+		int count = 0;
+		int current = 0;
+		while (true) {
+			int pos = before.indexOf(c, current);
+			if (pos == -1)
+				return count;
+			current = pos + 1;
+			count++;
+		}
 	}
 
 	/**

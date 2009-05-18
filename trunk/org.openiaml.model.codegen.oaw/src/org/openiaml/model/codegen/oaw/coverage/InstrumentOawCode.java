@@ -130,7 +130,7 @@ public class InstrumentOawCode {
 	protected String replaceLineNumbers(String input) {
 		String buffer = input; // content taken from here..
 		String output = ""; // ..and placed into here
-		int currentCount = 0;
+		int currentCount = 1;	// start line numbers at 1
 		
 		while (true) {
 			int pos = buffer.indexOf("__LINE_NUMBER__");
@@ -408,9 +408,12 @@ public class InstrumentOawCode {
 		html = escapeHtml(html);
 		
 		// elements to worry about: DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH
-		html = replaceDefines(html, template.getAbsolutePath(), oaw, php);
+		html = replaceBinaryTag("DEFINE", "ENDDEFINE", html, template.getAbsolutePath(), oaw, php);
+		html = replaceBinaryTag("FILE", "ENDFILE", html, template.getAbsolutePath(), oaw, php);
+		html = replaceBinaryTag("FOREACH", "ENDFOREACH", html, template.getAbsolutePath(), oaw, php);
+		html = replaceBinaryTag("IF", "ENDIF", html, template.getAbsolutePath(), oaw, php);
 		
-		html = "<html><style>span.none{background:#fcc;}span.oaw{background:#ffc;}span.php{color:green;}</style><body><h1>" + template + "</h1>\n\n<p><pre>" + html + "</pre></p></html>";
+		html = "<html><style>.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>" + template + "</h1>\n\n<ul><li class=\"none\">no execution</li><li class=\"oaw\">OAW execution</li><li class=\"php\">PHP execution</li></ul>\n\n<p><pre>" + html + "</pre></p></html>";
 		
 		System.out.println("Writing file '" + file + "'...");
 		writeFile(file, html);
@@ -433,19 +436,25 @@ public class InstrumentOawCode {
 	 * @param php
 	 * @return
 	 */
-	private String replaceDefines(String html,
+	private String replaceBinaryTag(String tag,
+			String endtag,
+			String html,
 			String templateFile,
 			Map<String, Map<String, Integer>> oaw,
 			Map<String, Map<String, Integer>> php) {
 
 		// find all DEFINEs
 		int lineCount = 0;
-		String[] bits = html.split("«DEFINE");
+		String[] bits = html.split("«" + tag);
 		html = bits[0];
-		lineCount = bits[0].split("\n").length + 4;		// 4 is a magic number TODO fix (important!)
+		lineCount = countOccurrences(bits[0], '\n') + 1;		// generated instrumentation code is out by 1
+		
+		if (templateFile.toLowerCase().contains("operations.xpt") && tag.equals("DEFINE")) {
+			System.out.println("breakpoint");
+		}
 		
 		for (int i = 1; i < bits.length; i++) {
-			String key = "DEFINE" + bits[i].substring(0, bits[i].indexOf('»'));
+			String key = tag + bits[i].substring(0, bits[i].indexOf('»'));
 			key = lineCount + ":" + key;
 			
 			// add a <span> with a "title"
@@ -468,12 +477,12 @@ public class InstrumentOawCode {
 			html += "<span class=\"" + classes + "\" title=\"" + title + "\">";
 			
 			// append
-			html += "«DEFINE" + bits[i];
-			lineCount += bits[i].split("\n").length;
+			html += "«" + tag + bits[i];
+			lineCount += countOccurrences(bits[i], '\n');
 		}
 		
 		// append all ENDDEFINE with </span>
-		html = html.replaceAll("«(ENDDEFINE[^'»]*?)»", "«$1»</span></span>");
+		html = html.replaceAll("«(" + endtag + "[^'»]*?)»", "«$1»</span>");
 		
 		return html;
 		

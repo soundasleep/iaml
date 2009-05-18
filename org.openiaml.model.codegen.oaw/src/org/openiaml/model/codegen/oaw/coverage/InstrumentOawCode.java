@@ -347,4 +347,189 @@ public class InstrumentOawCode {
 		writeFile(f, buf.toString());
 	}
 	
+	/**
+	 * The aim of this method is to take our template files and
+	 * the results of the instrumentation, and generate a pretty format
+	 * of the code coverage for HTML.
+	 * 
+	 * @param oawDump
+	 * @param phpDump
+	 * @param templatesDir
+	 * @param outputDir
+	 * @throws InstrumentationException 
+	 * @throws IOException 
+	 */
+	public void outputCoveredCode(File oawDump, File phpDump, File templatesDir, File outputDir) throws InstrumentationException, IOException {
+		// checks
+		if (!templatesDir.exists() || !templatesDir.isDirectory()) {
+			throw new InstrumentationException("Template directory '" + templatesDir + "' does not exist or is not a directory.");
+		}
+		if (!outputDir.exists()) {
+			boolean created = outputDir.mkdirs();
+			if (!created) {
+				throw new InstrumentationException("Could not create directory '" + outputDir + "'");
+			}
+		}
+		if (!oawDump.exists()) {
+			throw new InstrumentationException("File '" + oawDump + "' does not exist");
+		}
+		if (!phpDump.exists()) {
+			throw new InstrumentationException("File '" + phpDump + "' does not exist");
+		}
+		
+		// load the dumps
+		Map<String, Map<String, Integer>> oaw = loadInstrumentation(oawDump);
+		Map<String, Map<String, Integer>> php = loadInstrumentation(phpDump);
+		
+		// get templates
+		List<File> templates = getRecursiveDirectoryContents(templatesDir);
+		for (File template : templates) {
+			if (template.getAbsolutePath().endsWith(".xpt")) {
+				String templateOut = outputDir.getAbsolutePath() + File.separator + getOutputName(template);
+				outputCoveredTemplate(oaw, php, template, new File(templateOut));
+			}
+		}
+	}
+
+	/**
+	 * @param oaw oaw instrumentation results
+	 * @param php php instrumentation results
+	 * @param template the xpt template file itself
+	 * @param file file to output results to
+	 * @throws IOException 
+	 */
+	protected void outputCoveredTemplate(Map<String, Map<String, Integer>> oaw,
+			Map<String, Map<String, Integer>> php, File template,
+			File file) throws IOException {
+		
+		String html = readFile(template);
+		
+		// escape html
+		html = escapeHtml(html);
+		
+		// elements to worry about: DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH
+		html = replaceDefines(html, template.getAbsolutePath(), oaw, php);
+		
+		html = "<html><style>span.none{background:#fcc;}span.oaw{background:#ffc;}span.php{color:green;}</style><body><h1>" + template + "</h1>\n\n<p><pre>" + html + "</pre></p></html>";
+		
+		System.out.println("Writing file '" + file + "'...");
+		writeFile(file, html);
+		
+	}
+
+	/**
+	 * Escape the given string to HTML
+	 * 
+	 * @param html
+	 * @return
+	 */
+	protected String escapeHtml(String html) {
+		return html.replace("&", "&amp;").replace(">", "&gt;").replace("<", "&lt;");
+	}
+
+	/**
+	 * @param html
+	 * @param oaw
+	 * @param php
+	 * @return
+	 */
+	private String replaceDefines(String html,
+			String templateFile,
+			Map<String, Map<String, Integer>> oaw,
+			Map<String, Map<String, Integer>> php) {
+
+		// find all DEFINEs
+		int lineCount = 0;
+		String[] bits = html.split("«DEFINE");
+		html = bits[0];
+		lineCount = bits[0].split("\n").length + 4;		// 4 is a magic number TODO fix (important!)
+		
+		for (int i = 1; i < bits.length; i++) {
+			String key = "DEFINE" + bits[i].substring(0, bits[i].indexOf('»'));
+			key = lineCount + ":" + key;
+			
+			// add a <span> with a "title"
+			String classes = "";
+			String title = "";
+			if (oaw.containsKey(templateFile) && oaw.get(templateFile).containsKey(key)) {
+				// it's been executed in OAW
+				classes += "oaw ";
+				title += oaw.get(templateFile).get(key) + " steps in OAW ";
+			}
+			if (php.containsKey(templateFile) && php.get(templateFile).containsKey(key)) {
+				// it's been executed in OAW
+				classes += "php ";
+				title += php.get(templateFile).get(key) + " steps in PHP ";
+			}
+			if (classes.isEmpty()) {
+				classes = "none";
+			}
+			title += "(" + templateFile + ": " + key + ")";
+			html += "<span class=\"" + classes + "\" title=\"" + title + "\">";
+			
+			// append
+			html += "«DEFINE" + bits[i];
+			lineCount += bits[i].split("\n").length;
+		}
+		
+		// append all ENDDEFINE with </span>
+		html = html.replaceAll("«(ENDDEFINE[^'»]*?)»", "«$1»</span></span>");
+		
+		return html;
+		
+	}
+
+	/**
+	 * @param oawDump
+	 * @return
+	 * @throws InstrumentationException 
+	 * @throws IOException 
+	 */
+	protected Map<String, Map<String, Integer>> loadInstrumentation(File file) throws InstrumentationException, IOException {
+		String input = readFile(file);
+		String[] lines = input.split("\n");
+		
+		Map<String, Map<String, Integer>> result = new 
+			HashMap<String, Map<String, Integer>>();
+		Map<String, Integer> current = new HashMap<String, Integer>();
+		String currentFilename = "";
+		
+		for (String line : lines) {
+			if (!line.isEmpty()) {
+				if (line.charAt(0) == '\t') {
+					// add to current
+					int pos = line.lastIndexOf(":");
+					String part1 = line.substring(0, pos).trim();
+					String part2 = line.substring(pos + 1).trim();
+					current.put(part1, Integer.valueOf(part2.trim()));
+				} else {
+					// a filename; insert the current buffer into the result
+					result.put(currentFilename, current);
+					
+					// remove the ':' at the end of the filename
+					currentFilename = line.substring(0, line.length() - 1);
+					current = new HashMap<String, Integer>();
+				}
+			}
+		}
+		
+		// put in the last result
+		result.put(currentFilename, current);
+		
+		return result;
+	}
+
+	/**
+	 * Get the HTML filename result for the given xpt template file.
+	 * 
+	 * @param template
+	 * @return
+	 */
+	protected String getOutputName(File template) {
+		// get root
+		File root = new File("");
+		String out = template.getAbsolutePath().replace(root.getAbsolutePath() + File.separator, "");
+		return out.replaceAll("[^A-Za-z0-9_\\-]", "-").replaceAll("--+", "-") + ".html";		
+	}
+	
 }

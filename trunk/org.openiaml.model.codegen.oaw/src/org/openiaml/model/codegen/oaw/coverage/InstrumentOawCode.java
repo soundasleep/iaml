@@ -24,6 +24,72 @@ import java.util.Map;
 public class InstrumentOawCode {
 
 	/**
+	 * A helper class to keep track of output summaries.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	protected class OutputSummary {
+		private File template;
+		private File destination;
+		private long blocks = 0;
+		private long coveredOaw = 0;
+		private long coveredPhp = 0;
+		
+		/**
+		 * 
+		 * @param template Input template file
+		 * @param destination Destination output file
+		 */
+		public OutputSummary(File template, File destination) {
+			this.template = template;
+			this.destination = destination;
+		}
+
+		/**
+		 * Add another potential execution block.
+		 */
+		public void addBlock() {
+			blocks++;
+		}
+
+		/**
+		 * Call when a block has been covered with OAW execution.
+		 */
+		public void coveredInOaw() {
+			coveredOaw++;
+		}
+
+		/**
+		 * Call when a block has been covered with PHP execution.
+		 */
+		public void coveredInPhp() {
+			coveredPhp++;
+		}
+
+		public File getTemplate() {
+			return template;
+		}
+
+		public File getDestination() {
+			return destination;
+		}
+
+		public long getBlocks() {
+			return blocks;
+		}
+
+		public long getCoveredOaw() {
+			return coveredOaw;
+		}
+
+		public long getCoveredPhp() {
+			return coveredPhp;
+		}
+
+	}
+
+	/**
 	 * A special string to enable output instrumentation. This line
 	 * should only be added to files that have actually been instrumented.
 	 */
@@ -383,12 +449,80 @@ public class InstrumentOawCode {
 		
 		// get templates
 		List<File> templates = getRecursiveDirectoryContents(templatesDir);
+		List<OutputSummary> summaries = new ArrayList<OutputSummary>();
 		for (File template : templates) {
 			if (template.getAbsolutePath().endsWith(".xpt")) {
 				String templateOut = outputDir.getAbsolutePath() + File.separator + getOutputName(template);
-				outputCoveredTemplate(oaw, php, template, new File(templateOut));
+				OutputSummary summary = outputCoveredTemplate(oaw, php, template, new File(templateOut));
+				summaries.add(summary);
 			}
 		}
+		
+		// write a summary
+		String templateOut = outputDir.getAbsolutePath() + File.separator + "index.html";
+		outputSummary(summaries, templateOut); 
+	}
+
+	/**
+	 * Output a summary of all templates to the given file.
+	 * 
+	 * @param summaries
+	 * @param templateOut File to write to
+	 * @throws IOException 
+	 */
+	private void outputSummary(List<OutputSummary> summaries, String templateOut) throws IOException {
+		String html = "";
+		double barWidth = 200;
+
+		for (OutputSummary summary : summaries) {
+			html += "<tr><th><a href=\"" + escapeHtmlQuotes(summary.getDestination().getName()) + "\">" + escapeHtml(formatTemplateName(summary.getTemplate())) + "</a></th>\n";
+			{
+				double ratio = summary.getCoveredOaw() / (1.0 * summary.getBlocks());
+				double ratio2 = summary.getCoveredPhp() / (1.0 * summary.getBlocks());
+				html += "<td>" + formatNumber(summary.getCoveredOaw()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio * 100) + "%) </td>\n";
+				html += "<td>" + formatNumber(summary.getCoveredPhp()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio2 * 100) + "%) </td>\n";
+				html += "<td style=\"border:1px solid #ccc;margin:0;padding:0;background:#f33;\">";
+				html += "<div style=\"width:" + Math.floor((barWidth * ratio2)) + "px;background:#3f3;height:1.3em;display:inline-block;\"></div>";
+				html += "<div style=\"width:" + Math.floor((barWidth * (ratio - ratio2))) + "px;background:#ff3;height:1.3em;display:inline-block;\"></div>";
+				html += "<div style=\"width:" + Math.floor((barWidth * (1.0-ratio))) + "px;background:#f33;height:1.3em;display:inline-block;\"></div>";
+				html += "</td>\n";
+			}
+			html += "</tr>\n";
+		}
+		
+		html = "<html><style>body,html,th,td{font-family:Arial;}</style><body><h1>Summary</h1>\n\n<table><tr><th>Template</th><th>OAW</th><th>PHP</th><th width=\"" + barWidth + "\">%</th></tr>\n" + html + "</table></html>";
+		
+		System.out.println("Writing summary '" + templateOut + "'...");
+		writeFile(new File(templateOut), html);
+	}
+
+	/**
+	 * @param d
+	 * @return
+	 */
+	private String formatNumber(double d) {
+		return formatNumber(new Double(d).longValue());
+	}
+
+	/**
+	 * @param n
+	 * @return
+	 */
+	private String formatNumber(long n) {
+		return new Long(n).toString();
+	}
+	
+	/**
+	 * Get an easy-to-read filename of the given file. 
+	 * Removes the root directory from the file.
+	 * 
+	 * @param f
+	 * @return
+	 */
+	private String formatTemplateName(File f) {
+		File root = new File("");
+		String out = f.getAbsolutePath().replace(root.getAbsolutePath() + File.separator, "");
+		return out;
 	}
 
 	/**
@@ -397,34 +531,38 @@ public class InstrumentOawCode {
 	 * @param template the xpt template file itself
 	 * @param file file to output results to
 	 * @param templates list of templates that we are loading (used to generate hyperlinks)
+	 * @return an output summary of the instrumented template
 	 * @throws IOException 
 	 */
-	protected void outputCoveredTemplate(Map<String, Map<String, Integer>> oaw,
+	protected OutputSummary outputCoveredTemplate(Map<String, Map<String, Integer>> oaw,
 			Map<String, Map<String, Integer>> php, File template,
 			File file) throws IOException {
 		
 		String html = readFile(template);
+		OutputSummary os = new OutputSummary(template, file);
 		
 		// escape html
 		html = escapeHtml(html);
 		
 		// elements to worry about: DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH
-		html = replaceBinaryTag("DEFINE", "ENDDEFINE", html, template.getAbsolutePath(), oaw, php);
-		html = replaceBinaryTag("FILE", "ENDFILE", html, template.getAbsolutePath(), oaw, php);
-		html = replaceBinaryTag("FOREACH", "ENDFOREACH", html, template.getAbsolutePath(), oaw, php);
+		html = replaceBinaryTag("DEFINE", "ENDDEFINE", html, template.getAbsolutePath(), oaw, php, os);
+		html = replaceBinaryTag("FILE", "ENDFILE", html, template.getAbsolutePath(), oaw, php, os);
+		html = replaceBinaryTag("FOREACH", "ENDFOREACH", html, template.getAbsolutePath(), oaw, php, os);
 		
 		// hopefully this clever little hack works
-		html = replaceBinaryTag("IF", "ENDIF", html, template.getAbsolutePath(), oaw, php);
-		html = replaceBinaryTagReverse("ELSE", "ELSE", html, template.getAbsolutePath(), oaw, php);
-		html = replaceBinaryTagReverse("ELSEIF", "ELSEIF", html, template.getAbsolutePath(), oaw, php);
+		html = replaceBinaryTag("IF", "ENDIF", html, template.getAbsolutePath(), oaw, php, os);
+		html = replaceBinaryTagReverse("ELSE", "ELSE", html, template.getAbsolutePath(), oaw, php, os);
+		html = replaceBinaryTagReverse("ELSEIF", "ELSEIF", html, template.getAbsolutePath(), oaw, php, os);
 		
 		// create <a> links to template files
 		html = replaceLinks(template, html, template.getAbsolutePath());
 		
-		html = "<html><style>.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>" + template + "</h1>\n\n<ul><li class=\"none\">no execution</li><li class=\"oaw\">OAW execution</li><li class=\"php\">PHP execution</li></ul>\n\n<p><pre>" + html + "</pre></p></html>";
+		html = "<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>" + template + "</h1>\n\n<a href=\"index.html\">Summary</a><ul><li class=\"none\">no execution</li><li class=\"oaw\">OAW execution</li><li class=\"php\">PHP execution</li></ul>\n\n<p><pre>" + html + "</pre></p></html>";
 		
 		System.out.println("Writing file '" + file + "'...");
 		writeFile(file, html);
+		
+		return os;
 		
 	}
 
@@ -571,6 +709,7 @@ public class InstrumentOawCode {
 	 * @param html
 	 * @param oaw
 	 * @param php
+	 * @param os output summary to append to
 	 * @return
 	 */
 	private String replaceBinaryTag(String tag,
@@ -578,7 +717,7 @@ public class InstrumentOawCode {
 			String html,
 			String templateFile,
 			Map<String, Map<String, Integer>> oaw,
-			Map<String, Map<String, Integer>> php) {
+			Map<String, Map<String, Integer>> php, OutputSummary os) {
 
 		// find all DEFINEs
 		int lineCount = 0;
@@ -594,6 +733,9 @@ public class InstrumentOawCode {
 			String key = tag + bits[i].substring(0, bits[i].indexOf('»'));
 			key = lineCount + ":" + key;
 			
+			// add to output summary
+			os.addBlock();
+			
 			// add a <span> with a "title"
 			String classes = "";
 			String title = "";
@@ -601,11 +743,13 @@ public class InstrumentOawCode {
 				// it's been executed in OAW
 				classes += "oaw ";
 				title += oaw.get(templateFile).get(key) + " steps in OAW ";
+				os.coveredInOaw();
 			}
 			if (php.containsKey(templateFile) && php.get(templateFile).containsKey(key)) {
 				// it's been executed in OAW
 				classes += "php ";
 				title += php.get(templateFile).get(key) + " steps in PHP ";
+				os.coveredInPhp();
 			}
 			if (classes.isEmpty()) {
 				classes = "none";
@@ -630,6 +774,7 @@ public class InstrumentOawCode {
 	 * @param html
 	 * @param oaw
 	 * @param php
+	 * @param os output summary to append to
 	 * @return
 	 */
 	private String replaceBinaryTagReverse(String tag,
@@ -637,7 +782,7 @@ public class InstrumentOawCode {
 			String html,
 			String templateFile,
 			Map<String, Map<String, Integer>> oaw,
-			Map<String, Map<String, Integer>> php) {
+			Map<String, Map<String, Integer>> php, OutputSummary os) {
 
 		// append all ENDDEFINE with </span>
 		// do this replacement first
@@ -658,6 +803,9 @@ public class InstrumentOawCode {
 			String key = tag + bits[i].substring(0, bits[i].indexOf('»'));
 			key = lineCount + ":" + key;
 			
+			// add to output summary
+			os.addBlock();
+			
 			// add a <span> with a "title"
 			String classes = "";
 			String title = "";
@@ -665,11 +813,13 @@ public class InstrumentOawCode {
 				// it's been executed in OAW
 				classes += "oaw ";
 				title += oaw.get(templateFile).get(key) + " steps in OAW ";
+				os.coveredInOaw();
 			}
 			if (php.containsKey(templateFile) && php.get(templateFile).containsKey(key)) {
 				// it's been executed in OAW
 				classes += "php ";
 				title += php.get(templateFile).get(key) + " steps in PHP ";
+				os.coveredInPhp();
 			}
 			if (classes.isEmpty()) {
 				classes = "none";

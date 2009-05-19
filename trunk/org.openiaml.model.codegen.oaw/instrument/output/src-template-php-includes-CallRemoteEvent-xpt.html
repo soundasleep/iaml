@@ -1,0 +1,68 @@
+<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\CallRemoteEvent.xpt</h1>
+
+<a href="index.html">Summary</a><ul><li class="none">no execution</li><li class="oaw">OAW execution</li><li class="php">PHP execution</li></ul>
+
+<p><pre>«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\CallRemoteEvent.xpt: 5:DEFINE callRemoteEvent FOR model::InternetApplication-)"><a name="callRemoteEvent.html">«DEFINE callRemoteEvent FOR model::InternetApplication-»</a>
+&lt;?php
+/**
+ * Call a remote event.
+ */
+ 
+require("header.php");
+
+log_message("call_remote_event.php? " . print_r($_GET, true));
+$container = require_get("container");
+$operation_name = require_get("operation_name");
+$arg0 = require_get("arg0");
+$arg1 = require_get("arg1");
+$running = require_get("running", "");	// optional stacktrace
+
+/* check to make sure it's in an existing page */
+$existing_pages = array(
+	<a href="#allPageNames.html">«EXPAND allPageNames FOREACH getAllPages() SEPARATOR ", "»</a>
+);
+if (!isset($existing_pages[$container])) {
+	throw new IamlRuntimeException("Container '$container' was not found in existing pages.");
+}
+
+/* let's call it through a HTTP request */
+$url = get_request_base() . "/" . $existing_pages[$container]
+	. "?operation=" . urlencode($operation_name) . "&amp;arg0=" . urlencode($arg0) . "&amp;arg1=" . urlencode($arg1) . "&amp;running=" . urlencode($running);
+
+// copy over session parameters
+$url .= "&amp;" . get_sid();		// directly from PHP, so we don't need to set session_id() ourselves
+
+log_message("Remote call to: $url");
+
+// stop current session: the default PHP session handler blocks to prevent concurrent access
+$old_id = session_id();
+session_write_close();
+
+$result = file_get_contents($url);
+
+// restart the session once complete
+session_id($old_id);
+session_start();
+
+if (strpos(strtolower($result), "Fatal error") !== false) {
+	// TODO add test case to make sure we will catch this exception
+	throw new IamlRuntimeException("Remote call to '$url' failed: Fatal error.", $result);
+} 
+if (strpos(strtolower($result), "Warning") !== false) {
+	// TODO add test case to make sure we will catch this exception
+	throw new IamlRuntimeException("Remote call to '$url' failed: Warning.", $result);
+} 
+echo $result;
+
+log_message("call_remote_event.php complete");
+
+«ENDDEFINE»</span>
+
+<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\CallRemoteEvent.xpt: 61:DEFINE allPageNames FOR model::visual::Page)"><a name="allPageNames.html">«DEFINE allPageNames FOR model::visual::Page»</a>
+	"«safeName()-»" =&gt; "«safeNameString(id)-».php"
+«ENDDEFINE»</span>
+</pre></p></html>

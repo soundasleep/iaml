@@ -411,7 +411,11 @@ public class InstrumentOawCode {
 		html = replaceBinaryTag("DEFINE", "ENDDEFINE", html, template.getAbsolutePath(), oaw, php);
 		html = replaceBinaryTag("FILE", "ENDFILE", html, template.getAbsolutePath(), oaw, php);
 		html = replaceBinaryTag("FOREACH", "ENDFOREACH", html, template.getAbsolutePath(), oaw, php);
+		
+		// hopefully this clever little hack works
 		html = replaceBinaryTag("IF", "ENDIF", html, template.getAbsolutePath(), oaw, php);
+		html = replaceBinaryTagReverse("ELSE", "ELSE", html, template.getAbsolutePath(), oaw, php);
+		html = replaceBinaryTagReverse("ELSEIF", "ELSEIF", html, template.getAbsolutePath(), oaw, php);
 		
 		html = "<html><style>.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>" + template + "</h1>\n\n<ul><li class=\"none\">no execution</li><li class=\"oaw\">OAW execution</li><li class=\"php\">PHP execution</li></ul>\n\n<p><pre>" + html + "</pre></p></html>";
 		
@@ -487,7 +491,68 @@ public class InstrumentOawCode {
 		return html;
 		
 	}
+	
 
+	/**
+	 * @param html
+	 * @param oaw
+	 * @param php
+	 * @return
+	 */
+	private String replaceBinaryTagReverse(String tag,
+			String endtag,
+			String html,
+			String templateFile,
+			Map<String, Map<String, Integer>> oaw,
+			Map<String, Map<String, Integer>> php) {
+
+		// append all ENDDEFINE with </span>
+		// do this replacement first
+		// the </span> is also in reverse order
+		html = html.replaceAll("«(" + endtag + "[^'»]*?)»", "</span>«$1»");
+
+		// find all DEFINEs
+		int lineCount = 0;
+		String[] bits = html.split("«" + tag);
+		html = bits[0];
+		lineCount = countOccurrences(bits[0], '\n') + 1;		// generated instrumentation code is out by 1
+		
+		if (templateFile.toLowerCase().contains("operations.xpt") && tag.equals("DEFINE")) {
+			System.out.println("breakpoint");
+		}
+		
+		for (int i = 1; i < bits.length; i++) {
+			String key = tag + bits[i].substring(0, bits[i].indexOf('»'));
+			key = lineCount + ":" + key;
+			
+			// add a <span> with a "title"
+			String classes = "";
+			String title = "";
+			if (oaw.containsKey(templateFile) && oaw.get(templateFile).containsKey(key)) {
+				// it's been executed in OAW
+				classes += "oaw ";
+				title += oaw.get(templateFile).get(key) + " steps in OAW ";
+			}
+			if (php.containsKey(templateFile) && php.get(templateFile).containsKey(key)) {
+				// it's been executed in OAW
+				classes += "php ";
+				title += php.get(templateFile).get(key) + " steps in PHP ";
+			}
+			if (classes.isEmpty()) {
+				classes = "none";
+			}
+			title += "(" + templateFile + ": " + key + ")";
+			html += "<span class=\"" + classes + "\" title=\"" + title + "\">";
+			
+			// append
+			html += "«" + tag + bits[i];
+			lineCount += countOccurrences(bits[i], '\n');
+		}
+		
+		return html;
+		
+	}
+	
 	/**
 	 * @param oawDump
 	 * @return

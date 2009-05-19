@@ -396,6 +396,7 @@ public class InstrumentOawCode {
 	 * @param php php instrumentation results
 	 * @param template the xpt template file itself
 	 * @param file file to output results to
+	 * @param templates list of templates that we are loading (used to generate hyperlinks)
 	 * @throws IOException 
 	 */
 	protected void outputCoveredTemplate(Map<String, Map<String, Integer>> oaw,
@@ -417,11 +418,133 @@ public class InstrumentOawCode {
 		html = replaceBinaryTagReverse("ELSE", "ELSE", html, template.getAbsolutePath(), oaw, php);
 		html = replaceBinaryTagReverse("ELSEIF", "ELSEIF", html, template.getAbsolutePath(), oaw, php);
 		
+		// create <a> links to template files
+		html = replaceLinks(template, html, template.getAbsolutePath());
+		
 		html = "<html><style>.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>" + template + "</h1>\n\n<ul><li class=\"none\">no execution</li><li class=\"oaw\">OAW execution</li><li class=\"php\">PHP execution</li></ul>\n\n<p><pre>" + html + "</pre></p></html>";
 		
 		System.out.println("Writing file '" + file + "'...");
 		writeFile(file, html);
 		
+	}
+
+	/**
+	 * Replace all EXPAND foo::bar statements with a hyperlink
+	 * to the actual template.
+	 * 
+	 * @param html
+	 * @param absolutePath
+	 * @param templates
+	 * @return
+	 */
+	protected String replaceLinks(File thisTemplate, String html, String absolutePath) {
+
+		// create <a> links from <expand> to <define>s
+		String[] bits = html.split("«EXPAND");
+		html = bits[0];
+		
+		for (int i = 1; i < bits.length; i++) {
+			String key = bits[i].substring(0, bits[i].indexOf('»'));
+			String remainder = bits[i].substring(bits[i].indexOf('»') + 1);
+			
+			String[] keyBits = key.split("FOR", 2);
+			String href = "foo";
+			// remove brackets
+			if (keyBits[0].contains("(")) {
+				keyBits[0] = keyBits[0].substring(0, keyBits[0].indexOf("("));
+			}
+			if (keyBits.length == 2 && keyBits[0].contains("::")) {
+				// its in a different file
+				String lastKey = keyBits[0].substring(keyBits[0].lastIndexOf("::") + 2);
+				href = getOutputName(findTemplateFile(thisTemplate, keyBits[0])) + '#' + generateExpandHref(lastKey);
+			} else {
+				// its in this file
+				href = '#' + generateExpandHref(key);
+			}
+			
+			// append
+			html += "<a href=\"" + escapeHtmlQuotes(href) + "\">«EXPAND" + key + "»</a>" + remainder;
+		}
+		
+		// now, take all <define>s and add <a name>s so they can be linked
+		html = createDefineLinks(html);
+		
+		return html;
+		
+	}
+
+	
+	/**
+	 * @param html
+	 * @return
+	 */
+	private String createDefineLinks(String html) {
+
+		// create <a> links from <expand> to <define>s
+		String[] bits = html.split("«DEFINE");
+		html = bits[0];
+		
+		for (int i = 1; i < bits.length; i++) {
+			String key = bits[i].substring(0, bits[i].indexOf('»'));
+			String remainder = bits[i].substring(bits[i].indexOf('»') + 1);
+			
+			String href = generateExpandHref(key);
+			
+			// append
+			html += "<a name=\"" + escapeHtmlQuotes(href) + "\">«DEFINE" + key + "»</a>" + remainder;
+		}
+		
+		return html;
+	}
+
+	/**
+	 * Find the template file for the given string.
+	 * 
+	 * @param string ' js::Operations::expandEventTriggers'
+	 * @return
+	 */
+	private File findTemplateFile(File thisTemplate, String string) {		
+		String[] bits = string.trim().split("::");
+		File start = thisTemplate;
+		
+		// go back to find the common root
+		for (int i = 0; i < bits.length - 1; i++) {
+			start = start.getParentFile();
+		}
+		
+		// jevon hack: if the file does not contain /template, add it
+		if (!bits[0].equals("template") && !start.getAbsolutePath().contains(File.separator + "template")) {
+			start = new File(start.getAbsolutePath() + File.separator + "template");
+		}
+		
+		// now add additional bits (folders and filename)
+		for (int i = 0; i < bits.length - 1; i++) {
+			start = new File(start.getAbsolutePath() + File.separator + bits[i]);
+		}
+		
+		// add file extension
+		start = new File(start.getAbsolutePath() + ".xpt");
+		
+		// this should be the result file
+		return start;
+	}
+
+	/**
+	 * Generate a key into a href target.
+	 * @param key
+	 * @return
+	 */
+	protected String generateExpandHref(String key) {
+		// remove brackets; we can't do type inference
+		if (key.contains("(")) {
+			key = key.substring(0, key.indexOf("("));
+		}
+		// remove FOR: we can't do type inference
+		if (key.contains("FOR")) {
+			key = key.substring(0, key.indexOf("FOR"));
+		}
+		
+		return getOutputName(new File(key.trim()));
 	}
 
 	/**
@@ -434,6 +557,16 @@ public class InstrumentOawCode {
 		return html.replace("&", "&amp;").replace(">", "&gt;").replace("<", "&lt;");
 	}
 
+	/**
+	 * Escape the given string to HTML, but also quotes.
+	 * 
+	 * @param html
+	 * @return
+	 */
+	protected String escapeHtmlQuotes(String html) {
+		return escapeHtml(html).replace("\"", "&quot;");
+	}
+	
 	/**
 	 * @param html
 	 * @param oaw

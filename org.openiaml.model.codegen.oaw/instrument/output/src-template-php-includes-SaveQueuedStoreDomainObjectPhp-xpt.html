@@ -1,0 +1,40 @@
+<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SaveQueuedStoreDomainObjectPhp.xpt</h1>
+
+<a href="index.html">Summary</a><ul><li class="none">no execution</li><li class="oaw">OAW execution</li><li class="php">PHP execution</li></ul>
+
+<p><pre>«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SaveQueuedStoreDomainObjectPhp.xpt: 5:DEFINE saveQueuedStoreDomainObject FOR model::InternetApplication-)"><a name="saveQueuedStoreDomainObject.html">«DEFINE saveQueuedStoreDomainObject FOR model::InternetApplication-»</a>
+&lt;?php
+/**
+ * Saving queued stored objects.
+ */
+ 
+require("header.php");
+
+// queue up any log messages
+queue_log_messages(true);
+
+log_message("save_queued_store_domain_object.php? " . print_r($_GET, true));
+$id = $_GET["id"] or throw_new_IamlRuntimeException("no id");
+$page_id = $_GET["page"] or throw_new_IamlRuntimeException("no page");
+
+log_message("save_queued_store_domain_object.php: setting id=$id, page_id=$page_id");
+
+«REM»TODO put this into a separate include«ENDREM»
+<a href="src-template-template-php-DomainInstance-xpt.html#expandDomainAttributes.html">«EXPAND template::php::DomainInstance::expandDomainAttributes FOR this»</a>
+<a href="src-template-template-php-DomainInstance-xpt.html#expandDomainObjects.html">«EXPAND template::php::DomainInstance::expandDomainObjects FOR this»</a>
+
+// TODO probably a security risk
+$function_name = 'save_queued_store_domain_object_' . $id;
+
+// execute queued
+$function_name();
+
+// output any instructions
+echo "ok";
+
+«ENDDEFINE»</span>
+</pre></p></html>

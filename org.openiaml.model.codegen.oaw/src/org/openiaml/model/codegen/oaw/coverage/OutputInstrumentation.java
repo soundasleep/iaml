@@ -20,77 +20,63 @@ import org.openarchitectureware.xpand2.output.FileHandle;
  * @author Jevon
  *
  */
-public class OutputInstrumentation implements org.openarchitectureware.xpand2.output.PostProcessor {
+public class OutputInstrumentation {
 
-	/**
-	 * We use the IACleaner to format the file.
-	 * 
-	 * @see org.openarchitectureware.xpand2.output.PostProcessor#afterClose(org.openarchitectureware.xpand2.output.FileHandle)
-	 * @throws RuntimeException if an IOException or CleanerException occurs while trying to format the file
-	 */
-	@Override
-	public void afterClose(FileHandle file) {
-		try {
-			String instrumented = instrument(file.getTargetFile());
-			if (instrumented == null)
-				return;		// do nothing
-			
-			// write output
-			writeFile(file.getTargetFile(), instrumented);
-			
-			// also, write the helper file
-			// TODO actually load this from the .php file provided
-			String in = "<?php"
-					+ "\n/* "
-					+ "\n * this is special code that should be included in instrumented"
-					+ "\n * code, which allows us to perform instrumentation of:" 
-					+ "\n *" 
-					+ "\n * 1. PHP (via inline calls)"
-					+ "\n * 2. HTML (via inline calls)"
-					+ "\n * 3. Javascript (via AJAX calls) TODO"
-					+ "\n */"
-
-					+ "\nfunction php_instrument_oaw($destination, $oaw_file, $oaw_line) {"
-					+ "\n	$file = $destination . '/' . 'php-instrumented.dump.raw';"
-					+ "\n	"
-					+ "\n	// load"
-					+ "\n	if (file_exists($file)) {"
-					+ "\n		$serialized = unserialize(file_get_contents($file));"
-					+ "\n	} else {"
-					+ "\n		$serialized = array();"
-					+ "\n	}"
-					+ "\n"	
-					+ "\n	// mark"
-					+ "\n	if (!isset($serialized[$oaw_file])) {"
-					+ "\n		$serialized[$oaw_file] = array();"
-					+ "\n	}"
-					+ "\n	if (!isset($serialized[$oaw_file][$oaw_line])) {"
-					+ "\n		$serialized[$oaw_file][$oaw_line] = 0;"
-					+ "\n	}"
-					+ "\n	$serialized[$oaw_file][$oaw_line]++;"
-					+ "\n	"
-					+ "\n	// save"
-					+ "\n	file_put_contents($file, serialize($serialized));"
-					+ "\n	"
-					+ "\n	// also write an easy-to-read version"
-					+ "\n	$file = $destination . '/' . 'php-instrumented.dump';"
-					+ "\n	$out = '';"
-					+ "\n	foreach ($serialized as $key => $value) {"
-					+ "\n		$out .= \"$key:\n\";"
-					+ "\n		foreach ($value as $k => $v) {"
-					+ "\n			$out .= \"\t$k: $v\n\";"
-					+ "\n		}"
-					+ "\n	}"
-					+ "\n	file_put_contents($file, $out);"
-					+ "\n}";
-			String fn = file.getTargetFile().getParent() + File.separator + "oaw_coverage.php";
-			writeFile(new File(fn), in);
-		} catch (IOException e) {
-			throw new RuntimeException("[" + file.getTargetFile() + "] IO Exception during prettifier: " + e.getMessage(), e);
-		} catch (InstrumentationException e) {
-			throw new RuntimeException("[" + file.getTargetFile() + "] Instrumentation Exception during prettifier: " + e.getMessage(), e);
-		}
+	public void instrumentFile(FileHandle file) throws IOException, InstrumentationException {
+		String instrumented = instrument(file.getTargetFile());
+		if (instrumented == null)
+			return;		// do nothing
 		
+		// write output
+		writeFile(file.getTargetFile(), instrumented);
+		
+		// also, write the helper file
+		// TODO actually load this from the .php file provided
+		String in = "<?php"
+				+ "\n/* "
+				+ "\n * this is special code that should be included in instrumented"
+				+ "\n * code, which allows us to perform instrumentation of:" 
+				+ "\n *" 
+				+ "\n * 1. PHP (via inline calls)"
+				+ "\n * 2. HTML (via inline calls)"
+				+ "\n * 3. Javascript (via AJAX calls) TODO"
+				+ "\n */"
+
+				+ "\nfunction php_instrument_oaw($destination, $oaw_file, $oaw_line) {"
+				+ "\n	$file = $destination . '/' . 'php-instrumented.dump.raw';"
+				+ "\n	"
+				+ "\n	// load"
+				+ "\n	if (file_exists($file)) {"
+				+ "\n		$serialized = unserialize(file_get_contents($file));"
+				+ "\n	} else {"
+				+ "\n		$serialized = array();"
+				+ "\n	}"
+				+ "\n"	
+				+ "\n	// mark"
+				+ "\n	if (!isset($serialized[$oaw_file])) {"
+				+ "\n		$serialized[$oaw_file] = array();"
+				+ "\n	}"
+				+ "\n	if (!isset($serialized[$oaw_file][$oaw_line])) {"
+				+ "\n		$serialized[$oaw_file][$oaw_line] = 0;"
+				+ "\n	}"
+				+ "\n	$serialized[$oaw_file][$oaw_line]++;"
+				+ "\n	"
+				+ "\n	// save"
+				+ "\n	file_put_contents($file, serialize($serialized));"
+				+ "\n	"
+				+ "\n	// also write an easy-to-read version"
+				+ "\n	$file = $destination . '/' . 'php-instrumented.dump';"
+				+ "\n	$out = '';"
+				+ "\n	foreach ($serialized as $key => $value) {"
+				+ "\n		$out .= \"$key:\n\";"
+				+ "\n		foreach ($value as $k => $v) {"
+				+ "\n			$out .= \"\t$k: $v\n\";"
+				+ "\n		}"
+				+ "\n	}"
+				+ "\n	file_put_contents($file, $out);"
+				+ "\n}";
+		String fn = file.getTargetFile().getParent() + File.separator + "oaw_coverage.php";
+		writeFile(new File(fn), in);
 	}
 
 	/**
@@ -328,15 +314,6 @@ public class OutputInstrumentation implements org.openarchitectureware.xpand2.ou
 		
 		return output;
 	}
-
-	/* (non-Javadoc)
-	 * @see org.openarchitectureware.xpand2.output.PostProcessor#beforeWriteAndClose(org.openarchitectureware.xpand2.output.FileHandle)
-	 */
-	@Override
-	public void beforeWriteAndClose(FileHandle file) {
-		// ignore	
-	}
-
 
     /**
      * Read in a file into a string.

@@ -10,9 +10,9 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 9:DEFINE pageEvents FOR model::EventTrigger-)"><a name="pageEvents.html">«DEFINE pageEvents FOR model::EventTrigger-»</a>
+<span class="oaw " title="37 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 9:DEFINE pageEvents FOR model::EventTrigger-)"><a name="pageEvents.html">«DEFINE pageEvents FOR model::EventTrigger-»</a>
 	// Page EventTrigger «this»
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 11:IF name == "init" || name == "access"-)">«IF name == "init" || name == "access"-»
+	<span class="oaw " title="37 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 11:IF name == "init" || name == "access"-)">«IF name == "init" || name == "access"-»
 		// RunInstanceWires sorted by priority
 		<a href="#callOperations.html">«EXPAND callOperations(false, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»</a>
 	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 14:ELSE-)">«ELSE-»
@@ -20,9 +20,9 @@
 	«ENDIF-»</span>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 19:DEFINE sessionEvents FOR model::EventTrigger-)"><a name="sessionEvents.html">«DEFINE sessionEvents FOR model::EventTrigger-»</a>
+<span class="oaw " title="39 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 19:DEFINE sessionEvents FOR model::EventTrigger-)"><a name="sessionEvents.html">«DEFINE sessionEvents FOR model::EventTrigger-»</a>
 	// Session EventTrigger «this»
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 21:IF name == "init" || name == "access"-)">«IF name == "init" || name == "access"-»
+	<span class="oaw " title="39 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 21:IF name == "init" || name == "access"-)">«IF name == "init" || name == "access"-»
 		// RunInstanceWires sorted by priority
 		<a href="#callOperations.html">«EXPAND callOperations(false, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»</a>
 	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 24:ELSE-)">«ELSE-»
@@ -42,7 +42,7 @@
 	<a href="#expandOperation.html">«EXPAND expandOperation FOREACH operations-»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 41:DEFINE expandOperations FOR model::ApplicationElementContainer-)"><a name="expandOperations.html">«DEFINE expandOperations FOR model::ApplicationElementContainer-»</a>
+<span class="oaw " title="155 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 41:DEFINE expandOperations FOR model::ApplicationElementContainer-)"><a name="expandOperations.html">«DEFINE expandOperations FOR model::ApplicationElementContainer-»</a>
 	// expanding operations for «this»
 	<a href="#expandOperation.html">«EXPAND expandOperation FOREACH allContainerOperations()-»</a>
 «ENDDEFINE»</span>
@@ -54,7 +54,7 @@
 	}
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="24 steps in OAW 60 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 53:DEFINE expandOperation FOR model::CompositeOperation)"><a name="expandOperation.html">«DEFINE expandOperation FOR model::CompositeOperation»</a>
+<span class="oaw php " title="399 steps in OAW 601 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 53:DEFINE expandOperation FOR model::CompositeOperation)"><a name="expandOperation.html">«DEFINE expandOperation FOR model::CompositeOperation»</a>
 	/** composite operation "«name»" */
 	$running_«safeName()» = false;
 	function do_«safeName()»(<a href="#expandParameters.html">«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-»</a>) {
@@ -66,7 +66,7 @@
 			add_running_function("«safeName()-»");
 			
 			// has this operation got a fail handler?
-			<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 65:IF getFailEdge() != null)">«IF getFailEdge() != null»
+			<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 65:IF getFailEdge() != null)">«IF getFailEdge() != null»
 				// fail edge «getFailEdge()»
 				try {
 			«ENDIF»</span>
@@ -80,7 +80,7 @@
 			// continue chained operations
 			<a href="#continueChainedOperations.html">«EXPAND continueChainedOperations FOR this»</a>
 			
-			<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 79:IF getFailEdge() != null)">«IF getFailEdge() != null»
+			<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 79:IF getFailEdge() != null)">«IF getFailEdge() != null»
 				} catch (IamlRuntimeException $e) {
 					log_message("Caught exception $e");
 					<a href="#expandFailEdge.html">«EXPAND expandFailEdge FOR getFailEdge()»</a>
@@ -93,18 +93,18 @@
 	}
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 92:DEFINE temporaryVariable FOR model::TemporaryVariable)"><a name="temporaryVariable.html">«DEFINE temporaryVariable FOR model::TemporaryVariable»</a>
+<span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 92:DEFINE temporaryVariable FOR model::TemporaryVariable)"><a name="temporaryVariable.html">«DEFINE temporaryVariable FOR model::TemporaryVariable»</a>
 	$temp_«safeName()-» = null;	/* temporary variable '«safeNameString(name)-»' */
 «ENDDEFINE»</span>
 
-<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 96:DEFINE expandParameters FOR model::Parameter-)"><a name="expandParameters.html">«DEFINE expandParameters FOR model::Parameter-»</a>
+<span class="oaw " title="346 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 96:DEFINE expandParameters FOR model::Parameter-)"><a name="expandParameters.html">«DEFINE expandParameters FOR model::Parameter-»</a>
 	$«safeName()-»
 «ENDDEFINE»</span>
 
 /* I don't know how in JS we are supposed to handle multiple out edges yet... but we'll get there ;) */
-<span class="oaw " title="24 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 101:DEFINE doExecutionFlow FOR model::operations::StartNode-)"><a name="doExecutionFlow.html">«DEFINE doExecutionFlow FOR model::operations::StartNode-»</a>
+<span class="oaw " title="399 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 101:DEFINE doExecutionFlow FOR model::operations::StartNode-)"><a name="doExecutionFlow.html">«DEFINE doExecutionFlow FOR model::operations::StartNode-»</a>
 	// flow starts here
-	<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 103:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
+	<span class="oaw " title="373 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 103:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
 		<a href="#doExecutionFlowNext.html">«EXPAND doExecutionFlowNext FOR e.to-»</a>
 	«ENDFOREACH»</span>
 «ENDDEFINE»</span>
@@ -114,11 +114,11 @@
 «ENDDEFINE»</span>
 
 /* an edge that is the end (both StartNode and FinishNode also fall into this) */
-<span class="oaw " title="32 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 113:DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-»</a>
+<span class="oaw php " title="712 steps in OAW 147 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 113:DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::ExecutionEdgeDestination-»</a>
 	// do nothing «this-»
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 117:DEFINE doExecutionFlowNext FOR model::operations::CancelNode-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»</a>
+<span class="oaw " title="36 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 117:DEFINE doExecutionFlowNext FOR model::operations::CancelNode-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»</a>
 	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 118:IF exceptionText.length &gt; 0)">«IF exceptionText.length &gt; 0»
 		throw new IamlRuntimeException("«exceptionText»");
 	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 120:ELSE)">«ELSE»
@@ -127,10 +127,10 @@
 «ENDDEFINE»</span>
 
 /* a chained operation: carry on */
-<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 126:DEFINE doExecutionFlowNext FOR model::ChainedOperation-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::ChainedOperation-»</a>
+<span class="oaw " title="348 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 126:DEFINE doExecutionFlowNext FOR model::ChainedOperation-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::ChainedOperation-»</a>
 	// chained operation «name-»
 	<a href="#expandOperationContents.html">«EXPAND expandOperationContents FOR this-»</a>
-	<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 129:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
+	<span class="oaw php " title="348 steps in OAW 70 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 129:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
 		<a href="#doExecutionFlowNext.html">«EXPAND doExecutionFlowNext FOR e.to-»</a>
 	«ENDFOREACH»</span>
 	
@@ -139,7 +139,7 @@
 «ENDDEFINE»</span>
 
 /* a decision operation: expandOperationContents will continue the execution flow */
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 138:DEFINE doExecutionFlowNext FOR model::operations::DecisionOperation-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::DecisionOperation-»</a>
+<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 138:DEFINE doExecutionFlowNext FOR model::operations::DecisionOperation-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::DecisionOperation-»</a>
 	// decision operation «name-»
 	<a href="#expandOperationContents.html">«EXPAND expandOperationContents FOR this-»</a>
 
@@ -152,14 +152,14 @@
 «ENDDEFINE»</span>
 
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
-<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 151:DEFINE expandOperationContents FOR model::ChainedOperation-)"><a name="expandOperationContents.html">«DEFINE expandOperationContents FOR model::ChainedOperation-»</a>
+<span class="oaw " title="348 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 151:DEFINE expandOperationContents FOR model::ChainedOperation-)"><a name="expandOperationContents.html">«DEFINE expandOperationContents FOR model::ChainedOperation-»</a>
 	«REM»special operation names«ENDREM»
-	<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 153:IF name == "setPropertyToValue"-)">«IF name == "setPropertyToValue"-»
+	<span class="oaw " title="346 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 153:IF name == "setPropertyToValue"-)">«IF name == "setPropertyToValue"-»
 		«REM»outflowTarget == inflowTarget«ENDREM»
 		// outFlows first to = «outFlows.first().to»
-		<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 156:IF containingSession(outFlows.first().to) != null)">«IF containingSession(outFlows.first().to) != null»
+		<span class="oaw " title="69 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 156:IF containingSession(outFlows.first().to) != null)">«IF containingSession(outFlows.first().to) != null»
 			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = <a href="#setPropertyToValueInflowTarget.html">«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»</a>;
-		</span><span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 158:ELSE)">«ELSE»
+		</span><span class="oaw " title="277 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 158:ELSE)">«ELSE»
 			set_application_value("«outFlows.first().to.safeName()»", <a href="#setPropertyToValueInflowTarget.html">«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»</a>);
 		«ENDIF»</span>
 
@@ -167,32 +167,32 @@
 			in the future, we might want to make this into a function that is passed
 			to ajax calls and executed once the call is successful.
 		«ENDREM»
-		<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 166:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
+		<span class="oaw php " title="346 steps in OAW 77 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 166:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
 			<a href="#doExecutionFlowNext.html">«EXPAND doExecutionFlowNext FOR e.to-»</a>
 		«ENDFOREACH»</span>
 		
 		«REM»
 			here may be a good place to connect any chained EventTriggers
 		«ENDREM»
-		<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 173:IF shouldExpandEventTriggers(this))">«IF shouldExpandEventTriggers(this)»
+		<span class="oaw " title="158 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 173:IF shouldExpandEventTriggers(this))">«IF shouldExpandEventTriggers(this)»
 			<a href="#expandEventTriggersInline.html">«EXPAND expandEventTriggersInline FOR outFlows.first().to.eContainer-»</a>
-		</span><span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 175:ELSE)">«ELSE»
+		</span><span class="oaw " title="188 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 175:ELSE)">«ELSE»
 			// we don't call additional events for «eContainer» 
 		«ENDIF»</span>
-	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 178:ELSEIF name == "set")"></span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 178:ELSEIF name == "set")">«ELSEIF name == "set"»
+	</span><span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 178:ELSEIF name == "set")"></span><span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 178:ELSEIF name == "set")">«ELSEIF name == "set"»
 		«REM»set a temporary variable«ENDREM»
 		$temp_«safeName(outFlows.first().to)» = <a href="#setPropertyToValueInflowTarget.html">«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»</a>;
 
 		«REM»continue«ENDREM»
-		<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 183:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
+		<span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 183:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
 			<a href="#doExecutionFlowNext.html">«EXPAND doExecutionFlowNext FOR e.to-»</a>
 		«ENDFOREACH»</span>
-	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 186:ELSEIF name == "javascriptAlert")"></span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 186:ELSEIF name == "javascriptAlert")">«ELSEIF name == "javascriptAlert"»
+	</span><span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 186:ELSEIF name == "javascriptAlert")"></span><span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 186:ELSEIF name == "javascriptAlert")">«ELSEIF name == "javascriptAlert"»
 		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
 		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . <a href="#setPropertyToValueInflowTarget.html">«EXPAND setPropertyToValueInflowTarget FOR inFlows.first().from-»</a>);
 
 		«REM»continue«ENDREM»
-		<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 191:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
+		<span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 191:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
 			<a href="#doExecutionFlowNext.html">«EXPAND doExecutionFlowNext FOR e.to-»</a>
 		«ENDFOREACH»</span>
 	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 194:ELSE)">«ELSE»
@@ -202,10 +202,10 @@
 «ENDDEFINE»</span>
 
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 201:DEFINE expandOperationContents FOR model::operations::DecisionOperation-)"><a name="expandOperationContents.html">«DEFINE expandOperationContents FOR model::operations::DecisionOperation-»</a>
+<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 201:DEFINE expandOperationContents FOR model::operations::DecisionOperation-)"><a name="expandOperationContents.html">«DEFINE expandOperationContents FOR model::operations::DecisionOperation-»</a>
 	«REM»compare operations«ENDREM»
 	if (
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 204:IF name == "equal?"-)">«IF name == "equal?"-»
+	<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 204:IF name == "equal?"-)">«IF name == "equal?"-»
 		«REM»check all inflow targets are identical«ENDREM»
 		<a href="#expandCheckInflows.html">«EXPAND expandCheckInflows FOREACH inFlows SEPARATOR " == "»</a>
 	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 207:ELSE)">«ELSE»
@@ -227,19 +227,19 @@
 «ENDDEFINE»</span>
 
 // TODO need to wrap value in some sort of encoding algorithm
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 226:DEFINE setPropertyToValueInflowTarget FOR model::StaticValue)"><a name="setPropertyToValueInflowTarget.html">«DEFINE setPropertyToValueInflowTarget FOR model::StaticValue»</a>
+<span class="oaw " title="18 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 226:DEFINE setPropertyToValueInflowTarget FOR model::StaticValue)"><a name="setPropertyToValueInflowTarget.html">«DEFINE setPropertyToValueInflowTarget FOR model::StaticValue»</a>
 	"«value-»" /* static value "«safeName()-»" */ 
 «ENDDEFINE»</span>
 
-<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 230:DEFINE setPropertyToValueInflowTarget FOR model::Parameter)"><a name="setPropertyToValueInflowTarget.html">«DEFINE setPropertyToValueInflowTarget FOR model::Parameter»</a>
+<span class="oaw " title="328 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 230:DEFINE setPropertyToValueInflowTarget FOR model::Parameter)"><a name="setPropertyToValueInflowTarget.html">«DEFINE setPropertyToValueInflowTarget FOR model::Parameter»</a>
 	$«safeName()»
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 234:DEFINE setPropertyToValueInflowTarget FOR model::TemporaryVariable)"><a name="setPropertyToValueInflowTarget.html">«DEFINE setPropertyToValueInflowTarget FOR model::TemporaryVariable»</a>
+<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 234:DEFINE setPropertyToValueInflowTarget FOR model::TemporaryVariable)"><a name="setPropertyToValueInflowTarget.html">«DEFINE setPropertyToValueInflowTarget FOR model::TemporaryVariable»</a>
 	$temp_«safeName()»
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 238:DEFINE expandCheckInflows FOR model::DataFlowEdge-)"><a name="expandCheckInflows.html">«DEFINE expandCheckInflows FOR model::DataFlowEdge-»</a>
+<span class="oaw " title="54 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 238:DEFINE expandCheckInflows FOR model::DataFlowEdge-)"><a name="expandCheckInflows.html">«DEFINE expandCheckInflows FOR model::DataFlowEdge-»</a>
 	<a href="#expandCheckInflowsName.html">«EXPAND expandCheckInflowsName FOR from-»</a>
 «ENDDEFINE»</span>
 
@@ -248,7 +248,7 @@
 	<a href="#exception.html">«EXPAND exception FOR throwException("Unknown data inflow source for server expandCheckInflowsName: " + this)»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 247:DEFINE expandCheckInflowsName FOR model::Parameter-)"><a name="expandCheckInflowsName.html">«DEFINE expandCheckInflowsName FOR model::Parameter-»</a>
+<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 247:DEFINE expandCheckInflowsName FOR model::Parameter-)"><a name="expandCheckInflowsName.html">«DEFINE expandCheckInflowsName FOR model::Parameter-»</a>
 	$«safeName()-»
 «ENDDEFINE»</span>
 
@@ -265,7 +265,7 @@
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 264:DEFINE expandCheckInflowsName FOR model::StaticValue-)"><a name="expandCheckInflowsName.html">«DEFINE expandCheckInflowsName FOR model::StaticValue-»</a>
+<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 264:DEFINE expandCheckInflowsName FOR model::StaticValue-)"><a name="expandCheckInflowsName.html">«DEFINE expandCheckInflowsName FOR model::StaticValue-»</a>
 	"«value-»"
 «ENDDEFINE»</span>
 
@@ -274,7 +274,7 @@
 	«ERROR "Cannot expand the fail edge '" + this + "'"»
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 273:DEFINE expandFailEdge FOR model::wires::NavigateWire-)"><a name="expandFailEdge.html">«DEFINE expandFailEdge FOR model::wires::NavigateWire-»</a>
+<span class="oaw php " title="39 steps in OAW 4 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 273:DEFINE expandFailEdge FOR model::wires::NavigateWire-)"><a name="expandFailEdge.html">«DEFINE expandFailEdge FOR model::wires::NavigateWire-»</a>
 	// we need to navigate to the fail page
 	$url = "«safeName(to)».php?fail=" . urlencode($e-&gt;getMessage()) . "&amp;trace=" . urlencode($e-&gt;getTraceAsString());
 	log_message("Redirecting to '$url' (fail)");
@@ -283,7 +283,7 @@
 «ENDDEFINE»</span>
 
 /** continue operation execution */
-<span class="oaw " title="40 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 282:DEFINE continueChainedOperations FOR model::ChainedOperation-)"><a name="continueChainedOperations.html">«DEFINE continueChainedOperations FOR model::ChainedOperation-»</a>
+<span class="oaw " title="774 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 282:DEFINE continueChainedOperations FOR model::ChainedOperation-)"><a name="continueChainedOperations.html">«DEFINE continueChainedOperations FOR model::ChainedOperation-»</a>
 	<a href="#continueChainedOperations.html">«EXPAND continueChainedOperations FOREACH outEdges»</a>
 «ENDDEFINE»</span>
 
@@ -291,14 +291,14 @@
 	«ERROR "Cannot continue a chained operation for " + this»
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 290:DEFINE continueChainedOperations FOR model::wires::NavigateWire)"><a name="continueChainedOperations.html">«DEFINE continueChainedOperations FOR model::wires::NavigateWire»</a>
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 291:IF name != "fail")">«IF name != "fail"»
+<span class="oaw " title="54 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 290:DEFINE continueChainedOperations FOR model::wires::NavigateWire)"><a name="continueChainedOperations.html">«DEFINE continueChainedOperations FOR model::wires::NavigateWire»</a>
+	<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 291:IF name != "fail")">«IF name != "fail"»
 		// navigate to another page
 		$url = "«safeName(to)».php";
 		log_message("Redirecting to '$url'");
 		header("Location: $url");
 		die;
-	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 297:ELSE)">«ELSE»
+	</span><span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 297:ELSE)">«ELSE»
 		// ignoring fail wire
 	«ENDIF»</span>
 «ENDDEFINE»</span>
@@ -308,15 +308,15 @@
 	// cannot expand for non-event object
 «ENDDEFINE»</span>
 
-<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 307:DEFINE expandEventTriggersInline FOR model::ContainsEventTriggers)"><a name="expandEventTriggersInline.html">«DEFINE expandEventTriggersInline FOR model::ContainsEventTriggers»</a>
+<span class="oaw " title="158 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 307:DEFINE expandEventTriggersInline FOR model::ContainsEventTriggers)"><a name="expandEventTriggersInline.html">«DEFINE expandEventTriggersInline FOR model::ContainsEventTriggers»</a>
 	<a href="#expandEventTriggersInline.html">«EXPAND expandEventTriggersInline FOREACH eventTriggers»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 311:DEFINE expandEventTriggersInline FOR model::EventTrigger)"><a name="expandEventTriggersInline.html">«DEFINE expandEventTriggersInline FOR model::EventTrigger»</a>
+<span class="oaw " title="316 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 311:DEFINE expandEventTriggersInline FOR model::EventTrigger)"><a name="expandEventTriggersInline.html">«DEFINE expandEventTriggersInline FOR model::EventTrigger»</a>
 	// expanding inline event trigger «name»
-	<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 313:IF name=="edit")">«IF name=="edit"»
+	<span class="oaw " title="158 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 313:IF name=="edit")">«IF name=="edit"»
 		<a href="#callOperations.html">«EXPAND callOperations(true, false) FOREACH outEdges»</a>
-	</span><span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 315:ELSEIF name=="access")"></span><span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 315:ELSEIF name=="access")">«ELSEIF name=="access"»
+	</span><span class="oaw " title="158 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 315:ELSEIF name=="access")"></span><span class="oaw " title="158 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 315:ELSEIF name=="access")">«ELSEIF name=="access"»
 		// we don't expand 'access' events inline
 	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 317:ELSE)">«ELSE»
 		<a href="#exception.html">«EXPAND exception FOR throwException("Unknown client-side event trigger: " + this)»</a>
@@ -339,25 +339,25 @@
  * we instead use '$arg0', which we expect will be set already.
  * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
  */
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 338:DEFINE callOperations(Boolean inline, Boolean inStoreDb) FOR model::wires::RunInstanceWire-)"><a name="callOperations.html">«DEFINE callOperations(Boolean inline, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»</a>
+<span class="oaw php " title="235 steps in OAW 37 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 338:DEFINE callOperations(Boolean inline, Boolean inStoreDb) FOR model::wires::RunInstanceWire-)"><a name="callOperations.html">«DEFINE callOperations(Boolean inline, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»</a>
 	/* eContainer == «to.eContainer» */
 	
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 341:IF inEdges.typeSelect(model::wires::ConditionWire).size != 0)">«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
+	<span class="oaw " title="12 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 341:IF inEdges.typeSelect(model::wires::ConditionWire).size != 0)">«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
 		/* expand conditions */
 		if (<a href="src-template-php-Conditions-xpt.html#conditionWires.html">«EXPAND Conditions::conditionWires(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " &amp;&amp; "»</a>) {
 	«ENDIF»</span>
 
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 346:IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-)">«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
+	<span class="oaw " title="150 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 346:IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-)">«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
 		«REM»VisibleThing includes InputTextField and Page«ENDREM»
 		«REM»
 			is both source and target on the same page? NOTE this
 			will also return true for Event--&gt;Operation if they are
 			both on the same page.
 		«ENDREM»
-		<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 353:IF availableInCurrentScript(from, to)-)">«IF availableInCurrentScript(from, to)-»
+		<span class="oaw " title="54 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 353:IF availableInCurrentScript(from, to)-)">«IF availableInCurrentScript(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
 			do_«operationName(to)»(<a href="#callOperationParameters.html">«EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»</a>);
-		</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 356:ELSE-)">«ELSE-»
+		</span><span class="oaw " title="96 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 356:ELSE-)">«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
 				<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 359:IF inEdges.size&gt;0)">«IF inEdges.size&gt;0», <a href="#callOperationParameters.html">«EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»</a>«ENDIF»</span>
@@ -366,12 +366,12 @@
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
 			«ENDREM»
 		«ENDIF-»</span>
-	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 365:ELSEIF isDomainAttribute(to.eContainer)-)"></span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 365:ELSEIF isDomainAttribute(to.eContainer)-)">«ELSEIF isDomainAttribute(to.eContainer)-»
+	</span><span class="oaw " title="57 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 365:ELSEIF isDomainAttribute(to.eContainer)-)"></span><span class="oaw " title="57 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 365:ELSEIF isDomainAttribute(to.eContainer)-)">«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --&gt; abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
 			<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 368:IF inEdges.size&gt;0)">«IF inEdges.size&gt;0», <a href="#callOperationParameters.html">«EXPAND callOperationParameters(this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»</a>«ENDIF»</span>
 		); 
-	</span><span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 370:ELSEIF isDomainAttributeInstance(to.eContainer)-)"></span><span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 370:ELSEIF isDomainAttributeInstance(to.eContainer)-)">«ELSEIF isDomainAttributeInstance(to.eContainer)-»
+	</span><span class="oaw " title="28 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 370:ELSEIF isDomainAttributeInstance(to.eContainer)-)"></span><span class="oaw " title="28 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 370:ELSEIF isDomainAttributeInstance(to.eContainer)-)">«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --&gt; domain attribute instance«ENDREM»
 		<a href="#operationDomainAttributeInstance.html">«EXPAND operationDomainAttributeInstance(inline, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»</a>
 	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 373:ELSE-)">«ELSE-»
@@ -379,7 +379,7 @@
 		<a href="#exception.html">«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»</a>
 	«ENDIF-»</span>
 
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 378:IF inEdges.typeSelect(model::wires::ConditionWire).size != 0)">«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
+	<span class="oaw php " title="12 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 378:IF inEdges.typeSelect(model::wires::ConditionWire).size != 0)">«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
 		}
 	«ENDIF»</span>
 «ENDDEFINE»</span>
@@ -388,13 +388,13 @@
 	<a href="#exception.html">«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 387:DEFINE operationDomainAttributeInstance(Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation)"><a name="operationDomainAttributeInstance.html">«DEFINE operationDomainAttributeInstance(Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation»</a>
+<span class="oaw " title="28 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 387:DEFINE operationDomainAttributeInstance(Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation)"><a name="operationDomainAttributeInstance.html">«DEFINE operationDomainAttributeInstance(Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation»</a>
 	/* domain attribute instance: wire = «wire», attribute = «attribute», this = «this» */
 	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 389:IF name=="save")">«IF name=="save"»
 		«REM»"save" operation for DomainAttribute«ENDREM»
 		save_queued_store_domain_attribute_«safeNameString(attribute.id)»();
-	</span><span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 392:ELSE)">«ELSE»
-		<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 393:IF isAutosaveOff(attribute))">«IF isAutosaveOff(attribute)»
+	</span><span class="oaw " title="28 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 392:ELSE)">«ELSE»
+		<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 393:IF isAutosaveOff(attribute))">«IF isAutosaveOff(attribute)»
 			«REM»queue it up for hopefully saving it later«ENDREM»
 			queue_store_domain_attribute_«safeNameString(attribute.id)»(
 				<a href="#callOperationParameters.html">«EXPAND callOperationParameters(wire, inline, inStoreDb) FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»</a>
@@ -402,7 +402,7 @@
 					<a href="#exception.html">«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»</a>
 				«ENDIF»</span>
 			);
-		</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 401:ELSE)">«ELSE»
+		</span><span class="oaw " title="20 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 401:ELSE)">«ELSE»
 			«REM»set it right now«ENDREM»
 			store_domain_attribute_«safeNameString(attribute.id)»(
 				<a href="#callOperationParameters.html">«EXPAND callOperationParameters(wire, inline, inStoreDb) FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»</a>
@@ -415,7 +415,7 @@
 «ENDDEFINE»</span>
 
 /* ditto: check or error? */
-<span class="oaw " title="44 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 414:DEFINE callOperationParameters(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::wires::ParameterWire)"><a name="callOperationParameters.html">«DEFINE callOperationParameters(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::wires::ParameterWire»</a>
+<span class="oaw " title="381 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 414:DEFINE callOperationParameters(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::wires::ParameterWire)"><a name="callOperationParameters.html">«DEFINE callOperationParameters(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::wires::ParameterWire»</a>
 	<a href="#callOperationParametersSource.html">«EXPAND callOperationParametersSource(wire, inline, inStoreDb) FOR from»</a>
 «ENDDEFINE»</span>
 
@@ -425,19 +425,19 @@
 «ENDDEFINE»</span>
 
 /* what is the runtime value of the parameter? */
-<span class="oaw " title="44 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 424:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::ApplicationElementProperty)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::ApplicationElementProperty»</a>
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 425:IF inStoreDb)">«IF inStoreDb»
+<span class="oaw " title="304 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 424:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::ApplicationElementProperty)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::ApplicationElementProperty»</a>
+	<span class="oaw " title="57 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 425:IF inStoreDb)">«IF inStoreDb»
 		$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
-	</span><span class="oaw " title="44 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 427:ELSE)">«ELSE»
+	</span><span class="oaw " title="247 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 427:ELSE)">«ELSE»
 		«REM»
 			values stored in sessions will not always be called 'fieldValue';
 			perhaps fieldValue is only those stored as part of InputTextFields, etc.
 		«ENDREM»
-		<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 432:IF containingSession(this) != null)">«IF containingSession(this) != null»
+		<span class="oaw " title="31 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 432:IF containingSession(this) != null)">«IF containingSession(this) != null»
 			/* a property from our session */
 			require_session("«safeName(containingSession(this))»_«safeName()-»")
-		</span><span class="oaw " title="44 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 435:ELSE)">«ELSE»
-			<span class="oaw " title="44 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 436:IF name == "fieldValue")">«IF name == "fieldValue"»
+		</span><span class="oaw " title="216 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 435:ELSE)">«ELSE»
+			<span class="oaw " title="216 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 436:IF name == "fieldValue")">«IF name == "fieldValue"»
 				get_application_value("«safeName()-»", null)		
 			</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 438:ELSE)">«ELSE»
 				«REM»it's not in the current session, or a fieldValue; what could it be?!«ENDREM»
@@ -448,23 +448,23 @@
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="40 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 447:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::InputTextField)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::InputTextField»</a>
+<span class="oaw " title="90 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 447:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::InputTextField)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::InputTextField»</a>
 	/* implicitly from InputTextField */
 	<a href="#callOperationParametersSource.html">«EXPAND callOperationParametersSource(wire, inline, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 452:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue»</a>
+<span class="oaw " title="65 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 452:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue»</a>
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»</span>
 
 /* we are in PHP mode. TODO document when we are switching in/out of it */
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 457:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::DynamicApplicationElementSet)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»</a>
+<span class="oaw " title="6 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 457:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::DynamicApplicationElementSet)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»</a>
 	/* dynamic element set "«name-»" */
 	get_dynamic_elements_«safeName()-»()
 «ENDDEFINE»</span>
 
 /* we are in PHP mode. TODO document when we are switching in/out of it */
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 463:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::Page)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::Page»</a>
+<span class="oaw " title="6 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\EventTrigger.xpt: 463:DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::Page)"><a name="callOperationParametersSource.html">«DEFINE callOperationParametersSource(model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::Page»</a>
 	/* Page "«name-»" */
 	new Visual_Page("«id-»", "«name-»")
 «ENDDEFINE»</span>

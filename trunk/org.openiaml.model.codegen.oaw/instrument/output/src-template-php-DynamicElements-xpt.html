@@ -7,18 +7,18 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* expand out all dynamic elements for the page */
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DynamicElements.xpt: 6:DEFINE expandDynamicElements FOR model::ContainsConditions)"><a name="expandDynamicElements.html">«DEFINE expandDynamicElements FOR model::ContainsConditions»</a>
+<span class="oaw " title="155 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DynamicElements.xpt: 6:DEFINE expandDynamicElements FOR model::ContainsConditions)"><a name="expandDynamicElements.html">«DEFINE expandDynamicElements FOR model::ContainsConditions»</a>
 	<a href="#expandDynamicElement.html">«EXPAND expandDynamicElement FOREACH getRoot().getAllDynamicElements()»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DynamicElements.xpt: 10:DEFINE expandDynamicElement FOR model::DynamicApplicationElementSet-)"><a name="expandDynamicElement.html">«DEFINE expandDynamicElement FOR model::DynamicApplicationElementSet-»</a>
+<span class="oaw " title="5 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DynamicElements.xpt: 10:DEFINE expandDynamicElement FOR model::DynamicApplicationElementSet-)"><a name="expandDynamicElement.html">«DEFINE expandDynamicElement FOR model::DynamicApplicationElementSet-»</a>
 	function get_dynamic_elements_«safeName()»() {
 		/* return a list of all the IDs that match this query "«query-»" */
 		return array(<a href="#getElementID.html">«EXPAND getElementID FOREACH resolveDynamicSet(getRoot(), this) SEPARATOR ", "»</a>);
 	}
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DynamicElements.xpt: 17:DEFINE getElementID FOR model::NamedElement-)"><a name="getElementID.html">«DEFINE getElementID FOR model::NamedElement-»</a>
+<span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DynamicElements.xpt: 17:DEFINE getElementID FOR model::NamedElement-)"><a name="getElementID.html">«DEFINE getElementID FOR model::NamedElement-»</a>
 	"«id-»"
 «ENDDEFINE»</span>
 

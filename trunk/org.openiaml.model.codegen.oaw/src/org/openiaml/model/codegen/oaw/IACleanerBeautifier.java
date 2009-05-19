@@ -10,6 +10,7 @@ import java.io.IOException;
 import org.openarchitectureware.xpand2.output.FileHandle;
 import org.openiaml.iacleaner.IACleaner;
 import org.openiaml.iacleaner.IACleaner.CleanerException;
+import org.openiaml.model.codegen.oaw.coverage.InstrumentationException;
 import org.openiaml.model.codegen.oaw.coverage.OutputInstrumentation;
 
 /**
@@ -45,8 +46,12 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 			
 			// chain onto output
 			OutputInstrumentation oi = new OutputInstrumentation();
-			oi.afterClose(file);
-
+			try {
+				oi.instrumentFile(file);
+			} catch (InstrumentationException e) {
+				throw new CleanerException(e);
+			}
+			
 		} catch (IOException e) {
 			throw new RuntimeException("[" + file.getTargetFile() + "] IO Exception during prettifier: " + e.getMessage(), e);
 		} catch (CleanerException e) {

@@ -6,11 +6,11 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-<span class="oaw php " title="4 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 5:DEFINE createDomainStorePhp FOR model::DomainStore)"><a name="createDomainStorePhp.html">«DEFINE createDomainStorePhp FOR model::DomainStore»</a>
+<span class="oaw php " title="42 steps in OAW 118 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 5:DEFINE createDomainStorePhp FOR model::DomainStore)"><a name="createDomainStorePhp.html">«DEFINE createDomainStorePhp FOR model::DomainStore»</a>
 	// DomainStore «type» "«name»"
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 7:IF isPropertiesFile(this))">«IF isPropertiesFile(this)»
+	<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 7:IF isPropertiesFile(this))">«IF isPropertiesFile(this)»
 		<a href="#createDomainStoreProperties.html">«EXPAND createDomainStoreProperties FOR this»</a>
-	</span><span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 9:ELSE)">«ELSE»
+	</span><span class="oaw " title="34 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 9:ELSE)">«ELSE»
 		<a href="#createDomainStoreDatabase.html">«EXPAND createDomainStoreDatabase FOR this»</a>
 	«ENDIF»</span>
 «ENDDEFINE»</span>
@@ -18,7 +18,7 @@
 /**
  * PHP code for creating the domain store.
  */
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 17:DEFINE createDomainStoreDatabase FOR model::DomainStore)"><a name="createDomainStoreDatabase.html">«DEFINE createDomainStoreDatabase FOR model::DomainStore»</a>
+<span class="oaw " title="34 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 17:DEFINE createDomainStoreDatabase FOR model::DomainStore)"><a name="createDomainStoreDatabase.html">«DEFINE createDomainStoreDatabase FOR model::DomainStore»</a>
 	// first, make sure the table exists
 	$db = new PDO('sqlite:«safeName()».db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
 	
@@ -40,14 +40,14 @@
 	$db = null;
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 39:DEFINE createDomainStoreProperties FOR model::DomainStore)"><a name="createDomainStoreProperties.html">«DEFINE createDomainStoreProperties FOR model::DomainStore»</a>
+<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 39:DEFINE createDomainStoreProperties FOR model::DomainStore)"><a name="createDomainStoreProperties.html">«DEFINE createDomainStoreProperties FOR model::DomainStore»</a>
 	// we don't need to create anything, it is handled automatically
 «ENDDEFINE»</span>
 
 /**
  * Expand a DomainObject into a SQL table.
  */ 
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 46:DEFINE createDomainObjectDatabase FOR model::DomainObject)"><a name="createDomainObjectDatabase.html">«DEFINE createDomainObjectDatabase FOR model::DomainObject»</a>
+<span class="oaw php " title="33 steps in OAW 17 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 46:DEFINE createDomainObjectDatabase FOR model::DomainObject)"><a name="createDomainObjectDatabase.html">«DEFINE createDomainObjectDatabase FOR model::DomainObject»</a>
 	$s = $db-&gt;prepare("SELECT * FROM «safeNameString(name)»");
 	if (!$s) {
 		// create the table
@@ -60,10 +60,10 @@
 /* if an InternetApplication directly contains an AbstractObject,
    we still process it anyway. we will assume it is stored
    inside a database. */
-<span class="oaw php " title="4 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 59:DEFINE createDomainObjectPhp_Root FOR model::ApplicationElement)"><a name="createDomainObjectPhp_Root.html">«DEFINE createDomainObjectPhp_Root FOR model::ApplicationElement»</a>
+<span class="oaw php " title="121 steps in OAW 586 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 59:DEFINE createDomainObjectPhp_Root FOR model::ApplicationElement)"><a name="createDomainObjectPhp_Root.html">«DEFINE createDomainObjectPhp_Root FOR model::ApplicationElement»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 62:DEFINE createDomainObjectPhp_Root FOR model::DomainObject)"><a name="createDomainObjectPhp_Root.html">«DEFINE createDomainObjectPhp_Root FOR model::DomainObject»</a>
+<span class="oaw php " title="1 steps in OAW 1 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 62:DEFINE createDomainObjectPhp_Root FOR model::DomainObject)"><a name="createDomainObjectPhp_Root.html">«DEFINE createDomainObjectPhp_Root FOR model::DomainObject»</a>
 	// first, make sure the table exists
 	$db = new PDO('sqlite:internet_application.db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
 	
@@ -81,7 +81,7 @@
 /**
  * Expand a DomainAttribute into a SQL row.
  */
-<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 80:DEFINE createDomainAttributeDatabase FOR model::DomainAttribute)"><a name="createDomainAttributeDatabase.html">«DEFINE createDomainAttributeDatabase FOR model::DomainAttribute»</a>
+<span class="oaw " title="126 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\CreateDomainStorePhp.xpt: 80:DEFINE createDomainAttributeDatabase FOR model::DomainAttribute)"><a name="createDomainAttributeDatabase.html">«DEFINE createDomainAttributeDatabase FOR model::DomainAttribute»</a>
 	«safeNameString(name)» VARCHAR(255) NULL
 «ENDDEFINE»</span>
 

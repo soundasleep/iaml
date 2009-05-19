@@ -6,7 +6,7 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 5:DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline, Boolean inStoreDb) FOR model::wires::ConditionWire)"><a name="conditionWires.html">«DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline, Boolean inStoreDb) FOR model::wires::ConditionWire»</a>
+<span class="oaw " title="12 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 5:DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline, Boolean inStoreDb) FOR model::wires::ConditionWire)"><a name="conditionWires.html">«DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline, Boolean inStoreDb) FOR model::wires::ConditionWire»</a>
 	/* ConditionWire: «this-» */
 	condition_«conditionName(from)»(
 		<a href="src-template-php-EventTrigger-xpt.html#callOperationParameters.html">«EXPAND EventTrigger::callOperationParameters(wire, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»</a>
@@ -14,7 +14,7 @@
 «ENDDEFINE»</span>
 
 /* expand out the conditions for the page */
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 13:DEFINE expandConditions FOR model::ContainsConditions)"><a name="expandConditions.html">«DEFINE expandConditions FOR model::ContainsConditions»</a>
+<span class="oaw " title="155 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 13:DEFINE expandConditions FOR model::ContainsConditions)"><a name="expandConditions.html">«DEFINE expandConditions FOR model::ContainsConditions»</a>
 	<a href="#expandCondition.html">«EXPAND expandCondition FOREACH getRoot().getAllConditions()»</a>
 «ENDDEFINE»</span>
 
@@ -22,14 +22,14 @@
 	<a href="#exception.html">«EXPAND exception FOR throwException("Cannot expand an abstract Condition: " + this)»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 21:DEFINE expandCondition FOR model::operations::DecisionCondition)"><a name="expandCondition.html">«DEFINE expandCondition FOR model::operations::DecisionCondition»</a>
+<span class="oaw php " title="5 steps in OAW 22 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 21:DEFINE expandCondition FOR model::operations::DecisionCondition)"><a name="expandCondition.html">«DEFINE expandCondition FOR model::operations::DecisionCondition»</a>
 	«REM»
 		DecisionCondition is not expanded here; it is expanded as part of the
 		execution flow. (this is only called for all conditions in the InternetApplication.)
 	«ENDREM»
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 28:DEFINE expandCondition FOR model::CompositeCondition)"><a name="expandCondition.html">«DEFINE expandCondition FOR model::CompositeCondition»</a>
+<span class="oaw " title="9 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 28:DEFINE expandCondition FOR model::CompositeCondition)"><a name="expandCondition.html">«DEFINE expandCondition FOR model::CompositeCondition»</a>
 	/** composite condition "«name»" */
 	function condition_«safeName()»(<a href="#expandParameters.html">«EXPAND expandParameters FOREACH parameters SEPARATOR ", "-»</a>) {
 		«REM»here we would expand out the data flow of the condition, etc«ENDREM»
@@ -40,14 +40,14 @@
 	}
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 39:DEFINE expandParameters FOR model::Parameter-)"><a name="expandParameters.html">«DEFINE expandParameters FOR model::Parameter-»</a>
+<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 39:DEFINE expandParameters FOR model::Parameter-)"><a name="expandParameters.html">«DEFINE expandParameters FOR model::Parameter-»</a>
 	$«safeName()-»
 «ENDDEFINE»</span>
 
 /* I don't know how in JS we are supposed to handle multiple out edges yet... but we'll get there ;) */
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 44:DEFINE doExecutionFlow FOR model::operations::StartNode-)"><a name="doExecutionFlow.html">«DEFINE doExecutionFlow FOR model::operations::StartNode-»</a>
+<span class="oaw " title="9 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 44:DEFINE doExecutionFlow FOR model::operations::StartNode-)"><a name="doExecutionFlow.html">«DEFINE doExecutionFlow FOR model::operations::StartNode-»</a>
 	// flow starts here
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 46:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
+	<span class="oaw " title="9 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 46:FOREACH outExecutions AS e-)">«FOREACH outExecutions AS e-»
 		<a href="#doExecutionFlowNext.html">«EXPAND doExecutionFlowNext FOR e.to-»</a>
 	«ENDFOREACH»</span>
 «ENDDEFINE»</span>
@@ -61,17 +61,17 @@
 	// do nothing «this-»
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 60:DEFINE doExecutionFlowNext FOR model::operations::DecisionCondition)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::DecisionCondition»</a>
+<span class="oaw " title="5 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 60:DEFINE doExecutionFlowNext FOR model::operations::DecisionCondition)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::DecisionCondition»</a>
 	// DecisionCondition «this»
-	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 62:IF name=="xpathMatch")">«IF name=="xpathMatch"»
+	<span class="oaw " title="5 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 62:IF name=="xpathMatch")">«IF name=="xpathMatch"»
 		if (!xpathMatch(<a href="#getInflows.html">«EXPAND getInflows FOREACH inFlows SEPARATOR ","»</a>)) {
 			«REM»continue expanding following conditions (if any)«ENDREM»
-			<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 65:FOREACH getFailEdges() AS e-)">«FOREACH getFailEdges() AS e-»
+			<span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 65:FOREACH getFailEdges() AS e-)">«FOREACH getFailEdges() AS e-»
 				<a href="#doExecutionFlowNext.html">«EXPAND doExecutionFlowNext FOR e.to-»</a>
 			«ENDFOREACH»</span>
 		} else {
 			«REM»continue expanding following conditions (if any)«ENDREM»
-			<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 70:FOREACH getPassEdges() AS e-)">«FOREACH getPassEdges() AS e-»
+			<span class="oaw " title="5 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 70:FOREACH getPassEdges() AS e-)">«FOREACH getPassEdges() AS e-»
 				<a href="#doExecutionFlowNext.html">«EXPAND doExecutionFlowNext FOR e.to-»</a>
 			«ENDFOREACH»</span>
 		}
@@ -93,16 +93,16 @@
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 92:DEFINE doExecutionFlowNext FOR model::operations::CancelNode-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»</a>
+<span class="oaw " title="5 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 92:DEFINE doExecutionFlowNext FOR model::operations::CancelNode-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::CancelNode-»</a>
 	return false; /* condition failed: «exceptionText» */
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 96:DEFINE doExecutionFlowNext FOR model::operations::FinishNode-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::FinishNode-»</a>
+<span class="oaw " title="5 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 96:DEFINE doExecutionFlowNext FOR model::operations::FinishNode-)"><a name="doExecutionFlowNext.html">«DEFINE doExecutionFlowNext FOR model::operations::FinishNode-»</a>
 	return true; /* condition passed */
 «ENDDEFINE»</span>
 
 /* data flows in */
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 101:DEFINE getInflows FOR model::DataFlowEdge-)"><a name="getInflows.html">«DEFINE getInflows FOR model::DataFlowEdge-»</a>
+<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 101:DEFINE getInflows FOR model::DataFlowEdge-)"><a name="getInflows.html">«DEFINE getInflows FOR model::DataFlowEdge-»</a>
 	<a href="#inflowTarget.html">«EXPAND inflowTarget FOR from-»</a>
 «ENDDEFINE»</span>
 
@@ -115,7 +115,7 @@
 	"«value-»" /* static value "«safeName()-»" */ 
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 114:DEFINE inflowTarget FOR model::Parameter)"><a name="inflowTarget.html">«DEFINE inflowTarget FOR model::Parameter»</a>
+<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\Conditions.xpt: 114:DEFINE inflowTarget FOR model::Parameter)"><a name="inflowTarget.html">«DEFINE inflowTarget FOR model::Parameter»</a>
 	$«safeName()»
 «ENDDEFINE»</span>
 

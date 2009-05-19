@@ -6,7 +6,7 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-<span class="oaw php " title="4 steps in OAW 10 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 5:DEFINE setApplicationValuePhp FOR model::InternetApplication-)"><a name="setApplicationValuePhp.html">«DEFINE setApplicationValuePhp FOR model::InternetApplication-»</a>
+<span class="oaw php " title="82 steps in OAW 89 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 5:DEFINE setApplicationValuePhp FOR model::InternetApplication-)"><a name="setApplicationValuePhp.html">«DEFINE setApplicationValuePhp FOR model::InternetApplication-»</a>
 &lt;?php
 /**
  * For setting an application value.
@@ -56,19 +56,19 @@ try {
 
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="24 steps in OAW 50 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 55:DEFINE potentialUpdatesRequired FOR model::ApplicationElementProperty)"><a name="potentialUpdatesRequired.html">«DEFINE potentialUpdatesRequired FOR model::ApplicationElementProperty»</a>
+<span class="oaw php " title="325 steps in OAW 306 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 55:DEFINE potentialUpdatesRequired FOR model::ApplicationElementProperty)"><a name="potentialUpdatesRequired.html">«DEFINE potentialUpdatesRequired FOR model::ApplicationElementProperty»</a>
 	if ($id == "«safeName()-»") {
 		/* Property "«name-»" («id-») */
 		
 		«REM»is this property used as the input for a SelectWire?«ENDREM»
 		«REM»is this property's parent used as the input for a SelectWire?«ENDREM»
-		<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 61:IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField))">«IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField)»
+		<span class="oaw " title="158 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 61:IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField))">«IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField)»
 			<a href="#potentialContainerUpdates.html">«EXPAND potentialContainerUpdates FOR (model::visual::InputTextField) eContainer»</a>
 		«ENDIF»</span>
 	}
 «ENDDEFINE»</span>
 
-<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 67:DEFINE potentialContainerUpdates FOR model::visual::InputTextField)"><a name="potentialContainerUpdates.html">«DEFINE potentialContainerUpdates FOR model::visual::InputTextField»</a>
+<span class="oaw " title="158 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 67:DEFINE potentialContainerUpdates FOR model::visual::InputTextField)"><a name="potentialContainerUpdates.html">«DEFINE potentialContainerUpdates FOR model::visual::InputTextField»</a>
 	<a href="#potentialUpdates.html">«EXPAND potentialUpdates FOREACH outEdges»</a>
 «ENDDEFINE»</span>
 
@@ -76,24 +76,24 @@ try {
 	<a href="#exception.html">«EXPAND exception FOR throwException("Unknown potential update wire edge: " + this)»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 75:DEFINE potentialUpdates FOR model::wires::ParameterWire)"><a name="potentialUpdates.html">«DEFINE potentialUpdates FOR model::wires::ParameterWire»</a>
+<span class="oaw " title="11 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 75:DEFINE potentialUpdates FOR model::wires::ParameterWire)"><a name="potentialUpdates.html">«DEFINE potentialUpdates FOR model::wires::ParameterWire»</a>
 	/* ParameterWire "«this-»" */
 	<a href="#potentialUpdatesParameter.html">«EXPAND potentialUpdatesParameter FOR to»</a>
 «ENDDEFINE»</span>
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 79:DEFINE potentialUpdates FOR model::wires::SyncWire)"><a name="potentialUpdates.html">«DEFINE potentialUpdates FOR model::wires::SyncWire»</a>
+<span class="oaw " title="62 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 79:DEFINE potentialUpdates FOR model::wires::SyncWire)"><a name="potentialUpdates.html">«DEFINE potentialUpdates FOR model::wires::SyncWire»</a>
 	/* SyncWire "«this-»" */
 	<a href="#potentialUpdatesParameter.html">«EXPAND potentialUpdatesParameter FOR from»</a>
 	<a href="#potentialUpdatesParameter.html">«EXPAND potentialUpdatesParameter FOR to»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 85:DEFINE potentialUpdatesParameter FOR model::WireEdgesSource)"><a name="potentialUpdatesParameter.html">«DEFINE potentialUpdatesParameter FOR model::WireEdgesSource»</a>
+<span class="oaw " title="70 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 85:DEFINE potentialUpdatesParameter FOR model::WireEdgesSource)"><a name="potentialUpdatesParameter.html">«DEFINE potentialUpdatesParameter FOR model::WireEdgesSource»</a>
 	/* ignore «this» */
 «ENDDEFINE»</span>
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 88:DEFINE potentialUpdatesParameter FOR model::WireEdgeDestination)"><a name="potentialUpdatesParameter.html">«DEFINE potentialUpdatesParameter FOR model::WireEdgeDestination»</a>
+<span class="oaw " title="56 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 88:DEFINE potentialUpdatesParameter FOR model::WireEdgeDestination)"><a name="potentialUpdatesParameter.html">«DEFINE potentialUpdatesParameter FOR model::WireEdgeDestination»</a>
 	/* ignore «this» */
 «ENDDEFINE»</span>
 
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 92:DEFINE potentialUpdatesParameter FOR model::wires::SelectWire)"><a name="potentialUpdatesParameter.html">«DEFINE potentialUpdatesParameter FOR model::wires::SelectWire»</a>
+<span class="oaw " title="9 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 92:DEFINE potentialUpdatesParameter FOR model::wires::SelectWire)"><a name="potentialUpdatesParameter.html">«DEFINE potentialUpdatesParameter FOR model::wires::SelectWire»</a>
 	/* SelectWire "«this-»" */
 	<a href="#potentialUpdateDestination.html">«EXPAND potentialUpdateDestination FOR to»</a>
 «ENDDEFINE»</span>
@@ -102,7 +102,7 @@ try {
 	<a href="#exception.html">«EXPAND exception FOR throwException("Unknown update wire edge destination: " + this)»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 101:DEFINE potentialUpdateDestination FOR model::DomainObjectInstance)"><a name="potentialUpdateDestination.html">«DEFINE potentialUpdateDestination FOR model::DomainObjectInstance»</a>
+<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 101:DEFINE potentialUpdateDestination FOR model::DomainObjectInstance)"><a name="potentialUpdateDestination.html">«DEFINE potentialUpdateDestination FOR model::DomainObjectInstance»</a>
 	/* DomainObjectInstance "«this-»" */
 	$object = get_object_instance_«safeName()»(); // parameters are from server-side
 	<a href="#potentialUpdateDestinationAttributes.html">«EXPAND potentialUpdateDestinationAttributes FOREACH attributes»</a>
@@ -111,38 +111,38 @@ try {
 	<a href="#potentialUpdateDesinationWires.html">«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 110:DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance)"><a name="potentialUpdateDestination.html">«DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»</a>
+<span class="oaw " title="7 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 110:DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance)"><a name="potentialUpdateDestination.html">«DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»</a>
 	/* DomainAttributeInstance "«this-»" */
 	$value = get_attribute_instance_«safeName()»(); // parameters are from server-side
 	<a href="#potentialUpdateDesinationWires.html">«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»</a>
 	<a href="#potentialUpdateDesinationWires.html">«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 117:DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance)"><a name="potentialUpdateDestinationAttributes.html">«DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance»</a>
+<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 117:DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance)"><a name="potentialUpdateDestinationAttributes.html">«DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance»</a>
 	/* attribute "«name»" («this») */
 	$value = $object["«safeNameString(name)-»"];
 	<a href="#potentialUpdateDesinationWires.html">«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»</a>
 	<a href="#potentialUpdateDesinationWires.html">«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 124:DEFINE potentialUpdateDesinationWires FOR model::wires::SyncWire)"><a name="potentialUpdateDesinationWires.html">«DEFINE potentialUpdateDesinationWires FOR model::wires::SyncWire»</a>
+<span class="oaw php " title="9 steps in OAW 1 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 124:DEFINE potentialUpdateDesinationWires FOR model::wires::SyncWire)"><a name="potentialUpdateDesinationWires.html">«DEFINE potentialUpdateDesinationWires FOR model::wires::SyncWire»</a>
 	/* SyncWire "«this-»" */
 	<a href="#outgoingValue.html">«EXPAND outgoingValue FOR from»</a>
 	<a href="#outgoingValue.html">«EXPAND outgoingValue FOR to»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 130:DEFINE outgoingValue FOR model::WireEdgesSource)"><a name="outgoingValue.html">«DEFINE outgoingValue FOR model::WireEdgesSource»</a>
+<span class="oaw " title="5 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 130:DEFINE outgoingValue FOR model::WireEdgesSource)"><a name="outgoingValue.html">«DEFINE outgoingValue FOR model::WireEdgesSource»</a>
 «ENDDEFINE»</span>
-<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 132:DEFINE outgoingValue FOR model::WireEdgeDestination)"><a name="outgoingValue.html">«DEFINE outgoingValue FOR model::WireEdgeDestination»</a>
+<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 132:DEFINE outgoingValue FOR model::WireEdgeDestination)"><a name="outgoingValue.html">«DEFINE outgoingValue FOR model::WireEdgeDestination»</a>
 «ENDDEFINE»</span>
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 134:DEFINE outgoingValue FOR model::visual::InputTextField)"><a name="outgoingValue.html">«DEFINE outgoingValue FOR model::visual::InputTextField»</a>
+<span class="oaw " title="9 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 134:DEFINE outgoingValue FOR model::visual::InputTextField)"><a name="outgoingValue.html">«DEFINE outgoingValue FOR model::visual::InputTextField»</a>
 	<a href="#outgoingValue.html">«EXPAND outgoingValue FOREACH properties.select(e|e.name=="fieldValue")»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 138:DEFINE outgoingValue FOR model::ApplicationElementProperty)"><a name="outgoingValue.html">«DEFINE outgoingValue FOR model::ApplicationElementProperty»</a>
+<span class="oaw " title="9 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 138:DEFINE outgoingValue FOR model::ApplicationElementProperty)"><a name="outgoingValue.html">«DEFINE outgoingValue FOR model::ApplicationElementProperty»</a>
 	if ($page_id == "«safeNameString(containingPage(this).id)-»") {
 		/* the property "«this»" needs to be updated on the client */
-		<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 141:IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField))">«IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField)»
+		<span class="oaw " title="9 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\SetApplicationValuePhp.xpt: 141:IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField))">«IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField)»
 			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::InputTextField) eContainer).id)»): '$value'");
 			log_message("set_value " 
 				. escape_parameter_string("«safeNameString(((model::visual::InputTextField) eContainer).id)»")

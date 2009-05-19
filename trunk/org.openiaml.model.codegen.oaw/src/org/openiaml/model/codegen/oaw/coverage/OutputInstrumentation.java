@@ -22,8 +22,6 @@ import org.openarchitectureware.xpand2.output.FileHandle;
  */
 public class OutputInstrumentation implements org.openarchitectureware.xpand2.output.PostProcessor {
 
-	public static long PHP_IDENTIFIER = System.currentTimeMillis();
-	
 	/**
 	 * We use the IACleaner to format the file.
 	 * 
@@ -53,7 +51,7 @@ public class OutputInstrumentation implements org.openarchitectureware.xpand2.ou
 					+ "\n */"
 
 					+ "\nfunction php_instrument_oaw($destination, $oaw_file, $oaw_line) {"
-					+ "\n	$file = $destination . '/' . 'php-instrument-" + PHP_IDENTIFIER + ".dump.raw';"
+					+ "\n	$file = $destination . '/' . 'php-instrumented.dump.raw';"
 					+ "\n	"
 					+ "\n	// load"
 					+ "\n	if (file_exists($file)) {"
@@ -75,7 +73,7 @@ public class OutputInstrumentation implements org.openarchitectureware.xpand2.ou
 					+ "\n	file_put_contents($file, serialize($serialized));"
 					+ "\n	"
 					+ "\n	// also write an easy-to-read version"
-					+ "\n	$file = $destination . '/' . 'php-instrument-" + PHP_IDENTIFIER + ".dump';"
+					+ "\n	$file = $destination . '/' . 'php-instrumented.dump';"
 					+ "\n	$out = '';"
 					+ "\n	foreach ($serialized as $key => $value) {"
 					+ "\n		$out .= \"$key:\n\";"

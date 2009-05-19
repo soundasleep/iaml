@@ -303,7 +303,7 @@ public class InstrumentOawCode {
     public static void instrument(String destinationDir, String filename, String statement) {
     	if (instrumentedFile == null) {
     		// create a new instrumented file
-    		instrumentedFile = "instrumented-" + System.currentTimeMillis() + ".dump";
+    		instrumentedFile = "instrumented.dump";
     	}
     	
     	if (instrumented == null) {

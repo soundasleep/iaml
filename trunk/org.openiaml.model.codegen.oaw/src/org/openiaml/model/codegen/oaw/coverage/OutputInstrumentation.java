@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.net.URL;
-import java.util.Random;
 
-import org.omg.CORBA_2_3.portable.OutputStream;
 import org.openarchitectureware.xpand2.output.FileHandle;
 
 /**
@@ -97,21 +95,33 @@ public class OutputInstrumentation {
 	}
 
 	/**
+	 * A .js file.
+	 * 
 	 * @param input
 	 * @return
 	 * @throws InstrumentationException 
 	 */
 	protected String instrumentJs(String input) throws InstrumentationException {
+		
+		// we're definitely in a javascript block
+		input = instrumentJavascriptBlock(input);
+		
+		// remove other instrumentation
 		return instrumentDefault(input);
 	}
 	
 	/**
+	 * An .html file.
+	 * 
 	 * @param input
 	 * @return
 	 * @throws InstrumentationException 
 	 */
 	protected String instrumentHtml(String input) throws InstrumentationException {
-		// TODO add ajax calls?
+		// escape javascript
+		input = instrumentHtmlJavascript(input);
+
+		// remove other instrumentation
 		return instrumentDefault(input);
 	}
 	
@@ -297,10 +307,15 @@ public class OutputInstrumentation {
 		input = input.replaceAll("(\n|;|\\}|\\{|,)\\s*//([^\n]+)\n", "$1/*$2*/\n");
 
 		// add AJAX code
+		// no longer uses Prototype code, as Prototype might not have been loaded yet
 		String output = "";
 		output += "\tfunction " + ajaxFunctionName + "(dir, template, key) {\n";
-		output += "\t	var url = 'oaw_coverage.php?javascript=1&dir=' + escape(dir) + '&template=' + escape(template) + '&key=' + escape(key);\n";	
-		output += "\t	new Ajax.Request(url, { method : 'get' }); \n";
+		output += "\t	var url = 'oaw_coverage.php?javascript=1&dir=' + escape(dir) + '&template=' + escape(template) + '&key=' + escape(key);\n";
+		output += "\t	var xml;\n";	
+		output += "\t	if (window.XMLHttpRequest) { xml = new XMLHttpRequest(); }\n";	
+		output += "\t	else { xml = new ActiveXObject(\"Microsoft.XMLHTTP\"); }\n";
+		output += "\t	xml.open('GET', url, false);\n";	/* force sync */
+		output += "\t	xml.send(null);\n";
 		output += "\t}\n";
 		
 		// replace all output templates

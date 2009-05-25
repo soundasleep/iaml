@@ -1,12 +1,27 @@
-<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Coverage: StoreDbPhp.xpt</title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
 
-<a href="index.html">Summary</a><ul><li class="none">no execution</li><li class="oaw">OAW execution</li><li class="php">PHP execution</li></ul>
+<h1>StoreDbPhp.xpt</h1>
+
+<a href="index.html">Summary</a>
+
+<ul id="legend">
+	<li class="none">Never executed</li>
+	<li class="oaw">Generated output</li>
+	<li class="php">Executed on server (PHP)</li>
+	<li class="js">Executed on client (Javascript)</li>
+</ul>
 
 <p><pre>«IMPORT iaml»
 
 «EXTENSION template::GeneratorExtensions»
 
-<span class="oaw php " title="82 steps in OAW 8 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 5:DEFINE storeDbPhp FOR model::InternetApplication-)"><a name="storeDbPhp.html">«DEFINE storeDbPhp FOR model::InternetApplication-»</a>
+<span class="oaw php " title="19 steps in OAW 3 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 5:DEFINE storeDbPhp FOR model::InternetApplication-)"><a name="storeDbPhp.html">«DEFINE storeDbPhp FOR model::InternetApplication-»</a>
 &lt;?php
 /**
  * For storing a single value into the database (attribute id).
@@ -115,7 +130,7 @@ echo "ok";
 /** 
  * Expand out each DomainStore.
  */
-<span class="oaw php " title="42 steps in OAW 8 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 114:DEFINE expandDomainStore FOR model::DomainStore)"><a name="expandDomainStore.html">«DEFINE expandDomainStore FOR model::DomainStore»</a>
+<span class="oaw php " title="9 steps in OAW 3 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 114:DEFINE expandDomainStore FOR model::DomainStore)"><a name="expandDomainStore.html">«DEFINE expandDomainStore FOR model::DomainStore»</a>
 	/* Domain Store «this.name» */ 
 	<a href="#expandDomainObject.html">«EXPAND expandDomainObject(this) FOREACH children»</a>
 	
@@ -126,22 +141,22 @@ echo "ok";
 /**
  * Expand out each DomainObject.
  */
-<span class="oaw php " title="37 steps in OAW 3 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 125:DEFINE expandDomainObject(model::DomainStore store) FOR model::DomainObject)"><a name="expandDomainObject.html">«DEFINE expandDomainObject(model::DomainStore store) FOR model::DomainObject»</a>
+<span class="oaw php " title="9 steps in OAW 6 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 125:DEFINE expandDomainObject(model::DomainStore store) FOR model::DomainObject)"><a name="expandDomainObject.html">«DEFINE expandDomainObject(model::DomainStore store) FOR model::DomainObject»</a>
 	<a href="#expandDomainAttribute.html">«EXPAND expandDomainAttribute(store, this) FOREACH attributes»</a>
 «ENDDEFINE»</span>
 
 /**
  * Expand out each DomainAttribute.
  */
-<span class="oaw php " title="135 steps in OAW 9 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 132:DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttribute.html">«DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»</a>
+<span class="oaw php " title="23 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 132:DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttribute.html">«DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»</a>
 	<span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 133:IF isPropertiesFile(store))">«IF isPropertiesFile(store)»
 		<a href="#expandDomainAttributeProperties.html">«EXPAND expandDomainAttributeProperties(store, object) FOR this»</a>
-	</span><span class="oaw php " title="120 steps in OAW 9 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 135:ELSE)">«ELSE»
+	</span><span class="oaw php " title="8 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 135:ELSE)">«ELSE»
 		<a href="#expandDomainAttributeDatabase.html">«EXPAND expandDomainAttributeDatabase(store, object) FOR this»</a>
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="120 steps in OAW 9 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 140:DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttributeDatabase.html">«DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»</a>
+<span class="oaw php " title="8 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 140:DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttributeDatabase.html">«DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»</a>
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		$db_name = "sqlite:«safeNameString(store.id)».db";
@@ -170,15 +185,15 @@ echo "ok";
 /**
  * Expand out each solo DomainAttribute.
  */
-<span class="oaw php " title="10 steps in OAW 4 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 169:DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttribute.html">«DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute»</a>
-	<span class="oaw php " title="6 steps in OAW 2 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 170:IF isPropertiesFile(store))">«IF isPropertiesFile(store)»
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 169:DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttribute.html">«DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute»</a>
+	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 170:IF isPropertiesFile(store))">«IF isPropertiesFile(store)»
 		<a href="#soleAttributeProperties.html">«EXPAND soleAttributeProperties(store) FOR this»</a>
-	</span><span class="oaw php " title="4 steps in OAW 2 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 172:ELSE)">«ELSE»
+	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 172:ELSE)">«ELSE»
 		<a href="#soleAttributeDatabase.html">«EXPAND soleAttributeDatabase(store) FOR this»</a>
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="4 steps in OAW 2 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 177:DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttributeDatabase.html">«DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute»</a>
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 177:DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttributeDatabase.html">«DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute»</a>
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		$db_name = "sqlite:«safeNameString(store.id)».db";
@@ -191,7 +206,7 @@ echo "ok";
 	}
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="6 steps in OAW 2 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 190:DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttributeProperties.html">«DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute»</a>
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 190:DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttributeProperties.html">«DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute»</a>
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";
@@ -206,7 +221,7 @@ echo "ok";
 
 /* if an InternetApplication directly contains an AbstractObject,
    we still process it anyway. */
-<span class="oaw php " title="121 steps in OAW 8 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 205:DEFINE expandDomainObjectRoot FOR model::ApplicationElement)"><a name="expandDomainObjectRoot.html">«DEFINE expandDomainObjectRoot FOR model::ApplicationElement»</a>
+<span class="oaw php " title="28 steps in OAW 9 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 205:DEFINE expandDomainObjectRoot FOR model::ApplicationElement)"><a name="expandDomainObjectRoot.html">«DEFINE expandDomainObjectRoot FOR model::ApplicationElement»</a>
 	«REM»empty«ENDREM»
 «ENDDEFINE»</span>
 
@@ -251,11 +266,14 @@ echo "ok";
 /**
  * Expand out any event triggers.
  */
-<span class="oaw " title="147 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 250:DEFINE expandDomainAttributeEvents FOR model::EventTrigger)"><a name="expandDomainAttributeEvents.html">«DEFINE expandDomainAttributeEvents FOR model::EventTrigger»</a>
-	<span class="oaw " title="147 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 251:IF name=="edit")">«IF name=="edit"»
+<span class="oaw " title="25 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 250:DEFINE expandDomainAttributeEvents FOR model::EventTrigger)"><a name="expandDomainAttributeEvents.html">«DEFINE expandDomainAttributeEvents FOR model::EventTrigger»</a>
+	<span class="oaw " title="25 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 251:IF name=="edit")">«IF name=="edit"»
 		<a href="src-template-template-php-EventTrigger-xpt.html#callOperations.html">«EXPAND template::php::EventTrigger::callOperations(false, true) FOREACH outEdges»</a>
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
 <span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\StoreDbPhp.xpt: 256:DEFINE exception FOR Object)"><a name="exception.html">«DEFINE exception FOR Object»</a>
-«ENDDEFINE»</span></pre></p></html>
+«ENDDEFINE»</span></pre></p>
+
+</body>
+</html>

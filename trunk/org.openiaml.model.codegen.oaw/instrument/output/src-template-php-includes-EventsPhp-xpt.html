@@ -1,12 +1,27 @@
-<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\EventsPhp.xpt</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Coverage: EventsPhp.xpt</title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
 
-<a href="index.html">Summary</a><ul><li class="none">no execution</li><li class="oaw">OAW execution</li><li class="php">PHP execution</li></ul>
+<h1>EventsPhp.xpt</h1>
+
+<a href="index.html">Summary</a>
+
+<ul id="legend">
+	<li class="none">Never executed</li>
+	<li class="oaw">Generated output</li>
+	<li class="php">Executed on server (PHP)</li>
+	<li class="js">Executed on client (Javascript)</li>
+</ul>
 
 <p><pre>«IMPORT iaml»
 
 «EXTENSION template::GeneratorExtensions»
 
-<span class="oaw php " title="155 steps in OAW 192 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\EventsPhp.xpt: 5:DEFINE eventsPhp FOR model::visual::Page)"><a name="eventsPhp.html">«DEFINE eventsPhp FOR model::visual::Page»</a>
+<span class="oaw php " title="135 steps in OAW 31 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\includes\EventsPhp.xpt: 5:DEFINE eventsPhp FOR model::visual::Page)"><a name="eventsPhp.html">«DEFINE eventsPhp FOR model::visual::Page»</a>
 
 /**
  * Expand all possible events for the current page.
@@ -39,4 +54,7 @@ $s = $db-&gt;prepare("DELETE FROM stored_events WHERE page_id=?") or throw_new_I
 $s-&gt;execute(array("«id»")) or throw_new_IamlRuntimeException("could not execute delete query: " . print_r($db-&gt;errorInfo(), true));
 
 «ENDDEFINE»</span>
-</pre></p></html>
+</pre></p>
+
+</body>
+</html>

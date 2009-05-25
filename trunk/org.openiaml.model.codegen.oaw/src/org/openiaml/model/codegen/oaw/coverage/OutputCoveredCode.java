@@ -24,11 +24,12 @@ public class OutputCoveredCode {
 	public static void main(String[] args) throws InstrumentationException, IOException {
 		File oawDump = new File("instrument/instrumented.dump");
 		File phpDump = new File("instrument/php-instrumented.dump");
+		File jsDump = new File("instrument/javascript-instrumented.dump");
 		File templatesDir = new File("src/template");
 		File outputDir = new File("instrument/output");
 
 		InstrumentOawCode ia = new InstrumentOawCode();
-		ia.outputCoveredCode(oawDump, phpDump, templatesDir, outputDir);
+		ia.outputCoveredCode(oawDump, phpDump, jsDump, templatesDir, outputDir);
 	}
 
 }

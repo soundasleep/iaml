@@ -35,6 +35,7 @@ public class InstrumentOawCode {
 		private long blocks = 0;
 		private long coveredOaw = 0;
 		private long coveredPhp = 0;
+		private long coveredJs = 0;
 		
 		/**
 		 * 
@@ -67,6 +68,13 @@ public class InstrumentOawCode {
 			coveredPhp++;
 		}
 
+		/**
+		 * Call when a block has been covered with Javascript execution.
+		 */
+		public void coveredInJs() {
+			coveredJs++;
+		}
+
 		public File getTemplate() {
 			return template;
 		}
@@ -85,6 +93,10 @@ public class InstrumentOawCode {
 
 		public long getCoveredPhp() {
 			return coveredPhp;
+		}
+		
+		public long getCoveredJs() {
+			return coveredJs;
 		}
 
 	}
@@ -471,14 +483,15 @@ public class InstrumentOawCode {
 	 * the results of the instrumentation, and generate a pretty format
 	 * of the code coverage for HTML.
 	 * 
-	 * @param oawDump
-	 * @param phpDump
+	 * @param oawDump instrumented oaw results
+	 * @param phpDump instrumented php results
+	 * @param jsDump instrumented javascript results
 	 * @param templatesDir
 	 * @param outputDir
 	 * @throws InstrumentationException 
 	 * @throws IOException 
 	 */
-	public void outputCoveredCode(File oawDump, File phpDump, File templatesDir, File outputDir) throws InstrumentationException, IOException {
+	public void outputCoveredCode(File oawDump, File phpDump, File jsDump, File templatesDir, File outputDir) throws InstrumentationException, IOException {
 		// checks
 		if (!templatesDir.exists() || !templatesDir.isDirectory()) {
 			throw new InstrumentationException("Template directory '" + templatesDir + "' does not exist or is not a directory.");
@@ -495,10 +508,14 @@ public class InstrumentOawCode {
 		if (!phpDump.exists()) {
 			throw new InstrumentationException("File '" + phpDump + "' does not exist");
 		}
+		if (!jsDump.exists()) {
+			throw new InstrumentationException("File '" + jsDump + "' does not exist");
+		}
 		
 		// load the dumps
 		Map<String, Map<String, Integer>> oaw = loadInstrumentation(oawDump);
 		Map<String, Map<String, Integer>> php = loadInstrumentation(phpDump);
+		Map<String, Map<String, Integer>> js = loadInstrumentation(jsDump);
 		
 		// get templates
 		List<File> templates = getRecursiveDirectoryContents(templatesDir);
@@ -506,7 +523,7 @@ public class InstrumentOawCode {
 		for (File template : templates) {
 			if (template.getAbsolutePath().endsWith(".xpt")) {
 				String templateOut = outputDir.getAbsolutePath() + File.separator + getOutputName(template);
-				OutputSummary summary = outputCoveredTemplate(oaw, php, template, new File(templateOut));
+				OutputSummary summary = outputCoveredTemplate(oaw, php, js, template, new File(templateOut));
 				summaries.add(summary);
 			}
 		}
@@ -532,8 +549,10 @@ public class InstrumentOawCode {
 			{
 				double ratio = summary.getCoveredOaw() / (1.0 * summary.getBlocks());
 				double ratio2 = summary.getCoveredPhp() / (1.0 * summary.getBlocks());
+				double ratio3 = summary.getCoveredJs() / (1.0 * summary.getBlocks());
 				html += "<td>" + formatNumber(summary.getCoveredOaw()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio * 100) + "%) </td>\n";
 				html += "<td>" + formatNumber(summary.getCoveredPhp()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio2 * 100) + "%) </td>\n";
+				html += "<td>" + formatNumber(summary.getCoveredJs()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio3 * 100) + "%) </td>\n";
 				html += "<td style=\"border:1px solid #ccc;margin:0;padding:0;background:#f33;\">";
 				html += "<div style=\"width:" + Math.floor((barWidth * ratio2)) + "px;background:#3f3;height:1.3em;display:inline-block;\"></div>";
 				html += "<div style=\"width:" + Math.floor((barWidth * (ratio - ratio2))) + "px;background:#ff3;height:1.3em;display:inline-block;\"></div>";
@@ -543,7 +562,7 @@ public class InstrumentOawCode {
 			html += "</tr>\n";
 		}
 		
-		html = "<html><style>body,html,th,td{font-family:Arial;}</style><body><h1>Summary</h1>\n\n<table><tr><th>Template</th><th>OAW</th><th>PHP</th><th width=\"" + barWidth + "\">%</th></tr>\n" + html + "</table></html>";
+		html = "<html><style>body,html,th,td{font-family:Arial;}</style><body><h1>Summary</h1>\n\n<table><tr><th>Template</th><th>OAW</th><th>PHP</th><th>JS</th><th width=\"" + barWidth + "\">%</th></tr>\n" + html + "</table></html>";
 		
 		System.out.println("Writing summary '" + templateOut + "'...");
 		writeFile(new File(templateOut), html);
@@ -581,6 +600,7 @@ public class InstrumentOawCode {
 	/**
 	 * @param oaw oaw instrumentation results
 	 * @param php php instrumentation results
+	 * @param js js instrumentation results
 	 * @param template the xpt template file itself
 	 * @param file file to output results to
 	 * @param templates list of templates that we are loading (used to generate hyperlinks)
@@ -588,7 +608,9 @@ public class InstrumentOawCode {
 	 * @throws IOException 
 	 */
 	protected OutputSummary outputCoveredTemplate(Map<String, Map<String, Integer>> oaw,
-			Map<String, Map<String, Integer>> php, File template,
+			Map<String, Map<String, Integer>> php, 
+			Map<String, Map<String, Integer>> js, 
+			File template,
 			File file) throws IOException {
 		
 		String html = readFile(template);
@@ -598,19 +620,20 @@ public class InstrumentOawCode {
 		html = escapeHtml(html);
 		
 		// elements to worry about: DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH
-		html = replaceBinaryTag("DEFINE", "ENDDEFINE", html, template.getAbsolutePath(), oaw, php, os);
-		html = replaceBinaryTag("FILE", "ENDFILE", html, template.getAbsolutePath(), oaw, php, os);
-		html = replaceBinaryTag("FOREACH", "ENDFOREACH", html, template.getAbsolutePath(), oaw, php, os);
+		html = replaceBinaryTag("DEFINE", "ENDDEFINE", html, template.getAbsolutePath(), oaw, php, js, os);
+		html = replaceBinaryTag("FILE", "ENDFILE", html, template.getAbsolutePath(), oaw, php, js, os);
+		html = replaceBinaryTag("FOREACH", "ENDFOREACH", html, template.getAbsolutePath(), oaw, php, js, os);
 		
 		// hopefully this clever little hack works
-		html = replaceBinaryTag("IF", "ENDIF", html, template.getAbsolutePath(), oaw, php, os);
-		html = replaceBinaryTagReverse("ELSE", "ELSE", html, template.getAbsolutePath(), oaw, php, os);
-		html = replaceBinaryTagReverse("ELSEIF", "ELSEIF", html, template.getAbsolutePath(), oaw, php, os);
+		html = replaceBinaryTag("IF", "ENDIF", html, template.getAbsolutePath(), oaw, php, js, os);
+		html = replaceBinaryTagReverse("ELSE", "ELSE", html, template.getAbsolutePath(), oaw, php, js, os);
+		html = replaceBinaryTagReverse("ELSEIF", "ELSEIF", html, template.getAbsolutePath(), oaw, php, js, os);
 		
 		// create <a> links to template files
 		html = replaceLinks(template, html, template.getAbsolutePath());
 		
-		html = "<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>" + template + "</h1>\n\n<a href=\"index.html\">Summary</a><ul><li class=\"none\">no execution</li><li class=\"oaw\">OAW execution</li><li class=\"php\">PHP execution</li></ul>\n\n<p><pre>" + html + "</pre></p></html>";
+		// TODO load this from actual file
+		html = "<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}.js{font-style:italic;}pre{background:#eee;border:1px solid #666;}</style><body><h1>" + template + "</h1>\n\n<a href=\"index.html\">Summary</a><ul><li class=\"none\">no execution</li><li class=\"oaw\">OAW execution</li><li class=\"php\">PHP execution</li><li class=\"js\">Javascript execution</li></ul>\n\n<p><pre>" + html + "</pre></p></html>";
 		
 		System.out.println("Writing file '" + file + "'...");
 		writeFile(file, html);
@@ -770,7 +793,9 @@ public class InstrumentOawCode {
 			String html,
 			String templateFile,
 			Map<String, Map<String, Integer>> oaw,
-			Map<String, Map<String, Integer>> php, OutputSummary os) {
+			Map<String, Map<String, Integer>> php, 
+			Map<String, Map<String, Integer>> js, 
+			OutputSummary os) {
 
 		// find all DEFINEs
 		int lineCount = 0;
@@ -804,6 +829,12 @@ public class InstrumentOawCode {
 				title += php.get(templateFile).get(key) + " steps in PHP ";
 				os.coveredInPhp();
 			}
+			if (js.containsKey(templateFile) && js.get(templateFile).containsKey(key)) {
+				// it's been executed in OAW
+				classes += "js ";
+				title += js.get(templateFile).get(key) + " steps in JS ";
+				os.coveredInJs();
+			}
 			if (classes.isEmpty()) {
 				classes = "none";
 			}
@@ -835,7 +866,9 @@ public class InstrumentOawCode {
 			String html,
 			String templateFile,
 			Map<String, Map<String, Integer>> oaw,
-			Map<String, Map<String, Integer>> php, OutputSummary os) {
+			Map<String, Map<String, Integer>> php, 
+			Map<String, Map<String, Integer>> js, 
+			OutputSummary os) {
 
 		// append all ENDDEFINE with </span>
 		// do this replacement first
@@ -873,6 +906,12 @@ public class InstrumentOawCode {
 				classes += "php ";
 				title += php.get(templateFile).get(key) + " steps in PHP ";
 				os.coveredInPhp();
+			}
+			if (js.containsKey(templateFile) && js.get(templateFile).containsKey(key)) {
+				// it's been executed in OAW
+				classes += "js ";
+				title += js.get(templateFile).get(key) + " steps in JS ";
+				os.coveredInJs();
 			}
 			if (classes.isEmpty()) {
 				classes = "none";

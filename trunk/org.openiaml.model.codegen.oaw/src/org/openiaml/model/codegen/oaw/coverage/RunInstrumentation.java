@@ -33,7 +33,9 @@ public class RunInstrumentation {
 		for (File f : new File[]{ 
 				new File("instrument/instrumented.dump"),
 				new File("instrument/php-instrumented.dump"),
-				new File("instrument/php-instrumented.dump.raw")}) {
+				new File("instrument/php-instrumented.dump.raw"),
+				new File("instrument/javascript-instrumented.dump"),
+				new File("instrument/javascript-instrumented.dump.raw")}) {
 			if (f.exists()) {
 				System.out.println("Deleting '" + f + "'...");
 				boolean deleted = f.delete();

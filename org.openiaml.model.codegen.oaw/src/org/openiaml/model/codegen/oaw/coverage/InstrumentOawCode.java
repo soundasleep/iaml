@@ -161,8 +161,9 @@ public class InstrumentOawCode {
 	 * 
 	 * @param input
 	 * @return
+	 * @throws InstrumentationException 
 	 */
-	protected String instrumentFile(File destinationDir, String filename, String input) {
+	protected String instrumentFile(File destinationDir, String filename, String input) throws InstrumentationException {
 		// we want to jump between each instance of «
 		
 		// we need to escape the strings a lot
@@ -179,10 +180,62 @@ public class InstrumentOawCode {
 		input = input.replaceAll("«(FILE[^'»]*?)»", "«$1»" + ENABLE_OUTPUT_INSTRUMENTATION);
 		
 		// output code coverage
-		input = input.replaceAll("«((DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH)[^'»]*?)»", "«$1»__output_instrument(" + destDir + ";" + filename + ";__LINE_NUMBER__:$1)__");
+		input = input.replaceAll("«((DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH)[^'»]*?)»", "«$1»__output_instrument(" + destDir + "|" + filename + "|__LINE_NUMBER__:$1)__");
+		
+		// output coverage for individual template statements
+		// this is necessary so we can see what parts of individual templates are actually being executed at run-time
+		input = addRuntimeOutputInformation(input, destDir, filename);
 		
 		// replace all line numbers
 		input = replaceLineNumbers(input);
+		
+		return input;
+	}
+
+	/**
+	 * Add any runtime template information to the instrumented templates.
+	 * 
+	 * This is necessary so we can see what parts of individual templates are actually being executed at run-time.
+	 * 
+	 * @param input
+	 * @param destDir 
+	 * @param filename 
+	 * @return
+	 * @throws InstrumentationException 
+	 */
+	protected String addRuntimeOutputInformation(String input, String destDir, String filename) throws InstrumentationException {
+		
+		// find all code outside of « »s
+		String[] bits = input.split("»");
+		String output = bits[0] + "»";
+		
+		for (int i = 1; i < bits.length; i++) {
+			String[] sub = bits[i].split("«");
+			if (sub.length == 2) {
+				output += addRuntimeOutputBlock(sub[0], destDir, filename) + "«" + sub[1]; 
+			} else if (sub.length == 1) {
+				output += bits[i];
+			} else {
+				throw new InstrumentationException("Unexpectedly found more than 2 '«'s in '" + bits[i] + "'");
+			}
+			output += "»";
+		}
+		
+		return output;
+		
+	}
+
+	/**
+	 * This is the actually generated text, outside of all of the templates.
+	 * @param destDir 
+	 * @param filename 
+	 * 
+	 * @param string
+	 * @return
+	 */
+	private String addRuntimeOutputBlock(String input, String destDir, String filename) {
+		// TODO do not replace these characters within strings (follow iacleaner example)
+		input = input.replaceAll("(}|;)", "$1__runtime_instrument(" + destDir + "|" + filename + "|RUNTIME:__LINE_NUMBER__:$1)__");
 		
 		return input;
 	}

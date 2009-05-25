@@ -1,44 +1,59 @@
-<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Coverage: DomainInstance.xpt</title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
 
-<a href="index.html">Summary</a><ul><li class="none">no execution</li><li class="oaw">OAW execution</li><li class="php">PHP execution</li></ul>
+<h1>DomainInstance.xpt</h1>
+
+<a href="index.html">Summary</a>
+
+<ul id="legend">
+	<li class="none">Never executed</li>
+	<li class="oaw">Generated output</li>
+	<li class="php">Executed on server (PHP)</li>
+	<li class="js">Executed on client (Javascript)</li>
+</ul>
 
 <p><pre>«IMPORT iaml»
 
 «EXTENSION template::GeneratorExtensions»
 
 /* expand out all domain attribute instances for the page */
-<span class="oaw php " title="483 steps in OAW 5 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 6:DEFINE expandDomainAttributes FOR model::InternetApplication)"><a name="expandDomainAttributes.html">«DEFINE expandDomainAttributes FOR model::InternetApplication»</a>
+<span class="oaw " title="211 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 6:DEFINE expandDomainAttributes FOR model::InternetApplication)"><a name="expandDomainAttributes.html">«DEFINE expandDomainAttributes FOR model::InternetApplication»</a>
 	<a href="#getDomainAttribute.html">«EXPAND getDomainAttribute FOREACH getAllDomainAttributeInstances()»</a>
 	<a href="#storeDomainAttribute.html">«EXPAND storeDomainAttribute FOREACH getAllDomainAttributeInstances()»</a>
 «ENDDEFINE»</span>
-<span class="oaw " title="155 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 10:DEFINE expandDomainAttributes FOR model::visual::Page)"><a name="expandDomainAttributes.html">«DEFINE expandDomainAttributes FOR model::visual::Page»</a>
+<span class="oaw " title="135 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 10:DEFINE expandDomainAttributes FOR model::visual::Page)"><a name="expandDomainAttributes.html">«DEFINE expandDomainAttributes FOR model::visual::Page»</a>
 	<a href="#expandDomainAttributes.html">«EXPAND expandDomainAttributes FOR getRoot()»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="483 steps in OAW 105 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 14:DEFINE expandDomainObjects FOR model::InternetApplication)"><a name="expandDomainObjects.html">«DEFINE expandDomainObjects FOR model::InternetApplication»</a>
+<span class="oaw " title="211 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 14:DEFINE expandDomainObjects FOR model::InternetApplication)"><a name="expandDomainObjects.html">«DEFINE expandDomainObjects FOR model::InternetApplication»</a>
 	<a href="#getDomainObject.html">«EXPAND getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»</a>
 	<a href="#storeDomainObject.html">«EXPAND storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»</a>
 «ENDDEFINE»</span>
-<span class="oaw php " title="155 steps in OAW 69 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 18:DEFINE expandDomainObjects FOR model::visual::Page)"><a name="expandDomainObjects.html">«DEFINE expandDomainObjects FOR model::visual::Page»</a>
+<span class="oaw " title="135 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 18:DEFINE expandDomainObjects FOR model::visual::Page)"><a name="expandDomainObjects.html">«DEFINE expandDomainObjects FOR model::visual::Page»</a>
 	<a href="#expandDomainObjects.html">«EXPAND expandDomainObjects FOR getRoot()»</a>
 «ENDDEFINE»</span>
 
 /* code to get domain attributes */
-<span class="oaw php " title="141 steps in OAW 5 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 23:DEFINE getDomainAttribute FOR model::DomainAttributeInstance-)"><a name="getDomainAttribute.html">«DEFINE getDomainAttribute FOR model::DomainAttributeInstance-»</a>
+<span class="oaw " title="29 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 23:DEFINE getDomainAttribute FOR model::DomainAttributeInstance-)"><a name="getDomainAttribute.html">«DEFINE getDomainAttribute FOR model::DomainAttributeInstance-»</a>
 	function get_attribute_instance_«safeName()»($default = false) {
 		/* return the current value for attribute id '«id»' */
-		<span class="oaw " title="50 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 26:IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance))">«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
+		<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 26:IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance))">«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$obj = get_object_instance_«safeName(eContainer)»();
 			return $obj["«name-»"];
-		</span><span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 30:ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)"></span><span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 30:ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		</span><span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 30:ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)"></span><span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 30:ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
 			return get_new_attribute_instance_«safeName()-»();
-		</span><span class="oaw " title="76 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 33:ELSE)">«ELSE»
+		</span><span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 33:ELSE)">«ELSE»
 			/* not contained in an object instance; select it manually */
 			<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 35:IF inEdges.typeSelect(model::wires::SelectWire).isEmpty)">«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for getting attribute instance '«this»'");
-			</span><span class="oaw " title="76 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 37:ELSE)">«ELSE»
+			</span><span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 37:ELSE)">«ELSE»
 				<a href="#evaluateSelectWire.html">«EXPAND evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»</a>
 				$row = $rs-&gt;fetch();
 				if (!$row) {
@@ -51,19 +66,19 @@
 		«ENDIF»</span>
 	}
 	
-	<span class="oaw php " title="15 steps in OAW 14 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 50:IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+	<span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 50:IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 		<a href="#getNewAttributeInstance.html">«EXPAND getNewAttributeInstance(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»</a>
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="15 steps in OAW 14 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 55:DEFINE getNewAttributeInstance(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance)"><a name="getNewAttributeInstance.html">«DEFINE getNewAttributeInstance(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance»</a>
+<span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 55:DEFINE getNewAttributeInstance(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance)"><a name="getNewAttributeInstance.html">«DEFINE getNewAttributeInstance(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance»</a>
 	/** Get an instance of an attribute */
 	function get_new_attribute_instance_«safeName()-»($force = true) {
-		<span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 58:IF containingSession() != null)">«IF containingSession() != null»
+		<span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 58:IF containingSession() != null)">«IF containingSession() != null»
 			// in the session
 			if (require_session('new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
 				// force creation?
-				<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 62:IF isAutosaveOff())">«IF isAutosaveOff()»
+				<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 62:IF isAutosaveOff())">«IF isAutosaveOff()»
 					if ($force == false) {
 						// don't force creation; return a default
 						return "";	/* TODO put in actual default for attribute "«safeNameString(name)-»" */
@@ -122,18 +137,18 @@
 	}
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="50 steps in OAW 37 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 121:DEFINE getDomainObject FOR model::DomainObjectInstance-)"><a name="getDomainObject.html">«DEFINE getDomainObject FOR model::DomainObjectInstance-»</a>
+<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 121:DEFINE getDomainObject FOR model::DomainObjectInstance-)"><a name="getDomainObject.html">«DEFINE getDomainObject FOR model::DomainObjectInstance-»</a>
 	function get_object_instance_«safeName()»() {
 		/* get the object instance '«id»' */
 		/* not contained in an object instance; select it manually */
-		<span class="oaw " title="20 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 125:IF inEdges.typeSelect(model::wires::SelectWire).isEmpty)">«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+		<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 125:IF inEdges.typeSelect(model::wires::SelectWire).isEmpty)">«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
 			<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 126:IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 				throw new IamlRuntimeException("No selection or new instance wires exist for object instance '«id»'");
-			</span><span class="oaw " title="20 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 128:ELSE)">«ELSE»
+			</span><span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 128:ELSE)">«ELSE»
 				// return a "new" object
-				return get_new_domain_object_«safeName()-»(<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 130:IF isAutosaveOff())">«IF isAutosaveOff()»false«ENDIF»</span>);
+				return get_new_domain_object_«safeName()-»(<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 130:IF isAutosaveOff())">«IF isAutosaveOff()»false«ENDIF»</span>);
 			«ENDIF»</span>
-		</span><span class="oaw " title="30 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 132:ELSE)">«ELSE»
+		</span><span class="oaw " title="6 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 132:ELSE)">«ELSE»
 			<a href="#evaluateSelectWire.html">«EXPAND evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»</a>
 			// get just the first result
 			$row = $rs-&gt;fetch();
@@ -148,12 +163,12 @@
 		«ENDIF»</span>
 	}
 
-	<span class="oaw php " title="20 steps in OAW 20 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 147:IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+	<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 147:IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 		<a href="#getNewDomainObject.html">«EXPAND getNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»</a>
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="20 steps in OAW 20 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 152:DEFINE getNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-)"><a name="getNewDomainObject.html">«DEFINE getNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»</a>
+<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 152:DEFINE getNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-)"><a name="getNewDomainObject.html">«DEFINE getNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»</a>
 	function get_new_domain_object_«safeName()-»($force = true) {
 		<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 154:IF containingSession() != null)">«IF containingSession() != null»
 			// in the session
@@ -211,11 +226,11 @@
 				$obj[$key] = $value;
 			}
 			return $obj;
-		</span><span class="oaw " title="20 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 210:ELSE)">«ELSE»
+		</span><span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 210:ELSE)">«ELSE»
 			// in the page
 			if (get_application_value('new_object_«safeNameString(id)-»', false) === false) {
 				// force creation?
-				<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 214:IF isAutosaveOff())">«IF isAutosaveOff()»
+				<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 214:IF isAutosaveOff())">«IF isAutosaveOff()»
 					if ($force == false) {
 						// don't force creation; return a default
 						return <a href="#newDomainObjectTemplate.html">«EXPAND newDomainObjectTemplate FOR wire.from»</a>;
@@ -275,18 +290,18 @@
 	<a href="#exception.html">«EXPAND exception FOR throwException("Cannot get domain object template for object: " + this)»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 274:DEFINE newDomainObjectTemplate FOR model::DomainObject)"><a name="newDomainObjectTemplate.html">«DEFINE newDomainObjectTemplate FOR model::DomainObject»</a>
+<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 274:DEFINE newDomainObjectTemplate FOR model::DomainObject)"><a name="newDomainObjectTemplate.html">«DEFINE newDomainObjectTemplate FOR model::DomainObject»</a>
 	array(
 		"_is_new" =&gt; true,
 		<a href="#newDomainAttributeTemplate.html">«EXPAND newDomainAttributeTemplate FOREACH attributes SEPARATOR ", "»</a>
 	);
 «ENDDEFINE»</span>
 
-<span class="oaw " title="40 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 281:DEFINE newDomainAttributeTemplate FOR model::DomainAttribute)"><a name="newDomainAttributeTemplate.html">«DEFINE newDomainAttributeTemplate FOR model::DomainAttribute»</a>
+<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 281:DEFINE newDomainAttributeTemplate FOR model::DomainAttribute)"><a name="newDomainAttributeTemplate.html">«DEFINE newDomainAttributeTemplate FOR model::DomainAttribute»</a>
 	"«safeNameString(name)-»" =&gt; "" /* TODO eventually put the default value in here */
 «ENDDEFINE»</span>
 
-<span class="oaw " title="106 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 285:DEFINE evaluateSelectWire FOR model::wires::SelectWire)"><a name="evaluateSelectWire.html">«DEFINE evaluateSelectWire FOR model::wires::SelectWire»</a>
+<span class="oaw " title="22 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 285:DEFINE evaluateSelectWire FOR model::wires::SelectWire)"><a name="evaluateSelectWire.html">«DEFINE evaluateSelectWire FOR model::wires::SelectWire»</a>
 	/* selection wire «this» */
 	
 	// where are we loading it from? sets $db
@@ -303,11 +318,11 @@
 «ENDDEFINE»</span>
 
 /* create a SQL query to select a particular value */
-<span class="oaw " title="212 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 302:DEFINE getQuery FOR model::wires::SelectWire)"><a name="getQuery.html">«DEFINE getQuery FOR model::wires::SelectWire»</a>
-	<span class="oaw " title="50 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 303:IF query == null || query.trim().length == 0)">«IF query == null || query.trim().length == 0»
+<span class="oaw " title="44 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 302:DEFINE getQuery FOR model::wires::SelectWire)"><a name="getQuery.html">«DEFINE getQuery FOR model::wires::SelectWire»</a>
+	<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 303:IF query == null || query.trim().length == 0)">«IF query == null || query.trim().length == 0»
 		«REM»an empty query«ENDREM»
 		"1"
-	</span><span class="oaw " title="162 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 306:ELSE-)">«ELSE-»
+	</span><span class="oaw " title="34 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 306:ELSE-)">«ELSE-»
 		"«query-»" /* direct query */
 	«ENDIF-»</span>
 «ENDDEFINE»</span>
@@ -317,7 +332,7 @@
 	<a href="#exception.html">«EXPAND exception FOR throwException("Cannot connect to a database source from " + this)»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="317 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 316:DEFINE selectDatabase FOR model::DomainObject)"><a name="selectDatabase.html">«DEFINE selectDatabase FOR model::DomainObject»</a>
+<span class="oaw " title="65 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 316:DEFINE selectDatabase FOR model::DomainObject)"><a name="selectDatabase.html">«DEFINE selectDatabase FOR model::DomainObject»</a>
 	<a href="#selectDatabaseStore.html">«EXPAND selectDatabaseStore FOR eContainer»</a>	
 «ENDDEFINE»</span>
 
@@ -326,55 +341,55 @@
 	<a href="#exception.html">«EXPAND exception FOR throwException("Unknown DomainObject container " + this)»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="317 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 325:DEFINE selectDatabaseStore FOR model::DomainStore)"><a name="selectDatabaseStore.html">«DEFINE selectDatabaseStore FOR model::DomainStore»</a>
+<span class="oaw " title="65 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 325:DEFINE selectDatabaseStore FOR model::DomainStore)"><a name="selectDatabaseStore.html">«DEFINE selectDatabaseStore FOR model::DomainStore»</a>
 	$db = new PDO('sqlite:«safeNameString(id)».db') 
 		or throw_new_IamlRuntimeException("Could not open DomainStore '«id»'");
 «ENDDEFINE»</span>
 
 /* code to _save_ attributes */
-<span class="oaw php " title="141 steps in OAW 105 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 331:DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-)"><a name="storeDomainAttribute.html">«DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-»</a>
+<span class="oaw " title="29 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 331:DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-)"><a name="storeDomainAttribute.html">«DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-»</a>
 	function store_domain_attribute_«safeName()»($arg0) {
 		/* store a value into attribute id '«id»' */
-		<span class="oaw " title="50 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 334:IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance))">«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
+		<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 334:IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance))">«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			store_object_instance_«safeName(eContainer)»("«safeNameString(name)-»", $arg0);
-		</span><span class="oaw " title="91 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 337:ELSE)">«ELSE»
+		</span><span class="oaw " title="19 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 337:ELSE)">«ELSE»
 			/* not contained in an object instance; select it manually */
-			<span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 339:IF inEdges.typeSelect(model::wires::SelectWire).isEmpty)">«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+			<span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 339:IF inEdges.typeSelect(model::wires::SelectWire).isEmpty)">«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
 				<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 340:IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for setting attribute instance '«safeNameString(id)-»'");
-				</span><span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 342:ELSE)">«ELSE»
+				</span><span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 342:ELSE)">«ELSE»
 					// set the current "new" object
 					<a href="#setNewDomainAttribute.html">«EXPAND setNewDomainAttribute(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»</a>
 				«ENDIF»</span>
-			</span><span class="oaw " title="76 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 346:ELSE)">«ELSE»
+			</span><span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 346:ELSE)">«ELSE»
 				$attribute_name = "«safeNameString(name)-»";
 				<a href="#evaluateSelectWireStore.html">«EXPAND evaluateSelectWireStore FOR inEdges.typeSelect(model::wires::SelectWire).first()»</a>
 			«ENDIF»</span>
 		«ENDIF»</span>
 	}
 
-	<span class="oaw php " title="40 steps in OAW 45 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 353:IF isAutosaveOff(this))">«IF isAutosaveOff(this)»
+	<span class="oaw " title="8 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 353:IF isAutosaveOff(this))">«IF isAutosaveOff(this)»
 	/* for elements with 'autosave' off */
 	function queue_store_domain_attribute_«safeName()»($arg0) {
 		/* queue store a value into attribute id '«id»' */
-		<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 357:IF containingSession(this) != null)">«IF containingSession(this) != null»
+		<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 357:IF containingSession(this) != null)">«IF containingSession(this) != null»
 			$_SESSION["instance_queue_«safeName(containingSession())-»_«safeName()-»"] = $arg0;
-		</span><span class="oaw " title="30 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 359:ELSE)">«ELSE»
+		</span><span class="oaw " title="6 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 359:ELSE)">«ELSE»
 			set_application_value("instance_queue_«safeName()-»", $arg0);
 		«ENDIF»</span>
 	}
 	
 	function save_queued_store_domain_attribute_«safeName()»() {
 		/* execute the actual save for attribute id '«id»' */
-		<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 366:IF containingSession(this) != null)">«IF containingSession(this) != null»
+		<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 366:IF containingSession(this) != null)">«IF containingSession(this) != null»
 			/* contained within a session */
 			$arg0 = require_session("instance_queue_«safeName(containingSession())-»_«safeName()-»", false);
 			if ($arg0 !== false) {
 				// lets set it
 				store_domain_attribute_«safeName()-»($arg0);
 			}
-		</span><span class="oaw " title="30 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 373:ELSE)">«ELSE»
+		</span><span class="oaw " title="6 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 373:ELSE)">«ELSE»
 			/* contained within a page */
 			$arg0 = get_application_value("instance_queue_«safeName()-»", false);
 			if ($arg0 !== false) {
@@ -386,11 +401,11 @@
 	«ENDIF»</span>
 «ENDDEFINE»</span>
 
-<span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 385:DEFINE setNewDomainAttribute(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance-)"><a name="setNewDomainAttribute.html">«DEFINE setNewDomainAttribute(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance-»</a>
+<span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 385:DEFINE setNewDomainAttribute(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance-)"><a name="setNewDomainAttribute.html">«DEFINE setNewDomainAttribute(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance-»</a>
 	// it should already be created, or this will create a new one
 	$existing = get_new_attribute_instance_«safeName()-»(true);	/* force creation */
 
-	<span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 389:IF containingSession(this) != null)">«IF containingSession(this) != null»
+	<span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 389:IF containingSession(this) != null)">«IF containingSession(this) != null»
 		/* contained within a session */
 		$new_id = require_session("new_attribute_«safeName(containingSession())»_«safeName()-»", false);
 		if ($new_id === false) {
@@ -423,17 +438,17 @@
 	log_message("attribute '$attribute_name' set to '$arg0'");
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="50 steps in OAW 37 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 422:DEFINE storeDomainObject FOR model::DomainObjectInstance-)"><a name="storeDomainObject.html">«DEFINE storeDomainObject FOR model::DomainObjectInstance-»</a>
+<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 422:DEFINE storeDomainObject FOR model::DomainObjectInstance-)"><a name="storeDomainObject.html">«DEFINE storeDomainObject FOR model::DomainObjectInstance-»</a>
 	function store_object_instance_«safeName()»($attribute_name, $arg0) {
 		/* store a value into object id '«id»' */
-		<span class="oaw " title="20 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 425:IF inEdges.typeSelect(model::wires::SelectWire).isEmpty)">«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+		<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 425:IF inEdges.typeSelect(model::wires::SelectWire).isEmpty)">«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
 			<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 426:IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty)">«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for setting object instance '«id»'");
-			</span><span class="oaw " title="20 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 428:ELSE)">«ELSE»
+			</span><span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 428:ELSE)">«ELSE»
 				// set the current "new" object
 				<a href="#setNewDomainObject.html">«EXPAND setNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»</a>
 			«ENDIF»</span>
-		</span><span class="oaw " title="30 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 432:ELSE)">«ELSE»
+		</span><span class="oaw " title="6 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 432:ELSE)">«ELSE»
 			<a href="#evaluateSelectWireStore.html">«EXPAND evaluateSelectWireStore FOR inEdges.typeSelect(model::wires::SelectWire).first()»</a>
 		«ENDIF»</span>
 	}
@@ -444,11 +459,11 @@
 	}
 «ENDDEFINE»</span>
 
-<span class="oaw " title="50 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 443:DEFINE queuedDomainObjectStore FOR model::DomainAttributeInstance)"><a name="queuedDomainObjectStore.html">«DEFINE queuedDomainObjectStore FOR model::DomainAttributeInstance»</a>
+<span class="oaw " title="10 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 443:DEFINE queuedDomainObjectStore FOR model::DomainAttributeInstance)"><a name="queuedDomainObjectStore.html">«DEFINE queuedDomainObjectStore FOR model::DomainAttributeInstance»</a>
 	save_queued_store_domain_attribute_«safeNameString(id)-»(); /* attribute "«safeNameString(name)-»" */
 «ENDDEFINE»</span>
 
-<span class="oaw " title="20 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 447:DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-)"><a name="setNewDomainObject.html">«DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»</a>
+<span class="oaw " title="4 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 447:DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-)"><a name="setNewDomainObject.html">«DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»</a>
 	// it should already be created, or this will create a new one
 	$existing = get_new_domain_object_«safeName()-»(true);	/* force creation */
 	$new_id = $existing["id"];
@@ -470,7 +485,7 @@
 	log_message("attribute '$attribute_name' set to '$arg0'");
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="106 steps in OAW 9 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 469:DEFINE evaluateSelectWireStore FOR model::wires::SelectWire)"><a name="evaluateSelectWireStore.html">«DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»</a>
+<span class="oaw " title="22 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 469:DEFINE evaluateSelectWireStore FOR model::wires::SelectWire)"><a name="evaluateSelectWireStore.html">«DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»</a>
 	/* selection wire «this» (for storing values), assumes $arg0 exists */
 	
 	// where are we loading it from? sets $db
@@ -492,11 +507,11 @@
 «ENDDEFINE»</span>
 
 /** to find the relevant domain attribute set method */
-<span class="oaw php " title="82 steps in OAW 16 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 491:DEFINE findSetDomainAttributeMethod FOR model::InternetApplication)"><a name="findSetDomainAttributeMethod.html">«DEFINE findSetDomainAttributeMethod FOR model::InternetApplication»</a> 
+<span class="oaw " title="19 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 491:DEFINE findSetDomainAttributeMethod FOR model::InternetApplication)"><a name="findSetDomainAttributeMethod.html">«DEFINE findSetDomainAttributeMethod FOR model::InternetApplication»</a> 
 	<a href="#findDomainAttribute.html">«EXPAND findDomainAttribute FOREACH getAllDomainAttributeInstances()»</a>
 «ENDDEFINE»</span>
 
-<span class="oaw php " title="28 steps in OAW 16 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 495:DEFINE findDomainAttribute FOR model::DomainAttributeInstance)"><a name="findDomainAttribute.html">«DEFINE findDomainAttribute FOR model::DomainAttributeInstance»</a>
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 495:DEFINE findDomainAttribute FOR model::DomainAttributeInstance)"><a name="findDomainAttribute.html">«DEFINE findDomainAttribute FOR model::DomainAttributeInstance»</a>
 	if ($id == "«safeNameString(id)-»") {
 		store_domain_attribute_«safeNameString(id)-»($arg0);
 		log_message("set_application_value.php: succeeded");
@@ -506,4 +521,7 @@
 «ENDDEFINE»</span>
 
 <span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\php\DomainInstance.xpt: 504:DEFINE exception FOR Object)"><a name="exception.html">«DEFINE exception FOR Object»</a>
-«ENDDEFINE»</span></pre></p></html>
+«ENDDEFINE»</span></pre></p>
+
+</body>
+</html>

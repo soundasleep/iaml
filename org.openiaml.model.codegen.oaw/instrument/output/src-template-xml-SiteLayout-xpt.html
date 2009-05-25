@@ -1,6 +1,21 @@
-<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}pre{background:#eee;border:1px solid #666;}</style><body><h1>C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\xml\SiteLayout.xpt</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Coverage: SiteLayout.xpt</title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
 
-<a href="index.html">Summary</a><ul><li class="none">no execution</li><li class="oaw">OAW execution</li><li class="php">PHP execution</li></ul>
+<h1>SiteLayout.xpt</h1>
+
+<a href="index.html">Summary</a>
+
+<ul id="legend">
+	<li class="none">Never executed</li>
+	<li class="oaw">Generated output</li>
+	<li class="php">Executed on server (PHP)</li>
+	<li class="js">Executed on client (Javascript)</li>
+</ul>
 
 <p><pre>«IMPORT iaml»
 
@@ -10,7 +25,7 @@
  * Currently we only generate really basic XML; that is,
  * we recurse over all &lt;children&gt; in the site.
  */
-<span class="oaw " title="82 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\xml\SiteLayout.xpt: 9:DEFINE siteLayout FOR model::InternetApplication-)"><a name="siteLayout.html">«DEFINE siteLayout FOR model::InternetApplication-»</a>
+<span class="oaw " title="42 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\xml\SiteLayout.xpt: 9:DEFINE siteLayout FOR model::InternetApplication-)"><a name="siteLayout.html">«DEFINE siteLayout FOR model::InternetApplication-»</a>
 &lt;?xml version="1.0"?&gt;
 &lt;iaml:InternetApplication xmi:version="2.0" 
 	xmlns:xmi="http://www.omg.org/XMI" 
@@ -24,13 +39,13 @@
 &lt;/iaml:InternetApplication&gt;
 «ENDDEFINE»</span>
 
-<span class="oaw " title="27 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\xml\SiteLayout.xpt: 23:DEFINE siteLayoutChildren FOR model::ApplicationElement)"><a name="siteLayoutChildren.html">«DEFINE siteLayoutChildren FOR model::ApplicationElement»</a>
+<span class="oaw " title="16 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\xml\SiteLayout.xpt: 23:DEFINE siteLayoutChildren FOR model::ApplicationElement)"><a name="siteLayoutChildren.html">«DEFINE siteLayoutChildren FOR model::ApplicationElement»</a>
 &lt;children id="«id-»" name="«name-»"&gt;
 	&lt;!-- empty --&gt;
 &lt;/children&gt;
 «ENDDEFINE»</span>
 
-<span class="oaw " title="313 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\xml\SiteLayout.xpt: 29:DEFINE siteLayoutChildren FOR model::ApplicationElementContainer)"><a name="siteLayoutChildren.html">«DEFINE siteLayoutChildren FOR model::ApplicationElementContainer»</a>
+<span class="oaw " title="178 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\xml\SiteLayout.xpt: 29:DEFINE siteLayoutChildren FOR model::ApplicationElementContainer)"><a name="siteLayoutChildren.html">«DEFINE siteLayoutChildren FOR model::ApplicationElementContainer»</a>
 &lt;children id="«id-»" name="«name-»"&gt;
 	<a href="#siteLayoutChildren.html">«EXPAND siteLayoutChildren FOREACH children»</a>
 &lt;/children&gt;
@@ -38,4 +53,7 @@
 
 <span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\xml\SiteLayout.xpt: 35:DEFINE exception FOR Object)"><a name="exception.html">«DEFINE exception FOR Object»</a>
 «ENDDEFINE»</span>
-</pre></p></html>
+</pre></p>
+
+</body>
+</html>

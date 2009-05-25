@@ -28,7 +28,7 @@ public class OutputCoveredCode {
 		File templatesDir = new File("src/template");
 		File outputDir = new File("instrument/output");
 
-		InstrumentOawCode ia = new InstrumentOawCode();
+		CodeCoverageWriter ia = new CodeCoverageWriter();
 		ia.outputCoveredCode(oawDump, phpDump, jsDump, templatesDir, outputDir);
 	}
 

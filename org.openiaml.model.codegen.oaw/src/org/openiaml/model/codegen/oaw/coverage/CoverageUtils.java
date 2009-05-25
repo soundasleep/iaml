@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,6 +116,27 @@ public class CoverageUtils {
 			current = pos + 1;
 			count++;
 		}
+	}
+
+	/**
+	 * Read in an InputStream into a string.
+	 * 
+	 * @param openStream
+	 * @return
+	 * @throws IOException if an IO exception occurs
+	 */
+	public static String readFile(InputStream reader) throws IOException {
+        int bufSize = 128;
+        StringBuffer sb = new StringBuffer(bufSize);
+                        
+        byte[] chars = new byte[bufSize];
+        int numRead = 0;
+        while ((numRead = reader.read(chars)) > -1) {
+                sb.append(String.valueOf(chars).substring(0, numRead)); 
+        }
+        
+        reader.close();
+        return sb.toString();
 	}
 
 }

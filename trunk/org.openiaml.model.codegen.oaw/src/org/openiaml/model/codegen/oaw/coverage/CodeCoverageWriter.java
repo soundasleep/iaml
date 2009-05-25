@@ -5,6 +5,7 @@ package org.openiaml.model.codegen.oaw.coverage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -149,11 +150,16 @@ public class CodeCoverageWriter {
 		
 		// write a summary
 		String templateOut = outputDir.getAbsolutePath() + File.separator + "index.html";
-		outputSummary(summaries, templateOut); 
+		outputSummary(summaries, templateOut);
+		
+		// write a stylesheet
+		String stylesheet = outputDir.getAbsolutePath() + File.separator + "default.css";
+		System.out.println("Writing stylesheet '" + stylesheet + "'...");
+		CoverageUtils.writeFile(new File(stylesheet), loadTemplate("default.css"));
 	}
 
 	/**
-	 * Get the HTML filename result for the given xpt template file.
+	 * Get the HTML filename result for the given .xpt template file.
 	 * 
 	 * @param template
 	 * @return
@@ -179,25 +185,28 @@ public class CodeCoverageWriter {
 		for (OutputSummary summary : summaries) {
 			html += "<tr><th><a href=\"" + escapeHtmlQuotes(summary.getDestination().getName()) + "\">" + escapeHtml(formatTemplateName(summary.getTemplate())) + "</a></th>\n";
 			{
-				double ratio = summary.getCoveredOaw() / (1.0 * summary.getBlocks());
-				double ratio2 = summary.getCoveredPhp() / (1.0 * summary.getBlocks());
-				double ratio3 = summary.getCoveredJs() / (1.0 * summary.getBlocks());
-				html += "<td>" + formatNumber(summary.getCoveredOaw()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio * 100) + "%) </td>\n";
-				html += "<td>" + formatNumber(summary.getCoveredPhp()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio2 * 100) + "%) </td>\n";
-				html += "<td>" + formatNumber(summary.getCoveredJs()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio3 * 100) + "%) </td>\n";
-				html += "<td style=\"border:1px solid #ccc;margin:0;padding:0;background:#f33;\">";
-				html += "<div style=\"width:" + Math.floor((barWidth * ratio2)) + "px;background:#3f3;height:1.3em;display:inline-block;\"></div>";
-				html += "<div style=\"width:" + Math.floor((barWidth * (ratio - ratio2))) + "px;background:#ff3;height:1.3em;display:inline-block;\"></div>";
-				html += "<div style=\"width:" + Math.floor((barWidth * (1.0-ratio))) + "px;background:#f33;height:1.3em;display:inline-block;\"></div>";
+				double ratio_oaw = summary.getCoveredOaw() / (1.0 * summary.getBlocks());
+				double ratio_php = summary.getCoveredPhp() / (1.0 * summary.getBlocks());
+				double ratio_js = summary.getCoveredJs() / (1.0 * summary.getBlocks());
+				html += "<td>" + formatNumber(summary.getCoveredOaw()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio_oaw * 100) + "%) </td>\n";
+				html += "<td>" + formatNumber(summary.getCoveredPhp()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio_php * 100) + "%) </td>\n";
+				html += "<td>" + formatNumber(summary.getCoveredJs()) + " / " + formatNumber(summary.getBlocks()) + " (" + formatNumber(ratio_js * 100) + "%) </td>\n";
+				html += "<td class=\"bar\">";
+				html += "<div class=\"bar-oaw\" style=\"width:" + Math.floor((barWidth * ratio_oaw)) + "px;\"></div>";
+				html += "<div class=\"bar-php\" style=\"width:" + Math.floor((barWidth * ratio_php)) + "px;\"></div>";
+				html += "<div class=\"bar-js\" style=\"width:" + Math.floor((barWidth * ratio_js)) + "px;\"></div>";
+				//html += "<div class=\"bar-none\" style=\"width:" + Math.floor((barWidth * (1.0-ratio_oaw))) + "px;\"></div>";
 				html += "</td>\n";
 			}
 			html += "</tr>\n";
 		}
 		
-		html = "<html><style>body,html,th,td{font-family:Arial;}</style><body><h1>Summary</h1>\n\n<table><tr><th>Template</th><th>OAW</th><th>PHP</th><th>JS</th><th width=\"" + barWidth + "\">%</th></tr>\n" + html + "</table></html>";
+		String output = loadTemplate("index.html");
+		output = output.replace("{content}", html);
+		output = output.replace("{barWidth}", "" + barWidth);
 		
 		System.out.println("Writing summary '" + templateOut + "'...");
-		CoverageUtils.writeFile(new File(templateOut), html);
+		CoverageUtils.writeFile(new File(templateOut), output);
 	}
 
 	/**
@@ -263,15 +272,42 @@ public class CodeCoverageWriter {
 		
 		// create <a> links to template files
 		html = replaceLinks(template, html, template.getAbsolutePath());
-		
-		// TODO load this from actual file
-		html = "<html><style>body,html,th,td{font-family:Arial;}.none{background:#fcc;}.oaw{background:#ffc;}.php{color:green;}.js{font-style:italic;}pre{background:#eee;border:1px solid #666;}</style><body><h1>" + template + "</h1>\n\n<a href=\"index.html\">Summary</a><ul><li class=\"none\">no execution</li><li class=\"oaw\">OAW execution</li><li class=\"php\">PHP execution</li><li class=\"js\">Javascript execution</li></ul>\n\n<p><pre>" + html + "</pre></p></html>";
+
+		// load a template file to insert this information into
+		String output = loadTemplate("template.html");
+		output = output.replace("{content}", html);
+		output = output.replace("{template-name}", template.getName());
 		
 		System.out.println("Writing file '" + file + "'...");
-		CoverageUtils.writeFile(file, html);
+		CoverageUtils.writeFile(file, output);
 		
 		return os;
 		
+	}
+
+	/**
+	 * Load a template file.
+	 * 
+	 * @param filename
+	 * @return
+	 * @throws IOException if the template could not be found, or read
+	 */
+	protected String loadTemplate(String filename) throws IOException {
+		String res = "src/org/openiaml/model/codegen/oaw/coverage/templates/" + filename;
+
+		// try the classloader (within eclipse)
+		URL url = getClass().getClassLoader().getResource(res);
+		if (url == null) {
+			// try loading by file directly (from command line)
+			File f = new File(res);
+			if (f.exists()) {
+				return CoverageUtils.readFile(f);
+			} else {
+				throw new IOException("Could not find resource '" + res + "'");
+			}
+		}
+		
+		return CoverageUtils.readFile(url.openStream());
 	}
 
 	/**

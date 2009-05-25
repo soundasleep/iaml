@@ -31,6 +31,6 @@ ul#legend li {
 
 td.bar{border:1px solid black;margin:0;padding:0;background:#c66;height:32px;vertical-align:top;}
 div.bar-oaw{background:#ccc;height:10px;display:inline-block;position:absolute;margin-top:0px;}
-div.bar-php{background:#fc3;height:10px;display:inline-block;position:absolute;margin-top:10px;}
+div.bar-php{background:#ff0;height:10px;display:inline-block;position:absolute;margin-top:10px;}
 div.bar-js{background:#3f3;height:10px;display:inline-block;position:absolute;margin-top:20px;}
 div.bar-none{display:none;}

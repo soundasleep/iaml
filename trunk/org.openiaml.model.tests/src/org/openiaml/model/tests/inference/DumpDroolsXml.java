@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -64,6 +65,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * Generates:
 	 * <pre>
 	 * RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+	 * 
      * &lt;statement&gt;
      *   &lt;assignment&gt;
      *     &lt;set-variable name="rw" type="RunInstanceWire" /&gt;
@@ -78,6 +80,7 @@ public class DumpDroolsXml extends InferenceTestCase {
      * &lt;/statement&gt;
      * 
      * rw.setName("run");
+     * 
      * &lt;statement&gt;
      *   &lt;variable name="rw"&gt;
      *    &lt;method name="insert"&gt;
@@ -89,6 +92,7 @@ public class DumpDroolsXml extends InferenceTestCase {
      * &lt;/statement&gt;
      * 
      * insert(rw);
+     * 
      * &lt;statement&gt;
      *   &lt;method name="insert"&gt;
      *    &lt;argument-list&gt;
@@ -182,7 +186,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			Element assignment = document.createElement("assignment");
 			line.appendChild(assignment);
 			
-			String[] elements = equals[0].trim().split("[ \r\n\t]+");
+			String[] elements = equals[0].trim().split("\\s+");
 			Element setVariable = document.createElement("set-variable");
 			if (elements.length == 2) {
 				// typed variable
@@ -193,7 +197,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				setVariable.setAttribute("name", elements[0]);
 			} else { 
 				// who knows
-				throw new RuntimeException("Found more than one part of the equals left hand side '" + javaLine + "'");
+				throw new RuntimeException("Found more than one part of the equals left hand side '" + javaLine + "': " + equals[0] + " (found " + elements.length + " elements: " + Arrays.toString(elements) + ")");
 			}
 			assignment.appendChild(setVariable);
 			
@@ -457,11 +461,20 @@ public class DumpDroolsXml extends InferenceTestCase {
 	
 		Set<LogicRule> allRules = new HashSet<LogicRule>();
 		
+		boolean foundTestRule = false;
 		for (String f : results.keySet()) {
 			
 			String name = f.substring(f.lastIndexOf("/"));
 			IFile out = project.getFile(name + ".xml");
 
+			if (f.toLowerCase().contains("dynamic-sources")) {
+				// TODO we need to allow for if (a...) { b... } syntax
+				// OR we need to modify the rule source to not use this 
+				// syntax directly
+				System.out.println("Skipping drools rule file: " + f);
+				continue;
+			}
+			
 			// who knows what format XmlDump is supplied in?
 			// we will assume UTF-8 as the dumped XML is UTF-8
 			InputStream source = new ByteArrayInputStream(results.get(f).getBytes("UTF-8")); 
@@ -486,6 +499,19 @@ public class DumpDroolsXml extends InferenceTestCase {
 				
 				// lets create the statements here
 				parseJava(document, originalNode.getParentNode(), sourceCode);
+				
+				// find the rule node
+				Element ruleNode = (Element) rhs.getParentNode();
+				assertEquals(ruleNode.getNodeName(), "rule");
+				
+				/**
+				 * Our new paper wants to generate the factory graph/k-graph
+				 * of the rule. Here we make sure that it parses ok.
+				 */
+				if (ruleNode.getAttribute("name").equals("Create empty domain store")) {
+					myTestSampleRule(ruleNode);
+					foundTestRule = true;
+				}
 			}
 			
 			// work out the logic formula defined by each rule
@@ -496,7 +522,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 			saveDocument(document, out.getLocation().toFile());
 
 		}
-		
+
+		assertTrue("Never found and parsed the test rule", foundTestRule);
+
 		// output out the rules in a prolog format
 		outputPrologStratification(allRules);
 		
@@ -509,6 +537,40 @@ public class DumpDroolsXml extends InferenceTestCase {
 		refreshProject();
 	}
 	
+	/**
+	 * Test the parsing for factory graph/k-graph of the given rule
+	 * "Create empty domain store".
+	 * 
+	 * @param ruleNode
+	 */
+	private void myTestSampleRule(Element ruleNode) {
+		// sanity checks
+		assertEquals(ruleNode.getNodeName(), "rule");
+		assertEquals(ruleNode.getAttribute("name"), "Create empty domain store");
+		
+		String[] result = parseSampleRule(ruleNode);
+		assertEquals(result.length, 2);
+		String r1 = "DomainStore(f(a)), containedIn(f(a), a), name(f(a), \"test domain store\") <- InternetApplication(a), name(a, \"test\"), \neg L1(a).";
+		assertEquals(r1, result[0]);
+		String r2 = "L1(a) <- DomainStore(x), name(x, \"test domain store\"), containedIn(x, a).";
+		assertEquals(r2, result[1]);
+	}
+
+	/**
+	 * Parse the rule to get a set of logic-style outputs.
+	 * 
+	 * TODO actually implement
+	 * 
+	 * @param ruleNode
+	 * @return
+	 */
+	private String[] parseSampleRule(Element ruleNode) {
+		return new String[] {
+			"todo",
+			"todo"
+		};
+	}
+
 	/**
 	 * Create a graph of the stratification rules, and check for
 	 * any cycles.

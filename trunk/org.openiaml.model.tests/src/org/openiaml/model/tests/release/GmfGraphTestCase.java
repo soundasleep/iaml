@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
-import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -44,7 +44,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testAllLabelsAreInRoot() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		IterableNodeList nl = xpath(gmfgraph, "//descriptors/actualFigure/children");
+		IterableElementList nl = xpath(gmfgraph, "//descriptors/actualFigure/children");
 		
 		assertNotSame("We should have at least one label node", nl.getLength(), 0);
 		for (Element child : nl) {
@@ -72,7 +72,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testAllNodesAndLinks() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		IterableNodeList nl = xpath(gmfgraph, "/Canvas/figures/descriptors");
+		IterableElementList nl = xpath(gmfgraph, "/Canvas/figures/descriptors");
 		
 		assertNotSame("We should have at least one node", nl.getLength(), 0);
 		for (Element child : nl) {
@@ -101,7 +101,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testRootLabelAccessors() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		IterableNodeList nl = xpath(gmfgraph, "//labels[@accessor]");
+		IterableElementList nl = xpath(gmfgraph, "//labels[@accessor]");
 		
 		assertNotSame("We should have at least one label node", nl.getLength(), 0);
 		for (Element child : nl) {
@@ -130,7 +130,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testUniqueDescriptors() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		IterableNodeList nl = xpath(gmfgraph, "/Canvas/figures/descriptors");
+		IterableElementList nl = xpath(gmfgraph, "/Canvas/figures/descriptors");
 		
 		assertNotSame("We should have at least one descriptor node", nl.getLength(), 0);
 		Set<String> found = new HashSet<String>();
@@ -149,7 +149,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testUniqueNodes() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		IterableNodeList nl = xpath(gmfgraph, "/Canvas/nodes");
+		IterableElementList nl = xpath(gmfgraph, "/Canvas/nodes");
 		
 		assertNotSame("We should have at least one node node", nl.getLength(), 0);
 		Set<String> found = new HashSet<String>();
@@ -168,7 +168,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testUniqueConnections() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		IterableNodeList nl = xpath(gmfgraph, "/Canvas/connections");
+		IterableElementList nl = xpath(gmfgraph, "/Canvas/connections");
 		
 		assertNotSame("We should have at least one connection node", nl.getLength(), 0);
 		Set<String> found = new HashSet<String>();
@@ -187,7 +187,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	public void testUniqueLabels() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		IterableNodeList nl = xpath(gmfgraph, "/Canvas/labels");
+		IterableElementList nl = xpath(gmfgraph, "/Canvas/labels");
 		
 		assertNotSame("We should have at least one label node", nl.getLength(), 0);
 		Set<String> found = new HashSet<String>();

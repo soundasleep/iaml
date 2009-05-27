@@ -13,7 +13,7 @@ import java.util.Properties;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.openiaml.model.tests.XmlTestCase;
-import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -89,7 +89,7 @@ public class PluginsTestCase extends XmlTestCase {
 		
 		// lets find the first one
 		Document doc = firstDocument(loadedGmfgens);
-		IterableNodeList nodes = xpath(doc, "//diagram/containsShortcutsTo");
+		IterableElementList nodes = xpath(doc, "//diagram/containsShortcutsTo");
 		for (Element node : nodes) {
 			String value = node.getFirstChild().getNodeValue();
 			if (!shortcuts.contains(value))
@@ -186,7 +186,7 @@ public class PluginsTestCase extends XmlTestCase {
 		// now test them all
 		for (String file : loadedGmfgens.keySet()) {
 			Document doc = loadedGmfgens.get(file);
-			IterableNodeList nodes = xpath(doc, "//diagram/containsShortcutsTo");
+			IterableElementList nodes = xpath(doc, "//diagram/containsShortcutsTo");
 			assertEquals(nodes.getLength(), shortcuts.size());
 			for (Element node : nodes) {
 				String value = node.getFirstChild().getNodeValue();
@@ -215,7 +215,7 @@ public class PluginsTestCase extends XmlTestCase {
 		// now test them all
 		for (String file : loadedGmfgens.keySet()) {
 			Document doc = loadedGmfgens.get(file);
-			IterableNodeList nodes = xpath(doc, "//diagram/shortcutsProvidedFor");
+			IterableElementList nodes = xpath(doc, "//diagram/shortcutsProvidedFor");
 			assertEquals(nodes.getLength(), shortcuts.size());
 			for (Element node : nodes) {
 				String value = node.getFirstChild().getNodeValue();
@@ -297,10 +297,10 @@ public class PluginsTestCase extends XmlTestCase {
 			DiagramUniqueness du = new DiagramUniqueness();
 			
 			// get all top level nodes
-			IterableNodeList nodes = xpath(doc, "//diagram/topLevelNodes");
+			IterableElementList nodes = xpath(doc, "//diagram/topLevelNodes");
 			
 			for (Element node : nodes) {
-				IterableNodeList behaviours = xpath(node, "behaviour");
+				IterableElementList behaviours = xpath(node, "behaviour");
 				for (Element b : behaviours) {
 					// assume each Behaviour is an OpenDiagramPolicy
 					// (since we can't get xsi:type from xpath)

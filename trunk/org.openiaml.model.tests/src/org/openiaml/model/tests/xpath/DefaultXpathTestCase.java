@@ -25,12 +25,12 @@ public class DefaultXpathTestCase extends TestCase implements XpathTestCase {
 	/**
 	 * Apply an XPath query to an XML document.
 	 */
-	public IterableNodeList xpath(Node doc, String query) throws XPathExpressionException {
+	public IterableElementList xpath(Node doc, String query) throws XPathExpressionException {
 		XPathFactory factory = XPathFactory.newInstance();
 		XPath xpath = factory.newXPath();
 		XPathExpression expr = xpath.compile(query);
 		NodeList result = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-		return new IterableNodeList(result);
+		return new IterableElementList(result);
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class DefaultXpathTestCase extends TestCase implements XpathTestCase {
 	 */
 	public Element hasXpathFirst(Element e, String query) throws XPathExpressionException {
 		assertNotNull("Cannot find the xpath for a null element", e);
-		IterableNodeList nl = xpath(e, query);
+		IterableElementList nl = xpath(e, query);
 		if (nl.getLength() == 1) {
 			return (Element) nl.item(0);
 		}
@@ -74,7 +74,7 @@ public class DefaultXpathTestCase extends TestCase implements XpathTestCase {
 	 */
 	public Element hasXpathFirst(Document e, String query) throws XPathExpressionException {
 		assertNotNull("Cannot find the xpath for a null element", e);
-		IterableNodeList nl = xpath(e, query);
+		IterableElementList nl = xpath(e, query);
 		if (nl.getLength() == 1) {
 			return (Element) nl.item(0);
 		}

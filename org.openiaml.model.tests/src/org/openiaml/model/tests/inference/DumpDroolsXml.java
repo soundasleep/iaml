@@ -729,6 +729,24 @@ public class DumpDroolsXml extends InferenceTestCase {
 			head.add(f);
 		}
 		
+		if (e.getNodeName().equals("or-constraint-connective")) {
+			// wrap in an <or>
+			// first, get the contents
+			Set<Function> foundTerms = new LinkedHashSet<Function>();
+			for (Element e2 : new IterableElementList(e.getChildNodes())) {
+				parseNodeSide(e2, foundTerms, currentVariable, factoryFunctionMap);
+			}
+			if (foundTerms.isEmpty()) {
+				throw new TermParseException("Parsed an <or> but did not expect no elements contained within");
+			}
+			// now add a new <or>
+			Or or = new Or();
+			or.addAll(foundTerms);
+			head.add(or);
+			// don't re-parse contents
+			return;
+		}
+		
 		if (e.getNodeName().equals("field-constraint")) {
 			String fieldName = e.getAttribute("field-name");
 			// we want to find out what the comparison is
@@ -1398,6 +1416,33 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		public String toString() {
 			return "not(" + DumpDroolsXml.toString(contents) + ")";
+		}
+	}
+	
+	/**
+	 * 'or(...)' 
+	 */
+	public class Or extends LazyEquals implements Function {
+		private Set<Function> contents = new LinkedHashSet<Function>();
+		public Or() {
+		}
+
+		public void addAll(Set<Function> foundTerms) {
+			for (Function f : foundTerms) {
+				contents.add(f);
+			}
+		}
+
+		public Set<Function> getContents() {
+			return contents;
+		}
+
+		public void add(Function t) {
+			contents.add(t);
+		}
+
+		public String toString() {
+			return "or(" + DumpDroolsXml.toString(contents) + ")";
 		}
 	}
 	

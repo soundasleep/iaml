@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -560,7 +561,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			assertEquals(2, result.length);
 			String r2 = "L0(a) <- DomainStore(x), name(x, \"test domain store\"), containedIn(x, a)";
 			assertEquals(r2, result[0]);
-			String r1 = "DomainStore(f(a)), containedIn(f(a), a), name(f(a), \"test domain store\") <- InternetApplication(a), name(a, \"test\"), not(L0(a))";
+			String r1 = "DomainStore(f(a)), generatedBy(f(a), a), containedIn(f(a), a), name(f(a), \"test domain store\") <- InternetApplication(a), name(a, \"test\"), not(L0(a))";
 			assertEquals(r1, result[1]);
 		} catch (AssertionFailedError e) {
 			// print out the contents of the list
@@ -644,7 +645,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return terms;
 	}
 	
-	private void parseNodeSide(Element e, List<Function> head) throws TermParseException {
+	private void parseNodeSide(Element e, Set<Function> head) throws TermParseException {
 		try {
 			parseNodeSide(e, head, null, new HashMap<String, FactoryFunction>());
 		} catch (XPathExpressionException e1) {
@@ -661,7 +662,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @throws TermParseException 
 	 * @throws XPathExpressionException 
 	 */
-	private void parseNodeSide(Element e, List<Function> head, Variable currentVariable,
+	private void parseNodeSide(Element e, Set<Function> head, Variable currentVariable,
 			Map<String, FactoryFunction> factoryFunctionMap) throws TermParseException, XPathExpressionException {
 		// this element
 		if (e.getNodeName().equals("pattern")) {
@@ -1046,7 +1047,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (a instanceof NotExists) {
 					NotExists ne = (NotExists) a;
 					// how many other variables are used in this NotExists?
-					Set<FunctionTerm> otherVariables = new HashSet<FunctionTerm>();
+					Set<FunctionTerm> otherVariables = new LinkedHashSet<FunctionTerm>();
 					for (Function b : ne.getContents()) {
 						if (b instanceof SingleFunction) {
 							FunctionTerm c = ((SingleFunction) b).getFunctionTerm();							
@@ -1097,7 +1098,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	}
 
 	public interface FunctionTerm {
-		
+
 	}
 	public interface Function {
 		
@@ -1105,19 +1106,32 @@ public class DumpDroolsXml extends InferenceTestCase {
 	public interface Variable extends FunctionTerm {
 		
 	}
+	
+	public abstract class LazyEquals {
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null)
+				return false;
+			return toString().equals(obj.toString());
+		}
+		@Override
+		public int hashCode() {
+			return toString().hashCode();
+		}
+	}
 
-	public class InferredTerm {
+	public class InferredTerm extends LazyEquals {
 
-		private List<Function> head = new ArrayList<Function>();
-		private List<Function> body = new ArrayList<Function>();
+		private Set<Function> head = new LinkedHashSet<Function>();
+		private Set<Function> body = new LinkedHashSet<Function>();
 		
-		public List<Function> getHead() {
+		public Set<Function> getHead() {
 			return head;
 		}
 		public boolean isEmpty() {
 			return head.isEmpty() && body.isEmpty();
 		}
-		public List<Function> getBody() {
+		public Set<Function> getBody() {
 			return body;
 		}
 		
@@ -1134,6 +1148,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 					return DumpDroolsXml.toString(head) + " <- " + DumpDroolsXml.toString(body);
 		}
 
+
 	}
 
 	/**
@@ -1141,7 +1156,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @param head2
 	 * @return
 	 */
-	public static String toString(List<?> variables) {
+	public static String toString(Set<?> variables) {
 		boolean isFirst = true;
 		String result = "";
 		for (Object f : variables) {
@@ -1156,7 +1171,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'name(variable)'
 	 */
-	public class SingleFunction implements Function {
+	public class SingleFunction extends LazyEquals implements Function {
 
 		private String name;
 		private FunctionTerm variable;
@@ -1177,8 +1192,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'not(...)' 
 	 */
-	public class Not implements Function {
-		private List<Function> contents = new ArrayList<Function>();
+	public class Not extends LazyEquals implements Function {
+		private Set<Function> contents = new LinkedHashSet<Function>();
 		public Not() {
 		}
 
@@ -1194,19 +1209,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'name(v1, v2, ...)' or 'name'
 	 */
-	public class VariableFunction implements Function {
+	public class VariableFunction extends LazyEquals implements Function {
 		private String name;
-		private List<FunctionTerm> variables;
-		public VariableFunction(String string, List<FunctionTerm> variable) {
+		private Set<FunctionTerm> variables;
+		public VariableFunction(String string, Set<FunctionTerm> variable) {
 			this.name = string;
 			this.variables = variable;
-		}
-		public VariableFunction(String string, Set<FunctionTerm> variable) {
-			variables = new ArrayList<FunctionTerm>();
-			for (FunctionTerm f : variable) {
-				variables.add(f);
-			}
-			this.name = string;
 		}
 
 		public String toString() {
@@ -1220,7 +1228,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'a'
 	 */
-	public class NormalVariable implements FunctionTerm, Variable {
+	public class NormalVariable extends LazyEquals implements FunctionTerm, Variable {
 
 		private String name;
 		public NormalVariable(String string) {
@@ -1268,7 +1276,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * '"test"' 
 	 */
-	public class StringLiteral implements FunctionTerm, Variable {
+	public class StringLiteral extends LazyEquals implements FunctionTerm, Variable {
 
 		private String value;
 		public StringLiteral(String value) {
@@ -1283,7 +1291,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'f(a)' 
 	 */
-	public class FactoryFunction implements FunctionTerm, Variable {
+	public class FactoryFunction extends LazyEquals implements FunctionTerm, Variable {
 		private NormalVariable variable;
 		public FactoryFunction(NormalVariable string) {
 			this.variable = string;
@@ -1297,7 +1305,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'notExists(x : ...)'
 	 */
-	public class NotExists implements Function {
+	public class NotExists extends LazyEquals implements Function {
 
 		private NormalVariable variable;
 		public NotExists(NormalVariable v) {
@@ -1311,11 +1319,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return variable;
 		}
 
-		public List<Function> getContents() {
+		public Set<Function> getContents() {
 			return body;
 		}
 
-		private List<Function> body = new ArrayList<Function>();
+		private Set<Function> body = new LinkedHashSet<Function>();
 		public void add(Function linked) {
 			body.add(linked);
 		}
@@ -1329,7 +1337,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'name(a, b)' 
 	 */
-	public class DoubleFunction implements Function {
+	public class DoubleFunction extends LazyEquals implements Function {
 		private String name;
 		private FunctionTerm variable;
 		private FunctionTerm variable2;
@@ -1364,8 +1372,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 		t.getBody().add(ds);
 		assertEquals("DomainStore(f(a)) <- DomainStore(f(a))", t.toString());
 
+		// its a HashSet so additional identical terms do nothing
 		t.getHead().add(ds);
-		assertEquals("DomainStore(f(a)), DomainStore(f(a)) <- DomainStore(f(a))", t.toString());
+		assertEquals("DomainStore(f(a)) <- DomainStore(f(a))", t.toString());
 	}
 	
 	/**
@@ -1404,7 +1413,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		List<StratReason> reasonGt = new ArrayList<StratReason>();
 		List<StratReason> reasonGtEq = new ArrayList<StratReason>();
 		
-		Set<String> sources = new HashSet<String>();
+		Set<String> sources = new LinkedHashSet<String>();
 		
 		// first, create the graph
 		for (LogicRule r : allRules) {
@@ -1616,7 +1625,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		pl.append("\n");
 		
 		// now we create a rule which will specify all the strat values
-		Set<String> allUnique = new HashSet<String>();
+		Set<String> allUnique = new LinkedHashSet<String>();
 		for (LogicRule r : allRules) {
 			allUnique.addAll(uniqueElementsInRule(r));
 		}
@@ -1671,7 +1680,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * head and body of this rule. 
 	 */
 	private Set<String> uniqueElementsInRule(LogicRule r) {
-		Set<String> s = new HashSet<String>();
+		Set<String> s = new LinkedHashSet<String>();
 		for (LogicElement e : r.head) {
 			if (e instanceof LogicTerm) {
 				s.add(((LogicTerm) e).name);

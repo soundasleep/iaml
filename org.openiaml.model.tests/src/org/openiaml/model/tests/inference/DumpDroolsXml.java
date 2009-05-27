@@ -32,6 +32,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPathExpressionException;
 
 import junit.framework.AssertionFailedError;
 
@@ -44,6 +45,7 @@ import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
@@ -59,6 +61,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		super.setUp();		// set up project
 		
 		identifierCount = -1;		// reset identifier count
+		existsIdentifierCount = 0;
 	}
 	
 	/**
@@ -554,11 +557,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 		String[] result = parseSampleRule(ruleNode);
 		try {
-			assertEquals(result.length, 2);
-			String r1 = "DomainStore(f(a)), containedIn(f(a), a), name(f(a), \"test domain store\") <- InternetApplication(a), name(a, \"test\"), \neg L1(a).";
-			assertEquals(r1, result[0]);
-			String r2 = "L1(a) <- DomainStore(x), name(x, \"test domain store\"), containedIn(x, a).";
-			assertEquals(r2, result[1]);
+			assertEquals(2, result.length);
+			String r2 = "L0(a) <- DomainStore(x), name(x, \"test domain store\"), containedIn(x, a)";
+			assertEquals(r2, result[0]);
+			String r1 = "DomainStore(f(a)), containedIn(f(a), a), name(f(a), \"test domain store\") <- InternetApplication(a), name(a, \"test\"), not(L0(a))";
+			assertEquals(r1, result[1]);
 		} catch (AssertionFailedError e) {
 			// print out the contents of the list
 			for (String r : result) {
@@ -579,8 +582,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 */
 	private String[] parseSampleRule(Element ruleNode) throws TermParseException {
 		List<InferredTerm> terms = parseInferredTerms(ruleNode);
+		
+		// now, remove <not exists> from the list of terms
+		List<InferredTerm> resolved = removeNotExists(terms);
+		
 		List<String> result = new ArrayList<String>();
-		for (InferredTerm t : terms) {
+		for (InferredTerm t : resolved) {
 			result.add(t.toString());
 		}
 		return result.toArray(new String[0]);
@@ -616,8 +623,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 			throw new TermParseException("Root rule node name must be 'rule', found '" + ruleNode.getNodeName() + "'");
 		}
 		
+		InferredTerm t = new InferredTerm();
+		// if there are multiple <rhs><lhs> (unexpected), they will be merged together
 		for (Element e : new IterableElementList(ruleNode.getChildNodes())) {
-			InferredTerm t = new InferredTerm();
 			if (e.getNodeName().equals("rhs")) {
 				// head of the rule
 				parseNodeSide(e, t.getHead());
@@ -627,19 +635,21 @@ public class DumpDroolsXml extends InferenceTestCase {
 			} else {
 				throw new TermParseException("Unexpected child of <rule> node: " + e);
 			}
-			// ignore empty terms
-			if (!t.isEmpty()) {
-				terms.add(t);
-			}
 		}
-
-		// parse the lhs
+		// ignore empty terms
+		if (!t.isEmpty()) {
+			terms.add(t);
+		}
 		
 		return terms;
 	}
 	
 	private void parseNodeSide(Element e, List<Function> head) throws TermParseException {
-		parseNodeSide(e, head, null);
+		try {
+			parseNodeSide(e, head, null, new HashMap<String, FactoryFunction>());
+		} catch (XPathExpressionException e1) {
+			throw new TermParseException(e1);
+		}
 	}
 	
 	/**
@@ -649,22 +659,44 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @param e
 	 * @param head
 	 * @throws TermParseException 
+	 * @throws XPathExpressionException 
 	 */
-	private void parseNodeSide(Element e, List<Function> head, Variable currentVariable) throws TermParseException {
+	private void parseNodeSide(Element e, List<Function> head, Variable currentVariable,
+			Map<String, FactoryFunction> factoryFunctionMap) throws TermParseException, XPathExpressionException {
 		// this element
 		if (e.getNodeName().equals("pattern")) {
 			String identifier = e.getAttribute("identifier");
 			String type = e.getAttribute("object-type");
-			Variable v = new Variable(identifier);
+			NormalVariable v = new NormalVariable(identifier);
 			Function f = new SingleFunction(type, v);
 			head.add(f);
 			currentVariable = v;		// save the current variable
+		}
+		
+		if (e.getNodeName().equals("from")) {
+			Element expression = xpathFirst(e, "expression");
+			String expr = getTextInNode(expression);
+			if (expr == null)
+				throw new TermParseException("Did not expect null expression for <from>: " + expression);
+			if (expr.isEmpty())
+				throw new TermParseException("Did not expect empty expression for <from>: " + expression);
+			
+			// split up on '.'
+			String[] bits = expr.trim().split("\\.");
+			if (bits.length != 2) {
+				throw new TermParseException("Expected exactly 'a.b' format from <from> expression, found: '" + expr + "'");
+			}
+			// the first part will be a variable
+			NormalVariable fromVar = new NormalVariable(bits[0]);
+			DoubleFunction f = new DoubleFunction("containedIn", currentVariable, fromVar);
+			head.add(f);
 		}
 		
 		if (e.getNodeName().equals("field-constraint")) {
 			String fieldName = e.getAttribute("field-name");
 			// we want to find out what the comparison is
 			IterableElementList literalRestrictions = new IterableElementList(e.getElementsByTagName("literal-restriction"));
+			IterableElementList variableRestrictions = new IterableElementList(e.getElementsByTagName("variable-restriction"));
 			if (!literalRestrictions.isEmpty()) {
 				if (literalRestrictions.size() != 1) {
 					throw new TermParseException("Did not expect more than 1 literal restriction, found: " + literalRestrictions);
@@ -675,6 +707,23 @@ public class DumpDroolsXml extends InferenceTestCase {
 				StringLiteral literalValue = new StringLiteral(value);
 				if (evaluator.equals("==")) {
 					Function f = new DoubleFunction(fieldName, currentVariable, literalValue);
+					head.add(f);
+				}
+			} else if (!variableRestrictions.isEmpty()) {
+				if (variableRestrictions.size() != 1) {
+					throw new TermParseException("Did not expect more than 1 variable restriction, found: " + variableRestrictions);
+				}
+				Element var = (Element) variableRestrictions.item(0);
+				String evaluator = var.getAttribute("evaluator");
+				String identifier = var.getAttribute("value");
+				Variable comparedTo = new NormalVariable(identifier);
+				if (evaluator.equals("==")) {
+					Function f;
+					if (fieldName.equals("eContainer")) {
+						f = new DoubleFunction("containedIn", currentVariable, comparedTo);
+					} else {
+						f = new DoubleFunction(fieldName, currentVariable, comparedTo);
+					}
 					head.add(f);
 				}
 			} else {
@@ -695,7 +744,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (identifier.isEmpty())
 					identifier = newIdentifier();	// x, x0, x1, ... 
 
-				Variable v = new Variable(identifier);
+				NormalVariable v = new NormalVariable(identifier);
 				Function f = new SingleFunction(type, v);
 				
 				NotExists ne = new NotExists(v);
@@ -703,7 +752,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				head.add(ne);
 				// add additional constraints
 				for (Element ee : new IterableElementList(pattern.getChildNodes())) {
-					parseNodeSide(ee, ne.getContents(), v);
+					parseNodeSide(ee, ne.getContents(), v, factoryFunctionMap);
 				}
 			} else {
 				throw new TermParseException("Expected a <not> term to contain at least one <pattern>: " + e);
@@ -711,11 +760,124 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// don't parse children
 			return;
 		}
+		
+		if (e.getNodeName().equals("statement")) {
+			// is this a handler.generatedXXX?
+			IterableElementList generated = xpath(e, "assignment[set-variable]/statement/variable[@name='handler']/method[contains(@name, 'generated')]");
+			System.out.println("generated = " + generated);
+			if (!generated.isEmpty()) {
+				if (generated.size() != 1) {
+					throw new TermParseException("Did not expect more than one generated method, found: " + generated);
+				}
+				Element generateMethod = generated.item(0);
+				// we found it!
+				// find the type of the assignment
+				Element setVariable = xpathFirst(e, "assignment/set-variable");
+				String type = setVariable.getAttribute("type");
+				String variableName = setVariable.getAttribute("name");
+				
+				// how many arguments do we have?
+				IterableElementList args = xpath(generateMethod, "argument-list/variable-argument");
+				if (args.size() == 2) {
+					// if 2, it is just contained
+					String generatedBy = args.item(0).getAttribute("name");
+					String containedIn = args.item(1).getAttribute("name");
+					
+					// DomainStore(f(a))
+					NormalVariable vGeneratedBy = new NormalVariable(generatedBy);
+					FactoryFunction gfunction = new FactoryFunction(vGeneratedBy);
+					SingleFunction typeCreation = new SingleFunction(type, gfunction);
+					head.add(typeCreation);
+					
+					// generatedBy(f(a))
+					DoubleFunction gbyf = new DoubleFunction("generatedBy", gfunction, vGeneratedBy);
+					head.add(gbyf);
+					
+					// containedIn(f(a), a)
+					NormalVariable containedInV = new NormalVariable(containedIn);
+					DoubleFunction cinf = new DoubleFunction("containedIn", gfunction, containedInV);
+					head.add(cinf);
+					
+					// add this function to the map
+					factoryFunctionMap.put(variableName, gfunction);
+				} else if (args.size() == 4) {
+					// if 4, it is contained and linked
+					throw new TermParseException("Cannot yet handle linked arguments: " + generated + ", args = " + args);
+					
+				} else {
+					throw new TermParseException("Expected 2 or 4 arguments for 'generated' method, found " + args.size() + ": " + args);
+				}
+				
+				// don't parse children
+				return;
+			}
+		}
+		
+		if (e.getNodeName().equals("statement")) {
+			// does this have a variable?
+			IterableElementList variables = xpath(e, "variable");
+			if (variables.size() == 1) {
+				Element variable = variables.item(0);
+				String varName = variable.getAttribute("name");
+				
+				// is this in the mapping of generator functions?
+				Variable resolved;
+				if (factoryFunctionMap.containsKey(varName)) {
+					resolved = factoryFunctionMap.get(varName);
+				} else {
+					// its a different variable
+					resolved = new NormalVariable(varName);
+				}
+				
+				currentVariable = resolved;
 
+			} else if (variables.size() > 1) {
+				throw new TermParseException("Did not expect multiple variables for <statement>; found: " + variables);
+			}
+		}
+
+		if (e.getNodeName().equals("method")) {
+			// we should be operating on a current variable
+			String methodName = e.getAttribute("name");
+			if (methodName.equals("setName")) {
+				// there should be one argument
+				Element arg = xpathFirst(e, "argument-list/string-argument");
+				Variable resArg;
+				if (arg.getNodeName().equals("string-argument")) {
+					resArg = new StringLiteral(arg.getAttribute("value"));
+				} else {
+					throw new TermParseException("Not sure what to do with an argument of type " + arg);
+				}
+				// name(f(a), 'foo')
+				DoubleFunction f = new DoubleFunction("name", currentVariable, resArg);
+				head.add(f);
+			} else if (methodName.equals("insert")) {
+				// ignore insert and do not process children
+				return;
+			}
+		}
+		
 		// then children
 		for (Element inside : new IterableElementList(e.getChildNodes())) {
-			parseNodeSide(inside, head, currentVariable);
+			parseNodeSide(inside, head, currentVariable, factoryFunctionMap);
 		}
+	}
+
+	/**
+	 * Get the text within the given element.
+	 * 
+	 * @param expression
+	 * @return
+	 */
+	protected String getTextInNode(Element expression) {
+		String out = "";
+		NodeList nl = expression.getChildNodes();
+		for (int i = 0; i < nl.getLength(); i++) {
+			if (nl.item(i) instanceof Text) {
+				out += ((Text) nl.item(i)).getData();
+			}
+		}
+		return out;
 	}
 
 	/**
@@ -732,7 +894,23 @@ public class DumpDroolsXml extends InferenceTestCase {
 		assertEquals(1, list.size());
 		assertEquals("<- InternetApplication(a), name(a, \"test\")", list.get(0).toString());
 	}
-	
+
+
+	/**
+	 * Test the inferred terms parsing directly.
+	 * 
+	 * @return
+	 */
+	public void testParseInferredTermFrom() throws Exception {
+		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><pattern identifier=\"a\" object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint><from><expression>b.domainStores</expression></from></pattern></lhs></rule>");
+		Element root = (Element) d.getElementsByTagName("rule").item(0);
+		assertEquals(root.getNodeName(), "rule");
+		
+		List<InferredTerm> list = parseInferredTerms(root);
+		assertEquals(1, list.size());
+		assertEquals("<- InternetApplication(a), name(a, \"test\"), containedIn(a, b)", list.get(0).toString());
+	}
+
 	/**
 	 * Test the inferred terms parsing directly.
 	 * 
@@ -748,10 +926,183 @@ public class DumpDroolsXml extends InferenceTestCase {
 		assertEquals("<- notExists(x : InternetApplication(x), name(x, \"test\"))", list.get(0).toString());
 	}
 	
+	/**
+	 * Test the inferred terms parsing directly.
+	 * 
+	 * @return
+	 */
+	public void testParseInferredTermRhs() throws Exception {
+		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><rhs><source>kittens</source><statement><assignment><set-variable name=\"ds\" type=\"DomainStore\" /><statement><variable name=\"handler\"><method name=\"generatedDomainStore\"><argument-list><variable-argument name=\"a\" /><variable-argument name=\"a\" /></argument-list></method></variable></statement></assignment></statement></rhs></rule>");
+		Element root = (Element) d.getElementsByTagName("rule").item(0);
+		assertEquals(root.getNodeName(), "rule");
+		
+		List<InferredTerm> list = parseInferredTerms(root);
+		assertEquals(1, list.size());
+		assertEquals("DomainStore(f(a)), generatedBy(f(a), a), containedIn(f(a), a) <-", list.get(0).toString());
+	}
+	
+	/**
+	 * Test the inferred terms parsing directly.
+	 * 
+	 * @return
+	 */
+	public void testParseInferredTermRhs2() throws Exception {
+		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><rhs><source>kittens</source><statement><assignment><set-variable name=\"ds\" type=\"DomainStore\" /><statement><variable name=\"handler\"><method name=\"generatedDomainStore\"><argument-list><variable-argument name=\"a\" /><variable-argument name=\"a\" /></argument-list></method></variable></statement></assignment></statement><statement><variable name=\"ds\"><method name=\"setName\"><argument-list><string-argument value=\"test domain store\" /></argument-list></method></variable></statement></rhs></rule>");
+		Element root = (Element) d.getElementsByTagName("rule").item(0);
+		assertEquals(root.getNodeName(), "rule");
+		
+		List<InferredTerm> list = parseInferredTerms(root);
+		assertEquals(1, list.size());
+		assertEquals("DomainStore(f(a)), generatedBy(f(a), a), containedIn(f(a), a), name(f(a), \"test domain store\") <-", list.get(0).toString());
+	}
+
+	/**
+	 * Test the inferred terms parsing directly.
+	 * 
+	 * @return
+	 */
+	public void testParseInferredTermRhsIgnoresInsert() throws Exception {
+		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><rhs><source>kittens</source><statement><assignment><set-variable name=\"ds\" type=\"DomainStore\" /><statement><variable name=\"handler\"><method name=\"generatedDomainStore\"><argument-list><variable-argument name=\"a\" /><variable-argument name=\"a\" /></argument-list></method></variable></statement></assignment></statement><statement><variable name=\"ds\"><method name=\"setName\"><argument-list><string-argument value=\"test domain store\" /></argument-list></method></variable></statement><statement><method name=\"insert\"><argument-list><variable-argument name=\"ds\" /></argument-list></method></statement></rhs></rule>");
+		Element root = (Element) d.getElementsByTagName("rule").item(0);
+		assertEquals(root.getNodeName(), "rule");
+		
+		List<InferredTerm> list = parseInferredTerms(root);
+		assertEquals(1, list.size());
+		assertEquals("DomainStore(f(a)), generatedBy(f(a), a), containedIn(f(a), a), name(f(a), \"test domain store\") <-", list.get(0).toString());
+	}
+
+	public void testRemovingNotExists() throws Exception {
+		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><not><pattern object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint></pattern></not></lhs></rule>");
+		Element root = (Element) d.getElementsByTagName("rule").item(0);
+		assertEquals(root.getNodeName(), "rule");
+		
+		List<InferredTerm> list = parseInferredTerms(root);
+		assertEquals(1, list.size());
+		assertEquals("<- notExists(x : InternetApplication(x), name(x, \"test\"))", list.get(0).toString());
+		
+		// when we remove not exists, we should get two results
+		List<InferredTerm> resolved = removeNotExists(list);
+		assertEquals(2, resolved.size());
+		assertEquals("L0 <- InternetApplication(x), name(x, \"test\")", resolved.get(0).toString());
+		assertEquals("<- not(L0)", resolved.get(1).toString());
+
+	}
+
+	public void testRemovingNotExistsWithBindings() throws Exception {
+		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><not><pattern object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><variable-restriction evaluator=\"==\" value=\"a\" /></field-constraint></pattern></not></lhs></rule>");
+		Element root = (Element) d.getElementsByTagName("rule").item(0);
+		assertEquals(root.getNodeName(), "rule");
+		
+		List<InferredTerm> list = parseInferredTerms(root);
+		assertEquals(1, list.size());
+		assertEquals("<- notExists(x : InternetApplication(x), name(x, a))", list.get(0).toString());
+		
+		// when we remove not exists, we should get two results
+		List<InferredTerm> resolved = removeNotExists(list);
+		assertEquals(2, resolved.size());
+		assertEquals("L0(a) <- InternetApplication(x), name(x, a)", resolved.get(0).toString());
+		assertEquals("<- not(L0(a))", resolved.get(1).toString());
+
+	}
+
+	public void testRemovingNotExistsWithTypedBindings() throws Exception {
+		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><pattern identifier=\"a\" object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint></pattern><not><pattern object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><variable-restriction evaluator=\"==\" value=\"a\" /></field-constraint></pattern></not></lhs></rule>");
+		Element root = (Element) d.getElementsByTagName("rule").item(0);
+		assertEquals(root.getNodeName(), "rule");
+		
+		List<InferredTerm> list = parseInferredTerms(root);
+		assertEquals(1, list.size());
+		assertEquals("<- InternetApplication(a), name(a, \"test\"), notExists(x : InternetApplication(x), name(x, a))", list.get(0).toString());
+		
+		// when we remove not exists, we should get two results
+		List<InferredTerm> resolved = removeNotExists(list);
+		assertEquals(2, resolved.size());
+		assertEquals("L0(a) <- InternetApplication(x), name(x, a)", resolved.get(0).toString());
+		assertEquals("<- InternetApplication(a), name(a, \"test\"), not(L0(a))", resolved.get(1).toString());
+
+	}
+	
+	/**
+	 * Resolve any terms of 'notExists(x : foo(x))' in the body of rules
+	 * by adding another term 'L1(...) <- foo(x)', and replacing the 
+	 * original term with 'not(L1)'
+	 * 
+	 * @param list
+	 * @return
+	 * @throws TermParseException 
+	 */
+	protected List<InferredTerm> removeNotExists(List<InferredTerm> list) throws TermParseException {
+		List<InferredTerm> result = new ArrayList<InferredTerm>();
+		
+		for (InferredTerm term : list) {
+			// copy head over without change
+			InferredTerm nt = new InferredTerm();
+			for (Function a : term.getHead()) {
+				nt.getHead().add(a);
+			}
+			// copy over body except for NotExists
+			for (Function a : term.getBody()) {
+				// is this a NotExists?
+				if (a instanceof NotExists) {
+					NotExists ne = (NotExists) a;
+					// how many other variables are used in this NotExists?
+					Set<FunctionTerm> otherVariables = new HashSet<FunctionTerm>();
+					for (Function b : ne.getContents()) {
+						if (b instanceof SingleFunction) {
+							FunctionTerm c = ((SingleFunction) b).getFunctionTerm();							
+							if (c instanceof NormalVariable && !ne.getFunctionTerm().equals(c)) {
+								// a different variable
+								otherVariables.add(c);
+							}
+						} else if (b instanceof DoubleFunction) {
+							FunctionTerm c1 = ((DoubleFunction) b).getFunctionTerm1();
+							FunctionTerm c2 = ((DoubleFunction) b).getFunctionTerm2();
+							if (c1 instanceof NormalVariable && !ne.getFunctionTerm().equals(c1)) {
+								// a different variable
+								otherVariables.add(c1);
+							}
+							if (c2 instanceof NormalVariable && !ne.getFunctionTerm().equals(c2)) {
+								// a different variable
+								otherVariables.add(c2);
+							}
+						} else {
+							throw new TermParseException("Unexpected function type in NotExists: " + b);
+						}
+					}
+					// create a new function L1 for these other variables
+					String functionName = newExistsIdentifier();
+					VariableFunction lf = new VariableFunction(functionName, otherVariables);
+					// wrap it with a not
+					Not not = new Not();
+					not.add(lf);
+					// use L1 instead of notExists(...)
+					nt.getBody().add(not);
+					
+					// add this L1 definition to the result
+					InferredTerm ldef = new InferredTerm();
+					ldef.getHead().add(lf);
+					for (Function b : ne.getContents()) {
+						ldef.getBody().add(b);
+					}
+					result.add(ldef);
+				} else {
+					// add as normal
+					nt.getBody().add(a);
+				}
+			}
+			result.add(nt);
+		}
+		
+		return result;
+	}
+
 	public interface FunctionTerm {
 		
 	}
 	public interface Function {
+		
+	}
+	public interface Variable extends FunctionTerm {
 		
 	}
 
@@ -790,10 +1141,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @param head2
 	 * @return
 	 */
-	public static String toString(List<Function> h) {
+	public static String toString(List<?> variables) {
 		boolean isFirst = true;
 		String result = "";
-		for (Function f : h) {
+		for (Object f : variables) {
 			if (!isFirst)
 				result += ", ";
 			result += f.toString();
@@ -802,6 +1153,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return result;
 	}
 		
+	/**
+	 * 'name(variable)'
+	 */
 	public class SingleFunction implements Function {
 
 		private String name;
@@ -811,15 +1165,65 @@ public class DumpDroolsXml extends InferenceTestCase {
 			this.variable = variable;
 		}
 		
+		public FunctionTerm getFunctionTerm() {
+			return variable;
+		}
+
 		public String toString() {
 			return name + "(" + variable + ")";
 		}
 	}
 	
-	public class Variable implements FunctionTerm {
+	/**
+	 * 'not(...)' 
+	 */
+	public class Not implements Function {
+		private List<Function> contents = new ArrayList<Function>();
+		public Not() {
+		}
+
+		public void add(Function t) {
+			contents.add(t);
+		}
+
+		public String toString() {
+			return "not(" + DumpDroolsXml.toString(contents) + ")";
+		}
+	}
+	
+	/**
+	 * 'name(v1, v2, ...)' or 'name'
+	 */
+	public class VariableFunction implements Function {
+		private String name;
+		private List<FunctionTerm> variables;
+		public VariableFunction(String string, List<FunctionTerm> variable) {
+			this.name = string;
+			this.variables = variable;
+		}
+		public VariableFunction(String string, Set<FunctionTerm> variable) {
+			variables = new ArrayList<FunctionTerm>();
+			for (FunctionTerm f : variable) {
+				variables.add(f);
+			}
+			this.name = string;
+		}
+
+		public String toString() {
+			if (variables.size() == 0)
+				return name;
+			else		
+				return name + "(" + DumpDroolsXml.toString(variables) + ")";
+		}	
+	}
+	
+	/**
+	 * 'a'
+	 */
+	public class NormalVariable implements FunctionTerm, Variable {
 
 		private String name;
-		public Variable(String string) {
+		public NormalVariable(String string) {
 			this.name = string;
 		}
 
@@ -847,7 +1251,24 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return result;
 	}
 	
-	public class StringLiteral implements FunctionTerm {
+	private static int existsIdentifierCount = 0;
+	/**
+	 * Create a new identifier. Returns elements in
+	 * [L0, L1, L2, ...]
+	 * 
+	 * @return
+	 */
+	public static String newExistsIdentifier() {
+		String result;
+		result = "L" + existsIdentifierCount;
+		existsIdentifierCount++;
+		return result;
+	}
+	
+	/**
+	 * '"test"' 
+	 */
+	public class StringLiteral implements FunctionTerm, Variable {
 
 		private String value;
 		public StringLiteral(String value) {
@@ -859,9 +1280,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 	}
 	
-	public class FactoryFunction implements FunctionTerm {
-		private Variable variable;
-		public FactoryFunction(Variable string) {
+	/**
+	 * 'f(a)' 
+	 */
+	public class FactoryFunction implements FunctionTerm, Variable {
+		private NormalVariable variable;
+		public FactoryFunction(NormalVariable string) {
 			this.variable = string;
 		}
 		public String toString() {
@@ -870,13 +1294,23 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 	}
 	
+	/**
+	 * 'notExists(x : ...)'
+	 */
 	public class NotExists implements Function {
 
-		private Variable variable;
-		public NotExists(Variable v) {
+		private NormalVariable variable;
+		public NotExists(NormalVariable v) {
 			this.variable = v;
 		}
 		
+		/**
+		 * @return
+		 */
+		public FunctionTerm getFunctionTerm() {
+			return variable;
+		}
+
 		public List<Function> getContents() {
 			return body;
 		}
@@ -892,14 +1326,23 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 	}
 	
+	/**
+	 * 'name(a, b)' 
+	 */
 	public class DoubleFunction implements Function {
 		private String name;
 		private FunctionTerm variable;
 		private FunctionTerm variable2;
-		public DoubleFunction(String string, FunctionTerm variable, FunctionTerm v2) {
+		public DoubleFunction(String string, FunctionTerm currentVariable, FunctionTerm v2) {
 			this.name = string;
-			this.variable = variable;
+			this.variable = currentVariable;
 			this.variable2 = v2;
+		}
+		public FunctionTerm getFunctionTerm2() {
+			return variable2;
+		}
+		public FunctionTerm getFunctionTerm1() {
+			return variable;
 		}
 		public String toString() {
 			return name + "(" + variable + ", " + variable2 + ")";
@@ -912,7 +1355,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 */
 	public void testTermToStringFactoryFunction() {
 		InferredTerm t = new InferredTerm();
-		Variable a = new Variable("a");
+		NormalVariable a = new NormalVariable("a");
 		FactoryFunction fa = new FactoryFunction(a);
 		SingleFunction ds = new SingleFunction("DomainStore", fa);
 		t.getHead().add(ds);
@@ -931,8 +1374,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 */
 	public void testTermToStringNotExists() {
 		InferredTerm t = new InferredTerm();
-		Variable a = new Variable("a");
-		Variable x = new Variable("x");
+		NormalVariable a = new NormalVariable("a");
+		NormalVariable x = new NormalVariable("x");
 		NotExists nb = new NotExists(x);
 		SingleFunction ia = new SingleFunction("InternetApplication", x);
 		nb.add(ia);

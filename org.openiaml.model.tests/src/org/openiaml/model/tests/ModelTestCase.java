@@ -30,7 +30,7 @@ import org.eclipse.core.runtime.Status;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
-import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.IterableElementList;
 import org.openiaml.model.tests.xpath.XpathTestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -405,7 +405,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 * @see org.openiaml.model.tests.xpath.XpathTestCase#xpath(org.w3c.dom.Node, java.lang.String)
 	 */
 	@Override
-	public IterableNodeList xpath(Node doc, String query)
+	public IterableElementList xpath(Node doc, String query)
 			throws XPathExpressionException {
 		return xpath.xpath(doc, query);
 	}

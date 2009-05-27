@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
-import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -75,12 +75,12 @@ public class GmfToolTestCase extends XmlTestCase {
 		for (String file : loaded.keySet()) {
 			boolean changed = false;
 			Document doc = loaded.get(file);
-			IterableNodeList nl = xpath(doc, "//palette/tools");
+			IterableElementList nl = xpath(doc, "//palette/tools");
 			
 			assertEquals("There should be exactly one //tools entry", nl.getLength(), 1);
 			Element root = (Element) nl.item(0);
 			
-			IterableNodeList tools = xpath(root, "tools");
+			IterableElementList tools = xpath(root, "tools");
 			assertNotSame("There should be at least one subtool entry", tools.getLength(), 0);
 			
 			for (int i = 0; i < tools.getLength(); i++) {
@@ -144,13 +144,13 @@ public class GmfToolTestCase extends XmlTestCase {
 			Document gmftool = loaded.get(filename);
 			Document gmfmap = loadGmfmap(filename);
 			
-			IterableNodeList tools = xpath(gmftool, "/ToolRegistry/palette/tools/tools");
+			IterableElementList tools = xpath(gmftool, "/ToolRegistry/palette/tools/tools");
 			for (Element tool : tools) {
 				// EventTrigger
 				String toolName = tool.getAttribute("title");
 				
 				// should match either a node..
-				IterableNodeList matches = xpath(gmfmap, "/Mapping/nodes/ownedChild/domainMetaElement[contains(@href, '" + toolName + "')]");
+				IterableElementList matches = xpath(gmfmap, "/Mapping/nodes/ownedChild/domainMetaElement[contains(@href, '" + toolName + "')]");
 				boolean matched = false;
 				for (Element match : matches) {
 					String href = match.getAttribute("href");
@@ -161,7 +161,7 @@ public class GmfToolTestCase extends XmlTestCase {
 				}
 
 				// or a link
-				IterableNodeList matches2 = xpath(gmfmap, "/Mapping/links/domainMetaElement[contains(@href, '" + toolName + "')]");
+				IterableElementList matches2 = xpath(gmfmap, "/Mapping/links/domainMetaElement[contains(@href, '" + toolName + "')]");
 				for (Element match : matches2) {
 					String href = match.getAttribute("href");
 					if (href.endsWith(toolName)) {

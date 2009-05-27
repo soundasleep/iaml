@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.tests.model.ModelTestCase;
-import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -78,12 +78,12 @@ public class GmfGenTestCase extends XmlTestCase {
 		for (String filename : getGmfGens().keySet()) {
 			Document doc = getGmfGens().get(filename);
 			
-			IterableNodeList nodes = xpath(doc, "/GenEditorGenerator/diagram/topLevelNodes");
+			IterableElementList nodes = xpath(doc, "/GenEditorGenerator/diagram/topLevelNodes");
 			assertFalse(filename + ": No nodes found", nodes.isEmpty());
 			
 			for (Element node : nodes) {
 				// directly contained OpenDiagramPolicies
-				IterableNodeList opens = xpath(node, "behaviour");
+				IterableElementList opens = xpath(node, "behaviour");
 				boolean foundOpen = false;
 				for (Element open : opens) {
 					if (open.getAttribute("xsi:type").equals("gmfgen:OpenDiagramBehaviour")) {
@@ -93,11 +93,11 @@ public class GmfGenTestCase extends XmlTestCase {
 				}
 			}
 
-			IterableNodeList links = xpath(doc, "/GenEditorGenerator/diagram/links");
+			IterableElementList links = xpath(doc, "/GenEditorGenerator/diagram/links");
 			assertFalse(filename + ": No links found", links.isEmpty());
 			for (Element link : links) {
 				// directly contained OpenDiagramPolicies
-				IterableNodeList opens = xpath(link, "behaviour");
+				IterableElementList opens = xpath(link, "behaviour");
 				boolean foundOpen = false;
 				for (Element open : opens) {
 					if (open.getAttribute("xsi:type").equals("gmfgen:OpenDiagramBehaviour")) {
@@ -120,7 +120,7 @@ public class GmfGenTestCase extends XmlTestCase {
 			Document doc = getGmfGens().get(filename);
 			
 			// will do both links and nodes
-			IterableNodeList labels = xpath(doc, "//labels[@readOnly='true']");
+			IterableElementList labels = xpath(doc, "//labels[@readOnly='true']");
 			assertFalse(filename + ": No read-only labels found", labels.isEmpty());
 			
 			for (Element label : labels) {
@@ -154,14 +154,14 @@ public class GmfGenTestCase extends XmlTestCase {
 			Document doc = getGmfGens().get(filename);
 			
 			// will do both links and nodes
-			IterableNodeList labels = xpath(doc, "//labels[not(@readOnly='true')]");
+			IterableElementList labels = xpath(doc, "//labels[not(@readOnly='true')]");
 			assertFalse(filename + ": No normal labels found", labels.isEmpty());
 			
 			for (Element label : labels) {
 				String labelName = label.getAttribute("editPartClassName");
 				
 				// it cannot have a OpenDiagram behaviour
-				IterableNodeList bh = xpath(label, "behaviour");
+				IterableElementList bh = xpath(label, "behaviour");
 				for (Element b : bh) {
 					assertNotEqual(filename + ": Normal editable label '" + labelName + "' cannot have an OpenDiagram behaviour",
 						b.getAttribute("xsi:type"), "gmfgen:OpenDiagramBehaviour");
@@ -182,14 +182,14 @@ public class GmfGenTestCase extends XmlTestCase {
 			Document doc = getGmfGens().get(filename);
 			
 			// will do both links and nodes
-			IterableNodeList labels = xpath(doc, "//labels");
+			IterableElementList labels = xpath(doc, "//labels");
 			assertFalse(filename + ": No labels found", labels.isEmpty());
 			
 			for (Element label : labels) {
 				String labelName = label.getAttribute("editPartClassName");
 				
 				// iterate over behaviours
-				IterableNodeList beh = xpath(label, "behaviour");
+				IterableElementList beh = xpath(label, "behaviour");
 				for (Element b : beh) {
 					if (b.getAttribute("xsi:type").equals("gmfgen:OpenDiagramBehaviour")) {
 						// the parent must have the same node
@@ -213,7 +213,7 @@ public class GmfGenTestCase extends XmlTestCase {
 		for (String filename : getGmfGens().keySet()) {
 			Document doc = getGmfGens().get(filename);
 			
-			IterableNodeList nodes = xpath(doc, "/GenEditorGenerator/diagram/topLevelNodes");
+			IterableElementList nodes = xpath(doc, "/GenEditorGenerator/diagram/topLevelNodes");
 			nodes.addAll(xpath(doc, "/GenEditorGenerator/diagram/links"));
 			assertFalse(filename + ": No nodes found", nodes.isEmpty());
 			
@@ -223,7 +223,7 @@ public class GmfGenTestCase extends XmlTestCase {
 				// iaml.genmodel#//model/CompositeOperation
 				String metaHref = meta.getAttribute("href");
 				
-				IterableNodeList beh = xpath(node, "behaviour");
+				IterableElementList beh = xpath(node, "behaviour");
 				for (Element b : beh) {
 					if (b.getAttribute("xsi:type").equals("gmfgen:OpenDiagramBehaviour")) {
 						// an OpenDiagram policy
@@ -362,7 +362,7 @@ public class GmfGenTestCase extends XmlTestCase {
 			Document doc = getGmfGens().get(filename);
 			
 			// will do both links and nodes
-			IterableNodeList nodes = xpath(doc, "/GenEditorGenerator/diagram/topLevelNodes");
+			IterableElementList nodes = xpath(doc, "/GenEditorGenerator/diagram/topLevelNodes");
 			nodes.addAll(xpath(doc, "/GenEditorGenerator/diagram/links"));
 			assertFalse(filename + ": No nodes found", nodes.isEmpty());
 			
@@ -380,7 +380,7 @@ public class GmfGenTestCase extends XmlTestCase {
 					// there must be a behaviour for this meta element!
 					boolean found = false;
 					
-					IterableNodeList beh = xpath(node, "behaviour");
+					IterableElementList beh = xpath(node, "behaviour");
 					for (Element b : beh) {
 						if (b.getAttribute("xsi:type").equals("gmfgen:OpenDiagramBehaviour")) {
 							// found it directly
@@ -426,13 +426,13 @@ public class GmfGenTestCase extends XmlTestCase {
 			List<String> policyNames = new ArrayList<String>();
 			
 			// will do both links and nodes
-			IterableNodeList nodes = xpath(doc, "/GenEditorGenerator/diagram/topLevelNodes");
+			IterableElementList nodes = xpath(doc, "/GenEditorGenerator/diagram/topLevelNodes");
 			nodes.addAll(xpath(doc, "/GenEditorGenerator/diagram/links"));
 			assertFalse(filename + ": No nodes found", nodes.isEmpty());
 			
 			for (Element node : nodes) {
 				// does this have a behaviour?
-				IterableNodeList beh = xpath(node, "behaviour");
+				IterableElementList beh = xpath(node, "behaviour");
 				for (Element b : beh) {
 					if (b.getAttribute("xsi:type").equals("gmfgen:OpenDiagramBehaviour")) {
 						String diagramKind = b.getAttribute("diagramKind");

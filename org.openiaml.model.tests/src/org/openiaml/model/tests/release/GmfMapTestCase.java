@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
-import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -80,7 +80,7 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @param loadedContainers containment features found
 	 * @throws Exception
 	 */
-	private void iterateOverNodes(String filename, IterableNodeList nodes, Map<String, List<String>> loadedContainers, String constraintXpath)
+	private void iterateOverNodes(String filename, IterableElementList nodes, Map<String, List<String>> loadedContainers, String constraintXpath)
 			throws Exception {
 		for (Element node : nodes) {
 			// all nodes must be contained somewher
@@ -138,10 +138,10 @@ public class GmfMapTestCase extends XmlTestCase {
 			
 			Document doc = getGmfMaps().get(filename);
 			
-			IterableNodeList nodes = xpath(doc, "/Mapping/nodes");
+			IterableElementList nodes = xpath(doc, "/Mapping/nodes");
 			iterateOverNodes(filename, nodes, loadedContainers, "ownedChild/domainSpecialization");
 
-			IterableNodeList links = xpath(doc, "/Mapping/links");
+			IterableElementList links = xpath(doc, "/Mapping/links");
 			iterateOverNodes(filename, links, loadedContainers, "domainSpecialization");
 			
 		}
@@ -156,7 +156,7 @@ public class GmfMapTestCase extends XmlTestCase {
 		for (String filename : getGmfMaps().keySet()) {
 			Document doc = getGmfMaps().get(filename);
 			
-			IterableNodeList nodes = xpath(doc, "/Mapping/nodes");
+			IterableElementList nodes = xpath(doc, "/Mapping/nodes");
 			for (Element node : nodes) {
 				// all nodes must be contained somewhere
 				Element domainMetaElement = (Element) xpathFirst(node, "ownedChild/domainMetaElement");
@@ -164,7 +164,7 @@ public class GmfMapTestCase extends XmlTestCase {
 				// iaml.ecore#//EventTrigger
 				String elementName = domainMetaElement.getAttribute("href");
 				
-				IterableNodeList labels = xpath(node, "ownedChild/labelMappings");
+				IterableElementList labels = xpath(node, "ownedChild/labelMappings");
 				for (Element label : labels) {
 					Element diagramLabel = (Element) xpathFirst(label, "diagramLabel");
 					
@@ -194,7 +194,7 @@ public class GmfMapTestCase extends XmlTestCase {
 				}
 			}
 			
-			IterableNodeList links = xpath(doc, "/Mapping/links");
+			IterableElementList links = xpath(doc, "/Mapping/links");
 			for (Element link : links) {
 				// all nodes must be contained somewhere
 				Element domainMetaElement = (Element) xpathFirst(link, "domainMetaElement");
@@ -202,7 +202,7 @@ public class GmfMapTestCase extends XmlTestCase {
 				// iaml.ecore#//EventTrigger
 				String elementName = domainMetaElement.getAttribute("href");
 				
-				IterableNodeList labels = xpath(link, "labelMappings");
+				IterableElementList labels = xpath(link, "labelMappings");
 				for (Element label : labels) {
 					Element diagramLabel = (Element) xpathFirst(label, "diagramLabel");
 					

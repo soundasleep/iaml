@@ -20,7 +20,7 @@ public interface XpathTestCase {
 	/**
 	 * Apply an XPath query to an XML document.
 	 */
-	public IterableNodeList xpath(Node doc, String query) throws XPathExpressionException;
+	public IterableElementList xpath(Node doc, String query) throws XPathExpressionException;
 	
 	/**
 	 * Get the first node result from an XPath query.

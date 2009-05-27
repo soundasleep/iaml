@@ -6,7 +6,7 @@ package org.openiaml.model.tests.release;
 import java.util.Map;
 
 import org.openiaml.model.tests.XmlTestCase;
-import org.openiaml.model.tests.xpath.IterableNodeList;
+import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -58,7 +58,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 */
 	public void testAllParents() throws Exception {
 		Document gmfgraph = getGmfgraph();
-		IterableNodeList nl = xpath(gmfgraph, "//actualFigure/children[contains(@name, 'ParentNameFigure')]");
+		IterableElementList nl = xpath(gmfgraph, "//actualFigure/children[contains(@name, 'ParentNameFigure')]");
 		
 		for (Element child : nl) {
 			String childName = child.getAttribute("name");
@@ -156,7 +156,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		for (String filename : getGmfMaps().keySet()) {
 			Document doc = getGmfMaps().get(filename);
 
-			IterableNodeList nodes = xpath(doc, "/Mapping/nodes/ownedChild/labelMappings/diagramLabel[contains(@href, 'ParentName')]");
+			IterableElementList nodes = xpath(doc, "/Mapping/nodes/ownedChild/labelMappings/diagramLabel[contains(@href, 'ParentName')]");
 			for (Element node : nodes) {
 				Element parent = (Element) node.getParentNode();
 				assertEquals(filename + ": ParentName '" + node + "' must be read-only.", parent.getAttribute("readOnly"), "true");

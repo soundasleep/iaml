@@ -587,7 +587,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// (or we could set these ourselves)
 			String r2 = "L[0-9]+\\(a\\) <- DomainStore\\(x[0-9]*\\), name\\(x[0-9]*, \"test domain store\"\\), containedIn\\(x[0-9]*, a\\)";
 			assertStringMatches(r2, result[0]);
-			String r1 = "DomainStore\\(f\\(a\\)\\), generatedBy\\(f\\(a\\), a\\), containedIn\\(f\\(a\\), a\\), name\\(f\\(a\\), \"test domain store\"\\) <- InternetApplication\\(a\\), name\\(a, \"test\"\\), not\\(L[0-9]+\\(a\\)\\)";
+			String r1 = "DomainStore\\(f\\(a, 0\\)\\), generatedBy\\(f\\(a, 0\\), a\\), containedIn\\(f\\(a, 0\\), a\\), name\\(f\\(a, 0\\), \"test domain store\"\\) <- InternetApplication\\(a\\), name\\(a, \"test\"\\), not\\(L[0-9]+\\(a\\)\\)";
 			assertStringMatches(r1, result[1]);
 		} catch (AssertionFailedError e) {
 			// print out the contents of the list
@@ -681,9 +681,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return terms;
 	}
 	
+	private class FactoryIndexTracker {
+		private int current = 0;
+		
+		public int newIndex() {
+			return current++;
+		}
+	}
+	
 	private void parseNodeSide(Element e, Set<Function> head) throws TermParseException {
 		try {
-			parseNodeSide(e, head, null, new HashMap<String, FactoryFunction>());
+			parseNodeSide(e, head, null, new HashMap<String, FactoryFunction>(), new FactoryIndexTracker());
 		} catch (XPathExpressionException e1) {
 			throw new TermParseException(e1);
 		}
@@ -695,11 +703,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * 
 	 * @param e
 	 * @param head
+	 * @param tracker keeps track of indexes for f(x, N)
 	 * @throws TermParseException 
 	 * @throws XPathExpressionException 
 	 */
 	private void parseNodeSide(Element e, Set<Function> head, Variable currentVariable,
-			Map<String, FactoryFunction> factoryFunctionMap) throws TermParseException, XPathExpressionException {
+			Map<String, FactoryFunction> factoryFunctionMap, FactoryIndexTracker tracker) throws TermParseException, XPathExpressionException {
 		// this element
 		if (e.getNodeName().equals("pattern")) {
 			String identifier = e.getAttribute("identifier");
@@ -734,7 +743,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// first, get the contents
 			Set<Function> foundTerms = new LinkedHashSet<Function>();
 			for (Element e2 : new IterableElementList(e.getChildNodes())) {
-				parseNodeSide(e2, foundTerms, currentVariable, factoryFunctionMap);
+				parseNodeSide(e2, foundTerms, currentVariable, factoryFunctionMap, tracker);
 			}
 			if (foundTerms.isEmpty()) {
 				throw new TermParseException("Parsed an <or> but did not expect no elements contained within");
@@ -876,7 +885,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				head.add(ne); 
 				// add additional constraints
 				for (Element ee : new IterableElementList(pattern.getChildNodes())) {
-					parseNodeSide(ee, ne.getContents(), v, factoryFunctionMap);
+					parseNodeSide(ee, ne.getContents(), v, factoryFunctionMap, tracker);
 				}
 			} else {
 				throw new TermParseException("Expected a <not> term to contain at least one <pattern>: " + e);
@@ -911,7 +920,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 					
 					// DomainStore(f(a))
 					NormalVariable vGeneratedBy = new NormalVariable(generatedBy);
-					gfunction = new FactoryFunction(vGeneratedBy);
+					gfunction = new FactoryFunction(vGeneratedBy, tracker.newIndex());
 					SingleFunction typeCreation = new SingleFunction(type, gfunction);
 					head.add(typeCreation);
 					
@@ -998,7 +1007,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 		// then children
 		for (Element inside : new IterableElementList(e.getChildNodes())) {
-			parseNodeSide(inside, head, currentVariable, factoryFunctionMap);
+			parseNodeSide(inside, head, currentVariable, factoryFunctionMap, tracker);
 		}
 	}
 
@@ -1098,7 +1107,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
-		assertEquals("DomainStore(f(a)), generatedBy(f(a), a), containedIn(f(a), a) <-", list.get(0).toString());
+		assertEquals("DomainStore(f(a, 0)), generatedBy(f(a, 0), a), containedIn(f(a, 0), a) <-", list.get(0).toString());
 	}
 	
 	/**
@@ -1113,7 +1122,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
-		assertEquals("DomainStore(f(a)), generatedBy(f(a), a), containedIn(f(a), a), name(f(a), \"test domain store\") <-", list.get(0).toString());
+		assertEquals("DomainStore(f(a, 0)), generatedBy(f(a, 0), a), containedIn(f(a, 0), a), name(f(a, 0), \"test domain store\") <-", list.get(0).toString());
 	}
 
 	/**
@@ -1128,7 +1137,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
-		assertEquals("DomainStore(f(a)), generatedBy(f(a), a), containedIn(f(a), a), name(f(a), \"test domain store\") <-", list.get(0).toString());
+		assertEquals("DomainStore(f(a, 0)), generatedBy(f(a, 0), a), containedIn(f(a, 0), a), name(f(a, 0), \"test domain store\") <-", list.get(0).toString());
 	}
 
 	public void testRemovingNotExists() throws Exception {
@@ -1197,7 +1206,6 @@ public class DumpDroolsXml extends InferenceTestCase {
 		assertEquals("<- InputTextField(f), overridden(f, \"false\"), notExists(x : Operation(x), containedIn(x, f), name(x, \"update\"))", list.get(0).toString());
 	}
 
-
 	/**
 	 * Test the inferred terms parsing directly.
 	 * This one has 'or()' in it.
@@ -1212,6 +1220,26 @@ public class DumpDroolsXml extends InferenceTestCase {
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- CompositeOperation(o), overridden(o, \"false\"), or(name(o, \"update\"), name(o, \"refresh\"), name(o, \"init\")), ApplicationElementProperty(field), containedIn(o, x), containedIn(field, x), name(field, \"fieldValue\")", list.get(0).toString());
+	}
+
+	/**
+	 * Test the inferred terms parsing directly.
+	 * This one has multiple element creations from the same elements.
+	 * 
+	 * @return
+	 */
+	public void testParseDumpDrools3Xml() throws Exception {
+		Document d = loadDocument( ROOT + "inference/DumpDrools3.xml" );
+		Element root = (Element) d.getElementsByTagName("rule").item(0);
+		assertEquals(root.getNodeName(), "rule");
+		
+		List<InferredTerm> list = parseInferredTerms(root);
+		assertEquals(1, list.size());
+		assertEquals("Parameter(f(o, 0)), generatedBy(f(o, 0), o), containedIn(f(o, 0), o), name(f(o, 0), \"setValueTo\"), " + 
+				"Parameter(f(o, 1)), generatedBy(f(o, 1), o), containedIn(f(o, 1), o), name(f(o, 1), \"setValueTo\"), " +
+				"Parameter(f(o, 2)), generatedBy(f(o, 2), o), containedIn(f(o, 2), o), name(f(o, 2), \"setValueTo\"), " +
+				"Parameter(f(o, 3)), generatedBy(f(o, 3), o), containedIn(f(o, 3), o), name(f(o, 3), \"setValueTo\") " +
+				"<- CompositeOperation(o), overridden(o, \"false\"), or(name(o, \"update\"), name(o, \"refresh\"), name(o, \"init\")), ApplicationElementProperty(field), containedIn(o, x), containedIn(field, x), name(field, \"fieldValue\")", list.get(0).toString());
 	}
 
 	/**
@@ -1533,11 +1561,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 */
 	public class FactoryFunction extends LazyEquals implements FunctionTerm, Variable {
 		private NormalVariable variable;
-		public FactoryFunction(NormalVariable string) {
+		private int index;
+		public FactoryFunction(NormalVariable string, int index) {
 			this.variable = string;
+			this.index = index;
 		}
 		public String toString() {
-			return "f(" + variable + ")";
+			return "f(" + variable + ", " + index + ")";
 		}
 		
 	}
@@ -1604,17 +1634,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 	public void testTermToStringFactoryFunction() {
 		InferredTerm t = new InferredTerm();
 		NormalVariable a = new NormalVariable("a");
-		FactoryFunction fa = new FactoryFunction(a);
+		FactoryFunction fa = new FactoryFunction(a, 0);
 		SingleFunction ds = new SingleFunction("DomainStore", fa);
 		t.getHead().add(ds);
-		assertEquals("DomainStore(f(a)) <-", t.toString());
+		assertEquals("DomainStore(f(a, 0)) <-", t.toString());
 		
 		t.getBody().add(ds);
-		assertEquals("DomainStore(f(a)) <- DomainStore(f(a))", t.toString());
+		assertEquals("DomainStore(f(a, 0)) <- DomainStore(f(a, 0))", t.toString());
 
 		// its a HashSet so additional identical terms do nothing
 		t.getHead().add(ds);
-		assertEquals("DomainStore(f(a)) <- DomainStore(f(a))", t.toString());
+		assertEquals("DomainStore(f(a, 0)) <- DomainStore(f(a, 0))", t.toString());
 	}
 	
 	/**

@@ -477,6 +477,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 			IFile outParsed = project.getFile(name + "-parsed.txt");
 			String parsed = "";
 
+			IFile outLatex = project.getFile(name + "-parsed.tex");
+			String latex = "";
+
 			if (f.toLowerCase().contains("dynamic-sources")) {
 				// TODO we need to allow for if (a...) { b... } syntax
 				// OR we need to modify the rule source to not use this 
@@ -525,15 +528,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 				
 				// parse all the rules
 				try {
-					String[] parsedResults = parseSampleRule(ruleNode);
-					for (String s : parsedResults) {
-						parsed += s + "\n";
+					List<InferredTerm> parsedResults = parseSampleRule(ruleNode);
+					for (InferredTerm s : parsedResults) {
+						parsed += s.toString() + "\n";
+						latex += "  \\item $" + s.toLatex() + "$\n";
 					}
 				} catch (TermParseException e) {
 					// write document anyway
 					// out.create(source, true, monitor);
 					saveDocument(document, out.getLocation().toFile());
 					outParsed.create(new StringBufferInputStream(parsed), 
+							true, monitor);
+					outLatex.create(new StringBufferInputStream(latex), 
 							true, monitor);
 					
 					throw new TermParseException("While trying to parse '" + f + "'...: " + e.getMessage(), e);
@@ -550,6 +556,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// write out parsed rules
 			System.out.println("Writing to '" + outParsed + "'...");
 			outParsed.create(new StringBufferInputStream(parsed), 
+					true, monitor);
+			// write out parsed rules
+			System.out.println("Writing to '" + outLatex + "'...");
+			outLatex.create(new StringBufferInputStream(latex), 
 					true, monitor);
 			
 		}
@@ -580,7 +590,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		assertEquals(ruleNode.getNodeName(), "rule");
 		assertEquals(ruleNode.getAttribute("name"), "Create empty domain store");
 		
-		String[] result = parseSampleRule(ruleNode);
+		String[] result = convertToStrings(parseSampleRule(ruleNode));
 		try {
 			assertEquals(2, result.length);
 			// we need to use regexps, because the variable names may have been changed since
@@ -596,6 +606,20 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			throw e;
 		}
+	}
+
+	/**
+	 * Convert a list of rule elements to an array of strings.
+	 * 
+	 * @param t
+	 * @return
+	 */
+	private String[] convertToStrings(List<InferredTerm> r) {
+		String[] s = new String[r.size()];
+		for (int i = 0; i < r.size(); i++) {
+			s[i] = r.get(i).toString();
+		}
+		return s;
 	}
 
 	/**
@@ -617,17 +641,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @return
 	 * @throws TermParseException 
 	 */
-	private String[] parseSampleRule(Element ruleNode) throws TermParseException {
+	private List<InferredTerm> parseSampleRule(Element ruleNode) throws TermParseException {
 		List<InferredTerm> terms = parseInferredTerms(ruleNode);
 		
 		// now, remove <not exists> from the list of terms
 		List<InferredTerm> resolved = removeNotExists(terms);
 		
-		List<String> result = new ArrayList<String>();
-		for (InferredTerm t : resolved) {
-			result.add(t.toString());
-		}
-		return result.toArray(new String[0]);
+		return resolved;
 	}
 	
 	public class TermParseException extends Exception {
@@ -1334,14 +1354,20 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return result;
 	}
 
-	public interface FunctionTerm {
+	public interface Latexable {
+		/**
+		 * Compile the term to a Latex format
+		 */
+		public String toLatex();
+	}
+	public interface FunctionTerm extends Latexable {
 
 	}
-	public interface Function {
+	public interface Function extends Latexable {
 		
 	}
-	public interface Variable extends FunctionTerm {
-		
+	public interface Variable extends FunctionTerm, Latexable {
+
 	}
 	
 	public abstract class LazyEquals {
@@ -1357,7 +1383,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 	}
 
-	public class InferredTerm extends LazyEquals {
+	public class InferredTerm extends LazyEquals implements Latexable {
 
 		private Set<Function> head = new LinkedHashSet<Function>();
 		private Set<Function> body = new LinkedHashSet<Function>();
@@ -1384,7 +1410,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 				else
 					return DumpDroolsXml.toString(head) + " <- " + DumpDroolsXml.toString(body);
 		}
-
+		
+		/**
+		 * Compile the term to a Latex format
+		 */
+		public String toLatex() {
+			return DumpDroolsXml.toLatexAnd(head) + " \\leftarrow " + DumpDroolsXml.toLatexAnd(body);
+		}
 
 	}
 
@@ -1404,7 +1436,64 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 		return result;
 	}
-		
+
+	/**
+	 * Create the format string, in Latex.
+	 * Separate terms with \wedge.
+	 * 
+	 * @param head2
+	 * @return
+	 */
+	public static String toLatexAnd(Set<? extends Latexable> variables) {
+		boolean isFirst = true;
+		String result = "";
+		for (Latexable f : variables) {
+			if (!isFirst)
+				result += " \\wedge ";
+			result += f.toLatex();
+			isFirst = false;
+		}
+		return result;
+	}
+	
+	/**
+	 * Create the format string, in Latex.
+	 * Separate terms with \vee.
+	 * 
+	 * @param head2
+	 * @return
+	 */
+	public static String toLatexOr(Set<? extends Latexable> variables) {
+		boolean isFirst = true;
+		String result = "";
+		for (Latexable f : variables) {
+			if (!isFirst)
+				result += " \\vee ";
+			result += f.toLatex();
+			isFirst = false;
+		}
+		return result;
+	}
+	
+	/**
+	 * Create the format string, in Latex.
+	 * Separate terms with ','.
+	 * 
+	 * @param head2
+	 * @return
+	 */
+	public static String toLatexComma(Set<? extends Latexable> variables) {
+		boolean isFirst = true;
+		String result = "";
+		for (Latexable f : variables) {
+			if (!isFirst)
+				result += ", ";
+			result += f.toLatex();
+			isFirst = false;
+		}
+		return result;
+	}
+	
 	/**
 	 * 'name(variable)'
 	 */
@@ -1423,6 +1512,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		public String toString() {
 			return name + "(" + variable + ")";
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return escapeLatex(name) + "(" + variable.toLatex() + ")";
 		}
 	}
 	
@@ -1444,6 +1541,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		public String toString() {
 			return "not(" + DumpDroolsXml.toString(contents) + ")";
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return "\\neg (" + DumpDroolsXml.toLatexAnd(contents) + ")";
 		}
 	}
 	
@@ -1472,6 +1577,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toString() {
 			return "or(" + DumpDroolsXml.toString(contents) + ")";
 		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return "(" + DumpDroolsXml.toLatexOr(contents) + ")";
+		}
 	}
 	
 	/**
@@ -1490,6 +1603,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 				return name;
 			else		
 				return name + "(" + DumpDroolsXml.toString(variables) + ")";
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return escapeLatex(name) + "(" + DumpDroolsXml.toLatexComma(variables) + ")";
 		}	
 	}
 	
@@ -1505,6 +1626,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		public String toString() {
 			return name;
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return escapeLatex(name);
 		}
 		
 	}
@@ -1527,6 +1656,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return result;
 	}
 	
+	/**
+	 * Escape any special latex contents.
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public String escapeLatex(String name) {
+		return name.replace("-", "\\-").replace("_", "\\_");
+	}
+
 	private static int existsIdentifierCount = 0;
 	/**
 	 * Create a new identifier. Returns elements in
@@ -1553,6 +1692,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toString() {
 			return "\"" + value + "\"";
 		}
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return "\\textrm{\"" + escapeLatex(value) + "\"}";
+		}
 		
 	}
 	
@@ -1568,6 +1714,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 		public String toString() {
 			return "f(" + variable + ", " + index + ")";
+		}
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return "f_{" + index + "}(" + variable.toLatex() + ")";
 		}
 		
 	}
@@ -1601,6 +1754,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toString() {
 			return "notExists(" + variable + " : " + DumpDroolsXml.toString(body) + ")";
 		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return "(\\neg \\exists " + variable.toLatex() + " : " + DumpDroolsXml.toLatexAnd(body) + ")"; 
+		}
 		
 	}
 	
@@ -1624,6 +1785,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 		public String toString() {
 			return name + "(" + variable + ", " + variable2 + ")";
+		}
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.Latexable#toLatex()
+		 */
+		@Override
+		public String toLatex() {
+			return escapeLatex(name) + "(" + variable.toLatex() + ", " + variable2.toLatex() + ")";
 		}
 	}
 	

@@ -30,6 +30,16 @@ public abstract class DijkstraAlgorithm<T> {
 	protected abstract Collection<T> getEdges();
 	
 	/**
+	 * Allows abstract supertypes to extend getInternalEdges() while
+	 * leaving getEdges() abstract.
+	 * 
+	 * @return
+	 */
+	protected Collection<T> getInternalEdges() {
+		return getEdges();
+	}
+	
+	/**
 	 * Get the shortest path distance between source and target.
 	 * Returns -1 if no path can be found.
 	 * The last path found is stored in {@link #getLastPath()}.
@@ -44,7 +54,7 @@ public abstract class DijkstraAlgorithm<T> {
 		Map<T, T> previous = new HashMap<T, T>();
 		
 		// initialise
-		for (T c : getEdges()) {
+		for (T c : getInternalEdges()) {
 			distance.put(c, INFINITE);
 			previous.put(c, null);
 		}
@@ -54,7 +64,7 @@ public abstract class DijkstraAlgorithm<T> {
 		
 		// queue of all elements in the graph to look through
 		List<T> queue = new ArrayList<T>();
-		queue.addAll( getEdges() );
+		queue.addAll( getInternalEdges() );
 		
 		while (!queue.isEmpty()) {
 			// more elements to process
@@ -62,7 +72,7 @@ public abstract class DijkstraAlgorithm<T> {
 			queue.remove(u);
 			
 			// for each neighbour in u
-			for (T n : getNeighbours(u)) {
+			for (T n : getInternalNeighbours(u)) {
 				// where the neighbour is still in the queue
 				if (queue.contains(n)) {
 					int alt = distance.get(u) + distanceBetween(u, n);	// fixed distance of 1
@@ -143,6 +153,16 @@ public abstract class DijkstraAlgorithm<T> {
 	 * @return
 	 */
 	public abstract List<T> getNeighbours(T u);
+	
+	/**
+	 * Allows abstract supertypes to extend getInternalNeighbours() while
+	 * leaving getNeighbours() abstract.
+	 * 
+	 * @return
+	 */
+	public List<T> getInternalNeighbours(T u) {
+		return getNeighbours(u);
+	}
 
 	/**
 	 * Find the element in queue with the smallest distance.
@@ -170,5 +190,5 @@ public abstract class DijkstraAlgorithm<T> {
 	public String getLastPath() {
 		return lastPath;
 	}
-	
+
 }

@@ -1521,6 +1521,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toLatex() {
 			return escapeLatex(name) + "(" + variable.toLatex() + ")";
 		}
+
+		public String getName() {
+			return name;
+		}
+
+		public FunctionTerm getVariable() {
+			return variable;
+		}
 	}
 	
 	/**
@@ -1529,6 +1537,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 	public class Not extends LazyEquals implements Function {
 		private Set<Function> contents = new LinkedHashSet<Function>();
 		public Not() {
+		}
+
+		/**
+		 * Create a new 'not' with the given function already in it.
+		 * 
+		 * @param init
+		 */
+		public Not(Function f) {
+			contents.add(f);
 		}
 
 		public Set<Function> getContents() {
@@ -1722,6 +1739,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toLatex() {
 			return "f_{" + index + "}(" + variable.toLatex() + ")";
 		}
+
+		public NormalVariable getVariable() {
+			return variable;
+		}
 		
 	}
 	
@@ -1834,6 +1855,703 @@ public class DumpDroolsXml extends InferenceTestCase {
 		SingleFunction sf = new SingleFunction("DomainStore", a);
 		t.getHead().add(sf);
 		assertEquals("DomainStore(a) <- notExists(x : InternetApplication(x), linked(x, a))", t.toString());
+	}
+	
+	/**
+	 * Test the creation of a factory graph.
+	 * 
+	 * From the example in version4:
+	 * – a(x) -> b(f(x))
+	 * – b(x) -> c(f(x))
+	 * – a(x), b(x) -> d(f(x))
+	 * – b(x), ¬e(x) -> f(x)
+	 * – f(x) -> g(f(x))
+	 * – d(x) -> e(f(x))
+	 * – g(x) -> a(f(x)) **
+	 * @throws Exception 
+	 * 
+	 */
+	public void testCreatingFactoryGraph() throws Exception {
+		NormalVariable x = new NormalVariable("x");
+		NormalVariable y = new NormalVariable("y");	// to test that variable names can change
+		FactoryFunction fx = new FactoryFunction(x, 0);
+		FactoryFunction fy = new FactoryFunction(y, 0);
+		List<InferredTerm> program = new ArrayList<InferredTerm>();
+		{
+			InferredTerm t = new InferredTerm();
+			t.getBody().add(new SingleFunction("a", x));
+			t.getHead().add(new SingleFunction("b", fx));
+			assertEquals("b(f(x, 0)) <- a(x)", t.toString());
+			program.add(t);
+			
+			// try the node calculations
+			FactoryLoopNodeList n = calculate(t);
+			assertEquals(2, n.size());
+			assertTrue(n.containsNode("a")); 
+			assertTrue(n.containsNode("b")); 
+			assertEquals("a", n.getNode("a").getName());
+			assertEquals(1, n.getNode("a").getEdges().size());
+			assertNotNull(n.getNode("a").getEdges().get(0));
+			assertEquals("b", n.getNode("a").getEdges().get(0).getName());
+			
+			// the program so far should also return the same
+			FactoryLoopNodeList nodes = calculate(program);
+			assertEquals(2, nodes.size());
+			assertTrue(nodes.containsNode("a")); 
+			assertTrue(nodes.containsNode("b")); 
+			assertEquals("a", nodes.getNode("a").getName());
+			assertEquals(1, nodes.getNode("a").getEdges().size());
+			assertNotNull(nodes.getNode("a").getEdges().get(0));
+			assertEquals("b", nodes.getNode("a").getEdges().get(0).getName());
+		}
+		{
+			InferredTerm t = new InferredTerm();
+			t.getBody().add(new SingleFunction("b", x));
+			t.getHead().add(new SingleFunction("c", fx));
+			assertEquals("c(f(x, 0)) <- b(x)", t.toString());
+			program.add(t);
+		}
+		{
+			InferredTerm t = new InferredTerm();
+			t.getBody().add(new SingleFunction("a", x));
+			t.getBody().add(new SingleFunction("b", x));
+			t.getHead().add(new SingleFunction("d", fx));
+			assertEquals("d(f(x, 0)) <- a(x), b(x)", t.toString());
+			program.add(t);
+
+			// try the node calculations
+			FactoryLoopNodeList n = calculate(t);
+			// there should be three; a -> d, and b -> d, and d -> .
+			assertEquals(3, n.size());
+			FactoryLoopNode n1 = n.getNode("a");
+			assertEquals("a", n1.getName());
+			assertEquals(1, n1.getEdges().size());
+			assertEquals("d", n1.getEdges().get(0).getName());
+			FactoryLoopNode n2 = n.getNode("b");
+			assertEquals("b", n2.getName());
+			assertEquals(1, n2.getEdges().size());
+			assertEquals("d", n2.getEdges().get(0).getName());
+			FactoryLoopNode n3 = n.getNode("d");
+			assertEquals("d", n3.getName());
+			assertEquals(0, n3.getEdges().size());
+		}
+		{
+			InferredTerm t = new InferredTerm();
+			t.getBody().add(new SingleFunction("b", x));
+			t.getBody().add(new Not(new SingleFunction("e", x)));
+			t.getHead().add(new SingleFunction("f", x));
+			assertEquals("f(x) <- b(x), not(e(x))", t.toString());
+			program.add(t);
+			
+			// try the node calculations
+			FactoryLoopNodeList n = calculate(t);
+			// this term does nothing by itself
+			assertEquals(1, n.size());
+			assertTrue(n.containsNode("b"));	// just the single node
+		}
+		{
+			InferredTerm t = new InferredTerm();
+			t.getBody().add(new SingleFunction("f", y));
+			t.getHead().add(new SingleFunction("g", fy));
+			assertEquals("g(f(y, 0)) <- f(y)", t.toString());
+			program.add(t);
+		}
+		{
+			InferredTerm t = new InferredTerm();
+			t.getBody().add(new SingleFunction("d", y));
+			t.getHead().add(new SingleFunction("e", fy));
+			assertEquals("e(f(y, 0)) <- d(y)", t.toString());
+			program.add(t);
+		}
+		
+		// lets test all the generated loop edges
+		{
+			FactoryLoopNodeList n = calculate(program);
+			assertEquals(7, n.size());
+			
+			FactoryLoopNode a = n.getNode("a");
+			assertEquals(2, a.getEdges().size());
+			assertTrue(a.hasEdgeTo("d"));
+			assertTrue(a.hasEdgeTo("b"));
+			FactoryLoopNode b = n.getNode("b");
+			
+			assertEquals(3, b.getEdges().size());
+			assertTrue(b.hasEdgeTo("c"));
+			assertTrue(b.hasEdgeTo("d"));
+			assertTrue(b.hasEdgeTo("g"));
+			
+			// 'c' will exist, but it will have 0 edges
+			FactoryLoopNode c = n.getNode("c");
+			assertNotNull(c);
+			assertTrue(n.containsNode("c"));
+			assertEquals(0, c.getEdges().size());
+			
+			FactoryLoopNode d = n.getNode("d");
+			assertEquals(1, d.getEdges().size());
+			assertTrue(d.hasEdgeTo("e"));
+			
+			FactoryLoopNode e = n.getNode("e");
+			assertEquals(0, e.getEdges().size());
+			
+			FactoryLoopNode f = n.getNode("f");
+			assertEquals(1, f.getEdges().size());
+			assertTrue(f.hasEdgeTo("g"));
+		
+			FactoryLoopNode g = n.getNode("g");
+			assertEquals(0, g.getEdges().size());
+			assertFalse(a.hasEdgeTo("a"));	// not yet
+		}
+
+		{
+			// there shouldn't be any loops yet
+			List<GraphLoop<Function>> loops = calculateFactoryLoops(program);
+			
+			//assertEquals(0, loops.size());
+		}
+
+		{
+			InferredTerm t = new InferredTerm();
+			t.getBody().add(new SingleFunction("g", y));
+			t.getHead().add(new SingleFunction("a", fy));
+			assertEquals("a(f(y, 0)) <- g(y)", t.toString());
+			program.add(t);
+		}
+		
+		// lets test all the generated loop edges
+		{
+			FactoryLoopNodeList n = calculate(program);
+			assertEquals(7, n.size());
+			
+			FactoryLoopNode g = n.getNode("g");
+			assertEquals(1, g.getEdges().size());
+			assertTrue(g.hasEdgeTo("a"));	// it has it now
+		}
+
+		{
+			// there should now be one loop
+			List<GraphLoop<Function>> loops = calculateFactoryLoops(program);
+			
+			assertEquals(1, loops.size());
+			assertEquals("a -> b -> g -> a", loops.get(0).toString("a"));
+		}
+	}
+	
+	/**
+	 * Calculate the loops within a given graph.
+	 * 
+	 * @param program
+	 * @return
+	 * @throws TermParseException 
+	 */
+	private List<GraphLoop<Function>> calculateFactoryLoops(
+			List<InferredTerm> program) throws TermParseException {
+
+		FactoryLoopNodeList parsed = calculate(program);
+		
+		// now lets find loops
+		//List<GraphLoop<FactoryLoopNode>> result = new ArrayList<GraphLoop<FactoryLoopNode>>();
+		
+		System.out.println("---");
+		for (FactoryLoopNode f : parsed) {
+			
+			// create the checker
+			FactoryLoopChecker fc = new FactoryLoopChecker(parsed);
+			
+			// does a path exist?
+			int path = fc.dijkstra(f, f);
+			System.out.println("path from '" + f + "' to '" + f + "': " + path);
+			
+		}
+		
+		// TODO complete method
+		return null;
+		
+	}
+	
+	public class DijkstraException extends Exception {
+
+		private static final long serialVersionUID = 1L;
+
+		public DijkstraException(String message) {
+			super(message);
+		}
+
+	}
+	
+	/**
+	 * Extends Dijkstra's algorithm to not consider the 'source' of the 
+	 * current node when calculating distance.
+	 * 
+	 * TODO rename appropriately
+	 * 
+	 * @author jmwright
+	 * @param <T>
+	 */
+	public abstract class DijkstraAlgorithmWithoutRoot<T> extends DijkstraAlgorithm<T> {
+
+		private T copy;
+		private T source;
+		
+		/**
+		 * Add the duplicate copy. We have to make a new list
+		 * and place it in there, otherwise we will get a
+		 * ConcurrentModificationException.
+		 */
+		@Override
+		protected Collection<T> getInternalEdges() {
+			Collection<T> r = getEdges();
+			Collection<T> newR = new ArrayList<T>();
+			newR.addAll(r);
+			newR.add(copy);
+			return newR;
+		}
+
+		/**
+		 * If we are the duplicate copy, add all of the edges
+		 * of the original element
+		 */
+		@Override
+		public List<T> getInternalNeighbours(T u) {
+			if (this.copy.equals(u)) {
+				// get the edges of the source
+				return getNeighbours(this.source);
+			}
+			return getNeighbours(u);
+		}
+
+		/**
+		 * We change something like:
+		 * 
+		 *   a -> b, c, d
+		 *   e, c -> a
+		 *   
+		 * To:
+		 * 
+		 *   a -> b, c, d
+		 *   a' -> b, c, d
+		 *   e, c -> a
+		 *   
+		 * And call dijkstra(a', a), rather than (a, a).
+		 * @throws DijkstraException 
+		 * 
+		 */
+		@Override
+		public int dijkstra(T source, T target) {
+			
+			// we need to make a new copy of the source - this will
+			// be our new target
+			this.source = target;
+			this.copy = makeCopy(target);
+			
+			try {
+				if (this.copy.equals(target)) {
+					throw new DijkstraException("While trying to make a copy of the source element, making a copy did not create a new element which was not equal: '" + source + "', '" + this.source + "'");
+				}
+				if (getEdges().contains(this.copy)) {
+					throw new DijkstraException("While trying to make a copy of the source element, the copy already existed in the edge list: '" + this.source + "'");
+				}
+			} catch (DijkstraException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+			
+			// continue as normal
+			return super.dijkstra(source, this.copy);
+		}
+
+		/**
+		 * We need to make a new element 'e' that 
+		 * definitely does not equal 'e'. It also cannot currently
+		 * be stored within the edges.
+		 * 
+		 * @param source2
+		 * @return
+		 */
+		public abstract T makeCopy(T e);
+
+		/**
+		 * We need to override it so we can link up to the 
+		 * copied source.
+		 * 
+		 * TODO you may need to change this method to internalXXX
+		 */
+		@Override
+		public int distanceBetween(T u, T n) {
+			if (u.equals(this.copy)) {
+				if (n.equals(this.copy)) {
+					return super.distanceBetween(this.source, this.source);
+				} else { 
+					return super.distanceBetween(this.source, n);
+				}
+			} else {
+				if (n.equals(this.copy)) {
+					return super.distanceBetween(u, this.source);
+				} else {
+					return super.distanceBetween(u, n);
+				}
+			}
+		}
+		
+		
+		
+	}
+	
+	public class FactoryLoopChecker extends DijkstraAlgorithmWithoutRoot<FactoryLoopNode> {
+
+		FactoryLoopNodeList contents;
+		
+		public FactoryLoopChecker(FactoryLoopNodeList contents) {
+			this.contents = contents;
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.DijkstraAlgorithm#getEdges()
+		 */
+		@Override
+		protected Collection<FactoryLoopNode> getEdges() {
+			return contents;
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.DijkstraAlgorithm#getNeighbours(java.lang.Object)
+		 */
+		@Override
+		public List<FactoryLoopNode> getNeighbours(FactoryLoopNode u) {
+			return u.getEdges();
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.DijkstraAlgorithmWithoutRoot#makeCopy(java.lang.Object)
+		 */
+		@Override
+		public FactoryLoopNode makeCopy(FactoryLoopNode e) {
+			// make a new node based on 'e' that does not exist in contents
+			for (int i = 0; i < 1024; i++) {
+				FactoryLoopNode r = new FactoryLoopNode("[copy]" + e.getName() + i);
+				if (!contents.contains(r)) {
+					return r;
+				}
+			}
+			throw new RuntimeException("Could not generate a unique node for '" + e + "'");
+		}
+		
+	}
+
+	/**
+	 * Represents a loop in a graph of elements in T.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public class GraphLoop<T> {
+
+		/**
+		 * Print out the contents of the graph loop, starting at 
+		 * an element which is represented by the given string.
+		 * 
+		 * @param string
+		 * @return
+		 */
+		public String toString(String string) {
+			// TODO
+			return null;
+		}
+
+	}
+
+	
+	/**
+	 * Calculate all the nodes from the given term.
+	 * 
+	 * @param t
+	 * @return
+	 * @throws TermParseException 
+	 */
+	public FactoryLoopNodeList calculate(InferredTerm t) throws TermParseException {
+		List<InferredTerm> list = new ArrayList<InferredTerm>();
+		list.add(t);
+		return calculate(list);
+	}
+
+	/**
+	 * Calculate all the nodes from the given list of terms.
+	 * 
+	 * @param program
+	 * @return
+	 * @throws TermParseException 
+	 */
+	public FactoryLoopNodeList calculate(List<InferredTerm> program) throws TermParseException {
+		FactoryLoopNodeList fl = new FactoryLoopNodeList();
+		
+		for (InferredTerm term : program) {
+			// for every positive term in the body,
+			for (Function body : term.getBody()) {
+				// first just select all types functionName(x).
+				if (body instanceof SingleFunction) {
+					SingleFunction f = (SingleFunction) body;
+
+					// do we have this node in the list already?
+					FactoryLoopNode bodyNode = fl.getNodeForFunction(f);
+					if (bodyNode == null) {
+						// otherwise, create a new one
+						bodyNode = new FactoryLoopNode(f);
+						fl.add(bodyNode);
+					}
+
+					// iterate over all the elements in the head
+					// to find out what factory elements it could create
+					Set<Function> canCreate = 
+						investigateFunctionForPotentialFactoryFunctions(f, term, program);
+					
+					// turn these into FactoryNodes
+					Set<FactoryLoopNode> nodes =
+						fl.convertFunctionsToNodes(canCreate);
+					
+					// all of these elements will be neighbours of this node.
+					bodyNode.addEdges(nodes);
+				}
+				
+			}
+			
+		}
+		
+		return fl;
+	}
+	
+	/**
+	 * In the given program in the given term, take the given function and find out all
+	 * the factory functions f(x) that it may 
+	 * 
+	 * @param f
+	 * @param program
+	 * @return
+	 * @throws TermParseException 
+	 */
+	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
+			SingleFunction f, InferredTerm current, List<InferredTerm> program) throws TermParseException {
+		
+		Set<Function> results = new HashSet<Function>();
+		
+		if (!current.getBody().contains(f)) {
+			throw new TermParseException("Expected function '" + f + "' to be in the current term body: '" + current + "'");
+		}
+		
+		for (Function head : current.getHead()) {
+			if (head instanceof SingleFunction) {
+				SingleFunction sf = (SingleFunction) head;
+				if (sf.getVariable() instanceof FactoryFunction) {
+					FactoryFunction ff = (FactoryFunction) sf.getVariable();
+					if (ff.getVariable().equals( f.getVariable() )) {
+						// sf(f(x)) <- current(x)
+						results.add(sf);
+					}
+				} else if (sf.getVariable().equals(f.getVariable())) {
+					// its a function that uses the current variable
+					
+					// look through the entire program for other things that match 
+					// this current term
+					Set<Function> subResults = 
+						investigateFunctionForPotentialFactoryFunctions(sf, program);
+					
+					// add these to the results
+					results.addAll(subResults);
+				}
+			}
+		}
+		
+		return results;
+	}
+
+	/**
+	 * Go through the entire program and look for terms that have the given
+	 * function in the body. Add all of the factory functions that this
+	 * term creates, and return these.
+	 * 
+	 * @param sf
+	 * @param program
+	 * @return
+	 * @throws TermParseException 
+	 */
+	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
+			SingleFunction sf, List<InferredTerm> program) throws TermParseException {
+
+		Set<Function> results = new HashSet<Function>();
+		
+		for (InferredTerm term : program) {
+			// we can't look directly at these functions, we
+			// have to look at the function names
+			for (Function f : term.getBody()) {
+				if (f instanceof SingleFunction && ((SingleFunction) f).getName().equals(sf.getName())) {
+					// a match
+					Set<Function> sub = 
+						investigateFunctionForPotentialFactoryFunctions((SingleFunction) f, term, program);
+					results.addAll(sub);
+				}
+			}
+		}
+
+		
+		return results;
+	}
+
+	/**
+	 * We take InferredTerms and connect all of the related paths
+	 * into a single node.
+	 * 
+	 * e.g. "a(x) -> b(f(x))" becomes a node 'a', with a link to 'b'
+	 * 
+	 * "a(x) -> b(x), b(x) -> c(f(x))" becomes a node 'a', with
+	 * a link to 'c'.
+	 * 
+	 * If we combine the two above, we get a node 'a' with links to
+	 * both 'b' and 'c'. 
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	protected class FactoryLoopNode {
+
+		private String name;
+		private Set<FactoryLoopNode> edges = new LinkedHashSet<FactoryLoopNode>();
+		public FactoryLoopNode(String name) {
+			this.name = name;
+		}
+
+		/**
+		 * Add all of the given nodes as edges.
+		 * 
+		 * @param nodes
+		 */
+		public void addEdges(Set<FactoryLoopNode> nodes) {
+			for (FactoryLoopNode n : nodes) {
+				if (n == null)
+					throw new NullPointerException("Node '" + n + "' cannot be null.");
+				edges.add(n);
+			}
+		}
+
+		public FactoryLoopNode(SingleFunction f) {
+			this(f.getName());
+		}
+
+		/**
+		 * Does this node have an edge to the given node name?
+		 * 
+		 * @param string
+		 * @return
+		 */
+		public boolean hasEdgeTo(String string) {
+			for (FactoryLoopNode e : getEdges()) {
+				if (e.getName().equals(string))
+					return true;
+			}
+			return false;
+		}
+
+		/**
+		 * Get all neighbours to this node.
+		 * 
+		 * @return
+		 */
+		public List<FactoryLoopNode> getEdges() {
+			List<FactoryLoopNode> r = new ArrayList<FactoryLoopNode>();
+			r.addAll(edges);
+			return r;
+		}
+
+		public String getName() {
+			return name;
+		}
+		
+		public String toString() {
+			// prevent infinite loops
+			String e = "";
+			for (FactoryLoopNode edge : edges) {
+				if (!e.isEmpty())
+					e += ", ";
+				e += edge.getName();
+			}
+				
+			return "[Node '" + name + "', edges: " + e + "]";
+		}
+		
+	}
+	
+	/**
+	 * Helper functions around a list of FactoryLoopNodes.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public class FactoryLoopNodeList extends ArrayList<FactoryLoopNode> {
+
+		private static final long serialVersionUID = 1L;
+
+		/**
+		 * Get the FactoryLoopNode with the given name, or
+		 * null if it doesn't exist.
+		 * 
+		 * @param string
+		 * @return
+		 */
+		public FactoryLoopNode getNode(String string) {
+			for (FactoryLoopNode f : this) {
+				if (f.getName().equals(string))
+					return f;
+			}
+			return null;
+		}
+
+		/**
+		 * Take all functions in the given list and add them
+		 * as nodes to the currnet list, returning the nodes
+		 * created.
+		 * 
+		 * Modifies the current list.
+		 * 
+		 * @param list
+		 * @param program
+		 * @return
+		 */
+		public Set<FactoryLoopNode> convertFunctionsToNodes(
+				Set<Function> list) {
+			
+			Set<FactoryLoopNode> result = new LinkedHashSet<FactoryLoopNode>();
+			
+			for (Function f : list) {
+				if (f instanceof SingleFunction) {
+					FactoryLoopNode found = getNodeForFunction((SingleFunction) f);
+					if (found == null) {
+						found = new FactoryLoopNode((SingleFunction) f);
+						add(found);
+					}
+					result.add(found);
+				}
+			}
+			
+			return result;
+		}
+
+		/**
+		 * Get the node for the given function, or null
+		 * if none exists.
+		 * 
+		 * @param body
+		 * @return
+		 */
+		public FactoryLoopNode getNodeForFunction(SingleFunction body) {
+			return getNode(((SingleFunction) body).getName());
+		}
+
+		/**
+		 * Does this list contain the given node name?
+		 * 
+		 * @param string
+		 * @return
+		 */
+		public boolean containsNode(String string) {
+			return getNode(string) != null;
+		}
+		
 	}
 	
 	/**

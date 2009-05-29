@@ -16,6 +16,7 @@ import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -2004,9 +2005,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		{
 			// there shouldn't be any loops yet
-			List<GraphLoop<Function>> loops = calculateFactoryLoops(program);
+			GraphLoops loops = calculateFactoryLoops(program);
 			
-			//assertEquals(0, loops.size());
+			assertEquals(0, loops.size());
 		}
 
 		{
@@ -2029,10 +2030,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		{
 			// there should now be one loop
-			List<GraphLoop<Function>> loops = calculateFactoryLoops(program);
+			GraphLoops loops = calculateFactoryLoops(program);
 			
-			assertEquals(1, loops.size());
-			assertEquals("a -> b -> g -> a", loops.get(0).toString("a"));
+			// three nodes have loops
+			assertEquals(3, loops.size());
+			assertEquals("a -> b -> g -> a", loops.getLoopAsString("a"));
 		}
 	}
 	
@@ -2043,13 +2045,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @return
 	 * @throws TermParseException 
 	 */
-	private List<GraphLoop<Function>> calculateFactoryLoops(
+	private GraphLoops calculateFactoryLoops(
 			List<InferredTerm> program) throws TermParseException {
 
 		FactoryLoopNodeList parsed = calculate(program);
 		
 		// now lets find loops
-		//List<GraphLoop<FactoryLoopNode>> result = new ArrayList<GraphLoop<FactoryLoopNode>>();
+		Map<FactoryLoopNode, GraphLoop<FactoryLoopNode>> result = new HashMap<FactoryLoopNode, GraphLoop<FactoryLoopNode>>();
 		
 		System.out.println("---");
 		for (FactoryLoopNode f : parsed) {
@@ -2058,13 +2060,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 			FactoryLoopChecker fc = new FactoryLoopChecker(parsed);
 			
 			// does a path exist?
-			int path = fc.dijkstra(f, f);
-			System.out.println("path from '" + f + "' to '" + f + "': " + path);
+			int r = fc.dijkstra(f, f);
+			if (r != -1) {
+				List<FactoryLoopNode> pathList = fc.getLastPathElements();
+				System.out.println(r);
+				System.out.println(pathList);
+				result.put(f, new GraphLoop<FactoryLoopNode>(pathList));
+			}
 			
 		}
 		
-		// TODO complete method
-		return null;
+		return new GraphLoops(result);
 		
 	}
 	
@@ -2079,6 +2085,63 @@ public class DumpDroolsXml extends InferenceTestCase {
 	}
 	
 	/**
+	 * Extends {@link DijkstraAlgorithm} to also provide a method to get
+	 * the actual elements used in the path. i.e.:
+	 * 
+	 * int length = d.dijkstra(a, b);
+	 * List<T> path = d.getLastPathElements();
+	 * 
+	 * @author jmwright
+	 *
+	 * @param <T>
+	 */
+	public abstract class DijkstraAlgorithmWithPaths<T> extends DijkstraAlgorithm<T> {
+
+		private List<T> lastPath;
+		
+		/**
+		 * We override compilePath to also create a copy of the 
+		 * path.
+		 * 
+		 * @see #getLastPathElements()
+		 */
+		@Override
+		public String compilePath(T source, T target, Map<T, T> previous) {
+
+			lastPath = new ArrayList<T>();
+			
+			T cur = target;
+			int i = 0;
+			while (cur != source && cur != null && i < MAX_COMPILE_PATH) {
+				// buf = " -> " + translateToString(cur) + buf;
+				lastPath.add(cur);
+				cur = previous.get(cur);
+				i++;
+			}
+			// buf = translateToString(source) + buf;
+			lastPath.add(source);
+			
+			// we need to reverse the list
+			Collections.reverse(lastPath);
+			
+			// this method actually needs to return a string
+			return super.compilePath(source, target, previous);
+		}
+
+		/**
+		 * Get the last path called by {@link #dijkstra(Object, Object)}.
+		 * 
+		 * This path is compiled in {@link #compilePath(Object, Object, Map)}.
+		 * 
+		 * @return the last path found. this path may be empty.
+		 */
+		public List<T> getLastPathElements() {
+			return lastPath;
+		}
+		
+	}
+	
+	/**
 	 * Extends Dijkstra's algorithm to not consider the 'source' of the 
 	 * current node when calculating distance.
 	 * 
@@ -2087,7 +2150,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @author jmwright
 	 * @param <T>
 	 */
-	public abstract class DijkstraAlgorithmWithoutRoot<T> extends DijkstraAlgorithm<T> {
+	public abstract class DijkstraAlgorithmWithoutRoot<T> extends DijkstraAlgorithmWithPaths<T> {
 
 		private T copy;
 		private T source;
@@ -2112,11 +2175,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 		 */
 		@Override
 		public List<T> getInternalNeighbours(T u) {
+			List<T> neighbours;
 			if (this.copy.equals(u)) {
 				// get the edges of the source
-				return getNeighbours(this.source);
+				neighbours = getNeighbours(this.source);
+			} else {
+				neighbours = getNeighbours(u);
 			}
-			return getNeighbours(u);
+			// if this list of neighbours includes source, include a link to the copy
+			if (neighbours.contains(this.source)) {
+				neighbours.add(this.copy);
+			}
+			return neighbours;
 		}
 
 		/**
@@ -2223,10 +2293,22 @@ public class DumpDroolsXml extends InferenceTestCase {
 		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.DijkstraAlgorithmWithoutRoot#makeCopy(java.lang.Object)
 		 */
 		@Override
-		public FactoryLoopNode makeCopy(FactoryLoopNode e) {
+		public FactoryLoopNode makeCopy(final FactoryLoopNode e) {
 			// make a new node based on 'e' that does not exist in contents
 			for (int i = 0; i < 1024; i++) {
-				FactoryLoopNode r = new FactoryLoopNode("[copy]" + e.getName() + i);
+				FactoryLoopNode r = new FactoryLoopNode("[copy]" + e.getName() + i) {
+
+					/**
+					 * Return the original node name.
+					 * 
+					 * @return
+					 */
+					@Override
+					public String getName() {
+						return e.getName();
+					}
+					
+				};
 				if (!contents.contains(r)) {
 					return r;
 				}
@@ -2242,17 +2324,62 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @author jmwright
 	 *
 	 */
-	public class GraphLoop<T> {
+	public class GraphLoop<T> extends ArrayList<T> {
+
+		private static final long serialVersionUID = 1L;
 
 		/**
-		 * Print out the contents of the graph loop, starting at 
-		 * an element which is represented by the given string.
-		 * 
+		 * @param pathList
+		 */
+		public GraphLoop(List<T> pathList) {
+			addAll(pathList);
+		}
+
+	}
+
+	/**
+	 * Represents a set of loops in a graph.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public class GraphLoops extends HashMap<FactoryLoopNode, GraphLoop<FactoryLoopNode>> {
+
+		private static final long serialVersionUID = 1L;
+
+		/**
+		 * @param result
+		 */
+		public GraphLoops(Map<FactoryLoopNode, GraphLoop<FactoryLoopNode>> result) {
+			putAll(result);
+		}
+
+		/**
 		 * @param string
 		 * @return
 		 */
-		public String toString(String string) {
-			// TODO
+		public String getLoopAsString(String string) {
+			GraphLoop<FactoryLoopNode> path = get(findNodeFor(string));
+			// compile the path
+			String r = "";
+			for (FactoryLoopNode node : path) {
+				if (!r.isEmpty()) 
+					r += " -> ";
+				r += node.getName();
+			}
+			return r;
+		}
+
+		/**
+		 * @param string
+		 * @return
+		 */
+		private FactoryLoopNode findNodeFor(String string) {
+			for (FactoryLoopNode f : keySet()) {
+				if (f.getName().equals(string)) {
+					return f;
+				}
+			}
 			return null;
 		}
 

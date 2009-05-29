@@ -21,6 +21,9 @@ public abstract class DijkstraAlgorithm<T> {
 
 	/** Static value for an infinite path (i.e. no path exists) */
 	private static final int INFINITE = 2 << 24;
+	
+	/** Maximum depth that we will try to compile a path */
+	protected static final int MAX_COMPILE_PATH = 1024;
 
 	/**
 	 * Get all of the edges (nodes) involved in this graph.
@@ -111,7 +114,7 @@ public abstract class DijkstraAlgorithm<T> {
 		T cur = target;
 		int i = 0;
 		String buf = "";
-		while (cur != source && cur != null && i < 50) {
+		while (cur != source && cur != null && i < MAX_COMPILE_PATH) {
 			buf = " -> " + translateToString(cur) + buf;
 			cur = previous.get(cur);
 			i++;
@@ -183,7 +186,7 @@ public abstract class DijkstraAlgorithm<T> {
 	}
 
 	/**
-	 * Get the last path used.
+	 * Get the last path used (as a string).
 	 * 
 	 * @return
 	 */

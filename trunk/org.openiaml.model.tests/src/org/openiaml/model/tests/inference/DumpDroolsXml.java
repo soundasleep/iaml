@@ -463,11 +463,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	public void testDumpXml() throws Exception {
 		DroolsXmlDumper dump = new DroolsXmlDumper();
 		Map<String,String> results = dump.getRuleXmls();
 	
 		Set<LogicRule> allRules = new HashSet<LogicRule>();
+		List<InferredTerm> program = new ArrayList<InferredTerm>();
 		
 		boolean foundTestRule = false;
 		for (String f : results.keySet()) {
@@ -480,6 +482,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 			IFile outLatex = project.getFile(name + "-parsed.tex");
 			String latex = "";
+			
+			List<InferredTerm> fileProgram = new ArrayList<InferredTerm>();
 
 			if (f.toLowerCase().contains("dynamic-sources")) {
 				// TODO we need to allow for if (a...) { b... } syntax
@@ -534,6 +538,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 						parsed += s.toString() + "\n";
 						latex += "  \\item $" + s.toLatex() + "$\n";
 					}
+					
+					// add these rules to the file program
+					fileProgram.addAll(parsedResults);
 				} catch (TermParseException e) {
 					// write document anyway
 					// out.create(source, true, monitor);
@@ -563,6 +570,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 			outLatex.create(new StringBufferInputStream(latex), 
 					true, monitor);
 			
+			System.out.println("---");
+			System.out.println("loops factory in '" + f + "':");
+			GraphLoops loops = calculateFactoryLoops(fileProgram);
+			for (GraphLoop<FactoryLoopNode> o : loops.values()) {
+				System.out.println(o.getLoopAsString());
+			}
+			
+			// add all of these terms to the overall program
+			program.addAll(fileProgram);
 		}
 
 		assertTrue("Never found and parsed the test rule", foundTestRule);
@@ -575,6 +591,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 		
 		// find rule cycles
 		findStratCycleRules(allRules);
+		
+		// look for factory graph cycles
+		// TODO meow
+		System.out.println("---");
+		System.out.println("overall factory loops:");
+		GraphLoops loops = calculateFactoryLoops(program);
+		for (GraphLoop<FactoryLoopNode> o : loops.values()) {
+			System.out.println(o.getLoopAsString());
+		}
 		
 		refreshProject();
 	}
@@ -918,7 +943,6 @@ public class DumpDroolsXml extends InferenceTestCase {
 		if (e.getNodeName().equals("statement")) {
 			// is this a handler.generatedXXX?
 			IterableElementList generated = xpath(e, "assignment[set-variable]/statement/variable[@name='handler']/method[contains(@name, 'generated')]");
-			System.out.println("generated = " + generated);
 			if (!generated.isEmpty()) {
 				if (generated.size() != 1) {
 					throw new TermParseException("Did not expect more than one generated method, found: " + generated);
@@ -2063,9 +2087,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 			int r = fc.dijkstra(f, f);
 			if (r != -1) {
 				List<FactoryLoopNode> pathList = fc.getLastPathElements();
-				System.out.println(r);
-				System.out.println(pathList);
-				result.put(f, new GraphLoop<FactoryLoopNode>(pathList));
+				result.put(f, new GraphLoop<FactoryLoopNode>(pathList) {
+
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public String formatNodeAsString(FactoryLoopNode element) {
+						return element.getName();
+					}
+					
+				});
 			}
 			
 		}
@@ -2334,6 +2365,32 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public GraphLoop(List<T> pathList) {
 			addAll(pathList);
 		}
+		
+		/**
+		 * Get the value of this node as a string. Default
+		 * uses toString().
+		 * 
+		 * @param element
+		 * @return
+		 */
+		public String formatNodeAsString(T element) {
+			return element.toString();
+		}
+
+		/**
+		 * @param string
+		 * @return
+		 */
+		public String getLoopAsString() {
+			// compile the path
+			String r = "";
+			for (T node : this) {
+				if (!r.isEmpty()) 
+					r += " -> ";
+				r += formatNodeAsString(node);
+			}
+			return r;
+		}
 
 	}
 
@@ -2355,19 +2412,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 
 		/**
+		 * @see GraphLoop#getLoopAsString()
 		 * @param string
-		 * @return
+		 * @return the loop as a string, or null if no loop with this element was found
 		 */
 		public String getLoopAsString(String string) {
 			GraphLoop<FactoryLoopNode> path = get(findNodeFor(string));
-			// compile the path
-			String r = "";
-			for (FactoryLoopNode node : path) {
-				if (!r.isEmpty()) 
-					r += " -> ";
-				r += node.getName();
+			if (path == null) {
+				return null;
 			}
-			return r;
+			return path.getLoopAsString();
 		}
 
 		/**

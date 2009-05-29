@@ -1394,6 +1394,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 	public interface Variable extends FunctionTerm, Latexable {
 
 	}
+	public interface NamedFunction extends Function {
+		public String getName();
+	}
 	
 	public abstract class LazyEquals {
 		@Override
@@ -1522,7 +1525,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'name(variable)'
 	 */
-	public class SingleFunction extends LazyEquals implements Function {
+	public class SingleFunction extends LazyEquals implements Function, NamedFunction {
 
 		private String name;
 		private FunctionTerm variable;
@@ -1632,7 +1635,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'name(v1, v2, ...)' or 'name'
 	 */
-	public class VariableFunction extends LazyEquals implements Function {
+	public class VariableFunction extends LazyEquals implements Function, NamedFunction {
 		private String name;
 		private Set<FunctionTerm> variables;
 		public VariableFunction(String string, Set<FunctionTerm> variable) {
@@ -1653,6 +1656,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 		@Override
 		public String toLatex() {
 			return escapeLatex(name) + "(" + DumpDroolsXml.toLatexComma(variables) + ")";
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.NamedFunction#getName()
+		 */
+		@Override
+		public String getName() {
+			return name;
 		}	
 	}
 	
@@ -1814,7 +1825,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * 'name(a, b)' 
 	 */
-	public class DoubleFunction extends LazyEquals implements Function {
+	public class DoubleFunction extends LazyEquals implements Function, NamedFunction {
 		private String name;
 		private FunctionTerm variable;
 		private FunctionTerm variable2;
@@ -1838,6 +1849,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 		@Override
 		public String toLatex() {
 			return escapeLatex(name) + "(" + variable.toLatex() + ", " + variable2.toLatex() + ")";
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.NamedFunction#getName()
+		 */
+		@Override
+		public String getName() {
+			return name;
 		}
 	}
 	
@@ -2477,11 +2496,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 						bodyNode = new FactoryLoopNode(f);
 						fl.add(bodyNode);
 					}
+					
+					if (!(f.getVariable() instanceof NormalVariable)) {
+						throw new TermParseException("Did not expect variable '" + f.getVariable() + "' in function '" + f + "' to not be a NormalVariable.");
+					}
 
 					// iterate over all the elements in the head
 					// to find out what factory elements it could create
 					Set<Function> canCreate = 
-						investigateFunctionForPotentialFactoryFunctions(f, term, program);
+						investigateFunctionForPotentialFactoryFunctions((NormalVariable) f.getVariable(), term, program);
 					
 					// turn these into FactoryNodes
 					Set<FactoryLoopNode> nodes =
@@ -2489,6 +2512,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 					
 					// all of these elements will be neighbours of this node.
 					bodyNode.addEdges(nodes);
+				} else if (body instanceof Not) {
+					// ignore not(...) in the rule body
+				} else {
+					throw new TermParseException("Did not expect body function of type '" + body.getClass().getSimpleName() + "': " + body);
 				}
 				
 			}
@@ -2508,35 +2535,44 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @throws TermParseException 
 	 */
 	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
-			SingleFunction f, InferredTerm current, List<InferredTerm> program) throws TermParseException {
+			NormalVariable variable, InferredTerm current, List<InferredTerm> program) throws TermParseException {
 		
 		Set<Function> results = new HashSet<Function>();
-		
-		if (!current.getBody().contains(f)) {
-			throw new TermParseException("Expected function '" + f + "' to be in the current term body: '" + current + "'");
-		}
 		
 		for (Function head : current.getHead()) {
 			if (head instanceof SingleFunction) {
 				SingleFunction sf = (SingleFunction) head;
-				if (sf.getVariable() instanceof FactoryFunction) {
-					FactoryFunction ff = (FactoryFunction) sf.getVariable();
-					if (ff.getVariable().equals( f.getVariable() )) {
-						// sf(f(x)) <- current(x)
-						results.add(sf);
-					}
-				} else if (sf.getVariable().equals(f.getVariable())) {
-					// its a function that uses the current variable
-					
-					// look through the entire program for other things that match 
-					// this current term
-					Set<Function> subResults = 
-						investigateFunctionForPotentialFactoryFunctions(sf, program);
-					
-					// add these to the results
-					results.addAll(subResults);
-				}
+				results.addAll(considerFunctionTerm(sf, variable, sf.getVariable(), program));
+
+			} else if (head instanceof VariableFunction) {
+				
+			} else {
+				throw new TermParseException("Did not expect head function of type '" + head.getClass().getSimpleName() + "': " + head);
 			}
+		}
+		
+		return results;
+	}
+	
+	private Set<Function> considerFunctionTerm(NamedFunction sf, FunctionTerm v2, FunctionTerm variable, List<InferredTerm> program) throws TermParseException {
+		Set<Function> results = new HashSet<Function>();
+		
+		if (variable instanceof FactoryFunction) {
+			FactoryFunction ff = (FactoryFunction) variable;
+			if (ff.getVariable().equals( v2 )) {
+				// sf(f(x)) <- current(x)
+				results.add(sf);
+			}
+		} else if (variable.equals( v2 )) {
+			// its a function that uses the current variable
+			
+			// look through the entire program for other things that match 
+			// this current term
+			Set<Function> subResults = 
+				investigateFunctionForPotentialFactoryFunctions(sf, program);
+			
+			// add these to the results
+			results.addAll(subResults);
 		}
 		
 		return results;
@@ -2553,7 +2589,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @throws TermParseException 
 	 */
 	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
-			SingleFunction sf, List<InferredTerm> program) throws TermParseException {
+			NamedFunction sf, List<InferredTerm> program) throws TermParseException {
 
 		Set<Function> results = new HashSet<Function>();
 		
@@ -2561,11 +2597,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// we can't look directly at these functions, we
 			// have to look at the function names
 			for (Function f : term.getBody()) {
-				if (f instanceof SingleFunction && ((SingleFunction) f).getName().equals(sf.getName())) {
-					// a match
-					Set<Function> sub = 
-						investigateFunctionForPotentialFactoryFunctions((SingleFunction) f, term, program);
-					results.addAll(sub);
+				if (f instanceof SingleFunction) {
+					if (((SingleFunction) f).getName().equals(sf.getName())) {
+						// a match
+						Set<Function> sub = 
+							investigateFunctionForPotentialFactoryFunctions((NormalVariable) ((SingleFunction) f).getVariable(), term, program);
+						results.addAll(sub);
+					}
+				} else if (f instanceof Not) {
+					// ignore not(..) in the rule body
+				} else {
+					throw new TermParseException("Did not expect potential function of type '" + f.getClass().getSimpleName() + "': " + f);
 				}
 			}
 		}

@@ -1664,6 +1664,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 		@Override
 		public String getName() {
 			return name;
+		}
+
+		/**
+		 * @return
+		 */
+		public Set<FunctionTerm> getVariables() {
+			return variables;
 		}	
 	}
 	
@@ -1966,7 +1973,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// try the node calculations
 			FactoryLoopNodeList n = calculate(t);
 			// there should be three; a -> d, and b -> d, and d -> .
-			assertEquals(3, n.size());
+			try {
+				assertEquals(3, n.size());
+			} catch (AssertionFailedError e) {
+				System.out.println(n);
+				throw e;
+			}
 			FactoryLoopNode n1 = n.getNode("a");
 			assertEquals("a", n1.getName());
 			assertEquals(1, n1.getEdges().size());
@@ -2017,9 +2029,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 			assertEquals(2, a.getEdges().size());
 			assertTrue(a.hasEdgeTo("d"));
 			assertTrue(a.hasEdgeTo("b"));
-			FactoryLoopNode b = n.getNode("b");
 			
-			assertEquals(3, b.getEdges().size());
+			FactoryLoopNode b = n.getNode("b");
+			try {
+				assertEquals(3, b.getEdges().size());
+			} catch (AssertionFailedError e) {
+				System.out.println(b);
+				throw e;
+			}
 			assertTrue(b.hasEdgeTo("c"));
 			assertTrue(b.hasEdgeTo("d"));
 			assertTrue(b.hasEdgeTo("g"));
@@ -2480,44 +2497,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @throws TermParseException 
 	 */
 	public FactoryLoopNodeList calculate(List<InferredTerm> program) throws TermParseException {
+		// results will be stored in here
+		// it needs to be shared, or we will get non-unique results
 		FactoryLoopNodeList fl = new FactoryLoopNodeList();
 		
 		for (InferredTerm term : program) {
 			// for every positive term in the body,
 			for (Function body : term.getBody()) {
 				// first just select all types functionName(x).
-				if (body instanceof SingleFunction) {
-					SingleFunction f = (SingleFunction) body;
-
-					// do we have this node in the list already?
-					FactoryLoopNode bodyNode = fl.getNodeForFunction(f);
-					if (bodyNode == null) {
-						// otherwise, create a new one
-						bodyNode = new FactoryLoopNode(f);
-						fl.add(bodyNode);
-					}
-					
-					if (!(f.getVariable() instanceof NormalVariable)) {
-						throw new TermParseException("Did not expect variable '" + f.getVariable() + "' in function '" + f + "' to not be a NormalVariable.");
-					}
-
-					// iterate over all the elements in the head
-					// to find out what factory elements it could create
-					Set<Function> canCreate = 
-						investigateFunctionForPotentialFactoryFunctions((NormalVariable) f.getVariable(), term, program);
-					
-					// turn these into FactoryNodes
-					Set<FactoryLoopNode> nodes =
-						fl.convertFunctionsToNodes(canCreate);
-					
-					// all of these elements will be neighbours of this node.
-					bodyNode.addEdges(nodes);
-				} else if (body instanceof Not) {
-					// ignore not(...) in the rule body
-				} else {
-					throw new TermParseException("Did not expect body function of type '" + body.getClass().getSimpleName() + "': " + body);
-				}
-				
+				List<InferredTerm> considered = new ArrayList<InferredTerm>();
+				considered.add(term);	// prevent loops back to here
+				calculateForFunction(fl, body, term, program, considered);
 			}
 			
 		}
@@ -2525,9 +2515,115 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return fl;
 	}
 	
+	private void calculateForFunction(FactoryLoopNodeList fl,
+			Function function,
+			InferredTerm term,
+			List<InferredTerm> program,
+			List<InferredTerm> consideredTerms) throws TermParseException {
+
+		if (function instanceof NamedFunction) {
+			NamedFunction nf = (NamedFunction) function;
+			
+			/*
+			if (consideredFunctions.contains(nf.getName())) {
+				// prevent infinite loops
+				return;
+			}*/
+			
+			// do we have this node in the list already?
+			FactoryLoopNode bodyNode = fl.getNodeForFunction(nf);
+			if (bodyNode == null) {
+				// otherwise, create a new one
+				bodyNode = new FactoryLoopNode(nf);
+				fl.add(bodyNode);
+			}
+			
+			if (nf instanceof SingleFunction) {
+				SingleFunction sf = (SingleFunction) nf;
+				
+				if (!(sf.getVariable() instanceof StringLiteral)) {
+					if (!(sf.getVariable() instanceof NormalVariable)) {
+						throw new TermParseException("Did not expect variable '" + sf.getVariable() + "' in function '" + sf + "' to not be a NormalVariable.");
+					}
+	
+					// iterate over all the elements in the head
+					// to find out what factory elements it could create
+					Set<Function> canCreate = 
+						investigateFunctionForPotentialFactoryFunctions((NormalVariable) sf.getVariable(), term, program, consideredTerms);
+					
+					// turn these into FactoryNodes
+					Set<FactoryLoopNode> nodes =
+						fl.convertFunctionsToNodes(canCreate);
+					
+					// all of these elements will be neighbours of this node.
+					bodyNode.addEdges(nodes);
+				}
+				
+			} else if (nf instanceof DoubleFunction) {
+				DoubleFunction f = (DoubleFunction) nf;
+				
+				// first variable
+				if (!(f.getFunctionTerm1() instanceof StringLiteral)) {
+					if (!(f.getFunctionTerm1() instanceof NormalVariable)) {
+						throw new TermParseException("Did not expect variable '" + f.getFunctionTerm1() + "' in function '" + f + "' to not be a NormalVariable.");
+					}
+					NormalVariable var = (NormalVariable) f.getFunctionTerm1();
+
+					// iterate over all the elements in the head
+					// to find out what factory elements it could create
+					Set<Function> canCreate = 
+						investigateFunctionForPotentialFactoryFunctions(var, term, program, consideredTerms);
+					
+					// turn these into FactoryNodes
+					Set<FactoryLoopNode> nodes =
+						fl.convertFunctionsToNodes(canCreate);
+					
+					// all of these elements will be neighbours of this node.
+					bodyNode.addEdges(nodes);
+				}
+				
+				// second variable
+				if (!(f.getFunctionTerm2() instanceof StringLiteral)) {
+					if (!(f.getFunctionTerm2() instanceof NormalVariable)) {
+						throw new TermParseException("Did not expect variable '" + f.getFunctionTerm2() + "' in function '" + f + "' to not be a NormalVariable.");
+					}
+					NormalVariable var = (NormalVariable) f.getFunctionTerm2();
+
+					// iterate over all the elements in the head
+					// to find out what factory elements it could create
+					Set<Function> canCreate = 
+						investigateFunctionForPotentialFactoryFunctions(var, term, program, consideredTerms);
+					
+					// turn these into FactoryNodes
+					Set<FactoryLoopNode> nodes =
+						fl.convertFunctionsToNodes(canCreate);
+					
+					// all of these elements will be neighbours of this node.
+					bodyNode.addEdges(nodes);
+				}
+
+			
+			} else {
+				throw new TermParseException("Did not expect NamedFunction of type '" + function.getClass().getSimpleName() + "': " + function);
+			}
+		} else if (function instanceof Not) {
+			// not(...): ignore
+		} else if (function instanceof Or) {
+			// or(...): add all elements to this list
+			Or orFunction = (Or) function;
+			for (Function f : orFunction.getContents()) {
+				calculateForFunction(fl, f, term, program, consideredTerms);
+			}
+		} else {
+			throw new TermParseException("Did not expect function of type '" + function.getClass().getSimpleName() + "': " + function);
+		}
+		
+	}
+
+	
 	/**
 	 * In the given program in the given term, take the given function and find out all
-	 * the factory functions f(x) that it may 
+	 * the factory functions f(x) that it may create.
 	 * 
 	 * @param f
 	 * @param program
@@ -2535,17 +2631,26 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @throws TermParseException 
 	 */
 	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
-			NormalVariable variable, InferredTerm current, List<InferredTerm> program) throws TermParseException {
+			FunctionTerm currentVariable, InferredTerm term, List<InferredTerm> program, List<InferredTerm> consideredTerms) throws TermParseException {
 		
 		Set<Function> results = new HashSet<Function>();
 		
-		for (Function head : current.getHead()) {
+		for (Function head : term.getHead()) {
 			if (head instanceof SingleFunction) {
+				// f(x)
 				SingleFunction sf = (SingleFunction) head;
-				results.addAll(considerFunctionTerm(sf, variable, sf.getVariable(), program));
-
+				results.addAll(considerFunctionTerm(sf, currentVariable, sf.getVariable(), program, consideredTerms));
+			} else if (head instanceof DoubleFunction) {
+				// f(x, y): consider each variable
+				DoubleFunction df = (DoubleFunction) head;
+				results.addAll(considerFunctionTerm(df, currentVariable, df.getFunctionTerm1(), program, consideredTerms));
+				results.addAll(considerFunctionTerm(df, currentVariable, df.getFunctionTerm2(), program, consideredTerms));
 			} else if (head instanceof VariableFunction) {
-				
+				// f(x, y, z, ...): consider each variable
+				VariableFunction vf = (VariableFunction) head;
+				for (FunctionTerm var : vf.getVariables()) {
+					results.addAll(considerFunctionTerm(vf, currentVariable, var, program, consideredTerms));
+				}
 			} else {
 				throw new TermParseException("Did not expect head function of type '" + head.getClass().getSimpleName() + "': " + head);
 			}
@@ -2554,22 +2659,23 @@ public class DumpDroolsXml extends InferenceTestCase {
 		return results;
 	}
 	
-	private Set<Function> considerFunctionTerm(NamedFunction sf, FunctionTerm v2, FunctionTerm variable, List<InferredTerm> program) throws TermParseException {
+	private Set<Function> considerFunctionTerm(NamedFunction sf, FunctionTerm currentVariable, FunctionTerm variable, List<InferredTerm> program, List<InferredTerm> consideredTerms) throws TermParseException {
 		Set<Function> results = new HashSet<Function>();
 		
 		if (variable instanceof FactoryFunction) {
 			FactoryFunction ff = (FactoryFunction) variable;
-			if (ff.getVariable().equals( v2 )) {
+			if (ff.getVariable().equals( currentVariable )) {
 				// sf(f(x)) <- current(x)
 				results.add(sf);
+				// recursion also stops here
 			}
-		} else if (variable.equals( v2 )) {
+		} else if (variable.equals( currentVariable )) {
 			// its a function that uses the current variable
 			
 			// look through the entire program for other things that match 
 			// this current term
 			Set<Function> subResults = 
-				investigateFunctionForPotentialFactoryFunctions(sf, program);
+				investigateFunctionForPotentialFactoryFunctions(sf, program, consideredTerms);
 			
 			// add these to the results
 			results.addAll(subResults);
@@ -2583,37 +2689,94 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * function in the body. Add all of the factory functions that this
 	 * term creates, and return these.
 	 * 
-	 * @param sf
+	 * @param named the named function to consider against
 	 * @param program
+	 * @param consideredFunctionNames a list of function names we have already considered. we need to populate this
+	 * 	with the current function name, otherwise we could easily get in an infinite loop
+	 *  e.g. a(x) -> b(x), b(x) -> a(x). without a b(f(x)) this will loop forever.
 	 * @return
 	 * @throws TermParseException 
 	 */
 	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
-			NamedFunction sf, List<InferredTerm> program) throws TermParseException {
+			NamedFunction named, List<InferredTerm> program, List<InferredTerm> consideredTerms) throws TermParseException {
 
 		Set<Function> results = new HashSet<Function>();
 		
 		for (InferredTerm term : program) {
-			// we can't look directly at these functions, we
-			// have to look at the function names
-			for (Function f : term.getBody()) {
-				if (f instanceof SingleFunction) {
-					if (((SingleFunction) f).getName().equals(sf.getName())) {
-						// a match
-						Set<Function> sub = 
-							investigateFunctionForPotentialFactoryFunctions((NormalVariable) ((SingleFunction) f).getVariable(), term, program);
-						results.addAll(sub);
-					}
-				} else if (f instanceof Not) {
-					// ignore not(..) in the rule body
-				} else {
-					throw new TermParseException("Did not expect potential function of type '" + f.getClass().getSimpleName() + "': " + f);
+			// prevent infinite loops
+			if (!consideredTerms.contains(term)) {
+				// we can't look directly at these functions, we
+				// have to look at the function names
+				consideredTerms.add(term);
+				for (Function f : term.getBody()) {
+					results.addAll(investigateFunctionForPotentialFactoryFunctions(named, f, term, program, consideredTerms));
 				}
+				//consideredTerms.remove(term);
 			}
 		}
 
+		return results;
+	}
+	
+	/**
+	 * We're looking at an individual function.
+	 * @param named
+	 * @param function
+	 * @param program
+	 * @return
+	 * @throws TermParseException
+	 */
+	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
+			NamedFunction named, Function function, InferredTerm term, 
+			List<InferredTerm> program, List<InferredTerm> consideredTerms) throws TermParseException {
+
+		Set<Function> results = new HashSet<Function>();
+		
+		if (function instanceof NamedFunction) {
+			NamedFunction nf = (NamedFunction) function;
+			if (nf.getName().equals(named.getName())) {
+				// we have a function name match
+				if (function instanceof SingleFunction) {
+					// f(x)
+					SingleFunction sf = (SingleFunction) function;
+					Set<Function> sub = 
+						investigateFunctionForPotentialFactoryFunctions(sf.getVariable(), term, program, consideredTerms);
+					results.addAll(sub);
+				} else if (function instanceof DoubleFunction) {
+					// f(x, y)
+					DoubleFunction df = (DoubleFunction) function;
+					Set<Function> sub1 = 
+						investigateFunctionForPotentialFactoryFunctions(df.getFunctionTerm1(), term, program, consideredTerms);
+					results.addAll(sub1);
+					Set<Function> sub2 = 
+						investigateFunctionForPotentialFactoryFunctions(df.getFunctionTerm2(), term, program, consideredTerms);
+					results.addAll(sub2);
+				} else if (function instanceof VariableFunction) {
+					// f(x, y, ...)
+					VariableFunction df = (VariableFunction) function;
+					for (FunctionTerm var : df.getVariables()) {
+						Set<Function> sub = 
+							investigateFunctionForPotentialFactoryFunctions(var, term, program, consideredTerms);
+						results.addAll(sub);
+					}
+				} else {
+					throw new TermParseException("Did not expect NamedFunction of type '" + function.getClass().getSimpleName() + "': " + function);
+				}
+			}
+		} else if (function instanceof Not) {
+			// ignore not(..) in the rule body
+		} else if (function instanceof Or) {
+			// or(a(x), b(x), ...): consider all these terms as and().
+			Or orFunction = (Or) function;
+			for (Function subf : orFunction.getContents()) {
+				results.addAll(investigateFunctionForPotentialFactoryFunctions(named, subf, term, program, consideredTerms));
+			}
+		} else {
+			throw new TermParseException("Did not expect potential function of type '" + function.getClass().getSimpleName() + "': " + function);
+		}
 		
 		return results;
+		
 	}
 
 	/**
@@ -2652,7 +2815,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 		}
 
-		public FactoryLoopNode(SingleFunction f) {
+		public FactoryLoopNode(NamedFunction f) {
 			this(f.getName());
 		}
 
@@ -2741,13 +2904,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 			Set<FactoryLoopNode> result = new LinkedHashSet<FactoryLoopNode>();
 			
 			for (Function f : list) {
-				if (f instanceof SingleFunction) {
-					FactoryLoopNode found = getNodeForFunction((SingleFunction) f);
+				if (f instanceof NamedFunction) {
+					FactoryLoopNode found = getNodeForFunction((NamedFunction) f);
 					if (found == null) {
-						found = new FactoryLoopNode((SingleFunction) f);
+						found = new FactoryLoopNode((NamedFunction) f);
 						add(found);
 					}
 					result.add(found);
+				} else {
+					throw new RuntimeException("Did not expect non NamedFunction '" + f + "'");
 				}
 			}
 			
@@ -2761,8 +2926,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 		 * @param body
 		 * @return
 		 */
-		public FactoryLoopNode getNodeForFunction(SingleFunction body) {
-			return getNode(((SingleFunction) body).getName());
+		public FactoryLoopNode getNodeForFunction(NamedFunction body) {
+			return getNode(body.getName());
 		}
 
 		/**

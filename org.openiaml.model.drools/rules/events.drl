@@ -13,6 +13,9 @@ import org.openiaml.model.model.domain.*;
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
+import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
+global PrintingArrayList queue;
+
 rule "Create 'edit' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )
@@ -23,7 +26,7 @@ rule "Create 'edit' event trigger for input text field"
 
 		EventTrigger event = handler.generatedEventTrigger(f, f);
 		event.setName("edit");
-		insert(event);
+		queue.add(event);
 		
 end
 
@@ -35,7 +38,7 @@ rule "Create 'edit' event trigger for domain attribute"
 	then
 		EventTrigger event = handler.generatedEventTrigger(f, f);
 		event.setName("edit");
-		insert(event);
+		queue.add(event);
 		
 end
 
@@ -47,6 +50,6 @@ rule "Create 'access' event trigger for input text field"
 	then
 		EventTrigger event = handler.generatedEventTrigger(f, f);
 		event.setName("access");
-		insert(event);
+		queue.add(event);
 		
 end

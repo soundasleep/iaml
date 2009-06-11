@@ -15,6 +15,9 @@ import java.util.*;
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
+import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
+global PrintingArrayList queue;
+
 function boolean syncMatches(NamedElement e1, NamedElement e2) {
 	return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
 }
@@ -57,7 +60,7 @@ rule "Sync wires between pages should create sync wires between all elements ins
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
 		sw.setName("sync");
-		insert(sw);
+		queue.add(sw);
 		
 end
 
@@ -77,7 +80,7 @@ rule "Run instance wire from source.edit to target.update"
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		insert(rw);
+		queue.add(rw);
 
 end
 
@@ -95,7 +98,7 @@ rule "Run instance wire from target.edit to source.update"
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		insert(rw);
+		queue.add(rw);
 
 end
 
@@ -116,7 +119,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
 		pw.setName("[sync] run instance parameter (source.edit)"); 
-		insert(pw);
+		queue.add(pw);
 
 end
 
@@ -136,7 +139,7 @@ rule "Connect parameter wire to: run instance wire from target.edit to source.up
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
 		pw.setName("[sync] run instance parameter (target.edit)"); 
-		insert(pw);
+		queue.add(pw);
 
 end
 
@@ -156,7 +159,7 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		insert(rw);
+		queue.add(rw);
 
 end
 
@@ -175,7 +178,7 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		insert(rw);
+		queue.add(rw);
 
 end
 
@@ -196,7 +199,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
 		pw.setName("[sync] run instance parameter (source.access)"); 
-		insert(pw);
+		queue.add(pw);
 
 end
 
@@ -216,7 +219,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire);
 		pw.setName("[sync] run instance parameter (target.access)"); 
-		insert(pw);
+		queue.add(pw);
 
 end
 
@@ -349,7 +352,7 @@ rule "Chained SyncWires: between A to B, and B to C, means there should be a Syn
 	then
 		SyncWire newWire = handler.generatedSyncWire(as, container, a, c);
 		newWire.setName("chained sync from: " + as.getId() + " to: " + bs.getId()); 
-		insert(newWire);
+		queue.add(newWire);
 		
 end
 
@@ -379,7 +382,7 @@ rule "Chained SyncWires: Cascade conditions from A to C"
 	then
 		ConditionWire newWire = handler.generatedConditionWire(aw, aw, cond, cs);
 		newWire.setName("copied chained condition [from a]: " + aw.getId()); 
-		insert(newWire);
+		queue.add(newWire);
 		
 		// also copy over all Parameters explicitly 
 		// if we try to do this implicitly, then we get the problem where
@@ -392,7 +395,7 @@ rule "Chained SyncWires: Cascade conditions from A to C"
 				ParameterWire src = (ParameterWire) w;
 				ParameterWire newPw = handler.generatedParameterWire(aw, aw, src.getFrom(), newWire);
 				newPw.setName("[chained a] from " + w.getId());
-				insert(newPw);  
+				queue.add(newPw);  
 			}
 		}
 		
@@ -424,7 +427,7 @@ rule "Chained SyncWires: Cascade conditions from B to C"
 	then
 		ConditionWire newWire = handler.generatedConditionWire(bw, bw, cond, cs);
 		newWire.setName("copied chained condition [from b]: " + bw.getId()); 
-		insert(newWire);
+		queue.add(newWire);
 		
 		// also copy over all Parameters explicitly 
 		// TODO see note above
@@ -433,7 +436,7 @@ rule "Chained SyncWires: Cascade conditions from B to C"
 				ParameterWire src = (ParameterWire) w;
 				ParameterWire newPw = handler.generatedParameterWire(bw, bw, src.getFrom(), newWire);
 				newPw.setName("[chained b] from " + w.getId());
-				insert(newPw);  
+				queue.add(newPw);  
 			}
 		}
 		
@@ -471,7 +474,7 @@ rule "Chained SyncWires: Cascade parameters from A to C"
 	then
 		ParameterWire newWire = handler.generatedParameterWire(as, as, param, cw);
 		newWire.setName("[chained] param from [a]: " + ap.getId());
-		insert(newWire);
+		queue.add(newWire);
 		
 end
 
@@ -506,7 +509,7 @@ rule "Chained SyncWires: Cascade parameters from B to C"
 	then
 		ParameterWire newWire = handler.generatedParameterWire(bs, bs, param, cw);
 		newWire.setName("[chained] param from [b]: " + bp.getId());
-		insert(newWire);
+		queue.add(newWire);
 		
 end
 */
@@ -534,7 +537,7 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 	then
 		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
 		ecw.setName("[copied] from: " + cw.getId());
-		insert(ecw);
+		queue.add(ecw);
 
 end
 
@@ -569,7 +572,7 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		# create it
 		ParameterWire epw = handler.generatedParameterWire( cw, cw, parameter, ecw );
 		epw.setName("[copied] from: " + pw.getId());
-		insert(epw);
+		queue.add(epw);
 
 end
 
@@ -599,7 +602,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Pages)"
 	then
 		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
 		rw2.setName("run");
-		insert(rw2);
+		queue.add(rw2);
 		
 end
 
@@ -631,7 +634,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Pag
 		
 	then
 		ParameterWire pw2 = handler.generatedParameterWire(sw, sw, field, initrw);
-		insert(pw2);		
+		queue.add(pw2);		
 end
 
 

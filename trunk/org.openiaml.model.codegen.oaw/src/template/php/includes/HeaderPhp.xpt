@@ -22,7 +22,7 @@ function log_message($msg, $also_debug = true) {
 	if ($also_debug) {
 		global $enable_queue_log_messages;
 		global $queue_log_messages;
-		$message = "\$('response').innerHTML = \"" . htmlentities($msg) . "\";\n";
+		$message = "\$('response').innerHTML = \"" . htmlentities(str_replace("\n", "", str_replace("\r", "", $msg))) . "\";\n";
 		if ($enable_queue_log_messages) {
 			$queue_log_messages .= $message;
 		} else {

@@ -159,16 +159,13 @@
 					«EXPAND php::includes::EventsPhp::eventsPhp FOR this-» 
 					?>
 
+					<?php queue_log_messages(false); /* re-enable log messages */ ?>
+
 				}
 			/* ]]> */
 			</script>
 		</head>
 		<body onLoad="loadStoredEvents()">
-		<script language="Javascript" type="text/javascript">
-		/* <![CDATA[ */
-		<?php queue_log_messages(false); /* re-enable log messages */ ?>
-		/* ]]> */
-		</script>
 		<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
 		
 		<h1>«pageTitle()»</h1>

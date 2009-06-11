@@ -36,7 +36,7 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 				fw.close();
 			}
 			
-			/*
+			
 			IACleaner cleaner = new IACleaner();
 			String out = cleaner.cleanScript( file.getTargetFile() );
 			
@@ -44,15 +44,17 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 			FileWriter fw2 = new FileWriter(file.getTargetFile());
 			fw2.write(out);
 			fw2.close();
-			*/
+			
 			
 			// chain onto output
+			/*
 			OutputInstrumentation oi = new OutputInstrumentation();
 			try {
 				oi.instrumentFile(file);
 			} catch (InstrumentationException e) {
 				throw new CleanerException(e);
 			}
+			*/
 			
 		} catch (IOException e) {
 			throw new RuntimeException("[" + file.getTargetFile() + "] IO Exception during prettifier: " + e.getMessage(), e);

@@ -16,6 +16,9 @@ import java.util.*;
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
+import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
+global PrintingArrayList queue;
+
 function boolean connects(WireEdge wire, Object a, Object b) {
 	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
 		(wire.getFrom().equals(b) && wire.getTo().equals(a));
@@ -75,7 +78,7 @@ rule "Connect SyncWires for a dynamic source, referenced by XPath"
 	then 
 		SyncWire sw2 = handler.generatedSyncWire( container, container, source, target );
 		sw2.setName("dynamic sync");
-		insert(sw2);
+		queue.add(sw2);
 		
 end
 
@@ -88,7 +91,7 @@ rule "Create the Condition for an XPath set"
 	then
 		CompositeCondition c = handler.generatedCompositeCondition(ds, ds);
 		c.setName("xpath");
-		insert(c);
+		queue.add(c);
 	
 end
 
@@ -110,49 +113,49 @@ rule "Create the contents of the XPath condition"
 		# create contents
 		Parameter parameter = handler.generatedParameter(o, o);
 		parameter.setName("element");
-		insert(parameter);
+		queue.add(parameter);
 
 		Parameter xpath = handler.generatedParameter(o, o);
 		xpath.setName("xpath");
-		insert(xpath);
+		queue.add(xpath);
 		
 		DecisionCondition dc = handler.generatedDecisionCondition(o, o);
 		dc.setName("xpathMatch");
-		insert(dc);
+		queue.add(dc);
 		
 		StartNode start = handler.generatedStartNode(o, o);
-		insert(start);
+		queue.add(start);
 		
 		FinishNode finish = handler.generatedFinishNode(o, o);
-		insert(finish);
+		queue.add(finish);
 		
 		CancelNode cancel = handler.generatedCancelNode(o, o);
-		insert(cancel);
+		queue.add(cancel);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
 		data1.setFrom(parameter);
 		data1.setTo(dc);
-		insert(data1);
+		queue.add(data1);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
 		data2.setFrom(xpath);
 		data2.setTo(dc);
-		insert(data2);
+		queue.add(data2);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
 		edge1.setFrom(start);
 		edge1.setTo(dc);
-		insert(edge1);
+		queue.add(edge1);
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
 		edge2.setFrom(dc);
 		edge2.setTo(finish);
-		insert(edge2);
+		queue.add(edge2);
 
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
 		edge3.setFrom(dc);
 		edge3.setTo(cancel);
-		insert(edge3);
+		queue.add(edge3);
 
 end
 
@@ -180,29 +183,29 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		if (sw.isIsGenerated()) {
 			ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
 			cw.setName("xpath condition (source)");
-			insert(cw);
+			queue.add(cw);
 
 			ParameterWire pw = handler.generatedParameterWire( cw, cw, ds, cw);
 			pw.setName("[xpath] from ds 1");
-			insert(pw);		 
+			queue.add(pw);		 
 	
 			ParameterWire pw2 = handler.generatedParameterWire( cw, cw, source, cw);
 			pw2.setName("[xpath] from source");
-			insert(pw2);
+			queue.add(pw2);
 
 		}
 
 		ConditionWire cwt = handler.generatedConditionWire( ds, ds, condition, tw );
 		cwt.setName("xpath condition (target)");
-		insert(cwt);
+		queue.add(cwt);
 
 		ParameterWire pwt = handler.generatedParameterWire( cwt, cwt, ds, cwt);
 		pwt.setName("[xpath] from ds 2");
-		insert(pwt);		 
+		queue.add(pwt);		 
 
 		ParameterWire pwt2 = handler.generatedParameterWire( cwt, cwt, target, cwt);
 		pwt2.setName("[xpath] from target");
-		insert(pwt2);
+		queue.add(pwt2);
 
 end
 

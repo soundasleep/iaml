@@ -15,6 +15,9 @@ import java.util.*;
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
+import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
+global PrintingArrayList queue;
+
 # TODO can we put this function into something global?
 function boolean connects(WireEdge wire, Object a, Object b) {
 	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
@@ -44,7 +47,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 		# copy the condition
 		ConditionWire cw = handler.generatedConditionWire( sourceCw, sourceCw, condition, run );
 		cw.setName("copied condition: " + sourceCw.getId());
-		insert(cw);
+		queue.add(cw);
 
 end
 
@@ -71,7 +74,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires (reverse)"
 		# copy the condition
 		ConditionWire cw = handler.generatedConditionWire( sourceCw, sourceCw, condition, run );
 		cw.setName("copied condition [reverse]: " + sourceCw.getId());
-		insert(cw);
+		queue.add(cw);
 
 end
 
@@ -106,7 +109,7 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		pw.setName("[conditions] sync from: " + paramWire.getId());
-		insert(pw);
+		queue.add(pw);
 
 end
 
@@ -140,6 +143,6 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		pw.setName("[conditions] sync from [reverse]: " + paramWire.getId());
-		insert(pw);
+		queue.add(pw);
 
 end

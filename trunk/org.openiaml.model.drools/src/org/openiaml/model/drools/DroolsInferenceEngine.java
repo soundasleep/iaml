@@ -3,19 +3,55 @@
  */
 package org.openiaml.model.drools;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.WorkingMemory;
 import org.drools.compiler.PackageBuilder;
+import org.drools.event.ActivationCancelledEvent;
+import org.drools.event.ActivationCreatedEvent;
+import org.drools.event.AfterActivationFiredEvent;
+import org.drools.event.AfterFunctionRemovedEvent;
+import org.drools.event.AfterPackageAddedEvent;
+import org.drools.event.AfterPackageRemovedEvent;
+import org.drools.event.AfterRuleAddedEvent;
+import org.drools.event.AfterRuleBaseLockedEvent;
+import org.drools.event.AfterRuleBaseUnlockedEvent;
+import org.drools.event.AfterRuleRemovedEvent;
+import org.drools.event.AgendaEventListener;
+import org.drools.event.AgendaGroupPoppedEvent;
+import org.drools.event.AgendaGroupPushedEvent;
+import org.drools.event.BeforeActivationFiredEvent;
+import org.drools.event.BeforeFunctionRemovedEvent;
+import org.drools.event.BeforePackageAddedEvent;
+import org.drools.event.BeforePackageRemovedEvent;
+import org.drools.event.BeforeRuleAddedEvent;
+import org.drools.event.BeforeRuleBaseLockedEvent;
+import org.drools.event.BeforeRuleBaseUnlockedEvent;
+import org.drools.event.BeforeRuleRemovedEvent;
 import org.drools.event.DefaultWorkingMemoryEventListener;
 import org.drools.event.ObjectInsertedEvent;
 import org.drools.event.ObjectRetractedEvent;
 import org.drools.event.ObjectUpdatedEvent;
+import org.drools.event.RuleBaseEventListener;
+import org.drools.event.RuleFlowCompletedEvent;
+import org.drools.event.RuleFlowEventListener;
+import org.drools.event.RuleFlowGroupActivatedEvent;
+import org.drools.event.RuleFlowGroupDeactivatedEvent;
+import org.drools.event.RuleFlowStartedEvent;
 import org.drools.event.WorkingMemoryEventListener;
 import org.drools.rule.Package;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -56,6 +92,14 @@ import org.openiaml.model.model.scopes.Session;
  *
  */
 public abstract class DroolsInferenceEngine {
+	
+	/**
+	 * How many iterations of inserting new elements (and revaluating
+	 * the rules) should we limit ourselves to?
+	 * 
+	 * Also: The value of 'k' from the upcoming paper.
+	 */
+	protected static int INSERTION_ITERATION_LIMIT = 20;
 	
 	ICreateElements handler;
 
@@ -271,8 +315,6 @@ public abstract class DroolsInferenceEngine {
         subProgressMonitor.done();
         subProgressMonitor = null;
         
-        workingMemory.setGlobal("handler", handler);
-        
         monitor.subTask("Inferring new model elements");
         
         /*
@@ -295,13 +337,154 @@ public abstract class DroolsInferenceEngine {
 				}
 	        });
         }
-        
-        subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
-        workingMemory.fireAllRules();
+
+        PrintingArrayList queue = new PrintingArrayList();
+	    workingMemory.setGlobal("handler", handler);
+		workingMemory.setGlobal("queue", queue );
+		
+		// logging
+		try {
+			// InferenceQueueLog log = new InferenceQueueLog();
+			// turn off
+			InferenceQueueLog log = new InferenceQueueLogSilent();
+	
+		    // subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
+			// we can actually use a real monitor, now that we have a limit
+			subProgressMonitor = new SubProgressMonitor(monitor, INSERTION_ITERATION_LIMIT);
+	        for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
+	        	System.out.println("[step " + k + "]");
+		        
+		        workingMemory.fireAllRules();
+		        
+		        // once the rules have been completed,
+		        // insert in the new elements
+		        // but first reset the queue
+		        PrintingArrayList oldQueue = queue;
+		        queue = new PrintingArrayList();
+				workingMemory.setGlobal("queue", queue );
+				
+				for (EObject o : oldQueue) {
+					workingMemory.insert(o);
+
+					// increment all the types in the log
+					log.increment("step " + k + " type " + o.eClass().getName(), 1);
+				}
+		        
+				// increment the log
+				log.increment("step " + k, oldQueue.size());
+	        }
+	        
+	        // are there any elements left in the queue?
+	        // if so, this might be an infinite loop
+	        if (!queue.isEmpty()) {
+	        	throw new InferenceException("Expected an empty queue at the end of k iterations, but had: " + queue);
+	        }
+	        
+	        // finish the log
+	        log.save();
+		} catch (IOException e) {
+			throw new InferenceException(e);
+		} catch (NumberFormatException e) {
+			throw new InferenceException(e);
+		}
+	        
         subProgressMonitor.done();	// completed
         
         monitor.done();
 
+	}
+	
+	/**
+	 * Log inference queue results.
+	 * Will usually output to the source directory of the executing
+	 * plugin, e.g. org.openiaml.tests/inference.log 
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public class InferenceQueueLog {
+
+		File logFile = new File("inference.log");
+		private Map<String, Integer> log = new HashMap<String, Integer>();
+
+		/**
+		 * Load the log.
+		 * @throws IOException 
+		 * @throws NumberFormatException 
+		 */
+		public InferenceQueueLog() throws NumberFormatException, IOException {
+			if (logFile.exists()) {
+				BufferedReader read = new BufferedReader(new FileReader(logFile));
+				String line;
+				while ((line = read.readLine()) != null) {
+					String[] bits = line.split(": ", 2);
+					log.put(bits[0], Integer.parseInt(bits[1]));
+				}
+				read.close();
+			}
+		}
+		
+		/**
+		 * Increment a log value.
+		 * @param key
+		 */
+		public void increment(String key, int value) {
+			if (log.get(key) == null) {
+				log.put(key, value);
+			} else {
+				log.put(key, log.get(key) + value);
+			}
+		}
+		
+		/**
+		 * Save the log.
+		 * @throws IOException 
+		 */
+		public void save() throws IOException {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(logFile));
+			for (String key : log.keySet()) {
+				writer.write(key + ": " + log.get(key) + "\n");
+			}
+			writer.close();
+		}
+		
+	}
+	
+	/**
+	 * Extends {@link InferenceQueueLog} to never actually do
+	 * anything, i.e. be silent.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public class InferenceQueueLogSilent extends InferenceQueueLog {
+
+		public InferenceQueueLogSilent() throws NumberFormatException, IOException {
+			// do nothing
+		}
+		
+		@Override
+		public void increment(String key, int value) {
+			// do nothing
+		}
+		
+		@Override
+		public void save() throws IOException {
+			// do nothing
+		}
+		
+	}
+	
+	public class PrintingArrayList extends ArrayList<EObject> {
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public boolean add(EObject e) {
+			System.out.println("queueing object: " + e);
+			return super.add(e);
+		}
+    	
 	}
 
 	public List<String> ruleFiles = Arrays.asList(

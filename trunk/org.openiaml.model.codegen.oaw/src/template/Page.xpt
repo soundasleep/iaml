@@ -183,10 +183,18 @@
 		}
 		?>
 		
+		<?php queue_log_messages(true); ?>
+
 		«EXPAND expandChild FOREACH children-»
 		
 		<div id="debug"></div>
 		<div id="response">empty</div>
+		
+		<script language="Javascript" type="text/javascript">
+		/* <![CDATA[ */
+		<?php queue_log_messages(false); /* re-enable log messages, but only after we have "response". */ ?>
+		/* ]]> */
+		</script>
 		
 		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
 		<div id="debug_monitors">
@@ -211,7 +219,6 @@
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputForm-»
-	<?php queue_log_messages(true); ?>
 	<form id="«safeNameString(id)»" 
 			onChange="return onChange_«safeNameString(id)»(this);"
 			onClick="return onClick_«safeNameString(id)»(this);"
@@ -238,15 +245,9 @@
 		
 		«EXPAND expandChild FOREACH children-»
 	</form>
-	<script language="Javascript" type="text/javascript">
-	/* <![CDATA[ */
-	<?php queue_log_messages(false); /* re-enable log messages */ ?>
-	/* ]]> */
-	</script>
 «ENDDEFINE»
 
 «DEFINE expandChild FOR model::visual::InputTextField-»
-	<?php queue_log_messages(true); ?>
 	<div>
 	<label id="label_«safeNameString(id)-»">
 		«textFieldName()»
@@ -302,16 +303,10 @@
 		</script>
 	</label>
 	</div>
-	<script language="Javascript" type="text/javascript">
-	/* <![CDATA[ */
-	<?php queue_log_messages(false); /* re-enable log messages */ ?>
-	/* ]]> */
-	</script>
 «ENDDEFINE»
 
 /* currently, a "Button" == a submit button. */
 «DEFINE expandChild FOR model::visual::Button-»
-	<?php queue_log_messages(true); ?>
 	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
 			onChange="return onChange_«safeNameString(id)»(this);"
 			onClick="return onClick_«safeNameString(id)»(this);"
@@ -336,11 +331,6 @@
 
 			return false;
 		}
-	/* ]]> */
-	</script>
-	<script language="Javascript" type="text/javascript">
-	/* <![CDATA[ */
-	<?php queue_log_messages(false); /* re-enable log messages */ ?>
 	/* ]]> */
 	</script>
 «ENDDEFINE»

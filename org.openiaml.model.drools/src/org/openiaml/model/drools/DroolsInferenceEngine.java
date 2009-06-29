@@ -22,40 +22,17 @@ import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.WorkingMemory;
 import org.drools.compiler.PackageBuilder;
-import org.drools.event.ActivationCancelledEvent;
-import org.drools.event.ActivationCreatedEvent;
-import org.drools.event.AfterActivationFiredEvent;
-import org.drools.event.AfterFunctionRemovedEvent;
-import org.drools.event.AfterPackageAddedEvent;
-import org.drools.event.AfterPackageRemovedEvent;
-import org.drools.event.AfterRuleAddedEvent;
-import org.drools.event.AfterRuleBaseLockedEvent;
-import org.drools.event.AfterRuleBaseUnlockedEvent;
-import org.drools.event.AfterRuleRemovedEvent;
-import org.drools.event.AgendaEventListener;
-import org.drools.event.AgendaGroupPoppedEvent;
-import org.drools.event.AgendaGroupPushedEvent;
-import org.drools.event.BeforeActivationFiredEvent;
-import org.drools.event.BeforeFunctionRemovedEvent;
-import org.drools.event.BeforePackageAddedEvent;
-import org.drools.event.BeforePackageRemovedEvent;
-import org.drools.event.BeforeRuleAddedEvent;
-import org.drools.event.BeforeRuleBaseLockedEvent;
-import org.drools.event.BeforeRuleBaseUnlockedEvent;
-import org.drools.event.BeforeRuleRemovedEvent;
 import org.drools.event.DefaultWorkingMemoryEventListener;
 import org.drools.event.ObjectInsertedEvent;
 import org.drools.event.ObjectRetractedEvent;
 import org.drools.event.ObjectUpdatedEvent;
-import org.drools.event.RuleBaseEventListener;
-import org.drools.event.RuleFlowCompletedEvent;
-import org.drools.event.RuleFlowEventListener;
-import org.drools.event.RuleFlowGroupActivatedEvent;
-import org.drools.event.RuleFlowGroupDeactivatedEvent;
-import org.drools.event.RuleFlowStartedEvent;
 import org.drools.event.WorkingMemoryEventListener;
+import org.drools.reteoo.ReteTuple;
 import org.drools.rule.Package;
+import org.drools.rule.Rule;
+import org.drools.spi.Activation;
 import org.drools.spi.KnowledgeHelper;
+import org.drools.spi.PropagationContext;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -485,8 +462,109 @@ public abstract class DroolsInferenceEngine {
 	 */
 	public class PrintingArrayList {
 
+
+		/**
+		 * @author jmwright
+		 *
+		 */
+		public class MyPropogationContext implements PropagationContext {
+
+			private static final long serialVersionUID = 1L;
+			
+			private Activation activation;
+
+			/**
+			 * @param activation
+			 */
+			public MyPropogationContext(Activation activation) {
+				this.activation = activation;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#addRetractedTuple(org.drools.rule.Rule, org.drools.spi.Activation)
+			 */
+			@Override
+			public void addRetractedTuple(Rule rule, Activation activation) {
+				throw new UnsupportedOperationException("addRetractedTuple() is not supported");
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#clearRetractedTuples()
+			 */
+			@Override
+			public void clearRetractedTuples() {
+				throw new UnsupportedOperationException("clearRetractedTuples() is not supported");
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#getActivationOrigin()
+			 */
+			@Override
+			public Activation getActivationOrigin() {
+				return activation;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#getActiveActivations()
+			 */
+			@Override
+			public int getActiveActivations() {
+				throw new UnsupportedOperationException("getActiveActivations() is not supported");
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#getDormantActivations()
+			 */
+			@Override
+			public int getDormantActivations() {
+				throw new UnsupportedOperationException("getDormantActivations() is not supported");
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#getPropagationNumber()
+			 */
+			@Override
+			public long getPropagationNumber() {
+				throw new UnsupportedOperationException("getDormantActivations() is not supported");
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#getRuleOrigin()
+			 */
+			@Override
+			public Rule getRuleOrigin() {
+				return activation.getRule();
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#getType()
+			 */
+			@Override
+			public int getType() {
+				return PropagationContext.ASSERTION;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#releaseResources()
+			 */
+			@Override
+			public void releaseResources() {
+				// does nothing
+			}
+
+			/* (non-Javadoc)
+			 * @see org.drools.spi.PropagationContext#removeRetractedTuple(org.drools.rule.Rule, org.drools.reteoo.ReteTuple)
+			 */
+			@Override
+			public Activation removeRetractedTuple(Rule rule, ReteTuple tuple) {
+				throw new UnsupportedOperationException("removeRetractedTuple() is not supported");
+			}
+
+		}
+		
 		public List<EObject> objects = new ArrayList<EObject>();
 		public List<KnowledgeHelper> helpers = new ArrayList<KnowledgeHelper>();
+		public List<Activation> activations = new ArrayList<Activation>();
 		
 		private static final long serialVersionUID = 1L;
 		
@@ -500,6 +578,7 @@ public abstract class DroolsInferenceEngine {
 		public void add(EObject e, KnowledgeHelper drools) {
 			objects.add(e);
 			helpers.add(drools);
+			activations.add(drools.getActivation());
 		}
 		
 		/**
@@ -550,11 +629,10 @@ public abstract class DroolsInferenceEngine {
 
 				// throw a new event for all listeners
 				KnowledgeHelper drools = helpers.get(i);
-				for (Object o : memory.getWorkingMemoryEventListeners()) {
-					WorkingMemoryEventListener listener = (WorkingMemoryEventListener) o;
+				for (WorkingMemoryEventListener listener : oldList) {
 					listener.objectInserted(new ObjectInsertedEvent(
 							drools.getWorkingMemory(),
-							drools.getActivation().getPropagationContext(),
+							new MyPropogationContext(activations.get(i)),
 							handle,
 							objects.get(i)
 						));

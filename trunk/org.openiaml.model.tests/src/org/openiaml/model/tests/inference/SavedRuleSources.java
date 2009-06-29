@@ -95,13 +95,16 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertTrue(targetOp.isIsGenerated());
 		assertEquals("Create 'update' operation for input text field", targetOp.getGeneratedRule());
 		
+		// there should only be one run wire between these two
+		assertHasWiresFromTo(1, wire, srcEdit, targetOp);
+		
 		// there should be a run wire between these two
 		RunInstanceWire srcRw = (RunInstanceWire) getWireFromTo(wire, srcEdit, targetOp);
 		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
 		assertTrue(srcRw.isIsGenerated());
-		assertEquals("Run instance wire from target.edit to source.update", srcRw.getGeneratedRule());
+		assertEquals("Run instance wire from edit to update", srcRw.getGeneratedRule());
 		assertTrue(targetRw.isIsGenerated());
-		assertEquals("Run instance wire from source.edit to target.update", targetRw.getGeneratedRule());
+		assertEquals("Run instance wire from edit to update", targetRw.getGeneratedRule());
 		
 		// there should be additional ConditionWires to these RunInstanceWires
 		ConditionWire srcCw = (ConditionWire) getWireFromTo(page1, cond, srcRw); 

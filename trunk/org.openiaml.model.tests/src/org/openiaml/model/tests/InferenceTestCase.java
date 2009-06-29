@@ -21,12 +21,15 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.SyncWire;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -261,6 +264,29 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		return results;
 	}
 
+	/**
+	 * Assert that only the given number of wires exist between
+	 * the source and the target.
+	 * 
+	 * @param count
+	 * @param container
+	 * @param fromElement
+	 * @param toElement
+	 * @throws JaxenException 
+	 */
+	protected void assertHasWiresFromTo(int count, EObject container, 
+			WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
+
+		Set<WireEdge> wires = getWiresFromTo(container, fromElement, toElement);
+		if (wires.size() != count) {
+			for (WireEdge wire : wires) {
+				System.err.println(wire);
+			}
+			assertEquals("Expected " + count + " wires between [" + fromElement + "] and [" + toElement + "], found: " + wires.size(), wires.size(), count);
+		}
+		
+	}
+	
 	/**
 	 * It's not possible to do something like //iaml:wire[iaml:from='id']
 	 * so we need to parse them manually.

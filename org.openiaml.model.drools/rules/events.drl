@@ -26,7 +26,7 @@ rule "Create 'edit' event trigger for input text field"
 
 		EventTrigger event = handler.generatedEventTrigger(f, f);
 		event.setName("edit");
-		queue.add(event);
+		queue.add(event, drools);
 		
 end
 
@@ -38,7 +38,7 @@ rule "Create 'edit' event trigger for domain attribute"
 	then
 		EventTrigger event = handler.generatedEventTrigger(f, f);
 		event.setName("edit");
-		queue.add(event);
+		queue.add(event, drools);
 		
 end
 
@@ -50,6 +50,6 @@ rule "Create 'access' event trigger for input text field"
 	then
 		EventTrigger event = handler.generatedEventTrigger(f, f);
 		event.setName("access");
-		queue.add(event);
+		queue.add(event, drools);
 		
 end

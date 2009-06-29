@@ -78,7 +78,7 @@ rule "Connect SyncWires for a dynamic source, referenced by XPath"
 	then 
 		SyncWire sw2 = handler.generatedSyncWire( container, container, source, target );
 		sw2.setName("dynamic sync");
-		queue.add(sw2);
+		queue.add(sw2, drools);
 		
 end
 
@@ -91,7 +91,7 @@ rule "Create the Condition for an XPath set"
 	then
 		CompositeCondition c = handler.generatedCompositeCondition(ds, ds);
 		c.setName("xpath");
-		queue.add(c);
+		queue.add(c, drools);
 	
 end
 
@@ -113,49 +113,49 @@ rule "Create the contents of the XPath condition"
 		# create contents
 		Parameter parameter = handler.generatedParameter(o, o);
 		parameter.setName("element");
-		queue.add(parameter);
+		queue.add(parameter, drools);
 
 		Parameter xpath = handler.generatedParameter(o, o);
 		xpath.setName("xpath");
-		queue.add(xpath);
+		queue.add(xpath, drools);
 		
 		DecisionCondition dc = handler.generatedDecisionCondition(o, o);
 		dc.setName("xpathMatch");
-		queue.add(dc);
+		queue.add(dc, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
-		queue.add(start);
+		queue.add(start, drools);
 		
 		FinishNode finish = handler.generatedFinishNode(o, o);
-		queue.add(finish);
+		queue.add(finish, drools);
 		
 		CancelNode cancel = handler.generatedCancelNode(o, o);
-		queue.add(cancel);
+		queue.add(cancel, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
 		data1.setFrom(parameter);
 		data1.setTo(dc);
-		queue.add(data1);
+		queue.add(data1, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
 		data2.setFrom(xpath);
 		data2.setTo(dc);
-		queue.add(data2);
+		queue.add(data2, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
 		edge1.setFrom(start);
 		edge1.setTo(dc);
-		queue.add(edge1);
+		queue.add(edge1, drools);
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
 		edge2.setFrom(dc);
 		edge2.setTo(finish);
-		queue.add(edge2);
+		queue.add(edge2, drools);
 
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
 		edge3.setFrom(dc);
 		edge3.setTo(cancel);
-		queue.add(edge3);
+		queue.add(edge3, drools);
 
 end
 
@@ -183,29 +183,29 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		if (sw.isIsGenerated()) {
 			ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
 			cw.setName("xpath condition (source)");
-			queue.add(cw);
+			queue.add(cw, drools);
 
 			ParameterWire pw = handler.generatedParameterWire( cw, cw, ds, cw);
 			pw.setName("[xpath] from ds 1");
-			queue.add(pw);		 
+			queue.add(pw, drools);		 
 	
 			ParameterWire pw2 = handler.generatedParameterWire( cw, cw, source, cw);
 			pw2.setName("[xpath] from source");
-			queue.add(pw2);
+			queue.add(pw2, drools);
 
 		}
 
 		ConditionWire cwt = handler.generatedConditionWire( ds, ds, condition, tw );
 		cwt.setName("xpath condition (target)");
-		queue.add(cwt);
+		queue.add(cwt, drools);
 
 		ParameterWire pwt = handler.generatedParameterWire( cwt, cwt, ds, cwt);
 		pwt.setName("[xpath] from ds 2");
-		queue.add(pwt);		 
+		queue.add(pwt, drools);		 
 
 		ParameterWire pwt2 = handler.generatedParameterWire( cwt, cwt, target, cwt);
 		pwt2.setName("[xpath] from target");
-		queue.add(pwt2);
+		queue.add(pwt2, drools);
 
 end
 

@@ -54,6 +54,9 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
     SyncWire sw1 = (SyncWire) getWireBidirectional(root, page1, page2);
     SyncWire sw2 = (SyncWire) getWireBidirectional(root, page1, page3);
     
+    // there should NOT be a SyncWire between page2 and page3
+    assertNoWireBidirectional(root, page2, page3);
+    
     // we can now investigate the SyncWires themselves, and make sure
     // they have the conditions attached too
     EventTrigger f1edit = (EventTrigger) queryOne(field1, "iaml:eventTriggers[iaml:name='edit']");

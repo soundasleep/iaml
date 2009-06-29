@@ -32,6 +32,8 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 	/**
 	 * Ensure there are only a given number of parameters for a 
 	 * ConditionWire.
+	 * 
+	 * If it fails, it prints out to stderr the ParameterWires found.
 	 */
 	protected void checkParameterCount(int i, ConditionWire cw) {
 		int counted = 0;
@@ -47,7 +49,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 		if (counted != i) {
 			// print out list
 			for (ParameterWire w : results) {
-				System.err.println(w);
+				System.err.println(w + ", from: " + w.getFrom() + ", to: " + w.getTo());
 			}
 			fail("Expected " + i + " parameters into ConditionWire '" + cw + "': found " + counted);
 		}

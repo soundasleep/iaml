@@ -82,7 +82,7 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 	then
 		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
-		pw.setName("[conditions] sync from: " + paramWire.getId());
+		pw.setName("[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);
 
 end

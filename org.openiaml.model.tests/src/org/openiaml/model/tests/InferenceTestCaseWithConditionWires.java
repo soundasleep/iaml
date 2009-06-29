@@ -9,6 +9,7 @@ import java.util.Set;
 
 import junit.framework.AssertionFailedError;
 
+import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
@@ -35,7 +36,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 	 * 
 	 * If it fails, it prints out to stderr the ParameterWires found.
 	 */
-	protected void checkParameterCount(int i, ConditionWire cw) {
+	protected void assertHasParameterWireCount(int i, ConditionWire cw) {
 		int counted = 0;
 		List<ParameterWire> results = new ArrayList<ParameterWire>();
 		
@@ -60,7 +61,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 	 * the given page as a Parameter
 	 * @throws JaxenException 
 	 */
-	protected void checkNotConditionParameter(InternetApplication root,
+	protected void assertNotParameterWire(InternetApplication root,
 			CompositeCondition cond, RunInstanceWire rw, Page page) throws JaxenException {
 
 		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
@@ -223,5 +224,5 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			return false;
 		}
 	}
-  
+
 }

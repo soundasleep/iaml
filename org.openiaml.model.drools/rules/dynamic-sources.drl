@@ -169,9 +169,9 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		tw : SyncWire ( eval(connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		not (
-			sw_cw : ConditionWire ( from == condition, to == tw ) and
-			sw_pw : ParameterWire ( from == ds, to == sw_cw ) and
-			sw_pw2 : ParameterWire ( from == source, to == sw_cw ) and
+#			sw_cw : ConditionWire ( from == condition, to == tw ) and
+#			sw_pw : ParameterWire ( from == ds, to == sw_cw ) and
+#			sw_pw2 : ParameterWire ( from == source, to == sw_cw ) and
 
 			tw_cw : ConditionWire ( from == condition, to == tw ) and
 			tw_pw : ParameterWire ( from == ds, to == tw_cw ) and
@@ -180,6 +180,8 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 	
 	then
 		# could put this into a separate rule
+		# TODO what does it do?
+		/*
 		if (sw.isIsGenerated()) {
 			ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
 			cw.setName("xpath condition (source)");
@@ -194,6 +196,7 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 			queue.add(pw2, drools);
 
 		}
+		*/
 
 		ConditionWire cwt = handler.generatedConditionWire( ds, ds, condition, tw );
 		cwt.setName("xpath condition (target)");

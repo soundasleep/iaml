@@ -13,7 +13,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/drools-analytics-4.0.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/drools-ant-4.0.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/drools-compiler-4.0.7.jar" sourcepath="C:/source/drools-4.0.7-src.zip"/>
-	<classpathentry exported="true" kind="lib" path="lib/drools-core-4.0.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/drools-core-4.0.7.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/Desktop/Downloads/drools-4.0.7-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/drools-jsr94-4.0.7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>

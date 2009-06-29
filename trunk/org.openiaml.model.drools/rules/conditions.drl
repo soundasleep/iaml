@@ -47,7 +47,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 		# copy the condition
 		ConditionWire cw = handler.generatedConditionWire( sourceCw, sourceCw, condition, run );
 		cw.setName("copied condition: " + sourceCw.getId());
-		queue.add(cw);
+		queue.add(cw, drools);
 
 end
 
@@ -74,7 +74,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires (reverse)"
 		# copy the condition
 		ConditionWire cw = handler.generatedConditionWire( sourceCw, sourceCw, condition, run );
 		cw.setName("copied condition [reverse]: " + sourceCw.getId());
-		queue.add(cw);
+		queue.add(cw, drools);
 
 end
 
@@ -109,7 +109,7 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		pw.setName("[conditions] sync from: " + paramWire.getId());
-		queue.add(pw);
+		queue.add(pw, drools);
 
 end
 
@@ -143,6 +143,6 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		pw.setName("[conditions] sync from [reverse]: " + paramWire.getId());
-		queue.add(pw);
+		queue.add(pw, drools);
 
 end

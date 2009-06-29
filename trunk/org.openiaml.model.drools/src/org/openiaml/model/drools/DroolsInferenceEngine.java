@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.drools.FactHandle;
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.WorkingMemory;
@@ -54,6 +55,7 @@ import org.drools.event.RuleFlowGroupDeactivatedEvent;
 import org.drools.event.RuleFlowStartedEvent;
 import org.drools.event.WorkingMemoryEventListener;
 import org.drools.rule.Package;
+import org.drools.spi.KnowledgeHelper;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -337,7 +339,7 @@ public abstract class DroolsInferenceEngine {
 				}
 	        });
         }
-
+        
         PrintingArrayList queue = new PrintingArrayList();
 	    workingMemory.setGlobal("handler", handler);
 		workingMemory.setGlobal("queue", queue );
@@ -363,13 +365,9 @@ public abstract class DroolsInferenceEngine {
 		        queue = new PrintingArrayList();
 				workingMemory.setGlobal("queue", queue );
 				
-				for (EObject o : oldQueue) {
-					workingMemory.insert(o);
+				// apply the new objects
+				oldQueue.apply(workingMemory, k, log);
 
-					// increment all the types in the log
-					log.increment("step " + k + " type " + o.eClass().getName(), 1);
-				}
-		        
 				// increment the log
 				log.increment("step " + k, oldQueue.size());
 	        }
@@ -475,14 +473,98 @@ public abstract class DroolsInferenceEngine {
 		
 	}
 	
-	public class PrintingArrayList extends ArrayList<EObject> {
+	/**
+	 * This used to just be an ArrayList that would print out when
+	 * objects were added to it. Now it is a handle that deals with
+	 * throwing ObjectInsertEvents etc. 
+	 * 
+	 * TODO rename, refactor and document appropriately.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public class PrintingArrayList {
 
+		public List<EObject> objects = new ArrayList<EObject>();
+		public List<KnowledgeHelper> helpers = new ArrayList<KnowledgeHelper>();
+		
 		private static final long serialVersionUID = 1L;
+		
+		/**
+		 * Load additional information from the drools object.
+		 * 
+		 * @param e
+		 * @param drools
+		 * @return
+		 */
+		public void add(EObject e, KnowledgeHelper drools) {
+			objects.add(e);
+			helpers.add(drools);
+		}
+		
+		/**
+		 * Is this queue empty?
+		 * 
+		 * @return
+		 */
+		public boolean isEmpty() {
+			return objects.isEmpty();
+		}
 
-		@Override
-		public boolean add(EObject e) {
-			System.out.println("queueing object: " + e);
-			return super.add(e);
+		/**
+		 * The number of objects queued in here.
+		 * 
+		 * @return
+		 */
+		public int size() {
+			return objects.size();
+		}
+
+		/**
+		 * Apply all the new objects to the given working memory.
+		 * Also throws WorkingMemoryEvents for each added event.
+		 * 
+		 * @param memory
+		 * @param log 
+		 */
+		public void apply(WorkingMemory memory, int step, InferenceQueueLog log) {
+			assert(objects.size() == helpers.size());
+			
+			// first, remove all WorkingMemoryEventListeners
+			// (or else memory.insert() below will still call them)
+			List<WorkingMemoryEventListener> oldList = new ArrayList<WorkingMemoryEventListener>();
+			List<?> oldListeners = memory.getWorkingMemoryEventListeners();
+			for (Object obj : oldListeners) {
+				oldList.add((WorkingMemoryEventListener) obj);
+			}
+			
+			for (WorkingMemoryEventListener obj : oldList) {
+				memory.removeEventListener((WorkingMemoryEventListener) obj);
+			}
+			
+			for (int i = 0; i < objects.size(); i++) {
+				FactHandle handle = memory.insert(objects.get(i));
+
+				// log it
+				log.increment("step " + step + " type " + objects.get(i).eClass().getName(), 1);
+
+				// throw a new event for all listeners
+				KnowledgeHelper drools = helpers.get(i);
+				for (Object o : memory.getWorkingMemoryEventListeners()) {
+					WorkingMemoryEventListener listener = (WorkingMemoryEventListener) o;
+					listener.objectInserted(new ObjectInsertedEvent(
+							drools.getWorkingMemory(),
+							drools.getActivation().getPropagationContext(),
+							handle,
+							objects.get(i)
+						));
+				}
+			}
+			
+			// add all the listeners back again
+			for (WorkingMemoryEventListener obj : oldList) {
+				memory.addEventListener(obj);
+			}
 		}
     	
 	}

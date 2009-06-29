@@ -24,7 +24,7 @@ rule "Create 'update' operation for input text field"
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
 		operation.setName("update");
-		queue.add(operation);
+		queue.add(operation, drools);
 		
 end
 
@@ -36,7 +36,7 @@ rule "Create 'update' operation for domain attribute"
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
 		operation.setName("update");
-		queue.add(operation);
+		queue.add(operation, drools);
 		
 end
 
@@ -48,7 +48,7 @@ rule "Create 'update' operation for domain attribute instance"
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
 		operation.setName("update");
-		queue.add(operation);
+		queue.add(operation, drools);
 		
 end
 
@@ -60,7 +60,7 @@ rule "Create 'init' operation for input text field"
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
 		operation.setName("init");
-		queue.add(operation);
+		queue.add(operation, drools);
 		
 end
 
@@ -72,37 +72,37 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 	then
 		Parameter parameter = handler.generatedParameter(o, o);
 		parameter.setName("setValueTo");
-		queue.add(parameter);
+		queue.add(parameter, drools);
 		
 		ChainedOperation op = handler.generatedChainedOperation(o, o);
 		op.setName("setPropertyToValue");
-		queue.add(op);
+		queue.add(op, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
-		queue.add(start);
+		queue.add(start, drools);
 		
 		FinishNode finish = handler.generatedFinishNode(o, o);
-		queue.add(finish);
+		queue.add(finish, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
 		data1.setFrom(parameter);
 		data1.setTo(op);
-		queue.add(data1);
+		queue.add(data1, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
 		data2.setFrom(op);
 		data2.setTo(field);
-		queue.add(data2);
+		queue.add(data2, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
 		edge1.setFrom(start);
 		edge1.setTo(op);
-		queue.add(edge1);
+		queue.add(edge1, drools);
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
 		edge2.setFrom(op);
 		edge2.setTo(finish);
-		queue.add(edge2);
+		queue.add(edge2, drools);
 
 end
 
@@ -113,31 +113,31 @@ rule "Create components of 'alert' operation"
 	then
 		Parameter parameter = handler.generatedParameter(o, o);
 		parameter.setName("alertText");
-		queue.add(parameter);
+		queue.add(parameter, drools);
 		
 		ChainedOperation op = handler.generatedChainedOperation(o, o);
 		op.setName("javascriptAlert");
-		queue.add(op);
+		queue.add(op, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
-		queue.add(start);
+		queue.add(start, drools);
 		
 		FinishNode finish = handler.generatedFinishNode(o, o);
-		queue.add(finish);
+		queue.add(finish, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
 		data1.setFrom(parameter);
 		data1.setTo(op);
-		queue.add(data1);
+		queue.add(data1, drools);
 
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
 		edge1.setFrom(start);
 		edge1.setTo(op);
-		queue.add(edge1);
+		queue.add(edge1, drools);
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
 		edge2.setFrom(op);
 		edge2.setTo(finish);
-		queue.add(edge2);
+		queue.add(edge2, drools);
 
 end

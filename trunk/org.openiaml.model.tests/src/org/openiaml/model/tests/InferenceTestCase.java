@@ -315,6 +315,30 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	}
 
 	/**
+	 * Assert that no given bidirectional wire exists.
+	 * 
+	 * @see #getWireBidirectional(EObject, WireEdgesSource, WireEdgeDestination)
+	 * @param container
+	 * @param element1
+	 * @param element2
+	 * @throws JaxenException
+	 */
+	protected void assertNoWireBidirectional(EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+		List<?> wires = query(container, "//iaml:wires");
+		for (Object o : wires) {
+			if (o instanceof WireEdge) {
+				WireEdge w = (WireEdge) o;
+				if (w.getFrom().equals(element1) && w.getTo().equals(element2))
+					fail("Found an unexpected wire between [" + element1 + "] and [" + element2 + "]: " + w);
+				if (w.getFrom().equals(element2) && w.getTo().equals(element1))
+					fail("Found an unexpected wire between [" + element2 + "] and [" + element1 + "]: " + w);
+			}
+		}
+
+		// pass
+	}
+	
+	/**
 	 * It's not possible to do something like //iaml:wire[iaml:from='id']
 	 * so we need to parse them manually?
 	 *

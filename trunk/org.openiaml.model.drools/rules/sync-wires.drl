@@ -60,7 +60,7 @@ rule "Sync wires between pages should create sync wires between all elements ins
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
 		sw.setName("sync");
-		queue.add(sw);
+		queue.add(sw, drools);
 		
 end
 
@@ -80,7 +80,7 @@ rule "Run instance wire from source.edit to target.update"
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		queue.add(rw);
+		queue.add(rw, drools);
 
 end
 
@@ -98,7 +98,7 @@ rule "Run instance wire from target.edit to source.update"
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		queue.add(rw);
+		queue.add(rw, drools);
 
 end
 
@@ -119,7 +119,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
 		pw.setName("[sync] run instance parameter (source.edit)"); 
-		queue.add(pw);
+		queue.add(pw, drools);
 
 end
 
@@ -139,7 +139,7 @@ rule "Connect parameter wire to: run instance wire from target.edit to source.up
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
 		pw.setName("[sync] run instance parameter (target.edit)"); 
-		queue.add(pw);
+		queue.add(pw, drools);
 
 end
 
@@ -159,7 +159,7 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		queue.add(rw);
+		queue.add(rw, drools);
 
 end
 
@@ -178,7 +178,7 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		queue.add(rw);
+		queue.add(rw, drools);
 
 end
 
@@ -199,7 +199,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
 		pw.setName("[sync] run instance parameter (source.access)"); 
-		queue.add(pw);
+		queue.add(pw, drools);
 
 end
 
@@ -219,7 +219,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire);
 		pw.setName("[sync] run instance parameter (target.access)"); 
-		queue.add(pw);
+		queue.add(pw, drools);
 
 end
 
@@ -537,7 +537,7 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 	then
 		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
 		ecw.setName("[copied] from: " + cw.getId());
-		queue.add(ecw);
+		queue.add(ecw, drools);
 
 end
 
@@ -572,7 +572,7 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		# create it
 		ParameterWire epw = handler.generatedParameterWire( cw, cw, parameter, ecw );
 		epw.setName("[copied] from: " + pw.getId());
-		queue.add(epw);
+		queue.add(epw, drools);
 
 end
 
@@ -602,7 +602,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Pages)"
 	then
 		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
 		rw2.setName("run");
-		queue.add(rw2);
+		queue.add(rw2, drools);
 		
 end
 
@@ -634,7 +634,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Pag
 		
 	then
 		ParameterWire pw2 = handler.generatedParameterWire(sw, sw, field, initrw);
-		queue.add(pw2);		
+		queue.add(pw2, drools);		
 end
 
 

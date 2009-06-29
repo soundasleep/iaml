@@ -282,7 +282,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			for (WireEdge wire : wires) {
 				System.err.println(wire);
 			}
-			assertEquals("Expected " + count + " wires between [" + fromElement + "] and [" + toElement + "], found: " + wires.size(), wires.size(), count);
+			assertEquals("Expected " + count + " wires between [" + fromElement + "] and [" + toElement + "], found: " + wires.size(), count, wires.size());
 		}
 		
 	}
@@ -338,6 +338,54 @@ public abstract class InferenceTestCase extends ModelTestCase {
 
 		fail("No wire found between [" + element1 + "] and [" + element2 + "]");
 		return null;
+	}
+	
+	/**
+	 * For bidirectional wires, get all wires connecting the
+	 * two elements.
+	 *
+	 * @param container
+	 * @param element1
+	 * @param element2
+	 * @throws JaxenException
+	 */
+	protected Set<WireEdge> getWiresBidirectional(EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+		List<?> wires = query(container, "//iaml:wires");
+		Set<WireEdge> edges = new HashSet<WireEdge>();
+		for (Object o : wires) {
+			if (o instanceof WireEdge) {
+				WireEdge w = (WireEdge) o;
+				if (w.getFrom().equals(element1) && w.getTo().equals(element2))
+					edges.add(w);
+				if (w.getFrom().equals(element2) && w.getTo().equals(element1))
+					edges.add(w);
+			}
+		}
+
+		return edges;
+	}
+
+	/**
+	 * Assert that a given number of bidirectional wires
+	 * occur between the two elements.
+	 *
+	 * @see #assertHasWiresFromTo(int, EObject, WireEdgesSource, WireEdgeDestination)
+	 * @see #getWiresBidirectional(EObject, WireEdgesSource, WireEdgeDestination)
+	 * @param container
+	 * @param element1
+	 * @param element2
+	 * @throws JaxenException
+	 */
+	protected void assertHasWiresBidirectional(int count, EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+		
+		Set<WireEdge> wires = getWiresFromTo(container, element1, element2);
+		if (wires.size() != count) {
+			for (WireEdge wire : wires) {
+				System.err.println(wire);
+			}
+			assertEquals("Expected " + count + " wires connecting [" + element1 + "] and [" + element2 + "], found: " + wires.size(), count, wires.size());
+		}
+		
 	}
 
 	/**

@@ -500,9 +500,9 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 	when
 
 		# the containing elements	
-		source : ApplicationElement( )   
-		target : ApplicationElement( ) 
-		sw : SyncWire( eval(connects(sw, source, target)) )
+		sw : SyncWire ( overridden == false )
+		source : ApplicationElement( ) from sw.from  
+		target : ApplicationElement( ) from sw.to
 		
 		# the elements contained
 		e1 : ApplicationElement( eContainer == source )
@@ -526,10 +526,10 @@ end
 rule "Cascaded SyncWires: Parameters from parent to child"
 	when
 
-		# the containing elements	
-		source : ApplicationElement( )   
-		target : ApplicationElement( ) 
-		sw : SyncWire( eval(connects(sw, source, target)) )
+		# the containing elements
+		sw : SyncWire ( overridden == false )
+		source : ApplicationElement( ) from sw.from  
+		target : ApplicationElement( ) from sw.to
 		
 		# the elements contained
 		e1 : ApplicationElement( eContainer == source )

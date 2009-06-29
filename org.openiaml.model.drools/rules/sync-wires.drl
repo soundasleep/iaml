@@ -48,9 +48,10 @@ function boolean containingSessionEquals(EObject e, Session s) {
 
 rule "Sync wires between pages should create sync wires between all elements inside each page that match"
 	when
-		p1 : ApplicationElement( )
-		p2 : ApplicationElement(this != p1)
-		source : SyncWire(overridden == false, eval(connects(source, p1, p2)) )
+		# source : SyncWire(overridden == false, eval(connects(source, p1, p2)) )
+		source : SyncWire(overridden == false)
+		p1 : ApplicationElement( ) from source.from
+		p2 : ApplicationElement(this != p1) from source.to
 		
 		e1 : ApplicationElement( eContainer == p1 )
 		e2 : ApplicationElement( eContainer == p2, eval(syncMatches(e1, e2)) )
@@ -64,13 +65,12 @@ rule "Sync wires between pages should create sync wires between all elements ins
 		
 end
 
-# Ideally, these two commands would be joined together into one.
-# TODO achieve this using eval(connects())
-rule "Run instance wire from source.edit to target.update"
+rule "Run instance wire from edit to update"
 	when
 		sw : SyncWire(overridden == false)
-		source : ContainsEventTriggers( ) from sw.from  
-		target : ContainsOperations( ) from sw.to
+		source : ContainsEventTriggers( )
+		target : ContainsOperations( )
+		eval(connects(sw, source, target))
 		
 		event : EventTrigger( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
@@ -80,24 +80,7 @@ rule "Run instance wire from source.edit to target.update"
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		queue.add(rw, drools);
-
-end
-
-rule "Run instance wire from target.edit to source.update"
-	when
-		sw : SyncWire(overridden == false)
-		target : InputTextField( ) from sw.from  
-		source : InputTextField( ) from sw.to
-		
-		event : EventTrigger( eContainer == source, name=="edit" )
-		operation : Operation( eContainer == target, name=="update" )
-		
-		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
-		
-	then
-		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
-		rw.setName("run");
+		rw.setName(rw.getName() + "," + sw.getId()); 
 		queue.add(rw, drools);
 
 end

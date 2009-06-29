@@ -28,10 +28,11 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 	when
 		# we have a sync wire
 		sw : SyncWire(overridden == false)
-		source : ContainsOperations( ) from sw.to
-		target : ContainsEventTriggers( ) from sw.from  
+		source : ContainsEventTriggers( )
+		target : ContainsOperations( )
+		eval(connects(sw, source, target))  
 		
-		# which has a run wire between event and operation
+		# which has a run wire between event and operation (generated)
 		event : EventTrigger( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )		
 		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
@@ -51,40 +52,13 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 
 end
 
-rule "Connect ConditionWires to RunInstanceWires created by SyncWires (reverse)"
-	when
-		# we have a sync wire
-		sw : SyncWire(overridden == false)
-		source : ContainsEventTriggers( ) from sw.from  
-		target : ContainsOperations( ) from sw.to
-		
-		# which has a run wire between event and operation
-		event : EventTrigger( eContainer == source, name=="edit" )
-		operation : Operation( eContainer == target, name=="update" )
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
-		
-		# and the sync wire had a condition
-		condition : Condition ( )
-		sourceCw : ConditionWire( from == condition, to == sw )
-		
-		# but our run wire doesn't 
-		not (ConditionWire (generatedBy == sourceCw, from == condition, to == run )) 
-		
-	then
-		# copy the condition
-		ConditionWire cw = handler.generatedConditionWire( sourceCw, sourceCw, condition, run );
-		cw.setName("copied condition [reverse]: " + sourceCw.getId());
-		queue.add(cw, drools);
-
-end
-
-
 rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires"
 	when
 		# we have a syncwire
 		sw : SyncWire(overridden == false)
-		target : ContainsEventTriggers( ) from sw.from  
-		source : ContainsOperations( ) from sw.to
+		source : ContainsEventTriggers( )
+		target : ContainsOperations( )
+		eval(connects(sw, source, target))  
 		
 		# that has created a RunInstanceWire
 		event : EventTrigger( eContainer == source, name=="edit" )
@@ -109,40 +83,6 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		pw.setName("[conditions] sync from: " + paramWire.getId());
-		queue.add(pw, drools);
-
-end
-
-rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (reverse)"
-	when
-		# we have a syncwire
-		sw : SyncWire(overridden == false)
-		source : ContainsEventTriggers( ) from sw.from  
-		target : ContainsOperations( ) from sw.to
-		
-		# that has created a RunInstanceWire
-		event : EventTrigger( eContainer == source, name=="edit" )
-		operation : Operation( eContainer == target, name=="update" )	
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
-		
-		# and this SyncWire has a condition
-		condition : Condition ( )
-		sourceCw : ConditionWire( from == condition, to == sw )
-		
-		# and the RunInstanceWire has the same condition 
-		targetCw : ConditionWire (generatedBy == sourceCw, from == condition, to == run ) 
-		
-		# and the SyncWire had a parameter
-		param : WireEdgesSource ( )
-		paramWire : ParameterWire( from == param, to == sourceCw )
-		
-		# but this wire does not have it
-		not (ParameterWire (generatedBy == sourceCw, from == param, to == targetCw ))
-		
-	then
-		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
-		//cw.setName("copied parameter: " + paramWire.getName());
-		pw.setName("[conditions] sync from [reverse]: " + paramWire.getId());
 		queue.add(pw, drools);
 
 end

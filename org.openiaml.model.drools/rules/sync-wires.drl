@@ -80,7 +80,6 @@ rule "Run instance wire from edit to update"
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		rw.setName("run");
-		rw.setName(rw.getName() + "," + sw.getId()); 
 		queue.add(rw, drools);
 
 end

@@ -97,6 +97,7 @@ public class SavedRuleSources extends InferenceTestCase {
 		
 		// there should only be one run wire between these two
 		assertHasWiresFromTo(1, wire, srcEdit, targetOp);
+		assertHasWiresFromTo(1, wire, targetEdit, srcOp);
 		
 		// there should be a run wire between these two
 		RunInstanceWire srcRw = (RunInstanceWire) getWireFromTo(wire, srcEdit, targetOp);
@@ -105,14 +106,14 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertEquals("Run instance wire from edit to update", srcRw.getGeneratedRule());
 		assertTrue(targetRw.isIsGenerated());
 		assertEquals("Run instance wire from edit to update", targetRw.getGeneratedRule());
-		
+			
 		// there should be additional ConditionWires to these RunInstanceWires
-		ConditionWire srcCw = (ConditionWire) getWireFromTo(page1, cond, srcRw); 
+		ConditionWire srcCw = (ConditionWire) getWireFromTo(root, cond, srcRw); 
 		assertTrue(srcCw.isIsGenerated());
 		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires", srcCw.getGeneratedRule());
-		ConditionWire targetCw = (ConditionWire) getWireFromTo(page1, cond, targetRw);
+		ConditionWire targetCw = (ConditionWire) getWireFromTo(root, cond, targetRw);
 		assertTrue(targetCw.isIsGenerated());
-		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires (reverse)", targetCw.getGeneratedRule());
+		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires", targetCw.getGeneratedRule());
 		
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
 		ParameterWire param1 = (ParameterWire) getWireFromTo(root, dae, srcCw);
@@ -120,7 +121,7 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires", param1.getGeneratedRule());
 		ParameterWire param2 = (ParameterWire) getWireFromTo(root, dae, targetCw);
 		assertTrue(param2.isIsGenerated());
-		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (reverse)", param2.getGeneratedRule());
+		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires", param2.getGeneratedRule());
 		
 
 	}

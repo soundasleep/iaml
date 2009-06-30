@@ -698,8 +698,7 @@
     <domainSpecialization
         body="self.oclIsTypeOf( NewInstanceWire )"/>
     <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping"
-        readOnly="true">
+        xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
           href="iaml.gmfgraph#NewInstanceWireName"/>
       <features

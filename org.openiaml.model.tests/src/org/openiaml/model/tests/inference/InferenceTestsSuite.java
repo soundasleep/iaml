@@ -1,5 +1,7 @@
 package org.openiaml.model.tests.inference;
 
+import org.openiaml.model.tests.inference.model0_3.AllTests;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -40,6 +42,10 @@ public class InferenceTestsSuite {
         suite.addTestSuite(PropertiesFileWithInputForm.class);
         suite.addTestSuite(SelectField.class);
         suite.addTestSuite(SelectFieldFromObject.class);
+        
+        // actual suite
+        suite.addTest(AllTests.suite());
+        
 		//$JUnit-END$
         return suite; 
    }

@@ -49,7 +49,7 @@ function boolean containingSessionEquals(EObject e, Session s) {
 	return s.equals(actual);
 }
 
-rule "Sync wires between pages should create sync wires between all elements inside each page that match"
+rule "Sync wires between objects should create sync wires between all elements inside each object that matches"
 	when
 		# source : SyncWire(overridden == false, eval(connects(source, p1, p2)) )
 		source : SyncWire(overridden == false)
@@ -623,4 +623,22 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Pag
 end
 
 
+rule "Refresh New Instance Object mappings when sync connected to Forms: create text fields"
+	when
+		sync : SyncWire( overridden == false )
+		form : InputForm ( overridden == false )
+		instance : DomainObjectInstance ( overridden == false )
+		
+		eval(connects(sync, form, instance))
+		
+		attribute : DomainAttributeInstance( eContainer == instance )
+		
+		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
+		
+	then
+		# create a new one
+		InputTextField text = handler.generatedInputTextField(sync, form);
+		handler.setName(text, attribute.getName());
+		queue.add(text, drools);
 
+end

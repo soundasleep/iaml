@@ -18,10 +18,12 @@ global EcoreCreateElementsHelper handler;
 import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
 global PrintingArrayList queue;
 
+# TODO put into separate file
 function boolean syncMatches(NamedElement e1, NamedElement e2) {
 	return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
 }
 
+# TODO put into separate file
 function boolean connects(WireEdge wire, Object a, Object b) {
 	if (wire.getFrom() == null)
 		throw new NullPointerException("Wire '" + wire + "'.from = null");
@@ -31,6 +33,7 @@ function boolean connects(WireEdge wire, Object a, Object b) {
 		(wire.getFrom().equals(b) && wire.getTo().equals(a));
 }
 
+# TODO put into separate file
 function Session containingSession(EObject e) {
 	if (e.eContainer() == null) {
 		return null;

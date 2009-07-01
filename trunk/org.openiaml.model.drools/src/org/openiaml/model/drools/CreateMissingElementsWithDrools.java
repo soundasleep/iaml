@@ -27,7 +27,9 @@ public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 			"/rules/sessions.drl",
 			"/rules/operations.drl",
 			"/rules/dynamic-sources.drl",
-			"/rules/conditions.drl"
+			"/rules/conditions.drl",
+			"/rules/runtime/new-instance.drl",
+			"/rules/runtime/forms.drl"
 			);
 	
 	/**

@@ -1,0 +1,76 @@
+# Create text fields and sync wires when DomainObjectInstances are
+# sync wired to InputForms
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.eclipse.emf.ecore.*;
+import java.util.*;
+import java.io.*;
+import org.openiaml.model.*;
+import org.openiaml.model.model.*;	// for ModelPackage
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.domain.*;
+import org.openiaml.model.model.wires.*;
+
+import org.openiaml.model.inference.*;		// for handler
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+
+import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
+global PrintingArrayList queue;
+
+function boolean syncMatches(NamedElement e1, NamedElement e2) {
+	return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
+}
+
+# TODO put into separate file
+function boolean connects(WireEdge wire, Object a, Object b) {
+	if (wire.getFrom() == null)
+		throw new NullPointerException("Wire '" + wire + "'.from = null");
+	if (wire.getTo() == null)
+		throw new NullPointerException("Wire '" + wire + "'.to = null");
+	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
+		(wire.getFrom().equals(b) && wire.getTo().equals(a));
+}
+
+rule "Refresh New Instance Object mappings when sync connected to Forms: create text fields"
+	when
+		sync : SyncWire( overridden == false )
+		form : InputForm ( overridden == false )
+		instance : DomainObjectInstance ( overridden == false )
+		
+		eval(connects(sync, form, instance))
+		
+		attribute : DomainAttributeInstance( eContainer == instance )
+		
+		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
+		
+	then
+		# create a new one
+		InputTextField text = handler.generatedInputTextField(sync, form);
+		handler.setName(text, attribute.getName());
+		queue.add(text, drools);
+
+end
+
+rule "Refresh New Instance Object mappings when sync connected to Forms: create sync wires"
+	when
+		sync : SyncWire( overridden == false )
+		form : InputForm ( overridden == false )
+		instance : DomainObjectInstance ( overridden == false )
+		
+		eval(connects(sync, form, instance))
+		
+		attribute : DomainAttributeInstance( eContainer == instance )
+		tf : InputTextField( eval(syncMatches( attribute, tf )) )
+		
+		not ( sw2 : SyncWire ( eval(connects(sw2, tf, attribute))) )
+		
+	then
+		# create a new one
+		SyncWire sw2 = handler.generatedSyncWire(sync, attribute, attribute, tf);
+		handler.setName(sw2, "sync");
+		queue.add(sw2, drools);
+
+end

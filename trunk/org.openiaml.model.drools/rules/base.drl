@@ -9,6 +9,7 @@ import org.openiaml.model.model.impl.*;
 import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.domain.*;
 
 #declare any global variables here

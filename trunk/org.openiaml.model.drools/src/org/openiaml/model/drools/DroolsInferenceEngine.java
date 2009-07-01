@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -78,9 +79,15 @@ public abstract class DroolsInferenceEngine {
 	 * 
 	 * Also: The value of 'k' from the upcoming paper.
 	 */
-	protected static int INSERTION_ITERATION_LIMIT = 20;
+	public static int INSERTION_ITERATION_LIMIT = 20;
 	
-	ICreateElements handler;
+	protected ICreateElements handler;
+	
+	/**
+	 * Stores a summary of queue elements added.
+	 * (This should really be added through a mock object instead. TODO)
+	 */
+	private Map<Integer, Integer> queueElementsAdded;
 
 	public DroolsInferenceEngine(ICreateElements handler) {
 		this.handler = handler;
@@ -115,6 +122,8 @@ public abstract class DroolsInferenceEngine {
 
 		monitor.beginTask("Inferring model using Drools", 100);
 		monitor.subTask("Loading rulebase");
+		
+		queueElementsAdded = new HashMap<Integer,Integer>();
 		
     	// load up the rulebase
         RuleBase ruleBase;
@@ -347,6 +356,7 @@ public abstract class DroolsInferenceEngine {
 
 				// increment the log
 				log.increment("step " + k, oldQueue.size());
+				queueElementsAdded.put(k, oldQueue.size());
 	        }
 	        
 	        // are there any elements left in the queue?
@@ -680,6 +690,17 @@ public abstract class DroolsInferenceEngine {
 	}
 	
 	/**
+	 * Load the given resource filename as a stream. By default,
+	 * uses {@link DroolsInferenceEngine}'s classLoader to load it.
+	 * 
+	 * @param filename
+	 * @return the loaded stream, or null if it could not be loaded
+	 */
+	public InputStream loadResourceAsStream(String filename) {
+		return DroolsInferenceEngine.class.getResourceAsStream( filename );
+	}
+	
+	/**
 	 * Get the RuleBase from the rules provided.
 	 * Copied from sample DroolsTest.java.
 	 * 
@@ -693,8 +714,14 @@ public abstract class DroolsInferenceEngine {
 
 		for (String ruleFile : getRuleFiles()) {
 	
+			// load the stream
+			InputStream stream = loadResourceAsStream(ruleFile);
+			if (stream == null) {
+				throw new InferenceException("Could not load the resource '" + ruleFile + "' as a stream."); 
+			}
+			
 			//read in the source
-			Reader source = new InputStreamReader( DroolsInferenceEngine.class.getResourceAsStream( ruleFile ) );
+			Reader source = new InputStreamReader( stream );
 			
 			//optionally read in the DSL (if you are using it).
 			//Reader dsl = new InputStreamReader( DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
@@ -800,6 +827,15 @@ public abstract class DroolsInferenceEngine {
 			}
 		}
 
+	}
+
+	/**
+	 * Get a list of elements added per iteration step.
+	 * 
+	 * @return A map of elements added in each iteration step.
+	 */
+	public Map<Integer, Integer> getQueueElementsAdded() {
+		return queueElementsAdded;
 	}
 	
 }

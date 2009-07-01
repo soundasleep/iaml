@@ -35,6 +35,8 @@ import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.scopes.ScopesPackage;
+import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -93,10 +95,21 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(ds, by);
 		return ds;
 	}
-	
+
+	public Session generatedSession(GeneratesElements by, InternetApplication container) throws InferenceException {
+		Session session = createSession(container);
+		setGeneratedBy(session, by);
+		return session;
+	}
+
 	public DomainStore createDomainStore(InternetApplication container) throws InferenceException {
 		DomainStore ds = (DomainStore) createElement( container, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
 		return ds;
+	}
+	
+	public Session createSession(InternetApplication container) throws InferenceException {
+		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getInternetApplication_Sessions() );
+		return session;
 	}
 
 	public EventTrigger generatedEventTrigger(GeneratesElements by, ContainsEventTriggers container) throws InferenceException {
@@ -241,6 +254,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		Page page = createPage(container);
 		setGeneratedBy(page, by);
 		return page;
+	}
+
+	public Session generatedSession(InternetApplication by, InternetApplication container) throws InferenceException {
+		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getInternetApplication_Sessions() );
+		setGeneratedBy(session, by);
+		return session;
 	}
 
 	public InputForm generatedInputForm(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {

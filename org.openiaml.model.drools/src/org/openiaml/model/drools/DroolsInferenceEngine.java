@@ -656,16 +656,6 @@ public abstract class DroolsInferenceEngine {
 		}
     	
 	}
-
-	public List<String> ruleFiles = Arrays.asList(
-			"/rules/base.drl",
-			"/rules/sync-wires.drl",
-			"/rules/events.drl",
-			"/rules/sessions.drl",
-			"/rules/operations.drl",
-			"/rules/dynamic-sources.drl",
-			"/rules/conditions.drl"
-			);
 	
 	/**
 	 * Get the list of rule files used. This method
@@ -677,17 +667,6 @@ public abstract class DroolsInferenceEngine {
 	 * @return
 	 */
 	public abstract List<String> getRuleFiles();
-	
-	/**
-	 * Add a rule file, relative to this loaded class.
-	 * 
-	 * @see #getRuleFiles()
-	 * @deprecated not yet tested
-	 * @param filename
-	 */
-	public void addRuleFile(String filename) {
-		ruleFiles.add(filename);
-	}
 	
 	/**
 	 * Load the given resource filename as a stream. By default,

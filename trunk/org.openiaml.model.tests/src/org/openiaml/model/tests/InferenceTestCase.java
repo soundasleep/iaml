@@ -55,12 +55,13 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * Load a model file and perform inference on it.
 	 */
 	protected InternetApplication loadAndInfer(String modelFile) throws Exception {
-		return loadAndInfer(modelFile, false);
+		InternetApplication root = (InternetApplication) loadModelDirectly(modelFile);
+		return loadAndInfer(root, false);
 	}
 
 	/**
 	 * Automagically load the model file (.iaml) for this given
-	 * test class.
+	 * test class, and do inference.
 	 *
 	 * @see #loadAndCodegen(String)
 	 * @param class1 The test class to load a model for.
@@ -73,7 +74,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 
 	/**
 	 * Automagically load the model file (.iaml) for this given
-	 * test class.
+	 * test class, and do inference.
 	 *
 	 * @see #loadAndCodegen(String)
 	 * @param class1 The test class to load a model for.
@@ -82,9 +83,66 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 */
 	protected InternetApplication loadAndInfer(
 			Class<?> class1, boolean logRuleSource) throws Exception {
-		return loadAndInfer(ROOT + "inference/" + class1.getSimpleName() + ".iaml", logRuleSource);
+		return loadAndInfer(loadDirectly(class1), logRuleSource);
 	}
 
+	/**
+	 * Load the model file (.iaml) for this given
+	 * test class, and do inference.
+	 *
+	 * @see #loadAndCodegen(String)
+	 * @param class1 The test class to load a model for.
+	 * @param logRuleSource Log the rule source of inserted elements.
+	 * @return the loaded and inferred InternetApplication
+	 */
+	protected InternetApplication loadAndInfer(
+			String filename, boolean logRuleSource) throws Exception {
+		return loadAndInfer((InternetApplication) loadModelDirectly(filename), logRuleSource);
+	}
+
+	/**
+	 * Automagically load the model file (.iaml) for this given
+	 * test class, but don't do inference.
+	 *
+	 * @see #loadAndInfer(Class)
+	 * @param class1 The test class to load a model for.
+	 * @return the loaded and inferred InternetApplication
+	 */
+	protected InternetApplication loadDirectly(
+			Class<?> class1) throws Exception {
+		return loadDirectly(class1, false);
+	}
+
+	/**
+	 * Automagically load the model file (.iaml) for this given
+	 * test class, but don't do inference.
+	 *
+	 * @see #loadAndInfer(Class)
+	 * @param class1 The test class to load a model for.
+	 * @param logRuleSource Log the rule source of inserted elements.
+	 * @return the loaded and inferred InternetApplication
+	 */
+	protected InternetApplication loadDirectly(
+			Class<?> class1, boolean logRuleSource) throws Exception {
+		// TODO move other inference tests into separate test folders
+		if (class1.getPackage().getName().contains("model0_3")) {
+			return (InternetApplication) loadModelDirectly(ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml");
+		}
+		
+		return (InternetApplication) loadModelDirectly(ROOT + "inference/" + class1.getSimpleName() + ".iaml");
+	}
+
+	/**
+	 * Create an {@link ICreateElements} handler that can be used
+	 * to modify the model.
+	 * 
+	 * @return
+	 */
+	protected ICreateElements createHandler() {
+		ICreateElements handler = new EcoreInferenceHandler(resource);
+		return handler;
+	}
+	
 	/**
 	 * Load a model file and perform inference on it.
 	 *
@@ -93,15 +151,9 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @return
 	 * @throws Exception
 	 */
-	protected InternetApplication loadAndInfer(String modelFile, boolean logRuleSource) throws Exception {
-		EObject model = loadModelDirectly(modelFile);
-		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
-		assertNotNull(model);
-
-		InternetApplication root = (InternetApplication) model;
-
+	protected InternetApplication loadAndInfer(InternetApplication root, boolean logRuleSource) throws Exception {
 		// we now try to do inference
-		ICreateElements handler = new EcoreInferenceHandler(resource);
+		ICreateElements handler = createHandler();
 		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
 		ce.create(root, logRuleSource, monitor);
 
@@ -378,7 +430,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 */
 	protected void assertHasWiresBidirectional(int count, EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
 		
-		Set<WireEdge> wires = getWiresFromTo(container, element1, element2);
+		Set<WireEdge> wires = getWiresBidirectional(container, element1, element2);
 		if (wires.size() != count) {
 			for (WireEdge wire : wires) {
 				System.err.println(wire);

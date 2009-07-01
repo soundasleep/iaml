@@ -65,6 +65,16 @@ public class RefreshObjectInstanceMappingsWithDrools implements IViewActionDeleg
 	}
 	
 	/**
+	 * Refresh the mappings manually. Also useful for test cases.
+	 * 
+	 * @throws InferenceException 
+	 */
+	public void refreshMappings(EObject root, ICreateElements handler, IProgressMonitor monitor) throws InferenceException {
+		DroolsInferenceEngine engine = new RefreshObjectInstanceMappings(handler);
+		engine.create(root, new SubProgressMonitor(monitor, 100));
+	}
+	
+	/**
 	 * @param part The edit part to work with
 	 * @param monitor 
 	 * @return 
@@ -81,14 +91,13 @@ public class RefreshObjectInstanceMappingsWithDrools implements IViewActionDeleg
 						
 			EObject root = getRoot(resolved);
 			
-			DroolsInferenceEngine engine = new RefreshObjectInstanceMappings(new EmfInferenceHandler(
+			refreshMappings(root, new EmfInferenceHandler(
 					part.getEditingDomain(), 
 					new ArrayList<Object>(), /* affected files */
 					new SubProgressMonitor(monitor, 100), 
 					null /* IAdapter == null */,
 					resolved.eResource()	/* eResource */
-			));
-			engine.create(root, new SubProgressMonitor(monitor, 100));
+			), monitor);
 			
 			monitor.done();
 				

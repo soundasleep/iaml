@@ -1,13 +1,52 @@
 #summary Summary of model version 0.3.
-#labels Phase-Design,Development
+#labels Phase-Design,Development,Featured
 
 [Model0_2 < 0.2] | *0.3* | [Model0_4 0.4 >]
 
 =Model 0.3=
 
+<wiki:toc max_depth="1" />
+
 =Introduction=
 
 TODO
+
+=Knowledge Inference=
+
+==New Instance Wires==
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/images/NewInstanceWireMapping-3.png
+
+|| *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/NewInstanceWireMapping.java NewInstanceWireMapping.java] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/new-instance.drl runtime/new-instance.drl] ||
+
+If a _NewInstanceWire_ is connected from a _DomainObject_ to a _DomainObjectInstance_, the attributes from the _DomainObject_ will automatically populate the _DomainObjectInstance_ unless [OverridingGeneration overridden].
+
+This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all DomainObjectInstance mappings_.
+
+==Input Form Population==
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/images/InputFormInstanceMapping-1.png
+
+|| *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/InputFormInstanceMapping.java InputFormInstanceMapping.java] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl?spec=svn745&r=745#626 sync-wires.drl] ||
+
+If an _InputForm_ is connected to a _DomainObjectInstance_, then attributes within the instance will automatically create editable _InputTextFields_ within the form.
+
+Following the inference below of SyncWires with ApplicationElements, these new text fields will also automatically sync up.
+
+This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all SyncWire mappings_.
+
+==SyncWires with ApplicationElements==
+
+|| *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/InputFormInstanceMapping.java InputFormInstanceMapping.java] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl?r=745#52 sync-wires.drl] ||
+
+If two _ApplicationElements_ are connected via a _SyncWire_ labelled "sync", and these elements both contain other elements that match to each other (currently through a case-insensitive naming match), these elements will also gain a _SyncWire_ between each other.
+
+This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all SyncWire mappings_.
+
+=New Elements=
 
 ==Sessions==
 || *Description* || ApplicationElementProperties stored within a Session (i.e. text field values, login keys) are only available to a single session user. When the session is closed, the values are lost. ||

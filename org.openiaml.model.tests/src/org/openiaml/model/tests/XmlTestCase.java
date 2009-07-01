@@ -215,6 +215,19 @@ public class XmlTestCase extends TestCase implements XpathTestCase {
 			assertFalse(message + ", expected not equal: '" + a + "' and: '" + b + "'", a.equals(b));
 		}
 	}
+	
+	/**
+	 * Assert that the two elements are not the same.
+	 * 
+	 * @param string
+	 */
+	public void assertNotEqual(Object a, Object b) {
+		if (a == null) {
+			assertNotNull("Expected not equal: '" + a + "' and: '" + b + "'", b);
+		} else {
+			assertFalse("Expected not equal: '" + a + "' and: '" + b + "'", a.equals(b));
+		}
+	}
 
 	/**
 	 * XPath helper methods.

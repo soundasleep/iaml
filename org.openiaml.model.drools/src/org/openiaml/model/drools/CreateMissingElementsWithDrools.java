@@ -15,12 +15,9 @@ import org.openiaml.model.inference.ICreateElements;
  *
  */
 public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
-	
-	ICreateElements handler;
 
 	public CreateMissingElementsWithDrools(ICreateElements handler) {
 		super(handler);
-		this.handler = handler;
 	}
 
 	private List<String> ruleFiles = Arrays.asList(

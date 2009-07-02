@@ -6,13 +6,13 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12109331f38.5c9" from="model.12109331eea.edd" to="visual.12109331f38.d99" name="sync"/>
     </children>
   </children>
-  <domainStores xsi:type="iaml:DomainStore" id="model.12109331eea.e3e" name="DomainStore">
-    <children xsi:type="iaml:DomainObject" id="model.12109331eea.e47" name="User" outEdges="wires.12109331f38.5c7">
+  <domainStores id="model.12109331eea.e3e" name="DomainStore">
+    <children id="model.12109331eea.e47" name="User" outEdges="wires.12109331f38.5c7">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.12109331f38.5c7" from="model.12109331eea.e47" to="model.12109331eea.edd" name="select"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.e62" name="name"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.e64" name="email"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.e6a" name="password"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.e8c" name="id"/>
+      <attributes id="model.12109331eea.e62" name="name"/>
+      <attributes id="model.12109331eea.e64" name="email"/>
+      <attributes id="model.12109331eea.e6a" name="password"/>
+      <attributes id="model.12109331eea.e8c" name="id"/>
     </children>
   </domainStores>
 </iaml:InternetApplication>

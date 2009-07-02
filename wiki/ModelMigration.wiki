@@ -1,0 +1,19 @@
+#summary Information about model migration.
+#labels EndUser,Development
+
+=Introduction=
+
+Model migration has been available since [Model0_1 version 0.1], and there will always be a model migration path to newer model versions. To migrate an older model version, right click the model file and select _Migrate model to latest version_. You will have to select a new model file to place the migrated model.
+
+Once the model has been migrated, you will likely have to recreate the .iaml_diagram files for the new model version; right click the model file and select "Initialize iaml_diagram diagram file".
+
+Generally there will not be any errors or warnings while migrating models; however, if there are significant problems that the model developer should know about, warning messages will be placed in the Eclipse error log and can be viewable by opening the _Error Log_ tab.
+
+==Test Cases==
+
+Technical details about the model migration:
+
+|| *Version* || *Migrator* || *Test case* || *Test model* ||
+|| Model 0.0 to 0.1 || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/migrate/Migrate0To1.java Migrate0To1.java] || ? || ? ||
+|| Model 0.1 to 0.2 || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/migrate/Migrate1To2.java Migrate1To2.java] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/eclipse/migration/Migrate0_1SignupForm.java Migrate0_1SignupForm.java] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/eclipse/migration/signup-form-0_1.iaml signup-form-0_1.iaml] ||
+|| Model 0.2 to 0.3 || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/migrate/Migrate2To3.java Migrate2To3.java] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/eclipse/migration/Migrate0_2SyncPages.java Migrate0_2SyncPages.java] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/eclipse/migration/codegen-sync-pages-0_2.iaml codegen-sync-pages-0_2.iaml] ||

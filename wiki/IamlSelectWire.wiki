@@ -7,6 +7,8 @@ To select a _DomainObjectInstance_ from a _DomainObject_, or to select a _Domain
 
 These were added in [Model0_2_5 Model version 0.2.5].
 
+<wiki:toc max_depth="2" />
+
 ==Selecting Any==
 
 || *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/SelectField.iaml SelectField.iaml] ||

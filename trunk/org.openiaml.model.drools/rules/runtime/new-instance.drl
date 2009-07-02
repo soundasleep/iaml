@@ -21,9 +21,9 @@ global PrintingArrayList queue;
 
 rule "Refresh New Instance Object mappings"
 	when
-		wire : NewInstanceWire( overridden == false )
-		object : DomainObject ( ) from wire.from
-		instance : DomainObjectInstance ( ) from wire.to
+		object : DomainObject ( )
+		instance : DomainObjectInstance ( )
+		wire : NewInstanceWire( overridden == false, from == object, to == instance )
 
 		attribute : DomainAttribute ( eContainer == object )
 		

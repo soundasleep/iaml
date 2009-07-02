@@ -5,7 +5,7 @@
 
 =Model 0.3=
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="2" />
 
 =Introduction=
 
@@ -46,7 +46,7 @@ If a _DomainStore_ is of type _PropertiesFile_, the _DomainStore_ will be automa
 
 This can also be achieved by right clicking the _DomainStore_ and selecting _IAML Model_ > _Refresh all DomainStore Mappings_.
 
-==SyncWires with ApplicationElements==
+==Sync Wires with Application Elements==
 
 || *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/InputFormInstanceMapping.java InputFormInstanceMapping.java] ||
 || *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl?spec=svn745&r=745#626 sync-wires.drl] ||
@@ -104,3 +104,36 @@ If a Button contains an EventTrigger labelled _click_ or _onClick_, this EventTr
 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/ButtonSetValue-6.png
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/ButtonSetValue-7.png
+
+==Domain Object Instance==
+|| *Description* || _DomainObjectInstances_ are instances of a _DomainObject_. They are created by a _NewInstanceWire_. ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceObject.iaml NewInstanceObject.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceObjectAutosave.iaml NewInstanceObjectAutosave.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceObject.java NewInstanceObject.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceObjectAutosave.java NewInstanceObjectAutosave.java] ||
+
+If "autosave" is set to _false_ on the _DomainObjectInstance_, then changes to the attributes within the instance will not be automatically saved. The "save" operation will have to be called manually.
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/NewInstanceObject-1.png
+
+==Domain Attribute Instance==
+|| *Description* || Like a _DomainObjectInstance_, except concerned with an attribute. A _DomainObjectInstance_ contains many _DomainAttributeInstances_. ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceAttributeSession.iaml NewInstanceAttributeSession.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceAttributeSessionAutosave.iaml NewInstanceAttributeSessionAutosave.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceAttributeSession.java NewInstanceAttributeSession.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceAttributeSessionAutosave.java NewInstanceAttributeSessionAutosave.java] ||
+
+_DomainObjectInstances_ and _DomainAttributeInstances_ can be stored within _Sessions_; otherwise, all visitors to the site will access the same instance.
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/NewInstanceAttributeSession.png 
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/NewInstanceAttributeSession-4.png
+
+=New Wires=
+
+==New Instance Wire==
+|| *Description* || These wires create new instances of _DomainObjects_ and _DomainAttributes_ ||
+|| *Models* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceObject.iaml NewInstanceObject.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceAttributeSession.iaml NewInstanceAttributeSession.iaml] etc ||
+|| *Inference Tests* || Covered above ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceObject.java NewInstanceObject.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceAttributeSession.java NewInstanceAttributeSession.java] etc ||
+
+If the targeted _DomainObjectInstance_ or _DomainAttributeInstance_ is stored within a _Session_, then the new instance will only reside in that session, and will only be saved to the database if "autosave" is enabled or the "save" operation is called.
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/images/NewInstanceWireMapping-3.png

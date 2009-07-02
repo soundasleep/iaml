@@ -15,8 +15,9 @@ import java.util.*;
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
-import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
-global PrintingArrayList queue;
+# insertion queue
+import org.openiaml.model.drools.*;
+global DroolsInsertionQueue queue;
 
 # TODO put into separate file
 function boolean syncMatches(NamedElement e1, NamedElement e2) {

@@ -15,8 +15,9 @@ import java.util.*;
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
-import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
-global PrintingArrayList queue;
+# insertion queue
+import org.openiaml.model.drools.*;
+global DroolsInsertionQueue queue;
 
 # TODO can we put this function into something global?
 function boolean connects(WireEdge wire, Object a, Object b) {

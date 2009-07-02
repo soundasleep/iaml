@@ -16,8 +16,9 @@ import org.openiaml.model.inference.*;		// for handler
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
 
-import org.openiaml.model.drools.DroolsInferenceEngine.PrintingArrayList;
-global PrintingArrayList queue;
+# insertion queue
+import org.openiaml.model.drools.*;
+global DroolsInsertionQueue queue;
 
 rule "Refresh New Instance Object mappings"
 	when

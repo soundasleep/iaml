@@ -12,13 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.drools.FactHandle;
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.WorkingMemory;
@@ -28,12 +25,7 @@ import org.drools.event.ObjectInsertedEvent;
 import org.drools.event.ObjectRetractedEvent;
 import org.drools.event.ObjectUpdatedEvent;
 import org.drools.event.WorkingMemoryEventListener;
-import org.drools.reteoo.ReteTuple;
 import org.drools.rule.Package;
-import org.drools.rule.Rule;
-import org.drools.spi.Activation;
-import org.drools.spi.KnowledgeHelper;
-import org.drools.spi.PropagationContext;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -326,7 +318,7 @@ public abstract class DroolsInferenceEngine {
 	        });
         }
         
-        PrintingArrayList queue = new PrintingArrayList();
+        DroolsInsertionQueue queue = new DroolsInsertionQueue();
 	    workingMemory.setGlobal("handler", handler);
 		workingMemory.setGlobal("queue", queue );
 		
@@ -340,15 +332,14 @@ public abstract class DroolsInferenceEngine {
 			// we can actually use a real monitor, now that we have a limit
 			subProgressMonitor = new SubProgressMonitor(monitor, INSERTION_ITERATION_LIMIT);
 	        for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
-	        	System.out.println("[step " + k + "]");
-		        
+	        	// actually do the work
 		        workingMemory.fireAllRules();
 		        
 		        // once the rules have been completed,
 		        // insert in the new elements
 		        // but first reset the queue
-		        PrintingArrayList oldQueue = queue;
-		        queue = new PrintingArrayList();
+		        DroolsInsertionQueue oldQueue = queue;
+		        queue = new DroolsInsertionQueue();
 				workingMemory.setGlobal("queue", queue );
 				
 				// apply the new objects
@@ -458,203 +449,6 @@ public abstract class DroolsInferenceEngine {
 			// do nothing
 		}
 		
-	}
-	
-	/**
-	 * This used to just be an ArrayList that would print out when
-	 * objects were added to it. Now it is a handle that deals with
-	 * throwing ObjectInsertEvents etc. 
-	 * 
-	 * TODO rename, refactor and document appropriately.
-	 * 
-	 * @author jmwright
-	 *
-	 */
-	public class PrintingArrayList {
-
-
-		/**
-		 * @author jmwright
-		 *
-		 */
-		public class MyPropogationContext implements PropagationContext {
-
-			private static final long serialVersionUID = 1L;
-			
-			private Activation activation;
-
-			/**
-			 * @param activation
-			 */
-			public MyPropogationContext(Activation activation) {
-				this.activation = activation;
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#addRetractedTuple(org.drools.rule.Rule, org.drools.spi.Activation)
-			 */
-			@Override
-			public void addRetractedTuple(Rule rule, Activation activation) {
-				throw new UnsupportedOperationException("addRetractedTuple() is not supported");
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#clearRetractedTuples()
-			 */
-			@Override
-			public void clearRetractedTuples() {
-				throw new UnsupportedOperationException("clearRetractedTuples() is not supported");
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#getActivationOrigin()
-			 */
-			@Override
-			public Activation getActivationOrigin() {
-				return activation;
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#getActiveActivations()
-			 */
-			@Override
-			public int getActiveActivations() {
-				throw new UnsupportedOperationException("getActiveActivations() is not supported");
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#getDormantActivations()
-			 */
-			@Override
-			public int getDormantActivations() {
-				throw new UnsupportedOperationException("getDormantActivations() is not supported");
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#getPropagationNumber()
-			 */
-			@Override
-			public long getPropagationNumber() {
-				throw new UnsupportedOperationException("getDormantActivations() is not supported");
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#getRuleOrigin()
-			 */
-			@Override
-			public Rule getRuleOrigin() {
-				return activation.getRule();
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#getType()
-			 */
-			@Override
-			public int getType() {
-				return PropagationContext.ASSERTION;
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#releaseResources()
-			 */
-			@Override
-			public void releaseResources() {
-				// does nothing
-			}
-
-			/* (non-Javadoc)
-			 * @see org.drools.spi.PropagationContext#removeRetractedTuple(org.drools.rule.Rule, org.drools.reteoo.ReteTuple)
-			 */
-			@Override
-			public Activation removeRetractedTuple(Rule rule, ReteTuple tuple) {
-				throw new UnsupportedOperationException("removeRetractedTuple() is not supported");
-			}
-
-		}
-		
-		public List<EObject> objects = new ArrayList<EObject>();
-		public List<KnowledgeHelper> helpers = new ArrayList<KnowledgeHelper>();
-		public List<Activation> activations = new ArrayList<Activation>();
-		
-		private static final long serialVersionUID = 1L;
-		
-		/**
-		 * Load additional information from the drools object.
-		 * 
-		 * @param e
-		 * @param drools
-		 * @return
-		 */
-		public void add(EObject e, KnowledgeHelper drools) {
-			objects.add(e);
-			helpers.add(drools);
-			activations.add(drools.getActivation());
-		}
-		
-		/**
-		 * Is this queue empty?
-		 * 
-		 * @return
-		 */
-		public boolean isEmpty() {
-			return objects.isEmpty();
-		}
-
-		/**
-		 * The number of objects queued in here.
-		 * 
-		 * @return
-		 */
-		public int size() {
-			return objects.size();
-		}
-
-		/**
-		 * Apply all the new objects to the given working memory.
-		 * Also throws WorkingMemoryEvents for each added event.
-		 * 
-		 * @param memory
-		 * @param log 
-		 */
-		public void apply(WorkingMemory memory, int step, InferenceQueueLog log) {
-			assert(objects.size() == helpers.size());
-			
-			// first, remove all WorkingMemoryEventListeners
-			// (or else memory.insert() below will still call them)
-			List<WorkingMemoryEventListener> oldList = new ArrayList<WorkingMemoryEventListener>();
-			List<?> oldListeners = memory.getWorkingMemoryEventListeners();
-			for (Object obj : oldListeners) {
-				oldList.add((WorkingMemoryEventListener) obj);
-			}
-			
-			for (WorkingMemoryEventListener obj : oldList) {
-				memory.removeEventListener((WorkingMemoryEventListener) obj);
-			}
-			
-			for (int i = 0; i < objects.size(); i++) {
-				FactHandle handle = memory.insert(objects.get(i));
-
-				// log it
-				log.increment("step " + step + " type " + objects.get(i).eClass().getName(), 1);
-
-				// throw a new event for all listeners
-				KnowledgeHelper drools = helpers.get(i);
-				for (WorkingMemoryEventListener listener : oldList) {
-					listener.objectInserted(new ObjectInsertedEvent(
-							drools.getWorkingMemory(),
-							new MyPropogationContext(activations.get(i)),
-							handle,
-							objects.get(i)
-						));
-				}
-			}
-			
-			// add all the listeners back again
-			for (WorkingMemoryEventListener obj : oldList) {
-				memory.addEventListener(obj);
-			}
-		}
-    	
 	}
 	
 	/**

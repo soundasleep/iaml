@@ -5,7 +5,7 @@
 
 To select a _DomainObjectInstance_ from a _DomainObject_, or to select a _DomainAttributeInstance_ from a _DomainAttribute_, we can either use a _NewInstanceWire_ to select a new instance, or, we can use a _SelectWire_ to select a previously existing value.
 
-These were added in [Model0_2_5 Model version 0.2.5].
+These were added in [Model0_3 Model version 0.3].
 
 <wiki:toc max_depth="2" />
 

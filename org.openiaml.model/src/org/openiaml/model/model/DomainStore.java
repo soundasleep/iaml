@@ -12,7 +12,6 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.ExtendedProperties;
 import org.openiaml.model.FileReference;
-import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.domain.DomainStoreTypes;
 
@@ -160,15 +159,6 @@ public interface DomainStore extends ContainsOperations, ContainsEventTriggers, 
 	 * @generated
 	 */
 	void setType(DomainStoreTypes value);
-
-	/**
-	 * Regenerate elements, based on changes in the FileReference, if needed.
-	 * 
-	 * @generated NOT
-	 * @throws InferenceException if something bad happens
-	 * @return true if the model has changed
-	 */
-	boolean refreshMappings(EcoreCreateElementsHelper handler) throws InferenceException;
 
 	/**
 	 * Get the properties file referenced by the FileReference.

@@ -1,30 +1,12 @@
 package org.openiaml.model.diagram.custom.actions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
-import org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools.RefreshObjectInstanceMappings;
 import org.openiaml.model.drools.DroolsInferenceEngine;
-import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
-import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
 import org.openiaml.model.model.diagram.visual.edit.parts.InputFormEditPart;
 import org.openiaml.model.model.visual.InputForm;
 
@@ -34,7 +16,7 @@ import org.openiaml.model.model.visual.InputForm;
  * @author jmwright
  *
  */
-public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction{
+public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 
 	public class RefreshFormMappings extends DroolsInferenceEngine {
 		

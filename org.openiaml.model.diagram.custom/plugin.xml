@@ -205,21 +205,12 @@
             path="actions"> 
             <separator name="group1" />
          </menu>
-         <action
-               class="org.openiaml.model.diagram.custom.actions.RefreshMappingsAction"
-               enablesFor="1"
-               id="org.openiaml.model.diagram.custom.actions.refresh"
-               label="&amp;Refresh Mappings"
-               menubarPath="ModelActions/group1">
-			 <selection class="org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart">
-			 </selection>
-         </action>
          
          <action
                class="org.openiaml.model.diagram.custom.actions.RefreshMappingsActionWithDrools"
                enablesFor="1"
                id="org.openiaml.model.diagram.custom.actions.refresh"
-               label="&amp;Refresh Mappings with Drools"
+               label="&amp;Refresh DomainStore Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart">
 			 </selection>
@@ -229,7 +220,7 @@
                class="org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools"
                enablesFor="1"
                id="org.openiaml.model.diagram.custom.actions.refresh"
-               label="&amp;Refresh all DomainObjectInstance Mappings with Drools"
+               label="&amp;Refresh all DomainObjectInstance Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart">
 			 </selection>
@@ -239,7 +230,7 @@
                class="org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools"
                enablesFor="1"
                id="org.openiaml.model.diagram.custom.actions.refresh"
-               label="&amp;Refresh all Form Mappings with Drools"
+               label="&amp;Refresh all Form Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.visual.edit.parts.InputFormEditPart">
 			 </selection>

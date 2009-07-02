@@ -204,4 +204,14 @@ public abstract class UpdateWithDroolsAction implements IViewActionDelegate {
 		}
 	}
 
+	/**
+	 * Any additional model element checks?
+	 * 
+	 * @param object
+	 * @throws InferenceException if something is wrong with the model element
+	 */
+	public void checkModelElement(EObject object) throws InferenceException {
+		// by default, does nothing
+	}
+
 }

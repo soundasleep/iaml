@@ -1,25 +1,15 @@
 package org.openiaml.model.diagram.custom.actions;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
-import org.openiaml.model.drools.RefreshDataStores;
-import org.openiaml.model.inference.EmfInferenceHandler;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.domain.DomainStoreTypes;
 
 /**
@@ -29,106 +19,91 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * @author jmwright
  *
  */
-public class RefreshMappingsActionWithDrools implements IViewActionDelegate {
-
-	/**
-	 * The loaded model.
-	 */
-	private EObject model = null;
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
-	 */
-	@Override
-	public void init(IViewPart view) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
-	 */
-	@Override
-	public void run(IAction action) {
-		model = null;
-		
-		if (selection != null) {
-			for (Object o : selection) {
-				if (o instanceof DomainStoreEditPart) {
-					DomainStoreEditPart fd = (DomainStoreEditPart) o;
-					IStatus status = refreshMappings(fd, action, new NullProgressMonitor());
-					if (!status.isOK()) {
-						// TODO remove this reference to the plugin and remove the reference in plugin.xml
-						IamlDiagramEditorPlugin.getInstance().logError(
-								"Could not refresh mappings for " + o + ": " + status.getMessage(), status.getException()); //$NON-NLS-1$
-						MessageDialog.openError(IamlDiagramEditorPlugin.getInstance().getWorkbench().getDisplay().getActiveShell(), "Error", status.getMessage());
-					}
-				}
-			}
-		}
-
-	}
+public class RefreshMappingsActionWithDrools  extends UpdateWithDroolsAction {
 	
 	/**
-	 * @param fd The edit part to work with
-	 * @param monitor 
-	 * @return 
-	 */
-	protected IStatus refreshMappings(DomainStoreEditPart fd, IAction action, IProgressMonitor monitor) {
-		try {
-			monitor.beginTask("Refreshing DomainStore mappings", 200);
-			
-			EObject obj = fd.resolveSemanticElement();
-			if (!(obj instanceof DomainStore))
-				throw new InferenceException("Object was not a DomainStore");	
-			
-			DomainStore fds = (DomainStore) obj;
-			
-			if (!fds.getType().equals(DomainStoreTypes.PROPERTIES_FILE)) {
-				throw new InferenceException("Can only refresh mappings of Properties files: actual type was '" + fds.getType() + "'");	
-			}
-			
-			RefreshDataStores refresh = new RefreshDataStores(new EmfInferenceHandler(
-					fd.getEditingDomain(), 
-					new ArrayList<Object>(), /* affected files */
-					new SubProgressMonitor(monitor, 100), 
-					null /* IAdapter == null */,
-					obj.eResource()	/* eResource */
-			));
-			refresh.create(fds, new SubProgressMonitor(monitor, 100));
-			
-			monitor.done();
-				
-			return Status.OK_STATUS;
-	
-		} catch (InferenceException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed: " + e.getMessage(), e);
-		}
-			/*
-		} catch (IOException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "IO exception", e);
-		} catch (CoreException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Core exception", e);
-		} */
-		
-	}
-	
-	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
-	Object[] selection;
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
+	 * We only want to refresh Properties file mappings.
+	 * 
+	 * @param object
+	 * @throws InferenceException 
 	 */
 	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = null;
-		if (selection instanceof IStructuredSelection) {
-			this.selection = ((IStructuredSelection) selection).toArray();
+	public void checkModelElement(EObject object) throws InferenceException {
+		DomainStore ds = (DomainStore) object;
+		if (!ds.getType().equals(DomainStoreTypes.PROPERTIES_FILE)) {
+			throw new InferenceException("Can only refresh mappings of Properties files: actual type was '" + ds.getType() + "'");	
 		}
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEditPartClass()
+	 */
+	@Override
+	public Class<? extends ShapeNodeEditPart> getEditPartClass() {
+		return DomainStoreEditPart.class;
+	}
 
-	public EObject getLoadedModel() {
-		return model;
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getExpectedEObjectClass()
+	 */
+	@Override
+	public Class<? extends EObject> getExpectedEObjectClass() {
+		return DomainStore.class;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEngine(org.openiaml.model.inference.ICreateElements)
+	 */
+	@Override
+	public DroolsInferenceEngine getEngine(ICreateElements handler) {
+		return new RefreshDataStores(handler);
+	}
+
+	/**
+	 * We want to use the root element, not the selected element.
+	 */
+	@Override
+	public EObject selectRootElement(EObject element) {
+		return getRoot(element);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getTitle()
+	 */
+	@Override
+	public String getTitle() {
+		return "Properties DomainStore";
+	}
+
+	/**
+	 * Uses Drools to refresh data stores.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public class RefreshDataStores extends DroolsInferenceEngine {
+		
+		ICreateElements handler;
+
+		public RefreshDataStores(ICreateElements handler) {
+			super(handler);
+			this.handler = handler;
+		}
+
+		private List<String> ruleFiles = Arrays.asList(
+				"/rules/file-domain-object.drl"
+				);
+		
+		/**
+		 * Get the list of rule files used.
+		 * 
+		 * @see #addRuleFile(String)
+		 * @return
+		 */
+		public List<String> getRuleFiles() {
+			return ruleFiles;
+		}
+		
 	}
 
 }

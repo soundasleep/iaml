@@ -1037,12 +1037,13 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 */
 	@Override
 	public ExtendedProperties getPropertiesFile() throws InferenceException, FileNotFoundException, IOException {
-		// we need to get the relative path
-		URI relativePath = this.eResource().getURI();
+		// we need to get the absolute path path
+		// "The URI is normally expected to be absolute and hierarchical"
+		URI absolutePath = this.eResource().getURI();
 		
 		if (getFile() == null)
 			throw new InferenceException("No file to map to");
-		File f = getFile().toFile(relativePath);
+		File f = getFile().toFile(absolutePath);
 		if (!f.exists())
 			throw new InferenceException("File does not exist: " + f);
 		if (!f.canRead())

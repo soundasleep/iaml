@@ -44,7 +44,7 @@ rule "Refresh FileDomainStore mappings (2)"
 		DomainObject fdo = handler.generatedDomainObject($fds, $fds);
 		handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
 		queue.add(fdo, drools);
-		
+
 end
 
 /*

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,15 +22,12 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
-import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.wires.SyncWire;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -112,6 +110,20 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			Class<?> class1) throws Exception {
 		return loadDirectly(class1, false);
 	}
+	
+	/**
+	 * Get the absolute path root of the testing plugin in the
+	 * current filesystem.
+	 * 
+	 * @return
+	 */
+	protected String getAbsolutePathRoot() {
+		try {
+			return Platform.resolve(Platform.getBundle("org.openiaml.model.tests").getEntry("/")).getPath();
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
 
 	/**
 	 * Automagically load the model file (.iaml) for this given
@@ -124,12 +136,17 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 */
 	protected InternetApplication loadDirectly(
 			Class<?> class1, boolean logRuleSource) throws Exception {
+		// check that the resolved path actually exists
+		File f = new File(getAbsolutePathRoot());
+		assertTrue("Resolved absolute path '" + getAbsolutePathRoot() + "' does not exist", f.exists());
+		assertTrue("Resolved absolute path '" + getAbsolutePathRoot() + "' is not a directory", f.isDirectory());
+		
 		// TODO move other inference tests into separate test folders
 		if (class1.getPackage().getName().contains("model0_3")) {
-			return (InternetApplication) loadModelDirectly(ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml");
+			return (InternetApplication) loadModelDirectly(getAbsolutePathRoot() + ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml");
 		}
 		
-		return (InternetApplication) loadModelDirectly(ROOT + "inference/" + class1.getSimpleName() + ".iaml");
+		return (InternetApplication) loadModelDirectly(getAbsolutePathRoot() + ROOT + "inference/" + class1.getSimpleName() + ".iaml");
 	}
 
 	/**
@@ -172,7 +189,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		URI uri = URI.createFileURI(filename);
 		resource = resourceSet.getResource(uri, true);
 		assertNotNull(resource);
-		assertEquals("there should only be one contents in the model file", resource.getContents().size(), 1);
+		assertEquals("there should only be one contents in the model file", 1, resource.getContents().size());
 		return resource.getContents().get(0);
 	}
 

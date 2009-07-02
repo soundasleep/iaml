@@ -207,7 +207,7 @@
          </menu>
          
          <action
-               class="org.openiaml.model.diagram.custom.actions.RefreshMappingsActionWithDrools"
+               class="org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools"
                enablesFor="1"
                id="org.openiaml.model.diagram.custom.actions.refresh"
                label="&amp;Refresh DomainStore Mappings"

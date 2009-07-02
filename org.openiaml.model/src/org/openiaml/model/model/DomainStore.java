@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.openiaml.model.ExtendedProperties;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.inference.InferenceException;
@@ -162,13 +163,15 @@ public interface DomainStore extends ContainsOperations, ContainsEventTriggers, 
 
 	/**
 	 * Get the properties file referenced by the FileReference.
-	 * @throws InferenceException 
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
 	 * 
 	 * @see #getFile()
+	 * @return
+	 * @throws InferenceException
+	 * @throws FileNotFoundException
+	 * @throws IOException
 	 * @generated NOT
 	 */
-	ExtendedProperties getPropertiesFile() throws InferenceException, FileNotFoundException, IOException;
+	ExtendedProperties getPropertiesFile() throws InferenceException,
+			FileNotFoundException, IOException;
 	
 } // DomainStore

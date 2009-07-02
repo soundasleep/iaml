@@ -39,20 +39,29 @@ public class FileReferenceImpl implements FileReference {
 	 * @see org.openiaml.model.FileReference#toFile(org.eclipse.emf.common.util.URI)
 	 */
 	@Override
-	public File toFile(URI relativePath) {
-		return resolveFilePath(relativePath, this.fileName);
+	public File toFile(URI absolutePath) {
+		return resolveFilePath(absolutePath, this.fileName);
 	}
 	
 	/**
 	 * Resolve a given file name to a given relative URI path.
 	 * 
-	 * @param relativePath
+	 * @param absolutePath
 	 * @param fileName
 	 * @return the resolved File
 	 */
-	public static File resolveFilePath(URI relativePath, String fileName) {
+	public static File resolveFilePath(URI absolutePath, String fileName) {
+		if (absolutePath.isRelative()) {
+			throw new IllegalArgumentException("Absolute path '" + absolutePath + "' cannot be relative.");
+		}
 		URI self = URI.createURI(fileName);
-		URI resolved = self.resolve(relativePath);
+		URI resolved;
+		try {
+			resolved = self.resolve(absolutePath);
+		} catch (IllegalArgumentException e) {
+			// a more useful error message
+			throw new IllegalArgumentException("Failed resolving '" + fileName + "' to relative path '" + absolutePath + "': " + e.getMessage(), e);
+		}
 		URI tofs = CommonPlugin.resolve(resolved);
 		return new File(tofs.toFileString());
 	}

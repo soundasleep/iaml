@@ -13,13 +13,12 @@ import org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart;
 import org.openiaml.model.model.domain.DomainStoreTypes;
 
 /**
- * Like {@link RefreshMappingsAction}, but using Drools instead.
+ * Refreshes DomainStores when connected to Properties files.
  * 
- * @see org.openiaml.model.drools
  * @author jmwright
  *
  */
-public class RefreshMappingsActionWithDrools  extends UpdateWithDroolsAction {
+public class RefreshDomainStoreMappingsWithDrools  extends UpdateWithDroolsAction {
 	
 	/**
 	 * We only want to refresh Properties file mappings.
@@ -72,7 +71,7 @@ public class RefreshMappingsActionWithDrools  extends UpdateWithDroolsAction {
 	 */
 	@Override
 	public String getTitle() {
-		return "Properties DomainStore";
+		return "Properties-based DomainStore";
 	}
 
 	/**
@@ -91,8 +90,8 @@ public class RefreshMappingsActionWithDrools  extends UpdateWithDroolsAction {
 		}
 
 		private List<String> ruleFiles = Arrays.asList(
-				"/rules/file-domain-object.drl"
-				);
+				"/rules/runtime/file-domain-object.drl"
+			);
 		
 		/**
 		 * Get the list of rule files used.

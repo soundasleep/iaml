@@ -20,8 +20,10 @@ public class AllTests {
 		TestSuite suite = new TestSuite("Model 0.3");
 		
 		suite.addTestSuite(NewInstanceWireMapping.class);
+		suite.addTestSuite(InputFormInstanceMapping.class);
+		suite.addTestSuite(PropertiesFileMapping.class);
 		
 		return suite;
 	}
-
+	
 }

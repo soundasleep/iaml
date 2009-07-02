@@ -1,131 +1,22 @@
 package org.openiaml.model.diagram.custom.actions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
-import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
-import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
 
 /**
  * Refresh {@link DomainObjectInstance} mappings with Drools.
  * 
- * @see org.openiaml.model.drools
  * @author jmwright
  *
  */
-public class RefreshObjectInstanceMappingsWithDrools implements IViewActionDelegate {
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
-	 */
-	@Override
-	public void init(IViewPart view) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
-	 */
-	@Override
-	public void run(IAction action) {
-		if (selection != null) {
-			for (Object o : selection) {
-				if (o instanceof DomainObjectInstanceEditPart) {
-					DomainObjectInstanceEditPart part = (DomainObjectInstanceEditPart) o;
-					IStatus status = refreshMappings(part, action, new NullProgressMonitor());
-					if (!status.isOK()) {
-						// TODO remove this reference to the plugin and remove the reference in plugin.xml
-						IamlDiagramEditorPlugin.getInstance().logError(
-								"Could not refresh mappings for " + o + ": " + status.getMessage(), status.getException()); //$NON-NLS-1$
-						MessageDialog.openError(IamlDiagramEditorPlugin.getInstance().getWorkbench().getDisplay().getActiveShell(), "Error", status.getMessage());
-					}
-				}
-			}
-		}
-
-	}
-	
-	/**
-	 * Refresh the mappings manually. Also useful for test cases.
-	 * 
-	 * @throws InferenceException 
-	 */
-	public void refreshMappings(EObject root, ICreateElements handler, IProgressMonitor monitor) throws InferenceException {
-		DroolsInferenceEngine engine = new RefreshObjectInstanceMappings(handler);
-		engine.create(root, new SubProgressMonitor(monitor, 100));
-	}
-	
-	/**
-	 * @param part The edit part to work with
-	 * @param monitor 
-	 * @return 
-	 */
-	protected IStatus refreshMappings(DomainObjectInstanceEditPart part, IAction action, IProgressMonitor monitor) {
-		try {
-			monitor.beginTask("Refreshing DomainObjectInstance mappings", 200);
-			
-			EObject obj = part.resolveSemanticElement();
-			if (!(obj instanceof DomainObjectInstance))
-				throw new InferenceException("Object was not a DomainObjectInstance");	
-			
-			DomainObjectInstance resolved = (DomainObjectInstance) obj;
-						
-			EObject root = getRoot(resolved);
-			
-			refreshMappings(root, new EmfInferenceHandler(
-					part.getEditingDomain(), 
-					new ArrayList<Object>(), /* affected files */
-					new SubProgressMonitor(monitor, 100), 
-					null /* IAdapter == null */,
-					resolved.eResource()	/* eResource */
-			), monitor);
-			
-			monitor.done();
-				
-			return Status.OK_STATUS;
-	
-		} catch (InferenceException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed: " + e.getMessage(), e);
-		}
-			/*
-		} catch (IOException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "IO exception", e);
-		} catch (CoreException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Core exception", e);
-		} */
-		
-	}
-	
-	/**
-	 * Iterate through the object until we find the root object, if any.
-	 * 
-	 * @param resolved
-	 * @return
-	 */
-	protected EObject getRoot(EObject resolved) {
-		if (resolved.eContainer() == null)
-			return resolved;
-		return getRoot(resolved.eContainer());
-	}
+public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAction {
 
 	public class RefreshObjectInstanceMappings extends DroolsInferenceEngine {
 		
@@ -148,19 +39,45 @@ public class RefreshObjectInstanceMappingsWithDrools implements IViewActionDeleg
 		}
 		
 	}
-	
-	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
-	Object[] selection;
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
+	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEditPartClass()
 	 */
 	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = null;
-		if (selection instanceof IStructuredSelection) {
-			this.selection = ((IStructuredSelection) selection).toArray();
-		}
+	public Class<? extends ShapeNodeEditPart> getEditPartClass() {
+		return DomainObjectInstanceEditPart.class;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getExpectedEObjectClass()
+	 */
+	@Override
+	public Class<? extends EObject> getExpectedEObjectClass() {
+		return DomainObjectInstance.class;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEngine(org.openiaml.model.inference.ICreateElements)
+	 */
+	@Override
+	public DroolsInferenceEngine getEngine(ICreateElements handler) {
+		return new RefreshObjectInstanceMappings(handler);
+	}
+
+	/**
+	 * We want to use the root element, not the selected element.
+	 */
+	@Override
+	public EObject selectRootElement(EObject element) {
+		return getRoot(element);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getTitle()
+	 */
+	@Override
+	public String getTitle() {
+		return "DomainObjectInstance";
 	}
 
 }

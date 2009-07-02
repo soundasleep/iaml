@@ -163,6 +163,7 @@ public interface DomainStore extends ContainsOperations, ContainsEventTriggers, 
 
 	/**
 	 * Get the properties file referenced by the FileReference.
+	 * If the file does not exist, return null.
 	 * 
 	 * @see #getFile()
 	 * @return

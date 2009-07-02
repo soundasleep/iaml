@@ -1033,7 +1033,7 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.openiaml.model.model.domain.FileDomainStore#getPropertiesFile()
+	 * @see org.openiaml.model.model.DomainStore#getPropertiesFile()
 	 */
 	@Override
 	public ExtendedProperties getPropertiesFile() throws InferenceException, FileNotFoundException, IOException {
@@ -1044,8 +1044,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 		if (getFile() == null)
 			throw new InferenceException("No file to map to");
 		File f = getFile().toFile(absolutePath);
-		if (!f.exists())
-			throw new InferenceException("File does not exist: " + f);
+		if (!f.exists()) 
+			// throw new InferenceException("File does not exist: " + f);
+			return null;
+			
 		if (!f.canRead())
 			throw new InferenceException("Cannot read file: " + f);
 		ExtendedProperties props = new ExtendedProperties();

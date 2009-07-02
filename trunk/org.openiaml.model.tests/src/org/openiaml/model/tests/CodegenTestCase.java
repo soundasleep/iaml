@@ -73,13 +73,13 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	protected InternetApplication loadAndCodegen(
 			Class<?> class1) throws Exception {
 		if (class1.getPackage().getName().contains("model0_1")) {
-			return loadAndCodegen(ROOT + "codegen/model0_1/" + class1.getSimpleName() + ".iaml");
+			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_1/" + class1.getSimpleName() + ".iaml");
 		}
 		if (class1.getPackage().getName().contains("model0_2")) {
-			return loadAndCodegen(ROOT + "codegen/model0_2/" + class1.getSimpleName() + ".iaml");
+			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_2/" + class1.getSimpleName() + ".iaml");
 		}
 		if (class1.getPackage().getName().contains("model0_3")) {
-			return loadAndCodegen(ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml");
+			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml");
 		}
 		fail("Could not work out an IAML model for class: " + class1);
 		return null;

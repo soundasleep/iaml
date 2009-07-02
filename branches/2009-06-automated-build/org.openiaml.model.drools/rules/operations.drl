@@ -1,0 +1,144 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+
+# insertion queue
+import org.openiaml.model.drools.*;
+global DroolsInsertionQueue queue;
+
+rule "Create 'update' operation for input text field"
+	when
+		f : InputTextField( overridden == false )
+		not (Operation( eContainer == f, name=="update" ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		operation.setName("update");
+		queue.add(operation, drools);
+		
+end
+
+rule "Create 'update' operation for domain attribute"
+	when
+		f : DomainAttribute( overridden == false )
+		not (Operation( eContainer == f, name=="update" ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		operation.setName("update");
+		queue.add(operation, drools);
+		
+end
+
+rule "Create 'update' operation for domain attribute instance"
+	when
+		f : DomainAttributeInstance( overridden == false )
+		not (Operation( eContainer == f, name=="update" ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		operation.setName("update");
+		queue.add(operation, drools);
+		
+end
+
+rule "Create 'init' operation for input text field"
+	when
+		f : InputTextField( overridden == false )
+		not (Operation( eContainer == f, name=="init" ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		operation.setName("init");
+		queue.add(operation, drools);
+		
+end
+
+rule "Create components of 'update', 'refresh', 'init' operations"
+	when
+		o : CompositeOperation(overridden == false, (name == "update" || name == "refresh" || name == "init"))
+		field : ApplicationElementProperty( eContainer == o.eContainer, name == "fieldValue" )
+
+	then
+		Parameter parameter = handler.generatedParameter(o, o);
+		parameter.setName("setValueTo");
+		queue.add(parameter, drools);
+		
+		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		op.setName("setPropertyToValue");
+		queue.add(op, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		data1.setFrom(parameter);
+		data1.setTo(op);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		data2.setFrom(op);
+		data2.setTo(field);
+		queue.add(data2, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		edge1.setFrom(start);
+		edge1.setTo(op);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		edge2.setFrom(op);
+		edge2.setTo(finish);
+		queue.add(edge2, drools);
+
+end
+
+rule "Create components of 'alert' operation"
+	when
+		o : CompositeOperation(overridden == false, (name == "alert"))
+
+	then
+		Parameter parameter = handler.generatedParameter(o, o);
+		parameter.setName("alertText");
+		queue.add(parameter, drools);
+		
+		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		op.setName("javascriptAlert");
+		queue.add(op, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		data1.setFrom(parameter);
+		data1.setTo(op);
+		queue.add(data1, drools);
+
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		edge1.setFrom(start);
+		edge1.setTo(op);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		edge2.setFrom(op);
+		edge2.setTo(finish);
+		queue.add(edge2, drools);
+
+end

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -119,7 +120,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 */
 	protected String getAbsolutePathRoot() {
 		try {
-			return Platform.resolve(Platform.getBundle("org.openiaml.model.tests").getEntry("/")).getPath();
+			return FileLocator.resolve(Platform.getBundle("org.openiaml.model.tests").getEntry("/")).getPath();
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}

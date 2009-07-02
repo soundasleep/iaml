@@ -210,7 +210,7 @@
                class="org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools"
                enablesFor="1"
                id="org.openiaml.model.diagram.custom.actions.refresh"
-               label="&amp;Refresh DomainStore Mappings"
+               label="&amp;Refresh all DomainStore Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart">
 			 </selection>

@@ -22,29 +22,39 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 
 If a _NewInstanceWire_ is connected from a _DomainObject_ to a _DomainObjectInstance_, the attributes from the _DomainObject_ will automatically populate the _DomainObjectInstance_ unless [OverridingGeneration overridden].
 
-This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all DomainObjectInstance mappings_.
-
 ==Input Form Population==
 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/images/InputFormInstanceMapping-1.png
 
 || *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/InputFormInstanceMapping.java InputFormInstanceMapping.java] ||
 || *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl?spec=svn745&r=745#626 sync-wires.drl] ||
+|| *UI Action* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshObjectInstanceMappingsWithDrools.java RefreshObjectInstanceMappingsWithDrools.java] ||
 
 If an _InputForm_ is connected to a _DomainObjectInstance_, then attributes within the instance will automatically create editable _InputTextFields_ within the form.
 
 Following the inference below of SyncWires with ApplicationElements, these new text fields will also automatically sync up.
 
-This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all SyncWire mappings_.
+This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all DomainObjectInstance Mappings_.
+
+==Domain Stores from Properties files==
+
+|| *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/PropertiesFileMapping.java PropertiesFileMapping.java] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/file-domain-object.drl?spec=svn753&r=753 file-domain-object.drl] ||
+|| *UI Action* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshDomainStoreMappingsWithDrools.java RefreshDomainStoreMappingsWithDrools.java] ||
+
+If a _DomainStore_ is of type _PropertiesFile_, the _DomainStore_ will be automatically populated from the values in the _PropertiesFile_ (in particular, this will create a _DomainObject_ named "properties", and all properties in the file will be added as attributes).
+
+This can also be achieved by right clicking the _DomainStore_ and selecting _IAML Model_ > _Refresh all DomainStore Mappings_.
 
 ==SyncWires with ApplicationElements==
 
 || *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/InputFormInstanceMapping.java InputFormInstanceMapping.java] ||
-|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl?r=745#52 sync-wires.drl] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl?spec=svn745&r=745#626 sync-wires.drl] ||
+|| *UI Action* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshFormMappingsWithDrools.java RefreshFormMappingsWithDrools.java] ||
 
 If two _ApplicationElements_ are connected via a _SyncWire_ labelled "sync", and these elements both contain other elements that match to each other (currently through a case-insensitive naming match), these elements will also gain a _SyncWire_ between each other.
 
-This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all SyncWire mappings_.
+This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all Form Mappings_.
 
 =New Elements=
 

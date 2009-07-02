@@ -128,6 +128,13 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 
 =New Wires=
 
+==Select Wire==
+|| *Description* || Selects existing instances of _DomainObjects_ into _DomainObjectInstances_ ||
+
+*See IamlSelectWire for more information.*
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/SelectFieldFromDynamicObject-1.png
+
 ==New Instance Wire==
 || *Description* || These wires create new instances of _DomainObjects_ and _DomainAttributes_ ||
 || *Models* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceObject.iaml NewInstanceObject.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceAttributeSession.iaml NewInstanceAttributeSession.iaml] etc ||

@@ -100,7 +100,7 @@
 		classpath="build/tasks"/>
 	<MyGenerateDiagramCode 
 		ignoreValidationErrors="true"
-		gmfgenPath="../org.openiaml.model/model/condition.gmfgen" />
+		gmfgenPath="org.openiaml.model/model/condition.gmfgen" />
 </target>
 
 <target name="compile-my-tasks">

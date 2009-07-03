@@ -3,5 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="lib/ecliptical/ant.jar"/>
+	<classpathentry kind="lib" path="lib/ecliptical/ant-tasks.jar" sourcepath="C:/eclipse-33-2/plugins/ca.ecliptical.gmf.ant.source_0.9.0.20090407143246/src/ca.ecliptical.gmf.ant_0.9.0.20090407143246/ant-taskssrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="/org.openiaml.model.drools/lib/reqs/ant-1.6.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

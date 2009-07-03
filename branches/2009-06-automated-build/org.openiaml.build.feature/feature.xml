@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.openiaml.build.feature"
+      label="Build Feature"
+      version="0.2.1"
+      provider-name="openiaml.org">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="ca.ecliptical.emf.xpath"/>
+      <import plugin="ca.ecliptical.emf.xpath.source"/>
+      <import plugin="ca.ecliptical.emf.xpath.tests"/>
+      <import plugin="ca.ecliptical.gmf.ant"/>
+      <import plugin="ca.ecliptical.gmf.ant.source"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.gmf"/>
+      <import plugin="org.eclipse.gmf.codegen"/>
+      <import plugin="org.eclipse.emf.ecore.change"/>
+      <import plugin="org.eclipse.emf.ecore.change.edit"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.eclipse.emf.ecore.editor"/>
+      <import plugin="org.eclipse.jdt"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.ant.core"/>
+      <import plugin="org.eclipse.ant.ui"/>
+   </requires>
+
+   <plugin
+         id="org.openiaml.build"
+         download-size="0"
+         install-size="0"
+         version="0.2.1"
+         unpack="false"/>
+
+</feature>

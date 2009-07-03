@@ -12,6 +12,7 @@ package org.openiaml.build;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
+import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -21,6 +22,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin.EclipsePlugin;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.equinox.app.IApplication;
 import org.eclipse.jdt.ui.PreferenceConstants;
 
 public class MyGenerateDiagramCode extends Task {
@@ -68,7 +70,15 @@ public class MyGenerateDiagramCode extends Task {
 		// hack to load it
 		// PreferenceConstants.initializeDefaultValues(PreferenceConstants.getPreferenceStore());
 		// System.out.println("xxx = " + PreferenceConstants.getPreferenceStore());
-
+		
+		// AntRunner r;
+		MyAntRunner ant = new MyAntRunner();
+		try {
+			ant.run((Object) null);
+		} catch (Exception e1) {
+			throw new BuildException(e1.getMessage(), e1);
+		}
+		
 		System.out.println("generating..");
 		MyGenerateOperation op = new MyGenerateOperation(); 
 		System.out.println("created op: " + op);

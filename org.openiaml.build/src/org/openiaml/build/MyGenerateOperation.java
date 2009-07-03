@@ -27,8 +27,6 @@ import org.eclipse.gmf.codegen.gmfgen.GenEditorGenerator;
 import org.eclipse.gmf.codegen.util.Generator;
 import org.eclipse.gmf.internal.common.migrate.ModelLoadHelper;
 
-import ca.ecliptical.gmf.ant.Activator;
-
 @SuppressWarnings("restriction")
 public class MyGenerateOperation {
 
@@ -54,7 +52,7 @@ public class MyGenerateOperation {
 
 	public void run(IProgressMonitor monitor) throws CoreException {
 		if (genModelURI == null)
-			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, "Missing GenModel URI.", null));
+			throw new CoreException(new Status(IStatus.ERROR, MyActivator.PLUGIN_ID, 0, "Missing GenModel URI.", null));
 
 		try {
 			Diagnostic loadStatus = loadGenModel();
@@ -99,7 +97,7 @@ public class MyGenerateOperation {
 	}
 	
 	private Generator createGenerator() {
-		return new Generator(getGenModel(), Activator.getDefault().getEmitters(getGenModel()));
+		return new Generator(getGenModel(), MyActivator.getDefault().getEmitters(getGenModel()));
 	}
 
 	private GenEditorGenerator getGenModel() {

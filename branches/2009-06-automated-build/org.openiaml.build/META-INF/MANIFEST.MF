@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: IAML Build Script Plug-in
-Bundle-SymbolicName: org.openiaml.build
+Bundle-SymbolicName: org.openiaml.build;singleton:=true
 Bundle-Version: 0.2.1
 Bundle-Vendor: openiaml.org
 Require-Bundle: ca.ecliptical.emf.xpath,
@@ -20,4 +20,6 @@ Require-Bundle: ca.ecliptical.emf.xpath,
  org.eclipse.emf.ecore.edit,
  org.eclipse.emf.ecore.editor,
  org.eclipse.jdt,
- org.eclipse.jdt.ui
+ org.eclipse.jdt.ui,
+ org.eclipse.ant.core,
+ org.eclipse.ant.ui

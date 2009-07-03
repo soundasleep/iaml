@@ -12,12 +12,16 @@ package org.openiaml.build;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceDescription;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.EMFPlugin.EclipsePlugin;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
-
-import ca.ecliptical.gmf.ant.GenerateDiagramCodeOperation;
+import org.eclipse.jdt.ui.PreferenceConstants;
 
 public class MyGenerateDiagramCode extends Task {
 	
@@ -39,13 +43,37 @@ public class MyGenerateDiagramCode extends Task {
 		this.ignoreValidationErrors = ignoreValidationErrors;
 	}
 
+	/**
+	 * From: http://dev.eclipse.org/newslists/news.eclipse.platform/msg54558.html
+	 * 
+	 * @param enable
+	 * @return
+	 * @throws CoreException
+	 */
+   public static boolean enableAutoBuild(boolean enable) throws 
+   CoreException {
+           IWorkspace workspace= ResourcesPlugin.getWorkspace();
+           IWorkspaceDescription desc= workspace.getDescription();
+           boolean isAutoBuilding= desc.isAutoBuilding();
+           if (isAutoBuilding != enable) {
+               desc.setAutoBuilding(enable);
+               workspace.setDescription(desc);
+           }
+           return isAutoBuilding;
+       }
+
+
 	@Override
 	public void execute() throws BuildException {
+		// hack to load it
+		// PreferenceConstants.initializeDefaultValues(PreferenceConstants.getPreferenceStore());
+		// System.out.println("xxx = " + PreferenceConstants.getPreferenceStore());
+
 		System.out.println("generating..");
-		MyGenerateOperation op = new MyGenerateOperation();
+		MyGenerateOperation op = new MyGenerateOperation(); 
 		System.out.println("created op: " + op);
 		URI uri = URI.createPlatformResourceURI(gmfgenPath, true);
-		uri = URI.createFileURI(gmfgenPath);
+		//uri = URI.createFileURI(gmfgenPath);
 		op.setGenModelURI(uri);
 		System.out.println("Set model URI to: " + uri);
 		op.setIgnoreLoadErrors(ignoreLoadErrors);
@@ -57,6 +85,11 @@ public class MyGenerateDiagramCode extends Task {
 		System.out.println("executing");
 		
 		try {
+			// turn off auto building
+			// stops 'java.lang.NoClassDefFoundError: org/eclipse/jdt/ui/PreferenceConstants'
+			// ref: http://www.eclipse.org/newsportal/article.php?id=81377&group=eclipse.platform
+			enableAutoBuild(false);
+			
 			op.run(monitor);
 		} catch (CoreException e) {
 			throw new BuildException(e);

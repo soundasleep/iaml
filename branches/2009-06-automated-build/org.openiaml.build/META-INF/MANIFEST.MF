@@ -18,4 +18,6 @@ Require-Bundle: ca.ecliptical.emf.xpath,
  org.eclipse.emf.ecore.change,
  org.eclipse.emf.ecore.change.edit,
  org.eclipse.emf.ecore.edit,
- org.eclipse.emf.ecore.editor
+ org.eclipse.emf.ecore.editor,
+ org.eclipse.jdt,
+ org.eclipse.jdt.ui

@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <!-- build script based on sample Tomcat build script:
 	http://tomcat.apache.org/tomcat-4.1-doc/appdev/build.xml.txt -->
-<project name="My Project" default="compile" basedir=".">
+<project name="My Project" default="diagram" basedir=".">
 
 <property name="build.home" value="${basedir}/build" />
 <property name="src.home" value="${basedir}/src" />
+<property name="eclipse.home" value="c:/eclipse-33-2" />
 
 <!--
 
@@ -61,6 +62,25 @@
 	<pathelement location="lib/svnant/lib/svnant.jar"/>
 	<pathelement location="lib/svnant/lib/svnClientAdapter.jar"/>
 </path>
+
+<path id="eclipse-path">
+	<fileset dir="${eclipse.home}/plugins">
+		<include name="**/*.jar"/>
+	</fileset>
+	<pathelement location="${eclipse.home}/plugins/ca.ecliptical.gmf.ant_0.9.0.20090407143246/ant-tasks.jar"/>
+	<pathelement location="${eclipse.home}/plugins/ca.ecliptical.gmf.ant_0.9.0.20090407143246/ant.jar"/>
+</path>
+
+<path id="my-tasks-path">
+	<fileset dir="${eclipse.home}/plugins">
+		<include name="**/*.jar"/>
+	</fileset>
+	<pathelement location="${eclipse.home}/plugins/ca.ecliptical.gmf.ant_0.9.0.20090407143246/ant-tasks.jar"/>
+	<pathelement location="${eclipse.home}/plugins/ca.ecliptical.gmf.ant_0.9.0.20090407143246/ant.jar"/>
+	<fileset dir="build/tasks">
+		<include name="**/*.class"/>
+	</fileset>
+</path>
 	
 <target name="checkout" description="Check out trunk from SVN">
 	<!-- svnant: http://subclipse.tigris.org/svnant/svn.html -->
@@ -68,6 +88,40 @@
 	<svn javahl="${javahl}">
 		<checkout url="http://iaml.googlecode.com/svn/trunk/" destPath="trunk" />
 	</svn> 
+</target>
+	
+<target name="diagram" depends="compile-my-tasks" description="Generate diagram code from gmfgen">
+	<!--
+	classname="ca.ecliptical.gmf.ant.tasks.GenerateDiagramCode"
+	-->
+	<typedef name="MyGenerateDiagramCode"
+		classpathref="my-tasks-path"
+			classname="org.openiaml.build.MyGenerateDiagramCode"
+		classpath="build/tasks"/>
+	<MyGenerateDiagramCode 
+		ignoreValidationErrors="true"
+		gmfgenPath="../org.openiaml.model/model/condition.gmfgen" />
+</target>
+
+<target name="compile-my-tasks">
+
+	<!-- Compile Java classes as necessary -->
+	<mkdir dir="build/tasks"/>
+	<javac srcdir="src"
+	      destdir="build/tasks"
+	        debug="${compile.debug}"
+	  deprecation="${compile.deprecation}"
+	     optimize="${compile.optimize}">
+	    <classpath refid="eclipse-path"/>
+	</javac>
+	
+	<!-- Copy application resources -->
+	<!--
+	<copy todir="${build.home}/WEB-INF/classes">
+	  <fileset dir="${src.home}" excludes="**/*.java"/>
+	</copy>
+	-->
+
 </target>
 	
 <target name="compile" depends="prepare"

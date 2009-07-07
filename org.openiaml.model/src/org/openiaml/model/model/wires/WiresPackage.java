@@ -235,13 +235,22 @@ public interface WiresPackage extends EPackage {
 	int COMPOSITE_WIRE__OVERRIDDEN = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_WIRE__CONDITIONS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__CHILDREN = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 4;
+	int COMPOSITE_WIRE__CHILDREN = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -250,7 +259,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PROPERTIES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 5;
+	int COMPOSITE_WIRE__PROPERTIES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -259,7 +268,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__OPERATIONS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 6;
+	int COMPOSITE_WIRE__OPERATIONS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
@@ -268,7 +277,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__EVENT_TRIGGERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 7;
+	int COMPOSITE_WIRE__EVENT_TRIGGERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -277,7 +286,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PARAMETERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 8;
+	int COMPOSITE_WIRE__PARAMETERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -286,7 +295,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__VALUES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 9;
+	int COMPOSITE_WIRE__VALUES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Composite Wire</em>' class.
@@ -295,7 +304,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 10;
+	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.SyncWireImpl <em>Sync Wire</em>}' class.
@@ -396,6 +405,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYNC_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -568,6 +586,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int RUN_INSTANCE_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_INSTANCE_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -842,6 +869,15 @@ public interface WiresPackage extends EPackage {
 	int SET_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1003,6 +1039,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SHOW_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHOW_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1168,6 +1213,15 @@ public interface WiresPackage extends EPackage {
 	int COMMIT_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMIT_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1331,6 +1385,15 @@ public interface WiresPackage extends EPackage {
 	int NAVIGATE_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATE_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1492,6 +1555,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SELECT_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELECT_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1684,6 +1756,15 @@ public interface WiresPackage extends EPackage {
 	int CONDITION_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1854,6 +1935,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int NEW_INSTANCE_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.

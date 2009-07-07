@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.openiaml.model.ExtendedProperties;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.inference.InferenceException;

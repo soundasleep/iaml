@@ -107,9 +107,9 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 
 ==Domain Object Instance==
 || *Description* || _DomainObjectInstances_ are instances of a _DomainObject_. They are created by a _NewInstanceWire_. ||
-|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceObject.iaml NewInstanceObject.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceObjectAutosave.iaml NewInstanceObjectAutosave.iaml] ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceObject.iaml NewInstanceObject.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceObjectAutosave.iaml NewInstanceObjectAutosave.iaml] ||
 || *Inference Tests* || - ||
-|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceObject.java NewInstanceObject.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceObjectAutosave.java NewInstanceObjectAutosave.java] ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceObject.java NewInstanceObject.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceObjectAutosave.java NewInstanceObjectAutosave.java] ||
 
 If "autosave" is set to _false_ on the _DomainObjectInstance_, then changes to the attributes within the instance will not be automatically saved. The "save" operation will have to be called manually.
 
@@ -117,14 +117,33 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 
 ==Domain Attribute Instance==
 || *Description* || Like a _DomainObjectInstance_, except concerned with an attribute. A _DomainObjectInstance_ contains many _DomainAttributeInstances_. ||
-|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceAttributeSession.iaml NewInstanceAttributeSession.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceAttributeSessionAutosave.iaml NewInstanceAttributeSessionAutosave.iaml] ||
+|| *Model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceAttributeSession.iaml NewInstanceAttributeSession.iaml], [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceAttributeSessionAutosave.iaml NewInstanceAttributeSessionAutosave.iaml] ||
 || *Inference Tests* || - ||
-|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceAttributeSession.java NewInstanceAttributeSession.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/NewInstanceAttributeSessionAutosave.java NewInstanceAttributeSessionAutosave.java] ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceAttributeSession.java NewInstanceAttributeSession.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/NewInstanceAttributeSessionAutosave.java NewInstanceAttributeSessionAutosave.java] ||
 
 _DomainObjectInstances_ and _DomainAttributeInstances_ can be stored within _Sessions_; otherwise, all visitors to the site will access the same instance.
 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/NewInstanceAttributeSession.png 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/NewInstanceAttributeSession-4.png
+
+==Login Handler (type=key)==
+|| *Description* || Controls authentication and access to pages, authenticated with a single key. ||
+|| *Model* || [https://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_1/LoginHandlerKey.iaml LoginHandlerKey.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_1/LoginHandlerKey.java LoginHandlerKey.java] ||
+
+If placed within a Session, all accesses to pages within the Session must be authenticated through the _LoginHandler_. The _LoginHandler_ uses a single key for authentication. 
+
+The "login key" can be any data source, such as a static value or an _ApplicationElementProperty_.
+
+The _LoginHandler_ has a number of special wires:
+  * A _NavigateWire_ called "login" will redirect the user to the page if authentication has failed; this may be generated.
+  * A _NavigateWire_ called "logout" will redirect the user to the page if they request to logout; this may be generated.
+  * A _SetWire_ called "set" will store the current value of the login key. This may be generated.
+  * An incoming _ParameterWire_ provides the current login key to authenticate against.
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_1/images/LoginHandlerKey.png
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_1/images/LoginHandlerKey-1.png
 
 =New Wires=
 

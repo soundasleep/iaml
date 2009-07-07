@@ -8,10 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.openarchitectureware.xpand2.output.FileHandle;
+import org.openiaml.iacleaner.CleanerException;
 import org.openiaml.iacleaner.IACleaner;
-import org.openiaml.iacleaner.IACleaner.CleanerException;
-import org.openiaml.model.codegen.oaw.coverage.InstrumentationException;
-import org.openiaml.model.codegen.oaw.coverage.OutputInstrumentation;
+import org.openiaml.iacleaner.IAInlineCleaner;
 
 /**
  * @author Jevon
@@ -32,12 +31,12 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 			{
 				File backup = new File( file.getTargetFile().getAbsolutePath() + ".old" );
 				FileWriter fw = new FileWriter( backup );
-				fw.write( IACleaner.readFile(file.getTargetFile()) );
+				fw.write( IAInlineCleaner.readFile(file.getTargetFile()) );
 				fw.close();
 			}
 			
 			
-			IACleaner cleaner = new IACleaner();
+			IACleaner cleaner = new IAInlineCleaner();
 			String out = cleaner.cleanScript( file.getTargetFile() );
 			
 			// rewrite the file

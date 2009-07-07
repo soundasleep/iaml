@@ -263,14 +263,32 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	}
 	
 	/**
+	 * <p>
 	 * We need some way of working out the label ID that contains 
 	 * a particular string.
+	 * </p>
+	 * 
+	 * <p>
+	 * Previously, this would occasionally fail even though the
+	 * label was directly in the page. It turns out this is because
+	 * these two labels have different text() values:
+	 * 
+	 * <ol>
+	 * 	<li><code>&lt;a&gt;b c&lt;/a&gt;</code></li>
+	 *  <li><code>&lt;a&gt;b<br>c&lt;/a&gt;</code></li>
+	 * </ol>
+	 * </p>
+	 * 
+	 * <p>
+	 * As a result, we wrap both <code>text()</code> and the testing
+	 * string with the <code>normalize-string()</code> XPath function.
+	 * </p>
 	 * 
 	 * @param text
 	 * @return
 	 */
 	protected String getLabelIDForText(String text) {
-		IElement element = getElementByXPath("//label[contains(text(),'" + text + "')]");
+		IElement element = getElementByXPath("//label[contains(normalize-space(text()), normalize-space('" + text + "'))]");
 		return element.getAttribute("id");
 	}
 	

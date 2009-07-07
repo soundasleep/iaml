@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12252e52506.1">
+  <children xsi:type="iaml.visual:Page" id="visual.12252e52574.1" name="container">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12252e52574.8" name="text field 1" inEdges="wires.12252e52583.1" generatedElements="model.12252e52506.28 model.12252e52506.29 model.12252e52506.2a model.12252e52506.2b model.12252e52506.2c">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12252e52583.8" generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.28" name="init" generatedElements="model.12252e52506.33 model.12252e52506.34 operations.12252e52583.3 operations.12252e52583.4 model.12252e52506.35 model.12252e52506.36 model.12252e52506.37 model.12252e52506.38">
+        <parameters generatedBy="model.12252e52506.28" isGenerated="true" id="model.12252e52506.33" name="setValueTo" outFlows="model.12252e52506.35"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.12252e52506.28" isGenerated="true" id="model.12252e52506.34" name="setPropertyToValue" inFlows="model.12252e52506.35" inExecutions="model.12252e52506.37" outFlows="model.12252e52506.36" outExecutions="model.12252e52506.38"/>
+        <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.12252e52506.28" isGenerated="true" id="operations.12252e52583.3" outExecutions="model.12252e52506.37"/>
+        <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.12252e52506.28" isGenerated="true" id="operations.12252e52583.4" inExecutions="model.12252e52506.38"/>
+        <dataEdges generatedBy="model.12252e52506.28" isGenerated="true" id="model.12252e52506.35" from="model.12252e52506.33" to="model.12252e52506.34"/>
+        <dataEdges generatedBy="model.12252e52506.28" isGenerated="true" id="model.12252e52506.36" from="model.12252e52506.34" to="model.12252e52506.2c"/>
+        <executionEdges generatedBy="model.12252e52506.28" isGenerated="true" id="model.12252e52506.37" from="operations.12252e52583.3" to="model.12252e52506.34"/>
+        <executionEdges generatedBy="model.12252e52506.28" isGenerated="true" id="model.12252e52506.38" from="model.12252e52506.34" to="operations.12252e52583.4"/>
+      </operations>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12252e52583.9" generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.29" name="update" generatedElements="model.12252e52506.2d model.12252e52506.2e operations.12252e52583.1 operations.12252e52583.2 model.12252e52506.2f model.12252e52506.30 model.12252e52506.31 model.12252e52506.32">
+        <parameters generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.2d" name="setValueTo" outFlows="model.12252e52506.2f"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.2e" name="setPropertyToValue" inFlows="model.12252e52506.2f" inExecutions="model.12252e52506.31" outFlows="model.12252e52506.30" outExecutions="model.12252e52506.32"/>
+        <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.12252e52506.29" isGenerated="true" id="operations.12252e52583.1" outExecutions="model.12252e52506.31"/>
+        <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.12252e52506.29" isGenerated="true" id="operations.12252e52583.2" inExecutions="model.12252e52506.32"/>
+        <dataEdges generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.2f" from="model.12252e52506.2d" to="model.12252e52506.2e"/>
+        <dataEdges generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.30" from="model.12252e52506.2e" to="model.12252e52506.2c"/>
+        <executionEdges generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.31" from="operations.12252e52583.1" to="model.12252e52506.2e"/>
+        <executionEdges generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.32" from="model.12252e52506.2e" to="operations.12252e52583.2"/>
+      </operations>
+      <eventTriggers generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2a" name="access" outEdges="wires.12252e52583.8"/>
+      <eventTriggers generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2b" name="edit" outEdges="wires.12252e52583.7"/>
+      <properties generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2c" name="fieldValue" outEdges="wires.12252e52583.c wires.12252e52583.d" inFlows="model.12252e52506.30 model.12252e52506.36"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12252e52574.a" name="text field 2" outEdges="wires.12252e52583.1" generatedElements="model.12252e52506.23 model.12252e52506.24 model.12252e52506.25 model.12252e52506.26 model.12252e52506.27">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12252e52583.6" generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.23" name="init" generatedElements="model.12252e52506.3f model.12252e52506.40 operations.12252e52583.7 operations.12252e52583.8 model.12252e52506.41 model.12252e52506.42 model.12252e52506.43 model.12252e52506.44">
+        <parameters generatedBy="model.12252e52506.23" isGenerated="true" id="model.12252e52506.3f" name="setValueTo" outFlows="model.12252e52506.41"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.12252e52506.23" isGenerated="true" id="model.12252e52506.40" name="setPropertyToValue" inFlows="model.12252e52506.41" inExecutions="model.12252e52506.43" outFlows="model.12252e52506.42" outExecutions="model.12252e52506.44"/>
+        <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.12252e52506.23" isGenerated="true" id="operations.12252e52583.7" outExecutions="model.12252e52506.43"/>
+        <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.12252e52506.23" isGenerated="true" id="operations.12252e52583.8" inExecutions="model.12252e52506.44"/>
+        <dataEdges generatedBy="model.12252e52506.23" isGenerated="true" id="model.12252e52506.41" from="model.12252e52506.3f" to="model.12252e52506.40"/>
+        <dataEdges generatedBy="model.12252e52506.23" isGenerated="true" id="model.12252e52506.42" from="model.12252e52506.40" to="model.12252e52506.27"/>
+        <executionEdges generatedBy="model.12252e52506.23" isGenerated="true" id="model.12252e52506.43" from="operations.12252e52583.7" to="model.12252e52506.40"/>
+        <executionEdges generatedBy="model.12252e52506.23" isGenerated="true" id="model.12252e52506.44" from="model.12252e52506.40" to="operations.12252e52583.8"/>
+      </operations>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12252e52583.7" generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.24" name="update" generatedElements="model.12252e52506.39 model.12252e52506.3a operations.12252e52583.5 operations.12252e52583.6 model.12252e52506.3b model.12252e52506.3c model.12252e52506.3d model.12252e52506.3e">
+        <parameters generatedBy="model.12252e52506.24" isGenerated="true" id="model.12252e52506.39" name="setValueTo" outFlows="model.12252e52506.3b"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.12252e52506.24" isGenerated="true" id="model.12252e52506.3a" name="setPropertyToValue" inFlows="model.12252e52506.3b" inExecutions="model.12252e52506.3d" outFlows="model.12252e52506.3c" outExecutions="model.12252e52506.3e"/>
+        <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.12252e52506.24" isGenerated="true" id="operations.12252e52583.5" outExecutions="model.12252e52506.3d"/>
+        <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.12252e52506.24" isGenerated="true" id="operations.12252e52583.6" inExecutions="model.12252e52506.3e"/>
+        <dataEdges generatedBy="model.12252e52506.24" isGenerated="true" id="model.12252e52506.3b" from="model.12252e52506.39" to="model.12252e52506.3a"/>
+        <dataEdges generatedBy="model.12252e52506.24" isGenerated="true" id="model.12252e52506.3c" from="model.12252e52506.3a" to="model.12252e52506.27"/>
+        <executionEdges generatedBy="model.12252e52506.24" isGenerated="true" id="model.12252e52506.3d" from="operations.12252e52583.5" to="model.12252e52506.3a"/>
+        <executionEdges generatedBy="model.12252e52506.24" isGenerated="true" id="model.12252e52506.3e" from="model.12252e52506.3a" to="operations.12252e52583.6"/>
+      </operations>
+      <eventTriggers generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.25" name="access" outEdges="wires.12252e52583.6"/>
+      <eventTriggers generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.26" name="edit" outEdges="wires.12252e52583.9"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12252e52583.1" from="visual.12252e52574.a" to="visual.12252e52574.8" name="sycn" generatedElements="wires.12252e52583.6 wires.12252e52583.7 wires.12252e52583.8 wires.12252e52583.9 wires.12252e52583.a wires.12252e52583.b wires.12252e52583.c wires.12252e52583.d">
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.6" from="model.12252e52506.25" to="model.12252e52506.23" name="run" inEdges="wires.12252e52583.d"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.7" from="model.12252e52506.2b" to="model.12252e52506.24" name="run" inEdges="wires.12252e52583.c"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.8" from="model.12252e52506.2a" to="model.12252e52506.28" name="run" inEdges="wires.12252e52583.b"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.9" from="model.12252e52506.26" to="model.12252e52506.29" name="run" inEdges="wires.12252e52583.a"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.a" from="model.12252e52506.27" to="wires.12252e52583.9" name="[sync] run instance parameter (source.edit)"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.b" from="model.12252e52506.27" to="wires.12252e52583.8" name="[sync] run instance parameter (target.access)"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.c" from="model.12252e52506.2c" to="wires.12252e52583.7" name="[sync] run instance parameter (target.edit)"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.d" from="model.12252e52506.2c" to="wires.12252e52583.6" name="[sync] run instance parameter (source.access)"/>
+      </wires>
+      <properties generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.27" name="fieldValue" outEdges="wires.12252e52583.a wires.12252e52583.b" inFlows="model.12252e52506.3c model.12252e52506.42"/>
+    </children>
+  </children>
+</iaml:InternetApplication>

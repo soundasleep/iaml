@@ -368,7 +368,7 @@
         <details key="comment" value="why do we have SingleWire at all? (following a design pattern?)"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//WireEdge #//NamedElement #//ContainsWires #//GeneratesElements">
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//WireEdge #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="ideally this would be abstract; but we want to have a &quot;wire&quot; diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire..."/>
         <details key="comment2" value="easy visualisation: all composite wires are dashed"/>

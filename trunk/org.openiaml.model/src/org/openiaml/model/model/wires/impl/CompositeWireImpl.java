@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
@@ -44,6 +46,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getOperations <em>Operations</em>}</li>
@@ -115,6 +118,16 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Condition> conditions;
 
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
@@ -266,6 +279,18 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Condition> getConditions() {
+		if (conditions == null) {
+			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, WiresPackage.COMPOSITE_WIRE__CONDITIONS);
+		}
+		return conditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ApplicationElement> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentEList<ApplicationElement>(ApplicationElement.class, this, WiresPackage.COMPOSITE_WIRE__CHILDREN);
@@ -360,6 +385,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
+			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
+				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
@@ -392,6 +419,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return getGeneratedElements();
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
 				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
+				return getConditions();
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				return getChildren();
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
@@ -430,6 +459,10 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return;
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
 				setOverridden(((Boolean)newValue).booleanValue());
+				return;
+			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
+				getConditions().clear();
+				getConditions().addAll((Collection<? extends Condition>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				getChildren().clear();
@@ -479,6 +512,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
+			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
+				getConditions().clear();
+				return;
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				getChildren().clear();
 				return;
@@ -517,6 +553,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return generatedElements != null && !generatedElements.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
+				return conditions != null && !conditions.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
 				return children != null && !children.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
@@ -559,6 +597,12 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsConditions.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.COMPOSITE_WIRE__CONDITIONS: return ModelPackage.CONTAINS_CONDITIONS__CONDITIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -585,6 +629,12 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return WiresPackage.COMPOSITE_WIRE__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsConditions.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return WiresPackage.COMPOSITE_WIRE__CONDITIONS;
 				default: return -1;
 			}
 		}

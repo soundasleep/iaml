@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -119,6 +120,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(compositeWire);
 				if (result == null) result = caseContainsWires(compositeWire);
 				if (result == null) result = caseGeneratesElements(compositeWire);
+				if (result == null) result = caseContainsConditions(compositeWire);
 				if (result == null) result = caseGeneratedElement(compositeWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -132,6 +134,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(syncWire);
 				if (result == null) result = caseContainsWires(syncWire);
 				if (result == null) result = caseGeneratesElements(syncWire);
+				if (result == null) result = caseContainsConditions(syncWire);
 				if (result == null) result = caseGeneratedElement(syncWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -145,6 +148,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(runInstanceWire);
 				if (result == null) result = caseContainsWires(runInstanceWire);
 				if (result == null) result = caseGeneratesElements(runInstanceWire);
+				if (result == null) result = caseContainsConditions(runInstanceWire);
 				if (result == null) result = caseGeneratedElement(runInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -167,6 +171,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(setWire);
 				if (result == null) result = caseContainsWires(setWire);
 				if (result == null) result = caseGeneratesElements(setWire);
+				if (result == null) result = caseContainsConditions(setWire);
 				if (result == null) result = caseGeneratedElement(setWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -179,6 +184,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(showWire);
 				if (result == null) result = caseContainsWires(showWire);
 				if (result == null) result = caseGeneratesElements(showWire);
+				if (result == null) result = caseContainsConditions(showWire);
 				if (result == null) result = caseGeneratedElement(showWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -191,6 +197,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(commitWire);
 				if (result == null) result = caseContainsWires(commitWire);
 				if (result == null) result = caseGeneratesElements(commitWire);
+				if (result == null) result = caseContainsConditions(commitWire);
 				if (result == null) result = caseGeneratedElement(commitWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -203,6 +210,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(navigateWire);
 				if (result == null) result = caseContainsWires(navigateWire);
 				if (result == null) result = caseGeneratesElements(navigateWire);
+				if (result == null) result = caseContainsConditions(navigateWire);
 				if (result == null) result = caseGeneratedElement(navigateWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -216,6 +224,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(selectWire);
 				if (result == null) result = caseContainsWires(selectWire);
 				if (result == null) result = caseGeneratesElements(selectWire);
+				if (result == null) result = caseContainsConditions(selectWire);
 				if (result == null) result = caseGeneratedElement(selectWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -229,6 +238,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(conditionWire);
 				if (result == null) result = caseContainsWires(conditionWire);
 				if (result == null) result = caseGeneratesElements(conditionWire);
+				if (result == null) result = caseContainsConditions(conditionWire);
 				if (result == null) result = caseGeneratedElement(conditionWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -241,6 +251,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseNamedElement(newInstanceWire);
 				if (result == null) result = caseContainsWires(newInstanceWire);
 				if (result == null) result = caseGeneratesElements(newInstanceWire);
+				if (result == null) result = caseContainsConditions(newInstanceWire);
 				if (result == null) result = caseGeneratedElement(newInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -501,6 +512,21 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseGeneratesElements(GeneratesElements object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsConditions(ContainsConditions object) {
 		return null;
 	}
 

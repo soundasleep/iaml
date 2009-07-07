@@ -593,7 +593,6 @@ public class DumpDroolsXml extends InferenceTestCase {
 		findStratCycleRules(allRules);
 		
 		// look for factory graph cycles
-		// TODO meow
 		System.out.println("---");
 		System.out.println("overall factory loops:");
 		GraphLoops loops = calculateFactoryLoops(program);

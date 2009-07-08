@@ -3366,22 +3366,24 @@ public class IamlDiagramUpdater {
     List<EObject> edges = new ArrayList<EObject>();
 
     // for now, we will only concern ourselves with Operations, EventTriggers, fieldValues
-    result.addAll(jevonTest1(doneAlready, edges, view, modelElement
+    result.addAll(getAllImportantRelationships(doneAlready, edges, view, modelElement
         .getOperations()));
-    result.addAll(jevonTest1(doneAlready, edges, view, modelElement
+    result.addAll(getAllImportantRelationships(doneAlready, edges, view, modelElement
         .getEventTriggers()));
-    result.addAll(jevonTest1(doneAlready, edges, view, modelElement
+    result.addAll(getAllImportantRelationships(doneAlready, edges, view, modelElement
         .getProperties()));
 
     return new Pair<List,List>(result, edges);
   }
 
   /**
-   * @param eventTriggers
+   * For a given list of EObjects, what edges should be
+   * displayed?
+   * 
    * @return
    * @generated NOT
    */
-  private static Collection jevonTest1(List<EObject> doneAlready, List<EObject> edges, View view,
+  private static Collection getAllImportantRelationships(List<EObject> doneAlready, List<EObject> edges, View view,
       EList<? extends EObject> list) {
     List result = new LinkedList();
     for (EObject e : list) {

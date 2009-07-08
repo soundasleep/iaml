@@ -33,10 +33,13 @@ import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.INodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIPlugin;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
@@ -116,7 +119,7 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
-   * Connections thta are getting created are being removed for some reason. I override this
+   * Connections that are getting created are being removed for some reason. I override this
    * method so no views (connections) should ever be removed...
    * 
    * I've changed this again, now we want it to delete all views, because my new method "should"
@@ -125,10 +128,8 @@ public class VisibleThingCanonicalEditPolicy extends
    * @generated NOT
    */
   protected boolean shouldDeleteView(View view) {
-    
-    // return false;  // JEVON hack
+    // return false;
     return true;
-    // return true;
   }
 
   /**
@@ -196,14 +197,13 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
-   * modified by Jevon to return a list of all EObjects in the
-   * current view that need to be connections?
+   * Get a list of all EObjects in the current diagram that need to be made
+   * into Edges. In particular this will go outside simply direct containment.
    * 
    * @generated NOT
    */
   protected List getSemanticConnectionsList() {
 
-//      return Collections.EMPTY_LIST;
     View viewObject = (View) getHost().getModel();
     List result = new LinkedList();
     for (Iterator it = IamlDiagramUpdater
@@ -213,30 +213,11 @@ public class VisibleThingCanonicalEditPolicy extends
     }
     return result;
   }
-  
-  /**
-   * Calculates the <code>EditPart</code> that this connection element is
-   * connected to at it's target.
-   * 
-   * @generated NOTwe need to override this so we can call OUR method? getEditPArtFor is 'private...
-   * @param connection
-   *            the <code>EObject</code> element that we are canonical
-   *            trying to create a view for.
-   * @return the <code>EditPart</code> that is the source of the
-   *         <code>View</code> we want to create
-   */
-  protected EditPart getTargetEditPartFor(EObject connection) {
-    EObject tel;
-    EditPart tep;
-    tel = getTargetElement(connection);
-    tep = getEditPartFor(tel, connection);
-    if (true);
-    
-    return tep;
-  }
 
   /**
-   * @generated NOT we need to override?
+   * We need to override this method to get the correct EObject.
+   * 
+   * @generated NOT
    */
   protected EObject getSourceElement(EObject relationship) {
     if (relationship instanceof WireEdge) {
@@ -246,7 +227,9 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
-   * @generated NOT we need to override?
+   * We need to override this method to get the correct EObject.
+   * 
+   * @generated NOT
    */
   protected EObject getTargetElement(EObject relationship) {
     if (relationship instanceof WireEdge) {
@@ -256,6 +239,62 @@ public class VisibleThingCanonicalEditPolicy extends
   }
   
   /**
+   * We add additional logic to findEditPartForElement. The original method would dive straight
+   * into the ancestor of the view, even though in this case, host() returns the container of the
+   * actual EditPart we might be looking for.
+   * Otherwise it asks the parent method for the right result.
+   * 
+   * @return an editpart; <tt>null</tt> if non could be found.
+   * @generated NOT
+   */
+  protected EditPart findEditPartForElement(EObject element, EObject context, List parts) {
+    DiagramEditPart host = (DiagramEditPart) getHost();
+    for (Object ep : host.getConnections()) {
+      ConnectionEditPart cep = (ConnectionEditPart) ep;
+      if (element.equals(cep.resolveSemanticElement())) {
+        // we found the edit part already
+        return cep;
+      }
+    }
+
+    // otherwise, consult the parent
+    return super.findEditPartForElement(element, context, parts);
+  }
+  
+  /**
+   * If we are trying to create a connection to an Edge, this method will return false, because
+   * the edge.getParent() = the root diagram window, not the XXXEditPart that we're actually
+   * after.
+   * 
+   * So, we add some special logic to an otherwise direct copy, to assume we _can_ create
+   * connections between ConnectionEditParts, even if they don't have a CanonicalEditPolicy.
+   * 
+   * @see CanonicalConnectionEditPolicy#canCreateConnection(EditPart, EditPart)
+   * @generated NOT
+   */
+  protected boolean canCreateConnection(EditPart sep, EditPart tep,
+      EObject connection) {
+    if (sep != null && sep.isActive() && tep != null && tep.isActive()) {
+
+      View src = (View) sep.getAdapter(View.class);
+      View tgt = (View) tep.getAdapter(View.class);
+      if (src != null && tgt != null) {
+
+        return ((sep instanceof ConnectionEditPart) || sep.getParent().getEditPolicy(
+          EditPolicyRoles.CANONICAL_ROLE) != null)
+          && ((tep instanceof ConnectionEditPart) || tep.getParent().getEditPolicy(
+            EditPolicyRoles.CANONICAL_ROLE) != null);
+      }
+    }
+    return false;
+  }
+  
+  /**
+   * We create our own method to create connection views, so we can wrap the
+   * elementAdapter with another layer - IElementTypeElementAdapter - which lets us supply IElementType information
+   * to the adapter. Otherwise adapter.getAdapter(IElementType.class) will always return null.
+   * Otherwise, this method is copied directly from createConnectionView.
+   * 
    * Creates a connection view facde element for the supplied semantic element.
    * An empty string is used as the default factory hint.
    * 
@@ -267,8 +306,9 @@ public class VisibleThingCanonicalEditPolicy extends
    *            connections target editpart
    * @param index
    *            semantic elements position
-   * @generated NOT copied
+   * @generated NOT
    * @see #createConnectionView(EObject, int)
+   * @see IElementTypeElementAdapter
    */
   protected Edge myCreateConnectionView(EObject connection, int index) {
     EditPart sep = getSourceEditPartFor(connection);
@@ -281,7 +321,8 @@ public class VisibleThingCanonicalEditPolicy extends
     View tView = (View) tep.getModel();
     Edge model = null;
     String factoryHint = getDefaultFactoryHint();
-    IAdaptable elementAdapter = new MyCanonicalElementAdapter(connection,
+    // use a different adapter so we can actually get IElementTypes
+    IAdaptable elementAdapter = new IElementTypeElementAdapter(connection,
       factoryHint);
     CreateConnectionViewRequest ccr = getCreateConnectionViewRequest(
       elementAdapter, getFactoryHint(elementAdapter, factoryHint), index);
@@ -298,13 +339,6 @@ public class VisibleThingCanonicalEditPolicy extends
         .getDiagram()));
       viewAdapters.add(new EObjectAdapter(sView));
       viewAdapters.add(new EObjectAdapter(tView));
-      
-      // jevon hack to add edges to the model
-      /*
-      Diagram d = (Diagram) (host().getModel());
-      d.getSourceEdges().add(sep);
-      d.getTargetEdges().add(tep);
-      */
 
       SetViewMutabilityCommand.makeMutable(viewAdapters).execute();
       
@@ -327,11 +361,16 @@ public class VisibleThingCanonicalEditPolicy extends
   }
   
   /**
-   * @generated NOT copied
+   * We wrap EObjectAdapter to also adapt to IElementType.class requests, so we can 
+   * actually create edges in our current editor.
+   * 
+   * This is also copied from the other adapter that adapts it to String.class.
+   * 
+   * @generated NOT
    * @author jmwright
    *
    */
-  public static class MyCanonicalElementAdapter extends EObjectAdapter {
+  public static class IElementTypeElementAdapter extends EObjectAdapter {
     private String _hint;
     
     /**
@@ -339,7 +378,7 @@ public class VisibleThingCanonicalEditPolicy extends
      * @param element
      * @param hint
      */
-    public MyCanonicalElementAdapter( EObject element, String hint ) {
+    public IElementTypeElementAdapter( EObject element, String hint ) {
       super(element);
       _hint = hint;
     }
@@ -349,8 +388,8 @@ public class VisibleThingCanonicalEditPolicy extends
       if ( adapter.equals(String.class) ) {
         return _hint;
       }
+      // my hack: we just get the diagram editor to get the IElementType directly
       if (adapter.equals(IElementType.class)) {
-        // my Jevon hack
         return IamlElementTypes.getElementType( ((EObject)getRealObject()).eClass() );
       }
       return super.getAdapter(adapter);
@@ -361,6 +400,8 @@ public class VisibleThingCanonicalEditPolicy extends
   /**
    * Return a create connection view request.
    * 
+   * Copied directly, because the original method is private.
+   * 
    * @param elementAdapter
    *            semantic element
    * @param viewKind
@@ -370,7 +411,7 @@ public class VisibleThingCanonicalEditPolicy extends
    * @param index
    *            index
    * @return a create <i>non-persisted </i> view request
-   * @generated NOT copied
+   * @generated NOT
    */
   private CreateConnectionViewRequest getCreateConnectionViewRequest(
       IAdaptable elementAdapter, String hint, int index) {
@@ -381,6 +422,8 @@ public class VisibleThingCanonicalEditPolicy extends
 
   /**
    * Return a connection view descriptor.
+   * 
+   * Copied directly, because the original method is private.
    * 
    * @param elementAdapter
    *            semantic element
@@ -406,152 +449,21 @@ public class VisibleThingCanonicalEditPolicy extends
   }
   
   /**
-   * Return the editpart mapped to the object. The editpart is retrieved from
-   * a [view,semantic] mapping. {@link #getView(IElement)}is called if the
-   * mapping cannot be found inside this manager.
+   * Even though the method "should not be overridden", we do so anyway.
    * 
-   * @generated NOT modified by Jevon to try and find EditParts that are not contained within the Container
-   * @param element
-   *            an <tt>View</tt> or <tt>EObject</tt> instance.
-   * @param context
-   *        an <code>EObject</code> that is the context for the element.  Typically,
-   *        this will be either <code>null</code> or it will the <code>Edge</code>
-   *        that is connected to the <code>element</code> to find the <code>EditPart</code> of.
-   * @return an editpart; <tt>null</tt> if non could be found.
-   */
-  private EditPart getEditPartFor(EObject element, EObject context) {
-    
-    if (element != null && !(element instanceof View)) {
-      EditPartViewer viewer = getHost().getViewer();
-      if (viewer instanceof IDiagramGraphicalViewer) {
-        List parts = ((IDiagramGraphicalViewer) viewer)
-          .findEditPartsForElement(EMFCoreUtil.getProxyID(element),
-            INodeEditPart.class);
-
-        if (parts.isEmpty()) {
-          // reach for the container's editpart instead and force it
-          // to refresh
-          EObject container = element.eContainer();
-          EditPart containerEP = getEditPartFor(container, null);
-          if (containerEP != null) {
-            containerEP.refresh();
-            parts = ((IDiagramGraphicalViewer) viewer)
-              .findEditPartsForElement(EMFCoreUtil.getProxyID(element),
-                INodeEditPart.class);
-          }
-        }
-
-        // Check if the part is contained with-in the host EditPart
-        // since we are canonically updated the host.
-        return findEditPartForElement(element, context, parts);
-      }
-    }
-
-    return (EditPart) host().getViewer().getEditPartRegistry().get(element);
-  }
-  
-  /**
-   * Updates the set of connection views so that it is in sync with the
-   * semantic connections. This method is called in response to notification
-   * from the model.
-   * <P>
-   * The update is performed by comparing the exising connection views with the
-   * set of semantic connections returned from {@link #getSemanticConnections()}.
-   * Views whose semantic connection no longer exists or whose semantic
-   * connection ends are <tt>null</tt> are
-   * {@link org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy#deleteViews(Iterator) removed}.
-   * New semantic children have their View
-   * {@link  #createEdge(IElement, EditPart, EditPart, int, String)
-   * created}. Subclasses must override <code>getSemanticConnections()</code>.
-   * <P>
-   * This refresh routine will not reorder the view list to ensure both it and
-   * the semantic children are in the same order since it is possible that
-   * this editpolicy will only handle a specifc subset of the host's views.
-   * 
-   * This method should <em>not</em> be overridden.
-   * 
+   * @see #refreshSemanticConnections()
    * @return <code>List</code> of new <code>IAdaptable</code> objects that
    *         adapt to <code>View</code> objects that were created as a
    *         result of the synchronization
-   * @generated NOT copied
+   * @generated NOT
    */
   protected List myRefreshSemanticConnections() {
-    Edge viewChild;
-    EObject semanticChild;
-    //
-    // current connection views
-    /*
-    List edges = ((Diagram) host().getModel()).getEdges();
-    Edge edge1 = (Edge) edges.get(0);
-    View view = edge1.getSource();
-    View view2 = edge1.getTarget();
-    */
-    
-    if (true)
-    return myNewRefreshSemanticConnections();
-    
-    if (true)
-      return null;
-    
-    Collection viewChildren = getConnectionViews();
-    Collection semanticChildren = new HashSet();
-    semanticChildren.addAll(getSemanticConnectionsList());
-
-    List orphaned = cleanCanonicalSemanticChildren(viewChildren,
-      semanticChildren);
-    //
-    // delete all the remaining views
-    deleteViews(orphaned.iterator());
-
-    //
-    // create a view for each remaining semantic element.
-    List viewDescriptors = new ArrayList();
-    Iterator semanticChildrenIT = semanticChildren.iterator();
-    while (semanticChildrenIT.hasNext()) {
-      semanticChild = (EObject) semanticChildrenIT.next();
-      viewChild = myCreateConnectionView(semanticChild, ViewUtil.APPEND);
-      if (viewChild != null) {
-        viewDescriptors.add(new EObjectAdapter(viewChild)); 
-      }
-    }
-    
-    if (true)
-      return viewDescriptors;
-    
-    makeViewsMutable(viewDescriptors);
-
-    // now refresh all the connection containers to update the editparts
-    HashSet ends = new HashSet();
-    ListIterator li = viewDescriptors.listIterator();
-    while (li.hasNext()) {
-      IAdaptable adaptable = (IAdaptable) li.next();
-      Edge edge = (Edge) adaptable.getAdapter(Edge.class);
-      EditPart sourceEP = getEditPartFor(edge.getSource(), edge);
-      if (sourceEP != null) {
-        ends.add(sourceEP);
-      }
-      EditPart targetEP = getEditPartFor(edge.getTarget(), edge);
-      if (targetEP != null) {
-        ends.add(targetEP);
-      }
-    }
-
-    for (Iterator iter = ends.iterator(); iter.hasNext();) {
-      EditPart end = (EditPart) iter.next();
-      end.refresh();
-    }
-
-    return viewDescriptors;
-  }
-  
-  protected List myNewRefreshSemanticConnections() {
     
     // lets just get the edges (of type EObject)
     List connections = getSemanticConnectionsList();
-    // List connectionCopy = getSemanticConnectionsList();
     List toDelete = new ArrayList();
     
-    // TODO remove links that shouldn't be there
+    // remove duplicate links that shouldn't be there
     for (Object obj : ((Diagram) ((VisibleThingEditPart) host()).getModel()).getEdges()) {
       Object found = null;
       Edge edge = (Edge) obj;
@@ -576,15 +488,17 @@ public class VisibleThingCanonicalEditPolicy extends
       
     }
     
+    // delete these duplicate views
     deleteViews(toDelete.iterator());
     
-    // remaining edges should be added to model
+    // remaining edges in 'connections' should be added to diagram
     
     // create a view for each remaining semantic element.
     List viewDescriptors = new ArrayList();
     Iterator semanticChildrenIT = connections.iterator();
     while (semanticChildrenIT.hasNext()) {
       EObject semanticChild = (EObject) semanticChildrenIT.next();
+      //Edge viewChild = createConnectionView(semanticChild, ViewUtil.APPEND);
       Edge viewChild = myCreateConnectionView(semanticChild, ViewUtil.APPEND);
       if (viewChild != null) {
         viewDescriptors.add(new EObjectAdapter(viewChild)); 
@@ -592,12 +506,13 @@ public class VisibleThingCanonicalEditPolicy extends
     }
     
     /*
-    if (true)
-      return viewDescriptors;
-      */
-    
+     * This doesn't seem to do anything.
+     */
     //makeViewsMutable(viewDescriptors);
 
+    /*
+     * This doesn't seem to do anything either...
+     */
     // now refresh all the connection containers to update the editparts
     /*
     HashSet ends = new HashSet();
@@ -613,8 +528,12 @@ public class VisibleThingCanonicalEditPolicy extends
       if (targetEP != null) {
         ends.add(targetEP);
       }
-    }
-
+    }*/
+    
+    /*
+     * Nor does this...
+     */
+    /*
     for (Iterator iter = ends.iterator(); iter.hasNext();) {
       EditPart end = (EditPart) iter.next();
       end.refresh();
@@ -625,25 +544,45 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
+   * We override the fundamental method of refreshing the diagram -
+   * refreshSemantic() - so that we can select not only directly
+   * contained elements, but also those referenced in shortcuts.
+   * 
    * @generated NOT
    */
   @SuppressWarnings("unchecked")
   protected void refreshSemantic() {
     List createdViews = new LinkedList();
+    
+    /*
+     * I use my own method to select all the Nodes to render in the diagram.
+     * @see #refreshSemanticChildren()
+     */
     // createdViews.addAll(refreshSemanticChildren());
     createdViews.addAll(myRefreshSemanticChildren());
     List createdConnectionViews = new LinkedList();
-    createdConnectionViews.addAll(myRefreshSemanticConnections());
-    //myRefreshSemanticConnections();
+    
     /*
-    List semanticConnections = myRefreshSemanticConnections();
-    createdConnectionViews.addAll(semanticConnections);
-    */
-    if (false);
-    if(true);
-    //createdConnectionViews.addAll(refreshConnections());  // this method is making eContainer=null
-    //refreshConnections();
+     * I use my own method to select all the Edges to render in the Diagram.
+     * @see #refreshSemanticConnections()
+     */
+    // createdConnectionViews.addAll(refreshSemanticConnections());
+    createdConnectionViews.addAll(myRefreshSemanticConnections());
+    
+    /*
+     * Using refreshConnections() will set some Edges eContainer=null, which then throws
+     * a NullPointerException in:
+     * 
+     * java.lang.NullPointerException
+     *    at org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy.addListenersToContainers(CanonicalEditPolicy.java:1032)
+     *    at org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy.makeViewsImmutable(CanonicalEditPolicy.java:1008)
+     *   
+     * Plus, I'm not sure this method is even necessary anymore... this is the only
+     * method that calls it.
+     */
+    //createdConnectionViews.addAll(refreshConnections());
 
+    // not sure that this actually does anything
     if (createdViews.size() > 1) {
       // perform a layout of the container
       DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host()
@@ -652,6 +591,32 @@ public class VisibleThingCanonicalEditPolicy extends
     }
     
     // get rid of any duplicate edges
+    removeDuplicateEdges();
+
+    createdViews.addAll(createdConnectionViews);
+    
+    // a hack: remove all 'null' elements in the list
+    /*
+    while (createdViews.contains(null)) {
+      createdViews.remove(null);
+    }*/
+    
+    /*
+     * The default makeViewsImmutable() can throw NullPointerExceptions; my modification
+     * adds a null check.
+     */
+    //makeViewsImmutable(createdViews);
+    makeViewsImmutableWithNullCheck(createdViews);
+
+  }
+  
+  /**
+   * Cycle through the diagram to get rid of any duplicate edges, i.e. edges that refer
+   * to the same EObject.
+   * 
+   * @generated NOT
+   */
+  public void removeDuplicateEdges() {
     List objectsFound = new ArrayList();
     List toDelete = new ArrayList();
     for (Object obj : ((Diagram) ((VisibleThingEditPart) host()).getModel()).getEdges()) {
@@ -668,23 +633,6 @@ public class VisibleThingCanonicalEditPolicy extends
     }
     
     deleteViews(toDelete.iterator());
-
-    createdViews.addAll(createdConnectionViews);
-    
-    // a hack: remove all 'null' elements in the list
-    /*
-    while (createdViews.contains(null)) {
-      createdViews.remove(null);
-    }*/
-    
-    //makeViewsImmutable(createdViews);
-    
-    // if this method is called,  then all connections in the diagram are rendered twice!
-    myMakeViewsImmutable(createdViews);
-    
-    // currently, if F5 is pressed, all links are duplicated
-    
-    if (true)return;
   }
 
   /**
@@ -692,13 +640,18 @@ public class VisibleThingCanonicalEditPolicy extends
    * non-persisted views.  Any subsequent change to an immutable view will force 
    * the view to be persisted.
    * 
-   * @generated NOT but copied
+   * This method has been copied exactly.
+   * 
+   * @generated NOT
    * @param createdViews <code<>List</code> of view adapters that were created during the 
    * {@link CanonicalEditPolicy#refreshSemantic()} operation
+   * 
+   * @see CanonicalEditPolicy#makeViewsImmutable(List)
    */
-  protected void myMakeViewsImmutable(List createdViews) {
+  protected void makeViewsImmutableWithNullCheck(List createdViews) {
     if (createdViews != null && !createdViews.isEmpty()) {
-      addListenersToContainers(createdViews);
+      // uses my own method
+      addListenersToContainersWithNullCheck(createdViews);
       
       List viewAdapters = prepareAdapterList(createdViews);
       Command immutable = SetViewMutabilityCommand.makeImmutable(viewAdapters);
@@ -708,10 +661,13 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
-   * @generated NOT but copied
+   * Copied from {@link CanonicalEditPolicy#addListenersToContainers()}, except this
+   * method prevents some NullPointerExceptions from being thrown.
+   * 
+   * @generated NOT
    * @param createdViews
    */
-  private void addListenersToContainers(List createdViews) {
+  private void addListenersToContainersWithNullCheck(List createdViews) {
     UniqueEList list = new UniqueEList();
     ListIterator li = createdViews.listIterator();
     while (li.hasNext()) {
@@ -726,8 +682,7 @@ public class VisibleThingCanonicalEditPolicy extends
     ListIterator liContainers = list.listIterator();
     while (liContainers.hasNext()) {
       View containerView = (View)liContainers.next();
-      // jevon change: add a null check to prevent NPEs
-      if (containerView != null) {
+      if (containerView != null) {    // jevon change: add a null check to prevent NPEs
         addListenerFilter("NotationListener_Container" + containerView.toString(), //$NON-NLS-1$
             this,
             containerView,
@@ -737,7 +692,10 @@ public class VisibleThingCanonicalEditPolicy extends
   }
   
   /**
-   * @generated NOT but copied
+   * This method is copied directly from {@link CanonicalEditPolicy#prepareAdapterList(List)}, 
+   * since the original method is marked 'private'
+   * 
+   * @generated NOT
    * @param createdViews
    * @return
    */
@@ -757,13 +715,15 @@ public class VisibleThingCanonicalEditPolicy extends
     return viewAdapters;
   }
   
-  /** 
-   * Runs the supplied commands asyncronously. 
-   * @generated NOT but copied
+  /**
+   * Copied directly from CanonicalEditPolicy.
+   * 
+   * Runs the supplied commands asyncronously.
+   * 
+   * @generated NOT
    **/
   private static class AsyncCommand extends Command {
     private final CompoundCommand _cc;
-    
     
     /**
      * constructor
@@ -839,8 +799,9 @@ public class VisibleThingCanonicalEditPolicy extends
   }
   
   /**
-   * Exgtend refreshSemanticChildren to handle shortcuts too.
+   * Extends refreshSemanticChildren to handle shortcuts too.
    * 
+   * @see #getShortcutChildrenList()
    * @generated NOT
    * @return
    */
@@ -913,6 +874,7 @@ public class VisibleThingCanonicalEditPolicy extends
       }
     }
 
+    // the same thing, but with shortcuts
     if (!newShortcutChildren.isEmpty()) {
       createdViews = createShortcutViews(newShortcutChildren);
 
@@ -940,7 +902,8 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
-   * my own method
+   * Get all of the shortcut children to add to this diagram.
+   * 
    * @generated NOT
    */
   protected List getShortcutChildrenList() {
@@ -955,7 +918,10 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
+   * Like {@link #createViews(List)}, but creates Shortcut commands instead.
+   * 
    * Creates a <code>View</code> element for each of the supplied semantic elements.
+   * 
    * @param eObjects list of semantic element
    * @return a list of {@link IAdaptable} that adapt to {@link View}.
    * @generated NOT
@@ -992,7 +958,9 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
-   * my own method; add a shortcut command to the end of the normal create view command
+   * Get the command to create both the element, and the shortcut decorator, on the request.
+   * Copied from {@link #getCreateViewCommand(CreateRequest)}.
+   * 
    * @generated NOT
    */
   protected Command getCreateViewShortcutsCommand(CreateRequest request,
@@ -1003,7 +971,7 @@ public class VisibleThingCanonicalEditPolicy extends
     if (command != null) {
       command = command.chain(new ICommandProxy(
           new CreateShortcutDecorationsCommand(
-              // I doubt any of this works ;)
+              // these parameters are guessed, but they work
               host.getEditingDomain(), host.getPrimaryView(),
               descriptors, VisibleThingEditPart.MODEL_ID)));
 
@@ -1012,6 +980,12 @@ public class VisibleThingCanonicalEditPolicy extends
     return command;
   }
 
+  /**
+   * A simple command to add a shortcut decoration.
+   * 
+   * @author jmwright
+   * @generated NOT 
+   */
   public class CreateShortcutDecorationsCommand extends
       AbstractTransactionalCommand {
 
@@ -1066,11 +1040,16 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
+   * This method doesn't actually do anything anymore.
+   * 
    * Changed by Jevon
    * @generated NOT
    */
   @SuppressWarnings("unchecked")
   private Collection refreshConnections() {
+    if (true)
+      throw new UnsupportedOperationException("refreshConnections() is no longer used");
+    
     /*
     if (true)
       return Collections.EMPTY_LIST;
@@ -1456,12 +1435,15 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
+   * This method isn't called anymore, because its only called by
+   * {@link #refreshConnections()}.
+   * 
    * @generated NOT
    */
   private Collection createConnections(Collection linkDescriptors,
       Map domain2NotationMap) {
     if (true)
-      return Collections.EMPTY_LIST;
+      throw new UnsupportedOperationException("createConnections() is no longer supported");
 
     List adapters = new LinkedList();
     for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator

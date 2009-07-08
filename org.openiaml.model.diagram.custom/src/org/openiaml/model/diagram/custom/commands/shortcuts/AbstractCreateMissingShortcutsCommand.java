@@ -269,6 +269,10 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 	 * @throws ExecutionException 
 	 */
 	protected IStatus getCreateShortcutsCommand() throws ExecutionException {
+		
+		// temporary hack to stop shortcuts being created at all
+		if (true)
+			return Status.OK_STATUS;
 
 		Assert.isTrue(selectedElement.getModel() instanceof Diagram);
 		

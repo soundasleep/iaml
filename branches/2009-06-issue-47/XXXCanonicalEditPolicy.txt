@@ -116,10 +116,19 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
-   * @generated
+   * Connections thta are getting created are being removed for some reason. I override this
+   * method so no views (connections) should ever be removed...
+   * 
+   * I've changed this again, now we want it to delete all views, because my new method "should"
+   * always select only duplicates and orphan edges to delete.
+   * 
+   * @generated NOT
    */
   protected boolean shouldDeleteView(View view) {
+    
+    // return false;  // JEVON hack
     return true;
+    // return true;
   }
 
   /**
@@ -259,6 +268,7 @@ public class VisibleThingCanonicalEditPolicy extends
    * @param index
    *            semantic elements position
    * @generated NOT copied
+   * @see #createConnectionView(EObject, int)
    */
   protected Edge myCreateConnectionView(EObject connection, int index) {
     EditPart sep = getSourceEditPartFor(connection);
@@ -288,9 +298,16 @@ public class VisibleThingCanonicalEditPolicy extends
         .getDiagram()));
       viewAdapters.add(new EObjectAdapter(sView));
       viewAdapters.add(new EObjectAdapter(tView));
+      
+      // jevon hack to add edges to the model
+      /*
+      Diagram d = (Diagram) (host().getModel());
+      d.getSourceEdges().add(sep);
+      d.getTargetEdges().add(tep);
+      */
 
       SetViewMutabilityCommand.makeMutable(viewAdapters).execute();
-
+      
       executeCommand(cmd);
       IAdaptable adapter = (IAdaptable) ccr.getNewObject();
       SetViewMutabilityCommand.makeMutable(adapter).execute();
@@ -463,6 +480,19 @@ public class VisibleThingCanonicalEditPolicy extends
     EObject semanticChild;
     //
     // current connection views
+    /*
+    List edges = ((Diagram) host().getModel()).getEdges();
+    Edge edge1 = (Edge) edges.get(0);
+    View view = edge1.getSource();
+    View view2 = edge1.getTarget();
+    */
+    
+    if (true)
+    return myNewRefreshSemanticConnections();
+    
+    if (true)
+      return null;
+    
     Collection viewChildren = getConnectionViews();
     Collection semanticChildren = new HashSet();
     semanticChildren.addAll(getSemanticConnectionsList());
@@ -484,6 +514,9 @@ public class VisibleThingCanonicalEditPolicy extends
         viewDescriptors.add(new EObjectAdapter(viewChild)); 
       }
     }
+    
+    if (true)
+      return viewDescriptors;
     
     makeViewsMutable(viewDescriptors);
 
@@ -510,6 +543,86 @@ public class VisibleThingCanonicalEditPolicy extends
 
     return viewDescriptors;
   }
+  
+  protected List myNewRefreshSemanticConnections() {
+    
+    // lets just get the edges (of type EObject)
+    List connections = getSemanticConnectionsList();
+    // List connectionCopy = getSemanticConnectionsList();
+    List toDelete = new ArrayList();
+    
+    // TODO remove links that shouldn't be there
+    for (Object obj : ((Diagram) ((VisibleThingEditPart) host()).getModel()).getEdges()) {
+      Object found = null;
+      Edge edge = (Edge) obj;
+      for (Object connection : connections) {
+        if (edge.getElement().equals(connection)) {
+          // it's OK
+          // this logic also make sure that if we have multiple edges for the same object,
+          // then we will keep one and delete the rest
+          found = connection;
+          break;
+        }
+      }
+      
+      if (found != null) {
+        connections.remove(found);
+      }
+      
+      // if it wasnt found, we need to delete it
+      if (found == null) {
+        toDelete.add(edge);
+      }
+      
+    }
+    
+    deleteViews(toDelete.iterator());
+    
+    // remaining edges should be added to model
+    
+    // create a view for each remaining semantic element.
+    List viewDescriptors = new ArrayList();
+    Iterator semanticChildrenIT = connections.iterator();
+    while (semanticChildrenIT.hasNext()) {
+      EObject semanticChild = (EObject) semanticChildrenIT.next();
+      Edge viewChild = myCreateConnectionView(semanticChild, ViewUtil.APPEND);
+      if (viewChild != null) {
+        viewDescriptors.add(new EObjectAdapter(viewChild)); 
+      }
+    }
+    
+    /*
+    if (true)
+      return viewDescriptors;
+      */
+    
+    //makeViewsMutable(viewDescriptors);
+
+    // now refresh all the connection containers to update the editparts
+    /*
+    HashSet ends = new HashSet();
+    ListIterator li = viewDescriptors.listIterator();
+    while (li.hasNext()) {
+      IAdaptable adaptable = (IAdaptable) li.next();
+      Edge edge = (Edge) adaptable.getAdapter(Edge.class);
+      EditPart sourceEP = getEditPartFor(edge.getSource(), edge);
+      if (sourceEP != null) {
+        ends.add(sourceEP);
+      }
+      EditPart targetEP = getEditPartFor(edge.getTarget(), edge);
+      if (targetEP != null) {
+        ends.add(targetEP);
+      }
+    }
+
+    for (Iterator iter = ends.iterator(); iter.hasNext();) {
+      EditPart end = (EditPart) iter.next();
+      end.refresh();
+    }
+    */
+
+    return viewDescriptors;
+  }
 
   /**
    * @generated NOT
@@ -521,8 +634,15 @@ public class VisibleThingCanonicalEditPolicy extends
     createdViews.addAll(myRefreshSemanticChildren());
     List createdConnectionViews = new LinkedList();
     createdConnectionViews.addAll(myRefreshSemanticConnections());
+    //myRefreshSemanticConnections();
+    /*
+    List semanticConnections = myRefreshSemanticConnections();
+    createdConnectionViews.addAll(semanticConnections);
+    */
     if (false);
-    createdConnectionViews.addAll(refreshConnections());
+    if(true);
+    //createdConnectionViews.addAll(refreshConnections());  // this method is making eContainer=null
+    //refreshConnections();
 
     if (createdViews.size() > 1) {
       // perform a layout of the container
@@ -530,6 +650,24 @@ public class VisibleThingCanonicalEditPolicy extends
           .getEditingDomain(), createdViews, host());
       executeCommand(new ICommandProxy(layoutCmd));
     }
+    
+    // get rid of any duplicate edges
+    List objectsFound = new ArrayList();
+    List toDelete = new ArrayList();
+    for (Object obj : ((Diagram) ((VisibleThingEditPart) host()).getModel()).getEdges()) {
+      Object found = null;
+      Edge edge = (Edge) obj;
+      if (objectsFound.contains(edge.getElement())) {
+        // we need to delete this edge
+        toDelete.add(edge);
+      } else {
+        // it's a unique object
+        objectsFound.add(edge.getElement());
+      }
+
+    }
+    
+    deleteViews(toDelete.iterator());
 
     createdViews.addAll(createdConnectionViews);
     
@@ -540,7 +678,13 @@ public class VisibleThingCanonicalEditPolicy extends
     }*/
     
     //makeViewsImmutable(createdViews);
+    
+    // if this method is called,  then all connections in the diagram are rendered twice!
     myMakeViewsImmutable(createdViews);
+    
+    // currently, if F5 is pressed, all links are duplicated
+    
+    if (true)return;
   }
 
   /**
@@ -927,6 +1071,10 @@ public class VisibleThingCanonicalEditPolicy extends
    */
   @SuppressWarnings("unchecked")
   private Collection refreshConnections() {
+    /*
+    if (true)
+      return Collections.EMPTY_LIST;
+      */
     Map domain2NotationMap = new HashMap();
     Collection linkDescriptors = collectAllLinks(getDiagram(),
         domain2NotationMap);
@@ -1308,10 +1456,13 @@ public class VisibleThingCanonicalEditPolicy extends
   }
 
   /**
-   * @generated
+   * @generated NOT
    */
   private Collection createConnections(Collection linkDescriptors,
       Map domain2NotationMap) {
+    if (true)
+      return Collections.EMPTY_LIST;
+
     List adapters = new LinkedList();
     for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator
         .hasNext();) {

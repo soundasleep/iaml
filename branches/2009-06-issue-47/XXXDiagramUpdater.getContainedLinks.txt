@@ -1,30 +1,185 @@
 from Collection org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.getContainedTypeModelFacetLinks_SyncWire_3001(ContainsWires container)
 
+
   /**
+   * Jevon: Get ALL related links for an EObject, not just ones directly contained. TODO more documentation
    * @generated NOT
    */
-  private static Collection getContainedTypeModelFacetLinks_SyncWire_3001(
-      ContainsWires container) {
+  public static Collection getAllRelatedIamlLinks(EObject container) {
     Collection result = new LinkedList();
-    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
-      Object linkObject = links.next();
-      if (false == linkObject instanceof SyncWire) {
-        continue;
-      }
-      SyncWire link = (SyncWire) linkObject;
-      if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
-          .getLinkWithClassVisualID(link)) {
-        continue;
-      }
-      WireEdgeDestination dst = link.getTo();
-      WireEdgesSource src = link.getFrom();
-      result
-          .add(new IamlLinkDescriptor(src, dst, link,
+
+    if (container instanceof WireEdgeDestination) {
+      for (WireEdge wire : ((WireEdgeDestination) container).getInEdges()) {
+        if (wire instanceof RunInstanceWire) {
+          RunInstanceWire link = (RunInstanceWire) wire;
+          if (RunInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+              .getLinkWithClassVisualID(link)) {
+            continue;
+          }
+          WireEdgeDestination dst = link.getTo();
+          WireEdgesSource src = link.getFrom();
+          result.add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.RunInstanceWire_3002,
+              RunInstanceWireEditPart.VISUAL_ID));
+        }
+
+        if (wire instanceof SyncWire) {
+          SyncWire link = (SyncWire) wire;
+          if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+              .getLinkWithClassVisualID(link)) {
+            continue;
+          }
+          WireEdgeDestination dst = link.getTo();
+          WireEdgesSource src = link.getFrom();
+          result.add(new IamlLinkDescriptor(src, dst, link,
               IamlElementTypes.SyncWire_3001,
               SyncWireEditPart.VISUAL_ID));
+        }
+
+        if (wire instanceof ParameterWire) {
+          ParameterWire link = (ParameterWire) wire;
+          if (ParameterWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+              .getLinkWithClassVisualID(link)) {
+            continue;
+          }
+          WireEdgeDestination dst = link.getTo();
+          WireEdgesSource src = link.getFrom();
+          result.add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.ParameterWire_3003,
+              ParameterWireEditPart.VISUAL_ID));
+        }
+      }
     }
 
-    // result.addAll(getAllRelatedIamlLinks(container));
+    if (container instanceof WireEdgesSource) {
+      for (WireEdge wire : ((WireEdgesSource) container).getOutEdges()) {
+        if (wire instanceof RunInstanceWire) {
+          RunInstanceWire link = (RunInstanceWire) wire;
+          if (RunInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+              .getLinkWithClassVisualID(link)) {
+            continue;
+          }
+          WireEdgeDestination dst = link.getTo();
+          WireEdgesSource src = link.getFrom();
+          result.add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.RunInstanceWire_3002,
+              RunInstanceWireEditPart.VISUAL_ID));
+        }
+
+        if (wire instanceof SyncWire) {
+          SyncWire link = (SyncWire) wire;
+          if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+              .getLinkWithClassVisualID(link)) {
+            continue;
+          }
+          WireEdgeDestination dst = link.getTo();
+          WireEdgesSource src = link.getFrom();
+          result.add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.SyncWire_3001,
+              SyncWireEditPart.VISUAL_ID));
+        }
+
+        if (wire instanceof ParameterWire) {
+          ParameterWire link = (ParameterWire) wire;
+          if (ParameterWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+              .getLinkWithClassVisualID(link)) {
+            continue;
+          }
+          WireEdgeDestination dst = link.getTo();
+          WireEdgesSource src = link.getFrom();
+          result.add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.ParameterWire_3003,
+              ParameterWireEditPart.VISUAL_ID));
+        }
+      }
+    }
 
     return result;
   }
+
+  /**
+   * @param viewObject
+   * @return
+   * @generated NOT MY attempt at getting shortcut children for a particular view
+   */
+  public static List getVisibleThing_79ShortcutChildren(View view) {
+    if (!view.isSetElement()) {
+      return Collections.EMPTY_LIST;
+    }
+    VisibleThing modelElement = (VisibleThing) view.getElement();
+    List result = new LinkedList();
+    
+    List<EObject> doneAlready = new ArrayList<EObject>();
+    
+    // for now, we will only concern ourselves with Operations, EventTriggers, fieldValues
+    result.addAll(jevonTest1(doneAlready, view, modelElement.getOperations()));
+    result.addAll(jevonTest1(doneAlready, view, modelElement.getEventTriggers()));
+    result.addAll(jevonTest1(doneAlready, view, modelElement.getProperties()));
+    
+    return result;
+  }
+
+  /**
+   * @param eventTriggers
+   * @return
+   * @generated NOT
+   */
+  private static Collection jevonTest1(List<EObject> doneAlready, View view, EList<? extends EObject> list) {
+    List result = new LinkedList();
+    for (EObject e : list) {
+      if (e instanceof WireEdgesSource) {
+        // get all incoming edges
+        result.addAll(getAllShortcutsFromEdges(doneAlready, view, e, ((WireEdgesSource) e).getOutEdges()));
+      }
+      if (e instanceof WireEdgeDestination) {
+        // get all incoming edges
+        result.addAll(getAllShortcutsFromEdges(doneAlready, view, e, ((WireEdgeDestination) e).getInEdges()));
+      }
+    }
+    return result;
+  }
+
+  /**
+   * @param outEdges
+   * @return
+   * @generated NOT
+   */
+  private static List<WireEdge> getAllShortcutsFromEdges(List<EObject> doneAlready, View view, EObject source, EList<WireEdge> outEdges) {
+    List result = new LinkedList();
+    
+    // get all nodes at the start and end of the edge
+    // that are not the original object source
+    for (WireEdge wire : outEdges) {
+      {
+        EObject childElement = wire.getFrom();
+        if (!childElement.equals(source)) {
+          if (doneAlready.contains(childElement))
+            continue;
+          int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+              childElement);
+          if (visualID != -1) {
+            result.add(new IamlNodeDescriptor(childElement, visualID));
+            doneAlready.add(childElement);
+            continue;
+          }
+        }
+      }
+      {
+        EObject childElement = wire.getTo();
+        if (!childElement.equals(source)) {
+          if (doneAlready.contains(childElement))
+            continue;
+          int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+              childElement);
+          if (visualID != -1) {
+            result.add(new IamlNodeDescriptor(childElement, visualID));
+            doneAlready.add(childElement);
+            continue;
+          }
+        }
+      }
+    }
+    
+    return result;
+  }
+

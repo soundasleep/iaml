@@ -1,4 +1,699 @@
+package org.openiaml.model.model.diagram.visual.edit.policies;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.UniqueEList;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.commands.CompoundCommand;
+import org.eclipse.gef.requests.CreateRequest;
+import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
+import org.eclipse.gmf.runtime.common.core.util.Log;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
+import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
+import org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.INodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIPlugin;
+import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
+import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest.ConnectionViewDescriptor;
+import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
+import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.osgi.util.NLS;
+import org.eclipse.ui.PlatformUI;
+import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.diagram.visual.edit.parts.ApplicationElementPropertyEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ButtonEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ChainedOperationEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.CommitWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.CompositeConditionEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.CompositeOperationEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ConditionWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.DomainAttributeEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.DomainAttributeInstanceEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.EventTriggerEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.InputFormEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.InputTextFieldEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.LoginHandlerEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.NavigateWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.NewInstanceWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ParameterWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.RunInstanceWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SelectWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SessionEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SetWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ShowWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SingleOperationEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.StaticValueEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SyncWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart;
+import org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater;
+import org.openiaml.model.model.diagram.visual.part.IamlLinkDescriptor;
+import org.openiaml.model.model.diagram.visual.part.IamlNodeDescriptor;
+import org.openiaml.model.model.diagram.visual.part.IamlVisualIDRegistry;
+import org.openiaml.model.model.diagram.visual.providers.IamlElementTypes;
+
+/**
+ * @generated
+ */
+public class VisibleThingCanonicalEditPolicy extends
+    CanonicalConnectionEditPolicy {
+
+  /**
+   * @generated
+   */
+  Set myFeaturesToSynchronize;
+
+  /**
+   * @generated
+   */
+  protected List getSemanticChildrenList() {
+    View viewObject = (View) getHost().getModel();
+    List result = new LinkedList();
+    for (Iterator it = IamlDiagramUpdater
+        .getVisibleThing_79SemanticChildren(viewObject).iterator(); it
+        .hasNext();) {
+      result.add(((IamlNodeDescriptor) it.next()).getModelElement());
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  protected boolean shouldDeleteView(View view) {
+    return true;
+  }
+
+  /**
+   * @generated
+   */
+  protected boolean isOrphaned(Collection semanticChildren, final View view) {
+    if (view.getEAnnotation("Shortcut") != null) {//$NON-NLS-1$
+      return IamlDiagramUpdater.isShortcutOrphaned(view);
+    }
+    int visualID = IamlVisualIDRegistry.getVisualID(view);
+    switch (visualID) {
+    case EventTriggerEditPart.VISUAL_ID:
+    case SingleOperationEditPart.VISUAL_ID:
+    case CompositeOperationEditPart.VISUAL_ID:
+    case ChainedOperationEditPart.VISUAL_ID:
+    case DomainObjectEditPart.VISUAL_ID:
+    case DomainAttributeEditPart.VISUAL_ID:
+    case ApplicationElementPropertyEditPart.VISUAL_ID:
+    case PageEditPart.VISUAL_ID:
+    case InputFormEditPart.VISUAL_ID:
+    case InputTextFieldEditPart.VISUAL_ID:
+    case StaticValueEditPart.VISUAL_ID:
+    case SessionEditPart.VISUAL_ID:
+    case LoginHandlerEditPart.VISUAL_ID:
+    case CompositeConditionEditPart.VISUAL_ID:
+    case DomainObjectInstanceEditPart.VISUAL_ID:
+    case DomainAttributeInstanceEditPart.VISUAL_ID:
+    case ButtonEditPart.VISUAL_ID:
+      return !semanticChildren.contains(view.getElement())
+          || visualID != IamlVisualIDRegistry.getNodeVisualID(
+              (View) getHost().getModel(), view.getElement());
+    }
+    return false;
+  }
+
+  /**
+   * @generated
+   */
+  protected String getDefaultFactoryHint() {
+    return null;
+  }
+
+  /**
+   * @generated
+   */
+  protected Set getFeaturesToSynchronize() {
+    if (myFeaturesToSynchronize == null) {
+      myFeaturesToSynchronize = new HashSet();
+      myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
+          .getContainsEventTriggers_EventTriggers());
+      myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
+          .getContainsOperations_Operations());
+      myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
+          .getApplicationElementContainer_Children());
+      myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
+          .getApplicationElement_Properties());
+      myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
+          .getApplicationElement_Values());
+      myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
+          .getVisibleThing_Sessions());
+      myFeaturesToSynchronize.add(ModelPackage.eINSTANCE
+          .getContainsConditions_Conditions());
+    }
+    return myFeaturesToSynchronize;
+  }
+
+  /**
+   * modified by Jevon to return a list of all EObjects in the
+   * current view that need to be connections?
+   * 
+   * @generated NOT
+   */
+  protected List getSemanticConnectionsList() {
+
+//      return Collections.EMPTY_LIST;
+    View viewObject = (View) getHost().getModel();
+    List result = new LinkedList();
+    for (Iterator it = IamlDiagramUpdater
+        .getAllChildrenEdges(viewObject).iterator(); it
+        .hasNext();) {
+      result.add(((EObject) it.next()));
+    }
+    return result;
+  }
+  
+  /**
+   * Calculates the <code>EditPart</code> that this connection element is
+   * connected to at it's target.
+   * 
+   * @generated NOTwe need to override this so we can call OUR method? getEditPArtFor is 'private...
+   * @param connection
+   *            the <code>EObject</code> element that we are canonical
+   *            trying to create a view for.
+   * @return the <code>EditPart</code> that is the source of the
+   *         <code>View</code> we want to create
+   */
+  protected EditPart getTargetEditPartFor(EObject connection) {
+    EObject tel;
+    EditPart tep;
+    tel = getTargetElement(connection);
+    tep = getEditPartFor(tel, connection);
+    if (true);
+    
+    return tep;
+  }
+
+  /**
+   * @generated NOT we need to override?
+   */
+  protected EObject getSourceElement(EObject relationship) {
+    if (relationship instanceof WireEdge) {
+      return ((WireEdge) relationship).getFrom();
+    }
+    return null;
+  }
+
+  /**
+   * @generated NOT we need to override?
+   */
+  protected EObject getTargetElement(EObject relationship) {
+    if (relationship instanceof WireEdge) {
+      return ((WireEdge) relationship).getTo();
+    }
+    return null;
+  }
+  
+  /**
+   * Creates a connection view facde element for the supplied semantic element.
+   * An empty string is used as the default factory hint.
+   * 
+   * @param element
+   *            the semantic element
+   * @param the
+   *            connections source editpart
+   * @param the
+   *            connections target editpart
+   * @param index
+   *            semantic elements position
+   * @generated NOT copied
+   */
+  protected Edge myCreateConnectionView(EObject connection, int index) {
+    EditPart sep = getSourceEditPartFor(connection);
+    EditPart tep = getTargetEditPartFor(connection);
+    if (!canCreateConnection(sep, tep, connection)) {
+      return null;
+    }
+
+    View sView = (View) sep.getModel();
+    View tView = (View) tep.getModel();
+    Edge model = null;
+    String factoryHint = getDefaultFactoryHint();
+    IAdaptable elementAdapter = new MyCanonicalElementAdapter(connection,
+      factoryHint);
+    CreateConnectionViewRequest ccr = getCreateConnectionViewRequest(
+      elementAdapter, getFactoryHint(elementAdapter, factoryHint), index);
+
+    ccr.setType(RequestConstants.REQ_CONNECTION_START);
+    ccr.setSourceEditPart(sep);
+    getCreateViewCommand(ccr); // sep.getCommand(ccr); //prime the command
+    ccr.setTargetEditPart(tep);
+    ccr.setType(RequestConstants.REQ_CONNECTION_END);
+    Command cmd = getCreateViewCommand(ccr); // tep.getCommand(ccr);
+    if (cmd != null && cmd.canExecute()) {
+      List viewAdapters = new ArrayList();
+      viewAdapters.add(new EObjectAdapter(((View) host().getModel())
+        .getDiagram()));
+      viewAdapters.add(new EObjectAdapter(sView));
+      viewAdapters.add(new EObjectAdapter(tView));
+
+      SetViewMutabilityCommand.makeMutable(viewAdapters).execute();
+
+      executeCommand(cmd);
+      IAdaptable adapter = (IAdaptable) ccr.getNewObject();
+      SetViewMutabilityCommand.makeMutable(adapter).execute();
+      model = (Edge) adapter.getAdapter(Edge.class);
+      if (model == null) {
+        String eMsg = NLS
+          .bind(
+            DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_,
+            connection);
+        IllegalStateException ise = new IllegalStateException(eMsg);
+        Log.error(DiagramUIPlugin.getInstance(), IStatus.ERROR, eMsg,
+          ise);
+        throw ise;
+      }
+    }
+    return model;
+  }
+  
+  /**
+   * @generated NOT copied
+   * @author jmwright
+   *
+   */
+  public static class MyCanonicalElementAdapter extends EObjectAdapter {
+    private String _hint;
+    
+    /**
+     * constructor
+     * @param element
+     * @param hint
+     */
+    public MyCanonicalElementAdapter( EObject element, String hint ) {
+      super(element);
+      _hint = hint;
+    }
+    
+    /** Adds <code>String.class</tt> adaptablity. */
+    public Object getAdapter(Class adapter) { 
+      if ( adapter.equals(String.class) ) {
+        return _hint;
+      }
+      if (adapter.equals(IElementType.class)) {
+        // my Jevon hack
+        return IamlElementTypes.getElementType( ((EObject)getRealObject()).eClass() );
+      }
+      return super.getAdapter(adapter);
+    }
+  }
+  
+  
+  /**
+   * Return a create connection view request.
+   * 
+   * @param elementAdapter
+   *            semantic element
+   * @param viewKind
+   *            type of view to create
+   * @param hint
+   *            factory hint
+   * @param index
+   *            index
+   * @return a create <i>non-persisted </i> view request
+   * @generated NOT copied
+   */
+  private CreateConnectionViewRequest getCreateConnectionViewRequest(
+      IAdaptable elementAdapter, String hint, int index) {
+    return new CreateConnectionViewRequest(getConnectionViewDescriptor(
+      elementAdapter, hint, index));
+  }
+
+
+  /**
+   * Return a connection view descriptor.
+   * 
+   * @param elementAdapter
+   *            semantic element
+   * @param hint
+   *            factory hint
+   * @param index
+   *            index
+   * @return a create <i>non-persisted </i> connection view descriptor
+   * @generated NOT
+   */
+  private ConnectionViewDescriptor getConnectionViewDescriptor(
+      IAdaptable elementAdapter, String hint, int index) {
+    return new ConnectionViewDescriptor(elementAdapter, hint, index, false,
+      ((IGraphicalEditPart) getHost()).getDiagramPreferencesHint());
+  }
+
+  /**
+   * @generated
+   */
+  protected boolean shouldIncludeConnection(Edge connector,
+      Collection children) {
+    return false;
+  }
+  
+  /**
+   * Return the editpart mapped to the object. The editpart is retrieved from
+   * a [view,semantic] mapping. {@link #getView(IElement)}is called if the
+   * mapping cannot be found inside this manager.
+   * 
+   * @generated NOT modified by Jevon to try and find EditParts that are not contained within the Container
+   * @param element
+   *            an <tt>View</tt> or <tt>EObject</tt> instance.
+   * @param context
+   *        an <code>EObject</code> that is the context for the element.  Typically,
+   *        this will be either <code>null</code> or it will the <code>Edge</code>
+   *        that is connected to the <code>element</code> to find the <code>EditPart</code> of.
+   * @return an editpart; <tt>null</tt> if non could be found.
+   */
+  private EditPart getEditPartFor(EObject element, EObject context) {
+    
+    if (element != null && !(element instanceof View)) {
+      EditPartViewer viewer = getHost().getViewer();
+      if (viewer instanceof IDiagramGraphicalViewer) {
+        List parts = ((IDiagramGraphicalViewer) viewer)
+          .findEditPartsForElement(EMFCoreUtil.getProxyID(element),
+            INodeEditPart.class);
+
+        if (parts.isEmpty()) {
+          // reach for the container's editpart instead and force it
+          // to refresh
+          EObject container = element.eContainer();
+          EditPart containerEP = getEditPartFor(container, null);
+          if (containerEP != null) {
+            containerEP.refresh();
+            parts = ((IDiagramGraphicalViewer) viewer)
+              .findEditPartsForElement(EMFCoreUtil.getProxyID(element),
+                INodeEditPart.class);
+          }
+        }
+
+        // Check if the part is contained with-in the host EditPart
+        // since we are canonically updated the host.
+        return findEditPartForElement(element, context, parts);
+      }
+    }
+
+    return (EditPart) host().getViewer().getEditPartRegistry().get(element);
+  }
+  
+  /**
+   * Updates the set of connection views so that it is in sync with the
+   * semantic connections. This method is called in response to notification
+   * from the model.
+   * <P>
+   * The update is performed by comparing the exising connection views with the
+   * set of semantic connections returned from {@link #getSemanticConnections()}.
+   * Views whose semantic connection no longer exists or whose semantic
+   * connection ends are <tt>null</tt> are
+   * {@link org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy#deleteViews(Iterator) removed}.
+   * New semantic children have their View
+   * {@link  #createEdge(IElement, EditPart, EditPart, int, String)
+   * created}. Subclasses must override <code>getSemanticConnections()</code>.
+   * <P>
+   * This refresh routine will not reorder the view list to ensure both it and
+   * the semantic children are in the same order since it is possible that
+   * this editpolicy will only handle a specifc subset of the host's views.
+   * 
+   * This method should <em>not</em> be overridden.
+   * 
+   * @return <code>List</code> of new <code>IAdaptable</code> objects that
+   *         adapt to <code>View</code> objects that were created as a
+   *         result of the synchronization
+   * @generated NOT copied
+   */
+  protected List myRefreshSemanticConnections() {
+    Edge viewChild;
+    EObject semanticChild;
+    //
+    // current connection views
+    Collection viewChildren = getConnectionViews();
+    Collection semanticChildren = new HashSet();
+    semanticChildren.addAll(getSemanticConnectionsList());
+
+    List orphaned = cleanCanonicalSemanticChildren(viewChildren,
+      semanticChildren);
+    //
+    // delete all the remaining views
+    deleteViews(orphaned.iterator());
+
+    //
+    // create a view for each remaining semantic element.
+    List viewDescriptors = new ArrayList();
+    Iterator semanticChildrenIT = semanticChildren.iterator();
+    while (semanticChildrenIT.hasNext()) {
+      semanticChild = (EObject) semanticChildrenIT.next();
+      viewChild = myCreateConnectionView(semanticChild, ViewUtil.APPEND);
+      if (viewChild != null) {
+        viewDescriptors.add(new EObjectAdapter(viewChild)); 
+      }
+    }
+    
+    makeViewsMutable(viewDescriptors);
+
+    // now refresh all the connection containers to update the editparts
+    HashSet ends = new HashSet();
+    ListIterator li = viewDescriptors.listIterator();
+    while (li.hasNext()) {
+      IAdaptable adaptable = (IAdaptable) li.next();
+      Edge edge = (Edge) adaptable.getAdapter(Edge.class);
+      EditPart sourceEP = getEditPartFor(edge.getSource(), edge);
+      if (sourceEP != null) {
+        ends.add(sourceEP);
+      }
+      EditPart targetEP = getEditPartFor(edge.getTarget(), edge);
+      if (targetEP != null) {
+        ends.add(targetEP);
+      }
+    }
+
+    for (Iterator iter = ends.iterator(); iter.hasNext();) {
+      EditPart end = (EditPart) iter.next();
+      end.refresh();
+    }
+
+    return viewDescriptors;
+  }
+
+  /**
+   * @generated NOT
+   */
+  @SuppressWarnings("unchecked")
+  protected void refreshSemantic() {
+    List createdViews = new LinkedList();
+    // createdViews.addAll(refreshSemanticChildren());
+    createdViews.addAll(myRefreshSemanticChildren());
+    List createdConnectionViews = new LinkedList();
+    createdConnectionViews.addAll(myRefreshSemanticConnections());
+    if (false);
+    createdConnectionViews.addAll(refreshConnections());
+
+    if (createdViews.size() > 1) {
+      // perform a layout of the container
+      DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host()
+          .getEditingDomain(), createdViews, host());
+      executeCommand(new ICommandProxy(layoutCmd));
+    }
+
+    createdViews.addAll(createdConnectionViews);
+    
+    // a hack: remove all 'null' elements in the list
+    /*
+    while (createdViews.contains(null)) {
+      createdViews.remove(null);
+    }*/
+    
+    //makeViewsImmutable(createdViews);
+    myMakeViewsImmutable(createdViews);
+  }
+
+  /**
+   * Sets views as being immutable, meaning that they are unmodifiable as 
+   * non-persisted views.  Any subsequent change to an immutable view will force 
+   * the view to be persisted.
+   * 
+   * @generated NOT but copied
+   * @param createdViews <code<>List</code> of view adapters that were created during the 
+   * {@link CanonicalEditPolicy#refreshSemantic()} operation
+   */
+  protected void myMakeViewsImmutable(List createdViews) {
+    if (createdViews != null && !createdViews.isEmpty()) {
+      addListenersToContainers(createdViews);
+      
+      List viewAdapters = prepareAdapterList(createdViews);
+      Command immutable = SetViewMutabilityCommand.makeImmutable(viewAdapters);
+      AsyncCommand ac = new AsyncCommand(immutable);
+      ac.execute();
+    }
+  }
+
+  /**
+   * @generated NOT but copied
+   * @param createdViews
+   */
+  private void addListenersToContainers(List createdViews) {
+    UniqueEList list = new UniqueEList();
+    ListIterator li = createdViews.listIterator();
+    while (li.hasNext()) {
+      Object obj = li.next();
+      if (obj instanceof IAdaptable) {
+        View view = (View)((IAdaptable)obj).getAdapter(View.class);
+        if (view != null)
+          list.add(view.eContainer());
+      }
+    }
+    
+    ListIterator liContainers = list.listIterator();
+    while (liContainers.hasNext()) {
+      View containerView = (View)liContainers.next();
+      // jevon change: add a null check to prevent NPEs
+      if (containerView != null) {
+        addListenerFilter("NotationListener_Container" + containerView.toString(), //$NON-NLS-1$
+            this,
+            containerView,
+            NotationPackage.eINSTANCE.getView_PersistedChildren()); 
+      }
+    }
+  }
+  
+  /**
+   * @generated NOT but copied
+   * @param createdViews
+   * @return
+   */
+  private List prepareAdapterList(List createdViews) {
+    List viewAdapters = new ArrayList();
+    viewAdapters.add( host() );
+    ListIterator li = createdViews.listIterator();
+    while (li.hasNext()) {
+      Object obj = li.next();
+      if (obj != null) {
+        if (!(obj instanceof IAdaptable) && obj instanceof EObject)
+          viewAdapters.add(new EObjectAdapter((EObject)obj));
+        else
+          viewAdapters.add(obj);
+      }
+    }
+    return viewAdapters;
+  }
+  
+  /** 
+   * Runs the supplied commands asyncronously. 
+   * @generated NOT but copied
+   **/
+  private static class AsyncCommand extends Command {
+    private final CompoundCommand _cc;
+    
+    
+    /**
+     * constructor
+     * @param label this command label
+     */
+    public AsyncCommand(String label) {
+      super(label);
+      _cc = new CompoundCommand(label);
+    }
+
+    /**
+     * constructor
+     * @param cmd the command
+     */
+    public AsyncCommand( Command cmd ) {
+      this( cmd.getLabel() );
+      add( cmd );
+    }
+
+    
+    /**
+     * constructor
+     * @param cmd the command
+     */
+    public AsyncCommand( ICommand cmd ) {
+      this( cmd.getLabel() );
+      add( cmd );
+    }
+    
+    /**
+     * Executes the command asynchonously. 
+     * Calls {@link #doExecute}.
+     */
+    public final void execute() {
+            // do not use Display.getCurrent() this mthod could be invoked
+            // on a non ui thread
+            PlatformUI.getWorkbench().getDisplay().asyncExec( new Runnable() {
+          public void run() {
+            AsyncCommand.this.doExecute();
+          }
+        } );
+    }
+    
+    /**
+     * Return the command to be executed asynchronously.
+     * @return the command
+     */
+    protected final CompoundCommand getCommand() {
+      return _cc;
+    }
+    
+    /** Executes the command. */
+    protected void doExecute() {
+      getCommand().execute(); 
+    }
+    
+    /**
+     * Add supplied command to the list of commands to be executed.
+     * @param cmd command to add
+     */
+    public void add( ICommand cmd ) {
+      _cc.add( new ICommandProxy(cmd));
+    }
+
+    
+    /**
+     * Add supplied command to the list of commands to be executed.
+     * @param cmd the command to add
+     */
+    public void add( Command cmd ) {
+      _cc.add( cmd );
+    }
+  }
+  
   /**
    * Exgtend refreshSemanticChildren to handle shortcuts too.
    * 
@@ -6,18 +701,21 @@
    * @return
    */
   protected final List myRefreshSemanticChildren() {
-    
+
     // Don't try to refresh children if the semantic element
     // cannot be resolved.
     if (resolveSemanticElement() == null) {
-      return Collections.EMPTY_LIST;    
+      return Collections.EMPTY_LIST;
     }
-    
+
     //
     // current views
     List viewChildren = getViewChildren();
     List semanticChildren = new ArrayList(getSemanticChildrenList());
     List shortcutChildren = new ArrayList(getShortcutChildrenList());
+
+    // both lists are of EObjects
+    shortcutChildren.removeAll(semanticChildren);
     
     List allChildren = new ArrayList();
     allChildren.addAll(semanticChildren);
@@ -25,14 +723,15 @@
 
     // this method changes [allChildren] by removing elements within it
     // i.e. it removes any views in the list that are already in the view
-    List orphaned = cleanCanonicalSemanticChildren(viewChildren, allChildren);
+    List orphaned = cleanCanonicalSemanticChildren(viewChildren,
+        allChildren);
     boolean changed = false;
     //
     // delete all the remaining oprphaned views
-    if ( !orphaned.isEmpty() ) {
+    if (!orphaned.isEmpty()) {
       changed = deleteViews(orphaned.iterator());
     }
-    
+
     // so, we need to only select elements within the semanticChildren that are
     // also inside allChildren
     List newSemanticChildren = new ArrayList();
@@ -47,59 +746,51 @@
         newShortcutChildren.add(o);
       }
     }
-    
+
     //
     // create a view for each remaining semantic element.
     List createdViews = Collections.EMPTY_LIST;
-    if ( !newSemanticChildren.isEmpty() ) {
-      createdViews = createViews( newSemanticChildren );
-      
-      for ( int i = 0; i < createdViews.size(); i++ ) {
-        View createdView = (View)((IAdaptable)createdViews.get(i)).getAdapter(View.class);
+    if (!newSemanticChildren.isEmpty()) {
+      createdViews = createViews(newSemanticChildren);
+
+      for (int i = 0; i < createdViews.size(); i++) {
+        View createdView = (View) ((IAdaptable) createdViews.get(i))
+            .getAdapter(View.class);
         if (createdView == null) {
-          String eMsg =
-            NLS
-            .bind(
-              DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_,
-              newSemanticChildren.get(i));
-          IllegalStateException ise =
-            new IllegalStateException(eMsg);
-          Log.error(
-            DiagramUIPlugin.getInstance(),
-            IStatus.ERROR,
-            eMsg,
-            ise);
+          String eMsg = NLS
+              .bind(
+                  DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_,
+                  newSemanticChildren.get(i));
+          IllegalStateException ise = new IllegalStateException(eMsg);
+          Log.error(DiagramUIPlugin.getInstance(), IStatus.ERROR,
+              eMsg, ise);
           throw ise;
         }
       }
     }
-    
-    if ( !newShortcutChildren.isEmpty() ) {
-      createdViews = createShortcutViews( newShortcutChildren );
-      
-      for ( int i = 0; i < createdViews.size(); i++ ) {
-        View createdView = (View)((IAdaptable)createdViews.get(i)).getAdapter(View.class);
+
+    if (!newShortcutChildren.isEmpty()) {
+      createdViews = createShortcutViews(newShortcutChildren);
+
+      for (int i = 0; i < createdViews.size(); i++) {
+        View createdView = (View) ((IAdaptable) createdViews.get(i))
+            .getAdapter(View.class);
         if (createdView == null) {
-          String eMsg =
-            NLS
-            .bind(
-              DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_ + " [shortcut children]",
-              newShortcutChildren.get(i));
-          IllegalStateException ise =
-            new IllegalStateException(eMsg);
-          Log.error(
-            DiagramUIPlugin.getInstance(),
-            IStatus.ERROR,
-            eMsg,
-            ise);
+          String eMsg = NLS
+              .bind(
+                  DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_
+                      + " [shortcut children]",
+                  newShortcutChildren.get(i));
+          IllegalStateException ise = new IllegalStateException(eMsg);
+          Log.error(DiagramUIPlugin.getInstance(), IStatus.ERROR,
+              eMsg, ise);
           throw ise;
         }
       }
     }
-    
+
     if (changed || createdViews.size() > 0)
       postProcessRefreshSemantic(createdViews);
-    
 
     return createdViews;
   }
@@ -118,7 +809,7 @@
     }
     return result;
   }
-  
+
   /**
    * Creates a <code>View</code> element for each of the supplied semantic elements.
    * @param eObjects list of semantic element
@@ -128,96 +819,100 @@
   protected final List createShortcutViews(List eObjects) {
     List descriptors = new ArrayList();
     Iterator elements = eObjects.iterator();
-    while( elements.hasNext() ) {
-      EObject element = (EObject)elements.next();
-      if ( element != null ) {
+    while (elements.hasNext()) {
+      EObject element = (EObject) elements.next();
+      if (element != null) {
         CreateViewRequest.ViewDescriptor descriptor = getViewDescriptor(element);
         descriptors.add(descriptor);
       }
     }
-    
-    if ( !descriptors.isEmpty() ) {
+
+    if (!descriptors.isEmpty()) {
       //
       // create the request
       CreateViewRequest request = getCreateViewRequest(descriptors);
-      
+
       //
       // get the command and execute it.
-      Command cmd = getCreateViewShortcutsCommand(request, descriptors, host());
-      if ( cmd != null && cmd.canExecute() ) {
-        SetViewMutabilityCommand.makeMutable(new EObjectAdapter(host().getNotationView())).execute();
+      Command cmd = getCreateViewShortcutsCommand(request, descriptors,
+          host());
+      if (cmd != null && cmd.canExecute()) {
+        SetViewMutabilityCommand.makeMutable(
+            new EObjectAdapter(host().getNotationView())).execute();
         executeCommand(cmd);
-        List adapters = (List)request.getNewObject();
+        List adapters = (List) request.getNewObject();
         return adapters;
       }
     }
     return Collections.EMPTY_LIST;
   }
-      
+
   /**
    * my own method; add a shortcut command to the end of the normal create view command
    * @generated NOT
    */
-  protected Command getCreateViewShortcutsCommand(CreateRequest request, List<CreateViewRequest.ViewDescriptor> descriptors, IGraphicalEditPart host) {
-        Command command = getCreateViewCommand(request);
-        
-        if (command != null) {
-      command = command.chain(new ICommandProxy(new CreateShortcutDecorationsCommand(
-          // I doubt any of this works ;)
-          host.getEditingDomain(), host.getPrimaryView(), descriptors, VisibleThingEditPart.MODEL_ID)));
+  protected Command getCreateViewShortcutsCommand(CreateRequest request,
+      List<CreateViewRequest.ViewDescriptor> descriptors,
+      IGraphicalEditPart host) {
+    Command command = getCreateViewCommand(request);
 
-        }
-        
-        return command;
+    if (command != null) {
+      command = command.chain(new ICommandProxy(
+          new CreateShortcutDecorationsCommand(
+              // I doubt any of this works ;)
+              host.getEditingDomain(), host.getPrimaryView(),
+              descriptors, VisibleThingEditPart.MODEL_ID)));
+
+    }
+
+    return command;
   }
-  
+
   public class CreateShortcutDecorationsCommand extends
-  AbstractTransactionalCommand {
+      AbstractTransactionalCommand {
 
-private List<CreateViewRequest.ViewDescriptor> myDescriptors;
-private String modelId;
+    private List<CreateViewRequest.ViewDescriptor> myDescriptors;
+    private String modelId;
 
-/**
- * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
- */
-public CreateShortcutDecorationsCommand(
-    TransactionalEditingDomain editingDomain, View parentView,
-    List<CreateViewRequest.ViewDescriptor> viewDescriptors,
-    String modelId) {
-  super(editingDomain, "Create Shortcuts", getWorkspaceFiles(parentView)); //$NON-NLS-1$
-  myDescriptors = viewDescriptors;
-  this.modelId = modelId;
-  
-}
+    /**
+     * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
+     */
+    public CreateShortcutDecorationsCommand(
+        TransactionalEditingDomain editingDomain, View parentView,
+        List<CreateViewRequest.ViewDescriptor> viewDescriptors,
+        String modelId) {
+      super(editingDomain,
+          "Create Shortcuts", getWorkspaceFiles(parentView)); //$NON-NLS-1$
+      myDescriptors = viewDescriptors;
+      this.modelId = modelId;
 
-/**
- * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
- */
-public CreateShortcutDecorationsCommand(
-    TransactionalEditingDomain editingDomain, View parentView,
-    CreateViewRequest.ViewDescriptor viewDescriptor,
-    String modelId) {
-  this(editingDomain, parentView, Collections
-      .singletonList(viewDescriptor), modelId);
-}
+    }
 
-protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-    IAdaptable info) throws ExecutionException {
-  for (CreateViewRequest.ViewDescriptor nextDescriptor : myDescriptors) {
-    View view = (View) nextDescriptor.getAdapter(View.class);
-    if (view != null && view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-      EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
-          .createEAnnotation();
-      shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
-      shortcutAnnotation.getDetails().put(
-          "modelID", modelId); //$NON-NLS-1$
-      view.getEAnnotations().add(shortcutAnnotation);
+    /**
+     * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
+     */
+    public CreateShortcutDecorationsCommand(
+        TransactionalEditingDomain editingDomain, View parentView,
+        CreateViewRequest.ViewDescriptor viewDescriptor, String modelId) {
+      this(editingDomain, parentView, Collections
+          .singletonList(viewDescriptor), modelId);
+    }
+
+    protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+        IAdaptable info) throws ExecutionException {
+      for (CreateViewRequest.ViewDescriptor nextDescriptor : myDescriptors) {
+        View view = (View) nextDescriptor.getAdapter(View.class);
+        if (view != null && view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+          EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
+              .createEAnnotation();
+          shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
+          shortcutAnnotation.getDetails().put("modelID", modelId); //$NON-NLS-1$
+          view.getEAnnotations().add(shortcutAnnotation);
+        }
+      }
+      return CommandResult.newOKCommandResult();
     }
   }
-  return CommandResult.newOKCommandResult();
-}
-}
-
 
   /**
    * @generated
@@ -279,3 +974,389 @@ protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
     deleteViews(existingLinks.iterator());
     return createConnections(linkDescriptors, domain2NotationMap);
   }
+
+  /**
+   * @generated
+   */
+  private Collection collectAllLinks(View view, Map domain2NotationMap) {
+    if (!VisibleThingEditPart.MODEL_ID.equals(IamlVisualIDRegistry
+        .getModelID(view))) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    switch (IamlVisualIDRegistry.getVisualID(view)) {
+    case VisibleThingEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getVisibleThing_79ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case EventTriggerEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getEventTrigger_1001ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case SingleOperationEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getSingleOperation_1002ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case CompositeOperationEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getCompositeOperation_1003ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case ChainedOperationEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getChainedOperation_1004ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case DomainObjectEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getDomainObject_1005ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case DomainAttributeEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getDomainAttribute_1006ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case ApplicationElementPropertyEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result
+            .addAll(IamlDiagramUpdater
+                .getApplicationElementProperty_1007ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case PageEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getPage_1008ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case InputFormEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getInputForm_1009ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case InputTextFieldEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getInputTextField_1010ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case StaticValueEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getStaticValue_1011ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case SessionEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getSession_1012ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case LoginHandlerEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getLoginHandler_1013ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case CompositeConditionEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getCompositeCondition_1014ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case DomainObjectInstanceEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getDomainObjectInstance_1015ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case DomainAttributeInstanceEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getDomainAttributeInstance_1016ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case ButtonEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getButton_1017ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case SyncWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getSyncWire_3001ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case RunInstanceWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getRunInstanceWire_3002ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case ParameterWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getParameterWire_3003ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case SelectWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getSelectWire_3004ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case SetWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getSetWire_3005ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case ShowWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getShowWire_3006ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case NavigateWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getNavigateWire_3007ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case CommitWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getCommitWire_3008ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case ConditionWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getConditionWire_3009ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    case NewInstanceWireEditPart.VISUAL_ID: {
+      if (!domain2NotationMap.containsKey(view.getElement())) {
+        result.addAll(IamlDiagramUpdater
+            .getNewInstanceWire_3010ContainedLinks(view));
+      }
+      if (!domain2NotationMap.containsKey(view.getElement())
+          || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+        domain2NotationMap.put(view.getElement(), view);
+      }
+      break;
+    }
+    }
+    for (Iterator children = view.getChildren().iterator(); children
+        .hasNext();) {
+      result.addAll(collectAllLinks((View) children.next(),
+          domain2NotationMap));
+    }
+    for (Iterator edges = view.getSourceEdges().iterator(); edges.hasNext();) {
+      result.addAll(collectAllLinks((View) edges.next(),
+          domain2NotationMap));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private Collection createConnections(Collection linkDescriptors,
+      Map domain2NotationMap) {
+    List adapters = new LinkedList();
+    for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator
+        .hasNext();) {
+      final IamlLinkDescriptor nextLinkDescriptor = (IamlLinkDescriptor) linkDescriptorsIterator
+          .next();
+      EditPart sourceEditPart = getEditPart(nextLinkDescriptor
+          .getSource(), domain2NotationMap);
+      EditPart targetEditPart = getEditPart(nextLinkDescriptor
+          .getDestination(), domain2NotationMap);
+      if (sourceEditPart == null || targetEditPart == null) {
+        continue;
+      }
+      CreateConnectionViewRequest.ConnectionViewDescriptor descriptor = new CreateConnectionViewRequest.ConnectionViewDescriptor(
+          nextLinkDescriptor.getSemanticAdapter(), null,
+          ViewUtil.APPEND, false, ((IGraphicalEditPart) getHost())
+              .getDiagramPreferencesHint());
+      CreateConnectionViewRequest ccr = new CreateConnectionViewRequest(
+          descriptor);
+      ccr.setType(RequestConstants.REQ_CONNECTION_START);
+      ccr.setSourceEditPart(sourceEditPart);
+      sourceEditPart.getCommand(ccr);
+      ccr.setTargetEditPart(targetEditPart);
+      ccr.setType(RequestConstants.REQ_CONNECTION_END);
+      Command cmd = targetEditPart.getCommand(ccr);
+      if (cmd != null && cmd.canExecute()) {
+        executeCommand(cmd);
+        IAdaptable viewAdapter = (IAdaptable) ccr.getNewObject();
+        if (viewAdapter != null) {
+          adapters.add(viewAdapter);
+        }
+      }
+    }
+    return adapters;
+  }
+
+  /**
+   * @generated
+   */
+  private EditPart getEditPart(EObject domainModelElement,
+      Map domain2NotationMap) {
+    View view = (View) domain2NotationMap.get(domainModelElement);
+    if (view != null) {
+      return (EditPart) getHost().getViewer().getEditPartRegistry().get(
+          view);
+    }
+    return null;
+  }
+}

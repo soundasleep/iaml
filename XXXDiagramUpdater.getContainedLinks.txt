@@ -3338,21 +3338,15 @@ public class IamlDiagramUpdater {
     if (!view.isSetElement()) {
       return;
     }
-    VisibleThing modelElement = (VisibleThing) view.getElement();
-    List result = new LinkedList();
+    EObject modelElement = (EObject) view.getElement();
+    List contents = modelElement.eContents();
 
     List<EObject> doneAlready = new ArrayList<EObject>();
-    List<EObject> edges = new ArrayList<EObject>();
-
-    // for now, we will only concern ourselves with Operations, EventTriggers, fieldValues
+    
+    // EObject.eContents() will get all elements contained directly within the EObject,
+    // i.e. we don't need to cast to any model-specific types anymore
     getAllImportantRelationships(doneAlready, targetElements, targetEdges, view, modelElement
-        .getOperations());
-    getAllImportantRelationships(doneAlready, targetElements, targetEdges, view, modelElement
-        .getEventTriggers());
-    getAllImportantRelationships(doneAlready, targetElements, targetEdges, view, modelElement
-        .getProperties());
-    getAllImportantRelationships(doneAlready, targetElements, targetEdges, view, modelElement
-        .getChildren());
+        .eContents());
   }
 
   /**

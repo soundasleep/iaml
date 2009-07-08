@@ -3,7 +3,7 @@
 «EXTENSION xpt::diagram::Utils»
 «EXTENSION xpt::GenModelUtils»
 
-«AROUND caseSemanticElement FOR gmfgen::GenCommonBase-»
+«AROUND disabled_caseSemanticElement FOR gmfgen::GenCommonBase-»
 «EXPAND xpt::Common::caseVisualID» {
 	if (!domain2NotationMap.containsKey(view.getElement())) {
 «REM»

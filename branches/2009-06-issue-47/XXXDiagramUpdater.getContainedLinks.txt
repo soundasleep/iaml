@@ -1,99 +1,3307 @@
-from Collection org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.getContainedTypeModelFacetLinks_SyncWire_3001(ContainsWires container)
+package org.openiaml.model.model.diagram.visual.part;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.notation.View;
+import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.CompositeCondition;
+import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainAttributeInstance;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
+import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.SingleOperation;
+import org.openiaml.model.model.StaticValue;
+import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.diagram.visual.edit.parts.ApplicationElementPropertyEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ButtonEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ChainedOperationEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.CommitWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.CompositeConditionEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.CompositeOperationEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ConditionWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.DomainAttributeEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.DomainAttributeInstanceEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.EventTriggerEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.InputFormEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.InputTextFieldEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.LoginHandlerEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.NavigateWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.NewInstanceWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.PageEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ParameterWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.RunInstanceWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SelectWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SessionEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SetWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.ShowWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SingleOperationEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.StaticValueEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.SyncWireEditPart;
+import org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart;
+import org.openiaml.model.model.diagram.visual.providers.IamlElementTypes;
+import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.CommitWire;
+import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NewInstanceWire;
+import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SelectWire;
+import org.openiaml.model.model.wires.SetWire;
+import org.openiaml.model.model.wires.ShowWire;
+import org.openiaml.model.model.wires.SyncWire;
+
+/**
+ * @generated
+ */
+public class IamlDiagramUpdater {
 
   /**
-   * Jevon: Get ALL related links for an EObject, not just ones directly contained. TODO more documentation
+   * @generated
+   */
+  public static boolean isShortcutOrphaned(View view) {
+    return !view.isSetElement() || view.getElement() == null
+        || view.getElement().eIsProxy();
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSemanticChildren(View view) {
+    switch (IamlVisualIDRegistry.getVisualID(view)) {
+    case VisibleThingEditPart.VISUAL_ID:
+      return getVisibleThing_79SemanticChildren(view);
+    }
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getVisibleThing_79SemanticChildren(View view) {
+    if (!view.isSetElement()) {
+      return Collections.EMPTY_LIST;
+    }
+    VisibleThing modelElement = (VisibleThing) view.getElement();
+    List result = new LinkedList();
+    for (Iterator it = modelElement.getEventTriggers().iterator(); it
+        .hasNext();) {
+      EventTrigger childElement = (EventTrigger) it.next();
+      int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+          childElement);
+      if (visualID == EventTriggerEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+    }
+    for (Iterator it = modelElement.getOperations().iterator(); it
+        .hasNext();) {
+      Operation childElement = (Operation) it.next();
+      int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+          childElement);
+      if (visualID == SingleOperationEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == CompositeOperationEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == ChainedOperationEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+    }
+    for (Iterator it = modelElement.getChildren().iterator(); it.hasNext();) {
+      ApplicationElement childElement = (ApplicationElement) it.next();
+      int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+          childElement);
+      if (visualID == DomainObjectEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == DomainAttributeEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == PageEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == InputFormEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == InputTextFieldEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == LoginHandlerEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == DomainObjectInstanceEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == DomainAttributeInstanceEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+      if (visualID == ButtonEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+    }
+    for (Iterator it = modelElement.getProperties().iterator(); it
+        .hasNext();) {
+      ApplicationElementProperty childElement = (ApplicationElementProperty) it
+          .next();
+      int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+          childElement);
+      if (visualID == ApplicationElementPropertyEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+    }
+    for (Iterator it = modelElement.getValues().iterator(); it.hasNext();) {
+      StaticValue childElement = (StaticValue) it.next();
+      int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+          childElement);
+      if (visualID == StaticValueEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+    }
+    for (Iterator it = modelElement.getSessions().iterator(); it.hasNext();) {
+      Session childElement = (Session) it.next();
+      int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+          childElement);
+      if (visualID == SessionEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+    }
+    for (Iterator it = modelElement.getConditions().iterator(); it
+        .hasNext();) {
+      Condition childElement = (Condition) it.next();
+      int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
+          childElement);
+      if (visualID == CompositeConditionEditPart.VISUAL_ID) {
+        result.add(new IamlNodeDescriptor(childElement, visualID));
+        continue;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getContainedLinks(View view) {
+    switch (IamlVisualIDRegistry.getVisualID(view)) {
+    case VisibleThingEditPart.VISUAL_ID:
+      return getVisibleThing_79ContainedLinks(view);
+    case EventTriggerEditPart.VISUAL_ID:
+      return getEventTrigger_1001ContainedLinks(view);
+    case SingleOperationEditPart.VISUAL_ID:
+      return getSingleOperation_1002ContainedLinks(view);
+    case CompositeOperationEditPart.VISUAL_ID:
+      return getCompositeOperation_1003ContainedLinks(view);
+    case ChainedOperationEditPart.VISUAL_ID:
+      return getChainedOperation_1004ContainedLinks(view);
+    case DomainObjectEditPart.VISUAL_ID:
+      return getDomainObject_1005ContainedLinks(view);
+    case DomainAttributeEditPart.VISUAL_ID:
+      return getDomainAttribute_1006ContainedLinks(view);
+    case ApplicationElementPropertyEditPart.VISUAL_ID:
+      return getApplicationElementProperty_1007ContainedLinks(view);
+    case PageEditPart.VISUAL_ID:
+      return getPage_1008ContainedLinks(view);
+    case InputFormEditPart.VISUAL_ID:
+      return getInputForm_1009ContainedLinks(view);
+    case InputTextFieldEditPart.VISUAL_ID:
+      return getInputTextField_1010ContainedLinks(view);
+    case StaticValueEditPart.VISUAL_ID:
+      return getStaticValue_1011ContainedLinks(view);
+    case SessionEditPart.VISUAL_ID:
+      return getSession_1012ContainedLinks(view);
+    case LoginHandlerEditPart.VISUAL_ID:
+      return getLoginHandler_1013ContainedLinks(view);
+    case CompositeConditionEditPart.VISUAL_ID:
+      return getCompositeCondition_1014ContainedLinks(view);
+    case DomainObjectInstanceEditPart.VISUAL_ID:
+      return getDomainObjectInstance_1015ContainedLinks(view);
+    case DomainAttributeInstanceEditPart.VISUAL_ID:
+      return getDomainAttributeInstance_1016ContainedLinks(view);
+    case ButtonEditPart.VISUAL_ID:
+      return getButton_1017ContainedLinks(view);
+    case SyncWireEditPart.VISUAL_ID:
+      return getSyncWire_3001ContainedLinks(view);
+    case RunInstanceWireEditPart.VISUAL_ID:
+      return getRunInstanceWire_3002ContainedLinks(view);
+    case ParameterWireEditPart.VISUAL_ID:
+      return getParameterWire_3003ContainedLinks(view);
+    case SelectWireEditPart.VISUAL_ID:
+      return getSelectWire_3004ContainedLinks(view);
+    case SetWireEditPart.VISUAL_ID:
+      return getSetWire_3005ContainedLinks(view);
+    case ShowWireEditPart.VISUAL_ID:
+      return getShowWire_3006ContainedLinks(view);
+    case NavigateWireEditPart.VISUAL_ID:
+      return getNavigateWire_3007ContainedLinks(view);
+    case CommitWireEditPart.VISUAL_ID:
+      return getCommitWire_3008ContainedLinks(view);
+    case ConditionWireEditPart.VISUAL_ID:
+      return getConditionWire_3009ContainedLinks(view);
+    case NewInstanceWireEditPart.VISUAL_ID:
+      return getNewInstanceWire_3010ContainedLinks(view);
+    }
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getIncomingLinks(View view) {
+    switch (IamlVisualIDRegistry.getVisualID(view)) {
+    case EventTriggerEditPart.VISUAL_ID:
+      return getEventTrigger_1001IncomingLinks(view);
+    case SingleOperationEditPart.VISUAL_ID:
+      return getSingleOperation_1002IncomingLinks(view);
+    case CompositeOperationEditPart.VISUAL_ID:
+      return getCompositeOperation_1003IncomingLinks(view);
+    case ChainedOperationEditPart.VISUAL_ID:
+      return getChainedOperation_1004IncomingLinks(view);
+    case DomainObjectEditPart.VISUAL_ID:
+      return getDomainObject_1005IncomingLinks(view);
+    case DomainAttributeEditPart.VISUAL_ID:
+      return getDomainAttribute_1006IncomingLinks(view);
+    case ApplicationElementPropertyEditPart.VISUAL_ID:
+      return getApplicationElementProperty_1007IncomingLinks(view);
+    case PageEditPart.VISUAL_ID:
+      return getPage_1008IncomingLinks(view);
+    case InputFormEditPart.VISUAL_ID:
+      return getInputForm_1009IncomingLinks(view);
+    case InputTextFieldEditPart.VISUAL_ID:
+      return getInputTextField_1010IncomingLinks(view);
+    case StaticValueEditPart.VISUAL_ID:
+      return getStaticValue_1011IncomingLinks(view);
+    case SessionEditPart.VISUAL_ID:
+      return getSession_1012IncomingLinks(view);
+    case LoginHandlerEditPart.VISUAL_ID:
+      return getLoginHandler_1013IncomingLinks(view);
+    case CompositeConditionEditPart.VISUAL_ID:
+      return getCompositeCondition_1014IncomingLinks(view);
+    case DomainObjectInstanceEditPart.VISUAL_ID:
+      return getDomainObjectInstance_1015IncomingLinks(view);
+    case DomainAttributeInstanceEditPart.VISUAL_ID:
+      return getDomainAttributeInstance_1016IncomingLinks(view);
+    case ButtonEditPart.VISUAL_ID:
+      return getButton_1017IncomingLinks(view);
+    case SyncWireEditPart.VISUAL_ID:
+      return getSyncWire_3001IncomingLinks(view);
+    case RunInstanceWireEditPart.VISUAL_ID:
+      return getRunInstanceWire_3002IncomingLinks(view);
+    case ParameterWireEditPart.VISUAL_ID:
+      return getParameterWire_3003IncomingLinks(view);
+    case SelectWireEditPart.VISUAL_ID:
+      return getSelectWire_3004IncomingLinks(view);
+    case SetWireEditPart.VISUAL_ID:
+      return getSetWire_3005IncomingLinks(view);
+    case ShowWireEditPart.VISUAL_ID:
+      return getShowWire_3006IncomingLinks(view);
+    case NavigateWireEditPart.VISUAL_ID:
+      return getNavigateWire_3007IncomingLinks(view);
+    case CommitWireEditPart.VISUAL_ID:
+      return getCommitWire_3008IncomingLinks(view);
+    case ConditionWireEditPart.VISUAL_ID:
+      return getConditionWire_3009IncomingLinks(view);
+    case NewInstanceWireEditPart.VISUAL_ID:
+      return getNewInstanceWire_3010IncomingLinks(view);
+    }
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getOutgoingLinks(View view) {
+    switch (IamlVisualIDRegistry.getVisualID(view)) {
+    case EventTriggerEditPart.VISUAL_ID:
+      return getEventTrigger_1001OutgoingLinks(view);
+    case SingleOperationEditPart.VISUAL_ID:
+      return getSingleOperation_1002OutgoingLinks(view);
+    case CompositeOperationEditPart.VISUAL_ID:
+      return getCompositeOperation_1003OutgoingLinks(view);
+    case ChainedOperationEditPart.VISUAL_ID:
+      return getChainedOperation_1004OutgoingLinks(view);
+    case DomainObjectEditPart.VISUAL_ID:
+      return getDomainObject_1005OutgoingLinks(view);
+    case DomainAttributeEditPart.VISUAL_ID:
+      return getDomainAttribute_1006OutgoingLinks(view);
+    case ApplicationElementPropertyEditPart.VISUAL_ID:
+      return getApplicationElementProperty_1007OutgoingLinks(view);
+    case PageEditPart.VISUAL_ID:
+      return getPage_1008OutgoingLinks(view);
+    case InputFormEditPart.VISUAL_ID:
+      return getInputForm_1009OutgoingLinks(view);
+    case InputTextFieldEditPart.VISUAL_ID:
+      return getInputTextField_1010OutgoingLinks(view);
+    case StaticValueEditPart.VISUAL_ID:
+      return getStaticValue_1011OutgoingLinks(view);
+    case SessionEditPart.VISUAL_ID:
+      return getSession_1012OutgoingLinks(view);
+    case LoginHandlerEditPart.VISUAL_ID:
+      return getLoginHandler_1013OutgoingLinks(view);
+    case CompositeConditionEditPart.VISUAL_ID:
+      return getCompositeCondition_1014OutgoingLinks(view);
+    case DomainObjectInstanceEditPart.VISUAL_ID:
+      return getDomainObjectInstance_1015OutgoingLinks(view);
+    case DomainAttributeInstanceEditPart.VISUAL_ID:
+      return getDomainAttributeInstance_1016OutgoingLinks(view);
+    case ButtonEditPart.VISUAL_ID:
+      return getButton_1017OutgoingLinks(view);
+    case SyncWireEditPart.VISUAL_ID:
+      return getSyncWire_3001OutgoingLinks(view);
+    case RunInstanceWireEditPart.VISUAL_ID:
+      return getRunInstanceWire_3002OutgoingLinks(view);
+    case ParameterWireEditPart.VISUAL_ID:
+      return getParameterWire_3003OutgoingLinks(view);
+    case SelectWireEditPart.VISUAL_ID:
+      return getSelectWire_3004OutgoingLinks(view);
+    case SetWireEditPart.VISUAL_ID:
+      return getSetWire_3005OutgoingLinks(view);
+    case ShowWireEditPart.VISUAL_ID:
+      return getShowWire_3006OutgoingLinks(view);
+    case NavigateWireEditPart.VISUAL_ID:
+      return getNavigateWire_3007OutgoingLinks(view);
+    case CommitWireEditPart.VISUAL_ID:
+      return getCommitWire_3008OutgoingLinks(view);
+    case ConditionWireEditPart.VISUAL_ID:
+      return getConditionWire_3009OutgoingLinks(view);
+    case NewInstanceWireEditPart.VISUAL_ID:
+      return getNewInstanceWire_3010OutgoingLinks(view);
+    }
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getVisibleThing_79ContainedLinks(View view) {
+    VisibleThing modelElement = (VisibleThing) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getEventTrigger_1001ContainedLinks(View view) {
+    EventTrigger modelElement = (EventTrigger) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSingleOperation_1002ContainedLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCompositeOperation_1003ContainedLinks(View view) {
+    CompositeOperation modelElement = (CompositeOperation) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getChainedOperation_1004ContainedLinks(View view) {
+    ChainedOperation modelElement = (ChainedOperation) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainObject_1005ContainedLinks(View view) {
+    DomainObject modelElement = (DomainObject) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainAttribute_1006ContainedLinks(View view) {
+    DomainAttribute modelElement = (DomainAttribute) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getApplicationElementProperty_1007ContainedLinks(
+      View view) {
+    ApplicationElementProperty modelElement = (ApplicationElementProperty) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getPage_1008ContainedLinks(View view) {
+    Page modelElement = (Page) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getInputForm_1009ContainedLinks(View view) {
+    InputForm modelElement = (InputForm) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getInputTextField_1010ContainedLinks(View view) {
+    InputTextField modelElement = (InputTextField) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getStaticValue_1011ContainedLinks(View view) {
+    StaticValue modelElement = (StaticValue) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSession_1012ContainedLinks(View view) {
+    Session modelElement = (Session) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getLoginHandler_1013ContainedLinks(View view) {
+    LoginHandler modelElement = (LoginHandler) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCompositeCondition_1014ContainedLinks(View view) {
+    CompositeCondition modelElement = (CompositeCondition) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainObjectInstance_1015ContainedLinks(View view) {
+    DomainObjectInstance modelElement = (DomainObjectInstance) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainAttributeInstance_1016ContainedLinks(View view) {
+    DomainAttributeInstance modelElement = (DomainAttributeInstance) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getButton_1017ContainedLinks(View view) {
+    Button modelElement = (Button) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSyncWire_3001ContainedLinks(View view) {
+    SyncWire modelElement = (SyncWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getRunInstanceWire_3002ContainedLinks(View view) {
+    RunInstanceWire modelElement = (RunInstanceWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getParameterWire_3003ContainedLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSelectWire_3004ContainedLinks(View view) {
+    SelectWire modelElement = (SelectWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSetWire_3005ContainedLinks(View view) {
+    SetWire modelElement = (SetWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getShowWire_3006ContainedLinks(View view) {
+    ShowWire modelElement = (ShowWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getNavigateWire_3007ContainedLinks(View view) {
+    NavigateWire modelElement = (NavigateWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCommitWire_3008ContainedLinks(View view) {
+    CommitWire modelElement = (CommitWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getConditionWire_3009ContainedLinks(View view) {
+    ConditionWire modelElement = (ConditionWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getNewInstanceWire_3010ContainedLinks(View view) {
+    NewInstanceWire modelElement = (NewInstanceWire) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getContainedTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getContainedTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getEventTrigger_1001IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSingleOperation_1002IncomingLinks(View view) {
+    SingleOperation modelElement = (SingleOperation) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCompositeOperation_1003IncomingLinks(View view) {
+    CompositeOperation modelElement = (CompositeOperation) view
+        .getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getChainedOperation_1004IncomingLinks(View view) {
+    ChainedOperation modelElement = (ChainedOperation) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainObject_1005IncomingLinks(View view) {
+    DomainObject modelElement = (DomainObject) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainAttribute_1006IncomingLinks(View view) {
+    DomainAttribute modelElement = (DomainAttribute) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getApplicationElementProperty_1007IncomingLinks(View view) {
+    ApplicationElementProperty modelElement = (ApplicationElementProperty) view
+        .getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getPage_1008IncomingLinks(View view) {
+    Page modelElement = (Page) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getInputForm_1009IncomingLinks(View view) {
+    InputForm modelElement = (InputForm) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getInputTextField_1010IncomingLinks(View view) {
+    InputTextField modelElement = (InputTextField) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getStaticValue_1011IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSession_1012IncomingLinks(View view) {
+    Session modelElement = (Session) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getLoginHandler_1013IncomingLinks(View view) {
+    LoginHandler modelElement = (LoginHandler) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCompositeCondition_1014IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainObjectInstance_1015IncomingLinks(View view) {
+    DomainObjectInstance modelElement = (DomainObjectInstance) view
+        .getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainAttributeInstance_1016IncomingLinks(View view) {
+    DomainAttributeInstance modelElement = (DomainAttributeInstance) view
+        .getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getButton_1017IncomingLinks(View view) {
+    Button modelElement = (Button) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSyncWire_3001IncomingLinks(View view) {
+    SyncWire modelElement = (SyncWire) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getRunInstanceWire_3002IncomingLinks(View view) {
+    RunInstanceWire modelElement = (RunInstanceWire) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getParameterWire_3003IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSelectWire_3004IncomingLinks(View view) {
+    SelectWire modelElement = (SelectWire) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSetWire_3005IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getShowWire_3006IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getNavigateWire_3007IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCommitWire_3008IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getConditionWire_3009IncomingLinks(View view) {
+    ConditionWire modelElement = (ConditionWire) view.getElement();
+    Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
+        .getResourceSet().getResources());
+    List result = new LinkedList();
+    result.addAll(getIncomingTypeModelFacetLinks_SyncWire_3001(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ParameterWire_3003(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SelectWire_3004(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_SetWire_3005(modelElement,
+        crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ShowWire_3006(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NavigateWire_3007(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_CommitWire_3008(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_ConditionWire_3009(
+        modelElement, crossReferences));
+    result.addAll(getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+        modelElement, crossReferences));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getNewInstanceWire_3010IncomingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getEventTrigger_1001OutgoingLinks(View view) {
+    EventTrigger modelElement = (EventTrigger) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSingleOperation_1002OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCompositeOperation_1003OutgoingLinks(View view) {
+    CompositeOperation modelElement = (CompositeOperation) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getChainedOperation_1004OutgoingLinks(View view) {
+    ChainedOperation modelElement = (ChainedOperation) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainObject_1005OutgoingLinks(View view) {
+    DomainObject modelElement = (DomainObject) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainAttribute_1006OutgoingLinks(View view) {
+    DomainAttribute modelElement = (DomainAttribute) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getApplicationElementProperty_1007OutgoingLinks(View view) {
+    ApplicationElementProperty modelElement = (ApplicationElementProperty) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getPage_1008OutgoingLinks(View view) {
+    Page modelElement = (Page) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getInputForm_1009OutgoingLinks(View view) {
+    InputForm modelElement = (InputForm) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getInputTextField_1010OutgoingLinks(View view) {
+    InputTextField modelElement = (InputTextField) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getStaticValue_1011OutgoingLinks(View view) {
+    StaticValue modelElement = (StaticValue) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSession_1012OutgoingLinks(View view) {
+    Session modelElement = (Session) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getLoginHandler_1013OutgoingLinks(View view) {
+    LoginHandler modelElement = (LoginHandler) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCompositeCondition_1014OutgoingLinks(View view) {
+    CompositeCondition modelElement = (CompositeCondition) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainObjectInstance_1015OutgoingLinks(View view) {
+    DomainObjectInstance modelElement = (DomainObjectInstance) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getDomainAttributeInstance_1016OutgoingLinks(View view) {
+    DomainAttributeInstance modelElement = (DomainAttributeInstance) view
+        .getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getButton_1017OutgoingLinks(View view) {
+    Button modelElement = (Button) view.getElement();
+    List result = new LinkedList();
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SyncWire_3001(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ParameterWire_3003(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SelectWire_3004(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_SetWire_3005(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ShowWire_3006(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NavigateWire_3007(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_CommitWire_3008(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_ConditionWire_3009(modelElement));
+    result
+        .addAll(getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(modelElement));
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSyncWire_3001OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getRunInstanceWire_3002OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getParameterWire_3003OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSelectWire_3004OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getSetWire_3005OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getShowWire_3006OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getNavigateWire_3007OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getCommitWire_3008OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getConditionWire_3009OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
+   * @generated
+   */
+  public static List getNewInstanceWire_3010OutgoingLinks(View view) {
+    return Collections.EMPTY_LIST;
+  }
+
+  /**
    * @generated NOT
    */
-  public static Collection getAllRelatedIamlLinks(EObject container) {
+  private static Collection getContainedTypeModelFacetLinks_SyncWire_3001(
+      ContainsWires container) {
     Collection result = new LinkedList();
-
-    if (container instanceof WireEdgeDestination) {
-      for (WireEdge wire : ((WireEdgeDestination) container).getInEdges()) {
-        if (wire instanceof RunInstanceWire) {
-          RunInstanceWire link = (RunInstanceWire) wire;
-          if (RunInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
-              .getLinkWithClassVisualID(link)) {
-            continue;
-          }
-          WireEdgeDestination dst = link.getTo();
-          WireEdgesSource src = link.getFrom();
-          result.add(new IamlLinkDescriptor(src, dst, link,
-              IamlElementTypes.RunInstanceWire_3002,
-              RunInstanceWireEditPart.VISUAL_ID));
-        }
-
-        if (wire instanceof SyncWire) {
-          SyncWire link = (SyncWire) wire;
-          if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
-              .getLinkWithClassVisualID(link)) {
-            continue;
-          }
-          WireEdgeDestination dst = link.getTo();
-          WireEdgesSource src = link.getFrom();
-          result.add(new IamlLinkDescriptor(src, dst, link,
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof SyncWire) {
+        continue;
+      }
+      SyncWire link = (SyncWire) linkObject;
+      if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result
+          .add(new IamlLinkDescriptor(src, dst, link,
               IamlElementTypes.SyncWire_3001,
               SyncWireEditPart.VISUAL_ID));
-        }
-
-        if (wire instanceof ParameterWire) {
-          ParameterWire link = (ParameterWire) wire;
-          if (ParameterWireEditPart.VISUAL_ID != IamlVisualIDRegistry
-              .getLinkWithClassVisualID(link)) {
-            continue;
-          }
-          WireEdgeDestination dst = link.getTo();
-          WireEdgesSource src = link.getFrom();
-          result.add(new IamlLinkDescriptor(src, dst, link,
-              IamlElementTypes.ParameterWire_3003,
-              ParameterWireEditPart.VISUAL_ID));
-        }
-      }
     }
 
-    if (container instanceof WireEdgesSource) {
-      for (WireEdge wire : ((WireEdgesSource) container).getOutEdges()) {
-        if (wire instanceof RunInstanceWire) {
-          RunInstanceWire link = (RunInstanceWire) wire;
-          if (RunInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
-              .getLinkWithClassVisualID(link)) {
-            continue;
-          }
-          WireEdgeDestination dst = link.getTo();
-          WireEdgesSource src = link.getFrom();
-          result.add(new IamlLinkDescriptor(src, dst, link,
-              IamlElementTypes.RunInstanceWire_3002,
-              RunInstanceWireEditPart.VISUAL_ID));
-        }
+    // result.addAll(getAllRelatedIamlLinks(container));
 
-        if (wire instanceof SyncWire) {
-          SyncWire link = (SyncWire) wire;
-          if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
-              .getLinkWithClassVisualID(link)) {
-            continue;
-          }
-          WireEdgeDestination dst = link.getTo();
-          WireEdgesSource src = link.getFrom();
-          result.add(new IamlLinkDescriptor(src, dst, link,
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_RunInstanceWire_3002(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof RunInstanceWire) {
+        continue;
+      }
+      RunInstanceWire link = (RunInstanceWire) linkObject;
+      if (RunInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.RunInstanceWire_3002,
+          RunInstanceWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_ParameterWire_3003(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof ParameterWire) {
+        continue;
+      }
+      ParameterWire link = (ParameterWire) linkObject;
+      if (ParameterWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.ParameterWire_3003,
+          ParameterWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_SelectWire_3004(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof SelectWire) {
+        continue;
+      }
+      SelectWire link = (SelectWire) linkObject;
+      if (SelectWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.SelectWire_3004,
+          SelectWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_SetWire_3005(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof SetWire) {
+        continue;
+      }
+      SetWire link = (SetWire) linkObject;
+      if (SetWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.SetWire_3005, SetWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_ShowWire_3006(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof ShowWire) {
+        continue;
+      }
+      ShowWire link = (ShowWire) linkObject;
+      if (ShowWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result
+          .add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.ShowWire_3006,
+              ShowWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_NavigateWire_3007(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof NavigateWire) {
+        continue;
+      }
+      NavigateWire link = (NavigateWire) linkObject;
+      if (NavigateWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.NavigateWire_3007,
+          NavigateWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_CommitWire_3008(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof CommitWire) {
+        continue;
+      }
+      CommitWire link = (CommitWire) linkObject;
+      if (CommitWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.CommitWire_3008,
+          CommitWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_ConditionWire_3009(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof ConditionWire) {
+        continue;
+      }
+      ConditionWire link = (ConditionWire) linkObject;
+      if (ConditionWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.ConditionWire_3009,
+          ConditionWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getContainedTypeModelFacetLinks_NewInstanceWire_3010(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof NewInstanceWire) {
+        continue;
+      }
+      NewInstanceWire link = (NewInstanceWire) linkObject;
+      if (NewInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.NewInstanceWire_3010,
+          NewInstanceWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_SyncWire_3001(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof SyncWire) {
+        continue;
+      }
+      SyncWire link = (SyncWire) setting.getEObject();
+      if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result
+          .add(new IamlLinkDescriptor(src, target, link,
               IamlElementTypes.SyncWire_3001,
               SyncWireEditPart.VISUAL_ID));
-        }
+    }
+    return result;
+  }
 
-        if (wire instanceof ParameterWire) {
-          ParameterWire link = (ParameterWire) wire;
-          if (ParameterWireEditPart.VISUAL_ID != IamlVisualIDRegistry
-              .getLinkWithClassVisualID(link)) {
-            continue;
-          }
-          WireEdgeDestination dst = link.getTo();
-          WireEdgesSource src = link.getFrom();
-          result.add(new IamlLinkDescriptor(src, dst, link,
-              IamlElementTypes.ParameterWire_3003,
-              ParameterWireEditPart.VISUAL_ID));
-        }
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_RunInstanceWire_3002(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof RunInstanceWire) {
+        continue;
+      }
+      RunInstanceWire link = (RunInstanceWire) setting.getEObject();
+      if (RunInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, target, link,
+          IamlElementTypes.RunInstanceWire_3002,
+          RunInstanceWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_ParameterWire_3003(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof ParameterWire) {
+        continue;
+      }
+      ParameterWire link = (ParameterWire) setting.getEObject();
+      if (ParameterWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, target, link,
+          IamlElementTypes.ParameterWire_3003,
+          ParameterWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_SelectWire_3004(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof SelectWire) {
+        continue;
+      }
+      SelectWire link = (SelectWire) setting.getEObject();
+      if (SelectWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, target, link,
+          IamlElementTypes.SelectWire_3004,
+          SelectWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_SetWire_3005(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof SetWire) {
+        continue;
+      }
+      SetWire link = (SetWire) setting.getEObject();
+      if (SetWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, target, link,
+          IamlElementTypes.SetWire_3005, SetWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_ShowWire_3006(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof ShowWire) {
+        continue;
+      }
+      ShowWire link = (ShowWire) setting.getEObject();
+      if (ShowWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result
+          .add(new IamlLinkDescriptor(src, target, link,
+              IamlElementTypes.ShowWire_3006,
+              ShowWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_NavigateWire_3007(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof NavigateWire) {
+        continue;
+      }
+      NavigateWire link = (NavigateWire) setting.getEObject();
+      if (NavigateWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, target, link,
+          IamlElementTypes.NavigateWire_3007,
+          NavigateWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_CommitWire_3008(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof CommitWire) {
+        continue;
+      }
+      CommitWire link = (CommitWire) setting.getEObject();
+      if (CommitWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, target, link,
+          IamlElementTypes.CommitWire_3008,
+          CommitWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_ConditionWire_3009(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof ConditionWire) {
+        continue;
+      }
+      ConditionWire link = (ConditionWire) setting.getEObject();
+      if (ConditionWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, target, link,
+          IamlElementTypes.ConditionWire_3009,
+          ConditionWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getIncomingTypeModelFacetLinks_NewInstanceWire_3010(
+      WireEdgeDestination target, Map crossReferences) {
+    Collection result = new LinkedList();
+    Collection settings = (Collection) crossReferences.get(target);
+    for (Iterator it = settings.iterator(); it.hasNext();) {
+      EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
+          .next();
+      if (setting.getEStructuralFeature() != ModelPackage.eINSTANCE
+          .getWireEdge_To()
+          || false == setting.getEObject() instanceof NewInstanceWire) {
+        continue;
+      }
+      NewInstanceWire link = (NewInstanceWire) setting.getEObject();
+      if (NewInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgesSource src = link.getFrom();
+      result.add(new IamlLinkDescriptor(src, target, link,
+          IamlElementTypes.NewInstanceWire_3010,
+          NewInstanceWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_SyncWire_3001(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
       }
     }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof SyncWire) {
+        continue;
+      }
+      SyncWire link = (SyncWire) linkObject;
+      if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result
+          .add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.SyncWire_3001,
+              SyncWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
 
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_RunInstanceWire_3002(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof RunInstanceWire) {
+        continue;
+      }
+      RunInstanceWire link = (RunInstanceWire) linkObject;
+      if (RunInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.RunInstanceWire_3002,
+          RunInstanceWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_ParameterWire_3003(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof ParameterWire) {
+        continue;
+      }
+      ParameterWire link = (ParameterWire) linkObject;
+      if (ParameterWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.ParameterWire_3003,
+          ParameterWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_SelectWire_3004(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof SelectWire) {
+        continue;
+      }
+      SelectWire link = (SelectWire) linkObject;
+      if (SelectWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.SelectWire_3004,
+          SelectWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_SetWire_3005(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof SetWire) {
+        continue;
+      }
+      SetWire link = (SetWire) linkObject;
+      if (SetWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.SetWire_3005, SetWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_ShowWire_3006(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof ShowWire) {
+        continue;
+      }
+      ShowWire link = (ShowWire) linkObject;
+      if (ShowWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result
+          .add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.ShowWire_3006,
+              ShowWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_NavigateWire_3007(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof NavigateWire) {
+        continue;
+      }
+      NavigateWire link = (NavigateWire) linkObject;
+      if (NavigateWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.NavigateWire_3007,
+          NavigateWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_CommitWire_3008(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof CommitWire) {
+        continue;
+      }
+      CommitWire link = (CommitWire) linkObject;
+      if (CommitWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.CommitWire_3008,
+          CommitWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_ConditionWire_3009(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof ConditionWire) {
+        continue;
+      }
+      ConditionWire link = (ConditionWire) linkObject;
+      if (ConditionWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.ConditionWire_3009,
+          ConditionWireEditPart.VISUAL_ID));
+    }
+    return result;
+  }
+
+  /**
+   * @generated
+   */
+  private static Collection getOutgoingTypeModelFacetLinks_NewInstanceWire_3010(
+      WireEdgesSource source) {
+    ContainsWires container = null;
+    // Find container element for the link.
+    // Climb up by containment hierarchy starting from the source
+    // and return the first element that is instance of the container class.
+    for (EObject element = source; element != null && container == null; element = element
+        .eContainer()) {
+      if (element instanceof ContainsWires) {
+        container = (ContainsWires) element;
+      }
+    }
+    if (container == null) {
+      return Collections.EMPTY_LIST;
+    }
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof NewInstanceWire) {
+        continue;
+      }
+      NewInstanceWire link = (NewInstanceWire) linkObject;
+      if (NewInstanceWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      if (src != source) {
+        continue;
+      }
+      result.add(new IamlLinkDescriptor(src, dst, link,
+          IamlElementTypes.NewInstanceWire_3010,
+          NewInstanceWireEditPart.VISUAL_ID));
+    }
     return result;
   }
 
@@ -103,20 +3311,69 @@ from Collection org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.
    * @generated NOT MY attempt at getting shortcut children for a particular view
    */
   public static List getVisibleThing_79ShortcutChildren(View view) {
+    Pair<List,List> pair = getBothShortcutElementsAndEdges(view);
+    return pair.getA();
+  }
+  
+  /**
+   * @generated NOT
+   * @param view
+   * @return
+   */
+  public static List getAllChildrenEdges(View view) {
+    Pair<List,List> pair = getBothShortcutElementsAndEdges(view);
+    return pair.getB();
+  }
+  
+  /**
+   * @generated NOT
+   * hack class
+   * @author jmwright
+   *
+   * @param <A>
+   * @param <B>
+   */
+  public static class Pair<A,B> {
+    private A a;
+    private B b;
+    
+    public Pair(A a, B b) {
+      this.a = a;
+      this.b = b;
+    }
+    
+    public A getA() {
+      return a;
+    }
+    public B getB() {
+      return b;
+    }
+  }
+  
+  /**
+   * @generated NOT
+   * @param view
+   * @return
+   */
+  public static Pair<List, List> getBothShortcutElementsAndEdges(View view) {
     if (!view.isSetElement()) {
-      return Collections.EMPTY_LIST;
+      return new IamlDiagramUpdater.Pair<List,List>(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
     }
     VisibleThing modelElement = (VisibleThing) view.getElement();
     List result = new LinkedList();
-    
+
     List<EObject> doneAlready = new ArrayList<EObject>();
-    
+    List<EObject> edges = new ArrayList<EObject>();
+
     // for now, we will only concern ourselves with Operations, EventTriggers, fieldValues
-    result.addAll(jevonTest1(doneAlready, view, modelElement.getOperations()));
-    result.addAll(jevonTest1(doneAlready, view, modelElement.getEventTriggers()));
-    result.addAll(jevonTest1(doneAlready, view, modelElement.getProperties()));
-    
-    return result;
+    result.addAll(jevonTest1(doneAlready, edges, view, modelElement
+        .getOperations()));
+    result.addAll(jevonTest1(doneAlready, edges, view, modelElement
+        .getEventTriggers()));
+    result.addAll(jevonTest1(doneAlready, edges, view, modelElement
+        .getProperties()));
+
+    return new Pair<List,List>(result, edges);
   }
 
   /**
@@ -124,16 +3381,19 @@ from Collection org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.
    * @return
    * @generated NOT
    */
-  private static Collection jevonTest1(List<EObject> doneAlready, View view, EList<? extends EObject> list) {
+  private static Collection jevonTest1(List<EObject> doneAlready, List<EObject> edges, View view,
+      EList<? extends EObject> list) {
     List result = new LinkedList();
     for (EObject e : list) {
       if (e instanceof WireEdgesSource) {
         // get all incoming edges
-        result.addAll(getAllShortcutsFromEdges(doneAlready, view, e, ((WireEdgesSource) e).getOutEdges()));
+        result.addAll(getAllShortcutsFromEdges(doneAlready, edges, view, e,
+            ((WireEdgesSource) e).getOutEdges()));
       }
       if (e instanceof WireEdgeDestination) {
         // get all incoming edges
-        result.addAll(getAllShortcutsFromEdges(doneAlready, view, e, ((WireEdgeDestination) e).getInEdges()));
+        result.addAll(getAllShortcutsFromEdges(doneAlready, edges, view, e,
+            ((WireEdgeDestination) e).getInEdges()));
       }
     }
     return result;
@@ -144,9 +3404,13 @@ from Collection org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.
    * @return
    * @generated NOT
    */
-  private static List<WireEdge> getAllShortcutsFromEdges(List<EObject> doneAlready, View view, EObject source, EList<WireEdge> outEdges) {
+  private static List<WireEdge> getAllShortcutsFromEdges(
+      List<EObject> doneAlready, List<EObject> edges, View view, EObject source,
+      EList<WireEdge> outEdges) {
     List result = new LinkedList();
     
+    edges.addAll(outEdges);
+
     // get all nodes at the start and end of the edge
     // that are not the original object source
     for (WireEdge wire : outEdges) {
@@ -158,8 +3422,11 @@ from Collection org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.
           int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
               childElement);
           if (visualID != -1) {
-            result.add(new IamlNodeDescriptor(childElement, visualID));
+            result.add(new IamlNodeDescriptor(childElement,
+                visualID));
             doneAlready.add(childElement);
+            if (!edges.contains(wire))
+              edges.add(wire);
             continue;
           }
         }
@@ -172,14 +3439,18 @@ from Collection org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.
           int visualID = IamlVisualIDRegistry.getNodeVisualID(view,
               childElement);
           if (visualID != -1) {
-            result.add(new IamlNodeDescriptor(childElement, visualID));
+            result.add(new IamlNodeDescriptor(childElement,
+                visualID));
             doneAlready.add(childElement);
+            if (!edges.contains(wire))
+              edges.add(wire);
             continue;
           }
         }
       }
     }
-    
+
     return result;
   }
 
+}

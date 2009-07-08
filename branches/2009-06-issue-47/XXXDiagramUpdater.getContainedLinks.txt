@@ -1,0 +1,30 @@
+from Collection org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.getContainedTypeModelFacetLinks_SyncWire_3001(ContainsWires container)
+
+  /**
+   * @generated NOT
+   */
+  private static Collection getContainedTypeModelFacetLinks_SyncWire_3001(
+      ContainsWires container) {
+    Collection result = new LinkedList();
+    for (Iterator links = container.getWires().iterator(); links.hasNext();) {
+      Object linkObject = links.next();
+      if (false == linkObject instanceof SyncWire) {
+        continue;
+      }
+      SyncWire link = (SyncWire) linkObject;
+      if (SyncWireEditPart.VISUAL_ID != IamlVisualIDRegistry
+          .getLinkWithClassVisualID(link)) {
+        continue;
+      }
+      WireEdgeDestination dst = link.getTo();
+      WireEdgesSource src = link.getFrom();
+      result
+          .add(new IamlLinkDescriptor(src, dst, link,
+              IamlElementTypes.SyncWire_3001,
+              SyncWireEditPart.VISUAL_ID));
+    }
+
+    // result.addAll(getAllRelatedIamlLinks(container));
+
+    return result;
+  }

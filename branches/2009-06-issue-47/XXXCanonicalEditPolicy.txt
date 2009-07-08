@@ -1,0 +1,55 @@
+from Collection org.openiaml.model.model.diagram.visual.edit.policies.VisibleThingCanonicalEditPolicy#refreshConnections()
+
+  /**
+   * Changed by Jevon
+   * @generated NOT
+   */
+  @SuppressWarnings("unchecked")
+  private Collection refreshConnections() {
+    Map domain2NotationMap = new HashMap();
+    Collection linkDescriptors = collectAllLinks(getDiagram(),
+        domain2NotationMap);
+    Collection existingLinks = new LinkedList(getDiagram().getEdges());
+    for (Iterator linksIterator = existingLinks.iterator(); linksIterator
+        .hasNext();) {
+      // Jevon change
+      boolean linksIteratorRemoved = false;
+      Edge nextDiagramLink = (Edge) linksIterator.next();
+      int diagramLinkVisualID = IamlVisualIDRegistry
+          .getVisualID(nextDiagramLink);
+      if (diagramLinkVisualID == -1) {
+        if (nextDiagramLink.getSource() != null
+            && nextDiagramLink.getTarget() != null) {
+          // Jevon change
+          if (!linksIteratorRemoved) {
+            linksIterator.remove();
+            linksIteratorRemoved = true;
+          }
+        }
+        continue;
+      }
+      EObject diagramLinkObject = nextDiagramLink.getElement();
+      EObject diagramLinkSrc = nextDiagramLink.getSource().getElement();
+      EObject diagramLinkDst = nextDiagramLink.getTarget().getElement();
+      for (Iterator LinkDescriptorsIterator = linkDescriptors.iterator(); LinkDescriptorsIterator
+          .hasNext();) {
+        IamlLinkDescriptor nextLinkDescriptor = (IamlLinkDescriptor) LinkDescriptorsIterator
+            .next();
+        if (diagramLinkObject == nextLinkDescriptor.getModelElement()
+            && diagramLinkSrc == nextLinkDescriptor.getSource()
+            && diagramLinkDst == nextLinkDescriptor
+                .getDestination()
+            && diagramLinkVisualID == nextLinkDescriptor
+                .getVisualID()) {
+          // Jevon change 
+          if (!linksIteratorRemoved) {
+            linksIterator.remove();
+            linksIteratorRemoved = true;
+          }
+          LinkDescriptorsIterator.remove();
+        }
+      }
+    }
+    deleteViews(existingLinks.iterator());
+    return createConnections(linkDescriptors, domain2NotationMap);
+  }

@@ -3311,8 +3311,10 @@ public class IamlDiagramUpdater {
    * @generated NOT MY attempt at getting shortcut children for a particular view
    */
   public static List getVisibleThing_79ShortcutChildren(View view) {
-    Pair<List,List> pair = getBothShortcutElementsAndEdges(view);
-    return pair.getA();
+    List elements = new ArrayList();
+    List edges = new ArrayList();
+    getBothShortcutElementsAndEdges(view, elements, edges);
+    return elements;
   }
   
   /**
@@ -3321,33 +3323,10 @@ public class IamlDiagramUpdater {
    * @return
    */
   public static List getAllChildrenEdges(View view) {
-    Pair<List,List> pair = getBothShortcutElementsAndEdges(view);
-    return pair.getB();
-  }
-  
-  /**
-   * @generated NOT
-   * hack class
-   * @author jmwright
-   *
-   * @param <A>
-   * @param <B>
-   */
-  public static class Pair<A,B> {
-    private A a;
-    private B b;
-    
-    public Pair(A a, B b) {
-      this.a = a;
-      this.b = b;
-    }
-    
-    public A getA() {
-      return a;
-    }
-    public B getB() {
-      return b;
-    }
+    List elements = new ArrayList();
+    List edges = new ArrayList();
+    getBothShortcutElementsAndEdges(view, elements, edges);
+    return edges;
   }
   
   /**
@@ -3355,9 +3334,9 @@ public class IamlDiagramUpdater {
    * @param view
    * @return
    */
-  public static Pair<List, List> getBothShortcutElementsAndEdges(View view) {
+  public static void getBothShortcutElementsAndEdges(View view, List targetElements, List targetEdges) {
     if (!view.isSetElement()) {
-      return new IamlDiagramUpdater.Pair<List,List>(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+      return;
     }
     VisibleThing modelElement = (VisibleThing) view.getElement();
     List result = new LinkedList();
@@ -3366,14 +3345,14 @@ public class IamlDiagramUpdater {
     List<EObject> edges = new ArrayList<EObject>();
 
     // for now, we will only concern ourselves with Operations, EventTriggers, fieldValues
-    result.addAll(getAllImportantRelationships(doneAlready, edges, view, modelElement
-        .getOperations()));
-    result.addAll(getAllImportantRelationships(doneAlready, edges, view, modelElement
-        .getEventTriggers()));
-    result.addAll(getAllImportantRelationships(doneAlready, edges, view, modelElement
-        .getProperties()));
-
-    return new Pair<List,List>(result, edges);
+    getAllImportantRelationships(doneAlready, targetElements, targetEdges, view, modelElement
+        .getOperations());
+    getAllImportantRelationships(doneAlready, targetElements, targetEdges, view, modelElement
+        .getEventTriggers());
+    getAllImportantRelationships(doneAlready, targetElements, targetEdges, view, modelElement
+        .getProperties());
+    getAllImportantRelationships(doneAlready, targetElements, targetEdges, view, modelElement
+        .getChildren());
   }
 
   /**
@@ -3383,22 +3362,20 @@ public class IamlDiagramUpdater {
    * @return
    * @generated NOT
    */
-  private static Collection getAllImportantRelationships(List<EObject> doneAlready, List<EObject> edges, View view,
+  private static void getAllImportantRelationships(List<EObject> doneAlready, List<EObject> elements, List<EObject> edges, View view,
       EList<? extends EObject> list) {
-    List result = new LinkedList();
     for (EObject e : list) {
       if (e instanceof WireEdgesSource) {
         // get all incoming edges
-        result.addAll(getAllShortcutsFromEdges(doneAlready, edges, view, e,
+        elements.addAll(getAllShortcutsFromEdges(doneAlready, edges, view, e,
             ((WireEdgesSource) e).getOutEdges()));
       }
       if (e instanceof WireEdgeDestination) {
         // get all incoming edges
-        result.addAll(getAllShortcutsFromEdges(doneAlready, edges, view, e,
+        elements.addAll(getAllShortcutsFromEdges(doneAlready, edges, view, e,
             ((WireEdgeDestination) e).getInEdges()));
       }
     }
-    return result;
   }
 
   /**

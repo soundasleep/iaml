@@ -82,7 +82,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		migrateModel();
 		
 		// there should be five children (five pages)
-		assertChildren(5, editor);
+		assertEditorHasChildren(5, editor);
 		
 		// check the contents
 		assertHasDomainStore(editor, "normal domain store");
@@ -112,7 +112,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		assertEditorDomainStore(sub);
 		
 		// check contents
-		assertChildren(2, sub);
+		assertEditorHasChildren(2, sub);
 		{
 			ShapeNodeEditPart p = assertHasDomainObject(sub, "normal domain object");
 			assertNotNull(p);
@@ -157,7 +157,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		assertEditorDomainStore(sub);
 		
 		// check contents
-		assertChildren(2, sub);
+		assertEditorHasChildren(2, sub);
 		{
 			ShapeNodeEditPart p = assertHasDomainObject(sub, "file domain object");
 			assertNotNull(p);
@@ -196,7 +196,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		assertEditorVisual(sub);
 		
 		// check contents
-		assertChildren(4, sub);
+		assertEditorHasChildren(4, sub);
 		{
 			ShapeNodeEditPart p = assertHasDomainObject(sub, "do");
 			assertNotNull(p);
@@ -254,7 +254,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		assertEditorDomainObject(sub2);
 		
 		// check contents
-		assertChildren(1, sub2);
+		assertEditorHasChildren(1, sub2);
 		{
 			ShapeNodeEditPart p = assertHasDomainAttribute(sub2, "another normal attribute");
 			assertNotNull(p);
@@ -292,7 +292,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		assertEditorDomainObject(sub2);
 		
 		// check contents
-		assertChildren(1, sub2);
+		assertEditorHasChildren(1, sub2);
 		{
 			ShapeNodeEditPart p = assertHasDomainAttribute(sub2, "another fda");
 			assertNotNull(p);

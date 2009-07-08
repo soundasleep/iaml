@@ -19,6 +19,7 @@ import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
+import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
@@ -31,6 +32,7 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -210,7 +212,9 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param shortcutRequired if checkShortcut is true, only search for parts where isShortcut(part) = shortcutRequired
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName, boolean checkShortcut, boolean shortcutRequired) {
+	public ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName, 
+			boolean checkShortcut, boolean shortcutRequired) {
+		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
@@ -304,20 +308,23 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasEventTrigger(DiagramDocumentEditor root, String eventName) {
+	public ShapeNodeEditPart assertHasEventTrigger(DiagramDocumentEditor root, String eventName, boolean checkShortcut, boolean shortcutRequired) {
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				EObject obj = s.resolveSemanticElement();
-				if (obj instanceof EventTrigger) {
-					EventTrigger p = (EventTrigger) obj;
-					if (p.getName().equals(eventName)) {
-						assertNotNull(s);
-						return s;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (obj instanceof EventTrigger) {
+						EventTrigger p = (EventTrigger) obj;
+						if (p.getName().equals(eventName)) {
+							assertNotNull(s);
+							return s;
+						}
+						found += p.getName() + ",";
 					}
-					found += p.getName() + ",";
 				}
 			}
 		}
@@ -391,20 +398,25 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasOperation(DiagramDocumentEditor root, String operationName) {
+	public ShapeNodeEditPart assertHasOperation(DiagramDocumentEditor root, String operationName, 
+			boolean checkShortcut, boolean shortcutRequired) {
+		
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				EObject obj = s.resolveSemanticElement();
-				if (obj instanceof Operation) {
-					Operation p = (Operation) obj;
-					if (p.getName().equals(operationName)) {
-						assertNotNull(s);
-						return s;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (obj instanceof Operation) {
+						Operation p = (Operation) obj;
+						if (p.getName().equals(operationName)) {
+							assertNotNull(s);
+							return s;
+						}
+						found += p.getName() + ",";
 					}
-					found += p.getName() + ",";
 				}
 			}
 		}
@@ -440,9 +452,13 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 
 
 	/**
-	 * Assert that a RunInstanceWire exists between two elements in the editor. 
+	 * Assert that a SyncWire exists between two elements in the editor.
+	 * 
+	 * SyncWires are bidirectional, so the order of elements in the parameters
+	 * do not matter.
 	 */
-	public ConnectionNodeEditPart assertHasSyncWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+	public ConnectionNodeEditPart assertHasSyncWire(DiagramDocumentEditor editor, 
+			EditPart part1, EditPart part2, String name) {
 		String found = "";
 		
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
@@ -451,15 +467,19 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				EObject element = connection.resolveSemanticElement();
 				if (element instanceof SyncWire) {
 					SyncWire w = (SyncWire) element;
-					if (connection.getSource().equals(source) && 
-							connection.getTarget().equals(target) && w.getName().equals(name))
-						return connection;	// found it
+					// SyncWires are bidirectional
+					if (connection.getSource().equals(part1) && 
+							connection.getTarget().equals(part2) && w.getName().equals(name))
+						return connection;	// found it (a->b)
+					if (connection.getSource().equals(part2) && 
+							connection.getTarget().equals(part1) && w.getName().equals(name))
+						return connection;	// found it (b->a)
 					found += ", " + w.getName();
 				}
 			}
 		}
 		
-		fail("assertHasSyncWire: no connection found between '" + source + "' and '" + target + "'. found: " + found);
+		fail("assertHasSyncWire: no connection found between '" + part1 + "' and '" + part2 + "'. found: " + found);
 		return null;
 	}
 
@@ -633,12 +653,158 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	
 	/**
 	 * Check the number of children nodes in this editor.
+	 * The "number of children" are the number of nodes, not the number of
+	 * edges, visible in the current editor.
 	 * 
 	 * @param i
 	 * @param sub
 	 */
-	protected void assertChildren(int i, DiagramDocumentEditor sub) {
+	protected void assertEditorHasChildren(int i, DiagramDocumentEditor sub) {
 		assertEquals("There should be " + i + " children in editor '" + sub.getTitle() + "'", i, sub.getDiagramEditPart().getChildren().size());
+	}
+
+	/**
+	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasEventTrigger(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasEventTrigger(editor, name, true, shortcutRequired);
+	}
+
+	/**
+	 * @see #assertHasOperation(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasOperation(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasOperation(editor, name, true, shortcutRequired);
+	}
+
+	/**
+	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasEventTrigger(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasEventTrigger(editor, name, false, false);
+	}
+
+	/**
+	 * @see #assertHasOperation(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasOperation(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasOperation(editor, name, false, false);
+	}
+
+
+	/**
+	 * Assert that a ParameterWire exists between two elements in the editor.
+	 *  
+	 * @param editor
+	 * @param source
+	 * @param target
+	 * @return
+	 */
+	public ConnectionNodeEditPart assertHasParameterWire(DiagramDocumentEditor editor,
+			ShapeNodeEditPart source, ConnectionNodeEditPart target) {
+		
+		String found = "";
+		
+		for (Object c : editor.getDiagramEditPart().getConnections()) {
+			if (c instanceof ConnectionNodeEditPart) {
+				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
+				EObject element = connection.resolveSemanticElement();
+				if (element instanceof ParameterWire) {
+					ParameterWire w = (ParameterWire) element;
+					if (connection.getSource().equals(source) && 
+							connection.getTarget().equals(target))
+						return connection;	// found it
+					found += ", " + w.getName();
+				}
+			}
+		}
+		
+		fail("assertHasParameterWire: no connection found between '" + source + "' and '" + target + "'. found: " + found);
+		return null;
+		
+	}
+
+	/**
+	 * The given edit part must not be generated.
+	 * 
+	 * @param part
+	 */
+	public void assertNotGenerated(ShapeNodeEditPart part) {
+		assertFalse("EditPart '" + part + "' should not be generated", ((GeneratedElement) part.resolveSemanticElement()).isIsGenerated());
+	}
+
+	/**
+	 * The given edit part must be generated.
+	 * 
+	 * @param part
+	 */
+	public void assertGenerated(ShapeNodeEditPart part) {
+		assertTrue("EditPart '" + part + "' should be generated", ((GeneratedElement) part.resolveSemanticElement()).isIsGenerated());
+	}
+
+	/**
+	 * The given edit part must not be generated.
+	 * 
+	 * @param part
+	 */
+	public void assertNotGenerated(ConnectionNodeEditPart part) {
+		assertFalse("EditPart '" + part + "' should not be generated", ((GeneratedElement) part.resolveSemanticElement()).isIsGenerated());
+	}
+
+	/**
+	 * The given edit part must be generated.
+	 * 
+	 * @param part
+	 */
+	public void assertGenerated(ConnectionNodeEditPart part) {
+		assertTrue("EditPart '" + part + "' should be generated", ((GeneratedElement) part.resolveSemanticElement()).isIsGenerated());
+	}
+
+	/**
+	 * @see #assertHasFieldValue(DiagramDocumentEditor, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasFieldValue(DiagramDocumentEditor editor, boolean shortcutRequired) {
+		return assertHasFieldValue(editor, true, shortcutRequired);
+	}
+
+	/**
+	 * The editor should contain an ApplicationElementProperty called
+	 * 'fieldValue' that is shortcut=requiredShortcut.
+	 * 
+	 * @param editor
+	 * @param checkShortcut should we check if it's a shortcut?
+	 * @param shortcutRequired the required value of shortcut
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasFieldValue(
+			DiagramDocumentEditor editor, boolean checkShortcut,
+			boolean shortcutRequired) {		
+		String found = "";
+		
+		for (Object o : editor.getDiagramEditPart().getChildren()) {
+			if (o instanceof ShapeNodeEditPart) {
+				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (obj instanceof ApplicationElementProperty) {
+						ApplicationElementProperty p = (ApplicationElementProperty) obj;
+						if (p.getName().equals("fieldValue")) {
+							assertNotNull(s);
+							return s;
+						}
+						found += p.getName() + ",";
+					}
+				}
+			}
+		}
+		// failed
+		fail("assertHasFieldValue: no fieldValue found. Found: " + found);
+		return null;
+		
 	}
 
 	

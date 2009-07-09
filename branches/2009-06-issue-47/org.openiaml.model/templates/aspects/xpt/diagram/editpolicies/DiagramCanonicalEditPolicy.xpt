@@ -8,7 +8,7 @@
 	protected java.util.List getSemanticConnectionsList() {
 		org.eclipse.gmf.runtime.notation.View viewObject = (org.eclipse.gmf.runtime.notation.View) getHost().getModel();
 		java.util.List result = new java.util.LinkedList();
-		for (java.util.Iterator it = IamlDiagramUpdater.getAllChildrenEdges(viewObject)
+		for (java.util.Iterator it = «editorGen.diagramUpdater.getDiagramUpdaterQualifiedClassName()».getAllChildrenEdges(viewObject)
 				.iterator(); it.hasNext();) {
 			result.add(((org.eclipse.emf.ecore.EObject) it.next()));
 		}
@@ -151,8 +151,7 @@
 			}
 			// my hack: we just get the diagram editor to get the IElementType directly
 			if (adapter.equals(org.eclipse.gmf.runtime.emf.type.core.IElementType.class)) {
-				// TODO currently doesn't switch to the correct ElementTypes provider
-				return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes
+				return «getElementTypesQualifiedClassName()»
 						.getElementType(((org.eclipse.emf.ecore.EObject) getRealObject()).eClass());
 			}
 			return super.getAdapter(adapter);
@@ -514,13 +513,10 @@
 	protected java.util.List getShortcutChildrenList() {
 		org.eclipse.gmf.runtime.notation.View viewObject = (org.eclipse.gmf.runtime.notation.View) getHost().getModel();
 		java.util.List result = new java.util.LinkedList();
-		// TODO link this to the actual model
-		for (java.util.Iterator it = org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater
+		for (java.util.Iterator it = «editorGen.diagramUpdater.getDiagramUpdaterQualifiedClassName()»
 				.getAllShortcutElements(viewObject).iterator(); it
 				.hasNext();) {
-			// NOTE model-specific
-			// TODO link this to the actual model
-			result.add(((org.openiaml.model.model.diagram.visual.part.IamlNodeDescriptor) it.next()).getModelElement());
+			result.add(((«getDiagram().editorGen.diagramUpdater.getNodeDescriptorQualifiedClassName()») it.next()).getModelElement());
 		}
 		return result;
 	}
@@ -567,9 +563,8 @@
 			command = command.chain(new org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy(
 					new CreateShortcutDecorationsCommand(
 							// these parameters are guessed, but they work
-							// TODO move VisibleThingEditPart to actual model
 							host.getEditingDomain(), host.getPrimaryView(),
-							descriptors, org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart.MODEL_ID)));
+							descriptors, «getEditPartQualifiedClassName()».MODEL_ID)));
 
 		}
 

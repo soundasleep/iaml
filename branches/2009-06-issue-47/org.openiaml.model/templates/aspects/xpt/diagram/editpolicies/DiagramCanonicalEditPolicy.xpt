@@ -23,6 +23,20 @@
 		if (relationship instanceof org.openiaml.model.model.WireEdge) {
 			return ((org.openiaml.model.model.WireEdge) relationship).getFrom();
 		}
+		if (relationship instanceof org.openiaml.model.model.ExecutionEdge) {
+			return ((org.openiaml.model.model.ExecutionEdge) relationship).getFrom();
+		}
+		if (relationship instanceof org.openiaml.model.model.DataFlowEdge) {
+			return ((org.openiaml.model.model.DataFlowEdge) relationship).getFrom();
+		}
+		
+		// if we get this far, there may be a relationship type that
+		// we're not checking for
+		String errorMessage = "Could not resolve source element for relationship element '" + relationship + "'";
+		org.eclipse.gmf.runtime.common.core.util.Log.error(org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIPlugin.getInstance(), 
+				org.eclipse.core.runtime.IStatus.WARNING, 
+				errorMessage,
+				new java.lang.RuntimeException(errorMessage));
 		return null;
 	}
 «ENDAROUND»
@@ -34,6 +48,20 @@
 		if (relationship instanceof org.openiaml.model.model.WireEdge) {
 			return ((org.openiaml.model.model.WireEdge) relationship).getTo();
 		}
+		if (relationship instanceof org.openiaml.model.model.ExecutionEdge) {
+			return ((org.openiaml.model.model.ExecutionEdge) relationship).getTo();
+		}
+		if (relationship instanceof org.openiaml.model.model.DataFlowEdge) {
+			return ((org.openiaml.model.model.DataFlowEdge) relationship).getTo();
+		}
+		
+		// if we get this far, there may be a relationship type that
+		// we're not checking for
+		String errorMessage = "Could not resolve source element for relationship element '" + relationship + "'";
+		org.eclipse.gmf.runtime.common.core.util.Log.error(org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIPlugin.getInstance(), 
+				org.eclipse.core.runtime.IStatus.WARNING, 
+				errorMessage,
+				new java.lang.RuntimeException(errorMessage));
 		return null;
 	}
 «ENDAROUND»

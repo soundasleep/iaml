@@ -60,8 +60,8 @@
 		}
 	}
 
-«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?")»
-	private static java.util.List<WireEdge> getAllShortcutsFromEdges(
+«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
+	private static java.util.List<org.openiaml.model.model.WireEdge> getAllShortcutsFromEdges(
 			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
 			org.eclipse.gmf.runtime.notation.View view, 

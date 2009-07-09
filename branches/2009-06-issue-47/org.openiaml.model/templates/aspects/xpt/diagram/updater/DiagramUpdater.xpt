@@ -86,7 +86,7 @@
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
 			org.eclipse.gmf.runtime.notation.View view, 
 			org.eclipse.emf.ecore.EObject source,
-			org.eclipse.emf.common.util.EList<org.openiaml.model.model.WireEdge> outEdges) {
+			java.util.List<org.openiaml.model.model.WireEdge> outEdges) {
 		java.util.List result = new java.util.LinkedList();
 		
 		edges.addAll(outEdges);
@@ -97,11 +97,22 @@
 		for (org.openiaml.model.model.WireEdge wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
-					continue;
-				if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
-					continue;
+				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
+				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
 			}
+			
+			// additional special logic: if we have a RunInstanceWire, get all of the incoming edges
+			// that are ParameterWires, and render these as shortcut elements too (i.e. parameters)
+			if (wire instanceof org.openiaml.model.model.wires.RunInstanceWire) {
+				org.openiaml.model.model.wires.RunInstanceWire run = (org.openiaml.model.model.wires.RunInstanceWire) wire;
+				java.util.List<WireEdge> params = new java.util.ArrayList();
+				for (org.openiaml.model.model.WireEdge e : run.getInEdges()) {
+					if (e instanceof org.openiaml.model.model.wires.ParameterWire) {
+						params.add(e);
+					}
+				}
+				result.addAll(getAllShortcutsFromWireEdges(doneAlready, edges, view, wire, params));
+			} 
 		}
 
 		return result;
@@ -113,7 +124,7 @@
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
 			org.eclipse.gmf.runtime.notation.View view, 
 			org.eclipse.emf.ecore.EObject source,
-			org.eclipse.emf.common.util.EList<org.openiaml.model.model.ExecutionEdge> outEdges) {
+			java.util.List<org.openiaml.model.model.ExecutionEdge> outEdges) {
 		java.util.List result = new java.util.LinkedList();
 		
 		edges.addAll(outEdges);
@@ -140,7 +151,7 @@
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
 			org.eclipse.gmf.runtime.notation.View view, 
 			org.eclipse.emf.ecore.EObject source,
-			org.eclipse.emf.common.util.EList<org.openiaml.model.model.DataFlowEdge> outEdges) {
+			java.util.List<org.openiaml.model.model.DataFlowEdge> outEdges) {
 		java.util.List result = new java.util.LinkedList();
 		
 		edges.addAll(outEdges);

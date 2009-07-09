@@ -49,18 +49,17 @@ public class Issue47 extends AbstractShortcutsTestCase {
 
 		// open the text field
 		editor_text = openDiagram(text1);
+		assertEditorVisual(editor_text);
 		
 		// should contain a field value
 		ShapeNodeEditPart text1_value = assertHasFieldValue(editor_text, false);
 		assertNotShortcut(text1_value);
 		assertGenerated(text1_value);
-		/*
+		// the other fieldValue _should_ most definitely be displayed here, because
+		// it's used as the parameter for an incoming operation
 		ShapeNodeEditPart text2_value = assertHasFieldValue(editor_text, true);
 		assertShortcut(text2_value);
 		assertGenerated(text2_value);
-		*/
-		
-		ShapeNodeEditPart text2_value = null;
 		
 		// editor should contain both "edit" and "update" operations for
 		// text1 and text2

@@ -1,0 +1,693 @@
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
+«EXTENSION xpt::diagram::Utils»
+«EXTENSION xpt::GenModelUtils»
+
+«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47]")»
+
+«AROUND getSemanticConnectionsList FOR gmfgen::GenDiagram-»
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get a list of all EObjects in the current diagram that need to be made into Edges. In particular this will go outside simply direct containment.")»
+  protected java.util.List getSemanticConnectionsList() {
+    View viewObject = (View) getHost().getModel();
+    List result = new LinkedList();
+    for (Iterator it = IamlDiagramUpdater.getAllChildrenEdges(viewObject)
+        .iterator(); it.hasNext();) {
+      result.add(((EObject) it.next()));
+    }
+    return result;
+  }
+«ENDAROUND»
+
+«AROUND getSourceElement FOR gmfgen::GenDiagram-»
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
+  protected org.eclipse.emf.ecore.EObject getSourceElement(org.eclipse.emf.ecore.EObject relationship) {
+    if (relationship instanceof WireEdge) {
+      return ((WireEdge) relationship).getFrom();
+    }
+    return null;
+  }
+«ENDAROUND»
+
+«AROUND getTargetElement FOR gmfgen::GenDiagram-»
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
+  protected org.eclipse.emf.ecore.EObject getTargetElement(org.eclipse.emf.ecore.EObject relationship) {
+    if (relationship instanceof WireEdge) {
+      return ((WireEdge) relationship).getTo();
+    }
+    return null;
+  }
+«ENDAROUND»
+
+«DEFINE additions FOR gmfgen::GenDiagram»
+  «targetDef.proceed()»
+  
+  «REM»Can we split up the Javadoc comments into [..." + \n + "...]?«ENDREM»
+=
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We add additional logic to findEditPartForElement. The original method would dive straight into the ancestor of the view, even though in this case, host() returns the container of the actual EditPart we might be looking for. Otherwise it asks the parent method for the right result.\n\n@return an editpart; <tt>null</tt> if non could be found.")»
+  protected EditPart findEditPartForElement(EObject element, EObject context,
+      List parts) {
+    DiagramEditPart host = (DiagramEditPart) getHost();
+    for (Object ep : host.getConnections()) {
+      ConnectionEditPart cep = (ConnectionEditPart) ep;
+      if (element.equals(cep.resolveSemanticElement())) {
+        // we found the edit part already
+        return cep;
+      }
+    }
+
+    // otherwise, consult the parent
+    return super.findEditPartForElement(element, context, parts);
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] If we are trying to create a connection to an Edge, this method will return false, because the edge.getParent() = the root diagram window, not the XXXEditPart that we're actually after.\n\nSo, we add some special logic to an otherwise direct copy, to assume we _can_ create connections between ConnectionEditParts, even if they don't have a CanonicalEditPolicy. \n\n @see CanonicalConnectionEditPolicy#canCreateConnection(EditPart, EditPart)")»
+  protected boolean canCreateConnection(EditPart sep, EditPart tep,
+      EObject connection) {
+    if (sep != null && sep.isActive() && tep != null && tep.isActive()) {
+
+      View src = (View) sep.getAdapter(View.class);
+      View tgt = (View) tep.getAdapter(View.class);
+      if (src != null && tgt != null) {
+
+        return ((sep instanceof ConnectionEditPart) || sep.getParent()
+            .getEditPolicy(EditPolicyRoles.CANONICAL_ROLE) != null)
+            && ((tep instanceof ConnectionEditPart) || tep
+                .getParent().getEditPolicy(
+                    EditPolicyRoles.CANONICAL_ROLE) != null);
+      }
+    }
+    return false;
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We create our own method to create connection views, so we can wrap the elementAdapter with another layer - IElementTypeElementAdapter - which lets us supply IElementType information to the adapter. Otherwise adapter.getAdapter(IElementType.class) will always return null. Otherwise, this method is copied directly from createConnectionView. \n\n Creates a connection view facade element for the supplied semantic element. An empty string is used as the default factory hint. \n\n @see #createConnectionView(EObject, int) \n @see IElementTypeElementAdapter")»
+  protected Edge myCreateConnectionView(EObject connection, int index) {
+    EditPart sep = getSourceEditPartFor(connection);
+    EditPart tep = getTargetEditPartFor(connection);
+    if (!canCreateConnection(sep, tep, connection)) {
+      return null;
+    }
+
+    View sView = (View) sep.getModel();
+    View tView = (View) tep.getModel();
+    Edge model = null;
+    String factoryHint = getDefaultFactoryHint();
+    // use a different adapter so we can actually get IElementTypes
+    IAdaptable elementAdapter = new IElementTypeElementAdapter(connection,
+        factoryHint);
+    CreateConnectionViewRequest ccr = getCreateConnectionViewRequest(
+        elementAdapter, getFactoryHint(elementAdapter, factoryHint),
+        index);
+
+    ccr.setType(RequestConstants.REQ_CONNECTION_START);
+    ccr.setSourceEditPart(sep);
+    getCreateViewCommand(ccr); // sep.getCommand(ccr); //prime the command
+    ccr.setTargetEditPart(tep);
+    ccr.setType(RequestConstants.REQ_CONNECTION_END);
+    Command cmd = getCreateViewCommand(ccr); // tep.getCommand(ccr);
+    if (cmd != null && cmd.canExecute()) {
+      List viewAdapters = new ArrayList();
+      viewAdapters.add(new EObjectAdapter(((View) host().getModel())
+          .getDiagram()));
+      viewAdapters.add(new EObjectAdapter(sView));
+      viewAdapters.add(new EObjectAdapter(tView));
+
+      SetViewMutabilityCommand.makeMutable(viewAdapters).execute();
+
+      executeCommand(cmd);
+      IAdaptable adapter = (IAdaptable) ccr.getNewObject();
+      SetViewMutabilityCommand.makeMutable(adapter).execute();
+      model = (Edge) adapter.getAdapter(Edge.class);
+      if (model == null) {
+        String eMsg = NLS
+            .bind(
+                DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_,
+                connection);
+        IllegalStateException ise = new IllegalStateException(eMsg);
+        Log.error(DiagramUIPlugin.getInstance(), IStatus.ERROR, eMsg,
+            ise);
+        throw ise;
+      }
+    }
+    return model;
+  }
+
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We wrap EObjectAdapter to also adapt to IElementType.class requests, so we can actually create edges in our current editor. \n\n This is also copied from the other adapter that adapts it to String.class.")»
+  public static class IElementTypeElementAdapter extends EObjectAdapter {
+    private String _hint;
+
+    /**
+     * constructor
+     * @param element
+     * @param hint
+     */
+    public IElementTypeElementAdapter(EObject element, String hint) {
+      super(element);
+      _hint = hint;
+    }
+
+    /** Adds both <code>String.class</tt> and <code>IElementType.class</tt> adaptablity. */
+    public Object getAdapter(Class adapter) {
+      if (adapter.equals(String.class)) {
+        return _hint;
+      }
+      // my hack: we just get the diagram editor to get the IElementType directly
+      if (adapter.equals(IElementType.class)) {
+        return IamlElementTypes
+            .getElementType(((EObject) getRealObject()).eClass());
+      }
+      return super.getAdapter(adapter);
+    }
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Return a create connection view request. \n\n Copied directly, because the original method is private.")»
+  private CreateConnectionViewRequest getCreateConnectionViewRequest(
+      IAdaptable elementAdapter, String hint, int index) {
+    return new CreateConnectionViewRequest(getConnectionViewDescriptor(
+        elementAdapter, hint, index));
+  }
+
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Return a connection view descriptor. \n\n Copied directly, because the original method is private.")»  
+  private ConnectionViewDescriptor getConnectionViewDescriptor(
+      IAdaptable elementAdapter, String hint, int index) {
+    return new ConnectionViewDescriptor(elementAdapter, hint, index, false,
+        ((IGraphicalEditPart) getHost()).getDiagramPreferencesHint());
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Even though the method \"should not be overridden\", we do so anyway.\n\n @see #refreshSemanticConnections()")»
+  protected List myRefreshSemanticConnections() {
+
+    // lets just get the edges (of type EObject)
+    List connections = getSemanticConnectionsList();
+    List toDelete = new ArrayList();
+
+    // remove duplicate links that shouldn't be there
+    for (Object obj : ((Diagram) ((VisibleThingEditPart) host()).getModel())
+        .getEdges()) {
+      Object found = null;
+      Edge edge = (Edge) obj;
+      for (Object connection : connections) {
+        if (edge.getElement().equals(connection)) {
+          // it's OK
+          // this logic also make sure that if we have multiple edges for the same object,
+          // then we will keep one and delete the rest
+          found = connection;
+          break;
+        }
+      }
+
+      if (found != null) {
+        connections.remove(found);
+      }
+
+      // if it wasnt found, we need to delete it
+      if (found == null) {
+        toDelete.add(edge);
+      }
+
+    }
+
+    // delete these duplicate views
+    deleteViews(toDelete.iterator());
+
+    // remaining edges in 'connections' should be added to diagram
+
+    // create a view for each remaining semantic element.
+    List viewDescriptors = new ArrayList();
+    Iterator semanticChildrenIT = connections.iterator();
+    while (semanticChildrenIT.hasNext()) {
+      EObject semanticChild = (EObject) semanticChildrenIT.next();
+      //Edge viewChild = createConnectionView(semanticChild, ViewUtil.APPEND);
+      Edge viewChild = myCreateConnectionView(semanticChild,
+          ViewUtil.APPEND);
+      if (viewChild != null) {
+        viewDescriptors.add(new EObjectAdapter(viewChild));
+      }
+    }
+
+    /*
+     * This doesn't seem to do anything.
+     */
+    //makeViewsMutable(viewDescriptors);
+    /*
+     * This doesn't seem to do anything either...
+     */
+    // now refresh all the connection containers to update the editparts
+    /*
+    HashSet ends = new HashSet();
+    ListIterator li = viewDescriptors.listIterator();
+    while (li.hasNext()) {
+      IAdaptable adaptable = (IAdaptable) li.next();
+      Edge edge = (Edge) adaptable.getAdapter(Edge.class);
+      EditPart sourceEP = getEditPartFor(edge.getSource(), edge);
+      if (sourceEP != null) {
+        ends.add(sourceEP);
+      }
+      EditPart targetEP = getEditPartFor(edge.getTarget(), edge);
+      if (targetEP != null) {
+        ends.add(targetEP);
+      }
+    }*/
+
+    /*
+     * Nor does this...
+     */
+    /*
+    for (Iterator iter = ends.iterator(); iter.hasNext();) {
+      EditPart end = (EditPart) iter.next();
+      end.refresh();
+    }
+     */
+
+    return viewDescriptors;
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We override the fundamental method of refreshing the diagram - refreshSemantic() - so that we can select not only directly contained elements, but also those referenced in shortcuts.")»
+  protected void refreshSemantic() {
+    List createdViews = new LinkedList();
+
+    /*
+     * I use my own method to select all the Nodes to render in the diagram.
+     * @see #refreshSemanticChildren()
+     */
+    // createdViews.addAll(refreshSemanticChildren());
+    createdViews.addAll(myRefreshSemanticChildren());
+    List createdConnectionViews = new LinkedList();
+
+    /*
+     * I use my own method to select all the Edges to render in the Diagram.
+     * @see #refreshSemanticConnections()
+     */
+    // createdConnectionViews.addAll(refreshSemanticConnections());
+    createdConnectionViews.addAll(myRefreshSemanticConnections());
+
+    /*
+     * Using refreshConnections() will set some Edges eContainer=null, which then throws
+     * a NullPointerException in:
+     * 
+     * java.lang.NullPointerException
+     *    at org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy.addListenersToContainers(CanonicalEditPolicy.java:1032)
+     *    at org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy.makeViewsImmutable(CanonicalEditPolicy.java:1008)
+     *   
+     * Plus, I'm not sure this method is even necessary anymore... this is the only
+     * method that calls it.
+     */
+    //createdConnectionViews.addAll(refreshConnections());
+    // not sure that this actually does anything
+    if (createdViews.size() > 1) {
+      // perform a layout of the container
+      DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host()
+          .getEditingDomain(), createdViews, host());
+      executeCommand(new ICommandProxy(layoutCmd));
+    }
+
+    // get rid of any duplicate edges
+    removeDuplicateEdges();
+
+    createdViews.addAll(createdConnectionViews);
+
+    // a hack: remove all 'null' elements in the list
+    /*
+    while (createdViews.contains(null)) {
+      createdViews.remove(null);
+    }*/
+
+    /*
+     * The default makeViewsImmutable() can throw NullPointerExceptions; my modification
+     * adds a null check.
+     */
+    //makeViewsImmutable(createdViews);
+    makeViewsImmutableWithNullCheck(createdViews);
+
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Cycle through the diagram to get rid of any duplicate edges, i.e. edges that refer to the same EObject.")»
+  protected void removeDuplicateEdges() {
+    List objectsFound = new ArrayList();
+    List toDelete = new ArrayList();
+    for (Object obj : ((Diagram) ((VisibleThingEditPart) host()).getModel())
+        .getEdges()) {
+      Object found = null;
+      Edge edge = (Edge) obj;
+      if (objectsFound.contains(edge.getElement())) {
+        // we need to delete this edge
+        toDelete.add(edge);
+      } else {
+        // it's a unique object
+        objectsFound.add(edge.getElement());
+      }
+
+    }
+
+    deleteViews(toDelete.iterator());
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly, except we add a null check.\n\n@see CanonicalEditPolicy#makeViewsImmutable(List)")»
+  protected void makeViewsImmutableWithNullCheck(List createdViews) {
+    if (createdViews != null && !createdViews.isEmpty()) {
+      // uses my own method
+      addListenersToContainersWithNullCheck(createdViews);
+
+      List viewAdapters = prepareAdapterList(createdViews);
+      Command immutable = SetViewMutabilityCommand
+          .makeImmutable(viewAdapters);
+      AsyncCommand ac = new AsyncCommand(immutable);
+      ac.execute();
+    }
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied from {@link CanonicalEditPolicy#addListenersToContainers()}, except this method prevents some NullPointerExceptions from being thrown.")»
+  private void addListenersToContainersWithNullCheck(List createdViews) {
+    UniqueEList list = new UniqueEList();
+    ListIterator li = createdViews.listIterator();
+    while (li.hasNext()) {
+      Object obj = li.next();
+      if (obj instanceof IAdaptable) {
+        View view = (View) ((IAdaptable) obj).getAdapter(View.class);
+        if (view != null)
+          list.add(view.eContainer());
+      }
+    }
+
+    ListIterator liContainers = list.listIterator();
+    while (liContainers.hasNext()) {
+      View containerView = (View) liContainers.next();
+      if (containerView != null) { // jevon change: add a null check to prevent NPEs
+        addListenerFilter(
+            "NotationListener_Container" + containerView.toString(), //$NON-NLS-1$
+            this, containerView, NotationPackage.eINSTANCE
+                .getView_PersistedChildren());
+      }
+    }
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is copied directly from {@link CanonicalEditPolicy#prepareAdapterList(List)}, since the original method is marked 'private'.")»
+  private List prepareAdapterList(List createdViews) {
+    List viewAdapters = new ArrayList();
+    viewAdapters.add(host());
+    ListIterator li = createdViews.listIterator();
+    while (li.hasNext()) {
+      Object obj = li.next();
+      if (obj != null) {
+        if (!(obj instanceof IAdaptable) && obj instanceof EObject)
+          viewAdapters.add(new EObjectAdapter((EObject) obj));
+        else
+          viewAdapters.add(obj);
+      }
+    }
+    return viewAdapters;
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly from CanonicalEditPolicy.\n\nRuns the supplied commands asyncronously.")»
+  protected static class AsyncCommand extends Command {
+    private final CompoundCommand _cc;
+
+    /**
+     * constructor
+     * @param label this command label
+     */
+    public AsyncCommand(String label) {
+      super(label);
+      _cc = new CompoundCommand(label);
+    }
+
+    /**
+     * constructor
+     * @param cmd the command
+     */
+    public AsyncCommand(Command cmd) {
+      this(cmd.getLabel());
+      add(cmd);
+    }
+
+    /**
+     * constructor
+     * @param cmd the command
+     */
+    public AsyncCommand(ICommand cmd) {
+      this(cmd.getLabel());
+      add(cmd);
+    }
+
+    /**
+     * Executes the command asynchonously. 
+     * Calls {@link #doExecute}.
+     */
+    public final void execute() {
+      // do not use Display.getCurrent() this mthod could be invoked
+      // on a non ui thread
+      PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+        public void run() {
+          AsyncCommand.this.doExecute();
+        }
+      });
+    }
+
+    /**
+     * Return the command to be executed asynchronously.
+     * @return the command
+     */
+    protected final CompoundCommand getCommand() {
+      return _cc;
+    }
+
+    /** Executes the command. */
+    protected void doExecute() {
+      getCommand().execute();
+    }
+
+    /**
+     * Add supplied command to the list of commands to be executed.
+     * @param cmd command to add
+     */
+    public void add(ICommand cmd) {
+      _cc.add(new ICommandProxy(cmd));
+    }
+
+    /**
+     * Add supplied command to the list of commands to be executed.
+     * @param cmd the command to add
+     */
+    public void add(Command cmd) {
+      _cc.add(cmd);
+    }
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Extends {@link #refreshSemanticChildren()} to handle shortcuts too.\n\n@see #getShortcutChildrenList()")»
+  protected final List myRefreshSemanticChildren() {
+
+    // Don't try to refresh children if the semantic element
+    // cannot be resolved.
+    if (resolveSemanticElement() == null) {
+      return Collections.EMPTY_LIST;
+    }
+
+    //
+    // current views
+    List viewChildren = getViewChildren();
+    List semanticChildren = new ArrayList(getSemanticChildrenList());
+    List shortcutChildren = new ArrayList(getShortcutChildrenList());
+
+    // both lists are of EObjects
+    shortcutChildren.removeAll(semanticChildren);
+
+    List allChildren = new ArrayList();
+    allChildren.addAll(semanticChildren);
+    allChildren.addAll(shortcutChildren);
+
+    // this method changes [allChildren] by removing elements within it
+    // i.e. it removes any views in the list that are already in the view
+    List orphaned = cleanCanonicalSemanticChildren(viewChildren,
+        allChildren);
+    boolean changed = false;
+    //
+    // delete all the remaining oprphaned views
+    if (!orphaned.isEmpty()) {
+      changed = deleteViews(orphaned.iterator());
+    }
+
+    // so, we need to only select elements within the semanticChildren that are
+    // also inside allChildren
+    List newSemanticChildren = new ArrayList();
+    for (Object o : semanticChildren) {
+      if (allChildren.contains(o)) {
+        newSemanticChildren.add(o);
+      }
+    }
+    List newShortcutChildren = new ArrayList();
+    for (Object o : shortcutChildren) {
+      if (allChildren.contains(o)) {
+        newShortcutChildren.add(o);
+      }
+    }
+
+    //
+    // create a view for each remaining semantic element.
+    List createdViews = Collections.EMPTY_LIST;
+    if (!newSemanticChildren.isEmpty()) {
+      createdViews = createViews(newSemanticChildren);
+
+      for (int i = 0; i < createdViews.size(); i++) {
+        View createdView = (View) ((IAdaptable) createdViews.get(i))
+            .getAdapter(View.class);
+        if (createdView == null) {
+          String eMsg = NLS
+              .bind(
+                  DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_,
+                  newSemanticChildren.get(i));
+          IllegalStateException ise = new IllegalStateException(eMsg);
+          Log.error(DiagramUIPlugin.getInstance(), IStatus.ERROR,
+              eMsg, ise);
+          throw ise;
+        }
+      }
+    }
+
+    // the same thing, but with shortcuts
+    if (!newShortcutChildren.isEmpty()) {
+      createdViews = createShortcutViews(newShortcutChildren);
+
+      for (int i = 0; i < createdViews.size(); i++) {
+        View createdView = (View) ((IAdaptable) createdViews.get(i))
+            .getAdapter(View.class);
+        if (createdView == null) {
+          String eMsg = NLS
+              .bind(
+                  DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_
+                      + " [shortcut children]",
+                  newShortcutChildren.get(i));
+          IllegalStateException ise = new IllegalStateException(eMsg);
+          Log.error(DiagramUIPlugin.getInstance(), IStatus.ERROR,
+              eMsg, ise);
+          throw ise;
+        }
+      }
+    }
+
+    if (changed || createdViews.size() > 0)
+      postProcessRefreshSemantic(createdViews);
+
+    return createdViews;
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all of the shortcut children to add to this diagram.")»
+  protected List getShortcutChildrenList() {
+    View viewObject = (View) getHost().getModel();
+    List result = new LinkedList();
+    for (Iterator it = IamlDiagramUpdater
+        .getAllShortcutElements(viewObject).iterator(); it
+        .hasNext();) {
+      result.add(((IamlNodeDescriptor) it.next()).getModelElement());
+    }
+    return result;
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Like {@link #createViews(List)}, but creates Shortcut commands instead.\n\nCreates a <code>View</code> element for each of the supplied semantic elements.\n\n @return a list of {@link IAdaptable} that adapt to {@link View}.")»
+  protected final List createShortcutViews(List eObjects) {
+    List descriptors = new ArrayList();
+    Iterator elements = eObjects.iterator();
+    while (elements.hasNext()) {
+      EObject element = (EObject) elements.next();
+      if (element != null) {
+        CreateViewRequest.ViewDescriptor descriptor = getViewDescriptor(element);
+        descriptors.add(descriptor);
+      }
+    }
+
+    if (!descriptors.isEmpty()) {
+      //
+      // create the request
+      CreateViewRequest request = getCreateViewRequest(descriptors);
+
+      //
+      // get the command and execute it.
+      Command cmd = getCreateViewShortcutsCommand(request, descriptors,
+          host());
+      if (cmd != null && cmd.canExecute()) {
+        SetViewMutabilityCommand.makeMutable(
+            new EObjectAdapter(host().getNotationView())).execute();
+        executeCommand(cmd);
+        List adapters = (List) request.getNewObject();
+        return adapters;
+      }
+    }
+    return Collections.EMPTY_LIST;
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get the command to create both the element, and the shortcut decorator, on the request. Copied from {@link #getCreateViewCommand(CreateRequest)}.")»
+  protected Command getCreateViewShortcutsCommand(CreateRequest request,
+      List<CreateViewRequest.ViewDescriptor> descriptors,
+      IGraphicalEditPart host) {
+    Command command = getCreateViewCommand(request);
+
+    if (command != null) {
+      command = command.chain(new ICommandProxy(
+          new CreateShortcutDecorationsCommand(
+              // these parameters are guessed, but they work
+              host.getEditingDomain(), host.getPrimaryView(),
+              descriptors, VisibleThingEditPart.MODEL_ID)));
+
+    }
+
+    return command;
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] A simple command to add a shortcut decoration.")»
+  public class CreateShortcutDecorationsCommand extends
+      AbstractTransactionalCommand {
+
+    private List<CreateViewRequest.ViewDescriptor> myDescriptors;
+    private String modelId;
+
+    /**
+     * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
+     */
+    public CreateShortcutDecorationsCommand(
+        TransactionalEditingDomain editingDomain, View parentView,
+        List<CreateViewRequest.ViewDescriptor> viewDescriptors,
+        String modelId) {
+      super(editingDomain,
+          "Create Shortcuts", getWorkspaceFiles(parentView)); //$NON-NLS-1$
+      myDescriptors = viewDescriptors;
+      this.modelId = modelId;
+
+    }
+
+    /**
+     * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
+     */
+    public CreateShortcutDecorationsCommand(
+        TransactionalEditingDomain editingDomain, View parentView,
+        CreateViewRequest.ViewDescriptor viewDescriptor, String modelId) {
+      this(editingDomain, parentView, Collections
+          .singletonList(viewDescriptor), modelId);
+    }
+
+    protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+        IAdaptable info) throws ExecutionException {
+      for (CreateViewRequest.ViewDescriptor nextDescriptor : myDescriptors) {
+        View view = (View) nextDescriptor.getAdapter(View.class);
+        if (view != null && view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+          EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
+              .createEAnnotation();
+          shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
+          shortcutAnnotation.getDetails().put("modelID", modelId); //$NON-NLS-1$
+          view.getEAnnotations().add(shortcutAnnotation);
+        }
+      }
+      return CommandResult.newOKCommandResult();
+    }
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is no longer used.")»
+  private Collection refreshConnections() {
+    throw new UnsupportedOperationException(
+        "refreshConnections() is no longer used");
+  }
+  
+  «EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method isn't called anymore, because its only called by {@link #refreshConnections()}.")»
+  private Collection createConnections(Collection linkDescriptors,
+      Map domain2NotationMap) {
+    throw new UnsupportedOperationException(
+        "createConnections() is no longer supported");
+  }
+  
+«ENDDEFINE»

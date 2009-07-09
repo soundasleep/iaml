@@ -4,6 +4,8 @@
 «EXTENSION xpt::GenModelUtils»
 
 «AROUND additions FOR gmfgen::GenDiagramUpdater-»
+	«targetDef.proceed()»
+
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all the shortcut elements that need to be rendered for a particular view.")»
 	public static java.util.List getAllShortcutElements(org.eclipse.gmf.runtime.notation.View view) {
 		java.util.List elements = new java.util.ArrayList();
@@ -111,6 +113,4 @@
 
 		return result;
 	}
-
-	«targetDef.proceed()»
 «ENDAROUND»

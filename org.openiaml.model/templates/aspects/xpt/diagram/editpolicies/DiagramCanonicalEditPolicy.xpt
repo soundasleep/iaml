@@ -3,25 +3,702 @@
 «EXTENSION xpt::diagram::Utils»
 «EXTENSION xpt::GenModelUtils»
 
-«AROUND disabled_caseSemanticElement FOR gmfgen::GenCommonBase-»
-«EXPAND xpt::Common::caseVisualID» {
-	if (!domain2NotationMap.containsKey(view.getElement())) {
-«REM»
-	Processing each domain element only once. Prevents us from 
-	having duplicated links if a shortcut to one of the "main"
-	diagram elements present on diagram.
-«ENDREM»«-»
-		result.addAll(«EXPAND xpt::diagram::updater::DiagramUpdater::getContainedLinksMethodCall»(view));
-		
-		// jevon hack
-		result.addAll(org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater.getAllRelatedIamlLinks(view.getElement()));
+«AROUND getSemanticConnectionsList FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get a list of all EObjects in the current diagram that need to be made into Edges. In particular this will go outside simply direct containment.")»
+	protected java.util.List getSemanticConnectionsList() {
+		org.eclipse.gmf.runtime.notation.View viewObject = (org.eclipse.gmf.runtime.notation.View) getHost().getModel();
+		java.util.List result = new java.util.LinkedList();
+		for (java.util.Iterator it = IamlDiagramUpdater.getAllChildrenEdges(viewObject)
+				.iterator(); it.hasNext();) {
+			result.add(((org.eclipse.emf.ecore.EObject) it.next()));
+		}
+		return result;
 	}
-	if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { «EXPAND xpt::Common::nonNLS»
-«REM»
-	Storing element view or replacing shortcut by the "original" element view.
-«ENDREM»«-»
-		domain2NotationMap.put(view.getElement(), view);
-	}	
-	break;	
-}
+«ENDAROUND»
+
+«AROUND getSourceElement FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
+	protected org.eclipse.emf.ecore.EObject getSourceElement(org.eclipse.emf.ecore.EObject relationship) {
+		// NOTE: model-specific
+		if (relationship instanceof org.openiaml.model.model.WireEdge) {
+			return ((org.openiaml.model.model.WireEdge) relationship).getFrom();
+		}
+		return null;
+	}
+«ENDAROUND»
+
+«AROUND getTargetElement FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
+	protected org.eclipse.emf.ecore.EObject getTargetElement(org.eclipse.emf.ecore.EObject relationship) {
+		// NOTE: model-specific
+		if (relationship instanceof org.openiaml.model.model.WireEdge) {
+			return ((org.openiaml.model.model.WireEdge) relationship).getTo();
+		}
+		return null;
+	}
+«ENDAROUND»
+
+«AROUND additions FOR gmfgen::GenDiagram»
+	«targetDef.proceed()»
+	
+	«REM»Can we split up the Javadoc comments into [..." + \n + "...]?«ENDREM»
+
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We add additional logic to findEditPartForElement. The original method would dive straight into the ancestor of the view, even though in this case, host() returns the container of the actual EditPart we might be looking for. Otherwise it asks the parent method for the right result.\n\n@return an editpart; <tt>null</tt> if non could be found.")»
+	protected org.eclipse.gef.EditPart findEditPartForElement(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject context,
+			java.util.List parts) {
+		org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart host = (org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart) getHost();
+		for (Object ep : host.getConnections()) {
+			org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart cep = (org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart) ep;
+			if (element.equals(cep.resolveSemanticElement())) {
+				// we found the edit part already
+				return cep;
+			}
+		}
+
+		// otherwise, consult the parent
+		return super.findEditPartForElement(element, context, parts);
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] If we are trying to create a connection to an Edge, this method will return false, because the edge.getParent() = the root diagram window, not the XXXEditPart that were actually after.\n\nSo, we add some special logic to an otherwise direct copy, to assume we _can_ create connections between ConnectionEditParts, even if they dont have a CanonicalEditPolicy. \n\n @see CanonicalConnectionEditPolicy#canCreateConnection(EditPart, EditPart)")»
+	protected boolean canCreateConnection(org.eclipse.gef.EditPart sep, org.eclipse.gef.EditPart tep,
+			org.eclipse.emf.ecore.EObject connection) {
+		if (sep != null && sep.isActive() && tep != null && tep.isActive()) {
+
+			org.eclipse.gmf.runtime.notation.View src = (org.eclipse.gmf.runtime.notation.View) sep.getAdapter(org.eclipse.gmf.runtime.notation.View.class);
+			org.eclipse.gmf.runtime.notation.View tgt = (org.eclipse.gmf.runtime.notation.View) tep.getAdapter(org.eclipse.gmf.runtime.notation.View.class);
+			if (src != null && tgt != null) {
+
+				return ((sep instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart) || sep.getParent()
+						.getEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CANONICAL_ROLE) != null)
+						&& ((tep instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart) || tep
+								.getParent().getEditPolicy(
+										org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CANONICAL_ROLE) != null);
+			}
+		}
+		return false;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We create our own method to create connection views, so we can wrap the elementAdapter with another layer - IElementTypeElementAdapter - which lets us supply IElementType information to the adapter. Otherwise adapter.getAdapter(IElementType.class) will always return null. Otherwise, this method is copied directly from createConnectionView. \n\n Creates a connection view facade element for the supplied semantic element. An empty string is used as the default factory hint. \n\n @see #createConnectionView(EObject, int) \n @see IElementTypeElementAdapter")»
+	protected org.eclipse.gmf.runtime.notation.Edge myCreateConnectionView(org.eclipse.emf.ecore.EObject connection, int index) {
+		org.eclipse.gef.EditPart sep = getSourceEditPartFor(connection);
+		org.eclipse.gef.EditPart tep = getTargetEditPartFor(connection);
+		if (!canCreateConnection(sep, tep, connection)) {
+			return null;
+		}
+
+		org.eclipse.gmf.runtime.notation.View sView = (org.eclipse.gmf.runtime.notation.View) sep.getModel();
+		org.eclipse.gmf.runtime.notation.View tView = (org.eclipse.gmf.runtime.notation.View) tep.getModel();
+		org.eclipse.gmf.runtime.notation.Edge model = null;
+		String factoryHint = getDefaultFactoryHint();
+		// Jevon change: use a different adapter so we can actually get IElementTypes
+		org.eclipse.core.runtime.IAdaptable elementAdapter = new IElementTypeElementAdapter(connection,
+				factoryHint);
+		org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest ccr = getCreateConnectionViewRequest(
+				elementAdapter, getFactoryHint(elementAdapter, factoryHint),
+				index);
+
+		ccr.setType(org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_CONNECTION_START);
+		ccr.setSourceEditPart(sep);
+		getCreateViewCommand(ccr); // sep.getCommand(ccr); //prime the command
+		ccr.setTargetEditPart(tep);
+		ccr.setType(org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_CONNECTION_END);
+		org.eclipse.gef.commands.Command cmd = getCreateViewCommand(ccr); // tep.getCommand(ccr);
+		if (cmd != null && cmd.canExecute()) {
+			java.util.List viewAdapters = new java.util.ArrayList();
+			viewAdapters.add(new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter(((org.eclipse.gmf.runtime.notation.View) host().getModel())
+					.getDiagram()));
+			viewAdapters.add(new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter(sView));
+			viewAdapters.add(new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter(tView));
+
+			org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand.makeMutable(viewAdapters).execute();
+
+			executeCommand(cmd);
+			org.eclipse.core.runtime.IAdaptable adapter = (org.eclipse.core.runtime.IAdaptable) ccr.getNewObject();
+			org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand.makeMutable(adapter).execute();
+			model = (org.eclipse.gmf.runtime.notation.Edge) adapter.getAdapter(org.eclipse.gmf.runtime.notation.Edge.class);
+			if (model == null) {
+				String eMsg = org.eclipse.osgi.util.NLS
+						.bind(
+								org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_,
+								connection);
+				java.lang.IllegalStateException ise = new java.lang.IllegalStateException(eMsg);
+				org.eclipse.gmf.runtime.common.core.util.Log.error(org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIPlugin.getInstance(), org.eclipse.core.runtime.IStatus.ERROR, eMsg,
+						ise);
+				throw ise;
+			}
+		}
+		return model;
+	}
+
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We wrap org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter to also adapt to IElementType.class requests, so we can actually create edges in our current editor. \n\n This is also copied from the other adapter that adapts it to String.class.")»
+	public static class IElementTypeElementAdapter extends org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter {
+		private String _hint;
+
+		/**
+		 * constructor
+		 * @param element
+		 * @param hint
+		 */
+		public IElementTypeElementAdapter(org.eclipse.emf.ecore.EObject element, String hint) {
+			super(element);
+			_hint = hint;
+		}
+
+		/** Adds both <code>String.class</tt> and <code>IElementType.class</tt> adaptablity. */
+		public Object getAdapter(Class adapter) {
+			if (adapter.equals(String.class)) {
+				return _hint;
+			}
+			// my hack: we just get the diagram editor to get the IElementType directly
+			if (adapter.equals(org.eclipse.gmf.runtime.emf.type.core.IElementType.class)) {
+				// TODO currently doesn't switch to the correct ElementTypes provider
+				return org.openiaml.model.model.diagram.visual.providers.IamlElementTypes
+						.getElementType(((org.eclipse.emf.ecore.EObject) getRealObject()).eClass());
+			}
+			return super.getAdapter(adapter);
+		}
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Return a create connection view request. \n\n Copied directly, because the original method is private.")»
+	private org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest getCreateConnectionViewRequest(
+			org.eclipse.core.runtime.IAdaptable elementAdapter, String hint, int index) {
+		return new org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest(getConnectionViewDescriptor(
+				elementAdapter, hint, index));
+	}
+
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Return a connection view descriptor. \n\n Copied directly, because the original method is private.")»	
+	private org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest.ConnectionViewDescriptor getConnectionViewDescriptor(
+			org.eclipse.core.runtime.IAdaptable elementAdapter, String hint, int index) {
+		return new org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest.ConnectionViewDescriptor(elementAdapter, hint, index, false,
+				((org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart) getHost()).getDiagramPreferencesHint());
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Even though the method \"should not be overridden\", we do so anyway.\n\n @see #refreshSemanticConnections()")»
+	protected java.util.List myRefreshSemanticConnections() {
+
+		// lets just get the edges (of type org.eclipse.emf.ecore.EObject)
+		java.util.List connections = getSemanticConnectionsList();
+		java.util.List toDelete = new java.util.ArrayList();
+
+		// remove duplicate links that shouldn't be there
+		for (Object obj : ((org.eclipse.gmf.runtime.notation.Diagram) ((org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart) host()).getModel())
+				.getEdges()) {
+			Object found = null;
+			org.eclipse.gmf.runtime.notation.Edge edge = (org.eclipse.gmf.runtime.notation.Edge) obj;
+			for (Object connection : connections) {
+				if (edge.getElement().equals(connection)) {
+					// it's OK
+					// this logic also make sure that if we have multiple edges for the same object,
+					// then we will keep one and delete the rest
+					found = connection;
+					break;
+				}
+			}
+
+			if (found != null) {
+				connections.remove(found);
+			}
+
+			// if it wasnt found, we need to delete it
+			if (found == null) {
+				toDelete.add(edge);
+			}
+
+		}
+
+		// delete these duplicate views
+		deleteViews(toDelete.iterator());
+
+		// remaining edges in 'connections' should be added to diagram
+
+		// create a view for each remaining semantic element.
+		java.util.List viewDescriptors = new java.util.ArrayList();
+		java.util.Iterator semanticChildrenIT = connections.iterator();
+		while (semanticChildrenIT.hasNext()) {
+			org.eclipse.emf.ecore.EObject semanticChild = (org.eclipse.emf.ecore.EObject) semanticChildrenIT.next();
+			//Edge viewChild = createConnectionView(semanticChild, ViewUtil.APPEND);
+			org.eclipse.gmf.runtime.notation.Edge viewChild = myCreateConnectionView(semanticChild,
+					org.eclipse.gmf.runtime.diagram.core.util.ViewUtil.APPEND);
+			if (viewChild != null) {
+				viewDescriptors.add(new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter(viewChild));
+			}
+		}
+
+		/*
+		 * This doesn't seem to do anything.
+		 */
+		//makeViewsMutable(viewDescriptors);
+		/*
+		 * This doesn't seem to do anything either...
+		 */
+		// now refresh all the connection containers to update the editparts
+		/*
+		HashSet ends = new HashSet();
+		ListIterator li = viewDescriptors.listIterator();
+		while (li.hasNext()) {
+			org.eclipse.core.runtime.IAdaptable adaptable = (org.eclipse.core.runtime.IAdaptable) li.next();
+			org.eclipse.gmf.runtime.notation.Edge edge = (org.eclipse.gmf.runtime.notation.Edge) adaptable.getAdapter(org.eclipse.gmf.runtime.notation.Edge.class);
+			EditPart sourceEP = getEditPartFor(edge.getSource(), edge);
+			if (sourceEP != null) {
+				ends.add(sourceEP);
+			}
+			EditPart targetEP = getEditPartFor(edge.getTarget(), edge);
+			if (targetEP != null) {
+				ends.add(targetEP);
+			}
+		}*/
+
+		/*
+		 * Nor does this...
+		 */
+		/*
+		for (java.util.Iterator iter = ends.iterator(); iter.hasNext();) {
+			EditPart end = (EditPart) iter.next();
+			end.refresh();
+		}
+		 */
+
+		return viewDescriptors;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Cycle through the diagram to get rid of any duplicate edges, i.e. edges that refer to the same EObject.")»
+	protected void removeDuplicateEdges() {
+		java.util.List objectsFound = new java.util.ArrayList();
+		java.util.List toDelete = new java.util.ArrayList();
+		for (Object obj : ((org.eclipse.gmf.runtime.notation.Diagram) ((org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart) host()).getModel())
+				.getEdges()) {
+			Object found = null;
+			org.eclipse.gmf.runtime.notation.Edge edge = (org.eclipse.gmf.runtime.notation.Edge) obj;
+			if (objectsFound.contains(edge.getElement())) {
+				// we need to delete this edge
+				toDelete.add(edge);
+			} else {
+				// it's a unique object
+				objectsFound.add(edge.getElement());
+			}
+
+		}
+
+		deleteViews(toDelete.iterator());
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly, except we add a null check.\n\n@see CanonicalEditPolicy#makeViewsImmutable(java.util.List)")»
+	protected void makeViewsImmutableWithNullCheck(java.util.List createdViews) {
+		if (createdViews != null && !createdViews.isEmpty()) {
+			// uses my own method
+			addListenersToContainersWithNullCheck(createdViews);
+
+			java.util.List viewAdapters = prepareAdapterList(createdViews);
+			org.eclipse.gef.commands.Command immutable = org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand
+					.makeImmutable(viewAdapters);
+			AsyncCommand ac = new AsyncCommand(immutable);
+			ac.execute();
+		}
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied from {@link CanonicalEditPolicy#addListenersToContainers()}, except this method prevents some NullPointerExceptions from being thrown.")»
+	private void addListenersToContainersWithNullCheck(java.util.List createdViews) {
+		org.eclipse.emf.common.util.UniqueEList list = new org.eclipse.emf.common.util.UniqueEList();
+		java.util.ListIterator li = createdViews.listIterator();
+		while (li.hasNext()) {
+			Object obj = li.next();
+			if (obj instanceof org.eclipse.core.runtime.IAdaptable) {
+				org.eclipse.gmf.runtime.notation.View view = (org.eclipse.gmf.runtime.notation.View) ((org.eclipse.core.runtime.IAdaptable) obj).getAdapter(org.eclipse.gmf.runtime.notation.View.class);
+				if (view != null)
+					list.add(view.eContainer());
+			}
+		}
+
+		java.util.ListIterator liContainers = list.listIterator();
+		while (liContainers.hasNext()) {
+			org.eclipse.gmf.runtime.notation.View containerView = (org.eclipse.gmf.runtime.notation.View) liContainers.next();
+			if (containerView != null) { // jevon change: add a null check to prevent NPEs
+				addListenerFilter(
+						"NotationListener_Container" + containerView.toString(), //$NON-NLS-1$
+						this, containerView, org.eclipse.gmf.runtime.notation.NotationPackage.eINSTANCE
+								.getView_PersistedChildren());
+			}
+		}
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is copied directly from {@link CanonicalEditPolicy#prepareAdapterList(java.util.List)}, since the original method is marked private.")»
+	private java.util.List prepareAdapterList(java.util.List createdViews) {
+		java.util.List viewAdapters = new java.util.ArrayList();
+		viewAdapters.add(host());
+		java.util.ListIterator li = createdViews.listIterator();
+		while (li.hasNext()) {
+			Object obj = li.next();
+			if (obj != null) {
+				if (!(obj instanceof org.eclipse.core.runtime.IAdaptable) && obj instanceof org.eclipse.emf.ecore.EObject)
+					viewAdapters.add(new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter((org.eclipse.emf.ecore.EObject) obj));
+				else
+					viewAdapters.add(obj);
+			}
+		}
+		return viewAdapters;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly from CanonicalEditPolicy.\n\nRuns the supplied commands asyncronously.")»
+	protected static class AsyncCommand extends org.eclipse.gef.commands.Command {
+		private final org.eclipse.gef.commands.CompoundCommand _cc;
+
+		/**
+		 * constructor
+		 * @param label this command label
+		 */
+		public AsyncCommand(String label) {
+			super(label);
+			_cc = new org.eclipse.gef.commands.CompoundCommand(label);
+		}
+
+		/**
+		 * constructor
+		 * @param cmd the command
+		 */
+		public AsyncCommand(org.eclipse.gef.commands.Command cmd) {
+			this(cmd.getLabel());
+			add(cmd);
+		}
+
+		/**
+		 * constructor
+		 * @param cmd the command
+		 */
+		public AsyncCommand(org.eclipse.gmf.runtime.common.core.command.ICommand cmd) {
+			this(cmd.getLabel());
+			add(cmd);
+		}
+
+		/**
+		 * Executes the command asynchonously. 
+		 * Calls {@link #doExecute}.
+		 */
+		public final void execute() {
+			// do not use Display.getCurrent() this mthod could be invoked
+			// on a non ui thread
+			org.eclipse.ui.PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					AsyncCommand.this.doExecute();
+				}
+			});
+		}
+
+		/**
+		 * Return the command to be executed asynchronously.
+		 * @return the command
+		 */
+		protected final org.eclipse.gef.commands.CompoundCommand getCommand() {
+			return _cc;
+		}
+
+		/** Executes the command. */
+		protected void doExecute() {
+			getCommand().execute();
+		}
+
+		/**
+		 * Add supplied command to the list of commands to be executed.
+		 * @param cmd command to add
+		 */
+		public void add(org.eclipse.gmf.runtime.common.core.command.ICommand cmd) {
+			_cc.add(new org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy(cmd));
+		}
+
+		/**
+		 * Add supplied command to the list of commands to be executed.
+		 * @param cmd the command to add
+		 */
+		public void add(org.eclipse.gef.commands.Command cmd) {
+			_cc.add(cmd);
+		}
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Extends {@link #refreshSemanticChildren()} to handle shortcuts too.\n\n@see #getShortcutChildrenList()")»
+	protected final java.util.List myRefreshSemanticChildren() {
+
+		// Don't try to refresh children if the semantic element
+		// cannot be resolved.
+		if (resolveSemanticElement() == null) {
+			return java.util.Collections.EMPTY_LIST;
+		}
+
+		//
+		// current views
+		java.util.List viewChildren = getViewChildren();
+		java.util.List semanticChildren = new java.util.ArrayList(getSemanticChildrenList());
+		java.util.List shortcutChildren = new java.util.ArrayList(getShortcutChildrenList());
+
+		// both lists are of EObjects
+		shortcutChildren.removeAll(semanticChildren);
+
+		java.util.List allChildren = new java.util.ArrayList();
+		allChildren.addAll(semanticChildren);
+		allChildren.addAll(shortcutChildren);
+
+		// this method changes [allChildren] by removing elements within it
+		// i.e. it removes any views in the list that are already in the view
+		java.util.List orphaned = cleanCanonicalSemanticChildren(viewChildren,
+				allChildren);
+		boolean changed = false;
+		//
+		// delete all the remaining oprphaned views
+		if (!orphaned.isEmpty()) {
+			changed = deleteViews(orphaned.iterator());
+		}
+
+		// so, we need to only select elements within the semanticChildren that are
+		// also inside allChildren
+		java.util.List newSemanticChildren = new java.util.ArrayList();
+		for (Object o : semanticChildren) {
+			if (allChildren.contains(o)) {
+				newSemanticChildren.add(o);
+			}
+		}
+		java.util.List newShortcutChildren = new java.util.ArrayList();
+		for (Object o : shortcutChildren) {
+			if (allChildren.contains(o)) {
+				newShortcutChildren.add(o);
+			}
+		}
+
+		//
+		// create a view for each remaining semantic element.
+		java.util.List createdViews = java.util.Collections.EMPTY_LIST;
+		if (!newSemanticChildren.isEmpty()) {
+			createdViews = createViews(newSemanticChildren);
+
+			for (int i = 0; i < createdViews.size(); i++) {
+				org.eclipse.gmf.runtime.notation.View createdView = (org.eclipse.gmf.runtime.notation.View) ((org.eclipse.core.runtime.IAdaptable) createdViews.get(i))
+						.getAdapter(org.eclipse.gmf.runtime.notation.View.class);
+				if (createdView == null) {
+					String eMsg = org.eclipse.osgi.util.NLS
+							.bind(
+									org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_,
+									newSemanticChildren.get(i));
+					java.lang.IllegalStateException ise = new java.lang.IllegalStateException(eMsg);
+					org.eclipse.gmf.runtime.common.core.util.Log.error(org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIPlugin.getInstance(), org.eclipse.core.runtime.IStatus.ERROR,
+							eMsg, ise);
+					throw ise;
+				}
+			}
+		}
+
+		// the same thing, but with shortcuts
+		if (!newShortcutChildren.isEmpty()) {
+			createdViews = createShortcutViews(newShortcutChildren);
+
+			for (int i = 0; i < createdViews.size(); i++) {
+				org.eclipse.gmf.runtime.notation.View createdView = (org.eclipse.gmf.runtime.notation.View) ((org.eclipse.core.runtime.IAdaptable) createdViews.get(i))
+						.getAdapter(org.eclipse.gmf.runtime.notation.View.class);
+				if (createdView == null) {
+					String eMsg = org.eclipse.osgi.util.NLS
+							.bind(
+									org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages.CanonicalEditPolicy_create_view_failed_ERROR_
+											+ " [shortcut children]",
+									newShortcutChildren.get(i));
+					java.lang.IllegalStateException ise = new java.lang.IllegalStateException(eMsg);
+					org.eclipse.gmf.runtime.common.core.util.Log.error(org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIPlugin.getInstance(), org.eclipse.core.runtime.IStatus.ERROR,
+							eMsg, ise);
+					throw ise;
+				}
+			}
+		}
+
+		if (changed || createdViews.size() > 0)
+			postProcessRefreshSemantic(createdViews);
+
+		return createdViews;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all of the shortcut children to add to this diagram.")»
+	protected java.util.List getShortcutChildrenList() {
+		org.eclipse.gmf.runtime.notation.View viewObject = (org.eclipse.gmf.runtime.notation.View) getHost().getModel();
+		java.util.List result = new java.util.LinkedList();
+		// TODO link this to the actual model
+		for (java.util.Iterator it = org.openiaml.model.model.diagram.visual.part.IamlDiagramUpdater
+				.getAllShortcutElements(viewObject).iterator(); it
+				.hasNext();) {
+			// NOTE model-specific
+			// TODO link this to the actual model
+			result.add(((org.openiaml.model.model.diagram.visual.part.IamlNodeDescriptor) it.next()).getModelElement());
+		}
+		return result;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Like {@link #createViews(java.util.List)}, but creates Shortcut commands instead.\n\nCreates a <code>View</code> element for each of the supplied semantic elements.\n\n @return a list of {@link org.eclipse.core.runtime.IAdaptable} that adapt to {@link View}.")»
+	protected final java.util.List createShortcutViews(java.util.List eObjects) {
+		java.util.List descriptors = new java.util.ArrayList();
+		java.util.Iterator elements = eObjects.iterator();
+		while (elements.hasNext()) {
+			org.eclipse.emf.ecore.EObject element = (org.eclipse.emf.ecore.EObject) elements.next();
+			if (element != null) {
+				org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor descriptor = getViewDescriptor(element);
+				descriptors.add(descriptor);
+			}
+		}
+
+		if (!descriptors.isEmpty()) {
+			//
+			// create the request
+			org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest request = getCreateViewRequest(descriptors);
+
+			//
+			// get the command and execute it.
+			org.eclipse.gef.commands.Command cmd = getCreateViewShortcutsCommand(request, descriptors,
+					host());
+			if (cmd != null && cmd.canExecute()) {
+				org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand.makeMutable(
+						new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter(host().getNotationView())).execute();
+				executeCommand(cmd);
+				java.util.List adapters = (java.util.List) request.getNewObject();
+				return adapters;
+			}
+		}
+		return java.util.Collections.EMPTY_LIST;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get the command to create both the element, and the shortcut decorator, on the request. Copied from {@link #getCreateViewCommand(CreateRequest)}.")»
+	protected org.eclipse.gef.commands.Command getCreateViewShortcutsCommand(org.eclipse.gef.requests.CreateRequest request,
+			java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> descriptors,
+			org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart host) {
+		org.eclipse.gef.commands.Command command = getCreateViewCommand(request);
+
+		if (command != null) {
+			command = command.chain(new org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy(
+					new CreateShortcutDecorationsCommand(
+							// these parameters are guessed, but they work
+							// TODO move VisibleThingEditPart to actual model
+							host.getEditingDomain(), host.getPrimaryView(),
+							descriptors, org.openiaml.model.model.diagram.visual.edit.parts.VisibleThingEditPart.MODEL_ID)));
+
+		}
+
+		return command;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] A simple command to add a shortcut decoration.")»
+	public class CreateShortcutDecorationsCommand extends
+			org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand {
+
+		private java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> myDescriptors;
+		private String modelId;
+
+		/**
+		 * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
+		 */
+		public CreateShortcutDecorationsCommand(
+				org.eclipse.emf.transaction.TransactionalEditingDomain editingDomain, org.eclipse.gmf.runtime.notation.View parentView,
+				java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> viewDescriptors,
+				String modelId) {
+			super(editingDomain,
+					"Create Shortcuts", getWorkspaceFiles(parentView)); //$NON-NLS-1$
+			myDescriptors = viewDescriptors;
+			this.modelId = modelId;
+
+		}
+
+		/**
+		 * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
+		 */
+		public CreateShortcutDecorationsCommand(
+				org.eclipse.emf.transaction.TransactionalEditingDomain editingDomain, org.eclipse.gmf.runtime.notation.View parentView,
+				org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor viewDescriptor, String modelId) {
+			this(editingDomain, parentView, Collections
+					.singletonList(viewDescriptor), modelId);
+		}
+
+		protected org.eclipse.gmf.runtime.common.core.command.CommandResult doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor monitor,
+				org.eclipse.core.runtime.IAdaptable info) throws org.eclipse.core.commands.ExecutionException {
+			for (org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor nextDescriptor : myDescriptors) {
+				org.eclipse.gmf.runtime.notation.View view = (org.eclipse.gmf.runtime.notation.View) nextDescriptor.getAdapter(org.eclipse.gmf.runtime.notation.View.class);
+				if (view != null && view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+					org.eclipse.emf.ecore.EAnnotation shortcutAnnotation = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE
+							.createEAnnotation();
+					shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
+					shortcutAnnotation.getDetails().put("modelID", modelId); //$NON-NLS-1$
+					view.getEAnnotations().add(shortcutAnnotation);
+				}
+			}
+			return org.eclipse.gmf.runtime.common.core.command.CommandResult.newOKCommandResult();
+		}
+	}
+
+«ENDAROUND»
+
+«AROUND createConnections FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method isnt called anymore, because its only called by {@link #refreshConnections()}.")»
+	private java.util.Collection createConnections(java.util.Collection linkDescriptors,
+			java.util.Map domain2NotationMap) {
+		throw new java.lang.UnsupportedOperationException(
+				"createConnections() is no longer supported");
+	}
+«ENDAROUND»
+
+«AROUND refreshConnections FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is no longer used.")»
+	private java.util.Collection refreshConnections() {
+		throw new java.lang.UnsupportedOperationException(
+				"refreshConnections() is no longer used");
+	}
+«ENDAROUND»
+
+«AROUND refreshSemantic FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We override the fundamental method of refreshing the diagram - refreshSemantic() - so that we can select not only directly contained elements, but also those referenced in shortcuts.")»
+	protected void refreshSemantic() {
+		java.util.List createdViews = new java.util.LinkedList();
+
+		/*
+		 * I use my own method to select all the Nodes to render in the diagram.
+		 * @see #refreshSemanticChildren()
+		 */
+		// createdViews.addAll(refreshSemanticChildren());
+		createdViews.addAll(myRefreshSemanticChildren());
+		java.util.List createdConnectionViews = new java.util.LinkedList();
+
+		/*
+		 * I use my own method to select all the Edges to render in the Diagram.
+		 * @see #refreshSemanticConnections()
+		 */
+		// createdConnectionViews.addAll(refreshSemanticConnections());
+		createdConnectionViews.addAll(myRefreshSemanticConnections());
+
+		/*
+		 * Using refreshConnections() will set some Edges eContainer=null, which then throws
+		 * a NullPointerException in:
+		 * 
+		 * java.lang.NullPointerException
+		 *  	at org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy.addListenersToContainers(CanonicalEditPolicy.java:1032)
+		 *   	at org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy.makeViewsImmutable(CanonicalEditPolicy.java:1008)
+		 *   
+		 * Plus, I'm not sure this method is even necessary anymore... this is the only
+		 * method that calls it.
+		 */
+		//createdConnectionViews.addAll(refreshConnections());
+		// not sure that this actually does anything
+		if (createdViews.size() > 1) {
+			// perform a layout of the container
+			org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand layoutCmd = new org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand(host()
+					.getEditingDomain(), createdViews, host());
+			executeCommand(new org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy(layoutCmd));
+		}
+
+		// get rid of any duplicate edges
+		removeDuplicateEdges();
+
+		createdViews.addAll(createdConnectionViews);
+
+		// a hack: remove all 'null' elements in the list
+		/*
+		while (createdViews.contains(null)) {
+			createdViews.remove(null);
+		}*/
+
+		/*
+		 * The default makeViewsImmutable() can throw NullPointerExceptions; my modification
+		 * adds a null check.
+		 */
+		//makeViewsImmutable(createdViews);
+		makeViewsImmutableWithNullCheck(createdViews);
+
+	}
 «ENDAROUND»

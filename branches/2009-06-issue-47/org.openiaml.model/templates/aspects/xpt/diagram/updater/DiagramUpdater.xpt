@@ -95,10 +95,13 @@
 		// that are not the original object source
 		// NOTE: model-specific
 		for (org.openiaml.model.model.WireEdge wire : outEdges) {
-			if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
-				continue;
-			if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
-				continue;
+			// only look into these edges if we can actually render them...
+			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
+				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
+					continue;
+				if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
+					continue;
+			}
 		}
 
 		return result;
@@ -119,10 +122,13 @@
 		// that are not the original object source
 		// NOTE: model-specific
 		for (org.openiaml.model.model.ExecutionEdge wire : outEdges) {
-			if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
-				continue;
-			if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
-				continue;
+			// only look into these edges if we can actually render them...
+			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
+				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
+					continue;
+				if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
+					continue;
+			}
 		}
 
 		return result;
@@ -143,10 +149,13 @@
 		// that are not the original object source
 		// NOTE: model-specific
 		for (org.openiaml.model.model.DataFlowEdge wire : outEdges) {
-			if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
-				continue;
-			if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
-				continue;
+			// only look into these edges if we can actually render them...
+			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
+				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
+					continue;
+				if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
+					continue;
+			}
 		}
 
 		return result;

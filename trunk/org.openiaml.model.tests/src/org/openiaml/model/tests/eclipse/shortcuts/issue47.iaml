@@ -49,7 +49,7 @@
       </operations>
       <eventTriggers generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.25" name="access" outEdges="wires.12252e52583.6"/>
       <eventTriggers generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.26" name="edit" outEdges="wires.12252e52583.9"/>
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12252e52583.1" from="visual.12252e52574.a" to="visual.12252e52574.8" name="sycn" generatedElements="wires.12252e52583.6 wires.12252e52583.7 wires.12252e52583.8 wires.12252e52583.9 wires.12252e52583.a wires.12252e52583.b wires.12252e52583.c wires.12252e52583.d">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12252e52583.1" from="visual.12252e52574.a" to="visual.12252e52574.8" name="sync" generatedElements="wires.12252e52583.6 wires.12252e52583.7 wires.12252e52583.8 wires.12252e52583.9 wires.12252e52583.a wires.12252e52583.b wires.12252e52583.c wires.12252e52583.d">
         <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.6" from="model.12252e52506.25" to="model.12252e52506.23" name="run" inEdges="wires.12252e52583.d"/>
         <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.7" from="model.12252e52506.2b" to="model.12252e52506.24" name="run" inEdges="wires.12252e52583.c"/>
         <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.8" from="model.12252e52506.2a" to="model.12252e52506.28" name="run" inEdges="wires.12252e52583.b"/>

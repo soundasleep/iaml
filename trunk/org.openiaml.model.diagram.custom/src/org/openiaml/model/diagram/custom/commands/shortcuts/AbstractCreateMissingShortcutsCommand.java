@@ -8,12 +8,18 @@ import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
+import org.eclipse.gmf.runtime.diagram.core.commands.SetConnectionEndsCommand;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.commands.CreateCommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
@@ -22,6 +28,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
@@ -32,6 +39,8 @@ import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
+import org.openiaml.model.model.diagram.visual.providers.IamlElementTypes;
 
 /**
  * This class is now abstract so that we may have multiple similar commands
@@ -81,8 +90,10 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		
 		// get the command to create the shortcuts
 		// this will also execute the commands
-		getCreateShortcutsCommand();
-
+		IStatus result = getCreateShortcutsCommand();
+		if (!result.isOK())
+			Platform.getLog(getDefaultPlugin().getBundle()).log(result);
+			
 		// after creating everything, issue a new command: refresh elements
 		/*
 
@@ -100,6 +111,17 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		return CommandResult.newOKCommandResult();
 	}
 
+	/**
+	 * Get the default editor plugin, which we will use to log errors and the like.
+	 * 
+	 * TODO remove this direct reference and remove IamlDiagramEditorPlugin from the plugin.xml.
+	 * 
+	 * @return
+	 */
+	public IamlDiagramEditorPlugin getDefaultPlugin() {
+		return IamlDiagramEditorPlugin.getInstance();
+	}
+	
 	/**
 	 * For a given EObject, get all the WireEdges that go out of it
 	 * 
@@ -183,13 +205,78 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 	 */
 	protected abstract String getEditPartModelId();
 	
+	public class IStatusCollector {
+		
+		private List<IStatus> statuses = new ArrayList<IStatus>();
+		private int maxSeverity = IStatus.OK;
+		
+		/**
+		 * If the given IStatus is not OK, wrap another
+		 * message around it.
+		 * 
+		 * @see #add(IStatus)
+		 * @param status
+		 * @param message
+		 */
+		public void add(IStatus status, String message) {
+			if (!status.isOK()) {
+				add(
+					new MultiStatus(
+						status.getPlugin(),
+						status.getCode(),
+						new IStatus[] { status },
+						message + ": " + status.getMessage(),
+						status.getException())
+				);
+			}
+		}
+		
+		/**
+		 * Add this status to the list of results, but only
+		 * if the status is not OK.
+		 * 
+		 * @see IStatus#isOK()
+		 * @param status
+		 */
+		public void add(IStatus status) {
+			if (!status.isOK()) {
+				statuses.add(status);
+				if (status.getSeverity() > maxSeverity) {
+					maxSeverity = status.getSeverity();
+				}
+			}
+		}
+		
+		public IStatus getStatus() {
+			if (statuses.isEmpty())
+				return Status.OK_STATUS;
+			
+			return new MultiStatus(
+					"org.openiaml.model.diagram.custom", 
+					42, 
+					statuses.toArray(new IStatus[]{}), 
+					"Some errors occured, first: " + statuses.get(0).getMessage(), 
+					statuses.get(0).getException());
+		}
+		
+	}
+	
 	/**
 	 * Generate the command for creating the shortcuts.
+	 *
+	 * TODO important: sum up all the IStatus results from all commands, and return this
+	 * 
 	 * @throws ExecutionException 
 	 */
-	protected void getCreateShortcutsCommand() throws ExecutionException {
+	protected IStatus getCreateShortcutsCommand() throws ExecutionException {
+		
+		// temporary hack to stop shortcuts being created at all
+		if (true)
+			return Status.OK_STATUS;
 
 		Assert.isTrue(selectedElement.getModel() instanceof Diagram);
+		
+		IStatusCollector status = new IStatusCollector();
 		
 		// get all the nodes in the model tree
 		final Diagram rootView = (Diagram) selectedElement.getModel();
@@ -228,9 +315,20 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		// create a shortcut displaying it
 		// we now have a list of Actions that we want to add to the current view
 		for (EObject newObject : toAdd) {
+			/*
+			 * If we set semanticHint == "" rather than null, then shortcut
+			 * nodes aren't created at all.
+			 */
+			
 			CreateViewRequest.ViewDescriptor viewDescriptor = new CreateViewRequest.ViewDescriptor(
-					new EObjectAdapter(newObject), Node.class, null,  // tried null->"" with no effect
+					new EObjectAdapter(newObject), Node.class, null,
 					prefHint);
+					
+			/*
+			CreateViewRequest.ViewDescriptor viewDescriptor = new CreateViewRequest.ViewDescriptor(
+					new MyEObjectAdapterForViews(newObject, selectedElement), Node.class, "Iaml_Visual",
+					prefHint);
+					*/
 			
 			// create element
 			command = new CreateCommand(
@@ -241,7 +339,7 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 					selectedElement.getEditingDomain(), parentView, viewDescriptor, this.getEditPartModelId()));
 			
 			// execute
-			doExecute(command);		// execute it now
+			status.add(doExecute(command), "Creating node for object '" + newObject + "'");		// execute it now
 
 			// save the descriptor for later
 			viewAdapters.add(viewDescriptor);
@@ -253,13 +351,33 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 			// not sure if this actually works
 			//String type = ElementTypeRegistry.getInstance().getType("org.openiaml.model.diagram.wire.RunInstanceWire_3002");
 			
+			/*
+			 * If we set semanticHint == "" rather than null, then shortcut
+			 * nodes aren't created at all.
+			 */
+			
 			CreateConnectionViewRequest.ConnectionViewDescriptor viewDescriptorEdge = new CreateConnectionViewRequest.ConnectionViewDescriptor(
-					new EObjectAdapter(newObjectEdge), null,  // tried null->"" with no effect
+					new MyEObjectAdapterForViews(newObjectEdge, selectedElement), null,
 					prefHint);
+					
+			/*
+			CreateConnectionViewRequest.ConnectionViewDescriptor viewDescriptorEdge = new CreateConnectionViewRequest.ConnectionViewDescriptor(
+					new EObjectAdapter(newObjectEdge), null,
+					prefHint);
+					*/
 			
 			command = new CreateCommand(
 					selectedElement.getEditingDomain(), viewDescriptorEdge, parentView);
-			doExecute(command);
+			status.add(doExecute(command), "Creating edge for object '" + newObjectEdge + "'");
+			
+			/*
+			command = new SetConnectionEndsCommand(selectedElement.getEditingDomain(), "test");
+			EditPart sourceView = resolveElementOnDiagram(selectedElement, ((WireEdge) newObjectEdge).getFrom()); 
+			((SetConnectionEndsCommand) command).setEdgeAdaptor(sourceView);
+			EditPart targetView = resolveElementOnDiagram(selectedElement, ((WireEdge) newObjectEdge).getTo()); 
+			((SetConnectionEndsCommand) command).setEdgeAdaptor(targetView);
+			status.add(doExecute(command));
+			*/
 
 			// save the descriptor for later
 			viewAdapters.add(viewDescriptorEdge);
@@ -273,9 +391,62 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 		DeferredLayoutCommand dlc = new DeferredLayoutCommand(selectedElement.getEditingDomain(),
 				viewAdapters,
 				selectedElement);
-		doExecute(dlc);
+		status.add(doExecute(dlc), "Refreshing layout");
 
-		return;
+		return status.getStatus();
+		
+	}
+	
+	/**
+	 * Search the current view for any EditPart that resolves
+	 * to the given EObject.
+	 * 
+	 * @param selectedElement2
+	 * @param from
+	 * @return
+	 */
+	private EditPart resolveElementOnDiagram(
+			GraphicalEditPart editor, EObject object) {
+		for (Object o : editor.getChildren()) {
+			if (o instanceof GraphicalEditPart) {
+				GraphicalEditPart ep = (GraphicalEditPart) o;
+				if (ep.resolveSemanticElement().equals(object)) {
+					return ep;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Temporary: A test implementation of an IAdapter that takes
+	 * EObjects and can return IElementType views back.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	protected class MyEObjectAdapterForViews extends EObjectAdapter {
+		
+		private GraphicalEditPart diagram;
+
+		public MyEObjectAdapterForViews(EObject element, GraphicalEditPart diagram) {
+			super(element);
+			this.diagram = diagram;
+		}
+
+		@Override
+		public Object getAdapter(Class adapter) {
+			if (adapter == IElementType.class) {
+				// VisibleThingEditPart v;
+				System.out.println("try and get an IElementType from " + diagram);
+				EClass eclass = ((EObject) this.getRealObject()).eClass();
+				System.out.println("eclass= " + eclass);
+				return IamlElementTypes.getElementType(eclass);
+			}
+
+			// otherwise, get the parent to respond
+			return super.getAdapter(adapter);
+		}
 		
 	}
 
@@ -554,10 +725,10 @@ public abstract class AbstractCreateMissingShortcutsCommand extends AbstractTran
 	 * @throws ExecutionException
 	 * @see doExecuteWithResult()
 	 */
-	protected void doExecute(ICommand command) throws ExecutionException {
+	protected IStatus doExecute(ICommand command) throws ExecutionException {
 		IProgressMonitor monitor = new NullProgressMonitor();
 		IAdaptable info = null;
-		OperationHistoryFactory.getOperationHistory().execute(command,
+		return OperationHistoryFactory.getOperationHistory().execute(command,
 				monitor, info);
 	}
 

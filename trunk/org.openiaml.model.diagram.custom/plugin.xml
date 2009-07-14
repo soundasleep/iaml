@@ -206,6 +206,7 @@
             <separator name="group1" />
          </menu>
          
+         <!-- TODO most of these actions refer specifically to a given editor ID (e.g. visual.DomainStoreEditPart); need to make them non-specific -->
          <action
                class="org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools"
                enablesFor="1"
@@ -236,6 +237,16 @@
 			 </selection>
          </action>
 
+         <action
+               class="org.openiaml.model.diagram.custom.actions.InferContainedElementsAction"
+               enablesFor="1"
+               id="org.openiaml.model.diagram.custom.actions.contained"
+               label="&amp;Infer only contained elements"
+               menubarPath="ModelActions/group1">
+			 <selection class="org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart">
+			 </selection>
+         </action>
+         
       </objectContribution>                    
 	</extension>
 

@@ -273,4 +273,16 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.inference.ICreateElements#deleteElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature)
+	 */
+	@Override
+	public void deleteElement(EObject object, EObject container,
+			EClass elementType, EStructuralFeature containerFeature)
+			throws InferenceException {
+		
+		// TODO implement
+		throw new InferenceException("Cannot yet delete from GmfInferenceHandler");
+	}
+
 }

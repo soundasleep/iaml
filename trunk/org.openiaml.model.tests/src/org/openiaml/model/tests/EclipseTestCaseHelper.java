@@ -806,6 +806,25 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return null;
 		
 	}
-
+	
+	/**
+	 * Force the deletion of the given file, and halt until it is.
+	 * 
+	 * @param diagram
+	 * @throws Exception 
+	 */
+	public void forceDelete(IFile diagram) throws Exception {
+		diagram.delete(true, monitor);
+		
+		for (int i = 0; i < 300; i++) {
+			refreshProject();
+			if (!diagram.exists())
+				return;		// done
+			Thread.sleep(300);	// wait
+		}
+		
+		fail("Could not successfully force delete diagram file '" + diagram + "'");
+		
+	}
 	
 }

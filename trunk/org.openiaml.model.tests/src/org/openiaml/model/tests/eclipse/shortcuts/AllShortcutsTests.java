@@ -27,6 +27,7 @@ public class AllShortcutsTests {
         suite.addTestSuite(ShortcutsRootTestCase.class);
         suite.addTestSuite(ShortcutsWireTestCase.class);
         suite.addTestSuite(Issue47.class);
+        suite.addTestSuite(PartialInference.class);	// shouldn't really be here
 
         return suite; 
    }

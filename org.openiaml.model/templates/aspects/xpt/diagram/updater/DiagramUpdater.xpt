@@ -40,9 +40,9 @@
 	}
 
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a given list of EObjects in the model, what edges should be displayed?")»
-	private static void getAllImportantRelationships(java.util.List<EObject> doneAlready, 
+	private static void getAllImportantRelationships(java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
 			java.util.List<org.eclipse.emf.ecore.EObject> elements, 
-			java.util.List<EObject> edges, 
+			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
 			org.eclipse.gmf.runtime.notation.View view,
 			org.eclipse.emf.common.util.EList<? extends org.eclipse.emf.ecore.EObject> list) {
 		for (org.eclipse.emf.ecore.EObject e : list) {
@@ -105,7 +105,7 @@
 			// that are ParameterWires, and render these as shortcut elements too (i.e. parameters)
 			if (wire instanceof org.openiaml.model.model.wires.RunInstanceWire) {
 				org.openiaml.model.model.wires.RunInstanceWire run = (org.openiaml.model.model.wires.RunInstanceWire) wire;
-				java.util.List<WireEdge> params = new java.util.ArrayList();
+				java.util.List<org.openiaml.model.model.WireEdge> params = new java.util.ArrayList();
 				for (org.openiaml.model.model.WireEdge e : run.getInEdges()) {
 					if (e instanceof org.openiaml.model.model.wires.ParameterWire) {
 						params.add(e);

@@ -46,6 +46,11 @@ public interface ICreateElements {
 	EObject createRelationship(EObject container, EClass elementType,
 			EObject source, EObject target, EStructuralFeature containerFeature, EStructuralFeature sourceFeature, EStructuralFeature targetFeature)  throws InferenceException;
 
+	/**
+	 * Delete a given element from a container. 
+	 */
+	public void deleteElement(EObject object, EObject container, EClass elementType,
+			EStructuralFeature containerFeature) throws InferenceException;
 	
 	/**
 	 * Sets the "generatedRule" property of a GeneratedElement.

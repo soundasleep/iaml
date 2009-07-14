@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.inference;
 
+import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -316,10 +317,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return wire;
 	}
 
-	public void setName(NamedElement element, String value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getNamedElement_Name(), value);
-	}
-
 	public CompositeOperation createCompositeOperation(ContainsOperations container) throws InferenceException {
 		CompositeOperation operation = (CompositeOperation) createElement( container, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
 		return operation;
@@ -346,6 +343,27 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		DomainAttributeInstance object = (DomainAttributeInstance) createElement( container, ModelPackage.eINSTANCE.getDomainAttributeInstance(), ModelPackage.eINSTANCE.getDomainObjectInstance_Attributes() );
 		setGeneratedBy(object, by);
 		return object;
+	}
+
+	// property setting helpers
+	public void setName(NamedElement element, String value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getNamedElement_Name(), value);
+	}
+
+	public void setFrom(DataFlowEdge element, EObject value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getDataFlowEdge_From(), value);
+	}
+
+	public void setTo(DataFlowEdge element, EObject value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getDataFlowEdge_To(), value);
+	}
+
+	public void setFrom(ExecutionEdge element, EObject value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getExecutionEdge_From(), value);
+	}
+
+	public void setTo(ExecutionEdge element, EObject value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
 
 }

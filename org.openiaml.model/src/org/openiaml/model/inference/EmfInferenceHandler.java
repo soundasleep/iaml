@@ -267,4 +267,69 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		
 	}
 
+	/**
+	 * Wraps {@link EmfInferenceHandler#deleteElement(EObject, EObject, EClass, EStructuralFeature)} with
+	 * an {@link AbstractTransactionalCommand}. 
+	 * 
+	 * @author jmwright
+	 */
+	protected class DeleteElementCommand extends AbstractTransactionalCommand {
+
+		private EObject object;
+		private EObject container;
+		private EClass elementType;
+		private EStructuralFeature containerFeature;
+
+		public DeleteElementCommand(TransactionalEditingDomain domain,
+				List<?> affectedFiles,
+				EObject object, EObject container,
+				EClass elementType, EStructuralFeature containerFeature) {
+			super(domain, "Delete element command", affectedFiles);
+			
+			this.object = object;
+			this.container = container;
+			this.elementType = elementType;
+			this.containerFeature = containerFeature;
+		}
+
+		@Override
+		protected CommandResult doExecuteWithResult(
+				IProgressMonitor monitor, IAdaptable info)
+				throws ExecutionException {
+			
+			// just pass it along
+			EcoreInferenceHandler eih = new EcoreInferenceHandler(resource);
+			try {
+				eih.deleteElement(object, container, elementType, containerFeature);
+			} catch (InferenceException e) {
+				throw new ExecutionException(e.getMessage(), e);
+			}
+			return CommandResult.newOKCommandResult();
+			
+		}
+			
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.inference.ICreateElements#deleteElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature)
+	 */
+	@Override
+	public void deleteElement(EObject object, EObject container,
+			EClass elementType, EStructuralFeature containerFeature) throws InferenceException {
+
+		DeleteElementCommand command = new DeleteElementCommand(editingDomain, affectedFiles, object, container, elementType, containerFeature);
+		
+		try {
+			IStatus r = command.execute(monitor, info);
+			if (!r.isOK()) {
+				throw new InferenceException("Status was not OK: " + r.getMessage(), r.getException());
+			}
+		} catch (ExecutionException e) {
+			throw new InferenceException(e);
+		}	
+		
+		return;
+		
+	}
+
 }

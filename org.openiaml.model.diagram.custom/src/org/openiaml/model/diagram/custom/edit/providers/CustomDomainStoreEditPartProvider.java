@@ -10,7 +10,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.diagram.custom.commands.generation.InferMissingElementsCommand;
-import org.openiaml.model.diagram.custom.commands.shortcuts.CreateMissingDomainStoreShortcutsCommand;
 import org.openiaml.model.model.diagram.domain_store.edit.parts.DomainStoreEditPart;
 import org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.domain_store.providers.IamlEditPartProvider;
@@ -51,18 +50,6 @@ public class CustomDomainStoreEditPartProvider extends IamlEditPartProvider {
 					if (editpart instanceof GraphicalEditPart) {
 						
 						// MessageDialog.openInformation(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Warning", "Not yet implemented");
-						
-						ICommand command = new CreateMissingDomainStoreShortcutsCommand((GraphicalEditPart) editpart, 
-									IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT, 
-									DomainStoreEditPart.MODEL_ID);
-						
-						try {
-							OperationHistoryFactory.getOperationHistory().execute(command,
-									new NullProgressMonitor(), null);
-						} catch (ExecutionException e) {
-							IamlDiagramEditorPlugin.getInstance().logError(
-									"Unable to refresh shortcuts view", e); //$NON-NLS-1$
-						}
 
 						// generate missing elements
 						ICommand command2 = new InferMissingElementsCommand((GraphicalEditPart) editpart, 

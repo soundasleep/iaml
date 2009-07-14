@@ -3,7 +3,7 @@ package org.openiaml.model.tests.codegen;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.openiaml.model.tests.codegen.oaw.OawTestsSuite;
+import org.openiaml.model.tests.codegen.oaw.AllOawTests;
 
 /**
  * All tests for code generation.
@@ -11,7 +11,7 @@ import org.openiaml.model.tests.codegen.oaw.OawTestsSuite;
  * @author jmwright
  *
  */
-public class CodegenTestsSuite {
+public class AllCodegenTests {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.
@@ -25,7 +25,7 @@ public class CodegenTestsSuite {
         suite.addTestSuite(TestExceptionHandling.class);
 
 		// OAW-specific tests
-		suite.addTest(OawTestsSuite.suite());
+		suite.addTest(AllOawTests.suite());
 
 		// different model versions
 		suite.addTest(Codegen0_1Suite.suite());

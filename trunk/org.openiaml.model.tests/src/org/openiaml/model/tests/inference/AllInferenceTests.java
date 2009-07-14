@@ -11,7 +11,7 @@ import junit.framework.TestSuite;
  * @author jmwright
  *
  */
-public class InferenceTestsSuite {
+public class AllInferenceTests {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.

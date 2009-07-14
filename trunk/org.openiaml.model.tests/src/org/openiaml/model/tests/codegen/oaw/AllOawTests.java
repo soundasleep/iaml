@@ -1,15 +1,15 @@
-package org.openiaml.model.tests.model;
+package org.openiaml.model.tests.codegen.oaw;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * All tests for model quality.
+ * All tests for openArchitectureWare-style tests.
  * 
  * @author jmwright
  *
  */
-public class ModelTestsSuite {
+public class AllOawTests {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.
@@ -17,9 +17,9 @@ public class ModelTestsSuite {
 	 * @return
 	 */
     public static Test suite() { 
-        TestSuite suite = new TestSuite("Model Quality");
+        TestSuite suite = new TestSuite("openArchitectureWare");
 
-        suite.addTestSuite(ModelTestCase.class);
+        suite.addTestSuite(ChecksTest.class);
         
         return suite; 
    }

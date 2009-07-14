@@ -42,7 +42,8 @@ rule "Refresh FileDomainStore mappings (2)"
 
 	then
 		DomainObject fdo = handler.generatedDomainObject($fds, $fds);
-		handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
+		//handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
+		handler.setName(fdo, "properties");
 		queue.add(fdo, drools);
 
 end
@@ -81,7 +82,8 @@ rule "Refresh FileDomainObject mappings (2)"
 
 	then
 		DomainAttribute fda = handler.generatedDomainAttribute(fdo, fdo);
-		handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
+		//handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
+		handler.setName(fda, $key);
 		queue.add(fda, drools);
 		
 end

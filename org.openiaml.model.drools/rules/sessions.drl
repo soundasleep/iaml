@@ -28,7 +28,7 @@ rule "Create 'login' page for LoginHandlers [ApplicationElementContainer]"
 	then
 
 		Page login = handler.generatedPage(login_handler, container);
-		login.setName("login");
+		handler.setName(login, "login");
 		queue.add(login, drools);
 		
 end
@@ -43,7 +43,7 @@ rule "Create 'login' page for LoginHandlers [InternetApplication]"
 	then
 
 		Page login = handler.generatedPage(login_handler, container);
-		login.setName("login");
+		handler.setName(login, "login");
 		queue.add(login, drools);
 		
 end
@@ -57,7 +57,7 @@ rule "Create 'logout' page for LoginHandlers"
 	then
 
 		Page login = handler.generatedPage(login_handler, scope);
-		login.setName("logout");
+		handler.setName(login, "logout");
 		queue.add(login, drools);
 		
 end
@@ -71,7 +71,7 @@ rule "Create 'access' event for all pages in a Session"
 	then
 	
 		EventTrigger access = handler.generatedEventTrigger(scope, page);
-		access.setName("access");
+		handler.setName(access, "access");
 		queue.add(access, drools);
 		
 end
@@ -89,7 +89,7 @@ rule "Create 'key' property for LoginHandler[type = key]s"
 	then
 
 		ApplicationElementProperty key = handler.generatedApplicationElementProperty(login_handler, scope);
-		key.setName("current login key");
+		handler.setName(key, "current login key");
 		queue.add(key, drools);
 		
 end
@@ -105,7 +105,7 @@ rule "Connect 'key' property to LoginHandler"
 	then
 
 		SetWire wire = handler.generatedSetWire(login_handler, scope, login_handler, key);
-		key.setName("set");
+		handler.setName(key, "set");
 		queue.add(key, drools);
 		
 end
@@ -119,7 +119,7 @@ rule "Create 'check key' operation for LoginHandler[type = key]"
 	then
 	
 		CompositeOperation op = handler.generatedCompositeOperation( login_handler, scope );
-		op.setName("check key");
+		handler.setName(op, "check key");
 		queue.add(op, drools);
 end
 
@@ -133,8 +133,8 @@ rule "Connect 'access' event to 'check key' operation"
 		
 	then
 		RunInstanceWire wire = handler.generatedRunInstanceWire(scope, page, access, check);
-		wire.setName("run");
-		wire.setPriority(100);	// high priority
+		handler.setName(wire, "run");
+		handler.setValue(wire, WiresPackage.eINSTANCE.getRunInstanceWire_Priority(), 100); // high priority
 		queue.add(wire, drools);	
 	
 end
@@ -155,7 +155,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		
 	then
 		ParameterWire param = handler.generatedParameterWire(scope, page, value, wire);
-		param.setName("[sessions] 'login key' parameter to 'check key'");
+		handler.setName(param, "[sessions] 'login key' parameter to 'check key'");
 		queue.add(param, drools);	
 
 end
@@ -171,7 +171,7 @@ rule "Connect 'fail' wire from 'check key' operation to Login Page"
 	
 	then
 		NavigateWire fail = handler.generatedNavigateWire(scope, scope, check, login);
-		fail.setName("fail");
+		handler.setName(fail, "fail");
 		queue.add(fail, drools);
 		
 end
@@ -190,11 +190,11 @@ rule "Create contents of 'check key' operation for LoginHandler[type=key]"
 	
 	then
 		Parameter parameter = handler.generatedParameter(o, o);
-		parameter.setName("current key value");
+		handler.setName(parameter, "current key value");
 		queue.add(parameter, drools);
 		
 		DecisionOperation op = handler.generatedDecisionOperation(o, o);
-		op.setName("equal?");
+		handler.setName(op, "equal?");
 		queue.add(op, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
@@ -206,34 +206,34 @@ rule "Create contents of 'check key' operation for LoginHandler[type=key]"
 		
 		# not ok
 		CancelNode cancel = handler.generatedCancelNode(o, o);
-		cancel.setExceptionText("Error: Key check failed. You may need to login.");
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Error: Key check failed. You may need to login.");
 		queue.add(cancel, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
-		data1.setFrom(parameter);
-		data1.setTo(op);
+		handler.setFrom(data1, parameter);
+		handler.setTo(data1, op);
 		queue.add(data1, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
-		data2.setFrom(expected);
-		data2.setTo(op);
+		handler.setFrom(data2, expected);
+		handler.setTo(data2, op);
 		queue.add(data2, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
-		edge1.setFrom(start);
-		edge1.setTo(op);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, op);
 		queue.add(edge1, drools);
 
 		# ok
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
-		edge2.setFrom(op);
-		edge2.setTo(finish);
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, finish);
 		queue.add(edge2, drools);
 		
 		# not ok	
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
-		edge3.setFrom(op);
-		edge3.setTo(cancel);
+		handler.setFrom(edge3, op);
+		handler.setTo(edge3, cancel);
 		queue.add(edge3, drools);
 
 end
@@ -280,48 +280,48 @@ rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
 			
 	then
 		InputForm form = handler.generatedInputForm(login_handler, login);
-		form.setName("login form");
+		handler.setName(form, "login form");
 		queue.add(form, drools);
 		
 		InputTextField field = handler.generatedInputTextField(form, form);
-		field.setName("login key");		# login field name
+		handler.setName(field, "login key");		# login field name
 		queue.add(field, drools);
 
 		# field has a value
 		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(field, field);
-		fieldValue.setName("fieldValue");
+		handler.setName(fieldValue, "fieldValue");
 		queue.add(fieldValue, drools);
 
 		Button button = handler.generatedButton(form, form);
-		button.setName("Login");
+		handler.setName(button, "Login");
 		queue.add(button, drools);
 				
 		# button has an event
 		EventTrigger click = handler.generatedEventTrigger(button, button);
-		click.setName("click");
+		handler.setName(click, "click");
 		queue.add(click, drools);
 		
 		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, login);
-		loginOperation.setName("do login");
+		handler.setName(loginOperation, "do login");
 		queue.add(loginOperation, drools);
 		
 		# connect button click to login operation
 		RunInstanceWire runClick = handler.generatedRunInstanceWire(login_handler, login, click, loginOperation);
-		runClick.setName("run");
+		handler.setName(runClick, "run");
 		queue.add(runClick, drools);
 		
 		# connect field value as parameter
 		ParameterWire clickParam = handler.generatedParameterWire(login_handler, login, fieldValue, runClick);
-		clickParam.setName("[sessions] field value as param");
+		handler.setName(clickParam, "[sessions] field value as param");
 		queue.add(clickParam, drools);
 		
 		# create contents of login operation
 		Parameter parameter = handler.generatedParameter(loginOperation, loginOperation);
-		parameter.setName("provided key");
+		handler.setName(parameter, "provided key");
 		queue.add(parameter, drools);
 		
 		DecisionOperation op = handler.generatedDecisionOperation(loginOperation, loginOperation);
-		op.setName("equal?");
+		handler.setName(op, "equal?");
 		queue.add(op, drools);
 		
 		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
@@ -333,55 +333,55 @@ rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
 		
 		# not ok
 		CancelNode cancel = handler.generatedCancelNode(loginOperation, loginOperation);
-		cancel.setExceptionText("Invalid key.");
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Invalid key.");
 		queue.add(cancel, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
-		data1.setFrom(parameter);
-		data1.setTo(op);
+		handler.setFrom(data1, parameter);
+		handler.setTo(data1, op);
 		queue.add(data1, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
-		data2.setFrom(expected);
-		data2.setTo(op);
+		handler.setFrom(data2, expected);
+		handler.setTo(data2, op);
 		queue.add(data2, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		edge1.setFrom(start);
-		edge1.setTo(op);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, op);
 		queue.add(edge1, drools);
 		
 		# not ok	
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		edge2.setFrom(op);
-		edge2.setTo(cancel);
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, cancel);
 		queue.add(edge2, drools);
 
 		# ok: set value operation
 		ChainedOperation setProperty = handler.generatedChainedOperation(loginOperation, loginOperation);
-		setProperty.setName("setPropertyToValue");
+		handler.setName(setProperty, "setPropertyToValue");
 		queue.add(setProperty, drools);
 		
 		DataFlowEdge data3 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
-		data3.setFrom(parameter);
-		data3.setTo(setProperty);
+		handler.setFrom(data3, parameter);
+		handler.setTo(data3, setProperty);
 		queue.add(data3, drools);
 
 		DataFlowEdge data4 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
-		data4.setFrom(setProperty);
-		data4.setTo(value);
+		handler.setFrom(data4, setProperty);
+		handler.setTo(data4, value);
 		queue.add(data4, drools);
 
 		# ok
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		edge3.setFrom(op);
-		edge3.setTo(setProperty);
+		handler.setFrom(edge3, op);
+		handler.setTo(edge3, setProperty);
 		queue.add(edge3, drools);
 
 		# finish
 		ExecutionEdge edge4 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		edge4.setFrom(setProperty);
-		edge4.setTo(finish);
+		handler.setFrom(edge4, setProperty);
+		handler.setTo(edge4, finish);
 		queue.add(edge4, drools);
 				
 end
@@ -401,7 +401,7 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 			
 	then
 		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, login_operation, login_target);
-		wire.setName("navigate on successful login");
+		handler.setName(wire,"navigate on successful login");
 		queue.add(wire, drools);
 				
 end
@@ -418,7 +418,7 @@ rule "Connect failed 'login' operation to navigate back to 'login'"
 			
 	then
 		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, login_operation, login);
-		wire.setName("fail");
+		handler.setName(wire, "fail");
 		queue.add(wire, drools);
 		
 end
@@ -434,7 +434,7 @@ rule "Create 'do logout' operation in session"
 
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(login_handler, scope);
-		operation.setName("do logout");
+		handler.setName(operation, "do logout");
 		queue.add(operation, drools); 
 		
 end 
@@ -456,7 +456,7 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 	
 	then 
 		RunInstanceWire wire = handler.generatedRunInstanceWire(login_handler, logout, access, logout_operation);
-		wire.setName("run logout operation");
+		handler.setName(wire, "run logout operation");
 		queue.add(wire, drools);
 
 end 
@@ -478,7 +478,7 @@ rule "Connect new navigate wire from logout to logout destination"
 	
 	then
 		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, final_operation, destination);
-		wire.setName("navigate on successful logout");
+		handler.setName(wire, "navigate on successful logout");
 		queue.add(wire, drools);
 		
 end
@@ -498,8 +498,8 @@ rule "Create contents of 'do logout' operation for LoginHandler[type=key]"
 	then
 		# create a 'null' value
 		StaticValue myNull = handler.generatedStaticValue(o, o);
-		myNull.setName("reset value");
-		myNull.setValue("null");
+		handler.setName(myNull, "reset value");
+		handler.setValue(myNull, ModelPackage.eINSTANCE.getStaticValue_Value(), "null");
 		queue.add(myNull, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
@@ -511,28 +511,28 @@ rule "Create contents of 'do logout' operation for LoginHandler[type=key]"
 		
 		# setPropertyToValue
 		ChainedOperation op = handler.generatedChainedOperation(o, o);
-		op.setName("setPropertyToValue");
+		handler.setName(op, "setPropertyToValue");
 		queue.add(op, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
-		data1.setFrom(myNull);
-		data1.setTo(op);
+		handler.setFrom(data1, myNull);
+		handler.setTo(data1, op);
 		queue.add(data1, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
-		data2.setFrom(op);
-		data2.setTo(value);
+		handler.setFrom(data2, op);
+		handler.setTo(data2, value);
 		queue.add(data2, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
-		edge1.setFrom(start);
-		edge1.setTo(op);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, op);
 		queue.add(edge1, drools);
 
 		# ok
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
-		edge2.setFrom(op);
-		edge2.setTo(finish);
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, finish);
 		queue.add(edge2, drools);
 
 end
@@ -544,7 +544,7 @@ rule "Create 'init' event for Sessions"
 		
 	then
 		EventTrigger event = handler.generatedEventTrigger(session, session);
-		event.setName("init");
+		handler.setName(event, "init");
 		queue.add(event, drools);
 	
 end

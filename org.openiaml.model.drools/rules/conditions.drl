@@ -48,7 +48,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 	then
 		# copy the condition
 		ConditionWire cw = handler.generatedConditionWire( sourceCw, sourceCw, condition, run );
-		cw.setName("copied condition: " + sourceCw.getId());
+		handler.setName(cw, "copied condition: " + sourceCw.getId());
 		queue.add(cw, drools);
 
 end
@@ -83,7 +83,7 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 	then
 		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
-		pw.setName("[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
+		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);
 
 end

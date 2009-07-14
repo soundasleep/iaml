@@ -33,7 +33,7 @@ rule "Create empty domain store"
 		// ds.setGeneratedBy(a);
 		
 		DomainStore ds = handler.generatedDomainStore( a, a );
-		ds.setName("test domain store");
+		handler.setName(ds, "test domain store");
 		
 		queue.add(ds, drools); // possibly infer new knowledge (this is necessary)
 		
@@ -46,7 +46,7 @@ rule "Create field value for input text field"
 			
 	then
 		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(f, f);
-		fieldValue.setName("fieldValue");
+		handler.setName(fieldValue, "fieldValue");
 		queue.add(fieldValue, drools);
 		
 end
@@ -58,7 +58,7 @@ rule "Create field value for domain attribute"
 			
 	then
 		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(f, f);
-		fieldValue.setName("fieldValue");
+		handler.setName(fieldValue, "fieldValue");
 		queue.add(fieldValue, drools);
 		
 end
@@ -74,11 +74,11 @@ rule "Empty forms connected by SyncWires create sync'd elements automatically"
 		
 	then
 		InputTextField field = handler.generatedInputTextField(wire, form);
-		field.setName(attribute.getName());
+		handler.setName(field, attribute.getName());
 		queue.add(field, drools);
 		
 		SyncWire wire2 = handler.generatedSyncWire(wire, form, attribute, field);
-		wire2.setName("sync");
+		handler.setName(wire2, "sync");
 		queue.add(wire2, drools);
 		
 end 

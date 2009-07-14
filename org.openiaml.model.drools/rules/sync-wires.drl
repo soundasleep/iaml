@@ -64,7 +64,7 @@ rule "Sync wires between objects should create sync wires between all elements i
 		
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
-		sw.setName("sync");
+		handler.setName(sw, "sync");
 		queue.add(sw, drools);
 		
 end
@@ -83,7 +83,7 @@ rule "Run instance wire from edit to update"
 		
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
-		rw.setName("run");
+		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
 end
@@ -104,7 +104,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
-		pw.setName("[sync] run instance parameter (source.edit)"); 
+		handler.setName(pw, "[sync] run instance parameter (source.edit)"); 
 		queue.add(pw, drools);
 
 end
@@ -124,7 +124,7 @@ rule "Connect parameter wire to: run instance wire from target.edit to source.up
 		
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
-		pw.setName("[sync] run instance parameter (target.edit)"); 
+		handler.setName(pw, "[sync] run instance parameter (target.edit)"); 
 		queue.add(pw, drools);
 
 end
@@ -144,7 +144,7 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 		
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
-		rw.setName("run");
+		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
 end
@@ -163,7 +163,7 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 		
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
-		rw.setName("run");
+		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
 end
@@ -184,7 +184,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 		
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
-		pw.setName("[sync] run instance parameter (source.access)"); 
+		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
 		queue.add(pw, drools);
 
 end
@@ -204,7 +204,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		
 	then
 		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire);
-		pw.setName("[sync] run instance parameter (target.access)"); 
+		handler.setName(pw, "[sync] run instance parameter (target.access)"); 
 		queue.add(pw, drools);
 
 end
@@ -234,272 +234,6 @@ end
  * be handled by the code generation instead.
  */
 
-/*
-
-function List getParameters(ConditionWire a) {
-	List<Object> result = new ArrayList<Object>();
-	for (WireEdge w : a.getInEdges()) {
-		if (w instanceof ParameterWire) {
-			result.add(w.getFrom());
-		}
-	}
-	return result;
-}
-
-function List getConditions(SyncWire a) {
-	List<Object> result = new ArrayList<Object>();
-	for (WireEdge w : a.getInEdges()) {
-		if (w instanceof ConditionWire) {
-			result.add(w);
-		}
-	}
-	return result;
-}
-
-function boolean identicalParameters(ConditionWire a, ConditionWire b) {
-
-	List<Object> a_params = getParameters(a);
-	List<Object> b_params = getParameters(b);
-	if (a_params.size() != b_params.size()) {
-		return false;	// quick check
-	}
-	
-	for (Object x : b_params) {
-		if (a_params.contains(x)) {
-			if (true)
-			throw new RuntimeException("kittens are tasty");
-			a_params.remove(x);
-			continue;
-		}
-		return false;	// param 'x' from 'b' was not found in 'a'
-	}
-
-	return true;	// all parameters were found
-}
-
-/*
- * Evaluate the two SyncWires for their Conditions. This is only true
- * if each SyncWire has the _same_ conditions with the _same_
- * Parameter sources.
- *
-function boolean identicalConditions(SyncWire a, SyncWire b) {
-	List<Object> a_conditions = getConditions(a);
-	List<Object> b_conditions = getConditions(b);
-	if (a_conditions.size() != b_conditions.size()) {
-		return false;	// quick check
-	}
-	System.out.println("a conditions: " + a_conditions);
-	System.out.println("b conditions: " + b_conditions);
-	
-	for (Object x : b_conditions) {
-		ConditionWire xc = (ConditionWire) x;
-		
-		// find an a_conditions which has the same parameters
-		boolean found_condition = false;
-		
-		for (int i = 0; i < a_conditions.size(); i++) {
-			boolean found = false;
-			ConditionWire cur = (ConditionWire) a_conditions.get(i);
-			if ((cur.getFrom().equals(xc.getFrom()))) {
-				// Conditions are the same
-				if (identicalParameters(cur, xc)) {
-					// parameters are the same
-					found_condition = true;
-					found = true;
-					break;		// stop and break out
-				}
-			}
-			if (found) break;	// stop
-		}
-		
-		if (!found_condition)	
-			return false; // param 'x' from 'b' was not found in 'a'
-	}
-
-	return true;	// all parameters were found
-
-}
-
-rule "Chained SyncWires: between A to B, and B to C, means there should be a SyncWire from A to C (Page)"
-	when
-		container : ContainsWires ( )
-		
-		a : Page ( )
-		b : Page ( eval(a != b) )
-		c : Page ( eval(b != c), eval(a != c) )
-		
-		as : SyncWire( eval(connects(as, a, b)), eContainer == container )
-		bs : SyncWire( eval(connects(bs, b, c)) )
-		
-		eval(identicalConditions(as, bs))
-		
-		not (cs : SyncWire( eval(connects(cs, c, a)) ) )
-		
-	then
-		SyncWire newWire = handler.generatedSyncWire(as, container, a, c);
-		newWire.setName("chained sync from: " + as.getId() + " to: " + bs.getId()); 
-		queue.add(newWire);
-		
-end
-
-rule "Chained SyncWires: Cascade conditions from A to C"
-	when
-		
-		# we have three pages in Sync
-		a : Page ( )
-		b : Page ( eval(a != b) )
-		c : Page ( eval(b != c), eval(a != c) )
-		
-		as : SyncWire( eval(connects(as, a, b)) )
-		bs : SyncWire( eval(connects(bs, b, c)) )
-		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
-
-		eval(identicalConditions(as, bs))
-		
-		# there is a condition
-		cond : Condition ( )
-		
-		# one of the pages has a ConditionWire
-		aw : ConditionWire ( from == cond, to == as )
-		
-		# but this generated wire does not
-		not (ConditionWire ( from == cond, to == cs, generatedBy == aw ))
-	
-	then
-		ConditionWire newWire = handler.generatedConditionWire(aw, aw, cond, cs);
-		newWire.setName("copied chained condition [from a]: " + aw.getId()); 
-		queue.add(newWire);
-		
-		// also copy over all Parameters explicitly 
-		// if we try to do this implicitly, then we get the problem where
-		// a<--sync-->b, b<--sync-->c, and the same condition is
-		// used for both sync wires; as a result, parameters to both
-		// incoming sync wires are merged together into one wire
-		// TODO this can probably be achieved though.
-		for (WireEdge w : aw.getInEdges()) {
-			if (w instanceof ParameterWire) {
-				ParameterWire src = (ParameterWire) w;
-				ParameterWire newPw = handler.generatedParameterWire(aw, aw, src.getFrom(), newWire);
-				newPw.setName("[chained a] from " + w.getId());
-				queue.add(newPw);  
-			}
-		}
-		
-end
-
-rule "Chained SyncWires: Cascade conditions from B to C" 
-	when
-		
-		# we have three pages in Sync
-		a : Page ( )
-		b : Page ( eval(a != b) )
-		c : Page ( eval(b != c), eval(a != c) )
-		
-		as : SyncWire( eval(connects(as, a, b)) )
-		bs : SyncWire( eval(connects(bs, b, c)) )
-		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
-
-		eval(identicalConditions(as, bs))
-		
-		# there is a condition
-		cond : Condition ( )
-		
-		# one of the pages has a ConditionWire
-		bw : ConditionWire ( from == cond, to == bs )
-		
-		# but this generated wire does not
-		not (ConditionWire ( from == cond, to == cs, generatedBy == bw ))
-		
-	then
-		ConditionWire newWire = handler.generatedConditionWire(bw, bw, cond, cs);
-		newWire.setName("copied chained condition [from b]: " + bw.getId()); 
-		queue.add(newWire);
-		
-		// also copy over all Parameters explicitly 
-		// TODO see note above
-		for (WireEdge w : bw.getInEdges()) {
-			if (w instanceof ParameterWire) {
-				ParameterWire src = (ParameterWire) w;
-				ParameterWire newPw = handler.generatedParameterWire(bw, bw, src.getFrom(), newWire);
-				newPw.setName("[chained b] from " + w.getId());
-				queue.add(newPw);  
-			}
-		}
-		
-end
-
-/*
-rule "Chained SyncWires: Cascade parameters from A to C"
-	when
-		
-		# we have three pages in Sync
-		a : Page ( )
-		b : Page ( eval(a != b) )
-		c : Page ( eval(b != c), eval(a != c) )
-		
-		as : SyncWire( eval(connects(as, a, b)) )
-		bs : SyncWire( eval(connects(bs, b, c)) )
-		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
-		
-		# there is a condition
-		cond : Condition ( )
-		
-		# two of the pages have ConditionWires
-		aw : ConditionWire ( from == cond, to == as )
-		cw : ConditionWire ( from == cond, to == cs, generatedBy == as )
-		
-		# there is a parameter
-		param : WireEdgesSource ( )
-		
-		# one of them has a ParameterWire
-		ap : ParameterWire ( from == param, to == aw )
-		
-		# but this generated wire does not
-		not (ParameterWire ( from == param, to == cw, generatedBy == as )) 
-		
-	then
-		ParameterWire newWire = handler.generatedParameterWire(as, as, param, cw);
-		newWire.setName("[chained] param from [a]: " + ap.getId());
-		queue.add(newWire);
-		
-end
-
-rule "Chained SyncWires: Cascade parameters from B to C"
-	when
-		
-		# we have three pages in Sync
-		a : Page ( )
-		b : Page ( eval(a != b) )
-		c : Page ( eval(b != c), eval(a != c) )
-		
-		as : SyncWire( eval(connects(as, a, b)) )
-		bs : SyncWire( eval(connects(bs, b, c)) )
-		cs : SyncWire( eval(connects(cs, c, a)), generatedBy == as )
-		
-		# there is a condition
-		cond : Condition ( )
-		
-		# two of the pages have ConditionWires
-		bw : ConditionWire ( from == cond, to == bs )
-		cw : ConditionWire ( from == cond, to == cs, generatedBy == bs )
-		
-		# there is a parameter
-		param : WireEdgesSource ( )
-		
-		# one of them has a ParameterWire
-		bp : ParameterWire ( from == param, to == bw )
-		
-		# but this generated wire does not
-		not (ParameterWire ( from == param, to == cw, generatedBy == bs )) 
-		
-	then
-		ParameterWire newWire = handler.generatedParameterWire(bs, bs, param, cw);
-		newWire.setName("[chained] param from [b]: " + bp.getId());
-		queue.add(newWire);
-		
-end
-*/
-
 rule "Cascaded SyncWires: Conditions from parent to child"
 	when
 
@@ -522,7 +256,7 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 		
 	then
 		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
-		ecw.setName("[copied] from: " + cw.getId());
+		handler.setName(ecw, "[copied] from: " + cw.getId());
 		queue.add(ecw, drools);
 
 end
@@ -557,7 +291,7 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 	then
 		# create it
 		ParameterWire epw = handler.generatedParameterWire( cw, cw, parameter, ecw );
-		epw.setName("[copied] from: " + pw.getId());
+		handler.setName(epw, "[copied] from: " + pw.getId());
 		queue.add(epw, drools);
 
 end
@@ -587,7 +321,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Pages)"
 		
 	then
 		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
-		rw2.setName("run");
+		handler.setName(rw2, "run");
 		queue.add(rw2, drools);
 		
 end

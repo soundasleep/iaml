@@ -100,6 +100,16 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="default: {0}"
+          editorPattern=""
+          editPattern="{0}">
+        <diagramLabel
+            href="iaml.gmfgraph#ApplicationElementPropertyDefaultValue"/>
+        <features
+            href="iaml.ecore#//ApplicationElementProperty/defaultValue"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#ApplicationElementPropertyParentName"/>

@@ -3,8 +3,8 @@ package org.openiaml.model.tests.eclipse;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.openiaml.model.tests.eclipse.migration.MigrateTestSuite;
-import org.openiaml.model.tests.eclipse.shortcuts.EclipseShortcutsTestSuite;
+import org.openiaml.model.tests.eclipse.migration.AllMigrationTests;
+import org.openiaml.model.tests.eclipse.shortcuts.AllShortcutsTests;
 
 /**
  * All tests for the Eclipse editors.
@@ -12,7 +12,7 @@ import org.openiaml.model.tests.eclipse.shortcuts.EclipseShortcutsTestSuite;
  * @author jmwright
  *
  */
-public class EclipseTestsSuite {
+public class AllEclipseTests {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.
@@ -32,10 +32,10 @@ public class EclipseTestsSuite {
 		//$JUnit-END$
         
         // add the shortcut tests
-        suite.addTest(EclipseShortcutsTestSuite.suite());
+        suite.addTest(AllShortcutsTests.suite());
 
         // add the migration tests
-        suite.addTest(MigrateTestSuite.suite());
+        suite.addTest(AllMigrationTests.suite());
 
         return suite;
    }

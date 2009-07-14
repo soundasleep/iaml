@@ -9,7 +9,7 @@ import junit.framework.TestSuite;
  * @author jmwright
  *
  */
-public class ReleaseTestsSuite {
+public class AllReleaseTests {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.

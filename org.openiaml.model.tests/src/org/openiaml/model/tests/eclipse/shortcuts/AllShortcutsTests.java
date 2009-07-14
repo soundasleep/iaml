@@ -9,7 +9,7 @@ import junit.framework.TestSuite;
  * @author jmwright
  *
  */
-public class EclipseShortcutsTestSuite {
+public class AllShortcutsTests {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.

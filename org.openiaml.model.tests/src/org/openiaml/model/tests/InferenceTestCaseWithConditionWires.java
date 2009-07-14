@@ -9,7 +9,6 @@ import java.util.Set;
 
 import junit.framework.AssertionFailedError;
 
-import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;

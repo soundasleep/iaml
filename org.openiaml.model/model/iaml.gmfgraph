@@ -255,6 +255,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="ApplicationElementPropertyDefaultValueFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="ApplicationElementPropertyParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -266,6 +270,8 @@
           figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="StaticValueFigure">
@@ -1293,7 +1299,7 @@
       name="ApplicationElementPropertyParentName"
       figure="ApplicationElementPropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.2"/>
   <labels
       name="InputFormParentName"
       figure="InputFormFigure"
@@ -1338,4 +1344,8 @@
       name="DomainObjectInstanceAutosave"
       figure="DomainObjectInstanceFigure"
       accessor="//@figures.0/@descriptors.41/@accessors.1"/>
+  <labels
+      name="ApplicationElementPropertyDefaultValue"
+      figure="ApplicationElementPropertyFigure"
+      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
 </gmfgraph:Canvas>

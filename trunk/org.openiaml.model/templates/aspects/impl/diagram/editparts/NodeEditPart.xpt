@@ -99,7 +99,7 @@
 					getFigureChainedOperationParentNameFigure().setText(parentName);
 				«ENDIF»
 				«IF className=="ApplicationElementPropertyFigure"»
-					getFigureApplicationElementPropertyNameFigure().setText(parentName);
+					getFigureApplicationElementPropertyParentNameFigure().setText(parentName);
 				«ENDIF»
 				«IF className=="InputFormFigure"»
 					getFigureInputFormParentNameFigure().setText(parentName);

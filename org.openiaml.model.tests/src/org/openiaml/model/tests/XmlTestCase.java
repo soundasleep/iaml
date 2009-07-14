@@ -284,4 +284,12 @@ public class XmlTestCase extends TestCase implements XpathTestCase {
 		return xpath.xpathFirst(e, query);
 	}
 
+	/**
+	 * Assert that the given string ends with the given suffix.
+	 * 
+	 */
+	public void assertEndsWith(String message, String suffix, String string) {
+		assertTrue(message + "String '" + string + "' should end with prefix '" + suffix + "'", string.endsWith(suffix));
+	}
+	
 }

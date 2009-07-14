@@ -49,7 +49,7 @@ public interface ICreateElements {
 	/**
 	 * Delete a given element from a container. 
 	 */
-	public void deleteElement(EObject object, EObject container, EClass elementType,
+	public void deleteElement(EObject object, EObject container,
 			EStructuralFeature containerFeature) throws InferenceException;
 	
 	/**

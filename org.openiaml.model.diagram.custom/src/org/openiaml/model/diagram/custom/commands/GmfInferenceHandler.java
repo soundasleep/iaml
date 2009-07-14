@@ -278,7 +278,7 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	 */
 	@Override
 	public void deleteElement(EObject object, EObject container,
-			EClass elementType, EStructuralFeature containerFeature)
+			EStructuralFeature containerFeature)
 			throws InferenceException {
 		
 		// TODO implement

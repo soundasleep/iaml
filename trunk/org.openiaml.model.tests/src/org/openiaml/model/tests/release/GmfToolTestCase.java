@@ -190,4 +190,35 @@ public class GmfToolTestCase extends XmlTestCase {
 		return loadDocument(f);
 	}
 	
+	/**
+	 * For each .gmftool creation node, the icons set to the
+	 * creation tool should match the name of the element
+	 * created.
+	 * 
+	 * @throws Exception
+	 */
+	public void testIconsMatch() throws Exception {
+		Map<String,Document> loaded = getGmfTools();
+		
+		for (String filename : loaded.keySet()) {
+			Document gmftool = loaded.get(filename);
+			
+			IterableElementList tools = xpath(gmftool, "/ToolRegistry/palette/tools/tools");
+			for (Element tool : tools) {
+				// EventTrigger
+				String toolName = tool.getAttribute("title");
+				String message = "[" + filename + "] " + toolName + ": ";
+				
+				// should have a smallIcon
+				Element smallIcon = xpathFirst(tool, "smallIcon");
+				assertEndsWith(message, "/" + toolName + ".gif", smallIcon.getAttribute("path"));
+
+				// should have a largeIcon
+				Element largeIcon = xpathFirst(tool, "smallIcon");
+				assertEndsWith(message, "/" + toolName + ".gif", largeIcon.getAttribute("path"));
+				
+			}
+		}
+	}
+
 }

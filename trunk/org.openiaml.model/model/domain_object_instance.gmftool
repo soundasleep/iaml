@@ -27,11 +27,11 @@
           description="Create new DomainAttributeInstance">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainAttribute.gif"
+            path="icons/full/obj16/DomainAttributeInstance.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainAttribute.gif"
+            path="icons/full/obj32/DomainAttributeInstance.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

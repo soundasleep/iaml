@@ -339,11 +339,11 @@
           description="Create new Button">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainAttributeInstance.gif"
+            path="icons/full/obj16/Button.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainAttributeInstance.gif"
+            path="icons/full/obj32/Button.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

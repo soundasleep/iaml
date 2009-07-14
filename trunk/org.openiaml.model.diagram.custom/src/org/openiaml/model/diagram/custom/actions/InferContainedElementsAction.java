@@ -117,10 +117,7 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 		 * Elements to delete later through {@link #removeUncontainedElements()}
 		 */
 		private List<EObject> toDelete = new ArrayList<EObject>();
-		
-		// TODO some of these are likely unneccesary
 		private Map<EObject, EObject> deleteContainer = new HashMap<EObject, EObject>();
-		private Map<EObject, EClass> deleteType = new HashMap<EObject, EClass>();
 		private Map<EObject, EStructuralFeature> deleteFeature = new HashMap<EObject, EStructuralFeature>();
 
 		/**
@@ -144,7 +141,7 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 		 */
 		public void removeUncontainedElements() throws InferenceException {
 			for (EObject obj : toDelete) {
-				deleteElement(obj, deleteContainer.get(obj), deleteType.get(obj), deleteFeature.get(obj));
+				deleteElement(obj, deleteContainer.get(obj), deleteFeature.get(obj));
 			}
 		}
 		
@@ -158,10 +155,8 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 			
 			if (!isContainedBy(this.container, container)) {
 				// add the element to delete later
-				System.out.println("Adding element to delete later: " + result);
 				toDelete.add(result);
 				deleteContainer.put(result, container);
-				deleteType.put(result, elementType);
 				deleteFeature.put(result, containerFeature);
 			}
 			

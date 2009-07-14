@@ -277,18 +277,16 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 
 		private EObject object;
 		private EObject container;
-		private EClass elementType;
 		private EStructuralFeature containerFeature;
 
 		public DeleteElementCommand(TransactionalEditingDomain domain,
 				List<?> affectedFiles,
 				EObject object, EObject container,
-				EClass elementType, EStructuralFeature containerFeature) {
+				EStructuralFeature containerFeature) {
 			super(domain, "Delete element command", affectedFiles);
 			
 			this.object = object;
 			this.container = container;
-			this.elementType = elementType;
 			this.containerFeature = containerFeature;
 		}
 
@@ -300,7 +298,7 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 			// just pass it along
 			EcoreInferenceHandler eih = new EcoreInferenceHandler(resource);
 			try {
-				eih.deleteElement(object, container, elementType, containerFeature);
+				eih.deleteElement(object, container, containerFeature);
 			} catch (InferenceException e) {
 				throw new ExecutionException(e.getMessage(), e);
 			}
@@ -315,9 +313,9 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	 */
 	@Override
 	public void deleteElement(EObject object, EObject container,
-			EClass elementType, EStructuralFeature containerFeature) throws InferenceException {
+			EStructuralFeature containerFeature) throws InferenceException {
 
-		DeleteElementCommand command = new DeleteElementCommand(editingDomain, affectedFiles, object, container, elementType, containerFeature);
+		DeleteElementCommand command = new DeleteElementCommand(editingDomain, affectedFiles, object, container, containerFeature);
 		
 		try {
 			IStatus r = command.execute(monitor, info);

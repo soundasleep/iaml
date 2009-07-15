@@ -155,7 +155,7 @@ public abstract class UpdateWithDroolsAction implements IViewActionDelegate {
 			monitor.beginTask("Refreshing " + getTitle() + " mappings", 200);
 			
 			EObject obj = part.resolveSemanticElement();
-			if (getExpectedEObjectClass().isInstance(obj)) {
+			if (!getExpectedEObjectClass().isAssignableFrom(obj.getClass())) {
 				throw new InferenceException("Resolved EObject from EditPart was not of expected type " + getExpectedEObjectClass().getSimpleName() + ": was " + obj.getClass().getSimpleName());
 			}
 			

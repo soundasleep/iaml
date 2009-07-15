@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.eclipse;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
@@ -121,6 +122,17 @@ public abstract class AbstractModelEclipseTestCase extends EclipseTestCaseHelper
 		
 		// find what elements are displayed
 		editor = (IamlDiagramEditor) ep;
+	}
+	
+	/**
+	 * Run a given action against a given element part as the selection.
+	 * 
+	 * @param action
+	 * @param element
+	 */
+	public void runAction(IViewActionDelegate action, ShapeNodeEditPart element) {
+		action.selectionChanged(null, new StructuredSelection(element));
+		action.run(null);
 	}
 
 	/**

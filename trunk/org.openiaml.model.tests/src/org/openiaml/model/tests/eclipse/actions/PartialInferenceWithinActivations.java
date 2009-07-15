@@ -7,13 +7,10 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.AssertionFailedError;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
 import org.openiaml.model.diagram.custom.actions.InferEntireModelAction;
@@ -157,9 +154,7 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase {
 			assertHasPage(editor, "other");
 			
 			// select the first text field and infer!
-			IViewActionDelegate action = getAction();
-			action.selectionChanged(null, new StructuredSelection(target));
-			action.run(null);
+			runAction(getAction(), target);
 			
 			// save it
 			editor.doSave(new NullProgressMonitor());

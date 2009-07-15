@@ -8,7 +8,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
 
 /**
@@ -87,9 +86,7 @@ public class PartialInference extends AbstractActionTestCase {
 			assertNotGenerated(sync);
 			
 			// select the first text field and infer!
-			InferContainedElementsAction action = new InferContainedElementsAction();
-			action.selectionChanged(null, new StructuredSelection(text1));
-			action.run(null);
+			runAction(new InferContainedElementsAction(), text1);
 			
 			// save it
 			editor_page.doSave(new NullProgressMonitor());

@@ -165,7 +165,6 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 					throw new NullPointerException("The EObject '" + obj + "' did not have a matching activation in the queue.");					
 				}
 				for (EObject other : engine.getDroolsInsertionQueue().getInsertedObjectsForActivation(a)) {
-					System.out.println("deleting activated related element " + other);
 					deleteElement(other, deleteContainer.get(other), deleteFeature.get(other));
 				}
 			}
@@ -177,7 +176,6 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 		
 			// get parent to create the element
 			EObject result = super.createElement(container, elementType, containerFeature);
-			System.out.println("Creating element " + result);
 			
 			if (!isContainedBy(this.container, container)) {
 				// add the element to delete later
@@ -260,18 +258,6 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 			
 			// select the actual target (the absolute root)
 			EObject root = getRoot(container);
-			
-			/*
-			// we need a copy of the root
-			Copier copier = new Copier();
-			EObject rootCopy = copier.copy(root);
-			Collection<EObject> results = copier.copyAll(getCollection(root.eAllContents()));
-			copier.copyReferences();
-			
-			// the root element should be distinct but equal
-			assert(root != rootCopy);
-			assert(root.equals(rootCopy));
-			*/
 			
 			refreshContainedMappings(root, new CreateElementsWithinContainer(
 					container,

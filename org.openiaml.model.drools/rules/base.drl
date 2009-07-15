@@ -62,25 +62,3 @@ rule "Create field value for domain attribute"
 		queue.add(fieldValue, drools);
 		
 end
-
-rule "Empty forms connected by SyncWires create sync'd elements automatically"
-	when
-		form : InputForm( overridden == false )
-		domain : DomainObject( )
-		attribute : DomainAttribute( eContainer == domain, attributeName : name )
-		wire : SyncWire( overridden == false, from == form, to == domain )
-		not (VisibleThing( eContainer == form, name == attributeName ))
-		not (SyncWire( from == attribute, to != null, to.eContainer == form ))
-		
-	then
-		InputTextField field = handler.generatedInputTextField(wire, form);
-		handler.setName(field, attribute.getName());
-		queue.add(field, drools);
-		
-		SyncWire wire2 = handler.generatedSyncWire(wire, form, attribute, field);
-		handler.setName(wire2, "sync");
-		queue.add(wire2, drools);
-		
-end 
-
-

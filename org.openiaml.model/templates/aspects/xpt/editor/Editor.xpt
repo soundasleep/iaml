@@ -5,6 +5,9 @@
  * ALSO: Add a method closeBlocking(), which closes the current editor
  * and blocks the calling thread until it is closed. (Useful for
  * testing.)
+ *
+ * ALSO: Add a confirmation when deleting generated elements connected
+ * to non-generated elements [issue 29]
  */
 «IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
 «IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
@@ -40,5 +43,84 @@
 					getSite().getPage().closeEditor(«className».this, save);
 			}
 		});
+	}
+	
+	«REM»
+	-- issue 29 --
+	«ENDREM»
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Add a command to ask for confirmation of generated element deletion, when those elements are connected to non-generated elements.")»
+	@SuppressWarnings("restriction")
+	public class MyDeleteAction extends org.eclipse.gmf.runtime.diagram.ui.internal.actions.PromptingDeleteAction 
+			implements org.eclipse.ui.ISelectionListener {
+
+		«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Selected elements.")»
+		private Object[] selected;
+
+		«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29]")»
+		public MyDeleteAction(org.eclipse.ui.IWorkbenchPart part) {
+			super(part);
+		}
+
+		«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Check to see if we need to ask for a confirmation; if so, ask for it, and cancel if the user cancels.")»
+		@Override
+		public void run() {
+			// do we need to confirm?
+			org.openiaml.model.diagramextensions.GeneratedElementHandler handler = new org.openiaml.model.diagramextensions.GeneratedElementHandler(selected);
+			if (handler.needsConfirmation()) {
+				for (org.eclipse.emf.ecore.EObject element : handler.getConfirmationElements()) {
+					String title = "Generated element is in use";
+					String message = handler.getConfirmationMessage(element);
+
+					message += "\n\nDo you wish to continue deleting the selected elements?";
+					boolean result = org.eclipse.jface.dialogs.MessageDialog.openConfirm(
+							org.eclipse.ui.PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
+							title, 
+							message);
+					
+					// if we cancel, we cancel early
+					if (!result)
+						return;
+					
+					// otherwise we continue onto the next selected element that needs confirmation
+				}
+			}
+			
+			// if we get this far, we have confirmed it all
+			super.run();
+		}
+
+		«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] We want to keep track of what elements are deleted, so we can work out which elements need confirmation.\n\n@see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)")»
+		@Override
+		public void selectionChanged(org.eclipse.ui.IWorkbenchPart part, org.eclipse.jface.viewers.ISelection selection) {
+			if (selection instanceof org.eclipse.jface.viewers.StructuredSelection) {
+				selected = ((org.eclipse.jface.viewers.StructuredSelection) selection).toArray();
+			}
+		}
+	
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("")»
+	private org.eclipse.gef.KeyHandler myKeyHandler = null;
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Add a command to ask for confirmation of generated element deletion, when those elements are connected to non-generated elements.")»
+	@Override
+	protected org.eclipse.gef.KeyHandler getKeyHandler() {
+		if (myKeyHandler == null) {
+			myKeyHandler = super.getKeyHandler();
+			
+			// replace the delete action handler
+			MyDeleteAction action = new MyDeleteAction(this);
+			getActionRegistry().registerAction(action);
+			
+			// refresh delete actions
+			myKeyHandler.put(org.eclipse.gef.KeyStroke.getPressed(org.eclipse.swt.SWT.DEL, 127, 0),
+	                getActionRegistry().getAction(org.eclipse.ui.actions.ActionFactory.DELETE.getId()));
+			myKeyHandler.put(org.eclipse.gef.KeyStroke.getPressed(org.eclipse.swt.SWT.BS, 8, 0),
+	                getActionRegistry().getAction(org.eclipse.ui.actions.ActionFactory.DELETE.getId()));
+	        
+	        getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(action);
+		}
+		return myKeyHandler;
 	}
 «ENDAROUND»

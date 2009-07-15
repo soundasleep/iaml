@@ -512,7 +512,7 @@
 
 		// the same thing, but with shortcuts
 		if (!newShortcutChildren.isEmpty()) {
-			createdViews = createShortcutViews(newShortcutChildren);
+			createdViews.addAll(createShortcutViews(newShortcutChildren));
 
 			for (int i = 0; i < createdViews.size(); i++) {
 				org.eclipse.gmf.runtime.notation.View createdView = (org.eclipse.gmf.runtime.notation.View) ((org.eclipse.core.runtime.IAdaptable) createdViews.get(i))
@@ -697,7 +697,6 @@
 		 * method that calls it.
 		 */
 		//createdConnectionViews.addAll(refreshConnections());
-		// not sure that this actually does anything
 		if (createdViews.size() > 1) {
 			// perform a layout of the container
 			org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand layoutCmd = new org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand(host()

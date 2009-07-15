@@ -20,21 +20,15 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.action.IAction;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.migrate.ExpectedMigrationException;
 import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
 import org.openiaml.model.diagram.custom.migrate.MigrationException;
 import org.openiaml.model.diagram.custom.migrate.MigratorRegistry;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
 import org.w3c.dom.Document;
 
@@ -45,17 +39,42 @@ import org.w3c.dom.Document;
  * @author jmwright
  *
  */
-public class MigrateModelAction implements IViewActionDelegate {
+public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 
 	private List<IamlModelMigrator> migratorsUsed;
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public void init(IViewPart view) {
-		// TODO Auto-generated method stub
+	public String getErrorMessage(IFile individual, String message) {
+		return "Could not migrate model '" + individual.getName() + "': " + message;
+	}
 
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getProgressMessage()
+	 */
+	@Override
+	public String getProgressMessage() {
+		return "Migrating model";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
+	 */
+	@Override
+	public List<IFile> getSelection(Object[] selection) {
+		final List<IFile> ifiles = new ArrayList<IFile>();
+		
+		if (selection != null) {
+			for (Object o : selection) {
+				if (o instanceof IFile) {
+					ifiles.add((IFile) o);
+				}
+			}
+		}
+		
+		return ifiles;
 	}
 
 	/**
@@ -66,76 +85,62 @@ public class MigrateModelAction implements IViewActionDelegate {
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
 	@Override
-	public void run(IAction action) {
-		if (selection != null) {
-			for (Object o : selection) {
-				if (o instanceof IFile) {
-					IFile source = (IFile) o;
-					// we need to get a new file
-					IPath containerPath = source.getFullPath().removeLastSegments(1);
-					String fileName = source.getName();
-					String fileExtension = source.getFileExtension();
-					// generate unique name
-					String uniqueName = IamlDiagramEditorUtil.getUniqueFileName( containerPath, fileName, fileExtension);
+	public IStatus execute(IFile source, IProgressMonitor monitor) {
+		// we need to get a new file
+		IPath containerPath = source.getFullPath().removeLastSegments(1);
+		String fileName = source.getName();
+		String fileExtension = source.getFileExtension();
+		// generate unique name
+		String uniqueName = IamlDiagramEditorUtil.getUniqueFileName( containerPath, fileName, fileExtension);
 
-					// TODO migrate this to a wizard
-					InputDialog dialog = new InputDialog(
-							PlatformUI.getWorkbench().getDisplay().getActiveShell(),
-							"Enter in destination model file",
-							"Please enter in the destination model file",
-							uniqueName,
-							null	// InputValidator
-						);
-					dialog.setBlockOnOpen(true);
-					dialog.open();
-					
-					String destination = dialog.getValue();
-					if (destination == null) {
-						// cancelled
-						return;
-					}
-					
-					// get the file
-					IFile target = source.getProject().getFile(
-							source.getProjectRelativePath().removeLastSegments(1).append(destination)
-						);
-					
-					if (target.exists()) {
-						IamlDiagramEditorPlugin.getInstance().logError(
-								"The target model file already exists.", null); //$NON-NLS-1$
-						return;
-					}
-					
-					// must not be the same file
-					if (source.getLocation().toString().equals(target.getLocation().toString())) {
-						IamlDiagramEditorPlugin.getInstance().logError(
-								"Cannot write to the same file.", null); //$NON-NLS-1$
-						return;
-					}
-					
-					// migrate it
-					IStatus status = migrateModel(source, target, new NullProgressMonitor());
-					if (!status.isOK()) {
-						// TODO remove this reference to the plugin and remove the reference in plugin.xml
-						IamlDiagramEditorPlugin.getInstance().getLog().log( status );
-						
-						// warn or error
-						if (status.getSeverity() == IStatus.WARNING) {
-							// msg
-							MessageDialog.openWarning( PlatformUI.getWorkbench().getDisplay().getActiveShell() ,
-									"Model migration warning", status.getChildren().length + " errors occured during model migration. Please check the error log to review them.");
-						} else {
-							MessageDialog.openError( PlatformUI.getWorkbench().getDisplay().getActiveShell() ,
-									"Model migration failed", "Could not migrate model. Please check the error log.");
-						}
-					}
-					
-				}
+		// TODO migrate this to a wizard
+		InputDialog dialog = new InputDialog(
+				PlatformUI.getWorkbench().getDisplay().getActiveShell(),
+				"Enter in destination model file",
+				"Please enter in the destination model file",
+				uniqueName,
+				null	// InputValidator
+			);
+		dialog.setBlockOnOpen(true);
+		dialog.open();
+		
+		String destination = dialog.getValue();
+		if (destination == null) {
+			// cancelled
+			return Status.CANCEL_STATUS;
+		}
+		
+		// get the file
+		IFile target = source.getProject().getFile(
+				source.getProjectRelativePath().removeLastSegments(1).append(destination)
+			);
+		
+		if (target.exists()) {
+			return errorStatus("The target model file already exists.");
+		}
+		
+		// must not be the same file
+		if (source.getLocation().toString().equals(target.getLocation().toString())) {
+			return errorStatus("Cannot write to the same file.");
+		}
+		
+		// migrate it
+		IStatus status = migrateModel(source, target, monitor);
+		if (!status.isOK()) {
+			// warn or error
+			if (status.getSeverity() == IStatus.WARNING) {
+				// msg
+				MessageDialog.openWarning( PlatformUI.getWorkbench().getDisplay().getActiveShell() ,
+						"Model migration warning", status.getChildren().length + " errors occured during model migration. Please check the error log to review them.");
+			} else {
+				MessageDialog.openError( PlatformUI.getWorkbench().getDisplay().getActiveShell() ,
+						"Model migration failed", "Could not migrate model. Please check the error log.");
 			}
 		}
-
+		
+		return status;
 	}
-	
+
 	/**
 	 * Migrate a file to another file. 
 	 * 
@@ -186,6 +191,9 @@ public class MigrateModelAction implements IViewActionDelegate {
 			// initialise an error log
 			List<ExpectedMigrationException> errors = new ArrayList<ExpectedMigrationException>();
 			
+			int scale = 4000;
+			monitor.beginTask("Migrating", (migrators.size() + 1) * scale);
+			
 			// try each of them
 			for (IamlModelMigrator m : migrators) {
 				if (m.isVersion(doc)) {
@@ -193,9 +201,14 @@ public class MigrateModelAction implements IViewActionDelegate {
 					migratorsUsed.add(m);
 
 					// we want to migrate it with this migrator
-					doc = m.migrate(doc, monitor, errors);
+					monitor.subTask(m.getName());
+					doc = m.migrate(doc, new SubProgressMonitor(monitor, scale), errors);
+				} else {
+					monitor.worked(scale);
 				}
 			}
+			
+			monitor.subTask("Writing out final model");
 			
 			// once we are done, write the final document to the new model
 			// IFiles cannot handle OutputStreams so we can either create a threaded
@@ -231,6 +244,8 @@ public class MigrateModelAction implements IViewActionDelegate {
             for (ExpectedMigrationException e : errors) {
             	s.add( new Status(Status.WARNING, PLUGIN_ID, e.getMessage(), e) );
             }
+            
+            monitor.done();
 
             return s;
 
@@ -278,21 +293,6 @@ public class MigrateModelAction implements IViewActionDelegate {
 			return doc;
 		} catch (Exception e) {
 			throw new MigrationException(e);
-		}
-	}
-	
-	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
-
-	Object[] selection;
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
-	 */
-	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = null;
-		if (selection instanceof IStructuredSelection) {
-			this.selection = ((IStructuredSelection) selection).toArray();
 		}
 	}
 

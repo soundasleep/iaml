@@ -140,6 +140,17 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	}
 	
 	/**
+	 * Make a new ERROR IStatus with the given message.
+	 * 
+	 * @param message
+	 * @param cause
+	 * @return
+	 */
+	protected IStatus errorStatus(String message) {
+		return new Status(IStatus.ERROR, PLUGIN_ID, message, null);
+	}
+	
+	/**
 	 * This is the method that actually does the work of this action.
 	 * Returns a Status; if the Status is not OK then the Status message
 	 * will be logged as an error, and execution will be cancelled.

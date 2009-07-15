@@ -1,7 +1,6 @@
 package org.openiaml.model.diagram.custom.actions;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,29 +8,19 @@ import java.util.Map;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 
 /**
  * An action which infers the entire model, but only includes
@@ -47,47 +36,42 @@ import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
  * 
  * @author jmwright
  */
-public class InferContainedElementsAction implements IViewActionDelegate {
-
-	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
-	Object[] selection;
+public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNodeEditPart> {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public void init(IViewPart view) {
-		// does nothing
+	public String getErrorMessage(ShapeNodeEditPart individual, String message) {
+		return "Could not infer contained elements for '" + individual + "': " + message;
 	}
-		
+
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getProgressMessage()
 	 */
 	@Override
-	public void run(IAction action) {
-		if (selection == null)
-			return;
-		
-		for (Object o : selection) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart part = (ShapeNodeEditPart) o;
-				IStatus status = inferContainedElements(part, action, new NullProgressMonitor());
-				if (!status.isOK()) {
-					String message = "Could not infer contained elements for " + o + ": " + status.getMessage();
+	public String getProgressMessage() {
+		return "Inferring contained elements";
+	}
 
-					// TODO remove this reference to the plugin and remove the reference in plugin.xml
-					IamlDiagramEditorPlugin.getInstance().logError(message, status.getException());
-					MessageDialog.openError(getActiveShell(), "Error", status.getMessage());
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
+	 */
+	@Override
+	public List<ShapeNodeEditPart> getSelection(Object[] selection) {
+		final List<ShapeNodeEditPart> ifiles = new ArrayList<ShapeNodeEditPart>();
+		
+		if (selection != null) {
+			for (Object o : selection) {
+				if (o instanceof ShapeNodeEditPart) {
+					ifiles.add((ShapeNodeEditPart) o);
 				}
 			}
 		}
+		
+		return ifiles;
+	}
 
-	}
-	
-	private Shell getActiveShell() {
-		return IamlDiagramEditorPlugin.getInstance().getWorkbench().getDisplay().getActiveShell();
-	}
-	
 	/**
 	 * Select and create the Drools engine for updating.
 	 * This will usually be a specific engine implementation
@@ -97,9 +81,6 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 	 * @return The engine to use
 	 */
 	public DroolsInferenceEngine getEngine(ICreateElements handler) {
-		// get the normal inference engine
-		// TODO refactor this out properly
-		
 		// we add trackInsertions=true so we can actually get tracked insertions
 		return new CreateMissingElementsWithDrools(handler, true);
 	}
@@ -151,10 +132,13 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 		 * If we delete f(a), the rule may not fire again now that f(b) exists, so
 		 * we need to delete f(b) as well.
 		 * @param engine 
+		 * @param monitor 
 		 * 
 		 * @throws InferenceException 
 		 */
-		public void removeUncontainedElements(DroolsInferenceEngine engine) throws InferenceException {
+		public void removeUncontainedElements(DroolsInferenceEngine engine, IProgressMonitor monitor) throws InferenceException {
+			monitor.beginTask("Removing uncontained elements", toDelete.size() + 1);
+			
 			for (EObject obj : toDelete) {
 				deleteElement(obj, deleteContainer.get(obj), deleteFeature.get(obj));
 				
@@ -167,7 +151,11 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 				for (EObject other : engine.getDroolsInsertionQueue().getInsertedObjectsForActivation(a)) {
 					deleteElement(other, deleteContainer.get(other), deleteFeature.get(other));
 				}
+				
+				monitor.worked(1);
 			}
+			
+			monitor.done();
 		}
 		
 		@Override
@@ -233,14 +221,17 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 	 */
 	public void refreshContainedMappings(EObject root,
 			CreateElementsWithinContainer handler, IProgressMonitor monitor) throws InferenceException {
-
+		monitor.beginTask("Inferring contained elements", 150);
+		
 		// infer like normal...
 		DroolsInferenceEngine engine = getEngine(handler);
 		engine.create(root, new SubProgressMonitor(monitor, 100));
 		
 		// but our handler will remove any incorrect elements
-		handler.removeUncontainedElements(engine);
+		monitor.subTask("Removing uncontained elements");
+		handler.removeUncontainedElements(engine, new SubProgressMonitor(monitor, 50));
 		
+		monitor.done();
 	}
 
 	/**
@@ -250,10 +241,8 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 	 * @param monitor 
 	 * @return 
 	 */
-	protected IStatus inferContainedElements(ShapeNodeEditPart part, IAction action, IProgressMonitor monitor) {
+	public IStatus execute(ShapeNodeEditPart part, IProgressMonitor monitor) {
 		try {
-			monitor.beginTask("Inferring contained elements", 200);
-			
 			EObject container = part.resolveSemanticElement();
 			
 			// select the actual target (the absolute root)
@@ -267,8 +256,6 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 					null /* IAdapter == null */,
 					container.eResource()	/* eResource */
 			), monitor);
-			
-			monitor.done();
 				
 			return Status.OK_STATUS;
 	
@@ -279,20 +266,6 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 	}
 	
 	/**
-	 * From an iterator, create a collection of its contents.
-	 * 
-	 * @param allContents
-	 * @return
-	 */
-	private Collection<EObject> getCollection(TreeIterator<EObject> it) {
-		Collection<EObject> c = new ArrayList<EObject>();
-		while (it.hasNext()) {
-			c.add(it.next());
-		}
-		return c;
-	}
-
-	/**
 	 * Iterate through the object until we find the root object, if any.
 	 * 
 	 * @param resolved
@@ -302,28 +275,6 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 		if (resolved.eContainer() == null)
 			return resolved;
 		return getRoot(resolved.eContainer());
-	}
-
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
-	 */
-	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = null;
-		if (selection instanceof IStructuredSelection) {
-			this.selection = ((IStructuredSelection) selection).toArray();
-		}
-	}
-
-	/**
-	 * Any additional model element checks?
-	 * 
-	 * @param object
-	 * @throws InferenceException if something is wrong with the model element
-	 */
-	public void checkModelElement(EObject object) throws InferenceException {
-		// by default, does nothing
 	}
 
 }

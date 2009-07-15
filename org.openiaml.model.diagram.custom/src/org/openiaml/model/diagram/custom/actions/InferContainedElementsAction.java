@@ -99,7 +99,9 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 	public DroolsInferenceEngine getEngine(ICreateElements handler) {
 		// get the normal inference engine
 		// TODO refactor this out properly
-		return new CreateMissingElementsWithDrools(handler);
+		
+		// we add trackInsertions=true so we can actually get tracked insertions
+		return new CreateMissingElementsWithDrools(handler, true);
 	}
 	
 	/**
@@ -137,11 +139,35 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 		/**
 		 * Remove any elements added during inference, that weren't contained
 		 * by the given element.
+		 * 
+		 * This also goes through the DroolsInsertionQueue to get elements that
+		 * were added in the same activation. Any elements created in the same activation
+		 * are also removed, otherwise our property that allows us to remove elements
+		 * will not hold.
+		 * 
+		 * Consider:
+		 * f(a), f(b) <- a, b
+		 * 
+		 * If we delete f(a), the rule may not fire again now that f(b) exists, so
+		 * we need to delete f(b) as well.
+		 * @param engine 
+		 * 
 		 * @throws InferenceException 
 		 */
-		public void removeUncontainedElements() throws InferenceException {
+		public void removeUncontainedElements(DroolsInferenceEngine engine) throws InferenceException {
 			for (EObject obj : toDelete) {
 				deleteElement(obj, deleteContainer.get(obj), deleteFeature.get(obj));
+				
+				// are there any other elements in the queue which we need to
+				// delete, i.e. created by the same activation?
+				Object a = engine.getDroolsInsertionQueue().getActivationFor(obj);
+				if (a == null) {
+					throw new NullPointerException("The EObject '" + obj + "' did not have a matching activation in the queue.");					
+				}
+				for (EObject other : engine.getDroolsInsertionQueue().getInsertedObjectsForActivation(a)) {
+					System.out.println("deleting activated related element " + other);
+					deleteElement(other, deleteContainer.get(other), deleteFeature.get(other));
+				}
 			}
 		}
 		
@@ -156,9 +182,13 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 			if (!isContainedBy(this.container, container)) {
 				// add the element to delete later
 				toDelete.add(result);
-				deleteContainer.put(result, container);
-				deleteFeature.put(result, containerFeature);
 			}
+			
+			// save a copy of all containers and features
+			// (may be needed later when we delete inserted EObjects that were
+			// inserted in the same Activation)
+			deleteContainer.put(result, container);
+			deleteFeature.put(result, containerFeature);
 			
 			return result;
 
@@ -193,9 +223,7 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 			return super.createRelationship(container, elementType, source, target,
 					containerFeature, sourceFeature, targetFeature);
 			
-		}
-		
-		
+		}		
 		
 	}
 	
@@ -213,7 +241,7 @@ public class InferContainedElementsAction implements IViewActionDelegate {
 		engine.create(root, new SubProgressMonitor(monitor, 100));
 		
 		// but our handler will remove any incorrect elements
-		handler.removeUncontainedElements();
+		handler.removeUncontainedElements(engine);
 		
 	}
 

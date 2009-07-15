@@ -1,7 +1,9 @@
 package org.openiaml.model.drools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.drools.FactHandle;
 import org.drools.WorkingMemory;
@@ -174,7 +176,23 @@ public class DroolsInsertionQueue {
 	public List<KnowledgeHelper> helpers = new ArrayList<KnowledgeHelper>();
 	public List<Activation> activations = new ArrayList<Activation>();
 	
+	private boolean trackInsertions;
+	// data storage structures
+	private Map<EObject,Activation> tracked = new HashMap<EObject,Activation>();
+	private Map<Activation,List<EObject>> activationObjects = new HashMap<Activation,List<EObject>>();
+	
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @param trackInsertions should we keep track of which activations
+	 * 	various elements were added?
+	 * 
+	 * @see #getActivationFor(EObject)
+	 */
+	public DroolsInsertionQueue(boolean trackInsertions) {
+		super();
+		this.trackInsertions = trackInsertions;
+	}
 	
 	/**
 	 * Load additional information from the drools object.
@@ -188,7 +206,19 @@ public class DroolsInsertionQueue {
 	public void add(EObject e, KnowledgeHelper drools) {
 		objects.add(e);
 		helpers.add(drools);
-		activations.add(drools.getActivation());
+		Activation a = drools.getActivation();
+		activations.add(a);
+		
+		// should we track the insertions for each activation?
+		if (trackInsertions) {
+			// map from EObject to Activation
+			tracked.put(e, a);
+			// list map from Activation to EObject
+			if (activationObjects.get(a) == null) {
+				activationObjects.put(a, new ArrayList<EObject>());
+			}
+			activationObjects.get(a).add(e);
+		}
 	}
 	
 	/**
@@ -273,4 +303,54 @@ public class DroolsInsertionQueue {
 		addExistingListeners(listeners, memory);
 	}
 	
+	/**
+	 * If we have been tracking activation insertions, this will get the
+	 * activation for a particular object insertion, or null if none
+	 * was found.
+	 * 
+	 * @param object
+	 */
+	public Object getActivationFor(EObject object) {
+		return tracked.get(object);
+	}
+	
+	/**
+	 * If we have been tracking activation insertions, this will get all 
+	 * of the objects that were inserted for a particular activation, or
+	 * null if this activation was not found.
+	 * 
+	 * @param object
+	 */
+	public List<EObject> getInsertedObjectsForActivation(Object a) {
+		if (!(a instanceof Activation)) {
+			throw new IllegalArgumentException("Expected object type '" + a + "' to be an Activation, was: " + a.getClass().getSimpleName());
+		}
+		return activationObjects.get(a);
+	}
+
+	/**
+	 * Since we create a new queue for each iteration step, this will
+	 * add all the activations and EObjects from the old queue.
+	 * 
+	 * @throws IllegalArugmentException if we are not tracking insertions
+	 * @throws IllegalStateException if the current tracking queues aren't empty
+	 * 
+	 * @param oldQueue
+	 */
+	public void addPreviousInsertions(DroolsInsertionQueue oldQueue) {
+		if (!trackInsertions) {
+			throw new IllegalArgumentException("Cannot add previous insertions - tracking is not enabled.");
+		}
+		if (!tracked.isEmpty()) {
+			throw new IllegalStateException("The tracking map is not empty; this method should be called before any element insertion occurs."); 
+		}
+		if (!activationObjects.isEmpty()) {
+			throw new IllegalStateException("The activation objects map is not empty; this method should be called before any element insertion occurs."); 
+		}
+		// we don't really need to copy them all; just assigning them will be enough
+		tracked = oldQueue.tracked;
+		activationObjects = oldQueue.activationObjects;
+		
+	}
+
 }

@@ -80,7 +80,7 @@ public class InferMissingElementsCommand extends AbstractTransactionalCommand {
 		EcoreCreateElementsHelper helper = new GmfInferenceHandler(monitor, info, editorId, getEditingDomain());
 
 		if (!isDisabled) {
-			CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(helper);
+			CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(helper, false);
 			try {
 				ce.create(rootObject, monitor);
 			} catch (InferenceException e) {

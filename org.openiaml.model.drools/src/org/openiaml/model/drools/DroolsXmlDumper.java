@@ -29,7 +29,7 @@ public class DroolsXmlDumper {
 	 * @throws InferenceException 
 	 */
 	public Map<String,String> getRuleXmls() throws InferenceException {
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(null);
+		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(null, false);
 		List<String> files = ce.getRuleFiles();
 		Map<String,String> result = new HashMap<String,String>();
 		

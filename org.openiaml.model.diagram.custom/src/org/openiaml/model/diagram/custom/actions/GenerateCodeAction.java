@@ -148,7 +148,7 @@ public class GenerateCodeAction implements IViewActionDelegate {
 				
 				// do inference on the model
 				model = resource.getContents().get(0);
-				CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
+				CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
 				ce.create(model, new SubProgressMonitor(monitor, 45));
 				
 				// output the temporary changed model to an external file

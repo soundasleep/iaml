@@ -81,8 +81,16 @@ public abstract class DroolsInferenceEngine {
 	 */
 	private Map<Integer, Integer> queueElementsAdded;
 
-	public DroolsInferenceEngine(ICreateElements handler) {
+	/**
+	 * 
+	 * @param handler The handler to create elements
+	 * @param trackInsertions Should the DroolsInsertionQueue track the activations/elements inserted?
+	 * @see DroolsInsertionQueue#DroolsInsertionQueue(boolean)
+	 * @see DroolsInsertionQueue#getActivationFor(EObject)
+	 */
+	public DroolsInferenceEngine(ICreateElements handler, boolean trackInsertions) {
 		this.handler = handler;
+		this.trackInsertions = trackInsertions;
 	}
 
 	/**
@@ -101,7 +109,23 @@ public abstract class DroolsInferenceEngine {
 	public IProgressMonitor getSubprogressMonitor() {
 		return subProgressMonitor;
 	}
+
+	private DroolsInsertionQueue queue;
+
+	/**
+	 * Should we ask the DroolsInsertionQueue to track insertions?
+	 */
+	private boolean trackInsertions;
 	
+	/**
+	 * The insertion queue. We make this available so that Partial
+	 * Inference through {@link #InferContainedElementsAction} can identify
+	 * which elements needs to be properly deleted.
+	 */
+	public DroolsInsertionQueue getDroolsInsertionQueue() {
+		return queue;
+	}
+
 	/**
 	 * Do the inference using Drools.
 	 * 
@@ -318,7 +342,7 @@ public abstract class DroolsInferenceEngine {
 	        });
         }
         
-        DroolsInsertionQueue queue = new DroolsInsertionQueue();
+        queue = new DroolsInsertionQueue(trackInsertions);
 	    workingMemory.setGlobal("handler", handler);
 		workingMemory.setGlobal("queue", queue );
 		
@@ -339,7 +363,10 @@ public abstract class DroolsInferenceEngine {
 		        // insert in the new elements
 		        // but first reset the queue
 		        DroolsInsertionQueue oldQueue = queue;
-		        queue = new DroolsInsertionQueue();
+		        queue = new DroolsInsertionQueue(trackInsertions);
+		        if (trackInsertions) {
+		        	queue.addPreviousInsertions(oldQueue);
+		        }
 				workingMemory.setGlobal("queue", queue );
 				
 				// apply the new objects

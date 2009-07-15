@@ -41,7 +41,7 @@ public class DroolsQueueTest extends XmlTestCase {
 	public class DroolsQueueEngine extends DroolsInferenceEngine {
 
 		public DroolsQueueEngine(ICreateElements handler) {
-			super(handler);
+			super(handler, false);
 		}
 
 		private List<String> ruleFiles = Arrays.asList(
@@ -59,11 +59,8 @@ public class DroolsQueueTest extends XmlTestCase {
 		}
 		
 		/**
-		 * Load the given resource filename as a stream. By default,
-		 * uses {@link DroolsInferenceEngine}'s classLoader to load it.
-		 * 
-		 * @param filename
-		 * @return the loaded stream, or null if it could not be loaded
+		 * We need to extend this to use the testing classloader,
+		 * not the drools plugin classloader.
 		 */
 		@Override
 		public InputStream loadResourceAsStream(String filename) {

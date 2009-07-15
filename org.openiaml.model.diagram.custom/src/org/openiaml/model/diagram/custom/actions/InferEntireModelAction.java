@@ -24,7 +24,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
+import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EcoreInferenceHandler;
+import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 
@@ -78,6 +80,18 @@ public class InferEntireModelAction implements IViewActionDelegate {
 	}
 	
 	/**
+	 * Select and create the Drools engine for updating.
+	 * This will usually be a specific engine implementation
+	 * which only selects a small subset of rule files (i.e.
+	 * it does not select all of the rules at once).
+	 * 
+	 * @return The engine to use
+	 */
+	public DroolsInferenceEngine getEngine(ICreateElements handler) {
+		return new CreateMissingElementsWithDrools(handler, false);
+	}
+	
+	/**
 	 * @param o Both the source file and the target file.
 	 * @param monitor 
 	 * @return 
@@ -101,7 +115,7 @@ public class InferEntireModelAction implements IViewActionDelegate {
 				
 				// do inference on the model
 				model = resource.getContents().get(0);
-				CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
+				DroolsInferenceEngine ce = getEngine(handler);
 				ce.create(model, new SubProgressMonitor(monitor, 45));
 
 				// output the temporary changed model to an external file

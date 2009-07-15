@@ -172,7 +172,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	protected InternetApplication loadAndInfer(InternetApplication root, boolean logRuleSource) throws Exception {
 		// we now try to do inference
 		ICreateElements handler = createHandler();
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler);
+		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
 		ce.create(root, logRuleSource, monitor);
 
 		// write out this inferred model for reference

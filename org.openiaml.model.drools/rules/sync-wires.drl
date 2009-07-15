@@ -357,7 +357,6 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Pag
 		queue.add(pw2, drools);		
 end
 
-
 rule "Refresh New Instance Object mappings when sync connected to Forms: create text fields"
 	when
 		sync : SyncWire( overridden == false )
@@ -377,3 +376,24 @@ rule "Refresh New Instance Object mappings when sync connected to Forms: create 
 		queue.add(text, drools);
 
 end
+
+rule "Refresh Domain Object mappings when sync connected to Forms: create text fields"
+	when
+		sync : SyncWire( overridden == false )
+		form : InputForm ( overridden == false )
+		object : DomainObject ( overridden == false )
+		
+		eval(connects(sync, form, object))
+		
+		attribute : DomainAttribute( eContainer == object )
+		
+		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
+		
+	then
+		# create a new one
+		InputTextField text = handler.generatedInputTextField(sync, form);
+		handler.setName(text, attribute.getName());
+		queue.add(text, drools);
+
+end
+

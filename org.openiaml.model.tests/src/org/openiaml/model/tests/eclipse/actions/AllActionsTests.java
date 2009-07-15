@@ -21,6 +21,7 @@ public class AllActionsTests {
 
         suite.addTestSuite(PartialInference.class);
         suite.addTestSuite(PartialInferenceWithinActivations.class);
+        suite.addTestSuite(FormDomainObjectMapping.class);
 
         return suite; 
    }

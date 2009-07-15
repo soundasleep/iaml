@@ -185,16 +185,19 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param formName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasInputForm(DiagramDocumentEditor root, String formName) {
+	public ShapeNodeEditPart assertHasInputForm(DiagramDocumentEditor root, String formName, boolean checkShortcut, boolean shortcutRequired) {
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				EObject obj = s.resolveSemanticElement();
-				if (obj instanceof InputForm) {
-					InputForm p = (InputForm) obj;
-					if (p.getName().equals(formName)) {
-						assertNotNull(s);
-						return s;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (obj instanceof InputForm) {
+						InputForm p = (InputForm) obj;
+						if (p.getName().equals(formName)) {
+							assertNotNull(s);
+							return s;
+						}
 					}
 				}
 			}
@@ -342,20 +345,23 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasDomainAttribute(DiagramDocumentEditor root, String attrName) {
+	public ShapeNodeEditPart assertHasDomainAttribute(DiagramDocumentEditor root, String attrName, boolean checkShortcut, boolean shortcutRequired) {
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				EObject obj = s.resolveSemanticElement();
-				if (obj instanceof DomainAttribute) {
-					DomainAttribute p = (DomainAttribute) obj;
-					if (p.getName().equals(attrName)) {
-						assertNotNull(s);
-						return s;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (obj instanceof DomainAttribute) {
+						DomainAttribute p = (DomainAttribute) obj;
+						if (p.getName().equals(attrName)) {
+							assertNotNull(s);
+							return s;
+						}
+						found += p.getName() + ",";
 					}
-					found += p.getName() + ",";
 				}
 			}
 		}
@@ -371,20 +377,23 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasDomainObject(DiagramDocumentEditor root, String objectName) {
+	public ShapeNodeEditPart assertHasDomainObject(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
 		String found = "";
 		
 		for (Object o : root.getDiagramEditPart().getChildren()) {
 			if (o instanceof ShapeNodeEditPart) {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				EObject obj = s.resolveSemanticElement();
-				if (obj instanceof DomainObject) {
-					DomainObject p = (DomainObject) obj;
-					if (p.getName().equals(objectName)) {
-						assertNotNull(s);
-						return s;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (obj instanceof DomainObject) {
+						DomainObject p = (DomainObject) obj;
+						if (p.getName().equals(objectName)) {
+							assertNotNull(s);
+							return s;
+						}
+						found += p.getName() + ",";
 					}
-					found += p.getName() + ",";
 				}
 			}
 		}
@@ -661,16 +670,48 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param i
 	 * @param sub
 	 */
-	protected void assertEditorHasChildren(int i, DiagramDocumentEditor sub) {
+	public void assertEditorHasChildren(int i, DiagramDocumentEditor sub) {
 		assertEquals("There should be " + i + " children in editor '" + sub.getTitle() + "'", i, sub.getDiagramEditPart().getChildren().size());
 	}
 
+	/**
+	 * @see #assertHasDomainObject(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasDomainObject(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasDomainObject(editor, name, true, shortcutRequired);
+	}
+
+	/**
+	 * @see #assertHasDomainAttribute(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasDomainAttribute(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasDomainAttribute(editor, name, true, shortcutRequired);
+	}
+	
 	/**
 	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
 	 */
 	public ShapeNodeEditPart assertHasEventTrigger(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasEventTrigger(editor, name, true, shortcutRequired);
+	}
+	
+	/**
+	 * @see #assertHasInputTextField(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasInputTextField(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasInputTextField(editor, name, true, shortcutRequired);
+	}
+	
+	/**
+	 * @see #assertHasInputForm(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasInputForm(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasInputForm(editor, name, true, shortcutRequired);
 	}
 
 	/**
@@ -682,11 +723,35 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
+	 * @see #assertHasDomainObject(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasDomainObject(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasDomainObject(editor, name, false, false);
+	}
+
+	/**
+	 * @see #assertHasDomainAttribute(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasDomainAttribute(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasDomainAttribute(editor, name, false, false);
+	}
+
+	/**
 	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
 	 */
 	public ShapeNodeEditPart assertHasEventTrigger(
 			DiagramDocumentEditor editor, String name) {
 		return assertHasEventTrigger(editor, name, false, false);
+	}
+
+	/**
+	 * @see #assertHasInputForm(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasInputForm(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasInputForm(editor, name, false, false);
 	}
 
 	/**
@@ -829,7 +894,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		
 	}
 	
-	protected void assertNotHasPage(DiagramDocumentEditor editor, String string) {
+	public void assertNotHasPage(DiagramDocumentEditor editor, String string) {
 		boolean failed = false;
 		try {
 			assertHasPage(editor, string);
@@ -840,7 +905,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		assertFalse("Editor had unexpected page '" + string + "'", failed);
 	}
 	
-	protected void assertNotHasInputTextField(DiagramDocumentEditor editor_page2, String string) {
+	public void assertNotHasInputTextField(DiagramDocumentEditor editor_page2, String string) {
 		boolean failed = false;
 		try {
 			assertHasInputTextField(editor_page2, string);
@@ -851,7 +916,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		assertFalse("Editor had unexpected text field '" + string + "'", failed);
 	}
 	
-	protected void assertNotHasInputForm(DiagramDocumentEditor editor_page2, String string) {
+	public void assertNotHasInputForm(DiagramDocumentEditor editor_page2, String string) {
 		boolean failed = false;
 		try {
 			assertHasInputForm(editor_page2, string);

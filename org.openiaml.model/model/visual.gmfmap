@@ -404,9 +404,9 @@
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="autosave: {1}"
+          viewPattern="autosave: {0}"
           editorPattern=""
-          editPattern="">
+          editPattern="{0}">
         <diagramLabel
             href="iaml.gmfgraph#DomainObjectInstanceAutosave"/>
         <features

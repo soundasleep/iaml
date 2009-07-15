@@ -1151,9 +1151,9 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
-            viewPattern="autosave: {1}"
+            viewPattern="autosave: {0}"
             editorPattern=""
-            editPattern="">
+            editPattern="{0}">
           <metaFeatures
               href="iaml.genmodel#//model/DomainObjectInstance/autosave"/>
         </modelFacet>

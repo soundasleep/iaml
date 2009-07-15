@@ -1,10 +1,17 @@
 package org.openiaml.model.diagram.custom.actions;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -16,15 +23,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
 
 /**
@@ -33,54 +34,115 @@ import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
  * @author jmwright
  *
  */
-public class ExportImagePartsAction implements IViewActionDelegate {
+public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public void init(IViewPart view) {
-		// TODO Auto-generated method stub
-
+	public String getErrorMessage(IFile individual, String message) {
+		return "Could not export images for '" + individual.getName() + "': " + message;
 	}
 
-	/**
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getProgressMessage()
 	 */
 	@Override
-	public void run(IAction action) {
+	public String getProgressMessage() {
+		return "Exporting images";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
+	 */
+	@Override
+	public List<IFile> getSelection(Object[] selection) {
+		final List<IFile> ifiles = new ArrayList<IFile>();
+		
 		if (selection != null) {
 			for (Object o : selection) {
 				if (o instanceof IFile) {
-
-					try {
-						doExport((IFile) o);
-					
-					} catch (ExportImageException e) {
-						IamlDiagramEditorPlugin.getInstance().logError("Could not copy image to '" + generateImageDestination() + "': " + e.getMessage(), e);
-					}
-										
+					ifiles.add((IFile) o);
 				}
 			}
+		}
+		
+		return ifiles;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#execute(java.lang.Object, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public IStatus execute(IFile individual, IProgressMonitor monitor) {
+		try {
+			doExport(individual, monitor);
+			return Status.OK_STATUS;
+		} catch (ExportImageException e) {
+			return errorStatus("Export image exception: " + e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * Do the export
+	 * 
+	 * @param targetDiagram
+	 * @param monitor 
+	 * @throws ExportImageException if anything went wrong
+	 */
+	public void doExport(IFile targetDiagram, IProgressMonitor monitor) throws ExportImageException {
+		diagramFile = targetDiagram;
+		
+		try {
+			monitor.beginTask("Loading target diagram " + targetDiagram.getName(), MAX_IMAGES + 2);
+			monitor.subTask("Loading target diagram " + targetDiagram.getName());
+			
+			// we need to load this model diagram
+			// based on EclipseTestCase#loadDiagramFile(IFile)
+			// try loading it up with Eclipse
+			ResourceSet resSet = new ResourceSetImpl();          
+			Resource res = resSet.getResource(URI.createPlatformResourceURI(diagramFile.getFullPath().toString(), false), true);
+			IamlDiagramEditorUtil.openDiagram( res );
+			
+			// get the active workbench editor part
+			// based on IamlDiagramEditorUtil#openDiagram()
+			IWorkbenchPage page = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage();
+			DiagramDocumentEditor editor = (DiagramDocumentEditor) page.getActiveEditor();
+			
+			monitor.worked(1);
+			
+			// export all of the images
+			imagesSaved = 0;
+			recurseExportDiagram(editor, monitor);
+			
+			// only once we return are we actually done
+			monitor.done();
+		} catch (Exception e) {
+			throw new ExportImageException(e);
 		}
 
 	}
 	
 	/**
 	 * Recursively export elements in this diagram. Closes the editor once it is complete.
+	 * @param monitor2
 	 * 
 	 * @param part
 	 * @throws CoreException 
 	 */
-	protected void recurseExportDiagram(DiagramDocumentEditor editor) throws CoreException {
+	protected void recurseExportDiagram(DiagramDocumentEditor editor, IProgressMonitor monitor) throws CoreException {
 		DiagramEditPart part = editor.getDiagramEditPart();
 		IPath destination = generateImageDestination();
 		
 		// save this image if there is something in it
 		if (part.getChildren().size() > 0) {
+			IProgressMonitor saveMonitor = new SubProgressMonitor(monitor, 1);
+			saveMonitor.beginTask("Saving image " + destination, 2);
+			monitor.subTask("Saving image " + destination.lastSegment());
 			CopyToImageUtil img = new CopyToImageUtil();
-			IProgressMonitor monitor = new NullProgressMonitor();
-			img.copyToImage(part, destination, ImageFileFormat.PNG, monitor);
+			img.copyToImage(part, destination, ImageFileFormat.PNG, new SubProgressMonitor(monitor, 1));
+			saveMonitor.done();
 			imagesSaved++;
 		}
 		
@@ -100,11 +162,32 @@ public class ExportImagePartsAction implements IViewActionDelegate {
 				}
 				
 				// export this diagram editor
-				recurseExportDiagram(newEd);
+				recurseExportDiagram(newEd, monitor);
 			}
 		}
-			
+		
 		// close the editor once we're done
+		// (this is done asynchronously, so there might still be things going on in the
+		// editor when the monitor is marked 'done')
+		
+		// if we have a closeBlocking method (Jevon extension), invoke that instead
+		try {
+			Method method = editor.getClass().getMethod("closeBlocking", new Class[] { boolean.class} );
+			method.invoke(editor, new Object[] { false } );
+			return;
+		} catch (SecurityException e) {
+			// ignore
+		} catch (NoSuchMethodException e) {
+			// ignore
+		} catch (IllegalArgumentException e) {
+			// ignore
+		} catch (IllegalAccessException e) {
+			// ignore
+		} catch (InvocationTargetException e) {
+			// ignore
+		}
+		
+		// do normal close
 		editor.close(false);
 		
 	}
@@ -126,7 +209,6 @@ public class ExportImagePartsAction implements IViewActionDelegate {
 	 * @return
 	 */
 	protected IPath generateImageDestination() {
-		// TODO Auto-generated method stub
 		IPath container = diagramFile.getLocation().removeLastSegments(1);
 		String extension = diagramFile.getFileExtension();
 		String fileName = diagramFile.getName();
@@ -169,59 +251,12 @@ public class ExportImagePartsAction implements IViewActionDelegate {
 		
 	}
 	
-	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
-
-	Object[] selection;
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
-	 */
-	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = null;
-		if (selection instanceof IStructuredSelection) {
-			this.selection = ((IStructuredSelection) selection).toArray();
-		}
-	}
-
-	/**
-	 * Do the export
-	 * 
-	 * @param targetDiagram
-	 * @throws ExportImageException if anything went wrong
-	 */
-	public void doExport(IFile targetDiagram) throws ExportImageException {
-		diagramFile = targetDiagram;
-		
-		try {
-			// we need to load this model diagram
-			// based on EclipseTestCase#loadDiagramFile(IFile)
-			// try loading it up with Eclipse
-			ResourceSet resSet = new ResourceSetImpl();          
-			Resource res = resSet.getResource(URI.createPlatformResourceURI(diagramFile.getFullPath().toString(), false), true);
-			IamlDiagramEditorUtil.openDiagram( res );
-			
-			// get the active workbench editor part
-			// based on IamlDiagramEditorUtil#openDiagram()
-			IWorkbenchPage page = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage();
-			DiagramDocumentEditor editor = (DiagramDocumentEditor) page.getActiveEditor();
-			
-			// export all of the images
-			imagesSaved = 0;
-			recurseExportDiagram(editor);
-		} catch (Exception e) {
-			throw new ExportImageException(e);
-		}
-
-	}
-	
 	public static class ExportImageException extends Exception {
 
 		private static final long serialVersionUID = 1L;
 
 		public ExportImageException(Exception e) {
-			super(e);
+			super(e.getMessage(), e);
 		}
 		
 	}

@@ -8,7 +8,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -32,8 +31,9 @@ public class GenerateCodeActionAndView extends GenerateCodeAction implements IVi
 	 * @param monitor 
 	 * @return 
 	 */
-	protected IStatus generateCodeFrom(IFile o, IAction action, IProgressMonitor monitor) {
-		IStatus result = super.generateCodeFrom(o, action, monitor);
+	@Override
+	public IStatus execute(IFile o, IProgressMonitor monitor) {
+		IStatus result = super.execute(o, monitor);
 		
 		if (result != null && result.isOK()) {
 			// it was ok: try and load it

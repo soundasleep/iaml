@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
@@ -826,5 +828,39 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		fail("Could not successfully force delete diagram file '" + diagram + "'");
 		
 	}
+	
+	protected void assertNotHasPage(DiagramDocumentEditor editor, String string) {
+		boolean failed = false;
+		try {
+			assertHasPage(editor, string);
+			failed = true;
+		} catch (AssertionFailedError e) {
+			// expected
+		}
+		assertFalse("Editor had unexpected page '" + string + "'", failed);
+	}
+	
+	protected void assertNotHasInputTextField(DiagramDocumentEditor editor_page2, String string) {
+		boolean failed = false;
+		try {
+			assertHasInputTextField(editor_page2, string);
+			failed = true;
+		} catch (AssertionFailedError e) {
+			// expected
+		}
+		assertFalse("Editor had unexpected text field '" + string + "'", failed);
+	}
+	
+	protected void assertNotHasInputForm(DiagramDocumentEditor editor_page2, String string) {
+		boolean failed = false;
+		try {
+			assertHasInputForm(editor_page2, string);
+			failed = true;
+		} catch (AssertionFailedError e) {
+			// expected
+		}
+		assertFalse("Editor had unexpected input form '" + string + "'", failed);
+	}
+
 	
 }

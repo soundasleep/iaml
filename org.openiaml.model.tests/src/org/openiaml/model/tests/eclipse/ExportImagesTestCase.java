@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.eclipse;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.openiaml.model.diagram.custom.actions.ExportImagePartsAction;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
@@ -44,7 +45,7 @@ public class ExportImagesTestCase extends EclipseTestCaseHelper {
 
 		// do the export action
 		ExportImagePartsAction act = new ExportImagePartsAction();
-		act.doExport(targetDiagram);
+		act.doExport(targetDiagram, new NullProgressMonitor());
 		
 		assertExists(target1);
 		assertExists(target2);

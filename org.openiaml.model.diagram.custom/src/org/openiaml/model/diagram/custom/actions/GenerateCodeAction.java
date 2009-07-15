@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +12,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.MultiStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -22,19 +19,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.oaw.OawCodeGenerator;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 
 /**
  * Action to generate code from an .iaml file
@@ -43,93 +32,24 @@ import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
  * @author jmwright
  *
  */
-public class GenerateCodeAction implements IViewActionDelegate {
+public class GenerateCodeAction extends ProgressEnabledAction<IFile> {
+
+	private EObject model;
 
 	/**
-	 * The loaded model.
+	 * @return For {@link GenerateCodeActionAndView}, we need to get the
+	 * loaded model.
 	 */
-	private EObject model = null;
+	protected EObject getLoadedModel() {
+		return model;
+	}
 
+	
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#execute(java.lang.Object, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public void init(IViewPart view) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
-	 */
-	@Override
-	public void run(final IAction action) {
-		model = null;
-		
-		final List<IFile> ifiles = new ArrayList<IFile>();
-		
-		if (selection != null) {
-			for (Object o : selection) {
-				if (o instanceof IFile) {
-					ifiles.add((IFile) o);
-				}
-			}
-		}
-		
-		/**
-		 * Create a progress display monitor, and actually
-		 * execute the code generation.
-		 */
-		try {
-			PlatformUI.getWorkbench().getProgressService().
-			busyCursorWhile(new IRunnableWithProgress() {
-			    public void run(IProgressMonitor monitor) {
-			    	int scale = 4000;
-			    	
-			    	monitor.beginTask("Generating code", ifiles.size() * scale);
-			    	
-			    	for (IFile f : ifiles) {
-			    		// create a new sub-progress
-			    		IProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1 * scale);
-			    		
-						IStatus status = generateCodeFrom(f, action, subMonitor);
-						if (!status.isOK()) {
-							IStatus multi = new MultiStatus(PLUGIN_ID, Status.ERROR, new IStatus[] { status }, "Could not generate code for '" + f.getName() + "': " + status.getMessage(), status.getException());							
-							Platform.getLog(getDefaultPlugin().getBundle()).log(multi);
-							
-							monitor.done();
-							return;
-						}
-			    	}
-			    	
-			    	monitor.done();
-			    }
-			});
-		} catch (InvocationTargetException e) {
-			getDefaultPlugin().logError(e.getMessage(), e);
-		} catch (InterruptedException e) {
-			getDefaultPlugin().logError(e.getMessage(), e);
-		}
-
-	}
-	
-	/**
-	 * Get the default editor plugin, which we will use to log errors and the like.
-	 * 
-	 * TODO remove this direct reference and remove IamlDiagramEditorPlugin from the plugin.xml.
-	 * 
-	 * @return
-	 */
-	public IamlDiagramEditorPlugin getDefaultPlugin() {
-		return IamlDiagramEditorPlugin.getInstance();
-	}
-	
-	/**
-	 * @param o
-	 * @param monitor 
-	 * @return 
-	 */
-	protected IStatus generateCodeFrom(IFile o, IAction action, IProgressMonitor monitor) {
+	public IStatus execute(IFile o, IProgressMonitor monitor) {
 		try {
 			if (o.getFileExtension().equals("iaml")) {
 				monitor.beginTask("Generating code for file '" + o.getName() + "'", 100);
@@ -190,31 +110,46 @@ public class GenerateCodeAction implements IViewActionDelegate {
 				return new Status(IStatus.ERROR, PLUGIN_ID, "File '" + o.getName() + "' does not have an .iaml extension.");
 			}
 		} catch (InferenceException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed", e);
+			return errorStatus("Inference failed", e);
 		} catch (IOException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "IO exception", e);
+			return errorStatus("IO exception", e);
 		} catch (CoreException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Core exception", e);
+			return errorStatus("Core exception", e);
 		}
 	}
-	
-	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
-
-	Object[] selection;
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = null;
-		if (selection instanceof IStructuredSelection) {
-			this.selection = ((IStructuredSelection) selection).toArray();
-		}
+	public String getErrorMessage(IFile individual, String message) {
+		return "Could not generate code for '" + individual.getName() + "': " + message;
 	}
 
-	public EObject getLoadedModel() {
-		return model;
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getProgressMessage()
+	 */
+	@Override
+	public String getProgressMessage() {
+		return "Generating code";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
+	 */
+	@Override
+	public List<IFile> getSelection(Object[] selection) {
+		final List<IFile> ifiles = new ArrayList<IFile>();
+		
+		if (selection != null) {
+			for (Object o : selection) {
+				if (o instanceof IFile) {
+					ifiles.add((IFile) o);
+				}
+			}
+		}
+		
+		return ifiles;
 	}
 
 }

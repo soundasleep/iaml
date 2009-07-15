@@ -4,26 +4,18 @@
 package org.openiaml.model.diagram.custom.actions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -38,17 +30,40 @@ import org.openiaml.model.model.wires.SyncWire;
  * @author jmwright
  *
  */
-public abstract class UpdateWithDroolsAction implements IViewActionDelegate {
-
-	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
-	Object[] selection;
+public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<ShapeNodeEditPart> {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public void init(IViewPart view) {
-		// does nothing
+	public String getErrorMessage(ShapeNodeEditPart individual, String message) {
+		return "Could not update " + getTitle() + " with Drools for '" + individual + "': " + message;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getProgressMessage()
+	 */
+	@Override
+	public String getProgressMessage() {
+		return "Updating " + getTitle();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
+	 */
+	@Override
+	public List<ShapeNodeEditPart> getSelection(Object[] selection) {
+		final List<ShapeNodeEditPart> ifiles = new ArrayList<ShapeNodeEditPart>();
+		
+		if (selection != null) {
+			for (Object o : selection) {
+				if (o instanceof ShapeNodeEditPart) {
+					ifiles.add((ShapeNodeEditPart) o);
+				}
+			}
+		}
+		
+		return ifiles;
 	}
 	
 	/**
@@ -77,34 +92,6 @@ public abstract class UpdateWithDroolsAction implements IViewActionDelegate {
 	 * @return A title string
 	 */
 	public abstract String getTitle();
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
-	 */
-	@Override
-	public void run(IAction action) {
-		if (selection == null)
-			return;
-		
-		for (Object o : selection) {
-			if (getEditPartClass().isInstance(o)) {
-				ShapeNodeEditPart part = (ShapeNodeEditPart) o;
-				IStatus status = refreshMappings(part, action, new NullProgressMonitor());
-				if (!status.isOK()) {
-					String message = "Could not refresh " + getTitle() + " mappings for " + o + ": " + status.getMessage();
-
-					// TODO remove this reference to the plugin and remove the reference in plugin.xml
-					IamlDiagramEditorPlugin.getInstance().logError(message, status.getException());
-					MessageDialog.openError(getActiveShell(), "Error", status.getMessage());
-				}
-			}
-		}
-
-	}
-	
-	private Shell getActiveShell() {
-		return IamlDiagramEditorPlugin.getInstance().getWorkbench().getDisplay().getActiveShell();
-	}
 	
 	/**
 	 * Which EObject should the inference start with? By default,
@@ -150,9 +137,9 @@ public abstract class UpdateWithDroolsAction implements IViewActionDelegate {
 	 * @param monitor 
 	 * @return 
 	 */
-	protected IStatus refreshMappings(ShapeNodeEditPart part, IAction action, IProgressMonitor monitor) {
+	public IStatus execute(ShapeNodeEditPart part, IProgressMonitor monitor) {
 		try {
-			monitor.beginTask("Refreshing " + getTitle() + " mappings", 200);
+			monitor.beginTask("Refreshing " + getTitle() + " mappings", 100);
 			
 			EObject obj = part.resolveSemanticElement();
 			if (!getExpectedEObjectClass().isAssignableFrom(obj.getClass())) {
@@ -190,18 +177,6 @@ public abstract class UpdateWithDroolsAction implements IViewActionDelegate {
 		if (resolved.eContainer() == null)
 			return resolved;
 		return getRoot(resolved.eContainer());
-	}
-
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
-	 */
-	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = null;
-		if (selection instanceof IStructuredSelection) {
-			this.selection = ((IStructuredSelection) selection).toArray();
-		}
 	}
 
 	/**

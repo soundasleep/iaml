@@ -77,7 +77,7 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 	 */
 	@Override
 	public String getTitle() {
-		return "DomainObjectInstance";
+		return "InputForm mappings";
 	}
 
 }

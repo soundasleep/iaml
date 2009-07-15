@@ -18,7 +18,7 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * @author jmwright
  *
  */
-public class RefreshDomainStoreMappingsWithDrools  extends UpdateWithDroolsAction {
+public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction {
 	
 	/**
 	 * We only want to refresh Properties file mappings.

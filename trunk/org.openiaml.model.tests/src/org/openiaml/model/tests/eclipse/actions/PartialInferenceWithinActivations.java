@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.eclipse.shortcuts;
+package org.openiaml.model.tests.eclipse.actions;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ import org.openiaml.model.inference.ICreateElements;
  * @author jmwright
  *
  */
-public class PartialInferenceWithinActivations extends AbstractShortcutsTestCase {
+public class PartialInferenceWithinActivations extends AbstractActionTestCase {
 
 	public String getModel() {
 		return "PartialInference.iaml";

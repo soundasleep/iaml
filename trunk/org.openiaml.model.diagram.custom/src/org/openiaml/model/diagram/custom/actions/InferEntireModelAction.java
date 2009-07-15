@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -18,17 +19,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IViewPart;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
 
 /**
  * A temporary action which infers the entire model, and places
@@ -41,44 +36,42 @@ import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
  * @author jmwright
  *
  */
-public class InferEntireModelAction implements IViewActionDelegate {
-
-	/**
-	 * The loaded model.
-	 */
-	private EObject model = null;
+public class InferEntireModelAction extends ProgressEnabledAction<IFile> {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public void init(IViewPart view) {
-		// TODO Auto-generated method stub
-
+	public String getErrorMessage(IFile individual, String message) {
+		return "Could not infer model from '" + individual.getName() + "': " + message;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getProgressMessage()
 	 */
 	@Override
-	public void run(IAction action) {
-		model = null;
+	public String getProgressMessage() {
+		return "Infer entire model";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
+	 */
+	@Override
+	public List<IFile> getSelection(Object[] selection) {
+		final List<IFile> ifiles = new ArrayList<IFile>();
 		
 		if (selection != null) {
 			for (Object o : selection) {
 				if (o instanceof IFile) {
-					IStatus status = inferEntireModel((IFile) o, action, new NullProgressMonitor());
-					if (!status.isOK()) {
-						// TODO remove this reference to the plugin and remove the reference in plugin.xml
-						IamlDiagramEditorPlugin.getInstance().logError(
-								"Could not infer entire model for " + o + ": " + status.getMessage(), status.getException()); //$NON-NLS-1$
-					}
+					ifiles.add((IFile) o);
 				}
 			}
 		}
-
+		
+		return ifiles;
 	}
-	
+
 	/**
 	 * Select and create the Drools engine for updating.
 	 * This will usually be a specific engine implementation
@@ -96,10 +89,10 @@ public class InferEntireModelAction implements IViewActionDelegate {
 	 * @param monitor 
 	 * @return 
 	 */
-	protected IStatus inferEntireModel(IFile o, IAction action, IProgressMonitor monitor) {
+	public IStatus execute(IFile o, IProgressMonitor monitor) {
 		try {
 			if (o.getFileExtension().equals("iaml")) {
-				monitor.beginTask("Inferring model in file '" + o.getName() + "'", 50);
+				monitor.beginTask("Inferring model in file '" + o.getName() + "'", 60);
 				
 				// try and load the file directly
 				ResourceSet resourceSet = new ResourceSetImpl();
@@ -114,10 +107,11 @@ public class InferEntireModelAction implements IViewActionDelegate {
 				}
 				
 				// do inference on the model
-				model = resource.getContents().get(0);
+				EObject model = resource.getContents().get(0);
 				DroolsInferenceEngine ce = getEngine(handler);
 				ce.create(model, new SubProgressMonitor(monitor, 45));
-
+				
+				monitor.subTask("Writing to temporary file");
 				// output the temporary changed model to an external file
 				// so we can move it back later
 				IFile tempFile = null;
@@ -137,8 +131,14 @@ public class InferEntireModelAction implements IViewActionDelegate {
 				Map<?,?> options = resourceSet.getLoadOptions();
 				resource.save(new FileOutputStream(tempJavaFile), options);
 				
+				monitor.worked(5);
+				monitor.subTask("Saving to IFile");
+				
 				// now load it in as an IFile
 				tempFile.create(new FileInputStream(tempJavaFile), true, monitor);
+				
+				monitor.worked(5);
+				monitor.subTask("Replacing original model");
 		
 				// rename the tempFile
 				o.delete(true, monitor);
@@ -149,35 +149,16 @@ public class InferEntireModelAction implements IViewActionDelegate {
 				monitor.done();
 				
 				return Status.OK_STATUS;
+			} else {
+				return errorStatus("File '" + o.getName() + "' does not end in '.iaml' extension.");
 			}
 		} catch (InferenceException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Inference failed", e);
+			return errorStatus("Inference failed", e);
 		} catch (IOException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "IO exception", e);
+			return errorStatus("IO exception", e);
 		} catch (CoreException e) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Core exception", e);
+			return errorStatus("Core exception", e);
 		}
-		
-		return null;
-	}
-	
-	public static final String PLUGIN_ID = "org.openiaml.model.diagram.custom";
-
-	Object[] selection;
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
-	 */
-	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = null;
-		if (selection instanceof IStructuredSelection) {
-			this.selection = ((IStructuredSelection) selection).toArray();
-		}
-	}
-
-	public EObject getLoadedModel() {
-		return model;
 	}
 
 }

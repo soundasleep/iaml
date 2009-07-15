@@ -7,6 +7,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IViewActionDelegate;
 import org.openiaml.model.diagram.custom.actions.InferEntireModelAction;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
@@ -41,13 +42,23 @@ public abstract class AbstractShortcutsTestCase extends EclipseTestCaseHelper {
 	 * Perform complete inference on the target IFile model.
 	 * 
 	 * @param targetModel
+	 * @param action the action to perform
 	 */
-	protected void inferSourceModelFile(IFile targetModel) {
-		InferEntireModelAction action = new InferEntireModelAction();
+	protected void inferSourceModelFile(IFile targetModel, IViewActionDelegate action) {
 		action.selectionChanged(null, new StructuredSelection(targetModel));
 		action.run(null);
 	}
-	
+
+	/**
+	 * Perform complete inference on the target IFile model.
+	 * 
+	 * @param targetModel
+	 * @param inferContainedElementsAction 
+	 */
+	protected void inferSourceModelFile(IFile targetModel) {
+		inferSourceModelFile(targetModel, new InferEntireModelAction());
+	}
+
 	/**
 	 * Initialise the model file from the model given in {@link #getModel()}.
 	 * 
@@ -59,9 +70,8 @@ public abstract class AbstractShortcutsTestCase extends EclipseTestCaseHelper {
 	 */
 	protected void initializeModelFile(boolean inferModel) throws Exception {
 		// copy our local file into the project
+		copyLocalFile();
 		IFile targetModel = project.getFile(getModel());
-		copyFileIntoWorkspace(ROOT + getModel(),
-				targetModel);
 		IFile targetDiagram = project.getFile(getDiagram());
 		
 		// should we infer the model?
@@ -73,6 +83,18 @@ public abstract class AbstractShortcutsTestCase extends EclipseTestCaseHelper {
 		initialiseAndLoadDiagram(targetModel, targetDiagram);
 	}
 	
+	/**
+	 * Copy the target model ({@link #getModel()} into the current
+	 * workspace.
+	 * 
+	 * @throws Exception 
+	 * 
+	 */
+	protected void copyLocalFile() throws Exception {
+		IFile targetModel = project.getFile(getModel());
+		copyFileIntoWorkspace(ROOT + getModel(), targetModel);
+	}
+
 	/**
 	 * Initialise and load the diagram file, from the target model file.
 	 * @throws Exception 

@@ -21,7 +21,7 @@ public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAct
 	public class RefreshObjectInstanceMappings extends DroolsInferenceEngine {
 		
 		public RefreshObjectInstanceMappings(ICreateElements handler) {
-			super(handler);
+			super(handler, false);
 		}
 
 		private List<String> ruleFiles = Arrays.asList(

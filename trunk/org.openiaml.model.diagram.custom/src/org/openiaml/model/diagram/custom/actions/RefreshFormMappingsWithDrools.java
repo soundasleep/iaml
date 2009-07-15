@@ -21,7 +21,7 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 	public class RefreshFormMappings extends DroolsInferenceEngine {
 		
 		public RefreshFormMappings(ICreateElements handler) {
-			super(handler);
+			super(handler, false);
 		}
 
 		private List<String> ruleFiles = Arrays.asList(

@@ -85,7 +85,7 @@ public class RefreshDomainStoreMappingsWithDrools  extends UpdateWithDroolsActio
 		ICreateElements handler;
 
 		public RefreshDataStores(ICreateElements handler) {
-			super(handler);
+			super(handler, false);
 			this.handler = handler;
 		}
 

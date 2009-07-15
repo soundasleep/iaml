@@ -5,7 +5,7 @@
     <eventTriggers id="model.1227e0889db.4f" name="outgoing" outEdges="wires.1227e088ab6.1b">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1227e088ab6.1b" from="model.1227e0889db.4f" to="model.1227e0889db.5c" name="run in"/>
     </eventTriggers>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.1227e088ab6.1c" name="target" generatedElements="model.1227e0889db.5b model.1227e0889db.5c model.1227e0889db.5d model.1227e0889db.5e model.1227e0889db.5f">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1227e088ab6.1c" isGenerated="true" name="target" generatedElements="model.1227e0889db.5b model.1227e0889db.5c model.1227e0889db.5d model.1227e0889db.5e model.1227e0889db.5f">
       <operations xsi:type="iaml:CompositeOperation" generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5b" name="init" generatedElements="model.1227e0889db.66 model.1227e0889db.67 operations.1227e088ac6.b operations.1227e088ac6.c model.1227e0889db.68 model.1227e0889db.69 model.1227e0889db.6a model.1227e0889db.6b">
         <parameters generatedBy="model.1227e0889db.5b" isGenerated="true" id="model.1227e0889db.66" name="setValueTo" outFlows="model.1227e0889db.68"/>
         <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1227e0889db.5b" isGenerated="true" id="model.1227e0889db.67" name="setPropertyToValue" inFlows="model.1227e0889db.68" inExecutions="model.1227e0889db.6a" outFlows="model.1227e0889db.69" outExecutions="model.1227e0889db.6b"/>
@@ -32,7 +32,7 @@
       </eventTriggers>
       <properties generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5f" name="fieldValue" inFlows="model.1227e0889db.63 model.1227e0889db.69"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.1227e088ab6.25" name="unrelated" generatedElements="model.1227e0889db.78 model.1227e0889db.79 model.1227e0889db.7a model.1227e0889db.7b model.1227e0889db.7c">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1227e088ab6.25" name="unrelated" isGenerated="true" generatedElements="model.1227e0889db.78 model.1227e0889db.79 model.1227e0889db.7a model.1227e0889db.7b model.1227e0889db.7c">
       <operations xsi:type="iaml:CompositeOperation" generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.78" name="init" generatedElements="model.1227e0889db.8f model.1227e0889db.90 operations.1227e088ac6.17 operations.1227e088ac6.18 model.1227e0889db.91 model.1227e0889db.92 model.1227e0889db.93 model.1227e0889db.94">
         <parameters generatedBy="model.1227e0889db.78" isGenerated="true" id="model.1227e0889db.8f" name="setValueTo" outFlows="model.1227e0889db.91"/>
         <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1227e0889db.78" isGenerated="true" id="model.1227e0889db.90" name="setPropertyToValue" inFlows="model.1227e0889db.91" inExecutions="model.1227e0889db.93" outFlows="model.1227e0889db.92" outExecutions="model.1227e0889db.94"/>

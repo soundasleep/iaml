@@ -307,39 +307,4 @@ public class PartialInferenceWithinActivations extends AbstractShortcutsTestCase
 		super.tearDown();
 	}
 
-	// TODO move up
-	
-	protected void assertNotHasPage(DiagramDocumentEditor editor, String string) {
-		boolean failed = false;
-		try {
-			assertHasPage(editor, string);
-			failed = true;
-		} catch (AssertionFailedError e) {
-			// expected
-		}
-		assertFalse("Editor had unexpected page '" + string + "'", failed);
-	}
-	
-	protected void assertNotHasInputTextField(DiagramDocumentEditor editor_page2, String string) {
-		boolean failed = false;
-		try {
-			assertHasInputTextField(editor_page2, string);
-			failed = true;
-		} catch (AssertionFailedError e) {
-			// expected
-		}
-		assertFalse("Editor had unexpected text field '" + string + "'", failed);
-	}
-	
-	protected void assertNotHasInputForm(DiagramDocumentEditor editor_page2, String string) {
-		boolean failed = false;
-		try {
-			assertHasInputForm(editor_page2, string);
-			failed = true;
-		} catch (AssertionFailedError e) {
-			// expected
-		}
-		assertFalse("Editor had unexpected input form '" + string + "'", failed);
-	}
-
 }

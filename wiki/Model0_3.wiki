@@ -11,6 +11,24 @@
 
 TODO
 
+==Usability Features==
+
+Diagram editors now reliably render both contained elements and referenced shortcut elements, even if they are not directly contained within the diagram root element. ([http://code.google.com/p/iaml/issues/detail?id=47 issue 47])
+  * This means that if a model element is connected to another element elsewhere in the model, a shortcut of the referenced model element will be rendered in the current editor, and the link will still be displayed.
+  * This is usually limited to direct connections, however incoming ParameterWires to RunInstanceWires will also be rendered.
+
+You can select a model element and generate all elements that should be contained within it.
+  * Simply right click a model element and select "_Infer all contained elements_".
+  * Thanks to a proven property in an upcoming paper, this partial inference is guaranteed to not affect the final generation of the model, although changes to the generated elements may do so.
+  * There still needs to be a way to delete contained generated elements.
+
+Three new inference actions use the Drools inference engine to infer new knowledge about a given model element. These can be accessed by right clicking an element in the editor, and selecting _IAML Model_ > _(action name)_:
+
+|| *Action* || *Description* || *Rule file(s)* || *Action* ||
+|| _Refresh all Form Mappings_ || Adds text fields to the current InputForm to match any SyncWires connected to DomainObjects or DomainObjectInstances. || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl sync-wires.drl] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshFormMappingsWithDrools.java RefreshFormMappingsWithDrools.java] ||
+|| _Refresh all DomainObjectInstance Mappings_ || Update DomainAttributeInstances within DomainObjectInstances. || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/new-instance.drl runtime/new-instance.drl] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshObjectInstanceMappingsWithDrools.java RefreshObjectInstanceMappingsWithDrools.java] ||
+|| _Refresh all DomainStore Mappings_ || DomainStores connected to Properties files; the Properties file will be loaded, and the DomainStore will be populated with DomainObject and DomainAttributes referencing to this Properties file. || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/file-domain-object.drl runtime/file-domain-object.drl] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshDomainStoreMappingsWithDrools.java RefreshDomainStoreMappingsWithDrools.java] ||
+
 =Knowledge Inference=
 
 ==New Instance Wires==

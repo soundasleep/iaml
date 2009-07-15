@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.eclipse.shortcuts;
+package org.openiaml.model.tests.eclipse.actions;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -18,7 +18,7 @@ import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
  * @author jmwright
  *
  */
-public class PartialInference extends AbstractShortcutsTestCase {
+public class PartialInference extends AbstractActionTestCase {
 
 	public String getModel() {
 		return "PartialInference.iaml";

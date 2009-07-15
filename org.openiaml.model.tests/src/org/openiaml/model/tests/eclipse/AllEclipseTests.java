@@ -3,6 +3,7 @@ package org.openiaml.model.tests.eclipse;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.openiaml.model.tests.eclipse.actions.AllActionsTests;
 import org.openiaml.model.tests.eclipse.migration.AllMigrationTests;
 import org.openiaml.model.tests.eclipse.shortcuts.AllShortcutsTests;
 
@@ -33,6 +34,9 @@ public class AllEclipseTests {
         
         // add the shortcut tests
         suite.addTest(AllShortcutsTests.suite());
+
+        // add the action tests
+        suite.addTest(AllActionsTests.suite());
 
         // add the migration tests
         suite.addTest(AllMigrationTests.suite());

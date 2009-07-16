@@ -2,7 +2,7 @@
 <feature
       id="org.openiaml.model.editor"
       label="IAML Modelling Platform"
-      version="0.2.0"
+      version="0.3.0"
       provider-name="www.openiaml.org">
 
    <description url="http://www.openiaml.org/">

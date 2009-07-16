@@ -519,7 +519,7 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__ID:
 				return getId();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__GENERATED_RULE:
@@ -555,7 +555,7 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__ID:
 				setId((String)newValue);

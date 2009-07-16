@@ -9,7 +9,6 @@ package org.openiaml.model.model.operations;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.openiaml.model.model.ModelPackage;
 
 /**

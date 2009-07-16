@@ -147,12 +147,12 @@ public class OperationsSwitch<T> {
 				DecisionOperation decisionOperation = (DecisionOperation)theEObject;
 				T result = caseDecisionOperation(decisionOperation);
 				if (result == null) result = caseChainedOperation(decisionOperation);
-				if (result == null) result = caseDataFlowEdgeDestination(decisionOperation);
 				if (result == null) result = caseOperation(decisionOperation);
 				if (result == null) result = caseExecutionEdgesSource(decisionOperation);
 				if (result == null) result = caseWireEdgesSource(decisionOperation);
 				if (result == null) result = caseWireEdgeDestination(decisionOperation);
 				if (result == null) result = caseNamedElement(decisionOperation);
+				if (result == null) result = caseDataFlowEdgeDestination(decisionOperation);
 				if (result == null) result = caseExecutionEdgeDestination(decisionOperation);
 				if (result == null) result = caseActivityNode(decisionOperation);
 				if (result == null) result = caseDataFlowEdgesSource(decisionOperation);

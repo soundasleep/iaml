@@ -237,7 +237,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ModelPackage.SCOPE__OVERRIDDEN:
-				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+				return isOverridden();
 			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
 				return getDomainObjects();
 			case ModelPackage.SCOPE__DOMAIN_VIEWS:
@@ -262,7 +262,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
 			case ModelPackage.SCOPE__OVERRIDDEN:
-				setOverridden(((Boolean)newValue).booleanValue());
+				setOverridden((Boolean)newValue);
 				return;
 			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
 				getDomainObjects().clear();

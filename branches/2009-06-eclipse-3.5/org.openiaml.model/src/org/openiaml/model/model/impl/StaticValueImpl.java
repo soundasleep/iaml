@@ -463,7 +463,7 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.STATIC_VALUE__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.STATIC_VALUE__ID:
 				return getId();
 			case ModelPackage.STATIC_VALUE__GENERATED_RULE:
@@ -495,7 +495,7 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.STATIC_VALUE__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.STATIC_VALUE__ID:
 				setId((String)newValue);

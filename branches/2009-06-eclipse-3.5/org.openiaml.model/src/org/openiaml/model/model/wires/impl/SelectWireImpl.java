@@ -10,21 +10,15 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
-
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -209,7 +203,7 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 			case WiresPackage.SELECT_WIRE__QUERY:
 				return getQuery();
 			case WiresPackage.SELECT_WIRE__LIMIT:
-				return new Integer(getLimit());
+				return getLimit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -231,7 +225,7 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 				setQuery((String)newValue);
 				return;
 			case WiresPackage.SELECT_WIRE__LIMIT:
-				setLimit(((Integer)newValue).intValue());
+				setLimit((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

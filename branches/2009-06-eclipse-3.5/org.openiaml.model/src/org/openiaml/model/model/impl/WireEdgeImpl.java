@@ -435,7 +435,7 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.WIRE_EDGE__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.WIRE_EDGE__ID:
 				return getId();
 			case ModelPackage.WIRE_EDGE__GENERATED_RULE:
@@ -462,7 +462,7 @@ public class WireEdgeImpl extends EObjectImpl implements WireEdge {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.WIRE_EDGE__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.WIRE_EDGE__ID:
 				setId((String)newValue);

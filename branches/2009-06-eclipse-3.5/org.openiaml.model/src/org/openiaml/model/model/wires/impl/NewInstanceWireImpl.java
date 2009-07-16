@@ -7,7 +7,6 @@
 package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.WiresPackage;
 

@@ -8,13 +8,10 @@ package org.openiaml.model.model.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -446,7 +443,7 @@ public class DataFlowEdgeImpl extends EObjectImpl implements DataFlowEdge {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.DATA_FLOW_EDGE__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.DATA_FLOW_EDGE__ID:
 				return getId();
 			case ModelPackage.DATA_FLOW_EDGE__GENERATED_RULE:
@@ -473,7 +470,7 @@ public class DataFlowEdgeImpl extends EObjectImpl implements DataFlowEdge {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.DATA_FLOW_EDGE__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.DATA_FLOW_EDGE__ID:
 				setId((String)newValue);

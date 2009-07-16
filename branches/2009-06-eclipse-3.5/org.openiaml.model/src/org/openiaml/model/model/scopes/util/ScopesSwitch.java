@@ -104,20 +104,20 @@ public class ScopesSwitch<T> {
 			case ScopesPackage.SESSION: {
 				Session session = (Session)theEObject;
 				T result = caseSession(session);
-				if (result == null) result = caseNamedElement(session);
-				if (result == null) result = caseContainsOperations(session);
 				if (result == null) result = caseScope(session);
 				if (result == null) result = caseVisibleThing(session);
-				if (result == null) result = caseContainsWires(session);
 				if (result == null) result = caseGeneratedElement(session);
-				if (result == null) result = caseGeneratesElements(session);
 				if (result == null) result = caseApplicationElementContainer(session);
 				if (result == null) result = caseApplicationElement(session);
+				if (result == null) result = caseNamedElement(session);
+				if (result == null) result = caseContainsOperations(session);
+				if (result == null) result = caseGeneratesElements(session);
 				if (result == null) result = caseContainsEventTriggers(session);
 				if (result == null) result = caseWireEdgesSource(session);
 				if (result == null) result = caseWireEdgeDestination(session);
 				if (result == null) result = caseContainsConditions(session);
 				if (result == null) result = caseShouldntContainWires(session);
+				if (result == null) result = caseContainsWires(session);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

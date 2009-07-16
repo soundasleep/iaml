@@ -769,7 +769,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.INTERNET_APPLICATION__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.INTERNET_APPLICATION__ID:
 				return getId();
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_RULE:
@@ -781,7 +781,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
-				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+				return isOverridden();
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
 				return getDomainObjects();
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
@@ -827,7 +827,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__ID:
 				setId((String)newValue);
@@ -847,7 +847,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
-				setOverridden(((Boolean)newValue).booleanValue());
+				setOverridden((Boolean)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();

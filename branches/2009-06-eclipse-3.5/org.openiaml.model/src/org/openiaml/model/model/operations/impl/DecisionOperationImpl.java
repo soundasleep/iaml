@@ -7,9 +7,7 @@
 package org.openiaml.model.model.operations.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.openiaml.model.model.impl.ChainedOperationImpl;
-
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.OperationsPackage;
 

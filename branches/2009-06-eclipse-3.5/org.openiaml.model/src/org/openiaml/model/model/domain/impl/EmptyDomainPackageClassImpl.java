@@ -7,9 +7,7 @@
 package org.openiaml.model.model.domain.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.EmptyDomainPackageClass;
 

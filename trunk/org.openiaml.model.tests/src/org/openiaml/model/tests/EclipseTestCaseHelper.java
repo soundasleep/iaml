@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests;
 
+import java.util.List;
+
 import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
@@ -926,6 +928,15 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		}
 		assertFalse("Editor had unexpected input form '" + string + "'", failed);
 	}
-
 	
+	/**
+	 * Assert that the given list contains the given object
+	 */
+	public void assertContains(Object obj,
+			List<? extends Object> list) {
+		
+		assertTrue("List should contain '" + obj + "': current list " + list, list.contains(obj));
+		
+	}
+
 }

@@ -1,0 +1,215 @@
+--- wire.gmfgen	2009-07-07 13:46:54.759003100 +1200
++++ copies/wire.gmfgen	2009-07-07 13:46:31.665253100 +1200
+@@ -136,6 +136,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="OperationOpenDiagramEditPolicy"
++          diagramKind="Iaml_Operation"
++          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/CompositeOperation"/>
+@@ -180,6 +185,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="OperationOpenDiagramEditPolicy"
++            diagramKind="Iaml_Operation"
++            editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -273,6 +283,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="ElementOpenDiagramEditPolicy"
++          diagramKind="Iaml_Element"
++          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/DomainAttribute"/>
+@@ -317,6 +332,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="ElementOpenDiagramEditPolicy"
++            diagramKind="Iaml_Element"
++            editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -343,6 +363,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="VisualOpenDiagramEditPolicy"
++          diagramKind="Iaml_Visual"
++          editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/visual/InputTextField"/>
+@@ -387,6 +412,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="VisualOpenDiagramEditPolicy"
++            diagramKind="Iaml_Visual"
++            editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <topLevelNodes
+@@ -667,6 +697,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="ConditionOpenDiagramEditPolicy"
++          diagramKind="Iaml_Condition"
++          editorID="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"/>
+       <modelFacet>
+         <metaClass
+             href="iaml.genmodel#//model/CompositeCondition"/>
+@@ -709,6 +744,11 @@
+               xsi:type="gmfgen:StyleAttributes"
+               fixedForeground="true"/>
+         </viewmap>
++        <behaviour
++            xsi:type="gmfgen:OpenDiagramBehaviour"
++            editPolicyClassName="ConditionOpenDiagramEditPolicy"
++            diagramKind="Iaml_Condition"
++            editorID="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"/>
+       </labels>
+     </topLevelNodes>
+     <links
+@@ -730,6 +770,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="WireOpenDiagramEditPolicy"
++          diagramKind="Iaml_Wire"
++          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
+       <modelFacet
+           xsi:type="gmfgen:TypeLinkModelFacet">
+         <metaClass
+@@ -790,6 +835,11 @@
+         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+       </viewmap>
++      <behaviour
++          xsi:type="gmfgen:OpenDiagramBehaviour"
++          editPolicyClassName="WireOpenDiagramEditPolicy"
++          diagramKind="Iaml_Wire"
++          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
+       <modelFacet
+           xsi:type="gmfgen:TypeLinkModelFacet">
+         <metaClass
+@@ -1089,30 +1139,6 @@
+         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+     <childReferences
+         parent="//@diagram/@links.0"
+-        child="//@diagram/@topLevelNodes.1"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.1"
+-        child="//@diagram/@links.0"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.0"
+-        child="//@diagram/@topLevelNodes.2"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.2"
+-        child="//@diagram/@links.0"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.0"
+         child="//@diagram/@topLevelNodes.3"
+         referenceType="in_source"
+         groupName="source"
+@@ -1262,30 +1288,6 @@
+         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+     <childReferences
+         parent="//@diagram/@links.1"
+-        child="//@diagram/@topLevelNodes.1"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.1"
+-        child="//@diagram/@links.1"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.1"
+-        child="//@diagram/@topLevelNodes.2"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.2"
+-        child="//@diagram/@links.1"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.1"
+         child="//@diagram/@topLevelNodes.3"
+         referenceType="in_source"
+         groupName="source"
+@@ -1435,30 +1437,6 @@
+         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+     <childReferences
+         parent="//@diagram/@links.2"
+-        child="//@diagram/@topLevelNodes.1"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.1"
+-        child="//@diagram/@links.2"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.2"
+-        child="//@diagram/@topLevelNodes.2"
+-        referenceType="in_source"
+-        groupName="source"
+-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@topLevelNodes.2"
+-        child="//@diagram/@links.2"
+-        referenceType="out_target"
+-        groupName="outgoing links"
+-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+-    <childReferences
+-        parent="//@diagram/@links.2"
+         child="//@diagram/@topLevelNodes.3"
+         referenceType="in_source"
+         groupName="source"

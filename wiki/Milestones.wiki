@@ -35,38 +35,48 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Test cases for code generation of all modelling elements
 
 ==Release 0.3==
-([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.3 In progress])
+(Released)
   # [Model0_3 Expand IAML model]
-    * [IamlOperations Document existing operation types]
+    * [IamlOperations Document existing atomic operations]
+    * [IamlCompositeOperations Document existing composite operations]
   # Inference
-    * [ModelInference Queue-based knowledge inference, from paper]
+    * [ModelInference Queue-based knowledge inference] - to be detailed in upcoming paper
+    * Infer directly-contained model elements
+    * [http://code.google.com/p/iaml/wiki/Model0_3#Usability_Features Inference actions] available through right-click
   # Code generation
     * Session persistence within multiple remote calls ([http://code.google.com/p/iaml/source/detail?r=586 r586])
+    * Generated code is cleaned with the [http://code.google.com/p/iacleaner/ iacleaner] formatter ([http://code.google.com/p/iaml/issues/detail?id=13 issue 13])
   # [Model0_3 Testing and Documentation]
     * Sessions
+    * Buttons
     * Operation modelling
-    * Domain objects
+    * Condition modelling
+    * Domain objects, domain object instances
+    * Login handlers (type=key)
     * Select wires
     * New instance wires
   # Editor
     * Create edges from shortcut elements not directly contained ([http://code.google.com/p/iaml/issues/detail?id=34 issue 34])
+    * Render shortcut elements and edges not directly contained ([http://code.google.com/p/iaml/issues/detail?id=47 issue 47])
   # Usability improvements
     * [ModelMigration Can migrate models between different versions]
-    * [http://code.google.com/p/iaml/issues/detail?id=23 Add progress monitors for inference and code generation]
-    * [http://code.google.com/p/iaml/issues/detail?id=29 Propogation of generated element deletion (element override)]
-    * [http://code.google.com/p/iaml/issues/detail?id=30 Sharing single EditingDomain instance] across all editors
+    * Render model diagram to PNG images ([http://code.google.com/p/iaml/issues/detail?id=9 issue 9])
+    * Progress monitors for inference and code generation ([http://code.google.com/p/iaml/issues/detail?id=23 issue 23])
+    * [http://code.google.com/p/iaml/wiki/Model0_3#Generated_Elements Deletion of generated elements semantics] ([[http://code.google.com/p/iaml/issues/detail?id=29 issue 29])
   # Development
     * [http://code.google.com/p/iaml/source/browse/#svn/trunk/org.openiaml.model.codegen.oaw/instrument/output Investigations into model-driven code coverage]
+
+==Release 0.4+==
+([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.4 Outstanding issues])
+  # [Model0_4 Expand IAML model]
+  # Usability improvements
+    * [http://code.google.com/p/iaml/issues/detail?id=30 Sharing single EditingDomain instance] across all editors
+  # Development
     * [http://code.google.com/p/iaml/issues/detail?id=21 Set up automated build and release]
     * Automated testing in build script
     * Integration with CruiseControl
     * Code coverage with [http://emma.sourceforge.net/ Emma] and [http://www.eclemma.org/ EclEmma]
     * [http://code.google.com/p/iaml/issues/detail?id=22 Javadoc documentation generation]
-
-==Release 0.4+==
-([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.4 Outstanding issues])
-  # [Model0_4 Expand IAML model]
-  # To be decided...
 
 ==Release 0.9==
   # Can implement [http://openiaml.org Ticket 2.0]

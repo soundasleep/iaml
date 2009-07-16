@@ -1,0 +1,7 @@
+# Tracing options for the org.openiaml.model.diagram.domain_object_instance plug-in
+
+# Common issues
+org.openiaml.model.diagram.domain_object_instance/debug=false
+
+# Visual IDs
+org.openiaml.model.diagram.domain_object_instance/debug/visualID=false

@@ -1,0 +1,39 @@
+/**
+ * Extends an OpenDiagramEditPolicy to allow double clicking
+ * on child labels to open the parent node, rather than
+ * doing nothing. (The child label resolves to a Node
+ * that does not have the necessary Style information
+ * to open a new editor.)
+ *
+ * See http://www.jevon.org/wiki/GMF_Label_OpenDiagramEditPolicies
+ */
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
+«EXTENSION xpt::diagram::Utils»
+«EXTENSION xpt::GenModelUtils»
+
+/**
+ * Straightforward extension.
+ */
+«AROUND additions FOR OpenDiagramBehaviour-»
+	«targetDef.proceed()»
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: Extend the OpenDiagramEditPolicy to also consider the parent node.")»
+	@Override
+	public org.eclipse.gef.EditPart getTargetEditPart(org.eclipse.gef.Request request) {
+		if (understandsRequest(request)) {
+			// are we on a node or link?
+			if (getHost() instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart ||
+					getHost() instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart) {
+				return getHost();
+			}
+			
+			// refer to the container of this node
+			return getHost().getParent();
+		}
+		
+		// default implementation
+		return super.getTargetEditPart(request);
+	}
+
+«ENDAROUND»

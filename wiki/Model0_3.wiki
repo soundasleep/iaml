@@ -9,7 +9,11 @@
 
 =Introduction=
 
-TODO
+This model release adds some fundamental new model elements such as domain object, domain object instances, and sessions.
+
+Existing [IamlOperations atomic operations] and [IamlCompositeOperations composite operations] are now documented.
+
+Generated web application runtime code is now formatted through the side project [http://code.google.com/p/iacleaner/ iacleaner 0.2]. ([http://code.google.com/p/iaml/issues/detail?id=13 issue 13])
 
 ==Usability Features==
 
@@ -22,18 +26,11 @@ You can select a model element and generate all elements that should be containe
   * Thanks to a proven property in an upcoming paper, this partial inference is guaranteed to not affect the final generation of the model, although changes to the generated elements may do so.
   * There still needs to be a way to delete contained generated elements.
 
-Three new inference actions use the Drools inference engine to infer new knowledge about a given model element. These can be accessed by right clicking an element in the editor, and selecting _IAML Model_ > _(action name)_:
-
-|| *Action* || *Description* || *Rule file(s)* || *Action* ||
-|| _Refresh all Form Mappings_ || Adds text fields to the current InputForm to match any SyncWires connected to DomainObjects or DomainObjectInstances. || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl sync-wires.drl] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshFormMappingsWithDrools.java RefreshFormMappingsWithDrools.java] ||
-|| _Refresh all DomainObjectInstance Mappings_ || Update DomainAttributeInstances within DomainObjectInstances. || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/new-instance.drl runtime/new-instance.drl] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshObjectInstanceMappingsWithDrools.java RefreshObjectInstanceMappingsWithDrools.java] ||
-|| _Refresh all DomainStore Mappings_ || DomainStores connected to Properties files; the Properties file will be loaded, and the DomainStore will be populated with DomainObject and DomainAttributes referencing to this Properties file. || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/file-domain-object.drl runtime/file-domain-object.drl] || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshDomainStoreMappingsWithDrools.java RefreshDomainStoreMappingsWithDrools.java] ||
+Three new inference actions use the Drools inference engine to infer new knowledge about a given model element. These can be accessed by right clicking an element in the editor, and selecting _IAML Model_ > _(action name)_. More information is available in the _Knowledge Inference_ section below.
 
 Model elements render the names of their parent elements; this is to help with identifying the source of shortcut elements. ([http://code.google.com/p/iaml/issues/detail?id=40 issue 40])
 
 A copy of the given model instance diagram can be exported automatically to PNG by right clicking the .iaml_diagram file, and selecting "_Export all diagram parts to PNG images_". ([http://code.google.com/p/iaml/issues/detail?id=9 issue 9])
-
-Generated web application runtime code is now formatted through the side project [http://code.google.com/p/iacleaner/ iacleaner 0.2]. ([http://code.google.com/p/iaml/issues/detail?id=13 issue 13])
 
 Models can be migrated between different versions: See ModelMigration.
 
@@ -64,34 +61,39 @@ If a _NewInstanceWire_ is connected from a _DomainObject_ to a _DomainObjectInst
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/images/InputFormInstanceMapping-1.png
 
 || *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/InputFormInstanceMapping.java InputFormInstanceMapping.java] ||
-|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl?spec=svn745&r=745#626 sync-wires.drl] ||
-|| *UI Action* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshObjectInstanceMappingsWithDrools.java RefreshObjectInstanceMappingsWithDrools.java] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl  sync-wires.drl ] ||
+|| *Menu Title* || _Refresh all Form Mappings_ ||
+|| *UI Action* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshFormMappingsWithDrools.java RefreshFormMappingsWithDrools.java] ||
 
-If an _InputForm_ is connected to a _DomainObjectInstance_, then attributes within the instance will automatically create editable _InputTextFields_ within the form.
+If an _InputForm_ is connected to a _DomainObjectInstance_ or _DomainObject_, then attributes within the instance will automatically create editable _InputTextFields_ within the form.
 
 Following the inference below of SyncWires with ApplicationElements, these new text fields will also automatically sync up.
-
-This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all DomainObjectInstance Mappings_.
 
 ==Domain Stores from Properties files==
 
 || *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/PropertiesFileMapping.java PropertiesFileMapping.java] ||
-|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/file-domain-object.drl?spec=svn753&r=753 file-domain-object.drl] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/file-domain-object.drl runtime/file-domain-object.drl] ||
+|| *Menu Title* || _Refresh all DomainStore Mappings_ ||
 || *UI Action* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshDomainStoreMappingsWithDrools.java RefreshDomainStoreMappingsWithDrools.java] ||
 
 If a _DomainStore_ is of type _PropertiesFile_, the _DomainStore_ will be automatically populated from the values in the _PropertiesFile_ (in particular, this will create a _DomainObject_ named "properties", and all properties in the file will be added as attributes).
 
-This can also be achieved by right clicking the _DomainStore_ and selecting _IAML Model_ > _Refresh all DomainStore Mappings_.
-
 ==Sync Wires with Application Elements==
 
 || *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/InputFormInstanceMapping.java InputFormInstanceMapping.java] ||
-|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl?spec=svn745&r=745#626 sync-wires.drl] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sync-wires.drl sync-wires.drl] ||
 || *UI Action* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshFormMappingsWithDrools.java RefreshFormMappingsWithDrools.java] ||
 
 If two _ApplicationElements_ are connected via a _SyncWire_ labelled "sync", and these elements both contain other elements that match to each other (currently through a case-insensitive naming match), these elements will also gain a _SyncWire_ between each other.
 
-This can also be achieved by right clicking the _DomainObjectInstance_ and selecting _IAML Model_ > _Refresh all Form Mappings_.
+==Domain Object Instance Mappings==
+
+|| *Inference and Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_3/NewInstanceWireMapping.java NewInstanceWireMapping.java] ||
+|| *Inference Rules* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/runtime/new-instance.drl runtime/new-instance.drl] ||
+|| *Menu Title* || _Refresh all DomainObjectInstance Mappings_ ||
+|| *UI Action* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.diagram.custom/src/org/openiaml/model/diagram/custom/actions/RefreshObjectInstanceMappingsWithDrools.java RefreshObjectInstanceMappingsWithDrools.java] ||
+
+If a _DomainObject_ is connected to a _DomainObjectInstance_ via a _NewInstanceWire_, this action will populate the object instance with _DomainAttributeInstance_s matching the attributes within the _DomainObject_.
 
 =New Elements=
 

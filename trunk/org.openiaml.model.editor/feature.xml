@@ -13,8 +13,8 @@
       [Enter Copyright Description here.]
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      Under the Eclipse Public Licence (EPL) 1.0.
    </license>
 
    <url>
@@ -27,7 +27,7 @@
 
    <includes
          id="org.openiaml.iacleaner.feature"
-         version="0.1.0"
+         version="0.2.0"
          name="Internet Application Formatter/Cleaner"/>
 
    <requires>
@@ -83,105 +83,98 @@
          id="org.openiaml.model"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram.domain_store"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram.element"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram.visual"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram.wire"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.edit"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram.custom"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram.domain_object"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram.operation"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.codegen.oaw"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.drools"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
          id="org.openiaml.model.diagram.condition"
          download-size="0"
          install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
    <plugin
-         id="org.openiaml.model.diagram.file_domain_object"
+         id="org.openiaml.model.diagram.domain_object_instance"
          download-size="0"
          install-size="0"
-         version="0.2.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.openiaml.model.diagram.file_domain_store"
-         download-size="0"
-         install-size="0"
-         version="0.2.0"
+         version="0.3.0"
          unpack="false"/>
 
 </feature>

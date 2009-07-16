@@ -7,7 +7,7 @@ The development of this [Development IAML Eclipse plugin] is based on an iterati
 I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Development] significantly in order to test and validate the majority of the plugin. Though I'm not yet sure how to test the usability of Eclipse :)
 
 ==Release 0.1==
-([http://journals.jevon.org/users/jevon-phd/entry/16760 Released])
+([http://journals.jevon.org/users/jevon-phd/entry/16760 Released] November 2008)
   # [Model0_1 Initial IAML model] that can describe initial requirements
   # Usability improvements
     * Display shortcut elements for referenced elements
@@ -21,7 +21,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Set up [Installation update site]
 
 ==Release 0.2==
-([http://journals.jevon.org/users/jevon-phd/entry/19062 Released])
+([http://journals.jevon.org/users/jevon-phd/entry/19062 Released] April 2009)
   # [Milestones Publish milestones]
   # [Model0_2 Expand IAML model]
     * All basic model elements can be placed in a diagram 
@@ -35,6 +35,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Test cases for code generation of all modelling elements
 
 ==Release 0.3==
+([http://journals.jevon.org/users/jevon-phd/entry/19718 Released] July 2009)
 (Released)
   # [Model0_3 Expand IAML model]
     * [IamlOperations Document existing atomic operations]

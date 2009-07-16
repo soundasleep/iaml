@@ -3,8 +3,12 @@
  */
 package org.openiaml.model.tests.eclipse.actions;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.diagramextensions.GeneratedElementDeleter;
 import org.openiaml.model.diagramextensions.GeneratedElementHandler;
 import org.openiaml.model.model.GeneratedElement;
 
@@ -139,9 +143,37 @@ public class DeleteGeneratedElements extends AbstractActionTestCase {
 	}
 	
 	public void testDeletedElements() throws Exception {
-		fail("Needed: Implementation of deleting generated elements etc.");
+		initializeModelFile();
+
+		// open page
+		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		editor_page = openDiagram(page);
+		assertEditorVisual(editor_page);
+		
+		// there should be six children
+		assertEditorHasChildren(6, editor_page);
+		ShapeNodeEditPart target = assertHasInputTextField(editor_page, "target", false);
+		assertGenerated(target);
+		
+		GeneratedElementHandler handler = new GeneratedElementHandler(target);
+		List<EObject> toDelete = handler.getOtherElementsToDelete();	
+		
+		// there should be two other elements that are important to delete		
+		assertEquals(2, toDelete.size());
+		
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_page, "edit", true);
+		assertGenerated(edit);
+		ShapeNodeEditPart update = assertHasOperation(editor_page, "update", true);
+		assertGenerated(update);
+		assertContains(edit.resolveSemanticElement(), toDelete);
+		assertContains(update.resolveSemanticElement(), toDelete);
+		
+		// get ALL related elements to also
+		GeneratedElementDeleter deleter = new GeneratedElementDeleter((GeneratedElement) target.resolveSemanticElement());
+		
+		assertGreaterEq(6, deleter.getElementsToDelete().size());		
 	}
-	
+
 	/**
 	 * Close loaded editors.
 	 * @throws Exception 

@@ -86,6 +86,9 @@
 				}
 			}
 			
+			// delete other related elements that need deleting
+			handler.deleteOtherElements( getDiagramEditPart() );
+			
 			// if we get this far, we have confirmed it all
 			super.run();
 		}

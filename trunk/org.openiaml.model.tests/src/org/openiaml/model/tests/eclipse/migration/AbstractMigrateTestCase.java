@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.IEditorPart;
 import org.openiaml.model.diagram.custom.actions.MigrateModelAction;
 import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
@@ -58,7 +59,7 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 		// migrate the model
 		assertFalse("the target model should not exist yet", targetModel.exists());
 		MigrateModelAction a = new MigrateModelAction();
-		IStatus status = a.migrateModel(sourceModel, targetModel, monitor);
+		IStatus status = a.migrateModel(sourceModel, targetModel, new NullProgressMonitor());
 		assertStatusOK(status);
 		assertTrue("the target model should have been created", targetModel.exists());
 		

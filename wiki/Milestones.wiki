@@ -36,7 +36,6 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 
 ==Release 0.3==
 ([http://journals.jevon.org/users/jevon-phd/entry/19718 Released] July 2009)
-(Released)
   # [Model0_3 Expand IAML model]
     * [IamlOperations Document existing atomic operations]
     * [IamlCompositeOperations Document existing composite operations]

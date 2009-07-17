@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Iaml Tests Plug-in
-Bundle-SymbolicName: org.openiaml.model.tests
+Bundle-SymbolicName: org.openiaml.model.tests;singleton:=true
 Bundle-Version: 0.3.0
 Require-Bundle: org.junit,
  org.eclipse.ui,

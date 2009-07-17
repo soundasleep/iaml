@@ -3,36 +3,42 @@
  * This also allows us to remove the ".command" package export
  * requirement!
  *
- * It would be nice if this was in a separate file though, but
+ * It would be nice if this was in a separate class, but
  * I'm not sure how to make GMF do this yet.
  */
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
-«IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
-«EXTENSION xpt::diagram::Utils»
-«EXTENSION xpt::GenModelUtils»
+Â«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'Â»
+Â«IMPORT 'http://www.eclipse.org/emf/2002/GenModel'Â»
+Â«EXTENSION xpt::diagram::UtilsÂ»
 
 /**
  * Add our extensions in the "additions"
  */
-«AROUND additions FOR gmfgen::GenDiagram-»
-	«targetDef.proceed()»
+Â«AROUND additions FOR gmfgen::GenDiagram-Â»
+	Â«targetDef.proceed()Â»
 	
-	«EXPAND xpt::Common::generatedMemberComment»
-	public static org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand 
+	Â«REMÂ»
+		GMF 2.0.1 XXXCreateCommands extended CreateElementCommand; 
+		GMF 2.2 XXXCreateCommands extend EditElementCommand. Not sure why.
+		
+		But this means we cannot execute the EditElementCommand get the
+		created element; we have to use the original CreateElementRequest
+		instead.
+	Â«ENDREMÂ»
+	Â«EXPAND xpt::Common::generatedMemberCommentÂ»
+	public static org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand 
 			getCreateNodeCommand(org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest request, 
 			org.eclipse.emf.ecore.EClass elementType) {
 			
 		if (elementType == null)
 			return null;
 
-			«EXPAND elementCreateNodeCommand FOREACH getElements()-»
+			Â«EXPAND elementCreateNodeCommand FOREACH getAllTypedElements()-Â»
 		
 		return null;
 	} 
 
-	«EXPAND xpt::Common::generatedMemberComment»
-	public static org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand 
+	Â«EXPAND xpt::Common::generatedMemberCommentÂ»
+	public static org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand 
 			getCreateEdgeCommand(org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest request, 
 			org.eclipse.emf.ecore.EClass elementType,
 			org.eclipse.emf.ecore.EObject source,
@@ -41,103 +47,103 @@
 		if (elementType == null)
 			return null;
 
-			«EXPAND elementCreateEdgeCommand FOREACH getElements()-»
+			Â«EXPAND elementCreateEdgeCommand FOREACH getAllTypedElements()-Â»
 		
 		return null;
 	} 
 	
-	«EXPAND getElementReverse-»
-«ENDAROUND»
+	Â«EXPAND getElementReverse-Â»
+Â«ENDAROUNDÂ»
 
 
 // we have to expand it depending on what type it is
-«DEFINE elementCreateNodeCommand FOR gmfgen::GenNode-»
-	«EXPAND elementCreateNodeCommandType(elementType, getDiagram()) FOR elementType-»
-«ENDDEFINE»
+Â«DEFINE elementCreateNodeCommand FOR gmfgen::GenNode-Â»
+	Â«EXPAND elementCreateNodeCommandType(self, getDiagram()) FOR elementType-Â»
+Â«ENDDEFINEÂ»
 
 // other possible: gmfgen::GenLink, gmfgen::GenDiagram
 // default element: blank
-«DEFINE elementCreateNodeCommand FOR gmfgen::GenCommonBase-»
-«ENDDEFINE»
+Â«DEFINE elementCreateNodeCommand FOR gmfgen::GenCommonBase-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE elementCreateNodeCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::MetamodelType-»
-	«IF null != elementType-»
-		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetaClass()»)) {
-			return new «diagram.editCommandsPackageName».«elementType.getMetaClass().ecoreClass.name»CreateCommand(request);
+Â«DEFINE elementCreateNodeCommandType(gmfgen::GenNode node, gmfgen::GenDiagram diagram) FOR gmfgen::MetamodelType-Â»
+	Â«IF null <> self-Â»
+		if (elementType.equals(Â«EXPAND MetaModel::MetaClass FOR getMetaClass()Â»)) {
+			return new Â«node.getCreateCommandQualifiedClassName()Â»(request);
 		}
-	«ENDIF-»
-«ENDDEFINE»
+	Â«ENDIF-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE elementCreateNodeCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::SpecializationType-»
-	«IF null != elementType-»
-		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetamodelClass()»)) {
-			return new «diagram.editCommandsPackageName».«elementType.getMetamodelClass().ecoreClass.name»CreateCommand(request);
+Â«DEFINE elementCreateNodeCommandType(gmfgen::GenNode node, gmfgen::GenDiagram diagram) FOR gmfgen::SpecializationType-Â»
+	Â«IF null <> self-Â»
+		if (elementType.equals(Â«EXPAND MetaModel::MetaClass FOR getMetamodelClass()Â»)) {
+			return new Â«node.getCreateCommandQualifiedClassName()Â»(request);
 		}
-	«ENDIF-»
-«ENDDEFINE»
+	Â«ENDIF-Â»
+Â«ENDDEFINEÂ»
 
 
 // we have to expand it twice, depending on what type it is
-«DEFINE elementCreateEdgeCommand FOR gmfgen::GenLink-»
-	«EXPAND elementCreateEdgeCommandType(elementType, getDiagram()) FOR elementType-»
-«ENDDEFINE»
+Â«DEFINE elementCreateEdgeCommand FOR gmfgen::GenLink-Â»
+	Â«EXPAND elementCreateEdgeCommandType(self, getDiagram()) FOR elementType-Â»
+Â«ENDDEFINEÂ»
 
 // other possible: gmfgen::GenNode, gmfgen::GenDiagram
 // default element: blank
-«DEFINE elementCreateEdgeCommand FOR gmfgen::GenCommonBase-»
-«ENDDEFINE»
+Â«DEFINE elementCreateEdgeCommand FOR gmfgen::GenCommonBase-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE elementCreateEdgeCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::MetamodelType-»
-	«IF null != elementType-»
-		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetaClass()»)) {
-			return new «diagram.editCommandsPackageName».«elementType.getMetaClass().ecoreClass.name»CreateCommand(request, source, target);
+Â«DEFINE elementCreateEdgeCommandType(gmfgen::GenLink link, gmfgen::GenDiagram diagram) FOR gmfgen::MetamodelType-Â»
+	Â«IF null <> self-Â»
+		if (elementType.equals(Â«EXPAND MetaModel::MetaClass FOR getMetaClass()Â»)) {
+			return new Â«link.getCreateCommandQualifiedClassName()Â»(request, source, target);
 		}
-	«ENDIF-»
-«ENDDEFINE»
+	Â«ENDIF-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE elementCreateEdgeCommandType(gmfgen::ElementType elementType, gmfgen::GenDiagram diagram) FOR gmfgen::SpecializationType-»
-	«IF null != elementType-»
-		if (elementType.equals(«EXPAND xpt::Common::metaClassAccessor FOR elementType.getMetamodelClass()»)) {
-			return new «diagram.editCommandsPackageName».«elementType.getMetamodelClass().ecoreClass.name»CreateCommand(request, source, target);
+Â«DEFINE elementCreateEdgeCommandType(gmfgen::GenLink link, gmfgen::GenDiagram diagram) FOR gmfgen::SpecializationType-Â»
+	Â«IF null <> self-Â»
+		if (elementType.equals(Â«EXPAND MetaModel::MetaClass FOR getMetamodelClass()Â»)) {
+			return new Â«link.getCreateCommandQualifiedClassName()Â»(request, source, target);
 		}
-	«ENDIF-»
-«ENDDEFINE»
+	Â«ENDIF-Â»
+Â«ENDDEFINEÂ»
 
 
 /**
  * Copied from getElement() in ElementTypes.xpt
  */
-«DEFINE getElementReverse FOR gmfgen::GenDiagram-»
+Â«DEFINE getElementReverse FOR gmfgen::GenDiagram-Â»
 	private static java.util.Map<org.eclipse.emf.ecore.EClass, org.eclipse.gmf.runtime.emf.type.core.IElementType> elementsReverse;
 
-	«EXPAND xpt::Common::generatedMemberComment("Get the associated IElementType for this editor that renders a particular EClass in the model.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Get the associated IElementType for this editor that renders a particular EClass in the model.")Â»
 public static org.eclipse.gmf.runtime.emf.type.core.IElementType getElementType(org.eclipse.emf.ecore.EClass hint) {
 	if (elementsReverse == null) {
 		elementsReverse = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EClass, org.eclipse.gmf.runtime.emf.type.core.IElementType>();
-		«EXPAND bindUniqueIdentifierToNamedElementReverse(getUniqueIdentifier()) FOR domainDiagramElement-»
-		«FOREACH getNodes() AS node-»
-			«EXPAND bindUniqueIdentifierToNamedElementReverse(node.getUniqueIdentifier()) FOR node.modelFacet-»
-		«ENDFOREACH-»
-		«FOREACH links AS link-»
-			«EXPAND bindUniqueIdentifierToNamedElementReverse(link.getUniqueIdentifier()) FOR link.modelFacet-»
-		«ENDFOREACH-»
+		Â«EXPAND bindUniqueIdentifierToNamedElementReverse(getUniqueIdentifier()) FOR domainDiagramElement-Â»
+		Â«FOREACH getAllNodes() AS node-Â»
+			Â«EXPAND bindUniqueIdentifierToNamedElementReverse(node.getUniqueIdentifier()) FOR node.modelFacet-Â»
+		Â«ENDFOREACH-Â»
+		Â«FOREACH links->asSequence() AS link-Â»
+			Â«EXPAND bindUniqueIdentifierToNamedElementReverse(link.getUniqueIdentifier()) FOR link.modelFacet-Â»
+		Â«ENDFOREACH-Â»
 	}
 	return elementsReverse.get(hint);
 }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR genmodel::GenClass»
-	elementsReverse.put(«getQualifiedPackageInterfaceName(genPackage)».eINSTANCE.get«getClassifierAccessorName()»(), «id»);
-«ENDDEFINE»
+Â«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR genmodel::GenClassÂ»
+	elementsReverse.put(Â«EXPAND MetaModel::MetaClassÂ», Â«idÂ»);
+Â«ENDDEFINEÂ»
 
-«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::ModelFacet»
-	«ERROR "Unsupported model facet: " + this-»
-«ENDDEFINE»
+Â«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::ModelFacetÂ»
+	Â«ERROR 'Unsupported model facet: ' + self.repr()-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::TypeModelFacet»
-	«EXPAND bindUniqueIdentifierToNamedElementReverse(id) FOR metaClass-»
-«ENDDEFINE»
+Â«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::TypeModelFacetÂ»
+	Â«EXPAND bindUniqueIdentifierToNamedElementReverse(id) FOR metaClass-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::FeatureLinkModelFacet»
-	elementsReverse.put(«EXPAND xpt::Common::metaFeatureAccessor FOR metaFeature», «id»);
-«ENDDEFINE»
+Â«DEFINE bindUniqueIdentifierToNamedElementReverse(String id) FOR gmfgen::FeatureLinkModelFacetÂ»
+	elementsReverse.put(Â«EXPAND MetaModel::MetaFeature FOR metaFeatureÂ», Â«idÂ»)
+Â«ENDDEFINEÂ»

@@ -175,19 +175,16 @@
 
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We wrap org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter to also adapt to IElementType.class requests, so we can actually create edges in our current editor. \n\n This is also copied from the other adapter that adapts it to String.class.")»
 	public static class IElementTypeElementAdapter extends org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter {
+		«EXPAND xpt::Common::generatedMemberComment»
 		private String _hint;
 
-		/**
-		 * constructor
-		 * @param element
-		 * @param hint
-		 */
+		«EXPAND xpt::Common::generatedMemberComment»
 		public IElementTypeElementAdapter(org.eclipse.emf.ecore.EObject element, String hint) {
 			super(element);
 			_hint = hint;
 		}
 
-		/** Adds both <code>String.class</tt> and <code>IElementType.class</tt> adaptablity. */
+		«EXPAND xpt::Common::generatedMemberComment("Adds both <code>String.class</tt> and <code>IElementType.class</tt> adaptablity.")»
 		public Object getAdapter(Class adapter) {
 			if (adapter.equals(String.class)) {
 				return _hint;
@@ -356,7 +353,7 @@
 	}
 	
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is copied directly from {@link CanonicalEditPolicy#prepareAdapterList(java.util.List)}, since the original method is marked private.")»
-	private List<org.eclipse.core.runtime.IAdaptable> prepareAdapterList(java.util.List<org.eclipse.core.runtime.IAdaptable> createdViews) {
+	private java.util.List<org.eclipse.core.runtime.IAdaptable> prepareAdapterList(java.util.List<org.eclipse.core.runtime.IAdaptable> createdViews) {
 		java.util.List<org.eclipse.core.runtime.IAdaptable> viewAdapters = new java.util.ArrayList<org.eclipse.core.runtime.IAdaptable>();
 		viewAdapters.add( host() );
 		
@@ -379,37 +376,25 @@
 	protected static class AsyncCommand extends org.eclipse.gef.commands.Command {
 		private final org.eclipse.gef.commands.CompoundCommand _cc;
 
-		/**
-		 * constructor
-		 * @param label this command label
-		 */
+		«EXPAND xpt::Common::generatedMemberComment»
 		public AsyncCommand(String label) {
 			super(label);
 			_cc = new org.eclipse.gef.commands.CompoundCommand(label);
 		}
 
-		/**
-		 * constructor
-		 * @param cmd the command
-		 */
+		«EXPAND xpt::Common::generatedMemberComment»
 		public AsyncCommand(org.eclipse.gef.commands.Command cmd) {
 			this(cmd.getLabel());
 			add(cmd);
 		}
 
-		/**
-		 * constructor
-		 * @param cmd the command
-		 */
+		«EXPAND xpt::Common::generatedMemberComment»
 		public AsyncCommand(org.eclipse.gmf.runtime.common.core.command.ICommand cmd) {
 			this(cmd.getLabel());
 			add(cmd);
 		}
 
-		/**
-		 * Executes the command asynchonously. 
-		 * Calls {@link #doExecute}.
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("Executes the command asynchronously.\nCalls {@link #doExecute}.")»
 		public final void execute() {
 			// do not use Display.getCurrent() this mthod could be invoked
 			// on a non ui thread
@@ -420,31 +405,22 @@
 			});
 		}
 
-		/**
-		 * Return the command to be executed asynchronously.
-		 * @return the command
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("Return the command to be executed asynchronously.")»
 		protected final org.eclipse.gef.commands.CompoundCommand getCommand() {
 			return _cc;
 		}
 
-		/** Executes the command. */
+		«EXPAND xpt::Common::generatedMemberComment("Executes the command.")»
 		protected void doExecute() {
 			getCommand().execute();
 		}
 
-		/**
-		 * Add supplied command to the list of commands to be executed.
-		 * @param cmd command to add
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("Add supplied command to the list of commands to be executed.")»
 		public void add(org.eclipse.gmf.runtime.common.core.command.ICommand cmd) {
 			_cc.add(new org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy(cmd));
 		}
 
-		/**
-		 * Add supplied command to the list of commands to be executed.
-		 * @param cmd the command to add
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("Add supplied command to the list of commands to be executed.")»
 		public void add(org.eclipse.gef.commands.Command cmd) {
 			_cc.add(cmd);
 		}
@@ -613,12 +589,13 @@
 	public class CreateShortcutDecorationsCommand extends
 			org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand {
 
+		«EXPAND xpt::Common::generatedMemberComment»
 		private java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> myDescriptors;
+		
+		«EXPAND xpt::Common::generatedMemberComment»
 		private String modelId;
 
-		/**
-		 * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("@param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID")»
 		public CreateShortcutDecorationsCommand(
 				org.eclipse.emf.transaction.TransactionalEditingDomain editingDomain, org.eclipse.gmf.runtime.notation.View parentView,
 				java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> viewDescriptors,
@@ -630,9 +607,7 @@
 
 		}
 
-		/**
-		 * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("@param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID")»
 		public CreateShortcutDecorationsCommand(
 				org.eclipse.emf.transaction.TransactionalEditingDomain editingDomain, org.eclipse.gmf.runtime.notation.View parentView,
 				org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor viewDescriptor, String modelId) {
@@ -640,6 +615,7 @@
 					.singletonList(viewDescriptor), modelId);
 		}
 
+		«EXPAND xpt::Common::generatedMemberComment»
 		protected org.eclipse.gmf.runtime.common.core.command.CommandResult doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor monitor,
 				org.eclipse.core.runtime.IAdaptable info) throws org.eclipse.core.commands.ExecutionException {
 			for (org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor nextDescriptor : myDescriptors) {

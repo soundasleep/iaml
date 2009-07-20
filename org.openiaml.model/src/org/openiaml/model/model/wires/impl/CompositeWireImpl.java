@@ -418,7 +418,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
-				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+				return isOverridden();
 			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
 				return getConditions();
 			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
@@ -458,7 +458,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
-				setOverridden(((Boolean)newValue).booleanValue());
+				setOverridden((Boolean)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
 				getConditions().clear();

@@ -8,13 +8,10 @@ package org.openiaml.model.model.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
@@ -446,7 +443,7 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.EXECUTION_EDGE__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.EXECUTION_EDGE__ID:
 				return getId();
 			case ModelPackage.EXECUTION_EDGE__GENERATED_RULE:
@@ -473,7 +470,7 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.EXECUTION_EDGE__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.EXECUTION_EDGE__ID:
 				setId((String)newValue);

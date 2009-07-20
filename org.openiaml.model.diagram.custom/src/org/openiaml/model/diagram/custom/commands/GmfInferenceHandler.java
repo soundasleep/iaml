@@ -15,6 +15,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
+import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
@@ -67,7 +68,10 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 			
 			IElementType et = getDiagramEditType(elementType);
 			
-			CreateElementCommand cc = getDiagramCreateNodeCommand(new CreateElementRequest(getEditingDomain(), container, et ), elementType );
+			// GMF 2.2: XXXCreateCommands no longer extend CreateElementCommand, so
+			// we must get the newly created element from the CreateElementRequest instead
+			CreateElementRequest request = new CreateElementRequest(getEditingDomain(), container, et );
+			EditElementCommand cc = getDiagramCreateNodeCommand(request, elementType );
 			if (cc == null) {
 				// we can't do anything because the diagram editor won't allow us to create it currently
 				//return null;
@@ -75,7 +79,8 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 			}
 			doExecute(cc);
 			
-			EObject createdElement = cc.getNewElement();
+			//EObject createdElement = cc.getNewElement();
+			EObject createdElement = request.getNewElement();
 			
 			return createdElement;
 		} catch (ExecutionException e) {
@@ -104,7 +109,10 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 				//return null;
 				throw new InferenceException("Cannot create a relationship in a null container, source or target");
 			
-			CreateElementCommand cc = getDiagramCreateRelationshipCommand(new CreateRelationshipRequest(getEditingDomain(), container, source, target, getDiagramEditType(elementType) ), elementType, source, target );
+			// GMF 2.2: XXXCreateCommands no longer extend CreateElementCommand, so
+			// we must get the newly created element from the CreateElementRequest instead
+			CreateRelationshipRequest request = new CreateRelationshipRequest(getEditingDomain(), container, source, target, getDiagramEditType(elementType) );
+			EditElementCommand cc = getDiagramCreateRelationshipCommand(request, elementType, source, target );
 			if (cc == null) {
 				// we can't do anything because the diagram editor won't allow us to create it currently
 				//return null;
@@ -112,7 +120,8 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 			}
 			doExecute(cc);
 			
-			EObject createdElement = cc.getNewElement();
+			//EObject createdElement = cc.getNewElement();
+			EObject createdElement = request.getNewElement();
 			
 			return createdElement;
 		} catch (ExecutionException e) {
@@ -182,7 +191,7 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	 * @return
 	 * @throws ExecutionException 
 	 */
-	protected CreateElementCommand getDiagramCreateRelationshipCommand(
+	protected EditElementCommand getDiagramCreateRelationshipCommand(
 			CreateRelationshipRequest request,
 			EClass elementType, EObject source, EObject target) throws ExecutionException {
 		/*
@@ -250,7 +259,7 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	 * @return
 	 * @throws ExecutionException 
 	 */
-	protected CreateElementCommand getDiagramCreateNodeCommand(
+	protected EditElementCommand getDiagramCreateNodeCommand(
 			CreateElementRequest request, EClass elementType) throws ExecutionException {
 		/*
 		 * If any of these methods do not exist, make sure dynamic templates

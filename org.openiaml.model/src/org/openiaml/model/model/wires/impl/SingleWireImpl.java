@@ -7,9 +7,7 @@
 package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.openiaml.model.model.impl.WireEdgeImpl;
-
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.WiresPackage;
 

@@ -44,7 +44,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		migrateModel();
 		
 		// there should be two children
-		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasPage(editor, "SignupForm");
@@ -65,7 +65,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		migrateModel();
 
 		// there should be two children
-		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasPage(editor, "SignupForm");

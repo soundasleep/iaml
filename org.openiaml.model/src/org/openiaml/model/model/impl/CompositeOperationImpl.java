@@ -450,7 +450,7 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
-				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+				return isOverridden();
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS:
 				return getDomainObjects();
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS:
@@ -493,7 +493,7 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
-				setOverridden(((Boolean)newValue).booleanValue());
+				setOverridden((Boolean)newValue);
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();

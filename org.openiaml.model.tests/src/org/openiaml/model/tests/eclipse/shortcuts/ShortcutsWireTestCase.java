@@ -27,7 +27,7 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 		initializeModelFile();
 
 		// there should be four children
-		assertEquals("there should be 1 children", 1, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(1, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasPage(editor, "container");
@@ -39,7 +39,7 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 
 		// there are lots of children because the event triggers here
 		// also reference the operations inside the wire
-		assertEquals("there should be 5 children", 5, editor_page.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(5, editor_page);
 		ShapeNodeEditPart co = assertHasOperation(editor_page, "co");
 		ShapeNodeEditPart et = assertHasEventTrigger(editor_page, "et");
 		ShapeNodeEditPart etnew = assertHasEventTrigger(editor_page, "et new");
@@ -62,7 +62,7 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 		assertEditorWire(editor_wire);
 		
 		// it should have two operations and two event triggers
-		assertEquals("there should be 4 children", 4, editor_wire.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(4, editor_wire);
 		ShapeNodeEditPart et2 = assertHasEventTrigger(editor_wire, "et");
 		ShapeNodeEditPart etnew2 = assertHasEventTrigger(editor_wire, "et new");
 		ShapeNodeEditPart op12 = assertHasOperation(editor_wire, "op1");

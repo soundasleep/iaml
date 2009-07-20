@@ -10,20 +10,15 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
-
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -163,7 +158,7 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				return getInEdges();
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
-				return new Integer(getPriority());
+				return getPriority();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -182,7 +177,7 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
-				setPriority(((Integer)newValue).intValue());
+				setPriority((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

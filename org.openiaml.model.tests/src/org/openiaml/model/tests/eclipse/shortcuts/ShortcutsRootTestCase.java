@@ -25,7 +25,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		initializeModelFile();
 
 		// there should be four children
-		assertEquals("there should be 4 children", 4, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(4, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasPage(editor, "page");
@@ -47,7 +47,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		assertEditorVisual(editor_page);
 
 		// it should have a domain object
-		assertEquals("there should be 2 children", 2, editor_page.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor_page);
 		ShapeNodeEditPart chained2 = assertHasEventTrigger(editor_page, "chained");
 		ShapeNodeEditPart op2 = assertHasOperation(editor_page, "op");
 

@@ -27,7 +27,7 @@ public class Issue47 extends AbstractShortcutsTestCase {
 		initializeModelFile();
 
 		// there should be four children
-		assertEquals("there should be 1 children", 1, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(1, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasPage(editor, "container");

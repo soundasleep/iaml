@@ -394,7 +394,7 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.EVENT_TRIGGER__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.EVENT_TRIGGER__ID:
 				return getId();
 			case ModelPackage.EVENT_TRIGGER__GENERATED_RULE:
@@ -422,7 +422,7 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.EVENT_TRIGGER__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.EVENT_TRIGGER__ID:
 				setId((String)newValue);

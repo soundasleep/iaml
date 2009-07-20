@@ -111,17 +111,17 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(page);
 				if (result == null) result = caseScope(page);
 				if (result == null) result = caseApplicationElementContainer(page);
-				if (result == null) result = caseGeneratesElements(page);
 				if (result == null) result = caseApplicationElement(page);
-				if (result == null) result = caseContainsWires(page);
 				if (result == null) result = caseContainsOperations(page);
 				if (result == null) result = caseNamedElement(page);
 				if (result == null) result = caseContainsEventTriggers(page);
 				if (result == null) result = caseWireEdgesSource(page);
 				if (result == null) result = caseWireEdgeDestination(page);
+				if (result == null) result = caseGeneratesElements(page);
 				if (result == null) result = caseContainsConditions(page);
 				if (result == null) result = caseGeneratedElement(page);
 				if (result == null) result = caseShouldntContainWires(page);
+				if (result == null) result = caseContainsWires(page);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -131,7 +131,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(inputForm);
 				if (result == null) result = caseApplicationElementContainer(inputForm);
 				if (result == null) result = caseApplicationElement(inputForm);
-				if (result == null) result = caseContainsWires(inputForm);
 				if (result == null) result = caseContainsOperations(inputForm);
 				if (result == null) result = caseNamedElement(inputForm);
 				if (result == null) result = caseContainsEventTriggers(inputForm);
@@ -141,6 +140,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseContainsConditions(inputForm);
 				if (result == null) result = caseGeneratedElement(inputForm);
 				if (result == null) result = caseShouldntContainWires(inputForm);
+				if (result == null) result = caseContainsWires(inputForm);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -150,7 +150,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(inputTextField);
 				if (result == null) result = caseApplicationElementContainer(inputTextField);
 				if (result == null) result = caseApplicationElement(inputTextField);
-				if (result == null) result = caseContainsWires(inputTextField);
 				if (result == null) result = caseContainsOperations(inputTextField);
 				if (result == null) result = caseNamedElement(inputTextField);
 				if (result == null) result = caseContainsEventTriggers(inputTextField);
@@ -160,6 +159,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseContainsConditions(inputTextField);
 				if (result == null) result = caseGeneratedElement(inputTextField);
 				if (result == null) result = caseShouldntContainWires(inputTextField);
+				if (result == null) result = caseContainsWires(inputTextField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -169,7 +169,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(button);
 				if (result == null) result = caseApplicationElementContainer(button);
 				if (result == null) result = caseApplicationElement(button);
-				if (result == null) result = caseContainsWires(button);
 				if (result == null) result = caseContainsOperations(button);
 				if (result == null) result = caseNamedElement(button);
 				if (result == null) result = caseContainsEventTriggers(button);
@@ -179,6 +178,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseContainsConditions(button);
 				if (result == null) result = caseGeneratedElement(button);
 				if (result == null) result = caseShouldntContainWires(button);
+				if (result == null) result = caseContainsWires(button);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -188,17 +188,17 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(frame);
 				if (result == null) result = caseScope(frame);
 				if (result == null) result = caseApplicationElementContainer(frame);
-				if (result == null) result = caseGeneratesElements(frame);
 				if (result == null) result = caseApplicationElement(frame);
-				if (result == null) result = caseContainsWires(frame);
 				if (result == null) result = caseContainsOperations(frame);
 				if (result == null) result = caseNamedElement(frame);
 				if (result == null) result = caseContainsEventTriggers(frame);
 				if (result == null) result = caseWireEdgesSource(frame);
 				if (result == null) result = caseWireEdgeDestination(frame);
+				if (result == null) result = caseGeneratesElements(frame);
 				if (result == null) result = caseContainsConditions(frame);
 				if (result == null) result = caseGeneratedElement(frame);
 				if (result == null) result = caseShouldntContainWires(frame);
+				if (result == null) result = caseContainsWires(frame);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

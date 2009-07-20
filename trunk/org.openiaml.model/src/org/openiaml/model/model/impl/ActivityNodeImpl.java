@@ -9,11 +9,9 @@ package org.openiaml.model.model.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
@@ -284,7 +282,7 @@ public class ActivityNodeImpl extends EObjectImpl implements ActivityNode {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.ACTIVITY_NODE__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.ACTIVITY_NODE__ID:
 				return getId();
 			case ModelPackage.ACTIVITY_NODE__GENERATED_RULE:
@@ -305,7 +303,7 @@ public class ActivityNodeImpl extends EObjectImpl implements ActivityNode {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.ACTIVITY_NODE__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.ACTIVITY_NODE__ID:
 				setId((String)newValue);

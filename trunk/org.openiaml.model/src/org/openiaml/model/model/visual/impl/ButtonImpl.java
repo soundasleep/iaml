@@ -7,9 +7,7 @@
 package org.openiaml.model.model.visual.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.openiaml.model.model.impl.VisibleThingImpl;
-
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.VisualPackage;
 

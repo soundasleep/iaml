@@ -186,7 +186,7 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY:
 				return getStrQuery();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
-				return isAutosave() ? Boolean.TRUE : Boolean.FALSE;
+				return isAutosave();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -208,7 +208,7 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				setStrQuery((String)newValue);
 				return;
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
-				setAutosave(((Boolean)newValue).booleanValue());
+				setAutosave((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -10,19 +10,14 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
@@ -712,7 +707,7 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.COMPOSITE_CONDITION__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.COMPOSITE_CONDITION__ID:
 				return getId();
 			case ModelPackage.COMPOSITE_CONDITION__GENERATED_RULE:
@@ -722,7 +717,7 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 			case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
-				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+				return isOverridden();
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				return getNodes();
 			case ModelPackage.COMPOSITE_CONDITION__DATA_EDGES:
@@ -770,7 +765,7 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.COMPOSITE_CONDITION__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.COMPOSITE_CONDITION__ID:
 				setId((String)newValue);
@@ -786,7 +781,7 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
 			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
-				setOverridden(((Boolean)newValue).booleanValue());
+				setOverridden((Boolean)newValue);
 				return;
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				getNodes().clear();

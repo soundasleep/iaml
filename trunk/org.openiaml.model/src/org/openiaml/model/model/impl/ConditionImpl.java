@@ -10,19 +10,14 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
@@ -432,7 +427,7 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.CONDITION__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.CONDITION__ID:
 				return getId();
 			case ModelPackage.CONDITION__GENERATED_RULE:
@@ -468,7 +463,7 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.CONDITION__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.CONDITION__ID:
 				setId((String)newValue);

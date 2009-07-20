@@ -59,7 +59,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertTrue("Rendering an InternetApplication", rendering instanceof InternetApplication);
 		
 		// there should be 0 elements in this editor
-		assertEquals("there should be 0 children", 0, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(0, editor);
 		
 		root = (InternetApplication) rendering;
 		// should be empty
@@ -100,7 +100,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertNotNull(page);
 		
 		// there should be two elements in this editor
-		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor);
 		
 		// add another page
 		Page page2 = gmf.createPage(root);
@@ -111,7 +111,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertNotNull(sync);
 
 		// there should be three elements in this editor
-		assertEquals("there should be 3 children", 3, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(3, editor);
 	}
 	
 	public void testCreatingSubEditor() throws Exception {
@@ -131,7 +131,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertEquals("Page name should have changed", page.getName(), "page1");
 		
 		// there should be one element in this editor
-		assertEquals("there should be 1 children", 1, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(1, editor);
 		
 		// find the edit part for the page
 		ShapeNodeEditPart pageNode = assertHasPage(editor, "page1");
@@ -142,7 +142,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorVisual(pageEditor);
 		
 		// there shouldn't be anything here
-		assertEquals("there should be 0 children", 0, pageEditor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(0, pageEditor);
 		
 		// close this editor
 		((org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor) pageEditor).closeBlocking(false);

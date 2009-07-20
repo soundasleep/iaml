@@ -66,7 +66,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertTrue("Rendering an InternetApplication", rendering instanceof InternetApplication);
 		
 		// there should be 0 elements in this editor
-		assertEquals("there should be 0 children", 0, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(0, editor);
 		
 		root = (InternetApplication) rendering;
 		// should be empty

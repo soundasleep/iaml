@@ -1,18 +1,18 @@
---- wire.gmfgen	2009-07-07 13:46:54.759003100 +1200
-+++ copies/wire.gmfgen	2009-07-07 13:46:31.665253100 +1200
-@@ -136,6 +136,11 @@
-         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+--- wire.gmfgen	2009-07-17 12:55:13.546875000 +1200
++++ copies/wire.gmfgen	2009-07-17 12:57:17.515625000 +1200
+@@ -132,6 +132,11 @@
+             xsi:type="gmfgen:StyleAttributes"
+             fixedBackground="true"/>
        </viewmap>
 +      <behaviour
 +          xsi:type="gmfgen:OpenDiagramBehaviour"
 +          editPolicyClassName="OperationOpenDiagramEditPolicy"
 +          diagramKind="Iaml_Operation"
 +          editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
-       <modelFacet>
+       <modelFacet
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.1">
          <metaClass
-             href="iaml.genmodel#//model/CompositeOperation"/>
-@@ -180,6 +185,11 @@
+@@ -176,6 +181,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -21,22 +21,22 @@
 +            editPolicyClassName="OperationOpenDiagramEditPolicy"
 +            diagramKind="Iaml_Operation"
 +            editorID="org.openiaml.model.model.diagram.operation.part.IamlDiagramEditorID"/>
+         <modelFacet
+             parser="//@labelParsers/@implementations.1"/>
        </labels>
-     </topLevelNodes>
-     <topLevelNodes
-@@ -273,6 +283,11 @@
-         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-       </viewmap>
+@@ -268,6 +278,11 @@
+           layoutType="FLOW_LAYOUT"
+           className="DomainAttributeFigure"
+           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class DomainAttributeFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDomainAttributeNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDomainAttributeParentNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public DomainAttributeFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureDomainAttributeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureDomainAttributeNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureDomainAttributeNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureDomainAttributeParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureDomainAttributeParentNameFigure.setText(&quot;[none]&quot;);&#xA;&#x9;fFigureDomainAttributeParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;this.add(fFigureDomainAttributeParentNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDomainAttributeNameFigure() {&#xA;&#x9;&#x9;return fFigureDomainAttributeNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDomainAttributeParentNameFigure() {&#xA;&#x9;&#x9;return fFigureDomainAttributeParentNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
 +      <behaviour
 +          xsi:type="gmfgen:OpenDiagramBehaviour"
 +          editPolicyClassName="ElementOpenDiagramEditPolicy"
 +          diagramKind="Iaml_Element"
 +          editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
-       <modelFacet>
+       <modelFacet
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.3">
          <metaClass
-             href="iaml.genmodel#//model/DomainAttribute"/>
-@@ -317,6 +332,11 @@
+@@ -312,6 +327,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -45,22 +45,22 @@
 +            editPolicyClassName="ElementOpenDiagramEditPolicy"
 +            diagramKind="Iaml_Element"
 +            editorID="org.openiaml.model.model.diagram.element.part.IamlDiagramEditorID"/>
+         <modelFacet
+             parser="//@labelParsers/@implementations.1"/>
        </labels>
-     </topLevelNodes>
-     <topLevelNodes
-@@ -343,6 +363,11 @@
-         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+@@ -338,6 +358,11 @@
+             xsi:type="gmfgen:StyleAttributes"
+             fixedBackground="true"/>
        </viewmap>
 +      <behaviour
 +          xsi:type="gmfgen:OpenDiagramBehaviour"
 +          editPolicyClassName="VisualOpenDiagramEditPolicy"
 +          diagramKind="Iaml_Visual"
 +          editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
-       <modelFacet>
+       <modelFacet
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.4">
          <metaClass
-             href="iaml.genmodel#//model/visual/InputTextField"/>
-@@ -387,6 +412,11 @@
+@@ -382,6 +407,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -69,13 +69,13 @@
 +            editPolicyClassName="VisualOpenDiagramEditPolicy"
 +            diagramKind="Iaml_Visual"
 +            editorID="org.openiaml.model.model.diagram.visual.part.IamlDiagramEditorID"/>
+         <modelFacet
+             parser="//@labelParsers/@implementations.1"/>
        </labels>
-     </topLevelNodes>
-     <topLevelNodes
-@@ -667,6 +697,11 @@
-         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-       </viewmap>
+@@ -683,6 +713,11 @@
+           layoutType="FLOW_LAYOUT"
+           className="CompositeConditionFigure"
+           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class CompositeConditionFigure extends org.eclipse.draw2d.Ellipse {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureCompositeConditionNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureCompositeConditionParentNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public CompositeConditionFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureCompositeConditionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureCompositeConditionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureCompositeConditionNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureCompositeConditionParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureCompositeConditionParentNameFigure.setText(&quot;[none]&quot;);&#xA;&#x9;fFigureCompositeConditionParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;this.add(fFigureCompositeConditionParentNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureCompositeConditionNameFigure() {&#xA;&#x9;&#x9;return fFigureCompositeConditionNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureCompositeConditionParentNameFigure() {&#xA;&#x9;&#x9;return fFigureCompositeConditionParentNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
 +      <behaviour
 +          xsi:type="gmfgen:OpenDiagramBehaviour"
 +          editPolicyClassName="ConditionOpenDiagramEditPolicy"
@@ -84,7 +84,7 @@
        <modelFacet>
          <metaClass
              href="iaml.genmodel#//model/CompositeCondition"/>
-@@ -709,6 +744,11 @@
+@@ -726,6 +761,11 @@
                xsi:type="gmfgen:StyleAttributes"
                fixedForeground="true"/>
          </viewmap>
@@ -93,123 +93,30 @@
 +            editPolicyClassName="ConditionOpenDiagramEditPolicy"
 +            diagramKind="Iaml_Condition"
 +            editorID="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"/>
+         <modelFacet
+             parser="//@labelParsers/@implementations.1"/>
        </labels>
-     </topLevelNodes>
-     <links
-@@ -730,6 +770,11 @@
-         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-       </viewmap>
+@@ -746,6 +786,11 @@
+           xsi:type="gmfgen:InnerClassViewmap"
+           className="SyncWireFigure"
+           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SyncWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSyncWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SyncWireFigure() {&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setSourceDecoration(createSourceDecoration());&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSyncWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSyncWireNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureSyncWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createSourceDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSyncWireNameFigure() {&#xA;&#x9;&#x9;return fFigureSyncWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
 +      <behaviour
 +          xsi:type="gmfgen:OpenDiagramBehaviour"
 +          editPolicyClassName="WireOpenDiagramEditPolicy"
 +          diagramKind="Iaml_Wire"
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
-           xsi:type="gmfgen:TypeLinkModelFacet">
-         <metaClass
-@@ -790,6 +835,11 @@
-         <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-       </viewmap>
+           xsi:type="gmfgen:TypeLinkModelFacet"
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.5">
+@@ -803,6 +848,11 @@
+           xsi:type="gmfgen:InnerClassViewmap"
+           className="RunInstanceWireFigure"
+           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RunInstanceWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRunInstanceWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RunInstanceWireFigure() {&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRunInstanceWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRunInstanceWireNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureRunInstanceWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRunInstanceWireNameFigure() {&#xA;&#x9;&#x9;return fFigureRunInstanceWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
 +      <behaviour
 +          xsi:type="gmfgen:OpenDiagramBehaviour"
 +          editPolicyClassName="WireOpenDiagramEditPolicy"
 +          diagramKind="Iaml_Wire"
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
-           xsi:type="gmfgen:TypeLinkModelFacet">
-         <metaClass
-@@ -1089,30 +1139,6 @@
-         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-     <childReferences
-         parent="//@diagram/@links.0"
--        child="//@diagram/@topLevelNodes.1"
--        referenceType="in_source"
--        groupName="source"
--        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@topLevelNodes.1"
--        child="//@diagram/@links.0"
--        referenceType="out_target"
--        groupName="outgoing links"
--        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@links.0"
--        child="//@diagram/@topLevelNodes.2"
--        referenceType="in_source"
--        groupName="source"
--        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@topLevelNodes.2"
--        child="//@diagram/@links.0"
--        referenceType="out_target"
--        groupName="outgoing links"
--        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@links.0"
-         child="//@diagram/@topLevelNodes.3"
-         referenceType="in_source"
-         groupName="source"
-@@ -1262,30 +1288,6 @@
-         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-     <childReferences
-         parent="//@diagram/@links.1"
--        child="//@diagram/@topLevelNodes.1"
--        referenceType="in_source"
--        groupName="source"
--        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@topLevelNodes.1"
--        child="//@diagram/@links.1"
--        referenceType="out_target"
--        groupName="outgoing links"
--        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@links.1"
--        child="//@diagram/@topLevelNodes.2"
--        referenceType="in_source"
--        groupName="source"
--        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@topLevelNodes.2"
--        child="//@diagram/@links.1"
--        referenceType="out_target"
--        groupName="outgoing links"
--        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@links.1"
-         child="//@diagram/@topLevelNodes.3"
-         referenceType="in_source"
-         groupName="source"
-@@ -1435,30 +1437,6 @@
-         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-     <childReferences
-         parent="//@diagram/@links.2"
--        child="//@diagram/@topLevelNodes.1"
--        referenceType="in_source"
--        groupName="source"
--        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@topLevelNodes.1"
--        child="//@diagram/@links.2"
--        referenceType="out_target"
--        groupName="outgoing links"
--        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@links.2"
--        child="//@diagram/@topLevelNodes.2"
--        referenceType="in_source"
--        groupName="source"
--        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@topLevelNodes.2"
--        child="//@diagram/@links.2"
--        referenceType="out_target"
--        groupName="outgoing links"
--        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
--    <childReferences
--        parent="//@diagram/@links.2"
-         child="//@diagram/@topLevelNodes.3"
-         referenceType="in_source"
-         groupName="source"
+           xsi:type="gmfgen:TypeLinkModelFacet"
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.6">

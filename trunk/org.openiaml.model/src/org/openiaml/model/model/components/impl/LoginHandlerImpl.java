@@ -8,11 +8,9 @@ package org.openiaml.model.model.components.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
-
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.impl.ApplicationElementContainerImpl;
 

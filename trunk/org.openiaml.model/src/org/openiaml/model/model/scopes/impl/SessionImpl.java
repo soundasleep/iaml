@@ -807,7 +807,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ScopesPackage.SESSION__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ScopesPackage.SESSION__ID:
 				return getId();
 			case ScopesPackage.SESSION__GENERATED_RULE:
@@ -819,7 +819,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ScopesPackage.SESSION__OVERRIDDEN:
-				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+				return isOverridden();
 			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				return getDomainObjects();
 			case ScopesPackage.SESSION__DOMAIN_VIEWS:
@@ -865,7 +865,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ScopesPackage.SESSION__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ScopesPackage.SESSION__ID:
 				setId((String)newValue);
@@ -885,7 +885,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
 			case ScopesPackage.SESSION__OVERRIDDEN:
-				setOverridden(((Boolean)newValue).booleanValue());
+				setOverridden((Boolean)newValue);
 				return;
 			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
 				getDomainObjects().clear();

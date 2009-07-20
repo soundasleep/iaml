@@ -32,7 +32,7 @@ public class LoadDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorRoot(editor);
 
 		// there should be four children
-		assertEquals("there should only be 4 children", 4, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(4, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page1 = assertHasPage(editor, "page1");

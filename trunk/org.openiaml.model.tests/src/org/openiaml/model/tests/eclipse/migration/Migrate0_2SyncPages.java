@@ -38,7 +38,7 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		migrateModel();
 		
 		// there should be five children (five pages)
-		assertEquals("there should be 5 children", 5, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(5, editor);
 		
 		// check the contents
 		assertHasPage(editor, "page1");
@@ -64,7 +64,7 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		assertEditorVisual(editor_page);
 		
 		// it should have two children: two text fields
-		assertEquals("there should be 2 children in page 1", 2, editor_page.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor_page);
 		assertHasInputTextField(editor_page, "text1");
 		assertHasInputTextField(editor_page, "text2");
 		
@@ -84,7 +84,7 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		assertEditorVisual(editor_page);
 		
 		// it should have two children: two text fields
-		assertEquals("there should be 4 children in page 1", 4, editor_page.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(4, editor_page);
 		// two non-shortcuts
 		assertHasInputTextField(editor_page, "text1", true, false);
 		assertHasInputTextField(editor_page, "text3", true, false);

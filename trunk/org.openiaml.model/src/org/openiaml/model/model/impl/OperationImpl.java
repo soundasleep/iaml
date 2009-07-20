@@ -481,7 +481,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.OPERATION__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.OPERATION__ID:
 				return getId();
 			case ModelPackage.OPERATION__GENERATED_RULE:
@@ -517,7 +517,7 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.OPERATION__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.OPERATION__ID:
 				setId((String)newValue);

@@ -625,7 +625,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				if (resolve) return getGeneratedBy();
 				return basicGetGeneratedBy();
 			case ModelPackage.APPLICATION_ELEMENT__IS_GENERATED:
-				return isIsGenerated() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsGenerated();
 			case ModelPackage.APPLICATION_ELEMENT__ID:
 				return getId();
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_RULE:
@@ -643,7 +643,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
-				return isOverridden() ? Boolean.TRUE : Boolean.FALSE;
+				return isOverridden();
 			case ModelPackage.APPLICATION_ELEMENT__CONDITIONS:
 				return getConditions();
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
@@ -671,7 +671,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				setGeneratedBy((GeneratesElements)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__IS_GENERATED:
-				setIsGenerated(((Boolean)newValue).booleanValue());
+				setIsGenerated((Boolean)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__ID:
 				setId((String)newValue);
@@ -703,7 +703,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
-				setOverridden(((Boolean)newValue).booleanValue());
+				setOverridden((Boolean)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__CONDITIONS:
 				getConditions().clear();

@@ -2,15 +2,14 @@
  * We extend the editor to automatically provide FileReference editors
  * through FileDialogs. Based on http://www.jevon.org/wiki/Using_EDataTypes_in_GMF_2
  */
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
+Â«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'Â»
 
 /**
  * We have to redefine the whole method, and then add some additional
  * helper classes.
  */
-«AROUND getPropertySourceMethod FOR gmfgen::GenCustomPropertyTab-»
-	«EXPAND xpt::Common::generatedMemberComment»
+Â«AROUND getPropertySourceMethod FOR gmfgen::GenCustomPropertyTab-Â»
+	Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 	public org.eclipse.ui.views.properties.IPropertySource getPropertySource(Object object) {
 		if (object instanceof org.eclipse.ui.views.properties.IPropertySource) {
 			return (org.eclipse.ui.views.properties.IPropertySource) object;
@@ -19,7 +18,7 @@
 		if (af != null) {
 			org.eclipse.emf.edit.provider.IItemPropertySource ips = (org.eclipse.emf.edit.provider.IItemPropertySource) af.adapt(object, org.eclipse.emf.edit.provider.IItemPropertySource.class);
 			if (ips != null) {
-			    // return a custom PropertySource
+				// Jevon: return a custom PropertySource
 				return new IamlCustomPropertySource(object, ips);
 			}
 		}
@@ -29,16 +28,16 @@
 		return null;
 	}
 
-	«EXPAND xpt::Common::generatedMemberComment("Provides custom property editor functionality through {@link IamlCustomPropertySource}.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Provides custom property editor functionality through {@link IamlCustomPropertySource}.")Â»
 	protected class IamlCustomPropertyDescriptor extends org.eclipse.emf.edit.ui.provider.PropertyDescriptor {
 
-		«EXPAND xpt::Common::generatedMemberComment»
+		Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 		public IamlCustomPropertyDescriptor(Object object,
 				org.eclipse.emf.edit.provider.IItemPropertyDescriptor itemPropertyDescriptor) {
 			super(object, itemPropertyDescriptor);
 		}
 
-		«EXPAND xpt::Common::generatedMemberComment»
+		Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 		public org.eclipse.jface.viewers.CellEditor createPropertyEditor(org.eclipse.swt.widgets.Composite composite) {
 			org.eclipse.emf.ecore.EClassifier eType = ((org.eclipse.emf.ecore.EStructuralFeature) itemPropertyDescriptor
 					.getFeature(object)).getEType();
@@ -52,11 +51,11 @@
 					// based on CellEditor
 					// org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createEDataTypeCellEditor(EDataType
 					// eDataType, Composite composite)
-					«EXPAND xpt::Common::generatedMemberComment»
+					Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 					protected EDataTypeValueHandler valueHandler = new EDataTypeValueHandler(
 							dataType);
 
-					«EXPAND xpt::Common::generatedMemberComment»
+					Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 					@Override
 					protected Object openDialogBox(org.eclipse.swt.widgets.Control cellEditorWindow) {
 
@@ -97,16 +96,16 @@
 
 	}
 
-	«EXPAND xpt::Common::generatedMemberComment("A custom property source that provides a custom {@link IamlCustomPropertyDescriptor}, which provides custom property editor functionality.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("A custom property source that provides a custom {@link IamlCustomPropertyDescriptor}, which provides custom property editor functionality.")Â»
 	protected class IamlCustomPropertySource extends org.eclipse.emf.edit.ui.provider.PropertySource {
 
-		«EXPAND xpt::Common::generatedMemberComment»
+		Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 		public IamlCustomPropertySource(Object object,
 				org.eclipse.emf.edit.provider.IItemPropertySource itemPropertySource) {
 			super(object, itemPropertySource);
 		}
 
-		«EXPAND xpt::Common::generatedMemberComment»
+		Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 		@Override
 	    protected org.eclipse.ui.views.properties.IPropertyDescriptor createPropertyDescriptor(
 	    		org.eclipse.emf.edit.provider.IItemPropertyDescriptor itemPropertyDescriptor) {
@@ -114,5 +113,5 @@
         }
 
 	}	
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 

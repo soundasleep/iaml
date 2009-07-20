@@ -23,19 +23,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DomainAttributeInstance"
-          description="Create new DomainAttributeInstance">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainAttributeInstance.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainAttributeInstance.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="SingleOperation"
           description="Create new SingleOperation">
         <smallIcon
@@ -88,29 +75,48 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="SyncWire"
-          description="Create new SyncWire">
+          title="DomainAttributeInstance"
+          description="Create new DomainAttributeInstance">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/SyncWire.gif"
+            path="icons/full/obj16/DomainAttributeInstance.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/SyncWire.gif"
+            path="icons/full/obj32/DomainAttributeInstance.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
-          xsi:type="gmftool:CreationTool"
-          title="RunInstanceWire"
-          description="Create new RunInstanceWire">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/RunInstanceWire.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/RunInstanceWire.gif"
-            bundle="org.openiaml.model.edit"/>
+          xsi:type="gmftool:ToolGroup"
+          title="Wires"
+          description="Wires"
+          collapsible="true">
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="SyncWire"
+            description="Create new SyncWire">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/SyncWire.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/SyncWire.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="RunInstanceWire"
+            description="Create new RunInstanceWire">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/RunInstanceWire.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/RunInstanceWire.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
       </tools>
     </tools>
   </palette>

@@ -23,19 +23,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DomainObject"
-          description="Create new DomainObject">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainObject.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainObject.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="SingleOperation"
           description="Create new SingleOperation">
         <smallIcon
@@ -88,58 +75,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Page"
-          description="Create new Page">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Page.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Page.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="SyncWire"
-          description="Create new SyncWire">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/SyncWire.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/SyncWire.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="RunInstanceWire"
-          description="Create new RunInstanceWire">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/RunInstanceWire.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/RunInstanceWire.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="DomainStore"
-          description="Create new DomainStore">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainStore.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainStore.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="DynamicApplicationElementSet"
           description="Create new DynamicApplicationElementSet">
         <smallIcon
@@ -149,19 +84,6 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/DynamicApplicationElementSet.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Session"
-          description="Create new Session">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Session.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Session.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
@@ -179,6 +101,32 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="DomainStore"
+          description="Create new DomainStore">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/DomainStore.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/DomainStore.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DomainObject"
+          description="Create new DomainObject">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/DomainObject.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/DomainObject.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="CompositeCondition"
           description="Create new CompositeCondition">
         <smallIcon
@@ -191,30 +139,94 @@
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
-          xsi:type="gmftool:CreationTool"
-          title="ConditionWire"
-          description="Create new ConditionWire">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ConditionWire.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ConditionWire.gif"
-            bundle="org.openiaml.model.edit"/>
+          xsi:type="gmftool:ToolGroup"
+          title="Visual Elements"
+          description="Visual Elements"
+          collapsible="true">
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="Page"
+            description="Create new Page">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/Page.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/Page.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="Session"
+            description="Create new Session">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/Session.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/Session.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
       </tools>
       <tools
-          xsi:type="gmftool:CreationTool"
-          title="NavigateWire"
-          description="Create new NavigateWire">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/NavigateWire.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/NavigateWire.gif"
-            bundle="org.openiaml.model.edit"/>
+          xsi:type="gmftool:ToolGroup"
+          title="Wires"
+          description="Wires"
+          collapsible="true">
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="SyncWire"
+            description="Create new SyncWire">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/SyncWire.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/SyncWire.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="RunInstanceWire"
+            description="Create new RunInstanceWire">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/RunInstanceWire.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/RunInstanceWire.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="NavigateWire"
+            description="Create new NavigateWire">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/NavigateWire.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/NavigateWire.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="ConditionWire"
+            description="Create new ConditionWire">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/ConditionWire.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/ConditionWire.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
       </tools>
     </tools>
   </palette>

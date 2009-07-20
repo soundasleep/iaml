@@ -824,11 +824,25 @@
           title="model">
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="Parameter"
-            description="Create new Parameter"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Parameter.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Parameter.gif"
-            genNodes="//@diagram/@topLevelNodes.3"/>
+            title="StartNode"
+            description="Create new StartNode"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/StartNode.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/StartNode.gif"
+            genNodes="//@diagram/@topLevelNodes.4"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="FinishNode"
+            description="Create new FinishNode"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/FinishNode.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/FinishNode.gif"
+            genNodes="//@diagram/@topLevelNodes.6"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="CancelNode"
+            description="Create new CancelNode"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CancelNode.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CancelNode.gif"
+            genNodes="//@diagram/@topLevelNodes.5"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="SingleOperation"
@@ -852,39 +866,11 @@
             genNodes="//@diagram/@topLevelNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="StartNode"
-            description="Create new StartNode"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/StartNode.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/StartNode.gif"
-            genNodes="//@diagram/@topLevelNodes.4"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="CancelNode"
-            description="Create new CancelNode"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CancelNode.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CancelNode.gif"
-            genNodes="//@diagram/@topLevelNodes.5"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="FinishNode"
-            description="Create new FinishNode"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/FinishNode.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/FinishNode.gif"
-            genNodes="//@diagram/@topLevelNodes.6"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="DataFlowEdge"
-            description="Create new DataFlowEdge"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DataFlowEdge.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DataFlowEdge.gif"
-            genLinks="//@diagram/@links.0"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="ExecutionEdge"
-            description="Create new ExecutionEdge"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ExecutionEdge.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ExecutionEdge.gif"
-            genLinks="//@diagram/@links.1"/>
+            title="Parameter"
+            description="Create new Parameter"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Parameter.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Parameter.gif"
+            genNodes="//@diagram/@topLevelNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="TemporaryVariable"
@@ -894,13 +880,6 @@
             genNodes="//@diagram/@topLevelNodes.9"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="DecisionOperation"
-            description="Create new DecisionOperation"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DecisionOperation.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DecisionOperation.gif"
-            genNodes="//@diagram/@topLevelNodes.8"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
             title="DecisionNode"
             description="Create new DecisionNode"
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DecisionNode.gif"
@@ -908,11 +887,38 @@
             genNodes="//@diagram/@topLevelNodes.7"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="ConditionalEdge"
-            description="Create new ConditionalEdge"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionalEdge.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionalEdge.gif"
-            genLinks="//@diagram/@links.2"/>
+            title="DecisionOperation"
+            description="Create new DecisionOperation"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DecisionOperation.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DecisionOperation.gif"
+            genNodes="//@diagram/@topLevelNodes.8"/>
+        <entries
+            xsi:type="gmfgen:ToolGroup"
+            title="Edges"
+            description="Edges"
+            collapse="true">
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="ConditionalEdge"
+              description="Create new ConditionalEdge"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionalEdge.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionalEdge.gif"
+              genLinks="//@diagram/@links.2"/>
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="DataFlowEdge"
+              description="Create new DataFlowEdge"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DataFlowEdge.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DataFlowEdge.gif"
+              genLinks="//@diagram/@links.0"/>
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="ExecutionEdge"
+              description="Create new ExecutionEdge"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ExecutionEdge.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ExecutionEdge.gif"
+              genLinks="//@diagram/@links.1"/>
+        </entries>
       </groups>
     </palette>
     <preferencePages

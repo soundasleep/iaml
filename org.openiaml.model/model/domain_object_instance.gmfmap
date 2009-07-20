@@ -59,7 +59,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#ApplicationElementProperty"/>
     </ownedChild>
@@ -86,7 +86,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#SingleOperation"/>
     </ownedChild>
@@ -113,7 +113,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -140,7 +140,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#ChainedOperation"/>
     </ownedChild>
@@ -162,7 +162,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttributeInstance"/>
     </ownedChild>
@@ -183,7 +183,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.6"/>
+        href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.6/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#SyncWire"/>
     <sourceMetaFeature
@@ -209,7 +209,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.7"/>
+        href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.6/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature

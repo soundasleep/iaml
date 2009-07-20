@@ -1141,13 +1141,6 @@
             genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="DomainObject"
-            description="Create new DomainObject"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainObject.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainObject.gif"
-            genNodes="//@diagram/@topLevelNodes.4"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
             title="SingleOperation"
             description="Create new SingleOperation"
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SingleOperation.gif"
@@ -1176,46 +1169,11 @@
             genNodes="//@diagram/@topLevelNodes.7"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="Page"
-            description="Create new Page"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Page.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Page.gif"
-            genNodes="//@diagram/@topLevelNodes.5"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="SyncWire"
-            description="Create new SyncWire"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
-            genLinks="//@diagram/@links.0"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="RunInstanceWire"
-            description="Create new RunInstanceWire"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
-            genLinks="//@diagram/@links.1"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="DomainStore"
-            description="Create new DomainStore"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainStore.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainStore.gif"
-            genNodes="//@diagram/@topLevelNodes.8"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
             title="DynamicApplicationElementSet"
             description="Create new DynamicApplicationElementSet"
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DynamicApplicationElementSet.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DynamicApplicationElementSet.gif"
             genNodes="//@diagram/@topLevelNodes.6"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="Session"
-            description="Create new Session"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Session.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Session.gif"
-            genNodes="//@diagram/@topLevelNodes.9"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="LoginHandler"
@@ -1225,25 +1183,79 @@
             genNodes="//@diagram/@topLevelNodes.10"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
+            title="DomainStore"
+            description="Create new DomainStore"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainStore.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainStore.gif"
+            genNodes="//@diagram/@topLevelNodes.8"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="DomainObject"
+            description="Create new DomainObject"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainObject.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainObject.gif"
+            genNodes="//@diagram/@topLevelNodes.4"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
             title="CompositeCondition"
             description="Create new CompositeCondition"
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeCondition.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeCondition.gif"
             genNodes="//@diagram/@topLevelNodes.11"/>
         <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="ConditionWire"
-            description="Create new ConditionWire"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionWire.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionWire.gif"
-            genLinks="//@diagram/@links.2"/>
+            xsi:type="gmfgen:ToolGroup"
+            title="Visual Elements"
+            description="Visual Elements"
+            collapse="true">
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="Page"
+              description="Create new Page"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Page.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Page.gif"
+              genNodes="//@diagram/@topLevelNodes.5"/>
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="Session"
+              description="Create new Session"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Session.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Session.gif"
+              genNodes="//@diagram/@topLevelNodes.9"/>
+        </entries>
         <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="NavigateWire"
-            description="Create new NavigateWire"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/NavigateWire.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/NavigateWire.gif"
-            genLinks="//@diagram/@links.3"/>
+            xsi:type="gmfgen:ToolGroup"
+            title="Wires"
+            description="Wires"
+            collapse="true">
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="SyncWire"
+              description="Create new SyncWire"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
+              genLinks="//@diagram/@links.0"/>
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="RunInstanceWire"
+              description="Create new RunInstanceWire"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
+              genLinks="//@diagram/@links.1"/>
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="NavigateWire"
+              description="Create new NavigateWire"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/NavigateWire.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/NavigateWire.gif"
+              genLinks="//@diagram/@links.3"/>
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="ConditionWire"
+              description="Create new ConditionWire"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionWire.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionWire.gif"
+              genLinks="//@diagram/@links.2"/>
+        </entries>
       </groups>
     </palette>
     <preferencePages

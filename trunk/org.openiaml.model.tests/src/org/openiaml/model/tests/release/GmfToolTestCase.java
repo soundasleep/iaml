@@ -4,10 +4,14 @@
 package org.openiaml.model.tests.release;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.xml.xpath.XPathExpressionException;
 
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.tests.xpath.IterableElementList;
@@ -59,6 +63,34 @@ public class GmfToolTestCase extends XmlTestCase {
 	public void testGmfToolMatch() throws Exception {
 		assertEquals(getGmfTools().size(), PluginsTestCase.GMFGENS.length);
 	}
+	
+	/**
+	 * From a given root element (//palette/tools), get ALL 
+	 * gmfTool elements within. Excluding tool groups, but recursing 
+	 * through the gool groups.
+	 * 
+	 * @param root
+	 * @throws XPathExpressionException 
+	 */
+	private IterableElementList getAllGmfTools(Element root) throws XPathExpressionException {
+		List<Element> result = new ArrayList<Element>();
+		IterableElementList tools = xpath(root, "tools");
+		
+		for (Element e : tools) {
+			if (e.getAttribute("xsi:type").equals("gmftool:ToolGroup")) {
+				// found a group
+				result.addAll(getAllGmfTools(e).getContents());
+			} else if (e.getAttribute("xsi:type").equals("gmftool:CreationTool")) {
+				// found a tool
+				result.add(e);
+			} else {
+				// unknown tool type
+				fail("Unexpected GMF tool xsi:type: " + e.getAttribute("xsi:type"));
+			}
+		}
+		
+		return new IterableElementList(result);
+	}
 
 	/**
 	 * Check .gmftools for icons. If the .gmftool does not
@@ -80,7 +112,7 @@ public class GmfToolTestCase extends XmlTestCase {
 			assertEquals("There should be exactly one //tools entry", nl.getLength(), 1);
 			Element root = (Element) nl.item(0);
 			
-			IterableElementList tools = xpath(root, "tools");
+			IterableElementList tools = getAllGmfTools(root);
 			assertNotSame("There should be at least one subtool entry", tools.getLength(), 0);
 			
 			for (int i = 0; i < tools.getLength(); i++) {
@@ -144,7 +176,9 @@ public class GmfToolTestCase extends XmlTestCase {
 			Document gmftool = loaded.get(filename);
 			Document gmfmap = loadGmfmap(filename);
 			
-			IterableElementList tools = xpath(gmftool, "/ToolRegistry/palette/tools/tools");
+			Element root = xpathFirst(gmftool, "/ToolRegistry/palette/tools");
+			IterableElementList tools = getAllGmfTools(root);
+			
 			for (Element tool : tools) {
 				// EventTrigger
 				String toolName = tool.getAttribute("title");
@@ -203,7 +237,9 @@ public class GmfToolTestCase extends XmlTestCase {
 		for (String filename : loaded.keySet()) {
 			Document gmftool = loaded.get(filename);
 			
-			IterableElementList tools = xpath(gmftool, "/ToolRegistry/palette/tools/tools");
+			Element root = xpathFirst(gmftool, "/ToolRegistry/palette/tools");
+			IterableElementList tools = getAllGmfTools(root);
+
 			for (Element tool : tools) {
 				// EventTrigger
 				String toolName = tool.getAttribute("title");

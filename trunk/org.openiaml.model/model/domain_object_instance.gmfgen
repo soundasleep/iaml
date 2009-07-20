@@ -603,13 +603,6 @@
             genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="DomainAttributeInstance"
-            description="Create new DomainAttributeInstance"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainAttributeInstance.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainAttributeInstance.gif"
-            genNodes="//@diagram/@topLevelNodes.5"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
             title="SingleOperation"
             description="Create new SingleOperation"
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SingleOperation.gif"
@@ -638,18 +631,31 @@
             genNodes="//@diagram/@topLevelNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="SyncWire"
-            description="Create new SyncWire"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
-            genLinks="//@diagram/@links.0"/>
+            title="DomainAttributeInstance"
+            description="Create new DomainAttributeInstance"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainAttributeInstance.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainAttributeInstance.gif"
+            genNodes="//@diagram/@topLevelNodes.5"/>
         <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="RunInstanceWire"
-            description="Create new RunInstanceWire"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
-            genLinks="//@diagram/@links.1"/>
+            xsi:type="gmfgen:ToolGroup"
+            title="Wires"
+            description="Wires"
+            collapse="true">
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="SyncWire"
+              description="Create new SyncWire"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
+              genLinks="//@diagram/@links.0"/>
+          <entries
+              xsi:type="gmfgen:ToolEntry"
+              title="RunInstanceWire"
+              description="Create new RunInstanceWire"
+              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
+              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
+              genLinks="//@diagram/@links.1"/>
+        </entries>
       </groups>
     </palette>
     <preferencePages

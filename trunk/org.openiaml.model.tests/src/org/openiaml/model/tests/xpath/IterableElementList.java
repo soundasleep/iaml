@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.xpath;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,6 +38,16 @@ public class IterableElementList implements NodeList, Iterable<Element> {
 				elements.add((Element) nl.item(i));
 			}
 		}
+	}
+
+	/**
+	 * Wrap around a normal list. NOTE this doesn't clone the list,
+	 * it only keeps a copy of it.
+	 * 
+	 * @param result
+	 */
+	public IterableElementList(List<Element> result) {
+		elements = result;
 	}
 
 	/* (non-Javadoc)
@@ -111,6 +122,15 @@ public class IterableElementList implements NodeList, Iterable<Element> {
 	 */
 	public int size() {
 		return getLength();
+	}
+
+	/**
+	 * Get the contents of this iterable list.
+	 * 
+	 * @return
+	 */
+	public Collection<? extends Element> getContents() {
+		return elements;
 	}
 
 }

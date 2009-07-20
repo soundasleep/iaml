@@ -23,19 +23,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DomainObject"
-          description="Create new DomainObject">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainObject.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainObject.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="SingleOperation"
           description="Create new SingleOperation">
         <smallIcon
@@ -62,6 +49,19 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="ChainedOperation"
+          description="Create new ChainedOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ChainedOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ChainedOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="ApplicationElementProperty"
           description="Create new ApplicationElementProperty">
         <smallIcon
@@ -75,28 +75,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="SyncWire"
-          description="Create new SyncWire">
+          title="DomainObject"
+          description="Create new DomainObject">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/SyncWire.gif"
+            path="icons/full/obj16/DomainObject.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/SyncWire.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="ChainedOperation"
-          description="Create new ChainedOperation">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ChainedOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ChainedOperation.gif"
+            path="icons/full/obj32/DomainObject.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
@@ -111,6 +98,25 @@
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/DomainAttribute.gif"
             bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:ToolGroup"
+          title="Wires"
+          description="Wires"
+          collapsible="true">
+        <tools
+            xsi:type="gmftool:CreationTool"
+            title="SyncWire"
+            description="Create new SyncWire">
+          <smallIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj16/SyncWire.gif"
+              bundle="org.openiaml.model.edit"/>
+          <largeIcon
+              xsi:type="gmftool:BundleImage"
+              path="icons/full/obj32/SyncWire.gif"
+              bundle="org.openiaml.model.edit"/>
+        </tools>
       </tools>
     </tools>
   </palette>

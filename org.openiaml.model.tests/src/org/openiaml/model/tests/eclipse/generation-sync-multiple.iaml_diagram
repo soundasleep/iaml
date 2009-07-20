@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml="http://openiaml.org/model0.2" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_a3wbIHTiEd6jpMJt9-eZIg" type="Iaml" measurementUnit="Pixel">
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_a3wbIXTiEd6jpMJt9-eZIg"/>
-  <element xmi:type="iaml:InternetApplication" href="generation-sync-multiple.iaml#model.11d83490915.308"/>
-</notation:Diagram>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml="http://openiaml.org/model0.2" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation">
+  <notation:Diagram xmi:id="_X_C4QDqwEd6CDuP6W38FGg" type="Iaml" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_X_C4QTqwEd6CDuP6W38FGg"/>
+    <element xmi:type="iaml:InternetApplication" href="generation-sync-multiple.iaml#model.11d83490915.308"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_Z19WkDqwEd6CDuP6W38FGg" type="Iaml_DomainStore" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_Z19WkTqwEd6CDuP6W38FGg"/>
+    <element xmi:type="iaml:DomainStore" href="generation-sync-multiple.iaml#model.11d83490915.30d"/>
+  </notation:Diagram>
+</xmi:XMI>

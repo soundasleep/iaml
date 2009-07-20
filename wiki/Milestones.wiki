@@ -1,6 +1,8 @@
 #summary Planned development milestones for the IAML plugin
 #labels Featured,Phase-QA
 
+<wiki:toc max_depth="1" />
+
 =Introduction=
 The development of this [Development IAML Eclipse plugin] is based on an iterative approach. In particular, large iterations (minor versions) which are then broken down into smaller iterations (revisions, spikes). These iterations are also designed to be synchronised with my [http://journals.jevon.org/users/jevon-phd PhD]. 
 
@@ -65,6 +67,10 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * [http://code.google.com/p/iaml/wiki/Model0_3#Generated_Elements Deletion of generated elements semantics] ([[http://code.google.com/p/iaml/issues/detail?id=29 issue 29])
   # Development
     * [http://code.google.com/p/iaml/source/browse/#svn/trunk/org.openiaml.model.codegen.oaw/instrument/output Investigations into model-driven code coverage]
+
+===Release 0.3.1===
+In Progress
+  # Upgrade editor to Eclipse 3.5/GMF 2.2 ([http://code.google.com/p/iaml/issues/detail?id=50 issue 50])
 
 ==Release 0.4+==
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.4 Outstanding issues])

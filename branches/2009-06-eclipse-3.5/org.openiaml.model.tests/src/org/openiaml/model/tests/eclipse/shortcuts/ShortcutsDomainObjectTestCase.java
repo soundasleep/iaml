@@ -27,7 +27,7 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		initializeModelFile();
 
 		// there should be two children
-		assertEquals("there should be 2 children", 2, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasPage(editor, "page");
@@ -39,7 +39,7 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		assertEditorDomainStore(editor_store);
 
 		// it should have a domain object
-		assertEquals("there should be 1 children", 1, editor_store.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(1, editor_store);
 		ShapeNodeEditPart object = assertHasDomainObject(editor_store, "domain object");
 		
 		// open up the domain object
@@ -48,7 +48,7 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		assertEditorDomainObject(editor_object);
 		
 		// it should have a domain attribute connected to an event trigger
-		assertEquals("there should be 2 children", 2, editor_object.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor_object);
 		ShapeNodeEditPart attribute = assertHasDomainAttribute(editor_object, "domain attribute");
 		ShapeNodeEditPart event = assertHasEventTrigger(editor_object, "event trigger");
 		
@@ -63,7 +63,7 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		assertEditorVisual(editor_page);
 		
 		// it should have a domain attribute connected to an event trigger
-		assertEquals("there should be 2 children", 2, editor_page.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor_page);
 		ShapeNodeEditPart attribute2 = assertHasDomainAttribute(editor_page, "domain attribute");
 		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_page, "event trigger");
 

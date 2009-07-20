@@ -26,7 +26,7 @@ public class ShortcutsOperationTestCase extends AbstractShortcutsTestCase {
 		initializeModelFile();
 
 		// there should be four children
-		assertEquals("there should be 1 children", 1, editor.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(1, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasPage(editor, "container");
@@ -38,7 +38,7 @@ public class ShortcutsOperationTestCase extends AbstractShortcutsTestCase {
 
 		// note that even though there is an executionedge from chained -> final,
 		// it should not display
-		assertEquals("there should be 2 children", 2, editor_page.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(2, editor_page);
 		ShapeNodeEditPart composite = assertHasOperation(editor_page, "composite");
 		ShapeNodeEditPart opFinal = assertHasOperation(editor_page, "final");
 		
@@ -48,7 +48,7 @@ public class ShortcutsOperationTestCase extends AbstractShortcutsTestCase {
 		assertEditorOperation(editor_operation);
 		
 		// it should have a domain attribute connected to an event trigger
-		assertEquals("there should be 3 children", 3, editor_operation.getDiagramEditPart().getChildren().size());
+		assertEditorHasChildren(3, editor_operation);
 		ShapeNodeEditPart startNode = assertHasStartNode(editor_operation);
 		ShapeNodeEditPart chained = assertHasOperation(editor_operation, "chained");
 		ShapeNodeEditPart opFinal2 = assertHasOperation(editor_operation, "final");

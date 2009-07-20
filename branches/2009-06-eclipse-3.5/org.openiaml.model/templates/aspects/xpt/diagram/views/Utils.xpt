@@ -15,6 +15,11 @@
 	«targetDef.proceed()-»
 	
 	«IF stylesVar = 'edge.getStyles()'»
+		// [eclipse bug 244386] add support for OpenDiagramPolicies with edges  
 		«EXPAND xpt::diagram::views::Utils::addLinkedDiagramStyle(stylesVar)-»
+		
+		// [eclipse bug 244386] add support for OpenDiagramPolicies with edges
+		// see xpt/providers/ViewProvider.xpt#additions
+		stampShortcut(containerView, edge);
 	«ENDIF»
 «ENDAROUND»

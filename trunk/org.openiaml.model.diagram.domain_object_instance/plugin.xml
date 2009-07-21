@@ -55,8 +55,7 @@
          </action>
       </objectContribution>
    </extension>
-
-   	
+	
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
       <?gmfgen generated="true"?>
       <GlobalActionHandlerProvider
@@ -96,8 +95,7 @@
       </GlobalActionHandlerProvider>
    </extension>
 
-   
-   
+
    <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
       <?gmfgen generated="true"?>
       <MarkerNavigationProvider class="org.openiaml.model.model.diagram.domain_object_instance.providers.IamlMarkerNavigationProvider">
@@ -545,7 +543,8 @@
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
    </extension>
-<extension point="org.eclipse.ui.menus" id="context-menus">
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
       <?gmfgen generated="true"?>
       <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
       </menuContribution>
@@ -587,7 +586,7 @@
       </menuContribution>
    </extension>
 
-<extension point="org.eclipse.ui.commands" id="menu-commands">
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
       <?gmfgen generated="true"?>
       <category id="org.openiaml.model.model.diagram.domain_object_instance.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
       <command id="org.openiaml.model.diagram.domain_object_instance.LoadResourceAction"
@@ -604,8 +603,9 @@
          defaultHandler="org.openiaml.model.model.diagram.domain_object_instance.part.CreateShortcutAction"/>
    </extension>
 
-<extension point="org.eclipse.ui.handlers" id="menu-handlers">
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
       <?gmfgen generated="true"?>
    </extension>
 
+   <!-- optionally, specify keybindings -->
 </plugin>

@@ -55,8 +55,7 @@
          </action>
       </objectContribution>
    </extension>
-
-   	
+	
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
       <?gmfgen generated="true"?>
       <GlobalActionHandlerProvider
@@ -96,7 +95,31 @@
       </GlobalActionHandlerProvider>
    </extension>
 
-   
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.domain_object.providers.IamlMarkerNavigationProvider">
+         <MarkerType name="org.openiaml.model.diagram.domain_object.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Iaml Plugin (Domain Object) problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.domain_object.providers.IamlValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
    <extension point="org.eclipse.core.runtime.preferences" id="prefs">
       <?gmfgen generated="true"?>
       <initializer class="org.openiaml.model.model.diagram.domain_object.preferences.DiagramPreferenceInitializer"/>
@@ -262,6 +285,17 @@
       <ParserProvider class="org.openiaml.model.model.diagram.domain_object.providers.IamlParserProvider">
          <Priority name="Lowest"/>
       </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.model.diagram.domain_object.providers.IamlShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006"/>
+         </object>
+         <context decoratorTargets="generated-top-nodes"/>
+      </decoratorProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
@@ -509,37 +543,8 @@
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
    </extension>
-<extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
-      <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.domain_object.providers.IamlValidationDecoratorProvider">
-         <Priority name="Lowest"/>
-         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
-         <context decoratorTargets="PRIMARY_VIEW"/>
-      </decoratorProvider>
-   </extension>
-<extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
-      <?gmfgen generated="true"?>
-      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.domain_object.providers.IamlMarkerNavigationProvider">
-         <MarkerType name="org.openiaml.model.diagram.domain_object.diagnostic"/>
-         <Priority name="Lowest"/>
-      </MarkerNavigationProvider>
-   </extension>
-<extension id="diagnostic" name="Iaml Plugin (Domain Object) problems" point="org.eclipse.core.resources.markers">
-      <?gmfgen generated="true"?>
-      <super type="org.eclipse.core.resources.problemmarker"/>
-      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
-      <persistent value="true"/>
-   </extension><extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
-      <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.domain_object.providers.IamlShortcutsDecoratorProvider">
-         <Priority name="Lowest"/>
-         <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006"/>
-         </object>
-         <context decoratorTargets="generated-top-nodes"/>
-      </decoratorProvider>
-   </extension>
-<extension point="org.eclipse.ui.menus" id="context-menus">
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
       <?gmfgen generated="true"?>
       <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
       </menuContribution>
@@ -581,7 +586,7 @@
       </menuContribution>
    </extension>
 
-<extension point="org.eclipse.ui.commands" id="menu-commands">
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
       <?gmfgen generated="true"?>
       <category id="org.openiaml.model.model.diagram.domain_object.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
       <command id="org.openiaml.model.diagram.domain_object.LoadResourceAction"
@@ -598,12 +603,9 @@
          defaultHandler="org.openiaml.model.model.diagram.domain_object.part.CreateShortcutAction"/>
    </extension>
 
-<extension point="org.eclipse.ui.handlers" id="menu-handlers">
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
       <?gmfgen generated="true"?>
    </extension>
 
-
-
-
-
+   <!-- optionally, specify keybindings -->
 </plugin>

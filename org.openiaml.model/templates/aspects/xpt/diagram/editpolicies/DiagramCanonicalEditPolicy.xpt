@@ -1,23 +1,33 @@
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
-«EXTENSION xpt::diagram::Utils»
-«EXTENSION xpt::GenModelUtils»
+/**
+ * [issue 47]
+ * Lots of changes to render referenced elements as shortcuts.
+ *
+ * [issue 57]
+ * Phantom nodes can no longer be drag/dropped onto the editor; we 
+ * allow this again by adding logic to preventDragDrop(Request) to
+ * allow the drag/drop of nodes that can be rendered visually in 
+ * our current view.
+ */
+Â«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"Â»;
+Â«IMPORT "http://www.eclipse.org/emf/2002/Ecore"Â»;
+Â«EXTENSION xpt::diagram::UtilsÂ»
+Â«EXTENSION xpt::GenModelUtilsÂ»
 
-«AROUND getSemanticConnectionsList FOR gmfgen::GenDiagram-»
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get a list of all EObjects in the current diagram that need to be made into Edges. In particular this will go outside simply direct containment.")»
+Â«AROUND getSemanticConnectionsList FOR gmfgen::GenDiagram-Â»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get a list of all EObjects in the current diagram that need to be made into Edges. In particular this will go outside simply direct containment.")Â»
 	protected java.util.List getSemanticConnectionsList() {
 		org.eclipse.gmf.runtime.notation.View viewObject = (org.eclipse.gmf.runtime.notation.View) getHost().getModel();
 		java.util.List result = new java.util.LinkedList();
-		for (java.util.Iterator it = «editorGen.diagramUpdater.getDiagramUpdaterQualifiedClassName()».getAllChildrenEdges(viewObject)
+		for (java.util.Iterator it = Â«editorGen.diagramUpdater.getDiagramUpdaterQualifiedClassName()Â».getAllChildrenEdges(viewObject)
 				.iterator(); it.hasNext();) {
 			result.add(((org.eclipse.emf.ecore.EObject) it.next()));
 		}
 		return result;
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND getSourceElement FOR gmfgen::GenDiagram-»
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
+Â«AROUND getSourceElement FOR gmfgen::GenDiagram-Â»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")Â»
 	protected org.eclipse.emf.ecore.EObject getSourceElement(org.eclipse.emf.ecore.EObject relationship) {
 		// NOTE: model-specific
 		if (relationship instanceof org.openiaml.model.model.WireEdge) {
@@ -39,10 +49,10 @@
 				new java.lang.RuntimeException(errorMessage));
 		return null;
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND getTargetElement FOR gmfgen::GenDiagram-»
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
+Â«AROUND getTargetElement FOR gmfgen::GenDiagram-Â»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")Â»
 	protected org.eclipse.emf.ecore.EObject getTargetElement(org.eclipse.emf.ecore.EObject relationship) {
 		// NOTE: model-specific
 		if (relationship instanceof org.openiaml.model.model.WireEdge) {
@@ -64,14 +74,29 @@
 				new java.lang.RuntimeException(errorMessage));
 		return null;
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND additions FOR gmfgen::GenDiagram»
-	«targetDef.proceed()»
+Â«AROUND additions FOR gmfgen::GenDiagramÂ»
+	Â«targetDef.proceed()Â»
 	
-	«REM»Can we split up the Javadoc comments into [..." + \n + "...]?«ENDREM»
-
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We add additional logic to findEditPartForElement. The original method would dive straight into the ancestor of the view, even though in this case, host() returns the container of the actual EditPart we might be looking for. Otherwise it asks the parent method for the right result.\n\n@return an editpart; <tt>null</tt> if non could be found.")»
+	Â«EXPAND xpt::Common::generatedMemberComment(
+		"Jevon: [issue 57] If we remove the direct containment, we can no longer drag/drop shortcuts into the editor.\n\n" +
+		"This extension allows us to drag/drop elements that are still able to be rendered directly."
+	)Â»
+	@Override
+	protected boolean preventDropElement(Object dropElement) {
+		if (dropElement instanceof org.eclipse.emf.ecore.EObject) {
+			org.eclipse.emf.ecore.EObject resolved = (org.eclipse.emf.ecore.EObject) dropElement;
+			
+			if (Â«EXPAND xpt::editor::VisualIDRegistry::getNodeVisualIDMethodCallÂ»(getDiagram(), resolved) != -1) {
+				return false;	// can create this node in this diagram
+			}
+		}
+		
+		return super.preventDropElement(dropElement);
+	}
+	
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We add additional logic to findEditPartForElement. The original method would dive straight into the ancestor of the view, even though in this case, host() returns the container of the actual EditPart we might be looking for. Otherwise it asks the parent method for the right result.\n\n@return an editpart; <tt>null</tt> if non could be found.")Â»
 	protected org.eclipse.gef.EditPart findEditPartForElement(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject context,
 			java.util.List parts) {
 		org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart host = (org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart) getHost();
@@ -87,7 +112,7 @@
 		return super.findEditPartForElement(element, context, parts);
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] If we are trying to create a connection to an Edge, this method will return false, because the edge.getParent() = the root diagram window, not the XXXEditPart that were actually after.\n\nSo, we add some special logic to an otherwise direct copy, to assume we _can_ create connections between ConnectionEditParts, even if they dont have a CanonicalEditPolicy. \n\n @see CanonicalConnectionEditPolicy#canCreateConnection(EditPart, EditPart)")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] If we are trying to create a connection to an Edge, this method will return false, because the edge.getParent() = the root diagram window, not the XXXEditPart that were actually after.\n\nSo, we add some special logic to an otherwise direct copy, to assume we _can_ create connections between ConnectionEditParts, even if they dont have a CanonicalEditPolicy. \n\n @see CanonicalConnectionEditPolicy#canCreateConnection(EditPart, EditPart)")Â»
 	protected boolean canCreateConnection(org.eclipse.gef.EditPart sep, org.eclipse.gef.EditPart tep,
 			org.eclipse.emf.ecore.EObject connection) {
 		if (sep != null && sep.isActive() && tep != null && tep.isActive()) {
@@ -106,7 +131,7 @@
 		return false;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We create our own method to create connection views, so we can wrap the elementAdapter with another layer - IElementTypeElementAdapter - which lets us supply IElementType information to the adapter. Otherwise adapter.getAdapter(IElementType.class) will always return null. Otherwise, this method is copied directly from createConnectionView. \n\n Creates a connection view facade element for the supplied semantic element. An empty string is used as the default factory hint. \n\n @see #createConnectionView(EObject, int) \n @see IElementTypeElementAdapter")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We create our own method to create connection views, so we can wrap the elementAdapter with another layer - IElementTypeElementAdapter - which lets us supply IElementType information to the adapter. Otherwise adapter.getAdapter(IElementType.class) will always return null. Otherwise, this method is copied directly from createConnectionView. \n\n Creates a connection view facade element for the supplied semantic element. An empty string is used as the default factory hint. \n\n @see #createConnectionView(EObject, int) \n @see IElementTypeElementAdapter")Â»
 	protected org.eclipse.gmf.runtime.notation.Edge myCreateConnectionView(org.eclipse.emf.ecore.EObject connection, int index) {
 		org.eclipse.gef.EditPart sep = getSourceEditPartFor(connection);
 		org.eclipse.gef.EditPart tep = getTargetEditPartFor(connection);
@@ -158,7 +183,7 @@
 		return model;
 	}
 
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We wrap org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter to also adapt to IElementType.class requests, so we can actually create edges in our current editor. \n\n This is also copied from the other adapter that adapts it to String.class.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We wrap org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter to also adapt to IElementType.class requests, so we can actually create edges in our current editor. \n\n This is also copied from the other adapter that adapts it to String.class.")Â»
 	public static class IElementTypeElementAdapter extends org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter {
 		private String _hint;
 
@@ -179,28 +204,28 @@
 			}
 			// my hack: we just get the diagram editor to get the IElementType directly
 			if (adapter.equals(org.eclipse.gmf.runtime.emf.type.core.IElementType.class)) {
-				return «getElementTypesQualifiedClassName()»
+				return Â«getElementTypesQualifiedClassName()Â»
 						.getElementType(((org.eclipse.emf.ecore.EObject) getRealObject()).eClass());
 			}
 			return super.getAdapter(adapter);
 		}
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Return a create connection view request. \n\n Copied directly, because the original method is private.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Return a create connection view request. \n\n Copied directly, because the original method is private.")Â»
 	private org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest getCreateConnectionViewRequest(
 			org.eclipse.core.runtime.IAdaptable elementAdapter, String hint, int index) {
 		return new org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest(getConnectionViewDescriptor(
 				elementAdapter, hint, index));
 	}
 
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Return a connection view descriptor. \n\n Copied directly, because the original method is private.")»	
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Return a connection view descriptor. \n\n Copied directly, because the original method is private.")Â»	
 	private org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest.ConnectionViewDescriptor getConnectionViewDescriptor(
 			org.eclipse.core.runtime.IAdaptable elementAdapter, String hint, int index) {
 		return new org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest.ConnectionViewDescriptor(elementAdapter, hint, index, false,
 				((org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart) getHost()).getDiagramPreferencesHint());
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Even though the method \"should not be overridden\", we do so anyway.\n\n @see #refreshSemanticConnections()")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Even though the method \"should not be overridden\", we do so anyway.\n\n @see #refreshSemanticConnections()")Â»
 	protected java.util.List myRefreshSemanticConnections() {
 
 		// lets just get the edges (of type org.eclipse.emf.ecore.EObject)
@@ -288,7 +313,7 @@
 		return viewDescriptors;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Cycle through the diagram to get rid of any duplicate edges, i.e. edges that refer to the same EObject.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Cycle through the diagram to get rid of any duplicate edges, i.e. edges that refer to the same EObject.")Â»
 	protected void removeDuplicateEdges() {
 		java.util.List objectsFound = new java.util.ArrayList();
 		java.util.List toDelete = new java.util.ArrayList();
@@ -309,7 +334,7 @@
 		deleteViews(toDelete.iterator());
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly, except we add a null check.\n\n@see CanonicalEditPolicy#makeViewsImmutable(java.util.List)")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly, except we add a null check.\n\n@see CanonicalEditPolicy#makeViewsImmutable(java.util.List)")Â»
 	protected void makeViewsImmutableWithNullCheck(java.util.List createdViews) {
 		if (createdViews != null && !createdViews.isEmpty()) {
 			// uses my own method
@@ -323,7 +348,7 @@
 		}
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied from {@link CanonicalEditPolicy#addListenersToContainers()}, except this method prevents some NullPointerExceptions from being thrown.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied from {@link CanonicalEditPolicy#addListenersToContainers()}, except this method prevents some NullPointerExceptions from being thrown.")Â»
 	private void addListenersToContainersWithNullCheck(java.util.List createdViews) {
 		org.eclipse.emf.common.util.UniqueEList list = new org.eclipse.emf.common.util.UniqueEList();
 		java.util.ListIterator li = createdViews.listIterator();
@@ -348,7 +373,7 @@
 		}
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is copied directly from {@link CanonicalEditPolicy#prepareAdapterList(java.util.List)}, since the original method is marked private.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is copied directly from {@link CanonicalEditPolicy#prepareAdapterList(java.util.List)}, since the original method is marked private.")Â»
 	private java.util.List prepareAdapterList(java.util.List createdViews) {
 		java.util.List viewAdapters = new java.util.ArrayList();
 		viewAdapters.add(host());
@@ -365,7 +390,7 @@
 		return viewAdapters;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly from CanonicalEditPolicy.\n\nRuns the supplied commands asyncronously.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly from CanonicalEditPolicy.\n\nRuns the supplied commands asyncronously.")Â»
 	protected static class AsyncCommand extends org.eclipse.gef.commands.Command {
 		private final org.eclipse.gef.commands.CompoundCommand _cc;
 
@@ -440,7 +465,7 @@
 		}
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Extends {@link #refreshSemanticChildren()} to handle shortcuts too.\n\n@see #getShortcutChildrenList()")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Extends {@link #refreshSemanticChildren()} to handle shortcuts too.\n\n@see #getShortcutChildrenList()")Â»
 	protected final java.util.List myRefreshSemanticChildren() {
 
 		// Don't try to refresh children if the semantic element
@@ -537,19 +562,19 @@
 		return createdViews;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all of the shortcut children to add to this diagram.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all of the shortcut children to add to this diagram.")Â»
 	protected java.util.List getShortcutChildrenList() {
 		org.eclipse.gmf.runtime.notation.View viewObject = (org.eclipse.gmf.runtime.notation.View) getHost().getModel();
 		java.util.List result = new java.util.LinkedList();
-		for (java.util.Iterator it = «editorGen.diagramUpdater.getDiagramUpdaterQualifiedClassName()»
+		for (java.util.Iterator it = Â«editorGen.diagramUpdater.getDiagramUpdaterQualifiedClassName()Â»
 				.getAllShortcutElements(viewObject).iterator(); it
 				.hasNext();) {
-			result.add(((«getDiagram().editorGen.diagramUpdater.getNodeDescriptorQualifiedClassName()») it.next()).getModelElement());
+			result.add(((Â«getDiagram().editorGen.diagramUpdater.getNodeDescriptorQualifiedClassName()Â») it.next()).getModelElement());
 		}
 		return result;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Like {@link #createViews(java.util.List)}, but creates Shortcut commands instead.\n\nCreates a <code>View</code> element for each of the supplied semantic elements.\n\n @return a list of {@link org.eclipse.core.runtime.IAdaptable} that adapt to {@link View}.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Like {@link #createViews(java.util.List)}, but creates Shortcut commands instead.\n\nCreates a <code>View</code> element for each of the supplied semantic elements.\n\n @return a list of {@link org.eclipse.core.runtime.IAdaptable} that adapt to {@link View}.")Â»
 	protected final java.util.List createShortcutViews(java.util.List eObjects) {
 		java.util.List descriptors = new java.util.ArrayList();
 		java.util.Iterator elements = eObjects.iterator();
@@ -581,7 +606,7 @@
 		return java.util.Collections.EMPTY_LIST;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get the command to create both the element, and the shortcut decorator, on the request. Copied from {@link #getCreateViewCommand(CreateRequest)}.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get the command to create both the element, and the shortcut decorator, on the request. Copied from {@link #getCreateViewCommand(CreateRequest)}.")Â»
 	protected org.eclipse.gef.commands.Command getCreateViewShortcutsCommand(org.eclipse.gef.requests.CreateRequest request,
 			java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> descriptors,
 			org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart host) {
@@ -592,14 +617,14 @@
 					new CreateShortcutDecorationsCommand(
 							// these parameters are guessed, but they work
 							host.getEditingDomain(), host.getPrimaryView(),
-							descriptors, «getEditPartQualifiedClassName()».MODEL_ID)));
+							descriptors, Â«getEditPartQualifiedClassName()Â».MODEL_ID)));
 
 		}
 
 		return command;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] A simple command to add a shortcut decoration.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] A simple command to add a shortcut decoration.")Â»
 	public class CreateShortcutDecorationsCommand extends
 			org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand {
 
@@ -646,27 +671,27 @@
 		}
 	}
 
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND createConnections FOR gmfgen::GenDiagram-»
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method isnt called anymore, because its only called by {@link #refreshConnections()}.")»
+Â«AROUND createConnections FOR gmfgen::GenDiagram-Â»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method isnt called anymore, because its only called by {@link #refreshConnections()}.")Â»
 	private java.util.Collection createConnections(java.util.Collection linkDescriptors,
 			java.util.Map domain2NotationMap) {
 		throw new java.lang.UnsupportedOperationException(
 				"createConnections() is no longer supported");
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND refreshConnections FOR gmfgen::GenDiagram-»
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is no longer used.")»
+Â«AROUND refreshConnections FOR gmfgen::GenDiagram-Â»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is no longer used.")Â»
 	private java.util.Collection refreshConnections() {
 		throw new java.lang.UnsupportedOperationException(
 				"refreshConnections() is no longer used");
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND refreshSemantic FOR gmfgen::GenDiagram-»
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We override the fundamental method of refreshing the diagram - refreshSemantic() - so that we can select not only directly contained elements, but also those referenced in shortcuts.")»
+Â«AROUND refreshSemantic FOR gmfgen::GenDiagram-Â»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We override the fundamental method of refreshing the diagram - refreshSemantic() - so that we can select not only directly contained elements, but also those referenced in shortcuts.")Â»
 	protected void refreshSemantic() {
 		java.util.List createdViews = new java.util.LinkedList();
 
@@ -723,4 +748,4 @@
 		makeViewsImmutableWithNullCheck(createdViews);
 
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»

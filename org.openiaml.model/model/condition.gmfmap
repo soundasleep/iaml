@@ -135,8 +135,6 @@
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//CompositeCondition/_shouldnt_properties"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//ApplicationElementProperty"/>

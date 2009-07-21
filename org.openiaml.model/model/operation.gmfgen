@@ -394,8 +394,7 @@
           editPartClassName="WrappingLabel5EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel5ItemSemanticEditPolicy"
           notationViewFactoryClassName="CancelNodeLabelViewFactory"
-          readOnly="true"
-          elementIcon="true">
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -615,7 +614,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="2011"
+        visualID="2012"
         editPartClassName="ApplicationElementPropertyEditPart"
         itemSemanticEditPolicyClassName="ApplicationElementPropertyItemSemanticEditPolicy"
         notationViewFactoryClassName="ApplicationElementPropertyViewFactory"
@@ -639,13 +638,9 @@
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/ApplicationElementProperty"/>
-        <containmentMetaFeature
-            href="iaml.genmodel#//model/CompositeOperation/_shouldnt_properties"/>
-        <childMetaFeature
-            href="iaml.genmodel#//model/CompositeOperation/_shouldnt_properties"/>
       </modelFacet>
       <labels
-          visualID="5015"
+          visualID="5018"
           editPartClassName="ApplicationElementPropertyNameEditPart"
           itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
           notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
@@ -664,11 +659,10 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="5016"
+          visualID="5019"
           editPartClassName="ApplicationElementPropertyDefaultValueEditPart"
           itemSemanticEditPolicyClassName="ApplicationElementPropertyDefaultValueItemSemanticEditPolicy"
-          notationViewFactoryClassName="ApplicationElementPropertyDefaultValueViewFactory"
-          elementIcon="true">
+          notationViewFactoryClassName="ApplicationElementPropertyDefaultValueViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -685,7 +679,7 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="5017"
+          visualID="5020"
           editPartClassName="WrappingLabel8EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel8ItemSemanticEditPolicy"
           notationViewFactoryClassName="ApplicationElementPropertyLabelViewFactory"

@@ -1,12 +1,25 @@
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
-«EXTENSION xpt::diagram::Utils»
-«EXTENSION xpt::GenModelUtils»
+/**
+ * [issue 47]
+ * Add convenience methods to XXXDiagramUpdater, to allow us to
+ * easily identify which elements need to be rendered on a
+ * given diagram.
+ *
+ * Most of this dynamic template is model-specific.
+ *
+ * [issue 57]
+ * Phantom nodes should not render _all_ nodes from the entire
+ * model when called from getSemanticChildren().
+ */
+Â«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'Â»
 
-«AROUND additions FOR gmfgen::GenDiagramUpdater-»
-	«targetDef.proceed()»
+Â«EXTENSION xpt::diagram::updater::UtilsÂ»
+Â«EXTENSION xpt::GenModelUtilsÂ»
+Â«EXTENSION gmf::GenModelUtilsÂ»
 
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all the shortcut elements that need to be rendered for a particular view.")»
+Â«AROUND additions FOR gmfgen::GenDiagramUpdater-Â»
+	Â«targetDef.proceed()Â»
+
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all the shortcut elements that need to be rendered for a particular view.")Â»
 	public static java.util.List getAllShortcutElements(org.eclipse.gmf.runtime.notation.View view) {
 		java.util.List elements = new java.util.ArrayList();
 		java.util.List edges = new java.util.ArrayList();
@@ -14,7 +27,7 @@
 		return elements;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all the edges that need to be rendered for a particular view.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get all the edges that need to be rendered for a particular view.")Â»
 	public static java.util.List getAllChildrenEdges(org.eclipse.gmf.runtime.notation.View view) {
 		java.util.List elements = new java.util.ArrayList();
 		java.util.List edges = new java.util.ArrayList();
@@ -22,7 +35,7 @@
 		return edges;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get both the shortcut elements and the edges that are required for a particular view.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get both the shortcut elements and the edges that are required for a particular view.")Â»
 	public static void getBothShortcutElementsAndEdges(org.eclipse.gmf.runtime.notation.View view, 
 			java.util.List targetElements, java.util.List targetEdges) {
 		if (!view.isSetElement()) {
@@ -39,7 +52,7 @@
 				.eContents());
 	}
 
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a given list of EObjects in the model, what edges should be displayed?")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a given list of EObjects in the model, what edges should be displayed?")Â»
 	private static void getAllImportantRelationships(java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
 			java.util.List<org.eclipse.emf.ecore.EObject> elements, 
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
@@ -80,7 +93,7 @@
 		}
 	}
 
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")Â»
 	private static java.util.List<org.openiaml.model.model.WireEdge> getAllShortcutsFromWireEdges(
 			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
@@ -96,7 +109,7 @@
 		// NOTE: model-specific
 		for (org.openiaml.model.model.WireEdge wire : outEdges) {
 			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
+			if (Â«EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagramÂ»(wire) != -1) {
 				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
 				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
 			}
@@ -118,7 +131,7 @@
 		return result;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")Â»
 	private static java.util.List<org.openiaml.model.model.ExecutionEdge> getAllShortcutsFromExecutionEdges(
 			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
@@ -134,7 +147,7 @@
 		// NOTE: model-specific
 		for (org.openiaml.model.model.ExecutionEdge wire : outEdges) {
 			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
+			if (Â«EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagramÂ»(wire) != -1) {
 				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
 					continue;
 				if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
@@ -145,7 +158,7 @@
 		return result;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")Â»
 	private static java.util.List<org.openiaml.model.model.DataFlowEdge> getAllShortcutsFromDataFlowEdges(
 			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
@@ -161,7 +174,7 @@
 		// NOTE: model-specific
 		for (org.openiaml.model.model.DataFlowEdge wire : outEdges) {
 			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
+			if (Â«EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagramÂ»(wire) != -1) {
 				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
 					continue;
 				if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
@@ -172,7 +185,7 @@
 		return result;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Add descriptors for elements that exist in the current diagram editor registry.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Add descriptors for elements that exist in the current diagram editor registry.")Â»
 	private static boolean considerElementForShortcut(org.eclipse.emf.ecore.EObject childElement, 
 			org.eclipse.emf.ecore.EObject wire,
 			org.eclipse.gmf.runtime.notation.View view, 
@@ -184,10 +197,10 @@
 		if (childElement != null && !childElement.equals(source)) {
 			if (doneAlready.contains(childElement))
 				return true;
-			int visualID = «EXPAND xpt::editor::VisualIDRegistry::getNodeVisualIDMethodCall FOR editorGen.diagram»(view,
+			int visualID = Â«EXPAND xpt::editor::VisualIDRegistry::getNodeVisualIDMethodCall FOR editorGen.diagramÂ»(view,
 					childElement);
 			if (visualID != -1) {
-				result.add(new «getNodeDescriptorQualifiedClassName()»(childElement,
+				result.add(new Â«getNodeDescriptorQualifiedClassName()Â»(childElement,
 						visualID));
 				doneAlready.add(childElement);
 				if (!edges.contains(wire))
@@ -198,4 +211,24 @@
 		
 		return false;
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»
+
+/**
+ * Issue 57: In order to allow creation of shortcut elements that are not
+ * directly contained, we make the .gmfmap element a phantom node by setting
+ * its containment element to null. However, the default implementation of
+ * getSemanticChildren() calls getPhantomNodesIterator() for each phantom node,
+ * which by default returns _all_ elements in the current document.
+ *
+ * We change this behaviour to return an empty iterator instead, restoring
+ * its old functionality.
+ */
+Â«AROUND getPhantomNodesIterator FOR gmfgen::GenDiagramUpdater-Â»
+	Â«IF not editorGen.diagram.getPhantomNodes()->isEmpty()-Â»
+	
+	Â«EXPAND xpt::Common::generatedMemberComment("[jevon] Issue 57: Phantom nodes should <b>not</b> automatically return <i>all</i> matching elements in the model.")Â»
+	private static java.util.Iterator getPhantomNodesIterator(org.eclipse.emf.ecore.resource.Resource resource) {
+		return java.util.Collections.EMPTY_LIST.iterator();
+	}
+	Â«ENDIF-Â»
+Â«ENDAROUNDÂ»

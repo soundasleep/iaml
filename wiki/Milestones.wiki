@@ -69,8 +69,11 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * [http://code.google.com/p/iaml/source/browse/#svn/trunk/org.openiaml.model.codegen.oaw/instrument/output Investigations into model-driven code coverage]
 
 ==Release 0.3.1==
-In Progress
+([http://journals.jevon.org/users/jevon-phd/entry/19722 Released] July 2009)
   # Upgrade editor to Eclipse 3.5/GMF 2.2 ([http://code.google.com/p/iaml/issues/detail?id=50 issue 50])
+  # Usability improvements
+    * More icons for editor elements ([http://code.google.com/p/iaml/issues/detail?id=18 issue 18])
+    * Model element creation tools are now rendered in groups
 
 =Release 0.4+=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.4 Outstanding issues])

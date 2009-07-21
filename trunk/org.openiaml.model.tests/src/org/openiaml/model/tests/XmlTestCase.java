@@ -108,7 +108,14 @@ public class XmlTestCase extends TestCase implements XpathTestCase {
 	}
 
 	/**
-	 * Load an XML document.
+	 * Load an XML document from a file.
+	 */
+	public static Document loadDocument(File f) throws FileNotFoundException, ParserConfigurationException, SAXException, IOException {
+		return loadDocument( new FileInputStream(f) );
+	}
+	
+	/**
+	 * Load an XML document from an input source.
 	 */
 	public static Document loadDocument(InputStream source) throws ParserConfigurationException, SAXException, IOException {
 		// load the model version

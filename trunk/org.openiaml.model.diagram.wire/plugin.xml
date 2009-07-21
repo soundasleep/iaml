@@ -39,17 +39,6 @@
       </context>
    </extension>
 
-   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
-      <?gmfgen generated="true"?>
-  	  <wizard
-  	     name="%newWizardName"
-  	     icon="icons/obj16/WiresDiagramFile.gif"
-  	     category="org.eclipse.ui.Examples"
-  	     class="org.openiaml.model.model.diagram.wire.part.IamlCreationWizard"
-  	     id="org.openiaml.model.model.diagram.wire.part.IamlCreationWizardID">
-  	  	 <description>%newWizardDesc</description>  
-      </wizard>
-   </extension>
 
    <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
       <?gmfgen generated="true"?>

@@ -23,12 +23,14 @@ public interface XpathTestCase {
 	public IterableElementList xpath(Node doc, String query) throws XPathExpressionException;
 	
 	/**
-	 * Get the first node result from an XPath query.
+	 * Get the first element result from an XPath query.
+	 * Fail if no such element exists.
 	 */
 	public Element xpathFirst(Document doc, String query) throws XPathExpressionException;
 	
 	/**
-	 * Get the first node result from an XPath query.
+	 * Get the first element result from an XPath query.
+	 * Fail if no such element exists.
 	 */
 	public Element xpathFirst(Element e, String query) throws XPathExpressionException;
 	

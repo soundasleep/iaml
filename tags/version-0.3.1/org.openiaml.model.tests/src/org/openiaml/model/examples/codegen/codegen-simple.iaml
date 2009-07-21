@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.11d04eefe13.2">
+  <children xsi:type="iaml.visual:Page" id="visual.11d04eefe41.c" name="home">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d04eefe41.4b" name="empty text field"/>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.11d04eefe41.e" name="about"/>
+  <children xsi:type="iaml.visual:Page" id="visual.11d04eefe41.13" name="contact me!">
+    <children xsi:type="iaml.visual:InputForm" id="visual.11d04eefe41.97" name="contact form">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d04eefe41.103" name="your name"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d04eefe41.104" name="your email address"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.11d04eefe41.105" name="your message"/>
+    </children>
+  </children>
+</iaml:InternetApplication>

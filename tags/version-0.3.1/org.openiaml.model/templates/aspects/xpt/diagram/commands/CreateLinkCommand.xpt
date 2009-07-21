@@ -1,0 +1,61 @@
+«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
+«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
+«IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
+«EXTENSION xpt::diagram::Utils»
+«EXTENSION xpt::GenModelUtils»
+
+/**
+ * Originally, if you created a shortcut to ApplicationElementProperty in
+ * a CompositeOperation diagram editor, and you tried to create a
+ * DataFlowEdge _from_ that ApplicationElementProperty, it couldn't
+ * be created -- the AEP cannot contain DataFlowEdges, even though the
+ * source CompositeOperation contains them.
+ *
+ * This extension makes GMF consider the host element for link containment,
+ * and not just the target element.
+ *
+ * See http://code.google.com/p/iaml/issues/detail?id=34
+ */
+
+/**
+ * A bit of a hack to extend the command with a new constructor.
+ *
+ * See http://code.google.com/p/iaml/issues/detail?id=34
+ */
+«AROUND body(gmfgen::GenLink link) FOR gmfgen::TypeLinkModelFacet-»
+	«targetDef.proceed()»
+
+	«EXPAND xpt::Common::generatedMemberComment("Jevon custom command: Allow links to be contained in non-direct elements")»
+	public «link.createCommandClassName»(org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest req,
+			org.eclipse.emf.ecore.EObject source2, 
+			org.eclipse.emf.ecore.EObject target2,
+			java.util.List<org.eclipse.emf.ecore.EObject> potentialHostElements) {
+		// try find the container like normal
+		this(req, source2, target2);
+		
+		// now lets try the elements in the list of potential hosts
+		// (but only if a container hasn't already been found.)
+		while (container == null) {
+			for (org.eclipse.emf.ecore.EObject source : potentialHostElements) {
+				if (container != null) break;
+				
+				/* copied from diagram/commands/CreateLinkUtils.xpt#initContainment(gmfgen::TypeLinkModelFacet) */ 
+				«IF sourceMetaFeature != null-»
+				// Find container element for the new link.
+				// Climb up by containment hierarchy starting from the source
+				// and return the first element that is instance of the container class.
+				for (org.eclipse.emf.ecore.EObject element = source; element != null; element = element.eContainer()) {
+					if (element instanceof «getQualifiedInterfaceName(containmentMetaFeature.genClass)») {
+						container = («getQualifiedInterfaceName(containmentMetaFeature.genClass)») element;
+						super.«EXPAND xpt::diagram::commands::CreateLinkUtils::setElementToEdit("container") FOR containmentMetaFeature-»
+						break;
+					}
+				}
+				«ELSE-»
+				super.«EXPAND xpt::diagram::commands::CreateLinkUtils::setElementToEdit("source") FOR containmentMetaFeature-»
+				«ENDIF-»
+			}
+		}
+	}
+
+«ENDAROUND»

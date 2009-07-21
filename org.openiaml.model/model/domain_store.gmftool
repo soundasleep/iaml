@@ -7,7 +7,8 @@
       title="modelPalette">
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="model">
+        title="Model Elements"
+        description="Model Elements">
       <tools
           xsi:type="gmftool:CreationTool"
           title="EventTrigger"
@@ -99,24 +100,24 @@
             path="icons/full/obj32/DomainAttribute.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Wires"
+        description="Wires"
+        collapsible="true">
       <tools
-          xsi:type="gmftool:ToolGroup"
-          title="Wires"
-          description="Wires"
-          collapsible="true">
-        <tools
-            xsi:type="gmftool:CreationTool"
-            title="SyncWire"
-            description="Create new SyncWire">
-          <smallIcon
-              xsi:type="gmftool:BundleImage"
-              path="icons/full/obj16/SyncWire.gif"
-              bundle="org.openiaml.model.edit"/>
-          <largeIcon
-              xsi:type="gmftool:BundleImage"
-              path="icons/full/obj32/SyncWire.gif"
-              bundle="org.openiaml.model.edit"/>
-        </tools>
+          xsi:type="gmftool:CreationTool"
+          title="SyncWire"
+          description="Create new SyncWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/SyncWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/SyncWire.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>
   </palette>

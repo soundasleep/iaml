@@ -606,7 +606,8 @@
     </links>
     <palette>
       <groups
-          title="model">
+          title="Model Elements"
+          description="Model Elements">
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="StartNode"
@@ -656,33 +657,32 @@
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DecisionCondition.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DecisionCondition.gif"
             genNodes="//@diagram/@topLevelNodes.4"/>
+      </groups>
+      <groups
+          title="Edges"
+          description="Edge elements"
+          collapse="true">
         <entries
-            xsi:type="gmfgen:ToolGroup"
-            title="Edges"
-            description="Edge elements"
-            collapse="true">
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="ConditionalEdge"
-              description="Create new ConditionalEdge"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionalEdge.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionalEdge.gif"
-              genLinks="//@diagram/@links.2"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="DataFlowEdge"
-              description="Create new DataFlowEdge"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DataFlowEdge.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DataFlowEdge.gif"
-              genLinks="//@diagram/@links.0"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="ExecutionEdge"
-              description="Create new ExecutionEdge"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ExecutionEdge.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ExecutionEdge.gif"
-              genLinks="//@diagram/@links.1"/>
-        </entries>
+            xsi:type="gmfgen:ToolEntry"
+            title="ConditionalEdge"
+            description="Create new ConditionalEdge"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionalEdge.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionalEdge.gif"
+            genLinks="//@diagram/@links.2"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="DataFlowEdge"
+            description="Create new DataFlowEdge"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DataFlowEdge.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DataFlowEdge.gif"
+            genLinks="//@diagram/@links.0"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ExecutionEdge"
+            description="Create new ExecutionEdge"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ExecutionEdge.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ExecutionEdge.gif"
+            genLinks="//@diagram/@links.1"/>
       </groups>
     </palette>
     <preferencePages

@@ -282,7 +282,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="wire.gmftool#//@palette/@tools.0/@tools.7/@tools.0"/>
+        href="wire.gmftool#//@palette/@tools.1/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#SyncWire"/>
     <sourceMetaFeature
@@ -309,7 +309,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="wire.gmftool#//@palette/@tools.0/@tools.7/@tools.1"/>
+        href="wire.gmftool#//@palette/@tools.1/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
@@ -328,7 +328,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="wire.gmftool#//@palette/@tools.0/@tools.7/@tools.2"/>
+        href="wire.gmftool#//@palette/@tools.1/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#ParameterWire"/>
     <sourceMetaFeature

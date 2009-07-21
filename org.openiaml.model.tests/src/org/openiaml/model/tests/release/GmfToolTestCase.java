@@ -65,21 +65,44 @@ public class GmfToolTestCase extends XmlTestCase {
 	}
 	
 	/**
-	 * From a given root element (//palette/tools), get ALL 
+	 * From a given root element (//palette/tools) [there may be
+	 * many 'tools' in //palette), get ALL 
 	 * gmfTool elements within. Excluding tool groups, but recursing 
 	 * through the gool groups.
 	 * 
 	 * @param root
 	 * @throws XPathExpressionException 
 	 */
-	private IterableElementList getAllGmfTools(Element root) throws XPathExpressionException {
+	private IterableElementList getAllGmfTools(IterableElementList roots, String prefix) throws XPathExpressionException {
+		assertNotEqual(prefix + ": There should be exactly one //tools entry", roots.getLength(), 0);
+		
+		List<Element> result = new ArrayList<Element>();
+
+		for (Element root : roots) {		
+			result.addAll(getAllGmfToolsRecursive(root, prefix));
+		}
+		
+		return new IterableElementList(result);
+	}
+	
+
+	/**
+	 * From a given root element (//palette/tools) [there may be
+	 * many 'tools' in //palette), get ALL 
+	 * gmfTool elements within. Excluding tool groups, but recursing 
+	 * through the gool groups.
+	 * 
+	 * @param root
+	 * @throws XPathExpressionException 
+	 */
+	private List<Element> getAllGmfToolsRecursive(Element root, String prefix) throws XPathExpressionException {
 		List<Element> result = new ArrayList<Element>();
 		IterableElementList tools = xpath(root, "tools");
 		
 		for (Element e : tools) {
 			if (e.getAttribute("xsi:type").equals("gmftool:ToolGroup")) {
 				// found a group
-				result.addAll(getAllGmfTools(e).getContents());
+				result.addAll(getAllGmfToolsRecursive(e, prefix));
 			} else if (e.getAttribute("xsi:type").equals("gmftool:CreationTool")) {
 				// found a tool
 				result.add(e);
@@ -88,8 +111,8 @@ public class GmfToolTestCase extends XmlTestCase {
 				fail("Unexpected GMF tool xsi:type: " + e.getAttribute("xsi:type"));
 			}
 		}
-		
-		return new IterableElementList(result);
+
+		return result;
 	}
 
 	/**
@@ -109,11 +132,8 @@ public class GmfToolTestCase extends XmlTestCase {
 			Document doc = loaded.get(file);
 			IterableElementList nl = xpath(doc, "//palette/tools");
 			
-			assertEquals("There should be exactly one //tools entry", nl.getLength(), 1);
-			Element root = (Element) nl.item(0);
-			
-			IterableElementList tools = getAllGmfTools(root);
-			assertNotSame("There should be at least one subtool entry", tools.getLength(), 0);
+			IterableElementList tools = getAllGmfTools(nl, file + ": ");
+			assertNotSame(file + ": There should be at least one subtool entry", tools.getLength(), 0);
 			
 			for (int i = 0; i < tools.getLength(); i++) {
 				String prefix = "[" + file + "#" + i + "] ";
@@ -176,8 +196,8 @@ public class GmfToolTestCase extends XmlTestCase {
 			Document gmftool = loaded.get(filename);
 			Document gmfmap = loadGmfmap(filename);
 			
-			Element root = xpathFirst(gmftool, "/ToolRegistry/palette/tools");
-			IterableElementList tools = getAllGmfTools(root);
+			IterableElementList roots = xpath(gmftool, "/ToolRegistry/palette/tools");
+			IterableElementList tools = getAllGmfTools(roots, filename);
 			
 			for (Element tool : tools) {
 				// EventTrigger
@@ -237,8 +257,8 @@ public class GmfToolTestCase extends XmlTestCase {
 		for (String filename : loaded.keySet()) {
 			Document gmftool = loaded.get(filename);
 			
-			Element root = xpathFirst(gmftool, "/ToolRegistry/palette/tools");
-			IterableElementList tools = getAllGmfTools(root);
+			IterableElementList roots = xpath(gmftool, "/ToolRegistry/palette/tools");
+			IterableElementList tools = getAllGmfTools(roots, filename);
 
 			for (Element tool : tools) {
 				// EventTrigger

@@ -539,8 +539,7 @@
           visualID="5014"
           editPartClassName="ApplicationElementPropertyDefaultValueEditPart"
           itemSemanticEditPolicyClassName="ApplicationElementPropertyDefaultValueItemSemanticEditPolicy"
-          notationViewFactoryClassName="ApplicationElementPropertyDefaultValueViewFactory"
-          elementIcon="true">
+          notationViewFactoryClassName="ApplicationElementPropertyDefaultValueViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -847,8 +846,7 @@
           visualID="5022"
           editPartClassName="StaticValueValueEditPart"
           itemSemanticEditPolicyClassName="StaticValueValueItemSemanticEditPolicy"
-          notationViewFactoryClassName="StaticValueValueViewFactory"
-          elementIcon="true">
+          notationViewFactoryClassName="StaticValueValueViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -979,8 +977,7 @@
           visualID="5025"
           editPartClassName="LoginHandlerTypeEditPart"
           itemSemanticEditPolicyClassName="LoginHandlerTypeItemSemanticEditPolicy"
-          notationViewFactoryClassName="LoginHandlerTypeViewFactory"
-          elementIcon="true">
+          notationViewFactoryClassName="LoginHandlerTypeViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -1134,8 +1131,7 @@
           visualID="5029"
           editPartClassName="DomainObjectInstanceAutosaveEditPart"
           itemSemanticEditPolicyClassName="DomainObjectInstanceAutosaveItemSemanticEditPolicy"
-          notationViewFactoryClassName="DomainObjectInstanceAutosaveViewFactory"
-          elementIcon="true">
+          notationViewFactoryClassName="DomainObjectInstanceAutosaveViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -1496,8 +1492,7 @@
           visualID="6004"
           editPartClassName="SelectWireQueryEditPart"
           itemSemanticEditPolicyClassName="SelectWireQueryItemSemanticEditPolicy"
-          notationViewFactoryClassName="SelectWireQueryViewFactory"
-          elementIcon="true">
+          notationViewFactoryClassName="SelectWireQueryViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

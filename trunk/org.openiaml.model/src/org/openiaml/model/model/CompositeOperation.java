@@ -20,13 +20,12 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getExecutionEdges <em>Execution Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getVariables <em>Variables</em>}</li>
- *   <li>{@link org.openiaml.model.model.CompositeOperation#get_shouldnt_properties <em>shouldnt properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeOperation#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getCompositeOperation()
- * @model annotation="http://openiaml.org/comment comment='Scope supertype added in 0.2'"
+ * @model annotation="http://openiaml.org/comment comment='Scope supertype added in 0.2\r\n_shouldnt_properties removed in 0.4'"
  * @generated
  */
 public interface CompositeOperation extends ChainedOperation, ContainsOperations, ContainsWires, GeneratesElements, Scope, ContainsConditions {
@@ -93,22 +92,6 @@ public interface CompositeOperation extends ChainedOperation, ContainsOperations
 	 * @generated
 	 */
 	EList<TemporaryVariable> getVariables();
-
-	/**
-	 * Returns the value of the '<em><b>shouldnt properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>shouldnt properties</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>shouldnt properties</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getCompositeOperation__shouldnt_properties()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ApplicationElementProperty> get_shouldnt_properties();
 
 	/**
 	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.

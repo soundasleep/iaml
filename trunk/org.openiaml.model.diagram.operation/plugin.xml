@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Operation"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Operation"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017"/>
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5018,5019,5020"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -273,8 +273,8 @@
          <object class="org.openiaml.model.model.diagram.operation.edit.parts.DecisionNodeEditPart" id="DecisionNode_2008"/>
          <object class="org.openiaml.model.model.diagram.operation.edit.parts.DecisionOperationEditPart" id="DecisionOperation_2009"/>
          <object class="org.openiaml.model.model.diagram.operation.edit.parts.TemporaryVariableEditPart" id="TemporaryVariable_2010"/>
-         <object class="org.openiaml.model.model.diagram.operation.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2011"/>
-         <context elements="CompositeOperation_1000,SingleOperation_2001,CompositeOperation_2002,ChainedOperation_2003,Parameter_2004,StartNode_2005,CancelNode_2006,FinishNode_2007,DecisionNode_2008,DecisionOperation_2009,TemporaryVariable_2010,ApplicationElementProperty_2011"/>
+         <object class="org.openiaml.model.model.diagram.operation.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2012"/>
+         <context elements="CompositeOperation_1000,SingleOperation_2001,CompositeOperation_2002,ChainedOperation_2003,Parameter_2004,StartNode_2005,CancelNode_2006,FinishNode_2007,DecisionNode_2008,DecisionOperation_2009,TemporaryVariable_2010,ApplicationElementProperty_2012"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -297,7 +297,7 @@
       <decoratorProvider class="org.openiaml.model.model.diagram.operation.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -416,12 +416,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.ApplicationElementProperty_2011"
-               name="%metatype.name.ApplicationElementProperty_2011"
+               id="org.openiaml.model.diagram.operation.ApplicationElementProperty_2012"
+               name="%metatype.name.ApplicationElementProperty_2012"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ApplicationElementProperty"
                edithelper="org.openiaml.model.model.diagram.operation.edit.helpers.ApplicationElementPropertyEditHelper">
-            <param name="semanticHint" value="2011"/>
+            <param name="semanticHint" value="2012"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
@@ -477,7 +477,7 @@
          <elementType ref="org.openiaml.model.diagram.operation.DecisionNode_2008"/>
          <elementType ref="org.openiaml.model.diagram.operation.DecisionOperation_2009"/>
          <elementType ref="org.openiaml.model.diagram.operation.TemporaryVariable_2010"/>
-         <elementType ref="org.openiaml.model.diagram.operation.ApplicationElementProperty_2011"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ApplicationElementProperty_2012"/>
          <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_4001"/>
          <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_4002"/>
          <elementType ref="org.openiaml.model.diagram.operation.ConditionalEdge_4003"/>

@@ -705,17 +705,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeOperation__shouldnt_properties() {
-		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getCompositeOperation_Values() {
-		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(5);
+		return (EReference)compositeOperationEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1416,7 +1407,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeCondition__shouldnt_properties() {
+	public EReference getCompositeCondition_Values() {
 		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1425,17 +1416,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeCondition_Values() {
-		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getCompositeCondition_Parameters() {
-		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(6);
+		return (EReference)compositeConditionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1541,7 +1523,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__DATA_EDGES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__EXECUTION_EDGES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__VARIABLES);
-		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__SHOULDNT_PROPERTIES);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__VALUES);
 
 		containsOperationsEClass = createEClass(CONTAINS_OPERATIONS);
@@ -1648,7 +1629,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__DATA_EDGES);
 		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__EXECUTION_EDGES);
 		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__VARIABLES);
-		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__SHOULDNT_PROPERTIES);
 		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__VALUES);
 		createEReference(compositeConditionEClass, COMPOSITE_CONDITION__PARAMETERS);
 
@@ -1825,7 +1805,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getCompositeOperation_DataEdges(), this.getDataFlowEdge(), null, "dataEdges", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_ExecutionEdges(), this.getExecutionEdge(), null, "executionEdges", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_Variables(), this.getTemporaryVariable(), null, "variables", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeOperation__shouldnt_properties(), this.getApplicationElementProperty(), null, "_shouldnt_properties", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeOperation_Values(), this.getStaticValue(), null, "values", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containsOperationsEClass, ContainsOperations.class, "ContainsOperations", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1932,7 +1911,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getCompositeCondition_DataEdges(), this.getDataFlowEdge(), null, "dataEdges", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeCondition_ExecutionEdges(), this.getExecutionEdge(), null, "executionEdges", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeCondition_Variables(), this.getTemporaryVariable(), null, "variables", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeCondition__shouldnt_properties(), this.getApplicationElementProperty(), null, "_shouldnt_properties", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeCondition_Values(), this.getStaticValue(), null, "values", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeCondition_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, CompositeCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1980,7 +1958,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (compositeOperationEClass, 
 		   source, 
 		   new String[] {
-			 "comment", "Scope supertype added in 0.2"
+			 "comment", "Scope supertype added in 0.2\r\n_shouldnt_properties removed in 0.4"
 		   });		
 		addAnnotation
 		  (applicationElementEClass, 
@@ -2139,7 +2117,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (compositeConditionEClass, 
 		   source, 
 		   new String[] {
-			 "comment", "added in 0.2"
+			 "comment", "added in 0.2\r\n_shouldnt_properties removed in 0.4"
 		   });		
 		addAnnotation
 		  (containsConditionsEClass, 

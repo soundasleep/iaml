@@ -1840,22 +1840,13 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__VARIABLES = CHAINED_OPERATION_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>shouldnt properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = CHAINED_OPERATION_FEATURE_COUNT + 11;
-
-	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__VALUES = CHAINED_OPERATION_FEATURE_COUNT + 12;
+	int COMPOSITE_OPERATION__VALUES = CHAINED_OPERATION_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
@@ -1864,7 +1855,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 13;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = CHAINED_OPERATION_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -4014,22 +4005,13 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_CONDITION__VARIABLES = CONTAINS_CONDITIONS_FEATURE_COUNT + 13;
 
 	/**
-	 * The feature id for the '<em><b>shouldnt properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_CONDITION__SHOULDNT_PROPERTIES = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
-
-	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 15;
+	int COMPOSITE_CONDITION__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -4038,7 +4020,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__PARAMETERS = CONTAINS_CONDITIONS_FEATURE_COUNT + 16;
+	int COMPOSITE_CONDITION__PARAMETERS = CONTAINS_CONDITIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>Composite Condition</em>' class.
@@ -4047,7 +4029,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 17;
+	int COMPOSITE_CONDITION_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 16;
 
 
 	/**
@@ -4485,17 +4467,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeOperation_Variables();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeOperation#get_shouldnt_properties <em>shouldnt properties</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>shouldnt properties</em>'.
-	 * @see org.openiaml.model.model.CompositeOperation#get_shouldnt_properties()
-	 * @see #getCompositeOperation()
-	 * @generated
-	 */
-	EReference getCompositeOperation__shouldnt_properties();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeOperation#getValues <em>Values</em>}'.
@@ -5328,17 +5299,6 @@ public interface ModelPackage extends EPackage {
 	EReference getCompositeCondition_Variables();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#get_shouldnt_properties <em>shouldnt properties</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>shouldnt properties</em>'.
-	 * @see org.openiaml.model.model.CompositeCondition#get_shouldnt_properties()
-	 * @see #getCompositeCondition()
-	 * @generated
-	 */
-	EReference getCompositeCondition__shouldnt_properties();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.CompositeCondition#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5659,14 +5619,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_OPERATION__VARIABLES = eINSTANCE.getCompositeOperation_Variables();
-
-		/**
-		 * The meta object literal for the '<em><b>shouldnt properties</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPOSITE_OPERATION__SHOULDNT_PROPERTIES = eINSTANCE.getCompositeOperation__shouldnt_properties();
 
 		/**
 		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
@@ -6347,14 +6299,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_CONDITION__VARIABLES = eINSTANCE.getCompositeCondition_Variables();
-
-		/**
-		 * The meta object literal for the '<em><b>shouldnt properties</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPOSITE_CONDITION__SHOULDNT_PROPERTIES = eINSTANCE.getCompositeCondition__shouldnt_properties();
 
 		/**
 		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.

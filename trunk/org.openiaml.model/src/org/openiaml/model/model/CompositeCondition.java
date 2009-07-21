@@ -20,14 +20,13 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openiaml.model.model.CompositeCondition#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeCondition#getExecutionEdges <em>Execution Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeCondition#getVariables <em>Variables</em>}</li>
- *   <li>{@link org.openiaml.model.model.CompositeCondition#get_shouldnt_properties <em>shouldnt properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeCondition#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.CompositeCondition#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getCompositeCondition()
- * @model annotation="http://openiaml.org/comment comment='added in 0.2'"
+ * @model annotation="http://openiaml.org/comment comment='added in 0.2\r\n_shouldnt_properties removed in 0.4'"
  * @generated
  */
 public interface CompositeCondition extends ContainsConditions, Condition, GeneratesElements {
@@ -94,22 +93,6 @@ public interface CompositeCondition extends ContainsConditions, Condition, Gener
 	 * @generated
 	 */
 	EList<TemporaryVariable> getVariables();
-
-	/**
-	 * Returns the value of the '<em><b>shouldnt properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>shouldnt properties</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>shouldnt properties</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getCompositeCondition__shouldnt_properties()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ApplicationElementProperty> get_shouldnt_properties();
 
 	/**
 	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.

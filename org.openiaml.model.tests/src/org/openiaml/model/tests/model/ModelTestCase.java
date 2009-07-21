@@ -87,6 +87,7 @@ public class ModelTestCase extends TestCase {
 		// get all classes from this package
 		List<EClassifier> classes = pkg.getEClassifiers(); 
 		
+		int done = 0;
 		for (EClassifier c : classes) {
 			// instantiate all non-abstract classes in this package
 			if (c instanceof EClass && !((EClass) c).isAbstract()) {
@@ -101,13 +102,33 @@ public class ModelTestCase extends TestCase {
 					GeneratedElement ge = (GeneratedElement) obj;
 					
 					assertNotEmpty("element '" + ge.getClass().getPackage().getName() + "." + ge.getClass().getSimpleName() + "' should have a generated ID.", ge.getId());
+					done++;
 				}
 			}
+		}
+		
+		// special check: ignore Domain package
+		if (!pkg.equals(DomainPackage.eINSTANCE)) {
+			// make sure we've done at least one
+			assertNotEqual("We should have checked generated IDs for at least one class in package '" + pkg, 0, done);
 		}
 		
 		// iterate over sub-packages
 		for (EPackage sub : pkg.getESubpackages()) {
 			iterateGeneratedIDs(sub);
+		}
+		
+	}
+
+	/**
+	 * Assert that the given values are not the same.
+	 * @param message
+	 * @param a
+	 * @param b
+	 */
+	public void assertNotEqual(String message, int a, int b) {
+		if (a == b) {
+			fail(message + " [a = " + a + ", b = " + b + "]");
 		}
 		
 	}

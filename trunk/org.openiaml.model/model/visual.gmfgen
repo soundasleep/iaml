@@ -1872,7 +1872,8 @@
     </links>
     <palette>
       <groups
-          title="model">
+          title="Model Elements"
+          description="Model Elements">
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="EventTrigger"
@@ -1957,123 +1958,121 @@
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeCondition.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeCondition.gif"
             genNodes="//@diagram/@topLevelNodes.13"/>
+      </groups>
+      <groups
+          title="Visual Elements"
+          description="Visual Elements"
+          collapse="true">
         <entries
-            xsi:type="gmfgen:ToolGroup"
-            title="Visual Elements"
-            description="Visual Elements"
-            collapse="true">
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="Page"
-              description="Create new Page"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Page.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Page.gif"
-              genNodes="//@diagram/@topLevelNodes.7"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="InputForm"
-              description="Create new InputForm"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/InputForm.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/InputForm.gif"
-              genNodes="//@diagram/@topLevelNodes.8"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="InputTextField"
-              description="Create new InputTextField"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/InputTextField.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/InputTextField.gif"
-              genNodes="//@diagram/@topLevelNodes.9"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="Button"
-              description="Create new Button"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Button.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Button.gif"
-              genNodes="//@diagram/@topLevelNodes.16"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="Session"
-              description="Create new Session"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Session.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Session.gif"
-              genNodes="//@diagram/@topLevelNodes.11"/>
-        </entries>
+            xsi:type="gmfgen:ToolEntry"
+            title="Page"
+            description="Create new Page"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Page.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Page.gif"
+            genNodes="//@diagram/@topLevelNodes.7"/>
         <entries
-            xsi:type="gmfgen:ToolGroup"
-            title="Wires"
-            description="Wires"
-            collapse="true">
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="SyncWire"
-              description="Create new SyncWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
-              genLinks="//@diagram/@links.0"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="RunInstanceWire"
-              description="Create new RunInstanceWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
-              genLinks="//@diagram/@links.1"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="NavigateWire"
-              description="Create new NavigateWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/NavigateWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/NavigateWire.gif"
-              genLinks="//@diagram/@links.6"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="ConditionWire"
-              description="Create new ConditionWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionWire.gif"
-              genLinks="//@diagram/@links.8"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="ParameterWire"
-              description="Create new ParameterWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ParameterWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ParameterWire.gif"
-              genLinks="//@diagram/@links.2"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="SelectWire"
-              description="Create new SelectWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SelectWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SelectWire.gif"
-              genLinks="//@diagram/@links.3"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="SetWire"
-              description="Create new SetWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SetWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SetWire.gif"
-              genLinks="//@diagram/@links.4"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="ShowWire"
-              description="Create new ShowWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ShowWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ShowWire.gif"
-              genLinks="//@diagram/@links.5"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="CommitWire"
-              description="Create new CommitWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CommitWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CommitWire.gif"
-              genLinks="//@diagram/@links.7"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="NewInstanceWire"
-              description="Create new NewInstanceWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/NewInstanceWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/NewInstanceWire.gif"
-              genLinks="//@diagram/@links.9"/>
-        </entries>
+            xsi:type="gmfgen:ToolEntry"
+            title="InputForm"
+            description="Create new InputForm"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/InputForm.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/InputForm.gif"
+            genNodes="//@diagram/@topLevelNodes.8"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="InputTextField"
+            description="Create new InputTextField"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/InputTextField.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/InputTextField.gif"
+            genNodes="//@diagram/@topLevelNodes.9"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Button"
+            description="Create new Button"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Button.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Button.gif"
+            genNodes="//@diagram/@topLevelNodes.16"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Session"
+            description="Create new Session"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Session.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Session.gif"
+            genNodes="//@diagram/@topLevelNodes.11"/>
+      </groups>
+      <groups
+          title="Wires"
+          description="Wires"
+          collapse="true">
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="SyncWire"
+            description="Create new SyncWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
+            genLinks="//@diagram/@links.0"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="RunInstanceWire"
+            description="Create new RunInstanceWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
+            genLinks="//@diagram/@links.1"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="NavigateWire"
+            description="Create new NavigateWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/NavigateWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/NavigateWire.gif"
+            genLinks="//@diagram/@links.6"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ConditionWire"
+            description="Create new ConditionWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ConditionWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ConditionWire.gif"
+            genLinks="//@diagram/@links.8"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ParameterWire"
+            description="Create new ParameterWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ParameterWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ParameterWire.gif"
+            genLinks="//@diagram/@links.2"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="SelectWire"
+            description="Create new SelectWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SelectWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SelectWire.gif"
+            genLinks="//@diagram/@links.3"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="SetWire"
+            description="Create new SetWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SetWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SetWire.gif"
+            genLinks="//@diagram/@links.4"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ShowWire"
+            description="Create new ShowWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ShowWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ShowWire.gif"
+            genLinks="//@diagram/@links.5"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="CommitWire"
+            description="Create new CommitWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CommitWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CommitWire.gif"
+            genLinks="//@diagram/@links.7"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="NewInstanceWire"
+            description="Create new NewInstanceWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/NewInstanceWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/NewInstanceWire.gif"
+            genLinks="//@diagram/@links.9"/>
       </groups>
     </palette>
     <preferencePages

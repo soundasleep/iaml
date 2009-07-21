@@ -218,7 +218,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.12/@tools.0"/>
+          href="visual.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#Page"/>
     </ownedChild>
@@ -245,7 +245,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.12/@tools.1"/>
+          href="visual.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#InputForm"/>
     </ownedChild>
@@ -272,7 +272,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.12/@tools.2"/>
+          href="visual.gmftool#//@palette/@tools.1/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#InputTextField"/>
     </ownedChild>
@@ -322,7 +322,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.12/@tools.4"/>
+          href="visual.gmftool#//@palette/@tools.1/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#Session"/>
     </ownedChild>
@@ -463,7 +463,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.12/@tools.3"/>
+          href="visual.gmftool#//@palette/@tools.1/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#Button"/>
     </ownedChild>
@@ -484,7 +484,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.0"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#SyncWire"/>
     <sourceMetaFeature
@@ -510,7 +510,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.1"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
@@ -529,7 +529,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.4"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.4"/>
     <diagramLink
         href="iaml.gmfgraph#ParameterWire"/>
     <sourceMetaFeature
@@ -562,7 +562,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.5"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.5"/>
     <diagramLink
         href="iaml.gmfgraph#SelectWire"/>
     <sourceMetaFeature
@@ -588,7 +588,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.6"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.6"/>
     <diagramLink
         href="iaml.gmfgraph#SetWire"/>
     <sourceMetaFeature
@@ -614,7 +614,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.7"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.7"/>
     <diagramLink
         href="iaml.gmfgraph#ShowWire"/>
     <sourceMetaFeature
@@ -640,7 +640,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.2"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#NavigateWire"/>
     <sourceMetaFeature
@@ -666,7 +666,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.8"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.8"/>
     <diagramLink
         href="iaml.gmfgraph#CommitWire"/>
     <sourceMetaFeature
@@ -692,7 +692,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.3"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.3"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionWire"/>
     <sourceMetaFeature
@@ -718,7 +718,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.0/@tools.13/@tools.9"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.9"/>
     <diagramLink
         href="iaml.gmfgraph#NewInstanceWire"/>
     <sourceMetaFeature

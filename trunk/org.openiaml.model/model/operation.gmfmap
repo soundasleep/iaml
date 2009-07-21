@@ -273,7 +273,7 @@
         href="iaml.ecore#//CompositeOperation/dataEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.10/@tools.1"/>
+        href="operation.gmftool#//@palette/@tools.1/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#DataFlowEdge"/>
     <sourceMetaFeature
@@ -292,7 +292,7 @@
         href="iaml.ecore#//CompositeOperation/executionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.10/@tools.2"/>
+        href="operation.gmftool#//@palette/@tools.1/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#ExecutionEdge"/>
     <sourceMetaFeature
@@ -318,7 +318,7 @@
         href="iaml.ecore#//CompositeOperation/executionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.0/@tools.10/@tools.0"/>
+        href="operation.gmftool#//@palette/@tools.1/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionalEdge"/>
     <sourceMetaFeature

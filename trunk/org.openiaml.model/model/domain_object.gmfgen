@@ -614,7 +614,8 @@
     </links>
     <palette>
       <groups
-          title="model">
+          title="Model Elements"
+          description="Model Elements">
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="EventTrigger"
@@ -657,26 +658,25 @@
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainAttribute.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainAttribute.gif"
             genNodes="//@diagram/@topLevelNodes.5"/>
+      </groups>
+      <groups
+          title="Wires"
+          description="Wires"
+          collapse="true">
         <entries
-            xsi:type="gmfgen:ToolGroup"
-            title="Wires"
-            description="Wires"
-            collapse="true">
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="SyncWire"
-              description="Create new SyncWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
-              genLinks="//@diagram/@links.1"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
-              title="RunInstanceWire"
-              description="Create new RunInstanceWire"
-              largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
-              smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
-              genLinks="//@diagram/@links.0"/>
-        </entries>
+            xsi:type="gmfgen:ToolEntry"
+            title="SyncWire"
+            description="Create new SyncWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif"
+            genLinks="//@diagram/@links.1"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="RunInstanceWire"
+            description="Create new RunInstanceWire"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif"
+            genLinks="//@diagram/@links.0"/>
       </groups>
     </palette>
     <preferencePages

@@ -7,11 +7,9 @@ The IAML plugin is an Eclipse plugin that provides a visual editor for the model
 
 =Requirements=
 
-*Currently the plugin only supports Eclipse 3.3 (Europa) and GMF 2.0.2, until [http://code.google.com/p/iaml/issues/detail?id=50 issue 50] is resolved.*
-
-  # Eclipse 3.3 Europa
+  # Eclipse 3.5 Galileo
     * _plus UML 2.0 feature for OAW_
-  # GMF 2.0.2
+  # GMF 2.2
   # [http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare 4.3]
     * Update site: http://www.openarchitectureware.org/updatesite/milestone/site.xml
   # [http://code.google.com/p/iacleaner/ iacleaner 0.2]

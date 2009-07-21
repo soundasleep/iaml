@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Drools Rules for Openiaml
 Bundle-SymbolicName: org.openiaml.model.drools
-Bundle-Version: 0.3.0
+Bundle-Version: 0.3.1
 Export-Package: org.openiaml.model.drools
 Require-Bundle: org.openiaml.model,
  ca.ecliptical.emf.xpath,

@@ -709,7 +709,7 @@
       iD="org.openiaml.model.diagram.domain_object"
       name="Iaml Plugin (Domain Object)"
       provider="www.openiaml.org"
-      version="0.3.0">
+      version="0.3.1">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   </plugin>

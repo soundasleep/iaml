@@ -1140,6 +1140,7 @@
   <labels
       name="StaticValueValue"
       figure="StaticValueFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.10/@accessors.1"/>
   <labels
       name="VisibleThingName"
@@ -1160,6 +1161,7 @@
   <labels
       name="DynamicApplicationElementSetQuery"
       figure="DynamicApplicationElementSetFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.16/@accessors.1"/>
   <labels
       name="PageName"
@@ -1168,6 +1170,7 @@
   <labels
       name="PageUrl"
       figure="PageFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.17/@accessors.1"/>
   <labels
       name="InputFormName"
@@ -1208,6 +1211,7 @@
   <labels
       name="SelectWireQuery"
       figure="SelectWireFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.31/@accessors.1"/>
   <labels
       name="SetWireName"
@@ -1240,6 +1244,7 @@
   <labels
       name="LoginHandlerType"
       figure="LoginHandlerFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.38/@accessors.1"/>
   <labels
       name="CancelNodeText"
@@ -1323,10 +1328,12 @@
   <labels
       name="DomainObjectType"
       figure="DomainObjectFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.2"/>
   <labels
       name="CancelNodeLabel"
       figure="CancelNodeFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.26/@accessors.1"/>
   <labels
       name="FinishNodeLabel"
@@ -1343,9 +1350,11 @@
   <labels
       name="DomainObjectInstanceAutosave"
       figure="DomainObjectInstanceFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.41/@accessors.1"/>
   <labels
       name="ApplicationElementPropertyDefaultValue"
       figure="ApplicationElementPropertyFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.9/@accessors.1"/>
 </gmfgraph:Canvas>

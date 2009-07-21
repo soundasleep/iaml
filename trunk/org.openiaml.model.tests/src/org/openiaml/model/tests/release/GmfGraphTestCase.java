@@ -3,7 +3,9 @@
  */
 package org.openiaml.model.tests.release;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
@@ -179,7 +181,6 @@ public class GmfGraphTestCase extends XmlTestCase {
 			found.add(childName);
 		}
 	}
-
 	
 	/**
 	 * Make sure all 'labels' are unique.
@@ -188,8 +189,8 @@ public class GmfGraphTestCase extends XmlTestCase {
 	public void testUniqueLabels() throws Exception {
 		Document gmfgraph = getGmfgraph();
 		IterableElementList nl = xpath(gmfgraph, "/Canvas/labels");
-		
 		assertNotSame("We should have at least one label node", nl.getLength(), 0);
+		
 		Set<String> found = new HashSet<String>();
 		for (Element child : nl) {
 			String childName = child.getAttribute("name");
@@ -197,6 +198,56 @@ public class GmfGraphTestCase extends XmlTestCase {
 			assertFalse("More than one label found for '" + childName + "'", found.contains(childName));
 			found.add(childName);
 		}
+	}
+	
+	/**
+	 * Issue 56: A node element should only have one label with
+	 * an element icon.
+	 * 
+	 */
+	public void testDuplicateIcons() throws Exception {
+		Document gmfgraph = getGmfgraph();
+		IterableElementList nl = xpath(gmfgraph, "/Canvas/labels");
+		assertNotSame("We should have at least one label node", nl.getLength(), 0);
+		
+		// store a map of [/accessor]->[element icon count]
+		Map<String,Integer> elementIconMap = new HashMap<String,Integer>();
+		// a map back to the original label element [for debug]
+		Map<String,String> labelMap = new HashMap<String,String>();
+		
+		for (Element e : nl) {
+			if (!e.getAttribute("elementIcon").equals("false")) {
+				// get the accessor
+				String accessorKey = getAccessorKey(e);
+				if (!elementIconMap.containsKey(accessorKey)) {
+					elementIconMap.put(accessorKey, 0);
+					labelMap.put(accessorKey, e.getAttribute("name"));
+				}
+				elementIconMap.put(accessorKey, elementIconMap.get(accessorKey) + 1);
+			}
+		}
+		
+		// check all the contents
+		for (String acc : elementIconMap.keySet()) {
+			if (elementIconMap.get(acc) > 1) {
+				fail("Element '" + labelMap.get(acc) + "' has " + elementIconMap.get(acc) + " labels with icons");
+			}
+		}
+		
+	}
+
+	/**
+	 * Translate
+	 * <e accessor="//@figures.0/@descriptors.25/@accessors.0"/>
+	 * into
+	 * "//@figures.0/@descriptors.25"
+	 * 
+	 * @param e
+	 * @return
+	 */
+	private String getAccessorKey(Element e) {
+		String ac = e.getAttribute("accessor");
+		return ac.substring(0, ac.lastIndexOf('/'));
 	}
 
 }

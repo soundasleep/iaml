@@ -2,7 +2,9 @@
 #labels Featured,Development,Phase-Implementation
 
 =Introduction=
-IAML is primarly developed in the Eclipse environment, and heavily based on many of its sub projects. It is based on Eclipse 3.3/GMF 2.0.2 until [https://bugs.eclipse.org/bugs/buglist.cgi?email1=jevon%40jevon.org&emailtype1=exact&emailassigned_to1=1&emailreporter1=1 some bugs are fixed] or we find workarounds.
+IAML is primarly developed in the Eclipse environment, and heavily based on many of its sub projects. It is based on Eclipse 3.5/GMF 2.2.
+
+*Note:* The instructions below refer to Eclipse 3.3/GMF 2.0 and need to be updated.
 
 =Requirements=
 

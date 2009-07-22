@@ -7,7 +7,8 @@ Bundle-ClassPath: .
 Bundle-Activator: org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorPlugin
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
-Export-Package: org.openiaml.model.model.diagram.condition.edit.parts,
+Export-Package: org.openiaml.model.model.diagram.condition.edit.commands,
+ org.openiaml.model.model.diagram.condition.edit.parts,
  org.openiaml.model.model.diagram.condition.part,
  org.openiaml.model.model.diagram.condition.providers
 Require-Bundle: org.eclipse.core.runtime,

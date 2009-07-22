@@ -17,7 +17,9 @@ Require-Bundle: org.junit,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor,
  org.eclipse.gmf.runtime.diagram.ui,
  org.openiaml.model.diagram.visual,
- org.openiaml.model.diagram.wire
+ org.openiaml.model.diagram.wire,
+ org.openiaml.model.diagram.condition;bundle-version="0.3.1",
+ org.openiaml.model.diagram.operation;bundle-version="0.3.1"
 Eclipse-LazyStart: false
 Bundle-ClassPath: .,
  lib/jwebunit-core-2.1-SNAPSHOT.jar,

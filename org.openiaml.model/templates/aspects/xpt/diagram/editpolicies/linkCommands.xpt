@@ -20,12 +20,12 @@
  * We have to redefine the entire command, because there are no
  * extension points which we can use.
  */
-«AROUND startLinkCommands(gmfgen::TypeModelFacet typeModelFacet) FOR gmfgen::GenLink-»
+«AROUND startLinkCommands(linkEnd : gmfgen::GenLinkEnd) FOR gmfgen::GenLink-»
 /* start Jevon customisation: allow links to be contained in non-direct elements */
-if («getDiagram().getElementTypesQualifiedClassName()».«getUniqueIdentifier()» == req.getElementType()) {
-	«IF createStartLinkCommand(typeModelFacet)-»
+if («EXPAND xpt::providers::ElementTypes::accessElementType» == req.getElementType()) {
+	«IF createStartLinkCommand(self, linkEnd)-»
 	return getGEFWrapper(new «getCreateCommandQualifiedClassName()»(req,
-		«IF createStartIncomingLinkCommand(typeModelFacet)-»
+		«IF createStartIncomingLinkCommand(self, linkEnd)-»
 			req.getTarget(), req.getSource()
 		«ELSE-»
 			req.getSource(), req.getTarget()
@@ -39,12 +39,12 @@ if («getDiagram().getElementTypesQualifiedClassName()».«getUniqueIdentifier()» =
 /* end Jevon customisation: allow links to be contained in non-direct elements */
 «ENDAROUND»
 
-«AROUND completeLinkCommands(gmfgen::TypeModelFacet typeModelFacet) FOR gmfgen::GenLink-»
+«AROUND completeLinkCommands(linkEnd : gmfgen::GenLinkEnd) FOR gmfgen::GenLink-»
 /* start Jevon customisation: allow links to be contained in non-direct elements */
-if («getDiagram().getElementTypesQualifiedClassName()».«getUniqueIdentifier()» == req.getElementType()) {
-	«IF createCompleteLinkCommand(typeModelFacet)-»
+if («EXPAND xpt::providers::ElementTypes::accessElementType» == req.getElementType()) {
+	«IF createCompleteLinkCommand(self, linkEnd)-»
 	return getGEFWrapper(new «getCreateCommandQualifiedClassName()»(req,
-		«IF createCompleteOutgoingLinkCommand(typeModelFacet)-»
+		«IF createCompleteOutgoingLinkCommand(self, linkEnd)-»
 			req.getTarget(), req.getSource()
 		«ELSE-»
 			req.getSource(), req.getTarget()
@@ -64,7 +64,7 @@ if («getDiagram().getElementTypesQualifiedClassName()».«getUniqueIdentifier()» =
  *
  * See http://code.google.com/p/iaml/issues/detail?id=34
  */
-«AROUND createLinkCommands(gmfgen::GenDiagram diagram) FOR gmfgen::TypeModelFacet-»
+«AROUND createLinkCommands FOR gmfgen::GenLinkEnd-»
 	«targetDef.proceed()»
 
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: Search the current diagram editor for potential containment elements too. See http://code.google.com/p/iaml/issues/detail?id=34")»

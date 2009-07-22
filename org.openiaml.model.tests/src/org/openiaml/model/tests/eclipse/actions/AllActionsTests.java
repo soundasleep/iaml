@@ -23,6 +23,7 @@ public class AllActionsTests {
         suite.addTestSuite(PartialInferenceWithinActivations.class);
         suite.addTestSuite(FormDomainObjectMapping.class);
         suite.addTestSuite(DeleteGeneratedElements.class);
+        suite.addTestSuite(NonContainedEdges.class);
 
         return suite; 
    }

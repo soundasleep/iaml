@@ -24,13 +24,17 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.InputForm;
@@ -126,6 +130,49 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		if (!(link == null || !(link instanceof HintedDiagramLinkStyle)))
 			fail("part '" + part + "' is not a shortcut, it should be (link=" + link + ")");
 	}
+		
+	/**
+	 * An abstract method which checks an editors children to see
+	 * if the editor contains a given model element, with the given
+	 * shortcut parameters.
+	 * 
+	 * @param root the editor to search
+	 * @param objectClass the EObject class to look for
+	 * @param name the name of the NamedElement
+	 * @param checkShortcut
+	 * @param shortcutRequired
+	 * @return
+	 */
+	protected ShapeNodeEditPart assertHasRenderedNamedObject(DiagramDocumentEditor root,
+			Class<? extends NamedElement> objectClass,
+			String name, 
+			boolean checkShortcut, 
+			boolean shortcutRequired) {
+		// debug
+		String found = "";
+		
+		for (Object o : root.getDiagramEditPart().getChildren()) {
+			if (o instanceof ShapeNodeEditPart) {
+				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (objectClass.isInstance(obj)) {
+						NamedElement e = (NamedElement) obj;
+						if (e.getName().equals(name)) {
+							assertNotNull(s);
+							return s;
+						}
+						found += e.getName() + ",";
+					}
+				}
+			}
+		}
+		
+		// failed
+		fail("No " + objectClass.getSimpleName() + " named '" + name + "' found in editor " + root + ". Found: " + found);
+		return null;
+	}
 	
 	/**
 	 * Look at the editor's children to see if a Page is being displayed.
@@ -188,25 +235,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @return
 	 */
 	public ShapeNodeEditPart assertHasInputForm(DiagramDocumentEditor root, String formName, boolean checkShortcut, boolean shortcutRequired) {
-		for (Object o : root.getDiagramEditPart().getChildren()) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				// check for shortcut status if necessary
-				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
-					EObject obj = s.resolveSemanticElement();
-					if (obj instanceof InputForm) {
-						InputForm p = (InputForm) obj;
-						if (p.getName().equals(formName)) {
-							assertNotNull(s);
-							return s;
-						}
-					}
-				}
-			}
-		}
-		// failed
-		fail("assertHasInputForm: no input form '" + formName + "' found.");
-		return null;
+		return assertHasRenderedNamedObject(root, InputForm.class, formName, checkShortcut, shortcutRequired); 
 	}
 
 	/**
@@ -221,26 +250,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasInputTextField(DiagramDocumentEditor root, String textName, 
 			boolean checkShortcut, boolean shortcutRequired) {
-		
-		for (Object o : root.getDiagramEditPart().getChildren()) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				// check for shortcut status if necessary
-				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
-					EObject obj = s.resolveSemanticElement();
-					if (obj instanceof InputTextField) {
-						InputTextField p = (InputTextField) obj;
-						if (p.getName().equals(textName)) {
-							assertNotNull(s);
-							return s;
-						}
-					}
-				}
-			}
-		}
-		// failed
-		fail("assertHasInputTextField: no input text field '" + textName + "' found.");
-		return null;
+		return assertHasRenderedNamedObject(root, InputTextField.class, textName, checkShortcut, shortcutRequired); 
 	}
 
 	/**
@@ -287,25 +297,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @return
 	 */
 	public ShapeNodeEditPart assertHasDomainStore(DiagramDocumentEditor root, String storeName) {
-		String found = "";
-		
-		for (Object o : root.getDiagramEditPart().getChildren()) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				EObject obj = s.resolveSemanticElement();
-				if (obj instanceof DomainStore) {
-					DomainStore p = (DomainStore) obj;
-					if (p.getName().equals(storeName)) {
-						assertNotNull(s);
-						return s;
-					}
-					found += p.getName() + ",";
-				}
-			}
-		}
-		// failed
-		fail("assertHasDomainStore: no domain store '" + storeName + "' found. Found: " + found);
-		return null;
+		return assertHasRenderedNamedObject(root, DomainStore.class, storeName, false, false); 
 	}
 
 	/**
@@ -316,28 +308,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @return
 	 */
 	public ShapeNodeEditPart assertHasEventTrigger(DiagramDocumentEditor root, String eventName, boolean checkShortcut, boolean shortcutRequired) {
-		String found = "";
-		
-		for (Object o : root.getDiagramEditPart().getChildren()) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				// check for shortcut status if necessary
-				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
-					EObject obj = s.resolveSemanticElement();
-					if (obj instanceof EventTrigger) {
-						EventTrigger p = (EventTrigger) obj;
-						if (p.getName().equals(eventName)) {
-							assertNotNull(s);
-							return s;
-						}
-						found += p.getName() + ",";
-					}
-				}
-			}
-		}
-		// failed
-		fail("assertHasEventTrigger: no event trigger '" + eventName + "' found. Found: " + found);
-		return null;
+		return assertHasRenderedNamedObject(root, EventTrigger.class, eventName, checkShortcut, shortcutRequired); 
 	}
 	
 	/**
@@ -348,28 +319,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @return
 	 */
 	public ShapeNodeEditPart assertHasDomainAttribute(DiagramDocumentEditor root, String attrName, boolean checkShortcut, boolean shortcutRequired) {
-		String found = "";
-		
-		for (Object o : root.getDiagramEditPart().getChildren()) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				// check for shortcut status if necessary
-				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
-					EObject obj = s.resolveSemanticElement();
-					if (obj instanceof DomainAttribute) {
-						DomainAttribute p = (DomainAttribute) obj;
-						if (p.getName().equals(attrName)) {
-							assertNotNull(s);
-							return s;
-						}
-						found += p.getName() + ",";
-					}
-				}
-			}
-		}
-		// failed
-		fail("assertHasDomainAttribute: no domain attribute '" + attrName + "' found. Found: " + found);
-		return null;
+		return assertHasRenderedNamedObject(root, DomainAttribute.class, attrName, checkShortcut, shortcutRequired); 
 	}
 
 	/**
@@ -380,30 +330,9 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @return
 	 */
 	public ShapeNodeEditPart assertHasDomainObject(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
-		String found = "";
-		
-		for (Object o : root.getDiagramEditPart().getChildren()) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				// check for shortcut status if necessary
-				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
-					EObject obj = s.resolveSemanticElement();
-					if (obj instanceof DomainObject) {
-						DomainObject p = (DomainObject) obj;
-						if (p.getName().equals(objectName)) {
-							assertNotNull(s);
-							return s;
-						}
-						found += p.getName() + ",";
-					}
-				}
-			}
-		}
-		// failed
-		fail("assertHasDomainObject: no domain object '" + objectName + "' found. Found: " + found);
-		return null;
+		return assertHasRenderedNamedObject(root, DomainObject.class, objectName, checkShortcut, shortcutRequired); 
 	}
-	
+
 	/**
 	 * Look at the editor's children to see if a Domain Store is being displayed.
 	 * 
@@ -413,31 +342,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasOperation(DiagramDocumentEditor root, String operationName, 
 			boolean checkShortcut, boolean shortcutRequired) {
-		
-		String found = "";
-		
-		for (Object o : root.getDiagramEditPart().getChildren()) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				// check for shortcut status if necessary
-				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
-					EObject obj = s.resolveSemanticElement();
-					if (obj instanceof Operation) {
-						Operation p = (Operation) obj;
-						if (p.getName().equals(operationName)) {
-							assertNotNull(s);
-							return s;
-						}
-						found += p.getName() + ",";
-					}
-				}
-			}
-		}
-		// failed
-		fail("assertHasOperation: no operation '" + operationName + "' found. Found: " + found);
-		return null;
+		return assertHasRenderedNamedObject(root, Operation.class, operationName, checkShortcut, shortcutRequired); 
 	}
-
 
 	/**
 	 * Assert that a RunInstanceWire exists between two elements in the editor. 
@@ -463,6 +369,26 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return null;
 	}
 
+	/**
+	 * Assert that a DataFlowEdge exists between two elements in the editor. 
+	 */
+	public ConnectionNodeEditPart assertHasDataFlowEdge(DiagramDocumentEditor editor, EditPart source, EditPart target) {
+		for (Object c : editor.getDiagramEditPart().getConnections()) {
+			if (c instanceof ConnectionNodeEditPart) {
+				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
+				EObject element = connection.resolveSemanticElement();
+				if (element instanceof DataFlowEdge) {
+					DataFlowEdge w = (DataFlowEdge) element;
+					if (connection.getSource().equals(source) && 
+							connection.getTarget().equals(target))
+						return connection;	// found it
+				}
+			}
+		}
+		
+		fail("assertHasDataFlowEdge: no data flow edge found between '" + source + "' and '" + target + "'");
+		return null;
+	}
 
 	/**
 	 * Assert that a SyncWire exists between two elements in the editor.
@@ -577,6 +503,15 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				"org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditor", 
 				editor.getClass().getName());
 	}
+
+	/**
+	 * Assert the given editor is from the condition plugin.
+	 */
+	public void assertEditorCondition(IEditorPart editor) {
+		assertEquals("active editor is the condition plugin", 
+				"org.openiaml.model.model.diagram.condition.part.IamlDiagramEditor", 
+				editor.getClass().getName());
+	}
 	
 	/**
 	 * Assert the given editor is from the domain_object plugin.
@@ -681,7 +616,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasDomainObject(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasDomainObject(editor, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, DomainObject.class, name, true, shortcutRequired);
 	}
 
 	/**
@@ -689,7 +624,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasDomainAttribute(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasDomainAttribute(editor, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, DomainAttribute.class, name, true, shortcutRequired);
 	}
 	
 	/**
@@ -697,7 +632,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasEventTrigger(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasEventTrigger(editor, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, EventTrigger.class, name, true, shortcutRequired);
 	}
 	
 	/**
@@ -705,7 +640,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasInputTextField(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasInputTextField(editor, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, InputTextField.class, name, true, shortcutRequired);
 	}
 	
 	/**
@@ -713,7 +648,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasInputForm(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasInputForm(editor, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, InputForm.class, name, true, shortcutRequired);
 	}
 
 	/**
@@ -721,9 +656,33 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasOperation(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasOperation(editor, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, Operation.class, name, true, shortcutRequired);
 	}
 
+	/**
+	 * @see #assertHasCondition(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasCondition(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, Condition.class, name, true, shortcutRequired);
+	}
+
+	/**
+	 * @see #assertHasApplicationElementProperty(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasApplicationElementProperty(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, ApplicationElementProperty.class, name, true, shortcutRequired);
+	}
+
+	/**
+	 * @see #assertHasTemporaryVariable(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasTemporaryVariable(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, TemporaryVariable.class, name, true, shortcutRequired);
+	}
+	
 	/**
 	 * @see #assertHasDomainObject(DiagramDocumentEditor, String, boolean, boolean)
 	 */

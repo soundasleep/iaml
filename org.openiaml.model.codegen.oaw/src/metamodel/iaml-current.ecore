@@ -54,7 +54,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ChainedOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireEdgesSource"/>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//ChainedOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//Scope #//ContainsConditions">
     <eAnnotations source="http://openiaml.org/comment">
-      <details key="comment" value="Scope supertype added in 0.2"/>
+      <details key="comment" value="Scope supertype added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//ActivityNode" containment="true"/>
@@ -64,8 +64,6 @@
         eType="#//ExecutionEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
         eType="#//TemporaryVariable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="_shouldnt_properties" upperBound="-1"
-        eType="#//ApplicationElementProperty" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//StaticValue" containment="true"/>
   </eClassifiers>
@@ -305,7 +303,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsConditions #//Condition #//GeneratesElements">
     <eAnnotations source="http://openiaml.org/comment">
-      <details key="comment" value="added in 0.2"/>
+      <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//ActivityNode" containment="true"/>
@@ -315,8 +313,6 @@
         eType="#//ExecutionEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
         eType="#//TemporaryVariable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="_shouldnt_properties" upperBound="-1"
-        eType="#//ApplicationElementProperty" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//StaticValue" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"

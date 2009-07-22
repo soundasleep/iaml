@@ -19,7 +19,7 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.core.commands.DeleteCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.EmfInferenceHandler;
@@ -85,8 +85,8 @@ public class GeneratedElementHandler {
 		
 		// iterate over the selected elements, and
 		for (Object o : selected) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart part = (ShapeNodeEditPart) o;
+			if (o instanceof IGraphicalEditPart) {
+				IGraphicalEditPart part = (IGraphicalEditPart) o;
 				
 				// it must be a GeneratedElement...
 				if (part.resolveSemanticElement() instanceof GeneratedElement) {
@@ -174,7 +174,7 @@ public class GeneratedElementHandler {
 	/**
 	 * @param target
 	 */
-	public GeneratedElementHandler(ShapeNodeEditPart target) {
+	public GeneratedElementHandler(IGraphicalEditPart target) {
 		if (target.resolveSemanticElement() instanceof GeneratedElement) {
 			checkElement((GeneratedElement) target.resolveSemanticElement());
 		} else {
@@ -426,7 +426,7 @@ public class GeneratedElementHandler {
 								
 								// is this element currently contained within the current
 								// edit part?
-								ShapeNodeEditPart contained = elementContainedWithin(d, diagramEditPart);
+								IGraphicalEditPart contained = elementContainedWithin(d, diagramEditPart);
 								if (contained != null) {
 									// it is: delete the node from the current display								
 									DeleteCommand command2 = new DeleteCommand(editingDomain, contained.getPrimaryView());
@@ -453,12 +453,12 @@ public class GeneratedElementHandler {
 			 * @param diagramEditPart
 			 * @return
 			 */
-			private ShapeNodeEditPart elementContainedWithin(EObject d,
+			private IGraphicalEditPart elementContainedWithin(EObject d,
 					DiagramEditPart diagramEditPart) {
 				
 				for (Object obj : diagramEditPart.getChildren()) {
-					if (obj instanceof ShapeNodeEditPart) {
-						ShapeNodeEditPart p = (ShapeNodeEditPart) obj;
+					if (obj instanceof IGraphicalEditPart) {
+						IGraphicalEditPart p = (IGraphicalEditPart) obj;
 						if (d.equals(p.resolveSemanticElement()))
 							return p;
 					}

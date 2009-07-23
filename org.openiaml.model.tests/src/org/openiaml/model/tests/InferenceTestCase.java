@@ -251,6 +251,16 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @returns the generated model file
 	 */
 	protected File saveInferredModel() throws FileNotFoundException, IOException {
+		// check that the inference folder exists
+		File folder = new File("infer-output/");
+		if (!(folder.exists() && folder.isDirectory())) {
+			// make it
+			assertTrue("Could not make output folder '" + folder + "'", folder.mkdir());
+		}
+		// it should now exist
+		assertTrue(folder.exists());
+		assertTrue(folder.isDirectory());
+		
 		File tempJavaFile = new File("infer-output/" + this.getClass().getSimpleName() + ".iaml");
 		Map<?,?> options = resource.getResourceSet().getLoadOptions();
 		resource.save(new FileOutputStream(tempJavaFile), options);

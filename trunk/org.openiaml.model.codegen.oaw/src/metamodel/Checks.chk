@@ -63,5 +63,8 @@ context model::WireEdge ERROR "A WireEdge must have a 'from'" :
 
 context model::WireEdge ERROR "A WireEdge must have a 'to'" :
 	to != null;
+
+context model::visual::Page WARNING "Sample warning message" :
+	name != "warning";
 	
 	

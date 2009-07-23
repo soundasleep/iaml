@@ -18,6 +18,7 @@ import java.util.Map;
 
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
+import org.drools.StatefulSession;
 import org.drools.WorkingMemory;
 import org.drools.compiler.PackageBuilder;
 import org.drools.event.DefaultWorkingMemoryEventListener;
@@ -148,7 +149,18 @@ public abstract class DroolsInferenceEngine {
 		} catch (Exception e) {
 			throw new InferenceException("Could not load rulebase: " + e.getMessage(), e);
 		}
-        final WorkingMemory workingMemory = ruleBase.newStatefulSession();
+		
+		/*
+		 * We use a StatefulSession, because we may add additional facts
+		 * after the initial insertion.
+		 * 
+		 * But creating a StatefulSession adds a reference to the RuleBase,
+		 * which can cause memory leaks. This is so that if the
+		 * RuleBase has changed rules, they can be updated in the working
+		 * memory. As a result, we have to call dispose() on the 
+		 * StatefulSession once we are finished with it.  
+		 */
+        final StatefulSession workingMemory = ruleBase.newStatefulSession();
         
         monitor.worked(5);
         monitor.subTask("Inserting initial model");
@@ -390,7 +402,13 @@ public abstract class DroolsInferenceEngine {
 		} catch (NumberFormatException e) {
 			throw new InferenceException(e);
 		}
-	        
+		
+		// force the dispose of the working memory;
+		// all of our rules have been fired, all of the working
+		// memory has been saved to an EObject, so we should be
+		// able to remove it from memory
+		workingMemory.dispose();
+		
         subProgressMonitor.done();	// completed
         
         monitor.done();

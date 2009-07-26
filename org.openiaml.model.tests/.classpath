@@ -26,5 +26,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/jwebunit-htmlunit-plugin-2.1-SNAPSHOT.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk/jwebunit-htmlunit-plugin"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.6.0_02/lib/tools.jar" sourcepath="C:/Program Files/Java/jdk1.6.0_02/src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

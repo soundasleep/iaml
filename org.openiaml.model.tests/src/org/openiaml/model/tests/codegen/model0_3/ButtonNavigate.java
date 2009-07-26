@@ -19,6 +19,10 @@ public class ButtonNavigate extends CodegenTestCase {
 		root = loadAndCodegen(ButtonNavigate.class);
 	}
 	
+	/**
+	 * @semantics test foo
+	 * @throws Exception
+	 */
 	public void testPage1to2() throws Exception {
 		// go to sitemap
 		IFile sitemap = getProject().getFile("output/sitemap.html");

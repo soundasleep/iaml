@@ -11,6 +11,7 @@
 <?php
 		/* generated page "«name-»" */
 		// include header code
+		require("config.php");		// runtime library configuration
 		require("header.php");		// include header code
 		require("create_database.php");		// ensure DB exists
 		require("properties_file.php");
@@ -98,13 +99,13 @@
 		<html>
 		<head>
 			<title>«pageTitle()»</title>
-			<link rel="stylesheet" type="text/css" href="default.css">
+			<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
 			<script language="Javascript" type="text/javascript">
 			/* <![CDATA[ */
 				var page_id = "«safeNameString(id)-»";
 			/* ]]> */
 			</script>
-			<script language="Javascript" type="text/javascript" src="js/prototype.js"></script>
+			<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
 			<script language="Javascript" type="text/javascript">
 			/* <![CDATA[ */
 				«EXPAND js::includes::DefaultJs::defaultJs FOR this-»

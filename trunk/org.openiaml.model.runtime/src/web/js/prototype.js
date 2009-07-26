@@ -1,11 +1,7 @@
-«IMPORT iaml»
-
-«EXTENSION template::GeneratorExtensions»
-
 /**
  * downloaded from http://www.prototypejs.org/assets/2008/9/29/prototype-1.6.0.3.js
  */
-«DEFINE prototypeJs FOR model::InternetApplication»
+
 /*  Prototype JavaScript framework, version 1.6.0.3
  *  (c) 2005-2008 Sam Stephenson
  *
@@ -4326,4 +4322,3 @@ Object.extend(Element.ClassNames.prototype, Enumerable);
 /*--------------------------------------------------------------------------*/
 
 Element.addMethods();
-«ENDDEFINE»

@@ -24,6 +24,21 @@ These requirements may be installed through the [http://download.eclipse.org/rel
 
 =Installation=
 
+After installing the plugin, you will need to set up an alias on your web server to the IAML client-side runtime libraries (similar to Symfony's /sf virtual folder) - see [http://code.google.com/p/iaml/issues/detail?id=76 issue 76]:
+
+{{{
+# iaml library include (client-side)
+Alias "/iaml-runtime" "C:/.../org.openiaml.model.runtime/src/web"
+<Directory C:/.../org.openiaml.model.runtime/src/web">
+   Options Indexes FollowSymLinks
+   DirectoryIndex index.html index.php default.html default.php
+   AllowOverride All
+   Allow from All   
+</Directory>
+}}}
+
+=Getting Started=
+
   # In Eclipse, select _Help_ > _Software Updates_ > _Find and Install..._
   # Add the following remote site:
 {{{

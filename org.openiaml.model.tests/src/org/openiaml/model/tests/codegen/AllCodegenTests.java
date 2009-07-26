@@ -27,6 +27,9 @@ public class AllCodegenTests {
 		// and that the client-side library exists
         suite.addTestSuite(TestClientsideRuntimeLibrary.class);
 
+		// (issue 81) runtime libraries can be included
+        suite.addTestSuite(TestIncludeLibraries.class);
+
 		// OAW-specific tests
 		suite.addTest(AllOawTests.suite());
 

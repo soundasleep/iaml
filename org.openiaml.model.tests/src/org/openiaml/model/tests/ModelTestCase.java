@@ -30,7 +30,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.openiaml.model.codegen.ICodeGenerator;
-import org.openiaml.model.codegen.oaw.OawCodeGenerator;
+import org.openiaml.model.codegen.oaw.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
 import org.openiaml.model.tests.xpath.IterableElementList;
 import org.openiaml.model.tests.xpath.XpathTestCase;
@@ -273,7 +273,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		// create some properties
 		Map<String,String> runtimeProperties = getRuntimeProperties();
 		
-		ICodeGenerator runner = new OawCodeGenerator();		
+		ICodeGenerator runner = new OawCodeGeneratorWithRuntime();		
 		IStatus status = runner.generateCode(filename, monitor, runtimeProperties);
 		
 		if (!status.isOK()) {

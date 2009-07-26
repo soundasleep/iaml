@@ -105,7 +105,6 @@ public class GenerateCodeAction extends ProgressEnabledAction<IFile> {
 				} else if (o.getParent() instanceof IProject) {
 					properties = ((IProject) o.getParent()).getFile("runtime.properties");
 				}
-				System.out.println("properties: " + properties);
 				
 				// load the properties file if it does
 				Map<String,String> runtimeProperties = getDefaultProperties();

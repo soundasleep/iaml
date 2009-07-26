@@ -3,12 +3,16 @@
  */
 package org.openiaml.model.codegen.oaw;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.openiaml.model.runtime.IamlRuntimeLibrariesPlugin;
 
 /**
  * Extends the OawCodeGenerator to also include runtime files
@@ -25,6 +29,8 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator {
 	public IStatus generateCode(IFile file, IProgressMonitor monitor,
 			Map<String, String> runtimeProperties) {
 		
+		monitor.beginTask("Generating code (with runtime)", 100);
+		
 		boolean needToCopy = "true".equals(runtimeProperties.get("include_runtime")); 
 		
 		// set our custom properties, if necessary
@@ -35,7 +41,7 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator {
 		}
 		
 		// generate like normal
-		IStatus result = super.generateCode(file, monitor, runtimeProperties);
+		IStatus result = super.generateCode(file, new SubProgressMonitor(monitor, 90), runtimeProperties);
 		if (!result.isOK())
 			return result;		// bail early
 		
@@ -43,8 +49,18 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator {
 		// we copy over ALL files from the org.openiaml.model.runtime folder
 		// into a runtime/ folder
 		if (needToCopy) {
-			return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files");
+			IamlRuntimeLibrariesPlugin runtime = IamlRuntimeLibrariesPlugin.getInstance();
+			System.out.println("instance = " + runtime);
+			try {
+				runtime.copyRuntimeFiles(file.getProject(), new SubProgressMonitor(monitor, 10));
+			} catch (IOException e) {
+				return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files: " + e.getMessage(), e);
+			} catch (CoreException e) {
+				return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files: " + e.getMessage(), e);
+			}
 		}
+		
+		monitor.done();
 		
 		// return old result
 		return result;

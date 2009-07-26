@@ -24,6 +24,9 @@ public class AllCodegenTests {
 		// make sure we can catch exceptions
         suite.addTestSuite(TestExceptionHandling.class);
 
+		// and that the client-side library exists
+        suite.addTestSuite(TestClientsideRuntimeLibrary.class);
+
 		// OAW-specific tests
 		suite.addTest(AllOawTests.suite());
 

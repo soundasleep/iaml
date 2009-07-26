@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- a workflow for running in the dev environment -->
 <workflow>
 	<!-- using a local file for testing generation locally -->
 	<property name="model" value="org.openiaml.model.codegen.oaw/src/codegen-sync-pages.iaml" />
@@ -28,7 +29,7 @@
 	<component class="org.openarchitectureware.xpand2.Generator">
 		<metaModel idRef="mm"/>
 		<expand
-			value="template::Template::main FOR model" />
+			value="template::Template::main('${config_runtime}', '${config_web}') FOR model" />
 		<outlet path="${src-gen}" >
 			<postprocessor class="org.openiaml.model.codegen.oaw.IACleanerBeautifier" />
 		</outlet>

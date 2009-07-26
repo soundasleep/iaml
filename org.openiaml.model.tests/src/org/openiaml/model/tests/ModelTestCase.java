@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -52,6 +54,10 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	protected IProgressMonitor monitor;
 	
 	public static final String BASE_URL = "http://localhost:8080/junit-workspace/";
+	// from ./junit-workspace/project_name/output/ to target
+	public static final String CONFIG_RUNTIME = "../../../workspace-iaml/org.openiaml.model.runtime/src/include";
+	public static final String BASE_URL_RUNTIME = "http://localhost:8080/iaml-runtime/"; 
+	public static final String CONFIG_WEB = "/iaml-runtime/";
 	
 	/** 
 	 * TODO a temporary variable to make sure we don't set up
@@ -264,8 +270,11 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	protected IStatus doTransformOAWWorkflow(IFile filename,
 			IProgressMonitor monitor) throws CoreException {
 		
+		// create some properties
+		Map<String,String> runtimeProperties = getRuntimeProperties();
+		
 		ICodeGenerator runner = new OawCodeGenerator();		
-		IStatus status = runner.generateCode(filename, monitor);
+		IStatus status = runner.generateCode(filename, monitor, runtimeProperties);
 		
 		if (!status.isOK()) {
 			// bail early
@@ -278,6 +287,21 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		
 		// we need to *force* refresh the workspace
 		return refreshProject();
+	}
+
+	/**
+	 * Generate the properties required for ICodeGenerator.
+	 * 
+	 * @see org.openiaml.model.codegen.ICodeGenerator#generateCode(IFile, IProgressMonitor, Map)
+	 * @return
+	 */
+	protected Map<String, String> getRuntimeProperties() {
+		Map<String,String> properties = new HashMap<String,String>();
+
+		properties.put("config_runtime", CONFIG_RUNTIME);
+		properties.put("config_web", CONFIG_WEB);
+
+		return properties;
 	}
 
 	/**

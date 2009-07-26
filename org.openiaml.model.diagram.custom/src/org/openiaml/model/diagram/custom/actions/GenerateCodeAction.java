@@ -5,10 +5,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -20,7 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openiaml.model.codegen.ICodeGenerator;
-import org.openiaml.model.codegen.oaw.OawCodeGenerator;
+import org.openiaml.model.codegen.oaw.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
@@ -92,10 +96,27 @@ public class GenerateCodeAction extends ProgressEnabledAction<IFile> {
 				
 				// now load it in as an IFile
 				tempFile.create(new FileInputStream(tempJavaFile), true, new SubProgressMonitor(monitor, 5));
-		
+				
+				// does a properties file exist?
+				// (used to define the location of runtime libraries)
+				IFile properties = null;
+				if (o.getParent() instanceof IFolder) {
+					properties = ((IFolder) o.getParent()).getFile("runtime.properties");
+				} else if (o.getParent() instanceof IProject) {
+					properties = ((IProject) o.getParent()).getFile("runtime.properties");
+				}
+				System.out.println("properties: " + properties);
+				
+				// load the properties file if it does
+				Map<String,String> runtimeProperties = getDefaultProperties();
+				if (properties != null && properties.exists()) {
+					// read it
+					runtimeProperties = readProperties(properties);
+				}
+				
 				// create code generator instance
-				ICodeGenerator codegen = new OawCodeGenerator();
-				IStatus status = codegen.generateCode(tempFile, new SubProgressMonitor(monitor, 50));
+				ICodeGenerator codegen = new OawCodeGeneratorWithRuntime();
+				IStatus status = codegen.generateCode(tempFile, new SubProgressMonitor(monitor, 50), runtimeProperties);
 				
 				// now delete the generated model file
 				// TODO this would probably go well in a finally block
@@ -117,6 +138,44 @@ public class GenerateCodeAction extends ProgressEnabledAction<IFile> {
 			return errorStatus("Core exception", e);
 		}
 	}
+
+	/**
+	 * Read in an IFile into a Map.
+	 * 
+	 * @param properties
+	 * @return
+	 * @throws CoreException 
+	 * @throws IOException 
+	 */
+	protected Map<String, String> readProperties(IFile properties) throws IOException, CoreException {
+		
+		Properties p = new Properties();
+		p.load(properties.getContents());
+		
+		Map<String,String> result = new HashMap<String,String>();
+		for (Object key : p.keySet()) {
+			result.put((String) key, (String) p.get(key));
+		}
+		
+		return result;
+		
+	}
+
+
+	/**
+	 * Get the default runtime properties.
+	 * 
+	 * @see ICodeGenerator#generateCode(IFile, IProgressMonitor, Map)
+	 * @return
+	 */
+	protected Map<String, String> getDefaultProperties() {
+		Map<String, String> properties = new HashMap<String,String>();
+		
+		properties.put("include_runtime", "true");
+		
+		return properties;
+	}
+
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)

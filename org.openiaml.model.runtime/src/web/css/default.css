@@ -1,8 +1,3 @@
-«IMPORT iaml»
-
-«EXTENSION template::GeneratorExtensions»
-
-«DEFINE defaultCss FOR model::InternetApplication»
 html,input {
 	font-family: Calibri, Arial;
 	font-size: 1em;
@@ -69,5 +64,3 @@ div#debug_monitors div#counter_store_event:before { content: 'event '; }
 div#debug_monitors div#counter_set_session:before { content: 'session '; }
 div#debug_monitors div#counter_set_application_value:before { content: 'app '; }
 div#debug_monitors div#counter_set_domain_attribute:before { content: 'attr '; }
-
-«ENDDEFINE»

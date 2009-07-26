@@ -41,7 +41,8 @@ public class OawCodeGenerator implements ICodeGenerator {
 	 * Does NOT deal with inference.
 	 * 
 	 */
-	public IStatus generateCode(IFile file, IProgressMonitor monitor) {
+	public IStatus generateCode(IFile file, IProgressMonitor monitor, 
+			Map<String,String> runtimeProperties) {
 		
 		// reset exception-key map
 		resetKeyToExceptionMap();
@@ -70,10 +71,13 @@ public class OawCodeGenerator implements ICodeGenerator {
 			// of created files
 			CustomOAWLog.setMonitor(monitor);
 			
-			String wfFile = "src/workflow/generator.oaw";
+			String wfFile = "src/workflow/runtime.oaw";
 			Map<String,String> properties = new HashMap<String,String>();
 			properties.put("model", file.getFullPath().toString());
 			properties.put("src-gen", file.getProject().getLocation().toString());	// have to get absolute filename for output dir
+			properties.put("config_runtime", runtimeProperties.get("config_runtime"));
+			properties.put("config_web", runtimeProperties.get("config_web"));
+			
 			Map<String,Object> slotContents = new HashMap<String,Object>();
 			new WorkflowRunner().run(wfFile,
 				new ProgressMonitorAdapter(monitor), properties, slotContents);

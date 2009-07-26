@@ -29,7 +29,7 @@ After installing the plugin, you will need to set up an alias on your web server
 {{{
 # iaml library include (client-side)
 Alias "/iaml-runtime" "C:/.../org.openiaml.model.runtime/src/web"
-<Directory C:/.../org.openiaml.model.runtime/src/web">
+<Directory "C:/.../org.openiaml.model.runtime/src/web">
    Options Indexes FollowSymLinks
    DirectoryIndex index.html index.php default.html default.php
    AllowOverride All

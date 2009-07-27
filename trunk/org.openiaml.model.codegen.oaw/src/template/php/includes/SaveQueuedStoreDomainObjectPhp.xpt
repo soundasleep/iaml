@@ -8,10 +8,8 @@
  * Saving queued stored objects.
  */
  
-require("header.php");
-
-// queue up any log messages
-queue_log_messages(true);
+require("config.php");		// runtime library configuration
+require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 
 log_message("save_queued_store_domain_object.php? " . print_r($_GET, true));
 $id = $_GET["id"] or throw_new_IamlRuntimeException("no id");

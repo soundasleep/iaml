@@ -4,9 +4,9 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * All tests for the runtime library (both client-side and 
- * server-side at the moment)
+ * All tests for the runtime library (client-side)
  * 
+ * @see AllServerRuntimeTests
  * @author jmwright
  *
  */

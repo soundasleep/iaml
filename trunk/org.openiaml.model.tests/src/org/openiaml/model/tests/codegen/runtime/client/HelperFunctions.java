@@ -23,7 +23,8 @@ public class HelperFunctions extends JavascriptCodegenTestCase {
 		assertJavascriptResult("test", "trim('test')");
 		assertJavascriptResult("test", "trim('test ')");
 		assertJavascriptResult("test", "trim('  test')");
-		assertJavascriptResult("te st", "trim('te st')");
+		assertJavascriptResult("te st", "trim('\tte st\n\n\t')");
+		assertJavascriptResult("te\n \nst", "trim(' te\n \nst ')");
 	}
 
 	public void testArrayEqual() throws Exception {

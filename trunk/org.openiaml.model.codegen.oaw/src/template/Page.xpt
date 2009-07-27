@@ -12,12 +12,9 @@
 		/* generated page "«name-»" */
 		// include header code
 		require("config.php");		// runtime library configuration
-		require("header.php");		// include header code
+		require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 		require("create_database.php");		// ensure DB exists
 		require("properties_file.php");
-		
-		// queue up any log messages
-		queue_log_messages(true);
 		
 		// a default fail handler for this page?
 		«IF getFailHandler(this) != null»

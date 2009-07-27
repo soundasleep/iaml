@@ -106,6 +106,7 @@
 			/* ]]> */
 			</script>
 			<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
+			<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
 			<script language="Javascript" type="text/javascript">
 			/* <![CDATA[ */
 				«EXPAND js::includes::DefaultJs::defaultJs FOR this-»

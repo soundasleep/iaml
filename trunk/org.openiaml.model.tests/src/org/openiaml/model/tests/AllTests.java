@@ -33,7 +33,7 @@ public class AllTests {
         suite.addTest(AllCodegenTests.suite());
         suite.addTestSuite(DroolsQueueTest.class);
         // currently the Eclipse tests fail with an out of memory/exception_access_violation fatal error
-        suite.addTest(AllEclipseTests.suite());
+        //suite.addTest(AllEclipseTests.suite());
         suite.addTest(AllReleaseTests.suite());
         suite.addTest(AllModelTests.suite());
 

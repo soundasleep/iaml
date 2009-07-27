@@ -8,7 +8,8 @@
  * For setting a session variable.
  */
  
-require("header.php");
+require("config.php");		// runtime library configuration
+require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 
 log_message("set_session.php? " . print_r($_GET, true));
 $id = $_GET["id"] or throw_new_IamlRuntimeException("no id");

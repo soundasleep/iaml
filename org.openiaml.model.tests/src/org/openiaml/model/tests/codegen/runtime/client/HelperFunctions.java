@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen.runtime;
+package org.openiaml.model.tests.codegen.runtime.client;
 
 /**
  * Checks helper functions.

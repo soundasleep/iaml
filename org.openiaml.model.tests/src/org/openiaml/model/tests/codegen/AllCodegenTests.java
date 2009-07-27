@@ -4,7 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.openiaml.model.tests.codegen.oaw.AllOawTests;
-import org.openiaml.model.tests.codegen.runtime.AllRuntimeTests;
+import org.openiaml.model.tests.codegen.runtime.client.AllClientRuntimeTests;
 
 /**
  * All tests for code generation.
@@ -40,7 +40,7 @@ public class AllCodegenTests {
 		suite.addTest(Codegen0_3Suite.suite());
 		
 		// client-side runtime library tests
-		suite.addTest(AllRuntimeTests.suite());
+		suite.addTest(AllClientRuntimeTests.suite());
 
 		return suite;
 	}

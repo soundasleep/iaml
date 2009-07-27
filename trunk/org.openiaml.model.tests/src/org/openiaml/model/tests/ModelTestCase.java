@@ -55,7 +55,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	
 	public static final String BASE_URL = "http://localhost:8080/junit-workspace/";
 	// from ./junit-workspace/project_name/output/ to target
-	public static final String CONFIG_RUNTIME = "../../../workspace-iaml/org.openiaml.model.runtime/src/include";
+	public static final String CONFIG_RUNTIME = "../../../workspace-iaml/org.openiaml.model.runtime/src/include/";
 	public static final String BASE_URL_RUNTIME = "http://localhost:8080/iaml-runtime/"; 
 	public static final String CONFIG_WEB = "/iaml-runtime/";
 	

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.codegen.runtime;
+package org.openiaml.model.tests.codegen.runtime.client;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -23,7 +23,7 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(JavascriptCodegenTestCase.class);
+		root = loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/runtime/client/JavascriptCodegenTestCase.iaml");
 		hasStarted = false;
 	}
 	

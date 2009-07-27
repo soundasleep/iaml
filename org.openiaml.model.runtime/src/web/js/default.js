@@ -372,7 +372,7 @@ function emailAddressMatch(a) {
 	}
 	
 	var re = new RegExp("([A-Za-z0-9\._\-]+)@([A-Za-z0-9_\-]+)(\.[A-Za-z0-9_\-]+)+");
-	return re.exec(a);
+	return re.exec(a) ? true : false;
 }
 
 /**

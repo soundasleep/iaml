@@ -21,7 +21,8 @@ public class AllRuntimeTests {
 		TestSuite suite = new TestSuite("Runtime Library");
 		
 		suite.addTestSuite(JavascriptMethodsTest.class);
-		suite.addTestSuite(StoreCookie.class);
+		suite.addTestSuite(HelperFunctions.class);
+		suite.addTestSuite(ComparisonFunctions.class);
 
 		return suite;
 	}

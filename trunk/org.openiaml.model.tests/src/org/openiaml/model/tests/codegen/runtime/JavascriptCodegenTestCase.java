@@ -3,9 +3,12 @@
  */
 package org.openiaml.model.tests.codegen.runtime;
 
-import java.io.StringBufferInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -31,9 +34,32 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 	 * @throws Exception 
 	 */
 	public void assertJavascriptResult(String expected, String script) throws Exception {
-		setExpectedJavaScriptAlert(expected);
-		executeJavascript("alert(" + script + ");");
+		assertJavascriptResult(expected, "", script);
 		
+	}
+	
+	/**
+	 * 
+	 * @param init pre-init code
+	 * @throws Exception 
+	 */
+	public void assertJavascriptResult(String expected, String init, String script) throws Exception {
+		setExpectedJavaScriptAlert(expected);
+		executeJavascript(init + "alert(" + script + ");");		
+	}
+	
+	/**
+	 * @throws Exception 
+	 */
+	public void assertJavascriptResult(Boolean expected, String script) throws Exception {
+		assertJavascriptResult(expected.toString(), "", script);
+	}
+
+	/**
+	 * @throws Exception 
+	 */
+	public void assertJavascriptResult(Boolean expected, String init, String script) throws Exception {
+		assertJavascriptResult(expected.toString(), init, script);
 	}
 
 	private boolean hasStarted = false;
@@ -46,19 +72,26 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 	 * @param string The Javascript code to execute
 	 */
 	public void executeJavascript(String string) throws Exception {
-		// create a new page with our target javascript
-		IFile runtime = getProject().getFile("output/runtime-js-test.html");
-		if (runtime.exists()) {
-			runtime.delete(true, monitor);
-		}
-		StringBufferInputStream content = new StringBufferInputStream("<html><script src=\"" + CONFIG_WEB + "js/default.js\"></script><script>" + string + "</script></html>");
-		
-		runtime.create(content, true, monitor);
-		if (hasStarted) {
-			gotoPage("output/runtime-js-test.html");	
-		} else {
-			beginAt("output/runtime-js-test.html");
-			hasStarted = true;
+		try {
+			// create a new page with our target javascript
+			long random = new Random().nextLong();
+			String filename = "output/runtime-js-test" + random + ".html";
+			IFile runtime = getProject().getFile(filename);
+			if (runtime.exists()) {
+				runtime.delete(true, new NullProgressMonitor());
+			}
+			InputStream content = new ByteArrayInputStream(("<html><script src=\"" + CONFIG_WEB + "js/default.js\"></script><script>" + string + "</script></html>").getBytes());
+			
+			runtime.create(content, true, new NullProgressMonitor());
+			if (hasStarted) {
+				gotoPage(filename);	
+			} else {
+				beginAt(filename);
+				hasStarted = true;
+			}
+			
+		} catch (RuntimeException e) {
+			throw new RuntimeException("Could not execute '" + string + ": " + e.getMessage(), e);
 		}
 		
 	}

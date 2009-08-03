@@ -5,6 +5,8 @@
 
 The IAML plugin is an Eclipse plugin that provides a visual editor for the modelling of Internet applications, as an implementation of our [http://openiaml.org research project]. Following our research emphasis on iterative development, we hope that regularly releasing our plugin will help us focus development and gain valuable feedback from the development community.
 
+*NOTE:* These instructions are cryptic and hard to follow until [http://code.google.com/p/iaml/issues/detail?id=2 issue 2] is resolved. Good luck!
+
 =Requirements=
 
   # Eclipse 3.5 Galileo
@@ -14,28 +16,14 @@ The IAML plugin is an Eclipse plugin that provides a visual editor for the model
     * Update site: http://www.openarchitectureware.org/updatesite/milestone/site.xml
   # [http://code.google.com/p/iacleaner/ iacleaner 0.2]
     * Update site: http://iacleaner.googlecode.com/svn/trunk/org.openiaml.iacleaner.update/site.xml
+  # Possibly others: [http://code.google.com/p/iaml/issues/detail?id=2 to be determined]
 
 For testing:
 
   # [http://www.eclipticalsoftware.com/emf/xpath/ XPath Support for EMF]
     * Update site: http://www.eclipticalsoftware.com/updates
 
-These requirements may be installed through the [http://download.eclipse.org/releases/europa/ Europa update site]. (They also might be installed with the installation process.)
-
-=Installation=
-
-After installing the plugin, you will need to set up an alias on your web server to the IAML client-side runtime libraries (similar to Symfony's /sf virtual folder) - see [http://code.google.com/p/iaml/issues/detail?id=76 issue 76]:
-
-{{{
-# iaml library include (client-side)
-Alias "/iaml-runtime" "C:/.../org.openiaml.model.runtime/src/web"
-<Directory "C:/.../org.openiaml.model.runtime/src/web">
-   Options Indexes FollowSymLinks
-   DirectoryIndex index.html index.php default.html default.php
-   AllowOverride All
-   Allow from All   
-</Directory>
-}}}
+These requirements may be installed through the [http://download.eclipse.org/releases/galileo/ Galileo update site]. (They also might be installed with the installation process.)
 
 =Getting Started=
 
@@ -53,3 +41,34 @@ Now that you have got the IAML plugin installed, you can run through the [Tutori
   # Create a new blank project
   # Create a new IAML model by selecting _New..._ > _Examples_ > _Iaml Diagram_
   # You can now edit the _iaml_diagram_ to create your Internet application visually
+
+=Miscellaneous=
+
+You may run out of memory when using the modelling platform within a Sun VM, in particular PermGen memory; this is mostly due to the Drools engine requiring a 7MB compiler in PermGen memory. It will depend on your system, but you may need to add the following lines to your _eclipse.ini_:
+
+{{{
+-vmargs
+-Xms384m
+-Xmx640m
+-XX:PermSize=512M
+-XX:MaxPermSize=512M
+}}}
+
+The parameters above work on a system with 2GB memory. As part of [http://code.google.com/p/iaml/issues/detail?id=2 issue 2], comprehensive system requirements will be investigated.
+
+==Runtime Library==
+
+Since r888, IAML provides a separate runtime library plugin which can be aliased to a virtual folder to improve performance. To enable this, you will need to set up an alias on your web server to the IAML client-side runtime libraries (similar to Symfony's /sf virtual folder):
+
+{{{
+# iaml library include (client-side)
+Alias "/iaml-runtime" "C:/.../org.openiaml.model.runtime/src/web"
+<Directory "C:/.../org.openiaml.model.runtime/src/web">
+   Options Indexes FollowSymLinks
+   DirectoryIndex index.html index.php default.html default.php
+   AllowOverride All
+   Allow from All   
+</Directory>
+}}}
+
+To make your project use these libraries, set "include_runtime" to "false" in your project properties, and set "config_runtime" and "config_web" appropriately. See: [IamlProjectProperties]

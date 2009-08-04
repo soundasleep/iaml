@@ -114,10 +114,11 @@
 				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
 			}
 			
-			// additional special logic: if we have a RunInstanceWire, get all of the incoming edges
+			// additional special logic: if we have a WireEdgeDestination, get all of the incoming edges
 			// that are ParameterWires, and render these as shortcut elements too (i.e. parameters)
-			if (wire instanceof org.openiaml.model.model.wires.RunInstanceWire) {
-				org.openiaml.model.model.wires.RunInstanceWire run = (org.openiaml.model.model.wires.RunInstanceWire) wire;
+			// (this covers RunInstanceWires, SelectWires, etc...: see Issue 69)
+			if (wire instanceof org.openiaml.model.model.WireEdgeDestination) {
+				org.openiaml.model.model.WireEdgeDestination run = (org.openiaml.model.model.WireEdgeDestination) wire;
 				java.util.List<org.openiaml.model.model.WireEdge> params = new java.util.ArrayList();
 				for (org.openiaml.model.model.WireEdge e : run.getInEdges()) {
 					if (e instanceof org.openiaml.model.model.wires.ParameterWire) {

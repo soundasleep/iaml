@@ -27,6 +27,7 @@ public class AllShortcutsTests {
         suite.addTestSuite(ShortcutsRootTestCase.class);
         suite.addTestSuite(ShortcutsWireTestCase.class);
         suite.addTestSuite(Issue47.class);
+        suite.addTestSuite(Issue69.class);
 
         return suite; 
    }

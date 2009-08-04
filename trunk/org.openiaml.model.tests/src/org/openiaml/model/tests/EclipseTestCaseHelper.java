@@ -28,6 +28,7 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
@@ -42,6 +43,7 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -334,6 +336,17 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
+	 * Look at the editor's children to see if a Domain Object Instance is being displayed.
+	 * 
+	 * @param root
+	 * @param pageName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasDomainObjectInstance(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, DomainObjectInstance.class, objectName, checkShortcut, shortcutRequired); 
+	}
+
+	/**
 	 * Look at the editor's children to see if a Domain Store is being displayed.
 	 * 
 	 * @param root
@@ -366,6 +379,30 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		}
 		
 		fail("assertHasRunInstanceWire: no connection found between '" + source + "' and '" + target + "' with name '" + name + "'. found: " + found);
+		return null;
+	}
+
+	/**
+	 * Assert that a SelectWire exists between two elements in the editor. 
+	 */
+	public ConnectionNodeEditPart assertHasSelectWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+		String found = "";
+		
+		for (Object c : editor.getDiagramEditPart().getConnections()) {
+			if (c instanceof ConnectionNodeEditPart) {
+				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
+				EObject element = connection.resolveSemanticElement();
+				if (element instanceof SelectWire) {
+					SelectWire w = (SelectWire) element;
+					if (connection.getSource().equals(source) && 
+							connection.getTarget().equals(target) && w.getName().equals(name))
+						return connection;	// found it
+					found += ", " + w.getName();
+				}
+			}
+		}
+		
+		fail("assertHasSelectWire: no connection found between '" + source + "' and '" + target + "' with name '" + name + "'. found: " + found);
 		return null;
 	}
 
@@ -617,6 +654,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasDomainObject(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, DomainObject.class, name, true, shortcutRequired);
+	}
+	
+	/**
+	 * @see #assertHasDomainObjectInstance(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasDomainObjectInstance(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, DomainObjectInstance.class, name, true, shortcutRequired);
 	}
 
 	/**

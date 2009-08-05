@@ -248,7 +248,7 @@ echo "ok";
  */
 «DEFINE expandDomainAttributeEvents FOR model::EventTrigger»
 	«IF name=="edit"»
-		«EXPAND template::php::EventTrigger::callOperations(false, true) FOREACH outEdges»
+		«EXPAND template::operations::OperationCall::callOperation(true, false, true) FOREACH outEdges»
 	«ENDIF»
 «ENDDEFINE»
 

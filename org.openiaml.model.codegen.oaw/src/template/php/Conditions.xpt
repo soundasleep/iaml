@@ -2,13 +2,6 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE conditionWires(model::wires::RunInstanceWire wire, boolean inline, Boolean inStoreDb) FOR model::wires::ConditionWire»
-	/* ConditionWire: «this-» */
-	condition_«conditionName(from)»(
-		«EXPAND EventTrigger::callOperationParameters(wire, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
-	)
-«ENDDEFINE»
-
 /* expand out the conditions for the page */
 «DEFINE expandConditions FOR model::ContainsConditions»
 	«EXPAND expandCondition FOREACH getRoot().getAllConditions()»

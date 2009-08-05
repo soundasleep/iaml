@@ -19,7 +19,7 @@
 		// a default fail handler for this page?
 		«IF getFailHandler(this) != null»
 		function page_fail_handler($e) {
-			«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(this)»
+			«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(this)»
 			die;
 		}
 		set_exception_handler('page_fail_handler');
@@ -28,7 +28,7 @@
 		// a default fail handler for this session?
 		«IF containingSession() != null && getFailHandler(containingSession()) != null»
 		function session_fail_handler($e) {
-			«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(containingSession())»
+			«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
 			die;
 		}
 		set_exception_handler('session_fail_handler');
@@ -46,11 +46,11 @@
 			«IF getFailHandler(containingSession()) != null»
 				try {
 			«ENDIF»
-			«EXPAND php::EventTrigger::sessionEvents FOREACH containingSession().eventTriggers-»
+			«EXPAND template::events::Session::runSessionEvents FOREACH containingSession().eventTriggers-»
 			«IF getFailHandler(containingSession()) != null»
 				} catch (IamlRuntimeException $e) {
 					// only expand the first fail handler
-					«EXPAND php::EventTrigger::expandFailEdge FOR getFailHandler(containingSession())»
+					«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
 				}
 			«ENDIF»
 		}

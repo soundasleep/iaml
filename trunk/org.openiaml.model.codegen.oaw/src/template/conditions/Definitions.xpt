@@ -1,11 +1,11 @@
 «IMPORT iaml»
 
 /**
- * Event trigger definitions.
+ * Condition definitions.
  */
 «EXTENSION template::GeneratorExtensions»
 
-/* expand out the event triggers for the page */
+/* expand out the conditions for the page */
 /* this includes Page and Session */
 «REM»
 «DEFINE eventDefinitions(Boolean php) FOR model::ContainsOperations-»

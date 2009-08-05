@@ -8,23 +8,23 @@
 /* expand out the operations for the page */
 /* this includes Page and Session */
 «DEFINE operationDefinitions(Boolean php) FOR model::ContainsOperations-»
-	«EXPAND operation(php) FOREACH operations-»
+	«EXPAND operationDefinition(php) FOREACH operations-»
 «ENDDEFINE»
 
 «DEFINE operationDefinitions(Boolean php) FOR model::ApplicationElementContainer-»
 	// expanding operations for «this»
-	«EXPAND operation(php) FOREACH allContainerOperations()-»
+	«EXPAND operationDefinition(php) FOREACH allContainerOperations()-»
 «ENDDEFINE»
 
 /* operation definitions */
-«DEFINE operation(Boolean php) FOR model::Operation-»
+«DEFINE operationDefinition(Boolean php) FOR model::Operation-»
 	/* simple operation */
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
 		log_message("simple operation: «name»");
 	}
 «ENDDEFINE»
 
-«DEFINE operation(Boolean php) FOR model::CompositeOperation»
+«DEFINE operationDefinition(Boolean php) FOR model::CompositeOperation»
 	/** composite operation "«name»" */
 	$running_«safeName()» = false;
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
@@ -45,7 +45,7 @@
 			«EXPAND Variables::temporaryVariable(php) FOREACH variables.typeSelect(model::TemporaryVariable)»			
 			
 			// execute the operation
-			«EXPAND ExecutionFlow::flow(php) FOR startNode()-»
+			«EXPAND ExecutionFlow::executionFlow(php) FOR startNode()-»
 
 			// continue chained operations
 			«EXPAND ExecutionFlow::continueChainedOperations(php) FOR this»

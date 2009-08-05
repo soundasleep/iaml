@@ -11,14 +11,14 @@
  * Option: Start new threads, though this could be challenging for Javascript, and it
  * will also introduce concurrency issues.  
  */
-«DEFINE flow(Boolean php) FOR model::operations::StartNode-»
+«DEFINE executionFlow(Boolean php) FOR model::operations::StartNode-»
 	// flow starts here
 	«FOREACH outExecutions AS e-»
-		«EXPAND flowStep(php) FOR e.to-»
+		«EXPAND executionFlowStep(php) FOR e.to-»
 	«ENDFOREACH»
 «ENDDEFINE»
 
-«DEFINE flow(Boolean php) FOR model::ActivityNode-»
+«DEFINE executionFlow(Boolean php) FOR model::ActivityNode-»
 	// nothing for an activity node
 «ENDDEFINE»
 
@@ -27,11 +27,11 @@
  */
  
 /* an edge that is the end (both StartNode and FinishNode also fall into this) */
-«DEFINE flowStep(Boolean php) FOR model::ExecutionEdgeDestination-»
+«DEFINE executionFlowStep(Boolean php) FOR model::ExecutionEdgeDestination-»
 	// do nothing «this-»
 «ENDDEFINE»
 
-«DEFINE flowStep(Boolean php) FOR model::operations::CancelNode-»
+«DEFINE executionFlowStep(Boolean php) FOR model::operations::CancelNode-»
 	«IF exceptionText.length > 0»
 		throw new IamlRuntimeException("«exceptionText»");
 	«ELSE»
@@ -40,11 +40,11 @@
 «ENDDEFINE»
 
 /* a chained operation: carry on */
-«DEFINE flowStep(Boolean php) FOR model::ChainedOperation-»
+«DEFINE executionFlowStep(Boolean php) FOR model::ChainedOperation-»
 	// chained operation «name-»
 	«EXPAND Contents::operationContents(php) FOR this-»
 	«FOREACH outExecutions AS e-»
-		«EXPAND flowStep(php) FOR e.to-»
+		«EXPAND executionFlowStep(php) FOR e.to-»
 	«ENDFOREACH»
 	
 	// continue chained operations
@@ -52,7 +52,7 @@
 «ENDDEFINE»
 
 /* a decision operation: expandOperationContents will continue the execution flow */
-«DEFINE flowStep(Boolean php) FOR model::operations::DecisionOperation-»
+«DEFINE executionFlowStep(Boolean php) FOR model::operations::DecisionOperation-»
 	// decision operation «name-»
 	«EXPAND Contents::operationContents(php) FOR this-»
 

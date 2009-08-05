@@ -31,7 +31,7 @@
 			to ajax calls and executed once the call is successful.
 		«ENDREM»
 		«FOREACH outExecutions AS e-»
-			«EXPAND ExecutionFlow::flowStep(php) FOR e.to-»
+			«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
 		«ENDFOREACH»
 		
 		«REM»
@@ -49,7 +49,7 @@
 
 		«REM»continue«ENDREM»
 		«FOREACH outExecutions AS e-»
-			«EXPAND ExecutionFlow::flowStep(php) FOR e.to-»
+			«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
 		«ENDFOREACH»
 	«ELSEIF name == "javascriptAlert"»
 		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
@@ -57,7 +57,7 @@
 
 		«REM»continue«ENDREM»
 		«FOREACH outExecutions AS e-»
-			«EXPAND ExecutionFlow::flowStep(php) FOR e.to-»
+			«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
 		«ENDFOREACH»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
@@ -78,10 +78,10 @@
 	«ENDIF»
 	) {
 		// passed (exactly one pass)
-		«EXPAND ExecutionFlow::flowStep(php) FOR passedExectionFlow().to»
+		«EXPAND ExecutionFlow::executionFlowStep(php) FOR passedExectionFlow().to»
 	} else {
 		// failed (exactly one fail)
-		«EXPAND ExecutionFlow::flowStep(php) FOR failedExectionFlow().to»
+		«EXPAND ExecutionFlow::executionFlowStep(php) FOR failedExectionFlow().to»
 	}
 «ENDDEFINE»
 
@@ -118,7 +118,6 @@
 «DEFINE equalDecisionOperation(Boolean php) FOR model::DataFlowEdge-»
 	«EXPAND DataFlow::dataSource(php) FOR from-»
 «ENDDEFINE»
-
 
 «DEFINE exception FOR Object»
 «ENDDEFINE»

@@ -1,0 +1,26 @@
+«IMPORT iaml»
+
+/**
+ * The flow of data within an operation.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE dataSource(Boolean php) FOR model::DataFlowEdgesSource»
+	«EXPAND exception FOR throwException("Unknown data flow edge source for server setPropertyToValue: " + this)»
+«ENDDEFINE»
+
+// TODO need to wrap value in some sort of encoding algorithm
+«DEFINE dataSource(Boolean php) FOR model::StaticValue»
+	"«value-»" /* static value "«safeName()-»" */ 
+«ENDDEFINE»
+
+«DEFINE dataSource(Boolean php) FOR model::Parameter»
+	$«safeName()»
+«ENDDEFINE»
+
+«DEFINE dataSource(Boolean php) FOR model::TemporaryVariable»
+	$temp_«safeName()»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

@@ -6,16 +6,6 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE pageEvents FOR model::EventTrigger-»
-	// Page EventTrigger «this»
-	«IF name == "init" || name == "access"-»
-		// RunInstanceWires sorted by priority
-		«EXPAND callOperations(false, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
-	«ELSE-»
-		// I don't know what to do with page event "«name»"
-	«ENDIF-»
-«ENDDEFINE»
-
 «DEFINE sessionEvents FOR model::EventTrigger-»
 	// Session EventTrigger «this»
 	«IF name == "init" || name == "access"-»
@@ -24,23 +14,6 @@
 	«ELSE-»
 		// I don't know what to do with session event "«name»"
 	«ENDIF-»
-«ENDDEFINE»
-
-/* this is a direct copy from Page.xpt */
-
-/* expand out the operations for the page */
-«DEFINE expandOperations FOR emf::EObject-»
-	«ERROR "can't expand operations for something that has none!"»
-«ENDDEFINE»
-
-/* this includes Page and Session */
-«DEFINE expandOperations FOR model::ContainsOperations-»
-	«EXPAND expandOperation FOREACH operations-»
-«ENDDEFINE»
-
-«DEFINE expandOperations FOR model::ApplicationElementContainer-»
-	// expanding operations for «this»
-	«EXPAND expandOperation FOREACH allContainerOperations()-»
 «ENDDEFINE»
 
 «DEFINE expandOperation FOR model::Operation-»

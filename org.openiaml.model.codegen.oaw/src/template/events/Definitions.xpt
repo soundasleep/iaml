@@ -1,0 +1,13 @@
+«IMPORT iaml»
+
+/**
+ * Event trigger definitions.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/* expand out the event triggers for the page */
+/* this includes Page and Session */
+// «DEFINE eventDefinitions(Boolean php) FOR model::ContainsOperations-»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

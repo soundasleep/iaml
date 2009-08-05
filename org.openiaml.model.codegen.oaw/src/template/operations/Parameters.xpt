@@ -1,0 +1,77 @@
+«IMPORT iaml»
+
+/**
+ * Parameters for operations.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * Parameter definitions within the signature of an operation/method.
+ */
+«DEFINE signatures(Boolean php) FOR model::Parameter-»
+	$«safeName()-»
+«ENDDEFINE»
+
+/**
+ * Parameters as part of an operation call.
+ */
+«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::wires::ParameterWire»
+	«EXPAND callParameterValue(php, wire, inline, inStoreDb) FOR from»
+«ENDDEFINE»
+
+/**
+ * The sources of parameters for parameter calls, i.e.
+ * fetch the runtime value of the parameter.
+ */
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::WireEdgesSource»
+	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
+«ENDDEFINE»
+
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::ApplicationElementProperty»
+	«IF inStoreDb»
+		$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
+	«ELSE»
+		«REM»
+			values stored in sessions will not always be called 'fieldValue';
+			perhaps fieldValue is only those stored as part of InputTextFields, etc.
+		«ENDREM»
+		«IF containingSession(this) != null»
+			/* a property from our session */
+			require_session("«safeName(containingSession(this))»_«safeName()-»")
+		«ELSE»
+			«IF name == "fieldValue"»
+				get_application_value("«safeName()-»", null)		
+			«ELSE»
+				«REM»it's not in the current session, or a fieldValue; what could it be?!«ENDREM»
+				/* TODO XXX this should not be throwing a Javascript exception, we are inside PHP mode */
+				throwJavascriptException("Unknown parameter source for parameter '«name»': «this-»") &&
+				get_application_value("«safeName()-»", null)
+			«ENDIF»
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * If we have a Parameter from a TextField, we should use its 'fieldValue' property instead.
+ */
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::InputTextField»
+	/* implicitly from InputTextField */
+	«EXPAND callParameterValue(php, wire, inline, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»
+«ENDDEFINE»
+
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue»
+	"«value-»" /* static value "«name-»" */
+«ENDDEFINE»
+
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»
+	/* dynamic element set "«name-»" */
+	get_dynamic_elements_«safeName()-»()
+«ENDDEFINE»
+
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::Page»
+	/* Page "«name-»" */
+	new Visual_Page("«id-»", "«name-»")
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

@@ -25,6 +25,8 @@ import org.openarchitectureware.xpand2.output.FileHandle;
  */
 public class OutputInstrumentation {
 
+	public static final String ajaxFunctionName = "__javascript_instrument";
+	
 	public void instrumentFile(FileHandle file) throws IOException, InstrumentationException {
 		String instrumented = instrument(file.getTargetFile());
 		if (instrumented == null)
@@ -70,10 +72,19 @@ public class OutputInstrumentation {
 		String fileType = targetFile.getAbsolutePath().substring(targetFile.getAbsolutePath().lastIndexOf(".") + 1).toLowerCase();
 		if (fileType.equals("html")) {
 			input = instrumentHtml(input);
-		} else if (fileType.equals("php")) {
+			
+			// add JS instrumentation code
+			input = addJavascriptFunctionToHtmlTags(input);
+		} else if (fileType.equals("php")) { 		
 			input = instrumentPhp(input);
+
+			// add JS instrumentation code
+			input = addJavascriptFunctionToHtmlTags(input);
 		} else if (fileType.equals("js")) {
 			input = instrumentJs(input);
+			
+			// we can assume the JS function will be defined by
+			// a PHP or HTML document
 		} else {
 			input = instrumentDefault(input);
 		}
@@ -82,6 +93,55 @@ public class OutputInstrumentation {
 		input = removeRuntimeInstrumentation(input);
 		
 		return input;
+	}
+
+	/**
+	 * Add the {@link #javascriptInstrumentationCode()} in 
+	 * front of the first &lt;script&gt;, &lt;title&gt;, &lt;link&gt;, or &lt;body&gt; tag (in that order) in the HTML or PHP document.
+	 * This is a hack, and expects the HTML tag to be lowercase.
+	 * 
+	 * If there are no tags found (e.g. in a PHP script
+	 * document), this method won't do anything. 
+	 * 
+	 * @param input
+	 * @return
+	 */
+	private String addJavascriptFunctionToHtmlTags(String input) {
+		String function = "<script language=\"Javascript\">" +
+			javascriptInstrumentationCode() + 
+			"</script>\n";
+		
+		String[] tagsToTry = new String[] { "<script", "<title", "<link", "<body" };
+		
+		for (String tag : tagsToTry) {		
+			// find the first <script> tag
+			int pos = input.indexOf(tag);
+			if (pos != -1) {
+				return input.substring(0, pos) + function + input.substring(pos);
+			}
+		}
+		
+		// do nothing
+		return input;
+	}
+
+	/**
+	 * Get the code used for Javascript (runtime) instrumentation.
+	 * 
+	 * @return
+	 */
+	public String javascriptInstrumentationCode() {
+		String functionDef = "";
+		functionDef += "\tfunction " + ajaxFunctionName + "(dir, template, key) {\n";
+		functionDef += "\t	var url = 'oaw_coverage.php?javascript=1&dir=' + escape(dir) + '&template=' + escape(template) + '&key=' + escape(key);\n";
+		functionDef += "\t	var xml;\n";	
+		functionDef += "\t	if (window.XMLHttpRequest) { xml = new XMLHttpRequest(); }\n";	
+		functionDef += "\t	else { xml = new ActiveXObject(\"Microsoft.XMLHTTP\"); }\n";
+		functionDef += "\t	xml.open('GET', url, false);\n";	/* try allowing async */
+		functionDef += "\t	xml.send(null);\n";
+		functionDef += "\t}\n";
+		
+		return functionDef;
 	}
 
 	/**
@@ -294,8 +354,6 @@ public class OutputInstrumentation {
 		return input.substring(0, input.indexOf('>') + 1) + instrumentJavascriptBlock(input.substring(input.indexOf('>') + 1));		
 		
 	}
-
-	private static int javascriptFunctionCounter = 0;
 	
 	/**
 	 * Instrument a block of Javascript. This is most likely to be code
@@ -309,14 +367,6 @@ public class OutputInstrumentation {
 	 */
 	protected String instrumentJavascriptBlock(String input) throws InstrumentationException {
 		
-		// unique function names per block
-		String ajaxFunctionName = "__javascript_instrument_" + javascriptFunctionCounter++;
-		
-		if (javascriptFunctionCounter >= 16) {
-			System.out.println("moo");
-			// break
-		}
-		
 		// we can't handle inline comments, so we replace them with block comments
 		// don't replace comments that look like http:// (a hack)
 		input = input.replaceAll("(\n|;|\\}|\\{|,)\\s*//([^\n]+)\n", "$1/*$2*/\n");
@@ -324,14 +374,6 @@ public class OutputInstrumentation {
 		// add AJAX code
 		// no longer uses Prototype code, as Prototype might not have been loaded yet
 		String output = "";
-		output += "\tfunction " + ajaxFunctionName + "(dir, template, key) {\n";
-		output += "\t	var url = 'oaw_coverage.php?javascript=1&dir=' + escape(dir) + '&template=' + escape(template) + '&key=' + escape(key);\n";
-		output += "\t	var xml;\n";	
-		output += "\t	if (window.XMLHttpRequest) { xml = new XMLHttpRequest(); }\n";	
-		output += "\t	else { xml = new ActiveXObject(\"Microsoft.XMLHTTP\"); }\n";
-		output += "\t	xml.open('GET', url, false);\n";	/* force sync */
-		output += "\t	xml.send(null);\n";
-		output += "\t}\n";
 		
 		// replace all output templates
 		String[] bits = input.split("__output_instrument");
@@ -366,7 +408,7 @@ public class OutputInstrumentation {
 				output += "__output_instrument" + bit;
 			}
 		}
-		
+
 		// TODO __runtime_instrument
 
 		return output;

@@ -1,0 +1,21 @@
+«IMPORT iaml»
+
+/**
+ * When operations fail and a failure wire exists, we must follow it.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE failWire(Boolean php) FOR model::WireEdge-»
+	«EXPAND exception FOR throwException("Cannot expand the fail edge '" + this + "'")»
+«ENDDEFINE»
+
+«DEFINE failWire(Boolean php) FOR model::wires::NavigateWire-»
+	// we need to navigate to the fail page
+	$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage()) . "&trace=" . urlencode($e->getTraceAsString());
+	log_message("Redirecting to '$url' (fail)");
+	header("Location: $url");
+	die;
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

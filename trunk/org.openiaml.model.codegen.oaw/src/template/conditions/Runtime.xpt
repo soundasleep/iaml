@@ -1,0 +1,16 @@
+«IMPORT iaml»
+
+/**
+ * Runtime checks of conditions.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE callCondition(Boolean php, model::wires::RunInstanceWire wire, boolean inline, Boolean inStoreDb) FOR model::wires::ConditionWire»
+	/* ConditionWire: «this-» */
+	condition_«conditionName(from)»(
+		«EXPAND template::operations::Parameters::callParameter(php, wire, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+	)
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

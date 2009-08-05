@@ -58,10 +58,10 @@
 		
 		// run any event triggers for this page
 		// exceptions are now covered by the exception handlers above
-		«EXPAND php::EventTrigger::pageEvents FOREACH eventTriggers-»
+		«EXPAND template::events::Page::runPageEvents FOREACH eventTriggers-»
 		
 		// expand any operations (both in this page and in any surrounding scopes)
-		«EXPAND php::EventTrigger::expandOperations FOR this-»
+		«EXPAND template::operations::Definitions::operationDefinitions(true) FOR this-»		
 
 		// expand all conditions
 		«EXPAND php::Conditions::expandConditions FOR this-»

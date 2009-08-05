@@ -1,0 +1,124 @@
+«IMPORT iaml»
+
+/**
+ * The contents of primitive operation types.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE operationContents(Boolean php) FOR model::Operation-»
+	«EXPAND exception FOR throwException("Unknown primitive operation to expand: " + this)»
+«ENDDEFINE»
+
+/**
+ * Expand the definition of an operation, assumed to be called 
+ * as part of an existing function call.
+ *
+ * TODO refactor each type of operation within into a separate template.
+ */
+«DEFINE operationContents(Boolean php) FOR model::ChainedOperation-»
+	«REM»special operation names«ENDREM»
+	«IF name == "setPropertyToValue"-»
+		«REM»outflowTarget == inflowTarget«ENDREM»
+		// outFlows first to = «outFlows.first().to»
+		«IF containingSession(outFlows.first().to) != null»
+			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		«ELSE»
+			set_application_value("«outFlows.first().to.safeName()»", «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+		«ENDIF»
+
+		«REM»
+			in the future, we might want to make this into a function that is passed
+			to ajax calls and executed once the call is successful.
+		«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND ExecutionFlow::flowStep(php) FOR e.to-»
+		«ENDFOREACH»
+		
+		«REM»
+			here may be a good place to connect any chained EventTriggers
+		«ENDREM»
+		«IF shouldExpandEventTriggers(this)»
+			// expand any EventTriggers connected to the first outFlow target
+			«EXPAND chainedEvent(php) FOR outFlows.first().to.eContainer-»
+		«ELSE»
+			// we don't call additional events for «eContainer» 
+		«ENDIF»
+	«ELSEIF name == "set"»
+		«REM»set a temporary variable«ENDREM»
+		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+
+		«REM»continue«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND ExecutionFlow::flowStep(php) FOR e.to-»
+		«ENDFOREACH»
+	«ELSEIF name == "javascriptAlert"»
+		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
+		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+
+		«REM»continue«ENDREM»
+		«FOREACH outExecutions AS e-»
+			«EXPAND ExecutionFlow::flowStep(php) FOR e.to-»
+		«ENDFOREACH»
+	«ELSE»
+		«REM»an existing function on this page«ENDREM»
+		«EXPAND exception FOR throwException("Unknown server-side function to expand '" + name + "': " + this)»
+	«ENDIF»
+«ENDDEFINE»
+
+/* expand the definition of an operation, assumed to be called as part of an existing function call */
+«DEFINE operationContents(Boolean php) FOR model::operations::DecisionOperation-»
+	«REM»compare operations«ENDREM»
+	if (
+	«IF name == "equal?"-»
+		«REM»check all inflow targets are identical«ENDREM»
+		«EXPAND equalDecisionOperation(php) FOREACH inFlows SEPARATOR " == "»
+	«ELSE»
+		«REM»??? who knows«ENDREM»
+		«ERROR "Unknown decision operation '" + this + "'"»
+	«ENDIF»
+	) {
+		// passed (exactly one pass)
+		«EXPAND ExecutionFlow::flowStep(php) FOR passedExectionFlow().to»
+	} else {
+		// failed (exactly one fail)
+		«EXPAND ExecutionFlow::flowStep(php) FOR failedExectionFlow().to»
+	}
+«ENDDEFINE»
+
+/**
+ * Chained events?
+ */
+«DEFINE chainedEvent(Boolean php) FOR emf::EObject»
+	// cannot expand for non-event object
+«ENDDEFINE»
+
+«DEFINE chainedEvent(Boolean php) FOR model::ContainsEventTriggers»
+	«EXPAND chainedEvent(php) FOREACH eventTriggers»
+«ENDDEFINE»
+
+«DEFINE chainedEvent(Boolean php) FOR model::EventTrigger»
+	// expanding inline event trigger «name»
+	«IF name=="edit"»
+		«EXPAND OperationCall::callOperation(php, true, false) FOREACH outEdges»
+	«ELSEIF name=="access"»
+		// we don't expand 'access' events inline
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown event trigger: " + this)»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Specific operation templates.
+ */
+ 
+/**
+ * Get all the inflows for a DecisionOperation[equal], which are
+ * then compared for equality.
+ */
+«DEFINE equalDecisionOperation(Boolean php) FOR model::DataFlowEdge-»
+	«EXPAND DataFlow::dataSource(php) FOR from-»
+«ENDDEFINE»
+
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

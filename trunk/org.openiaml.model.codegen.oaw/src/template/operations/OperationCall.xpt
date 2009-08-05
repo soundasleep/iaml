@@ -1,0 +1,69 @@
+«IMPORT iaml»
+
+/**
+ * Calling an operation.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/* default: don't know what to do */
+«DEFINE callOperation(Boolean php, Boolean inline, Boolean inStoreDb) FOR model::WireEdge»
+	«EXPAND exception FOR throwException("Unknown wire edge connected to edit trigger: " + this)»
+«ENDDEFINE»
+
+/* 
+ * Run a command with some parameters. this could be in inline JS or a JS block.
+ * RunInstanceWire: event --> operation 
+ *
+ * @param inStoreDb is set if we are calling operations as a result of storing a value
+ * in the database. instead of defining a new function 'get_db_param(...)' and
+ * using this as a parameter source,
+ * we instead use '$arg0', which we expect will be set already.
+ * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
+ */
+«DEFINE callOperation(Boolean php, Boolean inline, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»
+	/* eContainer == «to.eContainer» */
+	
+	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
+		/* expand conditions */
+		if («EXPAND template::conditions::Runtime::callCondition(php, this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+	«ENDIF»
+
+	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
+		«REM»VisibleThing includes InputTextField and Page«ENDREM»
+		«REM»
+			is both source and target on the same page? NOTE this
+			will also return true for Event-->Operation if they are
+			both on the same page.
+		«ENDREM»
+		«IF availableInCurrentScript(from, to)-»
+			«REM»// on current page (wire id = «id»)«ENDREM»
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
+		«ELSE-»
+			«REM»// not on current page (wire id = «id»)«ENDREM»
+			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
+				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+			);
+			«REM»				
+			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
+			«ENDREM»
+		«ENDIF-»
+	«ELSEIF isDomainAttribute(to.eContainer)-»
+		«REM»direct field --> abstract domain attribute«ENDREM»
+		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
+			«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+		); 
+	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
+		«REM»direct field --> domain attribute instance«ENDREM»
+		«EXPAND template::domain::AttributeInstance::getAttributeInstanceValue(php, inline, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»
+	«ELSE-»
+		alert('unknown target operation type in «to.eContainer.metaType.name»');
+		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
+	«ENDIF-»
+
+	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
+		}
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

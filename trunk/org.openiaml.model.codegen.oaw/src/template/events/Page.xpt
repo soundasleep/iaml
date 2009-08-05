@@ -1,0 +1,19 @@
+«IMPORT iaml»
+
+/**
+ * Events that run on a Page.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE runPageEvents FOR model::EventTrigger-»
+	// Page EventTrigger «this»
+	«IF name == "init" || name == "access"-»
+		// RunInstanceWires sorted by priority
+		«EXPAND template::operations::OperationCall::callOperation(true, false, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+	«ELSE-»
+		// I don't know what to do with page event "«name»"
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

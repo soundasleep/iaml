@@ -33,7 +33,11 @@
 
 «DEFINE executionFlowStep(Boolean php) FOR model::operations::CancelNode-»
 	«IF exceptionText.length > 0»
+		«IF php»
 		throw new IamlRuntimeException("«exceptionText»");
+		«ELSE»
+		throw new IamlJavascriptException("«exceptionText»");
+		«ENDIF»
 	«ELSE»
 		// ignored cancel node "«this»"
 	«ENDIF»
@@ -69,16 +73,23 @@
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::WireEdge»
-	«ERROR "Cannot continue a chained operation for " + this»
+	«EXPAND exception FOR throwException("Cannot continue a chained operation for " + this)»
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::wires::NavigateWire»
 	«IF name != "fail"»
-		// navigate to another page
-		$url = "«safeName(to)».php";
-		log_message("Redirecting to '$url'");
-		header("Location: $url");
-		die;
+		«IF php»
+			// navigate to another page
+			$url = "«safeName(to)».php";
+			log_message("Redirecting to '$url'");
+			header("Location: $url");
+			die;
+		«ELSE»
+			// navigate to another page
+			var url = "«safeName(to)».php";
+			debug("Redirecting to '" + url + "'");
+			window.location = url;
+		«ENDIF»
 	«ELSE»
 		// ignoring fail wire
 	«ENDIF»

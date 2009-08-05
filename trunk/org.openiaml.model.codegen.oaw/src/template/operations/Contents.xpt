@@ -12,56 +12,18 @@
 /**
  * Expand the definition of an operation, assumed to be called 
  * as part of an existing function call.
- *
- * TODO refactor each type of operation within into a separate template.
  */
 «DEFINE operationContents(Boolean php) FOR model::ChainedOperation-»
 	«REM»special operation names«ENDREM»
 	«IF name == "setPropertyToValue"-»
-		«REM»outflowTarget == inflowTarget«ENDREM»
-		// outFlows first to = «outFlows.first().to»
-		«IF containingSession(outFlows.first().to) != null»
-			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
-		«ELSE»
-			set_application_value("«outFlows.first().to.safeName()»", «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
-		«ENDIF»
-
-		«REM»
-			in the future, we might want to make this into a function that is passed
-			to ajax calls and executed once the call is successful.
-		«ENDREM»
-		«FOREACH outExecutions AS e-»
-			«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
-		«ENDFOREACH»
-		
-		«REM»
-			here may be a good place to connect any chained EventTriggers
-		«ENDREM»
-		«IF shouldExpandEventTriggers(this)»
-			// expand any EventTriggers connected to the first outFlow target
-			«EXPAND chainedEvent(php) FOR outFlows.first().to.eContainer-»
-		«ELSE»
-			// we don't call additional events for «eContainer» 
-		«ENDIF»
+		«EXPAND setPropertyToValueOperation(php) FOR this»
 	«ELSEIF name == "set"»
-		«REM»set a temporary variable«ENDREM»
-		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
-
-		«REM»continue«ENDREM»
-		«FOREACH outExecutions AS e-»
-			«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
-		«ENDFOREACH»
+		«EXPAND setOperation(php) FOR this»
 	«ELSEIF name == "javascriptAlert"»
-		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
-		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
-
-		«REM»continue«ENDREM»
-		«FOREACH outExecutions AS e-»
-			«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
-		«ENDFOREACH»
+		«EXPAND javascriptAlert(php) FOR this»
 	«ELSE»
 		«REM»an existing function on this page«ENDREM»
-		«EXPAND exception FOR throwException("Unknown server-side function to expand '" + name + "': " + this)»
+		«EXPAND exception FOR throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -71,7 +33,11 @@
 	if (
 	«IF name == "equal?"-»
 		«REM»check all inflow targets are identical«ENDREM»
-		«EXPAND equalDecisionOperation(php) FOREACH inFlows SEPARATOR " == "»
+		«IF php»
+			«EXPAND equalDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»
+		«ELSE»
+			is_array_equal(new Array(«EXPAND equalDecisionOperationSource(php) FOREACH inFlows SEPARATOR ", "»))
+		«ENDIF»
 	«ELSE»
 		«REM»??? who knows«ENDREM»
 		«ERROR "Unknown decision operation '" + this + "'"»
@@ -115,8 +81,121 @@
  * Get all the inflows for a DecisionOperation[equal], which are
  * then compared for equality.
  */
-«DEFINE equalDecisionOperation(Boolean php) FOR model::DataFlowEdge-»
+«DEFINE equalDecisionOperationSource(Boolean php) FOR model::DataFlowEdge-»
 	«EXPAND DataFlow::dataSource(php) FOR from-»
+«ENDDEFINE»
+
+/**
+ * outflowTarget <-- inflowTarget
+ */
+«DEFINE setPropertyToValueOperation(Boolean php) FOR model::ChainedOperation-»
+	// outFlows first to = «outFlows.first().to»
+	«IF php»
+		«IF containingSession(outFlows.first().to) != null»
+			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		«ELSE»
+			set_application_value("«outFlows.first().to.safeName()»", «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+		«ENDIF»
+	«ELSE»
+		«IF isInputTextField(outFlows.first().to.eContainer)»
+			// set a variable in the current page (assumed)
+			var value = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+			if (value !== null) {
+				// ignore null parameters
+				// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
+				// will populate this field
+				«EXPAND DataFlow::dataTarget(php) FOR outFlows.first().to» = value;
+				
+				// set server/session variables too
+				«EXPAND template::Page::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
+			}
+		«ELSEIF isDomainAttribute(outFlows.first().to.eContainer)-»
+			«REM»direct field --> domain attribute«ENDREM»
+			var value = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+			if (value !== null) {
+				// ignore null parameters
+				// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
+				// will populate this field
+				store_db('«safeNameString(((model::DomainAttribute) outFlows.first().to.eContainer).id)»',
+					value);
+
+				// set server/session variables too
+				«EXPAND template::Page::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
+			} 
+		«ELSEIF containingSession(outFlows.first().to) == null»
+			«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+			set_application_value("«safeName(outFlows.first().to)»", 
+				«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-», 
+				function_queue);
+			function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+		«ELSE»
+			«REM»contained in a Session: a session value«ENDREM»
+			set_session("«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)»", 
+				«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-», 
+				function_queue);
+			function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+		«ENDIF»
+	«ENDIF»
+
+	«REM»
+		in the future, we might want to make this into a function that is passed
+		to ajax calls and executed once the call is successful.
+	«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
+	«ENDFOREACH»
+	
+	«REM»
+		here may be a good place to connect any chained EventTriggers
+	«ENDREM»
+	«IF shouldExpandEventTriggers(this)»
+		// expand any EventTriggers connected to the first outFlow target
+		«EXPAND chainedEvent(php) FOR outFlows.first().to.eContainer-»
+	«ELSE»
+		// we don't call additional events for «eContainer» 
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Set temporary variable <-- inFlow
+ */
+«DEFINE setOperation(Boolean php) FOR model::ChainedOperation-»
+	«REM»set a temporary variable«ENDREM»
+	«IF php»
+		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+	«ELSE»
+		temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+	«ENDIF»
+
+	«REM»continue«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+ * Throw a Javascript alert box on the client-side.
+ * Fails on the server-side.
+ *
+ * TODO remove this and replace with a generic 'alert()' method.
+ */
+«DEFINE javascriptAlert(Boolean php) FOR model::ChainedOperation-»
+	«IF php»
+		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
+		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+	«ELSE»
+		// throw an alert box
+		// NOTE: alert boxes currently aren't owned by any element; they are a direct
+		// hack to display something immediately. eventually, this should be replaced
+		// with a generic alert(), that will render an alert box in the most appropriate
+		// way for the alert container. 
+		alert(«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+	«ENDIF»
+
+	«REM»continue«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::executionFlowStep(php) FOR e.to-»
+	«ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

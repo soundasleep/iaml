@@ -5,8 +5,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * Data sources
+ */
 «DEFINE dataSource(Boolean php) FOR model::DataFlowEdgesSource»
-	«EXPAND exception FOR throwException("Unknown data flow edge source for server setPropertyToValue: " + this)»
+	«EXPAND exception FOR throwException("Unknown data flow edge source for dataSource: " + this)»
 «ENDDEFINE»
 
 // TODO need to wrap value in some sort of encoding algorithm
@@ -15,11 +18,30 @@
 «ENDDEFINE»
 
 «DEFINE dataSource(Boolean php) FOR model::Parameter»
+	«IF php»
 	$«safeName()»
+	«ELSE»
+	«safeName()-»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE dataSource(Boolean php) FOR model::TemporaryVariable»
+	«IF php»
 	$temp_«safeName()»
+	«ELSE»
+	temp_«safeName()-»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Data targets
+ */
+«DEFINE dataTarget(Boolean php) FOR model::DataFlowEdgeDestination»
+	«EXPAND exception FOR throwException("Unknown data flow edge target for dataTarget: " + this)»
+«ENDDEFINE»
+
+«DEFINE dataTarget(Boolean php) FOR model::ApplicationElementProperty»	
+	document.getElementById('«safeNameString(( (model::NamedElement) eContainer).id)»').value
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

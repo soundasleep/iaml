@@ -1,5 +1,10 @@
 «IMPORT iaml»
 
+/**
+ * Code behind DomainObjectInstances.
+ *
+ * TODO move AttributeInstance code into AttributeInstance.xpt
+ */
 «EXTENSION template::GeneratorExtensions»
 
 /* expand out all domain attribute instances for the page */

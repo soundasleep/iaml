@@ -67,11 +67,11 @@
 		«EXPAND template::conditions::Definitions::conditionDefinitions(true) FOR this-»
 
 		// expand any dynamic element sources
-		«EXPAND php::DynamicElements::expandDynamicElements FOR this-»
+		«EXPAND template::dynamic::DynamicElements::dynamicElements FOR this-»
 		
 		// expand any domain instances
-		«EXPAND php::DomainInstance::expandDomainAttributes FOR this-»
-		«EXPAND php::DomainInstance::expandDomainObjects FOR this-»
+		«EXPAND template::domain::DomainInstance::expandDomainAttributes FOR this-»
+		«EXPAND template::domain::DomainInstance::expandDomainObjects FOR this-»
 
 		// allow remote execution of operations
 		if (require_get("operation", "")) {

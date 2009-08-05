@@ -32,18 +32,37 @@
 «ENDDEFINE»
 
 «DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::ApplicationElementProperty»
-	«IF inStoreDb»
-		$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
-	«ELSE»
-		«REM»
-			values stored in sessions will not always be called 'fieldValue';
-			perhaps fieldValue is only those stored as part of InputTextFields, etc.
-		«ENDREM»
-		«IF containingSession(this) != null»
-			/* a property from our session */
-			require_session("«safeName(containingSession(this))»_«safeName()-»")
+	«IF php»
+		«IF inStoreDb»
+			$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
 		«ELSE»
-			get_application_value("«safeName()-»", null)		
+			«REM»
+				values stored in sessions will not always be called 'fieldValue';
+				perhaps fieldValue is only those stored as part of InputTextFields, etc.
+			«ENDREM»
+			«IF containingSession(this) != null»
+				/* a property from our session */
+				require_session("«safeName(containingSession(this))»_«safeName()-»")
+			«ELSE»
+				get_application_value("«safeName()-»", null)		
+			«ENDIF»
+		«ENDIF»
+	«ELSE»
+		/* wire = «wire», from = «wire.from», to = «wire.to» */
+		«IF name == "fieldValue"»
+			«REM»where is this value stored? is it available on the current page?«ENDREM»
+			«IF onCurrentPage(wire.from, this)» 
+				document.getElementById('«safeName(eContainer)»').value
+			«ELSE»
+				«REM»
+					it's not on the current page. it could be anywhere!
+					but we want it NOW, so we can't just ask the 
+					server. we have to find out where it is.
+				«ENDREM»			
+				«EXPAND RemoteParameter::remoteValue(false, wire, inline, this) FOR this.eContainer-»
+			«ENDIF»
+		«ELSE»
+			get_application_element_property("«safeName()-»")
 		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
@@ -52,8 +71,16 @@
  * If we have a Parameter from a TextField, we should use its 'fieldValue' property instead.
  */
 «DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::InputTextField»
-	/* implicitly from InputTextField */
-	«EXPAND callParameterValue(php, wire, inline, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»
+	«IF php»
+		/* implicitly from InputTextField */
+		«EXPAND callParameterValue(php, wire, inline, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»
+	«ELSE»
+		«IF getFieldValue(this) != null»
+			«EXPAND callParameterValue(php, wire, inline, false) FOR getFieldValue(this)»
+		«ELSE»
+			«EXPAND exception FOR throwException("No 'fieldValue' property found in the InputTextField '" + this + "', which is being used as a Parameter source.")»
+		«ENDIF» 
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue»

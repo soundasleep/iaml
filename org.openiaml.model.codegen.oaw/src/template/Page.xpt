@@ -227,14 +227,14 @@
 		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
 				// expand all onChanges
-				«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
+				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "edit")-»
 
 				return false;
 			}
 			
 			function onClick_«safeNameString(id)»(obj) {
 				// expand all onClicks
-				«EXPAND js::Operations::expandEventTriggers("click") FOREACH eventTriggers-»
+				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
 			
 				return false;
 			}
@@ -272,7 +272,7 @@
 		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
 				// expand all onChanges
-				«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
+				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "edit")-»
 
 				// outgoing values
 				«REM»any application element properties to change? (both on client and server)«ENDREM»
@@ -289,14 +289,14 @@
 			
 			function onClick_«safeNameString(id)»(obj) {
 				// expand all onClicks
-				«EXPAND js::Operations::expandEventTriggers("click") FOREACH eventTriggers-»
-			
+				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
+							
 				return false;
 			}
 			
 			«REM»any on-access events?«ENDREM»
 			addOnloadFunction( function() {
-				«EXPAND js::Operations::expandEventTriggers("access") FOREACH eventTriggers-»
+				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "access")-»				
 			} );
 		/* ]]> */
 		</script>
@@ -315,23 +315,42 @@
 	/* <![CDATA[ */
 		function onChange_«safeNameString(id)»(obj) {
 			// expand all onChanges
-			«EXPAND js::Operations::expandEventTriggers("edit") FOREACH eventTriggers-»
+			«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click")-»
 			
 			return false;
 		}
 		
 		function onClick_«safeNameString(id)»(obj) {
 			// expand all onClicks
-			«EXPAND js::Operations::expandEventTriggers("click") FOREACH eventTriggers-»
-			«EXPAND js::Operations::expandEventTriggers("onClick") FOREACH eventTriggers-»
+			«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
 
 			// implicit operations
-			«EXPAND js::Operations::expandImplicitEventTriggersButton FOREACH outEdges-»
+			«EXPAND implicitButtonClickEvents FOREACH outEdges-»
 
 			return false;
 		}
 	/* ]]> */
 	</script>
+«ENDDEFINE»
+
+/**
+ * If buttons have a NavigateWire or RunInstanceWire called onClick,
+ * execute them as if there was an EventTrigger that existed.
+ */
+«DEFINE implicitButtonClickEvents FOR model::WireEdge»
+«ENDDEFINE»
+
+«DEFINE implicitButtonClickEvents FOR model::wires::NavigateWire»
+	«IF (name == "click" || name == "onClick")»
+		/* expanding implicit trigger (navigate) */
+		«EXPAND template::operations::OperationCall::callOperation(false, false, false) FOR this»
+	«ENDIF» 
+«ENDDEFINE»
+«DEFINE implicitButtonClickEvents FOR model::wires::RunInstanceWire»
+	«IF (name == "click" || name == "onClick")»
+		/* expanding implicit trigger (run) */
+		«EXPAND template::operations::OperationCall::callOperation(false, false, false) FOR this»
+	«ENDIF» 
 «ENDDEFINE»
 
 /* ignore. todo: refactor this to a model extension to only select viable SyncWires */

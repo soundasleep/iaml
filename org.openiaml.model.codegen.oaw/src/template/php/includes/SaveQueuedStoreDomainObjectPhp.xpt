@@ -18,8 +18,8 @@ $page_id = $_GET["page"] or throw_new_IamlRuntimeException("no page");
 log_message("save_queued_store_domain_object.php: setting id=$id, page_id=$page_id");
 
 «REM»TODO put this into a separate include«ENDREM»
-«EXPAND template::php::DomainInstance::expandDomainAttributes FOR this»
-«EXPAND template::php::DomainInstance::expandDomainObjects FOR this»
+«EXPAND template::domain::DomainInstance::expandDomainAttributes FOR this»
+«EXPAND template::domain::DomainInstance::expandDomainObjects FOR this»
 
 // TODO probably a security risk
 $function_name = 'save_queued_store_domain_object_' . $id;

@@ -14,8 +14,8 @@ require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 log_message("set_application_value.php? " . print_r($_GET, true));
 
 // expand any domain instances
-«EXPAND template::php::DomainInstance::expandDomainAttributes FOR this-»
-«EXPAND template::php::DomainInstance::expandDomainObjects FOR this-»
+«EXPAND template::domain::DomainInstance::expandDomainAttributes FOR this-»
+«EXPAND template::domain::DomainInstance::expandDomainObjects FOR this-»
 
 // the property to set
 $id = $_GET["id"] or throw_new_IamlRuntimeException("no id");

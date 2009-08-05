@@ -125,10 +125,10 @@
 			/* <![CDATA[ */
 				var try_catch_depth = 0;
 			
-				// operations
-				«EXPAND js::Operations::expandOperations FOR this-»
+				// operation definitions
+				«EXPAND template::operations::Definitions::operationDefinitions(false) FOR this-»
 
-				// conditions
+				// condition definitions
 				«EXPAND js::Conditions::expandConditions FOR this-»
 
 				// dynamic elements

@@ -9,7 +9,11 @@
  * Parameter definitions within the signature of an operation/method.
  */
 «DEFINE signatures(Boolean php) FOR model::Parameter-»
-	$«safeName()-»
+	«IF php»
+		$«safeName()-»
+	«ELSE»
+		«safeName()-»
+	«ENDIF»
 «ENDDEFINE»
 
 /**
@@ -39,14 +43,7 @@
 			/* a property from our session */
 			require_session("«safeName(containingSession(this))»_«safeName()-»")
 		«ELSE»
-			«IF name == "fieldValue"»
-				get_application_value("«safeName()-»", null)		
-			«ELSE»
-				«REM»it's not in the current session, or a fieldValue; what could it be?!«ENDREM»
-				/* TODO XXX this should not be throwing a Javascript exception, we are inside PHP mode */
-				throwJavascriptException("Unknown parameter source for parameter '«name»': «this-»") &&
-				get_application_value("«safeName()-»", null)
-			«ENDIF»
+			get_application_value("«safeName()-»", null)		
 		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»

@@ -18,13 +18,13 @@ $arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
 log_message("set_application_value.php: setting id=$id, arg0=$arg0");
 
 // set_domain_attribute($id, $arg0);
-«EXPAND template::domain::DomainInstance::findSetDomainAttributeMethod FOR this»
+«EXPAND template::domain::StoreDefinitions::findSetDomainAttributeMethod FOR this»
 
 log_message("set_application_value.php: failed");
 echo "fail";
 
-/* expand out all domain attribute setting code in the application. */
-«EXPAND template::domain::DomainInstance::expandDomainAttributes FOR this»
-«EXPAND template::domain::DomainInstance::expandDomainObjects FOR this»
+«REM»TODO put this into a separate include«ENDREM»
+«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this»
+«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this»
 
 «ENDDEFINE»

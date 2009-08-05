@@ -67,11 +67,11 @@
 		«EXPAND template::conditions::Definitions::conditionDefinitions(true) FOR this-»
 
 		// expand any dynamic element sources
-		«EXPAND template::dynamic::DynamicElements::dynamicElements FOR this-»
+		«EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
 		
 		// expand any domain instances
-		«EXPAND template::domain::DomainInstance::expandDomainAttributes FOR this-»
-		«EXPAND template::domain::DomainInstance::expandDomainObjects FOR this-»
+		«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
+		«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
 
 		// allow remote execution of operations
 		if (require_get("operation", "")) {
@@ -106,7 +106,7 @@
 			<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
 			<script language="Javascript" type="text/javascript">
 			/* <![CDATA[ */
-				«EXPAND js::includes::DefaultJs::defaultJs FOR this-»
+				«EXPAND template::js::DefaultJs::defaultJs FOR this-»
 				
 				«REM»
 				/* load site XML (if requested) */
@@ -129,14 +129,14 @@
 				«EXPAND template::operations::Definitions::operationDefinitions(false) FOR this-»
 
 				// condition definitions
-				«EXPAND js::Conditions::expandConditions FOR this-»
+				«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»
 
 				// dynamic elements
-				«EXPAND js::DynamicElements::expandDynamicElements FOR this-»
+				«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»
 
 				// domain instances
-				«EXPAND js::DomainInstance::expandDomainAttributes FOR this-»
-				«EXPAND js::DomainInstance::expandDomainObjects FOR this-»
+				«EXPAND template::domain::Definitions::domainObjectDefinitions(false) FOR this-»
+				«EXPAND template::domain::Definitions::domainAttributeDefinitions(false) FOR this-»
 
 				/* actual page onload functions (called ONCE the page is fully loaded) */
 				var stored_onload_functions = new Array();

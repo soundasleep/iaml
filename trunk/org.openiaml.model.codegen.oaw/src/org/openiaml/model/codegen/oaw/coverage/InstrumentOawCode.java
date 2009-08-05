@@ -83,7 +83,7 @@ public class InstrumentOawCode {
 	/**
 	 * Instrument the input file, and return the result.
 	 * 
-	 * NOTE that elements in the .xpt that use the '' characters
+	 * NOTE that elements in the .xpt that use the '' or | characters
 	 * will not be instrumented (until I get some sort of callback function
 	 * implemented for regular expressions, so I can escape both " and ').
 	 * 
@@ -95,8 +95,8 @@ public class InstrumentOawCode {
 		// we want to jump between each instance of «
 		
 		// we need to escape the strings a lot
-		filename = filename.replace("\\", "\\\\\\\\");
-		String destDir = destinationDir.getAbsolutePath().replace("\\", "\\\\\\\\");
+		final String filenameEscaped = filename.replace("\\", "\\\\\\\\");
+		final String destDir = destinationDir.getAbsolutePath().replace("\\", "\\\\\\\\");
 		
 		input = input.replaceAll("«((DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH)[^'»]*?)»", "«$1»«EXPAND _instrument_template FOR _instrument('" + destDir + "', '" + filename + "', '__LINE_NUMBER__:$1')»");
 
@@ -108,7 +108,7 @@ public class InstrumentOawCode {
 		input = input.replaceAll("«(FILE[^'»]*?)»", "«$1»" + ENABLE_OUTPUT_INSTRUMENTATION);
 		
 		// output code coverage
-		input = input.replaceAll("«((DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH)[^'»]*?)»", "«$1»__output_instrument(" + destDir + "|" + filename + "|__LINE_NUMBER__:$1)__");
+		input = input.replaceAll("«((DEFINE|FILE|IF|ELSE|ELSEIF|FOREACH)[^'\\|»]*?)»", "«$1»__output_instrument(" + destDir + "|" + filenameEscaped + "|__LINE_NUMBER__:$1)__");
 		
 		// output coverage for individual template statements
 		// this is necessary so we can see what parts of individual templates are actually being executed at run-time
@@ -315,6 +315,5 @@ public class InstrumentOawCode {
 		
 		CoverageUtils.writeFile(f, buf.toString());
 	}
-
 	
 }

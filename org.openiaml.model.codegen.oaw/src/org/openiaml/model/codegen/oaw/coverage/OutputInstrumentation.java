@@ -179,7 +179,11 @@ public class OutputInstrumentation {
 	protected String instrumentPhpHtml(String input) throws InstrumentationException {
 		
 		// escape javascript
-		input = instrumentHtmlJavascript(input);
+		try {
+			input = instrumentHtmlJavascript(input);
+		} catch (InstrumentationException e) {
+			throw new InstrumentationException("Could not instrument PHP html: '" + input + "'", e);
+		}
 		
 		String[] bits = input.split("__output_instrument");
 		String output = bits[0];
@@ -237,7 +241,12 @@ public class OutputInstrumentation {
 		
 		if (end2.length == 2) {
 			// the first block was a script that needs to be ended
-			output += instrumentJavascriptBlock(end2[0]);
+			// unless the first script block hasn't actually started yet (i.e. we're still in a string)
+			if (end2[0].matches("[^\">]+\"[ \r\n\t]*>[ \r\n\t]*")) {
+				output += end2[0];
+			} else {
+				output += instrumentJavascriptBlock(end2[0]);
+			}
 			output += "</script>";
 			output += end2[1];	// this is just HTML
 		} else {
@@ -279,7 +288,8 @@ public class OutputInstrumentation {
 
 		// jump to the start of the actual javascript
 		if (!input.contains(">")) {
-			throw new InstrumentationException("Script does not have an ending > character: '" + input + "'");
+			// there is no ending of the script tag: something like [<script src="<?php]
+			return input;		// return as-is
 		}
 		return input.substring(0, input.indexOf('>') + 1) + instrumentJavascriptBlock(input.substring(input.indexOf('>') + 1));		
 		
@@ -298,9 +308,14 @@ public class OutputInstrumentation {
 	 * @return
 	 */
 	protected String instrumentJavascriptBlock(String input) throws InstrumentationException {
-
+		
 		// unique function names per block
 		String ajaxFunctionName = "__javascript_instrument_" + javascriptFunctionCounter++;
+		
+		if (javascriptFunctionCounter >= 16) {
+			System.out.println("moo");
+			// break
+		}
 		
 		// we can't handle inline comments, so we replace them with block comments
 		// don't replace comments that look like http:// (a hack)

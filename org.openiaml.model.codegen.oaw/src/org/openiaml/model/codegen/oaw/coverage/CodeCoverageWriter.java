@@ -257,6 +257,9 @@ public class CodeCoverageWriter {
 		String html = CoverageUtils.readFile(template);
 		OutputSummary os = new OutputSummary(template, file);
 		
+		// replace tabs with spaces
+		html = html.replace("\t", "    ");
+		
 		// escape html
 		html = escapeHtml(html);
 		
@@ -346,6 +349,7 @@ public class CodeCoverageWriter {
 			
 			// append
 			html += "<a href=\"" + escapeHtmlQuotes(href) + "\">«EXPAND" + key + "»</a>" + remainder;
+			html += "";
 		}
 		
 		// now, take all <define>s and add <a name>s so they can be linked
@@ -381,34 +385,44 @@ public class CodeCoverageWriter {
 
 	/**
 	 * Find the template file for the given string.
+	 * Assumes that all templates are either absolute, or in the local directory.
 	 * 
 	 * @param string ' js::Operations::expandEventTriggers'
 	 * @return
 	 */
-	private File findTemplateFile(File thisTemplate, String string) {		
+	private File findTemplateFile(File thisTemplate, String string) {
 		String[] bits = string.trim().split("::");
-		File start = thisTemplate;
-		
-		// go back to find the common root
-		for (int i = 0; i < bits.length - 1; i++) {
-			start = start.getParentFile();
+
+		// local template folder?
+		if (bits.length == 2) {
+			// [Template::foo] yes: use the current template file
+			return new File(thisTemplate.getParentFile().getAbsolutePath() + File.separator + bits[1] + ".xpt");
+		} else {
+			// [foo::bar::foo] no: it's absolute
+			// go back until we hit 'template'
+			File result = thisTemplate;
+			while (true) {
+				String path = result.getAbsolutePath();
+				if (path.indexOf(File.separator) == -1) {
+					throw new NullPointerException("Could not get the 'template' directory out of '" + thisTemplate + "': does it have the 'template' directory?");
+				}
+				
+				if (path.substring(path.lastIndexOf(File.separator) + 1).equals("template")) {
+					// found it
+					break;
+				}
+				result = result.getParentFile();
+
+			}
+			
+			// we found the root, now we have to add the bits
+			for (int i = 0; i < bits.length - 1; i++) {
+				result = new File(result.getAbsolutePath() + File.separator + bits[i]);
+			}
+			result = new File(result.getAbsolutePath() + ".xpt");
+			
+			return result;
 		}
-		
-		// jevon hack: if the file does not contain /template, add it
-		if (!bits[0].equals("template") && !start.getAbsolutePath().contains(File.separator + "template")) {
-			start = new File(start.getAbsolutePath() + File.separator + "template");
-		}
-		
-		// now add additional bits (folders and filename)
-		for (int i = 0; i < bits.length - 1; i++) {
-			start = new File(start.getAbsolutePath() + File.separator + bits[i]);
-		}
-		
-		// add file extension
-		start = new File(start.getAbsolutePath() + ".xpt");
-		
-		// this should be the result file
-		return start;
 	}
 
 	/**

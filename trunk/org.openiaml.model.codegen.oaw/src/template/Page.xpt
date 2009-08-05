@@ -64,7 +64,7 @@
 		«EXPAND template::operations::Definitions::operationDefinitions(true) FOR this-»		
 
 		// expand all conditions
-		«EXPAND php::Conditions::expandConditions FOR this-»
+		«EXPAND template::conditions::Definitions::conditionDefinitions(true) FOR this-»
 
 		// expand any dynamic element sources
 		«EXPAND php::DynamicElements::expandDynamicElements FOR this-»

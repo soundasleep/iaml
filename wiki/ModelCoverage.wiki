@@ -11,13 +11,17 @@ Starting in r701, there has been some experimental support for code coverage fro
   # Force a refresh of your local workspace (so that the templates can be rebuilt through XPT)
   # Make sure that you have the [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/org/openiaml/model/codegen/oaw/coverage/OutputInstrumentation.java OutputInstrumentation] instrumenter enabled as part of the IACleanerBeautifier: r903
   # Execute a test case
-  # Once a test case is finished, run [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/org/openiaml/model/codegen/oaw/coverage/OutputInstrumentation.java OutputInstrumentation] as a Java application to generate the [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.codegen.oaw/instrument/output/index.html instrumentation results]
+
+Generating the instrumentation results:
+
+  # Execute [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/org/openiaml/model/codegen/oaw/coverage/RevertInstrumentation.java RevertInstrumentation] to remove the instrumentation code from the templates
+  # Execute [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/org/openiaml/model/codegen/oaw/coverage/OutputInstrumentation.java OutputInstrumentation] as a Java application to generate the [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.codegen.oaw/instrument/output/index.html instrumentation results]
   # Note that successive test case executions will append information to the existing instrumentation dumps; you will have to delete `instrument/*.dump` manually otherwise
 
 Once finished:
 
   # Revert the changes to the IACleanerBeautifier
-  # Execute [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/org/openiaml/model/codegen/oaw/coverage/RevertInstrumentation.java RevertInstrumentation] as a Java application; this will replace the instrumented templates with their backups
+  # Execute [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/org/openiaml/model/codegen/oaw/coverage/RevertInstrumentation.java RevertInstrumentation] as a Java application
   # Force a refresh of your local workspace
 
 =Sample Results=

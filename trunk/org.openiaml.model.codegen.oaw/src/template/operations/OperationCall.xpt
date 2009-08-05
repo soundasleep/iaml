@@ -54,7 +54,10 @@
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
-		«EXPAND template::domain::AttributeInstance::getAttributeInstanceValue(php, inline, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»
+		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, inline, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»
+	«ELSEIF isDomainObjectInstance(to.eContainer)-»
+		«REM»direct field --> domain object instance«ENDREM»
+		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, inline, this, (model::DomainObjectInstance) to.eContainer) FOR to»
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
 		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
@@ -62,6 +65,20 @@
 
 	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
 		}
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * NavigateWire: on the client-side, browse to a new page
+ */
+«DEFINE callOperation(Boolean php, Boolean inline, Boolean inStoreDb) FOR model::wires::NavigateWire»
+	«IF php»
+		«EXPAND exception FOR throwException("Cannot expand a NavigateWire on server-side: " + this)»
+	«ELSE»
+		// navigating to a new page
+		var url = "«safeName(to)».php";
+		debug("Redirecting to '" + url + "'");
+		window.location = url;
 	«ENDIF»
 «ENDDEFINE»
 

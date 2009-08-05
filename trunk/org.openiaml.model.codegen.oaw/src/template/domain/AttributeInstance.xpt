@@ -5,16 +5,21 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE getAttributeInstanceValue(Boolean php, Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::WireEdgeDestination»
+«DEFINE attributeInstanceCall(Boolean php, Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::WireEdgeDestination»
 	«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE getAttributeInstanceValue(Boolean php, Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation»
+«DEFINE attributeInstanceCall(Boolean php, Boolean inline, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation»
 	/* domain attribute instance: wire = «wire», attribute = «attribute», this = «this» */
 	«IF name=="save"»
 		«REM»"save" operation for DomainAttribute«ENDREM»
-		save_queued_store_domain_attribute_«safeNameString(attribute.id)»();
+		«IF php»
+			save_queued_store_domain_attribute_«safeNameString(attribute.id)»();
+		«ELSE»
+			save_queued_store_domain_attribute('«safeNameString(attribute.id)»');
+		«ENDIF»
 	«ELSE»
+		«REM»the rest works either in PHP or JS«ENDREM»
 		«IF isAutosaveOff(attribute)»
 			«REM»queue it up for hopefully saving it later«ENDREM»
 			queue_store_domain_attribute_«safeNameString(attribute.id)»(

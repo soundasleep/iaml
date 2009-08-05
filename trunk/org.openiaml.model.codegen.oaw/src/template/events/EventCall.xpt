@@ -1,0 +1,15 @@
+«IMPORT iaml»
+
+/**
+ * Instantiating an event.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE callEvent(Boolean php) FOR model::EventTrigger»
+	// Event «this»
+	// expand out all outgoing edges
+	«EXPAND template::operations::OperationCall::callOperation(php, false, false) FOREACH outEdges»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

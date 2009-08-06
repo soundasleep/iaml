@@ -63,11 +63,11 @@
 «ENDDEFINE»
 
 «DEFINE chainedEvent(Boolean php) FOR model::EventTrigger»
-	// expanding inline event trigger «name»
+	// expanding chained event trigger «name»
 	«IF name=="edit"»
-		«EXPAND OperationCall::callOperation(php, true, false) FOREACH outEdges»
+		«EXPAND OperationCall::callOperation(php, false) FOREACH outEdges»
 	«ELSEIF name=="access"»
-		// we don't expand 'access' events inline
+		// we don't expand 'access' events as part of a chain
 	«ELSE»
 		«EXPAND exception FOR throwException("Unknown event trigger: " + this)»
 	«ENDIF»

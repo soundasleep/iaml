@@ -18,20 +18,20 @@ require("properties_file.php");
 
 // a default fail handler for this page?
 «IF getFailHandler(this) != null»
-function page_fail_handler($e) {
-	«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(this)»
-	die;
-}
-set_exception_handler('page_fail_handler');
+	function page_fail_handler($e) {
+		«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(this)»
+		die;
+	}
+	set_exception_handler('page_fail_handler');
 «ENDIF»
 
-		// a default fail handler for this session?
-		«IF containingSession() != null && getFailHandler(containingSession()) != null»
-function session_fail_handler($e) {
-	«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
-	die;
-}
-set_exception_handler('session_fail_handler');
+// a default fail handler for this session?
+«IF containingSession() != null && getFailHandler(containingSession()) != null»
+	function session_fail_handler($e) {
+		«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
+		die;
+	}
+	set_exception_handler('session_fail_handler');
 «ENDIF»
 
 // initialise default values for any fields
@@ -39,10 +39,10 @@ set_exception_handler('session_fail_handler');
 
 // run any event triggers for this session
 «IF containingSession() != null»
-		if (!require_session("session_init", false)) {
-			$_SESSION["session_init"] = true; /* this MUST execute before we start any events, or else we can easily call ourselves and get stuck in an infinite loop */
+	if (!require_session("session_init", false)) {
+		$_SESSION["session_init"] = true; /* this MUST execute before we start any events, or else we can easily call ourselves and get stuck in an infinite loop */
 
-			«REM»any fail/exception handlers?«ENDREM»
+	«REM»any fail/exception handlers?«ENDREM»
 	«IF getFailHandler(containingSession()) != null»
 		try {
 	«ENDIF»
@@ -53,7 +53,7 @@ set_exception_handler('session_fail_handler');
 			«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
 		}
 	«ENDIF»
-}
+	}
 «ENDIF»
 
 // run any event triggers for this page

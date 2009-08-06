@@ -6,11 +6,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE remoteValue(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR emf::EObject»
+«DEFINE remoteValue(boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR emf::EObject»
 	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::visual::InputTextField»
+«DEFINE remoteValue(boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR model::visual::InputTextField»
 	«REM»
 		TODO we are trying to find the remote parameter source for a field that isn't on the current page! what are we supposed to do??
 	«ENDREM»
@@ -18,11 +18,11 @@
 	null
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean require, model::WireEdge wire, Boolean inline, model::ApplicationElementProperty property) FOR model::DomainAttribute»
+«DEFINE remoteValue(boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR model::DomainAttribute»
 	«IF isPropertiesFile(getDomainStore(this))»
-		«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValue(require, wire, inline, property) FOR this»
+		«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValue(require, wire, property) FOR this»
 	«ELSE»
-		«EXPAND template::domain::database::DatabaseSource::remoteDatabaseValue(require, wire, inline, property) FOR this»
+		«EXPAND template::domain::database::DatabaseSource::remoteDatabaseValue(require, wire, property) FOR this»
 	«ENDIF»
 «ENDDEFINE»
 

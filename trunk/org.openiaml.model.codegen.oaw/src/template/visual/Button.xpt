@@ -44,13 +44,13 @@
 «DEFINE implicitButtonClickEvents FOR model::wires::NavigateWire»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (navigate) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false, false) FOR this»
+		«EXPAND template::operations::OperationCall::callOperation(false, false) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
 «DEFINE implicitButtonClickEvents FOR model::wires::RunInstanceWire»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (run) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false, false) FOR this»
+		«EXPAND template::operations::OperationCall::callOperation(false, false) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
 

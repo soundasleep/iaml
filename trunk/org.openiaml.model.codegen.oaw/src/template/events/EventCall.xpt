@@ -8,7 +8,7 @@
 «DEFINE callEvent(Boolean php) FOR model::EventTrigger»
 	// Event «this»
 	// expand out all outgoing edges
-	«EXPAND template::operations::OperationCall::callOperation(php, false, false) FOREACH outEdges»
+	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outEdges»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

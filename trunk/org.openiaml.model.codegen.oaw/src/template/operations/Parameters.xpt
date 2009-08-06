@@ -19,19 +19,19 @@
 /**
  * Parameters as part of an operation call.
  */
-«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::wires::ParameterWire»
-	«EXPAND callParameterValue(php, wire, inline, inStoreDb) FOR from»
+«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::wires::ParameterWire»
+	«EXPAND callParameterValue(php, wire, inStoreDb) FOR from»
 «ENDDEFINE»
 
 /**
  * The sources of parameters for parameter calls, i.e.
  * fetch the runtime value of the parameter.
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::WireEdgesSource»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::WireEdgesSource»
 	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::ApplicationElementProperty»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::ApplicationElementProperty»
 	«IF php»
 		«IF inStoreDb»
 			$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
@@ -59,7 +59,7 @@
 					but we want it NOW, so we can't just ask the 
 					server. we have to find out where it is.
 				«ENDREM»			
-				«EXPAND RemoteParameter::remoteValue(false, wire, inline, this) FOR this.eContainer-»
+				«EXPAND RemoteParameter::remoteValue(false, wire, this) FOR this.eContainer-»
 			«ENDIF»
 		«ELSE»
 			get_application_element_property("«safeName()-»")
@@ -70,29 +70,29 @@
 /**
  * If we have a Parameter from a TextField, we should use its 'fieldValue' property instead.
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::InputTextField»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::visual::InputTextField»
 	«IF php»
 		/* implicitly from InputTextField */
-		«EXPAND callParameterValue(php, wire, inline, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»
+		«EXPAND callParameterValue(php, wire, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»
 	«ELSE»
 		«IF getFieldValue(this) != null»
-			«EXPAND callParameterValue(php, wire, inline, false) FOR getFieldValue(this)»
+			«EXPAND callParameterValue(php, wire, false) FOR getFieldValue(this)»
 		«ELSE»
 			«EXPAND exception FOR throwException("No 'fieldValue' property found in the InputTextField '" + this + "', which is being used as a Parameter source.")»
 		«ENDIF» 
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::StaticValue»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::StaticValue»
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»
 	/* dynamic element set "«name-»" */
 	get_dynamic_elements_«safeName()-»()
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inline, Boolean inStoreDb) FOR model::visual::Page»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::visual::Page»
 	/* Page "«name-»" */
 	new Visual_Page("«id-»", "«name-»")
 «ENDDEFINE»

@@ -14,7 +14,7 @@
 	// create query
 	$query = "SELECT * FROM «safeNameString(((model::DomainObject) from).name)»
 		WHERE " . «EXPAND getQuery FOR this-»;
-	$args = array(«EXPAND template::operations::Parameters::callParameter(true, this, false, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
+	$args = array(«EXPAND template::operations::Parameters::callParameter(true, this, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
 	
 	// execute query
 	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));

@@ -6,12 +6,12 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* default: don't know what to do */
-«DEFINE callOperation(Boolean php, Boolean inline, Boolean inStoreDb) FOR model::WireEdge»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::WireEdge»
 	«EXPAND exception FOR throwException("Unknown wire edge connected to edit trigger: " + this)»
 «ENDDEFINE»
 
 /* 
- * Run a command with some parameters. this could be in inline JS or a JS block.
+ * Run a command with some parameters.
  * RunInstanceWire: event --> operation 
  *
  * @param inStoreDb is set if we are calling operations as a result of storing a value
@@ -20,12 +20,12 @@
  * we instead use '$arg0', which we expect will be set already.
  * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
  */
-«DEFINE callOperation(Boolean php, Boolean inline, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»
 	/* eContainer == «to.eContainer» */
 	
 	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
 	«ENDIF»
 
 	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
@@ -37,11 +37,11 @@
 		«ENDREM»
 		«IF availableInCurrentScript(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
-				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
@@ -50,14 +50,14 @@
 	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inline, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+			«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
-		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, inline, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»
+		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»
 	«ELSEIF isDomainObjectInstance(to.eContainer)-»
 		«REM»direct field --> domain object instance«ENDREM»
-		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, inline, this, (model::DomainObjectInstance) to.eContainer) FOR to»
+		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::DomainObjectInstance) to.eContainer) FOR to»
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
 		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
@@ -71,7 +71,7 @@
 /**
  * NavigateWire: on the client-side, browse to a new page
  */
-«DEFINE callOperation(Boolean php, Boolean inline, Boolean inStoreDb) FOR model::wires::NavigateWire»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::wires::NavigateWire»
 	«IF php»
 		«EXPAND exception FOR throwException("Cannot expand a NavigateWire on server-side: " + this)»
 	«ELSE»

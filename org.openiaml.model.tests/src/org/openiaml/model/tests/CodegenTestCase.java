@@ -197,32 +197,23 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
 	 */ 
 	protected void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle) throws Exception {
-		try {
-			waitForAjax();
-	
-			beginAt(sitemap.getProjectRelativePath().toString());
-			assertTitleMatch("sitemap");
-			
-			assertLinkPresentWithText(pageTitle);
-			clickLinkWithText(pageTitle);
-			try {
-				assertTitleMatch(expectedPageTitle);
-			} catch (AssertionFailedError e) {
-				// something went wrong in the page execution, or
-				// the output is mangled HTML: output page source for debug purposes
-				System.out.println(this.getPageSource());
-				throw e;	// carry on throwing
-			}
-		} catch (FailingHttpStatusCodeException f) {
-			// if we failed at exception.php, we can try and read out the error
-			if (PhpRuntimeExceptionException.canHandle(f)) {
-				throw new PhpRuntimeExceptionException(f);
-			}
-			throw f;
-		}
+		waitForAjax();
+
+		beginAt(sitemap.getProjectRelativePath().toString());
+		assertTitleMatch("sitemap");
 		
+		assertLinkPresentWithText(pageTitle);
+		clickLinkWithText(pageTitle);
+		try {
+			assertTitleMatch(expectedPageTitle);
+		} catch (AssertionFailedError e) {
+			// something went wrong in the page execution, or
+			// the output is mangled HTML: output page source for debug purposes
+			System.out.println(this.getPageSource());
+			throw e;	// carry on throwing
+		}
 	}
-	
+
 	/**
 	 * We extend {@link WebTestCase#beginAt(String)} to also set
 	 * {@link #hasLoaded} to true (to help Ajax navigation).
@@ -358,8 +349,6 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 
 	/**
 	 * Assert that a given labelled field does NOT equal the current value.
-	 * 
-	 * TODO move into JWebUnit.
 	 * 
 	 * @param id
 	 * @param value
@@ -498,4 +487,21 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 		assertNoMatch("(Error|error|Exception|exception)");
 	}
 
+	/**
+	 * We wrap the method to try and catch runtime exceptions
+	 * from the PHP server-side code.
+	 */
+	@Override
+	public void clickLinkWithText(String linkText) {
+		try {
+			super.clickLinkWithText(linkText);
+		} catch (FailingHttpStatusCodeException f) {
+			// if we failed at exception.php, we can try and read out the error
+			if (PhpRuntimeExceptionException.canHandle(f)) {
+				throw new PhpRuntimeExceptionException(f);
+			}
+			throw f;
+		}
+	}
+	
 }

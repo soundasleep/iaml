@@ -27,7 +27,9 @@
     <genClasses ecoreClass="iaml.ecore#//DomainObject">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObject/attributes"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//DomainAttribute"/>
+    <genClasses ecoreClass="iaml.ecore#//DomainAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainAttribute/primaryKey"/>
+    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//ActivityNode"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Operation/parameters"/>

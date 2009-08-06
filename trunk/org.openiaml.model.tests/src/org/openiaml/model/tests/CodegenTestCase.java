@@ -17,6 +17,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.openiaml.model.model.InternetApplication;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+
 /**
  * Code generation-specific test cases.
  * 
@@ -24,7 +26,7 @@ import org.openiaml.model.model.InternetApplication;
  *
  */
 public abstract class CodegenTestCase extends InferenceTestCase {
-	
+
 	protected InternetApplication root;
 
 	/**
@@ -80,6 +82,9 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 		}
 		if (class1.getPackage().getName().contains("model0_3")) {
 			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml");
+		}
+		if (class1.getPackage().getName().contains("model0_4")) {
+			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_4/" + class1.getSimpleName() + ".iaml");
 		}
 		if (class1.getPackage().getName().contains("runtime")) {
 			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/runtime/" + class1.getSimpleName() + ".iaml");
@@ -192,20 +197,28 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
 	 */ 
 	protected void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle) throws Exception {
-		waitForAjax();
-
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-		
-		assertLinkPresentWithText(pageTitle);
-		clickLinkWithText(pageTitle);
 		try {
-			assertTitleMatch(expectedPageTitle);
-		} catch (AssertionFailedError e) {
-			// something went wrong in the page execution, or
-			// the output is mangled HTML: output page source for debug purposes
-			System.out.println(this.getPageSource());
-			throw e;	// carry on throwing
+			waitForAjax();
+	
+			beginAt(sitemap.getProjectRelativePath().toString());
+			assertTitleMatch("sitemap");
+			
+			assertLinkPresentWithText(pageTitle);
+			clickLinkWithText(pageTitle);
+			try {
+				assertTitleMatch(expectedPageTitle);
+			} catch (AssertionFailedError e) {
+				// something went wrong in the page execution, or
+				// the output is mangled HTML: output page source for debug purposes
+				System.out.println(this.getPageSource());
+				throw e;	// carry on throwing
+			}
+		} catch (FailingHttpStatusCodeException f) {
+			// if we failed at exception.php, we can try and read out the error
+			if (PhpRuntimeExceptionException.canHandle(f)) {
+				throw new PhpRuntimeExceptionException(f);
+			}
+			throw f;
 		}
 		
 	}

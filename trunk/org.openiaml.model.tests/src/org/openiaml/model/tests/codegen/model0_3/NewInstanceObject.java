@@ -50,11 +50,7 @@ public class NewInstanceObject extends DatabaseCodegenTestCase {
 	public void testNewInstance() throws Exception {
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		// there should be a text field 'editname'
 		String field = getLabelIDForText("edit new instance name");
@@ -109,11 +105,7 @@ public class NewInstanceObject extends DatabaseCodegenTestCase {
 	public void testOnlyOneNewInstance() throws Exception {
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		// there should be a text field 'editname'
 		String field = getLabelIDForText("edit new instance name");

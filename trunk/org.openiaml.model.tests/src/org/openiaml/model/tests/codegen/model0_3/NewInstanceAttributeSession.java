@@ -50,11 +50,7 @@ public class NewInstanceAttributeSession extends DatabaseCodegenTestCase {
 	public void testNewInstance() throws Exception {
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "session page");
+		IFile sitemap = beginAtSitemapThenPage("session page");
 		
 		// there should be a text field 'editname'
 		String field = getLabelIDForText("edit new name");

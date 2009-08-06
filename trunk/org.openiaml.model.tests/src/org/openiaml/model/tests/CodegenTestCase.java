@@ -143,7 +143,7 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 		}
 		
 	}
-
+	
 	/**
 	 * Begin at the sitemap page, and then click on a particular page title.
 	 * This method also checks that the destination page is the same as the
@@ -154,12 +154,27 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	 * use {@link #gotoSitemapThenPage(IFile, String)}.
 	 * 
 	 * @see #beginAtSitemapThenPage(IFile, String, String)
-	 * @param sitemap the location of the sitemap file
 	 * @param pageTitle the page title to select from the sitemap
 	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
-	 */ 
-	protected void beginAtSitemapThenPage(IFile sitemap, String pageTitle) throws Exception {
+	 * @return the location of the sitemap file
+	 * @throws Exception 
+	 */
+	protected IFile beginAtSitemapThenPage(String pageTitle) throws Exception {
+		// go to sitemap
+		IFile sitemap = getSitemap();
+		assertTrue("Sitemap " + sitemap + " exists", sitemap.exists());
+		
+		// go to page
 		beginAtSitemapThenPage(sitemap, pageTitle, pageTitle);
+		
+		return sitemap;
+	}
+	
+	/** 
+	 * Get the sitemap file, i.e. <code>output/sitemap.html</code>
+	 */
+	protected IFile getSitemap() {
+		return getProject().getFile("output/sitemap.html");
 	}
 	
 	/**
@@ -453,7 +468,7 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	protected void restartSession(IFile sitemap, String pageText) throws Exception {
-		beginAtSitemapThenPage(sitemap, pageText);
+		beginAtSitemapThenPage(sitemap, pageText, pageText);
 	}
 	
 	/**

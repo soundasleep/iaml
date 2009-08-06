@@ -24,11 +24,7 @@ public class DatabaseWithInputForm extends CodegenTestCase {
 	
 	public void testWithoutForm() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "without form");
+		IFile sitemap = beginAtSitemapThenPage("without form");
 		
 		String text = "a changed value " + new Date().toString();
 		{
@@ -46,7 +42,7 @@ public class DatabaseWithInputForm extends CodegenTestCase {
 		}
 		
 		// *restart* entire session
-		beginAtSitemapThenPage(sitemap, "without form");
+		sitemap = beginAtSitemapThenPage("without form");
 		{
 			// should be the same
 			String target = getLabelIDForText("target");
@@ -68,11 +64,7 @@ public class DatabaseWithInputForm extends CodegenTestCase {
 	
 	public void testWithForm() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "with form");
+		IFile sitemap = beginAtSitemapThenPage("with form");
 		
 		String text = "a changed value " + new Date().toString();
 		{
@@ -90,7 +82,7 @@ public class DatabaseWithInputForm extends CodegenTestCase {
 		}
 		
 		// *restart* entire session
-		beginAtSitemapThenPage(sitemap, "with form");
+		sitemap = beginAtSitemapThenPage("with form");
 		{
 			// should be the same
 			String target = getLabelIDForText("target");

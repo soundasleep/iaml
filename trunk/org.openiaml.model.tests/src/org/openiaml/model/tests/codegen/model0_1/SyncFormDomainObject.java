@@ -36,11 +36,7 @@ public class SyncFormDomainObject extends CodegenTestCase {
 		}
 
 		// we can now go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page1
-		beginAtSitemapThenPage(sitemap, "page1");
+		IFile sitemap = beginAtSitemapThenPage("page1");
 		
 		// the values should all be empty first
 		String field1id = getLabelIDForText("field1");

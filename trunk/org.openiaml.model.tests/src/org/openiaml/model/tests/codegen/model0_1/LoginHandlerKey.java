@@ -132,10 +132,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 */
 	public void testCanLoginLogoutFromSitemap() throws Exception {
 		try {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		beginAtSitemapThenPage(sitemap, "login");
+		IFile sitemap = beginAtSitemapThenPage("login");
 		assertNoProblem();
 		
 		String loginId = getLabelIDForText("login key");

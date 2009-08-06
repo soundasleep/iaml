@@ -72,11 +72,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 	 */
 	public void testFormInference() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page1
-		beginAtSitemapThenPage(sitemap, "container");
+		beginAtSitemapThenPage("container");
 		
 		// there should be some fields inferred automatically
 		String fruitId = getLabelIDForText("fruit");
@@ -106,11 +102,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		copyProperties();
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page1
-		beginAtSitemapThenPage(sitemap, "container");
+		beginAtSitemapThenPage("container");
 		
 		// there should be some fields inferred automatically
 		String fruitId = getLabelIDForText("fruit");
@@ -142,11 +134,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		copyProperties();
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page1
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		waitForAjax();
 		
 		// there should be some fields inferred automatically
@@ -183,11 +171,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		IFile target = copyProperties();
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page1
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		// there should be some fields inferred automatically
 		String newAnimal = "animal " + new Date().toString();

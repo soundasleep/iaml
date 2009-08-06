@@ -26,11 +26,8 @@ public class ConditionWireFalseServer extends CodegenTestCase {
 	
 	public void testFalseCondition() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		IFile sitemap = beginAtSitemapThenPage("page1");
 		
-		// go to page 1
-		beginAtSitemapThenPage(sitemap, "page1");
 		// print out the page
 		{
 			IFile page1 = getProject().getFile("page1.html");

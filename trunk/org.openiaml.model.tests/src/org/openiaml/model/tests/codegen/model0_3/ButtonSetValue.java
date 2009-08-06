@@ -28,11 +28,7 @@ public class ButtonSetValue extends CodegenTestCase {
 	 */
 	public void testExplicitCopy() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		// there should be two buttons here
 		assertButtonPresentWithText("copy value over to target");
@@ -90,11 +86,7 @@ public class ButtonSetValue extends CodegenTestCase {
 	 */
 	public void testImplicitCopy() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "implicit");
+		IFile sitemap = beginAtSitemapThenPage("implicit");
 		
 		// there should be one buttons here
 		assertButtonPresentWithText("copy over implicitly");

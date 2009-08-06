@@ -23,13 +23,9 @@ public class SessionSyncInSession extends CodegenTestCase {
 	
 	public void testRequirement() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		IFile sitemap = beginAtSitemapThenPage("page1");
 		
 		// page1, page2 and page3 are in the same session
-		
-		// go to page 1
-		beginAtSitemapThenPage(sitemap, "page1");
 		
 		String text1 = "initial value " + new Date().toString();
 		{
@@ -66,7 +62,7 @@ public class SessionSyncInSession extends CodegenTestCase {
 		}
 		
 		// *restart* entire session
-		beginAtSitemapThenPage(sitemap, "page1");
+		sitemap = beginAtSitemapThenPage("page1");
 		{
 			// should have been lost
 			String target = getLabelIDForText("target");

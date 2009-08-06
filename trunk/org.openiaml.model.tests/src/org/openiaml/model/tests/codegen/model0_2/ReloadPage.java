@@ -24,11 +24,7 @@ public class ReloadPage extends CodegenTestCase {
 	
 	public void testServerReload() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		String testString = "value " + new Date().toString();
 		{

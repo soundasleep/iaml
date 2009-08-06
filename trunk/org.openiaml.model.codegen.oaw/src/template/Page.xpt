@@ -9,413 +9,206 @@
 «DEFINE expandPage FOR model::visual::Page-»
 	«FILE "output/"+safeNameString(id)+".php"-»
 <?php
-		/* generated page "«name-»" */
-		// include header code
-		require("config.php");		// runtime library configuration
-		require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
-		require("create_database.php");		// ensure DB exists
-		require("properties_file.php");
-		
-		// a default fail handler for this page?
-		«IF getFailHandler(this) != null»
-		function page_fail_handler($e) {
-			«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(this)»
-			die;
-		}
-		set_exception_handler('page_fail_handler');
-		«ENDIF»
+/* generated page "«name-»" */
+// include header code
+require("config.php");		// runtime library configuration
+require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+require("create_database.php");		// ensure DB exists
+require("properties_file.php");
+
+// a default fail handler for this page?
+«IF getFailHandler(this) != null»
+function page_fail_handler($e) {
+	«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(this)»
+	die;
+}
+set_exception_handler('page_fail_handler');
+«ENDIF»
 
 		// a default fail handler for this session?
 		«IF containingSession() != null && getFailHandler(containingSession()) != null»
-		function session_fail_handler($e) {
-			«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
-			die;
-		}
-		set_exception_handler('session_fail_handler');
-		«ENDIF»
-		
-		// initialise default values for any fields
-		«EXPAND initialiseDefaultValues FOREACH children»
-		
-		// run any event triggers for this session
-		«IF containingSession() != null»
+function session_fail_handler($e) {
+	«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
+	die;
+}
+set_exception_handler('session_fail_handler');
+«ENDIF»
+
+// initialise default values for any fields
+«EXPAND initialiseDefaultValues FOREACH children»
+
+// run any event triggers for this session
+«IF containingSession() != null»
 		if (!require_session("session_init", false)) {
 			$_SESSION["session_init"] = true; /* this MUST execute before we start any events, or else we can easily call ourselves and get stuck in an infinite loop */
 
 			«REM»any fail/exception handlers?«ENDREM»
-			«IF getFailHandler(containingSession()) != null»
-				try {
-			«ENDIF»
-			«EXPAND template::events::Session::runSessionEvents FOREACH containingSession().eventTriggers-»
-			«IF getFailHandler(containingSession()) != null»
-				} catch (IamlRuntimeException $e) {
-					// only expand the first fail handler
-					«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
-				}
-			«ENDIF»
+	«IF getFailHandler(containingSession()) != null»
+		try {
+	«ENDIF»
+	«EXPAND template::events::Session::runSessionEvents FOREACH containingSession().eventTriggers-»
+	«IF getFailHandler(containingSession()) != null»
+		} catch (IamlRuntimeException $e) {
+			// only expand the first fail handler
+			«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
 		}
-		«ENDIF»
-		
-		// run any event triggers for this page
-		// exceptions are now covered by the exception handlers above
-		«EXPAND template::events::Page::runPageEvents FOREACH eventTriggers-»
-		
-		// expand any operations (both in this page and in any surrounding scopes)
-		«EXPAND template::operations::Definitions::operationDefinitions(true) FOR this-»		
+	«ENDIF»
+}
+«ENDIF»
 
-		// expand all conditions
-		«EXPAND template::conditions::Definitions::conditionDefinitions(true) FOR this-»
+// run any event triggers for this page
+// exceptions are now covered by the exception handlers above
+«EXPAND template::events::Page::runPageEvents FOREACH eventTriggers-»
 
-		// expand any dynamic element sources
-		«EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
-		
-		// expand any domain instances
-		«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
-		«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
+// expand any operations (both in this page and in any surrounding scopes)
+«EXPAND template::operations::Definitions::operationDefinitions(true) FOR this-»		
 
-		// allow remote execution of operations
-		if (require_get("operation", "")) {
-			$operation_name = "do_" . require_get("operation");
-			$arg0 = require_get("arg0");
-			$arg1 = require_get("arg1");
+// expand all conditions
+«EXPAND template::conditions::Definitions::conditionDefinitions(true) FOR this-»
+
+// expand any dynamic element sources
+«EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
+
+// expand any domain instances
+«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
+«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
+
+// allow remote execution of operations
+if (require_get("operation", "")) {
+	$operation_name = "do_" . require_get("operation");
+	$arg0 = require_get("arg0");
+	$arg1 = require_get("arg1");
 			
-			// any running functions? (prevent infinite loops)
-			register_running_functions();
+	// any running functions? (prevent infinite loops)
+	register_running_functions();
 
-			log_message("page «name»: remote operation $operation_name($arg0, $arg1)");
-			$operation_name($arg0, $arg1);
-			log_message("page «name»: remote operation $operation_name($arg0, $arg1) complete");
-			
-			echo "ok";
-			die;
-		}
-				
-		?>
-		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-			"http://www.w3.org/TR/html4/loose.dtd">
-		<html>
-		<head>
-			<title>«pageTitle()»</title>
-			<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
-			<script language="Javascript" type="text/javascript">
-			/* <![CDATA[ */
-				var page_id = "«safeNameString(id)-»";
-			/* ]]> */
-			</script>
-			<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
-			<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
-			<script language="Javascript" type="text/javascript">
-			/* <![CDATA[ */
-				«EXPAND template::js::DefaultJs::defaultJs FOR this-»
-				
-				«REM»
-				/* load site XML (if requested) */
-				var site_xml = null;
-				function get_site_xml() {
-					if (site_xml == null) {
-						site_xml = load_xml("<?php echo escape_javascript_string(file_get_contents("site_layout.xml")); ?>");
-					}
-					return site_xml;
-				}
-				«ENDREM»
-				
-			/* ]]> */
-			</script>
-			<script language="Javascript" type="text/javascript">
-			/* <![CDATA[ */
-				var try_catch_depth = 0;
-			
-				// operation definitions
-				«EXPAND template::operations::Definitions::operationDefinitions(false) FOR this-»
+	log_message("page «name»: remote operation $operation_name($arg0, $arg1)");
+	$operation_name($arg0, $arg1);
+	log_message("page «name»: remote operation $operation_name($arg0, $arg1) complete");
 
-				// condition definitions
-				«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»
-
-				// dynamic elements
-				«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»
-
-				// domain instances
-				«EXPAND template::domain::Definitions::domainObjectDefinitions(false) FOR this-»
-				«EXPAND template::domain::Definitions::domainAttributeDefinitions(false) FOR this-»
-
-				/* actual page onload functions (called ONCE the page is fully loaded) */
-				var stored_onload_functions = new Array();
-				function addOnloadFunction(f) {
-					stored_onload_functions.push(f);
-				}
-				
-				// this needs to be loaded *after* the page has loaded
-				function loadStoredEvents() {
-					
-					// expand all onLoad functions
-					for (var i = 0; i < stored_onload_functions.length; i++) {
-						var f = stored_onload_functions[i];
-						f();
-					}
-
-					$('response').innerHTML = "before loadStoredEvents...";
-					<?php 
-					«EXPAND php::includes::EventsPhp::eventsPhp FOR this-» 
-					?>
-
-					<?php queue_log_messages(false); /* re-enable log messages */ ?>
-
-				}
-			/* ]]> */
-			</script>
-		</head>
-		<body onLoad="loadStoredEvents()">
-		<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
+	echo "ok";
+	die;
+}
 		
-		<h1>«pageTitle()»</h1>
-		
-		<div id="runtime_errors"><!-- any runtime errors go into here --></div>
-		
-		<?php
-		/* expand any fail error messages */
-		if (require_get("fail")) {
 ?>
-	<div class="error">
-		<p>An exception occured: <i><?php echo htmlspecialchars(require_get("fail")); ?></i></p>
-	</div>
-<?php 
-		}
-		?>
-		
-		<?php queue_log_messages(true); ?>
-
-		«EXPAND expandChild FOREACH children-»
-		
-		<div id="debug"></div>
-		<div id="response">empty</div>
-		
-		<script language="Javascript" type="text/javascript">
-		/* <![CDATA[ */
-		<?php queue_log_messages(false); /* re-enable log messages, but only after we have "response". */ ?>
-		/* ]]> */
-		</script>
-		
-		<!-- for test cases to improve speed: an outstanding ajax calls counter -->
-		<div id="debug_monitors">
-			<div id="ajax_monitor"></div>
-			<div id="counter_store_db"></div>
-			<div id="counter_store_event"></div>
-			<div id="counter_set_session"></div>
-			<div id="counter_set_application_value"></div>
-			<div id="counter_set_domain_attribute"></div>
-			<div id="counter_remote_event"></div>
-			<div id="counter_queued_store_attribute"></div>
-			<div id="counter_queued_store_object"></div>
-		</div>
-		<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
-		
-		</body>
-		</html>
-	«ENDFILE»
-«ENDDEFINE»
-
-«DEFINE expandChild FOR model::ApplicationElement-»
-«ENDDEFINE»
-
-«DEFINE expandChild FOR model::visual::InputForm-»
-	<form id="«safeNameString(id)»" 
-			onChange="return onChange_«safeNameString(id)»(this);"
-			onClick="return onClick_«safeNameString(id)»(this);"
-		>
-		
-		<script language="Javascript" type="text/javascript">
-		/* <![CDATA[ */
-			function onChange_«safeNameString(id)»(obj) {
-				// expand all onChanges
-				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "edit")-»
-
-				return false;
-			}
-			
-			function onClick_«safeNameString(id)»(obj) {
-				// expand all onClicks
-				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
-			
-				return false;
-			}
-		/* ]]> */
-		</script>
-		<h2>«formName()»</h2>
-		
-		«EXPAND expandChild FOREACH children-»
-	</form>
-«ENDDEFINE»
-
-«DEFINE expandChild FOR model::visual::InputTextField-»
-	<div>
-	<label id="label_«safeNameString(id)-»">
-		«textFieldName()»
-		
-		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»"
-			onChange="return onChange_«safeNameString(id)»(this);"
-			onClick="return onClick_«safeNameString(id)»(this);"
-
-			«REM»any static values?«ENDREM»
-			«EXPAND staticInitialValues FOREACH inEdges» 
-			«EXPAND staticInitialValues FOREACH outEdges» 			 
-
-			«REM»
-				an initial value?
-				TODO we could have multiple default values; right now we are relying on
-				browser behaviour to place this value as lower priority. we should work
-				out some way to select it programatically.
-			«ENDREM»
-			«EXPAND staticInitialValue FOREACH properties.select( e | e.name == "fieldValue")»			
-		>
-		
-		<script language="Javascript" type="text/javascript">
-		/* <![CDATA[ */
-			function onChange_«safeNameString(id)»(obj) {
-				// expand all onChanges
-				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "edit")-»
-
-				// outgoing values
-				«REM»any application element properties to change? (both on client and server)«ENDREM»
-				«EXPAND outgoingValues(this) FOREACH outEdges»
-				«EXPAND outgoingValues(this) FOREACH inEdges»
-				«REM»it may be required to outgoingValues(this) FOREACH properties.outEdges«ENDREM»
-				
-				// server values
-				«REM»save a value for myself (which is not covered by an outEdge/inEdge) to the server/session?«ENDREM»
-				«EXPAND outgoingValue(this) FOREACH properties.select( e | e.name == "fieldValue")»
-				
-				return false;
-			}
-			
-			function onClick_«safeNameString(id)»(obj) {
-				// expand all onClicks
-				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
-							
-				return false;
-			}
-			
-			«REM»any on-access events?«ENDREM»
-			addOnloadFunction( function() {
-				«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "access")-»				
-			} );
-		/* ]]> */
-		</script>
-	</label>
-	</div>
-«ENDDEFINE»
-
-/* currently, a "Button" == a submit button. */
-«DEFINE expandChild FOR model::visual::Button-»
-	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
-			onChange="return onChange_«safeNameString(id)»(this);"
-			onClick="return onClick_«safeNameString(id)»(this);"
-		>
-	
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>«pageTitle()»</title>
+	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
 	<script language="Javascript" type="text/javascript">
 	/* <![CDATA[ */
-		function onChange_«safeNameString(id)»(obj) {
-			// expand all onChanges
-			«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click")-»
-			
-			return false;
-		}
+		var page_id = "«safeNameString(id)-»";
+	/* ]]> */
+	</script>
+	<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
+	<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
+	<script language="Javascript" type="text/javascript">
+	/* <![CDATA[ */
+		«EXPAND template::js::DefaultJs::defaultJs FOR this-»
 		
-		function onClick_«safeNameString(id)»(obj) {
-			// expand all onClicks
-			«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
+		«REM»
+		/* load site XML (if requested) */
+		var site_xml = null;
+		function get_site_xml() {
+			if (site_xml == null) {
+				site_xml = load_xml("<?php echo escape_javascript_string(file_get_contents("site_layout.xml")); ?>");
+			}
+			return site_xml;
+		}
+		«ENDREM»
+		
+	/* ]]> */
+	</script>
+	<script language="Javascript" type="text/javascript">
+	/* <![CDATA[ */
+		var try_catch_depth = 0;
+	
+		// operation definitions
+		«EXPAND template::operations::Definitions::operationDefinitions(false) FOR this-»
 
-			// implicit operations
-			«EXPAND implicitButtonClickEvents FOREACH outEdges-»
+		// condition definitions
+		«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»
 
-			return false;
+		// dynamic elements
+		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»
+
+		// domain instances
+		«EXPAND template::domain::Definitions::domainObjectDefinitions(false) FOR this-»
+		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false) FOR this-»
+
+		/* actual page onload functions (called ONCE the page is fully loaded) */
+		var stored_onload_functions = new Array();
+		function addOnloadFunction(f) {
+			stored_onload_functions.push(f);
+		}
+				
+		// this needs to be loaded *after* the page has loaded
+		function loadStoredEvents() {
+			// expand all onLoad functions
+			for (var i = 0; i < stored_onload_functions.length; i++) {
+				var f = stored_onload_functions[i];
+				f();
+			}
+
+			$('response').innerHTML = "before loadStoredEvents...";
+			<?php 
+			«EXPAND php::includes::EventsPhp::eventsPhp FOR this-» 
+			?>
+
+			<?php queue_log_messages(false); /* re-enable log messages */ ?>
 		}
 	/* ]]> */
 	</script>
-«ENDDEFINE»
+</head>
+<body onLoad="loadStoredEvents()">
+	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
+		
+	<h1>«pageTitle()»</h1>
+		
+	<div id="runtime_errors"><!-- any runtime errors go into here --></div>
+		
+	<?php
+	/* expand any fail error messages */
+	if (require_get("fail")) { 
+	?>
+		<div class="error">
+			<p>An exception occured: <i><?php echo htmlspecialchars(require_get("fail")); ?></i></p>
+		</div>
+	<?php } ?>
+		
+	<?php queue_log_messages(true); ?>
 
-/**
- * If buttons have a NavigateWire or RunInstanceWire called onClick,
- * execute them as if there was an EventTrigger that existed.
- */
-«DEFINE implicitButtonClickEvents FOR model::WireEdge»
-«ENDDEFINE»
+	«EXPAND template::visual::Render::renderVisual FOREACH children.typeSelect(model::VisibleThing)-»
 
-«DEFINE implicitButtonClickEvents FOR model::wires::NavigateWire»
-	«IF (name == "click" || name == "onClick")»
-		/* expanding implicit trigger (navigate) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false, false) FOR this»
-	«ENDIF» 
-«ENDDEFINE»
-«DEFINE implicitButtonClickEvents FOR model::wires::RunInstanceWire»
-	«IF (name == "click" || name == "onClick")»
-		/* expanding implicit trigger (run) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false, false) FOR this»
-	«ENDIF» 
-«ENDDEFINE»
-
-/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
-«DEFINE staticInitialValues FOR model::WireEdge»
-«ENDDEFINE»
-
-/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
-   property as the value */
-«DEFINE staticInitialValues FOR model::wires::SyncWire»
-	«EXPAND staticInitialValue FOR from»
-	«EXPAND staticInitialValue FOR to»
-«ENDDEFINE»
-
-/* ignore: todo refactor */
-«DEFINE staticInitialValue FOR model::WireEdgesSource»
-«ENDDEFINE»
-«DEFINE staticInitialValue FOR model::WireEdgeDestination»
-«ENDDEFINE»
-
-/* we have a property to provide [in PHP] */
-«DEFINE staticInitialValue FOR model::ApplicationElementProperty»
-	«IF containingSession(this) == null»
-		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
-		value="<?php echo htmlspecialchars(get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
-	«ELSE»
-		«REM»contained in a Session: a session value«ENDREM»
-		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
-	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE staticInitialValue FOR model::DomainAttributeInstance»
-	«REM»from a domain attribute instance.«ENDREM»
-	value="<?php echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>"
-«ENDDEFINE»
-
-/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
-«DEFINE outgoingValues(model::ApplicationElement container) FOR model::WireEdge»
-«ENDDEFINE»
-
-/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
-   property as the destination */
-«DEFINE outgoingValues(model::ApplicationElement container) FOR model::wires::SyncWire»
-	«EXPAND outgoingValue(container) FOR from»
-	«EXPAND outgoingValue(container) FOR to»
-«ENDDEFINE»
-
-/* ignore: todo refactor */
-«DEFINE outgoingValue(model::ApplicationElement container) FOR model::WireEdgesSource»
-«ENDDEFINE»
-«DEFINE outgoingValue(model::ApplicationElement container) FOR model::WireEdgeDestination»
-«ENDDEFINE»
-«DEFINE outgoingValue(model::ApplicationElement container) FOR model::DataFlowEdgesSource»
-«ENDDEFINE»
-«DEFINE outgoingValue(model::ApplicationElement container) FOR model::DataFlowEdgeDestination»
-«ENDDEFINE»
-
-/* we have a property to set [in Javascript] */
-«DEFINE outgoingValue(model::ApplicationElement container) FOR model::ApplicationElementProperty»
-	«IF containingSession(this) == null»
-		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
-		set_application_value("«safeNameString(id)»", document.getElementById('«safeName(container)-»').value);
-	«ELSE»
-		«REM»contained in a Session: a session value«ENDREM»
-		set_session("«safeName(containingSession(this))»_«safeNameString(id)»", document.getElementById('«safeName(container)-»').value);
-	«ENDIF»
+	<div id="debug"></div>
+	<div id="response">empty</div>
+	
+	<script language="Javascript" type="text/javascript">
+	/* <![CDATA[ */
+	<?php queue_log_messages(false); /* re-enable log messages, but only after we have "response". */ ?>
+	/* ]]> */
+	</script>
+	
+	<!-- for test cases to improve speed: an outstanding ajax calls counter -->
+	<!-- TODO we should remove this once issue 43 is resolved -->
+	<div id="debug_monitors">
+		<div id="ajax_monitor"></div>
+		<div id="counter_store_db"></div>
+		<div id="counter_store_event"></div>
+		<div id="counter_set_session"></div>
+		<div id="counter_set_application_value"></div>
+		<div id="counter_set_domain_attribute"></div>
+		<div id="counter_remote_event"></div>
+		<div id="counter_queued_store_attribute"></div>
+		<div id="counter_queued_store_object"></div>
+	</div>
+	<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
+	
+</body>
+</html>
+	«ENDFILE»
 «ENDDEFINE»
 
 /* default values that we should set before we access this page */

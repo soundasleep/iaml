@@ -107,7 +107,7 @@
 				«EXPAND DataFlow::dataTarget(php) FOR outFlows.first().to» = value;
 				
 				// set server/session variables too
-				«EXPAND template::Page::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
+				«EXPAND OutgoingValues::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
 			}
 		«ELSEIF isDomainAttribute(outFlows.first().to.eContainer)-»
 			«REM»direct field --> domain attribute«ENDREM»
@@ -120,7 +120,7 @@
 					value);
 
 				// set server/session variables too
-				«EXPAND template::Page::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
+				«EXPAND OutgoingValues::outgoingValue((model::ApplicationElement) outFlows.first().to.eContainer) FOR outFlows.first().to»
 			} 
 		«ELSEIF containingSession(outFlows.first().to) == null»
 			«REM»contained in a Page or InternetApplication: a static value«ENDREM»

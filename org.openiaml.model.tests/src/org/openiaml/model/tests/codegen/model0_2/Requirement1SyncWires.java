@@ -24,11 +24,7 @@ public class Requirement1SyncWires extends CodegenTestCase {
 	
 	public void testRequirement() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		// fill in name and email
 		String testName = "name " + new Date().toString();

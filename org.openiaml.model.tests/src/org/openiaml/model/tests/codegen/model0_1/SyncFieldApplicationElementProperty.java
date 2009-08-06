@@ -32,12 +32,10 @@ public class SyncFieldApplicationElementProperty extends CodegenTestCase {
 		assertNotSame(testingText, testingText2);
 		assertNotSame(testingText2, testingText3);
 		
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
+		IFile sitemap = beginAtSitemapThenPage("container");
+		assertNoProblem();
+		
 		{
-			beginAtSitemapThenPage(sitemap, "container");
-			
 			// fill in a field
 			String fieldId = getLabelIDForText("field1");
 			setLabeledFormElementField(fieldId, testingText);

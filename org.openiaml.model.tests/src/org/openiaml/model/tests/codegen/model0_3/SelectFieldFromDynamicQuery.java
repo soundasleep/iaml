@@ -52,11 +52,7 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 	public void testSelectDefault() throws Exception {
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		// there should be a text field 'editname'
 		String field = getLabelIDForText("edit name");
@@ -109,11 +105,7 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 	public void testSelectDynamic() throws Exception {
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		// there should be a text field 'editname'
 		String field = getLabelIDForText("edit name");
@@ -177,11 +169,7 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 	 */
 	public void testSelectMissing() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");		
+		beginAtSitemapThenPage("container");	
 		String select = getLabelIDForText("select email");
 		
 		// set it to something that doesnt exist
@@ -195,7 +183,7 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		
 		// if we reload the page, we will get back to the same error page
 		try {
-			beginAtSitemapThenPage(sitemap, "container");
+			beginAtSitemapThenPage("container");
 			fail("We should not be able to load page 'container' back again");
 		} catch (FailingHttpStatusCodeException e) {
 			// we should instantly have an exception occur

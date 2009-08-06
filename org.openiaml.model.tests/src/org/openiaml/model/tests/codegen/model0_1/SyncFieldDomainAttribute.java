@@ -45,11 +45,8 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 		}
 
 		// we can now go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
-		// go to "page" to initialise the db/application
-		beginAtSitemapThenPage(sitemap, "page");
+		IFile sitemap = beginAtSitemapThenPage("page");
+		assertNoProblem();
 
 		// refresh the workspace
 		assertTrue(refreshProject().isOK());

@@ -60,11 +60,7 @@ public class SelectField extends DatabaseCodegenTestCase {
 	public void testSelectInstant() throws Exception {
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		beginAtSitemapThenPage("container");
 		
 		// there should be a text field 'editname'
 		String field = getLabelIDForText("editname");
@@ -94,11 +90,7 @@ public class SelectField extends DatabaseCodegenTestCase {
 	public void testSelect() throws Exception {
 
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "container");
+		IFile sitemap = beginAtSitemapThenPage("container");
 		
 		// there should be a text field 'editname'
 		String field = getLabelIDForText("editname");

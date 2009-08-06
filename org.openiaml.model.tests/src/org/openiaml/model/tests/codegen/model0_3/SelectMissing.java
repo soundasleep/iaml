@@ -6,7 +6,6 @@ package org.openiaml.model.tests.codegen.model0_3;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -42,13 +41,8 @@ public class SelectMissing extends DatabaseCodegenTestCase {
 	
 	public void testSelectMissing() throws Exception {
 
-		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
 		try {
-			beginAtSitemapThenPage(sitemap, "container");
+			beginAtSitemapThenPage("container");
 			fail("We should not be able to load page 'container'");
 		} catch (FailingHttpStatusCodeException e) {
 			// we should instantly have an exception occur

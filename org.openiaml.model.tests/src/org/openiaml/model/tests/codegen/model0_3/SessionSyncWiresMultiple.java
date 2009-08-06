@@ -26,11 +26,7 @@ public class SessionSyncWiresMultiple extends CodegenTestCase {
 	
 	public void testRequirement() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
-		// go to page
-		beginAtSitemapThenPage(sitemap, "outside1");
+		IFile sitemap = beginAtSitemapThenPage("outside1");
 		
 		String outside = "outside " + new Date().toString();
 		{

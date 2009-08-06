@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.codegen.model0_1;
 
-import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -23,11 +22,7 @@ public class SyncStaticValueField extends CodegenTestCase {
 	
 	public void testSync() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to target
-		beginAtSitemapThenPage(sitemap, "target");
+		beginAtSitemapThenPage("target");
 
 		// find the value
 		String nameId = getLabelIDForText("current value");

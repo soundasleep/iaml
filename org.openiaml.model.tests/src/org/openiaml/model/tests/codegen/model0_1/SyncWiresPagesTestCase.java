@@ -39,12 +39,9 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		assertNotSame(testingText, testingText2);
 		assertNotSame(testingText2, testingText3);
 		
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		{
-			beginAtSitemapThenPage(sitemap, "page1");
+		IFile sitemap = beginAtSitemapThenPage("page1");
 			
+		{
 			// fill in a field on page 1
 			String label_text1 = getLabelIDForText("text1");
 			String label_text2 = getLabelIDForText("text2");

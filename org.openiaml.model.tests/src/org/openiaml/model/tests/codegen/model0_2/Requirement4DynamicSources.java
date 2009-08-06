@@ -27,11 +27,7 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 	
 	public void testRequirement() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-		
-		// go to page
-		beginAtSitemapThenPage(sitemap, "page a");
+		IFile sitemap = beginAtSitemapThenPage("page a");
 		
 		String test1 = "set target value " + new Date().toString();
 		String test2 = "should not be set " + new Random().nextDouble();

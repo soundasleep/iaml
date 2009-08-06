@@ -41,7 +41,7 @@ public class SelectMissingExpected extends DatabaseCodegenTestCase {
 	
 	public void testSelectMissing() throws Exception {
 		// go to sitemap
-		IFile sitemap = getProject().getFile("output/sitemap.html");
+		IFile sitemap = getSitemap();
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 		
 		// go to page

@@ -39,6 +39,7 @@ public class AllCodegenTests {
 		suite.addTest(Codegen0_1Suite.suite());
 		suite.addTest(Codegen0_2Suite.suite());
 		suite.addTest(Codegen0_3Suite.suite());
+		suite.addTest(Codegen0_4Suite.suite());
 		
 		// client-side runtime library tests
 		suite.addTest(AllClientRuntimeTests.suite());

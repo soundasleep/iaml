@@ -1,0 +1,36 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools
+
+#list any import classes here.
+import org.eclipse.emf.ecore.*;
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.domain.*;
+import ca.ecliptical.emf.xpath.*;
+import java.util.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+
+# insertion queue
+import org.openiaml.model.drools.*;
+global DroolsInsertionQueue queue;
+
+rule "Create a default primary key for DomainObjects which do not have one"
+
+	when
+		object : DomainObject ( )
+		not (da : DomainAttribute ( eContainer == object, primaryKey == true ) )
+	
+	then
+		// create a new one
+		DomainAttribute da2 = handler.generatedDomainAttribute(object, object);
+		handler.setName(da2, "generated primary key");
+		handler.setValue(da2, ModelPackage.eINSTANCE.getDomainAttribute_PrimaryKey(), true);
+		queue.add(da2, drools);
+
+end 

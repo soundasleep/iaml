@@ -49,11 +49,11 @@ context model::scopes::Session ERROR "Sessions cannot directly contain InputForm
 context model::DomainObject ERROR "You cannot have a DomainObject called single_values (reserved word)" :
 	name != "single_values";
 
-context model::DomainAttributeInstance ERROR "A DomainAttributeInstance cannot have more than one selection" :
-	inEdges.typeSelect(model::wires::SelectWire).size <= 1;
+context model::DomainAttributeInstance ERROR "A DomainAttributeInstance cannot have more than one Select or NewInstance wire" :
+	inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size <= 1;
 	
-context model::DomainObjectInstance ERROR "A DomainObjectInstance cannot have more than one selection" :
-	inEdges.typeSelect(model::wires::SelectWire).size <= 1;
+context model::DomainObjectInstance ERROR "A DomainObjectInstance cannot have more than one Select or NewInstance wire" :
+	inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size <= 1;
 	
 context model::wires::SelectWire ERROR "A SelectWire must come from a valid DomainObject":
 	model::DomainObject.isInstance(from);	

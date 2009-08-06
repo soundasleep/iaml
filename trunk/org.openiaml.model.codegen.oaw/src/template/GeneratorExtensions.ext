@@ -44,6 +44,15 @@ conditionName(emf::EObject this ) :
 
 conditionName(model::Condition this) :
 	safeName(this);
+	
+attributeName(model::DomainAttribute this) :
+	safeNameString(name);
+
+attributeName(model::DomainAttributeInstance this) :
+	safeNameString(name);
+	
+attributeName(Void v) :
+	"null";
 
 isXPath(model::DynamicApplicationElementSet this) :
 	query.startsWith("xpath:");
@@ -291,6 +300,27 @@ isAutosaveOff(model::DomainObjectInstance this) :
 	
 isAutosaveOff(emf::EObject this):
 	false;
+
+getPrimaryKey(model::DomainAttributeInstance this) :
+	if inEdges.typeSelect(model::wires::NewInstanceWire).size >= 1 then
+		getPrimaryKey(inEdges.typeSelect(model::wires::NewInstanceWire).first())
+	else if eContainer.metaType.isAssignableFrom(model::DomainObjectInstance) then
+		getPrimaryKey((model::DomainObjectInstance) eContainer);
+
+getPrimaryKey(model::wires::NewInstanceWire this) :
+	getPrimaryKey(from);
+
+getPrimaryKey(model::DomainObject this) :
+	attributes.selectFirst( e | e.primaryKey );
+
+getPrimaryKey(model::DomainAttribute this) :
+	getPrimaryKey(eContainer);
+
+getPrimaryKey(model::DomainObjectInstance this) :
+	getPrimaryKey(inEdges.typeSelect(model::wires::NewInstanceWire).first());
+
+getPrimaryKey(emf::EObject this) :
+	null;
 
 /** 
  * a hack way to create backtrace-able errors

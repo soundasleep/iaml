@@ -78,7 +78,12 @@
  * Expand a DomainAttribute into a SQL row.
  */
 «DEFINE createDomainAttributeDatabase FOR model::DomainAttribute»
-	«safeNameString(name)» VARCHAR(255) NULL
+	«safeNameString(name)»
+	«IF primaryKey»
+		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT 
+	«ELSE»
+		VARCHAR(255) NULL
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

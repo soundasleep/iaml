@@ -606,6 +606,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDomainAttribute_PrimaryKey() {
+		return (EAttribute)domainAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getActivityNode() {
 		return activityNodeEClass;
 	}
@@ -1506,6 +1515,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(domainObjectEClass, DOMAIN_OBJECT__ATTRIBUTES);
 
 		domainAttributeEClass = createEClass(DOMAIN_ATTRIBUTE);
+		createEAttribute(domainAttributeEClass, DOMAIN_ATTRIBUTE__PRIMARY_KEY);
 
 		activityNodeEClass = createEClass(ACTIVITY_NODE);
 
@@ -1788,6 +1798,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getDomainObject_Attributes(), this.getDomainAttribute(), null, "attributes", null, 0, -1, DomainObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainAttributeEClass, DomainAttribute.class, "DomainAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDomainAttribute_PrimaryKey(), ecorePackage.getEBoolean(), "primaryKey", "false", 0, 1, DomainAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(activityNodeEClass, ActivityNode.class, "ActivityNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1953,6 +1964,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "changed", "0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute"
+		   });		
+		addAnnotation
+		  (getDomainAttribute_PrimaryKey(), 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4"
 		   });		
 		addAnnotation
 		  (compositeOperationEClass, 

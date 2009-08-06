@@ -13,7 +13,7 @@
 		«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$obj = get_object_instance_«safeName(eContainer)»();
-			return $obj["«name-»"];
+			return $obj["«attributeName(this)-»"];
 		«ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
 			return get_new_attribute_instance_«safeName()-»();
@@ -29,7 +29,7 @@
 						throw new IamlRuntimeException("Could not find any value instance for attribute '«id»'");
 					return $default;
 				}
-				return $row["«name-»"];
+				return $row["«attributeName(this)-»"];
 			«ENDIF»
 		«ENDIF»
 	}
@@ -68,8 +68,8 @@
 				$rs->execute() or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
 
 				// get the inserted id
-				$new_id = $db->lastInsertId("id");
-				log_message("new session variable id: $new_id");
+				$new_id = $db->lastInsertId("«attributeName(getPrimaryKey(this))-»");
+				log_message("new session variable id [«attributeName(getPrimaryKey(this))-»]: $new_id");
 
 				// add a link to this
 				$_SESSION['new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»'] = $new_id;
@@ -80,7 +80,7 @@
 			
 			// create query
 			$query = "SELECT «safeNameString(name)» FROM «safeNameString(((model::DomainObject) wire.from).name)»
-				WHERE id=?";
+				WHERE «attributeName(getPrimaryKey(this))-»=?";
 			$args = array(require_session('new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»'));
 			log_message("selecting previously created new session object: " . print_r($args, true));
 
@@ -164,8 +164,8 @@
 				$rs->execute() or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
 
 				// get the inserted id
-				$new_id = $db->lastInsertId("id");
-				log_message("new session variable id: $new_id");
+				$new_id = $db->lastInsertId("«attributeName(getPrimaryKey(this))-»");
+				log_message("new session variable id [«attributeName(getPrimaryKey(this))-»]: $new_id");
 
 				// add a link to this
 				$_SESSION['new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»'] = $new_id;
@@ -176,7 +176,7 @@
 			
 			// create query
 			$query = "SELECT * FROM «safeNameString(((model::DomainObject) wire.from).name)»
-				WHERE id=?";
+				WHERE «attributeName(getPrimaryKey(this))-»=?";
 			$args = array(require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»'));
 			log_message("selecting previously created new session object: " . print_r($args, true));
 
@@ -220,8 +220,8 @@
 				$rs->execute() or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
 
 				// get the inserted id
-				$new_id = $db->lastInsertId("id");
-				log_message("new page variable id: $new_id");
+				$new_id = $db->lastInsertId("«attributeName(getPrimaryKey(this))-»");
+				log_message("new page variable id [«attributeName(getPrimaryKey(this))-»]: $new_id");
 
 				// add a link to this
 				set_application_value('new_object_«safeNameString(id)-»', $new_id);
@@ -232,7 +232,7 @@
 			
 			// create query
 			$query = "SELECT * FROM «safeNameString(((model::DomainObject) wire.from).name)»
-				WHERE id=?";
+				WHERE «attributeName(getPrimaryKey(this))-»=?";
 			$args = array(get_application_value('new_object_«safeNameString(id)-»', 'missing'));
 			log_message("selecting previously created new page object: " . print_r($args, true));
 

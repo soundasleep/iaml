@@ -18,7 +18,7 @@
       <attributes id="model.12109331eea.10ac" name="name"/>
       <attributes id="model.12109331eea.10ad" name="email"/>
       <attributes id="model.12109331eea.10ae" name="password"/>
-      <attributes id="model.12109331eea.10d3" name="id"/>
+      <attributes id="model.12109331eea.10d3" name="id" primaryKey="true"/>
     </children>
   </domainStores>
 </iaml:InternetApplication>

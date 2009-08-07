@@ -65,12 +65,16 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertNotNull("Rendering a non-null element", rendering);
 		assertTrue("Rendering an InternetApplication", rendering instanceof InternetApplication);
 		
-		// there should be 0 elements in this editor
-		assertEditorHasChildren(0, editor);
+		// there should be 1 elements in this editor: a generated page (issue 89)
+		assertEditorHasChildren(1, editor);
 		
 		root = (InternetApplication) rendering;
-		// should be empty
-		assertTrue("InternetApplication is empty", root.eContents().isEmpty());
+		assertEquals(1, root.getChildren().size());
+		Page page = (Page) root.getChildren().get(0);
+		assertEquals("Home", page.getName());
+		
+		// should not be empty
+		assertFalse("InternetApplication is not empty", root.eContents().isEmpty());
 	}
 	
 	/**

@@ -21,6 +21,7 @@ public class AllModel0_4InferenceTests {
 		
 		suite.addTestSuite(GeneratedPrimaryKey.class);
 		suite.addTestSuite(SelectWireAttributeInference.class);
+		suite.addTestSuite(DomainInstanceSaveOperation.class);
 		
 		return suite;
 	}

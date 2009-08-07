@@ -55,3 +55,17 @@ rule "Refresh SelectWire Instance Object mappings"
 		queue.add(attr, drools);
 
 end
+
+rule "Create 'save' operation for DomainObjectInstances"
+	when
+		instance : DomainObjectInstance ( )
+		
+		not ( Operation( eContainer == instance, name == "save" ))
+		
+	then
+		# create a new one
+		CompositeOperation op = handler.generatedCompositeOperation(instance, instance);
+		op.setName("save");
+		queue.add(op, drools);
+
+end

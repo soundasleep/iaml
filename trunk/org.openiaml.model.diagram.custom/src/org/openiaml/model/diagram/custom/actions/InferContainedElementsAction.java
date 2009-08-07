@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -13,11 +12,10 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
@@ -92,9 +90,10 @@ public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNod
 	 * @author jmwright
 	 *
 	 */
-	public class CreateElementsWithinContainer extends EmfInferenceHandler {
+	public class CreateElementsWithinContainer extends EcoreCreateElementsHelper {
 
 		private EObject container;
+		private ICreateElements parent;
 		
 		/**
 		 * Elements to delete later through {@link #removeUncontainedElements()}
@@ -110,10 +109,8 @@ public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNod
 		 */
 		public CreateElementsWithinContainer(
 				EObject container,
-				TransactionalEditingDomain editingDomain,
-				List<?> affectedFiles, IProgressMonitor monitor,
-				IAdaptable info, Resource resource) {
-			super(editingDomain, affectedFiles, monitor, info, resource);
+				ICreateElements parent) {
+			this.parent = parent;
 			this.container = container;
 		}
 
@@ -163,7 +160,7 @@ public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNod
 				EStructuralFeature containerFeature) throws InferenceException {
 		
 			// get parent to create the element
-			EObject result = super.createElement(container, elementType, containerFeature);
+			EObject result = parent.createElement(container, elementType, containerFeature);
 			
 			if (!isContainedBy(this.container, container)) {
 				// add the element to delete later
@@ -206,9 +203,27 @@ public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNod
 				EStructuralFeature targetFeature) throws InferenceException {
 
 			// TODO Auto-generated method stub
-			return super.createRelationship(container, elementType, source, target,
+			return parent.createRelationship(container, elementType, source, target,
 					containerFeature, sourceFeature, targetFeature);
 			
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.inference.ICreateElements#deleteElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature)
+		 */
+		@Override
+		public void deleteElement(EObject object, EObject container,
+				EStructuralFeature containerFeature) throws InferenceException {
+			parent.deleteElement(object, container, containerFeature);
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.inference.ICreateElements#setValue(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object)
+		 */
+		@Override
+		public void setValue(EObject element, EStructuralFeature reference,
+				Object value) throws InferenceException {
+			parent.setValue(element, reference, value);
 		}		
 		
 	}
@@ -250,11 +265,13 @@ public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNod
 			
 			refreshContainedMappings(root, new CreateElementsWithinContainer(
 					container,
-					part.getEditingDomain(), 
-					new ArrayList<Object>(), /* affected files */
-					new SubProgressMonitor(monitor, 100), 
-					null /* IAdapter == null */,
-					container.eResource()	/* eResource */
+					new EmfInferenceHandler(
+						part.getEditingDomain(), 
+						new ArrayList<Object>(), /* affected files */
+						new SubProgressMonitor(monitor, 100), 
+						null /* IAdapter == null */,
+						container.eResource()	/* eResource */
+					)
 			), monitor);
 				
 			return Status.OK_STATUS;

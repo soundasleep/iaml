@@ -79,8 +79,8 @@ public class OawCodeGenerator implements ICodeGenerator {
 			properties.put("config_web", runtimeProperties.get("config_web"));
 			
 			Map<String,Object> slotContents = new HashMap<String,Object>();
-			new WorkflowRunner().run(wfFile,
-				new ProgressMonitorAdapter(monitor), properties, slotContents);
+			
+			executeWorkflow(wfFile, monitor, properties, slotContents);
 			
 			// refresh output folder
 			try {
@@ -102,6 +102,25 @@ public class OawCodeGenerator implements ICodeGenerator {
 			monitor.done();
 		}
 			
+	}
+	
+	/**
+	 * <p>Execute the workflow in the given workflow file.
+	 * By default, this creates a new {@link WorkflowRunner} and then
+	 * calls {@link WorkflowRunner#run(String, org.openarchitectureware.workflow.monitor.ProgressMonitor, Map, Map)}.
+	 * </p>
+	 * 
+	 * <p>This method is extracted so it can be overridden if necessary.</p>
+	 * 
+	 * @param wfFile
+	 * @param monitor
+	 * @param properties
+	 * @param slotContents
+	 */
+	protected void executeWorkflow(String wfFile, IProgressMonitor monitor, Map<String, String> properties, Map<String, ?> slotContents) {
+		new WorkflowRunner().run(wfFile,
+				new ProgressMonitorAdapter(monitor), properties, slotContents);
+		
 	}
 	
 	/**

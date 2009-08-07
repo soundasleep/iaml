@@ -259,11 +259,23 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		return Status.OK_STATUS;
 				
 	}
-	
+
 	/**
+	 * <p>
 	 * Transform a filename using OpenArchitectureWare. It also forces
 	 * a filesystem refresh of the particular project directory,
 	 * and does not stop until the refresh is complete.
+	 * </p>
+	 * 
+	 * <p>
+	 * Sadly, we cannot refactor out the initialisation of the WorkflowRunner
+	 * in OAW, because the WorkflowRunners are not designed to be run more than 
+	 * once per invoke() method:
+	 * <pre>
+	 * org.openarchitectureware.workflow.ConfigurationException: A default outlet is allready registered!
+	 * at org.openarchitectureware.xpand2.output.OutputImpl.addOutlet(OutputImpl.java:49)
+	 * </pre>
+	 * </p>
 	 * 
 	 * TODO refactor into CodegenTestCase
 	 */
@@ -273,7 +285,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		// create some properties
 		Map<String,String> runtimeProperties = getRuntimeProperties();
 		
-		ICodeGenerator runner = new OawCodeGeneratorWithRuntime();		
+		ICodeGenerator runner = new OawCodeGeneratorWithRuntime();
 		IStatus status = runner.generateCode(filename, monitor, runtimeProperties);
 		
 		if (!status.isOK()) {

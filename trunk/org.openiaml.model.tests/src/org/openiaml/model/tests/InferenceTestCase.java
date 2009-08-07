@@ -146,6 +146,9 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		if (class1.getPackage().getName().contains("model0_3")) {
 			return (InternetApplication) loadModelDirectly(getAbsolutePathRoot() + ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml");
 		}
+		if (class1.getPackage().getName().contains("model0_4")) {
+			return (InternetApplication) loadModelDirectly(getAbsolutePathRoot() + ROOT + "inference/model0_4/" + class1.getSimpleName() + ".iaml");
+		}
 		
 		return (InternetApplication) loadModelDirectly(getAbsolutePathRoot() + ROOT + "inference/" + class1.getSimpleName() + ".iaml");
 	}

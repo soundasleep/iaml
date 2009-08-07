@@ -58,12 +58,16 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertNotNull("Rendering a non-null element", rendering);
 		assertTrue("Rendering an InternetApplication", rendering instanceof InternetApplication);
 		
-		// there should be 0 elements in this editor
-		assertEditorHasChildren(0, editor);
+		// there should be 1 elements in this editor: a generated page (issue 89)
+		assertEditorHasChildren(1, editor);
 		
 		root = (InternetApplication) rendering;
-		// should be empty
-		assertTrue("InternetApplication is empty", root.eContents().isEmpty());
+		assertEquals(1, root.getChildren().size());
+		Page page = (Page) root.getChildren().get(0);
+		assertEquals("Home", page.getName());
+		
+		// should not be empty
+		assertFalse("InternetApplication is not empty", root.eContents().isEmpty());
 	}
 	
 	/**
@@ -91,6 +95,9 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		testCreateBlank();
 		EcoreCreateElementsHelper gmf = getElementCreator();
 
+		// initially just the default page
+		assertEditorHasChildren(1, editor);
+		
 		// create a DomainStore
 		DomainStore ds = gmf.createDomainStore(root);
 		assertNotNull(ds);
@@ -99,8 +106,8 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		Page page = gmf.createPage(root);
 		assertNotNull(page);
 		
-		// there should be two elements in this editor
-		assertEditorHasChildren(2, editor);
+		// there should be three elements in this editor
+		assertEditorHasChildren(3, editor);
 		
 		// add another page
 		Page page2 = gmf.createPage(root);
@@ -110,8 +117,8 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		SyncWire sync = gmf.createSyncWire(root, page, page2);
 		assertNotNull(sync);
 
-		// there should be three elements in this editor
-		assertEditorHasChildren(3, editor);
+		// there should be four elements in this editor
+		assertEditorHasChildren(4, editor);
 	}
 	
 	public void testCreatingSubEditor() throws Exception {
@@ -121,6 +128,9 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		
 		// we should be in the root editor
 		assertEditorRoot(editor);
+		
+		// initially just the initial page
+		assertEditorHasChildren(1, editor);
 
 		// create a Page
 		Page page = gmf.createPage(root);
@@ -131,7 +141,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertEquals("Page name should have changed", page.getName(), "page1");
 		
 		// there should be one element in this editor
-		assertEditorHasChildren(1, editor);
+		assertEditorHasChildren(2, editor);
 		
 		// find the edit part for the page
 		ShapeNodeEditPart pageNode = assertHasPage(editor, "page1");

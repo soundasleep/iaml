@@ -64,7 +64,7 @@ context model::WireEdge ERROR "A WireEdge must have a 'from'" :
 context model::WireEdge ERROR "A WireEdge must have a 'to'" :
 	to != null;
 
-context model::visual::Page WARNING "Sample warning message" :
-	name != "warning";
+context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do anything: consider naming it 'onClick'" :
+	!(from.metaType.isAssignableFrom(model::VisibleThing) && !(name == "click" || name == "onClick"));
 	
 	

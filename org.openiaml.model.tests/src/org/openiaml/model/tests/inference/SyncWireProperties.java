@@ -48,6 +48,7 @@ public class SyncWireProperties extends InferenceTestCase {
 		DomainObject properties = (DomainObject) queryOne(store, "iaml:children[iaml:name='properties']");
 
 		// there should be exactly three fields here (generated)
+		// if there are four fields here, the generated key may have been added as a text field
 		List<?> nodes = query(form, "iaml:children");
 		assertEquals(3, nodes.size());
 		InputTextField f1 = (InputTextField) getNodeWithName(nodes, "fruit");
@@ -66,15 +67,21 @@ public class SyncWireProperties extends InferenceTestCase {
 		assertEquals(wire.getFrom(), form);
 		assertEquals(wire.getTo(), properties);
 
-		// there should be exactly 3 attributes
+		// there should be 4 attributes; one of these will be a primary key
 		List<?> nodes2 = query(properties, "iaml:attributes");
-		assertEquals(3, nodes2.size());
+		assertEquals(4, nodes2.size());
 		DomainAttribute a1 = (DomainAttribute) getNodeWithName(nodes2, "fruit");
 		DomainAttribute a2 = (DomainAttribute) getNodeWithName(nodes2, "animal");
 		DomainAttribute a3 = (DomainAttribute) getNodeWithName(nodes2, "country");
+		DomainAttribute a4 = (DomainAttribute) getNodeWithName(nodes2, "generated primary key");
 		assertEquals(a1.getName(), "fruit");
+		assertFalse(a1.isPrimaryKey());
 		assertEquals(a2.getName(), "animal");
+		assertFalse(a2.isPrimaryKey());
 		assertEquals(a3.getName(), "country");
+		assertFalse(a3.isPrimaryKey());
+		assertEquals(a4.getName(), "generated primary key");
+		assertTrue(a4.isPrimaryKey());
 
 		// there should be sync wires between each of these elements
 		SyncWire sw1 = (SyncWire) getWireFromTo(form, f1, a1);

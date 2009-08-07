@@ -94,7 +94,8 @@ public class NewInstanceWireMapping extends InferenceTestCase {
 		assertEquals("User instance", obj.getName());
 		
 		// the instance should NOT be empty
-		assertEquals(2, obj.getAttributes().size());
+		// but contain three attributes (two plus a generated key)
+		assertEquals(3, obj.getAttributes().size());
 		
 		{
 			DomainAttributeInstance attr = (DomainAttributeInstance) queryOne(obj, "iaml:attributes[iaml:name='username']");
@@ -103,6 +104,10 @@ public class NewInstanceWireMapping extends InferenceTestCase {
 		{
 			DomainAttributeInstance attr = (DomainAttributeInstance) queryOne(obj, "iaml:attributes[iaml:name='email']");
 			assertEquals(attr.getName(), "email");
+		}
+		{
+			DomainAttributeInstance attr = (DomainAttributeInstance) queryOne(obj, "iaml:attributes[iaml:name='generated primary key']");
+			assertEquals(attr.getName(), "generated primary key");
 		}
 		
 	}

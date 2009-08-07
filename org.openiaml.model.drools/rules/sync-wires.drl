@@ -357,7 +357,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Pag
 		queue.add(pw2, drools);		
 end
 
-rule "Refresh New Instance Object mappings when sync connected to Forms: create text fields"
+rule "Refresh New Instance Object mappings (except for generated primary keys) when sync connected to Forms: create text fields"
 	when
 		sync : SyncWire( overridden == false )
 		form : InputForm ( overridden == false )
@@ -365,7 +365,7 @@ rule "Refresh New Instance Object mappings when sync connected to Forms: create 
 		
 		eval(connects(sync, form, instance))
 		
-		attribute : DomainAttributeInstance( eContainer == instance )
+		attribute : DomainAttributeInstance( eContainer == instance, name != "generated primary key" )
 		
 		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
 		
@@ -377,7 +377,7 @@ rule "Refresh New Instance Object mappings when sync connected to Forms: create 
 
 end
 
-rule "Refresh Domain Object mappings when sync connected to Forms: create text fields"
+rule "Refresh Domain Object mappings (except for generated primary keys) when sync connected to Forms: create text fields"
 	when
 		sync : SyncWire( overridden == false )
 		form : InputForm ( overridden == false )
@@ -385,7 +385,7 @@ rule "Refresh Domain Object mappings when sync connected to Forms: create text f
 		
 		eval(connects(sync, form, object))
 		
-		attribute : DomainAttribute( eContainer == object )
+		attribute : DomainAttribute( eContainer == object, name != "generated primary key" )
 		
 		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
 		

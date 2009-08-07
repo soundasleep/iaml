@@ -84,43 +84,51 @@ public class GmfMapTestCase extends XmlTestCase {
 			throws Exception {
 		for (Element node : nodes) {
 			// all nodes must be contained somewher
-			Element containNode = (Element) xpathFirst(node, "containmentFeature");
-			String containment = containNode.getAttribute("href"); 
-				
-			Element oclNode = (Element) hasXpathFirst(node, constraintXpath);
-			String ocl = null;
-			if (oclNode != null) {
-				// all OCL must have a body node
-				ocl = oclNode.getAttribute("body");
-				assertNotNull(filename + ": Null OCL found for element '" + node + "'", ocl);
-				
-				// get rid of whitespace
-				ocl = ocl.replaceAll("\\s", "");
-				
-				// it should not be empty
-				assertFalse("OCL should not be empty", ocl.isEmpty());
-			}
-			
-			if (loadedContainers.containsKey(containment)) {
-				// it already exists
-				// make sure we have ocl
-				assertNotNull(filename + ": Multiple containment found for '" + containment + "', but no OCL found for element '" + node + "'", ocl);
-				
-				// the ocl should not exist in the map already
-				assertFalse(filename + ": OCL '" + ocl + "' already exists for containment '" + containment + "'", loadedContainers.get(containment).contains(ocl));
-				
-				// no existing OCL must be blank (i.e. an empty OCL from a previous containment mapping)
-				assertNotEqual(filename + ": containment '" + containment + "' contains a non-constrained previous containment mapping", loadedContainers.get(containment).size(), 0);
-			} else {
-				// add it
-				List<String> newList = new ArrayList<String>();
-				if (ocl != null) {
-					// add current OCL as a containment
-					newList.add(ocl);
+			try {
+				if (hasXpathFirst(node, "containmentFeature") == null) {
+					// it does not have a containment feature: a phantom node
+					continue;
+				}
+				Element containNode = (Element) xpathFirst(node, "containmentFeature");
+				String containment = containNode.getAttribute("href"); 
+					
+				Element oclNode = (Element) hasXpathFirst(node, constraintXpath);
+				String ocl = null;
+				if (oclNode != null) {
+					// all OCL must have a body node
+					ocl = oclNode.getAttribute("body");
+					assertNotNull(filename + ": Null OCL found for element '" + node + "'", ocl);
+					
+					// get rid of whitespace
+					ocl = ocl.replaceAll("\\s", "");
+					
+					// it should not be empty
+					assertFalse("OCL should not be empty", ocl.isEmpty());
 				}
 				
-				loadedContainers.put(containment, newList);
-				
+				if (loadedContainers.containsKey(containment)) {
+					// it already exists
+					// make sure we have ocl
+					assertNotNull(filename + ": Multiple containment found for '" + containment + "', but no OCL found for element '" + node + "'", ocl);
+					
+					// the ocl should not exist in the map already
+					assertFalse(filename + ": OCL '" + ocl + "' already exists for containment '" + containment + "'", loadedContainers.get(containment).contains(ocl));
+					
+					// no existing OCL must be blank (i.e. an empty OCL from a previous containment mapping)
+					assertNotEqual(filename + ": containment '" + containment + "' contains a non-constrained previous containment mapping", loadedContainers.get(containment).size(), 0);
+				} else {
+					// add it
+					List<String> newList = new ArrayList<String>();
+					if (ocl != null) {
+						// add current OCL as a containment
+						newList.add(ocl);
+					}
+					
+					loadedContainers.put(containment, newList);
+					
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(node + ": " + e.getMessage(), e);
 			}
 		}
 	}
@@ -138,11 +146,15 @@ public class GmfMapTestCase extends XmlTestCase {
 			
 			Document doc = getGmfMaps().get(filename);
 			
-			IterableElementList nodes = xpath(doc, "/Mapping/nodes");
-			iterateOverNodes(filename, nodes, loadedContainers, "ownedChild/domainSpecialization");
-
-			IterableElementList links = xpath(doc, "/Mapping/links");
-			iterateOverNodes(filename, links, loadedContainers, "domainSpecialization");
+			try {
+				IterableElementList nodes = xpath(doc, "/Mapping/nodes");
+				iterateOverNodes(filename, nodes, loadedContainers, "ownedChild/domainSpecialization");
+	
+				IterableElementList links = xpath(doc, "/Mapping/links");
+				iterateOverNodes(filename, links, loadedContainers, "domainSpecialization");
+			} catch (Exception e) {
+				throw new RuntimeException(filename + ": " + e.getMessage(), e);
+			}
 			
 		}
 	}

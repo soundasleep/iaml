@@ -45,10 +45,17 @@ public class DefaultXpathTestCase extends TestCase implements XpathTestCase {
 	
 	/**
 	 * Get the first node result from an XPath query.
+	 * Does not throw an error if more than one result is found; see
+	 * {@link #hasXpathFirst(Element, String)}.
+	 * 
+	 * @throws RuntimeException if no results are found
 	 */
 	public Element xpathFirst(Element e, String query) throws XPathExpressionException {
 		assertNotNull("Cannot find the xpath for a null element", e);
-		Element e2 = (Element) xpath(e, query).item(0);
+		IterableElementList result = xpath(e, query);
+		if (result.isEmpty())
+			throw new RuntimeException("No results found for query '" + query + "' on element '" + e + "'");
+		Element e2 = (Element) result.item(0);
 		assertNotNull("Could not find result for query '" + query + "'", e2);
 		return e2;
 	}

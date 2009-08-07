@@ -116,38 +116,44 @@
                path="additions"
                label="&amp;IAML Tools">
             <separator
-                  name="group1">
+                  name="group">
             </separator>
          </menu>
 
 		<!-- more than one popup extension is displayed in reverse order:
 		     a documented bug of eclipse -->
          <action
-               class="org.openiaml.model.diagram.custom.actions.InferEntireModelAction"
+               class="org.openiaml.model.diagram.custom.actions.RemovePhantomEdgesAction"
                id="org.openiaml.model.diagram.custom.action4"
-               label="Infer all elements in-place"
-               menubarPath="org.openiaml.model.diagram.custom.menu1">
+               label="&amp;Infer all elements in-place"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
          </action>
 
          <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeActionAndView"
                id="org.openiaml.model.diagram.custom.action2"
-               label="Generate code and load in browser"
-               menubarPath="org.openiaml.model.diagram.custom.menu1">
+               label="Generate code and load in &amp;browser"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
          </action>
 
          <action
                class="org.openiaml.model.diagram.custom.actions.GenerateCodeAction"
                id="org.openiaml.model.diagram.custom.action1"
-               label="Generate code"
-               menubarPath="org.openiaml.model.diagram.custom.menu1">
+               label="&amp;Generate code"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+         <action
+               class="org.openiaml.model.diagram.custom.actions.MigrateModelAction"
+               id="org.openiaml.model.diagram.custom.action5"
+               label="&amp;Remove phantom edges"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
          </action>
 
          <action
                class="org.openiaml.model.diagram.custom.actions.MigrateModelAction"
                id="org.openiaml.model.diagram.custom.action3"
-               label="Migrate model to latest version"
-               menubarPath="org.openiaml.model.diagram.custom.menu1">
+               label="&amp;Migrate model to latest version"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
          </action>
 
       </objectContribution>                    
@@ -163,7 +169,7 @@
                path="additions"
                label="&amp;IAML Diagram Tools">
             <separator
-                  name="group1">
+                  name="group">
             </separator>
          </menu>
 
@@ -173,8 +179,8 @@
          <action
                class="org.openiaml.model.diagram.custom.actions.ExportImagePartsAction"
                id="org.openiaml.model.diagram.custom.menu2.action1"
-               label="Export all diagram parts to PNG images"
-               menubarPath="org.openiaml.model.diagram.custom.menu2">
+               label="&amp;Export all diagram parts to PNG images"
+               menubarPath="org.openiaml.model.diagram.custom.menu2/group">
          </action>
 
       </objectContribution>
@@ -211,7 +217,7 @@
                class="org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools"
                enablesFor="1"
                id="org.openiaml.model.diagram.custom.actions.refresh"
-               label="&amp;Refresh all DomainStore Mappings"
+               label="Refresh all &amp;DomainStore Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart">
 			 </selection>
@@ -221,7 +227,7 @@
                class="org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools"
                enablesFor="1"
                id="org.openiaml.model.diagram.custom.actions.refresh"
-               label="&amp;Refresh all DomainObjectInstance Mappings"
+               label="Refresh all Domain&amp;ObjectInstance Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart">
 			 </selection>
@@ -231,7 +237,7 @@
                class="org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools"
                enablesFor="1"
                id="org.openiaml.model.diagram.custom.actions.refresh"
-               label="&amp;Refresh all Form Mappings"
+               label="Refresh all &amp;Form Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.visual.edit.parts.InputFormEditPart">
 			 </selection>

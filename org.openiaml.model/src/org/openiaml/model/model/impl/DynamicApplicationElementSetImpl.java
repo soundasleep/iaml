@@ -105,7 +105,6 @@ public class DynamicApplicationElementSetImpl extends ApplicationElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

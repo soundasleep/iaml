@@ -26,6 +26,8 @@ $trace = require_get("trace", "No trace specified");
 </head>
 		
 <body>
+	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
+	
 	<div class="exception">
 		An exception occured:
 		<span><?php echo htmlspecialchars($fail); ?>

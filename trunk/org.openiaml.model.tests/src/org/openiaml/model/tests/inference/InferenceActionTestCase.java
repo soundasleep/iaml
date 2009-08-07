@@ -3,19 +3,13 @@
  */
 package org.openiaml.model.tests.inference;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.jaxen.JaxenException;
-import org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools;
-import org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools;
-import org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools;
 import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
-import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.InferenceTestCase;
-import org.openiaml.model.tests.inference.model0_3.InputFormInstanceMapping;
 
 /**
  * An abstract test case to simpify checking inference actions which
@@ -71,14 +65,26 @@ public abstract class InferenceActionTestCase extends InferenceTestCase {
 	 * @throws JaxenException
 	 */
 	public void testActionInference() throws Exception {
-		root = loadDirectly(getTestClass());
-		UpdateWithDroolsAction action = getAction();
-		
-		action.refreshMappings(root, createHandler(), new NullProgressMonitor());
+		root = loadDirectly(getTestClass());		
+		for (UpdateWithDroolsAction action : getActionList()) {
+			action.refreshMappings(root, createHandler(), new NullProgressMonitor());
+		}
 		
 		checkInferredKnowledge();
 	}
 	
+	/**
+	 * Get a list of actions to execute in order. By default, only
+	 * returns {@link #getAction()}.
+	 * 
+	 * @return
+	 */
+	protected List<UpdateWithDroolsAction> getActionList() {
+		List<UpdateWithDroolsAction> result = new ArrayList<UpdateWithDroolsAction>();
+		result.add(getAction());
+		return result;
+	}
+
 	/**
 	 * The custom action to test against.
 	 * 

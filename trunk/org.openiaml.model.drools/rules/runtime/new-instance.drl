@@ -20,11 +20,29 @@ global EcoreCreateElementsHelper handler;
 import org.openiaml.model.drools.*;
 global DroolsInsertionQueue queue;
 
-rule "Refresh New Instance Object mappings"
+rule "Refresh NewInstanceWire Instance Object mappings"
 	when
 		object : DomainObject ( )
 		instance : DomainObjectInstance ( )
 		wire : NewInstanceWire( overridden == false, from == object, to == instance )
+
+		attribute : DomainAttribute ( eContainer == object )
+		
+		not ( DomainAttributeInstance( eContainer == instance, name == attribute.name ))
+		
+	then
+		# create a new one
+		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(wire, instance);
+		handler.setName(attr, attribute.getName());
+		queue.add(attr, drools);
+
+end
+
+rule "Refresh SelectWire Instance Object mappings"
+	when
+		object : DomainObject ( )
+		instance : DomainObjectInstance ( )
+		wire : SelectWire( overridden == false, from == object, to == instance )
 
 		attribute : DomainAttribute ( eContainer == object )
 		

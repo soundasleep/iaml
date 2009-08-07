@@ -8,6 +8,7 @@ import java.util.List;
 import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
@@ -85,6 +86,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	
 	public void assertNotExists(IFile file) {
 		assertFalse("File '" + file + "' should not exist", file.exists());
+	}
+	
+	public void assertExists(IFolder folder) {
+		assertTrue("Folder '" + folder + "' should exist", folder.exists());
+	}
+	
+	public void assertNotExists(IFolder folder) {
+		assertFalse("Folder '" + folder + "' should not exist", folder.exists());
 	}
 	
 	/**
@@ -415,7 +424,6 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
 				if (element instanceof DataFlowEdge) {
-					DataFlowEdge w = (DataFlowEdge) element;
 					if (connection.getSource().equals(source) && 
 							connection.getTarget().equals(target))
 						return connection;	// found it

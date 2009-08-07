@@ -113,35 +113,6 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 	}
 
 	/**
-	 * Assert that the IStatus is ok.
-	 * 
-	 * @param status
-	 * @throws Exception if there was a Throwable in the IStatus
-	 */
-	protected void assertStatusOK(IStatus status) throws Exception {
-		if (!status.isOK()) {
-			if (status.getException() != null) {
-				// rethrow
-				throw new RuntimeException(status.getMessage(), status.getException());
-			}
-			
-			if (status.isMultiStatus()) {
-				// build up the message to alert the developer
-				MultiStatus ms = (MultiStatus) status;
-				StringBuffer msg = new StringBuffer();
-				msg.append("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
-				for (IStatus s : ms.getChildren()) {
-					msg.append("\n").append(s.getMessage());
-				}
-				fail(msg.toString());
-			}
-			
-			// default fail
-			fail("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
-		}
-	}
-
-	/**
 	 * @return getModel() + "_diagram"
 	 */
 	public String getDiagram() {

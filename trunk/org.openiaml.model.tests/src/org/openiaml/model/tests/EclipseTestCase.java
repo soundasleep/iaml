@@ -12,6 +12,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -182,5 +184,36 @@ public abstract class EclipseTestCase extends ModelTestCase {
 		return ep;
 
 	}
+	
+
+	/**
+	 * Assert that the IStatus is ok.
+	 * 
+	 * @param status
+	 * @throws Exception if there was a Throwable in the IStatus
+	 */
+	protected void assertStatusOK(IStatus status) throws Exception {
+		if (!status.isOK()) {
+			if (status.getException() != null) {
+				// rethrow
+				throw new RuntimeException(status.getMessage(), status.getException());
+			}
+			
+			if (status.isMultiStatus()) {
+				// build up the message to alert the developer
+				MultiStatus ms = (MultiStatus) status;
+				StringBuffer msg = new StringBuffer();
+				msg.append("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
+				for (IStatus s : ms.getChildren()) {
+					msg.append("\n").append(s.getMessage());
+				}
+				fail(msg.toString());
+			}
+			
+			// default fail
+			fail("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
+		}
+	}
+
 	
 }

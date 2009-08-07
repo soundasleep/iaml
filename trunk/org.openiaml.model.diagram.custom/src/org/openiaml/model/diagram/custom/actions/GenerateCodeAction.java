@@ -35,6 +35,8 @@ import org.openiaml.model.inference.InferenceException;
  *
  */
 public class GenerateCodeAction extends IamlFileAction {
+	
+	private EObject model;
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#execute(java.lang.Object, org.eclipse.core.runtime.IProgressMonitor)
@@ -56,7 +58,7 @@ public class GenerateCodeAction extends IamlFileAction {
 		}
 		
 		// do inference on the model
-		EObject model = resource.getContents().get(0);
+		model = resource.getContents().get(0);
 		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
 		ce.create(model, new SubProgressMonitor(monitor, 45));
 		
@@ -163,6 +165,14 @@ public class GenerateCodeAction extends IamlFileAction {
 	@Override
 	public String getProgressMessage() {
 		return "Generating code";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.IamlFileAction#getLoadedModel()
+	 */
+	@Override
+	protected EObject getLoadedModel() {
+		return model;
 	}
 
 }

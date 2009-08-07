@@ -1,9 +1,9 @@
 package org.openiaml.model.tests.eclipse.migration;
 
-import org.openiaml.model.tests.eclipse.migration.model0_3.Migrate0_3TestSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.openiaml.model.tests.eclipse.migration.model0_3.Migrate0_3TestSuite;
 
 /**
  * All tests for the Migration functionality.

@@ -37,6 +37,8 @@ import org.openiaml.model.inference.InferenceException;
  */
 public class InferEntireModelAction extends IamlFileAction {
 
+	private EObject model;
+	
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
@@ -89,7 +91,7 @@ public class InferEntireModelAction extends IamlFileAction {
 		}
 		
 		// do inference on the model
-		EObject model = resource.getContents().get(0);
+		model = resource.getContents().get(0);
 		DroolsInferenceEngine ce = getEngine(handler);
 		ce.create(model, new SubProgressMonitor(monitor, 45));
 		
@@ -131,6 +133,14 @@ public class InferEntireModelAction extends IamlFileAction {
 		monitor.done();
 		
 		return Status.OK_STATUS;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.IamlFileAction#getLoadedModel()
+	 */
+	@Override
+	protected EObject getLoadedModel() {
+		return model;
 	}
 
 }

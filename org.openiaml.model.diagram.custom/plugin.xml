@@ -204,7 +204,7 @@
       <objectContribution
             adaptable="false"
             id="org.openiaml.model.diagram.custom.commands.iaml.refresh.menu"
-            objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart">
+            objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart">
          <menu 
             id="ModelActions" 
             label="&amp;IAML Model" 
@@ -252,6 +252,16 @@
 			 <selection class="org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart">
 			 </selection>
          </action>
+         <enablement>
+            <or>
+               <objectClass
+                     name="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               </objectClass>
+               <objectClass
+                     name="org.eclipse.gmf.runtime.diagram.ui.editparts.TopGraphicEditPart">
+               </objectClass>
+            </or>
+         </enablement>
          
       </objectContribution>                    
 	</extension>

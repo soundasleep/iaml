@@ -11,7 +11,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
@@ -30,13 +30,13 @@ import org.openiaml.model.model.wires.SyncWire;
  * @author jmwright
  *
  */
-public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<ShapeNodeEditPart> {
+public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<GraphicalEditPart> {
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public String getErrorMessage(ShapeNodeEditPart individual, String message) {
+	public String getErrorMessage(GraphicalEditPart individual, String message) {
 		return "Could not update " + getTitle() + " with Drools for '" + individual + "': " + message;
 	}
 
@@ -52,13 +52,13 @@ public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<Shape
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
 	 */
 	@Override
-	public List<ShapeNodeEditPart> getSelection(Object[] selection) {
-		final List<ShapeNodeEditPart> ifiles = new ArrayList<ShapeNodeEditPart>();
+	public List<GraphicalEditPart> getSelection(Object[] selection) {
+		final List<GraphicalEditPart> ifiles = new ArrayList<GraphicalEditPart>();
 		
 		if (selection != null) {
 			for (Object o : selection) {
-				if (o instanceof ShapeNodeEditPart) {
-					ifiles.add((ShapeNodeEditPart) o);
+				if (o instanceof GraphicalEditPart) {
+					ifiles.add((GraphicalEditPart) o);
 				}
 			}
 		}
@@ -74,7 +74,7 @@ public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<Shape
 	 * @see #getExpectedEObjectClass()
 	 * @return An edit part type class
 	 */
-	public abstract Class<? extends ShapeNodeEditPart> getEditPartClass();
+	public abstract Class<? extends GraphicalEditPart> getEditPartClass();
 
 	/**
 	 * What type do we expect the selected EditPart's EObject will resolve to?
@@ -137,7 +137,7 @@ public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<Shape
 	 * @param monitor 
 	 * @return 
 	 */
-	public IStatus execute(ShapeNodeEditPart part, IProgressMonitor monitor) {
+	public IStatus execute(GraphicalEditPart part, IProgressMonitor monitor) {
 		try {
 			monitor.beginTask("Refreshing " + getTitle() + " mappings", 100);
 			

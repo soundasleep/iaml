@@ -1,0 +1,10 @@
+/**
+ * Issue 92: Extension to make NodeLabel text edit parts accessible, i.e.
+ * implement IAccessibleTextAwareEditPart.
+ */
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«AROUND implementsList FOR gmfgen::GenLinkLabel»
+	«targetDef.proceed()»,
+	org.openiaml.model.diagramextensions.IAccessibleTextAwareEditPart
+«ENDAROUND»

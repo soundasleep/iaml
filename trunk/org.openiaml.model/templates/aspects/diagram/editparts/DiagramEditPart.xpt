@@ -1,10 +1,7 @@
 /**
- * Add a isGenerated "/derived" property to all GeneratedElements that
- * are generated.
+ * Add support for breadcrumbs.
  */
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
-«EXTENSION xpt::diagram::ViewmapAttributesUtils»
+Â«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'Â»
 
 /**
  * We have to redefine the entire command, because there are no
@@ -12,8 +9,10 @@
  *
  * NOTE: [IF shouldGenerateDiagramViewmap()] was deleted
  */
-«AROUND createFigure FOR gmfgen::GenDiagram-»
-	«EXPAND xpt::Common::generatedMemberComment»
+Â«AROUND additions FOR gmfgen::GenDiagram-Â»
+	Â«targetDef.proceed()Â»
+
+	Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 	protected org.eclipse.draw2d.IFigure createFigure() {
 		org.eclipse.draw2d.IFigure fig = super.createFigure();
 		
@@ -26,7 +25,7 @@
 
 		fig.addLayoutListener(new org.eclipse.draw2d.LayoutListener.Stub() {
 
-			«EXPAND xpt::Common::generatedMemberComment»
+			Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 			@Override
 			public void invalidate(org.eclipse.draw2d.IFigure container) {
 				String text = getBreadcrumb();
@@ -37,7 +36,7 @@
 				}
 			}
 
-			«EXPAND xpt::Common::generatedMemberComment»
+			Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 			@Override
 			public void postLayout(org.eclipse.draw2d.IFigure container) {
 				String text = getBreadcrumb();
@@ -53,14 +52,14 @@
 		return fig;	
 	}
 
-	«EXPAND xpt::Common::generatedMemberComment»
+	Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 	static final org.eclipse.swt.graphics.Font BREADCRUMB_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), "Arial", 9,
 			org.eclipse.swt.SWT.NORMAL);
 
-	«EXPAND xpt::Common::generatedMemberComment»
+	Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 	public String getBreadcrumb() {
 		org.eclipse.emf.ecore.EObject target = ((org.eclipse.gmf.runtime.notation.Diagram) getModel()).getElement();
 		return org.openiaml.model.diagramextensions.IamlBreadcrumb.breadcrumb(target, 3);
 	}
 	
-«ENDAROUND»
+Â«ENDAROUNDÂ»

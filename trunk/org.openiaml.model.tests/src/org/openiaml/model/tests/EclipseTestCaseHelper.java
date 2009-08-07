@@ -553,7 +553,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * Assert the given editor is from the condition plugin.
 	 */
 	public void assertEditorCondition(IEditorPart editor) {
-		assertEquals("active editor is the condition plugin", 
+		assertEquals("active editor is the condition plugin",
 				"org.openiaml.model.model.diagram.condition.part.IamlDiagramEditor", 
 				editor.getClass().getName());
 	}

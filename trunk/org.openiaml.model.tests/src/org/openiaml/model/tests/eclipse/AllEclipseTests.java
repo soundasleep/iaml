@@ -30,6 +30,7 @@ public class AllEclipseTests {
         suite.addTestSuite(BreadcrumbTestCase.class);
         suite.addTestSuite(CreateNewDiagramTestCase.class);
         suite.addTestSuite(ParentNameTestCase.class);
+        suite.addTestSuite(DerivedPropertyMarker.class);
 		//$JUnit-END$
         
         // add the shortcut tests

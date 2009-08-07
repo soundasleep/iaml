@@ -1,5 +1,8 @@
 package org.openiaml.model.tests.codegen;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 import org.openiaml.model.tests.codegen.model0_1.LoginHandlerKey;
 import org.openiaml.model.tests.codegen.model0_1.SimpleTestCase;
 import org.openiaml.model.tests.codegen.model0_1.SyncFieldApplicationElementProperty;
@@ -10,9 +13,6 @@ import org.openiaml.model.tests.codegen.model0_1.SyncWiresMultiple;
 import org.openiaml.model.tests.codegen.model0_1.SyncWiresPagesTestCase;
 import org.openiaml.model.tests.codegen.model0_1.SyncWiresProperties;
 import org.openiaml.model.tests.codegen.model0_1.SyncWiresTestCase;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Code generation tests: model version 0.1

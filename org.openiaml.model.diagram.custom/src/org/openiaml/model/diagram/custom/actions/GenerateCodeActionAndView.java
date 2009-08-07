@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.browser.IWebBrowser;
 import org.openiaml.model.model.InternetApplication;
 
 /**
@@ -22,6 +23,8 @@ import org.openiaml.model.model.InternetApplication;
  *
  */
 public class GenerateCodeActionAndView extends GenerateCodeAction implements IViewActionDelegate {
+	
+	private IWebBrowser createdBrowser = null;
 	
 	/**
 	 * Extends {@link GenerateCodeAction} to also open a new
@@ -49,17 +52,24 @@ public class GenerateCodeActionAndView extends GenerateCodeAction implements IVi
 					urlAsUrl = new URL(url);
 
 					// load this url + sitemap.html
-					PlatformUI.getWorkbench().getBrowserSupport().createBrowser(PLUGIN_ID).openURL(urlAsUrl); 
+					createdBrowser = PlatformUI.getWorkbench().getBrowserSupport().createBrowser(PLUGIN_ID);
+					createdBrowser.openURL(urlAsUrl); 
 				} catch (MalformedURLException e) {
 					return new Status(IStatus.WARNING, PLUGIN_ID, "Runtime url '" + url + "' is not a valid URL.", e);
 				} catch (PartInitException e) {
 					return new Status(IStatus.ERROR, PLUGIN_ID, "Part init exception", e);
 				}
 				
+			} else {
+				return errorStatus("Result was OK, but model was not set");
 			}
 		}
 		
 		return result;
+	}
+
+	public IWebBrowser getCreatedBrowser() {
+		return createdBrowser;
 	}
 
 }

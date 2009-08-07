@@ -21,15 +21,11 @@ import org.openiaml.model.inference.InferenceException;
  */
 public abstract class IamlFileAction extends ProgressEnabledAction<IFile> {
 
-	private EObject model;
-
 	/**
 	 * @return For {@link GenerateCodeActionAndView}, we need to get the
 	 * loaded model.
 	 */
-	protected EObject getLoadedModel() {
-		return model;
-	}
+	protected abstract EObject getLoadedModel();
 	
 	/**
 	 * Execute the action. The IFile extension is guaranteed to
@@ -51,7 +47,7 @@ public abstract class IamlFileAction extends ProgressEnabledAction<IFile> {
 	public IStatus execute(IFile o, IProgressMonitor monitor) {
 		try {
 			if (o.getFileExtension().equals("iaml")) {
-				return doExecute(o, monitor);
+				return doExecute(o, monitor);				
 			} else {
 				return new Status(IStatus.ERROR, PLUGIN_ID, "File '" + o.getName() + "' does not have an .iaml extension.");
 			}

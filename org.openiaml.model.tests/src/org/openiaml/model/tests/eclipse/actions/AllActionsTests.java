@@ -24,6 +24,8 @@ public class AllActionsTests {
         suite.addTestSuite(FormDomainObjectMapping.class);
         suite.addTestSuite(DeleteGeneratedElements.class);
         suite.addTestSuite(NonContainedEdges.class);
+        suite.addTestSuite(RemovePhantomEdges.class);
+        suite.addTestSuite(GenerateCodeActionTest.class);
 
         return suite; 
    }

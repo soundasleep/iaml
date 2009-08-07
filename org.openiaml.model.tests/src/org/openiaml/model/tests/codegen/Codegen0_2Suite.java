@@ -1,5 +1,8 @@
 package org.openiaml.model.tests.codegen;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 import org.openiaml.model.tests.codegen.model0_2.ConditionWireFalse;
 import org.openiaml.model.tests.codegen.model0_2.ConditionWireFalseServer;
 import org.openiaml.model.tests.codegen.model0_2.ReloadPage;
@@ -9,9 +12,6 @@ import org.openiaml.model.tests.codegen.model0_2.Requirement3DynamicParams;
 import org.openiaml.model.tests.codegen.model0_2.Requirement4DynamicSources;
 import org.openiaml.model.tests.codegen.model0_2.Requirement5Operations;
 import org.openiaml.model.tests.codegen.model0_2.Requirement6Conditions;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Code generation tests: model version 0.2

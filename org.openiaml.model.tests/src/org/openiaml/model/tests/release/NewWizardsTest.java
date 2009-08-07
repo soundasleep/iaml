@@ -4,19 +4,10 @@
 package org.openiaml.model.tests.release;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.xml.xpath.XPathExpressionException;
 
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 /**
  * Checks all plugins to make sure that only the root diagram

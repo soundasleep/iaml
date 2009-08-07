@@ -3,6 +3,8 @@ package org.openiaml.model.tests.codegen.runtime.client;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.openiaml.model.tests.codegen.runtime.server.AllServerRuntimeTests;
+
 /**
  * All tests for the runtime library (client-side)
  * 

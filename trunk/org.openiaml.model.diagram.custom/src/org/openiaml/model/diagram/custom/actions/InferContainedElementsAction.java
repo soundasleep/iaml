@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
@@ -34,13 +34,13 @@ import org.openiaml.model.inference.InferenceException;
  * 
  * @author jmwright
  */
-public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNodeEditPart> {
+public class InferContainedElementsAction extends ProgressEnabledAction<GraphicalEditPart> {
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public String getErrorMessage(ShapeNodeEditPart individual, String message) {
+	public String getErrorMessage(GraphicalEditPart individual, String message) {
 		return "Could not infer contained elements for '" + individual + "': " + message;
 	}
 
@@ -56,13 +56,13 @@ public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNod
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
 	 */
 	@Override
-	public List<ShapeNodeEditPart> getSelection(Object[] selection) {
-		final List<ShapeNodeEditPart> ifiles = new ArrayList<ShapeNodeEditPart>();
+	public List<GraphicalEditPart> getSelection(Object[] selection) {
+		final List<GraphicalEditPart> ifiles = new ArrayList<GraphicalEditPart>();
 		
 		if (selection != null) {
 			for (Object o : selection) {
-				if (o instanceof ShapeNodeEditPart) {
-					ifiles.add((ShapeNodeEditPart) o);
+				if (o instanceof GraphicalEditPart) {
+					ifiles.add((GraphicalEditPart) o);
 				}
 			}
 		}
@@ -256,10 +256,10 @@ public class InferContainedElementsAction extends ProgressEnabledAction<ShapeNod
 	 * @param monitor 
 	 * @return 
 	 */
-	public IStatus execute(ShapeNodeEditPart part, IProgressMonitor monitor) {
+	public IStatus execute(GraphicalEditPart part, IProgressMonitor monitor) {
 		try {
 			EObject container = part.resolveSemanticElement();
-			
+
 			// select the actual target (the absolute root)
 			EObject root = getRoot(container);
 			

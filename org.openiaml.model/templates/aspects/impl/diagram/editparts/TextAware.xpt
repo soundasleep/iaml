@@ -6,17 +6,16 @@
  * From http://dev.eclipse.org/newslists/news.eclipse.modeling.gmf/msg16145.html
  *
  */
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
-«EXTENSION xpt::diagram::ViewmapAttributesUtils»
+Â«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'Â»
+Â«EXTENSION xpt::diagram::ViewmapAttributesUtilsÂ»
 
 /**
  * We have to redefine the entire command, because there are no
  * extension points which we can use.
  */
-«AROUND getLabelText FOR gmfgen::GenCommonBase-»
-	«EXPAND xpt::Common::generatedMemberComment»
-	protected String getLabelText() {
+Â«AROUND getLabelText FOR gmfgen::GenCommonBase-Â»
+	Â«EXPAND xpt::Common::generatedMemberComment("Add a /derived property to generated elements. Method is made public to allow for accessible testing.")Â»
+	public String getLabelText() {
 		String text = null;
 		org.eclipse.emf.ecore.EObject parserElement = getParserElement();
 		if (parserElement != null && getParser() != null) {
@@ -37,10 +36,10 @@
 		
 		return text;
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND setFontColor FOR gmfgen::GenCommonBase-»
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: Disable refreshing the font color.")»
+Â«AROUND setFontColor FOR gmfgen::GenCommonBase-Â»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: Disable refreshing the font color.")Â»
 	protected void setFontColor(org.eclipse.swt.graphics.Color color) {
 		// some weird logic: if we can edit this field, then
 		// we should be able to change its color. (makes some sense?)
@@ -48,5 +47,5 @@
 		if (isEditable())
 			getFigure().setForegroundColor(color);
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 

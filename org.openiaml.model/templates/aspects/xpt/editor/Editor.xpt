@@ -9,30 +9,25 @@
  * ALSO: Add a confirmation when deleting generated elements connected
  * to non-generated elements [issue 29]
  */
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»
-«IMPORT "http://www.eclipse.org/emf/2002/GenModel"»
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
-«EXTENSION xpt::editor::Utils»
+Â«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'Â»
+Â«EXTENSION xpt::editor::UtilsÂ»
 
-/**
- * Add our extensions in the "constructor" (additions isn't actually in the class definition)
- */
-«AROUND constructor FOR gmfgen::GenEditorView-»
-	«targetDef.proceed()»
+Â«AROUND additions FOR gmfgen::GenEditorView-Â»
+	Â«targetDef.proceed()Â»
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: When we save the model, we automatically revalidate the model.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: When we save the model, we automatically revalidate the model.")Â»
 	public void doSave(org.eclipse.core.runtime.IProgressMonitor progressMonitor) {
 		super.doSave(progressMonitor);
 		
 		// once saved, force validation
-		«REM»
+		Â«REMÂ»
 			should be defaultValidateActionClassName(), not 'ValidateAction' literal,
 			but I don't know how to get from a GenEditorView to a GenDiagram
-		«ENDREM»
-		«editorGen.editor.packageName».ValidateAction.runValidation(this.getDiagramEditPart(), this.getDiagram());
+		Â«ENDREMÂ»
+		Â«editorGen.editor.packageNameÂ».ValidateAction.runValidation(this.getDiagramEditPart(), this.getDiagram());
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: Add a method to close the current editor window, but block until it is complete.\n\nNot intended to be used except during testing.\n\n@see #close(boolean)")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: Add a method to close the current editor window, but block until it is complete.\n\nNot intended to be used except during testing.\n\n@see #close(boolean)")Â»
 	public void closeBlocking(final boolean save) {
 		enableSanityChecking(false);
 
@@ -40,29 +35,29 @@
 		display.syncExec(new java.lang.Runnable() {
 			public void run() {
 				if (getGraphicalViewer() != null)
-					getSite().getPage().closeEditor(«className».this, save);
+					getSite().getPage().closeEditor(Â«classNameÂ».this, save);
 			}
 		});
 	}
 	
-	«REM»
+	Â«REMÂ»
 	-- issue 29 --
-	«ENDREM»
+	Â«ENDREMÂ»
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Add a command to ask for confirmation of generated element deletion, when those elements are connected to non-generated elements.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Add a command to ask for confirmation of generated element deletion, when those elements are connected to non-generated elements.")Â»
 	@SuppressWarnings("restriction")
 	public class MyDeleteAction extends org.eclipse.gmf.runtime.diagram.ui.internal.actions.PromptingDeleteAction 
 			implements org.eclipse.ui.ISelectionListener {
 
-		«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Selected elements.")»
+		Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Selected elements.")Â»
 		private Object[] selected;
 
-		«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29]")»
+		Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29]")Â»
 		public MyDeleteAction(org.eclipse.ui.IWorkbenchPart part) {
 			super(part);
 		}
 
-		«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Check to see if we need to ask for a confirmation; if so, ask for it, and cancel if the user cancels.")»
+		Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Check to see if we need to ask for a confirmation; if so, ask for it, and cancel if the user cancels.")Â»
 		@Override
 		public void run() {
 			// do we need to confirm?
@@ -93,7 +88,7 @@
 			super.run();
 		}
 
-		«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] We want to keep track of what elements are deleted, so we can work out which elements need confirmation.\n\n@see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)")»
+		Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] We want to keep track of what elements are deleted, so we can work out which elements need confirmation.\n\n@see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)")Â»
 		@Override
 		public void selectionChanged(org.eclipse.ui.IWorkbenchPart part, org.eclipse.jface.viewers.ISelection selection) {
 			if (selection instanceof org.eclipse.jface.viewers.StructuredSelection) {
@@ -103,10 +98,10 @@
 	
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("")»
+	Â«EXPAND xpt::Common::generatedMemberComment("")Â»
 	private org.eclipse.gef.KeyHandler myKeyHandler = null;
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Add a command to ask for confirmation of generated element deletion, when those elements are connected to non-generated elements.")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 29] Add a command to ask for confirmation of generated element deletion, when those elements are connected to non-generated elements.")Â»
 	@Override
 	protected org.eclipse.gef.KeyHandler getKeyHandler() {
 		if (myKeyHandler == null) {
@@ -126,4 +121,4 @@
 		}
 		return myKeyHandler;
 	}
-«ENDAROUND»
+Â«ENDAROUNDÂ»

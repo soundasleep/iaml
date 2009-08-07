@@ -141,7 +141,9 @@ public class InputFormInstanceMapping extends InferenceTestCase {
 		assertEquals(3, page.getChildren().size());
 		DomainObjectInstance obj = (DomainObjectInstance) queryOne(page, "iaml:children[iaml:name='User instance']");
 		assertEquals("User instance", obj.getName());
-		assertEquals(2, obj.getAttributes().size());
+		
+		// two attributes + generated primary key
+		assertEquals(3, obj.getAttributes().size());
 		
 		// get the domain attribute instances
 		DomainAttributeInstance username = (DomainAttributeInstance) queryOne(obj, "iaml:attributes[iaml:name='username']");

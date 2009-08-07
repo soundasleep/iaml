@@ -81,7 +81,9 @@ public class PropertiesFileMapping extends InferenceTestCase {
 		assertEquals(0, ds.getEventTriggers().size());
 		
 		DomainObject dobj = (DomainObject) queryOne(ds, "iaml:children[iaml:name='properties']");
-		assertEquals(3, dobj.getAttributes().size());	// three attributes
+		System.out.println(dobj);
+		System.out.println(dobj.getAttributes());
+		assertEquals(4, dobj.getAttributes().size());	// four attributes (one is a generated primary key)
 		assertEquals(0, dobj.getOperations().size());
 		assertEquals(0, dobj.getEventTriggers().size());
 		
@@ -96,6 +98,11 @@ public class PropertiesFileMapping extends InferenceTestCase {
 		{
 			DomainAttribute attribute = (DomainAttribute) queryOne(dobj, "iaml:attributes[iaml:name='empty']");
 			assertEquals(attribute.getName(), "empty");
+		}
+		{
+			DomainAttribute attribute = (DomainAttribute) queryOne(dobj, "iaml:attributes[iaml:name='generated primary key']");
+			assertEquals(attribute.getName(), "generated primary key");
+			assertTrue(attribute.isPrimaryKey());
 		}
 		
 	}

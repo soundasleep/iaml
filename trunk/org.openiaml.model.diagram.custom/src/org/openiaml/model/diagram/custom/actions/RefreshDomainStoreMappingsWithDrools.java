@@ -90,6 +90,7 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 		}
 
 		private List<String> ruleFiles = Arrays.asList(
+				"/rules/runtime/domain.drl",
 				"/rules/runtime/file-domain-object.drl"
 			);
 		

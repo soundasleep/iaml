@@ -3,15 +3,13 @@
  */
 package org.openiaml.model.tests.inference.model0_3;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.jaxen.JaxenException;
 import org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools;
 import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.InferenceTestCase;
+import org.openiaml.model.tests.inference.InferenceActionTestCase;
 
 /**
  * Tests automatic mapping of DomainStores when connected to
@@ -20,59 +18,31 @@ import org.openiaml.model.tests.InferenceTestCase;
  * @author jmwright
  *
  */
-public class PropertiesFileMapping extends InferenceTestCase {
+public class PropertiesFileMapping extends InferenceActionTestCase {
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Override
+	protected Class<? extends InferenceTestCase> getTestClass() {
+		return PropertiesFileMapping.class;
 	}
-	
-	/**
-	 * Make sure the model is loaded properly.
-	 * @throws Exception
-	 */
-	public void testInitial() throws Exception {
-		root = loadDirectly(PropertiesFileMapping.class);
+
+	@Override
+	public UpdateWithDroolsAction getAction() {
+		return new RefreshDomainStoreMappingsWithDrools();
+	}
+
+	@Override
+	protected void initialTests() throws Exception {
 		
 		DomainStore ds = (DomainStore) queryOne(root, "iaml:domainStores[iaml:name='my domain store']");
 		assertEquals(0, ds.getChildren().size());
 		assertEquals(0, ds.getAttributes().size());
 		assertEquals(0, ds.getOperations().size());
 		assertEquals(0, ds.getEventTriggers().size());
-		
+				
 	}
 	
-	/**
-	 * Complete model inference.
-	 * 
-	 * @throws Exception
-	 */
-	public void testDefaultInference() throws Exception {
-		root = loadAndInfer(PropertiesFileMapping.class);
-		checkInferredKnowledge(root);
-	}
-	
-	/**
-	 * Inference through the custom action.
-	 * 
-	 * @throws JaxenException
-	 */
-	public void testActionInference() throws Exception {
-		root = loadDirectly(PropertiesFileMapping.class);
-		UpdateWithDroolsAction action =
-			new RefreshDomainStoreMappingsWithDrools();
-		
-		action.refreshMappings(root, createHandler(), new NullProgressMonitor());
-		
-		checkInferredKnowledge(root);
-	}
-
-	/**
-	 * Test that the correct new knowledge has been added.
-	 * 
-	 * @param root
-	 * @throws Exception
-	 */
-	protected void checkInferredKnowledge(InternetApplication root) throws Exception {
+	@Override
+	protected void checkInferredKnowledge() throws Exception {
 
 		DomainStore ds = (DomainStore) queryOne(root, "iaml:domainStores[iaml:name='my domain store']");
 		assertEquals(1, ds.getChildren().size());	// one domain object called 'properties'

@@ -1,4 +1,4 @@
-package org.openiaml.model.tests.inference.model0_3;
+package org.openiaml.model.tests.inference.model0_4;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -9,7 +9,7 @@ import junit.framework.TestSuite;
  * @author jmwright
  *
  */
-public class AllTests {
+public class AllModel0_4InferenceTests {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.
@@ -19,9 +19,7 @@ public class AllTests {
 	public static Test suite() { 
 		TestSuite suite = new TestSuite("Model 0.3");
 		
-		suite.addTestSuite(NewInstanceWireMapping.class);
-		suite.addTestSuite(InputFormInstanceMapping.class);
-		suite.addTestSuite(PropertiesFileMapping.class);
+		suite.addTestSuite(GeneratedPrimaryKey.class);
 		
 		return suite;
 	}

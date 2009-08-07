@@ -17,9 +17,10 @@ public class AllModel0_4InferenceTests {
 	 * @return
 	 */
 	public static Test suite() { 
-		TestSuite suite = new TestSuite("Model 0.3");
+		TestSuite suite = new TestSuite("Model 0.4");
 		
 		suite.addTestSuite(GeneratedPrimaryKey.class);
+		suite.addTestSuite(SelectWireAttributeInference.class);
 		
 		return suite;
 	}

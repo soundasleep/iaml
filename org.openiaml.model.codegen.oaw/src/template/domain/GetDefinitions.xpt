@@ -44,7 +44,7 @@
 	function get_new_attribute_instance_«safeName()-»($force = true) {
 		«IF containingSession() != null»
 			// in the session
-			if (require_session('new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
+			if (has_session('new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
 				// force creation?
 				«IF isAutosaveOff()»
 					if ($force == false) {
@@ -140,7 +140,7 @@
 	function get_new_domain_object_«safeName()-»($force = true) {
 		«IF containingSession() != null»
 			// in the session
-			if (require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
+			if (has_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
 				// force creation?
 				«IF isAutosaveOff()»
 					if ($force == false) {

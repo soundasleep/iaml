@@ -7,21 +7,21 @@
 
 /* expand out the operations for the page */
 /* this includes Page and Session */
-«DEFINE operationDefinitions(Boolean php) FOR model::ContainsOperations-»
-	«EXPAND operationDefinition(php) FOREACH operations-»
+«DEFINE operationDefinitions(model::visual::Page container, Boolean php) FOR model::ContainsOperations-»
+	«EXPAND operationDefinition(container, php) FOREACH operations-»
 «ENDDEFINE»
 
-«DEFINE operationDefinitions(Boolean php) FOR model::InternetApplication-»
-	«EXPAND operationDefinition(php) FOREACH allContainerOperations()-»
+«DEFINE operationDefinitions(model::visual::Page container, Boolean php) FOR model::InternetApplication-»
+	«EXPAND operationDefinition(container, php) FOREACH allContainerOperations()-»
 «ENDDEFINE»
 
-«DEFINE operationDefinitions(Boolean php) FOR model::ApplicationElementContainer-»
+«DEFINE operationDefinitions(model::visual::Page container, Boolean php) FOR model::ApplicationElementContainer-»
 	// expanding operations for «this»
-	«EXPAND operationDefinition(php) FOREACH allContainerOperations()-»
+	«EXPAND operationDefinition(container, php) FOREACH allContainerOperations()-»
 «ENDDEFINE»
 
 /* operation definitions */
-«DEFINE operationDefinition(Boolean php) FOR model::Operation-»
+«DEFINE operationDefinition(model::visual::Page container, Boolean php) FOR model::Operation-»
 	/* simple operation */
 	«IF php»
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
@@ -34,7 +34,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE operationDefinition(Boolean php) FOR model::CompositeOperation»
+«DEFINE operationDefinition(model::visual::Page container, Boolean php) FOR model::CompositeOperation»
 	/** composite operation "«name»" */
 	«IF php»
 	$running_«safeName()» = false;
@@ -60,7 +60,7 @@
 			«EXPAND Variables::temporaryVariable(php) FOREACH variables.typeSelect(model::TemporaryVariable)»			
 			
 			// execute the operation
-			«EXPAND ExecutionFlow::executionFlow(php) FOR startNode()-»
+			«EXPAND ExecutionFlow::executionFlow(container, php) FOR startNode()-»
 
 			// continue chained operations
 			«EXPAND ExecutionFlow::continueChainedOperations(php) FOR this»
@@ -100,7 +100,7 @@
 					}
 					var function_queue_queued = false;
 				
-					«EXPAND ExecutionFlow::executionFlow(php) FOR startNode()-»
+					«EXPAND ExecutionFlow::executionFlow(container, php) FOR startNode()-»
 					
 					// should we still run the chained functions?
 					if (!function_queue_queued)
@@ -117,7 +117,7 @@
 				}
 				var function_queue_queued = false;
 			
-				«EXPAND ExecutionFlow::executionFlow(php) FOR startNode()-»
+				«EXPAND ExecutionFlow::executionFlow(container, php) FOR startNode()-»
 				
 				// should we still run the chained functions?
 				if (!function_queue_queued)

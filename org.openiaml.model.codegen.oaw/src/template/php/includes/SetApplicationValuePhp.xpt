@@ -18,13 +18,13 @@ log_message("set_application_value.php? " . print_r($_GET, true));
 «EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this»
 
 // the property to set
-$id = $_GET["id"] or throw_new_IamlRuntimeException("no id");
+$id = require_get("id");
 
 // the current page ID we are on
-$page_id = $_GET["page"] or throw_new_IamlRuntimeException("no page id");
+$page_id = require_get("page");
 
 // the value to set the property to
-$arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
+$arg0 = require_get("arg0");
 
 set_application_value($id, $arg0);
 log_message("set_application_value.php: setting id=$id, arg0=$arg0");

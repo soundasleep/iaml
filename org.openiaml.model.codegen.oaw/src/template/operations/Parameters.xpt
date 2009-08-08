@@ -48,21 +48,25 @@
 			«ENDIF»
 		«ENDIF»
 	«ELSE»
-		/* wire = «wire», from = «wire.from», to = «wire.to» */
-		«IF name == "fieldValue"»
-			«REM»where is this value stored? is it available on the current page?«ENDREM»
-			«IF onCurrentPage(wire.from, this)» 
-				document.getElementById('«safeName(eContainer)»').value
-			«ELSE»
-				«REM»
-					it's not on the current page. it could be anywhere!
-					but we want it NOW, so we can't just ask the 
-					server. we have to find out where it is.
-				«ENDREM»			
-				«EXPAND RemoteParameter::remoteValue(false, wire, this) FOR this.eContainer-»
-			«ENDIF»
+		«IF inStoreDb»
+			value
 		«ELSE»
-			get_application_element_property("«safeName()-»")
+			/* wire = «wire», from = «wire.from», to = «wire.to» */
+			«IF name == "fieldValue"»
+				«REM»where is this value stored? is it available on the current page?«ENDREM»
+				«IF onCurrentPage(wire.from, this)» 
+					document.getElementById('«safeName(eContainer)»').value
+				«ELSE»
+					«REM»
+						it's not on the current page. it could be anywhere!
+						but we want it NOW, so we can't just ask the 
+						server. we have to find out where it is.
+					«ENDREM»			
+					«EXPAND RemoteParameter::remoteValue(false, wire, this) FOR this.eContainer-»
+				«ENDIF»
+			«ELSE»
+				get_application_element_property("«safeName()-»")
+			«ENDIF»
 		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»

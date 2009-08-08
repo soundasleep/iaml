@@ -12,9 +12,9 @@ function log_message($msg) {
 }
 
 log_message("store_event.php? " . print_r($_GET, true));
-$page_id = $_GET["page_id"] or throw_new_IamlRuntimeException("no page id");
-$event_name = $_GET["event_name"] or throw_new_IamlRuntimeException("no event name");
-$arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
+$page_id = require_get("page_id");
+$event_name = require_get("event_name");
+$arg0 = require_get("arg0");
 
 // first, make sure the table exists
 $db = new PDO('sqlite:stored_events.db') or die("could not open db");

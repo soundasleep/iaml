@@ -7,11 +7,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -70,20 +72,6 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	protected InternetApplication loadAndInfer(
 			Class<?> class1) throws Exception {
 		return loadAndInfer(class1, false);
-	}
-
-	/**
-	 * Automagically load the model file (.iaml) for this given
-	 * test class, and do inference.
-	 *
-	 * @see #loadAndCodegen(String)
-	 * @param class1 The test class to load a model for.
-	 * @param logRuleSource Log the rule source of inserted elements.
-	 * @return the loaded and inferred InternetApplication
-	 */
-	protected InternetApplication loadAndInfer(
-			Class<?> class1, boolean logRuleSource) throws Exception {
-		return loadAndInfer(loadDirectly(class1), logRuleSource);
 	}
 
 	/**
@@ -183,6 +171,43 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		inferredModel = saveInferredModel();
 
 		return root;
+	}
+	
+	private static Map<Class<?>, File> inferCache = new HashMap<Class<?>, File>();
+	
+	/**
+	 * Load a model file and perform inference on it.
+	 * This method also sees if we have got a cached model; if
+	 * not, it loads and infers it, then saves the inferred model
+	 * location to the cache.
+	 *
+	 * @see CreateMissingElementsWithDrools#create(EObject, boolean)
+	 * @param logRuleSource Log the rule source of inserted elements.
+	 * @return
+	 * @throws Exception
+	 */
+	protected InternetApplication loadAndInfer(Class<?> loadClass, boolean logRuleSource) throws Exception {
+		if (!inferCache.containsKey(loadClass)) {
+			// reload
+			InternetApplication root = loadDirectly(loadClass, logRuleSource);
+			
+			// we now try to do inference
+			ICreateElements handler = createHandler();
+			CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
+			ce.create(root, logRuleSource, monitor);
+	
+			// write out this inferred model for reference
+			inferredModel = saveInferredModel();
+			
+			// put this model down in the cache
+			inferCache.put(loadClass, inferredModel);
+			
+			return root;
+		} else {
+			// load it from the given file - it will be inferred already
+			System.out.println("Loaded model for '" + loadClass + "' directly from cache '" + inferCache.get(loadClass) + "'");
+			return (InternetApplication) loadModelDirectly(inferCache.get(loadClass).getAbsolutePath());
+		}
 	}
 
 	/**

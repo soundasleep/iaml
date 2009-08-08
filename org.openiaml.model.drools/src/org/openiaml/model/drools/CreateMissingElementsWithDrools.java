@@ -25,6 +25,7 @@ public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 			"/rules/sync-wires.drl",
 			"/rules/events.drl",
 			"/rules/sessions.drl",
+			"/rules/login-handler.drl",
 			"/rules/operations.drl",
 			"/rules/dynamic-sources.drl",
 			"/rules/conditions.drl",

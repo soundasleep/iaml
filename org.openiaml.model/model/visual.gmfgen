@@ -987,9 +987,9 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0"
-            viewPattern="[type = {1}]"
-            editorPattern="[type = {1}]"
-            editPattern="[type = {1}]">
+            viewPattern="[type = {0}]"
+            editorPattern="{0}"
+            editPattern="{0}">
           <metaFeatures
               href="iaml.genmodel#//model/components/LoginHandler/type"/>
         </modelFacet>

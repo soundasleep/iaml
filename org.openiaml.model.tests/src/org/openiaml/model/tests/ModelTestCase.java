@@ -417,8 +417,11 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 */
 	private static XpathTestCase xpath = new DefaultXpathTestCase();
 
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Element, java.lang.String)
+	/**
+	 * Get the first node result from an XPath query. Returns the 
+	 * node found, or null if none or more than one is found.
+	 * 
+	 * @returns the found node, or null if none is found (or more than one is found)
 	 */
 	@Override
 	public Element hasXpathFirst(Element e, String query)
@@ -426,9 +429,11 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		return xpath.hasXpathFirst(e, query);
 	}
 
-
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Document, java.lang.String)
+	/**
+	 * Get the first node result from an XPath query. Returns the 
+	 * node found, or null if none or more than one is found.
+	 * 
+	 * @returns the found node, or null if none is found (or more than one is found)
 	 */
 	@Override
 	public Element hasXpathFirst(Document e, String query)

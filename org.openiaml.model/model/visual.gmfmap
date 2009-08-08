@@ -344,9 +344,9 @@
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="[type = {1}]"
-          editorPattern="[type = {1}]"
-          editPattern="[type = {1}]">
+          viewPattern="[type = {0}]"
+          editorPattern="{0}"
+          editPattern="{0}">
         <diagramLabel
             href="iaml.gmfgraph#LoginHandlerType"/>
         <features

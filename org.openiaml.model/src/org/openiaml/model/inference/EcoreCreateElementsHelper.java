@@ -49,6 +49,7 @@ import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -240,6 +241,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(wire, by);
 		return wire;
 	}
+
+	public SelectWire generatedSelectWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
+		SelectWire wire = (SelectWire) createRelationship(container, WiresPackage.eINSTANCE.getSelectWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+		setGeneratedBy(wire, by);
+		return wire;
+	}
 	
 	public NavigateWire generatedNavigateWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
 		NavigateWire wire = (NavigateWire) createRelationship(container, WiresPackage.eINSTANCE.getNavigateWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
@@ -365,5 +372,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	public void setTo(ExecutionEdge element, EObject value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
-
+	
+	public void setQuery(SelectWire element, String value) throws InferenceException {
+		setValue(element, WiresPackage.eINSTANCE.getSelectWire_Query(), value);
+	}
 }

@@ -277,7 +277,10 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="[type = {0}]"
+          editorPattern="{0}"
+          editPattern="{0}">
         <diagramLabel
             href="iaml.gmfgraph#LoginHandlerType"/>
         <features

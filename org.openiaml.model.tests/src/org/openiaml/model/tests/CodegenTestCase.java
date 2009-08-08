@@ -150,17 +150,20 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	}
 	
 	/**
+	 * <p>
 	 * Begin at the sitemap page, and then click on a particular page title.
 	 * This method also checks that the destination page is the same as the
 	 * target page; if not, use {@link #beginAtSitemapThenPage(IFile, String, String)}.
+	 * </p>
 	 * 
+	 * <p>
 	 * <b>NOTE</b> that this resets the current WebClient context, which can cause
 	 * the client to lose sessions/cookies. If this is undesirable,
 	 * use {@link #gotoSitemapThenPage(IFile, String)}.
+	 * </p>
 	 * 
 	 * @see #beginAtSitemapThenPage(IFile, String, String)
 	 * @param pageTitle the page title to select from the sitemap
-	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
 	 * @return the location of the sitemap file
 	 * @throws Exception 
 	 */
@@ -171,6 +174,35 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 		
 		// go to page
 		beginAtSitemapThenPage(sitemap, pageTitle, pageTitle);
+		
+		return sitemap;
+	}
+	
+	/**
+	 * <p>
+	 * Like {@link #beginAtSitemapThenPage(String)}, except we expect
+	 * to not end up at <code>pageTitle</code>.
+	 * </p>
+	 * 
+	 * <p>
+	 * <b>NOTE</b> that this resets the current WebClient context, which can cause
+	 * the client to lose sessions/cookies. If this is undesirable,
+	 * use {@link #gotoSitemapThenPage(IFile, String)}.
+	 * </p>
+	 * 
+	 * @see #beginAtSitemapThenPage(String)
+	 * @param pageTitle the page title to select from the sitemap
+	 * @param expectedTitle the expected destination page title, usually the same as pageTitle
+	 * @return the location of the sitemap file
+	 * @throws Exception 
+	 */
+	protected IFile beginAtSitemapThenPage(String pageTitle, String expectedTitle) throws Exception {
+		// go to sitemap
+		IFile sitemap = getSitemap();
+		assertTrue("Sitemap " + sitemap + " exists", sitemap.exists());
+		
+		// go to page
+		beginAtSitemapThenPage(sitemap, pageTitle, expectedTitle);
 		
 		return sitemap;
 	}

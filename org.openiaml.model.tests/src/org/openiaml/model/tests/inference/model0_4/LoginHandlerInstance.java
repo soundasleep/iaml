@@ -224,7 +224,6 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		root = loadAndInfer(LoginHandlerInstance.class);
 		
 		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
-		LoginHandler handler = (LoginHandler) queryOne(session, "iaml:children[iaml:name='login handler']");
 
 		Page login = (Page) queryOne(root, "iaml:children[iaml:name='login']");
 		assertGenerated(login);
@@ -242,7 +241,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(button);
 		
 		// a generated operation will handle the login
-		Operation op = (Operation) queryOne(handler, "iaml:operations[iaml:name='do login']");
+		Operation op = (Operation) queryOne(session, "iaml:operations[iaml:name='do login']");
 		assertGenerated(op);
 		
 		// button has an 'onClick' run wire

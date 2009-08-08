@@ -7,10 +7,6 @@
 
 /* expand out the conditions for the page */
 /* this includes Page and Session */
-«DEFINE conditionDefinitions(Boolean php) FOR model::ContainsConditions-»
-	«EXPAND conditionDefinition(php) FOREACH getRoot().getAllConditions()»
-«ENDDEFINE»
-
 «DEFINE conditionDefinition(Boolean php) FOR model::Condition-»
 	«EXPAND exception FOR throwException("Cannot expand an abstract Condition: " + this)»
 «ENDDEFINE»

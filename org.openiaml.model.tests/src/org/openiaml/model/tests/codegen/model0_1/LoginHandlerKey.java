@@ -33,14 +33,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 	/**
 	 * The site should have a login page.
 	 */
-	public void testHasLoginPage() {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("login");
+	public void testHasLoginPage() throws Exception {
+		beginAtSitemapThenPage("login");
 		assertTitleMatch("login");
 		assertNoProblem();
 
@@ -49,14 +43,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 	/**
 	 * The site should have a home page.
 	 */
-	public void testHasHomePage() {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("Home");
+	public void testHasHomePage() throws Exception {
+		beginAtSitemapThenPage("Home");
 		assertTitleMatch("Home");
 		assertNoProblem();
 
@@ -67,9 +55,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * we're not yet authenticated).
 	 */
 	public void testHasViewkeyPage() {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
+		IFile sitemap = getSitemap();
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 
@@ -88,15 +74,12 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 */
 	public void testHasLogoutPage() {
 		try {
-			
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("logout");
-		assertProblem();	// who knows where we are?
+			IFile sitemap = getSitemap();
+			beginAt(sitemap.getProjectRelativePath().toString());
+			assertTitleMatch("sitemap");
+	
+			clickLinkWithText("logout");
+			assertProblem();	// who knows where we are?
 		
 		} catch (Error e) {
 			System.out.println(getPageSource());
@@ -110,9 +93,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * logging in. It should redirect us to the login page.
 	 */
 	public void testCantAccessViewKeyPageWithoutSession() {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
+		IFile sitemap = getSitemap();
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 	
@@ -132,27 +113,27 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 */
 	public void testCanLoginLogoutFromSitemap() throws Exception {
 		try {
-		IFile sitemap = beginAtSitemapThenPage("login");
-		assertNoProblem();
-		
-		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "key42");
-		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
-		
-		// we should now be on the viewkey page
-		assertEquals("viewkey", getPageTitle());
-		assertTitleMatch("viewkey");
-		assertNoProblem();
-		
-		// now we just quickly go logout
-		gotoSitemapThenPage(sitemap, "logout", "Home");
-		assertNoProblem();
-		
-		// we should now be on the home page
-		assertEquals("Home", getPageTitle());
-		assertTitleMatch("Home");
-		assertNoProblem();
+			IFile sitemap = beginAtSitemapThenPage("login");
+			assertNoProblem();
+			
+			String loginId = getLabelIDForText("login key");
+			setLabeledFormElementField(loginId, "key42");
+			submit();		// submit the form
+			waitForAjax();	// wait for ajax forms
+			
+			// we should now be on the viewkey page
+			assertEquals("viewkey", getPageTitle());
+			assertTitleMatch("viewkey");
+			assertNoProblem();
+			
+			// now we just quickly go logout
+			gotoSitemapThenPage(sitemap, "logout", "Home");
+			assertNoProblem();
+			
+			// we should now be on the home page
+			assertEquals("Home", getPageTitle());
+			assertTitleMatch("Home");
+			assertNoProblem();
 		
 		} catch (Error e) {
 			System.out.println( getPageSource() );		// let us debug the page source
@@ -168,13 +149,8 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * Then we logout.
 	 */
 	public void testLoginLogoutCheckViewkey() throws Exception {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		IFile sitemap = beginAtSitemapThenPage("login");
 
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("login");
 		String loginId = getLabelIDForText("login key");
 		setLabeledFormElementField(loginId, "key42");
 		submit();		// submit the form
@@ -206,15 +182,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * We login, check the viewkey page works, and then logout again.
 	 */
 	public void testTryViewkeyThenLogin() throws Exception {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("viewkey");
-		// TODO add: assertTitleNotMatch("viewkey");
-		assertTitleMatch("login");
+		IFile sitemap = beginAtSitemapThenPage("viewkey", "login");
 		assertProblem();		// we should have been warned
 
 		// lets set the fields
@@ -248,14 +216,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 	 * Test that we are actually comparing the login keys
 	 */
 	public void testTryInvalidLogin() throws Exception {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
-
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("login");
-		assertTitleMatch("login");
+		IFile sitemap = beginAtSitemapThenPage("login");
 		assertNoProblem();		// we should be fine
 
 		// lets set the fields

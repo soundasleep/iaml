@@ -87,15 +87,14 @@ onCurrentSession(model::WireEdgesSource source, model::WireEdgeDestination targe
  * this is true if onCurrentPage() is true, or
  * it is an operation that will also be included in the current page.
  *
- * if the target container is a session, this is all the operations
- * within the session. 
+ * all operations contained within a session are also available to all
+ * elements outside that session.
  *
  * this is based on allContainerOperations() and possibleParentOperations(). 
  */
 availableInCurrentScript(model::WireEdgesSource source, model::WireEdgeDestination target) :
 	onCurrentPage(source, target) ||
-	(containingSession(source) != null && target.eContainer.metaType.isAssignableFrom(model::scopes::Session) &&
-		containingSession(target) == target.eContainer);
+		containingSession(target) != null;
 
 /**
  * Get all the operations that may be referenced in a container. In particular:
@@ -112,6 +111,12 @@ allContainerOperations(model::ApplicationElementContainer this) :
 allContainerOperations(model::ApplicationElement this) :
 	operations;
 
+allContainerOperations(model::ContainsOperations this) :
+	operations;
+
+allContainerOperations(model::InternetApplication this) :
+	 operations.toSet().addAll( sessions.allContainerOperations() ).addAll( children.allContainerOperations() );	 
+		
 /** All of the ApplicationElementProperties stored within this InternetApplication */
 List[model::ApplicationElementProperty] allApplicationElementProperties(model::InternetApplication this) :
 	properties.toSet().union( eAllContents.allApplicationElementProperties() ).reject( e | e == null );

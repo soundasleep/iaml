@@ -16,6 +16,8 @@ require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 require("create_database.php");		// ensure DB exists
 require("properties_file.php");
 
+define("CURRENT_PAGE", "«id»");
+
 // a default fail handler for this page?
 «IF getFailHandler(this) != null»
 	function page_fail_handler($e) {
@@ -61,10 +63,10 @@ require("properties_file.php");
 «EXPAND template::events::Page::runPageEvents FOREACH eventTriggers-»
 
 // expand any operations (both in this page and in any surrounding scopes)
-«EXPAND template::operations::Definitions::operationDefinitions(true) FOR this-»		
+«EXPAND template::operations::Definitions::operationDefinitions(true) FOR getRoot()-»		
 
 // expand all conditions
-«EXPAND template::conditions::Definitions::conditionDefinitions(true) FOR this-»
+«EXPAND template::conditions::Definitions::conditionDefinition(true) FOREACH getRoot().getAllConditions()-»
 
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
@@ -126,7 +128,7 @@ if (require_get("operation", "")) {
 		var try_catch_depth = 0;
 	
 		// operation definitions
-		«EXPAND template::operations::Definitions::operationDefinitions(false) FOR this-»
+		«EXPAND template::operations::Definitions::operationDefinitions(false) FOR getRoot()-»
 
 		// condition definitions
 		«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»

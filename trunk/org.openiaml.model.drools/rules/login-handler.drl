@@ -61,10 +61,30 @@ rule "Create 'logout' page for LoginHandlers"
 			
 	then
 
-		Page login = handler.generatedPage(login_handler, scope);
-		handler.setName(login, "logout");
-		queue.add(login, drools);
+		Page logout = handler.generatedPage(login_handler, scope);
+		handler.setName(logout, "logout");
+		queue.add(logout, drools);
 		
+end
+
+rule "Instruct 'logout' page to follow to the actual logout destination if set"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope )
+		
+		logout : Page (eContainer == scope, name=="logout" )
+		
+		destination : Page ( this != logout )
+		navigate : NavigateWire ( from == login_handler, to == destination, name == "logout")
+
+		access : EventTrigger ( eContainer == logout, name == "access" )
+		not (NavigateWire ( from == access, to == destination ))
+	
+	then
+		NavigateWire wire = handler.generatedNavigateWire(login_handler, logout, access, destination);
+		handler.setName(wire, "redirect to intended logout page");
+		queue.add(wire, drools);
+
 end
 
 rule "Create 'key' property for LoginHandler[type = key]s"
@@ -283,7 +303,7 @@ rule "Connect 'Login' button to 'do login' operation"
 		form : InputForm ( eContainer == login, name == "login form" )
 		button : Button ( eContainer == form, name == "Login" )
 		
-		operation : Operation ( eContainer == login_handler, name == "do login" )
+		operation : Operation ( eContainer == scope, name == "do login" )
 		
 		not (RunInstanceWire ( from == button, to == operation, name == "onClick"))
 
@@ -301,14 +321,7 @@ rule "Create contents for login form of 'login' pages [type=secret_key]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		login : Page (eContainer == container, name=="login" )
 
-		value : ApplicationElementProperty( )
-		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
-
-		expected : StaticValue( ) 
-		expected_param : ParameterWire( from == expected, to == login_handler )
-
 		form : InputForm( eContainer == login, name == "login form" )
-		button : Button ( eContainer == login, name == "Login" )
 		
 		not ( InputTextField ( eContainer == form, name == "login key" ))
 			
@@ -338,12 +351,12 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		expected_param : ParameterWire( from == expected, to == login_handler )
 
 		form : InputForm( eContainer == login, name == "login form" )
-		button : Button ( eContainer == login, name == "Login" )
+		button : Button ( eContainer == form, name == "Login" )
 		
 		field : InputTextField ( eContainer == form, name == "login key" )
 		fieldValue : ApplicationElementProperty( eContainer == field, name == "fieldValue" )
 		
-		loginOperation : CompositeOperation ( eContainer == login_handler, name == "do login" )
+		loginOperation : CompositeOperation ( eContainer == scope, name == "do login" )
 		runClick : RunInstanceWire ( from == button, to == loginOperation, name == "onClick" )
 		
 		not ( StartNode ( eContainer == loginOperation ))
@@ -449,14 +462,14 @@ rule "Create text fields for login form of 'login' pages [type=domain_object]"
 		
 end
 
-rule "Connext text fields for login form of 'login' pages to 'do login' run wire [type=domain_object]"
+rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=domain_object]"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		login : Page (eContainer == container, name=="login" )
 		
-		operation : Operation( eContainer == login_handler, name == "do login" )
+		operation : Operation( eContainer == scope, name == "do login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
@@ -485,10 +498,10 @@ rule "Create 'do login' operation within all login_handlers"
 		session : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == session )
 		
-		not ( Operation ( eContainer == login_handler, name == "do login" ))
+		not ( Operation ( eContainer == session, name == "do login" ))
 
 	then
-		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, login_handler);
+		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, session);
 		handler.setName(loginOperation, "do login");
 		queue.add(loginOperation, drools);
 		
@@ -505,7 +518,7 @@ rule "Create 'do login' operation inside login handler[type=domain_object]"
 		
 		ex : Operation ( eContainer == instance, name == "exists?" )
 				
-		loginOperation : CompositeOperation ( eContainer == login_handler, name == "do login" )
+		loginOperation : CompositeOperation ( eContainer == scope, name == "do login" )
 
 		not ( StartNode ( eContainer == loginOperation ))
 
@@ -566,7 +579,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 
-		operation : CompositeOperation ( eContainer == login_handler, name == "do login" )
+		operation : CompositeOperation ( eContainer == scope, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
@@ -615,7 +628,8 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login : Page (eContainer == container, name=="login" )
-		login_operation : CompositeOperation( eContainer == login, name == "do login" )		
+		
+		login_operation : CompositeOperation( eContainer == scope, name == "do login" )		
 		login_target : Page ( ) 
 		login_wire : NavigateWire( from == login_handler, to == login_target, name == "login" )
 
@@ -634,7 +648,7 @@ rule "Connect failed 'login' operation to navigate back to 'login'"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login : Page (eContainer == container, name=="login" )
-		login_operation : CompositeOperation( eContainer == login, name == "do login" )		
+		login_operation : CompositeOperation( eContainer == scope, name == "do login" )		
 
 		not (NavigateWire(from == login_operation, to == login, name == "fail"))
 			
@@ -652,7 +666,7 @@ rule "Create 'do logout' operation in session"
 		login_handler : LoginHandler( eContainer == scope )
 		logout : Page ( eContainer == scope, name == "logout" )
 	
-		not (CompositeOperation ( eContainer == logout, name == "do logout" ))
+		not (CompositeOperation ( eContainer == scope, name == "do logout" ))
 
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(login_handler, scope);

@@ -11,6 +11,10 @@
 	«EXPAND operationDefinition(php) FOREACH operations-»
 «ENDDEFINE»
 
+«DEFINE operationDefinitions(Boolean php) FOR model::InternetApplication-»
+	«EXPAND operationDefinition(php) FOREACH allContainerOperations()-»
+«ENDDEFINE»
+
 «DEFINE operationDefinitions(Boolean php) FOR model::ApplicationElementContainer-»
 	// expanding operations for «this»
 	«EXPAND operationDefinition(php) FOREACH allContainerOperations()-»

@@ -69,11 +69,22 @@
 «ENDDEFINE»
 
 /**
- * NavigateWire: on the client-side, browse to a new page
+ * NavigateWire: browse to a new page
  */
 «DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::wires::NavigateWire»
 	«IF php»
-		«EXPAND exception FOR throwException("Cannot expand a NavigateWire on server-side: " + this)»
+		«IF to.metaType.isAssignableFrom(model::visual::Page)»
+		/* prevent infinite loops on the current page */
+		if ("«((model::visual::Page) to).id»" != CURRENT_PAGE) {
+		«ELSE»
+		if (true) {
+		«ENDIF»
+			// navigate to another page
+			$url = "«safeName(to)».php";
+			log_message("Redirecting to '$url'");
+			header("Location: $url");
+			die;
+		}
 	«ELSE»
 		// navigating to a new page
 		var url = "«safeName(to)».php";

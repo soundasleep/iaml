@@ -80,6 +80,24 @@ public interface OperationsFactory extends EFactory {
 	DecisionCondition createDecisionCondition();
 
 	/**
+	 * Returns a new object of class '<em>Split Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Split Node</em>'.
+	 * @generated
+	 */
+	SplitNode createSplitNode();
+
+	/**
+	 * Returns a new object of class '<em>Join Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Join Node</em>'.
+	 * @generated
+	 */
+	JoinNode createJoinNode();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

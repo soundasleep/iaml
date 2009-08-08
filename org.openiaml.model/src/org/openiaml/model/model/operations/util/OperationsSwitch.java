@@ -29,7 +29,9 @@ import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 
 /**
@@ -179,6 +181,26 @@ public class OperationsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OperationsPackage.SPLIT_NODE: {
+				SplitNode splitNode = (SplitNode)theEObject;
+				T result = caseSplitNode(splitNode);
+				if (result == null) result = caseActivityNode(splitNode);
+				if (result == null) result = caseExecutionEdgesSource(splitNode);
+				if (result == null) result = caseExecutionEdgeDestination(splitNode);
+				if (result == null) result = caseGeneratedElement(splitNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OperationsPackage.JOIN_NODE: {
+				JoinNode joinNode = (JoinNode)theEObject;
+				T result = caseJoinNode(joinNode);
+				if (result == null) result = caseActivityNode(joinNode);
+				if (result == null) result = caseExecutionEdgesSource(joinNode);
+				if (result == null) result = caseExecutionEdgeDestination(joinNode);
+				if (result == null) result = caseGeneratedElement(joinNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -270,6 +292,36 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseDecisionCondition(DecisionCondition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Split Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Split Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSplitNode(SplitNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Join Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Join Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJoinNode(JoinNode object) {
 		return null;
 	}
 

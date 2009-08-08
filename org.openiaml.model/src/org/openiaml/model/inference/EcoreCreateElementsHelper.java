@@ -36,7 +36,9 @@ import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
@@ -176,6 +178,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 
+	public SplitNode generatedSplitNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		SplitNode node = (SplitNode) createElement( container, OperationsPackage.eINSTANCE.getSplitNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
+	public JoinNode generatedJoinNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		JoinNode node = (JoinNode) createElement( container, OperationsPackage.eINSTANCE.getJoinNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
 	public StartNode generatedStartNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
 		StartNode node = (StartNode) createElement( container, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
 		setGeneratedBy(node, by);
@@ -190,6 +204,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public FinishNode generatedFinishNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
 		FinishNode node = (FinishNode) createElement( container, OperationsPackage.eINSTANCE.getFinishNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
+	public SplitNode generatedSplitNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		SplitNode node = (SplitNode) createElement( container, OperationsPackage.eINSTANCE.getSplitNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
+	public JoinNode generatedJoinNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		JoinNode node = (JoinNode) createElement( container, OperationsPackage.eINSTANCE.getJoinNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}

@@ -114,7 +114,7 @@ rule "Create 'check key' operation for LoginHandler[type = key]"
 		queue.add(op, drools);
 end
 
-rule "Connect 'access' event to 'check key' operation"
+rule "Connect 'access' event to 'check' operations"
 	when
 		scope : Session( )
 		page : Page( eContainer == scope )
@@ -167,7 +167,7 @@ rule "Connect 'fail' wire from 'check key' operation to Login Page"
 		
 end
 
-rule "Create contents of 'check key' operation for LoginHandler[type=key]"
+rule "Create contents of 'check key' operation [type=secret_key]"
 	when
 		scope : Session( )
 		o : CompositeOperation( name == "check key", eContainer == scope )
@@ -253,8 +253,48 @@ rule "Connect expected login key as parameter to check key operation"
 end
 */
 
-/* it's possible in the future that this method should be split up. */
-rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
+rule "Create login form for 'login' pages"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login : Page (eContainer == container, name=="login" )
+
+		not (InputForm( eContainer == login ))
+		
+	then
+		InputForm form = handler.generatedInputForm(login_handler, login);
+		handler.setName(form, "login form");
+		queue.add(form, drools);
+
+		Button button = handler.generatedButton(form, form);
+		handler.setName(button, "Login");
+		queue.add(button, drools);
+		
+end
+
+rule "Connect 'Login' button to 'do login' operation"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login : Page (eContainer == container, name=="login" )
+
+		form : InputForm ( eContainer == login, name == "login form" )
+		button : Button ( eContainer == form, name == "Login" )
+		
+		operation : Operation ( eContainer == login_handler, name == "do login" )
+		
+		not (RunInstanceWire ( from == button, to == operation, name == "onClick"))
+
+	then
+		RunInstanceWire run = handler.generatedRunInstanceWire(login_handler, login, button, operation);
+		handler.setName(run, "onClick");
+		queue.add(run, drools);
+
+end
+
+rule "Create contents for login form of 'login' pages [type=secret_key]"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
@@ -267,13 +307,13 @@ rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
 		expected : StaticValue( ) 
 		expected_param : ParameterWire( from == expected, to == login_handler )
 
-		not (InputForm( eContainer == login ))
+		form : InputForm( eContainer == login, name == "login form" )
+		button : Button ( eContainer == login, name == "Login" )
+		
+		not ( InputTextField ( eContainer == form, name == "login key" ))
 			
 	then
-		InputForm form = handler.generatedInputForm(login_handler, login);
-		handler.setName(form, "login form");
-		queue.add(form, drools);
-		
+
 		InputTextField field = handler.generatedInputTextField(form, form);
 		handler.setName(field, "login key");		# login field name
 		queue.add(field, drools);
@@ -282,24 +322,33 @@ rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
 		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(field, field);
 		handler.setName(fieldValue, "fieldValue");
 		queue.add(fieldValue, drools);
+end
 
-		Button button = handler.generatedButton(form, form);
-		handler.setName(button, "Login");
-		queue.add(button, drools);
-				
-		# button has an event
-		EventTrigger click = handler.generatedEventTrigger(button, button);
-		handler.setName(click, "click");
-		queue.add(click, drools);
+rule "Create contents of 'do login' operation [type=secret_key]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login : Page (eContainer == container, name=="login" )
+
+		value : ApplicationElementProperty( )
+		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
+
+		expected : StaticValue( ) 
+		expected_param : ParameterWire( from == expected, to == login_handler )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		button : Button ( eContainer == login, name == "Login" )
 		
-		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, login);
-		handler.setName(loginOperation, "do login");
-		queue.add(loginOperation, drools);
+		field : InputTextField ( eContainer == form, name == "login key" )
+		fieldValue : ApplicationElementProperty( eContainer == field, name == "fieldValue" )
 		
-		# connect button click to login operation
-		RunInstanceWire runClick = handler.generatedRunInstanceWire(login_handler, login, click, loginOperation);
-		handler.setName(runClick, "run");
-		queue.add(runClick, drools);
+		loginOperation : CompositeOperation ( eContainer == login_handler, name == "do login" )
+		runClick : RunInstanceWire ( from == button, to == loginOperation, name == "onClick" )
+		
+		not ( StartNode ( eContainer == loginOperation ))
+			
+	then				
 		
 		# connect field value as parameter
 		ParameterWire clickParam = handler.generatedParameterWire(login_handler, login, fieldValue, runClick);
@@ -377,12 +426,194 @@ rule "Create login form for 'login' pages created by a LoginHandler [type=key]"
 				
 end
 
+rule "Create text fields for login form of 'login' pages [type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login : Page (eContainer == container, name=="login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		
+		# from a domain object
+		attribute : DomainAttribute ( )
+		param : ParameterWire ( from == attribute, to == login_handler )
+		
+		not ( InputTextField ( eContainer == form, name == attribute.name ))
+
+	then
+		InputTextField field = handler.generatedInputTextField(form, form);
+		# login field name
+		handler.setName(field, attribute.getName());		
+		queue.add(field, drools);		
+		
+end
+
+rule "Connext text fields for login form of 'login' pages to 'do login' run wire [type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login : Page (eContainer == container, name=="login" )
+		
+		operation : Operation( eContainer == login_handler, name == "do login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		
+		# from a domain object
+		attribute : DomainAttribute ( )
+		param : ParameterWire ( from == attribute, to == login_handler )
+		
+		field : InputTextField ( eContainer == form, name == attribute.name )
+		fieldValue : ApplicationElementProperty ( eContainer == field, name == "fieldValue" )
+		
+		button : Button ( eContainer == form, name == "Login" )
+		run : RunInstanceWire ( from == button, to == operation, name == "onClick" )
+		
+		not ( ParameterWire ( from == fieldValue, to == run, name == attribute.name )) 
+
+	then
+		ParameterWire param2 = handler.generatedParameterWire(login_handler, fieldValue, fieldValue, run);
+		handler.setName(param2, attribute.getName());
+		queue.add(param2, drools); 
+		
+end
+
+rule "Create 'do login' operation within all login_handlers"
+	when
+		container : InternetApplication( )
+		session : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == session )
+		
+		not ( Operation ( eContainer == login_handler, name == "do login" ))
+
+	then
+		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, login_handler);
+		handler.setName(loginOperation, "do login");
+		queue.add(loginOperation, drools);
+		
+end
+
+rule "Create 'do login' operation inside login handler[type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		instance : DomainObjectInstance ( eContainer == scope )
+		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
+		
+		ex : Operation ( eContainer == instance, name == "exists?" )
+				
+		loginOperation : CompositeOperation ( eContainer == login_handler, name == "do login" )
+
+		not ( StartNode ( eContainer == loginOperation ))
+
+	then
+		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(loginOperation, loginOperation);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(loginOperation, loginOperation);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Invalid key.");
+		queue.add(cancel, drools);
+		
+		// make a split/join
+		SplitNode split = handler.generatedSplitNode(loginOperation, loginOperation);
+		queue.add(split, drools);
+		JoinNode join = handler.generatedJoinNode(loginOperation, loginOperation);
+		queue.add(join, drools);
+				
+		ExecutionEdge edge0 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge0, start);
+		handler.setTo(edge0, split);		
+		queue.add(edge0, drools);
+		
+		// we will leave the other rules to generate the contents
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge1, join);
+		handler.setTo(edge1, ex);
+		queue.add(edge1, drools);
+		
+		# not ok	
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge2, ex);
+		handler.setTo(edge2, cancel);
+		queue.add(edge2, drools);
+
+		# ok
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge3, ex);
+		handler.setTo(edge3, finish);
+		queue.add(edge3, drools);
+
+end
+
+rule "Create parameter for 'do login' operation inside login handler[type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		attribute : DomainAttribute ( )
+		paramWire : ParameterWire( from == attribute, to == login_handler )
+		
+		instance : DomainObjectInstance ( eContainer == scope )
+		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
+
+		operation : CompositeOperation ( eContainer == login_handler, name == "do login" )
+		split : SplitNode ( eContainer == operation )
+		join : JoinNode ( eContainer == operation )
+		
+		target : ApplicationElementProperty ( eContainer == scope, eval(loginAttributeMatches(target, attribute)))
+
+		not ( Parameter ( eContainer == operation, name == attribute.name ))
+
+	then
+		Parameter param = handler.generatedParameter(operation, operation);
+		handler.setName(param, attribute.getName());
+		queue.add(param, drools);
+		
+		CompositeOperation setValue = handler.generatedCompositeOperation(operation, operation);
+		handler.setName(setValue, "setValue");
+		queue.add(setValue, drools);
+		
+		// split to set value
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(operation, operation);
+		handler.setFrom(edge1, split);
+		handler.setTo(edge1, setValue);
+		queue.add(edge1, drools);
+		
+		// set value to join
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(operation, operation);
+		handler.setFrom(edge2, setValue);
+		handler.setTo(edge2, join);
+		queue.add(edge2, drools);
+		
+		// flow from param to value
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(operation, operation);
+		handler.setFrom(data1, param);
+		handler.setTo(data1, setValue);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(operation, operation);
+		handler.setFrom(data2, setValue);
+		handler.setTo(data2, target);
+		queue.add(data2, drools);
+
+end
+
 /* it's possible in the future that this method should be split up. */
 rule "Connect successful 'login' operation to navigate to final 'login' page"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login_handler : LoginHandler( eContainer == scope )
 		login : Page (eContainer == container, name=="login" )
 		login_operation : CompositeOperation( eContainer == login, name == "do login" )		
 		login_target : Page ( ) 
@@ -392,7 +623,7 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 			
 	then
 		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, login_operation, login_target);
-		handler.setName(wire,"navigate on successful login");
+		handler.setName(wire, "navigate on successful login");
 		queue.add(wire, drools);
 				
 end
@@ -401,7 +632,7 @@ rule "Connect failed 'login' operation to navigate back to 'login'"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login_handler : LoginHandler( eContainer == scope )
 		login : Page (eContainer == container, name=="login" )
 		login_operation : CompositeOperation( eContainer == login, name == "do login" )		
 
@@ -458,7 +689,7 @@ rule "Connect new navigate wire from logout to logout destination"
 	when
 		container : InternetApplication( )
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login_handler : LoginHandler( eContainer == scope )
 		logout : Page ( eContainer == scope, name == "logout" )
 		logout_operation : CompositeOperation ( eContainer == scope, name == "do logout" )
 		# add it at the end of the operation chain (final_operation may == logout_operation)
@@ -476,7 +707,7 @@ rule "Connect new navigate wire from logout to logout destination"
 		
 end
 
-rule "Create contents of 'do logout' operation for LoginHandler[type=key]"
+rule "Create contents of 'do logout' operation [type=secret_key]"
 	when
 		scope : Session( )
 		o : CompositeOperation( name == "do logout", eContainer == scope )

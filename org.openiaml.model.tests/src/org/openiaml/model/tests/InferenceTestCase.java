@@ -26,6 +26,7 @@ import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -240,7 +241,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @return
 	 * @throws JaxenException
 	 */
-	protected EObject queryOne(EObject root, String query) throws JaxenException {
+	public EObject queryOne(EObject root, String query) throws JaxenException {
 		List<?> q = query(root, query);
 		assertEquals("queryOne for '" + query + "' did not return one result", 1, q.size());
 		return (EObject) q.get(0);
@@ -254,9 +255,27 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @return
 	 * @throws JaxenException
 	 */
-	protected void assertHasNone(EObject root, String query) throws JaxenException {
+	public void assertHasNone(EObject root, String query) throws JaxenException {
 		List<?> q = query(root, query);
 		assertEquals("Unexpected query result for '" + query + "' on '" + root + ": " + q, 0, q.size());
+	}
+	
+	/**
+	 * Assert that the given list of elements contains a
+	 * NamedElement with the given name and given generated status. 
+	 * 
+	 * @param elements
+	 * @param name
+	 * @param isGenerated
+	 */
+	public void assertContainsNamedElement(List<? extends NamedElement> elements, String name, boolean isGenerated) {
+		for (NamedElement e : elements) {
+			if (e.getName().equals(name) && e.isIsGenerated() == isGenerated) {
+				// ok
+				return;
+			}
+		}
+		fail("Did not find any NamedElement '" + name + "' [generated=" + isGenerated + "] in " + elements);
 	}
 	
 	/**
@@ -264,7 +283,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * 
 	 * @param e
 	 */
-	protected void assertGenerated(GeneratedElement e) {
+	public void assertGenerated(GeneratedElement e) {
 		assertTrue("Element '" + e + "' should be generated", e.isIsGenerated());
 	}
 
@@ -273,7 +292,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * 
 	 * @param e
 	 */
-	protected void assertNotGenerated(GeneratedElement e) {
+	public void assertNotGenerated(GeneratedElement e) {
 		assertFalse("Element '" + e + "' should not be generated", e.isIsGenerated());
 	}
 
@@ -390,7 +409,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @throws JaxenException 
 	 * @return the found wires
 	 */
-	protected Set<WireEdge> assertHasWiresFromTo(int count, EObject container, 
+	public Set<WireEdge> assertHasWiresFromTo(int count, EObject container, 
 			WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
 
 		Set<WireEdge> wires = getWiresFromTo(container, fromElement, toElement);
@@ -493,7 +512,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @param element2
 	 * @throws JaxenException
 	 */
-	protected void assertHasWiresBidirectional(int count, EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+	public void assertHasWiresBidirectional(int count, EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
 		
 		Set<WireEdge> wires = getWiresBidirectional(container, element1, element2);
 		if (wires.size() != count) {
@@ -514,7 +533,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @param element2
 	 * @throws JaxenException
 	 */
-	protected void assertNoWireBidirectional(EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+	public void assertNoWireBidirectional(EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
 		List<?> wires = query(container, "//iaml:wires");
 		for (Object o : wires) {
 			if (o instanceof WireEdge) {

@@ -6,8 +6,9 @@
  */
 package org.openiaml.model.model.operations;
 
-import org.openiaml.model.model.SingleOperation;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ExecutionEdgeDestination;
+import org.openiaml.model.model.ExecutionEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,8 +17,8 @@ import org.openiaml.model.model.WireEdgesSource;
  *
  *
  * @see org.openiaml.model.model.operations.OperationsPackage#getSplitNode()
- * @model
+ * @model annotation="http://openiaml.org/comment comment='added in 0.4'"
  * @generated
  */
-public interface SplitNode extends SingleOperation, WireEdgesSource {
+public interface SplitNode extends ActivityNode, ExecutionEdgesSource, ExecutionEdgeDestination {
 } // SplitNode

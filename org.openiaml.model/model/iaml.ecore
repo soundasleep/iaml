@@ -463,6 +463,16 @@
         <details key="comment" value="added in 0.2"/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SplitNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="JoinNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="scopes">
     <eAnnotations source="http://openiaml.org/comment">

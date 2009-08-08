@@ -1,0 +1,19 @@
+#summary Summary of model version 0.4.
+#labels Phase-Design,Development
+
+[Model0_3 < 0.3] | *0.4* | [Model0_5 0.5 >]
+
+=Model 0.4=
+
+<wiki:toc max_depth="2" />
+
+=Introduction=
+
+TODO
+
+=New Elements=
+
+  * JoinNode
+  * SplitNode
+
+Documentation forthcoming.

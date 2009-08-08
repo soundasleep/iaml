@@ -69,3 +69,17 @@ rule "Create 'save' operation for DomainObjectInstances"
 		queue.add(op, drools);
 
 end
+
+rule "Create 'exists?' operation for DomainObjectInstances"
+	when
+		instance : DomainObjectInstance ( )
+		
+		not ( Operation( eContainer == instance, name == "exists?" ))
+		
+	then
+		# create a new one
+		CompositeOperation op = handler.generatedCompositeOperation(instance, instance);
+		op.setName("exists?");
+		queue.add(op, drools);
+
+end

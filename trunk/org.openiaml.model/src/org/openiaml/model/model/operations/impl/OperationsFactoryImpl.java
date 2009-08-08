@@ -19,8 +19,10 @@ import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 
 /**
@@ -73,6 +75,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 			case OperationsPackage.DECISION_NODE: return createDecisionNode();
 			case OperationsPackage.DECISION_OPERATION: return createDecisionOperation();
 			case OperationsPackage.DECISION_CONDITION: return createDecisionCondition();
+			case OperationsPackage.SPLIT_NODE: return createSplitNode();
+			case OperationsPackage.JOIN_NODE: return createJoinNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -142,6 +146,26 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 		DecisionConditionImpl decisionCondition = new DecisionConditionImpl();
 		generateID(decisionCondition);
 		return decisionCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SplitNode createSplitNode() {
+		SplitNodeImpl splitNode = new SplitNodeImpl();
+		return splitNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JoinNode createJoinNode() {
+		JoinNodeImpl joinNode = new JoinNodeImpl();
+		return joinNode;
 	}
 
 	/**

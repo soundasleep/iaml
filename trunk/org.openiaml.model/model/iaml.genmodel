@@ -202,6 +202,8 @@
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionOperation"/>
       <genClasses ecoreClass="iaml.ecore#//operations/DecisionCondition"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/SplitNode"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/JoinNode"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//scopes">

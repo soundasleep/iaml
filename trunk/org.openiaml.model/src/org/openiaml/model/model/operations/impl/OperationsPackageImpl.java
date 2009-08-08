@@ -21,8 +21,10 @@ import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
@@ -79,6 +81,20 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * @generated
 	 */
 	private EClass decisionConditionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass splitNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass joinNodeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -229,6 +245,24 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSplitNode() {
+		return splitNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJoinNode() {
+		return joinNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public OperationsFactory getOperationsFactory() {
 		return (OperationsFactory)getEFactoryInstance();
 	}
@@ -264,6 +298,10 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		decisionOperationEClass = createEClass(DECISION_OPERATION);
 
 		decisionConditionEClass = createEClass(DECISION_CONDITION);
+
+		splitNodeEClass = createEClass(SPLIT_NODE);
+
+		joinNodeEClass = createEClass(JOIN_NODE);
 	}
 
 	/**
@@ -312,6 +350,12 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		decisionConditionEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
 		decisionConditionEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 		decisionConditionEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
+		splitNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		splitNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
+		splitNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		joinNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		joinNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
+		joinNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -326,6 +370,10 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		initEClass(decisionOperationEClass, DecisionOperation.class, "DecisionOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(decisionConditionEClass, DecisionCondition.class, "DecisionCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(splitNodeEClass, SplitNode.class, "SplitNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(joinNodeEClass, JoinNode.class, "JoinNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -345,6 +393,18 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.2"
+		   });		
+		addAnnotation
+		  (splitNodeEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4"
+		   });		
+		addAnnotation
+		  (joinNodeEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4"
 		   });
 	}
 

@@ -9,7 +9,6 @@ import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
 import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
 import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction.CreateElementsWithinContainer;
 import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.tests.InferenceTestCase;
 import org.openiaml.model.tests.inference.InferenceActionTestCase;
@@ -51,12 +50,11 @@ public class DomainInstanceSaveOperation extends InferenceActionTestCase {
 		// page is otherwise empty
 		assertEquals(1, page.getChildren().size());
 		
-		// instance now contains a 'save' method
-		assertEquals(1, di.getOperations().size());
+		// instance now contains a 'save' method and 'exists?' method
+		assertEquals(2, di.getOperations().size());
 		
-		Operation op = di.getOperations().get(0);
-		assertEquals(op.getName(), "save");
-		assertTrue(op.isIsGenerated());
+		assertContainsNamedElement(di.getOperations(), "save", true);
+		assertContainsNamedElement(di.getOperations(), "exists?", true);
 		
 	}
 

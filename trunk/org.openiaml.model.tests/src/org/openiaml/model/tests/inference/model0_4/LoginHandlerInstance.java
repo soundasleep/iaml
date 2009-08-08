@@ -17,6 +17,9 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
@@ -119,6 +122,10 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		DomainAttributeInstance aname = (DomainAttributeInstance) queryOne(instance, "iaml:attributes[iaml:name='name']");
 		assertNotGenerated(aname);
 		
+		// the instance should also contain an 'exists?' operation
+		Operation exists = (Operation) queryOne(instance, "iaml:operations[iaml:name='exists?']");
+		assertGenerated(exists);
+		
 	}
 	
 	/**
@@ -205,6 +212,53 @@ public class LoginHandlerInstance extends InferenceTestCase {
 			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
 			assertGenerated(run);
 		}
+		
+	}
+	
+	/**
+	 * A default login page should be created.
+	 * 
+	 * @throws Exception
+	 */
+	public void testLoginPage() throws Exception {
+		root = loadAndInfer(LoginHandlerInstance.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		LoginHandler handler = (LoginHandler) queryOne(session, "iaml:children[iaml:name='login handler']");
+
+		Page login = (Page) queryOne(root, "iaml:children[iaml:name='login']");
+		assertGenerated(login);
+		
+		// it should contain a form
+		InputForm form = (InputForm) queryOne(login, "iaml:children[iaml:name='login form']");
+		assertGenerated(form);
+		
+		// with a password field
+		InputTextField field = (InputTextField) queryOne(form, "iaml:children[iaml:name='password']");
+		assertGenerated(field);
+		
+		// there should be a login button
+		Button button = (Button) queryOne(form, "iaml:children[iaml:name='Login']");
+		assertGenerated(button);
+		
+		// a generated operation will handle the login
+		Operation op = (Operation) queryOne(handler, "iaml:operations[iaml:name='do login']");
+		assertGenerated(op);
+		
+		// button has an 'onClick' run wire
+		Set<WireEdge> w = assertHasWiresFromTo(1, root, button, op);
+		RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+		assertGenerated(run);
+		assertEquals("onClick", run.getName());
+
+		// the text field has a parameter
+		ApplicationElementProperty prop = (ApplicationElementProperty) queryOne(field, "iaml:properties[iaml:name='fieldValue']");
+		assertGenerated(prop);
+		
+		// connecting to the operation
+		Set<WireEdge> w2 = assertHasWiresFromTo(1, root, prop, run);
+		ParameterWire param = (ParameterWire) w2.iterator().next();
+		assertGenerated(param);
 		
 	}
 	

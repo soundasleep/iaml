@@ -12,8 +12,8 @@ require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 
 log_message("set_session.php? " . print_r($_GET, true));
-$id = $_GET["id"] or throw_new_IamlRuntimeException("no id");
-$arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
+$id = require_get("id");
+$arg0 = require_get("arg0");
 
 // set
 $_SESSION[$id] = $arg0;

@@ -11,14 +11,14 @@
  * Option: Start new threads, though this could be challenging for Javascript, and it
  * will also introduce concurrency issues.  
  */
-«DEFINE executionFlow(Boolean php) FOR model::operations::StartNode-»
+«DEFINE executionFlow(model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
 	// flow starts here
 	«FOREACH outExecutions AS e-»
-		«EXPAND executionFlowStep(php) FOR e.to-»
+		«EXPAND executionFlowStep(container, php) FOR e.to-»
 	«ENDFOREACH»
 «ENDDEFINE»
 
-«DEFINE executionFlow(Boolean php) FOR model::ActivityNode-»
+«DEFINE executionFlow(model::visual::Page container, Boolean php) FOR model::ActivityNode-»
 	// nothing for an activity node
 «ENDDEFINE»
 
@@ -27,11 +27,11 @@
  */
  
 /* an edge that is the end (both StartNode and FinishNode also fall into this) */
-«DEFINE executionFlowStep(Boolean php) FOR model::ExecutionEdgeDestination-»
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::ExecutionEdgeDestination-»
 	// do nothing «this-»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean php) FOR model::operations::CancelNode-»
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::CancelNode-»
 	«IF exceptionText.length > 0»
 		«IF php»
 		throw new IamlRuntimeException("«exceptionText»");
@@ -44,11 +44,11 @@
 «ENDDEFINE»
 
 /* a chained operation: carry on */
-«DEFINE executionFlowStep(Boolean php) FOR model::ChainedOperation-»
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::ChainedOperation-»
 	// chained operation «name-»
-	«EXPAND Contents::operationContents(php) FOR this-»
+	«EXPAND Contents::operationContents(container, php) FOR this-»
 	«FOREACH outExecutions AS e-»
-		«EXPAND executionFlowStep(php) FOR e.to-»
+		«EXPAND executionFlowStep(container, php) FOR e.to-»
 	«ENDFOREACH»
 	
 	// continue chained operations
@@ -56,9 +56,9 @@
 «ENDDEFINE»
 
 /* a decision operation: expandOperationContents will continue the execution flow */
-«DEFINE executionFlowStep(Boolean php) FOR model::operations::DecisionOperation-»
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
 	// decision operation «name-»
-	«EXPAND Contents::operationContents(php) FOR this-»
+	«EXPAND Contents::operationContents(container, php) FOR this-»
 
 	// continue chained operations
 	«EXPAND continueChainedOperations(php) FOR this»

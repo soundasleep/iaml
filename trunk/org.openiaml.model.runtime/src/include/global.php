@@ -80,11 +80,25 @@ if (!$s) {
 	log_message("table for stored_events created", false);
 }
 
-function require_session($var, $default = "") {
+function require_session($var, $default = false) {
+	if (!isset($_SESSION[$var]) && $default === false) {
+		throw new IamlRuntimeException("Required session variable '$var' was not found");
+	}
 	return isset($_SESSION[$var]) ? $_SESSION[$var] : $default;
 }
 
-function require_get($var, $default = "") {
+function require_get($var, $default = false) {
+	if (!isset($_GET[$var]) && $default === false) {
+		throw new IamlRuntimeException("Required get variable '$var' was not found");
+	}
+	return isset($_GET[$var]) ? $_GET[$var] : $default;
+}
+
+function has_session($var, $default = "") {
+	return isset($_SESSION[$var]) ? $_SESSION[$var] : $default;
+}
+
+function has_get($var, $default = "") {
 	return isset($_GET[$var]) ? $_GET[$var] : $default;
 }
 

@@ -12,8 +12,8 @@ require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 
 log_message("save_queued_store_domain_object.php? " . print_r($_GET, true));
-$id = $_GET["id"] or throw_new_IamlRuntimeException("no id");
-$page_id = $_GET["page"] or throw_new_IamlRuntimeException("no page");
+$id = require_get("id");
+$page_id = require_get("page");
 
 log_message("save_queued_store_domain_object.php: setting id=$id, page_id=$page_id");
 

@@ -48,8 +48,8 @@ function store_event($page_id, $event_name, $arg0) {
 }
 
 log_message("store_db.php? " . print_r($_GET, true));
-$attribute_id = $_GET["attribute_id"] or throw_new_IamlRuntimeException("no attribute id");
-$arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
+$attribute_id = require_get("attribute_id");
+$arg0 = require_get("arg0");
 
 // anti-infinite-loop trace tracking
 add_running_function($attribute_id);

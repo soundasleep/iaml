@@ -245,6 +245,37 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		assertEquals("queryOne for '" + query + "' did not return one result", 1, q.size());
 		return (EObject) q.get(0);
 	}
+	
+	/**
+	 * Assert that there are no results for the given query.
+	 *
+	 * @param root
+	 * @param query
+	 * @return
+	 * @throws JaxenException
+	 */
+	protected void assertHasNone(EObject root, String query) throws JaxenException {
+		List<?> q = query(root, query);
+		assertEquals("Unexpected query result for '" + query + "' on '" + root + ": " + q, 0, q.size());
+	}
+	
+	/**
+	 * Assert that the given element is generated.
+	 * 
+	 * @param e
+	 */
+	protected void assertGenerated(GeneratedElement e) {
+		assertTrue("Element '" + e + "' should be generated", e.isIsGenerated());
+	}
+
+	/**
+	 * Assert that the given element is not generated.
+	 * 
+	 * @param e
+	 */
+	protected void assertNotGenerated(GeneratedElement e) {
+		assertFalse("Element '" + e + "' should not be generated", e.isIsGenerated());
+	}
 
 	/**
 	 * Save the changed, inferred model to a file for later reference.
@@ -355,9 +386,11 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	 * @param container
 	 * @param fromElement
 	 * @param toElement
+	 * @return 
 	 * @throws JaxenException 
+	 * @return the found wires
 	 */
-	protected void assertHasWiresFromTo(int count, EObject container, 
+	protected Set<WireEdge> assertHasWiresFromTo(int count, EObject container, 
 			WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
 
 		Set<WireEdge> wires = getWiresFromTo(container, fromElement, toElement);
@@ -367,6 +400,7 @@ public abstract class InferenceTestCase extends ModelTestCase {
 			}
 			assertEquals("Expected " + count + " wires between [" + fromElement + "] and [" + toElement + "], found: " + wires.size(), count, wires.size());
 		}
+		return wires;
 		
 	}
 	

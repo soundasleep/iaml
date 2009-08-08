@@ -808,7 +808,10 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
-            parser="//@labelParsers/@implementations.0">
+            parser="//@labelParsers/@implementations.0"
+            viewPattern="[type = {0}]"
+            editorPattern="{0}"
+            editPattern="{0}">
           <metaFeatures
               href="iaml.genmodel#//model/components/LoginHandler/type"/>
         </modelFacet>

@@ -472,6 +472,53 @@
         </modelFacet>
       </labels>
     </topLevelNodes>
+    <topLevelNodes
+        visualID="2007"
+        editPartClassName="DecisionOperationEditPart"
+        itemSemanticEditPolicyClassName="DecisionOperationItemSemanticEditPolicy"
+        notationViewFactoryClassName="DecisionOperationViewFactory"
+        canonicalEditPolicyClassName="DecisionOperationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DecisionOperationGraphicalNodeEditPolicy"
+        createCommandClassName="DecisionOperationCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="DecisionOperationEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          layoutType="FLOW_LAYOUT"
+          className="DecisionOperationFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class DecisionOperationFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDecisionOperationNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public DecisionOperationFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;this.setLineWidth(1);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureDecisionOperationNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureDecisionOperationNameFigure.setText(&quot;??? &lt;...>&quot;);&#xA;&#xA;this.add(fFigureDecisionOperationNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDecisionOperationNameFigure() {&#xA;&#x9;&#x9;return fFigureDecisionOperationNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+      <modelFacet
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.3">
+        <metaClass
+            href="iaml.genmodel#//model/operations/DecisionOperation"/>
+        <containmentMetaFeature
+            href="iaml.genmodel#//model/ContainsOperations/operations"/>
+        <childMetaFeature
+            href="iaml.genmodel#//model/ContainsOperations/operations"/>
+      </modelFacet>
+      <labels
+          visualID="5013"
+          editPartClassName="DecisionOperationNameEditPart"
+          itemSemanticEditPolicyClassName="DecisionOperationNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="DecisionOperationNameViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureDecisionOperationNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
     <links
         visualID="4001"
         editPartClassName="SyncWireEditPart"
@@ -495,7 +542,7 @@
           editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
-          modelElementSelector="//@expressionProviders/@providers.0/@expressions.3">
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.4">
         <metaClass
             href="iaml.genmodel#//model/wires/SyncWire"/>
         <containmentMetaFeature
@@ -554,7 +601,7 @@
           editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
-          modelElementSelector="//@expressionProviders/@providers.0/@expressions.4">
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.5">
         <metaClass
             href="iaml.genmodel#//model/wires/RunInstanceWire"/>
         <containmentMetaFeature
@@ -636,6 +683,13 @@
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainAttributeInstance.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainAttributeInstance.gif"
             genNodes="//@diagram/@topLevelNodes.5"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="DecisionOperation"
+            description="Create new DecisionOperation"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeOperation.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeOperation.gif"
+            genNodes="//@diagram/@topLevelNodes.6"/>
       </groups>
       <groups
           title="Wires"
@@ -716,6 +770,9 @@
         child="//@diagram/@topLevelNodes.5"/>
     <childReferences
         parent="//@diagram"
+        child="//@diagram/@topLevelNodes.6"/>
+    <childReferences
+        parent="//@diagram"
         child="//@diagram/@links.0"
         groupName="links"
         groupIcon="icons/linksNavigatorGroup.gif"/>
@@ -781,6 +838,18 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.6"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.6"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
         child="//@diagram/@topLevelNodes.0"
         referenceType="in_source"
         groupName="source"
@@ -835,6 +904,18 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.5"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.6"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.6"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"
@@ -906,6 +987,18 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.6"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.6"
+        child="//@diagram/@links.1"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
         child="//@diagram/@topLevelNodes.0"
         referenceType="in_source"
         groupName="source"
@@ -964,6 +1057,18 @@
         referenceType="out_target"
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.6"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.6"
+        child="//@diagram/@links.1"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
   </navigator>
   <diagramUpdater/>
   <propertySheet>
@@ -1001,6 +1106,9 @@
           body="self.oclIsTypeOf( ChainedOperation )"/>
       <expressions
           xsi:type="gmfgen:GenConstraint"
+          body="self.oclIsTypeOf( DecisionOperation )"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
           body="self.oclIsTypeOf( SyncWire )"/>
       <expressions
           xsi:type="gmfgen:GenConstraint"
@@ -1011,7 +1119,7 @@
       extensibleViaService="true">
     <implementations
         xsi:type="gmfgen:PredefinedParser"
-        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet"/>
+        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet"/>
     <implementations
         xsi:type="gmfgen:ExternalParser"
         uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.1/@labels.2/@modelFacet //@diagram/@topLevelNodes.2/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.1/@modelFacet //@diagram/@topLevelNodes.4/@labels.1/@modelFacet"/>

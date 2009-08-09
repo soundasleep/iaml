@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.eclipse.actions;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
@@ -114,6 +116,18 @@ public class PartialInference extends AbstractActionTestCase {
 		IFile model = project.getFile(getModel());
 		IFile modelNew = project.getFile("new-model.iaml");
 		IFile diagramNew = project.getFile("new-model.iaml_diagram");
+		if (modelNew.exists()) {
+			HaltProgressMonitor m = new HaltProgressMonitor();
+			modelNew.delete(true, m);
+			halt(m);
+		}
+		if (diagramNew.exists()) {
+			HaltProgressMonitor m = new HaltProgressMonitor();
+			diagramNew.delete(true, m);
+			halt(m);
+		}
+		assertFalse(modelNew.exists());
+		assertFalse(diagramNew.exists());
 		
 		// infer
 		inferSourceModelFile(model);
@@ -138,8 +152,8 @@ public class PartialInference extends AbstractActionTestCase {
 			editor_page = openDiagram(page);
 			assertEditorVisual(editor_page);
 			
-			// there should be two children (text fields)
-			assertEditorHasChildren(2, editor_page);
+			// there should be three children (text fields and access)
+			assertEditorHasChildren(3, editor_page);
 			ShapeNodeEditPart text1 = assertHasInputTextField(editor_page, "target text field");
 			assertNotShortcut(text1);
 			assertNotGenerated(text1);
@@ -148,6 +162,8 @@ public class PartialInference extends AbstractActionTestCase {
 			assertNotGenerated(text2);
 			ConnectionNodeEditPart sync = assertHasSyncWire(editor_page, text1, text2, "sync");
 			assertNotGenerated(sync);
+			ShapeNodeEditPart access = assertHasEventTrigger(editor_page, "access", false);
+			assertGenerated(access);
 			
 			// in the fully inferred file, there should be lots of children
 			editor_text = openDiagram(text1);
@@ -173,8 +189,8 @@ public class PartialInference extends AbstractActionTestCase {
 		editor_page = openDiagram(page);
 		assertEditorVisual(editor_page);
 		
-		// there should be two children (text fields)
-		assertEditorHasChildren(2, editor_page);
+		// there should be three children (text fields and access)
+		assertEditorHasChildren(3, editor_page);
 		ShapeNodeEditPart text1 = assertHasInputTextField(editor_page, "target text field");
 		assertNotShortcut(text1);
 		assertNotGenerated(text1);
@@ -183,6 +199,8 @@ public class PartialInference extends AbstractActionTestCase {
 		assertNotGenerated(text2);
 		ConnectionNodeEditPart sync = assertHasSyncWire(editor_page, text1, text2, "sync");
 		assertNotGenerated(sync);
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_page, "access", false);
+		assertGenerated(access);
 		
 		// in the fully inferred file, there should be lots of children
 		editor_text = openDiagram(text1);
@@ -273,4 +291,18 @@ public class PartialInference extends AbstractActionTestCase {
 		super.tearDown();
 	}
 
+	/**
+	 * Override the default method to print out which children are
+	 * actually present in the given editor.
+	 */
+	@Override
+	public void assertEditorHasChildren(int i, DiagramDocumentEditor sub) {
+		try {
+			super.assertEditorHasChildren(i, sub);
+		} catch (AssertionFailedError e) {
+			String children = "" + sub.getDiagramEditPart().getChildren();
+			throw new RuntimeException(children, e);
+		}
+	}
+	
 }

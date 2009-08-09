@@ -62,6 +62,9 @@ public class LoginHandlerKey extends InferenceTestCase {
 		// stored key
 		ApplicationElementProperty key = (ApplicationElementProperty) queryOne(session, "iaml:properties[iaml:name='my login key']");
 		assertNotGenerated(key);
+		// the key must have a default
+		assertNotNull(key.getDefaultValue());
+		assertEquals("", key.getDefaultValue());
 		
 		// handler logout--> home
 		{

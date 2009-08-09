@@ -125,7 +125,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// the instance should also contain an 'exists?' operation
 		Operation exists = (Operation) queryOne(instance, "iaml:operations[iaml:name='exists?']");
 		assertGenerated(exists);
-		
+
 	}
 	
 	/**
@@ -153,6 +153,11 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// the login handler should have generated a key store
 		ApplicationElementProperty currentPassword = (ApplicationElementProperty) queryOne(session, "iaml:properties[iaml:name='current password']");
 		assertGenerated(currentPassword);
+		
+		// thuis key must have a default value set
+		assertNotNull(currentPassword.getDefaultValue());
+		assertEquals("", currentPassword.getDefaultValue());
+		
 		
 		// each key should be connected to the select
 		{

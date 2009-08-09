@@ -42,9 +42,19 @@
 			«ENDREM»
 			«IF containingSession(this) != null»
 				/* a property from our session */
-				require_session("«safeName(containingSession(this))»_«safeName()-»")
+				require_session("«safeName(containingSession(this))»_«safeName()-»"
+				«IF defaultValue != null»
+					, "«defaultValue»"
+				«ENDIF»
+				)
 			«ELSE»
-				get_application_value("«safeName()-»", null)		
+				get_application_value("«safeName()-»", 
+					«IF defaultValue != null»
+						"«defaultValue»"
+					«ELSE»
+						null
+					«ENDIF»
+				)		
 			«ENDIF»
 		«ENDIF»
 	«ELSE»

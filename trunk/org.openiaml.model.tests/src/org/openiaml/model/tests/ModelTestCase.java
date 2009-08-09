@@ -219,6 +219,25 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		return doTransformOAWWorkflow(file, monitor);
 	}
 
+	public class HaltProgressMonitor extends NullProgressMonitor {
+		@Override
+		public void setCanceled(boolean cancelled) {
+			isDone = true;	// bail early
+			super.setCanceled(cancelled);
+		}
+
+		private boolean isDone = false;
+		public synchronized boolean isDone() {
+			return isDone;
+		}
+
+		@Override
+		public void done() {
+			isDone = true;
+			super.done();
+		}
+	}
+	
 	/**
 	 * Force a complete refresh of the entire project, and
 	 * halt execution until it's completed.
@@ -227,24 +246,6 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 * @throws CoreException
 	 */
 	protected IStatus refreshProject() throws CoreException {
-		class HaltProgressMonitor extends NullProgressMonitor {
-			@Override
-			public void setCanceled(boolean cancelled) {
-				isDone = true;	// bail early
-				super.setCanceled(cancelled);
-			}
-
-			private boolean isDone = false;
-			public synchronized boolean isDone() {
-				return isDone;
-			}
-
-			@Override
-			public void done() {
-				isDone = true;
-				super.done();
-			}
-		}
 		
 		HaltProgressMonitor m = new HaltProgressMonitor();
 		project.refreshLocal(IResource.DEPTH_INFINITE, m);
@@ -257,7 +258,17 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		}
 
 		return Status.OK_STATUS;
-				
+		
+	}
+	
+	protected void halt(HaltProgressMonitor m) {
+		try {
+			while (!m.isDone()) {
+				Thread.sleep(300);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace(System.err);
+		}
 	}
 
 	/**
@@ -354,10 +365,29 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 * @param expected expected value (B)
 	 * @param actual actual value (A)
 	 */
-	protected void assertGreaterEq(int expected, int actual) {
+	public void assertGreaterEq(int expected, int actual) {
 		assertTrue("expected >= than " + expected + ", but actually had " + actual, actual >= expected);
 	}
 	
+	/**
+	 * Helper method: assert A != B
+	 * 
+	 * @param expected expected value (B)
+	 * @param actual actual value (A)
+	 */
+	public void assertNotEqual(String message, int expected, int actual) {
+		assertFalse(message, expected == actual);
+	}
+	
+	/**
+	 * Helper method: assert A != B
+	 * 
+	 * @param expected expected value
+	 * @param actual actual value
+	 */
+	public void assertNotEqual(int expected, int actual) {
+		assertFalse("Expected '" + expected + "', actually '" + actual + "'", expected == actual);
+	}
 	
 	/**
 	 * Assert an instance of a class is in a given list.
@@ -365,7 +395,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 * @param class1 class to check
 	 * @param used list of class instances
 	 */
-	protected void assertClassIn(Class<?> class1,
+	public void assertClassIn(Class<?> class1,
 			List<?> used) {
 		for (Object m : used) {
 			if (m.getClass().equals(class1))
@@ -380,7 +410,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 * @param class1 class to check
 	 * @param used list of class instances
 	 */
-	protected void assertClassNotIn(Class<?> class1,
+	public void assertClassNotIn(Class<?> class1,
 			List<?> used) {
 		for (Object m : used) {
 			if (m.getClass().equals(class1))

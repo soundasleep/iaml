@@ -23,6 +23,7 @@ public class AllModel0_4InferenceTests {
 		suite.addTestSuite(SelectWireAttributeInference.class);
 		suite.addTestSuite(DomainInstanceSaveOperation.class);
 		suite.addTestSuite(LoginHandlerInstance.class);
+		suite.addTestSuite(LoginHandlerKey.class);
 		
 		return suite;
 	}

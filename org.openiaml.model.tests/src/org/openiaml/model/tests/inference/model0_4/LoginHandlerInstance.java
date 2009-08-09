@@ -170,6 +170,34 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		
 	}
 	
+	
+	/**
+	 * A default logout page should be created; this will
+	 * redirect to the actual logout page in our case.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGeneratedLogoutPage() throws Exception {
+		root = loadAndInfer(LoginHandlerInstance.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+
+		// a generated 'logout' page
+		Page page = (Page) queryOne(session, "iaml:children[iaml:name='logout']");
+		assertGenerated(page);
+		
+		// this page will have been generated
+		Page target = (Page) queryOne(root, "iaml:children[iaml:name='Logout Successful']");
+		assertGenerated(target);
+		
+		EventTrigger access = (EventTrigger) queryOne(page, "iaml:eventTriggers[iaml:name='access']");
+		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, target);
+		{
+			NavigateWire nav = (NavigateWire) w.iterator().next();
+			assertGenerated(nav);
+		}
+	}
+	
 	/**
 	 * Test the generation of event triggers and check operations.
 	 * 
@@ -182,6 +210,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		
 		Page dest = (Page) queryOne(session, "iaml:children[iaml:name='current user']");
 		assertNotGenerated(dest);
+		
 		Operation check = (Operation) queryOne(session, "iaml:operations[iaml:name='check instance']");
 		EventTrigger access = (EventTrigger) queryOne(dest, "iaml:eventTriggers[iaml:name='access']");
 		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, check);
@@ -205,6 +234,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Page logout = (Page) queryOne(root, "iaml:children[iaml:name='Logout Successful']");
 		assertGenerated(logout);
+		
 		Operation op = (Operation) queryOne(session, "iaml:operations[iaml:name='do logout']");
 		EventTrigger access = (EventTrigger) queryOne(logout, "iaml:eventTriggers[iaml:name='access']");
 		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, op);
@@ -254,7 +284,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		ApplicationElementProperty prop = (ApplicationElementProperty) queryOne(field, "iaml:properties[iaml:name='fieldValue']");
 		assertGenerated(prop);
 		
-		// connecting to the operation
+		// connecting to the run wire
 		Set<WireEdge> w2 = assertHasWiresFromTo(1, root, prop, run);
 		ParameterWire param = (ParameterWire) w2.iterator().next();
 		assertGenerated(param);

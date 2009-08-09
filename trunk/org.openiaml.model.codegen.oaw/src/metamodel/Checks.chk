@@ -64,6 +64,20 @@ context model::WireEdge ERROR "A WireEdge must have a 'from'" :
 context model::WireEdge ERROR "A WireEdge must have a 'to'" :
 	to != null;
 
+/*
+ * isInstance() definitely works in OAW checks for abstract supertypes.
+ * if a check isn't working, make sure that you are following the OAW
+ * checks logic correctly; the predicate is expected to be _true_,
+ * and will only throw an exception if the predicate is false.
+ *
+ * i.e.: "name != 'single_values'"
+ */
+
+context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation: " + outEdges.size + ", " + isRunInstanceWire(outEdges.first()) + ", " + isOperation(outEdges.first().to) + " metatype=" + outEdges.first().to.metaType :
+	outEdges.size == 1
+		&& model::wires::RunInstanceWire.isInstance(outEdges.first())
+		&& model::Operation.isInstance(outEdges.first().to);
+
 context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do anything: consider naming it 'onClick'" :
 	!(from.metaType.isAssignableFrom(model::VisibleThing) && !(name == "click" || name == "onClick"));
 

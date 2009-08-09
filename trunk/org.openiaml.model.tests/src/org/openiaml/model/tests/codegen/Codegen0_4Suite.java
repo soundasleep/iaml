@@ -3,6 +3,7 @@ package org.openiaml.model.tests.codegen;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstance;
 import org.openiaml.model.tests.codegen.model0_4.NewInstanceWithoutId;
 
 /**
@@ -22,6 +23,7 @@ public class Codegen0_4Suite {
 		TestSuite suite = new TestSuite("Model 0.4");
 		
 		suite.addTestSuite(NewInstanceWithoutId.class);
+		suite.addTestSuite(LoginHandlerInstance.class);
 
 		return suite;
 	}

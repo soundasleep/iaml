@@ -10,6 +10,7 @@ import org.openiaml.model.*;
 import org.openiaml.model.model.*;	// for ModelPackage
 import org.openiaml.model.model.domain.*;
 import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.operations.*;
 
 import org.openiaml.model.inference.*;		// for handler
 
@@ -74,11 +75,11 @@ rule "Create 'exists?' operation for DomainObjectInstances"
 	when
 		instance : DomainObjectInstance ( )
 		
-		not ( Operation( eContainer == instance, name == "exists?" ))
+		not ( DecisionOperation( eContainer == instance, name == "exists?" ))
 		
 	then
 		# create a new one
-		CompositeOperation op = handler.generatedCompositeOperation(instance, instance);
+		DecisionOperation op = handler.generatedDecisionOperation(instance, instance);
 		op.setName("exists?");
 		queue.add(op, drools);
 

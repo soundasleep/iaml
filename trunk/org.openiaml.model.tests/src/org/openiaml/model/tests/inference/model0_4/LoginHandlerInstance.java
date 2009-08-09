@@ -3,9 +3,11 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
+import java.util.List;
 import java.util.Set;
 
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
@@ -16,6 +18,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
+import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.InputForm;
@@ -295,5 +298,98 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(param);
 		
 	}
+
+	/**
+	 * Check that the 'check instance' operation actually contains
+	 * some nodes.
+	 * 
+	 * @throws Exception
+	 */
+	public void testCheckInstanceOperation() throws Exception {
+		root = loadAndInfer(LoginHandlerInstance.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		
+		CompositeOperation check = (CompositeOperation) queryOne(session, "iaml:operations[iaml:name='check instance']");
+		assertGenerated(check);
+		
+		List<?> nodes = query(check, "iaml:nodes");
+		assertNotEqual("'check instance' operation should have been generated", 0, nodes.size());
+		
+		// at least two nodes
+		assertGreaterEq(2, nodes.size());
+		
+	}
 	
+	/**
+	 * Helper method - the given operation should use an operation
+	 * call node to call the 'exists?' operation
+	 * 
+	 * @throws Exception
+	 */
+	private void checkOperationCallsExists(Session session, Operation check) throws Exception {
+		// find 'exists?'
+		DomainObjectInstance instance = (DomainObjectInstance) queryOne(session, "iaml:children[iaml:name='logged in user']");
+		assertNotGenerated(instance);
+		Operation exists = (Operation) queryOne(instance, "iaml:operations[iaml:name='exists?']");
+		assertGenerated(exists);
+		
+		OperationCallNode call = null;
+		List<?> nodes = query(check, "iaml:nodes");
+		for (Object o : nodes) {
+			if (o instanceof OperationCallNode) {
+				call = (OperationCallNode) o;
+			}
+		}
+		
+		assertNotNull(call);
+		assertGenerated(call);
+		
+		// should have a RunInstanceWire to the 'exists?' operation
+		Set<WireEdge> w = assertHasWiresFromTo(1, session, call, exists);
+		{
+			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+			assertGenerated(run);
+		}
+	}
+	
+	/**
+	 * The 'check key' operation should use an operation call node
+	 * to call the 'exists?' operation
+	 * 
+	 * @throws Exception
+	 */
+	public void testCheckInstanceOperationCall() throws Exception {
+		root = loadAndInfer(LoginHandlerInstance.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		
+		// find 'check instance'
+		CompositeOperation check = (CompositeOperation) queryOne(session, "iaml:operations[iaml:name='check instance']");
+		assertGenerated(check);
+		
+		// check
+		checkOperationCallsExists(session, check);		
+	}
+
+	
+	/**
+	 * The 'do login' operation should use an operation call node
+	 * to call the 'exists?' operation
+	 * 
+	 * @throws Exception
+	 */
+	public void testDoLoginOperationCall() throws Exception {
+		root = loadAndInfer(LoginHandlerInstance.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		
+		// find 'do login'
+		Operation op = (Operation) queryOne(session, "iaml:operations[iaml:name='do login']");
+		assertGenerated(op);
+		
+		// check
+		checkOperationCallsExists(session, op);		
+	}
+
 }

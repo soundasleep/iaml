@@ -106,7 +106,7 @@
 «ENDDEFINE»
 
 «DEFINE getDomainObject FOR model::DomainObjectInstance-»
-	function get_object_instance_«safeName()»() {
+	function get_object_instance_«safeName()»($default = false) {
 		/* get the object instance '«id»' */
 		/* not contained in an object instance; select it manually */
 		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
@@ -121,7 +121,11 @@
 			// get just the first result
 			$row = $rs->fetch();
 			if (!$row) {
-				throw new IamlRuntimeException("No results found for query '$query'");
+				if ($default !== false) {
+					return $default;
+				} else {
+					throw new IamlRuntimeException("No results found for query '$query'");
+				}
 			}
 			$obj = array();
 			foreach ($row as $key => $value) {
@@ -131,6 +135,11 @@
 		«ENDIF»
 	}
 
+	/* Does the DomainObjectInstance «id» exist? */
+	function exists_object_instance_«safeName()»($default = false) {
+		return get_object_instance_«safeName()»(0) !== 0;
+	}
+	
 	«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 		«EXPAND getNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 	«ENDIF»

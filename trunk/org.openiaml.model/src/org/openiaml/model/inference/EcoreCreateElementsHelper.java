@@ -37,6 +37,7 @@ import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
+import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
@@ -190,6 +191,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 
+	public OperationCallNode generatedOperationCallNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		OperationCallNode node = (OperationCallNode) createElement( container, OperationsPackage.eINSTANCE.getOperationCallNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+	
 	public StartNode generatedStartNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
 		StartNode node = (StartNode) createElement( container, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
 		setGeneratedBy(node, by);
@@ -219,7 +226,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(node, by);
 		return node;
 	}
-
+	
 	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		DataFlowEdge edge = (DataFlowEdge) createElement( container, ModelPackage.eINSTANCE.getDataFlowEdge(), ModelPackage.eINSTANCE.getCompositeOperation_DataEdges() );
 		setGeneratedBy(edge, by);

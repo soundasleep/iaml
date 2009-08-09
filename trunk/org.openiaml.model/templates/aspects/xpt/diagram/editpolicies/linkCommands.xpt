@@ -1,7 +1,5 @@
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
-«EXTENSION xpt::diagram::editpolicies::Utils»
-«EXTENSION xpt::GenModelUtils»
+Â«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'Â»
+Â«EXTENSION xpt::diagram::editpolicies::UtilsÂ»
 
 /**
  * Originally, if you created a shortcut to ApplicationElementProperty in
@@ -20,43 +18,44 @@
  * We have to redefine the entire command, because there are no
  * extension points which we can use.
  */
-«AROUND startLinkCommands(linkEnd : gmfgen::GenLinkEnd) FOR gmfgen::GenLink-»
+Â«AROUND startLinkCommands(linkEnd : gmfgen::GenLinkEnd) FOR gmfgen::GenLink-Â»
 /* start Jevon customisation: allow links to be contained in non-direct elements */
-if («EXPAND xpt::providers::ElementTypes::accessElementType» == req.getElementType()) {
-	«IF createStartLinkCommand(self, linkEnd)-»
-	return getGEFWrapper(new «getCreateCommandQualifiedClassName()»(req,
-		«IF createStartIncomingLinkCommand(self, linkEnd)-»
+if (Â«EXPAND xpt::providers::ElementTypes::accessElementTypeÂ» == req.getElementType()) {
+	Â«IF createStartLinkCommand(self, linkEnd)-Â»
+	return getGEFWrapper(new Â«getCreateCommandQualifiedClassName()Â»(req,
+		Â«IF createStartIncomingLinkCommand(self, linkEnd)-Â»
 			req.getTarget(), req.getSource()
-		«ELSE-»
+		Â«ELSE-Â»
 			req.getSource(), req.getTarget()
-		«ENDIF-»
+		Â«ENDIF-Â»
 		, getPotentialHostElements()
 	));
-	«ELSE-»
+	Â«ELSE-Â»
 	return null;
-	«ENDIF-»
+	Â«ENDIF-Â»
 }
 /* end Jevon customisation: allow links to be contained in non-direct elements */
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND completeLinkCommands(linkEnd : gmfgen::GenLinkEnd) FOR gmfgen::GenLink-»
+Â«AROUND completeLinkCommands(linkEnd : gmfgen::GenLinkEnd) FOR gmfgen::GenLink-Â»
 /* start Jevon customisation: allow links to be contained in non-direct elements */
-if («EXPAND xpt::providers::ElementTypes::accessElementType» == req.getElementType()) {
-	«IF createCompleteLinkCommand(self, linkEnd)-»
-	return getGEFWrapper(new «getCreateCommandQualifiedClassName()»(req,
-		«IF createCompleteOutgoingLinkCommand(self, linkEnd)-»
+if (Â«EXPAND xpt::providers::ElementTypes::accessElementTypeÂ» == req.getElementType()) {
+	Â«IF createCompleteLinkCommand(self, linkEnd)-Â»
+	return getGEFWrapper(new Â«getCreateCommandQualifiedClassName()Â»(req,
+		Â«IF createCompleteOutgoingLinkCommand(self, linkEnd)-Â»
 			req.getTarget(), req.getSource()
-		«ELSE-»
+		Â«ELSE-Â»
 			req.getSource(), req.getTarget()
-		«ENDIF-»
+		Â«ENDIF-Â»
 		, getPotentialHostElements()
 	));
-	«ELSE-»
+	Â«ELSE-Â»
 	return null;
-	«ENDIF-»
+	Â«ENDIF-Â»
 }
 /* end Jevon customisation: allow links to be contained in non-direct elements */
-«ENDAROUND»
+Â«ENDAROUNDÂ»
+
 
 /**
  * Add a method to get all potential container elements in the given
@@ -64,10 +63,10 @@ if («EXPAND xpt::providers::ElementTypes::accessElementType» == req.getElementTy
  *
  * See http://code.google.com/p/iaml/issues/detail?id=34
  */
-«AROUND createLinkCommands FOR gmfgen::GenLinkEnd-»
-	«targetDef.proceed()»
+Â«AROUND linkCommands FOR gmfgen::GenLinkEnd-Â»
+	Â«targetDef.proceed()Â»
 
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: Search the current diagram editor for potential containment elements too. See http://code.google.com/p/iaml/issues/detail?id=34")»
+	Â«EXPAND xpt::Common::generatedMemberComment("Jevon: Search the current diagram editor for potential containment elements too. See http://code.google.com/p/iaml/issues/detail?id=34")Â»
 	protected java.util.List<org.eclipse.emf.ecore.EObject> getPotentialHostElements() {
 		java.util.List<org.eclipse.emf.ecore.EObject> myList = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
 		org.eclipse.gef.EditPart p = getHost();
@@ -84,4 +83,4 @@ if («EXPAND xpt::providers::ElementTypes::accessElementType» == req.getElementTy
 		return myList;
 	}
 
-«ENDAROUND» 
+Â«ENDAROUNDÂ» 

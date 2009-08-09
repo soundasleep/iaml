@@ -213,7 +213,6 @@
 		return false;
 	}
 «ENDAROUND»
-
 /**
  * Issue 57: In order to allow creation of shortcut elements that are not
  * directly contained, we make the .gmfmap element a phantom node by setting

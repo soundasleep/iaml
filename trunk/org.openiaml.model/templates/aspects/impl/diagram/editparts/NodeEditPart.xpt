@@ -6,47 +6,47 @@
  *
  * See: http://www.jevon.org/wiki/Adding_a_Custom_Label_in_GMF
  */
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
-«EXTENSION xpt::diagram::ViewmapAttributesUtils»
-«EXTENSION xpt::diagram::editparts::Utils»
+Â«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'Â»
+Â«EXTENSION xpt::diagram::ViewmapAttributesUtilsÂ»
+Â«EXTENSION xpt::diagram::editparts::UtilsÂ»
+Â«EXTENSION xpt::diagram::UtilsÂ»
 
 /**
  * We re-define the entire command, since we're creating a
  * new sub-class.
  */
-«AROUND createNodeShape(gmfgen::GenNode node) FOR gmfgen::InnerClassViewmap-»
-	«REM»only expand for classes which we can support«ENDREM»
-	«IF className == "CompositeOperationFigure"
-		|| className == "DomainObjectFigure" 
-		|| className == "DomainAttributeFigure" 
-		|| className == "SingleOperationFigure" 
-		|| className == "ChainedOperationFigure" 
-		|| className == "ApplicationElementPropertyFigure" 
-		|| className == "InputFormFigure" 
-		|| className == "InputTextFieldFigure" 
-		|| className == "CompositeConditionFigure" 
-		|| className == "ButtonFigure" 
-		|| className == "EventTriggerFigure"»
-		«EXPAND xpt::Common::generatedMemberComment("Jevon modification: we extend createNodeShape to use our extended class.")»
+Â«AROUND createNodeShape(gmfgen::GenNode node) FOR gmfgen::InnerClassViewmap-Â»
+	Â«REMÂ»only expand for classes which we can supportÂ«ENDREMÂ»
+	Â«IF className = "CompositeOperationFigure"
+		or className = "DomainObjectFigure" 
+		or className = "DomainAttributeFigure" 
+		or className = "SingleOperationFigure" 
+		or className = "ChainedOperationFigure" 
+		or className = "ApplicationElementPropertyFigure" 
+		or className = "InputFormFigure" 
+		or className = "InputTextFieldFigure" 
+		or className = "CompositeConditionFigure" 
+		or className = "ButtonFigure" 
+		or className = "EventTriggerFigure"Â»
+		Â«EXPAND xpt::Common::generatedMemberComment("Jevon modification: we extend createNodeShape to use our extended class.")Â»
 		protected org.eclipse.draw2d.IFigure createNodeShape() {
-			«className» figure = new Extended«className»();
-			«IF node.childNodes.size() > 0 && node.getLayoutType().value == gmfgen::ViewmapLayoutType::XY_LAYOUT.value-»
+			Â«classNameÂ» figure = new ExtendedÂ«classNameÂ»();
+			Â«IF node.childNodes->size() > 0 and node.getLayoutType() = gmfgen::ViewmapLayoutType::XY_LAYOUT-Â»
 	 		figure.setUseLocalCoordinates(true);
-			«ENDIF-»
+			Â«ENDIF-Â»
 	 		return primaryShape = figure;
 		}
 		
-		«EXPAND impl::diagram::editparts::NodeEditPart::getPrimaryShapeMethod FOR className-»
+		Â«EXPAND impl::diagram::editparts::NodeEditPart::getPrimaryShapeMethod FOR className-Â»
 		
-		«EXPAND xpt::Common::generatedMemberComment("Extends the normal generated Figure class with one that can handle notification events, to render changes in the model.\n\nUnfortunately, GMF generates the Viewmap as part of the .gmfgen directly, so we cannot modify the generated code here; we have to extend it in this way. Its not ideal.")»
-		public class Extended«className» extends «className» {
+		Â«EXPAND xpt::Common::generatedMemberComment("Extends the normal generated Figure class with one that can handle notification events, to render changes in the model.\n\nUnfortunately, GMF generates the Viewmap as part of the .gmfgen directly, so we cannot modify the generated code here; we have to extend it in this way. Its not ideal.")Â»
+		public class ExtendedÂ«classNameÂ» extends Â«classNameÂ» {
 			
-			«EXPAND xpt::Common::generatedMemberComment»
+			Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 			private org.eclipse.emf.ecore.EObject resolvedObject;
 			
-			«EXPAND xpt::Common::generatedMemberComment»
-			public Extended«className»() {
+			Â«EXPAND xpt::Common::generatedMemberCommentÂ»
+			public ExtendedÂ«classNameÂ»() {
 				// initialise parent as normal
 				super();
 				
@@ -60,7 +60,7 @@
 				// based on http://dev.eclipse.org/newslists/news.eclipse.modeling.gmf/msg12297.html
 		        org.eclipse.emf.transaction.NotificationFilter nf = org.eclipse.emf.transaction.NotificationFilter.createFeatureFilter( org.openiaml.model.model.ModelPackage.eINSTANCE.getNamedElement_Name() );
 		        org.eclipse.emf.transaction.ResourceSetListener rsl = new org.eclipse.emf.transaction.ResourceSetListenerImpl(nf) {
-					«EXPAND xpt::Common::generatedMemberComment»		
+					Â«EXPAND xpt::Common::generatedMemberCommentÂ»		
 					@Override
 					public void resourceSetChanged(org.eclipse.emf.transaction.ResourceSetChangeEvent event) {
 						refreshLabels();
@@ -70,7 +70,7 @@
 		        getEditingDomain().addResourceSetListener(rsl);
 			}
 			
-			«EXPAND xpt::Common::generatedMemberComment»
+			Â«EXPAND xpt::Common::generatedMemberCommentÂ»
 			public void refreshLabels() {
 				// only refresh if it makes sense
 				if (resolvedObject != null &&
@@ -81,47 +81,47 @@
 					org.openiaml.model.model.NamedElement parent = (org.openiaml.model.model.NamedElement) resolvedObject.eContainer();
 					String parentName = parent.getName();
 						
-				«REM»this is pretty fragile, but there is no way to access the contents of the .gmfmap from the generated .gmfgen viewmap.«ENDREM»
-				«REM»also, I can't do EString.substring(EInt, EInt) for some reason, and struggling to add a generator extension.«ENDREM»
-				«IF className=="CompositeOperationFigure"»
+				Â«REMÂ»this is pretty fragile, but there is no way to access the contents of the .gmfmap from the generated .gmfgen viewmap.Â«ENDREMÂ»
+				Â«REMÂ»also, I can't do EString.substring(EInt, EInt) for some reason, and struggling to add a generator extension.Â«ENDREMÂ»
+				Â«IF className="CompositeOperationFigure"Â»
 					getFigureCompositeOperationParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="DomainObjectFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="DomainObjectFigure"Â»
 					getFigureDomainObjectParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="DomainAttributeFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="DomainAttributeFigure"Â»
 					getFigureDomainAttributeParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="SingleOperationFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="SingleOperationFigure"Â»
 					getFigureSingleOperationParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="ChainedOperationFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="ChainedOperationFigure"Â»
 					getFigureChainedOperationParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="ApplicationElementPropertyFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="ApplicationElementPropertyFigure"Â»
 					getFigureApplicationElementPropertyParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="InputFormFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="InputFormFigure"Â»
 					getFigureInputFormParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="InputTextFieldFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="InputTextFieldFigure"Â»
 					getFigureInputTextFieldParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="CompositeConditionFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="CompositeConditionFigure"Â»
 					getFigureCompositeConditionParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="ButtonFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="ButtonFigure"Â»
 					getFigureButtonParentNameFigure().setText(parentName);
-				«ENDIF»
-				«IF className=="EventTriggerFigure"»
+				Â«ENDIFÂ»
+				Â«IF className="EventTriggerFigure"Â»
 					getFigureEventTriggerParentNameFigure().setText(parentName);
-				«ENDIF»
+				Â«ENDIFÂ»
 				}
 			}
 		
 		}
-	«ELSE»
-		«REM»continue with normal shape«ENDREM»
-		«targetDef.proceed()»
-	«ENDIF»
-«ENDAROUND»
+	Â«ELSEÂ»
+		Â«REMÂ»continue with normal shapeÂ«ENDREMÂ»
+		Â«targetDef.proceed()Â»
+	Â«ENDIFÂ»
+Â«ENDAROUNDÂ»

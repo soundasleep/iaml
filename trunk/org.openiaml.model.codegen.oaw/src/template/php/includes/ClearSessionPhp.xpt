@@ -24,8 +24,8 @@ log_message("clear_session.php completed");
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>An exception occured</title>
-	<link rel="stylesheet" type="text/css" href="default.css">
+	<title>Session cleared</title>
+	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
 </head>
 		
 <body>

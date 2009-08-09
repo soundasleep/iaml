@@ -1,6 +1,8 @@
 /**
  * [issue 47]
- * Lots of changes to render referenced elements as shortcuts.
+ * Modify the XXXCanonicalEditPolicy for the diagram to properly
+ * render contained shortcuts; in particular, replaces
+ * refreshSemantic() methods.
  *
  * [issue 57]
  * Phantom nodes can no longer be drag/dropped onto the editor; we 
@@ -8,11 +10,12 @@
  * allow the drag/drop of nodes that can be rendered visually in 
  * our current view.
  */
-«IMPORT "http://www.eclipse.org/gmf/2006/GenModel"»;
-«IMPORT "http://www.eclipse.org/emf/2002/Ecore"»;
-«EXTENSION xpt::diagram::Utils»
-«EXTENSION xpt::GenModelUtils»
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::diagram::updater::Utils»
 
+/**
+ * Used to return EMPTY_LIST.
+ */
 «AROUND getSemanticConnectionsList FOR gmfgen::GenDiagram-»
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get a list of all EObjects in the current diagram that need to be made into Edges. In particular this will go outside simply direct containment.")»
 	protected java.util.List getSemanticConnectionsList() {
@@ -26,6 +29,9 @@
 	}
 «ENDAROUND»
 
+/**
+ * Used to return null.
+ */
 «AROUND getSourceElement FOR gmfgen::GenDiagram-»
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
 	protected org.eclipse.emf.ecore.EObject getSourceElement(org.eclipse.emf.ecore.EObject relationship) {
@@ -51,6 +57,9 @@
 	}
 «ENDAROUND»
 
+/**
+ * Used to return null.
+ */
 «AROUND getTargetElement FOR gmfgen::GenDiagram-»
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
 	protected org.eclipse.emf.ecore.EObject getTargetElement(org.eclipse.emf.ecore.EObject relationship) {
@@ -185,19 +194,16 @@
 
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We wrap org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter to also adapt to IElementType.class requests, so we can actually create edges in our current editor. \n\n This is also copied from the other adapter that adapts it to String.class.")»
 	public static class IElementTypeElementAdapter extends org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter {
+		«EXPAND xpt::Common::generatedMemberComment»
 		private String _hint;
 
-		/**
-		 * constructor
-		 * @param element
-		 * @param hint
-		 */
+		«EXPAND xpt::Common::generatedMemberComment»
 		public IElementTypeElementAdapter(org.eclipse.emf.ecore.EObject element, String hint) {
 			super(element);
 			_hint = hint;
 		}
 
-		/** Adds both <code>String.class</tt> and <code>IElementType.class</tt> adaptablity. */
+		«EXPAND xpt::Common::generatedMemberComment("Adds both <code>String.class</tt> and <code>IElementType.class</tt> adaptablity.")»
 		public Object getAdapter(Class adapter) {
 			if (adapter.equals(String.class)) {
 				return _hint;
@@ -333,58 +339,53 @@
 
 		deleteViews(toDelete.iterator());
 	}
-	
+		
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied directly, except we add a null check.\n\n@see CanonicalEditPolicy#makeViewsImmutable(java.util.List)")»
-	protected void makeViewsImmutableWithNullCheck(java.util.List createdViews) {
+	protected void makeViewsImmutableWithNullCheck(java.util.List<org.eclipse.core.runtime.IAdaptable> createdViews) {
 		if (createdViews != null && !createdViews.isEmpty()) {
-			// uses my own method
 			addListenersToContainersWithNullCheck(createdViews);
-
-			java.util.List viewAdapters = prepareAdapterList(createdViews);
-			org.eclipse.gef.commands.Command immutable = org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand
-					.makeImmutable(viewAdapters);
+			
+			java.util.List<org.eclipse.core.runtime.IAdaptable> viewAdapters = prepareAdapterList(createdViews);
+			org.eclipse.gef.commands.Command immutable = org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand.makeImmutable(viewAdapters);
 			AsyncCommand ac = new AsyncCommand(immutable);
 			ac.execute();
 		}
 	}
 	
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Copied from {@link CanonicalEditPolicy#addListenersToContainers()}, except this method prevents some NullPointerExceptions from being thrown.")»
-	private void addListenersToContainersWithNullCheck(java.util.List createdViews) {
-		org.eclipse.emf.common.util.UniqueEList list = new org.eclipse.emf.common.util.UniqueEList();
-		java.util.ListIterator li = createdViews.listIterator();
-		while (li.hasNext()) {
-			Object obj = li.next();
-			if (obj instanceof org.eclipse.core.runtime.IAdaptable) {
-				org.eclipse.gmf.runtime.notation.View view = (org.eclipse.gmf.runtime.notation.View) ((org.eclipse.core.runtime.IAdaptable) obj).getAdapter(org.eclipse.gmf.runtime.notation.View.class);
-				if (view != null)
-					list.add(view.eContainer());
+	private void addListenersToContainersWithNullCheck(java.util.List<org.eclipse.core.runtime.IAdaptable> createdViews) {
+		org.eclipse.emf.common.util.UniqueEList<org.eclipse.gmf.runtime.notation.View> list = new org.eclipse.emf.common.util.UniqueEList<org.eclipse.gmf.runtime.notation.View>();
+		for(org.eclipse.core.runtime.IAdaptable obj : createdViews) {
+			org.eclipse.gmf.runtime.notation.View view = (org.eclipse.gmf.runtime.notation.View)obj.getAdapter(org.eclipse.gmf.runtime.notation.View.class);
+			// Jevon change: add eContainer null check
+			if (view != null && view.eContainer() != null) {				
+				list.add((org.eclipse.gmf.runtime.notation.View)view.eContainer());
 			}
 		}
-
-		java.util.ListIterator liContainers = list.listIterator();
-		while (liContainers.hasNext()) {
-			org.eclipse.gmf.runtime.notation.View containerView = (org.eclipse.gmf.runtime.notation.View) liContainers.next();
-			if (containerView != null) { // jevon change: add a null check to prevent NPEs
-				addListenerFilter(
-						"NotationListener_Container" + containerView.toString(), //$NON-NLS-1$
-						this, containerView, org.eclipse.gmf.runtime.notation.NotationPackage.eINSTANCE
-								.getView_PersistedChildren());
-			}
+		
+		for(org.eclipse.gmf.runtime.notation.View containerView : list) {
+			addListenerFilter("NotationListener_Container_" + containerView.getClass().getName() + '@' + Integer.toHexString(containerView.hashCode()), //$NON-NLS-1$
+				  this,
+				  containerView,
+				  org.eclipse.gmf.runtime.notation.NotationPackage.eINSTANCE.getView_PersistedChildren());
 		}
 	}
 	
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] This method is copied directly from {@link CanonicalEditPolicy#prepareAdapterList(java.util.List)}, since the original method is marked private.")»
-	private java.util.List prepareAdapterList(java.util.List createdViews) {
-		java.util.List viewAdapters = new java.util.ArrayList();
-		viewAdapters.add(host());
-		java.util.ListIterator li = createdViews.listIterator();
+	private java.util.List<org.eclipse.core.runtime.IAdaptable> prepareAdapterList(java.util.List<org.eclipse.core.runtime.IAdaptable> createdViews) {
+		java.util.List<org.eclipse.core.runtime.IAdaptable> viewAdapters = new java.util.ArrayList<org.eclipse.core.runtime.IAdaptable>();
+		viewAdapters.add( host() );
+		
+		java.util.ListIterator<org.eclipse.core.runtime.IAdaptable> li = createdViews.listIterator();
 		while (li.hasNext()) {
-			Object obj = li.next();
-			if (obj != null) {
-				if (!(obj instanceof org.eclipse.core.runtime.IAdaptable) && obj instanceof org.eclipse.emf.ecore.EObject)
-					viewAdapters.add(new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter((org.eclipse.emf.ecore.EObject) obj));
-				else
-					viewAdapters.add(obj);
+			org.eclipse.core.runtime.IAdaptable adapter = li.next();
+			
+			if (adapter != null) {
+				if (!(adapter instanceof org.eclipse.core.runtime.IAdaptable) && adapter instanceof org.eclipse.emf.ecore.EObject) {
+					viewAdapters.add(new org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter((org.eclipse.emf.ecore.EObject)adapter));
+				} else {
+					viewAdapters.add(adapter);
+				}
 			}
 		}
 		return viewAdapters;
@@ -394,37 +395,25 @@
 	protected static class AsyncCommand extends org.eclipse.gef.commands.Command {
 		private final org.eclipse.gef.commands.CompoundCommand _cc;
 
-		/**
-		 * constructor
-		 * @param label this command label
-		 */
+		«EXPAND xpt::Common::generatedMemberComment»
 		public AsyncCommand(String label) {
 			super(label);
 			_cc = new org.eclipse.gef.commands.CompoundCommand(label);
 		}
 
-		/**
-		 * constructor
-		 * @param cmd the command
-		 */
+		«EXPAND xpt::Common::generatedMemberComment»
 		public AsyncCommand(org.eclipse.gef.commands.Command cmd) {
 			this(cmd.getLabel());
 			add(cmd);
 		}
 
-		/**
-		 * constructor
-		 * @param cmd the command
-		 */
+		«EXPAND xpt::Common::generatedMemberComment»
 		public AsyncCommand(org.eclipse.gmf.runtime.common.core.command.ICommand cmd) {
 			this(cmd.getLabel());
 			add(cmd);
 		}
 
-		/**
-		 * Executes the command asynchonously. 
-		 * Calls {@link #doExecute}.
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("Executes the command asynchronously.\nCalls {@link #doExecute}.")»
 		public final void execute() {
 			// do not use Display.getCurrent() this mthod could be invoked
 			// on a non ui thread
@@ -435,31 +424,22 @@
 			});
 		}
 
-		/**
-		 * Return the command to be executed asynchronously.
-		 * @return the command
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("Return the command to be executed asynchronously.")»
 		protected final org.eclipse.gef.commands.CompoundCommand getCommand() {
 			return _cc;
 		}
 
-		/** Executes the command. */
+		«EXPAND xpt::Common::generatedMemberComment("Executes the command.")»
 		protected void doExecute() {
 			getCommand().execute();
 		}
 
-		/**
-		 * Add supplied command to the list of commands to be executed.
-		 * @param cmd command to add
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("Add supplied command to the list of commands to be executed.")»
 		public void add(org.eclipse.gmf.runtime.common.core.command.ICommand cmd) {
 			_cc.add(new org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy(cmd));
 		}
 
-		/**
-		 * Add supplied command to the list of commands to be executed.
-		 * @param cmd the command to add
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("Add supplied command to the list of commands to be executed.")»
 		public void add(org.eclipse.gef.commands.Command cmd) {
 			_cc.add(cmd);
 		}
@@ -628,12 +608,13 @@
 	public class CreateShortcutDecorationsCommand extends
 			org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand {
 
+		«EXPAND xpt::Common::generatedMemberComment»
 		private java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> myDescriptors;
+		
+		«EXPAND xpt::Common::generatedMemberComment»
 		private String modelId;
 
-		/**
-		 * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("@param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID")»
 		public CreateShortcutDecorationsCommand(
 				org.eclipse.emf.transaction.TransactionalEditingDomain editingDomain, org.eclipse.gmf.runtime.notation.View parentView,
 				java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> viewDescriptors,
@@ -645,9 +626,7 @@
 
 		}
 
-		/**
-		 * @param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID
-		 */
+		«EXPAND xpt::Common::generatedMemberComment("@param modelEditPart the ID to use for the annotation, e.g. PageEditPart.MODEL_ID")»
 		public CreateShortcutDecorationsCommand(
 				org.eclipse.emf.transaction.TransactionalEditingDomain editingDomain, org.eclipse.gmf.runtime.notation.View parentView,
 				org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor viewDescriptor, String modelId) {
@@ -655,6 +634,7 @@
 					.singletonList(viewDescriptor), modelId);
 		}
 
+		«EXPAND xpt::Common::generatedMemberComment»
 		protected org.eclipse.gmf.runtime.common.core.command.CommandResult doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor monitor,
 				org.eclipse.core.runtime.IAdaptable info) throws org.eclipse.core.commands.ExecutionException {
 			for (org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor nextDescriptor : myDescriptors) {

@@ -2,3 +2,15 @@ import iaml;
 
 model::InternetApplication parent(model::ApplicationElement this) :
 	eContainer;
+
+isOperation(emf::EObject this) :
+	false;
+	
+isOperation(model::Operation this) :
+	true;
+	
+isRunInstanceWire(emf::EObject this) :
+	false;
+	
+isRunInstanceWire(model::wires::RunInstanceWire this) :
+	true;	

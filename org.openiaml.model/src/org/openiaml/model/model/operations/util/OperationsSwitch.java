@@ -30,6 +30,7 @@ import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
+import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
@@ -201,6 +202,22 @@ public class OperationsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OperationsPackage.OPERATION_CALL_NODE: {
+				OperationCallNode operationCallNode = (OperationCallNode)theEObject;
+				T result = caseOperationCallNode(operationCallNode);
+				if (result == null) result = caseActivityNode(operationCallNode);
+				if (result == null) result = caseExecutionEdgesSource(operationCallNode);
+				if (result == null) result = caseExecutionEdgeDestination(operationCallNode);
+				if (result == null) result = caseDataFlowEdgeDestination(operationCallNode);
+				if (result == null) result = caseDataFlowEdgesSource(operationCallNode);
+				if (result == null) result = caseWireEdgesSource(operationCallNode);
+				if (result == null) result = caseNamedElement(operationCallNode);
+				if (result == null) result = caseGeneratedElement(operationCallNode);
+				if (result == null) result = caseShouldntContainWires(operationCallNode);
+				if (result == null) result = caseContainsWires(operationCallNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -322,6 +339,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseJoinNode(JoinNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Call Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Call Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationCallNode(OperationCallNode object) {
 		return null;
 	}
 

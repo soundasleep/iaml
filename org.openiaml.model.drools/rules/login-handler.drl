@@ -251,6 +251,62 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 
 end
 
+rule "Create contents of 'check instance' operation [type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		instance : DomainObjectInstance ( eContainer == scope )
+		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
+		
+		ex : Operation ( eContainer == instance, name == "exists?" )
+				
+		checkOperation : CompositeOperation ( eContainer == scope, name == "check instance" )
+
+		not ( StartNode ( eContainer == checkOperation ))
+
+	then
+		StartNode start = handler.generatedStartNode(checkOperation, checkOperation);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(checkOperation, checkOperation);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(checkOperation, checkOperation);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Invalid domain instance, you need to login.");
+		queue.add(cancel, drools);
+		
+		# a virtual operation call
+		# (the 'exists?' operation cannot have more than 2 execution edges out)
+		OperationCallNode call = handler.generatedOperationCallNode(checkOperation, checkOperation);
+		handler.setName(call, "call exists?");
+		queue.add(call, drools);
+		
+		# connect with a RunInstanceWire
+		RunInstanceWire run = handler.generatedRunInstanceWire(checkOperation, checkOperation, call, ex);
+		handler.setName(run, "virtual operation call");
+		queue.add(run, drools);
+		
+		ExecutionEdge edge0 = handler.generatedExecutionEdge(checkOperation, checkOperation);
+		handler.setFrom(edge0, start);
+		handler.setTo(edge0, call);		
+		queue.add(edge0, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(checkOperation, checkOperation);
+		handler.setFrom(edge1, call);
+		handler.setTo(edge1, finish);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(checkOperation, checkOperation);
+		handler.setFrom(edge2, call);
+		handler.setTo(edge2, cancel);
+		queue.add(edge2, drools);
+
+end
+
 /*
 We don't want the expected login key to connect to the operation: it is already
 explicitly defined in the Operation itself.
@@ -509,7 +565,7 @@ rule "Create 'do login' operation within all login_handlers"
 		
 end
 
-rule "Create 'do login' operation inside login handler[type=domain_object]"
+rule "Create contents of 'do login' operation inside login handler[type=domain_object]"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
@@ -549,21 +605,32 @@ rule "Create 'do login' operation inside login handler[type=domain_object]"
 		queue.add(edge0, drools);
 		
 		// we will leave the other rules to generate the contents
+
+		# a virtual operation call
+		# (the 'exists?' operation cannot have more than 2 execution edges out)
+		OperationCallNode call = handler.generatedOperationCallNode(loginOperation, loginOperation);
+		handler.setName(call, "call exists?");
+		queue.add(call, drools);
+		
+		# connect with a RunInstanceWire
+		RunInstanceWire run = handler.generatedRunInstanceWire(loginOperation, loginOperation, call, ex);
+		handler.setName(run, "virtual operation call");
+		queue.add(run, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
 		handler.setFrom(edge1, join);
-		handler.setTo(edge1, ex);
+		handler.setTo(edge1, call);
 		queue.add(edge1, drools);
 		
 		# not ok	
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		handler.setFrom(edge2, ex);
+		handler.setFrom(edge2, call);
 		handler.setTo(edge2, cancel);
 		queue.add(edge2, drools);
 
 		# ok
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		handler.setFrom(edge3, ex);
+		handler.setFrom(edge3, call);
 		handler.setTo(edge3, finish);
 		queue.add(edge3, drools);
 
@@ -907,7 +974,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 	
 end
 
-rule "Create 'check key' operation for LoginHandler[type = object]"
+rule "Create 'check instance' operation for LoginHandler[type = object]"
 	when
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )

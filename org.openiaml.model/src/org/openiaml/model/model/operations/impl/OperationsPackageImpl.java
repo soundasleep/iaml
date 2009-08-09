@@ -22,6 +22,7 @@ import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
+import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
@@ -95,6 +96,13 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * @generated
 	 */
 	private EClass joinNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationCallNodeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -263,6 +271,15 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOperationCallNode() {
+		return operationCallNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public OperationsFactory getOperationsFactory() {
 		return (OperationsFactory)getEFactoryInstance();
 	}
@@ -302,6 +319,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		splitNodeEClass = createEClass(SPLIT_NODE);
 
 		joinNodeEClass = createEClass(JOIN_NODE);
+
+		operationCallNodeEClass = createEClass(OPERATION_CALL_NODE);
 	}
 
 	/**
@@ -356,6 +375,13 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		joinNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
 		joinNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
 		joinNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
+		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
+		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgesSource());
+		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
+		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -374,6 +400,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		initEClass(splitNodeEClass, SplitNode.class, "SplitNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(joinNodeEClass, JoinNode.class, "JoinNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(operationCallNodeEClass, OperationCallNode.class, "OperationCallNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -402,6 +430,12 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		   });		
 		addAnnotation
 		  (joinNodeEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4"
+		   });		
+		addAnnotation
+		  (operationCallNodeEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4"

@@ -98,6 +98,15 @@ public interface OperationsFactory extends EFactory {
 	JoinNode createJoinNode();
 
 	/**
+	 * Returns a new object of class '<em>Operation Call Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Call Node</em>'.
+	 * @generated
+	 */
+	OperationCallNode createOperationCallNode();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

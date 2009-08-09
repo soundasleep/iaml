@@ -87,7 +87,7 @@ rule "Instruct 'logout' page to follow to the actual logout destination if set"
 
 end
 
-rule "Create 'key' property for LoginHandler[type = key]s"
+rule "Create 'key attribute' property for LoginHandler[type = key]s"
 	when
 		scope : Session( ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
@@ -101,6 +101,8 @@ rule "Create 'key' property for LoginHandler[type = key]s"
 
 		ApplicationElementProperty key = handler.generatedApplicationElementProperty(login_handler, scope);
 		handler.setName(key, "current login key");
+		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
+		handler.setValue(key, ModelPackage.eINSTANCE.getApplicationElementProperty_DefaultValue(), "");
 		queue.add(key, drools);
 		
 end
@@ -848,6 +850,8 @@ rule "Create 'key attribute' property for LoginHandler[type = object]s"
 	then
 		ApplicationElementProperty key = handler.generatedApplicationElementProperty(login_handler, session);
 		handler.setName(key, "current " + attribute.getName());
+		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
+		handler.setValue(key, ModelPackage.eINSTANCE.getApplicationElementProperty_DefaultValue(), "");
 		queue.add(key, drools);
 		
 end

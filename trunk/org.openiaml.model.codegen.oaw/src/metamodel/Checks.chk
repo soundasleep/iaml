@@ -66,5 +66,7 @@ context model::WireEdge ERROR "A WireEdge must have a 'to'" :
 
 context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do anything: consider naming it 'onClick'" :
 	!(from.metaType.isAssignableFrom(model::VisibleThing) && !(name == "click" || name == "onClick"));
-	
+
+context model::ApplicationElementProperty WARNING "A session property used as part of a login handler should have a default value set, otherwise secure pages will crash with an exception rather than going to the login page" :
+	!(defaultValue == null && inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
 	

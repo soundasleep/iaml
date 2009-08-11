@@ -3,13 +3,11 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
+import java.util.List;
 import java.util.Set;
 
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.StaticValue;
@@ -24,7 +22,6 @@ import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.InferenceTestCase;
 
@@ -209,6 +206,47 @@ public class LoginHandlerKey extends InferenceTestCase {
 		ParameterWire param = (ParameterWire) w2.iterator().next();
 		assertGenerated(param);
 		
+	}
+
+	/**
+	 * The 'check key' operation should have a fail wire that
+	 * navigates to the login page.
+	 * 
+	 * @throws Exception
+	 */
+	public void testCheckInstanceFailWire() throws Exception {
+		root = loadAndInfer(LoginHandlerKey.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		
+		CompositeOperation check = (CompositeOperation) queryOne(session, "iaml:operations[iaml:name='check key']");
+		assertGenerated(check);
+		
+		// destination page
+		Page login = (Page) queryOne(root, "iaml:children[iaml:name='login']");
+		{
+			Set<WireEdge> wires = assertHasWiresFromTo(1, root, check, login);
+			NavigateWire wire = (NavigateWire) wires.iterator().next();
+			assertEquals("fail", wire.getName());
+			assertGenerated(wire);
+		}
+
+	}
+	
+	/**
+	 * There should not be a 'check instance' operation generated in
+	 * the session, since we are a LoginHandler[type=key].
+	 * 
+	 * @throws Exception
+	 */
+	public void testNoCheckInstanceOperation() throws Exception {
+		root = loadAndInfer(LoginHandlerKey.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		
+		List<?> nodes = query(session, "iaml:operations[iaml:name='check instance']");
+		assertEquals(0, nodes.size());
+
 	}
 	
 }

@@ -14,9 +14,9 @@
 	«IF name=="save"»
 		«REM»"save" operation for DomainAttribute«ENDREM»
 		«IF php»
-			save_queued_store_domain_attribute_«safeNameString(attribute.id)»();
+			save_queued_store_domain_attribute_«safeNameString(attribute.id)»()
 		«ELSE»
-			save_queued_store_domain_attribute('«safeNameString(attribute.id)»');
+			save_queued_store_domain_attribute('«safeNameString(attribute.id)»')
 		«ENDIF»
 	«ELSE»
 		«REM»the rest works either in PHP or JS«ENDREM»
@@ -27,7 +27,7 @@
 				«IF wire.inEdges.typeSelect(model::wires::ParameterWire).size > 1»
 					«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
 				«ENDIF»
-			);
+			)
 		«ELSE»
 			«REM»set it right now«ENDREM»
 			store_domain_attribute_«safeNameString(attribute.id)»(
@@ -35,7 +35,7 @@
 				«IF wire.inEdges.typeSelect(model::wires::ParameterWire).size > 1»
 					«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
 				«ENDIF»
-			);
+			)
 		«ENDIF»
 	«ENDIF» 
 «ENDDEFINE»

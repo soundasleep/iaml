@@ -220,11 +220,17 @@ isPropertiesFile(model::DomainStore store) :
 
 /* get failed/passed out edges from a given DecisionCondition */
 getFailEdges(model::operations::DecisionCondition this):
-	outExecutions.select( e | e.to.metaType.isAssignableFrom(model::operations::CancelNode) );
+	outExecutions.select( e | model::operations::CancelNode.isInstance(e.to) );
 	/* TODO one day, this will also include OutExecutions[name=cancel|fail|N] */
 
+getFailEdges(model::operations::OperationCallNode this):
+	outExecutions.select( e | model::operations::CancelNode.isInstance(e.to) );
+
 getPassEdges(model::operations::DecisionCondition this):
-	outExecutions.removeAll( getFailEdges() );	/* everything that didn't fail */	
+	outExecutions.toSet().removeAll( getFailEdges() );	/* everything that didn't fail */	
+
+getPassEdges(model::operations::OperationCallNode this):
+	outExecutions.toSet().removeAll( getFailEdges() );	/* everything that didn't fail */	
 
 /* get the root InternetApplication */
 model::InternetApplication getRoot(emf::EObject this) :

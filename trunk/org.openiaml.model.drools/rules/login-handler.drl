@@ -130,10 +130,10 @@ rule "Create 'check key' operation for LoginHandler[type = key]"
 		not (Operation( eContainer == scope, name == "check key") )
 					
 	then
-	
 		CompositeOperation op = handler.generatedCompositeOperation( login_handler, scope );
 		handler.setName(op, "check key");
 		queue.add(op, drools);
+		
 end
 
 rule "Connect 'access' event to 'check' operations"
@@ -173,13 +173,13 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 
 end
 
-rule "Connect 'fail' wire from 'check key' operation to Login Page"
+rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Login Page"
 	when
 		container : ContainsWires( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login : Page (eContainer == container, name=="login" )
-		check : CompositeOperation( name == "check key", eContainer == scope )
+		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
 		not (CompositeWire( from == check, to == login, name == "fail") )
 	
 	then
@@ -662,7 +662,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		queue.add(param, drools);
 		
 		CompositeOperation setValue = handler.generatedCompositeOperation(operation, operation);
-		handler.setName(setValue, "setValue");
+		handler.setName(setValue, "setPropertyToValue");
 		queue.add(setValue, drools);
 		
 		// split to set value
@@ -981,8 +981,8 @@ rule "Create 'check instance' operation for LoginHandler[type = object]"
 		not (Operation( eContainer == session, name == "check instance") )
 					
 	then
-	
 		CompositeOperation op = handler.generatedCompositeOperation( login_handler, session );
 		handler.setName(op, "check instance");
 		queue.add(op, drools);
+		
 end

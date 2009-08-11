@@ -136,7 +136,7 @@
 	}
 
 	/* Does the DomainObjectInstance «id» exist? */
-	function exists_object_instance_«safeName()»($default = false) {
+	function exists_object_instance_«safeName()»() {
 		return get_object_instance_«safeName()»(0) !== 0;
 	}
 	

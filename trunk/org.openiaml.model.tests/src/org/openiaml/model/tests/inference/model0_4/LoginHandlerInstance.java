@@ -371,7 +371,6 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// check
 		checkOperationCallsExists(session, check);		
 	}
-
 	
 	/**
 	 * The 'do login' operation should use an operation call node
@@ -392,4 +391,29 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		checkOperationCallsExists(session, op);		
 	}
 
+	/**
+	 * The 'check instance' operation should have a fail wire that
+	 * navigates to the login page.
+	 * 
+	 * @throws Exception
+	 */
+	public void testCheckInstanceFailWire() throws Exception {
+		root = loadAndInfer(LoginHandlerInstance.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		
+		CompositeOperation check = (CompositeOperation) queryOne(session, "iaml:operations[iaml:name='check instance']");
+		assertGenerated(check);
+		
+		// destination page
+		Page login = (Page) queryOne(root, "iaml:children[iaml:name='login']");
+		{
+			Set<WireEdge> wires = assertHasWiresFromTo(1, root, check, login);
+			NavigateWire wire = (NavigateWire) wires.iterator().next();
+			assertEquals("fail", wire.getName());
+			assertGenerated(wire);
+		}
+
+	}
+	
 }

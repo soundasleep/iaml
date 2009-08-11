@@ -17,14 +17,21 @@
 
 «DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object) FOR model::Operation»
 	«IF php»
-		«EXPAND exception FOR throwException("No JS code for domainInstanceCall")»
+		«IF name=="exists?"»
+			exists_object_instance_«safeNameString(object.id)»()
+		«ELSE»
+			«EXPAND exception FOR throwException("No server-side code for domainInstanceCall operation '" + name + "'")»
+		«ENDIF»
 	«ELSE»
 		/* domain object instance: wire = «wire», object = «object», this = «this» */
 		«IF name=="save"»
 			«REM»"save" operation for DomainAttribute«ENDREM»
-			save_queued_store_domain_object('«safeNameString(object.id)»');
+			save_queued_store_domain_object('«safeNameString(object.id)»')
+		«ELSEIF name=="exists?"»
+			«REM»exists operation: ask the server«ENDREM»
+			<?php echo exists_object_instance_«safeNameString(object.id)»() ? "true" : "false"; ?>
 		«ELSE»
-			«EXPAND exception FOR throwException("Cannot expand a non-save operation for DomainObjectInstance: " + this)»
+			«EXPAND exception FOR throwException("No client-side code for domainInstanceCall operation " + this)»
 		«ENDIF»
 	«ENDIF» 
 «ENDDEFINE»

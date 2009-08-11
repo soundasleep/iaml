@@ -175,10 +175,11 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public OperationCallNode createOperationCallNode() {
 		OperationCallNodeImpl operationCallNode = new OperationCallNodeImpl();
+		generateID(operationCallNode);
 		return operationCallNode;
 	}
 

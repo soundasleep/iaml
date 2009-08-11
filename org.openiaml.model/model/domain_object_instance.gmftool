@@ -93,11 +93,11 @@
           description="Create new DecisionOperation">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/CompositeOperation.gif"
+            path="icons/full/obj16/DecisionOperation.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/CompositeOperation.gif"
+            path="icons/full/obj32/DecisionOperation.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

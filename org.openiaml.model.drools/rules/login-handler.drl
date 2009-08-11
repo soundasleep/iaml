@@ -23,6 +23,33 @@ function boolean loginAttributeMatches(ApplicationElementProperty p, DomainAttri
 	return p.getName() != null && p.getName().equals("current " + a.getName());
 }
 
+#
+# Does the given DomainObject have at least one attribute?
+#
+function boolean hasDomainAttribute(DomainObject dobj) {
+	return dobj.getAttributes().size() > 0;
+}
+
+#
+# Does the given LoginHandler have incoming ParameterWires from
+# attributes contained by the given DomainObject?
+#
+function boolean hasIncomingParameterWiresFrom(LoginHandler handler, DomainObject dobj) {
+	for (WireEdge wire : handler.getInEdges()) {
+		if (wire instanceof ParameterWire && wire.getFrom() instanceof DomainAttribute) {
+			if (dobj.equals(((DomainAttribute) wire.getFrom()).eContainer())) {
+				// found one
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+function boolean test() {
+	return true;
+}
+
 rule "Create 'login' page for LoginHandlers [ApplicationElementContainer]"
 	when
 		container : ApplicationElementContainer( )
@@ -881,24 +908,49 @@ rule "Create default logout successful page"
 
 end
 
+/**
+ * If we have multiple incoming ParameterWires, we need special logic to
+ * only instantiate this rule once (thanks to queued insertions).
+ *
+ * Essentially, we create only SelectWire for each DomainObject
+ * linked by a ParameterWire, and then use Java to generate the
+ * actual query from the Attributes.
+ */
 rule "Create Select Wire between Domain Object types"
 	when
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		dobj : DomainObject ( eval(hasDomainAttribute(dobj)) )
 		
-		object : DomainObject ( )
-		attribute : DomainAttribute ( eContainer == object )
-		paramWire : ParameterWire ( from == attribute, to == login_handler )
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.DOMAIN_OBJECT,
+			eval(hasIncomingParameterWiresFrom(login_handler, dobj)) 
+		)
 		
 		instance : DomainObjectInstance ( )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( SelectWire ( from == object, to == instance )) 
+		not ( SelectWire ( from == dobj, to == instance )) 
 		
 	then
-		SelectWire wire = handler.generatedSelectWire(login_handler, login_handler, object, instance);
+		// find all the attributes as incoming parameter wires for the
+		// given DomainObject
+		String q = "";
+		for (WireEdge wire : login_handler.getInEdges()) {
+			if (wire.getFrom() instanceof DomainAttribute &&
+					dobj.equals(wire.getFrom().eContainer())) {
+				// add this attribute as a query
+				DomainAttribute attribute = (DomainAttribute) wire.getFrom();
+				if (!q.isEmpty()) {
+					q += " and ";
+				}
+				q += attribute.getName() + " = :" + attribute.getName(); 
+			}
+		}
+			
+		SelectWire wire = handler.generatedSelectWire(login_handler, login_handler, dobj, instance);
 		handler.setName(wire, "select");
-		handler.setQuery(wire, attribute.getName() + " = :" + attribute.getName());
+		handler.setQuery(wire, q);
 		queue.add(wire, drools); 
 
 end

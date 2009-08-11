@@ -72,27 +72,50 @@
  */ 
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::SplitNode-»
 	/* a split node */
+	«REM»
+		disable function_queue until we get to the end.
+		this is necessary, otherwise all split functions in
+		here will call the same function_queue multiple times.
+	
+		one side effect of this is that any splitted "set" operations
+		will only get to the first "set" operation before
+		the function queue (which may be a redirect to another page)
+		executes, so the other "set" operations would not complete.	
+	«ENDREM»
+	«IF !php»
+		var function_queue_split_«safeName()» = function_queue;
+		var function_queue_queued_split_«safeName()» = function_queue_queued;
+		function_queue = function() { /* empty */ };
+		function_queue_queued = false;
+	«ENDIF»
+	
 	«FOREACH outExecutions AS e-»
 		«EXPAND executionFlowStep(container, php) FOR e.to-»
 	«ENDFOREACH»
 	
 	/* find the first join node, and continue code there */
-	«EXPAND findJoinNode(container, php) FOR outExecutions.first().to»
+	«EXPAND findJoinNode(container, php, this) FOR outExecutions.first().to»
 «ENDDEFINE»
 
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::JoinNode-»
 	// end of split operation path; wait for join node
 «ENDDEFINE»
 
-«DEFINE findJoinNode(model::visual::Page container, Boolean php) FOR emf::EObject»
+«DEFINE findJoinNode(model::visual::Page container, Boolean php, model::operations::SplitNode split) FOR emf::EObject»
 «ENDDEFINE»
 
-«DEFINE findJoinNode(model::visual::Page container, Boolean php) FOR model::ExecutionEdgesSource»
-	«EXPAND findJoinNode(container, php) FOR outExecutions.first().to»
+«DEFINE findJoinNode(model::visual::Page container, Boolean php, model::operations::SplitNode split) FOR model::ExecutionEdgesSource»
+	«EXPAND findJoinNode(container, php, split) FOR outExecutions.first().to»
 «ENDDEFINE»
 
-«DEFINE findJoinNode(model::visual::Page container, Boolean php) FOR model::operations::JoinNode»
+«DEFINE findJoinNode(model::visual::Page container, Boolean php, model::operations::SplitNode split) FOR model::operations::JoinNode»
 	/* found end of join node; continue execution */
+	«REM»re-enable the function queue from before the split«ENDREM»
+	«IF !php»
+		function_queue = function_queue_split_«safeName(split)»;
+		function_queue_queued = function_queue_queued_split_«safeName(split)»;
+	«ENDIF»
+	
 	«FOREACH outExecutions AS e-»
 		«EXPAND executionFlowStep(container, php) FOR e.to-»
 	«ENDFOREACH»	
@@ -131,19 +154,23 @@
 	«ENDREM»
 	«IF !php && model::DomainObjectInstance.isInstance(outEdges.typeSelect(model::wires::RunInstanceWire).first().to.eContainer)»
 		// function call_remote_event(container, operation_name, arg0, arg1, function_queue = false) {
+		var old_function_queue_«safeName()» = function_queue;
 		var function_queue = function(response) {
 		 	if (response == "ok") {
 				«REM»continue expanding following conditions (if any)«ENDREM»
 				«FOREACH getPassEdges() AS e-»
 					«EXPAND executionFlowStep(container, php) FOR e.to-»
 				«ENDFOREACH»
+				old_function_queue_«safeName()»();
 		 	} else {
 				«REM»continue expanding following conditions (if any)«ENDREM»
 				«FOREACH getFailEdges() AS e-»
 					«EXPAND executionFlowStep(container, php) FOR e.to-»
 				«ENDFOREACH»
+				old_function_queue_«safeName()»();
 			}
 		};
+		function_queue_queued = true;
 		«EXPAND OperationCall::callRemoteOperation(php, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
 	«ELSE»
 		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»

@@ -17,7 +17,7 @@ textFieldName(model::visual::InputTextField this) :
 buttonName(model::visual::Button this) :
 	if (name == null || name == "") then "Submit Query" else name;
 	
-safeName(model::NamedElement this) :
+safeName(model::GeneratedElement this) :
 	safeNameString(id);
 
 safeName(emf::EObject this) :
@@ -64,8 +64,18 @@ model::visual::Page containingPage(model::visual::Page element) :
 model::visual::Page containingPage(model::NamedElement element) :
 	containingPage(element.eContainer);
 
+/* any page in the Session will contain all the operations for the Session */
+model::visual::Page containingPage(model::scopes::Session element) :
+	element.children.typeSelect( model::visual::Page ).first();
+		
+model::visual::Page containingPage(model::NamedElement element) :
+	containingPage(element.eContainer);
+
 /* default for any EObject */
 model::visual::Page containingPage(emf::EObject element) :
+	null;
+
+model::visual::Page containingPage(Void void) :
 	null;
 
 /* is [target] on the same page as [source]? */ 

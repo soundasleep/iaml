@@ -24,6 +24,7 @@ public class AllModel0_4InferenceTests {
 		suite.addTestSuite(DomainInstanceSaveOperation.class);
 		suite.addTestSuite(LoginHandlerInstance.class);
 		suite.addTestSuite(LoginHandlerKey.class);
+		suite.addTestSuite(LoginHandlerInstanceMultiple.class);
 		
 		return suite;
 	}

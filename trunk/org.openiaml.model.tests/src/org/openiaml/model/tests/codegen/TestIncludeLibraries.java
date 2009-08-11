@@ -21,6 +21,11 @@ import org.openiaml.model.tests.codegen.model0_1.SyncFieldApplicationElementProp
 public class TestIncludeLibraries extends SyncFieldApplicationElementProperty {
 
 	@Override
+	protected Class<?> getRuntimeClass() {
+		return TestIncludeLibraries.class;
+	}
+
+	@Override
 	protected Map<String, String> getRuntimeProperties() {
 		Map<String, String> result = new HashMap<String,String>();
 		// note that no other properties are included

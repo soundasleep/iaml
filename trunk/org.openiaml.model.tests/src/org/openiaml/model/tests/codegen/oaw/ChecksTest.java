@@ -29,7 +29,7 @@ public class ChecksTest extends CodegenTestCase {
 	protected void loadAndCodegenWithFail(String filename) throws Exception {
 		boolean passed = true;
 		try {
-			root = loadAndCodegen(filename);
+			root = loadAndCodegen(CodegenTestCase.class, filename);
 			passed = false;
 		} catch (TransformationException e) {
 			// expected

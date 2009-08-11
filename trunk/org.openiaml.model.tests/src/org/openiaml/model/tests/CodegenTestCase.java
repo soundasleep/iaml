@@ -47,9 +47,32 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	 * @return The loaded InternetApplication
 	 * @throws Exception
 	 */
-	protected InternetApplication loadAndCodegen(String modelFile) throws Exception {
+	protected InternetApplication loadAndCodegen(Class<?> modelFile) throws Exception {
 		InternetApplication root = loadAndInfer(modelFile);
-		
+		doCodegen(modelFile);
+		return root;
+	}
+
+	/**
+	 * Load a model and perform code generation.
+	 * 
+	 * @see #loadAndInfer(String)
+	 * @param modelFile
+	 * @return The loaded InternetApplication
+	 * @throws Exception
+	 */
+	protected InternetApplication loadAndCodegen(Class<?> testClass, String modelFile) throws Exception {
+		InternetApplication root = loadAndInfer(modelFile);
+		doCodegen(testClass);
+		return root;
+	}
+	
+	/**
+	 * Get the inferred model from {@link #getInferredModel()} and
+	 * do code generation with {@link #doTransform(String)}.
+	 * @throws Exception 
+	 */
+	protected void doCodegen(Class<?> testClass) throws Exception {
 		// write out this inferred model for reference
 		String outModel = getInferredModel().getAbsolutePath();
 
@@ -59,38 +82,7 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 			throw new RuntimeException("This test case should have called setUp() already [this creates the project]");
 			// super.setUp();		// create project
 		}
-		doTransform(outModel);	// output to project
-		
-		return root;
-	}
-	
-	/**
-	 * Automagically load the model file (.iaml) for this given
-	 * test class.
-	 * 
-	 * @see #loadAndCodegen(String)
-	 * @param class1 The test class to load a model for.
-	 * @return the loaded and compiled InternetApplication
-	 */
-	protected InternetApplication loadAndCodegen(
-			Class<?> class1) throws Exception {
-		if (class1.getPackage().getName().contains("model0_1")) {
-			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_1/" + class1.getSimpleName() + ".iaml");
-		}
-		if (class1.getPackage().getName().contains("model0_2")) {
-			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_2/" + class1.getSimpleName() + ".iaml");
-		}
-		if (class1.getPackage().getName().contains("model0_3")) {
-			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml");
-		}
-		if (class1.getPackage().getName().contains("model0_4")) {
-			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/model0_4/" + class1.getSimpleName() + ".iaml");
-		}
-		if (class1.getPackage().getName().contains("runtime")) {
-			return loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/runtime/" + class1.getSimpleName() + ".iaml");
-		}
-		fail("Could not work out an IAML model for class: " + class1);
-		return null;
+		doTransform(testClass, outModel);	// output to project
 	}
 	
 	/**

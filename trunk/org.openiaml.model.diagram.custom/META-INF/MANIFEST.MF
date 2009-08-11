@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.codegen.oaw,
  org.openiaml.model.drools,
  org.eclipse.gmf.runtime.diagram.ui.render,
- org.eclipse.gmf.runtime.diagram.ui.resources.editor
+ org.eclipse.gmf.runtime.diagram.ui.resources.editor,
+ org.openiaml.model.runtime;bundle-version="0.3.1"
 Bundle-Vendor: www.openiaml.org
 Export-Package: org.openiaml.model.diagram.custom.actions,
  org.openiaml.model.diagram.custom.commands,

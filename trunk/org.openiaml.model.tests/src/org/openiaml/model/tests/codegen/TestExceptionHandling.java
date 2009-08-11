@@ -20,7 +20,7 @@ public class TestExceptionHandling extends CodegenTestCase {
 	public void testExceptionThrowing() throws Exception {
 		boolean passed = false;
 		try {
-			root = loadAndCodegen(ROOT + "codegen/ThrowException.iaml");
+			root = loadAndCodegen(TestExceptionHandling.class, ROOT + "codegen/ThrowException.iaml");
 		} catch (TransformationException e) {
 			// pass
 			passed = true;
@@ -34,7 +34,7 @@ public class TestExceptionHandling extends CodegenTestCase {
 	public void testExceptionInvestgation() throws Exception {
 		TransformationException ex = null;
 		try {
-			root = loadAndCodegen(ROOT + "codegen/ThrowException.iaml");
+			root = loadAndCodegen(TestExceptionHandling.class, ROOT + "codegen/ThrowException.iaml");
 		} catch (TransformationException e) {
 			// pass
 			ex = e;

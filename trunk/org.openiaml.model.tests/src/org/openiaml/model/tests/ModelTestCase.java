@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,9 @@ import javax.xml.xpath.XPathExpressionException;
 
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -30,6 +33,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.openiaml.model.codegen.ICodeGenerator;
+import org.openiaml.model.codegen.oaw.IACleanerBeautifier;
 import org.openiaml.model.codegen.oaw.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
 import org.openiaml.model.tests.xpath.IterableElementList;
@@ -159,6 +163,19 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	public IStatus getTransformStatus() {
 		return transformStatus;
 	}
+	
+	/**
+	 * This cache attempts to store the results of previous code generations, allowing us
+	 * to perform multiple tests faster.
+	 * 
+	 * It stores a map of (input class, list of relative paths) of generated files.
+	 */
+	private static Map<Class<?>, List<String>> codegenCache = new HashMap<Class<?>, List<String>>();
+	
+	/**
+	 * A map of project classes to generated project paths.
+	 */
+	private static Map<Class<?>, String> projectCache = new HashMap<Class<?>, String>();
 
 	/**
 	 * Do the transformation and make sure it succeeded.
@@ -167,7 +184,72 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 * @param inputFile
 	 * @throws Throwable if it did not succeed
 	 */
-	protected void doTransform(String inputFile) throws Exception {
+	protected void doTransform(Class<?> cacheClass, String inputFile) throws Exception {
+		if (codegenCache.containsKey(cacheClass) && projectCache.containsKey(cacheClass)) {
+			// load from cache
+			loadFromCache(cacheClass);
+		} else {
+			// codegen manually
+			doTransformActual(inputFile);
+			
+			// update cache
+			updateCache(cacheClass);
+		}
+	}
+	
+	/**
+	 * The code generation has been cached previously; copy the 
+	 * cached code-generated files from this old project into our new project.
+	 * 
+	 * @param inputFile
+	 * @throws Exception 
+	 */
+	private void loadFromCache(Class<?> inputFile) throws Exception {
+		String root = projectCache.get(inputFile);
+		for (String file : codegenCache.get(inputFile)) {
+			// copy this file to the local project
+			File source = new File(root + file);
+			IFile target = getProject().getFile(file);
+			
+			// check that we can copy OK
+			assertTrue("The source file '" + source + "' should exist from our codegen cache.", source.exists());
+			assertFalse("The target file '" + target + "' should not exist yet.", target.exists());
+
+			System.out.println("Copying cache file '" + file + "'...");
+			copyFileIntoWorkspace(source, target);
+		}
+	}
+
+	/**
+	 * Take the code generation results and load them into a cache
+	 * for future reference.
+	 * 
+	 * @param inputFile
+	 */
+	protected void updateCache(Class<?> inputFile) {
+		// do nothing if generation was unsuccessful
+		if (lastTracingCache == null)
+			return;
+		
+		List<String> result = new ArrayList<String>();
+		for (File f : lastTracingCache) {
+			// get the relative path
+			String root = project.getLocation().toOSString();
+			result.add( f.getAbsolutePath().replace(root, "") );
+		}
+		
+		codegenCache.put(inputFile, result);
+		projectCache.put(inputFile, project.getLocation().toOSString());
+	}
+
+	/**
+	 * Do the transformation and make sure it succeeded.
+	 * The result of the transformation is stored in {@link #getTransformStatus()}.
+	 * 
+	 * @param inputFile
+	 * @throws Throwable if it did not succeed
+	 */
+	protected void doTransformActual(String inputFile) throws Exception {
 		transformStatus = doTransform(inputFile, getProjectName(), monitor);
 		if (!transformStatus.isOK()) {
 			String firstMessage = null;
@@ -272,6 +354,11 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	}
 
 	/**
+	 * The results of getTracingCache() for the last code generation run.
+	 */
+	private List<File> lastTracingCache;
+	
+	/**
 	 * <p>
 	 * Transform a filename using OpenArchitectureWare. It also forces
 	 * a filesystem refresh of the particular project directory,
@@ -293,23 +380,36 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	protected IStatus doTransformOAWWorkflow(IFile filename,
 			IProgressMonitor monitor) throws CoreException {
 		
-		// create some properties
-		Map<String,String> runtimeProperties = getRuntimeProperties();
+		// enable tracing cache
+		IACleanerBeautifier.setTracingEnabled(true);
 		
-		ICodeGenerator runner = new OawCodeGeneratorWithRuntime();
-		IStatus status = runner.generateCode(filename, monitor, runtimeProperties);
+		// set last cache to null
+		lastTracingCache = null;
 		
-		if (!status.isOK()) {
-			// bail early
-			return status;
+		try {
+			// create some properties
+			Map<String,String> runtimeProperties = getRuntimeProperties();
+			
+			ICodeGenerator runner = new OawCodeGeneratorWithRuntime();
+			IStatus status = runner.generateCode(filename, monitor, runtimeProperties);
+			
+			if (!status.isOK()) {
+				// bail early
+				return status;
+			}
+
+			lastTracingCache = IACleanerBeautifier.getTracingCache();
+
+			// once generated, we need to refresh the workspace before
+			// we can carry on testing (normally, we would just let Eclipse automatically
+			// refresh the resources)
+			
+			// we need to *force* refresh the workspace
+			return refreshProject();
+		} finally {
+			// disable tracing cache
+			IACleanerBeautifier.setTracingEnabled(false);
 		}
-		
-		// once generated, we need to refresh the workspace before
-		// we can carry on testing (normally, we would just let Eclipse automatically
-		// refresh the resources)
-		
-		// we need to *force* refresh the workspace
-		return refreshProject();
 	}
 
 	/**
@@ -344,8 +444,23 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	 * @throws Exception
 	 */
 	protected IFile copyFileIntoWorkspace(String sourceName, IFile target) throws Exception {
-		// first, copy local file into project workspace
-		File sourceFile = new File(sourceName);
+		return copyFileIntoWorkspace(new File(sourceName), target);
+	}
+
+	/**
+	 * Copy a local file into the Eclipse workspace. Makes sure it doesn't
+	 * already exist, and that it does exist once this method is completed.
+	 * 
+	 * This method also creates any necessary sub-folders recursively. 
+	 * 
+	 * @param source
+	 * @param target
+	 * @return the target file
+	 * @throws Exception
+	 */
+	protected IFile copyFileIntoWorkspace(File sourceFile, IFile target) throws Exception {
+		createFolderRecursively(target.getParent());
+		
 		assertTrue("source file '" + sourceFile + "' exists", sourceFile.exists());
 
 		assertFalse("target file '" + target + "' should not exist yet", target.exists());
@@ -357,6 +472,31 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 		assertTrue("target file '" + target + "' should now exist", target.exists());
 		
 		return target;
+	}
+	
+	/**
+	 * If the given argument is an IFolder, create it if it does not yet
+	 * exist. This method will
+	 * also create any parent IFolders if they need to be created first.
+	 * 
+	 * @param parent
+	 * @throws CoreException 
+	 */
+	protected void createFolderRecursively(IContainer parent) throws CoreException {
+		if (!(parent instanceof IFolder))
+			return;
+		
+		IFolder folder = (IFolder) parent;
+		
+		if (folder.exists())
+			return;
+		
+		// it doesn't exist
+		// make sure the parent exists
+		createFolderRecursively(folder.getParent());
+		
+		// create this one
+		folder.create(true, true, new NullProgressMonitor());
 	}
 
 	/**

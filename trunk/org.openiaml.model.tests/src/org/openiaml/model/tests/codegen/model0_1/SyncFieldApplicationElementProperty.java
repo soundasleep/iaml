@@ -18,9 +18,22 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class SyncFieldApplicationElementProperty extends CodegenTestCase {
 
+	/**
+	 * Allows this class to be extended for test methods, yet allow
+	 * each super class to run outside the cache. 
+	 * 
+	 * Classes extending this test case should also re-implement this
+	 * method to return a new class.
+	 * 
+	 * @return
+	 */
+	protected Class<?> getRuntimeClass() {
+		return SyncFieldApplicationElementProperty.class;
+	}
+	
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(SyncFieldApplicationElementProperty.class);
+		root = loadAndCodegen(getRuntimeClass(), getModelFileForClass(SyncFieldApplicationElementProperty.class));
 	}
 	
 	public void testSyncOnPage() throws Exception {

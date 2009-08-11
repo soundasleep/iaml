@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.codegen.model0_1;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Properties;
 
@@ -189,7 +190,10 @@ public class SyncWiresProperties extends CodegenTestCase {
 		waitForAjax();
 		Properties p = new Properties();
 		target.refreshLocal(IResource.DEPTH_INFINITE, monitor);	// refresh
-		p.load(target.getContents());
+		InputStream stream = target.getContents();
+		p.load(stream);
+		stream.close();
+		refreshProject();
 		
 		// check it has changed
 		assertEquals("The property should have changed in the file.", p.getProperty("animal", "[did not exist]"), newAnimal);

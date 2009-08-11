@@ -4,6 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstance;
+import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstanceMultiple;
 import org.openiaml.model.tests.codegen.model0_4.NewInstanceWithoutId;
 
 /**
@@ -24,6 +25,7 @@ public class Codegen0_4Suite {
 		
 		suite.addTestSuite(NewInstanceWithoutId.class);
 		suite.addTestSuite(LoginHandlerInstance.class);
+		suite.addTestSuite(LoginHandlerInstanceMultiple.class);
 
 		return suite;
 	}

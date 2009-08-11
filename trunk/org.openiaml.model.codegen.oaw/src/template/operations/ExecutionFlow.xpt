@@ -122,21 +122,46 @@
 /* an operation call: expand for any parameters */
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::OperationCallNode-»
 	// virtual operation call "«name-»"
-	«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-	«EXPAND OperationCall::callOperation(php, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
-	
-	/* Condition flow for virtual operation '«name»' */
-	if (!«IF php»$result«ELSE»result«ENDIF») {
-		«REM»continue expanding following conditions (if any)«ENDREM»
-		«FOREACH getFailEdges() AS e-»
-			«EXPAND executionFlowStep(container, php) FOR e.to-»
-		«ENDFOREACH»
-	} else {
-		«REM»continue expanding following conditions (if any)«ENDREM»
-		«FOREACH getPassEdges() AS e-»
-			«EXPAND executionFlowStep(container, php) FOR e.to-»
-		«ENDFOREACH»
-	}
+
+	«REM»
+		if we are in javascript, and 
+		if the remote operation to call is part of a DomainObject, then
+		we need to call it remotely. this is because the JS might be
+		out-of-date.
+	«ENDREM»
+	«IF !php && model::DomainObjectInstance.isInstance(outEdges.typeSelect(model::wires::RunInstanceWire).first().to.eContainer)»
+		// function call_remote_event(container, operation_name, arg0, arg1, function_queue = false) {
+		var function_queue = function(response) {
+		 	if (response == "ok") {
+				«REM»continue expanding following conditions (if any)«ENDREM»
+				«FOREACH getPassEdges() AS e-»
+					«EXPAND executionFlowStep(container, php) FOR e.to-»
+				«ENDFOREACH»
+		 	} else {
+				«REM»continue expanding following conditions (if any)«ENDREM»
+				«FOREACH getFailEdges() AS e-»
+					«EXPAND executionFlowStep(container, php) FOR e.to-»
+				«ENDFOREACH»
+			}
+		};
+		«EXPAND OperationCall::callRemoteOperation(php, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
+	«ELSE»
+		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
+		«EXPAND OperationCall::callOperation(php, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
+		
+		/* Condition flow for virtual operation '«name»' */
+		if (!«IF php»$result«ELSE»result«ENDIF») {
+			«REM»continue expanding following conditions (if any)«ENDREM»
+			«FOREACH getFailEdges() AS e-»
+				«EXPAND executionFlowStep(container, php) FOR e.to-»
+			«ENDFOREACH»
+		} else {
+			«REM»continue expanding following conditions (if any)«ENDREM»
+			«FOREACH getPassEdges() AS e-»
+				«EXPAND executionFlowStep(container, php) FOR e.to-»
+			«ENDFOREACH»
+		}
+	«ENDIF»
 «ENDDEFINE»
 
 /**

@@ -99,7 +99,7 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 		      	// execute the function queue (if any)
 		      	if (function_queue) {
 		      		debug('executing function queue');
-		      		function_queue();
+		      		function_queue(response); /* provide response as parameter to callback function, even if not requested */
 		      	}
 		      	
 		      	// are there any instructions in here?
@@ -246,13 +246,13 @@ function save_queued_store_domain_object(id, function_queue) {
 }
 
 /* call a remote operation (only one attribute) */
-function call_remote_event(container, operation_name, arg0, arg1) {
+function call_remote_event(container, operation_name, arg0, arg1, function_queue) {
 	var url = 'call_remote_event.php?container=' + escape(container) 
 		+ '&page=' + escape(page_id) 
 		+ '&operation_name=' + escape(operation_name)
 		+ '&arg0=' + escape(arg0)
 		+ '&arg1=' + escape(arg1);
-	execute_queued_url(url, 'remote_event', false, false);
+	execute_queued_url(url, 'remote_event', function_queue, function_queue ? true : false);
 }
 
 var debug_message_saved = "";

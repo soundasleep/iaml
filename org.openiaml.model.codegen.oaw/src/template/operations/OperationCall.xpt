@@ -105,5 +105,29 @@
 	«ENDIF»
 «ENDDEFINE»
 
+/**
+ * Assumes that there is a function call waiting in 'function_queue'.
+ * This function will be executed with the response as a parameter.
+ */
+«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»
+	«IF inEdges.typeSelect(model::wires::ParameterWire).size > 0» 
+		var arg0 = «EXPAND Parameters::callParameter(php, this, inStoreDb) FOR inEdges.typeSelect(model::wires::ParameterWire).get(0)»;
+	«ELSE»
+		var arg0 = null;	/* no parameter */
+	«ENDIF»
+	«IF inEdges.typeSelect(model::wires::ParameterWire).size > 1»
+		var arg1 = «EXPAND Parameters::callParameter(php, this, inStoreDb) FOR inEdges.typeSelect(model::wires::ParameterWire).get(1)»;
+	«ELSE»
+		var arg1 = null;	/* no parameter */
+	«ENDIF»
+	call_remote_event(
+		'«safeNameString(containingPage(to).id)»', 
+		'«operationName(to)-»',
+		arg0,
+		arg1,
+		function_queue
+	);
+«ENDDEFINE»
+
 «DEFINE exception FOR Object»
 «ENDDEFINE»

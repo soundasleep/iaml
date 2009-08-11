@@ -413,9 +413,9 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 	 */
 	protected void assertNotEquals(String a, String b) {
 		if (a == null) {
-			assertTrue("'" + a + "' should not equal '" + b + "'", b != null);
+			assertFalse("'" + a + "' should not equal '" + b + "'", b == null);
 		} else {
-			assertTrue("'" + a + "' should not equal '" + b + "'", a.equals(b));
+			assertFalse("'" + a + "' should not equal '" + b + "'", a.equals(b));
 		}
 	}
 

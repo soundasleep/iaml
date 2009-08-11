@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.codegen.model0_4;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -171,13 +172,9 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		assertTitleMatch("Login Successful");
 		assertNoProblem();
 		
-		// now we just quickly go logout
-		gotoSitemapThenPage(sitemap, "logout", "Home");
-		assertNoProblem();
-		
-		// we should now be on the home page
-		assertEquals("Home", getPageTitle());
-		assertTitleMatch("Home");
+		// now we just quickly go logout, we should now be on the
+		// "logout successful" page
+		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 		assertNoProblem();
 		
 		} catch (Error e) {
@@ -189,11 +186,11 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 	
 	/**
 	 * We login;
-	 * We check the viewkey page to make sure the key is there;
+	 * We check the page to make sure we are the right user;
 	 * We navigate to it again to check it's still there;
 	 * Then we logout.
 	 */
-	public void testLoginLogoutCheckViewkey() throws Exception {
+	public void testLoginLogoutCheck2() throws Exception {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
@@ -201,8 +198,8 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		assertTitleMatch("sitemap");
 
 		clickLinkWithText("login");
-		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "key42");
+		String loginId = getLabelIDForText("password");
+		setLabeledFormElementField(loginId, "test2");
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
 		
@@ -210,73 +207,134 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		assertEquals("Login Successful", getPageTitle());
 		assertNoProblem();
 		
-		// the password we entered should not be present
-		fail("continue this test");
+		// lets now go to the "current user" page
+		gotoSitemapThenPage(sitemap, "current user");
+		{
+			String username = getLabelIDForText("current user name");
+			assertLabeledFieldEquals(username, "User Two");
+		}
 		
-		fail("need to sitemap then go to 'current user' page");
+		// the password should _not_ be present
+		assertNoMatch("test2");
 		
-		// it should be present
-		assertTextPresent("key42");
+		// reload the page
+		gotoSitemapThenPage(sitemap, "current user");
+		{
+			String username = getLabelIDForText("current user name");
+			assertLabeledFieldEquals(username, "User Two");
+		}
 		
-		// go back to the viewkey page
-		gotoSitemapThenPage(sitemap, "viewkey");
-		assertNoProblem();
-		assertTextPresent("key42");
-		
-		// now we logout		
-		gotoSitemapThenPage(sitemap, "logout", "Home");
-		
-		// we should now be on the home page
-		assertTitleMatch("Home");
-		assertNoProblem();
-
+		// now we logout, we should now be on the logout page
+		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 	}
 	
 	/**
-	 * We try to view the viewkey page, but we get asked to login.
-	 * We login, check the viewkey page works, and then logout again.
+	 * We login;
+	 * We check the page to make sure we are the right user;
+	 * We navigate to it again to check it's still there;
+	 * Then we logout.
 	 */
-	public void testTryViewkeyThenLogin() throws Exception {
+	public void testLoginLogoutCheck3() throws Exception {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 
-		clickLinkWithText("viewkey");
-		// TODO add: assertTitleNotMatch("viewkey");
-		assertTitleMatch("login");
-		assertProblem();		// we should have been warned
-
-		// lets set the fields
-		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "key42");
+		clickLinkWithText("login");
+		String loginId = getLabelIDForText("password");
+		setLabeledFormElementField(loginId, "test3");
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
-
-		// we should now be on the viewkey page
-		assertEquals("viewkey", getPageTitle());
+		
+		// we should now be on the Login Successful page
+		assertEquals("Login Successful", getPageTitle());
 		assertNoProblem();
 		
-		// it should be present
-		assertTextPresent("key42");
+		// lets now go to the "current user" page
+		gotoSitemapThenPage(sitemap, "current user");
+		{
+			String username = getLabelIDForText("current user name");
+			assertLabeledFieldEquals(username, "User Three");
+		}
 		
-		// go back to the viewkey page
-		gotoSitemapThenPage(sitemap, "viewkey");
-		assertNoProblem();
-		assertTextPresent("key42");
+		// the password should _not_ be present
+		assertNoMatch("test3");
 		
-		// now we logout		
-		gotoSitemapThenPage(sitemap, "logout", "Home");
+		// reload the page
+		gotoSitemapThenPage(sitemap, "current user");
+		{
+			String username = getLabelIDForText("current user name");
+			assertLabeledFieldEquals(username, "User Three");
+		}
 		
-		// we should now be on the home page
-		assertTitleMatch("Home");
-		assertNoProblem();
-		
+		// now we logout, we should now be on the logout page
+		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 	}
-
+	
 	/**
-	 * Test that we are actually comparing the login keys
+	 * Once we can login, we can change our name.
+	 */
+	public void testChangeName() throws Exception {
+		IFile sitemap = getProject().getFile("output/sitemap.html");
+		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+
+		beginAt(sitemap.getProjectRelativePath().toString());
+		assertTitleMatch("sitemap");
+
+		clickLinkWithText("login");
+		String loginId = getLabelIDForText("password");
+		setLabeledFormElementField(loginId, "test4");
+		submit();		// submit the form
+		waitForAjax();	// wait for ajax forms
+		
+		// we should now be on the Login Successful page
+		assertEquals("Login Successful", getPageTitle());
+		assertNoProblem();
+		
+		// lets now go to the "current user" page
+		gotoSitemapThenPage(sitemap, "current user");
+		String newUsername = "my new username " + new Date();
+		{
+			String username = getLabelIDForText("current user name");
+			assertLabeledFieldEquals(username, "User Four");
+			
+			// lets set it
+			setLabeledFormElementField(username, newUsername);
+			waitForAjax();
+		}
+		
+		// reload the page, it should remain
+		gotoSitemapThenPage(sitemap, "current user");
+		{
+			String username = getLabelIDForText("current user name");
+			assertLabeledFieldEquals(username, newUsername);
+		}
+		
+		// now we logout, we should now be on the logout page
+		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
+		
+		// re-login to make sure the change was successful
+		beginAtSitemapThenPage(sitemap, "login", "login");
+		String loginId2 = getLabelIDForText("password");
+		setLabeledFormElementField(loginId2, "test4");
+		submit();		// submit the form
+		waitForAjax();	// wait for ajax forms
+		
+		// we should now be on the Login Successful page
+		assertEquals("Login Successful", getPageTitle());
+		assertNoProblem();
+		
+		// lets now go to the "current user" page
+		gotoSitemapThenPage(sitemap, "current user");
+		{
+			String username = getLabelIDForText("current user name");
+			assertLabeledFieldEquals(username, newUsername);
+		}
+	}
+	
+	/**
+	 * Test that we are actually comparing against the database
 	 */
 	public void testTryInvalidLogin() throws Exception {
 		IFile sitemap = getProject().getFile("output/sitemap.html");
@@ -286,36 +344,14 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		assertTitleMatch("sitemap");
 
 		clickLinkWithText("login");
-		assertTitleMatch("login");
-		assertNoProblem();		// we should be fine
-
-		// lets set the fields
-		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "key44");	// INVALID
+		String loginId = getLabelIDForText("password");
+		setLabeledFormElementField(loginId, "test6"); // INVALID password
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
-
-		// we should now be on the login page again
-		assertTitleMatch("login");
-		assertProblem();		// with a problem
-		assertTextNotPresent("key42");		// it should not be on the page
-
-		// lets set the fields again
-		setLabeledFormElementField(loginId, "key42");	// VALID
-		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
-
-		// we should now be on the right page
-		assertTitleMatch("viewkey");
-		assertNoProblem();		// no problems now
-		assertTextPresent("key42");
-
-		// now we logout		
-		gotoSitemapThenPage(sitemap, "logout", "Home");
 		
-		// we should now be on the home page
-		assertTitleMatch("Home");
-		assertNoProblem();
+		// we should now be on the Login Successful page
+		assertNotEquals("Login Successful", getPageTitle());
+		assertProblem();
 		
 	}
 

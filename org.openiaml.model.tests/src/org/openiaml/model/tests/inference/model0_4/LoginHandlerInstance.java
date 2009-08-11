@@ -416,4 +416,21 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 	}
 	
+	/**
+	 * There should not be a 'check key' operation generated in
+	 * the session, since we are a LoginHandler[type=instance].
+	 * 
+	 * @throws Exception
+	 */
+	public void testNoCheckKeyOperation() throws Exception {
+		root = loadAndInfer(LoginHandlerInstance.class);
+		
+		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		
+		List<?> nodes = query(session, "iaml:operations[iaml:name='check key']");
+		assertEquals(0, nodes.size());
+
+	}
+	
+	
 }

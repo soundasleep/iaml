@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.codegen.oaw;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.openiaml.model.runtime.IFileCopyListener;
 import org.openiaml.model.runtime.IamlRuntimeLibrariesPlugin;
 
 /**
@@ -23,7 +25,7 @@ import org.openiaml.model.runtime.IamlRuntimeLibrariesPlugin;
  * @author jmwright
  *
  */
-public class OawCodeGeneratorWithRuntime extends OawCodeGenerator {
+public class OawCodeGeneratorWithRuntime extends OawCodeGenerator implements IFileCopyListener {
 
 	@Override
 	public IStatus generateCode(IFile file, IProgressMonitor monitor,
@@ -50,7 +52,10 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator {
 		// into a runtime/ folder
 		if (needToCopy) {
 			IamlRuntimeLibrariesPlugin runtime = IamlRuntimeLibrariesPlugin.getInstance();
-			System.out.println("instance = " + runtime);
+			
+			// add a listener
+			runtime.addFileCopyListener(this);
+
 			try {
 				runtime.copyRuntimeFiles(file.getProject(), new SubProgressMonitor(monitor, 10));
 			} catch (IOException e) {
@@ -65,6 +70,19 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator {
 		// return old result
 		return result;
 		
+	}
+
+	/**
+	 * Notify the {@link IACleanerBeautifier} that a file was copied from
+	 * the runtime (for caching purposes).
+	 * 
+	 * @see org.openiaml.model.runtime.IFileCopyListener#fileCopied(java.io.File, java.io.File)
+	 */
+	@Override
+	public void fileCopied(File source, File target) {
+		if (IACleanerBeautifier.isTracingEnabled()) {
+			IACleanerBeautifier.getTracingCache().add( target );
+		}
 	}
 
 }

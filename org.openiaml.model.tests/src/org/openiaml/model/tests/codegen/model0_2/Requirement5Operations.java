@@ -18,7 +18,7 @@ public class Requirement5Operations extends CodegenTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(ROOT + "../examples/requirements/5-operations.iaml");
+		root = loadAndCodegen(Requirement5Operations.class, ROOT + "../examples/requirements/5-operations.iaml");
 	}
 	
 	public void testRequirement() throws Exception {

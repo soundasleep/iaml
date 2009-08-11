@@ -23,7 +23,7 @@ public abstract class PhpCodegenTestCase extends CodegenTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/runtime/server/PhpCodegenTestCase.iaml");
+		root = loadAndCodegen(PhpCodegenTestCase.class, getAbsolutePathRoot() + ROOT + "codegen/runtime/server/PhpCodegenTestCase.iaml");
 		hasStarted = false;
 	}
 	

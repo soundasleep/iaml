@@ -23,7 +23,7 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(getAbsolutePathRoot() + ROOT + "codegen/runtime/client/JavascriptCodegenTestCase.iaml");
+		root = loadAndCodegen(JavascriptCodegenTestCase.class, getAbsolutePathRoot() + ROOT + "codegen/runtime/client/JavascriptCodegenTestCase.iaml");
 		hasStarted = false;
 	}
 	

@@ -3,9 +3,12 @@
  */
 package org.openiaml.model.runtime;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -21,9 +24,11 @@ import org.eclipse.core.runtime.Plugin;
  * @author jmwright
  *
  */
-public class IamlRuntimeLibrariesPlugin extends Plugin {
+public class IamlRuntimeLibrariesPlugin extends Plugin implements IFileCopyListener {
 
 	private static IamlRuntimeLibrariesPlugin instance;
+	
+	private List<IFileCopyListener> listeners = new ArrayList<IFileCopyListener>();
 	
 	public static IamlRuntimeLibrariesPlugin getInstance() {
 		return instance;
@@ -32,6 +37,10 @@ public class IamlRuntimeLibrariesPlugin extends Plugin {
 	public IamlRuntimeLibrariesPlugin() {
 		super();
 		instance = this;
+	}
+	
+	public void addFileCopyListener(IFileCopyListener listener) {
+		listeners.add(listener);
 	}
 	
 	/**
@@ -63,7 +72,10 @@ public class IamlRuntimeLibrariesPlugin extends Plugin {
 			
 			// copy it over
 			createParentsRecursively(towrite.getParent(), new NullProgressMonitor());
-			towrite.create(url.openStream(), true, new NullProgressMonitor());			
+			towrite.create(url.openStream(), true, new NullProgressMonitor());
+			
+			// notify listeners
+			fileCopied( new File(url.toExternalForm()), towrite.getLocation().toFile() );
 		}
 		
 		monitor.done();
@@ -87,6 +99,18 @@ public class IamlRuntimeLibrariesPlugin extends Plugin {
 			((IFolder) f).create(true, true, monitor);
 		} else {
 			throw new RuntimeException("Cannot create the parent '" + f + "' as it is not a folder");
+		}
+	}
+
+	/**
+	 * Notify all of the listeners of the IFileCopyListener event.
+	 * 
+	 * @see org.openiaml.model.runtime.IFileCopyListener#fileCopied(java.io.File, java.io.File)
+	 */
+	@Override
+	public void fileCopied(File source, File target) {
+		for (IFileCopyListener listener : listeners) {
+			listener.fileCopied(source, target);
 		}
 	}
 	

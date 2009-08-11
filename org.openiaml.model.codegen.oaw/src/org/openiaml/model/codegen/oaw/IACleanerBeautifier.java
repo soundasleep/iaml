@@ -6,6 +6,8 @@ package org.openiaml.model.codegen.oaw;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openarchitectureware.xpand2.output.FileHandle;
 import org.openiaml.iacleaner.CleanerException;
@@ -17,6 +19,37 @@ import org.openiaml.iacleaner.IAInlineCleaner;
  *
  */
 public class IACleanerBeautifier implements org.openarchitectureware.xpand2.output.PostProcessor {
+
+	private static boolean tracingEnabled = false;
+	
+	private static List<File> tracingCache = null;
+	
+	/**
+	 * When tracing is enabled, all written files will be added
+	 * to a local tracing cache. This could help with caching
+	 * the OAW generation results.
+	 * 
+	 * This method also resets the cache: {@link #tracingReset()}.
+	 * 
+	 * @param tracing
+	 */
+	public static void setTracingEnabled(boolean tracing) {
+		tracingEnabled = tracing;
+		tracingReset();
+	}
+	
+	/**
+	 * Reset the tracing cache. This must be called before any 
+	 * tracing cache can be done.
+	 */
+	public static void tracingReset() {
+		tracingCache = new ArrayList<File>();
+	}
+	
+	
+	public static List<File> getTracingCache() {
+		return tracingCache;
+	}
 
 	/**
 	 * We use the IACleaner to format the file.
@@ -53,6 +86,11 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 			}
 			*/
 			
+			// tracing enabled?
+			if (tracingEnabled) {
+				tracingCache.add(file.getTargetFile());
+			}
+			
 		} catch (IOException e) {
 			throw new RuntimeException("[" + file.getTargetFile() + "] IO Exception during prettifier: " + e.getMessage(), e);
 		} catch (CleanerException e) {
@@ -67,6 +105,15 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 	@Override
 	public void beforeWriteAndClose(FileHandle file) {
 		// ignore	
+	}
+
+	/**
+	 * Is tracing currently enabled?
+	 * 
+	 * @return
+	 */
+	public static boolean isTracingEnabled() {
+		return tracingEnabled;
 	}
 
 }

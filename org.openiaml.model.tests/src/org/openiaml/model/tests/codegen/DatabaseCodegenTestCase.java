@@ -14,7 +14,7 @@ import org.openiaml.model.tests.CodegenTestCase;
 
 /**
  * Extends code generation test cases to allow for simpler access
- * to databases. Also includes database initialisation.
+ * to databases. Also includes database initialisation through {@link #getDatabaseInitialisers()}.
  * 
  * @author jmwright
  *
@@ -22,7 +22,8 @@ import org.openiaml.model.tests.CodegenTestCase;
 public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 	
 	/**
-	 * Get initial database values.
+	 * Get initial database values. The results returned from here are
+	 * queries executed against the initialised database.
 	 * 
 	 * @return
 	 */

@@ -19,7 +19,7 @@ public class Requirement1SyncWires extends CodegenTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(ROOT + "../examples/requirements/1-sync_wires.iaml");
+		root = loadAndCodegen(Requirement1SyncWires.class, ROOT + "../examples/requirements/1-sync_wires.iaml");
 	}
 	
 	public void testRequirement() throws Exception {

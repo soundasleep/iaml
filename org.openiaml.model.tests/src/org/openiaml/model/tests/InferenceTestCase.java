@@ -116,30 +116,60 @@ public abstract class InferenceTestCase extends ModelTestCase {
 	}
 
 	/**
+	 * Automatically find the model file (.iaml) for the given class.
+	 * 
+	 * @param class1
+	 * @return
+	 */
+	protected String getModelFileForClass(Class<?> class1) {
+		// check that the resolved path actually exists
+		File f = new File(getAbsolutePathRoot());
+		assertTrue("Resolved absolute path '" + getAbsolutePathRoot() + "' does not exist", f.exists());
+		assertTrue("Resolved absolute path '" + getAbsolutePathRoot() + "' is not a directory", f.isDirectory());
+
+		if (class1.getPackage().getName().contains("codegen.model0_1")) {
+			return getAbsolutePathRoot() + ROOT + "codegen/model0_1/" + class1.getSimpleName() + ".iaml";
+		}
+		if (class1.getPackage().getName().contains("codegen.model0_2")) {
+			return getAbsolutePathRoot() + ROOT + "codegen/model0_2/" + class1.getSimpleName() + ".iaml";
+		}
+		if (class1.getPackage().getName().contains("codegen.model0_3")) {
+			return getAbsolutePathRoot() + ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml";
+		}
+		if (class1.getPackage().getName().contains("codegen.model0_4")) {
+			return getAbsolutePathRoot() + ROOT + "codegen/model0_4/" + class1.getSimpleName() + ".iaml";
+		}
+		if (class1.getPackage().getName().contains("codegen.runtime")) {
+			return getAbsolutePathRoot() + ROOT + "codegen/runtime/" + class1.getSimpleName() + ".iaml";
+		}
+		
+		// TODO move other inference tests into separate test folders
+		if (class1.getPackage().getName().contains("inference.model0_3")) {
+			return getAbsolutePathRoot() + ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml";
+		}
+		if (class1.getPackage().getName().contains("inference.model0_4")) {
+			return getAbsolutePathRoot() + ROOT + "inference/model0_4/" + class1.getSimpleName() + ".iaml";
+		}
+		
+		return getAbsolutePathRoot() + ROOT + "inference/" + class1.getSimpleName() + ".iaml";
+
+	}
+	
+	/**
 	 * Automagically load the model file (.iaml) for this given
 	 * test class, but don't do inference.
 	 *
-	 * @see #loadAndInfer(Class)
+	 * @see #getModelFileForClass(Class)
+	 * @see #loadModelDirectly(Class)
 	 * @param class1 The test class to load a model for.
 	 * @param logRuleSource Log the rule source of inserted elements.
 	 * @return the loaded and inferred InternetApplication
 	 */
 	protected InternetApplication loadDirectly(
 			Class<?> class1, boolean logRuleSource) throws Exception {
-		// check that the resolved path actually exists
-		File f = new File(getAbsolutePathRoot());
-		assertTrue("Resolved absolute path '" + getAbsolutePathRoot() + "' does not exist", f.exists());
-		assertTrue("Resolved absolute path '" + getAbsolutePathRoot() + "' is not a directory", f.isDirectory());
 		
-		// TODO move other inference tests into separate test folders
-		if (class1.getPackage().getName().contains("model0_3")) {
-			return (InternetApplication) loadModelDirectly(getAbsolutePathRoot() + ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml");
-		}
-		if (class1.getPackage().getName().contains("model0_4")) {
-			return (InternetApplication) loadModelDirectly(getAbsolutePathRoot() + ROOT + "inference/model0_4/" + class1.getSimpleName() + ".iaml");
-		}
-		
-		return (InternetApplication) loadModelDirectly(getAbsolutePathRoot() + ROOT + "inference/" + class1.getSimpleName() + ".iaml");
+		return (InternetApplication) loadModelDirectly(getModelFileForClass(class1));
+
 	}
 
 	/**
@@ -206,7 +236,10 @@ public abstract class InferenceTestCase extends ModelTestCase {
 		} else {
 			// load it from the given file - it will be inferred already
 			System.out.println("Loaded model for '" + loadClass + "' directly from cache '" + inferCache.get(loadClass) + "'");
-			return (InternetApplication) loadModelDirectly(inferCache.get(loadClass).getAbsolutePath());
+			
+			inferredModel = inferCache.get(loadClass); 
+			
+			return (InternetApplication) loadModelDirectly(inferCache.get(loadClass).getAbsolutePath()); 
 		}
 	}
 

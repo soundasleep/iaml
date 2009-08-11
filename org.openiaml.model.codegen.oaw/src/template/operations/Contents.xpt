@@ -22,7 +22,6 @@
 	«ELSEIF name == "javascriptAlert"»
 		«EXPAND javascriptAlert(container, php) FOR this»
 	«ELSE»
-		«REM»an existing function on this page«ENDREM»
 		«EXPAND exception FOR throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
 «ENDDEFINE»
@@ -40,7 +39,7 @@
 		«ENDIF»
 	«ELSE»
 		«REM»??? who knows«ENDREM»
-		«ERROR "Unknown decision operation '" + this + "'"»
+		«EXPAND exception FOR throwException("Unknown decision operation to expand '" + name + ": " + this)»
 	«ENDIF»
 	) {
 		// passed (exactly one pass)

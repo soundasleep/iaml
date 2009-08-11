@@ -13,9 +13,15 @@ import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
+ * <p>
  * Extends code generation test cases to allow for simpler access
  * to databases. Also includes database initialisation through {@link #getDatabaseInitialisers()}.
+ * </p>
  * 
+ * <p><b>NOTE:</b> {@link #initialiseDatabase()} must be called in order to actually initialise the database.</b>
+ * 
+ * @see #initialiseDatabase()
+ * @see #getDatabaseInitialisers()
  * @author jmwright
  *
  */

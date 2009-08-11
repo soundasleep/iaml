@@ -23,9 +23,21 @@
 «DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»
 	/* eContainer == «to.eContainer» */
 	
+	«IF php»
+		$result = null;
+	«ELSE»
+		var result = null;
+	«ENDIF»
+	
 	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
 		/* expand conditions */
 		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+	«ENDIF»
+
+	«IF php»
+		$result =
+	«ELSE»
+		result = 
 	«ENDIF»
 
 	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
@@ -54,10 +66,10 @@
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
-		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»
+		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»;
 	«ELSEIF isDomainObjectInstance(to.eContainer)-»
 		«REM»direct field --> domain object instance«ENDREM»
-		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::DomainObjectInstance) to.eContainer) FOR to»
+		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::DomainObjectInstance) to.eContainer) FOR to»;
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
 		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»

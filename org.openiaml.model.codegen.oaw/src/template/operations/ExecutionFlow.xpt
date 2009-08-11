@@ -25,10 +25,8 @@
 /**
  * The individual steps within a flow.
  */
- 
-/* an edge that is the end (both StartNode and FinishNode also fall into this) */
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::ExecutionEdgeDestination-»
-	// do nothing «this-»
+	«EXPAND exception FOR throwException("Unknown operation contents node: " + this)»
 «ENDDEFINE»
 
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::CancelNode-»
@@ -43,9 +41,66 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
+	// start of operation
+	«FOREACH outExecutions AS e-»
+		«EXPAND executionFlowStep(container, php) FOR e.to-»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::FinishNode-»
+	// operation finished successfully
+«ENDDEFINE»
+
+/**
+ * We implement split nodes lazily; each branch is executed in sequence.
+ *
+ * Each split node will continue execution as normal until it reaches a
+ * JoinNode, then it will stop.
+ *
+ * The second part of this template will iterate down the first split
+ * path until it finds a JoinNode; we define this as the end of the split,
+ * and continue execution from there.
+ *
+ * This assumes that all splits and joins occur with the same edges, etc. 
+ *
+ * TODO: What about recursive split/joins? 
+ * TODO: What about multi level split/joins? e.g.
+ *       |-> b ->|-> f ->|
+ *   a ->|-> c ->|       |-> g
+ *       |-> d ----> e ->|
+ */ 
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::SplitNode-»
+	/* a split node */
+	«FOREACH outExecutions AS e-»
+		«EXPAND executionFlowStep(container, php) FOR e.to-»
+	«ENDFOREACH»
+	
+	/* find the first join node, and continue code there */
+	«EXPAND findJoinNode(container, php) FOR outExecutions.first().to»
+«ENDDEFINE»
+
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::JoinNode-»
+	// end of split operation path; wait for join node
+«ENDDEFINE»
+
+«DEFINE findJoinNode(model::visual::Page container, Boolean php) FOR emf::EObject»
+«ENDDEFINE»
+
+«DEFINE findJoinNode(model::visual::Page container, Boolean php) FOR model::ExecutionEdgesSource»
+	«EXPAND findJoinNode(container, php) FOR outExecutions.first().to»
+«ENDDEFINE»
+
+«DEFINE findJoinNode(model::visual::Page container, Boolean php) FOR model::operations::JoinNode»
+	/* found end of join node; continue execution */
+	«FOREACH outExecutions AS e-»
+		«EXPAND executionFlowStep(container, php) FOR e.to-»
+	«ENDFOREACH»	
+«ENDDEFINE»
+
 /* a chained operation: carry on */
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::ChainedOperation-»
-	// chained operation «name-»
+	// chained operation "«name-»"
 	«EXPAND Contents::operationContents(container, php) FOR this-»
 	«FOREACH outExecutions AS e-»
 		«EXPAND executionFlowStep(container, php) FOR e.to-»
@@ -57,11 +112,31 @@
 
 /* a decision operation: expandOperationContents will continue the execution flow */
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
-	// decision operation «name-»
+	// decision operation "«name-»"
 	«EXPAND Contents::operationContents(container, php) FOR this-»
 
 	// continue chained operations
 	«EXPAND continueChainedOperations(php) FOR this»
+«ENDDEFINE»
+
+/* an operation call: expand for any parameters */
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::OperationCallNode-»
+	// virtual operation call "«name-»"
+	«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
+	«EXPAND OperationCall::callOperation(php, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
+	
+	/* Condition flow for virtual operation '«name»' */
+	if (!«IF php»$result«ELSE»result«ENDIF») {
+		«REM»continue expanding following conditions (if any)«ENDREM»
+		«FOREACH getFailEdges() AS e-»
+			«EXPAND executionFlowStep(container, php) FOR e.to-»
+		«ENDFOREACH»
+	} else {
+		«REM»continue expanding following conditions (if any)«ENDREM»
+		«FOREACH getPassEdges() AS e-»
+			«EXPAND executionFlowStep(container, php) FOR e.to-»
+		«ENDFOREACH»
+	}
 «ENDDEFINE»
 
 /**

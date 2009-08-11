@@ -3,8 +3,11 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.tests.CodegenTestCase;
+import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
  * Test a Login Handler in a Session, where the login handler
@@ -13,11 +16,28 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  *
  */
-public class LoginHandlerInstance extends CodegenTestCase {
+public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 	
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(LoginHandlerInstance.class);
+		initialiseDatabase();
+	}
+	
+	@Override
+	protected String getDatabaseName() {
+		return "output/model_122f7c69efd_d.db";
+	}
+
+	@Override
+	protected List<String> getDatabaseInitialisers() {
+		List<String> s = new ArrayList<String>();
+		s.add("CREATE TABLE User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (12, 'User Default', 'default@jevon.org', 'test1')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (22, 'User Two', 'target@jevon.org', 'test2')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (42, 'User Three', 'test3@jevon.org', 'test3')");
+		s.add("INSERT INTO User (id, name, email, password) VALUES (82, 'User Four', 'test4@jevon.org', 'test4')");
+		return s;
 	}
 	
 	/**
@@ -141,8 +161,8 @@ public class LoginHandlerInstance extends CodegenTestCase {
 		IFile sitemap = beginAtSitemapThenPage("login");
 		assertNoProblem();
 		
-		String loginId = getLabelIDForText("login key");
-		setLabeledFormElementField(loginId, "key42");
+		String loginId = getLabelIDForText("password");
+		setLabeledFormElementField(loginId, "test2");
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
 		

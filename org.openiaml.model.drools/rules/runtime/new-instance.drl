@@ -99,20 +99,6 @@ rule "Create 'edit' event for DomainAttributeInstances"
 
 end
 
-rule "Create 'update' operation for DomainAttributeInstances"
-	when
-		instance : DomainAttributeInstance ( )
-		
-		not ( Operation( eContainer == instance, name == "update" ))
-		
-	then
-		# create a new one
-		CompositeOperation op = handler.generatedCompositeOperation(instance, instance);
-		handler.setName(op, "update");
-		queue.add(op, drools);
-
-end
-
 rule "Create 'fieldValue' value for DomainAttributeInstances"
 	when
 		instance : DomainAttributeInstance ( )

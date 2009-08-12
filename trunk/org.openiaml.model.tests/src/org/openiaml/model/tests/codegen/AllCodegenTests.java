@@ -3,6 +3,10 @@ package org.openiaml.model.tests.codegen;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.openiaml.model.tests.codegen.model0_1.AllModel0_1CodegenTests;
+import org.openiaml.model.tests.codegen.model0_2.AllModel0_2CodegenTests;
+import org.openiaml.model.tests.codegen.model0_3.AllModel0_3CodegenTests;
+import org.openiaml.model.tests.codegen.model0_4.AllModel0_4CodegenTests;
 import org.openiaml.model.tests.codegen.oaw.AllOawTests;
 import org.openiaml.model.tests.codegen.runtime.client.AllClientRuntimeTests;
 import org.openiaml.model.tests.codegen.runtime.server.AllServerRuntimeTests;
@@ -36,10 +40,10 @@ public class AllCodegenTests {
 		suite.addTest(AllOawTests.suite());
 
 		// different model versions
-		suite.addTest(Codegen0_1Suite.suite());
-		suite.addTest(Codegen0_2Suite.suite());
-		suite.addTest(Codegen0_3Suite.suite());
-		suite.addTest(Codegen0_4Suite.suite());
+		suite.addTest(AllModel0_1CodegenTests.suite());
+		suite.addTest(AllModel0_2CodegenTests.suite());
+		suite.addTest(AllModel0_3CodegenTests.suite());
+		suite.addTest(AllModel0_4CodegenTests.suite());
 		
 		// client-side runtime library tests
 		suite.addTest(AllClientRuntimeTests.suite());

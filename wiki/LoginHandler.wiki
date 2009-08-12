@@ -45,4 +45,4 @@ The incoming _Parameter Wire_ can be any attribute in a _Domain Object_, althoug
 
 Any number of incoming attribute parameters are supported.
 
-https://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/LoginHandlerInstanceComplete-2.png
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/LoginHandlerInstanceComplete-2.png

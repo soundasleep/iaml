@@ -30,6 +30,9 @@
 		«ELSEIF name=="exists?"»
 			«REM»exists operation: ask the server«ENDREM»
 			<?php echo exists_object_instance_«safeNameString(object.id)»() ? "true" : "false"; ?>
+		«ELSEIF name=="new"»
+			«REM»create a new instance of the given DomainObjectInstance«ENDREM»
+			queued_new_domain_instance('«safeNameString(object.id)»')
 		«ELSE»
 			«EXPAND exception FOR throwException("No client-side code for domainInstanceCall operation " + this)»
 		«ENDIF»

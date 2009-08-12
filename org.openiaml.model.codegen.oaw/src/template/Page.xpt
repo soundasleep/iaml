@@ -130,6 +130,36 @@ if (require_get("operation", "")) {
 		// operation definitions
 		«EXPAND template::operations::Definitions::operationDefinitions(this, false) FOR getRoot()-»
 
+		// register a operation handler
+		function operation_handler_«safeName()»() {
+			this.execute = function(name, args) {
+				debug("[operation handler] " + name + " (" + args + ")");
+				if (args.length != 10) {
+					throw new IamlJavascriptException("Expected 10 arguments to operation handler resolver"); 
+				}
+
+				var resolved = null;
+				switch (name) { 
+					«FOREACH allContainerOperations() AS operation»
+					case "«safeName(operation)»": 
+						resolved = "do_«safeName(operation)»";
+						break;
+					«ENDFOREACH»
+					default:
+						throw new IamlJavascriptException("Could not resolve function '" + name + "'");
+				}
+				
+				debug("[operation handler] resolved function: " + resolved);
+				
+				// call the function virtually
+				var virtual = new Function("args", "return " + resolved + "(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);");
+				debug("[operation handler] virtual function: " + virtual);
+
+				return virtual(args);
+			};
+		}
+		set_operation_handler(new operation_handler_«safeName()»());
+
 		// condition definitions
 		«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»
 
@@ -205,6 +235,7 @@ if (require_get("operation", "")) {
 		<div id="counter_remote_event"></div>
 		<div id="counter_queued_store_attribute"></div>
 		<div id="counter_queued_store_object"></div>
+		<div id="counter_new_domain_instance"></div>
 	</div>
 	<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
 	

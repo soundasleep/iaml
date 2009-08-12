@@ -49,6 +49,7 @@
 	«FILE "output/store_db.php"»«EXPAND php::includes::StoreDbPhp::storeDbPhp»«ENDFILE»
 	«FILE "output/set_session.php"»«EXPAND php::includes::SetSessionPhp::setSessionPhp»«ENDFILE»
 	«FILE "output/set_application_value.php"»«EXPAND php::includes::SetApplicationValuePhp::setApplicationValuePhp»«ENDFILE»
+	«FILE "output/new_domain_instance.php"»«EXPAND php::includes::NewDomainInstancePhp::newDomainInstancePhp»«ENDFILE»
 	«FILE "output/set_domain_attribute.php"»«EXPAND php::includes::SetDomainAttributePhp::setDomainAttributePhp»«ENDFILE»
 	«FILE "output/save_queued_attribute.php"»«EXPAND php::includes::SaveQueuedAttributePhp::saveQueuedAttribute»«ENDFILE»
 	«FILE "output/save_queued_store_domain_object.php"»«EXPAND php::includes::SaveQueuedStoreDomainObjectPhp::saveQueuedStoreDomainObject»«ENDFILE»

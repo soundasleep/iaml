@@ -19,8 +19,7 @@
 	«ELSE»
 		// we need to navigate to the fail page
 		var url = "«safeName(to)».php?fail=" + encodeURIComponent(e);
-		debug("Redirecting to '" + url + "' (fail)");
-		window.location = url;
+		redirect(url);
 	«ENDIF»
 «ENDDEFINE»
 

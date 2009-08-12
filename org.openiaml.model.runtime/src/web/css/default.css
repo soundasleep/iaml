@@ -64,3 +64,5 @@ div#debug_monitors div#counter_store_event:before { content: 'event '; }
 div#debug_monitors div#counter_set_session:before { content: 'session '; }
 div#debug_monitors div#counter_set_application_value:before { content: 'app '; }
 div#debug_monitors div#counter_set_domain_attribute:before { content: 'attr '; }
+div#debug_monitors div#counter_new_domain_instance:before { content: 'new '; }
+

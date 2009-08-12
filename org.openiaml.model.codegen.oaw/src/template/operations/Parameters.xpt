@@ -40,7 +40,10 @@
 				values stored in sessions will not always be called 'fieldValue';
 				perhaps fieldValue is only those stored as part of InputTextFields, etc.
 			«ENDREM»
-			«IF containingSession(this) != null»
+			«IF model::DomainAttributeInstance.isInstance(eContainer)»
+				«REM»from a DomainAttributeInstance«ENDREM»
+				«EXPAND RemoteParameter::remoteValue(php, false, wire, this) FOR this.eContainer-»
+			«ELSEIF containingSession(this) != null»
 				/* a property from our session */
 				require_session("«safeName(containingSession(this))»_«safeName()-»"
 				«IF defaultValue != null»
@@ -64,7 +67,10 @@
 			/* wire = «wire», from = «wire.from», to = «wire.to» */
 			«IF name == "fieldValue"»
 				«REM»where is this value stored? is it available on the current page?«ENDREM»
-				«IF onCurrentPage(wire.from, this)» 
+				«IF model::DomainAttributeInstance.isInstance(eContainer)»
+					«REM»from a DomainAttributeInstance«ENDREM»
+					«EXPAND RemoteParameter::remoteValue(php, false, wire, this) FOR this.eContainer-»
+				«ELSEIF onCurrentPage(wire.from, this)» 
 					document.getElementById('«safeName(eContainer)»').value
 				«ELSE»
 					«REM»
@@ -72,7 +78,7 @@
 						but we want it NOW, so we can't just ask the 
 						server. we have to find out where it is.
 					«ENDREM»			
-					«EXPAND RemoteParameter::remoteValue(false, wire, this) FOR this.eContainer-»
+					«EXPAND RemoteParameter::remoteValue(php, false, wire, this) FOR this.eContainer-»
 				«ENDIF»
 			«ELSE»
 				get_application_element_property("«safeName()-»")

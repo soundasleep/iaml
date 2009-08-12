@@ -1,13 +1,8 @@
-package org.openiaml.model.tests.codegen;
+package org.openiaml.model.tests.codegen.model0_4;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstance;
-import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstanceComplete;
-import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstanceMultiple;
-import org.openiaml.model.tests.codegen.model0_4.NewInstanceWithoutId;
-import org.openiaml.model.tests.codegen.model0_4.SessionNewDomainInstance;
 
 /**
  * Code generation tests: model version 0.4
@@ -15,7 +10,7 @@ import org.openiaml.model.tests.codegen.model0_4.SessionNewDomainInstance;
  * @author jmwright
  *
  */
-public class Codegen0_4Suite {
+public class AllModel0_4CodegenTests {
 
 	/**
 	 * Get all the tests in this package and return as a test suite.

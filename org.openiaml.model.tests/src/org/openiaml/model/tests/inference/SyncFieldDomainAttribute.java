@@ -15,7 +15,6 @@ import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.tests.InferenceTestCase;
 
 /**
  * Tests inference of sync wires between a domain attribute
@@ -43,20 +42,20 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		DomainAttribute attribute = (DomainAttribute) queryOne(obj, "//iaml:attributes[iaml:name='attribute']");
 
 		// field should now have an edit event
-		EventTrigger editEvent = (EventTrigger) queryOne(field, "iaml:eventTriggers[iaml:name='edit']");
+		EventTrigger editEvent = assertHasEventTrigger(field, "edit");
 
 		// this event should have a run wire
 		RunInstanceWire runWire = (RunInstanceWire) getWireFrom(page, editEvent, "run");
 
 		// the attribute should have an operation 'update'
-		Operation opUpdate = (Operation) queryOne(attribute, "iaml:operations[iaml:name='update']");
+		Operation opUpdate = assertHasOperation(attribute, "update");
 
 		// the run wire should go to the operation
 		assertEquals(runWire.getFrom(), editEvent);
 		assertEquals(runWire.getTo(), opUpdate);
 
 		// there should be a parameter on the field
-		ApplicationElementProperty fieldValue = (ApplicationElementProperty) queryOne(field, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty fieldValue = assertHasApplicationElementProperty(field, "fieldValue");
 
 		// there should be a parameter wire from fieldValue to the operation
 		ParameterWire paramWire = (ParameterWire) getWireFromTo(page, fieldValue, runWire);

@@ -24,7 +24,6 @@ import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.tests.InferenceTestCase;
 
 /**
  * Tests inference of sync wires between a .properties
@@ -43,9 +42,9 @@ public class SyncWireProperties extends InferenceTestCase {
 
 	public void testInference() throws JaxenException {
 		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='container']");
-		InputForm form = (InputForm) queryOne(page, "iaml:children[iaml:name='target form']");
+		InputForm form = assertHasInputForm(page, "target form");
 		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='properties file']");
-		DomainObject properties = (DomainObject) queryOne(store, "iaml:children[iaml:name='properties']");
+		DomainObject properties = assertHasDomainObject(store, "properties");
 
 		// there should be exactly three fields here (generated)
 		// if there are four fields here, the generated key may have been added as a text field
@@ -96,12 +95,12 @@ public class SyncWireProperties extends InferenceTestCase {
 		// (following from SyncFormDomainObject)
 
 		// fields should have fieldValues
-		ApplicationElementProperty value1 = (ApplicationElementProperty) queryOne(f1, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty value2 = (ApplicationElementProperty) queryOne(f2, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty value3 = (ApplicationElementProperty) queryOne(f3, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty valuea1 = (ApplicationElementProperty) queryOne(a1, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty valuea2 = (ApplicationElementProperty) queryOne(a2, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty valuea3 = (ApplicationElementProperty) queryOne(a3, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty value1 = assertHasApplicationElementProperty(f1, "fieldValue");
+		ApplicationElementProperty value2 = assertHasApplicationElementProperty(f2, "fieldValue");
+		ApplicationElementProperty value3 = assertHasApplicationElementProperty(f3, "fieldValue");
+		ApplicationElementProperty valuea1 = assertHasApplicationElementProperty(a1, "fieldValue");
+		ApplicationElementProperty valuea2 = assertHasApplicationElementProperty(a2, "fieldValue");
+		ApplicationElementProperty valuea3 = assertHasApplicationElementProperty(a3, "fieldValue");
 
 		// these field values should be parameters to run instance wires
 		{
@@ -120,12 +119,12 @@ public class SyncWireProperties extends InferenceTestCase {
 		}
 
 		// test for 'access' events and 'initialize' operations (new)
-		EventTrigger access1 = (EventTrigger) queryOne(f1, "iaml:eventTriggers[iaml:name='access']");
-		EventTrigger access2 = (EventTrigger) queryOne(f2, "iaml:eventTriggers[iaml:name='access']");
-		EventTrigger access3 = (EventTrigger) queryOne(f3, "iaml:eventTriggers[iaml:name='access']");
-		Operation op1 = (Operation) queryOne(f1, "iaml:operations[iaml:name='init']");
-		Operation op2 = (Operation) queryOne(f2, "iaml:operations[iaml:name='init']");
-		Operation op3 = (Operation) queryOne(f3, "iaml:operations[iaml:name='init']");
+		EventTrigger access1 = assertHasEventTrigger(f1, "access");
+		EventTrigger access2 = assertHasEventTrigger(f2, "access");
+		EventTrigger access3 = assertHasEventTrigger(f3, "access");
+		Operation op1 = assertHasOperation(f1, "init");
+		Operation op2 = assertHasOperation(f2, "init");
+		Operation op3 = assertHasOperation(f3, "init");
 
 		// these field values should be parameters to run instance wires
 		{

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests;
+package org.openiaml.model.tests.inference;
 
 import java.util.ArrayList;
 import java.util.List;

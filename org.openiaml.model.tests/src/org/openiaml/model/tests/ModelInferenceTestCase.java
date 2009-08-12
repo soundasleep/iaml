@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -36,13 +35,12 @@ import org.openiaml.model.model.WireEdgesSource;
 import ca.ecliptical.emf.xpath.EMFXPath;
 
 /**
- * Inference-specific test cases.
+ * Assorted methods to assist with loading and inferring models.
  *
- * @see CodegenTestCase
+ * @see #loadAndInfer(Class)
  * @author jmwright
- *
  */
-public abstract class InferenceTestCase extends ModelTestCase {
+public abstract class ModelInferenceTestCase extends ModelTestCase {
 
 	protected InternetApplication root;
 	

@@ -15,7 +15,6 @@ import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.tests.CodegenTestCase;
 
 /**
  * SyncWires connected to DomainAttributeInstances should call
@@ -24,7 +23,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  *
  */
-public class SelectField extends CodegenTestCase {
+public class SelectField extends InferenceTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -34,10 +33,10 @@ public class SelectField extends CodegenTestCase {
 	public void testInference() throws Exception {
 		// initial elements
 		Page container = (Page) queryOne(root, "//iaml:children[iaml:name='container']");
-		InputTextField field = (InputTextField) queryOne(container, "iaml:children[iaml:name='editname']");
+		InputTextField field = assertHasInputTextField(container, "editname");
 
 		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='DomainStore']");
-		DomainObject user = (DomainObject) queryOne(store, "iaml:children[iaml:name='User']");
+		DomainObject user = assertHasDomainObject(store, "User");
 
 		DomainAttributeInstance attr = (DomainAttributeInstance)
 			queryOne(root, "//iaml:children[iaml:name='name']");
@@ -46,13 +45,13 @@ public class SelectField extends CodegenTestCase {
 
 		// [inferred elements]
 		// edit events and operations on the text field
-		CompositeOperation update = (CompositeOperation) queryOne(field, "iaml:operations[iaml:name='update']");
-		EventTrigger edit = (EventTrigger) queryOne(field, "iaml:eventTriggers[iaml:name='edit']");
-		ApplicationElementProperty fieldValue = (ApplicationElementProperty) queryOne(field, "iaml:properties[iaml:name='fieldValue']");
+		CompositeOperation update = assertHasCompositeOperation(field, "update");
+		EventTrigger edit = assertHasEventTrigger(field, "edit");
+		ApplicationElementProperty fieldValue = assertHasApplicationElementProperty(field, "fieldValue");
 
 		// [new elements]
 		// edit operations on the attribute
-		CompositeOperation updateAttr = (CompositeOperation) queryOne(attr, "iaml:operations[iaml:name='update']");
+		CompositeOperation updateAttr = assertHasCompositeOperation(attr, "update");
 
 		// when the text field is edited, the attr update operation should be called
 		RunInstanceWire runEdit = (RunInstanceWire) getWireFromTo(root, edit, updateAttr);

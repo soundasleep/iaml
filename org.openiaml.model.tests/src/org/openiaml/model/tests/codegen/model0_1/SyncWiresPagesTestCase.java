@@ -155,10 +155,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		assertLabeledFieldEquals(label_text3, testingText3);
 		
 		} catch (Error e) {
-			// print out the source code
-			System.out.println(getTester().getPageSource());
-			// throw out any response text too
-			throw new RuntimeException("Response = '" + getElementById("response").getTextContent() + "' Debug='" + getElementById("debug").getTextContent() + "'", e);
+			throwDebugInformation(e);
 		}
 		
 	}

@@ -125,7 +125,7 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 							break;		// completed; we can carry on the test case
 						
 						if (text.length() > 6 && text.substring(0, 6).equals("failed"))
-							throw new Exception("Ajax loading failed: " + monitor.getTextContent());
+							throw new RuntimeException("Ajax loading failed: " + monitor.getTextContent());
 					
 						// carry on sleeping
 						Thread.sleep(30);
@@ -526,6 +526,22 @@ public abstract class CodegenTestCase extends InferenceTestCase {
 			}
 			throw f;
 		}
+	}
+	
+	/**
+	 * Throw a RuntimeException with the various information from the
+	 * debug box (<code>&lt;div id="debug"&gt;...&lt;/div&gt;</code>)
+	 * for debugging purposes.
+	 * 
+	 * Also prints out the current source code.
+	 */
+	public void throwDebugInformation(Throwable e) {
+		// print out the source code
+		System.out.println(getTester().getPageSource());
+		System.out.println(getElementById("debug").getTextContent());
+		// throw out any response text too
+		throw new RuntimeException("Response = '" + getElementById("response").getTextContent() + "' Debug='" + getElementById("debug").getTextContent() + "'", e);
+		
 	}
 	
 }

@@ -100,6 +100,7 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 		      	if (function_queue) {
 		      		debug('executing function queue');
 		      		function_queue(response); /* provide response as parameter to callback function, even if not requested */
+		      		debug('function queue complete');
 		      	}
 		      	
 		      	// are there any instructions in here?
@@ -134,7 +135,8 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 		      						}
 		      						var url = decodeURIComponent(bits[1]);
 		      						debug("[instruction] redirect(" + url + ")");
-		      						redirect(url);
+									window.location = url;
+									ajaxIncrement();	// prevent other events from executing
 		      						break;
 		      					
 		      					case "call_operation":
@@ -233,19 +235,6 @@ function next_store_event() {
 			debug(" -- nothing found in queue");
 		}
 	}
-}
-
-/**
- * Redirect the browser to the given URL.
- *
- * This method also increments the AJAX counter; this prevents
- * any test cases (and also other queued script calls)
- * from continuing until after the load is actually
- * complete.
-function redirect(url) {
-	debug("Redirecting to '" + url + "'");
-	window.location = url;
-	ajaxIncrement();
 }
 
 /* save directly to database (only one attribute) */

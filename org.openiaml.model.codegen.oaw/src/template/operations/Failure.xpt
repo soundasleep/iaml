@@ -19,7 +19,9 @@
 	«ELSE»
 		// we need to navigate to the fail page
 		var url = "«safeName(to)».php?fail=" + encodeURIComponent(e);
-		redirect(url);
+		debug("Redirecting to '" + url + "' [fail]");
+		window.location = url;
+		ajaxIncrement();	// prevent other events from executing
 	«ENDIF»
 «ENDDEFINE»
 

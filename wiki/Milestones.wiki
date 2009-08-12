@@ -54,7 +54,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Operation modelling
     * Condition modelling
     * Domain objects, domain object instances
-    * Login handlers (type=key)
+    * [LoginHandler Login handlers (secret key)]
     * Select wires
     * New instance wires
   # Editor
@@ -79,7 +79,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.4 Outstanding issues])
   # [Model0_4 Expand IAML model]
     * Priority 5
-      * LoginHandler (DomainObjectInstance)
+      * [LoginHandler Login handlers (domain object instance)]
       * Text element
       * Clear the current session DomainObjectInstance
       * One-way SyncWire

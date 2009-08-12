@@ -165,24 +165,8 @@ _DomainObjectInstances_ and _DomainAttributeInstances_ can be stored within _Ses
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/NewInstanceAttributeSession.png 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_3/images/NewInstanceAttributeSession-4.png
 
-==Login Handler (type=key)==
-|| *Description* || Controls authentication and access to pages, authenticated with a single key. ||
-|| *Model* || [https://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_1/LoginHandlerKey.iaml LoginHandlerKey.iaml] ||
-|| *Inference Tests* || - ||
-|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_1/LoginHandlerKey.java LoginHandlerKey.java] ||
-
-If placed within a Session, all accesses to pages within the Session must be authenticated through the _LoginHandler_. The _LoginHandler_ uses a single key for authentication. 
-
-The "login key" can be any data source, such as a static value or an _ApplicationElementProperty_.
-
-The _LoginHandler_ has a number of special wires:
-  * A _NavigateWire_ called "login" will redirect the user to the page if authentication has failed; this may be generated.
-  * A _NavigateWire_ called "logout" will redirect the user to the page if they request to logout; this may be generated.
-  * A _SetWire_ called "set" will store the current value of the login key. This may be generated.
-  * An incoming _ParameterWire_ provides the current login key to authenticate against.
-
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_1/images/LoginHandlerKey.png
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_1/images/LoginHandlerKey-1.png
+==Login Handler (Secret Key)==
+  _See [LoginHandler]_
 
 =New Wires=
 

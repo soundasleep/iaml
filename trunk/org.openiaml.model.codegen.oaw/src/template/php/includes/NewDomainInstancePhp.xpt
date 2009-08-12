@@ -1,0 +1,121 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE newDomainInstancePhp FOR model::InternetApplication-»
+<?php
+/**
+ * Create a new object instance for our session.
+ * 
+ * $page_id lets the server know which page the client is currently on;
+ * the script will search through all properties on the InternetApplication
+ * and let the client know if any of these properties (contained on
+ * page $page_id) need to update.
+ */
+ 
+require("config.php");		// runtime library configuration
+require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+
+log_message("new_domain_instance.php? " . print_r($_GET, true));
+
+«REM»TODO put this into a separate include«ENDREM»
+«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this»
+«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this»
+
+// the domain object instance to set
+$id = require_get("id");
+
+// the current page ID we are on
+// (used to select which elements to inform the client to update)
+$page_id = require_get("page");
+
+// create a function name
+// TODO this is probably insecure
+$function = "new_domain_instance_" . $id;
+
+// execute
+$function();
+log_message("new_domain_instance.php: $function called from page $page_id");
+
+echo "ok";
+
+/* Is there additional actions we should do on the client-side once this
+ * property has changed? */
+try {
+	«EXPAND potentialDomainObjectInstanceUpdatesRequired FOREACH eAllContents.typeSelect(model::DomainObjectInstance)»
+} catch (IamlRuntimeException $e) {
+	// redirect to the exception page
+	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
+	log_message(print_r($e, true));
+	log_message("[update exception handler] Redirecting to '$url' (fail)");
+
+	log_message("redirect " 
+		. escape_parameter_string($url));
+	echo "\nredirect " 
+		. escape_parameter_string($url);				
+	die;
+}
+
+«ENDDEFINE»
+
+«DEFINE potentialDomainObjectInstanceUpdatesRequired FOR model::DomainObjectInstance»
+	if ($id == "«safeName()-»") {
+		/* DomainObjectInstance "«name-»" («id-») */
+		
+		/* expand all attributes */
+		«EXPAND potentialDomainAttributeInstanceUpdatesRequired FOREACH attributes»
+	}
+«ENDDEFINE»
+
+«DEFINE potentialDomainAttributeInstanceUpdatesRequired FOR model::DomainAttributeInstance»
+	/* attribute «this» */
+	/* expand all 'edit' events */
+	«EXPAND potentialEditEvent FOREACH eventTriggers»
+«ENDDEFINE»
+
+«DEFINE potentialEditEvent FOR model::EventTrigger»
+	«IF name=="edit"»
+		«EXPAND editEvent FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)»
+	«ELSE»
+		// ignoring event trigger '«this»'
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE editEvent FOR model::wires::RunInstanceWire»
+	«EXPAND editEventTarget(this) FOR to»
+«ENDDEFINE»
+
+«DEFINE editEventTarget(model::wires::RunInstanceWire wire) FOR model::WireEdgeDestination»
+	// unknown RunInstanceWire target: «this»
+«ENDDEFINE»
+
+«DEFINE editEventTarget(model::wires::RunInstanceWire wire) FOR model::Operation»
+	/* we have an operation that we should call on edit */
+	/* is it on the current page? */
+	if ($page_id == '«containingPage(this).safeName()»') {
+		// yes: call the operation
+		log_message("calling client-side operation «name»");
+		log_message("call_operation " 
+			. escape_parameter_string("«safeName()»")
+			/* expand out all parameters */
+			«EXPAND clientSideOperationCallParamater(wire)
+				FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire)»
+			);
+		echo "\ncall_operation " 
+			. escape_parameter_string("«safeName()»")
+			/* expand out all parameters */
+			«EXPAND clientSideOperationCallParamater(wire)
+				FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire)»
+			;
+	}
+«ENDDEFINE»
+
+/**
+ * The parameter to pass to the client.
+ */
+«DEFINE clientSideOperationCallParamater(model::wires::RunInstanceWire wire) FOR model::wires::ParameterWire»
+	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, wire, false) FOR from»)
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

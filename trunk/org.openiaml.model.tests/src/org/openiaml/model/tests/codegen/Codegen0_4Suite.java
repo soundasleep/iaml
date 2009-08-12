@@ -7,6 +7,7 @@ import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstance;
 import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstanceComplete;
 import org.openiaml.model.tests.codegen.model0_4.LoginHandlerInstanceMultiple;
 import org.openiaml.model.tests.codegen.model0_4.NewInstanceWithoutId;
+import org.openiaml.model.tests.codegen.model0_4.SessionNewDomainInstance;
 
 /**
  * Code generation tests: model version 0.4
@@ -28,6 +29,7 @@ public class Codegen0_4Suite {
 		suite.addTestSuite(LoginHandlerInstance.class);
 		suite.addTestSuite(LoginHandlerInstanceMultiple.class);
 		suite.addTestSuite(LoginHandlerInstanceComplete.class);
+		suite.addTestSuite(SessionNewDomainInstance.class);
 
 		return suite;
 	}

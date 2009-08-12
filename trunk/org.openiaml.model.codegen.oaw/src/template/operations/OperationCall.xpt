@@ -100,8 +100,7 @@
 	«ELSE»
 		// navigating to a new page
 		var url = "«safeName(to)».php";
-		debug("Redirecting to '" + url + "'");
-		window.location = url;
+		redirect(url);
 	«ENDIF»
 «ENDDEFINE»
 

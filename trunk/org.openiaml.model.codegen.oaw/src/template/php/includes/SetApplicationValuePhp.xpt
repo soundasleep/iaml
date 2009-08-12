@@ -6,6 +6,11 @@
 <?php
 /**
  * For setting an application value.
+ * 
+ * $page_id lets the server know which page the client is currently on;
+ * the script will search through all properties on the InternetApplication
+ * and let the client know if any of these properties (contained on
+ * page $page_id) need to update. 
  */
  
 require("config.php");		// runtime library configuration
@@ -21,6 +26,7 @@ log_message("set_application_value.php? " . print_r($_GET, true));
 $id = require_get("id");
 
 // the current page ID we are on
+// (used to select which elements to inform the client to update)
 $page_id = require_get("page");
 
 // the value to set the property to

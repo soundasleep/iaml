@@ -107,20 +107,20 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 		      		debug('executing instructions');
 		      		var inst_list = response.split("\n");
 		      		for (var i = 0; i < inst_list.length; i++) {
-		      			var inst = trim(inst_list[i]);
+		      			var inst = inst_list[i]; /* TODO don't trim, otherwise empty strings may be lost */
 		      			if (inst) {
 		      				var bits = inst.split(" ");
 		      				switch (bits[0]) {
 		      					case "ok":
 		      						if (bits.length != 1) {
-		      							throw new IamlJavascriptException("ok instruction called with incorrect number of arguments: expected 1, found " + bits.length);
+		      							throw new IamlJavascriptException("'ok' instruction called with incorrect number of arguments: expected 1, found " + bits.length);
 		      						}
 		      						debug("[instruction] ok");
 		      						break;		// nothing
 		      					
 		      					case "set_value":
 		      						if (bits.length != 3) {
-		      							throw new IamlJavascriptException("set_value instruction called with incorrect number of arguments: expected 3, found " + bits.length);
+		      							throw new IamlJavascriptException("'set_value' instruction called with incorrect number of arguments: expected 3, found " + bits.length);
 		      						}
 		      						var element_id = decodeURIComponent(bits[1]);
 		      						var value = decodeURIComponent(bits[2]);
@@ -130,11 +130,35 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 		      					
 		      					case "redirect":
 		      						if (bits.length != 2) {
-		      							throw new IamlJavascriptException("redirect instruction called with incorrect number of arguments: expected 2, found " + bits.length);
+		      							throw new IamlJavascriptException("'redirect' instruction called with incorrect number of arguments: expected 2, found " + bits.length);
 		      						}
 		      						var url = decodeURIComponent(bits[1]);
 		      						debug("[instruction] redirect(" + url + ")");
-		      						window.location = url;
+		      						redirect(url);
+		      						break;
+		      					
+		      					case "call_operation":
+		      						// only up to 10 arguments
+		      						if (bits.length < 2 || bits.length > 12) {
+		      							throw new IamlJavascriptException("'call operation' instruction called with incorrect number of arguments: expected 2 <= n <= 12, found " + bits.length);
+		      						}
+		      						
+		      						if (!get_operation_handler()) {
+		      							throw new IamlJavascriptException("No operation handler registered");
+		      						}
+		      						
+		      						var op = decodeURIComponent(bits[1]);
+		      						var args = new Array();
+		      						
+		      						// any arguments (up to 10)
+		      						for (var j = 0; j < 10; j++) {
+		      							args.push(bits.length > (j + 2) ? bits[j + 2] : null); 
+		      						}
+		      						
+		      						// call the operation via the operation handler
+		      						debug("[instruction] operation '" + op + ": " + args[0] + ", " + args[1] + ", ...");
+		      						get_operation_handler().execute(op, args);
+		      						debug("[instruction] operation complete");
 		      						break;
 		      					
 		      					default:
@@ -211,6 +235,19 @@ function next_store_event() {
 	}
 }
 
+/**
+ * Redirect the browser to the given URL.
+ *
+ * This method also increments the AJAX counter; this prevents
+ * any test cases (and also other queued script calls)
+ * from continuing until after the load is actually
+ * complete.
+function redirect(url) {
+	debug("Redirecting to '" + url + "'");
+	window.location = url;
+	ajaxIncrement();
+}
+
 /* save directly to database (only one attribute) */
 function store_db(attribute_id, arg0) {
 	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
@@ -235,14 +272,19 @@ function set_domain_attribute(id, arg0, function_queue) {
 	execute_queued_url(url, 'set_domain_attribute', function_queue, false);
 }
 
+function queued_new_domain_instance(id, function_queue) {
+	var url = 'new_domain_instance.php?id=' + escape(id) + '&page=' + escape(page_id);
+	execute_queued_url(url, 'new_domain_instance', function_queue, true /* allow instructions */);
+}
+
 function save_queued_store_domain_attribute(id, function_queue) {
 	var url = 'save_queued_attribute.php?id=' + escape(id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'queued_store_attribute', function_queue, true);
+	execute_queued_url(url, 'queued_store_attribute', function_queue, true /* allow instructions */);
 }
 
 function save_queued_store_domain_object(id, function_queue) {
 	var url = 'save_queued_store_domain_object.php?id=' + escape(id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'queued_store_object', function_queue, true);
+	execute_queued_url(url, 'queued_store_object', function_queue, true /* allow instructions */);
 }
 
 /* call a remote operation (only one attribute) */
@@ -252,16 +294,22 @@ function call_remote_event(container, operation_name, arg0, arg1, function_queue
 		+ '&operation_name=' + escape(operation_name)
 		+ '&arg0=' + escape(arg0)
 		+ '&arg1=' + escape(arg1);
-	execute_queued_url(url, 'remote_event', function_queue, function_queue ? true : false);
+	execute_queued_url(url, 'remote_event', function_queue, false);
 }
 
 var debug_message_saved = "";
+var debug_message_cleared = false;
 function debug(msg) {
 	var debug_string = "<li>" + msg + "\n";
 	if (document.getElementById('debug')) {
 		document.getElementById('debug').innerHTML += debug_message_saved + debug_string;
 		debug_message_saved = "";
+		debug_message_cleared = true;
 	} else {
+		if (debug_message_cleared) {
+			// how could we have lost the element?
+			throw new IamlJavascriptException("Unexpectedly lost the debug element");
+		}
 		debug_message_saved += debug_string;
 	}
 }
@@ -272,6 +320,23 @@ function debug(msg) {
 function setField(field) {
 	debug("saving cookie for " + field.id);
 	createCookie("field_" + field.id, field.value, 30);
+}
+
+var operation_handler = null;
+
+/**
+ * To (hopefully) prevent various XSS attacks, we let each page register
+ * a function which actually lists all the operations that are available
+ * within the given page. This function handler will then execute
+ * the function as necessary, and acts as a "bridge" between this
+ * library script and the generated page.
+ */
+function get_operation_handler() {
+	return operation_handler;
+}
+
+function set_operation_handler(handler) {
+	operation_handler = handler;
 }
 
 /**

@@ -10,7 +10,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-lang-2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-logging-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/cssparser-0.9.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/reqs/htmlunit-2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/reqs/htmlunit-2.5.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/Desktop/Downloads/htmlunit-2.5-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/htmlunit-core-js-2.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/junit-3.8.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/log4j-1.2.13.jar"/>

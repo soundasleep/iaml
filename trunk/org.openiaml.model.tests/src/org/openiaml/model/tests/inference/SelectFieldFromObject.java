@@ -25,7 +25,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  *
  */
-public class SelectFieldFromObject extends CodegenTestCase {
+public class SelectFieldFromObject extends InferenceTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -35,10 +35,10 @@ public class SelectFieldFromObject extends CodegenTestCase {
 	public void testInference() throws Exception {
 		// initial elements
 		Page container = (Page) queryOne(root, "//iaml:children[iaml:name='container']");
-		InputTextField field = (InputTextField) queryOne(container, "iaml:children[iaml:name='textfield']");
+		InputTextField field = assertHasInputTextField(container, "textfield");
 
 		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='domain store']");
-		DomainObject user = (DomainObject) queryOne(store, "iaml:children[iaml:name='User']");
+		DomainObject user = assertHasDomainObject(store, "User");
 
 		DomainObjectInstance obj = (DomainObjectInstance)
 			queryOne(root, "//iaml:children[iaml:name='\"my user\"']");
@@ -49,13 +49,13 @@ public class SelectFieldFromObject extends CodegenTestCase {
 
 		// [inferred elements]
 		// edit events and operations on the text field
-		CompositeOperation update = (CompositeOperation) queryOne(field, "iaml:operations[iaml:name='update']");
-		EventTrigger edit = (EventTrigger) queryOne(field, "iaml:eventTriggers[iaml:name='edit']");
-		ApplicationElementProperty fieldValue = (ApplicationElementProperty) queryOne(field, "iaml:properties[iaml:name='fieldValue']");
+		CompositeOperation update = assertHasCompositeOperation(field, "update");
+		EventTrigger edit = assertHasEventTrigger(field, "edit");
+		ApplicationElementProperty fieldValue = assertHasApplicationElementProperty(field, "fieldValue");
 
 		// [new elements]
 		// edit operations on the attribute
-		CompositeOperation updateAttr = (CompositeOperation) queryOne(attr, "iaml:operations[iaml:name='update']");
+		CompositeOperation updateAttr = assertHasCompositeOperation(attr, "update");
 
 		// when the text field is edited, the attr update operation should be called
 		RunInstanceWire runEdit = (RunInstanceWire) getWireFromTo(root, edit, updateAttr);

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.inference;
 
@@ -41,7 +41,6 @@ import junit.framework.AssertionFailedError;
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.drools.DroolsXmlDumper;
 import org.openiaml.model.tests.DijkstraAlgorithm;
-import org.openiaml.model.tests.InferenceTestCase;
 import org.openiaml.model.tests.TestComposition;
 import org.openiaml.model.tests.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -53,7 +52,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Dump the XML involved in the rule bases.
- * 
+ *
  * @author jmwright
  *
  */
@@ -61,19 +60,19 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	public void setUp() throws Exception {
 		super.setUp();		// set up project
-		
+
 		identifierCount = -1;		// reset identifier count
 		existsIdentifierCount = 0;
 	}
-	
+
 	/**
 	 * Parse the given Java code and insert the results into
 	 * the given node.
-	 * 
+	 *
 	 * Generates:
 	 * <pre>
 	 * RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
-	 * 
+	 *
      * &lt;statement&gt;
      *   &lt;assignment&gt;
      *     &lt;set-variable name="rw" type="RunInstanceWire" /&gt;
@@ -86,9 +85,9 @@ public class DumpDroolsXml extends InferenceTestCase {
      *     &lt;/statement&gt;
      *   &lt;/assignment&gt;
      * &lt;/statement&gt;
-     * 
+     *
      * rw.setName("run");
-     * 
+     *
      * &lt;statement&gt;
      *   &lt;variable name="rw"&gt;
      *    &lt;method name="insert"&gt;
@@ -98,9 +97,9 @@ public class DumpDroolsXml extends InferenceTestCase {
      *    &lt;/method&gt;
      *   &lt;/variable&gt;
      * &lt;/statement&gt;
-     * 
+     *
      * insert(rw);
-     * 
+     *
      * &lt;statement&gt;
      *   &lt;method name="insert"&gt;
      *    &lt;argument-list&gt;
@@ -109,12 +108,12 @@ public class DumpDroolsXml extends InferenceTestCase {
      *   &lt;/method&gt;
      * &lt;/statement&gt;
 	 * </pre>
-	 * 
+	 *
 	 * <p><b>NOTE</b> All comments will be stripped out first, so
 	 * any string that contains //, /* and # will be destroyed.
 	 * There is also no support for nested method calls, or
 	 * casting.</p>
-	 * 
+	 *
 	 * @param parent
 	 * @param java
 	 */
@@ -124,10 +123,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 			java = java.replaceAll("//[^\n]*\n", "");
 			java = java.replaceAll("/\\*.+\\*/", "");
 			java = java.replaceAll("#[^\n]*\n", "");
-			
+
 			// parse out all strings
 			java = parseOutStrings(java);
-			
+
 			// expect that no strings contain ;s or .s
 			String[] lines = java.split(";");
 			for (String javaLine : lines) {
@@ -135,7 +134,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (!javaLine.isEmpty()) {
 					Element line = document.createElement("statement");
 					parent.appendChild(line);
-					
+
 					parseJavaEquals(document, line, javaLine);
 				}
 			}
@@ -145,14 +144,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 			throw e;		// rethrow
 		}
 	}
-	
+
 	private Map<String,String> parsedOutStrings;
-	
+
 	/**
 	 * Parse out all strings in the java code.
 	 * We assume that this code has no comments in it, and all strings are
 	 * ""s, and there are no \"s.
-	 * 
+	 *
 	 * @param java
 	 * @return
 	 */
@@ -166,21 +165,21 @@ public class DumpDroolsXml extends InferenceTestCase {
 			int end = java.indexOf("\"", start + 1);
 			if (end == -1)
 				throw new RuntimeException("Cannot find the ending string after " + java.substring(start));
-			
+
 			// take it out
 			String name = "_string" + i++;
 			String value = java.substring(start + 1, end);
 			parsedOutStrings.put(name, value);
 			java = java.replace("\"" + value + "\"", name);
-			
+
 		}
-		
+
 		return java;
 	}
 
 	/**
 	 * Parse a statement "a=b"
-	 * 
+	 *
 	 * @param document
 	 * @param line
 	 * @param javaLine
@@ -190,10 +189,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 		String[] equals = javaLine.split("=");
 		if (equals.length == 2) {
 			// a = b
-			
+
 			Element assignment = document.createElement("assignment");
 			line.appendChild(assignment);
-			
+
 			String[] elements = equals[0].trim().split("\\s+");
 			Element setVariable = document.createElement("set-variable");
 			if (elements.length == 2) {
@@ -203,12 +202,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 			} else if (elements.length == 1) {
 				// variable
 				setVariable.setAttribute("name", elements[0]);
-			} else { 
+			} else {
 				// who knows
 				throw new RuntimeException("Found more than one part of the equals left hand side '" + javaLine + "': " + equals[0] + " (found " + elements.length + " elements: " + Arrays.toString(elements) + ")");
 			}
 			assignment.appendChild(setVariable);
-			
+
 			Element statement = document.createElement("statement");
 			assignment.appendChild(statement);
 			parseJavaStatement(document, statement, equals[1]);
@@ -219,12 +218,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// who knows
 			throw new RuntimeException("Found more than one part of the equals statement '" + javaLine + "'");
 		}
-		
+
 	}
 
 	/**
 	 * Parse a statement "b.foo()" or "foo()"
-	 * 
+	 *
 	 * @param document
 	 * @param line
 	 * @param javaLine
@@ -234,11 +233,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		String[] bits = javaLine.split("\\.", 2);
 		if (bits.length == 2) {
 			// b.foo()
-			
+
 			Element variable = document.createElement("variable");
 			variable.setAttribute("name", bits[0].trim());
 			line.appendChild(variable);
-			
+
 			// recurse
 			parseJavaStatement(document, variable, bits[1]);
 		} else if (bits.length == 1) {
@@ -249,17 +248,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 				// there are no brackets
 				throw new RuntimeException("Could not find any brackets in method call '" + bits[0] + "'");
 			}
-		
+
 			Element method = document.createElement("method");
 			method.setAttribute("name", brackets[0].trim());
 			line.appendChild(method);
-			
+
 			Element argumentList = document.createElement("argument-list");
 			method.appendChild(argumentList);
-			
+
 			// parse out the arguments
 			parseJavaArgumentList(document, argumentList, brackets[1].substring(0, brackets[1].length() - 1));
-			
+
 		} else {
 			// who knows
 			throw new RuntimeException("Somehow split(limit 2) gave us more than 2 results.");
@@ -269,7 +268,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * Parse a statement like "a,b,c,.."
 	 * Non-recursive (i.e. we can't have "a,b,foo(a,b),c")
-	 * 
+	 *
 	 * @param document
 	 * @param method
 	 * @param string
@@ -299,13 +298,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 				}
 			}
 		}
-		
+
 	}
 
 	protected Document loadTestXML() throws FileNotFoundException, ParserConfigurationException, SAXException, IOException {
 		return loadDocument("src/org/openiaml/model/tests/inference/parser-test.xml");
 	}
-	
+
 	/**
 	 * Test the parser to make sure that it works as expected.
 	 * Only on one line: insert(rw)
@@ -313,30 +312,30 @@ public class DumpDroolsXml extends InferenceTestCase {
 	public void testBasicParsing() throws Exception {
 		Document d = loadTestXML();
 		Element root = xpathFirst(d, "//test");
-		
+
 		assertNotNull(root);
 		assertEquals( "123", root.getAttribute("attr") );
-		
+
 		// test parsing some simple text
 		parseJava(d, root, "insert(rw);");
-		
+
 		Element statement = xpathFirst(root, "statement");
 		assertEquals(0, statement.getAttributes().getLength());
-		
+
 		Element method = xpathFirst(statement, "method");
 		assertEquals(1, method.getAttributes().getLength());
 		assertEquals("insert", method.getAttribute("name"));
-		
+
 		Element argumentList = xpathFirst(method, "argument-list");
 		assertEquals(0, argumentList.getAttributes().getLength());
 		assertEquals(1, argumentList.getChildNodes().getLength());
-		
+
 		Element argument = (Element) argumentList.getChildNodes().item(0);
 		assertEquals("variable-argument", argument.getNodeName());
 		assertEquals("rw", argument.getAttribute("name"));
-		
+
 	}
-	
+
 	/**
 	 * Test the parser to make sure that it works as expected.
 	 * Only on one line: insert(rw)
@@ -344,16 +343,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 	public void testComplexParsing() throws Exception {
 		Document d = loadTestXML();
 		Element root = xpathFirst(d, "//test");
-		
+
 		assertNotNull(root);
 		assertEquals( "123", root.getAttribute("attr") );
-		
+
 		// test parsing some simple code
 		parseJava(d, root, "// a comment\nRunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);		rw.setName(\"run\");		insert(rw); insert(\"a complicated string. with full stops. and line breaks;\");");
-		
+
 		IterableElementList statements = xpath(root, "statement");
 		assertEquals(4, statements.getLength());
-		
+
 		// first statement
 		// RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		{
@@ -363,29 +362,29 @@ public class DumpDroolsXml extends InferenceTestCase {
 			assertNotNull(assignment);
 			assertEquals(0, assignment.getAttributes().getLength());
 			assertEquals(2, assignment.getChildNodes().getLength());
-			
+
 			Element setVariable = (Element) assignment.getChildNodes().item(0);
 			assertEquals("set-variable", setVariable.getNodeName());
 			assertEquals(2, setVariable.getAttributes().getLength());
 			assertEquals("rw", setVariable.getAttribute("name"));
 			assertEquals("RunInstanceWire", setVariable.getAttribute("type"));
-			
+
 			Element statement2 = (Element) assignment.getChildNodes().item(1);
 			assertEquals("statement", statement2.getNodeName());
 			assertEquals(0, statement2.getAttributes().getLength());
-			
+
 			Element variable = xpathFirst(statement2, "variable");
 			assertEquals(1, variable.getAttributes().getLength());
 			assertEquals("handler", variable.getAttribute("name"));
-			
+
 			Element method = xpathFirst(variable, "method");
 			assertEquals(1, method.getAttributes().getLength());
 			assertEquals("generatedRunInstanceWire", method.getAttribute("name"));
-			
+
 			Element argumentList = xpathFirst(method, "argument-list");
 			assertEquals(0, argumentList.getAttributes().getLength());
 			assertEquals(4, argumentList.getChildNodes().getLength());
-			
+
 			Element argument1 = (Element) argumentList.getChildNodes().item(0);
 			assertEquals("variable-argument", argument1.getNodeName());
 			assertEquals("sw", argument1.getAttribute("name"));
@@ -402,7 +401,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			assertEquals("variable-argument", argument4.getNodeName());
 			assertEquals("operation", argument4.getAttribute("name"));
 		}
-		
+
 		// second statement
 		// rw.setName("run");
 		{
@@ -411,117 +410,117 @@ public class DumpDroolsXml extends InferenceTestCase {
 			Element variable = xpathFirst(statement, "variable");
 			assertEquals(1, variable.getAttributes().getLength());
 			assertEquals("rw", variable.getAttribute("name"));
-			
+
 			Element method = xpathFirst(variable, "method");
 			assertEquals(1, method.getAttributes().getLength());
 			assertEquals("setName", method.getAttribute("name"));
-			
+
 			Element argumentList = xpathFirst(method, "argument-list");
 			assertEquals(0, argumentList.getAttributes().getLength());
 			assertEquals(1, argumentList.getChildNodes().getLength());
-			
+
 			Element argument = (Element) argumentList.getChildNodes().item(0);
 			assertEquals("string-argument", argument.getNodeName());
 			assertEquals("run", argument.getAttribute("value"));
 		}
-		
+
 		// third statement
 		// insert(rw);
 		{
 			Element statement = (Element) statements.item(2);
-			
+
 			Element method = xpathFirst(statement, "method");
 			assertEquals(1, method.getAttributes().getLength());
 			assertEquals("insert", method.getAttribute("name"));
-			
+
 			Element argumentList = xpathFirst(method, "argument-list");
 			assertEquals(0, argumentList.getAttributes().getLength());
 			assertEquals(1, argumentList.getChildNodes().getLength());
-			
+
 			Element argument = (Element) argumentList.getChildNodes().item(0);
 			assertEquals("variable-argument", argument.getNodeName());
 			assertEquals("rw", argument.getAttribute("name"));
-		}		
-		
+		}
+
 		// fourth statement
 		// insert("a complicated string. with full stops. and line breaks;");
 		{
 			Element statement = (Element) statements.item(3);
-			
+
 			Element method = xpathFirst(statement, "method");
 			assertEquals(1, method.getAttributes().getLength());
 			assertEquals("insert", method.getAttribute("name"));
-			
+
 			Element argumentList = xpathFirst(method, "argument-list");
 			assertEquals(0, argumentList.getAttributes().getLength());
 			assertEquals(1, argumentList.getChildNodes().getLength());
-			
+
 			Element argument = (Element) argumentList.getChildNodes().item(0);
 			assertEquals("string-argument", argument.getNodeName());
 			assertEquals("a complicated string. with full stops. and line breaks;", argument.getAttribute("value"));
 		}
-		
+
 	}
 
 	@SuppressWarnings("deprecation")
 	public void testDumpXml() throws Exception {
 		DroolsXmlDumper dump = new DroolsXmlDumper();
 		Map<String,String> results = dump.getRuleXmls();
-	
+
 		Set<LogicRule> allRules = new HashSet<LogicRule>();
 		List<InferredTerm> program = new ArrayList<InferredTerm>();
-		
+
 		boolean foundTestRule = false;
 		for (String f : results.keySet()) {
-			
+
 			String name = f.substring(f.lastIndexOf("/"));
 			IFile out = project.getFile(name + ".xml");
-			
+
 			IFile outParsed = project.getFile(name + "-parsed.txt");
 			String parsed = "";
 
 			IFile outLatex = project.getFile(name + "-parsed.tex");
 			String latex = "";
-			
+
 			List<InferredTerm> fileProgram = new ArrayList<InferredTerm>();
 
 			if (f.toLowerCase().contains("dynamic-sources")) {
 				// TODO we need to allow for if (a...) { b... } syntax
-				// OR we need to modify the rule source to not use this 
+				// OR we need to modify the rule source to not use this
 				// syntax directly
 				System.out.println("Skipping drools rule file: " + f);
 				continue;
 			}
-			
+
 			// who knows what format XmlDump is supplied in?
 			// we will assume UTF-8 as the dumped XML is UTF-8
-			InputStream source = new ByteArrayInputStream(results.get(f).getBytes("UTF-8")); 
+			InputStream source = new ByteArrayInputStream(results.get(f).getBytes("UTF-8"));
 
 			System.out.println("Writing " + out + "...");
-			
-			// load the created XML and replace the <rhs> with 
+
+			// load the created XML and replace the <rhs> with
 			// more XML (specific to our use in IAML)
-			
+
 			Document document = loadDocument(source);
 			IterableElementList rhsList = xpath(document, "//rhs");
-			
+
 			for (Element rhs : rhsList) {
 				Text originalNode = (Text) rhs.getFirstChild();
 				String sourceCode = originalNode.getData();
 				originalNode.setData("");	// empty the node
-				
+
 				Element t = document.createElement("source");
 				originalNode.getParentNode().appendChild(t);
 				Text t2 = document.createTextNode(sourceCode);
 				t.appendChild(t2);
-				
+
 				// lets create the statements here
 				parseJava(document, originalNode.getParentNode(), sourceCode);
-				
+
 				// find the rule node
 				Element ruleNode = (Element) rhs.getParentNode();
 				assertEquals(ruleNode.getNodeName(), "rule");
-				
+
 				/**
 				 * Our new paper wants to generate the factory graph/k-graph
 				 * of the rule. Here we make sure that it parses ok.
@@ -530,7 +529,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 					myTestSampleRule(ruleNode);
 					foundTestRule = true;
 				}
-				
+
 				// parse all the rules
 				try {
 					List<InferredTerm> parsedResults = parseSampleRule(ruleNode);
@@ -538,45 +537,45 @@ public class DumpDroolsXml extends InferenceTestCase {
 						parsed += s.toString() + "\n";
 						latex += "  \\item $" + s.toLatex() + "$\n";
 					}
-					
+
 					// add these rules to the file program
 					fileProgram.addAll(parsedResults);
 				} catch (TermParseException e) {
 					// write document anyway
 					// out.create(source, true, monitor);
 					saveDocument(document, out.getLocation().toFile());
-					outParsed.create(new StringBufferInputStream(parsed), 
+					outParsed.create(new StringBufferInputStream(parsed),
 							true, monitor);
-					outLatex.create(new StringBufferInputStream(latex), 
+					outLatex.create(new StringBufferInputStream(latex),
 							true, monitor);
-					
+
 					throw new TermParseException("While trying to parse '" + f + "'...: " + e.getMessage(), e);
 				}
 			}
-			
+
 			// work out the logic formula defined by each rule
 			List<LogicRule> rules = investigateLogic(document, name);
 			allRules.addAll(rules);
-			
+
 			// out.create(source, true, monitor);
 			saveDocument(document, out.getLocation().toFile());
 
 			// write out parsed rules
 			System.out.println("Writing to '" + outParsed + "'...");
-			outParsed.create(new StringBufferInputStream(parsed), 
+			outParsed.create(new StringBufferInputStream(parsed),
 					true, monitor);
 			// write out parsed rules
 			System.out.println("Writing to '" + outLatex + "'...");
-			outLatex.create(new StringBufferInputStream(latex), 
+			outLatex.create(new StringBufferInputStream(latex),
 					true, monitor);
-			
+
 			System.out.println("---");
 			System.out.println("loops factory in '" + f + "':");
 			GraphLoops loops = calculateFactoryLoops(fileProgram);
 			for (GraphLoop<FactoryLoopNode> o : loops.values()) {
 				System.out.println(o.getLoopAsString());
 			}
-			
+
 			// add all of these terms to the overall program
 			program.addAll(fileProgram);
 		}
@@ -585,13 +584,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		// output out the rules in a prolog format
 		outputPrologStratification(allRules);
-		
+
 		// check each rule for composition
 		checkRulesCompositionGraph(allRules);
-		
+
 		// find rule cycles
 		findStratCycleRules(allRules);
-		
+
 		// look for factory graph cycles
 		System.out.println("---");
 		System.out.println("overall factory loops:");
@@ -599,22 +598,22 @@ public class DumpDroolsXml extends InferenceTestCase {
 		for (GraphLoop<FactoryLoopNode> o : loops.values()) {
 			System.out.println(o.getLoopAsString());
 		}
-		
+
 		refreshProject();
 	}
-	
+
 	/**
 	 * Test the parsing for factory graph/k-graph of the given rule
 	 * "Create empty domain store".
-	 * 
+	 *
 	 * @param ruleNode
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	private void myTestSampleRule(Element ruleNode) throws TermParseException {
 		// sanity checks
 		assertEquals(ruleNode.getNodeName(), "rule");
 		assertEquals(ruleNode.getAttribute("name"), "Create empty domain store");
-		
+
 		String[] result = convertToStrings(parseSampleRule(ruleNode));
 		try {
 			assertEquals(2, result.length);
@@ -635,7 +634,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Convert a list of rule elements to an array of strings.
-	 * 
+	 *
 	 * @param t
 	 * @return
 	 */
@@ -649,7 +648,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * The given string should match the given 'expected' regexp
-	 * 
+	 *
 	 * @param expected expected regular expression to match
 	 * @param string the string to consider
 	 */
@@ -659,26 +658,26 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Parse the rule to get a set of logic-style outputs.
-	 * 
+	 *
 	 * TODO actually implement
-	 * 
+	 *
 	 * @param ruleNode
 	 * @return
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	private List<InferredTerm> parseSampleRule(Element ruleNode) throws TermParseException {
 		List<InferredTerm> terms = parseInferredTerms(ruleNode);
-		
+
 		// now, remove <not exists> from the list of terms
 		List<InferredTerm> resolved = removeNotExists(terms);
-		
+
 		return resolved;
 	}
-	
+
 	public class TermParseException extends Exception {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		public TermParseException(String message) {
 			super(message);
 		}
@@ -688,23 +687,23 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public TermParseException(Throwable e) {
 			super(e.getMessage(), e);
 		}
-		
+
 	}
-	
+
 	/**
 	 * From an element, create InferredTerms.
-	 * 
+	 *
 	 * @param ruleNode
 	 * @return
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	private List<InferredTerm> parseInferredTerms(Element ruleNode) throws TermParseException {
 		List<InferredTerm> terms = new ArrayList<InferredTerm>();
-		
+
 		if (!ruleNode.getNodeName().equals("rule")) {
 			throw new TermParseException("Root rule node name must be 'rule', found '" + ruleNode.getNodeName() + "'");
 		}
-		
+
 		InferredTerm t = new InferredTerm();
 		// if there are multiple <rhs><lhs> (unexpected), they will be merged together
 		for (Element e : new IterableElementList(ruleNode.getChildNodes())) {
@@ -722,18 +721,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 		if (!t.isEmpty()) {
 			terms.add(t);
 		}
-		
+
 		return terms;
 	}
-	
+
 	private class FactoryIndexTracker {
 		private int current = 0;
-		
+
 		public int newIndex() {
 			return current++;
 		}
 	}
-	
+
 	private void parseNodeSide(Element e, Set<Function> head) throws TermParseException {
 		try {
 			parseNodeSide(e, head, null, new HashMap<String, FactoryFunction>(), new FactoryIndexTracker());
@@ -741,16 +740,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 			throw new TermParseException(e1);
 		}
 	}
-	
+
 	/**
 	 * Parse the given element <rhs> or <lhs> into the given
 	 * function list.
-	 * 
+	 *
 	 * @param e
 	 * @param head
 	 * @param tracker keeps track of indexes for f(x, N)
-	 * @throws TermParseException 
-	 * @throws XPathExpressionException 
+	 * @throws TermParseException
+	 * @throws XPathExpressionException
 	 */
 	private void parseNodeSide(Element e, Set<Function> head, Variable currentVariable,
 			Map<String, FactoryFunction> factoryFunctionMap, FactoryIndexTracker tracker) throws TermParseException, XPathExpressionException {
@@ -763,7 +762,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			head.add(f);
 			currentVariable = v;		// save the current variable
 		}
-		
+
 		if (e.getNodeName().equals("from")) {
 			Element expression = xpathFirst(e, "expression");
 			String expr = getTextInNode(expression);
@@ -771,7 +770,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				throw new TermParseException("Did not expect null expression for <from>: " + expression);
 			if (expr.isEmpty())
 				throw new TermParseException("Did not expect empty expression for <from>: " + expression);
-			
+
 			// split up on '.'
 			String[] bits = expr.trim().split("\\.");
 			if (bits.length != 2) {
@@ -782,7 +781,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			DoubleFunction f = new DoubleFunction("containedIn", currentVariable, fromVar);
 			head.add(f);
 		}
-		
+
 		if (e.getNodeName().equals("or-constraint-connective")) {
 			// wrap in an <or>
 			// first, get the contents
@@ -800,7 +799,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// don't re-parse contents
 			return;
 		}
-		
+
 		if (e.getNodeName().equals("field-constraint")) {
 			String fieldName = e.getAttribute("field-name");
 			// we want to find out what the comparison is
@@ -865,14 +864,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (identifier.isEmpty()) {
 					throw new TermParseException("Unexpected empty string while parsing qualified identifier restriction " + quant);
 				}
-				
+
 				if (!evaluator.equals("==")) {
 					throw new TermParseException("Expected evaluator to be '==' but was: " + evaluator);
 				}
-				
+
 				// identifier = 'o.eContainer'
 				// fieldName = 'eContainer'
-				
+
 				// we want this to first create a rule "containedIn(o, z)" (z is new)
 				// and then connect this to fieldName "containedIn(this, z)"
 				String[] bits = identifier.trim().split("\\.");
@@ -885,7 +884,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (bits[1].isEmpty()) {
 					throw new TermParseException("Unexpected empty field for " + bits[1]);
 				}
-				
+
 				Variable newVariable = new NormalVariable(newIdentifier());
 				Variable from = new NormalVariable(bits[0]);	// o
 				Function f;	 // new function to create
@@ -895,7 +894,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 					f = new DoubleFunction(bits[1], from, newVariable);
 				}
 				head.add(f);		// add rule
-				
+
 				// now connect the rest
 				Function f2;
 				if (fieldName.equals("eContainer")) {
@@ -908,7 +907,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				throw new TermParseException("Did not find any restrictions for field-constant '" + fieldName + "': " + e);
 			}
 		}
-		
+
 		if (e.getNodeName().equals("not")) {
 			// find the first <pattern>
 			IterableElementList patterns = new IterableElementList(e.getElementsByTagName("pattern"));
@@ -920,14 +919,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 				String identifier = pattern.getAttribute("identifier");
 				String type = pattern.getAttribute("object-type");
 				if (identifier.isEmpty())
-					identifier = newIdentifier();	// x, x0, x1, ... 
+					identifier = newIdentifier();	// x, x0, x1, ...
 
 				NormalVariable v = new NormalVariable(identifier);
 				Function f = new SingleFunction(type, v);
-				
+
 				NotExists ne = new NotExists(v);
 				ne.add(f);
-				head.add(ne); 
+				head.add(ne);
 				// add additional constraints
 				for (Element ee : new IterableElementList(pattern.getChildNodes())) {
 					parseNodeSide(ee, ne.getContents(), v, factoryFunctionMap, tracker);
@@ -938,7 +937,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// don't parse children
 			return;
 		}
-		
+
 		if (e.getNodeName().equals("statement")) {
 			// is this a handler.generatedXXX?
 			IterableElementList generated = xpath(e, "assignment[set-variable]/statement/variable[@name='handler']/method[contains(@name, 'generated')]");
@@ -952,66 +951,66 @@ public class DumpDroolsXml extends InferenceTestCase {
 				Element setVariable = xpathFirst(e, "assignment/set-variable");
 				String type = setVariable.getAttribute("type");
 				String variableName = setVariable.getAttribute("name");
-				
+
 				// how many arguments do we have?
 				IterableElementList args = xpath(generateMethod, "argument-list/variable-argument");
-				
+
 				FactoryFunction gfunction;
 				if (args.size() == 2 || args.size() == 4) {
 					// first 2 arguments are generated by/contained in
 					String generatedBy = args.item(0).getAttribute("name");
 					String containedIn = args.item(1).getAttribute("name");
-					
+
 					// DomainStore(f(a))
 					NormalVariable vGeneratedBy = new NormalVariable(generatedBy);
 					gfunction = new FactoryFunction(vGeneratedBy, tracker.newIndex());
 					SingleFunction typeCreation = new SingleFunction(type, gfunction);
 					head.add(typeCreation);
-					
+
 					// generatedBy(f(a))
 					DoubleFunction gbyf = new DoubleFunction("generatedBy", gfunction, vGeneratedBy);
 					head.add(gbyf);
-					
+
 					// containedIn(f(a), a)
 					NormalVariable containedInV = new NormalVariable(containedIn);
 					DoubleFunction cinf = new DoubleFunction("containedIn", gfunction, containedInV);
 					head.add(cinf);
-					
+
 					// add this function to the map
 					factoryFunctionMap.put(variableName, gfunction);
 				} else {
 					throw new TermParseException("Expected 2 or 4 arguments for 'generated' method, found " + args.size() + ": " + args);
 				}
-				
+
 				// linked arguments?
 				if (args.size() == 4) {
 					// next 2 arguments are linked from/to
 					String linkFrom = args.item(2).getAttribute("name");
 					String linkTo = args.item(3).getAttribute("name");
-					
+
 					// linkedFrom(f(a), x)
 					NormalVariable varFrom = new NormalVariable(linkFrom);
 					DoubleFunction f1 = new DoubleFunction("linkedFrom", gfunction, varFrom);
 					head.add(f1);
-					
+
 					// linkedTo(f(a), y)
 					NormalVariable varTo = new NormalVariable(linkTo);
 					DoubleFunction f2 = new DoubleFunction("linkedTo", gfunction, varTo);
-					head.add(f2);					
+					head.add(f2);
 				}
-				
+
 				// don't parse children
 				return;
 			}
 		}
-		
+
 		if (e.getNodeName().equals("statement")) {
 			// does this have a variable?
 			IterableElementList variables = xpath(e, "variable");
 			if (variables.size() == 1) {
 				Element variable = variables.item(0);
 				String varName = variable.getAttribute("name");
-				
+
 				// is this in the mapping of generator functions?
 				Variable resolved;
 				if (factoryFunctionMap.containsKey(varName)) {
@@ -1020,7 +1019,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 					// its a different variable
 					resolved = new NormalVariable(varName);
 				}
-				
+
 				currentVariable = resolved;
 
 			} else if (variables.size() > 1) {
@@ -1048,7 +1047,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				return;
 			}
 		}
-		
+
 		// then children
 		for (Element inside : new IterableElementList(e.getChildNodes())) {
 			parseNodeSide(inside, head, currentVariable, factoryFunctionMap, tracker);
@@ -1057,7 +1056,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Get the text within the given element.
-	 * 
+	 *
 	 * @param expression
 	 * @return
 	 */
@@ -1074,14 +1073,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Test the inferred terms parsing directly.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseInferredTerm() throws Exception {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><pattern identifier=\"a\" object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint></pattern></lhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- InternetApplication(a), name(a, \"test\")", list.get(0).toString());
@@ -1089,14 +1088,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Test the inferred terms parsing directly.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseInferredTermFrom() throws Exception {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><pattern identifier=\"a\" object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint><from><expression>b.domainStores</expression></from></pattern></lhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- InternetApplication(a), name(a, \"test\"), containedIn(a, b)", list.get(0).toString());
@@ -1104,21 +1103,21 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Test the inferred terms parsing directly.
-	 * 
+	 *
 	 * This rule might look like this:
-	 * 
+	 *
 	 * <pre>rule "foo"
 	 *   when
 	 *     b : DomainStore ( )
 	 *     a : InternetApplication ( name == "test", eContainer = o.eContainer )</pre>
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseInferredTermQuantifiedIdentifierRestriction() throws Exception {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><pattern identifier=\"b\" object-type=\"DomainStore\"></pattern><pattern identifier=\"a\" object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint><field-constraint field-name=\"eContainer\"><qualified-identifier-restriction evaluator=\"==\">o.eContainer</qualified-identifier-restriction></field-constraint></pattern></lhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- DomainStore(b), InternetApplication(a), name(a, \"test\"), containedIn(o, x), containedIn(a, x)", list.get(0).toString());
@@ -1126,44 +1125,44 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Test the inferred terms parsing directly.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseInferredTermNotExists() throws Exception {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><not><pattern object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint></pattern></not></lhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- notExists(x : InternetApplication(x), name(x, \"test\"))", list.get(0).toString());
 	}
-	
+
 	/**
 	 * Test the inferred terms parsing directly.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseInferredTermRhs() throws Exception {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><rhs><source>kittens</source><statement><assignment><set-variable name=\"ds\" type=\"DomainStore\" /><statement><variable name=\"handler\"><method name=\"generatedDomainStore\"><argument-list><variable-argument name=\"a\" /><variable-argument name=\"a\" /></argument-list></method></variable></statement></assignment></statement></rhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("DomainStore(f(a, 0)), generatedBy(f(a, 0), a), containedIn(f(a, 0), a) <-", list.get(0).toString());
 	}
-	
+
 	/**
 	 * Test the inferred terms parsing directly.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseInferredTermRhs2() throws Exception {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><rhs><source>kittens</source><statement><assignment><set-variable name=\"ds\" type=\"DomainStore\" /><statement><variable name=\"handler\"><method name=\"generatedDomainStore\"><argument-list><variable-argument name=\"a\" /><variable-argument name=\"a\" /></argument-list></method></variable></statement></assignment></statement><statement><variable name=\"ds\"><method name=\"setName\"><argument-list><string-argument value=\"test domain store\" /></argument-list></method></variable></statement></rhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("DomainStore(f(a, 0)), generatedBy(f(a, 0), a), containedIn(f(a, 0), a), name(f(a, 0), \"test domain store\") <-", list.get(0).toString());
@@ -1171,14 +1170,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Test the inferred terms parsing directly.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseInferredTermRhsIgnoresInsert() throws Exception {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><rhs><source>kittens</source><statement><assignment><set-variable name=\"ds\" type=\"DomainStore\" /><statement><variable name=\"handler\"><method name=\"generatedDomainStore\"><argument-list><variable-argument name=\"a\" /><variable-argument name=\"a\" /></argument-list></method></variable></statement></assignment></statement><statement><variable name=\"ds\"><method name=\"setName\"><argument-list><string-argument value=\"test domain store\" /></argument-list></method></variable></statement><statement><method name=\"insert\"><argument-list><variable-argument name=\"ds\" /></argument-list></method></statement></rhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("DomainStore(f(a, 0)), generatedBy(f(a, 0), a), containedIn(f(a, 0), a), name(f(a, 0), \"test domain store\") <-", list.get(0).toString());
@@ -1188,11 +1187,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><not><pattern object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint></pattern></not></lhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- notExists(x : InternetApplication(x), name(x, \"test\"))", list.get(0).toString());
-		
+
 		// when we remove not exists, we should get two results
 		List<InferredTerm> resolved = removeNotExists(list);
 		assertEquals(2, resolved.size());
@@ -1205,11 +1204,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><not><pattern object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><variable-restriction evaluator=\"==\" identifier=\"a\" /></field-constraint></pattern></not></lhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- notExists(x : InternetApplication(x), name(x, a))", list.get(0).toString());
-		
+
 		// when we remove not exists, we should get two results
 		List<InferredTerm> resolved = removeNotExists(list);
 		assertEquals(2, resolved.size());
@@ -1222,11 +1221,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		Document d = loadInlineDocument("<?xml version=\"1.0\"?><rule><lhs><pattern identifier=\"a\" object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><literal-restriction evaluator=\"==\" value=\"test\" /></field-constraint></pattern><not><pattern object-type=\"InternetApplication\"><field-constraint field-name=\"name\"><variable-restriction evaluator=\"==\" identifier=\"a\" /></field-constraint></pattern></not></lhs></rule>");
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- InternetApplication(a), name(a, \"test\"), notExists(x : InternetApplication(x), name(x, a))", list.get(0).toString());
-		
+
 		// when we remove not exists, we should get two results
 		List<InferredTerm> resolved = removeNotExists(list);
 		assertEquals(2, resolved.size());
@@ -1237,14 +1236,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Test the inferred terms parsing directly.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseDumpDrools1Xml() throws Exception {
 		Document d = loadDocument( ROOT + "inference/DumpDrools1.xml" );
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- InputTextField(f), overridden(f, \"false\"), notExists(x : Operation(x), containedIn(x, f), name(x, \"update\"))", list.get(0).toString());
@@ -1253,14 +1252,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * Test the inferred terms parsing directly.
 	 * This one has 'or()' in it.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseDumpDrools2Xml() throws Exception {
 		Document d = loadDocument( ROOT + "inference/DumpDrools2.xml" );
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
 		assertEquals("<- CompositeOperation(o), overridden(o, \"false\"), or(name(o, \"update\"), name(o, \"refresh\"), name(o, \"init\")), ApplicationElementProperty(field), containedIn(o, x), containedIn(field, x), name(field, \"fieldValue\")", list.get(0).toString());
@@ -1269,17 +1268,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * Test the inferred terms parsing directly.
 	 * This one has multiple element creations from the same elements.
-	 * 
+	 *
 	 * @return
 	 */
 	public void testParseDumpDrools3Xml() throws Exception {
 		Document d = loadDocument( ROOT + "inference/DumpDrools3.xml" );
 		Element root = (Element) d.getElementsByTagName("rule").item(0);
 		assertEquals(root.getNodeName(), "rule");
-		
+
 		List<InferredTerm> list = parseInferredTerms(root);
 		assertEquals(1, list.size());
-		assertEquals("Parameter(f(o, 0)), generatedBy(f(o, 0), o), containedIn(f(o, 0), o), name(f(o, 0), \"setValueTo\"), " + 
+		assertEquals("Parameter(f(o, 0)), generatedBy(f(o, 0), o), containedIn(f(o, 0), o), name(f(o, 0), \"setValueTo\"), " +
 				"Parameter(f(o, 1)), generatedBy(f(o, 1), o), containedIn(f(o, 1), o), name(f(o, 1), \"setValueTo\"), " +
 				"Parameter(f(o, 2)), generatedBy(f(o, 2), o), containedIn(f(o, 2), o), name(f(o, 2), \"setValueTo\"), " +
 				"Parameter(f(o, 3)), generatedBy(f(o, 3), o), containedIn(f(o, 3), o), name(f(o, 3), \"setValueTo\") " +
@@ -1293,11 +1292,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @param compare variable to compare with
 	 * @param f function to iterate through
 	 * @param otherVariables any variables in 'f' that are not 'compare' are added to here
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	protected void parseOutOtherVariables(FunctionTerm compare, Function f, Set<FunctionTerm> otherVariables) throws TermParseException {
 		if (f instanceof SingleFunction) {
-			FunctionTerm c = ((SingleFunction) f).getFunctionTerm();							
+			FunctionTerm c = ((SingleFunction) f).getFunctionTerm();
 			if (c instanceof NormalVariable && !compare.equals(c)) {
 				// a different variable
 				otherVariables.add(c);
@@ -1322,19 +1321,19 @@ public class DumpDroolsXml extends InferenceTestCase {
 			throw new TermParseException("Unexpected function type in parseOutOtherVariables: " + f);
 		}
 	}
-	
+
 	/**
 	 * Resolve any terms of 'notExists(x : foo(x))' in the body of rules
-	 * by adding another term 'L1(...) <- foo(x)', and replacing the 
+	 * by adding another term 'L1(...) <- foo(x)', and replacing the
 	 * original term with 'not(L1)'
-	 * 
+	 *
 	 * @param list
 	 * @return
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	protected List<InferredTerm> removeNotExists(List<InferredTerm> list) throws TermParseException {
 		List<InferredTerm> result = new ArrayList<InferredTerm>();
-		
+
 		for (InferredTerm term : list) {
 			// copy head over without change
 			InferredTerm nt = new InferredTerm();
@@ -1359,7 +1358,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 					not.add(lf);
 					// use L1 instead of notExists(...)
 					nt.getBody().add(not);
-					
+
 					// add this L1 definition to the result
 					InferredTerm ldef = new InferredTerm();
 					ldef.getHead().add(lf);
@@ -1374,7 +1373,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			result.add(nt);
 		}
-		
+
 		return result;
 	}
 
@@ -1388,7 +1387,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	}
 	public interface Function extends Latexable {
-		
+
 	}
 	public interface Variable extends FunctionTerm, Latexable {
 
@@ -1396,7 +1395,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	public interface NamedFunction extends Function {
 		public String getName();
 	}
-	
+
 	public abstract class LazyEquals {
 		@Override
 		public boolean equals(Object obj) {
@@ -1414,7 +1413,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		private Set<Function> head = new LinkedHashSet<Function>();
 		private Set<Function> body = new LinkedHashSet<Function>();
-		
+
 		public Set<Function> getHead() {
 			return head;
 		}
@@ -1424,7 +1423,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public Set<Function> getBody() {
 			return body;
 		}
-		
+
 		public String toString() {
 			if (head.isEmpty())
 				if (body.isEmpty())
@@ -1437,7 +1436,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				else
 					return DumpDroolsXml.toString(head) + " <- " + DumpDroolsXml.toString(body);
 		}
-		
+
 		/**
 		 * Compile the term to a Latex format
 		 */
@@ -1467,7 +1466,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * Create the format string, in Latex.
 	 * Separate terms with \wedge.
-	 * 
+	 *
 	 * @param head2
 	 * @return
 	 */
@@ -1482,11 +1481,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Create the format string, in Latex.
 	 * Separate terms with \vee.
-	 * 
+	 *
 	 * @param head2
 	 * @return
 	 */
@@ -1501,11 +1500,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Create the format string, in Latex.
 	 * Separate terms with ','.
-	 * 
+	 *
 	 * @param head2
 	 * @return
 	 */
@@ -1520,7 +1519,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 'name(variable)'
 	 */
@@ -1532,7 +1531,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			this.name = string;
 			this.variable = variable;
 		}
-		
+
 		public FunctionTerm getFunctionTerm() {
 			return variable;
 		}
@@ -1557,9 +1556,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return variable;
 		}
 	}
-	
+
 	/**
-	 * 'not(...)' 
+	 * 'not(...)'
 	 */
 	public class Not extends LazyEquals implements Function {
 		private Set<Function> contents = new LinkedHashSet<Function>();
@@ -1568,7 +1567,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		/**
 		 * Create a new 'not' with the given function already in it.
-		 * 
+		 *
 		 * @param init
 		 */
 		public Not(Function f) {
@@ -1595,9 +1594,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return "\\neg (" + DumpDroolsXml.toLatexAnd(contents) + ")";
 		}
 	}
-	
+
 	/**
-	 * 'or(...)' 
+	 * 'or(...)'
 	 */
 	public class Or extends LazyEquals implements Function {
 		private Set<Function> contents = new LinkedHashSet<Function>();
@@ -1630,7 +1629,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return "(" + DumpDroolsXml.toLatexOr(contents) + ")";
 		}
 	}
-	
+
 	/**
 	 * 'name(v1, v2, ...)' or 'name'
 	 */
@@ -1645,7 +1644,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toString() {
 			if (variables.size() == 0)
 				return name;
-			else		
+			else
 				return name + "(" + DumpDroolsXml.toString(variables) + ")";
 		}
 
@@ -1670,9 +1669,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 		 */
 		public Set<FunctionTerm> getVariables() {
 			return variables;
-		}	
+		}
 	}
-	
+
 	/**
 	 * 'a'
 	 */
@@ -1694,30 +1693,30 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toLatex() {
 			return escapeLatex(name);
 		}
-		
+
 	}
-	
+
 	private static int identifierCount = -1;
 	/**
 	 * Create a new identifier. Returns elements in
 	 * [x, x0, x1, x2, ...]
-	 * 
+	 *
 	 * @return
 	 */
 	public static String newIdentifier() {
 		String result;
 		if (identifierCount == -1) {
-			result = "x";				
+			result = "x";
 		} else {
 			result = "x" + identifierCount;
 		}
 		identifierCount++;
 		return result;
 	}
-	
+
 	/**
 	 * Escape any special latex contents.
-	 * 
+	 *
 	 * @param name
 	 * @return
 	 */
@@ -1729,7 +1728,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * Create a new identifier. Returns elements in
 	 * [L0, L1, L2, ...]
-	 * 
+	 *
 	 * @return
 	 */
 	public static String newExistsIdentifier() {
@@ -1738,9 +1737,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 		existsIdentifierCount++;
 		return result;
 	}
-	
+
 	/**
-	 * '"test"' 
+	 * '"test"'
 	 */
 	public class StringLiteral extends LazyEquals implements FunctionTerm, Variable {
 
@@ -1758,11 +1757,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toLatex() {
 			return "\\textrm{\"" + escapeLatex(value) + "\"}";
 		}
-		
+
 	}
-	
+
 	/**
-	 * 'f(a)' 
+	 * 'f(a)'
 	 */
 	public class FactoryFunction extends LazyEquals implements FunctionTerm, Variable {
 		private NormalVariable variable;
@@ -1785,9 +1784,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public NormalVariable getVariable() {
 			return variable;
 		}
-		
+
 	}
-	
+
 	/**
 	 * 'notExists(x : ...)'
 	 */
@@ -1797,7 +1796,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public NotExists(NormalVariable v) {
 			this.variable = v;
 		}
-		
+
 		/**
 		 * @return
 		 */
@@ -1813,7 +1812,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public void add(Function linked) {
 			body.add(linked);
 		}
-		
+
 		public String toString() {
 			return "notExists(" + variable + " : " + DumpDroolsXml.toString(body) + ")";
 		}
@@ -1823,13 +1822,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 		 */
 		@Override
 		public String toLatex() {
-			return "(\\neg \\exists " + variable.toLatex() + " : " + DumpDroolsXml.toLatexAnd(body) + ")"; 
+			return "(\\neg \\exists " + variable.toLatex() + " : " + DumpDroolsXml.toLatexAnd(body) + ")";
 		}
-		
+
 	}
-	
+
 	/**
-	 * 'name(a, b)' 
+	 * 'name(a, b)'
 	 */
 	public class DoubleFunction extends LazyEquals implements Function, NamedFunction {
 		private String name;
@@ -1856,7 +1855,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toLatex() {
 			return escapeLatex(name) + "(" + variable.toLatex() + ", " + variable2.toLatex() + ")";
 		}
-		
+
 		/* (non-Javadoc)
 		 * @see org.openiaml.model.tests.inference.DumpDroolsXml.NamedFunction#getName()
 		 */
@@ -1865,9 +1864,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return name;
 		}
 	}
-	
+
 	/**
-	 * Test that .toString() on inferred terms generates the correct 
+	 * Test that .toString() on inferred terms generates the correct
 	 * output.
 	 */
 	public void testTermToStringFactoryFunction() {
@@ -1877,7 +1876,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		SingleFunction ds = new SingleFunction("DomainStore", fa);
 		t.getHead().add(ds);
 		assertEquals("DomainStore(f(a, 0)) <-", t.toString());
-		
+
 		t.getBody().add(ds);
 		assertEquals("DomainStore(f(a, 0)) <- DomainStore(f(a, 0))", t.toString());
 
@@ -1885,9 +1884,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 		t.getHead().add(ds);
 		assertEquals("DomainStore(f(a, 0)) <- DomainStore(f(a, 0))", t.toString());
 	}
-	
+
 	/**
-	 * Test that .toString() on inferred terms generates the correct 
+	 * Test that .toString() on inferred terms generates the correct
 	 * output.
 	 */
 	public void testTermToStringNotExists() {
@@ -1901,15 +1900,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 		nb.add(linked);
 		t.getBody().add(nb);
 		assertEquals("<- notExists(x : InternetApplication(x), linked(x, a))", t.toString());
-		
+
 		SingleFunction sf = new SingleFunction("DomainStore", a);
 		t.getHead().add(sf);
 		assertEquals("DomainStore(a) <- notExists(x : InternetApplication(x), linked(x, a))", t.toString());
 	}
-	
+
 	/**
 	 * Test the creation of a factory graph.
-	 * 
+	 *
 	 * From the example in version4:
 	 * – a(x) -> b(f(x))
 	 * – b(x) -> c(f(x))
@@ -1918,8 +1917,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * – f(x) -> g(f(x))
 	 * – d(x) -> e(f(x))
 	 * – g(x) -> a(f(x)) **
-	 * @throws Exception 
-	 * 
+	 * @throws Exception
+	 *
 	 */
 	public void testCreatingFactoryGraph() throws Exception {
 		NormalVariable x = new NormalVariable("x");
@@ -1933,22 +1932,22 @@ public class DumpDroolsXml extends InferenceTestCase {
 			t.getHead().add(new SingleFunction("b", fx));
 			assertEquals("b(f(x, 0)) <- a(x)", t.toString());
 			program.add(t);
-			
+
 			// try the node calculations
 			FactoryLoopNodeList n = calculate(t);
 			assertEquals(2, n.size());
-			assertTrue(n.containsNode("a")); 
-			assertTrue(n.containsNode("b")); 
+			assertTrue(n.containsNode("a"));
+			assertTrue(n.containsNode("b"));
 			assertEquals("a", n.getNode("a").getName());
 			assertEquals(1, n.getNode("a").getEdges().size());
 			assertNotNull(n.getNode("a").getEdges().get(0));
 			assertEquals("b", n.getNode("a").getEdges().get(0).getName());
-			
+
 			// the program so far should also return the same
 			FactoryLoopNodeList nodes = calculate(program);
 			assertEquals(2, nodes.size());
-			assertTrue(nodes.containsNode("a")); 
-			assertTrue(nodes.containsNode("b")); 
+			assertTrue(nodes.containsNode("a"));
+			assertTrue(nodes.containsNode("b"));
 			assertEquals("a", nodes.getNode("a").getName());
 			assertEquals(1, nodes.getNode("a").getEdges().size());
 			assertNotNull(nodes.getNode("a").getEdges().get(0));
@@ -1997,7 +1996,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			t.getHead().add(new SingleFunction("f", x));
 			assertEquals("f(x) <- b(x), not(e(x))", t.toString());
 			program.add(t);
-			
+
 			// try the node calculations
 			FactoryLoopNodeList n = calculate(t);
 			// this term does nothing by itself
@@ -2018,17 +2017,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 			assertEquals("e(f(y, 0)) <- d(y)", t.toString());
 			program.add(t);
 		}
-		
+
 		// lets test all the generated loop edges
 		{
 			FactoryLoopNodeList n = calculate(program);
 			assertEquals(7, n.size());
-			
+
 			FactoryLoopNode a = n.getNode("a");
 			assertEquals(2, a.getEdges().size());
 			assertTrue(a.hasEdgeTo("d"));
 			assertTrue(a.hasEdgeTo("b"));
-			
+
 			FactoryLoopNode b = n.getNode("b");
 			try {
 				assertEquals(3, b.getEdges().size());
@@ -2039,24 +2038,24 @@ public class DumpDroolsXml extends InferenceTestCase {
 			assertTrue(b.hasEdgeTo("c"));
 			assertTrue(b.hasEdgeTo("d"));
 			assertTrue(b.hasEdgeTo("g"));
-			
+
 			// 'c' will exist, but it will have 0 edges
 			FactoryLoopNode c = n.getNode("c");
 			assertNotNull(c);
 			assertTrue(n.containsNode("c"));
 			assertEquals(0, c.getEdges().size());
-			
+
 			FactoryLoopNode d = n.getNode("d");
 			assertEquals(1, d.getEdges().size());
 			assertTrue(d.hasEdgeTo("e"));
-			
+
 			FactoryLoopNode e = n.getNode("e");
 			assertEquals(0, e.getEdges().size());
-			
+
 			FactoryLoopNode f = n.getNode("f");
 			assertEquals(1, f.getEdges().size());
 			assertTrue(f.hasEdgeTo("g"));
-		
+
 			FactoryLoopNode g = n.getNode("g");
 			assertEquals(0, g.getEdges().size());
 			assertFalse(a.hasEdgeTo("a"));	// not yet
@@ -2065,7 +2064,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		{
 			// there shouldn't be any loops yet
 			GraphLoops loops = calculateFactoryLoops(program);
-			
+
 			assertEquals(0, loops.size());
 		}
 
@@ -2076,12 +2075,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 			assertEquals("a(f(y, 0)) <- g(y)", t.toString());
 			program.add(t);
 		}
-		
+
 		// lets test all the generated loop edges
 		{
 			FactoryLoopNodeList n = calculate(program);
 			assertEquals(7, n.size());
-			
+
 			FactoryLoopNode g = n.getNode("g");
 			assertEquals(1, g.getEdges().size());
 			assertTrue(g.hasEdgeTo("a"));	// it has it now
@@ -2090,34 +2089,34 @@ public class DumpDroolsXml extends InferenceTestCase {
 		{
 			// there should now be one loop
 			GraphLoops loops = calculateFactoryLoops(program);
-			
+
 			// three nodes have loops
 			assertEquals(3, loops.size());
 			assertEquals("a -> b -> g -> a", loops.getLoopAsString("a"));
 		}
 	}
-	
+
 	/**
 	 * Calculate the loops within a given graph.
-	 * 
+	 *
 	 * @param program
 	 * @return
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	private GraphLoops calculateFactoryLoops(
 			List<InferredTerm> program) throws TermParseException {
 
 		FactoryLoopNodeList parsed = calculate(program);
-		
+
 		// now lets find loops
 		Map<FactoryLoopNode, GraphLoop<FactoryLoopNode>> result = new HashMap<FactoryLoopNode, GraphLoop<FactoryLoopNode>>();
-		
+
 		System.out.println("---");
 		for (FactoryLoopNode f : parsed) {
-			
+
 			// create the checker
 			FactoryLoopChecker fc = new FactoryLoopChecker(parsed);
-			
+
 			// does a path exist?
 			int r = fc.dijkstra(f, f);
 			if (r != -1) {
@@ -2130,16 +2129,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 					public String formatNodeAsString(FactoryLoopNode element) {
 						return element.getName();
 					}
-					
+
 				});
 			}
-			
+
 		}
-		
+
 		return new GraphLoops(result);
-		
+
 	}
-	
+
 	public class DijkstraException extends Exception {
 
 		private static final long serialVersionUID = 1L;
@@ -2149,14 +2148,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 
 	}
-	
+
 	/**
 	 * Extends {@link DijkstraAlgorithm} to also provide a method to get
 	 * the actual elements used in the path. i.e.:
-	 * 
+	 *
 	 * int length = d.dijkstra(a, b);
 	 * List<T> path = d.getLastPathElements();
-	 * 
+	 *
 	 * @author jmwright
 	 *
 	 * @param <T>
@@ -2164,18 +2163,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 	public abstract class DijkstraAlgorithmWithPaths<T> extends DijkstraAlgorithm<T> {
 
 		private List<T> lastPath;
-		
+
 		/**
-		 * We override compilePath to also create a copy of the 
+		 * We override compilePath to also create a copy of the
 		 * path.
-		 * 
+		 *
 		 * @see #getLastPathElements()
 		 */
 		@Override
 		public String compilePath(T source, T target, Map<T, T> previous) {
 
 			lastPath = new ArrayList<T>();
-			
+
 			T cur = target;
 			int i = 0;
 			while (cur != source && cur != null && i < MAX_COMPILE_PATH) {
@@ -2186,33 +2185,33 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			// buf = translateToString(source) + buf;
 			lastPath.add(source);
-			
+
 			// we need to reverse the list
 			Collections.reverse(lastPath);
-			
+
 			// this method actually needs to return a string
 			return super.compilePath(source, target, previous);
 		}
 
 		/**
 		 * Get the last path called by {@link #dijkstra(Object, Object)}.
-		 * 
+		 *
 		 * This path is compiled in {@link #compilePath(Object, Object, Map)}.
-		 * 
+		 *
 		 * @return the last path found. this path may be empty.
 		 */
 		public List<T> getLastPathElements() {
 			return lastPath;
 		}
-		
+
 	}
-	
+
 	/**
-	 * Extends Dijkstra's algorithm to not consider the 'source' of the 
+	 * Extends Dijkstra's algorithm to not consider the 'source' of the
 	 * current node when calculating distance.
-	 * 
+	 *
 	 * TODO rename appropriately
-	 * 
+	 *
 	 * @author jmwright
 	 * @param <T>
 	 */
@@ -2220,7 +2219,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		private T copy;
 		private T source;
-		
+
 		/**
 		 * Add the duplicate copy. We have to make a new list
 		 * and place it in there, otherwise we will get a
@@ -2257,28 +2256,28 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		/**
 		 * We change something like:
-		 * 
+		 *
 		 *   a -> b, c, d
 		 *   e, c -> a
-		 *   
+		 *
 		 * To:
-		 * 
+		 *
 		 *   a -> b, c, d
 		 *   a' -> b, c, d
 		 *   e, c -> a
-		 *   
+		 *
 		 * And call dijkstra(a', a), rather than (a, a).
-		 * @throws DijkstraException 
-		 * 
+		 * @throws DijkstraException
+		 *
 		 */
 		@Override
 		public int dijkstra(T source, T target) {
-			
+
 			// we need to make a new copy of the source - this will
 			// be our new target
 			this.source = target;
 			this.copy = makeCopy(target);
-			
+
 			try {
 				if (this.copy.equals(target)) {
 					throw new DijkstraException("While trying to make a copy of the source element, making a copy did not create a new element which was not equal: '" + source + "', '" + this.source + "'");
@@ -2289,25 +2288,25 @@ public class DumpDroolsXml extends InferenceTestCase {
 			} catch (DijkstraException e) {
 				throw new RuntimeException(e.getMessage(), e);
 			}
-			
+
 			// continue as normal
 			return super.dijkstra(source, this.copy);
 		}
 
 		/**
-		 * We need to make a new element 'e' that 
+		 * We need to make a new element 'e' that
 		 * definitely does not equal 'e'. It also cannot currently
 		 * be stored within the edges.
-		 * 
+		 *
 		 * @param source2
 		 * @return
 		 */
 		public abstract T makeCopy(T e);
 
 		/**
-		 * We need to override it so we can link up to the 
+		 * We need to override it so we can link up to the
 		 * copied source.
-		 * 
+		 *
 		 * TODO you may need to change this method to internalXXX
 		 */
 		@Override
@@ -2315,7 +2314,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			if (u.equals(this.copy)) {
 				if (n.equals(this.copy)) {
 					return super.distanceBetween(this.source, this.source);
-				} else { 
+				} else {
 					return super.distanceBetween(this.source, n);
 				}
 			} else {
@@ -2326,19 +2325,19 @@ public class DumpDroolsXml extends InferenceTestCase {
 				}
 			}
 		}
-		
-		
-		
+
+
+
 	}
-	
+
 	public class FactoryLoopChecker extends DijkstraAlgorithmWithoutRoot<FactoryLoopNode> {
 
 		FactoryLoopNodeList contents;
-		
+
 		public FactoryLoopChecker(FactoryLoopNodeList contents) {
 			this.contents = contents;
 		}
-		
+
 		/* (non-Javadoc)
 		 * @see org.openiaml.model.tests.DijkstraAlgorithm#getEdges()
 		 */
@@ -2366,14 +2365,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 					/**
 					 * Return the original node name.
-					 * 
+					 *
 					 * @return
 					 */
 					@Override
 					public String getName() {
 						return e.getName();
 					}
-					
+
 				};
 				if (!contents.contains(r)) {
 					return r;
@@ -2381,12 +2380,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			throw new RuntimeException("Could not generate a unique node for '" + e + "'");
 		}
-		
+
 	}
 
 	/**
 	 * Represents a loop in a graph of elements in T.
-	 * 
+	 *
 	 * @author jmwright
 	 *
 	 */
@@ -2400,11 +2399,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public GraphLoop(List<T> pathList) {
 			addAll(pathList);
 		}
-		
+
 		/**
 		 * Get the value of this node as a string. Default
 		 * uses toString().
-		 * 
+		 *
 		 * @param element
 		 * @return
 		 */
@@ -2420,7 +2419,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// compile the path
 			String r = "";
 			for (T node : this) {
-				if (!r.isEmpty()) 
+				if (!r.isEmpty())
 					r += " -> ";
 				r += formatNodeAsString(node);
 			}
@@ -2431,7 +2430,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Represents a set of loops in a graph.
-	 * 
+	 *
 	 * @author jmwright
 	 *
 	 */
@@ -2474,13 +2473,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	}
 
-	
+
 	/**
 	 * Calculate all the nodes from the given term.
-	 * 
+	 *
 	 * @param t
 	 * @return
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	public FactoryLoopNodeList calculate(InferredTerm t) throws TermParseException {
 		List<InferredTerm> list = new ArrayList<InferredTerm>();
@@ -2490,16 +2489,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Calculate all the nodes from the given list of terms.
-	 * 
+	 *
 	 * @param program
 	 * @return
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	public FactoryLoopNodeList calculate(List<InferredTerm> program) throws TermParseException {
 		// results will be stored in here
 		// it needs to be shared, or we will get non-unique results
 		FactoryLoopNodeList fl = new FactoryLoopNodeList();
-		
+
 		for (InferredTerm term : program) {
 			// for every positive term in the body,
 			for (Function body : term.getBody()) {
@@ -2508,12 +2507,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 				considered.add(term);	// prevent loops back to here
 				calculateForFunction(fl, body, term, program, considered);
 			}
-			
+
 		}
-		
+
 		return fl;
 	}
-	
+
 	private void calculateForFunction(FactoryLoopNodeList fl,
 			Function function,
 			InferredTerm term,
@@ -2522,13 +2521,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		if (function instanceof NamedFunction) {
 			NamedFunction nf = (NamedFunction) function;
-			
+
 			/*
 			if (consideredFunctions.contains(nf.getName())) {
 				// prevent infinite loops
 				return;
 			}*/
-			
+
 			// do we have this node in the list already?
 			FactoryLoopNode bodyNode = fl.getNodeForFunction(nf);
 			if (bodyNode == null) {
@@ -2536,31 +2535,31 @@ public class DumpDroolsXml extends InferenceTestCase {
 				bodyNode = new FactoryLoopNode(nf);
 				fl.add(bodyNode);
 			}
-			
+
 			if (nf instanceof SingleFunction) {
 				SingleFunction sf = (SingleFunction) nf;
-				
+
 				if (!(sf.getVariable() instanceof StringLiteral)) {
 					if (!(sf.getVariable() instanceof NormalVariable)) {
 						throw new TermParseException("Did not expect variable '" + sf.getVariable() + "' in function '" + sf + "' to not be a NormalVariable.");
 					}
-	
+
 					// iterate over all the elements in the head
 					// to find out what factory elements it could create
-					Set<Function> canCreate = 
+					Set<Function> canCreate =
 						investigateFunctionForPotentialFactoryFunctions((NormalVariable) sf.getVariable(), term, program, consideredTerms);
-					
+
 					// turn these into FactoryNodes
 					Set<FactoryLoopNode> nodes =
 						fl.convertFunctionsToNodes(canCreate);
-					
+
 					// all of these elements will be neighbours of this node.
 					bodyNode.addEdges(nodes);
 				}
-				
+
 			} else if (nf instanceof DoubleFunction) {
 				DoubleFunction f = (DoubleFunction) nf;
-				
+
 				// first variable
 				if (!(f.getFunctionTerm1() instanceof StringLiteral)) {
 					if (!(f.getFunctionTerm1() instanceof NormalVariable)) {
@@ -2570,17 +2569,17 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 					// iterate over all the elements in the head
 					// to find out what factory elements it could create
-					Set<Function> canCreate = 
+					Set<Function> canCreate =
 						investigateFunctionForPotentialFactoryFunctions(var, term, program, consideredTerms);
-					
+
 					// turn these into FactoryNodes
 					Set<FactoryLoopNode> nodes =
 						fl.convertFunctionsToNodes(canCreate);
-					
+
 					// all of these elements will be neighbours of this node.
 					bodyNode.addEdges(nodes);
 				}
-				
+
 				// second variable
 				if (!(f.getFunctionTerm2() instanceof StringLiteral)) {
 					if (!(f.getFunctionTerm2() instanceof NormalVariable)) {
@@ -2590,18 +2589,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 					// iterate over all the elements in the head
 					// to find out what factory elements it could create
-					Set<Function> canCreate = 
+					Set<Function> canCreate =
 						investigateFunctionForPotentialFactoryFunctions(var, term, program, consideredTerms);
-					
+
 					// turn these into FactoryNodes
 					Set<FactoryLoopNode> nodes =
 						fl.convertFunctionsToNodes(canCreate);
-					
+
 					// all of these elements will be neighbours of this node.
 					bodyNode.addEdges(nodes);
 				}
 
-			
+
 			} else {
 				throw new TermParseException("Did not expect NamedFunction of type '" + function.getClass().getSimpleName() + "': " + function);
 			}
@@ -2616,24 +2615,24 @@ public class DumpDroolsXml extends InferenceTestCase {
 		} else {
 			throw new TermParseException("Did not expect function of type '" + function.getClass().getSimpleName() + "': " + function);
 		}
-		
+
 	}
 
-	
+
 	/**
 	 * In the given program in the given term, take the given function and find out all
 	 * the factory functions f(x) that it may create.
-	 * 
+	 *
 	 * @param f
 	 * @param program
 	 * @return
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
 			FunctionTerm currentVariable, InferredTerm term, List<InferredTerm> program, List<InferredTerm> consideredTerms) throws TermParseException {
-		
+
 		Set<Function> results = new HashSet<Function>();
-		
+
 		for (Function head : term.getHead()) {
 			if (head instanceof SingleFunction) {
 				// f(x)
@@ -2654,13 +2653,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 				throw new TermParseException("Did not expect head function of type '" + head.getClass().getSimpleName() + "': " + head);
 			}
 		}
-		
+
 		return results;
 	}
-	
+
 	private Set<Function> considerFunctionTerm(NamedFunction sf, FunctionTerm currentVariable, FunctionTerm variable, List<InferredTerm> program, List<InferredTerm> consideredTerms) throws TermParseException {
 		Set<Function> results = new HashSet<Function>();
-		
+
 		if (variable instanceof FactoryFunction) {
 			FactoryFunction ff = (FactoryFunction) variable;
 			if (ff.getVariable().equals( currentVariable )) {
@@ -2670,16 +2669,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 		} else if (variable.equals( currentVariable )) {
 			// its a function that uses the current variable
-			
-			// look through the entire program for other things that match 
+
+			// look through the entire program for other things that match
 			// this current term
-			Set<Function> subResults = 
+			Set<Function> subResults =
 				investigateFunctionForPotentialFactoryFunctions(sf, program, consideredTerms);
-			
+
 			// add these to the results
 			results.addAll(subResults);
 		}
-		
+
 		return results;
 	}
 
@@ -2687,20 +2686,20 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * Go through the entire program and look for terms that have the given
 	 * function in the body. Add all of the factory functions that this
 	 * term creates, and return these.
-	 * 
+	 *
 	 * @param named the named function to consider against
 	 * @param program
 	 * @param consideredFunctionNames a list of function names we have already considered. we need to populate this
 	 * 	with the current function name, otherwise we could easily get in an infinite loop
 	 *  e.g. a(x) -> b(x), b(x) -> a(x). without a b(f(x)) this will loop forever.
 	 * @return
-	 * @throws TermParseException 
+	 * @throws TermParseException
 	 */
 	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
 			NamedFunction named, List<InferredTerm> program, List<InferredTerm> consideredTerms) throws TermParseException {
 
 		Set<Function> results = new HashSet<Function>();
-		
+
 		for (InferredTerm term : program) {
 			// prevent infinite loops
 			if (!consideredTerms.contains(term)) {
@@ -2716,7 +2715,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		return results;
 	}
-	
+
 	/**
 	 * We're looking at an individual function.
 	 * @param named
@@ -2726,11 +2725,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 	 * @throws TermParseException
 	 */
 	private Set<Function> investigateFunctionForPotentialFactoryFunctions(
-			NamedFunction named, Function function, InferredTerm term, 
+			NamedFunction named, Function function, InferredTerm term,
 			List<InferredTerm> program, List<InferredTerm> consideredTerms) throws TermParseException {
 
 		Set<Function> results = new HashSet<Function>();
-		
+
 		if (function instanceof NamedFunction) {
 			NamedFunction nf = (NamedFunction) function;
 			if (nf.getName().equals(named.getName())) {
@@ -2738,23 +2737,23 @@ public class DumpDroolsXml extends InferenceTestCase {
 				if (function instanceof SingleFunction) {
 					// f(x)
 					SingleFunction sf = (SingleFunction) function;
-					Set<Function> sub = 
+					Set<Function> sub =
 						investigateFunctionForPotentialFactoryFunctions(sf.getVariable(), term, program, consideredTerms);
 					results.addAll(sub);
 				} else if (function instanceof DoubleFunction) {
 					// f(x, y)
 					DoubleFunction df = (DoubleFunction) function;
-					Set<Function> sub1 = 
+					Set<Function> sub1 =
 						investigateFunctionForPotentialFactoryFunctions(df.getFunctionTerm1(), term, program, consideredTerms);
 					results.addAll(sub1);
-					Set<Function> sub2 = 
+					Set<Function> sub2 =
 						investigateFunctionForPotentialFactoryFunctions(df.getFunctionTerm2(), term, program, consideredTerms);
 					results.addAll(sub2);
 				} else if (function instanceof VariableFunction) {
 					// f(x, y, ...)
 					VariableFunction df = (VariableFunction) function;
 					for (FunctionTerm var : df.getVariables()) {
-						Set<Function> sub = 
+						Set<Function> sub =
 							investigateFunctionForPotentialFactoryFunctions(var, term, program, consideredTerms);
 						results.addAll(sub);
 					}
@@ -2773,23 +2772,23 @@ public class DumpDroolsXml extends InferenceTestCase {
 		} else {
 			throw new TermParseException("Did not expect potential function of type '" + function.getClass().getSimpleName() + "': " + function);
 		}
-		
+
 		return results;
-		
+
 	}
 
 	/**
 	 * We take InferredTerms and connect all of the related paths
 	 * into a single node.
-	 * 
+	 *
 	 * e.g. "a(x) -> b(f(x))" becomes a node 'a', with a link to 'b'
-	 * 
+	 *
 	 * "a(x) -> b(x), b(x) -> c(f(x))" becomes a node 'a', with
 	 * a link to 'c'.
-	 * 
+	 *
 	 * If we combine the two above, we get a node 'a' with links to
-	 * both 'b' and 'c'. 
-	 * 
+	 * both 'b' and 'c'.
+	 *
 	 * @author jmwright
 	 *
 	 */
@@ -2803,7 +2802,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		/**
 		 * Add all of the given nodes as edges.
-		 * 
+		 *
 		 * @param nodes
 		 */
 		public void addEdges(Set<FactoryLoopNode> nodes) {
@@ -2820,7 +2819,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		/**
 		 * Does this node have an edge to the given node name?
-		 * 
+		 *
 		 * @param string
 		 * @return
 		 */
@@ -2834,7 +2833,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		/**
 		 * Get all neighbours to this node.
-		 * 
+		 *
 		 * @return
 		 */
 		public List<FactoryLoopNode> getEdges() {
@@ -2846,7 +2845,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String getName() {
 			return name;
 		}
-		
+
 		public String toString() {
 			// prevent infinite loops
 			String e = "";
@@ -2855,15 +2854,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 					e += ", ";
 				e += edge.getName();
 			}
-				
+
 			return "[Node '" + name + "', edges: " + e + "]";
 		}
-		
+
 	}
-	
+
 	/**
 	 * Helper functions around a list of FactoryLoopNodes.
-	 * 
+	 *
 	 * @author jmwright
 	 *
 	 */
@@ -2874,7 +2873,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		/**
 		 * Get the FactoryLoopNode with the given name, or
 		 * null if it doesn't exist.
-		 * 
+		 *
 		 * @param string
 		 * @return
 		 */
@@ -2890,18 +2889,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 		 * Take all functions in the given list and add them
 		 * as nodes to the currnet list, returning the nodes
 		 * created.
-		 * 
+		 *
 		 * Modifies the current list.
-		 * 
+		 *
 		 * @param list
 		 * @param program
 		 * @return
 		 */
 		public Set<FactoryLoopNode> convertFunctionsToNodes(
 				Set<Function> list) {
-			
+
 			Set<FactoryLoopNode> result = new LinkedHashSet<FactoryLoopNode>();
-			
+
 			for (Function f : list) {
 				if (f instanceof NamedFunction) {
 					FactoryLoopNode found = getNodeForFunction((NamedFunction) f);
@@ -2914,14 +2913,14 @@ public class DumpDroolsXml extends InferenceTestCase {
 					throw new RuntimeException("Did not expect non NamedFunction '" + f + "'");
 				}
 			}
-			
+
 			return result;
 		}
 
 		/**
 		 * Get the node for the given function, or null
 		 * if none exists.
-		 * 
+		 *
 		 * @param body
 		 * @return
 		 */
@@ -2931,38 +2930,38 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		/**
 		 * Does this list contain the given node name?
-		 * 
+		 *
 		 * @param string
 		 * @return
 		 */
 		public boolean containsNode(String string) {
 			return getNode(string) != null;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Create a graph of the stratification rules, and check for
 	 * any cycles.
-	 * 
+	 *
 	 * @param allRules
 	 */
 	protected void findStratCycleRules(Set<LogicRule> allRules) {
-		
+
 		Map<String, List<String>> graphGt = new HashMap<String, List<String>>();
 		Map<String, List<String>> graphGtEq = new HashMap<String, List<String>>();
-		
+
 		//List<StratElement> graph = new ArrayList<StratElement>();
 		List<StratReason> reasonGt = new ArrayList<StratReason>();
 		List<StratReason> reasonGtEq = new ArrayList<StratReason>();
-		
+
 		Set<String> sources = new LinkedHashSet<String>();
-		
+
 		// first, create the graph
 		for (LogicRule r : allRules) {
 			// r: a, b, not(c), not(d) -> d, e
 			// into: a->d, b->d, not(c)->d, a->e, b->e, not(c)->e
-			
+
 			List<LogicElement> headWithoutNots = removeInsertedElements(r.head, r.body);
 			for (LogicElement h : headWithoutNots) {
 				for (LogicElement b2 : r.body) {
@@ -2987,7 +2986,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 				}
 			}
 		}
-		
+
 		// now for every possible class, see if there is a cycle
 		for (String from : sources) {
 			StratificationCycleChecker scc = new StratificationCycleCheckerWithExplanation(graphGt, graphGtEq, reasonGt, reasonGtEq);
@@ -2996,10 +2995,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 				System.out.println(from + " -> " + from + "!target strat: no path found");
 			} else {
 				String path = scc.getLastPath();
-				System.out.println(from + " -> " + from + "!target strat: " + d + ": " + path);				
+				System.out.println(from + " -> " + from + "!target strat: " + d + ": " + path);
 			}
 		}
-		
+
 	}
 
 	/**
@@ -3014,7 +3013,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			doubleMap.put(key, new ArrayList<String>());
 		}
 		doubleMap.get(key).add(value);
-		
+
 		/*
 		 * Also add it to the reason list.
 		 */
@@ -3023,7 +3022,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	/**
 	 * Remove not(e) elements from the head that are asserted in the body.
-	 * 
+	 *
 	 * @param head
 	 * @param body
 	 * @return
@@ -3031,7 +3030,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 	private List<LogicElement> removeInsertedElements(List<LogicElement> head,
 			List<LogicElement> body) {
 		List<LogicElement> elements = new ArrayList<LogicElement>();
-		
+
 		for (LogicElement h : head) {
 			if (h instanceof LogicNotTerm) {
 				LogicNotTerm t = (LogicNotTerm) h;
@@ -3050,20 +3049,20 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 		}
 		return elements;
-		
+
 	}
 
 	/**
 	 * Check each rule to make sure that there is a path from head to
 	 * body, but no path from body to head.
-	 * 
+	 *
 	 * Ignores negated() rules in body.
-	 * 
+	 *
 	 * @param allRules
 	 */
 	protected void checkRulesCompositionGraph(Set<LogicRule> allRules) {
 		TestComposition comp = new TestComposition();
-		
+
 		for (LogicRule r : allRules) {
 			// get the element with the highest distance from InternetApplication
 			int max_d = -1;
@@ -3078,12 +3077,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 					}
 				}
 			}
-			
+
 			// now check each element in the rule body
 			for (LogicElement e : r.body) {
 				if (e instanceof LogicTerm) {
 					// even if it fails, we want to continue evaluating the model
-					try { 
+					try {
 						comp.checkDijkstra(maxTerm.name, ((LogicTerm) e).name);
 					} catch (AssertionFailedError ex) {
 						System.out.println(ex.getMessage());		// temporary TODO remove
@@ -3099,15 +3098,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 	/**
 	 * Create all the prolog rules that are necessary to work out
 	 * stratification.
-	 * 
+	 *
 	 * @param allRules
 	 */
 	public void outputPrologStratification(Set<LogicRule> allRules) throws Exception {
 		StringBuffer pl = new StringBuffer();
-		
+
 		/*
 		 * First, lets define the rules.
-		 * 
+		 *
 		 *   a, b -> c
 		 * changes to:
 		 *   strat_1(OutA, OutB, OutC) :- strat(a, OutA), strat(b, OutB), strat(c, outC), C >= A, C >= B.
@@ -3115,11 +3114,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 		int i = 0;
 		for (LogicRule r : allRules) {
 			i++;
-			
+
 			// strat_1(OutA, ...) :-
 			pl.append("strat_").append(i).append("(");
 			Set<String> unique = uniqueElementsInRule(r);
-			
+
 			int z = 0;
 			for (String element_name : unique) {
 				if (z != 0) pl.append(", ");
@@ -3127,8 +3126,8 @@ public class DumpDroolsXml extends InferenceTestCase {
 				z++;
 			}
 			pl.append(") :- ");
-			
-			// strat(a, OutA), 
+
+			// strat(a, OutA),
 			for (LogicElement e : r.head) {
 				if (e instanceof LogicTerm) {
 					String t = ((LogicTerm) e).name;
@@ -3146,7 +3145,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 					throw new RuntimeException("Body should only contain LogicTerms");
 				}
 			}
-			
+
 			// X >= Y, X > Y, ...
 			for (LogicElement f : r.body) {
 				String t2 = ((LogicTerm) f).name;
@@ -3161,18 +3160,18 @@ public class DumpDroolsXml extends InferenceTestCase {
 						pl.append("Out" + t2 + " > Out" + t + ", ");
 					}
 				}
-			}			
-			
+			}
+
 			pl.append("true.\n");		// end the rule
 		}
 		pl.append("\n");
-		
+
 		// now we create a rule which will specify all the strat values
 		Set<String> allUnique = new LinkedHashSet<String>();
 		for (LogicRule r : allRules) {
 			allUnique.addAll(uniqueElementsInRule(r));
 		}
-		
+
 		// head: valid(OutA, OutB, OutC, ...) :-
 		pl.append("valid(");
 		{
@@ -3184,7 +3183,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 		}
 		pl.append(") :- ");
-		
+
 		// body: each rule
 		i = 0;
 		for (LogicRule r : allRules) {
@@ -3201,26 +3200,26 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			pl.append(")");
 		}
-		
+
 		pl.append(".\n\n");
-		
+
 		// finally, we list out all possible values of every strat
 		for (String term : allUnique) {
 			for (int j = 0; j < 10; j++) {
 				pl.append("strat(").append(undercase(term)).append(", ").append(j).append(").\n");
 			}
 		}
-		
+
 		// write to file
 		IFile outFile = project.getFile("strat.pl");
 		InputStream stream = new ByteArrayInputStream(pl.toString().getBytes("UTF-8"));
 		System.out.println("Writing " + outFile + "...");
 		outFile.create(stream, true, monitor);
 	}
-	
+
 	/**
 	 * Get a list of all the unique elements mentioned in both the
-	 * head and body of this rule. 
+	 * head and body of this rule.
 	 */
 	private Set<String> uniqueElementsInRule(LogicRule r) {
 		Set<String> s = new LinkedHashSet<String>();
@@ -3244,7 +3243,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 		return s;
 	}
-	
+
 	/**
 	 * Change MyFoo to my_foo
 	 * @param a
@@ -3254,7 +3253,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		for (int i = 0; i < a.length(); i++) {
 			char c = a.charAt(i);
 			if (i != 0 && (c >= 'A' && c <= 'Z')) {
-				// uppercase char 
+				// uppercase char
 				out += "_" + Character.toLowerCase(c);
 			} else {
 				out += Character.toLowerCase(c);
@@ -3265,7 +3264,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 	protected class LogicTerm extends LogicElement {
 		public String name;
-		
+
 		public LogicTerm(String name, String reason) {
 			super(reason);
 			this.name = name;
@@ -3274,12 +3273,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String toHtml() {
 			return name;
 		}
-		
+
 		public String toString() { return name; }
-		
+
 		@Override
 		public boolean equals(Object obj) {
-			return obj instanceof LogicTerm && 
+			return obj instanceof LogicTerm &&
 			((LogicTerm) obj).name.equals(this.name);
 		}
 
@@ -3288,10 +3287,10 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return ("LogicTerm" + name.hashCode()).hashCode();
 		}
 	}
-	
+
 	protected class LogicNotTerm extends LogicElement {
 		public LogicTerm term;
-		
+
 		public LogicNotTerm(LogicTerm term, String reason) {
 			super(reason);
 			this.term = term;
@@ -3301,11 +3300,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return "not(" + term.toHtml() + ")";
 		}
 
-		public String toString() { return "not(" + term + ")"; }		
+		public String toString() { return "not(" + term + ")"; }
 
 		@Override
 		public boolean equals(Object obj) {
-			return obj instanceof LogicNotTerm && 
+			return obj instanceof LogicNotTerm &&
 			((LogicNotTerm) obj).term.equals(this.term);
 		}
 
@@ -3314,28 +3313,28 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return ("LogicNotTerm" + term.hashCode()).hashCode();
 		}
 	}
-	
+
 	protected abstract class LogicElement {
 
 		public abstract String toHtml();
-		
+
 		public String reason;
-		
+
 		public LogicElement(String reason) {
 			this.reason = reason;
 		}
-		
+
 	}
-	
+
 	protected class LogicRule {
 		public List<LogicElement> head = new ArrayList<LogicElement>();
 		public List<LogicElement> body = new ArrayList<LogicElement>();
-			
+
 		@Override
 		public boolean equals(Object obj) {
-			return obj instanceof LogicRule && 
-			((LogicRule) obj).head.equals(this.head) && 
-			((LogicRule) obj).body.equals(this.body); 
+			return obj instanceof LogicRule &&
+			((LogicRule) obj).head.equals(this.head) &&
+			((LogicRule) obj).body.equals(this.body);
 		}
 
 		@Override
@@ -3346,15 +3345,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 		/**
 		 * Cycle through generated elements in the body
 		 * and remove those that are not(..) in the head.
-		 * 
+		 *
 		 * i.e. "A, not(B) -> B" should be simplified to
 		 * "A -> B"
-		 * 
+		 *
 		 * Currently only concerns itself with element names
 		 */
 		public void removeGeneratedElements() {
 			List<LogicElement> elementsToRemove = new ArrayList<LogicElement>();
-			
+
 			for (LogicElement e : body) {
 				String name = ((LogicTerm) e).name;
 				// is it in the head?
@@ -3366,12 +3365,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 					}
 				}
 			}
-			
+
 			for (LogicElement n : elementsToRemove) {
 				head.remove(n);
 			}
 		}
-		
+
 		public String toHtml() {
 			String head = "";
 			for (LogicElement e : this.head) {
@@ -3384,26 +3383,26 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return head + " -> " + body;
 		}
 	}
-	
+
 	/**
 	 * Investigate XML rules to calculate their logic formulas.
 	 * TODO move all of this into separate classes (if necessary)
-	 * 
+	 *
 	 * @param document
 	 * @param name
 	 */
 	private List<LogicRule> investigateLogic(Document document, String name) throws Exception {
 		List<LogicRule> logicRules = new ArrayList<LogicRule>();
-		
+
 		// parse over each rule
 		IterableElementList rules = xpath(document, "//rule");
 		for (Element rule : rules) {
 			LogicRule logic = new LogicRule();
 			String reason = rule.getAttribute("name");
-			
+
 			Element lhs = xpathFirst(rule, "lhs");
 			Element rhs = xpathFirst(rule, "rhs");
-			
+
 			for (int j = 0; j < lhs.getChildNodes().getLength(); j++) {
 				Node p2 = lhs.getChildNodes().item(j);
 				if (p2 instanceof Element) {
@@ -3412,13 +3411,13 @@ public class DumpDroolsXml extends InferenceTestCase {
 						LogicTerm t = new LogicTerm(p.getAttribute("object-type"), reason);
 						logic.head.add(t);
 					} else if (p.getNodeName().equals("not")) {
-						Element actualP = xpathFirst(p, "pattern"); 
+						Element actualP = xpathFirst(p, "pattern");
 						LogicTerm t = new LogicTerm(actualP.getAttribute("object-type"), reason);
 						logic.head.add(new LogicNotTerm(t, reason));
 					}
 				}
 			}
-			
+
 			// find the handler rules
 			// we assume that rule bodies only generate elements using
 			// handler.generatedXXX(...)
@@ -3432,11 +3431,11 @@ public class DumpDroolsXml extends InferenceTestCase {
 				LogicTerm t = new LogicTerm(methodName, reason);
 				logic.body.add(t);
 			}
-			
+
 			logic.removeGeneratedElements();
 			logicRules.add(logic);
 		}
-		
+
 		// concatenate down
 		StringBuffer out = new StringBuffer();
 		out.append("<html><h1>" + name + " rules</h1><p>\n\n<ol>\n");
@@ -3444,19 +3443,19 @@ public class DumpDroolsXml extends InferenceTestCase {
 			out.append("<li>" + r.toHtml() + "</li>\n");
 		}
 		out.append("\n</ol></html>\n");
-		
+
 		// output to name-logic.html
 		IFile outFile = project.getFile(name + ".logic.html");
 		InputStream source = new ByteArrayInputStream(out.toString().getBytes("UTF-8"));
 		outFile.create(source, true, monitor);
-		
+
 		return logicRules;
 	}
 
 	public Document firstDocument(Map<?,Document> map) {
 		return map.values().iterator().next();
 	}
-	
+
 	/**
 	 * Load a properties file.
 	 */
@@ -3465,7 +3464,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		p.load(new FileInputStream(manifest));
 		return p;
 	}
-	
+
 	/**
 	 * Load an XML document.
 	 */
@@ -3481,16 +3480,16 @@ public class DumpDroolsXml extends InferenceTestCase {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		Document doc = db.parse(source);
-		
+
 		// done
 		source.close();
-		
+
 		return doc;
 	}
-	
+
 	/**
 	 * Load an XML document from an XML snippet.
-	 * 
+	 *
 	 * @param xml
 	 * @return
 	 * @throws ParserConfigurationException
@@ -3517,59 +3516,59 @@ public class DumpDroolsXml extends InferenceTestCase {
         trans.transform(source, result);
         sw.close();
 	}
-	
+
 	/**
 	 * Assert that the given file exists.
-	 * 
+	 *
 	 * @param source
 	 */
 	public void assertFileExists(File source) {
 		assertFileExists("", source);
 	}
-	
+
 	/**
 	 * Assert that the given file exists.
-	 * 
+	 *
 	 * @param source
 	 */
 	public void assertFileExists(String prefix, File source) {
 		assertTrue(prefix + "File '" + source.getAbsolutePath() + "' doesn't exist.", source.exists());
 	}
-	
+
 	/**
 	 * Read in a file into a string.
-	 * 
+	 *
 	 * @throws IOException if an IO exception occurs
 	 */
 	public static String readFile(File sourceFile) throws IOException {
 		if (!sourceFile.exists()) {
 			throw new IOException("File " + sourceFile.getAbsolutePath() + " does not exist.");
 		}
-		
+
 		int bufSize = 128;
 		StringBuffer sb = new StringBuffer(bufSize);
 		BufferedReader reader = new BufferedReader(new FileReader(sourceFile), bufSize);
-				
+
 		char[] chars = new char[bufSize];
 		int numRead = 0;
 		while ((numRead = reader.read(chars)) > -1) {
-			sb.append(String.valueOf(chars).substring(0, numRead));	
+			sb.append(String.valueOf(chars).substring(0, numRead));
 		}
-		
+
 		reader.close();
 		return sb.toString();
 	}
-	
+
 	protected class StratificationCycleChecker extends DijkstraAlgorithm<String> {
 
 		public Map<String, List<String>> graphGt;
 		public Map<String, List<String>> graphGtEquals;
-		
+
 		public StratificationCycleChecker(Map<String, List<String>> graphGt, Map<String, List<String>> graphGtEquals) {
 			this.graphGt = graphGt;
 			this.graphGtEquals = graphGtEquals;
 		}
-		
+
 		/* (non-Javadoc)
 		 * @see org.openiaml.model.tests.DijkstraAlgorithm#getEdges()
 		 */
@@ -3588,7 +3587,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			return edgeCache;
 		}
-		
+
 		private Set<String> edgeCache = null;
 
 		/* (non-Javadoc)
@@ -3598,7 +3597,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public List<String> getNeighbours(String u) {
 			List<String> a = graphGt.get(u);
 			List<String> b = graphGtEquals.get(u);
-			
+
 			if (a == null) {
 				if (b == null) {
 					return new ArrayList<String>();
@@ -3651,7 +3650,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			// we should never get here
 			throw new RuntimeException("There is no distance between " + from + " and " + to + ", as they are not connected.");
 		}
-		
+
 		/**
 		 * Compile the last path, but as a list of elements, rather than
 		 * a string.
@@ -3673,9 +3672,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 			if (cur != null) {
 				path.add(source);
 			}
-			
+
 			return path;
-			
+
 		}
 
 		@Override
@@ -3684,7 +3683,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			List<String> path = compilePathList(source, target, previous);
 			if (path == null)
 				return "[no path]";
-			
+
 			// now, reverse-compile this into a string
 			String buf = "";
 			for (int j = path.size() - 1; j >= 0; j--) {
@@ -3704,12 +3703,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 					}
 				}
 			}
-			
+
 			return buf;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Represents a stratification statement, i.e. from (>|>=) to, because: reason (usually a rule name)
 	 * @author jmwright
@@ -3720,7 +3719,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public String from;
 		public String to;
 		public String reason;
-		
+
 		/**
 		 * @param from
 		 * @param to
@@ -3731,42 +3730,42 @@ public class DumpDroolsXml extends InferenceTestCase {
 			this.to = to;
 			this.reason = reason;
 		}
-		
+
 	}
-	
+
 	protected class StratificationCycleCheckerWithExplanation extends StratificationCycleChecker {
 
 		private List<StratReason> reasonGt;
 		private List<StratReason> reasonGtEquals;
-		
+
 		/**
 		 * Default constructor. Add the explanations for each graph map.
-		 * 
+		 *
 		 * @param graphGt
 		 * @param graphGtEquals
-		 * @param reasonGt 
-		 * @param reasonGtEquals 
+		 * @param reasonGt
+		 * @param reasonGtEquals
 		 */
 		public StratificationCycleCheckerWithExplanation(
 				Map<String, List<String>> graphGt,
 				Map<String, List<String>> graphGtEquals,
-				List<StratReason> reasonGt, 
+				List<StratReason> reasonGt,
 				List<StratReason> reasonGtEquals) {
 			super(graphGt, graphGtEquals);
 			this.reasonGt = reasonGt;
 			this.reasonGtEquals = reasonGtEquals;
-			
+
 		}
 
 		@Override
 		public String compilePath(String source, String target,
 				Map<String, String> previous) {
 			String buf = super.compilePath(source, target, previous);
-			
+
 			List<String> path = compilePathList(source, target, previous);
 			if (path == null)
 				return "[no path]";
-			
+
 			// now, reverse-compile this into a string
 			String reasoning = "";
 			for (int j = path.size() - 1; j >= 0; j--) {
@@ -3786,15 +3785,15 @@ public class DumpDroolsXml extends InferenceTestCase {
 					}
 				}
 			}
-			
+
 			return buf + "\n" + reasoning;
-			
+
 		}
 
 		/**
 		 * Search the given list for an element from 'from' to 'to',
 		 * and provide the reason provided.
-		 * 
+		 *
 		 * @param list
 		 * @param from
 		 * @param to
@@ -3809,9 +3808,9 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 			return null;
 		}
-		
-		
-		
+
+
+
 	}
-	
+
 }

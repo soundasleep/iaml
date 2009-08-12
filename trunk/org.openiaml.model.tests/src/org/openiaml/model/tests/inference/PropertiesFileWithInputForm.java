@@ -15,7 +15,6 @@ import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.tests.InferenceTestCase;
 
 /**
  * Tests inference of database sources.
@@ -35,18 +34,18 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='a properties file']");
 		// the store should only have two attributes
 		assertEquals(2, store.getAttributes().size());
-		DomainAttribute attribute = (DomainAttribute) queryOne(store, "iaml:attributes[iaml:name='value1']");
+		DomainAttribute attribute = assertHasDomainAttribute(store, "value1");
 
 		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='without form']");
-		InputTextField source = (InputTextField) queryOne(page, "iaml:children[iaml:name='target']");
+		InputTextField source = assertHasInputTextField(page, "target");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, source, attribute);
 
 		// [inferred]
 		// both text field and attribute should have events/operations
-		EventTrigger srcEdit = (EventTrigger) queryOne(source, "iaml:eventTriggers[iaml:name='edit']");
-		Operation srcOp = (Operation) queryOne(source, "iaml:operations[iaml:name='update']");
-		EventTrigger targetEdit = (EventTrigger) queryOne(attribute, "iaml:eventTriggers[iaml:name='edit']");
-		Operation targetOp = (Operation) queryOne(attribute, "iaml:operations[iaml:name='update']");
+		EventTrigger srcEdit = assertHasEventTrigger(source, "edit");
+		Operation srcOp = assertHasOperation(source, "update");
+		EventTrigger targetEdit = assertHasEventTrigger(attribute, "edit");
+		Operation targetOp = assertHasOperation(attribute, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);
 
@@ -55,8 +54,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
-		ApplicationElementProperty textValue = (ApplicationElementProperty) queryOne(source, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty attrValue = (ApplicationElementProperty) queryOne(attribute, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty textValue = assertHasApplicationElementProperty(source, "fieldValue");
+		ApplicationElementProperty attrValue = assertHasApplicationElementProperty(attribute, "fieldValue");
 
 		// they should be parameters
 		ParameterWire textPw = (ParameterWire) getWireFromTo(wire, textValue, srcRw);
@@ -72,19 +71,19 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='a properties file']");
 		// the store should only have two attributes
 		assertEquals(2, store.getAttributes().size());
-		DomainAttribute attribute = (DomainAttribute) queryOne(store, "iaml:attributes[iaml:name='value2']");
+		DomainAttribute attribute = assertHasDomainAttribute(store, "value2");
 
 		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='with form']");
-		InputForm form = (InputForm) queryOne(page, "iaml:children[iaml:name='a form']");
-		InputTextField source = (InputTextField) queryOne(form, "iaml:children[iaml:name='target']");
+		InputForm form = assertHasInputForm(page, "a form");
+		InputTextField source = assertHasInputTextField(form, "target");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, source, attribute);
 
 		// [inferred]
 		// both text field and attribute should have events/operations
-		EventTrigger srcEdit = (EventTrigger) queryOne(source, "iaml:eventTriggers[iaml:name='edit']");
-		Operation srcOp = (Operation) queryOne(source, "iaml:operations[iaml:name='update']");
-		EventTrigger targetEdit = (EventTrigger) queryOne(attribute, "iaml:eventTriggers[iaml:name='edit']");
-		Operation targetOp = (Operation) queryOne(attribute, "iaml:operations[iaml:name='update']");
+		EventTrigger srcEdit = assertHasEventTrigger(source, "edit");
+		Operation srcOp = assertHasOperation(source, "update");
+		EventTrigger targetEdit = assertHasEventTrigger(attribute, "edit");
+		Operation targetOp = assertHasOperation(attribute, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);
 
@@ -93,8 +92,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
-		ApplicationElementProperty textValue = (ApplicationElementProperty) queryOne(source, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty attrValue = (ApplicationElementProperty) queryOne(attribute, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty textValue = assertHasApplicationElementProperty(source, "fieldValue");
+		ApplicationElementProperty attrValue = assertHasApplicationElementProperty(attribute, "fieldValue");
 
 		// they should be parameters
 		ParameterWire textPw = (ParameterWire) getWireFromTo(wire, textValue, srcRw);

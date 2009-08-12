@@ -16,7 +16,6 @@ import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.tests.InferenceTestCase;
 
 /**
  * Tests inference of an InputForm with a DomainObject.
@@ -34,39 +33,39 @@ public class SyncFormDomainObject extends InferenceTestCase {
 
 	@SuppressWarnings("unused")
 	public void testInference() throws JaxenException {
-		Page page = (Page) queryOne(root, "iaml:children[iaml:name='page1']");
-		InputForm form = (InputForm) queryOne(page, "iaml:children[iaml:name='form1']");
-		InputTextField field1 = (InputTextField) queryOne(form, "iaml:children[iaml:name='field1']");
-		InputTextField field2 = (InputTextField) queryOne(form, "iaml:children[iaml:name='field2']");
+		Page page = assertHasPage(root, "page1");
+		InputForm form = assertHasInputForm(page, "form1");
+		InputTextField field1 = assertHasInputTextField(form, "field1");
+		InputTextField field2 = assertHasInputTextField(form, "field2");
 
-		DomainStore store = (DomainStore) queryOne(root, "iaml:domainStores[iaml:name='domainStore1']");
-		DomainObject obj = (DomainObject) queryOne(store, "iaml:children[iaml:name='form1']");
-		DomainAttribute attr1 = (DomainAttribute) queryOne(obj, "iaml:attributes[iaml:name='field1']");
-		DomainAttribute attr2 = (DomainAttribute) queryOne(obj, "iaml:attributes[iaml:name='field2']");
+		DomainStore store = assertHasDomainStore(root, "domainStore1");
+		DomainObject obj = assertHasDomainObject(store, "form1");
+		DomainAttribute attr1 = assertHasDomainAttribute(obj, "field1");
+		DomainAttribute attr2 = assertHasDomainAttribute(obj, "field2");
 
 		// there should be a SyncWire from field1 to attr1
 		SyncWire sw1 = (SyncWire) getWireBidirectional(form, field1, attr1);
 		SyncWire sw2 = (SyncWire) getWireBidirectional(form, field2, attr2);
 
 		// fields should now have an edit event
-		EventTrigger editf1 = (EventTrigger) queryOne(field1, "iaml:eventTriggers[iaml:name='edit']");
-		EventTrigger editf2 = (EventTrigger) queryOne(field2, "iaml:eventTriggers[iaml:name='edit']");
+		EventTrigger editf1 = assertHasEventTrigger(field1, "edit");
+		EventTrigger editf2 = assertHasEventTrigger(field2, "edit");
 
 		// attrs should now have an edit event
-		EventTrigger edita1 = (EventTrigger) queryOne(attr1, "iaml:eventTriggers[iaml:name='edit']");
-		EventTrigger edita2 = (EventTrigger) queryOne(attr2, "iaml:eventTriggers[iaml:name='edit']");
+		EventTrigger edita1 = assertHasEventTrigger(attr1, "edit");
+		EventTrigger edita2 = assertHasEventTrigger(attr2, "edit");
 
 		// fields should now have update operations
-		Operation update1 = (Operation) queryOne(field1, "iaml:operations[iaml:name='update']");
-		Operation update2 = (Operation) queryOne(field2, "iaml:operations[iaml:name='update']");
-		Operation updatea1 = (Operation) queryOne(attr1, "iaml:operations[iaml:name='update']");
-		Operation updatea2 = (Operation) queryOne(attr2, "iaml:operations[iaml:name='update']");
+		Operation update1 = assertHasOperation(field1, "update");
+		Operation update2 = assertHasOperation(field2, "update");
+		Operation updatea1 = assertHasOperation(attr1, "update");
+		Operation updatea2 = assertHasOperation(attr2, "update");
 
 		// fields should have fieldValues
-		ApplicationElementProperty value1 = (ApplicationElementProperty) queryOne(field1, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty value2 = (ApplicationElementProperty) queryOne(field2, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty valuea1 = (ApplicationElementProperty) queryOne(attr1, "iaml:properties[iaml:name='fieldValue']");
-		ApplicationElementProperty valuea2 = (ApplicationElementProperty) queryOne(attr2, "iaml:properties[iaml:name='fieldValue']");
+		ApplicationElementProperty value1 = assertHasApplicationElementProperty(field1, "fieldValue");
+		ApplicationElementProperty value2 = assertHasApplicationElementProperty(field2, "fieldValue");
+		ApplicationElementProperty valuea1 = assertHasApplicationElementProperty(attr1, "fieldValue");
+		ApplicationElementProperty valuea2 = assertHasApplicationElementProperty(attr2, "fieldValue");
 
 		// these field values should be parameters
 		ParameterWire pw1 = (ParameterWire) getWireFrom(root, value1);

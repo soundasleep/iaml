@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.inference.model0_4;
 
@@ -17,14 +17,14 @@ import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.SelectWire;
-import org.openiaml.model.tests.InferenceTestCase;
+import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
  * Test case for inference of login handler[type=domain object] when
  * we have multiple parameters. Most of the logic is handled sufficiently
  * in {@link LoginHandlerInstance}, so this test case is checking
  * special cases for multiple parameters.
- * 
+ *
  * @author jmwright
  *
  */
@@ -32,55 +32,55 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 
 	/**
 	 * Test the initial model.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testInitial() throws Exception {
 		root = loadDirectly(LoginHandlerInstanceMultiple.class);
-		
-		Page page = (Page) queryOne(root, "iaml:children[iaml:name='Home']");
+
+		Page page = assertHasPage(root, "Home");
 		assertNotGenerated(page);
-		DomainStore store = (DomainStore) queryOne(root, "iaml:domainStores[iaml:name='Users']");
+		DomainStore store = assertHasDomainStore(root, "Users");
 		assertNotGenerated(store);
-		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
+		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
-		
-		DomainObject obj = (DomainObject) queryOne(store, "iaml:children[iaml:name='User']");
+
+		DomainObject obj = assertHasDomainObject(store, "User");
 		assertNotGenerated(obj);
-		
-		DomainAttribute password = (DomainAttribute) queryOne(obj, "iaml:attributes[iaml:name='password']");
+
+		DomainAttribute password = assertHasDomainAttribute(obj, "password");
 		assertNotGenerated(password);
-		
-		LoginHandler handler = (LoginHandler) queryOne(session, "iaml:children[iaml:name='login handler']");
+
+		LoginHandler handler = assertHasLoginHandler(session, "login handler");
 		assertNotGenerated(handler);
 		assertEquals(handler.getType(), LoginHandlerTypes.DOMAIN_OBJECT);
-		DomainObjectInstance instance = (DomainObjectInstance) queryOne(session, "iaml:children[iaml:name='logged in user']");
+		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
 		assertNotGenerated(instance);
-		
+
 		// only one attribute
-		DomainAttributeInstance aname = (DomainAttributeInstance) queryOne(instance, "iaml:attributes[iaml:name='name']");
+		DomainAttributeInstance aname = assertHasDomainAttributeInstance(instance, "name");
 		assertNotGenerated(aname);
 		assertHasNone(instance, "iaml:attributes[iaml:name='password']");
-		
+
 		// no pages have been created yet
 		assertHasNone(root, "iaml:children[iaml:name='Login Successful']");
 		assertHasNone(session, "iaml:children[iaml:name='Logout Successful']");
-		
+
 	}
-	
+
 	/**
 	 * Even though we have multiple parameters, there should only be one SelectWire.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testOnlyOneSelectWire() throws Exception {
 		root = loadAndInfer(LoginHandlerInstanceMultiple.class);
-		
-		Session session = (Session) queryOne(root, "iaml:sessions[iaml:name='my session']");
-		DomainStore store = (DomainStore) queryOne(root, "iaml:domainStores[iaml:name='Users']");
-		DomainObject object = (DomainObject) queryOne(store, "iaml:children[iaml:name='User']");
-		DomainObjectInstance instance = (DomainObjectInstance) queryOne(session, "iaml:children[iaml:name='logged in user']");
-		
+
+		Session session = assertHasSession(root, "my session");
+		DomainStore store = assertHasDomainStore(root, "Users");
+		DomainObject object = assertHasDomainObject(store, "User");
+		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
+
 		SelectWire select = null;
 		int selectWireCount = 0;
 		{
@@ -88,7 +88,7 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 			Iterator<WireEdge> it = wires2.iterator();
 			while (it.hasNext()) {
 				WireEdge w = it.next();
-				if (w instanceof SelectWire) { 
+				if (w instanceof SelectWire) {
 					selectWireCount++;
 					select = (SelectWire) w;
 				}
@@ -100,7 +100,7 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		// the query should contain both :password and :email
 		assertTrue("Query '" + select.getQuery() + "' should contain :password", select.getQuery().contains(":password"));
 		assertTrue("Query '" + select.getQuery() + "' should contain :email", select.getQuery().contains(":email"));
-		
+
 	}
-	
+
 }

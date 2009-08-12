@@ -136,8 +136,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 			assertNoProblem();
 		
 		} catch (Error e) {
-			System.out.println( getPageSource() );		// let us debug the page source
-			throw e;		// continue throwing
+			throwDebugInformation(e);
 		}
 
 	}
@@ -157,7 +156,11 @@ public class LoginHandlerKey extends CodegenTestCase {
 		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the viewkey page
-		assertEquals("viewkey", getPageTitle());
+		try {
+			assertEquals("viewkey", getPageTitle());
+		} catch (Error e) {
+			throwDebugInformation(e);
+		}
 		assertNoProblem();
 		
 		// it should be present

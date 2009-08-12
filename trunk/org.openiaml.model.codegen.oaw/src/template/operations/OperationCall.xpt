@@ -100,7 +100,9 @@
 	«ELSE»
 		// navigating to a new page
 		var url = "«safeName(to)».php";
-		redirect(url);
+		debug("Redirecting to '" + url + "'");
+		window.location = url;
+		ajaxIncrement();	// prevent other events from executing
 	«ENDIF»
 «ENDDEFINE»
 

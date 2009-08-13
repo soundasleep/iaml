@@ -81,7 +81,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Priority 5
       * [LoginHandler Login handlers (domain object instance)]
       * Text element
-      * [r973 Clear the current session DomainObjectInstance]
+      * [http://code.google.com/p/iaml/source/detail?r=973 Clear the current session DomainObjectInstance]
       * One-way SyncWire
       * Query parameter (_url?param=bar_)
       * Users as first-class citizens

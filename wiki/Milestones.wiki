@@ -85,6 +85,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
       * One-way SyncWire
       * Query parameter (_url?param=bar_)
       * Users as first-class citizens
+      * [http://code.google.com/p/iaml/wiki/Model0_4#Join_Node,_Split_Node Join Node, Split Node]
     * Priority 4
       * Resultset viewer
       * InputForm which renders SyncWire contents as Text, rather than InputTextFields

@@ -961,6 +961,48 @@
       <accessors
           figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="SplitNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="SplitNodeFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="154"
+            green="224"
+            blue="142"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SplitNodeLabelFigure"
+            text="split"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="JoinNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="JoinNodeFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="154"
+            green="224"
+            blue="142"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="JoinNodeLabelFigure"
+            text="join"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1052,6 +1094,12 @@
   <nodes
       name="Button"
       figure="ButtonFigure"/>
+  <nodes
+      name="SplitNode"
+      figure="SplitNodeFigure"/>
+  <nodes
+      name="JoinNode"
+      figure="JoinNodeFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1357,4 +1405,12 @@
       figure="ApplicationElementPropertyFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.9/@accessors.1"/>
+  <labels
+      name="SplitNodeLabel"
+      figure="SplitNodeFigure"
+      accessor="//@figures.0/@descriptors.45/@accessors.0"/>
+  <labels
+      name="JoinNodeLabel"
+      figure="JoinNodeFigure"
+      accessor="//@figures.0/@descriptors.46/@accessors.0"/>
 </gmfgraph:Canvas>

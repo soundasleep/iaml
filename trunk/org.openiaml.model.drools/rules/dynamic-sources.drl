@@ -160,6 +160,19 @@ rule "Create the contents of the XPath condition"
 
 end
 
+/**
+ * This rule used to contain the following negative existential:
+ *
+ * not (
+ *   tw_cw : ConditionWire ( from == condition, to == tw ) and 
+ *   tw_pw : ParameterWire ( from == ds, to == tw_cw ) and
+ *   tw_pw2 : ParameterWire ( from == target, to == tw_cw )
+ * )
+ *
+ * In order to satisfy our requirement that there are no more than
+ * one negative existential in each rule [TODO see upcoming paper],
+ * we can decompose this into two rules.
+ */
 rule "Create the XPath ConditionWire for generated SyncWires"
 	when
 		container : InternetApplication( )
@@ -170,38 +183,49 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		tw : SyncWire ( eval(connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		not (
-#			sw_cw : ConditionWire ( from == condition, to == tw ) and
-#			sw_pw : ParameterWire ( from == ds, to == sw_cw ) and
-#			sw_pw2 : ParameterWire ( from == source, to == sw_cw ) and
-
-			tw_cw : ConditionWire ( from == condition, to == tw ) and
-			tw_pw : ParameterWire ( from == ds, to == tw_cw ) and
-			tw_pw2 : ParameterWire ( from == target, to == tw_cw )
+			tw_cw : ConditionWire ( from == condition, to == tw ) 
 		)
 	
 	then
-		# could put this into a separate rule
-		# TODO what does it do?
-		/*
-		if (sw.isIsGenerated()) {
-			ConditionWire cw = handler.generatedConditionWire( ds, ds, condition, tw );
-			handler.setName(cw, "xpath condition (source)");
-			queue.add(cw, drools);
-
-			ParameterWire pw = handler.generatedParameterWire( cw, cw, ds, cw);
-			handler.setName(pw, "[xpath] from ds 1");
-			queue.add(pw, drools);		 
-	
-			ParameterWire pw2 = handler.generatedParameterWire( cw, cw, source, cw);
-			handler.setName(pw2, "[xpath] from source");
-			queue.add(pw2, drools);
-
-		}
-		*/
-
 		ConditionWire cwt = handler.generatedConditionWire( ds, ds, condition, tw );
 		handler.setName(cwt, "xpath condition (target)");
 		queue.add(cwt, drools);
+		
+		# Create the contents like normal
+
+		ParameterWire pwt = handler.generatedParameterWire( cwt, cwt, ds, cwt);
+		handler.setName(pwt, "[xpath] from ds 2");
+		queue.add(pwt, drools);		 
+
+		ParameterWire pwt2 = handler.generatedParameterWire( cwt, cwt, target, cwt);
+		handler.setName(pwt2, "[xpath] from target");
+		queue.add(pwt2, drools);
+
+end
+
+/**
+ * This is a decomposition of the rule above.
+ */
+rule "Connect ParameterWires to empty ConditionWire for XPath"
+	when
+		container : InternetApplication( )
+		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		source : Page ( ) 
+		sw : SyncWire ( eval(connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(connects(tw, source, target)) )
+		condition : CompositeCondition ( eContainer == ds )
+		cwt : ConditionWire ( from == condition, to == tw )
+		not (
+			#tw_cw : ConditionWire ( from == condition, to == tw ) and
+			tw_pw : ParameterWire ( from == ds, to == cwt ) 
+			#and
+			#tw_pw2 : ParameterWire ( from == target, to == tw_cw )
+		)
+	
+	then
+		# We have a ConditionWire that does not have any parameters:
+		# connect the parameters up to the wire
 
 		ParameterWire pwt = handler.generatedParameterWire( cwt, cwt, ds, cwt);
 		handler.setName(pwt, "[xpath] from ds 2");

@@ -41,9 +41,9 @@ public class SyncWireProperties extends InferenceTestCase {
 	}
 
 	public void testInference() throws JaxenException {
-		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='container']");
+		Page page = assertHasPage(root, "container");
 		InputForm form = assertHasInputForm(page, "target form");
-		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='properties file']");
+		DomainStore store = assertHasDomainStore(root, "properties file");
 		DomainObject properties = assertHasDomainObject(store, "properties");
 
 		// there should be exactly three fields here (generated)

@@ -11,7 +11,6 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
-import org.openiaml.model.tests.CodegenTestCase;
 
 /**
  * Tests sessions: sync wires across session boundaries.
@@ -31,13 +30,13 @@ public class SessionSyncWires extends InferenceTestCase {
 
 	public void testInference() throws Exception {
 		// initial elements
-		Page outside = (Page) queryOne(root, "//iaml:children[iaml:name='outside']");
-		Page inside = (Page) queryOne(root, "//iaml:children[iaml:name='inside']");
+		Page outside = assertHasPage(root, "outside");
+		Session session = assertHasSession(root, "session");
+		Page inside = assertHasPage(session, "inside");
 		assertNotSame(outside, inside);
 		InputTextField field1 = assertHasInputTextField(outside, "target");
 		InputTextField field2 = assertHasInputTextField(inside, "target");
 		assertNotSame(field1, field2);
-		Session session = (Session) queryOne(root, "//iaml:sessions");
 
 		// generated events and operations
 		// all part of SyncWire elements generation

@@ -27,9 +27,9 @@ public class ConditionWireFalse extends InferenceTestCase {
 	}
 
 	public void testInference() throws JaxenException {
-		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='container']");
-		InputTextField source = (InputTextField) queryOne(page, "//iaml:children[iaml:name='source']");
-		InputTextField target = (InputTextField) queryOne(page, "//iaml:children[iaml:name='target']");
+		Page page = assertHasPage(root, "container");
+		InputTextField source = assertHasInputTextField(page, "source");
+		InputTextField target = assertHasInputTextField(page, "target");
 		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='sync']");
 		Condition cond = (Condition) queryOne(page, "//iaml:conditions[iaml:name='Always False']");
 		ConditionWire cw = (ConditionWire) queryOne(page, "//iaml:wires[iaml:name='condition']");

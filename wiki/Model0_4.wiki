@@ -12,13 +12,24 @@
 TODO
 
 =New Elements=
-
-  * JoinNode
-  * SplitNode
-  * OperationCallNode
-
 ==Login Handler (Domain Instance)==
 
   _See [LoginHandler]_
+
+==Join Node, Split Node==
+|| *Description* || A Split Node will split the execution of an operation; a Join Node is required to unify the execution back. ||
+|| *Models* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/JoinSplitClientSide.iaml JoinSplitClientSide.iaml], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/JoinSplitServerSide.iaml JoinSplitServerSide.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/JoinSplitClientSide.java JoinSplitClientSide.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/JoinSplitServerSide.java JoinSplitServerSide.java] ||
+
+All edges coming out of a Split Node should eventually rejoin back at a Join Node; otherwise the effect is currently undefined.
+
+Currently these are implemented in a single threaded way; each execution flow is executed sequentially until all flows are complete. ([http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/template/operations/ExecutionFlow.xpt?spec=svn958&r=958#55 ExecutionFlow.xpt])
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/JoinSplitServerSide-2.png
+
+==Undocumented==
+
+  * OperationCallNode
 
 Documentation forthcoming.

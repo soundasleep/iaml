@@ -46,10 +46,6 @@ function boolean hasIncomingParameterWiresFrom(LoginHandler handler, DomainObjec
 	return false;
 }
 
-function boolean test() {
-	return true;
-}
-
 rule "Create 'login' page for LoginHandlers [ApplicationElementContainer]"
 	when
 		container : ApplicationElementContainer( )
@@ -226,7 +222,7 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		expected_param : ParameterWire( from == expected, to == login_handler )
 		
 		not (StartNode( eContainer == o))
-		not (FinishNode( eContainer == o))
+		# not (FinishNode( eContainer == o)) - not necessary
 	
 	then
 		Parameter parameter = handler.generatedParameter(o, o);

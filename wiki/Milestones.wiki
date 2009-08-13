@@ -81,9 +81,9 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Priority 5
       * [LoginHandler Login handlers (domain object instance)]
       * Text element
-      * Clear the current session DomainObjectInstance
+      * [r973 Clear the current session DomainObjectInstance]
       * One-way SyncWire
-      * Query parameter (url?param=bar)
+      * Query parameter (_url?param=bar_)
       * Users as first-class citizens
     * Priority 4
       * Resultset viewer

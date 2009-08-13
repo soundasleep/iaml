@@ -31,12 +31,12 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 
 	public void testInferenceWithoutForm() throws JaxenException {
 		// [already in model]
-		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='a properties file']");
+		DomainStore store = assertHasDomainStore(root, "a properties file");
 		// the store should only have two attributes
 		assertEquals(2, store.getAttributes().size());
 		DomainAttribute attribute = assertHasDomainAttribute(store, "value1");
 
-		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='without form']");
+		Page page = assertHasPage(root, "without form");
 		InputTextField source = assertHasInputTextField(page, "target");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, source, attribute);
 
@@ -68,12 +68,12 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 
 	public void testInferenceWithForm() throws Exception {
 		// [already in model]
-		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='a properties file']");
+		DomainStore store = assertHasDomainStore(root, "a properties file");
 		// the store should only have two attributes
 		assertEquals(2, store.getAttributes().size());
 		DomainAttribute attribute = assertHasDomainAttribute(store, "value2");
 
-		Page page = (Page) queryOne(root, "//iaml:children[iaml:name='with form']");
+		Page page = assertHasPage(root, "with form");
 		InputForm form = assertHasInputForm(page, "a form");
 		InputTextField source = assertHasInputTextField(form, "target");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, source, attribute);

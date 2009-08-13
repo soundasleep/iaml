@@ -29,9 +29,9 @@ public class ConditionWireXpath extends InferenceTestCase {
 	}
 
 	public void testInference() throws JaxenException {
-		Page page1 = (Page) queryOne(root, "//iaml:children[iaml:name='page1']");
-		Page page2 = (Page) queryOne(root, "//iaml:children[iaml:name='page2']");
-		DynamicApplicationElementSet dae = (DynamicApplicationElementSet) queryOne(root, "//iaml:children[iaml:name='xpath']");
+		Page page1 = assertHasPage(root, "page1");
+		Page page2 = assertHasPage(root, "page2");
+		DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "xpath");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, page1, dae);
 
 		InputTextField field1 = assertHasInputTextField(page1, "target");

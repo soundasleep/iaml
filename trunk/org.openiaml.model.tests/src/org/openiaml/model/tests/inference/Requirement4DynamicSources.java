@@ -56,11 +56,11 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 	 *
 	 */
 	public void testUnrelatedSyncWires() throws JaxenException {
-		Page page1 = (Page) queryOne(root, "//iaml:children[iaml:name='page a']");
-		Page page2 = (Page) queryOne(root, "//iaml:children[iaml:name='page b']");
-		Page fieldList = (Page) queryOne(root, "//iaml:children[iaml:name='FieldList']");
-		Page unrelated = (Page) queryOne(root, "//iaml:children[iaml:name='unrelated']");
-	    DynamicApplicationElementSet dae = (DynamicApplicationElementSet) queryOne(root, "//iaml:children[iaml:name='all pages']");
+		Page page1 = assertHasPage(root, "page a");
+		Page page2 = assertHasPage(root, "page b");
+		Page fieldList = assertHasPage(root, "FieldList");
+		Page unrelated = assertHasPage(root, "unrelated");
+	    DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "all pages");
 		SyncWire sync = (SyncWire) getWireBidirectional(root, fieldList, dae);
 
 		// generated

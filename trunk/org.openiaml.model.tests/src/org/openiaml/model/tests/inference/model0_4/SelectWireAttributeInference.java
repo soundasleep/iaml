@@ -67,19 +67,19 @@ public class SelectWireAttributeInference extends InferenceActionTestCase {
 
 		// the domain object now has two attributes (one generated key)
 		assertEquals(2, dobj.getAttributes().size());
-		queryOne(dobj, "iaml:attributes[iaml:name='attribute']");
+		assertHasDomainAttribute(dobj, "attribute");
 		DomainAttribute key = assertHasDomainAttribute(dobj, "generated primary key");
 		assertTrue(key.isPrimaryKey());
 		assertTrue(key.isIsGenerated());
 
 		// the instance has both of these values
 		assertEquals(2, di.getAttributes().size());
-		queryOne(di, "iaml:attributes[iaml:name='attribute']");
-		queryOne(di, "iaml:attributes[iaml:name='generated primary key']");
+		assertHasDomainAttributeInstance(di, "attribute");
+		assertHasDomainAttributeInstance(di, "generated primary key");
 
 		// the form only has 'attribute'
 		assertEquals(1, form.getChildren().size());
-		queryOne(form, "iaml:children[iaml:name='attribute']");
+		assertHasInputTextField(form, "attribute");
 
 	}
 

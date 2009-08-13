@@ -28,15 +28,15 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 	}
 
 	public void testInference() throws JaxenException {
-		Page page1 = (Page) queryOne(root, "//iaml:children[iaml:name='page1']");
-		Page page2 = (Page) queryOne(root, "//iaml:children[iaml:name='page2']");
+		Page page1 = assertHasPage(root, "page1");
+		Page page2 = assertHasPage(root, "page2");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, page1, page2);
 
 		InputTextField field1 = assertHasInputTextField(page1, "field");
 		InputTextField field2 = assertHasInputTextField(page2, "field");
 		assertNotSame(field1, field2);
 
-		Condition cond = (Condition) queryOne(root, "//iaml:conditions[iaml:name='Always False']");
+		Condition cond = assertHasCondition(root, "Always False");
 		ConditionWire cw = (ConditionWire) getWireFromTo(root, cond, wire);
 
 		// [already in model]

@@ -32,14 +32,13 @@ public class SelectField extends InferenceTestCase {
 
 	public void testInference() throws Exception {
 		// initial elements
-		Page container = (Page) queryOne(root, "//iaml:children[iaml:name='container']");
+		Page container = assertHasPage(root, "container");
 		InputTextField field = assertHasInputTextField(container, "editname");
 
-		DomainStore store = (DomainStore) queryOne(root, "//iaml:domainStores[iaml:name='DomainStore']");
+		DomainStore store = assertHasDomainStore(root, "DomainStore");
 		DomainObject user = assertHasDomainObject(store, "User");
 
-		DomainAttributeInstance attr = (DomainAttributeInstance)
-			queryOne(root, "//iaml:children[iaml:name='name']");
+		DomainAttributeInstance attr = assertHasDomainAttributeInstance(container, "name");
 		SyncWire sw = (SyncWire) getWireBidirectional(root, field, attr);
 		SelectWire select = (SelectWire) getWireFromTo(root, user, attr);
 

@@ -5,7 +5,6 @@ package org.openiaml.model.tests.inference;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ChainedOperation;
@@ -18,6 +17,7 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -39,15 +39,16 @@ public class SyncWireTestCase extends InferenceTestCase {
 
 	public void testName1toName2() throws JaxenException {
 		// name1 should have a sync wire to name2
-		EObject name1 = queryOne(root, "iaml:children[iaml:name='on-page']/iaml:children[iaml:name='name1']");
-		assertTrue(name1 instanceof InputTextField);
-		EObject name2 = queryOne(root, "iaml:children[iaml:name='on-page']/iaml:children[iaml:name='name2']");
-		assertTrue(name2 instanceof InputTextField);
+		Page page = assertHasPage(root, "on-page");
+		assertNotGenerated(page);
+		InputTextField name1 = assertHasInputTextField(page, "name1");
+		assertNotGenerated(name1);
+		InputTextField name2 = assertHasInputTextField(page, "name2");
+		assertNotGenerated(name2);
 
 		// these elements should now have generated elements that match
 		// the semantics specified in our .vsd file
-		EObject update = queryOne(name1, "iaml:operations[iaml:name='update']");
-		assertTrue(update instanceof CompositeOperation);
+		Operation update = assertHasOperation(name1, "update");
 		List<?> nodes = query(update, "iaml:nodes");
 		assertEquals(nodes.size(), 2);
 		assertTrue(nodes.get(0) instanceof StartNode);

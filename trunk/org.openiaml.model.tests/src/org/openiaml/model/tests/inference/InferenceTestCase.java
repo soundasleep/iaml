@@ -133,6 +133,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			String string) throws JaxenException {
 		return (DomainAttributeInstance) queryOne(obj, "iaml:children[iaml:name='" + string + "']");
 	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * DomainAttributeInstance.
+	 *
+	 * @return The element found
+	 */
+	public DomainAttributeInstance assertHasDomainAttributeInstance(InternetApplication obj,
+			String string) throws JaxenException {
+		return (DomainAttributeInstance) queryOne(obj, "iaml:children[iaml:name='" + string + "']");
+	}
 	
 	/**
 	 * Assert that the given element contains the given
@@ -182,6 +193,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public DomainObjectInstance assertHasDomainObjectInstance(ApplicationElementContainer root, String string) throws JaxenException {
+		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * DomainObjectInstance.
+	 *
+	 * @return The element found
+	 */
+	public DomainObjectInstance assertHasDomainObjectInstance(InternetApplication root, String string) throws JaxenException {
 		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
 	}
 

@@ -25,6 +25,8 @@ public class AllModel0_4CodegenTests {
 		suite.addTestSuite(LoginHandlerInstanceMultiple.class);
 		suite.addTestSuite(LoginHandlerInstanceComplete.class);
 		suite.addTestSuite(SessionNewDomainInstance.class);
+		suite.addTestSuite(JoinSplitClientSide.class);
+		suite.addTestSuite(JoinSplitServerSide.class);
 
 		return suite;
 	}

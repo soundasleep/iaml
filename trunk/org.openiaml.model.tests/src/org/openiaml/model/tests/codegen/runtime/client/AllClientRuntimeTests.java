@@ -25,6 +25,7 @@ public class AllClientRuntimeTests {
 		suite.addTestSuite(JavascriptMethodsTest.class);
 		suite.addTestSuite(HelperFunctions.class);
 		suite.addTestSuite(ComparisonFunctions.class);
+		suite.addTestSuite(RuntimeLibraryVersionTest.class);
 
 		return suite;
 	}

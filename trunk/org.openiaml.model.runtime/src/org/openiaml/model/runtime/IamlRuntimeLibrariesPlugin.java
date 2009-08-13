@@ -34,6 +34,11 @@ public class IamlRuntimeLibrariesPlugin extends Plugin implements IFileCopyListe
 		return instance;
 	}
 	
+	/**
+	 * This method should only be called by the Eclipse framework.
+	 * 
+	 * @deprecated Only the Eclipse framework should use this; see {@link #getInstance()}. 
+	 */
 	public IamlRuntimeLibrariesPlugin() {
 		super();
 		instance = this;
@@ -79,6 +84,19 @@ public class IamlRuntimeLibrariesPlugin extends Plugin implements IFileCopyListe
 		}
 		
 		monitor.done();
+	}
+	
+	/**
+	 * Get the given file in our current bundle. 
+	 * 
+	 * @param filename
+	 * @return
+	 * @throws IOException 
+	 */
+	public URL getResolvedFile(String filename) throws IOException {
+		URL file = getBundle().getEntry(filename);
+		
+		return FileLocator.resolve(file);
 	}
 
 	/**

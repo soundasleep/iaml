@@ -99,14 +99,14 @@ if (require_get("operation", "")) {
 <head>
 	<title>«pageTitle()»</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
-	<script language="Javascript" type="text/javascript">
+	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		var page_id = "«safeNameString(id)-»";
 	/* ]]> */
 	</script>
-	<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
-	<script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
-	<script language="Javascript" type="text/javascript">
+	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
+	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
+	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		«EXPAND template::js::DefaultJs::defaultJs FOR this-»
 		
@@ -123,7 +123,7 @@ if (require_get("operation", "")) {
 		
 	/* ]]> */
 	</script>
-	<script language="Javascript" type="text/javascript">
+	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		var try_catch_depth = 0;
 	
@@ -217,7 +217,7 @@ if (require_get("operation", "")) {
 	<div id="debug"></div>
 	<div id="response">empty</div>
 	
-	<script language="Javascript" type="text/javascript">
+	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 	<?php queue_log_messages(false); /* re-enable log messages, but only after we have "response". */ ?>
 	/* ]]> */
@@ -237,7 +237,7 @@ if (require_get("operation", "")) {
 		<div id="counter_queued_store_object"></div>
 		<div id="counter_new_domain_instance"></div>
 	</div>
-	<script language="Javascript" type="text/javascript">initAjaxMonitor();</script>
+	<script language="Javascript" type="application/javascript">initAjaxMonitor();</script>
 	
 </body>
 </html>

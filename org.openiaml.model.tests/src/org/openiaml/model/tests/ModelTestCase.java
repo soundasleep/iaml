@@ -245,6 +245,7 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	/**
 	 * Do the transformation and make sure it succeeded.
 	 * The result of the transformation is stored in {@link #getTransformStatus()}.
+	 * TODO refactor this out into plugins
 	 * 
 	 * @param inputFile
 	 * @throws Throwable if it did not succeed

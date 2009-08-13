@@ -11,7 +11,7 @@
 			onClick="return onClick_«safeNameString(id)»(this);"
 		>
 		
-		<script language="Javascript" type="text/javascript">
+		<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
 				// expand all onChanges

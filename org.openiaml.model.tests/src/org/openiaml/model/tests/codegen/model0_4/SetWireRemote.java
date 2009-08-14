@@ -61,7 +61,7 @@ public class SetWireRemote extends CodegenTestCase {
 		
 		String test1 = "test1 " + new Date();
 		String target = getLabelIDForText("target");
-		assertLabeledFieldEquals(target, test1);
+		assertLabeledFieldEquals(target, "");
 		setLabeledFormElementField(target, test1);
 		
 		gotoSitemapThenPage(sitemap, "Home");

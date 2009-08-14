@@ -23,6 +23,7 @@ public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 	private List<String> ruleFiles = Arrays.asList(
 			"/rules/base.drl",
 			"/rules/sync-wires.drl",
+			"/rules/set-wires.drl",
 			"/rules/events.drl",
 			"/rules/sessions.drl",
 			"/rules/login-handler.drl",

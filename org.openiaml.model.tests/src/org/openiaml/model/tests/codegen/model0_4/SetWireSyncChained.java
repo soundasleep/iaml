@@ -29,7 +29,21 @@ public class SetWireSyncChained extends CodegenTestCase {
 	 * @throws Exception
 	 */
 	public void testInitial() throws Exception {
-		fail("TODO");
+		IFile sitemap = beginAtSitemapThenPage("page3");
+
+		// page 3
+		String changed = getLabelIDForText("changed"); // sync
+		assertLabeledFieldEquals(changed, "");
+
+		// page 2
+		gotoSitemapThenPage(sitemap, "page2");
+		String target = getLabelIDForText("target"); //set
+		assertLabeledFieldEquals(target, "");
+		
+		// Home
+		gotoSitemapThenPage(sitemap, "Home");
+		String source = getLabelIDForText("source");
+		assertLabeledFieldEquals(source, "");
 	}
 	
 	/**
@@ -90,7 +104,7 @@ public class SetWireSyncChained extends CodegenTestCase {
 
 		String test = "test1 " + new Date();
 		String changed = getLabelIDForText("changed"); // sync
-		assertLabeledFieldEquals(changed, test);
+		assertLabeledFieldEquals(changed, "");
 		setLabeledFormElementField(changed, test);
 
 		// page 2

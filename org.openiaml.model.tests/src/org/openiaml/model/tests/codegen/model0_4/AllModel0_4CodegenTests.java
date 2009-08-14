@@ -27,6 +27,13 @@ public class AllModel0_4CodegenTests {
 		suite.addTestSuite(SessionNewDomainInstance.class);
 		suite.addTestSuite(JoinSplitClientSide.class);
 		suite.addTestSuite(JoinSplitServerSide.class);
+		
+		// SetWire tests
+		suite.addTestSuite(SetWireClient.class);
+		suite.addTestSuite(SetWireRemote.class);
+		suite.addTestSuite(SetWireChained.class);
+		suite.addTestSuite(SetWireSync.class);
+		suite.addTestSuite(SetWireSyncChained.class);
 
 		return suite;
 	}

@@ -167,6 +167,7 @@ public class WiresSwitch<T> {
 				SetWire setWire = (SetWire)theEObject;
 				T result = caseSetWire(setWire);
 				if (result == null) result = caseCompositeWire(setWire);
+				if (result == null) result = caseWireEdgeDestination(setWire);
 				if (result == null) result = caseWireEdge(setWire);
 				if (result == null) result = caseNamedElement(setWire);
 				if (result == null) result = caseContainsWires(setWire);

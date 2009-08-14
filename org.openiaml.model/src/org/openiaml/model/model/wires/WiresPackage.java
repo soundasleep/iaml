@@ -931,13 +931,22 @@ public interface WiresPackage extends EPackage {
 	int SET_WIRE__VALUES = COMPOSITE_WIRE__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_WIRE__IN_EDGES = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Set Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+	int SET_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ShowWireImpl <em>Show Wire</em>}' class.

@@ -15,8 +15,9 @@
 			onClick="return onClick_«safeNameString(id)»(this);"
 
 			«REM»any initial values?«ENDREM»
-			«EXPAND getInitialValues FOREACH inEdges» 
-			«EXPAND getInitialValues FOREACH outEdges» 			 
+			«EXPAND getInitialValuesSetWire FOREACH inEdges.typeSelect(model::wires::SetWire)» 			 
+			«EXPAND getInitialValuesSyncWire FOREACH inEdges.typeSelect(model::wires::SyncWire)» 
+			«EXPAND getInitialValuesSyncWire FOREACH outEdges.typeSelect(model::wires::SyncWire)» 			 
 
 			«REM»
 				an initial value?
@@ -63,15 +64,17 @@
 	</div>
 «ENDDEFINE»
 
-/* ignore. todo: refactor this to a model extension to only select viable SyncWires */
-«DEFINE getInitialValues FOR model::WireEdge»
-«ENDDEFINE»
-
 /* if it connects to a SyncWire that is an ApplicationElementProperty, use this
    property as the value */
-«DEFINE getInitialValues FOR model::wires::SyncWire»
+«DEFINE getInitialValuesSyncWire FOR model::wires::SyncWire»
 	«EXPAND staticInitialValue FOR from»
 	«EXPAND staticInitialValue FOR to»
+«ENDDEFINE»
+
+/* if it connects to a SetWire that is an ApplicationElementProperty, use this
+   property as the value */
+«DEFINE getInitialValuesSetWire FOR model::wires::SetWire»
+	«EXPAND staticInitialValue FOR from»
 «ENDDEFINE»
 
 /* ignore: todo refactor */

@@ -454,6 +454,30 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	}
 
 	/**
+	 * Assert that there are no wires (contained in <code>container//iaml:wires</code>)
+	 * that connect the two given elements together.
+	 *
+	 * @param container
+	 * @param fromElement
+	 * @param toElement
+	 * @throws JaxenException
+	 */
+	public void assertHasNoWiresFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
+
+		List<?> wires = query(container, "//iaml:wires");
+		for (Object o : wires) {
+			if (o instanceof WireEdge) {
+				WireEdge w = (WireEdge) o;
+				if (w.getFrom().equals(fromElement) && w.getTo().equals(toElement)) {
+					fail("Unexpected wire found from '" + w.getFrom() + "' to '" + w.getTo() + "'");
+				}
+			}
+		}
+		
+		// no wires found: pass
+	}
+
+	/**
 	 * Assert that only the given number of wires exist between
 	 * the source and the target.
 	 * 

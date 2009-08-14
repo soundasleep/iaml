@@ -85,6 +85,10 @@ try {
 	«EXPAND potentialUpdatesParameter FOR from»
 	«EXPAND potentialUpdatesParameter FOR to»
 «ENDDEFINE»
+«DEFINE potentialUpdates FOR model::wires::SetWire»
+	/* SetWire "«this-»" */
+	«EXPAND potentialUpdatesParameter FOR to»
+«ENDDEFINE»
 
 «DEFINE potentialUpdatesParameter FOR model::WireEdgesSource»
 	/* ignore «this» */
@@ -109,6 +113,7 @@ try {
 	
 	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
 	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SetWire)»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»
@@ -116,6 +121,7 @@ try {
 	$value = get_attribute_instance_«safeName()»(); // parameters are from server-side
 	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
 	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SetWire)»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance»
@@ -123,11 +129,16 @@ try {
 	$value = $object["«safeNameString(name)-»"];
 	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
 	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SetWire)»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDesinationWires FOR model::wires::SyncWire»
 	/* SyncWire "«this-»" */
 	«EXPAND outgoingValue FOR from»
+	«EXPAND outgoingValue FOR to»
+«ENDDEFINE»
+«DEFINE potentialUpdateDesinationWires FOR model::wires::SetWire»
+	/* SetWire "«this-»" */
 	«EXPAND outgoingValue FOR to»
 «ENDDEFINE»
 

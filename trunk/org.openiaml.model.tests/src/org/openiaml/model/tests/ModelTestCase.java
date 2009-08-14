@@ -523,6 +523,19 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 	/**
 	 * Helper method: assert A != B
 	 * 
+	 * @param expected expected value (B)
+	 * @param actual actual value (A)
+	 */
+	public void assertNotEqual(String a, String b) {
+		if (a == null)
+			assertNotNull("null should not equal null", b);
+		else
+			assertFalse("'" + a + "' should not equal '" + b + "'", a.equals(b));
+	}
+	
+	/**
+	 * Helper method: assert A != B
+	 * 
 	 * @param expected expected value
 	 * @param actual actual value
 	 */

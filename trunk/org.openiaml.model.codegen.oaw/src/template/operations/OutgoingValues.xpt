@@ -9,12 +9,16 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE outgoingValues(model::ApplicationElement container) FOR model::WireEdge»
+	«EXPAND exception FOR throwException("Unexpected outgoingValue wire: '" + this + "'")»
 «ENDDEFINE»
 
 /* if it connects to a SyncWire that is an ApplicationElementProperty, use this
    property as the destination */
 «DEFINE outgoingValues(model::ApplicationElement container) FOR model::wires::SyncWire»
 	«EXPAND outgoingValue(container) FOR from»
+	«EXPAND outgoingValue(container) FOR to»
+«ENDDEFINE»
+«DEFINE outgoingValues(model::ApplicationElement container) FOR model::wires::SetWire»
 	«EXPAND outgoingValue(container) FOR to»
 «ENDDEFINE»
 

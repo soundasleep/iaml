@@ -28,6 +28,7 @@ import org.drools.event.WorkingMemoryEventListener;
 import org.drools.rule.Package;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.diagramextensions.InfiniteSubProgressMonitor;
 import org.openiaml.model.inference.ICreateElements;
@@ -50,10 +51,12 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.wires.CompositeWire;
 
 /**
  * Uses Drools to infer new elements. By defining
@@ -188,125 +191,14 @@ public abstract class DroolsInferenceEngine {
 					*/
 				}
 				
-				// ContainsEventTriggers
-				if (obj.getObject() instanceof ContainsEventTriggers) {
-					ContainsEventTriggers a = (ContainsEventTriggers) obj.getObject();
-					for (EventTrigger child : a.getEventTriggers()) {
-						workingMemory.insert( child );
-					}
-				}
-
-				// ContainsOperations
-				if (obj.getObject() instanceof ContainsOperations) {
-					ContainsOperations a = (ContainsOperations) obj.getObject();
-					for (Operation child : a.getOperations()) {
-						workingMemory.insert( child );
-					}
-				}
-
-				// ContainsWires
-				if (obj.getObject() instanceof ContainsWires) {
-					ContainsWires a = (ContainsWires) obj.getObject();
-					for (WireEdge child : a.getWires()) {
-						workingMemory.insert( child );
+				if (obj.getObject() instanceof EObject) {
+					// get all objects within 
+					TreeIterator<EObject> it = ((EObject) obj.getObject()).eAllContents();
+					while (it.hasNext()) {
+						workingMemory.insert( it.next() );
 					}
 				}
 				
-				// ContainsConditions
-				if (obj.getObject() instanceof ContainsConditions) {
-					ContainsConditions a = (ContainsConditions) obj.getObject();
-					for (Condition child : a.getConditions()) {
-						workingMemory.insert( child );
-					}
-				}
-
-				// ApplicationElement
-				if (obj.getObject() instanceof ApplicationElement) {
-					ApplicationElement a = (ApplicationElement) obj.getObject();
-					for (ApplicationElementProperty child : a.getProperties()) {
-						workingMemory.insert( child );
-					}
-					for (StaticValue child : a.getValues()) {
-						workingMemory.insert( child );
-					}
-				}
-
-				// ApplicationElementContainer
-				if (obj.getObject() instanceof ApplicationElementContainer) {
-					ApplicationElementContainer a = (ApplicationElementContainer) obj.getObject();
-					for (ApplicationElement child : a.getChildren()) {
-						workingMemory.insert( child );
-					}
-				}
-				
-				// AbstractDomainStore
-				if (obj.getObject() instanceof DomainStore) {
-					DomainStore a = (DomainStore) obj.getObject();
-					for (DomainObject child : a.getChildren()) {
-						workingMemory.insert( child );
-					}
-					for (DomainAttribute child : a.getAttributes()) {
-						workingMemory.insert( child );
-					}
-					for (ApplicationElementProperty child : a.getProperties()) {
-						workingMemory.insert( child );
-					}
-				}				
-
-				// AbstractDomainObject
-				if (obj.getObject() instanceof DomainObject) {
-					DomainObject a = (DomainObject) obj.getObject();
-					for (DomainAttribute child : a.getAttributes()) {
-						workingMemory.insert( child );
-					}
-				}
-
-				// InternetApplication
-				if (obj.getObject() instanceof InternetApplication) {
-					InternetApplication a = (InternetApplication) obj.getObject();
-					for (ApplicationElementProperty child : a.getProperties()) {
-						workingMemory.insert( child );
-					}
-					for (ApplicationElement child : a.getChildren()) {
-						workingMemory.insert( child );
-					}
-					for (DomainStore child : a.getDomainStores()) {
-						workingMemory.insert( child );
-					}
-					for (Session child : a.getSessions()) {
-						workingMemory.insert( child );
-					}
-				}
-				
-				// Scope
-				if (obj.getObject() instanceof Scope) {
-					Scope a = (Scope) obj.getObject();
-					for (DomainObjectInstance child : a.getDomainInstances()) {
-						workingMemory.insert( child );
-					}
-					for (DomainObject child : a.getDomainObjects()) {
-						workingMemory.insert( child );
-					}
-					for (DerivedView child : a.getDomainViews()) {
-						workingMemory.insert( child );
-					}
-				}
-				
-				// Session
-				if (obj.getObject() instanceof Session) {
-					Session a = (Session) obj.getObject();
-					for (ApplicationElement child : a.getComponents()) {
-						workingMemory.insert( child );
-					}
-				}
-
-				// DomainObjectInstance
-				if (obj.getObject() instanceof DomainObjectInstance) {
-					DomainObjectInstance a = (DomainObjectInstance) obj.getObject();
-					for (DomainAttributeInstance child : a.getAttributes()) {
-						workingMemory.insert( child );
-					}
-				}
 			}
 
 			@Override

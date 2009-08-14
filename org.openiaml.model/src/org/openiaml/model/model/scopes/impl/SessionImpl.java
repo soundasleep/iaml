@@ -34,6 +34,7 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
@@ -72,6 +73,7 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getSessions <em>Sessions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getAgents <em>Agents</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getComponents <em>Components</em>}</li>
  * </ul>
@@ -329,6 +331,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EList<Session> sessions;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<QueryParameter> parameters;
 
 	/**
 	 * The cached value of the '{@link #getAgents() <em>Agents</em>}' containment reference list.
@@ -731,6 +743,18 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<QueryParameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<QueryParameter>(QueryParameter.class, this, ScopesPackage.SESSION__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -787,6 +811,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__SESSIONS:
 				return ((InternalEList<?>)getSessions()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__AGENTS:
 				return ((InternalEList<?>)getAgents()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__COMPONENTS:
@@ -844,6 +870,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getChildren();
 			case ScopesPackage.SESSION__SESSIONS:
 				return getSessions();
+			case ScopesPackage.SESSION__PARAMETERS:
+				return getParameters();
 			case ScopesPackage.SESSION__AGENTS:
 				return getAgents();
 			case ScopesPackage.SESSION__COMPONENTS:
@@ -935,6 +963,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getSessions().clear();
 				getSessions().addAll((Collection<? extends Session>)newValue);
 				return;
+			case ScopesPackage.SESSION__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends QueryParameter>)newValue);
+				return;
 			case ScopesPackage.SESSION__AGENTS:
 				getAgents().clear();
 				getAgents().addAll((Collection<? extends VisitorAgent>)newValue);
@@ -1015,6 +1047,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__SESSIONS:
 				getSessions().clear();
 				return;
+			case ScopesPackage.SESSION__PARAMETERS:
+				getParameters().clear();
+				return;
 			case ScopesPackage.SESSION__AGENTS:
 				getAgents().clear();
 				return;
@@ -1073,6 +1108,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return children != null && !children.isEmpty();
 			case ScopesPackage.SESSION__SESSIONS:
 				return sessions != null && !sessions.isEmpty();
+			case ScopesPackage.SESSION__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
 			case ScopesPackage.SESSION__AGENTS:
 				return agents != null && !agents.isEmpty();
 			case ScopesPackage.SESSION__COMPONENTS:
@@ -1160,6 +1197,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 		if (baseClass == VisibleThing.class) {
 			switch (derivedFeatureID) {
 				case ScopesPackage.SESSION__SESSIONS: return ModelPackage.VISIBLE_THING__SESSIONS;
+				case ScopesPackage.SESSION__PARAMETERS: return ModelPackage.VISIBLE_THING__PARAMETERS;
 				default: return -1;
 			}
 		}
@@ -1245,6 +1283,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 		if (baseClass == VisibleThing.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.VISIBLE_THING__SESSIONS: return ScopesPackage.SESSION__SESSIONS;
+				case ModelPackage.VISIBLE_THING__PARAMETERS: return ScopesPackage.SESSION__PARAMETERS;
 				default: return -1;
 			}
 		}

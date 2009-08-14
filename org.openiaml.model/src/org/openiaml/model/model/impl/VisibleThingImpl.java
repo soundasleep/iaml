@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.scopes.Session;
 
@@ -26,6 +27,7 @@ import org.openiaml.model.model.scopes.Session;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getSessions <em>Sessions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +43,16 @@ public class VisibleThingImpl extends ApplicationElementContainerImpl implements
 	 * @ordered
 	 */
 	protected EList<Session> sessions;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<QueryParameter> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,11 +90,25 @@ public class VisibleThingImpl extends ApplicationElementContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<QueryParameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<QueryParameter>(QueryParameter.class, this, ModelPackage.VISIBLE_THING__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.VISIBLE_THING__SESSIONS:
 				return ((InternalEList<?>)getSessions()).basicRemove(otherEnd, msgs);
+			case ModelPackage.VISIBLE_THING__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,6 +123,8 @@ public class VisibleThingImpl extends ApplicationElementContainerImpl implements
 		switch (featureID) {
 			case ModelPackage.VISIBLE_THING__SESSIONS:
 				return getSessions();
+			case ModelPackage.VISIBLE_THING__PARAMETERS:
+				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,6 +142,10 @@ public class VisibleThingImpl extends ApplicationElementContainerImpl implements
 				getSessions().clear();
 				getSessions().addAll((Collection<? extends Session>)newValue);
 				return;
+			case ModelPackage.VISIBLE_THING__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends QueryParameter>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -129,6 +161,9 @@ public class VisibleThingImpl extends ApplicationElementContainerImpl implements
 			case ModelPackage.VISIBLE_THING__SESSIONS:
 				getSessions().clear();
 				return;
+			case ModelPackage.VISIBLE_THING__PARAMETERS:
+				getParameters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,6 +178,8 @@ public class VisibleThingImpl extends ApplicationElementContainerImpl implements
 		switch (featureID) {
 			case ModelPackage.VISIBLE_THING__SESSIONS:
 				return sessions != null && !sessions.isEmpty();
+			case ModelPackage.VISIBLE_THING__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

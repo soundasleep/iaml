@@ -62,6 +62,7 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//VisibleThing">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/sessions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/parameters"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//InternetApplication">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/properties"/>
@@ -152,6 +153,9 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainAttributeInstance">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainAttributeInstance/autosave"/>
+    </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//QueryParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//QueryParameter/defaultValue"/>
     </genClasses>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">

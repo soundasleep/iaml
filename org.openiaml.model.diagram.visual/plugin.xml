@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Visual"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2019"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004,4005,4006,4007,4008,4009,4010"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Visual"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2019"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003,4004,4005,4006,4007,4008,4009,4010"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032"/>
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5034"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -280,7 +280,8 @@
          <object class="org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart" id="DomainObjectInstance_2015"/>
          <object class="org.openiaml.model.model.diagram.visual.edit.parts.DomainAttributeInstanceEditPart" id="DomainAttributeInstance_2016"/>
          <object class="org.openiaml.model.model.diagram.visual.edit.parts.ButtonEditPart" id="Button_2017"/>
-         <context elements="VisibleThing_1000,EventTrigger_2001,SingleOperation_2002,CompositeOperation_2003,ChainedOperation_2004,DomainObject_2005,DomainAttribute_2006,ApplicationElementProperty_2007,Page_2008,InputForm_2009,InputTextField_2010,StaticValue_2011,Session_2012,LoginHandler_2013,CompositeCondition_2014,DomainObjectInstance_2015,DomainAttributeInstance_2016,Button_2017"/>
+         <object class="org.openiaml.model.model.diagram.visual.edit.parts.QueryParameterEditPart" id="QueryParameter_2019"/>
+         <context elements="VisibleThing_1000,EventTrigger_2001,SingleOperation_2002,CompositeOperation_2003,ChainedOperation_2004,DomainObject_2005,DomainAttribute_2006,ApplicationElementProperty_2007,Page_2008,InputForm_2009,InputTextField_2010,StaticValue_2011,Session_2012,LoginHandler_2013,CompositeCondition_2014,DomainObjectInstance_2015,DomainAttributeInstance_2016,Button_2017,QueryParameter_2019"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -303,7 +304,7 @@
       <decoratorProvider class="org.openiaml.model.model.diagram.visual.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2019"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -491,6 +492,16 @@
             <param name="semanticHint" value="2017"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.2">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.QueryParameter_2019"
+               name="%metatype.name.QueryParameter_2019"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="QueryParameter"
+               edithelper="org.openiaml.model.model.diagram.visual.edit.helpers.QueryParameterEditHelper">
+            <param name="semanticHint" value="2019"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_4001"
@@ -621,6 +632,7 @@
          <elementType ref="org.openiaml.model.diagram.visual.DomainObjectInstance_2015"/>
          <elementType ref="org.openiaml.model.diagram.visual.DomainAttributeInstance_2016"/>
          <elementType ref="org.openiaml.model.diagram.visual.Button_2017"/>
+         <elementType ref="org.openiaml.model.diagram.visual.QueryParameter_2019"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_4003"/>

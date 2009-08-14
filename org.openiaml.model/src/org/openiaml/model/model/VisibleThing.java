@@ -19,6 +19,7 @@ import org.openiaml.model.model.scopes.Session;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.VisibleThing#getSessions <em>Sessions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.VisibleThing#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,4 +45,21 @@ public interface VisibleThing extends ApplicationElementContainer {
 	 * @generated
 	 */
 	EList<Session> getSessions();
+
+	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.QueryParameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getVisibleThing_Parameters()
+	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment added='0.4' about='ideally this might only be placed in Page and Session, but allowing it within VisibleThing allows us to (1) reuse our visual editor, and (2) increases modularity of components perhaps?'"
+	 * @generated
+	 */
+	EList<QueryParameter> getParameters();
 } // VisibleThing

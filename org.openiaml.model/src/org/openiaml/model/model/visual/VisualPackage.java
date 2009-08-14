@@ -223,6 +223,15 @@ public interface VisualPackage extends EPackage {
 	int PAGE__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__PARAMETERS = ModelPackage.VISIBLE_THING__PARAMETERS;
+
+	/**
 	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -431,6 +440,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__PARAMETERS = ModelPackage.VISIBLE_THING__PARAMETERS;
+
+	/**
 	 * The number of structural features of the '<em>Input Form</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -601,6 +619,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__PARAMETERS = ModelPackage.VISIBLE_THING__PARAMETERS;
 
 	/**
 	 * The number of structural features of the '<em>Input Text Field</em>' class.
@@ -776,6 +803,15 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__PARAMETERS = ModelPackage.VISIBLE_THING__PARAMETERS;
+
+	/**
 	 * The number of structural features of the '<em>Button</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -946,6 +982,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int FRAME__SESSIONS = ModelPackage.VISIBLE_THING__SESSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__PARAMETERS = ModelPackage.VISIBLE_THING__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.

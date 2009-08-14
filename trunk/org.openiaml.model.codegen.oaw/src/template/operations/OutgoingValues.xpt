@@ -21,6 +21,9 @@
 «DEFINE outgoingValues(model::ApplicationElement container) FOR model::wires::SetWire»
 	«EXPAND outgoingValue(container) FOR to»
 «ENDDEFINE»
+«DEFINE outgoingValues(model::ApplicationElement container) FOR model::wires::ParameterWire»
+	«REM»ParameterWires do not explicitly point towards ApplicationElementProperties, etc.«ENDREM»
+«ENDDEFINE»
 
 /* ignore: todo refactor */
 «DEFINE outgoingValue(model::ApplicationElement container) FOR model::WireEdgesSource»

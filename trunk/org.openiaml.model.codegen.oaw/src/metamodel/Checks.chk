@@ -29,9 +29,13 @@ context model::operations::DecisionOperation ERROR "A compare decision operation
 context model::operations::DecisionOperation ERROR "A DecisionOperation can only have at most two out execution edges" :
 	outExecutions.size <= 2;
 	
-context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a StaticValue [from=" + from + "]":
+context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a StaticValue":
 	!model::StaticValue.isInstance(from) &&
 	!model::StaticValue.isInstance(to);
+	
+context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a QueryParameter":
+	!model::QueryParameter.isInstance(from) &&
+	!model::QueryParameter.isInstance(to);
 
 context model::wires::SyncWire ERROR "A SyncWire cannot connect to itself":
 	from != to;
@@ -73,7 +77,7 @@ context model::WireEdge ERROR "A WireEdge must have a 'to'" :
  * i.e.: "name != 'single_values'"
  */
 
-context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation: " + outEdges.size + ", " + isRunInstanceWire(outEdges.first()) + ", " + isOperation(outEdges.first().to) + " metatype=" + outEdges.first().to.metaType :
+context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation" :
 	outEdges.size == 1
 		&& model::wires::RunInstanceWire.isInstance(outEdges.first())
 		&& model::Operation.isInstance(outEdges.first().to);
@@ -83,4 +87,8 @@ context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do 
 
 context model::ApplicationElementProperty WARNING "A session property used as part of a login handler should have a default value set, otherwise secure pages will crash with an exception rather than going to the login page" :
 	!(defaultValue == null && inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
+
+context model::QueryParameter ERROR "A QueryParameter cannot be used on a Page outside of its containing page" :
+	outEdges.forAll( e | containingPage(e.to.eContainer) == containingPage(this.eContainer) );
+	
 	

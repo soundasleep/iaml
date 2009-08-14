@@ -114,6 +114,13 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//QueryParameter" containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4"/>
+        <details key="about" value="ideally this might only be placed in Page and Session, but allowing it within VisibleThing allows us to (1) reuse our visual editor, and (2) increases modularity of components perhaps?"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements #//Scope #//ContainsConditions">
     <eAnnotations source="http://openiaml.org/comment">
@@ -342,6 +349,13 @@
         <details key="added" value="0.3"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QueryParameter" eSuperTypes="#//NamedElement #//WireEdgesSource #//DataFlowEdgesSource">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="added" value="0.4"/>
+      <details key="about" value="represents a query parameter from the browser."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing #//Scope">

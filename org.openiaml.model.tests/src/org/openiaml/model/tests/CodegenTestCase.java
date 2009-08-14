@@ -159,7 +159,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @return the location of the sitemap file
 	 * @throws Exception 
 	 */
-	protected IFile beginAtSitemapThenPage(String pageTitle) throws Exception {
+	public IFile beginAtSitemapThenPage(String pageTitle) throws Exception {
 		// go to sitemap
 		IFile sitemap = getSitemap();
 		assertTrue("Sitemap " + sitemap + " exists", sitemap.exists());
@@ -168,6 +168,59 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		beginAtSitemapThenPage(sitemap, pageTitle, pageTitle);
 		
 		return sitemap;
+	}
+	
+	/**
+	 * Identical to {@link #beginAtSitemapThenPage(String)}, except adds
+	 * the given query to the URL through {@link #visitLinkWithQueryParameter(String, String)}.
+	 * 
+	 * @see #visitLinkWithQueryParameter(String, String)
+	 * @param pageTitle
+	 * @param query
+	 * @return
+	 * @throws Exception
+	 */
+	public IFile beginAtSitemapThenPageQuery(String pageTitle, String query) throws Exception {
+		// go to sitemap
+		IFile sitemap = getSitemap();
+		assertTrue("Sitemap " + sitemap + " exists", sitemap.exists());
+		
+		// go to page
+		beginAtSitemapThenPage(sitemap, pageTitle, pageTitle, query);
+		
+		return sitemap;
+	}
+	
+	/**
+	 * Emulate clicking the given link, but add the given query string
+	 * to the end of the request. This won't actually call any
+	 * Javascript etc that is present on the given link.
+	 * 
+	 * @param linkName
+	 * @param query Query to append, e.g. <code>key=value&amp;key2=value2</code>
+	 */
+	public void visitLinkWithQueryParameter(String linkName, String query) {
+		IElement link = getElementByXPath("//a[contains(text(), '" + linkName + "')]");
+		assertNotNull(link);
+		
+		// find the href
+		String href = link.getAttribute("href");
+		assertNotNull(href);
+		assertNotEquals(href, "");
+		
+		// TODO get the current page URL from JWebUnit in order to work out
+		// the current relative path to the sitemap
+		href = "output/" + href;	// hack until we can get the actual relative URL
+		
+		// construct the query
+		if (href.indexOf('?') != -1) {
+			href += "&" + query;
+		} else {
+			href += "?" + query;
+		}
+		
+		// go to the link
+		gotoPage(href);
 	}
 	
 	/**
@@ -188,7 +241,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @return the location of the sitemap file
 	 * @throws Exception 
 	 */
-	protected IFile beginAtSitemapThenPage(String pageTitle, String expectedTitle) throws Exception {
+	public IFile beginAtSitemapThenPage(String pageTitle, String expectedTitle) throws Exception {
 		// go to sitemap
 		IFile sitemap = getSitemap();
 		assertTrue("Sitemap " + sitemap + " exists", sitemap.exists());
@@ -202,7 +255,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	/** 
 	 * Get the sitemap file, i.e. <code>output/sitemap.html</code>
 	 */
-	protected IFile getSitemap() {
+	public IFile getSitemap() {
 		return getProject().getFile("output/sitemap.html");
 	}
 	
@@ -220,14 +273,38 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param pageTitle the page title to select from the sitemap
 	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
 	 */ 
-	protected void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle) throws Exception {
+	public void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle) throws Exception {
+		beginAtSitemapThenPage(sitemap, pageTitle, expectedPageTitle, null);
+	}
+
+	/**
+	 * Begin at the sitemap page, and then click on a particular page title.
+	 * This method checks to see the destination page title is the same as
+	 * expectedPageTitle.
+	 * 
+	 * <b>NOTE</b> that this resets the current WebClient context, which can cause
+	 * the client to lose sessions/cookies. If this is undesirable,
+	 * use {@link #gotoSitemapThenPage(IFile, String)}.
+	 * 
+	 * @see #beginAtSitemapThenPage(IFile, String, String)
+	 * @param sitemap the location of the sitemap file
+	 * @param pageTitle the page title to select from the sitemap
+	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
+	 * @param query query string to append to the end of the destination, or null if none
+	 */ 
+	public void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle, String query) throws Exception {
 		waitForAjax();
 
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 		
 		assertLinkPresentWithText(pageTitle);
-		clickLinkWithText(pageTitle);
+		if (query == null) {	
+			clickLinkWithText(pageTitle);
+		} else {
+			visitLinkWithQueryParameter(pageTitle, query);
+		}
+		
 		try {
 			assertTitleMatch(expectedPageTitle);
 		} catch (AssertionFailedError e) {

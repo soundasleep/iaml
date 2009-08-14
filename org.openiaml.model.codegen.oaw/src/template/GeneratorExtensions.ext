@@ -67,9 +67,6 @@ model::visual::Page containingPage(model::NamedElement element) :
 /* any page in the Session will contain all the operations for the Session */
 model::visual::Page containingPage(model::scopes::Session element) :
 	element.children.typeSelect( model::visual::Page ).first();
-		
-model::visual::Page containingPage(model::NamedElement element) :
-	containingPage(element.eContainer);
 
 /* default for any EObject */
 model::visual::Page containingPage(emf::EObject element) :

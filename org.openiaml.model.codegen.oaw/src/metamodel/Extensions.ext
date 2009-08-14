@@ -13,4 +13,18 @@ isRunInstanceWire(emf::EObject this) :
 	false;
 	
 isRunInstanceWire(model::wires::RunInstanceWire this) :
-	true;	
+	true;
+
+model::visual::Page containingPage(model::visual::Page element) :
+	element;
+	
+model::visual::Page containingPage(model::NamedElement element) :
+	containingPage(element.eContainer);
+
+/* default for any EObject */
+model::visual::Page containingPage(emf::EObject element) :
+	null;
+model::visual::Page containingPage(Void void) :
+	null;
+	
+	

@@ -33,3 +33,16 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
   * OperationCallNode
 
 Documentation forthcoming.
+
+=New Wires=
+==Set Wire==
+|| *Description* || Keeps a target value up-to-date with a source value. ||
+|| *Models* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/SetWireClient.iaml SetWireClient.iaml] ||
+|| *Inference Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_4/SetWireClient.java SetWireClient.java] ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/SetWireClient.java SetWireClient.java] ||
+
+Similar in concept and implementation to a _Sync Wire_, except this is unidirectional. If the target value changes, the source change will not change. If connected between containers of elements, the target element will automatically be populated with the source's children, and these will be connected with _Set Wires_.
+
+Can be connected directly to _Input Text Fields_.
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/SetWireClient-1.png

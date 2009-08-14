@@ -165,6 +165,19 @@
             path="icons/full/obj32/CompositeCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="QueryParameter"
+          description="Create new QueryParameter">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/QueryParameter.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/QueryParameter.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

@@ -45,6 +45,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.SingleOperation;
@@ -605,6 +606,18 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseGeneratedElement(domainAttributeInstance);
 				if (result == null) result = caseShouldntContainWires(domainAttributeInstance);
 				if (result == null) result = caseContainsWires(domainAttributeInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.QUERY_PARAMETER: {
+				QueryParameter queryParameter = (QueryParameter)theEObject;
+				T result = caseQueryParameter(queryParameter);
+				if (result == null) result = caseNamedElement(queryParameter);
+				if (result == null) result = caseWireEdgesSource(queryParameter);
+				if (result == null) result = caseDataFlowEdgesSource(queryParameter);
+				if (result == null) result = caseGeneratedElement(queryParameter);
+				if (result == null) result = caseShouldntContainWires(queryParameter);
+				if (result == null) result = caseContainsWires(queryParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1269,6 +1282,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseDomainAttributeInstance(DomainAttributeInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Query Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Query Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQueryParameter(QueryParameter object) {
 		return null;
 	}
 

@@ -260,6 +260,15 @@ public interface ModelFactory extends EFactory {
 	DomainAttributeInstance createDomainAttributeInstance();
 
 	/**
+	 * Returns a new object of class '<em>Query Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Query Parameter</em>'.
+	 * @generated
+	 */
+	QueryParameter createQueryParameter();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

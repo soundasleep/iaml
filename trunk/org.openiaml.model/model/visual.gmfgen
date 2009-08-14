@@ -1281,6 +1281,55 @@
             parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
+    <topLevelNodes
+        visualID="2019"
+        editPartClassName="QueryParameterEditPart"
+        itemSemanticEditPolicyClassName="QueryParameterItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="QueryParameterCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="QueryParameterGraphicalNodeEditPolicy"
+        createCommandClassName="QueryParameterCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="QueryParameterEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          layoutType="FLOW_LAYOUT"
+          className="QueryParameterFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class QueryParameterFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureQueryParameterNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public QueryParameterFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(true);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;&#xA;this.setFont(THIS_FONT);&#xA;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel queryParameterNamePrefix0 = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;queryParameterNamePrefix0.setText(&quot;query: &quot;);&#xA;&#xA;this.add(queryParameterNamePrefix0);&#xA;&#xA;&#xA;&#xA;fFigureQueryParameterNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureQueryParameterNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureQueryParameterNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureQueryParameterNameFigure() {&#xA;&#x9;&#x9;return fFigureQueryParameterNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font THIS_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Arial&quot;, 9, org.eclipse.swt.SWT.ITALIC);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedFont="true"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="iaml.genmodel#//model/QueryParameter"/>
+        <containmentMetaFeature
+            href="iaml.genmodel#//model/VisibleThing/parameters"/>
+        <childMetaFeature
+            href="iaml.genmodel#//model/VisibleThing/parameters"/>
+      </modelFacet>
+      <labels
+          visualID="5034"
+          editPartClassName="QueryParameterNameEditPart"
+          itemSemanticEditPolicyClassName="QueryParameterNameItemSemanticEditPolicy"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureQueryParameterNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0"
+            editPattern="">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
     <links
         visualID="4001"
         editPartClassName="SyncWireEditPart"
@@ -1953,6 +2002,13 @@
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeCondition.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeCondition.gif"
             genNodes="//@diagram/@topLevelNodes.13"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="QueryParameter"
+            description="Create new QueryParameter"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/QueryParameter.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/QueryParameter.gif"
+            genNodes="//@diagram/@topLevelNodes.17"/>
       </groups>
       <groups
           title="Visual Elements"
@@ -2162,6 +2218,9 @@
         child="//@diagram/@topLevelNodes.16"/>
     <childReferences
         parent="//@diagram"
+        child="//@diagram/@topLevelNodes.17"/>
+    <childReferences
+        parent="//@diagram"
         child="//@diagram/@links.0"
         groupName="links"
         groupIcon="icons/linksNavigatorGroup.gif"/>
@@ -2521,6 +2580,18 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.16"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"
@@ -2891,6 +2962,18 @@
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
+        child="//@diagram/@links.1"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.2"
         groupName="links"
@@ -3256,6 +3339,18 @@
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
+        parent="//@diagram/@links.2"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
+        child="//@diagram/@links.2"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.3"
         groupName="links"
@@ -3621,6 +3716,18 @@
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
+        parent="//@diagram/@links.3"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
+        child="//@diagram/@links.3"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.4"
         groupName="links"
@@ -3986,6 +4093,18 @@
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
+        parent="//@diagram/@links.4"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
+        child="//@diagram/@links.4"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.5"
         groupName="links"
@@ -4351,6 +4470,18 @@
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
+        parent="//@diagram/@links.5"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
+        child="//@diagram/@links.5"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.6"
         groupName="links"
@@ -4716,6 +4847,18 @@
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
+        parent="//@diagram/@links.6"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
+        child="//@diagram/@links.6"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.7"
         groupName="links"
@@ -5081,6 +5224,18 @@
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
+        parent="//@diagram/@links.7"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
+        child="//@diagram/@links.7"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.8"
         groupName="links"
@@ -5446,6 +5601,18 @@
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
+        parent="//@diagram/@links.8"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
+        child="//@diagram/@links.8"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
         parent="//@diagram"
         child="//@diagram/@links.9"
         groupName="links"
@@ -5806,6 +5973,18 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.16"
+        child="//@diagram/@links.9"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.9"
+        child="//@diagram/@topLevelNodes.17"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.17"
         child="//@diagram/@links.9"
         referenceType="out_target"
         groupName="outgoing links"
@@ -5911,7 +6090,7 @@
       extensibleViaService="true">
     <implementations
         xsi:type="gmfgen:PredefinedParser"
-        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet //@diagram/@topLevelNodes.8/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.1/@modelFacet //@diagram/@topLevelNodes.11/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.1/@modelFacet //@diagram/@topLevelNodes.13/@labels.0/@modelFacet //@diagram/@topLevelNodes.14/@labels.0/@modelFacet //@diagram/@topLevelNodes.14/@labels.1/@modelFacet //@diagram/@topLevelNodes.15/@labels.0/@modelFacet //@diagram/@topLevelNodes.16/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet //@diagram/@links.3/@labels.0/@modelFacet //@diagram/@links.3/@labels.1/@modelFacet //@diagram/@links.4/@labels.0/@modelFacet //@diagram/@links.5/@labels.0/@modelFacet //@diagram/@links.6/@labels.0/@modelFacet //@diagram/@links.7/@labels.0/@modelFacet //@diagram/@links.8/@labels.0/@modelFacet //@diagram/@links.9/@labels.0/@modelFacet"/>
+        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet //@diagram/@topLevelNodes.8/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.1/@modelFacet //@diagram/@topLevelNodes.11/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.1/@modelFacet //@diagram/@topLevelNodes.13/@labels.0/@modelFacet //@diagram/@topLevelNodes.14/@labels.0/@modelFacet //@diagram/@topLevelNodes.14/@labels.1/@modelFacet //@diagram/@topLevelNodes.15/@labels.0/@modelFacet //@diagram/@topLevelNodes.16/@labels.0/@modelFacet //@diagram/@topLevelNodes.17/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet //@diagram/@links.3/@labels.0/@modelFacet //@diagram/@links.3/@labels.1/@modelFacet //@diagram/@links.4/@labels.0/@modelFacet //@diagram/@links.5/@labels.0/@modelFacet //@diagram/@links.6/@labels.0/@modelFacet //@diagram/@links.7/@labels.0/@modelFacet //@diagram/@links.8/@labels.0/@modelFacet //@diagram/@links.9/@labels.0/@modelFacet"/>
     <implementations
         xsi:type="gmfgen:ExternalParser"
         uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.2/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.1/@modelFacet //@diagram/@topLevelNodes.4/@labels.1/@modelFacet //@diagram/@topLevelNodes.5/@labels.1/@modelFacet //@diagram/@topLevelNodes.6/@labels.2/@modelFacet //@diagram/@topLevelNodes.8/@labels.1/@modelFacet //@diagram/@topLevelNodes.9/@labels.1/@modelFacet //@diagram/@topLevelNodes.13/@labels.1/@modelFacet //@diagram/@topLevelNodes.16/@labels.1/@modelFacet"/>

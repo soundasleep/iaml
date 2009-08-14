@@ -47,6 +47,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.SingleOperation;
@@ -384,6 +385,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass domainAttributeInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass queryParameterEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -833,6 +841,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getVisibleThing_Sessions() {
 		return (EReference)visibleThingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVisibleThing_Parameters() {
+		return (EReference)visibleThingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1470,6 +1487,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getQueryParameter() {
+		return queryParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getQueryParameter_DefaultValue() {
+		return (EAttribute)queryParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -1553,6 +1588,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		visibleThingEClass = createEClass(VISIBLE_THING);
 		createEReference(visibleThingEClass, VISIBLE_THING__SESSIONS);
+		createEReference(visibleThingEClass, VISIBLE_THING__PARAMETERS);
 
 		internetApplicationEClass = createEClass(INTERNET_APPLICATION);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__PROPERTIES);
@@ -1647,6 +1683,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		domainAttributeInstanceEClass = createEClass(DOMAIN_ATTRIBUTE_INSTANCE);
 		createEAttribute(domainAttributeInstanceEClass, DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE);
+
+		queryParameterEClass = createEClass(QUERY_PARAMETER);
+		createEAttribute(queryParameterEClass, QUERY_PARAMETER__DEFAULT_VALUE);
 	}
 
 	/**
@@ -1774,6 +1813,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		compositeConditionEClass.getESuperTypes().add(this.getCondition());
 		compositeConditionEClass.getESuperTypes().add(this.getGeneratesElements());
 		domainAttributeInstanceEClass.getESuperTypes().add(this.getApplicationElement());
+		queryParameterEClass.getESuperTypes().add(this.getNamedElement());
+		queryParameterEClass.getESuperTypes().add(this.getWireEdgesSource());
+		queryParameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1836,6 +1878,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(visibleThingEClass, VisibleThing.class, "VisibleThing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVisibleThing_Sessions(), theScopesPackage.getSession(), null, "sessions", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVisibleThing_Parameters(), this.getQueryParameter(), null, "parameters", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(internetApplicationEClass, InternetApplication.class, "InternetApplication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInternetApplication_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1931,6 +1974,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(domainAttributeInstanceEClass, DomainAttributeInstance.class, "DomainAttributeInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomainAttributeInstance_Autosave(), ecorePackage.getEBoolean(), "autosave", "true", 0, 1, DomainAttributeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(queryParameterEClass, QueryParameter.class, "QueryParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getQueryParameter_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, QueryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -2002,6 +2048,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (getVisibleThing_Parameters(), 
+		   source, 
+		   new String[] {
+			 "added", "0.4",
+			 "about", "ideally this might only be placed in Page and Session, but allowing it within VisibleThing allows us to (1) reuse our visual editor, and (2) increases modularity of components perhaps?"
 		   });		
 		addAnnotation
 		  (internetApplicationEClass, 
@@ -2153,6 +2206,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.3"
+		   });		
+		addAnnotation
+		  (queryParameterEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4",
+			 "about", "represents a query parameter from the browser."
 		   });
 	}
 

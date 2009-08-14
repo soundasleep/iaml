@@ -251,13 +251,22 @@ public interface ScopesPackage extends EPackage {
 	int SESSION__SESSIONS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SESSION__PARAMETERS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 15;
+
+	/**
 	 * The feature id for the '<em><b>Agents</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__AGENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 15;
+	int SESSION__AGENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
@@ -266,7 +275,7 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__COMPONENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 16;
+	int SESSION__COMPONENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The number of structural features of the '<em>Session</em>' class.
@@ -275,7 +284,7 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 17;
+	int SESSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 18;
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.scopes.Session <em>Session</em>}'.

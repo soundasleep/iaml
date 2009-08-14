@@ -468,6 +468,27 @@
           href="iaml.gmfgraph#Button"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//VisibleThing/parameters"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//QueryParameter"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#QueryParameterName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.12"/>
+      <diagramNode
+          href="iaml.gmfgraph#QueryParameter"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

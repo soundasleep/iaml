@@ -8,10 +8,12 @@ import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
@@ -149,6 +151,61 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		} catch (ExecutionException e) {
 			throw new InferenceException(e);
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.inference.ICreateElements#setValue(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object)
+	 */
+	@Override
+	public void addReference(EObject element, EStructuralFeature reference,
+			Object value) throws InferenceException {
+		try {
+			if (element == null)
+				//return;
+				throw new InferenceException("Cannot set a value on a null element");
+			
+			AddReferenceCommand sv = new AddReferenceCommand(new SetRequest(getEditingDomain(), element, reference, value));
+			if (sv == null) {
+				// we can't do anything because the diagram editor won't allow us to create it currently
+				//return;
+				throw new InferenceException("Cannot set a value " + reference + " on the element " + element);
+			}
+			doExecute(sv);
+		} catch (ExecutionException e) {
+			throw new InferenceException(e);
+		}
+	}
+	
+	/**
+	 * TODO this class needs testing
+	 * 
+	 * @author jmwright
+	 */
+	public class AddReferenceCommand extends EditElementCommand {
+
+		private SetRequest request;
+		
+		/**
+		 * @param setRequest
+		 */
+		public AddReferenceCommand(SetRequest setRequest) {
+			super("Add reference command", setRequest.getElementToEdit(), setRequest);
+			this.request = setRequest;
+		}
+
+		/* (non-Javadoc)
+		 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor, org.eclipse.core.runtime.IAdaptable)
+		 */
+		@Override
+		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+				IAdaptable info) throws ExecutionException {
+			
+			EList<Object> existing = (EList<Object>) request.getElementToEdit().eGet(request.getFeature());
+			existing.add(request.getValue());
+			return CommandResult.newOKCommandResult();
+			
+		}
+		
 	}
 	
 	/**

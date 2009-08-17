@@ -248,7 +248,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
-			generatedElements = new EObjectWithInverseResolvingEList<GeneratedElement>(GeneratedElement.class, this, WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
+			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
 		}
 		return generatedElements;
 	}

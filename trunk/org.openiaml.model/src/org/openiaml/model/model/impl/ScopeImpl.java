@@ -129,7 +129,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
-			generatedElements = new EObjectWithInverseResolvingEList<GeneratedElement>(GeneratedElement.class, this, ModelPackage.SCOPE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
+			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, ModelPackage.SCOPE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
 		}
 		return generatedElements;
 	}

@@ -251,7 +251,7 @@ rule "Cascaded SetWires: Conditions from parent to child [set]"
 		cw : ConditionWire( from == condition, to == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : ConditionWire( generatedBy == cw, from == condition, to == esw )) 
+		not (ecw : ConditionWire( from == condition, to == esw )) 
 		
 	then
 		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
@@ -278,14 +278,14 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 		cw : ConditionWire( from == condition, to == sw )
 		
 		# the generated condition wire
-		ecw : ConditionWire( generatedBy == cw, from == condition, to == esw )
+		ecw : ConditionWire( from == condition, to == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : WireEdgesSource( )
 		pw : ParameterWire( from == parameter, to == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : ParameterWire( generatedBy == cw, from == parameter, to == ecw )) 
+		not (epw : ParameterWire( from == parameter, to == ecw )) 
 		
 	then
 		# create it

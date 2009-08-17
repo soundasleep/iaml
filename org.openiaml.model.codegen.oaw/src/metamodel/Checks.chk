@@ -88,7 +88,7 @@ context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do 
 context model::ApplicationElementProperty WARNING "A session property used as part of a login handler should have a default value set, otherwise secure pages will crash with an exception rather than going to the login page" :
 	!(defaultValue == null && inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
 
-context model::QueryParameter ERROR "A QueryParameter cannot be used on a Page outside of its containing page" :
-	outEdges.forAll( e | containingPage(e.to.eContainer) == containingPage(this.eContainer) );
+context model::QueryParameter ERROR "A QueryParameter cannot be used on a Page outside of its containing page (" + containingPage(this.eContainer) + ", " + containingPage(outEdges.first().to.eContainer) + ")" :
+	outEdges.forAll( e | isAccessibleOnPage(containingPage(this.eContainer), e.to) );
 	
 	

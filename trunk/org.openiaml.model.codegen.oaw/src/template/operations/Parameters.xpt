@@ -117,5 +117,16 @@
 	new Visual_Page("«id-»", "«name-»")
 «ENDDEFINE»
 
+/**
+ * A value specified as part of the URI, e.g. ?key=value
+ */
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::QueryParameter»
+	«IF php»
+		require_get("«name»"«IF defaultValue != null», "«defaultValue»"«ENDIF»)
+	«ELSE»
+		"<?php echo «EXPAND callParameterValue(true, wire, inStoreDb) FOR this»; ?>"
+	«ENDIF»
+«ENDDEFINE»
+
 «DEFINE exception FOR Object»
 «ENDDEFINE»

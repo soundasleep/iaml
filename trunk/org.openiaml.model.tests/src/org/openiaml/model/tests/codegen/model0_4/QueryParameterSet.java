@@ -68,6 +68,14 @@ public class QueryParameterSet extends CodegenTestCase {
 		
 		{
 			String source = getLabelIDForText("current name");
+			assertLabeledFieldEquals(source, "empty");
+		}
+		
+		// empty value
+		beginAtSitemapThenPageQuery("Home", "name=");
+		
+		{
+			String source = getLabelIDForText("current name");
 			assertLabeledFieldEquals(source, "");
 		}
 	}

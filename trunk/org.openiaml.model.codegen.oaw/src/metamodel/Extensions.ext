@@ -14,7 +14,7 @@ isRunInstanceWire(emf::EObject this) :
 	
 isRunInstanceWire(model::wires::RunInstanceWire this) :
 	true;
-
+	
 model::visual::Page containingPage(model::visual::Page element) :
 	element;
 	
@@ -27,4 +27,17 @@ model::visual::Page containingPage(emf::EObject element) :
 model::visual::Page containingPage(Void void) :
 	null;
 	
-	
+isAccessibleOnPage(model::visual::Page page, model::wires::CompositeWire wire) :
+	containingPage(wire.from) == page ||
+	containingPage(wire.to) == page;
+
+isAccessibleOnPage(model::visual::Page page, model::wires::SingleWire wire) :
+	containingPage(wire.from) == page ||
+	containingPage(wire.to) == page;
+
+isAccessibleOnPage(model::visual::Page page, model::NamedElement element) :
+	containingPage(element) == page;
+
+isAccessibleOnPage(model::visual::Page page, emf::EObject element) :
+	false;
+

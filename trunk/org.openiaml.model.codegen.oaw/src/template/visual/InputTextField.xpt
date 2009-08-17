@@ -77,7 +77,7 @@
 	«EXPAND staticInitialValue FOR from»
 «ENDDEFINE»
 
-/* ignore: todo refactor */
+/* ignore these sources */
 «DEFINE staticInitialValue FOR model::WireEdgesSource»
 «ENDDEFINE»
 «DEFINE staticInitialValue FOR model::WireEdgeDestination»
@@ -97,6 +97,11 @@
 «DEFINE staticInitialValue FOR model::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
 	value="<?php echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>"
+«ENDDEFINE»
+
+«DEFINE staticInitialValue FOR model::QueryParameter»
+	«REM»from the query«ENDREM»
+	value="<?php echo «EXPAND template::operations::Parameters::callParameterValue(true, null, false)»; ?>"
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

@@ -33,30 +33,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.diagramextensions.InfiniteSubProgressMonitor;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
-import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
-import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
-import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.Scope;
-import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.scopes.Session;
-import org.openiaml.model.model.wires.CompositeWire;
 
 /**
  * Uses Drools to infer new elements. By defining

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.xpath;
+package org.openiaml.model.xpath;
 
 import java.util.ArrayList;
 import java.util.Collection;

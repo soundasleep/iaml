@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.xpath;
+package org.openiaml.model.xpath;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -9,20 +9,17 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import junit.framework.TestCase;
-
-import org.openiaml.model.xpath.IterableElementList;
-import org.openiaml.model.xpath.IXpath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
+ * 
  * @author jmwright
  *
  */
-public class DefaultXpathTestCase extends TestCase implements IXpath {
+public class DefaultXpathFunctions implements IXpath {
 
 	/**
 	 * Apply an XPath query to an XML document.
@@ -45,6 +42,16 @@ public class DefaultXpathTestCase extends TestCase implements IXpath {
 		return e;
 	}
 	
+	/**
+	 * @param string
+	 * @param doc
+	 */
+	private void assertNotNull(String message, Object obj) {
+		if (obj == null) {
+			throw new RuntimeException(message);
+		}
+	}
+
 	/**
 	 * Get the first node result from an XPath query.
 	 * Does not throw an error if more than one result is found; see

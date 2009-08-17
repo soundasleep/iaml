@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.xpath;
+package org.openiaml.model.xpath;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -15,7 +15,7 @@ import org.w3c.dom.Node;
  * @author jmwright
  *
  */
-public interface XpathTestCase {
+public interface IXpath {
 
 	/**
 	 * Apply an XPath query to an XML document.

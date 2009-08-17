@@ -30,8 +30,8 @@ import javax.xml.xpath.XPathExpressionException;
 import junit.framework.TestCase;
 
 import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
-import org.openiaml.model.tests.xpath.IterableElementList;
-import org.openiaml.model.tests.xpath.XpathTestCase;
+import org.openiaml.model.xpath.IterableElementList;
+import org.openiaml.model.xpath.IXpath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -44,7 +44,7 @@ import org.xml.sax.SAXException;
  * @author jmwright
  *
  */
-public class XmlTestCase extends TestCase implements XpathTestCase {
+public class XmlTestCase extends TestCase implements IXpath {
 	
 	/**
 	 * Resolve an EMF query like '//@figures.0/@descriptors.29/@accessors.0'
@@ -238,9 +238,9 @@ public class XmlTestCase extends TestCase implements XpathTestCase {
 
 	/**
 	 * XPath helper methods.
-	 * @see org.openiaml.model.tests.xpath.XpathTestCase
+	 * @see org.openiaml.model.tests.xpath.IXpath
 	 */
-	private static XpathTestCase xpath = new DefaultXpathTestCase();
+	private static IXpath xpath = new DefaultXpathTestCase();
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.tests.xpath.XpathTestCase#hasXpathFirst(org.w3c.dom.Element, java.lang.String)

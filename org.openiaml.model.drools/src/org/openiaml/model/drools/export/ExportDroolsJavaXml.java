@@ -3,15 +3,28 @@
  */
 package org.openiaml.model.drools.export;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openiaml.model.drools.CreateMissingElementsWithDrools;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
 import org.openiaml.model.inference.InferenceException;
+import org.openiaml.model.xpath.DefaultXpathFunctions;
+import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 /**
  * Extends {@link ExportDroolsXml} to also generate the RHS
@@ -21,21 +34,6 @@ import org.w3c.dom.Node;
  *
  */
 public class ExportDroolsJavaXml extends ExportDroolsXml {
-
-	/**
-	 * Dump all the rule files into XML using XmlDumper, into a map
-	 * of source files to generated XML strings.
-	 * 
-	 * @see org.drools.xml.XmlDumper
-	 * @see CreateMissingElementsWithDrools#getRuleFiles()
-	 * @return a map of filename to XML strings
-	 * @throws InferenceException 
-	 */
-	public Map<String,String> getRuleXmls() throws InferenceException {
-		Map<String,String> result = super.getRuleXmls();
-		
-		return result;
-	}
 
 	/**
 	 * Parse the given Java code and insert the results into
@@ -271,6 +269,81 @@ public class ExportDroolsJavaXml extends ExportDroolsXml {
 			}
 		}
 
+	}
+
+	/**
+	 * 
+	 *  
+	 * @return
+	 * @throws XPathExpressionException 
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
+	 * @throws FileNotFoundException 
+	 * @throws InferenceException 
+	 */
+	public Map<String, Document> getRuleXmlDocuments() throws XPathExpressionException, FileNotFoundException, ParserConfigurationException, SAXException, IOException, InferenceException {
+		
+		Map<String,Document> result = new HashMap<String,Document>();
+		Map<String,String> source = getRuleXmls();
+		
+		for (String filename : source.keySet()) {
+
+			if (filename.toLowerCase().contains("dynamic-sources") ||
+					filename.toLowerCase().contains("login-handler")) {
+				// TODO we need to allow for if (a...) { b... } syntax
+				// OR we need to modify the rule source to not use this
+				// syntax directly
+				// TODO login-handler.drl has very complex logic
+				System.err.println("Skipping drools rule file: " + filename);
+				continue;
+			}
+			
+			InputStream stream = new ByteArrayInputStream(source.get(filename).getBytes("UTF-8"));
+			Document document = loadDocument(stream);
+			IterableElementList rhsList = new DefaultXpathFunctions().xpath(document, "//rhs");
+
+			for (Element rhs : rhsList) {
+				Text originalNode = (Text) rhs.getFirstChild();
+				String sourceCode = originalNode.getData();
+				originalNode.setData("");	// empty the node
+
+				Element t = document.createElement("source");
+				originalNode.getParentNode().appendChild(t);
+				Text t2 = document.createTextNode(sourceCode);
+				t.appendChild(t2);
+
+				// lets create the statements here
+				parseJava(document, originalNode.getParentNode(), sourceCode);
+			}
+			
+			result.put(filename, document);
+		}
+		
+		return result;
+		
+	}
+
+	/**
+	 * Load an XML document.
+	 */
+	public Document loadDocument(String filename) throws FileNotFoundException, ParserConfigurationException, SAXException, IOException {
+		return loadDocument( new FileInputStream(filename) );
+	}
+
+	/**
+	 * Load an XML document.
+	 */
+	public Document loadDocument(InputStream source) throws ParserConfigurationException, SAXException, IOException {
+		// load the model version
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document doc = db.parse(source);
+
+		// done
+		source.close();
+
+		return doc;
 	}
 
 	

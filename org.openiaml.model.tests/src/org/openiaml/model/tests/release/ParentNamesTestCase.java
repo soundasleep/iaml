@@ -6,7 +6,7 @@ package org.openiaml.model.tests.release;
 import java.util.Map;
 
 import org.openiaml.model.tests.XmlTestCase;
-import org.openiaml.model.tests.xpath.IterableElementList;
+import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

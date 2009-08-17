@@ -43,7 +43,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 		sourceCw : ConditionWire( from == condition, to == sw )
 		
 		# but our run wire doesn't 
-		not (ConditionWire (generatedBy == sourceCw, from == condition, to == run )) 
+		not (ConditionWire (from == condition, to == run )) 
 		
 	then
 		# copy the condition
@@ -71,14 +71,14 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		sourceCw : ConditionWire( from == condition, to == sw )
 		
 		# and the RunInstanceWire has the same condition 
-		targetCw : ConditionWire (generatedBy == sourceCw, from == condition, to == run ) 
+		targetCw : ConditionWire (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
 		param : WireEdgesSource ( )
 		paramWire : ParameterWire( from == param, to == sourceCw )
 
 		# but this wire does not have it
-		not (ParameterWire (generatedBy == sourceCw, from == param, to == targetCw ))
+		not (ParameterWire (from == param, to == targetCw ))
 		
 	then
 		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );

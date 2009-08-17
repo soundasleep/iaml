@@ -131,7 +131,7 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		}
 			
 	}
-	
+
 	/**
 	 * Wraps {@link EmfInferenceHandler#setValue(EObject, EStructuralFeature, Object)} with
 	 * an {@link AbstractTransactionalCommand}. 
@@ -162,6 +162,45 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 			EcoreInferenceHandler eih = new EcoreInferenceHandler(resource);
 			try {
 				eih.setValue(element, reference, value);
+			} catch (InferenceException e) {
+				throw new ExecutionException(e.getMessage(), e);
+			}
+			return CommandResult.newOKCommandResult();
+			
+		}
+			
+	}
+
+	/**
+	 * Wraps {@link EmfInferenceHandler#addReference(EObject, EStructuralFeature, Object)} with
+	 * an {@link AbstractTransactionalCommand}. 
+	 * 
+	 * @author jmwright
+	 */
+	protected class AddReferenceCommand extends AbstractTransactionalCommand {
+
+		public AddReferenceCommand(TransactionalEditingDomain domain,
+				List<?> affectedFiles,
+				EObject element, EStructuralFeature reference, Object value) {
+			super(domain, "Create element command", affectedFiles);
+			this.element = element;
+			this.reference = reference;
+			this.value = value;
+		}
+
+		private EObject element;
+		private EStructuralFeature reference;
+		private Object value;
+		
+		@Override
+		protected CommandResult doExecuteWithResult(
+				IProgressMonitor monitor, IAdaptable info)
+				throws ExecutionException {
+			
+			// just pass it along
+			EcoreInferenceHandler eih = new EcoreInferenceHandler(resource);
+			try {
+				eih.addReference(element, reference, value);
 			} catch (InferenceException e) {
 				throw new ExecutionException(e.getMessage(), e);
 			}
@@ -328,6 +367,27 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		
 		return;
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.inference.ICreateElements#addReference(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object)
+	 */
+	@Override
+	public void addReference(EObject element, EStructuralFeature reference,
+			Object value) throws InferenceException {
+		
+		AddReferenceCommand command = new AddReferenceCommand(editingDomain, affectedFiles, element, reference, value);
+		
+		try {
+			IStatus r = command.execute(monitor, info);
+			if (!r.isOK()) {
+				throw new InferenceException("Status was not OK: " + r.getMessage(), r.getException());
+			}
+		} catch (ExecutionException e) {
+			throw new InferenceException(e);
+		}	
+		
+		return;
 	}
 
 }

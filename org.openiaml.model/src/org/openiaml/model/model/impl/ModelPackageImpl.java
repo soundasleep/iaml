@@ -1929,7 +1929,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(shouldntContainWiresEClass, ShouldntContainWires.class, "ShouldntContainWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(generatedElementEClass, GeneratedElement.class, "GeneratedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGeneratedElement_GeneratedBy(), this.getGeneratesElements(), this.getGeneratesElements_GeneratedElements(), "generatedBy", null, 0, 1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratedElement_GeneratedBy(), this.getGeneratesElements(), this.getGeneratesElements_GeneratedElements(), "generatedBy", null, 0, -1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratedElement_IsGenerated(), ecorePackage.getEBoolean(), "isGenerated", null, 0, 1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratedElement_Id(), ecorePackage.getEString(), "id", null, 0, 1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratedElement_GeneratedRule(), ecorePackage.getEString(), "generatedRule", null, 0, 1, GeneratedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2122,6 +2122,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "comment", "classes that extend this SHOULDN\'T contain wires, but GMF\'s limitations require it (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=249717)"
+		   });		
+		addAnnotation
+		  (getGeneratedElement_GeneratedBy(), 
+		   source, 
+		   new String[] {
+			 "changed", "0.4 from 0..1 to 0..*"
 		   });		
 		addAnnotation
 		  (getGeneratedElement_GeneratedRule(), 

@@ -252,4 +252,17 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 		
 	}
 
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.inference.ICreateElements#addReference(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object)
+	 */
+	@Override
+	public void addReference(EObject element, EStructuralFeature reference,
+			Object value) throws InferenceException {
+		
+		// we will just let ecore do it
+		EList<Object> list = (EList<Object>) element.eGet(reference);
+		list.add(value);
+	}
+
 }

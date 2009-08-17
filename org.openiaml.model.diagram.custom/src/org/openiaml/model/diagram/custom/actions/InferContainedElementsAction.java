@@ -226,6 +226,15 @@ public class InferContainedElementsAction extends ProgressEnabledAction<Graphica
 			parent.setValue(element, reference, value);
 		}		
 		
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.inference.ICreateElements#setValue(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object)
+		 */
+		@Override
+		public void addReference(EObject element, EStructuralFeature reference,
+				Object value) throws InferenceException {
+			parent.addReference(element, reference, value);
+		}		
+		
 	}
 	
 	/**

@@ -82,7 +82,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	 */
 	public void setGeneratedBy(GeneratedElement element,
 			GeneratesElements by) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy(), by);
+		addReference(element, ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy(), by);
 		setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_IsGenerated(), true);
 	}
 	

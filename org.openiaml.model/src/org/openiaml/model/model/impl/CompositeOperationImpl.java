@@ -228,7 +228,7 @@ public class CompositeOperationImpl extends ChainedOperationImpl implements Comp
 	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
-			generatedElements = new EObjectWithInverseResolvingEList<GeneratedElement>(GeneratedElement.class, this, ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
+			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
 		}
 		return generatedElements;
 	}

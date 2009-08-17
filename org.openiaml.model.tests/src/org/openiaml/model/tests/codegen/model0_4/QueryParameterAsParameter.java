@@ -4,10 +4,8 @@
 package org.openiaml.model.tests.codegen.model0_4;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**

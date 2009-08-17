@@ -28,6 +28,17 @@ Currently these are implemented in a single threaded way; each execution flow is
 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/JoinSplitServerSide-2.png
 
+==Query Parameter==
+
+|| *Description* || Represents a parameter taken from the current request query. ||
+|| *Models* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/QueryParameterAsParameter.iaml QueryParameterAsParameter.iaml] ||
+|| *Inference Tests* || - ||
+|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/QueryParameterAsParameter.java QueryParameterAsParameter.java] ||
+
+A _Query Parameter_ [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/metamodel/Checks.chk?spec=svn1000&r=1000#91 can only be connected] to elements contained in the same page as the parameter, as this parameter only exists when the page is accessed.
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/QueryParameterAsParameter-1.png
+
 ==Undocumented==
 
   * OperationCallNode

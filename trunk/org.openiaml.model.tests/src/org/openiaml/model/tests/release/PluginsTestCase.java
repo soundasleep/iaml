@@ -13,7 +13,7 @@ import java.util.Properties;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.openiaml.model.tests.XmlTestCase;
-import org.openiaml.model.tests.xpath.IterableElementList;
+import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

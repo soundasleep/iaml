@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.openiaml.model.tests.XmlTestCase;
-import org.openiaml.model.tests.xpath.IterableElementList;
+import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

@@ -36,8 +36,8 @@ import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.oaw.IACleanerBeautifier;
 import org.openiaml.model.codegen.oaw.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
-import org.openiaml.model.tests.xpath.IterableElementList;
-import org.openiaml.model.tests.xpath.XpathTestCase;
+import org.openiaml.model.xpath.IterableElementList;
+import org.openiaml.model.xpath.IXpath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -49,7 +49,7 @@ import org.w3c.dom.Node;
  * @author jmwright
  *
  */
-public abstract class ModelTestCase extends WebTestCase implements XpathTestCase {
+public abstract class ModelTestCase extends WebTestCase implements IXpath {
 
 	public static final String PLUGIN_ID = "org.openiaml.model.tests";
 	public static final String ROOT = "src/org/openiaml/model/tests/";
@@ -597,9 +597,9 @@ public abstract class ModelTestCase extends WebTestCase implements XpathTestCase
 
 	/**
 	 * XPath helper methods.
-	 * @see org.openiaml.model.tests.xpath.XpathTestCase
+	 * @see org.openiaml.model.tests.xpath.IXpath
 	 */
-	private static XpathTestCase xpath = new DefaultXpathTestCase();
+	private static IXpath xpath = new DefaultXpathTestCase();
 
 	/**
 	 * Get the first node result from an XPath query. Returns the 

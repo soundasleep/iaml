@@ -3,11 +3,19 @@
  */
 package org.openiaml.model.drools.export;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.drools.compiler.DrlParser;
 import org.drools.compiler.DroolsParserException;
@@ -15,6 +23,10 @@ import org.drools.lang.descr.PackageDescr;
 import org.drools.xml.XmlDumper;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.InferenceException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 /**
  * <p>This helper method extracts drools rules and exports them as XML.

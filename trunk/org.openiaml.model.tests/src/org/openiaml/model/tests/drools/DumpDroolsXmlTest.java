@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.drools;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,9 +23,8 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.drools.export.ExportDroolsJavaXml;
-import org.openiaml.model.drools.export.ExportDroolsXml;
 import org.openiaml.model.tests.inference.InferenceTestCase;
-import org.openiaml.model.tests.xpath.IterableElementList;
+import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -203,53 +201,18 @@ public class DumpDroolsXmlTest extends InferenceTestCase {
 	}
 
 	public void testDumpXml() throws Exception {
-		ExportDroolsXml dump = new ExportDroolsXml();
-		Map<String,String> results = dump.getRuleXmls();
+		ExportDroolsJavaXml dump = new ExportDroolsJavaXml();
+		Map<String,Document> results = dump.getRuleXmlDocuments();
 
 		for (String f : results.keySet()) {
 
 			String name = f.substring(f.lastIndexOf("/"));
 			IFile out = project.getFile(name + ".xml");
 
-			if (f.toLowerCase().contains("dynamic-sources") ||
-					f.toLowerCase().contains("login-handler")) {
-				// TODO we need to allow for if (a...) { b... } syntax
-				// OR we need to modify the rule source to not use this
-				// syntax directly
-				// TODO login-handler.drl has very complex logic
-				System.out.println("Skipping drools rule file: " + f);
-				continue;
-			}
-
-			// who knows what format XmlDump is supplied in?
-			// we will assume UTF-8 as the dumped XML is UTF-8
-			InputStream source = new ByteArrayInputStream(results.get(f).getBytes("UTF-8"));
-
-			System.out.println("Writing " + out + "...");
-
 			// load the created XML and replace the <rhs> with
 			// more XML (specific to our use in IAML)
-
-			Document document = loadDocument(source);
-			IterableElementList rhsList = xpath(document, "//rhs");
-
-			for (Element rhs : rhsList) {
-				Text originalNode = (Text) rhs.getFirstChild();
-				String sourceCode = originalNode.getData();
-				originalNode.setData("");	// empty the node
-
-				Element t = document.createElement("source");
-				originalNode.getParentNode().appendChild(t);
-				Text t2 = document.createTextNode(sourceCode);
-				t.appendChild(t2);
-
-				// lets create the statements here
-				new ExportDroolsJavaXml().parseJava(document, originalNode.getParentNode(), sourceCode);
-
-				// find the rule node
-				Element ruleNode = (Element) rhs.getParentNode();
-				assertEquals(ruleNode.getNodeName(), "rule");
-			}
+			
+			Document document = results.get(f);
 
 			// out.create(source, true, monitor);
 			saveDocument(document, out.getLocation().toFile());

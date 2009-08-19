@@ -547,6 +547,7 @@
       <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
          <includes>
             <contentExtension pattern="org.openiaml.model.diagram.operation.resourceContent"/>
+			<contentExtension pattern="org.openiaml.model.diagram.operation.domainResourceContent"/>
             <contentExtension pattern="org.openiaml.model.diagram.operation.navigatorLinkHelper"/>
          </includes>
       </viewerContentBinding>
@@ -600,6 +601,27 @@
                </or>
             </parentExpression>
          </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="org.openiaml.model.diagram.operation.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="org.openiaml.model.model.diagram.operation.navigator.IamlDomainNavigatorContentProvider" 
+            labelProvider="org.openiaml.model.model.diagram.operation.navigator.IamlDomainNavigatorLabelProvider"
+            icon="icons/obj16/ModelDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_operation"/>
+               </and>
+               <instanceof value="org.openiaml.model.model.diagram.operation.navigator.IamlDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="org.openiaml.model.model.diagram.operation.navigator.IamlDomainNavigatorItem"/>
+         </possibleChildren>
       </navigatorContent>
       <actionProvider
             id="org.openiaml.model.diagram.operation.navigatorActionProvider"
@@ -712,6 +734,18 @@
    <extension point="org.eclipse.ui.handlers" id="menu-handlers">
       <?gmfgen generated="true"?>
    </extension>
+<extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/ModelDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="org.openiaml.model.model.diagram.operation.part.IamlCreationWizard"
+  	     id="org.openiaml.model.model.diagram.operation.part.IamlCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
 
    <!-- optionally, specify keybindings -->
 </plugin>

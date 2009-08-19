@@ -184,34 +184,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		fail("No " + objectClass.getSimpleName() + " named '" + name + "' found in editor " + root + ". Found: " + found);
 		return null;
 	}
-	
-	/**
-	 * Look at the editor's children to see if a Page is being displayed.
-	 * 
-	 * @param root
-	 * @param pageName
-	 * @return
-	 */
-	public ShapeNodeEditPart assertHasPage(DiagramDocumentEditor root, String pageName) {
-		for (Object o : root.getDiagramEditPart().getChildren()) {
-			if (o instanceof ShapeNodeEditPart) {
-				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
-				EObject obj = s.resolveSemanticElement();
-				if (obj instanceof Page) {
-					Page p = (Page) obj;
-					if (p.getName() != null && p.getName().equals(pageName)) {
-						assertNotNull(s);
-						return s;
-					}
-				}
-			}
-		}
-		// failed
-		fail("assertHasPage: no page '" + pageName + "' found.");
-		return null;
-	}
 
-	
 	/**
 	 * Look at the editor's children to see if a Session is being displayed.
 	 * 
@@ -241,12 +214,23 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Look at the editor's children to see if an InputForm is being displayed.
 	 * 
-	 * @param root
-	 * @param formName
+	 * @param editor
+	 * @param name
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasInputForm(DiagramDocumentEditor root, String formName, boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, InputForm.class, formName, checkShortcut, shortcutRequired); 
+	public ShapeNodeEditPart assertHasInputForm(DiagramDocumentEditor editor, String name, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, InputForm.class, name, checkShortcut, shortcutRequired); 
+	}
+	
+	/**
+	 * Look at the editor's children to see if an Page is being displayed.
+	 * 
+	 * @param editor
+	 * @param name
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasPage(DiagramDocumentEditor editor, String name, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, Page.class, name, checkShortcut, shortcutRequired); 
 	}
 
 	/**
@@ -703,6 +687,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, InputForm.class, name, true, shortcutRequired);
 	}
+	
+	/**
+	 * @see #assertHasPage(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasPage(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, Page.class, name, true, shortcutRequired);
+	}
 
 	/**
 	 * @see #assertHasOperation(DiagramDocumentEditor, String, boolean, boolean)
@@ -766,6 +758,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasInputForm(
 			DiagramDocumentEditor editor, String name) {
 		return assertHasInputForm(editor, name, false, false);
+	}
+
+	/**
+	 * @see #assertHasPage(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasPage(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasPage(editor, name, false, false);
 	}
 
 	/**

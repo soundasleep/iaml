@@ -20,18 +20,9 @@ public class NewWizardsTest extends XmlTestCase {
 	
 	public static final String DIAGRAM_PREFIX = "org.openiaml.model.diagram.";
 	
-	public void testNewWizards() throws Exception {
-		
-		// iterate over all plugins
-		int checked = 0;
-		for (String plugin : PluginsTestCase.PLUGINS) {
-			if (plugin.startsWith(DIAGRAM_PREFIX)) {
-				checkNewWizard(plugin);
-				checked++;
-			}
-		}
-		assertNotEqual(0, checked);
-		
+	public void testNewWizards() throws Exception {		
+		// we only want the Wire editor to not show
+		checkNewWizard("org.openiaml.model.diagram.wire");
 	}
 
 	private void checkNewWizard(String plugin) throws Exception {

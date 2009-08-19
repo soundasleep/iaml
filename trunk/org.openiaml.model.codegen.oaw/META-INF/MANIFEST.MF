@@ -8,7 +8,8 @@ Require-Bundle: org.openarchitectureware.dependencies,
  org.openarchitectureware.adapter.emf.check,
  org.openiaml.iacleaner,
  ca.ecliptical.emf.xpath,
- org.openiaml.model.runtime
+ org.openiaml.model.runtime,
+ org.junit
 Export-Package: org.openiaml.model.codegen.oaw,
  org.openiaml.model.codegen.oaw.coverage
 Bundle-Vendor: www.openiaml.org

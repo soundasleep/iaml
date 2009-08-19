@@ -151,6 +151,16 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	}
 	
 	/**
+	 * Make a new ERROR IStatus with the given cause.
+	 * 
+	 * @param cause
+	 * @return
+	 */
+	protected IStatus errorStatus(Throwable cause) {
+		return new Status(IStatus.ERROR, PLUGIN_ID, cause.getMessage(), cause);
+	}
+	
+	/**
 	 * This is the method that actually does the work of this action.
 	 * Returns a Status; if the Status is not OK then the Status message
 	 * will be logged as an error, and execution will be cancelled.
@@ -178,6 +188,25 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 		this.selection = null;
 		if (selection instanceof IStructuredSelection) {
 			this.selection = ((IStructuredSelection) selection).toArray();
+		}
+	}
+	
+	/**
+	 * Log the given status to the plugin. Does nothing if 
+	 * status.isOK() is true.
+	 * 
+	 * @param status
+	 */
+	public void logStatus(IStatus status) {
+		if (status.isOK())
+			return;
+		
+		if (status.getSeverity() >= IStatus.ERROR) {
+			IamlDiagramEditorPlugin.getInstance().logError(
+					status.getMessage(), status.getException());
+		} else {
+			IamlDiagramEditorPlugin.getInstance().logError(
+					"[warning] " + status.getMessage(), status.getException());
 		}
 	}
 

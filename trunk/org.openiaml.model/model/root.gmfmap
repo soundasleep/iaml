@@ -229,6 +229,8 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainStore"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DomainStore ) and not self.oclIsTypeOf( users::UserStore )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -318,6 +320,28 @@
           href="root.gmftool#//@palette/@tools.0/@tools.9"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//InternetApplication/domainStores"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//users/UserStore"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( UserStore )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#UserStoreName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.0/@tools.10"/>
+      <diagramNode
+          href="iaml.gmfgraph#UserStore"/>
     </ownedChild>
   </nodes>
   <links>

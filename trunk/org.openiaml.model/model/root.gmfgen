@@ -660,7 +660,8 @@
           editPolicyClassName="DomainStoreOpenDiagramEditPolicy"
           diagramKind="Iaml_DomainStore"
           editorID="org.openiaml.model.model.diagram.domain_store.part.IamlDiagramEditorID"/>
-      <modelFacet>
+      <modelFacet
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.6">
         <metaClass
             href="iaml.genmodel#//model/DomainStore"/>
         <containmentMetaFeature
@@ -843,7 +844,7 @@
           diagramKind="Iaml_Condition"
           editorID="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"/>
       <modelFacet
-          modelElementSelector="//@expressionProviders/@providers.0/@expressions.6">
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.7">
         <metaClass
             href="iaml.genmodel#//model/CompositeCondition"/>
         <containmentMetaFeature
@@ -895,6 +896,61 @@
             parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
+    <topLevelNodes
+        visualID="2013"
+        editPartClassName="UserStoreEditPart"
+        itemSemanticEditPolicyClassName="UserStoreItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="UserStoreCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="UserStoreGraphicalNodeEditPolicy"
+        createCommandClassName="UserStoreCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="UserStoreEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          layoutType="FLOW_LAYOUT"
+          className="UserStoreFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class UserStoreFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureUserStoreNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public UserStoreFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(2);&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#xA;this.setFont(THIS_FONT);&#xA;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureUserStoreNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureUserStoreNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureUserStoreNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureUserStoreNameFigure() {&#xA;&#x9;&#x9;return fFigureUserStoreNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 240, 240, 220);&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font THIS_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Arial&quot;, 9, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedFont="true"
+            fixedBackground="true"/>
+      </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="UserStoreOpenDiagramEditPolicy"
+          diagramKind="Iaml_UserStore"
+          editorID="org.openiaml.model.model.diagram.user_store.part.IamlDiagramEditorID"/>
+      <modelFacet
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.8">
+        <metaClass
+            href="iaml.genmodel#//model/users/UserStore"/>
+        <containmentMetaFeature
+            href="iaml.genmodel#//model/InternetApplication/domainStores"/>
+        <childMetaFeature
+            href="iaml.genmodel#//model/InternetApplication/domainStores"/>
+      </modelFacet>
+      <labels
+          visualID="5023"
+          editPartClassName="UserStoreNameEditPart"
+          itemSemanticEditPolicyClassName="UserStoreNameItemSemanticEditPolicy"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureUserStoreNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
     <links
         visualID="4001"
         editPartClassName="SyncWireEditPart"
@@ -918,7 +974,7 @@
           editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
-          modelElementSelector="//@expressionProviders/@providers.0/@expressions.7">
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.9">
         <metaClass
             href="iaml.genmodel#//model/wires/SyncWire"/>
         <containmentMetaFeature
@@ -977,7 +1033,7 @@
           editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
-          modelElementSelector="//@expressionProviders/@providers.0/@expressions.8">
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.10">
         <metaClass
             href="iaml.genmodel#//model/wires/RunInstanceWire"/>
         <containmentMetaFeature
@@ -1036,7 +1092,7 @@
           editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
-          modelElementSelector="//@expressionProviders/@providers.0/@expressions.9">
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.11">
         <metaClass
             href="iaml.genmodel#//model/wires/ConditionWire"/>
         <containmentMetaFeature
@@ -1095,7 +1151,7 @@
           editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
-          modelElementSelector="//@expressionProviders/@providers.0/@expressions.10">
+          modelElementSelector="//@expressionProviders/@providers.0/@expressions.12">
         <metaClass
             href="iaml.genmodel#//model/wires/NavigateWire"/>
         <containmentMetaFeature
@@ -1205,6 +1261,13 @@
             largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeCondition.gif"
             smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeCondition.gif"
             genNodes="//@diagram/@topLevelNodes.11"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="UserStore"
+            description="Create new UserStore"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/UserStore.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/UserStore.gif"
+            genNodes="//@diagram/@topLevelNodes.12"/>
       </groups>
       <groups
           title="Visual Elements"
@@ -1332,6 +1395,9 @@
     <childReferences
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.11"/>
+    <childReferences
+        parent="//@diagram"
+        child="//@diagram/@topLevelNodes.12"/>
     <childReferences
         parent="//@diagram"
         child="//@diagram/@links.0"
@@ -2310,7 +2376,13 @@
           body="self.oclIsTypeOf( DynamicApplicationElementSet )"/>
       <expressions
           xsi:type="gmfgen:GenConstraint"
+          body="self.oclIsTypeOf( DomainStore ) and not self.oclIsTypeOf( users::UserStore )"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
           body="self.oclIsTypeOf( CompositeCondition )"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self.oclIsTypeOf( UserStore )"/>
       <expressions
           xsi:type="gmfgen:GenConstraint"
           body="self.oclIsTypeOf(SyncWire)"/>
@@ -2329,7 +2401,7 @@
       extensibleViaService="true">
     <implementations
         xsi:type="gmfgen:PredefinedParser"
-        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet //@diagram/@topLevelNodes.7/@labels.1/@modelFacet //@diagram/@topLevelNodes.8/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.1/@modelFacet //@diagram/@topLevelNodes.11/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet //@diagram/@links.3/@labels.0/@modelFacet"/>
+        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet //@diagram/@topLevelNodes.7/@labels.1/@modelFacet //@diagram/@topLevelNodes.8/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.1/@modelFacet //@diagram/@topLevelNodes.11/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet //@diagram/@links.3/@labels.0/@modelFacet"/>
     <implementations
         xsi:type="gmfgen:ExternalParser"
         uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.2/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.1/@modelFacet //@diagram/@topLevelNodes.4/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.2/@modelFacet //@diagram/@topLevelNodes.11/@labels.1/@modelFacet"/>

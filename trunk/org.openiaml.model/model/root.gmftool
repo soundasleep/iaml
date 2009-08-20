@@ -139,6 +139,19 @@
             path="icons/full/obj32/CompositeCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="UserStore"
+          description="Create new UserStore">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/UserStore.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/UserStore.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

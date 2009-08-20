@@ -237,11 +237,11 @@
       <viewProvider class="org.openiaml.model.model.diagram.providers.IamlViewProvider">
          <Priority name="Lowest"/>
          <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
-            <method name="getType()" value="iaml,iaml_visual,iaml_wire,iaml_domain_object,iaml_operation,iaml_element,iaml_domain_store,iaml_condition,iaml_domain_object_instance"/>
+            <method name="getType()" value="iaml,iaml_visual,iaml_wire,iaml_domain_object,iaml_operation,iaml_element,iaml_domain_store,iaml_condition,iaml_domain_object_instance,iaml_user_store"/>
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022"/>
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -286,7 +286,8 @@
          <object class="org.openiaml.model.model.diagram.edit.parts.SessionEditPart" id="Session_2010"/>
          <object class="org.openiaml.model.model.diagram.edit.parts.LoginHandlerEditPart" id="LoginHandler_2011"/>
          <object class="org.openiaml.model.model.diagram.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2012"/>
-         <context elements="InternetApplication_1000,EventTrigger_2001,SingleOperation_2002,CompositeOperation_2003,ChainedOperation_2004,DomainObject_2005,Page_2006,DynamicApplicationElementSet_2007,ApplicationElementProperty_2008,DomainStore_2009,Session_2010,LoginHandler_2011,CompositeCondition_2012"/>
+         <object class="org.openiaml.model.model.diagram.edit.parts.UserStoreEditPart" id="UserStore_2013"/>
+         <context elements="InternetApplication_1000,EventTrigger_2001,SingleOperation_2002,CompositeOperation_2003,ChainedOperation_2004,DomainObject_2005,Page_2006,DynamicApplicationElementSet_2007,ApplicationElementProperty_2008,DomainStore_2009,Session_2010,LoginHandler_2011,CompositeCondition_2012,UserStore_2013"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -309,7 +310,7 @@
       <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -447,6 +448,16 @@
             <param name="semanticHint" value="2012"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/users">
+         <metamodelType
+               id="org.openiaml.model.diagram.UserStore_2013"
+               name="%metatype.name.UserStore_2013"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="UserStore"
+               edithelper="org.openiaml.model.model.diagram.edit.helpers.UserStoreEditHelper">
+            <param name="semanticHint" value="2013"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.SyncWire_4001"
@@ -512,6 +523,7 @@
          <elementType ref="org.openiaml.model.diagram.Session_2010"/>
          <elementType ref="org.openiaml.model.diagram.LoginHandler_2011"/>
          <elementType ref="org.openiaml.model.diagram.CompositeCondition_2012"/>
+         <elementType ref="org.openiaml.model.diagram.UserStore_2013"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.ConditionWire_4003"/>

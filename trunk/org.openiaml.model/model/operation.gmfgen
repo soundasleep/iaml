@@ -619,6 +619,7 @@
         visualID="2011"
         editPartClassName="ApplicationElementProperty2EditPart"
         itemSemanticEditPolicyClassName="ApplicationElementProperty2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="ApplicationElementPropertyViewFactory"
         canonicalEditPolicyClassName="ApplicationElementProperty2CanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="ApplicationElementProperty2GraphicalNodeEditPolicy"
         createCommandClassName="ApplicationElementProperty2CreateCommand">
@@ -644,6 +645,7 @@
           visualID="5015"
           editPartClassName="ApplicationElementPropertyName2EditPart"
           itemSemanticEditPolicyClassName="ApplicationElementPropertyName2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -661,7 +663,8 @@
       <labels
           visualID="5016"
           editPartClassName="ApplicationElementPropertyDefaultValueEditPart"
-          itemSemanticEditPolicyClassName="ApplicationElementPropertyDefaultValueItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="ApplicationElementPropertyDefaultValueItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyDefaultValueViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -681,6 +684,7 @@
           visualID="5017"
           editPartClassName="WrappingLabel8EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel8ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -779,6 +783,7 @@
           visualID="5019"
           editPartClassName="WrappingLabel9EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel9ItemSemanticEditPolicy"
+          notationViewFactoryClassName="JoinNodeLabelViewFactory"
           readOnly="true"
           elementIcon="true">
         <diagramRunTimeClass
@@ -825,6 +830,7 @@
           visualID="5020"
           editPartClassName="StaticValueNameEditPart"
           itemSemanticEditPolicyClassName="StaticValueNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="StaticValueNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -842,7 +848,8 @@
       <labels
           visualID="5021"
           editPartClassName="StaticValueValueEditPart"
-          itemSemanticEditPolicyClassName="StaticValueValueItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="StaticValueValueItemSemanticEditPolicy"
+          notationViewFactoryClassName="StaticValueValueViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

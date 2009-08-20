@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="modelPalette">
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Model Elements"
+        description="Model Elements">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="EventTrigger"
+          description="Create new EventTrigger">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SingleOperation"
+          description="Create new SingleOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/SingleOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/SingleOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeOperation"
+          description="Create new CompositeOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ChainedOperation"
+          description="Create new ChainedOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ChainedOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ChainedOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ApplicationElementProperty"
+          description="Create new ApplicationElementProperty">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ApplicationElementProperty.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ApplicationElementProperty.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Role"
+          description="Create new Role">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Role.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Role.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Wires"
+        description="Wires"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ProvidesWire"
+          description="Create new ProvidesWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ProvidesWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ProvidesWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ExtendsWire"
+          description="Create new ExtendsWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ExtendsWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ExtendsWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>

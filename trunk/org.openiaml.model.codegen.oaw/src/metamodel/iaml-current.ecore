@@ -467,6 +467,36 @@
         <details key="added" value="0.3"/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExtendsWire" eSuperTypes="#//wires/SingleWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RequiresWire" eSuperTypes="#//wires/SingleWire #//WireEdgesSource #//WireEdgeDestination">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintWire" eSuperTypes="#//wires/SingleWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
+          eType="#//wires/ConstraintTypes"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ConstraintTypes">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4"/>
+      </eAnnotations>
+      <eLiterals name="AND"/>
+      <eLiterals name="OR" value="1"/>
+      <eLiterals name="XOR" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProvidesWire" eSuperTypes="#//wires/SingleWire">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
     <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource"/>
@@ -523,6 +553,11 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
           eType="#//components/LoginHandlerTypes"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="domain" nsURI="http://openiaml.org/model/domain" nsPrefix="iaml.domain">
     <eAnnotations source="http://openiaml.org/comment">
@@ -537,5 +572,14 @@
       <eLiterals name="PROPERTIES_FILE" value="1"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EmptyDomainPackageClass"/>
+  </eSubpackages>
+  <eSubpackages name="users" nsURI="http://openiaml.org/model/users" nsPrefix="iaml.users">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="added" value="0.4"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="UserStore" eSuperTypes="#//DomainStore"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//DomainObject"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UserInstance" eSuperTypes="#//DomainObjectInstance"/>
   </eSubpackages>
 </ecore:EPackage>

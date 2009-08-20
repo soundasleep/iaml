@@ -9,6 +9,7 @@ package org.openiaml.model.model.wires.impl;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
@@ -17,9 +18,14 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConstraintTypes;
+import org.openiaml.model.model.wires.ConstraintWire;
+import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ProvidesWire;
+import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -85,8 +91,42 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.SELECT_WIRE: return createSelectWire();
 			case WiresPackage.CONDITION_WIRE: return createConditionWire();
 			case WiresPackage.NEW_INSTANCE_WIRE: return createNewInstanceWire();
+			case WiresPackage.EXTENDS_WIRE: return createExtendsWire();
+			case WiresPackage.REQUIRES_WIRE: return createRequiresWire();
+			case WiresPackage.CONSTRAINT_WIRE: return createConstraintWire();
+			case WiresPackage.PROVIDES_WIRE: return createProvidesWire();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case WiresPackage.CONSTRAINT_TYPES:
+				return createConstraintTypesFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case WiresPackage.CONSTRAINT_TYPES:
+				return convertConstraintTypesToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -220,6 +260,70 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 		NewInstanceWireImpl newInstanceWire = new NewInstanceWireImpl();
 		generateID(newInstanceWire);
 		return newInstanceWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ExtendsWire createExtendsWire() {
+		ExtendsWireImpl extendsWire = new ExtendsWireImpl();
+		generateID(extendsWire);
+		return extendsWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public RequiresWire createRequiresWire() {
+		RequiresWireImpl requiresWire = new RequiresWireImpl();
+		generateID(requiresWire);
+		return requiresWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ConstraintWire createConstraintWire() {
+		ConstraintWireImpl constraintWire = new ConstraintWireImpl();
+		generateID(constraintWire);
+		return constraintWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ProvidesWire createProvidesWire() {
+		ProvidesWireImpl providesWire = new ProvidesWireImpl();
+		generateID(providesWire);
+		return providesWire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintTypes createConstraintTypesFromString(EDataType eDataType, String initialValue) {
+		ConstraintTypes result = ConstraintTypes.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertConstraintTypesToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

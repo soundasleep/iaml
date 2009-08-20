@@ -26,6 +26,7 @@ import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.scopes.ScopesFactory;
 import org.openiaml.model.model.scopes.ScopesPackage;
+import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.WiresFactory;
@@ -42,13 +43,13 @@ public class ModelTestCase extends TestCase {
 	private static Map<EPackage,EFactory> factoryMap;
 	
 	/**
-	 * Set up a map of all available packages to their
-	 * respective factories.
+	 * <p>Set up a map of all available packages to their
+	 * respective factories.</p>
 	 * 
-	 * By going over all elements and finding the factories later,
+	 * <p>By going over all elements and finding the factories later,
 	 * as opposed to iterating over existing factories, we will make
 	 * sure that any new packages will throw an assertion rather
-	 * than being silently ignored.
+	 * than being silently ignored.</p>
 	 */
 	public static Map<EPackage,EFactory> getFactoryMap() {
 		if (factoryMap == null) {
@@ -60,6 +61,7 @@ public class ModelTestCase extends TestCase {
 			factoryMap.put( WiresPackage.eINSTANCE , WiresFactory.eINSTANCE );
 			factoryMap.put( ComponentsPackage.eINSTANCE , ComponentsFactory.eINSTANCE );
 			factoryMap.put( DomainPackage.eINSTANCE , DomainFactory.eINSTANCE );
+			factoryMap.put( UsersPackage.eINSTANCE , DomainFactory.eINSTANCE );
 		}
 		return factoryMap;
 	}

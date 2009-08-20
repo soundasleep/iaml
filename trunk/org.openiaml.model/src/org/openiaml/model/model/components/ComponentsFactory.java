@@ -35,6 +35,15 @@ public interface ComponentsFactory extends EFactory {
 	LoginHandler createLoginHandler();
 
 	/**
+	 * Returns a new object of class '<em>Access Control Handler</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Access Control Handler</em>'.
+	 * @generated
+	 */
+	AccessControlHandler createAccessControlHandler();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

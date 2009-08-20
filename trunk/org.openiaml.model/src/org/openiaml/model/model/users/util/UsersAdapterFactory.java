@@ -4,44 +4,48 @@
  *
  * $Id$
  */
-package org.openiaml.model.model.components.util;
+package org.openiaml.model.model.users.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
+import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.components.AccessControlHandler;
-import org.openiaml.model.model.components.ComponentsPackage;
-import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.users.Permission;
+import org.openiaml.model.model.users.Role;
+import org.openiaml.model.model.users.UserInstance;
+import org.openiaml.model.model.users.UserStore;
+import org.openiaml.model.model.users.UsersPackage;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.openiaml.model.model.components.ComponentsPackage
+ * @see org.openiaml.model.model.users.UsersPackage
  * @generated
  */
-public class ComponentsAdapterFactory extends AdapterFactoryImpl {
+public class UsersAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static ComponentsPackage modelPackage;
+	protected static UsersPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -49,9 +53,9 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentsAdapterFactory() {
+	public UsersAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = ComponentsPackage.eINSTANCE;
+			modelPackage = UsersPackage.eINSTANCE;
 		}
 	}
 
@@ -80,19 +84,31 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ComponentsSwitch<Adapter> modelSwitch =
-		new ComponentsSwitch<Adapter>() {
+	protected UsersSwitch<Adapter> modelSwitch =
+		new UsersSwitch<Adapter>() {
 			@Override
-			public Adapter caseLoginHandler(LoginHandler object) {
-				return createLoginHandlerAdapter();
+			public Adapter caseUserStore(UserStore object) {
+				return createUserStoreAdapter();
 			}
 			@Override
-			public Adapter caseAccessControlHandler(AccessControlHandler object) {
-				return createAccessControlHandlerAdapter();
+			public Adapter caseRole(Role object) {
+				return createRoleAdapter();
+			}
+			@Override
+			public Adapter casePermission(Permission object) {
+				return createPermissionAdapter();
+			}
+			@Override
+			public Adapter caseUserInstance(UserInstance object) {
+				return createUserInstanceAdapter();
 			}
 			@Override
 			public Adapter caseContainsOperations(ContainsOperations object) {
 				return createContainsOperationsAdapter();
+			}
+			@Override
+			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
+				return createContainsEventTriggersAdapter();
 			}
 			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
@@ -103,12 +119,20 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
-				return createContainsEventTriggersAdapter();
-			}
-			@Override
 			public Adapter caseContainsWires(ContainsWires object) {
 				return createContainsWiresAdapter();
+			}
+			@Override
+			public Adapter caseContainsConditions(ContainsConditions object) {
+				return createContainsConditionsAdapter();
+			}
+			@Override
+			public Adapter caseGeneratesElements(GeneratesElements object) {
+				return createGeneratesElementsAdapter();
+			}
+			@Override
+			public Adapter caseDomainStore(DomainStore object) {
+				return createDomainStoreAdapter();
 			}
 			@Override
 			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
@@ -123,20 +147,16 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 				return createWireEdgeDestinationAdapter();
 			}
 			@Override
-			public Adapter caseGeneratesElements(GeneratesElements object) {
-				return createGeneratesElementsAdapter();
-			}
-			@Override
-			public Adapter caseContainsConditions(ContainsConditions object) {
-				return createContainsConditionsAdapter();
-			}
-			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {
 				return createApplicationElementAdapter();
 			}
 			@Override
-			public Adapter caseApplicationElementContainer(ApplicationElementContainer object) {
-				return createApplicationElementContainerAdapter();
+			public Adapter caseDomainObject(DomainObject object) {
+				return createDomainObjectAdapter();
+			}
+			@Override
+			public Adapter caseDomainObjectInstance(DomainObjectInstance object) {
+				return createDomainObjectInstanceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -159,30 +179,58 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.components.LoginHandler <em>Login Handler</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.users.UserStore <em>User Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.components.LoginHandler
+	 * @see org.openiaml.model.model.users.UserStore
 	 * @generated
 	 */
-	public Adapter createLoginHandlerAdapter() {
+	public Adapter createUserStoreAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.components.AccessControlHandler <em>Access Control Handler</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.users.Role <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.components.AccessControlHandler
+	 * @see org.openiaml.model.model.users.Role
 	 * @generated
 	 */
-	public Adapter createAccessControlHandlerAdapter() {
+	public Adapter createRoleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.users.Permission <em>Permission</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.users.Permission
+	 * @generated
+	 */
+	public Adapter createPermissionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.users.UserInstance <em>User Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.users.UserInstance
+	 * @generated
+	 */
+	public Adapter createUserInstanceAdapter() {
 		return null;
 	}
 
@@ -197,6 +245,20 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsOperationsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsEventTriggers <em>Contains Event Triggers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsEventTriggers
+	 * @generated
+	 */
+	public Adapter createContainsEventTriggersAdapter() {
 		return null;
 	}
 
@@ -229,20 +291,6 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsEventTriggers <em>Contains Event Triggers</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ContainsEventTriggers
-	 * @generated
-	 */
-	public Adapter createContainsEventTriggersAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsWires <em>Contains Wires</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -253,6 +301,48 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsWiresAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsConditions <em>Contains Conditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsConditions
+	 * @generated
+	 */
+	public Adapter createContainsConditionsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.GeneratesElements <em>Generates Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.GeneratesElements
+	 * @generated
+	 */
+	public Adapter createGeneratesElementsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DomainStore <em>Domain Store</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DomainStore
+	 * @generated
+	 */
+	public Adapter createDomainStoreAdapter() {
 		return null;
 	}
 
@@ -299,34 +389,6 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.GeneratesElements <em>Generates Elements</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.GeneratesElements
-	 * @generated
-	 */
-	public Adapter createGeneratesElementsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsConditions <em>Contains Conditions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ContainsConditions
-	 * @generated
-	 */
-	public Adapter createContainsConditionsAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ApplicationElement <em>Application Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -341,16 +403,30 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ApplicationElementContainer <em>Application Element Container</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DomainObject <em>Domain Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ApplicationElementContainer
+	 * @see org.openiaml.model.model.DomainObject
 	 * @generated
 	 */
-	public Adapter createApplicationElementContainerAdapter() {
+	public Adapter createDomainObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DomainObjectInstance <em>Domain Object Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.DomainObjectInstance
+	 * @generated
+	 */
+	public Adapter createDomainObjectInstanceAdapter() {
 		return null;
 	}
 
@@ -366,4 +442,4 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //ComponentsAdapterFactory
+} //UsersAdapterFactory

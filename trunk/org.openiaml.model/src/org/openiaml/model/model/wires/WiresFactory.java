@@ -134,6 +134,42 @@ public interface WiresFactory extends EFactory {
 	NewInstanceWire createNewInstanceWire();
 
 	/**
+	 * Returns a new object of class '<em>Extends Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Extends Wire</em>'.
+	 * @generated
+	 */
+	ExtendsWire createExtendsWire();
+
+	/**
+	 * Returns a new object of class '<em>Requires Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Requires Wire</em>'.
+	 * @generated
+	 */
+	RequiresWire createRequiresWire();
+
+	/**
+	 * Returns a new object of class '<em>Constraint Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constraint Wire</em>'.
+	 * @generated
+	 */
+	ConstraintWire createConstraintWire();
+
+	/**
+	 * Returns a new object of class '<em>Provides Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Provides Wire</em>'.
+	 * @generated
+	 */
+	ProvidesWire createProvidesWire();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

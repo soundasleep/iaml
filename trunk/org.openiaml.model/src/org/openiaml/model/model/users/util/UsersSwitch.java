@@ -4,27 +4,31 @@
  *
  * $Id$
  */
-package org.openiaml.model.model.components.util;
+package org.openiaml.model.model.users.util;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
+import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.components.AccessControlHandler;
-import org.openiaml.model.model.components.ComponentsPackage;
-import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.users.Permission;
+import org.openiaml.model.model.users.Role;
+import org.openiaml.model.model.users.UserInstance;
+import org.openiaml.model.model.users.UserStore;
+import org.openiaml.model.model.users.UsersPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,17 +40,17 @@ import org.openiaml.model.model.components.LoginHandler;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.openiaml.model.model.components.ComponentsPackage
+ * @see org.openiaml.model.model.users.UsersPackage
  * @generated
  */
-public class ComponentsSwitch<T> {
+public class UsersSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static ComponentsPackage modelPackage;
+	protected static UsersPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -54,9 +58,9 @@ public class ComponentsSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentsSwitch() {
+	public UsersSwitch() {
 		if (modelPackage == null) {
-			modelPackage = ComponentsPackage.eINSTANCE;
+			modelPackage = UsersPackage.eINSTANCE;
 		}
 	}
 
@@ -100,39 +104,65 @@ public class ComponentsSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ComponentsPackage.LOGIN_HANDLER: {
-				LoginHandler loginHandler = (LoginHandler)theEObject;
-				T result = caseLoginHandler(loginHandler);
-				if (result == null) result = caseApplicationElementContainer(loginHandler);
-				if (result == null) result = caseApplicationElement(loginHandler);
-				if (result == null) result = caseContainsOperations(loginHandler);
-				if (result == null) result = caseNamedElement(loginHandler);
-				if (result == null) result = caseContainsEventTriggers(loginHandler);
-				if (result == null) result = caseWireEdgesSource(loginHandler);
-				if (result == null) result = caseWireEdgeDestination(loginHandler);
-				if (result == null) result = caseGeneratesElements(loginHandler);
-				if (result == null) result = caseContainsConditions(loginHandler);
-				if (result == null) result = caseGeneratedElement(loginHandler);
-				if (result == null) result = caseShouldntContainWires(loginHandler);
-				if (result == null) result = caseContainsWires(loginHandler);
+			case UsersPackage.USER_STORE: {
+				UserStore userStore = (UserStore)theEObject;
+				T result = caseUserStore(userStore);
+				if (result == null) result = caseDomainStore(userStore);
+				if (result == null) result = caseContainsOperations(userStore);
+				if (result == null) result = caseContainsEventTriggers(userStore);
+				if (result == null) result = caseNamedElement(userStore);
+				if (result == null) result = caseContainsWires(userStore);
+				if (result == null) result = caseContainsConditions(userStore);
+				if (result == null) result = caseGeneratesElements(userStore);
+				if (result == null) result = caseGeneratedElement(userStore);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ComponentsPackage.ACCESS_CONTROL_HANDLER: {
-				AccessControlHandler accessControlHandler = (AccessControlHandler)theEObject;
-				T result = caseAccessControlHandler(accessControlHandler);
-				if (result == null) result = caseApplicationElementContainer(accessControlHandler);
-				if (result == null) result = caseApplicationElement(accessControlHandler);
-				if (result == null) result = caseContainsOperations(accessControlHandler);
-				if (result == null) result = caseNamedElement(accessControlHandler);
-				if (result == null) result = caseContainsEventTriggers(accessControlHandler);
-				if (result == null) result = caseWireEdgesSource(accessControlHandler);
-				if (result == null) result = caseWireEdgeDestination(accessControlHandler);
-				if (result == null) result = caseGeneratesElements(accessControlHandler);
-				if (result == null) result = caseContainsConditions(accessControlHandler);
-				if (result == null) result = caseGeneratedElement(accessControlHandler);
-				if (result == null) result = caseShouldntContainWires(accessControlHandler);
-				if (result == null) result = caseContainsWires(accessControlHandler);
+			case UsersPackage.ROLE: {
+				Role role = (Role)theEObject;
+				T result = caseRole(role);
+				if (result == null) result = caseDomainObject(role);
+				if (result == null) result = caseApplicationElement(role);
+				if (result == null) result = caseContainsOperations(role);
+				if (result == null) result = caseNamedElement(role);
+				if (result == null) result = caseContainsEventTriggers(role);
+				if (result == null) result = caseWireEdgesSource(role);
+				if (result == null) result = caseWireEdgeDestination(role);
+				if (result == null) result = caseGeneratesElements(role);
+				if (result == null) result = caseContainsConditions(role);
+				if (result == null) result = caseGeneratedElement(role);
+				if (result == null) result = caseShouldntContainWires(role);
+				if (result == null) result = caseContainsWires(role);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UsersPackage.PERMISSION: {
+				Permission permission = (Permission)theEObject;
+				T result = casePermission(permission);
+				if (result == null) result = caseNamedElement(permission);
+				if (result == null) result = caseWireEdgesSource(permission);
+				if (result == null) result = caseWireEdgeDestination(permission);
+				if (result == null) result = caseGeneratedElement(permission);
+				if (result == null) result = caseShouldntContainWires(permission);
+				if (result == null) result = caseContainsWires(permission);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UsersPackage.USER_INSTANCE: {
+				UserInstance userInstance = (UserInstance)theEObject;
+				T result = caseUserInstance(userInstance);
+				if (result == null) result = caseDomainObjectInstance(userInstance);
+				if (result == null) result = caseApplicationElement(userInstance);
+				if (result == null) result = caseContainsOperations(userInstance);
+				if (result == null) result = caseNamedElement(userInstance);
+				if (result == null) result = caseContainsEventTriggers(userInstance);
+				if (result == null) result = caseWireEdgesSource(userInstance);
+				if (result == null) result = caseWireEdgeDestination(userInstance);
+				if (result == null) result = caseGeneratesElements(userInstance);
+				if (result == null) result = caseContainsConditions(userInstance);
+				if (result == null) result = caseGeneratedElement(userInstance);
+				if (result == null) result = caseShouldntContainWires(userInstance);
+				if (result == null) result = caseContainsWires(userInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -141,32 +171,62 @@ public class ComponentsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Login Handler</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>User Store</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Login Handler</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>User Store</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLoginHandler(LoginHandler object) {
+	public T caseUserStore(UserStore object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Access Control Handler</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Role</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Access Control Handler</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Role</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAccessControlHandler(AccessControlHandler object) {
+	public T caseRole(Role object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Permission</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Permission</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePermission(Permission object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>User Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>User Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUserInstance(UserInstance object) {
 		return null;
 	}
 
@@ -182,6 +242,21 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsOperations(ContainsOperations object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsEventTriggers(ContainsEventTriggers object) {
 		return null;
 	}
 
@@ -216,21 +291,6 @@ public class ComponentsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsEventTriggers(ContainsEventTriggers object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -242,6 +302,51 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsWires(ContainsWires object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsConditions(ContainsConditions object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGeneratesElements(GeneratesElements object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Store</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Store</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainStore(DomainStore object) {
 		return null;
 	}
 
@@ -291,36 +396,6 @@ public class ComponentsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGeneratesElements(GeneratesElements object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsConditions(ContainsConditions object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Application Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -336,17 +411,32 @@ public class ComponentsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Application Element Container</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Object</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Application Element Container</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Object</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseApplicationElementContainer(ApplicationElementContainer object) {
+	public T caseDomainObject(DomainObject object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Object Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Object Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainObjectInstance(DomainObjectInstance object) {
 		return null;
 	}
 
@@ -365,4 +455,4 @@ public class ComponentsSwitch<T> {
 		return null;
 	}
 
-} //ComponentsSwitch
+} //UsersSwitch

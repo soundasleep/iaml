@@ -169,6 +169,11 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Wires" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//wires">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//wires/ConstraintTypes">
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//wires/ConstraintTypes/AND"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//wires/ConstraintTypes/OR"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//wires/ConstraintTypes/XOR"/>
+      </genEnums>
       <genClasses image="false" ecoreClass="iaml.ecore#//wires/SingleWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/CompositeWire">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/children"/>
@@ -195,6 +200,12 @@
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ConditionWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/NewInstanceWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/ExtendsWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/RequiresWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/ConstraintWire">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ConstraintWire/type"/>
+      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//wires/ProvidesWire"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Operations" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//operations">
@@ -227,6 +238,7 @@
       <genClasses image="false" ecoreClass="iaml.ecore#//components/LoginHandler">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//components/LoginHandler/type"/>
       </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//components/AccessControlHandler"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Domain" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//domain">
@@ -236,6 +248,13 @@
       </genEnums>
       <genDataTypes ecoreDataType="iaml.ecore#//domain/FileReference"/>
       <genClasses ecoreClass="iaml.ecore#//domain/EmptyDomainPackageClass"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Users" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
+        ecorePackage="iaml.ecore#//users">
+      <genClasses ecoreClass="iaml.ecore#//users/UserStore"/>
+      <genClasses ecoreClass="iaml.ecore#//users/Role"/>
+      <genClasses ecoreClass="iaml.ecore#//users/Permission"/>
+      <genClasses ecoreClass="iaml.ecore#//users/UserInstance"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

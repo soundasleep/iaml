@@ -356,7 +356,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="2009"
+        visualID="2007"
         editPartClassName="ApplicationElementPropertyEditPart"
         itemSemanticEditPolicyClassName="ApplicationElementPropertyItemSemanticEditPolicy"
         canonicalEditPolicyClassName="ApplicationElementPropertyCanonicalEditPolicy"
@@ -381,7 +381,7 @@
             href="iaml.genmodel#//model/ApplicationElementProperty"/>
       </modelFacet>
       <labels
-          visualID="5012"
+          visualID="5008"
           editPartClassName="ApplicationElementPropertyNameEditPart"
           itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
           elementIcon="true">
@@ -399,7 +399,7 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="5013"
+          visualID="5009"
           editPartClassName="ApplicationElementPropertyDefaultValueEditPart"
           itemSemanticEditPolicyClassName="ApplicationElementPropertyDefaultValueItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -419,7 +419,7 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="5014"
+          visualID="5010"
           editPartClassName="WrappingLabel4EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel4ItemSemanticEditPolicy"
           readOnly="true">

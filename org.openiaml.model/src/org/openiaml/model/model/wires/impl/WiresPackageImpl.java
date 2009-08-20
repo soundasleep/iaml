@@ -8,6 +8,7 @@ package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -21,14 +22,21 @@ import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
+import org.openiaml.model.model.users.UsersPackage;
+import org.openiaml.model.model.users.impl.UsersPackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
 import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConstraintTypes;
+import org.openiaml.model.model.wires.ConstraintWire;
+import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ProvidesWire;
+import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -130,6 +138,41 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	private EClass newInstanceWireEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass extendsWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass requiresWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constraintWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass providesWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum constraintTypesEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -182,6 +225,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) : ScopesPackage.eINSTANCE);
 		ComponentsPackageImpl theComponentsPackage = (ComponentsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) instanceof ComponentsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) : ComponentsPackage.eINSTANCE);
 		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) : DomainPackage.eINSTANCE);
+		UsersPackageImpl theUsersPackage = (UsersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI) instanceof UsersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI) : UsersPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theWiresPackage.createPackageContents();
@@ -191,6 +235,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		theScopesPackage.createPackageContents();
 		theComponentsPackage.createPackageContents();
 		theDomainPackage.createPackageContents();
+		theUsersPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theWiresPackage.initializePackageContents();
@@ -200,6 +245,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		theScopesPackage.initializePackageContents();
 		theComponentsPackage.initializePackageContents();
 		theDomainPackage.initializePackageContents();
+		theUsersPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theWiresPackage.freeze();
@@ -413,6 +459,60 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExtendsWire() {
+		return extendsWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRequiresWire() {
+		return requiresWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstraintWire() {
+		return constraintWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraintWire_Type() {
+		return (EAttribute)constraintWireEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getProvidesWire() {
+		return providesWireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getConstraintTypes() {
+		return constraintTypesEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public WiresFactory getWiresFactory() {
 		return (WiresFactory)getEFactoryInstance();
 	}
@@ -469,6 +569,18 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		conditionWireEClass = createEClass(CONDITION_WIRE);
 
 		newInstanceWireEClass = createEClass(NEW_INSTANCE_WIRE);
+
+		extendsWireEClass = createEClass(EXTENDS_WIRE);
+
+		requiresWireEClass = createEClass(REQUIRES_WIRE);
+
+		constraintWireEClass = createEClass(CONSTRAINT_WIRE);
+		createEAttribute(constraintWireEClass, CONSTRAINT_WIRE__TYPE);
+
+		providesWireEClass = createEClass(PROVIDES_WIRE);
+
+		// Create enums
+		constraintTypesEEnum = createEEnum(CONSTRAINT_TYPES);
 	}
 
 	/**
@@ -524,6 +636,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		conditionWireEClass.getESuperTypes().add(this.getCompositeWire());
 		conditionWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		newInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
+		extendsWireEClass.getESuperTypes().add(this.getSingleWire());
+		requiresWireEClass.getESuperTypes().add(this.getSingleWire());
+		requiresWireEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
+		requiresWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		constraintWireEClass.getESuperTypes().add(this.getSingleWire());
+		providesWireEClass.getESuperTypes().add(this.getSingleWire());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(singleWireEClass, SingleWire.class, "SingleWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -559,6 +677,21 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEClass(conditionWireEClass, ConditionWire.class, "ConditionWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(newInstanceWireEClass, NewInstanceWire.class, "NewInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(extendsWireEClass, ExtendsWire.class, "ExtendsWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(requiresWireEClass, RequiresWire.class, "RequiresWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(constraintWireEClass, ConstraintWire.class, "ConstraintWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConstraintWire_Type(), this.getConstraintTypes(), "type", null, 1, 1, ConstraintWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(providesWireEClass, ProvidesWire.class, "ProvidesWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Initialize enums and add enum literals
+		initEEnum(constraintTypesEEnum, ConstraintTypes.class, "ConstraintTypes");
+		addEEnumLiteral(constraintTypesEEnum, ConstraintTypes.AND);
+		addEEnumLiteral(constraintTypesEEnum, ConstraintTypes.OR);
+		addEEnumLiteral(constraintTypesEEnum, ConstraintTypes.XOR);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -650,6 +783,36 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.3"
+		   });		
+		addAnnotation
+		  (extendsWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4"
+		   });		
+		addAnnotation
+		  (requiresWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4"
+		   });		
+		addAnnotation
+		  (constraintWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4"
+		   });		
+		addAnnotation
+		  (constraintTypesEEnum, 
+		   source, 
+		   new String[] {
+			 "added", "0.4"
+		   });		
+		addAnnotation
+		  (providesWireEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4"
 		   });
 	}
 

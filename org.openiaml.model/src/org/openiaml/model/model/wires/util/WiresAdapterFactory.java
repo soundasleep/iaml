@@ -15,14 +15,20 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConstraintWire;
+import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ProvidesWire;
+import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -136,6 +142,22 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createNewInstanceWireAdapter();
 			}
 			@Override
+			public Adapter caseExtendsWire(ExtendsWire object) {
+				return createExtendsWireAdapter();
+			}
+			@Override
+			public Adapter caseRequiresWire(RequiresWire object) {
+				return createRequiresWireAdapter();
+			}
+			@Override
+			public Adapter caseConstraintWire(ConstraintWire object) {
+				return createConstraintWireAdapter();
+			}
+			@Override
+			public Adapter caseProvidesWire(ProvidesWire object) {
+				return createProvidesWireAdapter();
+			}
+			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
 				return createGeneratedElementAdapter();
 			}
@@ -162,6 +184,14 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
 				return createWireEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
+				return createShouldntContainWiresAdapter();
+			}
+			@Override
+			public Adapter caseWireEdgesSource(WireEdgesSource object) {
+				return createWireEdgesSourceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -352,6 +382,62 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ExtendsWire <em>Extends Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ExtendsWire
+	 * @generated
+	 */
+	public Adapter createExtendsWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.RequiresWire <em>Requires Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.RequiresWire
+	 * @generated
+	 */
+	public Adapter createRequiresWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ConstraintWire <em>Constraint Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ConstraintWire
+	 * @generated
+	 */
+	public Adapter createConstraintWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ProvidesWire <em>Provides Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ProvidesWire
+	 * @generated
+	 */
+	public Adapter createProvidesWireAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.GeneratedElement <em>Generated Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -446,6 +532,34 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWireEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ShouldntContainWires <em>Shouldnt Contain Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ShouldntContainWires
+	 * @generated
+	 */
+	public Adapter createShouldntContainWiresAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgesSource <em>Wire Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.WireEdgesSource
+	 * @generated
+	 */
+	public Adapter createWireEdgesSourceAdapter() {
 		return null;
 	}
 

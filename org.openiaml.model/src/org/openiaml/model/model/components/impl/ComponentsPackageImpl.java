@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
@@ -23,6 +24,8 @@ import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
+import org.openiaml.model.model.users.UsersPackage;
+import org.openiaml.model.model.users.impl.UsersPackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -41,6 +44,13 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 * @generated
 	 */
 	private EClass loginHandlerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass accessControlHandlerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,6 +112,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI) : ScopesPackage.eINSTANCE);
 		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) : DomainPackage.eINSTANCE);
+		UsersPackageImpl theUsersPackage = (UsersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI) instanceof UsersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI) : UsersPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theComponentsPackage.createPackageContents();
@@ -111,6 +122,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		theOperationsPackage.createPackageContents();
 		theScopesPackage.createPackageContents();
 		theDomainPackage.createPackageContents();
+		theUsersPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theComponentsPackage.initializePackageContents();
@@ -120,6 +132,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		theOperationsPackage.initializePackageContents();
 		theScopesPackage.initializePackageContents();
 		theDomainPackage.initializePackageContents();
+		theUsersPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theComponentsPackage.freeze();
@@ -146,6 +159,15 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 */
 	public EAttribute getLoginHandler_Type() {
 		return (EAttribute)loginHandlerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAccessControlHandler() {
+		return accessControlHandlerEClass;
 	}
 
 	/**
@@ -188,6 +210,8 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		loginHandlerEClass = createEClass(LOGIN_HANDLER);
 		createEAttribute(loginHandlerEClass, LOGIN_HANDLER__TYPE);
 
+		accessControlHandlerEClass = createEClass(ACCESS_CONTROL_HANDLER);
+
 		// Create enums
 		loginHandlerTypesEEnum = createEEnum(LOGIN_HANDLER_TYPES);
 	}
@@ -225,10 +249,14 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		// Add supertypes to classes
 		loginHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElementContainer());
 		loginHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElementContainer());
+		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(loginHandlerEClass, LoginHandler.class, "LoginHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLoginHandler_Type(), this.getLoginHandlerTypes(), "type", null, 1, 1, LoginHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(accessControlHandlerEClass, AccessControlHandler.class, "AccessControlHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(loginHandlerTypesEEnum, LoginHandlerTypes.class, "LoginHandlerTypes");
@@ -253,6 +281,12 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		   source, 
 		   new String[] {
 			 "added", "0.2"
+		   });		
+		addAnnotation
+		  (accessControlHandlerEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4"
 		   });
 	}
 

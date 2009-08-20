@@ -21,6 +21,8 @@ import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
 import org.openiaml.model.model.scopes.ScopesFactory;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.users.UsersPackage;
+import org.openiaml.model.model.users.impl.UsersPackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -93,6 +95,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		ComponentsPackageImpl theComponentsPackage = (ComponentsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) instanceof ComponentsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI) : ComponentsPackage.eINSTANCE);
 		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) : DomainPackage.eINSTANCE);
+		UsersPackageImpl theUsersPackage = (UsersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI) instanceof UsersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI) : UsersPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theScopesPackage.createPackageContents();
@@ -102,6 +105,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		theOperationsPackage.createPackageContents();
 		theComponentsPackage.createPackageContents();
 		theDomainPackage.createPackageContents();
+		theUsersPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theScopesPackage.initializePackageContents();
@@ -111,6 +115,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		theOperationsPackage.initializePackageContents();
 		theComponentsPackage.initializePackageContents();
 		theDomainPackage.initializePackageContents();
+		theUsersPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theScopesPackage.freeze();

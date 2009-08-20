@@ -689,8 +689,8 @@
             xsi:type="gmfgen:ToolEntry"
             title="DecisionOperation"
             description="Create new DecisionOperation"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeOperation.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeOperation.gif"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DecisionOperation.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DecisionOperation.gif"
             genNodes="//@diagram/@topLevelNodes.6"/>
       </groups>
       <groups

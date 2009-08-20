@@ -1287,6 +1287,7 @@
         visualID="2019"
         editPartClassName="QueryParameterEditPart"
         itemSemanticEditPolicyClassName="QueryParameterItemSemanticEditPolicy"
+        notationViewFactoryClassName="QueryParameterViewFactory"
         canonicalEditPolicyClassName="QueryParameterCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="QueryParameterGraphicalNodeEditPolicy"
         createCommandClassName="QueryParameterCreateCommand">
@@ -1316,6 +1317,7 @@
           visualID="5034"
           editPartClassName="QueryParameterNameEditPart"
           itemSemanticEditPolicyClassName="QueryParameterNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="QueryParameterNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>

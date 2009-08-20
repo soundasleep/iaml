@@ -900,6 +900,7 @@
         visualID="2013"
         editPartClassName="UserStoreEditPart"
         itemSemanticEditPolicyClassName="UserStoreItemSemanticEditPolicy"
+        notationViewFactoryClassName="UserStoreViewFactory"
         canonicalEditPolicyClassName="UserStoreCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="UserStoreGraphicalNodeEditPolicy"
         createCommandClassName="UserStoreCreateCommand">
@@ -936,6 +937,7 @@
           visualID="5023"
           editPartClassName="UserStoreNameEditPart"
           itemSemanticEditPolicyClassName="UserStoreNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="UserStoreNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>

@@ -1026,6 +1026,164 @@
       <accessors
           figure="//@figures.0/@descriptors.47/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="UserStoreFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="UserStoreFigure"
+          lineWidth="2">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="240"
+            green="240"
+            blue="220"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="UserStoreNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.48/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="RoleFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="RoleFigure"
+          lineWidth="2">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="RoleNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.49/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="PermissionFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ApplicationElementPropertyFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="208"
+            green="185"
+            blue="243"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="ITALIC"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PermissionNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.50/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="UserInstanceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="UserInstanceFigure"
+          lineWidth="2"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="UserInstanceNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="UserInstanceAutosaveFigure"
+            text="autosave: true"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.51/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.51/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="ExtendsWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ExtendsWireFigure"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ExtendsWireNameFigure"
+            text="extends"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.52/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="RequiresWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="RequiresWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="RequiresWireNameFigure"
+            text="requires"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.53/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ConstraintWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ConstraintWireFigure"
+          lineKind="LINE_DASH">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ConstraintWireNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.54/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="ProvidesWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="ProvidesWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ProvidesWireNameFigure"
+            text="provides"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.55/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1126,6 +1284,18 @@
   <nodes
       name="QueryParameter"
       figure="QueryParameterFigure"/>
+  <nodes
+      name="UserStore"
+      figure="UserStoreFigure"/>
+  <nodes
+      name="Role"
+      figure="RoleFigure"/>
+  <nodes
+      name="Permission"
+      figure="PermissionFigure"/>
+  <nodes
+      name="UserInstance"
+      figure="UserInstanceFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1171,6 +1341,18 @@
   <connections
       name="NewInstanceWire"
       figure="NewInstanceWireFigure"/>
+  <connections
+      name="ExtendsWire"
+      figure="ExtendsWireFigure"/>
+  <connections
+      name="RequiresWire"
+      figure="RequiresWireFigure"/>
+  <connections
+      name="ConstraintWire"
+      figure="ConstraintWireFigure"/>
+  <connections
+      name="ProvidesWire"
+      figure="ProvidesWireFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -1443,4 +1625,41 @@
       name="QueryParameterName"
       figure="QueryParameterFigure"
       accessor="//@figures.0/@descriptors.47/@accessors.0"/>
+  <labels
+      name="UserStoreName"
+      figure="UserStoreFigure"
+      accessor="//@figures.0/@descriptors.48/@accessors.0"/>
+  <labels
+      name="RoleName"
+      figure="RoleFigure"
+      accessor="//@figures.0/@descriptors.49/@accessors.0"/>
+  <labels
+      name="PermissionName"
+      figure="PermissionFigure"
+      accessor="//@figures.0/@descriptors.50/@accessors.0"/>
+  <labels
+      name="UserInstanceName"
+      figure="UserInstanceFigure"
+      accessor="//@figures.0/@descriptors.51/@accessors.0"/>
+  <labels
+      name="UserInstanceAutosave"
+      figure="UserInstanceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.51/@accessors.1"/>
+  <labels
+      name="ExtendsWireName"
+      figure="ExtendsWireFigure"
+      accessor="//@figures.0/@descriptors.52/@accessors.0"/>
+  <labels
+      name="RequiresWireName"
+      figure="RequiresWireFigure"
+      accessor="//@figures.0/@descriptors.53/@accessors.0"/>
+  <labels
+      name="ConstraintWireName"
+      figure="ConstraintWireFigure"
+      accessor="//@figures.0/@descriptors.54/@accessors.0"/>
+  <labels
+      name="ProvidesWireName"
+      figure="ProvidesWireFigure"
+      accessor="//@figures.0/@descriptors.55/@accessors.0"/>
 </gmfgraph:Canvas>

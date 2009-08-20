@@ -38,6 +38,7 @@ public class PluginsTestCase extends XmlTestCase {
 		GMF_ROOT + "element.gmfgen",
 		GMF_ROOT + "operation.gmfgen",
 		GMF_ROOT + "root.gmfgen",
+		GMF_ROOT + "user_store.gmfgen",
 		GMF_ROOT + "visual.gmfgen",
 		GMF_ROOT + "wire.gmfgen",
 	};
@@ -58,6 +59,7 @@ public class PluginsTestCase extends XmlTestCase {
 		"org.openiaml.model.diagram.domain_store",
 		"org.openiaml.model.diagram.element",
 		"org.openiaml.model.diagram.operation",
+		"org.openiaml.model.diagram.user_store",
 		"org.openiaml.model.diagram.visual",
 		"org.openiaml.model.diagram.wire",
 		"org.openiaml.model.drools",

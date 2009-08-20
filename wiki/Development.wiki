@@ -1,71 +1,121 @@
 #summary How to set up a development environment.
 #labels Featured,Development,Phase-Implementation
 
-=Introduction=
-IAML is primarly developed in the Eclipse environment, and heavily based on many of its sub projects. It is based on Eclipse 3.5/GMF 2.2.
 
-*Note:* The instructions below refer to Eclipse 3.3/GMF 2.0 and need to be updated.
+This document will briefly summarise the steps required to create your own development environment from the source code, in order to understand and contribute to the project. If you only want to check out a copy of the plugin in order to create web application models, check out the [Installation installation instructions] instead.
+
+<wiki:toc max_depth="2" />
+
+=Introduction=
+IAML is currently developed in Java and [http://www.eclipse.org/galileo/ Eclipse 3.5 (Galileo)], and heavily utilizes [http://www.eclipse.org/emf/ EMF] (for the [Model0_4 meta-model definition]), [http://www.eclipse.org/modeling/gmf/ GMF] (for the graphical editor), [http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare] (for code generation and constraint validation) and [http://www.jboss.org/drools/ JBoss Drools] (for model inference). Currently an in-depth knowledge of all of these related technologies is assumed for development.
+
+In the future, once [http://code.google.com/p/iaml/issues/detail?id=28 issue 28] is resolved, a copy of the entire IAML development environment will be provided on the [Installation update site] as an SDK feature.
 
 =Requirements=
 
-  # [http://archive.eclipse.org/eclipse/downloads/drops/R-3.3.2-200802211800/index.php Eclipse 3.3 SDK Europa]
-  # Java 1.6
+First you will need to download [http://www.eclipse.org/galileo/ Eclipse 3.5 (Galileo)] and extract it to your given working directory; and, of course, you will need Java 1.6+ installed.
 
-Through the *Europa update site:*
+I suggest adding the following parameters to your {{{eclipse.ini}}} to prevent _Out of PermGen Memory_ errors:
 
-  # Graphical Editors > Graphical Editing Framework SDK 3.3.2
-  # Models > Eclipse Modeling Framework (EMF) Extender SDK 2.3.2
-  # Models > Graphical Modeling Framework 2.0.2
-  # Models > UML2 End-User Features
-  # + all required features
-
-*[http://www.eclipse.org/modeling/gmf/ GMF]:*
-  # Download the [http://www.eclipse.org/modeling/download.php?file=/modeling/gmf/gmf/downloads/drops/2.0.2/R200802250200/GMF-sdk-2.0.2.zip GMF SDK 2.0.2] (the [http://download.eclipse.org/modeling/gmf/updates/releases/ update site] doesn't include the full source) and extract into your Eclipse directory
-
-*[http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare]:*
 {{{
-Name:  OpenArchitectureWare update site
-URL:   http://www.openarchitectureware.org/updatesite/milestone/site.xml
-}}}
-  # OpenArchitectureWare SDK 4.3
-
-*[http://www.jboss.org/drools/ JBoss Drools]:*
-{{{
-Name:  JBoss Drools update site
-URL:   http://downloads.jboss.com/drools/updatesite3.3/ 
-}}}
-  # JBoss Drools Workbench 4.0.7
-
-*[http://www.eclipticalsoftware.com/emf/xpath/ XPath Support for EMF]:*
-{{{
-Name:  Ecliptical Software update site
-URL:   http://www.eclipticalsoftware.com/updates
-}}}
-  # XPath Support for EMF 2.0.1
-
-*[http://code.google.com/p/iacleaner/ iacleaner]:*
-{{{
-Name:  Iacleaner update site
-URL:   http://iacleaner.googlecode.com/svn/trunk/org.openiaml.iacleaner.update/site.xml
+-vmargs
+-Xms384m
+-Xmx512m
+-XX:PermSize=128M
+-XX:MaxPermSize=384M
 }}}
 
-*[http://subclipse.tigris.org Subclipse]:*
+Then, through the _Install New Software..._ manager, install the following plugins and SDKs along with their pre-requisites:
+
+==Galileo==
+
 {{{
-Name:  Subclipse 1.2.x update site
-URL:   http://subclipse.tigris.org/update_1.2.x
+Name: Galileo update site
+URL: http://download.eclipse.org/releases/galileo
 }}}
 
-If you also wish to install the components necessary for profiling the project, install the following additional components from the *Europa update site:*
+  * EMF - Eclipse Modeling Framework SDK (2.5.0)
+  * UML2 Extender SDK (3.0.0)
+  * UML2 Tools SDK (Incubation) (0.9.0)
 
-  # Testing and Performance > TPTP Platform Project 4.4.100
-  # Testing and Performance > TPTP Testing Tools Project 43.200
-  # Testing and Performance > TPTP Tracing and Profiling Tools Project 4.3.100
-  # + all required features
+You may also install the _TPTP Testing and Profiling tools_ if you wish to profile the application, but this is not necessary.
+
+==GMF==
+
+We update from the GMF update site itself to keep up-to-date with recent releases.
+
+{{{
+Name: GMF update site
+URL: http://download.eclipse.org/modeling/gmf/updates/releases/
+}}}
+
+  * GMF SDK 2.2.0
+
+==OpenArchitecureWare==
+
+When installing, uncheck "Group items by category". This needs to be installed after the UML2 tools above, or you may run into a prerequisite problem that Eclipse cannot solve itself. We will be using OAW until [http://code.google.com/p/iaml/issues/detail?id=71 issue 71] is resolved to migrate it to the new Xpand Eclipse project.
+
+{{{
+Name: OpenArchitectureWare update site 
+URL: http://www.openarchitectureware.org/updatesite/milestone/
+}}}
+
+  * openArchitectureWare Classic feature (4.3.1)
+  * openArchitectureWare Classic SDK feature (4.3.1)
+  * openArchitectureWare SDK feature (4.3.1)
+
+==JBoss Drools==
+
+While [http://downloads.jboss.com/drools/updatesite3.4/ JBoss Drools 5.0.1] has been released, there is [https://jira.jboss.org/jira/browse/JBRULES-2218 a major bug] that prevents us from using this implementation yet. So, you should instead install Drools 4.0.7:
+
+{{{
+Name: JBoss Drools update site 
+URL: http://downloads.jboss.com/drools/updatesite3.3/
+}}}
+
+  * JBoss Drools Workbench (4.0.7)
+
+==XPath support for EMF==
+
+This helps us in our test cases to select various parts of EMF models. ([http://www.eclipticalsoftware.com/emf/xpath/ more information])
+
+{{{
+Name: Ecliptical Software update site
+URL: http://www.eclipticalsoftware.com/updates
+}}}
+
+  * XPath support for EMF (2.0.1)
+  * XPath Support for EMF SDK (2.0.1)
+
+==Subclipse==
+
+[http://subclipse.tigris.org Subclipse] permits version control with Subversion; another option is Subversive, but [http://journals.jevon.org/users/jevon-phd/entry/19739 I don't prefer it]. You will need to [http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=8100 install SVN separately] onto your system. [http://journals.jevon.org/users/jevon-phd/entry/19513 Make sure] that you select the correct Subclipse version for your current installation of SVN.
+
+{{{
+Name: Subclipse 1.6.x update site
+URL: http://subclipse.tigris.org/update_1.6.x
+}}}
+
+  * Subclipse (Required) (1.6.5)
+  * Subversion Client Adapter (Required) (1.6.4.1)
+  * Subversion JavaHL Native Library Adapter (Required) (1.6.4.1)
+
+=Checking out=
+
+Once you have your Eclipse environment set up, you can [http://code.google.com/p/iaml/source/checkout check out the latest trunk] from the Subversion repository. Simply check out all projects in *[http://iaml.googlecode.com/svn/trunk/ trunk]* to your local workspace.
+
+{{{
+SVN Trunk: http://iaml.googlecode.com/svn/trunk/
+}}}
+
+=Development Guides=
 
 In the future this guide will also contain information on topics such as:
 
   # Plugin Overview
   # Building
+    # Refreshing the meta-model
+    # Generating diagram editors
   # Testing
   # Deploying
   # Contributing

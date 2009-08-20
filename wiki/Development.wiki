@@ -114,12 +114,13 @@ In the future this guide will also contain information on topics such as:
 
   # Plugin Overview
   # Building
-    # Refreshing the meta-model
+    # Reloading the meta-model
     # Generating diagram editors
   # Testing
   # Deploying
   # Contributing
   # Extending
+    # [CreatingANewVisualEditor]
   # Integrating
   # Profiling
 

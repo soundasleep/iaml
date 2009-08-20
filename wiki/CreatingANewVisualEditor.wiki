@@ -5,14 +5,16 @@
 
 =Introduction=
 
-This is a brief technical guideline on how to add a new visual editor in the IAML framework. A more comprehensive guide will appear eventually.
+This is a brief technical guideline on how to add a new visual editor in the IAML framework. A more comprehensive guide will appear eventually. This assumes you are well versed in both EMF and GMF; this is just the steps required to integrate your new plugin with the rest of the framework.
 
-Consider we are making a new editor "user_store", for UserStore objects.
+Ideally most of this will be integrated into an automated script or an abstraction.
 
-  # Update the .gmfgraph if necessary
-  # Create a new user_store.gmftool
-  # Create a new user_store.gmfmap and map the tools to the graph elements
-  # Generate the user_store.gmfgen
+In this example, consider we are making a new editor "user_store", for UserStore objects.
+
+  # Update the [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model/model/iaml.gmfgraph iaml.gmfgraph] if necessary
+  # Create a new {{{user_store.gmftool}}}
+  # Create a new {{{user_store.gmfmap}}} and map the tools to the graph elements
+  # Generate the {{{user_store.gmfgen}}}
   # Set the following properties:
     * _Gen Editor Generator_
       * _Domain File Extension_ to "iaml_user_store" (will update _Diagram File Extension_ automatically)
@@ -25,8 +27,8 @@ Consider we are making a new editor "user_store", for UserStore objects.
       * _Validation Enabled_ to "true"
       * _Contains Shortcuts To_ and _Shortcuts Provided For_ to all domain file extensions in the model (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/PluginsTestCase.java?r=1006&spec=svn1006#181 PluginsTestCase])
     * _Gen Plugin_
-      * _ID_ to "org.openiaml.model.diagram.domain_store"
-      * _Name_ to "Iaml Plugin (Domain Store)"
+      * _ID_ to "org.openiaml.model.diagram.user_store"
+      * _Name_ to "Iaml Plugin (User Store)"
       * _Provider_ to "www.openiaml.org"
       * _Version_ to the latest version (e.g. "0.3.1")
     * You will still need to add _OpenDiagramBehaviors_ to any elements that require it (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/GmfGenTestCase.java?r=1006#329 GmfGenTestCase])

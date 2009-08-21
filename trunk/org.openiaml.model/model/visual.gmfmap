@@ -511,6 +511,38 @@
           href="iaml.gmfgraph#AccessControlHandler"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//users/Permission"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#PermissionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#Permission"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//users/Role"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#RoleName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#Role"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -802,7 +834,7 @@
         body="self.oclIsTypeOf( ConstraintWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern="{{0}}"
+        viewPattern="'{'{0}'}'"
         editorPattern="{0}"
         editPattern="{0}">
       <diagramLabel

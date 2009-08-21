@@ -836,6 +836,11 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
+        <foregroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="200"
+            blue="135"/>
         <children
             xsi:type="gmfgraph:Label"
             name="CompositeConditionNameFigure"
@@ -861,7 +866,14 @@
           name="DecisionConditionFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
+            vertical="true"
+            majorAlignment="CENTER"
+            minorAlignment="CENTER"/>
+        <foregroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="200"
+            blue="135"/>
         <children
             xsi:type="gmfgraph:Label"
             name="DecisionConditionNameFigure"
@@ -1076,20 +1088,18 @@
     <descriptors
         name="PermissionFigure">
       <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="ApplicationElementPropertyFigure">
+          xsi:type="gmfgraph:Ellipse"
+          name="PermissionFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <backgroundColor
+            vertical="true"
+            majorAlignment="CENTER"
+            minorAlignment="CENTER"/>
+        <foregroundColor
             xsi:type="gmfgraph:RGBColor"
             red="208"
             green="185"
             blue="243"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="ITALIC"/>
         <children
             xsi:type="gmfgraph:Label"
             name="PermissionNameFigure"

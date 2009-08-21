@@ -87,6 +87,19 @@
             path="icons/full/obj32/Role.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Permission"
+          description="Create new Permission">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Permission.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Permission.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

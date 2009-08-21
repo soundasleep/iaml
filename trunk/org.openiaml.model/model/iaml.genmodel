@@ -251,7 +251,9 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Users" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//users">
-      <genClasses ecoreClass="iaml.ecore#//users/UserStore"/>
+      <genClasses ecoreClass="iaml.ecore#//users/UserStore">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//users/UserStore/permissions"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//users/Role"/>
       <genClasses ecoreClass="iaml.ecore#//users/Permission"/>
       <genClasses ecoreClass="iaml.ecore#//users/UserInstance"/>

@@ -577,7 +577,10 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.4"/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="UserStore" eSuperTypes="#//DomainStore"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UserStore" eSuperTypes="#//DomainStore">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+          eType="#//users/Permission" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//DomainObject"/>
     <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="UserInstance" eSuperTypes="#//DomainObjectInstance"/>

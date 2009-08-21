@@ -93,6 +93,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
       * E-mails
       * Server-side operation (e.g. written in PHP)
       * Client-side operaiton (e.g. written in Javascript)
+      * Deleting domain objects
   # Usability improvements
     * [http://code.google.com/p/iaml/issues/detail?id=30 Sharing single EditingDomain instance] across all editors
   # Development

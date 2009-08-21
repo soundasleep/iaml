@@ -386,5 +386,50 @@
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Access Control"
+        description="Access Control"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="AccessControlHandler"
+          description="Create new AccessControlHandler">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/AccessControlHandler.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/AccessControlHandler.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="RequiresWire"
+          description="Create new RequiresWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/RequiresWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/RequiresWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ConstraintWire"
+          description="Create new ConstraintWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ConstraintWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ConstraintWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
   </palette>
 </gmftool:ToolRegistry>

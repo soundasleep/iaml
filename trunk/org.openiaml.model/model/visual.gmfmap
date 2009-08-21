@@ -489,6 +489,28 @@
           href="iaml.gmfgraph#QueryParameter"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElementContainer/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//components/AccessControlHandler"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( AccessControlHandler )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#AccessControlHandlerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.3/@tools.0"/>
+      <diagramNode
+          href="iaml.gmfgraph#AccessControlHandler"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -742,6 +764,59 @@
         href="visual.gmftool#//@palette/@tools.2/@tools.9"/>
     <diagramLink
         href="iaml.gmfgraph#NewInstanceWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/RequiresWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( RequiresWire )"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#RequiresWireName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/wires"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="visual.gmftool#//@palette/@tools.3/@tools.1"/>
+    <diagramLink
+        href="iaml.gmfgraph#RequiresWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ConstraintWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ConstraintWire )"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        viewPattern="{{0}}"
+        editorPattern="{0}"
+        editPattern="{0}">
+      <diagramLabel
+          href="iaml.gmfgraph#ConstraintWireName"/>
+      <features
+          href="iaml.ecore#//wires/ConstraintWire/type"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/wires"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="visual.gmftool#//@palette/@tools.3/@tools.2"/>
+    <diagramLink
+        href="iaml.gmfgraph#ConstraintWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

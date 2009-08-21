@@ -192,6 +192,11 @@
         href="iaml.ecore#//wires/ProvidesWire"/>
     <domainSpecialization
         body="self.oclIsTypeOf( ProvidesWire )"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ProvidesWireName"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
@@ -211,6 +216,11 @@
         href="iaml.ecore#//wires/ExtendsWire"/>
     <domainSpecialization
         body="self.oclIsTypeOf( ExtendsWire )"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ExtendsWireName"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool

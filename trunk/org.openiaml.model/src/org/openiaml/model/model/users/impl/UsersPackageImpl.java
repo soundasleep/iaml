@@ -299,6 +299,12 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.4"
+		   });		
+		addAnnotation
+		  (roleEClass, 
+		   source, 
+		   new String[] {
+			 "note", "another option is to create \'extends : Role\' and \'extendedBy : Role\' as EOpposites, and remove ExtendsWire. but this means that this relationship cannot be used as the target or source of any wires (parameters? conditions?)"
 		   });
 	}
 

@@ -234,6 +234,7 @@
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//components/LoginHandlerTypes">
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//components/LoginHandlerTypes/SECRET_KEY"/>
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//components/LoginHandlerTypes/DOMAIN_OBJECT"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//components/LoginHandlerTypes/USER"/>
       </genEnums>
       <genClasses image="false" ecoreClass="iaml.ecore#//components/LoginHandler">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//components/LoginHandler/type"/>

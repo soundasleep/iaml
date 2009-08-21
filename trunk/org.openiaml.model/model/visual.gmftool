@@ -430,6 +430,19 @@
             path="icons/full/obj32/ConstraintWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="UserInstance"
+          description="Create new UserInstance">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/UserInstance.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/UserInstance.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

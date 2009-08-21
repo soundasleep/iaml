@@ -121,7 +121,8 @@
 				org.openiaml.model.model.WireEdgeDestination run = (org.openiaml.model.model.WireEdgeDestination) wire;
 				java.util.List<org.openiaml.model.model.WireEdge> params = new java.util.ArrayList();
 				for (org.openiaml.model.model.WireEdge e : run.getInEdges()) {
-					if (e instanceof org.openiaml.model.model.wires.ParameterWire) {
+					if (e instanceof org.openiaml.model.model.wires.ParameterWire ||
+							e instanceof org.openiaml.model.model.wires.ConstraintWire) {
 						params.add(e);
 					}
 				}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
+  <children xsi:type="iaml.visual:Page" id="visual.1233afe628e.15" name="Home"/>
+  <children xsi:type="iaml.visual:Page" id="visual.1233b453dc5.156" name="create a new user">
+    <children xsi:type="iaml.users:UserInstance" id="users.1233b53a814.a" name="newly created user" inEdges="wires.1233b53a3ce.7" autosave="false">
+      <operations xsi:type="iaml:SingleOperation" inEdges="wires.1233b53a3ce.a" id="model.1233b53a1ca.14" name="save"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" outEdges="wires.1233b53a3ce.a">
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.a" from="visual.1233b53a313.1a" to="model.1233b53a1ca.14" name="onClick"/>
+    </children>
+  </children>
+  <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">
+    <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outEdges="wires.1233b53a3ce.7" inEdges="wires.1233afe62eb.2d">
+      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1233b53a3ce.7" from="users.1233afe655c.23" to="users.1233b53a814.a" name="new instance"/>
+    </children>
+  </domainStores>
+  <sessions id="scopes.1233afe6368.3" name="target session">
+    <children xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outEdges="wires.1233afe62eb.2d">
+      <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
+    </children>
+    <children xsi:type="iaml.visual:Page" id="visual.1233afe628e.7e" name="target"/>
+  </sessions>
+</iaml:InternetApplication>

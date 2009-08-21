@@ -8,6 +8,7 @@ package org.openiaml.model.model.users.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
@@ -163,6 +164,15 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getUserStore_Permissions() {
+		return (EReference)userStoreEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRole() {
 		return roleEClass;
 	}
@@ -214,6 +224,7 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 
 		// Create classes and their features
 		userStoreEClass = createEClass(USER_STORE);
+		createEReference(userStoreEClass, USER_STORE__PERMISSIONS);
 
 		roleEClass = createEClass(ROLE);
 
@@ -262,6 +273,7 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(userStoreEClass, UserStore.class, "UserStore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUserStore_Permissions(), this.getPermission(), null, "permissions", null, 0, -1, UserStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

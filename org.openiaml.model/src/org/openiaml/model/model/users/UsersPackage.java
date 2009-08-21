@@ -8,6 +8,7 @@ package org.openiaml.model.model.users;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.openiaml.model.model.ModelPackage;
 
 /**
@@ -223,13 +224,22 @@ public interface UsersPackage extends EPackage {
 	int USER_STORE__TYPE = ModelPackage.DOMAIN_STORE__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Permissions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_STORE__PERMISSIONS = ModelPackage.DOMAIN_STORE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>User Store</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_STORE_FEATURE_COUNT = ModelPackage.DOMAIN_STORE_FEATURE_COUNT + 0;
+	int USER_STORE_FEATURE_COUNT = ModelPackage.DOMAIN_STORE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.users.impl.RoleImpl <em>Role</em>}' class.
@@ -678,6 +688,17 @@ public interface UsersPackage extends EPackage {
 	EClass getUserStore();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.users.UserStore#getPermissions <em>Permissions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Permissions</em>'.
+	 * @see org.openiaml.model.model.users.UserStore#getPermissions()
+	 * @see #getUserStore()
+	 * @generated
+	 */
+	EReference getUserStore_Permissions();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.users.Role <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -738,6 +759,14 @@ public interface UsersPackage extends EPackage {
 		 * @generated
 		 */
 		EClass USER_STORE = eINSTANCE.getUserStore();
+
+		/**
+		 * The meta object literal for the '<em><b>Permissions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference USER_STORE__PERMISSIONS = eINSTANCE.getUserStore_Permissions();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.users.impl.RoleImpl <em>Role</em>}' class.

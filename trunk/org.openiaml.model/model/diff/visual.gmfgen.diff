@@ -1,5 +1,5 @@
---- visual.gmfgen	2009-08-21 02:01:30.858925900 +1200
-+++ copies/visual.gmfgen	2009-08-21 02:00:45.373968700 +1200
+--- visual.gmfgen	2009-08-21 15:46:18.957043200 +1200
++++ copies/visual.gmfgen	2009-08-21 15:46:11.534883200 +1200
 @@ -202,10 +202,15 @@
            classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class CompositeOperationFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureCompositeOperationNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureCompositeOperationParentNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public CompositeOperationFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;this.setLineWidth(1);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureCompositeOperationNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureCompositeOperationNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureCompositeOperationNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureCompositeOperationParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureCompositeOperationParentNameFigure.setText(&quot;[none]&quot;);&#xA;&#x9;fFigureCompositeOperationParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;this.add(fFigureCompositeOperationParentNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureCompositeOperationNameFigure() {&#xA;&#x9;&#x9;return fFigureCompositeOperationNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureCompositeOperationParentNameFigure() {&#xA;&#x9;&#x9;return fFigureCompositeOperationParentNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 240, 240, 240);&#xA;&#xA;">
          <attributes
@@ -208,23 +208,7 @@
          <metaClass
              href="iaml.genmodel#//model/components/LoginHandler"/>
          <containmentMetaFeature
-@@ -948,10 +1013,15 @@
-       <viewmap
-           xsi:type="gmfgen:InnerClassViewmap"
-           layoutType="FLOW_LAYOUT"
-           className="CompositeConditionFigure"
-           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class CompositeConditionFigure extends org.eclipse.draw2d.Ellipse {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureCompositeConditionNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureCompositeConditionParentNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public CompositeConditionFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureCompositeConditionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureCompositeConditionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureCompositeConditionNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureCompositeConditionParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureCompositeConditionParentNameFigure.setText(&quot;[none]&quot;);&#xA;&#x9;fFigureCompositeConditionParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;this.add(fFigureCompositeConditionParentNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureCompositeConditionNameFigure() {&#xA;&#x9;&#x9;return fFigureCompositeConditionNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureCompositeConditionParentNameFigure() {&#xA;&#x9;&#x9;return fFigureCompositeConditionParentNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
-+      <behaviour
-+          xsi:type="gmfgen:OpenDiagramBehaviour"
-+          editPolicyClassName="ConditionOpenDiagramEditPolicy"
-+          diagramKind="Iaml_Condition"
-+          editorID="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"/>
-       <modelFacet
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.9">
-         <metaClass
-             href="iaml.genmodel#//model/CompositeCondition"/>
-         <containmentMetaFeature
-@@ -993,10 +1063,15 @@
+@@ -997,10 +1062,15 @@
              figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
            <attributes
                xsi:type="gmfgen:StyleAttributes"
@@ -240,7 +224,7 @@
        </labels>
      </topLevelNodes>
      <topLevelNodes
-@@ -1019,10 +1094,15 @@
+@@ -1023,10 +1093,15 @@
            classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class DomainObjectInstanceFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDomainObjectInstanceNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDomainObjectInstanceAutosaveFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public DomainObjectInstanceFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(2);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;this.setFont(THIS_FONT);&#xA;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureDomainObjectInstanceNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureDomainObjectInstanceNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureDomainObjectInstanceNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureDomainObjectInstanceAutosaveFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureDomainObjectInstanceAutosaveFigure.setText(&quot;autosave: true&quot;);&#xA;&#xA;this.add(fFigureDomainObjectInstanceAutosaveFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDomainObjectInstanceNameFigure() {&#xA;&#x9;&#x9;return fFigureDomainObjectInstanceNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDomainObjectInstanceAutosaveFigure() {&#xA;&#x9;&#x9;return fFigureDomainObjectInstanceAutosaveFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font THIS_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Arial&quot;, 9, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
          <attributes
              xsi:type="gmfgen:StyleAttributes"
@@ -256,7 +240,7 @@
          <metaClass
              href="iaml.genmodel#//model/DomainObjectInstance"/>
          <containmentMetaFeature
-@@ -1087,10 +1167,15 @@
+@@ -1091,10 +1166,15 @@
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
            layoutType="FLOW_LAYOUT"
@@ -272,7 +256,7 @@
          <metaClass
              href="iaml.genmodel#//model/DomainAttributeInstance"/>
          <containmentMetaFeature
-@@ -1138,10 +1223,15 @@
+@@ -1142,10 +1222,15 @@
            classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ButtonFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureButtonNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureButtonParentNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ButtonFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureButtonNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureButtonNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureButtonNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureButtonParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureButtonParentNameFigure.setText(&quot;[none]&quot;);&#xA;&#x9;fFigureButtonParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;this.add(fFigureButtonParentNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureButtonNameFigure() {&#xA;&#x9;&#x9;return fFigureButtonNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureButtonParentNameFigure() {&#xA;&#x9;&#x9;return fFigureButtonParentNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 240, 240, 240);&#xA;&#xA;">
          <attributes
              xsi:type="gmfgen:StyleAttributes"
@@ -288,7 +272,7 @@
          <metaClass
              href="iaml.genmodel#//model/visual/Button"/>
          <containmentMetaFeature
-@@ -1182,10 +1272,15 @@
+@@ -1186,10 +1271,15 @@
              figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
            <attributes
                xsi:type="gmfgen:StyleAttributes"
@@ -304,7 +288,7 @@
        </labels>
      </topLevelNodes>
      <topLevelNodes
-@@ -1253,10 +1348,15 @@
+@@ -1402,10 +1492,15 @@
            editHelperClassName="SyncWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -317,10 +301,10 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.13">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.14">
          <metaClass
              href="iaml.genmodel#//model/wires/SyncWire"/>
-@@ -1307,10 +1407,15 @@
+@@ -1456,10 +1551,15 @@
            editHelperClassName="RunInstanceWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -333,10 +317,10 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.14">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.15">
          <metaClass
              href="iaml.genmodel#//model/wires/RunInstanceWire"/>
-@@ -1392,10 +1497,15 @@
+@@ -1541,10 +1641,15 @@
            editHelperClassName="SelectWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -349,10 +333,10 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.16">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.17">
          <metaClass
              href="iaml.genmodel#//model/wires/SelectWire"/>
-@@ -1468,10 +1578,15 @@
+@@ -1617,10 +1722,15 @@
            editHelperClassName="SetWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -365,10 +349,10 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.17">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.18">
          <metaClass
              href="iaml.genmodel#//model/wires/SetWire"/>
-@@ -1522,10 +1637,15 @@
+@@ -1671,10 +1781,15 @@
            editHelperClassName="ShowWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -381,10 +365,10 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.18">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.19">
          <metaClass
              href="iaml.genmodel#//model/wires/ShowWire"/>
-@@ -1576,10 +1696,15 @@
+@@ -1725,10 +1840,15 @@
            editHelperClassName="NavigateWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -397,10 +381,10 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.19">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.20">
          <metaClass
              href="iaml.genmodel#//model/wires/NavigateWire"/>
-@@ -1630,10 +1755,15 @@
+@@ -1779,10 +1899,15 @@
            editHelperClassName="CommitWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -413,10 +397,10 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.20">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.21">
          <metaClass
              href="iaml.genmodel#//model/wires/CommitWire"/>
-@@ -1684,10 +1814,15 @@
+@@ -1833,10 +1958,15 @@
            editHelperClassName="ConditionWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -429,10 +413,10 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.21">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.22">
          <metaClass
              href="iaml.genmodel#//model/wires/ConditionWire"/>
-@@ -1738,10 +1873,15 @@
+@@ -1887,10 +2017,15 @@
            editHelperClassName="NewInstanceWireEditHelper"/>
        <viewmap
            xsi:type="gmfgen:InnerClassViewmap"
@@ -445,6 +429,6 @@
 +          editorID="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/>
        <modelFacet
            xsi:type="gmfgen:TypeLinkModelFacet"
-           modelElementSelector="//@expressionProviders/@providers.0/@expressions.22">
+           modelElementSelector="//@expressionProviders/@providers.0/@expressions.23">
          <metaClass
              href="iaml.genmodel#//model/wires/NewInstanceWire"/>

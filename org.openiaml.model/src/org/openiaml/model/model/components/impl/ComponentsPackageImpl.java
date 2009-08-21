@@ -262,6 +262,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		initEEnum(loginHandlerTypesEEnum, LoginHandlerTypes.class, "LoginHandlerTypes");
 		addEEnumLiteral(loginHandlerTypesEEnum, LoginHandlerTypes.SECRET_KEY);
 		addEEnumLiteral(loginHandlerTypesEEnum, LoginHandlerTypes.DOMAIN_OBJECT);
+		addEEnumLiteral(loginHandlerTypesEEnum, LoginHandlerTypes.USER);
 
 		// Create annotations
 		// http://openiaml.org/comment

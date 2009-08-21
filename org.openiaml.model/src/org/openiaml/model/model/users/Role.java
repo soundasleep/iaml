@@ -15,7 +15,7 @@ import org.openiaml.model.model.DomainObject;
  *
  *
  * @see org.openiaml.model.model.users.UsersPackage#getRole()
- * @model
+ * @model annotation="http://openiaml.org/comment note='another option is to create \'extends : Role\' and \'extendedBy : Role\' as EOpposites, and remove ExtendsWire. but this means that this relationship cannot be used as the target or source of any wires (parameters? conditions?)'"
  * @generated
  */
 public interface Role extends DomainObject {

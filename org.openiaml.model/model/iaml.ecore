@@ -548,6 +548,7 @@
     <eClassifiers xsi:type="ecore:EEnum" name="LoginHandlerTypes">
       <eLiterals name="SECRET_KEY"/>
       <eLiterals name="DOMAIN_OBJECT" value="1"/>
+      <eLiterals name="USER" value="2"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"

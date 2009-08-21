@@ -543,6 +543,38 @@
           href="iaml.gmfgraph#Role"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElementContainer/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//users/UserInstance"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( UserInstance )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#UserInstanceName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="autosave: {0}"
+          editorPattern=""
+          editPattern="{0}">
+        <diagramLabel
+            href="iaml.gmfgraph#UserInstanceAutosave"/>
+        <features
+            href="iaml.ecore#//DomainObjectInstance/autosave"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.3/@tools.3"/>
+      <diagramNode
+          href="iaml.gmfgraph#UserInstance"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

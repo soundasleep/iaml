@@ -40,7 +40,15 @@ public enum LoginHandlerTypes implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DOMAIN_OBJECT(1, "DOMAIN_OBJECT", "DOMAIN_OBJECT");
+	DOMAIN_OBJECT(1, "DOMAIN_OBJECT", "DOMAIN_OBJECT"), /**
+	 * The '<em><b>USER</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #USER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	USER(2, "USER", "USER");
 
 	/**
 	 * The '<em><b>SECRET KEY</b></em>' literal value.
@@ -73,6 +81,21 @@ public enum LoginHandlerTypes implements Enumerator {
 	public static final int DOMAIN_OBJECT_VALUE = 1;
 
 	/**
+	 * The '<em><b>USER</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>USER</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #USER
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int USER_VALUE = 2;
+
+	/**
 	 * An array of all the '<em><b>Login Handler Types</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,6 +105,7 @@ public enum LoginHandlerTypes implements Enumerator {
 		new LoginHandlerTypes[] {
 			SECRET_KEY,
 			DOMAIN_OBJECT,
+			USER,
 		};
 
 	/**
@@ -134,6 +158,7 @@ public enum LoginHandlerTypes implements Enumerator {
 		switch (value) {
 			case SECRET_KEY_VALUE: return SECRET_KEY;
 			case DOMAIN_OBJECT_VALUE: return DOMAIN_OBJECT;
+			case USER_VALUE: return USER;
 		}
 		return null;
 	}

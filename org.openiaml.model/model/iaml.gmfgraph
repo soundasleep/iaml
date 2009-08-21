@@ -1194,6 +1194,27 @@
       <accessors
           figure="//@figures.0/@descriptors.55/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="AccessControlHandlerFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="AccessControlHandlerFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="192"
+            blue="255"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="AccessControlHandlerNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.56/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1306,6 +1327,9 @@
   <nodes
       name="UserInstance"
       figure="UserInstanceFigure"/>
+  <nodes
+      name="AccessControlHandler"
+      figure="AccessControlHandlerFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1672,4 +1696,8 @@
       name="ProvidesWireName"
       figure="ProvidesWireFigure"
       accessor="//@figures.0/@descriptors.55/@accessors.0"/>
+  <labels
+      name="AccessControlHandlerName"
+      figure="AccessControlHandlerFigure"
+      accessor="//@figures.0/@descriptors.56/@accessors.0"/>
 </gmfgraph:Canvas>

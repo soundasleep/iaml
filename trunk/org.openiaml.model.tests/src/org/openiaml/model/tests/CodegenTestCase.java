@@ -371,12 +371,48 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		}
 		
 	}
+
+	/**
+	 * Go to the given page, but assert that we do not arrive
+	 * on the given page. Does not actually check {@link #assertProblem()}.
+	 * 
+	 * @param sitemap
+	 * @param string
+	 */
+	public void gotoSitemapWithProblem(IFile sitemap, String pageText) throws Exception {
+		// we can't goto the sitemap if we haven't begun the session yet
+		// (sanity check)
+		if (!hasBegun)
+			throw new RuntimeException("You cannot gotoSitemap() for a session that hasn't started yet. Use beginAt or beginAtSitemapThenPage instead.");
+	
+		waitForAjax();
+
+		gotoPage(sitemap.getProjectRelativePath().toString());
+		hasLoaded = true;		// we have now loaded a page
+		assertTitleMatch("sitemap");
+		
+		assertLinkPresentWithText(pageText);
+		clickLinkWithText(pageText);
+		try {
+			assertTitleNotSame(pageText);
+			// assertEquals(expectedTitle, getPageTitle());		// could be different
+		} catch (Exception e) {
+			// something went wrong in the page execution, or
+			// the output is mangled HTML: output page source for debug purposes
+			System.out.println(this.getPageSource());
+			throw e;	// carry on throwing
+		} catch (AssertionFailedError e) {
+			System.out.println(this.getPageSource());
+			throw e;	// carry on throwing
+		}
+	}
 	
 	/**
-	 * Go to the sitemap page, and then click on a particular page title.
+	 * <p>Go to the sitemap page, and then click on a particular page title.
+	 * Assert that the target page has the same given title.</p>
 	 * 
-	 * If you want the client to be reset (e.g. delete cookies, sessions),
-	 * use {@link #beginAtSitemapThenPage(IFile, String)}.
+	 * <p>If you want the client to be reset (e.g. delete cookies, sessions),
+	 * use {@link #beginAtSitemapThenPage(IFile, String)}.</p>
 	 * 
 	 * @param sitemap the sitemap url to start from
 	 * @param pageText the page text link to click

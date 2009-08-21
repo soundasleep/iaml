@@ -83,6 +83,9 @@ context model::wires::ProvidesWire ERROR "An ProvidesWire can only connect to a 
 context model::wires::RequiresWire ERROR "A RequiresWire can only be connected to ConstraintWires" :
 	inEdges.forAll( e | model::wires::ConstraintWire.isInstance(e) );
 
+context model::wires::RequiresWire ERROR "A RequireWire must connect to a Permission or a Role" :
+	model::users::Permission.isInstance(to) || model::users::Role.isInstance(to); 
+
 /*
  * isInstance() definitely works in OAW checks for abstract supertypes.
  * if a check isn't working, make sure that you are following the OAW

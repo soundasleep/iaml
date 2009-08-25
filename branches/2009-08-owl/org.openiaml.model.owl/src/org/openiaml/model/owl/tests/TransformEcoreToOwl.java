@@ -4,12 +4,22 @@
 package org.openiaml.model.owl.tests;
 
 import java.io.File;
+import java.util.Iterator;
 
 import l3i.sido.emf4sw.ui.ecore2owl.Ecore2OWLFileAction;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.openiaml.model.tests.ModelTestCase;
+
+import com.hp.hpl.jena.rdf.model.InfModel;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.reasoner.Reasoner;
+import com.hp.hpl.jena.reasoner.ReasonerRegistry;
+import com.hp.hpl.jena.reasoner.ValidityReport;
+import com.hp.hpl.jena.reasoner.ValidityReport.Report;
+import com.hp.hpl.jena.util.FileManager;
 
 /**
  * @author jmwright
@@ -38,6 +48,43 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		
 		// once run, the "target.owl" file should exist
 		assertTrue("Final file should exist: " + transformed, transformed.exists());
+		
+		Model schema = FileManager.get().loadModel( transformed.getLocation().toString() );
+		Reasoner reasoner = ReasonerRegistry.getOWLReasoner();
+		reasoner = reasoner.bindSchema(schema);
+		
+		// should be valid
+		Model model = ModelFactory.createDefaultModel();
+		InfModel inf = ModelFactory.createInfModel(reasoner, model);
+		ValidityReport valid = inf.validate();
+		assertTrue(valid.isValid());
 	}
+	
+	/**
+	 * Test that if we load an OWL file with invalid instances,
+	 * we can actually check that they are invalid.
+	 * 
+	 * @throws Exception
+	 */
+	public void testLoadInvalidOwl() throws Exception {
+		Model schema = FileManager.get().loadModel( "file:tests/invalid1.owl" );
+		Reasoner reasoner = ReasonerRegistry.getOWLReasoner();
+		reasoner = reasoner.bindSchema(schema);
+	
+		// should not be valid
+		Model model = ModelFactory.createDefaultModel();
+		InfModel inf = ModelFactory.createInfModel(reasoner, model);
+		ValidityReport valid = inf.validate();
+		assertFalse(valid.isValid());
+		Iterator<Report> it = valid.getReports();
+		while (it.hasNext()) {
+			Report r = it.next();
+			System.out.println(r);
+		}
+	}
+	
+	// we can use Jena to take a model represented in RDF and
+	// check it against the OWL model
+	
 	
 }

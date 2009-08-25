@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/arq-extra.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/arq.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/icu4j_3_4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/iri.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/jena.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/Desktop/Downloads/jena-2.6.0/Jena-2.6.0/src/"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/jenatest.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/json.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/log4j-1.2.12.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/lucene-core-2.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/slf4j-api-1.5.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/stax-api-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/wstx-asl-3.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jena/xercesImpl.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>

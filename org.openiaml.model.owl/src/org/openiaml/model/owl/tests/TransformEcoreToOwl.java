@@ -113,11 +113,26 @@ public class TransformEcoreToOwl extends ModelTestCase {
 				"[(?X rb:violation error('test', 'test', ?X)) <- " +
 				"(?X rdf:type s:Page)]]";
 			
+			// < 2 children should exist
 			rules = "[validationRule: (?v rb:validation on()) -> " +
 				"[(?X rb:violation error(?P1, ?P2, ?X)) <- " +
 				"(?X rdf:type s:InternetApplication) " +
 				"(?X s:pages ?P1) " + 
 				"(?X s:pages ?P2) notEqual(?P1, ?P2) ]]";
+			
+			// > 3 children should exist 
+			rules = "[moreThan3Children: (?X rdf:type s:InternetApplication) (?X s:pages ?P1) (?X s:pages ?P2) (?X s:pages ?P3) notEqual(?P1, ?P2) notEqual(?P2, ?P3) notEqual(?P1, ?P3) -> (?X eg:moreThan3Children 'true') ]\n" +
+				"[validationRule: (?v rb:validation on()) -> " +
+				"[(?X rb:violation error('test', 'test', ?X)) <- " +
+				"(?X rdf:type s:InternetApplication) " +
+				"noValue(?X eg:moreThan3Children 'true') ]]";
+			
+			// > 2 children should exist
+			rules = "[moreThan2Children: (?X rdf:type s:InternetApplication) (?X s:pages ?P1) (?X s:pages ?P2) notEqual(?P1, ?P2) -> (?X eg:moreThan2Children 'true') ]\n" +
+				"[validationRule: (?v rb:validation on()) -> " +
+				"[(?X rb:violation error('test', 'test', ?X)) <- " +
+				"(?X rdf:type s:InternetApplication) " +
+				"noValue(?X eg:moreThan2Children 'true') ]]";
 			
 			// this works (matches all rules)
 			/*

@@ -2,10 +2,24 @@
 module simple2rdf;
 create OUT : rdf from IN : simple;
 
+helper def: namespaces: Map(String, String) =
+	Map {
+		('simple', 'http://openiaml.org/simple#'),
+		('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'),
+	 	('rdfs', 'http://www.w3.org/2000/01/rdf-schema#'),
+	 	('owl', 'http://www.w3.org/2002/07/owl#'),
+		('xsd', 'http://www.w3.org/2001/XMLSchema#')
+	}->union( -- doesn't seem to do anything yet
+		simple!EPackage.allInstancesFrom('IN')->iterate(it; 
+			res: Map(String, String) = Map{} |
+				res->including(it.name, it.getURI())
+		)
+	);
+
 entrypoint rule rdfGraph() {
 	to
 		r : rdf!RDFGraph (
-			
+			namespaces <- thisModule.namespaces.getKeys()->collect(e | thisModule.addNamespaces(e))
 		)
 	
 	do {
@@ -13,12 +27,38 @@ entrypoint rule rdfGraph() {
 	}
 }
 
---
---rule InternetApplication {
---	from
---		i : simple!InternetApplication
---	
---	to
---		r : rdf!RDFGraph
---	
---}
+lazy rule addNamespaces {
+	from
+		s : String
+		
+	to
+		o : rdf!Namespace (
+			prefix <- s,
+			URI <- thisModule.namespaces.get(s)
+		)
+}
+
+rule InternetApplication {
+	from
+		i : simple!InternetApplication
+	
+	to
+		subject : rdf!Resource (
+			URI <- 'http://openiaml.org/simple#root1',
+			graph <- thisModule.graph
+		),
+		t : rdf!Triple (
+			subject <- subject,
+			predicate <- predicate,
+			object <- object,
+			graph <- thisModule.graph
+		),
+		predicate : rdf!Property (
+			URI <- 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+			graph <- thisModule.graph
+		),
+		object : rdf!Resource (
+			URI <- 'http://openiaml.org/simple#InternetApplication',
+			graph <- thisModule.graph
+		)
+}

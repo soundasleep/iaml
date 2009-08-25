@@ -4,6 +4,7 @@
 package org.openiaml.model.owl.tests;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Iterator;
 
 import l3i.sido.emf4sw.ui.ecore2owl.Ecore2OWLFileAction;
@@ -330,6 +331,14 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		
 		// once run, the "target.rdf" file should exist
 		assertTrue("Final file should exist: " + transformed, transformed.exists());
+		
+		// print out target.rdf
+		InputStream s = transformed.getContents();
+		int c;
+		while ((c = s.read()) != -1) {
+			System.out.print((char) c);
+		}
+		s.close();
 		
 	}
 	

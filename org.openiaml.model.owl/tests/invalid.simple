@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <s:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:s="http://openiaml.org/simple">
-  <pages name="page 1"/>
-  <pages name="page 1"/>
+  <s:pages s:name="page 1"/>
+  <s:pages s:name="page 1"/>
 </s:InternetApplication>

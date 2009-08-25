@@ -30,5 +30,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.5.0",
  l3i.sido.emf4sw.ui;bundle-version="0.4.0",
  org.eclipse.jface;bundle-version="3.5.0",
- org.openiaml.model;bundle-version="0.3.1"
+ org.openiaml.model;bundle-version="0.3.1",
+ org.eclipse.m2m.atl;bundle-version="3.0.0",
+ org.eclipse.m2m.atl.common;bundle-version="3.0.0",
+ org.eclipse.m2m.atl.core;bundle-version="3.0.0",
+ org.eclipse.m2m.atl.core.emf;bundle-version="3.0.0",
+ org.eclipse.ui;bundle-version="3.5.0",
+ l3i.sido.emf4sw.rdf;bundle-version="0.4.0"
 Bundle-ActivationPolicy: lazy

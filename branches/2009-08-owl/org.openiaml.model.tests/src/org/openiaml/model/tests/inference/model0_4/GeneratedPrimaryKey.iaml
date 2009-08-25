@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.122f2fbec25.10">
+  <children xsi:type="iaml:DomainObject" id="model.122f2fbec25.1e" name="domain object"/>
+  <children xsi:type="iaml.visual:Page" id="visual.122f2fbeca2.7" name="default page"/>
+</iaml:InternetApplication>

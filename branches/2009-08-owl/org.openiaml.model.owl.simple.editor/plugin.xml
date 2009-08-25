@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.openiaml.model.owl.simple.simple.presentation.SimpleModelWizardID"
+            name="%_UI_SimpleModelWizard_label"
+            class="org.openiaml.model.owl.simple.simple.presentation.SimpleModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SimpleModelFile.gif">
+         <description>%_UI_SimpleModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.openiaml.model.owl.simple.simple.presentation.SimpleEditorID"
+            name="%_UI_SimpleEditor_label"
+            icon="icons/full/obj16/SimpleModelFile.gif"
+            extensions="simple"
+            class="org.openiaml.model.owl.simple.simple.presentation.SimpleEditor"
+            contributorClass="org.openiaml.model.owl.simple.simple.presentation.SimpleActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

@@ -36,6 +36,20 @@ public class AllModel0_4CodegenTests {
 		suite.addTestSuite(SetWireChained.class);
 		suite.addTestSuite(SetWireSync.class);
 		suite.addTestSuite(SetWireSyncChained.class);
+		
+		// User security tests
+		suite.addTestSuite(LoginHandlerUser.class);
+		suite.addTestSuite(UserCreateRoles.class);
+		suite.addTestSuite(UserModifyRoles.class);
+		suite.addTestSuite(UserMultiplePermissions.class);
+		suite.addTestSuite(UserMultiplePermissionsOr.class);
+		suite.addTestSuite(UserMultiplePermissionsOrRoles.class);
+		suite.addTestSuite(UserPermissions.class);
+		suite.addTestSuite(UserPermissionsPage.class);
+		suite.addTestSuite(UserPermissionsRecursive.class);
+		suite.addTestSuite(UserRoleExtends.class);
+		suite.addTestSuite(UserRoles.class);
+		suite.addTestSuite(UserRolesLoginHandler.class);
 
 		return suite;
 	}

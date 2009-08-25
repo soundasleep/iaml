@@ -1,0 +1,24 @@
+
+module simple2rdf;
+create OUT : rdf from IN : simple;
+
+entrypoint rule rdfGraph() {
+	to
+		r : rdf!RDFGraph (
+			
+		)
+	
+	do {
+		thisModule.graph <- r;
+	}
+}
+
+--
+--rule InternetApplication {
+--	from
+--		i : simple!InternetApplication
+--	
+--	to
+--		r : rdf!RDFGraph
+--	
+--}

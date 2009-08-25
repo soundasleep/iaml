@@ -305,4 +305,32 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		return message;
 	}
 	
+	/**
+	 * Test custom ATL translation.
+	 * 
+	 * @throws Exception
+	 */
+	public void testMyAtlTranslation() throws Exception {
+		// copy over ecore file
+		// File source = new File("../org.openiaml.model/model/iaml.ecore");
+		File source = new File("tests/valid.simple");
+		System.out.println(source.getAbsolutePath());
+		assertTrue("Source file exists: " + source, source.exists());
+		IFile target = getProject().getFile("valid.simple");
+		assertFalse("Target file should not exist: " + target, target.exists());
+		copyFileIntoWorkspace(source, target);
+		assertTrue("Target file should exist: " + target, target.exists());
+		IFile transformed = getProject().getFile("valid.rdf");
+		assertFalse("Final file should not exist: " + transformed, transformed.exists());
+		
+		// try the transformation action
+		Simple2RDFModelAction action = new Simple2RDFModelAction();
+		action.selectionChanged(null, new StructuredSelection(target));
+		action.run(null);
+		
+		// once run, the "target.rdf" file should exist
+		assertTrue("Final file should exist: " + transformed, transformed.exists());
+		
+	}
+	
 }

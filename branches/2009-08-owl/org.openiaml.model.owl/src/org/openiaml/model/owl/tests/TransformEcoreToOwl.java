@@ -53,11 +53,25 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		Reasoner reasoner = ReasonerRegistry.getOWLReasoner();
 		reasoner = reasoner.bindSchema(schema);
 		
-		// should be valid
-		Model model = ModelFactory.createDefaultModel();
-		InfModel inf = ModelFactory.createInfModel(reasoner, model);
-		ValidityReport valid = inf.validate();
-		assertTrue(valid.isValid());
+		{
+			// should be valid
+			Model model = ModelFactory.createDefaultModel();
+			InfModel inf = ModelFactory.createInfModel(reasoner, model);
+			ValidityReport valid = inf.validate();
+			assertTrue(valid.isValid());
+		}
+		
+		{
+			// try loading an invalid model
+			Model model = FileManager.get().loadModel("file:tests/invalid.rdf");
+			InfModel inf = ModelFactory.createInfModel(reasoner, model);
+			ValidityReport valid = inf.validate();
+			assertFalse(valid.isValid());
+			Iterator<Report> it = valid.getReports();
+			while (it.hasNext()) {
+				System.out.println(it.next());
+			}
+		}
 	}
 	
 	/**

@@ -19,7 +19,10 @@ import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.ValidityReport.Report;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.util.PrintUtil;
 
 /**
  * @author jmwright
@@ -72,6 +75,67 @@ public class TransformEcoreToOwl extends ModelTestCase {
 				System.out.println(it.next());
 			}
 		}
+		
+		{
+			// what about directly from .simple? (xmi)
+			
+			// it's OK as long as all elements and attributes are given
+			// the correct prefix namespaces (i.e. default EMF saved models
+			// are not suitable)
+			
+			// even though the model is invalid (pages with the same name),
+			// we can't express this in OWL => the model is valid
+			Model model = FileManager.get().loadModel("file:tests/invalid.simple");
+			InfModel inf = ModelFactory.createInfModel(reasoner, model);
+			ValidityReport valid = inf.validate();
+			assertTrue(valid.isValid());
+			Iterator<Report> it = valid.getReports();
+			while (it.hasNext()) {
+				System.out.println(it.next());
+			}
+		}
+		
+		// lets try Jena inference rules
+		{
+			// what about directly from .simple? (xmi)
+			
+			// it's OK as long as all elements and attributes are given
+			// the correct prefix namespaces (i.e. default EMF saved models
+			// are not suitable)
+			
+			// even though the model is invalid (pages with the same name),
+			// we can't express this in OWL => the model is valid
+			//Model model = FileManager.get().loadModel("file:tests/invalid.simple");
+
+			Model model = FileManager.get().loadModel("file:tests/invalid.simple.rdf");
+
+			String rules = "[validationRule: (?v rb:validation on()) -> " +
+				"[(?X rb:violation error('test', 'test', ?X)) <- " +
+				"(?X rdf:type s:Page)]]";
+			
+			// this works (matches all rules)
+			/*
+			rules = "[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- (?X rdf:type ?Y)]]";
+
+			rules = "[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- (?X rdf:type <http://openiaml.org/simple:pages>)]]";
+			*/
+			PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
+
+			Reasoner reason2 = new GenericRuleReasoner(Rule.parseRules(rules));
+			reason2 = reason2.bindSchema(schema);
+			
+			InfModel inf = ModelFactory.createInfModel(reason2, model);
+			
+			ValidityReport valid = inf.validate();
+			assertFalse(valid.isValid());
+			Iterator<Report> it = valid.getReports();
+			while (it.hasNext()) {
+				System.out.println(it.next());
+			}
+		}
+
 	}
 	
 	/**

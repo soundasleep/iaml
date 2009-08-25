@@ -548,6 +548,7 @@
     <eClassifiers xsi:type="ecore:EEnum" name="LoginHandlerTypes">
       <eLiterals name="SECRET_KEY"/>
       <eLiterals name="DOMAIN_OBJECT" value="1"/>
+      <eLiterals name="USER" value="2"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
@@ -577,8 +578,15 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.4"/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="UserStore" eSuperTypes="#//DomainStore"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//DomainObject"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UserStore" eSuperTypes="#//DomainStore">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+          eType="#//users/Permission" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//DomainObject">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="note" value="another option is to create 'extends : Role' and 'extendedBy : Role' as EOpposites, and remove ExtendsWire. but this means that this relationship cannot be used as the target or source of any wires (parameters? conditions?)"/>
+      </eAnnotations>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="UserInstance" eSuperTypes="#//DomainObjectInstance"/>
   </eSubpackages>

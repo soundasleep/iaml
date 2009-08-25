@@ -30,7 +30,12 @@ import com.hp.hpl.jena.util.PrintUtil;
  */
 public class TransformEcoreToOwl extends ModelTestCase {
 
-	public void testTransform() throws Exception {
+	/**
+	 * Takes simple.ecore and translates it into simple.owl.
+	 * 
+	 * @return The generated OWL schema.
+	 */
+	protected Model setupOwlTransform() throws Exception {
 
 		// copy over ecore file
 		// File source = new File("../org.openiaml.model/model/iaml.ecore");
@@ -53,110 +58,180 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		assertTrue("Final file should exist: " + transformed, transformed.exists());
 		
 		Model schema = FileManager.get().loadModel( transformed.getLocation().toString() );
+		return schema;
+	}
+	
+	/**
+	 * Loading a default model instance to the OWL format is valid.
+	 * 
+	 * @throws Exception
+	 */
+	public void testDefaultModelIsValid() throws Exception {
+
+		Model schema = setupOwlTransform();
 		Reasoner reasoner = ReasonerRegistry.getOWLReasoner();
 		reasoner = reasoner.bindSchema(schema);
 		
-		{
-			// should be valid
-			Model model = ModelFactory.createDefaultModel();
-			InfModel inf = ModelFactory.createInfModel(reasoner, model);
-			ValidityReport valid = inf.validate();
-			assertTrue(valid.isValid());
-		}
+		// should be valid
+		Model model = ModelFactory.createDefaultModel();
+		InfModel inf = ModelFactory.createInfModel(reasoner, model);
+		ValidityReport valid = inf.validate();
+		assertIsValid(valid);
+
+	}
+	
+	/**
+	 * The given model has an invalid OWL syntax, i.e. it says
+	 * that [InternetApplication root1] is the same as [Page page1].
+	 * 
+	 * @throws Exception
+	 */
+	public void testInvalidOwlModel() throws Exception {
+		Model schema = setupOwlTransform();
+		Reasoner reasoner = ReasonerRegistry.getOWLReasoner();
+		reasoner = reasoner.bindSchema(schema);
+
+		// try loading an invalid model
+		Model model = FileManager.get().loadModel("file:tests/invalid.rdf");
+		InfModel inf = ModelFactory.createInfModel(reasoner, model);
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+	}
+
+	/**
+	 * Here we load a model instance that is invalid according to our
+	 * Jena rules, but because there is no OWL or Jena rule validation
+	 * going on, the model loads successfully.
+	 * 
+	 * @throws Exception
+	 */
+	public void testInvalidInstanceIsValid() throws Exception {
+		Model schema = setupOwlTransform();
+		Reasoner reasoner = ReasonerRegistry.getOWLReasoner();
+		reasoner = reasoner.bindSchema(schema);
 		
-		{
-			// try loading an invalid model
-			Model model = FileManager.get().loadModel("file:tests/invalid.rdf");
-			InfModel inf = ModelFactory.createInfModel(reasoner, model);
-			ValidityReport valid = inf.validate();
-			assertFalse(valid.isValid());
-			Iterator<Report> it = valid.getReports();
-			while (it.hasNext()) {
-				System.out.println(it.next());
-			}
-		}
+		// what about directly from .simple? (xmi)
 		
-		{
-			// what about directly from .simple? (xmi)
-			
-			// it's OK as long as all elements and attributes are given
-			// the correct prefix namespaces (i.e. default EMF saved models
-			// are not suitable)
-			
-			// even though the model is invalid (pages with the same name),
-			// we can't express this in OWL => the model is valid
-			Model model = FileManager.get().loadModel("file:tests/invalid.simple");
-			InfModel inf = ModelFactory.createInfModel(reasoner, model);
-			ValidityReport valid = inf.validate();
-			assertTrue(valid.isValid());
-			Iterator<Report> it = valid.getReports();
-			while (it.hasNext()) {
-				System.out.println(it.next());
-			}
-		}
+		// it's OK as long as all elements and attributes are given
+		// the correct prefix namespaces (i.e. default EMF saved models
+		// are not suitable)
 		
-		// lets try Jena inference rules
-		{
-			// what about directly from .simple? (xmi)
-			
-			// it's OK as long as all elements and attributes are given
-			// the correct prefix namespaces (i.e. default EMF saved models
-			// are not suitable)
-			
-			// even though the model is invalid (pages with the same name),
-			// we can't express this in OWL => the model is valid
-			//Model model = FileManager.get().loadModel("file:tests/invalid.simple");
+		// even though the model is invalid (pages with the same name),
+		// we can't express this in OWL => the model is valid
+		Model model = FileManager.get().loadModel("file:tests/invalid.simple");
+		InfModel inf = ModelFactory.createInfModel(reasoner, model);
+		ValidityReport valid = inf.validate();
+		assertIsValid(valid);
+	}
+	
+	protected Model getInvalidRDF() {
+		PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
+		return FileManager.get().loadModel("file:tests/invalid.simple.rdf");
+	}
 
-			Model model = FileManager.get().loadModel("file:tests/invalid.simple.rdf");
+	/**
+	 * A simple Jena validation rule. This will fail on any 
+	 * Page instance.
+	 * 
+	 * @throws Exception
+	 */
+	public void testValidationRule1() throws Exception {
+		
+		Model model = getInvalidRDF();
+		String rules = "[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- " +
+			"(?X rdf:type s:Page)]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+	}
+	
+	/**
+	 * A simple Jena validation rule. This checks that we can
+	 * look at children of instances: less than 2 children should exist.
+	 * It should return invalid.
+	 * 
+	 * @throws Exception
+	 */
+	public void testValidationRule2() throws Exception {
+		
+		Model model = getInvalidRDF();
+		String rules = "[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error(?P1, ?P2, ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"(?X s:pages ?P1) " + 
+			"(?X s:pages ?P2) notEqual(?P1, ?P2) ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+	}	
+	
+	/**
+	 * A simple Jena validation rule. This checks that the inference
+	 * world is closed: more than 3 children should exist. If this
+	 * was open world, it would return as valid, as there might be something
+	 * in the open world which could later support this claim.
+	 * It should return invalid.
+	 * 
+	 * @throws Exception
+	 */
+	public void testValidationRule3() throws Exception {
+		
+		Model model = getInvalidRDF();
+		String rules = "[moreThan3Children: " +
+			"(?X rdf:type s:InternetApplication) " +
+			"(?X s:pages ?P1) (?X s:pages ?P2) (?X s:pages ?P3) " +
+			"notEqual(?P1, ?P2) notEqual(?P2, ?P3) notEqual(?P1, ?P3) " +
+				" -> (?X eg:moreThan3Children 'true') ]\n" +
+				
+			"[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"noValue(?X eg:moreThan3Children 'true') ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+	}
+	
+	/**
+	 * A simple Jena validation rule. This checks that we can still
+	 * check for valid rules; two or more children should exist.
+	 * This should return valid.
+	 * 
+	 * @throws Exception
+	 */
+	public void testValidationRule4() throws Exception {
+		
+		Model model = getInvalidRDF();
 
-			String rules = "[validationRule: (?v rb:validation on()) -> " +
-				"[(?X rb:violation error('test', 'test', ?X)) <- " +
-				"(?X rdf:type s:Page)]]";
-			
-			// < 2 children should exist
-			rules = "[validationRule: (?v rb:validation on()) -> " +
-				"[(?X rb:violation error(?P1, ?P2, ?X)) <- " +
-				"(?X rdf:type s:InternetApplication) " +
-				"(?X s:pages ?P1) " + 
-				"(?X s:pages ?P2) notEqual(?P1, ?P2) ]]";
-			
-			// > 3 children should exist 
-			rules = "[moreThan3Children: (?X rdf:type s:InternetApplication) (?X s:pages ?P1) (?X s:pages ?P2) (?X s:pages ?P3) notEqual(?P1, ?P2) notEqual(?P2, ?P3) notEqual(?P1, ?P3) -> (?X eg:moreThan3Children 'true') ]\n" +
-				"[validationRule: (?v rb:validation on()) -> " +
-				"[(?X rb:violation error('test', 'test', ?X)) <- " +
-				"(?X rdf:type s:InternetApplication) " +
-				"noValue(?X eg:moreThan3Children 'true') ]]";
-			
-			// > 2 children should exist
-			rules = "[moreThan2Children: (?X rdf:type s:InternetApplication) (?X s:pages ?P1) (?X s:pages ?P2) notEqual(?P1, ?P2) -> (?X eg:moreThan2Children 'true') ]\n" +
-				"[validationRule: (?v rb:validation on()) -> " +
-				"[(?X rb:violation error('test', 'test', ?X)) <- " +
-				"(?X rdf:type s:InternetApplication) " +
-				"noValue(?X eg:moreThan2Children 'true') ]]";
-			
-			// this works (matches all rules)
-			/*
-			rules = "[validationRule: (?v rb:validation on()) -> " +
-			"[(?X rb:violation error('test', 'test', ?X)) <- (?X rdf:type ?Y)]]";
-
-			rules = "[validationRule: (?v rb:validation on()) -> " +
-			"[(?X rb:violation error('test', 'test', ?X)) <- (?X rdf:type <http://openiaml.org/simple:pages>)]]";
-			*/
-			PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
-
-			Reasoner reason2 = new GenericRuleReasoner(Rule.parseRules(rules));
-			reason2 = reason2.bindSchema(schema);
-			
-			InfModel inf = ModelFactory.createInfModel(reason2, model);
-			
-			ValidityReport valid = inf.validate();
-			assertFalse(valid.isValid());
-			Iterator<Report> it = valid.getReports();
-			while (it.hasNext()) {
-				System.out.println(it.next());
-			}
-		}
-
+		String rules = "[moreThan2Children: (?X rdf:type s:InternetApplication) (?X s:pages ?P1) (?X s:pages ?P2) notEqual(?P1, ?P2) -> (?X eg:moreThan2Children 'true') ]\n" +
+			"[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"noValue(?X eg:moreThan2Children 'true') ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertIsValid(valid);
+		
 	}
 	
 	/**
@@ -174,16 +249,60 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		Model model = ModelFactory.createDefaultModel();
 		InfModel inf = ModelFactory.createInfModel(reasoner, model);
 		ValidityReport valid = inf.validate();
-		assertFalse(valid.isValid());
-		Iterator<Report> it = valid.getReports();
-		while (it.hasNext()) {
-			Report r = it.next();
-			System.out.println(r);
+		assertNotValid(valid);
+	}
+
+	/**
+	 * Assert that the given validity report is valid.
+	 * 
+	 * @param valid
+	 */
+	protected void assertIsValid(ValidityReport valid) {
+		if (valid.isValid()) {
+			if (valid.isClean()) {
+				// ok
+			} else {
+				String message = printReports(valid);
+				fail("ValidityReport was valid but not clean: " + message);
+			}
+		} else {
+			String message = printReports(valid);
+			fail("ValidityReport was not valid: " + message);
+		}
+	}	
+	
+	/**
+	 * Assert that the given validity report is not valid.
+	 * 
+	 * @param valid
+	 */
+	protected void assertNotValid(ValidityReport valid) {
+		if (!valid.isValid()) {
+			// ok
+			// we can't test for clean-ness
+		} else {
+			String message = printReports(valid);
+			fail("ValidityReport was valid: " + message);
 		}
 	}
-	
-	// we can use Jena to take a model represented in RDF and
-	// check it against the OWL model
-	
+
+	/**
+	 * Print validity reports to stdout and return a message
+	 * describing the status.
+	 * 
+	 * @param valid
+	 * @return The first validity report
+	 */
+	private String printReports(ValidityReport valid) {
+		Iterator<Report> it = valid.getReports();
+		String message = null;
+		while (it.hasNext()) {
+			Report r = it.next();
+			if (message == null)
+				message = r.toString();
+			System.out.println(r);
+		}
+		return message;
+	}
 	
 }

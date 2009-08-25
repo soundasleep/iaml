@@ -3,17 +3,21 @@
  */
 package org.openiaml.model.tests;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +28,7 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
@@ -176,9 +181,65 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * 
 	 * @return
 	 */
-	protected ICreateElements createHandler() {
-		ICreateElements handler = new EcoreInferenceHandler(resource);
+	protected EcoreInferenceHandler createHandler() {
+		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
 		return handler;
+	}
+	
+	/**
+	 * <p>Create a new instance of the inference engine.</p>
+	 * 
+	 * <p>In this particular implementation, we extend the
+	 * <code>create</code> method so we can keep a log of 
+	 * model elements generated in every step.</p>
+	 * 
+	 * <b>TODO</b> remove from final implementation.
+	 * @return
+	 */
+	protected CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions) {
+		return new CreateMissingElementsWithDrools(handler, trackInsertions) {
+
+			@Override
+			public void create(EObject model, boolean logRuleSource,
+					IProgressMonitor monitor) throws InferenceException {
+
+				// how many elements are in the initial model?
+				int initial = 0;
+				{
+					Iterator<EObject> it = model.eAllContents();
+					while (it.hasNext()) {
+						it.next();
+						initial++;
+					}
+				}
+					
+				long startTime = System.currentTimeMillis();
+				super.create(model, logRuleSource, monitor);
+				long diff = System.currentTimeMillis() - startTime;
+
+				// how many are in the final model?
+				int finalCount = 0;
+				{
+					Iterator<EObject> it = model.eAllContents();
+					while (it.hasNext()) {
+						it.next();
+						finalCount++;
+					}
+				}
+				
+				// write this out to a log file
+				try {
+					BufferedWriter writer = new BufferedWriter(new FileWriter("inference-count.csv", true));
+					System.out.println(initial + " -> " + finalCount + "(" + diff + " ms)");
+					writer.write(initial + "," + finalCount + "," + diff + "\n");
+					writer.close();
+				} catch (IOException e) {
+					throw new InferenceException(e);
+				}
+				
+			}
+			
+		};
 	}
 	
 	/**
@@ -192,7 +253,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	protected InternetApplication loadAndInfer(InternetApplication root, boolean logRuleSource) throws Exception {
 		// we now try to do inference
 		ICreateElements handler = createHandler();
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
+		CreateMissingElementsWithDrools ce = getInferenceEngine(handler, false);
 		ce.create(root, logRuleSource, monitor);
 
 		// write out this inferred model for reference
@@ -221,7 +282,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			
 			// we now try to do inference
 			ICreateElements handler = createHandler();
-			CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
+			CreateMissingElementsWithDrools ce = getInferenceEngine(handler, false);
 			ce.create(root, logRuleSource, monitor);
 	
 			// write out this inferred model for reference

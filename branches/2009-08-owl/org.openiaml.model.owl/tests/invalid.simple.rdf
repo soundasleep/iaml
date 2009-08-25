@@ -8,6 +8,8 @@
     
     <InternetApplication rdf:about="id001">
     	<rdf:type rdf:resource="InternetApplication"/>
+		<pages rdf:resource="id002"/>
+		<pages rdf:resource="id003"/>
     </InternetApplication>
 
     <Page rdf:about="id002">

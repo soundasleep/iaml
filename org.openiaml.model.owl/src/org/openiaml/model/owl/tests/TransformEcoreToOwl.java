@@ -113,6 +113,12 @@ public class TransformEcoreToOwl extends ModelTestCase {
 				"[(?X rb:violation error('test', 'test', ?X)) <- " +
 				"(?X rdf:type s:Page)]]";
 			
+			rules = "[validationRule: (?v rb:validation on()) -> " +
+				"[(?X rb:violation error(?P1, ?P2, ?X)) <- " +
+				"(?X rdf:type s:InternetApplication) " +
+				"(?X s:pages ?P1) " + 
+				"(?X s:pages ?P2) notEqual(?P1, ?P2) ]]";
+			
 			// this works (matches all rules)
 			/*
 			rules = "[validationRule: (?v rb:validation on()) -> " +

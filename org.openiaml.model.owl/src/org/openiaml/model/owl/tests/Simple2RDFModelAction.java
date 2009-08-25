@@ -14,8 +14,10 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import l3i.sido.emf4sw.rdf.RDFPackage;
+import l3i.sido.emf4sw.ui.rdf.RDFModel2RDFXMLAction;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -23,6 +25,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.m2m.atl.core.IExtractor;
 import org.eclipse.m2m.atl.core.IInjector;
@@ -106,45 +109,49 @@ public class Simple2RDFModelAction implements IObjectActionDelegate {
 	}
 
 	private void transform(IFile file) throws CoreException, IOException, ATLCoreException {
-		System.out.println(1);
 		ModelFactory factory = CoreService.createModelFactory("EMF");
 
-		System.out.println(2);
 		rdfMetamodel = factory.newReferenceModel();
 		((EMFInjector)injector).inject((EMFReferenceModel)rdfMetamodel, RDFPackage.eINSTANCE.eResource());
 
-		System.out.println(3);
 		simple = factory.newReferenceModel();
 		//injector.inject(simple, "http://www.eclipse.org/emf/2002/Ecore");
 		injector.inject(simple, "http://openiaml.org/simple");
 
-		System.out.println(4);
 		ILauncher launcher = CoreService.getLauncher("EMF-specific VM");
 		launcher.initialize(Collections.<String, Object> emptyMap());
 
-		System.out.println(5);
 		IModel model = factory.newModel(simple);
 		IModel owlModel = factory.newModel(rdfMetamodel);
 
-		System.out.println(6);
 		injector.inject(model, file.getFullPath().toString());
 
 		launcher.addInModel(model, "IN", "simple");
 		launcher.addOutModel(owlModel, "OUT", "rdf");
 
-		System.out.println(7);
 		launcher.launch(ILauncher.RUN_MODE, new NullProgressMonitor(), 
 				Collections.<String, Object> emptyMap(), 
 				new Object[] {asmURL.openStream()}
 		);
 
-		System.out.println(8);
 		String name = file.getName();
-		name = name.substring(0, name.length() - (file.getFileExtension().length()+1)) + ".rdf";
+		name = name.substring(0, name.length() - (file.getFileExtension().length()+1)) + ".rdf-ecore";
 
 		extractor.extract(owlModel, file.getFullPath().removeLastSegments(1).append(name).toString());
+		
+		// once saved as RDFecore, load this up and save it as RDF/XML
+		RDFModel2RDFXMLAction action = new RDFModel2RDFXMLAction();
+		IFile targetRdf = null;
+		if (file.getParent() instanceof IFolder) {
+			targetRdf = ((IFolder) file.getParent()).getFile(name);
+		} else if (file.getParent() instanceof IProject) {
+			targetRdf = ((IProject) file.getParent()).getFile(name);
+		} else {
+			throw new RuntimeException("Could not get parent from '" + file.getParent() + "': class " + file.getParent().getClass());
+		}
+		action.selectionChanged(null, new StructuredSelection( targetRdf ));
+		action.run(null);
 
-		System.out.println(9);
 		file.getParent().refreshLocal(IProject.DEPTH_INFINITE, null);
 	}
 

@@ -17,7 +17,11 @@ helper def: namespaces: Map(String, String) =
 	);
 
 helper context simple!Page def: getURI() : String = 'http://www.example.org/page#' + self.name.trim();	
-	
+
+-- [http://wiki.eclipse.org/ATL/User_Guide#ATL_imperative_code]
+-- helper def: counter : Integer = 0;
+-- in imperative code: thisModule.counter <- thisModule.counter + 1;
+
 entrypoint rule rdfGraph() {
 	to
 		r : rdf!RDFGraph (
@@ -80,8 +84,6 @@ rule PageInInternetApplication {
 		subject : rdf!Resource (
 			URI <- 'http://openiaml.org/simple#root1',
 			graph <- thisModule.graph
-			-- subjectOf <- foo
-			-- subjectOf <- i.pages->collect( p | thisModule.PageInInternetApplication(subject, p) )
 		),	
 		predicate : rdf!Property (
 			URI <- 'http://openiaml.org/simple#pages',
@@ -89,35 +91,86 @@ rule PageInInternetApplication {
 		),
 		object : rdf!Resource (
 			URI <- p.getURI(),
-			graph <- thisModule.graph
+			graph <- thisModule.graph			
 		),
 		t : rdf!Triple (
 			subject <- subject,
 			predicate <- predicate,
 			object <- object,
 			graph <- thisModule.graph
-		),
+		)
 		
-		-- rdf:type triple
-		t2 : rdf!Triple (
-			subject <- object,
-			predicate <- predicate2,
-			object <- object2,
+		do { 
+			thisModule.PageType(p); 
+			thisModule.PageName(p);
+		}
+}
+
+-- "Note that a source model element of an ATL transformation should not be matched by more than one ATL matched rule"
+
+lazy rule PageType {
+	from
+		p : simple!Page
+		
+	to
+	
+		subject : rdf!Resource (
+			URI <- p.getURI(),
 			graph <- thisModule.graph
 		),
-		predicate2 : rdf!Property (
+		predicate : rdf!Property (
 			URI <- 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
 			graph <- thisModule.graph
 		),
-		object2 : rdf!Resource (
+		object : rdf!Resource (
 			URI <- 'http://openiaml.org/simple#Page',
+			graph <- thisModule.graph
+		),
+		
+		t : rdf!Triple (
+			subject <- subject,
+			predicate <- predicate,
+			object <- object,
 			graph <- thisModule.graph
 		)
 		
-		-- subject -- IA
-		-- predicate -- simple#pages
-		-- object -- object
-
 }
 
-
+lazy rule PageName {
+	from
+		p : simple!Page
+		
+	to
+	
+		-- dataTypeURI : DataType
+		-- DataType extends URIReference
+		-- URIReference extends Node, URIElement
+		-- Node (graph : Graph, objectOf : Triple)
+		-- URIElement (URI : string)
+	
+		dataType : rdf!Datatype (
+			URI <- 'http://www.w3.org/2001/XMLSchema#string',
+			graph <- thisModule.graph
+		),
+		subject : rdf!Resource (
+			URI <- p.getURI(),
+			graph <- thisModule.graph
+		),
+		predicate : rdf!Property (
+			URI <- 'http://openiaml.org/simple#name',
+			graph <- thisModule.graph
+		),
+		object : rdf!TypedLiteral (
+			lexicalForm <- p.name,
+			datatypeURI <- dataType,
+			graph <- thisModule.graph
+		),
+		
+		t : rdf!Triple (
+			subject <- subject,
+			predicate <- predicate,
+			object <- object,
+			graph <- thisModule.graph
+		)
+		
+}

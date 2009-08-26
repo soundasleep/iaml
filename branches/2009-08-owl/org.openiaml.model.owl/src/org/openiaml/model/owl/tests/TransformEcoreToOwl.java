@@ -353,8 +353,9 @@ public class TransformEcoreToOwl extends ModelTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public void testLoadMyAtlTransformationValidation1() throws Exception {
-
+	public void testLoadMyAtlTransformationValidation1() throws Throwable {
+		try {
+		
 		IFile rdf = testMyAtlTranslation();
 
 		PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
@@ -373,6 +374,12 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		ValidityReport valid = inf.validate();
 		assertIsValid(valid);
 	
+		} catch (Throwable t) {
+			System.out.println(t.getMessage());
+			t.printStackTrace();
+			System.out.println(t.getClass());
+			throw t;
+		}
 	}
 	
 	/**

@@ -16,6 +16,8 @@ helper def: namespaces: Map(String, String) =
 		)
 	);
 
+helper context simple!Page def: getURI() : String = 'http://www.example.org/page#' + self.name.trim();	
+	
 entrypoint rule rdfGraph() {
 	to
 		r : rdf!RDFGraph (
@@ -46,6 +48,8 @@ rule InternetApplication {
 		subject : rdf!Resource (
 			URI <- 'http://openiaml.org/simple#root1',
 			graph <- thisModule.graph
+			-- subjectOf <- foo
+			-- subjectOf <- i.pages->collect( p | thisModule.PageInInternetApplication(subject, p) )
 		),
 		t : rdf!Triple (
 			subject <- subject,
@@ -61,4 +65,59 @@ rule InternetApplication {
 			URI <- 'http://openiaml.org/simple#InternetApplication',
 			graph <- thisModule.graph
 		)
+		-- foo : distinct rdf!Triple foreach ( p in i.pages) ( PageInInternetApplication(subject, p) )
+		
 }
+
+rule PageInInternetApplication {
+	from
+		-- i : simple!InternetApplication,
+		-- subject : rdf!Resource,
+		p : simple!Page
+		
+	to
+	
+		subject : rdf!Resource (
+			URI <- 'http://openiaml.org/simple#root1',
+			graph <- thisModule.graph
+			-- subjectOf <- foo
+			-- subjectOf <- i.pages->collect( p | thisModule.PageInInternetApplication(subject, p) )
+		),	
+		predicate : rdf!Property (
+			URI <- 'http://openiaml.org/simple#pages',
+			graph <- thisModule.graph
+		),
+		object : rdf!Resource (
+			URI <- p.getURI(),
+			graph <- thisModule.graph
+		),
+		t : rdf!Triple (
+			subject <- subject,
+			predicate <- predicate,
+			object <- object,
+			graph <- thisModule.graph
+		),
+		
+		-- rdf:type triple
+		t2 : rdf!Triple (
+			subject <- object,
+			predicate <- predicate2,
+			object <- object2,
+			graph <- thisModule.graph
+		),
+		predicate2 : rdf!Property (
+			URI <- 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+			graph <- thisModule.graph
+		),
+		object2 : rdf!Resource (
+			URI <- 'http://openiaml.org/simple#Page',
+			graph <- thisModule.graph
+		)
+		
+		-- subject -- IA
+		-- predicate -- simple#pages
+		-- object -- object
+
+}
+
+

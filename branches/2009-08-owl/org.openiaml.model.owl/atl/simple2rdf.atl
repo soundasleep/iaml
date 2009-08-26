@@ -1,6 +1,6 @@
 
 module simple2rdf;
-create OUT : rdf from IN : simple;
+create OUT : rdf from IN : simple, ECORE : ecore;
 
 helper def: namespaces: Map(String, String) =
 	Map {
@@ -16,7 +16,22 @@ helper def: namespaces: Map(String, String) =
 		)
 	);
 
-helper context simple!Page def: getURI() : String = 'http://www.example.org/page#' + self.name.trim();	
+-- convert any EObject into a representative URI unique to that object, 'http://example.org/model#model_512'
+-- I would prefer to use simple!EObject here, but this doesn't match simple!InternetApplication,
+-- although simple!NamedElement does match
+helper context OclAny def: getElementID() :
+	String = self.eClass().getEPackage().getNsURI() + '#model_' +
+		if simple!EObject.allInstancesFrom('IN')->includes(self) 
+		then simple!EObject.allInstancesFrom('IN')->asSequence()->indexOf(self)->toString()
+		else 'unknown'
+		endif;
+
+--helper context simple!NamedElement def: getElementID() :
+--	String = 'http://example.org/model#NamedElement';
+
+
+--helper context OclAny def: getElementID() :
+--	String = 'http://example.org/model#oclAny';
 
 -- [http://wiki.eclipse.org/ATL/User_Guide#ATL_imperative_code]
 -- helper def: counter : Integer = 0;
@@ -46,11 +61,25 @@ lazy rule addNamespaces {
 
 rule InternetApplication {
 	from
-		i : simple!InternetApplication
+		i : simple!InternetApplication,
+		-- e : ecore!EClass ( e.isInstance(i) )
+		-- the above doesn't work, because the two EClasses are actually different
+		-- references; EClassImpl.isSuperTypeOf uses 'someClass == this'
+		-- what about EClass.getEPackage()?
+		e : ecore!EClass,
+		p : ecore!EPackage
+		
+		 ( e.name = i.eClass().name and
+		 	e.getEPackage().getNsURI() = p.getNsURI() )
 	
 	to
 		subject : rdf!Resource (
-			URI <- 'http://openiaml.org/simple#root1',
+			-- URI <- p.getNsURI() + '#' + e.name + '_' + i.getElementID(),
+			URI <- i.getElementID(),
+			-- URI <- 'http://example.org/model#' + thisModule.counter,
+			-- URI <- p.getNsURI() + '#' + e.name + 'kittens',
+			-- URI <- 'http://example.org/foo#final1',
+			-- URI <- 'http://openiaml.org/simple#root1;' + e.name + ';' + p.getNsURI(),
 			graph <- thisModule.graph
 			-- subjectOf <- foo
 			-- subjectOf <- i.pages->collect( p | thisModule.PageInInternetApplication(subject, p) )
@@ -69,8 +98,7 @@ rule InternetApplication {
 			URI <- 'http://openiaml.org/simple#InternetApplication',
 			graph <- thisModule.graph
 		)
-		-- foo : distinct rdf!Triple foreach ( p in i.pages) ( PageInInternetApplication(subject, p) )
-		
+	
 }
 
 rule PageInInternetApplication {
@@ -82,7 +110,8 @@ rule PageInInternetApplication {
 	to
 	
 		subject : rdf!Resource (
-			URI <- 'http://openiaml.org/simple#root1',
+			URI <- p.eContainer().getElementID(),
+			-- URI <- 'http://example.org/model#foo1',
 			graph <- thisModule.graph
 		),	
 		predicate : rdf!Property (
@@ -90,7 +119,8 @@ rule PageInInternetApplication {
 			graph <- thisModule.graph
 		),
 		object : rdf!Resource (
-			URI <- p.getURI(),
+			URI <- p.getElementID(),
+			-- URI <- 'http://example.org/model#foo2',
 			graph <- thisModule.graph			
 		),
 		t : rdf!Triple (
@@ -115,7 +145,8 @@ lazy rule PageType {
 	to
 	
 		subject : rdf!Resource (
-			URI <- p.getURI(),
+			URI <- p.getElementID(),
+			-- URI <- 'http://example.org/model#foo3',
 			graph <- thisModule.graph
 		),
 		predicate : rdf!Property (
@@ -153,7 +184,8 @@ lazy rule PageName {
 			graph <- thisModule.graph
 		),
 		subject : rdf!Resource (
-			URI <- p.getURI(),
+			URI <- p.getElementID(),
+			-- URI <- 'http://example.org/model#foo4',
 			graph <- thisModule.graph
 		),
 		predicate : rdf!Property (
@@ -174,3 +206,34 @@ lazy rule PageName {
 		)
 		
 }
+
+rule TestEcore {
+	from
+		e : ecore!EClass
+	
+	to
+		subject : rdf!Resource (
+			URI <- 'http://openiaml.org/simple#' + e.name,
+			graph <- thisModule.graph
+			-- subjectOf <- foo
+			-- subjectOf <- i.pages->collect( p | thisModule.PageInInternetApplication(subject, p) )
+		),
+		t : rdf!Triple (
+			subject <- subject,
+			predicate <- predicate,
+			object <- object,
+			graph <- thisModule.graph
+		),
+		predicate : rdf!Property (
+			URI <- 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+			graph <- thisModule.graph
+		),
+		object : rdf!Resource (
+			URI <- 'http://openiaml.org/simple#EClass',
+			graph <- thisModule.graph
+		)
+		-- foo : distinct rdf!Triple foreach ( p in i.pages) ( PageInInternetApplication(subject, p) )
+		
+}
+
+

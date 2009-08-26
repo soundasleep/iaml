@@ -13,6 +13,7 @@ import l3i.sido.emf4sw.ui.ecore2owl.Ecore2OWLFileAction;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.openiaml.model.owl.simple.simple.InternetApplication;
 import org.openiaml.model.tests.ModelTestCase;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -383,7 +384,8 @@ public class TransformEcoreToOwl extends ModelTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public void testLoadMyAtlTransformationValidation2() throws Exception {
+	public void testLoadMyAtlTransformationValidation2() throws Throwable {
+		try {
 
 		IFile rdf = testMyAtlTranslation();
 
@@ -410,6 +412,13 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		
 		printReports(valid);
 	
+		} catch (Throwable t) {
+			System.out.println(t.getMessage());
+			t.printStackTrace();
+			System.out.println(t.getClass());
+			throw t;
+			
+		}
 	}
 	
 	

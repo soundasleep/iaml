@@ -54,6 +54,8 @@ public class Simple2RDFModelAction implements IObjectActionDelegate {
 
 	private static IReferenceModel simple;
 
+	private static IReferenceModel ecore;
+
 	private static URL asmURL;
 
 	private ISelection currentSelection;
@@ -117,16 +119,22 @@ public class Simple2RDFModelAction implements IObjectActionDelegate {
 		simple = factory.newReferenceModel();
 		//injector.inject(simple, "http://www.eclipse.org/emf/2002/Ecore");
 		injector.inject(simple, "http://openiaml.org/simple");
+		
+		ecore = factory.newReferenceModel();
+		injector.inject(ecore, "http://www.eclipse.org/emf/2002/Ecore");
 
 		ILauncher launcher = CoreService.getLauncher("EMF-specific VM");
 		launcher.initialize(Collections.<String, Object> emptyMap());
 
 		IModel model = factory.newModel(simple);
+		IModel model_ecore = factory.newModel(ecore);
 		IModel owlModel = factory.newModel(rdfMetamodel);
 
 		injector.inject(model, file.getFullPath().toString());
+		injector.inject(model_ecore, "model/simple.ecore");
 
 		launcher.addInModel(model, "IN", "simple");
+		launcher.addInModel(model_ecore, "ECORE", "ecore");
 		launcher.addOutModel(owlModel, "OUT", "rdf");
 
 		launcher.launch(ILauncher.RUN_MODE, new NullProgressMonitor(), 

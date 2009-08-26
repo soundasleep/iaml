@@ -4,12 +4,14 @@
 package org.openiaml.model.owl.tests;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
 import l3i.sido.emf4sw.ui.ecore2owl.Ecore2OWLFileAction;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.openiaml.model.tests.ModelTestCase;
 
@@ -333,13 +335,27 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		assertTrue("Final file should exist: " + transformed, transformed.exists());
 		
 		// print out target.rdf
-		InputStream s = transformed.getContents();
+		printFile(getProject().getFile("valid.rdf-ecore"));
+		printFile(transformed);
+		
+	}
+	
+	/**
+	 * Print out the contents of the given IFile.
+	 * 
+	 * @param file
+	 * @throws CoreException 
+	 * @throws IOException 
+	 */
+	protected void printFile(IFile file) throws CoreException, IOException {
+		System.out.println("[" + file + "]");
+		InputStream s = file.getContents();
 		int c;
 		while ((c = s.read()) != -1) {
 			System.out.print((char) c);
 		}
 		s.close();
-		
+		System.out.println();
 	}
 	
 }

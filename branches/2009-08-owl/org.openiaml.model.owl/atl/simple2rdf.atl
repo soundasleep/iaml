@@ -26,13 +26,6 @@ helper context OclAny def: getElementID() :
 		else 'unknown'
 		endif;
 
---helper context simple!NamedElement def: getElementID() :
---	String = 'http://example.org/model#NamedElement';
-
-
---helper context OclAny def: getElementID() :
---	String = 'http://example.org/model#oclAny';
-
 -- [http://wiki.eclipse.org/ATL/User_Guide#ATL_imperative_code]
 -- helper def: counter : Integer = 0;
 -- in imperative code: thisModule.counter <- thisModule.counter + 1;
@@ -65,7 +58,6 @@ rule InternetApplication {
 		-- e : ecore!EClass ( e.isInstance(i) )
 		-- the above doesn't work, because the two EClasses are actually different
 		-- references; EClassImpl.isSuperTypeOf uses 'someClass == this'
-		-- what about EClass.getEPackage()?
 		e : ecore!EClass,
 		p : ecore!EPackage
 		
@@ -74,15 +66,8 @@ rule InternetApplication {
 	
 	to
 		subject : rdf!Resource (
-			-- URI <- p.getNsURI() + '#' + e.name + '_' + i.getElementID(),
 			URI <- i.getElementID(),
-			-- URI <- 'http://example.org/model#' + thisModule.counter,
-			-- URI <- p.getNsURI() + '#' + e.name + 'kittens',
-			-- URI <- 'http://example.org/foo#final1',
-			-- URI <- 'http://openiaml.org/simple#root1;' + e.name + ';' + p.getNsURI(),
 			graph <- thisModule.graph
-			-- subjectOf <- foo
-			-- subjectOf <- i.pages->collect( p | thisModule.PageInInternetApplication(subject, p) )
 		),
 		t : rdf!Triple (
 			subject <- subject,
@@ -103,15 +88,12 @@ rule InternetApplication {
 
 rule PageInInternetApplication {
 	from
-		-- i : simple!InternetApplication,
-		-- subject : rdf!Resource,
 		p : simple!Page
 		
 	to
 	
 		subject : rdf!Resource (
 			URI <- p.eContainer().getElementID(),
-			-- URI <- 'http://example.org/model#foo1',
 			graph <- thisModule.graph
 		),	
 		predicate : rdf!Property (
@@ -120,7 +102,6 @@ rule PageInInternetApplication {
 		),
 		object : rdf!Resource (
 			URI <- p.getElementID(),
-			-- URI <- 'http://example.org/model#foo2',
 			graph <- thisModule.graph			
 		),
 		t : rdf!Triple (
@@ -146,7 +127,6 @@ lazy rule PageType {
 	
 		subject : rdf!Resource (
 			URI <- p.getElementID(),
-			-- URI <- 'http://example.org/model#foo3',
 			graph <- thisModule.graph
 		),
 		predicate : rdf!Property (
@@ -185,7 +165,6 @@ lazy rule PageName {
 		),
 		subject : rdf!Resource (
 			URI <- p.getElementID(),
-			-- URI <- 'http://example.org/model#foo4',
 			graph <- thisModule.graph
 		),
 		predicate : rdf!Property (
@@ -215,8 +194,6 @@ rule TestEcore {
 		subject : rdf!Resource (
 			URI <- 'http://openiaml.org/simple#' + e.name,
 			graph <- thisModule.graph
-			-- subjectOf <- foo
-			-- subjectOf <- i.pages->collect( p | thisModule.PageInInternetApplication(subject, p) )
 		),
 		t : rdf!Triple (
 			subject <- subject,
@@ -232,7 +209,6 @@ rule TestEcore {
 			URI <- 'http://openiaml.org/simple#EClass',
 			graph <- thisModule.graph
 		)
-		-- foo : distinct rdf!Triple foreach ( p in i.pages) ( PageInInternetApplication(subject, p) )
 		
 }
 

@@ -309,11 +309,12 @@ public class TransformEcoreToOwl extends ModelTestCase {
 	}
 	
 	/**
-	 * Test custom ATL translation.
+	 * Test custom ATL translation to translate .simple into .rdf.
+	 * @return 
 	 * 
 	 * @throws Exception
 	 */
-	public void testMyAtlTranslation() throws Exception {
+	public IFile testMyAtlTranslation() throws Exception {
 		// copy over ecore file
 		// File source = new File("../org.openiaml.model/model/iaml.ecore");
 		File source = new File("tests/valid.simple");
@@ -338,7 +339,79 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		printFile(getProject().getFile("valid.rdf-ecore"));
 		printFile(transformed);
 		
+		return transformed;
+		
 	}
+	
+	/**
+	 * Take the RDF file we generated, load it with the generated
+	 * OWL file, and check that it validates.
+	 * 
+	 * Tests that an InternetApplication should have at least 2 children;
+	 * should pass.
+	 * 
+	 * @throws Exception
+	 */
+	public void testLoadMyAtlTransformationValidation1() throws Exception {
+
+		IFile rdf = testMyAtlTranslation();
+
+		PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
+		Model model = FileManager.get().loadModel("file:" + rdf.getLocation().toString());
+		
+		String rules = "[moreThan2Children: (?X rdf:type s:InternetApplication) (?X s:pages ?P1) (?X s:pages ?P2) notEqual(?P1, ?P2) -> (?X eg:moreThan2Children 'true') ]\n" +
+			"[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"noValue(?X eg:moreThan2Children 'true') ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertIsValid(valid);
+	
+	}
+	
+	/**
+	 * Take the RDF file we generated, load it with the generated
+	 * OWL file, and check that we can still check invalid validation.
+	 * 
+	 * Tests that an InternetApplication should have at least 3 children;
+	 * should fail.
+	 * 
+	 * @throws Exception
+	 */
+	public void testLoadMyAtlTransformationValidation2() throws Exception {
+
+		IFile rdf = testMyAtlTranslation();
+
+		PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
+		Model model = FileManager.get().loadModel("file:" + rdf.getLocation().toString());
+		
+		String rules = "[moreThan3Children: " +
+			"(?X rdf:type s:InternetApplication) " +
+			"(?X s:pages ?P1) (?X s:pages ?P2) (?X s:pages ?P3) " +
+			"notEqual(?P1, ?P2) notEqual(?P2, ?P3) notEqual(?P1, ?P3) " +
+				" -> (?X eg:moreThan3Children 'true') ]\n" +
+				
+			"[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"noValue(?X eg:moreThan3Children 'true') ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+		printReports(valid);
+	
+	}
+	
 	
 	/**
 	 * Print out the contents of the given IFile.

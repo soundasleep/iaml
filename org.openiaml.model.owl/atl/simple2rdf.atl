@@ -54,7 +54,7 @@ lazy rule addNamespaces {
 
 rule InternetApplication {
 	from
-		i : simple!InternetApplication,
+		i : simple!EObject,
 		-- e : ecore!EClass ( e.isInstance(i) )
 		-- the above doesn't work, because the two EClasses are actually different
 		-- references; EClassImpl.isSuperTypeOf uses 'someClass == this'
@@ -80,28 +80,73 @@ rule InternetApplication {
 			graph <- thisModule.graph
 		),
 		object : rdf!Resource (
-			URI <- 'http://openiaml.org/simple#InternetApplication',
+			URI <- p.getNsURI() + '#' + e.name,
 			graph <- thisModule.graph
 		)
 	
 }
 
-rule PageInInternetApplication {
-	from
-		p : simple!Page
+rule EReference {
+	from 
+		source : simple!EObject,
+		target : simple!EObject,
 		
-	to
+		source_class : ecore!EClass,
+		
+		feature : ecore!EStructuralFeature
+		
+		(
+			if 
+			
+			source_class.name = source.eClass().name and
+			
+			source_class.eAllStructuralFeatures.contains ( feature ) then
+			
+			-- we can't use eGet() with a feature either, because the local
+			-- featureId is different from the target featureId.
+			-- (the check is if (myFeature == parameterFeature) { return featureID; })
+							
+			-- hack to prevent source.eGet() being evaluated when it is not
+			-- a valid EFeature
+			
+			-- 'source.eClass().getEAllStructuralFeatures().contains(feature)' doesn't
+			-- work, because the Feature is in a different source model
+			
+			-- if source.eClass().getEAllStructuralFeatures().exists( f | f.name = feature.name and f.featureID = feature.featureID  )
+			
+			--if source.eClass().getEAllStructuralFeatures().debug() <> source.eClass().getEAllStructuralFeatures().contains(feature)
+			--then
+				-- 'set->any(f | f)' syntax isn't supported in 'let'
+				-- let myFeature : OclAny = source_class.eAllStructuralFeatures.any( f | f.name = feature.name and f.getFeatureID() = feature.getFeatureID() )
+				-- in
+			
+				if feature.isMany() then
+					if source.eGet(source.eClass().getEAllStructuralFeatures()->any( f | f.name = feature.name and f.getFeatureID() = feature.getFeatureID() )).contains(target)
+					then true
+					else false
+					endif
+				else
+					if source.eGet(source.eClass().getEAllStructuralFeatures()->any( f | f.name = feature.name and f.getFeatureID() = feature.getFeatureID() )) = target
+					then true
+					else false
+					endif
+				endif
+			else
+				false
+			endif
+		)
 	
+	to
 		subject : rdf!Resource (
-			URI <- p.eContainer().getElementID(),
+			URI <- source.getElementID(),
 			graph <- thisModule.graph
 		),	
 		predicate : rdf!Property (
-			URI <- 'http://openiaml.org/simple#pages',
+			URI <- source_class.getEPackage().getNsURI() + '#' + feature.name,
 			graph <- thisModule.graph
 		),
 		object : rdf!Resource (
-			URI <- p.getElementID(),
+			URI <- target.getElementID(),
 			graph <- thisModule.graph			
 		),
 		t : rdf!Triple (
@@ -111,43 +156,12 @@ rule PageInInternetApplication {
 			graph <- thisModule.graph
 		)
 		
-		do { 
-			thisModule.PageType(p); 
-			thisModule.PageName(p);
-		}
 }
+
 
 -- "Note that a source model element of an ATL transformation should not be matched by more than one ATL matched rule"
 
-lazy rule PageType {
-	from
-		p : simple!Page
-		
-	to
-	
-		subject : rdf!Resource (
-			URI <- p.getElementID(),
-			graph <- thisModule.graph
-		),
-		predicate : rdf!Property (
-			URI <- 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-			graph <- thisModule.graph
-		),
-		object : rdf!Resource (
-			URI <- 'http://openiaml.org/simple#Page',
-			graph <- thisModule.graph
-		),
-		
-		t : rdf!Triple (
-			subject <- subject,
-			predicate <- predicate,
-			object <- object,
-			graph <- thisModule.graph
-		)
-		
-}
-
-lazy rule PageName {
+rule PageName {
 	from
 		p : simple!Page
 		

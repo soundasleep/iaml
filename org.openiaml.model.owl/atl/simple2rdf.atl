@@ -206,6 +206,7 @@ rule PageName {
 rule TestEcore {
 	from
 		e : ecore!EClass
+		( false ) --disable rule for now
 	
 	to
 		subject : rdf!Resource (

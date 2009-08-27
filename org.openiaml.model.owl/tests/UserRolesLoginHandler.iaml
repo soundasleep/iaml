@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233b453c1f.69">
+  <children xsi:type="iaml.visual:Page" id="visual.1233b453dc5.b3" name="Home" generatedElements="model.1234ab4f4f4.5ef1">
+    <eventTriggers generatedBy="visual.1233b453dc5.b3" isGenerated="true" id="model.1234ab4f4f4.5ef1" name="access"/>
+  </children>
+  <children xsi:type="iaml.visual:Page" generatedBy="components.1233b453f6b.39" isGenerated="true" id="visual.1234ab4f552.7b2" name="Logout Successful" inEdges="wires.1234ab4f5cf.13ab wires.1234ab4f5cf.13b1 wires.1234ab4f5cf.13b2" generatedElements="model.1234ab4f4f4.5efc">
+    <eventTriggers generatedBy="visual.1234ab4f552.7b2" isGenerated="true" id="model.1234ab4f4f4.5efc" name="access" outEdges="wires.1234ab4f5cf.13af"/>
+    <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="components.1233b453f6b.39" isGenerated="true" id="wires.1234ab4f5cf.13af" from="model.1234ab4f4f4.5efc" to="model.1234ab4f4f4.5ef8" name="run logout operation"/>
+  </children>
+  <children xsi:type="iaml.visual:Page" generatedBy="components.1233b453f6b.39" isGenerated="true" id="visual.1234ab4f552.7b3" name="login" inEdges="wires.1234ab4f5cf.13ae" generatedElements="model.1234ab4f4f4.5efb">
+    <eventTriggers generatedBy="visual.1234ab4f552.7b3" isGenerated="true" id="model.1234ab4f4f4.5efb" name="access"/>
+    <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="components.1233b453f6b.39" isGenerated="true" id="wires.1234ab4f5cf.13b0" from="visual.1234ab4f552.7b7" to="model.1234ab4f4f4.5eed" name="onClick"/>
+    <children xsi:type="iaml.visual:InputForm" generatedBy="components.1233b453f6b.39" isGenerated="true" id="visual.1234ab4f552.7b6" name="login form" generatedElements="visual.1234ab4f552.7b7">
+      <children xsi:type="iaml.visual:Button" generatedBy="visual.1234ab4f552.7b6" isGenerated="true" id="visual.1234ab4f552.7b7" name="Login" outEdges="wires.1234ab4f5cf.13b0"/>
+    </children>
+  </children>
+  <domainStores xsi:type="iaml.users:UserStore" id="users.1233b454017.bb" name="user store">
+    <children xsi:type="iaml.users:Role" id="users.1233b454017.c1" name="Guest" generatedElements="model.1234ab4f4f4.5ef0">
+      <attributes generatedBy="users.1233b454017.c1" isGenerated="true" id="model.1234ab4f4f4.5ef0" name="generated primary key" generatedElements="model.1234ab4f4f4.5ef2 model.1234ab4f4f4.5ef3 model.1234ab4f4f4.5ef4" primaryKey="true">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1234ab4f4f4.5ef0" isGenerated="true" id="model.1234ab4f4f4.5ef2" name="update" generatedElements="model.1234ab4f4f4.5f03 model.1234ab4f4f4.5f04 operations.1234ab4f62c.14f1 operations.1234ab4f62c.14f2 model.1234ab4f4f4.5f05 model.1234ab4f4f4.5f06 model.1234ab4f4f4.5f07 model.1234ab4f4f4.5f08">
+          <parameters generatedBy="model.1234ab4f4f4.5ef2" isGenerated="true" id="model.1234ab4f4f4.5f03" name="setValueTo" outFlows="model.1234ab4f4f4.5f05"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.5ef2" isGenerated="true" id="model.1234ab4f4f4.5f04" name="setPropertyToValue" inFlows="model.1234ab4f4f4.5f05" inExecutions="model.1234ab4f4f4.5f07" outFlows="model.1234ab4f4f4.5f06" outExecutions="model.1234ab4f4f4.5f08"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.5ef2" isGenerated="true" id="operations.1234ab4f62c.14f1" outExecutions="model.1234ab4f4f4.5f07"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.5ef2" isGenerated="true" id="operations.1234ab4f62c.14f2" inExecutions="model.1234ab4f4f4.5f08"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.5ef2" isGenerated="true" id="model.1234ab4f4f4.5f05" from="model.1234ab4f4f4.5f03" to="model.1234ab4f4f4.5f04"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.5ef2" isGenerated="true" id="model.1234ab4f4f4.5f06" from="model.1234ab4f4f4.5f04" to="model.1234ab4f4f4.5ef4"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.5ef2" isGenerated="true" id="model.1234ab4f4f4.5f07" from="operations.1234ab4f62c.14f1" to="model.1234ab4f4f4.5f04"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.5ef2" isGenerated="true" id="model.1234ab4f4f4.5f08" from="model.1234ab4f4f4.5f04" to="operations.1234ab4f62c.14f2"/>
+        </operations>
+        <eventTriggers generatedBy="model.1234ab4f4f4.5ef0" isGenerated="true" id="model.1234ab4f4f4.5ef3" name="edit"/>
+        <properties generatedBy="model.1234ab4f4f4.5ef0" isGenerated="true" id="model.1234ab4f4f4.5ef4" name="fieldValue" inFlows="model.1234ab4f4f4.5f06"/>
+      </attributes>
+    </children>
+    <children xsi:type="iaml.users:Role" id="users.1233b454017.c2" name="Registered User" outEdges="wires.1233b453e32.5e" inEdges="wires.1233b453e32.66" generatedElements="model.1234ab4f4f4.5eef">
+      <wires xsi:type="iaml.wires:ParameterWire" id="wires.1233b453e32.5e" from="users.1233b454017.c2" to="components.1233b453f6b.39"/>
+      <attributes generatedBy="users.1233b454017.c2" isGenerated="true" id="model.1234ab4f4f4.5eef" name="generated primary key" generatedElements="model.1234ab4f4f4.5ef5 model.1234ab4f4f4.5ef6 model.1234ab4f4f4.5ef7" primaryKey="true">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1234ab4f4f4.5eef" isGenerated="true" id="model.1234ab4f4f4.5ef5" name="update" generatedElements="model.1234ab4f4f4.5efd model.1234ab4f4f4.5efe operations.1234ab4f62c.14ef operations.1234ab4f62c.14f0 model.1234ab4f4f4.5eff model.1234ab4f4f4.5f00 model.1234ab4f4f4.5f01 model.1234ab4f4f4.5f02">
+          <parameters generatedBy="model.1234ab4f4f4.5ef5" isGenerated="true" id="model.1234ab4f4f4.5efd" name="setValueTo" outFlows="model.1234ab4f4f4.5eff"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.5ef5" isGenerated="true" id="model.1234ab4f4f4.5efe" name="setPropertyToValue" inFlows="model.1234ab4f4f4.5eff" inExecutions="model.1234ab4f4f4.5f01" outFlows="model.1234ab4f4f4.5f00" outExecutions="model.1234ab4f4f4.5f02"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.5ef5" isGenerated="true" id="operations.1234ab4f62c.14ef" outExecutions="model.1234ab4f4f4.5f01"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.5ef5" isGenerated="true" id="operations.1234ab4f62c.14f0" inExecutions="model.1234ab4f4f4.5f02"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.5ef5" isGenerated="true" id="model.1234ab4f4f4.5eff" from="model.1234ab4f4f4.5efd" to="model.1234ab4f4f4.5efe"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.5ef5" isGenerated="true" id="model.1234ab4f4f4.5f00" from="model.1234ab4f4f4.5efe" to="model.1234ab4f4f4.5ef7"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.5ef5" isGenerated="true" id="model.1234ab4f4f4.5f01" from="operations.1234ab4f62c.14ef" to="model.1234ab4f4f4.5efe"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.5ef5" isGenerated="true" id="model.1234ab4f4f4.5f02" from="model.1234ab4f4f4.5efe" to="operations.1234ab4f62c.14f0"/>
+        </operations>
+        <eventTriggers generatedBy="model.1234ab4f4f4.5eef" isGenerated="true" id="model.1234ab4f4f4.5ef6" name="edit"/>
+        <properties generatedBy="model.1234ab4f4f4.5eef" isGenerated="true" id="model.1234ab4f4f4.5ef7" name="fieldValue" inFlows="model.1234ab4f4f4.5f00"/>
+      </attributes>
+    </children>
+  </domainStores>
+  <sessions id="scopes.1233b453efe.5b" name="my session" generatedElements="model.1234ab4f4f4.5eee">
+    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1234ab4f5cf.13b0" generatedBy="components.1233b453f6b.39" isGenerated="true" id="model.1234ab4f4f4.5eed" name="do login" outEdges="wires.1234ab4f5cf.13ad wires.1234ab4f5cf.13ae"/>
+    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1234ab4f5cf.13af" generatedBy="components.1233b453f6b.39" isGenerated="true" id="model.1234ab4f4f4.5ef8" name="do logout" outEdges="wires.1234ab4f5cf.13b2"/>
+    <eventTriggers generatedBy="scopes.1233b453efe.5b" isGenerated="true" id="model.1234ab4f4f4.5eee" name="init"/>
+    <wires xsi:type="iaml.wires:NavigateWire" generatedBy="components.1233b453f6b.39" isGenerated="true" id="wires.1234ab4f5cf.13ad" from="model.1234ab4f4f4.5eed" to="visual.1234ab4f552.7b4" name="navigate on successful login"/>
+    <wires xsi:type="iaml.wires:NavigateWire" generatedBy="components.1233b453f6b.39" isGenerated="true" id="wires.1234ab4f5cf.13ae" from="model.1234ab4f4f4.5eed" to="visual.1234ab4f552.7b3" name="fail"/>
+    <wires xsi:type="iaml.wires:NavigateWire" generatedBy="components.1233b453f6b.39" isGenerated="true" id="wires.1234ab4f5cf.13b2" from="model.1234ab4f4f4.5ef8" to="visual.1234ab4f552.7b2" name="navigate on successful logout"/>
+    <children xsi:type="iaml.components:LoginHandler" id="components.1233b453f6b.39" name="user login handler" outEdges="wires.1234ab4f5cf.13ab wires.1234ab4f5cf.13ac" inEdges="wires.1233b453e32.5e" generatedElements="visual.1234ab4f552.7b2 wires.1234ab4f5cf.13ab model.1234ab4f4f4.5eed visual.1234ab4f552.7b3 visual.1234ab4f552.7b4 wires.1234ab4f5cf.13ac visual.1234ab4f552.7b5 model.1234ab4f4f4.5ef8 wires.1234ab4f5cf.13ad wires.1234ab4f5cf.13ae visual.1234ab4f552.7b6 wires.1234ab4f5cf.13af wires.1234ab4f5cf.13b0 wires.1234ab4f5cf.13b1 wires.1234ab4f5cf.13b2" type="USER">
+      <wires xsi:type="iaml.wires:NavigateWire" generatedBy="components.1233b453f6b.39" isGenerated="true" id="wires.1234ab4f5cf.13ab" from="components.1233b453f6b.39" to="visual.1234ab4f552.7b2" name="logout"/>
+      <wires xsi:type="iaml.wires:NavigateWire" generatedBy="components.1233b453f6b.39" isGenerated="true" id="wires.1234ab4f5cf.13ac" from="components.1233b453f6b.39" to="visual.1234ab4f552.7b4" name="login"/>
+    </children>
+    <children xsi:type="iaml.visual:Page" id="visual.1233b453dc5.c2" name="target page" generatedElements="model.1234ab4f4f4.5eec">
+      <eventTriggers generatedBy="visual.1233b453dc5.c2" isGenerated="true" id="model.1234ab4f4f4.5eec" name="access"/>
+    </children>
+    <children xsi:type="iaml.components:AccessControlHandler" id="components.1233b453f6b.41" name="access control" outEdges="wires.1233b453e32.66">
+      <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233b453e32.66" from="components.1233b453f6b.41" to="users.1233b454017.c2"/>
+    </children>
+    <children xsi:type="iaml.visual:Page" generatedBy="components.1233b453f6b.39" isGenerated="true" id="visual.1234ab4f552.7b4" name="Login Successful" inEdges="wires.1234ab4f5cf.13ac wires.1234ab4f5cf.13ad" generatedElements="model.1234ab4f4f4.5efa">
+      <eventTriggers generatedBy="visual.1234ab4f552.7b4" isGenerated="true" id="model.1234ab4f4f4.5efa" name="access"/>
+    </children>
+    <children xsi:type="iaml.visual:Page" generatedBy="components.1233b453f6b.39" isGenerated="true" id="visual.1234ab4f552.7b5" name="logout" generatedElements="model.1234ab4f4f4.5ef9">
+      <eventTriggers generatedBy="visual.1234ab4f552.7b5" isGenerated="true" id="model.1234ab4f4f4.5ef9" name="access" outEdges="wires.1234ab4f5cf.13b1"/>
+      <wires xsi:type="iaml.wires:NavigateWire" generatedBy="components.1233b453f6b.39" isGenerated="true" id="wires.1234ab4f5cf.13b1" from="model.1234ab4f4f4.5ef9" to="visual.1234ab4f552.7b2" name="redirect to intended logout page"/>
+    </children>
+  </sessions>
+</iaml:InternetApplication>

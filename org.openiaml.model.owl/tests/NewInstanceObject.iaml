@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1213cee9b4f.f">
+  <children xsi:type="iaml.visual:Page" id="visual.1213cee9bad.9" name="container" generatedElements="model.1234ab4f4f4.2da0">
+    <eventTriggers generatedBy="visual.1213cee9bad.9" isGenerated="true" id="model.1234ab4f4f4.2da0" name="access"/>
+    <children xsi:type="iaml:DomainObjectInstance" id="model.1213cee9b4f.99" name="&quot;My User&quot;" inEdges="wires.1213cee9bad.7" generatedElements="operations.1234ab4f62c.a30 model.1234ab4f4f4.2d9f">
+      <operations xsi:type="iaml.operations:DecisionOperation" generatedBy="model.1213cee9b4f.99" isGenerated="true" id="operations.1234ab4f62c.a30" name="exists?"/>
+      <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1213cee9b4f.99" isGenerated="true" id="model.1234ab4f4f4.2d9f" name="save"/>
+      <attributes id="model.1213cee9b4f.e1" name="name" inEdges="wires.1213cee9bad.18" generatedElements="model.1234ab4f4f4.2d9c model.1234ab4f4f4.2d9d model.1234ab4f4f4.2d9e">
+        <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1234ab4f5cf.9bc" generatedBy="model.1213cee9b4f.e1" isGenerated="true" id="model.1234ab4f4f4.2d9e" name="update" generatedElements="model.1234ab4f4f4.2da1 model.1234ab4f4f4.2da2 operations.1234ab4f62c.a31 operations.1234ab4f62c.a32 model.1234ab4f4f4.2da3 model.1234ab4f4f4.2da4 model.1234ab4f4f4.2da5 model.1234ab4f4f4.2da6">
+          <parameters generatedBy="model.1234ab4f4f4.2d9e" isGenerated="true" id="model.1234ab4f4f4.2da1" name="setValueTo" outFlows="model.1234ab4f4f4.2da3"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2d9e" isGenerated="true" id="model.1234ab4f4f4.2da2" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2da3" inExecutions="model.1234ab4f4f4.2da5" outFlows="model.1234ab4f4f4.2da4" outExecutions="model.1234ab4f4f4.2da6"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2d9e" isGenerated="true" id="operations.1234ab4f62c.a31" outExecutions="model.1234ab4f4f4.2da5"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2d9e" isGenerated="true" id="operations.1234ab4f62c.a32" inExecutions="model.1234ab4f4f4.2da6"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d9e" isGenerated="true" id="model.1234ab4f4f4.2da3" from="model.1234ab4f4f4.2da1" to="model.1234ab4f4f4.2da2"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d9e" isGenerated="true" id="model.1234ab4f4f4.2da4" from="model.1234ab4f4f4.2da2" to="model.1234ab4f4f4.2d9c"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d9e" isGenerated="true" id="model.1234ab4f4f4.2da5" from="operations.1234ab4f62c.a31" to="model.1234ab4f4f4.2da2"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d9e" isGenerated="true" id="model.1234ab4f4f4.2da6" from="model.1234ab4f4f4.2da2" to="operations.1234ab4f62c.a32"/>
+        </operations>
+        <eventTriggers generatedBy="model.1213cee9b4f.e1" isGenerated="true" id="model.1234ab4f4f4.2d9d" name="edit" outEdges="wires.1234ab4f5cf.9bd"/>
+        <properties generatedBy="model.1213cee9b4f.e1" isGenerated="true" id="model.1234ab4f4f4.2d9c" name="fieldValue" outEdges="wires.1234ab4f5cf.9bf wires.1234ab4f5cf.9c0" inFlows="model.1234ab4f4f4.2da4"/>
+      </attributes>
+      <attributes generatedBy="wires.1213cee9bad.7" isGenerated="true" id="model.1234ab4f4f4.2d88" name="password" generatedElements="model.1234ab4f4f4.2dd1 model.1234ab4f4f4.2dd2 model.1234ab4f4f4.2dd3">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1234ab4f4f4.2d88" isGenerated="true" id="model.1234ab4f4f4.2dd3" name="update" generatedElements="model.1234ab4f4f4.2dd4 model.1234ab4f4f4.2dd5 operations.1234ab4f62c.a3f operations.1234ab4f62c.a40 model.1234ab4f4f4.2dd6 model.1234ab4f4f4.2dd7 model.1234ab4f4f4.2dd8 model.1234ab4f4f4.2dd9">
+          <parameters generatedBy="model.1234ab4f4f4.2dd3" isGenerated="true" id="model.1234ab4f4f4.2dd4" name="setValueTo" outFlows="model.1234ab4f4f4.2dd6"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2dd3" isGenerated="true" id="model.1234ab4f4f4.2dd5" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2dd6" inExecutions="model.1234ab4f4f4.2dd8" outFlows="model.1234ab4f4f4.2dd7" outExecutions="model.1234ab4f4f4.2dd9"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2dd3" isGenerated="true" id="operations.1234ab4f62c.a3f" outExecutions="model.1234ab4f4f4.2dd8"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2dd3" isGenerated="true" id="operations.1234ab4f62c.a40" inExecutions="model.1234ab4f4f4.2dd9"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2dd3" isGenerated="true" id="model.1234ab4f4f4.2dd6" from="model.1234ab4f4f4.2dd4" to="model.1234ab4f4f4.2dd5"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2dd3" isGenerated="true" id="model.1234ab4f4f4.2dd7" from="model.1234ab4f4f4.2dd5" to="model.1234ab4f4f4.2dd1"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2dd3" isGenerated="true" id="model.1234ab4f4f4.2dd8" from="operations.1234ab4f62c.a3f" to="model.1234ab4f4f4.2dd5"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2dd3" isGenerated="true" id="model.1234ab4f4f4.2dd9" from="model.1234ab4f4f4.2dd5" to="operations.1234ab4f62c.a40"/>
+        </operations>
+        <eventTriggers generatedBy="model.1234ab4f4f4.2d88" isGenerated="true" id="model.1234ab4f4f4.2dd2" name="edit"/>
+        <properties generatedBy="model.1234ab4f4f4.2d88" isGenerated="true" id="model.1234ab4f4f4.2dd1" name="fieldValue" inFlows="model.1234ab4f4f4.2dd7"/>
+      </attributes>
+      <attributes generatedBy="wires.1213cee9bad.7" isGenerated="true" id="model.1234ab4f4f4.2d8c" name="email" generatedElements="model.1234ab4f4f4.2dc8 model.1234ab4f4f4.2dc9 model.1234ab4f4f4.2dca">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1234ab4f4f4.2d8c" isGenerated="true" id="model.1234ab4f4f4.2dca" name="update" generatedElements="model.1234ab4f4f4.2dda model.1234ab4f4f4.2ddb operations.1234ab4f62c.a41 operations.1234ab4f62c.a42 model.1234ab4f4f4.2ddc model.1234ab4f4f4.2ddd model.1234ab4f4f4.2dde model.1234ab4f4f4.2ddf">
+          <parameters generatedBy="model.1234ab4f4f4.2dca" isGenerated="true" id="model.1234ab4f4f4.2dda" name="setValueTo" outFlows="model.1234ab4f4f4.2ddc"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2dca" isGenerated="true" id="model.1234ab4f4f4.2ddb" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2ddc" inExecutions="model.1234ab4f4f4.2dde" outFlows="model.1234ab4f4f4.2ddd" outExecutions="model.1234ab4f4f4.2ddf"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2dca" isGenerated="true" id="operations.1234ab4f62c.a41" outExecutions="model.1234ab4f4f4.2dde"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2dca" isGenerated="true" id="operations.1234ab4f62c.a42" inExecutions="model.1234ab4f4f4.2ddf"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2dca" isGenerated="true" id="model.1234ab4f4f4.2ddc" from="model.1234ab4f4f4.2dda" to="model.1234ab4f4f4.2ddb"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2dca" isGenerated="true" id="model.1234ab4f4f4.2ddd" from="model.1234ab4f4f4.2ddb" to="model.1234ab4f4f4.2dc8"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2dca" isGenerated="true" id="model.1234ab4f4f4.2dde" from="operations.1234ab4f62c.a41" to="model.1234ab4f4f4.2ddb"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2dca" isGenerated="true" id="model.1234ab4f4f4.2ddf" from="model.1234ab4f4f4.2ddb" to="operations.1234ab4f62c.a42"/>
+        </operations>
+        <eventTriggers generatedBy="model.1234ab4f4f4.2d8c" isGenerated="true" id="model.1234ab4f4f4.2dc9" name="edit"/>
+        <properties generatedBy="model.1234ab4f4f4.2d8c" isGenerated="true" id="model.1234ab4f4f4.2dc8" name="fieldValue" inFlows="model.1234ab4f4f4.2ddd"/>
+      </attributes>
+      <attributes generatedBy="wires.1213cee9bad.7" isGenerated="true" id="model.1234ab4f4f4.2d93" name="id" generatedElements="model.1234ab4f4f4.2db9 model.1234ab4f4f4.2dba model.1234ab4f4f4.2dbb">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1234ab4f4f4.2d93" isGenerated="true" id="model.1234ab4f4f4.2dbb" name="update" generatedElements="model.1234ab4f4f4.2de0 model.1234ab4f4f4.2de1 operations.1234ab4f62c.a43 operations.1234ab4f62c.a44 model.1234ab4f4f4.2de2 model.1234ab4f4f4.2de3 model.1234ab4f4f4.2de4 model.1234ab4f4f4.2de5">
+          <parameters generatedBy="model.1234ab4f4f4.2dbb" isGenerated="true" id="model.1234ab4f4f4.2de0" name="setValueTo" outFlows="model.1234ab4f4f4.2de2"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2dbb" isGenerated="true" id="model.1234ab4f4f4.2de1" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2de2" inExecutions="model.1234ab4f4f4.2de4" outFlows="model.1234ab4f4f4.2de3" outExecutions="model.1234ab4f4f4.2de5"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2dbb" isGenerated="true" id="operations.1234ab4f62c.a43" outExecutions="model.1234ab4f4f4.2de4"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2dbb" isGenerated="true" id="operations.1234ab4f62c.a44" inExecutions="model.1234ab4f4f4.2de5"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2dbb" isGenerated="true" id="model.1234ab4f4f4.2de2" from="model.1234ab4f4f4.2de0" to="model.1234ab4f4f4.2de1"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2dbb" isGenerated="true" id="model.1234ab4f4f4.2de3" from="model.1234ab4f4f4.2de1" to="model.1234ab4f4f4.2db9"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2dbb" isGenerated="true" id="model.1234ab4f4f4.2de4" from="operations.1234ab4f62c.a43" to="model.1234ab4f4f4.2de1"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2dbb" isGenerated="true" id="model.1234ab4f4f4.2de5" from="model.1234ab4f4f4.2de1" to="operations.1234ab4f62c.a44"/>
+        </operations>
+        <eventTriggers generatedBy="model.1234ab4f4f4.2d93" isGenerated="true" id="model.1234ab4f4f4.2dba" name="edit"/>
+        <properties generatedBy="model.1234ab4f4f4.2d93" isGenerated="true" id="model.1234ab4f4f4.2db9" name="fieldValue" inFlows="model.1234ab4f4f4.2de3"/>
+      </attributes>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1213cee9bad.48" name="edit new instance name" outEdges="wires.1213cee9bad.18" generatedElements="model.1234ab4f4f4.2d97 model.1234ab4f4f4.2d98 model.1234ab4f4f4.2d99 model.1234ab4f4f4.2d9a model.1234ab4f4f4.2d9b">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1234ab4f5cf.9be" generatedBy="visual.1213cee9bad.48" isGenerated="true" id="model.1234ab4f4f4.2d97" name="init" generatedElements="model.1234ab4f4f4.2dad model.1234ab4f4f4.2dae operations.1234ab4f62c.a35 operations.1234ab4f62c.a36 model.1234ab4f4f4.2daf model.1234ab4f4f4.2db0 model.1234ab4f4f4.2db1 model.1234ab4f4f4.2db2">
+        <parameters generatedBy="model.1234ab4f4f4.2d97" isGenerated="true" id="model.1234ab4f4f4.2dad" name="setValueTo" outFlows="model.1234ab4f4f4.2daf"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2d97" isGenerated="true" id="model.1234ab4f4f4.2dae" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2daf" inExecutions="model.1234ab4f4f4.2db1" outFlows="model.1234ab4f4f4.2db0" outExecutions="model.1234ab4f4f4.2db2"/>
+        <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2d97" isGenerated="true" id="operations.1234ab4f62c.a35" outExecutions="model.1234ab4f4f4.2db1"/>
+        <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2d97" isGenerated="true" id="operations.1234ab4f62c.a36" inExecutions="model.1234ab4f4f4.2db2"/>
+        <dataEdges generatedBy="model.1234ab4f4f4.2d97" isGenerated="true" id="model.1234ab4f4f4.2daf" from="model.1234ab4f4f4.2dad" to="model.1234ab4f4f4.2dae"/>
+        <dataEdges generatedBy="model.1234ab4f4f4.2d97" isGenerated="true" id="model.1234ab4f4f4.2db0" from="model.1234ab4f4f4.2dae" to="model.1234ab4f4f4.2d9b"/>
+        <executionEdges generatedBy="model.1234ab4f4f4.2d97" isGenerated="true" id="model.1234ab4f4f4.2db1" from="operations.1234ab4f62c.a35" to="model.1234ab4f4f4.2dae"/>
+        <executionEdges generatedBy="model.1234ab4f4f4.2d97" isGenerated="true" id="model.1234ab4f4f4.2db2" from="model.1234ab4f4f4.2dae" to="operations.1234ab4f62c.a36"/>
+      </operations>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1234ab4f5cf.9bd" generatedBy="visual.1213cee9bad.48" isGenerated="true" id="model.1234ab4f4f4.2d98" name="update" generatedElements="model.1234ab4f4f4.2da7 model.1234ab4f4f4.2da8 operations.1234ab4f62c.a33 operations.1234ab4f62c.a34 model.1234ab4f4f4.2da9 model.1234ab4f4f4.2daa model.1234ab4f4f4.2dab model.1234ab4f4f4.2dac">
+        <parameters generatedBy="model.1234ab4f4f4.2d98" isGenerated="true" id="model.1234ab4f4f4.2da7" name="setValueTo" outFlows="model.1234ab4f4f4.2da9"/>
+        <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2d98" isGenerated="true" id="model.1234ab4f4f4.2da8" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2da9" inExecutions="model.1234ab4f4f4.2dab" outFlows="model.1234ab4f4f4.2daa" outExecutions="model.1234ab4f4f4.2dac"/>
+        <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2d98" isGenerated="true" id="operations.1234ab4f62c.a33" outExecutions="model.1234ab4f4f4.2dab"/>
+        <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2d98" isGenerated="true" id="operations.1234ab4f62c.a34" inExecutions="model.1234ab4f4f4.2dac"/>
+        <dataEdges generatedBy="model.1234ab4f4f4.2d98" isGenerated="true" id="model.1234ab4f4f4.2da9" from="model.1234ab4f4f4.2da7" to="model.1234ab4f4f4.2da8"/>
+        <dataEdges generatedBy="model.1234ab4f4f4.2d98" isGenerated="true" id="model.1234ab4f4f4.2daa" from="model.1234ab4f4f4.2da8" to="model.1234ab4f4f4.2d9b"/>
+        <executionEdges generatedBy="model.1234ab4f4f4.2d98" isGenerated="true" id="model.1234ab4f4f4.2dab" from="operations.1234ab4f62c.a33" to="model.1234ab4f4f4.2da8"/>
+        <executionEdges generatedBy="model.1234ab4f4f4.2d98" isGenerated="true" id="model.1234ab4f4f4.2dac" from="model.1234ab4f4f4.2da8" to="operations.1234ab4f62c.a34"/>
+      </operations>
+      <eventTriggers generatedBy="visual.1213cee9bad.48" isGenerated="true" id="model.1234ab4f4f4.2d99" name="access" outEdges="wires.1234ab4f5cf.9be"/>
+      <eventTriggers generatedBy="visual.1213cee9bad.48" isGenerated="true" id="model.1234ab4f4f4.2d9a" name="edit" outEdges="wires.1234ab4f5cf.9bc"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1213cee9bad.18" from="visual.1213cee9bad.48" to="model.1213cee9b4f.e1" name="sync" generatedElements="wires.1234ab4f5cf.9bc wires.1234ab4f5cf.9bd wires.1234ab4f5cf.9be wires.1234ab4f5cf.9bf wires.1234ab4f5cf.9c0 wires.1234ab4f5cf.9c1">
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.1213cee9bad.18" isGenerated="true" id="wires.1234ab4f5cf.9bc" from="model.1234ab4f4f4.2d9a" to="model.1234ab4f4f4.2d9e" name="run" inEdges="wires.1234ab4f5cf.9c1"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.1213cee9bad.18" isGenerated="true" id="wires.1234ab4f5cf.9bd" from="model.1234ab4f4f4.2d9d" to="model.1234ab4f4f4.2d98" name="run" inEdges="wires.1234ab4f5cf.9c0"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.1213cee9bad.18" isGenerated="true" id="wires.1234ab4f5cf.9be" from="model.1234ab4f4f4.2d99" to="model.1234ab4f4f4.2d97" name="run" inEdges="wires.1234ab4f5cf.9bf"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.1213cee9bad.18" isGenerated="true" id="wires.1234ab4f5cf.9bf" from="model.1234ab4f4f4.2d9c" to="wires.1234ab4f5cf.9be" name="[sync] run instance parameter (source.access)"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.1213cee9bad.18" isGenerated="true" id="wires.1234ab4f5cf.9c0" from="model.1234ab4f4f4.2d9c" to="wires.1234ab4f5cf.9bd" name="[sync] run instance parameter (target.edit)"/>
+        <wires xsi:type="iaml.wires:ParameterWire" generatedBy="wires.1213cee9bad.18" isGenerated="true" id="wires.1234ab4f5cf.9c1" from="model.1234ab4f4f4.2d9b" to="wires.1234ab4f5cf.9bc" name="[sync] run instance parameter (source.edit)"/>
+      </wires>
+      <properties generatedBy="visual.1213cee9bad.48" isGenerated="true" id="model.1234ab4f4f4.2d9b" name="fieldValue" outEdges="wires.1234ab4f5cf.9c1" inFlows="model.1234ab4f4f4.2daa model.1234ab4f4f4.2db0"/>
+    </children>
+  </children>
+  <domainStores id="model.1213cee9b4f.18" name="domain store">
+    <children id="model.1213cee9b4f.29" name="User" outEdges="wires.1213cee9bad.7">
+      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1213cee9bad.7" from="model.1213cee9b4f.29" to="model.1213cee9b4f.99" generatedElements="model.1234ab4f4f4.2d88 model.1234ab4f4f4.2d8c model.1234ab4f4f4.2d93"/>
+      <attributes id="model.1213cee9b4f.50" name="id" generatedElements="model.1234ab4f4f4.2d94 model.1234ab4f4f4.2d95 model.1234ab4f4f4.2d96" primaryKey="true">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1213cee9b4f.50" isGenerated="true" id="model.1234ab4f4f4.2d94" name="update" generatedElements="model.1234ab4f4f4.2db3 model.1234ab4f4f4.2db4 operations.1234ab4f62c.a37 operations.1234ab4f62c.a38 model.1234ab4f4f4.2db5 model.1234ab4f4f4.2db6 model.1234ab4f4f4.2db7 model.1234ab4f4f4.2db8">
+          <parameters generatedBy="model.1234ab4f4f4.2d94" isGenerated="true" id="model.1234ab4f4f4.2db3" name="setValueTo" outFlows="model.1234ab4f4f4.2db5"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2d94" isGenerated="true" id="model.1234ab4f4f4.2db4" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2db5" inExecutions="model.1234ab4f4f4.2db7" outFlows="model.1234ab4f4f4.2db6" outExecutions="model.1234ab4f4f4.2db8"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2d94" isGenerated="true" id="operations.1234ab4f62c.a37" outExecutions="model.1234ab4f4f4.2db7"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2d94" isGenerated="true" id="operations.1234ab4f62c.a38" inExecutions="model.1234ab4f4f4.2db8"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d94" isGenerated="true" id="model.1234ab4f4f4.2db5" from="model.1234ab4f4f4.2db3" to="model.1234ab4f4f4.2db4"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d94" isGenerated="true" id="model.1234ab4f4f4.2db6" from="model.1234ab4f4f4.2db4" to="model.1234ab4f4f4.2d96"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d94" isGenerated="true" id="model.1234ab4f4f4.2db7" from="operations.1234ab4f62c.a37" to="model.1234ab4f4f4.2db4"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d94" isGenerated="true" id="model.1234ab4f4f4.2db8" from="model.1234ab4f4f4.2db4" to="operations.1234ab4f62c.a38"/>
+        </operations>
+        <eventTriggers generatedBy="model.1213cee9b4f.50" isGenerated="true" id="model.1234ab4f4f4.2d95" name="edit"/>
+        <properties generatedBy="model.1213cee9b4f.50" isGenerated="true" id="model.1234ab4f4f4.2d96" name="fieldValue" inFlows="model.1234ab4f4f4.2db6"/>
+      </attributes>
+      <attributes id="model.1213cee9b4f.57" name="name" generatedElements="model.1234ab4f4f4.2d90 model.1234ab4f4f4.2d91 model.1234ab4f4f4.2d92">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1213cee9b4f.57" isGenerated="true" id="model.1234ab4f4f4.2d90" name="update" generatedElements="model.1234ab4f4f4.2dbc model.1234ab4f4f4.2dbd operations.1234ab4f62c.a39 operations.1234ab4f62c.a3a model.1234ab4f4f4.2dbe model.1234ab4f4f4.2dbf model.1234ab4f4f4.2dc0 model.1234ab4f4f4.2dc1">
+          <parameters generatedBy="model.1234ab4f4f4.2d90" isGenerated="true" id="model.1234ab4f4f4.2dbc" name="setValueTo" outFlows="model.1234ab4f4f4.2dbe"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2d90" isGenerated="true" id="model.1234ab4f4f4.2dbd" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2dbe" inExecutions="model.1234ab4f4f4.2dc0" outFlows="model.1234ab4f4f4.2dbf" outExecutions="model.1234ab4f4f4.2dc1"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2d90" isGenerated="true" id="operations.1234ab4f62c.a39" outExecutions="model.1234ab4f4f4.2dc0"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2d90" isGenerated="true" id="operations.1234ab4f62c.a3a" inExecutions="model.1234ab4f4f4.2dc1"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d90" isGenerated="true" id="model.1234ab4f4f4.2dbe" from="model.1234ab4f4f4.2dbc" to="model.1234ab4f4f4.2dbd"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d90" isGenerated="true" id="model.1234ab4f4f4.2dbf" from="model.1234ab4f4f4.2dbd" to="model.1234ab4f4f4.2d92"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d90" isGenerated="true" id="model.1234ab4f4f4.2dc0" from="operations.1234ab4f62c.a39" to="model.1234ab4f4f4.2dbd"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d90" isGenerated="true" id="model.1234ab4f4f4.2dc1" from="model.1234ab4f4f4.2dbd" to="operations.1234ab4f62c.a3a"/>
+        </operations>
+        <eventTriggers generatedBy="model.1213cee9b4f.57" isGenerated="true" id="model.1234ab4f4f4.2d91" name="edit"/>
+        <properties generatedBy="model.1213cee9b4f.57" isGenerated="true" id="model.1234ab4f4f4.2d92" name="fieldValue" inFlows="model.1234ab4f4f4.2dbf"/>
+      </attributes>
+      <attributes id="model.1213cee9b4f.58" name="email" generatedElements="model.1234ab4f4f4.2d8d model.1234ab4f4f4.2d8e model.1234ab4f4f4.2d8f">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1213cee9b4f.58" isGenerated="true" id="model.1234ab4f4f4.2d8d" name="update" generatedElements="model.1234ab4f4f4.2dc2 model.1234ab4f4f4.2dc3 operations.1234ab4f62c.a3b operations.1234ab4f62c.a3c model.1234ab4f4f4.2dc4 model.1234ab4f4f4.2dc5 model.1234ab4f4f4.2dc6 model.1234ab4f4f4.2dc7">
+          <parameters generatedBy="model.1234ab4f4f4.2d8d" isGenerated="true" id="model.1234ab4f4f4.2dc2" name="setValueTo" outFlows="model.1234ab4f4f4.2dc4"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2d8d" isGenerated="true" id="model.1234ab4f4f4.2dc3" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2dc4" inExecutions="model.1234ab4f4f4.2dc6" outFlows="model.1234ab4f4f4.2dc5" outExecutions="model.1234ab4f4f4.2dc7"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2d8d" isGenerated="true" id="operations.1234ab4f62c.a3b" outExecutions="model.1234ab4f4f4.2dc6"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2d8d" isGenerated="true" id="operations.1234ab4f62c.a3c" inExecutions="model.1234ab4f4f4.2dc7"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d8d" isGenerated="true" id="model.1234ab4f4f4.2dc4" from="model.1234ab4f4f4.2dc2" to="model.1234ab4f4f4.2dc3"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d8d" isGenerated="true" id="model.1234ab4f4f4.2dc5" from="model.1234ab4f4f4.2dc3" to="model.1234ab4f4f4.2d8f"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d8d" isGenerated="true" id="model.1234ab4f4f4.2dc6" from="operations.1234ab4f62c.a3b" to="model.1234ab4f4f4.2dc3"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d8d" isGenerated="true" id="model.1234ab4f4f4.2dc7" from="model.1234ab4f4f4.2dc3" to="operations.1234ab4f62c.a3c"/>
+        </operations>
+        <eventTriggers generatedBy="model.1213cee9b4f.58" isGenerated="true" id="model.1234ab4f4f4.2d8e" name="edit"/>
+        <properties generatedBy="model.1213cee9b4f.58" isGenerated="true" id="model.1234ab4f4f4.2d8f" name="fieldValue" inFlows="model.1234ab4f4f4.2dc5"/>
+      </attributes>
+      <attributes id="model.1213cee9b4f.59" name="password" generatedElements="model.1234ab4f4f4.2d89 model.1234ab4f4f4.2d8a model.1234ab4f4f4.2d8b">
+        <operations xsi:type="iaml:CompositeOperation" generatedBy="model.1213cee9b4f.59" isGenerated="true" id="model.1234ab4f4f4.2d89" name="update" generatedElements="model.1234ab4f4f4.2dcb model.1234ab4f4f4.2dcc operations.1234ab4f62c.a3d operations.1234ab4f62c.a3e model.1234ab4f4f4.2dcd model.1234ab4f4f4.2dce model.1234ab4f4f4.2dcf model.1234ab4f4f4.2dd0">
+          <parameters generatedBy="model.1234ab4f4f4.2d89" isGenerated="true" id="model.1234ab4f4f4.2dcb" name="setValueTo" outFlows="model.1234ab4f4f4.2dcd"/>
+          <operations xsi:type="iaml:ChainedOperation" generatedBy="model.1234ab4f4f4.2d89" isGenerated="true" id="model.1234ab4f4f4.2dcc" name="setPropertyToValue" inFlows="model.1234ab4f4f4.2dcd" inExecutions="model.1234ab4f4f4.2dcf" outFlows="model.1234ab4f4f4.2dce" outExecutions="model.1234ab4f4f4.2dd0"/>
+          <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.1234ab4f4f4.2d89" isGenerated="true" id="operations.1234ab4f62c.a3d" outExecutions="model.1234ab4f4f4.2dcf"/>
+          <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.1234ab4f4f4.2d89" isGenerated="true" id="operations.1234ab4f62c.a3e" inExecutions="model.1234ab4f4f4.2dd0"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d89" isGenerated="true" id="model.1234ab4f4f4.2dcd" from="model.1234ab4f4f4.2dcb" to="model.1234ab4f4f4.2dcc"/>
+          <dataEdges generatedBy="model.1234ab4f4f4.2d89" isGenerated="true" id="model.1234ab4f4f4.2dce" from="model.1234ab4f4f4.2dcc" to="model.1234ab4f4f4.2d8b"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d89" isGenerated="true" id="model.1234ab4f4f4.2dcf" from="operations.1234ab4f62c.a3d" to="model.1234ab4f4f4.2dcc"/>
+          <executionEdges generatedBy="model.1234ab4f4f4.2d89" isGenerated="true" id="model.1234ab4f4f4.2dd0" from="model.1234ab4f4f4.2dcc" to="operations.1234ab4f62c.a3e"/>
+        </operations>
+        <eventTriggers generatedBy="model.1213cee9b4f.59" isGenerated="true" id="model.1234ab4f4f4.2d8a" name="edit"/>
+        <properties generatedBy="model.1213cee9b4f.59" isGenerated="true" id="model.1234ab4f4f4.2d8b" name="fieldValue" inFlows="model.1234ab4f4f4.2dce"/>
+      </attributes>
+    </children>
+  </domainStores>
+</iaml:InternetApplication>

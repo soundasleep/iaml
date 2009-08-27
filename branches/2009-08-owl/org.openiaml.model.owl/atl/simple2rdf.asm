@@ -444,43 +444,45 @@
 		<constant value="201:13-201:29"/>
 		<constant value="201:4-201:29"/>
 		<constant value="__matchTestEcore"/>
-		<constant value="211:13-211:25"/>
-		<constant value="211:3-214:4"/>
-		<constant value="215:7-215:17"/>
-		<constant value="215:3-220:4"/>
-		<constant value="221:15-221:27"/>
-		<constant value="221:3-224:4"/>
-		<constant value="225:12-225:24"/>
-		<constant value="225:3-228:4"/>
+		<constant value="48"/>
+		<constant value="209:5-209:10"/>
+		<constant value="212:13-212:25"/>
+		<constant value="212:3-215:4"/>
+		<constant value="216:7-216:17"/>
+		<constant value="216:3-221:4"/>
+		<constant value="222:15-222:27"/>
+		<constant value="222:3-225:4"/>
+		<constant value="226:12-226:24"/>
+		<constant value="226:3-229:4"/>
 		<constant value="__applyTestEcore"/>
 		<constant value="http://openiaml.org/simple#EClass"/>
-		<constant value="212:11-212:40"/>
-		<constant value="212:43-212:44"/>
-		<constant value="212:43-212:49"/>
-		<constant value="212:11-212:49"/>
-		<constant value="212:4-212:49"/>
-		<constant value="213:13-213:23"/>
-		<constant value="213:13-213:29"/>
-		<constant value="213:4-213:29"/>
-		<constant value="216:15-216:22"/>
-		<constant value="216:4-216:22"/>
-		<constant value="217:17-217:26"/>
-		<constant value="217:4-217:26"/>
-		<constant value="218:14-218:20"/>
-		<constant value="218:4-218:20"/>
-		<constant value="219:13-219:23"/>
-		<constant value="219:13-219:29"/>
-		<constant value="219:4-219:29"/>
-		<constant value="222:11-222:60"/>
-		<constant value="222:4-222:60"/>
-		<constant value="223:13-223:23"/>
-		<constant value="223:13-223:29"/>
-		<constant value="223:4-223:29"/>
-		<constant value="226:11-226:46"/>
-		<constant value="226:4-226:46"/>
-		<constant value="227:13-227:23"/>
-		<constant value="227:13-227:29"/>
-		<constant value="227:4-227:29"/>
+		<constant value="213:11-213:40"/>
+		<constant value="213:43-213:44"/>
+		<constant value="213:43-213:49"/>
+		<constant value="213:11-213:49"/>
+		<constant value="213:4-213:49"/>
+		<constant value="214:13-214:23"/>
+		<constant value="214:13-214:29"/>
+		<constant value="214:4-214:29"/>
+		<constant value="217:15-217:22"/>
+		<constant value="217:4-217:22"/>
+		<constant value="218:17-218:26"/>
+		<constant value="218:4-218:26"/>
+		<constant value="219:14-219:20"/>
+		<constant value="219:4-219:20"/>
+		<constant value="220:13-220:23"/>
+		<constant value="220:13-220:29"/>
+		<constant value="220:4-220:29"/>
+		<constant value="223:11-223:60"/>
+		<constant value="223:4-223:60"/>
+		<constant value="224:13-224:23"/>
+		<constant value="224:13-224:29"/>
+		<constant value="224:4-224:29"/>
+		<constant value="227:11-227:46"/>
+		<constant value="227:4-227:46"/>
+		<constant value="228:13-228:23"/>
+		<constant value="228:13-228:29"/>
+		<constant value="228:4-228:29"/>
 	</cp>
 	<field name="1" type="2"/>
 	<field name="3" type="4"/>
@@ -1854,6 +1856,9 @@
 			<call arg="179"/>
 			<iterate/>
 			<store arg="27"/>
+			<pushf/>
+			<call arg="186"/>
+			<if arg="443"/>
 			<getasm/>
 			<get arg="1"/>
 			<push arg="159"/>
@@ -1895,21 +1900,22 @@
 			<enditerate/>
 		</code>
 		<linenumbertable>
-			<lne id="443" begin="21" end="23"/>
-			<lne id="444" begin="19" end="24"/>
-			<lne id="445" begin="27" end="29"/>
-			<lne id="446" begin="25" end="30"/>
-			<lne id="447" begin="33" end="35"/>
-			<lne id="448" begin="31" end="36"/>
-			<lne id="449" begin="39" end="41"/>
-			<lne id="450" begin="37" end="42"/>
+			<lne id="444" begin="7" end="7"/>
+			<lne id="445" begin="24" end="26"/>
+			<lne id="446" begin="22" end="27"/>
+			<lne id="447" begin="30" end="32"/>
+			<lne id="448" begin="28" end="33"/>
+			<lne id="449" begin="36" end="38"/>
+			<lne id="450" begin="34" end="39"/>
+			<lne id="451" begin="42" end="44"/>
+			<lne id="452" begin="40" end="45"/>
 		</linenumbertable>
 		<localvariabletable>
-			<lve slot="1" name="83" begin="6" end="44"/>
-			<lve slot="0" name="69" begin="0" end="45"/>
+			<lve slot="1" name="83" begin="6" end="47"/>
+			<lve slot="0" name="69" begin="0" end="48"/>
 		</localvariabletable>
 	</operation>
-	<operation name="451">
+	<operation name="453">
 		<context type="7"/>
 		<parameters>
 			<parameter name="27" type="219"/>
@@ -1990,7 +1996,7 @@
 			<load arg="224"/>
 			<dup/>
 			<getasm/>
-			<push arg="452"/>
+			<push arg="454"/>
 			<call arg="80"/>
 			<set arg="169"/>
 			<dup/>
@@ -2002,37 +2008,37 @@
 			<pop/>
 		</code>
 		<linenumbertable>
-			<lne id="453" begin="23" end="23"/>
-			<lne id="454" begin="24" end="24"/>
-			<lne id="455" begin="24" end="25"/>
-			<lne id="456" begin="23" end="26"/>
-			<lne id="457" begin="21" end="28"/>
-			<lne id="458" begin="31" end="31"/>
-			<lne id="459" begin="31" end="32"/>
-			<lne id="460" begin="29" end="34"/>
-			<lne id="444" begin="20" end="35"/>
-			<lne id="461" begin="39" end="39"/>
-			<lne id="462" begin="37" end="41"/>
-			<lne id="463" begin="44" end="44"/>
-			<lne id="464" begin="42" end="46"/>
-			<lne id="465" begin="49" end="49"/>
-			<lne id="466" begin="47" end="51"/>
-			<lne id="467" begin="54" end="54"/>
-			<lne id="468" begin="54" end="55"/>
-			<lne id="469" begin="52" end="57"/>
-			<lne id="446" begin="36" end="58"/>
-			<lne id="470" begin="62" end="62"/>
-			<lne id="471" begin="60" end="64"/>
-			<lne id="472" begin="67" end="67"/>
-			<lne id="473" begin="67" end="68"/>
-			<lne id="474" begin="65" end="70"/>
-			<lne id="448" begin="59" end="71"/>
-			<lne id="475" begin="75" end="75"/>
-			<lne id="476" begin="73" end="77"/>
-			<lne id="477" begin="80" end="80"/>
-			<lne id="478" begin="80" end="81"/>
-			<lne id="479" begin="78" end="83"/>
-			<lne id="450" begin="72" end="84"/>
+			<lne id="455" begin="23" end="23"/>
+			<lne id="456" begin="24" end="24"/>
+			<lne id="457" begin="24" end="25"/>
+			<lne id="458" begin="23" end="26"/>
+			<lne id="459" begin="21" end="28"/>
+			<lne id="460" begin="31" end="31"/>
+			<lne id="461" begin="31" end="32"/>
+			<lne id="462" begin="29" end="34"/>
+			<lne id="446" begin="20" end="35"/>
+			<lne id="463" begin="39" end="39"/>
+			<lne id="464" begin="37" end="41"/>
+			<lne id="465" begin="44" end="44"/>
+			<lne id="466" begin="42" end="46"/>
+			<lne id="467" begin="49" end="49"/>
+			<lne id="468" begin="47" end="51"/>
+			<lne id="469" begin="54" end="54"/>
+			<lne id="470" begin="54" end="55"/>
+			<lne id="471" begin="52" end="57"/>
+			<lne id="448" begin="36" end="58"/>
+			<lne id="472" begin="62" end="62"/>
+			<lne id="473" begin="60" end="64"/>
+			<lne id="474" begin="67" end="67"/>
+			<lne id="475" begin="67" end="68"/>
+			<lne id="476" begin="65" end="70"/>
+			<lne id="450" begin="59" end="71"/>
+			<lne id="477" begin="75" end="75"/>
+			<lne id="478" begin="73" end="77"/>
+			<lne id="479" begin="80" end="80"/>
+			<lne id="480" begin="80" end="81"/>
+			<lne id="481" begin="78" end="83"/>
+			<lne id="452" begin="72" end="84"/>
 		</linenumbertable>
 		<localvariabletable>
 			<lve slot="3" name="190" begin="7" end="84"/>

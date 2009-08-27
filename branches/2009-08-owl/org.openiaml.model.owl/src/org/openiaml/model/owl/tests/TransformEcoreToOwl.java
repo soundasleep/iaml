@@ -45,6 +45,7 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.PrintUtil;
+import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 /**
  * @author jmwright
@@ -511,13 +512,13 @@ public class TransformEcoreToOwl extends ModelTestCase {
 	public IFile testMyRdfIaml() throws Exception {
 		// copy over ecore file
 		// File source = new File("../org.openiaml.model/model/iaml.ecore");
-		File source = new File("tests/SyncWiresPagesTestCase.iaml");
+		File source = new File("tests/UserRolesLoginHandler.iaml");
 		assertTrue("Source file exists: " + source, source.exists());
-		IFile target = getProject().getFile("SyncWiresPagesTestCase.iaml");
+		IFile target = getProject().getFile("UserRolesLoginHandler.iaml");
 		assertFalse("Target file should not exist: " + target, target.exists());
 		copyFileIntoWorkspace(source, target);
 		assertTrue("Target file should exist: " + target, target.exists());
-		IFile transformed = getProject().getFile("SyncWiresPagesTestCase.rdf");
+		IFile transformed = getProject().getFile("UserRolesLoginHandler.rdf");
 		assertFalse("Final file should not exist: " + transformed, transformed.exists());
 
 		// load the model file
@@ -602,21 +603,22 @@ public class TransformEcoreToOwl extends ModelTestCase {
 
 		IFile rdf = testMyRdf();
 
-		PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
+		// PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
 		Model model = FileManager.get().loadModel("file:" + rdf.getLocation().toString());
 		
 		String rules = "[moreThan3Children: " +
-			"(?X rdf:type s:InternetApplication) " +
-			"(?X s:pages ?P1) (?X s:pages ?P2) (?X s:pages ?P3) " +
+			"(?X rdf:type http://openiaml.org/simple#InternetApplication) " +
+			"(?X http://openiaml.org/simple#pages ?P1) (?X http://openiaml.org/simple#pages ?P2) (?X http://openiaml.org/simple#pages ?P3) " +
 			"notEqual(?P1, ?P2) notEqual(?P2, ?P3) notEqual(?P1, ?P3) " +
 				" -> (?X eg:moreThan3Children 'true') ]\n" +
-				
+
 			"[validationRule: (?v rb:validation on()) -> " +
 			"[(?X rb:violation error('test', 'test', ?X)) <- " +
 			"(?X rdf:type s:InternetApplication) " +
 			"noValue(?X eg:moreThan3Children 'true') ]]";
 		
 		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		// reason.setParameter(ReasonerVocabulary.PROPtraceOn, true);
 		reason = reason.bindSchema(setupOwlTransform());
 		
 		InfModel inf = ModelFactory.createInfModel(reason, model);
@@ -732,7 +734,7 @@ public class TransformEcoreToOwl extends ModelTestCase {
 			Resource res = getResourceFor(model, obj);
 			
 			// give it an rdf:type
-			res.addProperty(getRdfTypeProperty(model), obj.eClass().getEPackage().getNsURI() + "#" + obj.eClass().getName());
+			res.addProperty(getRdfTypeProperty(model), model.createResource(obj.eClass().getEPackage().getNsURI() + "#" + obj.eClass().getName()));
 
 			// all references (containment, references)
 			for (EReference feature : obj.eClass().getEAllReferences()) {
@@ -766,16 +768,29 @@ public class TransformEcoreToOwl extends ModelTestCase {
 			}
 		}
 		
+		/**
+		 * Get an ID for the object. If the object has a property with eID = true,
+		 * use this ID instead of generating a UUID.
+		 * 
+		 * @param obj
+		 */
+		protected String getID(EObject obj) {
+			for (EAttribute attr : obj.eClass().getEAllAttributes()) {
+				if (attr.isID() && obj.eGet(attr) != null) {
+					return obj.eGet(attr).toString();
+				}
+			}
+			
+			return EcoreUtil.generateUUID();
+		}
+		
 		protected Resource getResourceFor(Model model, EObject obj) {
 			if (!resourceMap.containsKey(obj)) {
-				// assert that generatedUUID doesn't return the same value twice
-				assertNotEqual(EcoreUtil.generateUUID(), EcoreUtil.generateUUID());
-				
 				// set ns prefix
 				EPackage pkg = obj.eClass().getEPackage();
 				model.setNsPrefix(pkg.getNsPrefix(), pkg.getNsURI() + "#");
 				
-				String uri = pkg.getNsURI() + "#" + EcoreUtil.generateUUID(); 
+				String uri = pkg.getNsURI() + "#" + getID(obj); 
 				Resource res = model.createResource(uri);
 				resourceMap.put(obj, res);
 			}

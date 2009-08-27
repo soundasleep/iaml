@@ -83,9 +83,12 @@ rule InternetApplication {
 			URI <- p.getNsURI() + '#' + e.name,
 			graph <- thisModule.graph
 		)
+		
+		-- we cannot imperatively call lazy rules for all structural features,
+		-- because there is no support in ATL for 'null'
 	
 }
-
+ 
 rule EReference {
 	from 
 		source : simple!EObject,

@@ -3,22 +3,40 @@
  */
 package org.openiaml.model.owl.tests;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import l3i.sido.emf4sw.ui.ecore2owl.Ecore2OWLFileAction;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.openiaml.model.owl.simple.simple.InternetApplication;
 import org.openiaml.model.tests.ModelTestCase;
 
+import com.hp.hpl.jena.datatypes.RDFDatatype;
+import com.hp.hpl.jena.datatypes.TypeMapper;
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.reasoner.ValidityReport;
@@ -428,6 +446,194 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		}
 	}
 	
+	/**
+	 * Load a model file directly.
+	 * Assumes that it will only contain one element (and tests this with JUnit).
+	 */
+	protected EObject loadModelDirectly(String filename) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		URI uri = URI.createFileURI(filename);
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.getResource(uri, true);
+		assertNotNull(resource);
+		assertEquals("there should only be one contents in the model file", 1, resource.getContents().size());
+		return resource.getContents().get(0);
+	}
+
+	/**
+	 * Test custom class to transform an EObject into .rdf.
+	 * 
+	 * @return 
+	 * 
+	 * @throws Exception
+	 */
+	public IFile testMyRdf() throws Exception {
+		// copy over ecore file
+		// File source = new File("../org.openiaml.model/model/iaml.ecore");
+		File source = new File("tests/valid.simple");
+		assertTrue("Source file exists: " + source, source.exists());
+		IFile target = getProject().getFile("valid.simple");
+		assertFalse("Target file should not exist: " + target, target.exists());
+		copyFileIntoWorkspace(source, target);
+		assertTrue("Target file should exist: " + target, target.exists());
+		IFile transformed = getProject().getFile("valid.rdf");
+		assertFalse("Final file should not exist: " + transformed, transformed.exists());
+
+		// load the model file
+		EObject loaded = loadModelDirectly(source.getAbsolutePath());
+		System.out.println(loaded);
+		
+		// transform to RDF
+		Model rdf = new MyEcoreRDFWriter().transform(loaded);
+		
+		// write to file
+		ByteArrayOutputStream pipe = new ByteArrayOutputStream();
+		rdf.write(pipe);
+		transformed.create(getInputStream(pipe), true, new NullProgressMonitor());
+		
+		// once run, the "target.rdf" file should exist
+		assertTrue("Final file should exist: " + transformed, transformed.exists());
+		
+		// print out target.rdf
+		printFile(transformed);
+		
+		return transformed;
+		
+	}
+	
+	/**
+	 * Test custom class to transform an EObject into .rdf, but take
+	 * a complex IAML model.
+	 * 
+	 * @return 
+	 * 
+	 * @throws Exception
+	 */
+	public IFile testMyRdfIaml() throws Exception {
+		// copy over ecore file
+		// File source = new File("../org.openiaml.model/model/iaml.ecore");
+		File source = new File("tests/SyncWiresPagesTestCase.iaml");
+		assertTrue("Source file exists: " + source, source.exists());
+		IFile target = getProject().getFile("SyncWiresPagesTestCase.iaml");
+		assertFalse("Target file should not exist: " + target, target.exists());
+		copyFileIntoWorkspace(source, target);
+		assertTrue("Target file should exist: " + target, target.exists());
+		IFile transformed = getProject().getFile("SyncWiresPagesTestCase.rdf");
+		assertFalse("Final file should not exist: " + transformed, transformed.exists());
+
+		// load the model file
+		EObject loaded = loadModelDirectly(source.getAbsolutePath());
+		System.out.println(loaded);
+		
+		// transform to RDF
+		Model rdf = new MyEcoreRDFWriter().transform(loaded);
+		
+		// write to file
+		ByteArrayOutputStream pipe = new ByteArrayOutputStream();
+		rdf.write(pipe);
+		transformed.create(getInputStream(pipe), true, new NullProgressMonitor());
+		
+		// once run, the "target.rdf" file should exist
+		assertTrue("Final file should exist: " + transformed, transformed.exists());
+		
+		// print out target.rdf
+		printFile(transformed);
+		
+		return transformed;
+		
+	}
+	
+	/**
+	 * Convert an OutputStream into an InputStream.
+	 * 
+	 * @param pipe
+	 * @return
+	 */
+	private InputStream getInputStream(ByteArrayOutputStream pipe) {
+		return new ByteArrayInputStream(pipe.toByteArray());
+	}
+
+	/**
+	 * Try our custom EObject/RDF writer.
+	 * 
+	 * Tests that an InternetApplication should have at least 2 children;
+	 * should pass.
+	 * 
+	 * @throws Exception
+	 */
+	public void testEObjectRdfValidation1() throws Throwable {
+		try {
+		
+		IFile rdf = testMyRdf();
+
+		PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
+		Model model = FileManager.get().loadModel("file:" + rdf.getLocation().toString());
+		
+		String rules = "[moreThan2Children: (?X rdf:type s:InternetApplication) (?X s:pages ?P1) (?X s:pages ?P2) notEqual(?P1, ?P2) -> (?X eg:moreThan2Children 'true') ]\n" +
+			"[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"noValue(?X eg:moreThan2Children 'true') ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertIsValid(valid);
+	
+		} catch (Throwable t) {
+			System.out.println(t.getMessage());
+			t.printStackTrace();
+			System.out.println(t.getClass());
+			throw t;
+		}
+	}
+	
+	/**
+	 * Try our custom EObject/RDF writer.
+	 * 
+	 * Tests that an InternetApplication should have at least 3 children;
+	 * should fail.
+	 * 
+	 * @throws Exception
+	 */
+	public void testEObjectRdfValidation2() throws Throwable {
+		try {
+
+		IFile rdf = testMyRdf();
+
+		PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
+		Model model = FileManager.get().loadModel("file:" + rdf.getLocation().toString());
+		
+		String rules = "[moreThan3Children: " +
+			"(?X rdf:type s:InternetApplication) " +
+			"(?X s:pages ?P1) (?X s:pages ?P2) (?X s:pages ?P3) " +
+			"notEqual(?P1, ?P2) notEqual(?P2, ?P3) notEqual(?P1, ?P3) " +
+				" -> (?X eg:moreThan3Children 'true') ]\n" +
+				
+			"[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"noValue(?X eg:moreThan3Children 'true') ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+		printReports(valid);
+	
+		} catch (Throwable t) {
+			System.out.println(t.getMessage());
+			t.printStackTrace();
+			System.out.println(t.getClass());
+			throw t;
+			
+		}
+	}
+	
 	
 	/**
 	 * Print out the contents of the given IFile.
@@ -446,5 +652,150 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		s.close();
 		System.out.println();
 	}
+	
+	/**
+	 * <p>A class to take an arbitrary EMF instance and write it out
+	 * as RDF, using only the information provided by EMF.</p>
+	 * 
+	 * <p>Compare this to an ATL information, which requires inputs of
+	 * both the instance and the instance's EMF model, and lots of 
+	 * hack that don't correspond to the ATL philosophy.</p>
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	protected class MyEcoreRDFWriter {
+		
+		Map<EObject,Resource> resourceMap = new HashMap<EObject,Resource>();
+		Map<EStructuralFeature,Property> featureMap = new HashMap<EStructuralFeature,Property>();
+		
+		public Model transform(EObject source) {
+			Model model = ModelFactory.createDefaultModel();
+			
+			// default namespaces
+			model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+			model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
+			model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
+			model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
+
+			// handle root
+			handleEObject(model, source);
+			
+			// create the model recursively for all contents
+			Iterator<EObject> contents = source.eAllContents();
+			while (contents.hasNext()) {
+				EObject obj = contents.next();
+				handleEObject(model, obj);
+			}
+			
+			return model;
+		}
+		
+		private Property rdfType;
+		
+		/**
+		 * Get the Property for rdf:type.
+		 * 
+		 * @param model
+		 * @return
+		 */
+		protected Property getRdfTypeProperty(Model model) {
+			if (rdfType == null) {
+				rdfType = model.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+			}
+			return rdfType;
+		}
+		
+		/**
+		 * A statically-instantiated map of EMF types to XML schema types.
+		 * From l3l.sido.emf4sw.transformations/ecore2owl.atl
+		 */
+		protected Map<String,String> typeMap = new HashMap<String,String>();		
+		{
+			typeMap.put("String", "http://www.w3.org/2001/XMLSchema#string");
+			typeMap.put("Integer", "http://www.w3.org/2001/XMLSchema#int");
+			typeMap.put("Boolean", "http://www.w3.org/2001/XMLSchema#boolean");
+			typeMap.put("UnlimitedNatural", "http://www.w3.org/2001/XMLSchema#integer");
+			typeMap.put("Byte", "http://www.w3.org/2001/XMLSchema#byte");
+			typeMap.put("Currency", "http://www.w3.org/2001/XMLSchema#decimal");
+			typeMap.put("Date", "http://www.w3.org/2001/XMLSchema#date");
+			typeMap.put("Double", "http://www.w3.org/2001/XMLSchema#double");
+			typeMap.put("Long", "http://www.w3.org/2001/XMLSchema#long");
+			typeMap.put("Single", "http://www.w3.org/2001/XMLSchema#short");
+			typeMap.put("Variant", "http://www.w3.org/2001/XMLSchema#string");
+			typeMap.put("EString", "http://www.w3.org/2001/XMLSchema#string");
+			typeMap.put("EInteger", "http://www.w3.org/2001/XMLSchema#int");
+			typeMap.put("EInt", "http://www.w3.org/2001/XMLSchema#int");
+		}
+		
+		protected void handleEObject(Model model, EObject obj) {
+			Resource res = getResourceFor(model, obj);
+			
+			// give it an rdf:type
+			res.addProperty(getRdfTypeProperty(model), obj.eClass().getEPackage().getNsURI() + "#" + obj.eClass().getName());
+
+			// all references (containment, references)
+			for (EReference feature : obj.eClass().getEAllReferences()) {
+				if (feature.isMany()) {
+					for (EObject target : ((List<EObject>) obj.eGet(feature))) {
+						Property property = getPredicateFor(model, feature);
+						Resource targetRes = getResourceFor(model, target);
+						
+						res.addProperty(property, targetRes);
+					}
+				} else {
+					if (obj.eGet(feature) != null) {
+						Property property = getPredicateFor(model, feature);
+						Resource targetRes = getResourceFor(model, (EObject) obj.eGet(feature));
+						
+						res.addProperty(property, targetRes);
+					}
+				}
+			}
+			
+			// all attributes
+			for (EAttribute attr : obj.eClass().getEAllAttributes()) {
+				if (obj.eGet(attr) != null) {
+					Property property = getPredicateFor(model, attr);
+					
+					String uri = typeMap.get(attr.getEAttributeType().getName());
+					RDFDatatype type = TypeMapper.getInstance().getTypeByName(uri);
+					String value = obj.eGet(attr).toString();
+					res.addProperty(property, value, type);
+				}
+			}
+		}
+		
+		protected Resource getResourceFor(Model model, EObject obj) {
+			if (!resourceMap.containsKey(obj)) {
+				// assert that generatedUUID doesn't return the same value twice
+				assertNotEqual(EcoreUtil.generateUUID(), EcoreUtil.generateUUID());
+				
+				// set ns prefix
+				EPackage pkg = obj.eClass().getEPackage();
+				model.setNsPrefix(pkg.getNsPrefix(), pkg.getNsURI() + "#");
+				
+				String uri = pkg.getNsURI() + "#" + EcoreUtil.generateUUID(); 
+				Resource res = model.createResource(uri);
+				resourceMap.put(obj, res);
+			}
+			return resourceMap.get(obj);
+		}
+		
+		public Property getPredicateFor(Model model, EStructuralFeature feature) {
+			if (!featureMap.containsKey(feature)) {
+				// set ns prefix
+				EPackage pkg = feature.getEContainingClass().getEPackage();
+				model.setNsPrefix(pkg.getNsPrefix(), pkg.getNsURI() + "#");
+
+				String uri = pkg.getNsURI() + "#" + feature.getName(); 
+				Property prop = model.createProperty(uri);
+				featureMap.put(feature, prop);
+			}
+			return featureMap.get(feature);
+		}
+	}
+
+	
 	
 }

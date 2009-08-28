@@ -75,6 +75,11 @@ define("CURRENT_PAGE", "«id»");
 «EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
 «EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
 
+«IF containingSession() != null»
+	// expand any AccessControlHandlers in the session
+	«EXPAND template::users::Definitions::accessControlHandlerDefinitions(true) FOR containingSession()-»
+«ENDIF»
+
 // allow remote execution of operations
 if (require_get("operation", "")) {
 	$operation_name = "do_" . require_get("operation");

@@ -299,6 +299,9 @@ List[model::DomainObjectInstance] getAllDomainObjectInstances(emf::EObject this)
 List[model::DomainObjectInstance] getAllDomainObjectInstances(model::DomainObjectInstance this) :
 	this;
 
+getAllDomainObjects(emf::EObject e) :
+	e.eAllContents.typeSelect(model::DomainObject);
+
 /** find all actual matches for the given DynamicApplicationSet in a given root */
 List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
 	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);

@@ -3,8 +3,11 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.tests.CodegenTestCase;
+import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
  * Helper methods for setting up a database, and automatically logging into,
@@ -13,7 +16,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  *
  */
-public abstract class AbstractUserLoginTestCase extends CodegenTestCase {
+public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase {
 	
 	/**
 	 * Begin the application using {@link #beginAtSitemapThenPage(IFile, String, String)},
@@ -75,8 +78,20 @@ public abstract class AbstractUserLoginTestCase extends CodegenTestCase {
 		return sitemap;
 	}
 	
-	public void testDatabaseSetup() throws Exception {
-		fail("TODO need to implement LoginHandler database initialisation.");
+	@Override
+	protected String getDatabaseName() {
+		return "output/users_1233afe655c_1c.db";
+	}
+
+	@Override
+	protected List<String> getDatabaseInitialisers() {
+		List<String> s = new ArrayList<String>();
+		s.add("CREATE TABLE Guest (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
+		s.add("INSERT INTO Guest (generated_primary_key, name, email, password) VALUES (12, 'Guest', 'guest@openiaml.org', 'guest')");
+		s.add("INSERT INTO Guest (generated_primary_key, name, email, password) VALUES (22, 'Default Role', 'default@openiaml.org', 'test123')");
+		s.add("CREATE TABLE default_role (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, guest_generated_primary_key INTEGER NOT NULL)");
+		s.add("INSERT INTO default_role (generated_primary_key, guest_generated_primary_key) VALUES (44, 22)");
+		return s;
 	}
 	
 }

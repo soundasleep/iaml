@@ -34,3 +34,27 @@ rule "Create a default primary key for DomainObjects which do not have one"
 		queue.add(da2, drools);
 
 end 
+
+rule "Domain objects that extend each other will also copy over attributes, connected by ExtendsWires"
+	when
+		sourceObject : DomainObject( )
+		sourceAttribute : DomainAttribute ( eContainer == sourceObject )
+		
+		targetObject : DomainObject ( this != sourceObject )
+		
+		ext : ExtendsWire ( from == targetObject, to == sourceObject )
+		
+		not ( DomainAttribute ( eContainer == targetObject, name == sourceAttribute.name )) 
+	
+	then
+		DomainAttribute copy = handler.generatedDomainAttribute(ext, targetObject);
+		handler.setName(copy, sourceAttribute.getName());
+		handler.setValue(copy, ModelPackage.eINSTANCE.getDomainAttribute_PrimaryKey(), sourceAttribute.isPrimaryKey());
+		queue.add(copy, drools);
+		
+		// extends wire to maintain relationship
+		ExtendsWire ext2 = handler.generatedExtendsWire(ext, sourceAttribute, copy, sourceAttribute);
+		queue.add(ext2, drools);
+
+end
+

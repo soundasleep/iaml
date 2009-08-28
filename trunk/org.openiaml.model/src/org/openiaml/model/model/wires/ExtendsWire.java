@@ -6,6 +6,8 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.GeneratesElements;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,5 +19,5 @@ package org.openiaml.model.model.wires;
  * @model annotation="http://openiaml.org/comment added='0.4'"
  * @generated
  */
-public interface ExtendsWire extends SingleWire {
+public interface ExtendsWire extends SingleWire, GeneratesElements {
 } // ExtendsWire

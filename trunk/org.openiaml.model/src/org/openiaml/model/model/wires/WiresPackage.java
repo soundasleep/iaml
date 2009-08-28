@@ -2082,13 +2082,31 @@ public interface WiresPackage extends EPackage {
 	int EXTENDS_WIRE__TO = SINGLE_WIRE__TO;
 
 	/**
+	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDS_WIRE__GENERATED_ELEMENTS = SINGLE_WIRE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDS_WIRE__OVERRIDDEN = SINGLE_WIRE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Extends Wire</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 0;
+	int EXTENDS_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.RequiresWireImpl <em>Requires Wire</em>}' class.

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,8 +37,8 @@ import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.oaw.IACleanerBeautifier;
 import org.openiaml.model.codegen.oaw.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
-import org.openiaml.model.xpath.IterableElementList;
 import org.openiaml.model.xpath.IXpath;
+import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -531,6 +532,21 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 			assertNotNull("null should not equal null", b);
 		else
 			assertFalse("'" + a + "' should not equal '" + b + "'", a.equals(b));
+	}
+	
+	/**
+	 * Assert that the given string is equal to one of the
+	 * expected strings.
+	 * 
+	 * @param expected
+	 * @param actual
+	 */
+	public void assertEqualsOneOf(String[] expected, String actual) {
+		for (String a : expected) {
+			if (actual.equals(a))
+				return;
+		}
+		fail("String '" + actual + "' was not equal to any of the strings in '" + Arrays.toString(expected) + "'");
 	}
 	
 	/**

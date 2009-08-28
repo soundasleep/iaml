@@ -32,7 +32,7 @@ function boolean hasDomainAttribute(DomainObject dobj) {
 }
 
 #
-# Does the given LoginHandler have incoming ParameterWires from
+# Does the given LoginHandler[instance] have incoming ParameterWires from
 # attributes contained by the given DomainObject?
 #
 function boolean hasIncomingParameterWiresFrom(LoginHandler handler, DomainObject dobj) {
@@ -544,6 +544,37 @@ rule "Create text fields for login form of 'login' pages [type=domain_object]"
 		
 end
 
+/**
+ * A LoginHandler[user] uses all of the fields from the given
+ * DomainObject parameter as input fields, except for 
+ * any generated primary keys.
+ */
+rule "Create text fields for login form of 'login' pages [type=user]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		login : Page (eContainer == container, name=="login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+
+		# from a role		
+		role : Role ( )
+		param : ParameterWire ( from == role, to == login_handler )
+		
+		# an attribute in that role
+		attribute : DomainAttribute ( eContainer == role, name != "generated primary key" )
+		
+		not ( InputTextField ( eContainer == form, name == attribute.name ))
+
+	then
+		InputTextField field = handler.generatedInputTextField(form, form);
+		# login field name
+		handler.setName(field, attribute.getName());		
+		queue.add(field, drools);
+		
+end
+
 rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=domain_object]"
 	when
 		container : InternetApplication( )
@@ -913,7 +944,7 @@ end
  * linked by a ParameterWire, and then use Java to generate the
  * actual query from the Attributes.
  */
-rule "Create Select Wire between Domain Object types"
+rule "Create Select Wire between Domain Object types [object]"
 	when
 		scope : Session ( )
 		dobj : DomainObject ( eval(hasDomainAttribute(dobj)) )
@@ -952,6 +983,41 @@ rule "Create Select Wire between Domain Object types"
 
 end
 
+rule "Create Select Wire between Domain Object types [user]"
+	when
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+
+		role : Role ( )
+		parameter : ParameterWire( from == role, to == login_handler )
+
+		instance : UserInstance ( )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		not ( SelectWire ( from == role, to == instance )) 
+		
+	then
+		// find all the attributes as incoming parameter wires for the
+		// given DomainObject
+		String q = "";
+		for (DomainAttribute attribute : role.getAttributes()) {
+			// ignore generated primary keys
+			if (!"generated primary key".equals(attribute.getName())) {
+				// add this attribute as a query
+				if (!q.isEmpty()) {
+					q += " and ";
+				}
+				q += attribute.getName() + " = :" + attribute.getName();
+			} 
+		}
+			
+		SelectWire wire = handler.generatedSelectWire(login_handler, login_handler, role, instance);
+		handler.setName(wire, "select");
+		handler.setQuery(wire, q);
+		queue.add(wire, drools); 
+
+end
+
 rule "Create 'key attribute' property for LoginHandler[type = object]s"
 	when
 		session : Session( ) 
@@ -959,6 +1025,27 @@ rule "Create 'key attribute' property for LoginHandler[type = object]s"
 		
 		attribute : DomainAttribute ( )
 		paramWire : ParameterWire ( from == attribute, to == login_handler )
+		
+		not ( p : ApplicationElementProperty ( eContainer == session, 
+			eval(loginAttributeMatches(p, attribute) ) ) )
+				
+	then
+		ApplicationElementProperty key = handler.generatedApplicationElementProperty(login_handler, session);
+		handler.setName(key, "current " + attribute.getName());
+		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
+		handler.setValue(key, ModelPackage.eINSTANCE.getApplicationElementProperty_DefaultValue(), "");
+		queue.add(key, drools);
+		
+end
+
+rule "Create 'key attribute' property for LoginHandler[type = user]s"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role )
+		paramWire : ParameterWire ( from == role, to == login_handler )
 		
 		not ( p : ApplicationElementProperty ( eContainer == session, 
 			eval(loginAttributeMatches(p, attribute) ) ) )
@@ -1011,6 +1098,31 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		select : SelectWire ( from == object, to == instance )
+		
+		key : ApplicationElementProperty ( eContainer == session, 
+			eval(loginAttributeMatches(key, attribute) ) )
+			
+		not ( ParameterWire ( from == key, to == select ))
+		
+	then
+		ParameterWire wire = handler.generatedParameterWire(login_handler, session, key, select);
+		queue.add(wire, drools); 
+	
+end
+
+rule "Connect key properties to SelectWire for LoginHandler[type = user]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role )
+		paramWire : ParameterWire ( from == role, to == login_handler )
+		
+		instance : UserInstance ( )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		select : SelectWire ( from == role, to == instance )
 		
 		key : ApplicationElementProperty ( eContainer == session, 
 			eval(loginAttributeMatches(key, attribute) ) )

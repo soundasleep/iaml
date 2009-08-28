@@ -99,6 +99,34 @@ rule "User Stores contain a default role 'Guest'"
 
 end
 
+rule "'Guest' role contains a default attribute 'email'"
+	when
+		store : UserStore ( )
+		guest : Role ( eContainer == store, name == "Guest" )
+		
+		not ( DomainAttribute ( name == "email", eContainer == guest ))
+	
+	then
+		DomainAttribute attr = handler.generatedDomainAttribute(guest, guest);
+		handler.setName(attr, "email");
+		queue.add(attr, drools);
+
+end
+
+rule "'Guest' role contains a default attribute 'password'"
+	when
+		store : UserStore ( )
+		guest : Role ( eContainer == store, name == "Guest" )
+		
+		not ( DomainAttribute ( name == "password", eContainer == guest ))
+	
+	then
+		DomainAttribute attr = handler.generatedDomainAttribute(guest, guest);
+		handler.setName(attr, "password");
+		queue.add(attr, drools);
+
+end
+
 rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to Guest"
 	when
 		session : Session( ) 
@@ -193,3 +221,36 @@ rule "Create contents of 'permissions check' operation in a Page"
 		queue.add(edge3, drools);
 
 end
+
+rule "An AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		instance : UserInstance ( eContainer == session )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		not ( ParameterWire ( from == instance, to == ach )) 
+	
+	then
+		ParameterWire param = handler.generatedParameterWire(ach, ach, instance, ach);
+		queue.add(param, drools);
+
+end
+
+rule "Any role should extend the default Guest role"
+	when
+		store : UserStore ( )
+		guest : Role ( name == "Guest", eContainer == store )
+		
+		another : Role ( this != guest )
+		
+		not ( ExtendsWire ( from == another, to == guest ))
+		
+	then
+		ExtendsWire ext = handler.generatedExtendsWire(store, store, another, guest);
+		queue.add(ext, drools);
+
+end
+

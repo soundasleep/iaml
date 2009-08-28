@@ -3,7 +3,9 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
+import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.components.AccessControlHandler;
@@ -17,11 +19,15 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -323,7 +329,178 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(assertHasExecutionEdge(op, start, virtualOp));
 		assertGenerated(assertHasExecutionEdge(op, virtualOp, end));
 		assertGenerated(assertHasExecutionEdge(op, virtualOp, cancel));
-		
+
 	}
 
+	/**
+	 * The AccessControlHandler should have an incoming UserInstance
+	 * as a parameter.
+	 *
+	 * @throws Exception
+	 */
+	public void testHasIncomingUserInstance() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		Session session = assertHasSession(root, "target session");
+		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
+		UserInstance instance = assertHasUserInstance(session, "current instance");
+		
+		ParameterWire param = assertHasParameterWire(session, instance, ach);
+		assertGenerated(param);
+		
+	}
+	
+	/**
+	 * The 'default role' should extend 'Guest'
+	 *
+	 * @throws Exception
+	 */
+	public void testDefaultRoleExtendsGuest() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		UserStore store = assertHasUserStore(root, "user store");		
+		Role guest = assertHasRole(store, "Guest");
+		assertGenerated(guest);
+		Role role = assertHasRole(store, "default role");
+		assertNotGenerated(role);
+		
+		ExtendsWire ext = assertHasExtendsWire(store, role, guest);
+		assertGenerated(ext);
+		
+	}
+	
+	/**
+	 * 'Guest' should have 'email' and 'password' attributes; these
+	 * are the default requirements for Users
+	 *
+	 * @throws Exception
+	 */
+	public void testGuestAttributes() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		UserStore store = assertHasUserStore(root, "user store");		
+		Role guest = assertHasRole(store, "Guest");
+
+		DomainAttribute email = assertHasDomainAttribute(guest, "email");
+		assertGenerated(email);
+		DomainAttribute password = assertHasDomainAttribute(guest, "password");
+		assertGenerated(password);
+		
+	}
+	
+	/**
+	 * Since Default Role extends Guest, the attributes of Guest
+	 * will be reproduced in Default Role.
+	 * 
+	 * @throws Exception
+	 */
+	public void testInheritanceOfAttributes() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		UserStore store = assertHasUserStore(root, "user store");		
+		Role guest = assertHasRole(store, "Guest");
+
+		DomainAttribute email = assertHasDomainAttribute(guest, "email");
+		assertGenerated(email);
+		DomainAttribute password = assertHasDomainAttribute(guest, "password");
+		assertGenerated(password);
+		
+		Role role = assertHasRole(store, "default role");
+
+		DomainAttribute email2 = assertHasDomainAttribute(role, "email");
+		assertGenerated(email2);
+		DomainAttribute password2 = assertHasDomainAttribute(role, "password");
+		assertGenerated(password2);
+		
+		// there should be extends wires between each attribute
+		assertGenerated(assertHasExtendsWire(store, email2, email));
+		assertGenerated(assertHasExtendsWire(store, password2, password));
+		
+		// none the other way around
+		assertHasNoWiresFromTo(store, email, email2);
+		assertHasNoWiresFromTo(store, password, password2);
+		assertHasNoWiresFromTo(store, email, email);
+		assertHasNoWiresFromTo(store, email, password);
+		assertHasNoWiresFromTo(store, password2, email);
+		
+	}
+	
+	/**
+	 * The generated login form on the generated 'login' page 
+	 * should have 'email' and 'password' fields.
+	 *
+	 * @throws Exception
+	 */
+	public void testLoginFormAttributes() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		Page login = assertHasPage(root, "login");
+		assertGenerated(login);
+		
+		InputForm form = assertHasInputForm(login, "login form");
+		assertGenerated(form);
+		
+		InputTextField email = assertHasInputTextField(form, "email");
+		assertGenerated(email);
+		InputTextField password = assertHasInputTextField(form, "password");
+		assertGenerated(password);
+		
+	}
+	
+	/**
+	 * The session should have 'email' and 'password' properties.
+	 *
+	 * @throws Exception
+	 */
+	public void testSessionProperties() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		Session session = assertHasSession(root, "target session");
+		assertNotGenerated(session);
+		
+		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
+		assertGenerated(email);
+		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		assertGenerated(password);
+		
+	}
+	
+	/**
+	 * The UserInstance should have a SelectWire from the given Role
+	 * with the current property values as parameters.
+	 *
+	 * @throws Exception
+	 */
+	public void testUserInstanceSelectWires() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		Session session = assertHasSession(root, "target session");
+		assertNotGenerated(session);
+		
+		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
+		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		
+		// user instance
+		UserInstance instance = assertHasUserInstance(session, "current instance");
+		
+		// store
+		UserStore store = assertHasUserStore(root, "user store");		
+		Role guest = assertHasRole(store, "Guest");
+		
+		// generated select wire		
+		SelectWire selectWire = assertHasSelectWire(root, guest, instance, "select");
+		assertGenerated(selectWire);
+		
+		// the query should be one of these values
+		assertEqualsOneOf(new String[]{
+				"email = :email and password = :password",
+				"password = :password and email = :email"
+		}, selectWire.getQuery());
+		
+		// parameters
+		assertHasParameterWire(root, email, selectWire);
+		assertHasParameterWire(root, password, selectWire);
+		
+	}
+	
 }

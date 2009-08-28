@@ -49,10 +49,12 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.ModelInferenceTestCase;
 
@@ -449,6 +451,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert there exists only one unidirectional ExtendsWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public ExtendsWire assertHasExtendsWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		return (ExtendsWire) assertHasWireFromTo(container, from, to, 
+				ExtendsWire.class);
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional RequiresWire between
 	 * the given elements.
 	 *
@@ -479,6 +492,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public SetWire assertHasSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (SetWire) assertHasWireFromTo(container, from, to, 
 				SetWire.class, name);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional SelectWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public SelectWire assertHasSelectWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+		return (SelectWire) assertHasWireFromTo(container, from, to, 
+				SelectWire.class, name);
 	}
 	
 	/**

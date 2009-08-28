@@ -36,6 +36,7 @@
 
 				// outgoing values
 				«REM»any application element properties to change? (both on client and server)«ENDREM»
+				«REM»this doesn't cover fieldValues connected by Set/SyncWires; these are covered by server code (below)«ENDREM»
 				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH outEdges»
 				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH inEdges»
 				«REM»it may be required to outgoingValues(this) FOREACH properties.outEdges«ENDREM»

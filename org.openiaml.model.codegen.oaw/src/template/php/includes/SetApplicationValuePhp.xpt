@@ -60,12 +60,40 @@ try {
 	if ($id == "«safeName()-»") {
 		/* Property "«name-»" («id-») */
 		
+		«REM»expand the direct wires from the property«ENDREM»
+		«EXPAND directPropertyUpdatesFrom FOREACH outEdges»
+		«EXPAND directPropertyUpdatesTo FOREACH inEdges»
+		
 		«REM»is this property used as the input for a SelectWire?«ENDREM»
 		«REM»is this property's parent used as the input for a SelectWire?«ENDREM»
-		«IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField)»
+		«IF model::visual::InputTextField.isInstance(eContainer)»
 			«EXPAND potentialContainerUpdates FOR (model::visual::InputTextField) eContainer»
 		«ENDIF»
 	}
+«ENDDEFINE»
+
+«DEFINE directPropertyUpdatesFrom FOR model::WireEdge»
+«ENDDEFINE»
+«DEFINE directPropertyUpdatesTo FOR model::WireEdge»
+«ENDDEFINE»
+
+«DEFINE directPropertyUpdatesFrom FOR model::wires::SyncWire»
+	«IF model::ApplicationElementProperty.isInstance(to)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::ApplicationElementProperty) to»
+	«ENDIF»
+«ENDDEFINE»
+
+/* bidirectionality */
+«DEFINE directPropertyUpdatesTo FOR model::wires::SyncWire»
+	«IF model::ApplicationElementProperty.isInstance(from)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::ApplicationElementProperty) from»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE directPropertyUpdatesFrom FOR model::wires::SetWire»
+	«IF model::ApplicationElementProperty.isInstance(to)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::ApplicationElementProperty) to»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE potentialContainerUpdates FOR model::visual::InputTextField»

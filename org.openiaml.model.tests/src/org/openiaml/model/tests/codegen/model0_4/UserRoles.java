@@ -17,6 +17,7 @@ public class UserRoles extends AbstractUserLoginTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(UserRoles.class);
+		initialiseDatabase();
 	}
 	
 	/**
@@ -38,7 +39,7 @@ public class UserRoles extends AbstractUserLoginTestCase {
 		IFile sitemap = doStandardLoginAs("guest@openiaml.org", "guest");
 		assertNoProblem();
 		
-		gotoSitemapThenPage(sitemap, "target");
+		gotoSitemapWithProblem(sitemap, "target");
 		assertTitleNotSame("target");
 		assertProblem();		// who knows where we are?
 	}

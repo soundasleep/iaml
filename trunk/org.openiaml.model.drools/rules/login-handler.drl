@@ -10,6 +10,7 @@ import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
@@ -274,11 +275,11 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 
 end
 
-rule "Create contents of 'check instance' operation [type=domain_object]"
+rule "Create contents of 'check instance' operation [type=domain_object or user]"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
@@ -1022,10 +1023,11 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 	
 end
 
-rule "Create 'check instance' operation for LoginHandler[type = object]"
+rule "Create 'check instance' operation for LoginHandler[type = object or user]"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
 		not (Operation( eContainer == session, name == "check instance") )
 					
 	then
@@ -1033,4 +1035,42 @@ rule "Create 'check instance' operation for LoginHandler[type = object]"
 		handler.setName(op, "check instance");
 		queue.add(op, drools);
 		
+end
+
+rule "Create 'current instance' for LoginHandler[type=object]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		not (DomainObjectInstance ( eContainer == session ))
+		
+	then
+		DomainObjectInstance instance = handler.generatedDomainObjectInstance( login_handler, session );
+		handler.setName(instance, "current instance");
+		queue.add(instance, drools);
+		
+		// connect with SetWire
+		SetWire setWire = handler.generatedSetWire(login_handler, session, login_handler, instance);
+		handler.setName(setWire, "set");
+		queue.add(setWire, drools);
+
+end
+
+rule "Create 'current instance' for LoginHandler[type=user]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		
+		not (UserInstance ( eContainer == session ))
+		
+	then
+		UserInstance instance = handler.generatedUserInstance( login_handler, session );
+		handler.setName(instance, "current instance");
+		queue.add(instance, drools);
+		
+		// connect with SetWire
+		SetWire setWire = handler.generatedSetWire(login_handler, session, login_handler, instance);
+		handler.setName(setWire, "set");
+		queue.add(setWire, drools);
+
 end

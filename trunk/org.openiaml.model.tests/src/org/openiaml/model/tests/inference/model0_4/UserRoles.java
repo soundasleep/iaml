@@ -15,11 +15,14 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
+import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -72,7 +75,23 @@ public class UserRoles extends InferenceTestCase {
 		// or events in the target page
 		assertHasNone(target, "iaml:eventTriggers");
 	}
+	
+	/**
+	 * There should be a default role 'Guest' generated
+	 * in the user store.
+	 *
+	 * @throws Exception
+	 */
+	public void testDefaultGuestRole() throws Exception {
+		root = loadAndInfer(UserRoles.class);
 
+		UserStore store = assertHasUserStore(root, "user store");
+		
+		Role guest = assertHasRole(store, "Guest");
+		assertGenerated(guest);
+		
+	}
+	
 	/**
 	 * Since there is an Access Control in the session, and no login handler,
 	 * a login handler for the session should be created.
@@ -102,23 +121,95 @@ public class UserRoles extends InferenceTestCase {
 	}
 
 	/**
-	 * Since there is an Access Control in the session, the 'access'
-	 * event on the target page should connect to a 'check permissions'
-	 * operation owned by the access control.
+	 * The Login Handler[type=user] should generate a 
+	 * UserInstance in the session. 
 	 *
 	 * @throws Exception
 	 */
-	public void testGeneratedAccessEvent() throws Exception {
+	public void testHandlerGeneratedUserInstance() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		Session session = assertHasSession(root, "target session");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		
+		// user instance
+		UserInstance instance = assertHasUserInstance(session, "current instance");
+		assertGenerated(instance);
+		
+		// a Set wire: [handler] --> [instance]
+		SetWire set = assertHasSetWire(session, handler, instance, "set");
+		assertGenerated(set);
+		
+		// this user instance should have an 'exists?' operation
+		Operation exists = assertHasOperation(instance, "exists?");
+		assertGenerated(exists);
+		
+	}
+
+	/**
+	 * The Login Handler[type=user] should have an incoming
+	 * parameter of 'Guest' - the default role/user instance
+	 * to generate.
+	 *
+	 * @throws Exception
+	 */
+	public void testHandlerGeneratedGuestParameter() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		Session session = assertHasSession(root, "target session");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");		
+		UserStore store = assertHasUserStore(root, "user store");
+		
+		Role guest = assertHasRole(store, "Guest");
+		assertGenerated(guest);
+		
+		// a Parameter wire: [guest] --> [handler]
+		ParameterWire param = assertHasParameterWire(session, guest, handler);
+		assertGenerated(param);
+		
+	}
+	
+	/**
+	 * The Login Handler[type=user] should generate a 
+	 * "check instance" operation 
+	 *
+	 * @throws Exception
+	 */
+	public void testHandlerGeneratedCheckInstance() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		Session session = assertHasSession(root, "target session");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		assertGenerated(handler);
+		
+		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
+		assertGenerated(check);
+	}
+	
+	/**
+	 * <p>Since there is an Access Control in the session, the 'access'
+	 * event on the target session should connect to a 'check permissions'
+	 * operation owned by the access control.</p>
+	 * 
+	 * <p>TODO Write up semantics: The events/operations are stored as part of the page, instead
+	 * of the session, to allow for easy extensibility. For example,
+	 * particular pages could redirect to different targets when the
+	 * authentication check fails, or we could extend only certain
+	 * pages with additional check constraints.</p>
+	 *
+	 * @throws Exception
+	 */
+	public void testGeneratedAccessEventSession() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
 		Page target = assertHasPage(session, "target");
 		
-		// access event
+		// access event in the session
 		EventTrigger event = assertHasEventTrigger(target, "access");
 		assertGenerated(event);
 		
-		// check permissions operation contained in the page
+		// check permissions operation contained in the session, not the page
 		CompositeOperation pageOp = assertHasCompositeOperation(target, "permissions check");
 		assertGenerated(pageOp);
 		
@@ -130,6 +221,33 @@ public class UserRoles extends InferenceTestCase {
 		Page login = assertHasPage(root, "login");
 		NavigateWire fail = assertHasNavigateWire(root, pageOp, login, "fail");
 		assertGenerated(fail);
+		
+	}
+	
+	/**
+	 * There should not be a 'permissions check' in the target session;
+	 * this is part of the page.
+	 *
+	 * @throws Exception
+	 */
+	public void testGeneratedAccessEventNotPage() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		Session session = assertHasSession(root, "target session");
+		Page target = assertHasPage(session, "target");
+		
+		// access event in the page
+		EventTrigger event = assertHasEventTrigger(session, "access");
+		assertGenerated(event);
+		
+		// check permissions operation contained in the session, not the page
+		assertHasNone(session, "iaml:operations[iaml:name='permissions check']");
+
+		CompositeOperation sessionOp = assertHasCompositeOperation(target, "permissions check");
+		assertGenerated(sessionOp);
+
+		// the page's event trigger should not connect to the actual permissions check in the session
+		assertHasNoWiresFromTo(session, event, sessionOp);
 		
 	}
 	
@@ -146,8 +264,8 @@ public class UserRoles extends InferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 		Page target = assertHasPage(session, "target");
 		
-		// find 'check user'
-		CompositeOperation check = assertHasCompositeOperation(session, "check user");
+		// find 'check instance'
+		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
 		assertGenerated(check);
 		
 		// access event
@@ -175,15 +293,15 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		Page target = assertHasPage(session, "target");
 		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
+		Page target = assertHasPage(session, "target");
 		
 		// the actual 'check permissions' operation in the ACH
 		Operation targetOp = assertHasOperation(ach, "check permissions");
 		assertGenerated(targetOp);
 		
 		// access event
-		EventTrigger event = assertHasEventTrigger(target, "access");
+		EventTrigger event = assertHasEventTrigger(session, "access");
 		assertGenerated(event);
 		
 		// check permissions operation contained in the page

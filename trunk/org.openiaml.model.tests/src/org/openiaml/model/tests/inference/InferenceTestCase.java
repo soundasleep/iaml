@@ -43,14 +43,17 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
+import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.ModelInferenceTestCase;
 
 /**
@@ -209,6 +212,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
+	 * UserInstance.
+	 *
+	 * @return The element found
+	 */
+	public UserInstance assertHasUserInstance(ApplicationElementContainer root, String string) throws JaxenException {
+		return (UserInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
 	 * DomainObjectInstance.
 	 *
 	 * @return The element found
@@ -216,7 +229,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public DomainObjectInstance assertHasDomainObjectInstance(ApplicationElementContainer root, String string) throws JaxenException {
 		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
 	}
-
+	
 	/**
 	 * Assert that the given element contains the given
 	 * DomainObjectInstance.
@@ -425,6 +438,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert there exists only one unidirectional ParameterWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public ParameterWire assertHasParameterWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		return (ParameterWire) assertHasWireFromTo(container, from, to, 
+				ParameterWire.class);
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional RequiresWire between
 	 * the given elements.
 	 *
@@ -444,6 +468,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
 				RunInstanceWire.class, name);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional SetWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public SetWire assertHasSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+		return (SetWire) assertHasWireFromTo(container, from, to, 
+				SetWire.class, name);
 	}
 	
 	/**

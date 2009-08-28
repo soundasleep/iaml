@@ -41,3 +41,16 @@ rule "Create 'init' event for Sessions"
 		queue.add(event, drools);
 	
 end
+
+rule "Create 'access' event for Sessions"
+	when
+		session : Session( overridden == false )
+		not (EventTrigger( eContainer == session, name == "access" ))
+		
+	then
+		EventTrigger event = handler.generatedEventTrigger(session, session);
+		handler.setName(event, "access");
+		queue.add(event, drools);
+	
+end
+

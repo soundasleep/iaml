@@ -38,7 +38,8 @@ end
 rule "Domain objects that extend each other will also copy over attributes, connected by ExtendsWires"
 	when
 		sourceObject : DomainObject( )
-		sourceAttribute : DomainAttribute ( eContainer == sourceObject )
+		# don't copy primary keys
+		sourceAttribute : DomainAttribute ( eContainer == sourceObject, primaryKey == false )
 		
 		targetObject : DomainObject ( this != sourceObject )
 		
@@ -57,4 +58,31 @@ rule "Domain objects that extend each other will also copy over attributes, conn
 		queue.add(ext2, drools);
 
 end
+
+rule "Domain objects that extend each other should include an indexable reference to the source primary key"
+	when
+		sourceObject : DomainObject( )
+		
+		targetObject : DomainObject ( this != sourceObject )
+		
+		ext : ExtendsWire ( from == targetObject, to == sourceObject )
+		
+		sourceId : DomainAttribute ( eContainer == sourceObject, primaryKey == true )
+		
+		not ( 
+		da : DomainAttribute ( eContainer == targetObject, primaryKey == false )
+		and 
+		ExtendsWire ( from == da, to == sourceId ) ) 
+
+	then
+		# create the target ID attribute
+		DomainAttribute id_ref = handler.generatedDomainAttribute(ext, targetObject);
+		handler.setName(id_ref, sourceObject.getName() + "." + sourceId.getName());
+		queue.add(id_ref, drools);
+		
+		# and set it as extends to signify relationship
+		ExtendsWire ext2 = handler.generatedExtendsWire(ext, sourceId, id_ref, sourceId);
+		queue.add(ext2, drools);		
+
+end		
 

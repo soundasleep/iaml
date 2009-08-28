@@ -29,6 +29,7 @@ import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
+import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -426,6 +427,38 @@ public class UserRoles extends InferenceTestCase {
 	}
 	
 	/**
+	 * Since Default Role extends Guest, there will be an
+	 * ID in Default Role which will be the index/foreign key
+	 * of Guest.
+	 * 
+	 * @throws Exception
+	 */
+	public void testInheritancePrimaryKeys() throws Exception {
+		root = loadAndInfer(UserRoles.class);
+
+		UserStore store = assertHasUserStore(root, "user store");		
+		Role guest = assertHasRole(store, "Guest");
+		
+		DomainAttribute source_id = assertHasDomainAttribute(guest, "generated primary key");
+		assertGenerated(source_id);
+		
+		Role role = assertHasRole(store, "default role");
+
+		DomainAttribute id = assertHasDomainAttribute(role, "generated primary key");
+		assertGenerated(id);
+		DomainAttribute fk = assertHasDomainAttribute(role, "Guest.generated primary key");
+		assertGenerated(fk);
+		
+		// there should be an extends wire between the PK and FK
+		assertGenerated(assertHasExtendsWire(store, fk, source_id));
+		
+		// and none between the PK and PK
+		assertHasNoWiresFromTo(store, id, source_id);
+		assertHasNoWiresFromTo(store, source_id, id);
+		
+	}
+	
+	/**
 	 * The generated login form on the generated 'login' page 
 	 * should have 'email' and 'password' fields.
 	 *
@@ -469,6 +502,35 @@ public class UserRoles extends InferenceTestCase {
 		// but not an 'generated primary key'
 		assertHasNoApplicationElementProperty(session, "current generated primary key");
 		
+	}
+	
+	/**
+	 * The login form and the session properties should be
+	 * connected by a SetWire (not SyncWire) from form to session property. 
+	 * 
+	 * @throws Exception
+	 */
+	public void testLoginFormConnectedToSession() throws Exception {
+		root = loadAndInfer(UserRoles.class, true);
+
+		Page login = assertHasPage(root, "login");
+		InputForm form = assertHasInputForm(login, "login form");
+		InputTextField email = assertHasInputTextField(form, "email");
+		ApplicationElementProperty emailValue = assertHasApplicationElementProperty(email, "fieldValue");
+		InputTextField password = assertHasInputTextField(form, "password");
+		ApplicationElementProperty passwordValue = assertHasApplicationElementProperty(password, "fieldValue");
+
+		Session session = assertHasSession(root, "target session");
+		ApplicationElementProperty sessionEmail = assertHasApplicationElementProperty(session, "current email");
+		ApplicationElementProperty sessionPassword = assertHasApplicationElementProperty(session, "current password");
+		
+		SetWire setEmail = assertHasSetWire(login, emailValue, sessionEmail, "set");
+		assertGenerated(setEmail);
+		SetWire setPassword = assertHasSetWire(login, passwordValue, sessionPassword, "set");
+		assertGenerated(setPassword);
+		
+		assertHasNoWiresFromTo(login, emailValue, sessionEmail, SyncWire.class);
+		assertHasNoWiresFromTo(login, passwordValue, sessionPassword, SyncWire.class);
 	}
 	
 	/**

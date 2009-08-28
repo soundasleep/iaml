@@ -605,6 +605,36 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		
 end
 
+rule "Connect text fields in login form to session properties for login handler[user]"
+	when
+		container : InternetApplication( )
+		session : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role )
+		param : ParameterWire ( from == role, to == login_handler )
+	
+		login : Page (eContainer == container, name=="login" )
+		form : InputForm( eContainer == login, name == "login form" )
+		
+		text : InputTextField ( eContainer == form, name == attribute.name )
+		textProperty : ApplicationElementProperty ( eContainer == text, name == "fieldValue" )
+		
+		# session property
+		property : ApplicationElementProperty ( eContainer == session, eval(loginAttributeMatches(property, attribute)) )
+				
+		not ( w : WireEdge ( ( from == property && to == textProperty ) ||
+			( from == textProperty && to == property) ) )  
+		
+	then
+		# use SetWire, so that the password isn't updated in the login form
+		SetWire set = handler.generatedSetWire(login_handler, login_handler, textProperty, property);
+		handler.setName(set, "set");
+		queue.add(set, drools); 
+		
+end
+
 rule "Create 'do login' operation within all login_handlers"
 	when
 		container : InternetApplication( )

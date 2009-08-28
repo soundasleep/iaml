@@ -3,6 +3,10 @@
  */
 package org.openiaml.model.tests.inference;
 
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
@@ -20,16 +24,33 @@ import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.ExecutionEdgeDestination;
+import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.OperationCallNode;
+import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.users.Role;
+import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.RequiresWire;
+import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.tests.ModelInferenceTestCase;
 
 /**
@@ -249,6 +270,36 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
+	 * UserStore.
+	 *
+	 * @return The element found
+	 */
+	public UserStore assertHasUserStore(InternetApplication root, String string) throws JaxenException {
+		return (UserStore) queryOne(root, "iaml:domainStores[iaml:name='" + string + "']");	
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * Role.
+	 *
+	 * @return The element found
+	 */
+	public Role assertHasRole(UserStore root, String string) throws JaxenException {
+		return (Role) queryOne(root, "iaml:children[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * AccessControlHandler.
+	 *
+	 * @return The element found
+	 */
+	public AccessControlHandler assertHasAccessControlHandler(Session root, String string) throws JaxenException {
+		return (AccessControlHandler) queryOne(root, "iaml:children[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
 	 * Page.
 	 *
 	 * @return The element found
@@ -268,6 +319,22 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 
 	/**
+	 * Assert that the given element does not contain the given
+	 * Page.
+	 */
+	public void assertHasNoPage(Session session, String string) throws JaxenException {
+		assertHasNone(session, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contain the given
+	 * Page.
+	 */
+	public void assertHasNoPage(InternetApplication root, String string) throws JaxenException {
+		assertHasNone(root, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
 	 * Assert that the given element contains the given
 	 * LoginHandler.
 	 *
@@ -275,6 +342,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public LoginHandler assertHasLoginHandler(Session session, String string) throws JaxenException {
 		return (LoginHandler) queryOne(session, "iaml:children[iaml:name='" + string + "']");	
+	}
+
+	/**
+	 * Assert that the given element does not contain the given
+	 * LoginHandler.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoLoginHandler(Session session, String string) throws JaxenException {
+		assertHasNone(session, "iaml:children[iaml:name='" + string + "']");	
 	}
 
 	/**
@@ -305,6 +382,182 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DynamicApplicationElementSet assertHasDynamicApplicationElementSet(InternetApplication element, String string) throws JaxenException {
 		return (DynamicApplicationElementSet) queryOne(element, "iaml:children[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * StartNode.
+	 *
+	 * @return The element found
+	 */
+	public StartNode assertHasStartNode(CompositeOperation element) throws JaxenException {
+		return (StartNode) assertHasOne(element, "iaml:nodes", StartNode.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * FinishNode.
+	 *
+	 * @return The element found
+	 */
+	public FinishNode assertHasFinishNode(CompositeOperation element) throws JaxenException {
+		return (FinishNode) assertHasOne(element, "iaml:nodes", FinishNode.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * CancelNode.
+	 *
+	 * @return The element found
+	 */
+	public CancelNode assertHasCancelNode(CompositeOperation element) throws JaxenException {
+		return (CancelNode) assertHasOne(element, "iaml:nodes", CancelNode.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * OperationCallNode.
+	 *
+	 * @return The element found
+	 */
+	public OperationCallNode assertHasOperationCallNode(CompositeOperation element, String string) throws JaxenException {
+		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional RequiresWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public RequiresWire assertHasRequiresWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		return (RequiresWire) assertHasWireFromTo(container, from, to, 
+				RequiresWire.class);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional RunInstanceWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
+				RunInstanceWire.class, name);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional NavigateWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public NavigateWire assertHasNavigateWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+		return (NavigateWire) assertHasWireFromTo(container, from, to, 
+				NavigateWire.class, name);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional ExecutionEdge between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public ExecutionEdge assertHasExecutionEdge(EObject container, ExecutionEdgesSource from, ExecutionEdgeDestination to) throws JaxenException {
+		ExecutionEdge result = null;
+		List<?> wires = query(container, "//iaml:executionEdges");
+		for (Object o : wires) {
+			if (o instanceof ExecutionEdge) {
+				ExecutionEdge e = (ExecutionEdge) o;
+				if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
+					if (result != null) {
+						fail("Found more than one execution edge from '" + from + "' to '" + to + "'. First = '" + result + ", second = '" + e + "'");
+					}
+					result = e;
+				}
+			}
+		}
+		assertNotNull("Did not find an ExecutionEdge from '" + from + "' to '" + to + "'", result);
+		return result;
+	}
+	
+	/**
+	 * For unnamed objects that are only differentiated by xsi:type, we need
+	 * a special method to find that only one of these types exist.
+	 * 
+	 * @param container
+	 * @param query
+	 * @param type
+	 * @return
+	 * @throws JaxenException 
+	 */
+	public EObject assertHasOne(EObject container, String query, Class<? extends EObject> type) throws JaxenException {
+		EObject result = null;
+		List<?> results = query(container, query);
+		for (Object r : results) {
+			if (type.isInstance(r)) {
+				if (result != null) {
+					fail("Found more than one '" + type + "' in container '" + container + "' with query '" + query + ". First = '" + result + ", second = '" + r + "'");
+				}
+				result = (EObject) r;
+			}
+		}
+		assertNotNull("Did not find any results of '" + query + "' of type '" + type + "' in container '" + container + "'", result);
+		return result;
+	}
+	
+	/**
+	 * Assert that there exists <em>only one</em> wire of the given type from the 'from' element
+	 * to the 'to' element.
+	 * 
+	 * @see #assertHasWireFromTo(EObject, WireEdgesSource, WireEdgeDestination, String, Class)
+	 * @param container
+	 * @param from
+	 * @param to
+	 * @param type
+	 * @return
+	 * @throws JaxenException 
+	 */
+	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type) throws JaxenException {
+		Set<WireEdge> wires = getWiresFromTo(container, from, to);
+		WireEdge result = null;
+		for (WireEdge w : wires) {
+			if (type.isInstance(w)) {
+				// found it
+				if (result != null)
+					fail("Found more than 1 wire from '" + from + "' to '" + to + "' class='" + type + "'. First = '" + result + "', second = '" + w + "'");
+				result = w;
+			}
+		}
+		assertNotNull("Did not find any wires connecting '" + from + "' to '" + to + " of type '" + type + "'", result);
+		return result;
+	}
+	
+	/**
+	 * Assert that there exists <em>only one</em> wire of the given type from the 'from' element
+	 * to the 'to' element, with the given name; the wire must implement NamedElement.
+	 * 
+	 * @param container
+	 * @param from
+	 * @param to
+	 * @param type
+	 * @param name the name of the NamedElement wire
+	 * @return
+	 * @throws JaxenException 
+	 */
+	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type, String name) throws JaxenException {
+		Set<WireEdge> wires = getWiresFromTo(container, from, to);
+		WireEdge result = null;
+		for (WireEdge w : wires) {
+			if (type.isInstance(w) && w instanceof NamedElement && name.equals(((NamedElement) w).getName())) {
+				// found it
+				if (result != null)
+					fail("Found more than 1 wire from '" + from + "' to '" + to + "' class='" + type + "' name='" + name + "'. First = '" + result + "', second = '" + w + "'");
+				result = w;
+			}
+		}
+		assertNotNull("Did not find any wires connecting '" + from + "' to '" + to + " of type '" + type + "' with name '" + name + "'", result);
+		return result;
 	}
 
 }

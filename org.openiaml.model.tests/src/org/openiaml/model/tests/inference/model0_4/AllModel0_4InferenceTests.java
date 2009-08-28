@@ -26,6 +26,7 @@ public class AllModel0_4InferenceTests {
 		suite.addTestSuite(LoginHandlerKey.class);
 		suite.addTestSuite(LoginHandlerInstanceMultiple.class);
 		suite.addTestSuite(SetWireClient.class);
+		suite.addTestSuite(UserRoles.class);
 		
 		return suite;
 	}

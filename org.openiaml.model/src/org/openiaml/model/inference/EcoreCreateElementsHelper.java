@@ -32,6 +32,8 @@ import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionOperation;
@@ -43,6 +45,10 @@ import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.users.Role;
+import org.openiaml.model.model.users.UserInstance;
+import org.openiaml.model.model.users.UserStore;
+import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -381,6 +387,30 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public DomainAttributeInstance generatedDomainAttributeInstance(GeneratesElements by, DomainObjectInstance container) throws InferenceException {
 		DomainAttributeInstance object = (DomainAttributeInstance) createElement( container, ModelPackage.eINSTANCE.getDomainAttributeInstance(), ModelPackage.eINSTANCE.getDomainObjectInstance_Attributes() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+
+	public DomainObjectInstance generatedDomainObjectInstance(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
+		DomainObjectInstance object = (DomainObjectInstance) createElement( container, ModelPackage.eINSTANCE.getDomainObjectInstance(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+
+	public UserInstance generatedUserInstance(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
+		UserInstance object = (UserInstance) createElement( container, UsersPackage.eINSTANCE.getUserInstance(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+	
+	public LoginHandler generatedLoginHandler(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
+		LoginHandler object = (LoginHandler) createElement( container, ComponentsPackage.eINSTANCE.getLoginHandler(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+
+	public Role generatedRole(GeneratesElements by, UserStore container) throws InferenceException {
+		Role object = (Role) createElement( container, UsersPackage.eINSTANCE.getRole(), ModelPackage.eINSTANCE.getDomainStore_Children() );
 		setGeneratedBy(object, by);
 		return object;
 	}

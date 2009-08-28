@@ -70,6 +70,8 @@
 	«ELSEIF isDomainObjectInstance(to.eContainer)-»
 		«REM»direct field --> domain object instance«ENDREM»
 		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::DomainObjectInstance) to.eContainer) FOR to»;
+	«ELSEIF model::components::AccessControlHandler.isInstance(to.eContainer)-»
+		«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, this, (model::components::AccessControlHandler) to.eContainer) FOR to»;
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
 		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»

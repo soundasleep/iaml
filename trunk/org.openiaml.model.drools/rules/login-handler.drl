@@ -1044,7 +1044,7 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
 		role : Role ( )
-		attribute : DomainAttribute ( eContainer == role )
+		attribute : DomainAttribute ( eContainer == role, name != "generated primary key" )
 		paramWire : ParameterWire ( from == role, to == login_handler )
 		
 		not ( p : ApplicationElementProperty ( eContainer == session, 

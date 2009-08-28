@@ -77,6 +77,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 
 	/**
+	 * Assert that the given element does not contains the given
+	 * ApplicationElementProperty.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoApplicationElementProperty(
+			ApplicationElement element, String string) throws JaxenException {
+		assertHasNone(element, "iaml:properties[iaml:name='" + string + "']");
+	}
+
+	/**
 	 * Assert that the given element contains the given
 	 * Operation.
 	 *
@@ -261,6 +272,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public InputTextField assertHasInputTextField(VisibleThing element, String string) throws JaxenException {
 		return (InputTextField) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contains the given
+	 * InputTextField.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoInputTextField(VisibleThing element, String string) throws JaxenException {
+		assertHasNone(element, "iaml:children[iaml:name='" + string + "']");
 	}
 
 	/**

@@ -36,7 +36,7 @@ public abstract class AbstractUserLoginTestCase extends CodegenTestCase {
 	
 		String passwordField = getLabelIDForText("password");
 		assertLabeledFieldEquals(passwordField, "");
-		assertLabeledFieldEquals(passwordField, password);
+		setLabeledFormElementField(passwordField, password);
 		
 		// submit form
 		submit();

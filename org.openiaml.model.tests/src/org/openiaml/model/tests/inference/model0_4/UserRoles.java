@@ -444,7 +444,10 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(email);
 		InputTextField password = assertHasInputTextField(form, "password");
 		assertGenerated(password);
-		
+
+		// but not an 'generated primary key'
+		assertHasNoInputTextField(form, "generated primary key");
+
 	}
 	
 	/**
@@ -462,6 +465,9 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(email);
 		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
 		assertGenerated(password);
+		
+		// but not an 'generated primary key'
+		assertHasNoApplicationElementProperty(session, "current generated primary key");
 		
 	}
 	
@@ -498,8 +504,10 @@ public class UserRoles extends InferenceTestCase {
 		}, selectWire.getQuery());
 		
 		// parameters
-		assertHasParameterWire(root, email, selectWire);
-		assertHasParameterWire(root, password, selectWire);
+		ParameterWire p1 = assertHasParameterWire(root, email, selectWire);
+		assertGenerated(p1);
+		ParameterWire p2 = assertHasParameterWire(root, password, selectWire);
+		assertGenerated(p2);
 		
 	}
 	

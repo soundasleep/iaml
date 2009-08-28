@@ -1,0 +1,41 @@
+«IMPORT iaml»
+
+/**
+ * Code behind AccessControlHandlers.
+ *
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * Domain instance methods.
+ */
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::WireEdgeDestination»
+	«EXPAND exception FOR throwException("Unexpected accessControlHandlerOperationCall run instance wire destination: " + this)»
+«ENDDEFINE»
+
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::Operation»
+	«IF php»
+		«IF name=="check permissions"»
+			«REM»
+				the AccessControlHandler will have an incoming ParameterWire
+				with the UserInstance in which to validate against
+			«ENDREM»
+			access_control_permissions_check_«safeNameString(object.id)»()
+		«ELSE»
+			«EXPAND exception FOR throwException("No server-side code for accessControlHandlerOperationCall operation '" + name + "'")»
+		«ENDIF»
+	«ELSE»
+		«IF name=="check permissions"»
+			«REM»
+				for now, we just bail
+			«ENDREM»
+			throwJavascriptException("'check permissions' function not implemented on client-side")
+		«ELSE»
+			«EXPAND exception FOR throwException("No client-side code for accessControlHandlerOperationCall operation '" + name + "'")»
+		«ENDIF»
+	«ENDIF» 
+«ENDDEFINE»
+
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

@@ -198,6 +198,8 @@
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( SyncWire )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
@@ -212,6 +214,30 @@
         href="domain_store.gmftool#//@palette/@tools.1/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#SyncWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//WireEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ExtendsWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ExtendsWire )"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ExtendsWireName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/wires"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="domain_store.gmftool#//@palette/@tools.1/@tools.1"/>
+    <diagramLink
+        href="iaml.gmfgraph#ExtendsWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>

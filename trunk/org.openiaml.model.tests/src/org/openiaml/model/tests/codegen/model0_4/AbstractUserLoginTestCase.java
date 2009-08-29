@@ -89,8 +89,7 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 		s.add("CREATE TABLE Guest (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
 		s.add("INSERT INTO Guest (generated_primary_key, name, email, password) VALUES (12, 'Guest', 'guest@openiaml.org', 'guest')");
 		s.add("INSERT INTO Guest (generated_primary_key, name, email, password) VALUES (22, 'Default Role', 'default@openiaml.org', 'test123')");
-		s.add("CREATE TABLE default_role (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, guest_generated_primary_key INTEGER NOT NULL)");
-		s.add("INSERT INTO default_role (generated_primary_key, guest_generated_primary_key) VALUES (44, 22)");
+		s.add("INSERT INTO Guest (generated_primary_key, name, email, password) VALUES (32, 'Registered User', 'registered@openiaml.org', 'test123')");
 		return s;
 	}
 	

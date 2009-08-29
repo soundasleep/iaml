@@ -185,6 +185,15 @@ public abstract class EclipseTestCase extends ModelTestCase {
 
 	}
 	
+	/**
+	 * Assert that the IStatus is ok.
+	 * 
+	 * @param status
+	 * @throws Exception if there was a Throwable in the IStatus
+	 */
+	public void assertStatusOK(IStatus status) throws Exception {
+		assertStatusIsOK(status);
+	}
 
 	/**
 	 * Assert that the IStatus is ok.
@@ -192,7 +201,7 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	 * @param status
 	 * @throws Exception if there was a Throwable in the IStatus
 	 */
-	protected void assertStatusOK(IStatus status) throws Exception {
+	public static void assertStatusIsOK(IStatus status) throws Exception {
 		if (!status.isOK()) {
 			if (status.getException() != null) {
 				// rethrow

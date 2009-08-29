@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 
 /**
@@ -39,7 +41,7 @@ public class UserRolesLoginHandler extends AbstractUserLoginTestCase {
 		IFile sitemap = doStandardLoginAs("guest@openiaml.org", "guest");
 		assertNoProblem();
 		
-		gotoSitemapThenPage(sitemap, "target page");
+		gotoSitemapWithProblem(sitemap, "target page");
 		assertTitleNotSame("target page");
 		assertProblem();		// who knows where we are?
 	}
@@ -57,4 +59,13 @@ public class UserRolesLoginHandler extends AbstractUserLoginTestCase {
 		assertNoProblem();
 	}
 
+
+	@Override
+	protected List<String> getDatabaseInitialisers() {
+		List<String> s = super.getDatabaseInitialisers();
+		s.add("CREATE TABLE Registered_User (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, guest_generated_primary_key INTEGER NOT NULL)");
+		s.add("INSERT INTO Registered_User (generated_primary_key, guest_generated_primary_key) VALUES (44, 22)");
+		return s;
+	}
+	
 }

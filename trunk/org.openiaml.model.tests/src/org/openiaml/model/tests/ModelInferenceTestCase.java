@@ -16,8 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -25,6 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.jaxen.JaxenException;
+import org.openiaml.model.codegen.oaw.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
@@ -612,6 +616,36 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 
 		return results;
 	}
+	
+	/**
+	 * Get all wires to the given element of the given EObject type.
+	 * 
+	 * @param container
+	 * @param toElement
+	 * @param type
+	 * @return
+	 * @throws JaxenException
+	 */
+	protected Set<WireEdge> getWiresTo(EObject container, WireEdgeDestination toElement, Class<? extends WireEdge> type) throws JaxenException {
+		return typeSelect(getWiresTo(container, toElement), type);
+	}
+	
+	/**
+	 * Get all elements of the set which are instances of the given
+	 * type.
+	 * 
+	 * @param collection
+	 * @param type
+	 * @return
+	 */
+	public Set<WireEdge> typeSelect(Set<? extends WireEdge> collection, Class<? extends WireEdge> type) {
+		Set<WireEdge> result = new HashSet<WireEdge>();
+		for (WireEdge o : collection) {
+			if (type.isInstance(o))
+				result.add(o);
+		}
+		return result;
+	}
 
 	/**
 	 * For bidirectional wires.
@@ -732,6 +766,27 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		fail("no wire found");
 		return null;
 	}
+	
+	/**
+	 * When we infer a model, we could assert that it is valid
+	 * according to the checks. Generally, this is already called when
+	 * generating code from the inferred model.
+	 * 
+	 * @throws Exception
+	 */
+	public void checkModelIsValid(EObject root) throws Exception {
+		
+		IFile target = getProject().getFile( getInferredModel().getName() );
+		assertFalse("File '" + target + "' should not exist", target.exists());
+		copyFileIntoWorkspace(getInferredModel(), target);
+		assertTrue("File '" + target + "' should now exist", target.exists());
+		
+		CheckModelInstance check = new CheckModelInstance();
+		IStatus result = check.checkModel(target, new NullProgressMonitor());
+		
+		EclipseTestCase.assertStatusIsOK(result);
+		
+	}
 
 	/**
 	 * Get the "safe name" of the given element.
@@ -765,6 +820,5 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		
 		super.tearDown();
 	}
-	
 
 }

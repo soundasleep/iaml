@@ -109,5 +109,8 @@ context model::ApplicationElementProperty WARNING "A session property used as pa
 
 context model::QueryParameter ERROR "A QueryParameter cannot be used on a Page outside of its containing page (" + containingPage(this.eContainer) + ", " + containingPage(outEdges.first().to.eContainer) + ")" :
 	outEdges.forAll( e | isAccessibleOnPage(containingPage(this.eContainer), e.to) );
-	
+
+context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming ParameterWire" :
+	(type != model::components::LoginHandlerTypes::USER) || inEdges.typeSelect(model::wires::ParameterWire).size <= 1; 
+
 	

@@ -452,6 +452,22 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert that there is no label on the page containing the given text.
+	 * 
+	 * @param text
+	 */
+	protected void assertHasNotLabelIDForText(String text) {
+		try {
+			// expect this to fail
+			getLabelIDForText(text);
+		} catch (AssertionFailedError e) {
+			// it wasn't found; ok
+			return;
+		}
+		fail("Unexpectedly found label '" + text + "': " + getLabelIDForText(text));
+	}
+	
+	/**
 	 * Helper method: Get the current page title.
 	 */
 	protected String getPageTitle() {
@@ -655,6 +671,19 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// throw out any response text too
 		throw new RuntimeException("Response = '" + getElementById("response").getTextContent() + "' Debug='" + getElementById("debug").getTextContent() + "'", e);
 		
+	}
+	
+	/**
+	 * Extend submit() to also wait for Ajax.
+	 */
+	@Override
+	public void submit() {
+		try {
+			waitForAjax();
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		super.submit();
 	}
 	
 }

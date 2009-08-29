@@ -5,10 +5,13 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * Must set $row with the result.
+ */
 «DEFINE evaluateSelectWire FOR model::wires::SelectWire»
 	/* selection wire «this» */
 	
-	// where are we loading it from? sets $db
+	// where are we loading it from? sets $db_name
 	«EXPAND selectDatabase FOR from»
 	
 	// create query
@@ -16,12 +19,8 @@
 		WHERE " . «EXPAND getQuery FOR this-»;
 	$args = array(«EXPAND template::operations::Parameters::callParameter(true, this, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
 	
-	log_message("[query] $query");
-	log_message("[args] " . print_r($args, true));
-	
-	// execute query
-	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
-	$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+	$db_query = new DatabaseQuery($db_name);
+	$row = $db_query->fetchFirst($query, $args);
 «ENDDEFINE»
 
 /* create a SQL query to select a particular value */
@@ -49,8 +48,7 @@
 «ENDDEFINE»
 
 «DEFINE selectDatabaseStore FOR model::DomainStore»
-	$db = new PDO('sqlite:«safeNameString(id)».db') 
-		or throw_new_IamlRuntimeException("Could not open DomainStore '«id»'");
+	$db_name = 'sqlite:«safeNameString(id)».db';
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

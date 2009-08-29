@@ -62,36 +62,24 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 			«LET attributes.selectFirst(a | a.primaryKey) AS sourceKey»
 				«LET subclass.attributes.select(a | !a.outEdges.typeSelect(model::wires::ExtendsWire).to.select( a | a == sourceKey ).isEmpty).first() AS targetKey»
 					$source_value = $instance["«safeNameString(sourceKey.name)»"];
+
+					«EXPAND Select::selectDatabase FOR subclass»
 					
 					$query = "SELECT * FROM «safeNameString(subclass.name)» WHERE
 						«safeNameString(targetKey.name)» = ?";
 
-					/* TODO refactor this into a function call */
 					$args = array($source_value);
 					
 					log_message("Selecting instance for cast from «name» to «target.name»: '$query', args = " . print_r($args, true));
-
-					// select database	
-					«EXPAND Select::selectDatabase FOR subclass»
-			
-					// execute query
-					$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
-					$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
 					
-					// get just the first result
-					$row = $rs->fetch();
-					if (!$row) {
+					$db_query = new DatabaseQuery($db_name);
+					$new_instance = $db_query->fetchFirst($query, $args);
+					if ($new_instance === null) {
 						log_message("Could not find any result");
-						return null;	// could not find any results to cast to
+						return null;
 					}
-
-					// found a result
-					$new_instance = array();
-					foreach ($row as $key => $value) {
-						$new_instance[$key] = $value;
-					}
+			
 					log_message("Found instance: " . print_r($new_instance, true));
-					/* END TODO */
 					 
 					// add $instance to $new_instance
 					foreach ($instance as $key => $value) {

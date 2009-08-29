@@ -9,6 +9,9 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.UserInstance;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -44,7 +47,7 @@ public class UserRolesLoginHandler extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testSelectWires() throws Exception {
-		root = loadAndInfer(UserRolesLoginHandler.class, true);
+		root = loadAndInfer(UserRolesLoginHandler.class);
 
 		Session session = assertHasSession(root, "my session");
 		
@@ -56,6 +59,47 @@ public class UserRolesLoginHandler extends InferenceTestCase {
 		Set<WireEdge> wires = getWiresTo(session, ui, SelectWire.class);
 		assertEquals(wires.toString(), 1, wires.size());		
 
+	}
+	
+	/**
+	 * The "generated primary key" of the Registered User/Guest should
+	 * not be a parameter in the input form.
+	 * 
+	 * @throws Exception
+	 */
+	public void testPrimaryKeyNotInputField() throws Exception {
+		root = loadAndInfer(UserRolesLoginHandler.class);
+		
+		Page login = assertHasPage(root, "login");
+		InputForm form = assertHasInputForm(login, "login form");
+		
+		InputTextField email = assertHasInputTextField(form, "email");
+		assertGenerated(email);
+		InputTextField password = assertHasInputTextField(form, "password");
+		assertGenerated(password);
+		assertHasNoInputTextField(form, "generated primary key");
+		assertHasNoInputTextField(form, "Guest.generated primary key");
+		
+	}
+	
+	/**
+	 * The UserInstance select query should not contain anything
+	 * about generated primary keys.
+	 * 
+	 * @throws Exception
+	 */
+	public void testUserInstanceSelectWire() throws Exception {
+		root = loadAndInfer(UserRolesLoginHandler.class);
+		
+		Session session = assertHasSession(root, "my session");
+		UserInstance user = assertHasUserInstance(session, "current instance");
+		
+		SelectWire select = (SelectWire) getWiresTo(session, user, SelectWire.class).iterator().next(); 
+		assertEqualsOneOf(new String[] {
+				"password = :password and email = :email",
+				"email = :email and password = :password"
+			}, select.getQuery());
+		
 	}
 	
 	/**

@@ -183,7 +183,11 @@ public class ExportDroolsJavaXml extends ExportDroolsXml {
 			parseJavaStatement(document, statement, equals[1]);
 		} else if (equals.length == 1) {
 			// normal statement
-			parseJavaStatement(document, line, javaLine);
+			try {
+				parseJavaStatement(document, line, javaLine);
+			} catch (RuntimeException e) {
+				throw new RuntimeException("Could not parse '" + javaLine + "': " + e.getMessage(), e);
+			}
 		} else {
 			// who knows
 			throw new RuntimeException("Found more than one part of the equals statement '" + javaLine + "'");
@@ -211,24 +215,33 @@ public class ExportDroolsJavaXml extends ExportDroolsXml {
 			// recurse
 			parseJavaStatement(document, variable, bits[1]);
 		} else if (bits.length == 1) {
-			// foo()
-			// get out the brackets
-			String[] brackets = bits[0].split("\\(", 2);
-			if (brackets.length != 2) {
-				// there are no brackets
-				throw new RuntimeException("Could not find any brackets in method call '" + bits[0] + "'");
+			// foo() or foo
+			if (bits[0].indexOf('(') == -1) {
+				// no brackets; foo
+				Element field = document.createElement("field");
+				field.setAttribute("name", bits[0]);
+				line.appendChild(field);
+
+				// no arguments to parse
+			} else {
+				// brackets; foo()
+				// get out the brackets
+				String[] brackets = bits[0].split("\\(", 2);
+				if (brackets.length != 2) {
+					// there are no brackets
+					throw new RuntimeException("Could not find any brackets in method call '" + bits[0] + "'");
+				}
+
+				Element method = document.createElement("method");
+				method.setAttribute("name", brackets[0].trim());
+				line.appendChild(method);
+
+				Element argumentList = document.createElement("argument-list");
+				method.appendChild(argumentList);
+
+				// parse out the arguments
+				parseJavaArgumentList(document, argumentList, brackets[1].substring(0, brackets[1].length() - 1));
 			}
-
-			Element method = document.createElement("method");
-			method.setAttribute("name", brackets[0].trim());
-			line.appendChild(method);
-
-			Element argumentList = document.createElement("argument-list");
-			method.appendChild(argumentList);
-
-			// parse out the arguments
-			parseJavaArgumentList(document, argumentList, brackets[1].substring(0, brackets[1].length() - 1));
-
 		} else {
 			// who knows
 			throw new RuntimeException("Somehow split(limit 2) gave us more than 2 results.");
@@ -304,17 +317,21 @@ public class ExportDroolsJavaXml extends ExportDroolsXml {
 			IterableElementList rhsList = new DefaultXpathFunctions().xpath(document, "//rhs");
 
 			for (Element rhs : rhsList) {
-				Text originalNode = (Text) rhs.getFirstChild();
-				String sourceCode = originalNode.getData();
-				originalNode.setData("");	// empty the node
-
-				Element t = document.createElement("source");
-				originalNode.getParentNode().appendChild(t);
-				Text t2 = document.createTextNode(sourceCode);
-				t.appendChild(t2);
-
-				// lets create the statements here
-				parseJava(document, originalNode.getParentNode(), sourceCode);
+				try {
+					Text originalNode = (Text) rhs.getFirstChild();
+					String sourceCode = originalNode.getData();
+					originalNode.setData("");	// empty the node
+	
+					Element t = document.createElement("source");
+					originalNode.getParentNode().appendChild(t);
+					Text t2 = document.createTextNode(sourceCode);
+					t.appendChild(t2);
+	
+					// lets create the statements here
+					parseJava(document, originalNode.getParentNode(), sourceCode);
+				} catch (RuntimeException e) {
+					throw new RuntimeException("Could not parse '" + filename + "': " + e.getMessage(), e);
+				}
 			}
 			
 			result.put(filename, document);

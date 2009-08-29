@@ -116,10 +116,9 @@
 		WHERE «attributeName(getPrimaryKey(this))-» = ?";
 	
 	$args = array($arg0, $new_id);
-			
-	// execute query
-	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
-	$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+	
+	$db_query = new DatabaseQuery($db_name);
+	$db_query->execute($query, $args);
 	log_message("attribute '$attribute_name' set to '$arg0'");
 «ENDDEFINE»
 
@@ -163,17 +162,16 @@
 		WHERE «attributeName(getPrimaryKey(this))-» = ?";
 	
 	$args = array($arg0, $new_id);
-			
-	// execute query
-	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
-	$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+	
+	$db_query = new DatabaseQuery($db_name);
+	$db_query->execute($query, $args);
 	log_message("attribute '$attribute_name' set to '$arg0'");
 «ENDDEFINE»
 
 «DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»
 	/* selection wire «this» (for storing values), assumes $arg0 exists */
 	
-	// where are we loading it from? sets $db
+	// where are we loading it from? sets $db_name
 	«EXPAND Select::selectDatabase FOR from»
 	
 	// create query
@@ -186,9 +184,8 @@
 		$args[] = $k;
 	}
 	
-	// execute query
-	$rs = $db->prepare($query) or throw_new_IamlRuntimeException("Could not prepare query '$query': " . print_r($db->errorInfo(), true));
-	$rs->execute($args) or throw_new_IamlRuntimeException("Could not execute query '$query': " . print_r($db->errorInfo(), true));
+	$db_query = new DatabaseQuery($db_name);
+	$db_query->execute($query, $args);
 «ENDDEFINE»
 
 /** to find the relevant domain attribute set method */

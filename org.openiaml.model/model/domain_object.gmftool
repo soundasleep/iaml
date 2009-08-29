@@ -119,6 +119,19 @@
             path="icons/full/obj32/RunInstanceWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ExtendsWire"
+          description="Create new ExtendsWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ExtendsWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ExtendsWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

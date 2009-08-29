@@ -109,14 +109,12 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 	 * We actually expect there to be some warnings.
 	 */
 	@Override
-	protected void assertStatusOK(IStatus status) throws Exception {
+	public void assertStatusOK(IStatus status) throws Exception {
 		if (status.getSeverity() == IStatus.WARNING && status instanceof MultiStatus) {
 			return;
 		}
 		// if not a multi-warning status, continue
 		super.assertStatusOK(status);
-	}
-	
-	
+	}	
 	
 }

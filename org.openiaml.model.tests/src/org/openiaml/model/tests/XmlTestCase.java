@@ -30,8 +30,8 @@ import javax.xml.xpath.XPathExpressionException;
 import junit.framework.TestCase;
 
 import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
-import org.openiaml.model.xpath.IterableElementList;
 import org.openiaml.model.xpath.IXpath;
+import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

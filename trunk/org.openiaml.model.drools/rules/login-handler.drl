@@ -47,6 +47,12 @@ function boolean hasIncomingParameterWiresFrom(LoginHandler handler, DomainObjec
 	return false;
 }
 
+# Check that the given attribute is not a primary key, or a
+# derived foreign key.
+function boolean notPrimaryKey(DomainAttribute attribute) {
+	return !attribute.getName().contains("generated primary key");
+}
+
 rule "Create 'login' page for LoginHandlers [ApplicationElementContainer]"
 	when
 		container : ApplicationElementContainer( )
@@ -396,7 +402,7 @@ rule "Connect 'Login' button to 'do login' operation"
 
 end
 
-rule "Create contents for login form of 'login' pages [type=secret_key]"
+rule "Create text fields for login form of 'login' pages [type=secret_key]"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
@@ -563,7 +569,7 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		param : ParameterWire ( from == role, to == login_handler )
 		
 		# an attribute in that role
-		attribute : DomainAttribute ( eContainer == role, name != "generated primary key" )
+		attribute : DomainAttribute ( eContainer == role, eval(notPrimaryKey(attribute)) )
 		
 		not ( InputTextField ( eContainer == form, name == attribute.name ))
 
@@ -999,10 +1005,12 @@ rule "Create Select Wire between Domain Object types [object]"
 					dobj.equals(wire.getFrom().eContainer())) {
 				// add this attribute as a query
 				DomainAttribute attribute = (DomainAttribute) wire.getFrom();
-				if (!q.isEmpty()) {
-					q += " and ";
-				}
-				q += attribute.getName() + " = :" + attribute.getName(); 
+				if (notPrimaryKey(attribute)) {
+					if (!q.isEmpty()) {
+						q += " and ";
+					}
+					q += attribute.getName() + " = :" + attribute.getName();
+				} 
 			}
 		}
 			
@@ -1032,7 +1040,7 @@ rule "Create Select Wire between Domain Object types [user]"
 		String q = "";
 		for (DomainAttribute attribute : role.getAttributes()) {
 			// ignore generated primary keys
-			if (!"generated primary key".equals(attribute.getName())) {
+			if (notPrimaryKey(attribute)) {
 				// add this attribute as a query
 				if (!q.isEmpty()) {
 					q += " and ";

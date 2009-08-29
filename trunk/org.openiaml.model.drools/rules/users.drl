@@ -147,7 +147,8 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		
 		guest : Role ( eContainer == store, name == "Guest" )
 	
-		not (ParameterWire ( from == guest, to == login_handler ))
+		# if there is already an incoming parameter wire, don't connect up Guest
+		not (ParameterWire ( to == login_handler ))
 	
 	then
 		ParameterWire param = handler.generatedParameterWire(ach, session, guest, login_handler);

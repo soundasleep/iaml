@@ -562,13 +562,12 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			assertFalse("'" + a + "' should not equal '" + b + "'", a.equals(b));
 		}
 	}
-
 	
 	/**
 	 * Load a database in the given database file, and execute
 	 * a SQL query against it.
 	 * 
-	 * @param dbName database file to load
+	 * @param dbName database file to load, not resolved against the project
 	 * @param query SQL query to execute
 	 * @return the SQL result set
 	 * @throws Exception

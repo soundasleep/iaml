@@ -3,9 +3,12 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
@@ -72,6 +75,16 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 		s.add("INSERT INTO Doctoral (generated_primary_key, Postgraduate_generated_primary_key, Teacher_generated_primary_key, thesis_title) VALUES (119, 21, 107, 'complicated database inheritances')");
 
 		return s;
+	}
+	
+	/**
+	 * Just visiting the home page should not create a problem.
+	 * 
+	 * @throws Exception
+	 */
+	public void testHome() throws Exception {
+		beginAtSitemapThenPage("Home");
+		assertNoProblem();
 	}
 
 	/**
@@ -155,6 +168,87 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 		String name = getLabelIDForText("name");
 		assertLabeledFieldEquals(name, "Tracy");
 		
+	}
+	
+	/**
+	 * Check the contents of the database tables, if they were not
+	 * created by {@link #initialiseDatabase()}.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGeneratedDatabase() throws Exception {
+		// delete the initialised database created in setUp
+		IFile database = getProject().getFile( getDatabaseName() ); 
+		database.delete(true, new NullProgressMonitor());
+		assertTrue(refreshProject().isOK());
+		assertFalse(database.exists());
+		
+		// visit the site; this will create the database
+		try {
+			beginAtSitemapThenPage("Home");
+		} catch (Throwable e) {
+			// ignore
+		}
+		
+		// check each SQL table
+		{
+			String sql = trimWhitespace(getGeneratedSQL("Person"));
+			assertContains("name VARCHAR", sql);
+			assertContains("id INTEGER", sql);
+			assertNotContains("title VARCHAR", sql);
+			assertNotContains("generated_primary_key", sql);
+		}
+
+		{
+			String sql = trimWhitespace(getGeneratedSQL("Student"));
+			assertContains("enrolled VARCHAR", sql);
+			assertContains("Person_id VARCHAR", sql);
+			assertContains("generated_primary_key INTEGER", sql);
+			assertNotContains("name VARCHAR", sql);
+		}
+
+		{
+			String sql = trimWhitespace(getGeneratedSQL("Doctoral"));
+			assertContains("thesis_title VARCHAR", sql);
+			assertContains("Teacher_generated_primary_key VARCHAR", sql);
+			assertContains("generated_primary_key INTEGER", sql);
+			assertNotContains("name VARCHAR", sql);
+			assertNotContains("qualification VARCHAR", sql);
+			assertNotContains("enrolled VARCHAR", sql);
+			assertNotContains("Person_id VARCHAR", sql);
+		}
+
+	}
+	
+	/**
+	 * Get the SQL used to create the table named tableName.
+	 * 
+	 * @param tableName
+	 * @return
+	 * @throws Exception 
+	 */
+	private String getGeneratedSQL(String tableName) throws Exception {
+		ResultSet rs = executeQuery("SELECT * FROM sqlite_master WHERE type='table' AND name='" + tableName + "'");
+		assertTrue("Could not find table '" + tableName + "'", rs.next());
+		return rs.getString("sql");
+	}
+	
+	private String trimWhitespace(String s) {
+		return s.replaceAll("\\s+", " ");
+	}
+	
+	/**
+	 * Assert that the given text contains the given needle.
+	 */
+	private void assertContains(String needle, String text) {
+		assertTrue("Needle '" + needle + "' not found in text '" + text + "'", text.contains(needle));
+	}
+	
+	/**
+	 * Assert that the given text does not contains the given needle.
+	 */
+	private void assertNotContains(String needle, String text) {
+		assertFalse("Needle '" + needle + "' found in text '" + text + "'", text.contains(needle));
 	}
 	
 }

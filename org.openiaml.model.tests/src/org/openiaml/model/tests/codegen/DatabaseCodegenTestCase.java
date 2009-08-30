@@ -77,19 +77,7 @@ public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 	 * @throws Exception
 	 */
 	protected ResultSet executeQuery(String sql) throws Exception {
-		// refresh the workspace first, in case the database is new
-		waitForAjax();
-		refreshProject();
-		
-		// lets create a database
-		Class.forName("org.sqlite.JDBC");
-		IFile db = getProject().getFile(getDatabaseName());
-		
-		assertTrue("Database should exist", db.exists());
-		Connection conn = DriverManager.getConnection("jdbc:sqlite:" + db.getLocation());
-		Statement stat = conn.createStatement();
-
-		return stat.executeQuery(sql);
+		return loadDatabaseQuery(getDatabaseName(), sql);
 	}
 	
 }

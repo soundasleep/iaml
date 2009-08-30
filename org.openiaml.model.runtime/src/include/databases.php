@@ -90,3 +90,60 @@ class DatabaseQuery {
 
 }
 
+/**
+ * Select an instance of the given source class with the
+ * given query.
+ *
+ * If the given source class is inherited, all sub-types
+ * must also be included in the result (likely through a JOIN).
+ *
+ * Return the final composed result, or null if
+ * none can be found.
+ */
+function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args) {
+	log_message("Evaluate select wire: source_id = $source_id, source_class = $source_class, query = $query"); 
+
+	// get all joins
+	global $compose_domain_joins_done_already;
+	$compose_domain_joins_done_already = array(); 
+	$joins = compose_domain_joins($source_id);
+	
+	$joined_query = "SELECT * FROM $source_class " 
+		. implode(" ", $joins)
+		. " WHERE $query";
+	
+	log_message("Evaluate select wire: Composed query: " . preg_replace("/[ \r\n\t]+/im", " ", $joined_query));
+		
+	$db_query = new DatabaseQuery($db_name);
+	$row = $db_query->fetchFirst($joined_query, $args);
+	
+	return $row;
+}
+
+$compose_domain_joins_done_already = null;
+
+/**
+ * Compose a list of all joins required for the given
+ * source object. Uses code generated in get_all_domain_joins().
+ * 
+ * Return a list of SQL string queries to be used as part
+ * of the SQL join. 
+ */
+function compose_domain_joins($source_id) {
+	global $compose_domain_joins_done_already;
+
+	$result = array();
+
+	$compose_domain_joins_done_already[] = $source_id;
+	
+	$all_joins = get_all_domain_joins();
+	foreach ($all_joins[$source_id] as $target_id => $join_query) {
+		// don't repeat multiple inheritance joins
+		if (!in_array($target_id, $compose_domain_joins_done_already)) {
+			$result[] = $join_query;
+			$result = array_merge($result, compose_domain_joins($target_id));
+		}
+	}
+
+	return $result;
+}

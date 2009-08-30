@@ -8,18 +8,33 @@
 /**
  * Expand out all domain object instances.
  */
+«DEFINE domainObjectDefinitions(Boolean php) FOR model::visual::Page»
+	«IF php»
+		«REM»call parent definition (immediately below)«ENDREM»
+		«EXPAND domainObjectDefinitions(php) FOR getRoot()»
+	«ELSE»
+		/* empty */
+	«ENDIF»
+«ENDDEFINE»
 «DEFINE domainObjectDefinitions(Boolean php) FOR model::InternetApplication»
 	«IF php»
 		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
 		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
 		«EXPAND DomainInheritance::allCasts FOREACH getRoot().getAllDomainObjects()»
-	«ELSE»
-		/* empty */
-	«ENDIF»
-«ENDDEFINE»
-«DEFINE domainObjectDefinitions(Boolean php) FOR model::visual::Page»
-	«IF php»
-		«EXPAND domainObjectDefinitions(php) FOR getRoot()»
+		
+		/**
+		 * Get all of the domain joins required in this generated
+		 * application. This is used to properly compose
+		 * select wires, etc.
+		 *
+		 * TODO put this into a separate include file */
+		function get_all_domain_joins() {
+			$direct_joins = array();
+			
+			«EXPAND DomainInheritance::defineInheritanceJoins FOREACH getRoot().getAllDomainObjects()»
+			
+			return $direct_joins;
+		}
 	«ELSE»
 		/* empty */
 	«ENDIF»

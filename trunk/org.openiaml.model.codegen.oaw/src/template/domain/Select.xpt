@@ -14,13 +14,13 @@
 	// where are we loading it from? sets $db_name
 	«EXPAND selectDatabase FOR from»
 	
-	// create query
-	$query = "SELECT * FROM «safeNameString(((model::DomainObject) from).name)»
-		WHERE " . «EXPAND getQuery FOR this-»;
-	$args = array(«EXPAND template::operations::Parameters::callParameter(true, this, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
+	$source_class = "«safeNameString(((model::DomainObject) from).name)»";
+	$source_id = "«safeNameString(((model::DomainObject) from).id)»";
+	$query = «EXPAND getQuery FOR this-»;
+	$args = array(«EXPAND template::operations::Parameters::callParameter(true, this, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»); 
 	
-	$db_query = new DatabaseQuery($db_name);
-	$row = $db_query->fetchFirst($query, $args);
+	// get the result or return null
+	$row = evaluate_select_wire($db_name, $source_id, $source_class, $query, $args);
 «ENDDEFINE»
 
 /* create a SQL query to select a particular value */

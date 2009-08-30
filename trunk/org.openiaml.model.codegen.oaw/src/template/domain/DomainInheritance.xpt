@@ -99,5 +99,37 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 }
 «ENDDEFINE»
 
+«REM»
+
+we want this method to return _all_ joins for this object, not just
+those which are directly inherited
+
+direct_joins("doctoral") = array(
+	"teacher" => "join teacher on teacher.id = doctoral.t_id",
+	"student" => "join student on student.id = doctoral.s_id",
+)
+
+«ENDREM»
+
+«DEFINE defineInheritanceJoins FOR model::DomainObject»
+ 	/* «safeNameString(name)» */ 
+	$direct_joins["«safeNameString(id)»"] = array(
+		
+		«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS parent»
+			«REM»find the PK of the parent object«ENDREM»
+			«LET parent.attributes.select(a | a.primaryKey).first() AS parentPK»				
+				«REM»find the corresponding FK of this current object«ENDREM»
+				«LET attributes.select(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.contains(parentPK)).first() AS fk»
+					"«safeNameString(parent.id)»" => 
+					"JOIN «safeNameString(parent.name)» ON
+						«safeNameString(parent.name)».«safeNameString(parentPK.name)» 
+						= «safeNameString(name)».«safeNameString(fk.name)»",
+				«ENDLET»
+			«ENDLET» 
+		«ENDFOREACH»
+		 
+	); 
+«ENDDEFINE»
+
 «DEFINE exception FOR Object»
 «ENDDEFINE»

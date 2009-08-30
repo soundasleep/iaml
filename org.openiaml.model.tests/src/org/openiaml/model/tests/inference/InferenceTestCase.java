@@ -194,6 +194,39 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 
 	/**
+	 * Assert that the given element does not contain the given
+	 * DomainAttributeInstance.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoDomainAttributeInstance(ApplicationElement obj,
+			String string) throws JaxenException {
+		assertHasNone(obj, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contain the given
+	 * DomainAttributeInstance.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoDomainAttributeInstance(InternetApplication obj,
+			String string) throws JaxenException {
+		assertHasNone(obj, "iaml:children[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element does not contain the given
+	 * DomainAttributeInstance.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoDomainAttributeInstance(DomainObjectInstance obj,
+			String string) throws JaxenException {
+		assertHasNone(obj, "iaml:attributes[iaml:name='" + string + "']");
+	}
+
+	/**
 	 * Assert that the given element contains the given
 	 * DomainObject.
 	 *
@@ -251,6 +284,26 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DomainObjectInstance assertHasDomainObjectInstance(InternetApplication root, String string) throws JaxenException {
 		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contain the given
+	 * DomainObjectInstance.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoDomainObjectInstance(ApplicationElementContainer root, String string) throws JaxenException {
+		assertHasNone(root, "iaml:children[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element does not contain the given
+	 * DomainObjectInstance.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoDomainObjectInstance(InternetApplication root, String string) throws JaxenException {
+		assertHasNone(root, "iaml:children[iaml:name='" + string + "']");
 	}
 
 	/**

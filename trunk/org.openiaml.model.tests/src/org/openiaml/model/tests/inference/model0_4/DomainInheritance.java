@@ -5,6 +5,7 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
+import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
@@ -97,8 +98,10 @@ public class DomainInheritance extends InferenceTestCase {
 		InputTextField name = assertHasInputTextField(form, "name");
 		assertGenerated(name);
 		
-		// primary key
-		assertHasNoInputTextField(form, "id");
+		// this primary key is still rendered, because it's
+		// not a generated primary key
+		InputTextField id = assertHasInputTextField(form, "id");
+		assertGenerated(id);
 		
 		// direct subclasses
 		assertHasNoInputTextField(form, "enrolled");
@@ -120,18 +123,18 @@ public class DomainInheritance extends InferenceTestCase {
 		InputTextField enrolled = assertHasInputTextField(form, "enrolled");
 		assertGenerated(enrolled);
 		
-		// inherited field
+		// inherited fields
 		InputTextField name = assertHasInputTextField(form, "name");
 		assertGenerated(name);
+		InputTextField id = assertHasInputTextField(form, "Person.id");
+		assertGenerated(id);
 				
 		// primary key
 		assertHasNoInputTextField(form, "generated primary key");
 		
 		// direct subclasses
-		assertHasNoInputTextField(form, "enrolled");
 		assertHasNoInputTextField(form, "title");
 		assertHasNoInputTextField(form, "id");
-		assertHasNoInputTextField(form, "Person.id");
 	}
 	
 	/**
@@ -154,15 +157,15 @@ public class DomainInheritance extends InferenceTestCase {
 		assertGenerated(qualification);
 		InputTextField name = assertHasInputTextField(form, "name");
 		assertGenerated(name);
+		InputTextField id = assertHasInputTextField(form, "Person.id");
+		assertGenerated(id);
 				
 		// primary key
 		assertHasNoInputTextField(form, "generated primary key");
 		
 		// direct subclasses
 		assertHasNoInputTextField(form, "enrolled");
-		assertHasNoInputTextField(form, "title");
 		assertHasNoInputTextField(form, "id");
-		assertHasNoInputTextField(form, "Person.id");
 		assertHasNoInputTextField(form, "Qualified.generated primary key");
 	}
 	
@@ -174,7 +177,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testDoctoral() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get teacher by id");
+		Page page = assertHasPage(root, "get doctoral");
 		InputForm form = assertHasInputForm(page, "view doctoral");
 		
 		// direct field
@@ -192,15 +195,14 @@ public class DomainInheritance extends InferenceTestCase {
 		assertGenerated(qualification);
 		InputTextField name = assertHasInputTextField(form, "name");
 		assertGenerated(name);
+		InputTextField id = assertHasInputTextField(form, "Person.id");
+		assertGenerated(id);
 				
 		// primary key
 		assertHasNoInputTextField(form, "generated primary key");
 		
 		// direct subclasses
-		assertHasNoInputTextField(form, "enrolled");
-		assertHasNoInputTextField(form, "title");
 		assertHasNoInputTextField(form, "id");
-		assertHasNoInputTextField(form, "Person.id");
 		assertHasNoInputTextField(form, "Qualified.generated primary key");
 		assertHasNoInputTextField(form, "Teacher.generated primary key");
 		assertHasNoInputTextField(form, "Student.generated primary key");
@@ -257,7 +259,7 @@ public class DomainInheritance extends InferenceTestCase {
 		// foreign key
 		DomainAttributeInstance Person_id = assertHasDomainAttributeInstance(instance, "Person.id");
 		assertGenerated(Person_id);
-		assertExtends(Person_id, "Person");
+		assertExtends(Person_id, "Student");
 	}
 	
 	/**
@@ -288,10 +290,10 @@ public class DomainInheritance extends InferenceTestCase {
 		// foreign keys
 		DomainAttributeInstance Person_id = assertHasDomainAttributeInstance(instance, "Person.id");
 		assertGenerated(Person_id);
-		assertExtends(Person_id, "Person");
+		assertExtends(Person_id, "Teacher");
 		DomainAttributeInstance qid = assertHasDomainAttributeInstance(instance, "Qualified.generated primary key");
 		assertGenerated(qid);
-		assertExtends(qid, "Qualified");
+		assertExtends(qid, "Teacher");
 		
 	}
 	
@@ -329,19 +331,19 @@ public class DomainInheritance extends InferenceTestCase {
 		// foreign keys
 		DomainAttributeInstance Person_id = assertHasDomainAttributeInstance(instance, "Person.id");
 		assertGenerated(Person_id);
-		assertExtends(Person_id, "Person");
+		assertExtends(Person_id, "Doctoral");
 		DomainAttributeInstance qid = assertHasDomainAttributeInstance(instance, "Qualified.generated primary key");
 		assertGenerated(qid);
-		assertExtends(qid, "Qualified");
+		assertExtends(qid, "Doctoral");
 		DomainAttributeInstance pid = assertHasDomainAttributeInstance(instance, "Postgraduate.generated primary key");
 		assertGenerated(pid);
-		assertExtends(pid, "Postgraduate");
+		assertExtends(pid, "Doctoral");
 		DomainAttributeInstance sid = assertHasDomainAttributeInstance(instance, "Student.generated primary key");
 		assertGenerated(sid);
-		assertExtends(sid, "Student");
+		assertExtends(sid, "Doctoral");
 		DomainAttributeInstance tid = assertHasDomainAttributeInstance(instance, "Teacher.generated primary key");
 		assertGenerated(tid);
-		assertExtends(tid, "Teacher");
+		assertExtends(tid, "Doctoral");
 		
 	}
 	
@@ -357,8 +359,11 @@ public class DomainInheritance extends InferenceTestCase {
 		assertEquals(1, wires.size());
 		ExtendsWire ext = (ExtendsWire) wires.iterator().next();
 		
-		DomainObject targetObj = (DomainObject) ext.getTo();
-		assertNotNull(targetObj);
+		DomainAttribute targetAttr = (DomainAttribute) ext.getTo();
+		assertNotNull(targetAttr);
+		
+		DomainObject targetObj = (DomainObject) targetAttr.eContainer();
+		assertNotNull(targetObj);		
 		assertEquals(name, targetObj.getName());
 	}
 	

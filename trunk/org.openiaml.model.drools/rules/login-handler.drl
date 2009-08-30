@@ -1039,7 +1039,7 @@ rule "Create Select Wire between Domain Object types [user]"
 		// given DomainObject
 		String q = "";
 		for (DomainAttribute attribute : role.getAttributes()) {
-			// ignore generated primary keys
+			// ignore primary keys
 			if (notPrimaryKey(attribute)) {
 				// add this attribute as a query
 				if (!q.isEmpty()) {
@@ -1082,7 +1082,7 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
 		role : Role ( )
-		attribute : DomainAttribute ( eContainer == role, name != "generated primary key" )
+		attribute : DomainAttribute ( eContainer == role, primaryKey == false || isGenerated == false )
 		paramWire : ParameterWire ( from == role, to == login_handler )
 		
 		not ( p : ApplicationElementProperty ( eContainer == session, 

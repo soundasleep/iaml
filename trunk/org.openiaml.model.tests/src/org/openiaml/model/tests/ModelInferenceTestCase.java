@@ -611,7 +611,35 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		}
 
 		if (results.isEmpty()) {
-			fail("No wires found ti [" + toElement + "]");
+			fail("No wires found to [" + toElement + "]");
+		}
+
+		return results;
+	}
+	
+	/**
+	 * It's not possible to do something like //iaml:wire[iaml:from='id']
+	 * so we need to parse them manually.
+	 *
+	 * @param container
+	 * @param fromElement
+	 * @return the wire found or null
+	 * @throws JaxenException
+	 */
+	protected Set<WireEdge> getWiresFrom(EObject container, WireEdgeDestination fromElement) throws JaxenException {
+		Set<WireEdge> results = new HashSet<WireEdge>();
+		List<?> wires = query(container, "//iaml:wires");
+		for (Object o : wires) {
+			if (o instanceof WireEdge) {
+				WireEdge w = (WireEdge) o;
+				if (w.getFrom().equals(fromElement)) {
+					results.add(w);
+				}
+			}
+		}
+
+		if (results.isEmpty()) {
+			fail("No wires found from [" + fromElement + "]");
 		}
 
 		return results;
@@ -628,6 +656,19 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 */
 	protected Set<WireEdge> getWiresTo(EObject container, WireEdgeDestination toElement, Class<? extends WireEdge> type) throws JaxenException {
 		return typeSelect(getWiresTo(container, toElement), type);
+	}
+	
+	/**
+	 * Get all wires from the given element of the given EObject type.
+	 * 
+	 * @param container
+	 * @param fromElement
+	 * @param type
+	 * @return
+	 * @throws JaxenException
+	 */
+	protected Set<WireEdge> getWiresFrom(EObject container, WireEdgeDestination fromElement, Class<? extends WireEdge> type) throws JaxenException {
+		return typeSelect(getWiresTo(container, fromElement), type);
 	}
 	
 	/**

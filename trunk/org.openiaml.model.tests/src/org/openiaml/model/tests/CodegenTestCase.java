@@ -452,6 +452,21 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Extension of {@link #getLabelIDForText(String)}; add an extra
+	 * XPath condition for text that it should not contain, 
+	 * allowing us to select elements that might otherwise
+	 * be erroneously matched.
+	 * 
+	 * @param text
+	 * @param notText
+	 * @return
+	 */
+	protected String getLabelIDForText(String text, String notText) {
+		IElement element = getElementByXPath("//label[contains(normalize-space(text()), normalize-space('" + text + "')) and not(contains(normalize-space(text()), normalize-space('" + notText + "')))]");
+		return element.getAttribute("id");
+	}
+	
+	/**
 	 * Assert that there is no label on the page containing the given text.
 	 * 
 	 * @param text

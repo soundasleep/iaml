@@ -86,7 +86,7 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 		assertNoProblem();
 		
 		String name = getLabelIDForText("name");
-		assertLabeledFieldEquals(name, "Test User");
+		assertLabeledFieldEquals(name, "Test Name");
 	}
 
 	/**
@@ -136,15 +136,15 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 	 * @throws Exception
 	 */
 	public void testDoctoral() throws Exception {
-		beginAtSitemapThenPage("get person");
+		beginAtSitemapThenPage("get doctoral");
 		assertNoProblem();
 		
 		// it should now be rendered
-		String thesis = getLabelIDForText("thesis");
+		String thesis = getLabelIDForText("thesis title");
 		assertLabeledFieldEquals(thesis, "complicated database inheritances");
 		
 		// derived fields
-		String title = getLabelIDForText("title");
+		String title = getLabelIDForText("title", "thesis title");
 		assertLabeledFieldEquals(title, "dr");
 		
 		// derived one way

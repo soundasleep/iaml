@@ -50,6 +50,9 @@ public class AllModel0_4CodegenTests {
 		suite.addTestSuite(UserRoleExtends.class);
 		suite.addTestSuite(UserRoles.class);
 		suite.addTestSuite(UserRolesLoginHandler.class);
+		
+		// Domain Inheritance tests
+		suite.addTestSuite(DomainInheritance.class);
 
 		return suite;
 	}

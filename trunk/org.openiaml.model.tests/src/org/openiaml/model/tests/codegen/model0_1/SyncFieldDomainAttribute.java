@@ -3,10 +3,7 @@
  */
 package org.openiaml.model.tests.codegen.model0_1;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
@@ -57,11 +54,7 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 
 		// make sure the database is empty
 		{
-			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + db.getLocation());
-			Statement stat = conn.createStatement();
-	
-			ResultSet rs = stat.executeQuery("SELECT attribute FROM domain;");
+			ResultSet rs = loadDatabaseQuery(dbName, "SELECT attribute FROM domain;");
 			assertFalse(rs.next());	// it should be empty
 		}
 		
@@ -87,11 +80,7 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 
 		// check the database
 		{
-			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + db.getLocation());
-			Statement stat = conn.createStatement();
-	
-			ResultSet rs = stat.executeQuery("SELECT attribute FROM domain;");
+			ResultSet rs = loadDatabaseQuery(dbName, "SELECT attribute FROM domain;");
 			assertTrue(rs.next());	// there should be one value
 			
 			// it should be our testing text

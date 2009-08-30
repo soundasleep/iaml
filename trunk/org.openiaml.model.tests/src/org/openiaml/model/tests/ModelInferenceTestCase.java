@@ -500,19 +500,33 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @throws JaxenException
 	 */
 	protected Set<WireEdge> getWiresFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
+		return getWiresFromTo(container, fromElement, toElement, WireEdge.class);
+	}
+	
+	/**
+	 * It's not possible to do something like //iaml:wire[iaml:from='id']
+	 * so we need to parse them manually.
+	 *
+	 * @param container
+	 * @param fromElement
+	 * @param toElement
+	 * @return the wire found or throws an exception
+	 * @throws JaxenException
+	 */
+	protected Set<WireEdge> getWiresFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement, Class<? extends WireEdge> type) throws JaxenException {
 		Set<WireEdge> results = new HashSet<WireEdge>();
 		List<?> wires = query(container, "//iaml:wires");
 		for (Object o : wires) {
 			if (o instanceof WireEdge) {
 				WireEdge w = (WireEdge) o;
-				if (w.getFrom().equals(fromElement) && w.getTo().equals(toElement)) {
+				if (type.isInstance(w) && w.getFrom().equals(fromElement) && w.getTo().equals(toElement)) {
 					results.add(w);
 				}
 			}
 		}
 
 		if (results.isEmpty()) {
-			fail("No wires found between [" + fromElement + "] and [" + toElement + "]");
+			fail("No wires of type '" + type + "' found between [" + fromElement + "] and [" + toElement + "]");
 		}
 
 		return results;

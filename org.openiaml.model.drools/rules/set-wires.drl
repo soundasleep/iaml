@@ -364,9 +364,11 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		
 		eval(connectsSet(sync, form, instance))
 		
-		attribute : DomainAttributeInstance( eContainer == instance, name != "generated primary key" )
+		originalAttribute : DomainAttribute ( primaryKey == false || isGenerated == false )
+		attribute : DomainAttributeInstance( eContainer == instance )
+		ExtendsWire ( from == attribute, to == originalAttribute )
 		
-		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
+		not ( tf : InputTextField( eContainer == form, eval(syncMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one
@@ -384,9 +386,9 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		
 		eval(connectsSet(sync, form, object))
 		
-		attribute : DomainAttribute( eContainer == object, name != "generated primary key" )
+		attribute : DomainAttribute( eContainer == object, primaryKey == false || isGenerated == false )
 		
-		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
+		not ( tf : InputTextField( eContainer == form, eval(syncMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one

@@ -668,7 +668,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @throws JaxenException
 	 */
 	protected Set<WireEdge> getWiresFrom(EObject container, WireEdgeDestination fromElement, Class<? extends WireEdge> type) throws JaxenException {
-		return typeSelect(getWiresTo(container, fromElement), type);
+		return typeSelect(getWiresFrom(container, fromElement), type);
 	}
 	
 	/**

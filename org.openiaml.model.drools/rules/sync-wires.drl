@@ -50,6 +50,25 @@ function boolean containingSessionEquals(EObject e, Session s) {
 	return s.equals(actual);
 }
 
+/**
+ * For a DomainAttribute, this returns true if it eventually
+ * extends a DomainAttribute which is a generated primary key.
+ */
+function boolean notExtendingGeneratedPrimaryKey(DomainAttribute attr) {
+	if (attr.isPrimaryKey() && attr.isIsGenerated()) {
+		return false;
+	}
+	for (WireEdge w : attr.getOutEdges()) {
+		if (w instanceof ExtendsWire && w.getTo() instanceof DomainAttribute) {
+			if (!notExtendingGeneratedPrimaryKey((DomainAttribute) w.getTo())) {
+				// we are extending a generated primary key
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 rule "Sync wires between objects should create sync wires between all elements inside each object that matches"
 	when
 		# source : SyncWire(overridden == false, eval(connects(source, p1, p2)) )
@@ -365,9 +384,15 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		
 		eval(connects(sync, form, instance))
 		
-		attribute : DomainAttributeInstance( eContainer == instance, name != "generated primary key" )
+		originalAttribute : DomainAttribute ( )
+		attribute : DomainAttributeInstance( eContainer == instance )
+		ExtendsWire ( from == attribute, to == originalAttribute )
 		
-		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
+		# at the top of the attribute inheritance heirarchy, not
+		# a generated primary key
+		eval( notExtendingGeneratedPrimaryKey( originalAttribute ) )
+		
+		not ( tf : InputTextField( eContainer == form, eval(syncMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one
@@ -385,9 +410,13 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		
 		eval(connects(sync, form, object))
 		
-		attribute : DomainAttribute( eContainer == object, name != "generated primary key" )
+		attribute : DomainAttribute( eContainer == object )
 		
-		not ( tf : InputTextField( eval(syncMatches( attribute, tf )) ) )
+		# at the top of the attribute inheritance heirarchy, not
+		# a generated primary key
+		eval( notExtendingGeneratedPrimaryKey( attribute ) )
+		
+		not ( tf : InputTextField( eContainer == form, eval(syncMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one

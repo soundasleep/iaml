@@ -36,6 +36,10 @@ rule "Refresh NewInstanceWire Instance Object mappings"
 		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(wire, instance);
 		handler.setName(attr, attribute.getName());
 		queue.add(attr, drools);
+		
+		# mark it as an extension
+		ExtendsWire w = handler.generatedExtendsWire(wire, instance, attr, attribute);
+		queue.add(w, drools);
 
 end
 
@@ -54,6 +58,10 @@ rule "Refresh SelectWire Instance Object mappings"
 		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(wire, instance);
 		handler.setName(attr, attribute.getName());
 		queue.add(attr, drools);
+
+		# mark it as an extension
+		ExtendsWire w = handler.generatedExtendsWire(wire, instance, attr, attribute);
+		queue.add(w, drools);
 
 end
 

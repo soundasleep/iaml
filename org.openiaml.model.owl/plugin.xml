@@ -17,4 +17,33 @@
             genModel="model/simple.genmodel"/>
    </extension>
 
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.model.owl.objectContribution1"
+            nameFilter="*.iaml"
+            objectClass="org.eclipse.core.resources.IResource">
+
+         <menu
+               id="org.openiaml.model.owl.menu1"
+               path="additions"
+               label="&amp;Validation Tools">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.model.owl.actions.TranslateIAMLToRDFAction"
+               id="org.openiaml.model.owl.action1"
+               label="Translate IAML model to &amp;RDF"
+               menubarPath="org.openiaml.model.owl.menu1/group">
+         </action>
+
+      </objectContribution>                    
+
+	</extension>
+
 </plugin>

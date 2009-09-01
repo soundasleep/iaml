@@ -1,0 +1,21 @@
+[moreThan2TextFields: 
+	(?X rdf:type iaml.visual:InputForm)
+	(?X iaml:children ?F1)
+	(?X iaml:children ?F2)
+	(?X iaml:children ?F3)
+	(?F1 rdf:type iaml.visual:InputTextField)
+	(?F2 rdf:type iaml.visual:InputTextField)
+	(?F3 rdf:type iaml.visual:InputTextField)
+	notEqual(?F1 ?F2)
+	notEqual(?F2 ?F3)
+	notEqual(?F3 ?F1)
+	->
+	(?X eg:moreThan2TextFields 'true')
+]
+
+[validationRule: (?v rb:validation on()) ->
+	[(?X rb:violation error('test', 'test', ?X)) <-
+		(?X rdf:type iaml.visual:InputForm)
+		(?X eg:moreThan2TextFields 'true')
+	]
+]

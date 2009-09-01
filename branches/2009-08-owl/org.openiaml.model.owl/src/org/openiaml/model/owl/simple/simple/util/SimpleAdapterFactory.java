@@ -8,12 +8,12 @@ package org.openiaml.model.owl.simple.simple.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.openiaml.model.owl.simple.simple.*;
+import org.openiaml.model.owl.simple.simple.InternetApplication;
+import org.openiaml.model.owl.simple.simple.NamedElement;
+import org.openiaml.model.owl.simple.simple.Page;
+import org.openiaml.model.owl.simple.simple.SimplePackage;
 
 /**
  * <!-- begin-user-doc -->

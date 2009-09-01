@@ -45,7 +45,6 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.PrintUtil;
-import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 /**
  * @author jmwright

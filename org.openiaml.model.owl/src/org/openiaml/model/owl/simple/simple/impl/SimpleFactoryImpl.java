@@ -9,12 +9,12 @@ package org.openiaml.model.owl.simple.simple.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.openiaml.model.owl.simple.simple.*;
+import org.openiaml.model.owl.simple.simple.InternetApplication;
+import org.openiaml.model.owl.simple.simple.Page;
+import org.openiaml.model.owl.simple.simple.SimpleFactory;
+import org.openiaml.model.owl.simple.simple.SimplePackage;
 
 /**
  * <!-- begin-user-doc -->

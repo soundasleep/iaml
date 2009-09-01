@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import org.openiaml.model.owl.simple.simple.*;
+import org.openiaml.model.owl.simple.simple.InternetApplication;
+import org.openiaml.model.owl.simple.simple.NamedElement;
+import org.openiaml.model.owl.simple.simple.Page;
+import org.openiaml.model.owl.simple.simple.SimplePackage;
 
 /**
  * <!-- begin-user-doc -->

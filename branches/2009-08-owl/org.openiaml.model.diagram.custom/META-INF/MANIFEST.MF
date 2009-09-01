@@ -22,3 +22,5 @@ Bundle-Vendor: www.openiaml.org
 Export-Package: org.openiaml.model.diagram.custom.actions,
  org.openiaml.model.diagram.custom.commands,
  org.openiaml.model.diagram.custom.migrate
+Bundle-Activator: org.openiaml.model.diagram.custom.CustomIAMLDiagramPlugin
+Bundle-ActivationPolicy: lazy

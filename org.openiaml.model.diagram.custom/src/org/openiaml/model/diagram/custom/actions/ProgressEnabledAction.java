@@ -10,13 +10,16 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
+import org.openiaml.model.diagram.custom.CustomIAMLDiagramPlugin;
 
 /**
  * An abstract action that wraps around a lot of the common code
@@ -75,13 +78,11 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	public IRunnableWithProgress getRunnable(final List<T> result) {
 		return new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) {
-		    	int scale = 4000;
-		    	
-		    	monitor.beginTask(getProgressMessage(), result.size() * scale);
+		    	monitor.beginTask(getProgressMessage(), result.size());
 		    	
 		    	for (T individual : result) {
 		    		// create a new sub-progress
-		    		IProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1 * scale);
+		    		IProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1);
 		    		
 					IStatus status = execute(individual, subMonitor);
 					if (!status.isOK()) {
@@ -95,6 +96,9 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 						// log it
 						Platform.getLog(getDefaultPlugin().getBundle()).log(multi);
 						
+						// display it
+						showError(getProgressMessage(), status.getMessage(), multi);
+
 						monitor.done();
 						return;
 					}
@@ -166,7 +170,7 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	 * will be logged as an error, and execution will be cancelled.
 	 * 
 	 * @param individual the individual element to process
-	 * @param monitor a sub-monitor for status progression
+	 * @param monitor a sub-monitor for status progression, with 100 ticks
 	 * @return
 	 */
 	public abstract IStatus execute(T individual, IProgressMonitor monitor);
@@ -176,8 +180,8 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	 * 
 	 * @return
 	 */
-	public IamlDiagramEditorPlugin getDefaultPlugin() {
-		return IamlDiagramEditorPlugin.getInstance();
+	public CustomIAMLDiagramPlugin getDefaultPlugin() {
+		return CustomIAMLDiagramPlugin.getInstance();
 	}
 	
 	/* (non-Javadoc)
@@ -202,12 +206,40 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 			return;
 		
 		if (status.getSeverity() >= IStatus.ERROR) {
-			IamlDiagramEditorPlugin.getInstance().logError(
+			CustomIAMLDiagramPlugin.getInstance().logError(
 					status.getMessage(), status.getException());
 		} else {
-			IamlDiagramEditorPlugin.getInstance().logError(
+			CustomIAMLDiagramPlugin.getInstance().logError(
 					"[warning] " + status.getMessage(), status.getException());
 		}
+	}
+	
+	/**
+	 * Show an information dialog box.
+	 */
+	public void showInformation(final String title, final String message) {
+		
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openInformation(null, title, message);
+			}
+		});
+
+	}
+
+	/**
+	 * Show an error message dialog box.
+	 */
+	public void showError(final String title, final String message, final IStatus status) {
+		
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				ErrorDialog.openError(null, title, message, status);
+			}
+		});
+
 	}
 
 }

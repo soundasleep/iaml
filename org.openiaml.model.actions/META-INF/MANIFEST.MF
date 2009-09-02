@@ -1,10 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Iaml Actions
-Bundle-SymbolicName: org.openiaml.model.actions
+Bundle-SymbolicName: org.openiaml.model.actions;singleton:=true
 Bundle-Version: 0.3.1
-Bundle-Activator: org.openiaml.model.actions.Activator
+Bundle-Activator: org.openiaml.model.actions.IamlActionsPlugin
 Bundle-Vendor: www.openiaml.org
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ org.openiaml.model;bundle-version="0.3.1",
+ org.openiaml.model.drools;bundle-version="0.3.1",
+ org.openiaml.model.codegen.oaw;bundle-version="0.3.1",
+ org.eclipse.core.resources;bundle-version="3.5.0",
+ org.eclipse.jface;bundle-version="3.5.0",
+ org.eclipse.ui;bundle-version="3.5.0",
+ org.openiaml.model.runtime;bundle-version="0.3.1",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Export-Package: org.openiaml.model.actions,
+ org.openiaml.model.custom.actions,
+ org.openiaml.model.migrate

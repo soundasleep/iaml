@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.migrate;
+package org.openiaml.model.migrate;
 
 import java.util.List;
 

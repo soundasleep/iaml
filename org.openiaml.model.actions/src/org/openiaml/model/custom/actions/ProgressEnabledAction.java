@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.actions;
+package org.openiaml.model.custom.actions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
+import org.openiaml.model.actions.IamlActionsPlugin;
 
 /**
  * An abstract action that wraps around a lot of the common code
@@ -176,8 +176,8 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	 * 
 	 * @return
 	 */
-	public IamlDiagramEditorPlugin getDefaultPlugin() {
-		return IamlDiagramEditorPlugin.getInstance();
+	public IamlActionsPlugin getDefaultPlugin() {
+		return IamlActionsPlugin.getInstance();
 	}
 	
 	/* (non-Javadoc)
@@ -202,10 +202,10 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 			return;
 		
 		if (status.getSeverity() >= IStatus.ERROR) {
-			IamlDiagramEditorPlugin.getInstance().logError(
+			getDefaultPlugin().logError(
 					status.getMessage(), status.getException());
 		} else {
-			IamlDiagramEditorPlugin.getInstance().logError(
+			getDefaultPlugin().logError(
 					"[warning] " + status.getMessage(), status.getException());
 		}
 	}

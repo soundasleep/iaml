@@ -100,6 +100,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			
 			// all wires should have a parameter from the set (xpath)
 			ParameterWire pw_set = (ParameterWire) getWireFromTo(root, dae, cw);
+			assertNotNull(pw_set);
 			
 			// but one wire should have page1, the other should have page2
 			if (hasWireFromTo(root, page1, cw)) {
@@ -138,7 +139,8 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			
 			// all wires should have a parameter from the set (xpath)
 			ParameterWire pw_set = (ParameterWire) getWireFromTo(root, dae, cw);
-			
+			assertNotNull(pw_set);
+
 			// but one wire should have page1, the other should have page2
 			if (hasWireFromTo(root, page1, cw)) {
 				checksPage1 = true;
@@ -186,7 +188,8 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			
 			// all wires should have a parameter from the set (xpath)
 			ParameterWire pw_set = (ParameterWire) getWireFromTo(root, dae, cw);
-			
+			assertNotNull(pw_set);
+
 			// but one wire should have page1, the other should have page2
 			if (hasWireFromTo(root, page1, cw)) {
 				checksPage1 = true;

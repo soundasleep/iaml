@@ -108,12 +108,16 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
     // and parameters connecting up the sets... (only one per dae --> condition wire)
     assertHasWiresFromTo(1, root, dae, cw1_2);
     ParameterWire pw1_2 = (ParameterWire) getWireFromTo(root, dae, cw1_2);
+    assertGenerated(pw1_2);
     assertHasWiresFromTo(1, root, dae, cw2_1);
     ParameterWire pw2_1 = (ParameterWire) getWireFromTo(root, dae, cw2_1);
+    assertGenerated(pw2_1);
     assertHasWiresFromTo(1, root, dae, cw1_3);
     ParameterWire pw1_3 = (ParameterWire) getWireFromTo(root, dae, cw1_3);
+    assertGenerated(pw1_3);
     assertHasWiresFromTo(1, root, dae, cw3_1);
     ParameterWire pw3_1 = (ParameterWire) getWireFromTo(root, dae, cw3_1);
+    assertGenerated(pw3_1);
     /*
     ParameterWire pw2_3 = (ParameterWire) getWireFromTo(root, dae, cw2_3);
     ParameterWire pw3_2 = (ParameterWire) getWireFromTo(root, dae, cw3_2);
@@ -122,12 +126,16 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
     // ... and the target elements (only one per page --> condition wire)
     assertHasWiresFromTo(1, root, page2, cw1_2);
     ParameterWire pw1_2b = (ParameterWire) getWireFromTo(root, page2, cw1_2);
+    assertGenerated(pw1_2b);
     assertHasWiresFromTo(1, root, page2, cw2_1);
     ParameterWire pw2_1b = (ParameterWire) getWireFromTo(root, page2, cw2_1);
+    assertGenerated(pw2_1b);
     assertHasWiresFromTo(1, root, page3, cw1_3);
     ParameterWire pw1_3b = (ParameterWire) getWireFromTo(root, page3, cw1_3);
+    assertGenerated(pw1_3b);
     assertHasWiresFromTo(1, root, page3, cw3_1);
     ParameterWire pw3_1b = (ParameterWire) getWireFromTo(root, page3, cw3_1);
+    assertGenerated(pw3_1b);
     /*
     ParameterWire pw2_3b = (ParameterWire) getWireFromTo(root, page3, cw2_3);
     ParameterWire pw3_2b = (ParameterWire) getWireFromTo(root, page2, cw3_2);

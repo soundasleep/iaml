@@ -60,9 +60,9 @@ public class RefreshElementCommand extends AbstractTransactionalCommand {
 		*/
 		
 		// from generated DiagramUpdateCommand
-		List editPolicies = CanonicalEditPolicy
+		List<?> editPolicies = CanonicalEditPolicy
 			.getRegisteredEditPolicies(rootObject);
-		for (Iterator it = editPolicies.iterator(); it.hasNext(); ) {
+		for (Iterator<?> it = editPolicies.iterator(); it.hasNext(); ) {
 			CanonicalEditPolicy nextEditPolicy = (CanonicalEditPolicy) it.next();
 			nextEditPolicy.refresh();
 		}

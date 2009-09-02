@@ -1,11 +1,11 @@
 package org.openiaml.model.tests.eclipse.inference.model0_3;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 import org.openiaml.model.tests.inference.model0_3.InputFormInstanceMapping;
 import org.openiaml.model.tests.inference.model0_3.NewInstanceWireMapping;
 import org.openiaml.model.tests.inference.model0_3.PropertiesFileMapping;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * All inference tests for model 0.3.

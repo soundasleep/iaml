@@ -66,8 +66,8 @@ public class PhpRuntimeExceptionException extends FailingHttpStatusCodeException
 	 * @return
 	 */
 	public static String extractTrace(FailingHttpStatusCodeException f) {
-		if (f.getResponse() != null && f.getResponse().getUrl() != null) {
-			String url = f.getResponse().getUrl().toString();
+		if (f.getResponse() != null && f.getResponse().getRequestUrl() != null) {
+			String url = f.getResponse().getRequestUrl().toString();
 			if (url.contains("exception.php?fail=")) {
 				String trace = url.substring(url.indexOf("exception.php?fail=") + "exception.php?fail=".length());
 				// remove any appending '&'s
@@ -96,8 +96,8 @@ public class PhpRuntimeExceptionException extends FailingHttpStatusCodeException
 	 * @return the extracted trace, or null
 	 */
 	public static StackTraceElement[] extractCause(FailingHttpStatusCodeException f) {
-		if (f.getResponse() != null && f.getResponse().getUrl() != null) {
-			String url = f.getResponse().getUrl().toString();
+		if (f.getResponse() != null && f.getResponse().getRequestUrl() != null) {
+			String url = f.getResponse().getRequestUrl().toString();
 			if (url.contains("&trace=")) {
 				String trace = url.substring(url.indexOf("&trace=") + "&trace=".length());
 				// remove any appending '&'s

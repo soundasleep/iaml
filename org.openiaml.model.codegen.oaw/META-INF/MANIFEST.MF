@@ -13,3 +13,4 @@ Require-Bundle: org.openarchitectureware.dependencies,
 Export-Package: org.openiaml.model.codegen.oaw,
  org.openiaml.model.codegen.oaw.coverage
 Bundle-Vendor: www.openiaml.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -45,4 +45,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.notation,
  org.eclipse.gmf.runtime.diagram.core,
  org.eclipse.gmf.runtime.diagram.ui
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy

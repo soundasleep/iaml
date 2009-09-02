@@ -9,8 +9,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.IEditorPart;
-import org.openiaml.model.diagram.custom.actions.MigrateModelAction;
-import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
+import org.openiaml.model.custom.actions.MigrateModelAction;
+import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 

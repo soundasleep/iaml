@@ -3,14 +3,12 @@
  */
 package org.openiaml.model.tests.inference.model0_3;
 
-import org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools;
-import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.Page;
-import org.openiaml.model.tests.inference.InferenceActionTestCase;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
  * Tests automatic mapping of NewInstanceWires from DomainObjects
@@ -19,20 +17,19 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
  * @author jmwright
  *
  */
-public class NewInstanceWireMapping extends InferenceActionTestCase {
-
+public class NewInstanceWireMapping extends EclipseInheritanceInterface {
+	
 	@Override
-	protected Class<? extends InferenceTestCase> getTestClass() {
+	public Class<? extends EclipseInheritanceInterface> getTestClass() {
 		return NewInstanceWireMapping.class;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.inference.EclipseInheritanceInterface#checkNotInferredKnowledge(org.openiaml.model.model.InternetApplication)
+	 */
 	@Override
-	public UpdateWithDroolsAction getAction() {
-		return new RefreshObjectInstanceMappingsWithDrools();
-	}
-
-	@Override
-	protected void initialTests() throws Exception {
+	public void checkNotInferredKnowledge(InternetApplication root)
+			throws Exception {
 
 		DomainStore ds = assertHasDomainStore(root, "a domain store");
 		assertEquals(1, ds.getChildren().size());
@@ -47,12 +44,16 @@ public class NewInstanceWireMapping extends InferenceActionTestCase {
 
 		// the instance should be empty
 		assertEquals(0, obj.getAttributes().size());
-
+		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.inference.EclipseInheritanceInterface#checkInferredKnowledge(org.openiaml.model.model.InternetApplication)
+	 */
 	@Override
-	protected void checkInferredKnowledge() throws Exception {
-
+	public void checkInferredKnowledge(InternetApplication root)
+			throws Exception {
+		
 		DomainStore ds = assertHasDomainStore(root, "a domain store");
 		assertEquals(1, ds.getChildren().size());
 		assertEquals("User", ds.getChildren().get(0).getName());
@@ -82,4 +83,5 @@ public class NewInstanceWireMapping extends InferenceActionTestCase {
 		}
 
 	}
+
 }

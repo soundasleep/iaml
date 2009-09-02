@@ -3,10 +3,6 @@
  */
 package org.openiaml.model.tests.inference.model0_3;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.jaxen.JaxenException;
-import org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools;
-import org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
@@ -14,7 +10,7 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
  * Tests automatic mapping of SyncWires between InputForms and
@@ -23,80 +19,20 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
  * @author jmwright
  *
  */
-public class InputFormInstanceMapping extends InferenceTestCase {
+public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Override
+	public Class<? extends EclipseInheritanceInterface> getTestClass() {
+		return InputFormInstanceMapping.class;
 	}
-
-	/**
-	 * Make sure the model is loaded properly.
-	 * @throws Exception
-	 */
-	public void testInitial() throws Exception {
-		root = loadDirectly(InputFormInstanceMapping.class);
-		checkNotInferredKnowledge(root);
-	}
-
-	/**
-	 * Complete model inference.
-	 *
-	 * @throws Exception
-	 */
-	public void testDefaultInference() throws Exception {
-		root = loadAndInfer(InputFormInstanceMapping.class, true);
-		checkInferredKnowledge(root);
-	}
-
-	/**
-	 * Inference through only the custom action. Doesn't do
-	 * anything, because SyncWires are separate to the
-	 * DomainObjectInstance mapping.
-	 *
-	 * @throws JaxenException
-	 */
-	public void testActionInference() throws Exception {
-		root = loadDirectly(InputFormInstanceMapping.class);
-		RefreshFormMappingsWithDrools action =
-			new RefreshFormMappingsWithDrools();
-
-		action.refreshMappings(root, createHandler(), new NullProgressMonitor());
-
-		checkNotInferredKnowledge(root);
-	}
-
-	/**
-	 * Inference through only the custom action. This should
-	 * fully comply with the entire model.
-	 *
-	 * @throws JaxenException
-	 */
-	public void testBothActionsInference() throws Exception {
-		root = loadDirectly(InputFormInstanceMapping.class);
-		{
-			RefreshObjectInstanceMappingsWithDrools action =
-				new RefreshObjectInstanceMappingsWithDrools();
-
-			action.refreshMappings(root, createHandler(), new NullProgressMonitor());
-		}
-		{
-			RefreshFormMappingsWithDrools action =
-				new RefreshFormMappingsWithDrools();
-
-			action.refreshMappings(root, createHandler(), new NullProgressMonitor());
-		}
-
-		// should now all be there
-		checkInferredKnowledge(root);
-	}
-
+	
 	/**
 	 * Test that the correct new knowledge has not yet been added.
 	 *
 	 * @param root
 	 * @throws Exception
 	 */
-	protected void checkNotInferredKnowledge(InternetApplication root) throws Exception {
+	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 
 		DomainStore ds = assertHasDomainStore(root, "a domain store");
 		assertEquals(1, ds.getChildren().size());
@@ -128,7 +64,7 @@ public class InputFormInstanceMapping extends InferenceTestCase {
 	 * @param root
 	 * @throws Exception
 	 */
-	protected void checkInferredKnowledge(InternetApplication root) throws Exception {
+	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
 		DomainStore ds = assertHasDomainStore(root, "a domain store");
 		assertEquals(1, ds.getChildren().size());
@@ -176,19 +112,6 @@ public class InputFormInstanceMapping extends InferenceTestCase {
 		InputForm ignore = assertHasInputForm(page, "unrelated input form");
 		assertEquals(0, ignore.getChildren().size());
 
-	}
-	/**
-	 * Assert that the given object is of the given class or higher.
-	 *
-	 * @param class1
-	 * @param object
-	 */
-	protected void assertInstanceOf(Class<?> class1, Object object) {
-		if (class1.isInstance(object)) {
-			// ok
-		} else {
-			fail("Expected object instance '" + class1 + "', got '" + object.getClass() + "': " + object);
-		}
 	}
 
 }

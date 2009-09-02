@@ -3,13 +3,11 @@
  */
 package org.openiaml.model.tests.inference.model0_3;
 
-import org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools;
-import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.tests.inference.InferenceActionTestCase;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
  * Tests automatic mapping of DomainStores when connected to
@@ -18,31 +16,34 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
  * @author jmwright
  *
  */
-public class PropertiesFileMapping extends InferenceActionTestCase {
+public class PropertiesFileMapping extends EclipseInheritanceInterface {
 
 	@Override
-	protected Class<? extends InferenceTestCase> getTestClass() {
+	public Class<? extends EclipseInheritanceInterface> getTestClass() {
 		return PropertiesFileMapping.class;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.inference.EclipseInheritanceInterface#checkNotInferredKnowledge(org.openiaml.model.model.InternetApplication)
+	 */
 	@Override
-	public UpdateWithDroolsAction getAction() {
-		return new RefreshDomainStoreMappingsWithDrools();
-	}
-
-	@Override
-	protected void initialTests() throws Exception {
-
+	public void checkNotInferredKnowledge(InternetApplication root)
+			throws Exception {
+		
 		DomainStore ds = assertHasDomainStore(root, "my domain store");
 		assertEquals(0, ds.getChildren().size());
 		assertEquals(0, ds.getAttributes().size());
 		assertEquals(0, ds.getOperations().size());
 		assertEquals(0, ds.getEventTriggers().size());
-
+		
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.inference.EclipseInheritanceInterface#checkInferredKnowledge(org.openiaml.model.model.InternetApplication)
+	 */
 	@Override
-	protected void checkInferredKnowledge() throws Exception {
+	public void checkInferredKnowledge(InternetApplication root)
+			throws Exception {
 
 		DomainStore ds = assertHasDomainStore(root, "my domain store");
 		assertEquals(1, ds.getChildren().size());	// one domain object called 'properties'
@@ -76,5 +77,6 @@ public class PropertiesFileMapping extends InferenceActionTestCase {
 		}
 
 	}
+
 
 }

@@ -8,8 +8,8 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.browser.IWebBrowser;
-import org.openiaml.model.diagram.custom.actions.GenerateCodeAction;
-import org.openiaml.model.diagram.custom.actions.GenerateCodeActionAndView;
+import org.openiaml.model.custom.actions.GenerateCodeAction;
+import org.openiaml.model.custom.actions.GenerateCodeActionAndView;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**

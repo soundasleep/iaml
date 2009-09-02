@@ -5,7 +5,6 @@ import junit.framework.TestSuite;
 
 import org.openiaml.model.tests.codegen.AllCodegenTests;
 import org.openiaml.model.tests.drools.AllDroolsTests;
-import org.openiaml.model.tests.eclipse.AllEclipseTests;
 import org.openiaml.model.tests.inference.AllInferenceTests;
 import org.openiaml.model.tests.model.AllModelTests;
 import org.openiaml.model.tests.release.AllReleaseTests;
@@ -32,8 +31,6 @@ public class AllTests {
         suite.addTest(AllInferenceTests.suite());
         suite.addTest(AllCodegenTests.suite());
         suite.addTest(AllDroolsTests.suite());
-        // currently the Eclipse tests fail with an out of memory/exception_access_violation fatal error
-        //suite.addTest(AllEclipseTests.suite());
         suite.addTest(AllReleaseTests.suite());
         suite.addTest(AllModelTests.suite());
 

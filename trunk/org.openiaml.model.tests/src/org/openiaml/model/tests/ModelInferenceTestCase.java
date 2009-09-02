@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -839,10 +840,39 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		CheckModelInstance check = new CheckModelInstance();
 		IStatus result = check.checkModel(target, new NullProgressMonitor());
 		
-		EclipseTestCase.assertStatusIsOK(result);
+		ModelInferenceTestCase.assertStatusIsOK(result);
 		
 	}
 
+	/**
+	 * Assert that the IStatus is ok.
+	 * 
+	 * @param status
+	 * @throws Exception if there was a Throwable in the IStatus
+	 */
+	public static void assertStatusIsOK(IStatus status) throws Exception {
+		if (!status.isOK()) {
+			if (status.getException() != null) {
+				// rethrow
+				throw new RuntimeException(status.getMessage(), status.getException());
+			}
+			
+			if (status.isMultiStatus()) {
+				// build up the message to alert the developer
+				MultiStatus ms = (MultiStatus) status;
+				StringBuffer msg = new StringBuffer();
+				msg.append("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
+				for (IStatus s : ms.getChildren()) {
+					msg.append("\n").append(s.getMessage());
+				}
+				fail(msg.toString());
+			}
+			
+			// default fail
+			fail("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
+		}
+	}
+	
 	/**
 	 * Get the "safe name" of the given element.
 	 *

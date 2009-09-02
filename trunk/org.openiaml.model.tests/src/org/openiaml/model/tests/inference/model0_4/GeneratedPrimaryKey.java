@@ -3,12 +3,10 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools;
-import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.tests.inference.InferenceActionTestCase;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
  * DomainObjects that do not define a DomainAttribute with a primary
@@ -17,21 +15,15 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
  * @author jmwright
  *
  */
-public class GeneratedPrimaryKey extends InferenceActionTestCase {
+public class GeneratedPrimaryKey extends EclipseInheritanceInterface {
 
 	@Override
-	protected Class<? extends InferenceTestCase> getTestClass() {
+	public Class<? extends EclipseInheritanceInterface> getTestClass() {
 		return GeneratedPrimaryKey.class;
 	}
 
 	@Override
-	public UpdateWithDroolsAction getAction() {
-		return new RefreshDomainStoreMappingsWithDrools();
-	}
-
-	@Override
-	protected void initialTests() throws Exception {
-
+	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 		DomainObject ds = assertHasDomainObject(root, "domain object");
 		assertEquals(0, ds.getAttributes().size());
 		assertEquals(0, ds.getOperations().size());
@@ -40,7 +32,7 @@ public class GeneratedPrimaryKey extends InferenceActionTestCase {
 	}
 
 	@Override
-	protected void checkInferredKnowledge() throws Exception {
+	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
 		DomainObject ds = assertHasDomainObject(root, "domain object");
 		assertEquals(1, ds.getAttributes().size());
@@ -50,8 +42,7 @@ public class GeneratedPrimaryKey extends InferenceActionTestCase {
 		assertTrue(generated.isPrimaryKey());
 		assertEquals(0, ds.getOperations().size());
 		assertEquals(0, ds.getEventTriggers().size());
-
+		
 	}
-
 
 }

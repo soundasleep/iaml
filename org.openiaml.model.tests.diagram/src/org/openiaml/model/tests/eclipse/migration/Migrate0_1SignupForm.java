@@ -9,8 +9,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
-import org.openiaml.model.diagram.custom.migrate.Migrate0To1;
+import org.openiaml.model.migrate.IamlModelMigrator;
+import org.openiaml.model.migrate.Migrate0To1;
 
 /**
  * Tests migrating a very old model version. 

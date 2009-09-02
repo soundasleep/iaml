@@ -589,6 +589,20 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	}
 	
 	/**
+	 * Assert that the given object is of the given class or higher.
+	 *
+	 * @param class1
+	 * @param object
+	 */
+	public void assertInstanceOf(Class<?> class1, Object object) {
+		if (class1.isInstance(object)) {
+			// ok
+		} else {
+			fail("Expected object instance '" + class1 + "', got '" + object.getClass() + "': " + object);
+		}
+	}
+	
+	/**
 	 * An exception has occured while transforming the model.
 	 * 
 	 * @author jmwright

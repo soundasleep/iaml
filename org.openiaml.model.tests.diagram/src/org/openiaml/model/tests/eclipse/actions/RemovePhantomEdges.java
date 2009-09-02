@@ -9,7 +9,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.openiaml.model.diagram.custom.actions.RemovePhantomEdgesAction;
+import org.openiaml.model.custom.actions.RemovePhantomEdgesAction;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.visual.Page;

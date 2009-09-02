@@ -3,19 +3,13 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools;
-import org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools;
-import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
+import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Page;
-import org.openiaml.model.tests.inference.InferenceActionTestCase;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
  * Issue 68: SelectWire does not synchronise Attributes between Object and Instance
@@ -23,23 +17,15 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
  * @author jmwright
  *
  */
-public class SelectWireAttributeInference extends InferenceActionTestCase {
+public class SelectWireAttributeInference extends EclipseInheritanceInterface {
 
 	@Override
-	protected Class<? extends InferenceTestCase> getTestClass() {
+	public Class<? extends EclipseInheritanceInterface> getTestClass() {
 		return SelectWireAttributeInference.class;
 	}
 
 	@Override
-	public List<UpdateWithDroolsAction> getActionList() {
-		List<UpdateWithDroolsAction> result = new ArrayList<UpdateWithDroolsAction>();
-		result.add(new RefreshObjectInstanceMappingsWithDrools());
-		result.add(new RefreshFormMappingsWithDrools());
-		return result;
-	}
-
-	@Override
-	protected void initialTests() throws Exception {
+	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 
 		Page page = assertHasPage(root, "container");
 		DomainObject dobj = assertHasDomainObject(page, "a domain object");
@@ -58,7 +44,7 @@ public class SelectWireAttributeInference extends InferenceActionTestCase {
 	}
 
 	@Override
-	protected void checkInferredKnowledge() throws Exception {
+	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
 		Page page = assertHasPage(root, "container");
 		DomainObject dobj = assertHasDomainObject(page, "a domain object");
@@ -80,18 +66,7 @@ public class SelectWireAttributeInference extends InferenceActionTestCase {
 		// the form only has 'attribute'
 		assertEquals(1, form.getChildren().size());
 		assertHasInputTextField(form, "attribute");
-
-	}
-
-	/**
-	 * Should not be used. Throws an exception.
-	 *
-	 * @deprecated
-	 * @see org.openiaml.model.tests.inference.InferenceActionTestCase#getAction()
-	 */
-	@Override
-	public UpdateWithDroolsAction getAction() {
-		throw new UnsupportedOperationException("getAction() is not supported.");
+		
 	}
 
 }

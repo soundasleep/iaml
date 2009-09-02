@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.openiaml.model.tests.inference;
+package org.openiaml.model.tests.eclipse.inference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,8 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.jaxen.JaxenException;
 import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
+import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
+import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
  * An abstract test case to simpify checking inference actions which
@@ -21,23 +23,25 @@ public abstract class InferenceActionTestCase extends InferenceTestCase {
 
 	/**
 	 * The current test case. This will be used to select the
-	 * model file used in the test cases.
+	 * model file used in the test cases. This is also the
+	 * test class that has the actual inference test cases.
 	 *
 	 * @return
 	 */
-	protected abstract Class<? extends InferenceTestCase> getTestClass();
-
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+	protected abstract Class<? extends EclipseInheritanceInterface> getTestClass();
 
 	/**
-	 * Tests from the initial model that we are inferring from.
-	 *
-	 * @throws Exception
+	 * Instantiate the actual test case for testing the inference.
+	 * 
+	 * @see #getTestClass()
+	 * @return
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	protected abstract void initialTests() throws Exception;
-
+	public EclipseInheritanceInterface getTestInterface() throws InstantiationException, IllegalAccessException {
+		return getTestClass().newInstance();
+	}
+	
 	/**
 	 * Make sure the model is loaded properly.
 	 * @throws Exception
@@ -45,17 +49,7 @@ public abstract class InferenceActionTestCase extends InferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(getTestClass());
 
-		initialTests();
-	}
-
-	/**
-	 * Complete model inference.
-	 *
-	 * @throws Exception
-	 */
-	public void testDefaultInference() throws Exception {
-		root = loadAndInfer(getTestClass());
-		checkInferredKnowledge();
+		getTestInterface().checkNotInferredKnowledge(root);
 	}
 
 	/**
@@ -65,11 +59,12 @@ public abstract class InferenceActionTestCase extends InferenceTestCase {
 	 */
 	public void testActionInference() throws Exception {
 		root = loadDirectly(getTestClass());
+		
 		for (UpdateWithDroolsAction action : getActionList()) {
 			action.refreshMappings(root, createHandler(), new NullProgressMonitor());
 		}
 
-		checkInferredKnowledge();
+		getTestInterface().checkInferredKnowledge(root);
 	}
 
 	/**
@@ -90,13 +85,5 @@ public abstract class InferenceActionTestCase extends InferenceTestCase {
 	 * @return
 	 */
 	public abstract UpdateWithDroolsAction getAction();
-
-	/**
-	 * Test that the correct new knowledge has been added.
-	 *
-	 * @param root
-	 * @throws Exception
-	 */
-	protected abstract void checkInferredKnowledge() throws Exception;
 
 }

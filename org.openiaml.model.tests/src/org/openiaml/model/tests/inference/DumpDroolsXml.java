@@ -41,7 +41,6 @@ import org.eclipse.core.resources.IFile;
 import org.openiaml.model.drools.export.ExportDroolsJavaXml;
 import org.openiaml.model.drools.export.ExportDroolsXml;
 import org.openiaml.model.tests.DijkstraAlgorithm;
-import org.openiaml.model.tests.TestComposition;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -188,9 +187,6 @@ public class DumpDroolsXml extends InferenceTestCase {
 
 		// output out the rules in a prolog format
 		outputPrologStratification(allRules);
-
-		// check each rule for composition
-		checkRulesCompositionGraph(allRules);
 
 		// find rule cycles
 		findStratCycleRules(allRules);
@@ -2657,49 +2653,6 @@ public class DumpDroolsXml extends InferenceTestCase {
 			}
 		}
 		return elements;
-
-	}
-
-	/**
-	 * Check each rule to make sure that there is a path from head to
-	 * body, but no path from body to head.
-	 *
-	 * Ignores negated() rules in body.
-	 *
-	 * @param allRules
-	 */
-	protected void checkRulesCompositionGraph(Set<LogicRule> allRules) {
-		TestComposition comp = new TestComposition();
-
-		for (LogicRule r : allRules) {
-			// get the element with the highest distance from InternetApplication
-			int max_d = -1;
-			LogicTerm maxTerm = null;
-			for (LogicElement e : r.head) {
-				if (!(e instanceof LogicNotTerm)) {
-					LogicTerm t = (LogicTerm) e;
-					int d = comp.dijkstra("InternetApplication", t.name);
-					if (d > max_d) {
-						maxTerm = t;
-						max_d = d;
-					}
-				}
-			}
-
-			// now check each element in the rule body
-			for (LogicElement e : r.body) {
-				if (e instanceof LogicTerm) {
-					// even if it fails, we want to continue evaluating the model
-					try {
-						comp.checkDijkstra(maxTerm.name, ((LogicTerm) e).name);
-					} catch (AssertionFailedError ex) {
-						System.out.println(ex.getMessage());		// temporary TODO remove
-					}
-				} else {
-					throw new RuntimeException("Element " + e + " should have been a LogicTerm.");
-				}
-			}
-		}
 
 	}
 

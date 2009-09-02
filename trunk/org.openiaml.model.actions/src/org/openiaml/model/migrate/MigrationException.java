@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.diagram.custom.migrate;
+package org.openiaml.model.migrate;
 
 /**
  * Something bad happened when doing migration.

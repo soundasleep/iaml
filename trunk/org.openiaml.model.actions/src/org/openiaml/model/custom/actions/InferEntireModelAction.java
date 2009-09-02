@@ -1,10 +1,10 @@
-package org.openiaml.model.diagram.custom.actions;
+package org.openiaml.model.custom.actions;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -12,46 +12,39 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.openiaml.model.diagramextensions.InfiniteSubProgressMonitor;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.DataFlowEdge;
-import org.openiaml.model.model.ExecutionEdge;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
 
 /**
- * Looks through the model and finds edges which either have no 'from'
- * or 'to', and removes them.
- * 
- * See issue 63.
+ * A temporary action which infers the entire model, and places
+ * it all back within the same model file. This isn't really designed
+ * to be used in the real world, because we should be working with
+ * models that do not require such inference to understand their
+ * operation.
  * 
  * @see org.openiaml.model.codegen.oaw
  * @author jmwright
  *
  */
-public class RemovePhantomEdgesAction extends IamlFileAction {
+public class InferEntireModelAction extends IamlFileAction {
 
-	private EObject loadedModel;
+	private EObject model;
 	
-	public EObject getLoadedModel() {
-		return loadedModel;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
 	public String getErrorMessage(IFile individual, String message) {
-		return "Could not remove phantom edges from '" + individual.getName() + "': " + message;
+		return "Could not infer model from '" + individual.getName() + "': " + message;
 	}
 
 	/* (non-Javadoc)
@@ -59,7 +52,7 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 	 */
 	@Override
 	public String getProgressMessage() {
-		return "Remove phantom edges";
+		return "Infer entire model";
 	}
 
 	/**
@@ -75,23 +68,21 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 	}
 	
 	/**
-	 * @param o
+	 * @param o Both the source file and the target file.
 	 * @param monitor 
 	 * @return 
 	 * @throws InferenceException 
 	 * @throws IOException 
 	 * @throws CoreException 
 	 */
-	public IStatus doExecute(IFile o, IProgressMonitor monitor2) throws InferenceException, FileNotFoundException, IOException, CoreException {
-		IProgressMonitor monitor = new InfiniteSubProgressMonitor(monitor2, 100);
-		
-		monitor.beginTask("Removing phantom edges: '" + o.getName() + "'", 60);
+	public IStatus doExecute(IFile o, IProgressMonitor monitor) throws InferenceException, FileNotFoundException, IOException, CoreException {
+		monitor.beginTask("Inferring model in file '" + o.getName() + "'", 60);
 		
 		// try and load the file directly
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.getResource(URI.createFileURI(o.getLocation().toString()), true);
 		
-		// load the handler to remove elements
+		// load the inference elements manager
 		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
 		
 		// we can only do one model
@@ -99,47 +90,57 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 			return new Status(IStatus.ERROR, PLUGIN_ID, "Could not transform model: unexpected number of model elements in file (expected: 1, found: " + resource.getContents().size() + ")");
 		}
 		
-		// remove phantom edges
-		loadedModel = resource.getContents().get(0);
+		// do inference on the model
+		model = resource.getContents().get(0);
+		DroolsInferenceEngine ce = getEngine(handler);
+		ce.create(model, new SubProgressMonitor(monitor, 45));
 		
-		// we need to store elements to delete in a buffer, or else
-		// deleting elements will affect the iterator and cause exceptions
-		List<EObject> elementsToDelete = new ArrayList<EObject>();
-		
-		Iterator<EObject> it = loadedModel.eAllContents();
-		while (it.hasNext()) {
-			EObject obj = it.next();
-			if (obj instanceof WireEdge && (((WireEdge) obj).getFrom() == null || ((WireEdge) obj).getTo() == null)) {
-				// remove this one
-				elementsToDelete.add(obj);
-			} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null || ((ExecutionEdge) obj).getTo() == null)) {
-				// remove this one
-				elementsToDelete.add(obj);
-			} else if (obj instanceof DataFlowEdge && (((DataFlowEdge) obj).getFrom() == null || ((DataFlowEdge) obj).getTo() == null)) {
-				// remove this one
-				elementsToDelete.add(obj);
+		monitor.subTask("Writing to temporary file");
+		// output the temporary changed model to an external file
+		// so we can move it back later
+		IFile tempFile = null;
+		for (int i = 0; i < 1000; i++) {
+			tempFile = o.getProject().getFile("temp-iaml-gen" + i + ".iaml");
+			if (!tempFile.exists()) {
+				break;
 			}
-			monitor.worked(1);
-		}
-		for (EObject obj : elementsToDelete) {
-			handler.deleteElement(obj, obj.eContainer(), obj.eContainingFeature());
 		}
 
-		// save it
-		monitor.subTask("Saving");
-		resource.save(getSaveOptions());
+		if (tempFile == null || tempFile.exists()) {
+			return new Status(Status.ERROR, PLUGIN_ID, "Could not create temporary file.");
+		}
+		
+		// create a temporary file to output to
+		File tempJavaFile = File.createTempFile("temp-iaml", ".iaml");
+		Map<?,?> options = resourceSet.getLoadOptions();
+		resource.save(new FileOutputStream(tempJavaFile), options);
+		
+		monitor.worked(5);
+		monitor.subTask("Saving to IFile");
+		
+		// now load it in as an IFile
+		tempFile.create(new FileInputStream(tempJavaFile), true, monitor);
+		
+		monitor.worked(5);
+		monitor.subTask("Replacing original model");
+
+		// rename the tempFile
+		o.delete(true, monitor);
+		tempFile.move(o.getFullPath(), true, monitor);
+		tempJavaFile.delete();
 		
 		// finished
 		monitor.done();
 		
 		return Status.OK_STATUS;
 	}
-	
-	/**
-	 * Copied from generated {@link IamlDiagramEditorUtil#getSaveOptions()}.
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.diagram.custom.actions.IamlFileAction#getLoadedModel()
 	 */
-	public static Map<?,?> getSaveOptions() {
-		return IamlDiagramEditorUtil.getSaveOptions();
+	@Override
+	protected EObject getLoadedModel() {
+		return model;
 	}
 
 }

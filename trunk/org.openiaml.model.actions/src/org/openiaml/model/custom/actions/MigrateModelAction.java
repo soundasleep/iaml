@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.actions;
+package org.openiaml.model.custom.actions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,20 +16,21 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.diagram.custom.migrate.ExpectedMigrationException;
-import org.openiaml.model.diagram.custom.migrate.IamlModelMigrator;
-import org.openiaml.model.diagram.custom.migrate.MigrationException;
-import org.openiaml.model.diagram.custom.migrate.MigratorRegistry;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
+import org.openiaml.model.migrate.ExpectedMigrationException;
+import org.openiaml.model.migrate.IamlModelMigrator;
+import org.openiaml.model.migrate.MigrationException;
+import org.openiaml.model.migrate.MigratorRegistry;
 import org.w3c.dom.Document;
 
 /**
@@ -91,7 +92,7 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 		String fileName = source.getName();
 		String fileExtension = source.getFileExtension();
 		// generate unique name
-		String uniqueName = IamlDiagramEditorUtil.getUniqueFileName( containerPath, fileName, fileExtension);
+		String uniqueName = getUniqueFileName( containerPath, fileName, fileExtension);
 
 		// TODO migrate this to a wizard
 		InputDialog dialog = new InputDialog(
@@ -305,4 +306,32 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 		return migratorsUsed;
 	}
 
+	/**
+	 * Copied directly from generated GMF diagram code.
+	 */
+	public static String getUniqueFileName(IPath containerFullPath,
+			String fileName, String extension) {
+		if (containerFullPath == null) {
+			containerFullPath = new Path(""); //$NON-NLS-1$
+		}
+		if (fileName == null || fileName.trim().length() == 0) {
+			fileName = "default"; //$NON-NLS-1$
+		}
+		IPath filePath = containerFullPath.append(fileName);
+		if (extension != null && !extension.equals(filePath.getFileExtension())) {
+			filePath = filePath.addFileExtension(extension);
+		}
+		extension = filePath.getFileExtension();
+		fileName = filePath.removeFileExtension().lastSegment();
+		int i = 1;
+		while (ResourcesPlugin.getWorkspace().getRoot().exists(filePath)) {
+			i++;
+			filePath = containerFullPath.append(fileName + i);
+			if (extension != null) {
+				filePath = filePath.addFileExtension(extension);
+			}
+		}
+		return filePath.lastSegment();
+	}
+	
 }

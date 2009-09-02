@@ -26,6 +26,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
+import org.openiaml.model.custom.actions.ProgressEnabledUIAction;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
 
 /**

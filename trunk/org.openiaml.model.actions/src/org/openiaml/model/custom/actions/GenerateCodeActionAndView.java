@@ -1,4 +1,4 @@
-package org.openiaml.model.diagram.custom.actions;
+package org.openiaml.model.custom.actions;
 
 import java.net.MalformedURLException;
 import java.net.URL;

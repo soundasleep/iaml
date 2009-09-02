@@ -6,7 +6,6 @@ Bundle-Version: 0.3.1
 Export-Package: org.openiaml.model.drools,
  org.openiaml.model.drools.export
 Require-Bundle: org.openiaml.model,
- ca.ecliptical.emf.xpath,
  org.eclipse.core.runtime
 Bundle-ClassPath: lib/reqs/ant-1.6.5.jar,
  lib/reqs/antlr-runtime-3.0.jar,
@@ -24,3 +23,4 @@ Bundle-ClassPath: lib/reqs/ant-1.6.5.jar,
  .,
  lib/reqs/core-3.2.3.v_686_R32x.jar
 Bundle-Vendor: www.openiaml.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

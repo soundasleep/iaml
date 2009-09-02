@@ -9,3 +9,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.openiaml.model.runtime.IamlRuntimeLibrariesPlugin
 Export-Package: org.openiaml.model.runtime
 Bundle-Vendor: www.openiaml.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

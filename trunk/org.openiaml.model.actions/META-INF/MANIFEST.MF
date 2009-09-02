@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Iaml Actions
+Bundle-SymbolicName: org.openiaml.model.actions
+Bundle-Version: 0.3.1
+Bundle-Activator: org.openiaml.model.actions.Activator
+Bundle-Vendor: www.openiaml.org
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233b453c1f.69">
   <children xsi:type="iaml.visual:Page" id="visual.1233b453dc5.b3" name="Home"/>
   <domainStores xsi:type="iaml.users:UserStore" id="users.1233b454017.bb" name="user store">
-    <children xsi:type="iaml.users:Role" id="users.1233b454017.c1" name="Guest"/>
+    <children xsi:type="iaml.users:Role" id="users.1233b454017.c1" name="User"/>
     <children xsi:type="iaml.users:Role" id="users.1233b454017.c2" name="Registered User" outEdges="wires.1233b453e32.5e" inEdges="wires.1233b453e32.66">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.1233b453e32.5e" from="users.1233b454017.c2" to="components.1233b453f6b.39"/>
     </children>

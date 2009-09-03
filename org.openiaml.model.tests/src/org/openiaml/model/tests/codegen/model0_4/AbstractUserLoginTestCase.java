@@ -86,10 +86,10 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
-		s.add("CREATE TABLE Guest (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
-		s.add("INSERT INTO Guest (generated_primary_key, name, email, password) VALUES (12, 'Guest', 'guest@openiaml.org', 'guest')");
-		s.add("INSERT INTO Guest (generated_primary_key, name, email, password) VALUES (22, 'Default Role', 'default@openiaml.org', 'test123')");
-		s.add("INSERT INTO Guest (generated_primary_key, name, email, password) VALUES (32, 'Registered User', 'registered@openiaml.org', 'test123')");
+		s.add("CREATE TABLE User (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
+		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (12, 'User', 'user@openiaml.org', 'user')");
+		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (22, 'Default Role', 'default@openiaml.org', 'test123')");
+		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (32, 'Registered User', 'registered@openiaml.org', 'test123')");
 		return s;
 	}
 	

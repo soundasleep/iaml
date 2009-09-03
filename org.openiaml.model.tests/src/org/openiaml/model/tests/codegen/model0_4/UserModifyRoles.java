@@ -22,6 +22,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(UserModifyRoles.class);
+		initialiseDatabase();
 	}
 	
 	/**

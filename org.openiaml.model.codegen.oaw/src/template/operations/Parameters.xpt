@@ -20,6 +20,12 @@
  * Parameters as part of an operation call.
  */
 «DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::wires::ParameterWire»
+	«IF php»
+		«REM»add associative keys for named parameter wires«ENDREM»
+		«IF name != null && name.length > 0»
+			"«safeNameString(name)»" =>
+		«ENDIF» 
+	«ENDIF»
 	«EXPAND callParameterValue(php, wire, inStoreDb) FOR from»
 «ENDDEFINE»
 

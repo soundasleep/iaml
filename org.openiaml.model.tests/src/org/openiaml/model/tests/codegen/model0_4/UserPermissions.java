@@ -17,6 +17,7 @@ public class UserPermissions extends AbstractUserLoginTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(UserPermissions.class);
+		initialiseDatabase();
 	}
 	
 	/**

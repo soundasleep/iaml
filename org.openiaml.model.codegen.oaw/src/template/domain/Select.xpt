@@ -48,7 +48,11 @@
 «ENDDEFINE»
 
 «DEFINE selectDatabaseStore FOR model::DomainStore»
-	$db_name = 'sqlite:«safeNameString(id)».db';
+	$db_name = «EXPAND getDatabaseStoreString»;
+«ENDDEFINE»
+
+«DEFINE getDatabaseStoreString FOR model::DomainStore»
+	'sqlite:«safeNameString(id)».db'
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

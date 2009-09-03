@@ -5,6 +5,7 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
+import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.scopes.Session;
@@ -12,6 +13,7 @@ import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -83,6 +85,27 @@ public class UserRolesLoginHandler extends InferenceTestCase {
 	}
 	
 	/**
+	 * There should only be 'current password' and 'current email'
+	 * stored in the session.
+	 * 
+	 * @throws Exception
+	 */
+	public void testStoredSessionProperties() throws Exception {
+		root = loadAndInfer(UserRolesLoginHandler.class);
+		
+		Session session = assertHasSession(root, "my session");
+		
+		assertGenerated(assertHasApplicationElementProperty(session, "current email"));
+		assertGenerated(assertHasApplicationElementProperty(session, "current password"));
+		assertHasNoApplicationElementProperty(session, "current generated primary key");
+		assertHasNoApplicationElementProperty(session, "current User.generated primary key");
+		assertHasNoApplicationElementProperty(session, "current generated_primary_key");
+		assertHasNoApplicationElementProperty(session, "current User.generated_primary_key");
+		assertHasNoApplicationElementProperty(session, "current User_generated_primary_key");
+		
+	}
+		
+	/**
 	 * The UserInstance select query should not contain anything
 	 * about generated primary keys.
 	 * 
@@ -100,6 +123,24 @@ public class UserRolesLoginHandler extends InferenceTestCase {
 				"email = :email and password = :password"
 			}, select.getQuery());
 		
+		// there should only be two incoming parameter wires
+		Set<WireEdge> params = getWiresTo(session, select, ParameterWire.class);
+		assertEquals(params.toString(), 2, params.size());
+		
+		// one from password
+		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		assertGenerated(password);
+		ParameterWire pw = (ParameterWire) assertHasWireFromTo(session, password, select, ParameterWire.class);
+		assertGenerated(pw);
+		assertEquals("password", pw.getName());
+
+		// one from email
+		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
+		assertGenerated(email);
+		ParameterWire pw2 = (ParameterWire) assertHasWireFromTo(session, email, select, ParameterWire.class);
+		assertGenerated(pw2);
+		assertEquals("email", pw2.getName());
+
 	}
 	
 	/**

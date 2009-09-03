@@ -1,0 +1,36 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * A script to dump out the current database structure
+ * (debug-only).
+ */
+«DEFINE databaseDump FOR model::InternetApplication»
+<?php
+
+require("config.php"); // runtime library configuration
+require(IAML_RUNTIME_ROOT . "global.php"); // runtime library import
+
+$databases = array(
+	«EXPAND getDomainStores FOREACH domainStores SEPARATOR ", "»
+);
+
+foreach ($databases as $db_name) {
+	echo "<h1>$db_name</h1>\n";
+	
+	$query = "select * from sqlite_master;";
+	$dq = new DatabaseQuery($db_name);
+	
+	$results = $dq->fetch($query, array());
+	
+	echo "<pre>" . print_r($results, true) . "</pre>\n";
+}
+«ENDDEFINE»
+
+«DEFINE getDomainStores FOR model::DomainStore»
+	«EXPAND template::domain::Select::getDatabaseStoreString»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

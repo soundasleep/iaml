@@ -1092,9 +1092,32 @@ rule "Create Select Wire between Domain Object types [user]"
 		String q = getUserQueryString(role);
 			
 		SelectWire wire = handler.generatedSelectWire(login_handler, login_handler, role, instance);
-		handler.setName(wire, "select");
+		handler.setName(wire, "select " + role);
 		handler.setQuery(wire, q);
 		queue.add(wire, drools); 
+
+end
+
+# if the attributes have changed, we need to update the
+# query string
+rule "Update Select Wire between Domain Object types [user]"
+	when
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+
+		role : Role ( )
+		parameter : ParameterWire( from == role, to == login_handler )
+
+		instance : UserInstance ( )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		select : SelectWire ( from == role, to == instance )
+		
+		not (eval(select.getQuery() != null && select.getQuery().equals(getUserQueryString(role))))
+		
+	then
+		String q = getUserQueryString(role);
+		handler.setQuery(select, q);
 
 end
 

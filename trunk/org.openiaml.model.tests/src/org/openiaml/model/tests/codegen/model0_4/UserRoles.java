@@ -32,13 +32,13 @@ public class UserRoles extends AbstractUserLoginTestCase {
 	}
 
 	/**
-	 * We cannot access the protected page as a Guest
+	 * We cannot access the protected page as a User
 	 * because it does not have the appropriate Role.
 	 * 
 	 * @throws Exception
 	 */
-	public void testGuest() throws Exception {
-		IFile sitemap = doStandardLoginAs("guest@openiaml.org", "guest");
+	public void testUser() throws Exception {
+		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
 		assertNoProblem();
 		
 		gotoSitemapWithProblem(sitemap, "target");
@@ -62,8 +62,8 @@ public class UserRoles extends AbstractUserLoginTestCase {
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = super.getDatabaseInitialisers();
-		s.add("CREATE TABLE default_role (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, guest_generated_primary_key INTEGER NOT NULL)");
-		s.add("INSERT INTO default_role (generated_primary_key, guest_generated_primary_key) VALUES (44, 22)");
+		s.add("CREATE TABLE default_role (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, User_generated_primary_key INTEGER NOT NULL)");
+		s.add("INSERT INTO default_role (generated_primary_key, User_generated_primary_key) VALUES (44, 22)");
 		return s;
 	}
 	

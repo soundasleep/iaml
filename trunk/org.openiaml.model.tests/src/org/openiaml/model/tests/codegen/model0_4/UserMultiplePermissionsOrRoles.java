@@ -30,13 +30,13 @@ public class UserMultiplePermissionsOrRoles extends AbstractUserLoginTestCase {
 	}
 
 	/**
-	 * We cannot access the protected page as a Guest
+	 * We cannot access the protected page as a User
 	 * because it does not have the appropriate Role.
 	 * 
 	 * @throws Exception
 	 */
-	public void testGuest() throws Exception {
-		IFile sitemap = doStandardLoginAs("guest@openiaml.org", "guest");
+	public void testUser() throws Exception {
+		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
 		assertNoProblem();
 		
 		gotoSitemapThenPage(sitemap, "target");

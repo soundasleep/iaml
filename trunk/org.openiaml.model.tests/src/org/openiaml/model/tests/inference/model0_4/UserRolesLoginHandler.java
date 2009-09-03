@@ -62,7 +62,7 @@ public class UserRolesLoginHandler extends InferenceTestCase {
 	}
 	
 	/**
-	 * The "generated primary key" of the Registered User/Guest should
+	 * The "generated primary key" of the Registered User/User should
 	 * not be a parameter in the input form.
 	 * 
 	 * @throws Exception
@@ -78,7 +78,7 @@ public class UserRolesLoginHandler extends InferenceTestCase {
 		InputTextField password = assertHasInputTextField(form, "password");
 		assertGenerated(password);
 		assertHasNoInputTextField(form, "generated primary key");
-		assertHasNoInputTextField(form, "Guest.generated primary key");
+		assertHasNoInputTextField(form, "User.generated primary key");
 		
 	}
 	

@@ -84,17 +84,17 @@ public class UserRoles extends InferenceTestCase {
 	}
 	
 	/**
-	 * There should be a default role 'Guest' generated
+	 * There should be a default role 'User' generated
 	 * in the user store.
 	 *
 	 * @throws Exception
 	 */
-	public void testDefaultGuestRole() throws Exception {
+	public void testDefaultUserRole() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
 		UserStore store = assertHasUserStore(root, "user store");
 		
-		Role guest = assertHasRole(store, "Guest");
+		Role guest = assertHasRole(store, "User");
 		assertGenerated(guest);
 		
 	}
@@ -155,23 +155,23 @@ public class UserRoles extends InferenceTestCase {
 
 	/**
 	 * The Login Handler[type=user] should have an incoming
-	 * parameter of 'Guest' - the default role/user instance
+	 * parameter of 'User' - the default role/user instance
 	 * to generate.
 	 *
 	 * @throws Exception
 	 */
-	public void testHandlerGeneratedGuestParameter() throws Exception {
+	public void testHandlerGeneratedUserParameter() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
 		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");		
 		UserStore store = assertHasUserStore(root, "user store");
 		
-		Role guest = assertHasRole(store, "Guest");
-		assertGenerated(guest);
+		Role user = assertHasRole(store, "User");
+		assertGenerated(user);
 		
 		// a Parameter wire: [guest] --> [handler]
-		ParameterWire param = assertHasParameterWire(session, guest, handler);
+		ParameterWire param = assertHasParameterWire(session, user, handler);
 		assertGenerated(param);
 		
 	}
@@ -352,7 +352,7 @@ public class UserRoles extends InferenceTestCase {
 	}
 	
 	/**
-	 * The 'default role' should extend 'Guest'
+	 * The 'default role' should extend 'User'
 	 *
 	 * @throws Exception
 	 */
@@ -360,7 +360,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		UserStore store = assertHasUserStore(root, "user store");		
-		Role guest = assertHasRole(store, "Guest");
+		Role guest = assertHasRole(store, "User");
 		assertGenerated(guest);
 		Role role = assertHasRole(store, "default role");
 		assertNotGenerated(role);
@@ -371,7 +371,7 @@ public class UserRoles extends InferenceTestCase {
 	}
 	
 	/**
-	 * 'Guest' should have 'email' and 'password' attributes; these
+	 * 'User' should have 'email' and 'password' attributes; these
 	 * are the default requirements for Users
 	 *
 	 * @throws Exception
@@ -380,7 +380,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		UserStore store = assertHasUserStore(root, "user store");		
-		Role guest = assertHasRole(store, "Guest");
+		Role guest = assertHasRole(store, "User");
 
 		DomainAttribute email = assertHasDomainAttribute(guest, "email");
 		assertGenerated(email);
@@ -390,7 +390,7 @@ public class UserRoles extends InferenceTestCase {
 	}
 	
 	/**
-	 * Since Default Role extends Guest, the attributes of Guest
+	 * Since Default Role extends User, the attributes of User
 	 * will be reproduced in Default Role.
 	 * 
 	 * @throws Exception
@@ -399,7 +399,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		UserStore store = assertHasUserStore(root, "user store");		
-		Role guest = assertHasRole(store, "Guest");
+		Role guest = assertHasRole(store, "User");
 
 		DomainAttribute email = assertHasDomainAttribute(guest, "email");
 		assertGenerated(email);
@@ -427,7 +427,7 @@ public class UserRoles extends InferenceTestCase {
 	}
 	
 	/**
-	 * Since Default Role extends Guest, there will be an
+	 * Since Default Role extends User, there will be an
 	 * ID in Default Role which will be the index/foreign key
 	 * of Guest.
 	 * 
@@ -437,7 +437,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		UserStore store = assertHasUserStore(root, "user store");		
-		Role guest = assertHasRole(store, "Guest");
+		Role guest = assertHasRole(store, "User");
 		
 		DomainAttribute source_id = assertHasDomainAttribute(guest, "generated primary key");
 		assertGenerated(source_id);
@@ -446,7 +446,7 @@ public class UserRoles extends InferenceTestCase {
 
 		DomainAttribute id = assertHasDomainAttribute(role, "generated primary key");
 		assertGenerated(id);
-		DomainAttribute fk = assertHasDomainAttribute(role, "Guest.generated primary key");
+		DomainAttribute fk = assertHasDomainAttribute(role, "User.generated primary key");
 		assertGenerated(fk);
 		
 		// there should be an extends wire between the PK and FK
@@ -553,7 +553,7 @@ public class UserRoles extends InferenceTestCase {
 		
 		// store
 		UserStore store = assertHasUserStore(root, "user store");		
-		Role guest = assertHasRole(store, "Guest");
+		Role guest = assertHasRole(store, "User");
 		
 		// generated select wire		
 		SelectWire selectWire = assertHasSelectWire(root, guest, instance, "select");

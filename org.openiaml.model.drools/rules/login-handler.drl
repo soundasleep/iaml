@@ -53,6 +53,42 @@ function boolean notPrimaryKey(DomainAttribute attribute) {
 	return !attribute.getName().contains("generated primary key");
 }
 
+/**
+ * Get the query string for selecting this user.
+ *
+ * Also iterates over extends so we get parent attributes. 
+ */
+function String getUserQueryString(Role role) {
+	String q = "";
+	for (DomainAttribute attribute : role.getAttributes()) {
+		// ignore primary keys
+		if (notPrimaryKey(attribute)) {
+			// add this attribute as a query
+			if (!q.isEmpty()) {
+				q += " and ";
+			}
+			q += attribute.getName() + " = :" + attribute.getName();
+		} 
+	}
+	
+	// get all parents
+	for (WireEdge w : role.getOutEdges()) {
+		if (w instanceof ExtendsWire && w.getTo() instanceof Role) {
+			String q2 = getUserQueryString((Role) w.getTo());
+			if (!q2.isEmpty()) {
+				if (q.isEmpty()) {
+					q = q2;
+				} else {
+					q += " and " + q2;
+				}
+			}		
+		}
+	}
+	
+	return q;
+}
+
+
 rule "Create 'login' page for LoginHandlers [ApplicationElementContainer]"
 	when
 		container : ApplicationElementContainer( )
@@ -1036,18 +1072,8 @@ rule "Create Select Wire between Domain Object types [user]"
 		
 	then
 		// find all the attributes as incoming parameter wires for the
-		// given DomainObject
-		String q = "";
-		for (DomainAttribute attribute : role.getAttributes()) {
-			// ignore primary keys
-			if (notPrimaryKey(attribute)) {
-				// add this attribute as a query
-				if (!q.isEmpty()) {
-					q += " and ";
-				}
-				q += attribute.getName() + " = :" + attribute.getName();
-			} 
-		}
+		// given DomainObject (including superclasses)
+		String q = getUserQueryString(role);
 			
 		SelectWire wire = handler.generatedSelectWire(login_handler, login_handler, role, instance);
 		handler.setName(wire, "select");

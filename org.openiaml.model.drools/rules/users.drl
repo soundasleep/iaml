@@ -86,48 +86,48 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 
 end
 
-rule "User Stores contain a default role 'Guest'"
+rule "User Stores contain a default role 'User'"
 	when
 		store : UserStore ( )
 		
-		not ( Role ( name == "Guest", eContainer == store ))
+		not ( Role ( name == "User", eContainer == store ))
 	
 	then
-		Role guest = handler.generatedRole(store, store);
-		handler.setName(guest, "Guest");
-		queue.add(guest, drools);
+		Role user = handler.generatedRole(store, store);
+		handler.setName(user, "User");
+		queue.add(user, drools);
 
 end
 
-rule "'Guest' role contains a default attribute 'email'"
+rule "'User' role contains a default attribute 'email'"
 	when
 		store : UserStore ( )
-		guest : Role ( eContainer == store, name == "Guest" )
+		user : Role ( eContainer == store, name == "User" )
 		
-		not ( DomainAttribute ( name == "email", eContainer == guest ))
+		not ( DomainAttribute ( name == "email", eContainer == user ))
 	
 	then
-		DomainAttribute attr = handler.generatedDomainAttribute(guest, guest);
+		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
 		handler.setName(attr, "email");
 		queue.add(attr, drools);
 
 end
 
-rule "'Guest' role contains a default attribute 'password'"
+rule "'User' role contains a default attribute 'password'"
 	when
 		store : UserStore ( )
-		guest : Role ( eContainer == store, name == "Guest" )
+		user : Role ( eContainer == store, name == "User" )
 		
-		not ( DomainAttribute ( name == "password", eContainer == guest ))
+		not ( DomainAttribute ( name == "password", eContainer == user ))
 	
 	then
-		DomainAttribute attr = handler.generatedDomainAttribute(guest, guest);
+		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
 		handler.setName(attr, "password");
 		queue.add(attr, drools);
 
 end
 
-rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to Guest"
+rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User"
 	when
 		session : Session( ) 
 		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER )
@@ -145,13 +145,13 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 			RequiresWire ( from == ach, to == permission ) )
 		)
 		
-		guest : Role ( eContainer == store, name == "Guest" )
+		user : Role ( eContainer == store, name == "User" )
 	
-		# if there is already an incoming parameter wire, don't connect up Guest
+		# if there is already an incoming parameter wire, don't connect up User
 		not (ParameterWire ( to == login_handler ))
 	
 	then
-		ParameterWire param = handler.generatedParameterWire(ach, session, guest, login_handler);
+		ParameterWire param = handler.generatedParameterWire(ach, session, user, login_handler);
 		queue.add(param, drools);
 
 end
@@ -240,17 +240,17 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 
 end
 
-rule "Any role should extend the default Guest role"
+rule "Any role should extend the default User role"
 	when
 		store : UserStore ( )
-		guest : Role ( name == "Guest", eContainer == store )
+		user : Role ( name == "User", eContainer == store )
 		
-		another : Role ( this != guest )
+		another : Role ( this != user )
 		
-		not ( ExtendsWire ( from == another, to == guest ))
+		not ( ExtendsWire ( from == another, to == user ))
 		
 	then
-		ExtendsWire ext = handler.generatedExtendsWire(store, store, another, guest);
+		ExtendsWire ext = handler.generatedExtendsWire(store, store, another, user);
 		queue.add(ext, drools);
 
 end

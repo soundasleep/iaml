@@ -171,8 +171,9 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 		      	} 
 		    } catch (e) {
 		    	if (e instanceof IamlJavascriptException) {
+			    	add_runtime_error("Exception within AJAX: " + e);
 			    	debug("Exception within AJAX: " + e);
-			    	alert("Exception within AJAX: " + e);
+			    	// alert("Exception within AJAX: " + e);
 		    	} else {
 		    		throw e;	// rethrow
 		    	}
@@ -207,6 +208,15 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 
 function root_alert(a) {
 	alert(a);
+}
+
+function add_runtime_error(message) {
+	var src = document.getElementById("runtime_errors");
+	if (!src) {
+		debug("warning: add_runtime_error called without runtime_errors existing");
+	} else {
+		src.innerHTML += "<li>Runtime error: " + message + "</li>";
+	}
 }
 
 /**

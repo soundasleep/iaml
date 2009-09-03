@@ -8,7 +8,7 @@
 «DEFINE callCondition(Boolean php, model::wires::RunInstanceWire wire, Boolean inStoreDb) FOR model::wires::ConditionWire»
 	/* ConditionWire: «this-» */
 	condition_«conditionName(from)»(
-		«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+		«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
 	)
 «ENDDEFINE»
 

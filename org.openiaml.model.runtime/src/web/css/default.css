@@ -19,15 +19,20 @@ form {
 	background: #eee;
 }
 
-.exception {
+.exception, div#runtime_errors li {
 	width: 80%;
 	background: #fcc;
 	border: 1px solid #c66;
 	padding: 1em;
 	margin: 1em auto;
+}
+.exception {
 	font-weight: bold;
 }
 .exception span { font-weight: normal; }
+div#runtime_errors li {
+	list-style: none;
+}
 
 /* debug css */
 div#debug {

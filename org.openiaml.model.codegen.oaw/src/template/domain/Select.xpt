@@ -17,7 +17,7 @@
 	$source_class = "«safeNameString(((model::DomainObject) from).name)»";
 	$source_id = "«safeNameString(((model::DomainObject) from).id)»";
 	$query = «EXPAND getQuery FOR this-»;
-	$args = array(«EXPAND template::operations::Parameters::callParameter(true, this, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»); 
+	$args = array(«EXPAND template::operations::Parameters::callParameter(true, this, false, true) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»); 
 	
 	// get the result or return null
 	$row = evaluate_select_wire($db_name, $source_id, $source_class, $query, $args);

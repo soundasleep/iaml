@@ -450,7 +450,7 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		submit();		// submit the form
 		waitForAjax();	// wait for ajax forms
 		
-		// we should now be on the Login Successful page
+		// we should not be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
 		assertProblem();
 		

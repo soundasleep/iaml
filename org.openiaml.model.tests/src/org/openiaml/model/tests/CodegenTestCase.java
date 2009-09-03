@@ -313,6 +313,11 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			System.out.println(this.getPageSource());
 			throw e;	// carry on throwing
 		}
+		
+		// check to make sure we didn't run out of execution time
+		if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageTitle + "'");
+		}
 	}
 
 	/**
@@ -370,6 +375,11 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw e;	// carry on throwing
 		}
 		
+		// check to make sure we didn't run out of execution time
+		if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageText + "'");
+		}
+
 	}
 
 	/**
@@ -405,6 +415,12 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			System.out.println(this.getPageSource());
 			throw e;	// carry on throwing
 		}
+		
+		// check to make sure we didn't run out of execution time
+		if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageText + "'");
+		}
+
 	}
 	
 	/**
@@ -668,6 +684,13 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 				throw new PhpRuntimeExceptionException(f);
 			}
 			throw f;
+		} catch (RuntimeException e) {
+			// perhaps this exception was caused by PHP running
+			// out of execution time?
+			if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+				throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + linkText + "'", e);
+			}
+			throw e; 
 		}
 	}
 	

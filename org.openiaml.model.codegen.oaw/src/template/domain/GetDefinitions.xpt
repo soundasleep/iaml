@@ -10,7 +10,7 @@
 «DEFINE getDomainAttribute FOR model::DomainAttributeInstance-»
 	function get_attribute_instance_«safeName()»($default = false) {
 		/* return the current value for attribute id '«id»' */
-		«IF eContainer.metaType.isAssignableFrom(model::DomainObjectInstance)»
+		«IF model::DomainObjectInstance.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$obj = get_object_instance_«safeName(eContainer)»();
 			return $obj["«attributeName(this)-»"];

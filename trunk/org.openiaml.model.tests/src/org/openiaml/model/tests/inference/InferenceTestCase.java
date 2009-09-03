@@ -648,7 +648,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @param from
 	 * @param to
 	 * @param type
-	 * @return
+	 * @return the wire edge found
 	 * @throws JaxenException 
 	 */
 	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type) throws JaxenException {

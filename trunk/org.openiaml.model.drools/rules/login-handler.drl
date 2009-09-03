@@ -53,8 +53,20 @@ function boolean notPrimaryKey(DomainAttribute attribute) {
 	return !attribute.getName().contains("generated primary key");
 }
 
+function boolean hasExtendsWire(java.util.List wires) {
+	for (Object w : wires) {
+		if (w instanceof ExtendsWire)
+			return true;
+	}
+	return false;
+}
+
 /**
  * Get the query string for selecting this user.
+ *
+ * We can't rely on using only attributes inferred to exist in the
+ * current role, because they may not have been inferred yet (they
+ * would be inferred in a later step).
  *
  * Also iterates over extends so we get parent attributes. 
  */
@@ -63,11 +75,15 @@ function String getUserQueryString(Role role) {
 	for (DomainAttribute attribute : role.getAttributes()) {
 		// ignore primary keys
 		if (notPrimaryKey(attribute)) {
-			// add this attribute as a query
-			if (!q.isEmpty()) {
-				q += " and ";
+			// ignore attributes which are extensions of other attributes;
+			// these attributes will be selected later
+			if (!hasExtendsWire(attribute.getOutEdges())) {
+				// add this attribute as a query
+				if (!q.isEmpty()) {
+					q += " and ";
+				}
+				q += attribute.getName() + " = :" + attribute.getName();
 			}
-			q += attribute.getName() + " = :" + attribute.getName();
 		} 
 	}
 	
@@ -1108,7 +1124,7 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
 		role : Role ( )
-		attribute : DomainAttribute ( eContainer == role, primaryKey == false || isGenerated == false )
+		attribute : DomainAttribute ( eContainer == role, eval(notPrimaryKey(attribute)) )
 		paramWire : ParameterWire ( from == role, to == login_handler )
 		
 		not ( p : ApplicationElementProperty ( eContainer == session, 
@@ -1170,6 +1186,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		
 	then
 		ParameterWire wire = handler.generatedParameterWire(login_handler, session, key, select);
+		handler.setName(wire, attribute.getName());
 		queue.add(wire, drools); 
 	
 end
@@ -1195,6 +1212,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 		
 	then
 		ParameterWire wire = handler.generatedParameterWire(login_handler, session, key, select);
+		handler.setName(wire, attribute.getName());
 		queue.add(wire, drools); 
 	
 end

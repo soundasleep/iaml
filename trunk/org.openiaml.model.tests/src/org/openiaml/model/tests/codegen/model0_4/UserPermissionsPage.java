@@ -18,6 +18,7 @@ public class UserPermissionsPage extends AbstractUserLoginTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(UserPermissionsPage.class);
+		initialiseDatabase();
 	}
 	
 	/**

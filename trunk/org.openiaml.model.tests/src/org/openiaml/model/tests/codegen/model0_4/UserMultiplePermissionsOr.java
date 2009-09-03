@@ -18,6 +18,7 @@ public class UserMultiplePermissionsOr extends AbstractUserLoginTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(UserMultiplePermissionsOr.class);
+		initialiseDatabase();
 	}
 	
 	/**

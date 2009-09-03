@@ -17,6 +17,7 @@ public class UserCreateRoles extends AbstractUserLoginTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(UserCreateRoles.class);
+		initialiseDatabase();
 	}
 	
 	/**

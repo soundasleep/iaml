@@ -51,6 +51,35 @@ class DatabaseQuery {
 	
 	/**
 	 * Execute the given query with the given arguments.
+	 *
+	 * Returns back all arguments into an array. The array
+	 * may be empty if there were no results.
+	 */
+	public function fetch($query, $args) {
+		
+		log_message("[query] $query");
+		log_message("[args] " . $this->debugString($args));
+		
+		$rs = $this->db->prepare($query) 
+			or $this->throwDbError($this->db, "Could not prepare query '$query'");
+
+		$rs->execute($args)
+			or $this->throwDbError($this->db, "Could not execute query '$query'");
+		
+		$result = array();
+		while ($row = $rs->fetch()) {
+			$obj = array();
+			foreach ($row as $key => $value) {
+				$obj[$key] = $value;
+			}
+			$result[] = $obj;
+		}
+		
+		return $result;
+	}
+	
+	/**
+	 * Execute the given query with the given arguments.
 	 * Returns a handle to the database.
 	 */
 	public function execute($query, $args) {

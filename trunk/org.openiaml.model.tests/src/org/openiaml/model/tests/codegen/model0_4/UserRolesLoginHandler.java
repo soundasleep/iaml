@@ -20,6 +20,7 @@ public class UserRolesLoginHandler extends AbstractUserLoginTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(UserRolesLoginHandler.class);
+		initialiseDatabase();
 	}
 	
 	/**
@@ -59,12 +60,16 @@ public class UserRolesLoginHandler extends AbstractUserLoginTestCase {
 		assertNoProblem();
 	}
 
+	@Override
+	protected String getDatabaseName() {
+		return "output/users_1233b454017_bb.db";
+	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = super.getDatabaseInitialisers();
 		s.add("CREATE TABLE Registered_User (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, User_generated_primary_key INTEGER NOT NULL)");
-		s.add("INSERT INTO Registered_User (generated_primary_key, User_generated_primary_key) VALUES (44, 22)");
+		s.add("INSERT INTO Registered_User (generated_primary_key, User_generated_primary_key) VALUES (44, 32)");
 		return s;
 	}
 	

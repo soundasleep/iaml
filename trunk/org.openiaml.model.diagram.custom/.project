@@ -3,6 +3,16 @@
 	<name>org.openiaml.model.diagram.custom</name>
 	<comment></comment>
 	<projects>
+		<project>org.openiaml.model.diagram</project>
+		<project>org.openiaml.model.diagram.condition</project>
+		<project>org.openiaml.model.diagram.domain_object</project>
+		<project>org.openiaml.model.diagram.domain_object_instance</project>
+		<project>org.openiaml.model.diagram.domain_store</project>
+		<project>org.openiaml.model.diagram.element</project>
+		<project>org.openiaml.model.diagram.operation</project>
+		<project>org.openiaml.model.diagram.user_store</project>
+		<project>org.openiaml.model.diagram.visual</project>
+		<project>org.openiaml.model.diagram.wire</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

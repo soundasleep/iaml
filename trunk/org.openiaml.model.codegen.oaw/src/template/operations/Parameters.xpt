@@ -18,9 +18,11 @@
 
 /**
  * Parameters as part of an operation call.
+ *
+ * @param addKeys add associative array keys to PHP parameters
  */
-«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::wires::ParameterWire»
-	«IF php»
+«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb, Boolean addKeys) FOR model::wires::ParameterWire»
+	«IF addKeys && php»
 		«REM»add associative keys for named parameter wires«ENDREM»
 		«IF name != null && name.length > 0»
 			"«safeNameString(name)»" =>

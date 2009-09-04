@@ -26,4 +26,5 @@ Require-Bundle: org.junit,
  org.openiaml.model.diagram.wire;bundle-version="0.3.1",
  org.openiaml.model.tests;bundle-version="0.3.1",
  org.openiaml.model.diagram.custom;bundle-version="0.3.1",
- org.openiaml.model.actions;bundle-version="0.3.1"
+ org.openiaml.model.actions;bundle-version="0.3.1",
+ org.openiaml.model.diagram.helpers;bundle-version="0.3.1"

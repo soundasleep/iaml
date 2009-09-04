@@ -8,8 +8,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.openiaml.model.diagramextensions.GeneratedElementDeleter;
-import org.openiaml.model.diagramextensions.GeneratedElementHandler;
+import org.openiaml.model.diagram.helpers.GeneratedElementDeleter;
+import org.openiaml.model.diagram.helpers.GeneratedElementHandler;
 import org.openiaml.model.model.GeneratedElement;
 
 /**

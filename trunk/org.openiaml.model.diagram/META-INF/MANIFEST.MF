@@ -37,6 +37,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
  org.eclipse.draw2d;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
- org.eclipse.emf.validation;visibility:=reexport
+ org.eclipse.emf.validation;visibility:=reexport,
+ org.openiaml.model.diagram.helpers;bundle-version="0.3.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-LazyStart: true

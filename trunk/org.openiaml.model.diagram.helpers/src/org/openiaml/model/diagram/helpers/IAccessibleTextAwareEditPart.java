@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.diagramextensions;
+package org.openiaml.model.diagram.helpers;
 
 /**
  * An extension to generated EditParts in GMF which forces the

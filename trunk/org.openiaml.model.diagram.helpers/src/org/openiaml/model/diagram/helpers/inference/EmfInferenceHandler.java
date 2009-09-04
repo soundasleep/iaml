@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.inference;
+package org.openiaml.model.diagram.helpers.inference;
 
 import java.util.List;
 
@@ -16,6 +16,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.openiaml.model.inference.EcoreCreateElementsHelper;
+import org.openiaml.model.inference.EcoreInferenceHandler;
+import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.inference.InferenceException;
 
 /**
  * <p>Wraps {@link EcoreInferenceHandler} with {@link AbstractTransactionalCommand}s,

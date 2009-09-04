@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.diagramextensions;
+package org.openiaml.model.diagram.helpers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.NamedElement;

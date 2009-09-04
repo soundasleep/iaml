@@ -6,5 +6,5 @@
 
 «AROUND implementsList FOR gmfgen::GenExternalNodeLabel»
 	«targetDef.proceed()»,
-	org.openiaml.model.diagramextensions.IAccessibleTextAwareEditPart
+	org.openiaml.model.diagram.helpers.IAccessibleTextAwareEditPart
 «ENDAROUND»

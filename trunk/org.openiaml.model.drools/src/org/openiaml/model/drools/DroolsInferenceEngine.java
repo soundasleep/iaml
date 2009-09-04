@@ -30,9 +30,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.model.diagramextensions.InfiniteSubProgressMonitor;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
+import org.openiaml.model.inference.InfiniteSubProgressMonitor;
 import org.openiaml.model.model.GeneratedElement;
 
 /**

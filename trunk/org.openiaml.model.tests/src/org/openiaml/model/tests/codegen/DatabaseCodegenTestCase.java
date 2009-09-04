@@ -67,6 +67,20 @@ public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 		conn.close();
 		refreshProject();
 		assertTrue("Database should now exist", db.exists());
+		
+		databaseInitialised = true;
+	}
+	
+	private boolean databaseInitialised = false;
+	
+	/**
+	 * Has {@link #initialiseDatabase()} been successfully
+	 * called?
+	 * 
+	 * @return
+	 */
+	protected boolean hasDatabaseBeenInitialised() {
+		return databaseInitialised;
 	}
 	
 	/**

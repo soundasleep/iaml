@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.diagramextensions;
+package org.openiaml.model.diagram.helpers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,8 +21,8 @@ import org.eclipse.gmf.runtime.diagram.core.commands.DeleteCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.openiaml.model.diagram.helpers.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
-import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;

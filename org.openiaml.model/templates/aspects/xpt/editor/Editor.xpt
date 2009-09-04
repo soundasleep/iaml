@@ -61,7 +61,7 @@
 		@Override
 		public void run() {
 			// do we need to confirm?
-			org.openiaml.model.diagramextensions.GeneratedElementHandler handler = new org.openiaml.model.diagramextensions.GeneratedElementHandler(selected);
+			org.openiaml.model.diagram.helpers.GeneratedElementHandler handler = new org.openiaml.model.diagram.helpers.GeneratedElementHandler(selected);
 			if (handler.needsConfirmation()) {
 				for (org.eclipse.emf.ecore.EObject element : handler.getConfirmationElements()) {
 					String title = "Generated element is in use";

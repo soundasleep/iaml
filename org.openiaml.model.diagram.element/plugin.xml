@@ -226,7 +226,7 @@
       <viewProvider class="org.openiaml.model.model.diagram.element.providers.IamlViewProvider">
          <Priority name="Lowest"/>
          <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
-            <method name="getType()" value="iaml,iaml_visual,iaml_wire,iaml_domain_object,iaml_operation,iaml_element,iaml_domain_store,iaml_condition,iaml_domain_object_instance"/>
+            <method name="getType()" value="iaml,iaml_visual,iaml_wire,iaml_domain_object,iaml_operation,iaml_element,iaml_domain_store,iaml_condition,iaml_domain_object_instance,iaml_user_store"/>
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Element"/>

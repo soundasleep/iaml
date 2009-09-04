@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.diagramextensions;
+package org.openiaml.model.diagram.helpers;
 
 import java.util.ArrayList;
 import java.util.List;

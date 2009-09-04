@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.diagramextensions;
+package org.openiaml.model.inference;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;

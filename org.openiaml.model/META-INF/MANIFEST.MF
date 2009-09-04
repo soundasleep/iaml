@@ -9,7 +9,6 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.openiaml.model,
  org.openiaml.model.codegen,
- org.openiaml.model.diagramextensions,
  org.openiaml.model.impl,
  org.openiaml.model.inference,
  org.openiaml.model.model,
@@ -39,10 +38,5 @@ Export-Package: org.openiaml.model,
  org.openiaml.model.xpath
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.gef,
- org.eclipse.gmf.runtime.emf.type.core,
- org.eclipse.gmf,
- org.eclipse.gmf.runtime.notation,
- org.eclipse.gmf.runtime.diagram.core,
- org.eclipse.gmf.runtime.diagram.ui
+ org.eclipse.core.resources;bundle-version="3.5.0"
 Bundle-ActivationPolicy: lazy

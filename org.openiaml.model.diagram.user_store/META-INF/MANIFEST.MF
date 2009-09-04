@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.openiaml.model.model.diagram.user_store.part.IamlDiagramEditorPlugin
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
-Export-Package: org.openiaml.model.model.diagram.user_store.edit.parts, 
+Export-Package: org.openiaml.model.model.diagram.user_store.edit.parts,
  org.openiaml.model.model.diagram.user_store.part,
  org.openiaml.model.model.diagram.user_store.providers
 Require-Bundle: org.eclipse.core.runtime,
@@ -37,6 +37,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.openiaml.model.edit;visibility:=reexport,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.emf.validation;visibility:=reexport,
- org.eclipse.gef;visibility:=reexport
+ org.eclipse.gef;visibility:=reexport,
+ org.openiaml.model.diagram.helpers;bundle-version="0.3.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-LazyStart: true

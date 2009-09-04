@@ -14,10 +14,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.custom.actions.ProgressEnabledAction;
+import org.openiaml.model.diagram.helpers.inference.EmfInferenceHandler;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
-import org.openiaml.model.inference.EmfInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 

@@ -553,10 +553,10 @@ public class UserRoles extends InferenceTestCase {
 		
 		// store
 		UserStore store = assertHasUserStore(root, "user store");		
-		Role guest = assertHasRole(store, "User");
+		Role user = assertHasRole(store, "User");
 		
 		// generated select wire		
-		SelectWire selectWire = assertHasSelectWire(root, guest, instance, "select");
+		SelectWire selectWire = assertHasSelectWire(root, user, instance, "select");
 		assertGenerated(selectWire);
 		
 		// the query should be one of these values

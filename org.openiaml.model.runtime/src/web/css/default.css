@@ -34,6 +34,12 @@ div#runtime_errors li {
 	list-style: none;
 }
 
+h2 { margin-top: .7em; margin-bottom: .3em; }
+table { border: 1px solid #aab; border-collapse: collapse; }
+table th { background: #ccd; }
+table th, table td { padding: 4px; border: 1px solid #aab; }
+table tr:nth-child(odd) { background: #eef; }
+
 /* debug css */
 div#debug {
 	border: 1px solid #666;

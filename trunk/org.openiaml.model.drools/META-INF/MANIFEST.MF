@@ -7,7 +7,8 @@ Export-Package: org.openiaml.model.drools,
  org.openiaml.model.drools.export
 Require-Bundle: org.openiaml.model,
  org.eclipse.core.runtime,
- ca.ecliptical.emf.xpath;bundle-version="2.0.1"
+ ca.ecliptical.emf.xpath;bundle-version="2.0.1",
+ org.eclipse.emf.ecore;bundle-version="2.5.0"
 Bundle-ClassPath: lib/reqs/ant-1.6.5.jar,
  lib/reqs/antlr-runtime-3.0.jar,
  lib/reqs/ant-nodeps-1.6.5.jar,

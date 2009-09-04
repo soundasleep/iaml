@@ -40,7 +40,7 @@ public class UserPermissionsPage extends AbstractUserLoginTestCase {
 		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
 		assertNoProblem();
 		
-		gotoSitemapThenPage(sitemap, "target");
+		gotoSitemapWithProblem(sitemap, "target");
 		assertTitleNotSame("target");
 		assertProblem();		// who knows where we are?
 	}

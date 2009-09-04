@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
@@ -26,6 +27,7 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 	 * This method does not check whether the login was
 	 * successful or not.
 	 * 
+	 * @see #actualDoStandardLoginAs(String, String)
 	 * @param email
 	 * @param password
 	 * @return the sitemap file
@@ -33,17 +35,7 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 	public IFile doStandardLoginAs(String email, String password) throws Exception {
 		IFile sitemap = beginAtSitemapThenPage("login");
 		
-		String emailField = getLabelIDForText("email");
-		assertLabeledFieldEquals(emailField, "");
-		setLabeledFormElementField(emailField, email);
-	
-		String passwordField = getLabelIDForText("password");
-		assertLabeledFieldEquals(passwordField, "");
-		setLabeledFormElementField(passwordField, password);
-		
-		// submit form
-		submit();
-		waitForAjax();
+		actualDoStandardLoginAs(email, password);
 		
 		return sitemap;
 	}
@@ -56,6 +48,7 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 	 * This method does not check whether the login was
 	 * successful or not.
 	 * 
+	 * @see #actualDoStandardLoginAs(String, String)
 	 * @param email
 	 * @param password
 	 * @return the sitemap file
@@ -63,19 +56,29 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 	public IFile doStandardLoginAs(IFile sitemap, String email, String password) throws Exception {
 		gotoSitemapThenPage(sitemap, "login");
 		
+		actualDoStandardLoginAs(email, password);
+		
+		return sitemap;
+	}
+	
+	/**
+	 * Actually do the login.
+	 * 
+	 * @see #doStandardLoginAs(String, String)
+	 * @see #doStandardLoginAs(IFile, String, String)
+	 */
+	protected void actualDoStandardLoginAs(String email, String password) throws Exception {
 		String emailField = getLabelIDForText("email");
 		assertLabeledFieldEquals(emailField, "");
 		setLabeledFormElementField(emailField, email);
 	
 		String passwordField = getLabelIDForText("password");
 		assertLabeledFieldEquals(passwordField, "");
-		assertLabeledFieldEquals(passwordField, password);
+		setLabeledFormElementField(passwordField, password);
 		
 		// submit form
 		submit();
 		waitForAjax();
-		
-		return sitemap;
 	}
 	
 	@Override
@@ -91,6 +94,35 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (22, 'Default Role', 'default@openiaml.org', 'test123')");
 		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (32, 'Registered User', 'registered@openiaml.org', 'test123')");
 		return s;
+	}
+	
+	/**
+	 * Check that we have created the correct database in
+	 * {@link #getDatabaseName()}; i.e. check that no more
+	 * than one database exists in the output folder
+	 * after visiting the home page.
+	 * 
+	 */
+	public void testCorrectDatabase() throws Exception {
+		beginAtSitemapThenPage("Home");
+		
+		// the output database name should start with 'output/'
+		assertTrue("Database name '" + getDatabaseName() + "' should start with 'output/'", getDatabaseName().startsWith("output/"));
+		String databaseName = getDatabaseName().substring(getDatabaseName().lastIndexOf("/") + 1);
+		
+		refreshProject();
+		IResource[] resources = getProject().getFolder("output").members(false);
+		for (IResource res : resources) {
+			if (res.getName().endsWith(".db")) {
+				if (!res.getName().equals("stored_events.db") && !res.getName().endsWith(databaseName)) {
+					// found an extra database
+					fail("Found an extra database: " + res.getName() + " (" + res + ")");
+				}
+			}
+		}
+		
+		// check that the database has been initialised normally
+		assertTrue("Database was not initialised by default", hasDatabaseBeenInitialised());
 	}
 	
 }

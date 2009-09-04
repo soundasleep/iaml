@@ -19,7 +19,7 @@ public class UserCreateRoles extends AbstractUserLoginTestCase {
 		root = loadAndCodegen(UserCreateRoles.class);
 		initialiseDatabase();
 	}
-	
+
 	/**
 	 * Check the initial state of the application.
 	 * 
@@ -48,7 +48,7 @@ public class UserCreateRoles extends AbstractUserLoginTestCase {
 		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
 		assertNoProblem();
 		
-		gotoSitemapThenPage(sitemap, "target");
+		gotoSitemapWithProblem(sitemap, "target");
 		assertTitleNotSame("target");
 		assertProblem();		// who knows where we are?
 	}
@@ -82,12 +82,14 @@ public class UserCreateRoles extends AbstractUserLoginTestCase {
 			setLabeledFormElementField(email, sourceEmail);
 		
 			String password = getLabelIDForText("password");
-			assertLabeledFieldEquals(password, sourcePassword);
+			assertLabeledFieldEquals(password, "");
+			setLabeledFormElementField(email, sourcePassword);
 		}
 		
 		// click the button
 		clickButtonWithText("create new user");
 		waitForAjax();
+		assertNoProblem();
 		
 		// lets try and login now!
 		doStandardLoginAs(sitemap, sourceEmail, sourcePassword);

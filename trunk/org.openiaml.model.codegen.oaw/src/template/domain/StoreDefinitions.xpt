@@ -180,7 +180,7 @@
 	
 	// recurse through the tree to find the attribute, and save it
 	«LET (model::DomainObject) from AS fromObject»
-		$db_query = update_«safeNameString(fromObject.name)»_attribute_instance_from_«safeNameString(fromObject.name)»(
+		$db_query = update_«safeName(fromObject)»_attribute_instance_from_«safeName(fromObject)»(
 				$instance,
 				$attribute_name,
 				$arg0);

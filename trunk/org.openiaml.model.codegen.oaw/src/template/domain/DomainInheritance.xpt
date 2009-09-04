@@ -89,13 +89,13 @@ function update_«safeName(target)»_attribute_instance_from_«safeName()»($instanc
 		«IF target == this»
 			// in same instance; no FK resolving needed
 			if (!isset($instance["«safeNameString(targetPk.name)»"]))
-				throw new IamlRuntimeException("self instance[«safeNameString(targetPk.name)» was not set");
+				throw new IamlRuntimeException("self instance[«safeNameString(targetPk.name)»] was not set");
 			$source_value = $instance["«safeNameString(targetPk.name)»"];
 		«ELSE»
 			// subclass FK
 			«LET attributes.selectFirst(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.contains(targetPk)) AS sourceFk»
 				if (!isset($instance["«safeNameString(sourceFk.name)»"]))
-					throw new IamlRuntimeException("parent instance[«safeNameString(sourceFk.name)» was not set");
+					throw new IamlRuntimeException("parent instance[«safeNameString(sourceFk.name)»] was not set");
 				$source_value = $instance["«safeNameString(sourceFk.name)»"];
 			«ENDLET»
 		«ENDIF»

@@ -33,11 +33,11 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
-		s.add("CREATE TABLE User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (12, 'User Default', 'default@jevon.org', 'test1')");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (22, 'User Two', 'target@jevon.org', 'test2')");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (42, 'User Three', 'test3@jevon.org', 'test3')");
-		s.add("INSERT INTO User (id, name, email, password) VALUES (82, 'User Four', 'test4@jevon.org', 'test4')");
+		s.add("CREATE TABLE User (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");
+		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (12, 'User Default', 'default@jevon.org', 'test1')");
+		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (22, 'User Two', 'target@jevon.org', 'test2')");
+		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (42, 'User Three', 'test3@jevon.org', 'test3')");
+		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (82, 'User Four', 'test4@jevon.org', 'test4')");
 		return s;
 	}
 	

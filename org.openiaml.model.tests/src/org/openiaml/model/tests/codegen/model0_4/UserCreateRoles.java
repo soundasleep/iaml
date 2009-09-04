@@ -83,14 +83,14 @@ public class UserCreateRoles extends AbstractUserLoginTestCase {
 		
 			String password = getLabelIDForText("password");
 			assertLabeledFieldEquals(password, "");
-			setLabeledFormElementField(email, sourcePassword);
+			setLabeledFormElementField(password, sourcePassword);
 		}
 		
 		// click the button
 		clickButtonWithText("create new user");
 		waitForAjax();
 		assertNoProblem();
-		
+	
 		// lets try and login now!
 		doStandardLoginAs(sitemap, sourceEmail, sourcePassword);
 		assertNoProblem();

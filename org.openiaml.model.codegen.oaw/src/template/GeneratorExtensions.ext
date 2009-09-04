@@ -322,25 +322,25 @@ isAutosaveOff(model::DomainObjectInstance this) :
 isAutosaveOff(emf::EObject this):
 	false;
 
-getPrimaryKey(model::DomainAttributeInstance this) :
+model::DomainAttribute getPrimaryKey(model::DomainAttributeInstance this) :
 	if inEdges.typeSelect(model::wires::NewInstanceWire).size >= 1 then
 		getPrimaryKey(inEdges.typeSelect(model::wires::NewInstanceWire).first())
 	else if eContainer.metaType.isAssignableFrom(model::DomainObjectInstance) then
 		getPrimaryKey((model::DomainObjectInstance) eContainer);
 
-getPrimaryKey(model::wires::NewInstanceWire this) :
+model::DomainAttribute getPrimaryKey(model::wires::NewInstanceWire this) :
 	getPrimaryKey(from);
 
-getPrimaryKey(model::DomainObject this) :
+model::DomainAttribute getPrimaryKey(model::DomainObject this) :
 	attributes.selectFirst( e | e.primaryKey );
 
-getPrimaryKey(model::DomainAttribute this) :
+model::DomainAttribute getPrimaryKey(model::DomainAttribute this) :
 	getPrimaryKey(eContainer);
 
-getPrimaryKey(model::DomainObjectInstance this) :
+model::DomainAttribute getPrimaryKey(model::DomainObjectInstance this) :
 	getPrimaryKey(inEdges.typeSelect(model::wires::NewInstanceWire).first());
 
-getPrimaryKey(emf::EObject this) :
+model::DomainAttribute getPrimaryKey(emf::EObject this) :
 	null;
 
 /** 

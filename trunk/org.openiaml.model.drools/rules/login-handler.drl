@@ -1092,7 +1092,7 @@ rule "Create Select Wire between Domain Object types [user]"
 		String q = getUserQueryString(role);
 			
 		SelectWire wire = handler.generatedSelectWire(login_handler, login_handler, role, instance);
-		handler.setName(wire, "select " + role);
+		handler.setName(wire, "select");
 		handler.setQuery(wire, q);
 		queue.add(wire, drools); 
 

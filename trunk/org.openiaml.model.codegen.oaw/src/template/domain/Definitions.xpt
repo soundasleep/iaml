@@ -18,13 +18,11 @@
 «ENDDEFINE»
 «DEFINE domainObjectDefinitions(Boolean php) FOR model::InternetApplication»
 	«IF php»
+		«EXPAND template::domain::Includes::getInclude FOREACH getRoot().getAllDomainObjects()» 
+
 		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
 		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
-		«EXPAND DomainInheritance::allCasts FOREACH getRoot().getAllDomainObjects()»
 
-		«REM»creating new instances«ENDREM»
-		«EXPAND DomainInheritance::createNewInstanceRecursively FOREACH getRoot().getAllDomainObjects()»
-		
 		/**
 		 * Get all of the domain joins required in this generated
 		 * application. This is used to properly compose
@@ -49,9 +47,10 @@
  */
 «DEFINE domainAttributeDefinitions(Boolean php) FOR model::InternetApplication»
 	«IF php»
-		«EXPAND GetDefinitions::getDomainAttribute FOREACH getAllDomainAttributeInstances()»
+		«EXPAND Includes::getInclude FOREACH getAllDomainAttributeInstances()»
+	«ELSE»
+		«EXPAND StoreDefinitions::storeDomainAttribute(php) FOREACH getAllDomainAttributeInstances()»
 	«ENDIF»
-	«EXPAND StoreDefinitions::storeDomainAttribute(php) FOREACH getAllDomainAttributeInstances()»
 «ENDDEFINE»
 «DEFINE domainAttributeDefinitions(Boolean php) FOR model::visual::Page»
 	«IF php»

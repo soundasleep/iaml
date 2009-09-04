@@ -8,6 +8,10 @@
 
 /* code to get domain attributes */
 «DEFINE getDomainAttribute FOR model::DomainAttributeInstance-»
+	/**
+	 * Get the attribute instance '«safeNameString(name)»' contained in
+	 * '«safeName(eContainer)»'.
+	 */
 	function get_attribute_instance_«safeName()»($default = false) {
 		/* return the current value for attribute id '«id»' */
 		«IF model::DomainObjectInstance.isInstance(eContainer)»
@@ -131,7 +135,7 @@
 			// (future calls will create the new instance)
 			// (this also handles autosave=off)
 			log_message("Resetting new object instance 'new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»')");
-			unset($_SESSION['new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»']);
+			unset($_SESSION['new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»']);
 			
 			// return the current session object (i.e. the new object)
 			return get_new_domain_object_«safeName()-»(«IF isAutosaveOff()»false«ENDIF»);
@@ -149,6 +153,7 @@
 «ENDDEFINE»
 
 «DEFINE getNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»
+	«LET ((model::DomainObject) wire.from) AS sourceObject»
 	function create_new_domain_object_«safeName()»() {
 		// insert a new one
 		log_message("Inserting new domain object [session] '«safeNameString(name)»' ('«safeNameString(id)»')");
@@ -157,7 +162,7 @@
 		«EXPAND Select::selectDatabase FOR wire.from»
 		
 		// create query
-		$query = "INSERT INTO «safeNameString(((model::DomainObject) wire.from).name)»
+		$query = "INSERT INTO «safeNameString(sourceObject.name)»
 					DEFAULT VALUES";
 		
 		// execute			
@@ -175,7 +180,7 @@
 	function get_new_domain_object_«safeName()-»($force = true) {
 		«IF containingSession() != null»
 			// in the session
-			if (has_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
+			if (has_session('new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»', false) === false) {
 				// force creation?
 				«IF isAutosaveOff()»
 					if ($force == false) {
@@ -185,25 +190,30 @@
 				«ENDIF»
 				
 				// create the new object 
-				create_new_domain_object_«safeName()»();
+				$instance = create_new_instance_«safeName(sourceObject)-»();
+				
+				$_SESSION['new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»'] =
+					 $instance["«safeNameString(getPrimaryKey(this).name)-»"];
 			}
 				
 			// return the newly inserted object
 			«EXPAND Select::selectDatabase FOR wire.from»
 			
-			// create query
-			$query = "SELECT * FROM «safeNameString(((model::DomainObject) wire.from).name)»
-				WHERE «attributeName(getPrimaryKey(this))-»=?";
 			$args = array(require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»'));
+
+			log_message("Selecting previously created new object [session]"); 
+			$result = evaluate_select_wire(
+				$db_name,
+				'«safeNameString(sourceObject.id)»',
+				'«safeNameString(sourceObject.name)»',
+				'«safeNameString(sourceObject.name)».«attributeName(getPrimaryKey(this))-» = ?',
+				$args
+			);
 			
-			// get just the first result
-			$db_query = new DatabaseQuery($db_name);
-			$row = $db_query->fetchFirst($query, $args);
+			if ($result === null)
+				throw new IamlRuntimeException("Could not get new session domain object '«safeNameString(id)»': args = " . print_r($args, true));
 			
-			if ($row === null) {
-				throw new IamlRuntimeException("No results found for query '$query'");
-			}
-			return $row;
+			return $result;
 		«ELSE»
 			// in the page
 			if (get_application_value('new_object_«safeNameString(id)-»', false) === false) {
@@ -215,47 +225,35 @@
 					}
 				«ENDIF»
 
-				// insert a new one
-				log_message("Inserting new domain object [page] '«safeNameString(name)»' ('«safeNameString(id)»')");
-				
-				// where are we loading it from? sets $db_name
-				«EXPAND Select::selectDatabase FOR wire.from»
-				
-				// create query
-				$query = "INSERT INTO «safeNameString(((model::DomainObject) wire.from).name)»
-					DEFAULT VALUES";
-					
-				// execute query
-				$db_query = new DatabaseQuery($db_name);
-				$db = $db_query->execute($query, array());
-				
-				// get the inserted id
-				$new_id = $db->lastInsertId("«attributeName(getPrimaryKey(this))-»");
-				log_message("new page variable id [«attributeName(getPrimaryKey(this))-»]: $new_id");
+				// create the new object 
+				$instance = create_new_instance_«safeName(sourceObject)»();
+				log_message("created instance: " . print_r($instance, true));
 
-				// add a link to this
-				set_application_value('new_object_«safeNameString(id)-»', $new_id);
+				set_application_value('new_object_«safeNameString(id)-»', $instance["«safeNameString(getPrimaryKey(this).name)-»"]);
 			}
 				
 			// return the newly inserted object
 			«EXPAND Select::selectDatabase FOR wire.from»
 			
-			// create query
-			$query = "SELECT * FROM «safeNameString(((model::DomainObject) wire.from).name)»
-				WHERE «attributeName(getPrimaryKey(this))-»=?";
 			$args = array(get_application_value('new_object_«safeNameString(id)-»', 'missing'));
-			log_message("selecting previously created new page object: " . print_r($args, true));
 
-			// execute query
-			$db_query = new DatabaseQuery($db_name);
-			$row = $db_query->fetchFirst($query, $args);
+			log_message("Selecting previously created new object [page]");
+			 
+			$result = evaluate_select_wire(
+				$db_name,
+				'«safeNameString(sourceObject.id)»',
+				'«safeNameString(sourceObject.name)»',
+				'«safeNameString(sourceObject.name)».«attributeName(getPrimaryKey(this))-» = ?',
+				$args
+			);
 			
-			if ($row === null) {
-				throw new IamlRuntimeException("No results found for query '$query'");
-			}
-			return $row;
+			if ($result === null)
+				throw new IamlRuntimeException("Could not get new page domain object '«safeNameString(id)»': args = " . print_r($args, true));
+				
+			return $result;
 		«ENDIF»
 	}
+	«ENDLET»
 «ENDDEFINE»
 
 «DEFINE newDomainObjectTemplate FOR model::WireEdgesSource»

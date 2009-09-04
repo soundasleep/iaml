@@ -76,7 +76,8 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			setLabeledFormElementField(email, NEW_EMAIL);
 		
 			String password = getLabelIDForText("password");
-			assertLabeledFieldEquals(password, NEW_PASSWORD);
+			assertLabeledFieldEquals(password, "");
+			setLabeledFormElementField(password, NEW_PASSWORD);
 		}
 		
 		// click the button

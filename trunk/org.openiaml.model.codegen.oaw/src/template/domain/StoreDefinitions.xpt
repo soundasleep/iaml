@@ -149,43 +149,46 @@
 
 «DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»
 	// it should already be created, or this will create a new one
-	$existing = get_new_domain_object_«safeName()-»(true);	/* force creation */
-	$new_id = $existing["«attributeName(getPrimaryKey(this))-»"];
+	$instance = get_new_domain_object_«safeName()-»(true);	/* force creation */
+	$new_id = $instance["«attributeName(getPrimaryKey(this))-»"];
+
 	log_message("updating existing new object '$new_id', attribute = '$attribute_name'");
+
+	// get the current instance (complete subclass) as an associative
+	// array (also deals with incoming values from superclasses, etc) 
+	$instance = get_object_instance_«safeName(wire.to)»();
 	
-	// where are we loading it from? sets $db
-	«EXPAND Select::selectDatabase FOR wire.from»
-		
-	// create query
-	$query = "UPDATE «safeNameString(((model::DomainObject) wire.from).name)»
-		SET $attribute_name = ?
-		WHERE «attributeName(getPrimaryKey(this))-» = ?";
-	
-	$args = array($arg0, $new_id);
-	
-	$db_query = new DatabaseQuery($db_name);
-	$db_query->execute($query, $args);
-	log_message("attribute '$attribute_name' set to '$arg0'");
+	// recurse through the tree to find the attribute, and save it
+	«LET (model::DomainObject) wire.from AS fromObject»
+		$db_query = update_«safeName(fromObject)»_attribute_instance_from_«safeName(fromObject)»(
+				$instance,
+				$attribute_name,
+				$arg0);
+		if ($db_query === null) {
+			// could not update attribute successfully
+			throw new IamlRuntimeException("Could not update attribute '$attribute_name' successfully: could not find attribute in subclass tree");
+		}
+	«ENDLET»
 «ENDDEFINE»
 
 «DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»
 	/* selection wire «this» (for storing values), assumes $arg0 exists */
 	
-	// where are we loading it from? sets $db_name
-	«EXPAND Select::selectDatabase FOR from»
+	// get the current instance (complete subclass) as an associative
+	// array (also deals with incoming values from superclasses, etc) 
+	$instance = get_object_instance_«safeName(to)»();
 	
-	// create query
-	$query = "UPDATE «safeNameString(((model::DomainObject) from).name)»
-		SET $attribute_name = ?
-		WHERE " . «EXPAND Select::getQuery FOR this-»;
-	$args = array($arg0);
-	$args2 = array(«EXPAND template::operations::Parameters::callParameter(true, this, false, true) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
-	foreach ($args2 as $k) {
-		$args[] = $k;
-	}
-	
-	$db_query = new DatabaseQuery($db_name);
-	$db_query->execute($query, $args);
+	// recurse through the tree to find the attribute, and save it
+	«LET (model::DomainObject) from AS fromObject»
+		$db_query = update_«safeNameString(fromObject.name)»_attribute_instance_from_«safeNameString(fromObject.name)»(
+				$instance,
+				$attribute_name,
+				$arg0);
+		if ($db_query === null) {
+			// could not update attribute successfully
+			throw new IamlRuntimeException("Could not update attribute '$attribute_name' successfully: could not find attribute in subclass tree");
+		}
+	«ENDLET»
 «ENDDEFINE»
 
 /** to find the relevant domain attribute set method */

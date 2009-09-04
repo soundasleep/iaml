@@ -8,43 +8,17 @@
 «DEFINE allCasts FOR model::DomainObject»
 	«REM»expand self cast«ENDREM»
 	«EXPAND castSourceAsTarget(this) FOR this»
+	«EXPAND updateSourceAttributeFromTarget(this) FOR this»
 	
 	«REM»expand all direct extends«ENDREM»
 	«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS target»
 		«EXPAND castSourceAsTarget(target) FOR this»
 	«ENDFOREACH»
+	«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS target»
+		«EXPAND updateSourceAttributeFromTarget(this) FOR target»
+	«ENDFOREACH»
 «ENDDEFINE»
 
-«REM»
-// return an object of the accumulated data, or null if it could
-// not be cast
-function cast_[source]_as_[target]($instance) {
-	if [source] == [target]
-		return $instance;
-
-	foreach subclass of [source]
-		attribute source_key = [source].primaryKey;
-		attribute target_key = subclass.attributes ( k | k extends source_key )
-		$source_value = $instance[source_key];
-		
-		$new_instance = (select * from subclass where target_key = ?)($source_value);
-		
-		if ($new_instance) {
-			// add $instance to $new_instance
-			foreach ($attr in $instance) {
-				if (isset($new_instance[$attr]))
-					$new_instance[[source] '.' $attr] = $instance[$attr];
-				else
-					$new_instance[$attr] = $new_instance[$attr];
-			}
-			return cast_[subclass]_as_[target]($new_instance);
-		} else {
-			return null;
-		}
-
-}
-
-«ENDREM»
 «DEFINE castSourceAsTarget(model::DomainObject target) FOR model::DomainObject»
 /**
  * Try to cast a '«name»' into a subclass '«target.name»'. 
@@ -99,6 +73,87 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 }
 «ENDDEFINE»
 
+«DEFINE updateSourceAttributeFromTarget(model::DomainObject target) FOR model::DomainObject»
+/**
+ * Try to update an attribute in the subclass '«target.name»' [B]
+ * from an initial instance of '«name»' [A].
+ *
+ * Will only update one attribute, and will bail once this attribute
+ * has been found.
+ *
+ * Returns the db_query if the attribute update was successful; null if not.
+ */
+function update_«safeName(target)»_attribute_instance_from_«safeName()»($instance, $attribute_name, $arg0) {
+	«LET target.attributes.selectFirst(a | a.primaryKey) AS targetPk»
+		// properties for '«name»'
+		«IF target == this»
+			// in same instance; no FK resolving needed
+			if (!isset($instance["«safeNameString(targetPk.name)»"]))
+				throw new IamlRuntimeException("self instance[«safeNameString(targetPk.name)» was not set");
+			$source_value = $instance["«safeNameString(targetPk.name)»"];
+		«ELSE»
+			// subclass FK
+			«LET attributes.selectFirst(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.contains(targetPk)) AS sourceFk»
+				if (!isset($instance["«safeNameString(sourceFk.name)»"]))
+					throw new IamlRuntimeException("parent instance[«safeNameString(sourceFk.name)» was not set");
+				$source_value = $instance["«safeNameString(sourceFk.name)»"];
+			«ENDLET»
+		«ENDIF»
+			
+		«EXPAND Select::selectDatabase FOR target»
+
+		$attribute_name_resolved = null;
+		«REM»only select attributes which are not extensions of subclass attributes«ENDREM»
+		«FOREACH target.attributes.select(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainAttribute).isEmpty) AS targetAttribute»
+		if ($attribute_name == '«safeNameString(targetAttribute.name)»') {
+			/* attribute '«safeNameString(targetAttribute.name)»' */
+			«IF target == this»
+				/* in identical instance */
+				$attribute_name_resolved = '«safeNameString(targetAttribute.name)»';
+			«ELSE»
+				/* an inherited attribute */
+				«LET attributes.selectFirst(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.contains(targetAttribute)) AS sourceAttribute»
+					«IF sourceAttribute != null»
+						$attribute_name_resolved = '«safeNameString(sourceAttribute.name)»'; 
+					«ELSE»
+						throw new IamlRuntimeException("Could not resolve target attribute '«safeNameString(targetAttribute.name)»' for source '«safeName(target)»' from '«safeName()»'");
+					«ENDIF»
+				«ENDLET»
+			«ENDIF»
+			log_message("[update attribute instance] Resolved attribute '$attribute_name' as '$attribute_name_resolved'");
+		}
+		«ENDFOREACH»
+		
+		// have we resolved the attribute?
+		if ($attribute_name_resolved !== null) {
+			$query = "UPDATE «safeNameString(target.name)»
+				SET $attribute_name_resolved = ?
+				WHERE «safeNameString(targetPk.name)» = ?";
+
+			$args = array($arg0, $source_value);
+			log_message("[update attribute instance] Updating attribute '$attribute_name_resolved' to '$arg0'");
+		
+			// update the current instance
+			$db_query = new DatabaseQuery($db_name);
+			$db_query->execute($query, $args);
+			
+			// and mark update as finished
+			return $db_query;
+		}
+					
+		// we haven't; try all the subclasses of '«target.name»'
+		«FOREACH target.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS targetSubclass»
+			$db_query = update_«safeName(targetSubclass)»_attribute_instance_from_«safeName()»($instance, $attribute_name, $arg0);
+			if ($db_query !== null)
+				return $db_query;
+		«ENDFOREACH»
+			
+		// could not find the attribute at all in this superclass
+		return null;
+	«ENDLET»
+}
+«ENDDEFINE»
+
 «REM»
 
 we want this method to return _all_ joins for this object, not just
@@ -129,6 +184,75 @@ direct_joins("doctoral") = array(
 		«ENDFOREACH»
 		 
 	); 
+«ENDDEFINE»
+
+«DEFINE createNewInstanceRecursively FOR model::DomainObject»
+/**
+ * Create a new domain object instance of '«safeNameString(name)»' recursively.
+ * Sets primary keys to FKs as necessary.
+ *
+ * Return the newly created instance, complete with its newly
+ * created primary key and resolved superclasses.
+ */
+function create_new_instance_«safeName()»() {
+	log_message("Creating new instance of '«safeNameString(name)»'");
+
+	// create all superclasses first
+	$superclasses = array();
+	«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS superclass»
+		// superclass '«safeNameString(superclass.name)»'
+		$superclass = create_new_instance_«safeName(superclass)»();
+		
+		// update the FK
+		«LET superclass.attributes.selectFirst( a | a.primaryKey) AS primaryKey»
+			«LET attributes.selectFirst(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.contains(primaryKey)) AS foreignKey»
+				$superclasses["«safeNameString(foreignKey.name)»"] = $superclass["«safeNameString(primaryKey.name)»"];
+			«ENDLET»
+		«ENDLET»
+	«ENDFOREACH»
+	
+	// where are we loading it from? sets $db_name
+	«EXPAND Select::selectDatabase FOR this»
+	
+	// create query
+	$query = "INSERT INTO «safeNameString(name)» DEFAULT VALUES";
+		
+	// execute			
+	$db_query = new DatabaseQuery($db_name);
+	$db = $db_query->execute($query, array());
+
+	// get the inserted id
+	$new_id = $db->lastInsertId("«attributeName(getPrimaryKey(this))-»");
+	log_message("New instance of '«safeNameString(name)»' insert ID: '$new_id'");
+	
+	// update with superclasses
+	foreach ($superclasses as $fk => $pk) {
+		$query = "UPDATE «safeNameString(name)»
+			SET $fk = ?
+			WHERE «attributeName(getPrimaryKey(this))-» = ?";
+		$args = array($pk, $new_id);
+		
+		$db_query->execute($query, $args); 
+	}
+	
+	// get this new instance along with subclasses
+	$new_instance = evaluate_select_wire(
+		$db_name,
+		'«safeNameString(id)»',
+		'«safeNameString(name)»',
+		'«safeNameString(name)».«attributeName(getPrimaryKey(this))-» = ?',
+		array($new_id)
+	);
+	
+	if ($new_instance === null) {
+		throw new IamlRuntimeException("Could not retrieve newly created instance of '«safeNameString(name)»' (ID = $new_id)");
+	}
+	
+	// update the PK of this instance manually (a bit of a hack)
+	$new_instance['«attributeName(getPrimaryKey(this))-»'] = $new_id;
+	
+	return $new_instance;	
+}
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

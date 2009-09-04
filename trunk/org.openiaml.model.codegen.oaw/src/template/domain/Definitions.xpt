@@ -21,13 +21,17 @@
 		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
 		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
 		«EXPAND DomainInheritance::allCasts FOREACH getRoot().getAllDomainObjects()»
+
+		«REM»creating new instances«ENDREM»
+		«EXPAND DomainInheritance::createNewInstanceRecursively FOREACH getRoot().getAllDomainObjects()»
 		
 		/**
 		 * Get all of the domain joins required in this generated
 		 * application. This is used to properly compose
 		 * select wires, etc.
 		 *
-		 * TODO put this into a separate include file */
+		 * TODO put this into a separate include file 
+		 */
 		function get_all_domain_joins() {
 			$direct_joins = array();
 			

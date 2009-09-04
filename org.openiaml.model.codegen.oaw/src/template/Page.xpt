@@ -36,6 +36,10 @@ define("CURRENT_PAGE", "«id»");
 	set_exception_handler('session_fail_handler');
 «ENDIF»
 
+// expand any domain instances
+«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
+«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
+
 // initialise default values for any fields
 «EXPAND initialiseDefaultValues FOREACH children»
 
@@ -70,10 +74,6 @@ define("CURRENT_PAGE", "«id»");
 
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
-
-// expand any domain instances
-«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
-«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
 
 «IF containingSession() != null»
 	// expand any AccessControlHandlers in the session

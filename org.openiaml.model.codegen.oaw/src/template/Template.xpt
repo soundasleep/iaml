@@ -40,6 +40,9 @@
 		define("IAML_RUNTIME_WEB", "«config_web»");
 		?>
 	«ENDFILE»
+	
+	«REM»database objects«ENDREM»
+	«EXPAND template::domain::Includes::domainIncludes»
 
 	«REM»create other files manually«ENDREM»	
 	«FILE "output/site_layout.xml"-»«EXPAND xml::SiteLayout::siteLayout-»«ENDFILE-»

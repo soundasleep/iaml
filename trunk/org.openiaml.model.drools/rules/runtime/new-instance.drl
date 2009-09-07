@@ -93,6 +93,20 @@ rule "Create 'exists?' operation for DomainObjectInstances"
 
 end
 
+rule "Create 'exists?' condition for DomainObjectInstances"
+	when
+		instance : DomainObjectInstance ( )
+		
+		not ( DecisionCondition( eContainer == instance, name == "exists?" ))
+		
+	then
+		# create a new one
+		DecisionCondition condition = handler.generatedDecisionCondition(instance, instance);
+		handler.setName(condition, "exists?");
+		queue.add(condition, drools);
+
+end
+
 rule "Create 'edit' event for DomainAttributeInstances"
 	when
 		instance : DomainAttributeInstance ( )

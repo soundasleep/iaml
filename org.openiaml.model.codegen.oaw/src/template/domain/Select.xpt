@@ -45,6 +45,8 @@
 «DEFINE selectDatabase FOR model::DomainAttribute»
 	«IF model::DomainObject.isInstance(eContainer)»
 		«EXPAND selectDatabase FOR (model::DomainObject) eContainer»
+	«ELSEIF model::DomainStore.isInstance(eContainer)»
+		«EXPAND selectDatabaseStore FOR (model::DomainStore) eContainer»
 	«ELSE»
 		«EXPAND selectDatabaseStore FOR getRoot()»
 	«ENDIF»	

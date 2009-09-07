@@ -19,6 +19,7 @@ import java.util.Map;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IContainer;
@@ -625,6 +626,19 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		
 	}
 	
+	/**
+	 * Does the given element ID exist?
+	 * 
+	 * TODO move into JWebUnit.
+	 */
+	public boolean hasElementById(String id) {
+		try {
+			getElementById(id);
+			return true;
+		} catch (AssertionFailedError e) {
+			return false;
+		}
+	}
 
 	/**
 	 * XPath helper methods.

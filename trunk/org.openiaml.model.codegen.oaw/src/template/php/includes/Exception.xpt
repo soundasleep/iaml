@@ -16,44 +16,41 @@ require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 log_message("exception.php? " . print_r($_GET, true));
 $fail = require_get("fail", "No exception specified"); 
 $trace = require_get("trace", "No trace specified");
+$type = require_get("type", "No type specified");
+
+$emulated_exception = null;
+if (class_exists($type)) {
+	$emulated_exception = new $type($fail);
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<title>An exception occured</title>
-	<link rel="stylesheet" type="text/css" href="default.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>default.css">
 </head>
 		
 <body>
 	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
 	
 	<div class="exception">
+		<p>
 		An exception occured:
-		<span><?php echo htmlspecialchars($fail); ?>
+		<span><?php echo htmlspecialchars($fail); ?></span>
+		</p>
+		
+		<?php if ($emulated_exception instanceof IamlInvalidSessionException) { ?>
+		<p>
+		Your session may be invalid; you may wish to <a href="clear_session.php" id="session_reset">reset it</a>.
+		</p>
+		<?php } ?>
 		
 		<p>
 			Stacktrace:
 			<blockquote><pre><?php echo htmlspecialchars($trace); ?></pre></blockquote>
 		</p>
-	</div>
-
-	«REM»
-	I don't really want to put this debug code here, but 
-	until issue 43 is resolved, this will have to stay TODO.
-	«ENDREM»
-	<div id="debug"></div>
-	<div id="response">empty</div>
-	
-	<!-- for test cases to improve speed: an outstanding ajax calls counter -->
-	<div id="debug_monitors">
-		<div id="ajax_monitor"></div>
-		<div id="counter_store_db"></div>
-		<div id="counter_store_event"></div>
-		<div id="counter_set_session"></div>
-		<div id="counter_set_application_value"></div>
-		<div id="counter_set_domain_attribute"></div>
-		<div id="counter_remote_event"></div>
 	</div>
 
 </body>

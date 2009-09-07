@@ -308,4 +308,52 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 		checkDoctoralForm();
 	}
 	
+	/**
+	 * If we set an invalid session property, then we will get
+	 * an informative message when we try to create a new 
+	 * Doctoral object.
+	 * 
+	 * @throws Exception
+	 */
+	public void testInvalidSession() throws Exception {
+		IFile sitemap = beginAtSitemapThenPage("Home");
+		
+		setSession("session_init", "1");		
+		setSession("new_object_scopes_12392019286_4_model_12392019209_4d0", "invalid");
+		
+		try {
+			gotoSitemapThenPage(sitemap, "create a new doctoral");
+			fail("Going to a page with an invalid session parameter set should fail");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
+		
+		assertMatch("([iI]nvalid.+session|[sS]ession.+invalid)");
+		
+		// there should be a link to "reset your session"
+		assertLinkPresent("session_reset");
+		clickLink("session_reset");
+		
+		assertNoProblem();
+		
+		// we can now create a new doctoral as normal
+		gotoSitemapThenPage(sitemap, "create a new doctoral");
+		assertNoProblem();
+	}
+	
+	/**
+	 * Set a session variable. Uses the "set_session.php" script generated.
+	 *  
+	 * @param key
+	 * @param value
+	 */
+	private void setSession(String key, String value) {
+		// insert a session id
+		IFile setSession = getProject().getFile("output/set_session.php");
+		assertTrue("session file '" + setSession + "' should exist", setSession.exists());
+		gotoPage(setSession.getProjectRelativePath().toString() + "?id=" + key + "&arg0=" + value);
+		
+		assertNoProblem();
+	}
+	
 }

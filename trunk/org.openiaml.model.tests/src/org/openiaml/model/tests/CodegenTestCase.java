@@ -112,9 +112,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	protected void waitForAjax() throws Exception {
 		// sleep a little bit first, so ajax calls can continue
 		if (hasLoaded) {
-			if (getElementById("ajax_monitor") == null) {
-				throw new RuntimeException("Ajax monitor did not exist, even though we expected it to.");
-				// Thread.sleep(2000);	// sleep for way too long, since we don't know when it will finish
+			if (!hasElementById("ajax_monitor")) {
+				// can't find it (perhaps it wasn't generated on this page); bail
+				return;
 			} else {
 				int cycles = 0;
 				while (cycles < 500) {		// max 15 seconds

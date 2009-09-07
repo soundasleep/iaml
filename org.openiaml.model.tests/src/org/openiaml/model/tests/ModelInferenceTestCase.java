@@ -53,8 +53,6 @@ import ca.ecliptical.emf.xpath.EMFXPath;
 public abstract class ModelInferenceTestCase extends ModelTestCase {
 
 	protected InternetApplication root;
-	
-	protected Resource resource;
 
 	/**
 	 * When inference is done, the model is saved to this file.
@@ -186,7 +184,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * 
 	 * @return
 	 */
-	protected EcoreInferenceHandler createHandler() {
+	protected EcoreInferenceHandler createHandler(Resource resource) {
 		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
 		return handler;
 	}
@@ -257,12 +255,15 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 */
 	protected InternetApplication loadAndInfer(InternetApplication root, boolean logRuleSource) throws Exception {
 		// we now try to do inference
-		ICreateElements handler = createHandler();
+		Resource resource = root.eResource();
+		assertNotNull(resource);
+		
+		ICreateElements handler = createHandler(resource);
 		CreateMissingElementsWithDrools ce = getInferenceEngine(handler, false);
 		ce.create(root, logRuleSource, monitor);
 
 		// write out this inferred model for reference
-		inferredModel = saveInferredModel();
+		inferredModel = saveInferredModel(resource);
 
 		return root;
 	}
@@ -286,15 +287,21 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			InternetApplication root = loadDirectly(loadClass, logRuleSource);
 			
 			// we now try to do inference
-			ICreateElements handler = createHandler();
+			Resource resource = root.eResource();
+			assertNotNull(resource);
+			
+			ICreateElements handler = createHandler(resource);
 			CreateMissingElementsWithDrools ce = getInferenceEngine(handler, false);
 			ce.create(root, logRuleSource, monitor);
 	
 			// write out this inferred model for reference
-			inferredModel = saveInferredModel();
+			inferredModel = saveInferredModel(resource);
 			
 			// put this model down in the cache
 			inferCache.put(loadClass, inferredModel);
+			
+			// save a copy in the model cache
+			modelCache.put(loadClass, root);
 			
 			return root;
 		} else {
@@ -303,18 +310,42 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			
 			inferredModel = inferCache.get(loadClass); 
 			
-			return (InternetApplication) loadModelDirectly(inferCache.get(loadClass).getAbsolutePath()); 
+			return modelCache.get(loadClass);
 		}
+	}
+	
+	private static final ModelCache modelCache = new ModelCache();
+	
+	/**
+	 * We use a soft reference model cache to store model results. This way,
+	 * if we run out of memory, model files can be discarded.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	private static class ModelCache extends SoftCache<Class<?>, InternetApplication> {
+
+		/**
+		 * If the model cache reference does not exist, we load it through
+		 * {@link ModelInferenceTestCase#loadModelDirectly(String)}.
+		 * 
+		 * @see org.openiaml.model.tests.SoftCache#retrieve(java.lang.Object)
+		 */
+		@Override
+		public InternetApplication retrieve(Class<?> input) {
+			return (InternetApplication) loadModelDirectly(inferCache.get(input).getAbsolutePath());
+		}
+		
 	}
 
 	/**
 	 * Load a model file directly.
 	 * Assumes that it will only contain one element (and tests this with JUnit).
 	 */
-	protected EObject loadModelDirectly(String filename) {
+	protected static EObject loadModelDirectly(String filename) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		URI uri = URI.createFileURI(filename);
-		resource = resourceSet.getResource(uri, true);
+		Resource resource = resourceSet.getResource(uri, true);
 		assertNotNull(resource);
 		assertEquals("there should only be one contents in the model file", 1, resource.getContents().size());
 		return resource.getContents().get(0);
@@ -425,7 +456,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @throws IOException
 	 * @returns the generated model file
 	 */
-	protected File saveInferredModel() throws FileNotFoundException, IOException {
+	protected File saveInferredModel(Resource resource) throws FileNotFoundException, IOException {
 		// check that the inference folder exists
 		File folder = new File("infer-output/");
 		if (!(folder.exists() && folder.isDirectory())) {
@@ -922,9 +953,6 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 
 	@Override
 	protected void tearDown() throws Exception {
-		// remove reference to resource
-		resource = null;
-		
 		root = null;
 		
 		super.tearDown();

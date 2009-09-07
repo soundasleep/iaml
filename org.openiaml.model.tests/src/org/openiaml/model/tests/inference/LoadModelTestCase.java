@@ -26,7 +26,7 @@ public class LoadModelTestCase extends InferenceTestCase {
 		root = (InternetApplication) model;
 
 		// write out this inferred model for reference
-		saveInferredModel();
+		saveInferredModel(root.eResource());
 	}
 
 	public void testContents() {

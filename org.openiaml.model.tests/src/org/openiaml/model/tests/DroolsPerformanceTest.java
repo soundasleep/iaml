@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
@@ -22,7 +23,7 @@ import org.openiaml.model.model.visual.VisualPackage;
 public class DroolsPerformanceTest extends ModelInferenceTestCase {
 
 	@Override
-	protected File saveInferredModel() throws FileNotFoundException,
+	protected File saveInferredModel(Resource resource) throws FileNotFoundException,
 			IOException {
 		// do nothing; prevents NPE
 		return null;
@@ -38,8 +39,8 @@ public class DroolsPerformanceTest extends ModelInferenceTestCase {
 		
 		for (int i = 0; i < 90000; i += 300) {
 			for (int k = 0; k < 10; k++) {
-			EcoreInferenceHandler handler = createHandler();
 			InternetApplication root = (InternetApplication) loadModelDirectly("src/org/openiaml/model/tests/blank.iaml");
+			EcoreInferenceHandler handler = createHandler(root.eResource());
 			for (int j = 0; j < i; j++) {
 				Page page = handler.createPage(root);
 				page.setName("test page " + j);

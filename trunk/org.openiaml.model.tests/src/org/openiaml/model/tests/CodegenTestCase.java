@@ -640,6 +640,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected void reloadPage(IFile sitemap, String pageText) throws Exception {
+		waitForAjax();	// TODO remove this check; we shouldn't have to wait for ajax
 		gotoSitemapThenPage(sitemap, pageText);
 	}
 	
@@ -653,6 +654,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected void restartSession(IFile sitemap, String pageText) throws Exception {
+		waitForAjax();	// TODO remove this check; we shouldn't have to wait for ajax
 		beginAtSitemapThenPage(sitemap, pageText, pageText);
 	}
 	

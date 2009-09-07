@@ -70,7 +70,7 @@ public class NewInstanceObject extends DatabaseCodegenTestCase {
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
-		// *restart* session, it should be stored
+		// *restart* session, it should still be stored
 		restartSession(sitemap, "container");
 		{
 			String field2 = getLabelIDForText("edit new instance name");
@@ -125,7 +125,7 @@ public class NewInstanceObject extends DatabaseCodegenTestCase {
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
-		// *restart* session, it should be stored
+		// *restart* session, it should still be stored
 		restartSession(sitemap, "container");
 		{
 			String field2 = getLabelIDForText("edit new instance name");
@@ -137,7 +137,7 @@ public class NewInstanceObject extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(field, newValue2);
 		assertLabeledFieldEquals(field, newValue2);
 		
-		// check the database: the first value should not exist
+		// check the database: the first value should not exist (since we changed it)
 		{
 			ResultSet rs = executeQuery("SELECT * FROM User WHERE name='" + newValue + "'");
 			assertFalse(rs.next());

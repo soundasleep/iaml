@@ -16,11 +16,9 @@
 require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 
-log_message("set_application_value.php? " . print_r($_GET, true));
+«EXPAND template::domain::Definitions::domainDefinitions»
 
-«REM»TODO put this into a separate include«ENDREM»
-«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this»
-«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this»
+log_message("set_application_value.php? " . print_r($_GET, true));
 
 // the property to set
 $id = require_get("id");

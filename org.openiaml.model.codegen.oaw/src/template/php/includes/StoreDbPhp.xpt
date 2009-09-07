@@ -139,7 +139,7 @@ echo "ok";
 «DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
-		$db_name = "sqlite:«safeNameString(store.id)».db";
+		«EXPAND template::domain::Select::selectDatabase» 
 		$table_name = "«safeNameString(object.name)»";
 		$row_name = "«safeNameString(name)»";
 		
@@ -176,7 +176,7 @@ echo "ok";
 «DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
-		$db_name = "sqlite:«safeNameString(store.id)».db";
+		«EXPAND template::domain::Select::selectDatabase» 
 		$table_name = "single_values";
 		$row_name = "«safeNameString(name)»";
 		
@@ -220,7 +220,7 @@ echo "ok";
 «DEFINE expandDomainAttributeRootDatabase(model::DomainObject object) FOR model::DomainAttribute»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
-		$db_name = "sqlite:internet_application.db";
+		«EXPAND template::domain::Select::selectDatabase» 
 		$table_name = "«safeNameString(object.name)»";
 		$row_name = "«safeNameString(name)»";
 		

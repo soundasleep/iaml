@@ -12,12 +12,7 @@
 	<?php 
 		// remote parameter source from a database file
 		$db_type = "DomainObject";
-		«IF getDomainStore(this) != null»
-			$db_name = "sqlite:«safeNameString(getDomainStore(this).id)».db";
-		«ELSE»
-			/* default database, for attributes without stores */
-			$db_name = "sqlite:internet_application.db";
-		«ENDIF»
+		«EXPAND template::domain::Select::selectDatabase»
 		«IF getDomainObject(this) != null»
 			$table_name = "«safeNameString(getDomainObject(this).name)»";
 		«ELSE»

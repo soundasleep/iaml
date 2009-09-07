@@ -15,12 +15,9 @@
  
 require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+«EXPAND template::domain::Definitions::domainDefinitions»
 
 log_message("new_domain_instance.php? " . print_r($_GET, true));
-
-«REM»TODO put this into a separate include«ENDREM»
-«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this»
-«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this»
 
 // the domain object instance to set
 $id = require_get("id");

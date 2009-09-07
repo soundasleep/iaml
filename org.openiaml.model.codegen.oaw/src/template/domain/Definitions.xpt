@@ -6,6 +6,17 @@
 «EXTENSION template::GeneratorExtensions»
 
 /**
+ * Expand out all domain object, instance and attribute
+ * information for this InternetApplication.
+ * 
+ * Expected to be in PHP mode.
+ */
+«DEFINE domainDefinitions FOR model::InternetApplication»
+	«EXPAND domainObjectDefinitions(true)»
+	«EXPAND domainAttributeDefinitions(true)»
+«ENDDEFINE»
+
+/**
  * Expand out all domain object instances.
  */
 «DEFINE domainObjectDefinitions(Boolean php) FOR model::visual::Page»

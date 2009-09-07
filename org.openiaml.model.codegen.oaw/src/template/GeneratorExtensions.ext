@@ -248,13 +248,13 @@ model::InternetApplication getRoot(model::InternetApplication this) :
 
 /** get all Conditions in the InternetApplication */
 cached List[model::Condition] getAllConditions(model::InternetApplication this) :
-	conditions.toSet().union( eAllContents.getAllConditions() ).reject( e | e == null );
+	eAllContents.typeSelect(model::Condition);
 
 cached List[model::Condition] getAllConditions(emf::EObject this) :
-	null;
+	eAllContents.typeSelect(model::Condition);
 
 cached List[model::Condition] getAllConditions(model::Condition this) :
-	this;
+	eAllContents.typeSelect(model::Condition).add(this);
 
 /** get all Pages in the InternetApplication */
 cached List[model::visual::Page] getAllPages(model::InternetApplication this) :

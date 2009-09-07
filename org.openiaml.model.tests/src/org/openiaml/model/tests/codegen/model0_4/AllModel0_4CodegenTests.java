@@ -53,6 +53,7 @@ public class AllModel0_4CodegenTests {
 		
 		// Domain Inheritance tests
 		suite.addTestSuite(DomainInheritance.class);
+		suite.addTestSuite(DomainInheritanceEditing.class);
 
 		return suite;
 	}

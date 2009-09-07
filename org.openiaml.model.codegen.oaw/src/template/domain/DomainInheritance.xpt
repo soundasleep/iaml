@@ -14,9 +14,11 @@
 	«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS target»
 		«EXPAND castSourceAsTarget(target) FOR this»
 	«ENDFOREACH»
+	«REM»
 	«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS target»
 		«EXPAND updateSourceAttributeFromTarget(this) FOR target»
 	«ENDFOREACH»
+	«ENDREM»
 «ENDDEFINE»
 
 «DEFINE castSourceAsTarget(model::DomainObject target) FOR model::DomainObject»
@@ -143,7 +145,106 @@ function update_«safeName(target)»_attribute_instance_from_«safeName()»($instanc
 					
 		// we haven't; try all the subclasses of '«target.name»'
 		«FOREACH target.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS targetSubclass»
-			$db_query = update_«safeName(targetSubclass)»_attribute_instance_from_«safeName()»($instance, $attribute_name, $arg0);
+			/* subclass '«targetSubclass.name»' */
+			// first, get the instance of this subclass
+			// evaluate_select_wire($db_name, $source_id, $source_class, $query, $args) {
+			«EXPAND Select::selectDatabase FOR targetSubclass»
+			
+			$source_id = "«safeName(targetSubclass)-»";
+			$source_class = "«safeNameString(targetSubclass.name)-»";
+			$query = "«safeNameString(targetSubclass.name)».«safeNameString(targetSubclass.getPrimaryKey().name)» = ?";
+			$args = array($instance["«safeNameString(target.attributes.selectFirst( a | !a.outEdges.typeSelect(model::wires::ExtendsWire).select(e | e.to == targetSubclass.getPrimaryKey()).isEmpty).name)-»"]);
+			
+			// fetch the instance
+			$subclass_instance = evaluate_select_wire($db_name,
+				$source_id,
+				$source_class,
+				$query,
+				$args);
+		
+			if ($subclass_instance === null)
+				throw new IamlRuntimeException("Could not get subclass '$source_class' from '«safeNameString(target.name)»': no results found for query '$query'");
+		
+			// try updating this instance
+			$db_query = update_«safeName(targetSubclass)»_attribute_instance_from_«safeName(target)»($subclass_instance, $attribute_name, $arg0);
+			if ($db_query !== null)
+				return $db_query;
+		«ENDFOREACH»
+			
+		// could not find the attribute at all in this superclass
+		return null;
+	«ENDLET»
+}
+
+/**
+ * Try to update an attribute in an instance of '«name»'. Will
+ * try subclasses if this attribute does not exist.
+ *
+ * Will only update one attribute, and will bail once this attribute
+ * has been found.
+ *
+ * Returns the db_query if the attribute update was successful; null if not.
+ */
+function update_«safeName()»_attribute_instance($instance, $attribute_name, $arg0) {
+	«LET attributes.selectFirst(a | a.primaryKey) AS pk»
+		// properties for '«name»'
+		if (!isset($instance["«safeNameString(pk.name)»"]))
+			throw new IamlRuntimeException("instance[«safeNameString(pk.name)»] was not set");
+		$source_value = $instance["«safeNameString(pk.name)»"];
+			
+		«EXPAND Select::selectDatabase»
+
+		$attribute_name_resolved = null;
+		«REM»only select attributes which are not extensions of subclass attributes«ENDREM»
+		«FOREACH attributes.select(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainAttribute).isEmpty) AS targetAttribute»
+		if ($attribute_name == '«safeNameString(targetAttribute.name)»') {
+			/* in self instance */
+			$attribute_name_resolved = '«safeNameString(targetAttribute.name)»'; 
+			log_message("[update attribute instance] Resolved attribute '$attribute_name' as '$attribute_name_resolved'");
+		}
+		«ENDFOREACH»
+		
+		// have we resolved the attribute?
+		if ($attribute_name_resolved !== null) {
+			$query = "UPDATE «safeNameString(name)»
+				SET $attribute_name_resolved = ?
+				WHERE «safeNameString(pk.name)» = ?";
+
+			$args = array($arg0, $source_value);
+			log_message("[update attribute instance] Updating attribute '$attribute_name_resolved' to '$arg0'");
+		
+			// update the current instance
+			$db_query = new DatabaseQuery($db_name);
+			$db_query->execute($query, $args);
+			
+			// and mark update as finished
+			return $db_query;
+		}
+					
+		// we haven't; try all the subclasses of '«name»'
+		«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS targetSubclass»
+			/* subclass '«targetSubclass.name»' */
+			// first, get the instance of this subclass
+			// evaluate_select_wire($db_name, $source_id, $source_class, $query, $args) {
+			«EXPAND Select::selectDatabase FOR targetSubclass»
+			
+			$source_id = "«safeName(targetSubclass)-»";
+			$source_class = "«safeNameString(targetSubclass.name)-»";
+			$query = "«safeNameString(targetSubclass.name)».«safeNameString(targetSubclass.getPrimaryKey().name)» = ?";
+			$args = array($instance["«safeNameString(attributes.selectFirst( a | !a.outEdges.typeSelect(model::wires::ExtendsWire).select(e | e.to == targetSubclass.getPrimaryKey()).isEmpty).name)-»"]);
+			
+			// fetch the instance
+			$subclass_instance = evaluate_select_wire($db_name,
+				$source_id,
+				$source_class,
+				$query,
+				$args);
+		
+			if ($subclass_instance === null)
+				throw new IamlRuntimeException("Could not get subclass '$source_class' from '«safeNameString(name)»': no results found for query '$query'");
+		
+			// try updating this instance
+			$db_query = update_«safeName(targetSubclass)»_attribute_instance($subclass_instance, $attribute_name, $arg0);
 			if ($db_query !== null)
 				return $db_query;
 		«ENDFOREACH»

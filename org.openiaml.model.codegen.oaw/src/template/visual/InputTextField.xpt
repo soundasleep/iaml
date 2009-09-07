@@ -97,7 +97,9 @@
 
 «DEFINE staticInitialValue FOR model::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
+	<?php if (has_attribute_instance_«safeName()»()) { ?>
 	value="<?php echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>"
+	<?php } ?>
 «ENDDEFINE»
 
 «DEFINE staticInitialValue FOR model::QueryParameter»

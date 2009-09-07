@@ -75,6 +75,9 @@ define("CURRENT_PAGE", "«id»");
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
 
+// expand any AccessControlHandlers in the page
+«EXPAND template::users::Definitions::accessControlHandlerDefinitions(true) FOR this-»
+
 «IF containingSession() != null»
 	// expand any AccessControlHandlers in the session
 	«EXPAND template::users::Definitions::accessControlHandlerDefinitions(true) FOR containingSession()-»

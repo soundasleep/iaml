@@ -76,6 +76,8 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	
 	/**
 	 * We can create a new user, and use it to login.
+	 * Because the new UserInstance is an instance of 'Default Role',
+	 * it should automatically have the 'Default Role' permissions.
 	 * 
 	 * @throws Exception
 	 */
@@ -110,10 +112,26 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		return sitemap;
 	}
 	
+	/**
+	 * Without adding 'Role 1' to the user, we cannot access
+	 * the secure page.
+	 * 
+	 * @throws Exception
+	 */
+	public void testWithoutRole1() throws Exception {
+		// create a new user
+		IFile sitemap = createRole();
+		
+		// we cannot access the 'requires role 1' page, since we
+		// only have 'default role'
+		gotoSitemapWithProblem(sitemap, "requires role 1");		
+		assertProblem();
+	}
+	
 	public void testCreateAddRole1() throws Exception {
 		createAddRole1();
 	}
-	
+
 	/**
 	 * Once created, we can add 'role 1' which can then
 	 * be used to access the page.
@@ -145,7 +163,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		// create a new user
 		IFile sitemap = createAddRole1();
 		
-		gotoSitemapThenPage(sitemap, "logout");
+		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 		assertNoProblem();
 		
 		// we can't get back to role 1 page
@@ -279,7 +297,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		// create a new user
 		IFile sitemap = createManyPermissions();
 		
-		gotoSitemapThenPage(sitemap, "logout");
+		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 		assertNoProblem();
 		
 		// relogin
@@ -318,7 +336,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		assertProblem();
 		
 		// logout
-		gotoSitemapThenPage(sitemap, "logout");
+		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 		assertNoProblem();
 		
 		// relogin

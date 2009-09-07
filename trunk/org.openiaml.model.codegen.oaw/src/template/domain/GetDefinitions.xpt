@@ -11,9 +11,10 @@
 	/**
 	 * Get the attribute instance '«safeNameString(name)»' contained in
 	 * '«safeName(eContainer)»'.
+	 *
+	 * Returns the current value for attribute ID '«id»'.
 	 */
 	function get_attribute_instance_«safeName()»($default = false) {
-		/* return the current value for attribute id '«id»' */
 		«IF model::DomainObjectInstance.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$obj = get_object_instance_«safeName(eContainer)»();
@@ -37,13 +38,49 @@
 		«ENDIF»
 	}
 	
+	/**
+	 * Does the attribute instance '«safeNameString(name)»' exist yet; that is,
+	 * does it exist in any DomainStore yet?
+	 *
+	 * Returns true or false.
+	 */
+	function has_attribute_instance_«safeName()»($default = false) {
+		«IF model::DomainObjectInstance.isInstance(eContainer)»
+			/* contained in an object instance '«eContainer»': get it from the instance */
+			if (has_object_instance_«safeName(eContainer)»()) {
+				$obj = get_object_instance_«safeName(eContainer)»();				
+				return isset($obj["«attributeName(this)-»"]);
+			} else {
+				return false;
+			}
+		«ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+			/* sourced from a new instance wire */
+			return has_new_attribute_instance_«safeName()-»();
+		«ELSE»
+			/* not contained in an object instance; select it manually */
+			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+				throw new IamlRuntimeException("No selection wires exist for trying to find attribute instance '«this»'");
+			«ELSE»
+				«EXPAND Select::evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+				if ($row === null) {
+					// not found
+					return false;
+				}
+				return true;
+			«ENDIF»
+		«ENDIF»
+	}
+	
 	«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 		«EXPAND getNewAttributeInstance(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE getNewAttributeInstance(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance»
-	/** Get an instance of an attribute */
+	/**
+	 * Get an instance of an attribute '«safeNameString(name)»',
+	 * attribute ID '«id»'.
+	 */
 	function get_new_attribute_instance_«safeName()-»($force = true) {
 		«IF containingSession() != null»
 			// in the session
@@ -97,12 +134,48 @@
 			«EXPAND exception FOR throwException("TODO not completed yet")»
 		«ENDIF»	
 	}
+
+	/**
+	 * Does the attribute instance '«safeNameString(name)»',
+	 * attribute ID '«id»', exist yet in the database?
+	 *
+	 * Returns true or false.
+	 */
+	function has_new_attribute_instance_«safeName()-»() {
+		«IF containingSession() != null»
+			// in the session
+			if (has_session('new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»', false) === false) {
+				// does not exist
+				return false;
+			}
+				
+			// return the newly inserted object
+			«EXPAND Select::selectDatabase FOR wire.from»
+			
+			// create query
+			$query = "SELECT «safeNameString(name)» FROM «safeNameString(((model::DomainObject) wire.from).name)»
+				WHERE «attributeName(getPrimaryKey(this))-»=?";
+			$args = array(require_session('new_attribute_«safeNameString(containingSession().id)»_«safeNameString(id)-»'));
+			log_message("selecting previously created new session object: " . print_r($args, true));
+
+			$db_query = new DatabaseQuery($db_name);
+			$row = $db_query->fetchFirst($query, $args);
+			if ($row === null) {
+				return false;	// none found
+			}
+			
+			return true;		// exists
+		«ELSE»
+			«EXPAND exception FOR throwException("TODO not completed yet")»
+		«ENDIF»	
+	}
 «ENDDEFINE»
 
 «DEFINE getDomainObject FOR model::DomainObjectInstance-»
+	/**
+	 * Get the domain object instance '«id»'.
+	 */
 	function get_object_instance_«safeName()»($default = false) {
-		/* get the object instance '«id»' */
-		/* not contained in an object instance; select it manually */
 		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
 			«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 				throw new IamlRuntimeException("No selection or new instance wires exist for object instance '«id»'");
@@ -120,6 +193,27 @@
 				}
 			}
 			return $row;
+		«ENDIF»
+	}
+	
+	/**
+	 * Does the domain object instance '«id»' exist yet in the database?
+	 *
+	 * Returns true or false.
+	 */
+	function has_object_instance_«safeName()»($default = false) {
+		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+			«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+				throw new IamlRuntimeException("No selection or new instance wires exist for checking object instance '«id»'");
+			«ELSE»
+				return has_new_domain_object_«safeName()-»();
+			«ENDIF»
+		«ELSE»
+			«EXPAND Select::evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+			if ($row === null) {
+				return false;
+			}
+			return true;
 		«ENDIF»
 	}
 	
@@ -154,6 +248,13 @@
 
 «DEFINE getNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»
 	«LET ((model::DomainObject) wire.from) AS sourceObject»
+	/**
+	 * Explicitly create a new DomainObjectInstance of type '«safeNameString(sourceObject.name)»'
+	 * and insert it into the database.
+	 *
+	 * This also sets a session variable 'new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»'
+	 * to track the newly created instance.
+	 */
 	function create_new_domain_object_«safeName()»() {
 		// insert a new one
 		log_message("Inserting new domain object [session] '«safeNameString(name)»' ('«safeNameString(id)»')");
@@ -177,6 +278,9 @@
 		$_SESSION['new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»'] = $new_id;			
 	}
 
+	/**
+	 * Create a new DomainObjectInstance '«safeNameString(name)»' (ID = '«id»').
+	 */
 	function get_new_domain_object_«safeName()-»($force = true) {
 		«IF containingSession() != null»
 			// in the session
@@ -211,7 +315,7 @@
 			);
 			
 			if ($result === null)
-				throw new IamlRuntimeException("Could not get new session domain object '«safeNameString(id)»': args = " . print_r($args, true));
+				throw new IamlInvalidSessionException("Could not get new session domain object '«safeNameString(id)»': args = " . print_r($args, true));
 			
 			return $result;
 		«ELSE»
@@ -251,6 +355,67 @@
 				throw new IamlRuntimeException("Could not get new page domain object '«safeNameString(id)»': args = " . print_r($args, true));
 				
 			return $result;
+		«ENDIF»
+	}
+	
+	/**
+	 * Does a new DomainObjectInstance '«safeNameString(name)»' (ID = '«id»')
+	 * exist yet in the database?
+	 *
+	 * Returns true or false.
+	 */
+	function has_new_domain_object_«safeName()-»() {
+		«IF containingSession() != null»
+			// in the session
+			if (has_session('new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»', false) === false) {
+				// does not exist
+				return false;
+			}
+				
+			// return the newly inserted object
+			«EXPAND Select::selectDatabase FOR wire.from»
+			
+			$args = array(require_session('new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»'));
+
+			log_message("Selecting previously created new object [session]"); 
+			$result = evaluate_select_wire(
+				$db_name,
+				'«safeNameString(sourceObject.id)»',
+				'«safeNameString(sourceObject.name)»',
+				'«safeNameString(sourceObject.name)».«attributeName(getPrimaryKey(this))-» = ?',
+				$args
+			);
+			
+			if ($result === null)
+				return false;
+			
+			return true;
+		«ELSE»
+			// in the page
+			if (get_application_value('new_object_«safeNameString(id)-»', false) === false) {
+				// does not exist
+				return false;
+			}
+				
+			// return the newly inserted object
+			«EXPAND Select::selectDatabase FOR wire.from»
+			
+			$args = array(get_application_value('new_object_«safeNameString(id)-»', 'missing'));
+
+			log_message("Selecting previously created new object [page]");
+			 
+			$result = evaluate_select_wire(
+				$db_name,
+				'«safeNameString(sourceObject.id)»',
+				'«safeNameString(sourceObject.name)»',
+				'«safeNameString(sourceObject.name)».«attributeName(getPrimaryKey(this))-» = ?',
+				$args
+			);
+			
+			if ($result === null)
+				return false;
+				
+			return true;
 		«ENDIF»
 	}
 	«ENDLET»

@@ -115,12 +115,27 @@ function get_baseurl() {
 	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
 }
 
+/**
+ * Similar to a Java's RuntimeException.
+ * We can also pass along additional information.
+ */
 class IamlRuntimeException extends Exception {
 	var $more_info;
 
 	public function __construct($message = "", $more_info = "") {
 		parent::__construct($message);
 		$this->more_info = $more_info;
+	}
+}
+
+/**
+ * A specific runtime exception to say that data from the current
+ * session seems invalid. Perhaps the user needs to reset their
+ * session?
+ */
+class IamlInvalidSessionException extends IamlRuntimeException {
+	public function __construct($message = "", $more_info = "") {
+		parent::__construct($message, $more_info);
 	}
 }
 

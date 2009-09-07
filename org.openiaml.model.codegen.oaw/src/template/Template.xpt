@@ -44,6 +44,9 @@
 	«REM»database objects«ENDREM»
 	«EXPAND template::domain::Includes::domainIncludes»
 
+	«REM»user objects«ENDREM»
+	«EXPAND template::users::Includes::userIncludes»
+
 	«REM»create other files manually«ENDREM»	
 	«FILE "output/site_layout.xml"-»«EXPAND xml::SiteLayout::siteLayout-»«ENDFILE-»
 

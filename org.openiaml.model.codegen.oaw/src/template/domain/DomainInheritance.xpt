@@ -13,6 +13,7 @@
 	«REM»expand all direct extends«ENDREM»
 	«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS target»
 		«EXPAND castSourceAsTarget(target) FOR this»
+		«EXPAND getSubclassInstance(target) FOR this»
 	«ENDFOREACH»
 «ENDDEFINE»
 
@@ -70,6 +71,33 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 }
 «ENDDEFINE»
 
+«DEFINE getSubclassInstance(model::DomainObject source) FOR model::DomainObject»
+/**
+ * Try to get the instance of the superclass '«name»' from the subclass
+ * '«source.name»'.
+ *
+ * Returns an instance of only '«name»', or <b>null</b> if it
+ * could not be retrieved.
+ */
+function get_subclass_«safeName()»_from_«safeName(source)»($instance) {
+	«EXPAND Select::selectDatabase FOR this»
+	
+	$source_id = "«safeName()-»";
+	$source_class = "«safeNameString(name)-»";
+	$query = "«safeNameString(name)».«safeNameString(getPrimaryKey().name)» = ?";
+	$args = array($instance["«safeNameString(source.attributes.selectFirst( a | !a.outEdges.typeSelect(model::wires::ExtendsWire).select(e | e.to == getPrimaryKey()).isEmpty).name)-»"]);
+	
+	// fetch the instance
+	$subclass_instance = evaluate_select_wire($db_name,
+		$source_id,
+		$source_class,
+		$query,
+		$args);
+	
+	return $subclass_instance;
+}
+«ENDDEFINE»
+
 «DEFINE updateInstanceAttributeFrom FOR model::DomainObject»
 /**
  * Try to update an attribute in an instance of '«name»'. Will
@@ -121,20 +149,8 @@ function update_«safeName()»_attribute_instance($instance, $attribute_name, $arg
 		{
 			/* subclass '«targetSubclass.name»' */
 			// first, get the instance of this subclass
-			// evaluate_select_wire($db_name, $source_id, $source_class, $query, $args) {
-			«EXPAND Select::selectDatabase FOR targetSubclass»
 			
-			$source_id = "«safeName(targetSubclass)-»";
-			$source_class = "«safeNameString(targetSubclass.name)-»";
-			$query = "«safeNameString(targetSubclass.name)».«safeNameString(targetSubclass.getPrimaryKey().name)» = ?";
-			$args = array($instance["«safeNameString(attributes.selectFirst( a | !a.outEdges.typeSelect(model::wires::ExtendsWire).select(e | e.to == targetSubclass.getPrimaryKey()).isEmpty).name)-»"]);
-			
-			// fetch the instance
-			$subclass_instance = evaluate_select_wire($db_name,
-				$source_id,
-				$source_class,
-				$query,
-				$args);
+			$subclass_instance = get_subclass_«safeName(targetSubclass)»_from_«safeName()»($instance);
 		
 			if ($subclass_instance === null)
 				throw new IamlRuntimeException("Could not get subclass '$source_class' from '«safeNameString(name)»': no results found for query '$query'");

@@ -90,7 +90,7 @@
     <children id="model.1236407970c.1e" name="Doctoral" outEdges="wires.12364143556.7 wires.12364143556.8 wires.12364143556.93b wires.12392019286.393">
       <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.7" from="model.1236407970c.1e" to="model.1236407970c.1c"/>
       <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.8" from="model.1236407970c.1e" to="model.1236407970c.1a"/>
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.93b" from="model.1236407970c.1e" to="model.123641434e9.2f0e" inEdges="wires.12364143556.93c wires.12364143556.93d" query="qualification = :qualificiation and degree = :degree"/>
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.93b" from="model.1236407970c.1e" to="model.123641434e9.2f0e" inEdges="wires.12364143556.93c wires.12364143556.93d" query="qualification = :qualification and degree = :degree"/>
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.12392019286.393" from="model.1236407970c.1e" to="model.12392019209.4d0" name="new"/>
       <attributes id="model.123641434e9.371" name="thesis title"/>
     </children>

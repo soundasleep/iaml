@@ -11,15 +11,13 @@
 require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 
+«EXPAND template::domain::Definitions::domainDefinitions»
+
 log_message("save_queued_attribute.php? " . print_r($_GET, true));
 $id = require_get("id");
 $page_id = require_get("page");
 
 log_message("save_queued_attribute.php: setting id=$id, page_id=$page_id");
-
-«REM»TODO put this into a separate include«ENDREM»
-«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this»
-«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this»
 
 // TODO probably a security risk
 $function_name = 'save_queued_store_domain_attribute_' . $id;

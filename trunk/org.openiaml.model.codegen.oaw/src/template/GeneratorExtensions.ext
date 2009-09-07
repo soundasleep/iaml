@@ -279,25 +279,23 @@ List[model::DynamicApplicationElementSet] getAllDynamicElements(model::DynamicAp
 
 /** get all Domain Attribute Instances in the InternetApplication */
 List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
-	children.typeSelect( model::DomainAttributeInstance ).toSet()
-		.union( eAllContents.getAllDomainAttributeInstances() ).reject( e | e == null );
+	eAllContents.typeSelect( model::DomainAttributeInstance );
 
 List[model::DomainAttributeInstance] getAllDomainAttributeInstances(emf::EObject this) :
-	null;
+	eAllContents.typeSelect( model::DomainAttributeInstance );
 
 List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::DomainAttributeInstance this) :
-	this;
+	eAllContents.typeSelect( model::DomainAttributeInstance ).add(this);
 
 /** get all Domain Object Instances in the InternetApplication */
 List[model::DomainObjectInstance] getAllDomainObjectInstances(model::InternetApplication this) :
-	children.typeSelect( model::DomainObjectInstance ).toSet()
-		.union( eAllContents.getAllDomainObjectInstances() ).reject( e | e == null );
+	eAllContents.typeSelect(model::DomainObjectInstance);
 
 List[model::DomainObjectInstance] getAllDomainObjectInstances(emf::EObject this) :
-	null;
+	eAllContents.typeSelect(model::DomainObjectInstance);
 
 List[model::DomainObjectInstance] getAllDomainObjectInstances(model::DomainObjectInstance this) :
-	this;
+	eAllContents.typeSelect(model::DomainObjectInstance).add(this);
 
 getAllDomainObjects(emf::EObject e) :
 	e.eAllContents.typeSelect(model::DomainObject);

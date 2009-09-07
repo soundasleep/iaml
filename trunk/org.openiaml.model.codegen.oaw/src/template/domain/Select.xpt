@@ -42,17 +42,29 @@
 	«EXPAND selectDatabaseStore FOR eContainer»	
 «ENDDEFINE»
 
-/* select a particular database */
-«DEFINE selectDatabaseStore FOR emf::EObject»
-	«EXPAND exception FOR throwException("Unknown DomainObject container " + this)»
+«DEFINE selectDatabase FOR model::DomainAttribute»
+	«IF model::DomainObject.isInstance(eContainer)»
+		«EXPAND selectDatabase FOR (model::DomainObject) eContainer»
+	«ELSE»
+		«EXPAND selectDatabaseStore FOR getRoot()»
+	«ENDIF»	
 «ENDDEFINE»
 
-«DEFINE selectDatabaseStore FOR model::DomainStore»
+/* select a particular database */
+«DEFINE selectDatabaseStore FOR emf::EObject»
 	$db_name = «EXPAND getDatabaseStoreString»;
+«ENDDEFINE»
+
+«DEFINE getDatabaseStoreString FOR emf::EObject»
+	«EXPAND exception FOR throwException("Unknown DomainObject container " + this)»
 «ENDDEFINE»
 
 «DEFINE getDatabaseStoreString FOR model::DomainStore»
 	'sqlite:«safeNameString(id)».db'
+«ENDDEFINE»
+
+«DEFINE getDatabaseStoreString FOR model::InternetApplication»
+	'sqlite:internet_application.db' /* default database, for attributes without stores */
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

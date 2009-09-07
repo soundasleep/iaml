@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -468,7 +469,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		assertFalse("target file '" + target + "' should not exist yet", target.exists());
 		
 		// copy
-		target.create(new FileInputStream(sourceFile), true, monitor);
+		target.create(new BufferedInputStream(new FileInputStream(sourceFile)), true, monitor);
 		
 		// check
 		assertTrue("target file '" + target + "' should now exist", target.exists());

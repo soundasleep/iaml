@@ -167,6 +167,11 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// go to page
 		beginAtSitemapThenPage(sitemap, pageTitle, pageTitle);
 		
+		// check to make sure we didn't run out of execution time
+		if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageTitle + "'");
+		}
+		
 		return sitemap;
 	}
 	
@@ -187,6 +192,11 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		
 		// go to page
 		beginAtSitemapThenPage(sitemap, pageTitle, pageTitle, query);
+		
+		// check to make sure we didn't run out of execution time
+		if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageTitle + "'");
+		}
 		
 		return sitemap;
 	}

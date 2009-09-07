@@ -491,22 +491,23 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	}
 
 	/**
-	 * It's not possible to do something like //iaml:wire[iaml:from='id']
-	 * so we need to parse them manually.
-	 *
+	 * Get all of the wires connecting the two elements together of any
+	 * class. Does not throw an error if there are no wires.
+	 * 
 	 * @param container
 	 * @param fromElement
 	 * @param toElement
 	 * @return the wire found or throws an exception
 	 * @throws JaxenException
+	 * @see #getWiresFromTo(EObject, WireEdgesSource, WireEdgeDestination, Class)
 	 */
 	protected Set<WireEdge> getWiresFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
 		return getWiresFromTo(container, fromElement, toElement, WireEdge.class);
 	}
 	
 	/**
-	 * It's not possible to do something like //iaml:wire[iaml:from='id']
-	 * so we need to parse them manually.
+	 * Get all of the wires connecting the two elements together of the
+	 * given class. Does not throw an error if there are no wires.
 	 *
 	 * @param container
 	 * @param fromElement
@@ -515,6 +516,11 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @throws JaxenException
 	 */
 	protected Set<WireEdge> getWiresFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement, Class<? extends WireEdge> type) throws JaxenException {
+		/*
+		 * It's not possible to do something like //iaml:wire[iaml:from='id']
+		 * so we need to parse them manually.
+		 */
+		
 		Set<WireEdge> results = new HashSet<WireEdge>();
 		List<?> wires = query(container, "//iaml:wires");
 		for (Object o : wires) {
@@ -524,10 +530,6 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 					results.add(w);
 				}
 			}
-		}
-
-		if (results.isEmpty()) {
-			fail("No wires of type '" + type + "' found between [" + fromElement + "] and [" + toElement + "]");
 		}
 
 		return results;
@@ -732,16 +734,25 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * For bidirectional wires, get all wires connecting the
 	 * two elements.
 	 *
+	 * @see #getWiresBidirectional(EObject, WireEdgesSource, WireEdgeDestination, Class)
 	 * @param container
 	 * @param element1
 	 * @param element2
 	 * @throws JaxenException
 	 */
 	protected Set<WireEdge> getWiresBidirectional(EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+		return getWiresBidirectional(container, element1, element2, WireEdge.class);
+	}
+
+	/**
+	 * For bidirectional wires, get all wires connecting the
+	 * two elements, with the given type.
+	 */
+	protected Set<WireEdge> getWiresBidirectional(EObject container, WireEdgesSource element1, WireEdgeDestination element2, Class<? extends WireEdge> type) throws JaxenException {
 		List<?> wires = query(container, "//iaml:wires");
 		Set<WireEdge> edges = new HashSet<WireEdge>();
 		for (Object o : wires) {
-			if (o instanceof WireEdge) {
+			if (type.isInstance(o)) {
 				WireEdge w = (WireEdge) o;
 				if (w.getFrom().equals(element1) && w.getTo().equals(element2))
 					edges.add(w);
@@ -759,20 +770,33 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 *
 	 * @see #assertHasWiresFromTo(int, EObject, WireEdgesSource, WireEdgeDestination)
 	 * @see #getWiresBidirectional(EObject, WireEdgesSource, WireEdgeDestination)
+	 * @see #assertHasWiresBidirectional(int, EObject, WireEdgesSource, WireEdgeDestination, Class)
 	 * @param container
 	 * @param element1
 	 * @param element2
+	 * @return the wires found
 	 * @throws JaxenException
 	 */
-	public void assertHasWiresBidirectional(int count, EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+	public Set<WireEdge> assertHasWiresBidirectional(int count, EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+		return assertHasWiresBidirectional(count, container, element1, element2, WireEdge.class);
+	}
+	
+	/**
+	 * Assert that a given number of bidirectional wires
+	 * occur between the two elements, with the given type.
+	 * 
+	 * @return the wires found
+	 */
+	public Set<WireEdge> assertHasWiresBidirectional(int count, EObject container, WireEdgesSource element1, WireEdgeDestination element2, Class<? extends WireEdge> type) throws JaxenException {
 		
-		Set<WireEdge> wires = getWiresBidirectional(container, element1, element2);
+		Set<WireEdge> wires = getWiresBidirectional(container, element1, element2, type);
 		if (wires.size() != count) {
 			for (WireEdge wire : wires) {
 				System.err.println(wire);
 			}
-			assertEquals("Expected " + count + " wires connecting [" + element1 + "] and [" + element2 + "], found: " + wires.size(), count, wires.size());
+			assertEquals("Expected " + count + " wires of type '" + type.getName() + "' connecting [" + element1 + "] and [" + element2 + "], found: " + wires.size(), count, wires.size());
 		}
+		return wires;
 		
 	}
 

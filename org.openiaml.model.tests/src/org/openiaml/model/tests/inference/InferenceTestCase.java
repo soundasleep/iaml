@@ -49,13 +49,16 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
+import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.ModelInferenceTestCase;
 
 /**
@@ -514,6 +517,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert there exists only one bidirectional SyncWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public SyncWire assertHasSyncWire(EObject container, WireEdgesSource element1, WireEdgeDestination element2, String name) throws JaxenException {
+		return (SyncWire) assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class).iterator().next();
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional ParameterWire between
 	 * the given elements.
 	 *
@@ -577,6 +590,28 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public SelectWire assertHasSelectWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (SelectWire) assertHasWireFromTo(container, from, to, 
 				SelectWire.class, name);
+	}	
+	
+	/**
+	 * Assert there exists only one unidirectional NewInstanceWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public NewInstanceWire assertHasNewInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+		return (NewInstanceWire) assertHasWireFromTo(container, from, to, 
+				NewInstanceWire.class, name);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional ConditionWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public ConditionWire assertHasConditionWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+		return (ConditionWire) assertHasWireFromTo(container, from, to, 
+				ConditionWire.class, name);
 	}
 	
 	/**

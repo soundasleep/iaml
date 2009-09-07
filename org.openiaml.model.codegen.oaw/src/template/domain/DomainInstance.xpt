@@ -33,6 +33,38 @@
 		«ELSEIF name=="new"»
 			«REM»create a new instance of the given DomainObjectInstance«ENDREM»
 			queued_new_domain_instance('«safeNameString(object.id)»')
+		«ELSEIF name=="add role"»
+			«LET wire.inEdges.typeSelect(model::wires::ParameterWire) AS paramWires»
+				«IF paramWires.size != 1»
+					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for add_role, got: " + paramWires.size)»
+				«ELSE»
+					queued_add_role(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
+				«ENDIF»
+			«ENDLET»
+		«ELSEIF name=="add permission"»
+			«LET wire.inEdges.typeSelect(model::wires::ParameterWire) AS paramWires»
+				«IF paramWires.size != 1»
+					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for add_permission, got: " + paramWires.size)»
+				«ELSE»
+					queued_add_permission(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
+				«ENDIF»
+			«ENDLET»
+		«ELSEIF name=="remove role"»
+			«LET wire.inEdges.typeSelect(model::wires::ParameterWire) AS paramWires»
+				«IF paramWires.size != 1»
+					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for remove_role, got: " + paramWires.size)»
+				«ELSE»
+					queued_remove_role(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
+				«ENDIF»
+			«ENDLET»
+		«ELSEIF name=="remove permission"»
+			«LET wire.inEdges.typeSelect(model::wires::ParameterWire) AS paramWires»
+				«IF paramWires.size != 1»
+					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for remove_permission, got: " + paramWires.size)»
+				«ELSE»
+					queued_remove_permission(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
+				«ENDIF»
+			«ENDLET»
 		«ELSE»
 			«EXPAND exception FOR throwException("No client-side code for domainInstanceCall operation " + this)»
 		«ENDIF»

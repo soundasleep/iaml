@@ -48,7 +48,20 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected InternetApplication loadAndCodegen(Class<?> modelFile) throws Exception {
-		InternetApplication root = loadAndInfer(modelFile);
+		return loadAndCodegen(modelFile, false);
+	}
+	
+	/**
+	 * Load a model and perform code generation.
+	 * 
+	 * @see #loadAndInfer(String)
+	 * @param modelFile
+	 * @param logRuleSource should the source of rules be logged?
+	 * @return The loaded InternetApplication
+	 * @throws Exception
+	 */
+	protected InternetApplication loadAndCodegen(Class<?> modelFile, boolean logRuleSource) throws Exception {
+		InternetApplication root = loadAndInfer(modelFile, logRuleSource);
 		doCodegen(modelFile);
 		return root;
 	}
@@ -62,7 +75,20 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected InternetApplication loadAndCodegen(Class<?> testClass, String modelFile) throws Exception {
-		InternetApplication root = loadAndInfer(modelFile);
+		return loadAndCodegen(testClass, modelFile, false);
+	}
+	
+	/**
+	 * Load a model and perform code generation.
+	 * 
+	 * @see #loadAndInfer(String)
+	 * @param modelFile
+	 * @param logRuleSource should the source of rules be logged?
+	 * @return The loaded InternetApplication
+	 * @throws Exception
+	 */
+	protected InternetApplication loadAndCodegen(Class<?> testClass, String modelFile, boolean logRuleSource) throws Exception {
+		InternetApplication root = loadAndInfer(modelFile, logRuleSource);
 		doCodegen(testClass);
 		return root;
 	}
@@ -728,7 +754,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	@Override
 	public void submit() {
 		try {
-			waitForAjax();
+			waitForAjax(); // TODO remove this check; we shouldn't have to wait for ajax
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}

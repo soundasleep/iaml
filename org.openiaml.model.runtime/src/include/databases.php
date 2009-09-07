@@ -4,10 +4,11 @@
  * Helper methods and functions for database access.
  *
  */
-
+ 
 class DatabaseQuery {
 
 	var $db;
+	var $source;
 
 	/**
 	 * Construct a database query with the given database source.
@@ -16,6 +17,7 @@ class DatabaseQuery {
 	public function __construct($source) {
 		$this->db = new PDO($source) 
 			or throw_new_IamlRuntimeException("Could not open database source '$source'");
+		$this->source = $source;
 	}
 	
 	/**
@@ -28,12 +30,12 @@ class DatabaseQuery {
 		
 		log_message("[query] $query");
 		log_message("[args] " . $this->debugString($args));
-		
+
 		$rs = $this->db->prepare($query) 
-			or $this->throwDbError($this->db, "Could not prepare query '$query'");
+			or $this->throwDbError($this->db, "Could not prepare fetchFirst query '$query'", $args);
 
 		$rs->execute($args)
-			or $this->throwDbError($this->db, "Could not execute query '$query'");
+			or $this->throwDbError($this->db, "Could not execute fetchFirst query '$query'", $args);
 		
 		// get just the first result			
 		$row = $rs->fetch();
@@ -61,10 +63,10 @@ class DatabaseQuery {
 		log_message("[args] " . $this->debugString($args));
 		
 		$rs = $this->db->prepare($query) 
-			or $this->throwDbError($this->db, "Could not prepare query '$query'");
+			or $this->throwDbError($this->db, "Could not prepare fetch query '$query'", $args);
 
 		$rs->execute($args)
-			or $this->throwDbError($this->db, "Could not execute query '$query'");
+			or $this->throwDbError($this->db, "Could not execute fetch query '$query'", $args);
 		
 		$result = array();
 		while ($row = $rs->fetch()) {
@@ -88,17 +90,19 @@ class DatabaseQuery {
 		log_message("[args] " . $this->debugString($args));
 		
 		$rs = $this->db->prepare($query) 
-			or $this->throwDbError($this->db, "Could not prepare query '$query'");
+			or $this->throwDbError($this->db, "Could not prepare single query '$query'", $args);
 
 		$rs->execute($args)
-			or $this->throwDbError($this->db, "Could not execute query '$query'");
+			or $this->throwDbError($this->db, "Could not execute single query '$query'", $args);
 		
 		return $this->db;
 		
 	}
 	
-	private function throwDbError($db, $message) {
-		throw new IamlRuntimeException($message . " [error = " . $this->errorInfo($db) . "]"); 
+	private function throwDbError($db, $message, $args = "<not provided>") {
+		throw new IamlRuntimeException($message . " "
+			. (!$args ? "(no args)" : "[args = " . $this->debugString($args) . "]")
+			. " [source = " . $this->source . "] [error = " . $this->errorInfo($db) . "]"); 
 	}
 	
 	private function errorInfo($db) {

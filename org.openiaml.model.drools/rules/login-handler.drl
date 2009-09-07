@@ -1113,6 +1113,9 @@ rule "Update Select Wire between Domain Object types [user]"
 		
 		select : SelectWire ( from == role, to == instance )
 		
+		# a new attribute has been inserted (trigger)
+		attribute : DomainAttributeInstance ( eContainer == instance )
+		
 		not (eval(select.getQuery() != null && select.getQuery().equals(getUserQueryString(role))))
 		
 	then

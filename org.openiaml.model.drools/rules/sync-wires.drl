@@ -426,3 +426,44 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 
 end
 
+rule "A SyncWire between Attributes selected from a NewInstanceWire need to check that the attribute exists before initialising"
+	when
+		sync : SyncWire( overridden == false )
+		form : InputForm ( overridden == false )
+		instance : DomainObjectInstance ( overridden == false )
+		
+		eval(connects(sync, form, instance))
+		
+		# the instance is created through a NewInstanceWire
+		domainObject : DomainObject ( )
+		newInstance : NewInstanceWire ( from == domainObject, to == instance )
+		
+		# contained attribute/field
+		attribute : DomainAttributeInstance( eContainer == instance )
+		tf : InputTextField ( eContainer == form )
+		sync2 : SyncWire ( )
+		
+		eval(connects(sync2, tf, attribute))
+		
+		# text field access/init events
+		access : EventTrigger ( eContainer == tf, name == "access" )
+		initOp : Operation ( eContainer == tf, name == "init" )
+		run : RunInstanceWire ( from == access, to == initOp )
+		
+		attributeValue : ApplicationElementProperty ( eContainer == attribute, name == "fieldValue" )
+		
+		param : ParameterWire ( from == attributeValue, to == run )  
+		
+		# exists? condition in the instance
+		existsCondition : Condition ( eContainer == instance, name == "exists?" )
+		
+		# but not connected		
+		not (ConditionWire ( from == existsCondition, to == run ))
+		
+	then
+		# connect it
+		ConditionWire cw = handler.generatedConditionWire(sync2, sync2, existsCondition, run);
+		handler.setName(cw, "check new instance exists");
+		queue.add(cw, drools);
+
+end

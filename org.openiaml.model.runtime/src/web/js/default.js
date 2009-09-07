@@ -490,6 +490,30 @@ function Visual_Page(id, name) {
 	this.toString = function() { return "Page: id=" + id + " name=" + name; };
 }
 
+/**
+ * Represents a Role: by ID and name
+ */
+function Users_Role(id, name) {
+	this.id = id;
+	this.name = name;
+	
+	this.getID = function() { return id; };
+	this.getName = function() { return name; };
+	this.toString = function() { return "Role: id=" + id + " name=" + name; };
+}
+
+/**
+ * Represents a Permission: by ID and name
+ */
+function Users_Permission(id, name) {
+	this.id = id;
+	this.name = name;
+	
+	this.getID = function() { return id; };
+	this.getName = function() { return name; };
+	this.toString = function() { return "Permission: id=" + id + " name=" + name; };
+}
+
 // ---------
 
 /**

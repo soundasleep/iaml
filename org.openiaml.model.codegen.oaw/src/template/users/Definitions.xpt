@@ -14,7 +14,14 @@
 		«EXPAND checkAccessDefinition FOREACH children.typeSelect(model::components::AccessControlHandler)»
 		«EXPAND checkAccessDefinition FOREACH components.typeSelect(model::components::AccessControlHandler)»
 	«ELSE»
-		/* no client-side access control handler definitions */
+		/* no client-side access control handler definitions for Session */
+	«ENDIF»
+«ENDDEFINE»
+«DEFINE accessControlHandlerDefinitions(Boolean php) FOR model::visual::Page»
+	«IF php»
+		«EXPAND checkAccessDefinition FOREACH children.typeSelect(model::components::AccessControlHandler)»
+	«ELSE»
+		/* no client-side access control handler definitions for Page */
 	«ENDIF»
 «ENDDEFINE»
 
@@ -80,7 +87,7 @@ see: template::domain::DomainInheritance
 	
 	/* check permissions */
 	«FOREACH outEdges.typeSelect(model::wires::RequiresWire).to.typeSelect(model::users::Permission) AS targetPermission»
-		«EXPAND exception FOR throwException("Permission logic not yet implemented")»
+		«EXPAND exception FOR throwException("Permission logic not yet implemented: " + targetPermission)»
 	«ENDFOREACH»
 	
 	/* check is successful */

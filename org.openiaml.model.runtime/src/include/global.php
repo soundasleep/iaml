@@ -10,6 +10,7 @@ ob_start();		/* we will implicitly flush at the end (needed for redirections whe
 set_exception_handler('default_exception_handler');			/* default exception handler */
 
 require("databases.php");
+require("first_class_types.php");
 
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
 function log_message($msg, $also_debug = true) {
@@ -365,27 +366,6 @@ function xpathMatch($a, $b) {
 function emailAddressMatch($a) {
 	$regexp = "/^([A-Za-z0-9\._\-]+)@([A-Za-z0-9_\-]+)(\.[A-Za-z0-9_\-]+)+$/i";
 	return preg_match($regexp, $a);
-}
-
-/**
- * Represents a Page: by ID and name
- */
-class Visual_Page {
-	var $id;
-	var $name;
-
-	public function __construct($id, $name) {
-		$this->id = $id;
-		$this->name = $name;
-	}
-
-	public function getID() {
-		return $this->id;
-	}
-
-	public function getName() {
-		return $this->name;
-	}
 }
 
 /**

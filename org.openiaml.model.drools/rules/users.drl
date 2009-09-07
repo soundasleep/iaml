@@ -34,7 +34,22 @@ rule "When a session is protected by an AccessControlHandler with no login handl
 
 end
 
-rule "A page protected by an ACH should have a 'permissions check' operation"
+rule "When a page is protected by an AccessControlHandler with no login handler[type=user], add it"
+	when
+		page : Page ( )
+		ach : AccessControlHandler ( eContainer == page )
+		
+		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == page ))
+
+	then
+		LoginHandler lh = handler.generatedLoginHandler(ach, page);
+		handler.setValue(lh, ComponentsPackage.eINSTANCE.getLoginHandler_Type(), LoginHandlerTypes.USER);
+		handler.setName(lh, "role-based login handler");
+		queue.add(lh, drools);
+
+end
+
+rule "A page within a session protected by an ACH should have a 'permissions check' operation"
 	when
 		session : Session ( )
 		page : Page ( eContainer == session )
@@ -49,13 +64,43 @@ rule "A page protected by an ACH should have a 'permissions check' operation"
 
 end
 
-rule "Connect 'permissions check' up to the 'access' event of the session"
+rule "A page protected by an ACH should have a 'permissions check' operation"
+	when
+		page : Page ( )
+		ach : AccessControlHandler ( eContainer == page )
+
+		not ( Operation ( eContainer == page, name == "page permissions check" ))
+	
+	then
+		CompositeOperation check = handler.generatedCompositeOperation(ach, page);
+		handler.setName(check, "page permissions check");
+		queue.add(check, drools);	
+
+end
+
+rule "Connect 'permissions check' up to the 'access' event of the session (ACH in session)"
 	when
 		session : Session ( )
 		page : Page ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
 		access : EventTrigger ( eContainer == page, name == 'access' )
 		check : Operation ( eContainer == page, name == "permissions check" )
+		
+		not ( RunInstanceWire ( from == access, to == check ))
+	
+	then
+		RunInstanceWire run = handler.generatedRunInstanceWire(ach, page, access, check);
+		handler.setName(run, "run");
+		queue.add(run, drools); 	
+
+end 
+
+rule "Connect 'permissions check' up to the 'access' event of the page (ACH in page)"
+	when
+		page : Page ( )
+		ach : AccessControlHandler ( eContainer == page )
+		access : EventTrigger ( eContainer == page, name == 'access' )
+		check : Operation ( eContainer == page, name == "page permissions check" )
 		
 		not ( RunInstanceWire ( from == access, to == check ))
 	
@@ -127,6 +172,7 @@ rule "'User' role contains a default attribute 'password'"
 
 end
 
+# TODO can we refactor these from [User/Session] pairs into an abstract 'Scope'?
 rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User"
 	when
 		session : Session( ) 
@@ -156,6 +202,35 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 
 end
 
+rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User (in page)"
+	when
+		page : Page( ) 
+		login_handler : LoginHandler ( eContainer == page, type == LoginHandlerTypes.USER )
+		ach : AccessControlHandler ( eContainer == page )
+		store : UserStore ( )
+		
+		// the store contains either the roles or the permissions
+		// referenced by the ACH; we only want one
+		( exists  
+			( role : Role ( eContainer == store ) and
+			RequiresWire ( from == ach, to == role ) )
+		or
+		exists
+			( permission : Permission ( eContainer == store ) and
+			RequiresWire ( from == ach, to == permission ) )
+		)
+		
+		user : Role ( eContainer == store, name == "User" )
+	
+		# if there is already an incoming parameter wire, don't connect up User
+		not (ParameterWire ( to == login_handler ))
+	
+	then
+		ParameterWire param = handler.generatedParameterWire(ach, page, user, login_handler);
+		queue.add(param, drools);
+
+end
+
 rule "Create 'check permissions' operation in AccessControlHandler"
 	when
 		ach : AccessControlHandler( )
@@ -169,7 +244,7 @@ rule "Create 'check permissions' operation in AccessControlHandler"
 
 end
 
-rule "Create contents of 'permissions check' operation in a Page"
+rule "Create contents of 'permissions check' operation in a Page (session)"
 	when
 		session : Session ( )
 		page : Page ( eContainer == session )
@@ -223,13 +298,84 @@ rule "Create contents of 'permissions check' operation in a Page"
 
 end
 
-rule "An AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter"
+rule "Create contents of 'permissions check' operation in a Page (page)"
+	when
+		page : Page ( )
+		ach : AccessControlHandler ( eContainer == page )
+
+		check : CompositeOperation ( eContainer == page, name == "page permissions check" )
+		ach_check : Operation ( eContainer == ach, name == "check permissions" )
+		
+		not ( StartNode( eContainer == check ))	
+
+	then
+			
+		StartNode start = handler.generatedStartNode(check, check);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(check, check);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(check, check);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Error: You do not have valid permissions. You may need to login.");
+		queue.add(cancel, drools);
+		
+		# virtual operation call
+		OperationCallNode opCall = handler.generatedOperationCallNode(check, check);
+		handler.setName(opCall, "call permissions operation");
+		queue.add(opCall, drools);
+		
+		# run wire to this call
+		RunInstanceWire run = handler.generatedRunInstanceWire(check, check, opCall, ach_check);
+		handler.setName(run, "run");
+		queue.add(run, drools); 
+	
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(check, check);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, opCall);
+		queue.add(edge1, drools);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(check, check);
+		handler.setFrom(edge2, opCall);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+		
+		# not ok	
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(check, check);
+		handler.setFrom(edge3, opCall);
+		handler.setTo(edge3, cancel);
+		queue.add(edge3, drools);
+
+end
+
+rule "An AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (session)"
 	when
 		session : Session ( )
 		ach : AccessControlHandler ( eContainer == session )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		instance : UserInstance ( eContainer == session )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		not ( ParameterWire ( from == instance, to == ach )) 
+	
+	then
+		ParameterWire param = handler.generatedParameterWire(ach, ach, instance, ach);
+		queue.add(param, drools);
+
+end
+
+rule "An AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (page)"
+	when
+		session : Session ( )
+		page : Page ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == page )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		instance : UserInstance ( eContainer == page )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( ParameterWire ( from == instance, to == ach )) 

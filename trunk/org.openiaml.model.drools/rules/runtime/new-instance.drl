@@ -97,11 +97,11 @@ rule "Create 'exists?' condition for DomainObjectInstances"
 	when
 		instance : DomainObjectInstance ( )
 		
-		not ( DecisionCondition( eContainer == instance, name == "exists?" ))
+		not ( CompositeCondition( eContainer == instance, name == "exists?" ))
 		
 	then
 		# create a new one
-		DecisionCondition condition = handler.generatedDecisionCondition(instance, instance);
+		CompositeCondition condition = handler.generatedCompositeCondition(instance, instance);
 		handler.setName(condition, "exists?");
 		queue.add(condition, drools);
 
@@ -135,3 +135,49 @@ rule "Create 'fieldValue' value for DomainAttributeInstances"
 
 end
 
+rule "Create the contents of the 'exists?' condition"
+	
+	when
+		instance : DomainObjectInstance ( )
+		
+		condition : CompositeCondition( eContainer == instance, name == "exists?" )
+		existsOp : DecisionOperation( eContainer == instance, name == "exists?" )
+		
+		not ( StartNode( eContainer == condition ))
+	
+	then
+		# create contents
+		StartNode start = handler.generatedStartNode(condition, condition);
+		queue.add(start, drools);
+		
+		FinishNode finish = handler.generatedFinishNode(condition, condition);
+		queue.add(finish, drools);
+		
+		CancelNode cancel = handler.generatedCancelNode(condition, condition);
+		queue.add(cancel, drools);
+	
+		# virtual operation call
+		OperationCallNode opCall = handler.generatedOperationCallNode(condition, condition);
+		handler.setName(opCall, "exists?");
+		queue.add(opCall, drools);
+		
+		RunInstanceWire runWire = handler.generatedRunInstanceWire(condition, condition, opCall, existsOp);
+		handler.setName(runWire, "run");
+		queue.add(runWire, drools);
+				
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(condition, condition);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, opCall);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(condition, condition);
+		handler.setFrom(edge2, opCall);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(condition, condition);
+		handler.setFrom(edge3, opCall);
+		handler.setTo(edge3, cancel);
+		queue.add(edge3, drools);
+
+end

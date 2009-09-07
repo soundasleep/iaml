@@ -204,6 +204,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(node, by);
 		return node;
 	}
+
+	public OperationCallNode generatedOperationCallNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		OperationCallNode node = (OperationCallNode) createElement( container, OperationsPackage.eINSTANCE.getOperationCallNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
 	
 	public StartNode generatedStartNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
 		StartNode node = (StartNode) createElement( container, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );

@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
@@ -11,6 +12,11 @@ import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.OperationCallNode;
+import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -151,7 +157,45 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		ConditionWire conditionWire = assertHasConditionWire(root, exists, run, "check new instance exists");
 		assertGenerated(conditionWire);
 	}
+	
+	/**
+	 * Test the composition of the 'exists?' composite condition.
+	 * 
+	 * @throws Exception
+	 */
+	public void testExistsConditionCompositiion() throws Exception {
+		root = loadAndInfer(DomainInheritanceEditing.class);
+	
+		Page page = assertHasPage(root, "create a new student without autosave");
+		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "new student");
 		
+		// the 'exists?' operation
+		DecisionOperation decision = assertHasDecisionOperation(instance, "exists?");
+		assertGenerated(decision);
+		
+		// the condition on the object instance
+		CompositeCondition exists = assertHasCompositeCondition(instance, "exists?");
+		assertGenerated(exists);
+		
+		StartNode start = assertHasStartNode(exists);
+		FinishNode finish = assertHasFinishNode(exists);
+		CancelNode cancel = assertHasCancelNode(exists);
+		
+		// virtual operation call
+		OperationCallNode callExists = assertHasOperationCallNode(exists, "exists?");
+		assertGenerated(callExists);
+		
+		// calls the decision operation
+		RunInstanceWire virtual = assertHasRunInstanceWire(root, callExists, decision, "run");
+		assertGenerated(virtual);
+		
+		// the rest of the structure
+		assertHasExecutionEdge(exists, start, callExists);
+		assertHasExecutionEdge(exists, callExists, finish);
+		assertHasExecutionEdge(exists, callExists, cancel);
+		
+	}
+	
 	/**
 	 * The inferred model should be valid.
 	 * 

@@ -38,6 +38,7 @@ import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.StartNode;
@@ -478,11 +479,31 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
+	 * DecisionOperation.
+	 *
+	 * @return The element found
+	 */
+	public DecisionOperation assertHasDecisionOperation(ContainsOperations element, String string) throws JaxenException {
+		return (DecisionOperation) queryOne(element, "iaml:operations[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
 	 * StartNode.
 	 *
 	 * @return The element found
 	 */
 	public StartNode assertHasStartNode(CompositeOperation element) throws JaxenException {
+		return (StartNode) assertHasOne(element, "iaml:nodes", StartNode.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * StartNode.
+	 *
+	 * @return The element found
+	 */
+	public StartNode assertHasStartNode(CompositeCondition element) throws JaxenException {
 		return (StartNode) assertHasOne(element, "iaml:nodes", StartNode.class);
 	}
 	
@@ -498,6 +519,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
+	 * FinishNode.
+	 *
+	 * @return The element found
+	 */
+	public FinishNode assertHasFinishNode(CompositeCondition element) throws JaxenException {
+		return (FinishNode) assertHasOne(element, "iaml:nodes", FinishNode.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
 	 * CancelNode.
 	 *
 	 * @return The element found
@@ -508,11 +539,31 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
+	 * CancelNode.
+	 *
+	 * @return The element found
+	 */
+	public CancelNode assertHasCancelNode(CompositeCondition element) throws JaxenException {
+		return (CancelNode) assertHasOne(element, "iaml:nodes", CancelNode.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
 	 * OperationCallNode.
 	 *
 	 * @return The element found
 	 */
 	public OperationCallNode assertHasOperationCallNode(CompositeOperation element, String string) throws JaxenException {
+		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * OperationCallNode.
+	 *
+	 * @return The element found
+	 */
+	public OperationCallNode assertHasOperationCallNode(CompositeCondition element, String string) throws JaxenException {
 		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");	
 	}
 	

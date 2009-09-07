@@ -29,6 +29,7 @@ public class AllModel0_4InferenceTests {
 		suite.addTestSuite(UserRoles.class);
 		suite.addTestSuite(UserRolesLoginHandler.class);
 		suite.addTestSuite(DomainInheritance.class);
+		suite.addTestSuite(DomainInheritanceEditing.class);
 		
 		return suite;
 	}

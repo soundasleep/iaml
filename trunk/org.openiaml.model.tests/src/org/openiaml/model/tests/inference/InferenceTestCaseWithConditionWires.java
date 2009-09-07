@@ -24,6 +24,8 @@ import org.openiaml.model.model.wires.SyncWire;
  * Inference-specific test cases that deal with ConditionWires and
  * ParameterWires.
  * 
+ * TODO merge into {@link InferenceTestCase}.
+ * 
  * @author jmwright
  *
  */

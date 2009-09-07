@@ -286,6 +286,26 @@ function save_queued_store_domain_object(id, function_queue) {
 	execute_queued_url(url, 'queued_store_object', function_queue, true /* allow instructions */);
 }
 
+function queued_add_role(role_id, instance_id, function_queue) {
+	var url = 'add_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue, true /* allow instructions */);
+}
+
+function queued_add_permission(permission_id, instance_id, function_queue) {
+	var url = 'add_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue, true /* allow instructions */);
+}
+
+function queued_remove_role(role_id, instance_id, function_queue) {
+	var url = 'remove_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue, true /* allow instructions */);
+}
+
+function queued_remove_permission(permission_id, instance_id, function_queue) {
+	var url = 'remove_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue, true /* allow instructions */);
+}
+
 /* call a remote operation (only one attribute) */
 function call_remote_event(container, operation_name, arg0, arg1, function_queue) {
 	var url = 'call_remote_event.php?container=' + escape(container) 

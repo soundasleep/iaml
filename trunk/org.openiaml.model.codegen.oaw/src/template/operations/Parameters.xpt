@@ -125,6 +125,16 @@
 	new Visual_Page("«id-»", "«name-»")
 «ENDDEFINE»
 
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::users::Role»
+	/* Role "«name-»" */
+	new Users_Role("«id-»", "«name-»")
+«ENDDEFINE»
+
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::users::Permission»
+	/* Permission "«name-»" */
+	new Users_Permission("«id-»", "«name-»")
+«ENDDEFINE»
+
 /**
  * A value specified as part of the URI, e.g. ?key=value
  */

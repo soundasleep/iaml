@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 
 /**
@@ -21,8 +23,16 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(UserModifyRoles.class);
+		root = loadAndCodegen(UserModifyRoles.class, true);
 		initialiseDatabase();
+	}
+
+	@Override
+	protected List<String> getDatabaseInitialisers() {
+		List<String> s = super.getDatabaseInitialisers();
+		s.add("CREATE TABLE default_role (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, User_generated_primary_key INTEGER)");
+		s.add("INSERT INTO default_role (generated_primary_key, User_generated_primary_key) VALUES (44, 22)");
+		return s;
 	}
 	
 	/**
@@ -60,12 +70,16 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		assertProblem();
 	}
 	
+	public void testCreateRole() throws Exception {
+		createRole();
+	}
+	
 	/**
 	 * We can create a new user, and use it to login.
 	 * 
 	 * @throws Exception
 	 */
-	public IFile testCreateRole() throws Exception {
+	public IFile createRole() throws Exception {
 		IFile sitemap = beginAtSitemapThenPage("create a new user");
 		assertNoProblem();
 		
@@ -96,15 +110,19 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		return sitemap;
 	}
 	
+	public void testCreateAddRole1() throws Exception {
+		createAddRole1();
+	}
+	
 	/**
 	 * Once created, we can add 'role 1' which can then
 	 * be used to access the page.
 	 * 
 	 * @throws Exception
 	 */
-	public IFile testCreateAddRole1() throws Exception {
+	public IFile createAddRole1() throws Exception {
 		// create a new user
-		IFile sitemap = testCreateRole();
+		IFile sitemap = createRole();
 		
 		gotoSitemapThenPage(sitemap, "add new roles");		
 		clickButtonWithText("add role 1");
@@ -115,7 +133,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		assertNoProblem();
 		
 		return sitemap;
-	}	
+	}
 	
 	/**
 	 * Once we have 'role 1', we can log out, log
@@ -125,7 +143,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 */
 	public void testCreateAddRole1Logout() throws Exception {
 		// create a new user
-		IFile sitemap = testCreateAddRole1();
+		IFile sitemap = createAddRole1();
 		
 		gotoSitemapThenPage(sitemap, "logout");
 		assertNoProblem();
@@ -142,7 +160,6 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		assertNoProblem();
 	}
 	
-	
 	/**
 	 * If we add 'role 2', we still can't access a page
 	 * that requires 'role 1'
@@ -151,7 +168,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 */
 	public void testCreateAddRole2() throws Exception {
 		// create a new user
-		IFile sitemap = testCreateRole();
+		IFile sitemap = createRole();
 		
 		gotoSitemapThenPage(sitemap, "add new roles");		
 		clickButtonWithText("add role 2");
@@ -171,15 +188,19 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		
 	}	
 	
+	public void testCreateAddPermission() throws Exception {
+		createAddPermission();
+	}
+	
 	/**
 	 * Once created, we can add 'permission 1' which can then
 	 * be used to access the page.
 	 * 
 	 * @throws Exception
 	 */
-	public IFile testCreateAddPermission() throws Exception {
+	public IFile createAddPermission() throws Exception {
 		// create a new user
-		IFile sitemap = testCreateRole();
+		IFile sitemap = createRole();
 		
 		gotoSitemapThenPage(sitemap, "add new roles");		
 		clickButtonWithText("add permission 1");
@@ -195,16 +216,16 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		
 		return sitemap;
 	}
-	
+
 	/**
 	 * If we add 'role 2', we automatically gain inherited
 	 * permissions.
 	 * 
 	 * @throws Exception
 	 */
-	public IFile testCreateInheritedPermission() throws Exception {
+	public void createInheritedPermission() throws Exception {
 		// create a new user
-		IFile sitemap = testCreateRole();
+		IFile sitemap = createRole();
 		
 		gotoSitemapThenPage(sitemap, "add new roles");		
 		clickButtonWithText("add role 2");
@@ -213,8 +234,10 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		// we can now access the 'requires inherited permission' page
 		gotoSitemapThenPage(sitemap, "requires inherited permission");		
 		assertNoProblem();
-		
-		return sitemap;
+	}
+	
+	public void testCreateManyPermissions() throws Exception {
+		createManyPermissions();
 	}
 	
 	/**
@@ -223,9 +246,9 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public IFile testCreateManyPermissions() throws Exception {
+	public IFile createManyPermissions() throws Exception {
 		// create a new user
-		IFile sitemap = testCreateRole();
+		IFile sitemap = createRole();
 		
 		gotoSitemapThenPage(sitemap, "add new roles");		
 		clickButtonWithText("add role 1");
@@ -252,9 +275,9 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public IFile testCreateManyPermissionsLogout() throws Exception {
+	public void testCreateManyPermissionsLogout() throws Exception {
 		// create a new user
-		IFile sitemap = testCreateManyPermissions();
+		IFile sitemap = createManyPermissions();
 		
 		gotoSitemapThenPage(sitemap, "logout");
 		assertNoProblem();
@@ -273,7 +296,6 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		gotoSitemapThenPage(sitemap, "requires permission 1");		
 		assertNoProblem();
 		
-		return sitemap;
 	}
 	
 	/**
@@ -282,9 +304,9 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public IFile testCreateManyPermissionsRemove() throws Exception {
+	public void testCreateManyPermissionsRemove() throws Exception {
 		// create a new user
-		IFile sitemap = testCreateManyPermissions();
+		IFile sitemap = createManyPermissions();
 		
 		gotoSitemapThenPage(sitemap, "remove roles");		
 		clickButtonWithText("remove all roles");
@@ -312,8 +334,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		
 		gotoSitemapThenPage(sitemap, "requires permission 1");		
 		assertProblem();
-		
-		return sitemap;
+
 	}
 	
 }

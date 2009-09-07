@@ -1,0 +1,73 @@
+«IMPORT iaml»
+
+/**
+ * Code behind Permissions.
+ *
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE permissionChecks FOR model::users::Role»
+	«REM»all permission types for this role«ENDREM»
+	«EXPAND permissionCheck(this) FOREACH getDomainStore().eAllContents.typeSelect(model::users::Permission)»
+«ENDDEFINE»
+
+«DEFINE permissionCheck(model::users::Role role) FOR model::users::Permission»
+/**
+ * Does the given instance of '«role.name»' contain the permission
+ * '«name»'?
+ * 
+ * Returns true if it does, false if not.
+ */
+function user_instance_«safeName(role)»_has_permission_«safeName()»($instance) {
+	«REM»
+		We implement permissions in a lazy way. essentially, we go up the
+		heirarchy until we find a root object (often User). We then check
+		a permissions table called Permissions_<ObjectName> for _all_ the
+		permissions in the system.
+		
+		Ideally, the best solution is probably to make every UserInstance
+		contain a unique ID which is then referenced to a global Permissions
+		table with all Permissions, but this is future work.
+	«ENDREM»
+	«LET role.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::users::Role) AS extendsRoles»
+		«IF extendsRoles.size > 0»
+			«FOREACH extendsRoles AS superclass»
+				/* ask the parent instance '«superclass.name»' */
+				
+				// get parent instance
+				$subclass_instance = get_subclass_«safeName(superclass)»_from_«safeName(role)»($instance);
+				if ($subclass_instance !== null) {
+					$result = user_instance_«safeName(superclass)»_has_permission_«safeName()»($subclass_instance);
+					if ($result)
+						return true;	// successfully found permission
+				}
+			«ENDFOREACH»
+		«ELSE»
+			/* we are at the root of the heirarchy */
+			«EXPAND template::domain::Select::selectDatabase FOR role»
+	
+			$query = "SELECT * FROM Permissions_«safeNameString(role.name)» 
+				WHERE «safeNameString(role.getPrimaryKey().name)» = ?
+				AND «safeNameString(name)» = 1";
+				
+			if (!isset($instance["«safeNameString(role.getPrimaryKey().name)»"])) {
+				throw new IamlRuntimeException("Could not search for permission '«name»' in Role '«role.name»': instance attribute '«safeNameString(role.getPrimaryKey().name)»' not defined");
+			}
+			$args = array($instance["«safeNameString(role.getPrimaryKey().name)»"]);
+			
+			$db_query = new DatabaseQuery($db_name);
+			$row = $db_query->fetchFirst($query, $args);
+			
+			if ($row !== null) {
+				// we found a permission successfully
+				return true;
+			}
+			return false;
+
+		«ENDIF»
+	«ENDLET»
+}
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

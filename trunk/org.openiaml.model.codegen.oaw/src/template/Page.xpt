@@ -40,6 +40,9 @@ define("CURRENT_PAGE", "«id»");
 «EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
 «EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
 
+// expand any users
+«EXPAND template::users::Includes::getInclude FOREACH getRoot().eAllContents.typeSelect(model::users::Role)-»
+
 // initialise default values for any fields
 «EXPAND initialiseDefaultValues FOREACH children»
 

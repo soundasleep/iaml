@@ -37,46 +37,25 @@
 		«REM»find the desired UserInstance to check against«ENDREM»
 		«REM»there should be exactly one incoming parameter wire with a UserInstance«ENDREM»
 		«LET inEdges.typeSelect(model::wires::ParameterWire).from.typeSelect(model::users::UserInstance).first() AS user»
-			«EXPAND checkAccessDefinition(user) FOR this»
+			«IF user==null»
+				«EXPAND exception FOR throwException("No incoming UserInstances for AccessControlHandler " + this)»
+			«ENDIF»
+			«EXPAND checkAccessDefinitionUser(user) FOR this»
 		«ENDLET»
 	}
 «ENDDEFINE»
 
-«REM»
-function check_role(initialRole, targetRole, $instance)
-		
-if initialRole == targetRole
-	return true;
-else
-	foreach subclass of initialRole
-		attribute source_key = initialRole.primaryKey;
-		attribute target_key = subclass.attributes( k | k extends source_key )
-		$source_key_value = $instance[source_key];
-		$new_instance = select * from subclass where target_key = ? ($source_key_value);
-		
-		if (instance)
-			return check_role(subclass, targetRole, $new_instance); 
-		else
-			return false;
-			
-...
-
-why not a cast_domain_object_as() method?
-
-see: template::domain::DomainInheritance
-«ENDREM»
-
 /**
  * We now have a UserInstance on which to validate against
  */
-«DEFINE checkAccessDefinition(model::users::UserInstance user) FOR model::components::AccessControlHandler»
-	$instance = get_object_instance_«inEdges.typeSelect(model::wires::ParameterWire).from.first().safeName()»();
+«DEFINE checkAccessDefinitionUser(model::users::UserInstance user) FOR model::components::AccessControlHandler»
+	$instance = get_object_instance_«safeName(user)»();
 	if (!$instance)
-		throw new IamlRuntimeException("Unexpected empty UserInstance; has the user logged in?");
+		throw new IamlRuntimeException("Unexpected empty UserInstance '«user.name»'; has the user logged in?");
 
 	«FOREACH outEdges.typeSelect(model::wires::RequiresWire).to.typeSelect(model::users::Role) AS targetRole»
 		«LET user.inEdges.typeSelect(model::wires::SelectWire).from.typeSelect(model::DomainObject).first() AS initialRole»
-			/* check role '«targetRole»' */
+			/* check role '«targetRole.name»' */
 			if (cast_«safeName(initialRole)»_as_«safeName(targetRole)»($instance) == null) {
 				throw new IamlRuntimeException("Source role '«initialRole.name»' could not be translated into '«targetRole.name»'");
 			} else {
@@ -87,7 +66,22 @@ see: template::domain::DomainInheritance
 	
 	/* check permissions */
 	«FOREACH outEdges.typeSelect(model::wires::RequiresWire).to.typeSelect(model::users::Permission) AS targetPermission»
-		«EXPAND exception FOR throwException("Permission logic not yet implemented: " + targetPermission)»
+		/* permission '«targetPermission.name»' */
+		if (
+		«IF user.inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+			«IF user.inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+				«EXPAND exception FOR throwException("Cannot deduce the instance type of UserInstance: " + user)»
+			«ELSE»
+				user_instance_«safeName(user.inEdges.typeSelect(model::wires::SelectWire).from.first())»_has_permission_«safeName(targetPermission)»
+			«ENDIF»
+		«ELSE»
+			user_instance_«safeName(user.inEdges.typeSelect(model::wires::NewInstanceWire).from.first())»_has_permission_«safeName(targetPermission)»
+		«ENDIF»
+		($instance)) {
+			// user has permission
+		} else {
+			throw new IamlRuntimeException("User of type '«user.name»' did not have permission '«targetPermission.name»'");
+		}
 	«ENDFOREACH»
 	
 	/* check is successful */

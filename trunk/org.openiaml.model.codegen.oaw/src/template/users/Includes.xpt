@@ -1,0 +1,36 @@
+«IMPORT iaml»
+
+/**
+ * Define the include files for each role.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE userIncludes FOR model::InternetApplication»
+	«EXPAND domainObjectInclude FOREACH eAllContents.typeSelect(model::users::Role)» 
+«ENDDEFINE»
+
+«DEFINE domainObjectInclude FOR model::users::Role-»
+	«FILE "output/users/" + safeName() + ".php"-»
+<?php
+		
+/**
+ * Role includes file for Role '«safeNameString(name)»'.
+ */		
+
+/**
+ * Permission checks.
+ */
+«EXPAND Permissions::permissionChecks»
+
+	«ENDFILE»
+«ENDDEFINE»
+
+/**
+ * Get the include file for the given role.
+ */
+«DEFINE getInclude FOR model::users::Role»
+	require("users/«safeName()».php");
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

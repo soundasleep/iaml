@@ -368,14 +368,14 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 
 end
 
-rule "An AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (page)"
+rule "A separate AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (page within a session)"
 	when
 		session : Session ( )
 		page : Page ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == page )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
-		instance : UserInstance ( eContainer == page )
+		instance : UserInstance ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( ParameterWire ( from == instance, to == ach )) 

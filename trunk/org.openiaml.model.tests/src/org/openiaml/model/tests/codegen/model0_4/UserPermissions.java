@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 
 /**
@@ -19,6 +21,14 @@ public class UserPermissions extends AbstractUserLoginTestCase {
 		root = loadAndCodegen(UserPermissions.class);
 		initialiseDatabase();
 	}
+
+	@Override
+	protected List<String> getDatabaseInitialisers() {
+		List<String> s = super.getDatabaseInitialisers();
+		s.add("CREATE TABLE Permissions_User (generated_primary_key INTEGER PRIMARY KEY, a_permission INTEGER, a_different_permission INTEGER)");
+		s.add("INSERT INTO Permissions_User (generated_primary_key, a_permission, a_different_permission) VALUES (22, 1, 1)");
+		return s;
+	}
 	
 	/**
 	 * Check the initial state of the application.
@@ -31,7 +41,7 @@ public class UserPermissions extends AbstractUserLoginTestCase {
 
 	/**
 	 * We cannot access the protected page as a User
-	 * because it does not have the appropriate Role.
+	 * because it does not have the appropriate Permission.
 	 * 
 	 * @throws Exception
 	 */
@@ -45,7 +55,7 @@ public class UserPermissions extends AbstractUserLoginTestCase {
 	}
 	
 	/**
-	 * Log in as 'default role'; works
+	 * Log in as 'default role'; works, because it has the Permission
 	 * 
 	 * @throws Exception
 	 */

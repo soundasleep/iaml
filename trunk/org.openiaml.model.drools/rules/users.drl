@@ -2,6 +2,7 @@
 package org.openiaml.model.drools
 
 #list any import classes here.
+import org.eclipse.emf.ecore.*;
 import org.openiaml.model.inference.*;
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.impl.*;
@@ -14,6 +15,17 @@ import org.openiaml.model.model.users.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
+
+# TODO put into separate file
+function Session containingSession(EObject e) {
+	if (e.eContainer() == null) {
+		return null;
+	}
+	if (e.eContainer() instanceof Session) {
+		return (Session) e.eContainer();
+	}
+	return containingSession(e.eContainer());
+}
 
 # insertion queue
 import org.openiaml.model.drools.*;
@@ -41,6 +53,9 @@ rule "When a page is protected by an AccessControlHandler with no login handler[
 		ach : AccessControlHandler ( eContainer == page )
 		
 		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session ))
+		
+		# no AccessControlHandler within the session too (the above rule will create one)
+		not (AccessControlHandler ( eContainer == session ))
 
 	then
 		LoginHandler lh = handler.generatedLoginHandler(ach, session);
@@ -174,17 +189,27 @@ rule "'User' role contains a default attribute 'password'"
 end
 
 # TODO can we refactor these from [User/Session] pairs into an abstract 'Scope'?
+/**
+ * It doesn't matter whether the ACH is in the Session or in a Page; 
+ * the LoginHandler will always have the same input class (User role),
+ * as the actual check logic is handled by the 'permissions check'
+ * method.
+ */
 rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User"
 	when
 		session : Session( ) 
 		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER )
-		ach : AccessControlHandler ( eContainer == session )
 		store : UserStore ( )
 		
-		// the store contains either the roles or the permissions
-		// referenced by the ACH; we only want one
-		exists
-			( obj : NamedElement ( eContainer == store ) and
+		exists ( 
+			// it doesn't matter if the ACH is in the session or the page
+			ach : AccessControlHandler ( eContainer == session 
+			|| eval(containingSession(ach).equals(session)) )
+
+			// the store contains either the roles or the permissions
+			// referenced by the ACH; we only want one		
+			and			
+			obj : NamedElement ( eContainer == store ) and
 			RequiresWire ( from == ach, to == obj ) )
 		
 		user : Role ( eContainer == store, name == "User" )
@@ -193,32 +218,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		not (ParameterWire ( to == login_handler ))
 	
 	then
-		ParameterWire param = handler.generatedParameterWire(ach, session, user, login_handler);
-		queue.add(param, drools);
-
-end
-
-rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User (in page)"
-	when
-		session : Session ( )
-		page : Page( eContainer == session ) 
-		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER )
-		ach : AccessControlHandler ( eContainer == page )
-		store : UserStore ( )
-		
-		// the store contains either the roles or the permissions
-		// referenced by the ACH; we only want one
-		exists
-			( obj : NamedElement ( eContainer == store ) and
-			RequiresWire ( from == ach, to == obj ) )
-		
-		user : Role ( eContainer == store, name == "User" )
-	
-		# if there is already an incoming parameter wire, don't connect up User
-		not (ParameterWire ( to == login_handler ))
-	
-	then
-		ParameterWire param = handler.generatedParameterWire(ach, session, user, login_handler);
+		ParameterWire param = handler.generatedParameterWire(login_handler, session, user, login_handler);
 		queue.add(param, drools);
 
 end

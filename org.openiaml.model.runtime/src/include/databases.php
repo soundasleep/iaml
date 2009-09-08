@@ -21,6 +21,14 @@ class DatabaseQuery {
 	}
 	
 	/**
+	 * Can we prepare the given query?
+	 */
+	public function tableExists($query) {
+		$rs = $this->db->prepare($query);
+		return $rs;
+	}
+	
+	/**
 	 * Execute the given query with the given arguments.
 	 *
 	 * Returns back either 'null' if there were no results, or

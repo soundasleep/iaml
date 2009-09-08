@@ -36,13 +36,14 @@ end
 
 rule "When a page is protected by an AccessControlHandler with no login handler[type=user], add it"
 	when
-		page : Page ( )
+		session : Session ( )
+		page : Page ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == page )
 		
-		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == page ))
+		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session ))
 
 	then
-		LoginHandler lh = handler.generatedLoginHandler(ach, page);
+		LoginHandler lh = handler.generatedLoginHandler(ach, session);
 		handler.setValue(lh, ComponentsPackage.eINSTANCE.getLoginHandler_Type(), LoginHandlerTypes.USER);
 		handler.setName(lh, "role-based login handler");
 		queue.add(lh, drools);
@@ -199,21 +200,17 @@ end
 
 rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User (in page)"
 	when
-		page : Page( ) 
-		login_handler : LoginHandler ( eContainer == page, type == LoginHandlerTypes.USER )
+		session : Session ( )
+		page : Page( eContainer == session ) 
+		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER )
 		ach : AccessControlHandler ( eContainer == page )
 		store : UserStore ( )
 		
 		// the store contains either the roles or the permissions
 		// referenced by the ACH; we only want one
-		( exists  
-			( role : Role ( eContainer == store ) and
-			RequiresWire ( from == ach, to == role ) )
-		or
 		exists
-			( permission : Permission ( eContainer == store ) and
-			RequiresWire ( from == ach, to == permission ) )
-		)
+			( obj : NamedElement ( eContainer == store ) and
+			RequiresWire ( from == ach, to == obj ) )
 		
 		user : Role ( eContainer == store, name == "User" )
 	
@@ -221,7 +218,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		not (ParameterWire ( to == login_handler ))
 	
 	then
-		ParameterWire param = handler.generatedParameterWire(ach, page, user, login_handler);
+		ParameterWire param = handler.generatedParameterWire(ach, session, user, login_handler);
 		queue.add(param, drools);
 
 end

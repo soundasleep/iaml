@@ -5,6 +5,8 @@ package org.openiaml.model.tests.codegen.model0_4;
 
 import org.eclipse.core.resources.IFile;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+
 /**
  * If we place one access control in a session, and another
  * access control in the contained page, then <em>both</em>
@@ -56,8 +58,12 @@ public class UserPermissionsRecursive extends AbstractDefaultRoleUserLoginTestCa
 		IFile sitemap = doStandardLoginAs("default@openiaml.org", "test123");
 		assertNoProblem();
 		
-		gotoSitemapWithProblem(sitemap, "target");
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "target");
+			fail("Did not expect to get into 'target' page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 	}
 	
 	/**

@@ -49,7 +49,7 @@
 		«ENDREM»
 		«IF availableInCurrentScript(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'

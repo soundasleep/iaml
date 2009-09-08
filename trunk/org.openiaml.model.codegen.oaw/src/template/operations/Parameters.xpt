@@ -125,14 +125,16 @@
 	new Visual_Page("«id-»", "«name-»")
 «ENDDEFINE»
 
+«REM»new Users_Role("«id-»", "«name-»")«ENDREM»
 «DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::users::Role»
 	/* Role "«name-»" */
-	new Users_Role("«id-»", "«name-»")
+	'«safeName()-»'
 «ENDDEFINE»
 
+«REM»new Users_Permission("«id-»", "«name-»")«ENDREM»
 «DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb) FOR model::users::Permission»
 	/* Permission "«name-»" */
-	new Users_Permission("«id-»", "«name-»")
+	'«safeName()-»'
 «ENDDEFINE»
 
 /**

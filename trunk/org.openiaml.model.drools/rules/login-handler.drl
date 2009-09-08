@@ -200,8 +200,8 @@ rule "Connect 'key' property to LoginHandler"
 	then
 
 		SetWire wire = handler.generatedSetWire(login_handler, scope, login_handler, key);
-		handler.setName(key, "set");
-		queue.add(key, drools);
+		handler.setName(wire, "set");
+		queue.add(wire, drools);
 		
 end
 
@@ -663,33 +663,34 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		
 end
 
-rule "Connect text fields in login form to session properties for login handler[user]"
+rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=user]"
 	when
 		container : InternetApplication( )
-		session : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		login : Page (eContainer == container, name=="login" )
 		
+		operation : Operation( eContainer == scope, name == "do login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		
+		# from a role
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
 		param : ParameterWire ( from == role, to == login_handler )
-	
-		login : Page (eContainer == container, name=="login" )
-		form : InputForm( eContainer == login, name == "login form" )
 		
-		text : InputTextField ( eContainer == form, name == attribute.name )
-		textProperty : ApplicationElementProperty ( eContainer == text, name == "fieldValue" )
+		field : InputTextField ( eContainer == form, name == attribute.name )
+		fieldValue : ApplicationElementProperty ( eContainer == field, name == "fieldValue" )
 		
-		# session property
-		property : ApplicationElementProperty ( eContainer == session, eval(loginAttributeMatches(property, attribute)) )
-				
-		not ( w : WireEdge ( ( from == property && to == textProperty ) ||
-			( from == textProperty && to == property) ) )  
+		button : Button ( eContainer == form, name == "Login" )
+		run : RunInstanceWire ( from == button, to == operation, name == "onClick" )
 		
+		not ( ParameterWire ( from == fieldValue, to == run, name == attribute.name )) 
+
 	then
-		# use SetWire, so that the password isn't updated in the login form
-		SetWire set = handler.generatedSetWire(login_handler, login_handler, textProperty, property);
-		handler.setName(set, "set");
-		queue.add(set, drools); 
+		ParameterWire param2 = handler.generatedParameterWire(login_handler, fieldValue, fieldValue, run);
+		handler.setName(param2, attribute.getName());
+		queue.add(param2, drools); 
 		
 end
 
@@ -708,7 +709,7 @@ rule "Create 'do login' operation within all login_handlers"
 		
 end
 
-rule "Create contents of 'do login' operation inside login handler[type=domain_object]"
+rule "Create contents of 'do login' operation [type=domain_object]"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
@@ -733,7 +734,7 @@ rule "Create contents of 'do login' operation inside login handler[type=domain_o
 		
 		# not ok
 		CancelNode cancel = handler.generatedCancelNode(loginOperation, loginOperation);
-		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Invalid key.");
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "No such instance found.");
 		queue.add(cancel, drools);
 		
 		// make a split/join
@@ -791,6 +792,129 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 
+		operation : CompositeOperation ( eContainer == scope, name == "do login" )
+		split : SplitNode ( eContainer == operation )
+		join : JoinNode ( eContainer == operation )
+		
+		target : ApplicationElementProperty ( eContainer == scope, eval(loginAttributeMatches(target, attribute)))
+
+		not ( Parameter ( eContainer == operation, name == attribute.name ))
+
+	then
+		Parameter param = handler.generatedParameter(operation, operation);
+		handler.setName(param, attribute.getName());
+		queue.add(param, drools);
+		
+		CompositeOperation setValue = handler.generatedCompositeOperation(operation, operation);
+		handler.setName(setValue, "setPropertyToValue");
+		queue.add(setValue, drools);
+		
+		// split to set value
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(operation, operation);
+		handler.setFrom(edge1, split);
+		handler.setTo(edge1, setValue);
+		queue.add(edge1, drools);
+		
+		// set value to join
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(operation, operation);
+		handler.setFrom(edge2, setValue);
+		handler.setTo(edge2, join);
+		queue.add(edge2, drools);
+		
+		// flow from param to value
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(operation, operation);
+		handler.setFrom(data1, param);
+		handler.setTo(data1, setValue);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(operation, operation);
+		handler.setFrom(data2, setValue);
+		handler.setTo(data2, target);
+		queue.add(data2, drools);
+
+end
+
+rule "Create contents of 'do login' operation [type=user]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		
+		instance : DomainObjectInstance ( eContainer == scope )
+		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
+		
+		ex : Operation ( eContainer == instance, name == "exists?" )
+				
+		loginOperation : CompositeOperation ( eContainer == scope, name == "do login" )
+
+		not ( StartNode ( eContainer == loginOperation ))
+
+	then
+		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(loginOperation, loginOperation);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(loginOperation, loginOperation);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "No such user found.");
+		queue.add(cancel, drools);
+		
+		// make a split/join
+		SplitNode split = handler.generatedSplitNode(loginOperation, loginOperation);
+		queue.add(split, drools);
+		JoinNode join = handler.generatedJoinNode(loginOperation, loginOperation);
+		queue.add(join, drools);
+				
+		ExecutionEdge edge0 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge0, start);
+		handler.setTo(edge0, split);		
+		queue.add(edge0, drools);
+		
+		// we will leave the other rules to generate the contents
+
+		# a virtual operation call
+		# (the 'exists?' operation cannot have more than 2 execution edges out)
+		OperationCallNode call = handler.generatedOperationCallNode(loginOperation, loginOperation);
+		handler.setName(call, "call exists?");
+		queue.add(call, drools);
+		
+		# connect with a RunInstanceWire
+		RunInstanceWire run = handler.generatedRunInstanceWire(loginOperation, loginOperation, call, ex);
+		handler.setName(run, "virtual operation call");
+		queue.add(run, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge1, join);
+		handler.setTo(edge1, call);
+		queue.add(edge1, drools);
+		
+		# not ok	
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge2, call);
+		handler.setTo(edge2, cancel);
+		queue.add(edge2, drools);
+
+		# ok
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge3, call);
+		handler.setTo(edge3, finish);
+		queue.add(edge3, drools);
+
+end
+
+rule "Create parameter for 'do login' operation inside login handler[type=user]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role )
+		paramWire : ParameterWire( from == role, to == login_handler )
+		
 		operation : CompositeOperation ( eContainer == scope, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
@@ -983,6 +1107,143 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
 		handler.setFrom(edge2, op);
 		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+
+end
+
+rule "Create contents (initial) of 'do logout' operation [type=object or user]"
+	when
+		scope : Session( )
+		o : CompositeOperation( name == "do logout", eContainer == scope )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+
+		not (StartNode( eContainer == o))
+		not (FinishNode( eContainer == o))
+	
+	then
+		# create a 'null' value
+		StaticValue myNull = handler.generatedStaticValue(o, o);
+		handler.setName(myNull, "reset value");
+		handler.setValue(myNull, ModelPackage.eINSTANCE.getStaticValue_Value(), "null");
+		queue.add(myNull, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+		
+		SplitNode split = handler.generatedSplitNode(o, o);
+		queue.add(split, drools);
+		
+		JoinNode join = handler.generatedJoinNode(o, o);
+		queue.add(join, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, split);
+		queue.add(edge1, drools);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge2, join);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+
+end
+
+rule "Create contents (specific keys) of 'do logout' operation [type=object]"
+	when
+		session : Session( )
+		o : CompositeOperation( name == "do logout", eContainer == session )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+
+		attribute : DomainAttribute ( )
+		paramWire : ParameterWire ( from == attribute, to == login_handler )
+		
+		key : ApplicationElementProperty ( eContainer == session, 
+			eval(loginAttributeMatches(key, attribute) ) )
+
+		myNull : StaticValue ( eContainer == o, name == "reset value" )
+		split : SplitNode ( eContainer == o )
+		join : JoinNode ( eContainer == o )
+			
+		not (DataFlowEdge ( eContainer == o, from == key ))
+	
+	then
+	
+		# setPropertyToValue
+		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		handler.setName(op, "setPropertyToValue");
+		queue.add(op, drools);
+	
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, myNull);
+		handler.setTo(data1, op);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data2, op);
+		handler.setTo(data2, key);
+		queue.add(data2, drools);
+
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, split);
+		handler.setTo(edge1, op);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, join);
+		queue.add(edge2, drools);
+
+end
+
+rule "Create contents (specific keys) of 'do logout' operation [type=user]"
+	when
+		session : Session( )
+		o : CompositeOperation( name == "do logout", eContainer == session )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role, eval(notPrimaryKey(attribute)) )
+		paramWire : ParameterWire ( from == role, to == login_handler )
+		
+		key : ApplicationElementProperty ( eContainer == session, 
+			eval(loginAttributeMatches(key, attribute) ) )
+
+		myNull : StaticValue ( eContainer == o, name == "reset value" )
+		split : SplitNode ( eContainer == o )
+		join : JoinNode ( eContainer == o )
+			
+		not (DataFlowEdge ( eContainer == o, from == key ))
+	
+	then
+	
+		# setPropertyToValue
+		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		handler.setName(op, "setPropertyToValue");
+		queue.add(op, drools);
+	
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, myNull);
+		handler.setTo(data1, op);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data2, op);
+		handler.setTo(data2, key);
+		queue.add(data2, drools);
+	
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, split);
+		handler.setTo(edge1, op);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, join);
 		queue.add(edge2, drools);
 
 end

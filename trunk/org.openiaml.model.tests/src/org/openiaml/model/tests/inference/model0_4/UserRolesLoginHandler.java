@@ -15,7 +15,7 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.SelectWire;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
  * Inference of access control handlers.
@@ -23,8 +23,13 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
  * @author jmwright
  *
  */
-public class UserRolesLoginHandler extends InferenceTestCase {
+public class UserRolesLoginHandler extends ValidInferenceTestCase {
 
+	@Override
+	public Class<? extends ValidInferenceTestCase> getInferenceClass() {
+		return UserRolesLoginHandler.class;
+	}
+	
 	/**
 	 * Test the initial model.
 	 *
@@ -142,14 +147,5 @@ public class UserRolesLoginHandler extends InferenceTestCase {
 		assertEquals("email", pw2.getName());
 
 	}
-	
-	/**
-	 * The inferred model should be valid.
-	 * 
-	 * @throws Exception
-	 */
-	public void testInferredModelIsValid() throws Exception {
-		checkModelIsValid(loadAndInfer(UserRolesLoginHandler.class));
-	}
-	
+
 }

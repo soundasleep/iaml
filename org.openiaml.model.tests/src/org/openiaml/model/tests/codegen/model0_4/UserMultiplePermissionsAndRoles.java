@@ -12,15 +12,15 @@ import org.eclipse.core.resources.IFile;
  * @author jmwright
  *
  */
-public class UserMultiplePermissionsOrRoles extends AbstractUserLoginTestCase {
+public class UserMultiplePermissionsAndRoles extends AbstractDefaultRoleUserLoginTestCase {
 	
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(UserMultiplePermissionsOrRoles.class);
+		root = loadAndCodegen(UserMultiplePermissionsAndRoles.class, true);
 		initialiseDatabase();
 	}
-	
+
 	/**
 	 * Check the initial state of the application.
 	 * 
@@ -46,7 +46,7 @@ public class UserMultiplePermissionsOrRoles extends AbstractUserLoginTestCase {
 	}
 	
 	/**
-	 * Log in as 'default role'; works
+	 * Log in as 'default role'; works ('default role' provides 'a permission')
 	 * 
 	 * @throws Exception
 	 */
@@ -72,7 +72,8 @@ public class UserMultiplePermissionsOrRoles extends AbstractUserLoginTestCase {
 	}
 	
 	/**
-	 * Log in as 'both role'; doesn't work
+	 * Log in as 'both role'; doesn't work ('both role' does
+	 * not extend 'default role')
 	 * 
 	 * @throws Exception
 	 */

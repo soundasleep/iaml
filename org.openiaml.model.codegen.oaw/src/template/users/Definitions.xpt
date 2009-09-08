@@ -57,9 +57,11 @@
 		«LET user.inEdges.typeSelect(model::wires::SelectWire).from.typeSelect(model::DomainObject).first() AS initialRole»
 			/* check role '«targetRole.name»' */
 			if (cast_«safeName(initialRole)»_as_«safeName(targetRole)»($instance) == null) {
-				throw new IamlRuntimeException("Source role '«initialRole.name»' could not be translated into '«targetRole.name»'");
+				// user cannot be cast as this role
+				$failure['«safeName(targetRole)»'] = new IamlRuntimeException("Source role '«initialRole.name»' could not be translated into '«targetRole.name»'");
 			} else {
 				// can be cast fine
+				$failure['«safeName(targetRole)»'] = null;
 			}
 		«ENDLET»
 	«ENDFOREACH»
@@ -79,10 +81,52 @@
 		«ENDIF»
 		($instance)) {
 			// user has permission
+			$failure['«safeName(targetPermission)»'] = null;
 		} else {
-			throw new IamlRuntimeException("User of type '«user.name»' did not have permission '«targetPermission.name»'");
+			// user does not
+			$failure['«safeName(targetPermission)»'] = new IamlRuntimeException("User of type '«user.name»' did not have permission '«targetPermission.name»'");
 		}
 	«ENDFOREACH»
+	
+	/* combine with any constraint wires */
+	«LET outEdges.typeSelect(model::wires::RequiresWire).outEdges.typeSelect(model::wires::ConstraintWire) AS c1»
+	«LET outEdges.typeSelect(model::wires::RequiresWire).inEdges.typeSelect(model::wires::ConstraintWire) AS c2»
+	«LET c1.toSet().union(c2) AS constraints»
+		«FOREACH constraints AS constraint»
+			// constraint wire '«constraint»'
+			«LET ((model::wires::RequiresWire) constraint.from).to AS constraintFrom»
+			«LET ((model::wires::RequiresWire) constraint.to).to AS constraintTo»
+			«IF constraint.type==model::wires::ConstraintTypes::OR»
+				if ($failure['«safeName(constraintFrom)»'] == null ||
+						$failure['«safeName(constraintTo)»'] == null) {
+					// OR is successful
+					$failure['«safeName(constraintFrom)»'] = null;
+					$failure['«safeName(constraintTo)»'] = null;
+				}
+			«ELSEIF constraint.type==model::wires::ConstraintTypes::XOR»
+				if ($failure['«safeName(constraintFrom)»'] == null xor
+						$failure['«safeName(constraintTo)»'] == null) {
+					// XOR is successful
+					$failure['«safeName(constraintFrom)»'] = null;
+					$failure['«safeName(constraintTo)»'] = null;
+				}
+			«ELSE»
+				// ignore ANDs; this is the default 
+			«ENDIF»
+			«ENDLET»
+			«ENDLET»
+		«ENDFOREACH»
+	«ENDLET»
+	«ENDLET»
+	«ENDLET»
+	
+	// for the check to be successful, there must be no 'null's left in the failures
+	log_message("Access control check results: " . print_r($failure, true));
+	foreach ($failure as $key => $exception) {
+		if ($exception !== null) {
+			throw $exception;
+		}	
+	}
 	
 	/* check is successful */
 	return true;

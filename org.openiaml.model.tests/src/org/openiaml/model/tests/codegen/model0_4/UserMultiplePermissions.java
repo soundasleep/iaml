@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 
 /**
@@ -23,6 +25,16 @@ public class UserMultiplePermissions extends AbstractUserLoginTestCase {
 		super.setUp();
 		root = loadAndCodegen(UserMultiplePermissions.class);
 		initialiseDatabase();
+	}
+	
+	@Override
+	protected List<String> getDatabaseInitialisers() {
+		List<String> s = super.getDatabaseInitialisers();
+		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (66, 'Both Permissions', '" + EMAIL + "', '" + PASSWORD + "')");
+		s.add("CREATE TABLE Permissions_User (generated_primary_key INTEGER PRIMARY KEY, a_permission INTEGER, a_different_permission INTEGER)");
+		s.add("INSERT INTO Permissions_User (generated_primary_key, a_permission, a_different_permission) VALUES (22, 1, 0)");
+		s.add("INSERT INTO Permissions_User (generated_primary_key, a_permission, a_different_permission) VALUES (66, 1, 1)");
+		return s;
 	}
 	
 	/**

@@ -182,14 +182,9 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		
 		// the store contains either the roles or the permissions
 		// referenced by the ACH; we only want one
-		( exists  
-			( role : Role ( eContainer == store ) and
-			RequiresWire ( from == ach, to == role ) )
-		or
 		exists
-			( permission : Permission ( eContainer == store ) and
-			RequiresWire ( from == ach, to == permission ) )
-		)
+			( obj : NamedElement ( eContainer == store ) and
+			RequiresWire ( from == ach, to == obj ) )
 		
 		user : Role ( eContainer == store, name == "User" )
 	

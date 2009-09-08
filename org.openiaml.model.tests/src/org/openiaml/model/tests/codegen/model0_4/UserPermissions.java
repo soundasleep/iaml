@@ -3,8 +3,6 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
 
 /**
@@ -13,21 +11,13 @@ import org.eclipse.core.resources.IFile;
  * @author jmwright
  *
  */
-public class UserPermissions extends AbstractUserLoginTestCase {
+public class UserPermissions extends AbstractDefaultRoleUserLoginTestCase {
 	
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(UserPermissions.class);
 		initialiseDatabase();
-	}
-
-	@Override
-	protected List<String> getDatabaseInitialisers() {
-		List<String> s = super.getDatabaseInitialisers();
-		s.add("CREATE TABLE Permissions_User (generated_primary_key INTEGER PRIMARY KEY, a_permission INTEGER, a_different_permission INTEGER)");
-		s.add("INSERT INTO Permissions_User (generated_primary_key, a_permission, a_different_permission) VALUES (22, 1, 1)");
-		return s;
 	}
 	
 	/**

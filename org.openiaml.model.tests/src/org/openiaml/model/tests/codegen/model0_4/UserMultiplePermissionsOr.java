@@ -12,7 +12,7 @@ import org.eclipse.core.resources.IFile;
  * @author jmwright
  *
  */
-public class UserMultiplePermissionsOr extends AbstractUserLoginTestCase {
+public class UserMultiplePermissionsOr extends AbstractDefaultRoleUserLoginTestCase {
 	
 	@Override
 	public void setUp() throws Exception {
@@ -20,7 +20,7 @@ public class UserMultiplePermissionsOr extends AbstractUserLoginTestCase {
 		root = loadAndCodegen(UserMultiplePermissionsOr.class);
 		initialiseDatabase();
 	}
-	
+
 	/**
 	 * Check the initial state of the application.
 	 * 

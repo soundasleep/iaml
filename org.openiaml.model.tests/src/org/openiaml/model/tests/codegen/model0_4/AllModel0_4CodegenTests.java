@@ -43,7 +43,7 @@ public class AllModel0_4CodegenTests {
 		suite.addTestSuite(UserModifyRoles.class);
 		suite.addTestSuite(UserMultiplePermissions.class);
 		suite.addTestSuite(UserMultiplePermissionsOr.class);
-		suite.addTestSuite(UserMultiplePermissionsOrRoles.class);
+		suite.addTestSuite(UserMultiplePermissionsAndRoles.class);
 		suite.addTestSuite(UserPermissions.class);
 		suite.addTestSuite(UserPermissionsPage.class);
 		suite.addTestSuite(UserPermissionsRecursive.class);

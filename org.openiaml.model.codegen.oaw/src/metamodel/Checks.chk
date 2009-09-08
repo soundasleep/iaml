@@ -16,7 +16,7 @@ context model::visual::Page ERROR "Page must have a name" :
 context model::Operation ERROR "Operation must have a name" :
 	name.length > 0;
 	
-context model::components::LoginHandler ERROR "A login handler [type=key] must have an incoming parameter for the key (e.g. a StaticValue)" :
+context model::components::LoginHandler ERROR "A login handler must have an incoming parameter to check against" :
 	inEdges.exists ( e | model::wires::ParameterWire.isInstance(e) );
 
 context model::wires::RunInstanceWire ERROR "A run instance wire can only connect to an operation" :

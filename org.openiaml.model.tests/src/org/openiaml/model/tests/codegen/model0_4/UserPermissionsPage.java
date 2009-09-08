@@ -5,6 +5,8 @@ package org.openiaml.model.tests.codegen.model0_4;
 
 import org.eclipse.core.resources.IFile;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+
 /**
  * The access control requires 'a different permission', and
  * the control is placed on a page, not a session.
@@ -40,18 +42,21 @@ public class UserPermissionsPage extends AbstractDefaultRoleUserLoginTestCase {
 		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
 		assertNoProblem();
 		
-		gotoSitemapWithProblem(sitemap, "target");
-		assertTitleNotSame("target");
-		assertProblem();		// who knows where we are?
+		try {
+			gotoSitemapWithProblem(sitemap, "target");
+			fail("Should not be able to access 'target' page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 	}
 	
 	/**
-	 * Log in as 'default role'; works
+	 * Log in as 'another role'; works
 	 * 
 	 * @throws Exception
 	 */
 	public void testDefaultRole() throws Exception {
-		IFile sitemap = doStandardLoginAs("default@openiaml.org", "test123");
+		IFile sitemap = doStandardLoginAs("another@openiaml.org", "test123");
 		assertNoProblem();
 		
 		gotoSitemapThenPage(sitemap, "target");
@@ -59,16 +64,20 @@ public class UserPermissionsPage extends AbstractDefaultRoleUserLoginTestCase {
 	}
 	
 	/**
-	 * Log in as 'another role'; doesn't work
+	 * Log in as 'default role'; doesn't work
 	 * 
 	 * @throws Exception
 	 */
 	public void testAnotherRole() throws Exception {
-		IFile sitemap = doStandardLoginAs("another@openiaml.org", "test123");
+		IFile sitemap = doStandardLoginAs("default@openiaml.org", "test123");
 		assertNoProblem();
 		
-		gotoSitemapWithProblem(sitemap, "target");
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "target");
+			fail("Should not be able to access 'target' page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 	}
 	
 	/**

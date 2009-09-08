@@ -401,16 +401,34 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	}
 	
 	/**
-	 * Assert that there are no results for the given query.
+	 * Assert that there are no results for the given XPath query.
 	 *
-	 * @param root
-	 * @param query
-	 * @return
+	 * @param root the node on which to execute the XPath query
+	 * @param query the query to execute
 	 * @throws JaxenException
 	 */
 	public void assertHasNone(EObject root, String query) throws JaxenException {
 		List<?> q = query(root, query);
 		assertEquals("Unexpected query result for '" + query + "' on '" + root + ": " + q, 0, q.size());
+	}
+	
+	/**
+	 * Assert that there are no results for the given XPath query with
+	 * the given type.
+	 *
+	 * @param root the node on which to execute the XPath query
+	 * @param query the query to execute
+	 * @param type the type to check for in the results
+	 * @throws JaxenException
+	 */
+	public void assertHasNone(EObject root, String query, Class<?> type) throws JaxenException {
+		List<?> q = query(root, query);
+		for (Object o : q) {
+			if (type.isInstance(o)) {
+				fail("Unexpected type '" + type.getName() + "' result for '" + query + "' on '" + root + ": " + o);				
+			}
+		}
+
 	}
 	
 	/**

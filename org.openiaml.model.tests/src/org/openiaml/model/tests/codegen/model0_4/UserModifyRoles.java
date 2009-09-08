@@ -3,9 +3,9 @@
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
+
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 
 /**
  * We can create new users and assign them roles, and
@@ -15,7 +15,7 @@ import org.eclipse.core.resources.IFile;
  * @author jmwright
  *
  */
-public class UserModifyRoles extends AbstractUserLoginTestCase {
+public class UserModifyRoles extends AbstractDefaultRoleUserLoginTestCase {
 	
 	private final String NEW_EMAIL = "new@openiaml.org";
 	private final String NEW_PASSWORD = "test123";
@@ -25,14 +25,6 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		super.setUp();
 		root = loadAndCodegen(UserModifyRoles.class, true);
 		initialiseDatabase();
-	}
-
-	@Override
-	protected List<String> getDatabaseInitialisers() {
-		List<String> s = super.getDatabaseInitialisers();
-		s.add("CREATE TABLE default_role (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, User_generated_primary_key INTEGER)");
-		s.add("INSERT INTO default_role (generated_primary_key, User_generated_primary_key) VALUES (44, 22)");
-		return s;
 	}
 	
 	/**
@@ -81,7 +73,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public IFile createRole() throws Exception {
+	protected IFile createRole() throws Exception {
 		IFile sitemap = beginAtSitemapThenPage("create a new user");
 		assertNoProblem();
 		
@@ -124,8 +116,12 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		
 		// we cannot access the 'requires role 1' page, since we
 		// only have 'default role'
-		gotoSitemapWithProblem(sitemap, "requires role 1");		
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "requires role 1");
+			fail("Should not be able to access page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 	}
 	
 	public void testCreateAddRole1() throws Exception {
@@ -138,7 +134,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public IFile createAddRole1() throws Exception {
+	protected IFile createAddRole1() throws Exception {
 		// create a new user
 		IFile sitemap = createRole();
 		
@@ -193,8 +189,12 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		assertNoProblem();
 		
 		// we can't access the 'requires role 1' page
-		gotoSitemapWithProblem(sitemap, "requires role 1");		
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "requires role 1");
+			fail("Should not have been able to get to this page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 		
 		// we can't access the 'requires permission 1' page
 		gotoSitemapWithProblem(sitemap, "requires permission 1");		
@@ -216,7 +216,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public IFile createAddPermission() throws Exception {
+	protected IFile createAddPermission() throws Exception {
 		// create a new user
 		IFile sitemap = createRole();
 		
@@ -241,7 +241,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public void createInheritedPermission() throws Exception {
+	public void testCreateInheritedPermission() throws Exception {
 		// create a new user
 		IFile sitemap = createRole();
 		
@@ -264,7 +264,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public IFile createManyPermissions() throws Exception {
+	protected IFile createManyPermissions() throws Exception {
 		// create a new user
 		IFile sitemap = createRole();
 		

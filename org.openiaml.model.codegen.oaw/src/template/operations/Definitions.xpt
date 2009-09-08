@@ -24,11 +24,11 @@
 «DEFINE operationDefinition(model::visual::Page container, Boolean php) FOR model::Operation-»
 	/* simple operation */
 	«IF php»
-	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
+	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
 		log_message("simple operation: «name»");
 	}
 	«ELSE»
-	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
+	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
 		alert("simple operation: «name»");
 	}
 	«ENDIF»
@@ -36,7 +36,7 @@
 
 «DEFINE operationDefinition(model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
 	/* simple operation */
-	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
+	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
 		«IF isDomainAttributeInstance(eContainer)-»
 			return «EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, false, null, (model::DomainAttributeInstance) eContainer) FOR this»;
 		«ELSEIF isDomainObjectInstance(eContainer)-»
@@ -58,7 +58,7 @@
 	«ELSE»
 	var running_«safeName()» = false;
 	«ENDIF»
-	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
+	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
 		«REM»here we would expand out the data flow of the operation, etc«ENDREM»
 		// operation: «name»
 		«IF php»

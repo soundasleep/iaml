@@ -236,11 +236,11 @@
 		«ENDIF»
 	}
 
-	/* Does the DomainObjectInstance «id» exist? */
+	/* Does the DomainObjectInstance '«id»' exist? */
 	function exists_object_instance_«safeName()»() {
 		return get_object_instance_«safeName()»(0) !== 0;
 	}
-	
+
 	«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
 		«EXPAND getNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 	«ENDIF»
@@ -357,7 +357,7 @@
 			return $result;
 		«ENDIF»
 	}
-	
+
 	/**
 	 * Does a new DomainObjectInstance '«safeNameString(name)»' (ID = '«id»')
 	 * exist yet in the database?

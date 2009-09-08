@@ -10,11 +10,17 @@
 	«EXPAND castSourceAsTarget(this) FOR this»
 	«EXPAND updateInstanceAttributeFrom FOR this»
 	
-	«REM»expand all direct extends«ENDREM»
-	«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS target»
-		«EXPAND castSourceAsTarget(target) FOR this»
-		«EXPAND getSubclassInstance(target) FOR this»
-	«ENDFOREACH»
+	«LET inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS subclasses»
+		«REM»expand all direct extends«ENDREM»
+		«FOREACH subclasses AS target»
+			«EXPAND castSourceAsTarget(target) FOR this»
+			«EXPAND getSubclassInstance(target) FOR this»
+		«ENDFOREACH»
+		«REM»and all other roles, so we can cast between any two abritrary instances«ENDREM»
+		«FOREACH getDomainStore().eAllContents.typeSelect(model::DomainObject).without(subclasses).remove(this) AS target»
+			«EXPAND castSourceAsTargetOther(target) FOR this»
+		«ENDFOREACH»
+	«ENDLET»
 «ENDDEFINE»
 
 «DEFINE castSourceAsTarget(model::DomainObject target) FOR model::DomainObject»
@@ -32,6 +38,7 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 	«ELSE»
 		log_message("[cast] Casting '«name»' into subclass '«target.name»'...");
 		«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS subclass»
+			«IF allSubtypes(subclass).contains(target)»
 			«LET attributes.selectFirst(a | a.primaryKey) AS sourceKey»
 				«LET subclass.attributes.select(a | !a.outEdges.typeSelect(model::wires::ExtendsWire).to.select( a | a == sourceKey ).isEmpty).first() AS targetKey»
 					log_message("[cast] Attempting cast into '«subclass.name»'");
@@ -66,11 +73,61 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 					}
 				«ENDLET»
 			«ENDLET»
+			«ELSE»
+				// subclass '«subclass.name»' does not contain a path to '«target.name»'
+			«ENDIF»
 		«ENDFOREACH»
 	«ENDIF»
 	
 	// could not find any result
 	log_message("[cast] Could not find any result for '«name»'");
+	return null;
+}
+«ENDDEFINE»
+
+«DEFINE castSourceAsTargetOther(model::DomainObject target) FOR model::DomainObject»
+/**
+ * Try to cast a '«name»' into a subclass '«target.name»'. 
+ *
+ * However, '«name»' and '«target.name»' are not related directly, 
+ * so we will try all of the supertypes of '«name»'.
+ *
+ * Returns an instance of '«target.name»' with all accumulated attributes of
+ * '«name»' and the heirarchy of subclasses, or <b>null</b> if it
+ * could not be cast.
+ */
+function cast_«safeName()»_as_«safeName(target)»($instance) {
+	«IF this == target»
+		«EXPAND exception FOR throwException("Cannot castSourceAsTargetOther with the same instances")»
+	«ELSE»
+		«IF allSubtypes().contains(target)»
+			// '«target.name»' is a direct subtype of '«name»'
+			«LET inEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject).selectFirst( a | allSubtypes(a).contains(target) ) AS firstSubtype»
+				// the first subtype that has a path: «firstSubtype.name»
+				$new_instance = cast_«safeName()»_as_«safeName(firstSubtype)»($instance);
+				if ($new_instance === null) {
+					// none could be found
+					return null;
+				}
+				
+				// continue subtype casting
+				return cast_«safeName(firstSubtype)»_as_«safeName(target)»($new_instance);
+			«ENDLET»
+		«ELSE»
+			// '«target.name»' is not direct subtype of '«name»'
+			// try all of the supertypes of '«name»'
+			«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS superclass»
+				// subclass '«superclass.name»'
+				$superclass_instance = get_subclass_«safeName(superclass)»_from_«safeName()»($instance);
+				if ($superclass_instance != null) {
+					// continue supertype casting
+					return cast_«safeName(superclass)»_as_«safeName(target)»($superclass_instance);
+				}
+			«ENDFOREACH»
+		«ENDIF»
+	«ENDIF»
+	
+	// none found
 	return null;
 }
 «ENDDEFINE»

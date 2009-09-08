@@ -17,6 +17,9 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
@@ -30,6 +33,7 @@ import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
@@ -40,7 +44,9 @@ import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
+import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
@@ -469,6 +475,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
+	 * StaticValue.
+	 *
+	 * @return The element found
+	 */
+	public StaticValue assertHasStaticValue(CompositeOperation element, String string) throws JaxenException {
+		return (StaticValue) queryOne(element, "iaml:values[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
 	 * DynamicApplicationElementSet.
 	 *
 	 * @return The element found
@@ -485,6 +501,26 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DecisionOperation assertHasDecisionOperation(ContainsOperations element, String string) throws JaxenException {
 		return (DecisionOperation) queryOne(element, "iaml:operations[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * SplitNode.
+	 *
+	 * @return The element found
+	 */
+	public SplitNode assertHasSplitNode(CompositeOperation element) throws JaxenException {
+		return (SplitNode) assertHasOne(element, "iaml:nodes", SplitNode.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * JoinNode.
+	 *
+	 * @return The element found
+	 */
+	public JoinNode assertHasJoinNode(CompositeOperation element) throws JaxenException {
+		return (JoinNode) assertHasOne(element, "iaml:nodes", JoinNode.class);
 	}
 	
 	/**
@@ -528,6 +564,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert that the given element <em>does not</em> contains the given
+	 * FinishNode.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoFinishNode(CompositeOperation element) throws JaxenException {
+		assertHasNone(element, "iaml:nodes", FinishNode.class);
+	}
+	
+	/**
 	 * Assert that the given element contains the given
 	 * CancelNode.
 	 *
@@ -548,6 +594,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert that the given element <em>does not</em> contains the given
+	 * CancelNode.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoCancelNode(CompositeOperation element) throws JaxenException {
+		assertHasNone(element, "iaml:nodes", CancelNode.class);
+	}
+	
+	/**
 	 * Assert that the given element contains the given
 	 * OperationCallNode.
 	 *
@@ -565,6 +621,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public OperationCallNode assertHasOperationCallNode(CompositeCondition element, String string) throws JaxenException {
 		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * Parameter.
+	 *
+	 * @return The element found
+	 */
+	public Parameter assertHasParameter(CompositeOperation element, String string) throws JaxenException {
+		return (Parameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");	
 	}
 	
 	/**
@@ -633,6 +699,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert <em>no</em> unidirectional SetWire exists between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		assertHasNoWiresFromTo(container, from, to, SetWire.class);
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional SelectWire between
 	 * the given elements.
 	 *
@@ -698,6 +774,50 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		}
 		assertNotNull("Did not find an ExecutionEdge from '" + from + "' to '" + to + "'", result);
 		return result;
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional DataFlowEdge between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public DataFlowEdge assertHasDataFlowEdge(EObject container, DataFlowEdgesSource from, DataFlowEdgeDestination to) throws JaxenException {
+		DataFlowEdge result = null;
+		List<?> edges = query(container, "//iaml:dataEdges");
+		for (Object o : edges) {
+			if (o instanceof DataFlowEdge) {
+				DataFlowEdge e = (DataFlowEdge) o;
+				if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
+					if (result != null) {
+						fail("Found more than one data flow edge from '" + from + "' to '" + to + "'. First = '" + result + ", second = '" + e + "'");
+					}
+					result = e;
+				}
+			}
+		}
+		assertNotNull("Did not find an DataFlowEdge from '" + from + "' to '" + to + "'", result);
+		return result;
+	}
+	
+	/**
+	 * Does <em>exactly one</em> DataFlowEdge exist between the given elements?
+	 *
+	 * @return true if exactly one edge exists, or false otherwise
+	 */
+	public boolean hasDataFlowEdge(EObject container, DataFlowEdgesSource from, DataFlowEdgeDestination to) throws JaxenException {
+		int count = 0;
+		List<?> wires = query(container, "//iaml:dataEdges");
+		for (Object o : wires) {
+			if (o instanceof DataFlowEdge) {
+				DataFlowEdge e = (DataFlowEdge) o;
+				if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
+					assertEquals("Found more than one data flow edge from '" + from + "' to '" + to + "'. Second = '" + e + "'", 0, count);
+					count++;
+				}
+			}
+		}
+		return count == 1;
 	}
 	
 	/**

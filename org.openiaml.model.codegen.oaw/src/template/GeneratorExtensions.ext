@@ -341,6 +341,9 @@ model::DomainAttribute getPrimaryKey(model::DomainObjectInstance this) :
 model::DomainAttribute getPrimaryKey(emf::EObject this) :
 	null;
 
+List[model::DomainObject] allSubtypes(model::DomainObject this):
+	inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject).collect(e|allSubtypes(e)).flatten().add(this);
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

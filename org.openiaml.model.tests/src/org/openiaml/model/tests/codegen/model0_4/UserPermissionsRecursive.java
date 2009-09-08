@@ -21,7 +21,7 @@ public class UserPermissionsRecursive extends AbstractDefaultRoleUserLoginTestCa
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(UserPermissionsRecursive.class);
+		root = loadAndCodegen(UserPermissionsRecursive.class, true);
 		initialiseDatabase();
 	}
 	

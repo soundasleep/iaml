@@ -61,6 +61,30 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 		return sitemap;
 	}
 	
+	
+	/**
+	 * <em>Continue</em> the application using {@link #gotoSitemapThenPage(IFile, String)},
+	 * and then go to the "login" page and attempt to login with the
+	 * specified e-mail and password.
+	 * 
+	 * Ignore what the current text fields contents are.
+	 * 
+	 * This method does not check whether the login was
+	 * successful or not.
+	 * 
+	 * @see #actualDoStandardLoginAs(String, String)
+	 * @param email
+	 * @param password
+	 * @return the sitemap file
+	 */
+	public IFile doStandardLoginAsIgnore(IFile sitemap, String email, String password) throws Exception {
+		gotoSitemapThenPage(sitemap, "login");
+		
+		actualDoStandardLoginAsIgnore(email, password);
+		
+		return sitemap;
+	}
+	
 	/**
 	 * Actually do the login.
 	 * 
@@ -74,6 +98,26 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 	
 		String passwordField = getLabelIDForText("password");
 		assertLabeledFieldEquals(passwordField, "");
+		setLabeledFormElementField(passwordField, password);
+		
+		// submit form
+		submit();
+		waitForAjax(); // TODO remove this call; we shouldn't have to wait
+	}
+	
+	/**
+	 * Actually do the login, but ignore what the login fields used to say.
+	 * 
+	 * @see #doStandardLoginAs(String, String)
+	 * @see #doStandardLoginAs(IFile, String, String)
+	 */
+	protected void actualDoStandardLoginAsIgnore(String email, String password) throws Exception {
+		String emailField = getLabelIDForText("email");
+		// assertLabeledFieldEquals(emailField, "");
+		setLabeledFormElementField(emailField, email);
+	
+		String passwordField = getLabelIDForText("password");
+		// assertLabeledFieldEquals(passwordField, "");
 		setLabeledFormElementField(passwordField, password);
 		
 		// submit form

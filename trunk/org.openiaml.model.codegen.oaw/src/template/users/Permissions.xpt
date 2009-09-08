@@ -9,6 +9,7 @@
 «DEFINE permissionChecks FOR model::users::Role»
 	«REM»all permission types for this role«ENDREM»
 	«EXPAND permissionCheck(this) FOREACH getDomainStore().eAllContents.typeSelect(model::users::Permission)»
+	«EXPAND addPermission(this) FOREACH getDomainStore().eAllContents.typeSelect(model::users::Permission)»
 «ENDDEFINE»
 
 «DEFINE permissionCheck(model::users::Role role) FOR model::users::Permission»
@@ -42,6 +43,8 @@ function user_instance_«safeName(role)»_has_permission_«safeName()»($instance) {
 						return true;	// successfully found permission
 				}
 			«ENDFOREACH»
+			// not successful
+			return false;
 		«ELSE»
 			/* we are at the root of the heirarchy */
 			«EXPAND template::domain::Select::selectDatabase FOR role»
@@ -56,6 +59,12 @@ function user_instance_«safeName(role)»_has_permission_«safeName()»($instance) {
 			$args = array($instance["«safeNameString(role.getPrimaryKey().name)»"]);
 			
 			$db_query = new DatabaseQuery($db_name);
+			
+			if (!$db_query->tableExists($query)) {
+				// permissions table does not exist
+				return false;
+			}
+			
 			$row = $db_query->fetchFirst($query, $args);
 			
 			if ($row !== null) {
@@ -63,7 +72,79 @@ function user_instance_«safeName(role)»_has_permission_«safeName()»($instance) {
 				return true;
 			}
 			return false;
+		«ENDIF»
+	«ENDLET»
+}
+«ENDDEFINE»
 
+«DEFINE addPermission(model::users::Role role) FOR model::users::Permission»
+/**
+ * Add the permission '«name»' to the role '«role.name»'.
+ *
+ * Returns true if successful.
+ */
+function add_permission_«safeName()»_to_«safeName(role)»($instance) {
+	«LET role.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::users::Role) AS extendsRoles»
+		«IF extendsRoles.size > 0»
+			«FOREACH extendsRoles AS superclass»
+				/* tell the parent instance '«superclass.name»' to add it */
+				
+				// get parent instance
+				$subclass_instance = get_subclass_«safeName(superclass)»_from_«safeName(role)»($instance);
+				if ($subclass_instance === null) {
+					throw new IamlRuntimeException("Could not get parent instance '«superclass.name»' from '«role.name»'");
+				}
+				
+				if (add_permission_«safeName()»_to_«safeName(superclass)»($subclass_instance))
+					return true;
+			«ENDFOREACH»
+			// not successful
+			return false;
+		«ELSE»
+			/* we are at the root of the heirarchy */
+			«EXPAND template::domain::Select::selectDatabase FOR role»
+	
+			$db_query = new DatabaseQuery($db_name);
+			
+			// does the DB exist?
+			// TODO this logic should be refactored into a common method
+			if (!$db_query->tableExists("SELECT * FROM Permissions_«safeNameString(role.name)»")) {
+				log_message("[add permission] creating table Permissions_«safeNameString(role.name)»");
+				
+				$query = "CREATE TABLE Permissions_«safeNameString(role.name)» 
+					(
+					«safeNameString(role.getPrimaryKey().name)» INTEGER PRIMARY KEY
+					«FOREACH getDomainStore(role).eAllContents.typeSelect(model::users::Permission) AS permission»
+						, «safeNameString(permission.name)» INTEGER NOT NULL DEFAULT 0
+					«ENDFOREACH»
+					)";					
+				
+				$db_query->execute($query);				
+			}
+			
+			// does any existing query exist?
+			$query = "SELECT * FROM Permissions_«safeNameString(role.name)» 
+				WHERE «safeNameString(role.getPrimaryKey().name)» = ?";
+			
+			$args = array($instance["«safeNameString(role.getPrimaryKey().name)»"]);
+			
+			if ($db_query->fetchFirst($query, $args) !== null) {
+				// need to update the existing instance
+				$query = "UPDATE Permissions_«safeNameString(role.name)»
+					SET «safeNameString(name)» = 1
+					WHERE «safeNameString(role.getPrimaryKey().name)» = ?";
+			} else {
+				// need to insert a new instance
+				$query = "INSERT INTO Permissions_«safeNameString(role.name)»
+					(«safeNameString(role.getPrimaryKey().name)», «safeNameString(name)»)
+					VALUES 
+					(?, 1)";
+			}
+			
+			$db_query->execute($query, $args);
+			
+			// successful!
+			return true;
 		«ENDIF»
 	«ENDLET»
 }

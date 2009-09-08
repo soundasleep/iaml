@@ -15,10 +15,15 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * @author jmwright
  *
  */
-public class UserModifyRoles extends AbstractDefaultRoleUserLoginTestCase {
+public class UserModifyRoles extends AbstractUserLoginTestCase {
 	
 	private final String NEW_EMAIL = "new@openiaml.org";
 	private final String NEW_PASSWORD = "test123";
+
+	/*
+	 * We don't actually need to initialise any Permissions tables, etc;
+	 * they should be set up automatically.
+	 */
 	
 	@Override
 	public void setUp() throws Exception {
@@ -167,7 +172,7 @@ public class UserModifyRoles extends AbstractDefaultRoleUserLoginTestCase {
 		assertProblem();
 		
 		// so we login
-		doStandardLoginAs(sitemap, NEW_EMAIL, NEW_PASSWORD);
+		doStandardLoginAsIgnore(sitemap, NEW_EMAIL, NEW_PASSWORD);
 		assertNoProblem();
 		
 		gotoSitemapThenPage(sitemap, "requires role 1");
@@ -180,7 +185,7 @@ public class UserModifyRoles extends AbstractDefaultRoleUserLoginTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public void testCreateAddRole2() throws Exception {
+	public void testCreateAddRole1CannotAccess2() throws Exception {
 		// create a new user
 		IFile sitemap = createRole();
 		
@@ -197,12 +202,20 @@ public class UserModifyRoles extends AbstractDefaultRoleUserLoginTestCase {
 		}
 		
 		// we can't access the 'requires permission 1' page
-		gotoSitemapWithProblem(sitemap, "requires permission 1");		
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "requires permission 1");
+			fail("Should not have been able to get to this page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 		
 		// or the inherited permission page
-		gotoSitemapWithProblem(sitemap, "requires inherited permission");		
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "requires inherited permission");		
+			fail("Should not have been able to get to this page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 		
 	}	
 	
@@ -229,8 +242,12 @@ public class UserModifyRoles extends AbstractDefaultRoleUserLoginTestCase {
 		assertNoProblem();
 		
 		// but we can't access the inherited permission
-		gotoSitemapWithProblem(sitemap, "requires inherited permission");
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "requires inherited permission");
+			fail("Should not have been able to get to this page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 		
 		return sitemap;
 	}

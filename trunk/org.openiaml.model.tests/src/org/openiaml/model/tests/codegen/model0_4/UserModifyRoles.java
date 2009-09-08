@@ -209,13 +209,10 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			// expected
 		}
 		
-		// or the inherited permission page
-		try {
-			gotoSitemapWithProblem(sitemap, "requires inherited permission");		
-			fail("Should not have been able to get to this page");
-		} catch (FailingHttpStatusCodeException e) {
-			// expected
-		}
+		// but we can get to the inherited permissions page, because
+		// 'role 2' provides 'inherited permission'
+		gotoSitemapThenPage(sitemap, "requires inherited permission");		
+		assertNoProblem();
 		
 	}	
 	
@@ -318,7 +315,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		assertNoProblem();
 		
 		// relogin
-		doStandardLoginAs(sitemap, NEW_EMAIL, NEW_PASSWORD);
+		doStandardLoginAsIgnore(sitemap, NEW_EMAIL, NEW_PASSWORD);
 		assertNoProblem();
 		
 		// we can now access the 'requires inherited permission' page
@@ -349,26 +346,42 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		assertNoProblem();
 		
 		// can't access a page
-		gotoSitemapThenPage(sitemap, "requires role 1");
-		assertProblem();
-		
+		try {
+			gotoSitemapWithProblem(sitemap, "requires role 1");
+			fail("Should not have been able to get to this page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
+	
 		// logout
 		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 		assertNoProblem();
 		
 		// relogin
-		doStandardLoginAs(sitemap, NEW_EMAIL, NEW_PASSWORD);
+		doStandardLoginAsIgnore(sitemap, NEW_EMAIL, NEW_PASSWORD);
 		assertNoProblem();
 		
-		// we can now access the 'requires inherited permission' page
-		gotoSitemapThenPage(sitemap, "requires inherited permission");		
-		assertProblem();
+		// we still cannot access the 'requires inherited permission' page
+		try {
+			gotoSitemapWithProblem(sitemap, "requires inherited permission");
+			fail("Should not have been able to get to this page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 		
-		gotoSitemapThenPage(sitemap, "requires role 1");
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "requires role 1");
+			fail("Should not have been able to get to this page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 		
-		gotoSitemapThenPage(sitemap, "requires permission 1");		
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "requires permission 1");
+			fail("Should not have been able to get to this page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 
 	}
 	

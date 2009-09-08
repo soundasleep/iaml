@@ -66,6 +66,8 @@
 	«FILE "output/call_remote_event.php"»«EXPAND php::includes::CallRemoteEvent::callRemoteEvent»«ENDFILE»
 	«FILE "output/add_role.php"»«EXPAND php::includes::AddRolePhp::addRolePhp»«ENDFILE»
 	«FILE "output/add_permission.php"»«EXPAND php::includes::AddPermissionPhp::addPermissionPhp»«ENDFILE»
+	«FILE "output/remove_role.php"»«EXPAND php::includes::RemoveRolePhp::removeRolePhp»«ENDFILE»
+	«FILE "output/remove_permission.php"»«EXPAND php::includes::RemovePermissionPhp::removePermissionPhp»«ENDFILE»
 	
 	«FILE "output/database_dump.php"»«EXPAND template::php::DatabaseDump::databaseDump»«ENDFILE»
 

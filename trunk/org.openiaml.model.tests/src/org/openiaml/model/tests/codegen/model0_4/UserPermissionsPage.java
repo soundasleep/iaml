@@ -12,7 +12,7 @@ import org.eclipse.core.resources.IFile;
  * @author jmwright
  *
  */
-public class UserPermissionsPage extends AbstractUserLoginTestCase {
+public class UserPermissionsPage extends AbstractDefaultRoleUserLoginTestCase {
 	
 	@Override
 	public void setUp() throws Exception {

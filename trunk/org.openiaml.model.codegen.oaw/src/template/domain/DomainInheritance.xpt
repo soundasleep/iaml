@@ -30,9 +30,11 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 		/* same instance; return immediately */
 		return $instance;
 	«ELSE»
+		log_message("[cast] Casting '«name»' into subclass '«target.name»'...");
 		«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS subclass»
 			«LET attributes.selectFirst(a | a.primaryKey) AS sourceKey»
 				«LET subclass.attributes.select(a | !a.outEdges.typeSelect(model::wires::ExtendsWire).to.select( a | a == sourceKey ).isEmpty).first() AS targetKey»
+					log_message("[cast] Attempting cast into '«subclass.name»'");
 					$source_value = $instance["«safeNameString(sourceKey.name)»"];
 
 					«EXPAND Select::selectDatabase FOR subclass»
@@ -46,28 +48,30 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 					
 					$db_query = new DatabaseQuery($db_name);
 					$new_instance = $db_query->fetchFirst($query, $args);
-					if ($new_instance === null) {
-						log_message("Could not find any result");
-						return null;
-					}
-			
-					log_message("Found instance: " . print_r($new_instance, true));
-					 
-					// add $instance to $new_instance
-					foreach ($instance as $key => $value) {
-						if (isset($new_instance[$key])) {
-							$new_instance["«safeNameString(this.name)»." . $key] = $value;
-						} else {
-							$new_instance[$key] = $value;
+					if ($new_instance !== null) {
+						// we found an instance!
+						log_message("Found instance: " . print_r($new_instance, true));
+						 
+						// add $instance to $new_instance
+						foreach ($instance as $key => $value) {
+							if (isset($new_instance[$key])) {
+								$new_instance["«safeNameString(this.name)»." . $key] = $value;
+							} else {
+								$new_instance[$key] = $value;
+							}
 						}
+						
+						// continue casting call
+						return cast_«safeName(subclass)»_as_«safeName(target)»($new_instance);
 					}
-					
-					// continue casting call
-					return cast_«safeName(subclass)»_as_«safeName(target)»($new_instance);
 				«ENDLET»
 			«ENDLET»
 		«ENDFOREACH»
 	«ENDIF»
+	
+	// could not find any result
+	log_message("[cast] Could not find any result for '«name»'");
+	return null;
 }
 «ENDDEFINE»
 

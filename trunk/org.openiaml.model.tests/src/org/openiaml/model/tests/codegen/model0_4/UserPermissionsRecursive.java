@@ -14,7 +14,7 @@ import org.eclipse.core.resources.IFile;
  * @author jmwright
  *
  */
-public class UserPermissionsRecursive extends AbstractUserLoginTestCase {
+public class UserPermissionsRecursive extends AbstractDefaultRoleUserLoginTestCase {
 	
 	@Override
 	public void setUp() throws Exception {

@@ -10,6 +10,7 @@
 	«REM»all roles that extend this role«ENDREM»
 	«FOREACH getDomainStore().eAllContents.typeSelect(model::users::Role) AS role»
 		«EXPAND addRoleFunction(role) FOR this»
+		«EXPAND removeRoleFunction(role) FOR this»
 	«ENDFOREACH»
 «ENDDEFINE»
 
@@ -63,6 +64,16 @@ function add_role_«safeName(target)»_to_«safeName()»($instance) {
 					if ($this_instance === null) {
 						throw new IamlRuntimeException("Could not successfully add new role '«subType.name»' to existing role '«name»'");
 					}
+					
+					// if this role provides any permissions, we need to add them by default
+					«FOREACH subType.outEdges.typeSelect(model::wires::ProvidesWire).to.typeSelect(model::users::Permission) AS permission»
+						// permission '«permission.name»'
+						$result = add_permission_«safeName(permission)»_to_«safeName(subType)»($this_instance);
+						if (!$result) {
+							throw new IamlRuntimeException("Could not add permission '«permission.name»' to subtype role '«subType.name»'");
+						}
+					«ENDFOREACH»					
+				
 				}
 				
 				// now get the next subtype to add information 
@@ -90,6 +101,83 @@ function add_role_«safeName(target)»_to_«safeName()»($instance) {
 	«ENDIF»
 }
 «ENDDEFINE»
+
+«DEFINE removeRoleFunction(model::users::Role target) FOR model::users::Role»
+/**
+ * Remove the role '«target.name»' to the current instance of '«name»'.
+ *
+ * Even if this role is not currently an instance of '«name»', this method
+ * will not fail.
+ *
+ * Returns true if the role was successfully removed.
+ */
+function remove_role_«safeName(target)»_from_«safeName()»($instance) {
+	«IF target==this»
+		// same role; we need to remove this instance
+		«EXPAND template::domain::Select::selectDatabase FOR target»
+		
+		«LET getPrimaryKey() AS pk»
+		$query = "DELETE FROM «safeNameString(name)»
+			WHERE «safeNameString(pk.name)» = ?";
+			
+		if (!isset($instance["«safeNameString(pk.name)-»"])) {
+			throw new IamlRuntimeException("Primary key '«pk.name»' did not exist in instance of '«name»'");
+		}
+		$args = array($instance["«safeNameString(pk.name)-»"]);
+		
+		$db_query = new DatabaseQuery($db_name);
+		$db = $db_query->execute($query, $args);
+		«ENDLET»
+
+		// if this role provides any permissions, we need to remove them by default
+		«FOREACH outEdges.typeSelect(model::wires::ProvidesWire).to.typeSelect(model::users::Permission) AS permission»
+			// permission '«permission.name»'
+			remove_permission_«safeName(permission)»_from_«safeName()»($instance);
+		«ENDFOREACH»
+		
+		// success!
+		return true;
+	«ELSEIF allSubtypes().contains(target)»
+		// the type '«target.name»' is a subtype of '«name»'
+		
+		«LET inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::users::Role) AS directSubtypes»
+		«FOREACH directSubtypes AS subType»
+			«IF allSubtypes(subType).contains(target)»
+				// the subtype '«subType.name»' has a path to '«target.name»'
+				
+				// does an instance of '«subType.name»' exist?
+				$this_instance = cast_«safeName()»_as_«safeName(subType)»($instance);
+				if ($this_instance !== null) {
+					// instruct this instance to remove the tole
+					$result = remove_role_«safeName(target)»_from_«safeName(subType)»($this_instance);
+					if ($result) {
+						// removed successfully
+						return true;
+					}
+				}
+			«ENDIF»
+		«ENDFOREACH»
+		«ENDLET»		
+	«ELSE»
+		// the target class is not in any subclasses; try the direct superclasses
+		«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS superclass»
+			// subclass '«superclass.name»'
+			$superclass_instance = get_subclass_«safeName(superclass)»_from_«safeName()»($instance);
+			if ($superclass_instance != null) {
+				$result = remove_role_«safeName(target)»_from_«safeName(superclass)»($superclass_instance);
+				if ($result) {
+					// successful
+					return $result;
+				}
+			}
+		«ENDFOREACH»
+		
+		// could not find any
+		return false;
+	«ENDIF»
+}
+«ENDDEFINE»
+
 
 «DEFINE getRoleSuperclass FOR model::users::Role»
 «ENDDEFINE»

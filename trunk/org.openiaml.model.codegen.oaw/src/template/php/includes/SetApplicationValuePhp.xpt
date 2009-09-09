@@ -179,7 +179,7 @@ try {
 «DEFINE outgoingValue FOR model::ApplicationElementProperty»
 	if ($page_id == "«safeNameString(containingPage(this).id)-»") {
 		/* the property "«this»" needs to be updated on the client */
-		«IF eContainer.metaType.isAssignableFrom(model::visual::InputTextField)»
+		«IF model::visual::InputTextField.isInstance(eContainer)»
 			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::InputTextField) eContainer).id)»): '$value'");
 			log_message("set_value " 
 				. escape_parameter_string("«safeNameString(((model::visual::InputTextField) eContainer).id)»")

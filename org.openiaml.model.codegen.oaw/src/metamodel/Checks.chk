@@ -122,3 +122,6 @@ context model::scopes::Session ERROR "A Session can only contain one LoginHandle
 context model::visual::Page ERROR "A Page cannot contain a LoginHandler" :
 	children.typeSelect(model::components::LoginHandler).size == 0;
 
+context model::CompositeOperation ERROR "An Operation can only contain one StartNode" :
+	nodes.typeSelect(model::operations::StartNode).size <= 1;
+

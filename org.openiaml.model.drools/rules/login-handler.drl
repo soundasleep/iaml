@@ -173,11 +173,16 @@ rule "Create 'key attribute' property for LoginHandler[type = key]s"
 	when
 		scope : Session( ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+
 		not (ApplicationElementProperty (eContainer == scope, 
 			name=="current login key" ) )
+
 		# the value may not be called "current login key"
-		# not (FindWire( name == "set", from == login_handler, to != null ))
-		  # ^^ disabled to satisfy stratification constraint
+		not (
+			exists ( actual_key : ApplicationElementProperty ( )
+				and SetWire ( name == "set", from == login_handler, to == actual_key )
+			)
+		) 
 					
 	then
 
@@ -251,7 +256,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 	then
 		ParameterWire param = handler.generatedParameterWire(scope, page, value, wire);
 		handler.setName(param, "[sessions] 'login key' parameter to 'check key'");
-		queue.add(param, drools);	
+		queue.add(param, drools);
 
 end
 
@@ -501,7 +506,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		
 		not ( StartNode ( eContainer == loginOperation ))
 			
-	then				
+	then
 		
 		# connect field value as parameter
 		ParameterWire clickParam = handler.generatedParameterWire(login_handler, login, fieldValue, runClick);

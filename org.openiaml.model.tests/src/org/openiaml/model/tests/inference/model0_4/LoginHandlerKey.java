@@ -23,7 +23,7 @@ import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SetWire;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
  * Test case for inference of login handler[type=secret key]
@@ -31,7 +31,12 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
  * @author jmwright
  *
  */
-public class LoginHandlerKey extends InferenceTestCase {
+public class LoginHandlerKey extends ValidInferenceTestCase {
+
+	@Override
+	public Class<? extends ValidInferenceTestCase> getInferenceClass() {
+		return LoginHandlerKey.class;
+	}
 
 	/**
 	 * Test the initial model.
@@ -160,6 +165,32 @@ public class LoginHandlerKey extends InferenceTestCase {
 			NavigateWire nav = (NavigateWire) w.iterator().next();
 			assertGenerated(nav);
 		}
+	}
+
+	/**
+	 * The session should only have one ApplicationElementProperty.
+	 *
+	 * @throws Exception
+	 */
+	public void testSessionProperties() throws Exception {
+		root = loadAndInfer(LoginHandlerKey.class);
+
+		Session session = assertHasSession(root, "my session");
+
+		ApplicationElementProperty my = assertHasApplicationElementProperty(session, "my login key");
+		assertNotGenerated(my);
+		
+		// shouldn't be generated
+		assertHasNoApplicationElementProperty(session, "current login key");
+		
+		// there should only be one
+		assertHasOne(session, "iaml:properties", ApplicationElementProperty.class);
+		
+		// there should be a SetWire from the LoginHandler to this
+		LoginHandler loginHandler = assertHasLoginHandler(session, "Login Handler");
+		assertNotGenerated(loginHandler);
+		
+		assertHasSetWire(session, loginHandler, my, "set");
 	}
 
 	/**

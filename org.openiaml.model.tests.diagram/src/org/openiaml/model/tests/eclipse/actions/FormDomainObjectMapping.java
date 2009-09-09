@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.eclipse.actions;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools;
@@ -15,7 +16,7 @@ import org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools;
  * @author jmwright
  *
  */
-public class FormDomainObjectMapping extends AbstractActionTestCase {
+public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEditPart> {
 
 	public String getModel() {
 		return "FormDomainObjectMapping.iaml";

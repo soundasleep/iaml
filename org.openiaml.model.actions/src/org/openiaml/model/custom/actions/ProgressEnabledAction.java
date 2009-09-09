@@ -33,6 +33,8 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 
 	protected Object[] selection;
 
+	private IErrorLogger handler = getDefaultPlugin();
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
 	 */
@@ -93,7 +95,7 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 								getErrorMessage(individual, status.getMessage()),
 								status.getException());
 						// log it
-						Platform.getLog(getDefaultPlugin().getBundle()).log(multi);
+						getErrorHandler().log(multi);
 						
 						monitor.done();
 						return;
@@ -121,9 +123,9 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 			PlatformUI.getWorkbench().getProgressService().
 				busyCursorWhile(getRunnable(result));
 		} catch (InvocationTargetException e) {
-			getDefaultPlugin().logError(e.getMessage(), e);
+			getErrorHandler().logError(e.getMessage(), e);
 		} catch (InterruptedException e) {
-			getDefaultPlugin().logError(e.getMessage(), e);
+			getErrorHandler().logError(e.getMessage(), e);
 		}
 
 	}
@@ -208,6 +210,26 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 			getDefaultPlugin().logError(
 					"[warning] " + status.getMessage(), status.getException());
 		}
+	}
+
+	/**
+	 * Set a error handler.
+	 * 
+	 * @see #logError(Throwable)
+	 * @param handler the handler to handle {@link #logError(Throwable)} calls
+	 */
+	public void setErrorHandler(IErrorLogger handler) {
+		this.handler = handler;
+	}
+	
+	/**
+	 * Get the current error handler.
+	 * 
+	 * @see #logError(Throwable)
+	 * @return handler the handler to handle {@link #logError(Throwable)} calls
+	 */
+	public IErrorLogger getErrorHandler() {
+		return this.handler;
 	}
 
 }

@@ -9,10 +9,11 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.ui.IViewActionDelegate;
 import org.openiaml.model.custom.actions.InferEntireModelAction;
+import org.openiaml.model.custom.actions.ProgressEnabledAction;
 import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
@@ -28,7 +29,7 @@ import org.openiaml.model.inference.ICreateElements;
  * @author jmwright
  *
  */
-public class PartialInferenceWithinActivations extends AbstractActionTestCase {
+public class PartialInferenceWithinActivations extends AbstractActionTestCase<GraphicalEditPart> {
 
 	public String getModel() {
 		return "PartialInference.iaml";
@@ -42,7 +43,7 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase {
 	 * 
 	 * @return
 	 */
-	protected IViewActionDelegate getAction() {
+	protected ProgressEnabledAction<GraphicalEditPart> getAction() {
 		return new InferContainedElementsAction() {
 
 			@Override
@@ -75,7 +76,7 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase {
 	 * 
 	 * @return
 	 */
-	protected IViewActionDelegate getFullAction() {
+	protected ProgressEnabledAction<IFile> getFullAction() {
 		return new InferEntireModelAction() {
 
 			@Override
@@ -159,7 +160,8 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase {
 			// save it
 			editor.doSave(new NullProgressMonitor());
 			
-			// there should not be any new elements in the local editor
+			// nothing should be added (remember we are using
+			// a custom rule set)
 			assertEditorHasChildren(2, editor);
 			
 			// however, if we open up the text field, there should be elements

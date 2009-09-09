@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.eclipse;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.openiaml.model.diagram.helpers.IAccessibleTextAwareEditPart;
@@ -15,7 +16,7 @@ import org.openiaml.model.tests.eclipse.actions.AbstractActionTestCase;
  * @author jmwright
  *
  */
-public class DerivedPropertyMarker extends AbstractActionTestCase {
+public class DerivedPropertyMarker extends AbstractActionTestCase<IFile> {
 
 	@Override
 	public String getRoot() {

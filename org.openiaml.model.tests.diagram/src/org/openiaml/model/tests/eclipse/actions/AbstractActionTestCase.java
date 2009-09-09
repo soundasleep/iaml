@@ -11,7 +11,7 @@ import org.openiaml.model.tests.eclipse.AbstractModelEclipseTestCase;
  * @author jmwright
  *
  */
-public abstract class AbstractActionTestCase extends AbstractModelEclipseTestCase {
+public abstract class AbstractActionTestCase<T> extends AbstractModelEclipseTestCase<T> {
 
 	@Override
 	public String getRoot() {

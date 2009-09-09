@@ -1,14 +1,16 @@
 package org.openiaml.model.actions;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
+import org.openiaml.model.custom.actions.IErrorLogger;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class IamlActionsPlugin extends Plugin {
+public class IamlActionsPlugin extends Plugin implements IErrorLogger {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.openiaml.model.actions";
@@ -102,6 +104,14 @@ public class IamlActionsPlugin extends Plugin {
 		if (throwable != null) {
 			throwable.printStackTrace();
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.custom.actions.IErrorLogger#log(org.eclipse.core.runtime.IStatus)
+	 */
+	@Override
+	public void log(IStatus multi) {
+		Platform.getLog(this.getBundle()).log(multi);
 	}
 	
 }

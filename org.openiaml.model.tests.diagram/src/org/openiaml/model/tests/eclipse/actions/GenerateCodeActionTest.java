@@ -5,12 +5,9 @@ package org.openiaml.model.tests.eclipse.actions;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.browser.IWebBrowser;
 import org.openiaml.model.custom.actions.GenerateCodeAction;
 import org.openiaml.model.custom.actions.GenerateCodeActionAndView;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Issue 83: Test the GenerateCodeAction action, both the normal
@@ -19,9 +16,17 @@ import org.openiaml.model.tests.EclipseTestCaseHelper;
  * @author jmwright
  *
  */
-public class GenerateCodeActionTest extends EclipseTestCaseHelper {
+public class GenerateCodeActionTest extends AbstractActionTestCase<IFile> {
 	
 	private IFile targetModel;
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.eclipse.AbstractModelEclipseTestCase#getModel()
+	 */
+	@Override
+	public String getModel() {
+		return "GenerateCodeActionTest.iaml";
+	}
 	
 	public void copyFiles() throws Exception {
 		// register errors
@@ -48,9 +53,7 @@ public class GenerateCodeActionTest extends EclipseTestCaseHelper {
 		assertNotExists(outputFolder);
 		
 		// do the action
-		GenerateCodeAction action = new GenerateCodeAction();
-		IStatus status = action.doExecute(targetModel, new NullProgressMonitor());
-		assertStatusOK(status);
+		runAction(new GenerateCodeAction(), targetModel);
 		
 		// the output folder should now be created
 		assertExists(outputFolder);
@@ -73,10 +76,9 @@ public class GenerateCodeActionTest extends EclipseTestCaseHelper {
 		IFolder outputFolder = project.getFolder("output");
 		assertNotExists(outputFolder);
 		
-		// do the action
+		// do the action		
 		GenerateCodeActionAndView action = new GenerateCodeActionAndView();
-		IStatus status = action.execute(targetModel, new NullProgressMonitor());
-		assertStatusOK(status);
+		runAction(action, targetModel);
 		
 		// the output folder should now be created
 		assertExists(outputFolder);
@@ -90,5 +92,5 @@ public class GenerateCodeActionTest extends EclipseTestCaseHelper {
 		assertNotNull("Browser was not created", browser);
 		
 	}
-	
+
 }

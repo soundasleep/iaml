@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.eclipse.shortcuts;
 
+import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.eclipse.AbstractModelEclipseTestCase;
 
 /**
@@ -11,7 +12,7 @@ import org.openiaml.model.tests.eclipse.AbstractModelEclipseTestCase;
  * @author jmwright
  *
  */
-public abstract class AbstractShortcutsTestCase extends AbstractModelEclipseTestCase {
+public abstract class AbstractShortcutsTestCase extends AbstractModelEclipseTestCase<IFile> {
 
 	@Override
 	public String getRoot() {

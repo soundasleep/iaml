@@ -4,12 +4,14 @@
 package org.openiaml.model.tests.eclipse;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IViewActionDelegate;
+import org.openiaml.model.custom.actions.IErrorLogger;
 import org.openiaml.model.custom.actions.InferEntireModelAction;
+import org.openiaml.model.custom.actions.ProgressEnabledAction;
 import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
@@ -19,7 +21,7 @@ import org.openiaml.model.tests.EclipseTestCaseHelper;
  * @author jmwright
  *
  */
-public abstract class AbstractModelEclipseTestCase extends EclipseTestCaseHelper {
+public abstract class AbstractModelEclipseTestCase<T> extends EclipseTestCaseHelper {
 
 	/**
 	 * Get the root of the model files.
@@ -33,7 +35,8 @@ public abstract class AbstractModelEclipseTestCase extends EclipseTestCaseHelper
 	public IamlDiagramEditor editor;
 	
 	/**
-	 * Initialise the model file from the model given in {@link #getModel()}.
+	 * Initialise the model file from the model given in {@link #getModel()},
+	 * initialise the diagram, and open it.
 	 * 
 	 * This isn't placed in setUp() as {@link #testRunning()} was failing
 	 * from files being created from before.
@@ -51,8 +54,33 @@ public abstract class AbstractModelEclipseTestCase extends EclipseTestCaseHelper
 	 * 
 	 * @param targetModel
 	 * @param action the action to perform
+	 * @throws CoreException 
 	 */
-	protected void inferSourceModelFile(IFile targetModel, IViewActionDelegate action) {
+	protected void inferSourceModelFile(IFile targetModel, ProgressEnabledAction<IFile> action) throws CoreException {
+		
+		action.setErrorHandler(new IErrorLogger() {
+
+			/**
+			 * Since we are in a test case, we want to get
+			 * errors immediately.
+			 */
+			@Override
+			public void logError(String message, Throwable e) {
+				throw new RuntimeException(message, e);
+			}
+
+			@Override
+			public void logError(String message) {
+				throw new RuntimeException(message);
+			}
+
+			@Override
+			public void log(IStatus multi) {
+				throw new RuntimeException(multi.getMessage(), multi.getException());
+			}
+			
+		});
+		
 		action.selectionChanged(null, new StructuredSelection(targetModel));
 		action.run(null);
 	}
@@ -62,13 +90,15 @@ public abstract class AbstractModelEclipseTestCase extends EclipseTestCaseHelper
 	 * 
 	 * @param targetModel
 	 * @param inferContainedElementsAction 
+	 * @throws CoreException 
 	 */
-	protected void inferSourceModelFile(IFile targetModel) {
+	protected void inferSourceModelFile(IFile targetModel) throws CoreException {
 		inferSourceModelFile(targetModel, new InferEntireModelAction());
 	}
 
 	/**
-	 * Initialise the model file from the model given in {@link #getModel()}.
+	 * Initialise the model file from the model given in {@link #getModel()},
+	 * possibly infer the contained elements, initialise the diagram, and open it.
 	 * 
 	 * This isn't placed in setUp() as {@link #testRunning()} was failing
 	 * from files being created from before.
@@ -130,7 +160,31 @@ public abstract class AbstractModelEclipseTestCase extends EclipseTestCaseHelper
 	 * @param action
 	 * @param element
 	 */
-	public void runAction(IViewActionDelegate action, ShapeNodeEditPart element) {
+	public void runAction(ProgressEnabledAction<T> action, T element) {
+		
+		action.setErrorHandler(new IErrorLogger() {
+
+			/**
+			 * Since we are in a test case, we want to get
+			 * errors immediately.
+			 */
+			@Override
+			public void logError(String message, Throwable e) {
+				throw new RuntimeException(message, e);
+			}
+
+			@Override
+			public void logError(String message) {
+				throw new RuntimeException(message);
+			}
+
+			@Override
+			public void log(IStatus multi) {
+				throw new RuntimeException(multi.getMessage(), multi.getException());
+			}
+			
+		});
+		
 		action.selectionChanged(null, new StructuredSelection(element));
 		action.run(null);
 	}

@@ -505,35 +505,6 @@ public class UserRoles extends InferenceTestCase {
 	}
 	
 	/**
-	 * The login form and the session properties should be
-	 * connected by a SetWire (not SyncWire) from form to session property. 
-	 * 
-	 * @throws Exception
-	 */
-	public void testLoginFormConnectedToSession() throws Exception {
-		root = loadAndInfer(UserRoles.class, true);
-
-		Page login = assertHasPage(root, "login");
-		InputForm form = assertHasInputForm(login, "login form");
-		InputTextField email = assertHasInputTextField(form, "email");
-		ApplicationElementProperty emailValue = assertHasApplicationElementProperty(email, "fieldValue");
-		InputTextField password = assertHasInputTextField(form, "password");
-		ApplicationElementProperty passwordValue = assertHasApplicationElementProperty(password, "fieldValue");
-
-		Session session = assertHasSession(root, "target session");
-		ApplicationElementProperty sessionEmail = assertHasApplicationElementProperty(session, "current email");
-		ApplicationElementProperty sessionPassword = assertHasApplicationElementProperty(session, "current password");
-		
-		SetWire setEmail = assertHasSetWire(login, emailValue, sessionEmail, "set");
-		assertGenerated(setEmail);
-		SetWire setPassword = assertHasSetWire(login, passwordValue, sessionPassword, "set");
-		assertGenerated(setPassword);
-		
-		assertHasNoWiresFromTo(login, emailValue, sessionEmail, SyncWire.class);
-		assertHasNoWiresFromTo(login, passwordValue, sessionPassword, SyncWire.class);
-	}
-	
-	/**
 	 * The UserInstance should have a SelectWire from the given Role
 	 * with the current property values as parameters.
 	 *

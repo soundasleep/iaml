@@ -26,15 +26,6 @@ public interface DomainFactory extends EFactory {
 	DomainFactory eINSTANCE = org.openiaml.model.model.domain.impl.DomainFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Empty Domain Package Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Empty Domain Package Class</em>'.
-	 * @generated
-	 */
-	EmptyDomainPackageClass createEmptyDomainPackageClass();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

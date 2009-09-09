@@ -20,7 +20,6 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.domain.DomainFactory;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.DomainStoreTypes;
-import org.openiaml.model.model.domain.EmptyDomainPackageClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,7 +65,6 @@ public class DomainFactoryImpl extends EFactoryImpl implements DomainFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DomainPackage.EMPTY_DOMAIN_PACKAGE_CLASS: return createEmptyDomainPackageClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -104,16 +102,6 @@ public class DomainFactoryImpl extends EFactoryImpl implements DomainFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EmptyDomainPackageClass createEmptyDomainPackageClass() {
-		EmptyDomainPackageClassImpl emptyDomainPackageClass = new EmptyDomainPackageClassImpl();
-		return emptyDomainPackageClass;
 	}
 
 	/**

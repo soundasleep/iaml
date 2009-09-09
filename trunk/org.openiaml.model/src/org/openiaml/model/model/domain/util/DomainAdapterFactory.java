@@ -7,7 +7,6 @@
 package org.openiaml.model.model.domain.util;
 
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.domain.DomainPackage;
@@ -78,20 +77,6 @@ public class DomainAdapterFactory extends AdapterFactoryImpl {
 				return createEObjectAdapter();
 			}
 		};
-
-	/**
-	 * Creates an adapter for the <code>target</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
-	 * @generated
-	 */
-	@Override
-	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject)target);
-	}
-
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.EmptyDomainPackageClass <em>Empty Domain Package Class</em>}'.

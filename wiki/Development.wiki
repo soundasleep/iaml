@@ -19,7 +19,7 @@ I suggest adding the following parameters to your {{{eclipse.ini}}} to prevent _
 
 {{{
 -vmargs
--Xms384m
+-Xms128m
 -Xmx512m
 -XX:PermSize=128M
 -XX:MaxPermSize=384M

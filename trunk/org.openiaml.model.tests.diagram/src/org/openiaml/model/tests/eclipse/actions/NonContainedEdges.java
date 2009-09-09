@@ -6,6 +6,7 @@ package org.openiaml.model.tests.eclipse.actions;
 import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 
@@ -19,7 +20,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  * @author jmwright
  *
  */
-public class NonContainedEdges extends AbstractActionTestCase {
+public class NonContainedEdges extends AbstractActionTestCase<GraphicalEditPart> {
 
 	public String getModel() {
 		return "NonContainedEdges.iaml";

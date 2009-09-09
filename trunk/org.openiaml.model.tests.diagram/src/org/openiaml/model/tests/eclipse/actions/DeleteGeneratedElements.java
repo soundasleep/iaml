@@ -5,6 +5,7 @@ package org.openiaml.model.tests.eclipse.actions;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
@@ -13,13 +14,12 @@ import org.openiaml.model.diagram.helpers.GeneratedElementHandler;
 import org.openiaml.model.model.GeneratedElement;
 
 /**
- * Test InputForm mappings to DomainObjects. (Issue 45)
+ *
  * 
- * @see #getModel()
  * @author jmwright
  *
  */
-public class DeleteGeneratedElements extends AbstractActionTestCase {
+public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 
 	public String getModel() {
 		return "DeleteGeneratedElements.iaml";

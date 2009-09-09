@@ -8,6 +8,7 @@ import junit.framework.AssertionFailedError;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
@@ -19,7 +20,7 @@ import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
  * @author jmwright
  *
  */
-public class PartialInference extends AbstractActionTestCase {
+public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> {
 
 	public String getModel() {
 		return "PartialInference.iaml";

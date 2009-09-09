@@ -206,7 +206,7 @@
 «DEFINE continueChainedOperations(Boolean php) FOR model::wires::NavigateWire»
 	«IF name != "fail"»
 		«IF php»
-			«IF to.metaType.isAssignableFrom(model::visual::Page)»
+			«IF model::visual::Page.isInstance(to)»
 			/* prevent infinite loops on the current page */
 			if ("«((model::visual::Page) to).id»" != CURRENT_PAGE) {
 			«ELSE»

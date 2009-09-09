@@ -143,17 +143,17 @@ possibleParentOperations(emf::EObject this ) :
 
 /* get the start node for an operation */
 startNode(model::CompositeOperation this) :
-	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );
+	nodes.typeSelect(model::operations::StartNode).first();
 
 startNodeCondition(model::CompositeCondition this) :
-	nodes.selectFirst( node | node.metaType.isAssignableFrom(model::operations::StartNode) );
+	nodes.typeSelect(model::operations::StartNode).first();
 
 /* get the next execution flow for a decision operation that has passed */
-passedExectionFlow(model::operations::DecisionOperation this) :
-	outExecutions.selectFirst( flow | !flow.to.metaType.isAssignableFrom(model::operations::CancelNode) );
+passedExectionFlow(model::operations::DecisionOperation this) :	
+	outExecutions.selectFirst( flow | !model::operations::CancelNode.isInstance(flow.to) );
 
 failedExectionFlow(model::operations::DecisionOperation this) :
-	outExecutions.selectFirst( flow | flow.to.metaType.isAssignableFrom(model::operations::CancelNode) );
+	outExecutions.selectFirst( flow | model::operations::CancelNode.isInstance(flow.to) );
 
 /** does this operation have a "fail" edge? */
 getFailEdge(model::CompositeOperation this) :
@@ -323,7 +323,7 @@ isAutosaveOff(emf::EObject this):
 model::DomainAttribute getPrimaryKey(model::DomainAttributeInstance this) :
 	if inEdges.typeSelect(model::wires::NewInstanceWire).size >= 1 then
 		getPrimaryKey(inEdges.typeSelect(model::wires::NewInstanceWire).first())
-	else if eContainer.metaType.isAssignableFrom(model::DomainObjectInstance) then
+	else if model::DomainObjectInstance.isInstance(eContainer) then
 		getPrimaryKey((model::DomainObjectInstance) eContainer);
 
 model::DomainAttribute getPrimaryKey(model::wires::NewInstanceWire this) :

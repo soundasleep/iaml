@@ -572,7 +572,6 @@
       <eLiterals name="RELATIONAL_DB"/>
       <eLiterals name="PROPERTIES_FILE" value="1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="EmptyDomainPackageClass"/>
   </eSubpackages>
   <eSubpackages name="users" nsURI="http://openiaml.org/model/users" nsPrefix="iaml.users">
     <eAnnotations source="http://openiaml.org/comment">

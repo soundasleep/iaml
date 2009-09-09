@@ -26,6 +26,7 @@ import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.scopes.ScopesFactory;
 import org.openiaml.model.model.scopes.ScopesPackage;
+import org.openiaml.model.model.users.UsersFactory;
 import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
@@ -61,7 +62,7 @@ public class ModelTestCase extends TestCase {
 			factoryMap.put( WiresPackage.eINSTANCE , WiresFactory.eINSTANCE );
 			factoryMap.put( ComponentsPackage.eINSTANCE , ComponentsFactory.eINSTANCE );
 			factoryMap.put( DomainPackage.eINSTANCE , DomainFactory.eINSTANCE );
-			factoryMap.put( UsersPackage.eINSTANCE , DomainFactory.eINSTANCE );
+			factoryMap.put( UsersPackage.eINSTANCE , UsersFactory.eINSTANCE );
 		}
 		return factoryMap;
 	}
@@ -98,7 +99,12 @@ public class ModelTestCase extends TestCase {
 				// we should know of the factory to create the model element
 				EFactory factory = getFactoryMap().get( target.getEPackage() );
 				assertNotNull("Couldn't find a factory for package: " + target.getEPackage(), factory);
-				EObject obj = factory.create( target );
+				EObject obj;
+				try {
+					obj = factory.create( target );
+				} catch (IllegalArgumentException e) {
+					throw new RuntimeException("Could not create '" + target + "' in EPackage '" + target.getEPackage() + "' from factory: " + factory, e);
+				}
 				
 				if (obj instanceof GeneratedElement) {
 					GeneratedElement ge = (GeneratedElement) obj;

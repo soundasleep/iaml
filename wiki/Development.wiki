@@ -126,7 +126,7 @@ In the future this guide will also contain information on topics such as:
   # Plugin Overview
   # Building
     # Reloading the meta-model
-    # Generating diagram editors
+    # [GeneratingDiagramEditors]
   # Testing
   # Deploying
   # Contributing

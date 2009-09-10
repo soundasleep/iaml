@@ -1,0 +1,20 @@
+#summary Tips on generating diagram editors with GMF
+#labels Development,Phase-Implementation
+
+=Tips=
+
+Here is a basic script to delete the generated code from all generated editors ([http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model/model/scripts/remove-generated-gmf.bat?r=1140 source]).
+
+{{{
+rem we should be in workspace\
+rm -rf "org.openiaml.model.diagram\src\org"
+rm -rf "org.openiaml.model.diagram.condition\src\org"
+rm -rf "org.openiaml.model.diagram.domain_object\src\org"
+rm -rf "org.openiaml.model.diagram.domain_object_instance\src\org"
+rm -rf "org.openiaml.model.diagram.domain_store\src\org"
+rm -rf "org.openiaml.model.diagram.element\src\org"
+rm -rf "org.openiaml.model.diagram.operation\src\org"
+rm -rf "org.openiaml.model.diagram.user_store\src\org"
+rm -rf "org.openiaml.model.diagram.visual\src\org"
+rm -rf "org.openiaml.model.diagram.wire\src\org"
+}}}

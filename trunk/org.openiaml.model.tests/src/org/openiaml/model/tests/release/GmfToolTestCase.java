@@ -5,14 +5,13 @@ package org.openiaml.model.tests.release;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.openiaml.model.tests.SoftCache;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -26,32 +25,38 @@ import org.w3c.dom.Element;
  */
 public class GmfToolTestCase extends XmlTestCase {
 
-	/**
-	 * Load up all the .gmftool's
-	 * 
-	 */
-	public Map<String,Document> getGmfTools() throws Exception {
-		Map<String,Document> loadedTools = new HashMap<String,Document>();
-			
-		// load all .gmftool's
-		for (String map : getToolList()) {
-			loadedTools.put( map, loadDocument(map) );
-		}
+	private static SoftCache<String,Document> toolCache = new SoftCache<String,Document>() {
 
-		return loadedTools;
+		@Override
+		public Document retrieve(String input) {
+			try {
+				return loadDocument(input);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+		}
+		
+	};
+	
+	public static SoftCache<String,Document> getToolCache() {
+		return toolCache;
 	}
+	
+	private static Set<String> loadedTools = null;
 	
 	/**
 	 * Create a list of gmftools from {@link PluginsTestCase}.
 	 * 
 	 * @return
 	 */
-	private static Set<String> getToolList() {
-		Set<String> tools = new HashSet<String>();
-		for (String gmfgen : PluginsTestCase.getAllGmfGens()) {
-			tools.add(gmfgen.replace(".gmfgen", ".gmftool"));
+	public static Set<String> getToolList() {
+		if (loadedTools == null) {
+			loadedTools = new HashSet<String>();
+			for (String gmfgen : PluginsTestCase.getAllGmfGens()) {
+				loadedTools.add(gmfgen.replace(".gmfgen", ".gmftool"));
+			}
 		}
-		return tools;
+		return loadedTools;
 	}
 
 	/**
@@ -61,7 +66,7 @@ public class GmfToolTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testGmfToolMatch() throws Exception {
-		assertEquals(getGmfTools().size(), PluginsTestCase.getAllGmfGens().size());
+		assertEquals(getToolList().size(), PluginsTestCase.getAllGmfGens().size());
 	}
 	
 	/**
@@ -125,11 +130,10 @@ public class GmfToolTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testGmfTools() throws Exception {
-		Map<String,Document> loaded = getGmfTools();
 		
-		for (String file : loaded.keySet()) {
+		for (String file : getToolList()) {
 			boolean changed = false;
-			Document doc = loaded.get(file);
+			Document doc = getToolCache().get(file);
 			IterableElementList nl = xpath(doc, "//palette/tools");
 			
 			IterableElementList tools = getAllGmfTools(nl, file + ": ");
@@ -190,10 +194,9 @@ public class GmfToolTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testCheckAllToolsMapped() throws Exception {
-		Map<String,Document> loaded = getGmfTools();
-		
-		for (String filename : loaded.keySet()) {
-			Document gmftool = loaded.get(filename);
+
+		for (String filename : getToolList()) {
+			Document gmftool = getToolCache().get(filename);
 			Document gmfmap = loadGmfmap(filename);
 			
 			IterableElementList roots = xpath(gmftool, "/ToolRegistry/palette/tools");
@@ -252,10 +255,9 @@ public class GmfToolTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testIconsMatch() throws Exception {
-		Map<String,Document> loaded = getGmfTools();
 		
-		for (String filename : loaded.keySet()) {
-			Document gmftool = loaded.get(filename);
+		for (String filename : getToolList()) {
+			Document gmftool = getToolCache().get(filename);
 			
 			IterableElementList roots = xpath(gmftool, "/ToolRegistry/palette/tools");
 			IterableElementList tools = getAllGmfTools(roots, filename);

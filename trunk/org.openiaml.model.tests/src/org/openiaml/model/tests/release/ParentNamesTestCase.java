@@ -3,8 +3,6 @@
  */
 package org.openiaml.model.tests.release;
 
-import java.util.Map;
-
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -152,8 +150,8 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testMappingReadOnly() throws Exception {
-		for (String filename : getGmfMaps().keySet()) {
-			Document doc = getGmfMaps().get(filename);
+		for (String filename : GmfMapTestCase.getMapList()) {
+			Document doc = GmfMapTestCase.getMapCache().get(filename);
 
 			IterableElementList nodes = xpath(doc, "/Mapping/nodes/ownedChild/labelMappings/diagramLabel[contains(@href, 'ParentName')]");
 			for (Element node : nodes) {
@@ -164,13 +162,4 @@ public class ParentNamesTestCase extends XmlTestCase {
 
 	}
 
-	/**
-	 * Loads the gmfmaps from {@link GmfMapTestCase}.
-	 */
-	public Map<String,Document> getGmfMaps() throws Exception {
-		return new GmfMapTestCase().getGmfMaps();
-	}
-	
-	
-	
 }

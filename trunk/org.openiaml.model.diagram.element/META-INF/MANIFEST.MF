@@ -4,12 +4,20 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.openiaml.model.diagram.element; singleton:=true
 Bundle-Version: 0.3.1
 Bundle-ClassPath: .
-Bundle-Activator: org.openiaml.model.model.diagram.element.part.IamlDiagramEditorPlugin
+Bundle-Activator: org.openiaml.model.diagram.element.part.IamlDiagramEditorPlugin
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
-Export-Package: org.openiaml.model.model.diagram.element.edit.parts,
- org.openiaml.model.model.diagram.element.part,
- org.openiaml.model.model.diagram.element.providers
+Export-Package: org.openiaml.model.diagram.element.edit.commands,
+ org.openiaml.model.diagram.element.edit.helpers,
+ org.openiaml.model.diagram.element.edit.parts,
+ org.openiaml.model.diagram.element.edit.policies,
+ org.openiaml.model.diagram.element.expressions,
+ org.openiaml.model.diagram.element.navigator,
+ org.openiaml.model.diagram.element.parsers,
+ org.openiaml.model.diagram.element.part,
+ org.openiaml.model.diagram.element.preferences,
+ org.openiaml.model.diagram.element.providers,
+ org.openiaml.model.diagram.element.sheet
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.core.expressions,

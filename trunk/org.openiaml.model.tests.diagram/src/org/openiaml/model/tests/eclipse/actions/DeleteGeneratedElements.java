@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.eclipse.actions;
 
@@ -15,7 +15,7 @@ import org.openiaml.model.model.GeneratedElement;
 
 /**
  *
- * 
+ *
  * @author jmwright
  *
  */
@@ -24,13 +24,13 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 	public String getModel() {
 		return "DeleteGeneratedElements.iaml";
 	}
-	
+
 	protected DiagramDocumentEditor editor_page;
 	protected DiagramDocumentEditor editor_target;
-	
+
 	/**
 	 * Test the initial model.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testInitial() throws Exception {
@@ -40,14 +40,14 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		ShapeNodeEditPart page = assertHasPage(editor, "container");
 		editor_page = openDiagram(page);
 		assertEditorVisual(editor_page);
-		
+
 		// there should be six children
 		assertEditorHasChildren(6, editor_page);
 		ShapeNodeEditPart target = assertHasInputTextField(editor_page, "target", false);
 		assertGenerated(target);
 		ShapeNodeEditPart unrelated = assertHasInputTextField(editor_page, "unrelated", false);
 		assertGenerated(unrelated);
-		
+
 		ShapeNodeEditPart edit = assertHasEventTrigger(editor_page, "edit", true);
 		assertGenerated(edit);
 		ShapeNodeEditPart incoming = assertHasOperation(editor_page, "incoming", false);
@@ -62,20 +62,20 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 
 		// open the target
 		editor_target = openDiagram(target);
-		
+
 		// there should be 7 children
 		assertEditorHasChildren(7, editor_target);
 		editor_target.close(false);
-		
+
 		editor_target = openDiagram(unrelated);
 		assertEditorHasChildren(5, editor_target);
-		
+
 	}
-	
+
 	/**
 	 * Deleting an element which is being used by others should
 	 * show a message box.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void testDeleteConfirm() throws Exception {
 		initializeModelFile();
@@ -84,7 +84,7 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		ShapeNodeEditPart page = assertHasPage(editor, "container");
 		editor_page = openDiagram(page);
 		assertEditorVisual(editor_page);
-		
+
 		// there should be six children
 		assertEditorHasChildren(6, editor_page);
 		ShapeNodeEditPart target = assertHasInputTextField(editor_page, "target", false);
@@ -94,26 +94,26 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		// and deleting it.
 		/*
 		 the following code throws:
-		
+
 			java.lang.NullPointerException
 			at org.eclipse.emf.workspace.AbstractEMFOperation.createTransaction(AbstractEMFOperation.java:447)
 			at org.eclipse.emf.workspace.AbstractEMFOperation.execute(AbstractEMFOperation.java:134)
 			at org.eclipse.gmf.runtime.diagram.ui.internal.actions.PromptingDeleteAction.run(PromptingDeleteAction.java:159)
-			at org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor$MyDeleteAction.run(IamlDiagramEditor.java:180)
+			at org.openiaml.model.diagram.visual.part.IamlDiagramEditor$MyDeleteAction.run(IamlDiagramEditor.java:180)
 		*/
 		/*
 			MyDeleteAction action = ((IamlDiagramEditor) editor_page).new MyDeleteAction(editor_page);
 			action.selectionChanged(editor_page, new StructuredSelection(target));
 			action.run();
 		 */
-		
+
 		// so we are limited to unit testing the helper objects
 	}
-	
+
 	/**
 	 * Unit test the element handler.
-	 * 
-	 * @throws Exception 
+	 *
+	 * @throws Exception
 	 */
 	public void testHandler() throws Exception {
 		initializeModelFile();
@@ -122,26 +122,26 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		ShapeNodeEditPart page = assertHasPage(editor, "container");
 		editor_page = openDiagram(page);
 		assertEditorVisual(editor_page);
-		
+
 		// there should be six children
 		assertEditorHasChildren(6, editor_page);
 		ShapeNodeEditPart target = assertHasInputTextField(editor_page, "target", false);
 		assertGenerated(target);
-		
+
 		GeneratedElementHandler handler = new GeneratedElementHandler(target);
 		assertTrue("we should have incoming edges", handler.needsConfirmation());
 		assertEquals("There should only be one element to confirm", 1, handler.getConfirmationElements().size());
 		GeneratedElement toConfirm = (GeneratedElement) handler.getConfirmationElements().get(0);
-		
+
 		// this message will likely be quite fragile
 		assertEquals("The generated element 'InputTextField 'target'' contains elements which are connected to non-generated elements:\n\n" +
 				"CompositeOperation 'update'\n" +
-				"EventTrigger 'edit'\n\n" + 
+				"EventTrigger 'edit'\n\n" +
 				"Deleting 'InputTextField 'target'' will also delete these generated elements, currently in use:\n\n" +
-				"CompositeOperation 'update'\n" + 
+				"CompositeOperation 'update'\n" +
 				"EventTrigger 'edit'", handler.getConfirmationMessage(toConfirm));
 	}
-	
+
 	public void testDeletedElements() throws Exception {
 		initializeModelFile();
 
@@ -149,43 +149,43 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		ShapeNodeEditPart page = assertHasPage(editor, "container");
 		editor_page = openDiagram(page);
 		assertEditorVisual(editor_page);
-		
+
 		// there should be six children
 		assertEditorHasChildren(6, editor_page);
 		ShapeNodeEditPart target = assertHasInputTextField(editor_page, "target", false);
 		assertGenerated(target);
-		
+
 		GeneratedElementHandler handler = new GeneratedElementHandler(target);
-		List<EObject> toDelete = handler.getOtherElementsToDelete();	
-		
-		// there should be two other elements that are important to delete		
+		List<EObject> toDelete = handler.getOtherElementsToDelete();
+
+		// there should be two other elements that are important to delete
 		assertEquals(2, toDelete.size());
-		
+
 		ShapeNodeEditPart edit = assertHasEventTrigger(editor_page, "edit", true);
 		assertGenerated(edit);
 		ShapeNodeEditPart update = assertHasOperation(editor_page, "update", true);
 		assertGenerated(update);
 		assertContains(edit.resolveSemanticElement(), toDelete);
 		assertContains(update.resolveSemanticElement(), toDelete);
-		
+
 		// get ALL related elements to also
 		GeneratedElementDeleter deleter = new GeneratedElementDeleter((GeneratedElement) target.resolveSemanticElement());
-		
-		assertGreaterEq(6, deleter.getElementsToDelete().size());		
+
+		assertGreaterEq(6, deleter.getElementsToDelete().size());
 	}
 
 	/**
 	 * Close loaded editors.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void tearDown() throws Exception {
 
 		if (editor_target != null)
 			editor_target.close(false);
-		
+
 		if (editor_page != null)
 			editor_page.close(false);
-		
+
 		super.tearDown();
 	}
 

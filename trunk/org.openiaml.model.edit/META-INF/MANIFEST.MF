@@ -9,6 +9,7 @@ Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.openiaml.model.model.components.provider,
+ org.openiaml.model.model.domain.provider,
  org.openiaml.model.model.operations.provider,
  org.openiaml.model.model.provider,
  org.openiaml.model.model.scopes.provider,

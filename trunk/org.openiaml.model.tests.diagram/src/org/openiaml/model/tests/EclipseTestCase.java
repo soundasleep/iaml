@@ -32,13 +32,13 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
-import org.openiaml.model.model.diagram.part.IamlInitDiagramFileAction;
-import org.openiaml.model.model.diagram.part.IamlNewDiagramFileWizard;
-import org.openiaml.model.model.diagram.part.IamlVisualIDRegistry;
-import org.openiaml.model.model.diagram.part.Messages;
+import org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart;
+import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
+import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
+import org.openiaml.model.diagram.part.IamlInitDiagramFileAction;
+import org.openiaml.model.diagram.part.IamlNewDiagramFileWizard;
+import org.openiaml.model.diagram.part.IamlVisualIDRegistry;
+import org.openiaml.model.diagram.part.Messages;
 
 /**
  * Eclipse testing functionality.

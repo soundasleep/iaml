@@ -18,14 +18,14 @@
    <extension point="org.eclipse.ui.editors" id="gmf-editor">
       <?gmfgen generated="true"?>
       <editor
-         id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID"
+         id="org.openiaml.model.diagram.part.IamlDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/ModelDiagramFile.gif"
          extensions="iaml_diagram"
          default="true"
-         class="org.openiaml.model.model.diagram.part.IamlDiagramEditor"
-         matchingStrategy="org.openiaml.model.model.diagram.part.IamlMatchingStrategy"
-         contributorClass="org.openiaml.model.model.diagram.part.IamlDiagramActionBarContributor">
+         class="org.openiaml.model.diagram.part.IamlDiagramEditor"
+         matchingStrategy="org.openiaml.model.diagram.part.IamlMatchingStrategy"
+         contributorClass="org.openiaml.model.diagram.part.IamlDiagramActionBarContributor">
       </editor>
    </extension>
    
@@ -33,7 +33,7 @@
       <?gmfgen generated="true"?>
       <context
          description="%context.description"
-         id="org.openiaml.model.model.diagram.ui.diagramContext"
+         id="org.openiaml.model.diagram.ui.diagramContext"
          name="%context.name"
          parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
       </context>
@@ -45,8 +45,8 @@
   	     name="%newWizardName"
   	     icon="icons/obj16/ModelDiagramFile.gif"
   	     category="org.eclipse.ui.Examples"
-  	     class="org.openiaml.model.model.diagram.part.IamlCreationWizard"
-  	     id="org.openiaml.model.model.diagram.part.IamlCreationWizardID">
+  	     class="org.openiaml.model.diagram.part.IamlCreationWizard"
+  	     id="org.openiaml.model.diagram.part.IamlCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
    </extension>
@@ -59,7 +59,7 @@
             objectClass="org.eclipse.core.resources.IFile">
          <action
                label="%initDiagramActionLabel"
-               class="org.openiaml.model.model.diagram.part.IamlInitDiagramFileAction"
+               class="org.openiaml.model.diagram.part.IamlInitDiagramFileAction"
                menubarPath="additions"
                enablesFor="1"
                id="org.openiaml.model.diagram.InitDiagramAction">
@@ -73,7 +73,7 @@
          class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
          id="IamlPresentation">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.diagram.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="delete"/>
             </ElementType>
@@ -86,7 +86,7 @@
          class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
          id="IamlPresentationIDE">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.diagram.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="bookmark"/>
             </ElementType>
@@ -96,7 +96,7 @@
             class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
             id="IamlRender">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.diagram.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="cut"/>
                <GlobalActionId actionId="copy"/>
@@ -109,13 +109,13 @@
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
       <?gmfgen generated="true"?>
-      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.providers.IamlMarkerNavigationProvider">
+      <MarkerNavigationProvider class="org.openiaml.model.diagram.providers.IamlMarkerNavigationProvider">
          <MarkerType name="org.openiaml.model.diagram.diagnostic"/>
          <Priority name="Lowest"/>
       </MarkerNavigationProvider>
    </extension>
 
-   <extension id="diagnostic" name="Iaml Plugin problems" point="org.eclipse.core.resources.markers">
+   <extension id="diagnostic" name="Iaml Diagram Plugin problems" point="org.eclipse.core.resources.markers">
       <?gmfgen generated="true"?>
       <super type="org.eclipse.core.resources.problemmarker"/>
       <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
@@ -124,7 +124,7 @@
 
    <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
       <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlValidationDecoratorProvider">
+      <decoratorProvider class="org.openiaml.model.diagram.providers.IamlValidationDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
          <context decoratorTargets="PRIMARY_VIEW"/>
@@ -133,7 +133,7 @@
 
    <extension point="org.eclipse.core.runtime.preferences" id="prefs">
       <?gmfgen generated="true"?>
-      <initializer class="org.openiaml.model.model.diagram.preferences.DiagramPreferenceInitializer"/>
+      <initializer class="org.openiaml.model.diagram.preferences.DiagramPreferenceInitializer"/>
    </extension>
 
    <extension point="org.eclipse.ui.preferencePages" id="prefpages">
@@ -141,31 +141,31 @@
       <page
             id="org.openiaml.model.diagram.general"
             name="%prefpage.org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.preferences.DiagramGeneralPreferencePage">
+            class="org.openiaml.model.diagram.preferences.DiagramGeneralPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.appearance"
             name="%prefpage.org.openiaml.model.diagram.appearance"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.preferences.DiagramAppearancePreferencePage">
+            class="org.openiaml.model.diagram.preferences.DiagramAppearancePreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.connections"
             name="%prefpage.org.openiaml.model.diagram.connections"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.preferences.DiagramConnectionsPreferencePage">
+            class="org.openiaml.model.diagram.preferences.DiagramConnectionsPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.printing"
             name="%prefpage.org.openiaml.model.diagram.printing"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.preferences.DiagramPrintingPreferencePage">
+            class="org.openiaml.model.diagram.preferences.DiagramPrintingPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.rulersAndGrid"
             name="%prefpage.org.openiaml.model.diagram.rulersAndGrid"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.preferences.DiagramRulersAndGridPreferencePage">
+            class="org.openiaml.model.diagram.preferences.DiagramRulersAndGridPreferencePage">
       </page>
    </extension>
 
@@ -173,7 +173,7 @@
       <?gmfgen generated="true"?>
       <propertyContributor
             contributorId="org.openiaml.model.diagram"
-            labelProvider="org.openiaml.model.model.diagram.sheet.IamlSheetLabelProvider">
+            labelProvider="org.openiaml.model.diagram.sheet.IamlSheetLabelProvider">
          <propertyCategory category="domain"/>
          <propertyCategory category="visual"/>
          <propertyCategory category="extra"/>
@@ -224,43 +224,43 @@
          <propertySection
             id="property.section.domain" 
             tab="property.tab.domain"
-            class="org.openiaml.model.model.diagram.sheet.IamlPropertySection">
+            class="org.openiaml.model.diagram.sheet.IamlPropertySection">
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
-            <input type="org.openiaml.model.model.diagram.navigator.IamlAbstractNavigatorItem"/>
+            <input type="org.openiaml.model.diagram.navigator.IamlAbstractNavigatorItem"/>
          </propertySection>
       </propertySections>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
       <?gmfgen generated="true"?>
-      <viewProvider class="org.openiaml.model.model.diagram.providers.IamlViewProvider">
+      <viewProvider class="org.openiaml.model.diagram.providers.IamlViewProvider">
          <Priority name="Lowest"/>
          <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
-            <method name="getType()" value="iaml,iaml_visual,iaml_wire,iaml_domain_object,iaml_operation,iaml_element,iaml_domain_store,iaml_condition,iaml_domain_object_instance,iaml_user_store"/>
+            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_wire,iaml_element,iaml_domain_store,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object"/>
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004"/>
       </viewProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
       <?gmfgen generated="true"?>
-      <editpartProvider class="org.openiaml.model.model.diagram.providers.IamlEditPartProvider">
+      <editpartProvider class="org.openiaml.model.diagram.providers.IamlEditPartProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
             <method name="getType()" value="Iaml"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023"/>
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -271,46 +271,45 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
       <?gmfgen generated="true"?>
-      <modelingAssistantProvider class="org.openiaml.model.model.diagram.providers.IamlModelingAssistantProvider">
+      <modelingAssistantProvider class="org.openiaml.model.diagram.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart" id="InternetApplication_1000"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.EventTriggerEditPart" id="EventTrigger_2001"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.SingleOperationEditPart" id="SingleOperation_2002"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2003"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.ChainedOperationEditPart" id="ChainedOperation_2004"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.DomainObjectEditPart" id="DomainObject_2005"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.PageEditPart" id="Page_2006"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.DynamicApplicationElementSetEditPart" id="DynamicApplicationElementSet_2007"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2008"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart" id="DomainStore_2009"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.SessionEditPart" id="Session_2010"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.LoginHandlerEditPart" id="LoginHandler_2011"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2012"/>
-         <object class="org.openiaml.model.model.diagram.edit.parts.UserStoreEditPart" id="UserStore_2013"/>
-         <context elements="InternetApplication_1000,EventTrigger_2001,SingleOperation_2002,CompositeOperation_2003,ChainedOperation_2004,DomainObject_2005,Page_2006,DynamicApplicationElementSet_2007,ApplicationElementProperty_2008,DomainStore_2009,Session_2010,LoginHandler_2011,CompositeCondition_2012,UserStore_2013"/>
+         <object class="org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart" id="InternetApplication_1000"/>
+         <object class="org.openiaml.model.diagram.edit.parts.EventTriggerEditPart" id="EventTrigger_2001"/>
+         <object class="org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2002"/>
+         <object class="org.openiaml.model.diagram.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2003"/>
+         <object class="org.openiaml.model.diagram.edit.parts.DomainObjectEditPart" id="DomainObject_2004"/>
+         <object class="org.openiaml.model.diagram.edit.parts.PageEditPart" id="Page_2005"/>
+         <object class="org.openiaml.model.diagram.edit.parts.DynamicApplicationElementSetEditPart" id="DynamicApplicationElementSet_2006"/>
+         <object class="org.openiaml.model.diagram.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2007"/>
+         <object class="org.openiaml.model.diagram.edit.parts.DomainStoreEditPart" id="DomainStore_2008"/>
+         <object class="org.openiaml.model.diagram.edit.parts.SessionEditPart" id="Session_2009"/>
+         <object class="org.openiaml.model.diagram.edit.parts.LoginHandlerEditPart" id="LoginHandler_2010"/>
+         <object class="org.openiaml.model.diagram.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2011"/>
+         <object class="org.openiaml.model.diagram.edit.parts.UserStoreEditPart" id="UserStore_2012"/>
+         <context elements="InternetApplication_1000,EventTrigger_2001,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2004,Page_2005,DynamicApplicationElementSet_2006,ApplicationElementProperty_2007,DomainStore_2008,Session_2009,LoginHandler_2010,CompositeCondition_2011,UserStore_2012"/>
       </modelingAssistantProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
       <?gmfgen generated="true"?>
-      <IconProvider class="org.openiaml.model.model.diagram.providers.IamlIconProvider">
+      <IconProvider class="org.openiaml.model.diagram.providers.IamlIconProvider">
          <Priority name="Low"/>
       </IconProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
       <?gmfgen generated="true"?>
-      <ParserProvider class="org.openiaml.model.model.diagram.providers.IamlParserProvider">
+      <ParserProvider class="org.openiaml.model.diagram.providers.IamlParserProvider">
          <Priority name="Lowest"/>
       </ParserProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
       <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.providers.IamlShortcutsDecoratorProvider">
+      <decoratorProvider class="org.openiaml.model.diagram.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -324,7 +323,7 @@
                name="%metatype.name.InternetApplication_1000"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="InternetApplication"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.InternetApplicationEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.InternetApplicationEditHelper">
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
@@ -334,128 +333,118 @@
                name="%metatype.name.EventTrigger_2001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.EventTriggerEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.EventTriggerEditHelper">
             <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.SingleOperation_2002"
-               name="%metatype.name.SingleOperation_2002"
+               id="org.openiaml.model.diagram.CompositeOperation_2002"
+               name="%metatype.name.CompositeOperation_2002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="SingleOperation"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.SingleOperationEditHelper">
+               eclass="CompositeOperation"
+               edithelper="org.openiaml.model.diagram.edit.helpers.CompositeOperationEditHelper">
             <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.CompositeOperation_2003"
-               name="%metatype.name.CompositeOperation_2003"
+               id="org.openiaml.model.diagram.PrimitiveOperation_2003"
+               name="%metatype.name.PrimitiveOperation_2003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="CompositeOperation"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.CompositeOperationEditHelper">
+               eclass="PrimitiveOperation"
+               edithelper="org.openiaml.model.diagram.edit.helpers.PrimitiveOperationEditHelper">
             <param name="semanticHint" value="2003"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.ChainedOperation_2004"
-               name="%metatype.name.ChainedOperation_2004"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.ChainedOperationEditHelper">
-            <param name="semanticHint" value="2004"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
-         <metamodelType
-               id="org.openiaml.model.diagram.DomainObject_2005"
-               name="%metatype.name.DomainObject_2005"
+               id="org.openiaml.model.diagram.DomainObject_2004"
+               name="%metatype.name.DomainObject_2004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainObject"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.DomainObjectEditHelper">
-            <param name="semanticHint" value="2005"/>
+               edithelper="org.openiaml.model.diagram.edit.helpers.DomainObjectEditHelper">
+            <param name="semanticHint" value="2004"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
-               id="org.openiaml.model.diagram.Page_2006"
-               name="%metatype.name.Page_2006"
+               id="org.openiaml.model.diagram.Page_2005"
+               name="%metatype.name.Page_2005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Page"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.PageEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.PageEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.2">
+         <metamodelType
+               id="org.openiaml.model.diagram.DynamicApplicationElementSet_2006"
+               name="%metatype.name.DynamicApplicationElementSet_2006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DynamicApplicationElementSet"
+               edithelper="org.openiaml.model.diagram.edit.helpers.DynamicApplicationElementSetEditHelper">
             <param name="semanticHint" value="2006"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.DynamicApplicationElementSet_2007"
-               name="%metatype.name.DynamicApplicationElementSet_2007"
+               id="org.openiaml.model.diagram.ApplicationElementProperty_2007"
+               name="%metatype.name.ApplicationElementProperty_2007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="DynamicApplicationElementSet"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.DynamicApplicationElementSetEditHelper">
+               eclass="ApplicationElementProperty"
+               edithelper="org.openiaml.model.diagram.edit.helpers.ApplicationElementPropertyEditHelper">
             <param name="semanticHint" value="2007"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.ApplicationElementProperty_2008"
-               name="%metatype.name.ApplicationElementProperty_2008"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.ApplicationElementPropertyEditHelper">
-            <param name="semanticHint" value="2008"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
-         <metamodelType
-               id="org.openiaml.model.diagram.DomainStore_2009"
-               name="%metatype.name.DomainStore_2009"
+               id="org.openiaml.model.diagram.DomainStore_2008"
+               name="%metatype.name.DomainStore_2008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainStore"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.DomainStoreEditHelper">
-            <param name="semanticHint" value="2009"/>
+               edithelper="org.openiaml.model.diagram.edit.helpers.DomainStoreEditHelper">
+            <param name="semanticHint" value="2008"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/scopes">
          <metamodelType
-               id="org.openiaml.model.diagram.Session_2010"
-               name="%metatype.name.Session_2010"
+               id="org.openiaml.model.diagram.Session_2009"
+               name="%metatype.name.Session_2009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Session"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.SessionEditHelper">
-            <param name="semanticHint" value="2010"/>
+               edithelper="org.openiaml.model.diagram.edit.helpers.SessionEditHelper">
+            <param name="semanticHint" value="2009"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/components">
          <metamodelType
-               id="org.openiaml.model.diagram.LoginHandler_2011"
-               name="%metatype.name.LoginHandler_2011"
+               id="org.openiaml.model.diagram.LoginHandler_2010"
+               name="%metatype.name.LoginHandler_2010"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="LoginHandler"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.LoginHandlerEditHelper">
-            <param name="semanticHint" value="2011"/>
+               edithelper="org.openiaml.model.diagram.edit.helpers.LoginHandlerEditHelper">
+            <param name="semanticHint" value="2010"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.CompositeCondition_2012"
-               name="%metatype.name.CompositeCondition_2012"
+               id="org.openiaml.model.diagram.CompositeCondition_2011"
+               name="%metatype.name.CompositeCondition_2011"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeCondition"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.CompositeConditionEditHelper">
-            <param name="semanticHint" value="2012"/>
+               edithelper="org.openiaml.model.diagram.edit.helpers.CompositeConditionEditHelper">
+            <param name="semanticHint" value="2011"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/users">
          <metamodelType
-               id="org.openiaml.model.diagram.UserStore_2013"
-               name="%metatype.name.UserStore_2013"
+               id="org.openiaml.model.diagram.UserStore_2012"
+               name="%metatype.name.UserStore_2012"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="UserStore"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.UserStoreEditHelper">
-            <param name="semanticHint" value="2013"/>
+               edithelper="org.openiaml.model.diagram.edit.helpers.UserStoreEditHelper">
+            <param name="semanticHint" value="2012"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -464,7 +453,7 @@
                name="%metatype.name.SyncWire_4001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SyncWire"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.SyncWireEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.SyncWireEditHelper">
             <param name="semanticHint" value="4001"/>
          </metamodelType>
       </metamodel>
@@ -474,7 +463,7 @@
                name="%metatype.name.RunInstanceWire_4002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.RunInstanceWireEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.RunInstanceWireEditHelper">
             <param name="semanticHint" value="4002"/>
          </metamodelType>
       </metamodel>
@@ -484,7 +473,7 @@
                name="%metatype.name.ConditionWire_4003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ConditionWire"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.ConditionWireEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.ConditionWireEditHelper">
             <param name="semanticHint" value="4003"/>
          </metamodelType>
       </metamodel>
@@ -494,7 +483,7 @@
                name="%metatype.name.NavigateWire_4004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="NavigateWire"
-               edithelper="org.openiaml.model.model.diagram.edit.helpers.NavigateWireEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.NavigateWireEditHelper">
             <param name="semanticHint" value="4004"/>
          </metamodelType>
       </metamodel>
@@ -512,18 +501,17 @@
       <binding context="org.openiaml.model.diagram.TypeContext">
          <elementType ref="org.openiaml.model.diagram.InternetApplication_1000"/>
          <elementType ref="org.openiaml.model.diagram.EventTrigger_2001"/>
-         <elementType ref="org.openiaml.model.diagram.SingleOperation_2002"/>
-         <elementType ref="org.openiaml.model.diagram.CompositeOperation_2003"/>
-         <elementType ref="org.openiaml.model.diagram.ChainedOperation_2004"/>
-         <elementType ref="org.openiaml.model.diagram.DomainObject_2005"/>
-         <elementType ref="org.openiaml.model.diagram.Page_2006"/>
-         <elementType ref="org.openiaml.model.diagram.DynamicApplicationElementSet_2007"/>
-         <elementType ref="org.openiaml.model.diagram.ApplicationElementProperty_2008"/>
-         <elementType ref="org.openiaml.model.diagram.DomainStore_2009"/>
-         <elementType ref="org.openiaml.model.diagram.Session_2010"/>
-         <elementType ref="org.openiaml.model.diagram.LoginHandler_2011"/>
-         <elementType ref="org.openiaml.model.diagram.CompositeCondition_2012"/>
-         <elementType ref="org.openiaml.model.diagram.UserStore_2013"/>
+         <elementType ref="org.openiaml.model.diagram.CompositeOperation_2002"/>
+         <elementType ref="org.openiaml.model.diagram.PrimitiveOperation_2003"/>
+         <elementType ref="org.openiaml.model.diagram.DomainObject_2004"/>
+         <elementType ref="org.openiaml.model.diagram.Page_2005"/>
+         <elementType ref="org.openiaml.model.diagram.DynamicApplicationElementSet_2006"/>
+         <elementType ref="org.openiaml.model.diagram.ApplicationElementProperty_2007"/>
+         <elementType ref="org.openiaml.model.diagram.DomainStore_2008"/>
+         <elementType ref="org.openiaml.model.diagram.Session_2009"/>
+         <elementType ref="org.openiaml.model.diagram.LoginHandler_2010"/>
+         <elementType ref="org.openiaml.model.diagram.CompositeCondition_2011"/>
+         <elementType ref="org.openiaml.model.diagram.UserStore_2012"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.ConditionWire_4003"/>
@@ -538,7 +526,7 @@
            type="org.eclipse.emf.common.ui.URIEditorInput"
            namespace="org.openiaml.model.diagram"
            properties="isURIEditorInput"
-           class="org.openiaml.model.model.diagram.part.IamlUriEditorInputTester">
+           class="org.openiaml.model.diagram.part.IamlUriEditorInputTester">
        </propertyTester>
    </extension>
 
@@ -549,7 +537,7 @@
            type="org.eclipse.gmf.runtime.notation.View"
            namespace="org.openiaml.model.diagram"
            properties="isShortcut"
-           class="org.openiaml.model.model.diagram.part.IamlShortcutPropertyTester">
+           class="org.openiaml.model.diagram.part.IamlShortcutPropertyTester">
        </propertyTester>
    </extension>
 
@@ -575,8 +563,8 @@
             id="org.openiaml.model.diagram.resourceContent" 
             name="%navigatorContentName" 
             priority="normal" 
-            contentProvider="org.openiaml.model.model.diagram.navigator.IamlNavigatorContentProvider" 
-            labelProvider="org.openiaml.model.model.diagram.navigator.IamlNavigatorLabelProvider"
+            contentProvider="org.openiaml.model.diagram.navigator.IamlNavigatorContentProvider" 
+            labelProvider="org.openiaml.model.diagram.navigator.IamlNavigatorLabelProvider"
             icon="icons/obj16/ModelDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
@@ -585,7 +573,7 @@
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
         	      <test property="org.eclipse.core.resources.extension" value="iaml_diagram"/>
                </and>
-               <instanceof value="org.openiaml.model.model.diagram.navigator.IamlAbstractNavigatorItem"/>
+               <instanceof value="org.openiaml.model.diagram.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.isShortcut"/>
            	   </adapt>
@@ -593,7 +581,7 @@
          </triggerPoints>
          <possibleChildren>
             <or>
-         	   <instanceof value="org.openiaml.model.model.diagram.navigator.IamlAbstractNavigatorItem"/>
+         	   <instanceof value="org.openiaml.model.diagram.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.isShortcut"/>
            	   </adapt>
@@ -601,14 +589,14 @@
          </possibleChildren>
          <commonSorter 
                id="org.openiaml.model.diagram.navigatorSorter" 
-               class="org.openiaml.model.model.diagram.navigator.IamlNavigatorSorter">
+               class="org.openiaml.model.diagram.navigator.IamlNavigatorSorter">
             <parentExpression>
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
         	         <test property="org.eclipse.core.resources.extension" value="iaml_diagram"/>
                   </and>
-                  <instanceof value="org.openiaml.model.model.diagram.navigator.IamlAbstractNavigatorItem"/>
+                  <instanceof value="org.openiaml.model.diagram.navigator.IamlAbstractNavigatorItem"/>
                </or>
             </parentExpression>
          </commonSorter>
@@ -617,8 +605,8 @@
             id="org.openiaml.model.diagram.domainResourceContent" 
             name="%domainNavigatorContentName" 
             priority="normal" 
-            contentProvider="org.openiaml.model.model.diagram.navigator.IamlDomainNavigatorContentProvider" 
-            labelProvider="org.openiaml.model.model.diagram.navigator.IamlDomainNavigatorLabelProvider"
+            contentProvider="org.openiaml.model.diagram.navigator.IamlDomainNavigatorContentProvider" 
+            labelProvider="org.openiaml.model.diagram.navigator.IamlDomainNavigatorLabelProvider"
             icon="icons/obj16/ModelDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
@@ -627,19 +615,19 @@
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
         	      <test property="org.eclipse.core.resources.extension" value="iaml"/>
                </and>
-               <instanceof value="org.openiaml.model.model.diagram.navigator.IamlDomainNavigatorItem"/>
+               <instanceof value="org.openiaml.model.diagram.navigator.IamlDomainNavigatorItem"/>
             </or>
          </triggerPoints>
          <possibleChildren>
-            <instanceof value="org.openiaml.model.model.diagram.navigator.IamlDomainNavigatorItem"/>
+            <instanceof value="org.openiaml.model.diagram.navigator.IamlDomainNavigatorItem"/>
          </possibleChildren>
       </navigatorContent>
       <actionProvider
             id="org.openiaml.model.diagram.navigatorActionProvider"
-            class="org.openiaml.model.model.diagram.navigator.IamlNavigatorActionProvider">
+            class="org.openiaml.model.diagram.navigator.IamlNavigatorActionProvider">
          <enablement>
             <or>
-               <instanceof value="org.openiaml.model.model.diagram.navigator.IamlAbstractNavigatorItem"/>
+               <instanceof value="org.openiaml.model.diagram.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.isShortcut"/>
            	   </adapt>
@@ -652,7 +640,7 @@
       <?gmfgen generated="true"?>
       <linkHelper
             id="org.openiaml.model.diagram.navigatorLinkHelper"
-            class="org.openiaml.model.model.diagram.navigator.IamlNavigatorLinkHelper">
+            class="org.openiaml.model.diagram.navigator.IamlNavigatorLinkHelper">
          <editorInputEnablement>
             <and>
                <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
@@ -660,7 +648,7 @@
             </and>
          </editorInputEnablement>
          <selectionEnablement>
-            <instanceof value="org.openiaml.model.model.diagram.navigator.IamlAbstractNavigatorItem"/>
+            <instanceof value="org.openiaml.model.diagram.navigator.IamlAbstractNavigatorItem"/>
          </selectionEnablement>
       </linkHelper>
    </extension>
@@ -668,17 +656,17 @@
       <?gmfgen generated="true"?>
       <command
          categoryId="org.eclipse.ui.category.edit"
-         defaultHandler="org.openiaml.model.model.diagram.part.IamlDiagramUpdateCommand"
+         defaultHandler="org.openiaml.model.diagram.part.IamlDiagramUpdateCommand"
          description="%update.diagram.description"
-         id="org.openiaml.model.model.diagram.updateDiagram"
+         id="org.openiaml.model.diagram.updateDiagram"
          name="%update.diagram.name"/>
    </extension>
    
    <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
       <?gmfgen generated="true"?>
       <key 
-         commandId="org.openiaml.model.model.diagram.updateDiagram"
-         contextId="org.openiaml.model.model.diagram.ui.diagramContext"
+         commandId="org.openiaml.model.diagram.updateDiagram"
+         contextId="org.openiaml.model.diagram.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
    </extension>
@@ -693,19 +681,9 @@
          <command commandId="org.openiaml.model.diagram.LoadResourceAction">
             <visibleWhen>
                <and>
-                  <with variable="activePartId"><equals value="org.openiaml.model.model.diagram.part.IamlDiagramEditorID"/></with>
+                  <with variable="activePartId"><equals value="org.openiaml.model.diagram.part.IamlDiagramEditorID"/></with>
                   <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart"/>
-                  </iterate></with>
-               </and>
-            </visibleWhen>
-         </command>
-         <command commandId="org.openiaml.model.diagram.CreateShortcutAction">
-            <visibleWhen>
-               <and>
-                  <with variable="activePartId"><equals value="org.openiaml.model.model.diagram.part.IamlDiagramEditorID"/></with>
-                  <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart"/>
+                     <instanceof value="org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart"/>
                   </iterate></with>
                </and>
             </visibleWhen>
@@ -714,15 +692,11 @@
    </extension>
 <extension point="org.eclipse.ui.commands" id="menu-commands">
       <?gmfgen generated="true"?>
-      <category id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <category id="org.openiaml.model.diagram.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
       <command id="org.openiaml.model.diagram.LoadResourceAction"
          name="Load Resource"
-         categoryId="org.openiaml.model.model.diagram.part.IamlDiagramEditorID"
-         defaultHandler="org.openiaml.model.model.diagram.part.LoadResourceAction"/>
-      <command id="org.openiaml.model.diagram.CreateShortcutAction"
-         name="Create Shortcut..."
-         categoryId="org.openiaml.model.model.diagram.part.IamlDiagramEditorID"
-         defaultHandler="org.openiaml.model.model.diagram.part.CreateShortcutAction"/>
+         categoryId="org.openiaml.model.diagram.part.IamlDiagramEditorID"
+         defaultHandler="org.openiaml.model.diagram.part.LoadResourceAction"/>
    </extension>
 
 <extension point="org.eclipse.ui.handlers" id="menu-handlers">

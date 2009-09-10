@@ -18,14 +18,14 @@
    <extension point="org.eclipse.ui.editors" id="gmf-editor">
       <?gmfgen generated="true"?>
       <editor
-         id="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"
+         id="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/WiresDiagramFile.gif"
          extensions="iaml_wire_diagram"
          default="true"
-         class="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditor"
-         matchingStrategy="org.openiaml.model.model.diagram.wire.part.IamlMatchingStrategy"
-         contributorClass="org.openiaml.model.model.diagram.wire.part.IamlDiagramActionBarContributor">
+         class="org.openiaml.model.diagram.wire.part.IamlDiagramEditor"
+         matchingStrategy="org.openiaml.model.diagram.wire.part.IamlMatchingStrategy"
+         contributorClass="org.openiaml.model.diagram.wire.part.IamlDiagramActionBarContributor">
       </editor>
    </extension>
    
@@ -33,7 +33,7 @@
       <?gmfgen generated="true"?>
       <context
          description="%context.description"
-         id="org.openiaml.model.model.diagram.wire.ui.diagramContext"
+         id="org.openiaml.model.diagram.wire.ui.diagramContext"
          name="%context.name"
          parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
       </context>
@@ -48,7 +48,7 @@
             objectClass="org.eclipse.core.resources.IFile">
          <action
                label="%initDiagramActionLabel"
-               class="org.openiaml.model.model.diagram.wire.part.IamlInitDiagramFileAction"
+               class="org.openiaml.model.diagram.wire.part.IamlInitDiagramFileAction"
                menubarPath="additions"
                enablesFor="1"
                id="org.openiaml.model.diagram.wire.InitDiagramAction">
@@ -62,7 +62,7 @@
          class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
          id="Iaml_WirePresentation">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="delete"/>
             </ElementType>
@@ -75,7 +75,7 @@
          class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
          id="Iaml_WirePresentationIDE">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="bookmark"/>
             </ElementType>
@@ -85,7 +85,7 @@
             class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
             id="Iaml_WireRender">
          <Priority name="Lowest"/>
-         <ViewId id="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID">
+         <ViewId id="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
                <GlobalActionId actionId="cut"/>
                <GlobalActionId actionId="copy"/>
@@ -98,13 +98,13 @@
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
       <?gmfgen generated="true"?>
-      <MarkerNavigationProvider class="org.openiaml.model.model.diagram.wire.providers.IamlMarkerNavigationProvider">
+      <MarkerNavigationProvider class="org.openiaml.model.diagram.wire.providers.IamlMarkerNavigationProvider">
          <MarkerType name="org.openiaml.model.diagram.wire.diagnostic"/>
          <Priority name="Lowest"/>
       </MarkerNavigationProvider>
    </extension>
 
-   <extension id="diagnostic" name="Iaml Plugin (Wire) problems" point="org.eclipse.core.resources.markers">
+   <extension id="diagnostic" name="Iaml Diagram Plugin (Wire) problems" point="org.eclipse.core.resources.markers">
       <?gmfgen generated="true"?>
       <super type="org.eclipse.core.resources.problemmarker"/>
       <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
@@ -113,7 +113,7 @@
 
    <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
       <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.wire.providers.IamlValidationDecoratorProvider">
+      <decoratorProvider class="org.openiaml.model.diagram.wire.providers.IamlValidationDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
          <context decoratorTargets="PRIMARY_VIEW"/>
@@ -122,7 +122,7 @@
 
    <extension point="org.eclipse.core.runtime.preferences" id="prefs">
       <?gmfgen generated="true"?>
-      <initializer class="org.openiaml.model.model.diagram.wire.preferences.DiagramPreferenceInitializer"/>
+      <initializer class="org.openiaml.model.diagram.wire.preferences.DiagramPreferenceInitializer"/>
    </extension>
 
    <extension point="org.eclipse.ui.preferencePages" id="prefpages">
@@ -130,31 +130,31 @@
       <page
             id="org.openiaml.model.diagram.general"
             name="%prefpage.org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.wire.preferences.DiagramGeneralPreferencePage">
+            class="org.openiaml.model.diagram.wire.preferences.DiagramGeneralPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.appearance"
             name="%prefpage.org.openiaml.model.diagram.appearance"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.wire.preferences.DiagramAppearancePreferencePage">
+            class="org.openiaml.model.diagram.wire.preferences.DiagramAppearancePreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.connections"
             name="%prefpage.org.openiaml.model.diagram.connections"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.wire.preferences.DiagramConnectionsPreferencePage">
+            class="org.openiaml.model.diagram.wire.preferences.DiagramConnectionsPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.printing"
             name="%prefpage.org.openiaml.model.diagram.printing"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.wire.preferences.DiagramPrintingPreferencePage">
+            class="org.openiaml.model.diagram.wire.preferences.DiagramPrintingPreferencePage">
       </page>
       <page
             id="org.openiaml.model.diagram.rulersAndGrid"
             name="%prefpage.org.openiaml.model.diagram.rulersAndGrid"
             category="org.openiaml.model.diagram.general"
-            class="org.openiaml.model.model.diagram.wire.preferences.DiagramRulersAndGridPreferencePage">
+            class="org.openiaml.model.diagram.wire.preferences.DiagramRulersAndGridPreferencePage">
       </page>
    </extension>
 
@@ -162,7 +162,7 @@
       <?gmfgen generated="true"?>
       <propertyContributor
             contributorId="org.openiaml.model.diagram.wire"
-            labelProvider="org.openiaml.model.model.diagram.wire.sheet.IamlSheetLabelProvider">
+            labelProvider="org.openiaml.model.diagram.wire.sheet.IamlSheetLabelProvider">
          <propertyCategory category="domain"/>
          <propertyCategory category="visual"/>
          <propertyCategory category="extra"/>
@@ -213,43 +213,43 @@
          <propertySection
             id="property.section.domain" 
             tab="property.tab.domain"
-            class="org.openiaml.model.model.diagram.wire.sheet.IamlPropertySection">
+            class="org.openiaml.model.diagram.wire.sheet.IamlPropertySection">
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
-            <input type="org.openiaml.model.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
+            <input type="org.openiaml.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
          </propertySection>
       </propertySections>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
       <?gmfgen generated="true"?>
-      <viewProvider class="org.openiaml.model.model.diagram.wire.providers.IamlViewProvider">
+      <viewProvider class="org.openiaml.model.diagram.wire.providers.IamlViewProvider">
          <Priority name="Lowest"/>
          <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
-            <method name="getType()" value="iaml,iaml_visual,iaml_wire,iaml_domain_object,iaml_operation,iaml_element,iaml_domain_store,iaml_condition,iaml_domain_object_instance,iaml_user_store"/>
+            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_wire,iaml_element,iaml_domain_store,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object"/>
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Wire"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003"/>
       </viewProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
       <?gmfgen generated="true"?>
-      <editpartProvider class="org.openiaml.model.model.diagram.wire.providers.IamlEditPartProvider">
+      <editpartProvider class="org.openiaml.model.diagram.wire.providers.IamlEditPartProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
             <method name="getType()" value="Iaml_Wire"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020"/>
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -260,43 +260,42 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
       <?gmfgen generated="true"?>
-      <modelingAssistantProvider class="org.openiaml.model.model.diagram.wire.providers.IamlModelingAssistantProvider">
+      <modelingAssistantProvider class="org.openiaml.model.diagram.wire.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.CompositeWireEditPart" id="CompositeWire_1000"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.SingleOperationEditPart" id="SingleOperation_2001"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2002"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.ChainedOperationEditPart" id="ChainedOperation_2003"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2004"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.InputTextFieldEditPart" id="InputTextField_2005"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.EventTriggerEditPart" id="EventTrigger_2006"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2007"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.ParameterEditPart" id="Parameter_2008"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.StaticValueEditPart" id="StaticValue_2009"/>
-         <object class="org.openiaml.model.model.diagram.wire.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2010"/>
-         <context elements="CompositeWire_1000,SingleOperation_2001,CompositeOperation_2002,ChainedOperation_2003,DomainAttribute_2004,InputTextField_2005,EventTrigger_2006,ApplicationElementProperty_2007,Parameter_2008,StaticValue_2009,CompositeCondition_2010"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeWireEditPart" id="CompositeWire_1000"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2001"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2002"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2003"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.InputTextFieldEditPart" id="InputTextField_2004"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.EventTriggerEditPart" id="EventTrigger_2005"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2006"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.ParameterEditPart" id="Parameter_2007"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.StaticValueEditPart" id="StaticValue_2008"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2009"/>
+         <context elements="CompositeWire_1000,CompositeOperation_2001,PrimitiveOperation_2002,DomainAttribute_2003,InputTextField_2004,EventTrigger_2005,ApplicationElementProperty_2006,Parameter_2007,StaticValue_2008,CompositeCondition_2009"/>
       </modelingAssistantProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
       <?gmfgen generated="true"?>
-      <IconProvider class="org.openiaml.model.model.diagram.wire.providers.IamlIconProvider">
+      <IconProvider class="org.openiaml.model.diagram.wire.providers.IamlIconProvider">
          <Priority name="Low"/>
       </IconProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
       <?gmfgen generated="true"?>
-      <ParserProvider class="org.openiaml.model.model.diagram.wire.providers.IamlParserProvider">
+      <ParserProvider class="org.openiaml.model.diagram.wire.providers.IamlParserProvider">
          <Priority name="Lowest"/>
       </ParserProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
       <?gmfgen generated="true"?>
-      <decoratorProvider class="org.openiaml.model.model.diagram.wire.providers.IamlShortcutsDecoratorProvider">
+      <decoratorProvider class="org.openiaml.model.diagram.wire.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -310,108 +309,98 @@
                name="%metatype.name.CompositeWire_1000"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeWire"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.CompositeWireEditHelper">
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.CompositeWireEditHelper">
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.SingleOperation_2001"
-               name="%metatype.name.SingleOperation_2001"
+               id="org.openiaml.model.diagram.wire.CompositeOperation_2001"
+               name="%metatype.name.CompositeOperation_2001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="SingleOperation"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.SingleOperationEditHelper">
+               eclass="CompositeOperation"
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.CompositeOperationEditHelper">
             <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.CompositeOperation_2002"
-               name="%metatype.name.CompositeOperation_2002"
+               id="org.openiaml.model.diagram.wire.PrimitiveOperation_2002"
+               name="%metatype.name.PrimitiveOperation_2002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="CompositeOperation"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.CompositeOperationEditHelper">
+               eclass="PrimitiveOperation"
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.PrimitiveOperationEditHelper">
             <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.ChainedOperation_2003"
-               name="%metatype.name.ChainedOperation_2003"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ChainedOperation"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ChainedOperationEditHelper">
-            <param name="semanticHint" value="2003"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
-         <metamodelType
-               id="org.openiaml.model.diagram.wire.DomainAttribute_2004"
-               name="%metatype.name.DomainAttribute_2004"
+               id="org.openiaml.model.diagram.wire.DomainAttribute_2003"
+               name="%metatype.name.DomainAttribute_2003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainAttribute"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.DomainAttributeEditHelper">
-            <param name="semanticHint" value="2004"/>
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.DomainAttributeEditHelper">
+            <param name="semanticHint" value="2003"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.InputTextField_2005"
-               name="%metatype.name.InputTextField_2005"
+               id="org.openiaml.model.diagram.wire.InputTextField_2004"
+               name="%metatype.name.InputTextField_2004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="InputTextField"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.InputTextFieldEditHelper">
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.InputTextFieldEditHelper">
+            <param name="semanticHint" value="2004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.2">
+         <metamodelType
+               id="org.openiaml.model.diagram.wire.EventTrigger_2005"
+               name="%metatype.name.EventTrigger_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="EventTrigger"
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.EventTriggerEditHelper">
             <param name="semanticHint" value="2005"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.EventTrigger_2006"
-               name="%metatype.name.EventTrigger_2006"
+               id="org.openiaml.model.diagram.wire.ApplicationElementProperty_2006"
+               name="%metatype.name.ApplicationElementProperty_2006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="EventTrigger"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.EventTriggerEditHelper">
+               eclass="ApplicationElementProperty"
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.ApplicationElementPropertyEditHelper">
             <param name="semanticHint" value="2006"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.ApplicationElementProperty_2007"
-               name="%metatype.name.ApplicationElementProperty_2007"
+               id="org.openiaml.model.diagram.wire.Parameter_2007"
+               name="%metatype.name.Parameter_2007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ApplicationElementPropertyEditHelper">
+               eclass="Parameter"
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.ParameterEditHelper">
             <param name="semanticHint" value="2007"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.Parameter_2008"
-               name="%metatype.name.Parameter_2008"
+               id="org.openiaml.model.diagram.wire.StaticValue_2008"
+               name="%metatype.name.StaticValue_2008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="Parameter"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ParameterEditHelper">
+               eclass="StaticValue"
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.StaticValueEditHelper">
             <param name="semanticHint" value="2008"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.2">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.StaticValue_2009"
-               name="%metatype.name.StaticValue_2009"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="StaticValue"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.StaticValueEditHelper">
-            <param name="semanticHint" value="2009"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
-         <metamodelType
-               id="org.openiaml.model.diagram.wire.CompositeCondition_2010"
-               name="%metatype.name.CompositeCondition_2010"
+               id="org.openiaml.model.diagram.wire.CompositeCondition_2009"
+               name="%metatype.name.CompositeCondition_2009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeCondition"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.CompositeConditionEditHelper">
-            <param name="semanticHint" value="2010"/>
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.CompositeConditionEditHelper">
+            <param name="semanticHint" value="2009"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -420,7 +409,7 @@
                name="%metatype.name.SyncWire_4001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SyncWire"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.SyncWireEditHelper">
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.SyncWireEditHelper">
             <param name="semanticHint" value="4001"/>
          </metamodelType>
       </metamodel>
@@ -430,7 +419,7 @@
                name="%metatype.name.RunInstanceWire_4002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.RunInstanceWireEditHelper">
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.RunInstanceWireEditHelper">
             <param name="semanticHint" value="4002"/>
          </metamodelType>
       </metamodel>
@@ -440,7 +429,7 @@
                name="%metatype.name.ParameterWire_4003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ParameterWire"
-               edithelper="org.openiaml.model.model.diagram.wire.edit.helpers.ParameterWireEditHelper">
+               edithelper="org.openiaml.model.diagram.wire.edit.helpers.ParameterWireEditHelper">
             <param name="semanticHint" value="4003"/>
          </metamodelType>
       </metamodel>
@@ -457,16 +446,15 @@
       </clientContext> 
       <binding context="org.openiaml.model.diagram.wire.TypeContext">
          <elementType ref="org.openiaml.model.diagram.wire.CompositeWire_1000"/>
-         <elementType ref="org.openiaml.model.diagram.wire.SingleOperation_2001"/>
-         <elementType ref="org.openiaml.model.diagram.wire.CompositeOperation_2002"/>
-         <elementType ref="org.openiaml.model.diagram.wire.ChainedOperation_2003"/>
-         <elementType ref="org.openiaml.model.diagram.wire.DomainAttribute_2004"/>
-         <elementType ref="org.openiaml.model.diagram.wire.InputTextField_2005"/>
-         <elementType ref="org.openiaml.model.diagram.wire.EventTrigger_2006"/>
-         <elementType ref="org.openiaml.model.diagram.wire.ApplicationElementProperty_2007"/>
-         <elementType ref="org.openiaml.model.diagram.wire.Parameter_2008"/>
-         <elementType ref="org.openiaml.model.diagram.wire.StaticValue_2009"/>
-         <elementType ref="org.openiaml.model.diagram.wire.CompositeCondition_2010"/>
+         <elementType ref="org.openiaml.model.diagram.wire.CompositeOperation_2001"/>
+         <elementType ref="org.openiaml.model.diagram.wire.PrimitiveOperation_2002"/>
+         <elementType ref="org.openiaml.model.diagram.wire.DomainAttribute_2003"/>
+         <elementType ref="org.openiaml.model.diagram.wire.InputTextField_2004"/>
+         <elementType ref="org.openiaml.model.diagram.wire.EventTrigger_2005"/>
+         <elementType ref="org.openiaml.model.diagram.wire.ApplicationElementProperty_2006"/>
+         <elementType ref="org.openiaml.model.diagram.wire.Parameter_2007"/>
+         <elementType ref="org.openiaml.model.diagram.wire.StaticValue_2008"/>
+         <elementType ref="org.openiaml.model.diagram.wire.CompositeCondition_2009"/>
          <elementType ref="org.openiaml.model.diagram.wire.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.wire.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.wire.ParameterWire_4003"/>
@@ -480,7 +468,7 @@
            type="org.eclipse.emf.common.ui.URIEditorInput"
            namespace="org.openiaml.model.diagram.wire"
            properties="isURIEditorInput"
-           class="org.openiaml.model.model.diagram.wire.part.IamlUriEditorInputTester">
+           class="org.openiaml.model.diagram.wire.part.IamlUriEditorInputTester">
        </propertyTester>
    </extension>
 
@@ -491,7 +479,7 @@
            type="org.eclipse.gmf.runtime.notation.View"
            namespace="org.openiaml.model.diagram.wire"
            properties="isShortcut"
-           class="org.openiaml.model.model.diagram.wire.part.IamlShortcutPropertyTester">
+           class="org.openiaml.model.diagram.wire.part.IamlShortcutPropertyTester">
        </propertyTester>
    </extension>
 
@@ -500,6 +488,7 @@
       <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
          <includes>
             <contentExtension pattern="org.openiaml.model.diagram.wire.resourceContent"/>
+			<contentExtension pattern="org.openiaml.model.diagram.wire.domainResourceContent"/>
             <contentExtension pattern="org.openiaml.model.diagram.wire.navigatorLinkHelper"/>
          </includes>
       </viewerContentBinding>
@@ -516,8 +505,8 @@
             id="org.openiaml.model.diagram.wire.resourceContent" 
             name="%navigatorContentName" 
             priority="normal" 
-            contentProvider="org.openiaml.model.model.diagram.wire.navigator.IamlNavigatorContentProvider" 
-            labelProvider="org.openiaml.model.model.diagram.wire.navigator.IamlNavigatorLabelProvider"
+            contentProvider="org.openiaml.model.diagram.wire.navigator.IamlNavigatorContentProvider" 
+            labelProvider="org.openiaml.model.diagram.wire.navigator.IamlNavigatorLabelProvider"
             icon="icons/obj16/WiresDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
@@ -526,7 +515,7 @@
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
         	      <test property="org.eclipse.core.resources.extension" value="iaml_wire_diagram"/>
                </and>
-               <instanceof value="org.openiaml.model.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
+               <instanceof value="org.openiaml.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.wire.isShortcut"/>
            	   </adapt>
@@ -534,7 +523,7 @@
          </triggerPoints>
          <possibleChildren>
             <or>
-         	   <instanceof value="org.openiaml.model.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
+         	   <instanceof value="org.openiaml.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.wire.isShortcut"/>
            	   </adapt>
@@ -542,24 +531,45 @@
          </possibleChildren>
          <commonSorter 
                id="org.openiaml.model.diagram.wire.navigatorSorter" 
-               class="org.openiaml.model.model.diagram.wire.navigator.IamlNavigatorSorter">
+               class="org.openiaml.model.diagram.wire.navigator.IamlNavigatorSorter">
             <parentExpression>
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
         	         <test property="org.eclipse.core.resources.extension" value="iaml_wire_diagram"/>
                   </and>
-                  <instanceof value="org.openiaml.model.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
+                  <instanceof value="org.openiaml.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
                </or>
             </parentExpression>
          </commonSorter>
       </navigatorContent>
+      <navigatorContent
+            id="org.openiaml.model.diagram.wire.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="org.openiaml.model.diagram.wire.navigator.IamlDomainNavigatorContentProvider" 
+            labelProvider="org.openiaml.model.diagram.wire.navigator.IamlDomainNavigatorLabelProvider"
+            icon="icons/obj16/WiresDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_wire"/>
+               </and>
+               <instanceof value="org.openiaml.model.diagram.wire.navigator.IamlDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="org.openiaml.model.diagram.wire.navigator.IamlDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
       <actionProvider
             id="org.openiaml.model.diagram.wire.navigatorActionProvider"
-            class="org.openiaml.model.model.diagram.wire.navigator.IamlNavigatorActionProvider">
+            class="org.openiaml.model.diagram.wire.navigator.IamlNavigatorActionProvider">
          <enablement>
             <or>
-               <instanceof value="org.openiaml.model.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
+               <instanceof value="org.openiaml.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
            	      <test property="org.openiaml.model.diagram.wire.isShortcut"/>
            	   </adapt>
@@ -572,7 +582,7 @@
       <?gmfgen generated="true"?>
       <linkHelper
             id="org.openiaml.model.diagram.wire.navigatorLinkHelper"
-            class="org.openiaml.model.model.diagram.wire.navigator.IamlNavigatorLinkHelper">
+            class="org.openiaml.model.diagram.wire.navigator.IamlNavigatorLinkHelper">
          <editorInputEnablement>
             <and>
                <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
@@ -580,7 +590,7 @@
             </and>
          </editorInputEnablement>
          <selectionEnablement>
-            <instanceof value="org.openiaml.model.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
+            <instanceof value="org.openiaml.model.diagram.wire.navigator.IamlAbstractNavigatorItem"/>
          </selectionEnablement>
       </linkHelper>
    </extension>
@@ -588,17 +598,17 @@
       <?gmfgen generated="true"?>
       <command
          categoryId="org.eclipse.ui.category.edit"
-         defaultHandler="org.openiaml.model.model.diagram.wire.part.IamlDiagramUpdateCommand"
+         defaultHandler="org.openiaml.model.diagram.wire.part.IamlDiagramUpdateCommand"
          description="%update.diagram.description"
-         id="org.openiaml.model.model.diagram.wire.updateDiagram"
+         id="org.openiaml.model.diagram.wire.updateDiagram"
          name="%update.diagram.name"/>
    </extension>
    
    <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
       <?gmfgen generated="true"?>
       <key 
-         commandId="org.openiaml.model.model.diagram.wire.updateDiagram"
-         contextId="org.openiaml.model.model.diagram.wire.ui.diagramContext"
+         commandId="org.openiaml.model.diagram.wire.updateDiagram"
+         contextId="org.openiaml.model.diagram.wire.ui.diagramContext"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="F5"/>
    </extension>
@@ -613,19 +623,9 @@
          <command commandId="org.openiaml.model.diagram.wire.LoadResourceAction">
             <visibleWhen>
                <and>
-                  <with variable="activePartId"><equals value="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/></with>
+                  <with variable="activePartId"><equals value="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/></with>
                   <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.model.diagram.wire.edit.parts.CompositeWireEditPart"/>
-                  </iterate></with>
-               </and>
-            </visibleWhen>
-         </command>
-         <command commandId="org.openiaml.model.diagram.wire.CreateShortcutAction">
-            <visibleWhen>
-               <and>
-                  <with variable="activePartId"><equals value="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/></with>
-                  <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.model.diagram.wire.edit.parts.CompositeWireEditPart"/>
+                     <instanceof value="org.openiaml.model.diagram.wire.edit.parts.CompositeWireEditPart"/>
                   </iterate></with>
                </and>
             </visibleWhen>
@@ -635,15 +635,11 @@
 
    <extension point="org.eclipse.ui.commands" id="menu-commands">
       <?gmfgen generated="true"?>
-      <category id="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <category id="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
       <command id="org.openiaml.model.diagram.wire.LoadResourceAction"
          name="Load Resource"
-         categoryId="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"
-         defaultHandler="org.openiaml.model.model.diagram.wire.part.LoadResourceAction"/>
-      <command id="org.openiaml.model.diagram.wire.CreateShortcutAction"
-         name="Create Shortcut..."
-         categoryId="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"
-         defaultHandler="org.openiaml.model.model.diagram.wire.part.CreateShortcutAction"/>
+         categoryId="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"
+         defaultHandler="org.openiaml.model.diagram.wire.part.LoadResourceAction"/>
    </extension>
 
    <extension point="org.eclipse.ui.handlers" id="menu-handlers">

@@ -247,6 +247,7 @@
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//domain/DomainStoreTypes/PROPERTIES_FILE"/>
       </genEnums>
       <genDataTypes ecoreDataType="iaml.ecore#//domain/FileReference"/>
+      <genClasses ecoreClass="iaml.ecore#//domain/EmptyDomainClass"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Users" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//users">

@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.domain.impl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
@@ -17,6 +18,7 @@ import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.domain.DomainFactory;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.DomainStoreTypes;
+import org.openiaml.model.model.domain.EmptyDomainClass;
 import org.openiaml.model.model.impl.ModelPackageImpl;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
@@ -36,6 +38,13 @@ import org.openiaml.model.model.wires.impl.WiresPackageImpl;
  * @generated
  */
 public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass emptyDomainClassEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -139,6 +148,15 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEmptyDomainClass() {
+		return emptyDomainClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDomainStoreTypes() {
 		return domainStoreTypesEEnum;
 	}
@@ -179,6 +197,9 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		if (isCreated) return;
 		isCreated = true;
 
+		// Create classes and their features
+		emptyDomainClassEClass = createEClass(EMPTY_DOMAIN_CLASS);
+
 		// Create enums
 		domainStoreTypesEEnum = createEEnum(DOMAIN_STORE_TYPES);
 
@@ -208,6 +229,15 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
+
+		// Add supertypes to classes
+
+		// Initialize classes and features; add operations and parameters
+		initEClass(emptyDomainClassEClass, EmptyDomainClass.class, "EmptyDomainClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(domainStoreTypesEEnum, DomainStoreTypes.class, "DomainStoreTypes");
@@ -241,6 +271,12 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.3"
+		   });		
+		addAnnotation
+		  (emptyDomainClassEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "this exists solely to ensure DomainProviderFactory is generated in .genmodel; otherwise GMF complains"
 		   });
 	}
 

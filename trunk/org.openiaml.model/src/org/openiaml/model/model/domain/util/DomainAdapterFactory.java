@@ -7,10 +7,11 @@
 package org.openiaml.model.model.domain.util;
 
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.domain.DomainPackage;
-import org.openiaml.model.model.domain.EmptyDomainPackageClass;
+import org.openiaml.model.model.domain.EmptyDomainClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,8 +70,8 @@ public class DomainAdapterFactory extends AdapterFactoryImpl {
 	protected DomainSwitch<Adapter> modelSwitch =
 		new DomainSwitch<Adapter>() {
 			@Override
-			public Adapter caseEmptyDomainPackageClass(EmptyDomainPackageClass object) {
-				return createEmptyDomainPackageClassAdapter();
+			public Adapter caseEmptyDomainClass(EmptyDomainClass object) {
+				return createEmptyDomainClassAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -79,16 +80,29 @@ public class DomainAdapterFactory extends AdapterFactoryImpl {
 		};
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.EmptyDomainPackageClass <em>Empty Domain Package Class</em>}'.
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param target the object to adapt.
+	 * @return the adapter for the <code>target</code>.
+	 * @generated
+	 */
+	@Override
+	public Adapter createAdapter(Notifier target) {
+		return modelSwitch.doSwitch((EObject)target);
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.domain.EmptyDomainClass <em>Empty Domain Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.domain.EmptyDomainPackageClass
+	 * @see org.openiaml.model.model.domain.EmptyDomainClass
 	 * @generated
 	 */
-	public Adapter createEmptyDomainPackageClassAdapter() {
+	public Adapter createEmptyDomainClassAdapter() {
 		return null;
 	}
 

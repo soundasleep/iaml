@@ -195,22 +195,22 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2003"
-        editPartClassName="ChainedOperationEditPart"
-        itemSemanticEditPolicyClassName="ChainedOperationItemSemanticEditPolicy"
-        notationViewFactoryClassName="ChainedOperationViewFactory"
-        canonicalEditPolicyClassName="ChainedOperationCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="ChainedOperationGraphicalNodeEditPolicy"
-        createCommandClassName="ChainedOperationCreateCommand">
+        editPartClassName="PrimitiveOperationEditPart"
+        itemSemanticEditPolicyClassName="PrimitiveOperationItemSemanticEditPolicy"
+        notationViewFactoryClassName="PrimitiveOperationViewFactory"
+        canonicalEditPolicyClassName="PrimitiveOperationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="PrimitiveOperationGraphicalNodeEditPolicy"
+        createCommandClassName="PrimitiveOperationCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="ChainedOperationEditHelper"/>
+          editHelperClassName="PrimitiveOperationEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
-          className="ChainedOperationFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ChainedOperationFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureChainedOperationNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureChainedOperationParentNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ChainedOperationFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;this.setLineWidth(1);&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureChainedOperationNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureChainedOperationNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureChainedOperationNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureChainedOperationParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureChainedOperationParentNameFigure.setText(&quot;[none]&quot;);&#xA;&#x9;fFigureChainedOperationParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;this.add(fFigureChainedOperationParentNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureChainedOperationNameFigure() {&#xA;&#x9;&#x9;return fFigureChainedOperationNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureChainedOperationParentNameFigure() {&#xA;&#x9;&#x9;return fFigureChainedOperationParentNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 240, 240, 240);&#xA;&#xA;">
+          className="PrimitiveOperationFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class PrimitiveOperationFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigurePrimitiveOperationNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigurePrimitiveOperationParentNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public PrimitiveOperationFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;this.setLineWidth(1);&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigurePrimitiveOperationNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigurePrimitiveOperationNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigurePrimitiveOperationNameFigure);&#xA;&#xA;&#xA;&#xA;fFigurePrimitiveOperationParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigurePrimitiveOperationParentNameFigure.setText(&quot;[none]&quot;);&#xA;&#x9;fFigurePrimitiveOperationParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;this.add(fFigurePrimitiveOperationParentNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigurePrimitiveOperationNameFigure() {&#xA;&#x9;&#x9;return fFigurePrimitiveOperationNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigurePrimitiveOperationParentNameFigure() {&#xA;&#x9;&#x9;return fFigurePrimitiveOperationParentNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 240, 240, 240);&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
@@ -218,7 +218,7 @@
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.2">
         <metaClass
-            href="iaml.genmodel#//model/ChainedOperation"/>
+            href="iaml.genmodel#//model/PrimitiveOperation"/>
         <containmentMetaFeature
             href="iaml.genmodel#//model/ContainsOperations/operations"/>
         <childMetaFeature
@@ -226,15 +226,15 @@
       </modelFacet>
       <labels
           visualID="5005"
-          editPartClassName="ChainedOperationNameEditPart"
-          itemSemanticEditPolicyClassName="ChainedOperationNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="ChainedOperationNameViewFactory"
+          editPartClassName="PrimitiveOperationNameEditPart"
+          itemSemanticEditPolicyClassName="PrimitiveOperationNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="PrimitiveOperationNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureChainedOperationNameFigure"
+            getterName="getFigurePrimitiveOperationNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
@@ -247,13 +247,13 @@
           visualID="5006"
           editPartClassName="WrappingLabel3EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel3ItemSemanticEditPolicy"
-          notationViewFactoryClassName="ChainedOperationLabelViewFactory"
+          notationViewFactoryClassName="PrimitiveOperationLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureChainedOperationParentNameFigure"
+            getterName="getFigurePrimitiveOperationParentNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
           <attributes
               xsi:type="gmfgen:StyleAttributes"
@@ -567,10 +567,10 @@
             genNodes="//@diagram/@topLevelNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="ChainedOperation"
-            description="Create new ChainedOperation"
-            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ChainedOperation.gif"
-            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ChainedOperation.gif"
+            title="PrimitiveOperation"
+            description="Create new PrimitiveOperation"
+            largeIconPath="/org.openiaml.model.edit/icons/full/obj32/PrimitiveOperation.gif"
+            smallIconPath="/org.openiaml.model.edit/icons/full/obj16/PrimitiveOperation.gif"
             genNodes="//@diagram/@topLevelNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
@@ -889,7 +889,7 @@
           body="self.oclIsTypeOf( CompositeOperation )"/>
       <expressions
           xsi:type="gmfgen:GenConstraint"
-          body="self.oclIsTypeOf( ChainedOperation )"/>
+          body="self.oclIsTypeOf( PrimitiveOperation )"/>
       <expressions
           xsi:type="gmfgen:GenConstraint"
           body="self.oclIsTypeOf( RunInstanceWire )"/>

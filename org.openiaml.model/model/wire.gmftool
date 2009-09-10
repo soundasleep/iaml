@@ -11,19 +11,6 @@
         description="Model Elements">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="SingleOperation"
-          description="Create new SingleOperation">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/SingleOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/SingleOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="CompositeOperation"
           description="Create new CompositeOperation">
         <smallIcon
@@ -37,15 +24,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ChainedOperation"
-          description="Create new ChainedOperation">
+          title="PrimitiveOperation"
+          description="Create new PrimitiveOperation">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ChainedOperation.gif"
+            path="icons/full/obj16/PrimitiveOperation.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ChainedOperation.gif"
+            path="icons/full/obj32/PrimitiveOperation.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

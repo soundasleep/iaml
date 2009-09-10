@@ -40,7 +40,11 @@ public class DefaultXpathTestCase extends TestCase implements IXpath {
 	 */
 	public Element xpathFirst(Document doc, String query) throws XPathExpressionException {
 		assertNotNull("Cannot find the xpath for a null document", doc);
-		Element e = (Element) xpath(doc, query).item(0);
+		IterableElementList results = xpath(doc, query);
+		if (results.size() == 0) {
+			fail("XPath query '" + query + "' returned no results");
+		}
+		Element e = results.item(0);
 		assertNotNull("Could not find result for query '" + query + "'", e);
 		return e;
 	}

@@ -8,18 +8,18 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
+import org.openiaml.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
 
 /**
  * Refresh {@link DomainObjectInstance} mappings with Drools.
- * 
+ *
  * @author jmwright
  *
  */
 public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAction {
 
 	public class RefreshObjectInstanceMappings extends DroolsInferenceEngine {
-		
+
 		public RefreshObjectInstanceMappings(ICreateElements handler) {
 			super(handler, false);
 		}
@@ -28,17 +28,17 @@ public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAct
 				"/rules/runtime/domain.drl",
 				"/rules/runtime/new-instance.drl"
 				);
-		
+
 		/**
 		 * Get the list of rule files used.
-		 * 
+		 *
 		 * @see #addRuleFile(String)
 		 * @return
 		 */
 		public List<String> getRuleFiles() {
 			return ruleFiles;
 		}
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -56,7 +56,7 @@ public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAct
 	public Class<? extends EObject> getExpectedEObjectClass() {
 		return DomainObjectInstance.class;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEngine(org.openiaml.model.inference.ICreateElements)
 	 */

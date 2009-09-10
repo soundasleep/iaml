@@ -4,8 +4,8 @@
     <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d889e3162.71" id="model.11d889e30c6.2fe" name="co"/>
     <eventTriggers id="model.11d889e30c6.2fc" name="et" outEdges="wires.11d889e3162.71 wires.11d889e3162.86">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.71" from="model.11d889e30c6.2fc" to="model.11d889e30c6.2fe" name="wire">
-        <operations xsi:type="iaml:SingleOperation" inEdges="wires.11d889e3162.86" id="model.11d889e30c6.31d" name="op1"/>
-        <operations xsi:type="iaml:SingleOperation" inEdges="wires.11d889e3162.85" id="model.11d889e30c6.31e" name="op2"/>
+        <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.11d889e3162.86" id="model.11d889e30c6.31d" name="op1"/>
+        <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.11d889e3162.85" id="model.11d889e30c6.31e" name="op2"/>
       </wires>
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.86" from="model.11d889e30c6.2fc" to="model.11d889e30c6.31d" name="shortcut2"/>
     </eventTriggers>

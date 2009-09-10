@@ -37,17 +37,17 @@ import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.VisibleThing;
-import org.openiaml.model.model.diagram.part.IamlCreationWizardPage;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
-import org.openiaml.model.model.diagram.part.Messages;
+import org.openiaml.model.diagram.part.IamlCreationWizardPage;
+import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
+import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
+import org.openiaml.model.diagram.part.Messages;
 
 /**
  * An action which allows the user to move the selected model element
  * into a separate model file.
- * 
+ *
  * EMF handles all the logic for us, it seems.
- * 
+ *
  * @author jmwright
  */
 public class MoveIntoSeparateModelAction extends ProgressEnabledAction<GraphicalEditPart> {
@@ -74,7 +74,7 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 	@Override
 	public List<GraphicalEditPart> getSelection(Object[] selection) {
 		final List<GraphicalEditPart> ifiles = new ArrayList<GraphicalEditPart>();
-		
+
 		if (selection != null) {
 			for (Object o : selection) {
 				if (o instanceof GraphicalEditPart) {
@@ -82,32 +82,32 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 				}
 			}
 		}
-		
+
 		return ifiles;
 	}
-	
+
 	/**
-	 * 
-	 * <p>Based off generated {@link org.openiaml.model.model.diagram.part.IamlCreationWizard}.</p>
-	 * 
+	 *
+	 * <p>Based off generated {@link org.openiaml.model.diagram.part.IamlCreationWizard}.</p>
+	 *
 	 * @author jmwright
 	 *
 	 */
 	public class NewDomainFileWizard extends Wizard {
-		
+
 		protected IStructuredSelection selection;
-		
+
 		protected String suggestedName;
-		
+
 		protected TransactionalEditingDomain domain;
-		
+
 		/**
 		 * The object to move.
 		 */
 		protected EObject object;
-		
+
 		protected String fileExtension;
-		
+
 		/**
 		 * @param selection
 		 * @param suggestedName
@@ -124,19 +124,19 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 			this.fileExtension = fileExtension;
 			this.domain = domain;
 			this.object = object;
-			
+
 			setWindowTitle(Messages.IamlCreationWizardTitle);
 			setDefaultPageImageDescriptor(IamlDiagramEditorPlugin
 					.getBundledImageDescriptor("icons/wizban/NewModelWizard.gif")); //$NON-NLS-1$
-			setNeedsProgressMonitor(true);			
+			setNeedsProgressMonitor(true);
 		}
 
 		public IStructuredSelection getSelection() {
 			return selection;
 		}
-		
+
 		protected IamlCreationWizardPage modelPage;
-		
+
 		@Override
 		public void addPages() {
 			modelPage = new IamlCreationWizardPage(
@@ -157,37 +157,37 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 					.setDescription(Messages.IamlCreationWizard_DomainModelFilePageDescription);
 			addPage(modelPage);
 		}
-		
+
 		@Override
 		public boolean performFinish() {
-			
+
 			IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 
 				protected void execute(IProgressMonitor monitor)
 						throws CoreException, InterruptedException {
-					
+
 					AbstractTransactionalCommand command = new AbstractTransactionalCommand(
-							domain, 
-							"Move into separate model file", 
+							domain,
+							"Move into separate model file",
 							Collections.EMPTY_LIST /* TODO make this select the correct affected files */) {
-						
+
 						@Override
 						protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 								IAdaptable info) throws ExecutionException {
-							
+
 							Resource modelResource = domain.getResourceSet().createResource(modelPage.getURI());
 							modelResource.getContents().add(object);
 							try {
-								modelResource.save(org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil
+								modelResource.save(org.openiaml.model.diagram.part.IamlDiagramEditorUtil
 										.getSaveOptions());
 							} catch (IOException e) {
 								return CommandResult.newErrorCommandResult(e);
 							}
-							
+
 							return CommandResult.newOKCommandResult();
 						}
 					};
-					
+
 					try {
 						IStatus result = command.execute(new NullProgressMonitor(), null);
 						if (!result.isOK()) {
@@ -199,7 +199,7 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 
 				}
 			};
-			
+
 			try {
 				getContainer().run(false, true, op);
 			} catch (InterruptedException e) {
@@ -214,31 +214,31 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 
 	/**
 	 * Wrap the action with monitor updates.
-	 * 
+	 *
 	 * @param part The edit part to work with
-	 * @param monitor 
-	 * @return 
+	 * @param monitor
+	 * @return
 	 */
 	public IStatus execute(final GraphicalEditPart part, IProgressMonitor monitor) {
-		
+
 		EObject target = part.resolveSemanticElement();
 		String suggestedName = suggestName(target);
-		
+
 		String fileExtension = getFileExtension(target);
 		if (fileExtension == null) {
 			return errorStatus("Cannot move the given object '" + target.eClass().getName() + "' into a separate file." );
 		}
-		
+
 		String location = target.eResource().getURI().toPlatformString(true);
-		IStructuredSelection selection = new StructuredSelection(ResourcesPlugin.getWorkspace().getRoot().findMember( location ));		
+		IStructuredSelection selection = new StructuredSelection(ResourcesPlugin.getWorkspace().getRoot().findMember( location ));
 
 		// get a wizard to select the new model element file
-		final NewDomainFileWizard wizard = new NewDomainFileWizard(selection, 
-				suggestedName, 
+		final NewDomainFileWizard wizard = new NewDomainFileWizard(selection,
+				suggestedName,
 				fileExtension,
-				part.getEditingDomain(), 
+				part.getEditingDomain(),
 				target);
-		
+
 		// we need to exec the Wizard in the UI thread
 		final Display display = PlatformUI.getWorkbench().getDisplay();
 		display.syncExec(new Runnable() {
@@ -248,18 +248,18 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 				WizardDialog dialog = new WizardDialog(display.getActiveShell(), wizard);
 				dialog.create();
 				dialog.open();
-				
+
 			}
-			
+
 		});
-		
+
 		// done
 		return Status.OK_STATUS;
 	}
 
 	/**
 	 * Suggest a filename for the given EObject.
-	 * 
+	 *
 	 * @param target
 	 * @return
 	 */
@@ -269,13 +269,13 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 		}
 		return "moved";
 	}
-	
+
 	/**
 	 * Get the file extension for the given EObject.
 	 * If the given file extension does not accurately describe the EMF
 	 * object, this method must return null, so that the object is not moved
-	 * into an EMF model which cannot support it. 
-	 *  
+	 * into an EMF model which cannot support it.
+	 *
 	 * @param target
 	 * @return The domain model file extension, or null if none can be found
 	 */
@@ -301,7 +301,7 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 		if (target instanceof VisibleThing) {
 			return "iaml_visual";
 		}
-		
+
 		// must return null if none is found
 		return null;
 	}

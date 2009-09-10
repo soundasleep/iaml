@@ -9,31 +9,31 @@ import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart;
+import org.openiaml.model.diagram.edit.parts.DomainStoreEditPart;
 import org.openiaml.model.model.domain.DomainStoreTypes;
 
 /**
  * Refreshes DomainStores when connected to Properties files.
- * 
+ *
  * @author jmwright
  *
  */
 public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction {
-	
+
 	/**
 	 * We only want to refresh Properties file mappings.
-	 * 
+	 *
 	 * @param object
-	 * @throws InferenceException 
+	 * @throws InferenceException
 	 */
 	@Override
 	public void checkModelElement(EObject object) throws InferenceException {
 		DomainStore ds = (DomainStore) object;
 		if (!ds.getType().equals(DomainStoreTypes.PROPERTIES_FILE)) {
-			throw new InferenceException("Can only refresh mappings of Properties files: actual type was '" + ds.getType() + "'");	
+			throw new InferenceException("Can only refresh mappings of Properties files: actual type was '" + ds.getType() + "'");
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEditPartClass()
 	 */
@@ -49,7 +49,7 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 	public Class<? extends EObject> getExpectedEObjectClass() {
 		return DomainStore.class;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEngine(org.openiaml.model.inference.ICreateElements)
 	 */
@@ -76,12 +76,12 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 
 	/**
 	 * Uses Drools to refresh data stores.
-	 * 
+	 *
 	 * @author jmwright
 	 *
 	 */
 	public class RefreshDataStores extends DroolsInferenceEngine {
-		
+
 		ICreateElements handler;
 
 		public RefreshDataStores(ICreateElements handler) {
@@ -93,17 +93,17 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 				"/rules/runtime/domain.drl",
 				"/rules/runtime/file-domain-object.drl"
 			);
-		
+
 		/**
 		 * Get the list of rule files used.
-		 * 
+		 *
 		 * @see #addRuleFile(String)
 		 * @return
 		 */
 		public List<String> getRuleFiles() {
 			return ruleFiles;
 		}
-		
+
 	}
 
 }

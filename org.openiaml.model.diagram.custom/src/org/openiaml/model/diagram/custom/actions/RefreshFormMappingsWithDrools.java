@@ -7,19 +7,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.ICreateElements;
-import org.openiaml.model.model.diagram.visual.edit.parts.InputFormEditPart;
+import org.openiaml.model.diagram.visual.edit.parts.InputFormEditPart;
 import org.openiaml.model.model.visual.InputForm;
 
 /**
  * Refresh {@link InputForm} mappings with Drools.
- * 
+ *
  * @author jmwright
  *
  */
 public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 
 	public class RefreshFormMappings extends DroolsInferenceEngine {
-		
+
 		public RefreshFormMappings(ICreateElements handler) {
 			super(handler, false);
 		}
@@ -27,19 +27,19 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 		private List<String> ruleFiles = Arrays.asList(
 				"/rules/sync-wires.drl"
 				);
-		
+
 		/**
 		 * Get the list of rule files used.
-		 * 
+		 *
 		 * @see #addRuleFile(String)
 		 * @return
 		 */
 		public List<String> getRuleFiles() {
 			return ruleFiles;
 		}
-		
+
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEditPartClass()
 	 */
@@ -55,7 +55,7 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 	public Class<? extends EObject> getExpectedEObjectClass() {
 		return InputForm.class;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEngine(org.openiaml.model.inference.ICreateElements)
 	 */
@@ -63,7 +63,7 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 	public DroolsInferenceEngine getEngine(ICreateElements handler) {
 		return new RefreshFormMappings(handler);
 	}
-	
+
 	/**
 	 * We want to use the root element, not the selected element.
 	 */

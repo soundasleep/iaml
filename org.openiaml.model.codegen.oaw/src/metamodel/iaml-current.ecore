@@ -575,6 +575,11 @@
       <eLiterals name="RELATIONAL_DB"/>
       <eLiterals name="PROPERTIES_FILE" value="1"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EmptyDomainClass" abstract="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="this exists solely to ensure DomainProviderFactory is generated in .genmodel; otherwise GMF complains"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="users" nsURI="http://openiaml.org/model/users" nsPrefix="iaml.users">
     <eAnnotations source="http://openiaml.org/comment">

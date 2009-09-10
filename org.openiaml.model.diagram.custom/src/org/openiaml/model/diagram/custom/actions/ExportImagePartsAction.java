@@ -27,7 +27,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.custom.actions.ProgressEnabledUIAction;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
+import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 
 /**
  * Export all of the images in a model diagram to multiple image files

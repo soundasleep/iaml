@@ -4,11 +4,16 @@
 package org.openiaml.model.tests.release;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -67,6 +72,34 @@ public class PluginsTestCase extends XmlTestCase {
 	};
 	private Map<String,Properties> loadedManifests = new HashMap<String,Properties>();
 	private List<String> shortcuts; 
+	
+	private static Set<String> loadedGmfGens = null;
+	
+	/**
+	 * Get all of the GMF gens loaded from disk.
+	 * 
+	 * @return
+	 */
+	public static Set<String> getAllGmfGens() {
+		if (loadedGmfGens == null) {
+			File root = new File(GMF_ROOT);
+			loadedGmfGens = new HashSet<String>();
+			assertTrue(root.isDirectory());
+			
+			String[] contents = root.list(new FilenameFilter() {
+
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".gmfgen");
+				}
+				
+			});
+			for (String filename : contents) {
+				loadedGmfGens.add(GMF_ROOT + filename);
+			}
+		}
+		return loadedGmfGens;
+	}
 	
 	/**
 	 * Load up all the .gmfgen's and MANIFEST.MFs from all of our plugins.
@@ -132,6 +165,36 @@ public class PluginsTestCase extends XmlTestCase {
 					properties.get("Bundle-Version"));
 		}
 	}
+	
+	/**
+	 * Get the version that all plugins should be.
+	 * In particular, this is the version provided in the root
+	 * model manifest.
+	 * 
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static String getVersion() throws FileNotFoundException, IOException {
+		String manifest = PLUGIN_ROOT + "org.openiaml.model/META-INF/MANIFEST.MF";
+		Properties properties = loadProperties(manifest);
+		return properties.getProperty("Bundle-Version");
+	}
+	
+	/**
+	 * Get the vendor that all plugins should be.
+	 * In particular, this is the version provided in the root
+	 * model manifest.
+	 * 
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static String getVendor() throws FileNotFoundException, IOException {
+		String manifest = PLUGIN_ROOT + "org.openiaml.model/META-INF/MANIFEST.MF";
+		Properties properties = loadProperties(manifest);
+		return properties.getProperty("Bundle-Vendor");
+	}
 
 	/**
 	 * Test the vendor tags of each of these files.
@@ -140,7 +203,7 @@ public class PluginsTestCase extends XmlTestCase {
 	 */
 	public void testVendors() throws Exception {
 		// get initial version
-		String version = xpathFirst(firstDocument(loadedGmfgens), "//plugin").getAttribute("provider");
+		String version = getVendor();
 
 		// now lets test each .gmfgen
 		for (String file : loadedGmfgens.keySet()) {

@@ -94,7 +94,7 @@ public class XmlTestCase extends TestCase implements IXpath {
 	/**
 	 * Load a properties file.
 	 */
-	public Properties loadProperties(String file) throws FileNotFoundException, IOException {
+	public static Properties loadProperties(String file) throws FileNotFoundException, IOException {
 		Properties p = new Properties();
 		p.load(new FileInputStream(file));
 		return p;
@@ -132,7 +132,7 @@ public class XmlTestCase extends TestCase implements IXpath {
 	/**
 	 * Try saving an XML document.
 	 */
-	public void saveDocument(Document doc, File target) throws IOException, TransformerException {
+	public static void saveDocument(Document doc, File target) throws IOException, TransformerException {
         TransformerFactory transfac = TransformerFactory.newInstance();
         Transformer trans = transfac.newTransformer();
         trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");	// omit '<?xml version="1.0"?>'
@@ -280,7 +280,6 @@ public class XmlTestCase extends TestCase implements IXpath {
 			throws XPathExpressionException {
 		return xpath.xpathFirst(doc, query);
 	}
-
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.tests.xpath.XpathTestCase#xpathFirst(org.w3c.dom.Element, java.lang.String)

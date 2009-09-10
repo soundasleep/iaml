@@ -251,5 +251,33 @@ public class LoginHandlerKey extends CodegenTestCase {
 		assertNoProblem();
 		
 	}
-
+	
+	
+	/**
+	 * If we login, and then log out, we can not access
+	 * the target page again.
+	 */
+	public void testLoginLogoutComplete() throws Exception {
+		testLoginLogoutCheckViewkey(); //login then logout
+		
+		IFile sitemap = getSitemap();
+		
+		gotoSitemapWithProblem(sitemap, "viewkey");
+		// we should have hit a problem
+		assertNotEquals("Login Successful", getPageTitle());
+		assertNotEquals("viewkey", getPageTitle());
+		assertProblem();
+		
+		// but we can continue logging in again
+		String loginId = getLabelIDForText("login key");
+		setLabeledFormElementField(loginId, "key42");
+		submit();		// submit the form
+		
+		// we should now be on the Login Successful page
+		assertEquals("viewkey", getPageTitle());
+		assertNoProblem();
+		
+	}
+	
+	
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.openiaml.model.tests.SoftCache;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -23,41 +24,38 @@ import org.w3c.dom.Element;
  */
 public class GmfMapTestCase extends XmlTestCase {
 
-	/**
-	 * Load up all the .gmfmap's
-	 * 
-	 */
-	public Map<String,Document> getGmfMaps() throws Exception {
-		Map<String,Document> loadedMaps = new HashMap<String,Document>();
-		
-		// load all .gmftool's
-		for (String map : getMapList()) {
-			loadedMaps.put( map, loadDocument(map) );
-		}
+	private static SoftCache<String,Document> mapCache = new SoftCache<String,Document>() {
 
-		return loadedMaps;
-	}
+		@Override
+		public Document retrieve(String input) {
+			try {
+				return loadDocument(input);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+		}
+		
+	};
 	
-	/**
-	 * Load up all the .gmftool's from {@link GmfToolTestCase}.
-	 * 
-	 * @see GmfToolTestCase#getGmfTools
-	 */
-	public Map<String,Document> getGmfTools() throws Exception {
-		return new GmfToolTestCase().getGmfTools();
+	public static SoftCache<String,Document> getMapCache() {
+		return mapCache;
 	}
+
+	private static Set<String> loadedMaps = null;
 	
 	/**
 	 * Create a list of gmfmaps from {@link PluginsTestCase}.
 	 * 
 	 * @return
 	 */
-	private static Set<String> getMapList() {
-		Set<String> tools = new HashSet<String>();
-		for (String gmfgen : PluginsTestCase.getAllGmfGens()) {
-			tools.add(gmfgen.replace(".gmfgen", ".gmfmap"));
+	public static Set<String> getMapList() {
+		if (loadedMaps == null) {
+			loadedMaps = new HashSet<String>();
+			for (String gmfgen : PluginsTestCase.getAllGmfGens()) {
+				loadedMaps.add(gmfgen.replace(".gmfgen", ".gmfmap"));
+			}
 		}
-		return tools;
+		return loadedMaps;
 	}
 
 	/**
@@ -68,7 +66,7 @@ public class GmfMapTestCase extends XmlTestCase {
 	 */
 	public void testGmfMapMatch() throws Exception {
 		assertEquals(getMapList().size(), PluginsTestCase.getAllGmfGens().size());
-		assertEquals(getGmfMaps().size(), PluginsTestCase.getAllGmfGens().size());
+		assertEquals(getMapList().size(), PluginsTestCase.getAllGmfGens().size());
 	}
 
 	/**
@@ -140,11 +138,11 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testMultipleContainersHaveOcl() throws Exception {
-		for (String filename : getGmfMaps().keySet()) {
+		for (String filename : getMapList()) {
 			// reset stored containers
 			Map<String, List<String>> loadedContainers = new HashMap<String, List<String>>();
 			
-			Document doc = getGmfMaps().get(filename);
+			Document doc = getMapCache().get(filename);
 			
 			try {
 				IterableElementList nodes = xpath(doc, "/Mapping/nodes");
@@ -165,8 +163,8 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @see #assertLabelMappingMatches(String, String, String)
 	 */
 	public void testMappingsMatch() throws Exception {
-		for (String filename : getGmfMaps().keySet()) {
-			Document doc = getGmfMaps().get(filename);
+		for (String filename : getMapList()) {
+			Document doc = getMapCache().get(filename);
 			
 			IterableElementList nodes = xpath(doc, "/Mapping/nodes");
 			for (Element node : nodes) {
@@ -271,7 +269,7 @@ public class GmfMapTestCase extends XmlTestCase {
 		
 		Element toolNode;
 		try {
-			toolNode = resolveEmfElement( getGmfTools().get(toolResolved), href);
+			toolNode = resolveEmfElement( GmfToolTestCase.getToolCache().get(toolResolved), href);
 		} catch (RuntimeException e) {
 			throw new RuntimeException(filename + ": Could not load element href '" + href + "' from '" + toolFilename + "', resolved to '" + toolResolved + "': " + e.getMessage(), e);
 		}
@@ -299,7 +297,7 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @return
 	 */
 	private String findGmftoolFor(String toolFilename) throws Exception {
-		for (String filename : getGmfTools().keySet()) {
+		for (String filename : GmfToolTestCase.getToolList()) {
 			if (filename.endsWith(toolFilename)) {
 				return filename;
 			}

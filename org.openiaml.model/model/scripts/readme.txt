@@ -28,14 +28,16 @@ Process to make diffs:
 1. Complete all .gmfgen's and commit them to SVN. (This is what you want
    .gmfgen's to be.)
 
-2. $ make-diff-copies
-   This copies all the originals to /copies/.
+2. $ update-copies
+   This updates /copies/ to the latest SVN of the model files.
+   This directory should be a copy of the SVN /model folder.
 
 3. In GMF, regenerate the .gmfgen's from .gmfmap's.
    These new .gmfgen's will NOT have OpenDiagramPolicies in them.
 
 4. $ make-diff [name]
    For each .gmfgen, this will create the diff in /diff/.
+   It will also revert the original .gmfgen back to the version in SVN.
 
 5. $ apply [name]
    As a test, this will apply the diff to the current file without Policies,

@@ -1,0 +1,15 @@
+#summary An Eclipse feature plugin to assist with the development of Eclipse GMF
+#labels Featured,Development
+
+=Introduction=
+
+I have made a very simple and basic extension which resolves Eclipse bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=283775: Generate Diagram Code for multiple .gmfgens.
+
+You can install it from the update site below.
+
+{{{
+Name: IAML GMF Tools Update Site
+URL: http://iaml.googlecode.com/svn/trunk/org.openiaml.gmf.tools.update/
+}}}
+
+It uses internal GMF code, so it will likely break in a later GMF version, but this will have to suffice until the bug is resolved :)

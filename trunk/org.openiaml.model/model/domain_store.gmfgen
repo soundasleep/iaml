@@ -637,6 +637,7 @@
         visualID="4002"
         editPartClassName="ExtendsWireEditPart"
         itemSemanticEditPolicyClassName="ExtendsWireItemSemanticEditPolicy"
+        notationViewFactoryClassName="ExtendsWireViewFactory"
         createCommandClassName="ExtendsWireCreateCommand"
         reorientCommandClassName="ExtendsWireReorientCommand">
       <diagramRunTimeClass
@@ -666,6 +667,7 @@
           visualID="6002"
           editPartClassName="WrappingLabel8EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel8ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ExtendsWireLabelViewFactory"
           readOnly="true"
           elementIcon="true">
         <diagramRunTimeClass

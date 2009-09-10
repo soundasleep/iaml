@@ -1497,6 +1497,7 @@
         visualID="2023"
         editPartClassName="UserInstanceEditPart"
         itemSemanticEditPolicyClassName="UserInstanceItemSemanticEditPolicy"
+        notationViewFactoryClassName="UserInstanceViewFactory"
         canonicalEditPolicyClassName="UserInstanceCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="UserInstanceGraphicalNodeEditPolicy"
         createCommandClassName="UserInstanceCreateCommand">
@@ -1532,6 +1533,7 @@
           visualID="5038"
           editPartClassName="UserInstanceNameEditPart"
           itemSemanticEditPolicyClassName="UserInstanceNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="UserInstanceNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -1549,7 +1551,8 @@
       <labels
           visualID="5039"
           editPartClassName="UserInstanceAutosaveEditPart"
-          itemSemanticEditPolicyClassName="UserInstanceAutosaveItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="UserInstanceAutosaveItemSemanticEditPolicy"
+          notationViewFactoryClassName="UserInstanceAutosaveViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

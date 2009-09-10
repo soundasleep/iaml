@@ -620,18 +620,6 @@
                </and>
             </visibleWhen>
          </command>
-      </menuContribution>
-      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
-         <command commandId="org.openiaml.model.diagram.wire.LoadResourceAction">
-            <visibleWhen>
-               <and>
-                  <with variable="activePartId"><equals value="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"/></with>
-                  <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.model.diagram.wire.edit.parts.CompositeWireEditPart"/>
-                  </iterate></with>
-               </and>
-            </visibleWhen>
-         </command>
          <command commandId="org.openiaml.model.diagram.wire.CreateShortcutAction">
             <visibleWhen>
                <and>
@@ -648,10 +636,6 @@
    <extension point="org.eclipse.ui.commands" id="menu-commands">
       <?gmfgen generated="true"?>
       <category id="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
-      <command id="org.openiaml.model.diagram.wire.LoadResourceAction"
-         name="Load Resource"
-         categoryId="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"
-         defaultHandler="org.openiaml.model.model.diagram.wire.part.LoadResourceAction"/>
       <command id="org.openiaml.model.diagram.wire.LoadResourceAction"
          name="Load Resource"
          categoryId="org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorID"

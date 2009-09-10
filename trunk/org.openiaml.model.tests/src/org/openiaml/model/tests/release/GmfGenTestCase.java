@@ -456,4 +456,21 @@ public class GmfGenTestCase extends XmlTestCase {
 		}
 	}
 	
+	/**
+	 * Make sure there is only one 'contextMenu' in the root of each
+	 * .gmfgen. Otherwise, there may be a situation where multiple identical
+	 * commands with the same ID would be generated, throwing a warning
+	 * "Conflict for xxx.LoadResourceAction".
+	 * 
+	 */
+	public void testContextMenus() throws Exception {
+		for (String filename : getGmfGens().keySet()) {
+			Document doc = getGmfGens().get(filename);
+			
+			IterableElementList nodes = xpath(doc, "/GenEditorGenerator/contextMenus");
+			
+			assertEquals(filename + ": there should be exactly one /contextMenus", nodes.size(), 1);
+		}
+	}
+	
 }

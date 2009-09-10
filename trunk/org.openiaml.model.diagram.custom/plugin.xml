@@ -200,7 +200,7 @@
 			 <selection class="org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart">
 			 </selection>
          </action>
-         <enablement>
+         <visibility>
             <or>
                <objectClass
                      name="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
@@ -209,7 +209,7 @@
                      name="org.eclipse.gmf.runtime.diagram.ui.editparts.TopGraphicEditPart">
                </objectClass>
             </or>
-         </enablement>
+         </visibility>
          <action
                class="org.openiaml.model.diagram.custom.actions.MoveIntoSeparateModelAction"
                enablesFor="1"

@@ -1,6 +1,8 @@
 #summary Tips on generating diagram editors with GMF
 #labels Development,Phase-Implementation
 
+[Development < Development]
+
 =Tips=
 
 Here is a basic script to delete the generated code from all generated editors ([http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model/model/scripts/remove-generated-gmf.bat?r=1140 source]).

@@ -209,6 +209,7 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		
 		// lets now go to the "current user" page
 		gotoSitemapThenPage(sitemap, "current user");
+		assertNoProblem();
 		{
 			String username = getLabelIDForText("current user name");
 			assertLabeledFieldEquals(username, "User Two");
@@ -276,13 +277,9 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 	 * Once we can login, we can change our name.
 	 */
 	public void testChangeName() throws Exception {
-		IFile sitemap = getProject().getFile("output/sitemap.html");
-		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
+		IFile sitemap = beginAtSitemapThenPage("login");
+		assertNoProblem();
 
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
-
-		clickLinkWithText("login");
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test4");
 		submit();		// submit the form
@@ -354,5 +351,35 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		assertProblem();
 		
 	}
+	
+	/**
+	 * If we login, and then log out, we can not access
+	 * the target page again.
+	 */
+	public void testLoginLogoutComplete() throws Exception {
+		testLoginLogoutCheck2();
+		
+		IFile sitemap = getSitemap();
+		
+		gotoSitemapWithProblem(sitemap, "current user");
+		// we should have hit a problem
+		assertNotEquals("Login Successful", getPageTitle());
+		assertNotEquals("current user", getPageTitle());
+		assertProblem();
+		
+		// but we can continue logging in again
+		String loginId = getLabelIDForText("password");
+		setLabeledFormElementField(loginId, "test4");
+		submit();		// submit the form
+		
+		// we should now be on the Login Successful page
+		assertEquals("Login Successful", getPageTitle());
+		assertNoProblem();
+		
+		// and then we can visit current user
+		gotoSitemapThenPage(sitemap, "current user");
+		assertNoProblem();
+	}
+	
 
 }

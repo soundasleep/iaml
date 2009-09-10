@@ -759,6 +759,11 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 		super.submit();
+		try {
+			waitForAjax(); // TODO remove this check; we shouldn't have to wait for ajax
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
 	}
 	
 }

@@ -87,6 +87,17 @@ URL: http://www.eclipticalsoftware.com/updates
   * XPath support for EMF (2.0.1)
   * XPath Support for EMF SDK (2.0.1)
 
+==GMF Tools==
+
+This is not strictly necessary, but the [GmfTools] sub-project adds some extra functionality not yet provided by GMF; in particular, the ability to generate diagram code from multiple .gmfgens.
+
+{{{
+Name: IAML GMF Tools Update Site
+URL: http://iaml.googlecode.com/svn/trunk/org.openiaml.gmf.tools.update/
+}}}
+
+  * GMF Tools Feature (0.0.1)
+
 ==Subclipse==
 
 [http://subclipse.tigris.org Subclipse] permits version control with Subversion; another option is Subversive, but [http://journals.jevon.org/users/jevon-phd/entry/19739 I don't prefer it]. You will need to [http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=8100 install SVN separately] onto your system. [http://journals.jevon.org/users/jevon-phd/entry/19513 Make sure] that you select the correct Subclipse version for your current installation of SVN.

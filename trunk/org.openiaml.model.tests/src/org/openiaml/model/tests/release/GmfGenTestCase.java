@@ -479,7 +479,7 @@ public class GmfGenTestCase extends XmlTestCase {
 
 	public void testPackageNamePrefix() throws Exception {
 		iterate(new AttributeIterator() {
-
+			
 			@Override
 			public String getAttributeName() {
 				return "packageNamePrefix";
@@ -902,9 +902,9 @@ public class GmfGenTestCase extends XmlTestCase {
 	private String getPluginName(String filename) {
 		filename = getName(filename);
 		if (filename.equals("root")) {
-			return "org.openiaml.model.model.diagram";
+			return "org.openiaml.model.diagram";
 		} else {
-			return "org.openiaml.model.model.diagram." + filename;
+			return "org.openiaml.model.diagram." + filename;
 		}
 	}
 	
@@ -912,10 +912,10 @@ public class GmfGenTestCase extends XmlTestCase {
 	 * Tests {@link #getPluginName(filename)}.
 	 */
 	public void testGetPluginName() {
-		assertEquals("org.openiaml.model.model.diagram", getPluginName("../root.gmfgen"));
-		assertEquals("org.openiaml.model.model.diagram", getPluginName("root.gmfgen"));
-		assertEquals("org.openiaml.model.model.diagram.another", getPluginName("../another/directory//another.gmfgen"));
-		assertEquals("org.openiaml.model.model.diagram.test_test_test", getPluginName("..\\another\\directory\\test_test_test.gmfgen"));
+		assertEquals("org.openiaml.model.diagram", getPluginName("../root.gmfgen"));
+		assertEquals("org.openiaml.model.diagram", getPluginName("root.gmfgen"));
+		assertEquals("org.openiaml.model.diagram.another", getPluginName("../another/directory//another.gmfgen"));
+		assertEquals("org.openiaml.model.diagram.test_test_test", getPluginName("..\\another\\directory\\test_test_test.gmfgen"));
 	}
 
 	
@@ -1076,11 +1076,6 @@ public class GmfGenTestCase extends XmlTestCase {
 					metaHref = metaHref.substring(metaHref.lastIndexOf("/") + 1);
 					
 					EClass metaElement = resolveSimpleEClass(metaHref);
-					//log(metaElement.getName());
-					if (metaElement.getName().equals("DomainStore")) {
-						// break
-						System.out.println(1);
-					}
 					
 					try {
 						RootElementPair pair = getBestPair(rootElements, metaElement);
@@ -1133,8 +1128,8 @@ public class GmfGenTestCase extends XmlTestCase {
 				
 				String policyName = camelCase(getName(pair.getFilename())) + "OpenDiagramEditPolicy";
 				String diagramKind = pair.getModelID();
-				String editorId = getPluginName(pair.getFilename());
-				
+				String editorId = getPluginName(pair.getFilename()) + ".part.IamlDiagramEditorID";
+
 				if (beh.size() == 1) {
 					// check it is correct
 					Element b = beh.item(0);

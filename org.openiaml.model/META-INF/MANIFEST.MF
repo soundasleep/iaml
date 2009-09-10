@@ -38,4 +38,12 @@ Export-Package: org.openiaml.model,
  org.openiaml.model.xpath
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.5.0",
- org.eclipse.emf.ecore;bundle-version="2.5.0"
+ org.eclipse.emf.ecore;bundle-version="2.5.0",
+ org.eclipse.gmf.codegen;bundle-version="2.2.0",
+ org.eclipse.gmf;bundle-version="1.2.0",
+ org.eclipse.gmf.tooling;bundle-version="2.1.0",
+ org.eclipse.gmf.bridge;bundle-version="1.1.0",
+ org.eclipse.gmf.bridge.ui;bundle-version="1.2.0",
+ org.eclipse.gmf.sdk;bundle-version="1.0.0",
+ org.eclipse.gmf.bridge.ui.dashboard;bundle-version="2.0.0",
+ org.eclipse.gmf.codegen.ui;bundle-version="1.1.100"

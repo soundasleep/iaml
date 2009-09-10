@@ -6,7 +6,10 @@ package org.openiaml.model.tests.release;
 import java.io.File;
 import java.io.FileWriter;
 
+import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.tests.XmlTestCase;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Simple tests to ensure that all copies of .ecores across the
@@ -46,6 +49,36 @@ public class EcoreTestCase extends XmlTestCase {
 			System.out.println("Copied '" + source + "' to '" + target + "'");
 		}
 		
+	}
+	
+	/**
+	 * Issue 121: check that model NS URIs are synchronised
+	 * across instances. 
+	 * 
+	 * @throws Exception
+	 */
+	public void testModelNamespaceURIs() throws Exception {
+		String nsURI = ModelPackage.eINSTANCE.getNsURI();
+		
+		// try org.openiaml.model.codegen.oaw/plugin.xml
+		{
+			String file = "../org.openiaml.model.codegen.oaw/plugin.xml";
+			String xpath = "/plugin/extension/metaModel";
+			Document doc = loadDocument(file);
+			Element node = xpathFirst(doc, xpath);
+			String thisns = node.getAttribute("nsURI");
+			assertEquals(file + xpath, nsURI, thisns);
+		}
+
+		// try org.openiaml.model.edit/plugin.xml
+		{
+			String file = "../org.openiaml.model.edit/plugin.xml";
+			String xpath = "/plugin/extension[@point='org.eclipse.emf.edit.itemProviderAdapterFactories']/factory[@class='org.openiaml.model.model.provider.ModelItemProviderAdapterFactory']";
+			Document doc = loadDocument(file);
+			Element node = xpathFirst(doc, xpath);
+			String thisns = node.getAttribute("uri");
+			assertEquals(file + xpath, nsURI, thisns);
+		}
 	}
 	
 }

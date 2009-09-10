@@ -48,7 +48,7 @@ public class GmfToolTestCase extends XmlTestCase {
 	 */
 	private static Set<String> getToolList() {
 		Set<String> tools = new HashSet<String>();
-		for (String gmfgen : PluginsTestCase.GMFGENS) {
+		for (String gmfgen : PluginsTestCase.getAllGmfGens()) {
 			tools.add(gmfgen.replace(".gmfgen", ".gmftool"));
 		}
 		return tools;
@@ -61,7 +61,7 @@ public class GmfToolTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testGmfToolMatch() throws Exception {
-		assertEquals(getGmfTools().size(), PluginsTestCase.GMFGENS.length);
+		assertEquals(getGmfTools().size(), PluginsTestCase.getAllGmfGens().size());
 	}
 	
 	/**

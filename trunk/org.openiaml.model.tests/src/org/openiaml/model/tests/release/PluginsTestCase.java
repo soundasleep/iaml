@@ -8,15 +8,14 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.openiaml.model.tests.SoftCache;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -32,46 +31,66 @@ import org.w3c.dom.Node;
 public class PluginsTestCase extends XmlTestCase {
 
 	public static final String GMF_ROOT = "../org.openiaml.model/model/";
-	/**
-	 * All .gmfgen files in this project.
-	 */
-	public static final String[] GMFGENS = new String[] { 
-		GMF_ROOT + "condition.gmfgen",
-		GMF_ROOT + "domain_object.gmfgen",
-		GMF_ROOT + "domain_object_instance.gmfgen",
-		GMF_ROOT + "domain_store.gmfgen",
-		GMF_ROOT + "element.gmfgen",
-		GMF_ROOT + "operation.gmfgen",
-		GMF_ROOT + "root.gmfgen",
-		GMF_ROOT + "user_store.gmfgen",
-		GMF_ROOT + "visual.gmfgen",
-		GMF_ROOT + "wire.gmfgen",
-	};
-	private Map<String,Document> loadedGmfgens = new HashMap<String,Document>(); 
 
 	public static final String PLUGIN_ROOT = "../";
-	/**
-	 * All plugins with manifest information in this project.
-	 */
-	public static final String[] PLUGINS = new String[] { 
-		"org.openiaml.model",
-		"org.openiaml.model.codegen.oaw",
-		"org.openiaml.model.diagram",
-		"org.openiaml.model.diagram.custom",
-		"org.openiaml.model.diagram.condition",
-		"org.openiaml.model.diagram.domain_object",
-		"org.openiaml.model.diagram.domain_object_instance",
-		"org.openiaml.model.diagram.domain_store",
-		"org.openiaml.model.diagram.element",
-		"org.openiaml.model.diagram.operation",
-		"org.openiaml.model.diagram.user_store",
-		"org.openiaml.model.diagram.visual",
-		"org.openiaml.model.diagram.wire",
-		"org.openiaml.model.drools",
-		"org.openiaml.model.edit",
+	
+	private static Set<String> plugins = null;
+	
+	public static final String[] NO_MANIFEST_PLUGINS = new String[] {
+		"org.openiaml.model.editor",
+		"org.openiaml.update",
 	};
-	private Map<String,Properties> loadedManifests = new HashMap<String,Properties>();
+	
+	/**
+	 * Get all of the plugins in the system; that is,
+	 * those that start with 'org.openiaml'.
+	 * 
+	 * @return
+	 */
+	public static Set<String> getPlugins() {
+		if (plugins == null) {
+			plugins = new HashSet<String>();
+			File root = new File(PLUGIN_ROOT);
+			assertTrue(root.isDirectory());
+			assertTrue(root.exists());
+			
+			String[] children = root.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.startsWith("org.openiaml") &&
+						!name.startsWith("org.openiaml.iacleaner") &&
+						!name.startsWith("org.openiaml.gmf");
+				}
+			});
+			
+			for (String c : children) {
+				String plugin = root.getAbsolutePath() + File.separator + c;
+				assertTrue(new File(plugin).exists());
+				assertTrue(new File(plugin).isDirectory());
+				plugins.add(plugin);
+			}
+		}
+		return plugins;
+	}
+	
 	private List<String> shortcuts; 
+	
+	private static SoftCache<String,Properties> manifestCache = new SoftCache<String,Properties>() {
+
+		@Override
+		public Properties retrieve(String input) {
+			try {
+				return loadProperties(input);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+		}
+		
+	};
+	
+	public static SoftCache<String,Properties> getManifestCache() {
+		return manifestCache;
+	}
 	
 	private static Set<String> loadedGmfGens = null;
 	
@@ -101,29 +120,47 @@ public class PluginsTestCase extends XmlTestCase {
 		return loadedGmfGens;
 	}
 	
+	private static Set<String> loadedManifests = null;
+	
+	/**
+	 * Get all of the manifests loaded from disk.
+	 * 
+	 * @return
+	 */
+	public static Set<String> getAllManifests() {
+		if (loadedManifests == null) {
+			loadedManifests = new HashSet<String>();
+
+			for (String plugin : getPlugins()) {
+				boolean excluded = false;
+				for (String exclude : NO_MANIFEST_PLUGINS) {
+					if (plugin.endsWith(exclude))
+						excluded = true;
+				}
+				
+				if (!excluded) {
+					String manifest = plugin + "/META-INF/MANIFEST.MF";
+					assertTrue("Manifest '" + manifest + "' does not exist", new File(manifest).exists());
+					loadedManifests.add(manifest);
+				}
+			}
+			
+		}
+		return loadedManifests;
+	}
+	
 	/**
 	 * Load up all the .gmfgen's and MANIFEST.MFs from all of our plugins.
 	 * 
 	 */
 	public void setUp() throws Exception {
 		super.setUp();
-		
-		// load all .gmfgen's
-		for (String gmfgen : GMFGENS) {
-			loadedGmfgens.put( gmfgen, loadDocument(gmfgen) );
-		}
-		
-		// load all manifest.mf's
-		for (String plugin : PLUGINS) {
-			String manifest = PLUGIN_ROOT + plugin + "/META-INF/MANIFEST.MF";
-			loadedManifests.put( manifest, loadProperties(manifest) );
-		}
 	
 		// load up shortcuts
 		shortcuts = new ArrayList<String>();
 		
 		// lets find the first one
-		Document doc = firstDocument(loadedGmfgens);
+		Document doc = firstDocument(GmfGenTestCase.getCache());
 		IterableElementList nodes = xpath(doc, "//diagram/containsShortcutsTo");
 		for (Element node : nodes) {
 			String value = node.getFirstChild().getNodeValue();
@@ -132,8 +169,17 @@ public class PluginsTestCase extends XmlTestCase {
 		}
 	}
 	
+	/**
+	 * Get the first document in the given cache.
+	 * 
+	 * @param cache
+	 * @return
+	 */
+	private Document firstDocument(SoftCache<String, Document> cache) {
+		return cache.get( getAllGmfGens().iterator().next() );
+	}
+
 	public void tearDown() throws Exception {
-		loadedGmfgens = null;
 		loadedManifests = null;
 		shortcuts = null;
 		
@@ -147,19 +193,19 @@ public class PluginsTestCase extends XmlTestCase {
 	 */
 	public void testVersions() throws Exception {
 		// get initial version
-		String version = xpathFirst(firstDocument(loadedGmfgens), "//plugin").getAttribute("version");
+		String version = getVersion();
 
 		// now lets test each .gmfgen
-		for (String file : loadedGmfgens.keySet()) {
-			Document doc = loadedGmfgens.get(file);
+		for (String file : getAllGmfGens()) {
+			Document doc = GmfGenTestCase.getCache().get(file);
 			assertEquals( file + ": expected equal version", 
 					version,
 					xpathFirst(doc, "//plugin").getAttribute("version"));
 		}
 
 		// now lets test each manifest.mf
-		for (String file : loadedManifests.keySet()) {
-			Properties properties = loadedManifests.get(file);
+		for (String file : getAllManifests()) {
+			Properties properties = getManifestCache().get(file);
 			assertEquals( file + ": expected equal version",
 					version,
 					properties.get("Bundle-Version"));
@@ -206,16 +252,16 @@ public class PluginsTestCase extends XmlTestCase {
 		String version = getVendor();
 
 		// now lets test each .gmfgen
-		for (String file : loadedGmfgens.keySet()) {
-			Document doc = loadedGmfgens.get(file);
+		for (String file : getAllGmfGens()) {
+			Document doc = GmfGenTestCase.getCache().get(file);
 			assertEquals( file + ": expected equal vendor", 
 					version,
 					xpathFirst(doc, "//plugin").getAttribute("provider"));
 		}
 
 		// now lets test each manifest.mf
-		for (String file : loadedManifests.keySet()) {
-			Properties properties = loadedManifests.get(file);
+		for (String file : getAllManifests()) {
+			Properties properties = getManifestCache().get(file);
 			
 			if (properties.get("Bundle-Vendor").equals("%providerName")) {
 				// lets rewrite it manually
@@ -234,7 +280,7 @@ public class PluginsTestCase extends XmlTestCase {
 				
 				// reload
 				properties = loadProperties(file);
-				loadedManifests.put(file, properties);				
+				getManifestCache().put(file, properties);
 			}
 			
 			assertEquals( file + ": expected equal vendor",
@@ -249,8 +295,8 @@ public class PluginsTestCase extends XmlTestCase {
 	 */
 	public void testContainsShortcutsTo() throws Exception {
 		// now test them all
-		for (String file : loadedGmfgens.keySet()) {
-			Document doc = loadedGmfgens.get(file);
+		for (String file : getAllGmfGens()) {
+			Document doc = GmfGenTestCase.getCache().get(file);
 			IterableElementList nodes = xpath(doc, "//diagram/containsShortcutsTo");
 			assertEquals(nodes.getLength(), shortcuts.size());
 			for (Element node : nodes) {
@@ -269,7 +315,7 @@ public class PluginsTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testCorrectNumberOfShortcuts() throws Exception {
-		assertEquals(shortcuts.size(), GMFGENS.length);
+		assertEquals(shortcuts.size(), getAllGmfGens().size());
 	}
 	
 	/**
@@ -278,8 +324,8 @@ public class PluginsTestCase extends XmlTestCase {
 	 */
 	public void testContainsProvidedFor() throws Exception {
 		// now test them all
-		for (String file : loadedGmfgens.keySet()) {
-			Document doc = loadedGmfgens.get(file);
+		for (String file : getAllGmfGens()) {
+			Document doc = GmfGenTestCase.getCache().get(file);
 			IterableElementList nodes = xpath(doc, "//diagram/shortcutsProvidedFor");
 			assertEquals(nodes.getLength(), shortcuts.size());
 			for (Element node : nodes) {
@@ -357,8 +403,8 @@ public class PluginsTestCase extends XmlTestCase {
 		int checks = 0;
 		
 		// get all gmfgens
-		for (String file : loadedGmfgens.keySet()) {
-			Document doc = loadedGmfgens.get(file);
+		for (String file : getAllGmfGens()) {
+			Document doc = GmfGenTestCase.getCache().get(file);
 			DiagramUniqueness du = new DiagramUniqueness();
 			
 			// get all top level nodes
@@ -397,8 +443,8 @@ public class PluginsTestCase extends XmlTestCase {
 		List<String> foundIDs = new ArrayList<String>();
 		
 		// now lets test each .gmfgen
-		for (String file : loadedGmfgens.keySet()) {
-			Document doc = loadedGmfgens.get(file);
+		for (String file : getAllGmfGens()) {
+			Document doc = GmfGenTestCase.getCache().get(file);
 			String id = xpathFirst(doc, "//plugin").getAttribute("iD");
 			assertFalse(file + ": found a duplicate Plugin ID '" + id + "'", foundIDs.contains(id));
 			foundIDs.add(id);
@@ -414,8 +460,8 @@ public class PluginsTestCase extends XmlTestCase {
 		List<String> foundNames = new ArrayList<String>();
 		
 		// now lets test each .gmfgen
-		for (String file : loadedGmfgens.keySet()) {
-			Document doc = loadedGmfgens.get(file);
+		for (String file : getAllGmfGens()) {
+			Document doc = GmfGenTestCase.getCache().get(file);
 			String name = xpathFirst(doc, "//plugin").getAttribute("name");
 			assertFalse(file + ": found a duplicate Plugin name '" + name + "'", foundNames.contains(name));
 			foundNames.add(name);

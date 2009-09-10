@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
@@ -81,7 +81,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 
 			// start node should go to 'setPropertyToValue'
 			assertEquals(prelude, start.getOutExecutions().size(), 1);
-			ChainedOperation setProp = (ChainedOperation) start.getOutExecutions().get(0).getTo();
+			PrimitiveOperation setProp = (PrimitiveOperation) start.getOutExecutions().get(0).getTo();
 			assertEquals(prelude, setProp.getName(), "setPropertyToValue");
 
 			// setProperty should have one node: a parameter

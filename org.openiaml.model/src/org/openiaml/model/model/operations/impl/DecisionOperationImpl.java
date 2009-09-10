@@ -7,7 +7,7 @@
 package org.openiaml.model.model.operations.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.openiaml.model.model.impl.ChainedOperationImpl;
+import org.openiaml.model.model.impl.PrimitiveOperationImpl;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.OperationsPackage;
 
@@ -20,7 +20,7 @@ import org.openiaml.model.model.operations.OperationsPackage;
  *
  * @generated
  */
-public class DecisionOperationImpl extends ChainedOperationImpl implements DecisionOperation {
+public class DecisionOperationImpl extends PrimitiveOperationImpl implements DecisionOperation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

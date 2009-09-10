@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsConditions;
@@ -29,6 +28,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -151,8 +151,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return parameter;
 	}
 
-	public ChainedOperation generatedChainedOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
-		ChainedOperation operation = (ChainedOperation) createElement( container, ModelPackage.eINSTANCE.getChainedOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+	public PrimitiveOperation generatedPrimitiveOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
+		PrimitiveOperation operation = (PrimitiveOperation) createElement( container, ModelPackage.eINSTANCE.getPrimitiveOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
 		setGeneratedBy(operation, by);
 		return operation;
 	}

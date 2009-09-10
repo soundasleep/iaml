@@ -196,10 +196,10 @@ model::DomainObject getDomainObject(emf::EObject this) :
 	
 /** for a given setPropertyToValue operation, should we be calling
   additional event triggers? */
-shouldExpandEventTriggers(model::ChainedOperation this ) :
+shouldExpandEventTriggers(model::PrimitiveOperation this ) :
 	getOperationName( eContainer ) == "update";
 	
-shouldExpandEventTriggersServer(model::ChainedOperation this ) :
+shouldExpandEventTriggersServer(model::PrimitiveOperation this ) :
 	shouldExpandEventTriggers(this);
 	
 getOperationName(model::Operation this) :

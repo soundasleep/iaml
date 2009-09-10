@@ -368,7 +368,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
-		decisionOperationEClass.getESuperTypes().add(theModelPackage.getChainedOperation());
+		decisionOperationEClass.getESuperTypes().add(theModelPackage.getPrimitiveOperation());
 		decisionOperationEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
 		decisionConditionEClass.getESuperTypes().add(theModelPackage.getCondition());
 		decisionConditionEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());

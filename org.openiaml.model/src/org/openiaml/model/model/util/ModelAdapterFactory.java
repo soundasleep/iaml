@@ -14,7 +14,6 @@ import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -45,10 +44,10 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
-import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
@@ -158,12 +157,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createParameterAdapter();
 			}
 			@Override
-			public Adapter caseSingleOperation(SingleOperation object) {
-				return createSingleOperationAdapter();
-			}
-			@Override
-			public Adapter caseChainedOperation(ChainedOperation object) {
-				return createChainedOperationAdapter();
+			public Adapter casePrimitiveOperation(PrimitiveOperation object) {
+				return createPrimitiveOperationAdapter();
 			}
 			@Override
 			public Adapter caseCompositeOperation(CompositeOperation object) {
@@ -468,30 +463,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.SingleOperation <em>Single Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.PrimitiveOperation <em>Primitive Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.SingleOperation
+	 * @see org.openiaml.model.model.PrimitiveOperation
 	 * @generated
 	 */
-	public Adapter createSingleOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ChainedOperation <em>Chained Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ChainedOperation
-	 * @generated
-	 */
-	public Adapter createChainedOperationAdapter() {
+	public Adapter createPrimitiveOperationAdapter() {
 		return null;
 	}
 

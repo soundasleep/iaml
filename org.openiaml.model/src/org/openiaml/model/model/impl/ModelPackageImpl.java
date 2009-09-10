@@ -15,7 +15,6 @@ import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -47,10 +46,10 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
-import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
@@ -162,14 +161,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass singleOperationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass chainedOperationEClass = null;
+	private EClass primitiveOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -664,17 +656,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSingleOperation() {
-		return singleOperationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getChainedOperation() {
-		return chainedOperationEClass;
+	public EClass getPrimitiveOperation() {
+		return primitiveOperationEClass;
 	}
 
 	/**
@@ -1564,9 +1547,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		parameterEClass = createEClass(PARAMETER);
 
-		singleOperationEClass = createEClass(SINGLE_OPERATION);
-
-		chainedOperationEClass = createEClass(CHAINED_OPERATION);
+		primitiveOperationEClass = createEClass(PRIMITIVE_OPERATION);
 
 		compositeOperationEClass = createEClass(COMPOSITE_OPERATION);
 		createEReference(compositeOperationEClass, COMPOSITE_OPERATION__NODES);
@@ -1758,11 +1739,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		parameterEClass.getESuperTypes().add(this.getNamedElement());
 		parameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		parameterEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
-		singleOperationEClass.getESuperTypes().add(this.getOperation());
-		chainedOperationEClass.getESuperTypes().add(this.getOperation());
-		chainedOperationEClass.getESuperTypes().add(this.getExecutionEdgesSource());
-		chainedOperationEClass.getESuperTypes().add(this.getWireEdgesSource());
-		compositeOperationEClass.getESuperTypes().add(this.getChainedOperation());
+		primitiveOperationEClass.getESuperTypes().add(this.getOperation());
+		primitiveOperationEClass.getESuperTypes().add(this.getExecutionEdgesSource());
+		primitiveOperationEClass.getESuperTypes().add(this.getWireEdgesSource());
+		compositeOperationEClass.getESuperTypes().add(this.getPrimitiveOperation());
 		compositeOperationEClass.getESuperTypes().add(this.getContainsOperations());
 		compositeOperationEClass.getESuperTypes().add(this.getContainsWires());
 		compositeOperationEClass.getESuperTypes().add(this.getGeneratesElements());
@@ -1857,9 +1837,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(singleOperationEClass, SingleOperation.class, "SingleOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(chainedOperationEClass, ChainedOperation.class, "ChainedOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(primitiveOperationEClass, PrimitiveOperation.class, "PrimitiveOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(compositeOperationEClass, CompositeOperation.class, "CompositeOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeOperation_Nodes(), this.getActivityNode(), null, "nodes", null, 0, -1, CompositeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2024,6 +2002,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4"
+		   });		
+		addAnnotation
+		  (primitiveOperationEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "renamed from ChainedOperation -> PrimitiveOperation in 0.4"
 		   });		
 		addAnnotation
 		  (compositeOperationEClass, 

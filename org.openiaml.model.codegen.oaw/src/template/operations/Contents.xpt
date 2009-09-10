@@ -13,8 +13,8 @@
  * Expand the definition of an operation, assumed to be called 
  * as part of an existing function call.
  */
-«DEFINE operationContents(model::visual::Page container, Boolean php) FOR model::ChainedOperation-»
-	«REM»special operation names«ENDREM»
+«DEFINE operationContents(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
+	«REM»special primitive operation names«ENDREM»
 	«IF name == "setPropertyToValue"-»
 		«EXPAND setPropertyToValueOperation(container, php) FOR this»
 	«ELSEIF name == "set"»
@@ -102,7 +102,7 @@
 /**
  * outflowTarget <-- inflowTarget
  */
-«DEFINE setPropertyToValueOperation(model::visual::Page container, Boolean php) FOR model::ChainedOperation-»
+«DEFINE setPropertyToValueOperation(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	// outFlows first to = «outFlows.first().to»
 	«IF php»
 		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»; 
@@ -187,7 +187,7 @@
 /**
  * Set temporary variable <-- inFlow
  */
-«DEFINE setOperation(model::visual::Page container, Boolean php) FOR model::ChainedOperation-»
+«DEFINE setOperation(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	«REM»set a temporary variable«ENDREM»
 	«IF php»
 		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
@@ -207,7 +207,7 @@
  *
  * TODO remove this and replace with a generic 'alert()' method.
  */
-«DEFINE javascriptAlert(model::visual::Page container, Boolean php) FOR model::ChainedOperation-»
+«DEFINE javascriptAlert(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	«IF php»
 		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
 		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);

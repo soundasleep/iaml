@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ConditionalEdge;
@@ -36,8 +35,8 @@ import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
-import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
@@ -94,8 +93,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.DOMAIN_ATTRIBUTE: return createDomainAttribute();
 			case ModelPackage.ACTIVITY_NODE: return createActivityNode();
 			case ModelPackage.PARAMETER: return createParameter();
-			case ModelPackage.SINGLE_OPERATION: return createSingleOperation();
-			case ModelPackage.CHAINED_OPERATION: return createChainedOperation();
+			case ModelPackage.PRIMITIVE_OPERATION: return createPrimitiveOperation();
 			case ModelPackage.COMPOSITE_OPERATION: return createCompositeOperation();
 			case ModelPackage.APPLICATION_ELEMENT: return createApplicationElement();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY: return createApplicationElementProperty();
@@ -189,23 +187,11 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public SingleOperation createSingleOperation() {
-		SingleOperationImpl singleOperation = new SingleOperationImpl();
-		generateID(singleOperation);
-		return singleOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public ChainedOperation createChainedOperation() {
-		ChainedOperationImpl chainedOperation = new ChainedOperationImpl();
-		generateID(chainedOperation);
-		return chainedOperation;
+	public PrimitiveOperation createPrimitiveOperation() {
+		PrimitiveOperationImpl primitiveOperation = new PrimitiveOperationImpl();
+		return primitiveOperation;
 	}
 
 	/**

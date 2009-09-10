@@ -59,7 +59,7 @@ import org.openiaml.model.model.TemporaryVariable;
  *
  * @generated
  */
-public class CompositeOperationImpl extends ChainedOperationImpl implements CompositeOperation {
+public class CompositeOperationImpl extends PrimitiveOperationImpl implements CompositeOperation {
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

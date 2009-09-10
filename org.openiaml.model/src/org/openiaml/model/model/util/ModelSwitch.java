@@ -14,7 +14,6 @@ import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -45,10 +44,10 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
-import org.openiaml.model.model.SingleOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
@@ -240,42 +239,28 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.SINGLE_OPERATION: {
-				SingleOperation singleOperation = (SingleOperation)theEObject;
-				T result = caseSingleOperation(singleOperation);
-				if (result == null) result = caseOperation(singleOperation);
-				if (result == null) result = caseWireEdgeDestination(singleOperation);
-				if (result == null) result = caseNamedElement(singleOperation);
-				if (result == null) result = caseDataFlowEdgeDestination(singleOperation);
-				if (result == null) result = caseExecutionEdgeDestination(singleOperation);
-				if (result == null) result = caseActivityNode(singleOperation);
-				if (result == null) result = caseDataFlowEdgesSource(singleOperation);
-				if (result == null) result = caseGeneratedElement(singleOperation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.CHAINED_OPERATION: {
-				ChainedOperation chainedOperation = (ChainedOperation)theEObject;
-				T result = caseChainedOperation(chainedOperation);
-				if (result == null) result = caseOperation(chainedOperation);
-				if (result == null) result = caseExecutionEdgesSource(chainedOperation);
-				if (result == null) result = caseWireEdgesSource(chainedOperation);
-				if (result == null) result = caseWireEdgeDestination(chainedOperation);
-				if (result == null) result = caseNamedElement(chainedOperation);
-				if (result == null) result = caseDataFlowEdgeDestination(chainedOperation);
-				if (result == null) result = caseExecutionEdgeDestination(chainedOperation);
-				if (result == null) result = caseActivityNode(chainedOperation);
-				if (result == null) result = caseDataFlowEdgesSource(chainedOperation);
-				if (result == null) result = caseShouldntContainWires(chainedOperation);
-				if (result == null) result = caseGeneratedElement(chainedOperation);
-				if (result == null) result = caseContainsWires(chainedOperation);
+			case ModelPackage.PRIMITIVE_OPERATION: {
+				PrimitiveOperation primitiveOperation = (PrimitiveOperation)theEObject;
+				T result = casePrimitiveOperation(primitiveOperation);
+				if (result == null) result = caseOperation(primitiveOperation);
+				if (result == null) result = caseExecutionEdgesSource(primitiveOperation);
+				if (result == null) result = caseWireEdgesSource(primitiveOperation);
+				if (result == null) result = caseWireEdgeDestination(primitiveOperation);
+				if (result == null) result = caseNamedElement(primitiveOperation);
+				if (result == null) result = caseDataFlowEdgeDestination(primitiveOperation);
+				if (result == null) result = caseExecutionEdgeDestination(primitiveOperation);
+				if (result == null) result = caseActivityNode(primitiveOperation);
+				if (result == null) result = caseDataFlowEdgesSource(primitiveOperation);
+				if (result == null) result = caseShouldntContainWires(primitiveOperation);
+				if (result == null) result = caseGeneratedElement(primitiveOperation);
+				if (result == null) result = caseContainsWires(primitiveOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.COMPOSITE_OPERATION: {
 				CompositeOperation compositeOperation = (CompositeOperation)theEObject;
 				T result = caseCompositeOperation(compositeOperation);
-				if (result == null) result = caseChainedOperation(compositeOperation);
+				if (result == null) result = casePrimitiveOperation(compositeOperation);
 				if (result == null) result = caseContainsOperations(compositeOperation);
 				if (result == null) result = caseScope(compositeOperation);
 				if (result == null) result = caseContainsConditions(compositeOperation);
@@ -791,32 +776,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Single Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Single Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSingleOperation(SingleOperation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Chained Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Chained Operation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseChainedOperation(ChainedOperation object) {
+	public T casePrimitiveOperation(PrimitiveOperation object) {
 		return null;
 	}
 

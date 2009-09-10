@@ -11,7 +11,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ActivityNode;
-import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -21,6 +20,7 @@ import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -149,7 +149,7 @@ public class OperationsSwitch<T> {
 			case OperationsPackage.DECISION_OPERATION: {
 				DecisionOperation decisionOperation = (DecisionOperation)theEObject;
 				T result = caseDecisionOperation(decisionOperation);
-				if (result == null) result = caseChainedOperation(decisionOperation);
+				if (result == null) result = casePrimitiveOperation(decisionOperation);
 				if (result == null) result = caseOperation(decisionOperation);
 				if (result == null) result = caseExecutionEdgesSource(decisionOperation);
 				if (result == null) result = caseWireEdgesSource(decisionOperation);
@@ -508,6 +508,21 @@ public class OperationsSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePrimitiveOperation(PrimitiveOperation object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Execution Edges Source</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -519,21 +534,6 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseExecutionEdgesSource(ExecutionEdgesSource object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Chained Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Chained Operation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseChainedOperation(ChainedOperation object) {
 		return null;
 	}
 

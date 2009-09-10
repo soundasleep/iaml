@@ -75,7 +75,7 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		handler.setName(parameter, "setValueTo");
 		queue.add(parameter, drools);
 		
-		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
 		handler.setName(op, "setPropertyToValue");
 		queue.add(op, drools);
 		
@@ -116,7 +116,7 @@ rule "Create components of 'alert' operation"
 		handler.setName(parameter, "alertText");
 		queue.add(parameter, drools);
 		
-		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
 		handler.setName(op, "javascriptAlert");
 		queue.add(op, drools);
 		

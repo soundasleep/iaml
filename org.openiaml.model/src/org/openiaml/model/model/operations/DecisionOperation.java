@@ -6,8 +6,8 @@
  */
 package org.openiaml.model.model.operations;
 
-import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.PrimitiveOperation;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,5 +19,5 @@ import org.openiaml.model.model.DataFlowEdgeDestination;
  * @model
  * @generated
  */
-public interface DecisionOperation extends ChainedOperation, DataFlowEdgeDestination {
+public interface DecisionOperation extends PrimitiveOperation, DataFlowEdgeDestination {
 } // DecisionOperation

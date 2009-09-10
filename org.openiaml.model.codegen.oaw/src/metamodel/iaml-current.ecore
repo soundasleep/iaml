@@ -56,9 +56,12 @@
         eType="#//Parameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SingleOperation" eSuperTypes="#//Operation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ChainedOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireEdgesSource"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//ChainedOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//Scope #//ContainsConditions">
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireEdgesSource">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="comment" value="renamed from ChainedOperation -> PrimitiveOperation in 0.4"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//PrimitiveOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//Scope #//ContainsConditions">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="Scope supertype added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4"/>
     </eAnnotations>
@@ -505,7 +508,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//ActivityNode #//ExecutionEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination"/>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//ChainedOperation #//DataFlowEdgeDestination"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//PrimitiveOperation #//DataFlowEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionCondition" eSuperTypes="#//Condition #//ExecutionEdgesSource #//ExecutionEdgeDestination #//DataFlowEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.2"/>

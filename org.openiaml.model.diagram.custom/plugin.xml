@@ -164,7 +164,7 @@
          <action
                class="org.openiaml.model.diagram.custom.actions.RefreshDomainStoreMappingsWithDrools"
                enablesFor="1"
-               id="org.openiaml.model.diagram.custom.actions.refresh"
+               id="org.openiaml.model.diagram.custom.actions.refresh1"
                label="Refresh all &amp;DomainStore Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.edit.parts.DomainStoreEditPart">
@@ -174,7 +174,7 @@
          <action
                class="org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools"
                enablesFor="1"
-               id="org.openiaml.model.diagram.custom.actions.refresh"
+               id="org.openiaml.model.diagram.custom.actions.refresh2"
                label="Refresh all Domain&amp;ObjectInstance Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart">
@@ -184,7 +184,7 @@
          <action
                class="org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools"
                enablesFor="1"
-               id="org.openiaml.model.diagram.custom.actions.refresh"
+               id="org.openiaml.model.diagram.custom.actions.refresh3"
                label="Refresh all &amp;Form Mappings"
                menubarPath="ModelActions/group1">
 			 <selection class="org.openiaml.model.model.diagram.visual.edit.parts.InputFormEditPart">

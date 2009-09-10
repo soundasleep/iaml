@@ -2,7 +2,10 @@
 <gmfgen:GenEditorGenerator xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" domainFileExtension="iaml"
+    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" packageNamePrefix="org.openiaml.model.model.diagram"
+    modelID="Iaml"
+    diagramFileExtension="iaml_diagram"
+    domainFileExtension="iaml"
     dynamicTemplates="true"
     templateDirectory="/org.openiaml.model/templates/">
   <diagram
@@ -22,25 +25,25 @@
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
-    <containsShortcutsTo>iaml</containsShortcutsTo>
-    <containsShortcutsTo>iaml_visual</containsShortcutsTo>
-    <containsShortcutsTo>iaml_wire</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
-    <containsShortcutsTo>iaml_operation</containsShortcutsTo>
-    <containsShortcutsTo>iaml_element</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
-    <containsShortcutsTo>iaml_condition</containsShortcutsTo>
     <containsShortcutsTo>iaml_domain_object_instance</containsShortcutsTo>
+    <containsShortcutsTo>iaml_condition</containsShortcutsTo>
+    <containsShortcutsTo>iaml</containsShortcutsTo>
+    <containsShortcutsTo>iaml_wire</containsShortcutsTo>
+    <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
+    <containsShortcutsTo>iaml_element</containsShortcutsTo>
+    <containsShortcutsTo>iaml_operation</containsShortcutsTo>
+    <containsShortcutsTo>iaml_visual</containsShortcutsTo>
+    <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
     <containsShortcutsTo>iaml_user_store</containsShortcutsTo>
-    <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_user_store</shortcutsProvidedFor>
     <domainDiagramElement
         href="iaml.genmodel#//model/InternetApplication"/>
@@ -115,17 +118,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2002"
-        editPartClassName="SingleOperationEditPart"
-        itemSemanticEditPolicyClassName="SingleOperationItemSemanticEditPolicy"
-        notationViewFactoryClassName="SingleOperationViewFactory"
-        canonicalEditPolicyClassName="SingleOperationCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="SingleOperationGraphicalNodeEditPolicy"
-        createCommandClassName="SingleOperationCreateCommand">
+        editPartClassName="CompositeOperationEditPart"
+        itemSemanticEditPolicyClassName="CompositeOperationItemSemanticEditPolicy"
+        notationViewFactoryClassName="CompositeOperationViewFactory"
+        canonicalEditPolicyClassName="CompositeOperationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="CompositeOperationGraphicalNodeEditPolicy"
+        createCommandClassName="CompositeOperationCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="SingleOperationEditHelper"/>
+          editHelperClassName="CompositeOperationEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -135,6 +138,11 @@
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="OperationOpenDiagramEditPolicy"
+          diagramKind="Iaml_Operation"
+          editorID="org.openiaml.model.model.diagram.operation"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.0">
         <metaClass
@@ -146,9 +154,9 @@
       </modelFacet>
       <labels
           visualID="5003"
-          editPartClassName="SingleOperationNameEditPart"
-          itemSemanticEditPolicyClassName="SingleOperationNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="SingleOperationNameViewFactory"
+          editPartClassName="CompositeOperationNameEditPart"
+          itemSemanticEditPolicyClassName="CompositeOperationNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="CompositeOperationNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -167,7 +175,7 @@
           visualID="5004"
           editPartClassName="WrappingLabel2EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="SingleOperationLabelViewFactory"
+          notationViewFactoryClassName="CompositeOperationLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -179,23 +187,28 @@
               xsi:type="gmfgen:StyleAttributes"
               fixedForeground="true"/>
         </viewmap>
+        <behaviour
+            xsi:type="gmfgen:OpenDiagramBehaviour"
+            editPolicyClassName="OperationOpenDiagramEditPolicy"
+            diagramKind="Iaml_Operation"
+            editorID="org.openiaml.model.model.diagram.operation"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes
         visualID="2003"
-        editPartClassName="CompositeOperationEditPart"
-        itemSemanticEditPolicyClassName="CompositeOperationItemSemanticEditPolicy"
-        notationViewFactoryClassName="CompositeOperationViewFactory"
-        canonicalEditPolicyClassName="CompositeOperationCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="CompositeOperationGraphicalNodeEditPolicy"
-        createCommandClassName="CompositeOperationCreateCommand">
+        editPartClassName="PrimitiveOperationEditPart"
+        itemSemanticEditPolicyClassName="PrimitiveOperationItemSemanticEditPolicy"
+        notationViewFactoryClassName="PrimitiveOperationViewFactory"
+        canonicalEditPolicyClassName="PrimitiveOperationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="PrimitiveOperationGraphicalNodeEditPolicy"
+        createCommandClassName="PrimitiveOperationCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="CompositeOperationEditHelper"/>
+          editHelperClassName="PrimitiveOperationEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -216,9 +229,9 @@
       </modelFacet>
       <labels
           visualID="5005"
-          editPartClassName="CompositeOperationNameEditPart"
-          itemSemanticEditPolicyClassName="CompositeOperationNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="CompositeOperationNameViewFactory"
+          editPartClassName="PrimitiveOperationNameEditPart"
+          itemSemanticEditPolicyClassName="PrimitiveOperationNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="PrimitiveOperationNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -237,7 +250,7 @@
           visualID="5006"
           editPartClassName="WrappingLabel3EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel3ItemSemanticEditPolicy"
-          notationViewFactoryClassName="CompositeOperationLabelViewFactory"
+          notationViewFactoryClassName="PrimitiveOperationLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -255,17 +268,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2004"
-        editPartClassName="PrimitiveOperationEditPart"
-        itemSemanticEditPolicyClassName="PrimitiveOperationItemSemanticEditPolicy"
-        notationViewFactoryClassName="PrimitiveOperationViewFactory"
-        canonicalEditPolicyClassName="PrimitiveOperationCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="PrimitiveOperationGraphicalNodeEditPolicy"
-        createCommandClassName="PrimitiveOperationCreateCommand">
+        editPartClassName="DomainObjectEditPart"
+        itemSemanticEditPolicyClassName="DomainObjectItemSemanticEditPolicy"
+        notationViewFactoryClassName="DomainObjectViewFactory"
+        canonicalEditPolicyClassName="DomainObjectCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DomainObjectGraphicalNodeEditPolicy"
+        createCommandClassName="DomainObjectCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="PrimitiveOperationEditHelper"/>
+          editHelperClassName="DomainObjectEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -275,6 +288,11 @@
             xsi:type="gmfgen:StyleAttributes"
             fixedFont="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="DomainObjectOpenDiagramEditPolicy"
+          diagramKind="Iaml_DomainObject"
+          editorID="org.openiaml.model.model.diagram.domain_object"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.2">
         <metaClass
@@ -286,9 +304,9 @@
       </modelFacet>
       <labels
           visualID="5007"
-          editPartClassName="PrimitiveOperationNameEditPart"
-          itemSemanticEditPolicyClassName="PrimitiveOperationNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="PrimitiveOperationNameViewFactory"
+          editPartClassName="DomainObjectNameEditPart"
+          itemSemanticEditPolicyClassName="DomainObjectNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="DomainObjectNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -307,7 +325,7 @@
           visualID="5008"
           editPartClassName="WrappingLabel4EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel4ItemSemanticEditPolicy"
-          notationViewFactoryClassName="PrimitiveOperationLabelViewFactory"
+          notationViewFactoryClassName="DomainObjectLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -319,23 +337,28 @@
               xsi:type="gmfgen:StyleAttributes"
               fixedForeground="true"/>
         </viewmap>
+        <behaviour
+            xsi:type="gmfgen:OpenDiagramBehaviour"
+            editPolicyClassName="DomainObjectOpenDiagramEditPolicy"
+            diagramKind="Iaml_DomainObject"
+            editorID="org.openiaml.model.model.diagram.domain_object"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes
         visualID="2005"
-        editPartClassName="DomainObjectEditPart"
-        itemSemanticEditPolicyClassName="DomainObjectItemSemanticEditPolicy"
-        notationViewFactoryClassName="DomainObjectViewFactory"
-        canonicalEditPolicyClassName="DomainObjectCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DomainObjectGraphicalNodeEditPolicy"
-        createCommandClassName="DomainObjectCreateCommand">
+        editPartClassName="PageEditPart"
+        itemSemanticEditPolicyClassName="PageItemSemanticEditPolicy"
+        notationViewFactoryClassName="PageViewFactory"
+        canonicalEditPolicyClassName="PageCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="PageGraphicalNodeEditPolicy"
+        createCommandClassName="PageCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DomainObjectEditHelper"/>
+          editHelperClassName="PageEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -345,6 +368,11 @@
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="VisualOpenDiagramEditPolicy"
+          diagramKind="Iaml_Visual"
+          editorID="org.openiaml.model.model.diagram.visual"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.3">
         <metaClass
@@ -356,9 +384,9 @@
       </modelFacet>
       <labels
           visualID="5009"
-          editPartClassName="DomainObjectNameEditPart"
-          itemSemanticEditPolicyClassName="DomainObjectNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="DomainObjectNameViewFactory"
+          editPartClassName="PageNameEditPart"
+          itemSemanticEditPolicyClassName="PageNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="PageNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -376,17 +404,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2006"
-        editPartClassName="PageEditPart"
-        itemSemanticEditPolicyClassName="PageItemSemanticEditPolicy"
-        notationViewFactoryClassName="PageViewFactory"
-        canonicalEditPolicyClassName="PageCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="PageGraphicalNodeEditPolicy"
-        createCommandClassName="PageCreateCommand">
+        editPartClassName="DynamicApplicationElementSetEditPart"
+        itemSemanticEditPolicyClassName="DynamicApplicationElementSetItemSemanticEditPolicy"
+        notationViewFactoryClassName="DynamicApplicationElementSetViewFactory"
+        canonicalEditPolicyClassName="DynamicApplicationElementSetCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DynamicApplicationElementSetGraphicalNodeEditPolicy"
+        createCommandClassName="DynamicApplicationElementSetCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="PageEditHelper"/>
+          editHelperClassName="DynamicApplicationElementSetEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -396,6 +424,11 @@
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="ElementOpenDiagramEditPolicy"
+          diagramKind="Iaml_Element"
+          editorID="org.openiaml.model.model.diagram.element"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.4">
         <metaClass
@@ -407,8 +440,9 @@
       </modelFacet>
       <labels
           visualID="5010"
-          editPartClassName="DynamicApplicationElementSetName2EditPart"
-          itemSemanticEditPolicyClassName="DynamicApplicationElementSetName2ItemSemanticEditPolicy"
+          editPartClassName="DynamicApplicationElementSetNameEditPart"
+          itemSemanticEditPolicyClassName="DynamicApplicationElementSetNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="DynamicApplicationElementSetNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -425,9 +459,9 @@
       </labels>
       <labels
           visualID="5011"
-          editPartClassName="PageNameEditPart"
-          itemSemanticEditPolicyClassName="PageNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="PageNameViewFactory">
+          editPartClassName="DynamicApplicationElementSetQueryEditPart"
+          itemSemanticEditPolicyClassName="DynamicApplicationElementSetQueryItemSemanticEditPolicy"
+          notationViewFactoryClassName="DynamicApplicationElementSetQueryViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -448,17 +482,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2007"
-        editPartClassName="DynamicApplicationElementSetEditPart"
-        itemSemanticEditPolicyClassName="DynamicApplicationElementSetItemSemanticEditPolicy"
-        notationViewFactoryClassName="DynamicApplicationElementSetViewFactory"
-        canonicalEditPolicyClassName="DynamicApplicationElementSetCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DynamicApplicationElementSetGraphicalNodeEditPolicy"
-        createCommandClassName="DynamicApplicationElementSetCreateCommand">
+        editPartClassName="ApplicationElementPropertyEditPart"
+        itemSemanticEditPolicyClassName="ApplicationElementPropertyItemSemanticEditPolicy"
+        notationViewFactoryClassName="ApplicationElementPropertyViewFactory"
+        canonicalEditPolicyClassName="ApplicationElementPropertyCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="ApplicationElementPropertyGraphicalNodeEditPolicy"
+        createCommandClassName="ApplicationElementPropertyCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DynamicApplicationElementSetEditHelper"/>
+          editHelperClassName="ApplicationElementPropertyEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -478,9 +512,9 @@
       </modelFacet>
       <labels
           visualID="5012"
-          editPartClassName="DynamicApplicationElementSetNameEditPart"
-          itemSemanticEditPolicyClassName="DynamicApplicationElementSetNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="DynamicApplicationElementSetNameViewFactory"
+          editPartClassName="ApplicationElementPropertyNameEditPart"
+          itemSemanticEditPolicyClassName="ApplicationElementPropertyNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -497,19 +531,15 @@
       </labels>
       <labels
           visualID="5013"
-          editPartClassName="DynamicApplicationElementSetQueryEditPart"
-          itemSemanticEditPolicyClassName="DynamicApplicationElementSetQueryItemSemanticEditPolicy"
-          notationViewFactoryClassName="DynamicApplicationElementSetQueryViewFactory">
+          editPartClassName="ApplicationElementPropertyDefaultValueEditPart"
+          itemSemanticEditPolicyClassName="ApplicationElementPropertyDefaultValueItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyDefaultValueViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
             getterName="getFigureApplicationElementPropertyDefaultValueFigure"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
-          <attributes
-              xsi:type="gmfgen:StyleAttributes"
-              fixedFont="true"/>
-        </viewmap>
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0"
@@ -523,6 +553,7 @@
           visualID="5014"
           editPartClassName="WrappingLabel5EditPart"
           itemSemanticEditPolicyClassName="WrappingLabel5ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ApplicationElementPropertyLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -540,17 +571,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2008"
-        editPartClassName="ApplicationElementPropertyEditPart"
-        itemSemanticEditPolicyClassName="ApplicationElementPropertyItemSemanticEditPolicy"
-        notationViewFactoryClassName="ApplicationElementPropertyViewFactory"
-        canonicalEditPolicyClassName="ApplicationElementPropertyCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="ApplicationElementPropertyGraphicalNodeEditPolicy"
-        createCommandClassName="ApplicationElementPropertyCreateCommand">
+        editPartClassName="DomainStoreEditPart"
+        itemSemanticEditPolicyClassName="DomainStoreItemSemanticEditPolicy"
+        notationViewFactoryClassName="DomainStoreViewFactory"
+        canonicalEditPolicyClassName="DomainStoreCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="DomainStoreGraphicalNodeEditPolicy"
+        createCommandClassName="DomainStoreCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="ApplicationElementPropertyEditHelper"/>
+          editHelperClassName="DomainStoreEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -561,6 +592,11 @@
             fixedFont="true"
             fixedBackground="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="DomainStoreOpenDiagramEditPolicy"
+          diagramKind="Iaml_DomainStore"
+          editorID="org.openiaml.model.model.diagram.domain_store"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.5">
         <metaClass
@@ -572,9 +608,9 @@
       </modelFacet>
       <labels
           visualID="5015"
-          editPartClassName="ApplicationElementPropertyDefaultValueEditPart"
-          itemSemanticEditPolicyClassName="ApplicationElementPropertyDefaultValueItemSemanticEditPolicy"
-          notationViewFactoryClassName="ApplicationElementPropertyDefaultValueViewFactory"
+          editPartClassName="DomainStoreNameEditPart"
+          itemSemanticEditPolicyClassName="DomainStoreNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="DomainStoreNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -592,17 +628,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2009"
-        editPartClassName="DomainStoreEditPart"
-        itemSemanticEditPolicyClassName="DomainStoreItemSemanticEditPolicy"
-        notationViewFactoryClassName="DomainStoreViewFactory"
-        canonicalEditPolicyClassName="DomainStoreCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="DomainStoreGraphicalNodeEditPolicy"
-        createCommandClassName="DomainStoreCreateCommand">
+        editPartClassName="SessionEditPart"
+        itemSemanticEditPolicyClassName="SessionItemSemanticEditPolicy"
+        notationViewFactoryClassName="SessionViewFactory"
+        canonicalEditPolicyClassName="SessionCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="SessionGraphicalNodeEditPolicy"
+        createCommandClassName="SessionCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="DomainStoreEditHelper"/>
+          editHelperClassName="SessionEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -612,6 +648,11 @@
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="VisualOpenDiagramEditPolicy"
+          diagramKind="Iaml_Visual"
+          editorID="org.openiaml.model.model.diagram.visual"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/scopes/Session"/>
@@ -622,8 +663,9 @@
       </modelFacet>
       <labels
           visualID="5016"
-          editPartClassName="SessionName2EditPart"
-          itemSemanticEditPolicyClassName="SessionName2ItemSemanticEditPolicy"
+          editPartClassName="SessionNameEditPart"
+          itemSemanticEditPolicyClassName="SessionNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="SessionNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -641,17 +683,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2010"
-        editPartClassName="SessionEditPart"
-        itemSemanticEditPolicyClassName="SessionItemSemanticEditPolicy"
-        notationViewFactoryClassName="SessionViewFactory"
-        canonicalEditPolicyClassName="SessionCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="SessionGraphicalNodeEditPolicy"
-        createCommandClassName="SessionCreateCommand">
+        editPartClassName="LoginHandlerEditPart"
+        itemSemanticEditPolicyClassName="LoginHandlerItemSemanticEditPolicy"
+        notationViewFactoryClassName="LoginHandlerViewFactory"
+        canonicalEditPolicyClassName="LoginHandlerCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="LoginHandlerGraphicalNodeEditPolicy"
+        createCommandClassName="LoginHandlerCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="SessionEditHelper"/>
+          editHelperClassName="LoginHandlerEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -661,6 +703,11 @@
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="ElementOpenDiagramEditPolicy"
+          diagramKind="Iaml_Element"
+          editorID="org.openiaml.model.model.diagram.element"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/components/LoginHandler"/>
@@ -671,8 +718,9 @@
       </modelFacet>
       <labels
           visualID="5017"
-          editPartClassName="LoginHandlerName2EditPart"
-          itemSemanticEditPolicyClassName="LoginHandlerName2ItemSemanticEditPolicy"
+          editPartClassName="LoginHandlerNameEditPart"
+          itemSemanticEditPolicyClassName="LoginHandlerNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="LoginHandlerNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -689,9 +737,9 @@
       </labels>
       <labels
           visualID="5018"
-          editPartClassName="SessionNameEditPart"
-          itemSemanticEditPolicyClassName="SessionNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="SessionNameViewFactory">
+          editPartClassName="LoginHandlerTypeEditPart"
+          itemSemanticEditPolicyClassName="LoginHandlerTypeItemSemanticEditPolicy"
+          notationViewFactoryClassName="LoginHandlerTypeViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -711,17 +759,17 @@
     </topLevelNodes>
     <topLevelNodes
         visualID="2011"
-        editPartClassName="LoginHandlerEditPart"
-        itemSemanticEditPolicyClassName="LoginHandlerItemSemanticEditPolicy"
-        notationViewFactoryClassName="LoginHandlerViewFactory"
-        canonicalEditPolicyClassName="LoginHandlerCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="LoginHandlerGraphicalNodeEditPolicy"
-        createCommandClassName="LoginHandlerCreateCommand">
+        editPartClassName="CompositeConditionEditPart"
+        itemSemanticEditPolicyClassName="CompositeConditionItemSemanticEditPolicy"
+        notationViewFactoryClassName="CompositeConditionViewFactory"
+        canonicalEditPolicyClassName="CompositeConditionCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="CompositeConditionGraphicalNodeEditPolicy"
+        createCommandClassName="CompositeConditionCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="LoginHandlerEditHelper"/>
+          editHelperClassName="CompositeConditionEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -731,6 +779,11 @@
             xsi:type="gmfgen:StyleAttributes"
             fixedForeground="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="ConditionOpenDiagramEditPolicy"
+          diagramKind="Iaml_Condition"
+          editorID="org.openiaml.model.model.diagram.condition"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.6">
         <metaClass
@@ -742,9 +795,9 @@
       </modelFacet>
       <labels
           visualID="5019"
-          editPartClassName="LoginHandlerNameEditPart"
-          itemSemanticEditPolicyClassName="LoginHandlerNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="LoginHandlerNameViewFactory"
+          editPartClassName="CompositeConditionNameEditPart"
+          itemSemanticEditPolicyClassName="CompositeConditionNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="CompositeConditionNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -761,9 +814,9 @@
       </labels>
       <labels
           visualID="5020"
-          editPartClassName="LoginHandlerTypeEditPart"
-          itemSemanticEditPolicyClassName="LoginHandlerTypeItemSemanticEditPolicy"
-          notationViewFactoryClassName="LoginHandlerTypeViewFactory"
+          editPartClassName="WrappingLabel6EditPart"
+          itemSemanticEditPolicyClassName="WrappingLabel6ItemSemanticEditPolicy"
+          notationViewFactoryClassName="CompositeConditionLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -775,23 +828,28 @@
               xsi:type="gmfgen:StyleAttributes"
               fixedForeground="true"/>
         </viewmap>
+        <behaviour
+            xsi:type="gmfgen:OpenDiagramBehaviour"
+            editPolicyClassName="ConditionOpenDiagramEditPolicy"
+            diagramKind="Iaml_Condition"
+            editorID="org.openiaml.model.model.diagram.condition"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes
         visualID="2012"
-        editPartClassName="CompositeConditionEditPart"
-        itemSemanticEditPolicyClassName="CompositeConditionItemSemanticEditPolicy"
-        notationViewFactoryClassName="CompositeConditionViewFactory"
-        canonicalEditPolicyClassName="CompositeConditionCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="CompositeConditionGraphicalNodeEditPolicy"
-        createCommandClassName="CompositeConditionCreateCommand">
+        editPartClassName="UserStoreEditPart"
+        itemSemanticEditPolicyClassName="UserStoreItemSemanticEditPolicy"
+        notationViewFactoryClassName="UserStoreViewFactory"
+        canonicalEditPolicyClassName="UserStoreCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="UserStoreGraphicalNodeEditPolicy"
+        createCommandClassName="UserStoreCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="CompositeConditionEditHelper"/>
+          editHelperClassName="UserStoreEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -802,6 +860,11 @@
             fixedFont="true"
             fixedBackground="true"/>
       </viewmap>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="UserStoreOpenDiagramEditPolicy"
+          diagramKind="Iaml_UserStore"
+          editorID="org.openiaml.model.model.diagram.user_store"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.7">
         <metaClass
@@ -813,9 +876,9 @@
       </modelFacet>
       <labels
           visualID="5021"
-          editPartClassName="CompositeConditionNameEditPart"
-          itemSemanticEditPolicyClassName="CompositeConditionNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="CompositeConditionNameViewFactory"
+          editPartClassName="UserStoreNameEditPart"
+          itemSemanticEditPolicyClassName="UserStoreNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="UserStoreNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -847,6 +910,11 @@
           xsi:type="gmfgen:InnerClassViewmap"
           className="SyncWireFigure"
           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SyncWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSyncWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SyncWireFigure() {&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setSourceDecoration(createSourceDecoration());&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSyncWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSyncWireNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureSyncWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createSourceDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSyncWireNameFigure() {&#xA;&#x9;&#x9;return fFigureSyncWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="WireOpenDiagramEditPolicy"
+          diagramKind="Iaml_Wire"
+          editorID="org.openiaml.model.model.diagram.wire"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.8">
@@ -901,6 +969,11 @@
           xsi:type="gmfgen:InnerClassViewmap"
           className="RunInstanceWireFigure"
           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RunInstanceWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRunInstanceWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RunInstanceWireFigure() {&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRunInstanceWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRunInstanceWireNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureRunInstanceWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRunInstanceWireNameFigure() {&#xA;&#x9;&#x9;return fFigureRunInstanceWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="WireOpenDiagramEditPolicy"
+          diagramKind="Iaml_Wire"
+          editorID="org.openiaml.model.model.diagram.wire"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.9">
@@ -955,6 +1028,11 @@
           xsi:type="gmfgen:InnerClassViewmap"
           className="ConditionWireFigure"
           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ConditionWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureConditionWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ConditionWireFigure() {&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureConditionWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureConditionWireNameFigure.setText(&quot;condition&quot;);&#xA;&#xA;this.add(fFigureConditionWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureConditionWireNameFigure() {&#xA;&#x9;&#x9;return fFigureConditionWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="WireOpenDiagramEditPolicy"
+          diagramKind="Iaml_Wire"
+          editorID="org.openiaml.model.model.diagram.wire"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.10">
@@ -1009,6 +1087,11 @@
           xsi:type="gmfgen:InnerClassViewmap"
           className="NavigateWireFigure"
           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class NavigateWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNavigateWireNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public NavigateWireFigure() {&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureNavigateWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureNavigateWireNameFigure.setText(&quot;navigate&quot;);&#xA;&#xA;this.add(fFigureNavigateWireNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNavigateWireNameFigure() {&#xA;&#x9;&#x9;return fFigureNavigateWireNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+      <behaviour
+          xsi:type="gmfgen:OpenDiagramBehaviour"
+          editPolicyClassName="WireOpenDiagramEditPolicy"
+          diagramKind="Iaml_Wire"
+          editorID="org.openiaml.model.model.diagram.wire"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.11">
@@ -1203,6 +1286,7 @@
   </diagram>
   <plugin
       iD="org.openiaml.model.diagram"
+      name="Iaml Diagram Plugin"
       provider="www.openiaml.org"
       version="0.3.1">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
@@ -2209,7 +2293,5 @@
       context="//@diagram">
     <items
         xsi:type="gmfgen:LoadResourceAction"/>
-    <items
-        xsi:type="gmfgen:CreateShortcutAction"/>
   </contextMenus>
 </gmfgen:GenEditorGenerator>

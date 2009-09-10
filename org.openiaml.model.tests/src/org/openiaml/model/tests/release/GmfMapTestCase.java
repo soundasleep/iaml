@@ -280,7 +280,7 @@ public class GmfMapTestCase extends XmlTestCase {
 		String toolName = toolNode.getAttribute("title");
 		
 		// these should be the same
-		assertEquals(filename + ": tool mapping did not match", toolName, element);
+		assertEquals(filename + ": tool mapping did not match", element, toolName);
 		
 		return toolNode;
 	}

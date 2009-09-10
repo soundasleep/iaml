@@ -2,7 +2,7 @@
 <gmfgen:GenEditorGenerator xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" packageNamePrefix="org.openiaml.model.model.diagram.visual"
+    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" packageNamePrefix="org.openiaml.model.diagram.visual"
     modelID="Iaml_Visual"
     diagramFileExtension="iaml_visual_diagram"
     domainFileExtension="iaml_visual"
@@ -26,25 +26,25 @@
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
     <containsShortcutsTo>iaml_domain_object_instance</containsShortcutsTo>
-    <containsShortcutsTo>iaml_condition</containsShortcutsTo>
     <containsShortcutsTo>iaml</containsShortcutsTo>
+    <containsShortcutsTo>iaml_condition</containsShortcutsTo>
     <containsShortcutsTo>iaml_wire</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
     <containsShortcutsTo>iaml_element</containsShortcutsTo>
+    <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
     <containsShortcutsTo>iaml_operation</containsShortcutsTo>
     <containsShortcutsTo>iaml_visual</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
     <containsShortcutsTo>iaml_user_store</containsShortcutsTo>
+    <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
     <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_user_store</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
     <domainDiagramElement
         href="iaml.genmodel#//model/VisibleThing"/>
     <topLevelNodes
@@ -138,7 +138,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="OperationOpenDiagramEditPolicy"
           diagramKind="Iaml_Operation"
-          editorID="org.openiaml.model.model.diagram.operation"/>
+          editorID="org.openiaml.model.diagram.operation.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.0">
         <metaClass
@@ -185,7 +185,7 @@
             xsi:type="gmfgen:OpenDiagramBehaviour"
             editPolicyClassName="OperationOpenDiagramEditPolicy"
             diagramKind="Iaml_Operation"
-            editorID="org.openiaml.model.model.diagram.operation"/>
+            editorID="org.openiaml.model.diagram.operation.part.IamlDiagramEditorID"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
@@ -282,7 +282,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="DomainObjectOpenDiagramEditPolicy"
           diagramKind="Iaml_DomainObject"
-          editorID="org.openiaml.model.model.diagram.domain_object"/>
+          editorID="org.openiaml.model.diagram.domain_object.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.2">
         <metaClass
@@ -329,7 +329,7 @@
             xsi:type="gmfgen:OpenDiagramBehaviour"
             editPolicyClassName="DomainObjectOpenDiagramEditPolicy"
             diagramKind="Iaml_DomainObject"
-            editorID="org.openiaml.model.model.diagram.domain_object"/>
+            editorID="org.openiaml.model.diagram.domain_object.part.IamlDiagramEditorID"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
@@ -355,7 +355,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="ElementOpenDiagramEditPolicy"
           diagramKind="Iaml_Element"
-          editorID="org.openiaml.model.model.diagram.element"/>
+          editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.3">
         <metaClass
@@ -402,7 +402,7 @@
             xsi:type="gmfgen:OpenDiagramBehaviour"
             editPolicyClassName="ElementOpenDiagramEditPolicy"
             diagramKind="Iaml_Element"
-            editorID="org.openiaml.model.model.diagram.element"/>
+            editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
@@ -518,7 +518,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="VisualOpenDiagramEditPolicy"
           diagramKind="Iaml_Visual"
-          editorID="org.openiaml.model.model.diagram.visual"/>
+          editorID="org.openiaml.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.4">
         <metaClass
@@ -572,7 +572,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="VisualOpenDiagramEditPolicy"
           diagramKind="Iaml_Visual"
-          editorID="org.openiaml.model.model.diagram.visual"/>
+          editorID="org.openiaml.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.5">
         <metaClass
@@ -619,7 +619,7 @@
             xsi:type="gmfgen:OpenDiagramBehaviour"
             editPolicyClassName="VisualOpenDiagramEditPolicy"
             diagramKind="Iaml_Visual"
-            editorID="org.openiaml.model.model.diagram.visual"/>
+            editorID="org.openiaml.model.diagram.visual.part.IamlDiagramEditorID"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
@@ -649,7 +649,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="VisualOpenDiagramEditPolicy"
           diagramKind="Iaml_Visual"
-          editorID="org.openiaml.model.model.diagram.visual"/>
+          editorID="org.openiaml.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.6">
         <metaClass
@@ -696,7 +696,7 @@
             xsi:type="gmfgen:OpenDiagramBehaviour"
             editPolicyClassName="VisualOpenDiagramEditPolicy"
             diagramKind="Iaml_Visual"
-            editorID="org.openiaml.model.model.diagram.visual"/>
+            editorID="org.openiaml.model.diagram.visual.part.IamlDiagramEditorID"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
@@ -793,7 +793,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="VisualOpenDiagramEditPolicy"
           diagramKind="Iaml_Visual"
-          editorID="org.openiaml.model.model.diagram.visual"/>
+          editorID="org.openiaml.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/scopes/Session"/>
@@ -847,7 +847,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="ElementOpenDiagramEditPolicy"
           diagramKind="Iaml_Element"
-          editorID="org.openiaml.model.model.diagram.element"/>
+          editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.7">
         <metaClass
@@ -921,7 +921,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="ConditionOpenDiagramEditPolicy"
           diagramKind="Iaml_Condition"
-          editorID="org.openiaml.model.model.diagram.condition"/>
+          editorID="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.8">
         <metaClass
@@ -969,7 +969,7 @@
             xsi:type="gmfgen:OpenDiagramBehaviour"
             editPolicyClassName="ConditionOpenDiagramEditPolicy"
             diagramKind="Iaml_Condition"
-            editorID="org.openiaml.model.model.diagram.condition"/>
+            editorID="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
@@ -999,7 +999,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="DomainObjectInstanceOpenDiagramEditPolicy"
           diagramKind="Iaml_DomainObjectInstance"
-          editorID="org.openiaml.model.model.diagram.domain_object_instance"/>
+          editorID="org.openiaml.model.diagram.domain_object_instance.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.9">
         <metaClass
@@ -1069,7 +1069,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="ElementOpenDiagramEditPolicy"
           diagramKind="Iaml_Element"
-          editorID="org.openiaml.model.model.diagram.element"/>
+          editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.10">
         <metaClass
@@ -1123,7 +1123,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="VisualOpenDiagramEditPolicy"
           diagramKind="Iaml_Visual"
-          editorID="org.openiaml.model.model.diagram.visual"/>
+          editorID="org.openiaml.model.diagram.visual.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.11">
         <metaClass
@@ -1170,7 +1170,7 @@
             xsi:type="gmfgen:OpenDiagramBehaviour"
             editPolicyClassName="VisualOpenDiagramEditPolicy"
             diagramKind="Iaml_Visual"
-            editorID="org.openiaml.model.model.diagram.visual"/>
+            editorID="org.openiaml.model.diagram.visual.part.IamlDiagramEditorID"/>
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
@@ -1249,7 +1249,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="ElementOpenDiagramEditPolicy"
           diagramKind="Iaml_Element"
-          editorID="org.openiaml.model.model.diagram.element"/>
+          editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.12">
         <metaClass
@@ -1348,7 +1348,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="DomainObjectOpenDiagramEditPolicy"
           diagramKind="Iaml_DomainObject"
-          editorID="org.openiaml.model.model.diagram.domain_object"/>
+          editorID="org.openiaml.model.diagram.domain_object.part.IamlDiagramEditorID"/>
       <modelFacet>
         <metaClass
             href="iaml.genmodel#//model/users/Role"/>
@@ -1398,7 +1398,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="DomainObjectInstanceOpenDiagramEditPolicy"
           diagramKind="Iaml_DomainObjectInstance"
-          editorID="org.openiaml.model.model.diagram.domain_object_instance"/>
+          editorID="org.openiaml.model.diagram.domain_object_instance.part.IamlDiagramEditorID"/>
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.13">
         <metaClass
@@ -1466,7 +1466,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.14">
@@ -1523,7 +1523,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.15">
@@ -1610,7 +1610,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.17">
@@ -1688,7 +1688,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.18">
@@ -1745,7 +1745,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.19">
@@ -1802,7 +1802,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.20">
@@ -1859,7 +1859,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.21">
@@ -1916,7 +1916,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.22">
@@ -1973,7 +1973,7 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"
           editPolicyClassName="WireOpenDiagramEditPolicy"
           diagramKind="Iaml_Wire"
-          editorID="org.openiaml.model.model.diagram.wire"/>
+          editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.23">

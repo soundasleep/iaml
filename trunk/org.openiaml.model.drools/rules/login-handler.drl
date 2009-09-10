@@ -62,6 +62,18 @@ function boolean hasExtendsWire(java.util.List wires) {
 }
 
 /**
+ * What is the last chained operation for the given PrimitiveOperation?
+ */
+function PrimitiveOperation lastChainedOperation(PrimitiveOperation op) {
+	for (WireEdge wire : op.getOutEdges()) {
+		if (wire.getTo() instanceof PrimitiveOperation) {
+			return lastChainedOperation((PrimitiveOperation) wire.getTo());
+		}
+	}
+	return op;
+}
+
+/**
  * Get the query string for selecting this user.
  *
  * We can't rely on using only attributes inferred to exist in the
@@ -556,7 +568,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		queue.add(edge2, drools);
 
 		# ok: set value operation
-		ChainedOperation setProperty = handler.generatedChainedOperation(loginOperation, loginOperation);
+		PrimitiveOperation setProperty = handler.generatedPrimitiveOperation(loginOperation, loginOperation);
 		handler.setName(setProperty, "setPropertyToValue");
 		queue.add(setProperty, drools);
 		
@@ -1049,7 +1061,7 @@ rule "Connect new navigate wire from logout to logout destination"
 		logout_operation : CompositeOperation ( eContainer == scope, name == "do logout" )
 		# add it at the end of the operation chain (final_operation may == logout_operation)
 		# in this case, we want all accesses to "do logout" to always redirect to "home" (for example)
-		final_operation : CompositeOperation ( this == logout_operation.lastChainedOperation )
+		final_operation : CompositeOperation ( eval(final_operation.equals(lastChainedOperation(logout_operation))) )
 		destination : Page ( )
 		logout_wire : NavigateWire( from == login_handler, to == destination, name == "logout" )
 		
@@ -1089,7 +1101,7 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 		queue.add(finish, drools);
 		
 		# setPropertyToValue
-		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
 		handler.setName(op, "setPropertyToValue");
 		queue.add(op, drools);
 		
@@ -1179,7 +1191,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 	then
 	
 		# setPropertyToValue
-		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
 		handler.setName(op, "setPropertyToValue");
 		queue.add(op, drools);
 	
@@ -1227,7 +1239,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 	then
 	
 		# setPropertyToValue
-		ChainedOperation op = handler.generatedChainedOperation(o, o);
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
 		handler.setName(op, "setPropertyToValue");
 		queue.add(op, drools);
 	

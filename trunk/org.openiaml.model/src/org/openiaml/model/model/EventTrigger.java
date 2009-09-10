@@ -19,13 +19,4 @@ package org.openiaml.model.model;
  */
 public interface EventTrigger extends NamedElement, WireEdgesSource {
 	
-	/**
-	 * Follow this event trigger and find out which operation can be
-	 * considered "last" in the chain.
-	 * 
-	 * @generated NOT
-	 * @return the last ChainedOperation in this chain, or null if there are none
-	 */
-	public ChainedOperation getLastChainedOperation();
-	
 } // EventTrigger

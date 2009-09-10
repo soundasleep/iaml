@@ -121,9 +121,9 @@
 	«ENDFOREACH»	
 «ENDDEFINE»
 
-/* a chained operation: carry on */
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::ChainedOperation-»
-	// chained operation "«name-»"
+/* a primitive operation: carry on */
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
+	// primitive operation "«name-»"
 	«EXPAND Contents::operationContents(container, php) FOR this-»
 	«FOREACH outExecutions AS e-»
 		«EXPAND executionFlowStep(container, php) FOR e.to-»
@@ -195,7 +195,7 @@
  * Continue operations chained onto the current one.
  * TODO more documentation required. When are chained conditions used?
  */
-«DEFINE continueChainedOperations(Boolean php) FOR model::ChainedOperation-»
+«DEFINE continueChainedOperations(Boolean php) FOR model::PrimitiveOperation-»
 	«EXPAND continueChainedOperations(php) FOREACH outEdges»
 «ENDDEFINE»
 

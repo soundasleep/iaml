@@ -80,22 +80,13 @@ public interface ModelFactory extends EFactory {
 	Parameter createParameter();
 
 	/**
-	 * Returns a new object of class '<em>Single Operation</em>'.
+	 * Returns a new object of class '<em>Primitive Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Single Operation</em>'.
+	 * @return a new object of class '<em>Primitive Operation</em>'.
 	 * @generated
 	 */
-	SingleOperation createSingleOperation();
-
-	/**
-	 * Returns a new object of class '<em>Chained Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Chained Operation</em>'.
-	 * @generated
-	 */
-	ChainedOperation createChainedOperation();
+	PrimitiveOperation createPrimitiveOperation();
 
 	/**
 	 * Returns a new object of class '<em>Composite Operation</em>'.

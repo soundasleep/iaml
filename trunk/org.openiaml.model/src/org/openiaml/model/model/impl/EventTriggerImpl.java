@@ -7,7 +7,6 @@
 package org.openiaml.model.model.impl;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -19,7 +18,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.openiaml.model.model.ChainedOperation;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratesElements;
@@ -528,29 +526,6 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 		result.append(name);
 		result.append(')');
 		return result.toString();
-	}
-
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.model.EventTrigger#getLastChainedOperation()
-	 */
-	@Override
-	public ChainedOperation getLastChainedOperation() {
-		List<WireEdge> wires = getWires();
-		ChainedOperation last = null;
-		
-		while (!wires.isEmpty()) {
-			for (WireEdge wire : wires) {
-				if (wire.getTo() instanceof ChainedOperation) {
-					last = (ChainedOperation) wire.getTo();
-					wires = last.getWires();
-					break;
-				}
-				// no ChainedOperations in these wires: return
-				return last;
-			}
-		}
-		// we got no wires in the current node: return
-		return last;
 	}
 
 } //EventTriggerImpl

@@ -6,7 +6,7 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.ChainedOperation;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.Operation;
@@ -96,7 +96,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		boolean passwordSet = false;
 		
 		for (Object o : sets) {
-			ChainedOperation set = (ChainedOperation) o;
+			PrimitiveOperation set = (PrimitiveOperation) o;
 			assertEquals("setPropertyToValue", set.getName());
 
 			assertHasExecutionEdge(doLogin, split, set);

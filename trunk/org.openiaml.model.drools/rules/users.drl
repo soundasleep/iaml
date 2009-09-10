@@ -230,7 +230,7 @@ rule "Create 'check permissions' operation in AccessControlHandler"
 		not ( Operation ( name == "check permissions", eContainer == ach ))
 	
 	then
-		ChainedOperation op = handler.generatedChainedOperation(ach, ach);
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(ach, ach);
 		handler.setName(op, "check permissions");
 		queue.add(op, drools);
 

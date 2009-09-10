@@ -54,7 +54,7 @@ public class GmfMapTestCase extends XmlTestCase {
 	 */
 	private static Set<String> getMapList() {
 		Set<String> tools = new HashSet<String>();
-		for (String gmfgen : PluginsTestCase.GMFGENS) {
+		for (String gmfgen : PluginsTestCase.getAllGmfGens()) {
 			tools.add(gmfgen.replace(".gmfgen", ".gmfmap"));
 		}
 		return tools;
@@ -67,8 +67,8 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testGmfMapMatch() throws Exception {
-		assertEquals(getMapList().size(), PluginsTestCase.GMFGENS.length);
-		assertEquals(getGmfMaps().size(), PluginsTestCase.GMFGENS.length);
+		assertEquals(getMapList().size(), PluginsTestCase.getAllGmfGens().size());
+		assertEquals(getGmfMaps().size(), PluginsTestCase.getAllGmfGens().size());
 	}
 
 	/**

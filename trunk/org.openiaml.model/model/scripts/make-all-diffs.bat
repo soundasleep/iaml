@@ -1,10 +1,11 @@
 rem make-diff condition
-make-diff domain_object_instance
-make-diff domain_object
-make-diff domain_store
-make-diff element
-make-diff operation
-make-diff root
-rem make-diff user_store
-make-diff visual
-make-diff wire
+call make-diff domain_object_instance
+call make-diff domain_object
+call make-diff domain_store
+call make-diff element
+call make-diff operation
+call make-diff root
+call make-diff user_store
+call make-diff visual
+call make-diff wire
+echo complete!

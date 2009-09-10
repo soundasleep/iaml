@@ -618,18 +618,6 @@
                </and>
             </visibleWhen>
          </command>
-      </menuContribution>
-      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
-         <command commandId="org.openiaml.model.diagram.condition.LoadResourceAction">
-            <visibleWhen>
-               <and>
-                  <with variable="activePartId"><equals value="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"/></with>
-                  <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.model.diagram.condition.edit.parts.CompositeConditionEditPart"/>
-                  </iterate></with>
-               </and>
-            </visibleWhen>
-         </command>
          <command commandId="org.openiaml.model.diagram.condition.CreateShortcutAction">
             <visibleWhen>
                <and>
@@ -646,10 +634,6 @@
    <extension point="org.eclipse.ui.commands" id="menu-commands">
       <?gmfgen generated="true"?>
       <category id="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
-      <command id="org.openiaml.model.diagram.condition.LoadResourceAction"
-         name="Load Resource"
-         categoryId="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"
-         defaultHandler="org.openiaml.model.model.diagram.condition.part.LoadResourceAction"/>
       <command id="org.openiaml.model.diagram.condition.LoadResourceAction"
          name="Load Resource"
          categoryId="org.openiaml.model.model.diagram.condition.part.IamlDiagramEditorID"

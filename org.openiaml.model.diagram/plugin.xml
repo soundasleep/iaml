@@ -700,18 +700,6 @@
                </and>
             </visibleWhen>
          </command>
-      </menuContribution>
-      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
-         <command commandId="org.openiaml.model.diagram.LoadResourceAction">
-            <visibleWhen>
-               <and>
-                  <with variable="activePartId"><equals value="org.openiaml.model.model.diagram.part.IamlDiagramEditorID"/></with>
-                  <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.model.diagram.edit.parts.InternetApplicationEditPart"/>
-                  </iterate></with>
-               </and>
-            </visibleWhen>
-         </command>
          <command commandId="org.openiaml.model.diagram.CreateShortcutAction">
             <visibleWhen>
                <and>
@@ -724,14 +712,9 @@
          </command>
       </menuContribution>
    </extension>
-
-   <extension point="org.eclipse.ui.commands" id="menu-commands">
+<extension point="org.eclipse.ui.commands" id="menu-commands">
       <?gmfgen generated="true"?>
       <category id="org.openiaml.model.model.diagram.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
-      <command id="org.openiaml.model.diagram.LoadResourceAction"
-         name="Load Resource"
-         categoryId="org.openiaml.model.model.diagram.part.IamlDiagramEditorID"
-         defaultHandler="org.openiaml.model.model.diagram.part.LoadResourceAction"/>
       <command id="org.openiaml.model.diagram.LoadResourceAction"
          name="Load Resource"
          categoryId="org.openiaml.model.model.diagram.part.IamlDiagramEditorID"
@@ -742,9 +725,10 @@
          defaultHandler="org.openiaml.model.model.diagram.part.CreateShortcutAction"/>
    </extension>
 
-   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
+<extension point="org.eclipse.ui.handlers" id="menu-handlers">
       <?gmfgen generated="true"?>
    </extension>
+
 
    <!-- optionally, specify keybindings -->
 </plugin>

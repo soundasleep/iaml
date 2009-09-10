@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.eclipse;
 
@@ -16,16 +16,16 @@ import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditorUtil;
+import org.openiaml.model.diagram.part.IamlDiagramEditor;
+import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
+import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Try creating a new diagram and new domain file.
- * 
+ *
  * @author jmwright
  *
  */
@@ -33,61 +33,61 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 
 	private IamlDiagramEditor editor;
 	private InternetApplication root;
-	
+
 	/**
 	 * Try simply creating a brand new editor with no files in it.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testCreateBlank() throws Exception {
-		Resource r = IamlDiagramEditorUtil.createDiagram( 
-				createProjectURI("blank.iaml_diagram"), 
-				createProjectURI("blank.iaml"), 
+		Resource r = IamlDiagramEditorUtil.createDiagram(
+				createProjectURI("blank.iaml_diagram"),
+				createProjectURI("blank.iaml"),
 				new NullProgressMonitor());
 
 		assertNotNull(r);
-		
+
 		boolean opened = IamlDiagramEditorUtil.openDiagram(r);
 		assertTrue("Editor opened", opened);
-		
+
 		IEditorPart ep = getActiveEditor();
 		assertTrue("Active editor an IamlDiagramEditor", ep instanceof IamlDiagramEditor);
-		
+
 		editor = (IamlDiagramEditor) ep;
 		EObject rendering = editor.getDiagramEditPart().resolveSemanticElement();
 		assertNotNull("Rendering a non-null element", rendering);
 		assertTrue("Rendering an InternetApplication", rendering instanceof InternetApplication);
-		
+
 		// there should be 1 elements in this editor: a generated page (issue 89)
 		assertEditorHasChildren(1, editor);
-		
+
 		root = (InternetApplication) rendering;
 		assertEquals(1, root.getChildren().size());
 		Page page = (Page) root.getChildren().get(0);
 		assertEquals("Home", page.getName());
-		
+
 		// should not be empty
 		assertFalse("InternetApplication is not empty", root.eContents().isEmpty());
 	}
-	
+
 	/**
 	 * Get the currently open editor.
-	 * 
+	 *
 	 * @return The currently open editor part.
 	 */
 	protected IEditorPart getActiveEditor() {
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		assertNotNull("Workbench page not null", page);
-	
+
 		IEditorPart ep = page.getActiveEditor();
 		assertNotNull("Active editor not null", ep);
-		
+
 		return ep;
 	}
-	
+
 	/**
 	 * Try creating a new diagram, and then add elements to it.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testCreatingElements() throws Exception {
@@ -97,22 +97,22 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 
 		// initially just the default page
 		assertEditorHasChildren(1, editor);
-		
+
 		// create a DomainStore
 		DomainStore ds = gmf.createDomainStore(root);
 		assertNotNull(ds);
-		
+
 		// and a Page
 		Page page = gmf.createPage(root);
 		assertNotNull(page);
-		
+
 		// there should be three elements in this editor
 		assertEditorHasChildren(3, editor);
-		
+
 		// add another page
 		Page page2 = gmf.createPage(root);
 		assertNotNull(page2);
-		
+
 		// create a SyncWire between the two
 		SyncWire sync = gmf.createSyncWire(root, page, page2);
 		assertNotNull(sync);
@@ -120,15 +120,15 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		// there should be four elements in this editor
 		assertEditorHasChildren(4, editor);
 	}
-	
+
 	public void testCreatingSubEditor() throws Exception {
 		// create a blank editor
 		testCreateBlank();
 		EcoreCreateElementsHelper gmf = getElementCreator();
-		
+
 		// we should be in the root editor
 		assertEditorRoot(editor);
-		
+
 		// initially just the initial page
 		assertEditorHasChildren(1, editor);
 
@@ -139,10 +139,10 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		// set its name
 		gmf.setName(page, "page1");
 		assertEquals("Page name should have changed", page.getName(), "page1");
-		
+
 		// there should be one element in this editor
 		assertEditorHasChildren(2, editor);
-		
+
 		// find the edit part for the page
 		ShapeNodeEditPart pageNode = assertHasPage(editor, "page1");
 
@@ -150,13 +150,13 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		DiagramDocumentEditor pageEditor = openDiagram(pageNode);
 		assertNotNull(pageEditor);
 		assertEditorVisual(pageEditor);
-		
+
 		// there shouldn't be anything here
 		assertEditorHasChildren(0, pageEditor);
-		
+
 		// close this editor
-		((org.openiaml.model.model.diagram.visual.part.IamlDiagramEditor) pageEditor).closeBlocking(false);
-		
+		((org.openiaml.model.diagram.visual.part.IamlDiagramEditor) pageEditor).closeBlocking(false);
+
 		// we're back in the root editor
 		assertEquals(editor.getTitle(), getActiveEditor().getTitle());
 		assertEquals("We're back in the root editor after closing the visual editor", getActiveEditor(), editor);
@@ -165,7 +165,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 
 	/**
 	 * Returns an object that we will use to create elements in the editor.
-	 * 
+	 *
 	 * @see GmfInferenceHandler
 	 * @return an object creation helper
 	 */
@@ -176,24 +176,24 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 			IamlDiagramEditorPlugin.ID, // editorId
 			editor.getEditingDomain()); // editingDomain
 	}
-	
+
 	/**
-	 * Construct an EMF URI from a given filename in the current 
+	 * Construct an EMF URI from a given filename in the current
 	 * project.
-	 * 
+	 *
 	 * @param filename
 	 * @returns an EMF URI of the filename
 	 */
 	protected URI createProjectURI(String filename) {
 		return URI.createPlatformResourceURI(project.getFile(filename).getFullPath().toString(), true);
 	}
-	
+
 	public void tearDown() throws Exception {
 		if (editor != null) {
 			editor.close(false);
 			editor = null;
 		}
-		
+
 		root = null;
 
 		super.tearDown();

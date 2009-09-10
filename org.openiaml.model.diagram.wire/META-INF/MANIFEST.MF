@@ -4,12 +4,20 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.openiaml.model.diagram.wire; singleton:=true
 Bundle-Version: 0.3.1
 Bundle-ClassPath: .
-Bundle-Activator: org.openiaml.model.model.diagram.wire.part.IamlDiagramEditorPlugin
+Bundle-Activator: org.openiaml.model.diagram.wire.part.IamlDiagramEditorPlugin
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
-Export-Package: org.openiaml.model.model.diagram.wire.edit.parts,
- org.openiaml.model.model.diagram.wire.part,
- org.openiaml.model.model.diagram.wire.providers
+Export-Package: org.openiaml.model.diagram.wire.edit.commands,
+ org.openiaml.model.diagram.wire.edit.helpers,
+ org.openiaml.model.diagram.wire.edit.parts,
+ org.openiaml.model.diagram.wire.edit.policies,
+ org.openiaml.model.diagram.wire.expressions,
+ org.openiaml.model.diagram.wire.navigator,
+ org.openiaml.model.diagram.wire.parsers,
+ org.openiaml.model.diagram.wire.part,
+ org.openiaml.model.diagram.wire.preferences,
+ org.openiaml.model.diagram.wire.providers,
+ org.openiaml.model.diagram.wire.sheet
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.core.expressions,

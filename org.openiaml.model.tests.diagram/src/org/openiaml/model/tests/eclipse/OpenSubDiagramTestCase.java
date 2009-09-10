@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.eclipse;
 
@@ -7,12 +7,12 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IEditorPart;
-import org.openiaml.model.model.diagram.part.IamlDiagramEditor;
+import org.openiaml.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Tests opening a sub-diagram of a model diagram in Eclipse.
- * 
+ *
  * @author jmwright
  *
  */
@@ -33,22 +33,22 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 		// load up the editor
 		IEditorPart ep = loadDiagramFile(targetDiagram);
 
-		// if this is actually an ErrorEditPart, then an error has occured 
+		// if this is actually an ErrorEditPart, then an error has occured
 		// (but it may not be obvious in the log what it is)
 		assertTrue("active editor is our plugin, but is " + ep, ep instanceof IamlDiagramEditor);
-		
+
 		// find what elements are displayed
 		IamlDiagramEditor editor = (IamlDiagramEditor) ep;
 
 		// there should be four children
 		assertEditorHasChildren(4, editor);
-		
+
 		// check the contents
 		ShapeNodeEditPart page1 = assertHasPage(editor, "page1");
 		ShapeNodeEditPart page2 = assertHasPage(editor, "page2");
 		ShapeNodeEditPart store = assertHasDomainStore(editor, "domainStore");
 		ShapeNodeEditPart page4 = assertHasPage(editor, "last signup user");
-		
+
 		// stop warnings
 		assertNotNull(page1);
 		assertNotNull(page2);
@@ -58,15 +58,15 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 		// open the domain store
 		IEditorPart ep2 = openDiagram(store);
 
-		// if this is actually an ErrorEditPart, then an error has occured 
+		// if this is actually an ErrorEditPart, then an error has occured
 		// (but it may not be obvious in the log what it is)
 		assertEditorDomainStore(ep2);
 
 		// close editors
 		((DiagramDocumentEditor) ep2).close(false);
 		((DiagramDocumentEditor) editor).close(false);
-		
+
 	}
 
-	
+
 }

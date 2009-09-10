@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.domain;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
@@ -60,6 +61,25 @@ public interface DomainPackage extends EPackage {
 	DomainPackage eINSTANCE = org.openiaml.model.model.domain.impl.DomainPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.domain.impl.EmptyDomainClassImpl <em>Empty Domain Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.domain.impl.EmptyDomainClassImpl
+	 * @see org.openiaml.model.model.domain.impl.DomainPackageImpl#getEmptyDomainClass()
+	 * @generated
+	 */
+	int EMPTY_DOMAIN_CLASS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Empty Domain Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_DOMAIN_CLASS_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.domain.DomainStoreTypes <em>Store Types</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,7 +87,7 @@ public interface DomainPackage extends EPackage {
 	 * @see org.openiaml.model.model.domain.impl.DomainPackageImpl#getDomainStoreTypes()
 	 * @generated
 	 */
-	int DOMAIN_STORE_TYPES = 0;
+	int DOMAIN_STORE_TYPES = 1;
 
 	/**
 	 * The meta object id for the '<em>File Reference</em>' data type.
@@ -77,8 +97,18 @@ public interface DomainPackage extends EPackage {
 	 * @see org.openiaml.model.model.domain.impl.DomainPackageImpl#getFileReference()
 	 * @generated
 	 */
-	int FILE_REFERENCE = 1;
+	int FILE_REFERENCE = 2;
 
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.domain.EmptyDomainClass <em>Empty Domain Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Empty Domain Class</em>'.
+	 * @see org.openiaml.model.model.domain.EmptyDomainClass
+	 * @generated
+	 */
+	EClass getEmptyDomainClass();
 
 	/**
 	 * Returns the meta object for enum '{@link org.openiaml.model.model.domain.DomainStoreTypes <em>Store Types</em>}'.
@@ -123,6 +153,16 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.domain.impl.EmptyDomainClassImpl <em>Empty Domain Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.domain.impl.EmptyDomainClassImpl
+		 * @see org.openiaml.model.model.domain.impl.DomainPackageImpl#getEmptyDomainClass()
+		 * @generated
+		 */
+		EClass EMPTY_DOMAIN_CLASS = eINSTANCE.getEmptyDomainClass();
+
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.domain.DomainStoreTypes <em>Store Types</em>}' enum.
 		 * <!-- begin-user-doc -->

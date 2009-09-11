@@ -1,8 +1,9 @@
 #created on: 4/11/2008
-package org.openiaml.model.drools
+package org.openiaml.model.drools.rules.users
 
 #list any import classes here.
-import org.eclipse.emf.ecore.*;
+import org.openiaml.model.drools.*;
+
 import org.openiaml.model.inference.*;
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.impl.*;
@@ -15,11 +16,8 @@ import org.openiaml.model.model.users.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
-global DroolsHelperFunctions functions;
-
-# insertion queue
-import org.openiaml.model.drools.*;
 global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
 
 rule "When a session is protected by an AccessControlHandler with no login handler[type=user], add it"
 	when

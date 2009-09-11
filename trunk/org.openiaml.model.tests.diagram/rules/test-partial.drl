@@ -1,7 +1,8 @@
 package org.openiaml.model.drools
 
 #list any import classes here.
-import org.eclipse.emf.ecore.*;
+import org.openiaml.model.drools.*;
+
 import org.openiaml.model.inference.*;
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.impl.*;
@@ -13,10 +14,8 @@ import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
-
-# insertion queue
-import org.openiaml.model.drools.*;
 global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
 
 rule "Create a TextField within a Page"
 	when

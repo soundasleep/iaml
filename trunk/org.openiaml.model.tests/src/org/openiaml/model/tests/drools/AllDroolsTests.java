@@ -21,7 +21,7 @@ public class AllDroolsTests {
 
         suite.addTestSuite(DroolsQueueTest.class);
         suite.addTestSuite(DumpDroolsXmlTest.class);
-        suite.addTestSuite(CheckUniqueRuleNames.class);
+        suite.addTestSuite(DroolsPackageTest.class);
         
         return suite; 
    }

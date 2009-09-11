@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
+import org.openiaml.model.actions.QuestionDialogResult;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.oaw.CheckModelInstance;
 import org.openiaml.model.codegen.oaw.OawCodeGeneratorWithRuntime;
@@ -41,24 +42,6 @@ import org.openiaml.model.inference.InferenceException;
 public class GenerateCodeAction extends IamlFileAction {
 	
 	private EObject model;
-
-	/**
-	 * A simple class for passing back values from a thread.
-	 * 
-	 * @author jmwright
-	 */
-	private class QuestionDialogResult {
-		private boolean result = false;
-
-		public boolean getResult() {
-			return result;
-		}
-
-		public void setResult(boolean result) {
-			this.result = result;
-		}
-		
-	}
 	
 	/**
 	 * Get a helpful list of error messages from the given status.
@@ -107,7 +90,7 @@ public class GenerateCodeAction extends IamlFileAction {
 			Display.getDefault().syncExec(new Runnable() {
 			    @Override
 			    public void run() {
-			    	answer.setResult(MessageDialog.openQuestion(null, 
+			    	answer.setResult(MessageDialog.openConfirm(null, 
 							"Initial validation failed",
 							"An error occured when validating the initial model:\n\n" + 
 								getErrorMessage(result) +

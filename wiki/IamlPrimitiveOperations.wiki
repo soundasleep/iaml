@@ -45,48 +45,48 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 
 ==save==
 
-  TODO: Incomplete documentation.
+  _TODO: Incomplete documentation._
 
 Part of a domain object instance. Saves the current instance to the domain store.
 
 ==new==
 
-  TODO: Incomplete documentation.
+  _TODO: Incomplete documentation._
 
 Part of a domain object instance. Creates a new instance of the object from the NewInstanceWire or SelectWire.
 
 ==exists?==
 
-  TODO: Incomplete documentation.
+  _TODO: Incomplete documentation._
 
 Part of a domain object instance. Returns true if the current instance actually exists.
 
 ==equal?==
 
-  TODO: Incomplete documentation.
+  _TODO: Incomplete documentation._
 
 Returns true if the incoming parameters are all equal.
 
 ==add role==
 
-  TODO: Incomplete documentation.
+  _TODO: Incomplete documentation._
 
 Part of a UserInstance. Adds the given Role (parameter) to the given UserInstance.
 
 ==add permission==
 
-  TODO: Incomplete documentation.
+  _TODO: Incomplete documentation._
 
 Part of a UserInstance. Adds the given Permission (parameter) to the given UserInstance.
 
 ==remove role==
 
-  TODO: Incomplete documentation.
+  _TODO: Incomplete documentation._
 
 Part of a UserInstance. Removes the given Role (parameter) from the given UserInstance.
 
 ==remove role==
 
-  TODO: Incomplete documentation.
+  _TODO: Incomplete documentation._
 
 Part of a UserInstance. Removes the given Permission (parameter) from the given UserInstance.

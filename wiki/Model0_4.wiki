@@ -42,6 +42,11 @@ http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/m
 ==Undocumented==
 
   * OperationCallNode
+  * UserStore
+  * Role
+  * Permission
+  * UserInstance
+  * AccessControlHandler
 
 Documentation forthcoming.
 
@@ -57,3 +62,12 @@ Similar in concept and implementation to a _Sync Wire_, except this is unidirect
 Can be connected directly to _Input Text Fields_.
 
 http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/SetWireClient-1.png
+
+==Undocumented==
+
+  * ExtendsWire
+  * ProvidesWire
+  * RequiresWire
+  * ConstraintWire
+
+Documentation forthcoming.

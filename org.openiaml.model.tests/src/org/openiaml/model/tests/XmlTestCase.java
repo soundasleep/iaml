@@ -189,6 +189,16 @@ public class XmlTestCase extends TestCase implements IXpath {
 	}
 	
 	/**
+	 * Use {@link XmlTestCase#readFile(File)} instead.
+	 * 
+	 * @deprecated
+	 * @see #readFile(File)
+	 */
+	public static String loadFile(File sourceFile) throws IOException {
+		return readFile(sourceFile);
+	}
+	
+	/**
 	 * Write a string to a file. If the file exists, it will be
 	 * overwritten. 
 	 * 

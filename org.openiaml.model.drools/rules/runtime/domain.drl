@@ -1,8 +1,9 @@
 #created on: 4/11/2008
-package org.openiaml.model.drools
+package org.openiaml.model.drools.rules.runtime.domain
 
 #list any import classes here.
-import org.eclipse.emf.ecore.*;
+import org.openiaml.model.drools.*;
+
 import org.openiaml.model.inference.*;
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.impl.*;
@@ -10,15 +11,11 @@ import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.domain.*;
-import ca.ecliptical.emf.xpath.*;
-import java.util.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
-
-# insertion queue
-import org.openiaml.model.drools.*;
 global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
 
 rule "Create a default primary key for DomainObjects which do not have one"
 

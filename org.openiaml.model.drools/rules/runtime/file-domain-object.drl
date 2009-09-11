@@ -1,9 +1,8 @@
-package org.openiaml.model.drools
+package org.openiaml.model.drools.rules.runtime.file_domain_object
 
 #list any import classes here.
-import org.eclipse.emf.ecore.*;
-import java.util.*;
-import java.io.*;
+import org.openiaml.model.drools.*;
+
 import org.openiaml.model.*;
 import org.openiaml.model.model.*;	// for ModelPackage
 import org.openiaml.model.model.domain.*;
@@ -12,10 +11,8 @@ import org.openiaml.model.inference.*;		// for handler
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
-
-# insertion queue
-import org.openiaml.model.drools.*;
 global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
 
 /*
 rule "Refresh FileDomainStore mappings"

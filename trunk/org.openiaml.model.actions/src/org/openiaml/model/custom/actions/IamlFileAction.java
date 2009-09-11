@@ -52,12 +52,21 @@ public abstract class IamlFileAction extends ProgressEnabledAction<IFile> {
 				return new Status(IStatus.ERROR, PLUGIN_ID, "File '" + o.getName() + "' does not have an .iaml extension.");
 			}
 		} catch (InferenceException e) {
-			return errorStatus("Inference failed: " + e.getMessage(), e);
+			return errorStatus("Inference failed: " + getMessage(e), e);
 		} catch (IOException e) {
-			return errorStatus("IO exception: " + e.getMessage(), e);
+			return errorStatus("IO exception: " + getMessage(e), e);
 		} catch (CoreException e) {
-			return errorStatus("Core exception: " + e.getMessage(), e);
+			return errorStatus("Core exception: " + getMessage(e), e);
+		} catch (RuntimeException e) {
+			return errorStatus("Runtime exception: " + getMessage(e), e);
 		}
+	}
+	
+	private String getMessage(Throwable e) {
+		if (e.getMessage() == null || e.getMessage().isEmpty()) {
+			return e.getClass().getSimpleName();
+		}
+		return e.getMessage();
 	}
 
 	/* (non-Javadoc)

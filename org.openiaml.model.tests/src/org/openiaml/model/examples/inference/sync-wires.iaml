@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d08ec91b9.e">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d08ec91b9.e">
   <children xsi:type="iaml.visual:Page" id="visual.11d08ec9217.1" name="container">
     <children xsi:type="iaml.visual:InputForm" id="visual.11d08ec9217.13" name="if1" outEdges="wires.11d08ec9217.6">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d08ec9217.6" from="visual.11d08ec9217.13" to="visual.11d08ec9217.14" name="sync" generatedElements="wires.11d08ec9217.55 wires.11d08ec9217.56 wires.11d08ec9217.57"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d08ec9217.8e" name="field1" outEdges="wires.11d08ec9217.55">
         <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d08ec9217.278" id="model.11d08ec91b9.126" name="update">
           <parameters id="model.11d08ec91b9.b53" name="setValueTo" outFlows="model.11d08ec91b9.c96"/>
-          <operations xsi:type="iaml:ChainedOperation" id="model.11d08ec91b9.c95" name="setPropertyToValue" inFlows="model.11d08ec91b9.c96" inExecutions="model.11d08ec91b9.c97" outFlows="model.11d08f9698b.151" outExecutions="model.11d08ec91b9.c98"/>
+          <operations xsi:type="iaml:PrimitiveOperation" id="model.11d08ec91b9.c95" name="setPropertyToValue" inFlows="model.11d08ec91b9.c96" inExecutions="model.11d08ec91b9.c97" outFlows="model.11d08f9698b.151" outExecutions="model.11d08ec91b9.c98"/>
           <nodes xsi:type="iaml.operations:StartNode" outExecutions="model.11d08ec91b9.c97"/>
           <nodes xsi:type="iaml.operations:StopNode" inExecutions="model.11d08ec91b9.c98"/>
           <dataEdges id="model.11d08ec91b9.c96" from="model.11d08ec91b9.b53" to="model.11d08ec91b9.c95"/>
@@ -38,7 +38,7 @@
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d08ec9217.19a" name="field1" inEdges="wires.11d08ec9217.55">
         <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d08ec9217.277" id="model.11d08ec91b9.239" name="refresh">
           <parameters id="model.11d08f9698b.792" name="setValueTo" outFlows="model.11d08f9698b.793"/>
-          <operations xsi:type="iaml:ChainedOperation" id="model.11d08f9698b.56f" name="setPropertyToValue" inFlows="model.11d08f9698b.793" inExecutions="model.11d08f9698b.795" outFlows="model.11d08f9698b.794" outExecutions="model.11d08f9698b.796"/>
+          <operations xsi:type="iaml:PrimitiveOperation" id="model.11d08f9698b.56f" name="setPropertyToValue" inFlows="model.11d08f9698b.793" inExecutions="model.11d08f9698b.795" outFlows="model.11d08f9698b.794" outExecutions="model.11d08f9698b.796"/>
           <nodes xsi:type="iaml.operations:StartNode" outExecutions="model.11d08f9698b.795"/>
           <nodes xsi:type="iaml.operations:StopNode" inExecutions="model.11d08f9698b.796"/>
           <dataEdges id="model.11d08f9698b.793" from="model.11d08f9698b.792" to="model.11d08f9698b.56f"/>

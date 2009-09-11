@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.120acfde16a.69b">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.120acfde16a.69b">
   <children xsi:type="iaml.visual:Page" id="visual.120acfde1c7.412" name="container">
     <operations xsi:type="iaml:CompositeOperation" id="model.120acfde16a.6ee" name="composite operation">
       <parameters id="model.120acfde16a.824" name="param" outFlows="model.120acfde16a.825"/>
-      <operations xsi:type="iaml:ChainedOperation" id="model.120acfde16a.742" name="set" inFlows="model.120acfde16a.825" inExecutions="model.120acfde16a.827" outFlows="model.120acfde16a.826 model.120acfde16a.bc4" outExecutions="model.120acfde16a.828"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.120acfde16a.742" name="set" inFlows="model.120acfde16a.825" inExecutions="model.120acfde16a.827" outFlows="model.120acfde16a.826 model.120acfde16a.bc4" outExecutions="model.120acfde16a.828"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.120acfde225.1f6" outExecutions="model.120acfde16a.827"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.120acfde225.1f7" inExecutions="model.120acfde16a.828"/>
       <dataEdges id="model.120acfde16a.825" from="model.120acfde16a.824" to="model.120acfde16a.742"/>

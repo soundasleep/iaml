@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
   <children xsi:type="iaml.visual:Page" id="migrated1" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fa" name="setToHello">
       <eventTriggers id="model.1207ff82f9b.1ae" name="edit" outEdges="wires.1207ff8322b.4d">
@@ -12,7 +12,7 @@
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fb" name="target">
       <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1207ff8322b.4d wires.1207ff8322b.61" id="model.1207ff82f9b.1bf" name="set to a static value">
         <parameters id="model.1207ff82f9b.1f8" name="value" outFlows="model.1207ff82f9b.269"/>
-        <operations xsi:type="iaml:ChainedOperation" id="model.1207ff82f9b.1fd" name="setPropertyToValue" inFlows="model.1207ff82f9b.269" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" outExecutions="model.1207ff82f9b.1ff"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1207ff82f9b.1fd" name="setPropertyToValue" inFlows="model.1207ff82f9b.269" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" outExecutions="model.1207ff82f9b.1ff"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1207ff832b7.63" outExecutions="model.1207ff82f9b.1fe"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.1207ff832b7.64" inExecutions="model.1207ff82f9b.1ff"/>
         <dataEdges id="model.1207ff82f9b.269" from="model.1207ff82f9b.1f8" to="model.1207ff82f9b.1fd"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d889e30c6.2ca">
-  <operations xsi:type="iaml:SingleOperation" inEdges="wires.11d889e3162.63 wires.11d889e3162.6a" id="model.11d889e30c6.2cf" name="op"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d889e30c6.2ca">
+  <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.11d889e3162.63 wires.11d889e3162.6a" id="model.11d889e30c6.2cf" name="op"/>
   <eventTriggers id="model.11d889e30c6.2d0" name="et" outEdges="wires.11d889e3162.63">
     <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.63" from="model.11d889e30c6.2d0" to="model.11d889e30c6.2cf" name="run1"/>
   </eventTriggers>

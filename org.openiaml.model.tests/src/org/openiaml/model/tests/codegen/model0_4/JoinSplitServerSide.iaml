@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12311dd5ff7.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12311dd5ff7.1">
   <children xsi:type="iaml.visual:Page" id="visual.12311dd6084.1" name="Home">
     <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12311ff15e6.4" id="model.12311dd5ff7.c" name="target operation">
-      <operations xsi:type="iaml:ChainedOperation" id="model.12311e69386.13" name="setPropertyToValue" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
-      <operations xsi:type="iaml:ChainedOperation" id="model.12311e69386.14" name="setPropertyToValue" inFlows="model.12311eb1e33.38" inExecutions="model.12311e69386.22" outFlows="model.12311e69386.2a" outExecutions="model.12311e69386.25"/>
-      <operations xsi:type="iaml:ChainedOperation" id="model.12311e69386.15" name="setPropertyToValue" inFlows="model.12311eb1e33.39" inExecutions="model.12311e69386.23" outFlows="model.12311e69386.2b" outExecutions="model.12311e69386.26"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.13" name="setPropertyToValue" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.14" name="setPropertyToValue" inFlows="model.12311eb1e33.38" inExecutions="model.12311e69386.22" outFlows="model.12311e69386.2a" outExecutions="model.12311e69386.25"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.15" name="setPropertyToValue" inFlows="model.12311eb1e33.39" inExecutions="model.12311e69386.23" outFlows="model.12311e69386.2b" outExecutions="model.12311e69386.26"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.12311dd6093.3d" outExecutions="model.12311e69386.1f"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.12311dd6093.3f" inExecutions="model.12311e69386.27"/>
       <nodes xsi:type="iaml.operations:SplitNode" id="operations.12311e693f4.7" outExecutions="model.12311e69386.21 model.12311e69386.22 model.12311e69386.23" inExecutions="model.12311e69386.1f"/>

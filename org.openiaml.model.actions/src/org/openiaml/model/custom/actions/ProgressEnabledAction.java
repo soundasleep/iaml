@@ -33,7 +33,7 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	protected Object[] selection;
 
 	private IErrorLogger handler = getDefaultPlugin();
-
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IViewActionDelegate#init(org.eclipse.ui.IViewPart)
 	 */
@@ -76,7 +76,7 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	public IRunnableWithProgress getRunnable(final List<T> result) {
 		return new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) {
-		    	int scale = 4000;
+		    	int scale = 20;
 		    	
 		    	monitor.beginTask(getProgressMessage(), result.size() * scale);
 		    	

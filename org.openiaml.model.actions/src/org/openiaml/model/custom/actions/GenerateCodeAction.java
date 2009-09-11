@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -21,7 +22,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 import org.openiaml.model.codegen.ICodeGenerator;
+import org.openiaml.model.codegen.oaw.CheckModelInstance;
 import org.openiaml.model.codegen.oaw.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
@@ -38,13 +42,88 @@ public class GenerateCodeAction extends IamlFileAction {
 	
 	private EObject model;
 
+	/**
+	 * A simple class for passing back values from a thread.
+	 * 
+	 * @author jmwright
+	 */
+	private class QuestionDialogResult {
+		private boolean result = false;
+
+		public boolean getResult() {
+			return result;
+		}
+
+		public void setResult(boolean result) {
+			this.result = result;
+		}
+		
+	}
+	
+	/**
+	 * Get a helpful list of error messages from the given status.
+	 * 
+	 * @param status
+	 * @return
+	 */
+	private String getErrorMessage(IStatus status) {
+		if (status.isMultiStatus()) {
+			// get the first 4 errors
+			MultiStatus multi = (MultiStatus) status;
+			String result = "";
+			for (int i = 0; i < 4 && i < multi.getChildren().length; i++) {
+				result += (i == 0 ? "" : "\n") + multi.getChildren()[i].getMessage();
+			}
+			if (multi.getChildren().length > 4) {
+				result += "\n(... " + (multi.getChildren().length - 4) + " more)";
+			}
+			return result;
+		} else {
+			return status.getMessage();
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.diagram.custom.actions.ProgressEnabledAction#execute(java.lang.Object, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
 	public IStatus doExecute(IFile o, IProgressMonitor monitor) throws InferenceException, IOException, CoreException {
-		monitor.beginTask("Generating code for file '" + o.getName() + "'", 100);
+		monitor.beginTask("Generating code for file '" + o.getName() + "'", 130);
 		
+		// first, run OAW checks to check that the initial model instance is valid
+		monitor.subTask("Checking initial model instance");
+		CheckModelInstance check = new CheckModelInstance();
+		final IStatus result = check.checkModel(o, new SubProgressMonitor(monitor, 30));
+		final QuestionDialogResult answer = new QuestionDialogResult();
+		
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
+		if (!result.isOK()) {
+			// log the result
+			getDefaultPlugin().log(result);
+			
+			// get user confirmation
+			Display.getDefault().syncExec(new Runnable() {
+			    @Override
+			    public void run() {
+			    	answer.setResult(MessageDialog.openQuestion(null, 
+							"Initial validation failed",
+							"An error occured when validating the initial model:\n\n" + 
+								getErrorMessage(result) +
+								"\n\nWould you still like to continue with code generation?"));
+			    }
+			  });
+
+			if (!answer.getResult()) {
+				// user canceled
+				return Status.CANCEL_STATUS;
+			}
+		}
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		// try and load the file directly
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.getResource(URI.createFileURI(o.getLocation().toString()), true);

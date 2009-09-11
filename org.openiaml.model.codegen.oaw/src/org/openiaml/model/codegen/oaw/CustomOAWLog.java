@@ -155,8 +155,21 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 			return errors.get(0);
 		
 		// otherwise create a multi status
-		IStatus multi = new MultiStatus(PLUGIN_ID, Status.ERROR, errors.toArray(new IStatus[]{}), "Multiple errors occured", null);
+		IStatus multi = new MultiStatus(PLUGIN_ID, 
+				Status.ERROR, 
+				errors.toArray(new IStatus[]{}), 
+				getMultiErrorMessage(), 
+				null);
 		return multi;
+	}
+	
+	/**
+	 * Get an informative message describing the errors.
+	 * 
+	 * @return
+	 */
+	private static String getMultiErrorMessage() {
+		return "Multiple errors occured.";
 	}
 	
 	/**

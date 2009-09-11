@@ -18,7 +18,6 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.core.commands.DeleteCommand;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.openiaml.model.diagram.helpers.inference.EmfInferenceHandler;
@@ -180,6 +179,18 @@ public class GeneratedElementHandler {
 		} else {
 			throw new IllegalArgumentException("EditPart does not resolve to GeneratedElement");
 		}
+	}
+
+	/**
+	 * Check a list of generated elements.
+	 * 
+	 * @param result
+	 */
+	public GeneratedElementHandler(List<GeneratedElement> result, TransactionalEditingDomain domain) {
+		for (GeneratedElement ge : result) {
+			checkElement(ge);
+		}
+		this.editingDomain = domain;
 	}
 
 	/**
@@ -390,14 +401,42 @@ public class GeneratedElementHandler {
 		}
 		return element.toString();
 	}
+	
+	/**
+	 * Actually deletes an element.
+	 * 
+	 * @param selected
+	 * @param monitor
+	 * @param info
+	 * @param diagramEditPart
+	 * @throws InferenceException
+	 * @throws ExecutionException 
+	 */
+	public void deleteElement(EcoreCreateElementsHelper helper, EObject selected, IProgressMonitor monitor, IAdaptable info, IGraphicalEditPart diagramEditPart) throws InferenceException, ExecutionException {
+	
+		// if the element has no container, it shouldn't exist anymore in the model?
+		if (selected.eContainer() != null) {								
+			helper.deleteElement(selected, selected.eContainer(), selected.eContainingFeature());
+			
+			// is this element currently contained within the current
+			// edit part?
+			IGraphicalEditPart contained = elementContainedWithin(selected, diagramEditPart);
+			if (contained != null) {
+				// it is: delete the node from the current display								
+				DeleteCommand command2 = new DeleteCommand(editingDomain, contained.getPrimaryView());
+				command2.execute(monitor, info);
+			}
+		}
+	}
 
 	/**
-	 * Delete the other generated elements that should be deleted along
-	 * with the selected elements.
+	 * Delete the other generated elements that should be deleted. Does not delete
+	 * the actual selected element.
 	 * 
-	 * @param diagramEditPart the current edit part
+	 * @see #deleteElement(EcoreCreateElementsHelper, EObject, IProgressMonitor, IAdaptable, IGraphicalEditPart)
+	 * @param diagramEditPart the current edit part in order to refresh it, or null
 	 */
-	public void deleteOtherElements(final DiagramEditPart diagramEditPart) {
+	public void deleteOtherElements(final IGraphicalEditPart diagramEditPart) {
 		if (editingDomain == null)
 			throw new RuntimeException("Cannot delete related elements; we do not have an editing domain.");
 		
@@ -419,24 +458,16 @@ public class GeneratedElementHandler {
 								info, 
 								selected.eResource() );
 						
-						for (EObject d : new GeneratedElementDeleter(selected).getElementsToDelete()) {
-							// if the element has no container, it shouldn't exist anymore in the model?
-							if (d.eContainer() != null) {								
-								helper.deleteElement(d, d.eContainer(), d.eContainingFeature());
-								
-								// is this element currently contained within the current
-								// edit part?
-								IGraphicalEditPart contained = elementContainedWithin(d, diagramEditPart);
-								if (contained != null) {
-									// it is: delete the node from the current display								
-									DeleteCommand command2 = new DeleteCommand(editingDomain, contained.getPrimaryView());
-									command2.execute(monitor, info);
-								}
-							}
+						// get all elements to delete
+						List<EObject> toDelete = new GeneratedElementDeleter(selected).getElementsToDelete();
+						
+						for (EObject d : toDelete) {
+							deleteElement(helper, d, monitor, info, diagramEditPart);
 						}
 					}
 					
-					diagramEditPart.refresh();
+					if (diagramEditPart != null)
+						diagramEditPart.refresh();
 				} catch (InferenceException e) {
 					throw new ExecutionException(e.getMessage(), e);
 				}
@@ -444,29 +475,6 @@ public class GeneratedElementHandler {
 				return CommandResult.newOKCommandResult();
 			}
 
-			/**
-			 * Is the given eobject rendered in the current edit part?
-			 * Return the edit part rendering the object, or null
-			 * if none is found.
-			 * 
-			 * @param d
-			 * @param diagramEditPart
-			 * @return
-			 */
-			private IGraphicalEditPart elementContainedWithin(EObject d,
-					DiagramEditPart diagramEditPart) {
-				
-				for (Object obj : diagramEditPart.getChildren()) {
-					if (obj instanceof IGraphicalEditPart) {
-						IGraphicalEditPart p = (IGraphicalEditPart) obj;
-						if (d.equals(p.resolveSemanticElement()))
-							return p;
-					}
-				}
-				return null;
-				
-			}
-			
 		};
 		
 		try {
@@ -477,6 +485,29 @@ public class GeneratedElementHandler {
 		
 	}
 
+	/**
+	 * Is the given eobject rendered in the current edit part?
+	 * Return the edit part rendering the object, or null
+	 * if none is found.
+	 * 
+	 * @param d
+	 * @param diagramEditPart
+	 * @return
+	 */
+	private IGraphicalEditPart elementContainedWithin(EObject d,
+			IGraphicalEditPart diagramEditPart) {
+		
+		for (Object obj : diagramEditPart.getChildren()) {
+			if (obj instanceof IGraphicalEditPart) {
+				IGraphicalEditPart p = (IGraphicalEditPart) obj;
+				if (d.equals(p.resolveSemanticElement()))
+					return p;
+			}
+		}
+		return null;
+		
+	}
+	
 	/**
 	 * What other elements should we delete for the given selection?
 	 * 

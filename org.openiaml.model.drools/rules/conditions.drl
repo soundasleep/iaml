@@ -18,6 +18,7 @@ global EcoreCreateElementsHelper handler;
 # insertion queue
 import org.openiaml.model.drools.*;
 global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
 
 # TODO can we put this function into something global?
 function boolean connects(WireEdge wire, Object a, Object b) {
@@ -31,7 +32,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( )
 		target : ContainsOperations( )
-		eval(connects(sw, source, target))  
+		eval(functions.connects(sw, source, target))  
 		
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( eContainer == source, name=="edit" )
@@ -59,7 +60,7 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( )
 		target : ContainsOperations( )
-		eval(connects(sw, source, target))  
+		eval(functions.connects(sw, source, target))  
 		
 		# that has created a RunInstanceWire
 		event : EventTrigger( eContainer == source, name=="edit" )

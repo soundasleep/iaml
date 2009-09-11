@@ -197,6 +197,9 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 			
 			// try each of them
 			for (IamlModelMigrator m : migrators) {
+				if (monitor.isCanceled())
+					return Status.CANCEL_STATUS;
+
 				if (m.isVersion(doc)) {
 					// add to list of migrators used
 					migratorsUsed.add(m);

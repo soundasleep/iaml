@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.openarchitectureware.xpand2.output.FileHandle;
 import org.openiaml.iacleaner.CleanerException;
 import org.openiaml.iacleaner.IACleaner;
@@ -24,6 +26,16 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 	
 	private static List<File> tracingCache = null;
 	
+	private static IProgressMonitor monitor = null;
+
+	public static IProgressMonitor getMonitor() {
+		return monitor;
+	}
+
+	public static void setMonitor(IProgressMonitor monitor) {
+		IACleanerBeautifier.monitor = monitor;
+	}
+
 	/**
 	 * When tracing is enabled, all written files will be added
 	 * to a local tracing cache. This could help with caching
@@ -60,6 +72,10 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 	@Override
 	public void afterClose(FileHandle file) {
 		try {
+			// early bail?
+			if (monitor != null && monitor.isCanceled())
+				throw new OperationCanceledException();
+			
 			// make backup
 			{
 				File backup = new File( file.getTargetFile().getAbsolutePath() + ".old" );
@@ -95,6 +111,9 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 			throw new RuntimeException("[" + file.getTargetFile() + "] IO Exception during prettifier: " + e.getMessage(), e);
 		} catch (CleanerException e) {
 			throw new RuntimeException("[" + file.getTargetFile() + "] Cleaner Exception during prettifier: " + e.getMessage(), e);
+		} finally {
+			// reset the monitor
+			monitor = null;
 		}
 		
 	}

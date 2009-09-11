@@ -106,7 +106,10 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		// we need to store elements to delete in a buffer, or else
 		// deleting elements will affect the iterator and cause exceptions
 		List<EObject> elementsToDelete = new ArrayList<EObject>();
-		
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		Iterator<EObject> it = loadedModel.eAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
@@ -125,6 +128,9 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		for (EObject obj : elementsToDelete) {
 			handler.deleteElement(obj, obj.eContainer(), obj.eContainingFeature());
 		}
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
 
 		// save it
 		monitor.subTask("Saving");

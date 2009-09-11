@@ -19,62 +19,17 @@ global EcoreCreateElementsHelper handler;
 # insertion queue
 import org.openiaml.model.drools.*;
 global DroolsInsertionQueue queue;
-
-function boolean connects(WireEdge wire, Object a, Object b) {
-	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
-		(wire.getFrom().equals(b) && wire.getTo().equals(a));
-}
-
-function boolean isXPath(String query) {
-	return query.startsWith("xpath:");
-}
-
-/**
- * Could this potentially be an XPath match?
- * 
- * In particular, we take a query /a/b[c]/d[e] and
- * consider /a/b/d as potential matches. /a/b[c]/d[e] will become
- * the ConditionWire.
- *
- * Note we have to use the same XPath expressions as test
- * cases, i.e. //iaml:children[@name], not //Page
- */
-function boolean potentialXPathMatch(EObject container, DynamicApplicationElementSet ds, Page target) {
-	String query = ds.getQuery();
-	if (!query.startsWith("xpath:"))
-		throw new RuntimeException("potentialXPathMatch was called without an xpath: query: '" + query + "'");
-
-	// remove prefix		
-	query = query.substring("xpath:".length());
-	
-	// remove all conditionals
-	// TODO note this will fail if we have a[a[b]], though I don't think this is possible in XPath anyway 	
-	query = query.replaceAll("\\[([^\\]]+)\\]", "");
-	
-	// evaluate xpath using EMFXPath
-	// TODO move this into Java code (to reduce redunancy of the following code)
-	EMFXPath xpath = new EMFXPath(query);
-	xpath.addNamespace("iaml", ModelPackage.eNS_URI);
-	xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);
-	xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-	List results = xpath.selectNodes(container);
-
-	if (results.contains(target)) {
-		return true;
-	}
-	
-	return false;
-}
+global DroolsHelperFunctions functions;
 
 rule "Connect SyncWires for a dynamic source, referenced by XPath"
 		
 	when
 		container : InternetApplication ( )
-		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
 		source : Page ( ) 
-		sw : SyncWire ( eval(connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
-		not ( tw : SyncWire( eval(connects(tw, source, target)) ) )
+		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		not ( tw : SyncWire( eval(functions.connects(tw, source, target)) ) )
 		
 	then 
 		SyncWire sw2 = handler.generatedSyncWire( container, container, source, target );
@@ -86,7 +41,7 @@ end
 rule "Create the Condition for an XPath set"
 
 	when
-		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false )
+		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false )
 		not ( CompositeCondition(eContainer == ds, name == 'xpath' ) )
 	
 	then
@@ -100,11 +55,11 @@ rule "Create the contents of the XPath condition"
 	
 	when
 		container : InternetApplication( )
-		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
 		source : Page ( ) 
-		sw : SyncWire ( eval(connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
-		tw : SyncWire ( eval(connects(tw, source, target)) )
+		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		o : CompositeCondition ( eContainer == ds, name == "xpath" )
 		cw : ConditionWire ( from == o, to == tw )
 		
@@ -176,11 +131,11 @@ end
 rule "Create the XPath ConditionWire for generated SyncWires"
 	when
 		container : InternetApplication( )
-		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
 		source : Page ( ) 
-		sw : SyncWire ( eval(connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
-		tw : SyncWire ( eval(connects(tw, source, target)) )
+		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		not (
 			tw_cw : ConditionWire ( from == condition, to == tw ) 
@@ -209,11 +164,11 @@ end
 rule "Connect ParameterWires to empty ConditionWire for XPath"
 	when
 		container : InternetApplication( )
-		ds : DynamicApplicationElementSet( eval(isXPath(query)), overridden == false, eContainer == container )
+		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
 		source : Page ( ) 
-		sw : SyncWire ( eval(connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(potentialXPathMatch(container, ds, target)) )
-		tw : SyncWire ( eval(connects(tw, source, target)) )
+		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		cwt : ConditionWire ( from == condition, to == tw )
 		not (

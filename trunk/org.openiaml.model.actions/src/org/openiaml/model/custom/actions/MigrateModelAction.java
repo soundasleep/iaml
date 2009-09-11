@@ -192,7 +192,7 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 			// initialise an error log
 			List<ExpectedMigrationException> errors = new ArrayList<ExpectedMigrationException>();
 			
-			int scale = 4000;
+			int scale = 20;
 			monitor.beginTask("Migrating", (migrators.size() + 1) * scale);
 			
 			// try each of them

@@ -27,7 +27,7 @@ public class MigratorRegistry {
 		List<IamlModelMigrator> migrators = new ArrayList<IamlModelMigrator>();
 		migrators.add(new Migrate0To1());
 		migrators.add(new Migrate1To2());
-		migrators.add(new Migrate2To3());
+		migrators.add(new Migrate2To4());
 		return migrators;
 	}
 }

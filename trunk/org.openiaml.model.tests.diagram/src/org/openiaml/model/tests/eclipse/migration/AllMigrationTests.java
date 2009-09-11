@@ -26,7 +26,10 @@ public class AllMigrationTests {
         
         // model 0.3
         suite.addTest(Migrate0_3TestSuite.suite());
-        
+
+        // model 0.4
+        suite.addTestSuite(Migrate0_4JoinSplitClientSide.class);
+
         return suite; 
    }
 

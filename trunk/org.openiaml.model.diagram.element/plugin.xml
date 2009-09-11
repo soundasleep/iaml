@@ -298,7 +298,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.element.ApplicationElement_1000"
                name="%metatype.name.ApplicationElement_1000"
@@ -308,7 +308,7 @@
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.element.CompositeOperation_2001"
                name="%metatype.name.CompositeOperation_2001"
@@ -318,7 +318,7 @@
             <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.element.PrimitiveOperation_2002"
                name="%metatype.name.PrimitiveOperation_2002"
@@ -328,7 +328,7 @@
             <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.element.ApplicationElementProperty_2003"
                name="%metatype.name.ApplicationElementProperty_2003"
@@ -338,7 +338,7 @@
             <param name="semanticHint" value="2003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.element.EventTrigger_2004"
                name="%metatype.name.EventTrigger_2004"

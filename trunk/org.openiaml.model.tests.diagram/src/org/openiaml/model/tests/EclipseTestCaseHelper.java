@@ -36,6 +36,7 @@ import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
@@ -340,7 +341,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Look at the editor's children to see if a Domain Store is being displayed.
+	 * Look at the editor's children to see if an Operation is being displayed.
 	 *
 	 * @param root
 	 * @param pageName
@@ -351,6 +352,18 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return assertHasRenderedNamedObject(root, Operation.class, operationName, checkShortcut, shortcutRequired);
 	}
 
+	/**
+	 * Look at the editor's children to see if a PrimitiveOperation is being displayed.
+	 *
+	 * @param root
+	 * @param pageName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasPrimitiveOperation(DiagramDocumentEditor root, String operationName,
+			boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, PrimitiveOperation.class, operationName, checkShortcut, shortcutRequired);
+	}
+	
 	/**
 	 * Assert that a RunInstanceWire exists between two elements in the editor.
 	 */

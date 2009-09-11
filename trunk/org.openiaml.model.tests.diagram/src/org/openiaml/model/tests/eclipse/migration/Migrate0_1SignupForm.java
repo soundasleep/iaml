@@ -11,9 +11,10 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.migrate.Migrate0To1;
+import org.openiaml.model.migrate.Migrate2To4;
 
 /**
- * Tests migrating a very old model version. 
+ * Tests migrating a very old model version, from 0.0 to 0.1.
  * 
  * @see #getModel()
  * @author jmwright
@@ -32,6 +33,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 	public void testMigratorsUsed() throws Exception {
 		List<IamlModelMigrator> used = migrateModelOnly();
 		assertClassIn(Migrate0To1.class, used);
+		assertClassIn(Migrate2To4.class, used);
 	}
 	
 	/**

@@ -38,6 +38,9 @@ public class GenerateCodeActionAndView extends GenerateCodeAction implements IVi
 	public IStatus execute(IFile o, IProgressMonitor monitor) {
 		IStatus result = super.execute(o, monitor);
 		
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		if (result != null && result.isOK()) {
 			// it was ok: try and load it
 			EObject model = getLoadedModel();

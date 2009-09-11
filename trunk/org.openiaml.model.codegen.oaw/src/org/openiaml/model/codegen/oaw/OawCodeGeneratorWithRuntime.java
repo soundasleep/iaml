@@ -42,11 +42,17 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator implements IFi
 			runtimeProperties.put("config_web", "runtime/web/");
 		}
 		
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		// generate like normal
 		IStatus result = super.generateCode(file, new SubProgressMonitor(monitor, 90), runtimeProperties);
 		if (!result.isOK())
 			return result;		// bail early
-		
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		// copy over files
 		// we copy over ALL files from the org.openiaml.model.runtime folder
 		// into a runtime/ folder

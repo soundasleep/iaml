@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -79,9 +80,22 @@ public class OawCodeGenerator implements ICodeGenerator {
 			properties.put("config_web", runtimeProperties.get("config_web"));
 			
 			Map<String,Object> slotContents = new HashMap<String,Object>();
-			
-			executeWorkflow(wfFile, monitor, properties, slotContents);
-			
+
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+
+			try {
+				IACleanerBeautifier.setMonitor(monitor);
+				executeWorkflow(wfFile, monitor, properties, slotContents);
+			} catch (OperationCanceledException e) {
+				// monitor was cancelled; OK
+			} finally {
+				IACleanerBeautifier.setMonitor(null);
+			}
+
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+
 			// refresh output folder
 			try {
 				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, filesToCreate));

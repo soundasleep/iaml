@@ -194,7 +194,15 @@ public abstract class DroolsInferenceEngine {
         
         // set up the sub progress monitor
         subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 45);
-        
+
+        // need to set up these variables before we insert the model,
+        // otherwise the agenda cannot be built (as the rule heads use
+        // {@link #getHelperFunctions()}).
+        queue = new DroolsInsertionQueue(trackInsertions);
+	    workingMemory.setGlobal("handler", handler);
+		workingMemory.setGlobal("queue", queue);
+		workingMemory.setGlobal("functions", getHelperFunctions());		
+
         //go !
         workingMemory.insert( model );
         subProgressMonitor.done();
@@ -223,10 +231,6 @@ public abstract class DroolsInferenceEngine {
 	        });
         }
         
-        queue = new DroolsInsertionQueue(trackInsertions);
-	    workingMemory.setGlobal("handler", handler);
-		workingMemory.setGlobal("queue", queue );
-		
 		// logging
 		try {
 			// InferenceQueueLog log = new InferenceQueueLog();
@@ -237,6 +241,11 @@ public abstract class DroolsInferenceEngine {
 			// we can actually use a real monitor, now that we have a limit
 			subProgressMonitor = new SubProgressMonitor(monitor, INSERTION_ITERATION_LIMIT);
 	        for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
+	        	// check for monitor cancel
+	        	if (monitor.isCanceled()) {
+	        		return;
+	        	}
+	        	
 	        	// actually do the work
 		        workingMemory.fireAllRules();
 		        
@@ -284,6 +293,15 @@ public abstract class DroolsInferenceEngine {
 
 	}
 	
+	/**
+	 * Get the DroolsHelperFunctions to use within the rules.
+	 * 
+	 * @return
+	 */
+	public DroolsHelperFunctions getHelperFunctions() {
+		return new DroolsHelperFunctions();
+	}
+
 	/**
 	 * Log inference queue results.
 	 * Will usually output to the source directory of the executing

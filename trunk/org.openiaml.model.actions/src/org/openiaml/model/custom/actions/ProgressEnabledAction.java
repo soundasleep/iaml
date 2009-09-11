@@ -81,6 +81,9 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 		    	monitor.beginTask(getProgressMessage(), result.size() * scale);
 		    	
 		    	for (T individual : result) {
+		    		if (monitor.isCanceled())
+		    			return;
+
 		    		// create a new sub-progress
 		    		IProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1 * scale);
 		    		

@@ -56,11 +56,17 @@ public class GenerateCodeAction extends IamlFileAction {
 		if (resource.getContents().size() != 1) {
 			return new Status(IStatus.ERROR, PLUGIN_ID, "Could not transform model: unexpected number of model elements in file (expected: 1, found: " + resource.getContents().size() + ")");
 		}
-		
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		// do inference on the model
 		model = resource.getContents().get(0);
 		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
 		ce.create(model, new SubProgressMonitor(monitor, 45));
+		
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
 		
 		// output the temporary changed model to an external file
 		// so we can do code generation
@@ -99,11 +105,17 @@ public class GenerateCodeAction extends IamlFileAction {
 			// read it
 			runtimeProperties = readProperties(properties);
 		}
-		
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		// create code generator instance
 		ICodeGenerator codegen = new OawCodeGeneratorWithRuntime();
 		IStatus status = codegen.generateCode(tempFile, new SubProgressMonitor(monitor, 50), runtimeProperties);
-		
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		// now delete the generated model file
 		// TODO this would probably go well in a finally block
 		tempFile.delete(false, monitor);

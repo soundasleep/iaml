@@ -15,17 +15,7 @@ import org.openiaml.model.model.users.*;
 
 #declare any global variables here
 global EcoreCreateElementsHelper handler;
-
-# TODO put into separate file
-function Session containingSession(EObject e) {
-	if (e.eContainer() == null) {
-		return null;
-	}
-	if (e.eContainer() instanceof Session) {
-		return (Session) e.eContainer();
-	}
-	return containingSession(e.eContainer());
-}
+global DroolsHelperFunctions functions;
 
 # insertion queue
 import org.openiaml.model.drools.*;
@@ -204,7 +194,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		exists ( 
 			// it doesn't matter if the ACH is in the session or the page
 			ach : AccessControlHandler ( eContainer == session 
-			|| eval(containingSession(ach).equals(session)) )
+			|| eval(functions.containingSession(ach).equals(session)) )
 
 			// the store contains either the roles or the permissions
 			// referenced by the ACH; we only want one		

@@ -18,56 +18,7 @@ global EcoreCreateElementsHelper handler;
 # insertion queue
 import org.openiaml.model.drools.*;
 global DroolsInsertionQueue queue;
-
-# TODO put into separate file
-function boolean syncMatches(NamedElement e1, NamedElement e2) {
-	return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
-}
-
-# TODO put into separate file
-function boolean connects(WireEdge wire, Object a, Object b) {
-	if (wire.getFrom() == null)
-		throw new NullPointerException("Wire '" + wire + "'.from = null");
-	if (wire.getTo() == null)
-		throw new NullPointerException("Wire '" + wire + "'.to = null");
-	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
-		(wire.getFrom().equals(b) && wire.getTo().equals(a));
-}
-
-# TODO put into separate file
-function Session containingSession(EObject e) {
-	if (e.eContainer() == null) {
-		return null;
-	}
-	if (e.eContainer() instanceof Session) {
-		return (Session) e.eContainer();
-	}
-	return containingSession(e.eContainer());
-}
-
-function boolean containingSessionEquals(EObject e, Session s) {
-	Session actual = containingSession(e);
-	return s.equals(actual);
-}
-
-/**
- * For a DomainAttribute, this returns true if it eventually
- * extends a DomainAttribute which is a generated primary key.
- */
-function boolean notExtendingGeneratedPrimaryKey(DomainAttribute attr) {
-	if (attr.isPrimaryKey() && attr.isIsGenerated()) {
-		return false;
-	}
-	for (WireEdge w : attr.getOutEdges()) {
-		if (w instanceof ExtendsWire && w.getTo() instanceof DomainAttribute) {
-			if (!notExtendingGeneratedPrimaryKey((DomainAttribute) w.getTo())) {
-				// we are extending a generated primary key
-				return false;
-			}
-		}
-	}
-	return true;
-}
+global DroolsHelperFunctions functions;
 
 rule "Sync wires between objects should create sync wires between all elements inside each object that matches"
 	when
@@ -77,9 +28,9 @@ rule "Sync wires between objects should create sync wires between all elements i
 		p2 : ApplicationElement(this != p1) from source.to
 		
 		e1 : ApplicationElement( eContainer == p1 )
-		e2 : ApplicationElement( eContainer == p2, eval(syncMatches(e1, e2)) )
+		e2 : ApplicationElement( eContainer == p2, eval(functions.syncMatches(e1, e2)) )
 	
-		not (sw : SyncWire( name == "sync", eContainer == source, eval(connects( sw, e1, e2)) ))
+		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
 		
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
@@ -93,7 +44,7 @@ rule "Run instance wire from edit to update"
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( )
 		target : ContainsOperations( )
-		eval(connects(sw, source, target))
+		eval(functions.connects(sw, source, target))
 		
 		event : EventTrigger( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
@@ -263,8 +214,8 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 		
 		# the elements contained
 		e1 : ApplicationElement( eContainer == source )
-		e2 : ApplicationElement( eContainer == target, eval(syncMatches(e1, e2)) )
-		esw : SyncWire( name == "sync", eval(connects(esw, e1, e2)), overridden == false )
+		e2 : ApplicationElement( eContainer == target, eval(functions.syncMatches(e1, e2)) )
+		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
 		
 		# there is a condition on the containing sync wire
 		condition : Condition ( )
@@ -290,8 +241,8 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		
 		# the elements contained
 		e1 : ApplicationElement( eContainer == source )
-		e2 : ApplicationElement( eContainer == target, eval(syncMatches(e1, e2)) )
-		esw : SyncWire( name == "sync", eval(connects(esw, e1, e2)), overridden == false )
+		e2 : ApplicationElement( eContainer == target, eval(functions.syncMatches(e1, e2)) )
+		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
 		
 		# there is a condition on the containing sync wire
 		condition : Condition ( )
@@ -321,14 +272,14 @@ rule "Connect Session.init to incoming SyncWires (contained in Pages)"
 	when
 		session : Session ( overridden == false )
 		sw : SyncWire( overridden == false )
-		sourcePage : ContainsEventTriggers( eval(!containingSessionEquals(sourcePage, session)) )  
-		targetPage : ContainsOperations( eval(containingSessionEquals(targetPage, session)) )
-		eval( connects(sw, sourcePage, targetPage ))
+		sourcePage : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourcePage, session)) )  
+		targetPage : ContainsOperations( eval(functions.containingSessionEquals(targetPage, session)) )
+		eval( functions.connects(sw, sourcePage, targetPage ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
 		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
 		targetElement : ContainsOperations( eContainer == targetPage )
-		eval( connects(sw2, sourceElement, targetElement ))
+		eval( functions.connects(sw2, sourceElement, targetElement ))
 
 		event : EventTrigger( eContainer == sourceElement, name == "edit" )
 		operation : Operation( eContainer == targetElement, name == "update" )
@@ -349,14 +300,14 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Pag
 	when
 		session : Session ( overridden == false )
 		sw : SyncWire( overridden == false )
-		sourcePage : ContainsEventTriggers( eval(!containingSessionEquals(sourcePage, session)) )  
-		targetPage : ContainsOperations( eval(containingSessionEquals(targetPage, session)) )
-		eval( connects(sw, sourcePage, targetPage ))
+		sourcePage : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourcePage, session)) )  
+		targetPage : ContainsOperations( eval(functions.containingSessionEquals(targetPage, session)) )
+		eval( functions.connects(sw, sourcePage, targetPage ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
 		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
 		targetElement : ContainsOperations( eContainer == targetPage )
-		eval( connects(sw2, sourceElement, targetElement ))
+		eval( functions.connects(sw2, sourceElement, targetElement ))
 
 		event : EventTrigger( eContainer == sourceElement, name == "edit" )
 		operation : Operation( eContainer == targetElement, name == "update" )
@@ -382,7 +333,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		form : InputForm ( overridden == false )
 		instance : DomainObjectInstance ( overridden == false )
 		
-		eval(connects(sync, form, instance))
+		eval(functions.connects(sync, form, instance))
 		
 		originalAttribute : DomainAttribute ( )
 		attribute : DomainAttributeInstance( eContainer == instance )
@@ -390,9 +341,9 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		
 		# at the top of the attribute inheritance heirarchy, not
 		# a generated primary key
-		eval( notExtendingGeneratedPrimaryKey( originalAttribute ) )
+		eval( functions.notExtendingGeneratedPrimaryKey( originalAttribute ) )
 		
-		not ( tf : InputTextField( eContainer == form, eval(syncMatches( attribute, tf )) ) )
+		not ( tf : InputTextField( eContainer == form, eval(functions.syncMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one
@@ -408,15 +359,15 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		form : InputForm ( overridden == false )
 		object : DomainObject ( overridden == false )
 		
-		eval(connects(sync, form, object))
+		eval(functions.connects(sync, form, object))
 		
 		attribute : DomainAttribute( eContainer == object )
 		
 		# at the top of the attribute inheritance heirarchy, not
 		# a generated primary key
-		eval( notExtendingGeneratedPrimaryKey( attribute ) )
+		eval( functions.notExtendingGeneratedPrimaryKey( attribute ) )
 		
-		not ( tf : InputTextField( eContainer == form, eval(syncMatches( attribute, tf )) ) )
+		not ( tf : InputTextField( eContainer == form, eval(functions.syncMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one
@@ -432,7 +383,7 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		form : InputForm ( overridden == false )
 		instance : DomainObjectInstance ( overridden == false )
 		
-		eval(connects(sync, form, instance))
+		eval(functions.connects(sync, form, instance))
 		
 		# the instance is created through a NewInstanceWire
 		domainObject : DomainObject ( )
@@ -443,7 +394,7 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		tf : InputTextField ( eContainer == form )
 		sync2 : SyncWire ( )
 		
-		eval(connects(sync2, tf, attribute))
+		eval(functions.connects(sync2, tf, attribute))
 		
 		# text field access/init events
 		access : EventTrigger ( eContainer == tf, name == "access" )

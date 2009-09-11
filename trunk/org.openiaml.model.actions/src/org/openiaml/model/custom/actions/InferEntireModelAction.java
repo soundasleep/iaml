@@ -89,12 +89,18 @@ public class InferEntireModelAction extends IamlFileAction {
 		if (resource.getContents().size() != 1) {
 			return new Status(IStatus.ERROR, PLUGIN_ID, "Could not transform model: unexpected number of model elements in file (expected: 1, found: " + resource.getContents().size() + ")");
 		}
-		
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		// do inference on the model
 		model = resource.getContents().get(0);
 		DroolsInferenceEngine ce = getEngine(handler);
 		ce.create(model, new SubProgressMonitor(monitor, 45));
-		
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		monitor.subTask("Writing to temporary file");
 		// output the temporary changed model to an external file
 		// so we can move it back later

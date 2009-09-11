@@ -18,10 +18,13 @@ buttonName(model::visual::Button this) :
 	if (name == null || name == "") then "Submit Query" else name;
 	
 safeName(model::GeneratedElement this) :
-	safeNameString(id);
+	if (id == null) then
+		throwException("Cannot get the safeName of an element with no ID: " + this)
+	else
+		safeNameString(id);
 
 safeName(emf::EObject this) :
-	"unexpected eobject " + this;
+	throwException("Cannot get the safeName of an EObject: " + this);
 
 safeNameString(String s) :
 	s.replaceAll("[^A-Za-z0-9]", "_");
@@ -34,13 +37,13 @@ escapePhpString(String s):
 	s.replaceAll("[\\\\]", "\\\\").replaceAll("[\"]", "\\\"").replaceAll("[$]", "\\$");
 	
 operationName(model::WireEdgeDestination this) : 
-	"invalid_operation";
+	throwException("Invalid operation: " + this);
 
 operationName(model::Operation this) :
 	safeName(this);
 
 conditionName(emf::EObject this ) :
-	"invalid_condition";
+	throwException("Invalid condition: " + this);
 
 conditionName(model::Condition this) :
 	safeName(this);
@@ -52,7 +55,7 @@ attributeName(model::DomainAttributeInstance this) :
 	safeNameString(name);
 	
 attributeName(Void v) :
-	"null";
+	throwException("Invalid attribute (Void)");
 
 isXPath(model::DynamicApplicationElementSet this) :
 	query.startsWith("xpath:");
@@ -205,7 +208,7 @@ shouldExpandEventTriggersServer(model::PrimitiveOperation this ) :
 getOperationName(model::Operation this) :
 	name;
 getOperationName(emf::EObject this) :
-	"[no operation name for an EObject]";
+	throwException("Cannot get the operationName for an EObject: " + this);
 	
 isVisibleThing(emf::EObject this) :
 	model::VisibleThing.isInstance(this);

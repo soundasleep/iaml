@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1213cee9b4f.f">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1213cee9b4f.f">
   <children xsi:type="iaml.visual:Page" id="visual.1213cee9bad.9" name="container">
     <children xsi:type="iaml:DomainObjectInstance" id="model.1213cee9b4f.99" name="&quot;My User&quot;" inEdges="wires.1213cee9bad.7" autosave="false">
       <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1213cee9bad.31" id="model.1213cee9b4f.1b4" name="save"/>

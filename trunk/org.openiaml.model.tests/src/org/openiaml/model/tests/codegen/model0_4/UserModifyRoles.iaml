@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
   <children xsi:type="iaml.visual:Page" id="visual.1233afe628e.15" name="Home"/>
   <children xsi:type="iaml.visual:Page" id="visual.1233b453dc5.156" name="create a new user">
     <children xsi:type="iaml.users:UserInstance" id="users.1233b53a814.a" name="newly created user" inEdges="wires.1233b53a3ce.7" autosave="false" outEdges="sync">
-      <operations xsi:type="iaml:SingleOperation" inEdges="wires.1233b53a3ce.a" id="model.1233b53a1ca.14" name="save"/>
+      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1233b53a3ce.a" id="model.1233b53a1ca.14" name="save"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" outEdges="wires.1233b53a3ce.a">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.a" from="visual.1233b53a313.1a" to="model.1233b53a1ca.14" name="onClick"/>
@@ -51,10 +51,10 @@
       <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" from="components.1233b53a67e.19" to="users.1233b53a814.d0" name="set"/>
     </children>
     <children xsi:type="iaml.users:UserInstance" id="users.1233b53a814.d0" name="logged in user" inEdges="wires.1233b53a3ce.5c">
-      <operations xsi:type="iaml:SingleOperation" inEdges="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8" id="model.1233b53a1ca.71" name="add role"/>
-      <operations xsi:type="iaml:SingleOperation" inEdges="wires.1233b53a3ce.168 wires.1233b53a3ce.169" id="model.1233b53a1ca.72" name="remove role"/>
-      <operations xsi:type="iaml:SingleOperation" inEdges="wires.1233b53a3ce.a6" id="model.1233b53a1ca.73" name="add permission"/>
-      <operations xsi:type="iaml:SingleOperation" inEdges="wires.1233b53a3ce.16c" id="model.1233b53a1ca.74" name="remove permission"/>
+      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8" id="model.1233b53a1ca.71" name="add role"/>
+      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1233b53a3ce.168 wires.1233b53a3ce.169" id="model.1233b53a1ca.72" name="remove role"/>
+      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1233b53a3ce.a6" id="model.1233b53a1ca.73" name="add permission"/>
+      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1233b53a3ce.16c" id="model.1233b53a1ca.74" name="remove permission"/>
     </children>
     <children xsi:type="iaml.visual:Page" id="visual.1233b53a313.117" name="remove roles">
       <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.15a" name="remove all roles" outEdges="wires.1233b53a3ce.168 wires.1233b53a3ce.169">

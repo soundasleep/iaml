@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.2f">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.2f">
   <children xsi:type="iaml.visual:Page" id="visual.123172cef6c.2b" name="Home">
     <children xsi:type="iaml.visual:InputForm" id="visual.123172cef6c.3f" name="current user" inEdges="wires.123172cef6c.17"/>
     <children xsi:type="iaml:DomainObjectInstance" id="model.123172ceeef.93" name="selected user" outEdges="wires.123172cef6c.17" inEdges="wires.123172cef6c.13" autosave="false">

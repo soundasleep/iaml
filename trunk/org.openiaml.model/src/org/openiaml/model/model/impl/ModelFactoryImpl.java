@@ -187,10 +187,11 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public PrimitiveOperation createPrimitiveOperation() {
 		PrimitiveOperationImpl primitiveOperation = new PrimitiveOperationImpl();
+		generateID(primitiveOperation);
 		return primitiveOperation;
 	}
 

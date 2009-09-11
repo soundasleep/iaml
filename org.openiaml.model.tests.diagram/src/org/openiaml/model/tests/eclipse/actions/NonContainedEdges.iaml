@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.122a0a9692e.1d">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.122a0a9692e.1d">
   <operations xsi:type="iaml:CompositeOperation" id="model.122a0a9692e.2e" name="target operation">
     <dataEdges id="model.122a0a9692e.78" from="model.122a0a9692e.30" to="model.122a0a9692e.72"/>
     <variables id="model.122a0a9692e.72" name="target" inFlows="model.122a0a9692e.78"/>

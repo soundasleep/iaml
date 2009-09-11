@@ -7,14 +7,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * Migrate model version 0.2 to version 0.3
+ * Migrate model version 0.2 to version 0.4
  *
  * In the future most of this functionality should be refactored into an abstract superclass.
  *
  * Changes in model version 0.3:
  * 
  * <ol>
- *   <li><b>Root namespace changed to "http://openiaml.org/model0.3"</b>: {@link #createElement(Document, String)}</li>
  *   <li>Domain element changes: (requires migration)
  *   <ol>
  *     <li>DomainStore --> DomainStore[type=db]</li>
@@ -31,16 +30,30 @@ import org.w3c.dom.Node;
  *     <li>abstract AbstractDomainAttribute</li>
  *   </ol></li>
  * </ol>
+ * 
+ * Changes in model version 0.4:
+ * 
+ * <ol>
+ *   <li>Root namespace changed to "http://openiaml.org/model0.4"</b>: {@link #createElement(Document, String)}</li>
+ *   <li>Domain element changes: (requires migration)
+ *   <ol>
+ *     <li>ChainedOperation --> PrimitiveOperation</li>
+ *   </ol></li>
+ *   <li>
+ *   <ol>Removed elements: (requires migration)
+ *     <li>SingleOperation --> ChainedOperation (?)</li>
+ *   </ol></li>
+ * </ol>
  *
  * @see #isVersion(Document) for what defines this model
  * @see #recurseOverDocument(Element, Node, Document) for actual model changes
  * @author jmwright
  *
  */
-public class Migrate2To3 extends DomBasedMigrator implements IamlModelMigrator {
+public class Migrate2To4 extends DomBasedMigrator implements IamlModelMigrator {
 	
 	public String getName() {
-		return "Migrator 0.2 to 0.3";
+		return "Migrator 0.2 to 0.4";
 	}
 	
 	/**
@@ -59,6 +72,9 @@ public class Migrate2To3 extends DomBasedMigrator implements IamlModelMigrator {
 		try {
 			// get parameters
 			String nsPackage = doc.getDocumentElement().getAttribute("xmlns:iaml");
+			String nsPackage2 = doc.getDocumentElement().getNamespaceURI();
+			if (nsPackage2 != null)
+				nsPackage = nsPackage2;
 			String rootId = doc.getDocumentElement().getAttribute("id");
 
 			if (nsPackage.equals("http://openiaml.org/model0.2") && 
@@ -128,14 +144,41 @@ public class Migrate2To3 extends DomBasedMigrator implements IamlModelMigrator {
 			element.setAttribute("xsi:type", "iaml:DomainAttribute");
 		}
 
+		if (old.getNodeName().equals("operations")) {
+			System.out.println(old.getAttribute("xsi:type"));
+		}
+
 	}
 
 	/**
-	 * Models of version 0.3 have a different namespace.
+	 * Replace various element types.
+	 */
+	@Override
+	public String replaceType(Element old, String xsiType,
+			List<ExpectedMigrationException> errors) {
+		
+		// <operations xsi:type="iaml:ChainedOperation">
+		// --> <operations xsi:type="iaml:PrimitiveOperation">
+		if (old.getNodeName().equals("operations") && xsiType.equals("iaml:ChainedOperation")) {
+			return "iaml:PrimitiveOperation";
+		}
+
+		// <operations xsi:type="iaml:SingleOperation">
+		// --> <operations xsi:type="iaml:PrimitiveOperation">
+		if (old.getNodeName().equals("operations") && xsiType.equals("iaml:SingleOperation")) {
+			return "iaml:PrimitiveOperation";
+		}
+		
+		return super.replaceType(old, xsiType, errors);
+
+	}
+
+	/**
+	 * Models of version 0.4 have a different namespace.
 	 */
 	@Override
 	protected Element createElement(Document document, String nodeName) {
-		return document.createElementNS("http://openiaml.org/model0.2", nodeName);
+		return document.createElementNS("http://openiaml.org/model0.4", nodeName);
 	}
 
 	

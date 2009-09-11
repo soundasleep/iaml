@@ -12,7 +12,7 @@ import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate1To2;
 
 /**
- * Tests migrating a very old model version. 
+ * Tests migrating a very old model version, from 0.1 to 0.2.
  * 
  * @see #getModel()
  * @author jmwright

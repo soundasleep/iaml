@@ -315,7 +315,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.VisibleThing_1000"
                name="%metatype.name.VisibleThing_1000"
@@ -325,7 +325,7 @@
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.EventTrigger_2001"
                name="%metatype.name.EventTrigger_2001"
@@ -335,7 +335,7 @@
             <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.CompositeOperation_2002"
                name="%metatype.name.CompositeOperation_2002"
@@ -345,7 +345,7 @@
             <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.PrimitiveOperation_2003"
                name="%metatype.name.PrimitiveOperation_2003"
@@ -355,7 +355,7 @@
             <param name="semanticHint" value="2003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.DomainObject_2004"
                name="%metatype.name.DomainObject_2004"
@@ -365,7 +365,7 @@
             <param name="semanticHint" value="2004"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.DomainAttribute_2005"
                name="%metatype.name.DomainAttribute_2005"
@@ -375,7 +375,7 @@
             <param name="semanticHint" value="2005"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.ApplicationElementProperty_2006"
                name="%metatype.name.ApplicationElementProperty_2006"
@@ -415,7 +415,7 @@
             <param name="semanticHint" value="2009"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.StaticValue_2010"
                name="%metatype.name.StaticValue_2010"
@@ -445,7 +445,7 @@
             <param name="semanticHint" value="2012"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.CompositeCondition_2013"
                name="%metatype.name.CompositeCondition_2013"
@@ -455,7 +455,7 @@
             <param name="semanticHint" value="2013"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.DomainObjectInstance_2014"
                name="%metatype.name.DomainObjectInstance_2014"
@@ -465,7 +465,7 @@
             <param name="semanticHint" value="2014"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.DomainAttributeInstance_2015"
                name="%metatype.name.DomainAttributeInstance_2015"
@@ -485,7 +485,7 @@
             <param name="semanticHint" value="2016"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.2">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.visual.QueryParameter_2017"
                name="%metatype.name.QueryParameter_2017"

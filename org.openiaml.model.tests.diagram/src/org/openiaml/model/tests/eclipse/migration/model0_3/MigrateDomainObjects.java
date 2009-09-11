@@ -13,7 +13,7 @@ import org.openiaml.model.impl.FileReferenceImpl;
 import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate1To2;
-import org.openiaml.model.migrate.Migrate2To3;
+import org.openiaml.model.migrate.Migrate2To4;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
@@ -67,7 +67,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		List<IamlModelMigrator> used = migrateModelOnly();
 		assertClassNotIn(Migrate0To1.class, used);
 		assertClassNotIn(Migrate1To2.class, used);
-		assertClassIn(Migrate2To3.class, used);
+		assertClassIn(Migrate2To4.class, used);
 	}
 
 	/**

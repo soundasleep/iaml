@@ -1,4 +1,4 @@
-#summary Discussions on the types of Operations used in IAML.
+#summary Composing operations in IAML.
 #labels EndUser
 
 =Introduction=
@@ -7,7 +7,7 @@ Composite Operations are operations which are composed of [IamlOperations smalle
 
 The current implementation of these operations are implemented in the Drools rule files  [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/operations.drl#52 operations.drl]. They are also implemented in [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.drools/rules/sessions.drl sessions.drl] temporarily, but this needs to be refactored out (TODO).
 
-*Also see* [IamlOperations] for an overview of the pre-defined operation components.
+*Also see* [IamlPrimitiveOperations] for an overview of the pre-defined operation components.
 
 ==update, refresh, init==
 

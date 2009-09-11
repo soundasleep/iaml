@@ -3,40 +3,10 @@
 
 =Introduction=
 
-When composing [IamlCompositeOperations CompositeOperations] out of the elemental building blocks of [Model0_2 operation modelling] (StartNodes, FinishNodes, DataFlowEdges, ChainedOperations), there are particular ChainedOperations which are designed to have fixed intent in a generated web application. Their intent is based on their _name_, and we summarise these operations below.
+In IAML, there are two types of operations: *Primitive* operations, and *Composite* operations.
 
-The current implementation of these operations are implemented in the OAW templates [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/template/js/Operations.xpt?r=595#337 templates/js/Operations.xpt#expandOperationContents(model::ChainedOperation)] (for Javascript) and [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/template/php/EventTrigger.xpt?r=595#150 templates/php/EventTrigger.xpt#expandOperationContents(model::ChainedOperation)] (for PHP).
+*[IamlPrimitiveOperations Primitive Operations]* are the fundamental building blocks of application functionality.
 
-*Also see* [IamlCompositeOperations] for an overview of pre-defined composite operations.
+*[IamlCompositeOperations Composite Operations]* are built up with a combination of primitive operations, decisions, branching and loops. 
 
-==setPropertyToValue==
-
-|| *Sample model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/SetPropertyToValue.iaml SetPropertyToValue.iaml] ||
-|| *Runtime tests* || TODO ||
-|| *Added in* || [Model0_2 Model 0.2] ||
-
-This will set an [IamlApplicationElementProperties ApplicationElementProperty] (outgoing data edge) to a particular value (incoming data edge).
-
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/images/SetPropertyToValue-2.png
-
-==set==
-
-|| *Sample model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/Set.iaml Set.iaml] ||
-|| *Runtime tests* || TODO ||
-|| *Added in* || [Model0_3 Model 0.3] ||
-
-This will set a TemporaryVariable (outgoing data edge) to a particular value (incoming data edge).
-
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/images/Set-2.png
-
-==javascriptAlert==
-
-|| *Sample model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/JavascriptAlert.iaml JavascriptAlert.iaml] ||
-|| *Runtime tests* || TODO ||
-|| *Added in* || [Model0_2 Model 0.2] ||
-
-This will pop up a Javascript ''alert()'' box on the client, with the message provided by the incoming data edge.
-
-If this operation executes on the server, a PHP exception will occur (more documentation needed, and probably some validation tests).
-
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/images/JavascriptAlert-2.png
+In particular, primitive operations have a fixed semantics and cannot be changed (without modifying IAML inference and code generation logic); whereas composite operations have a default semantics, but can be [ModelInference changed if necessary].

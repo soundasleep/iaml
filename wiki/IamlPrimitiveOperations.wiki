@@ -1,0 +1,92 @@
+#summary Primitive operations in IAML.
+#labels EndUser
+
+=Introduction=
+
+*[IamlPrimitiveOperations Primitive Operations]* are the fundamental building blocks of application functionality. Their intent is based on their _name_, and we summarise these operations below.
+
+The current implementation of these operations are implemented in the OAW templates [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/template/js/Operations.xpt?r=595#337 templates/js/Operations.xpt#expandOperationContents(model::PrimitiveOperation)] (for Javascript) and [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/template/php/EventTrigger.xpt?r=595#150 templates/php/EventTrigger.xpt#expandOperationContents(model::PrimitiveOperation)] (for PHP).
+
+Primitive operations have a fixed semantics and cannot be changed (without modifying IAML inference and code generation logic).
+
+*Also see* [IamlCompositeOperations] for an overview of pre-defined composite operations.
+
+==setPropertyToValue==
+
+|| *Sample model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/SetPropertyToValue.iaml SetPropertyToValue.iaml] ||
+|| *Runtime tests* || TODO ||
+|| *Added in* || [Model0_2 Model 0.2] ||
+
+This will set an [IamlApplicationElementProperties ApplicationElementProperty] (outgoing data edge) to a particular value (incoming data edge).
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/images/SetPropertyToValue-2.png
+
+==set==
+
+|| *Sample model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/Set.iaml Set.iaml] ||
+|| *Runtime tests* || TODO ||
+|| *Added in* || [Model0_3 Model 0.3] ||
+
+This will set a TemporaryVariable (outgoing data edge) to a particular value (incoming data edge).
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/images/Set-2.png
+
+==javascriptAlert==
+
+|| *Sample model* || [http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/JavascriptAlert.iaml JavascriptAlert.iaml] ||
+|| *Runtime tests* || TODO ||
+|| *Added in* || [Model0_2 Model 0.2] ||
+
+This will pop up a Javascript ''alert()'' box on the client, with the message provided by the incoming data edge.
+
+If this operation executes on the server, a PHP exception will occur (more documentation needed, and probably some validation tests).
+
+http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/examples/requirements/operations/images/JavascriptAlert-2.png
+
+==save==
+
+  TODO: Incomplete documentation.
+
+Part of a domain object instance. Saves the current instance to the domain store.
+
+==new==
+
+  TODO: Incomplete documentation.
+
+Part of a domain object instance. Creates a new instance of the object from the NewInstanceWire or SelectWire.
+
+==exists?==
+
+  TODO: Incomplete documentation.
+
+Part of a domain object instance. Returns true if the current instance actually exists.
+
+==equal?==
+
+  TODO: Incomplete documentation.
+
+Returns true if the incoming parameters are all equal.
+
+==add role==
+
+  TODO: Incomplete documentation.
+
+Part of a UserInstance. Adds the given Role (parameter) to the given UserInstance.
+
+==add permission==
+
+  TODO: Incomplete documentation.
+
+Part of a UserInstance. Adds the given Permission (parameter) to the given UserInstance.
+
+==remove role==
+
+  TODO: Incomplete documentation.
+
+Part of a UserInstance. Removes the given Role (parameter) from the given UserInstance.
+
+==remove role==
+
+  TODO: Incomplete documentation.
+
+Part of a UserInstance. Removes the given Permission (parameter) from the given UserInstance.

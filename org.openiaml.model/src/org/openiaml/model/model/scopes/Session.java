@@ -9,6 +9,7 @@ package org.openiaml.model.model.scopes;
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -35,10 +36,10 @@ import org.openiaml.model.model.WireEdgesSource;
  * </p>
  *
  * @see org.openiaml.model.model.scopes.ScopesPackage#getSession()
- * @model annotation="http://openiaml.org/comment changed='0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, WireEdgesSource and WireEdgeDestination'"
+ * @model annotation="http://openiaml.org/comment changed='0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination'"
  * @generated
  */
-public interface Session extends NamedElement, ContainsOperations, Scope, ContainsWires, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination {
+public interface Session extends NamedElement, ContainsOperations, Scope, ContainsWires, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination, ContainsConditions {
 	/**
 	 * Returns the value of the '<em><b>Agents</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.VisitorAgent}.

@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -63,6 +65,7 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getAgents <em>Agents</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getProperties <em>Properties</em>}</li>
@@ -272,6 +275,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
+
+	/**
+	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Condition> conditions;
 
 	/**
 	 * The cached value of the '{@link #getAgents() <em>Agents</em>}' containment reference list.
@@ -517,6 +530,18 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Condition> getConditions() {
+		if (conditions == null) {
+			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ScopesPackage.SESSION__CONDITIONS);
+		}
+		return conditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
 			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, ScopesPackage.SESSION__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
@@ -654,6 +679,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__CONDITIONS:
+				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__AGENTS:
 				return ((InternalEList<?>)getAgents()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__CHILDREN:
@@ -704,6 +731,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getOutEdges();
 			case ScopesPackage.SESSION__IN_EDGES:
 				return getInEdges();
+			case ScopesPackage.SESSION__CONDITIONS:
+				return getConditions();
 			case ScopesPackage.SESSION__AGENTS:
 				return getAgents();
 			case ScopesPackage.SESSION__CHILDREN:
@@ -780,6 +809,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case ScopesPackage.SESSION__CONDITIONS:
+				getConditions().clear();
+				getConditions().addAll((Collection<? extends Condition>)newValue);
+				return;
 			case ScopesPackage.SESSION__AGENTS:
 				getAgents().clear();
 				getAgents().addAll((Collection<? extends VisitorAgent>)newValue);
@@ -853,6 +886,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case ScopesPackage.SESSION__CONDITIONS:
+				getConditions().clear();
+				return;
 			case ScopesPackage.SESSION__AGENTS:
 				getAgents().clear();
 				return;
@@ -907,6 +943,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return outEdges != null && !outEdges.isEmpty();
 			case ScopesPackage.SESSION__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case ScopesPackage.SESSION__CONDITIONS:
+				return conditions != null && !conditions.isEmpty();
 			case ScopesPackage.SESSION__AGENTS:
 				return agents != null && !agents.isEmpty();
 			case ScopesPackage.SESSION__CHILDREN:
@@ -976,6 +1014,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsConditions.class) {
+			switch (derivedFeatureID) {
+				case ScopesPackage.SESSION__CONDITIONS: return ModelPackage.CONTAINS_CONDITIONS__CONDITIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1033,6 +1077,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ScopesPackage.SESSION__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsConditions.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return ScopesPackage.SESSION__CONDITIONS;
 				default: return -1;
 			}
 		}

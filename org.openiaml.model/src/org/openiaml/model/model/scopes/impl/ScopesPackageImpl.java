@@ -244,6 +244,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsEventTriggers());
 		sessionEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		sessionEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		sessionEClass.getESuperTypes().add(theModelPackage.getContainsConditions());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -278,7 +279,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		  (sessionEClass, 
 		   source, 
 		   new String[] {
-			 "changed", "0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, WireEdgesSource and WireEdgeDestination"
+			 "changed", "0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination"
 		   });		
 		addAnnotation
 		  (getSession_Children(), 

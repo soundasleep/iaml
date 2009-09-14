@@ -224,8 +224,9 @@
         ecorePackage="iaml.ecore#//scopes">
       <genClasses ecoreClass="iaml.ecore#//scopes/Session">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/agents"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/components"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/children"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/properties"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/values"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"

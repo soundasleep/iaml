@@ -40,13 +40,26 @@
 		result = 
 	«ENDIF»
 
-	«IF to.eContainer.metaType.superTypes.contains( model::VisibleThing )-»
+	«IF model::VisibleThing.isInstance(to.eContainer)-»
 		«REM»VisibleThing includes InputTextField and Page«ENDREM»
 		«REM»
 			is both source and target on the same page? NOTE this
 			will also return true for Event-->Operation if they are
 			both on the same page.
 		«ENDREM»
+		«IF availableInCurrentScript(from, to)-»
+			«REM»// on current page (wire id = «id»)«ENDREM»
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);
+		«ELSE-»
+			«REM»// not on current page (wire id = «id»)«ENDREM»
+			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
+				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+			);
+			«REM»				
+			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
+			«ENDREM»
+		«ENDIF-»
+	«ELSEIF model::scopes::Session.isInstance(to.eContainer)-»
 		«IF availableInCurrentScript(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
 			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);

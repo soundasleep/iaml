@@ -149,8 +149,26 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSession_Components() {
+	public EReference getSession_Children() {
 		return (EReference)sessionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSession_Properties() {
+		return (EReference)sessionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSession_Values() {
+		return (EReference)sessionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -183,7 +201,9 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		// Create classes and their features
 		sessionEClass = createEClass(SESSION);
 		createEReference(sessionEClass, SESSION__AGENTS);
-		createEReference(sessionEClass, SESSION__COMPONENTS);
+		createEReference(sessionEClass, SESSION__CHILDREN);
+		createEReference(sessionEClass, SESSION__PROPERTIES);
+		createEReference(sessionEClass, SESSION__VALUES);
 	}
 
 	/**
@@ -220,13 +240,17 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		sessionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
 		sessionEClass.getESuperTypes().add(theModelPackage.getScope());
-		sessionEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsWires());
+		sessionEClass.getESuperTypes().add(theModelPackage.getContainsEventTriggers());
+		sessionEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
+		sessionEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSession_Agents(), theModelPackage.getVisitorAgent(), null, "agents", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSession_Components(), theModelPackage.getApplicationElement(), null, "components", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSession_Children(), theModelPackage.getApplicationElement(), null, "children", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSession_Properties(), theModelPackage.getApplicationElementProperty(), null, "properties", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSession_Values(), theModelPackage.getStaticValue(), null, "values", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -249,6 +273,30 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 			 "comment", "other scopes: iaml:InternetApplication, [...], iaml.visual:Page, iaml.visual:Frame, iaml:ApplicationElement, iaml:Operation",
 			 "comment2", "(it makes sense to put these scopes in here, because they are scoped in terms of visual terms)",
 			 "comment3", "some scopes aren\'t here: Host, Organisation, we can add these in later."
+		   });		
+		addAnnotation
+		  (sessionEClass, 
+		   source, 
+		   new String[] {
+			 "changed", "0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, WireEdgesSource and WireEdgeDestination"
+		   });		
+		addAnnotation
+		  (getSession_Children(), 
+		   source, 
+		   new String[] {
+			 "renamed", "0.4: from \'components\' to \'children\'"
+		   });		
+		addAnnotation
+		  (getSession_Properties(), 
+		   source, 
+		   new String[] {
+			 "added", "0.4"
+		   });		
+		addAnnotation
+		  (getSession_Values(), 
+		   source, 
+		   new String[] {
+			 "added", "0.4"
 		   });
 	}
 

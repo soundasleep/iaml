@@ -537,11 +537,30 @@
       <details key="comment2" value="(it makes sense to put these scopes in here, because they are scoped in terms of visual terms)"/>
       <details key="comment3" value="some scopes aren't here: Host, Organisation, we can add these in later."/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//VisibleThing #//ContainsWires">
+    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="changed" value="0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, WireEdgesSource and WireEdgeDestination"/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
           eType="#//VisitorAgent" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
-          eType="#//ApplicationElement" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+          eType="#//ApplicationElement" containment="true">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="renamed" value="0.4: from 'components' to 'children'"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//ApplicationElementProperty" containment="true">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="added" value="0.4"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+          eType="#//StaticValue" containment="true">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="added" value="0.4"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">

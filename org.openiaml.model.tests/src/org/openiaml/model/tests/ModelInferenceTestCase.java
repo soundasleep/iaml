@@ -200,6 +200,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @return
 	 */
 	protected CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions) {
+		final Class<?> caller = getClass();
+		
 		return new CreateMissingElementsWithDrools(handler, trackInsertions) {
 
 			@Override
@@ -234,7 +236,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				try {
 					BufferedWriter writer = new BufferedWriter(new FileWriter("inference-count.csv", true));
 					System.out.println(initial + " -> " + finalCount + "(" + diff + " ms)");
-					writer.write(initial + "," + finalCount + "," + diff + "\n");
+					writer.write(caller.getName() + "," + initial + "," + finalCount + "," + diff + "\n");
 					writer.close();
 				} catch (IOException e) {
 					throw new InferenceException(e);

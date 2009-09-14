@@ -24,9 +24,6 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
@@ -57,9 +54,6 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#isOverridden <em>Overridden</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainObjects <em>Domain Objects</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainViews <em>Domain Views</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainInstances <em>Domain Instances</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
@@ -222,36 +216,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainObjects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObject> domainObjects;
-
-	/**
-	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainViews()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DerivedView> domainViews;
-
-	/**
-	 * The cached value of the '{@link #getDomainInstances() <em>Domain Instances</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainInstances()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObjectInstance> domainInstances;
 
 	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
@@ -522,42 +486,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainObject> getDomainObjects() {
-		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS);
-		}
-		return domainObjects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DerivedView> getDomainViews() {
-		if (domainViews == null) {
-			domainViews = new EObjectContainmentEList<DerivedView>(DerivedView.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS);
-		}
-		return domainViews;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DomainObjectInstance> getDomainInstances() {
-		if (domainInstances == null) {
-			domainInstances = new EObjectContainmentEList<DomainObjectInstance>(DomainObjectInstance.class, this, ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES);
-		}
-		return domainInstances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Condition> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.INTERNET_APPLICATION__CONDITIONS);
@@ -681,12 +609,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
-				return ((InternalEList<?>)getDomainObjects()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
-				return ((InternalEList<?>)getDomainViews()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
-				return ((InternalEList<?>)getDomainInstances()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
@@ -731,12 +653,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getGeneratedElements();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				return isOverridden();
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
-				return getDomainObjects();
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
-				return getDomainViews();
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
-				return getDomainInstances();
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return getConditions();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
@@ -798,18 +714,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
-				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
-				getDomainViews().clear();
-				getDomainViews().addAll((Collection<? extends DerivedView>)newValue);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
-				getDomainInstances().clear();
-				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				getConditions().clear();
@@ -880,15 +784,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
-				getDomainObjects().clear();
-				return;
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
-				getDomainViews().clear();
-				return;
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
-				getDomainInstances().clear();
-				return;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				getConditions().clear();
 				return;
@@ -942,12 +837,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS:
-				return domainObjects != null && !domainObjects.isEmpty();
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS:
-				return domainViews != null && !domainViews.isEmpty();
-			case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES:
-				return domainInstances != null && !domainInstances.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
@@ -1009,9 +898,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS: return ModelPackage.SCOPE__DOMAIN_OBJECTS;
-				case ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS: return ModelPackage.SCOPE__DOMAIN_VIEWS;
-				case ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES: return ModelPackage.SCOPE__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
@@ -1067,9 +953,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_OBJECTS;
-				case ModelPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.INTERNET_APPLICATION__DOMAIN_VIEWS;
-				case ModelPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.INTERNET_APPLICATION__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

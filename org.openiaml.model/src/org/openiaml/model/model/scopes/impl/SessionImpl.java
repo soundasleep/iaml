@@ -25,9 +25,6 @@ import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -58,9 +55,6 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#isOverridden <em>Overridden</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getDomainObjects <em>Domain Objects</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getDomainViews <em>Domain Views</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getDomainInstances <em>Domain Instances</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
@@ -205,36 +199,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainObjects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObject> domainObjects;
-
-	/**
-	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainViews()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DerivedView> domainViews;
-
-	/**
-	 * The cached value of the '{@link #getDomainInstances() <em>Domain Instances</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainInstances()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObjectInstance> domainInstances;
 
 	/**
 	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
@@ -446,42 +410,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainObject> getDomainObjects() {
-		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ScopesPackage.SESSION__DOMAIN_OBJECTS);
-		}
-		return domainObjects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DerivedView> getDomainViews() {
-		if (domainViews == null) {
-			domainViews = new EObjectContainmentEList<DerivedView>(DerivedView.class, this, ScopesPackage.SESSION__DOMAIN_VIEWS);
-		}
-		return domainViews;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DomainObjectInstance> getDomainInstances() {
-		if (domainInstances == null) {
-			domainInstances = new EObjectContainmentEList<DomainObjectInstance>(DomainObjectInstance.class, this, ScopesPackage.SESSION__DOMAIN_INSTANCES);
-		}
-		return domainInstances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<WireEdge> getWires() {
 		if (wires == null) {
 			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ScopesPackage.SESSION__WIRES);
@@ -665,12 +593,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
-			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
-				return ((InternalEList<?>)getDomainObjects()).basicRemove(otherEnd, msgs);
-			case ScopesPackage.SESSION__DOMAIN_VIEWS:
-				return ((InternalEList<?>)getDomainViews()).basicRemove(otherEnd, msgs);
-			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
-				return ((InternalEList<?>)getDomainInstances()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
@@ -717,12 +639,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getGeneratedElements();
 			case ScopesPackage.SESSION__OVERRIDDEN:
 				return isOverridden();
-			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
-				return getDomainObjects();
-			case ScopesPackage.SESSION__DOMAIN_VIEWS:
-				return getDomainViews();
-			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
-				return getDomainInstances();
 			case ScopesPackage.SESSION__WIRES:
 				return getWires();
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
@@ -780,18 +696,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return;
 			case ScopesPackage.SESSION__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
-				return;
-			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
-				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
-				return;
-			case ScopesPackage.SESSION__DOMAIN_VIEWS:
-				getDomainViews().clear();
-				getDomainViews().addAll((Collection<? extends DerivedView>)newValue);
-				return;
-			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
-				getDomainInstances().clear();
-				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
 				return;
 			case ScopesPackage.SESSION__WIRES:
 				getWires().clear();
@@ -865,15 +769,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
-			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
-				getDomainObjects().clear();
-				return;
-			case ScopesPackage.SESSION__DOMAIN_VIEWS:
-				getDomainViews().clear();
-				return;
-			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
-				getDomainInstances().clear();
-				return;
 			case ScopesPackage.SESSION__WIRES:
 				getWires().clear();
 				return;
@@ -929,12 +824,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ScopesPackage.SESSION__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
-			case ScopesPackage.SESSION__DOMAIN_OBJECTS:
-				return domainObjects != null && !domainObjects.isEmpty();
-			case ScopesPackage.SESSION__DOMAIN_VIEWS:
-				return domainViews != null && !domainViews.isEmpty();
-			case ScopesPackage.SESSION__DOMAIN_INSTANCES:
-				return domainInstances != null && !domainInstances.isEmpty();
 			case ScopesPackage.SESSION__WIRES:
 				return wires != null && !wires.isEmpty();
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
@@ -979,9 +868,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
-				case ScopesPackage.SESSION__DOMAIN_OBJECTS: return ModelPackage.SCOPE__DOMAIN_OBJECTS;
-				case ScopesPackage.SESSION__DOMAIN_VIEWS: return ModelPackage.SCOPE__DOMAIN_VIEWS;
-				case ScopesPackage.SESSION__DOMAIN_INSTANCES: return ModelPackage.SCOPE__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
@@ -1045,9 +931,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.SCOPE__DOMAIN_OBJECTS: return ScopesPackage.SESSION__DOMAIN_OBJECTS;
-				case ModelPackage.SCOPE__DOMAIN_VIEWS: return ScopesPackage.SESSION__DOMAIN_VIEWS;
-				case ModelPackage.SCOPE__DOMAIN_INSTANCES: return ScopesPackage.SESSION__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

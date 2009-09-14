@@ -133,11 +133,7 @@
     <genClasses ecoreClass="iaml.ecore#//VisitorAgent">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//VisitorAgent/properties"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//Scope">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/domainObjects"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/domainViews"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/domainInstances"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//Scope"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Condition"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeCondition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/nodes"/>

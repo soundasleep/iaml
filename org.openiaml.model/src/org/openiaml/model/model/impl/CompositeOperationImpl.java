@@ -23,9 +23,6 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.DataFlowEdge;
-import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -45,9 +42,6 @@ import org.openiaml.model.model.TemporaryVariable;
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#isOverridden <em>Overridden</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDomainObjects <em>Domain Objects</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDomainViews <em>Domain Views</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDomainInstances <em>Domain Instances</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDataEdges <em>Data Edges</em>}</li>
@@ -99,36 +93,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainObjects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObject> domainObjects;
-
-	/**
-	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainViews()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DerivedView> domainViews;
-
-	/**
-	 * The cached value of the '{@link #getDomainInstances() <em>Domain Instances</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainInstances()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObjectInstance> domainInstances;
 
 	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
@@ -259,42 +223,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainObject> getDomainObjects() {
-		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS);
-		}
-		return domainObjects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DerivedView> getDomainViews() {
-		if (domainViews == null) {
-			domainViews = new EObjectContainmentEList<DerivedView>(DerivedView.class, this, ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS);
-		}
-		return domainViews;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DomainObjectInstance> getDomainInstances() {
-		if (domainInstances == null) {
-			domainInstances = new EObjectContainmentEList<DomainObjectInstance>(DomainObjectInstance.class, this, ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES);
-		}
-		return domainInstances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Condition> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.COMPOSITE_OPERATION__CONDITIONS);
@@ -389,12 +317,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS:
-				return ((InternalEList<?>)getDomainObjects()).basicRemove(otherEnd, msgs);
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS:
-				return ((InternalEList<?>)getDomainViews()).basicRemove(otherEnd, msgs);
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
-				return ((InternalEList<?>)getDomainInstances()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
@@ -425,12 +347,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				return getGeneratedElements();
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
 				return isOverridden();
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS:
-				return getDomainObjects();
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS:
-				return getDomainViews();
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
-				return getDomainInstances();
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				return getConditions();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
@@ -466,18 +382,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS:
-				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS:
-				getDomainViews().clear();
-				getDomainViews().addAll((Collection<? extends DerivedView>)newValue);
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
-				getDomainInstances().clear();
-				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				getConditions().clear();
@@ -524,15 +428,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS:
-				getDomainObjects().clear();
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS:
-				getDomainViews().clear();
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
-				getDomainInstances().clear();
-				return;
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				getConditions().clear();
 				return;
@@ -569,12 +464,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS:
-				return domainObjects != null && !domainObjects.isEmpty();
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS:
-				return domainViews != null && !domainViews.isEmpty();
-			case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES:
-				return domainInstances != null && !domainInstances.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
@@ -613,9 +502,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS: return ModelPackage.SCOPE__DOMAIN_OBJECTS;
-				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS: return ModelPackage.SCOPE__DOMAIN_VIEWS;
-				case ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES: return ModelPackage.SCOPE__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}
@@ -650,9 +536,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.SCOPE__DOMAIN_OBJECTS: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_OBJECTS;
-				case ModelPackage.SCOPE__DOMAIN_VIEWS: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_VIEWS;
-				case ModelPackage.SCOPE__DOMAIN_INSTANCES: return ModelPackage.COMPOSITE_OPERATION__DOMAIN_INSTANCES;
 				default: return -1;
 			}
 		}

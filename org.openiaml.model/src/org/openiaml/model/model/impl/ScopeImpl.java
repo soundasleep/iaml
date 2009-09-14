@@ -15,12 +15,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.openiaml.model.model.DerivedView;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Scope;
@@ -34,9 +30,6 @@ import org.openiaml.model.model.Scope;
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#isOverridden <em>Overridden</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getDomainObjects <em>Domain Objects</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getDomainViews <em>Domain Views</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getDomainInstances <em>Domain Instances</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,36 +65,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getDomainObjects() <em>Domain Objects</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainObjects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObject> domainObjects;
-
-	/**
-	 * The cached value of the '{@link #getDomainViews() <em>Domain Views</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainViews()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DerivedView> domainViews;
-
-	/**
-	 * The cached value of the '{@link #getDomainInstances() <em>Domain Instances</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomainInstances()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObjectInstance> domainInstances;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,42 +123,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DomainObject> getDomainObjects() {
-		if (domainObjects == null) {
-			domainObjects = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.SCOPE__DOMAIN_OBJECTS);
-		}
-		return domainObjects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DerivedView> getDomainViews() {
-		if (domainViews == null) {
-			domainViews = new EObjectContainmentEList<DerivedView>(DerivedView.class, this, ModelPackage.SCOPE__DOMAIN_VIEWS);
-		}
-		return domainViews;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DomainObjectInstance> getDomainInstances() {
-		if (domainInstances == null) {
-			domainInstances = new EObjectContainmentEList<DomainObjectInstance>(DomainObjectInstance.class, this, ModelPackage.SCOPE__DOMAIN_INSTANCES);
-		}
-		return domainInstances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -216,12 +143,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 		switch (featureID) {
 			case ModelPackage.SCOPE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
-			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
-				return ((InternalEList<?>)getDomainObjects()).basicRemove(otherEnd, msgs);
-			case ModelPackage.SCOPE__DOMAIN_VIEWS:
-				return ((InternalEList<?>)getDomainViews()).basicRemove(otherEnd, msgs);
-			case ModelPackage.SCOPE__DOMAIN_INSTANCES:
-				return ((InternalEList<?>)getDomainInstances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -238,12 +159,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return getGeneratedElements();
 			case ModelPackage.SCOPE__OVERRIDDEN:
 				return isOverridden();
-			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
-				return getDomainObjects();
-			case ModelPackage.SCOPE__DOMAIN_VIEWS:
-				return getDomainViews();
-			case ModelPackage.SCOPE__DOMAIN_INSTANCES:
-				return getDomainInstances();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -264,18 +179,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
 				return;
-			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
-				getDomainObjects().clear();
-				getDomainObjects().addAll((Collection<? extends DomainObject>)newValue);
-				return;
-			case ModelPackage.SCOPE__DOMAIN_VIEWS:
-				getDomainViews().clear();
-				getDomainViews().addAll((Collection<? extends DerivedView>)newValue);
-				return;
-			case ModelPackage.SCOPE__DOMAIN_INSTANCES:
-				getDomainInstances().clear();
-				getDomainInstances().addAll((Collection<? extends DomainObjectInstance>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -294,15 +197,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
-			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
-				getDomainObjects().clear();
-				return;
-			case ModelPackage.SCOPE__DOMAIN_VIEWS:
-				getDomainViews().clear();
-				return;
-			case ModelPackage.SCOPE__DOMAIN_INSTANCES:
-				getDomainInstances().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -319,12 +213,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.SCOPE__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
-			case ModelPackage.SCOPE__DOMAIN_OBJECTS:
-				return domainObjects != null && !domainObjects.isEmpty();
-			case ModelPackage.SCOPE__DOMAIN_VIEWS:
-				return domainViews != null && !domainViews.isEmpty();
-			case ModelPackage.SCOPE__DOMAIN_INSTANCES:
-				return domainInstances != null && !domainInstances.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -232,40 +232,13 @@ public interface VisualPackage extends EPackage {
 	int PAGE__PARAMETERS = ModelPackage.VISIBLE_THING__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__DOMAIN_INSTANCES = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE__URL = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 3;
+	int PAGE__URL = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Page</em>' class.
@@ -274,7 +247,7 @@ public interface VisualPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 4;
+	int PAGE_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.visual.impl.InputFormImpl <em>Input Form</em>}' class.
@@ -993,40 +966,13 @@ public interface VisualPackage extends EPackage {
 	int FRAME__PARAMETERS = ModelPackage.VISIBLE_THING__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Domain Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FRAME__DOMAIN_OBJECTS = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Domain Views</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FRAME__DOMAIN_VIEWS = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Domain Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FRAME__DOMAIN_INSTANCES = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Frame</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 3;
+	int FRAME_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
 
 
 	/**

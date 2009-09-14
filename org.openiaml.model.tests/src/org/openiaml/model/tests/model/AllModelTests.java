@@ -20,6 +20,7 @@ public class AllModelTests {
         TestSuite suite = new TestSuite("Model Quality");
 
         suite.addTestSuite(ModelTestCase.class);
+        suite.addTestSuite(ContainmentTestCase.class);
         
         return suite; 
    }

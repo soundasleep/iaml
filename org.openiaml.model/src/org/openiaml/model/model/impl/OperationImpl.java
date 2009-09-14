@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -606,11 +605,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				default: return -1;
 			}
 		}
-		if (baseClass == ActivityNode.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == DataFlowEdgesSource.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.OPERATION__OUT_FLOWS: return ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS;
@@ -651,11 +645,6 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 		if (baseClass == ExecutionEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.EXECUTION_EDGE_DESTINATION__IN_EXECUTIONS: return ModelPackage.OPERATION__IN_EXECUTIONS;
-				default: return -1;
-			}
-		}
-		if (baseClass == ActivityNode.class) {
-			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

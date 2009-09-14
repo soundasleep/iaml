@@ -7,7 +7,6 @@
 package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
-import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -23,7 +22,6 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.InternetApplication#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getRuntimeUrl <em>Runtime Url</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getSessions <em>Sessions</em>}</li>
- *   <li>{@link org.openiaml.model.model.InternetApplication#getLoginHandlers <em>Login Handlers</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,22 +122,5 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 * @generated
 	 */
 	EList<Session> getSessions();
-
-	/**
-	 * Returns the value of the '<em><b>Login Handlers</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.components.LoginHandler}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Login Handlers</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Login Handlers</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getInternetApplication_LoginHandlers()
-	 * @model containment="true"
-	 *        annotation="http://openiaml.org/comment added='0.2'"
-	 * @generated
-	 */
-	EList<LoginHandler> getLoginHandlers();
 
 } // InternetApplication

@@ -51,7 +51,7 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" eSuperTypes="#//GeneratedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//ActivityNode #//DataFlowEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//DataFlowEdgesSource">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
   </eClassifiers>
@@ -146,12 +146,6 @@
         defaultValueLiteral="http://localhost:8080/output/"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
         eType="#//scopes/Session" containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="loginHandlers" upperBound="-1"
-        eType="#//components/LoginHandler" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
@@ -309,7 +303,7 @@
       <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true" eSuperTypes="#//WireEdgesSource #//DataFlowEdgesSource #//ActivityNode #//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true" eSuperTypes="#//WireEdgesSource #//DataFlowEdgesSource #//NamedElement">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="added in 0.2"/>
     </eAnnotations>

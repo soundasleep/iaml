@@ -10,9 +10,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
-import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
@@ -21,7 +18,6 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
-import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.scopes.ScopesPackage;
@@ -104,18 +100,14 @@ public class ScopesSwitch<T> {
 			case ScopesPackage.SESSION: {
 				Session session = (Session)theEObject;
 				T result = caseSession(session);
-				if (result == null) result = caseScope(session);
-				if (result == null) result = caseVisibleThing(session);
-				if (result == null) result = caseGeneratedElement(session);
-				if (result == null) result = caseApplicationElementContainer(session);
-				if (result == null) result = caseApplicationElement(session);
 				if (result == null) result = caseNamedElement(session);
 				if (result == null) result = caseContainsOperations(session);
-				if (result == null) result = caseGeneratesElements(session);
+				if (result == null) result = caseScope(session);
 				if (result == null) result = caseContainsEventTriggers(session);
 				if (result == null) result = caseWireEdgesSource(session);
 				if (result == null) result = caseWireEdgeDestination(session);
-				if (result == null) result = caseContainsConditions(session);
+				if (result == null) result = caseGeneratedElement(session);
+				if (result == null) result = caseGeneratesElements(session);
 				if (result == null) result = caseShouldntContainWires(session);
 				if (result == null) result = caseContainsWires(session);
 				if (result == null) result = defaultCase(theEObject);
@@ -141,21 +133,6 @@ public class ScopesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsEventTriggers(ContainsEventTriggers object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Contains Wires</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -167,6 +144,21 @@ public class ScopesSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsWires(ContainsWires object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsEventTriggers(ContainsEventTriggers object) {
 		return null;
 	}
 
@@ -216,21 +208,6 @@ public class ScopesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Conditions</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsConditions(ContainsConditions object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Generates Elements</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -242,51 +219,6 @@ public class ScopesSwitch<T> {
 	 * @generated
 	 */
 	public T caseGeneratesElements(GeneratesElements object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Application Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Application Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseApplicationElement(ApplicationElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Application Element Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Application Element Container</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseApplicationElementContainer(ApplicationElementContainer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visible Thing</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visible Thing</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVisibleThing(VisibleThing object) {
 		return null;
 	}
 

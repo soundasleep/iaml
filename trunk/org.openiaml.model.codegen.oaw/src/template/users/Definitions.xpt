@@ -10,9 +10,7 @@
  */
 «DEFINE accessControlHandlerDefinitions(Boolean php) FOR model::scopes::Session»
 	«IF php»
-		«REM»TODO clean up the metamodel, as an ACH can be either in 'children' or 'components' right now«ENDREM»
 		«EXPAND checkAccessDefinition FOREACH children.typeSelect(model::components::AccessControlHandler)»
-		«EXPAND checkAccessDefinition FOREACH components.typeSelect(model::components::AccessControlHandler)»
 	«ELSE»
 		/* no client-side access control handler definitions for Session */
 	«ENDIF»

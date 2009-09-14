@@ -117,7 +117,7 @@ context model::wires::SelectWire ERROR "A SelectWire has incoming Parameters, bu
 	inEdges.typeSelect(model::wires::ParameterWire).size == 0 || (query != null && query.length > 0); 
 
 context model::scopes::Session ERROR "A Session can only contain one LoginHandler" :
-	children.toSet().union(components).typeSelect(model::components::LoginHandler).size <= 1;
+	children.typeSelect(model::components::LoginHandler).size <= 1;
 
 context model::visual::Page ERROR "A Page cannot contain a LoginHandler" :
 	children.typeSelect(model::components::LoginHandler).size == 0;

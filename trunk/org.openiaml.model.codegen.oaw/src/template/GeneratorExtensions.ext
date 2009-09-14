@@ -115,8 +115,11 @@ availableInCurrentScript(model::WireEdgesSource source, model::WireEdgeDestinati
 allContainerOperations(model::ApplicationElementContainer this) :
 	// we have to toSet() it so that we *clone* the list of operations, and not
 	// add operations to the list directly
-	// see http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=11142 
-	operations.toSet().addAll( children.allContainerOperations() ).addAll( possibleParentOperations(eContainer) );
+	// see http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=11142
+	operations.toSet().union( children.allContainerOperations() ).union( possibleParentOperations(eContainer) );
+
+allContainerOperations(model::scopes::Session this) :
+	operations.toSet().union( children.allContainerOperations() ).union( possibleParentOperations(eContainer) );
 
 allContainerOperations(model::ApplicationElement this) :
 	operations;
@@ -125,7 +128,7 @@ allContainerOperations(model::ContainsOperations this) :
 	operations;
 
 allContainerOperations(model::InternetApplication this) :
-	 operations.toSet().addAll( sessions.allContainerOperations() ).addAll( children.allContainerOperations() );	 
+	 operations.toSet().union( sessions.allContainerOperations() ).union( children.allContainerOperations() );	 
 		
 /** All of the ApplicationElementProperties stored within this InternetApplication */
 List[model::ApplicationElementProperty] allApplicationElementProperties(model::InternetApplication this) :

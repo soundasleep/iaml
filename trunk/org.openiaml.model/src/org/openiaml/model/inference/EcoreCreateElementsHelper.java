@@ -81,6 +81,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return fieldValue;
 	}
 
+	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, Session container) throws InferenceException {
+		ApplicationElementProperty fieldValue = (ApplicationElementProperty) createElement( container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ScopesPackage.eINSTANCE.getSession_Properties() );
+		setGeneratedBy(fieldValue, by);
+		return fieldValue;
+	}
+
 	/**
 	 * Convenience method that sets isGenerated and generatedBy to the
 	 * appropriate values.
@@ -325,6 +331,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 
+	public Page generatedPage(GeneratesElements by, Session container) throws InferenceException {
+		Page page = createPage(container);
+		setGeneratedBy(page, by);
+		return page;
+	}
+
 	public Session generatedSession(InternetApplication by, InternetApplication container) throws InferenceException {
 		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getInternetApplication_Sessions() );
 		setGeneratedBy(session, by);
@@ -377,6 +389,11 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 
+	public Page createPage(Session container) throws InferenceException {
+		Page page = (Page) createElement( container, VisualPackage.eINSTANCE.getPage(), ScopesPackage.eINSTANCE.getSession_Children() );
+		return page;
+	}
+	
 	public SyncWire createSyncWire(ContainsWires container, WireEdgesSource source,
 			WireEdgeDestination target) throws InferenceException {
 		SyncWire wire = (SyncWire) createRelationship(container, WiresPackage.eINSTANCE.getSyncWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
@@ -417,14 +434,32 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return object;
 	}
 
+	public DomainObjectInstance generatedDomainObjectInstance(GeneratesElements by, Session container) throws InferenceException {
+		DomainObjectInstance object = (DomainObjectInstance) createElement( container, ModelPackage.eINSTANCE.getDomainObjectInstance(), ScopesPackage.eINSTANCE.getSession_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+
 	public UserInstance generatedUserInstance(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
 		UserInstance object = (UserInstance) createElement( container, UsersPackage.eINSTANCE.getUserInstance(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
 		setGeneratedBy(object, by);
 		return object;
 	}
 	
+	public UserInstance generatedUserInstance(GeneratesElements by, Session container) throws InferenceException {
+		UserInstance object = (UserInstance) createElement( container, UsersPackage.eINSTANCE.getUserInstance(), ScopesPackage.eINSTANCE.getSession_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+	
 	public LoginHandler generatedLoginHandler(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
 		LoginHandler object = (LoginHandler) createElement( container, ComponentsPackage.eINSTANCE.getLoginHandler(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+	
+	public LoginHandler generatedLoginHandler(GeneratesElements by, Session container) throws InferenceException {
+		LoginHandler object = (LoginHandler) createElement( container, ComponentsPackage.eINSTANCE.getLoginHandler(), ScopesPackage.eINSTANCE.getSession_Children() );
 		setGeneratedBy(object, by);
 		return object;
 	}

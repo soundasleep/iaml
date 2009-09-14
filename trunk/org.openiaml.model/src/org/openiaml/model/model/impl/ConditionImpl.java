@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -514,11 +513,6 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 				default: return -1;
 			}
 		}
-		if (baseClass == ActivityNode.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.CONDITION__NAME: return ModelPackage.NAMED_ELEMENT__NAME;
@@ -547,11 +541,6 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 				case ModelPackage.GENERATED_ELEMENT__IS_GENERATED: return ModelPackage.CONDITION__IS_GENERATED;
 				case ModelPackage.GENERATED_ELEMENT__ID: return ModelPackage.CONDITION__ID;
 				case ModelPackage.GENERATED_ELEMENT__GENERATED_RULE: return ModelPackage.CONDITION__GENERATED_RULE;
-				default: return -1;
-			}
-		}
-		if (baseClass == ActivityNode.class) {
-			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

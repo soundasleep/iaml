@@ -18,5 +18,5 @@ package org.openiaml.model.model;
  *        annotation="http://openiaml.org/comment comment='added in 0.2'"
  * @generated
  */
-public interface Condition extends WireEdgesSource, DataFlowEdgesSource, ActivityNode, NamedElement {
+public interface Condition extends WireEdgesSource, DataFlowEdgesSource, NamedElement {
 } // Condition

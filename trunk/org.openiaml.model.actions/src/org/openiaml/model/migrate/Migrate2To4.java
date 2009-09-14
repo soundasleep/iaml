@@ -38,10 +38,13 @@ import org.w3c.dom.Node;
  *   <li>Domain element changes: (requires migration)
  *   <ol>
  *     <li>ChainedOperation --> PrimitiveOperation</li>
+ *     <li>SingleOperation --> PrimitiveOperation</li>
  *   </ol></li>
  *   <li>
- *   <ol>Removed elements: (requires migration)
- *     <li>SingleOperation --> ChainedOperation (?)</li>
+ *   <ol>Removed attributes:
+ *     <li>Scope.domainObjects</li>
+ *     <li>Scope.domainViews</li>
+ *     <li>Scope.domainInstances</li>
  *   </ol></li>
  * </ol>
  *

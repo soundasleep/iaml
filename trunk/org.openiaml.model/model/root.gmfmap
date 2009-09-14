@@ -240,10 +240,12 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/loginHandlers"/>
+        href="iaml.ecore#//InternetApplication/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//components/LoginHandler"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( LoginHandler )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel

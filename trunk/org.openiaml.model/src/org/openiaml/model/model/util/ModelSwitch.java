@@ -223,7 +223,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(operation);
 				if (result == null) result = caseDataFlowEdgeDestination(operation);
 				if (result == null) result = caseExecutionEdgeDestination(operation);
-				if (result == null) result = caseActivityNode(operation);
 				if (result == null) result = caseDataFlowEdgesSource(operation);
 				if (result == null) result = caseGeneratedElement(operation);
 				if (result == null) result = defaultCase(theEObject);
@@ -249,7 +248,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(primitiveOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(primitiveOperation);
 				if (result == null) result = caseExecutionEdgeDestination(primitiveOperation);
-				if (result == null) result = caseActivityNode(primitiveOperation);
 				if (result == null) result = caseDataFlowEdgesSource(primitiveOperation);
 				if (result == null) result = caseShouldntContainWires(primitiveOperation);
 				if (result == null) result = caseGeneratedElement(primitiveOperation);
@@ -272,7 +270,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(compositeOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(compositeOperation);
 				if (result == null) result = caseExecutionEdgeDestination(compositeOperation);
-				if (result == null) result = caseActivityNode(compositeOperation);
 				if (result == null) result = caseDataFlowEdgesSource(compositeOperation);
 				if (result == null) result = caseShouldntContainWires(compositeOperation);
 				if (result == null) result = caseGeneratedElement(compositeOperation);
@@ -547,7 +544,6 @@ public class ModelSwitch<T> {
 				T result = caseCondition(condition);
 				if (result == null) result = caseWireEdgesSource(condition);
 				if (result == null) result = caseDataFlowEdgesSource(condition);
-				if (result == null) result = caseActivityNode(condition);
 				if (result == null) result = caseNamedElement(condition);
 				if (result == null) result = caseShouldntContainWires(condition);
 				if (result == null) result = caseGeneratedElement(condition);
@@ -563,7 +559,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseGeneratesElements(compositeCondition);
 				if (result == null) result = caseWireEdgesSource(compositeCondition);
 				if (result == null) result = caseDataFlowEdgesSource(compositeCondition);
-				if (result == null) result = caseActivityNode(compositeCondition);
 				if (result == null) result = caseNamedElement(compositeCondition);
 				if (result == null) result = caseShouldntContainWires(compositeCondition);
 				if (result == null) result = caseGeneratedElement(compositeCondition);

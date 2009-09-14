@@ -157,7 +157,6 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseNamedElement(decisionOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(decisionOperation);
 				if (result == null) result = caseExecutionEdgeDestination(decisionOperation);
-				if (result == null) result = caseActivityNode(decisionOperation);
 				if (result == null) result = caseDataFlowEdgesSource(decisionOperation);
 				if (result == null) result = caseShouldntContainWires(decisionOperation);
 				if (result == null) result = caseGeneratedElement(decisionOperation);
@@ -174,7 +173,6 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseDataFlowEdgeDestination(decisionCondition);
 				if (result == null) result = caseWireEdgesSource(decisionCondition);
 				if (result == null) result = caseDataFlowEdgesSource(decisionCondition);
-				if (result == null) result = caseActivityNode(decisionCondition);
 				if (result == null) result = caseNamedElement(decisionCondition);
 				if (result == null) result = caseShouldntContainWires(decisionCondition);
 				if (result == null) result = caseGeneratedElement(decisionCondition);

@@ -881,11 +881,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				default: return -1;
 			}
 		}
-		if (baseClass == ActivityNode.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.COMPOSITE_CONDITION__NAME: return ModelPackage.NAMED_ELEMENT__NAME;
@@ -943,11 +938,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				case ModelPackage.GENERATED_ELEMENT__IS_GENERATED: return ModelPackage.COMPOSITE_CONDITION__IS_GENERATED;
 				case ModelPackage.GENERATED_ELEMENT__ID: return ModelPackage.COMPOSITE_CONDITION__ID;
 				case ModelPackage.GENERATED_ELEMENT__GENERATED_RULE: return ModelPackage.COMPOSITE_CONDITION__GENERATED_RULE;
-				default: return -1;
-			}
-		}
-		if (baseClass == ActivityNode.class) {
-			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

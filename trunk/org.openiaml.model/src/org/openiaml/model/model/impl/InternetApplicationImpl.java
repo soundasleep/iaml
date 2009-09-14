@@ -34,7 +34,6 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -60,7 +59,6 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRuntimeUrl <em>Runtime Url</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getSessions <em>Sessions</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getLoginHandlers <em>Login Handlers</em>}</li>
  * </ul>
  * </p>
  *
@@ -286,16 +284,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<Session> sessions;
-
-	/**
-	 * The cached value of the '{@link #getLoginHandlers() <em>Login Handlers</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLoginHandlers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<LoginHandler> loginHandlers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -567,18 +555,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<LoginHandler> getLoginHandlers() {
-		if (loginHandlers == null) {
-			loginHandlers = new EObjectContainmentEList<LoginHandler>(LoginHandler.class, this, ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS);
-		}
-		return loginHandlers;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -619,8 +595,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getDomainStores()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				return ((InternalEList<?>)getSessions()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
-				return ((InternalEList<?>)getLoginHandlers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -665,8 +639,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getRuntimeUrl();
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				return getSessions();
-			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
-				return getLoginHandlers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -738,10 +710,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				getSessions().clear();
 				getSessions().addAll((Collection<? extends Session>)newValue);
 				return;
-			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
-				getLoginHandlers().clear();
-				getLoginHandlers().addAll((Collection<? extends LoginHandler>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -802,9 +770,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				getSessions().clear();
 				return;
-			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
-				getLoginHandlers().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -849,8 +814,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return RUNTIME_URL_EDEFAULT == null ? runtimeUrl != null : !RUNTIME_URL_EDEFAULT.equals(runtimeUrl);
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				return sessions != null && !sessions.isEmpty();
-			case ModelPackage.INTERNET_APPLICATION__LOGIN_HANDLERS:
-				return loginHandlers != null && !loginHandlers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

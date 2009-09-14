@@ -537,9 +537,9 @@
       <details key="comment2" value="(it makes sense to put these scopes in here, because they are scoped in terms of visual terms)"/>
       <details key="comment3" value="some scopes aren't here: Host, Organisation, we can add these in later."/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination #//ContainsConditions">
       <eAnnotations source="http://openiaml.org/comment">
-        <details key="changed" value="0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, WireEdgesSource and WireEdgeDestination"/>
+        <details key="changed" value="0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
           eType="#//VisitorAgent" containment="true"/>

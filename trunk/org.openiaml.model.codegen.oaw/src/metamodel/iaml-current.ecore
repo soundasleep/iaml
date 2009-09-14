@@ -305,16 +305,9 @@
         eType="#//ApplicationElementProperty"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domainObjects" upperBound="-1"
-        eType="#//DomainObject" containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="changed" value="0.2 to extend the abstract counterpart"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domainViews" upperBound="-1"
-        eType="#//DerivedView" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domainInstances" upperBound="-1"
-        eType="#//DomainObjectInstance" containment="true"/>
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed"/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true" eSuperTypes="#//WireEdgesSource #//DataFlowEdgesSource #//ActivityNode #//NamedElement">
     <eAnnotations source="http://openiaml.org/comment">

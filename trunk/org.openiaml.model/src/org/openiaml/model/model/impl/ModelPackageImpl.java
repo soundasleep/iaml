@@ -1340,33 +1340,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getScope_DomainObjects() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getScope_DomainViews() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getScope_DomainInstances() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCondition() {
 		return conditionEClass;
 	}
@@ -1650,9 +1623,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(visitorAgentEClass, VISITOR_AGENT__PROPERTIES);
 
 		scopeEClass = createEClass(SCOPE);
-		createEReference(scopeEClass, SCOPE__DOMAIN_OBJECTS);
-		createEReference(scopeEClass, SCOPE__DOMAIN_VIEWS);
-		createEReference(scopeEClass, SCOPE__DOMAIN_INSTANCES);
 
 		conditionEClass = createEClass(CONDITION);
 
@@ -1940,9 +1910,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getVisitorAgent_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, VisitorAgent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopeEClass, Scope.class, "Scope", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScope_DomainObjects(), this.getDomainObject(), null, "domainObjects", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_DomainViews(), this.getDerivedView(), null, "domainViews", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_DomainInstances(), this.getDomainObjectInstance(), null, "domainInstances", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2170,10 +2137,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "added", "0.2"
 		   });		
 		addAnnotation
-		  (getScope_DomainObjects(), 
+		  (scopeEClass, 
 		   source, 
 		   new String[] {
-			 "changed", "0.2 to extend the abstract counterpart"
+			 "changed", "0.4: \'domainObjects\', \'domainViews\', \'domainInstances\' references removed"
 		   });		
 		addAnnotation
 		  (conditionEClass, 

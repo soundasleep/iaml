@@ -78,22 +78,25 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 =Release 0.4+=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.4 Outstanding issues])
   # [Model0_4 Expand IAML model]
-    * Priority 5
-      * [LoginHandler Login Handlers (domain object instance)]
-      * Text element
-      * [http://code.google.com/p/iaml/source/detail?r=973 Clear the current session DomainObjectInstance]
-      * [http://code.google.com/p/iaml/wiki/Model0_4#Set_Wire Set Wire]: a one-way _Sync Wire_
-      * [http://code.google.com/p/iaml/wiki/Model0_4#Query_Parameter Query Parameter] (_url?param=bar_)
-      * Users as first-class citizens
-      * [http://code.google.com/p/iaml/wiki/Model0_4#Join_Node,_Split_Node Join Node, Split Node]
-    * Priority 4
-      * Resultset viewer
-      * InputForm which renders SyncWire contents as Text, rather than InputTextFields
-      * DomainObjectInstance autosave default should be false
-      * E-mails
-      * Server-side operation (e.g. written in PHP)
-      * Client-side operaiton (e.g. written in Javascript)
-      * Deleting domain objects
+    * [LoginHandler Login Handlers (domain object instance)]
+    * Text element
+    * [http://code.google.com/p/iaml/source/detail?r=973 Clear the current session DomainObjectInstance]
+    * [http://code.google.com/p/iaml/wiki/Model0_4#Set_Wire Set Wire]: a one-way _Sync Wire_
+    * [http://code.google.com/p/iaml/wiki/Model0_4#Query_Parameter Query Parameter] (_url?param=bar_)
+    * [AccessControl Users as first-class citizens]
+    * [http://code.google.com/p/iaml/wiki/Model0_4#Join_Node,_Split_Node Join Node, Split Node]
+
+=Release 0.5+=
+([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
+  # [Model0_4 Expand IAML model]
+    * Text element
+    * Resultset viewer
+    * InputForm which renders SyncWire contents as Text, rather than InputTextFields
+    * DomainObjectInstance autosave default should be false
+    * E-mails
+    * Server-side operation (e.g. written in PHP)
+    * Client-side operaiton (e.g. written in Javascript)
+    * Deleting domain objects
   # Usability improvements
     * [http://code.google.com/p/iaml/issues/detail?id=30 Sharing single EditingDomain instance] across all editors
   # Development

@@ -41,6 +41,8 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.scopes.ScopesPackage;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -364,7 +366,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	public static List<?> query(final EObject root, String query) throws JaxenException {
 		EMFXPath xpath = new EMFXPath(query);
 		xpath.addNamespace("iaml", ModelPackage.eNS_URI);
-		// xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);
+		xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);
+		xpath.addNamespace("iaml.scopes", ScopesPackage.eNS_URI);
 		xpath.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		return xpath.selectNodes(root);
 	}

@@ -184,7 +184,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertHasNoApplicationElementProperty(session, "current login key");
 		
 		// there should only be one
-		assertHasOne(session, "iaml:properties", ApplicationElementProperty.class);
+		assertHasOne(session, "iaml.scopes:properties", ApplicationElementProperty.class);
 		
 		// there should be a SetWire from the LoginHandler to this
 		LoginHandler loginHandler = assertHasLoginHandler(session, "Login Handler");

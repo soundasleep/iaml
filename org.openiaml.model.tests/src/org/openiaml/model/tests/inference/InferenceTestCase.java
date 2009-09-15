@@ -94,7 +94,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public ApplicationElementProperty assertHasApplicationElementProperty(
 			Session element, String string) throws JaxenException {
-		return (ApplicationElementProperty) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
+		return (ApplicationElementProperty) queryOne(element, "iaml.scopes:properties[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -116,7 +116,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoApplicationElementProperty(
 			Session element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:properties[iaml:name='" + string + "']");
+		assertHasNone(element, "iaml.scopes:properties[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -305,7 +305,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public UserInstance assertHasUserInstance(Session root, String string) throws JaxenException {
-		return (UserInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
+		return (UserInstance) queryOne(root, "iaml.scopes:children[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -325,7 +325,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public DomainObjectInstance assertHasDomainObjectInstance(Session root, String string) throws JaxenException {
-		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
+		return (DomainObjectInstance) queryOne(root, "iaml.scopes:children[iaml:name='" + string + "']");
 	}
 	
 	/**
@@ -436,7 +436,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public AccessControlHandler assertHasAccessControlHandler(Session root, String string) throws JaxenException {
-		return (AccessControlHandler) queryOne(root, "iaml:children[iaml:name='" + string + "']");	
+		return (AccessControlHandler) queryOne(root, "iaml.scopes:children[iaml:name='" + string + "']");	
 	}
 	
 	/**
@@ -456,7 +456,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Page assertHasPage(Session session, String string) throws JaxenException {
-		return (Page) queryOne(session, "iaml:children[iaml:name='" + string + "']");	
+		return (Page) queryOne(session, "iaml.scopes:children[iaml:name='" + string + "']");	
 	}
 
 	/**
@@ -464,7 +464,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Page.
 	 */
 	public void assertHasNoPage(Session session, String string) throws JaxenException {
-		assertHasNone(session, "iaml:children[iaml:name='" + string + "']");
+		assertHasNone(session, "iaml.scopes:children[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -482,7 +482,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public LoginHandler assertHasLoginHandler(Session session, String string) throws JaxenException {
-		return (LoginHandler) queryOne(session, "iaml:children[iaml:name='" + string + "']");	
+		return (LoginHandler) queryOne(session, "iaml.scopes:children[iaml:name='" + string + "']");	
 	}
 
 	/**
@@ -492,7 +492,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoLoginHandler(Session session, String string) throws JaxenException {
-		assertHasNone(session, "iaml:children[iaml:name='" + string + "']");	
+		assertHasNone(session, "iaml.scopes:children[iaml:name='" + string + "']");	
 	}
 
 	/**
@@ -512,7 +512,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public StaticValue assertHasStaticValue(Session session, String string) throws JaxenException {
-		return (StaticValue) queryOne(session, "iaml:values[iaml:name='" + string + "']");	
+		return (StaticValue) queryOne(session, "iaml.scopes:values[iaml:name='" + string + "']");	
 	}
 	
 	/**

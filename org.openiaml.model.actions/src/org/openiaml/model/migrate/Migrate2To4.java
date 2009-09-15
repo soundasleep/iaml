@@ -147,10 +147,6 @@ public class Migrate2To4 extends DomBasedMigrator implements IamlModelMigrator {
 			element.setAttribute("xsi:type", "iaml:DomainAttribute");
 		}
 
-		if (old.getNodeName().equals("operations")) {
-			System.out.println(old.getAttribute("xsi:type"));
-		}
-
 	}
 
 	/**

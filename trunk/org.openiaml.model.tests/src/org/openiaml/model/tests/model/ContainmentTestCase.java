@@ -104,4 +104,11 @@ public class ContainmentTestCase extends TestCase {
 		
 	}
 	
+	/**
+	 * {@link #getAllClasses()} should not be empty.
+	 */
+	public void testClassesArentEmpty() {
+		assertFalse(getAllClasses().keySet().isEmpty());
+	}
+	
 }

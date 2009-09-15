@@ -13,6 +13,7 @@
 			«EXPAND MetaModel::QualifiedClassName FOR domainDiagramElement» app = «EXPAND MetaModel::NewInstance FOR domainDiagramElement»;
 			org.openiaml.model.model.visual.Page page = org.openiaml.model.model.visual.VisualFactory.eINSTANCE.createPage();
 			page.setName("Home");
+			page.setId("index");	// default page
 			app.getChildren().add(page); 
 			return app;
 		}

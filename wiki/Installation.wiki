@@ -1,74 +1,59 @@
 #summary How to install releases of the IAML Eclipse Plugin
-#labels Featured
+#labels Featured,EndUser,Phase-Deploy
 
 =Introduction=
 
 The IAML plugin is an Eclipse plugin that provides a visual editor for the modelling of Internet applications, as an implementation of our [http://openiaml.org research project]. Following our research emphasis on iterative development, we hope that regularly releasing our plugin will help us focus development and gain valuable feedback from the development community.
 
-*NOTE:* These instructions are cryptic and hard to follow until [http://code.google.com/p/iaml/issues/detail?id=2 issue 2] is resolved. Good luck!
+<wiki:toc max_depth="2" />
 
-=Requirements=
+=Install Eclipse=
 
-  # Eclipse 3.5 Galileo
-    * _plus UML 2.0 feature for OAW_
-  # GMF 2.2
-  # [http://www.eclipse.org/gmt/oaw/download/ OpenArchitectureWare 4.3]
-    * Update site: http://www.openarchitectureware.org/updatesite/milestone/site.xml
-  # [http://code.google.com/p/iacleaner/ iacleaner 0.2]
-    * Update site: http://iacleaner.googlecode.com/svn/trunk/org.openiaml.iacleaner.update/site.xml
-  # Possibly others: [http://code.google.com/p/iaml/issues/detail?id=2 to be determined]
+First you need to install a copy of [Eclipse]. Go to the [http://www.eclipse.org/downloads/ download page for Eclipse] and download the latest version of _Eclipse Classic_.
 
-For testing:
+Once downloaded, extract this archive to a folder, and start Eclipse.
 
-  # [http://www.eclipticalsoftware.com/emf/xpath/ XPath Support for EMF]
-    * Update site: http://www.eclipticalsoftware.com/updates
+You will need to select a workspace folder - usually you can just select the default.
 
-These requirements may be installed through the [http://download.eclipse.org/releases/galileo/ Galileo update site]. (They also might be installed with the installation process.)
+=Install IAML=
 
-=Getting Started=
+Select the "Menu" item and select "Install New Software".
 
-  # In Eclipse, select _Help_ > _Software Updates_ > _Find and Install..._
-  # Add the following remote site:
+[http://iaml.googlecode.com/svn/wiki/install/menu-install.png]
+
+You will be provided with [http://iaml.googlecode.com/svn/wiki/install/software-empty.png an installation dialog box] in which to select software artefacts to install. 
+
+Click the "Add" button and add the following update site to your Eclipse installation. All updates to the IAML project will be provided through this update site, and Eclipse includes functionality to automatically update your installation when new versions are released.
+
 {{{
-Name: IAML Plugin
+Name: IAML Modelling Platform
 URL:  http://iaml.googlecode.com/svn/trunk/org.openiaml.update/
 }}}
-  # Select the _IAML Modelling Platform_ feature to install
-  # Once it has been installed, restart Eclipse
 
-Now that you have got the IAML plugin installed, you can run through the [Tutorial] to learn how to use the plugin to generate your first modelled Internet application:
+[http://iaml.googlecode.com/svn/wiki/install/update-site.png]
 
-  # Create a new blank project
-  # Create a new IAML model by selecting _New..._ > _Examples_ > _Iaml Diagram_
-  # You can now edit the _iaml_diagram_ to create your Internet application visually
+Once the update site has been added, you should be able to select the latest version of the IAML Modelling Platform to install.
 
-=Miscellaneous=
+[http://iaml.googlecode.com/svn/wiki/install/software-select.png]
+
+Click "Next" and continue through the installation wizard. Eclipse will automatically contact relevant update sites and locate the required dependencies of the IAML plugin. This may take a significant period of time. Once all of these dependencies have been downloaded, the platform will be installed, and you will be asked to restart your platform (highly recommended).
+
+=What Next?=
+
+Once you have installed the Eclipse plugin, you should make sure that you have a [InstallationPlatform correct installation of PHP installed]. You can then create your [HelloWorld very first Hello World] Rich Internet Application.
+
+(Future plugin versions will support code generation to platforms other than PHP.)
+
+==Note==
 
 You may run out of memory when using the modelling platform within a Sun VM, in particular PermGen memory; this is mostly due to the Drools engine requiring a 7MB compiler in PermGen memory. It will depend on your system, but you may need to add the following lines to your _eclipse.ini_:
 
 {{{
 -vmargs
--Xms384m
--Xmx640m
--XX:PermSize=512M
--XX:MaxPermSize=512M
+-Xms128m
+-Xmx512m
+-XX:PermSize=128M
+-XX:MaxPermSize=384M
 }}}
 
-The parameters above work on a system with 2GB memory. As part of [http://code.google.com/p/iaml/issues/detail?id=2 issue 2], comprehensive system requirements will be investigated.
-
-==Runtime Library==
-
-Since r888, IAML provides a separate runtime library plugin which can be aliased to a virtual folder to improve performance. To enable this, you will need to set up an alias on your web server to the IAML client-side runtime libraries (similar to Symfony's /sf virtual folder):
-
-{{{
-# iaml library include (client-side)
-Alias "/iaml-runtime" "C:/.../org.openiaml.model.runtime/src/web"
-<Directory "C:/.../org.openiaml.model.runtime/src/web">
-   Options Indexes FollowSymLinks
-   DirectoryIndex index.html index.php default.html default.php
-   AllowOverride All
-   Allow from All   
-</Directory>
-}}}
-
-To make your project use these libraries, set "include_runtime" to "false" in your project properties, and set "config_runtime" and "config_web" appropriately. See: [IamlProjectProperties]
+  _For more information, see other [http://code.google.com/p/iaml/w/list?q=label:EndUser End User documentation]._

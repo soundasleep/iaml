@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="ASCII"?>
+<md:ModelDocumentation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:md="http://openiaml.org/modeldoc/2009/09">
+  <classes runtimeClass="//@references.0" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//NamedElement"/>
+    <extensions reference="//@references.83" name="containingPage" value="model::visual::Page containingPage(model::NamedElement element)"/>
+  </classes>
+  <classes runtimeClass="//@references.1" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//WireEdge"/>
+    <constraints reference="//@references.82" constraint="from.!=(null)" message="&quot;A WireEdge must have a 'from'&quot;"/>
+    <constraints reference="//@references.82" constraint="to.!=(null)" message="&quot;A WireEdge must have a 'to'&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.2" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//WireEdgeDestination"/>
+  </classes>
+  <classes runtimeClass="//@references.3" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//WireEdgesSource"/>
+  </classes>
+  <classes runtimeClass="//@references.4" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//EventTrigger"/>
+  </classes>
+  <classes runtimeClass="//@references.5" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ContainsEventTriggers"/>
+  </classes>
+  <classes runtimeClass="//@references.6" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DomainObject"/>
+    <constraints reference="//@references.82" constraint="name.!=(&quot;single_values&quot;)" message="&quot;You cannot have a DomainObject called single_values (reserved word)&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.7" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DomainAttribute"/>
+  </classes>
+  <classes runtimeClass="//@references.8" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ActivityNode"/>
+  </classes>
+  <classes runtimeClass="//@references.9" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//Operation"/>
+    <constraints reference="//@references.82" constraint="name.length.>(0)" message="&quot;Operation must have a name&quot;"/>
+    <extensions reference="//@references.83" name="isOperation" value="isOperation(model::Operation this)"/>
+  </classes>
+  <classes runtimeClass="//@references.10" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//Parameter"/>
+  </classes>
+  <classes runtimeClass="//@references.11" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//PrimitiveOperation"/>
+    <constraints reference="//@references.82" constraint="name.==(&quot;setPropertyToValue&quot;)||name.==(&quot;set&quot;)||name.==(&quot;javascriptAlert&quot;)||name.==(&quot;save&quot;)||name.==(&quot;new&quot;)||name.==(&quot;exists?&quot;)||name.==(&quot;equal?&quot;)||name.==(&quot;add role&quot;)||name.==(&quot;add permission&quot;)||name.==(&quot;remove role&quot;)||name.==(&quot;remove permission&quot;)" type="WARNING" message="&quot;Unknown primitive operation name '&quot;.+(name).+(&quot;'&quot;)"/>
+  </classes>
+  <classes runtimeClass="//@references.12" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//CompositeOperation"/>
+    <constraints reference="//@references.82" constraint="nodes.typeSelect(model::operations::StartNode).size.&lt;=(1)" message="&quot;An Operation can only contain one StartNode&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.13" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ContainsOperations"/>
+  </classes>
+  <classes runtimeClass="//@references.14" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ApplicationElement"/>
+    <extensions reference="//@references.83" name="parent" value="model::InternetApplication parent(model::ApplicationElement this)"/>
+  </classes>
+  <classes runtimeClass="//@references.15" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ApplicationElementContainer"/>
+  </classes>
+  <classes runtimeClass="//@references.16" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ApplicationElementProperty"/>
+    <constraints reference="//@references.82" constraint="defaultValue.==(null)&amp;&amp;inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size.>(0).!()" type="WARNING" message="&quot;A session property used as part of a login handler should have a default value set, otherwise secure pages will crash with an exception rather than going to the login page&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.17" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//StaticValue"/>
+  </classes>
+  <classes runtimeClass="//@references.18" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//VisibleThing"/>
+  </classes>
+  <classes runtimeClass="//@references.19" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//InternetApplication"/>
+    <constraints reference="//@references.82" constraint="children.exists(e|model::visual::Page.isInstance(e))||sessions.exists(e|e.children.exists(f|model::visual::Page.isInstance(f)))" message="&quot;No pages in internet application&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.20" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DomainStore"/>
+  </classes>
+  <classes runtimeClass="//@references.21" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DataFlowEdge"/>
+  </classes>
+  <classes runtimeClass="//@references.22" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DataFlowEdgeDestination"/>
+  </classes>
+  <classes runtimeClass="//@references.23" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DataFlowEdgesSource"/>
+  </classes>
+  <classes runtimeClass="//@references.24" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//TemporaryVariable"/>
+  </classes>
+  <classes runtimeClass="//@references.25" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ExecutionEdge"/>
+  </classes>
+  <classes runtimeClass="//@references.26" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ExecutionEdgeDestination"/>
+  </classes>
+  <classes runtimeClass="//@references.27" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ExecutionEdgesSource"/>
+  </classes>
+  <classes runtimeClass="//@references.28" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ConditionalEdge"/>
+  </classes>
+  <classes runtimeClass="//@references.29" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DynamicApplicationElementSet"/>
+  </classes>
+  <classes runtimeClass="//@references.30" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ContainsWires"/>
+  </classes>
+  <classes runtimeClass="//@references.31" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ShouldntContainWires"/>
+  </classes>
+  <classes runtimeClass="//@references.32" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//GeneratedElement"/>
+  </classes>
+  <classes runtimeClass="//@references.33" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//GeneratesElements"/>
+  </classes>
+  <classes runtimeClass="//@references.34" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DerivedView"/>
+  </classes>
+  <classes runtimeClass="//@references.35" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DomainObjectInstance"/>
+    <constraints reference="//@references.82" constraint="inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size.&lt;=(1)" message="&quot;A DomainObjectInstance cannot have more than one Select or NewInstance wire&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.36" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//PageRequest"/>
+  </classes>
+  <classes runtimeClass="//@references.37" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//VisitorAgent"/>
+  </classes>
+  <classes runtimeClass="//@references.38" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//Scope"/>
+  </classes>
+  <classes runtimeClass="//@references.39" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//Condition"/>
+  </classes>
+  <classes runtimeClass="//@references.40" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//CompositeCondition"/>
+  </classes>
+  <classes runtimeClass="//@references.41" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//ContainsConditions"/>
+  </classes>
+  <classes runtimeClass="//@references.42" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//DomainAttributeInstance"/>
+    <constraints reference="//@references.82" constraint="inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size.&lt;=(1)" message="&quot;A DomainAttributeInstance cannot have more than one Select or NewInstance wire&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.43" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//QueryParameter"/>
+    <constraints reference="//@references.82" constraint="outEdges.forAll(e|isAccessibleOnPage(containingPage(this.eContainer),e.to))" message="&quot;A QueryParameter cannot be used on a Page outside of its containing page (&quot;.+(containingPage(this.eContainer)).+(&quot;, &quot;).+(containingPage(outEdges.first().to.eContainer)).+(&quot;)&quot;)"/>
+  </classes>
+  <classes runtimeClass="//@references.44" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//visual/Page"/>
+    <constraints reference="//@references.82" constraint="name.length.>(0)" message="&quot;Page must have a name&quot;"/>
+    <constraints reference="//@references.82" constraint="children.typeSelect(model::components::LoginHandler).size.==(0)" message="&quot;A Page cannot contain a LoginHandler&quot;"/>
+    <extensions reference="//@references.83" name="containingPage" value="model::visual::Page containingPage(model::visual::Page element)"/>
+    <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::wires::CompositeWire wire)"/>
+    <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::wires::SingleWire wire)"/>
+    <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::NamedElement element)"/>
+    <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,emf::EObject element)"/>
+  </classes>
+  <classes runtimeClass="//@references.45" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//visual/InputForm"/>
+  </classes>
+  <classes runtimeClass="//@references.46" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//visual/InputTextField"/>
+  </classes>
+  <classes runtimeClass="//@references.47" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//visual/Button"/>
+  </classes>
+  <classes runtimeClass="//@references.48" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//visual/Frame"/>
+  </classes>
+  <classes runtimeClass="//@references.49" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/SingleWire"/>
+  </classes>
+  <classes runtimeClass="//@references.50" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/CompositeWire"/>
+  </classes>
+  <classes runtimeClass="//@references.51" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/SyncWire"/>
+    <constraints reference="//@references.82" constraint="model::StaticValue.isInstance(from).!()&amp;&amp;model::StaticValue.isInstance(to).!()" message="&quot;You cannot have a SyncWire that connects to a StaticValue&quot;"/>
+    <constraints reference="//@references.82" constraint="model::QueryParameter.isInstance(from).!()&amp;&amp;model::QueryParameter.isInstance(to).!()" message="&quot;You cannot have a SyncWire that connects to a QueryParameter&quot;"/>
+    <constraints reference="//@references.82" constraint="from.!=(to)" message="&quot;A SyncWire cannot connect to itself&quot;"/>
+    <constraints reference="//@references.82" constraint="model::ApplicationElementProperty.isInstance(from)&amp;&amp;model::ApplicationElementProperty.isInstance(to).!()" message="&quot;You cannot have a SyncWire connecting two ApplicationElementProperties&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.52" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/RunInstanceWire"/>
+    <constraints reference="//@references.82" constraint="model::Operation.isInstance(to)" message="&quot;A run instance wire can only connect to an operation&quot;"/>
+    <constraints reference="//@references.82" constraint="model::VisibleThing.isInstance(from)&amp;&amp;name.==(&quot;click&quot;)||name.==(&quot;onClick&quot;).!().!()" type="WARNING" message="&quot;This RunInstanceWire will not do anything: consider naming it 'onClick'&quot;"/>
+    <extensions reference="//@references.83" name="isRunInstanceWire" value="isRunInstanceWire(model::wires::RunInstanceWire this)"/>
+  </classes>
+  <classes runtimeClass="//@references.53" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/ParameterWire"/>
+  </classes>
+  <classes runtimeClass="//@references.54" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/SetWire"/>
+  </classes>
+  <classes runtimeClass="//@references.55" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/ShowWire"/>
+  </classes>
+  <classes runtimeClass="//@references.56" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/CommitWire"/>
+  </classes>
+  <classes runtimeClass="//@references.57" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/NavigateWire"/>
+  </classes>
+  <classes runtimeClass="//@references.58" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/SelectWire"/>
+    <constraints reference="//@references.82" constraint="model::DomainObject.isInstance(from)" message="&quot;A SelectWire must come from a valid DomainObject&quot;"/>
+    <constraints reference="//@references.82" constraint="inEdges.typeSelect(model::wires::ParameterWire).size.==(0)||query.!=(null)&amp;&amp;query.length.>(0)" message="&quot;A SelectWire has incoming Parameters, but does not have a query to use them&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.59" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/ConditionWire"/>
+  </classes>
+  <classes runtimeClass="//@references.60" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/NewInstanceWire"/>
+  </classes>
+  <classes runtimeClass="//@references.61" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/ExtendsWire"/>
+    <constraints reference="//@references.82" constraint="from.!=(to)" message="&quot;A Role cannot extend itself&quot;"/>
+    <constraints reference="//@references.82" constraint="model::DomainObject.isInstance(from)||model::DomainAttribute.isInstance(from)||model::DomainAttributeInstance.isInstance(from)&amp;&amp;model::DomainObject.isInstance(to)||model::DomainAttribute.isInstance(to)||model::DomainAttributeInstance.isInstance(to)" message="&quot;An ExtendsWire can only connect to a DomainObject, DomainAttribute or DomainAttributeInstance&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.62" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/RequiresWire"/>
+    <constraints reference="//@references.82" constraint="inEdges.forAll(e|model::wires::ConstraintWire.isInstance(e))" message="&quot;A RequiresWire can only be connected to ConstraintWires&quot;"/>
+    <constraints reference="//@references.82" constraint="model::users::Permission.isInstance(to)||model::users::Role.isInstance(to)" message="&quot;A RequireWire must connect to a Permission or a Role&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.63" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/ConstraintWire"/>
+  </classes>
+  <classes runtimeClass="//@references.64" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//wires/ProvidesWire"/>
+    <constraints reference="//@references.82" constraint="model::users::Role.isInstance(from)" message="&quot;An ProvidesWire can only connect from a Role&quot;"/>
+    <constraints reference="//@references.82" constraint="model::users::Permission.isInstance(to)" message="&quot;An ProvidesWire can only connect to a Permission&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.65" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/StartNode"/>
+  </classes>
+  <classes runtimeClass="//@references.66" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/CancelNode"/>
+  </classes>
+  <classes runtimeClass="//@references.67" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/FinishNode"/>
+  </classes>
+  <classes runtimeClass="//@references.68" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/DecisionNode"/>
+  </classes>
+  <classes runtimeClass="//@references.69" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/DecisionOperation"/>
+    <constraints reference="//@references.82" constraint="name.==(&quot;equal?&quot;)&amp;&amp;inFlows.size.>=(2)||name.!=(&quot;equal?&quot;)" message="&quot;A compare decision operation must have at least two data flows in to compare&quot;"/>
+    <constraints reference="//@references.82" constraint="outExecutions.size.&lt;=(2)" message="&quot;A DecisionOperation can only have at most two out execution edges&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.70" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/DecisionCondition"/>
+  </classes>
+  <classes runtimeClass="//@references.71" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/SplitNode"/>
+  </classes>
+  <classes runtimeClass="//@references.72" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/JoinNode"/>
+  </classes>
+  <classes runtimeClass="//@references.73" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//operations/OperationCallNode"/>
+    <constraints reference="//@references.82" constraint="outEdges.size.==(1)&amp;&amp;model::wires::RunInstanceWire.isInstance(outEdges.first())&amp;&amp;model::Operation.isInstance(outEdges.first().to)" message="&quot;An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.74" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//scopes/Session"/>
+    <constraints reference="//@references.82" constraint="children.exists(e|model::visual::InputTextField.isInstance(e)).!()" message="&quot;Sessions cannot directly contain InputTextFields&quot;"/>
+    <constraints reference="//@references.82" constraint="children.exists(e|model::visual::InputForm.isInstance(e)).!()" message="&quot;Sessions cannot directly contain InputForms&quot;"/>
+    <constraints reference="//@references.82" constraint="children.typeSelect(model::components::LoginHandler).size.&lt;=(1)" message="&quot;A Session can only contain one LoginHandler&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.75" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//components/LoginHandler"/>
+    <constraints reference="//@references.82" constraint="inEdges.exists(e|model::wires::ParameterWire.isInstance(e))" message="&quot;A login handler must have an incoming parameter to check against&quot;"/>
+    <constraints reference="//@references.82" constraint="type.!=(model::components::LoginHandlerTypes::USER)||inEdges.typeSelect(model::wires::ParameterWire).size.&lt;=(1)" message="&quot;A LoginHandler[user] can not have more than one incoming ParameterWire&quot;"/>
+  </classes>
+  <classes runtimeClass="//@references.76" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//components/AccessControlHandler"/>
+  </classes>
+  <classes runtimeClass="//@references.77" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//domain/EmptyDomainClass"/>
+  </classes>
+  <classes runtimeClass="//@references.78" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//users/UserStore"/>
+  </classes>
+  <classes runtimeClass="//@references.79" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//users/Role"/>
+  </classes>
+  <classes runtimeClass="//@references.80" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//users/Permission"/>
+  </classes>
+  <classes runtimeClass="//@references.81" tagline="TODO Tagline" description="TODO Description">
+    <targetClass href="http://openiaml.org/model0.4#//users/UserInstance"/>
+  </classes>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="NamedElement"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="WireEdge"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="WireEdgeDestination"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="WireEdgesSource"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="EventTrigger"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ContainsEventTriggers"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DomainObject"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DomainAttribute"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ActivityNode"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="Operation"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="Parameter"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="PrimitiveOperation"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="CompositeOperation"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ContainsOperations"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ApplicationElement"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ApplicationElementContainer"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ApplicationElementProperty"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="StaticValue"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="VisibleThing"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="InternetApplication"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DomainStore"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DataFlowEdge"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DataFlowEdgeDestination"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DataFlowEdgesSource"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="TemporaryVariable"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ExecutionEdge"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ExecutionEdgeDestination"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ExecutionEdgesSource"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ConditionalEdge"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DynamicApplicationElementSet"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ContainsWires"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ShouldntContainWires"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="GeneratedElement"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="GeneratesElements"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DerivedView"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DomainObjectInstance"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="PageRequest"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="VisitorAgent"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="Scope"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="Condition"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="CompositeCondition"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="ContainsConditions"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="DomainAttributeInstance"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="QueryParameter"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.visual" name="Page"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.visual" name="InputForm"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.visual" name="InputTextField"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.visual" name="Button"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.visual" name="Frame"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="SingleWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="CompositeWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="SyncWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="RunInstanceWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="ParameterWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="SetWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="ShowWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="CommitWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="NavigateWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="SelectWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="ConditionWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="NewInstanceWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="ExtendsWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="RequiresWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="ConstraintWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.wires" name="ProvidesWire"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="StartNode"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="CancelNode"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="FinishNode"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="DecisionNode"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="DecisionOperation"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="DecisionCondition"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="SplitNode"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="JoinNode"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.operations" name="OperationCallNode"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.scopes" name="Session"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.components" name="LoginHandler"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.components" name="AccessControlHandler"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.domain" name="EmptyDomainClass"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.users" name="UserStore"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.users" name="Role"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.users" name="Permission"/>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.users" name="UserInstance"/>
+  <references xsi:type="md:FileReference" package="src.metamodel" name="Checks.chk">
+    <lines line="9"/>
+    <lines line="13"/>
+    <lines line="16"/>
+    <lines line="19"/>
+    <lines line="22"/>
+    <lines line="25"/>
+    <lines line="29"/>
+    <lines line="32"/>
+    <lines line="36"/>
+    <lines line="40"/>
+    <lines line="43"/>
+    <lines line="47"/>
+    <lines line="50"/>
+    <lines line="53"/>
+    <lines line="56"/>
+    <lines line="59"/>
+    <lines line="62"/>
+    <lines line="65"/>
+    <lines line="68"/>
+    <lines line="71"/>
+    <lines line="74"/>
+    <lines line="78"/>
+    <lines line="81"/>
+    <lines line="84"/>
+    <lines line="87"/>
+    <lines line="99"/>
+    <lines line="104"/>
+    <lines line="107"/>
+    <lines line="110"/>
+    <lines line="113"/>
+    <lines line="116"/>
+    <lines line="119"/>
+    <lines line="122"/>
+    <lines line="125"/>
+    <lines line="129"/>
+  </references>
+  <references xsi:type="md:FileReference" package="src.metamodel" name="Extensions.ext">
+    <lines line="3"/>
+    <lines line="9"/>
+    <lines line="15"/>
+    <lines line="18"/>
+    <lines line="21"/>
+    <lines line="30"/>
+    <lines line="34"/>
+    <lines line="38"/>
+    <lines line="41"/>
+  </references>
+</md:ModelDocumentation>

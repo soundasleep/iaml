@@ -55,7 +55,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement #//DataFlowEdgesSource"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireEdgesSource">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="renamed from ChainedOperation -> PrimitiveOperation in 0.4"/>

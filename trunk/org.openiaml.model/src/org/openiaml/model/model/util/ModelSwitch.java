@@ -233,7 +233,6 @@ public class ModelSwitch<T> {
 				T result = caseParameter(parameter);
 				if (result == null) result = caseNamedElement(parameter);
 				if (result == null) result = caseDataFlowEdgesSource(parameter);
-				if (result == null) result = caseDataFlowEdgeDestination(parameter);
 				if (result == null) result = caseGeneratedElement(parameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

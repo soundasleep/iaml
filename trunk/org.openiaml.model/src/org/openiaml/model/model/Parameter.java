@@ -17,5 +17,5 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface Parameter extends NamedElement, DataFlowEdgesSource, DataFlowEdgeDestination {
+public interface Parameter extends NamedElement, DataFlowEdgesSource {
 } // Parameter

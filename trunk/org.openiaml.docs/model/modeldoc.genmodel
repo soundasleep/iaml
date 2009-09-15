@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.openiaml.docs/src"
+    modelPluginID="org.openiaml.docs" modelName="Modeldoc" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>modeldoc.ecore</foreignModel>
+  <genPackages prefix="Modeldoc" basePackage="org.openiaml.docs" disposableProviderFactory="true"
+      ecorePackage="modeldoc.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="modeldoc.ecore#//ConstraintType">
+      <genEnumLiterals ecoreEnumLiteral="modeldoc.ecore#//ConstraintType/ERROR"/>
+      <genEnumLiterals ecoreEnumLiteral="modeldoc.ecore#//ConstraintType/WARNING"/>
+    </genEnums>
+    <genClasses ecoreClass="modeldoc.ecore#//ModelDocumentation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//ModelDocumentation/classes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//ModelDocumentation/references"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//EMFClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/targetClass"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/runtimeClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/tagline"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/operationalSemantics"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/inferenceSemantics"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/extensions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/graphicalRepresentations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/examples"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/parent"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="modeldoc.ecore#//Semantic">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Semantic/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//Example">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Example/exampleModel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Example/exampleTest"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//OperationalSemantic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//OperationalSemantic/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//OperationalSemantic/description"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//GraphicalRepresentation"/>
+    <genClasses ecoreClass="modeldoc.ecore#//InferenceSemantic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//InferenceSemantic/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//InferenceSemantic/description"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//Constraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//Constraint/constraint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//Constraint/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//Constraint/message"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//ModelExtension">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//ModelExtension/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//ModelExtension/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="modeldoc.ecore#//Reference">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//Reference/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//JavaClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavaClass/plugin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavaClass/package"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavaClass/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavaClass/methods"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//JavaMethod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavaMethod/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavaMethod/line"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//JavaMethod/javaClass"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//ModelReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//ModelReference/plugin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//ModelReference/package"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//ModelReference/name"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//DroolsPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//DroolsPackage/plugin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//DroolsPackage/package"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//DroolsPackage/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//DroolsPackage/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//DroolsRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//DroolsRule/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//DroolsRule/line"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//DroolsRule/package"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//FileReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//FileReference/plugin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//FileReference/package"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//FileReference/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//FileReference/lines"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//FileLineReference">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//FileLineReference/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//FileLineReference/line"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

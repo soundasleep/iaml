@@ -164,6 +164,7 @@
   </classes>
   <classes runtimeClass="//@references.47" tagline="TODO Tagline" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Button"/>
+    <operationalSemantics reference="//@references.84/@methods.0/@javadocs.0/@fragments.1" description="//@references.84/@methods.0/@javadocs.0/@fragments.1"/>
   </classes>
   <classes runtimeClass="//@references.48" tagline="TODO Tagline" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Frame"/>
@@ -419,5 +420,44 @@
     <lines line="34"/>
     <lines line="38"/>
     <lines line="41"/>
+  </references>
+  <references xsi:type="md:JavaClass" plugin="org.openiaml.model.tests" package="org.openiaml.model.tests.codegen.model0_3" name="ButtonNavigate">
+    <javadocs>
+      <fragments xsi:type="md:JavadocTextElement" value="Tests the navigation of buttons."/>
+    </javadocs>
+    <javadocs name="@author">
+      <fragments xsi:type="md:JavadocTextElement" value=" jmwright"/>
+    </javadocs>
+    <methods name="testPage1to2" line="21">
+      <javadocs name="@semantics">
+        <fragments xsi:type="md:JavadocTextElement" value=" A "/>
+        <fragments xsi:type="md:JavadocTagElement" name="@model">
+          <fragments xsi:type="md:JavadocTextElement" value=" Button"/>
+        </fragments>
+        <fragments xsi:type="md:JavadocTextElement" value=" renders on a page as a button. "/>
+      </javadocs>
+      <javadocs name="@semantics">
+        <fragments xsi:type="md:JavadocTextElement" value=" test "/>
+        <fragments xsi:type="md:JavadocTagElement" name="@link">
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.84/@methods.1"/>
+        </fragments>
+        <fragments xsi:type="md:JavadocTextElement" value=", foo."/>
+      </javadocs>
+      <javadocs name="@semantics">
+        <fragments xsi:type="md:JavadocTextElement" value=" test "/>
+        <fragments xsi:type="md:JavadocTagElement" name="@link"/>
+      </javadocs>
+      <javadocs name="@semantics">
+        <fragments xsi:type="md:JavadocTextElement" value=" test "/>
+        <fragments xsi:type="md:JavadocTagElement" name="@link"/>
+      </javadocs>
+      <javadocs name="@another">
+        <fragments xsi:type="md:JavadocTextElement" value=" Also see "/>
+        <fragments xsi:type="md:JavadocTagElement" name="@link"/>
+        <fragments xsi:type="md:JavadocTextElement" value="."/>
+      </javadocs>
+      <javadocs name="@throws"/>
+    </methods>
+    <methods name="setUp"/>
   </references>
 </md:ModelDocumentation>

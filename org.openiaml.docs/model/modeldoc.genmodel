@@ -37,12 +37,12 @@
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//OperationalSemantic">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//OperationalSemantic/category"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//OperationalSemantic/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//OperationalSemantic/description"/>
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//GraphicalRepresentation"/>
     <genClasses ecoreClass="modeldoc.ecore#//InferenceSemantic">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//InferenceSemantic/category"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//InferenceSemantic/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//InferenceSemantic/description"/>
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//Constraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//Constraint/constraint"/>
@@ -92,6 +92,24 @@
     <genClasses ecoreClass="modeldoc.ecore#//FileLineReference">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//FileLineReference/file"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//FileLineReference/line"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="modeldoc.ecore#//JavadocFragment"/>
+    <genClasses ecoreClass="modeldoc.ecore#//JavadocTagElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavadocTagElement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavadocTagElement/fragments"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//JavadocTagElement/javaParent"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//JavadocTextElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavadocTextElement/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="modeldoc.ecore#//JavaElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavaElement/javadocs"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//JavadocMethodReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavadocMethodReference/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//JavadocClassReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavadocClassReference/reference"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -310,7 +310,7 @@ public interface ModeldocPackage extends EPackage {
 	int OPERATIONAL_SEMANTIC__CATEGORY = SEMANTIC_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -384,7 +384,7 @@ public interface ModeldocPackage extends EPackage {
 	int INFERENCE_SEMANTIC__CATEGORY = SEMANTIC_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -550,13 +550,22 @@ public interface ModeldocPackage extends EPackage {
 	int JAVA_CLASS__PARENT = REFERENCE__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Javadocs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS__JAVADOCS = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Plugin</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_CLASS__PLUGIN = REFERENCE_FEATURE_COUNT + 0;
+	int JAVA_CLASS__PLUGIN = REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' attribute.
@@ -565,7 +574,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_CLASS__PACKAGE = REFERENCE_FEATURE_COUNT + 1;
+	int JAVA_CLASS__PACKAGE = REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -574,7 +583,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_CLASS__NAME = REFERENCE_FEATURE_COUNT + 2;
+	int JAVA_CLASS__NAME = REFERENCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Methods</b></em>' containment reference list.
@@ -583,7 +592,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_CLASS__METHODS = REFERENCE_FEATURE_COUNT + 3;
+	int JAVA_CLASS__METHODS = REFERENCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Java Class</em>' class.
@@ -592,7 +601,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_CLASS_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 4;
+	int JAVA_CLASS_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavaMethodImpl <em>Java Method</em>}' class.
@@ -614,13 +623,22 @@ public interface ModeldocPackage extends EPackage {
 	int JAVA_METHOD__PARENT = REFERENCE__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Javadocs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_METHOD__JAVADOCS = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_METHOD__NAME = REFERENCE_FEATURE_COUNT + 0;
+	int JAVA_METHOD__NAME = REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Line</b></em>' attribute.
@@ -629,7 +647,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_METHOD__LINE = REFERENCE_FEATURE_COUNT + 1;
+	int JAVA_METHOD__LINE = REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Java Class</b></em>' container reference.
@@ -638,7 +656,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_METHOD__JAVA_CLASS = REFERENCE_FEATURE_COUNT + 2;
+	int JAVA_METHOD__JAVA_CLASS = REFERENCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Java Method</em>' class.
@@ -647,7 +665,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_METHOD_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 3;
+	int JAVA_METHOD_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.ModelReferenceImpl <em>Model Reference</em>}' class.
@@ -934,6 +952,228 @@ public interface ModeldocPackage extends EPackage {
 	int FILE_LINE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl <em>Javadoc Fragment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocFragment()
+	 * @generated
+	 */
+	int JAVADOC_FRAGMENT = 17;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_FRAGMENT__PARENT = REFERENCE__PARENT;
+
+	/**
+	 * The number of structural features of the '<em>Javadoc Fragment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_FRAGMENT_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl <em>Javadoc Tag Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTagElement()
+	 * @generated
+	 */
+	int JAVADOC_TAG_ELEMENT = 18;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_TAG_ELEMENT__PARENT = JAVADOC_FRAGMENT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_TAG_ELEMENT__NAME = JAVADOC_FRAGMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Fragments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_TAG_ELEMENT__FRAGMENTS = JAVADOC_FRAGMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Java Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_TAG_ELEMENT__JAVA_PARENT = JAVADOC_FRAGMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Javadoc Tag Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_TAG_ELEMENT_FEATURE_COUNT = JAVADOC_FRAGMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl <em>Javadoc Text Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTextElement()
+	 * @generated
+	 */
+	int JAVADOC_TEXT_ELEMENT = 19;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_TEXT_ELEMENT__PARENT = JAVADOC_FRAGMENT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_TEXT_ELEMENT__VALUE = JAVADOC_FRAGMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Javadoc Text Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_TEXT_ELEMENT_FEATURE_COUNT = JAVADOC_FRAGMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavaElementImpl <em>Java Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavaElementImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaElement()
+	 * @generated
+	 */
+	int JAVA_ELEMENT = 20;
+
+	/**
+	 * The feature id for the '<em><b>Javadocs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_ELEMENT__JAVADOCS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Java Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocMethodReferenceImpl <em>Javadoc Method Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavadocMethodReferenceImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocMethodReference()
+	 * @generated
+	 */
+	int JAVADOC_METHOD_REFERENCE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_METHOD_REFERENCE__PARENT = JAVADOC_FRAGMENT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_METHOD_REFERENCE__REFERENCE = JAVADOC_FRAGMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Javadoc Method Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_METHOD_REFERENCE_FEATURE_COUNT = JAVADOC_FRAGMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocClassReferenceImpl <em>Javadoc Class Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavadocClassReferenceImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocClassReference()
+	 * @generated
+	 */
+	int JAVADOC_CLASS_REFERENCE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_CLASS_REFERENCE__PARENT = JAVADOC_FRAGMENT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_CLASS_REFERENCE__REFERENCE = JAVADOC_FRAGMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Javadoc Class Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVADOC_CLASS_REFERENCE_FEATURE_COUNT = JAVADOC_FRAGMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -941,7 +1181,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 17;
+	int CONSTRAINT_TYPE = 23;
 
 
 	/**
@@ -1182,15 +1422,15 @@ public interface ModeldocPackage extends EPackage {
 	EAttribute getOperationalSemantic_Category();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.OperationalSemantic#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.OperationalSemantic#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @return the meta object for the reference '<em>Description</em>'.
 	 * @see org.openiaml.docs.modeldoc.OperationalSemantic#getDescription()
 	 * @see #getOperationalSemantic()
 	 * @generated
 	 */
-	EAttribute getOperationalSemantic_Description();
+	EReference getOperationalSemantic_Description();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.GraphicalRepresentation <em>Graphical Representation</em>}'.
@@ -1224,15 +1464,15 @@ public interface ModeldocPackage extends EPackage {
 	EAttribute getInferenceSemantic_Category();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.InferenceSemantic#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.InferenceSemantic#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @return the meta object for the reference '<em>Description</em>'.
 	 * @see org.openiaml.docs.modeldoc.InferenceSemantic#getDescription()
 	 * @see #getInferenceSemantic()
 	 * @generated
 	 */
-	EAttribute getInferenceSemantic_Description();
+	EReference getInferenceSemantic_Description();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Constraint <em>Constraint</em>}'.
@@ -1654,6 +1894,143 @@ public interface ModeldocPackage extends EPackage {
 	EAttribute getFileLineReference_Line();
 
 	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.JavadocFragment <em>Javadoc Fragment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Javadoc Fragment</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocFragment
+	 * @generated
+	 */
+	EClass getJavadocFragment();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.JavadocTagElement <em>Javadoc Tag Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Javadoc Tag Element</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocTagElement
+	 * @generated
+	 */
+	EClass getJavadocTagElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.JavadocTagElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocTagElement#getName()
+	 * @see #getJavadocTagElement()
+	 * @generated
+	 */
+	EAttribute getJavadocTagElement_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.JavadocTagElement#getFragments <em>Fragments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Fragments</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocTagElement#getFragments()
+	 * @see #getJavadocTagElement()
+	 * @generated
+	 */
+	EReference getJavadocTagElement_Fragments();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.JavadocTagElement#getJavaParent <em>Java Parent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Java Parent</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocTagElement#getJavaParent()
+	 * @see #getJavadocTagElement()
+	 * @generated
+	 */
+	EReference getJavadocTagElement_JavaParent();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.JavadocTextElement <em>Javadoc Text Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Javadoc Text Element</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocTextElement
+	 * @generated
+	 */
+	EClass getJavadocTextElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.JavadocTextElement#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocTextElement#getValue()
+	 * @see #getJavadocTextElement()
+	 * @generated
+	 */
+	EAttribute getJavadocTextElement_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.JavaElement <em>Java Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Java Element</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavaElement
+	 * @generated
+	 */
+	EClass getJavaElement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.JavaElement#getJavadocs <em>Javadocs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Javadocs</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavaElement#getJavadocs()
+	 * @see #getJavaElement()
+	 * @generated
+	 */
+	EReference getJavaElement_Javadocs();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.JavadocMethodReference <em>Javadoc Method Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Javadoc Method Reference</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocMethodReference
+	 * @generated
+	 */
+	EClass getJavadocMethodReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.JavadocMethodReference#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reference</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocMethodReference#getReference()
+	 * @see #getJavadocMethodReference()
+	 * @generated
+	 */
+	EReference getJavadocMethodReference_Reference();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.JavadocClassReference <em>Javadoc Class Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Javadoc Class Reference</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocClassReference
+	 * @generated
+	 */
+	EClass getJavadocClassReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.JavadocClassReference#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reference</em>'.
+	 * @see org.openiaml.docs.modeldoc.JavadocClassReference#getReference()
+	 * @see #getJavadocClassReference()
+	 * @generated
+	 */
+	EReference getJavadocClassReference_Reference();
+
+	/**
 	 * Returns the meta object for enum '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1872,12 +2249,12 @@ public interface ModeldocPackage extends EPackage {
 		EAttribute OPERATIONAL_SEMANTIC__CATEGORY = eINSTANCE.getOperationalSemantic_Category();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Description</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OPERATIONAL_SEMANTIC__DESCRIPTION = eINSTANCE.getOperationalSemantic_Description();
+		EReference OPERATIONAL_SEMANTIC__DESCRIPTION = eINSTANCE.getOperationalSemantic_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.GraphicalRepresentationImpl <em>Graphical Representation</em>}' class.
@@ -1908,12 +2285,12 @@ public interface ModeldocPackage extends EPackage {
 		EAttribute INFERENCE_SEMANTIC__CATEGORY = eINSTANCE.getInferenceSemantic_Category();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Description</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INFERENCE_SEMANTIC__DESCRIPTION = eINSTANCE.getInferenceSemantic_Description();
+		EReference INFERENCE_SEMANTIC__DESCRIPTION = eINSTANCE.getInferenceSemantic_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -2246,6 +2623,122 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FILE_LINE_REFERENCE__LINE = eINSTANCE.getFileLineReference_Line();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl <em>Javadoc Fragment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocFragment()
+		 * @generated
+		 */
+		EClass JAVADOC_FRAGMENT = eINSTANCE.getJavadocFragment();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl <em>Javadoc Tag Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTagElement()
+		 * @generated
+		 */
+		EClass JAVADOC_TAG_ELEMENT = eINSTANCE.getJavadocTagElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVADOC_TAG_ELEMENT__NAME = eINSTANCE.getJavadocTagElement_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Fragments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVADOC_TAG_ELEMENT__FRAGMENTS = eINSTANCE.getJavadocTagElement_Fragments();
+
+		/**
+		 * The meta object literal for the '<em><b>Java Parent</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVADOC_TAG_ELEMENT__JAVA_PARENT = eINSTANCE.getJavadocTagElement_JavaParent();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl <em>Javadoc Text Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTextElement()
+		 * @generated
+		 */
+		EClass JAVADOC_TEXT_ELEMENT = eINSTANCE.getJavadocTextElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVADOC_TEXT_ELEMENT__VALUE = eINSTANCE.getJavadocTextElement_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.JavaElementImpl <em>Java Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.JavaElementImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaElement()
+		 * @generated
+		 */
+		EClass JAVA_ELEMENT = eINSTANCE.getJavaElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Javadocs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVA_ELEMENT__JAVADOCS = eINSTANCE.getJavaElement_Javadocs();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.JavadocMethodReferenceImpl <em>Javadoc Method Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.JavadocMethodReferenceImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocMethodReference()
+		 * @generated
+		 */
+		EClass JAVADOC_METHOD_REFERENCE = eINSTANCE.getJavadocMethodReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVADOC_METHOD_REFERENCE__REFERENCE = eINSTANCE.getJavadocMethodReference_Reference();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.JavadocClassReferenceImpl <em>Javadoc Class Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.JavadocClassReferenceImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocClassReference()
+		 * @generated
+		 */
+		EClass JAVADOC_CLASS_REFERENCE = eINSTANCE.getJavadocClassReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVADOC_CLASS_REFERENCE__REFERENCE = eINSTANCE.getJavadocClassReference_Reference();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}' enum.

@@ -23,7 +23,13 @@ import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
+import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavaMethod;
+import org.openiaml.docs.modeldoc.JavadocClassReference;
+import org.openiaml.docs.modeldoc.JavadocFragment;
+import org.openiaml.docs.modeldoc.JavadocMethodReference;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
+import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -143,6 +149,42 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * @generated
 	 */
 	private EClass fileLineReferenceEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javadocFragmentEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javadocTagElementEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javadocTextElementEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javaElementEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javadocMethodReferenceEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javadocClassReferenceEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -414,8 +456,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOperationalSemantic_Description() {
-		return (EAttribute)operationalSemanticEClass.getEStructuralFeatures().get(1);
+	public EReference getOperationalSemantic_Description() {
+		return (EReference)operationalSemanticEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -450,8 +492,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getInferenceSemantic_Description() {
-		return (EAttribute)inferenceSemanticEClass.getEStructuralFeatures().get(1);
+	public EReference getInferenceSemantic_Description() {
+		return (EReference)inferenceSemanticEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -810,6 +852,123 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getJavadocFragment() {
+		return javadocFragmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJavadocTagElement() {
+		return javadocTagElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJavadocTagElement_Name() {
+		return (EAttribute)javadocTagElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJavadocTagElement_Fragments() {
+		return (EReference)javadocTagElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJavadocTagElement_JavaParent() {
+		return (EReference)javadocTagElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJavadocTextElement() {
+		return javadocTextElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJavadocTextElement_Value() {
+		return (EAttribute)javadocTextElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJavaElement() {
+		return javaElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJavaElement_Javadocs() {
+		return (EReference)javaElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJavadocMethodReference() {
+		return javadocMethodReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJavadocMethodReference_Reference() {
+		return (EReference)javadocMethodReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJavadocClassReference() {
+		return javadocClassReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJavadocClassReference_Reference() {
+		return (EReference)javadocClassReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintType() {
 		return constraintTypeEEnum;
 	}
@@ -868,13 +1027,13 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 
 		operationalSemanticEClass = createEClass(OPERATIONAL_SEMANTIC);
 		createEAttribute(operationalSemanticEClass, OPERATIONAL_SEMANTIC__CATEGORY);
-		createEAttribute(operationalSemanticEClass, OPERATIONAL_SEMANTIC__DESCRIPTION);
+		createEReference(operationalSemanticEClass, OPERATIONAL_SEMANTIC__DESCRIPTION);
 
 		graphicalRepresentationEClass = createEClass(GRAPHICAL_REPRESENTATION);
 
 		inferenceSemanticEClass = createEClass(INFERENCE_SEMANTIC);
 		createEAttribute(inferenceSemanticEClass, INFERENCE_SEMANTIC__CATEGORY);
-		createEAttribute(inferenceSemanticEClass, INFERENCE_SEMANTIC__DESCRIPTION);
+		createEReference(inferenceSemanticEClass, INFERENCE_SEMANTIC__DESCRIPTION);
 
 		constraintEClass = createEClass(CONSTRAINT);
 		createEAttribute(constraintEClass, CONSTRAINT__CONSTRAINT);
@@ -925,6 +1084,25 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(fileLineReferenceEClass, FILE_LINE_REFERENCE__FILE);
 		createEAttribute(fileLineReferenceEClass, FILE_LINE_REFERENCE__LINE);
 
+		javadocFragmentEClass = createEClass(JAVADOC_FRAGMENT);
+
+		javadocTagElementEClass = createEClass(JAVADOC_TAG_ELEMENT);
+		createEAttribute(javadocTagElementEClass, JAVADOC_TAG_ELEMENT__NAME);
+		createEReference(javadocTagElementEClass, JAVADOC_TAG_ELEMENT__FRAGMENTS);
+		createEReference(javadocTagElementEClass, JAVADOC_TAG_ELEMENT__JAVA_PARENT);
+
+		javadocTextElementEClass = createEClass(JAVADOC_TEXT_ELEMENT);
+		createEAttribute(javadocTextElementEClass, JAVADOC_TEXT_ELEMENT__VALUE);
+
+		javaElementEClass = createEClass(JAVA_ELEMENT);
+		createEReference(javaElementEClass, JAVA_ELEMENT__JAVADOCS);
+
+		javadocMethodReferenceEClass = createEClass(JAVADOC_METHOD_REFERENCE);
+		createEReference(javadocMethodReferenceEClass, JAVADOC_METHOD_REFERENCE__REFERENCE);
+
+		javadocClassReferenceEClass = createEClass(JAVADOC_CLASS_REFERENCE);
+		createEReference(javadocClassReferenceEClass, JAVADOC_CLASS_REFERENCE__REFERENCE);
+
 		// Create enums
 		constraintTypeEEnum = createEEnum(CONSTRAINT_TYPE);
 	}
@@ -963,12 +1141,19 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		constraintEClass.getESuperTypes().add(this.getSemantic());
 		modelExtensionEClass.getESuperTypes().add(this.getSemantic());
 		javaClassEClass.getESuperTypes().add(this.getReference());
+		javaClassEClass.getESuperTypes().add(this.getJavaElement());
 		javaMethodEClass.getESuperTypes().add(this.getReference());
+		javaMethodEClass.getESuperTypes().add(this.getJavaElement());
 		modelReferenceEClass.getESuperTypes().add(this.getReference());
 		droolsPackageEClass.getESuperTypes().add(this.getReference());
 		droolsRuleEClass.getESuperTypes().add(this.getReference());
 		fileReferenceEClass.getESuperTypes().add(this.getReference());
 		fileLineReferenceEClass.getESuperTypes().add(this.getReference());
+		javadocFragmentEClass.getESuperTypes().add(this.getReference());
+		javadocTagElementEClass.getESuperTypes().add(this.getJavadocFragment());
+		javadocTextElementEClass.getESuperTypes().add(this.getJavadocFragment());
+		javadocMethodReferenceEClass.getESuperTypes().add(this.getJavadocFragment());
+		javadocClassReferenceEClass.getESuperTypes().add(this.getJavadocFragment());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelDocumentationEClass, ModelDocumentation.class, "ModelDocumentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -997,13 +1182,13 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 
 		initEClass(operationalSemanticEClass, OperationalSemantic.class, "OperationalSemantic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperationalSemantic_Category(), ecorePackage.getEString(), "category", null, 0, 1, OperationalSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOperationalSemantic_Description(), ecorePackage.getEString(), "description", null, 0, 1, OperationalSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperationalSemantic_Description(), this.getJavadocTagElement(), null, "description", null, 0, 1, OperationalSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(graphicalRepresentationEClass, GraphicalRepresentation.class, "GraphicalRepresentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(inferenceSemanticEClass, InferenceSemantic.class, "InferenceSemantic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInferenceSemantic_Category(), ecorePackage.getEString(), "category", null, 0, 1, InferenceSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getInferenceSemantic_Description(), ecorePackage.getEString(), "description", null, 0, 1, InferenceSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInferenceSemantic_Description(), this.getJavadocTagElement(), null, "description", null, 0, 1, InferenceSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constraintEClass, Constraint.class, "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConstraint_Constraint(), ecorePackage.getEString(), "constraint", null, 0, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1053,6 +1238,25 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEClass(fileLineReferenceEClass, FileLineReference.class, "FileLineReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFileLineReference_File(), this.getFileReference(), this.getFileReference_Lines(), "file", null, 0, 1, FileLineReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFileLineReference_Line(), ecorePackage.getEInt(), "line", null, 0, 1, FileLineReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(javadocFragmentEClass, JavadocFragment.class, "JavadocFragment", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(javadocTagElementEClass, JavadocTagElement.class, "JavadocTagElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJavadocTagElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, JavadocTagElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJavadocTagElement_Fragments(), this.getJavadocFragment(), null, "fragments", null, 0, -1, JavadocTagElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJavadocTagElement_JavaParent(), this.getJavaElement(), this.getJavaElement_Javadocs(), "javaParent", null, 0, 1, JavadocTagElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(javadocTextElementEClass, JavadocTextElement.class, "JavadocTextElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJavadocTextElement_Value(), ecorePackage.getEString(), "value", null, 0, 1, JavadocTextElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(javaElementEClass, JavaElement.class, "JavaElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJavaElement_Javadocs(), this.getJavadocTagElement(), this.getJavadocTagElement_JavaParent(), "javadocs", null, 0, -1, JavaElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(javadocMethodReferenceEClass, JavadocMethodReference.class, "JavadocMethodReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJavadocMethodReference_Reference(), this.getJavaMethod(), null, "reference", null, 0, 1, JavadocMethodReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(javadocClassReferenceEClass, JavadocClassReference.class, "JavadocClassReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJavadocClassReference_Reference(), this.getJavaClass(), null, "reference", null, 0, 1, JavadocClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintTypeEEnum, ConstraintType.class, "ConstraintType");

@@ -24,6 +24,10 @@ import org.openiaml.docs.modeldoc.GraphicalRepresentation;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavaMethod;
+import org.openiaml.docs.modeldoc.JavadocClassReference;
+import org.openiaml.docs.modeldoc.JavadocMethodReference;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
+import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -90,6 +94,10 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 			case ModeldocPackage.DROOLS_RULE: return createDroolsRule();
 			case ModeldocPackage.FILE_REFERENCE: return createFileReference();
 			case ModeldocPackage.FILE_LINE_REFERENCE: return createFileLineReference();
+			case ModeldocPackage.JAVADOC_TAG_ELEMENT: return createJavadocTagElement();
+			case ModeldocPackage.JAVADOC_TEXT_ELEMENT: return createJavadocTextElement();
+			case ModeldocPackage.JAVADOC_METHOD_REFERENCE: return createJavadocMethodReference();
+			case ModeldocPackage.JAVADOC_CLASS_REFERENCE: return createJavadocClassReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -273,6 +281,46 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 	public FileLineReference createFileLineReference() {
 		FileLineReferenceImpl fileLineReference = new FileLineReferenceImpl();
 		return fileLineReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavadocTagElement createJavadocTagElement() {
+		JavadocTagElementImpl javadocTagElement = new JavadocTagElementImpl();
+		return javadocTagElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavadocTextElement createJavadocTextElement() {
+		JavadocTextElementImpl javadocTextElement = new JavadocTextElementImpl();
+		return javadocTextElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavadocMethodReference createJavadocMethodReference() {
+		JavadocMethodReferenceImpl javadocMethodReference = new JavadocMethodReferenceImpl();
+		return javadocMethodReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavadocClassReference createJavadocClassReference() {
+		JavadocClassReferenceImpl javadocClassReference = new JavadocClassReferenceImpl();
+		return javadocClassReference;
 	}
 
 	/**

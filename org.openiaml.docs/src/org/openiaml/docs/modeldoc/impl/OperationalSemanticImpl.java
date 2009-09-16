@@ -8,7 +8,9 @@ package org.openiaml.docs.modeldoc.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.docs.modeldoc.OperationalSemantic;
 
@@ -48,24 +50,14 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 	protected String category = CATEGORY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DESCRIPTION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected String description = DESCRIPTION_EDEFAULT;
+	protected JavadocTagElement description;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,7 +104,15 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDescription() {
+	public JavadocTagElement getDescription() {
+		if (description != null && description.eIsProxy()) {
+			InternalEObject oldDescription = (InternalEObject)description;
+			description = (JavadocTagElement)eResolveProxy(oldDescription);
+			if (description != oldDescription) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION, oldDescription, description));
+			}
+		}
 		return description;
 	}
 
@@ -121,8 +121,17 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDescription(String newDescription) {
-		String oldDescription = description;
+	public JavadocTagElement basicGetDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(JavadocTagElement newDescription) {
+		JavadocTagElement oldDescription = description;
 		description = newDescription;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION, oldDescription, description));
@@ -139,7 +148,8 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__CATEGORY:
 				return getCategory();
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION:
-				return getDescription();
+				if (resolve) return getDescription();
+				return basicGetDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,7 +166,7 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 				setCategory((String)newValue);
 				return;
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION:
-				setDescription((String)newValue);
+				setDescription((JavadocTagElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -174,7 +184,7 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 				setCategory(CATEGORY_EDEFAULT);
 				return;
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION:
-				setDescription(DESCRIPTION_EDEFAULT);
+				setDescription((JavadocTagElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -191,7 +201,7 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__CATEGORY:
 				return CATEGORY_EDEFAULT == null ? category != null : !CATEGORY_EDEFAULT.equals(category);
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION:
-				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+				return description != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -208,8 +218,6 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (category: ");
 		result.append(category);
-		result.append(", description: ");
-		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

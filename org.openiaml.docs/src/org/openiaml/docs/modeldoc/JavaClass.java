@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface JavaClass extends Reference {
+public interface JavaClass extends Reference, JavaElement {
 	/**
 	 * Returns the value of the '<em><b>Plugin</b></em>' attribute.
 	 * <!-- begin-user-doc -->

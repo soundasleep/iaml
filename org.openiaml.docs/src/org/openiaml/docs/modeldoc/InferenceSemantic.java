@@ -52,29 +52,29 @@ public interface InferenceSemantic extends Semantic {
 	void setCategory(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * Returns the value of the '<em><b>Description</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
+	 * @return the value of the '<em>Description</em>' reference.
+	 * @see #setDescription(JavadocTagElement)
 	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getInferenceSemantic_Description()
 	 * @model
 	 * @generated
 	 */
-	String getDescription();
+	JavadocTagElement getDescription();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.InferenceSemantic#getDescription <em>Description</em>}' attribute.
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.InferenceSemantic#getDescription <em>Description</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @param value the new value of the '<em>Description</em>' reference.
 	 * @see #getDescription()
 	 * @generated
 	 */
-	void setDescription(String value);
+	void setDescription(JavadocTagElement value);
 
 } // InferenceSemantic

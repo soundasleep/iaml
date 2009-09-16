@@ -25,7 +25,7 @@ package org.openiaml.docs.modeldoc;
  * @model
  * @generated
  */
-public interface JavaMethod extends Reference {
+public interface JavaMethod extends Reference, JavaElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

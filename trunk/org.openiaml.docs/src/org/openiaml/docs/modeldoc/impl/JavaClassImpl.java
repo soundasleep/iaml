@@ -17,7 +17,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.JavaClass;
+import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavaMethod;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 
 /**
@@ -27,6 +29,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.JavaClassImpl#getJavadocs <em>Javadocs</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.JavaClassImpl#getPlugin <em>Plugin</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.JavaClassImpl#getPackage <em>Package</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.JavaClassImpl#getName <em>Name</em>}</li>
@@ -37,6 +40,16 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  * @generated
  */
 public class JavaClassImpl extends ReferenceImpl implements JavaClass {
+	/**
+	 * The cached value of the '{@link #getJavadocs() <em>Javadocs</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJavadocs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JavadocTagElement> javadocs;
+
 	/**
 	 * The default value of the '{@link #getPlugin() <em>Plugin</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -131,6 +144,18 @@ public class JavaClassImpl extends ReferenceImpl implements JavaClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JavadocTagElement> getJavadocs() {
+		if (javadocs == null) {
+			javadocs = new EObjectContainmentWithInverseEList<JavadocTagElement>(JavadocTagElement.class, this, ModeldocPackage.JAVA_CLASS__JAVADOCS, ModeldocPackage.JAVADOC_TAG_ELEMENT__JAVA_PARENT);
+		}
+		return javadocs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getPlugin() {
 		return plugin;
 	}
@@ -210,6 +235,8 @@ public class JavaClassImpl extends ReferenceImpl implements JavaClass {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModeldocPackage.JAVA_CLASS__JAVADOCS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getJavadocs()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.JAVA_CLASS__METHODS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMethods()).basicAdd(otherEnd, msgs);
 		}
@@ -224,6 +251,8 @@ public class JavaClassImpl extends ReferenceImpl implements JavaClass {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModeldocPackage.JAVA_CLASS__JAVADOCS:
+				return ((InternalEList<?>)getJavadocs()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.JAVA_CLASS__METHODS:
 				return ((InternalEList<?>)getMethods()).basicRemove(otherEnd, msgs);
 		}
@@ -238,6 +267,8 @@ public class JavaClassImpl extends ReferenceImpl implements JavaClass {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ModeldocPackage.JAVA_CLASS__JAVADOCS:
+				return getJavadocs();
 			case ModeldocPackage.JAVA_CLASS__PLUGIN:
 				return getPlugin();
 			case ModeldocPackage.JAVA_CLASS__PACKAGE:
@@ -259,6 +290,10 @@ public class JavaClassImpl extends ReferenceImpl implements JavaClass {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ModeldocPackage.JAVA_CLASS__JAVADOCS:
+				getJavadocs().clear();
+				getJavadocs().addAll((Collection<? extends JavadocTagElement>)newValue);
+				return;
 			case ModeldocPackage.JAVA_CLASS__PLUGIN:
 				setPlugin((String)newValue);
 				return;
@@ -284,6 +319,9 @@ public class JavaClassImpl extends ReferenceImpl implements JavaClass {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ModeldocPackage.JAVA_CLASS__JAVADOCS:
+				getJavadocs().clear();
+				return;
 			case ModeldocPackage.JAVA_CLASS__PLUGIN:
 				setPlugin(PLUGIN_EDEFAULT);
 				return;
@@ -308,6 +346,8 @@ public class JavaClassImpl extends ReferenceImpl implements JavaClass {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ModeldocPackage.JAVA_CLASS__JAVADOCS:
+				return javadocs != null && !javadocs.isEmpty();
 			case ModeldocPackage.JAVA_CLASS__PLUGIN:
 				return PLUGIN_EDEFAULT == null ? plugin != null : !PLUGIN_EDEFAULT.equals(plugin);
 			case ModeldocPackage.JAVA_CLASS__PACKAGE:
@@ -318,6 +358,38 @@ public class JavaClassImpl extends ReferenceImpl implements JavaClass {
 				return methods != null && !methods.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == JavaElement.class) {
+			switch (derivedFeatureID) {
+				case ModeldocPackage.JAVA_CLASS__JAVADOCS: return ModeldocPackage.JAVA_ELEMENT__JAVADOCS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == JavaElement.class) {
+			switch (baseFeatureID) {
+				case ModeldocPackage.JAVA_ELEMENT__JAVADOCS: return ModeldocPackage.JAVA_CLASS__JAVADOCS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

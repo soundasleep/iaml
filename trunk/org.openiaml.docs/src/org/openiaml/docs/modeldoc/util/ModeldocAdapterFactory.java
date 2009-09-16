@@ -20,7 +20,13 @@ import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
+import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavaMethod;
+import org.openiaml.docs.modeldoc.JavadocClassReference;
+import org.openiaml.docs.modeldoc.JavadocFragment;
+import org.openiaml.docs.modeldoc.JavadocMethodReference;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
+import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -152,6 +158,30 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFileLineReference(FileLineReference object) {
 				return createFileLineReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJavadocFragment(JavadocFragment object) {
+				return createJavadocFragmentAdapter();
+			}
+			@Override
+			public Adapter caseJavadocTagElement(JavadocTagElement object) {
+				return createJavadocTagElementAdapter();
+			}
+			@Override
+			public Adapter caseJavadocTextElement(JavadocTextElement object) {
+				return createJavadocTextElementAdapter();
+			}
+			@Override
+			public Adapter caseJavaElement(JavaElement object) {
+				return createJavaElementAdapter();
+			}
+			@Override
+			public Adapter caseJavadocMethodReference(JavadocMethodReference object) {
+				return createJavadocMethodReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJavadocClassReference(JavadocClassReference object) {
+				return createJavadocClassReferenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -408,6 +438,90 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFileLineReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.JavadocFragment <em>Javadoc Fragment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.JavadocFragment
+	 * @generated
+	 */
+	public Adapter createJavadocFragmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.JavadocTagElement <em>Javadoc Tag Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.JavadocTagElement
+	 * @generated
+	 */
+	public Adapter createJavadocTagElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.JavadocTextElement <em>Javadoc Text Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.JavadocTextElement
+	 * @generated
+	 */
+	public Adapter createJavadocTextElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.JavaElement <em>Java Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.JavaElement
+	 * @generated
+	 */
+	public Adapter createJavaElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.JavadocMethodReference <em>Javadoc Method Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.JavadocMethodReference
+	 * @generated
+	 */
+	public Adapter createJavadocMethodReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.JavadocClassReference <em>Javadoc Class Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.JavadocClassReference
+	 * @generated
+	 */
+	public Adapter createJavadocClassReferenceAdapter() {
 		return null;
 	}
 

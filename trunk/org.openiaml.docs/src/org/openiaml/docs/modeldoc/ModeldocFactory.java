@@ -161,6 +161,42 @@ public interface ModeldocFactory extends EFactory {
 	FileLineReference createFileLineReference();
 
 	/**
+	 * Returns a new object of class '<em>Javadoc Tag Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Javadoc Tag Element</em>'.
+	 * @generated
+	 */
+	JavadocTagElement createJavadocTagElement();
+
+	/**
+	 * Returns a new object of class '<em>Javadoc Text Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Javadoc Text Element</em>'.
+	 * @generated
+	 */
+	JavadocTextElement createJavadocTextElement();
+
+	/**
+	 * Returns a new object of class '<em>Javadoc Method Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Javadoc Method Reference</em>'.
+	 * @generated
+	 */
+	JavadocMethodReference createJavadocMethodReference();
+
+	/**
+	 * Returns a new object of class '<em>Javadoc Class Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Javadoc Class Reference</em>'.
+	 * @generated
+	 */
+	JavadocClassReference createJavadocClassReference();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

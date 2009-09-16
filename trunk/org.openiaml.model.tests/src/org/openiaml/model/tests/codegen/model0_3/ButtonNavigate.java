@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.codegen.model0_3;
 
 import org.openiaml.model.tests.CodegenTestCase;
+import org.openiaml.model.tests.DijkstraAlgorithm;
 
 /**
  * Tests the navigation of buttons.
@@ -12,14 +13,18 @@ import org.openiaml.model.tests.CodegenTestCase;
  *
  */
 public class ButtonNavigate extends CodegenTestCase {
-	
+
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(ButtonNavigate.class);
 	}
 	
 	/**
-	 * @semantics test foo
+	 * @semantics A {@model Button} renders on a page as a button. 
+	 * @semantics test {@link #setUp()}, foo.
+	 * @semantics test {@link ButtonNavigate#setUp()}
+	 * @semantics test {@link InvalidClass#setUp()}
+	 * @another Also see {@link DijkstraAlgorithm}.
 	 * @throws Exception
 	 */
 	public void testPage1to2() throws Exception {

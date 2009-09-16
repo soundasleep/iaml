@@ -20,7 +20,13 @@ import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
+import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavaMethod;
+import org.openiaml.docs.modeldoc.JavadocClassReference;
+import org.openiaml.docs.modeldoc.JavadocFragment;
+import org.openiaml.docs.modeldoc.JavadocMethodReference;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
+import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -172,6 +178,7 @@ public class ModeldocSwitch<T> {
 				JavaClass javaClass = (JavaClass)theEObject;
 				T result = caseJavaClass(javaClass);
 				if (result == null) result = caseReference(javaClass);
+				if (result == null) result = caseJavaElement(javaClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -179,6 +186,7 @@ public class ModeldocSwitch<T> {
 				JavaMethod javaMethod = (JavaMethod)theEObject;
 				T result = caseJavaMethod(javaMethod);
 				if (result == null) result = caseReference(javaMethod);
+				if (result == null) result = caseJavaElement(javaMethod);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -214,6 +222,51 @@ public class ModeldocSwitch<T> {
 				FileLineReference fileLineReference = (FileLineReference)theEObject;
 				T result = caseFileLineReference(fileLineReference);
 				if (result == null) result = caseReference(fileLineReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.JAVADOC_FRAGMENT: {
+				JavadocFragment javadocFragment = (JavadocFragment)theEObject;
+				T result = caseJavadocFragment(javadocFragment);
+				if (result == null) result = caseReference(javadocFragment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.JAVADOC_TAG_ELEMENT: {
+				JavadocTagElement javadocTagElement = (JavadocTagElement)theEObject;
+				T result = caseJavadocTagElement(javadocTagElement);
+				if (result == null) result = caseJavadocFragment(javadocTagElement);
+				if (result == null) result = caseReference(javadocTagElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.JAVADOC_TEXT_ELEMENT: {
+				JavadocTextElement javadocTextElement = (JavadocTextElement)theEObject;
+				T result = caseJavadocTextElement(javadocTextElement);
+				if (result == null) result = caseJavadocFragment(javadocTextElement);
+				if (result == null) result = caseReference(javadocTextElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.JAVA_ELEMENT: {
+				JavaElement javaElement = (JavaElement)theEObject;
+				T result = caseJavaElement(javaElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.JAVADOC_METHOD_REFERENCE: {
+				JavadocMethodReference javadocMethodReference = (JavadocMethodReference)theEObject;
+				T result = caseJavadocMethodReference(javadocMethodReference);
+				if (result == null) result = caseJavadocFragment(javadocMethodReference);
+				if (result == null) result = caseReference(javadocMethodReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.JAVADOC_CLASS_REFERENCE: {
+				JavadocClassReference javadocClassReference = (JavadocClassReference)theEObject;
+				T result = caseJavadocClassReference(javadocClassReference);
+				if (result == null) result = caseJavadocFragment(javadocClassReference);
+				if (result == null) result = caseReference(javadocClassReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -473,6 +526,96 @@ public class ModeldocSwitch<T> {
 	 * @generated
 	 */
 	public T caseFileLineReference(FileLineReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Javadoc Fragment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Javadoc Fragment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJavadocFragment(JavadocFragment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Javadoc Tag Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Javadoc Tag Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJavadocTagElement(JavadocTagElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Javadoc Text Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Javadoc Text Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJavadocTextElement(JavadocTextElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Java Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Java Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJavaElement(JavaElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Javadoc Method Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Javadoc Method Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJavadocMethodReference(JavadocMethodReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Javadoc Class Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Javadoc Class Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJavadocClassReference(JavadocClassReference object) {
 		return null;
 	}
 

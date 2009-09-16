@@ -38,12 +38,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationalSemantic" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GraphicalRepresentation" eSuperTypes="#//Semantic"/>
   <eClassifiers xsi:type="ecore:EClass" name="InferenceSemantic" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -62,14 +62,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ModelDocumentation"
         eOpposite="#//ModelDocumentation/references"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaClass" eSuperTypes="#//Reference">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaClass" eSuperTypes="#//Reference #//JavaElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="plugin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
         eType="#//JavaMethod" containment="true" eOpposite="#//JavaMethod/javaClass"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaMethod" eSuperTypes="#//Reference">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaMethod" eSuperTypes="#//Reference #//JavaElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="line" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="javaClass" eType="#//JavaClass"
@@ -104,5 +104,26 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="file" eType="#//FileReference"
         eOpposite="#//FileReference/lines"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="line" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavadocFragment" abstract="true" eSuperTypes="#//Reference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JavadocTagElement" eSuperTypes="#//JavadocFragment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fragments" upperBound="-1"
+        eType="#//JavadocFragment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="javaParent" eType="#//JavaElement"
+        eOpposite="#//JavaElement/javadocs"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavadocTextElement" eSuperTypes="#//JavadocFragment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="javadocs" upperBound="-1"
+        eType="#//JavadocTagElement" containment="true" eOpposite="#//JavadocTagElement/javaParent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavadocMethodReference" eSuperTypes="#//JavadocFragment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//JavaMethod"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavadocClassReference" eSuperTypes="#//JavadocFragment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//JavaClass"/>
   </eClassifiers>
 </ecore:EPackage>

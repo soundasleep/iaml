@@ -62,6 +62,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ModelDocumentation"
         eOpposite="#//ModelDocumentation/references"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="javadocs" upperBound="-1"
+        eType="#//JavadocTagElement" containment="true" eOpposite="#//JavadocTagElement/javaParent"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaClass" eSuperTypes="#//Reference #//JavaElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="plugin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -87,7 +91,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
         eType="#//DroolsRule" containment="true" eOpposite="#//DroolsRule/package"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DroolsRule" eSuperTypes="#//Reference">
+  <eClassifiers xsi:type="ecore:EClass" name="DroolsRule" eSuperTypes="#//Reference #//JavaElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="line" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="#//DroolsPackage"
@@ -115,10 +119,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavadocTextElement" eSuperTypes="#//JavadocFragment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="javadocs" upperBound="-1"
-        eType="#//JavadocTagElement" containment="true" eOpposite="#//JavadocTagElement/javaParent"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavadocMethodReference" eSuperTypes="#//JavadocFragment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//JavaMethod"/>

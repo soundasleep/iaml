@@ -174,6 +174,12 @@ public class ModeldocSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModeldocPackage.JAVA_ELEMENT: {
+				JavaElement javaElement = (JavaElement)theEObject;
+				T result = caseJavaElement(javaElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ModeldocPackage.JAVA_CLASS: {
 				JavaClass javaClass = (JavaClass)theEObject;
 				T result = caseJavaClass(javaClass);
@@ -208,6 +214,7 @@ public class ModeldocSwitch<T> {
 				DroolsRule droolsRule = (DroolsRule)theEObject;
 				T result = caseDroolsRule(droolsRule);
 				if (result == null) result = caseReference(droolsRule);
+				if (result == null) result = caseJavaElement(droolsRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -245,12 +252,6 @@ public class ModeldocSwitch<T> {
 				T result = caseJavadocTextElement(javadocTextElement);
 				if (result == null) result = caseJavadocFragment(javadocTextElement);
 				if (result == null) result = caseReference(javadocTextElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModeldocPackage.JAVA_ELEMENT: {
-				JavaElement javaElement = (JavaElement)theEObject;
-				T result = caseJavaElement(javaElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

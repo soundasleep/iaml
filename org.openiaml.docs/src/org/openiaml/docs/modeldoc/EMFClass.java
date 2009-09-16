@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getExamples <em>Examples</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getExtends <em>Extends</em>}</li>
  * </ul>
  * </p>
  *
@@ -264,5 +265,21 @@ public interface EMFClass extends EObject {
 	 * @generated
 	 */
 	void setParent(ModelDocumentation value);
+
+	/**
+	 * Returns the value of the '<em><b>Extends</b></em>' reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.EMFClass}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extends</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extends</em>' reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Extends()
+	 * @model
+	 * @generated
+	 */
+	EList<EMFClass> getExtends();
 
 } // EMFClass

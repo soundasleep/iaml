@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.Constraint;
@@ -47,6 +48,7 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getExamples <em>Examples</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getExtends <em>Extends</em>}</li>
  * </ul>
  * </p>
  *
@@ -161,6 +163,15 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * @ordered
 	 */
 	protected EList<Example> examples;
+	/**
+	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtends()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EMFClass> extends_;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -416,6 +427,18 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EMFClass> getExtends() {
+		if (extends_ == null) {
+			extends_ = new EObjectResolvingEList<EMFClass>(EMFClass.class, this, ModeldocPackage.EMF_CLASS__EXTENDS);
+		}
+		return extends_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -499,6 +522,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return getExamples();
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				return getParent();
+			case ModeldocPackage.EMF_CLASS__EXTENDS:
+				return getExtends();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -551,6 +576,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				setParent((ModelDocumentation)newValue);
 				return;
+			case ModeldocPackage.EMF_CLASS__EXTENDS:
+				getExtends().clear();
+				getExtends().addAll((Collection<? extends EMFClass>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -596,6 +625,9 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				setParent((ModelDocumentation)null);
 				return;
+			case ModeldocPackage.EMF_CLASS__EXTENDS:
+				getExtends().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -630,6 +662,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return examples != null && !examples.isEmpty();
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				return getParent() != null;
+			case ModeldocPackage.EMF_CLASS__EXTENDS:
+				return extends_ != null && !extends_.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

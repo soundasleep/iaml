@@ -1,0 +1,39 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::Extensions»
+
+«DEFINE main FOR modeldoc::ModelDocumentation»
+	«FILE "output/index.html"»
+		<html>
+		<head>
+		</head>
+		
+		<body>
+		<ul>
+		«FOREACH classes AS cls»
+			<li>
+			<a href="«fileName(cls)»">
+			«EXPAND getIcon FOR cls»
+			«getName(cls.targetClass)»
+			</a>
+			</li>
+		«ENDFOREACH»
+		</ul>
+		</body>
+	«ENDFILE»
+	
+	«EXPAND ClassTemplate::class(this) FOREACH classes»
+«ENDDEFINE»
+
+«DEFINE getIcon FOR modeldoc::EMFClass»
+	«FOREACH graphicalRepresentations.reference.typeSelect(modeldoc::FileReference) AS fr»
+		<img src="../../«fr.plugin»/«getPackage(fr.package)»/«fr.name»">
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

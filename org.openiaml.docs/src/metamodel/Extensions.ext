@@ -1,0 +1,16 @@
+import modeldoc;
+
+fileName(modeldoc::EMFClass this) :
+	getName(targetClass) + ".html";
+
+/**
+ * Converts 'foo.bar.baz' into 'foo/bar/baz'
+ */
+getPackage(String this) :
+	replaceAll("\\.", "/");
+
+/**
+ * OAW can't handle ecore::EString
+ */
+String getName(ecore::EClass this) :
+	JAVA org.openiaml.docs.tests.OawCodeGenerator.getName(org.eclipse.emf.ecore.EClass);

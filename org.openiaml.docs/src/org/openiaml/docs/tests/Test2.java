@@ -53,6 +53,7 @@ import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
+import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavaMethod;
 import org.openiaml.docs.modeldoc.JavadocClassReference;
 import org.openiaml.docs.modeldoc.JavadocFragment;
@@ -102,6 +103,9 @@ public class Test2 extends TestCase {
 		
 		// load all EMF classes
 		loadEMFClasses(ModelPackage.eINSTANCE, factory, root);
+		
+		// set up inheritance
+		loadInheritance(factory, root);
 
 		// get all constraints
 		loadOAWChecks(factory, root);
@@ -123,6 +127,31 @@ public class Test2 extends TestCase {
 		return root;
 	}
 	
+	/**
+	 * Set up inheritance.
+	 * 
+	 * @param einstance
+	 * @param factory
+	 * @param root
+	 */
+	private void loadInheritance(ModeldocFactory factory, ModelDocumentation root) {
+		
+		for (EMFClass source : root.getClasses()) {
+			for (EMFClass target : root.getClasses()) {
+				// ignore self
+				if (!source.equals(target)) {
+					
+					if (source.getTargetClass().getESuperTypes().contains(target.getTargetClass())) {
+						// this class extends directly
+						source.getExtends().add(target);						
+					}
+					
+				}
+			}
+		}
+		
+	}
+
 	/**
 	 * Load all of the runtime icons as GraphicalRepresentations.
 	 * 
@@ -252,7 +281,7 @@ public class Test2 extends TestCase {
 					e.setName("@semantics");
 					
 					// and then parse the line
-					parseSemanticLine(line, factory, root, e);
+					parseSemanticLine(line, factory, root, e, rule);
 				}
 			}
 		}
@@ -292,9 +321,9 @@ public class Test2 extends TestCase {
 	 * <code>This element {@model Element} ...</code>
 	 */
 	private void parseSemanticLine(String line, ModeldocFactory factory,
-			ModelDocumentation root, JavadocTagElement e) {
+			ModelDocumentation root, JavadocTagElement e, DroolsRule droolsRule) {
 		
-		HandleInlineJavadoc inline = new HandleInlineJavadoc(factory, root, e);
+		HandleInlineJavadoc inline = new HandleInlineJavadoc(factory, root, e, droolsRule);
 		
 		int pos = 0;
 		while (true) {
@@ -332,11 +361,13 @@ public class Test2 extends TestCase {
 		private ModeldocFactory factory;
 		private ModelDocumentation root;
 		private JavadocTagElement tagElement;
+		private DroolsRule droolsReference;
 		
-		public HandleInlineJavadoc(ModeldocFactory factory, ModelDocumentation root, JavadocTagElement tagElement) {
+		public HandleInlineJavadoc(ModeldocFactory factory, ModelDocumentation root, JavadocTagElement tagElement, DroolsRule droolsReference) {
 			this.factory = factory;
 			this.root = root;
 			this.tagElement = tagElement;
+			this.droolsReference = droolsReference;
 		}
 		
 		/**
@@ -379,7 +410,7 @@ public class Test2 extends TestCase {
 					// make an inference semantics link
 					InferenceSemantic semantic = factory.createInferenceSemantic();
 					semantic.setDescription(tagElement);
-					semantic.setReference(tagElement);
+					semantic.setReference(droolsReference);
 					
 					// add it to the EMFclass
 					cls.getInferenceSemantics().add(semantic);
@@ -482,7 +513,8 @@ public class Test2 extends TestCase {
 		}
 
 		private List<JavadocFragment> handleTagFragment(
-				List<?> fragments) {
+				List<?> fragments, JavadocTagElement parent,
+				JavaElement javaReference) {
 			List<JavadocFragment> result = new ArrayList<JavadocFragment>();
 			for (Object o : fragments) {
 				if (o instanceof TagElement) {
@@ -491,10 +523,10 @@ public class Test2 extends TestCase {
 					e.setName(tag.getTagName());
 					
 					// recurse to create parents						
-					e.getFragments().addAll(handleTagFragment(tag.fragments()));
+					e.getFragments().addAll(handleTagFragment(tag.fragments(), e, javaReference));
 					
 					// link up any references to model elements
-					handleModelReferences(e);
+					handleModelReferences(e, parent, javaReference);
 					
 					result.add(e);
 				} else if (o instanceof TextElement) {
@@ -541,7 +573,7 @@ public class Test2 extends TestCase {
 		 * 
 		 * @param e
 		 */
-		private void handleModelReferences(JavadocTagElement e) {
+		private void handleModelReferences(JavadocTagElement e, JavadocTagElement parent, Reference javaReference) {
 			if ("@model".equals(e.getName())) {
 				// cycle through all model elements
 				JavadocTextElement refName = null;
@@ -556,8 +588,8 @@ public class Test2 extends TestCase {
 						if (emf.getTargetClass().getName().equals(refName.getValue().trim())) {
 							// create an operational semantic
 							OperationalSemantic op = factory.createOperationalSemantic();
-							op.setDescription(e);
-							op.setReference(e);
+							op.setDescription(parent);
+							op.setReference(javaReference);
 							
 							// add a reference
 							emf.getOperationalSemantics().add(op);
@@ -618,10 +650,10 @@ public class Test2 extends TestCase {
 		 * @return
 		 */
 		private JavadocTagElement handleTagFragment(
-				TagElement fragment) {
+				TagElement fragment, JavaElement javaReference) {
 			List<Object> input = new ArrayList<Object>();
 			input.add(fragment);
-			List<JavadocFragment> result = handleTagFragment(input);
+			List<JavadocFragment> result = handleTagFragment(input, null, javaReference);
 			return (JavadocTagElement) result.get(0);
 		}
 
@@ -633,7 +665,7 @@ public class Test2 extends TestCase {
 				if (parentMatches(parent, cls)) {					
 					for (Object o : node.tags()) {
 						TagElement tag = (TagElement) o;
-						JavadocTagElement docs = handleTagFragment(tag);
+						JavadocTagElement docs = handleTagFragment(tag, cls);
 						cls.getJavadocs().add(docs);
 					}
 				}
@@ -646,7 +678,7 @@ public class Test2 extends TestCase {
 				if (method != null) {
 					for (Object o : node.tags()) {
 						TagElement tag = (TagElement) o;
-						JavadocTagElement docs = handleTagFragment(tag);
+						JavadocTagElement docs = handleTagFragment(tag, method);
 						method.getJavadocs().add(docs);
 					}
 				}
@@ -1005,11 +1037,17 @@ public class Test2 extends TestCase {
 		EObject root = createDocumentation();
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
-        URI fileURI = URI.createFileURI(new File("test.modeldoc")
+		File modelFile = new File("test.modeldoc");
+        URI fileURI = URI.createFileURI(modelFile
                 .getAbsolutePath());
         Resource resource = resourceSet.createResource(fileURI);
         resource.getContents().add(root);
         resource.save(Collections.EMPTY_MAP);
+      
+		// generate code
+		OawCodeGenerator codegen = new OawCodeGenerator();
+		codegen.generateCode(modelFile);		
+        
 	}
 	
 	/*

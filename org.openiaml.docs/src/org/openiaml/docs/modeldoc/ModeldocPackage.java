@@ -207,13 +207,22 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_CLASS__PARENT = 10;
 
 	/**
+	 * The feature id for the '<em><b>Extends</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__EXTENDS = 11;
+
+	/**
 	 * The number of structural features of the '<em>EMF Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS_FEATURE_COUNT = 11;
+	int EMF_CLASS_FEATURE_COUNT = 12;
 
 
 	/**
@@ -641,13 +650,22 @@ public interface ModeldocPackage extends EPackage {
 	int JAVA_ELEMENT = 10;
 
 	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_ELEMENT__PARENT = REFERENCE__PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Javadocs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_ELEMENT__JAVADOCS = 0;
+	int JAVA_ELEMENT__JAVADOCS = REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Java Element</em>' class.
@@ -656,7 +674,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_ELEMENT_FEATURE_COUNT = 1;
+	int JAVA_ELEMENT_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1355,6 +1373,17 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEMFClass_Parent();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getExtends <em>Extends</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Extends</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getExtends()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EReference getEMFClass_Extends();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Semantic <em>Semantic</em>}'.
@@ -2194,6 +2223,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMF_CLASS__PARENT = eINSTANCE.getEMFClass_Parent();
+
+		/**
+		 * The meta object literal for the '<em><b>Extends</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_CLASS__EXTENDS = eINSTANCE.getEMFClass_Extends();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.SemanticImpl <em>Semantic</em>}' class.

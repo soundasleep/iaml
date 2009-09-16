@@ -56,6 +56,9 @@
     <genClasses image="false" ecoreClass="modeldoc.ecore#//Reference">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//Reference/parent"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="modeldoc.ecore#//JavaElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavaElement/javadocs"/>
+    </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//JavaClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavaClass/plugin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavaClass/package"/>
@@ -101,9 +104,6 @@
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//JavadocTextElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//JavadocTextElement/value"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="modeldoc.ecore#//JavaElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavaElement/javadocs"/>
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//JavadocMethodReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavadocMethodReference/reference"/>

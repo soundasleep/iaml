@@ -25,7 +25,7 @@ package org.openiaml.docs.modeldoc;
  * @model
  * @generated
  */
-public interface DroolsRule extends Reference {
+public interface DroolsRule extends Reference, JavaElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

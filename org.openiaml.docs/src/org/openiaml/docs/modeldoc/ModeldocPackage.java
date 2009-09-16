@@ -538,7 +538,125 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaClass()
 	 * @generated
 	 */
-	int JAVA_CLASS = 10;
+	int JAVA_CLASS = 11;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavaMethodImpl <em>Java Method</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavaMethodImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaMethod()
+	 * @generated
+	 */
+	int JAVA_METHOD = 12;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.ModelReferenceImpl <em>Model Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.ModelReferenceImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getModelReference()
+	 * @generated
+	 */
+	int MODEL_REFERENCE = 13;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.DroolsRuleImpl <em>Drools Rule</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.DroolsRuleImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getDroolsRule()
+	 * @generated
+	 */
+	int DROOLS_RULE = 15;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.DroolsPackageImpl <em>Drools Package</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.DroolsPackageImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getDroolsPackage()
+	 * @generated
+	 */
+	int DROOLS_PACKAGE = 14;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.FileReferenceImpl <em>File Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.FileReferenceImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getFileReference()
+	 * @generated
+	 */
+	int FILE_REFERENCE = 16;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.FileLineReferenceImpl <em>File Line Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.FileLineReferenceImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getFileLineReference()
+	 * @generated
+	 */
+	int FILE_LINE_REFERENCE = 17;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl <em>Javadoc Fragment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocFragment()
+	 * @generated
+	 */
+	int JAVADOC_FRAGMENT = 18;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl <em>Javadoc Tag Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTagElement()
+	 * @generated
+	 */
+	int JAVADOC_TAG_ELEMENT = 19;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl <em>Javadoc Text Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTextElement()
+	 * @generated
+	 */
+	int JAVADOC_TEXT_ELEMENT = 20;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavaElementImpl <em>Java Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.JavaElementImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaElement()
+	 * @generated
+	 */
+	int JAVA_ELEMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Javadocs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_ELEMENT__JAVADOCS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Java Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -604,16 +722,6 @@ public interface ModeldocPackage extends EPackage {
 	int JAVA_CLASS_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavaMethodImpl <em>Java Method</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.JavaMethodImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaMethod()
-	 * @generated
-	 */
-	int JAVA_METHOD = 11;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -668,16 +776,6 @@ public interface ModeldocPackage extends EPackage {
 	int JAVA_METHOD_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.ModelReferenceImpl <em>Model Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.ModelReferenceImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getModelReference()
-	 * @generated
-	 */
-	int MODEL_REFERENCE = 12;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -721,26 +819,6 @@ public interface ModeldocPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.DroolsRuleImpl <em>Drools Rule</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.DroolsRuleImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getDroolsRule()
-	 * @generated
-	 */
-	int DROOLS_RULE = 14;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.DroolsPackageImpl <em>Drools Package</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.DroolsPackageImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getDroolsPackage()
-	 * @generated
-	 */
-	int DROOLS_PACKAGE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -806,13 +884,22 @@ public interface ModeldocPackage extends EPackage {
 	int DROOLS_RULE__PARENT = REFERENCE__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Javadocs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DROOLS_RULE__JAVADOCS = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DROOLS_RULE__NAME = REFERENCE_FEATURE_COUNT + 0;
+	int DROOLS_RULE__NAME = REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Line</b></em>' attribute.
@@ -821,7 +908,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DROOLS_RULE__LINE = REFERENCE_FEATURE_COUNT + 1;
+	int DROOLS_RULE__LINE = REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' container reference.
@@ -830,7 +917,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DROOLS_RULE__PACKAGE = REFERENCE_FEATURE_COUNT + 2;
+	int DROOLS_RULE__PACKAGE = REFERENCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Drools Rule</em>' class.
@@ -839,17 +926,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DROOLS_RULE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.FileReferenceImpl <em>File Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.FileReferenceImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getFileReference()
-	 * @generated
-	 */
-	int FILE_REFERENCE = 15;
+	int DROOLS_RULE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -906,16 +983,6 @@ public interface ModeldocPackage extends EPackage {
 	int FILE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.FileLineReferenceImpl <em>File Line Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.FileLineReferenceImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getFileLineReference()
-	 * @generated
-	 */
-	int FILE_LINE_REFERENCE = 16;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -952,16 +1019,6 @@ public interface ModeldocPackage extends EPackage {
 	int FILE_LINE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl <em>Javadoc Fragment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocFragment()
-	 * @generated
-	 */
-	int JAVADOC_FRAGMENT = 17;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -978,16 +1035,6 @@ public interface ModeldocPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVADOC_FRAGMENT_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl <em>Javadoc Tag Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTagElement()
-	 * @generated
-	 */
-	int JAVADOC_TAG_ELEMENT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1035,16 +1082,6 @@ public interface ModeldocPackage extends EPackage {
 	int JAVADOC_TAG_ELEMENT_FEATURE_COUNT = JAVADOC_FRAGMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl <em>Javadoc Text Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTextElement()
-	 * @generated
-	 */
-	int JAVADOC_TEXT_ELEMENT = 19;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1070,34 +1107,6 @@ public interface ModeldocPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVADOC_TEXT_ELEMENT_FEATURE_COUNT = JAVADOC_FRAGMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavaElementImpl <em>Java Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.openiaml.docs.modeldoc.impl.JavaElementImpl
-	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaElement()
-	 * @generated
-	 */
-	int JAVA_ELEMENT = 20;
-
-	/**
-	 * The feature id for the '<em><b>Javadocs</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_ELEMENT__JAVADOCS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Java Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocMethodReferenceImpl <em>Javadoc Method Reference</em>}' class.

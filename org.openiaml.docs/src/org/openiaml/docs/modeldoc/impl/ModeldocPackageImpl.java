@@ -1047,6 +1047,9 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		referenceEClass = createEClass(REFERENCE);
 		createEReference(referenceEClass, REFERENCE__PARENT);
 
+		javaElementEClass = createEClass(JAVA_ELEMENT);
+		createEReference(javaElementEClass, JAVA_ELEMENT__JAVADOCS);
+
 		javaClassEClass = createEClass(JAVA_CLASS);
 		createEAttribute(javaClassEClass, JAVA_CLASS__PLUGIN);
 		createEAttribute(javaClassEClass, JAVA_CLASS__PACKAGE);
@@ -1093,9 +1096,6 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 
 		javadocTextElementEClass = createEClass(JAVADOC_TEXT_ELEMENT);
 		createEAttribute(javadocTextElementEClass, JAVADOC_TEXT_ELEMENT__VALUE);
-
-		javaElementEClass = createEClass(JAVA_ELEMENT);
-		createEReference(javaElementEClass, JAVA_ELEMENT__JAVADOCS);
 
 		javadocMethodReferenceEClass = createEClass(JAVADOC_METHOD_REFERENCE);
 		createEReference(javadocMethodReferenceEClass, JAVADOC_METHOD_REFERENCE__REFERENCE);
@@ -1147,6 +1147,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		modelReferenceEClass.getESuperTypes().add(this.getReference());
 		droolsPackageEClass.getESuperTypes().add(this.getReference());
 		droolsRuleEClass.getESuperTypes().add(this.getReference());
+		droolsRuleEClass.getESuperTypes().add(this.getJavaElement());
 		fileReferenceEClass.getESuperTypes().add(this.getReference());
 		fileLineReferenceEClass.getESuperTypes().add(this.getReference());
 		javadocFragmentEClass.getESuperTypes().add(this.getReference());
@@ -1202,6 +1203,9 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEClass(referenceEClass, Reference.class, "Reference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReference_Parent(), this.getModelDocumentation(), this.getModelDocumentation_References(), "parent", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(javaElementEClass, JavaElement.class, "JavaElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJavaElement_Javadocs(), this.getJavadocTagElement(), this.getJavadocTagElement_JavaParent(), "javadocs", null, 0, -1, JavaElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(javaClassEClass, JavaClass.class, "JavaClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJavaClass_Plugin(), ecorePackage.getEString(), "plugin", null, 0, 1, JavaClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJavaClass_Package(), ecorePackage.getEString(), "package", null, 0, 1, JavaClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1248,9 +1252,6 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 
 		initEClass(javadocTextElementEClass, JavadocTextElement.class, "JavadocTextElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJavadocTextElement_Value(), ecorePackage.getEString(), "value", null, 0, 1, JavadocTextElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(javaElementEClass, JavaElement.class, "JavaElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJavaElement_Javadocs(), this.getJavadocTagElement(), this.getJavadocTagElement_JavaParent(), "javadocs", null, 0, -1, JavaElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(javadocMethodReferenceEClass, JavadocMethodReference.class, "JavadocMethodReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJavadocMethodReference_Reference(), this.getJavaMethod(), null, "reference", null, 0, 1, JavadocMethodReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

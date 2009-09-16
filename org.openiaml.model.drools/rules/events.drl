@@ -17,6 +17,7 @@ global EcoreCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+# @semantics A {@model Button} has an {@model EventTrigger event trigger} named 'click'. 
 rule "Create 'edit' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )

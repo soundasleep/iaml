@@ -132,6 +132,10 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 				return createReferenceAdapter();
 			}
 			@Override
+			public Adapter caseJavaElement(JavaElement object) {
+				return createJavaElementAdapter();
+			}
+			@Override
 			public Adapter caseJavaClass(JavaClass object) {
 				return createJavaClassAdapter();
 			}
@@ -170,10 +174,6 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseJavadocTextElement(JavadocTextElement object) {
 				return createJavadocTextElementAdapter();
-			}
-			@Override
-			public Adapter caseJavaElement(JavaElement object) {
-				return createJavaElementAdapter();
 			}
 			@Override
 			public Adapter caseJavadocMethodReference(JavadocMethodReference object) {

@@ -6,14 +6,21 @@
  */
 package org.openiaml.docs.modeldoc.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
+import org.openiaml.docs.modeldoc.JavaElement;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 
 /**
@@ -23,6 +30,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsRuleImpl#getJavadocs <em>Javadocs</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsRuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsRuleImpl#getLine <em>Line</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsRuleImpl#getPackage <em>Package</em>}</li>
@@ -32,6 +40,16 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  * @generated
  */
 public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
+	/**
+	 * The cached value of the '{@link #getJavadocs() <em>Javadocs</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJavadocs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JavadocTagElement> javadocs;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -89,6 +107,18 @@ public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
 	@Override
 	protected EClass eStaticClass() {
 		return ModeldocPackage.Literals.DROOLS_RULE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<JavadocTagElement> getJavadocs() {
+		if (javadocs == null) {
+			javadocs = new EObjectContainmentWithInverseEList<JavadocTagElement>(JavadocTagElement.class, this, ModeldocPackage.DROOLS_RULE__JAVADOCS, ModeldocPackage.JAVADOC_TAG_ELEMENT__JAVA_PARENT);
+		}
+		return javadocs;
 	}
 
 	/**
@@ -179,9 +209,12 @@ public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModeldocPackage.DROOLS_RULE__JAVADOCS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getJavadocs()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.DROOLS_RULE__PACKAGE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -198,6 +231,8 @@ public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModeldocPackage.DROOLS_RULE__JAVADOCS:
+				return ((InternalEList<?>)getJavadocs()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.DROOLS_RULE__PACKAGE:
 				return basicSetPackage(null, msgs);
 		}
@@ -226,6 +261,8 @@ public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ModeldocPackage.DROOLS_RULE__JAVADOCS:
+				return getJavadocs();
 			case ModeldocPackage.DROOLS_RULE__NAME:
 				return getName();
 			case ModeldocPackage.DROOLS_RULE__LINE:
@@ -241,9 +278,14 @@ public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ModeldocPackage.DROOLS_RULE__JAVADOCS:
+				getJavadocs().clear();
+				getJavadocs().addAll((Collection<? extends JavadocTagElement>)newValue);
+				return;
 			case ModeldocPackage.DROOLS_RULE__NAME:
 				setName((String)newValue);
 				return;
@@ -265,6 +307,9 @@ public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ModeldocPackage.DROOLS_RULE__JAVADOCS:
+				getJavadocs().clear();
+				return;
 			case ModeldocPackage.DROOLS_RULE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -286,6 +331,8 @@ public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ModeldocPackage.DROOLS_RULE__JAVADOCS:
+				return javadocs != null && !javadocs.isEmpty();
 			case ModeldocPackage.DROOLS_RULE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModeldocPackage.DROOLS_RULE__LINE:
@@ -294,6 +341,38 @@ public class DroolsRuleImpl extends ReferenceImpl implements DroolsRule {
 				return getPackage() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == JavaElement.class) {
+			switch (derivedFeatureID) {
+				case ModeldocPackage.DROOLS_RULE__JAVADOCS: return ModeldocPackage.JAVA_ELEMENT__JAVADOCS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == JavaElement.class) {
+			switch (baseFeatureID) {
+				case ModeldocPackage.JAVA_ELEMENT__JAVADOCS: return ModeldocPackage.DROOLS_RULE__JAVADOCS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

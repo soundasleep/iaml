@@ -12,7 +12,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.JavaElement;
@@ -32,7 +31,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *
  * @generated
  */
-public abstract class JavaElementImpl extends EObjectImpl implements JavaElement {
+public abstract class JavaElementImpl extends ReferenceImpl implements JavaElement {
 	/**
 	 * The cached value of the '{@link #getJavadocs() <em>Javadocs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

@@ -393,6 +393,15 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getEMFClass_Extends() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSemantic() {
 		return semanticEClass;
 	}
@@ -1017,6 +1026,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfClassEClass, EMF_CLASS__GRAPHICAL_REPRESENTATIONS);
 		createEReference(emfClassEClass, EMF_CLASS__EXAMPLES);
 		createEReference(emfClassEClass, EMF_CLASS__PARENT);
+		createEReference(emfClassEClass, EMF_CLASS__EXTENDS);
 
 		semanticEClass = createEClass(SEMANTIC);
 		createEReference(semanticEClass, SEMANTIC__REFERENCE);
@@ -1140,6 +1150,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		inferenceSemanticEClass.getESuperTypes().add(this.getSemantic());
 		constraintEClass.getESuperTypes().add(this.getSemantic());
 		modelExtensionEClass.getESuperTypes().add(this.getSemantic());
+		javaElementEClass.getESuperTypes().add(this.getReference());
 		javaClassEClass.getESuperTypes().add(this.getReference());
 		javaClassEClass.getESuperTypes().add(this.getJavaElement());
 		javaMethodEClass.getESuperTypes().add(this.getReference());
@@ -1173,6 +1184,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFClass_GraphicalRepresentations(), this.getGraphicalRepresentation(), null, "graphicalRepresentations", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Examples(), this.getExample(), null, "examples", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Parent(), this.getModelDocumentation(), this.getModelDocumentation_Classes(), "parent", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFClass_Extends(), this.getEMFClass(), null, "extends", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(semanticEClass, Semantic.class, "Semantic", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSemantic_Reference(), this.getReference(), null, "reference", null, 0, 1, Semantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

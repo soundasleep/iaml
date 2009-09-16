@@ -1,0 +1,135 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::Extensions»
+
+«DEFINE class(modeldoc::ModelDocumentation root) FOR modeldoc::EMFClass»
+	«FILE "output/" + fileName()»
+		<html>
+		<head>
+		</head>
+		
+		<body>
+		
+		<a href="index.html">&lt; Back to list</a>
+		
+		<h1>
+		«EXPAND Template::getIcon»
+		«getName(targetClass)»
+		
+		«REM»get all extensions«ENDREM»
+		<small>«EXPAND extensions FOREACH extends SEPARATOR ","»</small>
+		</h1>
+		
+		<div id="tagline">
+		«tagline»
+		</div>
+		
+		<div id="description">
+		«description»
+		</div>
+		
+		«IF !examples.isEmpty»
+		<div id="examples">
+			<h2>Examples</h2>
+			
+			<ol>
+			«EXPAND example FOREACH examples»
+			</ol>
+		</div>
+		«ENDIF»
+		
+		<div id="operational">
+			<h2>Operational Semantics</h2>
+			
+			«IF operationalSemantics.isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ol>
+				«EXPAND operationalSemantics FOREACH operationalSemantics»
+				</ol>
+			«ENDIF»
+		</div>
+		
+		<div id="inference">
+			<h2>Inference Semantics</h2>
+			
+			«IF inferenceSemantics.isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ol>
+				«EXPAND inferenceSemantics FOREACH inferenceSemantics»
+				</ol>
+			«ENDIF»
+		</div>
+		
+		</body>
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE extensions FOR modeldoc::EMFClass»
+	«getName(targetClass)»
+«ENDDEFINE»
+
+«DEFINE example FOR modeldoc::Example»
+	<li>«this»</li>
+«ENDDEFINE»
+
+«DEFINE operationalSemantics FOR modeldoc::OperationalSemantic»
+	<li>«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»</li>
+«ENDDEFINE»
+
+«DEFINE inferenceSemantics FOR modeldoc::InferenceSemantic»
+	<li>«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»</li>
+«ENDDEFINE»
+
+«DEFINE javadocElement FOR modeldoc::Reference»
+	<span class="error">Unknown reference '«this»'</span>
+«ENDDEFINE»
+
+«DEFINE javadocElement FOR modeldoc::JavadocTagElement»
+	<span class="javadocTag">
+		«IF name == "@model"»
+			«EXPAND javadocModelElement FOREACH fragments»
+		«ELSE»
+			«EXPAND javadocElement FOREACH fragments»
+		«ENDIF»
+	</span>
+«ENDDEFINE»
+
+«DEFINE javadocElement FOR modeldoc::JavadocTextElement»
+	«value»
+«ENDDEFINE»
+
+«DEFINE javadocModelElement FOR modeldoc::JavadocTextElement»
+	<a href="«value».html">«value»</a>
+«ENDDEFINE»
+
+/* no special meaning; just render it like normal */
+«DEFINE javadocModelElement FOR modeldoc::JavadocFragment»
+	«EXPAND javadocElement» 
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::Reference»
+	<span class="error">Unknown reference '«this»'</span>
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::JavaMethod»
+	[<a href="«EXPAND browseSource»«javaClass.plugin»/src/«getPackage(javaClass.package)»/«javaClass.name».java#«line»">«name»()</a>]
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::JavaClass»
+	[<a href="«EXPAND browseSource»«plugin»/src/«getPackage(package)»/«name».java">«name»</a>]
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::DroolsRule»
+	[<a href="«EXPAND browseSource»«package.plugin»/«getPackage(package.package)»/«package.name».drl#«line»">«name»</a>]
+«ENDDEFINE»
+
+«DEFINE browseSource FOR emf::EObject-»http://code.google.com/p/iaml/source/browse/trunk/«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

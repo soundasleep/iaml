@@ -7,7 +7,6 @@
 package org.openiaml.docs.modeldoc;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface JavaElement extends EObject {
+public interface JavaElement extends Reference {
 	/**
 	 * Returns the value of the '<em><b>Javadocs</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.docs.modeldoc.JavadocTagElement}.

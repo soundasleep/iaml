@@ -4,11 +4,7 @@
 
 «DEFINE main FOR modeldoc::ModelDocumentation»
 	«FILE "output/index.html"»
-		<html>
-		<head>
-		</head>
-		
-		<body>
+		«EXPAND Template::header("List of model types")»
 		<ul>
 		«FOREACH classes AS cls»
 			<li>
@@ -19,10 +15,59 @@
 			</li>
 		«ENDFOREACH»
 		</ul>
-		</body>
+		«EXPAND Template::footer»
 	«ENDFILE»
 	
 	«EXPAND ClassTemplate::class(this) FOREACH classes»
+	
+	«EXPAND getCss»
+«ENDDEFINE»
+
+«DEFINE getCss FOR modeldoc::ModelDocumentation»
+«FILE "output/default.css"»
+html,input {
+	font-family: Calibri, Arial;
+	font-size: 1em;
+}
+html {
+	margin: 5px;
+	padding: 0;
+}
+h1,h2,h3,h4,h5,h6,form { margin: 0; padding: 0; }
+
+ul,ol,p {
+	line-height: 1.3em;
+}
+
+form {
+	border: 1px solid #ccc;
+	padding: 5px;
+	width: 50%;
+	background: #eee;
+}
+
+h2 { margin-top: .7em; margin-bottom: .3em; }
+table { border: 1px solid #aab; border-collapse: collapse; }
+table th { background: #ccd; }
+table th, table td { padding: 4px; border: 1px solid #aab; }
+table tr:nth-child(odd) { background: #eef; }
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE header(String title) FOR emf::EObject»
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>«title»</title>
+	<link rel="stylesheet" type="text/css" href="default.css">
+</head>
+<body>
+«ENDDEFINE»
+
+«DEFINE footer FOR emf::EObject»
+</body>
+</html>
 «ENDDEFINE»
 
 «DEFINE getIcon FOR modeldoc::EMFClass»

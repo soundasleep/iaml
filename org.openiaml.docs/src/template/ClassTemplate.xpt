@@ -4,12 +4,8 @@
 
 «DEFINE class(modeldoc::ModelDocumentation root) FOR modeldoc::EMFClass»
 	«FILE "output/" + fileName()»
-		<html>
-		<head>
-		</head>
-		
-		<body>
-		
+		«EXPAND Template::header(getName(targetClass))»
+
 		<a href="index.html">&lt; Back to list</a>
 		
 		<h1>
@@ -62,7 +58,7 @@
 			«ENDIF»
 		</div>
 		
-		</body>
+		«EXPAND Template::footer»
 	«ENDFILE»
 «ENDDEFINE»
 

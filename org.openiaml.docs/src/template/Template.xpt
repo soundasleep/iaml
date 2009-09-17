@@ -4,14 +4,17 @@
 
 «DEFINE main FOR modeldoc::ModelDocumentation»
 	«FILE "output/index.html"»
-		«EXPAND Template::header("List of model types")»
-		<ul>
-		«FOREACH classes AS cls»
-			<li>
-			<a href="«fileName(cls)»">
+		«EXPAND Template::header("List of model types", "index")»
+		<ul class="class_list">
+		«FOREACH classes.sortBy(c|c.name) AS cls»
+			<li class="class «IF cls.abstract»abstract«ENDIF» «IF cls.abstract»interface«ENDIF»">
+			<a href="«fileName(cls)»" class="icon_image">
 			«EXPAND getIcon FOR cls»
-			«getName(cls.targetClass)»
 			</a>
+			<a href="«fileName(cls)»">
+			«cls.name»
+			</a>
+			<small>«cls.tagline»</small>
 			</li>
 		«ENDFOREACH»
 		</ul>
@@ -25,18 +28,21 @@
 
 «DEFINE getCss FOR modeldoc::ModelDocumentation»
 «FILE "output/default.css"»
+
 html,input {
-	font-family: Calibri, Arial;
-	font-size: 1em;
+	font-family: Times New Roman, Times, serif;
+	font-size: .9em;
 }
 html {
 	margin: 5px;
 	padding: 0;
 }
-h1,h2,h3,h4,h5,h6,form { margin: 0; padding: 0; }
+form { margin: 0; padding: 0; }
+h1 { margin-top: .3em; margin-bottom: .3em; }
+a img { border: 0; }
 
 ul,ol,p {
-	line-height: 1.3em;
+	line-height: 1.4em;
 }
 
 form {
@@ -51,10 +57,55 @@ table { border: 1px solid #aab; border-collapse: collapse; }
 table th { background: #ccd; }
 table th, table td { padding: 4px; border: 1px solid #aab; }
 table tr:nth-child(odd) { background: #eef; }
+
+body#index ul, body#index ol, body#index p {
+	line-height: 1.6em;
+}
+body#index ul, body#index ol {
+	list-style: none;
+	padding: 0;
+}
+body#index li.class small:before { content: " - "; }
+.abstract { font-style: italic; }
+.interface { font-style: italic; }
+
+body#summary h1 img { vertical-align: .05em; }
+body#summary #tagline { font-style: italic; }
+
+body#summary p#tagline { margin: 0; padding: 0; }
+body#summary p#description {
+	border: 1px solid #99c;
+	background: #eef;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.navigation { margin: 5px; margin-top: 15px; }
+.navigation a {
+	border-top: 1px solid #aaa;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	background: #f6f6f6;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+body#summary div.intro { border: 1px solid #999; background: #eee; padding: 10px; }
+body#summary div.intro h1 { margin-top: 0; }
+body#summary div.intro #description { margin-bottom: 0; }
+
+body#summary div.intro h1 small { font-size: 0.6em; }
+body#summary div.intro h1 small a { color: #669; text-decoration: none; }
+body#summary div.intro h1 small a:hover { text-decoration: underline; }
+
+body#summary .subtype_list { padding-left: 2em; margin-top: .5em; line-height: 1.4em; }
+
+a:hover { text-decoration: none; }
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE header(String title) FOR emf::EObject»
+«DEFINE header(String title, String page_id) FOR emf::EObject»
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -62,7 +113,7 @@ table tr:nth-child(odd) { background: #eef; }
 	<title>«title»</title>
 	<link rel="stylesheet" type="text/css" href="default.css">
 </head>
-<body>
+<body id="«page_id»">
 «ENDDEFINE»
 
 «DEFINE footer FOR emf::EObject»

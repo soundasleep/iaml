@@ -303,8 +303,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_RuntimeClass() {
-		return (EReference)emfClassEClass.getEStructuralFeatures().get(1);
+	public EAttribute getEMFClass_Name() {
+		return (EAttribute)emfClassEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -312,7 +312,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEMFClass_Tagline() {
+	public EAttribute getEMFClass_Abstract() {
 		return (EAttribute)emfClassEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -321,7 +321,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEMFClass_Description() {
+	public EAttribute getEMFClass_Interface() {
 		return (EAttribute)emfClassEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -330,7 +330,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_OperationalSemantics() {
+	public EReference getEMFClass_Supertypes() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -339,7 +339,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_InferenceSemantics() {
+	public EReference getEMFClass_Subtypes() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -348,7 +348,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Constraints() {
+	public EReference getEMFClass_RuntimeClass() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -357,8 +357,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Extensions() {
-		return (EReference)emfClassEClass.getEStructuralFeatures().get(7);
+	public EAttribute getEMFClass_Tagline() {
+		return (EAttribute)emfClassEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -366,8 +366,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_GraphicalRepresentations() {
-		return (EReference)emfClassEClass.getEStructuralFeatures().get(8);
+	public EAttribute getEMFClass_Description() {
+		return (EAttribute)emfClassEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -375,7 +375,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Examples() {
+	public EReference getEMFClass_OperationalSemantics() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -384,7 +384,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Parent() {
+	public EReference getEMFClass_InferenceSemantics() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -393,8 +393,44 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Extends() {
+	public EReference getEMFClass_Constraints() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFClass_Extensions() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFClass_GraphicalRepresentations() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFClass_Examples() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFClass_Parent() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -1016,6 +1052,11 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 
 		emfClassEClass = createEClass(EMF_CLASS);
 		createEReference(emfClassEClass, EMF_CLASS__TARGET_CLASS);
+		createEAttribute(emfClassEClass, EMF_CLASS__NAME);
+		createEAttribute(emfClassEClass, EMF_CLASS__ABSTRACT);
+		createEAttribute(emfClassEClass, EMF_CLASS__INTERFACE);
+		createEReference(emfClassEClass, EMF_CLASS__SUPERTYPES);
+		createEReference(emfClassEClass, EMF_CLASS__SUBTYPES);
 		createEReference(emfClassEClass, EMF_CLASS__RUNTIME_CLASS);
 		createEAttribute(emfClassEClass, EMF_CLASS__TAGLINE);
 		createEAttribute(emfClassEClass, EMF_CLASS__DESCRIPTION);
@@ -1026,7 +1067,6 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfClassEClass, EMF_CLASS__GRAPHICAL_REPRESENTATIONS);
 		createEReference(emfClassEClass, EMF_CLASS__EXAMPLES);
 		createEReference(emfClassEClass, EMF_CLASS__PARENT);
-		createEReference(emfClassEClass, EMF_CLASS__EXTENDS);
 
 		semanticEClass = createEClass(SEMANTIC);
 		createEReference(semanticEClass, SEMANTIC__REFERENCE);
@@ -1174,6 +1214,11 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 
 		initEClass(emfClassEClass, EMFClass.class, "EMFClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEMFClass_TargetClass(), ecorePackage.getEClass(), null, "targetClass", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEMFClass_Name(), ecorePackage.getEString(), "name", null, 1, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEMFClass_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 1, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEMFClass_Interface(), ecorePackage.getEBoolean(), "interface", null, 1, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFClass_Supertypes(), this.getEMFClass(), this.getEMFClass_Subtypes(), "supertypes", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFClass_Subtypes(), this.getEMFClass(), this.getEMFClass_Supertypes(), "subtypes", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_RuntimeClass(), this.getJavaClass(), null, "runtimeClass", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEMFClass_Tagline(), ecorePackage.getEString(), "tagline", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEMFClass_Description(), ecorePackage.getEString(), "description", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1184,7 +1229,6 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFClass_GraphicalRepresentations(), this.getGraphicalRepresentation(), null, "graphicalRepresentations", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Examples(), this.getExample(), null, "examples", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Parent(), this.getModelDocumentation(), this.getModelDocumentation_Classes(), "parent", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEMFClass_Extends(), this.getEMFClass(), null, "extends", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(semanticEClass, Semantic.class, "Semantic", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSemantic_Reference(), this.getReference(), null, "reference", null, 0, 1, Semantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -19,6 +19,11 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getTargetClass <em>Target Class</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#isInterface <em>Interface</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getSupertypes <em>Supertypes</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getSubtypes <em>Subtypes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getRuntimeClass <em>Runtime Class</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getTagline <em>Tagline</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getDescription <em>Description</em>}</li>
@@ -29,7 +34,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getExamples <em>Examples</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getParent <em>Parent</em>}</li>
- *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getExtends <em>Extends</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +67,120 @@ public interface EMFClass extends EObject {
 	 * @generated
 	 */
 	void setTargetClass(EClass value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Name()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Abstract</em>' attribute.
+	 * @see #setAbstract(boolean)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Abstract()
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean isAbstract();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#isAbstract <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Abstract</em>' attribute.
+	 * @see #isAbstract()
+	 * @generated
+	 */
+	void setAbstract(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Interface</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Interface</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Interface</em>' attribute.
+	 * @see #setInterface(boolean)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Interface()
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean isInterface();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#isInterface <em>Interface</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Interface</em>' attribute.
+	 * @see #isInterface()
+	 * @generated
+	 */
+	void setInterface(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Supertypes</b></em>' reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.EMFClass}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.EMFClass#getSubtypes <em>Subtypes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Supertypes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Supertypes</em>' reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Supertypes()
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getSubtypes
+	 * @model opposite="subtypes"
+	 * @generated
+	 */
+	EList<EMFClass> getSupertypes();
+
+	/**
+	 * Returns the value of the '<em><b>Subtypes</b></em>' reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.EMFClass}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.EMFClass#getSupertypes <em>Supertypes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Subtypes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Subtypes</em>' reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Subtypes()
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getSupertypes
+	 * @model opposite="supertypes"
+	 * @generated
+	 */
+	EList<EMFClass> getSubtypes();
 
 	/**
 	 * Returns the value of the '<em><b>Runtime Class</b></em>' reference.
@@ -265,21 +383,5 @@ public interface EMFClass extends EObject {
 	 * @generated
 	 */
 	void setParent(ModelDocumentation value);
-
-	/**
-	 * Returns the value of the '<em><b>Extends</b></em>' reference list.
-	 * The list contents are of type {@link org.openiaml.docs.modeldoc.EMFClass}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Extends</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Extends</em>' reference list.
-	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Extends()
-	 * @model
-	 * @generated
-	 */
-	EList<EMFClass> getExtends();
 
 } // EMFClass

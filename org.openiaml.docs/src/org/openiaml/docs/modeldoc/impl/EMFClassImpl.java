@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.Constraint;
@@ -38,6 +38,11 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getTargetClass <em>Target Class</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#isInterface <em>Interface</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getSupertypes <em>Supertypes</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getSubtypes <em>Subtypes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getRuntimeClass <em>Runtime Class</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getTagline <em>Tagline</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getDescription <em>Description</em>}</li>
@@ -48,7 +53,6 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getExamples <em>Examples</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getExtends <em>Extends</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,6 +68,78 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * @ordered
 	 */
 	protected EClass targetClass;
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
+	/**
+	 * The default value of the '{@link #isInterface() <em>Interface</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInterface()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INTERFACE_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isInterface() <em>Interface</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInterface()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean interface_ = INTERFACE_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getSupertypes() <em>Supertypes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSupertypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EMFClass> supertypes;
+	/**
+	 * The cached value of the '{@link #getSubtypes() <em>Subtypes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubtypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EMFClass> subtypes;
 	/**
 	 * The cached value of the '{@link #getRuntimeClass() <em>Runtime Class</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -164,15 +240,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	protected EList<Example> examples;
 	/**
-	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExtends()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EMFClass> extends_;
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -227,6 +294,93 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 		targetClass = newTargetClass;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__TARGET_CLASS, oldTargetClass, targetClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__ABSTRACT, oldAbstract, abstract_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isInterface() {
+		return interface_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInterface(boolean newInterface) {
+		boolean oldInterface = interface_;
+		interface_ = newInterface;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__INTERFACE, oldInterface, interface_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<EMFClass> getSupertypes() {
+		if (supertypes == null) {
+			supertypes = new EObjectWithInverseResolvingEList.ManyInverse<EMFClass>(EMFClass.class, this, ModeldocPackage.EMF_CLASS__SUPERTYPES, ModeldocPackage.EMF_CLASS__SUBTYPES);
+		}
+		return supertypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<EMFClass> getSubtypes() {
+		if (subtypes == null) {
+			subtypes = new EObjectWithInverseResolvingEList.ManyInverse<EMFClass>(EMFClass.class, this, ModeldocPackage.EMF_CLASS__SUBTYPES, ModeldocPackage.EMF_CLASS__SUPERTYPES);
+		}
+		return subtypes;
 	}
 
 	/**
@@ -427,21 +581,14 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EMFClass> getExtends() {
-		if (extends_ == null) {
-			extends_ = new EObjectResolvingEList<EMFClass>(EMFClass.class, this, ModeldocPackage.EMF_CLASS__EXTENDS);
-		}
-		return extends_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModeldocPackage.EMF_CLASS__SUPERTYPES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSupertypes()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__SUBTYPES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubtypes()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -458,6 +605,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModeldocPackage.EMF_CLASS__SUPERTYPES:
+				return ((InternalEList<?>)getSupertypes()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__SUBTYPES:
+				return ((InternalEList<?>)getSubtypes()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				return ((InternalEList<?>)getOperationalSemantics()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
@@ -501,6 +652,16 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__TARGET_CLASS:
 				if (resolve) return getTargetClass();
 				return basicGetTargetClass();
+			case ModeldocPackage.EMF_CLASS__NAME:
+				return getName();
+			case ModeldocPackage.EMF_CLASS__ABSTRACT:
+				return isAbstract();
+			case ModeldocPackage.EMF_CLASS__INTERFACE:
+				return isInterface();
+			case ModeldocPackage.EMF_CLASS__SUPERTYPES:
+				return getSupertypes();
+			case ModeldocPackage.EMF_CLASS__SUBTYPES:
+				return getSubtypes();
 			case ModeldocPackage.EMF_CLASS__RUNTIME_CLASS:
 				if (resolve) return getRuntimeClass();
 				return basicGetRuntimeClass();
@@ -522,8 +683,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return getExamples();
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				return getParent();
-			case ModeldocPackage.EMF_CLASS__EXTENDS:
-				return getExtends();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -539,6 +698,23 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 		switch (featureID) {
 			case ModeldocPackage.EMF_CLASS__TARGET_CLASS:
 				setTargetClass((EClass)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__NAME:
+				setName((String)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__ABSTRACT:
+				setAbstract((Boolean)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__INTERFACE:
+				setInterface((Boolean)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__SUPERTYPES:
+				getSupertypes().clear();
+				getSupertypes().addAll((Collection<? extends EMFClass>)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__SUBTYPES:
+				getSubtypes().clear();
+				getSubtypes().addAll((Collection<? extends EMFClass>)newValue);
 				return;
 			case ModeldocPackage.EMF_CLASS__RUNTIME_CLASS:
 				setRuntimeClass((JavaClass)newValue);
@@ -576,10 +752,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				setParent((ModelDocumentation)newValue);
 				return;
-			case ModeldocPackage.EMF_CLASS__EXTENDS:
-				getExtends().clear();
-				getExtends().addAll((Collection<? extends EMFClass>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -594,6 +766,21 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 		switch (featureID) {
 			case ModeldocPackage.EMF_CLASS__TARGET_CLASS:
 				setTargetClass((EClass)null);
+				return;
+			case ModeldocPackage.EMF_CLASS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case ModeldocPackage.EMF_CLASS__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
+			case ModeldocPackage.EMF_CLASS__INTERFACE:
+				setInterface(INTERFACE_EDEFAULT);
+				return;
+			case ModeldocPackage.EMF_CLASS__SUPERTYPES:
+				getSupertypes().clear();
+				return;
+			case ModeldocPackage.EMF_CLASS__SUBTYPES:
+				getSubtypes().clear();
 				return;
 			case ModeldocPackage.EMF_CLASS__RUNTIME_CLASS:
 				setRuntimeClass((JavaClass)null);
@@ -625,9 +812,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				setParent((ModelDocumentation)null);
 				return;
-			case ModeldocPackage.EMF_CLASS__EXTENDS:
-				getExtends().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -642,6 +826,16 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 		switch (featureID) {
 			case ModeldocPackage.EMF_CLASS__TARGET_CLASS:
 				return targetClass != null;
+			case ModeldocPackage.EMF_CLASS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModeldocPackage.EMF_CLASS__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
+			case ModeldocPackage.EMF_CLASS__INTERFACE:
+				return interface_ != INTERFACE_EDEFAULT;
+			case ModeldocPackage.EMF_CLASS__SUPERTYPES:
+				return supertypes != null && !supertypes.isEmpty();
+			case ModeldocPackage.EMF_CLASS__SUBTYPES:
+				return subtypes != null && !subtypes.isEmpty();
 			case ModeldocPackage.EMF_CLASS__RUNTIME_CLASS:
 				return runtimeClass != null;
 			case ModeldocPackage.EMF_CLASS__TAGLINE:
@@ -662,8 +856,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return examples != null && !examples.isEmpty();
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				return getParent() != null;
-			case ModeldocPackage.EMF_CLASS__EXTENDS:
-				return extends_ != null && !extends_.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -678,7 +870,13 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (tagline: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", abstract: ");
+		result.append(abstract_);
+		result.append(", interface: ");
+		result.append(interface_);
+		result.append(", tagline: ");
 		result.append(tagline);
 		result.append(", description: ");
 		result.append(description);

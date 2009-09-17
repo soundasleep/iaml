@@ -16,7 +16,9 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -986,7 +988,9 @@ public class Test2 extends TestCase {
 				c.setAbstract(cls.isAbstract());
 				c.setInterface(cls.isInterface());
 				c.setDescription("TODO Description");
-				c.setTagline("TODO Tagline");
+
+				getTaglineForEMFClass(cls, c);		// add tagline
+				
 				c.setParent(root);
 				
 				// link up the source java class
@@ -998,6 +1002,28 @@ public class Test2 extends TestCase {
 		// load all subpackages
 		for (EPackage sub : pkg.getESubpackages()) {
 			loadEMFClasses(sub, factory, root);
+		}
+	}
+	
+	/**
+	 * Get the tagline information for the given class.
+	 * Following EMF's documentation approach, we get the appropriate
+	 * EAnnotation if it exists. 
+	 * Modifies the provided EMFClass as necessary.
+	 * 
+	 * @param source
+	 * @param target
+	 */
+	protected void getTaglineForEMFClass(EClass source, EMFClass target) {
+		EAnnotation ann = source.getEAnnotation("http://www.eclipse.org/emf/2002/GenModel");
+		if (ann != null) {
+			EMap<String, String> details = ann.getDetails();
+			for (String key : details.keySet()) {
+				if (key.equals("documentation")) {
+					// found a tag line
+					target.setTagline(details.get(key));
+				}
+			}
 		}
 	}
 	

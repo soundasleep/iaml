@@ -306,6 +306,8 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		// Create annotations
 		// http://openiaml.org/comment
 		createCommentAnnotations();
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
 	}
 
 	/**
@@ -328,13 +330,29 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (frameEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
 		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";				
+		addAnnotation
+		  (buttonEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a clickable button to the user."
+		   });	
 	}
 
 } //VisualPackageImpl

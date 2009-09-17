@@ -14,7 +14,9 @@
 			<a href="«fileName(cls)»">
 			«cls.name»
 			</a>
+			«IF cls.tagline != null && cls.tagline.length > 0»
 			<small>«cls.tagline»</small>
+			«ENDIF»
 			</li>
 		«ENDFOREACH»
 		</ul>
@@ -57,6 +59,8 @@ table { border: 1px solid #aab; border-collapse: collapse; }
 table th { background: #ccd; }
 table th, table td { padding: 4px; border: 1px solid #aab; }
 table tr:nth-child(odd) { background: #eef; }
+
+span.class_link { white-space: nowrap; }
 
 body#index ul, body#index ol, body#index p {
 	line-height: 1.6em;

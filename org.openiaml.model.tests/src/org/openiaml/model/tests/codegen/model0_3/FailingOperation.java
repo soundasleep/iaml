@@ -20,6 +20,10 @@ public class FailingOperation extends CodegenTestCase {
 		root = loadAndCodegen(FailingOperation.class);
 	}
 	
+	/**
+	 * @semantics ExecutionEdge,CancelNode An {@model ExecutionEdge operation flow} that goes to a {@model CancelNode failure node} will cause the operation to fail.
+	 * @throws Exception
+	 */
 	public void testFailingOperation() throws Exception {
 		try {
 			beginAtSitemapThenPage("page");

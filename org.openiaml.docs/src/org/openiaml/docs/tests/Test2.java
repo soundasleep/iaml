@@ -327,7 +327,7 @@ public class Test2 extends TestCase {
 					
 					// parse the line into javadoc elements
 					// (the line needs to be parsed into fragments before we can find semantic references)
-					parseSemanticLine(line, factory, root, e, rule);
+					parseSemanticLineIntoFragments(line, factory, e);
 					
 					// and then add a reference link back
 					findSemanticReferences(root, e, rule, new HandleSemantics() {
@@ -381,13 +381,17 @@ public class Test2 extends TestCase {
 	}
 	
 	/**
-	 * Parse the given semantic rule line, e.g.
-	 * <code>This element {@model Element} ...</code>
+	 * <p>Parse the given semantic rule line, e.g.
+	 * <code>This element {@model Element} ...</code>,
+	 * and place it into JavadocFragments.</p>
+	 * 
+	 * <p>This is a very basic parser, and won't handle anything
+	 * complicated (e.g. additional javadoc block characters).</p>
 	 */
-	private void parseSemanticLine(String line, ModeldocFactory factory,
-			ModelDocumentation root, JavadocTagElement e, DroolsRule droolsRule) {
+	private void parseSemanticLineIntoFragments(String line, ModeldocFactory factory,
+			JavadocTagElement e) {
 		
-		HandleInlineJavadoc inline = new HandleInlineJavadoc(factory, root, e, droolsRule);
+		HandleInlineJavadoc inline = new HandleInlineJavadoc(factory, e);
 		
 		int pos = 0;
 		while (true) {
@@ -423,15 +427,11 @@ public class Test2 extends TestCase {
 	
 	private class HandleInlineJavadoc {
 		private ModeldocFactory factory;
-		private ModelDocumentation root;
 		private JavadocTagElement tagElement;
-		private DroolsRule droolsReference;
 		
-		public HandleInlineJavadoc(ModeldocFactory factory, ModelDocumentation root, JavadocTagElement tagElement, DroolsRule droolsReference) {
+		public HandleInlineJavadoc(ModeldocFactory factory, JavadocTagElement tagElement) {
 			this.factory = factory;
-			this.root = root;
 			this.tagElement = tagElement;
-			this.droolsReference = droolsReference;
 		}
 		
 		/**
@@ -464,25 +464,6 @@ public class Test2 extends TestCase {
 			JavadocTextElement text2 = factory.createJavadocTextElement();
 			text2.setValue(text);
 			fragment.getFragments().add(text2);
-			
-			// what kind of tag is it?
-			/*
-			if (tag.equals("@model")) {
-				
-				// find the class it refers to
-				EMFClass cls = getEMFClassFor(root, text);
-				if (cls != null) {
-					// make an inference semantics link
-					InferenceSemantic semantic = factory.createInferenceSemantic();
-					semantic.setDescription(tagElement);
-					semantic.setReference(droolsReference);
-					
-					// add it to the EMFclass
-					cls.getInferenceSemantics().add(semantic);
-				}
-				
-			}
-			*/
 			
 			tagElement.getFragments().add(fragment);
 

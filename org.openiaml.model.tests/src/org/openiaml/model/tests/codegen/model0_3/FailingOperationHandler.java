@@ -20,6 +20,10 @@ public class FailingOperationHandler extends CodegenTestCase {
 		root = loadAndCodegen(FailingOperationHandler.class);
 	}
 	
+	/**
+	 * @semantics CancelNode,NavigateWire A {@model CancelNode failing operation} wrapped with a {@model NavigateWire navigation wire} named 'fail' will redirect to the destination {@model Page page} instead.
+	 * @throws Exception
+	 */
 	public void testFailingOperation() throws Exception {
 		// go to sitemap
 		IFile sitemap = getSitemap();

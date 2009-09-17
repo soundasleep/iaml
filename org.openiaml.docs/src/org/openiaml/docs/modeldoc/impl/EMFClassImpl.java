@@ -16,11 +16,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.Constraint;
+import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.EMFReference;
 import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
@@ -53,6 +56,8 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getExamples <em>Examples</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -239,6 +244,24 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * @ordered
 	 */
 	protected EList<Example> examples;
+	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EMFAttribute> attributes;
+	/**
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EMFReference> references;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -581,6 +604,30 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EMFAttribute> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentWithInverseEList<EMFAttribute>(EMFAttribute.class, this, ModeldocPackage.EMF_CLASS__ATTRIBUTES, ModeldocPackage.EMF_ATTRIBUTE__CONTAINING_TYPE);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<EMFReference> getReferences() {
+		if (references == null) {
+			references = new EObjectContainmentWithInverseEList<EMFReference>(EMFReference.class, this, ModeldocPackage.EMF_CLASS__REFERENCES, ModeldocPackage.EMF_REFERENCE__CONTAINING_TYPE);
+		}
+		return references;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -593,6 +640,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((ModelDocumentation)otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__ATTRIBUTES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAttributes()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__REFERENCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getReferences()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -623,6 +674,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<?>)getExamples()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				return basicSetParent(null, msgs);
+			case ModeldocPackage.EMF_CLASS__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__REFERENCES:
+				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -683,6 +738,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return getExamples();
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				return getParent();
+			case ModeldocPackage.EMF_CLASS__ATTRIBUTES:
+				return getAttributes();
+			case ModeldocPackage.EMF_CLASS__REFERENCES:
+				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -752,6 +811,14 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				setParent((ModelDocumentation)newValue);
 				return;
+			case ModeldocPackage.EMF_CLASS__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends EMFAttribute>)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends EMFReference>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -812,6 +879,12 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				setParent((ModelDocumentation)null);
 				return;
+			case ModeldocPackage.EMF_CLASS__ATTRIBUTES:
+				getAttributes().clear();
+				return;
+			case ModeldocPackage.EMF_CLASS__REFERENCES:
+				getReferences().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -856,6 +929,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return examples != null && !examples.isEmpty();
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				return getParent() != null;
+			case ModeldocPackage.EMF_CLASS__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
+			case ModeldocPackage.EMF_CLASS__REFERENCES:
+				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

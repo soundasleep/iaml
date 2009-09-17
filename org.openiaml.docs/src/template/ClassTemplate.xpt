@@ -80,6 +80,78 @@
 			«ENDIF»
 		</p>
 		
+		<p id="attributes_direct">
+			<h2>Direct Attributes</h2>
+			
+			«IF attributes.isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ol>
+				«EXPAND attribute(true) FOREACH attributes.sortBy(a|a.name)»
+				</ol>
+			«ENDIF»
+		</p>
+
+		<p id="attributes_inherited">
+			<h2>Inherited Attributes</h2>
+			
+			«IF getInheritedAttributes(this).isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ol>
+				«EXPAND attribute(false) FOREACH getInheritedAttributes(this).sortBy(a|a.name)»
+				</ol>
+			«ENDIF»
+		</p>
+		
+		<p id="containments_direct">
+			<h2>Direct Containments</h2>
+			
+			«IF references.select(r|r.containment).isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ol>
+				«EXPAND reference(true) FOREACH references.select(r|r.containment).sortBy(a|a.name)»
+				</ol>
+			«ENDIF»
+		</p>
+
+		<p id="containments_inherited">
+			<h2>Inherited Containments</h2>
+			
+			«IF getInheritedReferences(this).select(r|r.containment).isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ol>
+				«EXPAND reference(false) FOREACH getInheritedReferences(this).select(r|r.containment).sortBy(a|a.name)»
+				</ol>
+			«ENDIF»
+		</p>
+		
+		<p id="references_direct">
+			<h2>Direct References</h2>
+			
+			«IF references.select(r|!r.containment).isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ol>
+				«EXPAND reference(true) FOREACH references.select(r|!r.containment).sortBy(a|a.name)»
+				</ol>
+			«ENDIF»
+		</p>
+
+		<p id="references_inherited">
+			<h2>Inherited References</h2>
+			
+			«IF getInheritedReferences(this).select(r|!r.containment).isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ol>
+				«EXPAND reference(false) FOREACH getInheritedReferences(this).select(r|!r.containment).sortBy(a|a.name)»
+				</ol>
+			«ENDIF»
+		</p>
+		
 		«EXPAND Template::footer»
 	«ENDFILE»
 «ENDDEFINE»
@@ -96,6 +168,42 @@
 
 «DEFINE inferenceSemantics FOR modeldoc::InferenceSemantic»
 	<li>«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»</li>
+«ENDDEFINE»
+
+«DEFINE attribute(boolean local) FOR modeldoc::EMFAttribute»
+	<li>
+		«IF local»
+		«name»
+		«ELSE»
+		<a href="«fileName(containingType)»">«name»</a>
+		«ENDIF»
+		:
+		«type»
+		«IF lowerBound == 0»
+		(optional)
+		«ELSEIF defaultLiteral != null && defaultLiteral.length > 0»
+		(default: «defaultLiteral»)
+		«ELSE»
+		(<b>required</b>)
+		«ENDIF»
+	</li>
+«ENDDEFINE»
+
+«DEFINE reference(boolean local) FOR modeldoc::EMFReference»
+	<li>
+		«IF local»
+		«name»
+		«ELSE»
+		<a href="«fileName(containingType)»">«name»</a>
+		«ENDIF»
+		:
+		«IF lowerBound == upperBound»
+		[«lowerBound»]
+		«ELSE»
+		[«lowerBound»...«IF upperBound==-1»*«ELSE»«upperBound»«ENDIF»]
+		«ENDIF»
+		«EXPAND supertypes FOR type»
+	</li>
 «ENDDEFINE»
 
 «DEFINE javadocElement FOR modeldoc::Reference»

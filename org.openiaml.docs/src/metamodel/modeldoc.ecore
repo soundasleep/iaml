@@ -37,6 +37,10 @@
         eType="#//Example" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ModelDocumentation"
         eOpposite="#//ModelDocumentation/classes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//EMFAttribute" containment="true" eOpposite="#//EMFAttribute/containingType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//EMFReference" containment="true" eOpposite="#//EMFReference/containingType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Semantic" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Reference"/>
@@ -134,5 +138,28 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavadocClassReference" eSuperTypes="#//JavadocFragment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//JavaClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EMFAttribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingType" eType="#//EMFClass"
+        eOpposite="#//EMFClass/attributes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EMFReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EMFClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingType" eType="#//EMFClass"
+        eOpposite="#//EMFClass/references"/>
   </eClassifiers>
 </ecore:EPackage>

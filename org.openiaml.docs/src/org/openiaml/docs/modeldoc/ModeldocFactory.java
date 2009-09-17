@@ -197,6 +197,24 @@ public interface ModeldocFactory extends EFactory {
 	JavadocClassReference createJavadocClassReference();
 
 	/**
+	 * Returns a new object of class '<em>EMF Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EMF Attribute</em>'.
+	 * @generated
+	 */
+	EMFAttribute createEMFAttribute();
+
+	/**
+	 * Returns a new object of class '<em>EMF Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EMF Reference</em>'.
+	 * @generated
+	 */
+	EMFReference createEMFReference();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

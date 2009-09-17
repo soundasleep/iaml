@@ -252,13 +252,31 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_CLASS__PARENT = 15;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__ATTRIBUTES = 16;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__REFERENCES = 17;
+
+	/**
 	 * The number of structural features of the '<em>EMF Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS_FEATURE_COUNT = 16;
+	int EMF_CLASS_FEATURE_COUNT = 18;
 
 
 	/**
@@ -1237,6 +1255,161 @@ public interface ModeldocPackage extends EPackage {
 	int JAVADOC_CLASS_REFERENCE_FEATURE_COUNT = JAVADOC_FRAGMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl <em>EMF Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.EMFAttributeImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getEMFAttribute()
+	 * @generated
+	 */
+	int EMF_ATTRIBUTE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__ID = 1;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__LOWER_BOUND = 2;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__UPPER_BOUND = 3;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__TYPE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Containing Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__CONTAINING_TYPE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Default Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__DEFAULT_LITERAL = 6;
+
+	/**
+	 * The number of structural features of the '<em>EMF Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE_FEATURE_COUNT = 7;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl <em>EMF Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.EMFReferenceImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getEMFReference()
+	 * @generated
+	 */
+	int EMF_REFERENCE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__LOWER_BOUND = 1;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__UPPER_BOUND = 2;
+
+	/**
+	 * The feature id for the '<em><b>Containment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__CONTAINMENT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__TYPE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Containing Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__CONTAINING_TYPE = 5;
+
+	/**
+	 * The number of structural features of the '<em>EMF Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE_FEATURE_COUNT = 6;
+
+	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1244,7 +1417,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 23;
+	int CONSTRAINT_TYPE = 25;
 
 
 	/**
@@ -1464,6 +1637,28 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEMFClass_Parent();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getAttributes()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EReference getEMFClass_Attributes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getReferences <em>References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>References</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getReferences()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EReference getEMFClass_References();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Semantic <em>Semantic</em>}'.
@@ -2149,6 +2344,169 @@ public interface ModeldocPackage extends EPackage {
 	EReference getJavadocClassReference_Reference();
 
 	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.EMFAttribute <em>EMF Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EMF Attribute</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute
+	 * @generated
+	 */
+	EClass getEMFAttribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFAttribute#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getName()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EAttribute getEMFAttribute_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFAttribute#isId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#isId()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EAttribute getEMFAttribute_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFAttribute#getLowerBound <em>Lower Bound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lower Bound</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getLowerBound()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EAttribute getEMFAttribute_LowerBound();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFAttribute#getUpperBound <em>Upper Bound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Upper Bound</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getUpperBound()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EAttribute getEMFAttribute_UpperBound();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFAttribute#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getType()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EAttribute getEMFAttribute_Type();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.EMFAttribute#getContainingType <em>Containing Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Containing Type</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getContainingType()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EReference getEMFAttribute_ContainingType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFAttribute#getDefaultLiteral <em>Default Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Literal</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getDefaultLiteral()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EAttribute getEMFAttribute_DefaultLiteral();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.EMFReference <em>EMF Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EMF Reference</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference
+	 * @generated
+	 */
+	EClass getEMFReference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFReference#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getName()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EAttribute getEMFReference_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFReference#getLowerBound <em>Lower Bound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lower Bound</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getLowerBound()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EAttribute getEMFReference_LowerBound();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFReference#getUpperBound <em>Upper Bound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Upper Bound</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getUpperBound()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EAttribute getEMFReference_UpperBound();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFReference#isContainment <em>Containment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Containment</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#isContainment()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EAttribute getEMFReference_Containment();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.EMFReference#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getType()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EReference getEMFReference_Type();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.EMFReference#getContainingType <em>Containing Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Containing Type</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getContainingType()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EReference getEMFReference_ContainingType();
+
+	/**
 	 * Returns the meta object for enum '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2343,6 +2701,22 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMF_CLASS__PARENT = eINSTANCE.getEMFClass_Parent();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_CLASS__ATTRIBUTES = eINSTANCE.getEMFClass_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_CLASS__REFERENCES = eINSTANCE.getEMFClass_References();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.SemanticImpl <em>Semantic</em>}' class.
@@ -2897,6 +3271,130 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference JAVADOC_CLASS_REFERENCE__REFERENCE = eINSTANCE.getJavadocClassReference_Reference();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl <em>EMF Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.EMFAttributeImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getEMFAttribute()
+		 * @generated
+		 */
+		EClass EMF_ATTRIBUTE = eINSTANCE.getEMFAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_ATTRIBUTE__NAME = eINSTANCE.getEMFAttribute_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_ATTRIBUTE__ID = eINSTANCE.getEMFAttribute_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Lower Bound</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_ATTRIBUTE__LOWER_BOUND = eINSTANCE.getEMFAttribute_LowerBound();
+
+		/**
+		 * The meta object literal for the '<em><b>Upper Bound</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_ATTRIBUTE__UPPER_BOUND = eINSTANCE.getEMFAttribute_UpperBound();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_ATTRIBUTE__TYPE = eINSTANCE.getEMFAttribute_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Containing Type</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_ATTRIBUTE__CONTAINING_TYPE = eINSTANCE.getEMFAttribute_ContainingType();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_ATTRIBUTE__DEFAULT_LITERAL = eINSTANCE.getEMFAttribute_DefaultLiteral();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl <em>EMF Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.EMFReferenceImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getEMFReference()
+		 * @generated
+		 */
+		EClass EMF_REFERENCE = eINSTANCE.getEMFReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_REFERENCE__NAME = eINSTANCE.getEMFReference_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Lower Bound</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_REFERENCE__LOWER_BOUND = eINSTANCE.getEMFReference_LowerBound();
+
+		/**
+		 * The meta object literal for the '<em><b>Upper Bound</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_REFERENCE__UPPER_BOUND = eINSTANCE.getEMFReference_UpperBound();
+
+		/**
+		 * The meta object literal for the '<em><b>Containment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_REFERENCE__CONTAINMENT = eINSTANCE.getEMFReference_Containment();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_REFERENCE__TYPE = eINSTANCE.getEMFReference_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Containing Type</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_REFERENCE__CONTAINING_TYPE = eINSTANCE.getEMFReference_ContainingType();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}' enum.

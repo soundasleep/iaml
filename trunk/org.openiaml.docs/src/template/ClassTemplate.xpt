@@ -4,37 +4,59 @@
 
 «DEFINE class(modeldoc::ModelDocumentation root) FOR modeldoc::EMFClass»
 	«FILE "output/" + fileName()»
-		«EXPAND Template::header(getName(targetClass))»
+		«EXPAND Template::header(name, "summary")»
 
+		<div class="navigation">
 		<a href="index.html">&lt; Back to list</a>
-		
-		<h1>
-		«EXPAND Template::getIcon»
-		«getName(targetClass)»
-		
-		«REM»get all extensions«ENDREM»
-		<small>«EXPAND extensions FOREACH extends SEPARATOR ","»</small>
-		</h1>
-		
-		<div id="tagline">
-		«tagline»
 		</div>
 		
-		<div id="description">
+		<div class="intro">
+		<h1>
+		<span class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">
+		«EXPAND Template::getIcon»
+		«name»
+		</span>
+		
+		«REM»get all extensions«ENDREM»
+		«IF !supertypes.isEmpty»
+		<small class="supertypes">
+		extends
+		«EXPAND supertypes FOREACH supertypes.sortBy(t|t.name) SEPARATOR ", "»
+		</small>
+		«ENDIF»
+		</h1>
+		
+		<p id="tagline">
+		«tagline»
+		</p>
+		
+		<p id="description">
 		«description»
+		</p>
+		
+		«IF !subtypes.isEmpty»
+		<p>
+		<div id="subtypes">
+			Direct subtypes:
+			<div class="subtype_list">
+			«EXPAND supertypes FOREACH subtypes.sortBy(t|t.name) SEPARATOR ", "»
+			</div>
+		</div>
+		</p>
+		«ENDIF»
 		</div>
 		
 		«IF !examples.isEmpty»
-		<div id="examples">
+		<p id="examples">
 			<h2>Examples</h2>
 			
 			<ol>
 			«EXPAND example FOREACH examples»
 			</ol>
-		</div>
+		</p>
 		«ENDIF»
 		
-		<div id="operational">
+		<p id="operational">
 			<h2>Operational Semantics</h2>
 			
 			«IF operationalSemantics.isEmpty»
@@ -44,9 +66,9 @@
 				«EXPAND operationalSemantics FOREACH operationalSemantics»
 				</ol>
 			«ENDIF»
-		</div>
+		</p>
 		
-		<div id="inference">
+		<p id="inference">
 			<h2>Inference Semantics</h2>
 			
 			«IF inferenceSemantics.isEmpty»
@@ -56,15 +78,13 @@
 				«EXPAND inferenceSemantics FOREACH inferenceSemantics»
 				</ol>
 			«ENDIF»
-		</div>
+		</p>
 		
 		«EXPAND Template::footer»
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE extensions FOR modeldoc::EMFClass»
-	«getName(targetClass)»
-«ENDDEFINE»
+«DEFINE supertypes FOR modeldoc::EMFClass-»<a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a>«ENDDEFINE»
 
 «DEFINE example FOR modeldoc::Example»
 	<li>«this»</li>

@@ -11,6 +11,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EMFClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetClass" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supertypes" upperBound="-1"
+        eType="#//EMFClass" eOpposite="#//EMFClass/subtypes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subtypes" upperBound="-1"
+        eType="#//EMFClass" eOpposite="#//EMFClass/supertypes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="runtimeClass" eType="#//JavaClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tagline" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -28,8 +37,6 @@
         eType="#//Example" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ModelDocumentation"
         eOpposite="#//ModelDocumentation/classes"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
-        eType="#//EMFClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Semantic" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Reference"/>

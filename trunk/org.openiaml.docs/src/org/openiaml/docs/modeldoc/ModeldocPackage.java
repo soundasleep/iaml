@@ -117,13 +117,58 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_CLASS__TARGET_CLASS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__ABSTRACT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Interface</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__INTERFACE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Supertypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__SUPERTYPES = 4;
+
+	/**
+	 * The feature id for the '<em><b>Subtypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__SUBTYPES = 5;
+
+	/**
 	 * The feature id for the '<em><b>Runtime Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__RUNTIME_CLASS = 1;
+	int EMF_CLASS__RUNTIME_CLASS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Tagline</b></em>' attribute.
@@ -132,7 +177,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__TAGLINE = 2;
+	int EMF_CLASS__TAGLINE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -141,7 +186,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__DESCRIPTION = 3;
+	int EMF_CLASS__DESCRIPTION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Operational Semantics</b></em>' containment reference list.
@@ -150,7 +195,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__OPERATIONAL_SEMANTICS = 4;
+	int EMF_CLASS__OPERATIONAL_SEMANTICS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Inference Semantics</b></em>' containment reference list.
@@ -159,7 +204,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__INFERENCE_SEMANTICS = 5;
+	int EMF_CLASS__INFERENCE_SEMANTICS = 10;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -168,7 +213,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__CONSTRAINTS = 6;
+	int EMF_CLASS__CONSTRAINTS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -177,7 +222,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__EXTENSIONS = 7;
+	int EMF_CLASS__EXTENSIONS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Graphical Representations</b></em>' containment reference list.
@@ -186,7 +231,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__GRAPHICAL_REPRESENTATIONS = 8;
+	int EMF_CLASS__GRAPHICAL_REPRESENTATIONS = 13;
 
 	/**
 	 * The feature id for the '<em><b>Examples</b></em>' containment reference list.
@@ -195,7 +240,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__EXAMPLES = 9;
+	int EMF_CLASS__EXAMPLES = 14;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -204,16 +249,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__PARENT = 10;
-
-	/**
-	 * The feature id for the '<em><b>Extends</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_CLASS__EXTENDS = 11;
+	int EMF_CLASS__PARENT = 15;
 
 	/**
 	 * The number of structural features of the '<em>EMF Class</em>' class.
@@ -222,7 +258,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS_FEATURE_COUNT = 12;
+	int EMF_CLASS_FEATURE_COUNT = 16;
 
 
 	/**
@@ -1265,6 +1301,61 @@ public interface ModeldocPackage extends EPackage {
 	EReference getEMFClass_TargetClass();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFClass#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getName()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EAttribute getEMFClass_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFClass#isAbstract <em>Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Abstract</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#isAbstract()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EAttribute getEMFClass_Abstract();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFClass#isInterface <em>Interface</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Interface</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#isInterface()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EAttribute getEMFClass_Interface();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getSupertypes <em>Supertypes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Supertypes</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getSupertypes()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EReference getEMFClass_Supertypes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getSubtypes <em>Subtypes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Subtypes</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getSubtypes()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EReference getEMFClass_Subtypes();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.EMFClass#getRuntimeClass <em>Runtime Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1373,17 +1464,6 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEMFClass_Parent();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getExtends <em>Extends</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Extends</em>'.
-	 * @see org.openiaml.docs.modeldoc.EMFClass#getExtends()
-	 * @see #getEMFClass()
-	 * @generated
-	 */
-	EReference getEMFClass_Extends();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Semantic <em>Semantic</em>}'.
@@ -2145,6 +2225,46 @@ public interface ModeldocPackage extends EPackage {
 		EReference EMF_CLASS__TARGET_CLASS = eINSTANCE.getEMFClass_TargetClass();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_CLASS__NAME = eINSTANCE.getEMFClass_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_CLASS__ABSTRACT = eINSTANCE.getEMFClass_Abstract();
+
+		/**
+		 * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_CLASS__INTERFACE = eINSTANCE.getEMFClass_Interface();
+
+		/**
+		 * The meta object literal for the '<em><b>Supertypes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_CLASS__SUPERTYPES = eINSTANCE.getEMFClass_Supertypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Subtypes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_CLASS__SUBTYPES = eINSTANCE.getEMFClass_Subtypes();
+
+		/**
 		 * The meta object literal for the '<em><b>Runtime Class</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2223,14 +2343,6 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMF_CLASS__PARENT = eINSTANCE.getEMFClass_Parent();
-
-		/**
-		 * The meta object literal for the '<em><b>Extends</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EMF_CLASS__EXTENDS = eINSTANCE.getEMFClass_Extends();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.SemanticImpl <em>Semantic</em>}' class.

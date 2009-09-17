@@ -17,6 +17,11 @@
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//EMFClass">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/targetClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/interface"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/supertypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/subtypes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/runtimeClass"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/tagline"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/description"/>
@@ -27,7 +32,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/graphicalRepresentations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/examples"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/parent"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/extends"/>
     </genClasses>
     <genClasses image="false" ecoreClass="modeldoc.ecore#//Semantic">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Semantic/reference"/>

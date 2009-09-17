@@ -143,7 +143,7 @@ public class Test2 extends TestCase {
 					
 					if (source.getTargetClass().getESuperTypes().contains(target.getTargetClass())) {
 						// this class extends directly
-						source.getExtends().add(target);						
+						source.getSupertypes().add(target);
 					}
 					
 				}
@@ -982,6 +982,9 @@ public class Test2 extends TestCase {
 				
 				EMFClass c = factory.createEMFClass();
 				c.setTargetClass(cls);
+				c.setName(cls.getName());
+				c.setAbstract(cls.isAbstract());
+				c.setInterface(cls.isInterface());
 				c.setDescription("TODO Description");
 				c.setTagline("TODO Tagline");
 				c.setParent(root);

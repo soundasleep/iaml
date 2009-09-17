@@ -3,6 +3,12 @@ import modeldoc;
 fileName(modeldoc::EMFClass this) :
 	name + ".html";
 
+List[modeldoc::EMFAttribute] getInheritedAttributes(modeldoc::EMFClass this) :
+	supertypes.attributes.union( supertypes.getInheritedAttributes() ); 
+
+List[modeldoc::EMFReference] getInheritedReferences(modeldoc::EMFClass this) :
+	supertypes.references.union( supertypes.getInheritedReferences() ); 
+
 /**
  * Converts 'foo.bar.baz' into 'foo/bar/baz'
  */

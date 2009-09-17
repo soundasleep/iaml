@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
+import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.EMFReference;
 import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
@@ -182,6 +184,14 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseJavadocClassReference(JavadocClassReference object) {
 				return createJavadocClassReferenceAdapter();
+			}
+			@Override
+			public Adapter caseEMFAttribute(EMFAttribute object) {
+				return createEMFAttributeAdapter();
+			}
+			@Override
+			public Adapter caseEMFReference(EMFReference object) {
+				return createEMFReferenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -522,6 +532,34 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createJavadocClassReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.EMFAttribute <em>EMF Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute
+	 * @generated
+	 */
+	public Adapter createEMFAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.EMFReference <em>EMF Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.EMFReference
+	 * @generated
+	 */
+	public Adapter createEMFReferenceAdapter() {
 		return null;
 	}
 

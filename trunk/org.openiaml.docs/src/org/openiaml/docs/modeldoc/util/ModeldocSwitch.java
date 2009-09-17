@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
+import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.EMFReference;
 import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
@@ -269,6 +271,18 @@ public class ModeldocSwitch<T> {
 				T result = caseJavadocClassReference(javadocClassReference);
 				if (result == null) result = caseJavadocFragment(javadocClassReference);
 				if (result == null) result = caseReference(javadocClassReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.EMF_ATTRIBUTE: {
+				EMFAttribute emfAttribute = (EMFAttribute)theEObject;
+				T result = caseEMFAttribute(emfAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.EMF_REFERENCE: {
+				EMFReference emfReference = (EMFReference)theEObject;
+				T result = caseEMFReference(emfReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -618,6 +632,36 @@ public class ModeldocSwitch<T> {
 	 * @generated
 	 */
 	public T caseJavadocClassReference(JavadocClassReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EMF Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EMF Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEMFAttribute(EMFAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EMF Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EMF Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEMFReference(EMFReference object) {
 		return null;
 	}
 

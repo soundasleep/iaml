@@ -32,6 +32,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/graphicalRepresentations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/examples"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/parent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/references"/>
     </genClasses>
     <genClasses image="false" ecoreClass="modeldoc.ecore#//Semantic">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Semantic/reference"/>
@@ -115,6 +117,23 @@
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//JavadocClassReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//JavadocClassReference/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//EMFAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFAttribute/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFAttribute/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFAttribute/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFAttribute/upperBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFAttribute/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFAttribute/containingType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFAttribute/defaultLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//EMFReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFReference/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFReference/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFReference/upperBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFReference/containment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFReference/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFReference/containingType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

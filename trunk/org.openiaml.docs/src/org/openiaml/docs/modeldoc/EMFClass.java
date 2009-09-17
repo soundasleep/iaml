@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getExamples <em>Examples</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -383,5 +385,41 @@ public interface EMFClass extends EObject {
 	 * @generated
 	 */
 	void setParent(ModelDocumentation value);
+
+	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.EMFAttribute}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.EMFAttribute#getContainingType <em>Containing Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Attributes()
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getContainingType
+	 * @model opposite="containingType" containment="true"
+	 * @generated
+	 */
+	EList<EMFAttribute> getAttributes();
+
+	/**
+	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.EMFReference}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.EMFReference#getContainingType <em>Containing Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>References</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>References</em>' containment reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_References()
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getContainingType
+	 * @model opposite="containingType" containment="true"
+	 * @generated
+	 */
+	EList<EMFReference> getReferences();
 
 } // EMFClass

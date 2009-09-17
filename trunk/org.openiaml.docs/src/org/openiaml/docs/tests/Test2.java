@@ -19,10 +19,12 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -49,7 +51,9 @@ import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.ConstraintType;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
+import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.EMFReference;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
@@ -109,6 +113,9 @@ public class Test2 extends TestCase {
 		// set up inheritance
 		loadInheritance(factory, root);
 
+		// set up references
+		loadEMFReferences(factory, root);
+
 		// get all constraints
 		loadOAWChecks(factory, root);
 		
@@ -150,6 +157,42 @@ public class Test2 extends TestCase {
 					
 				}
 			}
+		}
+		
+	}
+	
+	/**
+	 * Set up references.
+	 * 
+	 * @param einstance
+	 * @param factory
+	 * @param root
+	 */
+	private void loadEMFReferences(ModeldocFactory factory, ModelDocumentation root) {
+		
+		for (EMFClass source : root.getClasses()) {
+			
+			for (EReference ref : source.getTargetClass().getEReferences()) {
+				
+				// get the destination type
+				EClass refDest = ref.getEReferenceType();
+				// find the corresponding EMFClass
+				EMFClass refDestEMF = getEMFClassFor(root, refDest);
+				
+				// create a new EMFReference
+				EMFReference newRef = factory.createEMFReference();
+				newRef.setName(ref.getName());
+				newRef.setLowerBound(ref.getLowerBound());
+				newRef.setUpperBound(ref.getUpperBound());
+				newRef.setContainment(ref.isContainment());
+				if (refDestEMF != null) {
+					newRef.setType(refDestEMF);
+				}
+				
+				source.getReferences().add(newRef);
+				
+			}
+			
 		}
 		
 	}
@@ -303,7 +346,7 @@ public class Test2 extends TestCase {
 				String ruleName = lines[i].trim();
 				if (!ruleName.contains("\""))
 					throw new RuntimeException("Rule does not contain \": '" + lines[i] + "'");
-				ruleName = ruleName.substring(ruleName.indexOf("\""));
+				ruleName = ruleName.substring(ruleName.indexOf("\"") + 1);
 				if (!ruleName.contains("\""))
 					throw new RuntimeException("Rule does not contain \" twice: '" + lines[i] + "'");
 				ruleName = ruleName.substring(0, ruleName.lastIndexOf("\""));
@@ -435,6 +478,25 @@ public class Test2 extends TestCase {
 	private EMFClass getEMFClassFor(ModelDocumentation root, String name) {
 		for (EMFClass cls : root.getClasses()) {
 			if (cls.getTargetClass().getName().equals(name)) {
+				// found it
+				return cls;
+			}
+			
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Find an existing EMFClass for the given class.
+	 * Does not create a new one.
+	 * 
+	 * @param o
+	 * @return the class found, or null
+	 */
+	private EMFClass getEMFClassFor(ModelDocumentation root, EClass c) {
+		for (EMFClass cls : root.getClasses()) {
+			if (cls.getTargetClass().equals(c)) {
 				// found it
 				return cls;
 			}
@@ -996,6 +1058,8 @@ public class Test2 extends TestCase {
 				// link up the source java class
 				getJavaClassFor(c, cls, factory, root);
 				
+				// parse attributes
+				parseAttributes(factory, cls, c);
 			}
 		}
 	
@@ -1005,6 +1069,23 @@ public class Test2 extends TestCase {
 		}
 	}
 	
+	/**
+	 * Add all (local) attributes in the source class to the target EMFClass.
+	 */
+	private void parseAttributes(ModeldocFactory factory, EClass source, EMFClass target) {
+		for (EAttribute a : source.getEAttributes()) {
+			EMFAttribute created = factory.createEMFAttribute();
+			created.setName(a.getName());
+			created.setId(a.isID());
+			created.setLowerBound(a.getLowerBound());
+			created.setUpperBound(a.getUpperBound());
+			created.setType(a.getEAttributeType().getName());
+			created.setDefaultLiteral(a.getDefaultValueLiteral());
+			target.getAttributes().add(created);
+		}
+		
+	}
+
 	/**
 	 * Get the tagline information for the given class.
 	 * Following EMF's documentation approach, we get the appropriate

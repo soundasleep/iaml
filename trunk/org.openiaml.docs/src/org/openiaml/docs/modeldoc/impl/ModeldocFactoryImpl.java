@@ -16,7 +16,9 @@ import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.ConstraintType;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
+import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.EMFReference;
 import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
@@ -98,6 +100,8 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 			case ModeldocPackage.JAVADOC_TEXT_ELEMENT: return createJavadocTextElement();
 			case ModeldocPackage.JAVADOC_METHOD_REFERENCE: return createJavadocMethodReference();
 			case ModeldocPackage.JAVADOC_CLASS_REFERENCE: return createJavadocClassReference();
+			case ModeldocPackage.EMF_ATTRIBUTE: return createEMFAttribute();
+			case ModeldocPackage.EMF_REFERENCE: return createEMFReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -321,6 +325,26 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 	public JavadocClassReference createJavadocClassReference() {
 		JavadocClassReferenceImpl javadocClassReference = new JavadocClassReferenceImpl();
 		return javadocClassReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMFAttribute createEMFAttribute() {
+		EMFAttributeImpl emfAttribute = new EMFAttributeImpl();
+		return emfAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMFReference createEMFReference() {
+		EMFReferenceImpl emfReference = new EMFReferenceImpl();
+		return emfReference;
 	}
 
 	/**

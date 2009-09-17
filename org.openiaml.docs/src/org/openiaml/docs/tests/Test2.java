@@ -888,7 +888,7 @@ public class Test2 extends TestCase {
 		InputStream in = new FileInputStream(checkFile);
 		
 		FileReference fr = factory.createFileReference();
-		fr.setPackage("org.openiaml.model.codegen.oaw");
+		fr.setPlugin("org.openiaml.model.codegen.oaw");
 		fr.setPackage("src.metamodel");
 		fr.setName("Checks.chk");
 		fr.setParent(root);
@@ -912,7 +912,7 @@ public class Test2 extends TestCase {
 			FileLineReference line = factory.createFileLineReference();
 			line.setFile(fr);
 			line.setLine(check.getLine());
-			constraint.setReference(fr);
+			constraint.setReference(line);
 			
 			// add this constraint
 			identifier.getConstraints().add(constraint);

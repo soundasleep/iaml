@@ -9,6 +9,9 @@ List[modeldoc::EMFAttribute] getInheritedAttributes(modeldoc::EMFClass this) :
 List[modeldoc::EMFReference] getInheritedReferences(modeldoc::EMFClass this) :
 	supertypes.references.union( supertypes.getInheritedReferences() ); 
 
+List[modeldoc::Constraint] getInheritedConstraints(modeldoc::EMFClass this) :
+	supertypes.constraints.union( supertypes.getInheritedConstraints() ); 
+
 /**
  * Converts 'foo.bar.baz' into 'foo/bar/baz'
  */

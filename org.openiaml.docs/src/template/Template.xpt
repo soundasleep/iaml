@@ -105,6 +105,9 @@ body#summary div.intro h1 small a:hover { text-decoration: underline; }
 
 body#summary .subtype_list { padding-left: 2em; margin-top: .5em; line-height: 1.4em; }
 
+.constraint .warning { background: url("../icons/warning_obj.gif") top left no-repeat; padding-left: 18px; }
+.constraint .error { background: url("../icons/error_tsk.gif") top left no-repeat; padding-left: 18px; }
+
 a:hover { text-decoration: none; }
 «ENDFILE»
 «ENDDEFINE»

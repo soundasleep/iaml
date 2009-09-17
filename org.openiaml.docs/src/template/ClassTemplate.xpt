@@ -50,9 +50,9 @@
 		<p id="examples">
 			<h2>Examples</h2>
 			
-			<ol>
+			<ul>
 			«EXPAND example FOREACH examples»
-			</ol>
+			</ul>
 		</p>
 		«ENDIF»
 		
@@ -62,9 +62,9 @@
 			«IF operationalSemantics.isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
-				<ol>
+				<ul>
 				«EXPAND operationalSemantics FOREACH operationalSemantics»
-				</ol>
+				</ul>
 			«ENDIF»
 		</p>
 		
@@ -74,9 +74,21 @@
 			«IF inferenceSemantics.isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
-				<ol>
+				<ul>
 				«EXPAND inferenceSemantics FOREACH inferenceSemantics»
-				</ol>
+				</ul>
+			«ENDIF»
+		</p>
+		
+		<p id="constraints">
+			<h2>Constraints</h2>
+			
+			«IF constraints.union(getInheritedConstraints(this)).isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ul>
+				«EXPAND constraint FOREACH constraints.union(getInheritedConstraints(this)).sortBy(c|c.constraint)»
+				</ul>
 			«ENDIF»
 		</p>
 		
@@ -86,9 +98,9 @@
 			«IF attributes.isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
-				<ol>
+				<ul>
 				«EXPAND attribute(true) FOREACH attributes.sortBy(a|a.name)»
-				</ol>
+				</ul>
 			«ENDIF»
 		</p>
 
@@ -98,9 +110,9 @@
 			«IF getInheritedAttributes(this).isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
-				<ol>
+				<ul>
 				«EXPAND attribute(false) FOREACH getInheritedAttributes(this).sortBy(a|a.name)»
-				</ol>
+				</ul>
 			«ENDIF»
 		</p>
 		
@@ -110,9 +122,9 @@
 			«IF references.select(r|r.containment).isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
-				<ol>
+				<ul>
 				«EXPAND reference(true) FOREACH references.select(r|r.containment).sortBy(a|a.name)»
-				</ol>
+				</ul>
 			«ENDIF»
 		</p>
 
@@ -122,9 +134,9 @@
 			«IF getInheritedReferences(this).select(r|r.containment).isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
-				<ol>
+				<ul>
 				«EXPAND reference(false) FOREACH getInheritedReferences(this).select(r|r.containment).sortBy(a|a.name)»
-				</ol>
+				</ul>
 			«ENDIF»
 		</p>
 		
@@ -134,9 +146,9 @@
 			«IF references.select(r|!r.containment).isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
-				<ol>
+				<ul>
 				«EXPAND reference(true) FOREACH references.select(r|!r.containment).sortBy(a|a.name)»
-				</ol>
+				</ul>
 			«ENDIF»
 		</p>
 
@@ -146,9 +158,9 @@
 			«IF getInheritedReferences(this).select(r|!r.containment).isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
-				<ol>
+				<ul>
 				«EXPAND reference(false) FOREACH getInheritedReferences(this).select(r|!r.containment).sortBy(a|a.name)»
-				</ol>
+				</ul>
 			«ENDIF»
 		</p>
 		
@@ -168,6 +180,19 @@
 
 «DEFINE inferenceSemantics FOR modeldoc::InferenceSemantic»
 	<li>«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»</li>
+«ENDDEFINE»
+
+«DEFINE constraint FOR modeldoc::Constraint»
+	<li class="constraint">
+	«IF type == modeldoc::ConstraintType::WARNING»
+		<span class="warning">
+	«ELSE»
+		<span class="error">
+	«ENDIF»
+	«message»
+	«EXPAND linkReference FOR reference»
+	</span>
+	</li>
 «ENDDEFINE»
 
 «DEFINE attribute(boolean local) FOR modeldoc::EMFAttribute»
@@ -247,6 +272,10 @@
 
 «DEFINE linkReference FOR modeldoc::DroolsRule»
 	[<a href="«EXPAND browseSource»«package.plugin»/«getPackage(package.package)»/«package.name».drl#«line»">«name»</a>]
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::FileLineReference»
+	[<a href="«EXPAND browseSource»«file.plugin»/«getPackage(file.package)»/«file.name»#«line»">«file.name»</a>]
 «ENDDEFINE»
 
 «DEFINE browseSource FOR emf::EObject-»http://code.google.com/p/iaml/source/browse/trunk/«ENDDEFINE»

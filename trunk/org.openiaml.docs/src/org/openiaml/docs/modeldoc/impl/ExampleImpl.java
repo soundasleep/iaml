@@ -7,10 +7,13 @@
 package org.openiaml.docs.modeldoc.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -25,6 +28,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  * <ul>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ExampleImpl#getExampleModel <em>Example Model</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ExampleImpl#getExampleTest <em>Example Test</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.ExampleImpl#getContainingClass <em>Containing Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -151,6 +155,91 @@ public class ExampleImpl extends EObjectImpl implements Example {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EMFClass getContainingClass() {
+		if (eContainerFeatureID() != ModeldocPackage.EXAMPLE__CONTAINING_CLASS) return null;
+		return (EMFClass)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetContainingClass(EMFClass newContainingClass, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newContainingClass, ModeldocPackage.EXAMPLE__CONTAINING_CLASS, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContainingClass(EMFClass newContainingClass) {
+		if (newContainingClass != eInternalContainer() || (eContainerFeatureID() != ModeldocPackage.EXAMPLE__CONTAINING_CLASS && newContainingClass != null)) {
+			if (EcoreUtil.isAncestor(this, newContainingClass))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newContainingClass != null)
+				msgs = ((InternalEObject)newContainingClass).eInverseAdd(this, ModeldocPackage.EMF_CLASS__EXAMPLES, EMFClass.class, msgs);
+			msgs = basicSetContainingClass(newContainingClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EXAMPLE__CONTAINING_CLASS, newContainingClass, newContainingClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModeldocPackage.EXAMPLE__CONTAINING_CLASS:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetContainingClass((EMFClass)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModeldocPackage.EXAMPLE__CONTAINING_CLASS:
+				return basicSetContainingClass(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case ModeldocPackage.EXAMPLE__CONTAINING_CLASS:
+				return eInternalContainer().eInverseRemove(this, ModeldocPackage.EMF_CLASS__EXAMPLES, EMFClass.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -160,6 +249,8 @@ public class ExampleImpl extends EObjectImpl implements Example {
 			case ModeldocPackage.EXAMPLE__EXAMPLE_TEST:
 				if (resolve) return getExampleTest();
 				return basicGetExampleTest();
+			case ModeldocPackage.EXAMPLE__CONTAINING_CLASS:
+				return getContainingClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -177,6 +268,9 @@ public class ExampleImpl extends EObjectImpl implements Example {
 				return;
 			case ModeldocPackage.EXAMPLE__EXAMPLE_TEST:
 				setExampleTest((JavaClass)newValue);
+				return;
+			case ModeldocPackage.EXAMPLE__CONTAINING_CLASS:
+				setContainingClass((EMFClass)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,6 +290,9 @@ public class ExampleImpl extends EObjectImpl implements Example {
 			case ModeldocPackage.EXAMPLE__EXAMPLE_TEST:
 				setExampleTest((JavaClass)null);
 				return;
+			case ModeldocPackage.EXAMPLE__CONTAINING_CLASS:
+				setContainingClass((EMFClass)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -212,6 +309,8 @@ public class ExampleImpl extends EObjectImpl implements Example {
 				return exampleModel != null;
 			case ModeldocPackage.EXAMPLE__EXAMPLE_TEST:
 				return exampleTest != null;
+			case ModeldocPackage.EXAMPLE__CONTAINING_CLASS:
+				return getContainingClass() != null;
 		}
 		return super.eIsSet(featureID);
 	}

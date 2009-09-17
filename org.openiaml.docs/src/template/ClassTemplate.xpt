@@ -164,6 +164,30 @@
 			«ENDIF»
 		</p>
 		
+		<p id="extensions_inherited">
+			<h2>Direct Extensions</h2>
+			
+			«IF extensions.isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ul>
+				«EXPAND extension(true) FOREACH extensions.sortBy(a|a.name)»
+				</ul>
+			«ENDIF»
+		</p>
+		
+		<p id="extensions_inherited">
+			<h2>Inherited Extensions</h2>
+			
+			«IF getInheritedExtensions(this).reject(e|extensions.name.contains(e.name)).isEmpty»
+				<div class="none">(none)</div>
+			«ELSE»
+				<ul>
+				«EXPAND extension(false) FOREACH getInheritedExtensions(this).reject(e|extensions.name.contains(e.name)).sortBy(a|a.name)»
+				</ul>
+			«ENDIF»
+		</p>
+		
 		«EXPAND Template::footer»
 	«ENDFILE»
 «ENDDEFINE»
@@ -228,6 +252,18 @@
 		[«lowerBound»...«IF upperBound==-1»*«ELSE»«upperBound»«ENDIF»]
 		«ENDIF»
 		«EXPAND supertypes FOR type»
+	</li>
+«ENDDEFINE»
+
+«DEFINE extension(boolean local) FOR modeldoc::ModelExtension»
+	<li>
+		«IF local»
+		«value»
+		«ELSE»
+		<a href="«fileName(containingClass)»">«value»</a>
+		«ENDIF»
+		
+		«EXPAND linkReference FOR reference»
 	</li>
 «ENDDEFINE»
 

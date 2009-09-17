@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -493,7 +492,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	public EList<OperationalSemantic> getOperationalSemantics() {
 		if (operationalSemantics == null) {
-			operationalSemantics = new EObjectContainmentEList<OperationalSemantic>(OperationalSemantic.class, this, ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS);
+			operationalSemantics = new EObjectContainmentWithInverseEList<OperationalSemantic>(OperationalSemantic.class, this, ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS, ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS);
 		}
 		return operationalSemantics;
 	}
@@ -505,7 +504,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	public EList<InferenceSemantic> getInferenceSemantics() {
 		if (inferenceSemantics == null) {
-			inferenceSemantics = new EObjectContainmentEList<InferenceSemantic>(InferenceSemantic.class, this, ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS);
+			inferenceSemantics = new EObjectContainmentWithInverseEList<InferenceSemantic>(InferenceSemantic.class, this, ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS, ModeldocPackage.INFERENCE_SEMANTIC__CONTAINING_CLASS);
 		}
 		return inferenceSemantics;
 	}
@@ -517,7 +516,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	public EList<Constraint> getConstraints() {
 		if (constraints == null) {
-			constraints = new EObjectContainmentEList<Constraint>(Constraint.class, this, ModeldocPackage.EMF_CLASS__CONSTRAINTS);
+			constraints = new EObjectContainmentWithInverseEList<Constraint>(Constraint.class, this, ModeldocPackage.EMF_CLASS__CONSTRAINTS, ModeldocPackage.CONSTRAINT__CONTAINING_CLASS);
 		}
 		return constraints;
 	}
@@ -529,7 +528,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	public EList<ModelExtension> getExtensions() {
 		if (extensions == null) {
-			extensions = new EObjectContainmentEList<ModelExtension>(ModelExtension.class, this, ModeldocPackage.EMF_CLASS__EXTENSIONS);
+			extensions = new EObjectContainmentWithInverseEList<ModelExtension>(ModelExtension.class, this, ModeldocPackage.EMF_CLASS__EXTENSIONS, ModeldocPackage.MODEL_EXTENSION__CONTAINING_CLASS);
 		}
 		return extensions;
 	}
@@ -541,7 +540,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	public EList<GraphicalRepresentation> getGraphicalRepresentations() {
 		if (graphicalRepresentations == null) {
-			graphicalRepresentations = new EObjectContainmentEList<GraphicalRepresentation>(GraphicalRepresentation.class, this, ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS);
+			graphicalRepresentations = new EObjectContainmentWithInverseEList<GraphicalRepresentation>(GraphicalRepresentation.class, this, ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS, ModeldocPackage.GRAPHICAL_REPRESENTATION__CONTAINING_CLASS);
 		}
 		return graphicalRepresentations;
 	}
@@ -553,7 +552,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	public EList<Example> getExamples() {
 		if (examples == null) {
-			examples = new EObjectContainmentEList<Example>(Example.class, this, ModeldocPackage.EMF_CLASS__EXAMPLES);
+			examples = new EObjectContainmentWithInverseEList<Example>(Example.class, this, ModeldocPackage.EMF_CLASS__EXAMPLES, ModeldocPackage.EXAMPLE__CONTAINING_CLASS);
 		}
 		return examples;
 	}
@@ -636,6 +635,18 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSupertypes()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__SUBTYPES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubtypes()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOperationalSemantics()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInferenceSemantics()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__CONSTRAINTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtensions()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGraphicalRepresentations()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__EXAMPLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExamples()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__PARENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);

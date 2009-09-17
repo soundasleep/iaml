@@ -265,6 +265,7 @@ public interface EMFClass extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Operational Semantics</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.docs.modeldoc.OperationalSemantic}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.OperationalSemantic#getContainingClass <em>Containing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operational Semantics</em>' containment reference list isn't clear,
@@ -273,7 +274,8 @@ public interface EMFClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Operational Semantics</em>' containment reference list.
 	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_OperationalSemantics()
-	 * @model containment="true"
+	 * @see org.openiaml.docs.modeldoc.OperationalSemantic#getContainingClass
+	 * @model opposite="containingClass" containment="true"
 	 * @generated
 	 */
 	EList<OperationalSemantic> getOperationalSemantics();
@@ -281,6 +283,7 @@ public interface EMFClass extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Inference Semantics</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.docs.modeldoc.InferenceSemantic}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.InferenceSemantic#getContainingClass <em>Containing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Inference Semantics</em>' containment reference list isn't clear,
@@ -289,7 +292,8 @@ public interface EMFClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inference Semantics</em>' containment reference list.
 	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_InferenceSemantics()
-	 * @model containment="true"
+	 * @see org.openiaml.docs.modeldoc.InferenceSemantic#getContainingClass
+	 * @model opposite="containingClass" containment="true"
 	 * @generated
 	 */
 	EList<InferenceSemantic> getInferenceSemantics();
@@ -297,6 +301,7 @@ public interface EMFClass extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.docs.modeldoc.Constraint}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.Constraint#getContainingClass <em>Containing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
@@ -305,7 +310,8 @@ public interface EMFClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Constraints</em>' containment reference list.
 	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Constraints()
-	 * @model containment="true"
+	 * @see org.openiaml.docs.modeldoc.Constraint#getContainingClass
+	 * @model opposite="containingClass" containment="true"
 	 * @generated
 	 */
 	EList<Constraint> getConstraints();
@@ -313,6 +319,7 @@ public interface EMFClass extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Extensions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.docs.modeldoc.ModelExtension}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.ModelExtension#getContainingClass <em>Containing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Extensions</em>' containment reference list isn't clear,
@@ -321,7 +328,8 @@ public interface EMFClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extensions</em>' containment reference list.
 	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Extensions()
-	 * @model containment="true"
+	 * @see org.openiaml.docs.modeldoc.ModelExtension#getContainingClass
+	 * @model opposite="containingClass" containment="true"
 	 * @generated
 	 */
 	EList<ModelExtension> getExtensions();
@@ -329,6 +337,7 @@ public interface EMFClass extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Graphical Representations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.docs.modeldoc.GraphicalRepresentation}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.GraphicalRepresentation#getContainingClass <em>Containing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Graphical Representations</em>' containment reference list isn't clear,
@@ -337,7 +346,8 @@ public interface EMFClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Graphical Representations</em>' containment reference list.
 	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_GraphicalRepresentations()
-	 * @model containment="true"
+	 * @see org.openiaml.docs.modeldoc.GraphicalRepresentation#getContainingClass
+	 * @model opposite="containingClass" containment="true"
 	 * @generated
 	 */
 	EList<GraphicalRepresentation> getGraphicalRepresentations();
@@ -345,6 +355,7 @@ public interface EMFClass extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Examples</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.docs.modeldoc.Example}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.Example#getContainingClass <em>Containing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Examples</em>' containment reference list isn't clear,
@@ -353,7 +364,8 @@ public interface EMFClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Examples</em>' containment reference list.
 	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Examples()
-	 * @model containment="true"
+	 * @see org.openiaml.docs.modeldoc.Example#getContainingClass
+	 * @model opposite="containingClass" containment="true"
 	 * @generated
 	 */
 	EList<Example> getExamples();

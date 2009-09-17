@@ -336,13 +336,22 @@ public interface ModeldocPackage extends EPackage {
 	int EXAMPLE__EXAMPLE_TEST = 1;
 
 	/**
+	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE__CONTAINING_CLASS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Example</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE_FEATURE_COUNT = 2;
+	int EXAMPLE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl <em>Operational Semantic</em>}' class.
@@ -382,13 +391,22 @@ public interface ModeldocPackage extends EPackage {
 	int OPERATIONAL_SEMANTIC__DESCRIPTION = SEMANTIC_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATIONAL_SEMANTIC__CONTAINING_CLASS = SEMANTIC_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Operational Semantic</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_SEMANTIC_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 2;
+	int OPERATIONAL_SEMANTIC_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.GraphicalRepresentationImpl <em>Graphical Representation</em>}' class.
@@ -410,13 +428,22 @@ public interface ModeldocPackage extends EPackage {
 	int GRAPHICAL_REPRESENTATION__REFERENCE = SEMANTIC__REFERENCE;
 
 	/**
+	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_REPRESENTATION__CONTAINING_CLASS = SEMANTIC_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Graphical Representation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAPHICAL_REPRESENTATION_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 0;
+	int GRAPHICAL_REPRESENTATION_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.InferenceSemanticImpl <em>Inference Semantic</em>}' class.
@@ -456,13 +483,22 @@ public interface ModeldocPackage extends EPackage {
 	int INFERENCE_SEMANTIC__DESCRIPTION = SEMANTIC_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INFERENCE_SEMANTIC__CONTAINING_CLASS = SEMANTIC_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Inference Semantic</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INFERENCE_SEMANTIC_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 2;
+	int INFERENCE_SEMANTIC_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -511,13 +547,22 @@ public interface ModeldocPackage extends EPackage {
 	int CONSTRAINT__MESSAGE = SEMANTIC_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__CONTAINING_CLASS = SEMANTIC_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 3;
+	int CONSTRAINT_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.ModelExtensionImpl <em>Model Extension</em>}' class.
@@ -557,13 +602,22 @@ public interface ModeldocPackage extends EPackage {
 	int MODEL_EXTENSION__VALUE = SEMANTIC_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_EXTENSION__CONTAINING_CLASS = SEMANTIC_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Model Extension</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_EXTENSION_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 2;
+	int MODEL_EXTENSION_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.ReferenceImpl <em>Reference</em>}' class.
@@ -1714,6 +1768,17 @@ public interface ModeldocPackage extends EPackage {
 	EReference getExample_ExampleTest();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.Example#getContainingClass <em>Containing Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Containing Class</em>'.
+	 * @see org.openiaml.docs.modeldoc.Example#getContainingClass()
+	 * @see #getExample()
+	 * @generated
+	 */
+	EReference getExample_ContainingClass();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.OperationalSemantic <em>Operational Semantic</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1746,6 +1811,17 @@ public interface ModeldocPackage extends EPackage {
 	EReference getOperationalSemantic_Description();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.OperationalSemantic#getContainingClass <em>Containing Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Containing Class</em>'.
+	 * @see org.openiaml.docs.modeldoc.OperationalSemantic#getContainingClass()
+	 * @see #getOperationalSemantic()
+	 * @generated
+	 */
+	EReference getOperationalSemantic_ContainingClass();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.GraphicalRepresentation <em>Graphical Representation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1754,6 +1830,17 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getGraphicalRepresentation();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.GraphicalRepresentation#getContainingClass <em>Containing Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Containing Class</em>'.
+	 * @see org.openiaml.docs.modeldoc.GraphicalRepresentation#getContainingClass()
+	 * @see #getGraphicalRepresentation()
+	 * @generated
+	 */
+	EReference getGraphicalRepresentation_ContainingClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.InferenceSemantic <em>Inference Semantic</em>}'.
@@ -1786,6 +1873,17 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getInferenceSemantic_Description();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.InferenceSemantic#getContainingClass <em>Containing Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Containing Class</em>'.
+	 * @see org.openiaml.docs.modeldoc.InferenceSemantic#getContainingClass()
+	 * @see #getInferenceSemantic()
+	 * @generated
+	 */
+	EReference getInferenceSemantic_ContainingClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Constraint <em>Constraint</em>}'.
@@ -1831,6 +1929,17 @@ public interface ModeldocPackage extends EPackage {
 	EAttribute getConstraint_Message();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.Constraint#getContainingClass <em>Containing Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Containing Class</em>'.
+	 * @see org.openiaml.docs.modeldoc.Constraint#getContainingClass()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EReference getConstraint_ContainingClass();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.ModelExtension <em>Model Extension</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1861,6 +1970,17 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getModelExtension_Value();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.ModelExtension#getContainingClass <em>Containing Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Containing Class</em>'.
+	 * @see org.openiaml.docs.modeldoc.ModelExtension#getContainingClass()
+	 * @see #getModelExtension()
+	 * @generated
+	 */
+	EReference getModelExtension_ContainingClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Reference <em>Reference</em>}'.
@@ -2763,6 +2883,14 @@ public interface ModeldocPackage extends EPackage {
 		EReference EXAMPLE__EXAMPLE_TEST = eINSTANCE.getExample_ExampleTest();
 
 		/**
+		 * The meta object literal for the '<em><b>Containing Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXAMPLE__CONTAINING_CLASS = eINSTANCE.getExample_ContainingClass();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl <em>Operational Semantic</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2789,6 +2917,14 @@ public interface ModeldocPackage extends EPackage {
 		EReference OPERATIONAL_SEMANTIC__DESCRIPTION = eINSTANCE.getOperationalSemantic_Description();
 
 		/**
+		 * The meta object literal for the '<em><b>Containing Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATIONAL_SEMANTIC__CONTAINING_CLASS = eINSTANCE.getOperationalSemantic_ContainingClass();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.GraphicalRepresentationImpl <em>Graphical Representation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2797,6 +2933,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EClass GRAPHICAL_REPRESENTATION = eINSTANCE.getGraphicalRepresentation();
+
+		/**
+		 * The meta object literal for the '<em><b>Containing Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GRAPHICAL_REPRESENTATION__CONTAINING_CLASS = eINSTANCE.getGraphicalRepresentation_ContainingClass();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.InferenceSemanticImpl <em>Inference Semantic</em>}' class.
@@ -2823,6 +2967,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INFERENCE_SEMANTIC__DESCRIPTION = eINSTANCE.getInferenceSemantic_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Containing Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INFERENCE_SEMANTIC__CONTAINING_CLASS = eINSTANCE.getInferenceSemantic_ContainingClass();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -2859,6 +3011,14 @@ public interface ModeldocPackage extends EPackage {
 		EAttribute CONSTRAINT__MESSAGE = eINSTANCE.getConstraint_Message();
 
 		/**
+		 * The meta object literal for the '<em><b>Containing Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT__CONTAINING_CLASS = eINSTANCE.getConstraint_ContainingClass();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.ModelExtensionImpl <em>Model Extension</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2883,6 +3043,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MODEL_EXTENSION__VALUE = eINSTANCE.getModelExtension_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Containing Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_EXTENSION__CONTAINING_CLASS = eINSTANCE.getModelExtension_ContainingClass();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.ReferenceImpl <em>Reference</em>}' class.

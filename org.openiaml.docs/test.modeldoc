@@ -2,28 +2,36 @@
 <md:ModelDocumentation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:md="http://openiaml.org/modeldoc/2009/09">
   <classes name="NamedElement" abstract="true" interface="true" supertypes="//@classes.32" subtypes="//@classes.4 //@classes.9 //@classes.10 //@classes.14 //@classes.16 //@classes.17 //@classes.19 //@classes.20 //@classes.24 //@classes.28 //@classes.39 //@classes.43 //@classes.50 //@classes.53 //@classes.73 //@classes.74 //@classes.80" runtimeClass="//@references.0" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//NamedElement"/>
-    <extensions reference="//@references.83" name="containingPage" value="model::visual::Page containingPage(model::NamedElement element)"/>
+    <extensions reference="//@references.83/@lines.4" name="containingPage" value="model::visual::Page containingPage(model::NamedElement element)"/>
+    <extensions reference="//@references.84/@lines.13" name="containingPage" value="model::visual::Page containingPage(model::NamedElement element)"/>
+    <extensions reference="//@references.84/@lines.33" name="containingSession" value="model::scopes::Session containingSession(model::NamedElement this)"/>
     <attributes name="name" type="EString"/>
   </classes>
   <classes name="WireEdge" supertypes="//@classes.32" subtypes="//@classes.49 //@classes.50" runtimeClass="//@references.1" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//WireEdge"/>
     <constraints reference="//@references.82/@lines.17" constraint="from.!=(null)" message="&quot;A WireEdge must have a 'from'&quot;"/>
     <constraints reference="//@references.82/@lines.18" constraint="to.!=(null)" message="&quot;A WireEdge must have a 'to'&quot;"/>
-    <graphicalRepresentations reference="//@references.329"/>
+    <extensions reference="//@references.84/@lines.31" name="isFailEdge" value="isFailEdge(model::WireEdge this)"/>
+    <graphicalRepresentations reference="//@references.330"/>
     <references name="from" lowerBound="1" type="//@classes.3"/>
     <references name="to" lowerBound="1" type="//@classes.2"/>
   </classes>
   <classes name="WireEdgeDestination" abstract="true" interface="true" subtypes="//@classes.9 //@classes.14 //@classes.16 //@classes.51 //@classes.52 //@classes.54 //@classes.58 //@classes.59 //@classes.62 //@classes.74 //@classes.80" runtimeClass="//@references.2" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//WireEdgeDestination"/>
+    <extensions reference="//@references.84/@lines.6" name="operationName" value="operationName(model::WireEdgeDestination this)"/>
     <references name="inEdges" upperBound="-1" type="//@classes.1"/>
   </classes>
   <classes name="WireEdgesSource" abstract="true" interface="true" supertypes="//@classes.31" subtypes="//@classes.4 //@classes.11 //@classes.14 //@classes.16 //@classes.17 //@classes.39 //@classes.43 //@classes.62 //@classes.73 //@classes.74 //@classes.80" runtimeClass="//@references.3" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//WireEdgesSource"/>
+    <extensions reference="//@references.84/@lines.15" name="onCurrentPage" value="onCurrentPage(model::WireEdgesSource source,model::WireEdgeDestination target)"/>
+    <extensions reference="//@references.84/@lines.16" name="onCurrentSession" value="onCurrentSession(model::WireEdgesSource source,model::WireEdgeDestination target)"/>
+    <extensions reference="//@references.84/@lines.17" name="availableInCurrentScript" value="availableInCurrentScript(model::WireEdgesSource source,model::WireEdgeDestination target)"/>
+    <extensions reference="//@references.84/@lines.62" name="getFailHandler" value="getFailHandler(model::WireEdgesSource this)"/>
     <references name="outEdges" upperBound="-1" type="//@classes.1"/>
   </classes>
   <classes name="EventTrigger" supertypes="//@classes.0 //@classes.3" runtimeClass="//@references.4" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//EventTrigger"/>
-    <graphicalRepresentations reference="//@references.292"/>
+    <graphicalRepresentations reference="//@references.293"/>
   </classes>
   <classes name="ContainsEventTriggers" abstract="true" interface="true" subtypes="//@classes.14 //@classes.19 //@classes.20 //@classes.74" runtimeClass="//@references.5" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ContainsEventTriggers"/>
@@ -32,37 +40,51 @@
   <classes name="DomainObject" supertypes="//@classes.14 //@classes.30" subtypes="//@classes.79" runtimeClass="//@references.6" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DomainObject"/>
     <constraints reference="//@references.82/@lines.13" constraint="name.!=(&quot;single_values&quot;)" message="&quot;You cannot have a DomainObject called single_values (reserved word)&quot;"/>
-    <graphicalRepresentations reference="//@references.287"/>
+    <extensions reference="//@references.84/@lines.37" name="getDomainStore" value="model::DomainStore getDomainStore(model::DomainObject this)"/>
+    <extensions reference="//@references.84/@lines.39" name="getDomainObject" value="model::DomainObject getDomainObject(model::DomainObject this)"/>
+    <extensions reference="//@references.84/@lines.67" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::DomainObject this)"/>
+    <extensions reference="//@references.84/@lines.70" name="allSubtypes" value="List[model::DomainObject] allSubtypes(model::DomainObject this)"/>
+    <graphicalRepresentations reference="//@references.288"/>
     <references name="attributes" upperBound="-1" containment="true" type="//@classes.7"/>
   </classes>
   <classes name="DomainAttribute" supertypes="//@classes.14 //@classes.30" runtimeClass="//@references.7" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DomainAttribute"/>
-    <graphicalRepresentations reference="//@references.285"/>
+    <extensions reference="//@references.84/@lines.9" name="attributeName" value="attributeName(model::DomainAttribute this)"/>
+    <extensions reference="//@references.84/@lines.38" name="getDomainStore" value="model::DomainStore getDomainStore(model::DomainAttribute this)"/>
+    <extensions reference="//@references.84/@lines.40" name="getDomainObject" value="model::DomainObject getDomainObject(model::DomainAttribute this)"/>
+    <extensions reference="//@references.84/@lines.68" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::DomainAttribute this)"/>
+    <graphicalRepresentations reference="//@references.286"/>
     <attributes name="primaryKey" type="EBoolean" defaultLiteral="false"/>
   </classes>
   <classes name="ActivityNode" supertypes="//@classes.32" subtypes="//@classes.65 //@classes.66 //@classes.67 //@classes.68 //@classes.71 //@classes.72 //@classes.73" runtimeClass="//@references.8" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ActivityNode"/>
-    <graphicalRepresentations reference="//@references.267"/>
+    <graphicalRepresentations reference="//@references.268"/>
   </classes>
   <classes name="Operation" abstract="true" supertypes="//@classes.0 //@classes.2 //@classes.22 //@classes.23 //@classes.26" subtypes="//@classes.11" runtimeClass="//@references.9" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//Operation"/>
     <constraints reference="//@references.82/@lines.2" constraint="name.length.>(0)" message="&quot;Operation must have a name&quot;"/>
-    <extensions reference="//@references.83" name="isOperation" value="isOperation(model::Operation this)"/>
+    <extensions reference="//@references.83/@lines.1" name="isOperation" value="isOperation(model::Operation this)"/>
+    <extensions reference="//@references.84/@lines.7" name="operationName" value="operationName(model::Operation this)"/>
+    <extensions reference="//@references.84/@lines.43" name="getOperationName" value="getOperationName(model::Operation this)"/>
     <references name="parameters" upperBound="-1" containment="true" type="//@classes.10"/>
   </classes>
   <classes name="Parameter" supertypes="//@classes.0 //@classes.23" runtimeClass="//@references.10" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//Parameter"/>
-    <graphicalRepresentations reference="//@references.307"/>
+    <graphicalRepresentations reference="//@references.308"/>
   </classes>
   <classes name="PrimitiveOperation" supertypes="//@classes.3 //@classes.9 //@classes.27" subtypes="//@classes.12 //@classes.69" runtimeClass="//@references.11" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//PrimitiveOperation"/>
     <constraints reference="//@references.82/@lines.34" constraint="name.==(&quot;setPropertyToValue&quot;)||name.==(&quot;set&quot;)||name.==(&quot;javascriptAlert&quot;)||name.==(&quot;save&quot;)||name.==(&quot;new&quot;)||name.==(&quot;exists?&quot;)||name.==(&quot;equal?&quot;)||name.==(&quot;add role&quot;)||name.==(&quot;add permission&quot;)||name.==(&quot;remove role&quot;)||name.==(&quot;remove permission&quot;)" type="WARNING" message="&quot;Unknown primitive operation name '&quot;.+(name).+(&quot;'&quot;)"/>
-    <graphicalRepresentations reference="//@references.310"/>
+    <extensions reference="//@references.84/@lines.41" name="shouldExpandEventTriggers" value="shouldExpandEventTriggers(model::PrimitiveOperation this)"/>
+    <extensions reference="//@references.84/@lines.42" name="shouldExpandEventTriggersServer" value="shouldExpandEventTriggersServer(model::PrimitiveOperation this)"/>
+    <graphicalRepresentations reference="//@references.311"/>
   </classes>
   <classes name="CompositeOperation" supertypes="//@classes.11 //@classes.13 //@classes.30 //@classes.33 //@classes.38 //@classes.41" runtimeClass="//@references.12" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//CompositeOperation"/>
     <constraints reference="//@references.82/@lines.33" constraint="nodes.typeSelect(model::operations::StartNode).size.&lt;=(1)" message="&quot;An Operation can only contain one StartNode&quot;"/>
-    <graphicalRepresentations reference="//@references.275"/>
+    <extensions reference="//@references.84/@lines.26" name="startNode" value="startNode(model::CompositeOperation this)"/>
+    <extensions reference="//@references.84/@lines.30" name="getFailEdge" value="getFailEdge(model::CompositeOperation this)"/>
+    <graphicalRepresentations reference="//@references.276"/>
     <references name="nodes" upperBound="-1" containment="true" type="//@classes.8"/>
     <references name="dataEdges" upperBound="-1" containment="true" type="//@classes.21"/>
     <references name="executionEdges" upperBound="-1" containment="true" type="//@classes.25"/>
@@ -71,41 +93,56 @@
   </classes>
   <classes name="ContainsOperations" abstract="true" interface="true" subtypes="//@classes.12 //@classes.14 //@classes.19 //@classes.20 //@classes.74" runtimeClass="//@references.13" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ContainsOperations"/>
+    <extensions reference="//@references.84/@lines.21" name="allContainerOperations" value="allContainerOperations(model::ContainsOperations this)"/>
     <references name="operations" upperBound="-1" containment="true" type="//@classes.9"/>
   </classes>
   <classes name="ApplicationElement" supertypes="//@classes.0 //@classes.2 //@classes.3 //@classes.5 //@classes.13 //@classes.33 //@classes.41" subtypes="//@classes.6 //@classes.7 //@classes.15 //@classes.29 //@classes.34 //@classes.35 //@classes.42" runtimeClass="//@references.14" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ApplicationElement"/>
-    <extensions reference="//@references.83" name="parent" value="model::InternetApplication parent(model::ApplicationElement this)"/>
-    <graphicalRepresentations reference="//@references.268"/>
+    <extensions reference="//@references.83/@lines.0" name="parent" value="model::InternetApplication parent(model::ApplicationElement this)"/>
+    <extensions reference="//@references.84/@lines.20" name="allContainerOperations" value="allContainerOperations(model::ApplicationElement this)"/>
+    <graphicalRepresentations reference="//@references.269"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
     <references name="values" upperBound="-1" containment="true" type="//@classes.17"/>
   </classes>
   <classes name="ApplicationElementContainer" abstract="true" supertypes="//@classes.14 //@classes.30" subtypes="//@classes.18 //@classes.75 //@classes.76" runtimeClass="//@references.15" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ApplicationElementContainer"/>
-    <graphicalRepresentations reference="//@references.269"/>
+    <extensions reference="//@references.84/@lines.18" name="allContainerOperations" value="allContainerOperations(model::ApplicationElementContainer this)"/>
+    <graphicalRepresentations reference="//@references.270"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
   </classes>
   <classes name="ApplicationElementProperty" supertypes="//@classes.0 //@classes.2 //@classes.3 //@classes.22 //@classes.23" runtimeClass="//@references.16" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ApplicationElementProperty"/>
     <constraints reference="//@references.82/@lines.27" constraint="defaultValue.==(null)&amp;&amp;inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size.>(0).!()" type="WARNING" message="&quot;A session property used as part of a login handler should have a default value set, otherwise secure pages will crash with an exception rather than going to the login page&quot;"/>
-    <graphicalRepresentations reference="//@references.270"/>
+    <extensions reference="//@references.84/@lines.24" name="allApplicationElementProperties" value="List[model::ApplicationElementProperty] allApplicationElementProperties(model::ApplicationElementProperty this)"/>
+    <graphicalRepresentations reference="//@references.271"/>
     <attributes name="defaultValue" type="EString"/>
   </classes>
   <classes name="StaticValue" supertypes="//@classes.0 //@classes.3 //@classes.23" runtimeClass="//@references.17" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//StaticValue"/>
-    <graphicalRepresentations reference="//@references.322"/>
+    <graphicalRepresentations reference="//@references.323"/>
     <attributes name="value" type="EString"/>
   </classes>
   <classes name="VisibleThing" supertypes="//@classes.15" subtypes="//@classes.44 //@classes.45 //@classes.46 //@classes.47 //@classes.48" runtimeClass="//@references.18" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//VisibleThing"/>
-    <graphicalRepresentations reference="//@references.327"/>
+    <graphicalRepresentations reference="//@references.328"/>
     <references name="sessions" upperBound="-1" containment="true" type="//@classes.74"/>
     <references name="parameters" upperBound="-1" containment="true" type="//@classes.43"/>
   </classes>
   <classes name="InternetApplication" supertypes="//@classes.0 //@classes.5 //@classes.13 //@classes.30 //@classes.33 //@classes.38 //@classes.41" runtimeClass="//@references.19" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//InternetApplication"/>
     <constraints reference="//@references.82/@lines.0" constraint="children.exists(e|model::visual::Page.isInstance(e))||sessions.exists(e|e.children.exists(f|model::visual::Page.isInstance(f)))" message="&quot;No pages in internet application&quot;"/>
-    <graphicalRepresentations reference="//@references.299"/>
+    <extensions reference="//@references.84/@lines.0" name="pageTitle" value="pageTitle(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.22" name="allContainerOperations" value="allContainerOperations(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.23" name="allApplicationElementProperties" value="List[model::ApplicationElementProperty] allApplicationElementProperties(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.35" name="containingSession" value="model::scopes::Session containingSession(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.49" name="getRoot" value="model::InternetApplication getRoot(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.50" name="getAllConditions" value="List[model::Condition] getAllConditions(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.52" name="getAllPages" value="List[model::visual::Page] getAllPages(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.54" name="getAllDynamicElements" value="List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.56" name="getAllDomainAttributeInstances" value="List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.58" name="getAllDomainObjectInstances" value="List[model::DomainObjectInstance] getAllDomainObjectInstances(model::InternetApplication this)"/>
+    <extensions reference="//@references.84/@lines.60" name="resolveDynamicSet" value="List[emf::EObject] resolveDynamicSet(model::InternetApplication root,model::DynamicApplicationElementSet set)"/>
+    <graphicalRepresentations reference="//@references.300"/>
     <attributes name="runtimeUrl" type="EString" defaultLiteral="http://localhost:8080/output/"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
@@ -114,7 +151,9 @@
   </classes>
   <classes name="DomainStore" supertypes="//@classes.0 //@classes.5 //@classes.13 //@classes.30 //@classes.33 //@classes.41" subtypes="//@classes.78" runtimeClass="//@references.20" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DomainStore"/>
-    <graphicalRepresentations reference="//@references.289"/>
+    <extensions reference="//@references.84/@lines.36" name="getDomainStore" value="model::DomainStore getDomainStore(model::DomainStore this)"/>
+    <extensions reference="//@references.84/@lines.44" name="isPropertiesFile" value="isPropertiesFile(model::DomainStore store)"/>
+    <graphicalRepresentations reference="//@references.290"/>
     <attributes name="file" lowerBound="1" type="FileReference"/>
     <attributes name="type" lowerBound="1" type="DomainStoreTypes"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.6"/>
@@ -124,7 +163,7 @@
   </classes>
   <classes name="DataFlowEdge" supertypes="//@classes.32" runtimeClass="//@references.21" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DataFlowEdge"/>
-    <graphicalRepresentations reference="//@references.280"/>
+    <graphicalRepresentations reference="//@references.281"/>
     <references name="from" lowerBound="1" type="//@classes.23"/>
     <references name="to" lowerBound="1" type="//@classes.22"/>
   </classes>
@@ -138,11 +177,11 @@
   </classes>
   <classes name="TemporaryVariable" supertypes="//@classes.0 //@classes.22 //@classes.23" runtimeClass="//@references.24" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//TemporaryVariable"/>
-    <graphicalRepresentations reference="//@references.324"/>
+    <graphicalRepresentations reference="//@references.325"/>
   </classes>
   <classes name="ExecutionEdge" supertypes="//@classes.32" subtypes="//@classes.28" runtimeClass="//@references.25" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ExecutionEdge"/>
-    <graphicalRepresentations reference="//@references.293"/>
+    <graphicalRepresentations reference="//@references.294"/>
     <references name="from" lowerBound="1" type="//@classes.27"/>
     <references name="to" lowerBound="1" type="//@classes.26"/>
   </classes>
@@ -156,11 +195,13 @@
   </classes>
   <classes name="ConditionalEdge" supertypes="//@classes.0 //@classes.25" runtimeClass="//@references.28" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ConditionalEdge"/>
-    <graphicalRepresentations reference="//@references.277"/>
+    <graphicalRepresentations reference="//@references.278"/>
   </classes>
   <classes name="DynamicApplicationElementSet" supertypes="//@classes.14" runtimeClass="//@references.29" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DynamicApplicationElementSet"/>
-    <graphicalRepresentations reference="//@references.290"/>
+    <extensions reference="//@references.84/@lines.11" name="isXPath" value="isXPath(model::DynamicApplicationElementSet this)"/>
+    <extensions reference="//@references.84/@lines.55" name="getAllDynamicElements" value="List[model::DynamicApplicationElementSet] getAllDynamicElements(model::DynamicApplicationElementSet this)"/>
+    <graphicalRepresentations reference="//@references.291"/>
     <attributes name="query" type="EString"/>
   </classes>
   <classes name="ContainsWires" abstract="true" interface="true" subtypes="//@classes.6 //@classes.7 //@classes.12 //@classes.15 //@classes.19 //@classes.20 //@classes.31 //@classes.34 //@classes.35 //@classes.50 //@classes.74" runtimeClass="//@references.30" description="TODO Description">
@@ -172,6 +213,7 @@
   </classes>
   <classes name="GeneratedElement" abstract="true" interface="true" subtypes="//@classes.0 //@classes.1 //@classes.8 //@classes.21 //@classes.25" runtimeClass="//@references.32" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//GeneratedElement"/>
+    <extensions reference="//@references.84/@lines.5" name="safeName" value="safeName(model::GeneratedElement this)"/>
     <attributes name="isGenerated" type="EBoolean"/>
     <attributes name="id" id="true" type="EString"/>
     <attributes name="generatedRule" type="EString"/>
@@ -184,26 +226,29 @@
   </classes>
   <classes name="DerivedView" supertypes="//@classes.14 //@classes.30" runtimeClass="//@references.34" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DerivedView"/>
-    <graphicalRepresentations reference="//@references.284"/>
+    <graphicalRepresentations reference="//@references.285"/>
     <attributes name="strQuery" type="EString"/>
     <references name="attributes" upperBound="-1" type="//@classes.7"/>
   </classes>
   <classes name="DomainObjectInstance" supertypes="//@classes.14 //@classes.30" subtypes="//@classes.81" runtimeClass="//@references.35" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DomainObjectInstance"/>
     <constraints reference="//@references.82/@lines.15" constraint="inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size.&lt;=(1)" message="&quot;A DomainObjectInstance cannot have more than one Select or NewInstance wire&quot;"/>
-    <graphicalRepresentations reference="//@references.288"/>
+    <extensions reference="//@references.84/@lines.59" name="getAllDomainObjectInstances" value="List[model::DomainObjectInstance] getAllDomainObjectInstances(model::DomainObjectInstance this)"/>
+    <extensions reference="//@references.84/@lines.64" name="isAutosaveOff" value="isAutosaveOff(model::DomainObjectInstance this)"/>
+    <extensions reference="//@references.84/@lines.69" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::DomainObjectInstance this)"/>
+    <graphicalRepresentations reference="//@references.289"/>
     <attributes name="strQuery" type="EString"/>
     <attributes name="autosave" type="EBoolean" defaultLiteral="true"/>
     <references name="attributes" upperBound="-1" containment="true" type="//@classes.42"/>
   </classes>
   <classes name="PageRequest" runtimeClass="//@references.36" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//PageRequest"/>
-    <graphicalRepresentations reference="//@references.306"/>
+    <graphicalRepresentations reference="//@references.307"/>
     <references name="parameters" upperBound="-1" type="//@classes.16"/>
   </classes>
   <classes name="VisitorAgent" runtimeClass="//@references.37" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//VisitorAgent"/>
-    <graphicalRepresentations reference="//@references.328"/>
+    <graphicalRepresentations reference="//@references.329"/>
     <references name="properties" upperBound="-1" type="//@classes.16"/>
   </classes>
   <classes name="Scope" abstract="true" supertypes="//@classes.33" subtypes="//@classes.12 //@classes.19 //@classes.44 //@classes.48 //@classes.74" runtimeClass="//@references.38" description="TODO Description">
@@ -211,10 +256,13 @@
   </classes>
   <classes name="Condition" abstract="true" supertypes="//@classes.0 //@classes.3 //@classes.23" subtypes="//@classes.40 //@classes.70" runtimeClass="//@references.39" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//Condition"/>
+    <extensions reference="//@references.84/@lines.8" name="conditionName" value="conditionName(model::Condition this)"/>
+    <extensions reference="//@references.84/@lines.51" name="getAllConditions" value="List[model::Condition] getAllConditions(model::Condition this)"/>
   </classes>
   <classes name="CompositeCondition" supertypes="//@classes.33 //@classes.39 //@classes.41" runtimeClass="//@references.40" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//CompositeCondition"/>
-    <graphicalRepresentations reference="//@references.274"/>
+    <extensions reference="//@references.84/@lines.27" name="startNodeCondition" value="startNodeCondition(model::CompositeCondition this)"/>
+    <graphicalRepresentations reference="//@references.275"/>
     <references name="nodes" upperBound="-1" containment="true" type="//@classes.8"/>
     <references name="dataEdges" upperBound="-1" containment="true" type="//@classes.21"/>
     <references name="executionEdges" upperBound="-1" containment="true" type="//@classes.25"/>
@@ -229,51 +277,63 @@
   <classes name="DomainAttributeInstance" supertypes="//@classes.14" runtimeClass="//@references.42" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DomainAttributeInstance"/>
     <constraints reference="//@references.82/@lines.14" constraint="inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size.&lt;=(1)" message="&quot;A DomainAttributeInstance cannot have more than one Select or NewInstance wire&quot;"/>
-    <graphicalRepresentations reference="//@references.286"/>
+    <extensions reference="//@references.84/@lines.10" name="attributeName" value="attributeName(model::DomainAttributeInstance this)"/>
+    <extensions reference="//@references.84/@lines.57" name="getAllDomainAttributeInstances" value="List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::DomainAttributeInstance this)"/>
+    <extensions reference="//@references.84/@lines.63" name="isAutosaveOff" value="isAutosaveOff(model::DomainAttributeInstance this)"/>
+    <extensions reference="//@references.84/@lines.65" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::DomainAttributeInstance this)"/>
+    <graphicalRepresentations reference="//@references.287"/>
     <attributes name="autosave" type="EBoolean" defaultLiteral="true"/>
   </classes>
   <classes name="QueryParameter" supertypes="//@classes.0 //@classes.3 //@classes.23" runtimeClass="//@references.43" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//QueryParameter"/>
     <constraints reference="//@references.82/@lines.28" constraint="outEdges.forAll(e|isAccessibleOnPage(containingPage(this.eContainer),e.to))" message="&quot;A QueryParameter cannot be used on a Page outside of its containing page (&quot;.+(containingPage(this.eContainer)).+(&quot;, &quot;).+(containingPage(outEdges.first().to.eContainer)).+(&quot;)&quot;)"/>
-    <graphicalRepresentations reference="//@references.312"/>
+    <graphicalRepresentations reference="//@references.313"/>
     <attributes name="defaultValue" type="EString"/>
   </classes>
   <classes name="Page" supertypes="//@classes.18 //@classes.38" runtimeClass="//@references.44" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Page"/>
     <constraints reference="//@references.82/@lines.1" constraint="name.length.>(0)" message="&quot;Page must have a name&quot;"/>
     <constraints reference="//@references.82/@lines.32" constraint="children.typeSelect(model::components::LoginHandler).size.==(0)" message="&quot;A Page cannot contain a LoginHandler&quot;"/>
-    <extensions reference="//@references.83" name="containingPage" value="model::visual::Page containingPage(model::visual::Page element)"/>
-    <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::wires::CompositeWire wire)"/>
-    <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::wires::SingleWire wire)"/>
-    <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::NamedElement element)"/>
-    <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,emf::EObject element)"/>
-    <graphicalRepresentations reference="//@references.305"/>
+    <extensions reference="//@references.83/@lines.3" name="containingPage" value="model::visual::Page containingPage(model::visual::Page element)"/>
+    <extensions reference="//@references.83/@lines.5" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::wires::CompositeWire wire)"/>
+    <extensions reference="//@references.83/@lines.6" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::wires::SingleWire wire)"/>
+    <extensions reference="//@references.83/@lines.7" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::NamedElement element)"/>
+    <extensions reference="//@references.83/@lines.8" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,emf::EObject element)"/>
+    <extensions reference="//@references.84/@lines.1" name="pageTitle" value="pageTitle(model::visual::Page this)"/>
+    <extensions reference="//@references.84/@lines.12" name="containingPage" value="model::visual::Page containingPage(model::visual::Page element)"/>
+    <extensions reference="//@references.84/@lines.53" name="getAllPages" value="List[model::visual::Page] getAllPages(model::visual::Page this)"/>
+    <graphicalRepresentations reference="//@references.306"/>
     <attributes name="url" type="EString"/>
   </classes>
   <classes name="InputForm" supertypes="//@classes.18" runtimeClass="//@references.45" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/InputForm"/>
-    <graphicalRepresentations reference="//@references.297"/>
+    <extensions reference="//@references.84/@lines.2" name="formName" value="formName(model::visual::InputForm this)"/>
+    <graphicalRepresentations reference="//@references.298"/>
   </classes>
   <classes name="InputTextField" supertypes="//@classes.18" runtimeClass="//@references.46" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/InputTextField"/>
-    <graphicalRepresentations reference="//@references.298"/>
+    <extensions reference="//@references.84/@lines.3" name="textFieldName" value="textFieldName(model::visual::InputTextField this)"/>
+    <extensions reference="//@references.84/@lines.61" name="getFieldValue" value="getFieldValue(model::visual::InputTextField this)"/>
+    <graphicalRepresentations reference="//@references.299"/>
   </classes>
   <classes name="Button" supertypes="//@classes.18" runtimeClass="//@references.47" tagline="Represents a clickable button to the user." description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Button"/>
-    <operationalSemantics reference="//@references.110/@methods.0" description="//@references.110/@methods.0/@javadocs.0"/>
-    <inferenceSemantics reference="//@references.256/@rules.0" description="//@references.256/@rules.0/@javadocs.0"/>
-    <graphicalRepresentations reference="//@references.271"/>
+    <operationalSemantics reference="//@references.111/@methods.0" description="//@references.111/@methods.0/@javadocs.0"/>
+    <inferenceSemantics reference="//@references.257/@rules.0" description="//@references.257/@rules.0/@javadocs.0"/>
+    <extensions reference="//@references.84/@lines.4" name="buttonName" value="buttonName(model::visual::Button this)"/>
+    <graphicalRepresentations reference="//@references.272"/>
   </classes>
   <classes name="Frame" supertypes="//@classes.18 //@classes.38" runtimeClass="//@references.48" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Frame"/>
-    <graphicalRepresentations reference="//@references.296"/>
+    <graphicalRepresentations reference="//@references.297"/>
   </classes>
   <classes name="SingleWire" supertypes="//@classes.1" subtypes="//@classes.53 //@classes.61 //@classes.62 //@classes.63 //@classes.64" runtimeClass="//@references.49" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/SingleWire"/>
   </classes>
   <classes name="CompositeWire" supertypes="//@classes.0 //@classes.1 //@classes.30 //@classes.33 //@classes.41" subtypes="//@classes.51 //@classes.52 //@classes.54 //@classes.55 //@classes.56 //@classes.57 //@classes.58 //@classes.59 //@classes.60" runtimeClass="//@references.50" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/CompositeWire"/>
-    <graphicalRepresentations reference="//@references.276"/>
+    <extensions reference="//@references.84/@lines.32" name="isFailEdge" value="isFailEdge(model::wires::CompositeWire this)"/>
+    <graphicalRepresentations reference="//@references.277"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
     <references name="operations" upperBound="-1" containment="true" type="//@classes.9"/>
@@ -287,122 +347,133 @@
     <constraints reference="//@references.82/@lines.8" constraint="model::QueryParameter.isInstance(from).!()&amp;&amp;model::QueryParameter.isInstance(to).!()" message="&quot;You cannot have a SyncWire that connects to a QueryParameter&quot;"/>
     <constraints reference="//@references.82/@lines.9" constraint="from.!=(to)" message="&quot;A SyncWire cannot connect to itself&quot;"/>
     <constraints reference="//@references.82/@lines.10" constraint="model::ApplicationElementProperty.isInstance(from)&amp;&amp;model::ApplicationElementProperty.isInstance(to).!()" message="&quot;You cannot have a SyncWire connecting two ApplicationElementProperties&quot;"/>
-    <graphicalRepresentations reference="//@references.323"/>
+    <graphicalRepresentations reference="//@references.324"/>
   </classes>
   <classes name="RunInstanceWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.52" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/RunInstanceWire"/>
     <constraints reference="//@references.82/@lines.4" constraint="model::Operation.isInstance(to)" message="&quot;A run instance wire can only connect to an operation&quot;"/>
     <constraints reference="//@references.82/@lines.26" constraint="model::VisibleThing.isInstance(from)&amp;&amp;name.==(&quot;click&quot;)||name.==(&quot;onClick&quot;).!().!()" type="WARNING" message="&quot;This RunInstanceWire will not do anything: consider naming it 'onClick'&quot;"/>
-    <extensions reference="//@references.83" name="isRunInstanceWire" value="isRunInstanceWire(model::wires::RunInstanceWire this)"/>
-    <graphicalRepresentations reference="//@references.315"/>
+    <extensions reference="//@references.83/@lines.2" name="isRunInstanceWire" value="isRunInstanceWire(model::wires::RunInstanceWire this)"/>
+    <graphicalRepresentations reference="//@references.316"/>
     <attributes name="priority" type="EInt"/>
   </classes>
   <classes name="ParameterWire" supertypes="//@classes.0 //@classes.49" runtimeClass="//@references.53" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ParameterWire"/>
-    <graphicalRepresentations reference="//@references.308"/>
+    <graphicalRepresentations reference="//@references.309"/>
     <attributes name="parameterName" type="EString"/>
   </classes>
   <classes name="SetWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.54" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/SetWire"/>
-    <graphicalRepresentations reference="//@references.318"/>
+    <graphicalRepresentations reference="//@references.319"/>
   </classes>
   <classes name="ShowWire" supertypes="//@classes.50" runtimeClass="//@references.55" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ShowWire"/>
-    <graphicalRepresentations reference="//@references.319"/>
+    <graphicalRepresentations reference="//@references.320"/>
   </classes>
   <classes name="CommitWire" supertypes="//@classes.50" runtimeClass="//@references.56" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/CommitWire"/>
-    <graphicalRepresentations reference="//@references.273"/>
+    <graphicalRepresentations reference="//@references.274"/>
   </classes>
   <classes name="NavigateWire" supertypes="//@classes.50" runtimeClass="//@references.57" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/NavigateWire"/>
-    <graphicalRepresentations reference="//@references.302"/>
+    <graphicalRepresentations reference="//@references.303"/>
   </classes>
   <classes name="SelectWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.58" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/SelectWire"/>
     <constraints reference="//@references.82/@lines.16" constraint="model::DomainObject.isInstance(from)" message="&quot;A SelectWire must come from a valid DomainObject&quot;"/>
     <constraints reference="//@references.82/@lines.30" constraint="inEdges.typeSelect(model::wires::ParameterWire).size.==(0)||query.!=(null)&amp;&amp;query.length.>(0)" message="&quot;A SelectWire has incoming Parameters, but does not have a query to use them&quot;"/>
-    <graphicalRepresentations reference="//@references.316"/>
+    <graphicalRepresentations reference="//@references.317"/>
     <attributes name="query" type="EString"/>
     <attributes name="limit" type="EInt" defaultLiteral="1"/>
   </classes>
   <classes name="ConditionWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.59" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ConditionWire"/>
-    <graphicalRepresentations reference="//@references.278"/>
+    <graphicalRepresentations reference="//@references.279"/>
   </classes>
   <classes name="NewInstanceWire" supertypes="//@classes.50" runtimeClass="//@references.60" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/NewInstanceWire"/>
-    <graphicalRepresentations reference="//@references.303"/>
+    <extensions reference="//@references.84/@lines.66" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::wires::NewInstanceWire this)"/>
+    <graphicalRepresentations reference="//@references.304"/>
   </classes>
   <classes name="ExtendsWire" supertypes="//@classes.33 //@classes.49" runtimeClass="//@references.61" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ExtendsWire"/>
     <constraints reference="//@references.82/@lines.19" constraint="from.!=(to)" message="&quot;A Role cannot extend itself&quot;"/>
     <constraints reference="//@references.82/@lines.20" constraint="model::DomainObject.isInstance(from)||model::DomainAttribute.isInstance(from)||model::DomainAttributeInstance.isInstance(from)&amp;&amp;model::DomainObject.isInstance(to)||model::DomainAttribute.isInstance(to)||model::DomainAttributeInstance.isInstance(to)" message="&quot;An ExtendsWire can only connect to a DomainObject, DomainAttribute or DomainAttributeInstance&quot;"/>
-    <graphicalRepresentations reference="//@references.294"/>
+    <graphicalRepresentations reference="//@references.295"/>
   </classes>
   <classes name="RequiresWire" supertypes="//@classes.2 //@classes.3 //@classes.49" runtimeClass="//@references.62" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/RequiresWire"/>
     <constraints reference="//@references.82/@lines.23" constraint="inEdges.forAll(e|model::wires::ConstraintWire.isInstance(e))" message="&quot;A RequiresWire can only be connected to ConstraintWires&quot;"/>
     <constraints reference="//@references.82/@lines.24" constraint="model::users::Permission.isInstance(to)||model::users::Role.isInstance(to)" message="&quot;A RequireWire must connect to a Permission or a Role&quot;"/>
-    <graphicalRepresentations reference="//@references.313"/>
+    <graphicalRepresentations reference="//@references.314"/>
   </classes>
   <classes name="ConstraintWire" supertypes="//@classes.49" runtimeClass="//@references.63" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ConstraintWire"/>
-    <graphicalRepresentations reference="//@references.279"/>
+    <graphicalRepresentations reference="//@references.280"/>
     <attributes name="type" lowerBound="1" type="ConstraintTypes"/>
   </classes>
   <classes name="ProvidesWire" supertypes="//@classes.49" runtimeClass="//@references.64" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ProvidesWire"/>
     <constraints reference="//@references.82/@lines.21" constraint="model::users::Role.isInstance(from)" message="&quot;An ProvidesWire can only connect from a Role&quot;"/>
     <constraints reference="//@references.82/@lines.22" constraint="model::users::Permission.isInstance(to)" message="&quot;An ProvidesWire can only connect to a Permission&quot;"/>
-    <graphicalRepresentations reference="//@references.311"/>
+    <graphicalRepresentations reference="//@references.312"/>
   </classes>
   <classes name="StartNode" supertypes="//@classes.8 //@classes.27" runtimeClass="//@references.65" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/StartNode"/>
-    <graphicalRepresentations reference="//@references.321"/>
+    <graphicalRepresentations reference="//@references.322"/>
   </classes>
   <classes name="CancelNode" supertypes="//@classes.8 //@classes.26" runtimeClass="//@references.66" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/CancelNode"/>
-    <graphicalRepresentations reference="//@references.272"/>
+    <graphicalRepresentations reference="//@references.273"/>
     <attributes name="exceptionText" type="EString"/>
   </classes>
   <classes name="FinishNode" supertypes="//@classes.8 //@classes.26" runtimeClass="//@references.67" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/FinishNode"/>
-    <graphicalRepresentations reference="//@references.295"/>
+    <graphicalRepresentations reference="//@references.296"/>
   </classes>
   <classes name="DecisionNode" supertypes="//@classes.8 //@classes.26 //@classes.27" runtimeClass="//@references.68" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/DecisionNode"/>
-    <graphicalRepresentations reference="//@references.282"/>
+    <graphicalRepresentations reference="//@references.283"/>
   </classes>
   <classes name="DecisionOperation" supertypes="//@classes.11 //@classes.22" runtimeClass="//@references.69" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/DecisionOperation"/>
     <constraints reference="//@references.82/@lines.5" constraint="name.==(&quot;equal?&quot;)&amp;&amp;inFlows.size.>=(2)||name.!=(&quot;equal?&quot;)" message="&quot;A compare decision operation must have at least two data flows in to compare&quot;"/>
     <constraints reference="//@references.82/@lines.6" constraint="outExecutions.size.&lt;=(2)" message="&quot;A DecisionOperation can only have at most two out execution edges&quot;"/>
-    <graphicalRepresentations reference="//@references.283"/>
+    <extensions reference="//@references.84/@lines.28" name="passedExectionFlow" value="passedExectionFlow(model::operations::DecisionOperation this)"/>
+    <extensions reference="//@references.84/@lines.29" name="failedExectionFlow" value="failedExectionFlow(model::operations::DecisionOperation this)"/>
+    <graphicalRepresentations reference="//@references.284"/>
   </classes>
   <classes name="DecisionCondition" supertypes="//@classes.22 //@classes.26 //@classes.27 //@classes.39" runtimeClass="//@references.70" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/DecisionCondition"/>
-    <graphicalRepresentations reference="//@references.281"/>
+    <extensions reference="//@references.84/@lines.45" name="getFailEdges" value="getFailEdges(model::operations::DecisionCondition this)"/>
+    <extensions reference="//@references.84/@lines.47" name="getPassEdges" value="getPassEdges(model::operations::DecisionCondition this)"/>
+    <graphicalRepresentations reference="//@references.282"/>
   </classes>
   <classes name="SplitNode" supertypes="//@classes.8 //@classes.26 //@classes.27" runtimeClass="//@references.71" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/SplitNode"/>
-    <graphicalRepresentations reference="//@references.320"/>
+    <graphicalRepresentations reference="//@references.321"/>
   </classes>
   <classes name="JoinNode" supertypes="//@classes.8 //@classes.26 //@classes.27" runtimeClass="//@references.72" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/JoinNode"/>
-    <graphicalRepresentations reference="//@references.300"/>
+    <graphicalRepresentations reference="//@references.301"/>
   </classes>
   <classes name="OperationCallNode" supertypes="//@classes.0 //@classes.3 //@classes.8 //@classes.22 //@classes.23 //@classes.26 //@classes.27" runtimeClass="//@references.73" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/OperationCallNode"/>
     <constraints reference="//@references.82/@lines.25" constraint="outEdges.size.==(1)&amp;&amp;model::wires::RunInstanceWire.isInstance(outEdges.first())&amp;&amp;model::Operation.isInstance(outEdges.first().to)" message="&quot;An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation&quot;"/>
-    <graphicalRepresentations reference="//@references.304"/>
+    <extensions reference="//@references.84/@lines.46" name="getFailEdges" value="getFailEdges(model::operations::OperationCallNode this)"/>
+    <extensions reference="//@references.84/@lines.48" name="getPassEdges" value="getPassEdges(model::operations::OperationCallNode this)"/>
+    <graphicalRepresentations reference="//@references.305"/>
   </classes>
   <classes name="Session" supertypes="//@classes.0 //@classes.2 //@classes.3 //@classes.5 //@classes.13 //@classes.30 //@classes.38 //@classes.41" runtimeClass="//@references.74" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//scopes/Session"/>
     <constraints reference="//@references.82/@lines.11" constraint="children.exists(e|model::visual::InputTextField.isInstance(e)).!()" message="&quot;Sessions cannot directly contain InputTextFields&quot;"/>
     <constraints reference="//@references.82/@lines.12" constraint="children.exists(e|model::visual::InputForm.isInstance(e)).!()" message="&quot;Sessions cannot directly contain InputForms&quot;"/>
     <constraints reference="//@references.82/@lines.31" constraint="children.typeSelect(model::components::LoginHandler).size.&lt;=(1)" message="&quot;A Session can only contain one LoginHandler&quot;"/>
-    <graphicalRepresentations reference="//@references.317"/>
+    <extensions reference="//@references.84/@lines.14" name="containingPage" value="model::visual::Page containingPage(model::scopes::Session element)"/>
+    <extensions reference="//@references.84/@lines.19" name="allContainerOperations" value="allContainerOperations(model::scopes::Session this)"/>
+    <extensions reference="//@references.84/@lines.25" name="possibleParentOperations" value="possibleParentOperations(model::scopes::Session this)"/>
+    <extensions reference="//@references.84/@lines.34" name="containingSession" value="model::scopes::Session containingSession(model::scopes::Session this)"/>
+    <graphicalRepresentations reference="//@references.318"/>
     <references name="agents" upperBound="-1" containment="true" type="//@classes.37"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
@@ -412,33 +483,33 @@
     <targetClass href="http://openiaml.org/model0.4#//components/LoginHandler"/>
     <constraints reference="//@references.82/@lines.3" constraint="inEdges.exists(e|model::wires::ParameterWire.isInstance(e))" message="&quot;A login handler must have an incoming parameter to check against&quot;"/>
     <constraints reference="//@references.82/@lines.29" constraint="type.!=(model::components::LoginHandlerTypes::USER)||inEdges.typeSelect(model::wires::ParameterWire).size.&lt;=(1)" message="&quot;A LoginHandler[user] can not have more than one incoming ParameterWire&quot;"/>
-    <graphicalRepresentations reference="//@references.301"/>
+    <graphicalRepresentations reference="//@references.302"/>
     <attributes name="type" lowerBound="1" type="LoginHandlerTypes"/>
   </classes>
   <classes name="AccessControlHandler" supertypes="//@classes.15 //@classes.33" runtimeClass="//@references.76" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//components/AccessControlHandler"/>
-    <graphicalRepresentations reference="//@references.266"/>
+    <graphicalRepresentations reference="//@references.267"/>
   </classes>
   <classes name="EmptyDomainClass" abstract="true" runtimeClass="//@references.77" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//domain/EmptyDomainClass"/>
-    <graphicalRepresentations reference="//@references.291"/>
+    <graphicalRepresentations reference="//@references.292"/>
   </classes>
   <classes name="UserStore" supertypes="//@classes.20" runtimeClass="//@references.78" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//users/UserStore"/>
-    <graphicalRepresentations reference="//@references.326"/>
+    <graphicalRepresentations reference="//@references.327"/>
     <references name="permissions" upperBound="-1" containment="true" type="//@classes.80"/>
   </classes>
   <classes name="Role" supertypes="//@classes.6" runtimeClass="//@references.79" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//users/Role"/>
-    <graphicalRepresentations reference="//@references.314"/>
+    <graphicalRepresentations reference="//@references.315"/>
   </classes>
   <classes name="Permission" supertypes="//@classes.0 //@classes.2 //@classes.3" runtimeClass="//@references.80" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//users/Permission"/>
-    <graphicalRepresentations reference="//@references.309"/>
+    <graphicalRepresentations reference="//@references.310"/>
   </classes>
   <classes name="UserInstance" supertypes="//@classes.35" runtimeClass="//@references.81" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//users/UserInstance"/>
-    <graphicalRepresentations reference="//@references.325"/>
+    <graphicalRepresentations reference="//@references.326"/>
   </classes>
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="NamedElement"/>
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="WireEdge"/>
@@ -559,7 +630,7 @@
     <lines line="125"/>
     <lines line="129"/>
   </references>
-  <references xsi:type="md:FileReference" package="src.metamodel" name="Extensions.ext">
+  <references xsi:type="md:FileReference" plugin="org.openiaml.model.codegen.oaw" package="src.metamodel" name="Extensions.ext">
     <lines line="3"/>
     <lines line="9"/>
     <lines line="15"/>
@@ -569,6 +640,79 @@
     <lines line="34"/>
     <lines line="38"/>
     <lines line="41"/>
+  </references>
+  <references xsi:type="md:FileReference" plugin="org.openiaml.model.codegen.oaw" package="src.template" name="GeneratorExtensions.ext">
+    <lines line="5"/>
+    <lines line="8"/>
+    <lines line="11"/>
+    <lines line="14"/>
+    <lines line="17"/>
+    <lines line="20"/>
+    <lines line="39"/>
+    <lines line="42"/>
+    <lines line="48"/>
+    <lines line="51"/>
+    <lines line="54"/>
+    <lines line="60"/>
+    <lines line="64"/>
+    <lines line="67"/>
+    <lines line="71"/>
+    <lines line="82"/>
+    <lines line="91"/>
+    <lines line="105"/>
+    <lines line="115"/>
+    <lines line="121"/>
+    <lines line="124"/>
+    <lines line="127"/>
+    <lines line="130"/>
+    <lines line="134"/>
+    <lines line="140"/>
+    <lines line="144"/>
+    <lines line="151"/>
+    <lines line="154"/>
+    <lines line="158"/>
+    <lines line="161"/>
+    <lines line="165"/>
+    <lines line="168"/>
+    <lines line="171"/>
+    <lines line="178"/>
+    <lines line="181"/>
+    <lines line="184"/>
+    <lines line="187"/>
+    <lines line="189"/>
+    <lines line="191"/>
+    <lines line="196"/>
+    <lines line="198"/>
+    <lines line="205"/>
+    <lines line="208"/>
+    <lines line="211"/>
+    <lines line="231"/>
+    <lines line="235"/>
+    <lines line="239"/>
+    <lines line="242"/>
+    <lines line="245"/>
+    <lines line="252"/>
+    <lines line="256"/>
+    <lines line="262"/>
+    <lines line="266"/>
+    <lines line="272"/>
+    <lines line="276"/>
+    <lines line="283"/>
+    <lines line="287"/>
+    <lines line="293"/>
+    <lines line="297"/>
+    <lines line="303"/>
+    <lines line="310"/>
+    <lines line="314"/>
+    <lines line="317"/>
+    <lines line="320"/>
+    <lines line="323"/>
+    <lines line="329"/>
+    <lines line="335"/>
+    <lines line="338"/>
+    <lines line="341"/>
+    <lines line="344"/>
+    <lines line="350"/>
   </references>
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model.tests" package="org.openiaml.javadoc" name="MyDoclet">
     <javadocs name="@author">
@@ -639,21 +783,21 @@
       <fragments xsi:type="md:JavadocTextElement" value="Extends code generation test cases to allow for simpler access"/>
       <fragments xsi:type="md:JavadocTextElement" value="to databases. Also includes database initialisation through "/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.87/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.88/@methods.0"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value="."/>
       <fragments xsi:type="md:JavadocTextElement" value="&lt;/p>"/>
       <fragments xsi:type="md:JavadocTextElement" value="&lt;p>&lt;b>NOTE:&lt;/b> "/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.87/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.88/@methods.1"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value=" must be called in order to actually initialise the database.&lt;/b>"/>
     </javadocs>
     <javadocs name="@see">
-      <fragments xsi:type="md:JavadocMethodReference" reference="//@references.87/@methods.1"/>
+      <fragments xsi:type="md:JavadocMethodReference" reference="//@references.88/@methods.1"/>
     </javadocs>
     <javadocs name="@see">
-      <fragments xsi:type="md:JavadocMethodReference" reference="//@references.87/@methods.0"/>
+      <fragments xsi:type="md:JavadocMethodReference" reference="//@references.88/@methods.0"/>
     </javadocs>
     <javadocs name="@author">
       <fragments xsi:type="md:JavadocTextElement" value=" jmwright"/>
@@ -669,11 +813,11 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Initialise the database given the values specified in "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.87/@methods.0"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.88/@methods.0"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=" and "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.87/@methods.2"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.88/@methods.2"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
         <fragments xsi:type="md:JavadocTextElement" value="This must be called by subclasses if they wish to have the database"/>
@@ -690,7 +834,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Has "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.87/@methods.1"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.88/@methods.1"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=" been successfully"/>
         <fragments xsi:type="md:JavadocTextElement" value="called?"/>
@@ -917,31 +1061,31 @@
       <fragments xsi:type="md:JavadocTextElement" value="&lt;li>Since the target form has no elements in it, they will be inferred"/>
       <fragments xsi:type="md:JavadocTextElement" value="from the sync wire ("/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.97/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.98/@methods.0"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value=") &lt;/li>"/>
       <fragments xsi:type="md:JavadocTextElement" value="&lt;li>The .properties file is copied over to the output destination, and"/>
       <fragments xsi:type="md:JavadocTextElement" value="exists ("/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.97/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.98/@methods.1"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value=")&lt;/li>"/>
       <fragments xsi:type="md:JavadocTextElement" value="&lt;li>The wire starts out with values derived from the properties file"/>
       <fragments xsi:type="md:JavadocTextElement" value="("/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.97/@methods.2"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.98/@methods.2"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value=")&lt;/li>"/>
       <fragments xsi:type="md:JavadocTextElement" value="&lt;li>If we change a value in a field, it persists over sessions"/>
       <fragments xsi:type="md:JavadocTextElement" value="("/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.97/@methods.3"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.98/@methods.3"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value=")&lt;/li>"/>
       <fragments xsi:type="md:JavadocTextElement" value="&lt;li>If we change a value in a field, it changes in the .properties file"/>
       <fragments xsi:type="md:JavadocTextElement" value="("/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.97/@methods.4"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.98/@methods.4"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value=")&lt;/li>"/>
       <fragments xsi:type="md:JavadocTextElement" value="&lt;/ol>"/>
@@ -1128,7 +1272,7 @@
       <javadocs name="@semantics">
         <fragments xsi:type="md:JavadocTextElement" value=" test "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.110/@methods.1"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.111/@methods.1"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=", foo."/>
       </javadocs>
@@ -1633,7 +1777,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Begin the application using "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.1"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.1"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=","/>
         <fragments xsi:type="md:JavadocTextElement" value="and then go to the &quot;login&quot; page and attempt to login with the"/>
@@ -1642,7 +1786,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="successful or not."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.2"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.2"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param"/>
@@ -1652,7 +1796,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="&lt;em>Continue&lt;/em> the application using "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.3"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.3"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=","/>
         <fragments xsi:type="md:JavadocTextElement" value="and then go to the &quot;login&quot; page and attempt to login with the"/>
@@ -1661,7 +1805,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="successful or not."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.2"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.2"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param"/>
@@ -1675,10 +1819,10 @@
         <fragments xsi:type="md:JavadocTextElement" value="Actually do the login."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.0"/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.0"/>
       </javadocs>
     </methods>
     <methods name="gotoSitemapThenPage"/>
@@ -1686,7 +1830,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="&lt;em>Continue&lt;/em> the application using "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.3"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.3"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=","/>
         <fragments xsi:type="md:JavadocTextElement" value="and then go to the &quot;login&quot; page and attempt to login with the"/>
@@ -1696,7 +1840,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="successful or not."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.2"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.2"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param"/>
@@ -1709,17 +1853,17 @@
         <fragments xsi:type="md:JavadocTextElement" value="Actually do the login, but ignore what the login fields used to say."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.0"/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.0"/>
       </javadocs>
     </methods>
     <methods name="testCorrectDatabase" line="142">
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Check that we have created the correct database in"/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.141/@methods.7"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.142/@methods.7"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="; i.e. check that no more"/>
         <fragments xsi:type="md:JavadocTextElement" value="than one database exists in the output folder"/>
@@ -1786,7 +1930,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Check the contents of the database tables, if they were not"/>
         <fragments xsi:type="md:JavadocTextElement" value="created by "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.143/@methods.6"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.144/@methods.6"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -2986,7 +3130,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Calls "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.172/@methods.1"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.173/@methods.1"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=", but it is expected"/>
         <fragments xsi:type="md:JavadocTextElement" value="that this will fail with an AssertionFailedError."/>
@@ -2995,7 +3139,7 @@
         <fragments xsi:type="md:JavadocTextElement" value=" The model file to load."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.172/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.173/@methods.1"/>
       </javadocs>
     </methods>
     <methods name="loadAndCodegen"/>
@@ -3123,7 +3267,7 @@
     <javadocs>
       <fragments xsi:type="md:JavadocTextElement" value="Test the wrapper methods in "/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocClassReference" reference="//@references.176"/>
+        <fragments xsi:type="md:JavadocClassReference" reference="//@references.177"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value="."/>
     </javadocs>
@@ -3187,7 +3331,7 @@
       <fragments xsi:type="md:JavadocTextElement" value="All tests for the runtime library (server-side)"/>
     </javadocs>
     <javadocs name="@see">
-      <fragments xsi:type="md:JavadocClassReference" reference="//@references.173"/>
+      <fragments xsi:type="md:JavadocClassReference" reference="//@references.174"/>
     </javadocs>
     <javadocs name="@author">
       <fragments xsi:type="md:JavadocTextElement" value=" jmwright"/>
@@ -3261,7 +3405,7 @@
     <javadocs>
       <fragments xsi:type="md:JavadocTextElement" value="Test the wrapper methods in "/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocClassReference" reference="//@references.181"/>
+        <fragments xsi:type="md:JavadocClassReference" reference="//@references.182"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value="."/>
     </javadocs>
@@ -3325,7 +3469,7 @@
       <fragments xsi:type="md:JavadocTextElement" value="explicitly, that they are included as normal. "/>
       <fragments xsi:type="md:JavadocTextElement" value="Otherwise tests everything in "/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocClassReference" reference="//@references.91"/>
+        <fragments xsi:type="md:JavadocClassReference" reference="//@references.92"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value="."/>
     </javadocs>
@@ -3350,7 +3494,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Load a model and perform code generation."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.1"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@return">
@@ -3361,7 +3505,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Load a model and perform code generation."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.1"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param">
@@ -3375,7 +3519,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Load a model and perform code generation."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.1"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@return">
@@ -3386,7 +3530,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Load a model and perform code generation."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.1"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param">
@@ -3402,12 +3546,12 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Get the inferred model from "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.3"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.3"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=" and"/>
         <fragments xsi:type="md:JavadocTextElement" value="do code generation with "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.4"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.4"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -3435,7 +3579,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="This method also checks that the destination page is the same as the"/>
         <fragments xsi:type="md:JavadocTextElement" value="target page; if not, use "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
         <fragments xsi:type="md:JavadocTextElement" value="&lt;/p>"/>
@@ -3444,13 +3588,13 @@
         <fragments xsi:type="md:JavadocTextElement" value="the client to lose sessions/cookies. If this is undesirable,"/>
         <fragments xsi:type="md:JavadocTextElement" value="use "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.8"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.8"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
         <fragments xsi:type="md:JavadocTextElement" value="&lt;/p>"/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" the page title to select from the sitemap"/>
@@ -3465,7 +3609,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="&lt;p>"/>
         <fragments xsi:type="md:JavadocTextElement" value="Like "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=", except we expect"/>
         <fragments xsi:type="md:JavadocTextElement" value="to not end up at &lt;code>pageTitle&lt;/code>."/>
@@ -3475,13 +3619,13 @@
         <fragments xsi:type="md:JavadocTextElement" value="the client to lose sessions/cookies. If this is undesirable,"/>
         <fragments xsi:type="md:JavadocTextElement" value="use "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.8"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.8"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
         <fragments xsi:type="md:JavadocTextElement" value="&lt;/p>"/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" the page title to select from the sitemap"/>
@@ -3503,12 +3647,12 @@
         <fragments xsi:type="md:JavadocTextElement" value="the client to lose sessions/cookies. If this is undesirable,"/>
         <fragments xsi:type="md:JavadocTextElement" value="use "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.8"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.8"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" the location of the sitemap file"/>
@@ -3527,12 +3671,12 @@
         <fragments xsi:type="md:JavadocTextElement" value="the client to lose sessions/cookies. If this is undesirable,"/>
         <fragments xsi:type="md:JavadocTextElement" value="use "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.8"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.8"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" the location of the sitemap file"/>
@@ -3553,7 +3697,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="If you want the client to be reset (e.g. delete cookies, sessions),"/>
         <fragments xsi:type="md:JavadocTextElement" value="use "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -3572,7 +3716,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="&lt;p>If you want the client to be reset (e.g. delete cookies, sessions),"/>
         <fragments xsi:type="md:JavadocTextElement" value="use "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=".&lt;/p>"/>
       </javadocs>
@@ -3587,17 +3731,17 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Identical to "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.7"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.7"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=", except adds"/>
         <fragments xsi:type="md:JavadocTextElement" value="the given query to the URL through "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.10"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.10"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.10"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.10"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param"/>
@@ -3631,7 +3775,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="the client to lose sessions/cookies. If this is undesirable,"/>
         <fragments xsi:type="md:JavadocTextElement" value="use "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.8"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.8"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -3641,7 +3785,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Go to the given page, but assert that we do not arrive"/>
         <fragments xsi:type="md:JavadocTextElement" value="on the given page. Does not actually check "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.14"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.14"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -3678,7 +3822,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Extension of "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.15"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.15"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="; add an extra"/>
         <fragments xsi:type="md:JavadocTextElement" value="XPath condition for text that it should not contain, "/>
@@ -3729,7 +3873,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Assert that a label with the given text is NOT present."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.15"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.15"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" label text to search for"/>
@@ -3775,7 +3919,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Reload a page (but do not lose the session information)."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.26"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.26"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" the sitemap to reload at"/>
@@ -3791,7 +3935,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="be lost."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.186/@methods.25"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.25"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" the sitemap to reload at"/>
@@ -3854,7 +3998,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Returns -1 if no path can be found."/>
         <fragments xsi:type="md:JavadocTextElement" value="The last path found is stored in "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.187/@methods.3"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.188/@methods.3"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -3957,7 +4101,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Get the list of rule files used."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.190/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.191/@methods.1"/>
       </javadocs>
       <javadocs name="@return"/>
     </methods>
@@ -4369,19 +4513,19 @@
         <fragments xsi:type="md:JavadocTextElement" value="path."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.199/@methods.35"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.200/@methods.35"/>
       </javadocs>
     </methods>
     <methods name="getLastPathElements" line="1799">
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Get the last path called by "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.199/@methods.36"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.200/@methods.36"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
         <fragments xsi:type="md:JavadocTextElement" value="This path is compiled in "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.199/@methods.34"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.200/@methods.34"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -5393,7 +5537,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="to the 'to' element."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.201/@methods.54"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.202/@methods.54"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param"/>
@@ -5428,7 +5572,7 @@
       <fragments xsi:type="md:JavadocTextElement" value="ParameterWires."/>
       <fragments xsi:type="md:JavadocTextElement" value="TODO merge into "/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocClassReference" reference="//@references.201"/>
+        <fragments xsi:type="md:JavadocClassReference" reference="//@references.202"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value="."/>
     </javadocs>
@@ -5800,7 +5944,7 @@
       <fragments xsi:type="md:JavadocTextElement" value="we have multiple parameters. Most of the logic is handled sufficiently"/>
       <fragments xsi:type="md:JavadocTextElement" value="in "/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocClassReference" reference="//@references.147"/>
+        <fragments xsi:type="md:JavadocClassReference" reference="//@references.148"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value=", so this test case is checking"/>
       <fragments xsi:type="md:JavadocTextElement" value="special cases for multiple parameters."/>
@@ -6188,7 +6332,7 @@
       <fragments xsi:type="md:JavadocTextElement" value="Based on ConditionWireXpath."/>
     </javadocs>
     <javadocs name="@see">
-      <fragments xsi:type="md:JavadocClassReference" reference="//@references.196"/>
+      <fragments xsi:type="md:JavadocClassReference" reference="//@references.197"/>
     </javadocs>
     <javadocs name="@author">
       <fragments xsi:type="md:JavadocTextElement" value=" jmwright"/>
@@ -6300,7 +6444,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Get the class on which to load and infer against."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.232/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.233/@methods.1"/>
       </javadocs>
       <javadocs name="@return"/>
     </methods>
@@ -6310,7 +6454,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="The inferred model should be valid."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.232/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.233/@methods.0"/>
       </javadocs>
       <javadocs name="@throws"/>
     </methods>
@@ -6357,7 +6501,7 @@
     <methods name="testClassesArentEmpty" line="106">
       <javadocs>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.234/@methods.0"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.235/@methods.0"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=" should not be empty."/>
       </javadocs>
@@ -6418,7 +6562,7 @@
       <fragments xsi:type="md:JavadocTextElement" value="Assorted methods to assist with loading and inferring models."/>
     </javadocs>
     <javadocs name="@see">
-      <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.0"/>
+      <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.0"/>
     </javadocs>
     <javadocs name="@author">
       <fragments xsi:type="md:JavadocTextElement" value=" jmwright"/>
@@ -6432,7 +6576,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="test class, and do inference."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.1"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" The test class to load a model for."/>
@@ -6445,7 +6589,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="test class, and do inference."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.1"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.1"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" The test class to load a model for."/>
@@ -6485,7 +6629,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="test class, but don't do inference."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.0"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" The test class to load a model for."/>
@@ -6498,10 +6642,10 @@
         <fragments xsi:type="md:JavadocTextElement" value="test class, but don't do inference."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.4"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.4"/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.5"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.5"/>
       </javadocs>
       <javadocs name="@param">
         <fragments xsi:type="md:JavadocTextElement" value=" The test class to load a model for."/>
@@ -6695,7 +6839,7 @@
       </javadocs>
       <javadocs name="@throws"/>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.19"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.19"/>
       </javadocs>
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Get all of the wires connecting the two elements together of the"/>
@@ -6813,7 +6957,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="two elements."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.26"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.26"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param"/>
@@ -6830,13 +6974,13 @@
         <fragments xsi:type="md:JavadocTextElement" value="occur between the two elements."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.21"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.21"/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.26"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.26"/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.27"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.27"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param"/>
@@ -6858,7 +7002,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Assert that no given bidirectional wire exists."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.236/@methods.25"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.25"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param"/>
@@ -6920,15 +7064,15 @@
         <fragments xsi:type="md:JavadocTextElement" value="We can also copy files directly from our testing environment"/>
         <fragments xsi:type="md:JavadocTextElement" value="to this new project by using"/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.3"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.238/@methods.3"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.4"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.238/@methods.4"/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.3"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.238/@methods.3"/>
       </javadocs>
       <javadocs name="@return">
         <fragments xsi:type="md:JavadocTextElement" value=" the created project"/>
@@ -6970,7 +7114,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Store the last IStatus of doTransform()."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.6"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.238/@methods.6"/>
       </javadocs>
     </methods>
     <methods name="doTransform" line="276">
@@ -6978,7 +7122,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Do the transformation and make sure it succeeded."/>
         <fragments xsi:type="md:JavadocTextElement" value="The result of the transformation is stored in "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.5"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.238/@methods.5"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -7013,7 +7157,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Do the transformation and make sure it succeeded."/>
         <fragments xsi:type="md:JavadocTextElement" value="The result of the transformation is stored in "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.237/@methods.5"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.238/@methods.5"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
         <fragments xsi:type="md:JavadocTextElement" value="TODO refactor this out into plugins"/>
@@ -7197,7 +7341,7 @@
       <fragments xsi:type="md:JavadocTextElement" value="This exception also prints out the location in the PHP source "/>
       <fragments xsi:type="md:JavadocTextElement" value="of the exception, as per "/>
       <fragments xsi:type="md:JavadocTagElement" name="@link">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.239/@methods.0"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.240/@methods.0"/>
       </fragments>
       <fragments xsi:type="md:JavadocTextElement" value="."/>
     </javadocs>
@@ -7373,7 +7517,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="metamodel."/>
         <fragments xsi:type="md:JavadocTextElement" value="Uses the factory map found in "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocClassReference" reference="//@references.235"/>
+          <fragments xsi:type="md:JavadocClassReference" reference="//@references.236"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -7462,7 +7606,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Tests "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.242/@methods.21"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.243/@methods.21"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -7472,7 +7616,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Tests "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.242/@methods.23"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.243/@methods.23"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -7496,7 +7640,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Tests "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.242/@methods.25"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.243/@methods.25"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -7512,7 +7656,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Tests "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.242/@methods.27"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.243/@methods.27"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -7571,7 +7715,7 @@
       <javadocs>
         <fragments xsi:type="md:JavadocTextElement" value="Tests "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.242/@methods.33"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.243/@methods.33"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>
@@ -7741,7 +7885,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="All label mappings should match their contained node."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.244/@methods.5"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.245/@methods.5"/>
       </javadocs>
     </methods>
     <methods name="assertLabelMappingMatches" line="330">
@@ -7760,12 +7904,12 @@
         <fragments xsi:type="md:JavadocTextElement" value="Assert that the given tool mapping matches the given element."/>
         <fragments xsi:type="md:JavadocTextElement" value="Maps the tool mapping to a loaded .gmftool document through "/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.244/@methods.7"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.245/@methods.7"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=". "/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.244/@methods.7"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.245/@methods.7"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@param">
@@ -7787,7 +7931,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Returns 'foo/bar/baz/visual.gmftool', the key in the gmftool map."/>
       </javadocs>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.244/@methods.8"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.245/@methods.8"/>
       </javadocs>
       <javadocs name="@param"/>
       <javadocs name="@return"/>
@@ -8103,7 +8247,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Get a value from the SoftCache. If the value does"/>
         <fragments xsi:type="md:JavadocTextElement" value="not exist, or has been lost, then"/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.250/@methods.1"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.251/@methods.1"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=" will be used to re-instantiate"/>
         <fragments xsi:type="md:JavadocTextElement" value="it."/>
@@ -8202,7 +8346,7 @@
       </javadocs>
       <javadocs name="@deprecated"/>
       <javadocs name="@see">
-        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.251/@methods.5"/>
+        <fragments xsi:type="md:JavadocMethodReference" reference="//@references.252/@methods.5"/>
       </javadocs>
     </methods>
     <methods name="writeFile" line="200">
@@ -8258,7 +8402,7 @@
         <fragments xsi:type="md:JavadocTextElement" value="Get the first node result from an XPath query."/>
         <fragments xsi:type="md:JavadocTextElement" value="Does not throw an error if more than one result is found; see"/>
         <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.252/@methods.2"/>
+          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.253/@methods.2"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value="."/>
       </javadocs>

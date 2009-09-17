@@ -7,10 +7,14 @@
 package org.openiaml.docs.modeldoc.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.ConstraintType;
+import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 
 /**
@@ -23,6 +27,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ConstraintImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ConstraintImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ConstraintImpl#getMessage <em>Message</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.ConstraintImpl#getContainingClass <em>Containing Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -176,6 +181,91 @@ public class ConstraintImpl extends SemanticImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EMFClass getContainingClass() {
+		if (eContainerFeatureID() != ModeldocPackage.CONSTRAINT__CONTAINING_CLASS) return null;
+		return (EMFClass)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetContainingClass(EMFClass newContainingClass, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newContainingClass, ModeldocPackage.CONSTRAINT__CONTAINING_CLASS, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContainingClass(EMFClass newContainingClass) {
+		if (newContainingClass != eInternalContainer() || (eContainerFeatureID() != ModeldocPackage.CONSTRAINT__CONTAINING_CLASS && newContainingClass != null)) {
+			if (EcoreUtil.isAncestor(this, newContainingClass))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newContainingClass != null)
+				msgs = ((InternalEObject)newContainingClass).eInverseAdd(this, ModeldocPackage.EMF_CLASS__CONSTRAINTS, EMFClass.class, msgs);
+			msgs = basicSetContainingClass(newContainingClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.CONSTRAINT__CONTAINING_CLASS, newContainingClass, newContainingClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModeldocPackage.CONSTRAINT__CONTAINING_CLASS:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetContainingClass((EMFClass)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModeldocPackage.CONSTRAINT__CONTAINING_CLASS:
+				return basicSetContainingClass(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case ModeldocPackage.CONSTRAINT__CONTAINING_CLASS:
+				return eInternalContainer().eInverseRemove(this, ModeldocPackage.EMF_CLASS__CONSTRAINTS, EMFClass.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -185,6 +275,8 @@ public class ConstraintImpl extends SemanticImpl implements Constraint {
 				return getType();
 			case ModeldocPackage.CONSTRAINT__MESSAGE:
 				return getMessage();
+			case ModeldocPackage.CONSTRAINT__CONTAINING_CLASS:
+				return getContainingClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,6 +297,9 @@ public class ConstraintImpl extends SemanticImpl implements Constraint {
 				return;
 			case ModeldocPackage.CONSTRAINT__MESSAGE:
 				setMessage((String)newValue);
+				return;
+			case ModeldocPackage.CONSTRAINT__CONTAINING_CLASS:
+				setContainingClass((EMFClass)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -227,6 +322,9 @@ public class ConstraintImpl extends SemanticImpl implements Constraint {
 			case ModeldocPackage.CONSTRAINT__MESSAGE:
 				setMessage(MESSAGE_EDEFAULT);
 				return;
+			case ModeldocPackage.CONSTRAINT__CONTAINING_CLASS:
+				setContainingClass((EMFClass)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -245,6 +343,8 @@ public class ConstraintImpl extends SemanticImpl implements Constraint {
 				return type != TYPE_EDEFAULT;
 			case ModeldocPackage.CONSTRAINT__MESSAGE:
 				return MESSAGE_EDEFAULT == null ? message != null : !MESSAGE_EDEFAULT.equals(message);
+			case ModeldocPackage.CONSTRAINT__CONTAINING_CLASS:
+				return getContainingClass() != null;
 		}
 		return super.eIsSet(featureID);
 	}

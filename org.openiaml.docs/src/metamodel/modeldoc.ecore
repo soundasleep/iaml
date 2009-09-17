@@ -24,17 +24,17 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tagline" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationalSemantics" upperBound="-1"
-        eType="#//OperationalSemantic" containment="true"/>
+        eType="#//OperationalSemantic" containment="true" eOpposite="#//OperationalSemantic/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inferenceSemantics" upperBound="-1"
-        eType="#//InferenceSemantic" containment="true"/>
+        eType="#//InferenceSemantic" containment="true" eOpposite="#//InferenceSemantic/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
-        eType="#//Constraint" containment="true"/>
+        eType="#//Constraint" containment="true" eOpposite="#//Constraint/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1"
-        eType="#//ModelExtension" containment="true"/>
+        eType="#//ModelExtension" containment="true" eOpposite="#//ModelExtension/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="graphicalRepresentations"
-        upperBound="-1" eType="#//GraphicalRepresentation" containment="true"/>
+        upperBound="-1" eType="#//GraphicalRepresentation" containment="true" eOpposite="#//GraphicalRepresentation/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="examples" upperBound="-1"
-        eType="#//Example" containment="true"/>
+        eType="#//Example" containment="true" eOpposite="#//Example/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ModelDocumentation"
         eOpposite="#//ModelDocumentation/classes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
@@ -48,20 +48,31 @@
   <eClassifiers xsi:type="ecore:EClass" name="Example">
     <eStructuralFeatures xsi:type="ecore:EReference" name="exampleModel" eType="#//ModelReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exampleTest" eType="#//JavaClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
+        eOpposite="#//EMFClass/examples"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationalSemantic" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
+        eOpposite="#//EMFClass/operationalSemantics"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GraphicalRepresentation" eSuperTypes="#//Semantic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalRepresentation" eSuperTypes="#//Semantic">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
+        eOpposite="#//EMFClass/graphicalRepresentations"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InferenceSemantic" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
+        eOpposite="#//EMFClass/inferenceSemantics"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ConstraintType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
+        eOpposite="#//EMFClass/constraints"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType">
     <eLiterals name="ERROR"/>
@@ -70,6 +81,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="ModelExtension" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
+        eOpposite="#//EMFClass/extensions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ModelDocumentation"

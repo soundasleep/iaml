@@ -7,9 +7,12 @@
 package org.openiaml.docs.modeldoc.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.docs.modeldoc.OperationalSemantic;
@@ -23,6 +26,7 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  * <ul>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl#getCategory <em>Category</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl#getContainingClass <em>Containing Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -142,6 +146,91 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EMFClass getContainingClass() {
+		if (eContainerFeatureID() != ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS) return null;
+		return (EMFClass)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetContainingClass(EMFClass newContainingClass, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newContainingClass, ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContainingClass(EMFClass newContainingClass) {
+		if (newContainingClass != eInternalContainer() || (eContainerFeatureID() != ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS && newContainingClass != null)) {
+			if (EcoreUtil.isAncestor(this, newContainingClass))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newContainingClass != null)
+				msgs = ((InternalEObject)newContainingClass).eInverseAdd(this, ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS, EMFClass.class, msgs);
+			msgs = basicSetContainingClass(newContainingClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS, newContainingClass, newContainingClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetContainingClass((EMFClass)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS:
+				return basicSetContainingClass(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS:
+				return eInternalContainer().eInverseRemove(this, ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS, EMFClass.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -150,6 +239,8 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION:
 				if (resolve) return getDescription();
 				return basicGetDescription();
+			case ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS:
+				return getContainingClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -167,6 +258,9 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 				return;
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION:
 				setDescription((JavadocTagElement)newValue);
+				return;
+			case ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS:
+				setContainingClass((EMFClass)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -186,6 +280,9 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION:
 				setDescription((JavadocTagElement)null);
 				return;
+			case ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS:
+				setContainingClass((EMFClass)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -202,6 +299,8 @@ public class OperationalSemanticImpl extends SemanticImpl implements Operational
 				return CATEGORY_EDEFAULT == null ? category != null : !CATEGORY_EDEFAULT.equals(category);
 			case ModeldocPackage.OPERATIONAL_SEMANTIC__DESCRIPTION:
 				return description != null;
+			case ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS:
+				return getContainingClass() != null;
 		}
 		return super.eIsSet(featureID);
 	}

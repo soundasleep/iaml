@@ -922,13 +922,15 @@ public class Test2 extends TestCase {
 	
 	/**
 	 * Load all of the OAW extensions.
+	 * TODO needs to be refactored.
 	 */
 	private void loadOAWExtensions(ModeldocFactory factory, ModelDocumentation root) throws Exception {
+		{
 		String checkFile = "../org.openiaml.model.codegen.oaw/src/metamodel/Extensions.ext";
 		InputStream in = new FileInputStream(checkFile);
 		
 		FileReference fr = factory.createFileReference();
-		fr.setPackage("org.openiaml.model.codegen.oaw");
+		fr.setPlugin("org.openiaml.model.codegen.oaw");
 		fr.setPackage("src.metamodel");
 		fr.setName("Extensions.ext");
 		fr.setParent(root);
@@ -954,13 +956,55 @@ public class Test2 extends TestCase {
 				FileLineReference line = factory.createFileLineReference();
 				line.setFile(fr);
 				line.setLine(ext.getLine());
-				extension.setReference(fr);
+				extension.setReference(line);
 
 				// add this extension
 				identifier.getExtensions().add(extension);
 
 			}
 		}
+		}
+		
+		// TODO this needs to be refactored!
+		{
+			String checkFile = "../org.openiaml.model.codegen.oaw/src/template/GeneratorExtensions.ext";
+			InputStream in = new FileInputStream(checkFile);
+			
+			FileReference fr = factory.createFileReference();
+			fr.setPlugin("org.openiaml.model.codegen.oaw");
+			fr.setPackage("src.template");
+			fr.setName("GeneratorExtensions.ext");
+			fr.setParent(root);
+			
+			ExtensionFile file = ParseFacade.file(new InputStreamReader(in), checkFile);
+			
+			for (Extension ext : file.getExtensions()) {
+			
+				// is there at least one type?
+				if (ext.getFormalParameters() != null && ext.getFormalParameters().size() > 0) {
+					
+					// map the Type (the first parameter) to an EMFClass
+					EMFClass identifier = mapOAWType(root, ext.getFormalParameters().get(0));				
+					if (identifier == null)
+						continue;	// unidentified type (e.g. emf::EObject)
+					
+					// make a new Extension
+					ModelExtension extension = factory.createModelExtension();
+					extension.setName(ext.getName());
+					extension.setValue(ext.toString());
+					
+					// make a new FileReference
+					FileLineReference line = factory.createFileLineReference();
+					line.setFile(fr);
+					line.setLine(ext.getLine());
+					extension.setReference(line);
+
+					// add this extension
+					identifier.getExtensions().add(extension);
+
+				}
+			}
+			}
 	}
 
 	/**

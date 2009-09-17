@@ -84,7 +84,7 @@
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE supertypes FOR modeldoc::EMFClass-»<a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a>«ENDDEFINE»
+«DEFINE supertypes FOR modeldoc::EMFClass-»<span class="class_link"><a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«EXPAND Template::getIcon»</a> <a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a></span>«ENDDEFINE»
 
 «DEFINE example FOR modeldoc::Example»
 	<li>«this»</li>

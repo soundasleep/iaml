@@ -12,7 +12,7 @@
     <constraints reference="//@references.82/@lines.17" constraint="from.!=(null)" message="&quot;A WireEdge must have a 'from'&quot;"/>
     <constraints reference="//@references.82/@lines.18" constraint="to.!=(null)" message="&quot;A WireEdge must have a 'to'&quot;"/>
     <extensions reference="//@references.84/@lines.31" name="isFailEdge" value="isFailEdge(model::WireEdge this)"/>
-    <graphicalRepresentations reference="//@references.330"/>
+    <graphicalRepresentations reference="//@references.331"/>
     <references name="from" lowerBound="1" type="//@classes.3"/>
     <references name="to" lowerBound="1" type="//@classes.2"/>
   </classes>
@@ -31,7 +31,9 @@
   </classes>
   <classes name="EventTrigger" supertypes="//@classes.0 //@classes.3" runtimeClass="//@references.4" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//EventTrigger"/>
-    <graphicalRepresentations reference="//@references.293"/>
+    <operationalSemantics reference="//@references.111/@methods.0" description="//@references.111/@methods.0/@javadocs.1"/>
+    <inferenceSemantics reference="//@references.258/@rules.0" description="//@references.258/@rules.0/@javadocs.0"/>
+    <graphicalRepresentations reference="//@references.294"/>
   </classes>
   <classes name="ContainsEventTriggers" abstract="true" interface="true" subtypes="//@classes.14 //@classes.19 //@classes.20 //@classes.74" runtimeClass="//@references.5" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ContainsEventTriggers"/>
@@ -44,7 +46,7 @@
     <extensions reference="//@references.84/@lines.39" name="getDomainObject" value="model::DomainObject getDomainObject(model::DomainObject this)"/>
     <extensions reference="//@references.84/@lines.67" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::DomainObject this)"/>
     <extensions reference="//@references.84/@lines.70" name="allSubtypes" value="List[model::DomainObject] allSubtypes(model::DomainObject this)"/>
-    <graphicalRepresentations reference="//@references.288"/>
+    <graphicalRepresentations reference="//@references.289"/>
     <references name="attributes" upperBound="-1" containment="true" type="//@classes.7"/>
   </classes>
   <classes name="DomainAttribute" supertypes="//@classes.14 //@classes.30" runtimeClass="//@references.7" description="TODO Description">
@@ -53,12 +55,12 @@
     <extensions reference="//@references.84/@lines.38" name="getDomainStore" value="model::DomainStore getDomainStore(model::DomainAttribute this)"/>
     <extensions reference="//@references.84/@lines.40" name="getDomainObject" value="model::DomainObject getDomainObject(model::DomainAttribute this)"/>
     <extensions reference="//@references.84/@lines.68" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::DomainAttribute this)"/>
-    <graphicalRepresentations reference="//@references.286"/>
+    <graphicalRepresentations reference="//@references.287"/>
     <attributes name="primaryKey" type="EBoolean" defaultLiteral="false"/>
   </classes>
   <classes name="ActivityNode" supertypes="//@classes.32" subtypes="//@classes.65 //@classes.66 //@classes.67 //@classes.68 //@classes.71 //@classes.72 //@classes.73" runtimeClass="//@references.8" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ActivityNode"/>
-    <graphicalRepresentations reference="//@references.268"/>
+    <graphicalRepresentations reference="//@references.269"/>
   </classes>
   <classes name="Operation" abstract="true" supertypes="//@classes.0 //@classes.2 //@classes.22 //@classes.23 //@classes.26" subtypes="//@classes.11" runtimeClass="//@references.9" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//Operation"/>
@@ -70,21 +72,21 @@
   </classes>
   <classes name="Parameter" supertypes="//@classes.0 //@classes.23" runtimeClass="//@references.10" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//Parameter"/>
-    <graphicalRepresentations reference="//@references.308"/>
+    <graphicalRepresentations reference="//@references.309"/>
   </classes>
   <classes name="PrimitiveOperation" supertypes="//@classes.3 //@classes.9 //@classes.27" subtypes="//@classes.12 //@classes.69" runtimeClass="//@references.11" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//PrimitiveOperation"/>
     <constraints reference="//@references.82/@lines.34" constraint="name.==(&quot;setPropertyToValue&quot;)||name.==(&quot;set&quot;)||name.==(&quot;javascriptAlert&quot;)||name.==(&quot;save&quot;)||name.==(&quot;new&quot;)||name.==(&quot;exists?&quot;)||name.==(&quot;equal?&quot;)||name.==(&quot;add role&quot;)||name.==(&quot;add permission&quot;)||name.==(&quot;remove role&quot;)||name.==(&quot;remove permission&quot;)" type="WARNING" message="&quot;Unknown primitive operation name '&quot;.+(name).+(&quot;'&quot;)"/>
     <extensions reference="//@references.84/@lines.41" name="shouldExpandEventTriggers" value="shouldExpandEventTriggers(model::PrimitiveOperation this)"/>
     <extensions reference="//@references.84/@lines.42" name="shouldExpandEventTriggersServer" value="shouldExpandEventTriggersServer(model::PrimitiveOperation this)"/>
-    <graphicalRepresentations reference="//@references.311"/>
+    <graphicalRepresentations reference="//@references.312"/>
   </classes>
   <classes name="CompositeOperation" supertypes="//@classes.11 //@classes.13 //@classes.30 //@classes.33 //@classes.38 //@classes.41" runtimeClass="//@references.12" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//CompositeOperation"/>
     <constraints reference="//@references.82/@lines.33" constraint="nodes.typeSelect(model::operations::StartNode).size.&lt;=(1)" message="&quot;An Operation can only contain one StartNode&quot;"/>
     <extensions reference="//@references.84/@lines.26" name="startNode" value="startNode(model::CompositeOperation this)"/>
     <extensions reference="//@references.84/@lines.30" name="getFailEdge" value="getFailEdge(model::CompositeOperation this)"/>
-    <graphicalRepresentations reference="//@references.276"/>
+    <graphicalRepresentations reference="//@references.277"/>
     <references name="nodes" upperBound="-1" containment="true" type="//@classes.8"/>
     <references name="dataEdges" upperBound="-1" containment="true" type="//@classes.21"/>
     <references name="executionEdges" upperBound="-1" containment="true" type="//@classes.25"/>
@@ -100,31 +102,31 @@
     <targetClass href="http://openiaml.org/model0.4#//ApplicationElement"/>
     <extensions reference="//@references.83/@lines.0" name="parent" value="model::InternetApplication parent(model::ApplicationElement this)"/>
     <extensions reference="//@references.84/@lines.20" name="allContainerOperations" value="allContainerOperations(model::ApplicationElement this)"/>
-    <graphicalRepresentations reference="//@references.269"/>
+    <graphicalRepresentations reference="//@references.270"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
     <references name="values" upperBound="-1" containment="true" type="//@classes.17"/>
   </classes>
   <classes name="ApplicationElementContainer" abstract="true" supertypes="//@classes.14 //@classes.30" subtypes="//@classes.18 //@classes.75 //@classes.76" runtimeClass="//@references.15" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ApplicationElementContainer"/>
     <extensions reference="//@references.84/@lines.18" name="allContainerOperations" value="allContainerOperations(model::ApplicationElementContainer this)"/>
-    <graphicalRepresentations reference="//@references.270"/>
+    <graphicalRepresentations reference="//@references.271"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
   </classes>
   <classes name="ApplicationElementProperty" supertypes="//@classes.0 //@classes.2 //@classes.3 //@classes.22 //@classes.23" runtimeClass="//@references.16" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ApplicationElementProperty"/>
     <constraints reference="//@references.82/@lines.27" constraint="defaultValue.==(null)&amp;&amp;inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size.>(0).!()" type="WARNING" message="&quot;A session property used as part of a login handler should have a default value set, otherwise secure pages will crash with an exception rather than going to the login page&quot;"/>
     <extensions reference="//@references.84/@lines.24" name="allApplicationElementProperties" value="List[model::ApplicationElementProperty] allApplicationElementProperties(model::ApplicationElementProperty this)"/>
-    <graphicalRepresentations reference="//@references.271"/>
+    <graphicalRepresentations reference="//@references.272"/>
     <attributes name="defaultValue" type="EString"/>
   </classes>
   <classes name="StaticValue" supertypes="//@classes.0 //@classes.3 //@classes.23" runtimeClass="//@references.17" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//StaticValue"/>
-    <graphicalRepresentations reference="//@references.323"/>
+    <graphicalRepresentations reference="//@references.324"/>
     <attributes name="value" type="EString"/>
   </classes>
   <classes name="VisibleThing" supertypes="//@classes.15" subtypes="//@classes.44 //@classes.45 //@classes.46 //@classes.47 //@classes.48" runtimeClass="//@references.18" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//VisibleThing"/>
-    <graphicalRepresentations reference="//@references.328"/>
+    <graphicalRepresentations reference="//@references.329"/>
     <references name="sessions" upperBound="-1" containment="true" type="//@classes.74"/>
     <references name="parameters" upperBound="-1" containment="true" type="//@classes.43"/>
   </classes>
@@ -142,7 +144,7 @@
     <extensions reference="//@references.84/@lines.56" name="getAllDomainAttributeInstances" value="List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this)"/>
     <extensions reference="//@references.84/@lines.58" name="getAllDomainObjectInstances" value="List[model::DomainObjectInstance] getAllDomainObjectInstances(model::InternetApplication this)"/>
     <extensions reference="//@references.84/@lines.60" name="resolveDynamicSet" value="List[emf::EObject] resolveDynamicSet(model::InternetApplication root,model::DynamicApplicationElementSet set)"/>
-    <graphicalRepresentations reference="//@references.300"/>
+    <graphicalRepresentations reference="//@references.301"/>
     <attributes name="runtimeUrl" type="EString" defaultLiteral="http://localhost:8080/output/"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
@@ -153,7 +155,7 @@
     <targetClass href="http://openiaml.org/model0.4#//DomainStore"/>
     <extensions reference="//@references.84/@lines.36" name="getDomainStore" value="model::DomainStore getDomainStore(model::DomainStore this)"/>
     <extensions reference="//@references.84/@lines.44" name="isPropertiesFile" value="isPropertiesFile(model::DomainStore store)"/>
-    <graphicalRepresentations reference="//@references.290"/>
+    <graphicalRepresentations reference="//@references.291"/>
     <attributes name="file" lowerBound="1" type="FileReference"/>
     <attributes name="type" lowerBound="1" type="DomainStoreTypes"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.6"/>
@@ -163,7 +165,7 @@
   </classes>
   <classes name="DataFlowEdge" supertypes="//@classes.32" runtimeClass="//@references.21" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DataFlowEdge"/>
-    <graphicalRepresentations reference="//@references.281"/>
+    <graphicalRepresentations reference="//@references.282"/>
     <references name="from" lowerBound="1" type="//@classes.23"/>
     <references name="to" lowerBound="1" type="//@classes.22"/>
   </classes>
@@ -177,11 +179,11 @@
   </classes>
   <classes name="TemporaryVariable" supertypes="//@classes.0 //@classes.22 //@classes.23" runtimeClass="//@references.24" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//TemporaryVariable"/>
-    <graphicalRepresentations reference="//@references.325"/>
+    <graphicalRepresentations reference="//@references.326"/>
   </classes>
   <classes name="ExecutionEdge" supertypes="//@classes.32" subtypes="//@classes.28" runtimeClass="//@references.25" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ExecutionEdge"/>
-    <graphicalRepresentations reference="//@references.294"/>
+    <graphicalRepresentations reference="//@references.295"/>
     <references name="from" lowerBound="1" type="//@classes.27"/>
     <references name="to" lowerBound="1" type="//@classes.26"/>
   </classes>
@@ -195,13 +197,13 @@
   </classes>
   <classes name="ConditionalEdge" supertypes="//@classes.0 //@classes.25" runtimeClass="//@references.28" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ConditionalEdge"/>
-    <graphicalRepresentations reference="//@references.278"/>
+    <graphicalRepresentations reference="//@references.279"/>
   </classes>
   <classes name="DynamicApplicationElementSet" supertypes="//@classes.14" runtimeClass="//@references.29" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DynamicApplicationElementSet"/>
     <extensions reference="//@references.84/@lines.11" name="isXPath" value="isXPath(model::DynamicApplicationElementSet this)"/>
     <extensions reference="//@references.84/@lines.55" name="getAllDynamicElements" value="List[model::DynamicApplicationElementSet] getAllDynamicElements(model::DynamicApplicationElementSet this)"/>
-    <graphicalRepresentations reference="//@references.291"/>
+    <graphicalRepresentations reference="//@references.292"/>
     <attributes name="query" type="EString"/>
   </classes>
   <classes name="ContainsWires" abstract="true" interface="true" subtypes="//@classes.6 //@classes.7 //@classes.12 //@classes.15 //@classes.19 //@classes.20 //@classes.31 //@classes.34 //@classes.35 //@classes.50 //@classes.74" runtimeClass="//@references.30" description="TODO Description">
@@ -226,7 +228,7 @@
   </classes>
   <classes name="DerivedView" supertypes="//@classes.14 //@classes.30" runtimeClass="//@references.34" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DerivedView"/>
-    <graphicalRepresentations reference="//@references.285"/>
+    <graphicalRepresentations reference="//@references.286"/>
     <attributes name="strQuery" type="EString"/>
     <references name="attributes" upperBound="-1" type="//@classes.7"/>
   </classes>
@@ -236,19 +238,19 @@
     <extensions reference="//@references.84/@lines.59" name="getAllDomainObjectInstances" value="List[model::DomainObjectInstance] getAllDomainObjectInstances(model::DomainObjectInstance this)"/>
     <extensions reference="//@references.84/@lines.64" name="isAutosaveOff" value="isAutosaveOff(model::DomainObjectInstance this)"/>
     <extensions reference="//@references.84/@lines.69" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::DomainObjectInstance this)"/>
-    <graphicalRepresentations reference="//@references.289"/>
+    <graphicalRepresentations reference="//@references.290"/>
     <attributes name="strQuery" type="EString"/>
     <attributes name="autosave" type="EBoolean" defaultLiteral="true"/>
     <references name="attributes" upperBound="-1" containment="true" type="//@classes.42"/>
   </classes>
   <classes name="PageRequest" runtimeClass="//@references.36" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//PageRequest"/>
-    <graphicalRepresentations reference="//@references.307"/>
+    <graphicalRepresentations reference="//@references.308"/>
     <references name="parameters" upperBound="-1" type="//@classes.16"/>
   </classes>
   <classes name="VisitorAgent" runtimeClass="//@references.37" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//VisitorAgent"/>
-    <graphicalRepresentations reference="//@references.329"/>
+    <graphicalRepresentations reference="//@references.330"/>
     <references name="properties" upperBound="-1" type="//@classes.16"/>
   </classes>
   <classes name="Scope" abstract="true" supertypes="//@classes.33" subtypes="//@classes.12 //@classes.19 //@classes.44 //@classes.48 //@classes.74" runtimeClass="//@references.38" description="TODO Description">
@@ -262,7 +264,7 @@
   <classes name="CompositeCondition" supertypes="//@classes.33 //@classes.39 //@classes.41" runtimeClass="//@references.40" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//CompositeCondition"/>
     <extensions reference="//@references.84/@lines.27" name="startNodeCondition" value="startNodeCondition(model::CompositeCondition this)"/>
-    <graphicalRepresentations reference="//@references.275"/>
+    <graphicalRepresentations reference="//@references.276"/>
     <references name="nodes" upperBound="-1" containment="true" type="//@classes.8"/>
     <references name="dataEdges" upperBound="-1" containment="true" type="//@classes.21"/>
     <references name="executionEdges" upperBound="-1" containment="true" type="//@classes.25"/>
@@ -281,17 +283,18 @@
     <extensions reference="//@references.84/@lines.57" name="getAllDomainAttributeInstances" value="List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::DomainAttributeInstance this)"/>
     <extensions reference="//@references.84/@lines.63" name="isAutosaveOff" value="isAutosaveOff(model::DomainAttributeInstance this)"/>
     <extensions reference="//@references.84/@lines.65" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::DomainAttributeInstance this)"/>
-    <graphicalRepresentations reference="//@references.287"/>
+    <graphicalRepresentations reference="//@references.288"/>
     <attributes name="autosave" type="EBoolean" defaultLiteral="true"/>
   </classes>
   <classes name="QueryParameter" supertypes="//@classes.0 //@classes.3 //@classes.23" runtimeClass="//@references.43" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//QueryParameter"/>
     <constraints reference="//@references.82/@lines.28" constraint="outEdges.forAll(e|isAccessibleOnPage(containingPage(this.eContainer),e.to))" message="&quot;A QueryParameter cannot be used on a Page outside of its containing page (&quot;.+(containingPage(this.eContainer)).+(&quot;, &quot;).+(containingPage(outEdges.first().to.eContainer)).+(&quot;)&quot;)"/>
-    <graphicalRepresentations reference="//@references.313"/>
+    <graphicalRepresentations reference="//@references.314"/>
     <attributes name="defaultValue" type="EString"/>
   </classes>
   <classes name="Page" supertypes="//@classes.18 //@classes.38" runtimeClass="//@references.44" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Page"/>
+    <operationalSemantics reference="//@references.111/@methods.0" description="//@references.111/@methods.0/@javadocs.2"/>
     <constraints reference="//@references.82/@lines.1" constraint="name.length.>(0)" message="&quot;Page must have a name&quot;"/>
     <constraints reference="//@references.82/@lines.32" constraint="children.typeSelect(model::components::LoginHandler).size.==(0)" message="&quot;A Page cannot contain a LoginHandler&quot;"/>
     <extensions reference="//@references.83/@lines.3" name="containingPage" value="model::visual::Page containingPage(model::visual::Page element)"/>
@@ -302,30 +305,31 @@
     <extensions reference="//@references.84/@lines.1" name="pageTitle" value="pageTitle(model::visual::Page this)"/>
     <extensions reference="//@references.84/@lines.12" name="containingPage" value="model::visual::Page containingPage(model::visual::Page element)"/>
     <extensions reference="//@references.84/@lines.53" name="getAllPages" value="List[model::visual::Page] getAllPages(model::visual::Page this)"/>
-    <graphicalRepresentations reference="//@references.306"/>
+    <graphicalRepresentations reference="//@references.307"/>
     <attributes name="url" type="EString"/>
   </classes>
   <classes name="InputForm" supertypes="//@classes.18" runtimeClass="//@references.45" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/InputForm"/>
     <extensions reference="//@references.84/@lines.2" name="formName" value="formName(model::visual::InputForm this)"/>
-    <graphicalRepresentations reference="//@references.298"/>
+    <graphicalRepresentations reference="//@references.299"/>
   </classes>
   <classes name="InputTextField" supertypes="//@classes.18" runtimeClass="//@references.46" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/InputTextField"/>
+    <operationalSemantics reference="//@references.111/@methods.0" description="//@references.111/@methods.0/@javadocs.2"/>
     <extensions reference="//@references.84/@lines.3" name="textFieldName" value="textFieldName(model::visual::InputTextField this)"/>
     <extensions reference="//@references.84/@lines.61" name="getFieldValue" value="getFieldValue(model::visual::InputTextField this)"/>
-    <graphicalRepresentations reference="//@references.299"/>
+    <graphicalRepresentations reference="//@references.300"/>
   </classes>
   <classes name="Button" supertypes="//@classes.18" runtimeClass="//@references.47" tagline="Represents a clickable button to the user." description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Button"/>
     <operationalSemantics reference="//@references.111/@methods.0" description="//@references.111/@methods.0/@javadocs.0"/>
-    <inferenceSemantics reference="//@references.257/@rules.0" description="//@references.257/@rules.0/@javadocs.0"/>
+    <inferenceSemantics reference="//@references.258/@rules.0" description="//@references.258/@rules.0/@javadocs.0"/>
     <extensions reference="//@references.84/@lines.4" name="buttonName" value="buttonName(model::visual::Button this)"/>
-    <graphicalRepresentations reference="//@references.272"/>
+    <graphicalRepresentations reference="//@references.273"/>
   </classes>
   <classes name="Frame" supertypes="//@classes.18 //@classes.38" runtimeClass="//@references.48" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Frame"/>
-    <graphicalRepresentations reference="//@references.297"/>
+    <graphicalRepresentations reference="//@references.298"/>
   </classes>
   <classes name="SingleWire" supertypes="//@classes.1" subtypes="//@classes.53 //@classes.61 //@classes.62 //@classes.63 //@classes.64" runtimeClass="//@references.49" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/SingleWire"/>
@@ -333,7 +337,7 @@
   <classes name="CompositeWire" supertypes="//@classes.0 //@classes.1 //@classes.30 //@classes.33 //@classes.41" subtypes="//@classes.51 //@classes.52 //@classes.54 //@classes.55 //@classes.56 //@classes.57 //@classes.58 //@classes.59 //@classes.60" runtimeClass="//@references.50" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/CompositeWire"/>
     <extensions reference="//@references.84/@lines.32" name="isFailEdge" value="isFailEdge(model::wires::CompositeWire this)"/>
-    <graphicalRepresentations reference="//@references.277"/>
+    <graphicalRepresentations reference="//@references.278"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
     <references name="operations" upperBound="-1" containment="true" type="//@classes.9"/>
@@ -347,93 +351,93 @@
     <constraints reference="//@references.82/@lines.8" constraint="model::QueryParameter.isInstance(from).!()&amp;&amp;model::QueryParameter.isInstance(to).!()" message="&quot;You cannot have a SyncWire that connects to a QueryParameter&quot;"/>
     <constraints reference="//@references.82/@lines.9" constraint="from.!=(to)" message="&quot;A SyncWire cannot connect to itself&quot;"/>
     <constraints reference="//@references.82/@lines.10" constraint="model::ApplicationElementProperty.isInstance(from)&amp;&amp;model::ApplicationElementProperty.isInstance(to).!()" message="&quot;You cannot have a SyncWire connecting two ApplicationElementProperties&quot;"/>
-    <graphicalRepresentations reference="//@references.324"/>
+    <graphicalRepresentations reference="//@references.325"/>
   </classes>
   <classes name="RunInstanceWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.52" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/RunInstanceWire"/>
     <constraints reference="//@references.82/@lines.4" constraint="model::Operation.isInstance(to)" message="&quot;A run instance wire can only connect to an operation&quot;"/>
     <constraints reference="//@references.82/@lines.26" constraint="model::VisibleThing.isInstance(from)&amp;&amp;name.==(&quot;click&quot;)||name.==(&quot;onClick&quot;).!().!()" type="WARNING" message="&quot;This RunInstanceWire will not do anything: consider naming it 'onClick'&quot;"/>
     <extensions reference="//@references.83/@lines.2" name="isRunInstanceWire" value="isRunInstanceWire(model::wires::RunInstanceWire this)"/>
-    <graphicalRepresentations reference="//@references.316"/>
+    <graphicalRepresentations reference="//@references.317"/>
     <attributes name="priority" type="EInt"/>
   </classes>
   <classes name="ParameterWire" supertypes="//@classes.0 //@classes.49" runtimeClass="//@references.53" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ParameterWire"/>
-    <graphicalRepresentations reference="//@references.309"/>
+    <graphicalRepresentations reference="//@references.310"/>
     <attributes name="parameterName" type="EString"/>
   </classes>
   <classes name="SetWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.54" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/SetWire"/>
-    <graphicalRepresentations reference="//@references.319"/>
+    <graphicalRepresentations reference="//@references.320"/>
   </classes>
   <classes name="ShowWire" supertypes="//@classes.50" runtimeClass="//@references.55" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ShowWire"/>
-    <graphicalRepresentations reference="//@references.320"/>
+    <graphicalRepresentations reference="//@references.321"/>
   </classes>
   <classes name="CommitWire" supertypes="//@classes.50" runtimeClass="//@references.56" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/CommitWire"/>
-    <graphicalRepresentations reference="//@references.274"/>
+    <graphicalRepresentations reference="//@references.275"/>
   </classes>
   <classes name="NavigateWire" supertypes="//@classes.50" runtimeClass="//@references.57" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/NavigateWire"/>
-    <graphicalRepresentations reference="//@references.303"/>
+    <graphicalRepresentations reference="//@references.304"/>
   </classes>
   <classes name="SelectWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.58" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/SelectWire"/>
     <constraints reference="//@references.82/@lines.16" constraint="model::DomainObject.isInstance(from)" message="&quot;A SelectWire must come from a valid DomainObject&quot;"/>
     <constraints reference="//@references.82/@lines.30" constraint="inEdges.typeSelect(model::wires::ParameterWire).size.==(0)||query.!=(null)&amp;&amp;query.length.>(0)" message="&quot;A SelectWire has incoming Parameters, but does not have a query to use them&quot;"/>
-    <graphicalRepresentations reference="//@references.317"/>
+    <graphicalRepresentations reference="//@references.318"/>
     <attributes name="query" type="EString"/>
     <attributes name="limit" type="EInt" defaultLiteral="1"/>
   </classes>
   <classes name="ConditionWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.59" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ConditionWire"/>
-    <graphicalRepresentations reference="//@references.279"/>
+    <graphicalRepresentations reference="//@references.280"/>
   </classes>
   <classes name="NewInstanceWire" supertypes="//@classes.50" runtimeClass="//@references.60" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/NewInstanceWire"/>
     <extensions reference="//@references.84/@lines.66" name="getPrimaryKey" value="model::DomainAttribute getPrimaryKey(model::wires::NewInstanceWire this)"/>
-    <graphicalRepresentations reference="//@references.304"/>
+    <graphicalRepresentations reference="//@references.305"/>
   </classes>
   <classes name="ExtendsWire" supertypes="//@classes.33 //@classes.49" runtimeClass="//@references.61" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ExtendsWire"/>
     <constraints reference="//@references.82/@lines.19" constraint="from.!=(to)" message="&quot;A Role cannot extend itself&quot;"/>
     <constraints reference="//@references.82/@lines.20" constraint="model::DomainObject.isInstance(from)||model::DomainAttribute.isInstance(from)||model::DomainAttributeInstance.isInstance(from)&amp;&amp;model::DomainObject.isInstance(to)||model::DomainAttribute.isInstance(to)||model::DomainAttributeInstance.isInstance(to)" message="&quot;An ExtendsWire can only connect to a DomainObject, DomainAttribute or DomainAttributeInstance&quot;"/>
-    <graphicalRepresentations reference="//@references.295"/>
+    <graphicalRepresentations reference="//@references.296"/>
   </classes>
   <classes name="RequiresWire" supertypes="//@classes.2 //@classes.3 //@classes.49" runtimeClass="//@references.62" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/RequiresWire"/>
     <constraints reference="//@references.82/@lines.23" constraint="inEdges.forAll(e|model::wires::ConstraintWire.isInstance(e))" message="&quot;A RequiresWire can only be connected to ConstraintWires&quot;"/>
     <constraints reference="//@references.82/@lines.24" constraint="model::users::Permission.isInstance(to)||model::users::Role.isInstance(to)" message="&quot;A RequireWire must connect to a Permission or a Role&quot;"/>
-    <graphicalRepresentations reference="//@references.314"/>
+    <graphicalRepresentations reference="//@references.315"/>
   </classes>
   <classes name="ConstraintWire" supertypes="//@classes.49" runtimeClass="//@references.63" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ConstraintWire"/>
-    <graphicalRepresentations reference="//@references.280"/>
+    <graphicalRepresentations reference="//@references.281"/>
     <attributes name="type" lowerBound="1" type="ConstraintTypes"/>
   </classes>
   <classes name="ProvidesWire" supertypes="//@classes.49" runtimeClass="//@references.64" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ProvidesWire"/>
     <constraints reference="//@references.82/@lines.21" constraint="model::users::Role.isInstance(from)" message="&quot;An ProvidesWire can only connect from a Role&quot;"/>
     <constraints reference="//@references.82/@lines.22" constraint="model::users::Permission.isInstance(to)" message="&quot;An ProvidesWire can only connect to a Permission&quot;"/>
-    <graphicalRepresentations reference="//@references.312"/>
+    <graphicalRepresentations reference="//@references.313"/>
   </classes>
   <classes name="StartNode" supertypes="//@classes.8 //@classes.27" runtimeClass="//@references.65" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/StartNode"/>
-    <graphicalRepresentations reference="//@references.322"/>
+    <graphicalRepresentations reference="//@references.323"/>
   </classes>
   <classes name="CancelNode" supertypes="//@classes.8 //@classes.26" runtimeClass="//@references.66" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/CancelNode"/>
-    <graphicalRepresentations reference="//@references.273"/>
+    <graphicalRepresentations reference="//@references.274"/>
     <attributes name="exceptionText" type="EString"/>
   </classes>
   <classes name="FinishNode" supertypes="//@classes.8 //@classes.26" runtimeClass="//@references.67" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/FinishNode"/>
-    <graphicalRepresentations reference="//@references.296"/>
+    <graphicalRepresentations reference="//@references.297"/>
   </classes>
   <classes name="DecisionNode" supertypes="//@classes.8 //@classes.26 //@classes.27" runtimeClass="//@references.68" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/DecisionNode"/>
-    <graphicalRepresentations reference="//@references.283"/>
+    <graphicalRepresentations reference="//@references.284"/>
   </classes>
   <classes name="DecisionOperation" supertypes="//@classes.11 //@classes.22" runtimeClass="//@references.69" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/DecisionOperation"/>
@@ -441,28 +445,28 @@
     <constraints reference="//@references.82/@lines.6" constraint="outExecutions.size.&lt;=(2)" message="&quot;A DecisionOperation can only have at most two out execution edges&quot;"/>
     <extensions reference="//@references.84/@lines.28" name="passedExectionFlow" value="passedExectionFlow(model::operations::DecisionOperation this)"/>
     <extensions reference="//@references.84/@lines.29" name="failedExectionFlow" value="failedExectionFlow(model::operations::DecisionOperation this)"/>
-    <graphicalRepresentations reference="//@references.284"/>
+    <graphicalRepresentations reference="//@references.285"/>
   </classes>
   <classes name="DecisionCondition" supertypes="//@classes.22 //@classes.26 //@classes.27 //@classes.39" runtimeClass="//@references.70" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/DecisionCondition"/>
     <extensions reference="//@references.84/@lines.45" name="getFailEdges" value="getFailEdges(model::operations::DecisionCondition this)"/>
     <extensions reference="//@references.84/@lines.47" name="getPassEdges" value="getPassEdges(model::operations::DecisionCondition this)"/>
-    <graphicalRepresentations reference="//@references.282"/>
+    <graphicalRepresentations reference="//@references.283"/>
   </classes>
   <classes name="SplitNode" supertypes="//@classes.8 //@classes.26 //@classes.27" runtimeClass="//@references.71" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/SplitNode"/>
-    <graphicalRepresentations reference="//@references.321"/>
+    <graphicalRepresentations reference="//@references.322"/>
   </classes>
   <classes name="JoinNode" supertypes="//@classes.8 //@classes.26 //@classes.27" runtimeClass="//@references.72" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/JoinNode"/>
-    <graphicalRepresentations reference="//@references.301"/>
+    <graphicalRepresentations reference="//@references.302"/>
   </classes>
   <classes name="OperationCallNode" supertypes="//@classes.0 //@classes.3 //@classes.8 //@classes.22 //@classes.23 //@classes.26 //@classes.27" runtimeClass="//@references.73" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/OperationCallNode"/>
     <constraints reference="//@references.82/@lines.25" constraint="outEdges.size.==(1)&amp;&amp;model::wires::RunInstanceWire.isInstance(outEdges.first())&amp;&amp;model::Operation.isInstance(outEdges.first().to)" message="&quot;An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation&quot;"/>
     <extensions reference="//@references.84/@lines.46" name="getFailEdges" value="getFailEdges(model::operations::OperationCallNode this)"/>
     <extensions reference="//@references.84/@lines.48" name="getPassEdges" value="getPassEdges(model::operations::OperationCallNode this)"/>
-    <graphicalRepresentations reference="//@references.305"/>
+    <graphicalRepresentations reference="//@references.306"/>
   </classes>
   <classes name="Session" supertypes="//@classes.0 //@classes.2 //@classes.3 //@classes.5 //@classes.13 //@classes.30 //@classes.38 //@classes.41" runtimeClass="//@references.74" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//scopes/Session"/>
@@ -473,7 +477,7 @@
     <extensions reference="//@references.84/@lines.19" name="allContainerOperations" value="allContainerOperations(model::scopes::Session this)"/>
     <extensions reference="//@references.84/@lines.25" name="possibleParentOperations" value="possibleParentOperations(model::scopes::Session this)"/>
     <extensions reference="//@references.84/@lines.34" name="containingSession" value="model::scopes::Session containingSession(model::scopes::Session this)"/>
-    <graphicalRepresentations reference="//@references.318"/>
+    <graphicalRepresentations reference="//@references.319"/>
     <references name="agents" upperBound="-1" containment="true" type="//@classes.37"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
@@ -483,33 +487,33 @@
     <targetClass href="http://openiaml.org/model0.4#//components/LoginHandler"/>
     <constraints reference="//@references.82/@lines.3" constraint="inEdges.exists(e|model::wires::ParameterWire.isInstance(e))" message="&quot;A login handler must have an incoming parameter to check against&quot;"/>
     <constraints reference="//@references.82/@lines.29" constraint="type.!=(model::components::LoginHandlerTypes::USER)||inEdges.typeSelect(model::wires::ParameterWire).size.&lt;=(1)" message="&quot;A LoginHandler[user] can not have more than one incoming ParameterWire&quot;"/>
-    <graphicalRepresentations reference="//@references.302"/>
+    <graphicalRepresentations reference="//@references.303"/>
     <attributes name="type" lowerBound="1" type="LoginHandlerTypes"/>
   </classes>
   <classes name="AccessControlHandler" supertypes="//@classes.15 //@classes.33" runtimeClass="//@references.76" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//components/AccessControlHandler"/>
-    <graphicalRepresentations reference="//@references.267"/>
+    <graphicalRepresentations reference="//@references.268"/>
   </classes>
   <classes name="EmptyDomainClass" abstract="true" runtimeClass="//@references.77" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//domain/EmptyDomainClass"/>
-    <graphicalRepresentations reference="//@references.292"/>
+    <graphicalRepresentations reference="//@references.293"/>
   </classes>
   <classes name="UserStore" supertypes="//@classes.20" runtimeClass="//@references.78" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//users/UserStore"/>
-    <graphicalRepresentations reference="//@references.327"/>
+    <graphicalRepresentations reference="//@references.328"/>
     <references name="permissions" upperBound="-1" containment="true" type="//@classes.80"/>
   </classes>
   <classes name="Role" supertypes="//@classes.6" runtimeClass="//@references.79" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//users/Role"/>
-    <graphicalRepresentations reference="//@references.315"/>
+    <graphicalRepresentations reference="//@references.316"/>
   </classes>
   <classes name="Permission" supertypes="//@classes.0 //@classes.2 //@classes.3" runtimeClass="//@references.80" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//users/Permission"/>
-    <graphicalRepresentations reference="//@references.310"/>
+    <graphicalRepresentations reference="//@references.311"/>
   </classes>
   <classes name="UserInstance" supertypes="//@classes.35" runtimeClass="//@references.81" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//users/UserInstance"/>
-    <graphicalRepresentations reference="//@references.326"/>
+    <graphicalRepresentations reference="//@references.327"/>
   </classes>
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="NamedElement"/>
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model" name="WireEdge"/>
@@ -1263,26 +1267,25 @@
     </javadocs>
     <methods name="testPage1to2" line="21">
       <javadocs name="@semantics">
-        <fragments xsi:type="md:JavadocTextElement" value=" A "/>
+        <fragments xsi:type="md:JavadocTextElement" value=" Button A "/>
         <fragments xsi:type="md:JavadocTagElement" name="@model">
           <fragments xsi:type="md:JavadocTextElement" value=" Button"/>
         </fragments>
         <fragments xsi:type="md:JavadocTextElement" value=" renders on a page as a button. "/>
       </javadocs>
       <javadocs name="@semantics">
-        <fragments xsi:type="md:JavadocTextElement" value=" test "/>
-        <fragments xsi:type="md:JavadocTagElement" name="@link">
-          <fragments xsi:type="md:JavadocMethodReference" reference="//@references.111/@methods.1"/>
+        <fragments xsi:type="md:JavadocTextElement" value=" EventTrigger A "/>
+        <fragments xsi:type="md:JavadocTagElement" name="@model">
+          <fragments xsi:type="md:JavadocTextElement" value=" Button"/>
         </fragments>
-        <fragments xsi:type="md:JavadocTextElement" value=", foo."/>
+        <fragments xsi:type="md:JavadocTextElement" value=" renders on "/>
+        <fragments xsi:type="md:JavadocTagElement" name="@model">
+          <fragments xsi:type="md:JavadocTextElement" value=" Page a page"/>
+        </fragments>
+        <fragments xsi:type="md:JavadocTextElement" value=" as a button. "/>
       </javadocs>
       <javadocs name="@semantics">
-        <fragments xsi:type="md:JavadocTextElement" value=" test "/>
-        <fragments xsi:type="md:JavadocTagElement" name="@link"/>
-      </javadocs>
-      <javadocs name="@semantics">
-        <fragments xsi:type="md:JavadocTextElement" value=" test "/>
-        <fragments xsi:type="md:JavadocTagElement" name="@link"/>
+        <fragments xsi:type="md:JavadocTextElement" value=" Page,InputTextField A multiple semantics link. "/>
       </javadocs>
       <javadocs name="@another">
         <fragments xsi:type="md:JavadocTextElement" value=" Also see "/>
@@ -1291,7 +1294,6 @@
       </javadocs>
       <javadocs name="@throws"/>
     </methods>
-    <methods name="setUp"/>
   </references>
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model.tests" package="org.openiaml.model.tests.codegen.model0_3" name="ButtonSetValue">
     <javadocs>
@@ -8430,8 +8432,13 @@
   <references xsi:type="md:DroolsPackage" plugin="org.openiaml.model.drools" package="rules" name="set-wires"/>
   <references xsi:type="md:DroolsPackage" plugin="org.openiaml.model.drools" package="rules" name="events">
     <rules name="Create 'edit' event trigger for input text field" line="20">
+      <javadocs name="@semantics"/>
+    </rules>
+  </references>
+  <references xsi:type="md:DroolsPackage" plugin="org.openiaml.model.drools" package="rules" name="events">
+    <rules name="Create 'edit' event trigger for input text field" line="20">
       <javadocs name="@semantics">
-        <fragments xsi:type="md:JavadocTextElement" value="A "/>
+        <fragments xsi:type="md:JavadocTextElement" value="Button,EventTrigger A "/>
         <fragments xsi:type="md:JavadocTagElement" name="@model">
           <fragments xsi:type="md:JavadocTextElement" value="Button"/>
         </fragments>

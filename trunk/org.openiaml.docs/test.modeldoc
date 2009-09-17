@@ -7,8 +7,8 @@
   </classes>
   <classes name="WireEdge" supertypes="//@classes.32" subtypes="//@classes.49 //@classes.50" runtimeClass="//@references.1" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//WireEdge"/>
-    <constraints reference="//@references.82" constraint="from.!=(null)" message="&quot;A WireEdge must have a 'from'&quot;"/>
-    <constraints reference="//@references.82" constraint="to.!=(null)" message="&quot;A WireEdge must have a 'to'&quot;"/>
+    <constraints reference="//@references.82/@lines.17" constraint="from.!=(null)" message="&quot;A WireEdge must have a 'from'&quot;"/>
+    <constraints reference="//@references.82/@lines.18" constraint="to.!=(null)" message="&quot;A WireEdge must have a 'to'&quot;"/>
     <graphicalRepresentations reference="//@references.329"/>
     <references name="from" lowerBound="1" type="//@classes.3"/>
     <references name="to" lowerBound="1" type="//@classes.2"/>
@@ -31,7 +31,7 @@
   </classes>
   <classes name="DomainObject" supertypes="//@classes.14 //@classes.30" subtypes="//@classes.79" runtimeClass="//@references.6" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DomainObject"/>
-    <constraints reference="//@references.82" constraint="name.!=(&quot;single_values&quot;)" message="&quot;You cannot have a DomainObject called single_values (reserved word)&quot;"/>
+    <constraints reference="//@references.82/@lines.13" constraint="name.!=(&quot;single_values&quot;)" message="&quot;You cannot have a DomainObject called single_values (reserved word)&quot;"/>
     <graphicalRepresentations reference="//@references.287"/>
     <references name="attributes" upperBound="-1" containment="true" type="//@classes.7"/>
   </classes>
@@ -46,7 +46,7 @@
   </classes>
   <classes name="Operation" abstract="true" supertypes="//@classes.0 //@classes.2 //@classes.22 //@classes.23 //@classes.26" subtypes="//@classes.11" runtimeClass="//@references.9" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//Operation"/>
-    <constraints reference="//@references.82" constraint="name.length.>(0)" message="&quot;Operation must have a name&quot;"/>
+    <constraints reference="//@references.82/@lines.2" constraint="name.length.>(0)" message="&quot;Operation must have a name&quot;"/>
     <extensions reference="//@references.83" name="isOperation" value="isOperation(model::Operation this)"/>
     <references name="parameters" upperBound="-1" containment="true" type="//@classes.10"/>
   </classes>
@@ -56,12 +56,12 @@
   </classes>
   <classes name="PrimitiveOperation" supertypes="//@classes.3 //@classes.9 //@classes.27" subtypes="//@classes.12 //@classes.69" runtimeClass="//@references.11" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//PrimitiveOperation"/>
-    <constraints reference="//@references.82" constraint="name.==(&quot;setPropertyToValue&quot;)||name.==(&quot;set&quot;)||name.==(&quot;javascriptAlert&quot;)||name.==(&quot;save&quot;)||name.==(&quot;new&quot;)||name.==(&quot;exists?&quot;)||name.==(&quot;equal?&quot;)||name.==(&quot;add role&quot;)||name.==(&quot;add permission&quot;)||name.==(&quot;remove role&quot;)||name.==(&quot;remove permission&quot;)" type="WARNING" message="&quot;Unknown primitive operation name '&quot;.+(name).+(&quot;'&quot;)"/>
+    <constraints reference="//@references.82/@lines.34" constraint="name.==(&quot;setPropertyToValue&quot;)||name.==(&quot;set&quot;)||name.==(&quot;javascriptAlert&quot;)||name.==(&quot;save&quot;)||name.==(&quot;new&quot;)||name.==(&quot;exists?&quot;)||name.==(&quot;equal?&quot;)||name.==(&quot;add role&quot;)||name.==(&quot;add permission&quot;)||name.==(&quot;remove role&quot;)||name.==(&quot;remove permission&quot;)" type="WARNING" message="&quot;Unknown primitive operation name '&quot;.+(name).+(&quot;'&quot;)"/>
     <graphicalRepresentations reference="//@references.310"/>
   </classes>
   <classes name="CompositeOperation" supertypes="//@classes.11 //@classes.13 //@classes.30 //@classes.33 //@classes.38 //@classes.41" runtimeClass="//@references.12" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//CompositeOperation"/>
-    <constraints reference="//@references.82" constraint="nodes.typeSelect(model::operations::StartNode).size.&lt;=(1)" message="&quot;An Operation can only contain one StartNode&quot;"/>
+    <constraints reference="//@references.82/@lines.33" constraint="nodes.typeSelect(model::operations::StartNode).size.&lt;=(1)" message="&quot;An Operation can only contain one StartNode&quot;"/>
     <graphicalRepresentations reference="//@references.275"/>
     <references name="nodes" upperBound="-1" containment="true" type="//@classes.8"/>
     <references name="dataEdges" upperBound="-1" containment="true" type="//@classes.21"/>
@@ -87,7 +87,7 @@
   </classes>
   <classes name="ApplicationElementProperty" supertypes="//@classes.0 //@classes.2 //@classes.3 //@classes.22 //@classes.23" runtimeClass="//@references.16" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//ApplicationElementProperty"/>
-    <constraints reference="//@references.82" constraint="defaultValue.==(null)&amp;&amp;inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size.>(0).!()" type="WARNING" message="&quot;A session property used as part of a login handler should have a default value set, otherwise secure pages will crash with an exception rather than going to the login page&quot;"/>
+    <constraints reference="//@references.82/@lines.27" constraint="defaultValue.==(null)&amp;&amp;inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size.>(0).!()" type="WARNING" message="&quot;A session property used as part of a login handler should have a default value set, otherwise secure pages will crash with an exception rather than going to the login page&quot;"/>
     <graphicalRepresentations reference="//@references.270"/>
     <attributes name="defaultValue" type="EString"/>
   </classes>
@@ -104,7 +104,7 @@
   </classes>
   <classes name="InternetApplication" supertypes="//@classes.0 //@classes.5 //@classes.13 //@classes.30 //@classes.33 //@classes.38 //@classes.41" runtimeClass="//@references.19" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//InternetApplication"/>
-    <constraints reference="//@references.82" constraint="children.exists(e|model::visual::Page.isInstance(e))||sessions.exists(e|e.children.exists(f|model::visual::Page.isInstance(f)))" message="&quot;No pages in internet application&quot;"/>
+    <constraints reference="//@references.82/@lines.0" constraint="children.exists(e|model::visual::Page.isInstance(e))||sessions.exists(e|e.children.exists(f|model::visual::Page.isInstance(f)))" message="&quot;No pages in internet application&quot;"/>
     <graphicalRepresentations reference="//@references.299"/>
     <attributes name="runtimeUrl" type="EString" defaultLiteral="http://localhost:8080/output/"/>
     <references name="properties" upperBound="-1" containment="true" type="//@classes.16"/>
@@ -190,7 +190,7 @@
   </classes>
   <classes name="DomainObjectInstance" supertypes="//@classes.14 //@classes.30" subtypes="//@classes.81" runtimeClass="//@references.35" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DomainObjectInstance"/>
-    <constraints reference="//@references.82" constraint="inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size.&lt;=(1)" message="&quot;A DomainObjectInstance cannot have more than one Select or NewInstance wire&quot;"/>
+    <constraints reference="//@references.82/@lines.15" constraint="inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size.&lt;=(1)" message="&quot;A DomainObjectInstance cannot have more than one Select or NewInstance wire&quot;"/>
     <graphicalRepresentations reference="//@references.288"/>
     <attributes name="strQuery" type="EString"/>
     <attributes name="autosave" type="EBoolean" defaultLiteral="true"/>
@@ -228,20 +228,20 @@
   </classes>
   <classes name="DomainAttributeInstance" supertypes="//@classes.14" runtimeClass="//@references.42" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//DomainAttributeInstance"/>
-    <constraints reference="//@references.82" constraint="inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size.&lt;=(1)" message="&quot;A DomainAttributeInstance cannot have more than one Select or NewInstance wire&quot;"/>
+    <constraints reference="//@references.82/@lines.14" constraint="inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size.&lt;=(1)" message="&quot;A DomainAttributeInstance cannot have more than one Select or NewInstance wire&quot;"/>
     <graphicalRepresentations reference="//@references.286"/>
     <attributes name="autosave" type="EBoolean" defaultLiteral="true"/>
   </classes>
   <classes name="QueryParameter" supertypes="//@classes.0 //@classes.3 //@classes.23" runtimeClass="//@references.43" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//QueryParameter"/>
-    <constraints reference="//@references.82" constraint="outEdges.forAll(e|isAccessibleOnPage(containingPage(this.eContainer),e.to))" message="&quot;A QueryParameter cannot be used on a Page outside of its containing page (&quot;.+(containingPage(this.eContainer)).+(&quot;, &quot;).+(containingPage(outEdges.first().to.eContainer)).+(&quot;)&quot;)"/>
+    <constraints reference="//@references.82/@lines.28" constraint="outEdges.forAll(e|isAccessibleOnPage(containingPage(this.eContainer),e.to))" message="&quot;A QueryParameter cannot be used on a Page outside of its containing page (&quot;.+(containingPage(this.eContainer)).+(&quot;, &quot;).+(containingPage(outEdges.first().to.eContainer)).+(&quot;)&quot;)"/>
     <graphicalRepresentations reference="//@references.312"/>
     <attributes name="defaultValue" type="EString"/>
   </classes>
   <classes name="Page" supertypes="//@classes.18 //@classes.38" runtimeClass="//@references.44" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//visual/Page"/>
-    <constraints reference="//@references.82" constraint="name.length.>(0)" message="&quot;Page must have a name&quot;"/>
-    <constraints reference="//@references.82" constraint="children.typeSelect(model::components::LoginHandler).size.==(0)" message="&quot;A Page cannot contain a LoginHandler&quot;"/>
+    <constraints reference="//@references.82/@lines.1" constraint="name.length.>(0)" message="&quot;Page must have a name&quot;"/>
+    <constraints reference="//@references.82/@lines.32" constraint="children.typeSelect(model::components::LoginHandler).size.==(0)" message="&quot;A Page cannot contain a LoginHandler&quot;"/>
     <extensions reference="//@references.83" name="containingPage" value="model::visual::Page containingPage(model::visual::Page element)"/>
     <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::wires::CompositeWire wire)"/>
     <extensions reference="//@references.83" name="isAccessibleOnPage" value="isAccessibleOnPage(model::visual::Page page,model::wires::SingleWire wire)"/>
@@ -283,16 +283,16 @@
   </classes>
   <classes name="SyncWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.51" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/SyncWire"/>
-    <constraints reference="//@references.82" constraint="model::StaticValue.isInstance(from).!()&amp;&amp;model::StaticValue.isInstance(to).!()" message="&quot;You cannot have a SyncWire that connects to a StaticValue&quot;"/>
-    <constraints reference="//@references.82" constraint="model::QueryParameter.isInstance(from).!()&amp;&amp;model::QueryParameter.isInstance(to).!()" message="&quot;You cannot have a SyncWire that connects to a QueryParameter&quot;"/>
-    <constraints reference="//@references.82" constraint="from.!=(to)" message="&quot;A SyncWire cannot connect to itself&quot;"/>
-    <constraints reference="//@references.82" constraint="model::ApplicationElementProperty.isInstance(from)&amp;&amp;model::ApplicationElementProperty.isInstance(to).!()" message="&quot;You cannot have a SyncWire connecting two ApplicationElementProperties&quot;"/>
+    <constraints reference="//@references.82/@lines.7" constraint="model::StaticValue.isInstance(from).!()&amp;&amp;model::StaticValue.isInstance(to).!()" message="&quot;You cannot have a SyncWire that connects to a StaticValue&quot;"/>
+    <constraints reference="//@references.82/@lines.8" constraint="model::QueryParameter.isInstance(from).!()&amp;&amp;model::QueryParameter.isInstance(to).!()" message="&quot;You cannot have a SyncWire that connects to a QueryParameter&quot;"/>
+    <constraints reference="//@references.82/@lines.9" constraint="from.!=(to)" message="&quot;A SyncWire cannot connect to itself&quot;"/>
+    <constraints reference="//@references.82/@lines.10" constraint="model::ApplicationElementProperty.isInstance(from)&amp;&amp;model::ApplicationElementProperty.isInstance(to).!()" message="&quot;You cannot have a SyncWire connecting two ApplicationElementProperties&quot;"/>
     <graphicalRepresentations reference="//@references.323"/>
   </classes>
   <classes name="RunInstanceWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.52" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/RunInstanceWire"/>
-    <constraints reference="//@references.82" constraint="model::Operation.isInstance(to)" message="&quot;A run instance wire can only connect to an operation&quot;"/>
-    <constraints reference="//@references.82" constraint="model::VisibleThing.isInstance(from)&amp;&amp;name.==(&quot;click&quot;)||name.==(&quot;onClick&quot;).!().!()" type="WARNING" message="&quot;This RunInstanceWire will not do anything: consider naming it 'onClick'&quot;"/>
+    <constraints reference="//@references.82/@lines.4" constraint="model::Operation.isInstance(to)" message="&quot;A run instance wire can only connect to an operation&quot;"/>
+    <constraints reference="//@references.82/@lines.26" constraint="model::VisibleThing.isInstance(from)&amp;&amp;name.==(&quot;click&quot;)||name.==(&quot;onClick&quot;).!().!()" type="WARNING" message="&quot;This RunInstanceWire will not do anything: consider naming it 'onClick'&quot;"/>
     <extensions reference="//@references.83" name="isRunInstanceWire" value="isRunInstanceWire(model::wires::RunInstanceWire this)"/>
     <graphicalRepresentations reference="//@references.315"/>
     <attributes name="priority" type="EInt"/>
@@ -320,8 +320,8 @@
   </classes>
   <classes name="SelectWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.58" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/SelectWire"/>
-    <constraints reference="//@references.82" constraint="model::DomainObject.isInstance(from)" message="&quot;A SelectWire must come from a valid DomainObject&quot;"/>
-    <constraints reference="//@references.82" constraint="inEdges.typeSelect(model::wires::ParameterWire).size.==(0)||query.!=(null)&amp;&amp;query.length.>(0)" message="&quot;A SelectWire has incoming Parameters, but does not have a query to use them&quot;"/>
+    <constraints reference="//@references.82/@lines.16" constraint="model::DomainObject.isInstance(from)" message="&quot;A SelectWire must come from a valid DomainObject&quot;"/>
+    <constraints reference="//@references.82/@lines.30" constraint="inEdges.typeSelect(model::wires::ParameterWire).size.==(0)||query.!=(null)&amp;&amp;query.length.>(0)" message="&quot;A SelectWire has incoming Parameters, but does not have a query to use them&quot;"/>
     <graphicalRepresentations reference="//@references.316"/>
     <attributes name="query" type="EString"/>
     <attributes name="limit" type="EInt" defaultLiteral="1"/>
@@ -336,14 +336,14 @@
   </classes>
   <classes name="ExtendsWire" supertypes="//@classes.33 //@classes.49" runtimeClass="//@references.61" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ExtendsWire"/>
-    <constraints reference="//@references.82" constraint="from.!=(to)" message="&quot;A Role cannot extend itself&quot;"/>
-    <constraints reference="//@references.82" constraint="model::DomainObject.isInstance(from)||model::DomainAttribute.isInstance(from)||model::DomainAttributeInstance.isInstance(from)&amp;&amp;model::DomainObject.isInstance(to)||model::DomainAttribute.isInstance(to)||model::DomainAttributeInstance.isInstance(to)" message="&quot;An ExtendsWire can only connect to a DomainObject, DomainAttribute or DomainAttributeInstance&quot;"/>
+    <constraints reference="//@references.82/@lines.19" constraint="from.!=(to)" message="&quot;A Role cannot extend itself&quot;"/>
+    <constraints reference="//@references.82/@lines.20" constraint="model::DomainObject.isInstance(from)||model::DomainAttribute.isInstance(from)||model::DomainAttributeInstance.isInstance(from)&amp;&amp;model::DomainObject.isInstance(to)||model::DomainAttribute.isInstance(to)||model::DomainAttributeInstance.isInstance(to)" message="&quot;An ExtendsWire can only connect to a DomainObject, DomainAttribute or DomainAttributeInstance&quot;"/>
     <graphicalRepresentations reference="//@references.294"/>
   </classes>
   <classes name="RequiresWire" supertypes="//@classes.2 //@classes.3 //@classes.49" runtimeClass="//@references.62" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/RequiresWire"/>
-    <constraints reference="//@references.82" constraint="inEdges.forAll(e|model::wires::ConstraintWire.isInstance(e))" message="&quot;A RequiresWire can only be connected to ConstraintWires&quot;"/>
-    <constraints reference="//@references.82" constraint="model::users::Permission.isInstance(to)||model::users::Role.isInstance(to)" message="&quot;A RequireWire must connect to a Permission or a Role&quot;"/>
+    <constraints reference="//@references.82/@lines.23" constraint="inEdges.forAll(e|model::wires::ConstraintWire.isInstance(e))" message="&quot;A RequiresWire can only be connected to ConstraintWires&quot;"/>
+    <constraints reference="//@references.82/@lines.24" constraint="model::users::Permission.isInstance(to)||model::users::Role.isInstance(to)" message="&quot;A RequireWire must connect to a Permission or a Role&quot;"/>
     <graphicalRepresentations reference="//@references.313"/>
   </classes>
   <classes name="ConstraintWire" supertypes="//@classes.49" runtimeClass="//@references.63" description="TODO Description">
@@ -353,8 +353,8 @@
   </classes>
   <classes name="ProvidesWire" supertypes="//@classes.49" runtimeClass="//@references.64" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/ProvidesWire"/>
-    <constraints reference="//@references.82" constraint="model::users::Role.isInstance(from)" message="&quot;An ProvidesWire can only connect from a Role&quot;"/>
-    <constraints reference="//@references.82" constraint="model::users::Permission.isInstance(to)" message="&quot;An ProvidesWire can only connect to a Permission&quot;"/>
+    <constraints reference="//@references.82/@lines.21" constraint="model::users::Role.isInstance(from)" message="&quot;An ProvidesWire can only connect from a Role&quot;"/>
+    <constraints reference="//@references.82/@lines.22" constraint="model::users::Permission.isInstance(to)" message="&quot;An ProvidesWire can only connect to a Permission&quot;"/>
     <graphicalRepresentations reference="//@references.311"/>
   </classes>
   <classes name="StartNode" supertypes="//@classes.8 //@classes.27" runtimeClass="//@references.65" description="TODO Description">
@@ -376,8 +376,8 @@
   </classes>
   <classes name="DecisionOperation" supertypes="//@classes.11 //@classes.22" runtimeClass="//@references.69" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/DecisionOperation"/>
-    <constraints reference="//@references.82" constraint="name.==(&quot;equal?&quot;)&amp;&amp;inFlows.size.>=(2)||name.!=(&quot;equal?&quot;)" message="&quot;A compare decision operation must have at least two data flows in to compare&quot;"/>
-    <constraints reference="//@references.82" constraint="outExecutions.size.&lt;=(2)" message="&quot;A DecisionOperation can only have at most two out execution edges&quot;"/>
+    <constraints reference="//@references.82/@lines.5" constraint="name.==(&quot;equal?&quot;)&amp;&amp;inFlows.size.>=(2)||name.!=(&quot;equal?&quot;)" message="&quot;A compare decision operation must have at least two data flows in to compare&quot;"/>
+    <constraints reference="//@references.82/@lines.6" constraint="outExecutions.size.&lt;=(2)" message="&quot;A DecisionOperation can only have at most two out execution edges&quot;"/>
     <graphicalRepresentations reference="//@references.283"/>
   </classes>
   <classes name="DecisionCondition" supertypes="//@classes.22 //@classes.26 //@classes.27 //@classes.39" runtimeClass="//@references.70" description="TODO Description">
@@ -394,14 +394,14 @@
   </classes>
   <classes name="OperationCallNode" supertypes="//@classes.0 //@classes.3 //@classes.8 //@classes.22 //@classes.23 //@classes.26 //@classes.27" runtimeClass="//@references.73" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//operations/OperationCallNode"/>
-    <constraints reference="//@references.82" constraint="outEdges.size.==(1)&amp;&amp;model::wires::RunInstanceWire.isInstance(outEdges.first())&amp;&amp;model::Operation.isInstance(outEdges.first().to)" message="&quot;An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation&quot;"/>
+    <constraints reference="//@references.82/@lines.25" constraint="outEdges.size.==(1)&amp;&amp;model::wires::RunInstanceWire.isInstance(outEdges.first())&amp;&amp;model::Operation.isInstance(outEdges.first().to)" message="&quot;An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation&quot;"/>
     <graphicalRepresentations reference="//@references.304"/>
   </classes>
   <classes name="Session" supertypes="//@classes.0 //@classes.2 //@classes.3 //@classes.5 //@classes.13 //@classes.30 //@classes.38 //@classes.41" runtimeClass="//@references.74" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//scopes/Session"/>
-    <constraints reference="//@references.82" constraint="children.exists(e|model::visual::InputTextField.isInstance(e)).!()" message="&quot;Sessions cannot directly contain InputTextFields&quot;"/>
-    <constraints reference="//@references.82" constraint="children.exists(e|model::visual::InputForm.isInstance(e)).!()" message="&quot;Sessions cannot directly contain InputForms&quot;"/>
-    <constraints reference="//@references.82" constraint="children.typeSelect(model::components::LoginHandler).size.&lt;=(1)" message="&quot;A Session can only contain one LoginHandler&quot;"/>
+    <constraints reference="//@references.82/@lines.11" constraint="children.exists(e|model::visual::InputTextField.isInstance(e)).!()" message="&quot;Sessions cannot directly contain InputTextFields&quot;"/>
+    <constraints reference="//@references.82/@lines.12" constraint="children.exists(e|model::visual::InputForm.isInstance(e)).!()" message="&quot;Sessions cannot directly contain InputForms&quot;"/>
+    <constraints reference="//@references.82/@lines.31" constraint="children.typeSelect(model::components::LoginHandler).size.&lt;=(1)" message="&quot;A Session can only contain one LoginHandler&quot;"/>
     <graphicalRepresentations reference="//@references.317"/>
     <references name="agents" upperBound="-1" containment="true" type="//@classes.37"/>
     <references name="children" upperBound="-1" containment="true" type="//@classes.14"/>
@@ -410,8 +410,8 @@
   </classes>
   <classes name="LoginHandler" supertypes="//@classes.15 //@classes.33" runtimeClass="//@references.75" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//components/LoginHandler"/>
-    <constraints reference="//@references.82" constraint="inEdges.exists(e|model::wires::ParameterWire.isInstance(e))" message="&quot;A login handler must have an incoming parameter to check against&quot;"/>
-    <constraints reference="//@references.82" constraint="type.!=(model::components::LoginHandlerTypes::USER)||inEdges.typeSelect(model::wires::ParameterWire).size.&lt;=(1)" message="&quot;A LoginHandler[user] can not have more than one incoming ParameterWire&quot;"/>
+    <constraints reference="//@references.82/@lines.3" constraint="inEdges.exists(e|model::wires::ParameterWire.isInstance(e))" message="&quot;A login handler must have an incoming parameter to check against&quot;"/>
+    <constraints reference="//@references.82/@lines.29" constraint="type.!=(model::components::LoginHandlerTypes::USER)||inEdges.typeSelect(model::wires::ParameterWire).size.&lt;=(1)" message="&quot;A LoginHandler[user] can not have more than one incoming ParameterWire&quot;"/>
     <graphicalRepresentations reference="//@references.301"/>
     <attributes name="type" lowerBound="1" type="LoginHandlerTypes"/>
   </classes>
@@ -522,7 +522,7 @@
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.users" name="Role"/>
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.users" name="Permission"/>
   <references xsi:type="md:JavaClass" plugin="org.openiaml.model" package="org.openiaml.model.model.users" name="UserInstance"/>
-  <references xsi:type="md:FileReference" package="src.metamodel" name="Checks.chk">
+  <references xsi:type="md:FileReference" plugin="org.openiaml.model.codegen.oaw" package="src.metamodel" name="Checks.chk">
     <lines line="9"/>
     <lines line="13"/>
     <lines line="16"/>

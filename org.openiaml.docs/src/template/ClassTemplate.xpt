@@ -273,7 +273,11 @@
 
 «DEFINE javadocElement FOR modeldoc::JavadocTagElement»
 	<span class="javadocTag">
-		«IF name == "@model"»
+		«IF name == "@semantics"»
+			«REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
+			«EXPAND javadocSemanticsElement FOR fragments.first()»
+			«EXPAND javadocElement FOREACH fragments.withoutFirst()» 
+		«ELSEIF name == "@model"»
 			«EXPAND javadocModelElement FOREACH fragments»
 		«ELSE»
 			«EXPAND javadocElement FOREACH fragments»
@@ -286,7 +290,21 @@
 «ENDDEFINE»
 
 «DEFINE javadocModelElement FOR modeldoc::JavadocTextElement»
-	<a href="«value».html">«value»</a>
+	«IF value.trim().contains(" ")»
+		«LET value.trim().split(" ") AS bits»
+			<a href="«bits.first()».html">«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>
+		«ENDLET»
+	«ELSE»
+		<a href="«value».html">«value»</a>
+	«ENDIF»
+«ENDDEFINE»
+
+«REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
+«DEFINE javadocSemanticsElement FOR modeldoc::JavadocTextElement»
+	«FOREACH value.trim().split(" ").withoutFirst() AS s»«s» «ENDFOREACH»
+«ENDDEFINE»
+«DEFINE javadocSemanticsElement FOR modeldoc::JavadocFragment»
+	<span class="error">(unknown semantic starting tag '«this»')</span>
 «ENDDEFINE»
 
 /* no special meaning; just render it like normal */

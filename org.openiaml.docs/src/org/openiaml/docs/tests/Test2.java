@@ -295,7 +295,7 @@ public class Test2 extends TestCase {
 	 * @param file
 	 * @throws IOException 
 	 */
-	private void loadInferenceSemantics(ModeldocFactory factory,
+	private void loadInferenceSemantics(final ModeldocFactory factory,
 			ModelDocumentation root, String plugin, String pkg,
 			String name, File file) throws IOException {
 		
@@ -325,8 +325,27 @@ public class Test2 extends TestCase {
 					e.setJavaParent(rule);
 					e.setName("@semantics");
 					
-					// and then parse the line
+					// parse the line into javadoc elements
+					// (the line needs to be parsed into fragments before we can find semantic references)
 					parseSemanticLine(line, factory, root, e, rule);
+					
+					// and then add a reference link back
+					findSemanticReferences(root, e, rule, new HandleSemantics() {
+
+						public void handleSemanticLink(JavadocTagElement description,
+								EMFClass target, Reference reference) {
+							
+							// make an inference semantics link
+							InferenceSemantic semantic = factory.createInferenceSemantic();
+							semantic.setDescription(description);
+							semantic.setReference(reference);
+							
+							// add it to the EMFclass
+							target.getInferenceSemantics().add(semantic);
+							
+						}
+						
+					});
 				}
 			}
 		}
@@ -447,6 +466,7 @@ public class Test2 extends TestCase {
 			fragment.getFragments().add(text2);
 			
 			// what kind of tag is it?
+			/*
 			if (tag.equals("@model")) {
 				
 				// find the class it refers to
@@ -462,6 +482,7 @@ public class Test2 extends TestCase {
 				}
 				
 			}
+			*/
 			
 			tagElement.getFragments().add(fragment);
 
@@ -577,7 +598,7 @@ public class Test2 extends TestCase {
 		}
 
 		private List<JavadocFragment> handleTagFragment(
-				List<?> fragments, JavadocTagElement parent,
+				List<?> fragments, 
 				JavaElement javaReference) {
 			List<JavadocFragment> result = new ArrayList<JavadocFragment>();
 			for (Object o : fragments) {
@@ -587,10 +608,10 @@ public class Test2 extends TestCase {
 					e.setName(tag.getTagName());
 					
 					// recurse to create parents						
-					e.getFragments().addAll(handleTagFragment(tag.fragments(), e, javaReference));
+					e.getFragments().addAll(handleTagFragment(tag.fragments(), javaReference));
 					
 					// link up any references to model elements
-					handleModelReferences(e, parent, javaReference);
+					handleModelReferences(e, javaReference);
 					
 					result.add(e);
 				} else if (o instanceof TextElement) {
@@ -629,38 +650,25 @@ public class Test2 extends TestCase {
 				}
 			}
 			return result;
-		}
+		}	
 
-		/**
-		 * With the given JavaDoc element, should there be any links 
-		 * created?
-		 * 
-		 * @param e
-		 */
-		private void handleModelReferences(JavadocTagElement e, JavadocTagElement parent, Reference javaReference) {
-			if ("@model".equals(e.getName())) {
-				// cycle through all model elements
-				JavadocTextElement refName = null;
-				for (JavadocFragment f : e.getFragments()) {
-					// select the first TextElement; this is the target class
-					if (f instanceof JavadocTextElement) {
-						refName = (JavadocTextElement) f;
-					}						
+		private void handleModelReferences(JavadocTagElement e, Reference javaReference) {
+			findSemanticReferences(root, e, javaReference, new HandleSemantics() {
+
+				public void handleSemanticLink(JavadocTagElement description,
+						EMFClass target, Reference reference) {
+					
+					// create an operational semantic
+					OperationalSemantic op = factory.createOperationalSemantic();
+					op.setDescription(description);
+					op.setReference(reference);
+					
+					// add a reference
+					target.getOperationalSemantics().add(op);
+					
 				}
-				if (refName != null) {
-					for (EMFClass emf : root.getClasses()) {
-						if (emf.getTargetClass().getName().equals(refName.getValue().trim())) {
-							// create an operational semantic
-							OperationalSemantic op = factory.createOperationalSemantic();
-							op.setDescription(parent);
-							op.setReference(javaReference);
-							
-							// add a reference
-							emf.getOperationalSemantics().add(op);
-						}
-					}
-				}
-			}
+				
+			});
 		}
 
 		/**
@@ -717,8 +725,11 @@ public class Test2 extends TestCase {
 				TagElement fragment, JavaElement javaReference) {
 			List<Object> input = new ArrayList<Object>();
 			input.add(fragment);
-			List<JavadocFragment> result = handleTagFragment(input, null, javaReference);
-			return (JavadocTagElement) result.get(0);
+			List<JavadocFragment> result = handleTagFragment(input, javaReference);
+
+			JavadocTagElement je = (JavadocTagElement) result.get(0);
+			
+			return je; 
 		}
 
 		@Override
@@ -748,15 +759,7 @@ public class Test2 extends TestCase {
 				}
 				
 			}
-			
-			
-			/*
-			System.out.println(node);
-			for (Object o : node.tags()) {
-				TagElement tag = (TagElement) o;
-				System.out.println(tag.getTagName() + " = " + tag.fragments());
-			}
-			*/
+
 			return super.visit(node);
 		}
 
@@ -862,6 +865,69 @@ public class Test2 extends TestCase {
 		}
 		
 	}
+	
+	/**
+	 * A generic interface to handle semantics.
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	public interface HandleSemantics {
+		
+		/**
+		 * 
+		 * 
+		 * @param description the source @semantics tag for description purposes   
+		 * @param target the target EMFclass to add the semantic type to
+		 * @param reference a reference to the source of the initial @semantics tag
+		 */
+		public void handleSemanticLink(JavadocTagElement description, EMFClass target, Reference reference); 
+		
+	}
+	
+	/**
+	 * <p>With the given JavaDoc element, should there be any links 
+	 * created?</p>
+	 * 
+	 * <p>Expected: <code>@semantics Model1,Model2 text to describe in semantics</code></p>
+	 * 
+	 * @param description the source element
+	 * @param reference a reference to provide later
+	 * @param handler the handler to call with matching references
+	 */
+	public void findSemanticReferences(ModelDocumentation root, JavadocTagElement description, Reference reference, HandleSemantics handler) {
+		if ("@semantics".equals(description.getName())) {
+			// cycle through all model elements
+			JavadocTextElement refName = null;
+			for (JavadocFragment f : description.getFragments()) {
+				// select the first TextElement; this is the target class
+				if (f instanceof JavadocTextElement) {
+					refName = (JavadocTextElement) f;
+					break;
+				}						
+			}
+			if (refName != null) {
+				// select the first word as the model element name
+				String className = refName.getValue().trim();
+				if (className.contains(" ")) {
+					className = className.substring(0, className.indexOf(" "));
+				}
+				// are there multiple elements selected with ','s?
+				String[] classNames = className.split(",");
+				for (String classNameTarget : classNames) {
+					
+					EMFClass target = getEMFClassFor(root, classNameTarget);
+					if (target != null) {
+						
+						// get the handler to deal with it
+						handler.handleSemanticLink(description, target, reference);
+
+					}
+				}
+			}
+		}
+	}
+	
 	
 	/**
 	 * Load test case semantics.
@@ -1200,7 +1266,7 @@ public class Test2 extends TestCase {
       
 		// generate code
 		OawCodeGenerator codegen = new OawCodeGenerator();
-		codegen.generateCode(modelFile);		
+		codegen.generateCode(modelFile);
         
 	}
 	

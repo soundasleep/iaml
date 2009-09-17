@@ -20,10 +20,9 @@ public class ButtonNavigate extends CodegenTestCase {
 	}
 	
 	/**
-	 * @semantics A {@model Button} renders on a page as a button. 
-	 * @semantics test {@link #setUp()}, foo.
-	 * @semantics test {@link ButtonNavigate#setUp()}
-	 * @semantics test {@link InvalidClass#setUp()}
+	 * @semantics Button A {@model Button} renders on a page as a button. 
+	 * @semantics EventTrigger A {@model Button} renders on {@model Page a page} as a button. 
+	 * @semantics Page,InputTextField A multiple semantics link. 
 	 * @another Also see {@link DijkstraAlgorithm}.
 	 * @throws Exception
 	 */

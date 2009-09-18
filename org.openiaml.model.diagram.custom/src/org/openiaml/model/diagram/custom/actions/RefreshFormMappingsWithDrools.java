@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.openiaml.model.diagram.visual.edit.parts.InputFormEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.ICreateElements;
-import org.openiaml.model.diagram.visual.edit.parts.InputFormEditPart;
 import org.openiaml.model.model.visual.InputForm;
 
 /**

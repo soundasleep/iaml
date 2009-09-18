@@ -3,7 +3,9 @@ package org.openiaml.model.diagram.custom.actions;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -52,6 +54,37 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	private Map<DiagramEditPart,IPath> partDestinationMap = new
 		HashMap<DiagramEditPart,IPath>();
 	
+	private Map<DiagramEditPart,Rectangle> partRectangleMap = new
+		HashMap<DiagramEditPart,Rectangle>();
+	
+	private Map<DiagramEditPart,EObject> partEObjectMap = new
+		HashMap<DiagramEditPart,EObject>();
+	
+	/**
+	 * Stores a list of all the resolved EObjects of children
+	 */
+	private Map<DiagramEditPart,List<RenderedChildInformation>> partChildrenListMap = 
+		new HashMap<DiagramEditPart,List<RenderedChildInformation>>();
+	
+	public class RenderedChildInformation {
+		private EObject resolvedObject;
+		private Rectangle bounds;
+		
+		public RenderedChildInformation(EObject resolvedObject, Rectangle bounds) {
+			super();
+			this.resolvedObject = resolvedObject;
+			this.bounds = bounds;
+		}
+		
+		public EObject getResolvedObject() {
+			return resolvedObject;
+		}
+		public Rectangle getBounds() {
+			return bounds;
+		}
+		
+	}
+	
 	public class MyCopyToImageUtil extends CopyToImageUtil {
 
 		@Override
@@ -62,6 +95,27 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 			
 			// keep track of the part -> destination
 			partDestinationMap.put(part, destination);
+			partEObjectMap.put(part, part.resolveSemanticElement());
+			
+			// make a copy of the image rectangle used
+			// we do this before we close the editor, so that we don't lose the editor instance/children
+			Rectangle rect = DiagramImageUtils.calculateImageRectangle(
+					part.getPrimaryEditParts(),
+					getImageMargin(part), 
+					getEmptyImageSize(part));
+			partRectangleMap.put(part, rect);
+			
+			// save all the children now
+			List<RenderedChildInformation> children = new ArrayList<RenderedChildInformation>();
+			for (Object o : part.getChildren()) {
+				if (o instanceof GraphicalEditPart) {
+					GraphicalEditPart gep = (GraphicalEditPart) o;
+					
+					RenderedChildInformation info = new RenderedChildInformation(gep.resolveSemanticElement(), gep.getContentPane().getBounds());
+					children.add(info);
+				}
+			}
+			partChildrenListMap.put(part, children);
 			
 			return result;
 		}
@@ -77,6 +131,8 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		return new MyCopyToImageUtil();
 	}
 
+	private IFile targetDiagram;
+	
 	/**
 	 * Once we have finished exporting all of the images, we go through
 	 * every saved node:
@@ -93,6 +149,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 			throws ExportImageException {
 		
 		monitor.beginTask("Exporting to HTML", 105);
+		this.targetDiagram = targetDiagram;
 		
 		// do parent
 		super.doExport(targetDiagram, new SubProgressMonitor(monitor, 70));
@@ -104,12 +161,13 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		for (DiagramEditPart root : partDestinationMap.keySet()) {
 			IPath destination = partDestinationMap.get(root);
 			IPath htmlDestination = getHTMLDestinationFor(destination);
+			EObject resolved = partEObjectMap.get(root);
 			finalMonitor.subTask("Writing " + htmlDestination.lastSegment());
 			
 			// construct the HTML
 			StringBuffer html = new StringBuffer();
-			html.append(getHTMLHeader(targetDiagram, root))
-				.append(getBreadcrumb(root))
+			html.append(getHTMLHeader(targetDiagram, resolved))
+				.append(getBreadcrumb(resolved))
 				.append(getImageTag(destination))
 				.append(getClickableMap(root))
 				.append(getHTMLFooter());
@@ -131,7 +189,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		
 		// once finished, refresh parent (folder, project)
 		try {
-			targetDiagram.getParent().refreshLocal(IResource.DEPTH_ONE, new SubProgressMonitor(monitor, 5));
+			targetDiagram.getParent().refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, 5));
 		} catch (CoreException e) {
 			throw new ExportImageException(e);
 		}
@@ -140,6 +198,33 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		monitor.done();
 	}
 	
+	/**
+	 * We want to place all generated files into a new folder.
+	 * @throws ExportImageException 
+	 */
+	@Override
+	protected IPath generateImageDestination() throws ExportImageException {
+
+		// get default
+		IPath source = super.generateImageDestination();
+		
+		// does the folder exist?
+		String newFolderName = targetDiagram.getFullPath().removeFileExtension().lastSegment();
+		
+		IPath targetFolder = source.removeLastSegments(1).append(newFolderName).addTrailingSeparator();
+		File f = new File(targetFolder.toOSString());
+		if (!f.exists()) {
+			if (!f.mkdir()) {
+				// could not create directory
+				throw new ExportImageException("Could not mkdir: '" + f + "'");
+			}
+		}
+		
+		// create the new path
+		return targetFolder.append(source.lastSegment());
+
+	}
+
 	/**
 	 * Allows linking of breadcrumb elements to target pages, if they
 	 * have been rendered.
@@ -185,10 +270,10 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	 * @param destination
 	 * @return
 	 */
-	private String getBreadcrumb(DiagramEditPart root) {
+	private String getBreadcrumb(EObject resolved) {
 		return new StringBuffer()
 		.append("<h2>")
-		.append(IamlBreadcrumb.breadcrumb(root.resolveSemanticElement(), 4, new HtmlBreadcrumbLinker(partDestinationMap)))
+		.append(IamlBreadcrumb.breadcrumb(resolved, 4, new HtmlBreadcrumbLinker(partDestinationMap)))
 		.append("</h2>\n")
 		.toString();
 	}
@@ -216,40 +301,37 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		// we need to find out the source rect that was taken
 		// to construct the image, so we can base the bounds
 		// on this minimal bound
-		Rectangle rect = DiagramImageUtils.calculateImageRectangle(
-				root.getPrimaryEditParts(),
-				getImageMargin(root), 
-				getEmptyImageSize(root));
+		Rectangle rect = partRectangleMap.get(root);
 		
-		for (Object o : root.getChildren()) {
-			if (o instanceof GraphicalEditPart) {
-				GraphicalEditPart part = (GraphicalEditPart) o;
-				
-				// do any edit parts link up to this one?
-				for (DiagramEditPart target : partDestinationMap.keySet()) {
-					EObject partObj = part.resolveSemanticElement();
-					EObject targetObj = target.resolveSemanticElement();
-					if (EcoreUtil.equals(partObj, targetObj)) {
-						
-						// found a link
-						// assume the link is square
-						
-						Rectangle bounds = part.getContentPane().getBounds();
-						IPath dest = partDestinationMap.get(target);
-						
-						buf.append("<area shape=\"rect\" coords=\"")
-							.append(bounds.x-rect.x).append(",")
-							.append(bounds.y-rect.y).append(",")
-							.append(bounds.width+bounds.x-rect.x).append(",")
-							.append(bounds.height+bounds.y-rect.y)
-							.append("\" href=\"")
-							.append(getHTMLDestinationFor(dest).lastSegment())
-							.append("\" />\n");
-						
-						break; 	// stop searching
-					}
+		// for all the saved children
+		for (RenderedChildInformation child : partChildrenListMap.get(root)) {
+			
+			// do any edit parts link up to this one?
+			DiagramEditPart found = null;
+			for (DiagramEditPart target : partEObjectMap.keySet()) {
+				if (EcoreUtil.equals(partEObjectMap.get(target), child.getResolvedObject())) {
+					found = target;
+					break;
 				}
 			}
+			
+			if (found != null) {
+				// found a link
+				// assume the link is square
+				
+				Rectangle bounds = child.getBounds();
+				IPath dest = partDestinationMap.get(found);
+				
+				buf.append("<area shape=\"rect\" coords=\"")
+					.append(bounds.x-rect.x).append(",")
+					.append(bounds.y-rect.y).append(",")
+					.append(bounds.width+bounds.x-rect.x).append(",")
+					.append(bounds.height+bounds.y-rect.y)
+					.append("\" href=\"")
+					.append(getHTMLDestinationFor(dest).lastSegment())
+					.append("\" />\n");
+			}
+			
 		}
 		
 		buf.append("</map>");
@@ -267,15 +349,15 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	 * Get the HTML title for the given object.
 	 * 
 	 * @param targetDiagram the source (root) diagram
-	 * @param part the current part to render a title for
+	 * @param part the current EObject to render a title for
 	 * @return
 	 */
-	protected String getHTMLTitle(IFile targetDiagram, DiagramEditPart part) {
+	protected String getHTMLTitle(IFile targetDiagram, EObject part) {
 		String filename = targetDiagram.getProjectRelativePath().lastSegment();
 		return new StringBuffer()
 			.append(escapeHTML(filename))
 			.append(" : ")
-			.append(escapeHTML(IamlBreadcrumb.getEObjectBreadcrumbString(part.resolveSemanticElement())))
+			.append(escapeHTML(IamlBreadcrumb.getEObjectBreadcrumbString(part)))
 			.toString();
 	}
 	
@@ -286,7 +368,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	 * @param part the current part to render a title for
 	 * @return
 	 */
-	protected String getHTMLHeader(IFile targetDiagram, DiagramEditPart part) {
+	protected String getHTMLHeader(IFile targetDiagram, EObject part) {
 		return new StringBuffer()
 			.append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n")
 			.append("\"http://www.w3.org/TR/html4/loose.dtd\">\n")

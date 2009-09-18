@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.openiaml.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
 
 /**
  * Refresh {@link DomainObjectInstance} mappings with Drools.

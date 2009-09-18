@@ -69,11 +69,13 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	public class RenderedChildInformation {
 		private EObject resolvedObject;
 		private Rectangle bounds;
+		private String tooltip;
 		
-		public RenderedChildInformation(EObject resolvedObject, Rectangle bounds) {
+		public RenderedChildInformation(EObject resolvedObject, Rectangle bounds, String tooltip) {
 			super();
 			this.resolvedObject = resolvedObject;
 			this.bounds = bounds;
+			this.tooltip = tooltip;
 		}
 		
 		public EObject getResolvedObject() {
@@ -81,6 +83,9 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		}
 		public Rectangle getBounds() {
 			return bounds;
+		}
+		public String getTooltip() {
+			return tooltip;
 		}
 		
 	}
@@ -111,7 +116,10 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 				if (o instanceof GraphicalEditPart) {
 					GraphicalEditPart gep = (GraphicalEditPart) o;
 					
-					RenderedChildInformation info = new RenderedChildInformation(gep.resolveSemanticElement(), gep.getContentPane().getBounds());
+					RenderedChildInformation info = new RenderedChildInformation(
+							gep.resolveSemanticElement(), 
+							gep.getContentPane().getBounds(),
+							IamlBreadcrumb.getEObjectBreadcrumbString(gep.resolveSemanticElement()) );
 					children.add(info);
 				}
 			}
@@ -328,8 +336,28 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 					.append(bounds.width+bounds.x-rect.x).append(",")
 					.append(bounds.height+bounds.y-rect.y)
 					.append("\" href=\"")
-					.append(getHTMLDestinationFor(dest).lastSegment())
+					.append(escapeHTML(getHTMLDestinationFor(dest).lastSegment()))
+					.append("\" alt=\"")
+					.append(escapeHTML(child.getTooltip()))
+					.append("\" title=\"")
+					.append(escapeHTML(child.getTooltip()))
 					.append("\" />\n");
+			} else {
+				// we can still add tooltip information anyway
+
+				Rectangle bounds = child.getBounds();
+				
+				buf.append("<area shape=\"rect\" coords=\"")
+					.append(bounds.x-rect.x).append(",")
+					.append(bounds.y-rect.y).append(",")
+					.append(bounds.width+bounds.x-rect.x).append(",")
+					.append(bounds.height+bounds.y-rect.y)
+					.append("\" alt=\"")
+					.append(escapeHTML(child.getTooltip()))
+					.append("\" title=\"")
+					.append(escapeHTML(child.getTooltip()))
+					.append("\" />\n");
+			
 			}
 			
 		}
@@ -342,7 +370,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	 * Escape the given HTML.
 	 */
 	protected String escapeHTML(String s) {
-		return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+		return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
 	}
 	
 	/**

@@ -16,10 +16,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
@@ -81,7 +82,10 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 			return Status.OK_STATUS;
 		} catch (ExportImageException e) {
 			return errorStatus("Export image exception: " + e.getMessage(), e);
+		} catch (RuntimeException e) {
+			return errorStatus("Runtime exception: " + e.getMessage(), e);
 		}
+
 	}
 
 	/**
@@ -163,8 +167,9 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	 * 
 	 * @param part
 	 * @throws CoreException 
+	 * @throws ExportImageException 
 	 */
-	protected void recurseExportDiagram(DiagramDocumentEditor editor, IProgressMonitor monitor) throws CoreException {
+	protected void recurseExportDiagram(DiagramDocumentEditor editor, IProgressMonitor monitor) throws CoreException, ExportImageException {
 		DiagramEditPart part = editor.getDiagramEditPart();
 		IPath destination = generateImageDestination();
 		
@@ -185,17 +190,22 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 				break;		// halt
 			}			
 
-			if (obj instanceof EditPart) {
-				EditPart child = (EditPart) obj;
+			if (obj instanceof GraphicalEditPart) {
+				GraphicalEditPart child = (GraphicalEditPart) obj;
 				
-				DiagramDocumentEditor newEd = openSubDiagram(child);
-				if (newEd == null || newEd == editor) {
-					// didn't do anything: continue
-					continue;
+				// only select children with open policies
+				if (child.getEditPolicy(EditPolicyRoles.OPEN_ROLE) != null) {
+					
+					DiagramDocumentEditor newEd = openSubDiagram(child);
+					if (newEd == null || newEd == editor) {
+						// didn't do anything: continue
+						continue;
+					}
+					
+					// export this diagram editor
+					recurseExportDiagram(newEd, monitor);
+
 				}
-				
-				// export this diagram editor
-				recurseExportDiagram(newEd, monitor);
 			}
 		}
 		
@@ -240,8 +250,9 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	 * Generate an image destination that shouldn't exist.
 	 * 
 	 * @return
+	 * @throws ExportImageException 
 	 */
-	protected IPath generateImageDestination() {
+	protected IPath generateImageDestination() throws ExportImageException {
 		IPath container = diagramFile.getLocation().removeLastSegments(1);
 		String extension = diagramFile.getFileExtension();
 		String fileName = diagramFile.getName();
@@ -262,7 +273,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	 *   it may return the same DiagramDocumentEditor if the load failed.
 	 *   it is up to the client to close this new editor.
 	 */
-	protected DiagramDocumentEditor openSubDiagram(EditPart sourcePart) {
+	protected DiagramDocumentEditor openSubDiagram(GraphicalEditPart sourcePart) {
 		
 		// based on org.eclipse.gef.tools.SelectEditPartTracker#performOpen()
 		SelectionRequest request = new SelectionRequest();
@@ -270,6 +281,9 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 		request.setModifiers(0 /*getCurrentInput().getModifiers()*/);
 		request.setType(RequestConstants.REQ_OPEN);
 		if (!sourcePart.understandsRequest(request)) {
+			return null;
+		}
+		if (sourcePart.getDiagramEditDomain() == null) {
 			return null;
 		}
 		
@@ -290,6 +304,10 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 
 		public ExportImageException(Exception e) {
 			super(e.getMessage(), e);
+		}
+
+		public ExportImageException(String message) {
+			super(message);
 		}
 		
 	}

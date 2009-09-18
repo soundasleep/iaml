@@ -198,7 +198,13 @@
 «DEFINE supertypes FOR modeldoc::EMFClass-»<span class="class_link"><a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«EXPAND Template::getIcon»</a> <a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a></span>«ENDDEFINE»
 
 «DEFINE example FOR modeldoc::Example»
-	<li>«this»</li>
+	<li>
+		«EXPAND linkReference FOR exampleModel»
+		:
+		«EXPAND javadocElement FOR description»
+
+		«EXPAND linkReference FOR reference»
+	</li>
 «ENDDEFINE»
 
 «DEFINE operationalSemantics(Boolean local) FOR modeldoc::OperationalSemantic»
@@ -289,7 +295,7 @@
 
 «DEFINE javadocElement FOR modeldoc::JavadocTagElement»
 	<span class="javadocTag">
-		«IF name == "@semantics"»
+		«IF name == "@semantics" || name == "@example"»
 			«REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 			«EXPAND javadocSemanticsElement FOR fragments.first()»
 			«EXPAND javadocElement FOREACH fragments.withoutFirst()» 
@@ -346,6 +352,11 @@
 
 «DEFINE linkReference FOR modeldoc::FileLineReference»
 	[<a href="«EXPAND browseSource»«file.plugin»/«getPackage(file.package)»/«file.name»#«line»">«file.name»</a>]
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::ModelReference»
+	[<a href="«EXPAND browseSource»«plugin»/«getPackage(package)»/«name»/«name».html">«name».iaml</a>
+	(<a href="«EXPAND browseSource»«plugin»/«getPackage(package)»/«name».iaml">source</a>)]
 «ENDDEFINE»
 
 «DEFINE browseSource FOR emf::EObject-»http://code.google.com/p/iaml/source/browse/trunk/«ENDDEFINE»

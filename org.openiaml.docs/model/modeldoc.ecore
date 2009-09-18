@@ -45,11 +45,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Semantic" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Reference"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Example">
+  <eClassifiers xsi:type="ecore:EClass" name="Example" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EReference" name="exampleModel" eType="#//ModelReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exampleTest" eType="#//JavaClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
         eOpposite="#//EMFClass/examples"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationalSemantic" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

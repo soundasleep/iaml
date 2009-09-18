@@ -54,6 +54,7 @@ import org.openiaml.docs.modeldoc.DroolsRule;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.EMFReference;
+import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
@@ -68,8 +69,8 @@ import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
+import org.openiaml.docs.modeldoc.ModelReference;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
-import org.openiaml.docs.modeldoc.OperationalSemantic;
 import org.openiaml.docs.modeldoc.Reference;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
@@ -330,26 +331,73 @@ public class Test2 extends TestCase {
 					parseSemanticLineIntoFragments(line, factory, e);
 					
 					// and then add a reference link back
-					findSemanticReferences(root, e, rule, new HandleSemantics() {
-
-						public void handleSemanticLink(JavadocTagElement description,
-								EMFClass target, Reference reference) {
-							
-							// make an inference semantics link
-							InferenceSemantic semantic = factory.createInferenceSemantic();
-							semantic.setDescription(description);
-							semantic.setReference(reference);
-							
-							// add it to the EMFclass
-							target.getInferenceSemantics().add(semantic);
-							
-						}
-						
-					});
+					findSemanticReferences(root, e, rule, new DefaultHandleSemantics(root, factory));
 				}
 			}
 		}
 		
+	}
+	
+	/**
+	 * Default implementation of HandleSemantics. 
+	 * Can deal with @semantic and @example.
+	 * 
+	 * @author jmwright
+	 */
+	public class DefaultHandleSemantics implements HandleSemantics {
+		
+		private ModeldocFactory factory;
+		private ModelDocumentation root;
+		
+		public DefaultHandleSemantics(ModelDocumentation root, ModeldocFactory factory) {
+			this.root = root;
+			this.factory = factory;
+		}
+		
+		public void handleSemanticLink(String name,
+				JavadocTagElement description,
+				EMFClass target, Reference reference) {
+			
+			if (name.equals("@semantics")) {
+				
+				// make an inference semantics link
+				InferenceSemantic semantic = factory.createInferenceSemantic();
+				semantic.setDescription(description);
+				semantic.setReference(reference);
+				
+				// add it to the EMFclass
+				target.getInferenceSemantics().add(semantic);
+				
+			} else if (name.equals("@example")) {
+				
+				if (reference instanceof JavaClass) {
+					JavaClass jc = (JavaClass) reference;
+
+					// make an inference semantics link
+					Example example = factory.createExample();
+					example.setDescription(description);
+					example.setReference(reference);
+					
+					// make a new ModelReference
+					ModelReference ref = factory.createModelReference();
+					ref.setPlugin(jc.getPlugin());
+					ref.setPackage(jc.getPackage());
+					ref.setName(jc.getName());
+					root.getReferences().add(ref);
+					
+					example.setExampleModel(ref);
+					
+					target.getExamples().add(example);
+
+				} else {
+					throw new IllegalArgumentException("Unknown example reference: " + reference + ", class: " + reference.getClass());
+				}
+
+			} else {
+				throw new IllegalArgumentException("Did not understand tag: " + name);
+			}
+			
+		}
 	}
 
 	/**
@@ -634,22 +682,7 @@ public class Test2 extends TestCase {
 		}	
 
 		private void handleModelReferences(JavadocTagElement e, Reference javaReference) {
-			findSemanticReferences(root, e, javaReference, new HandleSemantics() {
-
-				public void handleSemanticLink(JavadocTagElement description,
-						EMFClass target, Reference reference) {
-					
-					// create an operational semantic
-					OperationalSemantic op = factory.createOperationalSemantic();
-					op.setDescription(description);
-					op.setReference(reference);
-					
-					// add a reference
-					target.getOperationalSemantics().add(op);
-					
-				}
-				
-			});
+			findSemanticReferences(root, e, javaReference, new DefaultHandleSemantics(root, factory));
 		}
 
 		/**
@@ -857,12 +890,12 @@ public class Test2 extends TestCase {
 		
 		/**
 		 * 
-		 * 
+		 * @param tag the javadoc tag, e.g. '@example' or '@semantics'
 		 * @param description the source @semantics tag for description purposes   
 		 * @param target the target EMFclass to add the semantic type to
 		 * @param reference a reference to the source of the initial @semantics tag
 		 */
-		public void handleSemanticLink(JavadocTagElement description, EMFClass target, Reference reference); 
+		public void handleSemanticLink(String tag, JavadocTagElement description, EMFClass target, Reference reference); 
 		
 	}
 	
@@ -871,44 +904,56 @@ public class Test2 extends TestCase {
 	 * created?</p>
 	 * 
 	 * <p>Expected: <code>@semantics Model1,Model2 text to describe in semantics</code></p>
+	 * <p>Expected: <code>@example Model1,Model2 text to describe the example</code></p>
 	 * 
+	 * @see #tagsToIdentify
 	 * @param description the source element
 	 * @param reference a reference to provide later
 	 * @param handler the handler to call with matching references
 	 */
 	public void findSemanticReferences(ModelDocumentation root, JavadocTagElement description, Reference reference, HandleSemantics handler) {
-		if ("@semantics".equals(description.getName())) {
-			// cycle through all model elements
-			JavadocTextElement refName = null;
-			for (JavadocFragment f : description.getFragments()) {
-				// select the first TextElement; this is the target class
-				if (f instanceof JavadocTextElement) {
-					refName = (JavadocTextElement) f;
-					break;
-				}						
-			}
-			if (refName != null) {
-				// select the first word as the model element name
-				String className = refName.getValue().trim();
-				if (className.contains(" ")) {
-					className = className.substring(0, className.indexOf(" "));
+		for (String tag : tagsToIdentify) {
+			if (tag.equals(description.getName())) {
+				// cycle through all model elements
+				JavadocTextElement refName = null;
+				for (JavadocFragment f : description.getFragments()) {
+					// select the first TextElement; this is the target class
+					if (f instanceof JavadocTextElement) {
+						refName = (JavadocTextElement) f;
+						break;
+					}						
 				}
-				// are there multiple elements selected with ','s?
-				String[] classNames = className.split(",");
-				for (String classNameTarget : classNames) {
-					
-					EMFClass target = getEMFClassFor(root, classNameTarget);
-					if (target != null) {
+				if (refName != null) {
+					// select the first word as the model element name
+					String className = refName.getValue().trim();
+					if (className.contains(" ")) {
+						className = className.substring(0, className.indexOf(" "));
+					}
+					// are there multiple elements selected with ','s?
+					String[] classNames = className.split(",");
+					for (String classNameTarget : classNames) {
 						
-						// get the handler to deal with it
-						handler.handleSemanticLink(description, target, reference);
-
+						EMFClass target = getEMFClassFor(root, classNameTarget);
+						if (target != null) {
+							
+							// get the handler to deal with it
+							handler.handleSemanticLink(tag, description, target, reference);
+	
+						}
 					}
 				}
 			}
 		}
 	}
 	
+	/**
+	 * Javadog tags that are identified by
+	 * {@link #findSemanticReferences(ModelDocumentation, JavadocTagElement, Reference, HandleSemantics)}.
+	 */
+	protected String[] tagsToIdentify = new String[] {
+		"@semantics",
+		"@example",
+	};
 	
 	/**
 	 * Load test case semantics.

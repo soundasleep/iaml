@@ -40,8 +40,8 @@
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//Example">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Example/exampleModel"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Example/exampleTest"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//Example/containingClass"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Example/description"/>
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//OperationalSemantic">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//OperationalSemantic/category"/>

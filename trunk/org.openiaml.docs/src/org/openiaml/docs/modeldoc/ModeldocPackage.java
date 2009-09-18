@@ -318,22 +318,22 @@ public interface ModeldocPackage extends EPackage {
 	int EXAMPLE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE__REFERENCE = SEMANTIC__REFERENCE;
+
+	/**
 	 * The feature id for the '<em><b>Example Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE__EXAMPLE_MODEL = 0;
-
-	/**
-	 * The feature id for the '<em><b>Example Test</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXAMPLE__EXAMPLE_TEST = 1;
+	int EXAMPLE__EXAMPLE_MODEL = SEMANTIC_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
@@ -342,7 +342,16 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE__CONTAINING_CLASS = 2;
+	int EXAMPLE__CONTAINING_CLASS = SEMANTIC_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE__DESCRIPTION = SEMANTIC_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Example</em>' class.
@@ -351,7 +360,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE_FEATURE_COUNT = 3;
+	int EXAMPLE_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl <em>Operational Semantic</em>}' class.
@@ -1757,17 +1766,6 @@ public interface ModeldocPackage extends EPackage {
 	EReference getExample_ExampleModel();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.Example#getExampleTest <em>Example Test</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Example Test</em>'.
-	 * @see org.openiaml.docs.modeldoc.Example#getExampleTest()
-	 * @see #getExample()
-	 * @generated
-	 */
-	EReference getExample_ExampleTest();
-
-	/**
 	 * Returns the meta object for the container reference '{@link org.openiaml.docs.modeldoc.Example#getContainingClass <em>Containing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1777,6 +1775,17 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExample_ContainingClass();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.Example#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Description</em>'.
+	 * @see org.openiaml.docs.modeldoc.Example#getDescription()
+	 * @see #getExample()
+	 * @generated
+	 */
+	EReference getExample_Description();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.OperationalSemantic <em>Operational Semantic</em>}'.
@@ -2875,20 +2884,20 @@ public interface ModeldocPackage extends EPackage {
 		EReference EXAMPLE__EXAMPLE_MODEL = eINSTANCE.getExample_ExampleModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Example Test</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXAMPLE__EXAMPLE_TEST = eINSTANCE.getExample_ExampleTest();
-
-		/**
 		 * The meta object literal for the '<em><b>Containing Class</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference EXAMPLE__CONTAINING_CLASS = eINSTANCE.getExample_ContainingClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXAMPLE__DESCRIPTION = eINSTANCE.getExample_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl <em>Operational Semantic</em>}' class.

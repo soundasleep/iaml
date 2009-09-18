@@ -13,7 +13,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * at runtime.
  * 
  * @author jmwright
- *
+ * @example PrimitiveOperation,Role,Permission Adding and removing {@model Role roles} and {@model Permission permissions} at runtime.
  */
 public class UserModifyRoles extends AbstractUserLoginTestCase {
 	

@@ -132,6 +132,7 @@ public class ModeldocSwitch<T> {
 			case ModeldocPackage.EXAMPLE: {
 				Example example = (Example)theEObject;
 				T result = caseExample(example);
+				if (result == null) result = caseSemantic(example);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

@@ -365,6 +365,9 @@
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents a clickable button to the user."/>
+      </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//VisibleThing #//Scope">
       <eAnnotations source="http://openiaml.org/comment">

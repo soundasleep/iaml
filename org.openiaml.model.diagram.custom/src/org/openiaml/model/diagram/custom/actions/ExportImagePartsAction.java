@@ -95,7 +95,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 		diagramFile = targetDiagram;
 		
 		try {
-			monitor.beginTask("Loading target diagram " + targetDiagram.getName(), MAX_IMAGES + 2);
+			monitor.beginTask("Loading target diagram " + targetDiagram.getName(), getMaxImages() + 2);
 			monitor.subTask("Loading target diagram " + targetDiagram.getName());
 			
 			// we need to load this model diagram
@@ -126,6 +126,38 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	}
 	
 	/**
+	 * The maximum number of images that will be created.
+	 * 
+	 * @return
+	 */
+	public int getMaxImages() {
+		return MAX_IMAGES;
+	}
+
+	/**
+	 * Should we stop exporting images after exporting this many?
+	 * 
+	 * @param imagesSaved
+	 * @return true if exporting should stop.
+	 */
+	protected boolean shouldHalt(int imagesSaved) {
+		if (imagesSaved >= getMaxImages())
+			return true;
+		return false;
+	}
+	
+	/**
+	 * Create a new {@link CopyToImageUtil}, which will be used
+	 * to export images.
+	 * 
+	 * @see CopyToImageUtil#copyToImage(DiagramEditPart, IPath, ImageFileFormat, IProgressMonitor)
+	 * @return
+	 */
+	protected CopyToImageUtil getCopyToImageUtil() {
+		return new CopyToImageUtil();
+	}
+	
+	/**
 	 * Recursively export elements in this diagram. Closes the editor once it is complete.
 	 * @param monitor2
 	 * 
@@ -141,7 +173,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 			IProgressMonitor saveMonitor = new SubProgressMonitor(monitor, 1);
 			saveMonitor.beginTask("Saving image " + destination, 2);
 			monitor.subTask("Saving image " + destination.lastSegment());
-			CopyToImageUtil img = new CopyToImageUtil();
+			CopyToImageUtil img = getCopyToImageUtil();
 			img.copyToImage(part, destination, ImageFileFormat.PNG, new SubProgressMonitor(monitor, 1));
 			saveMonitor.done();
 			imagesSaved++;
@@ -149,7 +181,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 		
 		// get children
 		for (Object obj : part.getChildren()) {
-			if (imagesSaved >= MAX_IMAGES) {
+			if (shouldHalt(imagesSaved)) {
 				break;		// halt
 			}			
 

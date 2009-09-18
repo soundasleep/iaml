@@ -125,12 +125,19 @@
 		     a documented bug of eclipse -->
 
          <action
+               class="org.openiaml.model.diagram.custom.actions.ExportToClickableHtml"
+               id="org.openiaml.model.diagram.custom.actions.exporthtml"
+               label="Export to clickable &amp;HTML"
+               menubarPath="org.openiaml.model.diagram.custom.menu2/group">
+         </action>
+         
+         <action
                class="org.openiaml.model.diagram.custom.actions.ExportImagePartsAction"
                id="org.openiaml.model.diagram.custom.menu2.action1"
                label="&amp;Export all diagram parts to PNG images"
                menubarPath="org.openiaml.model.diagram.custom.menu2/group">
          </action>
-
+         
       </objectContribution>
       
 	</extension>

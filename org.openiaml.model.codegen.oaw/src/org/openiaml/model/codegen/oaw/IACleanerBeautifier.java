@@ -62,6 +62,15 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 	public static List<File> getTracingCache() {
 		return tracingCache;
 	}
+	
+	/**
+	 * Should we make a backup of the initial file in '.old'?
+	 * 
+	 * @return
+	 */
+	public boolean makeBackup() {
+		return false;
+	}
 
 	/**
 	 * We use the IACleaner to format the file.
@@ -76,8 +85,8 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 			if (monitor != null && monitor.isCanceled())
 				throw new OperationCanceledException();
 			
-			// make backup
-			{
+			// make backup?
+			if (makeBackup()) {
 				File backup = new File( file.getTargetFile().getAbsolutePath() + ".old" );
 				FileWriter fw = new FileWriter( backup );
 				fw.write( IAInlineCleaner.readFile(file.getTargetFile()) );

@@ -59,11 +59,12 @@
 		<p id="operational">
 			<h2>Operational Semantics</h2>
 			
-			«IF operationalSemantics.isEmpty»
+			«IF operationalSemantics.union(getInheritedOperationalSemantics(this)).isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
 				<ul>
-				«EXPAND operationalSemantics FOREACH operationalSemantics»
+				«EXPAND operationalSemantics(true) FOREACH operationalSemantics»
+				«EXPAND operationalSemantics(false) FOREACH getInheritedOperationalSemantics(this).sortBy( c | c.containingClass.name )»
 				</ul>
 			«ENDIF»
 		</p>
@@ -71,11 +72,12 @@
 		<p id="inference">
 			<h2>Inference Semantics</h2>
 			
-			«IF inferenceSemantics.isEmpty»
+			«IF inferenceSemantics.union(getInheritedInferenceSemantics(this)).isEmpty»
 				<div class="none">(none)</div>
 			«ELSE»
 				<ul>
-				«EXPAND inferenceSemantics FOREACH inferenceSemantics»
+				«EXPAND inferenceSemantics(true) FOREACH inferenceSemantics»
+				«EXPAND inferenceSemantics(false) FOREACH getInheritedInferenceSemantics(this).sortBy( c | c.containingClass.name )»
 				</ul>
 			«ENDIF»
 		</p>
@@ -87,7 +89,8 @@
 				<div class="none">(none)</div>
 			«ELSE»
 				<ul>
-				«EXPAND constraint FOREACH constraints.union(getInheritedConstraints(this)).sortBy(c|c.constraint)»
+				«EXPAND constraint(true) FOREACH constraints.sortBy(c|c.constraint)»
+				«EXPAND constraint(false) FOREACH getInheritedConstraints(this).sortBy(c|c.constraint)»
 				</ul>
 			«ENDIF»
 		</p>
@@ -198,28 +201,41 @@
 	<li>«this»</li>
 «ENDDEFINE»
 
-«DEFINE operationalSemantics FOR modeldoc::OperationalSemantic»
-	<li>«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»</li>
-«ENDDEFINE»
-
-«DEFINE inferenceSemantics FOR modeldoc::InferenceSemantic»
-	<li>«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»</li>
-«ENDDEFINE»
-
-«DEFINE constraint FOR modeldoc::Constraint»
-	<li class="constraint">
-	«IF type == modeldoc::ConstraintType::WARNING»
-		<span class="warning">
-	«ELSE»
-		<span class="error">
-	«ENDIF»
-	«message»
-	«EXPAND linkReference FOR reference»
-	</span>
+«DEFINE operationalSemantics(Boolean local) FOR modeldoc::OperationalSemantic»
+	<li>
+		«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»
+		«IF !local»
+		[«EXPAND supertypes FOR containingClass»]
+		«ENDIF»
 	</li>
 «ENDDEFINE»
 
-«DEFINE attribute(boolean local) FOR modeldoc::EMFAttribute»
+«DEFINE inferenceSemantics(Boolean local) FOR modeldoc::InferenceSemantic»
+	<li>
+		«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»
+		«IF !local»
+		[«EXPAND supertypes FOR containingClass»]
+		«ENDIF»
+	</li>
+«ENDDEFINE»
+
+«DEFINE constraint(Boolean local) FOR modeldoc::Constraint»
+	<li class="constraint">
+		«IF type == modeldoc::ConstraintType::WARNING»
+			<span class="warning">
+		«ELSE»
+			<span class="error">
+		«ENDIF»
+		«message»
+		«EXPAND linkReference FOR reference»
+		«IF !local»
+		[«EXPAND supertypes FOR containingClass»]
+		«ENDIF»
+		</span>
+	</li>
+«ENDDEFINE»
+
+«DEFINE attribute(Boolean local) FOR modeldoc::EMFAttribute»
 	<li>
 		«IF local»
 		«name»
@@ -238,7 +254,7 @@
 	</li>
 «ENDDEFINE»
 
-«DEFINE reference(boolean local) FOR modeldoc::EMFReference»
+«DEFINE reference(Boolean local) FOR modeldoc::EMFReference»
 	<li>
 		«IF local»
 		«name»
@@ -255,7 +271,7 @@
 	</li>
 «ENDDEFINE»
 
-«DEFINE extension(boolean local) FOR modeldoc::ModelExtension»
+«DEFINE extension(Boolean local) FOR modeldoc::ModelExtension»
 	<li>
 		«IF local»
 		«value»

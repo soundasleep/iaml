@@ -355,11 +355,13 @@
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::ModelReference»
-	[<a href="«EXPAND browseSource»«plugin»/«getPackage(package)»/«name»/«name».html">«name».iaml</a>
-	(<a href="«EXPAND browseSource»«plugin»/«getPackage(package)»/«name».iaml">source</a>)]
+	[<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name»/«name».html">«name».iaml</a>
+	(<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name».iaml">source</a>)]
 «ENDDEFINE»
 
 «DEFINE browseSource FOR emf::EObject-»http://code.google.com/p/iaml/source/browse/trunk/«ENDDEFINE»
+
+«DEFINE viewSource FOR emf::EObject-»http://iaml.googlecode.com/svn/trunk/«ENDDEFINE»
 
 /** 
  * a hack way to create backtrace-able errors

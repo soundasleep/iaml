@@ -451,7 +451,7 @@
 		// Don't try to refresh children if the semantic element
 		// cannot be resolved.
 		if (resolveSemanticElement() == null) {
-			return java.util.Collections.EMPTY_LIST;
+			return new java.util.ArrayList();
 		}
 
 		//
@@ -495,7 +495,7 @@
 
 		//
 		// create a view for each remaining semantic element.
-		java.util.List createdViews = java.util.Collections.EMPTY_LIST;
+		java.util.List createdViews = new java.util.ArrayList();
 		if (!newSemanticChildren.isEmpty()) {
 			createdViews = createViews(newSemanticChildren);
 
@@ -583,7 +583,7 @@
 				return adapters;
 			}
 		}
-		return java.util.Collections.EMPTY_LIST;
+		return new java.util.ArrayList();
 	}
 	
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Get the command to create both the element, and the shortcut decorator, on the request. Copied from {@link #getCreateViewCommand(CreateRequest)}.")»

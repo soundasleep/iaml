@@ -387,6 +387,7 @@
   </classes>
   <classes name="NavigateWire" supertypes="//@classes.50" runtimeClass="//@references.57" description="TODO Description">
     <targetClass href="http://openiaml.org/model0.4#//wires/NavigateWire"/>
+    <operationalSemantics reference="//@references.116/@methods.0" description="//@references.116/@methods.0/@javadocs.0"/>
     <graphicalRepresentations reference="//@references.303"/>
   </classes>
   <classes name="SelectWire" supertypes="//@classes.2 //@classes.50" runtimeClass="//@references.58" description="TODO Description">
@@ -1345,7 +1346,7 @@
     </javadocs>
     <methods name="testFailingOperation" line="22">
       <javadocs name="@semantics">
-        <fragments xsi:type="md:JavadocTextElement" value=" CancelNode A "/>
+        <fragments xsi:type="md:JavadocTextElement" value=" CancelNode,NavigateWire A "/>
         <fragments xsi:type="md:JavadocTagElement" name="@model">
           <fragments xsi:type="md:JavadocTextElement" value=" CancelNode failing operation"/>
         </fragments>

@@ -15,8 +15,28 @@ List[modeldoc::Constraint] getInheritedConstraints(modeldoc::EMFClass this) :
 List[modeldoc::ModelExtension] getInheritedExtensions(modeldoc::EMFClass this) :
 	supertypes.extensions.union( supertypes.getInheritedExtensions() ); 
 
+List[modeldoc::OperationalSemantic] getInheritedOperationalSemantics(modeldoc::EMFClass this) :
+	supertypes.operationalSemantics.union( supertypes.getInheritedOperationalSemantics() ); 
+
+List[modeldoc::InferenceSemantic] getInheritedInferenceSemantics(modeldoc::EMFClass this) :
+	supertypes.inferenceSemantics.union( supertypes.getInheritedInferenceSemantics() ); 
+
 /**
  * Converts 'foo.bar.baz' into 'foo/bar/baz'
  */
 getPackage(String this) :
 	replaceAll("\\.", "/");
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540
+ * to use: «EXPAND exception FOR throwException("Your message goes here")»
+ * AND add this anywhere in your template file: (very important)
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»
+   
+ */
+String throwException(String message) :
+	JAVA org.openiaml.docs.tests.OawCodeGenerator.throwException(java.lang.String);
+	

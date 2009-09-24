@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -210,6 +211,10 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			public void create(EObject model, boolean logRuleSource,
 					IProgressMonitor monitor) throws InferenceException {
 
+				// investigate initial model properties
+				ModelPropertiesInvestigator prop = new ModelPropertiesInvestigator();
+				List<Object> initialProperties = prop.investigate(model);
+				
 				// how many elements are in the initial model?
 				int initial = 0;
 				{
@@ -224,6 +229,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				super.create(model, logRuleSource, monitor);
 				long diff = System.currentTimeMillis() - startTime;
 
+				// investigate final model properties
+				List<Object> finalProperties = prop.investigate(model);
+
 				// how many are in the final model?
 				int finalCount = 0;
 				{
@@ -236,14 +244,54 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				
 				// write this out to a log file
 				try {
-					BufferedWriter writer = new BufferedWriter(new FileWriter("inference-count.csv", true));
+					File f = new File("inference-properties.csv");
+					if (!f.exists()) {
+						// write down a list of all the property names
+						write(f, "mode", prop.getModelProperties());
+					}
+					write(f, "initial", initialProperties);
+					write(f, "final", finalProperties);
+					write(f, "time", diff);
 					System.out.println(initial + " -> " + finalCount + "(" + diff + " ms)");
-					writer.write(caller.getName() + "," + initial + "," + finalCount + "," + diff + "\n");
-					writer.close();
+					
 				} catch (IOException e) {
 					throw new InferenceException(e);
 				}
 				
+			}
+
+			/**
+			 * Write only one property out.
+			 * @param f
+			 * @param string
+			 * @param value
+			 * @throws IOException 
+			 */
+			private void write(File f, String string, Object value) throws IOException {
+				write(f, string, Collections.singletonList(value));
+			}
+
+			/**
+			 * Write out all the properties, with the given mode string,
+			 * to the given log file.
+			 * 
+			 * @param f
+			 * @param string
+			 * @param modelProperties
+			 * @throws IOException 
+			 */
+			private void write(File f, String string,
+					List<?> modelProperties) throws IOException {
+				
+				BufferedWriter writer = new BufferedWriter(new FileWriter(f, true));
+				writer.write(caller.getName() + "," + string);
+				for (Object prop : modelProperties) {
+					writer.write(",");
+					writer.write(prop.toString());
+				}
+				writer.write("\n");
+				writer.close();
+
 			}
 			
 		};

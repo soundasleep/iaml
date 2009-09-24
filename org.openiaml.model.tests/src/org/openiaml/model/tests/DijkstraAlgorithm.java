@@ -30,7 +30,7 @@ public abstract class DijkstraAlgorithm<T> {
 	 * 
 	 * @return
 	 */
-	protected abstract Collection<T> getEdges();
+	public abstract Collection<T> getEdges();
 	
 	/**
 	 * Allows abstract supertypes to extend getInternalEdges() while

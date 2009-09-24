@@ -1946,7 +1946,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		 * @see org.openiaml.model.tests.DijkstraAlgorithm#getEdges()
 		 */
 		@Override
-		protected Collection<FactoryLoopNode> getEdges() {
+		public Collection<FactoryLoopNode> getEdges() {
 			return contents;
 		}
 
@@ -3134,7 +3134,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		 * @see org.openiaml.model.tests.DijkstraAlgorithm#getEdges()
 		 */
 		@Override
-		protected Collection<String> getEdges() {
+		public Collection<String> getEdges() {
 			if (edgeCache == null) {
 				edgeCache = new HashSet<String>();
 				edgeCache.addAll(graphGt.keySet());

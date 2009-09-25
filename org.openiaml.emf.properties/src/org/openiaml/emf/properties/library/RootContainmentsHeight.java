@@ -10,33 +10,26 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.openiaml.emf.DijkstraAlgorithm;
+import org.openiaml.emf.properties.DefaultPropertyInvestigator;
 import org.openiaml.emf.properties.IEMFElementSelector;
-import org.openiaml.emf.properties.IterateOverAll;
 
 /**
+ * The height from the root, i.e. the longest children height from the root.
+ * 
  * @author jmwright
  *
  */
-public class Radius extends IterateOverAll {
-	private int min = -1;
+public class RootContainmentsHeight extends DefaultPropertyInvestigator {
 
 	/**
 	 * @param name
 	 */
-	public Radius(String name, IEMFElementSelector selector) {
+	public RootContainmentsHeight(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
 
-	@Override
-	public Object evaluate(EObject root) {
-		// evaluate as normal
-		super.evaluate(root);
-		// but return the maximum
-		return min;
-	}
-
-	@Override
-	public int get(final EObject root) {
+	public Object evaluate(final EObject root) {
+		
 		// use dijkstra's algorithm to find the shortest path between any vertices
 		DijkstraAlgorithm<EObject> dj = new DijkstraAlgorithm<EObject>() {
 
@@ -53,7 +46,7 @@ public class Radius extends IterateOverAll {
 			public List<EObject> getNeighbours(EObject u) {
 				// edges = all EReferences (including containments)
 				List<EObject> neighbours = new ArrayList<EObject>();
-				for (EReference ref : u.eClass().getEAllReferences()) {
+				for (EReference ref : u.eClass().getEAllContainments()) {
 					if (ignoreReference(ref))
 						continue;	// ignore
 
@@ -74,27 +67,18 @@ public class Radius extends IterateOverAll {
 		};
 		
 		// for all nodes
-		int maxPath = -1;
-		for (EObject source : dj.getEdges()) {
-			for (EObject target : dj.getEdges()) {
-				// ignoring self
-				if (!source.equals(target)) {
-					int path = dj.dijkstra(source, target);
-					// ignore paths that cannot be found
-					if (path > maxPath) {
-						maxPath = path;	// select the maximum
-					}
+		int max = -1;
+		for (EObject target : dj.getEdges()) {
+			// ignoring self
+			if (!root.equals(target)) {
+				int path = dj.dijkstra(root, target);
+				// ignore paths that cannot be found
+				if (path > max) {
+					max = path;	// select the maximum
 				}
 			}
 		}
-		
-		// but only return the minimum
-		if (maxPath != -1) {
-			if (maxPath < min || min == -1) {
-				min = maxPath;
-			}
-		}
-		
-		return 0;	// ignore return value
+
+		return max;	// return the maximum value
 	}
 }

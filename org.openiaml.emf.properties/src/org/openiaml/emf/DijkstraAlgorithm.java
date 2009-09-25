@@ -27,7 +27,7 @@ public abstract class DijkstraAlgorithm<T> {
 
 	/**
 	 * Get all of the edges (nodes) involved in this graph.
-	 * Must not change between invocations.
+	 * <b>Must not</b> change between invocations.
 	 * 
 	 * @return
 	 */
@@ -186,11 +186,14 @@ public abstract class DijkstraAlgorithm<T> {
 	/**
 	 * Get the neighbours to a given edge. Subclasses
 	 * must implement this method.
+	 * <b>Must not</b> change between invocations.
 	 * 
 	 * @param u
 	 * @return
 	 */
 	public abstract List<T> getNeighbours(T u);
+	
+	private Map<T, List<T>> neighbourCache = new HashMap<T, List<T>>();
 	
 	/**
 	 * Allows abstract supertypes to extend getInternalNeighbours() while
@@ -199,7 +202,10 @@ public abstract class DijkstraAlgorithm<T> {
 	 * @return
 	 */
 	public List<T> getInternalNeighbours(T u) {
-		return getNeighbours(u);
+		if (!neighbourCache.containsKey(u)) {
+			neighbourCache.put(u, getNeighbours(u));
+		}
+		return neighbourCache.get(u);
 	}
 
 	/**

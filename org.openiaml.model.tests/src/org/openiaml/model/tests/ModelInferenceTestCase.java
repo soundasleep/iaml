@@ -213,6 +213,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 
 				// investigate initial model properties
 				List<Object> initialProperties = getModelPropertiesInvestigator(false).investigate(model);
+				List<Object> initialPropertiesNoGen = getModelPropertiesInvestigator(true).investigate(model);
 				
 				// how many elements are in the initial model?
 				int initial = 0;
@@ -250,6 +251,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 						write(f, "mode", getModelPropertiesInvestigator(false).getModelProperties());
 					}
 					write(f, "initial", initialProperties);
+					write(f, "initial-no-gen", initialProperties);
 					write(f, "final", finalProperties);
 					write(f, "final-no-gen", finalPropertiesNoGen);
 					write(f, "time", diff);
@@ -284,7 +286,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			private void write(File f, String string,
 					List<?> modelProperties) throws IOException {
 				
-				BufferedWriter writer = new BufferedWriter(new FileWriter(f, true));
+				FileWriter fw = new FileWriter(f, true);
+				BufferedWriter writer = new BufferedWriter(fw);
 				writer.write(caller.getName() + "," + string);
 				for (Object prop : modelProperties) {
 					writer.write(",");
@@ -292,6 +295,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				}
 				writer.write("\n");
 				writer.close();
+				fw.close();
 
 			}
 			

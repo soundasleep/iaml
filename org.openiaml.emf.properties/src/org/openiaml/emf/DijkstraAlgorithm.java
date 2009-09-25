@@ -27,10 +27,13 @@ public abstract class DijkstraAlgorithm<T> {
 
 	/**
 	 * Get all of the edges (nodes) involved in this graph.
+	 * Must not change between invocations.
 	 * 
 	 * @return
 	 */
 	public abstract Collection<T> getEdges();
+	
+	private Collection<T> cachedEdges = null;
 	
 	/**
 	 * Allows abstract supertypes to extend getInternalEdges() while
@@ -39,7 +42,10 @@ public abstract class DijkstraAlgorithm<T> {
 	 * @return
 	 */
 	protected Collection<T> getInternalEdges() {
-		return getEdges();
+		if (cachedEdges == null) {
+			cachedEdges = getEdges();
+		}
+		return cachedEdges;
 	}
 	
 	/**

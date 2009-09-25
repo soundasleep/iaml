@@ -8,22 +8,23 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
  * @author jmwright
  *
  */
-public final class MaxDegreeContainments extends IterateOverAll {
+public class MaxDegreeContainments extends IterateOverAll {
 	private int max = -1;
 
 	/**
 	 * @param name
 	 */
-	private MaxDegreeContainments(String name) {
-		super(name);
+	public MaxDegreeContainments(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
-
+	
 	@Override
 	public Object evaluate(EObject root) {
 		// evaluate as normal
@@ -37,6 +38,9 @@ public final class MaxDegreeContainments extends IterateOverAll {
 		List<EReference> refs = obj.eClass().getEAllContainments();
 		int thisValue = 0;
 		for (EReference ref : refs) {
+			if (ignoreReference(ref))
+				continue;	// ignore
+
 			Object r = obj.eGet(ref);
 			if (r == null)
 				continue;

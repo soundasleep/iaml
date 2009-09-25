@@ -15,15 +15,19 @@ import org.eclipse.emf.ecore.EObject;
  */
 public abstract class IterateOverAll extends DefaultPropertyInvestigator {
 
-	public IterateOverAll(String name) {
-		super(name);
+	public IterateOverAll(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	public Object evaluate(EObject root) {
 		int result = get(root);
 		TreeIterator<EObject> it = root.eAllContents();
 		while (it.hasNext()) {
-			result += get(it.next());
+			EObject next = it.next();
+			if (ignoreClass(next.eClass()))
+				continue;
+			
+			result += get(next);
 		}
 		return result;
 	}

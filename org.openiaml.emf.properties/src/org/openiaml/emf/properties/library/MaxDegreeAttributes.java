@@ -7,20 +7,21 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
  * @author jmwright
  *
  */
-public final class MaxDegreeAttributes extends IterateOverAll {
+public class MaxDegreeAttributes extends IterateOverAll {
 	private int max = -1;
 
 	/**
 	 * @param name
 	 */
-	private MaxDegreeAttributes(String name) {
-		super(name);
+	public MaxDegreeAttributes(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	@Override
@@ -36,6 +37,9 @@ public final class MaxDegreeAttributes extends IterateOverAll {
 		List<EAttribute> attributes = obj.eClass().getEAllAttributes();
 		int thisValue = 0;
 		for (EAttribute attr : attributes) {
+			if (ignoreAttribute(attr))
+				continue;	// ignore
+
 			Object r = obj.eGet(attr);
 			if (r != null)
 				thisValue++;

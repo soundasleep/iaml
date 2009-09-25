@@ -7,18 +7,19 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
  * @author jmwright
  *
  */
-public final class AttributesCount extends IterateOverAll {
+public class AttributesCount extends IterateOverAll {
 	/**
 	 * @param name
 	 */
-	private AttributesCount(String name) {
-		super(name);
+	public AttributesCount(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	@Override
@@ -26,6 +27,9 @@ public final class AttributesCount extends IterateOverAll {
 		int result = 0;
 		List<EAttribute> attributes = obj.eClass().getEAllAttributes();
 		for (EAttribute attr : attributes) {
+			if (ignoreAttribute(attr))
+				continue; // ignore
+			
 			if (obj.eGet(attr) != null) {
 				result++;
 			}

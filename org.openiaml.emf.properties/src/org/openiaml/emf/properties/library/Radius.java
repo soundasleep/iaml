@@ -10,20 +10,21 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.openiaml.emf.DijkstraAlgorithm;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
  * @author jmwright
  *
  */
-public final class Radius extends IterateOverAll {
+public class Radius extends IterateOverAll {
 	private int min = -1;
 
 	/**
 	 * @param name
 	 */
-	private Radius(String name) {
-		super(name);
+	public Radius(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public final class Radius extends IterateOverAll {
 				Collection<EObject> nodes = toCollection(root.eAllContents());
 				// add self
 				nodes.add(root);
-				return nodes;
+				return removeIgnoredClasses(nodes);
 			}
 
 			@Override
@@ -53,6 +54,9 @@ public final class Radius extends IterateOverAll {
 				// edges = all EReferences (including containments)
 				List<EObject> neighbours = new ArrayList<EObject>();
 				for (EReference ref : u.eClass().getEAllReferences()) {
+					if (ignoreReference(ref))
+						continue;	// ignore
+
 					if (ref.isMany()) {
 						List<?> r = (List<?>) u.eGet(ref);
 						for (Object rr : r) {
@@ -70,17 +74,24 @@ public final class Radius extends IterateOverAll {
 		};
 		
 		// for all nodes
+		int maxPath = -1;
 		for (EObject source : dj.getEdges()) {
 			for (EObject target : dj.getEdges()) {
 				// ignoring self
 				if (!source.equals(target)) {
 					int path = dj.dijkstra(source, target);
 					// ignore paths that cannot be found
-					if (path != -1) {
-						if (path < min)
-							min = path;
+					if (path > maxPath) {
+						maxPath = path;	// select the maximum
 					}
 				}
+			}
+		}
+		
+		// but only return the minimum
+		if (maxPath != -1) {
+			if (maxPath < min || min == -1) {
+				min = maxPath;
 			}
 		}
 		

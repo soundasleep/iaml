@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 
@@ -15,14 +16,14 @@ import org.openiaml.emf.properties.IterateOverAll;
  * @author jmwright
  *
  */
-public final class DistinctTypes extends IterateOverAll {
+public class DistinctTypes extends IterateOverAll {
 	private Set<EClass> types = new HashSet<EClass>();
 
 	/**
 	 * @param name
 	 */
-	private DistinctTypes(String name) {
-		super(name);
+	public DistinctTypes(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	@Override

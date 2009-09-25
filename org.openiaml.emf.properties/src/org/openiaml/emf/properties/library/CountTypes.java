@@ -3,7 +3,6 @@
  */
 package org.openiaml.emf.properties.library;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
@@ -12,24 +11,21 @@ import org.openiaml.emf.properties.IterateOverAll;
  * @author jmwright
  *
  */
-public class SupertypesCount extends IterateOverAll {
+public class CountTypes extends IterateOverAll {
 	
+	private Class<? extends EObject> type;
+
 	/**
 	 * @param name
+	 * @param type type to search for
 	 */
-	public SupertypesCount(String name, IEMFElementSelector selector) {
+	public CountTypes(String name, IEMFElementSelector selector, Class<? extends EObject> type) {
 		super(name, selector);
+		this.type = type;
 	}
-	
+
 	@Override
 	public int get(EObject obj) {
-		int thisValue = 0;
-		for (EClass c : obj.eClass().getEAllSuperTypes()) {
-			if (ignoreClass(c))
-				continue;	// ignore
-			
-			thisValue++;
-		}
-		return thisValue;
+		return type.isInstance(obj) ? 1 : 0; 
 	}
 }

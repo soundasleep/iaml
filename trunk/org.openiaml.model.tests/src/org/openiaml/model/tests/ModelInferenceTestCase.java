@@ -212,8 +212,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 					IProgressMonitor monitor) throws InferenceException {
 
 				// investigate initial model properties
-				ModelPropertiesInvestigator prop = new ModelPropertiesInvestigator();
-				List<Object> initialProperties = prop.investigate(model);
+				List<Object> initialProperties = getModelPropertiesInvestigator(false).investigate(model);
 				
 				// how many elements are in the initial model?
 				int initial = 0;
@@ -230,7 +229,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				long diff = System.currentTimeMillis() - startTime;
 
 				// investigate final model properties
-				List<Object> finalProperties = prop.investigate(model);
+				List<Object> finalProperties = getModelPropertiesInvestigator(false).investigate(model);
+				List<Object> finalPropertiesNoGen = getModelPropertiesInvestigator(true).investigate(model);
 
 				// how many are in the final model?
 				int finalCount = 0;
@@ -247,10 +247,11 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 					File f = new File("inference-properties.csv");
 					if (!f.exists()) {
 						// write down a list of all the property names
-						write(f, "mode", prop.getModelProperties());
+						write(f, "mode", getModelPropertiesInvestigator(false).getModelProperties());
 					}
 					write(f, "initial", initialProperties);
 					write(f, "final", finalProperties);
+					write(f, "final-no-gen", finalPropertiesNoGen);
 					write(f, "time", diff);
 					System.out.println(initial + " -> " + finalCount + "(" + diff + " ms)");
 					
@@ -295,6 +296,17 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			}
 			
 		};
+	}
+	
+	/**
+	 * Construct the model properties investigator that we will use
+	 * to investigate properties, including selecting which properties
+	 * to search for.
+	 * 
+	 * @return
+	 */
+	public ModelPropertiesInvestigator getModelPropertiesInvestigator(boolean ignoreGenerated) {
+		return new ModelPropertiesInvestigator(ignoreGenerated);
 	}
 	
 	/**

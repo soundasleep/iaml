@@ -38,9 +38,9 @@ import javax.xml.xpath.XPathExpressionException;
 import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
+import org.openiaml.emf.DijkstraAlgorithm;
 import org.openiaml.model.drools.export.ExportDroolsJavaXml;
 import org.openiaml.model.drools.export.ExportDroolsXml;
-import org.openiaml.model.tests.DijkstraAlgorithm;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

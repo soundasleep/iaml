@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests;
+package org.openiaml.emf;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -4,18 +4,47 @@
 package org.openiaml.model.tests;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.openiaml.emf.properties.IEMFElementSelector;
+import org.openiaml.emf.properties.IPropertyInvestigator;
+import org.openiaml.emf.properties.library.AttributesCount;
+import org.openiaml.emf.properties.library.AttributesCountIgnoringDefault;
+import org.openiaml.emf.properties.library.ContainmentsCount;
+import org.openiaml.emf.properties.library.ContainmentsCountIgnoringEmpty;
+import org.openiaml.emf.properties.library.ContainmentsSum;
+import org.openiaml.emf.properties.library.CountTypes;
+import org.openiaml.emf.properties.library.Diameter;
+import org.openiaml.emf.properties.library.DistinctAttributeValues;
+import org.openiaml.emf.properties.library.DistinctContainments;
+import org.openiaml.emf.properties.library.DistinctReferences;
+import org.openiaml.emf.properties.library.DistinctSupertypes;
+import org.openiaml.emf.properties.library.DistinctTypes;
+import org.openiaml.emf.properties.library.ElementsCount;
+import org.openiaml.emf.properties.library.MaxInheritanceHeight;
+import org.openiaml.emf.properties.library.MaxNodeAttributes;
+import org.openiaml.emf.properties.library.MaxNodeContainments;
+import org.openiaml.emf.properties.library.MaxNodeReferences;
+import org.openiaml.emf.properties.library.Radius;
+import org.openiaml.emf.properties.library.ReferencesCount;
+import org.openiaml.emf.properties.library.ReferencesCountIgnoringEmpty;
+import org.openiaml.emf.properties.library.ReferencesSum;
+import org.openiaml.emf.properties.library.SupertypesCount;
+import org.openiaml.model.model.ActivityNode;
+import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.visual.Page;
 
 /**
  * For an upcoming paper, we need to investigate the properties
@@ -27,706 +56,54 @@ import org.openiaml.model.model.ModelPackage;
  * @author jmwright
  *
  */
-public class ModelPropertiesInvestigator {
+public class ModelPropertiesInvestigator implements IEMFElementSelector {
 
-	/**
-	 * Interface for a property investigator.
-	 * 
-	 * @author jmwright
-	 *
-	 */
-	public interface IPropertyInvestigator {
-		public String getName();
-		public Object evaluate(EObject root);
+	public ModelPropertiesInvestigator(boolean ignoreGenerated) {
+		this.ignoreGenerated = ignoreGenerated;
 	}
 	
-	/**
-	 * Default abstract implementation.
-	 * 
-	 * @author jmwright
-	 *
-	 */
-	public abstract class DefaultPropertyInvestigator implements IPropertyInvestigator {
-		private String name;
-		
-		public DefaultPropertyInvestigator(String name) {
-			this.name = name;
-		}
-
-		public String getName() {
-			return name;
-		}
-		
-	}
-	
-	/**
-	 * Iterates over the root element and eAllContents and accumulates
-	 * a value. 
-	 * 
-	 * @author jmwright
-	 *
-	 */
-	public abstract class IterateOverAll extends DefaultPropertyInvestigator {
-
-		public IterateOverAll(String name) {
-			super(name);
-		}
-
-		@Override
-		public Object evaluate(EObject root) {
-			int result = get(root);
-			TreeIterator<EObject> it = root.eAllContents();
-			while (it.hasNext()) {
-				result += get(it.next());
-			}
-			return result;
-		}
-		
-		/**
-		 * Get the property value for just the current object.
-		 */
-		public abstract int get(EObject obj);
-		
-	}
-		
 	private List<IPropertyInvestigator> investigators = null;
+	private boolean ignoreGenerated;
 	
 	public List<IPropertyInvestigator> getInvestigators() {
 		if (investigators == null) {
 			investigators = new ArrayList<IPropertyInvestigator>();
 			// initialise
 			
-			investigators.add(new DefaultPropertyInvestigator("elements-count") {
-				@Override
-				public Object evaluate(EObject root) {
-					return 1 + getSize(root.eAllContents());
-				}
-			});
-			investigators.add(new IterateOverAll("attributes-count") {
-				@Override
-				public int get(EObject obj) {
-					int result = 0;
-					List<EAttribute> attributes = obj.eClass().getEAllAttributes();
-					for (EAttribute attr : attributes) {
-						if (obj.eGet(attr) != null) {
-							result++;
-						}
-					}
-					return result;
-				}
-			});
-			investigators.add(new IterateOverAll("attributes-count-no-default") {
-				@Override
-				public int get(EObject obj) {
-					int result = 0;
-					List<EAttribute> attributes = obj.eClass().getEAllAttributes();
-					for (EAttribute attr : attributes) {
-						if (obj.eGet(attr) != null) {
-							if (!obj.eGet(attr).equals( attr.getDefaultValue() )) { 
-								result++;
-							}
-						}
-					}
-					return result;
-				}
-			});
-			investigators.add(new IterateOverAll("references-count") {
-				@Override
-				public int get(EObject obj) {
-					int result = 0;
-					List<EReference> refs = obj.eClass().getEAllReferences();
-					for (EReference ref : refs) {
-						if (obj.eGet(ref) != null) {
-							result++;
-						}
-					}
-					return result;
-				}
-			});
-			investigators.add(new IterateOverAll("references-count-no-empty") {
-				@Override
-				public int get(EObject obj) {
-					int result = 0;
-					List<EReference> refs = obj.eClass().getEAllReferences();
-					for (EReference ref : refs) {
-						if (obj.eGet(ref) != null) {
-							if (!(ref.isMany() && ((List<?>) obj.eGet(ref)).size() == 0)) {
-								result++;
-							}
-						}
-					}
-					return result;
-				}
-			});
-			investigators.add(new IterateOverAll("references-sum") {
-				@Override
-				public int get(EObject obj) {
-					int result = 0;
-					List<EReference> refs = obj.eClass().getEAllReferences();
-					for (EReference ref : refs) {
-						if (obj.eGet(ref) != null) {
-							if (obj.eGet(ref) instanceof List<?>)
-								result += ((List<?>) obj.eGet(ref)).size();
-							else
-								result ++;
-						}
-					}
-					return result;
-				}
-			});
-			investigators.add(new IterateOverAll("containments-count") {
-				@Override
-				public int get(EObject obj) {
-					int result = 0;
-					List<EReference> refs = obj.eClass().getEAllContainments();
-					for (EReference ref : refs) {
-						if (obj.eGet(ref) != null) {
-							result++;
-						}
-					}
-					return result;
-				}
-			});
-			investigators.add(new IterateOverAll("containments-count-no-empty") {
-				@Override
-				public int get(EObject obj) {
-					int result = 0;
-					List<EReference> refs = obj.eClass().getEAllContainments();
-					for (EReference ref : refs) {
-						if (obj.eGet(ref) != null) {
-							if (!(ref.isMany() && ((List<?>) obj.eGet(ref)).size() == 0)) {
-								result++;
-							}
-						}
-					}
-					return result;
-				}
-			});
-			investigators.add(new IterateOverAll("containments-sum") {
-				@Override
-				public int get(EObject obj) {
-					int result = 0;
-					List<EReference> refs = obj.eClass().getEAllContainments();
-					for (EReference ref : refs) {
-						if (obj.eGet(ref) != null) {
-							if (obj.eGet(ref) instanceof List<?>)
-								result += ((List<?>) obj.eGet(ref)).size();
-							else
-								result ++;
-						}
-					}
-					return result;
-				}
-			});
-			investigators.add(new IterateOverAll("distinct-types") {				
-				private Set<EClass> types = new HashSet<EClass>();
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the distinct types
-					return types.size();
-				}
-
-				@Override
-				public int get(EObject obj) {
-					EClass type = obj.eClass();
-					if (!types.contains(type)) {
-						types.add(type);
-					}
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("supertype-count") {				
-				@Override
-				public int get(EObject obj) {
-					return obj.eClass().getEAllSuperTypes().size();
-				}
-			});
-			investigators.add(new IterateOverAll("distinct-supertypes") {				
-				private Set<EClass> types = new HashSet<EClass>();
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the distinct types
-					return types.size();
-				}
-
-				@Override
-				public int get(EObject obj) {
-					if (!types.contains(obj.eClass())) {
-						types.add(obj.eClass());
-					}
-					List<EClass> supertypes = obj.eClass().getEAllSuperTypes();
-					for (EClass type : supertypes) {
-						if (!types.contains(type)) {
-							types.add(type);
-						}
-					}
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("distinct-attribute-values") {				
-				private Set<Object> values = new HashSet<Object>();
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the distinct types
-					return values.size();
-				}
-
-				@Override
-				public int get(EObject obj) {
-					List<EAttribute> attributes = obj.eClass().getEAllAttributes();
-					for (EAttribute attr : attributes) {
-						Object r = obj.eGet(attr);
-						if (r != null && !values.contains(obj)) {
-							values.add(r);
-						}
-					}
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("distinct-references") {				
-				private Set<Object> values = new HashSet<Object>();
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the distinct types
-					return values.size();
-				}
-
-				@Override
-				public int get(EObject obj) {
-					List<EReference> refs = obj.eClass().getEAllReferences();
-					for (EReference ref : refs) {
-						Object r = obj.eGet(ref);
-						if (r == null)
-							continue;
-						
-						if (!(r instanceof List<?>)) {
-							// turn single value into singleton list
-							r = Collections.singletonList(r);
-						}
-						List<?> rl = (List<?>) r;
-						for (Object o : rl) {
-							if (!values.contains(o)) {
-								values.add(o);
-							}
-						}
-					}
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("distinct-containments") {				
-				private Set<Object> values = new HashSet<Object>();
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the distinct types
-					return values.size();
-				}
-
-				@Override
-				public int get(EObject obj) {
-					List<EReference> refs = obj.eClass().getEAllContainments();
-					for (EReference ref : refs) {
-						Object r = obj.eGet(ref);
-						if (r == null)
-							continue;
-						
-						if (!(r instanceof List<?>)) {
-							// turn single value into singleton list
-							r = Collections.singletonList(r);
-						}
-						List<?> rl = (List<?>) r;
-						for (Object o : rl) {
-							if (!values.contains(o)) {
-								values.add(o);
-							}
-						}
-					}
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("max-node-attributes") {
-				private int max = -1;
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the maximum
-					return max;
-				}
-
-				@Override
-				public int get(EObject obj) {
-					List<EAttribute> attributes = obj.eClass().getEAllAttributes();
-					int thisValue = 0;
-					for (EAttribute attr : attributes) {
-						Object r = obj.eGet(attr);
-						if (r != null)
-							thisValue++;
-					}
-					if (thisValue > max)
-						max = thisValue;	// set max
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("max-node-references") {
-				private int max = -1;
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the maximum
-					return max;
-				}
-
-				@Override
-				public int get(EObject obj) {
-					List<EReference> refs = obj.eClass().getEAllReferences();
-					int thisValue = 0;
-					for (EReference ref : refs) {
-						Object r = obj.eGet(ref);
-						if (r == null)
-							continue;
-						
-						if (!(r instanceof List<?>)) {
-							r = Collections.singletonList(r);
-						}
-						
-						thisValue += ((List<?>) r).size();
-					}
-					if (thisValue > max)
-						max = thisValue;	// set max
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("max-node-containments") {
-				private int max = -1;
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the maximum
-					return max;
-				}
-
-				@Override
-				public int get(EObject obj) {
-					List<EReference> refs = obj.eClass().getEAllContainments();
-					int thisValue = 0;
-					for (EReference ref : refs) {
-						Object r = obj.eGet(ref);
-						if (r == null)
-							continue;
-						
-						if (!(r instanceof List<?>)) {
-							r = Collections.singletonList(r);
-						}
-						
-						thisValue += ((List<?>) r).size();
-					}
-					if (thisValue > max)
-						max = thisValue;	// set max
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("max-inheritance-height") {
-				private int max = -1;
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the maximum
-					return max;
-				}
-
-				@Override
-				public int get(EObject obj) {
-					int thisValue = obj.eClass().getEAllSuperTypes().size();
-					if (thisValue > max)
-						max = thisValue;	// set max
-					return 0;	// ignored
-				}
-			});
-			investigators.add(new IterateOverAll("radius") {
-				private int min = -1;
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the maximum
-					return min;
-				}
-				
-				@Override
-				public int get(final EObject root) {
-					// use dijkstra's algorithm to find the shortest path between any vertices
-					DijkstraAlgorithm<EObject> dj = new DijkstraAlgorithm<EObject>() {
-
-						@Override
-						public Collection<EObject> getEdges() {
-							// vertices = all EObjects in the root							
-							Collection<EObject> nodes = toCollection(root.eAllContents());
-							// add self
-							nodes.add(root);
-							return nodes;
-						}
-
-						@Override
-						public List<EObject> getNeighbours(EObject u) {
-							// edges = all EReferences (including containments)
-							List<EObject> neighbours = new ArrayList<EObject>();
-							for (EReference ref : u.eClass().getEAllReferences()) {
-								if (ref.isMany()) {
-									List<?> r = (List<?>) u.eGet(ref);
-									for (Object rr : r) {
-										neighbours.add((EObject) rr);
-									}
-								} else {
-									if (u.eGet(ref) != null) {
-										neighbours.add((EObject) u.eGet(ref));
-									}
-								}
-							}
-							return neighbours;
-						}
-						
-					};
-					
-					// for all nodes
-					for (EObject source : dj.getEdges()) {
-						for (EObject target : dj.getEdges()) {
-							// ignoring self
-							if (!source.equals(target)) {
-								int path = dj.dijkstra(source, target);
-								// ignore paths that cannot be found
-								if (path != -1) {
-									if (path < min)
-										min = path;
-								}
-							}
-						}
-					}
-					
-					return 0;	// ignore return value
-				}
-				
-			});
-			investigators.add(new IterateOverAll("diameter") {
-				private int max = -1;
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the maximum
-					return max;
-				}
-				
-				@Override
-				public int get(final EObject root) {
-					// use dijkstra's algorithm to find the shortest path between any vertices
-					DijkstraAlgorithm<EObject> dj = new DijkstraAlgorithm<EObject>() {
-
-						@Override
-						public Collection<EObject> getEdges() {
-							// vertices = all EObjects in the root							
-							Collection<EObject> nodes = toCollection(root.eAllContents());
-							// add self
-							nodes.add(root);
-							return nodes;
-						}
-
-						@Override
-						public List<EObject> getNeighbours(EObject u) {
-							// edges = all EReferences (including containments)
-							List<EObject> neighbours = new ArrayList<EObject>();
-							for (EReference ref : u.eClass().getEAllReferences()) {
-								if (ref.isMany()) {
-									List<?> r = (List<?>) u.eGet(ref);
-									for (Object rr : r) {
-										neighbours.add((EObject) rr);
-									}
-								} else {
-									if (u.eGet(ref) != null) {
-										neighbours.add((EObject) u.eGet(ref));
-									}
-								}
-							}
-							return neighbours;
-						}
-						
-					};
-					
-					// for all nodes
-					for (EObject source : dj.getEdges()) {
-						for (EObject target : dj.getEdges()) {
-							// ignoring self
-							if (!source.equals(target)) {
-								int path = dj.dijkstra(source, target);
-								if (path > max)
-									max = path;
-							}
-						}
-					}
-					
-					return 0;	// ignore return value
-				}
-				
-			});
-			investigators.add(new IterateOverAll("radius-without-generated") {
-				private int min = -1;
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the maximum
-					return min;
-				}
-				
-				@Override
-				public int get(final EObject root) {
-					// use dijkstra's algorithm to find the shortest path between any vertices
-					DijkstraAlgorithm<EObject> dj = new DijkstraAlgorithm<EObject>() {
-
-						@Override
-						public Collection<EObject> getEdges() {
-							// vertices = all EObjects in the root							
-							Collection<EObject> nodes = toCollection(root.eAllContents());
-							// add self
-							nodes.add(root);
-							return nodes;
-						}
-
-						@Override
-						public List<EObject> getNeighbours(EObject u) {
-							// edges = all EReferences (including containments)
-							List<EObject> neighbours = new ArrayList<EObject>();
-							for (EReference ref : u.eClass().getEAllReferences()) {
-								// ignore generated references
-								if (isGeneratedReference(ref))
-									continue;
-								
-								if (ref.isMany()) {
-									List<?> r = (List<?>) u.eGet(ref);
-									for (Object rr : r) {
-										neighbours.add((EObject) rr);
-									}
-								} else {
-									if (u.eGet(ref) != null) {
-										neighbours.add((EObject) u.eGet(ref));
-									}
-								}
-							}
-							return neighbours;
-						}
-						
-					};
-					
-					// for all nodes
-					for (EObject source : dj.getEdges()) {
-						for (EObject target : dj.getEdges()) {
-							// ignoring self
-							if (!source.equals(target)) {
-								int path = dj.dijkstra(source, target);
-								// ignore paths that cannot be found
-								if (path != -1) {
-									if (path < min)
-										min = path;
-								}
-							}
-						}
-					}
-					
-					return 0;	// ignore return value
-				}
-				
-			});
-			investigators.add(new IterateOverAll("diameter-without-generated") {
-				private int max = -1;
-				
-				@Override
-				public Object evaluate(EObject root) {
-					// evaluate as normal
-					super.evaluate(root);
-					// but return the maximum
-					return max;
-				}
-				
-				@Override
-				public int get(final EObject root) {
-					// use dijkstra's algorithm to find the shortest path between any vertices
-					DijkstraAlgorithm<EObject> dj = new DijkstraAlgorithm<EObject>() {
-
-						@Override
-						public Collection<EObject> getEdges() {
-							// vertices = all EObjects in the root							
-							Collection<EObject> nodes = toCollection(root.eAllContents());
-							// add self
-							nodes.add(root);
-							return nodes;
-						}
-
-						@Override
-						public List<EObject> getNeighbours(EObject u) {
-							// edges = all EReferences (including containments)
-							List<EObject> neighbours = new ArrayList<EObject>();
-							for (EReference ref : u.eClass().getEAllReferences()) {
-								// ignore generated references
-								if (isGeneratedReference(ref))
-									continue;
-								
-								if (ref.isMany()) {
-									List<?> r = (List<?>) u.eGet(ref);
-									for (Object rr : r) {
-										neighbours.add((EObject) rr);
-									}
-								} else {
-									if (u.eGet(ref) != null) {
-										neighbours.add((EObject) u.eGet(ref));
-									}
-								}
-							}
-							return neighbours;
-						}
-
-					};
-					
-					// for all nodes
-					for (EObject source : dj.getEdges()) {
-						for (EObject target : dj.getEdges()) {
-							// ignoring self
-							if (!source.equals(target)) {
-								int path = dj.dijkstra(source, target);
-								if (path > max)
-									max = path;
-							}
-						}
-					}
-					
-					return 0;	// ignore return value
-				}
-				
-			});
-			
+			investigators.add(new ElementsCount("elements-count", this));
+			investigators.add(new AttributesCount("attributes-count", this));
+			investigators.add(new AttributesCountIgnoringDefault("attributes-count-no-default", this));
+			investigators.add(new ReferencesCount("references-count", this));
+			investigators.add(new ReferencesCountIgnoringEmpty("references-count-no-empty", this));
+			investigators.add(new ReferencesSum("references-sum", this));
+			investigators.add(new ContainmentsCount("containments-count", this));
+			investigators.add(new ContainmentsCountIgnoringEmpty("containments-count-no-empty", this));
+			investigators.add(new ContainmentsSum("containments-sum", this));
+			investigators.add(new DistinctTypes("distinct-types", this));
+			investigators.add(new SupertypesCount("supertype-count", this));
+			investigators.add(new DistinctSupertypes("distinct-supertypes", this));
+			investigators.add(new DistinctAttributeValues("distinct-attribute-values", this));
+			investigators.add(new DistinctReferences("distinct-references", this));
+			investigators.add(new DistinctContainments("distinct-containments", this));
+			investigators.add(new MaxNodeAttributes("max-degree-attributes", this));
+			investigators.add(new MaxNodeReferences("max-degree-references", this));
+			investigators.add(new MaxNodeContainments("max-degree-containments", this));
+			investigators.add(new MaxNodeAttributes("min-degree-attributes", this));
+			investigators.add(new MaxNodeReferences("min-degree-references", this));
+			investigators.add(new MaxNodeContainments("min-degree-containments", this));
+			investigators.add(new MaxInheritanceHeight("max-inheritance-height", this));
+			investigators.add(new Radius("radius", this));
+			investigators.add(new Diameter("diameter", this));
+			investigators.add(new CountTypes("wires", this, WireEdge.class));
+			investigators.add(new CountTypes("visible-things", this, VisibleThing.class));
+			investigators.add(new CountTypes("events", this, EventTrigger.class));
+			investigators.add(new CountTypes("operations", this, Operation.class));
+			investigators.add(new CountTypes("conditions", this, Condition.class));
+			investigators.add(new CountTypes("execution-edges", this, ExecutionEdge.class));
+			investigators.add(new CountTypes("data-flow-edges", this, DataFlowEdge.class));
+			investigators.add(new CountTypes("properties", this, ApplicationElementProperty.class));
+			investigators.add(new CountTypes("nodes", this, ActivityNode.class));
+			investigators.add(new CountTypes("pages", this, Page.class));
 		}
 		return investigators;
 	}
@@ -734,37 +111,14 @@ public class ModelPropertiesInvestigator {
 	/**
 	 * Is the given reference a 'generated' reference?
 	 * 
+	 * @see #investigate(EObject, boolean)
+	 * @see #ignoreReference(EReference)
 	 * @param ref
 	 * @return
 	 */
 	protected boolean isGeneratedReference(EReference ref) {
 		return ref.equals(ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy()) ||
 			ref.equals(ModelPackage.eINSTANCE.getGeneratesElements_GeneratedElements());
-	}
-	
-	
-	/**
-	 * Helper method: turn an iterator of objects into a collection of objects.
-	 * 
-	 * @param it
-	 * @return
-	 */
-	private Collection<EObject> toCollection(
-			TreeIterator<EObject> it) {
-		Collection<EObject> result = new ArrayList<EObject>();
-		while (it.hasNext())
-			result.add(it.next());
-		return result;
-	}
-	
-	/**
-	 * Helper method: get the size of all elements in the iterator
-	 * 
-	 * @param eAllContents
-	 * @return 
-	 */
-	protected int getSize(TreeIterator<EObject> it) {
-		return toCollection(it).size();
 	}
 
 	/**
@@ -781,10 +135,23 @@ public class ModelPropertiesInvestigator {
 	}
 	
 	/**
+	 * Should we ignore the current reference?
+	 * Set in {@link #investigate(EObject, boolean)}.
+	 * 
+	 * @param ref
+	 * @return
+	 */
+	public boolean ignoreReference(EReference ref) {
+		return ignoreGenerated && isGeneratedReference(ref); 
+	}
+	
+	/**
 	 * Investigate the given EObject for all of the model
 	 * properties. 
 	 * 
+	 * @see #isGeneratedReference(EReference)
 	 * @param root
+	 * @param ignoreGenerated should we ignore generated references?
 	 * @return
 	 */
 	public List<Object> investigate(EObject root) {
@@ -793,6 +160,23 @@ public class ModelPropertiesInvestigator {
 			result.add(p.evaluate(root));
 		}
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.emf.properties.IEMFElementSelector#ignoreAttribute(org.eclipse.emf.ecore.EAttribute)
+	 */
+	@Override
+	public boolean ignoreAttribute(EAttribute ref) {
+		return ignoreGenerated && (ref.equals(ModelPackage.eINSTANCE.getGeneratedElement_GeneratedRule())
+				|| ref.equals(ModelPackage.eINSTANCE.getGeneratedElement_IsGenerated()));
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.emf.properties.IEMFElementSelector#ignoreClass(org.eclipse.emf.ecore.EClass)
+	 */
+	@Override
+	public boolean ignoreClass(EClass ref) {
+		return ignoreGenerated && ref.equals(ModelPackage.eINSTANCE.getGeneratedElement());
 	}
 	
 }

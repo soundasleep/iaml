@@ -39,6 +39,7 @@ import org.openiaml.emf.properties.library.ReferencesCycles;
 import org.openiaml.emf.properties.library.ReferencesDiameter;
 import org.openiaml.emf.properties.library.ReferencesRadius;
 import org.openiaml.emf.properties.library.ReferencesSum;
+import org.openiaml.emf.properties.library.RootContainmentsHeight;
 import org.openiaml.emf.properties.library.SupertypesCount;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -53,11 +54,14 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.visual.Page;
 
 /**
- * For an upcoming paper, we need to investigate the properties
- * of the test models.
+ * <p>For an upcoming paper, we need to investigate the properties
+ * of the test models.</p>
  * 
- * Given an input model, this will return a list of 
- * properties loaded from the model.
+ * <p>Given an input model, this will return a list of 
+ * properties loaded from the model.</p>
+ * 
+ * <p>With each property, it also returns the time taken to execute the
+ * property check.</p>
  * 
  * @author jmwright
  *
@@ -113,6 +117,7 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 			investigators.add(new CountTypes("nodes", this, ActivityNode.class));
 			investigators.add(new CountTypes("pages", this, Page.class));
 			investigators.add(new ReferencesCycles("cycles", this));
+			investigators.add(new RootContainmentsHeight("children-height", this));
 		}
 		return investigators;
 	}
@@ -139,6 +144,7 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 		List<String> result = new ArrayList<String>();
 		for (IPropertyInvestigator p : getInvestigators()) {
 			result.add(p.getName());
+			result.add(p.getName() + "-time");	// add time as well
 		}
 		return result;
 	}
@@ -166,7 +172,10 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 	public List<Object> investigate(EObject root) {
 		List<Object> result = new ArrayList<Object>();
 		for (IPropertyInvestigator p : getInvestigators()) {
+			long startTime = System.currentTimeMillis();
 			result.add(p.evaluate(root));
+			long endTime = System.currentTimeMillis();
+			result.add(endTime - startTime);	// add time as well
 		}
 		return result;
 	}

@@ -251,7 +251,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 						write(f, "mode", getModelPropertiesInvestigator(false).getModelProperties());
 					}
 					write(f, "initial", initialProperties);
-					write(f, "initial-no-gen", initialProperties);
+					write(f, "initial-no-gen", initialPropertiesNoGen);
 					write(f, "final", finalProperties);
 					write(f, "final-no-gen", finalPropertiesNoGen);
 					write(f, "time", diff);

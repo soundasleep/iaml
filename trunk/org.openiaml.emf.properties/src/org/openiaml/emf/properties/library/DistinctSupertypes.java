@@ -9,20 +9,21 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
  * @author jmwright
  *
  */
-public final class DistinctSupertypes extends IterateOverAll {
+public class DistinctSupertypes extends IterateOverAll {
 	private Set<EClass> types = new HashSet<EClass>();
 
 	/**
 	 * @param name
 	 */
-	private DistinctSupertypes(String name) {
-		super(name);
+	public DistinctSupertypes(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	@Override
@@ -40,6 +41,9 @@ public final class DistinctSupertypes extends IterateOverAll {
 		}
 		List<EClass> supertypes = obj.eClass().getEAllSuperTypes();
 		for (EClass type : supertypes) {
+			if (ignoreClass(type))
+				continue;	// ignore
+			
 			if (!types.contains(type)) {
 				types.add(type);
 			}

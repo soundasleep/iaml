@@ -7,18 +7,19 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
  * @author jmwright
  *
  */
-public final class ContainmentsSum extends IterateOverAll {
+public class ContainmentsSum extends IterateOverAll {
 	/**
 	 * @param name
 	 */
-	private ContainmentsSum(String name) {
-		super(name);
+	public ContainmentsSum(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	@Override
@@ -26,6 +27,9 @@ public final class ContainmentsSum extends IterateOverAll {
 		int result = 0;
 		List<EReference> refs = obj.eClass().getEAllContainments();
 		for (EReference ref : refs) {
+			if (ignoreReference(ref))
+				continue; // ignore
+
 			if (obj.eGet(ref) != null) {
 				if (obj.eGet(ref) instanceof List<?>)
 					result += ((List<?>) obj.eGet(ref)).size();

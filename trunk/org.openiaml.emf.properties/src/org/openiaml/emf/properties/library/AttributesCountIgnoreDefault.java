@@ -7,18 +7,19 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
  * @author jmwright
  *
  */
-public final class AttributesCountIgnoreDefault extends IterateOverAll {
+public class AttributesCountIgnoreDefault extends IterateOverAll {
 	/**
 	 * @param name
 	 */
-	private AttributesCountIgnoreDefault(String name) {
-		super(name);
+	public AttributesCountIgnoreDefault(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	@Override
@@ -26,6 +27,9 @@ public final class AttributesCountIgnoreDefault extends IterateOverAll {
 		int result = 0;
 		List<EAttribute> attributes = obj.eClass().getEAllAttributes();
 		for (EAttribute attr : attributes) {
+			if (ignoreAttribute(attr))
+				continue; // ignore
+			
 			if (obj.eGet(attr) != null) {
 				if (!obj.eGet(attr).equals( attr.getDefaultValue() )) { 
 					result++;

@@ -10,20 +10,21 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.openiaml.emf.DijkstraAlgorithm;
+import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
  * @author jmwright
  *
  */
-public final class Diameter extends IterateOverAll {
+public class Diameter extends IterateOverAll {
 	private int max = -1;
 
 	/**
 	 * @param name
 	 */
-	private Diameter(String name) {
-		super(name);
+	public Diameter(String name, IEMFElementSelector selector) {
+		super(name, selector);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public final class Diameter extends IterateOverAll {
 				Collection<EObject> nodes = toCollection(root.eAllContents());
 				// add self
 				nodes.add(root);
-				return nodes;
+				return removeIgnoredClasses(nodes);
 			}
 
 			@Override
@@ -53,6 +54,9 @@ public final class Diameter extends IterateOverAll {
 				// edges = all EReferences (including containments)
 				List<EObject> neighbours = new ArrayList<EObject>();
 				for (EReference ref : u.eClass().getEAllReferences()) {
+					if (ignoreReference(ref))
+						continue;	// ignore
+					
 					if (ref.isMany()) {
 						List<?> r = (List<?>) u.eGet(ref);
 						for (Object rr : r) {
@@ -83,4 +87,5 @@ public final class Diameter extends IterateOverAll {
 		
 		return 0;	// ignore return value
 	}
+
 }

@@ -43,6 +43,35 @@ public abstract class DijkstraAlgorithm<T> {
 	}
 	
 	/**
+	 * <p>A cache for all elements from a certain source.</p>
+	 * 
+	 * <p>Essentially every time the Djikstra algorithm executes, it normally
+	 * has to recreate the entire previous/distance array, even
+	 * though it only changes when we have a different source element.</p>
+	 * 
+	 * <p>By saving this into a cache, we can get a significant speedup.</p>
+	 * 
+	 * @author jmwright
+	 *
+	 */
+	private class DjikstraCache {
+		public DjikstraCache(T source) {
+			this.source = source;
+			
+			distance = new HashMap<T, Integer>();
+			
+			// previous is probably not necessary if we don't need to
+			// find the path taken
+			previous = new HashMap<T, T>();
+		}
+		public Map<T, Integer> distance;
+		public Map<T, T> previous;
+		public T source;
+	}
+	
+	private DjikstraCache cache = null;
+	
+	/**
 	 * Get the shortest path distance between source and target.
 	 * Returns -1 if no path can be found.
 	 * The last path found is stored in {@link #getLastPath()}.
@@ -50,54 +79,54 @@ public abstract class DijkstraAlgorithm<T> {
 	 * @param source
 	 * @param target
 	 */
-	public int dijkstra(T source, T target) {
-		Map<T, Integer> distance = new HashMap<T, Integer>();
-		// previous is probably not necessary if we don't need to
-		// find the path taken
-		Map<T, T> previous = new HashMap<T, T>();
-		
-		// initialise
-		for (T c : getInternalEdges()) {
-			distance.put(c, INFINITE);
-			previous.put(c, null);
-		}
-		
-		// distance from source to source = 0
-		distance.put(source, 0);
-		
-		// queue of all elements in the graph to look through
-		List<T> queue = new ArrayList<T>();
-		queue.addAll( getInternalEdges() );
-		
-		while (!queue.isEmpty()) {
-			// more elements to process
-			T u = smallestDistance(queue, distance);
-			queue.remove(u);
+	public int dijkstra(final T source, final T target) {
+		if (cache == null || !cache.source.equals(source)) {
+			// not the same cache; reset
+			cache = new DjikstraCache(source);
+	
+			// initialise
+			for (T c : getInternalEdges()) {
+				cache.distance.put(c, INFINITE);
+				cache.previous.put(c, null);
+			}
 			
-			// for each neighbour in u
-			for (T n : getInternalNeighbours(u)) {
-				// where the neighbour is still in the queue
-				if (queue.contains(n)) {
-					int alt = distance.get(u) + distanceBetween(u, n);	// fixed distance of 1
-					if (alt < distance.get(n)) {
-						distance.put(n, alt);
-						previous.put(n, u);
+			// distance from source to source = 0
+			cache.distance.put(source, 0);
+			
+			// queue of all elements in the graph to look through
+			final List<T> queue = new ArrayList<T>();
+			queue.addAll( getInternalEdges() );
+			
+			while (!queue.isEmpty()) {
+				// more elements to process
+				T u = smallestDistance(queue, cache.distance);
+				queue.remove(u);
+				
+				// for each neighbour in u
+				for (T n : getInternalNeighbours(u)) {
+					// where the neighbour is still in the queue
+					if (queue.contains(n)) {
+						int alt = cache.distance.get(u) + distanceBetween(u, n);	// fixed distance of 1
+						if (alt < cache.distance.get(n)) {
+							cache.distance.put(n, alt);
+							cache.previous.put(n, u);
+						}
 					}
 				}
-			}
- 		}
+	 		}
+		}
 		
 		// print out the path from source to target
-		lastPath = compilePath(source, target, previous); 
+		lastPath = compilePath(source, target, cache.previous); 
 		
-		if (distance.get(target) == null) {
+		if (cache.distance.get(target) == null) {
 			throw new NullPointerException("No target named '" + target + "' found.");
 		}
 		
-		if (distance.get(target) == INFINITE) {
+		if (cache.distance.get(target) == INFINITE) {
 			return -1;
 		}
-		return distance.get(target);
+		return cache.distance.get(target);
 	}
 	
 	protected String lastPath = null;
@@ -174,7 +203,7 @@ public abstract class DijkstraAlgorithm<T> {
 	 * @param distance
 	 * @return
 	 */
-	private T smallestDistance(List<T> queue,
+	protected T smallestDistance(List<T> queue,
 			Map<T, Integer> distance) {
 		T result = queue.get(0);	// first = default
 		for (T c : queue) {
@@ -193,5 +222,5 @@ public abstract class DijkstraAlgorithm<T> {
 	public String getLastPath() {
 		return lastPath;
 	}
-
+	
 }

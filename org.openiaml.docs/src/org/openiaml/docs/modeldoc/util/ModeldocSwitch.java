@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.docs.modeldoc.AdditionalDocumentation;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
@@ -120,6 +121,12 @@ public class ModeldocSwitch<T> {
 			case ModeldocPackage.EMF_CLASS: {
 				EMFClass emfClass = (EMFClass)theEObject;
 				T result = caseEMFClass(emfClass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.ADDITIONAL_DOCUMENTATION: {
+				AdditionalDocumentation additionalDocumentation = (AdditionalDocumentation)theEObject;
+				T result = caseAdditionalDocumentation(additionalDocumentation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -318,6 +325,21 @@ public class ModeldocSwitch<T> {
 	 * @generated
 	 */
 	public T caseEMFClass(EMFClass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Additional Documentation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Additional Documentation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAdditionalDocumentation(AdditionalDocumentation object) {
 		return null;
 	}
 

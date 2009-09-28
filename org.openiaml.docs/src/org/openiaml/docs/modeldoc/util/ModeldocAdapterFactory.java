@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.docs.modeldoc.AdditionalDocumentation;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
@@ -100,6 +101,10 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseEMFClass(EMFClass object) {
 				return createEMFClassAdapter();
+			}
+			@Override
+			public Adapter caseAdditionalDocumentation(AdditionalDocumentation object) {
+				return createAdditionalDocumentationAdapter();
 			}
 			@Override
 			public Adapter caseSemantic(Semantic object) {
@@ -238,6 +243,20 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEMFClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.AdditionalDocumentation <em>Additional Documentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.AdditionalDocumentation
+	 * @generated
+	 */
+	public Adapter createAdditionalDocumentationAdapter() {
 		return null;
 	}
 

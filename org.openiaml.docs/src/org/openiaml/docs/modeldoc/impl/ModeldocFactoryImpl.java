@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.openiaml.docs.modeldoc.AdditionalDocumentation;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.ConstraintType;
 import org.openiaml.docs.modeldoc.DroolsPackage;
@@ -83,6 +84,7 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 		switch (eClass.getClassifierID()) {
 			case ModeldocPackage.MODEL_DOCUMENTATION: return createModelDocumentation();
 			case ModeldocPackage.EMF_CLASS: return createEMFClass();
+			case ModeldocPackage.ADDITIONAL_DOCUMENTATION: return createAdditionalDocumentation();
 			case ModeldocPackage.EXAMPLE: return createExample();
 			case ModeldocPackage.OPERATIONAL_SEMANTIC: return createOperationalSemantic();
 			case ModeldocPackage.GRAPHICAL_REPRESENTATION: return createGraphicalRepresentation();
@@ -155,6 +157,16 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 	public EMFClass createEMFClass() {
 		EMFClassImpl emfClass = new EMFClassImpl();
 		return emfClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AdditionalDocumentation createAdditionalDocumentation() {
+		AdditionalDocumentationImpl additionalDocumentation = new AdditionalDocumentationImpl();
+		return additionalDocumentation;
 	}
 
 	/**

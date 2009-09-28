@@ -15,10 +15,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.docs.modeldoc.AdditionalDocumentation;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
@@ -47,7 +49,6 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getSubtypes <em>Subtypes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getRuntimeClass <em>Runtime Class</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getTagline <em>Tagline</em>}</li>
- *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getOperationalSemantics <em>Operational Semantics</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getInferenceSemantics <em>Inference Semantics</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getConstraints <em>Constraints</em>}</li>
@@ -57,6 +58,7 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getReferences <em>References</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAdditionalDocumentation <em>Additional Documentation</em>}</li>
  * </ul>
  * </p>
  *
@@ -172,24 +174,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	protected String tagline = TAGLINE_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String DESCRIPTION_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected String description = DESCRIPTION_EDEFAULT;
-	/**
 	 * The cached value of the '{@link #getOperationalSemantics() <em>Operational Semantics</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -261,6 +245,15 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * @ordered
 	 */
 	protected EList<EMFReference> references;
+	/**
+	 * The cached value of the '{@link #getAdditionalDocumentation() <em>Additional Documentation</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdditionalDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AdditionalDocumentation> additionalDocumentation;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -469,27 +462,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDescription(String newDescription) {
-		String oldDescription = description;
-		description = newDescription;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__DESCRIPTION, oldDescription, description));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<OperationalSemantic> getOperationalSemantics() {
 		if (operationalSemantics == null) {
 			operationalSemantics = new EObjectContainmentWithInverseEList<OperationalSemantic>(OperationalSemantic.class, this, ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS, ModeldocPackage.OPERATIONAL_SEMANTIC__CONTAINING_CLASS);
@@ -627,6 +599,18 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<AdditionalDocumentation> getAdditionalDocumentation() {
+		if (additionalDocumentation == null) {
+			additionalDocumentation = new EObjectContainmentEList<AdditionalDocumentation>(AdditionalDocumentation.class, this, ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION);
+		}
+		return additionalDocumentation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -689,6 +673,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__REFERENCES:
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
+				return ((InternalEList<?>)getAdditionalDocumentation()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -733,8 +719,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return basicGetRuntimeClass();
 			case ModeldocPackage.EMF_CLASS__TAGLINE:
 				return getTagline();
-			case ModeldocPackage.EMF_CLASS__DESCRIPTION:
-				return getDescription();
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				return getOperationalSemantics();
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
@@ -753,6 +737,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return getAttributes();
 			case ModeldocPackage.EMF_CLASS__REFERENCES:
 				return getReferences();
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
+				return getAdditionalDocumentation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -792,9 +778,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__TAGLINE:
 				setTagline((String)newValue);
 				return;
-			case ModeldocPackage.EMF_CLASS__DESCRIPTION:
-				setDescription((String)newValue);
-				return;
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				getOperationalSemantics().clear();
 				getOperationalSemantics().addAll((Collection<? extends OperationalSemantic>)newValue);
@@ -829,6 +812,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__REFERENCES:
 				getReferences().clear();
 				getReferences().addAll((Collection<? extends EMFReference>)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
+				getAdditionalDocumentation().clear();
+				getAdditionalDocumentation().addAll((Collection<? extends AdditionalDocumentation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -866,9 +853,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__TAGLINE:
 				setTagline(TAGLINE_EDEFAULT);
 				return;
-			case ModeldocPackage.EMF_CLASS__DESCRIPTION:
-				setDescription(DESCRIPTION_EDEFAULT);
-				return;
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				getOperationalSemantics().clear();
 				return;
@@ -895,6 +879,9 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return;
 			case ModeldocPackage.EMF_CLASS__REFERENCES:
 				getReferences().clear();
+				return;
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
+				getAdditionalDocumentation().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -924,8 +911,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return runtimeClass != null;
 			case ModeldocPackage.EMF_CLASS__TAGLINE:
 				return TAGLINE_EDEFAULT == null ? tagline != null : !TAGLINE_EDEFAULT.equals(tagline);
-			case ModeldocPackage.EMF_CLASS__DESCRIPTION:
-				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				return operationalSemantics != null && !operationalSemantics.isEmpty();
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
@@ -944,6 +929,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return attributes != null && !attributes.isEmpty();
 			case ModeldocPackage.EMF_CLASS__REFERENCES:
 				return references != null && !references.isEmpty();
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
+				return additionalDocumentation != null && !additionalDocumentation.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -966,8 +953,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 		result.append(interface_);
 		result.append(", tagline: ");
 		result.append(tagline);
-		result.append(", description: ");
-		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

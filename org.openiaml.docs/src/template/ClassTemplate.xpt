@@ -26,13 +26,15 @@
 		«ENDIF»
 		</h1>
 		
-		<p id="tagline">
+		<div id="tagline">
 		«tagline»
-		</p>
+		</div>
 		
-		<p id="description">
-		«description»
-		</p>
+		<div id="description">
+		«FOREACH additionalDocumentation AS description»
+			«description.descriptionHtml»
+		«ENDFOREACH»
+		</div>
 		
 		«IF !subtypes.isEmpty»
 		<p>
@@ -47,16 +49,16 @@
 		</div>
 		
 		«IF !examples.isEmpty»
-		<p id="examples">
+		<div id="examples" class="semantic_block">
 			<h2>Examples</h2>
 			
 			<ul>
 			«EXPAND example FOREACH examples»
 			</ul>
-		</p>
+		</div>
 		«ENDIF»
 		
-		<p id="operational">
+		<div id="operational" class="semantic_block">
 			<h2>Operational Semantics</h2>
 			
 			«IF operationalSemantics.union(getInheritedOperationalSemantics(this)).isEmpty»
@@ -67,9 +69,9 @@
 				«EXPAND operationalSemantics(false) FOREACH getInheritedOperationalSemantics(this).sortBy( c | c.containingClass.name )»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 		
-		<p id="inference">
+		<div id="inference" class="semantic_block">
 			<h2>Inference Semantics</h2>
 			
 			«IF inferenceSemantics.union(getInheritedInferenceSemantics(this)).isEmpty»
@@ -80,9 +82,9 @@
 				«EXPAND inferenceSemantics(false) FOREACH getInheritedInferenceSemantics(this).sortBy( c | c.containingClass.name )»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 		
-		<p id="constraints">
+		<div id="constraints" class="semantic_block">
 			<h2>Constraints</h2>
 			
 			«IF constraints.union(getInheritedConstraints(this)).isEmpty»
@@ -93,9 +95,9 @@
 				«EXPAND constraint(false) FOREACH getInheritedConstraints(this).sortBy(c|c.constraint)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 		
-		<p id="attributes_direct">
+		<div id="attributes_direct" class="semantic_block">
 			<h2>Direct Attributes</h2>
 			
 			«IF attributes.isEmpty»
@@ -105,9 +107,9 @@
 				«EXPAND attribute(true) FOREACH attributes.sortBy(a|a.name)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 
-		<p id="attributes_inherited">
+		<div id="attributes_inherited" class="semantic_block">
 			<h2>Inherited Attributes</h2>
 			
 			«IF getInheritedAttributes(this).isEmpty»
@@ -117,9 +119,9 @@
 				«EXPAND attribute(false) FOREACH getInheritedAttributes(this).sortBy(a|a.name)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 		
-		<p id="containments_direct">
+		<div id="containments_direct" class="semantic_block">
 			<h2>Direct Containments</h2>
 			
 			«IF references.select(r|r.containment).isEmpty»
@@ -129,9 +131,9 @@
 				«EXPAND reference(true) FOREACH references.select(r|r.containment).sortBy(a|a.name)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 
-		<p id="containments_inherited">
+		<div id="containments_inherited" class="semantic_block">
 			<h2>Inherited Containments</h2>
 			
 			«IF getInheritedReferences(this).select(r|r.containment).isEmpty»
@@ -141,9 +143,9 @@
 				«EXPAND reference(false) FOREACH getInheritedReferences(this).select(r|r.containment).sortBy(a|a.name)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 		
-		<p id="references_direct">
+		<div id="references_direct" class="semantic_block">
 			<h2>Direct References</h2>
 			
 			«IF references.select(r|!r.containment).isEmpty»
@@ -153,9 +155,9 @@
 				«EXPAND reference(true) FOREACH references.select(r|!r.containment).sortBy(a|a.name)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 
-		<p id="references_inherited">
+		<div id="references_inherited" class="semantic_block">
 			<h2>Inherited References</h2>
 			
 			«IF getInheritedReferences(this).select(r|!r.containment).isEmpty»
@@ -165,9 +167,9 @@
 				«EXPAND reference(false) FOREACH getInheritedReferences(this).select(r|!r.containment).sortBy(a|a.name)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 		
-		<p id="extensions_inherited">
+		<div id="extensions_inherited" class="semantic_block">
 			<h2>Direct Extensions</h2>
 			
 			«IF extensions.isEmpty»
@@ -177,9 +179,9 @@
 				«EXPAND extension(true) FOREACH extensions.sortBy(a|a.name)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 		
-		<p id="extensions_inherited">
+		<div id="extensions_inherited" class="semantic_block">
 			<h2>Inherited Extensions</h2>
 			
 			«IF getInheritedExtensions(this).reject(e|extensions.name.contains(e.name)).isEmpty»
@@ -189,7 +191,7 @@
 				«EXPAND extension(false) FOREACH getInheritedExtensions(this).reject(e|extensions.name.contains(e.name)).sortBy(a|a.name)»
 				</ul>
 			«ENDIF»
-		</p>
+		</div>
 		
 		«EXPAND Template::footer»
 	«ENDFILE»

@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getSubtypes <em>Subtypes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getRuntimeClass <em>Runtime Class</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getTagline <em>Tagline</em>}</li>
- *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getDescription <em>Description</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getOperationalSemantics <em>Operational Semantics</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getInferenceSemantics <em>Inference Semantics</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getConstraints <em>Constraints</em>}</li>
@@ -36,6 +35,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getParent <em>Parent</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getReferences <em>References</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAdditionalDocumentation <em>Additional Documentation</em>}</li>
  * </ul>
  * </p>
  *
@@ -237,32 +237,6 @@ public interface EMFClass extends EObject {
 	void setTagline(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
-	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Description()
-	 * @model
-	 * @generated
-	 */
-	String getDescription();
-
-	/**
-	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Operational Semantics</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.docs.modeldoc.OperationalSemantic}.
 	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.OperationalSemantic#getContainingClass <em>Containing Class</em>}'.
@@ -433,5 +407,21 @@ public interface EMFClass extends EObject {
 	 * @generated
 	 */
 	EList<EMFReference> getReferences();
+
+	/**
+	 * Returns the value of the '<em><b>Additional Documentation</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.AdditionalDocumentation}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Additional Documentation</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Additional Documentation</em>' containment reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_AdditionalDocumentation()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<AdditionalDocumentation> getAdditionalDocumentation();
 
 } // EMFClass

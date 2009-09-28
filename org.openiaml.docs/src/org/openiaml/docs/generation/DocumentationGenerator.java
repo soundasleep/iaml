@@ -38,6 +38,16 @@ public class DocumentationGenerator {
 			loader.load(factory, root);
 		}
 		
+		// load additional documentation
+		{
+			ILoader loader = new LoadEMFDescription(
+					"../org.openiaml.model/model/docs" /* doc base */, 
+					"org.openiaml.model" /* plugin */, 
+					"model.doc" /* package base */
+			);
+			loader.load(factory, root);
+		}
+		
 		// set up inheritance
 		{
 			ILoader loader = new LoadInheritance();

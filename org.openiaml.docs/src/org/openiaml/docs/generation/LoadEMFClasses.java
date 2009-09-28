@@ -72,7 +72,6 @@ public class LoadEMFClasses implements ILoader {
 				c.setName(cls.getName());
 				c.setAbstract(cls.isAbstract());
 				c.setInterface(cls.isInterface());
-				c.setDescription("TODO Description");
 
 				getTaglineForEMFClass(cls, c);		// add tagline
 				

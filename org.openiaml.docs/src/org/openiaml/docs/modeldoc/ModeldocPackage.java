@@ -180,22 +180,13 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_CLASS__TAGLINE = 7;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_CLASS__DESCRIPTION = 8;
-
-	/**
 	 * The feature id for the '<em><b>Operational Semantics</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__OPERATIONAL_SEMANTICS = 9;
+	int EMF_CLASS__OPERATIONAL_SEMANTICS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Inference Semantics</b></em>' containment reference list.
@@ -204,7 +195,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__INFERENCE_SEMANTICS = 10;
+	int EMF_CLASS__INFERENCE_SEMANTICS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -213,7 +204,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__CONSTRAINTS = 11;
+	int EMF_CLASS__CONSTRAINTS = 10;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -222,7 +213,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__EXTENSIONS = 12;
+	int EMF_CLASS__EXTENSIONS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Graphical Representations</b></em>' containment reference list.
@@ -231,7 +222,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__GRAPHICAL_REPRESENTATIONS = 13;
+	int EMF_CLASS__GRAPHICAL_REPRESENTATIONS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Examples</b></em>' containment reference list.
@@ -240,7 +231,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__EXAMPLES = 14;
+	int EMF_CLASS__EXAMPLES = 13;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -249,7 +240,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__PARENT = 15;
+	int EMF_CLASS__PARENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -258,7 +249,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__ATTRIBUTES = 16;
+	int EMF_CLASS__ATTRIBUTES = 15;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' containment reference list.
@@ -267,7 +258,16 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__REFERENCES = 17;
+	int EMF_CLASS__REFERENCES = 16;
+
+	/**
+	 * The feature id for the '<em><b>Additional Documentation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__ADDITIONAL_DOCUMENTATION = 17;
 
 	/**
 	 * The number of structural features of the '<em>EMF Class</em>' class.
@@ -280,6 +280,43 @@ public interface ModeldocPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.AdditionalDocumentationImpl <em>Additional Documentation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.AdditionalDocumentationImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getAdditionalDocumentation()
+	 * @generated
+	 */
+	int ADDITIONAL_DOCUMENTATION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDITIONAL_DOCUMENTATION__REFERENCE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description Html</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML = 1;
+
+	/**
+	 * The number of structural features of the '<em>Additional Documentation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDITIONAL_DOCUMENTATION_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.SemanticImpl <em>Semantic</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -287,7 +324,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getSemantic()
 	 * @generated
 	 */
-	int SEMANTIC = 2;
+	int SEMANTIC = 3;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -315,7 +352,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getExample()
 	 * @generated
 	 */
-	int EXAMPLE = 3;
+	int EXAMPLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -370,7 +407,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getOperationalSemantic()
 	 * @generated
 	 */
-	int OPERATIONAL_SEMANTIC = 4;
+	int OPERATIONAL_SEMANTIC = 5;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -425,7 +462,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getGraphicalRepresentation()
 	 * @generated
 	 */
-	int GRAPHICAL_REPRESENTATION = 5;
+	int GRAPHICAL_REPRESENTATION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -462,7 +499,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getInferenceSemantic()
 	 * @generated
 	 */
-	int INFERENCE_SEMANTIC = 6;
+	int INFERENCE_SEMANTIC = 7;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -517,7 +554,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getConstraint()
 	 * @generated
 	 */
-	int CONSTRAINT = 7;
+	int CONSTRAINT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -581,7 +618,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getModelExtension()
 	 * @generated
 	 */
-	int MODEL_EXTENSION = 8;
+	int MODEL_EXTENSION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -636,7 +673,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getReference()
 	 * @generated
 	 */
-	int REFERENCE = 9;
+	int REFERENCE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -664,7 +701,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaClass()
 	 * @generated
 	 */
-	int JAVA_CLASS = 11;
+	int JAVA_CLASS = 12;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavaMethodImpl <em>Java Method</em>}' class.
@@ -674,7 +711,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaMethod()
 	 * @generated
 	 */
-	int JAVA_METHOD = 12;
+	int JAVA_METHOD = 13;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.ModelReferenceImpl <em>Model Reference</em>}' class.
@@ -684,7 +721,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getModelReference()
 	 * @generated
 	 */
-	int MODEL_REFERENCE = 13;
+	int MODEL_REFERENCE = 14;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.DroolsRuleImpl <em>Drools Rule</em>}' class.
@@ -694,7 +731,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getDroolsRule()
 	 * @generated
 	 */
-	int DROOLS_RULE = 15;
+	int DROOLS_RULE = 16;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.DroolsPackageImpl <em>Drools Package</em>}' class.
@@ -704,7 +741,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getDroolsPackage()
 	 * @generated
 	 */
-	int DROOLS_PACKAGE = 14;
+	int DROOLS_PACKAGE = 15;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.FileReferenceImpl <em>File Reference</em>}' class.
@@ -714,7 +751,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getFileReference()
 	 * @generated
 	 */
-	int FILE_REFERENCE = 16;
+	int FILE_REFERENCE = 17;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.FileLineReferenceImpl <em>File Line Reference</em>}' class.
@@ -724,7 +761,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getFileLineReference()
 	 * @generated
 	 */
-	int FILE_LINE_REFERENCE = 17;
+	int FILE_LINE_REFERENCE = 18;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocFragmentImpl <em>Javadoc Fragment</em>}' class.
@@ -734,7 +771,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocFragment()
 	 * @generated
 	 */
-	int JAVADOC_FRAGMENT = 18;
+	int JAVADOC_FRAGMENT = 19;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTagElementImpl <em>Javadoc Tag Element</em>}' class.
@@ -744,7 +781,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTagElement()
 	 * @generated
 	 */
-	int JAVADOC_TAG_ELEMENT = 19;
+	int JAVADOC_TAG_ELEMENT = 20;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavadocTextElementImpl <em>Javadoc Text Element</em>}' class.
@@ -754,7 +791,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocTextElement()
 	 * @generated
 	 */
-	int JAVADOC_TEXT_ELEMENT = 20;
+	int JAVADOC_TEXT_ELEMENT = 21;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.JavaElementImpl <em>Java Element</em>}' class.
@@ -764,7 +801,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavaElement()
 	 * @generated
 	 */
-	int JAVA_ELEMENT = 10;
+	int JAVA_ELEMENT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1251,7 +1288,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocMethodReference()
 	 * @generated
 	 */
-	int JAVADOC_METHOD_REFERENCE = 21;
+	int JAVADOC_METHOD_REFERENCE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1288,7 +1325,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getJavadocClassReference()
 	 * @generated
 	 */
-	int JAVADOC_CLASS_REFERENCE = 22;
+	int JAVADOC_CLASS_REFERENCE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1325,7 +1362,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getEMFAttribute()
 	 * @generated
 	 */
-	int EMF_ATTRIBUTE = 23;
+	int EMF_ATTRIBUTE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1407,7 +1444,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getEMFReference()
 	 * @generated
 	 */
-	int EMF_REFERENCE = 24;
+	int EMF_REFERENCE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1480,7 +1517,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 25;
+	int CONSTRAINT_TYPE = 26;
 
 
 	/**
@@ -1614,17 +1651,6 @@ public interface ModeldocPackage extends EPackage {
 	EAttribute getEMFClass_Tagline();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFClass#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.openiaml.docs.modeldoc.EMFClass#getDescription()
-	 * @see #getEMFClass()
-	 * @generated
-	 */
-	EAttribute getEMFClass_Description();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getOperationalSemantics <em>Operational Semantics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1722,6 +1748,49 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEMFClass_References();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getAdditionalDocumentation <em>Additional Documentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Additional Documentation</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getAdditionalDocumentation()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EReference getEMFClass_AdditionalDocumentation();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.AdditionalDocumentation <em>Additional Documentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Additional Documentation</em>'.
+	 * @see org.openiaml.docs.modeldoc.AdditionalDocumentation
+	 * @generated
+	 */
+	EClass getAdditionalDocumentation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reference</em>'.
+	 * @see org.openiaml.docs.modeldoc.AdditionalDocumentation#getReference()
+	 * @see #getAdditionalDocumentation()
+	 * @generated
+	 */
+	EReference getAdditionalDocumentation_Reference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescriptionHtml <em>Description Html</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description Html</em>'.
+	 * @see org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescriptionHtml()
+	 * @see #getAdditionalDocumentation()
+	 * @generated
+	 */
+	EAttribute getAdditionalDocumentation_DescriptionHtml();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Semantic <em>Semantic</em>}'.
@@ -2768,14 +2837,6 @@ public interface ModeldocPackage extends EPackage {
 		EAttribute EMF_CLASS__TAGLINE = eINSTANCE.getEMFClass_Tagline();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMF_CLASS__DESCRIPTION = eINSTANCE.getEMFClass_Description();
-
-		/**
 		 * The meta object literal for the '<em><b>Operational Semantics</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2846,6 +2907,40 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMF_CLASS__REFERENCES = eINSTANCE.getEMFClass_References();
+
+		/**
+		 * The meta object literal for the '<em><b>Additional Documentation</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_CLASS__ADDITIONAL_DOCUMENTATION = eINSTANCE.getEMFClass_AdditionalDocumentation();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.AdditionalDocumentationImpl <em>Additional Documentation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.AdditionalDocumentationImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getAdditionalDocumentation()
+		 * @generated
+		 */
+		EClass ADDITIONAL_DOCUMENTATION = eINSTANCE.getAdditionalDocumentation();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADDITIONAL_DOCUMENTATION__REFERENCE = eINSTANCE.getAdditionalDocumentation_Reference();
+
+		/**
+		 * The meta object literal for the '<em><b>Description Html</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML = eINSTANCE.getAdditionalDocumentation_DescriptionHtml();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.SemanticImpl <em>Semantic</em>}' class.

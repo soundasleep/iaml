@@ -13,11 +13,16 @@ import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.RunInstanceWire;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Operation Call Node</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * A virtual {@link Operation} call; the outgoing {@link RunInstanceWire} will be executed.
+ * <!-- end-model-doc -->
  *
  *
  * @see org.openiaml.model.model.operations.OperationsPackage#getOperationCallNode()

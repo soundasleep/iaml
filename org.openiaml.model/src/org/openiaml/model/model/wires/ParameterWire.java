@@ -14,6 +14,10 @@ import org.openiaml.model.model.NamedElement;
  * A representation of the model object '<em><b>Parameter Wire</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Provides incoming values for {@link Parameter Parameters} of a {@link RunInstanceWire}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

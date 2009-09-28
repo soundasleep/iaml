@@ -1920,6 +1920,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
 		// http://openiaml.org/comment
 		createCommentAnnotations();
 	}
@@ -1931,63 +1933,63 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	protected void createCommentAnnotations() {
-		String source = "http://openiaml.org/comment";		
+		String source = "http://openiaml.org/comment";				
 		addAnnotation
 		  (wireEdgesSourceEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "temporarily contains wires until GMF bug is fixed "
-		   });		
+		   });			
 		addAnnotation
 		  (domainObjectEClass, 
 		   source, 
 		   new String[] {
 			 "changed", "0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute"
-		   });		
+		   });			
 		addAnnotation
 		  (domainAttributeEClass, 
 		   source, 
 		   new String[] {
 			 "changed", "0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute"
-		   });		
+		   });			
 		addAnnotation
 		  (getDomainAttribute_PrimaryKey(), 
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4"
-		   });		
+		   });				
 		addAnnotation
 		  (primitiveOperationEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "renamed from ChainedOperation -> PrimitiveOperation in 0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (compositeOperationEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "Scope supertype added in 0.2\r\n_shouldnt_properties removed in 0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (applicationElementEClass, 
 		   source, 
 		   new String[] {
 			 "editor", "org.openiaml.model.diagram.element",
 			 "comment", "Scope supertype added in 0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (getApplicationElementProperty_DefaultValue(), 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (visibleThingEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor",
 			 "editor", "org.openiaml.model.diagram.visual"
-		   });		
+		   });			
 		addAnnotation
 		  (getVisibleThing_Sessions(), 
 		   source, 
@@ -2008,7 +2010,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "comment", "we cannot have InternetApplications inside of other ElementContainers, thus we don\'t define it as an ApplicationElement",
 			 "comment2", "but why can we have it as an ActivityEdgeSource? I don\'t think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA",
 			 "editor", "org.openiaml.model.diagram"
-		   });		
+		   });			
 		addAnnotation
 		  (getInternetApplication_DomainStores(), 
 		   source, 
@@ -2026,10 +2028,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (domainStoreEClass, 
 		   source, 
 		   new String[] {
-			 "comment", "stores database objects",
 			 "editor", "org.openiaml.model.diagram.domain_store",
 			 "changed", "0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute"
-		   });		
+		   });			
 		addAnnotation
 		  (getDomainStore_Views(), 
 		   source, 
@@ -2055,13 +2056,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.3"
-		   });		
+		   });					
 		addAnnotation
 		  (shouldntContainWiresEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "classes that extend this SHOULDN\'T contain wires, but GMF\'s limitations require it (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=249717)"
-		   });		
+		   });			
 		addAnnotation
 		  (getGeneratedElement_GeneratedBy(), 
 		   source, 
@@ -2085,7 +2086,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (getDomainObjectInstance_Attributes(), 
 		   source, 
@@ -2127,13 +2128,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (compositeConditionEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.2\r\n_shouldnt_properties removed in 0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (containsConditionsEClass, 
 		   source, 
@@ -2145,7 +2146,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.3"
-		   });		
+		   });			
 		addAnnotation
 		  (getDomainAttributeInstance_Autosave(), 
 		   source, 
@@ -2156,8 +2157,155 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (queryParameterEClass, 
 		   source, 
 		   new String[] {
-			 "added", "0.4",
-			 "about", "represents a query parameter from the browser."
+			 "added", "0.4"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (namedElementEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "An element with a name."
+		   });		
+		addAnnotation
+		  (wireEdgeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents some higher-level relationship between two components."
+		   });			
+		addAnnotation
+		  (eventTriggerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents the source of events."
+		   });			
+		addAnnotation
+		  (domainObjectEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a type of {@link DomainObjectInstance}."
+		   });			
+		addAnnotation
+		  (domainAttributeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a single attribute contained by a {@link DomainObject}."
+		   });			
+		addAnnotation
+		  (operationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents some type of executable step, which may contain logic flows, data flows or other operations."
+		   });		
+		addAnnotation
+		  (parameterEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Incoming values to an {@link Operation operation} executed by a {@link RunInstanceWire} can be accessed via Parameters."
+		   });			
+		addAnnotation
+		  (primitiveOperationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Fundamental building blocks of application functionality. Their intent is based on their name."
+		   });			
+		addAnnotation
+		  (compositeOperationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Operations which are composed of logic flows, data flows, and other operations."
+		   });			
+		addAnnotation
+		  (applicationElementPropertyEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a single value, accessible and modifiable at runtime."
+		   });			
+		addAnnotation
+		  (staticValueEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a single value, which is accessible at runtime but can never change."
+		   });			
+		addAnnotation
+		  (visibleThingEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "An abstract type representing application elements which have some sort of visible representation."
+		   });					
+		addAnnotation
+		  (internetApplicationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "The top-level type of a model instance, representing all of the information required to define an Internet application."
+		   });					
+		addAnnotation
+		  (domainStoreEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Stores many instances of {@link DomainObject DomainObjects} in some storage device."
+		   });						
+		addAnnotation
+		  (dataFlowEdgeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents the flow of data from a {@link DataFlowEdgesSource data source} to a {@link DataFlowEdgeDestination data destination}."
+		   });		
+		addAnnotation
+		  (temporaryVariableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Temporary storage of values contained within an {@link Operation} which will be lost once the operation is completed."
+		   });		
+		addAnnotation
+		  (executionEdgeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents the execution flow within an {@link Operation}."
+		   });			
+		addAnnotation
+		  (generatedElementEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A GeneratedElement may have been created manually, or initialised through model completion {@link GeneratesElements by another element}."
+		   });						
+		addAnnotation
+		  (domainObjectInstanceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents an instance of a {@link DomainObject}."
+		   });									
+		addAnnotation
+		  (conditionEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A Condition allows for conditional execution of {@link WireEdge wires} when {@link ConditionWire connected}."
+		   });			
+		addAnnotation
+		  (compositeConditionEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A custom condition, composed in the same way as {@link CompositeOperation operations}."
+		   });				
+		addAnnotation
+		  (domainAttributeInstanceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents an instance of a {@link DomainAttribute}, which is likely contained within a {@link DomainObjectInstance}."
+		   });				
+		addAnnotation
+		  (queryParameterEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a query parameter from the browser\'s URI string."
 		   });
 	}
 

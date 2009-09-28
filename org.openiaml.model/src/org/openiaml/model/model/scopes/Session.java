@@ -25,6 +25,10 @@ import org.openiaml.model.model.WireEdgesSource;
  * A representation of the model object '<em><b>Session</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents a user session; contained data is normally not accessible by other users.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

@@ -12,6 +12,10 @@ package org.openiaml.model.model;
  * A representation of the model object '<em><b>Application Element Property</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents a single value, accessible and modifiable at runtime.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

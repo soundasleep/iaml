@@ -378,8 +378,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEMFClass_Tagline() {
-		return (EAttribute)emfClassEClass.getEStructuralFeatures().get(7);
+	public EReference getEMFClass_Tagline() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1313,7 +1313,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfClassEClass, EMF_CLASS__SUPERTYPES);
 		createEReference(emfClassEClass, EMF_CLASS__SUBTYPES);
 		createEReference(emfClassEClass, EMF_CLASS__RUNTIME_CLASS);
-		createEAttribute(emfClassEClass, EMF_CLASS__TAGLINE);
+		createEReference(emfClassEClass, EMF_CLASS__TAGLINE);
 		createEReference(emfClassEClass, EMF_CLASS__OPERATIONAL_SEMANTICS);
 		createEReference(emfClassEClass, EMF_CLASS__INFERENCE_SEMANTICS);
 		createEReference(emfClassEClass, EMF_CLASS__CONSTRAINTS);
@@ -1505,7 +1505,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFClass_Supertypes(), this.getEMFClass(), this.getEMFClass_Subtypes(), "supertypes", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Subtypes(), this.getEMFClass(), this.getEMFClass_Supertypes(), "subtypes", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_RuntimeClass(), this.getJavaClass(), null, "runtimeClass", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEMFClass_Tagline(), ecorePackage.getEString(), "tagline", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFClass_Tagline(), this.getJavadocTagElement(), null, "tagline", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_OperationalSemantics(), this.getOperationalSemantic(), this.getOperationalSemantic_ContainingClass(), "operationalSemantics", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_InferenceSemantics(), this.getInferenceSemantic(), this.getInferenceSemantic_ContainingClass(), "inferenceSemantics", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Constraints(), this.getConstraint(), this.getConstraint_ContainingClass(), "constraints", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

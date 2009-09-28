@@ -18,14 +18,10 @@
 <ul class="class_list">
 «FOREACH classes.sortBy(c|c.name) AS cls»
 	<li class="class «IF cls.abstract»abstract«ENDIF» «IF cls.abstract»interface«ENDIF»">
-	<a href="«fileName(cls)»" class="icon_image">
-	«EXPAND Template::getIcon FOR cls»
-	</a>
-	<a href="«fileName(cls)»">
-	«cls.name»
-	</a>
-	«IF cls.tagline != null && cls.tagline.length > 0»
-	<small>«cls.tagline»</small>
+	<a href="«fileName(cls)»" class="icon_image">«EXPAND Template::getIcon FOR cls»</a>
+	<a href="«fileName(cls)»">«cls.name»</a>
+	«IF cls.tagline != null»
+	<small>«EXPAND ClassTemplate::javadocElement FOR cls.tagline»</small>
 	«ENDIF»
 	</li>
 «ENDFOREACH»

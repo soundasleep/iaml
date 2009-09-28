@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Composite Condition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A custom condition, composed in the same way as {@link CompositeOperation operations}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

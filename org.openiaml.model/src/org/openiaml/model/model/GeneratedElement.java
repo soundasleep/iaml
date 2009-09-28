@@ -14,6 +14,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Generated Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A GeneratedElement may have been created manually, or initialised through model completion {@link GeneratesElements by another element}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

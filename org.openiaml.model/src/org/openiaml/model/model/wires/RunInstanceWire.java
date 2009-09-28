@@ -13,6 +13,10 @@ import org.openiaml.model.model.WireEdgeDestination;
  * A representation of the model object '<em><b>Run Instance Wire</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents the execution of an {@link Operation}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

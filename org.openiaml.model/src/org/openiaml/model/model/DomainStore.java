@@ -20,6 +20,10 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * A representation of the model object '<em><b>Domain Store</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Stores many instances of {@link DomainObject DomainObjects} in some storage device.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -33,7 +37,7 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getDomainStore()
- * @model annotation="http://openiaml.org/comment comment='stores database objects' editor='org.openiaml.model.diagram.domain_store' changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute'"
+ * @model annotation="http://openiaml.org/comment editor='org.openiaml.model.diagram.domain_store' changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute'"
  * @generated
  */
 public interface DomainStore extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, ContainsConditions, GeneratesElements {

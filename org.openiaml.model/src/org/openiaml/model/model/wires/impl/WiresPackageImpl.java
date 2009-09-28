@@ -697,6 +697,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		// Create annotations
 		// http://openiaml.org/comment
 		createCommentAnnotations();
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
 	}
 
 	/**
@@ -722,19 +724,19 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "comment3", "only composite wires have a name now",
 			 "editor", "org.openiaml.model.diagram.wire",
 			 "comment4", "a wire shouldn\'t have parameters; but the operations contained within need them rendered."
-		   });		
+		   });			
 		addAnnotation
 		  (runInstanceWireEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "RunWire: a composite wire that contains ExecutionWires/etc"
-		   });		
+		   });			
 		addAnnotation
 		  (getRunInstanceWire_Priority(), 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (getParameterWire_ParameterName(), 
 		   source, 
@@ -746,7 +748,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (showWireEClass, 
 		   source, 
@@ -765,44 +767,44 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (selectWireEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.2",
 			 "comment", "parameters can be provided by ParameterWires"
-		   });		
+		   });			
 		addAnnotation
 		  (conditionWireEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (newInstanceWireEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.3"
-		   });		
+		   });			
 		addAnnotation
 		  (extendsWireEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (requiresWireEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (constraintWireEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (constraintTypesEEnum, 
 		   source, 
@@ -814,6 +816,88 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.4"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";				
+		addAnnotation
+		  (syncWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "When a connected element changes, a SyncWire will update the other connected element."
+		   });			
+		addAnnotation
+		  (runInstanceWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents the execution of an {@link Operation}."
+		   });			
+		addAnnotation
+		  (parameterWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Provides incoming values for {@link Parameter Parameters} of a {@link RunInstanceWire}."
+		   });				
+		addAnnotation
+		  (setWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "When the source element changes, the target element will be updated (but not vice versa)."
+		   });					
+		addAnnotation
+		  (navigateWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Executing this wire will navigate the user to the target {@link Page}."
+		   });			
+		addAnnotation
+		  (selectWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Allows for the selection of particular {@link DomainObjectInstance instances} from a {@link DomainStore}."
+		   });			
+		addAnnotation
+		  (conditionWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "When connected to a {@link RunInstanceWire}, the connected {@link Condition Conditions} will be evaluated before any execution takes place."
+		   });			
+		addAnnotation
+		  (newInstanceWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Creates a new instance of a {@model DomainObjectInstance} or {@model DomainAttributeInstance} from its definition."
+		   });			
+		addAnnotation
+		  (extendsWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents the inheritance of all target elements by the source element."
+		   });			
+		addAnnotation
+		  (requiresWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents the requirements for a {@link LoginHandler}, such as {@link Role Roles} and {@link Permission Permissions}."
+		   });			
+		addAnnotation
+		  (constraintWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Allows for the definition of complex {@link RequiresWire requirements}."
+		   });				
+		addAnnotation
+		  (providesWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Indicates that the source {@link Role} provides the target {@link Permission}."
 		   });
 	}
 

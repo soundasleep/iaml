@@ -68,9 +68,16 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	/**
 	 * Load a model file and perform inference on it.
 	 */
-	protected InternetApplication loadAndInfer(String modelFile) throws Exception {
+	protected InternetApplication loadAndInfer(final String modelFile) throws Exception {
 		InternetApplication root = (InternetApplication) loadModelDirectly(modelFile);
-		return loadAndInfer(root, false);
+		return loadAndInfer(root, false, new IModelReloader() {
+
+			@Override
+			public EObject reload() throws InferenceException {
+				return loadModelDirectly(modelFile);
+			}
+			
+		});
 	}
 
 	/**
@@ -96,8 +103,16 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @return the loaded and inferred InternetApplication
 	 */
 	protected InternetApplication loadAndInfer(
-			String filename, boolean logRuleSource) throws Exception {
-		return loadAndInfer((InternetApplication) loadModelDirectly(filename), logRuleSource);
+			final String filename, boolean logRuleSource) throws Exception {
+		return loadAndInfer((InternetApplication) loadModelDirectly(filename), logRuleSource,
+				new IModelReloader() {
+
+					@Override
+					public EObject reload() throws InferenceException {
+						return loadModelDirectly(filename);
+					}
+			
+		});
 	}
 
 	/**
@@ -196,6 +211,23 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	}
 	
 	/**
+	 * If we are executing the model inference process multiple times, we need
+	 * to be able to reload it from the disk.
+	 * 
+	 * @author jmwright
+	 */
+	public interface IModelReloader {
+		
+		/**
+		 * Reload the model.
+		 * 
+		 * @return
+		 */
+		public EObject reload() throws InferenceException;
+		
+	}
+	
+	/**
 	 * <p>Create a new instance of the inference engine.</p>
 	 * 
 	 * <p>In this particular implementation, we extend the
@@ -205,7 +237,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * <b>TODO</b> remove from final implementation.
 	 * @return
 	 */
-	protected CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions) {
+	protected CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions, final IModelReloader reloader) {
 		final Class<?> caller = getClass();
 		
 		return new CreateMissingElementsWithDrools(handler, trackInsertions) {
@@ -231,18 +263,28 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				}
 				
 				// do inference once, to remove any initial creation time
-				super.create(EcoreUtil.copy(model), logRuleSource, monitor);
+				// (and also log to inference queue log)
+				try {
+					super.create(model, logRuleSource, monitor, new InferenceQueueLog());
+					// reload
+					model = reloader.reload();
+				} catch (NumberFormatException e1) {
+					throw new InferenceException(e1);
+				} catch (IOException e1) {
+					throw new InferenceException(e1);
+				}
 				
-				int MAX_TIMES = 5;
+				int MAX_TIMES = 10;
 				List<Long> timedList = new ArrayList<Long>();
 				// now execute it 5 times, to get the times
 				for (int iteration = 0; iteration < MAX_TIMES; iteration++) {
 					System.out.println("iteration " + (iteration + 1) + "...");
-					EObject copy = EcoreUtil.copy(model);
 					long startTime = System.currentTimeMillis();
-					super.create(copy, logRuleSource, monitor);
+					super.create(model, logRuleSource, monitor);
 					long diff = System.currentTimeMillis() - startTime;
 					timedList.add(diff);
+					// reload
+					model = reloader.reload();
 				}
 				long diff = timedList.get(0);
 				
@@ -388,13 +430,13 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @return
 	 * @throws Exception
 	 */
-	protected InternetApplication loadAndInfer(InternetApplication root, boolean logRuleSource) throws Exception {
+	protected InternetApplication loadAndInfer(InternetApplication root, boolean logRuleSource, IModelReloader reloader) throws Exception {
 		// we now try to do inference
 		Resource resource = root.eResource();
 		assertNotNull(resource);
 		
 		ICreateElements handler = createHandler(resource);
-		CreateMissingElementsWithDrools ce = getInferenceEngine(handler, false);
+		CreateMissingElementsWithDrools ce = getInferenceEngine(handler, false, reloader);
 		ce.create(root, logRuleSource, monitor);
 
 		// write out this inferred model for reference
@@ -416,7 +458,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @return
 	 * @throws Exception
 	 */
-	protected InternetApplication loadAndInfer(Class<?> loadClass, boolean logRuleSource) throws Exception {
+	protected InternetApplication loadAndInfer(final Class<?> loadClass, final boolean logRuleSource) throws Exception {
 		if (!inferCache.containsKey(loadClass)) {
 			// reload
 			InternetApplication root = loadDirectly(loadClass, logRuleSource);
@@ -426,7 +468,18 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			assertNotNull(resource);
 			
 			ICreateElements handler = createHandler(resource);
-			CreateMissingElementsWithDrools ce = getInferenceEngine(handler, false);
+			CreateMissingElementsWithDrools ce = getInferenceEngine(handler, false, new IModelReloader() {
+
+				@Override
+				public EObject reload() throws InferenceException {
+					try {
+						return loadDirectly(loadClass, logRuleSource);
+					} catch (Exception e) {
+						throw new InferenceException(e);
+					}
+				}
+				
+			});
 			ce.create(root, logRuleSource, monitor);
 	
 			// write out this inferred model for reference

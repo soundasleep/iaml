@@ -1,0 +1,44 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::Extensions»
+
+«DEFINE index FOR modeldoc::ModelDocumentation»
+	«FILE "output/index.html"»
+	
+«EXPAND Template::header("List of model types", "index")»
+
+<h1>Model Elements Index</h1>
+
+<p>
+	This is a comprehensive, automatically-generated reference documentation 
+	of all model element types in <a href="http://openiaml.org">the 
+	Internet Application Modelling Language</a> (IAML).
+</p>
+
+<ul class="class_list">
+«FOREACH classes.sortBy(c|c.name) AS cls»
+	<li class="class «IF cls.abstract»abstract«ENDIF» «IF cls.abstract»interface«ENDIF»">
+	<a href="«fileName(cls)»" class="icon_image">
+	«EXPAND Template::getIcon FOR cls»
+	</a>
+	<a href="«fileName(cls)»">
+	«cls.name»
+	</a>
+	«IF cls.tagline != null && cls.tagline.length > 0»
+	<small>«cls.tagline»</small>
+	«ENDIF»
+	</li>
+«ENDFOREACH»
+</ul>
+
+«EXPAND Template::footer»
+
+	«ENDFILE»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

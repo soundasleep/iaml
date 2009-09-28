@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,8 +30,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.jaxen.JaxenException;
-import org.openiaml.emf.properties.library.Increase;
 import org.openiaml.model.codegen.oaw.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
@@ -45,8 +46,6 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.ScopesPackage;
-import org.openiaml.model.tests.ModelPropertiesInvestigator.ModelPropertiesInvestigatorIncreasePercent;
-import org.openiaml.model.tests.ModelPropertiesInvestigator.ModelPropertiesInvestigatorIncreaseAbsolute;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -217,8 +216,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				// investigate initial model properties
 				List<Object> initialProperties = getModelPropertiesInvestigator(false).investigate(model);
 				List<Object> initialPropertiesNoGen = getModelPropertiesInvestigator(true).investigate(model);
-				List<Object> initialDiff = getModelPropertiesInvestigatorIncreaseAbsolute().investigate(model);
-				List<Object> initialDiffPct = getModelPropertiesInvestigatorIncreasePercent().investigate(model);
+				List<Object> initialDiff = getIncreaseAbsolute(initialPropertiesNoGen, initialProperties);
+				List<Object> initialDiffPct = getIncreasePercent(initialPropertiesNoGen, initialProperties);
 				
 				// how many elements are in the initial model?
 				int initial = 0;
@@ -229,16 +228,31 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 						initial++;
 					}
 				}
-					
-				long startTime = System.currentTimeMillis();
+				
+				// do inference once, to remove any initial creation time
+				super.create(EcoreUtil.copy(model), logRuleSource, monitor);
+				
+				int MAX_TIMES = 5;
+				List<Long> timedList = new ArrayList<Long>();
+				// now execute it 5 times, to get the times
+				for (int iteration = 0; iteration < MAX_TIMES; iteration++) {
+					System.out.println("iteration " + (iteration + 1) + "...");
+					EObject copy = EcoreUtil.copy(model);
+					long startTime = System.currentTimeMillis();
+					super.create(copy, logRuleSource, monitor);
+					long diff = System.currentTimeMillis() - startTime;
+					timedList.add(diff);
+				}
+				long diff = timedList.get(0);
+				
+				// this execution is to get the actual final result
 				super.create(model, logRuleSource, monitor);
-				long diff = System.currentTimeMillis() - startTime;
 
 				// investigate final model properties
 				List<Object> finalProperties = getModelPropertiesInvestigator(false).investigate(model);
 				List<Object> finalPropertiesNoGen = getModelPropertiesInvestigator(true).investigate(model);
-				List<Object> finalDiff = getModelPropertiesInvestigatorIncreaseAbsolute().investigate(model);
-				List<Object> finalDiffPct = getModelPropertiesInvestigatorIncreasePercent().investigate(model);
+				List<Object> finalDiff = getIncreaseAbsolute(finalPropertiesNoGen, finalProperties);
+				List<Object> finalDiffPct = getIncreasePercent(finalPropertiesNoGen, finalProperties);
 
 				// how many are in the final model?
 				int finalCount = 0;
@@ -265,13 +279,54 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 					write(f, "final-no-gen", finalPropertiesNoGen);
 					write(f, "final-diff", finalDiff);
 					write(f, "final-diff-%", finalDiffPct);
-					write(f, "time", diff);
+					write(f, "time", timedList);
 					System.out.println(initial + " -> " + finalCount + "(" + diff + " ms)");
 					
 				} catch (IOException e) {
 					throw new InferenceException(e);
 				}
 				
+			}
+
+			/**
+			 * Return the absolute increase between the given list of long values.
+			 * 
+			 * @param source
+			 * @param target
+			 * @return
+			 */
+			protected List<Object> getIncreaseAbsolute(
+					List<Object> source,
+					List<Object> target) {
+				List<Object> result = new ArrayList<Object>();
+				for (int i = 0; i < source.size(); i++) {
+					result.add(
+						((Number) target.get(i)).longValue() -
+						((Number) source.get(i)).longValue()
+					);
+				}
+				return result;
+			}
+			
+			/**
+			 * Return the relative increase in % between the given list of long values.
+			 * 
+			 * @param source
+			 * @param target
+			 * @return
+			 */
+			protected List<Object> getIncreasePercent(
+					List<Object> source,
+					List<Object> target) {
+				List<Object> result = new ArrayList<Object>();
+				for (int i = 0; i < source.size(); i++) {
+					result.add(
+						(((Number) target.get(i)).doubleValue() -
+						((Number) source.get(i)).doubleValue())
+						/ ((Number) source.get(i)).doubleValue()
+					);
+				}
+				return result;
 			}
 
 			/**
@@ -322,28 +377,6 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 */
 	public ModelPropertiesInvestigator getModelPropertiesInvestigator(boolean ignoreGenerated) {
 		return new ModelPropertiesInvestigator(ignoreGenerated);
-	}
-	
-	/**
-	 * Wraps {@link #getModelPropertiesInvestigator(boolean)} with the
-	 * {@link Increase} operator, so we can investigate the difference
-	 * between ignoreGenerated=false and ignoreGenerated=true.
-	 * 
-	 * @return
-	 */
-	public ModelPropertiesInvestigator getModelPropertiesInvestigatorIncreasePercent() {
-		return new ModelPropertiesInvestigatorIncreasePercent(getModelPropertiesInvestigator(true), getModelPropertiesInvestigator(false));
-	}
-
-	/**
-	 * Wraps {@link #getModelPropertiesInvestigator(boolean)} with the
-	 * {@link Increase} operator, so we can investigate the difference
-	 * between ignoreGenerated=false and ignoreGenerated=true.
-	 * 
-	 * @return
-	 */
-	public ModelPropertiesInvestigator getModelPropertiesInvestigatorIncreaseAbsolute() {
-		return new ModelPropertiesInvestigatorIncreaseAbsolute(getModelPropertiesInvestigator(true), getModelPropertiesInvestigator(false));
 	}
 
 	/**

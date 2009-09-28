@@ -233,9 +233,9 @@ public abstract class DroolsInferenceEngine {
         
 		// logging
 		try {
-			// InferenceQueueLog log = new InferenceQueueLog();
 			// turn off
-			InferenceQueueLog log = new InferenceQueueLogSilent();
+			// InferenceQueueLog log = new InferenceQueueLogSilent();
+			InferenceQueueLog log = new InferenceQueueLog();
 	
 		    // subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
 			// we can actually use a real monitor, now that we have a limit

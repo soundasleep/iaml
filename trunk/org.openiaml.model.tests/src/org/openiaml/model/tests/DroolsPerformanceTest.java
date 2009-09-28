@@ -54,7 +54,7 @@ public class DroolsPerformanceTest extends ModelInferenceTestCase {
 				text.setName("test field " + j);
 				
 			}
-			loadAndInfer(root, false);
+			loadAndInfer(root, false, null);
 			}
 		}
 		

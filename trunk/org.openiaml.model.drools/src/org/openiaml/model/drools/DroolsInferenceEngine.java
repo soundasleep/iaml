@@ -107,9 +107,9 @@ public abstract class DroolsInferenceEngine {
 	public DroolsInsertionQueue getDroolsInsertionQueue() {
 		return queue;
 	}
-
+	
 	/**
-	 * Do the inference using Drools.
+	 * Do the inference using Drools. Will not write to any inference log.
 	 * 
 	 * @param model
 	 * @param logRuleSource if true, the source rule of inserted elements will be added
@@ -117,6 +117,26 @@ public abstract class DroolsInferenceEngine {
 	 * @throws Exception 
 	 */
 	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor) throws InferenceException {
+		try {
+			create(model, logRuleSource, monitor, new InferenceQueueLogSilent());
+		} catch (NumberFormatException e) {
+			throw new InferenceException(e);
+		} catch (IOException e) {
+			throw new InferenceException(e);
+		}
+	}
+
+	/**
+	 * Do the inference using Drools, logging the inference process to the
+	 * given InferenceQueueLog.
+	 * 
+	 * @param log a log to write inference results to
+	 * @param model
+	 * @param logRuleSource if true, the source rule of inserted elements will be added
+	 * @param monitor a progress monitor
+	 * @throws Exception 
+	 */
+	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor, InferenceQueueLog log) throws InferenceException {
 
 		monitor.beginTask("Inferring model using Drools", 100);
 		monitor.subTask("Loading rulebase");
@@ -232,56 +252,49 @@ public abstract class DroolsInferenceEngine {
 	        });
         }
         
-		// logging
-		try {
-			// turn off
-			// InferenceQueueLog log = new InferenceQueueLogSilent();
-			InferenceQueueLog log = new InferenceQueueLog();
-	
-		    // subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
-			// we can actually use a real monitor, now that we have a limit
-			subProgressMonitor = new SubProgressMonitor(monitor, INSERTION_ITERATION_LIMIT);
-	        for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
-	        	// check for monitor cancel
-	        	if (monitor.isCanceled()) {
-	        		return;
-	        	}
-	        	
-	        	// actually do the work
-		        workingMemory.fireAllRules();
-		        
-		        // once the rules have been completed,
-		        // insert in the new elements
-		        // but first reset the queue
-		        DroolsInsertionQueue oldQueue = queue;
-		        queue = new DroolsInsertionQueue(trackInsertions);
-		        if (trackInsertions) {
-		        	queue.addPreviousInsertions(oldQueue);
-		        }
-				workingMemory.setGlobal("queue", queue );
-				
-				// apply the new objects
-				oldQueue.apply(workingMemory, k, log);
+	    // subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
+		// we can actually use a real monitor, now that we have a limit
+		subProgressMonitor = new SubProgressMonitor(monitor, INSERTION_ITERATION_LIMIT);
+        for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
+        	// check for monitor cancel
+        	if (monitor.isCanceled()) {
+        		return;
+        	}
+        	
+        	// actually do the work
+	        workingMemory.fireAllRules();
+	        
+	        // once the rules have been completed,
+	        // insert in the new elements
+	        // but first reset the queue
+	        DroolsInsertionQueue oldQueue = queue;
+	        queue = new DroolsInsertionQueue(trackInsertions);
+	        if (trackInsertions) {
+	        	queue.addPreviousInsertions(oldQueue);
+	        }
+			workingMemory.setGlobal("queue", queue );
+			
+			// apply the new objects
+			oldQueue.apply(workingMemory, k, log);
 
-				// increment the log
-				log.increment("step " + k, oldQueue.size());
-				queueElementsAdded.put(k, oldQueue.size());
-	        }
-	        
-	        // are there any elements left in the queue?
-	        // if so, this might be an infinite loop
-	        if (!queue.isEmpty()) {
-	        	throw new InferenceException("Expected an empty queue at the end of k iterations, but had: " + queue);
-	        }
-	        
-	        // finish the log
-	        log.save();
+			// increment the log
+			log.increment("step " + k, oldQueue.size());
+			queueElementsAdded.put(k, oldQueue.size());
+        }
+        
+        // are there any elements left in the queue?
+        // if so, this might be an infinite loop
+        if (!queue.isEmpty()) {
+        	throw new InferenceException("Expected an empty queue at the end of k iterations, but had: " + queue);
+        }
+        
+        // finish the log
+        try {
+			log.save();
 		} catch (IOException e) {
 			throw new InferenceException(e);
-		} catch (NumberFormatException e) {
-			throw new InferenceException(e);
 		}
-		
+
 		// force the dispose of the working memory;
 		// all of our rules have been fired, all of the working
 		// memory has been saved to an EObject, so we should be

@@ -19,5 +19,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.core;bundle-version="3.5.0",
  org.openiaml.model.drools;bundle-version="0.3.1",
  org.openarchitectureware.workflow;bundle-version="4.3.1",
- org.openarchitectureware.core.workflow;bundle-version="4.3.1"
+ org.openarchitectureware.core.workflow;bundle-version="4.3.1",
+ org.openarchitectureware.core.xpand2;bundle-version="4.3.1",
+ org.openiaml.iacleaner;bundle-version="0.2.0"
 Bundle-ActivationPolicy: lazy

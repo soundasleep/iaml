@@ -8,8 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -17,6 +19,7 @@ import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.tests.XmlTestCase;
@@ -66,6 +69,16 @@ public class DroolsQueueTest extends XmlTestCase {
 		public InputStream loadResourceAsStream(String filename) {
 			return DroolsQueueEngine.class.getResourceAsStream( filename );
 		}
+
+		@Override
+		public void create(EObject model, boolean logRuleSource,
+				IProgressMonitor monitor) throws InferenceException {
+			// use the correct cache
+			setRuleBaseCache(new RuleBaseCache(this));
+			super.create(model, logRuleSource, monitor);
+			// future references should not use our cached values either
+			resetRuleBaseCache();
+		}
 		
 	}
 	
@@ -102,7 +115,7 @@ public class DroolsQueueTest extends XmlTestCase {
 		assertEquals(root.getName(), "created successfully");
 		
 	}
-	
+
 	/**
 	 * Test to make sure elements are being created at the appropriate
 	 * iterations.

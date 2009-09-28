@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.openiaml.model.tests.SoftCache;
+import org.openiaml.emf.SoftCache;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;

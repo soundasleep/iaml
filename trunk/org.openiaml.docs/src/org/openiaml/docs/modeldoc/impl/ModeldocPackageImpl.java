@@ -495,8 +495,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAdditionalDocumentation_DescriptionHtml() {
-		return (EAttribute)additionalDocumentationEClass.getEStructuralFeatures().get(1);
+	public EReference getAdditionalDocumentation_Description() {
+		return (EReference)additionalDocumentationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1327,7 +1327,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 
 		additionalDocumentationEClass = createEClass(ADDITIONAL_DOCUMENTATION);
 		createEReference(additionalDocumentationEClass, ADDITIONAL_DOCUMENTATION__REFERENCE);
-		createEAttribute(additionalDocumentationEClass, ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML);
+		createEReference(additionalDocumentationEClass, ADDITIONAL_DOCUMENTATION__DESCRIPTION);
 
 		semanticEClass = createEClass(SEMANTIC);
 		createEReference(semanticEClass, SEMANTIC__REFERENCE);
@@ -1519,7 +1519,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 
 		initEClass(additionalDocumentationEClass, AdditionalDocumentation.class, "AdditionalDocumentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAdditionalDocumentation_Reference(), this.getReference(), null, "reference", null, 0, 1, AdditionalDocumentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAdditionalDocumentation_DescriptionHtml(), ecorePackage.getEString(), "descriptionHtml", null, 0, 1, AdditionalDocumentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAdditionalDocumentation_Description(), this.getJavadocTagElement(), null, "description", null, 0, 1, AdditionalDocumentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(semanticEClass, Semantic.class, "Semantic", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSemantic_Reference(), this.getReference(), null, "reference", null, 0, 1, Semantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

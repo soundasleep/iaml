@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.FileReference;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 
@@ -64,9 +65,19 @@ public class LoadEMFDescription extends DocumentationHelper implements ILoader {
 				// it exists; load it in as additional documentation
 				try {
 					char[] html = readFile(f);
+
+					// parse into a JavadocTagElement
+					JavadocTagElement e = factory.createJavadocTagElement();
+					
+					// parse the line into javadoc elements
+					// (the line needs to be parsed into fragments before we can find semantic references)
+					new BasicJavadocParser().parseSemanticLineIntoFragments(String.valueOf(html), factory, e);
 					
 					AdditionalDocumentation doc = factory.createAdditionalDocumentation();
-					doc.setDescriptionHtml( String.valueOf(html) );
+					doc.setDescription( e );
+					
+					// add javadoc element to root
+					root.getReferences().add( e );
 					
 					FileReference ref = factory.createFileReference();
 					ref.setName(cls.getName() + ".html");

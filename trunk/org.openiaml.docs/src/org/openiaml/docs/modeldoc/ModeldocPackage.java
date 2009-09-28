@@ -299,13 +299,13 @@ public interface ModeldocPackage extends EPackage {
 	int ADDITIONAL_DOCUMENTATION__REFERENCE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Description Html</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML = 1;
+	int ADDITIONAL_DOCUMENTATION__DESCRIPTION = 1;
 
 	/**
 	 * The number of structural features of the '<em>Additional Documentation</em>' class.
@@ -1782,15 +1782,15 @@ public interface ModeldocPackage extends EPackage {
 	EReference getAdditionalDocumentation_Reference();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescriptionHtml <em>Description Html</em>}'.
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description Html</em>'.
-	 * @see org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescriptionHtml()
+	 * @return the meta object for the reference '<em>Description</em>'.
+	 * @see org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescription()
 	 * @see #getAdditionalDocumentation()
 	 * @generated
 	 */
-	EAttribute getAdditionalDocumentation_DescriptionHtml();
+	EReference getAdditionalDocumentation_Description();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Semantic <em>Semantic</em>}'.
@@ -2935,12 +2935,12 @@ public interface ModeldocPackage extends EPackage {
 		EReference ADDITIONAL_DOCUMENTATION__REFERENCE = eINSTANCE.getAdditionalDocumentation_Reference();
 
 		/**
-		 * The meta object literal for the '<em><b>Description Html</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Description</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML = eINSTANCE.getAdditionalDocumentation_DescriptionHtml();
+		EReference ADDITIONAL_DOCUMENTATION__DESCRIPTION = eINSTANCE.getAdditionalDocumentation_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.SemanticImpl <em>Semantic</em>}' class.

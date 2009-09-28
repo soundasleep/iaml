@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getReference <em>Reference</em>}</li>
- *   <li>{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescriptionHtml <em>Description Html</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,29 +53,29 @@ public interface AdditionalDocumentation extends EObject {
 	void setReference(Reference value);
 
 	/**
-	 * Returns the value of the '<em><b>Description Html</b></em>' attribute.
+	 * Returns the value of the '<em><b>Description</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Description Html</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Description</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description Html</em>' attribute.
-	 * @see #setDescriptionHtml(String)
-	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getAdditionalDocumentation_DescriptionHtml()
+	 * @return the value of the '<em>Description</em>' reference.
+	 * @see #setDescription(JavadocTagElement)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getAdditionalDocumentation_Description()
 	 * @model
 	 * @generated
 	 */
-	String getDescriptionHtml();
+	JavadocTagElement getDescription();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescriptionHtml <em>Description Html</em>}' attribute.
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.AdditionalDocumentation#getDescription <em>Description</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description Html</em>' attribute.
-	 * @see #getDescriptionHtml()
+	 * @param value the new value of the '<em>Description</em>' reference.
+	 * @see #getDescription()
 	 * @generated
 	 */
-	void setDescriptionHtml(String value);
+	void setDescription(JavadocTagElement value);
 
 } // AdditionalDocumentation

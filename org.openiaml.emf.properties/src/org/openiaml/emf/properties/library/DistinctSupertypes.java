@@ -13,6 +13,8 @@ import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IterateOverAll;
 
 /**
+ * Distinct types and supertypes.
+ * 
  * @author jmwright
  *
  */

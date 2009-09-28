@@ -1,0 +1,92 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::Extensions»
+
+«DEFINE getCss FOR modeldoc::ModelDocumentation»
+«FILE "output/default.css"»
+
+html,input {
+	font-family: Times New Roman, Times, serif;
+	font-size: .9em;
+}
+html {
+	margin: 5px;
+	padding: 0;
+}
+form { margin: 0; padding: 0; }
+h1 { margin-top: .3em; margin-bottom: .3em; }
+a img { border: 0; }
+
+ul,ol,p {
+	line-height: 1.4em;
+}
+
+form {
+	border: 1px solid #ccc;
+	padding: 5px;
+	width: 50%;
+	background: #eee;
+}
+
+h2 { margin-top: .7em; margin-bottom: .3em; }
+.semantic_block + .semantic_block { border-top: 1px solid #ccc; }
+.none { margin-bottom: 1em; }
+
+table { border: 1px solid #aab; border-collapse: collapse; }
+table th { background: #ccd; }
+table th, table td { padding: 4px; border: 1px solid #aab; }
+table tr:nth-child(odd) { background: #eef; }
+
+span.class_link { white-space: nowrap; }
+
+body#index ul, body#index ol, body#index p {
+	line-height: 1.6em;
+}
+body#index ul, body#index ol {
+	list-style: none;
+	padding: 0;
+}
+body#index li.class small:before { content: " - "; }
+.abstract { font-style: italic; }
+.interface { font-style: italic; }
+
+body#summary h1 img { vertical-align: .05em; }
+body#summary #tagline { font-style: italic; }
+
+body#summary #tagline { margin: 0; padding: 0; }
+body#summary #description {
+	border: 1px solid #99c;
+	background: #eef;
+	padding: 5px;
+	margin-top: 5px;
+}
+body#summary #description p { margin: 0; }
+body#summary #description p + p { margin-top: 1em; }
+
+.navigation { margin: 5px; margin-top: 15px; }
+.navigation a {
+	border-top: 1px solid #aaa;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	background: #f6f6f6;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+body#summary div.intro { border: 1px solid #999; background: #eee; padding: 10px; }
+body#summary div.intro h1 { margin-top: 0; }
+body#summary div.intro #description { margin-bottom: 0; }
+
+body#summary div.intro h1 small { font-size: 0.6em; }
+body#summary div.intro h1 small a { color: #669; text-decoration: none; }
+body#summary div.intro h1 small a:hover { text-decoration: underline; }
+
+body#summary .subtype_list { padding-left: 2em; margin-top: .5em; line-height: 1.4em; }
+
+.constraint .warning { background: url("../icons/warning_obj.gif") top left no-repeat; padding-left: 18px; }
+.constraint .error { background: url("../icons/error_tsk.gif") top left no-repeat; padding-left: 18px; }
+
+a:hover { text-decoration: none; }
+«ENDFILE»
+«ENDDEFINE»

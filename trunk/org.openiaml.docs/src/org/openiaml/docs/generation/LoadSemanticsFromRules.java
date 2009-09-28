@@ -9,7 +9,7 @@ import java.nio.CharBuffer;
 import java.util.List;
 
 import org.openiaml.docs.generation.semantics.HandleInlineJavadoc;
-import org.openiaml.docs.generation.semantics.HandleSemantics;
+import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.generation.semantics.SemanticFinder;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
@@ -17,7 +17,6 @@ import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 import org.openiaml.docs.modeldoc.Reference;
-import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 
 /**
@@ -26,13 +25,32 @@ import org.openiaml.model.drools.DroolsInferenceEngine;
  */
 public class LoadSemanticsFromRules extends DocumentationHelper implements ILoader {
 	
-	private List<HandleSemantics> semanticTagHandlers;
+	private DroolsInferenceEngine engine;
 	
-	public LoadSemanticsFromRules(List<HandleSemantics> semanticTagHandlers) {
+	private String plugin;
+	
+	private String ruleBase;
+	
+	private List<ITagHandler> semanticTagHandlers;
+	
+	/**
+	 * @param engine
+	 * @param plugin
+	 * @param ruleBase
+	 * @param semanticTagHandlers
+	 */
+	public LoadSemanticsFromRules(DroolsInferenceEngine engine, String plugin,
+			String ruleBase, List<ITagHandler> semanticTagHandlers) {
+		super();
+		this.engine = engine;
+		this.plugin = plugin;
+		this.ruleBase = ruleBase;
 		this.semanticTagHandlers = semanticTagHandlers;
 	}
-	
-	public List<HandleSemantics> getSemanticTagHandlers() {
+
+
+
+	public List<ITagHandler> getSemanticTagHandlers() {
 		return semanticTagHandlers;
 	}
 	
@@ -42,10 +60,7 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 	 * @throws IOException 
 	 */
 	public void load(ModeldocFactory factory, ModelDocumentation root) throws DocumentationGenerationException {
-	
-		// get the default inference engine
-		DroolsInferenceEngine engine = new CreateMissingElementsWithDrools(null, false);
-		
+
 		// for each rule file
 		for (String file : engine.getRuleFiles()) {
 			// load the inference rules
@@ -54,10 +69,10 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 				
 				loadInferenceSemantics(factory, 
 						root,
-						"org.openiaml.model.drools" /* plugin */,
+						plugin /* plugin */,
 						bits[0] /* package */,
 						bits[1] /* name */,
-						new File("../org.openiaml.model.drools/" + file ) );
+						new File(ruleBase + file ) );
 				
 			} catch (IOException e) {
 				throw new DocumentationGenerationException(e);
@@ -129,7 +144,7 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 	 */
 	protected void handleModelReferences(JavadocTagElement e, Reference reference, ModelDocumentation root) {
 		SemanticFinder finder = new SemanticFinder();
-		for (HandleSemantics sem : getSemanticTagHandlers()) {
+		for (ITagHandler sem : getSemanticTagHandlers()) {
 			finder.findSemanticReferences(LoadSemanticsFromRules.this, root, e, reference, sem);
 		}
 	}

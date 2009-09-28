@@ -19,7 +19,7 @@ import org.openiaml.docs.modeldoc.Reference;
  * 
  * @author jmwright
  */
-public class HandleExampleTag implements HandleSemantics {
+public class HandleExampleTag implements ITagHandler {
 	
 	private ModeldocFactory factory;
 	private ModelDocumentation root;

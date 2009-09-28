@@ -20,11 +20,33 @@ import org.openiaml.docs.modeldoc.ModeldocFactory;
  *
  */
 public class LoadEMFClasses implements ILoader {
-
+	
+	/**
+	 * The root EMF package to load from.
+	 */
 	private EPackage rootPackage;
 	
-	public LoadEMFClasses(EPackage rootPackage) {
+	/**
+	 * The plugin the generated package is stored in, e.g. "org.openiaml.model".
+	 */
+	private String plugin;
+	
+	/**
+	 * The base of the plugin, e.g. "org.openiaml.model.".
+	 */
+	private String packageBase;
+		
+	/**
+	 * @param rootPackage
+	 * @param plugin
+	 * @param packageBase
+	 */
+	public LoadEMFClasses(EPackage rootPackage, String plugin,
+			String packageBase) {
+		super();
 		this.rootPackage = rootPackage;
+		this.plugin = plugin;
+		this.packageBase = packageBase;
 	}
 
 	/* (non-Javadoc)
@@ -122,8 +144,8 @@ public class LoadEMFClasses implements ILoader {
 			ModeldocFactory factory, ModelDocumentation root) {
 		
 		JavaClass jc = factory.createJavaClass();
-		jc.setPlugin("org.openiaml.model");				
-		jc.setPackage("org.openiaml.model." + getJavaPackageFor(cls.getEPackage()));
+		jc.setPlugin(plugin);				
+		jc.setPackage(packageBase + getJavaPackageFor(cls.getEPackage()));
 		jc.setName(cls.getName());
 		jc.setParent(root);
 		

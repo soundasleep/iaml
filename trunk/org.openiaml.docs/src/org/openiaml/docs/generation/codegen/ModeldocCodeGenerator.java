@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.docs.tests;
+package org.openiaml.docs.generation.codegen;
 
 import java.io.File;
 import java.util.HashMap;
@@ -20,9 +20,9 @@ import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
  * @author jmwright
  *
  */
-public class OawCodeGenerator {
+public class ModeldocCodeGenerator {
 	
-	public static final String PLUGIN_ID = "org.openiaml.model.codegen.oaw"; 
+	public static final String PLUGIN_ID = "org.openiaml.docs"; 
 	
 	/**
 	 * Generate code for a given model file into a given output directory.
@@ -40,6 +40,10 @@ public class OawCodeGenerator {
 		 * commons.logging directly.
 		 * 
 		 * Based on http://oaw-forum.itemis.de/forum/viewtopic.php?forum=1&showtopic=1486 (german)
+		 */
+		/*
+		 * This is disabled because log4j can not support more than one
+		 * ClassLoader at the same time, so it conflicts with the IAML classlaoder.
 		 */
 		//ClassLoader oldcl = Thread.currentThread().getContextClassLoader();
 		

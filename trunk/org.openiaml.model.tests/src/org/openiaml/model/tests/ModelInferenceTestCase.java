@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.jaxen.JaxenException;
+import org.openiaml.emf.properties.library.Increase;
 import org.openiaml.model.codegen.oaw.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
@@ -44,6 +45,8 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.ScopesPackage;
+import org.openiaml.model.tests.ModelPropertiesInvestigator.ModelPropertiesInvestigatorIncreasePercent;
+import org.openiaml.model.tests.ModelPropertiesInvestigator.ModelPropertiesInvestigatorIncreaseAbsolute;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -214,6 +217,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				// investigate initial model properties
 				List<Object> initialProperties = getModelPropertiesInvestigator(false).investigate(model);
 				List<Object> initialPropertiesNoGen = getModelPropertiesInvestigator(true).investigate(model);
+				List<Object> initialDiff = getModelPropertiesInvestigatorIncreaseAbsolute().investigate(model);
+				List<Object> initialDiffPct = getModelPropertiesInvestigatorIncreasePercent().investigate(model);
 				
 				// how many elements are in the initial model?
 				int initial = 0;
@@ -232,6 +237,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				// investigate final model properties
 				List<Object> finalProperties = getModelPropertiesInvestigator(false).investigate(model);
 				List<Object> finalPropertiesNoGen = getModelPropertiesInvestigator(true).investigate(model);
+				List<Object> finalDiff = getModelPropertiesInvestigatorIncreaseAbsolute().investigate(model);
+				List<Object> finalDiffPct = getModelPropertiesInvestigatorIncreasePercent().investigate(model);
 
 				// how many are in the final model?
 				int finalCount = 0;
@@ -252,8 +259,12 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 					}
 					write(f, "initial", initialProperties);
 					write(f, "initial-no-gen", initialPropertiesNoGen);
+					write(f, "initial-diff", initialDiff);
+					write(f, "initial-diff-%", initialDiffPct);
 					write(f, "final", finalProperties);
 					write(f, "final-no-gen", finalPropertiesNoGen);
+					write(f, "final-diff", finalDiff);
+					write(f, "final-diff-%", finalDiffPct);
 					write(f, "time", diff);
 					System.out.println(initial + " -> " + finalCount + "(" + diff + " ms)");
 					
@@ -313,6 +324,28 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		return new ModelPropertiesInvestigator(ignoreGenerated);
 	}
 	
+	/**
+	 * Wraps {@link #getModelPropertiesInvestigator(boolean)} with the
+	 * {@link Increase} operator, so we can investigate the difference
+	 * between ignoreGenerated=false and ignoreGenerated=true.
+	 * 
+	 * @return
+	 */
+	public ModelPropertiesInvestigator getModelPropertiesInvestigatorIncreasePercent() {
+		return new ModelPropertiesInvestigatorIncreasePercent(getModelPropertiesInvestigator(true), getModelPropertiesInvestigator(false));
+	}
+
+	/**
+	 * Wraps {@link #getModelPropertiesInvestigator(boolean)} with the
+	 * {@link Increase} operator, so we can investigate the difference
+	 * between ignoreGenerated=false and ignoreGenerated=true.
+	 * 
+	 * @return
+	 */
+	public ModelPropertiesInvestigator getModelPropertiesInvestigatorIncreaseAbsolute() {
+		return new ModelPropertiesInvestigatorIncreaseAbsolute(getModelPropertiesInvestigator(true), getModelPropertiesInvestigator(false));
+	}
+
 	/**
 	 * Load a model file and perform inference on it.
 	 *

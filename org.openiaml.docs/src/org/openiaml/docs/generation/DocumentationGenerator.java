@@ -43,7 +43,7 @@ public class DocumentationGenerator {
 			ILoader loader = new LoadEMFDescription(
 					"../org.openiaml.model/model/docs" /* doc base */, 
 					"org.openiaml.model" /* plugin */, 
-					"model.doc" /* package base */
+					"model.docs" /* package base */
 			);
 			loader.load(factory, root);
 		}

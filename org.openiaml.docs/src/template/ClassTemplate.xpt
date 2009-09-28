@@ -30,11 +30,13 @@
 		«tagline»
 		</div>
 		
-		<div id="description">
-		«FOREACH additionalDocumentation AS description»
-			«description.descriptionHtml»
-		«ENDFOREACH»
-		</div>
+		«IF !additionalDocumentation.isEmpty»
+			<div id="description">
+			«FOREACH additionalDocumentation AS description»
+				«EXPAND javadocElement FOR description.description» «EXPAND linkReference FOR description.reference»
+			«ENDFOREACH»
+			</div>
+		«ENDIF»
 		
 		«IF !subtypes.isEmpty»
 		<p>
@@ -295,32 +297,24 @@
 	<span class="error">Unknown reference '«this»'</span>
 «ENDDEFINE»
 
-«DEFINE javadocElement FOR modeldoc::JavadocTagElement»
-	<span class="javadocTag">
-		«IF name == "@semantics" || name == "@example"»
-			«REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
-			«EXPAND javadocSemanticsElement FOR fragments.first()»
-			«EXPAND javadocElement FOREACH fragments.withoutFirst()» 
-		«ELSEIF name == "@model"»
-			«EXPAND javadocModelElement FOREACH fragments»
-		«ELSE»
-			«EXPAND javadocElement FOREACH fragments»
-		«ENDIF»
-	</span>
+«DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag">«IF name == "@semantics" || name == "@example"-»
+«REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
+«EXPAND javadocSemanticsElement FOR fragments.first()-»
+«EXPAND javadocElement FOREACH fragments.withoutFirst()-» 
+«ELSEIF name == "@model"-»
+«EXPAND javadocModelElement FOREACH fragments-»
+«ELSE-»
+«EXPAND javadocElement FOREACH fragments-»
+«ENDIF-»</span>«ENDDEFINE»
+
+«DEFINE javadocElement FOR modeldoc::JavadocTextElement-»
+«value-»
 «ENDDEFINE»
 
-«DEFINE javadocElement FOR modeldoc::JavadocTextElement»
-	«value»
-«ENDDEFINE»
-
-«DEFINE javadocModelElement FOR modeldoc::JavadocTextElement»
-	«IF value.trim().contains(" ")»
-		«LET value.trim().split(" ") AS bits»
-			<a href="«bits.first()».html">«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>
-		«ENDLET»
-	«ELSE»
-		<a href="«value».html">«value»</a>
-	«ENDIF»
+«DEFINE javadocModelElement FOR modeldoc::JavadocTextElement-»
+«IF value.trim().contains(" ")-»
+«LET value.trim().split(" ") AS bits-»<a href="«bits.first()».html">«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>«ENDLET-»
+«ELSE-»<a href="«value».html">«value»</a>«ENDIF-»
 «ENDDEFINE»
 
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
@@ -354,6 +348,10 @@
 
 «DEFINE linkReference FOR modeldoc::FileLineReference»
 	[<a href="«EXPAND browseSource»«file.plugin»/«getPackage(file.package)»/«file.name»#«line»">«file.name»</a>]
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::FileReference»
+	[<a href="«EXPAND browseSource»«plugin»/«getPackage(package)»/«name»">«name»</a>]
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::ModelReference»

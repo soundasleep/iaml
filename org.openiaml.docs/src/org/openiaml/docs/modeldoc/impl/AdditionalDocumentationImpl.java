@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.docs.modeldoc.Reference;
 
@@ -23,7 +24,7 @@ import org.openiaml.docs.modeldoc.Reference;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.AdditionalDocumentationImpl#getReference <em>Reference</em>}</li>
- *   <li>{@link org.openiaml.docs.modeldoc.impl.AdditionalDocumentationImpl#getDescriptionHtml <em>Description Html</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.AdditionalDocumentationImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,24 +42,14 @@ public class AdditionalDocumentationImpl extends EObjectImpl implements Addition
 	protected Reference reference;
 
 	/**
-	 * The default value of the '{@link #getDescriptionHtml() <em>Description Html</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDescriptionHtml()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DESCRIPTION_HTML_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDescriptionHtml() <em>Description Html</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescriptionHtml()
-	 * @generated
-	 * @ordered
-	 */
-	protected String descriptionHtml = DESCRIPTION_HTML_EDEFAULT;
+	protected JavadocTagElement description;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,8 +113,16 @@ public class AdditionalDocumentationImpl extends EObjectImpl implements Addition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDescriptionHtml() {
-		return descriptionHtml;
+	public JavadocTagElement getDescription() {
+		if (description != null && description.eIsProxy()) {
+			InternalEObject oldDescription = (InternalEObject)description;
+			description = (JavadocTagElement)eResolveProxy(oldDescription);
+			if (description != oldDescription) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION, oldDescription, description));
+			}
+		}
+		return description;
 	}
 
 	/**
@@ -131,11 +130,20 @@ public class AdditionalDocumentationImpl extends EObjectImpl implements Addition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDescriptionHtml(String newDescriptionHtml) {
-		String oldDescriptionHtml = descriptionHtml;
-		descriptionHtml = newDescriptionHtml;
+	public JavadocTagElement basicGetDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(JavadocTagElement newDescription) {
+		JavadocTagElement oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML, oldDescriptionHtml, descriptionHtml));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -149,8 +157,9 @@ public class AdditionalDocumentationImpl extends EObjectImpl implements Addition
 			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__REFERENCE:
 				if (resolve) return getReference();
 				return basicGetReference();
-			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML:
-				return getDescriptionHtml();
+			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION:
+				if (resolve) return getDescription();
+				return basicGetDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,8 +175,8 @@ public class AdditionalDocumentationImpl extends EObjectImpl implements Addition
 			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__REFERENCE:
 				setReference((Reference)newValue);
 				return;
-			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML:
-				setDescriptionHtml((String)newValue);
+			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION:
+				setDescription((JavadocTagElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,8 +193,8 @@ public class AdditionalDocumentationImpl extends EObjectImpl implements Addition
 			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__REFERENCE:
 				setReference((Reference)null);
 				return;
-			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML:
-				setDescriptionHtml(DESCRIPTION_HTML_EDEFAULT);
+			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION:
+				setDescription((JavadocTagElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -201,26 +210,10 @@ public class AdditionalDocumentationImpl extends EObjectImpl implements Addition
 		switch (featureID) {
 			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__REFERENCE:
 				return reference != null;
-			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION_HTML:
-				return DESCRIPTION_HTML_EDEFAULT == null ? descriptionHtml != null : !DESCRIPTION_HTML_EDEFAULT.equals(descriptionHtml);
+			case ModeldocPackage.ADDITIONAL_DOCUMENTATION__DESCRIPTION:
+				return description != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (descriptionHtml: ");
-		result.append(descriptionHtml);
-		result.append(')');
-		return result.toString();
 	}
 
 } //AdditionalDocumentationImpl

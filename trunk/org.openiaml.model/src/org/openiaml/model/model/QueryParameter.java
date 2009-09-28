@@ -12,6 +12,10 @@ package org.openiaml.model.model;
  * A representation of the model object '<em><b>Query Parameter</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents a query parameter from the browser's URI string.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -20,7 +24,7 @@ package org.openiaml.model.model;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getQueryParameter()
- * @model annotation="http://openiaml.org/comment added='0.4' about='represents a query parameter from the browser.'"
+ * @model annotation="http://openiaml.org/comment added='0.4'"
  * @generated
  */
 public interface QueryParameter extends NamedElement, WireEdgesSource, DataFlowEdgesSource {

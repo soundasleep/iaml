@@ -29,6 +29,7 @@ import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
@@ -156,23 +157,14 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	protected JavaClass runtimeClass;
 	/**
-	 * The default value of the '{@link #getTagline() <em>Tagline</em>}' attribute.
+	 * The cached value of the '{@link #getTagline() <em>Tagline</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTagline()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TAGLINE_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getTagline() <em>Tagline</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTagline()
-	 * @generated
-	 * @ordered
-	 */
-	protected String tagline = TAGLINE_EDEFAULT;
+	protected JavadocTagElement tagline;
 	/**
 	 * The cached value of the '{@link #getOperationalSemantics() <em>Operational Semantics</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -441,7 +433,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTagline() {
+	public JavadocTagElement getTagline() {
 		return tagline;
 	}
 
@@ -450,11 +442,33 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTagline(String newTagline) {
-		String oldTagline = tagline;
+	public NotificationChain basicSetTagline(JavadocTagElement newTagline, NotificationChain msgs) {
+		JavadocTagElement oldTagline = tagline;
 		tagline = newTagline;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__TAGLINE, oldTagline, tagline));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__TAGLINE, oldTagline, newTagline);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTagline(JavadocTagElement newTagline) {
+		if (newTagline != tagline) {
+			NotificationChain msgs = null;
+			if (tagline != null)
+				msgs = ((InternalEObject)tagline).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_CLASS__TAGLINE, null, msgs);
+			if (newTagline != null)
+				msgs = ((InternalEObject)newTagline).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_CLASS__TAGLINE, null, msgs);
+			msgs = basicSetTagline(newTagline, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__TAGLINE, newTagline, newTagline));
 	}
 
 	/**
@@ -655,6 +669,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<?>)getSupertypes()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__SUBTYPES:
 				return ((InternalEList<?>)getSubtypes()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__TAGLINE:
+				return basicSetTagline(null, msgs);
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				return ((InternalEList<?>)getOperationalSemantics()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
@@ -776,7 +792,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				setRuntimeClass((JavaClass)newValue);
 				return;
 			case ModeldocPackage.EMF_CLASS__TAGLINE:
-				setTagline((String)newValue);
+				setTagline((JavadocTagElement)newValue);
 				return;
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				getOperationalSemantics().clear();
@@ -851,7 +867,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				setRuntimeClass((JavaClass)null);
 				return;
 			case ModeldocPackage.EMF_CLASS__TAGLINE:
-				setTagline(TAGLINE_EDEFAULT);
+				setTagline((JavadocTagElement)null);
 				return;
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				getOperationalSemantics().clear();
@@ -910,7 +926,7 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__RUNTIME_CLASS:
 				return runtimeClass != null;
 			case ModeldocPackage.EMF_CLASS__TAGLINE:
-				return TAGLINE_EDEFAULT == null ? tagline != null : !TAGLINE_EDEFAULT.equals(tagline);
+				return tagline != null;
 			case ModeldocPackage.EMF_CLASS__OPERATIONAL_SEMANTICS:
 				return operationalSemantics != null && !operationalSemantics.isEmpty();
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
@@ -951,8 +967,6 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 		result.append(abstract_);
 		result.append(", interface: ");
 		result.append(interface_);
-		result.append(", tagline: ");
-		result.append(tagline);
 		result.append(')');
 		return result.toString();
 	}

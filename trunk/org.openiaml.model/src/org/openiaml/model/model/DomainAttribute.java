@@ -13,6 +13,10 @@ package org.openiaml.model.model;
  * A representation of the model object '<em><b>Domain Attribute</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents a single attribute contained by a {@link DomainObject}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

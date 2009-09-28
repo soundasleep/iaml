@@ -14,6 +14,10 @@ import org.openiaml.model.model.DomainStore;
  * A representation of the model object '<em><b>User Store</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Contains {@link Role Roles} and {@link Permission Permissions}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

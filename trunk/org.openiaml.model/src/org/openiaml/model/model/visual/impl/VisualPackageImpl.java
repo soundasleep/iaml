@@ -324,7 +324,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   new String[] {
 			 "comment", "Scope supertype added in 0.2",
 			 "comment2", "represents the scope Window"
-		   });		
+		   });					
 		addAnnotation
 		  (buttonEClass, 
 		   source, 
@@ -346,7 +346,25 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";				
+		String source = "http://www.eclipse.org/emf/2002/GenModel";			
+		addAnnotation
+		  (pageEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a single browser window instance."
+		   });		
+		addAnnotation
+		  (inputFormEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a form which may contain {@link InputTextField text fields} and {@link Button buttons}."
+		   });		
+		addAnnotation
+		  (inputTextFieldEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A single text field, storing a single text value, which may be edited by the user."
+		   });			
 		addAnnotation
 		  (buttonEClass, 
 		   source, 

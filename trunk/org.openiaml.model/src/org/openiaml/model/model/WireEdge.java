@@ -12,6 +12,10 @@ package org.openiaml.model.model;
  * A representation of the model object '<em><b>Wire Edge</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents some higher-level relationship between two components.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

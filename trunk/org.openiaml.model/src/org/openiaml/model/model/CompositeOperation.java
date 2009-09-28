@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Composite Operation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Operations which are composed of logic flows, data flows, and other operations.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

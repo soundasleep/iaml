@@ -14,6 +14,10 @@ import org.openiaml.model.model.VisibleThing;
  * A representation of the model object '<em><b>Page</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents a single browser window instance.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

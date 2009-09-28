@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Domain Object Instance</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents an instance of a {@link DomainObject}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

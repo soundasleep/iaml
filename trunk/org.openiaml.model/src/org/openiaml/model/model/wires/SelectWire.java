@@ -6,12 +6,18 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.DomainObjectInstance;
+import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.WireEdgeDestination;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Select Wire</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Allows for the selection of particular {@link DomainObjectInstance instances} from a {@link DomainStore}.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:

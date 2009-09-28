@@ -23,7 +23,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/supertypes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/subtypes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/runtimeClass"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/tagline"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/tagline"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/operationalSemantics"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/inferenceSemantics"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/constraints"/>

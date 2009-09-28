@@ -12,6 +12,10 @@ package org.openiaml.model.model;
  * A representation of the model object '<em><b>Named Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An element with a name.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

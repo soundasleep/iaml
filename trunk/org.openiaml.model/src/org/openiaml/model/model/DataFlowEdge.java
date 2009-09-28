@@ -12,6 +12,10 @@ package org.openiaml.model.model;
  * A representation of the model object '<em><b>Data Flow Edge</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Represents the flow of data from a {@link DataFlowEdgesSource data source} to a {@link DataFlowEdgeDestination data destination}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

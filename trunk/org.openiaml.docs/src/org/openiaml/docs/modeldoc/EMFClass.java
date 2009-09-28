@@ -211,30 +211,30 @@ public interface EMFClass extends EObject {
 	void setRuntimeClass(JavaClass value);
 
 	/**
-	 * Returns the value of the '<em><b>Tagline</b></em>' attribute.
+	 * Returns the value of the '<em><b>Tagline</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Tagline</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tagline</em>' attribute.
-	 * @see #setTagline(String)
+	 * @return the value of the '<em>Tagline</em>' containment reference.
+	 * @see #setTagline(JavadocTagElement)
 	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Tagline()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getTagline();
+	JavadocTagElement getTagline();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#getTagline <em>Tagline</em>}' attribute.
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#getTagline <em>Tagline</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tagline</em>' attribute.
+	 * @param value the new value of the '<em>Tagline</em>' containment reference.
 	 * @see #getTagline()
 	 * @generated
 	 */
-	void setTagline(String value);
+	void setTagline(JavadocTagElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Operational Semantics</b></em>' containment reference list.

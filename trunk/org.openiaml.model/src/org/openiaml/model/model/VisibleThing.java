@@ -15,6 +15,10 @@ import org.openiaml.model.model.scopes.Session;
  * A representation of the model object '<em><b>Visible Thing</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An abstract type representing application elements which have some sort of visible representation.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

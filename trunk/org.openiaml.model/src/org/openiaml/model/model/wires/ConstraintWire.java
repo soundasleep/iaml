@@ -12,6 +12,10 @@ package org.openiaml.model.model.wires;
  * A representation of the model object '<em><b>Constraint Wire</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Allows for the definition of complex {@link RequiresWire requirements}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

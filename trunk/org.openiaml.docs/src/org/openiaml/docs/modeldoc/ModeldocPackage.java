@@ -171,7 +171,7 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_CLASS__RUNTIME_CLASS = 6;
 
 	/**
-	 * The feature id for the '<em><b>Tagline</b></em>' attribute.
+	 * The feature id for the '<em><b>Tagline</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1640,15 +1640,15 @@ public interface ModeldocPackage extends EPackage {
 	EReference getEMFClass_RuntimeClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFClass#getTagline <em>Tagline</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.openiaml.docs.modeldoc.EMFClass#getTagline <em>Tagline</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tagline</em>'.
+	 * @return the meta object for the containment reference '<em>Tagline</em>'.
 	 * @see org.openiaml.docs.modeldoc.EMFClass#getTagline()
 	 * @see #getEMFClass()
 	 * @generated
 	 */
-	EAttribute getEMFClass_Tagline();
+	EReference getEMFClass_Tagline();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getOperationalSemantics <em>Operational Semantics</em>}'.
@@ -2829,12 +2829,12 @@ public interface ModeldocPackage extends EPackage {
 		EReference EMF_CLASS__RUNTIME_CLASS = eINSTANCE.getEMFClass_RuntimeClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Tagline</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Tagline</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EMF_CLASS__TAGLINE = eINSTANCE.getEMFClass_Tagline();
+		EReference EMF_CLASS__TAGLINE = eINSTANCE.getEMFClass_Tagline();
 
 		/**
 		 * The meta object literal for the '<em><b>Operational Semantics</b></em>' containment reference list feature.

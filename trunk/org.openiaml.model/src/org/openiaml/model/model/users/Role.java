@@ -7,11 +7,16 @@
 package org.openiaml.model.model.users;
 
 import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.wires.ExtendsWire;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Role</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * A particular Role that a user may have; may be {@link ExtendsWire inherited} from other Roles.
+ * <!-- end-model-doc -->
  *
  *
  * @see org.openiaml.model.model.users.UsersPackage#getRole()

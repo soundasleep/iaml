@@ -256,6 +256,8 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		// Create annotations
 		// http://openiaml.org/comment
 		createCommentAnnotations();
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
 	}
 
 	/**
@@ -280,7 +282,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		   source, 
 		   new String[] {
 			 "changed", "0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination"
-		   });		
+		   });			
 		addAnnotation
 		  (getSession_Children(), 
 		   source, 
@@ -299,6 +301,22 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		   new String[] {
 			 "added", "0.4"
 		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";				
+		addAnnotation
+		  (sessionEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a user session; contained data is normally not accessible by other users."
+		   });			
 	}
 
 } //ScopesPackageImpl

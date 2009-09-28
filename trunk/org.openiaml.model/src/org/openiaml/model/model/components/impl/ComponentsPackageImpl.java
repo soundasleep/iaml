@@ -267,6 +267,8 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		// Create annotations
 		// http://openiaml.org/comment
 		createCommentAnnotations();
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
 	}
 
 	/**
@@ -282,12 +284,34 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });		
+		   });			
 		addAnnotation
 		  (accessControlHandlerEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.4"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";			
+		addAnnotation
+		  (loginHandlerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "When placed into a {@link Page} or {@link Session}, enforces that users need to login via this LoginHandler first. Also supports logout."
+		   });			
+		addAnnotation
+		  (accessControlHandlerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "When placed into a {@link Page} or {@link Session}, enforces that all access contains the {@link Role roles} and {@link Permission permissions} provided by incoming {@link RequiresWire}."
 		   });
 	}
 

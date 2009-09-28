@@ -14,6 +14,10 @@ import org.openiaml.model.model.ExecutionEdgeDestination;
  * A representation of the model object '<em><b>Cancel Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Indicates that the current {@link Operation} did not execute successfully, or the {@link Condition} failed.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

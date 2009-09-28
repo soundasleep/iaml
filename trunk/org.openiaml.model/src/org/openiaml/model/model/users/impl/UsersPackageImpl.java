@@ -284,6 +284,8 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		// Create annotations
 		// http://openiaml.org/comment
 		createCommentAnnotations();
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
 	}
 
 	/**
@@ -299,12 +301,46 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (roleEClass, 
 		   source, 
 		   new String[] {
 			 "note", "another option is to create \'extends : Role\' and \'extendedBy : Role\' as EOpposites, and remove ExtendsWire. but this means that this relationship cannot be used as the target or source of any wires (parameters? conditions?)"
+		   });			
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";			
+		addAnnotation
+		  (userStoreEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains {@link Role Roles} and {@link Permission Permissions}."
+		   });			
+		addAnnotation
+		  (roleEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A particular Role that a user may have; may be {@link ExtendsWire inherited} from other Roles."
+		   });		
+		addAnnotation
+		  (permissionEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A single Permission that a user may have; may also be {@link ProvidesWire provided} by a {@link Role}."
+		   });		
+		addAnnotation
+		  (userInstanceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents {@link DomainObjectInstance an instance} of a {@link Role user}."
 		   });
 	}
 

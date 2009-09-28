@@ -14,6 +14,10 @@ import org.openiaml.model.model.ExecutionEdgeDestination;
  * A representation of the model object '<em><b>Finish Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The successful completion of an {@link Operation}, or the {@link Condition} passed.
+ * <!-- end-model-doc -->
+ *
  *
  * @see org.openiaml.model.model.operations.OperationsPackage#getFinishNode()
  * @model

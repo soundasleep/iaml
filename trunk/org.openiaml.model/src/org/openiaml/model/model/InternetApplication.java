@@ -14,6 +14,10 @@ import org.openiaml.model.model.scopes.Session;
  * A representation of the model object '<em><b>Internet Application</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The top-level type of a model instance, representing all of the information required to define an Internet application.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

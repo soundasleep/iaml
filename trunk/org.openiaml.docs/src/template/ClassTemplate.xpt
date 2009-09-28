@@ -27,7 +27,7 @@
 		</h1>
 		
 		<div id="tagline">
-		«tagline»
+		«EXPAND ClassTemplate::javadocElement FOR tagline»
 		</div>
 		
 		«IF !additionalDocumentation.isEmpty»
@@ -301,7 +301,7 @@
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 «EXPAND javadocSemanticsElement FOR fragments.first()-»
 «EXPAND javadocElement FOREACH fragments.withoutFirst()-» 
-«ELSEIF name == "@model"-»
+«ELSEIF name == "@model" || name == "@link"-»
 «EXPAND javadocModelElement FOREACH fragments-»
 «ELSE-»
 «EXPAND javadocElement FOREACH fragments-»
@@ -312,9 +312,13 @@
 «ENDDEFINE»
 
 «DEFINE javadocModelElement FOR modeldoc::JavadocTextElement-»
+«IF value.contains(".") || value.contains("#")-»
+«value-»«REM»the value contains an illegal character; it can't link to a model element«ENDREM»
+«ELSE-»
 «IF value.trim().contains(" ")-»
 «LET value.trim().split(" ") AS bits-»<a href="«bits.first()».html">«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>«ENDLET-»
 «ELSE-»<a href="«value».html">«value»</a>«ENDIF-»
+«ENDIF-»
 «ENDDEFINE»
 
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»

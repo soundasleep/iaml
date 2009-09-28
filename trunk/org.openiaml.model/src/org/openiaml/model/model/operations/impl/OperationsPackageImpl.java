@@ -409,8 +409,56 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		initEClass(operationCallNodeEClass, OperationCallNode.class, "OperationCallNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
 		// http://openiaml.org/comment
 		createCommentAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (startNodeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Start of an {@link CompositeOperation Operation} or {@link CompositeCondition Condition}."
+		   });		
+		addAnnotation
+		  (cancelNodeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Indicates that the current {@link Operation} did not execute successfully, or the {@link Condition} failed."
+		   });		
+		addAnnotation
+		  (finishNodeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "The successful completion of an {@link Operation}, or the {@link Condition} passed."
+		   });				
+		addAnnotation
+		  (splitNodeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Execution flow can split off into multiple threads, reconnected with a {@link JoinNode}."
+		   });			
+		addAnnotation
+		  (joinNodeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Joins multiple {@link SplitNode split} execution threads back together. Halts until all threads are complete."
+		   });			
+		addAnnotation
+		  (operationCallNodeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A virtual {@link Operation} call; the outgoing {@link RunInstanceWire} will be executed."
+		   });
 	}
 
 	/**
@@ -420,7 +468,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * @generated
 	 */
 	protected void createCommentAnnotations() {
-		String source = "http://openiaml.org/comment";		
+		String source = "http://openiaml.org/comment";					
 		addAnnotation
 		  (decisionConditionEClass, 
 		   source, 
@@ -432,19 +480,19 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (joinNodeEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4"
-		   });		
+		   });			
 		addAnnotation
 		  (operationCallNodeEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4"
-		   });
+		   });	
 	}
 
 } //OperationsPackageImpl

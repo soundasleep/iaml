@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.JavaClass;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 
@@ -73,7 +74,7 @@ public class LoadEMFClasses implements ILoader {
 				c.setAbstract(cls.isAbstract());
 				c.setInterface(cls.isInterface());
 
-				getTaglineForEMFClass(cls, c);		// add tagline
+				getTaglineForEMFClass(factory, cls, c);		// add tagline
 				
 				c.setParent(root);
 				
@@ -118,14 +119,22 @@ public class LoadEMFClasses implements ILoader {
 	 * @param source
 	 * @param target
 	 */
-	protected void getTaglineForEMFClass(EClass source, EMFClass target) {
+	protected void getTaglineForEMFClass(ModeldocFactory factory, EClass source, EMFClass target) {
 		EAnnotation ann = source.getEAnnotation("http://www.eclipse.org/emf/2002/GenModel");
 		if (ann != null) {
 			EMap<String, String> details = ann.getDetails();
 			for (String key : details.keySet()) {
 				if (key.equals("documentation")) {
 					// found a tag line
-					target.setTagline(details.get(key));
+					// parse for JavaDoc
+					JavadocTagElement e = factory.createJavadocTagElement();
+					
+					// parse the line into javadoc elements
+					// (the line needs to be parsed into fragments before we can find semantic references)
+					new BasicJavadocParser().parseSemanticLineIntoFragments(details.get(key), factory, e);
+					
+					// save this parsed detail as a tagline
+					target.setTagline(e);
 				}
 			}
 		}

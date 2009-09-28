@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests;
+package org.openiaml.emf;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;

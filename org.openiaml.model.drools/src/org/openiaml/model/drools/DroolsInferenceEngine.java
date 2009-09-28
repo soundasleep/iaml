@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.emf.SoftCache;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
@@ -125,7 +126,7 @@ public abstract class DroolsInferenceEngine {
     	// load up the rulebase
         RuleBase ruleBase;
 		try {
-			ruleBase = readRule();
+			ruleBase = getRuleBase();
 		} catch (Exception e) {
 			throw new InferenceException("Could not load rulebase: " + e.getMessage(), e);
 		}
@@ -405,54 +406,122 @@ public abstract class DroolsInferenceEngine {
 		return DroolsInferenceEngine.class.getResourceAsStream( filename );
 	}
 	
+	protected static class RuleBaseCache extends SoftCache<List<String>,RuleBase> {
+
+		/**
+		 * Use the selected engine.
+		 * 
+		 * @param engine
+		 */
+		public RuleBaseCache(DroolsInferenceEngine engine) {
+			this.engine = engine;
+		}
+		
+		private DroolsInferenceEngine engine;
+		
+		/**
+		 * Get the RuleBase from the rules provided.
+		 * Copied from sample DroolsTest.java.
+		 * 
+		 * @see DroolsInferenceEngine#getRuleFiles()
+		 * @see #doRetrieve(List)
+		 * @return
+		 * @throws Exception 
+		 */
+		@Override
+		public RuleBase retrieve(List<String> input) {
+			try {
+				return doRetrieve(input);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+		}
+		
+		/**
+		 * Actually loads the rulebase.
+		 * 
+		 * @see #retrieve(List)
+		 * @throws Exception 
+		 */
+		protected RuleBase doRetrieve(List<String> input) throws Exception {
+			RuleBase ruleBase = RuleBaseFactory.newRuleBase();
+
+			for (String ruleFile : input) {
+		
+				// load the stream
+				InputStream stream = engine.loadResourceAsStream(ruleFile);
+				if (stream == null) {
+					throw new InferenceException("Could not load the resource '" + ruleFile + "' as a stream."); 
+				}
+				
+				//read in the source
+				Reader source = new InputStreamReader( stream );
+				
+				//optionally read in the DSL (if you are using it).
+				//Reader dsl = new InputStreamReader( DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
+		
+				//Use package builder to build up a rule package.
+				//An alternative lower level class called "DrlParser" can also be used...
+
+				PackageBuilder builder = new PackageBuilder();
+		
+				//this wil parse and compile in one step
+				//NOTE: There are 2 methods here, the one argument one is for normal DRL.
+				builder.addPackageFromDrl( source );
+		
+				//Use the following instead of above if you are using a DSL:
+				//builder.addPackageFromDrl( source, dsl );
+				
+				//get the compiled package (which is serializable)
+				Package pkg = builder.getPackage();
+				
+				//add the package to a rulebase (deploy the rule package).
+				ruleBase.addPackage( pkg );
+		
+			}
+			
+			return ruleBase;
+		}
+	}
+	
 	/**
-	 * Get the RuleBase from the rules provided.
-	 * Copied from sample DroolsTest.java.
+	 * A soft cache of compiled RuleBases. This should increase the
+	 * performance of repeatedly inferring knowledge.
+	 */
+	private static RuleBaseCache ruleBaseCache = null;
+	
+	/**
+	 * Get the RuleBase from the rules provided. If the rulebase has
+	 * already been compiled into the cache {@link #ruleBaseCache},
+	 * uses this instead.
 	 * 
+	 * @see RuleBaseCache#retrieve(List)
 	 * @see #getRuleFiles()
 	 * @return
 	 * @throws Exception 
 	 */
-	private RuleBase readRule() throws Exception {
-		
-		RuleBase ruleBase = RuleBaseFactory.newRuleBase();
-
-		for (String ruleFile : getRuleFiles()) {
-	
-			// load the stream
-			InputStream stream = loadResourceAsStream(ruleFile);
-			if (stream == null) {
-				throw new InferenceException("Could not load the resource '" + ruleFile + "' as a stream."); 
-			}
-			
-			//read in the source
-			Reader source = new InputStreamReader( stream );
-			
-			//optionally read in the DSL (if you are using it).
-			//Reader dsl = new InputStreamReader( DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
-	
-			//Use package builder to build up a rule package.
-			//An alternative lower level class called "DrlParser" can also be used...
-
-			PackageBuilder builder = new PackageBuilder();
-	
-			//this wil parse and compile in one step
-			//NOTE: There are 2 methods here, the one argument one is for normal DRL.
-			builder.addPackageFromDrl( source );
-	
-			//Use the following instead of above if you are using a DSL:
-			//builder.addPackageFromDrl( source, dsl );
-			
-			//get the compiled package (which is serializable)
-			Package pkg = builder.getPackage();
-			
-			//add the package to a rulebase (deploy the rule package).
-			ruleBase.addPackage( pkg );
-	
+	protected RuleBase getRuleBase() throws Exception {
+		if (ruleBaseCache == null) {
+			ruleBaseCache = new RuleBaseCache(this);
 		}
-		
-		return ruleBase;
-		
+		return ruleBaseCache.get(getRuleFiles());
+	}
+	
+	/**
+	 * Reset the {@link #ruleBaseCache}.
+	 */
+	public void resetRuleBaseCache() {
+		ruleBaseCache = null;
+	}
+	
+	/**
+	 * Set the rule base cache to a given cache. Useful for test methods.
+	 * 
+	 * @see #resetRuleBaseCache()
+	 * @param ruleBaseCache
+	 */
+	public void setRuleBaseCache(RuleBaseCache ruleBaseCache) {
+		DroolsInferenceEngine.ruleBaseCache = ruleBaseCache;
 	}
 
 	/**

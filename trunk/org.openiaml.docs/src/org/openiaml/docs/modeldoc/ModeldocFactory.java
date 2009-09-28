@@ -44,6 +44,15 @@ public interface ModeldocFactory extends EFactory {
 	EMFClass createEMFClass();
 
 	/**
+	 * Returns a new object of class '<em>Additional Documentation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Additional Documentation</em>'.
+	 * @generated
+	 */
+	AdditionalDocumentation createAdditionalDocumentation();
+
+	/**
 	 * Returns a new object of class '<em>Example</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -24,7 +24,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/subtypes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/runtimeClass"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/tagline"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFClass/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/operationalSemantics"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/inferenceSemantics"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/constraints"/>
@@ -34,6 +33,11 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/parent"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/references"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/additionalDocumentation"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//AdditionalDocumentation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//AdditionalDocumentation/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//AdditionalDocumentation/descriptionHtml"/>
     </genClasses>
     <genClasses image="false" ecoreClass="modeldoc.ecore#//Semantic">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Semantic/reference"/>

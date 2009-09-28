@@ -55,6 +55,9 @@ form {
 }
 
 h2 { margin-top: .7em; margin-bottom: .3em; }
+.semantic_block + .semantic_block { border-top: 1px solid #ccc; }
+.none { margin-bottom: 1em; }
+
 table { border: 1px solid #aab; border-collapse: collapse; }
 table th { background: #ccd; }
 table th, table td { padding: 4px; border: 1px solid #aab; }
@@ -76,13 +79,15 @@ body#index li.class small:before { content: " - "; }
 body#summary h1 img { vertical-align: .05em; }
 body#summary #tagline { font-style: italic; }
 
-body#summary p#tagline { margin: 0; padding: 0; }
-body#summary p#description {
+body#summary #tagline { margin: 0; padding: 0; }
+body#summary #description {
 	border: 1px solid #99c;
 	background: #eef;
 	padding: 5px;
 	margin-top: 5px;
 }
+body#summary #description p { margin: 0; }
+body#summary #description p + p { margin-top: 1em; }
 
 .navigation { margin: 5px; margin-top: 15px; }
 .navigation a {

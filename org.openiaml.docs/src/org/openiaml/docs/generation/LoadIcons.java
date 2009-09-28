@@ -17,6 +17,24 @@ import org.openiaml.docs.modeldoc.ModeldocFactory;
  */
 public class LoadIcons extends DocumentationHelper implements ILoader {
 	
+	private File iconBase;
+
+	private String plugin;
+	
+	private String packageBase;
+	
+	/**
+	 * @param iconBase
+	 * @param plugin
+	 * @param packageBase
+	 */
+	public LoadIcons(File iconBase, String plugin, String packageBase) {
+		super();
+		this.iconBase = iconBase;
+		this.plugin = plugin;
+		this.packageBase = packageBase;
+	}
+
 	/**
 	 * Load all of the runtime icons as GraphicalRepresentations.
 	 * 
@@ -25,11 +43,7 @@ public class LoadIcons extends DocumentationHelper implements ILoader {
 	 */
 	public void load(ModeldocFactory factory, ModelDocumentation root) {
 		
-		String plugin = "org.openiaml.model.edit";
-		String pkg = "icons.full.obj16";
-		File dir = new File("../org.openiaml.model.edit/icons/full/obj16/");
-		
-		String[] files = dir.list();
+		String[] files = iconBase.list();
 		for (String file : files) {
 			// does there exist an EMFClass for this file?
 			for (EMFClass cls : root.getClasses()) {
@@ -38,7 +52,7 @@ public class LoadIcons extends DocumentationHelper implements ILoader {
 					// found a reference
 					FileReference fr = factory.createFileReference();
 					fr.setPlugin(plugin);
-					fr.setPackage(pkg);
+					fr.setPackage(packageBase);
 					fr.setName(file);
 					root.getReferences().add(fr);
 					

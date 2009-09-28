@@ -22,13 +22,12 @@ public class SemanticFinder {
 
 	/**
 	 * Javadog tags that are identified by
-	 * {@link #findSemanticReferences(ModelDocumentation, JavadocTagElement, Reference, HandleSemantics)}.
+	 * {@link #findSemanticReferences(ModelDocumentation, JavadocTagElement, Reference, ITagHandler)}.
 	 */
 	protected String[] tagsToIdentify = new String[] {
 		"@semantics",
 		"@example",
 	};
-
 	
 	/**
 	 * <p>With the given JavaDoc element, should there be any links 
@@ -42,7 +41,7 @@ public class SemanticFinder {
 	 * @param reference a reference to provide later
 	 * @param handler the handler to call with matching references
 	 */
-	public void findSemanticReferences(DocumentationHelper helper, ModelDocumentation root, JavadocTagElement description, Reference reference, HandleSemantics handler) {
+	public void findSemanticReferences(DocumentationHelper helper, ModelDocumentation root, JavadocTagElement description, Reference reference, ITagHandler handler) {
 		for (String tag : tagsToIdentify) {
 			if (tag.equals(description.getName())) {
 				// cycle through all model elements

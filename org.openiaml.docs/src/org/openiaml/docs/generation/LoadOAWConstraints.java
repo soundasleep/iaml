@@ -24,12 +24,47 @@ import org.openiaml.docs.modeldoc.ModeldocFactory;
  *
  */
 public class LoadOAWConstraints extends DocumentationHelper implements ILoader {
+
+	/**
+	 * The absolute path of the checkfile to load, e.g.
+	 * "../org.openiaml.model.codegen.oaw/src/metamodel/Checks.chk".
+	 */
+	private String checkFile;
 	
+	/**
+	 * The plugin the generated package is stored in, e.g. "org.openiaml.model".
+	 */
+	private String plugin;
+	
+	/**
+	 * The base of the check file, e.g. "src.metamodel".
+	 */
+	private String packageBase;
+	
+	/**
+	 * The name of the check file, e.g. "Checks.chk".
+	 */
+	private String name;
+
+	/**
+	 * @param checkFile
+	 * @param plugin
+	 * @param packageBase
+	 * @param name
+	 */
+	public LoadOAWConstraints(String checkFile, String plugin,
+			String packageBase, String name) {
+		super();
+		this.checkFile = checkFile;
+		this.plugin = plugin;
+		this.packageBase = packageBase;
+		this.name = name;
+	}
+
 	/**
 	 * Load all of the OAW constraints.
 	 */
-	public void load(ModeldocFactory factory, ModelDocumentation root) throws DocumentationGenerationException {
-		String checkFile = "../org.openiaml.model.codegen.oaw/src/metamodel/Checks.chk";
+	public void load(ModeldocFactory factory, ModelDocumentation root) throws DocumentationGenerationException {		
 		InputStream in;
 		try {
 			in = new FileInputStream(checkFile);
@@ -38,9 +73,9 @@ public class LoadOAWConstraints extends DocumentationHelper implements ILoader {
 		}
 		
 		FileReference fr = factory.createFileReference();
-		fr.setPlugin("org.openiaml.model.codegen.oaw");
-		fr.setPackage("src.metamodel");
-		fr.setName("Checks.chk");
+		fr.setPlugin(plugin);
+		fr.setPackage(packageBase);
+		fr.setName(name);
 		fr.setParent(root);
 		
 		ExtensionFile file = ParseFacade.file(new InputStreamReader(in), checkFile);

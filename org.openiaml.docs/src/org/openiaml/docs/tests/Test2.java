@@ -17,6 +17,7 @@ import org.openarchitectureware.expression.ast.Identifier;
 import org.openiaml.docs.generation.DocumentationGenerationException;
 import org.openiaml.docs.generation.DocumentationGenerator;
 import org.openiaml.docs.generation.DocumentationHelper;
+import org.openiaml.docs.generation.codegen.ModeldocCodeGenerator;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 import org.openiaml.model.model.ModelPackage;
@@ -77,9 +78,9 @@ public class Test2 extends TestCase {
         resource.save(Collections.EMPTY_MAP);
       
 		// generate code
-		OawCodeGenerator codegen = new OawCodeGenerator();
+		ModeldocCodeGenerator codegen = new ModeldocCodeGenerator();
 		codegen.generateCode(modelFile);
-        
+		
 	}
 	
 	/*

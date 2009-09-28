@@ -21,7 +21,7 @@ import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.TagElement;
 import org.eclipse.jdt.core.dom.TextElement;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.openiaml.docs.generation.semantics.HandleSemantics;
+import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.generation.semantics.SemanticFinder;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavaElement;
@@ -41,16 +41,33 @@ import org.openiaml.docs.modeldoc.Reference;
  */
 public class LoadSemanticsFromTests extends DocumentationHelper implements ILoader {
 	
-	private List<HandleSemantics> semanticTagHandlers;
+	private File folder;
 	
-	public LoadSemanticsFromTests(List<HandleSemantics> semanticTagHandlers) {
-		this.semanticTagHandlers = semanticTagHandlers;
-	}
+	private String plugin;
 	
-	public List<HandleSemantics> getSemanticTagHandlers() {
+	private String packageBase;
+	
+	private List<ITagHandler> semanticTagHandlers;
+
+	public List<ITagHandler> getSemanticTagHandlers() {
 		return semanticTagHandlers;
 	}
 	
+	/**
+	 * @param folder
+	 * @param plugin
+	 * @param packageBase
+	 * @param semanticTagHandlers
+	 */
+	public LoadSemanticsFromTests(File folder, String plugin,
+			String packageBase, List<ITagHandler> semanticTagHandlers) {
+		super();
+		this.folder = folder;
+		this.plugin = plugin;
+		this.packageBase = packageBase;
+		this.semanticTagHandlers = semanticTagHandlers;
+	}
+
 	/**
 	 * Load test case semantics.
 	 * 
@@ -64,9 +81,9 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 		try {
 			loadTestCaseSemantics(factory, 
 					root, 
-					new File("../org.openiaml.model.tests/src/org") /* folder */, 
-					"org.openiaml.model.tests" /* plugin */, 
-					"org" /* starting package */);
+					folder /* folder */, 
+					plugin /* plugin */, 
+					packageBase /* starting package */);
 		} catch (IOException e) {
 			throw new DocumentationGenerationException(e);
 		}
@@ -206,7 +223,7 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 		 */
 		protected void handleModelReferences(JavadocTagElement e, Reference reference) {
 			SemanticFinder finder = new SemanticFinder();
-			for (HandleSemantics sem : getSemanticTagHandlers()) {
+			for (ITagHandler sem : getSemanticTagHandlers()) {
 				finder.findSemanticReferences(LoadSemanticsFromTests.this, root, e, reference, sem);
 			}
 		}

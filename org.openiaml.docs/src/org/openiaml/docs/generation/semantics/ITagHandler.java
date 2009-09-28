@@ -15,7 +15,7 @@ import org.openiaml.docs.modeldoc.Reference;
  * @author jmwright
  *
  */
-public interface HandleSemantics {
+public interface ITagHandler {
 	
 	/**
 	 * 

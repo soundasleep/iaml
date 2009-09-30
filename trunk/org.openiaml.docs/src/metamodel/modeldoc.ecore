@@ -27,6 +27,8 @@
         eType="#//OperationalSemantic" containment="true" eOpposite="#//OperationalSemantic/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inferenceSemantics" upperBound="-1"
         eType="#//InferenceSemantic" containment="true" eOpposite="#//InferenceSemantic/containingClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implementationNotes" upperBound="-1"
+        eType="#//ImplementationNote" containment="true" eOpposite="#//ImplementationNote/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
         eType="#//Constraint" containment="true" eOpposite="#//Constraint/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1"
@@ -72,6 +74,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
         eOpposite="#//EMFClass/inferenceSemantics"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImplementationNote" eSuperTypes="#//Semantic">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
+        eOpposite="#//EMFClass/implementationNotes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -180,5 +188,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EMFClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingType" eType="#//EMFClass"
         eOpposite="#//EMFClass/references"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateFile" eSuperTypes="#//Reference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="plugin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templates" upperBound="-1"
+        eType="#//Template" containment="true" eOpposite="#//Template/templateFile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Template" eSuperTypes="#//Reference #//JavaElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="line" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateFile" eType="#//TemplateFile"
+        eOpposite="#//TemplateFile/templates"/>
   </eClassifiers>
 </ecore:EPackage>

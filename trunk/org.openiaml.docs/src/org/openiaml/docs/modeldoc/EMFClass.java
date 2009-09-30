@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getTagline <em>Tagline</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getOperationalSemantics <em>Operational Semantics</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getInferenceSemantics <em>Inference Semantics</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getImplementationNotes <em>Implementation Notes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getExtensions <em>Extensions</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
@@ -423,5 +424,23 @@ public interface EMFClass extends EObject {
 	 * @generated
 	 */
 	EList<AdditionalDocumentation> getAdditionalDocumentation();
+
+	/**
+	 * Returns the value of the '<em><b>Implementation Notes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.ImplementationNote}.
+	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.ImplementationNote#getContainingClass <em>Containing Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Implementation Notes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Implementation Notes</em>' containment reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_ImplementationNotes()
+	 * @see org.openiaml.docs.modeldoc.ImplementationNote#getContainingClass
+	 * @model opposite="containingClass" containment="true"
+	 * @generated
+	 */
+	EList<ImplementationNote> getImplementationNotes();
 
 } // EMFClass

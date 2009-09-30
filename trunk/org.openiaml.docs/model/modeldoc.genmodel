@@ -26,6 +26,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/tagline"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/operationalSemantics"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/inferenceSemantics"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/implementationNotes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/constraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/extensions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/graphicalRepresentations"/>
@@ -59,6 +60,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//InferenceSemantic/category"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//InferenceSemantic/description"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//InferenceSemantic/containingClass"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//ImplementationNote">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//ImplementationNote/category"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//ImplementationNote/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//ImplementationNote/containingClass"/>
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//Constraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//Constraint/constraint"/>
@@ -145,6 +151,18 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFReference/containment"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFReference/type"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFReference/containingType"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//TemplateFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//TemplateFile/plugin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//TemplateFile/package"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//TemplateFile/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//TemplateFile/templates"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//Template">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//Template/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//Template/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//Template/line"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//Template/templateFile"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

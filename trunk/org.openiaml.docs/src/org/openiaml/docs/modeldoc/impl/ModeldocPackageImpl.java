@@ -24,6 +24,7 @@ import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
+import org.openiaml.docs.modeldoc.ImplementationNote;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavaElement;
@@ -41,6 +42,8 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.docs.modeldoc.OperationalSemantic;
 import org.openiaml.docs.modeldoc.Reference;
 import org.openiaml.docs.modeldoc.Semantic;
+import org.openiaml.docs.modeldoc.Template;
+import org.openiaml.docs.modeldoc.TemplateFile;
 
 /**
  * <!-- begin-user-doc -->
@@ -98,6 +101,12 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * @generated
 	 */
 	private EClass inferenceSemanticEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass implementationNoteEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -206,6 +215,18 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * @generated
 	 */
 	private EClass emfReferenceEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass templateFileEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass templateEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -406,15 +427,6 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * @generated
 	 */
 	public EReference getEMFClass_Constraints() {
-		return (EReference)emfClassEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEMFClass_Extensions() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -423,7 +435,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_GraphicalRepresentations() {
+	public EReference getEMFClass_Extensions() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -432,7 +444,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Examples() {
+	public EReference getEMFClass_GraphicalRepresentations() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -441,7 +453,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Parent() {
+	public EReference getEMFClass_Examples() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -450,7 +462,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Attributes() {
+	public EReference getEMFClass_Parent() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -459,7 +471,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_References() {
+	public EReference getEMFClass_Attributes() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(16);
 	}
 
@@ -468,8 +480,26 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_AdditionalDocumentation() {
+	public EReference getEMFClass_References() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFClass_AdditionalDocumentation() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFClass_ImplementationNotes() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -641,6 +671,42 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 */
 	public EReference getInferenceSemantic_ContainingClass() {
 		return (EReference)inferenceSemanticEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getImplementationNote() {
+		return implementationNoteEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImplementationNote_Category() {
+		return (EAttribute)implementationNoteEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImplementationNote_Description() {
+		return (EReference)implementationNoteEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImplementationNote_ContainingClass() {
+		return (EReference)implementationNoteEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1269,6 +1335,96 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTemplateFile() {
+		return templateFileEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTemplateFile_Plugin() {
+		return (EAttribute)templateFileEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTemplateFile_Package() {
+		return (EAttribute)templateFileEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTemplateFile_Name() {
+		return (EAttribute)templateFileEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTemplateFile_Templates() {
+		return (EReference)templateFileEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTemplate() {
+		return templateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTemplate_Name() {
+		return (EAttribute)templateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTemplate_Type() {
+		return (EAttribute)templateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTemplate_Line() {
+		return (EAttribute)templateEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTemplate_TemplateFile() {
+		return (EReference)templateEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintType() {
 		return constraintTypeEEnum;
 	}
@@ -1316,6 +1472,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfClassEClass, EMF_CLASS__TAGLINE);
 		createEReference(emfClassEClass, EMF_CLASS__OPERATIONAL_SEMANTICS);
 		createEReference(emfClassEClass, EMF_CLASS__INFERENCE_SEMANTICS);
+		createEReference(emfClassEClass, EMF_CLASS__IMPLEMENTATION_NOTES);
 		createEReference(emfClassEClass, EMF_CLASS__CONSTRAINTS);
 		createEReference(emfClassEClass, EMF_CLASS__EXTENSIONS);
 		createEReference(emfClassEClass, EMF_CLASS__GRAPHICAL_REPRESENTATIONS);
@@ -1349,6 +1506,11 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEAttribute(inferenceSemanticEClass, INFERENCE_SEMANTIC__CATEGORY);
 		createEReference(inferenceSemanticEClass, INFERENCE_SEMANTIC__DESCRIPTION);
 		createEReference(inferenceSemanticEClass, INFERENCE_SEMANTIC__CONTAINING_CLASS);
+
+		implementationNoteEClass = createEClass(IMPLEMENTATION_NOTE);
+		createEAttribute(implementationNoteEClass, IMPLEMENTATION_NOTE__CATEGORY);
+		createEReference(implementationNoteEClass, IMPLEMENTATION_NOTE__DESCRIPTION);
+		createEReference(implementationNoteEClass, IMPLEMENTATION_NOTE__CONTAINING_CLASS);
 
 		constraintEClass = createEClass(CONSTRAINT);
 		createEAttribute(constraintEClass, CONSTRAINT__CONSTRAINT);
@@ -1437,6 +1599,18 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfReferenceEClass, EMF_REFERENCE__TYPE);
 		createEReference(emfReferenceEClass, EMF_REFERENCE__CONTAINING_TYPE);
 
+		templateFileEClass = createEClass(TEMPLATE_FILE);
+		createEAttribute(templateFileEClass, TEMPLATE_FILE__PLUGIN);
+		createEAttribute(templateFileEClass, TEMPLATE_FILE__PACKAGE);
+		createEAttribute(templateFileEClass, TEMPLATE_FILE__NAME);
+		createEReference(templateFileEClass, TEMPLATE_FILE__TEMPLATES);
+
+		templateEClass = createEClass(TEMPLATE);
+		createEAttribute(templateEClass, TEMPLATE__NAME);
+		createEAttribute(templateEClass, TEMPLATE__TYPE);
+		createEAttribute(templateEClass, TEMPLATE__LINE);
+		createEReference(templateEClass, TEMPLATE__TEMPLATE_FILE);
+
 		// Create enums
 		constraintTypeEEnum = createEEnum(CONSTRAINT_TYPE);
 	}
@@ -1473,6 +1647,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		operationalSemanticEClass.getESuperTypes().add(this.getSemantic());
 		graphicalRepresentationEClass.getESuperTypes().add(this.getSemantic());
 		inferenceSemanticEClass.getESuperTypes().add(this.getSemantic());
+		implementationNoteEClass.getESuperTypes().add(this.getSemantic());
 		constraintEClass.getESuperTypes().add(this.getSemantic());
 		modelExtensionEClass.getESuperTypes().add(this.getSemantic());
 		javaElementEClass.getESuperTypes().add(this.getReference());
@@ -1491,6 +1666,9 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		javadocTextElementEClass.getESuperTypes().add(this.getJavadocFragment());
 		javadocMethodReferenceEClass.getESuperTypes().add(this.getJavadocFragment());
 		javadocClassReferenceEClass.getESuperTypes().add(this.getJavadocFragment());
+		templateFileEClass.getESuperTypes().add(this.getReference());
+		templateEClass.getESuperTypes().add(this.getReference());
+		templateEClass.getESuperTypes().add(this.getJavaElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelDocumentationEClass, ModelDocumentation.class, "ModelDocumentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1508,6 +1686,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFClass_Tagline(), this.getJavadocTagElement(), null, "tagline", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_OperationalSemantics(), this.getOperationalSemantic(), this.getOperationalSemantic_ContainingClass(), "operationalSemantics", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_InferenceSemantics(), this.getInferenceSemantic(), this.getInferenceSemantic_ContainingClass(), "inferenceSemantics", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFClass_ImplementationNotes(), this.getImplementationNote(), this.getImplementationNote_ContainingClass(), "implementationNotes", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Constraints(), this.getConstraint(), this.getConstraint_ContainingClass(), "constraints", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Extensions(), this.getModelExtension(), this.getModelExtension_ContainingClass(), "extensions", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_GraphicalRepresentations(), this.getGraphicalRepresentation(), this.getGraphicalRepresentation_ContainingClass(), "graphicalRepresentations", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1541,6 +1720,11 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEAttribute(getInferenceSemantic_Category(), ecorePackage.getEString(), "category", null, 0, 1, InferenceSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInferenceSemantic_Description(), this.getJavadocTagElement(), null, "description", null, 0, 1, InferenceSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInferenceSemantic_ContainingClass(), this.getEMFClass(), this.getEMFClass_InferenceSemantics(), "containingClass", null, 0, 1, InferenceSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(implementationNoteEClass, ImplementationNote.class, "ImplementationNote", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImplementationNote_Category(), ecorePackage.getEString(), "category", null, 0, 1, ImplementationNote.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImplementationNote_Description(), this.getJavadocTagElement(), null, "description", null, 0, 1, ImplementationNote.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImplementationNote_ContainingClass(), this.getEMFClass(), this.getEMFClass_ImplementationNotes(), "containingClass", null, 0, 1, ImplementationNote.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constraintEClass, Constraint.class, "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConstraint_Constraint(), ecorePackage.getEString(), "constraint", null, 0, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1628,6 +1812,18 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEAttribute(getEMFReference_Containment(), ecorePackage.getEBoolean(), "containment", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFReference_Type(), this.getEMFClass(), null, "type", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFReference_ContainingType(), this.getEMFClass(), this.getEMFClass_References(), "containingType", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(templateFileEClass, TemplateFile.class, "TemplateFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTemplateFile_Plugin(), ecorePackage.getEString(), "plugin", null, 0, 1, TemplateFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplateFile_Package(), ecorePackage.getEString(), "package", null, 0, 1, TemplateFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplateFile_Name(), ecorePackage.getEString(), "name", null, 0, 1, TemplateFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTemplateFile_Templates(), this.getTemplate(), this.getTemplate_TemplateFile(), "templates", null, 0, -1, TemplateFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(templateEClass, Template.class, "Template", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTemplate_Name(), ecorePackage.getEString(), "name", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplate_Type(), ecorePackage.getEString(), "type", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplate_Line(), ecorePackage.getEInt(), "line", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTemplate_TemplateFile(), this.getTemplateFile(), this.getTemplateFile_Templates(), "templateFile", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintTypeEEnum, ConstraintType.class, "ConstraintType");

@@ -60,6 +60,16 @@
 		</div>
 		«ENDIF»
 		
+		«IF !implementationNotes.isEmpty»
+		<div id="implementation" class="semantic_block">
+			<h2>Implementation Notes</h2>
+			
+			<ul>
+			«EXPAND implementationNote FOREACH implementationNotes»
+			</ul>
+		</div>
+		«ENDIF»
+		
 		<div id="operational" class="semantic_block">
 			<h2>Operational Semantics</h2>
 			
@@ -215,7 +225,7 @@
 	<li>
 		«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»
 		«IF !local»
-		[«EXPAND supertypes FOR containingClass»]
+		[from «EXPAND supertypes FOR containingClass»]
 		«ENDIF»
 	</li>
 «ENDDEFINE»
@@ -224,8 +234,14 @@
 	<li>
 		«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»
 		«IF !local»
-		[«EXPAND supertypes FOR containingClass»]
+		[from «EXPAND supertypes FOR containingClass»]
 		«ENDIF»
+	</li>
+«ENDDEFINE»
+
+«DEFINE implementationNote FOR modeldoc::ImplementationNote»
+	<li>
+		«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»
 	</li>
 «ENDDEFINE»
 
@@ -239,7 +255,7 @@
 		«message»
 		«EXPAND linkReference FOR reference»
 		«IF !local»
-		[«EXPAND supertypes FOR containingClass»]
+		[from «EXPAND supertypes FOR containingClass»]
 		«ENDIF»
 		</span>
 	</li>
@@ -297,7 +313,7 @@
 	<span class="error">Unknown javadoc '«this»'</span>
 «ENDDEFINE»
 
-«DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag">«IF name == "@inference" || name == "@operational" || name == "@example"-»
+«DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag">«IF name == "@inference" || name == "@operational" || name == "@implementation" || name == "@example"-»
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 «EXPAND javadocSemanticsElement FOR fragments.first()-»
 «EXPAND javadocElement FOREACH fragments.withoutFirst()-» 
@@ -348,6 +364,10 @@
 
 «DEFINE linkReference FOR modeldoc::DroolsRule»
 	[<a href="«EXPAND browseSource»«package.plugin»/«getPackage(package.package)»/«package.name».drl#«line»">«name»</a>]
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::Template»
+	[<a href="«EXPAND browseSource»«templateFile.plugin»/«getPackage(templateFile.package)»/«templateFile.name»#«line»">«name»</a>]
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::FileLineReference»

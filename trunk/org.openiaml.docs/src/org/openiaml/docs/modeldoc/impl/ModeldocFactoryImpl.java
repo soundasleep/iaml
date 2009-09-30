@@ -24,6 +24,7 @@ import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
+import org.openiaml.docs.modeldoc.ImplementationNote;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavaMethod;
@@ -37,6 +38,8 @@ import org.openiaml.docs.modeldoc.ModelReference;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.docs.modeldoc.OperationalSemantic;
+import org.openiaml.docs.modeldoc.Template;
+import org.openiaml.docs.modeldoc.TemplateFile;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,6 +92,7 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 			case ModeldocPackage.OPERATIONAL_SEMANTIC: return createOperationalSemantic();
 			case ModeldocPackage.GRAPHICAL_REPRESENTATION: return createGraphicalRepresentation();
 			case ModeldocPackage.INFERENCE_SEMANTIC: return createInferenceSemantic();
+			case ModeldocPackage.IMPLEMENTATION_NOTE: return createImplementationNote();
 			case ModeldocPackage.CONSTRAINT: return createConstraint();
 			case ModeldocPackage.MODEL_EXTENSION: return createModelExtension();
 			case ModeldocPackage.JAVA_CLASS: return createJavaClass();
@@ -104,6 +108,8 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 			case ModeldocPackage.JAVADOC_CLASS_REFERENCE: return createJavadocClassReference();
 			case ModeldocPackage.EMF_ATTRIBUTE: return createEMFAttribute();
 			case ModeldocPackage.EMF_REFERENCE: return createEMFReference();
+			case ModeldocPackage.TEMPLATE_FILE: return createTemplateFile();
+			case ModeldocPackage.TEMPLATE: return createTemplate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -207,6 +213,16 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 	public InferenceSemantic createInferenceSemantic() {
 		InferenceSemanticImpl inferenceSemantic = new InferenceSemanticImpl();
 		return inferenceSemantic;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImplementationNote createImplementationNote() {
+		ImplementationNoteImpl implementationNote = new ImplementationNoteImpl();
+		return implementationNote;
 	}
 
 	/**
@@ -357,6 +373,26 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 	public EMFReference createEMFReference() {
 		EMFReferenceImpl emfReference = new EMFReferenceImpl();
 		return emfReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TemplateFile createTemplateFile() {
+		TemplateFileImpl templateFile = new TemplateFileImpl();
+		return templateFile;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Template createTemplate() {
+		TemplateImpl template = new TemplateImpl();
+		return template;
 	}
 
 	/**

@@ -89,6 +89,15 @@ public interface ModeldocFactory extends EFactory {
 	InferenceSemantic createInferenceSemantic();
 
 	/**
+	 * Returns a new object of class '<em>Implementation Note</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Implementation Note</em>'.
+	 * @generated
+	 */
+	ImplementationNote createImplementationNote();
+
+	/**
 	 * Returns a new object of class '<em>Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -222,6 +231,24 @@ public interface ModeldocFactory extends EFactory {
 	 * @generated
 	 */
 	EMFReference createEMFReference();
+
+	/**
+	 * Returns a new object of class '<em>Template File</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Template File</em>'.
+	 * @generated
+	 */
+	TemplateFile createTemplateFile();
+
+	/**
+	 * Returns a new object of class '<em>Template</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Template</em>'.
+	 * @generated
+	 */
+	Template createTemplate();
 
 	/**
 	 * Returns the package supported by this factory.

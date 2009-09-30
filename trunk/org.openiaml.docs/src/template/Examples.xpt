@@ -1,0 +1,51 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::Extensions»
+
+«DEFINE examples FOR modeldoc::ModelDocumentation»
+	«FILE "output/examples.html"»
+	
+«EXPAND Template::header("List of examples", "examples")»
+
+<div class="navigation">
+<a href="index.html">Model Elements</a>
+</div>
+
+<div class="intro">
+<h1>Model Examples Index</h1>
+
+<p>
+	This is an automatically-generated list of example models for 
+	<a href="http://openiaml.org">the Internet Application Modelling Language</a> (IAML).
+</p>
+</div>
+
+<ul class="class_list example_list">
+«FOREACH classes.sortBy(c|c.name) AS cls»
+	«IF !cls.examples.isEmpty»
+		<li class="example class «IF cls.abstract»abstract«ENDIF» «IF cls.abstract»interface«ENDIF»">
+		<a href="«fileName(cls)»" class="icon_image">«EXPAND Template::getIcon FOR cls»</a>
+		<a href="«fileName(cls)»">«cls.name»</a>
+		
+		<ul>
+		«FOREACH cls.examples AS example»
+			«EXPAND ClassTemplate::example FOR example»
+		«ENDFOREACH»
+		</ul>
+		
+		</li>
+	«ENDIF»
+«ENDFOREACH»
+</ul>
+
+«EXPAND Template::footer»
+
+	«ENDFILE»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

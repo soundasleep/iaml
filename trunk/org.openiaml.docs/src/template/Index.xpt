@@ -7,6 +7,11 @@
 	
 «EXPAND Template::header("List of model types", "index")»
 
+<div class="navigation">
+<a href="examples.html">Example Models</a>
+</div>
+
+<div class="intro">		
 <h1>Model Elements Index</h1>
 
 <p>
@@ -14,6 +19,7 @@
 	of all model element types in <a href="http://openiaml.org">the 
 	Internet Application Modelling Language</a> (IAML).
 </p>
+</div>
 
 <ul class="class_list">
 «FOREACH classes.sortBy(c|c.name) AS cls»

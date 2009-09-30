@@ -74,13 +74,13 @@ body#summary #description p + p { margin-top: 1em; }
 	padding-right: 10px;
 }
 
-body#summary div.intro { border: 1px solid #999; background: #eee; padding: 10px; }
-body#summary div.intro h1 { margin-top: 0; }
-body#summary div.intro #description { margin-bottom: 0; }
+div.intro { border: 1px solid #999; background: #eee; padding: 10px; }
+div.intro h1 { margin-top: 0; }
+div.intro #description { margin-bottom: 0; }
 
-body#summary div.intro h1 small { font-size: 0.6em; }
-body#summary div.intro h1 small a { color: #669; text-decoration: none; }
-body#summary div.intro h1 small a:hover { text-decoration: underline; }
+div.intro h1 small { font-size: 0.6em; }
+div.intro h1 small a { color: #669; text-decoration: none; }
+div.intro h1 small a:hover { text-decoration: underline; }
 
 body#summary .subtype_list { padding-left: 2em; margin-top: .5em; line-height: 1.4em; }
 

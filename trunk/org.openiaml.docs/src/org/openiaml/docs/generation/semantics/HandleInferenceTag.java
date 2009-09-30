@@ -11,18 +11,16 @@ import org.openiaml.docs.modeldoc.ModeldocFactory;
 import org.openiaml.docs.modeldoc.Reference;
 
 /**
- * Default implementation of HandleSemantics. 
- * 
- * Can deal with @semantics.
+ * Deal with @inference semantics tags.
  * 
  * @author jmwright
  */
-public class HandleSemanticsTag implements ITagHandler {
+public class HandleInferenceTag implements ITagHandler {
 	
 	private ModeldocFactory factory;
 	private ModelDocumentation root;
 	
-	public HandleSemanticsTag(ModelDocumentation root, ModeldocFactory factory) {
+	public HandleInferenceTag(ModelDocumentation root, ModeldocFactory factory) {
 		this.root = root;
 		this.factory = factory;
 	}
@@ -31,7 +29,7 @@ public class HandleSemanticsTag implements ITagHandler {
 			JavadocTagElement description,
 			EMFClass target, Reference reference) {
 		
-		if (name.equals("@semantics")) {
+		if (name.equals("@inference")) {
 			
 			// make an inference semantics link
 			InferenceSemantic semantic = factory.createInferenceSemantic();

@@ -17,7 +17,7 @@ global EcoreCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-# @semantics InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'edit'. 
+# @inference InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'edit'. 
 rule "Create 'edit' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )
@@ -32,7 +32,7 @@ rule "Create 'edit' event trigger for input text field"
 		
 end
 
-# @semantics DomainAttribute A {@model DomainAttribute} contains an {@model EventTrigger} named 'edit'.
+# @inference DomainAttribute A {@model DomainAttribute} contains an {@model EventTrigger} named 'edit'.
 rule "Create 'edit' event trigger for domain attribute"
 	when
 		f : DomainAttribute( overridden == false )
@@ -45,7 +45,7 @@ rule "Create 'edit' event trigger for domain attribute"
 		
 end
 
-# @semantics InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'access'.
+# @inference InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'access'.
 rule "Create 'access' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )

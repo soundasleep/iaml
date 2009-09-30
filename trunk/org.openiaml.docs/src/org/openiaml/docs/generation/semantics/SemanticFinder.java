@@ -25,7 +25,8 @@ public class SemanticFinder {
 	 * {@link #findSemanticReferences(ModelDocumentation, JavadocTagElement, Reference, ITagHandler)}.
 	 */
 	protected String[] tagsToIdentify = new String[] {
-		"@semantics",
+		"@inference",
+		"@operational",
 		"@example",
 	};
 	

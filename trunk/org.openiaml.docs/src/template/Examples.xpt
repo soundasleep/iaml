@@ -28,9 +28,16 @@
 		<a href="«fileName(cls)»">«cls.name»</a>
 		
 		<ul>
-		«FOREACH cls.examples AS example»
-			«EXPAND ClassTemplate::example(true) FOR example»
-		«ENDFOREACH»
+			«REM»group by example source«ENDREM»
+			«FOREACH cls.examples.union(getInheritedExamples(cls)).exampleModel.sortBy(m|m.name).uniqueModelID().toSet() AS exampleModel»
+				<li>«EXPAND ClassTemplate::linkReference FOR cls.examples.union(getInheritedExamples(cls)).exampleModel.selectFirst(e|e.uniqueModelID() == exampleModel)»
+				
+				<ul>
+					«EXPAND ClassTemplate::example(true) FOREACH cls.examples.select(e|e.exampleModel.uniqueModelID() == exampleModel).sortBy(e|e.description.getString())»
+					«EXPAND ClassTemplate::example(false) FOREACH getInheritedExamples(cls).select(e|e.exampleModel.uniqueModelID() == exampleModel).sortBy(e|e.description.getString())»
+				</ul>
+				</li>
+			«ENDFOREACH»
 		</ul>
 		
 		</li>

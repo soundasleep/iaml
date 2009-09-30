@@ -70,7 +70,7 @@ body#index li.class small:before { content: " - "; }
 
 body#summary h1 img { vertical-align: .05em; }
 body#summary h1 span.class_link a img { vertical-align: -.1em; }
-body#summary #tagline { font-style: italic; }
+body#summary #tagline { }
 
 body#summary #tagline { margin: 0; padding: 0; }
 body#summary #description {
@@ -116,6 +116,7 @@ span.error { background: #fcc; }
 .file_line_reference a { background: url("../icons/file_obj.gif") top left no-repeat; padding-left: 18px; }
 .file_reference a { background: url("../icons/file_obj.gif") top left no-repeat; padding-left: 18px; }
 .model_reference a { background: url("../icons/iaml_model.gif") top left no-repeat; padding-left: 18px; }
+a.model_source { background: url("../icons/file_obj.gif") top left no-repeat; padding-left: 18px; }
 .constraint .file_line_reference a { background: url("../icons/checkfile.gif") top left no-repeat; padding-left: 18px; }
 .constraint .file_reference a { background: url("../icons/checkfile.gif") top left no-repeat; padding-left: 18px; }
 .extension .file_line_reference a { background: url("../icons/extensionfile.gif") top left no-repeat; padding-left: 18px; }

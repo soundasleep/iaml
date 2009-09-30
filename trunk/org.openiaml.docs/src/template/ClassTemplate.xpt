@@ -66,7 +66,7 @@
 					«EXPAND example(false) FOREACH getInheritedExamples(this).select(e|e.exampleModel.uniqueModelID() == exampleModel).sortBy(e|e.description.getString())»
 				</ul>
 				</li>
-			«ENDFOREACH»			
+			«ENDFOREACH»
 			</ul>
 		</div>
 		«ENDIF»
@@ -121,7 +121,7 @@
 		</div>
 		
 		<div id="attributes_direct" class="semantic_block">
-			<h2>Direct Attributes</h2>
+			<h2>Attributes</h2>
 			
 			«IF attributes.isEmpty»
 				<div class="none">(none)</div>
@@ -145,7 +145,7 @@
 		</div>
 		
 		<div id="containments_direct" class="semantic_block">
-			<h2>Direct Containments</h2>
+			<h2>Children</h2>
 			
 			«IF references.select(r|r.containment).isEmpty»
 				<div class="none">(none)</div>
@@ -157,7 +157,7 @@
 		</div>
 
 		<div id="containments_inherited" class="semantic_block">
-			<h2>Inherited Containments</h2>
+			<h2>Inherited Children</h2>
 			
 			«IF getInheritedReferences(this).select(r|r.containment).isEmpty»
 				<div class="none">(none)</div>
@@ -169,7 +169,7 @@
 		</div>
 		
 		<div id="references_direct" class="semantic_block">
-			<h2>Direct References</h2>
+			<h2>References</h2>
 			
 			«IF references.select(r|!r.containment).isEmpty»
 				<div class="none">(none)</div>
@@ -193,7 +193,7 @@
 		</div>
 		
 		<div id="extensions_inherited" class="semantic_block">
-			<h2>Direct Extensions</h2>
+			<h2>Extensions</h2>
 			
 			«IF extensions.isEmpty»
 				<div class="none">(none)</div>
@@ -316,6 +316,7 @@
 		«ELSE»
 		[«lowerBound»...«IF upperBound==-1»*«ELSE»«upperBound»«ENDIF»]
 		«ENDIF»
+
 		«EXPAND supertypes FOR type»
 	</li>
 «ENDDEFINE»
@@ -403,7 +404,7 @@
 
 «DEFINE linkReference FOR modeldoc::ModelReference»
 	<span class="model_reference reference">[<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name»/«name».html">«name».iaml</a>
-	(<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name».iaml">source</a>)]</span>
+	(<a class="model_source" href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name».iaml">source</a>)]</span>
 «ENDDEFINE»
 
 «DEFINE browseSource FOR emf::EObject-»http://code.google.com/p/iaml/source/browse/trunk/«ENDDEFINE»

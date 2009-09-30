@@ -4,7 +4,6 @@
 
 «DEFINE getCss FOR modeldoc::ModelDocumentation»
 «FILE "output/default.css"»
-
 html,input {
 	font-family: Arial, Arial, Helvetica, sans-serif;
 	font-size: .9em;
@@ -16,6 +15,7 @@ html {
 form { margin: 0; padding: 0; }
 h1 { margin-top: .3em; margin-bottom: .3em; }
 a img { border: 0; }
+.class_link a img { vertical-align: text-bottom; }
 
 ul,ol,p {
 	line-height: 1.4em;
@@ -28,9 +28,27 @@ form {
 	background: #eee;
 }
 
-h2 { margin-top: .7em; margin-bottom: .3em; }
-.semantic_block + .semantic_block { border-top: 1px solid #ccc; }
+a { color: #369; text-decoration: underline; }
+a:hover { color: #036; text-decoration: underline; }
+
+h2 { margin-top: 0em; margin-bottom: .2em; padding: .2em .4em .2em .4em; background: #eee; }
+body#summary div.intro + .semantic_block { margin-top: .6em; }
+
+.semantic_block + .semantic_block { border-top: 1px solid #999; }
+#constraints.semantic_block li,
+#operational.semantic_block li,
+#inference.semantic_block li,
+#implementation.semantic_block li,
+#examples.semantic_block li
+	{ margin-bottom: 0.3em; }
 .none { margin-bottom: 1em; }
+
+.inherited_block { color: #999; font-size: 0.9em; }
+.inherited_block a { color: #999; }
+.inherited_block a:hover { color: #789; }
+.inherited_block a img { opacity: .7; }
+
+.javadoc_reference { float: right; }
 
 table { border: 1px solid #aab; border-collapse: collapse; }
 table th { background: #ccd; }
@@ -51,6 +69,7 @@ body#index li.class small:before { content: " - "; }
 .interface { font-style: italic; }
 
 body#summary h1 img { vertical-align: .05em; }
+body#summary h1 span.class_link a img { vertical-align: -.1em; }
 body#summary #tagline { font-style: italic; }
 
 body#summary #tagline { margin: 0; padding: 0; }
@@ -79,10 +98,12 @@ div.intro h1 { margin-top: 0; }
 div.intro #description { margin-bottom: 0; }
 
 div.intro h1 small { font-size: 0.6em; }
-div.intro h1 small a { color: #669; text-decoration: none; }
+div.intro h1 small a { text-decoration: none; }
 div.intro h1 small a:hover { text-decoration: underline; }
 
 body#summary .subtype_list { padding-left: 2em; margin-top: .5em; line-height: 1.4em; }
+
+body#examples li.example { margin-bottom: 1em; }
 
 .constraint .warning { background: url("../icons/warning_obj.gif") top left no-repeat; padding-left: 18px; }
 .constraint .error { background: url("../icons/error_tsk.gif") top left no-repeat; padding-left: 18px; }
@@ -99,7 +120,5 @@ span.error { background: #fcc; }
 .constraint .file_reference a { background: url("../icons/checkfile.gif") top left no-repeat; padding-left: 18px; }
 .extension .file_line_reference a { background: url("../icons/extensionfile.gif") top left no-repeat; padding-left: 18px; }
 .extension .file_reference a { background: url("../icons/extensionfile.gif") top left no-repeat; padding-left: 18px; }
-
-a:hover { text-decoration: none; }
 «ENDFILE»
 «ENDDEFINE»

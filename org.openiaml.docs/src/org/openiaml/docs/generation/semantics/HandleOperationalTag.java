@@ -4,10 +4,10 @@
 package org.openiaml.docs.generation.semantics;
 
 import org.openiaml.docs.modeldoc.EMFClass;
-import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
+import org.openiaml.docs.modeldoc.OperationalSemantic;
 import org.openiaml.docs.modeldoc.Reference;
 
 /**
@@ -32,12 +32,12 @@ public class HandleOperationalTag implements ITagHandler {
 		if (name.equals("@operational")) {
 			
 			// make an inference semantics link
-			InferenceSemantic semantic = factory.createInferenceSemantic();
+			OperationalSemantic semantic = factory.createOperationalSemantic();
 			semantic.setDescription(description);
 			semantic.setReference(reference);
 			
 			// add it to the EMFclass
-			target.getInferenceSemantics().add(semantic);
+			target.getOperationalSemantics().add(semantic);
 			
 		}
 	}

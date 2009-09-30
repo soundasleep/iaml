@@ -29,7 +29,7 @@
 		
 		<ul>
 		«FOREACH cls.examples AS example»
-			«EXPAND ClassTemplate::example FOR example»
+			«EXPAND ClassTemplate::example(true) FOR example»
 		«ENDFOREACH»
 		</ul>
 		

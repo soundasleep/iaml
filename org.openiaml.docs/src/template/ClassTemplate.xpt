@@ -52,12 +52,21 @@
 		«ENDIF»
 		</div>
 		
-		«IF !examples.isEmpty»
+		«IF !examples.union(getInheritedExamples(this)).isEmpty»
 		<div id="examples" class="semantic_block">
 			<h2>Examples</h2>
 			
 			<ul>
-			«EXPAND example FOREACH examples»
+			«REM»group by example source«ENDREM»
+			«FOREACH examples.union(getInheritedExamples(this)).exampleModel.sortBy(m|m.name).uniqueModelID().toSet() AS exampleModel»
+				<li>«EXPAND linkReference FOR examples.union(getInheritedExamples(this)).exampleModel.selectFirst(e|e.uniqueModelID() == exampleModel)»
+				
+				<ul>
+					«EXPAND example(true) FOREACH examples.select(e|e.exampleModel.uniqueModelID() == exampleModel).sortBy(e|e.description.getString())»
+					«EXPAND example(false) FOREACH getInheritedExamples(this).select(e|e.exampleModel.uniqueModelID() == exampleModel).sortBy(e|e.description.getString())»
+				</ul>
+				</li>
+			«ENDFOREACH»			
 			</ul>
 		</div>
 		«ENDIF»
@@ -213,37 +222,47 @@
 
 «DEFINE supertypes FOR modeldoc::EMFClass-»<span class="class_link"><a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«EXPAND Template::getIcon»</a> <a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a></span>«ENDDEFINE»
 
-«DEFINE example FOR modeldoc::Example»
+«DEFINE example(Boolean local) FOR modeldoc::Example»
 	<li>
-		«EXPAND linkReference FOR exampleModel»
-		:
 		«EXPAND javadocElement FOR description»
 
-		«EXPAND linkReference FOR reference»
+		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
+		
+		«IF !local»
+		<span class="inherited_block">[from «EXPAND supertypes FOR containingClass»]</span>
+		«ENDIF»
 	</li>
 «ENDDEFINE»
 
 «DEFINE operationalSemantics(Boolean local) FOR modeldoc::OperationalSemantic»
 	<li>
-		«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»
+		«EXPAND javadocElement FOR description»
+		
+		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
+		
 		«IF !local»
-		[from «EXPAND supertypes FOR containingClass»]
+		<span class="inherited_block">[from «EXPAND supertypes FOR containingClass»]</span>
 		«ENDIF»
 	</li>
 «ENDDEFINE»
 
 «DEFINE inferenceSemantics(Boolean local) FOR modeldoc::InferenceSemantic»
 	<li>
-		«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»
+		«EXPAND javadocElement FOR description»
+		
+		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
+		
 		«IF !local»
-		[from «EXPAND supertypes FOR containingClass»]
+		<span class="inherited_block">[from «EXPAND supertypes FOR containingClass»]</span>
 		«ENDIF»
 	</li>
 «ENDDEFINE»
 
 «DEFINE implementationNote FOR modeldoc::ImplementationNote»
 	<li>
-		«EXPAND javadocElement FOR description» «EXPAND linkReference FOR reference»
+		«EXPAND javadocElement FOR description»
+		
+		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
 	</li>
 «ENDDEFINE»
 
@@ -255,9 +274,11 @@
 			<span class="error">
 		«ENDIF»
 		«message»
-		«EXPAND linkReference FOR reference»
+		
+		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
+		
 		«IF !local»
-		[from «EXPAND supertypes FOR containingClass»]
+		<span class="inherited_block">[from «EXPAND supertypes FOR containingClass»]</span>
 		«ENDIF»
 		</span>
 	</li>
@@ -307,7 +328,7 @@
 		<a href="«fileName(containingClass)»">«value»</a>
 		«ENDIF»
 		
-		«EXPAND linkReference FOR reference»
+		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
 	</li>
 «ENDDEFINE»
 
@@ -330,7 +351,7 @@
 «ENDDEFINE»
 
 «DEFINE javadocModelElement FOR modeldoc::JavadocTextElement-»
-«IF value.contains(".") || value.contains("#")-»
+«" "»«IF value.contains(".") || value.contains("#")-»
 «value-»«REM»the value contains an illegal character; it can't link to a model element«ENDREM»
 «ELSE-»
 «IF value.trim().contains(" ")-»

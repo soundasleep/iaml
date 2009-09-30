@@ -21,6 +21,25 @@ List[modeldoc::OperationalSemantic] getInheritedOperationalSemantics(modeldoc::E
 List[modeldoc::InferenceSemantic] getInheritedInferenceSemantics(modeldoc::EMFClass this) :
 	supertypes.inferenceSemantics.union( supertypes.getInheritedInferenceSemantics() ); 
 
+List[modeldoc::Example] getInheritedExamples(modeldoc::EMFClass this) :
+	supertypes.examples.union( supertypes.getInheritedExamples() ); 
+
+/**
+ * Get a unique model reference ID that is consistent across multiple
+ * model references.
+ */
+String uniqueModelID(modeldoc::ModelReference this) :
+	plugin + ";" + package + ";" + name;
+
+String getString(modeldoc::JavadocTagElement this) :
+	name + " " + fragments.getString().toString();
+
+String getString(modeldoc::JavadocFragment this) :
+ 	"";
+
+String getString(modeldoc::JavadocTextElement this) :
+	value;
+	
 /**
  * Converts 'foo.bar.baz' into 'foo/bar/baz'
  */

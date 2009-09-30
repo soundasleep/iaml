@@ -51,14 +51,11 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	/**
 	 * Keeps track of (source edit parts -> destination files)
 	 */
-	private Map<DiagramEditPart,IPath> partDestinationMap = new
-		HashMap<DiagramEditPart,IPath>();
+	private Map<DiagramEditPart,IPath> partDestinationMap;
 	
-	private Map<DiagramEditPart,Rectangle> partRectangleMap = new
-		HashMap<DiagramEditPart,Rectangle>();
+	private Map<DiagramEditPart,Rectangle> partRectangleMap;
 	
-	private Map<DiagramEditPart,EObject> partEObjectMap = new
-		HashMap<DiagramEditPart,EObject>();
+	private Map<DiagramEditPart,EObject> partEObjectMap;
 	
 	/**
 	 * Stores a list of all the resolved EObjects of children
@@ -158,6 +155,11 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		
 		monitor.beginTask("Exporting to HTML", 105);
 		this.targetDiagram = targetDiagram;
+		
+		// initialise maps
+		partDestinationMap = new HashMap<DiagramEditPart,IPath>();
+		partRectangleMap = new HashMap<DiagramEditPart,Rectangle>();
+		partEObjectMap = new HashMap<DiagramEditPart,EObject>();
 		
 		// do parent
 		super.doExport(targetDiagram, new SubProgressMonitor(monitor, 70));

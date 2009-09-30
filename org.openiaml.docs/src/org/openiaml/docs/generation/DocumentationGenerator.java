@@ -125,8 +125,9 @@ public class DocumentationGenerator {
 		// load all OAW templates for implementation notes
 		{
 			ILoader loader = new LoadOAWImplementationNotes(
-					"org.openiaml.model.codegen.oaw" /* plugin */,
-					"../org.openiaml.model.codegen.oaw/" /* engine base */,
+					new File("../org.openiaml.model.codegen.oaw/src/template") /* source folder */,
+					"org.openiaml.model.codegen.oaw" /* plugin */, 
+					"template" /* starting package */, 
 					semanticTags
 			);
 			loader.load(factory, root);

@@ -108,7 +108,7 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 				loadTestCaseSemantics(factory, root, inFile, plugin, pkg + "." + file);
 			} else if (file.endsWith(".java")) {
 				// iterate over this file
-				String name = file.substring(0, file.lastIndexOf(".java"));
+				String name = file.substring(0, file.lastIndexOf(".java")); // remove extension
 				
 				System.out.println("Parsing '" + inFile + "'...");
 				

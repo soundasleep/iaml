@@ -8,8 +8,11 @@ import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.List;
 
+import org.openiaml.docs.generation.BasicJavadocParser.IJavadocReferenceCreator;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.generation.semantics.SemanticFinder;
+import org.openiaml.docs.modeldoc.DroolsRule;
+import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
@@ -26,24 +29,24 @@ import org.openiaml.docs.modeldoc.TemplateFile;
 public class LoadOAWImplementationNotes extends DocumentationHelper implements ILoader {
 
 	private String plugin;
-	
-	private List<ITagHandler> semanticTagHandlers;
 
 	private File file;
 
 	private String startingPackage;
 
+	private DocumentationGenerator generator;
+	
 	public LoadOAWImplementationNotes(File file, String plugin, String startingPackage,
-			List<ITagHandler> semanticTagHandlers) {
+			DocumentationGenerator generator) {
 		super();
 		this.file = file;
 		this.plugin = plugin;
 		this.startingPackage = startingPackage;
-		this.semanticTagHandlers = semanticTagHandlers;
+		this.generator = generator;
 	}
 
 	public List<ITagHandler> getSemanticTagHandlers() {
-		return semanticTagHandlers;
+		return generator.getSemanticTagHandlers();
 	}
 
 	public void load(ModeldocFactory factory, ModelDocumentation root) throws DocumentationGenerationException {
@@ -99,40 +102,24 @@ public class LoadOAWImplementationNotes extends DocumentationHelper implements I
 			String name, File file) throws IOException {
 		
 		// create a TemplateFile for this template file
-		TemplateFile templateFile = factory.createTemplateFile();
+		final TemplateFile templateFile = factory.createTemplateFile();
 		templateFile.setPlugin(plugin);
 		templateFile.setPackage(pkg);
 		templateFile.setName(name);
 		root.getReferences().add(templateFile);
 
-		CharBuffer buf = CharBuffer.wrap(readFile(file));
-		String[] lines = buf.toString().split("\n");
-		
-		for (int i = 0; i < lines.length; i++) {
-			String line = lines[i].trim();
+		BasicJavadocParser parser = new BasicJavadocParser(getSemanticTagHandlers());
+		parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
 			
-			String key = "# @implementation";
-			if (line.startsWith(key)) {
-				line = line.substring(key.length() + 1).trim();
-				
-				Template template = createTemplate(factory, i + 1, lines);
-				if (template != null) {
-					templateFile.getTemplates().add(template);
-
-					// a root tag for @semantics
-					JavadocTagElement e = factory.createJavadocTagElement();
-					e.setJavaParent(template);
-					e.setName("@implementation");
-					
-					// parse the line into javadoc elements
-					// (the line needs to be parsed into fragments before we can find semantic references)
-					new BasicJavadocParser().parseSemanticLineIntoFragments(line, factory, e);
-					
-					// identify semantic rules back
-					handleModelReferences(e, template, root);
+			public JavaElement createReference(String[] lines, int line) {
+				Template ref = createTemplate(factory, line, lines);
+				if (ref != null) {
+					templateFile.getTemplates().add(ref);
 				}
+				return ref;
 			}
-		}
+			
+		});
 		
 	}
 

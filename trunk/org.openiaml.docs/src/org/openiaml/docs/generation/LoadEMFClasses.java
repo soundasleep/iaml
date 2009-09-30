@@ -3,12 +3,15 @@
  */
 package org.openiaml.docs.generation;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.JavaClass;
@@ -36,20 +39,27 @@ public class LoadEMFClasses implements ILoader {
 	 * The base of the plugin, e.g. "org.openiaml.model.".
 	 */
 	private String packageBase;
-		
+
+	private DocumentationGenerator generator;
+	
 	/**
 	 * @param rootPackage
 	 * @param plugin
 	 * @param packageBase
 	 */
 	public LoadEMFClasses(EPackage rootPackage, String plugin,
-			String packageBase) {
+			String packageBase, DocumentationGenerator generator) {
 		super();
 		this.rootPackage = rootPackage;
 		this.plugin = plugin;
 		this.packageBase = packageBase;
+		this.generator = generator;
 	}
 
+	public List<ITagHandler> getSemanticTagHandlers() {
+		return generator.getSemanticTagHandlers();
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.openiaml.docs.generation.IDocGenerator#load(org.openiaml.docs.modeldoc.ModeldocFactory, org.openiaml.docs.modeldoc.ModelDocumentation)
 	 */
@@ -131,7 +141,7 @@ public class LoadEMFClasses implements ILoader {
 					
 					// parse the line into javadoc elements
 					// (the line needs to be parsed into fragments before we can find semantic references)
-					new BasicJavadocParser().parseSemanticLineIntoFragments(details.get(key), factory, e);
+					new BasicJavadocParser(getSemanticTagHandlers()).parseSemanticLineIntoFragments(details.get(key), factory, e);
 					
 					// save this parsed detail as a tagline
 					target.setTagline(e);

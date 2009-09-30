@@ -171,5 +171,5 @@ public abstract class DocumentationHelper implements ILoader {
 		return buf.toString().toCharArray();
 
 	}
-
+	
 }

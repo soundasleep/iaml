@@ -5,17 +5,15 @@ package org.openiaml.docs.generation;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.CharBuffer;
 import java.util.List;
 
+import org.openiaml.docs.generation.BasicJavadocParser.IJavadocReferenceCreator;
 import org.openiaml.docs.generation.semantics.ITagHandler;
-import org.openiaml.docs.generation.semantics.SemanticFinder;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
-import org.openiaml.docs.modeldoc.JavadocTagElement;
+import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
-import org.openiaml.docs.modeldoc.Reference;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 
 /**
@@ -29,8 +27,8 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 	private String plugin;
 	
 	private String ruleBase;
-	
-	private List<ITagHandler> semanticTagHandlers;
+
+	private DocumentationGenerator generator;
 	
 	/**
 	 * @param engine
@@ -39,18 +37,16 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 	 * @param semanticTagHandlers
 	 */
 	public LoadSemanticsFromRules(DroolsInferenceEngine engine, String plugin,
-			String ruleBase, List<ITagHandler> semanticTagHandlers) {
+			String ruleBase, DocumentationGenerator generator) {
 		super();
 		this.engine = engine;
 		this.plugin = plugin;
 		this.ruleBase = ruleBase;
-		this.semanticTagHandlers = semanticTagHandlers;
+		this.generator = generator;
 	}
 
-
-
 	public List<ITagHandler> getSemanticTagHandlers() {
-		return semanticTagHandlers;
+		return generator.getSemanticTagHandlers();
 	}
 	
 	/**
@@ -96,58 +92,27 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 			String name, File file) throws IOException {
 		
 		// create a package for this rule file
-		DroolsPackage drools = factory.createDroolsPackage();
+		final DroolsPackage drools = factory.createDroolsPackage();
 		drools.setPlugin(plugin);
 		drools.setPackage(pkg);
 		drools.setName(name);
 		root.getReferences().add(drools);
-
-		CharBuffer buf = CharBuffer.wrap(readFile(file));
-		String[] lines = buf.toString().split("\n");
 		
-		for (int i = 0; i < lines.length; i++) {
-			String line = lines[i].trim();
+		BasicJavadocParser parser = new BasicJavadocParser(getSemanticTagHandlers());
+		parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
 			
-			String key = "# @inference";
-			if (line.startsWith(key)) {
-				line = line.substring(key.length() + 1).trim();
-				
-				DroolsRule rule = createDroolsRule(factory, i + 1, lines);
+			public JavaElement createReference(String[] lines, int line) {
+				DroolsRule rule = createDroolsRule(factory, line, lines);
 				if (rule != null) {
 					drools.getRules().add(rule);
-
-					// a root tag for @semantics
-					JavadocTagElement e = factory.createJavadocTagElement();
-					e.setJavaParent(rule);
-					e.setName("@inference");
-					
-					// parse the line into javadoc elements
-					// (the line needs to be parsed into fragments before we can find semantic references)
-					new BasicJavadocParser().parseSemanticLineIntoFragments(line, factory, e);
-					
-					// identify semantic rules back
-					handleModelReferences(e, rule, root);
 				}
+				return rule;
 			}
-		}
+			
+		});
 		
 	}
 
-	/**
-	 * Iterate over all semantic handlers in {@link LoadSemanticsFromTests#getSemanticTagHandlers()}
-	 * and identify potential semantic tags.
-	 * 
-	 * @param e
-	 * @param reference
-	 * @param root 
-	 */
-	protected void handleModelReferences(JavadocTagElement e, Reference reference, ModelDocumentation root) {
-		SemanticFinder finder = new SemanticFinder();
-		for (ITagHandler sem : getSemanticTagHandlers()) {
-			finder.findSemanticReferences(LoadSemanticsFromRules.this, root, e, reference, sem);
-		}
-	}
-	
 	/**
 	 * Parse down until we find a line starting with 
 	 * <code>rule "rule title"</code>.

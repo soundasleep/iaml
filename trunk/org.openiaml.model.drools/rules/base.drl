@@ -38,7 +38,10 @@ rule "Create empty domain store"
 		
 end
 
-# @inference InputTextField,ApplicationElementProperty A {@model InputTextField} contains a {@model ApplicationElementProperty property} named 'fieldValue'.
+/**
+ * @inference InputTextField,ApplicationElementProperty A {@model InputTextField} 
+ * 		contains a {@model ApplicationElementProperty property} named 'fieldValue'.
+ */
 rule "Create field value for input text field"
 	when
 		f : InputTextField( overridden == false )

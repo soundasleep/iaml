@@ -5,7 +5,9 @@ package org.openiaml.docs.generation;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
+import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.FileReference;
@@ -38,6 +40,8 @@ public class LoadEMFDescription extends DocumentationHelper implements ILoader {
 	 * The base of the plugin, e.g. "model.doc".
 	 */
 	private String packageBase;
+	
+	private DocumentationGenerator generator;
 		
 	/**
 	 * @param rootPackage
@@ -45,13 +49,18 @@ public class LoadEMFDescription extends DocumentationHelper implements ILoader {
 	 * @param packageBase
 	 */
 	public LoadEMFDescription(String docBase, String plugin,
-			String packageBase) {
+			String packageBase, DocumentationGenerator generator) {
 		super();
 		this.docBase = docBase;
 		this.plugin = plugin;
 		this.packageBase = packageBase;
+		this.generator = generator;
 	}
-
+	
+	public List<ITagHandler> getSemanticTagHandlers() {
+		return generator.getSemanticTagHandlers();
+	}
+		
 	/* (non-Javadoc)
 	 * @see org.openiaml.docs.generation.IDocGenerator#load(org.openiaml.docs.modeldoc.ModeldocFactory, org.openiaml.docs.modeldoc.ModelDocumentation)
 	 */
@@ -71,7 +80,7 @@ public class LoadEMFDescription extends DocumentationHelper implements ILoader {
 					
 					// parse the line into javadoc elements
 					// (the line needs to be parsed into fragments before we can find semantic references)
-					new BasicJavadocParser().parseSemanticLineIntoFragments(String.valueOf(html), factory, e);
+					new BasicJavadocParser(getSemanticTagHandlers()).parseSemanticLineIntoFragments(String.valueOf(html), factory, e);
 					
 					AdditionalDocumentation doc = factory.createAdditionalDocumentation();
 					doc.setDescription( e );

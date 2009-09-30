@@ -54,7 +54,10 @@ rule "Create field value for input text field"
 		
 end
 
-# @inference DomainAttribute,ApplicationElementProperty A {@model DomainAttribute} contains a {@model ApplicationElementProperty property} named 'fieldValue'.
+/**
+ * @inference DomainAttribute,ApplicationElementProperty A {@model DomainAttribute} 
+ *		contains a {@model ApplicationElementProperty property} named 'fieldValue'.
+ */
 rule "Create field value for domain attribute"
 	when
 		f : DomainAttribute( overridden == false )

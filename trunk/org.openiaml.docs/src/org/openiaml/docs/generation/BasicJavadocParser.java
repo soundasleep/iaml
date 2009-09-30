@@ -6,6 +6,7 @@ package org.openiaml.docs.generation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.CharBuffer;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openiaml.docs.generation.semantics.HandleInlineJavadoc;
@@ -133,11 +134,110 @@ public class BasicJavadocParser {
 					// identify semantic rules back
 					handleModelReferences(e, ref, root, helper);
 				}
+			} else if (line.startsWith("/**")) {
+				
+				// get all @tags
+				String[] tags = getJavadocTags(lines, i);
+				
+				for (String tag : tags) {
+					if (!tag.contains(" ")) {
+						throw new RuntimeException("Malformed Javadoc tag, expected a space: '" + line + "'");
+					}
+					
+					// extract tag
+					String tagName = tag.substring(0, tag.indexOf(' '));
+					// extract line
+					tag = tag.substring(tag.indexOf(' ') + 1);
+					
+					JavaElement ref = creator.createReference(lines, i + 1);
+					if (ref != null) {
+					
+						// a root tag for @tagName
+						JavadocTagElement e = factory.createJavadocTagElement();
+						e.setJavaParent(ref);
+						e.setName(tagName);
+						
+						// parse the line into javadoc elements
+						// (the line needs to be parsed into fragments before we can find semantic references)
+						parseSemanticLineIntoFragments(tag, factory, e);
+						
+						// identify semantic rules back
+						handleModelReferences(e, ref, root, helper);
+					}
+				}
+				
 			}
-			
-			// TODO check for multiple-line comments
 		}
 		
+	}
+	
+	/**
+	 * Find all occurances of Javadoc tags from the given source, and
+	 * return them separately.
+	 * 
+	 * @param lines
+	 * @param line
+	 * @return
+	 */
+	protected String[] getJavadocTags(String[] lines, int line) {
+		List<String> result = new ArrayList<String>();
+		
+		boolean inTag = false;
+		String currentString = "";
+		for (int j = line; j < lines.length; j++) {
+			String cur = lines[j].trim();
+			
+			// jump over first
+			if (j == line) {
+				cur = cur.substring(cur.indexOf("/**") + 3).trim();
+			}
+
+			// bail if we get to the end
+			if (cur.startsWith("**/")) {
+				break;
+			}
+
+			// skip over any initial stars
+			while (cur.startsWith("*")) {
+				cur = cur.substring(1).trim();
+			}
+			
+			// does this line start with a @?
+			if (cur.startsWith("@")) {
+				if (inTag) {
+					// we are currently in a tag; close it and start a new one
+					result.add(currentString.trim());
+					currentString = "";
+				} else {
+					// we are not yet in a tag; we are now
+					inTag = true;
+				}
+			}
+			
+			// does this line end with a **/, i.e. we need to stop?
+			boolean shouldStop = false;
+			if (cur.startsWith("/") /* we previously got rid of the other '*'s */) {
+				cur = ""; // empty;
+				shouldStop = true;
+			} else if (cur.endsWith("*/")) {
+				cur = cur.substring(0, cur.indexOf("*/")).trim();
+				shouldStop = true;
+			}
+			if (inTag) {
+				currentString += cur + "\n";
+			}
+			
+			// does the current line end with a **/?
+			if (shouldStop)
+				break;
+			
+		}
+		
+		// add last tag if not yet saved
+		if (inTag) {
+			result.add(currentString.trim());
+		}
+		return result.toArray(new String[] {});
 	}
 
 	/**

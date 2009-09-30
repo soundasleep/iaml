@@ -14,6 +14,21 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * Test a Login Handler in a Session, where the login handler
  * is authenticating against a domain object instance.
  * 
+ * @example LoginHandler
+ * 		The complete {@model WireEdge wire-based} implementation of a 
+ * 		{@model LoginHandler} (selecting a
+ * 		{@model DomainObject})
+ * 
+ * @operational LoginHandler
+ * 		If a {@model LoginHandler} (selecting a {@model DomainObject}) has an outgoing
+ * 		{@model NavigateWire navigation} to a {@model Page} named 'logout', the successful
+ * 		logout of the current user will be redirected to this page.
+ * 
+ * @operational LoginHandler
+ * 		If a {@model LoginHandler} (selecting a {@model DomainObject}) has an outgoing
+ * 		{@model NavigateWire navigation} to a {@model Page} named 'login', the successful
+ * 		logout of the current user will be redirected to this page.
+ * 
  * @author jmwright
  *
  */

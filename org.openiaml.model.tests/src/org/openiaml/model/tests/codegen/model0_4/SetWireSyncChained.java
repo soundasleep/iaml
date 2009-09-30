@@ -12,6 +12,10 @@ import org.openiaml.model.tests.CodegenTestCase;
  * SetWires connecting to SyncWires operating over multiple pages,
  * both client and server.
  * 
+ * @example SetWire,SyncWire
+ * 		Chaining {@model SetWire SetWires} and {@model SyncWire SyncWires}
+ * 		together across multiple {@model Page Pages}.
+ * 
  * @author jmwright
  *
  */

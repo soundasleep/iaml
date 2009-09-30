@@ -11,6 +11,11 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * SetWires operating on a remote object.
  * 
+ * @operational SetWire 
+ * 		If a {@model InputTextField} is connected to another with 
+ * 		a {@model SetWire} on a different page, changes in the source
+ * 		InputTextField will update the target InputTextField.
+ *  
  * @author jmwright
  *
  */

@@ -10,6 +10,11 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * SetWires connecting to SyncWires.
  * 
+ * @operational SetWire 
+ * 		If a {@model SetWire} is chained with a {@model SyncWire},
+ * 		changes from the SetWire source will update the target of the 
+ * 		SyncWire.
+ * 
  * @author jmwright
  *
  */

@@ -192,8 +192,7 @@ public class Test2 extends TestCase {
 		);
 		assertEquals(result.length, 2);
 		assertEquals("@foo {@model kittens} bar multiple line multiple line", result[0]);
-		assertEquals("@bar foo multiple line", result[1]);		
-		
+		assertEquals("@bar foo multiple line", result[1]);				
 	}
 		
 }

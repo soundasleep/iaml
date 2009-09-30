@@ -27,50 +27,62 @@ public class LoadOAWImplementationNotes extends DocumentationHelper implements I
 
 	private String plugin;
 	
-	private String ruleBase;
-	
 	private List<ITagHandler> semanticTagHandlers;
-	
-	/**
-	 * @param plugin
-	 * @param ruleBase
-	 * @param semanticTagHandlers
-	 */
-	public LoadOAWImplementationNotes(String plugin,
-			String ruleBase, List<ITagHandler> semanticTagHandlers) {
+
+	private File file;
+
+	private String startingPackage;
+
+	public LoadOAWImplementationNotes(File file, String plugin, String startingPackage,
+			List<ITagHandler> semanticTagHandlers) {
 		super();
+		this.file = file;
 		this.plugin = plugin;
-		this.ruleBase = ruleBase;
+		this.startingPackage = startingPackage;
 		this.semanticTagHandlers = semanticTagHandlers;
 	}
-
-
 
 	public List<ITagHandler> getSemanticTagHandlers() {
 		return semanticTagHandlers;
 	}
-	
+
+	public void load(ModeldocFactory factory, ModelDocumentation root) throws DocumentationGenerationException {
+		try {
+			iterateOverTemplates(factory, root, file, plugin, startingPackage);
+		} catch (IOException e) {
+			throw new DocumentationGenerationException(e);
+		}
+	}
+
 	/**
+	 * Load test case semantics in the given directory recursively.
+	 * 
 	 * @param factory
 	 * @param root
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public void load(ModeldocFactory factory, ModelDocumentation root) throws DocumentationGenerationException {
-
-		try {
-			loadInferenceSemantics(factory,
-					root,
-					plugin,
-					"src.template.operations",
-					"ExecutionFlow.xpt",
-					new File(ruleBase + "/src/template/operations/ExecutionFlow.xpt")
-			);
-		} catch (IOException e1) {
-			throw new DocumentationGenerationException(e1);
+	protected void iterateOverTemplates(final ModeldocFactory factory,
+			final ModelDocumentation root, File folder, String plugin, String pkg) throws IOException {
+		
+		// for every java in this folder,
+		String[] files = folder.list();
+		for (String file : files) {
+			File inFile = new File(folder.getAbsolutePath() + File.separator + file);
+			if (inFile.isDirectory()) {
+				// recurse over directories
+				iterateOverTemplates(factory, root, inFile, plugin, pkg + "." + file);
+			} else if (file.endsWith(".xpt")) {
+				// iterate over this file
+				String name = file.substring(0, file.lastIndexOf(".xpt")); // remove extension
+				
+				System.out.println("Parsing '" + inFile + "'...");
+				
+				loadInferenceSemantics(factory, root, plugin, pkg, name, inFile);
+			}
 		}
 		
 	}
-
+	
 	/**
 	 * Parse the given Drools file for inference semantics, of
 	 * the format

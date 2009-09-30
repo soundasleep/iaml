@@ -367,7 +367,7 @@
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::Template»
-	[<a href="«EXPAND browseSource»«templateFile.plugin»/«getPackage(templateFile.package)»/«templateFile.name»#«line»">«name»</a>]
+	[<a href="«EXPAND browseSource»«templateFile.plugin»/«getPackage(templateFile.package)»/«templateFile.name».xpt#«line»">«name»</a>]
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::FileLineReference»

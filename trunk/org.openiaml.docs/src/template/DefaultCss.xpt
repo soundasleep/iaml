@@ -6,7 +6,7 @@
 «FILE "output/default.css"»
 
 html,input {
-	font-family: Times New Roman, Times, serif;
+	font-family: Arial, Arial, Helvetica, sans-serif;
 	font-size: .9em;
 }
 html {
@@ -97,6 +97,8 @@ span.error { background: #fcc; }
 .model_reference a { background: url("../icons/iaml_model.gif") top left no-repeat; padding-left: 18px; }
 .constraint .file_line_reference a { background: url("../icons/checkfile.gif") top left no-repeat; padding-left: 18px; }
 .constraint .file_reference a { background: url("../icons/checkfile.gif") top left no-repeat; padding-left: 18px; }
+.extension .file_line_reference a { background: url("../icons/extensionfile.gif") top left no-repeat; padding-left: 18px; }
+.extension .file_reference a { background: url("../icons/extensionfile.gif") top left no-repeat; padding-left: 18px; }
 
 a:hover { text-decoration: none; }
 «ENDFILE»

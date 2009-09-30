@@ -12,6 +12,9 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * We can use a QueryParameter as a Parameter to a SelectWire, in order
  * to select an instance from a domain store.
  * 
+ * @example QueryParameter,SelectWire,DomainObjectInstance Using a {@model QueryParameter} from
+ * 		the current request URI to {@model SelectWire select}
+ * 		an {@model DomainObjectInstance object instance}.
  * @author jmwright
  *
  */
@@ -77,6 +80,9 @@ public class QueryParameterAsParameter extends DatabaseCodegenTestCase {
 	 * We can select a user, edit the fields, and reload
 	 * with the same parameter, and the database object will not
 	 * have changed (because autosave is false)
+	 * 
+	 * @operational If a {@model InputForm} representing a {@model SelectWire selected}
+	 * 		{@model DomainObjectInstance} changes, the changes will be saved. 
 	 */
 	public void testChangable() throws Exception {
 		beginAtSitemapThenPageQuery("Home", "user_id=8");

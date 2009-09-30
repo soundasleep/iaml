@@ -298,7 +298,7 @@
 «ENDDEFINE»
 
 «DEFINE extension(Boolean local) FOR modeldoc::ModelExtension»
-	<li>
+	<li class="extension">
 		«IF local»
 		«value»
 		«ELSE»
@@ -316,7 +316,7 @@
 «DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag">«IF name == "@inference" || name == "@operational" || name == "@implementation" || name == "@example"-»
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 «EXPAND javadocSemanticsElement FOR fragments.first()-»
-«EXPAND javadocElement FOREACH fragments.withoutFirst()-» 
+«EXPAND javadocElement FOREACH fragments.withoutFirst()-»
 «ELSEIF name == "@model" || name == "@link"-»
 «EXPAND javadocModelElement FOREACH fragments-»
 «ELSE-»
@@ -324,7 +324,7 @@
 «ENDIF-»</span>«ENDDEFINE»
 
 «DEFINE javadocElement FOR modeldoc::JavadocTextElement-»
-«value-»
+«IF value.startsWith(",") || value.startsWith(".") || value.startsWith("?")»«" "»«ENDIF»«value-»
 «ENDDEFINE»
 
 «DEFINE javadocModelElement FOR modeldoc::JavadocTextElement-»
@@ -363,11 +363,11 @@
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::DroolsRule»
-	<span class="drools_rule reference">[<a href="«EXPAND browseSource»«package.plugin»/«getPackage(package.package)»/«package.name».drl#«line»">«name»</a>]</span>
+	<span class="drools_rule reference">[<a href="«EXPAND browseSource»«package.plugin»/«getPackage(package.package)»/«package.name».drl#«line»">«package.name»</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::Template»
-	<span class="template reference">[<a href="«EXPAND browseSource»«templateFile.plugin»/«getPackage(templateFile.package)»/«templateFile.name».xpt#«line»">«name»</a>]</span>
+	<span class="template reference">[<a href="«EXPAND browseSource»«templateFile.plugin»/«getPackage(templateFile.package)»/«templateFile.name».xpt#«line»">«templateFile.name»</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::FileLineReference»

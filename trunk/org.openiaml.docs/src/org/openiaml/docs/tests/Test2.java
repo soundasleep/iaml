@@ -172,7 +172,7 @@ public class Test2 extends TestCase {
 				2
 		);
 		assertEquals(result.length, 2);
-		assertEquals("@foo bar\nmultiple line", result[0]);
+		assertEquals("@foo bar multiple line", result[0]);
 		assertEquals("@bar foo", result[1]);
 		
 		result = mock.getJavadocTagsMock(
@@ -181,18 +181,18 @@ public class Test2 extends TestCase {
 						"bar",
 						"/**",
 						" * ignore this ",
-						" * @foo bar ",
-						" *  multiple line",
-						" *  multiple line",
-						" * @bar foo ",
-						" *  multiple line",
+						" * @foo {@model kittens} bar",
+						" *\tmultiple line",
+						" *\tmultiple line",
+						" * @bar foo",
+						" *\tmultiple line",
 						" */"
 				},
 				2
 		);
 		assertEquals(result.length, 2);
-		assertEquals("@foo bar\nmultiple line\nmultiple line", result[0]);
-		assertEquals("@bar foo\nmultiple line", result[1]);		
+		assertEquals("@foo {@model kittens} bar multiple line multiple line", result[0]);
+		assertEquals("@bar foo multiple line", result[1]);		
 		
 	}
 		

@@ -27,6 +27,7 @@ import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.EMFReference;
 import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
+import org.openiaml.docs.modeldoc.ImplementationNote;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
@@ -52,6 +53,7 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getTagline <em>Tagline</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getOperationalSemantics <em>Operational Semantics</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getInferenceSemantics <em>Inference Semantics</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getImplementationNotes <em>Implementation Notes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getExtensions <em>Extensions</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
@@ -183,6 +185,15 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * @ordered
 	 */
 	protected EList<InferenceSemantic> inferenceSemantics;
+	/**
+	 * The cached value of the '{@link #getImplementationNotes() <em>Implementation Notes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplementationNotes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ImplementationNote> implementationNotes;
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -625,6 +636,18 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ImplementationNote> getImplementationNotes() {
+		if (implementationNotes == null) {
+			implementationNotes = new EObjectContainmentWithInverseEList<ImplementationNote>(ImplementationNote.class, this, ModeldocPackage.EMF_CLASS__IMPLEMENTATION_NOTES, ModeldocPackage.IMPLEMENTATION_NOTE__CONTAINING_CLASS);
+		}
+		return implementationNotes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -637,6 +660,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOperationalSemantics()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInferenceSemantics()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__IMPLEMENTATION_NOTES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getImplementationNotes()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__CONSTRAINTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
@@ -675,6 +700,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<?>)getOperationalSemantics()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
 				return ((InternalEList<?>)getInferenceSemantics()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__IMPLEMENTATION_NOTES:
+				return ((InternalEList<?>)getImplementationNotes()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
@@ -739,6 +766,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return getOperationalSemantics();
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
 				return getInferenceSemantics();
+			case ModeldocPackage.EMF_CLASS__IMPLEMENTATION_NOTES:
+				return getImplementationNotes();
 			case ModeldocPackage.EMF_CLASS__CONSTRAINTS:
 				return getConstraints();
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
@@ -801,6 +830,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
 				getInferenceSemantics().clear();
 				getInferenceSemantics().addAll((Collection<? extends InferenceSemantic>)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__IMPLEMENTATION_NOTES:
+				getImplementationNotes().clear();
+				getImplementationNotes().addAll((Collection<? extends ImplementationNote>)newValue);
 				return;
 			case ModeldocPackage.EMF_CLASS__CONSTRAINTS:
 				getConstraints().clear();
@@ -875,6 +908,9 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
 				getInferenceSemantics().clear();
 				return;
+			case ModeldocPackage.EMF_CLASS__IMPLEMENTATION_NOTES:
+				getImplementationNotes().clear();
+				return;
 			case ModeldocPackage.EMF_CLASS__CONSTRAINTS:
 				getConstraints().clear();
 				return;
@@ -931,6 +967,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return operationalSemantics != null && !operationalSemantics.isEmpty();
 			case ModeldocPackage.EMF_CLASS__INFERENCE_SEMANTICS:
 				return inferenceSemantics != null && !inferenceSemantics.isEmpty();
+			case ModeldocPackage.EMF_CLASS__IMPLEMENTATION_NOTES:
+				return implementationNotes != null && !implementationNotes.isEmpty();
 			case ModeldocPackage.EMF_CLASS__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:

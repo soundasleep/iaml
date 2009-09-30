@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openiaml.docs.generation.semantics.HandleExampleTag;
+import org.openiaml.docs.generation.semantics.HandleImplementationTag;
 import org.openiaml.docs.generation.semantics.HandleInferenceTag;
 import org.openiaml.docs.generation.semantics.HandleOperationalTag;
 import org.openiaml.docs.generation.semantics.ITagHandler;
@@ -96,6 +97,7 @@ public class DocumentationGenerator {
 		List<ITagHandler> semanticTags = new ArrayList<ITagHandler>();
 		semanticTags.add(new HandleOperationalTag(root, factory));
 		semanticTags.add(new HandleInferenceTag(root, factory));
+		semanticTags.add(new HandleImplementationTag(root, factory));
 		semanticTags.add(new HandleExampleTag(root, factory));
 		
 		// load all test cases for operational semantics
@@ -115,6 +117,16 @@ public class DocumentationGenerator {
 					new CreateMissingElementsWithDrools(null, false) /* engine */,
 					"org.openiaml.model.drools" /* plugin */,
 					"../org.openiaml.model.drools/" /* engine base */,
+					semanticTags
+			);
+			loader.load(factory, root);
+		}
+		
+		// load all OAW templates for implementation notes
+		{
+			ILoader loader = new LoadOAWImplementationNotes(
+					"org.openiaml.model.codegen.oaw" /* plugin */,
+					"../org.openiaml.model.codegen.oaw/" /* engine base */,
 					semanticTags
 			);
 			loader.load(factory, root);

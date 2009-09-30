@@ -70,6 +70,7 @@
  *   a ->|-> c ->|       |-> g
  *       |-> d ----> e ->|
  */ 
+# @implementation SplitNode,JoinNode Currently execution split is implemented in a single threaded way; each {@model ExecutionEdge execution flow} is executed sequentially until all flows are complete. 
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::SplitNode-»
 	/* a split node */
 	«REM»

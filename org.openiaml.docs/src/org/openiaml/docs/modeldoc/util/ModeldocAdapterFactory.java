@@ -21,6 +21,7 @@ import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
+import org.openiaml.docs.modeldoc.ImplementationNote;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavaElement;
@@ -37,6 +38,8 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.docs.modeldoc.OperationalSemantic;
 import org.openiaml.docs.modeldoc.Reference;
 import org.openiaml.docs.modeldoc.Semantic;
+import org.openiaml.docs.modeldoc.Template;
+import org.openiaml.docs.modeldoc.TemplateFile;
 
 /**
  * <!-- begin-user-doc -->
@@ -127,6 +130,10 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 				return createInferenceSemanticAdapter();
 			}
 			@Override
+			public Adapter caseImplementationNote(ImplementationNote object) {
+				return createImplementationNoteAdapter();
+			}
+			@Override
 			public Adapter caseConstraint(Constraint object) {
 				return createConstraintAdapter();
 			}
@@ -197,6 +204,14 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseEMFReference(EMFReference object) {
 				return createEMFReferenceAdapter();
+			}
+			@Override
+			public Adapter caseTemplateFile(TemplateFile object) {
+				return createTemplateFileAdapter();
+			}
+			@Override
+			public Adapter caseTemplate(Template object) {
+				return createTemplateAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -327,6 +342,20 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInferenceSemanticAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.ImplementationNote <em>Implementation Note</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.ImplementationNote
+	 * @generated
+	 */
+	public Adapter createImplementationNoteAdapter() {
 		return null;
 	}
 
@@ -579,6 +608,34 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEMFReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.TemplateFile <em>Template File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.TemplateFile
+	 * @generated
+	 */
+	public Adapter createTemplateFileAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.Template <em>Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.Template
+	 * @generated
+	 */
+	public Adapter createTemplateAdapter() {
 		return null;
 	}
 

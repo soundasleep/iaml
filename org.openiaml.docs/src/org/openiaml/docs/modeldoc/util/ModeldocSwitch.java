@@ -21,6 +21,7 @@ import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileLineReference;
 import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.GraphicalRepresentation;
+import org.openiaml.docs.modeldoc.ImplementationNote;
 import org.openiaml.docs.modeldoc.InferenceSemantic;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavaElement;
@@ -37,6 +38,8 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.docs.modeldoc.OperationalSemantic;
 import org.openiaml.docs.modeldoc.Reference;
 import org.openiaml.docs.modeldoc.Semantic;
+import org.openiaml.docs.modeldoc.Template;
+import org.openiaml.docs.modeldoc.TemplateFile;
 
 /**
  * <!-- begin-user-doc -->
@@ -161,6 +164,13 @@ public class ModeldocSwitch<T> {
 				InferenceSemantic inferenceSemantic = (InferenceSemantic)theEObject;
 				T result = caseInferenceSemantic(inferenceSemantic);
 				if (result == null) result = caseSemantic(inferenceSemantic);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.IMPLEMENTATION_NOTE: {
+				ImplementationNote implementationNote = (ImplementationNote)theEObject;
+				T result = caseImplementationNote(implementationNote);
+				if (result == null) result = caseSemantic(implementationNote);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -294,6 +304,21 @@ public class ModeldocSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModeldocPackage.TEMPLATE_FILE: {
+				TemplateFile templateFile = (TemplateFile)theEObject;
+				T result = caseTemplateFile(templateFile);
+				if (result == null) result = caseReference(templateFile);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.TEMPLATE: {
+				Template template = (Template)theEObject;
+				T result = caseTemplate(template);
+				if (result == null) result = caseJavaElement(template);
+				if (result == null) result = caseReference(template);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -415,6 +440,21 @@ public class ModeldocSwitch<T> {
 	 * @generated
 	 */
 	public T caseInferenceSemantic(InferenceSemantic object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Implementation Note</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Implementation Note</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImplementationNote(ImplementationNote object) {
 		return null;
 	}
 
@@ -685,6 +725,36 @@ public class ModeldocSwitch<T> {
 	 * @generated
 	 */
 	public T caseEMFReference(EMFReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Template File</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Template File</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTemplateFile(TemplateFile object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Template</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Template</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTemplate(Template object) {
 		return null;
 	}
 

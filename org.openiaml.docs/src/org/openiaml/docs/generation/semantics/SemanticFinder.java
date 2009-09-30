@@ -27,6 +27,7 @@ public class SemanticFinder {
 	protected String[] tagsToIdentify = new String[] {
 		"@inference",
 		"@operational",
+		"@implementation",
 		"@example",
 	};
 	

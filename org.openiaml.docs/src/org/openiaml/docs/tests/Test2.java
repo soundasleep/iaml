@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openarchitectureware.expression.ast.Identifier;
+import org.openiaml.docs.generation.BasicJavadocParser;
 import org.openiaml.docs.generation.DocumentationGenerationException;
 import org.openiaml.docs.generation.DocumentationGenerator;
 import org.openiaml.docs.generation.DocumentationHelper;
@@ -110,5 +111,89 @@ public class Test2 extends TestCase {
         
 	}
 	*/
+	
+	public class BasicJavadocParserMock extends BasicJavadocParser {
+
+		public BasicJavadocParserMock() {
+			super(null);
+		}
+		public String[] getJavadocTagsMock(String[] lines, int line) {
+			return getJavadocTags(lines, line);
+		}
+		
+	}
+	
+	/**
+	 * Test the extraction of Javadoc block comments.
+	 */
+	public void testJavadocBlockExtract() {
+		BasicJavadocParserMock mock = new BasicJavadocParserMock();
+		String[] result = mock.getJavadocTagsMock(
+				new String[] {
+						"foo",
+						"bar",
+						"/**",
+						" * ",
+						" * @foo bar ",
+						" */"
+				},
+				2
+		);
+		assertEquals(result.length, 1);
+		assertEquals("@foo bar", result[0]);
+		
+		result = mock.getJavadocTagsMock(
+				new String[] {
+						"foo",
+						"bar",
+						"/**",
+						" * ",
+						" * @foo bar ",
+						" * @bar foo ",
+						" */"
+				},
+				2
+		);
+		assertEquals(result.length, 2);
+		assertEquals("@foo bar", result[0]);
+		assertEquals("@bar foo", result[1]);
+		
+		result = mock.getJavadocTagsMock(
+				new String[] {
+						"foo",
+						"bar",
+						"/**",
+						" * ",
+						" * @foo bar ",
+						" *  multiple line",
+						" * @bar foo ",
+						" */"
+				},
+				2
+		);
+		assertEquals(result.length, 2);
+		assertEquals("@foo bar\nmultiple line", result[0]);
+		assertEquals("@bar foo", result[1]);
+		
+		result = mock.getJavadocTagsMock(
+				new String[] {
+						"foo",
+						"bar",
+						"/**",
+						" * ignore this ",
+						" * @foo bar ",
+						" *  multiple line",
+						" *  multiple line",
+						" * @bar foo ",
+						" *  multiple line",
+						" */"
+				},
+				2
+		);
+		assertEquals(result.length, 2);
+		assertEquals("@foo bar\nmultiple line\nmultiple line", result[0]);
+		assertEquals("@bar foo\nmultiple line", result[1]);		
+		
+	}
 		
 }

@@ -102,6 +102,7 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 		parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
 			
 			public JavaElement createReference(String[] lines, int line) {
+				int i = 1;
 				DroolsRule rule = createDroolsRule(factory, line, lines);
 				if (rule != null) {
 					drools.getRules().add(rule);
@@ -121,14 +122,14 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 	 */
 	private DroolsRule createDroolsRule(ModeldocFactory factory, int i, String[] lines) {
 		for (int j = i; j < lines.length; j++) {
-			if (lines[i].trim().startsWith("rule ")) {
+			if (lines[j].trim().startsWith("rule ")) {
 				// found a rule
-				String ruleName = lines[i].trim();
+				String ruleName = lines[j].trim();
 				if (!ruleName.contains("\""))
-					throw new RuntimeException("Rule does not contain \": '" + lines[i] + "'");
+					throw new RuntimeException("Rule does not contain \": '" + lines[j] + "'");
 				ruleName = ruleName.substring(ruleName.indexOf("\"") + 1);
 				if (!ruleName.contains("\""))
-					throw new RuntimeException("Rule does not contain \" twice: '" + lines[i] + "'");
+					throw new RuntimeException("Rule does not contain \" twice: '" + lines[j] + "'");
 				ruleName = ruleName.substring(0, ruleName.lastIndexOf("\""));
 				
 				DroolsRule rule = factory.createDroolsRule();

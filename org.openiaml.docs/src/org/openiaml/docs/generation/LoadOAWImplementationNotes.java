@@ -5,13 +5,11 @@ package org.openiaml.docs.generation;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.CharBuffer;
 import java.util.List;
 
 import org.openiaml.docs.generation.BasicJavadocParser.IJavadocReferenceCreator;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.generation.semantics.SemanticFinder;
-import org.openiaml.docs.modeldoc.DroolsRule;
 import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;

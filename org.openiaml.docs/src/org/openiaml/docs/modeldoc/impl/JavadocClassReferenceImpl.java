@@ -154,4 +154,11 @@ public class JavadocClassReferenceImpl extends JavadocFragmentImpl implements Ja
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public String toString() {
+		return super.toString() + " [ref=" + getReference() + "]";
+	}
+	
+	
+
 } //JavadocClassReferenceImpl

@@ -22,7 +22,7 @@ function boolean connects(WireEdge wire, Object a, Object b) {
 		(wire.getFrom().equals(b) && wire.getTo().equals(a));
 }
 
-# @semantics SyncWire,RunInstanceWire,ConditionWire {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionWire conditions} will be copied to elements created by {@model SyncWire SyncWires}.
+# @inference SyncWire,RunInstanceWire,ConditionWire {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionWire conditions} will be copied to elements created by {@model SyncWire SyncWires}.
 rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 	when
 		# we have a sync wire
@@ -51,7 +51,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires"
 
 end
 
-# @semantics SyncWire,RunInstanceWire,ConditionWire,ParameterWire {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionWire conditions} with {@model ParameterWire parameters} will be copied to elements created by {@model SyncWire SyncWires}.
+# @inference SyncWire,RunInstanceWire,ConditionWire,ParameterWire {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionWire conditions} with {@model ParameterWire parameters} will be copied to elements created by {@model SyncWire SyncWires}.
 rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires"
 	when
 		# we have a syncwire

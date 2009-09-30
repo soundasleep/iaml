@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openiaml.docs.generation.semantics.HandleExampleTag;
-import org.openiaml.docs.generation.semantics.HandleSemanticsTag;
+import org.openiaml.docs.generation.semantics.HandleInferenceTag;
+import org.openiaml.docs.generation.semantics.HandleOperationalTag;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
@@ -93,7 +94,8 @@ public class DocumentationGenerator {
 		
 		// create Semantics handlers
 		List<ITagHandler> semanticTags = new ArrayList<ITagHandler>();
-		semanticTags.add(new HandleSemanticsTag(root, factory));
+		semanticTags.add(new HandleOperationalTag(root, factory));
+		semanticTags.add(new HandleInferenceTag(root, factory));
 		semanticTags.add(new HandleExampleTag(root, factory));
 		
 		// load all test cases for operational semantics

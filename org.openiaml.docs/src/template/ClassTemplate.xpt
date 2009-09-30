@@ -294,10 +294,10 @@
 «ENDDEFINE»
 
 «DEFINE javadocElement FOR modeldoc::Reference»
-	<span class="error">Unknown reference '«this»'</span>
+	<span class="error">Unknown javadoc '«this»'</span>
 «ENDDEFINE»
 
-«DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag">«IF name == "@semantics" || name == "@example"-»
+«DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag">«IF name == "@inference" || name == "@operational" || name == "@example"-»
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 «EXPAND javadocSemanticsElement FOR fragments.first()-»
 «EXPAND javadocElement FOREACH fragments.withoutFirst()-» 

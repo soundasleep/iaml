@@ -108,7 +108,7 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 		for (int i = 0; i < lines.length; i++) {
 			String line = lines[i].trim();
 			
-			String key = "# @semantics";
+			String key = "# @inference";
 			if (line.startsWith(key)) {
 				line = line.substring(key.length() + 1).trim();
 				
@@ -119,7 +119,7 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 					// a root tag for @semantics
 					JavadocTagElement e = factory.createJavadocTagElement();
 					e.setJavaParent(rule);
-					e.setName("@semantics");
+					e.setName("@inference");
 					
 					// parse the line into javadoc elements
 					// (the line needs to be parsed into fragments before we can find semantic references)

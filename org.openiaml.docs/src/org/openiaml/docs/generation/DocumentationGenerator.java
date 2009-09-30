@@ -25,17 +25,32 @@ import org.openiaml.model.model.ModelPackage;
  *
  */
 public class DocumentationGenerator {
+	
+	private List<ITagHandler> semanticTagHandlers;
+	
+	public List<ITagHandler> getSemanticTagHandlers() {
+		return semanticTagHandlers;
+	}
+		
 	public ModelDocumentation createDocumentation() throws Exception {
 		final ModeldocFactory factory = ModeldocFactory.eINSTANCE;
 		
 		final ModelDocumentation root = factory.createModelDocumentation();
+		
+		// create Semantics handlers
+		semanticTagHandlers = new ArrayList<ITagHandler>();
+		semanticTagHandlers.add(new HandleOperationalTag(root, factory));
+		semanticTagHandlers.add(new HandleInferenceTag(root, factory));
+		semanticTagHandlers.add(new HandleImplementationTag(root, factory));
+		semanticTagHandlers.add(new HandleExampleTag(root, factory));
 		
 		// load all EMF classes
 		{
 			ILoader loader = new LoadEMFClasses(
 					ModelPackage.eINSTANCE, 
 					"org.openiaml.model", 
-					"org.openiaml.model."
+					"org.openiaml.model.",
+					this
 			);
 			loader.load(factory, root);
 		}
@@ -45,7 +60,8 @@ public class DocumentationGenerator {
 			ILoader loader = new LoadEMFDescription(
 					"../org.openiaml.model/model/docs" /* doc base */, 
 					"org.openiaml.model" /* plugin */, 
-					"model.docs" /* package base */
+					"model.docs" /* package base */,
+					this
 			);
 			loader.load(factory, root);
 		}
@@ -93,20 +109,13 @@ public class DocumentationGenerator {
 			loader.load(factory, root);
 		}
 		
-		// create Semantics handlers
-		List<ITagHandler> semanticTags = new ArrayList<ITagHandler>();
-		semanticTags.add(new HandleOperationalTag(root, factory));
-		semanticTags.add(new HandleInferenceTag(root, factory));
-		semanticTags.add(new HandleImplementationTag(root, factory));
-		semanticTags.add(new HandleExampleTag(root, factory));
-		
 		// load all test cases for operational semantics
 		{
 			ILoader loader = new LoadSemanticsFromTests(
 					new File("../org.openiaml.model.tests/src/org") /* source folder */,
 					"org.openiaml.model.tests" /* plugin */, 
 					"org" /* starting package */, 
-					semanticTags
+					this
 			);
 			loader.load(factory, root);
 		}
@@ -117,7 +126,7 @@ public class DocumentationGenerator {
 					new CreateMissingElementsWithDrools(null, false) /* engine */,
 					"org.openiaml.model.drools" /* plugin */,
 					"../org.openiaml.model.drools/" /* engine base */,
-					semanticTags
+					this
 			);
 			loader.load(factory, root);
 		}
@@ -128,7 +137,7 @@ public class DocumentationGenerator {
 					new File("../org.openiaml.model.codegen.oaw/src/template") /* source folder */,
 					"org.openiaml.model.codegen.oaw" /* plugin */, 
 					"template" /* starting package */, 
-					semanticTags
+					this
 			);
 			loader.load(factory, root);
 		}

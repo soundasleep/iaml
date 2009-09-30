@@ -46,11 +46,11 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 	private String plugin;
 	
 	private String packageBase;
-	
-	private List<ITagHandler> semanticTagHandlers;
 
+	private DocumentationGenerator generator;
+	
 	public List<ITagHandler> getSemanticTagHandlers() {
-		return semanticTagHandlers;
+		return generator.getSemanticTagHandlers();
 	}
 	
 	/**
@@ -60,12 +60,12 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 	 * @param semanticTagHandlers
 	 */
 	public LoadSemanticsFromTests(File folder, String plugin,
-			String packageBase, List<ITagHandler> semanticTagHandlers) {
+			String packageBase, DocumentationGenerator generator) {
 		super();
 		this.folder = folder;
 		this.plugin = plugin;
 		this.packageBase = packageBase;
-		this.semanticTagHandlers = semanticTagHandlers;
+		this. generator = generator;
 	}
 
 	/**

@@ -102,7 +102,6 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 		parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
 			
 			public JavaElement createReference(String[] lines, int line) {
-				int i = 1;
 				DroolsRule rule = createDroolsRule(factory, line, lines);
 				if (rule != null) {
 					drools.getRules().add(rule);

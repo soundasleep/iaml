@@ -355,32 +355,32 @@
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::JavaMethod»
-	[<a href="«EXPAND browseSource»«javaClass.plugin»/src/«getPackage(javaClass.package)»/«javaClass.name».java#«line»">«name»()</a>]
+	<span class="java_method reference">[<a href="«EXPAND browseSource»«javaClass.plugin»/src/«getPackage(javaClass.package)»/«javaClass.name».java#«line»">«name»()</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::JavaClass»
-	[<a href="«EXPAND browseSource»«plugin»/src/«getPackage(package)»/«name».java">«name»</a>]
+	<span class="java_class reference">[<a href="«EXPAND browseSource»«plugin»/src/«getPackage(package)»/«name».java">«name»</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::DroolsRule»
-	[<a href="«EXPAND browseSource»«package.plugin»/«getPackage(package.package)»/«package.name».drl#«line»">«name»</a>]
+	<span class="drools_rule reference">[<a href="«EXPAND browseSource»«package.plugin»/«getPackage(package.package)»/«package.name».drl#«line»">«name»</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::Template»
-	[<a href="«EXPAND browseSource»«templateFile.plugin»/«getPackage(templateFile.package)»/«templateFile.name».xpt#«line»">«name»</a>]
+	<span class="template reference">[<a href="«EXPAND browseSource»«templateFile.plugin»/«getPackage(templateFile.package)»/«templateFile.name».xpt#«line»">«name»</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::FileLineReference»
-	[<a href="«EXPAND browseSource»«file.plugin»/«getPackage(file.package)»/«file.name»#«line»">«file.name»</a>]
+	<span class="file_line_reference reference">[<a href="«EXPAND browseSource»«file.plugin»/«getPackage(file.package)»/«file.name»#«line»">«file.name»</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::FileReference»
-	[<a href="«EXPAND browseSource»«plugin»/«getPackage(package)»/«name»">«name»</a>]
+	<span class="file_reference reference">[<a href="«EXPAND browseSource»«plugin»/«getPackage(package)»/«name»">«name»</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::ModelReference»
-	[<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name»/«name».html">«name».iaml</a>
-	(<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name».iaml">source</a>)]
+	<span class="model_reference reference">[<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name»/«name».html">«name».iaml</a>
+	(<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name».iaml">source</a>)]</span>
 «ENDDEFINE»
 
 «DEFINE browseSource FOR emf::EObject-»http://code.google.com/p/iaml/source/browse/trunk/«ENDDEFINE»

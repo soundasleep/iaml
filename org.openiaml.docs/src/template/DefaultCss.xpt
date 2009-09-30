@@ -88,6 +88,16 @@ body#summary .subtype_list { padding-left: 2em; margin-top: .5em; line-height: 1
 .constraint .error { background: url("../icons/error_tsk.gif") top left no-repeat; padding-left: 18px; }
 span.error { background: #fcc; }
 
+.java_method a { background: url("../icons/java_method.gif") top left no-repeat; padding-left: 18px; }
+.java_class a { background: url("../icons/java_file.gif") top left no-repeat; padding-left: 18px; }
+.drools_rule a { background: url("../icons/drools.gif") top left no-repeat; padding-left: 18px; }
+.template a { background: url("../icons/templatefile.gif") top left no-repeat; padding-left: 18px; }
+.file_line_reference a { background: url("../icons/file_obj.gif") top left no-repeat; padding-left: 18px; }
+.file_reference a { background: url("../icons/file_obj.gif") top left no-repeat; padding-left: 18px; }
+.model_reference a { background: url("../icons/iaml_model.gif") top left no-repeat; padding-left: 18px; }
+.constraint .file_line_reference a { background: url("../icons/checkfile.gif") top left no-repeat; padding-left: 18px; }
+.constraint .file_reference a { background: url("../icons/checkfile.gif") top left no-repeat; padding-left: 18px; }
+
 a:hover { text-decoration: none; }
 «ENDFILE»
 «ENDDEFINE»

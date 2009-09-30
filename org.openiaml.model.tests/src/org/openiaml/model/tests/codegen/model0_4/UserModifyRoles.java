@@ -12,8 +12,14 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * assign and remove roles and permissions dynamically 
  * at runtime.
  * 
+ * @example PrimitiveOperation,Role,Permission Adding and 
+ * 		removing {@model Role roles} and {@model Permission permissions} 
+ * 		at runtime.
+ * @example UserStore A {@model UserStore} can contain many different types of
+ * 		{@model Role Roles} and {@model Permission Permissions}.
+ * @example ProvidesWire,Role,Permission A {@model Role} can {@model Permission provide}
+ * 		a given	{@model Permission}.
  * @author jmwright
- * @example PrimitiveOperation,Role,Permission Adding and removing {@model Role roles} and {@model Permission permissions} at runtime.
  */
 public class UserModifyRoles extends AbstractUserLoginTestCase {
 	

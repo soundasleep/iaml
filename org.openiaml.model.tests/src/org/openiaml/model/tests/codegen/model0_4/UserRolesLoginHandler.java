@@ -11,6 +11,14 @@ import org.eclipse.core.resources.IFile;
  * We explicitly define the login handler and the roles 
  * required.
  * 
+ * @example LoginHandler,AccessControlHandler,Session Restricting access to {@model Page pages} contained
+ * 		within a {@model Session} by enforcing {@model LoginHandler user login}
+ * 		and checking the {@model UserInstance current user} has a given {@model Role}.
+ * @operational Session If a {@model Session} contains an {@model AccessControlHandler},
+ * 		it will check that the {@model UserInstance current user} matches its
+ * 		{@model RequiresWire access requirements}.
+ * @operational Session If a {@model Session} contains a {@model LoginHandler} of type
+ * 		"user", access to pages contained within it will need to login to the current session. 
  * @author jmwright
  *
  */

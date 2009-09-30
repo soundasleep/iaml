@@ -11,6 +11,8 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @operational JoinNode,SplitNode A {@model SplitNode} executing on 
  * 		the client will split execution into separate threads until 
  * 		each thread meets up at a {@model JoinNode}. 
+ * @example JoinNode,SplitNode,ExecutionEdge {@model SplitNode Splitting} execution into
+ * 		different threads on the client.
  * @author jmwright
  *
  */

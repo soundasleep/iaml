@@ -224,7 +224,7 @@ public class BasicJavadocParser {
 				shouldStop = true;
 			}
 			if (inTag) {
-				currentString += cur + "\n";
+				currentString += cur + " ";
 			}
 			
 			// does the current line end with a **/?

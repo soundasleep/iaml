@@ -8,6 +8,7 @@ import org.eclipse.core.resources.IFile;
 /**
  * We can create new users and assign them roles.
  * 
+ * @example Role Creating a new user by creating a new {@model Role} instance.
  * @author jmwright
  *
  */

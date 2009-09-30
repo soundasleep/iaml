@@ -26,9 +26,11 @@
 		«ENDIF»
 		</h1>
 		
+		«IF tagline != null»
 		<div id="tagline">
 		«EXPAND ClassTemplate::javadocElement FOR tagline»
 		</div>
+		«ENDIF»
 		
 		«IF !additionalDocumentation.isEmpty»
 			<div id="description">
@@ -324,7 +326,7 @@
 «ENDIF-»</span>«ENDDEFINE»
 
 «DEFINE javadocElement FOR modeldoc::JavadocTextElement-»
-«IF value.startsWith(",") || value.startsWith(".") || value.startsWith("?")»«" "»«ENDIF»«value-»
+«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«value-»
 «ENDDEFINE»
 
 «DEFINE javadocModelElement FOR modeldoc::JavadocTextElement-»

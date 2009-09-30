@@ -13,6 +13,34 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * when editing. In particular, this test case does
  * not set up an initial database.
  * 
+ * @example NewInstanceWire,DomainObject
+ * 		Creating a {@model NewInstanceWire new instance} of an inherited {@model DomainObject}.
+ * 
+ * @operational NewInstanceWire,DomainObjectInstance,DomainAttribute  
+ * 		{@model NewInstanceWire New instances} of {@model DomainObject DomainObjects} which {@model ExtendsWire inherit others} can be created;
+ * 		all of their {@model DomainAttribute attributes} are accessible.
+ * 
+ * @operational NewInstanceWire,DomainObjectInstance
+ * 		A {@model NewInstanceWire new instance} of an {@model ExtendsWire inherited} {@model DomainObject} with autosave=false
+ * 		can have its {@model DomainAttribute attributes} modified before being saved.
+ * 
+ * @operational SyncWire,InputForm,ExtendsWire
+ * 		A {@model NewInstanceWire new} {@model DomainObject} with {@model ExtendsWire inheritance} 
+ * 		connected to an {@model InputForm} with
+ * 		a {@model SyncWire} will populate the InputForm with an 
+ * 		{@model InputTextField}
+ * 		for all inherited {@model DomainAttribute DomainAttributes}.
+ * 
+ * @example	NewInstanceWire,DomainObject,Session
+ * 		Creating a {@model NewInstanceWire new instance} of an inherited {@model DomainObject},
+ * 		accessible only within a {@model Session}.
+ * 
+ * @operational Session,NewInstanceWire
+ * 		If a {@model NewInstanceWire new instance} of an {@model ExtendsWire inherited}
+ * 		{@model DomainObject} is created within
+ * 		a {@model Session}, then the modification of this instance is limited to
+ * 		within the Session.
+ * 
  * @author jmwright
  *
  */

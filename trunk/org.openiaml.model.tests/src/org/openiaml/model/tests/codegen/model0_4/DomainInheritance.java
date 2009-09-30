@@ -13,6 +13,37 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
  * Test the code generation of domain inheritance.
+ *
+ *
+ * @example ExtendsWire,DomainObject,DomainStore
+ * 		{@model DomainObject DomainObjects} can extend other
+ * 		DomainObjects to inherit their {@model DomainAttribute attributes}.
+ * 
+ * @example ExtendsWire,DomainObjectInstance,SelectWire
+ * 		{@model SelectWire Selecting} an {@model DomainObjectInstance instance} of a
+ * 		{@model DomainObject} which has been {@model ExtendsWire extended}.
+ * 
+ * @operational SelectWire,DomainObject
+ * 		If a {@model SelectWire} is selecting from a {@model DomainObject} which extends
+ * 		another DomainObject, the {@model DomainObjectInstance} will contain
+ * 		the inherited {@model DomainAttributeInstance attribute instances}.
+ * 
+ * @example SelectWire,DomainObjectInstance
+ * 		{@model SelectWire Selecting} a {@model DomainObjectInstance} with more than one query
+ * 		parameter (qualification = :qualification and degree = :degree)
+ * 
+ * @example SelectWire,DomainObjectInstance
+ * 		{@model SelectWire Selecting} a {@model DomainObjectInstance} with attributes across inherited
+ * 		{@model DomainObject DomainObjects}.
+ * 
+ * @operational SelectWire,ParameterWire
+ * 		If a {@model SelectWire} is using a query with more than one parameter,
+ * 		and the {@model ParameterWire parameter wires} are not named, the {@model NamedElement name} of the 
+ * 		data source will be used to match up a query.
+ * 
+ * @operational SelectWire,DomainObjectInstance
+ * 		A {@model DomainObject} which inherits another can be {@model DomainObjectInstance instantiated} by
+ * 		the combination of all inherited attributes. 
  * 
  * @author jmwright
  *

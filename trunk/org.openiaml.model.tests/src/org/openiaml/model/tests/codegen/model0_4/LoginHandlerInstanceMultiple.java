@@ -14,6 +14,16 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * Test a Login Handler in a Session, where the login handler
  * is authenticating against a domain object instance.
  * 
+ * @example Session,LoginHandler
+ * 		Restricting access to a {@model Session} with a
+ * 		{@model LoginHandler} (based on selecting a {@model DomainObject} instance)
+ * 		that requires two valid {@model ParameterWire parameters}.
+ * 
+ * @operational LoginHandler,DomainObjectInstance
+ * 		A LoginHandler (selecting a DomainObject) needs incoming
+ * 		{@model DomainAttribute DomainAttributes} as {@model ParameterWire parameters} in order 
+ * 		to select the valid {@model DomainObjectInstance instance}.
+ * 
  * @author jmwright
  *
  */

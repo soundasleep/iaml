@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.tests.CodegenTestCase;
+import org.openiaml.model.tests.EmfToDot;
 
 /**
  * Test properties files that are wrapped with inputforms (or not)
@@ -17,6 +19,16 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class PropertiesFileWithInputForm extends CodegenTestCase {
 
+	public void testExportDot() throws Exception {
+		
+		EmfToDot dot = new EmfToDot(); 
+		root = loadDirectly(PropertiesFileWithInputForm.class);
+
+		EObject root2 = loadAndInfer(PropertiesFileWithInputForm.class);
+		System.out.println(dot.toDot(root, root2));
+		
+	}
+	
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(PropertiesFileWithInputForm.class);

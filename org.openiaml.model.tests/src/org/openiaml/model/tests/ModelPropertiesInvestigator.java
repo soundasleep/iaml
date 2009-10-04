@@ -116,7 +116,7 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 	 * @param ref
 	 * @return
 	 */
-	protected boolean isGeneratedReference(EReference ref) {
+	public static boolean isGeneratedReference(EReference ref) {
 		return ref.equals(ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy()) ||
 			ref.equals(ModelPackage.eINSTANCE.getGeneratesElements_GeneratedElements());
 	}

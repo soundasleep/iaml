@@ -1,6 +1,6 @@
 «IMPORT modeldoc»
 
-«EXTENSION metamodel::Extensions»
+«EXTENSION metamodel::ModeldocExtensions»
 
 «DEFINE getCss FOR modeldoc::ModelDocumentation»
 «FILE "output/default.css"»

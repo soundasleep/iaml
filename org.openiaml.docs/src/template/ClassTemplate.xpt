@@ -1,6 +1,6 @@
 «IMPORT modeldoc»
 
-«EXTENSION metamodel::Extensions»
+«EXTENSION metamodel::ModeldocExtensions»
 
 «DEFINE class(modeldoc::ModelDocumentation root) FOR modeldoc::EMFClass»
 	«FILE "output/" + fileName()»

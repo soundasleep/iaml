@@ -207,7 +207,8 @@
     <tools
         xsi:type="gmftool:ToolGroup"
         title="Components"
-        description="Components">
+        description="Components"
+        collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
           title="DynamicApplicationElementSet"

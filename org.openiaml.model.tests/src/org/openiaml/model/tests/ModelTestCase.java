@@ -428,6 +428,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 
 		properties.put("config_runtime", CONFIG_RUNTIME);
 		properties.put("config_web", CONFIG_WEB);
+		properties.put("debug", "true");
 
 		return properties;
 	}

@@ -126,11 +126,13 @@ context model::CompositeOperation ERROR "An Operation can only contain one Start
 	nodes.typeSelect(model::operations::StartNode).size <= 1;
 
 // issue 98: unused PrimitiveOperation names should issue a warning
+// issue 136: CompositeOperations should not have this warning
 context model::PrimitiveOperation WARNING "Unknown primitive operation name '" + name + "'" :
-	name == "setPropertyToValue" || name == "set" ||
+	model::CompositeOperation.isInstance(this) ||  
+	(name == "setPropertyToValue" || name == "set" ||
 		name == "javascriptAlert" || name == "save" ||
 		name == "new" || name == "exists?" ||
 		name == "equal?" || name == "add role" ||
 		name == "add permission" || name == "remove role" ||
-		name == "remove permission";
+		name == "remove permission");
 

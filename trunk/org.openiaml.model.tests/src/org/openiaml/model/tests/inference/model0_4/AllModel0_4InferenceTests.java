@@ -4,7 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * All inference tests for model 0.3.
+ * All inference tests for model 0.4.
  * 
  * @author jmwright
  *
@@ -31,6 +31,7 @@ public class AllModel0_4InferenceTests {
 		suite.addTestSuite(DomainInheritance.class);
 		suite.addTestSuite(DomainInheritanceEditing.class);
 		suite.addTestSuite(UserModifyRoles.class);
+		suite.addTestSuite(OperationCallNode.class);
 		
 		return suite;
 	}

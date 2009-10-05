@@ -17,9 +17,12 @@ import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
 
 /**
- * Allows programatically validating an instance of an InternetApplication
+ * <p>Allows programatically validating an instance of an InternetApplication
  * with OAW checks. We need to use a workflow file in order to
- * set everything up properly. 
+ * set everything up properly.</p>
+ * 
+ * <p>If the checks process returns either errors or warnings, these
+ * are returned in {@link #checkModel(IFile, IProgressMonitor)}.</p>
  * 
  * @author jmwright
  *
@@ -30,6 +33,9 @@ public class CheckModelInstance {
 	
 	/**
 	 * Check the instance in a given model file.
+	 * 
+	 * Returns an OK status, or a MultiStatus containing any 
+	 * errors or warnings found.
 	 * 
 	 */
 	public IStatus checkModel(IFile file, IProgressMonitor monitor) {

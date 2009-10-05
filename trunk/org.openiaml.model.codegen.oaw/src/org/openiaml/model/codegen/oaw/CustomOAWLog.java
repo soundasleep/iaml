@@ -40,6 +40,9 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 	/** A list of all errors parsed by this logger. */
 	private static List<IStatus> errors = null;
 
+	/** A list of all warnings parsed by this logger. */
+	private static List<IStatus> warnings = null;
+
 	/** For keeping track and monitoring progress of file creation */
 	private static IProgressMonitor monitor;
 	private static SubProgressMonitor lastSubMonitor;
@@ -58,6 +61,7 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 		
 		setLevel(LOG_LEVEL_ALL);
 		errors = new ArrayList<IStatus>();
+		warnings = new ArrayList<IStatus>();
 	}
 	
 	/**
@@ -68,6 +72,7 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 		lastLogFactory = System.getProperty("org.apache.commons.logging.Log");
 		System.setProperty("org.apache.commons.logging.Log", CustomOAWLog.class.getName());
 		errors = new ArrayList<IStatus>();	// reset errors
+		warnings = new ArrayList<IStatus>();	// reset errors
 	}
 
 	/**
@@ -118,6 +123,11 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 			errors.add(new Status(Status.ERROR, PLUGIN_ID, message.toString(), t));
 		}
 		
+		// catch any Warning (or higher) messages
+		if (type >= LOG_LEVEL_WARN) {
+			errors.add(new Status(Status.WARNING, PLUGIN_ID, message.toString(), t));
+		}
+		
 		// log file references
 		String str = message.toString();
 		if (monitor != null && str.startsWith("Opening file : ")) {
@@ -145,7 +155,7 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 	 * (likely a MultiStatus).
 	 * 
 	 * @see #log(int, Object, Throwable)
-	 * @return
+	 * @return OK only if there are no errors (ignores warnings)
 	 */
 	public static IStatus getErrors() {
 		// no error, or only one?
@@ -164,6 +174,29 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 	}
 	
 	/**
+	 * Get the warnings parsed out by the log method, in an IStatus
+	 * (likely a MultiStatus).
+	 * 
+	 * @see #log(int, Object, Throwable)
+	 * @return OK only if there are no warnings (will include errors)
+	 */
+	public static IStatus getWarnings() {
+		// no warning, or only one?
+		if (warnings.size() == 0)
+			return Status.OK_STATUS;
+		if (warnings.size() == 1)
+			return errors.get(0);
+		
+		// otherwise create a multi status
+		IStatus multi = new MultiStatus(PLUGIN_ID, 
+				Status.WARNING, 
+				warnings.toArray(new IStatus[]{}), 
+				getMultiWarningMessage(), 
+				null);
+		return multi;
+	}
+	
+	/**
 	 * Get an informative message describing the errors.
 	 * 
 	 * @return
@@ -173,11 +206,28 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 	}
 	
 	/**
+	 * Get an informative message describing the errors.
+	 * 
+	 * @return
+	 */
+	private static String getMultiWarningMessage() {
+		return "Multiple warnings occured.";
+	}
+	
+	/**
 	 * Have we found any errors?
 	 * @return
 	 */
 	public static boolean hasErrors() {
 		return errors.size() != 0;
+	}
+	
+	/**
+	 * Have we found any warnings?
+	 * @return
+	 */
+	public static boolean hasWarnings() {
+		return warnings.size() != 0;
 	}
 
 	/**

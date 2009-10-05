@@ -1189,6 +1189,27 @@
       <accessors
           figure="//@figures.0/@descriptors.55/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="OperationCallNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="OperationCallNodeFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="224"
+            green="152"
+            blue="224"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="OperationCallNodeLabelFigure"
+            text="call"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.56/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1301,6 +1322,9 @@
   <nodes
       name="AccessControlHandler"
       figure="AccessControlHandlerFigure"/>
+  <nodes
+      name="OperationCallNode"
+      figure="OperationCallNodeFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -1662,4 +1686,8 @@
       name="AccessControlHandlerName"
       figure="AccessControlHandlerFigure"
       accessor="//@figures.0/@descriptors.55/@accessors.0"/>
+  <labels
+      name="OperationCallNodeLabel"
+      figure="OperationCallNodeFigure"
+      accessor="//@figures.0/@descriptors.56/@accessors.0"/>
 </gmfgraph:Canvas>

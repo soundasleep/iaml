@@ -90,3 +90,9 @@ Part of a UserInstance. Removes the given Role (parameter) from the given UserIn
   _TODO: Incomplete documentation._
 
 Part of a UserInstance. Removes the given Permission (parameter) from the given UserInstance.
+
+==check permissions==
+
+  _TODO: Incomplete documentation._
+
+Part of an AccessControlHandler. Checks that the current User Instance incoming to the AccessControlHandler has the correct permissions.

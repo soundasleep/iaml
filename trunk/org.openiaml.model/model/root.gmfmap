@@ -52,7 +52,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -79,7 +79,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
@@ -106,7 +106,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObject"/>
     </ownedChild>
@@ -157,7 +157,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="root.gmftool#//@palette/@tools.3/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#DynamicApplicationElementSet"/>
     </ownedChild>
@@ -265,7 +265,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="root.gmftool#//@palette/@tools.3/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
@@ -292,7 +292,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.8"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -314,7 +314,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.9"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.7"/>
       <diagramNode
           href="iaml.gmfgraph#UserStore"/>
     </ownedChild>

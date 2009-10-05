@@ -7,8 +7,8 @@
       title="modelPalette">
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="Model Elements"
-        description="Model Elements">
+        title="Operational Modelling"
+        description="Operational Modelling">
       <tools
           xsi:type="gmftool:CreationTool"
           title="StartNode"
@@ -50,58 +50,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="CompositeOperation"
-          description="Create new CompositeOperation">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/CompositeOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/CompositeOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="PrimitiveOperation"
-          description="Create new PrimitiveOperation">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/PrimitiveOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/PrimitiveOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Parameter"
-          description="Create new Parameter">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Parameter.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Parameter.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="TemporaryVariable"
-          description="Create new TemporaryVariable">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/TemporaryVariable.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/TemporaryVariable.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="DecisionNode"
           description="Create new DecisionNode">
         <smallIcon
@@ -111,19 +59,6 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/DecisionNode.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="DecisionOperation"
-          description="Create new DecisionOperation">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DecisionOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DecisionOperation.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
@@ -154,19 +89,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="StaticValue"
-          description="Create new StaticValue">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/StaticValue.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/StaticValue.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="OperationCallNode"
           description="Create new OperationCallNode">
         <smallIcon
@@ -176,6 +98,90 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/OperationCallNode.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Model Elements"
+        description="Model Elements"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveOperation"
+          description="Create new PrimitiveOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeOperation"
+          description="Create new CompositeOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DecisionOperation"
+          description="Create new DecisionOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/DecisionOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/DecisionOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="TemporaryVariable"
+          description="Create new TemporaryVariable">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/TemporaryVariable.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/TemporaryVariable.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Parameter"
+          description="Create new Parameter">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Parameter.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Parameter.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="StaticValue"
+          description="Create new StaticValue">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/StaticValue.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

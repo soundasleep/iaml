@@ -27,7 +27,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="operation.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -54,7 +54,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="operation.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
@@ -74,7 +74,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="operation.gmftool#//@palette/@tools.1/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#Parameter"/>
     </ownedChild>
@@ -161,7 +161,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#DecisionNode"/>
     </ownedChild>
@@ -183,7 +183,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
+          href="operation.gmftool#//@palette/@tools.1/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#DecisionOperation"/>
     </ownedChild>
@@ -203,7 +203,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
+          href="operation.gmftool#//@palette/@tools.1/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#TemporaryVariable"/>
     </ownedChild>
@@ -252,7 +252,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.9"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#SplitNode"/>
     </ownedChild>
@@ -272,7 +272,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.10"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#JoinNode"/>
     </ownedChild>
@@ -299,7 +299,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.11"/>
+          href="operation.gmftool#//@palette/@tools.1/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
@@ -319,7 +319,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.12"/>
+          href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#OperationCallNode"/>
     </ownedChild>
@@ -331,7 +331,7 @@
         href="iaml.ecore#//CompositeOperation/dataEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.1/@tools.1"/>
+        href="operation.gmftool#//@palette/@tools.2/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#DataFlowEdge"/>
     <sourceMetaFeature
@@ -350,7 +350,7 @@
         href="iaml.ecore#//CompositeOperation/executionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.1/@tools.2"/>
+        href="operation.gmftool#//@palette/@tools.2/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#ExecutionEdge"/>
     <sourceMetaFeature
@@ -376,7 +376,7 @@
         href="iaml.ecore#//CompositeOperation/executionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.1/@tools.0"/>
+        href="operation.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionalEdge"/>
     <sourceMetaFeature
@@ -402,7 +402,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="operation.gmftool#//@palette/@tools.2/@tools.0"/>
+        href="operation.gmftool#//@palette/@tools.3/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature

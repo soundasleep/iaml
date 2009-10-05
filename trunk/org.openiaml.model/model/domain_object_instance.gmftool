@@ -24,6 +24,19 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="PrimitiveOperation"
+          description="Create new PrimitiveOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="CompositeOperation"
           description="Create new CompositeOperation">
         <smallIcon
@@ -37,15 +50,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="PrimitiveOperation"
-          description="Create new PrimitiveOperation">
+          title="DecisionOperation"
+          description="Create new DecisionOperation">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/PrimitiveOperation.gif"
+            path="icons/full/obj16/DecisionOperation.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/PrimitiveOperation.gif"
+            path="icons/full/obj32/DecisionOperation.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
@@ -72,19 +85,6 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/DomainAttributeInstance.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="DecisionOperation"
-          description="Create new DecisionOperation">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DecisionOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DecisionOperation.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

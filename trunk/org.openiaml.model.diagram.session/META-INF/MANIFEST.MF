@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.openiaml.model.diagram.session.part.IamlDiagramEditorPlugin
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
-Export-Package: org.openiaml.model.diagram.session.edit.parts, 
+Export-Package: org.openiaml.model.diagram.session.edit.parts,
  org.openiaml.model.diagram.session.part,
  org.openiaml.model.diagram.session.providers
 Require-Bundle: org.eclipse.core.runtime,

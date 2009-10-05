@@ -20,7 +20,7 @@
 	<component class="oaw.check.CheckComponent">
 		<metaModel id="mm"
 			class="org.eclipse.m2t.type.emf.EmfRegistryMetaModel"/>
-		<checkFile value="metamodel::Checks" />
+		<checkFile value="metamodel::ModeldocChecks" />
 		<emfAllChildrenSlot value="model" />
 	</component>
 

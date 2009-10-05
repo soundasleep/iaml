@@ -51,7 +51,7 @@ public class ModeldocCodeGenerator {
 			// to enable custom logging
 			//Thread.currentThread().setContextClassLoader(OawCodeGenerator.class.getClassLoader());
 			
-			String wfFile = "src/workflow/runtime.oaw";
+			String wfFile = "src/workflow/modeldoc.oaw";
 			Map<String,String> properties = new HashMap<String,String>();
 			properties.put("model", file.getAbsolutePath());
 			properties.put("src-gen", ".");	// have to get absolute filename for output dir

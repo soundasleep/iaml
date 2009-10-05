@@ -1,6 +1,6 @@
 «IMPORT modeldoc»
 
-«EXTENSION metamodel::Extensions»
+«EXTENSION metamodel::ModeldocExtensions»
 
 «DEFINE main FOR modeldoc::ModelDocumentation»
 	«EXPAND Index::index»

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Iaml Diagram Helpers
 Bundle-SymbolicName: org.openiaml.model.diagram.helpers
-Bundle-Version: 0.3.1
+Bundle-Version: 0.4.0.qualifier
 Bundle-Activator: org.openiaml.model.diagram.helpers.Activator
 Bundle-Vendor: www.openiaml.org
 Require-Bundle: org.eclipse.core.runtime,

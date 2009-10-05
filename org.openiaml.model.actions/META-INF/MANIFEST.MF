@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Iaml Actions
 Bundle-SymbolicName: org.openiaml.model.actions;singleton:=true
-Bundle-Version: 0.3.1
+Bundle-Version: 0.4.0.qualifier
 Bundle-Activator: org.openiaml.model.actions.IamlActionsPlugin
 Bundle-Vendor: www.openiaml.org
 Require-Bundle: org.eclipse.core.runtime,

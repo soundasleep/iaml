@@ -86,6 +86,39 @@ public class XmlTestCase extends TestCase implements IXpath {
 		}
 	}
 	
+	/**
+	 * The reverse of {@link #resolveEmfElement(Document, String)}; 
+	 * obtain the 'filename.gmftool#//@figures.0/@descriptors.29/@accessors.0' of a given element.
+	 * 
+	 * @param filename 'filename.gmftool'
+	 * @param root
+	 * @return
+	 * @throws XPathExpressionException 
+	 */
+	public String compileEmfReference(String filename, Node root) throws XPathExpressionException {
+		if (root.getParentNode() == null) {
+			return "/";	// unexpected
+		}
+		
+		// get the '@name.index' for the current node
+		int index = 0;
+		for (Node node : xpath(root.getParentNode(), root.getNodeName())) {
+			if (node.equals(root)) {
+				// found it
+				break;
+			}
+			index++;
+		}
+		
+		if (root.getParentNode().equals(root.getOwnerDocument())) {
+			// found the root
+			// return filename + "#//@" + root.getNodeName();	// assumed to not have any index
+			return filename + "#/";		// we ignore the root element
+		} else {
+			// haven't found the root yet; recurse down
+			return compileEmfReference(filename, root.getParentNode()) + "/@" + root.getNodeName() + "." + index;
+		}
+	}
 	
 	public Document firstDocument(Map<?,Document> map) {
 		return map.values().iterator().next();
@@ -306,6 +339,18 @@ public class XmlTestCase extends TestCase implements IXpath {
 	 */
 	public void assertEndsWith(String message, String suffix, String string) {
 		assertTrue(message + "String '" + string + "' should end with prefix '" + suffix + "'", string.endsWith(suffix));
+	}
+	
+	/**
+	 * Saves the given XML document to the given filename.
+	 * 
+	 * @param doc
+	 * @param filename
+	 * @throws IOException
+	 * @throws TransformerException
+	 */
+	public static void saveDocument(Document doc, String filename) throws IOException, TransformerException {
+		saveDocument(doc, new File(filename));
 	}
 	
 }

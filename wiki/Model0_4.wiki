@@ -30,6 +30,12 @@ A Split Node will split the execution of an operation; a Join Node is required t
 
   _See [http://openiaml.org/model/SplitNode], [http://openiaml.org/model/JoinNode]_
 
+==Operation Call Node==
+
+A virtual [http://openiaml.org/model/Operation operation] call; the outgoing [http://openiaml.org/model/RunInstanceWire Run Instance Wire] will be executed.
+
+  _See [http://openiaml.org/model/OperationCallNode]_
+
 ==Query Parameter==
 
 Represents a parameter taken from the current request query.
@@ -65,12 +71,6 @@ User instances can have any number of permissions, which can be added or removed
 Restricts access to a Page or Session based on the required Roles or Permissions.
 
   _See [http://openiaml.org/model/AccessControlHandler]_
-
-==Undocumented==
-
-  * OperationCallNode
-
-Documentation forthcoming.
 
 =New Wires=
 ==Set Wire==

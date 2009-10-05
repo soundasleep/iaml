@@ -152,6 +152,30 @@
 		org.eclipse.gmf.runtime.notation.View tView = (org.eclipse.gmf.runtime.notation.View) tep.getModel();
 		org.eclipse.gmf.runtime.notation.Edge model = null;
 		String factoryHint = getDefaultFactoryHint();
+		
+		/*
+		 * Jevon: [issue 124] connections between shortcuts do not persist across Eclipse restart.
+		 * 
+		 * It seems this is because while Nodes may be successfully saved into an .iaml_diagram
+		 * instance, Edges are not. The Edges do not correctly contain the correct
+		 * semantic hint (e.g. "4002") so cannot be created.
+		 *
+		 * As a hack solution, if the factory hint is null, we get the factory hint
+		 * (which appears to be synonymous with semantic hint) from the VisualIDRegistry,
+		 * and use this.
+		 *
+		 * This is inspired by VisualIDRegistry.getNodeVisualID().
+		 */
+		if (factoryHint == null) {
+			// Semantic hint is not specified. Can be a result of call from CanonicalEditPolicy.
+			// In this situation there should be NO elementType, visualID will be determined
+			// by VisualIDRegistry.getNodeVisualID() for domainElement.
+			int visualID = «EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall»(connection);
+			if (visualID != -1) {
+				factoryHint = String.valueOf(visualID);
+			}
+		}
+		
 		// Jevon change: use a different adapter so we can actually get IElementTypes
 		org.eclipse.core.runtime.IAdaptable elementAdapter = new IElementTypeElementAdapter(connection,
 				factoryHint);

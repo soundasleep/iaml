@@ -213,6 +213,16 @@ public class PluginsTestCase extends XmlTestCase {
 	}
 	
 	/**
+	 * Issue 126: Check that versions end in x.y.z.qualifier 
+	 * 
+	 * @throws Exception
+	 */
+	public void testVersionEndsWithQualifier() throws Exception {
+		assertTrue("version does not end with '.qualifier': '" + getVersion() + "'",
+				getVersion().endsWith(".qualifier"));
+	}
+	
+	/**
 	 * Get the version that all plugins should be.
 	 * In particular, this is the version provided in the root
 	 * model manifest.

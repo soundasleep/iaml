@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.openiaml.model.tests;singleton:=true
 Bundle-Version: 0.4.0.qualifier
 Require-Bundle: org.junit,
  ca.ecliptical.emf.xpath,
- org.openiaml.model.codegen.oaw,
+ org.openiaml.model.codegen.php,
  org.openiaml.model.drools,
  org.openiaml.model.runtime;bundle-version="0.3.1",
  org.openiaml.model;bundle-version="0.3.1",

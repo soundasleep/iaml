@@ -87,7 +87,7 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 			try {
 				containerList.add(object);
 			} catch (ArrayStoreException e) {
-				throw new RuntimeException("Could not insert an element '" + elementType.getName() + "' into feature '" + feature.getName() + "': " + e, e);
+				throw new RuntimeException("Could not insert an element '" + elementType.getName() + "' into feature '" + feature.getName() + "' of " + feature.getEContainingClass().getName() + ": " + e, e);
 			}
 		} else {
 			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + feature);
@@ -131,7 +131,7 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 			try {
 				containerList.add(object);
 			} catch (ArrayStoreException e) {
-				throw new RuntimeException("Could not insert a relationship '" + elementType.getName() + "' into container feature '" + containerFeature.getName() + "': " + e, e);
+				throw new RuntimeException("Could not insert a relationship '" + elementType.getName() + "' into container feature '" + containerFeature.getName() + "' of " + containerFeature.getEContainingClass().getName() + ": " + e, e);
 			}
 		} else {
 			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + containerFeature);

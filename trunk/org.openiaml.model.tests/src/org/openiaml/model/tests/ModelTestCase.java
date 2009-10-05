@@ -49,6 +49,7 @@ import org.w3c.dom.Node;
  * The JET/Junit test framework now manages everything for you. It will
  * automatically create empty projects to be compiled to.
  * 
+ * @see ModelTestCaseWithProperties
  * @author jmwright
  *
  */

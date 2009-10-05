@@ -51,13 +51,26 @@ import org.openiaml.model.model.ModelPackage;
  */
 public class ModelPropertiesInvestigator implements IEMFElementSelector {
 
-	public ModelPropertiesInvestigator(boolean ignoreGenerated) {
+	private boolean includeComplexChecks;
+
+	public ModelPropertiesInvestigator(boolean ignoreGenerated, boolean includeComplexChecks) {
 		this.ignoreGenerated = ignoreGenerated;
+		this.includeComplexChecks = includeComplexChecks;
 	}
 	
 	private List<IPropertyInvestigator> investigators = null;
 	private boolean ignoreGenerated;
 	
+	/**
+	 * Should we include complicated complex checks, 
+	 * e.g. graph radius/diameter?
+	 * 	
+	 * @return
+	 */
+	public boolean isIncludeComplexChecks() {
+		return includeComplexChecks;
+	}
+
 	public List<IPropertyInvestigator> getInvestigators() {
 		if (investigators == null) {
 			investigators = new ArrayList<IPropertyInvestigator>();
@@ -86,24 +99,26 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 			investigators.add(new MinDegreeReferences("min-degree-references", this));
 			investigators.add(new MinDegreeContainments("min-degree-containments", this));
 			investigators.add(new MaxInheritanceHeight("max-inheritance-height", this));
-			investigators.add(new ReferencesRadius("references-radius", this));
-			investigators.add(new ReferencesDiameter("references-diameter", this));
-			// investigators.add(new ContainmentsRadius("containments-radius", this));
-			// investigators.add(new ContainmentsDiameter("containments-diameter", this));
-			/*
-			investigators.add(new CountTypes("wires", this, WireEdge.class));
-			investigators.add(new CountTypes("visible-things", this, VisibleThing.class));
-			investigators.add(new CountTypes("events", this, EventTrigger.class));
-			investigators.add(new CountTypes("operations", this, Operation.class));
-			investigators.add(new CountTypes("conditions", this, Condition.class));
-			investigators.add(new CountTypes("execution-edges", this, ExecutionEdge.class));
-			investigators.add(new CountTypes("data-flow-edges", this, DataFlowEdge.class));
-			investigators.add(new CountTypes("properties", this, ApplicationElementProperty.class));
-			investigators.add(new CountTypes("nodes", this, ActivityNode.class));
-			investigators.add(new CountTypes("pages", this, Page.class));
-			*/
-			investigators.add(new ReferencesCycles("cycles", this));
-			investigators.add(new RootContainmentsHeight("children-height", this));
+			if (isIncludeComplexChecks()) {
+				investigators.add(new ReferencesRadius("references-radius", this));
+				investigators.add(new ReferencesDiameter("references-diameter", this));
+				// investigators.add(new ContainmentsRadius("containments-radius", this));
+				// investigators.add(new ContainmentsDiameter("containments-diameter", this));
+				/*
+				investigators.add(new CountTypes("wires", this, WireEdge.class));
+				investigators.add(new CountTypes("visible-things", this, VisibleThing.class));
+				investigators.add(new CountTypes("events", this, EventTrigger.class));
+				investigators.add(new CountTypes("operations", this, Operation.class));
+				investigators.add(new CountTypes("conditions", this, Condition.class));
+				investigators.add(new CountTypes("execution-edges", this, ExecutionEdge.class));
+				investigators.add(new CountTypes("data-flow-edges", this, DataFlowEdge.class));
+				investigators.add(new CountTypes("properties", this, ApplicationElementProperty.class));
+				investigators.add(new CountTypes("nodes", this, ActivityNode.class));
+				investigators.add(new CountTypes("pages", this, Page.class));
+				*/
+				investigators.add(new ReferencesCycles("cycles", this));
+				investigators.add(new RootContainmentsHeight("children-height", this));
+			}
 		}
 		return investigators;
 	}
@@ -200,7 +215,7 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 		 * @param ignoreGenerated
 		 */
 		public ModelPropertiesInvestigatorIncreasePercent(ModelPropertiesInvestigator source, ModelPropertiesInvestigator target) {
-			super(false);
+			super(false, true);
 			this.source = source;
 			this.target = target;
 		}
@@ -250,7 +265,7 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 		 * @param ignoreGenerated
 		 */
 		public ModelPropertiesInvestigatorIncreaseAbsolute(ModelPropertiesInvestigator source, ModelPropertiesInvestigator target) {
-			super(false);
+			super(false, true);
 			this.source = source;
 			this.target = target;
 		}

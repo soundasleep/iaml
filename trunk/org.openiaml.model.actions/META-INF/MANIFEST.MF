@@ -8,7 +8,7 @@ Bundle-Vendor: www.openiaml.org
 Require-Bundle: org.eclipse.core.runtime,
  org.openiaml.model;bundle-version="0.3.1",
  org.openiaml.model.drools;bundle-version="0.3.1",
- org.openiaml.model.codegen.oaw;bundle-version="0.3.1",
+ org.openiaml.model.codegen.php;bundle-version="0.3.1",
  org.eclipse.core.resources;bundle-version="3.5.0",
  org.eclipse.jface;bundle-version="3.5.0",
  org.eclipse.ui;bundle-version="3.5.0",

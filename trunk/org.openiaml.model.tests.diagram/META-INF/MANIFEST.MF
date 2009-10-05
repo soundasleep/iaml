@@ -7,7 +7,7 @@ Bundle-Vendor: www.openiaml.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit,
  ca.ecliptical.emf.xpath,
- org.openiaml.model.codegen.oaw,
+ org.openiaml.model.codegen.php,
  org.openiaml.model.drools,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor,
  org.eclipse.gmf.runtime.diagram.ui,

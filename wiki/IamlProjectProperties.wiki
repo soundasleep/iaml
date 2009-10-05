@@ -28,3 +28,11 @@ A string pointing to the client-side runtime libraries: [http://code.google.com/
 {{{
 <script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
 }}}
+
+==debug==
+
+If set to "true", debug information will be rendered as part of the generate code. Until issue 137 is resolved, this only affects the rendering of debug code; it is still generated, just not displayed.
+
+{{{
+<?php if (DEBUG) { ... } ?>
+}}}

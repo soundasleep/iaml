@@ -894,9 +894,12 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	}
 	
 	/**
-	 * When we infer a model, we could assert that it is valid
+	 * <p>When we infer a model, we could assert that it is valid
 	 * according to the checks. Generally, this is already called when
-	 * generating code from the inferred model.
+	 * generating code from the inferred model.</p>
+	 * 
+	 * <p>We are especially strict; we assert that there are no
+	 * errors <em>or warnings</em> in the result.</p>
 	 * 
 	 * @throws Exception
 	 */

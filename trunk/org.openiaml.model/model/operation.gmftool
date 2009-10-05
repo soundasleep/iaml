@@ -165,6 +165,19 @@
             path="icons/full/obj32/StaticValue.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="OperationCallNode"
+          description="Create new OperationCallNode">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/OperationCallNode.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/OperationCallNode.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
@@ -208,6 +221,25 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/ExecutionEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Wires"
+        description="Wires"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="RunInstanceWire"
+          description="Create new RunInstanceWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/RunInstanceWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/RunInstanceWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

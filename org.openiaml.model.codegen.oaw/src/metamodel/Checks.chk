@@ -134,5 +134,5 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 		name == "new" || name == "exists?" ||
 		name == "equal?" || name == "add role" ||
 		name == "add permission" || name == "remove role" ||
-		name == "remove permission");
+		name == "remove permission" || name == "check permissions");
 

@@ -78,6 +78,7 @@ public class OawCodeGenerator implements ICodeGenerator {
 			properties.put("src-gen", file.getProject().getLocation().toString());	// have to get absolute filename for output dir
 			properties.put("config_runtime", runtimeProperties.get("config_runtime"));
 			properties.put("config_web", runtimeProperties.get("config_web"));
+			properties.put("debug", Boolean.toString(Boolean.parseBoolean(runtimeProperties.get("debug"))));
 			
 			Map<String,Object> slotContents = new HashMap<String,Object>();
 

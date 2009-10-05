@@ -204,6 +204,13 @@ if (require_get("operation", "")) {
 		}
 	/* ]]> */
 	</script>
+	<style type="text/css">
+	<?php if (!DEBUG) { ?>
+		#debug { display: none; }
+		#response { display: none; }
+		#debug_monitors { display: none; }
+	<?php } ?>
+	</style>
 </head>
 <body onLoad="loadStoredEvents()">
 	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>

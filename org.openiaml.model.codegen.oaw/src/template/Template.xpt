@@ -2,7 +2,7 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE main(String config_runtime, String config_web) FOR model::InternetApplication»
+«DEFINE main(String config_runtime, String config_web, String debug) FOR model::InternetApplication»
 	«REM»to test that when we throw exceptions, we can actually catch them«ENDREM»
 	«IF name=="__test throw exception"»
 		«EXPAND exception FOR throwException("We should be able to catch this exception.")» 
@@ -38,6 +38,7 @@
 		<?php
 		define("IAML_RUNTIME_ROOT", "«config_runtime»");
 		define("IAML_RUNTIME_WEB", "«config_web»");
+		define("DEBUG", strtolower("«debug»") == "false" ? false : ("«debug»" ? true : false));
 		?>
 	«ENDFILE»
 	

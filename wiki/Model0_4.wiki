@@ -14,60 +14,93 @@ TODO
 =New Elements=
 ==Login Handler (Domain Instance)==
 
-  _See [LoginHandler]_
+A [http://openiaml.org/model/LoginHandler login handler] can now be connected to login [http://openiaml.org/model/DomainObjectInstance domain object instances]. This will login or logout the current user based on the existance of a valid domain instance in the [http://openiaml.org/model/DomainStore domain store].
+
+  _See [http://openiaml.org/model/LoginHandler]_
+
+==Login Handler (User Instance)==
+
+A [http://openiaml.org/model/LoginHandler login handler] can now be connected to login [http://openiaml.org/model/UserInstance user instances]. This will login or logout the current user based on the existance of a valid user in the [http://openiaml.org/model/UserStore user store].
+
+  _See [http://openiaml.org/model/LoginHandler]_
 
 ==Join Node, Split Node==
-|| *Description* || A Split Node will split the execution of an operation; a Join Node is required to unify the execution back. ||
-|| *Models* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/JoinSplitClientSide.iaml JoinSplitClientSide.iaml], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/JoinSplitServerSide.iaml JoinSplitServerSide.iaml] ||
-|| *Inference Tests* || - ||
-|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/JoinSplitClientSide.java JoinSplitClientSide.java], [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/JoinSplitServerSide.java JoinSplitServerSide.java] ||
 
-All edges coming out of a Split Node should eventually rejoin back at a Join Node; otherwise the effect is currently undefined.
+A Split Node will split the execution of an operation; a Join Node is required to unify the execution back.
 
-Currently these are implemented in a single threaded way; each execution flow is executed sequentially until all flows are complete. ([http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/template/operations/ExecutionFlow.xpt?spec=svn958&r=958#55 ExecutionFlow.xpt])
-
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/JoinSplitServerSide-2.png
+  _See [http://openiaml.org/model/SplitNode], [http://openiaml.org/model/JoinNode]_
 
 ==Query Parameter==
 
-|| *Description* || Represents a parameter taken from the current request query. ||
-|| *Models* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/QueryParameterAsParameter.iaml QueryParameterAsParameter.iaml] ||
-|| *Inference Tests* || - ||
-|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/QueryParameterAsParameter.java QueryParameterAsParameter.java] ||
+Represents a parameter taken from the current request query.
 
-A _Query Parameter_ [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/metamodel/Checks.chk?spec=svn1000&r=1000#91 can only be connected] to elements contained in the same page as the parameter, as this parameter only exists when the page is accessed.
+  _See [http://openiaml.org/model/QueryParameter]_
 
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/QueryParameterAsParameter-1.png
+==User Store==
+
+Contains the definition of users; in particular, [http://openiaml.org/model/Role roles] and [http://openiaml.org/model/Permission permissions].
+
+  _See [http://openiaml.org/model/UserStore]_
+
+==User Instance==
+
+Represents an instance of a user, most commonly the currently [http://openiaml.org/model/LoginHandler logged in user].
+
+  _See [http://openiaml.org/model/UserInstance]_
+
+==Role==
+
+User instances can have one or many roles, which can be inherited. Roles can also provide [http://openiaml.org/model/Permission permissions]. This is an implementation of Role-Based Access Control.
+
+  _See [http://openiaml.org/model/Role]_
+
+==Permission==
+
+User instances can have any number of permissions, which can be added or removed at any time.
+
+  _See [http://openiaml.org/model/Permission]_
+
+==Access Control Handler==
+
+Restricts access to a Page or Session based on the required Roles or Permissions.
+
+  _See [http://openiaml.org/model/AccessControlHandler]_
 
 ==Undocumented==
 
   * OperationCallNode
-  * UserStore
-  * Role
-  * Permission
-  * UserInstance
-  * AccessControlHandler
 
 Documentation forthcoming.
 
 =New Wires=
 ==Set Wire==
-|| *Description* || Keeps a target value up-to-date with a source value. ||
-|| *Models* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/SetWireClient.iaml SetWireClient.iaml] ||
-|| *Inference Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_4/SetWireClient.java SetWireClient.java] ||
-|| *Runtime Tests* || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/SetWireClient.java SetWireClient.java] ||
 
-Similar in concept and implementation to a _Sync Wire_, except this is unidirectional. If the target value changes, the source change will not change. If connected between containers of elements, the target element will automatically be populated with the source's children, and these will be connected with _Set Wires_.
+Keeps a target value up-to-date with a source value in a unidirectional fashion.
 
-Can be connected directly to _Input Text Fields_.
+  _See [http://openiaml.org/model/SetWire]_
 
-http://iaml.googlecode.com/svn/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_4/images/SetWireClient-1.png
+==Extends Wire==
 
-==Undocumented==
+Allows for [http://openiaml.org/model/DomainObject domain objects] and [http://openiaml.org/model/Role roles] to inherit each other. Supports limited multiple inheritance.
 
-  * ExtendsWire
-  * ProvidesWire
-  * RequiresWire
-  * ConstraintWire
+  _See [http://openiaml.org/model/ExtendsWire]_
 
-Documentation forthcoming.
+==Provides Wire==
+
+Indicates that the given [http://openiaml.org/model/Role user role] by default will provide the connected [http://openiaml.org/model/Permission permissions].
+
+  _See [http://openiaml.org/model/ProvidesWire]_
+
+==Requires Wire==
+
+Indicates that the given [http://openiaml.org/model/AccessControlHandler access control handler] requires the given [http://openiaml.org/model/Role role] or [http://openiaml.org/model/Permission permission].
+
+  _See [http://openiaml.org/model/RequiresWire]_
+
+==Constraint Wire==
+
+Allows for the complex construction of [http://openiaml.org/model/RequiresWire requirements] for an [http://openiaml.org/model/AccessControlHandler access control handler].
+
+In the future this will allow the complex construction of [http://openiaml.org/model/ConditionWire conditions] ([http://code.google.com/p/iaml/issues/detail?id=134 issue 134]).
+
+  _See [http://openiaml.org/model/ConstraintWire]_

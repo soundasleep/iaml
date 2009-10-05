@@ -978,18 +978,6 @@ public class GmfGenTestCase extends XmlTestCase {
 	}
 
 	/**
-	 * Saves the given XML document to the given filename.
-	 * 
-	 * @param doc
-	 * @param filename
-	 * @throws IOException
-	 * @throws TransformerException
-	 */
-	public static void saveDocument(Document doc, String filename) throws IOException, TransformerException {
-		saveDocument(doc, new File(filename));
-	}
-	
-	/**
 	 * Represents a triple of (diagram canvas element, diagram ID, diagram gmfgen filename).
 	 * 
 	 * @author jmwright

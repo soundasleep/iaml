@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import org.openiaml.emf.SoftCache;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
@@ -164,6 +166,8 @@ public class GmfMapTestCase extends XmlTestCase {
 	 */
 	public void testMappingsMatch() throws Exception {
 		for (String filename : getMapList()) {
+			boolean changed = false;
+			
 			Document doc = getMapCache().get(filename);
 			
 			IterableElementList nodes = xpath(doc, "/Mapping/nodes");
@@ -200,7 +204,17 @@ public class GmfMapTestCase extends XmlTestCase {
 					// visual.gmftool#//@palette/@tools.0/@tools.22
 					String tool = toolNode.getAttribute("href");
 					
-					assertToolMappingMatches(filename, elementName, tool);
+					// find out which tool it should be
+					String expected = getDesiredToolMappingMatch(filename, elementName);
+					
+					// set it if different
+					if (!tool.equals(expected)) {
+						// set it
+						toolNode.setAttribute("href", expected);
+						changed = true;
+					}
+					
+					assertToolMappingMatches(filename, elementName, expected);
 				}
 			}
 			
@@ -238,8 +252,23 @@ public class GmfMapTestCase extends XmlTestCase {
 					// visual.gmftool#//@palette/@tools.0/@tools.22
 					String tool = toolNode.getAttribute("href");
 					
-					assertToolMappingMatches(filename, elementName, tool);
+					// find out which tool it should be
+					String expected = getDesiredToolMappingMatch(filename, elementName);
+					
+					// set it if different
+					if (!tool.equals(expected)) {
+						// set it
+						toolNode.setAttribute("href", expected);
+						changed = true;
+					}
+					
+					assertToolMappingMatches(filename, elementName, expected);
 				}
+			}
+			
+			if (changed) {
+				System.out.println("Writing " + filename + "...");
+				saveDocument(doc, filename);
 			}
 		}
 	}
@@ -257,7 +286,7 @@ public class GmfMapTestCase extends XmlTestCase {
 	 */
 	private Element assertToolMappingMatches(String filename, String elementName,
 			String tool) throws Exception {
-
+		
 		// get the last name (ignore sub-packages)
 		String element = elementName.substring(elementName.lastIndexOf("/") + 1);
 		// element = EventTrigger
@@ -281,6 +310,46 @@ public class GmfMapTestCase extends XmlTestCase {
 		assertEquals(filename + ": tool mapping did not match", element, toolName);
 		
 		return toolNode;
+	}
+	
+	/**
+	 * Get the actual desired tool mapping for the given tool name,
+	 * within the given .gmftool Document 
+	 * 
+	 * @param the current gmfmap filename, "visual.gmfmap"
+	 * @param elementName "iaml.ecore#//EventTrigger"
+	 * @return "visual.gmftool#//@palette/@tools.0/@tools.22"
+	 * @throws XPathExpressionException 
+	 */
+	private String getDesiredToolMappingMatch(String filename, 
+			String elementName) throws XPathExpressionException {
+		
+		// get the last name (ignore sub-packages)
+		String element = elementName.substring(elementName.lastIndexOf("/") + 1);
+		// element = EventTrigger
+
+		assertTrue("filename does not contain .gmfmap: " + filename, filename.contains(".gmfmap"));
+		
+		filename = filename.replace(".gmfmap", ".gmftool");
+		Document doc = GmfToolTestCase.getToolCache().get(filename);
+		
+		for (Element tool : xpath(doc, "//tools")) {
+			
+			if (tool.hasAttribute("title") && tool.getAttribute("title").equals(element)) {
+				// we found the target tool
+				String ref = compileEmfReference( filename.substring(filename.lastIndexOf("/") + 1), tool );
+				
+				// replace '@palette.0' with '@palette'
+				ref = ref.replace("/@palette.0/", "/@palette/");
+				
+				return ref;
+			}
+			
+		}
+		
+		// couldn't find anything
+		fail("Could not find tool mapping for '" + elementName + "' in filename '" + filename + "'");
+		return null;
 	}
 
 	/**

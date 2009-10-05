@@ -11,19 +11,6 @@
         description="Model Elements">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="CompositeOperation"
-          description="Create new CompositeOperation">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/CompositeOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/CompositeOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="PrimitiveOperation"
           description="Create new PrimitiveOperation">
         <smallIcon
@@ -37,15 +24,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Parameter"
-          description="Create new Parameter">
+          title="CompositeOperation"
+          description="Create new CompositeOperation">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Parameter.gif"
+            path="icons/full/obj16/CompositeOperation.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Parameter.gif"
+            path="icons/full/obj32/CompositeOperation.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
@@ -63,6 +50,19 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="CompositeCondition"
+          description="Create new CompositeCondition">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="StaticValue"
           description="Create new StaticValue">
         <smallIcon
@@ -76,15 +76,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="CompositeCondition"
-          description="Create new CompositeCondition">
+          title="Parameter"
+          description="Create new Parameter">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/CompositeCondition.gif"
+            path="icons/full/obj16/Parameter.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/CompositeCondition.gif"
+            path="icons/full/obj32/Parameter.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

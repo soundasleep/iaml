@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Wire"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2010,2011,2012,2004,2013,2014,2015,2016,2017"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Wire"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009"/>
+            <method name="getType()" value="2010,2011,2012,2004,2013,2014,2015,2016,2017"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018"/>
+            <method name="getType()" value="5019,5020,5021,5022,5023,5024,5007,5008,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -263,16 +263,16 @@
       <modelingAssistantProvider class="org.openiaml.model.diagram.wire.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeWireEditPart" id="CompositeWire_1000"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2001"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2002"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2003"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2010"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2011"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2012"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.InputTextFieldEditPart" id="InputTextField_2004"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.EventTriggerEditPart" id="EventTrigger_2005"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2006"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.ParameterEditPart" id="Parameter_2007"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.StaticValueEditPart" id="StaticValue_2008"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2009"/>
-         <context elements="CompositeWire_1000,CompositeOperation_2001,PrimitiveOperation_2002,DomainAttribute_2003,InputTextField_2004,EventTrigger_2005,ApplicationElementProperty_2006,Parameter_2007,StaticValue_2008,CompositeCondition_2009"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.EventTriggerEditPart" id="EventTrigger_2013"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2014"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.ParameterEditPart" id="Parameter_2015"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.StaticValueEditPart" id="StaticValue_2016"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2017"/>
+         <context elements="CompositeWire_1000,CompositeOperation_2010,PrimitiveOperation_2011,DomainAttribute_2012,InputTextField_2004,EventTrigger_2013,ApplicationElementProperty_2014,Parameter_2015,StaticValue_2016,CompositeCondition_2017"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -295,7 +295,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.wire.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009"/>
+            <method name="getType()" value="2010,2011,2012,2004,2013,2014,2015,2016,2017"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -315,32 +315,32 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.CompositeOperation_2001"
-               name="%metatype.name.CompositeOperation_2001"
+               id="org.openiaml.model.diagram.wire.CompositeOperation_2010"
+               name="%metatype.name.CompositeOperation_2010"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeOperation"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.CompositeOperationEditHelper">
-            <param name="semanticHint" value="2001"/>
+            <param name="semanticHint" value="2010"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.PrimitiveOperation_2002"
-               name="%metatype.name.PrimitiveOperation_2002"
+               id="org.openiaml.model.diagram.wire.PrimitiveOperation_2011"
+               name="%metatype.name.PrimitiveOperation_2011"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="PrimitiveOperation"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.PrimitiveOperationEditHelper">
-            <param name="semanticHint" value="2002"/>
+            <param name="semanticHint" value="2011"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.DomainAttribute_2003"
-               name="%metatype.name.DomainAttribute_2003"
+               id="org.openiaml.model.diagram.wire.DomainAttribute_2012"
+               name="%metatype.name.DomainAttribute_2012"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainAttribute"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.DomainAttributeEditHelper">
-            <param name="semanticHint" value="2003"/>
+            <param name="semanticHint" value="2012"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
@@ -355,52 +355,52 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.EventTrigger_2005"
-               name="%metatype.name.EventTrigger_2005"
+               id="org.openiaml.model.diagram.wire.EventTrigger_2013"
+               name="%metatype.name.EventTrigger_2013"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.EventTriggerEditHelper">
-            <param name="semanticHint" value="2005"/>
+            <param name="semanticHint" value="2013"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.ApplicationElementProperty_2006"
-               name="%metatype.name.ApplicationElementProperty_2006"
+               id="org.openiaml.model.diagram.wire.ApplicationElementProperty_2014"
+               name="%metatype.name.ApplicationElementProperty_2014"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ApplicationElementProperty"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.ApplicationElementPropertyEditHelper">
-            <param name="semanticHint" value="2006"/>
+            <param name="semanticHint" value="2014"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.Parameter_2007"
-               name="%metatype.name.Parameter_2007"
+               id="org.openiaml.model.diagram.wire.Parameter_2015"
+               name="%metatype.name.Parameter_2015"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Parameter"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.ParameterEditHelper">
-            <param name="semanticHint" value="2007"/>
+            <param name="semanticHint" value="2015"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.StaticValue_2008"
-               name="%metatype.name.StaticValue_2008"
+               id="org.openiaml.model.diagram.wire.StaticValue_2016"
+               name="%metatype.name.StaticValue_2016"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="StaticValue"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.StaticValueEditHelper">
-            <param name="semanticHint" value="2008"/>
+            <param name="semanticHint" value="2016"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.CompositeCondition_2009"
-               name="%metatype.name.CompositeCondition_2009"
+               id="org.openiaml.model.diagram.wire.CompositeCondition_2017"
+               name="%metatype.name.CompositeCondition_2017"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeCondition"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.CompositeConditionEditHelper">
-            <param name="semanticHint" value="2009"/>
+            <param name="semanticHint" value="2017"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -446,15 +446,15 @@
       </clientContext> 
       <binding context="org.openiaml.model.diagram.wire.TypeContext">
          <elementType ref="org.openiaml.model.diagram.wire.CompositeWire_1000"/>
-         <elementType ref="org.openiaml.model.diagram.wire.CompositeOperation_2001"/>
-         <elementType ref="org.openiaml.model.diagram.wire.PrimitiveOperation_2002"/>
-         <elementType ref="org.openiaml.model.diagram.wire.DomainAttribute_2003"/>
+         <elementType ref="org.openiaml.model.diagram.wire.CompositeOperation_2010"/>
+         <elementType ref="org.openiaml.model.diagram.wire.PrimitiveOperation_2011"/>
+         <elementType ref="org.openiaml.model.diagram.wire.DomainAttribute_2012"/>
          <elementType ref="org.openiaml.model.diagram.wire.InputTextField_2004"/>
-         <elementType ref="org.openiaml.model.diagram.wire.EventTrigger_2005"/>
-         <elementType ref="org.openiaml.model.diagram.wire.ApplicationElementProperty_2006"/>
-         <elementType ref="org.openiaml.model.diagram.wire.Parameter_2007"/>
-         <elementType ref="org.openiaml.model.diagram.wire.StaticValue_2008"/>
-         <elementType ref="org.openiaml.model.diagram.wire.CompositeCondition_2009"/>
+         <elementType ref="org.openiaml.model.diagram.wire.EventTrigger_2013"/>
+         <elementType ref="org.openiaml.model.diagram.wire.ApplicationElementProperty_2014"/>
+         <elementType ref="org.openiaml.model.diagram.wire.Parameter_2015"/>
+         <elementType ref="org.openiaml.model.diagram.wire.StaticValue_2016"/>
+         <elementType ref="org.openiaml.model.diagram.wire.CompositeCondition_2017"/>
          <elementType ref="org.openiaml.model.diagram.wire.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.wire.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.wire.ParameterWire_4003"/>

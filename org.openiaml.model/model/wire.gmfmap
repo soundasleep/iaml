@@ -27,7 +27,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.0"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -54,7 +54,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
@@ -159,7 +159,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#ApplicationElementProperty"/>
     </ownedChild>
@@ -179,7 +179,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#Parameter"/>
     </ownedChild>
@@ -231,7 +231,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>

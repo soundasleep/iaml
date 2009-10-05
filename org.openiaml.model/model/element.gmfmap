@@ -27,7 +27,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="element.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="element.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -54,7 +54,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="element.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="element.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>

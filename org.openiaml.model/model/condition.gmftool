@@ -7,8 +7,8 @@
       title="modelPalette">
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="Model Elements"
-        description="Model Elements">
+        title="Condition Nodes"
+        description="Condition Nodes">
       <tools
           xsi:type="gmftool:CreationTool"
           title="StartNode"
@@ -50,6 +50,25 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="DecisionNode"
+          description="Create new DecisionNode">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/DecisionNode.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/DecisionNode.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Model Elements"
+        description="Model Elements"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="Parameter"
           description="Create new Parameter">
         <smallIcon
@@ -72,19 +91,6 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/TemporaryVariable.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="DecisionNode"
-          description="Create new DecisionNode">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DecisionNode.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DecisionNode.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

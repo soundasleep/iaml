@@ -24,19 +24,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="CompositeOperation"
-          description="Create new CompositeOperation">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/CompositeOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/CompositeOperation.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="PrimitiveOperation"
           description="Create new PrimitiveOperation">
         <smallIcon
@@ -50,6 +37,19 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="CompositeOperation"
+          description="Create new CompositeOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="ApplicationElementProperty"
           description="Create new ApplicationElementProperty">
         <smallIcon
@@ -59,6 +59,19 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/ApplicationElementProperty.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeCondition"
+          description="Create new CompositeCondition">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
@@ -87,6 +100,25 @@
             path="icons/full/obj32/LoginHandler.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="QueryParameter"
+          description="Create new QueryParameter">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/QueryParameter.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/QueryParameter.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Domain Modelling"
+        description="Domain Modelling"
+        collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
           title="DomainObject"
@@ -137,32 +169,6 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/DomainAttributeInstance.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="CompositeCondition"
-          description="Create new CompositeCondition">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/CompositeCondition.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/CompositeCondition.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="QueryParameter"
-          description="Create new QueryParameter">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/QueryParameter.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/QueryParameter.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

@@ -418,8 +418,8 @@ public abstract class DroolsInferenceEngine {
 	public InputStream loadResourceAsStream(String filename) {
 		return DroolsInferenceEngine.class.getResourceAsStream( filename );
 	}
-	
-	protected static class RuleBaseCache extends SoftCache<List<String>,RuleBase> {
+
+	protected static class RuleBaseCache extends SoftCache<DroolsInferenceEngine,RuleBase> {
 
 		/**
 		 * Use the selected engine.
@@ -442,7 +442,7 @@ public abstract class DroolsInferenceEngine {
 		 * @throws Exception 
 		 */
 		@Override
-		public RuleBase retrieve(List<String> input) {
+		public RuleBase retrieve(DroolsInferenceEngine input) {
 			try {
 				return doRetrieve(input);
 			} catch (Exception e) {
@@ -456,13 +456,13 @@ public abstract class DroolsInferenceEngine {
 		 * @see #retrieve(List)
 		 * @throws Exception 
 		 */
-		protected RuleBase doRetrieve(List<String> input) throws Exception {
+		protected RuleBase doRetrieve(DroolsInferenceEngine input) throws Exception {
 			RuleBase ruleBase = RuleBaseFactory.newRuleBase();
 
-			for (String ruleFile : input) {
+			for (String ruleFile : input.getRuleFiles()) {
 		
 				// load the stream
-				InputStream stream = engine.loadResourceAsStream(ruleFile);
+				InputStream stream = input.loadResourceAsStream(ruleFile);
 				if (stream == null) {
 					throw new InferenceException("Could not load the resource '" + ruleFile + "' as a stream."); 
 				}
@@ -517,7 +517,7 @@ public abstract class DroolsInferenceEngine {
 		if (ruleBaseCache == null) {
 			ruleBaseCache = new RuleBaseCache(this);
 		}
-		return ruleBaseCache.get(getRuleFiles());
+		return ruleBaseCache.get(this);
 	}
 	
 	/**

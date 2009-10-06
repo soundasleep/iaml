@@ -138,7 +138,7 @@ public abstract class DroolsInferenceEngine {
 	 */
 	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor, InferenceQueueLog log) throws InferenceException {
 
-		monitor.beginTask("Inferring model using Drools", 100);
+		monitor.beginTask("Inferring model using Drools", 150);
 		monitor.subTask("Loading rulebase");
 		
 		queueElementsAdded = new HashMap<Integer,Integer>();
@@ -146,7 +146,7 @@ public abstract class DroolsInferenceEngine {
     	// load up the rulebase
         RuleBase ruleBase;
 		try {
-			ruleBase = getRuleBase();
+			ruleBase = getRuleBase(new SubProgressMonitor(monitor, 50));
 		} catch (Exception e) {
 			throw new InferenceException("Could not load rulebase: " + e.getMessage(), e);
 		}
@@ -252,9 +252,8 @@ public abstract class DroolsInferenceEngine {
 	        });
         }
         
-	    // subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
-		// we can actually use a real monitor, now that we have a limit
-		subProgressMonitor = new SubProgressMonitor(monitor, INSERTION_ITERATION_LIMIT);
+	    subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
+		subProgressMonitor.beginTask("Inferring elements iteratively", INSERTION_ITERATION_LIMIT);
         for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
         	// check for monitor cancel
         	if (monitor.isCanceled()) {
@@ -280,6 +279,7 @@ public abstract class DroolsInferenceEngine {
 			// increment the log
 			log.increment("step " + k, oldQueue.size());
 			queueElementsAdded.put(k, oldQueue.size());
+			subProgressMonitor.worked(1);
         }
         
         // are there any elements left in the queue?
@@ -419,18 +419,9 @@ public abstract class DroolsInferenceEngine {
 		return DroolsInferenceEngine.class.getResourceAsStream( filename );
 	}
 
-	protected static class RuleBaseCache extends SoftCache<DroolsInferenceEngine,RuleBase> {
-
-		/**
-		 * Use the selected engine.
-		 * 
-		 * @param engine
-		 */
-		public RuleBaseCache(DroolsInferenceEngine engine) {
-			this.engine = engine;
-		}
+	public static class RuleBaseCache extends SoftCache<DroolsInferenceEngine,RuleBase> {
 		
-		private DroolsInferenceEngine engine;
+		private IProgressMonitor monitor;
 		
 		/**
 		 * Get the RuleBase from the rules provided.
@@ -459,7 +450,9 @@ public abstract class DroolsInferenceEngine {
 		protected RuleBase doRetrieve(DroolsInferenceEngine input) throws Exception {
 			RuleBase ruleBase = RuleBaseFactory.newRuleBase();
 
+			monitor.beginTask("Parsing and loading rule files", input.getRuleFiles().size());
 			for (String ruleFile : input.getRuleFiles()) {
+				monitor.subTask("Loading " + ruleFile + "...");
 		
 				// load the stream
 				InputStream stream = input.loadResourceAsStream(ruleFile);
@@ -491,9 +484,20 @@ public abstract class DroolsInferenceEngine {
 				//add the package to a rulebase (deploy the rule package).
 				ruleBase.addPackage( pkg );
 		
+				monitor.worked(1);
 			}
 			
+			monitor.done();
 			return ruleBase;
+		}
+
+		/**
+		 * Set the progress monitor for the loading/parsing/compilation of rules.
+		 * 
+		 * @param monitor
+		 */
+		public void setMonitor(IProgressMonitor monitor) {
+			this.monitor = monitor;
 		}
 	}
 	
@@ -510,14 +514,21 @@ public abstract class DroolsInferenceEngine {
 	 * 
 	 * @see RuleBaseCache#retrieve(List)
 	 * @see #getRuleFiles()
+	 * @param monitor 
 	 * @return
 	 * @throws Exception 
 	 */
-	protected RuleBase getRuleBase() throws Exception {
+	protected RuleBase getRuleBase(IProgressMonitor monitor) throws Exception {
 		if (ruleBaseCache == null) {
-			ruleBaseCache = new RuleBaseCache(this);
+			ruleBaseCache = new RuleBaseCache();
 		}
-		return ruleBaseCache.get(this);
+		try {
+			ruleBaseCache.setMonitor(monitor);
+			return ruleBaseCache.get(this);
+		} finally {
+			monitor.done();
+			ruleBaseCache.setMonitor(null);
+		}
 	}
 	
 	/**

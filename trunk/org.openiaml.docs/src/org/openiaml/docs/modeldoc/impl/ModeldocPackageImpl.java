@@ -588,6 +588,15 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExample_ExampleLocation() {
+		return (EReference)exampleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOperationalSemantic() {
 		return operationalSemanticEClass;
 	}
@@ -1493,6 +1502,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(exampleEClass, EXAMPLE__EXAMPLE_MODEL);
 		createEReference(exampleEClass, EXAMPLE__CONTAINING_CLASS);
 		createEReference(exampleEClass, EXAMPLE__DESCRIPTION);
+		createEReference(exampleEClass, EXAMPLE__EXAMPLE_LOCATION);
 
 		operationalSemanticEClass = createEClass(OPERATIONAL_SEMANTIC);
 		createEAttribute(operationalSemanticEClass, OPERATIONAL_SEMANTIC__CATEGORY);
@@ -1707,6 +1717,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getExample_ExampleModel(), this.getModelReference(), null, "exampleModel", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExample_ContainingClass(), this.getEMFClass(), this.getEMFClass_Examples(), "containingClass", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExample_Description(), this.getJavadocTagElement(), null, "description", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExample_ExampleLocation(), this.getFileReference(), null, "exampleLocation", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationalSemanticEClass, OperationalSemantic.class, "OperationalSemantic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperationalSemantic_Category(), ecorePackage.getEString(), "category", null, 0, 1, OperationalSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

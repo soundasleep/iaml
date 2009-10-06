@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.Example;
+import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelReference;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
@@ -28,6 +29,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ExampleImpl#getExampleModel <em>Example Model</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ExampleImpl#getContainingClass <em>Containing Class</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ExampleImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.ExampleImpl#getExampleLocation <em>Example Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +55,16 @@ public class ExampleImpl extends SemanticImpl implements Example {
 	 * @ordered
 	 */
 	protected JavadocTagElement description;
+
+	/**
+	 * The cached value of the '{@link #getExampleLocation() <em>Example Location</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExampleLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected FileReference exampleLocation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -195,6 +207,44 @@ public class ExampleImpl extends SemanticImpl implements Example {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public FileReference getExampleLocation() {
+		if (exampleLocation != null && exampleLocation.eIsProxy()) {
+			InternalEObject oldExampleLocation = (InternalEObject)exampleLocation;
+			exampleLocation = (FileReference)eResolveProxy(oldExampleLocation);
+			if (exampleLocation != oldExampleLocation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModeldocPackage.EXAMPLE__EXAMPLE_LOCATION, oldExampleLocation, exampleLocation));
+			}
+		}
+		return exampleLocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FileReference basicGetExampleLocation() {
+		return exampleLocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExampleLocation(FileReference newExampleLocation) {
+		FileReference oldExampleLocation = exampleLocation;
+		exampleLocation = newExampleLocation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EXAMPLE__EXAMPLE_LOCATION, oldExampleLocation, exampleLocation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -250,6 +300,9 @@ public class ExampleImpl extends SemanticImpl implements Example {
 			case ModeldocPackage.EXAMPLE__DESCRIPTION:
 				if (resolve) return getDescription();
 				return basicGetDescription();
+			case ModeldocPackage.EXAMPLE__EXAMPLE_LOCATION:
+				if (resolve) return getExampleLocation();
+				return basicGetExampleLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -270,6 +323,9 @@ public class ExampleImpl extends SemanticImpl implements Example {
 				return;
 			case ModeldocPackage.EXAMPLE__DESCRIPTION:
 				setDescription((JavadocTagElement)newValue);
+				return;
+			case ModeldocPackage.EXAMPLE__EXAMPLE_LOCATION:
+				setExampleLocation((FileReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -292,6 +348,9 @@ public class ExampleImpl extends SemanticImpl implements Example {
 			case ModeldocPackage.EXAMPLE__DESCRIPTION:
 				setDescription((JavadocTagElement)null);
 				return;
+			case ModeldocPackage.EXAMPLE__EXAMPLE_LOCATION:
+				setExampleLocation((FileReference)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -310,6 +369,8 @@ public class ExampleImpl extends SemanticImpl implements Example {
 				return getContainingClass() != null;
 			case ModeldocPackage.EXAMPLE__DESCRIPTION:
 				return description != null;
+			case ModeldocPackage.EXAMPLE__EXAMPLE_LOCATION:
+				return exampleLocation != null;
 		}
 		return super.eIsSet(featureID);
 	}

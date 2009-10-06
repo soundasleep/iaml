@@ -59,13 +59,19 @@
 			<ul>
 			«REM»group by example source«ENDREM»
 			«FOREACH examples.union(getInheritedExamples(this)).exampleModel.sortBy(m|m.name).uniqueModelID().toSet() AS exampleModel»
-				<li>«EXPAND linkReference FOR examples.union(getInheritedExamples(this)).exampleModel.selectFirst(e|e.uniqueModelID() == exampleModel)»
+				«LET examples.union(getInheritedExamples(this)).exampleModel.selectFirst(e|e.uniqueModelID() == exampleModel) AS actualExampleModel»  
+				<li>
+					<span class="model_reference reference">
+						«EXPAND exampleLinkReference(actualExampleModel) FOR examples.union(getInheritedExamples(this)).selectFirst(e|e.exampleModel.uniqueModelID() == exampleModel).exampleLocation»
+						«EXPAND exampleModelReference FOR actualExampleModel»
+					</span>
 				
 				<ul>
 					«EXPAND example(true) FOREACH examples.select(e|e.exampleModel.uniqueModelID() == exampleModel).sortBy(e|e.description.getString())»
 					«EXPAND example(false) FOREACH getInheritedExamples(this).select(e|e.exampleModel.uniqueModelID() == exampleModel).sortBy(e|e.description.getString())»
 				</ul>
 				</li>
+				«ENDLET»
 			«ENDFOREACH»
 			</ul>
 		</div>
@@ -405,6 +411,13 @@
 «DEFINE linkReference FOR modeldoc::ModelReference»
 	<span class="model_reference reference">[<a href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name»/«name».html">«name».iaml</a>
 	(<a class="model_source" href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name».iaml">source</a>)]</span>
+«ENDDEFINE»
+
+«DEFINE exampleLinkReference(modeldoc::ModelReference model) FOR modeldoc::FileReference»
+	<a href="«EXPAND viewSource»«plugin»/«getPackage(package)»/«name»">«model.name».iaml</a>
+«ENDDEFINE»
+«DEFINE exampleModelReference FOR modeldoc::ModelReference»
+	(<a class="model_source" href="«EXPAND viewSource»«plugin»/src/«getPackage(package)»/«name».iaml">source</a>)]
 «ENDDEFINE»
 
 «DEFINE browseSource FOR emf::EObject-»http://code.google.com/p/iaml/source/browse/trunk/«ENDDEFINE»

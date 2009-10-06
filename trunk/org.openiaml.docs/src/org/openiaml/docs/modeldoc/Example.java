@@ -18,6 +18,7 @@ package org.openiaml.docs.modeldoc;
  *   <li>{@link org.openiaml.docs.modeldoc.Example#getExampleModel <em>Example Model</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.Example#getContainingClass <em>Containing Class</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.Example#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.Example#getExampleLocation <em>Example Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,5 +106,31 @@ public interface Example extends Semantic {
 	 * @generated
 	 */
 	void setDescription(JavadocTagElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Example Location</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Example Location</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Example Location</em>' reference.
+	 * @see #setExampleLocation(FileReference)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getExample_ExampleLocation()
+	 * @model
+	 * @generated
+	 */
+	FileReference getExampleLocation();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.Example#getExampleLocation <em>Example Location</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Example Location</em>' reference.
+	 * @see #getExampleLocation()
+	 * @generated
+	 */
+	void setExampleLocation(FileReference value);
 
 } // Example

@@ -43,7 +43,7 @@ public class DocumentationGenerator {
 		semanticTagHandlers.add(new HandleInferenceTag(root, factory));
 		semanticTagHandlers.add(new HandleImplementationTag(root, factory));
 		semanticTagHandlers.add(new HandleExampleTag(root, factory,
-					"examples" /* plugin */, "index.html" /* file */));
+					"examples" /* plugin */));
 		
 		// load all EMF classes
 		{

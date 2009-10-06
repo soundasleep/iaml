@@ -27,15 +27,12 @@ public class HandleExampleTag implements ITagHandler {
 	
 	// location of the examples, e.g. "org.openiaml.examples"
 	private String examplePlugin;
-	// location of the root file, e.g. "index.html"
-	private String exampleFile;
 	
 	public HandleExampleTag(ModelDocumentation root, ModeldocFactory factory,
-			String examplePlugin, String exampleFile) {
+			String examplePlugin) {
 		this.root = root;
 		this.factory = factory;
 		this.examplePlugin = examplePlugin;
-		this.exampleFile = exampleFile;
 	}
 	
 	public void handleSemanticLink(String name,
@@ -66,7 +63,7 @@ public class HandleExampleTag implements ITagHandler {
 				FileReference file = factory.createFileReference();
 				file.setPlugin(examplePlugin);
 				file.setPackage(jc.getName());
-				file.setName(exampleFile);
+				file.setName(jc.getName() + ".html");
 				root.getReferences().add(file);
 				
 				example.setExampleLocation(file);

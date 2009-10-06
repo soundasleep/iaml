@@ -279,4 +279,38 @@ public class GmfToolTestCase extends XmlTestCase {
 		}
 	}
 
+	/**
+	 * Issue 141: Only one root tool group should have "collapsible"
+	 * set to false.
+	 * 
+	 * @throws Exception
+	 */
+	public void testOnlyOneStaticGroup() throws Exception {
+		
+		for (String filename : getToolList()) {
+			Document gmftool = getToolCache().get(filename);
+			
+			IterableElementList roots = xpath(gmftool, "/ToolRegistry/palette/tools");
+			assertNotEqual("No roots found for " + filename, roots.size(), 0);
+			
+			Element previousStatic = null;
+			for (Element root : roots) {
+				
+				if (!root.hasAttribute("collapsible") ||
+						root.getAttribute("collapsible").equals("false")) {
+					
+					// found a static one
+					if (previousStatic != null) {
+						fail(filename + ": Found two static tool groups: " + root.getAttribute("title") + ", " + previousStatic.getAttribute("title"));
+					}
+					previousStatic = root;
+						
+				}
+				
+			}
+			
+			assertNotNull("No static tool groups found in " + filename, previousStatic);
+		}
+	}
+	
 }

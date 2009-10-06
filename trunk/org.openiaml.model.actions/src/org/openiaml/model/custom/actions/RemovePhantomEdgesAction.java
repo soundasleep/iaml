@@ -126,7 +126,9 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 			monitor.worked(1);
 		}
 		for (EObject obj : elementsToDelete) {
-			handler.deleteElement(obj, obj.eContainer(), obj.eContainingFeature());
+			if (obj.eContainer() != null) {
+				handler.deleteElement(obj, obj.eContainer(), obj.eContainingFeature());
+			}
 		}
 
 		if (monitor.isCanceled())

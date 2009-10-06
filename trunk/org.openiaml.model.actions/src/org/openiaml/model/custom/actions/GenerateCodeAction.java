@@ -86,6 +86,37 @@ public class GenerateCodeAction extends IamlFileAction {
 			// log the result
 			getDefaultPlugin().log(result);
 			
+			if (couldBePhantomEdges(result)) {
+	    		// issue 132: automatically suggest the removal of phantom edges
+	    		
+				// get user confirmation
+				Display.getDefault().syncExec(new Runnable() {
+				    @Override
+				    public void run() {
+				    	answer.setResult(MessageDialog.openConfirm(null, 
+								"Possible phantom edges",
+								"It appears that there may be phantom edges in your model:\n\n" + 
+									getErrorMessage(result) +
+									"\n\nWould you like to automatically remove these edges?"));
+				    }
+				  });
+				
+				if (answer.getResult()) {
+					// remove phantom edges
+					RemovePhantomEdgesAction phantom = new RemovePhantomEdgesAction();
+					phantom.doExecute(o, new SubProgressMonitor(monitor, 10));
+					
+					// refresh project
+					if (o.getParent() != null) {
+						o.getParent().refreshLocal(IFile.DEPTH_ONE, new SubProgressMonitor(monitor, 10));
+					}
+					
+					// and execute again
+					return doExecute(o, new SubProgressMonitor(monitor, 80));
+				}
+	    		
+	    	}
+			
 			// get user confirmation
 			Display.getDefault().syncExec(new Runnable() {
 			    @Override
@@ -187,6 +218,29 @@ public class GenerateCodeAction extends IamlFileAction {
 		monitor.done();
 		
 		return status;
+	}
+
+	/**
+	 * Could the given result status be due to phantom edges?
+	 * 
+	 * @param result
+	 * @return
+	 */
+	private boolean couldBePhantomEdges(IStatus result) {
+		if (result.isMultiStatus()) {
+			for (IStatus status : result.getChildren()) {
+				if (couldBePhantomEdges(status))
+					return true;
+			}
+		}
+		
+		if (result.getMessage().startsWith("A WireEdge must have a 'to'"))
+			return true;
+		
+		if (result.getMessage().startsWith("A WireEdge must have a 'from'"))
+			return true;
+
+		return false;
 	}
 
 	/**

@@ -61,10 +61,16 @@ context model::DomainObjectInstance ERROR "A DomainObjectInstance cannot have mo
 	
 context model::wires::SelectWire ERROR "A SelectWire must come from a valid DomainObject":
 	model::DomainObject.isInstance(from);	
-	
+
+/**
+ * Important: If this message changes, it must also be updated in org.openiaml.model.custom.actions.GenerateCodeAction#couldBePhantomEdges()
+ */	
 context model::WireEdge ERROR "A WireEdge must have a 'from'" :
 	from != null;
 
+/**
+ * Important: If this message changes, it must also be updated in org.openiaml.model.custom.actions.GenerateCodeAction#couldBePhantomEdges()
+ */	
 context model::WireEdge ERROR "A WireEdge must have a 'to'" :
 	to != null;
 

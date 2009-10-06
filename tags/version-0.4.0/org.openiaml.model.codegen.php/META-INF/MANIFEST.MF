@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Oaw Codegen Plugin for Iaml
+Bundle-SymbolicName: org.openiaml.model.codegen.php;singleton:=true
+Bundle-Version: 0.4.0.qualifier
+Require-Bundle: org.openarchitectureware.dependencies,
+ org.openiaml.model,
+ org.openarchitectureware.adapter.emf.check,
+ org.openiaml.iacleaner,
+ ca.ecliptical.emf.xpath,
+ org.openiaml.model.runtime,
+ org.junit
+Export-Package: org.openiaml.model.codegen.php,
+ org.openiaml.model.codegen.php.coverage
+Bundle-Vendor: www.openiaml.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

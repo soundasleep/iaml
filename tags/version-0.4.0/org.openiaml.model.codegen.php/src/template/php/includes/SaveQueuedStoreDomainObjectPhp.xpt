@@ -1,0 +1,31 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE saveQueuedStoreDomainObject FOR model::InternetApplication-»
+<?php
+/**
+ * Saving queued stored objects.
+ */
+ 
+require("config.php");		// runtime library configuration
+require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+
+«EXPAND template::domain::Definitions::domainDefinitions»
+
+log_message("save_queued_store_domain_object.php? " . print_r($_GET, true));
+$id = require_get("id");
+$page_id = require_get("page");
+
+log_message("save_queued_store_domain_object.php: setting id=$id, page_id=$page_id");
+
+// TODO probably a security risk
+$function_name = 'save_queued_store_domain_object_' . $id;
+
+// execute queued
+$function_name();
+
+// output any instructions
+echo "ok";
+
+«ENDDEFINE»

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Coverage: EventsPhp.xpt</title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
+
+<h1>EventsPhp.xpt</h1>
+
+<a href="index.html">Summary</a>
+
+<ul id="legend">
+	<li class="none">Never executed</li>
+	<li class="oaw">Generated output</li>
+	<li class="php">Executed on server (PHP)</li>
+	<li class="js">Executed on client (Javascript)</li>
+</ul>
+
+<p><pre>«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+<span class="oaw php " title="135 steps in OAW 31 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\EventsPhp.xpt: 5:DEFINE eventsPhp FOR model::visual::Page)"><a name="eventsPhp.html">«DEFINE eventsPhp FOR model::visual::Page»</a>
+
+/**
+ * Expand all possible events for the current page.
+ */
+// first, make sure the table exists
+$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
+$s = $db-&gt;prepare("SELECT * FROM stored_events LIMIT 1");
+if (!$s) {
+	// create the table
+	$q = $db-&gt;query("CREATE TABLE stored_events (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			page_id VARCHAR(64) NOT NULL,
+			event_name VARCHAR(64) NOT NULL,
+			arg0 BLOB
+		);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db-&gt;errorInfo(), true));
+}
+
+log_message("finding events for page id «id»");
+// make sure its in ascending order, so we get them back in the order they were inserted
+$s = $db-&gt;prepare("SELECT * FROM stored_events WHERE page_id=? ORDER BY id ASC") or throw_new_IamlRuntimeException("could not get stored events: " . print_r($db-&gt;errorInfo(), true));
+$s-&gt;execute(array("«id»")) or throw_new_IamlRuntimeException("could not execute select query: " . print_r($db-&gt;errorInfo(), true));
+foreach ($s-&gt;fetchAll() as $row) {
+	log_message("found event $row[id]: event_name=$row[event_name] arg0=$row[arg0]");
+	echo $row["event_name"] . "(\"" . $row["arg0"] . "\"); // from db " . $row["id"] . "\n";
+}
+
+// delete all the events for this page now
+log_message("deleting all events for page «id»");
+$s = $db-&gt;prepare("DELETE FROM stored_events WHERE page_id=?") or throw_new_IamlRuntimeException("could not delete stored events: " . print_r($db-&gt;errorInfo(), true));
+$s-&gt;execute(array("«id»")) or throw_new_IamlRuntimeException("could not execute delete query: " . print_r($db-&gt;errorInfo(), true));
+
+«ENDDEFINE»</span>
+</pre></p>
+
+</body>
+</html>

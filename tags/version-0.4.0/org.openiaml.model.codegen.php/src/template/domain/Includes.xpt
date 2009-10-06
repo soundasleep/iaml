@@ -1,0 +1,66 @@
+«IMPORT iaml»
+
+/**
+ * Define the include files for each domain object.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE domainIncludes FOR model::InternetApplication»
+	«EXPAND domainObjectInclude FOREACH getRoot().getAllDomainObjects()» 
+	«EXPAND domainAttributeInstanceInclude FOREACH getRoot().getAllDomainAttributeInstances()» 
+«ENDDEFINE»
+
+«DEFINE domainObjectInclude FOR model::DomainObject-»
+	«FILE "output/domain/" + safeName() + ".php"-»
+<?php
+		
+/**
+ * Domain object includes file for DomainObject '«safeNameString(name)»'.
+ */		
+
+/**
+ * Creating new instances.
+ */
+«EXPAND DomainInheritance::createNewInstanceRecursively»
+
+/**
+ * Casts.
+ */		
+«EXPAND DomainInheritance::allCasts»
+
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE domainAttributeInstanceInclude FOR model::DomainAttributeInstance-»
+	«FILE "output/domain/attribute/" + safeName() + ".php"-»
+<?php
+		
+/**
+ * Domain attribute includes file for DomainAttributeInstance '«safeNameString(name)»'.
+ */		
+
+/**
+ * Getting attribute instances.
+ */
+«EXPAND GetDefinitions::getDomainAttribute»
+
+/**
+ * Storing attribute instances.
+ */
+«EXPAND StoreDefinitions::storeDomainAttribute(true)»
+
+	«ENDFILE»
+«ENDDEFINE»
+
+/**
+ * Get the include file for the given domain object.
+ */
+«DEFINE getInclude FOR model::DomainObject»
+	require("domain/«safeName()».php");
+«ENDDEFINE»
+«DEFINE getInclude FOR model::DomainAttributeInstance»
+	require("domain/attribute/«safeName()».php");
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

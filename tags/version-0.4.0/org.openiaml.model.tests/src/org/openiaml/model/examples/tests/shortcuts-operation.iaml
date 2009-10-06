@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.11d889e30c6.236">
+  <children xsi:type="iaml.visual:Page" id="visual.11d889e3114.223" name="container">
+    <operations xsi:type="iaml:CompositeOperation" id="model.11d889e30c6.23e" name="composite">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.11d889e30c6.257" name="chained" inExecutions="model.11d889e30c6.28a" outExecutions="model.11d889e30c6.28b"/>
+      <nodes xsi:type="iaml.operations:StartNode" id="operations.11d889e3171.6" outExecutions="model.11d889e30c6.28a"/>
+      <executionEdges id="model.11d889e30c6.28a" from="operations.11d889e3171.6" to="model.11d889e30c6.257"/>
+      <executionEdges id="model.11d889e30c6.28b" from="model.11d889e30c6.257" to="model.11d889e30c6.266"/>
+    </operations>
+    <operations xsi:type="iaml:PrimitiveOperation" id="model.11d889e30c6.266" name="final" inExecutions="model.11d889e30c6.28b"/>
+  </children>
+</iaml:InternetApplication>

@@ -1,5 +1,5 @@
 #summary Summary of model version 0.3.
-#labels Phase-Design,Development,Featured
+#labels Phase-Design,Development
 
 [Model0_2 < 0.2] | *0.3* | [Model0_4 0.4 >]
 

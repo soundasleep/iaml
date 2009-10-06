@@ -58,6 +58,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
         eOpposite="#//EMFClass/examples"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exampleLocation" eType="#//FileReference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationalSemantic" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

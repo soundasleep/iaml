@@ -400,13 +400,22 @@ public interface ModeldocPackage extends EPackage {
 	int EXAMPLE__DESCRIPTION = SEMANTIC_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Example Location</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE__EXAMPLE_LOCATION = SEMANTIC_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Example</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 3;
+	int EXAMPLE_FEATURE_COUNT = SEMANTIC_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl <em>Operational Semantic</em>}' class.
@@ -2069,6 +2078,17 @@ public interface ModeldocPackage extends EPackage {
 	EReference getExample_Description();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.Example#getExampleLocation <em>Example Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Example Location</em>'.
+	 * @see org.openiaml.docs.modeldoc.Example#getExampleLocation()
+	 * @see #getExample()
+	 * @generated
+	 */
+	EReference getExample_ExampleLocation();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.OperationalSemantic <em>Operational Semantic</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3364,6 +3384,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXAMPLE__DESCRIPTION = eINSTANCE.getExample_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Example Location</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXAMPLE__EXAMPLE_LOCATION = eINSTANCE.getExample_ExampleLocation();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.OperationalSemanticImpl <em>Operational Semantic</em>}' class.

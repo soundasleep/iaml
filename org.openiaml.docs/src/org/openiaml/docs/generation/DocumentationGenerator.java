@@ -42,7 +42,8 @@ public class DocumentationGenerator {
 		semanticTagHandlers.add(new HandleOperationalTag(root, factory));
 		semanticTagHandlers.add(new HandleInferenceTag(root, factory));
 		semanticTagHandlers.add(new HandleImplementationTag(root, factory));
-		semanticTagHandlers.add(new HandleExampleTag(root, factory));
+		semanticTagHandlers.add(new HandleExampleTag(root, factory,
+					"examples" /* plugin */, "index.html" /* file */));
 		
 		// load all EMF classes
 		{
@@ -81,8 +82,8 @@ public class DocumentationGenerator {
 		// get all constraints
 		{
 			ILoader loader = new LoadOAWConstraints(
-					"../org.openiaml.model.codegen.oaw/src/metamodel/Checks.chk",
-					"org.openiaml.model.codegen.oaw",
+					"../org.openiaml.model.codegen.php/src/metamodel/Checks.chk",
+					"org.openiaml.model.codegen.php",
 					"src.metamodel",
 					"Checks.chk"
 			);
@@ -92,8 +93,8 @@ public class DocumentationGenerator {
 		// get all model extensions
 		{
 			ILoader loader = new LoadOAWExtensions(
-					"../org.openiaml.model.codegen.oaw/src/metamodel/Extensions.ext",
-					"org.openiaml.model.codegen.oaw",
+					"../org.openiaml.model.codegen.php/src/metamodel/Extensions.ext",
+					"org.openiaml.model.codegen.php",
 					"src.metamodel",
 					"Extensions.ext"
 			);
@@ -101,8 +102,8 @@ public class DocumentationGenerator {
 		}
 		{
 			ILoader loader = new LoadOAWExtensions(
-					"../org.openiaml.model.codegen.oaw/src/template/GeneratorExtensions.ext",
-					"org.openiaml.model.codegen.oaw",
+					"../org.openiaml.model.codegen.php/src/template/GeneratorExtensions.ext",
+					"org.openiaml.model.codegen.php",
 					"src.template",
 					"GeneratorExtensions.ext"
 			);
@@ -134,8 +135,8 @@ public class DocumentationGenerator {
 		// load all OAW templates for implementation notes
 		{
 			ILoader loader = new LoadOAWImplementationNotes(
-					new File("../org.openiaml.model.codegen.oaw/src/template") /* source folder */,
-					"org.openiaml.model.codegen.oaw" /* plugin */, 
+					new File("../org.openiaml.model.codegen.php/src/template") /* source folder */,
+					"org.openiaml.model.codegen.php" /* plugin */, 
 					"template" /* starting package */, 
 					this
 			);

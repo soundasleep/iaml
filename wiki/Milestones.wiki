@@ -75,20 +75,33 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * More icons for editor elements ([http://code.google.com/p/iaml/issues/detail?id=18 issue 18])
     * Model element creation tools are now rendered in groups
 
-=Release 0.4+=
-([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.4 Outstanding issues])
+=Release 0.4=
+([http://journals.jevon.org/users/jevon-phd/entry/19760 Released] October 2009)
   # [Model0_4 Expand IAML model]
-    * [LoginHandler Login Handlers (domain object instance)]
-    * Text element
+    * [http://openiaml.org/model/LoginHandler Login Handlers] (domain instance and user)
     * [http://code.google.com/p/iaml/source/detail?r=973 Clear the current session DomainObjectInstance]
-    * [http://code.google.com/p/iaml/wiki/Model0_4#Set_Wire Set Wire]: a one-way _Sync Wire_
-    * [http://code.google.com/p/iaml/wiki/Model0_4#Query_Parameter Query Parameter] (_url?param=bar_)
-    * [AccessControl Users as first-class citizens]
-    * [http://code.google.com/p/iaml/wiki/Model0_4#Join_Node,_Split_Node Join Node, Split Node]
+    * [http://openiaml.org/model/SetWire Set Wire]: a one-way _Sync Wire_
+    * [http://openiaml.org/model/QueryParameter Query Parameter] (_url?param=bar_)
+    * [http://openiaml.org/model/Role Users as first-class citizens]
+    * [http://openiaml.org/model/JoinNode Join Node], [http://openiaml.org/model/SplitNode Split Node]
+    * [Model0_4 ...]
+  # Documentation
+    * [http://openiaml.org/model Automatically generated documentation]
+    * [Installation Installation guide]
+    * [HelloWorld "Hello, World" tutorial]
+    * Rich suite of [http://openiaml.org/model/examples example models]
+  # Usability improvements
+    * Differences between [IamlPrimitiveOperations primitive operations] and [IamlCompositeOperations composite operations] have been clarified
+    * Model instances will be checked for validity before code generation occurs
+    * Debug information is no longer displayed by default (issue 115)
+  # Development
+    * PHP and Javascript libraries moved into a separate runtime bundle (issue 75, issue 76)
+    * Refactoring of code generation templates
+    * Diagram tests moved into separate bundle (issue 109)
 
-=Release 0.5+=
+=Release 0.5=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
-  # [Model0_4 Expand IAML model]
+  # [Model0_5 Expand IAML model]
     * Text element
     * Resultset viewer
     * InputForm which renders SyncWire contents as Text, rather than InputTextFields
@@ -97,14 +110,9 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Server-side operation (e.g. written in PHP)
     * Client-side operaiton (e.g. written in Javascript)
     * Deleting domain objects
-  # Usability improvements
-    * [http://code.google.com/p/iaml/issues/detail?id=30 Sharing single EditingDomain instance] across all editors
-  # Development
-    * [http://code.google.com/p/iaml/issues/detail?id=21 Set up automated build and release]
-    * Automated testing in build script
-    * Integration with CruiseControl
-    * Code coverage with [http://emma.sourceforge.net/ Emma] and [http://www.eclemma.org/ EclEmma]
-    * [http://code.google.com/p/iaml/issues/detail?id=22 Javadoc documentation generation]
+
+=Release 0.6+=
+([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.6 Outstanding issues])
 
 =Release 0.9=
   # Can implement [http://openiaml.org Ticket 2.0]

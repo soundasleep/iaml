@@ -1,5 +1,5 @@
 #summary Summary of model version 0.4.
-#labels Phase-Design,Development
+#labels Phase-Design,Development,Featured
 
 [Model0_3 < 0.3] | *0.4* | [Model0_5 0.5 >]
 
@@ -9,9 +9,44 @@
 
 =Introduction=
 
-TODO
+This model release adds a lot of important model elements to the modelling language. In particular, there is now better support for the instancing of domain objects and [http://openiaml.org/model/Role role-based access control]. Domain objects now support [http://openiaml.org/model/ExtendsWire inheritance]. Users are now [http://openiaml.org/model/UserInstance first-class objects] and can be created just like domain objects.
+
+==Documentation==
+
+There is now an experimental documentation source for model elements, available online at [http://openiaml.org/model]. Model elements now have documentation (issue 39) and this documentation is generated automatically. In the future, previous model versions will be migrated to this new format.
+
+An [Installation installation guide] has been written (issue 2) and a [HelloWorld simple tutorial] has also been written (issue 1), along with screenshots (issue 97).
+
+There is now a rich suite of generated example models, available on the documentation site: http://openiaml.org/model/examples
+
+==Usability Features==
+
+The differences between [IamlPrimitiveOperations primitive operations] and [IamlCompositeOperations composite operations] have been clarified. If an unrecognised primitive operation is specified, a warning will show (issue 136).
+
+A new [http://openiaml.org/model/Session session] editor has been created (issue 102).
+
+The model instance will be checked for validity before code generation is executed; if there is an error, a message box will be displayed.
+
+Debug information is no longer [IamlProjectProperties displayed by default] (issue 115).
+
+==Bug Fixes==
+
+There were [http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.4 many bug fixes], but the most important ones included:
+
+  * Generated elements no longer showing derived '/' marker (issue 92)
+  * Elements can no longer be included accidentally within more than one containment feature (issue 96)
+  * Constraints not being executed on model save (issue 135)
+  * A [http://openiaml.org/model/SelectWire SelectWire] will now synchronise attributes between objects and instances (issue 68)
+  * Incoming [http://openiaml.org/model/ParameterWire ParameterWires] from shortcuts are now rendered correctly (issue 69)
+
+==Development==
+
+  * PHP and Javascript libraries have been refactored out into a separate runtime bundle (issue 75, issue 76)
+  * A significant portion of the code generation templates have been refactored (issue 78, issue 79, issue 80, issue 95)
+  * Diagram tests have been refactored out into a separate bundle (issue 109)
 
 =New Elements=
+
 ==Login Handler (Domain Instance)==
 
 A [http://openiaml.org/model/LoginHandler login handler] can now be connected to login [http://openiaml.org/model/DomainObjectInstance domain object instances]. This will login or logout the current user based on the existance of a valid domain instance in the [http://openiaml.org/model/DomainStore domain store].

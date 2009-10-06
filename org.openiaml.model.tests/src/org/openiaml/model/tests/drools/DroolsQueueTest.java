@@ -74,7 +74,7 @@ public class DroolsQueueTest extends XmlTestCase {
 		public void create(EObject model, boolean logRuleSource,
 				IProgressMonitor monitor) throws InferenceException {
 			// use the correct cache
-			setRuleBaseCache(new RuleBaseCache(this));
+			setRuleBaseCache(new RuleBaseCache());
 			super.create(model, logRuleSource, monitor);
 			// future references should not use our cached values either
 			resetRuleBaseCache();

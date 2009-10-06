@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.codegen.oaw;
+package org.openiaml.model.codegen.php;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 	private static IProgressMonitor monitor;
 	private static SubProgressMonitor lastSubMonitor;
 
-	public static final String PLUGIN_ID = org.openiaml.model.codegen.oaw.OawCodeGenerator.PLUGIN_ID;
+	public static final String PLUGIN_ID = org.openiaml.model.codegen.php.OawCodeGenerator.PLUGIN_ID;
 	
 	/**
 	 * org.apache.commons.logging.impl.LogFactoryImpl requires a
@@ -109,7 +109,7 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 		 * OAW mangles up thrown exceptions within code, so we have to
 		 * use a workaround.
 		 * 
-		 * @see {@link org.openiaml.model.codegen.oaw.OawCodeGenerator#throwException(String message)}
+		 * @see {@link org.openiaml.model.codegen.php.OawCodeGenerator#throwException(String message)}
 		 */
 		if (type >= LOG_LEVEL_ERROR && t == null && message instanceof String) {			
 			Throwable original = OawCodeGenerator.getExceptionForMessage(message.toString());

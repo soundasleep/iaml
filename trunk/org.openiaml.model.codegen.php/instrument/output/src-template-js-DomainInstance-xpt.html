@@ -22,32 +22,32 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* expand out all domain attribute instances for the page */
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt: 6:DEFINE expandDomainAttributes FOR model::InternetApplication)"><a name="expandDomainAttributes.html">«DEFINE expandDomainAttributes FOR model::InternetApplication»</a>
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\js\DomainInstance.xpt: 6:DEFINE expandDomainAttributes FOR model::InternetApplication)"><a name="expandDomainAttributes.html">«DEFINE expandDomainAttributes FOR model::InternetApplication»</a>
 	<a href="#storeDomainAttribute.html">«EXPAND storeDomainAttribute FOREACH getAllDomainAttributeInstances()»</a>
 «ENDDEFINE»</span>
-<span class="oaw php js " title="135 steps in OAW 31 steps in PHP 31 steps in JS (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt: 9:DEFINE expandDomainAttributes FOR model::visual::Page)"><a name="expandDomainAttributes.html">«DEFINE expandDomainAttributes FOR model::visual::Page»</a>
+<span class="oaw php js " title="135 steps in OAW 31 steps in PHP 31 steps in JS (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\js\DomainInstance.xpt: 9:DEFINE expandDomainAttributes FOR model::visual::Page)"><a name="expandDomainAttributes.html">«DEFINE expandDomainAttributes FOR model::visual::Page»</a>
 	<a href="#storeDomainAttribute.html">«EXPAND storeDomainAttribute FOREACH getRoot().getAllDomainAttributeInstances()»</a>
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt: 13:DEFINE expandDomainObjects FOR model::InternetApplication)"><a name="expandDomainObjects.html">«DEFINE expandDomainObjects FOR model::InternetApplication»</a>
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\js\DomainInstance.xpt: 13:DEFINE expandDomainObjects FOR model::InternetApplication)"><a name="expandDomainObjects.html">«DEFINE expandDomainObjects FOR model::InternetApplication»</a>
 	/* empty */
 «ENDDEFINE»</span>
-<span class="oaw php js " title="135 steps in OAW 31 steps in PHP 31 steps in JS (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt: 16:DEFINE expandDomainObjects FOR model::visual::Page)"><a name="expandDomainObjects.html">«DEFINE expandDomainObjects FOR model::visual::Page»</a>
+<span class="oaw php js " title="135 steps in OAW 31 steps in PHP 31 steps in JS (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\js\DomainInstance.xpt: 16:DEFINE expandDomainObjects FOR model::visual::Page)"><a name="expandDomainObjects.html">«DEFINE expandDomainObjects FOR model::visual::Page»</a>
 	/* empty */
 «ENDDEFINE»</span>
 
 /* code to _save_ attributes */
 /* calls the server */
-<span class="oaw " title="29 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt: 22:DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-)"><a name="storeDomainAttribute.html">«DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-»</a>
+<span class="oaw " title="29 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\js\DomainInstance.xpt: 22:DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-)"><a name="storeDomainAttribute.html">«DEFINE storeDomainAttribute FOR model::DomainAttributeInstance-»</a>
 	function store_domain_attribute_«safeName()»(arg0) {
 		set_domain_attribute("«safeNameString(id)-»", arg0);
 	}
 	
 	/* for attributes with 'autosave' set to false */
 	function queue_store_domain_attribute_«safeName()»(arg0) {
-		<span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt: 29:IF containingSession() != null)">«IF containingSession() != null»
+		<span class="oaw " title="3 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\js\DomainInstance.xpt: 29:IF containingSession() != null)">«IF containingSession() != null»
 			set_session("instance_queue_«safeName(containingSession())-»_«safeNameString(id)-»", arg0);
-		</span><span class="oaw " title="26 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt: 31:ELSE)">«ELSE»
+		</span><span class="oaw " title="26 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\js\DomainInstance.xpt: 31:ELSE)">«ELSE»
 			set_application_value("instance_queue_«safeNameString(id)-»", arg0);
 		«ENDIF»</span> 
 	}
@@ -57,7 +57,7 @@
 	}
 «ENDDEFINE»</span>
 
-<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.oaw\src\template\js\DomainInstance.xpt: 41:DEFINE exception FOR Object)"><a name="exception.html">«DEFINE exception FOR Object»</a>
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\js\DomainInstance.xpt: 41:DEFINE exception FOR Object)"><a name="exception.html">«DEFINE exception FOR Object»</a>
 «ENDDEFINE»</span></pre></p>
 
 </body>

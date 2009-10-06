@@ -36,7 +36,7 @@ import org.w3c.dom.Document;
 /**
  * Action to migrate an old .iaml file to a new .iaml file
  * 
- * @see org.openiaml.model.codegen.oaw
+ * @see org.openiaml.model.codegen.php
  * @author jmwright
  *
  */

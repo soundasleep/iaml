@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.codegen.oaw.coverage;
+package org.openiaml.model.codegen.php.coverage;
 
 import java.io.File;
 import java.io.IOException;

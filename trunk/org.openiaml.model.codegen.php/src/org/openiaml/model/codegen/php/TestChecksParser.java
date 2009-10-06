@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.codegen.oaw;
+package org.openiaml.model.codegen.php;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

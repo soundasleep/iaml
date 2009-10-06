@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.jaxen.JaxenException;
 import org.openiaml.emf.SoftCache;
-import org.openiaml.model.codegen.oaw.CheckModelInstance;
+import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;

@@ -139,7 +139,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.openiaml.model.codegen.oaw"
+         id="org.openiaml.model.codegen.php"
          download-size="0"
          install-size="0"
          version="0.3.1"

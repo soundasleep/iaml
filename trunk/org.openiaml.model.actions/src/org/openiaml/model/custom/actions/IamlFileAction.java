@@ -15,7 +15,7 @@ import org.openiaml.model.inference.InferenceException;
 /**
  * Abstract class for interacting with .iaml files.
  * 
- * @see org.openiaml.model.codegen.oaw
+ * @see org.openiaml.model.codegen.php
  * @author jmwright
  *
  */

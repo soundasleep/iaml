@@ -2,7 +2,7 @@
 <!-- a workflow for running in the dev environment -->
 <workflow>
 	<!-- using a local file for testing generation locally -->
-	<property name="model" value="org.openiaml.model.codegen.oaw/src/codegen-sync-pages.iaml" />
+	<property name="model" value="org.openiaml.model.codegen.php/src/codegen-sync-pages.iaml" />
 	<property name="src-gen" value="src-gen" />
 	
 	<!-- set up EMF for standalone execution -->
@@ -31,7 +31,7 @@
 		<expand
 			value="template::Template::main('${config_runtime}', '${config_web}', '${debug}') FOR model" />
 		<outlet path="${src-gen}" >
-			<postprocessor class="org.openiaml.model.codegen.oaw.IACleanerBeautifier" />
+			<postprocessor class="org.openiaml.model.codegen.php.IACleanerBeautifier" />
 		</outlet>
 	</component>
 

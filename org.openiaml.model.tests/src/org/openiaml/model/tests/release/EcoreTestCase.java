@@ -26,7 +26,7 @@ public class EcoreTestCase extends XmlTestCase {
 	 */
 	public void testOawEcore() throws Exception {
 		File source = new File("../org.openiaml.model/model/iaml.ecore");
-		File target = new File("../org.openiaml.model.codegen.oaw/src/metamodel/iaml-current.ecore");
+		File target = new File("../org.openiaml.model.codegen.php/src/metamodel/iaml-current.ecore");
 		
 		assertFileExists(source);
 		assertFileExists(target);
@@ -60,9 +60,9 @@ public class EcoreTestCase extends XmlTestCase {
 	public void testModelNamespaceURIs() throws Exception {
 		String nsURI = ModelPackage.eINSTANCE.getNsURI();
 		
-		// try org.openiaml.model.codegen.oaw/plugin.xml
+		// try org.openiaml.model.codegen.php/plugin.xml
 		{
-			String file = "../org.openiaml.model.codegen.oaw/plugin.xml";
+			String file = "../org.openiaml.model.codegen.php/plugin.xml";
 			String xpath = "/plugin/extension/metaModel";
 			Document doc = loadDocument(file);
 			Element node = xpathFirst(doc, xpath);

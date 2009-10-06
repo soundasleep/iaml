@@ -35,7 +35,7 @@ import org.openiaml.model.model.WireEdge;
  * 
  * See issue 63.
  * 
- * @see org.openiaml.model.codegen.oaw
+ * @see org.openiaml.model.codegen.php
  * @author jmwright
  *
  */

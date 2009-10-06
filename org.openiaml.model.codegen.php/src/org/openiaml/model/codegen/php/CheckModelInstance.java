@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.codegen.oaw;
+package org.openiaml.model.codegen.php;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
  */
 public class CheckModelInstance {
 	
-	public static final String PLUGIN_ID = "org.openiaml.model.codegen.oaw"; 
+	public static final String PLUGIN_ID = "org.openiaml.model.codegen.php"; 
 	
 	/**
 	 * Check the instance in a given model file.

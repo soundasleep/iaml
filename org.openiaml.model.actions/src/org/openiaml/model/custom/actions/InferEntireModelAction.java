@@ -31,7 +31,7 @@ import org.openiaml.model.inference.InferenceException;
  * models that do not require such inference to understand their
  * operation.
  * 
- * @see org.openiaml.model.codegen.oaw
+ * @see org.openiaml.model.codegen.php
  * @author jmwright
  *
  */

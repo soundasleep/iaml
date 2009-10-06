@@ -10,7 +10,7 @@ Require-Bundle: org.openarchitectureware.dependencies,
  ca.ecliptical.emf.xpath,
  org.openiaml.model.runtime,
  org.junit
-Export-Package: org.openiaml.model.codegen.oaw,
- org.openiaml.model.codegen.oaw.coverage
+Export-Package: org.openiaml.model.codegen.php,
+ org.openiaml.model.codegen.php.coverage
 Bundle-Vendor: www.openiaml.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

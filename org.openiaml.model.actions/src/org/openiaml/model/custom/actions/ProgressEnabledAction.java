@@ -22,7 +22,7 @@ import org.openiaml.model.actions.IamlActionsPlugin;
  * with various actions, adding support for rendering progress monitors
  * (rather than halting the current thread).
  * 
- * @see org.openiaml.model.codegen.oaw
+ * @see org.openiaml.model.codegen.php
  * @author jmwright
  *
  */

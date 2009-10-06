@@ -308,7 +308,7 @@ getAllDomainObjects(emf::EObject e) :
 
 /** find all actual matches for the given DynamicApplicationSet in a given root */
 List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
-	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);
+	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);
 
 /** get the fieldValue of the text field, or null if none exists. */
 getFieldValue(model::visual::InputTextField this) :
@@ -361,7 +361,7 @@ List[model::DomainObject] allSubtypes(model::DomainObject this):
    
  */
 String throwException(String message) :
-	JAVA org.openiaml.model.codegen.oaw.OawCodeGenerator.throwException(java.lang.String);
+	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.throwException(java.lang.String);
 
 String _instrument(String destination, String filename, String location) :
-	JAVA org.openiaml.model.codegen.oaw.coverage.InstrumentOawCode.instrument(java.lang.String, java.lang.String, java.lang.String);
+	JAVA org.openiaml.model.codegen.php.coverage.InstrumentOawCode.instrument(java.lang.String, java.lang.String, java.lang.String);

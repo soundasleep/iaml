@@ -26,8 +26,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.openiaml.model.actions.QuestionDialogResult;
 import org.openiaml.model.codegen.ICodeGenerator;
-import org.openiaml.model.codegen.oaw.CheckModelInstance;
-import org.openiaml.model.codegen.oaw.OawCodeGeneratorWithRuntime;
+import org.openiaml.model.codegen.php.CheckModelInstance;
+import org.openiaml.model.codegen.php.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
@@ -35,7 +35,7 @@ import org.openiaml.model.inference.InferenceException;
 /**
  * Action to generate code from an .iaml file
  * 
- * @see org.openiaml.model.codegen.oaw
+ * @see org.openiaml.model.codegen.php
  * @author jmwright
  *
  */

@@ -35,17 +35,17 @@ public class SelectFieldFromDynamicQueryAutosave extends DatabaseCodegenTestCase
 	 * Unfortunately this doesn't work yet, because it appears the runtime
 	 * test environment uses pre-compiled templates. We need some way to
 	 * reload the templates manually, but this is too much work.
-	 * So, instead we will use {@link org.openiaml.model.codegen.oaw.coverage.RunInstrumentation} to
+	 * So, instead we will use {@link org.openiaml.model.codegen.php.coverage.RunInstrumentation} to
 	 * manually instrument the code.
 	 * 
-	 * @see org.openiaml.model.codegen.oaw.coverage.InstrumentOawCode
+	 * @see org.openiaml.model.codegen.php.coverage.InstrumentOawCode
 	 */
 	/*
 	protected IStatus doTransformOAW_old(String filename, String outputDir,
 			IProgressMonitor monitor) throws FileNotFoundException,
 			CoreException {
 		try {
-			File dir = new File("../org.openiaml.model.codegen.oaw/src/template");
+			File dir = new File("../org.openiaml.model.codegen.php/src/template");
 			InstrumentOawCode inst = new InstrumentOawCode();
 			
 			// we need to do some refreshing

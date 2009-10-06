@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.codegen.oaw;
+package org.openiaml.model.codegen.php;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,7 +35,7 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  */
 public class OawCodeGenerator implements ICodeGenerator {
 	
-	public static final String PLUGIN_ID = "org.openiaml.model.codegen.oaw"; 
+	public static final String PLUGIN_ID = "org.openiaml.model.codegen.php"; 
 	
 	/**
 	 * Generate code for a given model file into a given output directory.

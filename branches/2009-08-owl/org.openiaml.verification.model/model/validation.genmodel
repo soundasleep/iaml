@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.openiaml.verification.model/src"
+    modelPluginID="org.openiaml.verification.model" modelName="Validation" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../org.openiaml.model/model/iaml.genmodel#//model">
+  <foreignModel>validation.ecore</foreignModel>
+  <genPackages prefix="Validation" basePackage="org.openiaml.verification.model" disposableProviderFactory="true"
+      ecorePackage="validation.ecore#/">
+    <genClasses image="false" ecoreClass="validation.ecore#//ValidationRule"/>
+    <genClasses ecoreClass="validation.ecore#//NavigatesTo">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//NavigatesTo/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//NavigatesTo/to"/>
+    </genClasses>
+    <genClasses ecoreClass="validation.ecore#//Violation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute validation.ecore#//Violation/reason"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//Violation/source"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

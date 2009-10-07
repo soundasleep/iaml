@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.validation.drools.objectContribution1"
+            nameFilter="*.iaml"
+            objectClass="org.eclipse.core.resources.IResource">
+
+         <menu
+               id="org.openiaml.validation.drools.menu1"
+               path="additions"
+               label="&amp;Drools Validation Tools">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.verification.drools.ValidateIAMLWithDrools"
+               id="org.openiaml.validation.drools.action1"
+               label="&amp;Validation with Drools"
+               menubarPath="org.openiaml.validation.drools.menu1/group">
+         </action>
+
+      </objectContribution>                    
+
+	</extension>
+	
+</plugin>

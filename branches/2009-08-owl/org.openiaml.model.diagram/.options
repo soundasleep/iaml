@@ -1,7 +1,0 @@
-# Tracing options for the org.openiaml.model.diagram plug-in
-
-# Common issues
-org.openiaml.model.diagram/debug=false
-
-# Visual IDs
-org.openiaml.model.diagram/debug/visualID=false

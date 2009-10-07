@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.24">
-  <children xsi:type="iaml.visual:Page" id="visual.123172cef6c.1e" name="Home">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.123172cef6c.25" name="current name" inEdges="wires.123172cef6c.f"/>
-    <parameters id="model.123172ceeef.2a" name="name" outEdges="wires.123172cef6c.f" defaultValue="empty">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.123172cef6c.f" from="model.123172ceeef.2a" to="visual.123172cef6c.25" name="set"/>
-    </parameters>
-  </children>
-</iaml:InternetApplication>

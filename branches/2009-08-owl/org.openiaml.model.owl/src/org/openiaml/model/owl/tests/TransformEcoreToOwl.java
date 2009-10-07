@@ -255,7 +255,6 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		assertFalse(it.hasNext());	
 		
 	}	
-	
 
 	/**
 	 * Check to see that we can get derivation traces.
@@ -318,7 +317,51 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		assertFalse(it.hasNext());
 		
 	}	
-	
+
+
+	/**
+	 * Combining both approaches above.
+	 * 
+	 * @throws Exception
+	 */
+	public void testDerivationTraceCombined() throws Exception {
+		
+		Model model = getInvalidRDF();
+		String rules = "[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error(?X, ?Y, ?X)) <- " +
+			"(?X eg:violation ?Y) ]]" +
+			"[validationRule2: (?v rb:validation on()) -> " +
+			"[(?X eg:violation 'true') <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"(?X s:pages ?P1) " + 
+			"(?X s:pages ?P2) notEqual(?P1, ?P2) ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		inf.setDerivationLogging(true);		// enable derivation logging
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+		//String eg = "urn:x-hp-jena:eg/";
+		String eg = PrintUtil.egNS;
+		Property violation = model.getProperty(eg, "violation");
+		
+		StmtIterator it = inf.listStatements( (Resource) null, violation, (RDFNode) null);
+		assertTrue(it.hasNext());
+		Statement s = it.next();
+		
+		RuleDerivation rdev = (RuleDerivation) inf.getDerivation(s).next();
+		assertEquals(violation.toString(), rdev.getConclusion().getPredicate().toString());
+		assertEquals("\"true\"", rdev.getConclusion().getObject().toString());
+		rdev.printTrace(new PrintWriter(System.out, true), true);
+		
+		// no more matches
+		assertFalse(it.hasNext());	
+		
+	}	
+
 	
 	/**
 	 * A simple Jena validation rule. This checks that the inference

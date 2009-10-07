@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" id="model.123314d162d.77" name="target operation">
-  <inEdges href="SeparatedInstances.iaml#wires.123314d16aa.17"/>
-  <nodes xsi:type="iaml.operations:StartNode" id="operations.123314d16aa.6" outExecutions="model.123314d162d.b2"/>
-  <executionEdges id="model.123314d162d.b2" from="operations.123314d16aa.6">
-    <to xsi:type="iaml:CompositeOperation" href="SeparatedInstances.iaml#model.123314d162d.a7"/>
-  </executionEdges>
-</iaml:CompositeOperation>

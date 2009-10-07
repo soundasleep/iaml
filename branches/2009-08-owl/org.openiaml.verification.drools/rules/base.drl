@@ -1,0 +1,65 @@
+#created on: 4/11/2008
+package org.openiaml.verification.drools.rules.base;
+
+#list any import classes here.
+import org.openiaml.verification.drools.*;
+
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.verification.model.validation.*;
+
+global org.openiaml.verification.model.validation.ValidationFactory factory;
+global org.openiaml.verification.drools.VerifyHandler verify;
+
+rule "Page navigating to another Page on access"
+	when
+		p : Page ( )
+		access : EventTrigger ( eContainer == p, name == "access" )
+		p2 : Page ( eval(p != p2) )
+		navigate : NavigateWire ( from == access, to == p2 )
+		not ( NavigatesTo ( from == p, to == p2 ))
+	
+	then
+		System.out.println(1);
+		NavigatesTo navigatesTo = factory.createNavigatesTo();
+		navigatesTo.setFrom(p);
+		navigatesTo.setTo(p2);
+		insert(navigatesTo);
+		
+end
+
+rule "Recursiveness of NavigatesTo"
+	when
+		p1 : Page ( )
+		p2 : Page ( eval(p1 != p2) )
+		n : NavigatesTo( from == p1, to == p2 )
+		p3 : Page ( eval(p2 != p3) )
+		n2 : NavigatesTo ( from == p2, to == p3 )
+		not ( NavigatesTo ( from == p1, to == p3 ))
+	
+	then
+		System.out.println(2);
+		NavigatesTo navigatesTo = factory.createNavigatesTo();
+		navigatesTo.setFrom(p1);
+		navigatesTo.setTo(p3);
+		insert(navigatesTo);
+	
+end
+
+rule "A circular access loop"
+	when
+		p : Page ( )
+		n : NavigatesTo ( from == p, to == p )
+		not (Violation ( source == p ))
+	
+	then
+		System.out.println(3);
+		Violation violation = factory.createViolation();
+		violation.setSource(p);
+		violation.setReason("A circular access loop");
+		verify.failed(violation);
+		insert(violation);
+
+end
+	

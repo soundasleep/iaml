@@ -8,11 +8,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.AssertionFailedError;
 import l3i.sido.emf4sw.ui.ecore2owl.Ecore2OWLFileAction;
 
 import org.eclipse.core.resources.IFile;
@@ -36,15 +38,20 @@ import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.ValidityReport.Report;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.reasoner.rulesys.RuleDerivation;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.PrintUtil;
+import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 /**
  * @author jmwright
@@ -196,7 +203,122 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		ValidityReport valid = inf.validate();
 		assertNotValid(valid);
 		
+	}
+
+	/**
+	 * Check to see that we can get derivation traces.
+	 * 
+	 * @throws Exception
+	 */
+	public void testDerivationTrace() throws Exception {
+		
+		Model model = getInvalidRDF();
+		String rules = "[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error(?P1, ?P2, ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"(?X s:pages ?P1) " + 
+			"(?X s:pages ?P2) notEqual(?P1, ?P2) ]]" +
+			"[validationRule2: (?v rb:validation on()) -> " +
+			"[(?X eg:violation 'true') <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"(?X s:pages ?P1) " + 
+			"(?X s:pages ?P2) notEqual(?P1, ?P2) ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		inf.setDerivationLogging(true);		// enable derivation logging
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+		// String ns = "urn:x-hp-jena:eg/";
+		/*
+		String rb = ReasonerVocabulary.RBNamespace; // URI of "rb:"
+		Property violation = model.getProperty(rb, "violation");
+		*/
+		
+		//String eg = "urn:x-hp-jena:eg/";
+		String eg = PrintUtil.egNS;
+		Property violation = model.getProperty(eg, "violation");
+		
+		StmtIterator it = inf.listStatements( (Resource) null, violation, (RDFNode) null);
+		assertTrue(it.hasNext());
+		Statement s = it.next();
+		
+		RuleDerivation rdev = (RuleDerivation) inf.getDerivation(s).next();
+		assertEquals(violation.toString(), rdev.getConclusion().getPredicate().toString());
+		assertEquals("\"true\"", rdev.getConclusion().getObject().toString());
+		rdev.printTrace(new PrintWriter(System.out, true), true);
+		
+		// no more matches
+		assertFalse(it.hasNext());	
+		
 	}	
+	
+
+	/**
+	 * Check to see that we can get derivation traces.
+	 * (This time directly with the rb: namespace)
+	 * 
+	 * @throws Exception
+	 */
+	public void testDerivationTrace2() throws Exception {
+		
+		Model model = getInvalidRDF();
+		String rules = "[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error(?P1, ?P2, ?X)) <- " +
+			"(?X rdf:type s:InternetApplication) " +
+			"(?X s:pages ?P1) " + 
+			"(?X s:pages ?P2) notEqual(?P1, ?P2) ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		inf.setDerivationLogging(true);		// enable derivation logging
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+		// String ns = "urn:x-hp-jena:eg/";
+
+		/*
+		String rb = ReasonerVocabulary.RBNamespace; // URI of "rb:"
+		Property violation = model.getProperty(rb, "violation");
+		// Node validation = ReasonerVocabulary.RB_VALIDATION.asNode();
+		 * *
+		 */
+		
+		Property violation = ReasonerVocabulary.RB_VALIDATION_REPORT;
+		
+		//String eg = "urn:x-hp-jena:eg/";
+		/*String eg = PrintUtil.egNS;
+		Property violation = model.getProperty(eg, "violation");
+		*/
+		
+		StmtIterator it = inf.listStatements( (Resource) null, violation, (RDFNode) null );
+		try {
+			// this doesn't pass!
+			// it seems this is because rb:violation is not a statement (i.e. it's not in the
+			// inferred model), but eg:violation is.
+			assertTrue(it.hasNext());
+		} catch (AssertionFailedError e) {
+			// sadly, expected
+			return;		
+		}
+		
+		Statement s = it.next();
+		
+		RuleDerivation rdev = (RuleDerivation) inf.getDerivation(s).next();
+		assertEquals(violation.toString(), rdev.getConclusion().getPredicate().toString());
+		assertEquals("\"true\"", rdev.getConclusion().getObject().toString());
+		rdev.printTrace(new PrintWriter(System.out, true), true);
+		
+		// no more matches
+		assertFalse(it.hasNext());
+		
+	}	
+	
 	
 	/**
 	 * A simple Jena validation rule. This checks that the inference

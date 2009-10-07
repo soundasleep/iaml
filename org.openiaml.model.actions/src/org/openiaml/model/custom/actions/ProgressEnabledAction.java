@@ -9,9 +9,12 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
@@ -232,6 +235,34 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	 */
 	public IErrorLogger getErrorHandler() {
 		return this.handler;
+	}
+	
+	/**
+	 * Show an information dialog box.
+	 */
+	public void showInformation(final String title, final String message) {
+		
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openInformation(null, title, message);
+			}
+		});
+
+	}
+
+	/**
+	 * Show an error message dialog box.
+	 */
+	public void showError(final String title, final String message, final IStatus status) {
+		
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				ErrorDialog.openError(null, title, message, status);
+			}
+		});
+
 	}
 
 }

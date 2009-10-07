@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.openiaml.model.diagram.custom.actions.ProgressEnabledAction;
+import org.openiaml.model.custom.actions.ProgressEnabledAction;
 import org.openiaml.model.owl.rdf.EcoreRDFWriter;
 
 import com.hp.hpl.jena.rdf.model.Model;

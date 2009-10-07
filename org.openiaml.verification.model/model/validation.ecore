@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="validation"
+    nsURI="http://openiaml.org/validation/2009/10" nsPrefix="iv">
+  <eClassifiers xsi:type="ecore:EClass" name="ValidationRule" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigatesTo" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//NamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//NamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Violation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reason" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+</ecore:EPackage>

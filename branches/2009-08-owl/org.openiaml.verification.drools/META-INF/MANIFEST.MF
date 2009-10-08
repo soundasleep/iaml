@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.openiaml.verification.model;bundle-version="1.0.0",
  org.eclipse.core.resources;bundle-version="3.5.0",
  org.openiaml.model.actions;bundle-version="0.4.0",
- org.eclipse.ui;bundle-version="3.5.0"
+ org.eclipse.ui;bundle-version="3.5.0",
+ org.apache.xerces;bundle-version="2.9.0"
 Bundle-ClassPath: lib/reqs/ant-1.6.5.jar,
  lib/reqs/antlr-runtime-3.0.jar,
  lib/reqs/ant-nodeps-1.6.5.jar,

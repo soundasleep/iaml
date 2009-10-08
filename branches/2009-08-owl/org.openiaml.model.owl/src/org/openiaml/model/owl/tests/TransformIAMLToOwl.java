@@ -303,7 +303,7 @@ public class TransformIAMLToOwl extends ModelTestCase {
 	 * @author jmwright
 	 *
 	 */
-	protected class MyEcoreRDFWriter {
+	public static class MyEcoreRDFWriter {
 		
 		Map<EObject,Resource> resourceMap = new HashMap<EObject,Resource>();
 		Map<EStructuralFeature,Property> featureMap = new HashMap<EStructuralFeature,Property>();

@@ -50,7 +50,7 @@ public interface ScopesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "scopes";
+	String eNS_PREFIX = "iaml.scopes";
 
 	/**
 	 * The singleton instance of the package.

@@ -462,9 +462,10 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @param source
 	 * @param target
 	 * @return the target file
-	 * @throws Exception
+	 * @throws CoreException 
+	 * @throws FileNotFoundException 
 	 */
-	protected IFile copyFileIntoWorkspace(File sourceFile, IFile target) throws Exception {
+	protected IFile copyFileIntoWorkspace(File sourceFile, IFile target) throws CoreException, FileNotFoundException {
 		createFolderRecursively(target.getParent());
 		
 		assertTrue("source file '" + sourceFile + "' exists", sourceFile.exists());

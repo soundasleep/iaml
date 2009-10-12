@@ -15,6 +15,7 @@ import org.openiaml.emf.properties.IPropertyInvestigator;
 import org.openiaml.emf.properties.library.AttributesCount;
 import org.openiaml.emf.properties.library.AttributesCountIgnoreDefault;
 import org.openiaml.emf.properties.library.ContainmentsSum;
+import org.openiaml.emf.properties.library.DistinctAttributeValueStrings;
 import org.openiaml.emf.properties.library.DistinctAttributeValues;
 import org.openiaml.emf.properties.library.DistinctSupertypes;
 import org.openiaml.emf.properties.library.DistinctTypes;
@@ -90,6 +91,7 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 			// investigators.add(new SupertypesCount("supertype-count", this));
 			investigators.add(new DistinctSupertypes("distinct-supertypes", this));
 			investigators.add(new DistinctAttributeValues("distinct-attribute-values", this));
+			investigators.add(new DistinctAttributeValueStrings("distinct-attribute-value-strings", this));
 			// investigators.add(new DistinctReferences("distinct-references", this));
 			// investigators.add(new DistinctContainments("distinct-containments", this));
 			investigators.add(new MaxDegreeAttributes("max-degree-attributes", this));

@@ -14,16 +14,19 @@ import org.openiaml.emf.properties.IterateOverAll;
 
 
 /**
+ * Like {@link DistinctAttributeValues}, but 
+ * only considers the string values of attributes.
+ * 
  * @author jmwright
  *
  */
-public class DistinctAttributeValues extends IterateOverAll {
-	private Set<Object> values = new HashSet<Object>();
+public class DistinctAttributeValueStrings extends IterateOverAll {
+	private Set<String> values = new HashSet<String>();
 
 	/**
 	 * @param name
 	 */
-	public DistinctAttributeValues(String name, IEMFElementSelector selector) {
+	public DistinctAttributeValueStrings(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
 
@@ -46,13 +49,13 @@ public class DistinctAttributeValues extends IterateOverAll {
 			if (attr.isMany()) {
 				List<?> rList = (List<?>) r;
 				for (Object r2 : rList) {
-					if (r2 != null && !values.contains(obj)) {
-						values.add(r2);
+					if (r2 != null && !values.contains(obj.toString())) {
+						values.add(r2.toString());
 					}
 				}
 			} else {
-				if (r != null && !values.contains(obj)) {
-					values.add(r);
+				if (r != null && !values.contains(obj.toString())) {
+					values.add(r.toString());
 				}
 			}
 		}

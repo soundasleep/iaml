@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.verification.model.validation.NavigatesTo;
+import org.openiaml.verification.model.validation.PathTo;
 import org.openiaml.verification.model.validation.ValidationPackage;
 import org.openiaml.verification.model.validation.ValidationRule;
 import org.openiaml.verification.model.validation.Violation;
@@ -84,6 +85,10 @@ public class ValidationAdapterFactory extends AdapterFactoryImpl {
 				return createViolationAdapter();
 			}
 			@Override
+			public Adapter casePathTo(PathTo object) {
+				return createPathToAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -142,6 +147,20 @@ public class ValidationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createViolationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.verification.model.validation.PathTo <em>Path To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.verification.model.validation.PathTo
+	 * @generated
+	 */
+	public Adapter createPathToAdapter() {
 		return null;
 	}
 

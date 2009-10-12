@@ -19,7 +19,8 @@ public class VerifyWithDrools extends VerificationEngine {
 	}
 
 	private List<String> ruleFiles = Arrays.asList(
-			"/rules/base.drl"
+			"/rules/infinite.drl",
+			"/rules/accessible.drl"
 			);
 	
 	/**

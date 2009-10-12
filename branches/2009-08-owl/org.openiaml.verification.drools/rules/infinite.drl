@@ -1,5 +1,5 @@
 #created on: 4/11/2008
-package org.openiaml.verification.drools.rules.base;
+package org.openiaml.verification.drools.rules.infinite;
 
 #list any import classes here.
 import org.openiaml.verification.drools.*;
@@ -21,7 +21,6 @@ rule "Page navigating to another Page on access"
 		not ( NavigatesTo ( from == p, to == p2 ))
 	
 	then
-		System.out.println(1);
 		NavigatesTo navigatesTo = factory.createNavigatesTo();
 		navigatesTo.setFrom(p);
 		navigatesTo.setTo(p2);
@@ -39,7 +38,6 @@ rule "Recursiveness of NavigatesTo"
 		not ( NavigatesTo ( from == p1, to == p3 ))
 	
 	then
-		System.out.println(2);
 		NavigatesTo navigatesTo = factory.createNavigatesTo();
 		navigatesTo.setFrom(p1);
 		navigatesTo.setTo(p3);
@@ -54,7 +52,6 @@ rule "A circular access loop"
 		not (Violation ( source == p ))
 	
 	then
-		System.out.println(3);
 		Violation violation = factory.createViolation();
 		violation.setSource(p);
 		violation.setReason("A circular access loop");

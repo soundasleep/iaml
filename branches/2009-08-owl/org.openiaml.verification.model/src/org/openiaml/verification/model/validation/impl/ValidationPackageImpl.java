@@ -12,7 +12,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.verification.model.validation.NavigatesTo;
+import org.openiaml.verification.model.validation.PathTo;
 import org.openiaml.verification.model.validation.ValidationFactory;
 import org.openiaml.verification.model.validation.ValidationPackage;
 import org.openiaml.verification.model.validation.ValidationRule;
@@ -45,6 +47,13 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 	 * @generated
 	 */
 	private EClass violationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pathToEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -178,6 +187,33 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPathTo() {
+		return pathToEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPathTo_From() {
+		return (EReference)pathToEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPathTo_To() {
+		return (EReference)pathToEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ValidationFactory getValidationFactory() {
 		return (ValidationFactory)getEFactoryInstance();
 	}
@@ -210,6 +246,10 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 		violationEClass = createEClass(VIOLATION);
 		createEAttribute(violationEClass, VIOLATION__REASON);
 		createEReference(violationEClass, VIOLATION__SOURCE);
+
+		pathToEClass = createEClass(PATH_TO);
+		createEReference(pathToEClass, PATH_TO__FROM);
+		createEReference(pathToEClass, PATH_TO__TO);
 	}
 
 	/**
@@ -237,6 +277,7 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		VisualPackage theVisualPackage = (VisualPackage)EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -244,6 +285,7 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 
 		// Add supertypes to classes
 		navigatesToEClass.getESuperTypes().add(this.getValidationRule());
+		pathToEClass.getESuperTypes().add(this.getValidationRule());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(validationRuleEClass, ValidationRule.class, "ValidationRule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -255,6 +297,10 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 		initEClass(violationEClass, Violation.class, "Violation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getViolation_Reason(), ecorePackage.getEString(), "reason", null, 0, 1, Violation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViolation_Source(), ecorePackage.getEObject(), null, "source", null, 0, 1, Violation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pathToEClass, PathTo.class, "PathTo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPathTo_From(), theVisualPackage.getPage(), null, "from", null, 0, 1, PathTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPathTo_To(), theVisualPackage.getPage(), null, "to", null, 0, 1, PathTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

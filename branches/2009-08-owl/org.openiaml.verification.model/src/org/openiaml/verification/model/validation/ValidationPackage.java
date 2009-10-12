@@ -155,6 +155,44 @@ public interface ValidationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.verification.model.validation.impl.PathToImpl <em>Path To</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.verification.model.validation.impl.PathToImpl
+	 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getPathTo()
+	 * @generated
+	 */
+	int PATH_TO = 3;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_TO__FROM = VALIDATION_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_TO__TO = VALIDATION_RULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Path To</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_TO_FEATURE_COUNT = VALIDATION_RULE_FEATURE_COUNT + 2;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.ValidationRule <em>Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -227,6 +265,38 @@ public interface ValidationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getViolation_Source();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.PathTo <em>Path To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Path To</em>'.
+	 * @see org.openiaml.verification.model.validation.PathTo
+	 * @generated
+	 */
+	EClass getPathTo();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.PathTo#getFrom <em>From</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>From</em>'.
+	 * @see org.openiaml.verification.model.validation.PathTo#getFrom()
+	 * @see #getPathTo()
+	 * @generated
+	 */
+	EReference getPathTo_From();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.PathTo#getTo <em>To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>To</em>'.
+	 * @see org.openiaml.verification.model.validation.PathTo#getTo()
+	 * @see #getPathTo()
+	 * @generated
+	 */
+	EReference getPathTo_To();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -311,6 +381,32 @@ public interface ValidationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VIOLATION__SOURCE = eINSTANCE.getViolation_Source();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.verification.model.validation.impl.PathToImpl <em>Path To</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.verification.model.validation.impl.PathToImpl
+		 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getPathTo()
+		 * @generated
+		 */
+		EClass PATH_TO = eINSTANCE.getPathTo();
+
+		/**
+		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PATH_TO__FROM = eINSTANCE.getPathTo_From();
+
+		/**
+		 * The meta object literal for the '<em><b>To</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PATH_TO__TO = eINSTANCE.getPathTo_To();
 
 	}
 

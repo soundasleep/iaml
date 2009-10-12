@@ -19,8 +19,6 @@ import java.util.Map;
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.StatefulSession;
-import org.drools.WorkingMemory;
-import org.drools.common.InternalRuleBase;
 import org.drools.compiler.PackageBuilder;
 import org.drools.event.DefaultWorkingMemoryEventListener;
 import org.drools.event.ObjectInsertedEvent;
@@ -28,15 +26,12 @@ import org.drools.event.ObjectRetractedEvent;
 import org.drools.event.ObjectUpdatedEvent;
 import org.drools.event.WorkingMemoryEventListener;
 import org.drools.rule.Package;
-import org.drools.spi.Activation;
-import org.drools.spi.ConsequenceExceptionHandler;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.emf.SoftCache;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.verification.drools.VerifyHandler.VerificationException;
 import org.openiaml.verification.model.validation.ValidationFactory;
 
 /**

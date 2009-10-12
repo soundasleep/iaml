@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.verification.model.validation.NavigatesTo;
+import org.openiaml.verification.model.validation.PathTo;
 import org.openiaml.verification.model.validation.ValidationFactory;
 import org.openiaml.verification.model.validation.ValidationPackage;
 import org.openiaml.verification.model.validation.Violation;
@@ -62,6 +63,7 @@ public class ValidationFactoryImpl extends EFactoryImpl implements ValidationFac
 		switch (eClass.getClassifierID()) {
 			case ValidationPackage.NAVIGATES_TO: return createNavigatesTo();
 			case ValidationPackage.VIOLATION: return createViolation();
+			case ValidationPackage.PATH_TO: return createPathTo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -85,6 +87,16 @@ public class ValidationFactoryImpl extends EFactoryImpl implements ValidationFac
 	public Violation createViolation() {
 		ViolationImpl violation = new ViolationImpl();
 		return violation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PathTo createPathTo() {
+		PathToImpl pathTo = new PathToImpl();
+		return pathTo;
 	}
 
 	/**

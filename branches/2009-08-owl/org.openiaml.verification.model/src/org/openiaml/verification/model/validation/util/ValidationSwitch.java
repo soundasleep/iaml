@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.verification.model.validation.NavigatesTo;
+import org.openiaml.verification.model.validation.PathTo;
 import org.openiaml.verification.model.validation.ValidationPackage;
 import org.openiaml.verification.model.validation.ValidationRule;
 import org.openiaml.verification.model.validation.Violation;
@@ -108,6 +109,13 @@ public class ValidationSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ValidationPackage.PATH_TO: {
+				PathTo pathTo = (PathTo)theEObject;
+				T result = casePathTo(pathTo);
+				if (result == null) result = caseValidationRule(pathTo);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -154,6 +162,21 @@ public class ValidationSwitch<T> {
 	 * @generated
 	 */
 	public T caseViolation(Violation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path To</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path To</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePathTo(PathTo object) {
 		return null;
 	}
 

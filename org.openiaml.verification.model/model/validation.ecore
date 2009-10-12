@@ -12,4 +12,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reason" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathTo" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//visual/Page"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//visual/Page"/>
+  </eClassifiers>
 </ecore:EPackage>

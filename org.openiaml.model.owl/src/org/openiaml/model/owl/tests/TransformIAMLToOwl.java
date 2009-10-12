@@ -298,7 +298,7 @@ public class TransformIAMLToOwl extends ModelTestCase {
 	 * 
 	 * <p>Compare this to an ATL information, which requires inputs of
 	 * both the instance and the instance's EMF model, and lots of 
-	 * hack that don't correspond to the ATL philosophy.</p>
+	 * hacks that don't correspond to the ATL philosophy.</p>
 	 * 
 	 * @author jmwright
 	 *

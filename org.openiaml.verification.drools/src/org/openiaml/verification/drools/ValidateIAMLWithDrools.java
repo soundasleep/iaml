@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openiaml.model.custom.actions.ProgressEnabledAction;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.verification.drools.VerifyHandler.VerificationException;
 
 /**
  *

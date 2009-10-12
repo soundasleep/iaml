@@ -1,0 +1,92 @@
+#created on: 4/11/2008
+package org.openiaml.verification.drools.rules.accessible;
+
+#list any import classes here.
+import org.openiaml.verification.drools.*;
+
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.verification.model.validation.*;
+
+global org.openiaml.verification.model.validation.ValidationFactory factory;
+global org.openiaml.verification.drools.VerifyHandler verify;
+
+rule "Page has a path (1)"
+	when
+		p : Page ( )
+		b : Button ( eContainer == p )
+		p2 : Page ( )
+		n : NavigateWire ( from == b, to == p2, name == "onClick")
+		not ( PathTo ( from == p, to == p2 ))
+	
+	then
+		PathTo path = factory.createPathTo();
+		path.setFrom(p);
+		path.setTo(p2);
+		insert(path);
+
+end
+		
+rule "Page has a path (2)"
+	when
+		p : Page ( )
+		b : Button ( eContainer == p )
+		e : EventTrigger ( eContainer == b, name == "click" )
+		p2 : Page ( )
+		n : NavigateWire ( from == e, to == p2 )
+		not ( PathTo ( from == p, to == p2 ))
+	
+	then
+		PathTo path = factory.createPathTo();
+		path.setFrom(p);
+		path.setTo(p2);
+		insert(path);
+
+end
+
+rule "Recursiveness of PathTo"
+	when
+		p1 : Page ( )
+		p2 : Page ( )
+		p3 : Page ( )
+		PathTo ( from == p1, to == p2 )
+		PathTo ( from == p2, to == p3 )
+		not ( PathTo ( from == p1, to == p3 ))
+	
+	then
+		PathTo path = factory.createPathTo();
+		path.setFrom(p1);
+		path.setTo(p3);
+		insert(path);
+	
+end
+
+rule "Page is accessible"
+	when
+		home : Page ( name == "Home" )
+		p : Page ( )
+		not ( PathTo ( from == home, to == p ))
+	
+	then
+		Violation violation = factory.createViolation();
+		violation.setSource(p);
+		violation.setReason("Page is not accessible");
+		verify.failed(violation);
+		insert(violation);
+
+end
+
+rule "Retract previously inaccessible page"
+	when
+		home : Page ( name == "Home" )
+		p : Page ( )
+		violation : Violation ( source == p, reason == "Page is not accessible" )
+		PathTo ( from == home, to == p )
+	
+	then
+		# retract
+		verify.retract(violation);
+		retract(violation);
+
+end

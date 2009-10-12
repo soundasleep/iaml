@@ -56,4 +56,14 @@ public class VerifyHandler {
 		return !violations.isEmpty();
 	}
 	
+	/**
+	 * Retract a violation we previously added.
+	 * If the violation doesn't exist, does nothing.
+	 * 
+	 * @param violation
+	 */
+	public void retract(Violation violation) {
+		this.violations.remove(violation);
+	}
+	
 }

@@ -44,6 +44,15 @@ public interface ValidationFactory extends EFactory {
 	Violation createViolation();
 
 	/**
+	 * Returns a new object of class '<em>Path To</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path To</em>'.
+	 * @generated
+	 */
+	PathTo createPathTo();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

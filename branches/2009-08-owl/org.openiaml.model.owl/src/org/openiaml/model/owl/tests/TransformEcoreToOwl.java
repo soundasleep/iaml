@@ -837,6 +837,43 @@ public class TransformEcoreToOwl extends ModelTestCase {
 		}
 	}
 	
+	/**
+	 * Test that supertype rules work OK.
+	 * 
+	 * @throws Exception
+	 */
+	public void testSupertypes() throws Throwable {
+		try {
+
+		IFile rdf = testMyRdf();
+
+		// PrintUtil.registerPrefix("s", "http://openiaml.org/simple#");
+		Model model = FileManager.get().loadModel("file:" + rdf.getLocation().toString());
+		
+		String rules =
+			"[printType: (?X rdf:type ?A) -> print(?X, 'type', ?A)]\n" +
+			"[validationRule: (?v rb:validation on()) -> " +
+			"[(?X rb:violation error('test', 'test', ?X)) <- " +
+			"(?X rdf:type s:NamedElement) ]]";
+		
+		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
+		reason.setParameter(ReasonerVocabulary.PROPtraceOn, true);
+		reason = reason.bindSchema(setupOwlTransform());
+		
+		InfModel inf = ModelFactory.createInfModel(reason, model);
+		ValidityReport valid = inf.validate();
+		assertNotValid(valid);
+		
+		printReports(valid);
+	
+		} catch (Throwable t) {
+			System.out.println(t.getMessage());
+			t.printStackTrace();
+			System.out.println(t.getClass());
+			throw t;
+			
+		}
+	}
 	
 	/**
 	 * Print out the contents of the given IFile.

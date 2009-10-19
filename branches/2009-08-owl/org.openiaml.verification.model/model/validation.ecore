@@ -16,4 +16,27 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//visual/Page"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//visual/Page"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShouldBeSecure" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//visual/Page"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsSecure" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//visual/Page"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurePage" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//visual/Page"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecureOperation" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass ../../org.openiaml.model/model/iaml.ecore#//Operation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionPath" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurePath" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecureNode" eSuperTypes="#//ValidationRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
 </ecore:EPackage>

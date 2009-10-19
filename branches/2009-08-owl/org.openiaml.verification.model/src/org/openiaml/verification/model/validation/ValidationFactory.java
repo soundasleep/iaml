@@ -53,6 +53,69 @@ public interface ValidationFactory extends EFactory {
 	PathTo createPathTo();
 
 	/**
+	 * Returns a new object of class '<em>Should Be Secure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Should Be Secure</em>'.
+	 * @generated
+	 */
+	ShouldBeSecure createShouldBeSecure();
+
+	/**
+	 * Returns a new object of class '<em>Is Secure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Is Secure</em>'.
+	 * @generated
+	 */
+	IsSecure createIsSecure();
+
+	/**
+	 * Returns a new object of class '<em>Secure Page</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Secure Page</em>'.
+	 * @generated
+	 */
+	SecurePage createSecurePage();
+
+	/**
+	 * Returns a new object of class '<em>Secure Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Secure Operation</em>'.
+	 * @generated
+	 */
+	SecureOperation createSecureOperation();
+
+	/**
+	 * Returns a new object of class '<em>Execution Path</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Path</em>'.
+	 * @generated
+	 */
+	ExecutionPath createExecutionPath();
+
+	/**
+	 * Returns a new object of class '<em>Secure Path</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Secure Path</em>'.
+	 * @generated
+	 */
+	SecurePath createSecurePath();
+
+	/**
+	 * Returns a new object of class '<em>Secure Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Secure Node</em>'.
+	 * @generated
+	 */
+	SecureNode createSecureNode();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

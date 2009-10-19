@@ -10,8 +10,15 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.verification.model.validation.ExecutionPath;
+import org.openiaml.verification.model.validation.IsSecure;
 import org.openiaml.verification.model.validation.NavigatesTo;
 import org.openiaml.verification.model.validation.PathTo;
+import org.openiaml.verification.model.validation.SecureNode;
+import org.openiaml.verification.model.validation.SecureOperation;
+import org.openiaml.verification.model.validation.SecurePage;
+import org.openiaml.verification.model.validation.SecurePath;
+import org.openiaml.verification.model.validation.ShouldBeSecure;
 import org.openiaml.verification.model.validation.ValidationPackage;
 import org.openiaml.verification.model.validation.ValidationRule;
 import org.openiaml.verification.model.validation.Violation;
@@ -89,6 +96,34 @@ public class ValidationAdapterFactory extends AdapterFactoryImpl {
 				return createPathToAdapter();
 			}
 			@Override
+			public Adapter caseShouldBeSecure(ShouldBeSecure object) {
+				return createShouldBeSecureAdapter();
+			}
+			@Override
+			public Adapter caseIsSecure(IsSecure object) {
+				return createIsSecureAdapter();
+			}
+			@Override
+			public Adapter caseSecurePage(SecurePage object) {
+				return createSecurePageAdapter();
+			}
+			@Override
+			public Adapter caseSecureOperation(SecureOperation object) {
+				return createSecureOperationAdapter();
+			}
+			@Override
+			public Adapter caseExecutionPath(ExecutionPath object) {
+				return createExecutionPathAdapter();
+			}
+			@Override
+			public Adapter caseSecurePath(SecurePath object) {
+				return createSecurePathAdapter();
+			}
+			@Override
+			public Adapter caseSecureNode(SecureNode object) {
+				return createSecureNodeAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -161,6 +196,104 @@ public class ValidationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPathToAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.verification.model.validation.ShouldBeSecure <em>Should Be Secure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.verification.model.validation.ShouldBeSecure
+	 * @generated
+	 */
+	public Adapter createShouldBeSecureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.verification.model.validation.IsSecure <em>Is Secure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.verification.model.validation.IsSecure
+	 * @generated
+	 */
+	public Adapter createIsSecureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.verification.model.validation.SecurePage <em>Secure Page</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.verification.model.validation.SecurePage
+	 * @generated
+	 */
+	public Adapter createSecurePageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.verification.model.validation.SecureOperation <em>Secure Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.verification.model.validation.SecureOperation
+	 * @generated
+	 */
+	public Adapter createSecureOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.verification.model.validation.ExecutionPath <em>Execution Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.verification.model.validation.ExecutionPath
+	 * @generated
+	 */
+	public Adapter createExecutionPathAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.verification.model.validation.SecurePath <em>Secure Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.verification.model.validation.SecurePath
+	 * @generated
+	 */
+	public Adapter createSecurePathAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.verification.model.validation.SecureNode <em>Secure Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.verification.model.validation.SecureNode
+	 * @generated
+	 */
+	public Adapter createSecureNodeAdapter() {
 		return null;
 	}
 

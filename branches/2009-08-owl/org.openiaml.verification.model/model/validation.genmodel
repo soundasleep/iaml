@@ -20,5 +20,28 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//PathTo/from"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//PathTo/to"/>
     </genClasses>
+    <genClasses ecoreClass="validation.ecore#//ShouldBeSecure">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//ShouldBeSecure/page"/>
+    </genClasses>
+    <genClasses ecoreClass="validation.ecore#//IsSecure">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//IsSecure/page"/>
+    </genClasses>
+    <genClasses ecoreClass="validation.ecore#//SecurePage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//SecurePage/page"/>
+    </genClasses>
+    <genClasses ecoreClass="validation.ecore#//SecureOperation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//SecureOperation/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="validation.ecore#//ExecutionPath">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//ExecutionPath/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//ExecutionPath/to"/>
+    </genClasses>
+    <genClasses ecoreClass="validation.ecore#//SecurePath">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//SecurePath/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//SecurePath/to"/>
+    </genClasses>
+    <genClasses ecoreClass="validation.ecore#//SecureNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference validation.ecore#//SecureNode/node"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

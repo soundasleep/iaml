@@ -193,6 +193,221 @@ public interface ValidationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.verification.model.validation.impl.ShouldBeSecureImpl <em>Should Be Secure</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.verification.model.validation.impl.ShouldBeSecureImpl
+	 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getShouldBeSecure()
+	 * @generated
+	 */
+	int SHOULD_BE_SECURE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Page</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHOULD_BE_SECURE__PAGE = VALIDATION_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Should Be Secure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHOULD_BE_SECURE_FEATURE_COUNT = VALIDATION_RULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.verification.model.validation.impl.IsSecureImpl <em>Is Secure</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.verification.model.validation.impl.IsSecureImpl
+	 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getIsSecure()
+	 * @generated
+	 */
+	int IS_SECURE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Page</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_SECURE__PAGE = VALIDATION_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Is Secure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_SECURE_FEATURE_COUNT = VALIDATION_RULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.verification.model.validation.impl.SecurePageImpl <em>Secure Page</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.verification.model.validation.impl.SecurePageImpl
+	 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getSecurePage()
+	 * @generated
+	 */
+	int SECURE_PAGE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Page</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_PAGE__PAGE = VALIDATION_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Secure Page</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_PAGE_FEATURE_COUNT = VALIDATION_RULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.verification.model.validation.impl.SecureOperationImpl <em>Secure Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.verification.model.validation.impl.SecureOperationImpl
+	 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getSecureOperation()
+	 * @generated
+	 */
+	int SECURE_OPERATION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_OPERATION__OPERATION = VALIDATION_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Secure Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_OPERATION_FEATURE_COUNT = VALIDATION_RULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.verification.model.validation.impl.ExecutionPathImpl <em>Execution Path</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.verification.model.validation.impl.ExecutionPathImpl
+	 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getExecutionPath()
+	 * @generated
+	 */
+	int EXECUTION_PATH = 8;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_PATH__FROM = VALIDATION_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_PATH__TO = VALIDATION_RULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Execution Path</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_PATH_FEATURE_COUNT = VALIDATION_RULE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.verification.model.validation.impl.SecurePathImpl <em>Secure Path</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.verification.model.validation.impl.SecurePathImpl
+	 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getSecurePath()
+	 * @generated
+	 */
+	int SECURE_PATH = 9;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_PATH__FROM = VALIDATION_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_PATH__TO = VALIDATION_RULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Secure Path</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_PATH_FEATURE_COUNT = VALIDATION_RULE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.verification.model.validation.impl.SecureNodeImpl <em>Secure Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.verification.model.validation.impl.SecureNodeImpl
+	 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getSecureNode()
+	 * @generated
+	 */
+	int SECURE_NODE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_NODE__NODE = VALIDATION_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Secure Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURE_NODE_FEATURE_COUNT = VALIDATION_RULE_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.ValidationRule <em>Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -297,6 +512,175 @@ public interface ValidationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPathTo_To();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.ShouldBeSecure <em>Should Be Secure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Should Be Secure</em>'.
+	 * @see org.openiaml.verification.model.validation.ShouldBeSecure
+	 * @generated
+	 */
+	EClass getShouldBeSecure();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.ShouldBeSecure#getPage <em>Page</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Page</em>'.
+	 * @see org.openiaml.verification.model.validation.ShouldBeSecure#getPage()
+	 * @see #getShouldBeSecure()
+	 * @generated
+	 */
+	EReference getShouldBeSecure_Page();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.IsSecure <em>Is Secure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Is Secure</em>'.
+	 * @see org.openiaml.verification.model.validation.IsSecure
+	 * @generated
+	 */
+	EClass getIsSecure();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.IsSecure#getPage <em>Page</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Page</em>'.
+	 * @see org.openiaml.verification.model.validation.IsSecure#getPage()
+	 * @see #getIsSecure()
+	 * @generated
+	 */
+	EReference getIsSecure_Page();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.SecurePage <em>Secure Page</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Secure Page</em>'.
+	 * @see org.openiaml.verification.model.validation.SecurePage
+	 * @generated
+	 */
+	EClass getSecurePage();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.SecurePage#getPage <em>Page</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Page</em>'.
+	 * @see org.openiaml.verification.model.validation.SecurePage#getPage()
+	 * @see #getSecurePage()
+	 * @generated
+	 */
+	EReference getSecurePage_Page();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.SecureOperation <em>Secure Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Secure Operation</em>'.
+	 * @see org.openiaml.verification.model.validation.SecureOperation
+	 * @generated
+	 */
+	EClass getSecureOperation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.SecureOperation#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operation</em>'.
+	 * @see org.openiaml.verification.model.validation.SecureOperation#getOperation()
+	 * @see #getSecureOperation()
+	 * @generated
+	 */
+	EReference getSecureOperation_Operation();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.ExecutionPath <em>Execution Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Path</em>'.
+	 * @see org.openiaml.verification.model.validation.ExecutionPath
+	 * @generated
+	 */
+	EClass getExecutionPath();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.ExecutionPath#getFrom <em>From</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>From</em>'.
+	 * @see org.openiaml.verification.model.validation.ExecutionPath#getFrom()
+	 * @see #getExecutionPath()
+	 * @generated
+	 */
+	EReference getExecutionPath_From();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.ExecutionPath#getTo <em>To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>To</em>'.
+	 * @see org.openiaml.verification.model.validation.ExecutionPath#getTo()
+	 * @see #getExecutionPath()
+	 * @generated
+	 */
+	EReference getExecutionPath_To();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.SecurePath <em>Secure Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Secure Path</em>'.
+	 * @see org.openiaml.verification.model.validation.SecurePath
+	 * @generated
+	 */
+	EClass getSecurePath();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.SecurePath#getFrom <em>From</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>From</em>'.
+	 * @see org.openiaml.verification.model.validation.SecurePath#getFrom()
+	 * @see #getSecurePath()
+	 * @generated
+	 */
+	EReference getSecurePath_From();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.SecurePath#getTo <em>To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>To</em>'.
+	 * @see org.openiaml.verification.model.validation.SecurePath#getTo()
+	 * @see #getSecurePath()
+	 * @generated
+	 */
+	EReference getSecurePath_To();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.verification.model.validation.SecureNode <em>Secure Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Secure Node</em>'.
+	 * @see org.openiaml.verification.model.validation.SecureNode
+	 * @generated
+	 */
+	EClass getSecureNode();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.verification.model.validation.SecureNode#getNode <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Node</em>'.
+	 * @see org.openiaml.verification.model.validation.SecureNode#getNode()
+	 * @see #getSecureNode()
+	 * @generated
+	 */
+	EReference getSecureNode_Node();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -407,6 +791,148 @@ public interface ValidationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PATH_TO__TO = eINSTANCE.getPathTo_To();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.verification.model.validation.impl.ShouldBeSecureImpl <em>Should Be Secure</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.verification.model.validation.impl.ShouldBeSecureImpl
+		 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getShouldBeSecure()
+		 * @generated
+		 */
+		EClass SHOULD_BE_SECURE = eINSTANCE.getShouldBeSecure();
+
+		/**
+		 * The meta object literal for the '<em><b>Page</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SHOULD_BE_SECURE__PAGE = eINSTANCE.getShouldBeSecure_Page();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.verification.model.validation.impl.IsSecureImpl <em>Is Secure</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.verification.model.validation.impl.IsSecureImpl
+		 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getIsSecure()
+		 * @generated
+		 */
+		EClass IS_SECURE = eINSTANCE.getIsSecure();
+
+		/**
+		 * The meta object literal for the '<em><b>Page</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IS_SECURE__PAGE = eINSTANCE.getIsSecure_Page();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.verification.model.validation.impl.SecurePageImpl <em>Secure Page</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.verification.model.validation.impl.SecurePageImpl
+		 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getSecurePage()
+		 * @generated
+		 */
+		EClass SECURE_PAGE = eINSTANCE.getSecurePage();
+
+		/**
+		 * The meta object literal for the '<em><b>Page</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECURE_PAGE__PAGE = eINSTANCE.getSecurePage_Page();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.verification.model.validation.impl.SecureOperationImpl <em>Secure Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.verification.model.validation.impl.SecureOperationImpl
+		 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getSecureOperation()
+		 * @generated
+		 */
+		EClass SECURE_OPERATION = eINSTANCE.getSecureOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECURE_OPERATION__OPERATION = eINSTANCE.getSecureOperation_Operation();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.verification.model.validation.impl.ExecutionPathImpl <em>Execution Path</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.verification.model.validation.impl.ExecutionPathImpl
+		 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getExecutionPath()
+		 * @generated
+		 */
+		EClass EXECUTION_PATH = eINSTANCE.getExecutionPath();
+
+		/**
+		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_PATH__FROM = eINSTANCE.getExecutionPath_From();
+
+		/**
+		 * The meta object literal for the '<em><b>To</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_PATH__TO = eINSTANCE.getExecutionPath_To();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.verification.model.validation.impl.SecurePathImpl <em>Secure Path</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.verification.model.validation.impl.SecurePathImpl
+		 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getSecurePath()
+		 * @generated
+		 */
+		EClass SECURE_PATH = eINSTANCE.getSecurePath();
+
+		/**
+		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECURE_PATH__FROM = eINSTANCE.getSecurePath_From();
+
+		/**
+		 * The meta object literal for the '<em><b>To</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECURE_PATH__TO = eINSTANCE.getSecurePath_To();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.verification.model.validation.impl.SecureNodeImpl <em>Secure Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.verification.model.validation.impl.SecureNodeImpl
+		 * @see org.openiaml.verification.model.validation.impl.ValidationPackageImpl#getSecureNode()
+		 * @generated
+		 */
+		EClass SECURE_NODE = eINSTANCE.getSecureNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECURE_NODE__NODE = eINSTANCE.getSecureNode_Node();
 
 	}
 

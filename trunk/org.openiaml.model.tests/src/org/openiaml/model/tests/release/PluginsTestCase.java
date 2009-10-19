@@ -273,6 +273,10 @@ public class PluginsTestCase extends XmlTestCase {
 		for (String file : getAllManifests()) {
 			Properties properties = getManifestCache().get(file);
 			
+			if (!properties.containsKey("Bundle-Vendor")) {
+				fail(file + " does not contain key 'Bundle-Vendor'");
+			}
+			
 			if (properties.get("Bundle-Vendor").equals("%providerName")) {
 				// lets rewrite it manually
 				/*

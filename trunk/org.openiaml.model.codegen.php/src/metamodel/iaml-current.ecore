@@ -658,7 +658,7 @@
       </eAnnotations>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="scopes">
+  <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="iaml.scopes">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.2"/>
       <details key="comment" value="other scopes: iaml:InternetApplication, [...], iaml.visual:Page, iaml.visual:Frame, iaml:ApplicationElement, iaml:Operation"/>

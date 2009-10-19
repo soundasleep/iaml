@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,6 @@ import org.drools.event.WorkingMemoryEventListener;
 import org.drools.rule.Package;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.emf.SoftCache;
 import org.openiaml.model.inference.InferenceException;
@@ -106,6 +106,16 @@ public abstract class VerificationEngine {
 			throw new InferenceException(e);
 		}
 	}
+	
+	/**
+	 * Is there any listeners that the current engine wishes to add
+	 * to the given working memory? By default, this method does nothing. 
+	 * 
+	 * @param workingMemory
+	 */
+	public void addEventListenersCallback(StatefulSession workingMemory) {
+		// empty by default
+	}
 
 	/**
 	 * Do the inference using Drools, logging the inference process to the
@@ -143,6 +153,11 @@ public abstract class VerificationEngine {
         workingMemory.addEventListener( new WorkingMemoryEventListener() {
 
         	/**
+        	 * To prevent recursive insertion of the same objects.
+        	 */
+        	private boolean busyInserting = false;
+        	
+        	/**
         	 * When we insert a new element, we automatically insert
         	 * all of its children elements.
         	 * 
@@ -163,10 +178,14 @@ public abstract class VerificationEngine {
 				}
 				
 				if (obj.getObject() instanceof EObject) {
-					// get all objects within 
-					TreeIterator<EObject> it = ((EObject) obj.getObject()).eAllContents();
-					while (it.hasNext()) {
-						workingMemory.insert( it.next() );
+					if (!busyInserting) {
+						busyInserting = true;
+						// get all objects directly within 
+						Iterator<EObject> it = ((EObject) obj.getObject()).eAllContents();
+						while (it.hasNext()) {
+							workingMemory.insert( it.next() );
+						}
+						busyInserting = false;
 					}
 				}
 				
@@ -185,6 +204,8 @@ public abstract class VerificationEngine {
 			}
         	
         });   
+        
+        addEventListenersCallback(workingMemory);
 
         workingMemory.setGlobal("verify", verify);
         workingMemory.setGlobal("factory", ValidationFactory.eINSTANCE);

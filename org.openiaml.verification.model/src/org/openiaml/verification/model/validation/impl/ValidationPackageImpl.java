@@ -13,8 +13,15 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.visual.VisualPackage;
+import org.openiaml.verification.model.validation.ExecutionPath;
+import org.openiaml.verification.model.validation.IsSecure;
 import org.openiaml.verification.model.validation.NavigatesTo;
 import org.openiaml.verification.model.validation.PathTo;
+import org.openiaml.verification.model.validation.SecureNode;
+import org.openiaml.verification.model.validation.SecureOperation;
+import org.openiaml.verification.model.validation.SecurePage;
+import org.openiaml.verification.model.validation.SecurePath;
+import org.openiaml.verification.model.validation.ShouldBeSecure;
 import org.openiaml.verification.model.validation.ValidationFactory;
 import org.openiaml.verification.model.validation.ValidationPackage;
 import org.openiaml.verification.model.validation.ValidationRule;
@@ -54,6 +61,55 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 	 * @generated
 	 */
 	private EClass pathToEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass shouldBeSecureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass isSecureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass securePageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass secureOperationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass executionPathEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass securePathEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass secureNodeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -214,6 +270,150 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getShouldBeSecure() {
+		return shouldBeSecureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getShouldBeSecure_Page() {
+		return (EReference)shouldBeSecureEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIsSecure() {
+		return isSecureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIsSecure_Page() {
+		return (EReference)isSecureEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSecurePage() {
+		return securePageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSecurePage_Page() {
+		return (EReference)securePageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSecureOperation() {
+		return secureOperationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSecureOperation_Operation() {
+		return (EReference)secureOperationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExecutionPath() {
+		return executionPathEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionPath_From() {
+		return (EReference)executionPathEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExecutionPath_To() {
+		return (EReference)executionPathEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSecurePath() {
+		return securePathEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSecurePath_From() {
+		return (EReference)securePathEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSecurePath_To() {
+		return (EReference)securePathEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSecureNode() {
+		return secureNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSecureNode_Node() {
+		return (EReference)secureNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ValidationFactory getValidationFactory() {
 		return (ValidationFactory)getEFactoryInstance();
 	}
@@ -250,6 +450,29 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 		pathToEClass = createEClass(PATH_TO);
 		createEReference(pathToEClass, PATH_TO__FROM);
 		createEReference(pathToEClass, PATH_TO__TO);
+
+		shouldBeSecureEClass = createEClass(SHOULD_BE_SECURE);
+		createEReference(shouldBeSecureEClass, SHOULD_BE_SECURE__PAGE);
+
+		isSecureEClass = createEClass(IS_SECURE);
+		createEReference(isSecureEClass, IS_SECURE__PAGE);
+
+		securePageEClass = createEClass(SECURE_PAGE);
+		createEReference(securePageEClass, SECURE_PAGE__PAGE);
+
+		secureOperationEClass = createEClass(SECURE_OPERATION);
+		createEReference(secureOperationEClass, SECURE_OPERATION__OPERATION);
+
+		executionPathEClass = createEClass(EXECUTION_PATH);
+		createEReference(executionPathEClass, EXECUTION_PATH__FROM);
+		createEReference(executionPathEClass, EXECUTION_PATH__TO);
+
+		securePathEClass = createEClass(SECURE_PATH);
+		createEReference(securePathEClass, SECURE_PATH__FROM);
+		createEReference(securePathEClass, SECURE_PATH__TO);
+
+		secureNodeEClass = createEClass(SECURE_NODE);
+		createEReference(secureNodeEClass, SECURE_NODE__NODE);
 	}
 
 	/**
@@ -286,6 +509,13 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 		// Add supertypes to classes
 		navigatesToEClass.getESuperTypes().add(this.getValidationRule());
 		pathToEClass.getESuperTypes().add(this.getValidationRule());
+		shouldBeSecureEClass.getESuperTypes().add(this.getValidationRule());
+		isSecureEClass.getESuperTypes().add(this.getValidationRule());
+		securePageEClass.getESuperTypes().add(this.getValidationRule());
+		secureOperationEClass.getESuperTypes().add(this.getValidationRule());
+		executionPathEClass.getESuperTypes().add(this.getValidationRule());
+		securePathEClass.getESuperTypes().add(this.getValidationRule());
+		secureNodeEClass.getESuperTypes().add(this.getValidationRule());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(validationRuleEClass, ValidationRule.class, "ValidationRule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -301,6 +531,29 @@ public class ValidationPackageImpl extends EPackageImpl implements ValidationPac
 		initEClass(pathToEClass, PathTo.class, "PathTo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPathTo_From(), theVisualPackage.getPage(), null, "from", null, 0, 1, PathTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPathTo_To(), theVisualPackage.getPage(), null, "to", null, 0, 1, PathTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(shouldBeSecureEClass, ShouldBeSecure.class, "ShouldBeSecure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getShouldBeSecure_Page(), theVisualPackage.getPage(), null, "page", null, 0, 1, ShouldBeSecure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(isSecureEClass, IsSecure.class, "IsSecure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIsSecure_Page(), theVisualPackage.getPage(), null, "page", null, 0, 1, IsSecure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(securePageEClass, SecurePage.class, "SecurePage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSecurePage_Page(), theVisualPackage.getPage(), null, "page", null, 0, 1, SecurePage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(secureOperationEClass, SecureOperation.class, "SecureOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSecureOperation_Operation(), theModelPackage.getOperation(), null, "operation", null, 0, 1, SecureOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(executionPathEClass, ExecutionPath.class, "ExecutionPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExecutionPath_From(), ecorePackage.getEObject(), null, "from", null, 0, 1, ExecutionPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionPath_To(), ecorePackage.getEObject(), null, "to", null, 0, 1, ExecutionPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(securePathEClass, SecurePath.class, "SecurePath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSecurePath_From(), ecorePackage.getEObject(), null, "from", null, 0, 1, SecurePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecurePath_To(), ecorePackage.getEObject(), null, "to", null, 0, 1, SecurePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(secureNodeEClass, SecureNode.class, "SecureNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSecureNode_Node(), ecorePackage.getEObject(), null, "node", null, 0, 1, SecureNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

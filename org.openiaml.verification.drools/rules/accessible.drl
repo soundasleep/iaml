@@ -65,7 +65,7 @@ end
 rule "Page is accessible"
 	when
 		home : Page ( name == "Home" )
-		p : Page ( )
+		p : Page ( eval(p != home) )
 		not ( PathTo ( from == home, to == p ))
 	
 	then

@@ -11,6 +11,7 @@ Require-Bundle: org.openarchitectureware.dependencies,
  org.openiaml.model.runtime,
  org.junit
 Export-Package: org.openiaml.model.codegen.php,
- org.openiaml.model.codegen.php.coverage
+ org.openiaml.model.codegen.php.coverage,
+ org.openiaml.model.codegen.validation
 Bundle-Vendor: www.openiaml.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

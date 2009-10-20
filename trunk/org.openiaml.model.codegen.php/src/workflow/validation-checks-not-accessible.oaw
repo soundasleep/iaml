@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- only check the model instance; no code generation -->
+<workflow>
+	<!-- property model: part of caller -->
+	<!-- property src-gen: part of caller -->
+	
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
+		<platformUri value=".."/>
+       	<registerGeneratedEPackage value="org.openiaml.model.model.ModelPackage" /><!-- loads subpackages -->
+	</bean>
+
+	<!-- load model and store it in slot 'model' -->
+	<component class="org.eclipse.mwe.emf.Reader">
+		<uri value="platform:/resource/${model}" />
+		<modelSlot value="model" />
+	</component>
+
+	<!-- check model (and load metamodel) -->
+	<component class="oaw.check.CheckComponent">
+		<metaModel id="mm"
+			class="org.eclipse.m2t.type.emf.EmfRegistryMetaModel"/>
+		<checkFile value="validation::ValidationChecksNotAccessible" />
+		<emfAllChildrenSlot value="model" />
+	</component>
+
+</workflow>

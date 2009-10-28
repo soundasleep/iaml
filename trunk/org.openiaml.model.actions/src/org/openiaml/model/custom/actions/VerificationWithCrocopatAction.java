@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -34,8 +35,9 @@ public class VerificationWithCrocopatAction extends IamlFileAction {
 	 */
 	@Override
 	public IStatus doExecute(IFile o, IProgressMonitor monitor) throws InferenceException, IOException, CoreException {
-		monitor.beginTask("Verifying model '" + o.getName() + "'", 130);
+		monitor.beginTask("Verifying model '" + o.getName() + "'", 10);
 		
+		monitor.subTask("Loading model");
 		// try and load the file directly
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.getResource(URI.createFileURI(o.getLocation().toString()), true);
@@ -47,12 +49,13 @@ public class VerificationWithCrocopatAction extends IamlFileAction {
 
 		// do inference on the model
 		model = resource.getContents().get(0);
+		monitor.worked(1);
 
 		// do verification
 		VerificationEngine verify = new VerificationEngine();
 		IStatus status;
 		try {
-			status = verify.verify(model);
+			status = verify.verify(model, new SubProgressMonitor(monitor, 9));
 		} catch (VerificationException e) {
 			return errorStatus(e);
 		}

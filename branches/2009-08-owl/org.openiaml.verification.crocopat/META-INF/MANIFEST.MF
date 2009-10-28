@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: IAML Verification with Crocopat
+Bundle-SymbolicName: org.openiaml.verification.crocopat;singleton:=true
+Bundle-Version: 0.4.0.qualifier
+Bundle-Vendor: www.openiaml.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.5.0",
+ org.sosy_lab.crocopat.cli;bundle-version="0.0.1",
+ org.openiaml.model;bundle-version="0.4.0",
+ org.eclipse.core.runtime;bundle-version="3.5.0"
+Bundle-Activator: org.openiaml.verification.crocopat.VerificationCrocopatPlugin
+Bundle-ActivationPolicy: lazy
+Export-Package: org.openiaml.verification.crocopat

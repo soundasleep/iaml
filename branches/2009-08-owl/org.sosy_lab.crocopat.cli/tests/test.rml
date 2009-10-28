@@ -1,0 +1,45 @@
+InternetApplication("Root");
+
+Children("p1", "b1");
+
+VisibleThing(x) := (Button(x) | Page(x) | InputTextField(x) | InputForm(x)) & x != "null";
+
+EventTrigger("e1");
+Name("e1", "access");
+Children("p1", "e1");
+
+ChildrenOf(x, y) := VisibleThing(x) & Children(x, y);
+
+Page("p2");
+NavigateWire("n1");
+Wires("e1", "n1");
+From("n1", "e1");
+To("n1", "p2");
+Name("n1", "navigate");
+
+EventTrigger("e2");
+Name("e2", "access");
+Children("p2", "e2");
+
+NavigateWire("n2");
+Wires("e2", "n2");
+From("n2", "e2");
+To("n2", "p3");
+Name("n2", "navigate");
+
+Page("p3");
+EventTrigger("e3");
+Name("e3", "access");
+Children("p3", "e3");
+NavigateWire("n3");
+Wires("e3", "n3");
+From("n3", "e3");
+To("n3", "p1");
+Name("n3", "navigate");
+
+RedirectTo(p, p2) := Page(p) & Page(p2) & EX(e, EX(eName, EX(n, EventTrigger(e) & Children(p, e) & Name(e, eName) & eName = "access" & NavigateWire(n) & From(n, e) & To(n, p2))));
+RedirectTo(p, p2) := TC(RedirectTo(p, p2));
+
+InfiniteLoop(p) := RedirectTo(p, p);
+
+PRINT ["InfiniteLoop"] InfiniteLoop(p);

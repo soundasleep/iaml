@@ -8,6 +8,7 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -29,7 +30,7 @@ public class CrocopatTestCase extends TestCase {
 		EObject model = loadModelDirectly("src/org/openiaml/verification/crocopat/tests/BigInfiniteLoop-10.iaml");
 		
 		VerificationEngine engine = new VerificationEngine();
-		IStatus result = engine.verify(model);
+		IStatus result = engine.verify(model, new NullProgressMonitor());
 		ModelInferenceTestCase.assertStatusIsOK(result);
 	
 		// there should be violations

@@ -184,7 +184,7 @@ public class ExecuteCrocopat {
 	 * @throws IOException 
 	 * @throws CrocopatException if Crocopat wrote something to stderr
 	 */
-	public List<String> execute(InputStream rml, InputStream rsf) throws IOException, InterruptedException, CrocopatException {
+	public List<String> execute(InputStream rml, InputStream rsf) throws IOException, CrocopatException {
 		
 		// write out the rml to files
 		File rmlFile = File.createTempFile("temp", ".rml");

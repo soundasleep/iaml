@@ -1,0 +1,17 @@
+
+RedirectsTo(a, b) :=
+  Page(a) & a != "null" &
+  EX(e, EventTrigger(e) &
+  eventTriggers(a, e) &
+  name(e, "access") &
+  Page(b) & b != "null" &
+  EX(w, NavigateWire(w) & from(w, e) & to(w, b)));
+
+RedirectsTo(a, b) :=
+  Page(a) & Page(b) & TC(RedirectsTo(a, b));
+
+InfiniteRedirect(p) := 
+  Page(p) & p != "null" &
+  RedirectsTo(p, p);
+  
+PRINT ["Infinite redirection"] InfiniteRedirect(p);

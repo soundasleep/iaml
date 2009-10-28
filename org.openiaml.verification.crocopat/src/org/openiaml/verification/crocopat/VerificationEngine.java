@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EAttribute;
@@ -56,15 +57,15 @@ public class VerificationEngine {
 	 * Verify a given model. Violations can then be obtained by
 	 * {@link #getViolations()}.
 	 * 
-	 * TODO add an IProgressMonitor.
-	 * 
 	 * @param model
 	 * @return the status of the verification (error if any other type of exception was thrown)
 	 * @throws VerificationException if verification could not be executed
 	 */
-	public IStatus verify(EObject model) throws VerificationException {
+	public IStatus verify(EObject model, IProgressMonitor monitor) throws VerificationException {
 		
 		try {
+			monitor.beginTask("Verifying with Crocopat", 10);
+			
 			// we want to write the model and rules to files
 			File rsfFile = File.createTempFile("temp", ".rsf");
 			FileWriter rsf = new FileWriter(rsfFile);
@@ -78,10 +79,13 @@ public class VerificationEngine {
 			}
 			
 			// construct the instance map
+			monitor.subTask("Constructing instance map");
 			TwoWayMap<String, EObject> instanceMap = 
 				constructIDMap(model);
+			monitor.worked(1);
 			
 			// export types to rsf
+			monitor.subTask("Exporting meta-model to RSF");
 			exportTypes(model.eClass().getEPackage(), rsf);
 			
 			// export references
@@ -89,19 +93,24 @@ public class VerificationEngine {
 			
 			// export the rest of the universe to rsf
 			exportUniverses(rsf);
+			monitor.worked(1);
 
 			// export model instance to rsf
+			monitor.subTask("Exporting model instance to RSF");
 			exportInstance(model, instanceMap, rsf);
 			Iterator<EObject> it = model.eAllContents();
 			while (it.hasNext()) {
 				exportInstance(it.next(), instanceMap, rsf);
 			}
-			
+			monitor.worked(1);
+						
 			// export inheritance to rml
+			monitor.subTask("Exporting RML");
 			exportInheritance(model.eClass().getEPackage(), rml);
 			
 			// export all the rules to rml
 			exportRules(rml);
+			monitor.worked(1);
 			
 			// save the files
 			rsf.close();
@@ -113,15 +122,19 @@ public class VerificationEngine {
 			InputStream rmlin = new FileInputStream(rmlFile);
 	
 			// execute
+			monitor.subTask("Calling Crocopat");
 			List<String> results;
 			try {
 				results = exec.execute(rmlin, rsfin);
 			} catch (CrocopatException e) {
 				throw new VerificationException("Could not execute Crocopat: " + e.getMessage(), e);
 			}
+			monitor.worked(5);
 			
 			// parse for violations
+			monitor.subTask("Parsing output");
 			violations = parseViolations(model, results, instanceMap);
+			monitor.worked(1);
 			
 			// delete temporary files
 			if (deleteTemporaryFiles()) {
@@ -130,6 +143,7 @@ public class VerificationEngine {
 			}
 			
 			// return
+			monitor.done();
 			return Status.OK_STATUS;
 			
 		} catch (IOException e) {

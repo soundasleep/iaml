@@ -9,6 +9,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.openiaml.model,
  org.openiaml.model.codegen,
+ org.openiaml.model.helpers,
  org.openiaml.model.impl,
  org.openiaml.model.inference,
  org.openiaml.model.model,

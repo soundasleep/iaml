@@ -22,6 +22,13 @@
 		<!-- more than one popup extension is displayed in reverse order:
 		     a documented bug of eclipse -->
          <action
+               class="org.openiaml.model.custom.actions.VerificationWithCrocopatAction"
+               id="org.openiaml.model.diagram.custom.action5"
+               label="&amp;Verify with Crocopat"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+
+         <action
                class="org.openiaml.model.custom.actions.InferEntireModelAction"
                id="org.openiaml.model.diagram.custom.action4"
                label="&amp;Infer all elements in-place"

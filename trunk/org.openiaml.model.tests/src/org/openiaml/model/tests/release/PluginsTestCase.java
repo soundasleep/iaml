@@ -126,19 +126,34 @@ public class PluginsTestCase extends XmlTestCase {
 	 * Get all of the manifests loaded from disk.
 	 * 
 	 * @return
+	 * @see #getAllManifests(boolean)
 	 */
 	public static Set<String> getAllManifests() {
+		return getAllManifests(true);
+	}
+
+	/**
+	 * Get all of the manifests loaded from disk.
+	 * 
+	 * @param allowExcluded should we exclude the plugins listed
+	 * 	in {@link #NO_MANIFEST_PLUGINS}?
+	 * @return A list of manifest file strings.
+	 */
+	public static Set<String> getAllManifests(boolean allowExcluded) {
 		if (loadedManifests == null) {
 			loadedManifests = new HashSet<String>();
 
 			for (String plugin : getPlugins()) {
 				boolean excluded = false;
-				for (String exclude : NO_MANIFEST_PLUGINS) {
-					if (plugin.endsWith(exclude))
-						excluded = true;
+				if (allowExcluded) {
+					// we allow excluding particular plugins
+					for (String exclude : NO_MANIFEST_PLUGINS) {
+						if (plugin.endsWith(exclude))
+							excluded = true;
+					}
 				}
 				
-				if (!excluded) {
+				if (!allowExcluded || !excluded) {
 					String manifest = plugin + "/META-INF/MANIFEST.MF";
 					assertTrue("Manifest '" + manifest + "' does not exist", new File(manifest).exists());
 					loadedManifests.add(manifest);

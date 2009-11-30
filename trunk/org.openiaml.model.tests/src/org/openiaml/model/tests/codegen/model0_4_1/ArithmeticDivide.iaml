@@ -2,10 +2,10 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12542c563bb.1b">
   <children xsi:type="iaml.visual:Page" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.18" name="op1">
-      <properties id="model.12542c563bb.35" name="fieldValue" outFlows="model.12542c563bb.e3"/>
+      <properties id="model.12542c563bb.35" name="fieldValue" outFlows="model.12542c563bb.e1"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1a" name="op2">
-      <properties id="model.12542c563bb.46" name="fieldValue" outFlows="model.12542c563bb.e1"/>
+      <properties id="model.12542c563bb.46" name="fieldValue" outFlows="model.12542c563bb.e3"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12542c56418.1e" name="calculate">
       <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12542c56428.3" id="model.12542c563bb.81" name="do calculation">
@@ -13,8 +13,8 @@
         <nodes xsi:type="iaml.operations:StartNode" id="operations.12542c56428.5" outExecutions="model.12542c563bb.e6"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.12542c56428.7" inExecutions="model.12542c563bb.e8"/>
         <nodes xsi:type="iaml.operations:Arithmetic" id="operations.12542c56428.10" inFlows="model.12542c563bb.e1 model.12542c563bb.e3" outFlows="model.12542c563bb.e4" operationType="DIVIDE"/>
-        <dataEdges id="model.12542c563bb.e1" from="model.12542c563bb.46" to="operations.12542c56428.10"/>
-        <dataEdges id="model.12542c563bb.e3" from="model.12542c563bb.35" to="operations.12542c56428.10"/>
+        <dataEdges id="model.12542c563bb.e1" from="model.12542c563bb.35" to="operations.12542c56428.10"/>
+        <dataEdges id="model.12542c563bb.e3" from="model.12542c563bb.46" to="operations.12542c56428.10"/>
         <dataEdges id="model.12542c563bb.e4" from="operations.12542c56428.10" to="model.12542c563bb.dc"/>
         <dataEdges id="model.12542c563bb.e5" from="model.12542c563bb.dc" to="model.12542c563bb.5f"/>
         <executionEdges id="model.12542c563bb.e6" from="operations.12542c56428.5" to="model.12542c563bb.dc"/>

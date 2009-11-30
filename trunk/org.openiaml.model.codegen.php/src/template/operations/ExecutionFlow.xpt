@@ -172,10 +172,10 @@
 			}
 		};
 		function_queue_queued = true;
-		«EXPAND OperationCall::callRemoteOperation(php, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
+		«EXPAND OperationCall::callRemoteOperation(php, false, container) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
 	«ELSE»
 		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-		«EXPAND OperationCall::callOperation(php, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
+		«EXPAND OperationCall::callOperation(php, false, container) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
 		
 		/* Condition flow for virtual operation '«name»' */
 		if (!«IF php»$result«ELSE»result«ENDIF») {

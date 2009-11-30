@@ -111,7 +111,7 @@ try {
  * The parameter to pass to the client.
  */
 «DEFINE clientSideOperationCallParamater(model::wires::RunInstanceWire wire) FOR model::wires::ParameterWire»
-	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, wire, false) FOR from»)
+	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, wire, false, null) FOR from»)
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

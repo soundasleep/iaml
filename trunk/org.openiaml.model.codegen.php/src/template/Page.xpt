@@ -37,8 +37,8 @@ define("CURRENT_PAGE", "«id»");
 «ENDIF»
 
 // expand any domain instances
-«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
-«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
+«EXPAND template::domain::Definitions::domainObjectDefinitions(true, this) FOR this-»
+«EXPAND template::domain::Definitions::domainAttributeDefinitions(true, this) FOR this-»
 
 // expand any users
 «EXPAND template::users::Includes::getInclude FOREACH getRoot().eAllContents.typeSelect(model::users::Role)-»
@@ -55,7 +55,7 @@ define("CURRENT_PAGE", "«id»");
 	«IF getFailHandler(containingSession()) != null»
 		try {
 	«ENDIF»
-	«EXPAND template::events::Session::runSessionEvents FOREACH containingSession().eventTriggers-»
+	«EXPAND template::events::Session::runSessionEvents(this) FOREACH containingSession().eventTriggers-»
 	«IF getFailHandler(containingSession()) != null»
 		} catch (IamlRuntimeException $e) {
 			// only expand the first fail handler
@@ -67,13 +67,13 @@ define("CURRENT_PAGE", "«id»");
 
 // run any event triggers for this page
 // exceptions are now covered by the exception handlers above
-«EXPAND template::events::Page::runPageEvents FOREACH eventTriggers-»
+«EXPAND template::events::Page::runPageEvents(this) FOREACH eventTriggers-»
 
 // expand any operations (both in this page and in any surrounding scopes)
 «EXPAND template::operations::Definitions::operationDefinitions(this, true) FOR getRoot()-»		
 
 // expand all conditions
-«EXPAND template::conditions::Definitions::conditionDefinition(true) FOREACH getRoot().getAllConditions()-»
+«EXPAND template::conditions::Definitions::conditionDefinition(true, this) FOREACH getRoot().getAllConditions()-»
 
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
@@ -172,14 +172,14 @@ if (require_get("operation", "")) {
 		set_operation_handler(new operation_handler_«safeName()»());
 
 		// condition definitions
-		«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»
+		«EXPAND template::conditions::Definitions::conditionDefinition(false, this) FOREACH getRoot().getAllConditions()-»
 
 		// dynamic elements
 		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»
 
 		// domain instances
-		«EXPAND template::domain::Definitions::domainObjectDefinitions(false) FOR this-»
-		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false) FOR this-»
+		«EXPAND template::domain::Definitions::domainObjectDefinitions(false, this) FOR this-»
+		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false, this) FOR this-»
 
 		/* actual page onload functions (called ONCE the page is fully loaded) */
 		var stored_onload_functions = new Array();
@@ -230,7 +230,7 @@ if (require_get("operation", "")) {
 		
 	<?php queue_log_messages(true); ?>
 
-	«EXPAND template::visual::Render::renderVisual FOREACH children.typeSelect(model::VisibleThing)-»
+	«EXPAND template::visual::Render::renderVisual(this) FOREACH children.typeSelect(model::VisibleThing)-»
 
 	<div id="debug"></div>
 	<div id="response">empty</div>

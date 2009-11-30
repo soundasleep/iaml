@@ -142,3 +142,8 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 		name == "add permission" || name == "remove role" ||
 		name == "remove permission" || name == "check permissions");
 
+context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
+	inFlows.size > 0;
+
+context model::PrimitiveOperation ERROR "A 'set' PrimitiveOperation cannot set an ApplicationElementProperty: use 'setPropertyToValue'" :
+	name != "set" || outEdges.to.typeSelect(model::ApplicationElementProperty).size == 0;

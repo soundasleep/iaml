@@ -6,7 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* currently, a "Button" == a submit button. */
-«DEFINE renderButton FOR model::visual::Button-»
+«DEFINE renderButton(model::visual::Page currentPage) FOR model::visual::Button-»
 	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
 			onChange="return onChange_«safeNameString(id)»(this);"
 			onClick="return onClick_«safeNameString(id)»(this);"
@@ -16,17 +16,17 @@
 	/* <![CDATA[ */
 		function onChange_«safeNameString(id)»(obj) {
 			// expand all onChanges
-			«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click")-»
+			«EXPAND template::events::EventCall::callEvent(false, currentPage) FOREACH eventTriggers.select(e | e.name == "click")-»
 			
 			return false;
 		}
 		
 		function onClick_«safeNameString(id)»(obj) {
 			// expand all onClicks
-			«EXPAND template::events::EventCall::callEvent(false) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
+			«EXPAND template::events::EventCall::callEvent(false, currentPage) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
 
 			// implicit operations
-			«EXPAND implicitButtonClickEvents FOREACH outEdges-»
+			«EXPAND implicitButtonClickEvents(currentPage) FOREACH outEdges-»
 
 			return false;
 		}
@@ -38,19 +38,19 @@
  * If buttons have a NavigateWire or RunInstanceWire called onClick,
  * execute them as if there was an EventTrigger that existed.
  */
-«DEFINE implicitButtonClickEvents FOR model::WireEdge»
+«DEFINE implicitButtonClickEvents(model::visual::Page currentPage) FOR model::WireEdge»
 «ENDDEFINE»
 
-«DEFINE implicitButtonClickEvents FOR model::wires::NavigateWire»
+«DEFINE implicitButtonClickEvents(model::visual::Page currentPage) FOR model::wires::NavigateWire»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (navigate) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false) FOR this»
+		«EXPAND template::operations::OperationCall::callOperation(false, false, currentPage) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
-«DEFINE implicitButtonClickEvents FOR model::wires::RunInstanceWire»
+«DEFINE implicitButtonClickEvents(model::visual::Page currentPage) FOR model::wires::RunInstanceWire»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (run) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false) FOR this»
+		«EXPAND template::operations::OperationCall::callOperation(false, false, currentPage) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
 

@@ -5,11 +5,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runSessionEvents FOR model::EventTrigger-»
+«DEFINE runSessionEvents(model::visual::Page currentPage) FOR model::EventTrigger-»
 	// Session EventTrigger «this»
 	«IF name == "init" || name == "access"-»
 		// RunInstanceWires sorted by priority
-		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+		«EXPAND template::operations::OperationCall::callOperation(true, false, currentPage) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	«ELSE-»
 		// I don't know what to do with page event "«name»"
 	«ENDIF-»

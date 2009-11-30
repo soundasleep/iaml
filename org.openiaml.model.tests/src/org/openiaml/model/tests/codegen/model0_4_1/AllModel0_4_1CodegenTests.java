@@ -27,6 +27,7 @@ public class AllModel0_4_1CodegenTests {
 		suite.addTestSuite(ArithmeticSubtract.class);
 		suite.addTestSuite(ArithmeticMultiply.class);
 		suite.addTestSuite(ArithmeticDivide.class);
+		suite.addTestSuite(ArithmeticAddServer.class);
 
 		return suite;
 	}

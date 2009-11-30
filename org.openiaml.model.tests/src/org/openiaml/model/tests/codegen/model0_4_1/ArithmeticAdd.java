@@ -27,8 +27,8 @@ public class ArithmeticAdd extends AbstractArithmeticTestCase {
 	}
 
 	@Override
-	public String get13_23Calculation() {
-		return "3.6";
+	public double get13_23Calculation() {
+		return (1.3 + 2.3);
 	}
 
 	@Override

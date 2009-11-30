@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.codegen.model0_4_1;
 
+import net.sourceforge.jwebunit.api.IElement;
+
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -222,18 +224,55 @@ public abstract class AbstractArithmeticTestCase extends CodegenTestCase {
 		clickButtonWithText("calculate");
 		{
 			String result = getLabelIDForText("result");
-			assertLabeledFieldEquals(result, get13_23Calculation());
+			assertLabeledFieldEqualsDouble(result, get13_23Calculation());
 		}
 		
 	}
 
 	/**
+	 * Assert that the two given numbers (given as strings)
+	 * are equal as floating points.
+	 * 
+	 * @param id the ID of the text field to check
+	 * @param b the value to check against
+	 */
+	public void assertLabeledFieldEqualsDouble(String id,
+			double b) {
+		
+    	IElement label = getLabel(id);
+    	assertNotNull("no label for id [" + id + "] found", label);
+    	
+    	String value = getLabeledFieldValue(id, label);
+    	assertNotNull("Label '" + id + "' had no value", value);
+    	
+    	double a = Double.parseDouble(value);
+    	
+    	// check by float
+    	assertEquals(b, a, TEST_DELTA);
+	}
+
+	/**
+	 * Copied directly from JWebUnit implementation.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	private IElement getLabel(String id) {
+		// get all labels
+    	for (IElement e : getTestingEngine().getElementsByXPath("//label")) {
+    		if (e.getName().equals("label") && id.equals(e.getAttribute("id")))
+    			return e;	// label found
+    	}
+    	return null;
+	}
+
+	/**
 	 * Op1 = '1.3'; Op2 = '2.3'; what should the result be?
 	 * 
-	 * @return the result as a string
+	 * @return the result as a double, since we will be checking values as numbers
 	 * @see #test13Op23()
 	 */
-	public abstract String get13_23Calculation();
+	public abstract double get13_23Calculation();
 	
 	
 }

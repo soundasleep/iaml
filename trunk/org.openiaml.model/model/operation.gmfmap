@@ -39,7 +39,7 @@
       <domainMetaElement
           href="iaml.ecore#//PrimitiveOperation"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( PrimitiveOperation ) and not self.oclIsTypeOf( operations::ArithmeticOperation )"/>
+          body="self.oclIsTypeOf( PrimitiveOperation )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -57,33 +57,6 @@
           href="operation.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ContainsOperations/operations"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//operations/ArithmeticOperation"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( ArithmeticOperation )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#ArithmeticOperationName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#ArithmeticOperationParentName"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.1/@tools.6"/>
-      <diagramNode
-          href="iaml.gmfgraph#ArithmeticOperation"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -349,6 +322,21 @@
           href="operation.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#OperationCallNode"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/Arithmetic"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Arithmetic )"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#Arithmetic"/>
     </ownedChild>
   </nodes>
   <links>

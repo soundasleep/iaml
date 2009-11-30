@@ -17,7 +17,7 @@ import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.impl.DomainPackageImpl;
 import org.openiaml.model.model.impl.ModelPackageImpl;
-import org.openiaml.model.model.operations.ArithmeticOperation;
+import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
@@ -114,7 +114,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass arithmeticOperationEClass = null;
+	private EClass arithmeticEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -302,8 +302,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getArithmeticOperation() {
-		return arithmeticOperationEClass;
+	public EClass getArithmetic() {
+		return arithmeticEClass;
 	}
 
 	/**
@@ -311,8 +311,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArithmeticOperation_OperationType() {
-		return (EAttribute)arithmeticOperationEClass.getEStructuralFeatures().get(0);
+	public EAttribute getArithmetic_OperationType() {
+		return (EAttribute)arithmeticEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -371,8 +371,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		operationCallNodeEClass = createEClass(OPERATION_CALL_NODE);
 
-		arithmeticOperationEClass = createEClass(ARITHMETIC_OPERATION);
-		createEAttribute(arithmeticOperationEClass, ARITHMETIC_OPERATION__OPERATION_TYPE);
+		arithmeticEClass = createEClass(ARITHMETIC);
+		createEAttribute(arithmeticEClass, ARITHMETIC__OPERATION_TYPE);
 
 		// Create enums
 		arithmeticOperationTypesEEnum = createEEnum(ARITHMETIC_OPERATION_TYPES);
@@ -437,7 +437,9 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgesSource());
 		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		arithmeticOperationEClass.getESuperTypes().add(theModelPackage.getPrimitiveOperation());
+		arithmeticEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		arithmeticEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
+		arithmeticEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgesSource());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -459,8 +461,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		initEClass(operationCallNodeEClass, OperationCallNode.class, "OperationCallNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(arithmeticOperationEClass, ArithmeticOperation.class, "ArithmeticOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArithmeticOperation_OperationType(), this.getArithmeticOperationTypes(), "operationType", null, 0, 1, ArithmeticOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(arithmeticEClass, Arithmetic.class, "Arithmetic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArithmetic_OperationType(), this.getArithmeticOperationTypes(), "operationType", null, 0, 1, Arithmetic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(arithmeticOperationTypesEEnum, ArithmeticOperationTypes.class, "ArithmeticOperationTypes");
@@ -521,10 +523,10 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 			 "documentation", "A virtual {@link Operation} call; the outgoing {@link RunInstanceWire} will be executed."
 		   });			
 		addAnnotation
-		  (arithmeticOperationEClass, 
+		  (arithmeticEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A particular type of {@link PrimitiveOperation} which performs an arithmetic operation on {@link DataFlowEdgesSource incoming values}, and sets the result to the {@link DataFlowEdgeDestination outgoing value}."
+			 "documentation", "An inline expression of arithmetic. Can be used as part of a {@link PrimitiveOperation set operation}, for example."
 		   });			
 		addAnnotation
 		  (arithmeticOperationTypesEEnum, 
@@ -567,7 +569,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 			 "comment", "added in 0.4"
 		   });			
 		addAnnotation
-		  (arithmeticOperationEClass, 
+		  (arithmeticEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4.1"

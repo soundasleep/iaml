@@ -220,8 +220,8 @@
       <genClasses ecoreClass="iaml.ecore#//operations/SplitNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/JoinNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/OperationCallNode"/>
-      <genClasses ecoreClass="iaml.ecore#//operations/ArithmeticOperation">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/ArithmeticOperation/operationType"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/Arithmetic">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/Arithmetic/operationType"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"

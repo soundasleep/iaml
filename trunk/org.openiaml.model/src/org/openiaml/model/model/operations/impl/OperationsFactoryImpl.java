@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
-import org.openiaml.model.model.operations.ArithmeticOperation;
+import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
@@ -82,7 +82,7 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 			case OperationsPackage.SPLIT_NODE: return createSplitNode();
 			case OperationsPackage.JOIN_NODE: return createJoinNode();
 			case OperationsPackage.OPERATION_CALL_NODE: return createOperationCallNode();
-			case OperationsPackage.ARITHMETIC_OPERATION: return createArithmeticOperation();
+			case OperationsPackage.ARITHMETIC: return createArithmetic();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -222,10 +222,10 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public ArithmeticOperation createArithmeticOperation() {
-		ArithmeticOperationImpl arithmeticOperation = new ArithmeticOperationImpl();
-		generateID(arithmeticOperation);
-		return arithmeticOperation;
+	public Arithmetic createArithmetic() {
+		ArithmeticImpl arithmetic = new ArithmeticImpl();
+		generateID(arithmetic);
+		return arithmetic;
 	}
 
 	/**

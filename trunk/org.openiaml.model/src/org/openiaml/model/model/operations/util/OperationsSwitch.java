@@ -24,7 +24,7 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.operations.ArithmeticOperation;
+import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -217,21 +217,13 @@ public class OperationsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OperationsPackage.ARITHMETIC_OPERATION: {
-				ArithmeticOperation arithmeticOperation = (ArithmeticOperation)theEObject;
-				T result = caseArithmeticOperation(arithmeticOperation);
-				if (result == null) result = casePrimitiveOperation(arithmeticOperation);
-				if (result == null) result = caseOperation(arithmeticOperation);
-				if (result == null) result = caseExecutionEdgesSource(arithmeticOperation);
-				if (result == null) result = caseWireEdgesSource(arithmeticOperation);
-				if (result == null) result = caseWireEdgeDestination(arithmeticOperation);
-				if (result == null) result = caseNamedElement(arithmeticOperation);
-				if (result == null) result = caseDataFlowEdgeDestination(arithmeticOperation);
-				if (result == null) result = caseExecutionEdgeDestination(arithmeticOperation);
-				if (result == null) result = caseDataFlowEdgesSource(arithmeticOperation);
-				if (result == null) result = caseShouldntContainWires(arithmeticOperation);
-				if (result == null) result = caseGeneratedElement(arithmeticOperation);
-				if (result == null) result = caseContainsWires(arithmeticOperation);
+			case OperationsPackage.ARITHMETIC: {
+				Arithmetic arithmetic = (Arithmetic)theEObject;
+				T result = caseArithmetic(arithmetic);
+				if (result == null) result = caseActivityNode(arithmetic);
+				if (result == null) result = caseDataFlowEdgeDestination(arithmetic);
+				if (result == null) result = caseDataFlowEdgesSource(arithmetic);
+				if (result == null) result = caseGeneratedElement(arithmetic);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -375,17 +367,17 @@ public class OperationsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Arithmetic Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Arithmetic</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Arithmetic Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Arithmetic</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseArithmeticOperation(ArithmeticOperation object) {
+	public T caseArithmetic(Arithmetic object) {
 		return null;
 	}
 

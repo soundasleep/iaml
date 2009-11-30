@@ -35,7 +35,6 @@ public class ParentNamesTestCase extends XmlTestCase {
 		"InputTextField",
 		"CompositeCondition",
 		"Button",
-		"ArithmeticOperation",
 	};
 	
 	/**

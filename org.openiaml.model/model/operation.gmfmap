@@ -332,6 +332,15 @@
           href="iaml.ecore#//operations/Arithmetic"/>
       <domainSpecialization
           body="self.oclIsTypeOf( Arithmetic )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ArithmeticType"/>
+        <features
+            href="iaml.ecore#//operations/Arithmetic/operationType"/>
+        <editableFeatures
+            href="iaml.ecore#//operations/Arithmetic/operationType"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="operation.gmftool#//@palette/@tools.0/@tools.7"/>

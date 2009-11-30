@@ -1516,10 +1516,10 @@
           figure="//@figures.0/@descriptors.56/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="ArithmeticOperationFigure">
+        name="ArithmeticFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
-          name="ArithmeticOperationFigure">
+          name="ArithmeticFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
@@ -1538,27 +1538,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="ArithmeticOperationNameFigure"
+            name="ArithmeticPreviewFigure"
             text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ArithmeticOperationPreviewFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ArithmeticOperationParentNameFigure"
-            text="[none]">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="gray"/>
-        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.57/@actualFigure/@children.2"/>
-      <accessors
-          figure="//@figures.0/@descriptors.57/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -1676,8 +1660,8 @@
       name="OperationCallNode"
       figure="OperationCallNodeFigure"/>
   <nodes
-      name="ArithmeticOperation"
-      figure="ArithmeticOperationFigure"/>
+      name="Arithmetic"
+      figure="ArithmeticFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2044,17 +2028,8 @@
       figure="OperationCallNodeFigure"
       accessor="//@figures.0/@descriptors.56/@accessors.0"/>
   <labels
-      name="ArithmeticOperationName"
-      figure="ArithmeticOperationFigure"
+      name="ArithmeticPreview"
+      figure="ArithmeticFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.57/@accessors.0"/>
-  <labels
-      name="ArithmeticOperationPreview"
-      figure="ArithmeticOperationFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.57/@accessors.2"/>
-  <labels
-      name="ArithmeticOperationParentName"
-      figure="ArithmeticOperationFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.57/@accessors.1"/>
 </gmfgraph:Canvas>

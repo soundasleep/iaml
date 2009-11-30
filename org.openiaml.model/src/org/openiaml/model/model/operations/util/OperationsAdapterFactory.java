@@ -24,7 +24,7 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.operations.ArithmeticOperation;
+import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -129,8 +129,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 				return createOperationCallNodeAdapter();
 			}
 			@Override
-			public Adapter caseArithmeticOperation(ArithmeticOperation object) {
-				return createArithmeticOperationAdapter();
+			public Adapter caseArithmetic(Arithmetic object) {
+				return createArithmeticAdapter();
 			}
 			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
@@ -335,16 +335,16 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.operations.ArithmeticOperation <em>Arithmetic Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.operations.Arithmetic <em>Arithmetic</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.operations.ArithmeticOperation
+	 * @see org.openiaml.model.model.operations.Arithmetic
 	 * @generated
 	 */
-	public Adapter createArithmeticOperationAdapter() {
+	public Adapter createArithmeticAdapter() {
 		return null;
 	}
 

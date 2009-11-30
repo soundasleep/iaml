@@ -18,12 +18,30 @@
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.125437f91eb.5" from="model.125437f916e.5a" to="model.125437f916e.a1" name="run"/>
     </eventTriggers>
     <children xsi:type="iaml.visual:InputTextField" id="visual.125437f91db.33" name="result">
-      <properties id="model.125437f916e.11b" name="fieldValue" inFlows="model.125437f916e.14e"/>
+      <properties id="model.125437f916e.11b" name="fieldValue" outFlows="model.1254759b7c1.213" inFlows="model.125437f916e.14e model.1254759b7c1.217"/>
     </children>
   </children>
   <children xsi:type="iaml.visual:Page" id="visual.125437f91db.39" name="Page2">
     <children xsi:type="iaml.visual:InputTextField" id="visual.125437f91db.47" name="external">
       <properties id="model.125437f916e.76" name="fieldValue" outFlows="model.125437f916e.14a"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.1254759bbc9.54" name="make negative">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1254759bc84.16" id="model.1254759b7c1.155" name="make negative">
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.20e" name="setPropertyToValue" inFlows="model.1254759b7c1.216" inExecutions="model.1254759b7c1.210" outFlows="model.1254759b7c1.217" outExecutions="model.1254759b7c1.212"/>
+        <nodes xsi:type="iaml.operations:StartNode" id="operations.1254759bd7e.69" outExecutions="model.1254759b7c1.210"/>
+        <nodes xsi:type="iaml.operations:FinishNode" id="operations.1254759bd7e.6a" inExecutions="model.1254759b7c1.212"/>
+        <nodes xsi:type="iaml.operations:Arithmetic" id="operations.1254759bd7e.72" inFlows="model.1254759b7c1.213 model.1254759b7c1.215" outFlows="model.1254759b7c1.216" operationType="MULTIPLY"/>
+        <dataEdges id="model.1254759b7c1.213" from="model.125437f916e.11b" to="operations.1254759bd7e.72"/>
+        <dataEdges id="model.1254759b7c1.215" from="model.1254759b7c1.20f" to="operations.1254759bd7e.72"/>
+        <dataEdges id="model.1254759b7c1.216" from="operations.1254759bd7e.72" to="model.1254759b7c1.20e"/>
+        <dataEdges id="model.1254759b7c1.217" from="model.1254759b7c1.20e" to="model.125437f916e.11b"/>
+        <executionEdges id="model.1254759b7c1.210" from="operations.1254759bd7e.69" to="model.1254759b7c1.20e"/>
+        <executionEdges id="model.1254759b7c1.212" from="model.1254759b7c1.20e" to="operations.1254759bd7e.6a"/>
+        <values id="model.1254759b7c1.20f" name="negative 1" outFlows="model.1254759b7c1.215" value="-1"/>
+      </operations>
+      <eventTriggers id="model.1254759b7c1.154" name="click" outEdges="wires.1254759bc84.16">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1254759bc84.16" from="model.1254759b7c1.154" to="model.1254759b7c1.155" name="run"/>
+      </eventTriggers>
     </children>
   </children>
 </iaml:InternetApplication>

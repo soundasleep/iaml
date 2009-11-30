@@ -67,6 +67,11 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	public static final String BASE_URL_RUNTIME = "http://localhost:8080/iaml-runtime/"; 
 	public static final String CONFIG_WEB = "/iaml-runtime/";
 	
+	/**
+	 * The permissible delta in double tests.
+	 */
+	public static final double TEST_DELTA = 0.0001;
+	
 	/** 
 	 * TODO a temporary variable to make sure we don't set up
 	 * the same project twice.

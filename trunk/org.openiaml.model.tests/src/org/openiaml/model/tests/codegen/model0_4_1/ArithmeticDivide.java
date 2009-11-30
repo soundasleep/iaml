@@ -25,8 +25,8 @@ public class ArithmeticDivide extends AbstractArithmeticTestCase {
 	}
 
 	@Override
-	public String get13_23Calculation() {
-		return "0.56521739130434782608695652173913";
+	public double get13_23Calculation() {
+		return (1.3 / 2.3);
 	}
 
 	@Override

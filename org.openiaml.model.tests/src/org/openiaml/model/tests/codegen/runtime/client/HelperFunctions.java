@@ -46,26 +46,42 @@ public class HelperFunctions extends JavascriptCodegenTestCase {
 		assertJavascriptResult(false, "parseFloat('2') == parseFloat('1')");
 		
 		// now check the helper function
-		assertJavascriptResult(true, "parseFloat('1') == parseFloatOrZero('1')");
-		assertJavascriptResult(true, "parseFloat('1.0') == parseFloatOrZero('1')");
-		assertJavascriptResult(true, "parseFloat('1') == parseFloatOrZero('1.0')");
-		assertJavascriptResult(true, "parseFloat('1.0') == parseFloatOrZero('1.0')");
+		assertJavascriptResult(true, "parseFloat('1') == parse_float_or_zero('1')");
+		assertJavascriptResult(true, "parseFloat('1.0') == parse_float_or_zero('1')");
+		assertJavascriptResult(true, "parseFloat('1') == parse_float_or_zero('1.0')");
+		assertJavascriptResult(true, "parseFloat('1.0') == parse_float_or_zero('1.0')");
 		
-		assertJavascriptResult(false, "parseFloat('1.1') == parseFloatOrZero('1.0')");
-		assertJavascriptResult(false, "parseFloat('1') == parseFloatOrZero('1.1')");
+		assertJavascriptResult(false, "parseFloat('1.1') == parse_float_or_zero('1.0')");
+		assertJavascriptResult(false, "parseFloat('1') == parse_float_or_zero('1.1')");
 
-		assertJavascriptResult(true, "parseFloat('0') == parseFloatOrZero('0')");
+		assertJavascriptResult(true, "parseFloat('0') == parse_float_or_zero('0')");
 		
 		// parsing '' should return 0
-		assertJavascriptResult(false, "parseFloat('') == parseFloatOrZero('')");
-		assertJavascriptResult(true, "parseFloat('0') == parseFloatOrZero('')");
+		assertJavascriptResult(false, "parseFloat('') == parse_float_or_zero('')");
+		assertJavascriptResult(true, "parseFloat('0') == parse_float_or_zero('')");
+		
+		// identical results
+		assertJavascriptResult(true, "parse_float_or_zero('1') == parse_float_or_zero('1')");
+		assertJavascriptResult(true, "parse_float_or_zero('1.1') == parse_float_or_zero('1.1')");
+		assertJavascriptResult(true, "parse_float_or_zero('') == parse_float_or_zero('')");
 		
 		// all other values should return NaN
 		// but we can't compare Nan
 		assertJavascriptResult(true, "isNaN(parseFloat('invalid'))");
-		assertJavascriptResult(true, "isNaN(parseFloatOrZero('invalid'))");
+		assertJavascriptResult(true, "isNaN(parse_float_or_zero('invalid'))");
 		assertJavascriptResult(true, "isNaN(parseFloat(''))");
-		assertJavascriptResult(false, "isNaN(parseFloatOrZero(''))");
+		assertJavascriptResult(false, "isNaN(parse_float_or_zero(''))");
+
+	}
+	
+	public void testConvertToNan() throws Exception {
+		assertJavascriptResult(false, "isNaN(3)");
+		assertJavascriptResult(false, "isNaN(3/0)");
+		assertJavascriptResult(true, "isNaN(0/0)");
+		
+		assertJavascriptResult(false, "isNaN(convert_to_nan(3))");
+		assertJavascriptResult(true, "isNaN(convert_to_nan(3/0))");
+		assertJavascriptResult(true, "isNaN(convert_to_nan(0/0))");		
 
 	}
 

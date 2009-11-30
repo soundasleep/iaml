@@ -384,10 +384,20 @@ function trim(str) {
  * Translate the given string into a floating point.
  * If the given string is empty, return '0'.
  */
-function parseFloatOrZero(str) {
+function parse_float_or_zero(str) {
 	if (str == "")
 		return 0;
 	return parseFloat(str);
+}
+
+/**
+ * Convert any non-finite number (e.g. Infinity, NaN)
+ * into NaN. Otherwise, return the same number.
+ */
+function convert_to_nan(n) {
+	if (isFinite(n))
+		return n;
+	return Number.NaN;
 }
 
 /**

@@ -24,6 +24,30 @@
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
 			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " + "»
 		«ENDIF»
+	«ELSEIF operationType.toString() == "SUBTRACT"»
+		«IF php»
+			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
+			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " - "»
+		«ELSE»
+			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
+			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " - "»
+		«ENDIF»
+	«ELSEIF operationType.toString() == "MULTIPLY"»
+		«IF php»
+			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
+			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " * "»
+		«ELSE»
+			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
+			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " * "»
+		«ENDIF»
+	«ELSEIF operationType.toString() == "DIVIDE"»
+		«IF php»
+			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
+			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " / "»
+		«ELSE»
+			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
+			convert_to_nan(«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " / "»)
+		«ENDIF»
 	«ELSE»
 		«EXPAND exception FOR throwException("Unknown arithmetic: " + this)»
 	«ENDIF»
@@ -81,7 +105,7 @@
  * Uses JS parseFloatOrZero() from Runtime JS.
  */
 «DEFINE convertToFloat(model::visual::Page currentPage) FOR model::DataFlowEdgesSource»
-	parseFloatOrZero(«EXPAND dataSource(false, currentPage) FOR this»)
+	parse_float_or_zero(«EXPAND dataSource(false, currentPage) FOR this»)
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

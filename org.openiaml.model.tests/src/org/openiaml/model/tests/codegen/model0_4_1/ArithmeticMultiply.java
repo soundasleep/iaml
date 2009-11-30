@@ -5,40 +5,38 @@ package org.openiaml.model.tests.codegen.model0_4_1;
 
 
 /**
- * Try the 'ADD' arithmetic.
+ * Try the 'MULTIPLY' arithmetic.
  * 
  * @author jmwright
- * @example Arithmetic,PrimitiveOperation Using {@model Arithmetic} to add
- * 		two {@model InputTextField input values} together.
  * @operational Arithmetic
- * 		{@model Arithmetic} can be used inline to add together its
+ * 		{@model Arithmetic} can be used inline to multiply its
  * 		incoming operands, and act as a source of data.
  */
-public class ArithmeticAdd extends AbstractArithmeticTestCase {
+public class ArithmeticMultiply extends AbstractArithmeticTestCase {
 
 	@Override
 	public Class<? extends AbstractArithmeticTestCase> getTestcaseClass() {
-		return ArithmeticAdd.class;
+		return ArithmeticMultiply.class;
 	}
 	
 	@Override
 	public String get0_3Calculation() {
-		return "3";
+		return "0";
 	}
 
 	@Override
 	public String get13_23Calculation() {
-		return "3.6";
+		return "2.99";
 	}
 
 	@Override
 	public String get1_1Calculation() {
-		return "2";
+		return "1";
 	}
 
 	@Override
 	public String get3_0Calculation() {
-		return "3";
+		return "0";
 	}
 
 	@Override
@@ -48,7 +46,7 @@ public class ArithmeticAdd extends AbstractArithmeticTestCase {
 
 	@Override
 	public String getN1_N1Calculation() {
-		return "-2";
+		return "1";
 	}
 
 }

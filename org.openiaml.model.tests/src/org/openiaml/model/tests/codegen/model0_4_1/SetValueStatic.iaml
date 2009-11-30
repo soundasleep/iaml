@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12542c563bb.161">
+  <children xsi:type="iaml.visual:Page" id="index" name="Home">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1b5" name="target">
+      <properties id="model.12542c563bb.1f0" name="fieldValue" inFlows="model.12542c563bb.231"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12542c56418.1bb" name="execute">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12542c56428.1b" id="model.12542c563bb.170" name="do operation">
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.12542c563bb.22d" name="set" inFlows="model.12542c563bb.230" inExecutions="model.12542c563bb.22e" outFlows="model.12542c563bb.231" outExecutions="model.12542c563bb.22f"/>
+        <nodes xsi:type="iaml.operations:StartNode" id="operations.12542c56428.26" outExecutions="model.12542c563bb.22e"/>
+        <nodes xsi:type="iaml.operations:FinishNode" id="operations.12542c56428.27" inExecutions="model.12542c563bb.22f"/>
+        <dataEdges id="model.12542c563bb.230" from="model.12542c563bb.19c" to="model.12542c563bb.22d"/>
+        <dataEdges id="model.12542c563bb.231" from="model.12542c563bb.22d" to="model.12542c563bb.1f0"/>
+        <executionEdges id="model.12542c563bb.22e" from="operations.12542c56428.26" to="model.12542c563bb.22d"/>
+        <executionEdges id="model.12542c563bb.22f" from="model.12542c563bb.22d" to="operations.12542c56428.27"/>
+        <values id="model.12542c563bb.19c" name="static value" outFlows="model.12542c563bb.230" value="hello42"/>
+      </operations>
+      <eventTriggers id="model.12542c563bb.16f" name="click" outEdges="wires.12542c56428.1b">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12542c56428.1b" from="model.12542c563bb.16f" to="model.12542c563bb.170" name="run"/>
+      </eventTriggers>
+    </children>
+  </children>
+</iaml:InternetApplication>

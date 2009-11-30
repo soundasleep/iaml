@@ -1538,7 +1538,7 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="ArithmeticPreviewFigure"
+            name="ArithmeticTypeFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
@@ -2028,7 +2028,7 @@
       figure="OperationCallNodeFigure"
       accessor="//@figures.0/@descriptors.56/@accessors.0"/>
   <labels
-      name="ArithmeticPreview"
+      name="ArithmeticType"
       figure="ArithmeticFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.57/@accessors.0"/>

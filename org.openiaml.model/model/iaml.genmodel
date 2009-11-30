@@ -203,6 +203,12 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Operations" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//operations">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//operations/ArithmeticOperationTypes">
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//operations/ArithmeticOperationTypes/ADD"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//operations/ArithmeticOperationTypes/SUBTRACT"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//operations/ArithmeticOperationTypes/MULTIPLY"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//operations/ArithmeticOperationTypes/DIVIDE"/>
+      </genEnums>
       <genClasses ecoreClass="iaml.ecore#//operations/StartNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/CancelNode">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/CancelNode/exceptionText"/>
@@ -214,6 +220,9 @@
       <genClasses ecoreClass="iaml.ecore#//operations/SplitNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/JoinNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/OperationCallNode"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/ArithmeticOperation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/ArithmeticOperation/operationType"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//scopes">

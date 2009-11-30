@@ -1,0 +1,18 @@
+#summary Summary of model version 0.5.
+#labels Phase-Design,Development
+
+[Model0_4 < 0.4] | *0.5* | [Model0_6 0.6 >]
+
+=Model 0.5=
+
+<wiki:toc max_depth="2" />
+
+=Model 0.4.1=
+
+==New Elements==
+
+===Arithmetic===
+
+Allows for inline arithmetic expressions.
+
+  _See [http://openiaml.org/model/Arithmetic]_

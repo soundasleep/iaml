@@ -32,7 +32,7 @@ import org.sosy_lab.crocopat.cli.ExecuteCrocopat;
 import org.sosy_lab.crocopat.cli.ExecuteCrocopat.CrocopatException;
 
 /**
- * An abstract engine to verify with Crocopat.
+ * An abstract engine to verify with CrocoPat.
  * This way we can specify different types of verification inputs
  * with different validation rules, etc; similar to Drools.
  * 
@@ -58,13 +58,13 @@ public class VerificationEngine {
 	 * {@link #getViolations()}.
 	 * 
 	 * @param model
-	 * @return the status of the verification (error if any other type of exception was thrown)
+	 * @return OK if verification was successful; Warning if a violation was found; Error otherwise
 	 * @throws VerificationException if verification could not be executed
 	 */
 	public IStatus verify(EObject model, IProgressMonitor monitor) throws VerificationException {
 		
 		try {
-			monitor.beginTask("Verifying with Crocopat", 10);
+			monitor.beginTask("Verifying with CrocoPat", 10);
 			
 			// we want to write the model and rules to files
 			File rsfFile = File.createTempFile("temp", ".rsf");
@@ -122,12 +122,12 @@ public class VerificationEngine {
 			InputStream rmlin = new FileInputStream(rmlFile);
 	
 			// execute
-			monitor.subTask("Calling Crocopat");
+			monitor.subTask("Calling CrocoPat");
 			List<String> results;
 			try {
 				results = exec.execute(rmlin, rsfin);
 			} catch (CrocopatException e) {
-				throw new VerificationException("Could not execute Crocopat: " + e.getMessage(), e);
+				throw new VerificationException("Could not execute CrocoPat: " + e.getMessage(), e);
 			}
 			monitor.worked(5);
 			
@@ -144,7 +144,13 @@ public class VerificationEngine {
 			
 			// return
 			monitor.done();
-			return Status.OK_STATUS;
+			if (violations.isEmpty()) {
+				return Status.OK_STATUS;
+			} else {
+				return new Status(IStatus.WARNING, 
+						VerificationCrocopatPlugin.PLUGIN_ID, 
+						"CrocoPat verification failed: " + violations.size() + " violations");
+			}
 			
 		} catch (IOException e) {
 			return errorStatus(e);

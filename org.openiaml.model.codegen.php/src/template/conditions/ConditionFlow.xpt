@@ -8,14 +8,14 @@
 /**
  * TODO unresolved: Can a condition have multiple outExecutions?
  */
-«DEFINE conditionFlow(Boolean php) FOR model::operations::StartNode-»
+«DEFINE conditionFlow(Boolean php, model::visual::Page currentPage) FOR model::operations::StartNode-»
 	// flow starts here
 	«FOREACH outExecutions AS e-»
-		«EXPAND conditionFlowStep(php) FOR e.to-»
+		«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 	«ENDFOREACH»
 «ENDDEFINE»
 
-«DEFINE conditionFlow(Boolean php) FOR model::ActivityNode-»
+«DEFINE conditionFlow(Boolean php, model::visual::Page currentPage) FOR model::ActivityNode-»
 	// nothing for an activity node
 «ENDDEFINE»
 
@@ -24,7 +24,7 @@
  */
  
 /* an edge that is the end (both StartNode and FinishNode also fall into this) */
-«DEFINE conditionFlowStep(Boolean php) FOR model::ExecutionEdgeDestination-»
+«DEFINE conditionFlowStep(Boolean php, model::visual::Page currentPage) FOR model::ExecutionEdgeDestination-»
 	// do nothing «this-»
 «ENDDEFINE»
 
@@ -32,30 +32,30 @@
  * TODO expand each of these different types of Conditions into
  * new templates.
  */
-«DEFINE conditionFlowStep(Boolean php) FOR model::operations::DecisionCondition»
+«DEFINE conditionFlowStep(Boolean php, model::visual::Page currentPage) FOR model::operations::DecisionCondition»
 	// DecisionCondition «this»
 	«IF name=="xpathMatch"»
-		if (!xpathMatch(«EXPAND conditionInflows(php) FOREACH inFlows SEPARATOR ","»)) {
+		if (!xpathMatch(«EXPAND conditionInflows(php, currentPage) FOREACH inFlows SEPARATOR ","»)) {
 			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getFailEdges() AS e-»
-				«EXPAND conditionFlowStep(php) FOR e.to-»
+				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 			«ENDFOREACH»
 		} else {
 			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getPassEdges() AS e-»
-				«EXPAND conditionFlowStep(php) FOR e.to-»
+				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 			«ENDFOREACH»
 		}
 	«ELSEIF name=="emailAddress"»
-		if (!emailAddressMatch(«EXPAND conditionInflows(php) FOREACH inFlows SEPARATOR ","»)) {
+		if (!emailAddressMatch(«EXPAND conditionInflows(php, currentPage) FOREACH inFlows SEPARATOR ","»)) {
 			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getFailEdges() AS e-»
-				«EXPAND conditionFlowStep(php) FOR e.to-»
+				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 			«ENDFOREACH»
 		} else {
 			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getPassEdges() AS e-»
-				«EXPAND conditionFlowStep(php) FOR e.to-»
+				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 			«ENDFOREACH»
 		}
 	«ELSE»
@@ -64,19 +64,19 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE conditionFlowStep(Boolean php) FOR model::operations::CancelNode-»
+«DEFINE conditionFlowStep(Boolean php, model::visual::Page currentPage) FOR model::operations::CancelNode-»
 	return false; /* condition failed: «exceptionText» */
 «ENDDEFINE»
 
-«DEFINE conditionFlowStep(Boolean php) FOR model::operations::FinishNode-»
+«DEFINE conditionFlowStep(Boolean php, model::visual::Page currentPage) FOR model::operations::FinishNode-»
 	return true; /* condition passed */
 «ENDDEFINE»
 
 /**
  * Translate DataFlowEdges into actual sources of data
  */
-«DEFINE conditionInflows(Boolean php) FOR model::DataFlowEdge-»
-	«EXPAND template::operations::DataFlow::dataSource(php) FOR from-»
+«DEFINE conditionInflows(Boolean php, model::visual::Page currentPage) FOR model::DataFlowEdge-»
+	«EXPAND template::operations::DataFlow::dataSource(php, currentPage) FOR from-»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

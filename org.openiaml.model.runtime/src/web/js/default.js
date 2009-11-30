@@ -381,6 +381,16 @@ function trim(str) {
 }
 
 /**
+ * Translate the given string into a floating point.
+ * If the given string is empty, return '0'.
+ */
+function parseFloatOrZero(str) {
+	if (str == "")
+		return 0;
+	return parseFloat(str);
+}
+
+/**
  * Load a string of XML as an XML document using an XML parser.
  *
  * Based on http://www.w3schools.com/Xml/xml_parser.asp.

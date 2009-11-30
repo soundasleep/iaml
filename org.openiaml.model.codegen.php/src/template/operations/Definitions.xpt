@@ -38,9 +38,9 @@
 	/* simple operation */
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
 		«IF isDomainAttributeInstance(eContainer)-»
-			return «EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, false, null, (model::DomainAttributeInstance) eContainer) FOR this»;
+			return «EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, false, null, (model::DomainAttributeInstance) eContainer, container) FOR this»;
 		«ELSEIF isDomainObjectInstance(eContainer)-»
-			return «EXPAND template::domain::DomainInstance::domainInstanceCall(php, null, (model::DomainObjectInstance) eContainer) FOR this»;
+			return «EXPAND template::domain::DomainInstance::domainInstanceCall(php, null, (model::DomainObjectInstance) eContainer, container) FOR this»;
 		«ELSE»
 			«IF php»
 				throw new IamlRuntimeException("Unknown simple operation '«this»'");

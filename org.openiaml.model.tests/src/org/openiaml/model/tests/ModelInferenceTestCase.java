@@ -158,6 +158,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		if (class1.getPackage().getName().contains("codegen.model0_3")) {
 			return getAbsolutePathRoot() + ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml";
 		}
+		if (class1.getPackage().getName().contains("codegen.model0_4_1")) {
+			return getAbsolutePathRoot() + ROOT + "codegen/model0_4_1/" + class1.getSimpleName() + ".iaml";
+		}
 		if (class1.getPackage().getName().contains("codegen.model0_4")) {
 			return getAbsolutePathRoot() + ROOT + "codegen/model0_4/" + class1.getSimpleName() + ".iaml";
 		}
@@ -168,6 +171,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		// TODO move other inference tests into separate test folders
 		if (class1.getPackage().getName().contains("inference.model0_3")) {
 			return getAbsolutePathRoot() + ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml";
+		}
+		if (class1.getPackage().getName().contains("inference.model0_4_1")) {
+			return getAbsolutePathRoot() + ROOT + "inference/model0_4_1/" + class1.getSimpleName() + ".iaml";
 		}
 		if (class1.getPackage().getName().contains("inference.model0_4")) {
 			return getAbsolutePathRoot() + ROOT + "inference/model0_4/" + class1.getSimpleName() + ".iaml";

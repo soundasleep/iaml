@@ -107,6 +107,15 @@ public interface OperationsFactory extends EFactory {
 	OperationCallNode createOperationCallNode();
 
 	/**
+	 * Returns a new object of class '<em>Arithmetic Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Arithmetic Operation</em>'.
+	 * @generated
+	 */
+	ArithmeticOperation createArithmeticOperation();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

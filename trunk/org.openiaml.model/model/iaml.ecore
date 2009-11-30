@@ -657,6 +657,27 @@
         <details key="documentation" value="A virtual {@link Operation} call; the outgoing {@link RunInstanceWire} will be executed."/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ArithmeticOperation" eSuperTypes="#//PrimitiveOperation">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.1"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A particular type of {@link PrimitiveOperation} which performs an arithmetic operation on {@link DataFlowEdgesSource incoming values}, and sets the result to the {@link DataFlowEdgeDestination outgoing value}."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationType" eType="#//operations/ArithmeticOperationTypes"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ArithmeticOperationTypes">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.1"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents the range of possible {@link ArithmeticOperation arithmetic operations}."/>
+      </eAnnotations>
+      <eLiterals name="ADD"/>
+      <eLiterals name="SUBTRACT" value="1"/>
+      <eLiterals name="MULTIPLY" value="2"/>
+      <eLiterals name="DIVIDE" value="3"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="iaml.scopes">
     <eAnnotations source="http://openiaml.org/comment">

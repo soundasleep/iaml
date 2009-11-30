@@ -39,7 +39,7 @@
       <domainMetaElement
           href="iaml.ecore#//PrimitiveOperation"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( PrimitiveOperation )"/>
+          body="self.oclIsTypeOf( PrimitiveOperation ) and not self.oclIsTypeOf( operations::ArithmeticOperation )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -57,6 +57,33 @@
           href="operation.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsOperations/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/ArithmeticOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( ArithmeticOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ArithmeticOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ArithmeticOperationParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.1/@tools.6"/>
+      <diagramNode
+          href="iaml.gmfgraph#ArithmeticOperation"/>
     </ownedChild>
   </nodes>
   <nodes>

@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Operation"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2014,2015,2028,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4004,4005,4006,4007"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Operation"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027"/>
+            <method name="getType()" value="2014,2015,2028,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4004,4005,4006,4007"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039"/>
+            <method name="getType()" value="5020,5021,5022,5023,5040,5041,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -265,6 +265,7 @@
          <object class="org.openiaml.model.diagram.operation.edit.parts.CompositeOperationEditPart" id="CompositeOperation_1000"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.CompositeOperation2EditPart" id="CompositeOperation_2014"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2015"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.ArithmeticOperationEditPart" id="ArithmeticOperation_2028"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.ParameterEditPart" id="Parameter_2016"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.StartNodeEditPart" id="StartNode_2017"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.CancelNodeEditPart" id="CancelNode_2018"/>
@@ -277,7 +278,7 @@
          <object class="org.openiaml.model.diagram.operation.edit.parts.JoinNodeEditPart" id="JoinNode_2025"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.StaticValueEditPart" id="StaticValue_2026"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.OperationCallNodeEditPart" id="OperationCallNode_2027"/>
-         <context elements="CompositeOperation_1000,CompositeOperation_2014,PrimitiveOperation_2015,Parameter_2016,StartNode_2017,CancelNode_2018,FinishNode_2019,DecisionNode_2020,DecisionOperation_2021,TemporaryVariable_2022,ApplicationElementProperty_2023,SplitNode_2024,JoinNode_2025,StaticValue_2026,OperationCallNode_2027"/>
+         <context elements="CompositeOperation_1000,CompositeOperation_2014,PrimitiveOperation_2015,ArithmeticOperation_2028,Parameter_2016,StartNode_2017,CancelNode_2018,FinishNode_2019,DecisionNode_2020,DecisionOperation_2021,TemporaryVariable_2022,ApplicationElementProperty_2023,SplitNode_2024,JoinNode_2025,StaticValue_2026,OperationCallNode_2027"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -300,7 +301,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.operation.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027"/>
+            <method name="getType()" value="2014,2015,2028,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -335,6 +336,16 @@
                eclass="PrimitiveOperation"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.PrimitiveOperationEditHelper">
             <param name="semanticHint" value="2015"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/operations">
+         <metamodelType
+               id="org.openiaml.model.diagram.operation.ArithmeticOperation_2028"
+               name="%metatype.name.ArithmeticOperation_2028"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ArithmeticOperation"
+               edithelper="org.openiaml.model.diagram.operation.edit.helpers.ArithmeticOperationEditHelper">
+            <param name="semanticHint" value="2028"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -512,6 +523,7 @@
          <elementType ref="org.openiaml.model.diagram.operation.CompositeOperation_1000"/>
          <elementType ref="org.openiaml.model.diagram.operation.CompositeOperation_2014"/>
          <elementType ref="org.openiaml.model.diagram.operation.PrimitiveOperation_2015"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ArithmeticOperation_2028"/>
          <elementType ref="org.openiaml.model.diagram.operation.Parameter_2016"/>
          <elementType ref="org.openiaml.model.diagram.operation.StartNode_2017"/>
          <elementType ref="org.openiaml.model.diagram.operation.CancelNode_2018"/>

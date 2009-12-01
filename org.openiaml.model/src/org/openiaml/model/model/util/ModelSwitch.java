@@ -418,6 +418,7 @@ public class ModelSwitch<T> {
 			case ModelPackage.EXECUTION_EDGE: {
 				ExecutionEdge executionEdge = (ExecutionEdge)theEObject;
 				T result = caseExecutionEdge(executionEdge);
+				if (result == null) result = caseNamedElement(executionEdge);
 				if (result == null) result = caseGeneratedElement(executionEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

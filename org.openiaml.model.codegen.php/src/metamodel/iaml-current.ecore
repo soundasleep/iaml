@@ -253,9 +253,12 @@
       <details key="documentation" value="Temporary storage of values contained within an {@link Operation} which will be lost once the operation is completed."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdge" eSuperTypes="#//GeneratedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdge" eSuperTypes="#//GeneratedElement #//NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents the execution flow within an {@link Operation}."/>
+    </eAnnotations>
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="changed" value="0.4.1 to add NamedElement supertype"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ExecutionEdgesSource"
         eOpposite="#//ExecutionEdgesSource/outExecutions"/>

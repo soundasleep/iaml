@@ -1742,6 +1742,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
 		executionEdgeEClass.getESuperTypes().add(this.getGeneratedElement());
+		executionEdgeEClass.getESuperTypes().add(this.getNamedElement());
 		conditionalEdgeEClass.getESuperTypes().add(this.getExecutionEdge());
 		conditionalEdgeEClass.getESuperTypes().add(this.getNamedElement());
 		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getApplicationElement());
@@ -2058,6 +2059,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "added", "0.3"
 		   });					
 		addAnnotation
+		  (executionEdgeEClass, 
+		   source, 
+		   new String[] {
+			 "changed", "0.4.1 to add NamedElement supertype"
+		   });		
+		addAnnotation
 		  (shouldntContainWiresEClass, 
 		   source, 
 		   new String[] {
@@ -2270,7 +2277,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents the execution flow within an {@link Operation}."
-		   });			
+		   });				
 		addAnnotation
 		  (generatedElementEClass, 
 		   source, 

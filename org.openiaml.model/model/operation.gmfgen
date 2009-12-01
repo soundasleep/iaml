@@ -327,7 +327,7 @@
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeOperation/nodes"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeOperation/nodes"/>
       </modelFacet>
-      <labels editPartClassName="ArithmeticOperationTypeEditPart" itemSemanticEditPolicyClassName="ArithmeticOperationTypeItemSemanticEditPolicy" visualID="5040">
+      <labels editPartClassName="ArithmeticOperationTypeEditPart" itemSemanticEditPolicyClassName="ArithmeticOperationTypeItemSemanticEditPolicy" notationViewFactoryClassName="ArithmeticOperationTypeViewFactory" visualID="5040">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureArithmeticTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
@@ -351,7 +351,7 @@
     <links createCommandClassName="ExecutionEdgeCreateCommand" editPartClassName="ExecutionEdgeEditPart" itemSemanticEditPolicyClassName="ExecutionEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ExecutionEdgeViewFactory" reorientCommandClassName="ExecutionEdgeReorientCommand" visualID="4005">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ExecutionEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
-      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ExecutionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ExecutionEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;}&#10;&#10;" className="ExecutionEdgeFigure" xsi:type="gmfgen:InnerClassViewmap"/>
+      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ExecutionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureExecutionEdgeNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ExecutionEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureExecutionEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureExecutionEdgeNameFigure.setText(&quot;&quot;);&#10;&#10;this.add(fFigureExecutionEdgeNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureExecutionEdgeNameFigure() {&#10;&#9;&#9;return fFigureExecutionEdgeNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ExecutionEdgeFigure" xsi:type="gmfgen:InnerClassViewmap"/>
       <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.11" xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass href="iaml.genmodel#//model/ExecutionEdge"/>
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
@@ -359,6 +359,15 @@
         <sourceMetaFeature href="iaml.genmodel#//model/ExecutionEdge/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/ExecutionEdge/to"/>
       </modelFacet>
+      <labels editPartClassName="ExecutionEdgeNameEditPart" itemSemanticEditPolicyClassName="ExecutionEdgeNameItemSemanticEditPolicy" notationViewFactoryClassName="ExecutionEdgeNameViewFactory" visualID="6004">
+        <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureExecutionEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
+          <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
+        </viewmap>
+        <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
     </links>
     <links createCommandClassName="ConditionalEdgeCreateCommand" editPartClassName="ConditionalEdgeEditPart" itemSemanticEditPolicyClassName="ConditionalEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ConditionalEdgeViewFactory" reorientCommandClassName="ConditionalEdgeReorientCommand" visualID="4006">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
@@ -617,7 +626,7 @@
     </providers>
   </expressionProviders>
   <labelParsers extensibleViaService="true">
-    <implementations uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet //@diagram/@topLevelNodes.8/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.1/@modelFacet //@diagram/@topLevelNodes.12/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.1/@modelFacet //@diagram/@topLevelNodes.14/@labels.0/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet //@diagram/@links.3/@labels.0/@modelFacet" xsi:type="gmfgen:PredefinedParser"/>
+    <implementations uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet //@diagram/@topLevelNodes.8/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.1/@modelFacet //@diagram/@topLevelNodes.12/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.1/@modelFacet //@diagram/@topLevelNodes.14/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet //@diagram/@links.3/@labels.0/@modelFacet" xsi:type="gmfgen:PredefinedParser"/>
     <implementations uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.2/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.11/@labels.0/@modelFacet //@diagram/@topLevelNodes.13/@labels.0/@modelFacet" xsi:type="gmfgen:ExternalParser"/>
   </labelParsers>
   <contextMenus context="//@diagram">

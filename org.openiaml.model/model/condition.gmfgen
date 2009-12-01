@@ -537,7 +537,7 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="ExecutionEdgeFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ExecutionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ExecutionEdgeFigure() {&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ExecutionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureExecutionEdgeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ExecutionEdgeFigure() {&#xA;&#x9;&#x9;this.setLineWidth(1);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureExecutionEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureExecutionEdgeNameFigure.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureExecutionEdgeNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setLineWidth(1);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureExecutionEdgeNameFigure() {&#xA;&#x9;&#x9;return fFigureExecutionEdgeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet"
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.5">
@@ -552,6 +552,27 @@
         <targetMetaFeature
             href="iaml.genmodel#//model/ExecutionEdge/to"/>
       </modelFacet>
+      <labels
+          visualID="6003"
+          editPartClassName="ExecutionEdgeNameEditPart"
+          itemSemanticEditPolicyClassName="ExecutionEdgeNameItemSemanticEditPolicy">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureExecutionEdgeNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:LabelOffsetAttributes"
+              y="40"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
+          <metaFeatures
+              href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
     </links>
     <links
         visualID="4006"
@@ -1075,7 +1096,7 @@
       extensibleViaService="true">
     <implementations
         xsi:type="gmfgen:PredefinedParser"
-        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.1/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet"/>
+        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.1/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet"/>
     <implementations
         xsi:type="gmfgen:ExternalParser"
         uses="//@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.2/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet"/>

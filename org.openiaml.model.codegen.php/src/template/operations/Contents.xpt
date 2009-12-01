@@ -43,10 +43,18 @@
 	«ENDIF»
 	) {
 		// passed (exactly one pass)
-		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR passedExectionFlow().to»
+		«IF hasPassFlow(this)»
+			«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR passedExectionFlow().to»
+		«ELSE»
+			// no pass flow
+		«ENDIF»
 	} else {
 		// failed (exactly one fail)
-		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR failedExectionFlow().to»
+		«IF hasFailFlow(this)»
+			«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR failedExectionFlow().to»
+		«ELSE»
+			// no fail flow
+		«ENDIF»
 	}
 «ENDDEFINE»
 

@@ -10,18 +10,6 @@
 	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean php, boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR model::visual::InputTextField»
-	«IF php»
-		«EXPAND exception FOR throwException("Cannot generate server-side code for remoteValue InputTextField: " + this)» 
-	«ELSE»
-		«REM»
-			TODO we are trying to find the remote parameter source for a field that isn't on the current page! what are we supposed to do??
-		«ENDREM»
-		/* throwJavascriptException("I don't know how to find the remote parameter source for a field that isn't on the current page.") */
-		null
-	«ENDIF»
-«ENDDEFINE»
-
 «DEFINE remoteValue(boolean php, boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR model::DomainAttribute»
 	«IF php»
 		«EXPAND exception FOR throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 

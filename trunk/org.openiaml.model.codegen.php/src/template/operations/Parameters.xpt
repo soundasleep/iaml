@@ -85,6 +85,10 @@
 					document.getElementById('«safeName(eContainer)»').value
 				«ELSEIF onCurrentPage(currentPage, this)» 
 					document.getElementById('«safeName(eContainer)»').value
+				«ELSEIF model::visual::InputTextField.isInstance(eContainer)»
+					«REM»this is a text field stored outside of the current page«ENDREM»
+					/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing page. */
+					"<?php echo «EXPAND callParameterValue(true, wire, inStoreDb, currentPage) FOR this»; ?>"
 				«ELSE»
 					«REM»
 						it's not on the current page. it could be anywhere!

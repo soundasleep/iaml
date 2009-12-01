@@ -156,10 +156,16 @@ startNodeCondition(model::CompositeCondition this) :
 
 /* get the next execution flow for a decision operation that has passed */
 passedExectionFlow(model::operations::DecisionOperation this) :	
-	outExecutions.selectFirst( flow | !model::operations::CancelNode.isInstance(flow.to) );
+	outExecutions.selectFirst( e | !model::operations::CancelNode.isInstance(e.to) );
 
+/* get the next execution flow for a decision operation that has failed */
 failedExectionFlow(model::operations::DecisionOperation this) :
-	outExecutions.selectFirst( flow | model::operations::CancelNode.isInstance(flow.to) );
+	outExecutions.selectFirst( e | model::operations::CancelNode.isInstance(e.to) );
+
+hasFailFlow(model::operations::DecisionOperation this) :
+	outExecutions.select( e | model::operations::CancelNode.isInstance(e.to) ).size > 0; 
+hasPassFlow(model::operations::DecisionOperation this) :
+	outExecutions.select( e | !model::operations::CancelNode.isInstance(e.to) ).size > 0; 
 
 /** does this operation have a "fail" edge? */
 getFailEdge(model::CompositeOperation this) :
@@ -232,17 +238,11 @@ isPropertiesFile(model::DomainStore store) :
 	store != null && store.type != null && store.type.toString() == "PROPERTIES_FILE";
 
 /* get failed/passed out edges from a given DecisionCondition */
-getFailEdges(model::operations::DecisionCondition this):
+getFailEdges(model::ExecutionEdgesSource this):
 	outExecutions.select( e | model::operations::CancelNode.isInstance(e.to) );
 	/* TODO one day, this will also include OutExecutions[name=cancel|fail|N] */
 
-getFailEdges(model::operations::OperationCallNode this):
-	outExecutions.select( e | model::operations::CancelNode.isInstance(e.to) );
-
-getPassEdges(model::operations::DecisionCondition this):
-	outExecutions.toSet().removeAll( getFailEdges() );	/* everything that didn't fail */	
-
-getPassEdges(model::operations::OperationCallNode this):
+getFailEdges(model::ExecutionEdgesSource this):
 	outExecutions.toSet().removeAll( getFailEdges() );	/* everything that didn't fail */	
 
 /* get the root InternetApplication */

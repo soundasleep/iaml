@@ -206,6 +206,13 @@
         href="iaml.ecore#//ExecutionEdge"/>
     <domainSpecialization
         body="self.oclIsTypeOf( ExecutionEdge )"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="iaml.gmfgraph#ExecutionEdgeName"/>
+      <features
+          href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//CompositeCondition/executionEdges"/>
     <tool

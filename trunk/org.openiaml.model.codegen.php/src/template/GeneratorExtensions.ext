@@ -156,16 +156,21 @@ startNodeCondition(model::CompositeCondition this) :
 
 /* get the next execution flow for a decision operation that has passed */
 passedExectionFlow(model::operations::DecisionOperation this) :	
-	outExecutions.selectFirst( e | !model::operations::CancelNode.isInstance(e.to) );
+	outExecutions.selectFirst( e | isFailFlow(e) );
 
 /* get the next execution flow for a decision operation that has failed */
 failedExectionFlow(model::operations::DecisionOperation this) :
-	outExecutions.selectFirst( e | model::operations::CancelNode.isInstance(e.to) );
+	outExecutions.selectFirst( e | isPassFlow(e) );
 
 hasFailFlow(model::operations::DecisionOperation this) :
-	outExecutions.select( e | model::operations::CancelNode.isInstance(e.to) ).size > 0; 
+	outExecutions.select( e | isFailFlow(e) ).size > 0; 
 hasPassFlow(model::operations::DecisionOperation this) :
-	outExecutions.select( e | !model::operations::CancelNode.isInstance(e.to) ).size > 0; 
+	outExecutions.select( e | isPassFlow(e) ).size > 0; 
+
+isFailFlow(model::ExecutionEdge e) :
+	model::operations::CancelNode.isInstance(e.to) || e.name.toLowerCase().startsWith("n") || e.name.toLowerCase().startsWith("f");
+isPassFlow(model::ExecutionEdge e) :
+	!isFailFlow(e);
 
 /** does this operation have a "fail" edge? */
 getFailEdge(model::CompositeOperation this) :

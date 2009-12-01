@@ -2766,13 +2766,22 @@ public interface ModelPackage extends EPackage {
 	int EXECUTION_EDGE__GENERATED_RULE = GENERATED_ELEMENT__GENERATED_RULE;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_EDGE__NAME = GENERATED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EDGE__FROM = GENERATED_ELEMENT_FEATURE_COUNT + 0;
+	int EXECUTION_EDGE__FROM = GENERATED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -2781,7 +2790,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EDGE__TO = GENERATED_ELEMENT_FEATURE_COUNT + 1;
+	int EXECUTION_EDGE__TO = GENERATED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Execution Edge</em>' class.
@@ -2790,7 +2799,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EDGE_FEATURE_COUNT = GENERATED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_EDGE_FEATURE_COUNT = GENERATED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>In Executions</b></em>' reference list.
@@ -2875,6 +2884,15 @@ public interface ModelPackage extends EPackage {
 	int CONDITIONAL_EDGE__GENERATED_RULE = EXECUTION_EDGE__GENERATED_RULE;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL_EDGE__NAME = EXECUTION_EDGE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2893,22 +2911,13 @@ public interface ModelPackage extends EPackage {
 	int CONDITIONAL_EDGE__TO = EXECUTION_EDGE__TO;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITIONAL_EDGE__NAME = EXECUTION_EDGE_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Conditional Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONDITIONAL_EDGE_FEATURE_COUNT = EXECUTION_EDGE_FEATURE_COUNT + 1;
+	int CONDITIONAL_EDGE_FEATURE_COUNT = EXECUTION_EDGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.

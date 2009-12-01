@@ -459,7 +459,14 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="ExecutionEdgeFigure"
-          targetDecoration="//@figures.0/@figures.0"/>
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ExecutionEdgeNameFigure"
+            text=""/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DynamicApplicationElementSetFigure">
@@ -2032,4 +2039,9 @@
       figure="ArithmeticFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.57/@accessors.0"/>
+  <labels
+      name="ExecutionEdgeName"
+      figure="ExecutionEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
 </gmfgraph:Canvas>

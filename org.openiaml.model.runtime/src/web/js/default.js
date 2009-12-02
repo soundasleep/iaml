@@ -448,7 +448,7 @@ function xpathMatch(a, b) {
 	
 	// make sure we have id and path
 	if (id == null) {
-		throw new IamlJavascriptException("Cannot compare xpath: ID is null."); 
+		throw new IamlJavascriptException("Cannot compare xpath: ID is null. (" + a + ", " + b + ")"); 
 	}
 	if (ids == null) {
 		throw new IamlJavascriptException("Cannot compare xpath: List of results is null."); 
@@ -497,6 +497,30 @@ function throwJavascriptException(message) {
 	throw new IamlJavascriptException(message);
 	return false;
 }
+
+/**
+ * Represents a call stack.
+ */
+function CallStack() {
+	this.stack = new Array();
+	
+	this.history = new Array();
+	
+	this.pop = function() {
+		if (this.stack.length == 0)
+			throw new IamlJavascriptException("Ran out of stack: " + this.history);
+		
+		var s = this.stack.pop();
+		this.history.push(s);
+		return s;
+	}
+	
+	this.push = function(s) {
+		this.stack.push(s);
+	}
+}
+
+// ----- IAML domain concepts
 
 /**
  * Represents a Page: by ID and name

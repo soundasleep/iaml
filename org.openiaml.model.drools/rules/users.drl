@@ -266,12 +266,14 @@ rule "Create contents of 'permissions check' operation in a Page (session)"
 
 		# ok
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(check, check);
+		handler.setName(edge2, "pass");
 		handler.setFrom(edge2, opCall);
 		handler.setTo(edge2, finish);
 		queue.add(edge2, drools);
 		
 		# not ok	
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(check, check);
+		handler.setName(edge3, "fail");
 		handler.setFrom(edge3, opCall);
 		handler.setTo(edge3, cancel);
 		queue.add(edge3, drools);
@@ -319,12 +321,14 @@ rule "Create contents of 'permissions check' operation in a Page (page)"
 
 		# ok
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(check, check);
+		handler.setName(edge2, "pass");
 		handler.setFrom(edge2, opCall);
 		handler.setTo(edge2, finish);
 		queue.add(edge2, drools);
 		
 		# not ok	
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(check, check);
+		handler.setName(edge3, "fail");
 		handler.setFrom(edge3, opCall);
 		handler.setTo(edge3, cancel);
 		queue.add(edge3, drools);

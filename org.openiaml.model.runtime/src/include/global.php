@@ -384,3 +384,23 @@ function default_exception_handler($e) {
 	header("Location: $url");
 	die;
 }
+
+/**
+ * Represents a stack for function calls.
+ */
+class CallStack {
+
+	private $stack = array();
+	
+	public function pop() {
+		if (count($this->stack) == 0)
+			throw new IamlRuntimeException("Ran out of stack");
+		
+		return array_pop($this->stack);
+	}
+	
+	public function push($s) {
+		$this->stack[] = $s;
+	}
+
+}

@@ -37,24 +37,24 @@
 	«IF name=="xpathMatch"»
 		if (!xpathMatch(«EXPAND conditionInflows(php, currentPage) FOREACH inFlows SEPARATOR ","»)) {
 			«REM»continue expanding following conditions (if any)«ENDREM»
-			«FOREACH getFailEdges() AS e-»
+			«FOREACH getFailFlows() AS e-»
 				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 			«ENDFOREACH»
 		} else {
 			«REM»continue expanding following conditions (if any)«ENDREM»
-			«FOREACH getPassEdges() AS e-»
+			«FOREACH getPassFlows() AS e-»
 				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 			«ENDFOREACH»
 		}
 	«ELSEIF name=="emailAddress"»
 		if (!emailAddressMatch(«EXPAND conditionInflows(php, currentPage) FOREACH inFlows SEPARATOR ","»)) {
 			«REM»continue expanding following conditions (if any)«ENDREM»
-			«FOREACH getFailEdges() AS e-»
+			«FOREACH getFailFlows() AS e-»
 				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 			«ENDFOREACH»
 		} else {
 			«REM»continue expanding following conditions (if any)«ENDREM»
-			«FOREACH getPassEdges() AS e-»
+			«FOREACH getPassFlows() AS e-»
 				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
 			«ENDFOREACH»
 		}

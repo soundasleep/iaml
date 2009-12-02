@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -601,14 +602,30 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	/**
 	 * Assert that the given object is of the given class or higher.
 	 *
-	 * @param class1
-	 * @param object
+	 * @param class1 the expected class
+	 * @param object the object to check
 	 */
 	public void assertInstanceOf(Class<?> class1, Object object) {
 		if (class1.isInstance(object)) {
 			// ok
 		} else {
 			fail("Expected object instance '" + class1 + "', got '" + object.getClass() + "': " + object);
+		}
+	}
+	
+	/**
+	 * Assert that the given list of objects are of the given class or higher.
+	 *
+	 * @param class1 the expected class
+	 * @param objects the list of objects to check
+	 */
+	public void assertInstanceOf(Class<?> class1, Collection<?> objects) {
+		for (Object object : objects) {
+			if (class1.isInstance(object)) {
+				// ok
+			} else {
+				fail("Expected object instance '" + class1 + "', got '" + object.getClass() + "': " + object);
+			}
 		}
 	}
 	

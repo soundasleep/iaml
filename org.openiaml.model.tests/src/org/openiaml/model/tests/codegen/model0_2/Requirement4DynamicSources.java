@@ -22,7 +22,7 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(Requirement4DynamicSources.class, ROOT + "../examples/requirements/4-dynamic_sources.iaml");
+		root = loadAndCodegen(Requirement4DynamicSources.class, ROOT + "../examples/requirements/4-dynamic_sources.iaml", true);
 	}
 	
 	public void testRequirement() throws Exception {

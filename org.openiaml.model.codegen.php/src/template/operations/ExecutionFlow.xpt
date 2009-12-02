@@ -11,15 +11,80 @@
  * Option: Start new threads, though this could be challenging for Javascript, and it
  * will also introduce concurrency issues.  
  */
+# @implementation StartNode If a {@model StartNode} has more than one {@model ExecutionEdge} coming out of it, they will be executed sequentially. 
 «DEFINE executionFlow(model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
 	// flow starts here
-	«FOREACH outExecutions AS e-»
-		«EXPAND executionFlowStep(container, php) FOR e.to-»
+	/**
+	 * Since Javascript does not support GOTO, we must emulate this manually.
+	 * We also implement this in PHP to unify the approach.
+	 * 
+	 * TODO Ideally we would take the execution graph and translate it sensibly
+	 * into a correct structure of blocks, but this remains future work.
+	 */
+	// we emulate goto using an infinite loop of switch(pos)
+	«REM»initialise stack«ENDREM»
+	«IF php»
+		$call_stack = new CallStack();
+		$completed = false;
+	«ELSE»
+		var call_stack = new CallStack();
+		var completed = false;
+	«ENDIF»
+	
+	«REM»all of the initial outgoing executions are inserted onto the stack initially«ENDREM»
+	«FOREACH outExecutions AS e»
+		«EXPAND addStack(php) FOR e»
 	«ENDFOREACH»
+	
+	«REM»loop over stack until it is complete«ENDREM»
+	«IF php»
+		while (!$completed) {
+			$current_node = $call_stack->pop();
+			switch ($current_node) {
+	«ELSE»
+		while (!completed) {
+			var current_node = call_stack.pop();
+			switch (current_node) {
+	«ENDIF»
+	
+			«FOREACH allDestinations(this, {}) AS dest»
+				case "«safeName(dest)»":
+					«EXPAND executionFlowStep(container, php) FOR dest»
+					break;
+			«ENDFOREACH»
+			
+				default:
+					«IF php»
+						throw new IamlRuntimeException("Unexpected state: " . $current_node);
+					«ELSE»
+						throw new IamlJavascriptException("Unexpected state: " + current_node);
+					«ENDIF»
+				}
+			}
+	// all destinations 2:
+	/*
+	 * «allDestinations(this, {})»
+	 */
 «ENDDEFINE»
 
 «DEFINE executionFlow(model::visual::Page container, Boolean php) FOR model::ActivityNode-»
 	// nothing for an activity node
+«ENDDEFINE»
+
+/**
+ * Converts an ExecutionEdge into an operation on the call stack.
+ */
+«DEFINE addStack(Boolean php) FOR model::ExecutionEdge»
+	«IF php»$call_stack->push«ELSE»call_stack.push«ENDIF»
+	("«safeName(to)-»");
+«ENDDEFINE»
+
+«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR emf::EObject-»
+	/* disabled */
+	// all destinations 1:
+	/*
+	 * «allDestinations(this, {})»
+	 */
 «ENDDEFINE»
 
 /**
@@ -37,19 +102,21 @@
 		throw new IamlJavascriptException("«exceptionText»");
 		«ENDIF»
 	«ELSE»
-		// ignored cancel node "«this»"
+		// ignored cancel node "«this»" since it did not have an exception text
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
-	// start of operation
-	«FOREACH outExecutions AS e-»
-		«EXPAND executionFlowStep(container, php) FOR e.to-»
-	«ENDFOREACH»
+	«EXPAND exception FOR throwException("Should never have the executionFlowStep start at a StartNode: use executionFlow.")»
 «ENDDEFINE»
 
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::FinishNode-»
 	// operation finished successfully
+	«IF php»
+		$completed = true;
+	«ELSE»
+		completed = true;
+	«ENDIF»
 «ENDDEFINE»
 
 /**
@@ -91,7 +158,7 @@
 	«ENDIF»
 	
 	«FOREACH outExecutions AS e-»
-		«EXPAND executionFlowStep(container, php) FOR e.to-»
+		«EXPAND addStack(php) FOR e»
 	«ENDFOREACH»
 	
 	/* find the first join node, and continue code there */
@@ -100,6 +167,7 @@
 
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::JoinNode-»
 	// end of split operation path; wait for join node
+	// (the next step will pop off the call stack)
 «ENDDEFINE»
 
 «DEFINE findJoinNode(model::visual::Page container, Boolean php, model::operations::SplitNode split) FOR emf::EObject»
@@ -118,7 +186,7 @@
 	«ENDIF»
 	
 	«FOREACH outExecutions AS e-»
-		«EXPAND executionFlowStep(container, php) FOR e.to-»
+		«EXPAND addStack(php) FOR e»
 	«ENDFOREACH»	
 «ENDDEFINE»
 
@@ -126,9 +194,8 @@
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	// primitive operation "«name-»"
 	«EXPAND Contents::operationContents(container, php) FOR this-»
-	«FOREACH outExecutions AS e-»
-		«EXPAND executionFlowStep(container, php) FOR e.to-»
-	«ENDFOREACH»
+	
+	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
 	
 	// continue chained operations
 	«EXPAND continueChainedOperations(php) FOR this»
@@ -138,6 +205,8 @@
 «DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
 	// decision operation "«name-»"
 	«EXPAND Contents::operationContents(container, php) FOR this-»
+
+	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
 
 	// continue chained operations
 	«EXPAND continueChainedOperations(php) FOR this»
@@ -159,14 +228,14 @@
 		var function_queue = function(response) {
 		 	if (response == "ok") {
 				«REM»continue expanding following conditions (if any)«ENDREM»
-				«FOREACH getPassEdges() AS e-»
-					«EXPAND executionFlowStep(container, php) FOR e.to-»
+				«FOREACH getPassFlows() AS e-»
+					«EXPAND addStack(php) FOR e»
 				«ENDFOREACH»
 				old_function_queue_«safeName()»();
 		 	} else {
 				«REM»continue expanding following conditions (if any)«ENDREM»
-				«FOREACH getFailEdges() AS e-»
-					«EXPAND executionFlowStep(container, php) FOR e.to-»
+				«FOREACH getFailFlows() AS e-»
+					«EXPAND addStack(php) FOR e»
 				«ENDFOREACH»
 				old_function_queue_«safeName()»();
 			}
@@ -180,13 +249,13 @@
 		/* Condition flow for virtual operation '«name»' */
 		if (!«IF php»$result«ELSE»result«ENDIF») {
 			«REM»continue expanding following conditions (if any)«ENDREM»
-			«FOREACH getFailEdges() AS e-»
-				«EXPAND executionFlowStep(container, php) FOR e.to-»
+			«FOREACH getFailFlows() AS e-»
+				«EXPAND addStack(php) FOR e»
 			«ENDFOREACH»
 		} else {
 			«REM»continue expanding following conditions (if any)«ENDREM»
-			«FOREACH getPassEdges() AS e-»
-				«EXPAND executionFlowStep(container, php) FOR e.to-»
+			«FOREACH getPassFlows() AS e-»
+				«EXPAND addStack(php) FOR e»
 			«ENDFOREACH»
 		}
 	«ENDIF»
@@ -196,6 +265,7 @@
  * Continue operations chained onto the current one.
  * TODO more documentation required. When are chained conditions used?
  */
+# @implementation PrimitiveOperation,ExecutionEdge After a {@model PrimitiveOperation}, all outgoing {@model ExecutionEdge ExecutionEdges} are executed sequentially.
 «DEFINE continueChainedOperations(Boolean php) FOR model::PrimitiveOperation-»
 	«EXPAND continueChainedOperations(php) FOREACH outEdges»
 «ENDDEFINE»

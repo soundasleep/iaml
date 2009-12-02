@@ -1,0 +1,26 @@
+#summary Primitive decisions in IAML.
+#labels EndUser
+
+=Introduction=
+
+*[IamlDecisionConditions Decision Conditions]* are the fundamental building blocks of conditional blocks. Their intent is based on their _name_, and we summarise these operations below.
+
+Decision conditions have a fixed semantics and cannot be changed (without modifying IAML inference and code generation logic).
+
+*Also see* [IamlCompositeOperations] for an overview of pre-defined composite operations, and [IamlPrimitiveOperations] for an overview of the fundamental operations.
+
+==xpathMatch==
+
+  _TODO Incomplete documentation_
+
+==emailAddress==
+
+  _TODO Incomplete documentation_
+
+==is set?==
+
+|| *Sample model* || TODO ||
+|| *Runtime tests* || TODO ||
+|| *Added in* || [Model0_5 Model 0.4.1] ||
+
+This condition will be *true* if the incoming data flow variable has been set, *false* if not. For example, incoming properties stored within a session that have not been modified will return *false*. It only accepts incoming [ApplicationElementProperty]s.

@@ -16,3 +16,11 @@
 Allows for inline arithmetic expressions.
 
   _See [http://openiaml.org/model/Arithmetic]_
+
+==Changes==
+
+[http://openiaml.org/model/ExecutionEdge ExecutionEdges] can now have names; a [[http://openiaml.org/model/DecisionCondition DecisionCondition] will use the labels 'yes' or 'no' (also 'pass' or 'fail') in order to calculate the correct execution flow.
+
+All [ApplicationElementProperty]s now also create a condition called "X is set" in the container for the property. This is used in [SyncWires] to ensure that init/access does not overwrite the default (or existing) value if there is no value to replace it with.
+
+Added documentation on [IamlDecisionConditions].

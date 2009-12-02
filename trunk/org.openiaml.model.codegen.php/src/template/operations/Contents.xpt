@@ -42,16 +42,20 @@
 		«EXPAND exception FOR throwException("Unknown decision operation to expand '" + name + ": " + this)»
 	«ENDIF»
 	) {
-		// passed (exactly one pass)
+		// passes
 		«IF hasPassFlow(this)»
-			«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR passedExectionFlow().to»
+			«FOREACH getPassFlows() AS e-»
+				«EXPAND ExecutionFlow::addStack(php) FOR e»
+			«ENDFOREACH»
 		«ELSE»
 			// no pass flow
 		«ENDIF»
 	} else {
-		// failed (exactly one fail)
+		// fails
 		«IF hasFailFlow(this)»
-			«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR failedExectionFlow().to»
+			«FOREACH getFailFlows() AS e-»
+				«EXPAND ExecutionFlow::addStack(php) FOR e»
+			«ENDFOREACH»
 		«ELSE»
 			// no fail flow
 		«ENDIF»
@@ -177,7 +181,7 @@
 		to ajax calls and executed once the call is successful.
 	«ENDREM»
 	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR e.to-»
+		«EXPAND ExecutionFlow::addStack(php) FOR e»
 	«ENDFOREACH»
 	
 	«REM»
@@ -190,6 +194,11 @@
 		// we don't call additional events for «eContainer» 
 	«ENDIF»
 	}
+	«IF !php» else {
+		// we ignored a null parameter: set the operation as completed
+		// (so we don't fall off the stack)
+		completed = true;
+	}«ENDIF»
 «ENDDEFINE»
 
 /**
@@ -205,7 +214,7 @@
 
 	«REM»continue«ENDREM»
 	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR e.to-»
+		«EXPAND ExecutionFlow::addStack(php) FOR e»
 	«ENDFOREACH»
 «ENDDEFINE»
 
@@ -230,7 +239,7 @@
 
 	«REM»continue«ENDREM»
 	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR e.to-»
+		«EXPAND ExecutionFlow::addStack(php) FOR e»	
 	«ENDFOREACH»
 «ENDDEFINE»
 

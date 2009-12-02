@@ -156,21 +156,28 @@ startNodeCondition(model::CompositeCondition this) :
 
 /* get the next execution flow for a decision operation that has passed */
 passedExectionFlow(model::operations::DecisionOperation this) :	
-	outExecutions.selectFirst( e | isFailFlow(e) );
+	outExecutions.selectFirst( e | isPassFlow(e) );
 
 /* get the next execution flow for a decision operation that has failed */
 failedExectionFlow(model::operations::DecisionOperation this) :
-	outExecutions.selectFirst( e | isPassFlow(e) );
+	outExecutions.selectFirst( e | isFailFlow(e) );
 
 hasFailFlow(model::operations::DecisionOperation this) :
-	outExecutions.select( e | isFailFlow(e) ).size > 0; 
+	getFailFlows(this).size > 0; 
 hasPassFlow(model::operations::DecisionOperation this) :
-	outExecutions.select( e | isPassFlow(e) ).size > 0; 
+	getPassFlows(this).size > 0;
 
 isFailFlow(model::ExecutionEdge e) :
-	model::operations::CancelNode.isInstance(e.to) || e.name.toLowerCase().startsWith("n") || e.name.toLowerCase().startsWith("f");
+	e.name != null && (e.name.toLowerCase().startsWith("n") || e.name.toLowerCase().startsWith("f"));
 isPassFlow(model::ExecutionEdge e) :
 	!isFailFlow(e);
+
+/* get failed/passed out edges from a given DecisionCondition */
+getFailFlows(model::ExecutionEdgesSource this):
+	outExecutions.select( e | isFailFlow(e) );
+
+getPassFlows(model::ExecutionEdgesSource this):
+	outExecutions.select( e | isPassFlow(e) );
 
 /** does this operation have a "fail" edge? */
 getFailEdge(model::CompositeOperation this) :
@@ -241,14 +248,6 @@ isInputTextField(emf::EObject this) :
 
 isPropertiesFile(model::DomainStore store) :
 	store != null && store.type != null && store.type.toString() == "PROPERTIES_FILE";
-
-/* get failed/passed out edges from a given DecisionCondition */
-getFailEdges(model::ExecutionEdgesSource this):
-	outExecutions.select( e | model::operations::CancelNode.isInstance(e.to) );
-	/* TODO one day, this will also include OutExecutions[name=cancel|fail|N] */
-
-getFailEdges(model::ExecutionEdgesSource this):
-	outExecutions.toSet().removeAll( getFailEdges() );	/* everything that didn't fail */	
 
 /* get the root InternetApplication */
 model::InternetApplication getRoot(emf::EObject this) :
@@ -354,6 +353,27 @@ model::DomainAttribute getPrimaryKey(emf::EObject this) :
 
 List[model::DomainObject] allSubtypes(model::DomainObject this):
 	inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject).collect(e|allSubtypes(e)).flatten().add(this);
+
+model::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject this) :
+	(model::ExecutionEdgesSource) this;
+
+/**
+ * Get a list of all the possible execution states from the given node.
+ * Cached to prevent loops causing infinite loops in logic.
+ */
+// for a destination that is actually a source: recurse
+List[model::ExecutionEdgeDestination] allDestinations(model::ExecutionEdgesSource this, Collection[model::ExecutionEdgesSource] visited) :
+	if visited.contains(this) then
+		{}
+	else
+		outExecutions.to.toSet().addAll (
+			outExecutions.to.collect(e | allDestinations(e, visited.toSet().add(this)) )
+		).flatten()
+	;
+
+// default for an execution edge destination: empty
+List[model::ExecutionEdgeDestination] allDestinations(Object this, Collection[model::ExecutionEdgesSource] visited) :
+	{};
 
 /** 
  * a hack way to create backtrace-able errors

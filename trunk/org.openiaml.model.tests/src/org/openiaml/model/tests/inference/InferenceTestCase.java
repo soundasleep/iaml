@@ -682,7 +682,24 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public SyncWire assertHasSyncWire(EObject container, WireEdgesSource element1, WireEdgeDestination element2, String name) throws JaxenException {
-		return (SyncWire) assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class).iterator().next();
+		Set<WireEdge> x = assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class);
+		assertEquals(1, x.size());
+		SyncWire sw = (SyncWire) x.iterator().next();
+		assertEquals(name, sw.getName());
+		return sw;
+	}
+	
+	/**
+	 * Assert there exists only one bidirectional SyncWire between
+	 * the given elements, with any name.
+	 *
+	 * @return The element found
+	 */
+	public SyncWire assertHasSyncWire(EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
+		Set<WireEdge> x = assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class);
+		assertEquals(1, x.size());
+		SyncWire sw = (SyncWire) x.iterator().next();
+		return sw;
 	}
 	
 	/**
@@ -727,6 +744,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
 				RunInstanceWire.class, name);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional RunInstanceWire between
+	 * the given elements, with any name.
+	 *
+	 * @return The element found
+	 */
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
+				RunInstanceWire.class);
 	}
 	
 	/**
@@ -781,6 +809,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public ConditionWire assertHasConditionWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (ConditionWire) assertHasWireFromTo(container, from, to, 
 				ConditionWire.class, name);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional ConditionWire between
+	 * the given elements. Ignores the name.
+	 *
+	 * @return The element found
+	 */
+	public ConditionWire assertHasConditionWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		return (ConditionWire) assertHasWireFromTo(container, from, to, 
+				ConditionWire.class);
 	}
 	
 	/**

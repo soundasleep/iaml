@@ -77,7 +77,13 @@ public class IamlRuntimeLibrariesPlugin extends Plugin implements IFileCopyListe
 			
 			// copy it over
 			createParentsRecursively(towrite.getParent(), new NullProgressMonitor());
-			towrite.create(url.openStream(), true, new NullProgressMonitor());
+			if (towrite.exists()) {
+				// overwrite it
+				towrite.setContents(url.openStream(), true, true, new NullProgressMonitor());
+			} else {
+				// copy it
+				towrite.create(url.openStream(), true, new NullProgressMonitor());
+			}
 			
 			// notify listeners
 			fileCopied( new File(url.toExternalForm()), towrite.getLocation().toFile() );

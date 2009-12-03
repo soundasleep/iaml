@@ -88,6 +88,7 @@ define("CURRENT_PAGE", "«id»");
 
 // allow remote execution of operations
 if (require_get("operation", "")) {
+	// TODO may be a security problem
 	$operation_name = "do_" . require_get("operation");
 	$arg0 = require_get("arg0");
 	$arg1 = require_get("arg1");
@@ -95,13 +96,17 @@ if (require_get("operation", "")) {
 	// any running functions? (prevent infinite loops)
 	register_running_functions();
 
-	log_message("page «name»: remote operation $operation_name($arg0, $arg1)");
+	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1')");
 	$operation_name($arg0, $arg1);
-	log_message("page «name»: remote operation $operation_name($arg0, $arg1) complete");
+	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1') complete");
 
 	echo "ok";
 	die;
 }
+
+log_message("«id».php: User browsing started");
+
+log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -259,6 +264,10 @@ if (require_get("operation", "")) {
 	
 </body>
 </html>
+
+<?php
+log_message("«name».php: User browsing finished");
+?>
 	«ENDFILE»
 «ENDDEFINE»
 

@@ -5,6 +5,13 @@
  *
  */
 
+/**
+ * We need to be able to use SID in the URL; remote URL calls require it 
+ * (see call_remote_event.php for example).
+ * The default setting was changed in PHP 5.3.0.
+ */
+ini_set("session.use_only_cookies", false);
+
 session_start();
 ob_start();		/* we will implicitly flush at the end (needed for redirections when input_text_field values cannot be found) */
 set_exception_handler('default_exception_handler');			/* default exception handler */
@@ -18,7 +25,8 @@ function log_message($msg, $also_debug = true) {
 	$msg = "[$log_unique_id] $msg";		// append a unique ID to help us track requests
 
 	$fp = fopen("php.log", "a");
-	fwrite($fp, date("Y-m-d H:i:s") . " header.php: $msg\n");
+	$msg_indent = str_replace("\n", "\n\t", $msg);
+	fwrite($fp, date("Y-m-d H:i:s") . " $msg_indent\n");
 	fclose($fp);
 
 	// also echo to debug

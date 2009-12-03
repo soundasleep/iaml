@@ -27,11 +27,14 @@ if (!isset($existing_pages[$container])) {
 }
 
 /* let's call it through a HTTP request */
-$url = get_request_base() . "/" . $existing_pages[$container]
-	. "?operation=" . urlencode($operation_name) . "&arg0=" . urlencode($arg0) . "&arg1=" . urlencode($arg1) . "&running=" . urlencode($running);
+$url = get_request_base() . "/" . $existing_pages[$container];
 
 // copy over session parameters
-$url .= "&" . get_sid();		// directly from PHP, so we don't need to set session_id() ourselves
+// session ID needs to come *first* in the URL parameter list
+$url .= "?" . get_sid();		// directly from PHP, so we don't need to set session_id() ourselves
+
+// rest of url
+$url .= "&operation=" . urlencode($operation_name) . "&arg0=" . urlencode($arg0) . "&arg1=" . urlencode($arg1) . "&running=" . urlencode($running);
 
 log_message("Remote call to: $url");
 

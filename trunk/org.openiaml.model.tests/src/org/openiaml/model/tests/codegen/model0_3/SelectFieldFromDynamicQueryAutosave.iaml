@@ -7,7 +7,7 @@
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.ac" name="edit name" inEdges="wires.12109c6249b.5e"/>
     <children xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.1dc" name="name" outEdges="wires.12109c6249b.5e" inEdges="wires.12109c6249b.5f" autosave="false">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1213cee9bad.f4" id="model.1213cee9b4f.415" name="save"/>
+      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1213cee9bad.f4" id="model.1213cee9b4f.415" name="save"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac" name="sync"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1213cee9bad.158" name="manually save" outEdges="wires.1213cee9bad.f4">

@@ -252,5 +252,32 @@ public class DroolsHelperFunctions {
 		}
 		return true;
 	}
+	
+	/**
+	 * Does the given session directly or indirectly contain the given object? 
+	 * 
+	 * @param session the session to check against
+	 * @param prop the object to investigate
+	 * @return true if the given session contains the given property to some degree
+	 */
+	public boolean sessionContains(Session session, EObject prop) {
+		EObject obj = prop;
+		int i = 0;
+		while (i < 1000) {
+			i++;
+			if (obj == null) {
+				// we ran out of hierarchy
+				return false;
+			} else if (obj.equals(session)) {
+				// 'prop' is contained directly or indirectly by the given session 
+				return true;
+			} else {
+				// recurse up the containment
+				obj = obj.eContainer();
+			}
+		}
+		
+		throw new RuntimeException("Possible infinite loop detected in containment hierarchy: " + prop);
+	}
 
 }

@@ -77,7 +77,11 @@
 			«EXPAND Variables::temporaryVariable(php) FOREACH variables.typeSelect(model::TemporaryVariable)»			
 			
 			// execute the operation
-			«EXPAND ExecutionFlow::executionFlow(container, php) FOR startNode()-»
+			«IF startNode() == null»
+				«EXPAND exception FOR throwException("Operation " + this + " had no start node")»
+			«ELSE»
+				«EXPAND ExecutionFlow::executionFlow(container, php) FOR startNode()-»
+			«ENDIF»
 
 			// continue chained operations
 			«EXPAND ExecutionFlow::continueChainedOperations(php) FOR this»

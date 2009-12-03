@@ -13,6 +13,10 @@
  */
 # @implementation StartNode If a {@model StartNode} has more than one {@model ExecutionEdge} coming out of it, they will be executed sequentially. 
 «DEFINE executionFlow(model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
+	«EXPAND executionFlowInternal(container, php, outExecutions) FOR this»
+«ENDDEFINE»
+
+«DEFINE executionFlowInternal(model::visual::Page container, Boolean php, List[model::ExecutionEdge] edges) FOR model::ExecutionEdgesSource-»
 	// flow starts here
 	/**
 	 * Since Javascript does not support GOTO, we must emulate this manually.
@@ -24,32 +28,32 @@
 	// we emulate goto using an infinite loop of switch(pos)
 	«REM»initialise stack«ENDREM»
 	«IF php»
-		$call_stack = new CallStack();
-		$completed = false;
+		$call_stack_«safeName()» = new CallStack();
+		$completed_«safeName()» = false;
 	«ELSE»
-		var call_stack = new CallStack();
-		var completed = false;
+		var call_stack_«safeName()» = new CallStack();
+		var completed_«safeName()» = false;
 	«ENDIF»
 	
 	«REM»all of the initial outgoing executions are inserted onto the stack initially«ENDREM»
-	«FOREACH outExecutions AS e»
-		«EXPAND addStack(php) FOR e»
+	«FOREACH edges AS e»
+		«EXPAND addStack(this, php) FOR e»
 	«ENDFOREACH»
 	
 	«REM»loop over stack until it is complete«ENDREM»
 	«IF php»
-		while (!$completed) {
-			$current_node = $call_stack->pop();
-			switch ($current_node) {
+		while (!$completed_«safeName()») {
+			$current_node_«safeName()» = $call_stack_«safeName()»->pop();
+			switch ($current_node_«safeName()») {
 	«ELSE»
-		while (!completed) {
-			var current_node = call_stack.pop();
-			switch (current_node) {
+		while (!completed_«safeName()») {
+			var current_node_«safeName()» = call_stack_«safeName()».pop();
+			switch (current_node_«safeName()») {
 	«ENDIF»
 	
 			«FOREACH allDestinations(this, {}) AS dest»
 				case "«safeName(dest)»":
-					«EXPAND executionFlowStep(container, php) FOR dest»
+					«EXPAND executionFlowStep(this, container, php) FOR dest»
 					break;
 			«ENDFOREACH»
 			
@@ -74,12 +78,12 @@
 /**
  * Converts an ExecutionEdge into an operation on the call stack.
  */
-«DEFINE addStack(Boolean php) FOR model::ExecutionEdge»
-	«IF php»$call_stack->push«ELSE»call_stack.push«ENDIF»
+«DEFINE addStack(model::ExecutionEdgesSource start, Boolean php) FOR model::ExecutionEdge»
+	«IF php»$call_stack_«safeName(start)»->push«ELSE»call_stack_«safeName(start)».push«ENDIF»
 	("«safeName(to)-»");
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR emf::EObject-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR emf::EObject-»
 	/* disabled */
 	// all destinations 1:
 	/*
@@ -90,11 +94,11 @@
 /**
  * The individual steps within a flow.
  */
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::ExecutionEdgeDestination-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::ExecutionEdgeDestination-»
 	«EXPAND exception FOR throwException("Unknown operation contents node: " + this)»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::CancelNode-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::CancelNode-»
 	«IF exceptionText.length > 0»
 		«IF php»
 		throw new IamlRuntimeException("«exceptionText»");
@@ -106,16 +110,16 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
 	«EXPAND exception FOR throwException("Should never have the executionFlowStep start at a StartNode: use executionFlow.")»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::FinishNode-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::FinishNode-»
 	// operation finished successfully
 	«IF php»
-		$completed = true;
+		$completed_«safeName(start)» = true;
 	«ELSE»
-		completed = true;
+		completed_«safeName(start)» = true;
 	«ENDIF»
 «ENDDEFINE»
 
@@ -138,8 +142,30 @@
  *       |-> d ----> e ->|
  */ 
 # @implementation SplitNode,JoinNode Currently execution split is implemented in a single threaded way; each {@model ExecutionEdge execution flow} is executed sequentially until all flows are complete. 
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::SplitNode-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::SplitNode-»
 	/* a split node */
+	
+	«REM»
+		we emulate split nodes by adding additional layers of
+		call stacks, in a similar way to StartNode, for each
+		outgoing edge
+	«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND executionFlowInternal(container, php, {e}) FOR this» 
+	«ENDFOREACH»
+	
+	«REM»
+		find the target join node for this split node; this is
+		where execution will continue (and set the next step
+		in the call stack)
+	«ENDREM»
+	// final join node = «findFinalJoinNode(this)»
+	«IF findFinalJoinNode(this) != null»
+		«EXPAND executionFlowStep(start, container, php) FOR findFinalJoinNode(this)»
+	«ELSE»
+		«EXPAND exception FOR throwException("No join node found for split node '" + this + "'")»
+	«ENDIF» 
+	
 	«REM»
 		disable function_queue until we get to the end.
 		this is necessary, otherwise all split functions in
@@ -151,49 +177,30 @@
 		executes, so the other "set" operations would not complete.	
 	«ENDREM»
 	«IF !php»
+		/*
+		 * TODO not sure if this is necessary anymore
 		var function_queue_split_«safeName()» = function_queue;
 		var function_queue_queued_split_«safeName()» = function_queue_queued;
-		function_queue = function() { /* empty */ };
+		function_queue = function() { };
 		function_queue_queued = false;
+		*/
 	«ENDIF»
-	
-	«FOREACH outExecutions AS e-»
-		«EXPAND addStack(php) FOR e»
-	«ENDFOREACH»
-	
-	/* find the first join node, and continue code there */
-	«EXPAND findJoinNode(container, php, this) FOR outExecutions.first().to»
+
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::JoinNode-»
-	// end of split operation path; wait for join node
-	// (the next step will pop off the call stack)
-«ENDDEFINE»
-
-«DEFINE findJoinNode(model::visual::Page container, Boolean php, model::operations::SplitNode split) FOR emf::EObject»
-«ENDDEFINE»
-
-«DEFINE findJoinNode(model::visual::Page container, Boolean php, model::operations::SplitNode split) FOR model::ExecutionEdgesSource»
-	«EXPAND findJoinNode(container, php, split) FOR outExecutions.first().to»
-«ENDDEFINE»
-
-«DEFINE findJoinNode(model::visual::Page container, Boolean php, model::operations::SplitNode split) FOR model::operations::JoinNode»
-	/* found end of join node; continue execution */
-	«REM»re-enable the function queue from before the split«ENDREM»
-	«IF !php»
-		function_queue = function_queue_split_«safeName(split)»;
-		function_queue_queued = function_queue_queued_split_«safeName(split)»;
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::JoinNode-»
+	// split finished successfully
+	«IF php»
+		$completed_«safeName(start)» = true;
+	«ELSE»
+		completed_«safeName(start)» = true;
 	«ENDIF»
-	
-	«FOREACH outExecutions AS e-»
-		«EXPAND addStack(php) FOR e»
-	«ENDFOREACH»	
 «ENDDEFINE»
 
 /* a primitive operation: carry on */
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	// primitive operation "«name-»"
-	«EXPAND Contents::operationContents(container, php) FOR this-»
+	«EXPAND Contents::operationContents(start, container, php) FOR this-»
 	
 	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
 	
@@ -202,9 +209,9 @@
 «ENDDEFINE»
 
 /* a decision operation: expandOperationContents will continue the execution flow */
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
 	// decision operation "«name-»"
-	«EXPAND Contents::operationContents(container, php) FOR this-»
+	«EXPAND Contents::operationContents(start, container, php) FOR this-»
 
 	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
 
@@ -213,7 +220,7 @@
 «ENDDEFINE»
 
 /* an operation call: expand for any parameters */
-«DEFINE executionFlowStep(model::visual::Page container, Boolean php) FOR model::operations::OperationCallNode-»
+«DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::OperationCallNode-»
 	// virtual operation call "«name-»"
 
 	«REM»
@@ -229,13 +236,13 @@
 		 	if (response == "ok") {
 				«REM»continue expanding following conditions (if any)«ENDREM»
 				«FOREACH getPassFlows() AS e-»
-					«EXPAND addStack(php) FOR e»
+					«EXPAND addStack(start, php) FOR e»
 				«ENDFOREACH»
 				old_function_queue_«safeName()»();
 		 	} else {
 				«REM»continue expanding following conditions (if any)«ENDREM»
 				«FOREACH getFailFlows() AS e-»
-					«EXPAND addStack(php) FOR e»
+					«EXPAND addStack(start, php) FOR e»
 				«ENDFOREACH»
 				old_function_queue_«safeName()»();
 			}
@@ -250,12 +257,12 @@
 		if (!«IF php»$result«ELSE»result«ENDIF») {
 			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getFailFlows() AS e-»
-				«EXPAND addStack(php) FOR e»
+				«EXPAND addStack(start, php) FOR e»
 			«ENDFOREACH»
 		} else {
 			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getPassFlows() AS e-»
-				«EXPAND addStack(php) FOR e»
+				«EXPAND addStack(start, php) FOR e»
 			«ENDFOREACH»
 		}
 	«ENDIF»

@@ -70,7 +70,7 @@ rule "Create 'save' operation for DomainObjectInstances"
 		
 	then
 		# create a new one
-		CompositeOperation op = handler.generatedCompositeOperation(instance, instance);
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance);
 		handler.setName(op, "save");
 		queue.add(op, drools);
 

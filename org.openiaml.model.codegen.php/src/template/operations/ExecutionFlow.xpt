@@ -146,6 +146,45 @@
 	/* a split node */
 	
 	«REM»
+		disable function_queue until we get to the end.
+		this is necessary, otherwise all split functions in
+		here will call the same function_queue multiple times.
+	
+		one side effect of this is that any splitted "set" operations
+		will only get to the first "set" operation before
+		the function queue (which may be a redirect to another page)
+		executes, so the other "set" operations would not complete.	
+	«ENDREM»
+	«IF !php»
+		«REM»
+		// disable function queue over split
+		var function_queue_split_«safeName()» = function_queue;
+		var function_queue_queued_split_«safeName()» = function_queue_queued;
+		function_queue = function() { };
+		function_queue_queued = false;
+		«ENDREM»
+
+		/* we wrap up the function queue in N layers, so we
+		 can progressively unwrap it as it is executed */
+		
+		var function_queue_wrapped_«safeName()» = function_queue;
+		var function_queue_wrapped_«safeName()»_count = «outExecutions.size»;
+		
+		function_queue = function() {
+			function_queue_wrapped_«safeName()»_count--;
+			
+			if (function_queue_wrapped_«safeName()»_count == 0) {
+				function_queue_wrapped_«safeName()»();	// execute it
+			} else if (function_queue_wrapped_«safeName()»_count < 0) {
+				throw new IamlJavascriptException("Ran out of function queue wrapping: «this»");
+			} else {
+				// expected
+			}
+		}
+	«ENDIF»
+	
+		
+	«REM»
 		we emulate split nodes by adding additional layers of
 		call stacks, in a similar way to StartNode, for each
 		outgoing edge
@@ -164,27 +203,15 @@
 		«EXPAND executionFlowStep(start, container, php) FOR findFinalJoinNode(this)»
 	«ELSE»
 		«EXPAND exception FOR throwException("No join node found for split node '" + this + "'")»
-	«ENDIF» 
+	«ENDIF»
 	
 	«REM»
-		disable function_queue until we get to the end.
-		this is necessary, otherwise all split functions in
-		here will call the same function_queue multiple times.
-	
-		one side effect of this is that any splitted "set" operations
-		will only get to the first "set" operation before
-		the function queue (which may be a redirect to another page)
-		executes, so the other "set" operations would not complete.	
-	«ENDREM»
 	«IF !php»
-		/*
-		 * TODO not sure if this is necessary anymore
-		var function_queue_split_«safeName()» = function_queue;
-		var function_queue_queued_split_«safeName()» = function_queue_queued;
-		function_queue = function() { };
+		// restore function queue after split
+		function_queue = function_queue_split_«safeName()»;
 		function_queue_queued = false;
-		*/
 	«ENDIF»
+	«ENDREM»
 
 «ENDDEFINE»
 

@@ -375,6 +375,18 @@ List[model::ExecutionEdgeDestination] allDestinations(model::ExecutionEdgesSourc
 List[model::ExecutionEdgeDestination] allDestinations(Object this, Collection[model::ExecutionEdgesSource] visited) :
 	{};
 
+model::operations::JoinNode findFinalJoinNode(model::operations::SplitNode this) :
+	findFinalJoinNode(outExecutions.to.selectFirst( t | findFinalJoinNode(t) != null));
+
+model::operations::JoinNode findFinalJoinNode(emf::EObject this) :
+	null;
+
+model::operations::JoinNode findFinalJoinNode(model::ExecutionEdgesSource this) :
+	findFinalJoinNode(outExecutions.to.selectFirst( t | findFinalJoinNode(t) != null));
+
+model::operations::JoinNode findFinalJoinNode(model::operations::JoinNode this) :
+	this;
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

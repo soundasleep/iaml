@@ -30,5 +30,32 @@
 	«ENDIF»
 «ENDDEFINE»
 
+/**
+ * Is the current remote value set?
+ */
+«DEFINE remoteValueIsSet(boolean php, model::ApplicationElementProperty property) FOR emf::EObject»
+	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
+«ENDDEFINE»
+
+«DEFINE remoteValueIsSet(boolean php, model::ApplicationElementProperty property) FOR model::DomainAttribute»
+	«IF php»
+		«EXPAND exception FOR throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
+	«ELSE»
+		«IF isPropertiesFile(getDomainStore(this))»
+			«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValueIsSet(property) FOR this»
+		«ELSE»
+			«EXPAND template::domain::database::DatabaseSource::remoteDatabaseValueIsSet(property) FOR this»
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE remoteValueIsSet(boolean php, model::ApplicationElementProperty property) FOR model::DomainAttributeInstance»
+	«IF php»
+		has_attribute_instance_«safeName()-»()
+	«ELSE»
+		"<?php echo htmlspecialchars(has_attribute_instance_«safeName()-»() ? "true" : "false"); ?>"
+	«ENDIF»
+«ENDDEFINE»
+
 «DEFINE exception FOR Object»
 «ENDDEFINE»

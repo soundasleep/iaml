@@ -108,5 +108,20 @@
 	parse_float_or_zero(«EXPAND dataSource(false, currentPage) FOR this»)
 «ENDDEFINE»
 
+/**
+ * Data sources - are the sources set? Only supports ApplicationElementProperty.
+ *
+ * @implementation DecisionCondition The 'is set?' {@model DecisionCondition} 
+ *	only supports incoming {@model ApplicationElementProperty ApplicationElementProperties}
+ *	as {@model DataFlowEdge parameters}.   
+ */
+«DEFINE isSet(Boolean php, model::visual::Page currentPage) FOR model::DataFlowEdgesSource»
+	«EXPAND exception FOR throwException("Unknown data flow edge source for isSet: " + this)»
+«ENDDEFINE»
+
+«DEFINE isSet(Boolean php, model::visual::Page currentPage) FOR model::ApplicationElementProperty»
+	«EXPAND template::operations::Parameters::isSetParameter(php, currentPage) FOR this»
+«ENDDEFINE»
+
 «DEFINE exception FOR Object»
 «ENDDEFINE»

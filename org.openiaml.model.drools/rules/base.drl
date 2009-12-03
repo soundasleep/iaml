@@ -50,6 +50,9 @@ rule "Create field value for input text field"
 	then
 		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(f, f);
 		handler.setName(fieldValue, "fieldValue");
+		// set default to "" - disabled for now, as we should get an error
+		// before we access an undefined variable
+		// handler.setValue(fieldValue, ModelPackage.eINSTANCE.getApplicationElementProperty_DefaultValue(), "");
 		queue.add(fieldValue, drools);
 		
 end
@@ -68,4 +71,70 @@ rule "Create field value for domain attribute"
 		handler.setName(fieldValue, "fieldValue");
 		queue.add(fieldValue, drools);
 		
+end
+
+/**
+ * @inference ApplicationElementProperty All {@model ApplicationElementProperty ApplicationElementProperties}
+ * 		will have a {@model CompositeCondition} created called "is set".
+ */
+rule "ApplicationElementProperties will also have a related 'is set' condition"
+	when
+		container : ContainsConditions ( )
+		value : ApplicationElementProperty ( eContainer == container )
+		
+		not ( Condition( eval(name.equals(value.getName() + " is set")), eContainer == container ))
+	
+	then
+		CompositeCondition cond = handler.generatedCompositeCondition((GeneratesElements) container, container);
+		handler.setName(cond, value.getName() + " is set");
+		queue.add(cond, drools);
+
+end
+
+rule "Create contents of 'X is set' operation"
+	when
+		container : ContainsConditions ( )
+		value : ApplicationElementProperty ( eContainer == container )
+		
+		o : CompositeCondition( eval(name.equals(value.getName() + " is set")), eContainer == container )
+		
+		not ( StartNode ( eContainer == o ))
+	
+	then
+		
+		DecisionCondition decision = handler.generatedDecisionCondition(o, o);
+		handler.setName(decision, "is set?");
+		queue.add(decision, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+
+		CancelNode cancel = handler.generatedCancelNode(o, o);
+		queue.add(cancel, drools);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, value);
+		handler.setTo(data1, decision);
+		queue.add(data1, drools);
+
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, decision);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setName(edge2, "yes");
+		handler.setFrom(edge2, decision);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
+		handler.setName(edge3, "no");
+		handler.setFrom(edge3, decision);
+		handler.setTo(edge3, cancel);
+		queue.add(edge3, drools);
+
 end

@@ -30,10 +30,10 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getCompositeCondition()
- * @model annotation="http://openiaml.org/comment comment='added in 0.2\r\n_shouldnt_properties removed in 0.4'"
+ * @model annotation="http://openiaml.org/comment comment='added in 0.2\r\n_shouldnt_properties removed in 0.4\r\nContainsOperations added in 0.4.1'"
  * @generated
  */
-public interface CompositeCondition extends ContainsConditions, Condition, GeneratesElements {
+public interface CompositeCondition extends ContainsConditions, Condition, GeneratesElements, ContainsOperations {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ActivityNode}.

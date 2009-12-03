@@ -507,8 +507,11 @@ function CallStack() {
 	this.history = new Array();
 	
 	this.pop = function() {
-		if (this.stack.length == 0)
+		if (this.stack.length == 0) {
+			ajaxIncrement(); // prevent other events from executing
+			alert("Ran out of stack: " + this.history);
 			throw new IamlJavascriptException("Ran out of stack: " + this.history);
+		}
 		
 		var s = this.stack.pop();
 		this.history.push(s);

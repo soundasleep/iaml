@@ -34,6 +34,7 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
@@ -42,6 +43,7 @@ import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
@@ -141,6 +143,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
+	 * PrimitiveOperation.
+	 *
+	 * @return The element found
+	 */
+	public PrimitiveOperation assertHasPrimitiveOperation(ContainsOperations element, String string) throws JaxenException {
+		return (PrimitiveOperation) assertHasOperation(element, string);
+	}
+
+	/**
+	 * Assert that the given element contains the given
 	 * Condition.
 	 *
 	 * @return The element found
@@ -157,6 +169,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public CompositeCondition assertHasCompositeCondition(ContainsConditions element, String string) throws JaxenException {
 		return (CompositeCondition) assertHasCondition(element, string);
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * CompositeCondition.
+	 *
+	 * @return The element found
+	 */
+	public DecisionCondition assertHasDecisionCondition(ContainsConditions element, String string) throws JaxenException {
+		return (DecisionCondition) assertHasCondition(element, string);
 	}
 
 	/**

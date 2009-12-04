@@ -31,7 +31,7 @@ public class CrocopatTestCase extends TestCase {
 		
 		VerificationEngine engine = new VerificationEngine();
 		IStatus result = engine.verify(model, new NullProgressMonitor());
-		ModelInferenceTestCase.assertStatusIsOK(result);
+		ModelInferenceTestCase.assertStatusIsNotOK(result);
 	
 		// there should be violations
 		List<VerificationViolation> violations = engine.getViolations();

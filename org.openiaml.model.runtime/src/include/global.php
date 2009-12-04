@@ -13,8 +13,34 @@
 ini_set("session.use_only_cookies", false);
 
 session_start();
-ob_start();		/* we will implicitly flush at the end (needed for redirections when input_text_field values cannot be found) */
+ob_start('ob_error_handler');		/* we will implicitly flush at the end (needed for redirections when input_text_field values cannot be found) */
 set_exception_handler('default_exception_handler');			/* default exception handler */
+
+/**
+ * If a fatal error occurs in PHP, we cannot catch it with a user-defined
+ * exception handler or error handler. Using this, we can catch these errors
+ * anyway.
+ *
+ * We need to do this so that fatal errors return a 500 header, not just a
+ * 200 etc. This solves the failing test case runtime.server.PhpMethodsTest#testMissingFunction().
+ *
+ * If a fatal error occurs, we throw an exception.
+ */
+function ob_error_handler($output) {
+	if ($error = error_get_last()) {
+		switch ($error['type']) {
+			case E_ERROR: 
+			case E_CORE_ERROR:
+			case E_COMPILE_ERROR:
+			case E_USER_ERROR:
+				header("HTTP/1.0 500 Fatal error");
+				return "<b>A fatal error occured:</b> $error[message] at $error[file]:$error[line]";
+		}
+	}
+	
+	// otherwise, return the output as normal
+	return $output;
+}
 
 require("databases.php");
 require("first_class_types.php");

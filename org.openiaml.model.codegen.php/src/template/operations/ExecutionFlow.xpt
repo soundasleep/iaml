@@ -246,7 +246,14 @@
 	«EXPAND continueChainedOperations(php) FOR this»
 «ENDDEFINE»
 
-/* an operation call: expand for any parameters */
+/**
+ * An operation call: expand for any parameters.
+ *
+ * @operational OperationCall The result from a {@model OperationCall} can be used to 
+ *    execute conditional {@model ExecutionEdge execution paths}.
+ * @operational OperationCall If a {@model OperationCall} does not have any explicit pass/fail
+ *    {@model ExecutionEdge ExecutionEdges} defined, then the result value is ignored.
+ */
 «DEFINE executionFlowStep(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::OperationCallNode-»
 	// virtual operation call "«name-»"
 

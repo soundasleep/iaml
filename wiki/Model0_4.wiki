@@ -13,7 +13,7 @@ This model release adds a lot of important model elements to the modelling langu
 
 ==Documentation==
 
-There is now an experimental documentation source for model elements, available online at [http://openiaml.org/model]. Model elements now have documentation (issue 39) and this documentation is generated automatically. In the future, previous model versions will be migrated to this new format.
+There is now an experimental documentation source for model elements, available online at [http://openiaml.org/model] and described briefly at [ModelDoc]. Model elements now have documentation (issue 39) and this documentation is generated automatically. In the future, previous model versions will be migrated to this new format.
 
 An [Installation installation guide] has been written (issue 2) and a [HelloWorld simple tutorial] has also been written (issue 1), along with screenshots (issue 97).
 

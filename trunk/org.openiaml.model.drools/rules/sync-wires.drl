@@ -25,7 +25,7 @@ rule "Sync wires between objects should create sync wires between all elements i
 		p2 : ApplicationElement(this != p1) from source.to
 		
 		e1 : ApplicationElement( eContainer == p1 )
-		e2 : ApplicationElement( eContainer == p2, eval(functions.syncMatches(e1, e2)) )
+		e2 : ApplicationElement( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
 	
 		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
 		
@@ -257,7 +257,7 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 		
 		# the elements contained
 		e1 : ApplicationElement( eContainer == source )
-		e2 : ApplicationElement( eContainer == target, eval(functions.syncMatches(e1, e2)) )
+		e2 : ApplicationElement( eContainer == target, eval(functions.nameMatches(e1, e2)) )
 		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
 		
 		# there is a condition on the containing sync wire
@@ -284,7 +284,7 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		
 		# the elements contained
 		e1 : ApplicationElement( eContainer == source )
-		e2 : ApplicationElement( eContainer == target, eval(functions.syncMatches(e1, e2)) )
+		e2 : ApplicationElement( eContainer == target, eval(functions.nameMatches(e1, e2)) )
 		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
 		
 		# there is a condition on the containing sync wire
@@ -386,7 +386,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		# a generated primary key
 		eval( functions.notExtendingGeneratedPrimaryKey( originalAttribute ) )
 		
-		not ( tf : InputTextField( eContainer == form, eval(functions.syncMatches( attribute, tf )) ) )
+		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one
@@ -410,7 +410,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		# a generated primary key
 		eval( functions.notExtendingGeneratedPrimaryKey( attribute ) )
 		
-		not ( tf : InputTextField( eContainer == form, eval(functions.syncMatches( attribute, tf )) ) )
+		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one

@@ -373,9 +373,9 @@
       <details key="documentation" value="A Condition allows for conditional execution of {@link WireEdge wires} when {@link ConditionWire connected}."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsConditions #//Condition #//GeneratesElements">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsConditions #//Condition #//GeneratesElements #//ContainsOperations">
     <eAnnotations source="http://openiaml.org/comment">
-      <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4"/>
+      <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4&#xD;&#xA;ContainsOperations added in 0.4.1"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A custom condition, composed in the same way as {@link CompositeOperation operations}."/>

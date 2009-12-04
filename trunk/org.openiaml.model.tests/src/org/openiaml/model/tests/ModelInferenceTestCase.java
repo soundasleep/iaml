@@ -927,7 +927,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	/**
 	 * Assert that the IStatus is ok.
 	 * 
-	 * @param status
+	 * @param status the status to check
+	 * @see #assertStatusIsNotOK(IStatus)
 	 * @throws Exception if there was a Throwable in the IStatus
 	 */
 	public static void assertStatusIsOK(IStatus status) throws Exception {
@@ -950,6 +951,19 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			
 			// default fail
 			fail("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
+		}
+	}
+	
+	/**
+	 * Assert that the IStatus is <em>not</em> ok.
+	 * 
+	 * @param status the status to check
+	 * @see #assertStatusIsOK(IStatus)
+	 */
+	public static void assertStatusIsNotOK(IStatus status) {
+		if (status.isOK()) {
+			// default fail
+			fail("Status was unexpectedly OK: [" + status.getPlugin() + "] " + status.getMessage());
 		}
 	}
 	

@@ -202,7 +202,7 @@ public class DroolsHelperFunctions {
 		return q;
 	}
 
-	public boolean syncMatches(NamedElement e1, NamedElement e2) {
+	public boolean nameMatches(NamedElement e1, NamedElement e2) {
 		return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
 	}
 

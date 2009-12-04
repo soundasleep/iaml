@@ -280,18 +280,28 @@
 		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
 		«EXPAND OperationCall::callOperation(php, false, container) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
 		
-		/* Condition flow for virtual operation '«name»' */
-		if (!«IF php»$result«ELSE»result«ENDIF») {
-			«REM»continue expanding following conditions (if any)«ENDREM»
+		«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
+			/* No conditional flows; it was just an operation call */
 			«FOREACH getFailFlows() AS e-»
 				«EXPAND addStack(start, php) FOR e»
 			«ENDFOREACH»
-		} else {
-			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getPassFlows() AS e-»
 				«EXPAND addStack(start, php) FOR e»
 			«ENDFOREACH»
-		}
+		«ELSE»		
+			/* Condition flow for virtual operation '«name»' */
+			if (!«IF php»$result«ELSE»result«ENDIF») {
+				«REM»continue expanding following conditions (if any)«ENDREM»
+				«FOREACH getFailFlows() AS e-»
+					«EXPAND addStack(start, php) FOR e»
+				«ENDFOREACH»
+			} else {
+				«REM»continue expanding following conditions (if any)«ENDREM»
+				«FOREACH getPassFlows() AS e-»
+					«EXPAND addStack(start, php) FOR e»
+				«ENDFOREACH»
+			}
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 

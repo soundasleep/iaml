@@ -74,6 +74,7 @@ public class SessionSyncWires extends InferenceTestCase {
 	 * on a session variable should also have a condition to check that
 	 * the variable has been set.
 	 * 
+	 * @see SetWireClient#testSetWireCondition()
 	 * @throws Exception
 	 */
 	public void testSessionParamterAddsCheckCondition() throws Exception {

@@ -8,7 +8,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IEditorPart;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Tests opening a sub-diagram of a model diagram in Eclipse.

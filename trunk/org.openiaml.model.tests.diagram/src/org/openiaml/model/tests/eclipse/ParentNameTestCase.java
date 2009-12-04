@@ -13,17 +13,16 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
-import org.openiaml.model.inference.EcoreCreateElementsHelper;
-import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart.ExtendedCompositeOperationFigure;
 import org.openiaml.model.diagram.edit.parts.EventTriggerEditPart.ExtendedEventTriggerFigure;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
+import org.openiaml.model.inference.EcoreCreateElementsHelper;
+import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.Page;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Tests that editors that have elements with "parents" rendering

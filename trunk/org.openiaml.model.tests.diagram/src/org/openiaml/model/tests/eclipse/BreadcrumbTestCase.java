@@ -9,7 +9,6 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
 import org.eclipse.ui.IEditorPart;
 import org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Tests opening sub-diagrams of a model diagram in Eclipse and

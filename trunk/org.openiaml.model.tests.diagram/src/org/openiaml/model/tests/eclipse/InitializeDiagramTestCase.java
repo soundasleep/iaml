@@ -6,7 +6,6 @@ package org.openiaml.model.tests.eclipse;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Emulate right click > initialise diagram.

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests;
+package org.openiaml.model.tests.eclipse;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,6 +39,8 @@ import org.openiaml.model.diagram.part.IamlInitDiagramFileAction;
 import org.openiaml.model.diagram.part.IamlNewDiagramFileWizard;
 import org.openiaml.model.diagram.part.IamlVisualIDRegistry;
 import org.openiaml.model.diagram.part.Messages;
+import org.openiaml.model.tests.ModelInferenceTestCase;
+import org.openiaml.model.tests.ModelTestCase;
 
 /**
  * Eclipse testing functionality.

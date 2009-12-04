@@ -1,0 +1,16 @@
+#summary Brief description of special documentation tags.
+#labels Phase-Design,Phase-Implementation,Development
+
+<wiki:toc max_depth="2" />
+
+=Introduction=
+
+*Modeldoc* is an experimental way of adding documentation for a modelling language within the actual implementation itself. This will be discussed later in more detail. The essential tags are:
+
+|| *Tag* || *Description* || *Parser* ||
+|| {{{@operational}}} || Operational semantics || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.docs/src/org/openiaml/docs/generation/semantics/HandleOperationalTag.java HandleOperationalTag.java] ||
+|| {{{@inference}}} || Inference semantics || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.docs/src/org/openiaml/docs/generation/semantics/HandleInferenceTag.java HandleInferenceTag.java] ||
+|| {{{@implementation}}} || Implementation notes || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.docs/src/org/openiaml/docs/generation/semantics/HandleImplementationTag.java HandleImplementationTag.java] ||
+|| {{{@example}}} || Examples || [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.docs/src/org/openiaml/docs/generation/semantics/HandleExampleTag.java HandleExampleTag.java] ||
+
+You can see the most recently-generated model documentation at [http://openiaml.org/model/].

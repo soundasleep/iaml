@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.openiaml.model.tests;
+package org.openiaml.model.tests.eclipse;
 
 import java.util.List;
 

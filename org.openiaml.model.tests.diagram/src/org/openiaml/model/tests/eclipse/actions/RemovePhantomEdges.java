@@ -13,7 +13,7 @@ import org.openiaml.model.custom.actions.RemovePhantomEdgesAction;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.visual.Page;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
+import org.openiaml.model.tests.eclipse.EclipseTestCaseHelper;
 
 /**
  * Issue 63: Check the tool to remove phantom edges from our model.

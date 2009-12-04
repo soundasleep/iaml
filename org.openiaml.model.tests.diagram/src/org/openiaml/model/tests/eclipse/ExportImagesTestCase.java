@@ -6,7 +6,6 @@ package org.openiaml.model.tests.eclipse;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.openiaml.model.diagram.custom.actions.ExportImagePartsAction;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Emulate right click > export images to PNG

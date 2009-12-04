@@ -13,7 +13,6 @@ import org.openiaml.model.custom.actions.IErrorLogger;
 import org.openiaml.model.custom.actions.InferEntireModelAction;
 import org.openiaml.model.custom.actions.ProgressEnabledAction;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
-import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Sets up and tears down shortcut test cases.

@@ -25,6 +25,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DomainAttribute;
@@ -363,7 +364,19 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			boolean checkShortcut, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(root, PrimitiveOperation.class, operationName, checkShortcut, shortcutRequired);
 	}
-	
+
+	/**
+	 * Look at the editor's children to see if a CompositeCondition is being displayed.
+	 *
+	 * @param root
+	 * @param pageName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasCompositeCondition(DiagramDocumentEditor root, String operationName,
+			boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, CompositeCondition.class, operationName, checkShortcut, shortcutRequired);
+	}
+
 	/**
 	 * Assert that a RunInstanceWire exists between two elements in the editor.
 	 */
@@ -717,6 +730,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return assertHasRenderedNamedObject(editor, Operation.class, name, true, shortcutRequired);
 	}
 
+	/**
+	 * @see #assertHasCompositeCondition(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasCompositeCondition(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, CompositeCondition.class, name, true, shortcutRequired);
+	}
+	
 	/**
 	 * @see #assertHasCondition(DiagramDocumentEditor, String, boolean, boolean)
 	 */

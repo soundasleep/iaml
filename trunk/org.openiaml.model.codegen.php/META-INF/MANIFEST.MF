@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Oaw Codegen Plugin for Iaml
 Bundle-SymbolicName: org.openiaml.model.codegen.php;singleton:=true
-Bundle-Version: 0.4.0.qualifier
+Bundle-Version: 0.4.1.qualifier
 Require-Bundle: org.openarchitectureware.dependencies,
  org.openiaml.model,
  org.openarchitectureware.adapter.emf.check,

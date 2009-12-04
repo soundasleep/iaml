@@ -255,7 +255,7 @@
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
   </diagram>
-  <plugin iD="org.openiaml.model.diagram.domain_store" name="Iaml Diagram Plugin (Domain Store)" provider="www.openiaml.org" version="0.4.0.qualifier">
+  <plugin iD="org.openiaml.model.diagram.domain_store" name="Iaml Diagram Plugin (Domain Store)" provider="www.openiaml.org" version="0.4.1.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   </plugin>

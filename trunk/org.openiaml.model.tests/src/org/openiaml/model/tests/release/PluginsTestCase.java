@@ -15,6 +15,8 @@ import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import junit.framework.AssertionFailedError;
+
 import org.openiaml.emf.SoftCache;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
@@ -221,9 +223,16 @@ public class PluginsTestCase extends XmlTestCase {
 		// now lets test each manifest.mf
 		for (String file : getAllManifests()) {
 			Properties properties = getManifestCache().get(file);
-			assertEquals( file + ": expected equal version",
-					version,
-					properties.get("Bundle-Version"));
+			try {
+				assertEquals( file + ": expected equal version",
+						version,
+						properties.get("Bundle-Version"));
+				
+			} catch (AssertionFailedError e) {
+				// print out for easier debugging
+				System.err.println(file.substring(file.indexOf("..")));
+				throw e;	// rethrow
+			}
 		}
 	}
 	

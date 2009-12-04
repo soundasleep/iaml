@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+	<!-- .iaml file extensions -->
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.model.codegen.objectContribution1"
+            nameFilter="*.iaml"
+            objectClass="org.eclipse.core.resources.IResource">
+
+         <menu
+               id="org.openiaml.model.diagram.custom.menu2"
+               path="additions"
+               label="&amp;IAML Verification Tools">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.model.custom.actions.VerificationWithCrocopatAction"
+               id="org.openiaml.model.diagram.custom2.action5"
+               label="&amp;Verify with Crocopat"
+               menubarPath="org.openiaml.model.diagram.custom.menu2/group">
+         </action>
+
+      </objectContribution>                    
+
+	</extension>
+
+	<!-- add the crocopat verification service -->	
+   <extension point="org.eclipse.ui.startup">
+      <startup class="org.openiaml.model.verification.Startup"/>
+   </extension>
+	
+	
+</plugin>

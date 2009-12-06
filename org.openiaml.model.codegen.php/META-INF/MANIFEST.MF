@@ -6,7 +6,7 @@ Bundle-Version: 0.4.1.qualifier
 Require-Bundle: org.openarchitectureware.dependencies,
  org.openiaml.model,
  org.openarchitectureware.adapter.emf.check,
- org.openiaml.iacleaner,
+ org.openiaml.iacleaner;bundle-version="0.3.0",
  ca.ecliptical.emf.xpath,
  org.openiaml.model.runtime,
  org.junit

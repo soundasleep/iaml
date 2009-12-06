@@ -2,7 +2,7 @@
 <feature
       id="org.openiaml.model.editor"
       label="IAML Modelling Platform"
-      version="0.4.0.qualifier"
+      version="0.4.1.qualifier"
       provider-name="www.openiaml.org">
 
    <description url="http://www.openiaml.org/">
@@ -28,7 +28,7 @@
    <includes
          id="org.openiaml.iacleaner.feature"
          version="0.3.0"
-         name="Internet Application Formatter/Cleaner"/>
+         name="iacleaner"/>
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>

@@ -46,6 +46,19 @@ Once you have installed the Eclipse plugin, you should make sure that you have a
 
 ==Note==
 
+If you need to set up a proxy for Eclipse to access the IAML update site, you may need to add the following lines to your _eclipse.ini_ (before the {{{-vmargs}}} section):
+
+{{{
+-Dhttp.proxyPort=1234
+-Dhttp.proxyHost=proxy.name
+}}}
+
+This adds required proxy information for the Java runtime. To set up the proxy for Eclipse itself, you will need to set up the proxy as a _manual_ connection in _Window > Preferences_:
+
+[http://iaml.googlecode.com/svn/wiki/install/proxy.png]
+
+==Note==
+
 You may run out of memory when using the modelling platform within a Sun VM, in particular PermGen memory; this is mostly due to the Drools engine requiring a 7MB compiler in PermGen memory. It will depend on your system, but you may need to add the following lines to your _eclipse.ini_:
 
 {{{

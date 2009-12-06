@@ -12,10 +12,10 @@
    <feature url="features/org.openiaml.model.editor_0.4.0.200910061641.jar" id="org.openiaml.model.editor" version="0.4.0.200910061641">
       <category name="org.openiaml.model.editor"/>
    </feature>
-   <feature url="features/org.openiaml.model.editor_0.4.1.200912071048.jar" id="org.openiaml.model.editor" version="0.4.1.200912071048">
+   <feature url="features/org.openiaml.model.editor_0.4.1.200912071124.jar" id="org.openiaml.model.editor" version="0.4.1.200912071124">
       <category name="org.openiaml.model.editor"/>
    </feature>
-   <feature url="features/org.openiaml.verification.crocopat.feature_0.4.1.200912071048.jar" id="org.openiaml.verification.crocopat.feature" version="0.4.1.200912071048" os="win32">
+   <feature url="features/org.openiaml.verification.crocopat.feature_0.4.1.200912071124.jar" id="org.openiaml.verification.crocopat.feature" version="0.4.1.200912071124" os="win32">
       <category name="org.openiaml.verification.crocopat.feature"/>
    </feature>
    <category-def name="org.openiaml.model.editor" label="IAML Modelling Environment"/>

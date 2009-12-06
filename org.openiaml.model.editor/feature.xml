@@ -32,6 +32,8 @@
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.expressions"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.ui.ide"/>
@@ -55,18 +57,15 @@
       <import plugin="org.eclipse.draw2d"/>
       <import plugin="org.eclipse.gef"/>
       <import plugin="org.eclipse.emf.validation"/>
+      <import plugin="org.openiaml.model.diagram.helpers" version="0.3.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.gmf"/>
-      <import plugin="org.openarchitectureware.dependencies"/>
-      <import plugin="org.openarchitectureware.adapter.emf.check"/>
-      <import plugin="org.openiaml.iacleaner"/>
-      <import plugin="ca.ecliptical.emf.xpath"/>
-      <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore" version="2.5.0" match="greaterOrEqual"/>
-      <import plugin="org.openiaml.model.diagram.helpers" version="0.3.1" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.runtime" version="0.3.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.actions" version="0.3.1" match="greaterOrEqual"/>
+      <import plugin="org.openarchitectureware.dependencies"/>
+      <import plugin="org.openarchitectureware.adapter.emf.check"/>
+      <import plugin="ca.ecliptical.emf.xpath"/>
       <import plugin="org.junit"/>
       <import plugin="ca.ecliptical.emf.xpath" version="2.0.1" match="greaterOrEqual"/>
       <import plugin="org.openiaml.emf.properties" version="0.3.1" match="greaterOrEqual"/>
@@ -81,6 +80,8 @@
       <import plugin="org.eclipse.gmf.runtime.common.core" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.iacleaner" version="0.3.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.xerces"/>
    </requires>
 
    <plugin
@@ -211,6 +212,13 @@
 
    <plugin
          id="org.openiaml.model.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openiaml.emf.properties"
          download-size="0"
          install-size="0"
          version="0.0.0"

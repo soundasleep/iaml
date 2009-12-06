@@ -28,6 +28,7 @@ public class AllReleaseTests {
         suite.addTestSuite(ParentNamesTestCase.class);
         suite.addTestSuite(NewWizardsTest.class);
         suite.addTestSuite(LicenceTest.class);
+        suite.addTestSuite(RuntimeVersionTestCase.class);
 		//$JUnit-END$
         return suite; 
    }

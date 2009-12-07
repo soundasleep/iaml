@@ -1,0 +1,59 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools.rules.events
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+# @inference InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'edit'. 
+rule "Create 'edit' event trigger for input text field"
+	when
+		f : InputTextField( overridden == false )
+		not (EventTrigger( eContainer == f, name=="edit" ))
+			
+	then
+		// debug: System.out.println(drools.getRule().getName() + ": " + f); 
+
+		EventTrigger event = handler.generatedEventTrigger(f, f);
+		handler.setName(event, "edit");
+		queue.add(event, drools);
+		
+end
+
+# @inference DomainAttribute A {@model DomainAttribute} contains an {@model EventTrigger} named 'edit'.
+rule "Create 'edit' event trigger for domain attribute"
+	when
+		f : DomainAttribute( overridden == false )
+		not (EventTrigger( eContainer == f, name=="edit" ))
+			
+	then
+		EventTrigger event = handler.generatedEventTrigger(f, f);
+		handler.setName(event, "edit");
+		queue.add(event, drools);
+		
+end
+
+# @inference InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'access'.
+rule "Create 'access' event trigger for input text field"
+	when
+		f : InputTextField( overridden == false )
+		not (EventTrigger( eContainer == f, name=="access" ))
+			
+	then
+		EventTrigger event = handler.generatedEventTrigger(f, f);
+		handler.setName(event, "access");
+		queue.add(event, drools);
+		
+end

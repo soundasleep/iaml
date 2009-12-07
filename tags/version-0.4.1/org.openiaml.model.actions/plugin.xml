@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+	<!-- .iaml file extensions -->
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.model.codegen.objectContribution1"
+            nameFilter="*.iaml"
+            objectClass="org.eclipse.core.resources.IResource">
+
+         <menu
+               id="org.openiaml.model.diagram.custom.menu1"
+               path="additions"
+               label="&amp;IAML Tools">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.model.custom.actions.InferEntireModelAction"
+               id="org.openiaml.model.diagram.custom.action4"
+               label="&amp;Infer all elements in-place"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+
+         <action
+               class="org.openiaml.model.custom.actions.GenerateCodeActionAndView"
+               id="org.openiaml.model.diagram.custom.action2"
+               label="Generate code and load in &amp;browser"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+
+         <action
+               class="org.openiaml.model.custom.actions.GenerateCodeAction"
+               id="org.openiaml.model.diagram.custom.action1"
+               label="&amp;Generate code"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+         
+         <action
+               class="org.openiaml.model.custom.actions.RemovePhantomEdgesAction"
+               id="org.openiaml.model.diagram.custom.action5"
+               label="&amp;Remove phantom edges"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+
+         <action
+               class="org.openiaml.model.custom.actions.MigrateModelAction"
+               id="org.openiaml.model.diagram.custom.action3"
+               label="&amp;Migrate model to latest version"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+
+      </objectContribution>                    
+
+	</extension>
+
+	<!-- add a 'refresh mappings' command to FileDomainStore elements -->
+	<!-- following http://wiki.eclipse.org/GMF_Tutorial_Part_3 -->
+		
+	<extension point="org.eclipse.ui.commands">
+		<category name="IAML" description="Commands related to IAML diagrams." 
+			id="org.openiaml.model.diagram.custom.commands.iaml"/>
+		<command categoryId="org.openiaml.model.diagram.custom.commands.iaml" 
+			description="Refreshes the mappings of DomainStore elements" 
+			id="org.openiaml.model.diagram.custom.commands.iaml.refresh"
+			name="Refresh mappings">
+		</command>
+	</extension>
+	
+</plugin>

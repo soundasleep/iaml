@@ -23,6 +23,18 @@ Select the "Menu" item and select "Install New Software".
 
 You will be provided with [http://iaml.googlecode.com/svn/wiki/install/software-empty.png an installation dialog box] in which to select software artefacts to install. 
 
+Click the "Add" button and add the following update sites to your Eclipse installation. Eclipse will automatically contact these to download related and required plugins:
+
+{{{
+Name: OpenArchitectureWare update site 
+URL: http://www.openarchitectureware.org/updatesite/milestone/
+}}}
+
+{{{
+Name: Ecliptical Software update site
+URL: http://www.eclipticalsoftware.com/updates
+}}}
+
 Click the "Add" button and add the following update site to your Eclipse installation. All updates to the IAML project will be provided through this update site, and Eclipse includes functionality to automatically update your installation when new versions are released.
 
 {{{

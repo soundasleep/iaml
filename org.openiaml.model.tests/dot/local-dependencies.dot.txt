@@ -1,5 +1,5 @@
 digraph {
-  size="52,52";
+  size="48,72";
   ratio=expand;
   node [style=filled, fillcolor="#6677cc"];
 "org.openiaml.model.edit";
@@ -69,6 +69,7 @@ digraph {
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.diagram.user_store";
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.diagram.visual";
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.diagram.wire";
+  "org.openiaml.model.tests.diagram" -> "org.openiaml.model.diagram.session";
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.tests";
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.diagram.custom";
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.actions";

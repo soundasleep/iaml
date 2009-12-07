@@ -156,7 +156,7 @@ public class ExportDependencyGraph extends XmlTestCase {
 
 	public void exportLocalDependencies(Map<String, List<String>> dependencies, Writer out) throws IOException {
 		out.write("digraph {\n");
-		out.write("  size=\"52,52\";\n");
+		out.write("  size=\"48,72\";\n");
 		out.write("  ratio=expand;\n");
 		
 		// print out all nodes that we are using

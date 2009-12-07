@@ -99,6 +99,13 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Refactoring of code generation templates
     * Diagram tests moved into separate bundle (issue 109)
 
+==Release 0.4.1==
+([http://journals.jevon.org/users/jevon-phd/entry/19777 Released] December 2009)
+  # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.1 Expand IAML model]
+    * Arithmetic
+  * Code generation
+    * Operational modelling is now implemented using a call stack, allowing for loops in the execution path
+
 =Release 0.5=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
   # [Model0_5 Expand IAML model]
@@ -108,7 +115,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * DomainObjectInstance autosave default should be false
     * E-mails
     * Server-side operation (e.g. written in PHP)
-    * Client-side operaiton (e.g. written in Javascript)
+    * Client-side operation (e.g. written in Javascript)
     * Deleting domain objects
 
 =Release 0.6+=

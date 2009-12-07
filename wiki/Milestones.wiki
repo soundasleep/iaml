@@ -103,7 +103,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 ([http://journals.jevon.org/users/jevon-phd/entry/19777 Released] December 2009)
   # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.1 Expand IAML model]
     * Arithmetic
-  * Code generation
+  # Code generation
     * Operational modelling is now implemented using a call stack, allowing for loops in the execution path
 
 =Release 0.5=

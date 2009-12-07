@@ -3,11 +3,15 @@
 
 [Model0_4 < 0.4] | *0.5* | [Model0_6 0.6 >]
 
-=Model 0.5=
-
 <wiki:toc max_depth="2" />
 
 =Model 0.4.1=
+
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19777 December 2009]*
+
+This is a minor release which changes the approach used in the code generation of operations. Instead of generating operations as an exhaustive structured program, each instruction is generated as a state, and the execution flow is executed based on a call stack. In particular, this means that loops in the execution flow will no longer cause code generation to fail.
+
+Advanced verification with CrocoPat is also provided as an _experimental_ feature plugin. Currently this only detects [http://code.google.com/p/iaml/source/browse/branches/2009-08-owl/org.openiaml.verification.crocopat/rules/infinite_redirection.rml?spec=svn1301&r=1301 infinite redirection loops].
 
 ==New Elements==
 
@@ -21,6 +25,6 @@ Allows for inline arithmetic expressions.
 
 [http://openiaml.org/model/ExecutionEdge ExecutionEdges] can now have names; a [[http://openiaml.org/model/DecisionCondition DecisionCondition] will use the labels 'yes' or 'no' (also 'pass' or 'fail') in order to calculate the correct execution flow.
 
-All [ApplicationElementProperty]s now also create a condition called "X is set" in the container for the property. This is used in [SyncWires] to ensure that init/access does not overwrite the default (or existing) value if there is no value to replace it with.
+All [ApplicationElementProperty]s now also create a condition called "X is set" in the container for the property. This is used in [SyncWires] to ensure that init/access does not overwrite the default (or existing) value if there is no value to replace it with. This is powered by a new [IamlDecisionConditions decision condition] "is set?"
 
 Added documentation on [IamlDecisionConditions].

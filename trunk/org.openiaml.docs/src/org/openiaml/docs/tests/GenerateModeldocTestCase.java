@@ -30,7 +30,7 @@ import org.openiaml.model.model.visual.VisualPackage;
  * @author jmwright
  *
  */
-public class Test2 extends TestCase {
+public class GenerateModeldocTestCase extends TestCase {
 
 	public void testIdentifierMatches() {
 		
@@ -63,7 +63,8 @@ public class Test2 extends TestCase {
 	
 	/**
 	 * Tries to create a new instance of ModelDocumentation and
-	 * save it to a file.
+	 * save it to a file. It also executes the actual documentation
+	 * generation through OAW.
 	 * 
 	 * @throws Exception
 	 */

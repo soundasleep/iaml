@@ -61,6 +61,9 @@ public class IamlRuntimeLibrariesPlugin extends Plugin implements IFileCopyListe
 		monitor.beginTask("Copying over runtime files...", 10);
 		
 		URL root = getBundle().getEntry("src");
+		if (root == null)
+			throw new NullPointerException("Could not resolve root /src: null");
+		
 		root = FileLocator.resolve(root);
 		
 		Enumeration<?> e = getBundle().findEntries("src", "*.*", true);

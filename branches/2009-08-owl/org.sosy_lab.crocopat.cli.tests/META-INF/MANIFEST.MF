@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Crocopat: Java CLI Adapter Tests
 Bundle-SymbolicName: org.sosy_lab.crocopat.cli.tests;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: www.openiaml.org
 Require-Bundle: org.sosy_lab.crocopat.cli;bundle-version="0.0.1",

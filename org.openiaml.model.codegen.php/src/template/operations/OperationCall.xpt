@@ -6,7 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* default: don't know what to do */
-«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::WireEdge»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::WireEdge»
 	«EXPAND exception FOR throwException("Unknown wire edge connected to edit trigger: " + this)»
 «ENDDEFINE»
 
@@ -20,7 +20,7 @@
  * we instead use '$arg0', which we expect will be set already.
  * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
  */
-«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::RunInstanceWire-»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»
 	/* eContainer == «to.eContainer» */
 	
 	«IF php»
@@ -31,7 +31,7 @@
 	
 	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
 	«ENDIF»
 
 	«IF php»
@@ -49,11 +49,11 @@
 		«ENDREM»
 		«IF availableInCurrentScript(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
-				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
@@ -62,11 +62,11 @@
 	«ELSEIF model::scopes::Session.isInstance(to.eContainer)-»
 		«IF availableInCurrentScript(from, to)-»
 			«REM»// on current page (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current page (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingPage(to).id)»', '«operationName(to)-»'
-				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingPage(to).id»', 'do_«operationName(to)»'
@@ -75,14 +75,14 @@
 	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+			«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
-		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer, currentPage) FOR to»;
+		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer) FOR to»;
 	«ELSEIF isDomainObjectInstance(to.eContainer)-»
 		«REM»direct field --> domain object instance«ENDREM»
-		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::DomainObjectInstance) to.eContainer, currentPage) FOR to»;
+		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::DomainObjectInstance) to.eContainer) FOR to»;
 	«ELSEIF model::components::AccessControlHandler.isInstance(to.eContainer)-»
 		«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, this, (model::components::AccessControlHandler) to.eContainer) FOR to»;
 	«ELSE-»
@@ -98,7 +98,7 @@
 /**
  * NavigateWire: browse to a new page
  */
-«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::NavigateWire»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::wires::NavigateWire»
 	«IF php»
 		«IF model::visual::Page.isInstance(to)»
 		/* prevent infinite loops on the current page */
@@ -125,14 +125,14 @@
  * Assumes that there is a function call waiting in 'function_queue'.
  * This function will be executed with the response as a parameter.
  */
-«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::RunInstanceWire-»
+«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb) FOR model::wires::RunInstanceWire-»
 	«IF inEdges.typeSelect(model::wires::ParameterWire).size > 0» 
-		var arg0 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentPage) FOR inEdges.typeSelect(model::wires::ParameterWire).get(0)»;
+		var arg0 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOR inEdges.typeSelect(model::wires::ParameterWire).get(0)»;
 	«ELSE»
 		var arg0 = null;	/* no parameter */
 	«ENDIF»
 	«IF inEdges.typeSelect(model::wires::ParameterWire).size > 1»
-		var arg1 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentPage) FOR inEdges.typeSelect(model::wires::ParameterWire).get(1)»;
+		var arg1 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false) FOR inEdges.typeSelect(model::wires::ParameterWire).get(1)»;
 	«ELSE»
 		var arg1 = null;	/* no parameter */
 	«ENDIF»

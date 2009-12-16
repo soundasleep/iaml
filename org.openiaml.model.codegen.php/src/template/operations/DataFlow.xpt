@@ -8,57 +8,16 @@
 /**
  * Data sources
  */
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::DataFlowEdgesSource»
+«DEFINE dataSource(Boolean php) FOR model::DataFlowEdgesSource»
 	«EXPAND exception FOR throwException("Unknown data flow edge source for dataSource: " + this)»
 «ENDDEFINE»
 
-/**
- * Inline arithmetic.
- */
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::operations::Arithmetic»
-	«IF operationType.toString() == "ADD"»
-		«IF php»
-			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " + "»
-		«ELSE»
-			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " + "»
-		«ENDIF»
-	«ELSEIF operationType.toString() == "SUBTRACT"»
-		«IF php»
-			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " - "»
-		«ELSE»
-			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " - "»
-		«ENDIF»
-	«ELSEIF operationType.toString() == "MULTIPLY"»
-		«IF php»
-			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " * "»
-		«ELSE»
-			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " * "»
-		«ENDIF»
-	«ELSEIF operationType.toString() == "DIVIDE"»
-		«IF php»
-			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " / "»
-		«ELSE»
-			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			convert_to_nan(«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " / "»)
-		«ENDIF»
-	«ELSE»
-		«EXPAND exception FOR throwException("Unknown arithmetic: " + this)»
-	«ENDIF»
-«ENDDEFINE»
-
 // TODO need to wrap value in some sort of encoding algorithm
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::StaticValue»
+«DEFINE dataSource(Boolean php) FOR model::StaticValue»
 	"«value-»" /* static value "«safeName()-»" */ 
 «ENDDEFINE»
 
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::Parameter»
+«DEFINE dataSource(Boolean php) FOR model::Parameter»
 	«IF php»
 	$«safeName()»
 	«ELSE»
@@ -66,25 +25,12 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::TemporaryVariable»
+«DEFINE dataSource(Boolean php) FOR model::TemporaryVariable»
 	«IF php»
 	$temp_«safeName()»
 	«ELSE»
 	temp_«safeName()-»
 	«ENDIF»
-«ENDDEFINE»
-
-/**
- * A data source from an ApplicationElementProperty.
- *
- * Not sure if this implementation completely works; operations should
- * specify incoming data as parameters, and not reference properties directly.
- *
- * In particular, the <code>null</code> parameter will probably cause
- * problems later...
- */
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::ApplicationElementProperty»
-	«EXPAND template::operations::Parameters::callParameterValue(php, null, false, currentPage) FOR this»
 «ENDDEFINE»
 
 /**
@@ -96,31 +42,6 @@
 
 «DEFINE dataTarget(Boolean php) FOR model::ApplicationElementProperty»	
 	document.getElementById('«safeNameString(( (model::NamedElement) eContainer).id)»').value
-«ENDDEFINE»
-
-/**
- * Quick helper code to translate a value into a floating point number, to force
- * Javascript to use number arithmetic on it.
- *
- * Uses JS parseFloatOrZero() from Runtime JS.
- */
-«DEFINE convertToFloat(model::visual::Page currentPage) FOR model::DataFlowEdgesSource»
-	parse_float_or_zero(«EXPAND dataSource(false, currentPage) FOR this»)
-«ENDDEFINE»
-
-/**
- * Data sources - are the sources set? Only supports ApplicationElementProperty.
- *
- * @implementation DecisionCondition The 'is set?' {@model DecisionCondition} 
- *	only supports incoming {@model ApplicationElementProperty ApplicationElementProperties}
- *	as {@model DataFlowEdge parameters}.   
- */
-«DEFINE isSet(Boolean php, model::visual::Page currentPage) FOR model::DataFlowEdgesSource»
-	«EXPAND exception FOR throwException("Unknown data flow edge source for isSet: " + this)»
-«ENDDEFINE»
-
-«DEFINE isSet(Boolean php, model::visual::Page currentPage) FOR model::ApplicationElementProperty»
-	«EXPAND template::operations::Parameters::isSetParameter(php, currentPage) FOR this»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

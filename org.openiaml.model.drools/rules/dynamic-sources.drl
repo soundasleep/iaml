@@ -47,15 +47,17 @@ rule "Create the Condition for an XPath set"
 	
 end
 
-rule "Create the contents of the XPath condition when connected to SyncWires"
+rule "Create the contents of the XPath condition"
 	
 	when
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
+		source : Page ( ) 
+		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
+		target : Page ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		o : CompositeCondition ( eContainer == ds, name == "xpath" )
-		# limit to only creating one contents of the condition
-		exists ( any_sync_wire : SyncWire( )
-			and cw : ConditionWire ( from == o, to == any_sync_wire ) )
+		cw : ConditionWire ( from == o, to == tw )
 		
 		not ( StartNode( eContainer == o ))
 	
@@ -98,13 +100,11 @@ rule "Create the contents of the XPath condition when connected to SyncWires"
 		queue.add(edge1, drools);
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
-		handler.setName(edge2, "yes");
 		handler.setFrom(edge2, dc);
 		handler.setTo(edge2, finish);
 		queue.add(edge2, drools);
 
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
-		handler.setName(edge3, "no");
 		handler.setFrom(edge3, dc);
 		handler.setTo(edge3, cancel);
 		queue.add(edge3, drools);

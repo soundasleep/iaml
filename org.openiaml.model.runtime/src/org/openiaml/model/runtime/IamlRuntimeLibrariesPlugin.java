@@ -61,9 +61,6 @@ public class IamlRuntimeLibrariesPlugin extends Plugin implements IFileCopyListe
 		monitor.beginTask("Copying over runtime files...", 10);
 		
 		URL root = getBundle().getEntry("src");
-		if (root == null)
-			throw new NullPointerException("Could not resolve root /src: null");
-		
 		root = FileLocator.resolve(root);
 		
 		Enumeration<?> e = getBundle().findEntries("src", "*.*", true);
@@ -80,13 +77,7 @@ public class IamlRuntimeLibrariesPlugin extends Plugin implements IFileCopyListe
 			
 			// copy it over
 			createParentsRecursively(towrite.getParent(), new NullProgressMonitor());
-			if (towrite.exists()) {
-				// overwrite it
-				towrite.setContents(url.openStream(), true, true, new NullProgressMonitor());
-			} else {
-				// copy it
-				towrite.create(url.openStream(), true, new NullProgressMonitor());
-			}
+			towrite.create(url.openStream(), true, new NullProgressMonitor());
 			
 			// notify listeners
 			fileCopied( new File(url.toExternalForm()), towrite.getLocation().toFile() );

@@ -131,9 +131,6 @@ context model::visual::Page ERROR "A Page cannot contain a LoginHandler" :
 context model::CompositeOperation ERROR "An Operation can only contain one StartNode" :
 	nodes.typeSelect(model::operations::StartNode).size <= 1;
 
-context model::CompositeCondition ERROR "A Condition can only contain one StartNode" :
-	nodes.typeSelect(model::operations::StartNode).size <= 1;
-
 // issue 98: unused PrimitiveOperation names should issue a warning
 // issue 136: CompositeOperations should not have this warning
 context model::PrimitiveOperation WARNING "Unknown primitive operation name '" + name + "'" :
@@ -145,12 +142,3 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 		name == "add permission" || name == "remove role" ||
 		name == "remove permission" || name == "check permissions");
 
-context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
-	inFlows.size > 0;
-
-context model::PrimitiveOperation ERROR "A 'set' PrimitiveOperation cannot set an ApplicationElementProperty: use 'setPropertyToValue'" :
-	name != "set" || outEdges.to.typeSelect(model::ApplicationElementProperty).size == 0;
-
-context model::PrimitiveOperation ERROR "A 'setPropertyToValue' PrimitiveOperation cannot set a TemporaryVariable: use 'set'" :
-	name != "setPropertyToValue" || outEdges.to.typeSelect(model::TemporaryVariable).size == 0;
-	

@@ -25,21 +25,6 @@ import org.openiaml.emf.properties.IterateOverAll;
 public class ReferencesCycles extends IterateOverAll {
 	
 	/**
-	 * The actual root of the entire hierarchy, so we can access
-	 * <em>all</em> children in the entire graph, and not just those
-	 * directly contained within each iterated object. 
-	 */
-	private EObject actualRoot = null;
-	
-	@Override
-	public Object evaluate(EObject root) {
-		actualRoot = root;
-		
-		// continue iteration
-		return super.evaluate(root);
-	}
-
-	/**
 	 * If we find a cycle A->B->C->A, it is obvious that 
 	 * there is a cycle B->B and C->C. 
 	 * 
@@ -65,12 +50,12 @@ public class ReferencesCycles extends IterateOverAll {
 	 */
 	@Override
 	public int get(final EObject root) {
-
+		
 		// have we already found a cycle for this element somewhere else?
 		if (cyclesFound.contains(root)) {
 			// if so, we have already marked this as a cycle
 			return 0;
-		}	
+		}
 				
 		// a pseudo-object
 		final EObject pseudo = new BasicEObjectImpl() {
@@ -94,10 +79,10 @@ public class ReferencesCycles extends IterateOverAll {
 
 			@Override
 			public Collection<EObject> getEdges() {
-				// vertices = all EObjects in the <em>actual</em> root							
-				Collection<EObject> nodes = toCollection(actualRoot.eAllContents());
+				// vertices = all EObjects in the root							
+				Collection<EObject> nodes = toCollection(root.eAllContents());
 				// add self
-				nodes.add(actualRoot);
+				nodes.add(root);
 				nodes = removeIgnoredClasses(nodes);
 				
 				// add a pseudo-element for the target

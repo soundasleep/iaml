@@ -12,7 +12,6 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -67,11 +66,6 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	public static final String CONFIG_RUNTIME = "../../../workspace-iaml/org.openiaml.model.runtime/src/include/";
 	public static final String BASE_URL_RUNTIME = "http://localhost:8080/iaml-runtime/"; 
 	public static final String CONFIG_WEB = "/iaml-runtime/";
-	
-	/**
-	 * The permissible delta in double tests.
-	 */
-	public static final double TEST_DELTA = 0.0001;
 	
 	/** 
 	 * TODO a temporary variable to make sure we don't set up
@@ -474,7 +468,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	protected IFile copyFileIntoWorkspace(File sourceFile, IFile target) throws CoreException, FileNotFoundException {
 		createFolderRecursively(target.getParent());
 		
-		assertTrue("source file '" + sourceFile + "' should exist exists", sourceFile.exists());
+		assertTrue("source file '" + sourceFile + "' exists", sourceFile.exists());
 
 		assertFalse("target file '" + target + "' should not exist yet", target.exists());
 		
@@ -602,30 +596,14 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	/**
 	 * Assert that the given object is of the given class or higher.
 	 *
-	 * @param class1 the expected class
-	 * @param object the object to check
+	 * @param class1
+	 * @param object
 	 */
 	public void assertInstanceOf(Class<?> class1, Object object) {
 		if (class1.isInstance(object)) {
 			// ok
 		} else {
 			fail("Expected object instance '" + class1 + "', got '" + object.getClass() + "': " + object);
-		}
-	}
-	
-	/**
-	 * Assert that the given list of objects are of the given class or higher.
-	 *
-	 * @param class1 the expected class
-	 * @param objects the list of objects to check
-	 */
-	public void assertInstanceOf(Class<?> class1, Collection<?> objects) {
-		for (Object object : objects) {
-			if (class1.isInstance(object)) {
-				// ok
-			} else {
-				fail("Expected object instance '" + class1 + "', got '" + object.getClass() + "': " + object);
-			}
 		}
 	}
 	

@@ -33,7 +33,6 @@ import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
@@ -65,7 +64,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 */
 	protected InternetApplication loadAndInfer(final String modelFile) throws Exception {
 		InternetApplication root = (InternetApplication) loadModelDirectly(modelFile);
-		return infer(root, false, new IModelReloader() {
+		return loadAndInfer(root, false, new IModelReloader() {
 
 			@Override
 			public EObject reload() throws InferenceException {
@@ -99,7 +98,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 */
 	protected InternetApplication loadAndInfer(
 			final String filename, boolean logRuleSource) throws Exception {
-		return infer((InternetApplication) loadModelDirectly(filename), logRuleSource,
+		return loadAndInfer((InternetApplication) loadModelDirectly(filename), logRuleSource,
 				new IModelReloader() {
 
 					@Override
@@ -158,9 +157,6 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		if (class1.getPackage().getName().contains("codegen.model0_3")) {
 			return getAbsolutePathRoot() + ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml";
 		}
-		if (class1.getPackage().getName().contains("codegen.model0_4_1")) {
-			return getAbsolutePathRoot() + ROOT + "codegen/model0_4_1/" + class1.getSimpleName() + ".iaml";
-		}
 		if (class1.getPackage().getName().contains("codegen.model0_4")) {
 			return getAbsolutePathRoot() + ROOT + "codegen/model0_4/" + class1.getSimpleName() + ".iaml";
 		}
@@ -171,9 +167,6 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		// TODO move other inference tests into separate test folders
 		if (class1.getPackage().getName().contains("inference.model0_3")) {
 			return getAbsolutePathRoot() + ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_4_1")) {
-			return getAbsolutePathRoot() + ROOT + "inference/model0_4_1/" + class1.getSimpleName() + ".iaml";
 		}
 		if (class1.getPackage().getName().contains("inference.model0_4")) {
 			return getAbsolutePathRoot() + ROOT + "inference/model0_4/" + class1.getSimpleName() + ".iaml";
@@ -238,14 +231,14 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	}
 	
 	/**
-	 * Perform inference on a loaded model.
+	 * Load a model file and perform inference on it.
 	 *
 	 * @see CreateMissingElementsWithDrools#create(EObject, boolean)
 	 * @param logRuleSource Log the rule source of inserted elements.
 	 * @return
 	 * @throws Exception
 	 */
-	protected InternetApplication infer(InternetApplication root, boolean logRuleSource, IModelReloader reloader) throws Exception {
+	protected InternetApplication loadAndInfer(InternetApplication root, boolean logRuleSource, IModelReloader reloader) throws Exception {
 		// we now try to do inference
 		Resource resource = root.eResource();
 		assertNotNull(resource);
@@ -927,8 +920,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	/**
 	 * Assert that the IStatus is ok.
 	 * 
-	 * @param status the status to check
-	 * @see #assertStatusIsNotOK(IStatus)
+	 * @param status
 	 * @throws Exception if there was a Throwable in the IStatus
 	 */
 	public static void assertStatusIsOK(IStatus status) throws Exception {
@@ -951,19 +943,6 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			
 			// default fail
 			fail("Status was not OK: [" + status.getPlugin() + "] " + status.getMessage());
-		}
-	}
-	
-	/**
-	 * Assert that the IStatus is <em>not</em> ok.
-	 * 
-	 * @param status the status to check
-	 * @see #assertStatusIsOK(IStatus)
-	 */
-	public static void assertStatusIsNotOK(IStatus status) {
-		if (status.isOK()) {
-			// default fail
-			fail("Status was unexpectedly OK: [" + status.getPlugin() + "] " + status.getMessage());
 		}
 	}
 	
@@ -997,42 +976,4 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		super.tearDown();
 	}
 
-
-	/**
-	 * Create a new InternetApplication in the given file.
-	 * 
-	 * @param file
-	 */
-	public InternetApplication createNewInternetApplication(File file) {
-
-		ResourceSet resourceSet = new ResourceSetImpl();
-		URI uri = URI.createFileURI(file.getAbsolutePath());
-		Resource resource = resourceSet.createResource(uri);
-		assertNotNull(resource);
-		assertEquals("The new model should be empty.", 0, resource.getContents().size());
-
-		// create a new object
-		InternetApplication a = ModelFactory.eINSTANCE.createInternetApplication();
-		resource.getContents().add(a);
-		
-		// return
-		return a;
-	}
-	
-	/**
-	 * Save the model stored in the given resource to the given file.
-	 * 
-	 * @param resource
-	 * @param file
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
-	 */
-	public void saveModel(Resource resource, File file) throws FileNotFoundException, IOException {
-		
-		// save the model		
-		Map<?,?> options = resource.getResourceSet().getLoadOptions();
-		resource.save(new FileOutputStream(file), options);
-		System.out.println("inferred model saved to: " + file.getAbsolutePath());
-	}
-	
 }

@@ -11,11 +11,11 @@
 /**
  * Domain instance methods. (Copied from Javascript. TODO refactor with code above)
  */
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Page currentPage) FOR model::WireEdgeDestination»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object) FOR model::WireEdgeDestination»
 	«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Page currentPage) FOR model::Operation»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object) FOR model::Operation»
 	«IF php»
 		«IF name=="exists?"»
 			exists_object_instance_«safeNameString(object.id)»()
@@ -38,7 +38,7 @@
 				«IF paramWires.size != 1»
 					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for add_role, got: " + paramWires.size)»
 				«ELSE»
-					queued_add_role(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false, currentPage) FOR paramWires.first()», '«safeNameString(object.id)-»')
+					queued_add_role(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
 		«ELSEIF name=="add permission"»
@@ -46,7 +46,7 @@
 				«IF paramWires.size != 1»
 					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for add_permission, got: " + paramWires.size)»
 				«ELSE»
-					queued_add_permission(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false, currentPage) FOR paramWires.first()», '«safeNameString(object.id)-»')
+					queued_add_permission(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
 		«ELSEIF name=="remove role"»
@@ -54,7 +54,7 @@
 				«IF paramWires.size != 1»
 					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for remove_role, got: " + paramWires.size)»
 				«ELSE»
-					queued_remove_role(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false, currentPage) FOR paramWires.first()», '«safeNameString(object.id)-»')
+					queued_remove_role(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
 		«ELSEIF name=="remove permission"»
@@ -62,7 +62,7 @@
 				«IF paramWires.size != 1»
 					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for remove_permission, got: " + paramWires.size)»
 				«ELSE»
-					queued_remove_permission(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false, currentPage) FOR paramWires.first()», '«safeNameString(object.id)-»')
+					queued_remove_permission(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
 		«ELSE»

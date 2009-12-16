@@ -5,11 +5,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE attributeInstanceCall(Boolean php, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute, model::visual::Page currentPage) FOR model::WireEdgeDestination»
+«DEFINE attributeInstanceCall(Boolean php, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::WireEdgeDestination»
 	«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE attributeInstanceCall(Boolean php, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute, model::visual::Page currentPage) FOR model::Operation»
+«DEFINE attributeInstanceCall(Boolean php, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute) FOR model::Operation»
 	/* domain attribute instance: wire = «wire», attribute = «attribute», this = «this» */
 	«IF name=="save"»
 		«REM»"save" operation for DomainAttribute«ENDREM»
@@ -23,7 +23,7 @@
 		«IF isAutosaveOff(attribute)»
 			«REM»queue it up for hopefully saving it later«ENDREM»
 			queue_store_domain_attribute_«safeNameString(attribute.id)»(
-				«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false, currentPage) FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+				«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false) FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
 				«IF wire.inEdges.typeSelect(model::wires::ParameterWire).size > 1»
 					«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
 				«ENDIF»
@@ -31,7 +31,7 @@
 		«ELSE»
 			«REM»set it right now«ENDREM»
 			store_domain_attribute_«safeNameString(attribute.id)»(
-				«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false, currentPage) FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+				«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false) FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
 				«IF wire.inEdges.typeSelect(model::wires::ParameterWire).size > 1»
 					«EXPAND exception FOR throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
 				«ENDIF»

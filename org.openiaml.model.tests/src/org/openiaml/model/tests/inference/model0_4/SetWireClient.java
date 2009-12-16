@@ -6,17 +6,11 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.Set;
 
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.DecisionCondition;
-import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
-import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -81,11 +75,14 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(update);
 	
 		// connected with a run wire
-		RunInstanceWire run = assertHasRunInstanceWire(page, edit, update, "run");
+		Set<WireEdge> w1 = assertHasWiresFromTo(1, page, edit, update);
+		RunInstanceWire run = (RunInstanceWire) w1.iterator().next();
+		assertEquals("run", run.getName());
 		assertGenerated(run);
 		
 		// which has a parameter
-		ParameterWire param = assertHasParameterWire(page, value, run);
+		Set<WireEdge> w2 = assertHasWiresFromTo(1, page, value, run);
+		ParameterWire param = (ParameterWire) w2.iterator().next();
 		assertGenerated(param);
 	}
 
@@ -114,99 +111,6 @@ public class SetWireClient extends InferenceTestCase {
 		
 		// but NOT connected with a run wire
 		assertHasNoWiresFromTo(page, edit, update);
-	}
-	
-	/**
-	 * There should be elements generated from source to target, in
-	 * particular the access/init pair.
-	 * 
-	 * @throws Exception
-	 */
-	public void testSourceToTargetInit() throws Exception {
-		root = loadAndInfer(SetWireClient.class);
-
-		Page page = assertHasPage(root, "Home");
-		InputTextField source = assertHasInputTextField(page, "source");
-		InputTextField target = assertHasInputTextField(page, "target");
-
-		// there should be an 'edit' event in target
-		EventTrigger access = assertHasEventTrigger(target, "access");
-		assertGenerated(access);
-		
-		ApplicationElementProperty value = assertHasApplicationElementProperty(source, "fieldValue");
-		assertGenerated(value);
-		
-		// and an 'update' event in target
-		CompositeOperation init = assertHasCompositeOperation(target, "init");
-		assertGenerated(init);
-	
-		// connected with a run wire
-		RunInstanceWire run = assertHasRunInstanceWire(page, access, init, "run");
-		assertGenerated(run);
-		
-		// which has a parameter
-		ParameterWire param = assertHasParameterWire(page, value, run);
-		assertGenerated(param);
-		
-		// but the parameter of 'target' is not connected to the run wire
-		ApplicationElementProperty value2 = assertHasApplicationElementProperty(target, "fieldValue");
-		assertGenerated(value2);
-		
-		assertHasNoWiresFromTo(page, value2, run);
-	}
-	
-	/**
-	 * Like SyncWire, the source.access -> source.init should only be called if the
-	 * target value is actually set.
-	 * 
-	 * @see SessionSyncWires#testSessionParamterAddsCheckCondition()
-	 * @throws Exception
-	 */
-	public void testSetWireCondition() throws Exception {
-		root = loadAndInfer(SetWireClient.class);
-
-		Page page = assertHasPage(root, "Home");
-		InputTextField source = assertHasInputTextField(page, "source");
-		InputTextField target = assertHasInputTextField(page, "target");
-
-		// there should be an 'edit' event in target
-		EventTrigger access = assertHasEventTrigger(target, "access");
-		CompositeOperation init = assertHasCompositeOperation(target, "init");
-		RunInstanceWire run = assertHasRunInstanceWire(page, access, init, "run");
-		
-		// newly created condition
-		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");
-		assertGenerated(cond);
-		
-		ConditionWire cw = assertHasConditionWire(root, cond, run);
-		assertGenerated(cw);
-	}
-	
-	/**
-	 * Tests the contents of Page.target.[fieldValue is set]
-	 * 
-	 * @throws Exception
-	 */
-	public void testSetWireConditionContents() throws Exception {
-		root = loadAndInfer(SetWireClient.class);
-
-		Page page = assertHasPage(root, "Home");
-		InputTextField source = assertHasInputTextField(page, "source");
-		ApplicationElementProperty value = assertHasApplicationElementProperty(source, "fieldValue");
-		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");
-				
-		// check contents of condition
-		StartNode start = assertHasStartNode(cond);
-		FinishNode finish = assertHasFinishNode(cond);
-		CancelNode cancel = assertHasCancelNode(cond);
-		
-		DecisionCondition check = assertHasDecisionCondition(cond, "is set?");
-		
-		assertHasExecutionEdge(cond, start, check);
-		assertHasExecutionEdge(cond, check, finish);
-		assertHasExecutionEdge(cond, check, cancel);
-		
-		assertHasDataFlowEdge(cond, value, check);
 	}
 
 }

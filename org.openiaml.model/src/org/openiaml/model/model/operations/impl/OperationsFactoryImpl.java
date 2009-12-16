@@ -9,14 +9,11 @@ package org.openiaml.model.model.operations.impl;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
-import org.openiaml.model.model.operations.Arithmetic;
-import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -82,39 +79,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 			case OperationsPackage.SPLIT_NODE: return createSplitNode();
 			case OperationsPackage.JOIN_NODE: return createJoinNode();
 			case OperationsPackage.OPERATION_CALL_NODE: return createOperationCallNode();
-			case OperationsPackage.ARITHMETIC: return createArithmetic();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case OperationsPackage.ARITHMETIC_OPERATION_TYPES:
-				return createArithmeticOperationTypesFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case OperationsPackage.ARITHMETIC_OPERATION_TYPES:
-				return convertArithmeticOperationTypesToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -215,37 +181,6 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 		OperationCallNodeImpl operationCallNode = new OperationCallNodeImpl();
 		generateID(operationCallNode);
 		return operationCallNode;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Arithmetic createArithmetic() {
-		ArithmeticImpl arithmetic = new ArithmeticImpl();
-		generateID(arithmetic);
-		return arithmetic;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ArithmeticOperationTypes createArithmeticOperationTypesFromString(EDataType eDataType, String initialValue) {
-		ArithmeticOperationTypes result = ArithmeticOperationTypes.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertArithmeticOperationTypesToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

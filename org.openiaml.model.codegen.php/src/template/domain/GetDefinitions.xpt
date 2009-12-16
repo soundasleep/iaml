@@ -7,7 +7,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* code to get domain attributes */
-«DEFINE getDomainAttribute(model::visual::Page currentPage) FOR model::DomainAttributeInstance-»
+«DEFINE getDomainAttribute FOR model::DomainAttributeInstance-»
 	/**
 	 * Get the attribute instance '«safeNameString(name)»' contained in
 	 * '«safeName(eContainer)»'.
@@ -27,7 +27,7 @@
 			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for getting attribute instance '«this»'");
 			«ELSE»
-				«EXPAND Select::evaluateSelectWire(currentPage) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+				«EXPAND Select::evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 				if ($row === null) {
 					if ($default === false)					
 						throw new IamlRuntimeException("Could not find any value instance for attribute '«id»'");
@@ -61,7 +61,7 @@
 			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for trying to find attribute instance '«this»'");
 			«ELSE»
-				«EXPAND Select::evaluateSelectWire(currentPage) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+				«EXPAND Select::evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 				if ($row === null) {
 					// not found
 					return false;
@@ -171,7 +171,7 @@
 	}
 «ENDDEFINE»
 
-«DEFINE getDomainObject(model::visual::Page currentPage) FOR model::DomainObjectInstance-»
+«DEFINE getDomainObject FOR model::DomainObjectInstance-»
 	/**
 	 * Get the domain object instance '«id»'.
 	 */
@@ -184,7 +184,7 @@
 				return get_new_domain_object_«safeName()-»(«IF isAutosaveOff()»false«ENDIF»);
 			«ENDIF»
 		«ELSE»
-			«EXPAND Select::evaluateSelectWire(currentPage) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+			«EXPAND Select::evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 			if ($row === null) {
 				if ($default !== false) {
 					return $default;
@@ -209,7 +209,7 @@
 				return has_new_domain_object_«safeName()-»();
 			«ENDIF»
 		«ELSE»
-			«EXPAND Select::evaluateSelectWire(currentPage) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+			«EXPAND Select::evaluateSelectWire FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 			if ($row === null) {
 				return false;
 			}

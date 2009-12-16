@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="lib/sqlitejdbc-v056.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jwebunit-core-3.0-SNAPSHOT.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk/jwebunit-core/src/main/java"/>
-	<classpathentry exported="true" kind="lib" path="lib/jwebunit-htmlunit-plugin-3.0-SNAPSHOT.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk/jwebunit-htmlunit-plugin/src"/>
+	<classpathentry exported="true" kind="lib" path="lib/jwebunit-core-2.2.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk"/>
+	<classpathentry exported="true" kind="lib" path="lib/jwebunit-htmlunit-plugin-2.2.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-codec-1.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-collections-3.2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-httpclient-3.1.jar"/>
@@ -24,6 +23,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/reqs/slf4j-log4j12-1.5.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/xalan-2.7.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/xml-apis-1.3.04.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/sqlitejdbc-v053.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.6.0_02/lib/tools.jar" sourcepath="C:/Program Files/Java/jdk1.6.0_02/src.zip"/>

@@ -216,14 +216,13 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 	protected void checkPartialInferenceEditor() {
 		assertEditorVisual(editor_text);
 		
-		assertEditorHasChildren(6, editor_text);
+		assertEditorHasChildren(5, editor_text);
 		
 		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, "access", false);
 		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, "edit", false);
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
-		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
 		
 		// all generated
 		assertGenerated(access);
@@ -231,7 +230,6 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(update);
 		assertGenerated(init);
 		assertGenerated(fieldValue);
-		assertGenerated(condition);
 		
 		// connected by run wire
 		ConnectionNodeEditPart run = assertHasRunInstanceWire(editor_text, access, init, "run");
@@ -244,15 +242,13 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 	protected void checkFullInferenceEditor() {
 		assertEditorVisual(editor_text);
 		
-		assertEditorHasChildren(10, editor_text);
+		assertEditorHasChildren(8, editor_text);
 		
 		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, "access", false);
 		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, "edit", false);
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
-		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
-		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "fieldValue is set", true);
 
 		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, "edit", true);
 		ShapeNodeEditPart update2 = assertHasOperation(editor_text, "update", true);
@@ -264,7 +260,6 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(update);
 		assertGenerated(init);
 		assertGenerated(fieldValue);
-		assertGenerated(condition);
 		assertGenerated(edit2);
 		assertGenerated(update2);
 		assertGenerated(fieldValue2);
@@ -280,10 +275,6 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(run2);
 		ConnectionNodeEditPart param2 = assertHasParameterWire(editor_text, fieldValue, run2);
 		assertGenerated(param2);
-		
-		// connected by condition wire
-		ConnectionNodeEditPart condWire = assertHasConditionWire(editor_text, condition2, run);
-		assertGenerated(condWire);
 	}
 	
 	/**

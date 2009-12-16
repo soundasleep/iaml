@@ -18,14 +18,6 @@ import org.openiaml.emf.properties.IterateOverAll;
  *
  */
 public class ReferencesDiameter extends IterateOverAll {
-
-	/**
-	 * The actual root of the entire hierarchy, so we can access
-	 * <em>all</em> children in the entire graph, and not just those
-	 * directly contained within each iterated object. 
-	 */
-	private EObject actualRoot = null;
-
 	private int max = -1;
 
 	/**
@@ -37,8 +29,6 @@ public class ReferencesDiameter extends IterateOverAll {
 
 	@Override
 	public Object evaluate(EObject root) {
-		actualRoot = root;
-		
 		// evaluate as normal
 		super.evaluate(root);
 		// but return the maximum
@@ -53,9 +43,9 @@ public class ReferencesDiameter extends IterateOverAll {
 			@Override
 			public Collection<EObject> getEdges() {
 				// vertices = all EObjects in the root							
-				Collection<EObject> nodes = toCollection(actualRoot.eAllContents());
+				Collection<EObject> nodes = toCollection(root.eAllContents());
 				// add self
-				nodes.add(actualRoot);
+				nodes.add(root);
 				return removeIgnoredClasses(nodes);
 			}
 

@@ -24,8 +24,6 @@ public class GmfGraphTestCase extends XmlTestCase {
 	// TODO refactor into subclass
 	public static final String GMF_ROOT = "../org.openiaml.model/model/";
 
-	public static final String GMF_FILENAME = "iaml.gmfgraph";
-	
 	/**
 	 * Load the .gmfgraph.
 	 * 
@@ -33,7 +31,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public Document getGmfgraph() throws Exception {
-		return loadDocument(GMF_ROOT + GMF_FILENAME);
+		return loadDocument(GMF_ROOT + "iaml.gmfgraph");
 	}
 	
 	/**
@@ -250,69 +248,6 @@ public class GmfGraphTestCase extends XmlTestCase {
 	private String getAccessorKey(Element e) {
 		String ac = e.getAttribute("accessor");
 		return ac.substring(0, ac.lastIndexOf('/'));
-	}
-	
-	/**
-	 * Issue 54: Make sure that all nodes have a border.
-	 * Sets the border if it is not present. 
-	 * @throws Exception 
-	 * 
-	 * @throws Exception
-	 */
-	public void testNodeBorders() throws Exception {
-		Document gmfgraph = getGmfgraph();
-		IterableElementList nl = xpath(gmfgraph, "/Canvas/figures/descriptors/actualFigure[@type = 'gmfgraph:Rectangle' or @type = 'gmfgraph:Ellipse' or @type = 'gmfgraph:RoundedRectangle']");
-		
-		assertNotSame("We should have at least one figure node", nl.getLength(), 0);
-		
-		boolean changed = false;
-		for (Element child : nl) {
-			// there should be a border here
-			IterableElementList e = xpath(child, "border[@type='gmfgraph:MarginBorder']");
-			String figure = child.getAttribute("name");
-			
-			// how thick is the border of this figure?
-			int lineWidth = 1;
-			if (child.hasAttribute("lineWidth"))
-				lineWidth = Integer.valueOf(child.getAttribute("lineWidth"));
-			
-			if (e.getLength() == 0) {
-				// add one
-				System.out.println("Adding border inset for figure " + figure);
-				
-				Element border = gmfgraph.createElement("border");
-				border.setAttribute("xsi:type", "gmfgraph:MarginBorder");
-				child.appendChild(border);
-				
-				Element inset = gmfgraph.createElement("insets");
-				inset.setAttribute("top", Integer.toString(2 + lineWidth));
-				inset.setAttribute("left", Integer.toString(2 + lineWidth));
-				inset.setAttribute("bottom", Integer.toString(2 + lineWidth));
-				inset.setAttribute("right", Integer.toString(2 + lineWidth));
-				border.appendChild(inset);
-				
-				changed = true;
-				
-			} else if (e.getLength() == 1) {
-				// there should be one inset in here
-				Element inset = hasXpathFirst(e.item(0), "insets");
-				assertNotNull("No inset found for figure " + figure, inset);
-				
-				// should be equal to the expected
-				assertEquals(figure + " inset.top", Integer.toString(2 + lineWidth), inset.getAttribute("top"));
-				assertEquals(figure + " inset.left", Integer.toString(2 + lineWidth), inset.getAttribute("left"));
-				assertEquals(figure + " inset.bottom", Integer.toString(2 + lineWidth), inset.getAttribute("bottom"));
-				assertEquals(figure + " inset.right", Integer.toString(2 + lineWidth), inset.getAttribute("right"));
-			} else {
-				// this should never happen - more than one inset for a figure?
-				fail("Unexpectedly found more than one inset for figure " + figure);
-			}
-
-		}
-		
-		if (changed) {
-			saveDocument(gmfgraph, GMF_ROOT + GMF_FILENAME);
-		}
 	}
 
 }

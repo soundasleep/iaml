@@ -21,14 +21,6 @@
             red="247"
             green="221"
             blue="238"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="EventTriggerNameFigure"
@@ -60,14 +52,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainObjectNameFigure"
@@ -100,14 +84,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainAttributeNameFigure"
@@ -130,16 +106,7 @@
         name="ActivityNodeFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="ActivityNodeFigure">
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
-      </actualFigure>
+          name="ActivityNodeFigure"/>
     </descriptors>
     <descriptors
         name="ParameterFigure">
@@ -152,14 +119,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="ITALIC"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="ParameterNamePrefix"
@@ -185,14 +144,6 @@
             red="240"
             green="240"
             blue="240"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="PrimitiveOperationNameFigure"
@@ -225,14 +176,6 @@
             red="240"
             green="240"
             blue="240"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="CompositeOperationNameFigure"
@@ -259,14 +202,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="ApplicationElementNameFigure"
@@ -288,14 +223,6 @@
             red="208"
             green="185"
             blue="243"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="ApplicationElementPropertyNameFigure"
@@ -333,14 +260,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="StaticValueNameFigure"
@@ -363,14 +282,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="VisibleThingNameFigure"
@@ -397,14 +308,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainStoreNameFigure"
@@ -434,14 +337,6 @@
             red="243"
             green="212"
             blue="185"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="TemporaryVariableNamePrefix"
@@ -459,14 +354,7 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="ExecutionEdgeFigure"
-          targetDecoration="//@figures.0/@figures.0">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ExecutionEdgeNameFigure"
-            text=""/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
+          targetDecoration="//@figures.0/@figures.0"/>
     </descriptors>
     <descriptors
         name="DynamicApplicationElementSetFigure">
@@ -482,14 +370,6 @@
             red="240"
             green="220"
             blue="220"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DynamicApplicationElementSetNameFigure"
@@ -522,14 +402,6 @@
             red="240"
             green="240"
             blue="240"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="PageNameFigure"
@@ -557,14 +429,6 @@
             red="243"
             green="185"
             blue="192"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="InputFormNameFigure"
@@ -596,14 +460,6 @@
             red="243"
             green="229"
             blue="185"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="InputTextFieldNameFigure"
@@ -696,14 +552,6 @@
             red="154"
             green="224"
             blue="142"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="StartNodeLabelFigure"
@@ -725,14 +573,6 @@
             red="255"
             green="144"
             blue="142"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="CancelNodeLabelFigure"
@@ -760,14 +600,6 @@
             red="235"
             green="211"
             blue="179"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="FinishNodeLabelFigure"
@@ -784,14 +616,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DecisionNodeNameFigure"
@@ -808,14 +632,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DecisionOperationNameFigure"
@@ -950,14 +766,6 @@
             red="255"
             green="255"
             blue="240"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="SessionNameFigure"
@@ -979,14 +787,6 @@
             red="255"
             green="192"
             blue="255"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="LoginHandlerNameFigure"
@@ -1015,14 +815,6 @@
             red="255"
             green="200"
             blue="135"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="CompositeConditionNameFigure"
@@ -1056,14 +848,6 @@
             red="255"
             green="200"
             blue="135"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DecisionConditionNameFigure"
@@ -1086,14 +870,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainObjectInstanceNameFigure"
@@ -1117,14 +893,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainAttributeInstanceNameFigure"
@@ -1146,14 +914,6 @@
             red="240"
             green="240"
             blue="240"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="ButtonNameFigure"
@@ -1200,14 +960,6 @@
             red="154"
             green="224"
             blue="142"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="SplitNodeLabelFigure"
@@ -1229,14 +981,6 @@
             red="154"
             green="224"
             blue="142"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="JoinNodeLabelFigure"
@@ -1256,14 +1000,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="ITALIC"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="QueryParameterNamePrefix"
@@ -1294,14 +1030,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="UserStoreNameFigure"
@@ -1323,14 +1051,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="RoleNameFigure"
@@ -1354,14 +1074,6 @@
             red="208"
             green="185"
             blue="243"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="PermissionNameFigure"
@@ -1384,14 +1096,6 @@
             xsi:type="gmfgraph:BasicFont"
             faceName="Arial"
             style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="UserInstanceNameFigure"
@@ -1477,14 +1181,6 @@
             red="255"
             green="192"
             blue="255"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="AccessControlHandlerNameFigure"
@@ -1506,14 +1202,6 @@
             red="224"
             green="152"
             blue="224"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="OperationCallNodeLabelFigure"
@@ -1521,35 +1209,6 @@
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.56/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="ArithmeticFigure">
-      <actualFigure
-          xsi:type="gmfgraph:RoundedRectangle"
-          name="ArithmeticFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="240"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ArithmeticTypeFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -1666,9 +1325,6 @@
   <nodes
       name="OperationCallNode"
       figure="OperationCallNodeFigure"/>
-  <nodes
-      name="Arithmetic"
-      figure="ArithmeticFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2034,14 +1690,4 @@
       name="OperationCallNodeLabel"
       figure="OperationCallNodeFigure"
       accessor="//@figures.0/@descriptors.56/@accessors.0"/>
-  <labels
-      name="ArithmeticType"
-      figure="ArithmeticFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.57/@accessors.0"/>
-  <labels
-      name="ExecutionEdgeName"
-      figure="ExecutionEdgeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
 </gmfgraph:Canvas>

@@ -5,10 +5,10 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE callEvent(Boolean php, model::visual::Page currentPage) FOR model::EventTrigger»
+«DEFINE callEvent(Boolean php) FOR model::EventTrigger»
 	// Event «this»
 	// expand out all outgoing edges
-	«EXPAND template::operations::OperationCall::callOperation(php, false, currentPage) FOREACH outEdges»
+	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outEdges»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

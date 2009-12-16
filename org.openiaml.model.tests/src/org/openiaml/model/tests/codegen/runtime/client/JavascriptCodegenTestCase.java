@@ -31,8 +31,6 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 	 * Evaluate the given script and assert that it returns the given
 	 * result. The result must be a string.
 	 * 
-	 * @param expected the expected string result
-	 * @param script the Javascript code to execute
 	 * @throws Exception 
 	 */
 	public void assertJavascriptResult(String expected, String script) throws Exception {
@@ -51,12 +49,6 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 	}
 	
 	/**
-	 * Evaluate the given script and assert that it returns the given
-	 * boolean value. This is converted into a string.
-	 * 
-	 * @param expected the expected boolean result (translated into string)
-	 * @param script the Javascript code to execute
-	 * @see #assertJavascriptResult(String, String)
 	 * @throws Exception 
 	 */
 	public void assertJavascriptResult(Boolean expected, String script) throws Exception {

@@ -23,49 +23,6 @@ public class SessionSyncWiresMultiple extends CodegenTestCase {
 		super.setUp();
 		root = loadAndCodegen(SessionSyncWiresMultiple.class);
 	}
-
-	/**
-	 * A smaller version of {@link #testRequirement()}.
-	 * 
-	 * @throws Exception
-	 */
-	public void testInitSessionThenChangeOutside() throws Exception {
-		// go to sitemap
-		IFile sitemap = beginAtSitemapThenPage("outside1");
-		
-		String outside = "initial value";
-		{
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, "");
-			setLabeledFormElementField(target, outside);
-		}
-		
-		// *restart* entire session, but go to session page
-		restartSession(sitemap, "inside2");
-		{
-			// should be resurrected
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, outside);
-		}
-		
-		// change a value outside
-		gotoSitemapThenPage(sitemap, "outside1");
-		String outside2 = "changed value";
-		{
-			// should have changed
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, outside);
-			setLabeledFormElementField(target, outside2);
-		}
-		
-		// should have changed inside
-		gotoSitemapThenPage(sitemap, "inside3");
-		{
-			// should have changed
-			String target = getLabelIDForText("target");
-			assertLabeledFieldEquals(target, outside2);
-		}
-	}
 	
 	public void testRequirement() throws Exception {
 		// go to sitemap

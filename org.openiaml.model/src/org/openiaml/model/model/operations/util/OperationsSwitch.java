@@ -24,7 +24,6 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -217,16 +216,6 @@ public class OperationsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OperationsPackage.ARITHMETIC: {
-				Arithmetic arithmetic = (Arithmetic)theEObject;
-				T result = caseArithmetic(arithmetic);
-				if (result == null) result = caseActivityNode(arithmetic);
-				if (result == null) result = caseDataFlowEdgeDestination(arithmetic);
-				if (result == null) result = caseDataFlowEdgesSource(arithmetic);
-				if (result == null) result = caseGeneratedElement(arithmetic);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -363,21 +352,6 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseOperationCallNode(OperationCallNode object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Arithmetic</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Arithmetic</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseArithmetic(Arithmetic object) {
 		return null;
 	}
 

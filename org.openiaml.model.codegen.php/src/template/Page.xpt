@@ -37,8 +37,8 @@ define("CURRENT_PAGE", "«id»");
 «ENDIF»
 
 // expand any domain instances
-«EXPAND template::domain::Definitions::domainObjectDefinitions(true, this) FOR this-»
-«EXPAND template::domain::Definitions::domainAttributeDefinitions(true, this) FOR this-»
+«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
+«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
 
 // expand any users
 «EXPAND template::users::Includes::getInclude FOREACH getRoot().eAllContents.typeSelect(model::users::Role)-»
@@ -55,7 +55,7 @@ define("CURRENT_PAGE", "«id»");
 	«IF getFailHandler(containingSession()) != null»
 		try {
 	«ENDIF»
-	«EXPAND template::events::Session::runSessionEvents(this) FOREACH containingSession().eventTriggers-»
+	«EXPAND template::events::Session::runSessionEvents FOREACH containingSession().eventTriggers-»
 	«IF getFailHandler(containingSession()) != null»
 		} catch (IamlRuntimeException $e) {
 			// only expand the first fail handler
@@ -67,13 +67,13 @@ define("CURRENT_PAGE", "«id»");
 
 // run any event triggers for this page
 // exceptions are now covered by the exception handlers above
-«EXPAND template::events::Page::runPageEvents(this) FOREACH eventTriggers-»
+«EXPAND template::events::Page::runPageEvents FOREACH eventTriggers-»
 
 // expand any operations (both in this page and in any surrounding scopes)
 «EXPAND template::operations::Definitions::operationDefinitions(this, true) FOR getRoot()-»		
 
 // expand all conditions
-«EXPAND template::conditions::Definitions::conditionDefinition(true, this) FOREACH getRoot().getAllConditions()-»
+«EXPAND template::conditions::Definitions::conditionDefinition(true) FOREACH getRoot().getAllConditions()-»
 
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
@@ -88,7 +88,6 @@ define("CURRENT_PAGE", "«id»");
 
 // allow remote execution of operations
 if (require_get("operation", "")) {
-	// TODO may be a security problem
 	$operation_name = "do_" . require_get("operation");
 	$arg0 = require_get("arg0");
 	$arg1 = require_get("arg1");
@@ -96,17 +95,13 @@ if (require_get("operation", "")) {
 	// any running functions? (prevent infinite loops)
 	register_running_functions();
 
-	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1')");
+	log_message("page «name»: remote operation $operation_name($arg0, $arg1)");
 	$operation_name($arg0, $arg1);
-	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1') complete");
+	log_message("page «name»: remote operation $operation_name($arg0, $arg1) complete");
 
 	echo "ok";
 	die;
 }
-
-log_message("«id».php: User browsing started");
-
-log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -177,14 +172,14 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		set_operation_handler(new operation_handler_«safeName()»());
 
 		// condition definitions
-		«EXPAND template::conditions::Definitions::conditionDefinition(false, this) FOREACH getRoot().getAllConditions()-»
+		«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»
 
 		// dynamic elements
 		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»
 
 		// domain instances
-		«EXPAND template::domain::Definitions::domainObjectDefinitions(false, this) FOR this-»
-		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false, this) FOR this-»
+		«EXPAND template::domain::Definitions::domainObjectDefinitions(false) FOR this-»
+		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false) FOR this-»
 
 		/* actual page onload functions (called ONCE the page is fully loaded) */
 		var stored_onload_functions = new Array();
@@ -235,7 +230,7 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		
 	<?php queue_log_messages(true); ?>
 
-	«EXPAND template::visual::Render::renderVisual(this) FOREACH children.typeSelect(model::VisibleThing)-»
+	«EXPAND template::visual::Render::renderVisual FOREACH children.typeSelect(model::VisibleThing)-»
 
 	<div id="debug"></div>
 	<div id="response">empty</div>
@@ -264,10 +259,6 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 	
 </body>
 </html>
-
-<?php
-log_message("«name».php: User browsing finished");
-?>
 	«ENDFILE»
 «ENDDEFINE»
 

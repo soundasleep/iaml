@@ -109,18 +109,18 @@ public class SavedRuleSources extends InferenceTestCase {
 		// there should be additional ConditionWires to these RunInstanceWires
 		ConditionWire srcCw = (ConditionWire) getWireFromTo(root, cond, srcRw);
 		assertTrue(srcCw.isIsGenerated());
-		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires (edit/update)", srcCw.getGeneratedRule());
+		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires", srcCw.getGeneratedRule());
 		ConditionWire targetCw = (ConditionWire) getWireFromTo(root, cond, targetRw);
 		assertTrue(targetCw.isIsGenerated());
-		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires (edit/update)", targetCw.getGeneratedRule());
+		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires", targetCw.getGeneratedRule());
 
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
 		ParameterWire param1 = (ParameterWire) getWireFromTo(root, dae, srcCw);
 		assertTrue(param1.isIsGenerated());
-		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param1.getGeneratedRule());
+		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires", param1.getGeneratedRule());
 		ParameterWire param2 = (ParameterWire) getWireFromTo(root, dae, targetCw);
 		assertTrue(param2.isIsGenerated());
-		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param2.getGeneratedRule());
+		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires", param2.getGeneratedRule());
 
 
 	}

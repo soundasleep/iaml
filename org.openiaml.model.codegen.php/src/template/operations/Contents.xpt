@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::Operation-»
+«DEFINE operationContents(model::visual::Page container, Boolean php) FOR model::Operation-»
 	«EXPAND exception FOR throwException("Unknown primitive operation to expand: " + this)»
 «ENDDEFINE»
 
@@ -13,68 +13,56 @@
  * Expand the definition of an operation, assumed to be called 
  * as part of an existing function call.
  */
-«DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE operationContents(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	«REM»special primitive operation names«ENDREM»
 	«IF name == "setPropertyToValue"-»
-		«EXPAND setPropertyToValueOperation(start, container, php) FOR this»
+		«EXPAND setPropertyToValueOperation(container, php) FOR this»
 	«ELSEIF name == "set"»
-		«EXPAND setOperation(start, container, php) FOR this»
+		«EXPAND setOperation(container, php) FOR this»
 	«ELSEIF name == "javascriptAlert"»
-		«EXPAND javascriptAlert(start, container, php) FOR this»
+		«EXPAND javascriptAlert(container, php) FOR this»
 	«ELSE»
 		«EXPAND exception FOR throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
 «ENDDEFINE»
 
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
-«DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
+«DEFINE operationContents(model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
 	«REM»compare operations«ENDREM»
 	if (
 	«IF name == "equal?"-»
 		«REM»check all inflow targets are identical«ENDREM»
 		«IF php»
-			«EXPAND equalDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR " == "»
+			«EXPAND equalDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»
 		«ELSE»
-			is_array_equal(new Array(«EXPAND equalDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR ", "»))
+			is_array_equal(new Array(«EXPAND equalDecisionOperationSource(php) FOREACH inFlows SEPARATOR ", "»))
 		«ENDIF»
 	«ELSE»
 		«REM»??? who knows«ENDREM»
 		«EXPAND exception FOR throwException("Unknown decision operation to expand '" + name + ": " + this)»
 	«ENDIF»
 	) {
-		// passes
-		«IF hasPassFlow(this)»
-			«FOREACH getPassFlows() AS e-»
-				«EXPAND ExecutionFlow::addStack(start, php) FOR e»
-			«ENDFOREACH»
-		«ELSE»
-			// no pass flow
-		«ENDIF»
+		// passed (exactly one pass)
+		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR passedExectionFlow().to»
 	} else {
-		// fails
-		«IF hasFailFlow(this)»
-			«FOREACH getFailFlows() AS e-»
-				«EXPAND ExecutionFlow::addStack(start, php) FOR e»
-			«ENDFOREACH»
-		«ELSE»
-			// no fail flow
-		«ENDIF»
+		// failed (exactly one fail)
+		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR failedExectionFlow().to»
 	}
 «ENDDEFINE»
 
-«DEFINE chainedEventFlow(Boolean php, model::visual::Page currentPage) FOR model::DataFlowEdgeDestination»
+«DEFINE chainedEventFlow(Boolean php) FOR model::DataFlowEdgeDestination»
 	/**
 	 * Unexpected data flow edge destination: «this».
 	 * Will not continue chained event trigger expansion. 
 	 */
 «ENDDEFINE»
 
-«DEFINE chainedEventFlow(Boolean php, model::visual::Page currentPage) FOR model::ApplicationElementProperty»
+«DEFINE chainedEventFlow(Boolean php) FOR model::ApplicationElementProperty»
 	/* Chained event property: «this» */
 	«IF model::ContainsEventTriggers.isInstance(eContainer)»
 		/* A property has changed - call any event triggers in its parent called "edit" */
 		/* We assume the value to pass is stored in 'value' */
-		«EXPAND chainedEvent(php, true, currentPage) FOREACH ((model::ContainsEventTriggers) eContainer).eventTriggers.select(e | e.name == "edit")»
+		«EXPAND chainedEvent(php, true) FOREACH ((model::ContainsEventTriggers) eContainer).eventTriggers.select(e | e.name == "edit")»
 	«ELSE»
 		/* A property has changed, but is not contained within something with Event Triggers */
 	«ENDIF»
@@ -84,14 +72,14 @@
  * Chained events?
  */
 
-«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::ContainsEventTriggers»
-	«EXPAND chainedEvent(php, inStoreDb, currentPage) FOREACH eventTriggers»
+«DEFINE chainedEvent(Boolean php, Boolean inStoreDb) FOR model::ContainsEventTriggers»
+	«EXPAND chainedEvent(php, inStoreDb) FOREACH eventTriggers»
 «ENDDEFINE»
 
-«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::EventTrigger»
+«DEFINE chainedEvent(Boolean php, Boolean inStoreDb) FOR model::EventTrigger»
 	// expanding chained event trigger «name»
 	«IF name=="edit"»
-		«EXPAND OperationCall::callOperation(php, inStoreDb, currentPage) FOREACH outEdges»
+		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH outEdges»
 	«ELSEIF name=="access"»
 		// we don't expand 'access' events as part of a chain
 	«ELSE»
@@ -107,17 +95,17 @@
  * Get all the inflows for a DecisionOperation[equal], which are
  * then compared for equality.
  */
-«DEFINE equalDecisionOperationSource(Boolean php, model::visual::Page container) FOR model::DataFlowEdge-»
-	«EXPAND DataFlow::dataSource(php, container) FOR from-»
+«DEFINE equalDecisionOperationSource(Boolean php) FOR model::DataFlowEdge-»
+	«EXPAND DataFlow::dataSource(php) FOR from-»
 «ENDDEFINE»
 
 /**
  * outflowTarget <-- inflowTarget
  */
-«DEFINE setPropertyToValueOperation(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE setPropertyToValueOperation(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	// outFlows first to = «outFlows.first().to»
 	«IF php»
-		$arg0 = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»; 
+		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»; 
 		«IF containingSession(outFlows.first().to) != null»
 			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = $arg0;
 		«ELSE»
@@ -125,7 +113,7 @@
 		«ENDIF»
 		if (true) {
 	«ELSE»
-		var value = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»;
+		var value = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 		if (value !== null) {
 			// ignore null parameters
 			// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
@@ -181,7 +169,7 @@
 		to ajax calls and executed once the call is successful.
 	«ENDREM»
 	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR e.to-»
 	«ENDFOREACH»
 	
 	«REM»
@@ -189,32 +177,27 @@
 	«ENDREM»
 	«IF shouldExpandEventTriggers(this)»
 		// call outgoing event triggers (if any) 
-		«EXPAND chainedEventFlow(php, container) FOREACH outFlows.to-»
+		«EXPAND chainedEventFlow(php) FOREACH outFlows.to-»
 	«ELSE»
 		// we don't call additional events for «eContainer» 
 	«ENDIF»
 	}
-	«IF !php» else {
-		// we ignored a null parameter: set the operation as completed
-		// (so we don't fall off the stack)
-		completed = true;
-	}«ENDIF»
 «ENDDEFINE»
 
 /**
  * Set temporary variable <-- inFlow
  */
-«DEFINE setOperation(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE setOperation(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	«REM»set a temporary variable«ENDREM»
 	«IF php»
-		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»;
+		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 	«ELSE»
-		temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»;
+		temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 	«ENDIF»
 
 	«REM»continue«ENDREM»
 	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR e.to-»
 	«ENDFOREACH»
 «ENDDEFINE»
 
@@ -224,22 +207,22 @@
  *
  * TODO remove this and replace with a generic 'alert()' method.
  */
-«DEFINE javascriptAlert(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE javascriptAlert(model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
 	«IF php»
 		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
-		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»);
+		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
 	«ELSE»
 		// throw an alert box
 		// NOTE: alert boxes currently aren't owned by any element; they are a direct
 		// hack to display something immediately. eventually, this should be replaced
 		// with a generic alert(), that will render an alert box in the most appropriate
 		// way for the alert container. 
-		alert(«EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»);
+		alert(«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
 	«ENDIF»
 
 	«REM»continue«ENDREM»
 	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»	
+		«EXPAND ExecutionFlow::executionFlowStep(container, php) FOR e.to-»
 	«ENDFOREACH»
 «ENDDEFINE»
 

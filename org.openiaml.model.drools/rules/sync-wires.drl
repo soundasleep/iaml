@@ -25,7 +25,7 @@ rule "Sync wires between objects should create sync wires between all elements i
 		p2 : ApplicationElement(this != p1) from source.to
 		
 		e1 : ApplicationElement( eContainer == p1 )
-		e2 : ApplicationElement( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
+		e2 : ApplicationElement( eContainer == p2, eval(functions.syncMatches(e1, e2)) )
 	
 		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
 		
@@ -135,52 +135,6 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 
 end
 
-rule "Run instance wire from source.access to source.init, adding ConditionWire to check it is set"
-	when
-		sw : SyncWire(overridden == false)
-		source : ContainsEventTriggers( ) from sw.from  
-		target : ContainsOperations( ) from sw.to
-		
-		event : EventTrigger( eContainer == source, name=="access" )
-		operation : Operation( eContainer == source, name=="init" )
-		field : ApplicationElementProperty( eContainer == target, name=="fieldValue" )
-		
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
-		
-		# condition check
-		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
-		
-		not ( ConditionWire ( from == condition, to == run ))
-	
-	then
-		ConditionWire cw = handler.generatedConditionWire(sw, run, condition, run);
-		queue.add(cw, drools);
-		
-end	
-
-rule "Run instance wire from target.access to target.init, adding ConditionWire to check it is set"
-	when
-		sw : SyncWire(overridden == false)
-		source : ContainsEventTriggers( ) from sw.from  
-		target : ContainsOperations( ) from sw.to
-		
-		event : EventTrigger( eContainer == target, name=="access" )
-		operation : Operation( eContainer == target, name=="init" )
-		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
-		
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
-		
-		# condition check
-		condition : CompositeCondition ( eContainer == source, name == "fieldValue is set" )
-		
-		not ( ConditionWire ( from == condition, to == run ))
-	
-	then
-		ConditionWire cw = handler.generatedConditionWire(sw, run, condition, run);
-		queue.add(cw, drools);
-		
-end	
-
 # Ideally, these two commands would be joined together into one
 rule "Connect parameter wire to: run instance wire from source.access to source.init"
 	when
@@ -257,7 +211,7 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 		
 		# the elements contained
 		e1 : ApplicationElement( eContainer == source )
-		e2 : ApplicationElement( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		e2 : ApplicationElement( eContainer == target, eval(functions.syncMatches(e1, e2)) )
 		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
 		
 		# there is a condition on the containing sync wire
@@ -284,7 +238,7 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		
 		# the elements contained
 		e1 : ApplicationElement( eContainer == source )
-		e2 : ApplicationElement( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		e2 : ApplicationElement( eContainer == target, eval(functions.syncMatches(e1, e2)) )
 		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
 		
 		# there is a condition on the containing sync wire
@@ -386,7 +340,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		# a generated primary key
 		eval( functions.notExtendingGeneratedPrimaryKey( originalAttribute ) )
 		
-		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		not ( tf : InputTextField( eContainer == form, eval(functions.syncMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one
@@ -410,7 +364,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		# a generated primary key
 		eval( functions.notExtendingGeneratedPrimaryKey( attribute ) )
 		
-		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		not ( tf : InputTextField( eContainer == form, eval(functions.syncMatches( attribute, tf )) ) )
 		
 	then
 		# create a new one

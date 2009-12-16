@@ -5,14 +5,14 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runPageEvents(model::visual::Page currentPage) FOR model::EventTrigger-»
+«DEFINE runPageEvents FOR model::EventTrigger-»
 	// Page EventTrigger «this»
 	«IF name == "init" || name == "access"-»
 		// RunInstanceWires sorted by priority
-		«EXPAND template::operations::OperationCall::callOperation(true, false, currentPage) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 		
 		// NavigateWires in any order
-		«EXPAND template::operations::OperationCall::callOperation(true, false, currentPage) FOREACH outEdges.typeSelect(model::wires::NavigateWire)-»
+		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outEdges.typeSelect(model::wires::NavigateWire)-»
 	«ELSE-»
 		// I don't know what to do with page event "«name»"
 	«ENDIF-»

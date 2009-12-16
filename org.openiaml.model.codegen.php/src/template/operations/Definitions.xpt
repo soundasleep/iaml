@@ -38,9 +38,9 @@
 	/* simple operation */
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
 		«IF isDomainAttributeInstance(eContainer)-»
-			return «EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, false, null, (model::DomainAttributeInstance) eContainer, container) FOR this»;
+			return «EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, false, null, (model::DomainAttributeInstance) eContainer) FOR this»;
 		«ELSEIF isDomainObjectInstance(eContainer)-»
-			return «EXPAND template::domain::DomainInstance::domainInstanceCall(php, null, (model::DomainObjectInstance) eContainer, container) FOR this»;
+			return «EXPAND template::domain::DomainInstance::domainInstanceCall(php, null, (model::DomainObjectInstance) eContainer) FOR this»;
 		«ELSE»
 			«IF php»
 				throw new IamlRuntimeException("Unknown simple operation '«this»'");
@@ -77,11 +77,7 @@
 			«EXPAND Variables::temporaryVariable(php) FOREACH variables.typeSelect(model::TemporaryVariable)»			
 			
 			// execute the operation
-			«IF startNode() == null»
-				«EXPAND exception FOR throwException("Operation " + this + " had no start node")»
-			«ELSE»
-				«EXPAND ExecutionFlow::executionFlow(container, php) FOR startNode()-»
-			«ENDIF»
+			«EXPAND ExecutionFlow::executionFlow(container, php) FOR startNode()-»
 
 			// continue chained operations
 			«EXPAND ExecutionFlow::continueChainedOperations(php) FOR this»

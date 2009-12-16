@@ -70,7 +70,7 @@ rule "Create 'save' operation for DomainObjectInstances"
 		
 	then
 		# create a new one
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance);
+		CompositeOperation op = handler.generatedCompositeOperation(instance, instance);
 		handler.setName(op, "save");
 		queue.add(op, drools);
 
@@ -168,14 +168,12 @@ rule "Create the contents of the 'exists?' condition"
 		queue.add(edge1, drools);
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(condition, condition);
-		handler.setName(edge2, "yes");
 		handler.setFrom(edge2, opCall);
 		handler.setTo(edge2, finish);
 		queue.add(edge2, drools);
 
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(condition, condition);
 		handler.setFrom(edge3, opCall);
-		handler.setName(edge3, "no");
 		handler.setTo(edge3, cancel);
 		queue.add(edge3, drools);
 

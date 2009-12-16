@@ -381,26 +381,6 @@ function trim(str) {
 }
 
 /**
- * Translate the given string into a floating point.
- * If the given string is empty, return '0'.
- */
-function parse_float_or_zero(str) {
-	if (str == "")
-		return 0;
-	return parseFloat(str);
-}
-
-/**
- * Convert any non-finite number (e.g. Infinity, NaN)
- * into NaN. Otherwise, return the same number.
- */
-function convert_to_nan(n) {
-	if (isFinite(n))
-		return n;
-	return Number.NaN;
-}
-
-/**
  * Load a string of XML as an XML document using an XML parser.
  *
  * Based on http://www.w3schools.com/Xml/xml_parser.asp.
@@ -448,7 +428,7 @@ function xpathMatch(a, b) {
 	
 	// make sure we have id and path
 	if (id == null) {
-		throw new IamlJavascriptException("Cannot compare xpath: ID is null. (" + a + ", " + b + ")"); 
+		throw new IamlJavascriptException("Cannot compare xpath: ID is null."); 
 	}
 	if (ids == null) {
 		throw new IamlJavascriptException("Cannot compare xpath: List of results is null."); 
@@ -497,33 +477,6 @@ function throwJavascriptException(message) {
 	throw new IamlJavascriptException(message);
 	return false;
 }
-
-/**
- * Represents a call stack.
- */
-function CallStack() {
-	this.stack = new Array();
-	
-	this.history = new Array();
-	
-	this.pop = function() {
-		if (this.stack.length == 0) {
-			ajaxIncrement(); // prevent other events from executing
-			alert("Ran out of stack: " + this.history);
-			throw new IamlJavascriptException("Ran out of stack: " + this.history);
-		}
-		
-		var s = this.stack.pop();
-		this.history.push(s);
-		return s;
-	}
-	
-	this.push = function(s) {
-		this.stack.push(s);
-	}
-}
-
-// ----- IAML domain concepts
 
 /**
  * Represents a Page: by ID and name

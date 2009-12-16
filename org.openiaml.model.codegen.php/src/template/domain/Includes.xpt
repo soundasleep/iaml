@@ -42,12 +42,12 @@
 /**
  * Getting attribute instances.
  */
-«EXPAND GetDefinitions::getDomainAttribute(null)»
+«EXPAND GetDefinitions::getDomainAttribute»
 
 /**
  * Storing attribute instances.
  */
-«EXPAND StoreDefinitions::storeDomainAttribute(true, null)»
+«EXPAND StoreDefinitions::storeDomainAttribute(true)»
 
 	«ENDFILE»
 «ENDDEFINE»

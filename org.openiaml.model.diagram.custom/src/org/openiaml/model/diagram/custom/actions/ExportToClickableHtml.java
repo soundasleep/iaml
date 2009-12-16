@@ -26,8 +26,8 @@ import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.DiagramImageUtils;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
-import org.openiaml.model.helpers.IamlBreadcrumb;
-import org.openiaml.model.helpers.IamlBreadcrumb.BreadcrumbLinker;
+import org.openiaml.model.diagram.helpers.IamlBreadcrumb;
+import org.openiaml.model.diagram.helpers.IamlBreadcrumb.BreadcrumbLinker;
 
 
 /**

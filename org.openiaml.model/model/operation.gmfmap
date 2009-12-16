@@ -324,30 +324,6 @@
           href="iaml.gmfgraph#OperationCallNode"/>
     </ownedChild>
   </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//CompositeOperation/nodes"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//operations/Arithmetic"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( Arithmetic )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#ArithmeticType"/>
-        <features
-            href="iaml.ecore#//operations/Arithmetic/operationType"/>
-        <editableFeatures
-            href="iaml.ecore#//operations/Arithmetic/operationType"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="operation.gmftool#//@palette/@tools.0/@tools.7"/>
-      <diagramNode
-          href="iaml.gmfgraph#Arithmetic"/>
-    </ownedChild>
-  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>
@@ -370,13 +346,6 @@
         href="iaml.ecore#//ExecutionEdge"/>
     <domainSpecialization
         body="self.oclIsTypeOf( ExecutionEdge )"/>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="iaml.gmfgraph#ExecutionEdgeName"/>
-      <features
-          href="iaml.ecore#//NamedElement/name"/>
-    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//CompositeOperation/executionEdges"/>
     <tool

@@ -15,8 +15,6 @@ import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import junit.framework.AssertionFailedError;
-
 import org.openiaml.emf.SoftCache;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
@@ -128,34 +126,19 @@ public class PluginsTestCase extends XmlTestCase {
 	 * Get all of the manifests loaded from disk.
 	 * 
 	 * @return
-	 * @see #getAllManifests(boolean)
 	 */
 	public static Set<String> getAllManifests() {
-		return getAllManifests(true);
-	}
-
-	/**
-	 * Get all of the manifests loaded from disk.
-	 * 
-	 * @param allowExcluded should we exclude the plugins listed
-	 * 	in {@link #NO_MANIFEST_PLUGINS}?
-	 * @return A list of manifest file strings.
-	 */
-	public static Set<String> getAllManifests(boolean allowExcluded) {
 		if (loadedManifests == null) {
 			loadedManifests = new HashSet<String>();
 
 			for (String plugin : getPlugins()) {
 				boolean excluded = false;
-				if (allowExcluded) {
-					// we allow excluding particular plugins
-					for (String exclude : NO_MANIFEST_PLUGINS) {
-						if (plugin.endsWith(exclude))
-							excluded = true;
-					}
+				for (String exclude : NO_MANIFEST_PLUGINS) {
+					if (plugin.endsWith(exclude))
+						excluded = true;
 				}
 				
-				if (!allowExcluded || !excluded) {
+				if (!excluded) {
 					String manifest = plugin + "/META-INF/MANIFEST.MF";
 					assertTrue("Manifest '" + manifest + "' does not exist", new File(manifest).exists());
 					loadedManifests.add(manifest);
@@ -223,16 +206,9 @@ public class PluginsTestCase extends XmlTestCase {
 		// now lets test each manifest.mf
 		for (String file : getAllManifests()) {
 			Properties properties = getManifestCache().get(file);
-			try {
-				assertEquals( file + ": expected equal version",
-						version,
-						properties.get("Bundle-Version"));
-				
-			} catch (AssertionFailedError e) {
-				// print out for easier debugging
-				System.err.println(file.substring(file.indexOf("..")));
-				throw e;	// rethrow
-			}
+			assertEquals( file + ": expected equal version",
+					version,
+					properties.get("Bundle-Version"));
 		}
 	}
 	
@@ -296,10 +272,6 @@ public class PluginsTestCase extends XmlTestCase {
 		// now lets test each manifest.mf
 		for (String file : getAllManifests()) {
 			Properties properties = getManifestCache().get(file);
-			
-			if (!properties.containsKey("Bundle-Vendor")) {
-				fail(file + " does not contain key 'Bundle-Vendor'");
-			}
 			
 			if (properties.get("Bundle-Vendor").equals("%providerName")) {
 				// lets rewrite it manually

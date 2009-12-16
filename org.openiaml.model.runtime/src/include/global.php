@@ -5,42 +5,9 @@
  *
  */
 
-/**
- * We need to be able to use SID in the URL; remote URL calls require it 
- * (see call_remote_event.php for example).
- * The default setting was changed in PHP 5.3.0.
- */
-ini_set("session.use_only_cookies", false);
-
 session_start();
-ob_start('ob_error_handler');		/* we will implicitly flush at the end (needed for redirections when input_text_field values cannot be found) */
+ob_start();		/* we will implicitly flush at the end (needed for redirections when input_text_field values cannot be found) */
 set_exception_handler('default_exception_handler');			/* default exception handler */
-
-/**
- * If a fatal error occurs in PHP, we cannot catch it with a user-defined
- * exception handler or error handler. Using this, we can catch these errors
- * anyway.
- *
- * We need to do this so that fatal errors return a 500 header, not just a
- * 200 etc. This solves the failing test case runtime.server.PhpMethodsTest#testMissingFunction().
- *
- * If a fatal error occurs, we throw an exception.
- */
-function ob_error_handler($output) {
-	if ($error = error_get_last()) {
-		switch ($error['type']) {
-			case E_ERROR: 
-			case E_CORE_ERROR:
-			case E_COMPILE_ERROR:
-			case E_USER_ERROR:
-				header("HTTP/1.0 500 Fatal error");
-				return "<b>A fatal error occured:</b> $error[message] at $error[file]:$error[line]";
-		}
-	}
-	
-	// otherwise, return the output as normal
-	return $output;
-}
 
 require("databases.php");
 require("first_class_types.php");
@@ -51,8 +18,7 @@ function log_message($msg, $also_debug = true) {
 	$msg = "[$log_unique_id] $msg";		// append a unique ID to help us track requests
 
 	$fp = fopen("php.log", "a");
-	$msg_indent = str_replace("\n", "\n\t", $msg);
-	fwrite($fp, date("Y-m-d H:i:s") . " $msg_indent\n");
+	fwrite($fp, date("Y-m-d H:i:s") . " header.php: $msg\n");
 	fclose($fp);
 
 	// also echo to debug
@@ -417,24 +383,4 @@ function default_exception_handler($e) {
 	log_message("[default exception handler] Redirecting to '$url' (fail)");
 	header("Location: $url");
 	die;
-}
-
-/**
- * Represents a stack for function calls.
- */
-class CallStack {
-
-	private $stack = array();
-	
-	public function pop() {
-		if (count($this->stack) == 0)
-			throw new IamlRuntimeException("Ran out of stack");
-		
-		return array_pop($this->stack);
-	}
-	
-	public function push($s) {
-		$this->stack[] = $s;
-	}
-
 }

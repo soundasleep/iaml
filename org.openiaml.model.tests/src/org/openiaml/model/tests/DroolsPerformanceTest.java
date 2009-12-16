@@ -73,7 +73,7 @@ public class DroolsPerformanceTest extends ModelInferenceTestCase implements IMo
 			
 			InternetApplication root = (InternetApplication) reloader.reload();
 			
-			infer(root, false, reloader);
+			loadAndInfer(root, false, reloader);
 		}
 		
 	}

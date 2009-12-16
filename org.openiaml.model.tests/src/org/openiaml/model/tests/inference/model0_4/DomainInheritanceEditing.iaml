@@ -51,7 +51,7 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12392019286.17c" from="visual.12392019277.e7" to="model.12392019209.237" name="sync"/>
     </children>
     <children xsi:type="iaml:DomainObjectInstance" id="model.12392019209.237" name="new student" inEdges="wires.12392019286.17b wires.12392019286.17c" autosave="false">
-      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.12392019286.22b" id="model.12392019209.2aa" name="save"/>
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12392019286.22b" id="model.12392019209.2aa" name="save"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12392019277.178" name="save student" outEdges="wires.12392019286.22b">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12392019286.22b" from="visual.12392019277.178" to="model.12392019209.2aa" name="onClick"/>

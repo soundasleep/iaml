@@ -62,7 +62,7 @@
 	«EXPAND xpt::Common::generatedMemberComment»
 	public String getBreadcrumb() {
 		org.eclipse.emf.ecore.EObject target = ((org.eclipse.gmf.runtime.notation.Diagram) getModel()).getElement();
-		return org.openiaml.model.helpers.IamlBreadcrumb.breadcrumb(target, 3);
+		return org.openiaml.model.diagram.helpers.IamlBreadcrumb.breadcrumb(target, 3);
 	}
 	
 «ENDAROUND»

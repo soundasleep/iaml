@@ -83,14 +83,14 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 		    	
 		    	monitor.beginTask(getProgressMessage(), result.size() * scale);
 		    	
-		    	for (final T individual : result) {
+		    	for (T individual : result) {
 		    		if (monitor.isCanceled())
 		    			return;
 
 		    		// create a new sub-progress
 		    		IProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1 * scale);
 		    		
-					final IStatus status = execute(individual, subMonitor);
+					IStatus status = execute(individual, subMonitor);
 					if (!status.isOK()) {
 						// make a status to wrap it around
 						IStatus multi = new MultiStatus(
@@ -102,22 +102,6 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 						// log it
 						getErrorHandler().log(multi);
 						
-						// should we display a message to the user?
-						if (shouldDisplayErrorToUser()) {
-							Display.getDefault().asyncExec(new Runnable() {
-
-								@Override
-								public void run() {
-									ErrorDialog.openError(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-											getProgressMessage(), 
-											getErrorMessage(individual, status.getMessage()), 
-											status);
-								}
-								
-							});
-							
-						}
-						
 						monitor.done();
 						return;
 					}
@@ -128,16 +112,6 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 		};
 	}
 	
-	/**
-	 * If the action fails (returns a Status which is not OK), should
-	 * we display the failure to the user?
-	 * 
-	 * @return
-	 */
-	public boolean shouldDisplayErrorToUser() {
-		return false;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */

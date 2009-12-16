@@ -13,14 +13,15 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
-import org.openiaml.model.diagram.part.IamlDiagramEditor;
-import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.diagram.part.IamlDiagramEditor;
+import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
+import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.tests.EclipseTestCaseHelper;
 
 /**
  * Try creating a new diagram and new domain file.

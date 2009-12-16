@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -30,7 +29,6 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
@@ -56,7 +54,6 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#isOverridden <em>Overridden</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getDataEdges <em>Data Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeConditionImpl#getExecutionEdges <em>Execution Edges</em>}</li>
@@ -228,16 +225,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOperations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Operation> operations;
 
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
@@ -500,18 +487,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Operation> getOperations() {
-		if (operations == null) {
-			operations = new EObjectContainmentEList<Operation>(Operation.class, this, ModelPackage.COMPOSITE_CONDITION__OPERATIONS);
-		}
-		return operations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<ActivityNode> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentEList<ActivityNode>(ActivityNode.class, this, ModelPackage.COMPOSITE_CONDITION__NODES);
@@ -620,8 +595,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
-			case ModelPackage.COMPOSITE_CONDITION__OPERATIONS:
-				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_CONDITION__DATA_EDGES:
@@ -668,8 +641,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				return getGeneratedElements();
 			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
 				return isOverridden();
-			case ModelPackage.COMPOSITE_CONDITION__OPERATIONS:
-				return getOperations();
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				return getNodes();
 			case ModelPackage.COMPOSITE_CONDITION__DATA_EDGES:
@@ -733,10 +704,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				return;
 			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
-				return;
-			case ModelPackage.COMPOSITE_CONDITION__OPERATIONS:
-				getOperations().clear();
-				getOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				getNodes().clear();
@@ -807,9 +774,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
-			case ModelPackage.COMPOSITE_CONDITION__OPERATIONS:
-				getOperations().clear();
-				return;
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				getNodes().clear();
 				return;
@@ -862,8 +826,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
-			case ModelPackage.COMPOSITE_CONDITION__OPERATIONS:
-				return operations != null && !operations.isEmpty();
 			case ModelPackage.COMPOSITE_CONDITION__NODES:
 				return nodes != null && !nodes.isEmpty();
 			case ModelPackage.COMPOSITE_CONDITION__DATA_EDGES:
@@ -937,12 +899,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 				default: return -1;
 			}
 		}
-		if (baseClass == ContainsOperations.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.COMPOSITE_CONDITION__OPERATIONS: return ModelPackage.CONTAINS_OPERATIONS__OPERATIONS;
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1000,12 +956,6 @@ public class CompositeConditionImpl extends EObjectImpl implements CompositeCond
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.COMPOSITE_CONDITION__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.COMPOSITE_CONDITION__OVERRIDDEN;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsOperations.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_OPERATIONS__OPERATIONS: return ModelPackage.COMPOSITE_CONDITION__OPERATIONS;
 				default: return -1;
 			}
 		}

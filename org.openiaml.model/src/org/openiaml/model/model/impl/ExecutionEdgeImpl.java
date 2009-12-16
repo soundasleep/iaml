@@ -22,7 +22,6 @@ import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +34,6 @@ import org.openiaml.model.model.NamedElement;
  *   <li>{@link org.openiaml.model.model.impl.ExecutionEdgeImpl#isIsGenerated <em>Is Generated</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ExecutionEdgeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ExecutionEdgeImpl#getGeneratedRule <em>Generated Rule</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ExecutionEdgeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ExecutionEdgeImpl#getFrom <em>From</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ExecutionEdgeImpl#getTo <em>To</em>}</li>
  * </ul>
@@ -113,26 +111,6 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 	 * @ordered
 	 */
 	protected String generatedRule = GENERATED_RULE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
@@ -246,27 +224,6 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 		generatedRule = newGeneratedRule;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.EXECUTION_EDGE__GENERATED_RULE, oldGeneratedRule, generatedRule));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.EXECUTION_EDGE__NAME, oldName, name));
 	}
 
 	/**
@@ -446,8 +403,6 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 				return getId();
 			case ModelPackage.EXECUTION_EDGE__GENERATED_RULE:
 				return getGeneratedRule();
-			case ModelPackage.EXECUTION_EDGE__NAME:
-				return getName();
 			case ModelPackage.EXECUTION_EDGE__FROM:
 				if (resolve) return getFrom();
 				return basicGetFrom();
@@ -480,9 +435,6 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 			case ModelPackage.EXECUTION_EDGE__GENERATED_RULE:
 				setGeneratedRule((String)newValue);
 				return;
-			case ModelPackage.EXECUTION_EDGE__NAME:
-				setName((String)newValue);
-				return;
 			case ModelPackage.EXECUTION_EDGE__FROM:
 				setFrom((ExecutionEdgesSource)newValue);
 				return;
@@ -513,9 +465,6 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 			case ModelPackage.EXECUTION_EDGE__GENERATED_RULE:
 				setGeneratedRule(GENERATED_RULE_EDEFAULT);
 				return;
-			case ModelPackage.EXECUTION_EDGE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case ModelPackage.EXECUTION_EDGE__FROM:
 				setFrom((ExecutionEdgesSource)null);
 				return;
@@ -542,46 +491,12 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case ModelPackage.EXECUTION_EDGE__GENERATED_RULE:
 				return GENERATED_RULE_EDEFAULT == null ? generatedRule != null : !GENERATED_RULE_EDEFAULT.equals(generatedRule);
-			case ModelPackage.EXECUTION_EDGE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.EXECUTION_EDGE__FROM:
 				return from != null;
 			case ModelPackage.EXECUTION_EDGE__TO:
 				return to != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.EXECUTION_EDGE__NAME: return ModelPackage.NAMED_ELEMENT__NAME;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.NAMED_ELEMENT__NAME: return ModelPackage.EXECUTION_EDGE__NAME;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -600,8 +515,6 @@ public class ExecutionEdgeImpl extends EObjectImpl implements ExecutionEdge {
 		result.append(id);
 		result.append(", generatedRule: ");
 		result.append(generatedRule);
-		result.append(", name: ");
-		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

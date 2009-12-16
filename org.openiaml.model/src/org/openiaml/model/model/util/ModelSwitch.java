@@ -418,7 +418,6 @@ public class ModelSwitch<T> {
 			case ModelPackage.EXECUTION_EDGE: {
 				ExecutionEdge executionEdge = (ExecutionEdge)theEObject;
 				T result = caseExecutionEdge(executionEdge);
-				if (result == null) result = caseNamedElement(executionEdge);
 				if (result == null) result = caseGeneratedElement(executionEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -557,7 +556,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsConditions(compositeCondition);
 				if (result == null) result = caseCondition(compositeCondition);
 				if (result == null) result = caseGeneratesElements(compositeCondition);
-				if (result == null) result = caseContainsOperations(compositeCondition);
 				if (result == null) result = caseWireEdgesSource(compositeCondition);
 				if (result == null) result = caseDataFlowEdgesSource(compositeCondition);
 				if (result == null) result = caseNamedElement(compositeCondition);

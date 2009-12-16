@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.inference;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -58,43 +57,19 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp, "run");
-		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp, "run");
+		RunInstanceWire srcRw = (RunInstanceWire) getWireFromTo(wire, srcEdit, targetOp);
+		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
 
 		// [new]
 		// there should be a condition wire to the new SyncWire
-		ConditionWire cw2 = assertHasConditionWire(root, cond, sw);
+		ConditionWire cw2 = (ConditionWire) getWireFromTo(root, cond, sw);
 
 		// there should be additional ConditionWires to these RunInstanceWires
-		ConditionWire srcCw = assertHasConditionWire(page1, cond, srcRw);
-		ConditionWire targetCw = assertHasConditionWire(page1, cond, targetRw);
+		ConditionWire srcCw = (ConditionWire) getWireFromTo(page1, cond, srcRw);
+		ConditionWire targetCw = (ConditionWire) getWireFromTo(page1, cond, targetRw);
 
 		// there doesn't need to be any parameters to these ConditionWires
 
-		// we should also have condition wires copied to the 'init' operations
-		EventTrigger srcAccess = assertHasEventTrigger(field1, "access");
-		Operation srcInit = assertHasOperation(field1, "init");
-		EventTrigger targetAccess = assertHasEventTrigger(field2, "access");
-		Operation targetInit = assertHasOperation(field2, "init");
-		assertNotSame(srcAccess, targetAccess);
-		assertNotSame(srcInit, targetInit);
-		
-		// execution wires
-		RunInstanceWire srcInitRun = assertHasRunInstanceWire(wire, srcAccess, srcInit, "run");
-		RunInstanceWire targetInitRun = assertHasRunInstanceWire(wire, targetAccess, targetInit, "run");
-		
-		// they should have incoming parameters
-		ApplicationElementProperty field1value = assertHasApplicationElementProperty(field1, "fieldValue");
-		ApplicationElementProperty field2value = assertHasApplicationElementProperty(field2, "fieldValue");
-		assertNotSame(field1value, field2value);
-		
-		assertHasParameterWire(root, field2value, srcInitRun);
-		assertHasParameterWire(root, field1value, targetInitRun);
-		
-		// but they should also have condition wires
-		assertHasConditionWire(page1, cond, srcInitRun);
-		assertHasConditionWire(page1, cond, targetInitRun);
-		
 		assertNotNull(cw2);
 		assertNotNull(srcCw);
 		assertNotNull(targetCw);

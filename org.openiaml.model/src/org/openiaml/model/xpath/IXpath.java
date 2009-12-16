@@ -38,7 +38,7 @@ public interface IXpath {
 	 * Get the first node result from an XPath query. Returns the 
 	 * node found, or null if none or more than one is found.
 	 * 
-	 * @return the found node, or null if none is found (or more than one is found)
+	 * @returns the found node, or null if none is found (or more than one is found)
 	 */
 	public Element hasXpathFirst(Element e, String query) throws XPathExpressionException;
 	
@@ -46,7 +46,7 @@ public interface IXpath {
 	 * Get the first node result from an XPath query. Returns the 
 	 * node found, or null if none or more than one is found.
 	 * 
-	 * @return the found node, or null if none is found (or more than one is found)
+	 * @returns the found node, or null if none is found (or more than one is found)
 	 */
 	public Element hasXpathFirst(Document e, String query) throws XPathExpressionException;
 	

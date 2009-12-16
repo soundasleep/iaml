@@ -3,6 +3,7 @@
 	<classpathentry excluding="main/java/|main/rules/" kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/core-3.2.3.v_686_R32x.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/ant-1.6.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/reqs/antlr-runtime-3.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/ant-nodeps-1.6.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/jsr94-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/jxl-2.4.2.jar"/>

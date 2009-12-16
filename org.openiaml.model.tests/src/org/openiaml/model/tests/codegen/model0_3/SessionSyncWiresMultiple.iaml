@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="root">
-  <children xsi:type="iaml.visual:Page" id="outside1" name="outside1" outEdges="sync1">
-    <wires xsi:type="iaml.wires:SyncWire" id="sync1" from="outside1" to="outside2" name="sync outside"/>
-    <children xsi:type="iaml.visual:InputTextField" id="o1_target" name="target"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120a748ea9e.3f">
+  <children xsi:type="iaml.visual:Page" id="visual.120a748ebb7.71" name="outside1" outEdges="wires.120a748ec72.13">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.120a748ec72.13" from="visual.120a748ebb7.71" to="visual.120a748ebb7.72" name="sync outside"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.7b" name="target"/>
   </children>
-  <children xsi:type="iaml.visual:Page" id="outside2" name="outside2" outEdges="sync2" inEdges="sync1">
-    <wires xsi:type="iaml.wires:SyncWire" id="sync2" from="outside2" to="inside1" name="sync to inside"/>
-    <children xsi:type="iaml.visual:InputTextField" id="o2_target" name="target"/>
-    <children xsi:type="iaml.visual:InputTextField" id="o2_unrelated" name="unrelated"/>
+  <children xsi:type="iaml.visual:Page" id="visual.120a748ebb7.72" name="outside2" outEdges="wires.120a748ec72.4a" inEdges="wires.120a748ec72.13">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.120a748ec72.4a" from="visual.120a748ebb7.72" to="visual.120a748ebb7.c7" name="sync to inside"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.90" name="target"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.9b" name="unrelated"/>
   </children>
   <sessions id="scopes.120a748ed3d.31" name="session">
-    <children xsi:type="iaml.visual:Page" id="inside1" name="inside1" outEdges="sync3" inEdges="sync2">
-      <wires xsi:type="iaml.wires:SyncWire" id="sync3" from="inside1" to="inside2" name="sync"/>
-      <children xsi:type="iaml.visual:InputTextField" id="i1_target" name="target"/>
+    <children xsi:type="iaml.visual:Page" id="visual.120a748ebb7.c7" name="inside1" outEdges="wires.120a748ec72.3f" inEdges="wires.120a748ec72.4a">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.120a748ec72.3f" from="visual.120a748ebb7.c7" to="visual.120a748ebb7.c8" name="sync"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.103" name="target"/>
     </children>
-    <children xsi:type="iaml.visual:Page" id="inside2" name="inside2" outEdges="sync4" inEdges="sync3">
-      <wires xsi:type="iaml.wires:SyncWire" id="sync4" from="inside2" to="inside3" name="sync"/>
-      <children xsi:type="iaml.visual:InputTextField" id="i2_target" name="target"/>
+    <children xsi:type="iaml.visual:Page" id="visual.120a748ebb7.c8" name="inside2" outEdges="wires.120a748ec72.40" inEdges="wires.120a748ec72.3f">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.120a748ec72.40" from="visual.120a748ebb7.c8" to="visual.120a748ebb7.c9" name="sync"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.15e" name="target"/>
     </children>
-    <children xsi:type="iaml.visual:Page" id="inside3" name="inside3" inEdges="sync4">
-      <children xsi:type="iaml.visual:InputTextField" id="i3_target" name="target"/>
+    <children xsi:type="iaml.visual:Page" id="visual.120a748ebb7.c9" name="inside3" inEdges="wires.120a748ec72.40">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.1c6" name="target"/>
     </children>
   </sessions>
 </iaml:InternetApplication>

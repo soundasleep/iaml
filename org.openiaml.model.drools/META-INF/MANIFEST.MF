@@ -2,17 +2,17 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Drools Rules for Openiaml
 Bundle-SymbolicName: org.openiaml.model.drools
-Bundle-Version: 0.4.1.qualifier
+Bundle-Version: 0.4.0.qualifier
 Export-Package: org.openiaml.model.drools,
  org.openiaml.model.drools.export
 Require-Bundle: org.openiaml.model,
  org.eclipse.core.runtime,
  ca.ecliptical.emf.xpath;bundle-version="2.0.1",
  org.eclipse.emf.ecore;bundle-version="2.5.0",
- org.apache.xerces,
- org.openiaml.emf.properties,
- org.antlr.runtime;bundle-version="3.0.0"
+ org.openiaml.emf.properties;bundle-version="0.3.1",
+ org.apache.xerces;bundle-version="2.9.0"
 Bundle-ClassPath: lib/reqs/ant-1.6.5.jar,
+ lib/reqs/antlr-runtime-3.0.jar,
  lib/reqs/ant-nodeps-1.6.5.jar,
  lib/reqs/jsr94-1.1.jar,
  lib/reqs/jxl-2.4.2.jar,

@@ -19,11 +19,6 @@ import org.openiaml.model.tests.EmfToDot;
  */
 public class PropertiesFileWithInputForm extends CodegenTestCase {
 
-	/**
-	 * TODO Exports the initial model, and the inferred model, into DOT format. 
-	 * 
-	 * @throws Exception
-	 */
 	public void testExportDot() throws Exception {
 		
 		EmfToDot dot = new EmfToDot(); 

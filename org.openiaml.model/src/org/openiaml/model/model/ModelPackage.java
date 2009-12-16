@@ -2766,22 +2766,13 @@ public interface ModelPackage extends EPackage {
 	int EXECUTION_EDGE__GENERATED_RULE = GENERATED_ELEMENT__GENERATED_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_EDGE__NAME = GENERATED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EDGE__FROM = GENERATED_ELEMENT_FEATURE_COUNT + 1;
+	int EXECUTION_EDGE__FROM = GENERATED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -2790,7 +2781,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EDGE__TO = GENERATED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_EDGE__TO = GENERATED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Execution Edge</em>' class.
@@ -2799,7 +2790,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EDGE_FEATURE_COUNT = GENERATED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_EDGE_FEATURE_COUNT = GENERATED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>In Executions</b></em>' reference list.
@@ -2884,15 +2875,6 @@ public interface ModelPackage extends EPackage {
 	int CONDITIONAL_EDGE__GENERATED_RULE = EXECUTION_EDGE__GENERATED_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITIONAL_EDGE__NAME = EXECUTION_EDGE__NAME;
-
-	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2911,13 +2893,22 @@ public interface ModelPackage extends EPackage {
 	int CONDITIONAL_EDGE__TO = EXECUTION_EDGE__TO;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL_EDGE__NAME = EXECUTION_EDGE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Conditional Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONDITIONAL_EDGE_FEATURE_COUNT = EXECUTION_EDGE_FEATURE_COUNT + 0;
+	int CONDITIONAL_EDGE_FEATURE_COUNT = EXECUTION_EDGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3788,22 +3779,13 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_CONDITION__OVERRIDDEN = CONTAINS_CONDITIONS_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_CONDITION__OPERATIONS = CONTAINS_CONDITIONS_FEATURE_COUNT + 10;
-
-	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__NODES = CONTAINS_CONDITIONS_FEATURE_COUNT + 11;
+	int COMPOSITE_CONDITION__NODES = CONTAINS_CONDITIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Data Edges</b></em>' containment reference list.
@@ -3812,7 +3794,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__DATA_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 12;
+	int COMPOSITE_CONDITION__DATA_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Execution Edges</b></em>' containment reference list.
@@ -3821,7 +3803,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__EXECUTION_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 13;
+	int COMPOSITE_CONDITION__EXECUTION_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -3830,7 +3812,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__VARIABLES = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
+	int COMPOSITE_CONDITION__VARIABLES = CONTAINS_CONDITIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -3839,7 +3821,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 15;
+	int COMPOSITE_CONDITION__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -3848,7 +3830,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__PARAMETERS = CONTAINS_CONDITIONS_FEATURE_COUNT + 16;
+	int COMPOSITE_CONDITION__PARAMETERS = CONTAINS_CONDITIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>Composite Condition</em>' class.
@@ -3857,7 +3839,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 17;
+	int COMPOSITE_CONDITION_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 16;
 
 
 	/**

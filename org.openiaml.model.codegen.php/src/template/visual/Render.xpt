@@ -5,20 +5,20 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE renderVisual(model::visual::Page currentPage) FOR model::VisibleThing-»
+«DEFINE renderVisual FOR model::VisibleThing-»
 	«EXPAND exception FOR throwException("Cannot render abstract visible thing: " + this)»
 «ENDDEFINE»
 
-«DEFINE renderVisual(model::visual::Page currentPage) FOR model::visual::InputForm-»
-	«EXPAND InputForm::renderForm(currentPage) FOR this-»
+«DEFINE renderVisual FOR model::visual::InputForm-»
+	«EXPAND InputForm::renderForm FOR this-»
 «ENDDEFINE»
 
-«DEFINE renderVisual(model::visual::Page currentPage) FOR model::visual::InputTextField-»
-	«EXPAND InputTextField::renderTextField(currentPage) FOR this-»
+«DEFINE renderVisual FOR model::visual::InputTextField-»
+	«EXPAND InputTextField::renderTextField FOR this-»
 «ENDDEFINE»
 
-«DEFINE renderVisual(model::visual::Page currentPage) FOR model::visual::Button-»
-	«EXPAND Button::renderButton(currentPage) FOR this-»
+«DEFINE renderVisual FOR model::visual::Button-»
+	«EXPAND Button::renderButton FOR this-»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

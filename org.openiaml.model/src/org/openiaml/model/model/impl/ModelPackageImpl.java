@@ -1742,7 +1742,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
 		executionEdgeEClass.getESuperTypes().add(this.getGeneratedElement());
-		executionEdgeEClass.getESuperTypes().add(this.getNamedElement());
 		conditionalEdgeEClass.getESuperTypes().add(this.getExecutionEdge());
 		conditionalEdgeEClass.getESuperTypes().add(this.getNamedElement());
 		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getApplicationElement());
@@ -1758,7 +1757,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		compositeConditionEClass.getESuperTypes().add(this.getContainsConditions());
 		compositeConditionEClass.getESuperTypes().add(this.getCondition());
 		compositeConditionEClass.getESuperTypes().add(this.getGeneratesElements());
-		compositeConditionEClass.getESuperTypes().add(this.getContainsOperations());
 		domainAttributeInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		queryParameterEClass.getESuperTypes().add(this.getNamedElement());
 		queryParameterEClass.getESuperTypes().add(this.getWireEdgesSource());
@@ -2060,12 +2058,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "added", "0.3"
 		   });					
 		addAnnotation
-		  (executionEdgeEClass, 
-		   source, 
-		   new String[] {
-			 "changed", "0.4.1 to add NamedElement supertype"
-		   });		
-		addAnnotation
 		  (shouldntContainWiresEClass, 
 		   source, 
 		   new String[] {
@@ -2141,7 +2133,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (compositeConditionEClass, 
 		   source, 
 		   new String[] {
-			 "comment", "added in 0.2\r\n_shouldnt_properties removed in 0.4\r\nContainsOperations added in 0.4.1"
+			 "comment", "added in 0.2\r\n_shouldnt_properties removed in 0.4"
 		   });			
 		addAnnotation
 		  (containsConditionsEClass, 
@@ -2278,7 +2270,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents the execution flow within an {@link Operation}."
-		   });				
+		   });			
 		addAnnotation
 		  (generatedElementEClass, 
 		   source, 

@@ -25,10 +25,10 @@ package org.openiaml.model.model;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getExecutionEdge()
- * @model annotation="http://openiaml.org/comment changed='0.4.1 to add NamedElement supertype'"
+ * @model
  * @generated
  */
-public interface ExecutionEdge extends GeneratedElement, NamedElement {
+public interface ExecutionEdge extends GeneratedElement {
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.openiaml.model.model.ExecutionEdgesSource#getOutExecutions <em>Out Executions</em>}'.

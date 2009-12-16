@@ -253,12 +253,9 @@
       <details key="documentation" value="Temporary storage of values contained within an {@link Operation} which will be lost once the operation is completed."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdge" eSuperTypes="#//GeneratedElement #//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdge" eSuperTypes="#//GeneratedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents the execution flow within an {@link Operation}."/>
-    </eAnnotations>
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="changed" value="0.4.1 to add NamedElement supertype"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ExecutionEdgesSource"
         eOpposite="#//ExecutionEdgesSource/outExecutions"/>
@@ -373,9 +370,9 @@
       <details key="documentation" value="A Condition allows for conditional execution of {@link WireEdge wires} when {@link ConditionWire connected}."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsConditions #//Condition #//GeneratesElements #//ContainsOperations">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsConditions #//Condition #//GeneratesElements">
     <eAnnotations source="http://openiaml.org/comment">
-      <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4&#xD;&#xA;ContainsOperations added in 0.4.1"/>
+      <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A custom condition, composed in the same way as {@link CompositeOperation operations}."/>
@@ -660,29 +657,8 @@
         <details key="documentation" value="A virtual {@link Operation} call; the outgoing {@link RunInstanceWire} will be executed."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Arithmetic" eSuperTypes="#//ActivityNode #//DataFlowEdgeDestination #//DataFlowEdgesSource">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="added in 0.4.1"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="An inline expression of arithmetic. Can be used as part of a {@link PrimitiveOperation set operation}, for example."/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationType" eType="#//operations/ArithmeticOperationTypes"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="ArithmeticOperationTypes">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="added in 0.4.1"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents the range of possible {@link ArithmeticOperation arithmetic operations}."/>
-      </eAnnotations>
-      <eLiterals name="ADD"/>
-      <eLiterals name="SUBTRACT" value="1"/>
-      <eLiterals name="MULTIPLY" value="2"/>
-      <eLiterals name="DIVIDE" value="3"/>
-    </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="iaml.scopes">
+  <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="scopes">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.2"/>
       <details key="comment" value="other scopes: iaml:InternetApplication, [...], iaml.visual:Page, iaml.visual:Frame, iaml:ApplicationElement, iaml:Operation"/>

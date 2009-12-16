@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Coverage: StoreDbPhp.xpt</title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
+
+<h1>StoreDbPhp.xpt</h1>
+
+<a href="index.html">Summary</a>
+
+<ul id="legend">
+	<li class="none">Never executed</li>
+	<li class="oaw">Generated output</li>
+	<li class="php">Executed on server (PHP)</li>
+	<li class="js">Executed on client (Javascript)</li>
+</ul>
+
+<p><pre>«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+<span class="oaw php " title="19 steps in OAW 3 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 5:DEFINE storeDbPhp FOR model::InternetApplication-)"><a name="storeDbPhp.html">«DEFINE storeDbPhp FOR model::InternetApplication-»</a>
+&lt;?php
+/**
+ * For storing a single value into the database (attribute id).
+ */
+ 
+require("header.php");
+require("create_database.php");	// init db if necessary
+require("properties_file.php");	// properties loading code
+
+// queue up any log messages
+queue_log_messages(true);
+
+/**
+ * Recursive functions in PHP. See default.js for Javascript implementations of these.
+ * TODO add test cases to make sure these are both identical.
+ */
+function store_event($page_id, $event_name, $arg0) {
+	// not sure how often this will actually be called: we block on operations
+	/*
+	register_running_functions();
+	
+	$function_id = "store_event_" . $page_id . "_" . $event_name;
+	if (has_running_function($function_id)) {
+		log_message("Breaking out of infinite loop: $function_id");
+		return false;
+	}
+	*/
+	
+	/*
+	 * a simple solution (but not scalable TODO): create a new HTTP request to store the event.
+	 * a better solution is obviously to store the new event in this same page.
+	 */	
+	$url = get_baseurl() . "/store_event.php?page_id=" . urlencode($page_id)
+		. "&amp;event_name=" . urlencode($event_name)
+		. "&amp;arg0=" . urlencode($arg0);
+		
+	log_message("store_db.php:store_event calling $url");
+	$result = call_remote_url($url);
+
+	if (trim($result) != "ok")
+		throw new IamlRuntimeException("store_db failed: \"" . $result . "\"");
+		
+	return true;
+}
+
+log_message("store_db.php? " . print_r($_GET, true));
+$attribute_id = $_GET["attribute_id"] or throw_new_IamlRuntimeException("no attribute id");
+$arg0 = $_GET["arg0"] or throw_new_IamlRuntimeException("no arg0");
+
+// anti-infinite-loop trace tracking
+add_running_function($attribute_id);
+
+// find the table name
+$db_type = null;
+$db_name = false;
+$table_name = false;
+$row_name = false;
+<a href="#expandDomainStore.html">«EXPAND expandDomainStore FOREACH domainStores»</a>
+<a href="#expandDomainObjectRoot.html">«EXPAND expandDomainObjectRoot FOREACH children»</a>
+
+if ($db_type == "pdo") {
+	if (!$db_name)
+		throw new IamlRuntimeException("no $db_type db found");
+	if (!$table_name)
+		throw new IamlRuntimeException("no $db_type table found (db=$db_name)");
+	if (!$row_name)
+		throw new IamlRuntimeException("no $db_type row found (table=$table_name)");
+	
+	// connect to the database source
+	$db = new PDO($db_name) or throw_new_IamlRuntimeException("could not open $db_type db '$db_name'");
+	
+	// does anything exist?
+	$results = $db-&gt;query("SELECT * FROM $table_name") or throw_new_IamlRuntimeException("could not look for existing values in $db_type '$table_name': " .print_r($db-&gt;errorInfo(), true));
+	if ($results-&gt;fetch()) {
+		// yes: update all existing
+		$s = $db-&gt;prepare("UPDATE $table_name SET $row_name = ?") or throw_new_IamlRuntimeException("could not prepare $db_type update query: " . print_r($db-&gt;errorInfo(), true));
+	} else {
+		// no: insert new
+		$s = $db-&gt;prepare("INSERT INTO $table_name ($row_name) VALUES (?)") or throw_new_IamlRuntimeException("could not prepare $db_type insert query: " . print_r($db-&gt;errorInfo(), true));
+	}
+	
+	// update all existing
+	$s-&gt;execute(array($arg0)) or throw_new_IamlRuntimeException("could not execute query: " . print_r($db-&gt;errorInfo(), true));
+} elseif ($db_type == "properties") {
+	if (!$db_name)
+		throw new IamlRuntimeException("no $db_type db found");
+	if (!$row_name)
+		throw new IamlRuntimeException("no $db_type row found (table=$table_name)");
+	
+	$properties = load_properties($db_name);
+	$properties = set_property($db_name, $properties, $row_name, $arg0); 
+	
+} else {
+	throw new IamlRuntimeException("Unknown domain store type: $db_type");
+}
+
+// done
+$s = null;
+log_message("store_db.php: adding attribute_id=$attribute_id, arg0=$arg0 into db=$db_name, table=$table_name, row=$row_name");
+
+log_message("done");
+echo "ok";
+
+«ENDDEFINE»</span>
+
+/** 
+ * Expand out each DomainStore.
+ */
+<span class="oaw php " title="9 steps in OAW 3 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 114:DEFINE expandDomainStore FOR model::DomainStore)"><a name="expandDomainStore.html">«DEFINE expandDomainStore FOR model::DomainStore»</a>
+	/* Domain Store «this.name» */ 
+	<a href="#expandDomainObject.html">«EXPAND expandDomainObject(this) FOREACH children»</a>
+	
+	/* Sole attributes */
+	<a href="#soleAttribute.html">«EXPAND soleAttribute(this) FOREACH attributes»</a> 
+«ENDDEFINE»</span>
+
+/**
+ * Expand out each DomainObject.
+ */
+<span class="oaw php " title="9 steps in OAW 6 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 125:DEFINE expandDomainObject(model::DomainStore store) FOR model::DomainObject)"><a name="expandDomainObject.html">«DEFINE expandDomainObject(model::DomainStore store) FOR model::DomainObject»</a>
+	<a href="#expandDomainAttribute.html">«EXPAND expandDomainAttribute(store, this) FOREACH attributes»</a>
+«ENDDEFINE»</span>
+
+/**
+ * Expand out each DomainAttribute.
+ */
+<span class="oaw php " title="23 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 132:DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttribute.html">«DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»</a>
+	<span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 133:IF isPropertiesFile(store))">«IF isPropertiesFile(store)»
+		<a href="#expandDomainAttributeProperties.html">«EXPAND expandDomainAttributeProperties(store, object) FOR this»</a>
+	</span><span class="oaw php " title="8 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 135:ELSE)">«ELSE»
+		<a href="#expandDomainAttributeDatabase.html">«EXPAND expandDomainAttributeDatabase(store, object) FOR this»</a>
+	«ENDIF»</span>
+«ENDDEFINE»</span>
+
+<span class="oaw php " title="8 steps in OAW 12 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 140:DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttributeDatabase.html">«DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»</a>
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "pdo";
+		$db_name = "sqlite:«safeNameString(store.id)».db";
+		$table_name = "«safeNameString(object.name)»";
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		<a href="#expandDomainAttributeEvents.html">«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»</a>
+	}
+«ENDDEFINE»</span>
+
+<span class="oaw " title="15 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 153:DEFINE expandDomainAttributeProperties(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttributeProperties.html">«DEFINE expandDomainAttributeProperties(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»</a>
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "properties";
+		$db_name = "«store.file»";
+		$table_name = null;
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		<a href="#expandDomainAttributeEvents.html">«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»</a>
+	}
+«ENDDEFINE»</span>
+
+/**
+ * Expand out each solo DomainAttribute.
+ */
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 169:DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttribute.html">«DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute»</a>
+	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 170:IF isPropertiesFile(store))">«IF isPropertiesFile(store)»
+		<a href="#soleAttributeProperties.html">«EXPAND soleAttributeProperties(store) FOR this»</a>
+	</span><span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 172:ELSE)">«ELSE»
+		<a href="#soleAttributeDatabase.html">«EXPAND soleAttributeDatabase(store) FOR this»</a>
+	«ENDIF»</span>
+«ENDDEFINE»</span>
+
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 177:DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttributeDatabase.html">«DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute»</a>
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "pdo";
+		$db_name = "sqlite:«safeNameString(store.id)».db";
+		$table_name = "single_values";
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		<a href="#expandDomainAttributeEvents.html">«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»</a>
+	}
+«ENDDEFINE»</span>
+
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 190:DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute)"><a name="soleAttributeProperties.html">«DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute»</a>
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "properties";
+		$db_name = "«store.file»";
+		$table_name = null;
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		<a href="#expandDomainAttributeEvents.html">«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»</a>
+	}
+«ENDDEFINE»</span>
+
+/* if an InternetApplication directly contains an AbstractObject,
+   we still process it anyway. */
+<span class="oaw php " title="28 steps in OAW 9 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 205:DEFINE expandDomainObjectRoot FOR model::ApplicationElement)"><a name="expandDomainObjectRoot.html">«DEFINE expandDomainObjectRoot FOR model::ApplicationElement»</a>
+	«REM»empty«ENDREM»
+«ENDDEFINE»</span>
+
+<span class="oaw " title="1 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 209:DEFINE expandDomainObjectRoot FOR model::DomainObject)"><a name="expandDomainObjectRoot.html">«DEFINE expandDomainObjectRoot FOR model::DomainObject»</a>
+	<a href="#expandDomainAttributeRoot.html">«EXPAND expandDomainAttributeRoot(this) FOREACH attributes»</a>
+«ENDDEFINE»</span>
+
+<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 213:DEFINE expandDomainAttributeRoot(model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttributeRoot.html">«DEFINE expandDomainAttributeRoot(model::DomainObject object) FOR model::DomainAttribute»</a>
+	<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 214:IF isPropertiesFile(getDomainStore(this)))">«IF isPropertiesFile(getDomainStore(this))»
+		<a href="#expandDomainAttributeRootProperties.html">«EXPAND expandDomainAttributeRootProperties(object) FOR this»</a>
+	</span><span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 216:ELSE)">«ELSE»
+		<a href="#expandDomainAttributeRootDatabase.html">«EXPAND expandDomainAttributeRootDatabase(object) FOR this»</a>
+	«ENDIF»</span>
+«ENDDEFINE»</span>
+
+<span class="oaw " title="2 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 221:DEFINE expandDomainAttributeRootDatabase(model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttributeRootDatabase.html">«DEFINE expandDomainAttributeRootDatabase(model::DomainObject object) FOR model::DomainAttribute»</a>
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "pdo";
+		$db_name = "sqlite:internet_application.db";
+		$table_name = "«safeNameString(object.name)»";
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		<a href="#expandDomainAttributeEvents.html">«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»</a>
+	}
+«ENDDEFINE»</span>
+
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 234:DEFINE expandDomainAttributeRootProperties(model::DomainObject object) FOR model::DomainAttribute)"><a name="expandDomainAttributeRootProperties.html">«DEFINE expandDomainAttributeRootProperties(model::DomainObject object) FOR model::DomainAttribute»</a>
+	if ($attribute_id == "«safeNameString(id)»") {
+		$db_type = "properties";
+		$db_name = "internet_application.properties";
+		$table_name = null;
+		$row_name = "«safeNameString(name)»";
+		
+		// are there any onEdit operations for this attribute that we
+		// have to then call?
+		<a href="#expandDomainAttributeEvents.html">«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»</a>
+	}
+«ENDDEFINE»</span>
+
+/**
+ * Expand out any event triggers.
+ */
+<span class="oaw " title="25 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 250:DEFINE expandDomainAttributeEvents FOR model::EventTrigger)"><a name="expandDomainAttributeEvents.html">«DEFINE expandDomainAttributeEvents FOR model::EventTrigger»</a>
+	<span class="oaw " title="25 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 251:IF name=="edit")">«IF name=="edit"»
+		<a href="src-template-template-php-EventTrigger-xpt.html#callOperations.html">«EXPAND template::php::EventTrigger::callOperations(false, true) FOREACH outEdges»</a>
+	«ENDIF»</span>
+«ENDDEFINE»</span>
+
+<span class="none" title="(C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\StoreDbPhp.xpt: 256:DEFINE exception FOR Object)"><a name="exception.html">«DEFINE exception FOR Object»</a>
+«ENDDEFINE»</span></pre></p>
+
+</body>
+</html>

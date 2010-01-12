@@ -80,6 +80,17 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 			investigators.add(new ElementsCount("elements-count", this));
 			investigators.add(new AttributesCount("attributes-count", this));
 			investigators.add(new AttributesCountIgnoreDefault("attributes-count-no-default", this));
+			investigators.add(new DistinctAttributeValues("distinct-attribute-values", this));
+			investigators.add(new ReferencesWithoutContainmentsSum("references-without-containments-sum", this));
+			investigators.add(new ContainmentsSum("containments-sum", this));
+			investigators.add(new DistinctTypes("distinct-types", this));
+			investigators.add(new MinDegreeReferences("min-degree-references", this));
+			investigators.add(new MaxDegreeReferences("max-degree-references", this));
+			investigators.add(new RootContainmentsHeight("children-height", this));
+			investigators.add(new ReferencesCycles("cycles", this));
+			investigators.add(new ReferencesDiameter("references-diameter", this));
+			
+			/*
 			// investigators.add(new ReferencesCount("references-count", this));
 			// investigators.add(new ReferencesCountIgnoreEmpty("references-count-no-empty", this));
 			investigators.add(new ReferencesSum("references-sum", this));
@@ -101,6 +112,25 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 			investigators.add(new MinDegreeReferences("min-degree-references", this));
 			investigators.add(new MinDegreeContainments("min-degree-containments", this));
 			investigators.add(new MaxInheritanceHeight("max-inheritance-height", this));
+			investigators.add(new ReferencesRadius("references-radius", this));
+			investigators.add(new ReferencesDiameter("references-diameter", this));
+			// investigators.add(new ContainmentsRadius("containments-radius", this));
+			// investigators.add(new ContainmentsDiameter("containments-diameter", this));
+			/*
+			investigators.add(new CountTypes("wires", this, WireEdge.class));
+			investigators.add(new CountTypes("visible-things", this, VisibleThing.class));
+			investigators.add(new CountTypes("events", this, EventTrigger.class));
+			investigators.add(new CountTypes("operations", this, Operation.class));
+			investigators.add(new CountTypes("conditions", this, Condition.class));
+			investigators.add(new CountTypes("execution-edges", this, ExecutionEdge.class));
+			investigators.add(new CountTypes("data-flow-edges", this, DataFlowEdge.class));
+			investigators.add(new CountTypes("properties", this, ApplicationElementProperty.class));
+			investigators.add(new CountTypes("nodes", this, ActivityNode.class));
+			investigators.add(new CountTypes("pages", this, Page.class));
+			/
+			investigators.add(new ReferencesCycles("cycles", this));
+			investigators.add(new RootContainmentsHeight("children-height", this));
+			/*
 			if (isIncludeComplexChecks()) {
 				investigators.add(new ReferencesRadius("references-radius", this));
 				investigators.add(new ReferencesDiameter("references-diameter", this));
@@ -117,10 +147,11 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 				investigators.add(new CountTypes("properties", this, ApplicationElementProperty.class));
 				investigators.add(new CountTypes("nodes", this, ActivityNode.class));
 				investigators.add(new CountTypes("pages", this, Page.class));
-				*/
+				/
 				investigators.add(new ReferencesCycles("cycles", this));
 				investigators.add(new RootContainmentsHeight("children-height", this));
 			}
+			*/
 		}
 		return investigators;
 	}

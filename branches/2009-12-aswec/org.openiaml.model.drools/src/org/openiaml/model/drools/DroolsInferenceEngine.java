@@ -118,7 +118,7 @@ public abstract class DroolsInferenceEngine {
 	 */
 	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor) throws InferenceException {
 		try {
-			create(model, logRuleSource, monitor, new InferenceQueueLogSilent());
+			create(model, logRuleSource, monitor, new InferenceQueueLogSilent("unnamed"));
 		} catch (NumberFormatException e) {
 			throw new InferenceException(e);
 		} catch (IOException e) {
@@ -326,7 +326,7 @@ public abstract class DroolsInferenceEngine {
 	 */
 	public class InferenceQueueLog {
 
-		File logFile = new File("inference.log");
+		File logFile;
 		private Map<String, Integer> log = new HashMap<String, Integer>();
 
 		/**
@@ -334,7 +334,9 @@ public abstract class DroolsInferenceEngine {
 		 * @throws IOException 
 		 * @throws NumberFormatException 
 		 */
-		public InferenceQueueLog() throws NumberFormatException, IOException {
+		public InferenceQueueLog(String logName) throws NumberFormatException, IOException {
+			logFile = new File("inference." + logName + "-" + System.currentTimeMillis() + ".log");
+			
 			if (logFile.exists()) {
 				BufferedReader read = new BufferedReader(new FileReader(logFile));
 				String line;
@@ -381,7 +383,8 @@ public abstract class DroolsInferenceEngine {
 	 */
 	public class InferenceQueueLogSilent extends InferenceQueueLog {
 
-		public InferenceQueueLogSilent() throws NumberFormatException, IOException {
+		public InferenceQueueLogSilent(String logName) throws NumberFormatException, IOException {
+			super(logName);
 			// do nothing
 		}
 		

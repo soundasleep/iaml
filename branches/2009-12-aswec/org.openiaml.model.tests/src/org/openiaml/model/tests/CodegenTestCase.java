@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * @author jmwright
  *
  */
-public abstract class CodegenTestCase extends ModelInferenceTestCase {
+public abstract class CodegenTestCase extends ModelTestCaseWithProperties {
 
 	protected InternetApplication root;
 

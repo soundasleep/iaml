@@ -37,36 +37,36 @@ import org.openiaml.model.inference.InfiniteSubProgressMonitor;
 import org.openiaml.model.model.GeneratedElement;
 
 /**
- * Uses Drools to infer new elements. By defining
- * an abstract class, we can specify many different engine
- * implementations that all use different sets of rules,
- * but have the same logic internally.
+ * Uses Drools to infer new elements. By defining an abstract class, we can
+ * specify many different engine implementations that all use different sets of
+ * rules, but have the same logic internally.
  * 
  * @author jmwright
- *
+ * 
  */
 public abstract class DroolsInferenceEngine {
-	
+
 	/**
-	 * How many iterations of inserting new elements (and revaluating
-	 * the rules) should we limit ourselves to?
+	 * How many iterations of inserting new elements (and revaluating the rules)
+	 * should we limit ourselves to?
 	 * 
 	 * Also: The value of 'k' from the upcoming paper.
 	 */
 	public static int INSERTION_ITERATION_LIMIT = 20;
-	
+
 	protected ICreateElements handler;
-	
+
 	/**
-	 * Stores a summary of queue elements added.
-	 * (This should really be added through a mock object instead. TODO)
+	 * Stores a summary of queue elements added. (This should really be added
+	 * through a mock object instead. TODO)
 	 */
 	private Map<Integer, Integer> queueElementsAdded;
 
 	/**
 	 * 
 	 * @param handler The handler to create elements
-	 * @param trackInsertions Should the DroolsInsertionQueue track the activations/elements inserted?
+	 * @param trackInsertions Should the DroolsInsertionQueue track the
+	 *            activations/elements inserted?
 	 * @see DroolsInsertionQueue#DroolsInsertionQueue(boolean)
 	 * @see DroolsInsertionQueue#getActivationFor(EObject)
 	 */
@@ -85,9 +85,9 @@ public abstract class DroolsInferenceEngine {
 	public void create(EObject model, IProgressMonitor monitor) throws InferenceException {
 		create(model, false, monitor);
 	}
-	
+
 	private IProgressMonitor subProgressMonitor;
-	
+
 	public IProgressMonitor getSubprogressMonitor() {
 		return subProgressMonitor;
 	}
@@ -98,25 +98,27 @@ public abstract class DroolsInferenceEngine {
 	 * Should we ask the DroolsInsertionQueue to track insertions?
 	 */
 	private boolean trackInsertions;
-	
+
 	/**
-	 * The insertion queue. We make this available so that Partial
-	 * Inference through {@link #InferContainedElementsAction} can identify
-	 * which elements needs to be properly deleted.
+	 * The insertion queue. We make this available so that Partial Inference
+	 * through {@link #InferContainedElementsAction} can identify which elements
+	 * needs to be properly deleted.
 	 */
 	public DroolsInsertionQueue getDroolsInsertionQueue() {
 		return queue;
 	}
-	
+
 	/**
 	 * Do the inference using Drools. Will not write to any inference log.
 	 * 
 	 * @param model
-	 * @param logRuleSource if true, the source rule of inserted elements will be added
+	 * @param logRuleSource if true, the source rule of inserted elements will
+	 *            be added
 	 * @param monitor a progress monitor
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor) throws InferenceException {
+	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor)
+			throws InferenceException {
 		try {
 			create(model, logRuleSource, monitor, new InferenceQueueLogSilent("unnamed"));
 		} catch (NumberFormatException e) {
@@ -127,152 +129,155 @@ public abstract class DroolsInferenceEngine {
 	}
 
 	/**
-	 * Do the inference using Drools, logging the inference process to the
-	 * given InferenceQueueLog.
+	 * Do the inference using Drools, logging the inference process to the given
+	 * InferenceQueueLog.
 	 * 
 	 * @param log a log to write inference results to
 	 * @param model
-	 * @param logRuleSource if true, the source rule of inserted elements will be added
+	 * @param logRuleSource if true, the source rule of inserted elements will
+	 *            be added
 	 * @param monitor a progress monitor
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor, InferenceQueueLog log) throws InferenceException {
+	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor,
+			InferenceQueueLog log) throws InferenceException {
 
 		monitor.beginTask("Inferring model using Drools", 150);
 		monitor.subTask("Loading rulebase");
-		
-		queueElementsAdded = new HashMap<Integer,Integer>();
-		
-    	// load up the rulebase
-        RuleBase ruleBase;
+
+		queueElementsAdded = new HashMap<Integer, Integer>();
+
+		// load up the rulebase
+		RuleBase ruleBase;
 		try {
 			ruleBase = getRuleBase(new SubProgressMonitor(monitor, 50));
 		} catch (Exception e) {
 			throw new InferenceException("Could not load rulebase: " + e.getMessage(), e);
 		}
-		
+
 		/*
-		 * We use a StatefulSession, because we may add additional facts
-		 * after the initial insertion.
+		 * We use a StatefulSession, because we may add additional facts after
+		 * the initial insertion.
 		 * 
 		 * But creating a StatefulSession adds a reference to the RuleBase,
-		 * which can cause memory leaks. This is so that if the
-		 * RuleBase has changed rules, they can be updated in the working
-		 * memory. As a result, we have to call dispose() on the 
-		 * StatefulSession once we are finished with it.  
+		 * which can cause memory leaks. This is so that if the RuleBase has
+		 * changed rules, they can be updated in the working memory. As a
+		 * result, we have to call dispose() on the StatefulSession once we are
+		 * finished with it.
 		 */
-        final StatefulSession workingMemory = ruleBase.newStatefulSession();
-        
-        monitor.worked(5);
-        monitor.subTask("Inserting initial model");
-        
-        // automatically insert new objects based on a given object
-        workingMemory.addEventListener( new WorkingMemoryEventListener() {
+		final StatefulSession workingMemory = ruleBase.newStatefulSession();
 
-        	/**
-        	 * When we insert a new element, we automatically insert
-        	 * all of its children elements.
-        	 * 
-        	 * This is also the method that does all of the work
-        	 * when we insert in the root InternetApplication - it constructs
-        	 * the entire working memory model.
-        	 */
+		monitor.worked(5);
+		monitor.subTask("Inserting initial model");
+
+		// automatically insert new objects based on a given object
+		workingMemory.addEventListener(new WorkingMemoryEventListener() {
+
+			/**
+			 * When we insert a new element, we automatically insert all of its
+			 * children elements.
+			 * 
+			 * This is also the method that does all of the work when we insert
+			 * in the root InternetApplication - it constructs the entire
+			 * working memory model.
+			 */
 			@Override
 			public void objectInserted(ObjectInsertedEvent obj) {
 				// increment a progress monitor
 				if (getSubprogressMonitor() != null) {
 					getSubprogressMonitor().worked(1);
 					/*
-					if (obj.getObject() instanceof EObject) {
-						getSubprogressMonitor().subTask("Inserting " + ((EObject) obj.getObject()).eClass().getName());						
-					}
-					*/
+					 * if (obj.getObject() instanceof EObject) {
+					 * getSubprogressMonitor().subTask("Inserting " + ((EObject)
+					 * obj.getObject()).eClass().getName()); }
+					 */
 				}
-				
+
 				if (obj.getObject() instanceof EObject) {
-					// get all objects within 
+					// get all objects within
 					TreeIterator<EObject> it = ((EObject) obj.getObject()).eAllContents();
 					while (it.hasNext()) {
-						workingMemory.insert( it.next() );
+						workingMemory.insert(it.next());
 					}
 				}
-				
+
 			}
 
 			@Override
 			public void objectRetracted(ObjectRetractedEvent x) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void objectUpdated(ObjectUpdatedEvent x) {
 				// TODO Auto-generated method stub
-				
+
 			}
-        	
-        });   
-        
-        // set up the sub progress monitor
-        subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 45);
 
-        // need to set up these variables before we insert the model,
-        // otherwise the agenda cannot be built (as the rule heads use
-        // {@link #getHelperFunctions()}).
-        queue = new DroolsInsertionQueue(trackInsertions);
-	    workingMemory.setGlobal("handler", handler);
+		});
+
+		// set up the sub progress monitor
+		subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 45);
+
+		// need to set up these variables before we insert the model,
+		// otherwise the agenda cannot be built (as the rule heads use
+		// {@link #getHelperFunctions()}).
+		queue = new DroolsInsertionQueue(trackInsertions);
+		workingMemory.setGlobal("handler", handler);
 		workingMemory.setGlobal("queue", queue);
-		workingMemory.setGlobal("functions", getHelperFunctions());		
+		workingMemory.setGlobal("functions", getHelperFunctions());
 
-        //go !
-        workingMemory.insert( model );
-        subProgressMonitor.done();
-        subProgressMonitor = null;
-        
-        monitor.subTask("Inferring new model elements");
-        
-        /*
-         * This simply adds the Rule source for inserted elements
-         * (where possible).
-         */
-        if (logRuleSource) {
-	        workingMemory.addEventListener(new DefaultWorkingMemoryEventListener() {
-	
+		// go !
+		workingMemory.insert(model);
+		subProgressMonitor.done();
+		subProgressMonitor = null;
+
+		monitor.subTask("Inferring new model elements");
+
+		/*
+		 * This simply adds the Rule source for inserted elements (where
+		 * possible).
+		 */
+		if (logRuleSource) {
+			workingMemory.addEventListener(new DefaultWorkingMemoryEventListener() {
+
 				@Override
 				public void objectInserted(ObjectInsertedEvent event) {
 					if (event.getObject() instanceof GeneratedElement) {
 						GeneratedElement e = (GeneratedElement) event.getObject();
 						try {
-							handler.setGeneratedRule(e, event.getPropagationContext().getRuleOrigin().getName());
+							handler.setGeneratedRule(e, event.getPropagationContext()
+									.getRuleOrigin().getName());
 						} catch (InferenceException e1) {
 							throw new RuntimeException(e1.getMessage(), e1);
 						}
 					}
 				}
-	        });
-        }
-        
-	    subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
+			});
+		}
+
+		subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
 		subProgressMonitor.beginTask("Inferring elements iteratively", INSERTION_ITERATION_LIMIT);
-        for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
-        	// check for monitor cancel
-        	if (monitor.isCanceled()) {
-        		return;
-        	}
-        	
-        	// actually do the work
-	        workingMemory.fireAllRules();
-	        
-	        // once the rules have been completed,
-	        // insert in the new elements
-	        // but first reset the queue
-	        DroolsInsertionQueue oldQueue = queue;
-	        queue = new DroolsInsertionQueue(trackInsertions);
-	        if (trackInsertions) {
-	        	queue.addPreviousInsertions(oldQueue);
-	        }
-			workingMemory.setGlobal("queue", queue );
-			
+		for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
+			// check for monitor cancel
+			if (monitor.isCanceled()) {
+				return;
+			}
+
+			// actually do the work
+			workingMemory.fireAllRules();
+
+			// once the rules have been completed,
+			// insert in the new elements
+			// but first reset the queue
+			DroolsInsertionQueue oldQueue = queue;
+			queue = new DroolsInsertionQueue(trackInsertions);
+			if (trackInsertions) {
+				queue.addPreviousInsertions(oldQueue);
+			}
+			workingMemory.setGlobal("queue", queue);
+
 			// apply the new objects
 			oldQueue.apply(workingMemory, k, log);
 
@@ -280,16 +285,17 @@ public abstract class DroolsInferenceEngine {
 			log.increment("step " + k, oldQueue.size());
 			queueElementsAdded.put(k, oldQueue.size());
 			subProgressMonitor.worked(1);
-        }
-        
-        // are there any elements left in the queue?
-        // if so, this might be an infinite loop
-        if (!queue.isEmpty()) {
-        	throw new InferenceException("Expected an empty queue at the end of k iterations, but had: " + queue);
-        }
-        
-        // finish the log
-        try {
+		}
+
+		// are there any elements left in the queue?
+		// if so, this might be an infinite loop
+		if (!queue.isEmpty()) {
+			throw new InferenceException(
+					"Expected an empty queue at the end of k iterations, but had: " + queue);
+		}
+
+		// finish the log
+		try {
 			log.save();
 		} catch (IOException e) {
 			throw new InferenceException(e);
@@ -300,13 +306,13 @@ public abstract class DroolsInferenceEngine {
 		// memory has been saved to an EObject, so we should be
 		// able to remove it from memory
 		workingMemory.dispose();
-		
-        subProgressMonitor.done();	// completed
-        
-        monitor.done();
+
+		subProgressMonitor.done(); // completed
+
+		monitor.done();
 
 	}
-	
+
 	/**
 	 * Get the DroolsHelperFunctions to use within the rules.
 	 * 
@@ -317,12 +323,11 @@ public abstract class DroolsInferenceEngine {
 	}
 
 	/**
-	 * Log inference queue results.
-	 * Will usually output to the source directory of the executing
-	 * plugin, e.g. org.openiaml.tests/inference.log 
+	 * Log inference queue results. Will usually output to the source directory
+	 * of the executing plugin, e.g. org.openiaml.tests/inference.log
 	 * 
 	 * @author jmwright
-	 *
+	 * 
 	 */
 	public class InferenceQueueLog {
 
@@ -331,12 +336,13 @@ public abstract class DroolsInferenceEngine {
 
 		/**
 		 * Load the log.
-		 * @throws IOException 
-		 * @throws NumberFormatException 
+		 * 
+		 * @throws IOException
+		 * @throws NumberFormatException
 		 */
 		public InferenceQueueLog(String logName) throws NumberFormatException, IOException {
 			logFile = new File("inference." + logName + "-" + System.currentTimeMillis() + ".log");
-			
+
 			if (logFile.exists()) {
 				BufferedReader read = new BufferedReader(new FileReader(logFile));
 				String line;
@@ -347,9 +353,10 @@ public abstract class DroolsInferenceEngine {
 				read.close();
 			}
 		}
-		
+
 		/**
 		 * Increment a log value.
+		 * 
 		 * @param key
 		 */
 		public void increment(String key, int value) {
@@ -359,10 +366,11 @@ public abstract class DroolsInferenceEngine {
 				log.put(key, log.get(key) + value);
 			}
 		}
-		
+
 		/**
 		 * Save the log.
-		 * @throws IOException 
+		 * 
+		 * @throws IOException
 		 */
 		public void save() throws IOException {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(logFile));
@@ -371,15 +379,15 @@ public abstract class DroolsInferenceEngine {
 			}
 			writer.close();
 		}
-		
+
 	}
-	
+
 	/**
-	 * Extends {@link InferenceQueueLog} to never actually do
-	 * anything, i.e. be silent.
+	 * Extends {@link InferenceQueueLog} to never actually do anything, i.e. be
+	 * silent.
 	 * 
 	 * @author jmwright
-	 *
+	 * 
 	 */
 	public class InferenceQueueLogSilent extends InferenceQueueLog {
 
@@ -387,22 +395,22 @@ public abstract class DroolsInferenceEngine {
 			super(logName);
 			// do nothing
 		}
-		
+
 		@Override
 		public void increment(String key, int value) {
 			// do nothing
 		}
-		
+
 		@Override
 		public void save() throws IOException {
 			// do nothing
 		}
-		
+
 	}
-	
+
 	/**
-	 * Get the list of rule files used. This method
-	 * needs to be implemented by subclasses.
+	 * Get the list of rule files used. This method needs to be implemented by
+	 * subclasses.
 	 * 
 	 * For example, ["/rules/base.drl", "/rules/conditions.drl"]
 	 * 
@@ -410,30 +418,30 @@ public abstract class DroolsInferenceEngine {
 	 * @return
 	 */
 	public abstract List<String> getRuleFiles();
-	
+
 	/**
-	 * Load the given resource filename as a stream. By default,
-	 * uses {@link DroolsInferenceEngine}'s classLoader to load it.
+	 * Load the given resource filename as a stream. By default, uses
+	 * {@link DroolsInferenceEngine}'s classLoader to load it.
 	 * 
 	 * @param filename
 	 * @return the loaded stream, or null if it could not be loaded
 	 */
 	public InputStream loadResourceAsStream(String filename) {
-		return DroolsInferenceEngine.class.getResourceAsStream( filename );
+		return DroolsInferenceEngine.class.getResourceAsStream(filename);
 	}
 
-	public static class RuleBaseCache extends SoftCache<DroolsInferenceEngine,RuleBase> {
-		
+	public static class RuleBaseCache extends SoftCache<DroolsInferenceEngine, RuleBase> {
+
 		private IProgressMonitor monitor;
-		
+
 		/**
-		 * Get the RuleBase from the rules provided.
-		 * Copied from sample DroolsTest.java.
+		 * Get the RuleBase from the rules provided. Copied from sample
+		 * DroolsTest.java.
 		 * 
 		 * @see DroolsInferenceEngine#getRuleFiles()
 		 * @see #doRetrieve(List)
 		 * @return
-		 * @throws Exception 
+		 * @throws Exception
 		 */
 		@Override
 		public RuleBase retrieve(DroolsInferenceEngine input) {
@@ -443,12 +451,12 @@ public abstract class DroolsInferenceEngine {
 				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
-		
+
 		/**
 		 * Actually loads the rulebase.
 		 * 
 		 * @see #retrieve(List)
-		 * @throws Exception 
+		 * @throws Exception
 		 */
 		protected RuleBase doRetrieve(DroolsInferenceEngine input) throws Exception {
 			RuleBase ruleBase = RuleBaseFactory.newRuleBase();
@@ -456,46 +464,51 @@ public abstract class DroolsInferenceEngine {
 			monitor.beginTask("Parsing and loading rule files", input.getRuleFiles().size());
 			for (String ruleFile : input.getRuleFiles()) {
 				monitor.subTask("Loading " + ruleFile + "...");
-		
+
 				// load the stream
 				InputStream stream = input.loadResourceAsStream(ruleFile);
 				if (stream == null) {
-					throw new InferenceException("Could not load the resource '" + ruleFile + "' as a stream."); 
+					throw new InferenceException("Could not load the resource '" + ruleFile
+							+ "' as a stream.");
 				}
-				
-				//read in the source
-				Reader source = new InputStreamReader( stream );
-				
-				//optionally read in the DSL (if you are using it).
-				//Reader dsl = new InputStreamReader( DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
-		
-				//Use package builder to build up a rule package.
-				//An alternative lower level class called "DrlParser" can also be used...
+
+				// read in the source
+				Reader source = new InputStreamReader(stream);
+
+				// optionally read in the DSL (if you are using it).
+				// Reader dsl = new InputStreamReader(
+				// DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
+
+				// Use package builder to build up a rule package.
+				// An alternative lower level class called "DrlParser" can also
+				// be used...
 
 				PackageBuilder builder = new PackageBuilder();
-		
-				//this wil parse and compile in one step
-				//NOTE: There are 2 methods here, the one argument one is for normal DRL.
-				builder.addPackageFromDrl( source );
-		
-				//Use the following instead of above if you are using a DSL:
-				//builder.addPackageFromDrl( source, dsl );
-				
-				//get the compiled package (which is serializable)
+
+				// this wil parse and compile in one step
+				// NOTE: There are 2 methods here, the one argument one is for
+				// normal DRL.
+				builder.addPackageFromDrl(source);
+
+				// Use the following instead of above if you are using a DSL:
+				// builder.addPackageFromDrl( source, dsl );
+
+				// get the compiled package (which is serializable)
 				Package pkg = builder.getPackage();
-				
-				//add the package to a rulebase (deploy the rule package).
-				ruleBase.addPackage( pkg );
-		
+
+				// add the package to a rulebase (deploy the rule package).
+				ruleBase.addPackage(pkg);
+
 				monitor.worked(1);
 			}
-			
+
 			monitor.done();
 			return ruleBase;
 		}
 
 		/**
-		 * Set the progress monitor for the loading/parsing/compilation of rules.
+		 * Set the progress monitor for the loading/parsing/compilation of
+		 * rules.
 		 * 
 		 * @param monitor
 		 */
@@ -503,23 +516,22 @@ public abstract class DroolsInferenceEngine {
 			this.monitor = monitor;
 		}
 	}
-	
+
 	/**
-	 * A soft cache of compiled RuleBases. This should increase the
-	 * performance of repeatedly inferring knowledge.
+	 * A soft cache of compiled RuleBases. This should increase the performance
+	 * of repeatedly inferring knowledge.
 	 */
 	private static RuleBaseCache ruleBaseCache = null;
-	
+
 	/**
-	 * Get the RuleBase from the rules provided. If the rulebase has
-	 * already been compiled into the cache {@link #ruleBaseCache},
-	 * uses this instead.
+	 * Get the RuleBase from the rules provided. If the rulebase has already
+	 * been compiled into the cache {@link #ruleBaseCache}, uses this instead.
 	 * 
 	 * @see RuleBaseCache#retrieve(List)
 	 * @see #getRuleFiles()
-	 * @param monitor 
+	 * @param monitor
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	protected RuleBase getRuleBase(IProgressMonitor monitor) throws Exception {
 		if (ruleBaseCache == null) {
@@ -533,14 +545,14 @@ public abstract class DroolsInferenceEngine {
 			ruleBaseCache.setMonitor(null);
 		}
 	}
-	
+
 	/**
 	 * Reset the {@link #ruleBaseCache}.
 	 */
 	public void resetRuleBaseCache() {
 		ruleBaseCache = null;
 	}
-	
+
 	/**
 	 * Set the rule base cache to a given cache. Useful for test methods.
 	 * 
@@ -559,5 +571,5 @@ public abstract class DroolsInferenceEngine {
 	public Map<Integer, Integer> getQueueElementsAdded() {
 		return queueElementsAdded;
 	}
-	
+
 }

@@ -66,14 +66,14 @@ import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SyncWire;
-import org.openiaml.model.tests.ModelInferenceTestCase;
+import org.openiaml.model.tests.ModelTestCaseWithProperties;
 
 /**
  * Test case methods for asserting the results of model inference.
  *
  * @author jmwright
  */
-public abstract class InferenceTestCase extends ModelInferenceTestCase {
+public abstract class InferenceTestCase extends ModelTestCaseWithProperties {
 
 	/**
 	 * Assert that the given element contains the given

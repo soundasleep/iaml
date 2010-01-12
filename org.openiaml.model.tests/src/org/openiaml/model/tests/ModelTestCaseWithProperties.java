@@ -35,7 +35,7 @@ import org.openiaml.model.tests.ModelInferenceTestCase.IModelReloader;
  * @author jmwright
  *
  */
-public abstract class ModelTestCaseWithProperties extends ModelTestCase {
+public abstract class ModelTestCaseWithProperties extends ModelInferenceTestCase {
 
 	/**
 	 * Should the EMF properties investigation be 
@@ -85,7 +85,7 @@ public abstract class ModelTestCaseWithProperties extends ModelTestCase {
 				// do inference once, to remove any initial creation time
 				// (and also log to inference queue log)
 				try {
-					super.create(model, logRuleSource, monitor, new InferenceQueueLog());
+					super.create(model, logRuleSource, monitor, new InferenceQueueLog(caller.getName()));
 					// reload
 					model = reloader.reload();
 				} catch (NumberFormatException e1) {

@@ -219,21 +219,6 @@ public class ExportIAMLImagesJob extends Job {
 		return project.getFile(cls.getName() + ".png").getLocation();
 	}
 
-	private void assertNotNull(String string, Object ep) {
-		if (ep == null)
-			throw new RuntimeException(string);
-	}
-
-	private void assertFalse(String string, boolean exists) {
-		if (exists)
-			throw new RuntimeException(string);
-	}
-
-	private void assertTrue(String string, boolean exists) {
-		if (!exists)
-			throw new RuntimeException(string);
-	}
-
 	/**
 	 * @param classes the classes to search for
 	 * @return true if at least one exists; false otherwise

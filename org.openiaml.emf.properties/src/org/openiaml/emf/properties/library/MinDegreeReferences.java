@@ -24,6 +24,10 @@ public class MinDegreeReferences extends IterateOverAll {
 	public MinDegreeReferences(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public MinDegreeReferences(IEMFElementSelector selector) {
+		this(MinDegreeReferences.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

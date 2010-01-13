@@ -25,6 +25,10 @@ public class DistinctTypes extends IterateOverAll {
 	public DistinctTypes(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public DistinctTypes(IEMFElementSelector selector) {
+		this(DistinctTypes.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

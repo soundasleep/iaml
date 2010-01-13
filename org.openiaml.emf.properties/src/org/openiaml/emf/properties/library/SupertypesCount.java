@@ -21,6 +21,10 @@ public class SupertypesCount extends IterateOverAll {
 		super(name, selector);
 	}
 	
+	public SupertypesCount(IEMFElementSelector selector) {
+		this(SupertypesCount.class.getSimpleName(), selector);
+	}
+	
 	@Override
 	public int get(EObject obj) {
 		int thisValue = 0;

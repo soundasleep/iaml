@@ -19,6 +19,9 @@ public class ReferencesWithoutContainmentsCycles extends ReferencesCycles {
 		super(name, selector);
 	}
 
+	public ReferencesWithoutContainmentsCycles(IEMFElementSelector selector) {
+		this(ReferencesWithoutContainmentsCycles.class.getSimpleName(), selector);
+	}
 	@Override
 	public boolean ignoreReference(EReference ref) {
 		return ref.isContainment() || super.ignoreReference(ref);

@@ -55,6 +55,10 @@ public class ReferencesCycles extends IterateOverAll {
 		super(name, selector);
 	}
 	
+	public ReferencesCycles(IEMFElementSelector selector) {
+		this(ReferencesCycles.class.getSimpleName(), selector);
+	}
+	
 	/**
 	 * The cycle checker is achieved by creating a "pseudo-object"
 	 * which has all the same incoming references and outgoing references

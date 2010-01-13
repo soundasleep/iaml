@@ -34,6 +34,10 @@ public class ReferencesRadius extends IterateOverAll {
 	public ReferencesRadius(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ReferencesRadius(IEMFElementSelector selector) {
+		this(ReferencesRadius.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

@@ -23,6 +23,13 @@ public class CountTypes extends IterateOverAll {
 		super(name, selector);
 		this.type = type;
 	}
+	
+	/**
+	 * @param type type to search for
+	 */
+	public CountTypes(IEMFElementSelector selector, Class<? extends EObject> type) {
+		this(CountTypes.class.getSimpleName(), selector, type);
+	}
 
 	@Override
 	public int get(EObject obj) {

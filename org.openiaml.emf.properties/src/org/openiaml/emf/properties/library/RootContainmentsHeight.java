@@ -27,6 +27,10 @@ public class RootContainmentsHeight extends DefaultPropertyInvestigator {
 	public RootContainmentsHeight(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public RootContainmentsHeight(IEMFElementSelector selector) {
+		this(RootContainmentsHeight.class.getSimpleName(), selector);
+	}
 
 	public Object evaluate(final EObject root) {
 		

@@ -21,6 +21,10 @@ public class AttributesCountIgnoreDefault extends IterateOverAll {
 	public AttributesCountIgnoreDefault(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public AttributesCountIgnoreDefault(IEMFElementSelector selector) {
+		this(AttributesCountIgnoreDefault.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public int get(EObject obj) {

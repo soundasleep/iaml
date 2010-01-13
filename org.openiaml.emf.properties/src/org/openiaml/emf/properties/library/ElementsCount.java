@@ -17,6 +17,10 @@ public class ElementsCount extends DefaultPropertyInvestigator {
 	public ElementsCount(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ElementsCount(IEMFElementSelector selector) {
+		this(ElementsCount.class.getSimpleName(), selector);
+	}
 
 	public Object evaluate(EObject root) {
 		return 1 + removeIgnoredClasses(toCollection(root.eAllContents())).size();

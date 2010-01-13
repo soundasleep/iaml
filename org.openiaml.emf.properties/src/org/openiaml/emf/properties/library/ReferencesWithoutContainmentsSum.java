@@ -22,6 +22,10 @@ public class ReferencesWithoutContainmentsSum extends IterateOverAll {
 	public ReferencesWithoutContainmentsSum(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ReferencesWithoutContainmentsSum(IEMFElementSelector selector) {
+		this(ReferencesWithoutContainmentsSum.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public int get(EObject obj) {

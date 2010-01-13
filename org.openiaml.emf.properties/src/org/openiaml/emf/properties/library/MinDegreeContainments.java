@@ -25,6 +25,10 @@ public class MinDegreeContainments extends IterateOverAll {
 		super(name, selector);
 	}
 	
+	public MinDegreeContainments(IEMFElementSelector selector) {
+		this(MinDegreeContainments.class.getSimpleName(), selector);
+	}
+	
 	@Override
 	public Object evaluate(EObject root) {
 		// evaluate as normal

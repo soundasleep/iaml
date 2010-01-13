@@ -25,6 +25,10 @@ public class MaxDegreeContainments extends IterateOverAll {
 		super(name, selector);
 	}
 	
+	public MaxDegreeContainments(IEMFElementSelector selector) {
+		this(MaxDegreeContainments.class.getSimpleName(), selector);
+	}
+	
 	@Override
 	public Object evaluate(EObject root) {
 		// evaluate as normal

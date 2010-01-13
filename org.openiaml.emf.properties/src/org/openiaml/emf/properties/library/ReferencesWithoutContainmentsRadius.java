@@ -15,6 +15,10 @@ public class ReferencesWithoutContainmentsRadius extends ReferencesRadius {
 	public ReferencesWithoutContainmentsRadius(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ReferencesWithoutContainmentsRadius(IEMFElementSelector selector) {
+		this(ReferencesWithoutContainmentsRadius.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public boolean ignoreReference(EReference ref) {

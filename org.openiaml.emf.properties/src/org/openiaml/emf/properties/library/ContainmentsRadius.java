@@ -15,6 +15,10 @@ public class ContainmentsRadius extends ReferencesRadius {
 	public ContainmentsRadius(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ContainmentsRadius(IEMFElementSelector selector) {
+		this(ContainmentsRadius.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public boolean ignoreReference(EReference ref) {

@@ -22,6 +22,10 @@ public class ReferencesWithoutContainmentsCountIgnoreEmpty extends IterateOverAl
 	public ReferencesWithoutContainmentsCountIgnoreEmpty(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ReferencesWithoutContainmentsCountIgnoreEmpty(IEMFElementSelector selector) {
+		this(ReferencesWithoutContainmentsCountIgnoreEmpty.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public int get(EObject obj) {

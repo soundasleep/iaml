@@ -27,6 +27,10 @@ public class DistinctContainments extends IterateOverAll {
 	public DistinctContainments(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public DistinctContainments(IEMFElementSelector selector) {
+		this(DistinctContainments.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

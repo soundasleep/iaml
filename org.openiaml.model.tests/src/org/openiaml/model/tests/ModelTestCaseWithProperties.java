@@ -35,7 +35,7 @@ import org.openiaml.model.tests.ModelInferenceTestCase.IModelReloader;
  * @author jmwright
  *
  */
-public abstract class ModelTestCaseWithProperties extends ModelTestCase {
+public abstract class ModelTestCaseWithProperties extends CodegenTestCase {
 
 	/**
 	 * Should the EMF properties investigation be 
@@ -48,6 +48,15 @@ public abstract class ModelTestCaseWithProperties extends ModelTestCase {
 	}
 	
 	/**
+	 * Should complex checks be included?
+	 * 
+	 * @return 
+	 */
+	protected boolean includeComplexChecks() {
+		return true;
+	}
+	
+	/**
 	 * <p>Create a new instance of the inference engine.</p>
 	 * 
 	 * <p>In this particular implementation, we extend the
@@ -56,7 +65,11 @@ public abstract class ModelTestCaseWithProperties extends ModelTestCase {
 	 * 
 	 * @return
 	 */
+	@Override
 	protected CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions, final IModelReloader reloader) {
+		if (!doPropertiesInvestigation())
+			return super.getInferenceEngine(handler, trackInsertions, reloader);
+		
 		final Class<?> caller = getClass();
 		
 		// return engine which checks EMF properties
@@ -239,7 +252,7 @@ public abstract class ModelTestCaseWithProperties extends ModelTestCase {
 	 * @return
 	 */
 	public ModelPropertiesInvestigator getModelPropertiesInvestigator(boolean ignoreGenerated) {
-		return new ModelPropertiesInvestigator(ignoreGenerated, doPropertiesInvestigation());
+		return new ModelPropertiesInvestigator(ignoreGenerated, includeComplexChecks());
 	}
 
 }

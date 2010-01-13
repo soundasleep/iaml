@@ -10,31 +10,11 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.openiaml.emf.properties.EMFPropertiesLibrary;
 import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IPropertyInvestigator;
-import org.openiaml.emf.properties.library.AttributesCount;
-import org.openiaml.emf.properties.library.AttributesCountIgnoreDefault;
-import org.openiaml.emf.properties.library.ContainmentsSum;
-import org.openiaml.emf.properties.library.DistinctAttributeValueStrings;
-import org.openiaml.emf.properties.library.DistinctAttributeValues;
-import org.openiaml.emf.properties.library.DistinctSupertypes;
-import org.openiaml.emf.properties.library.DistinctTypes;
-import org.openiaml.emf.properties.library.ElementsCount;
 import org.openiaml.emf.properties.library.Increase;
 import org.openiaml.emf.properties.library.IncreaseAbsolute;
-import org.openiaml.emf.properties.library.MaxDegreeAttributes;
-import org.openiaml.emf.properties.library.MaxDegreeContainments;
-import org.openiaml.emf.properties.library.MaxDegreeReferences;
-import org.openiaml.emf.properties.library.MaxInheritanceHeight;
-import org.openiaml.emf.properties.library.MinDegreeAttributes;
-import org.openiaml.emf.properties.library.MinDegreeContainments;
-import org.openiaml.emf.properties.library.MinDegreeReferences;
-import org.openiaml.emf.properties.library.ReferencesCycles;
-import org.openiaml.emf.properties.library.ReferencesDiameter;
-import org.openiaml.emf.properties.library.ReferencesRadius;
-import org.openiaml.emf.properties.library.ReferencesSum;
-import org.openiaml.emf.properties.library.ReferencesWithoutContainmentsSum;
-import org.openiaml.emf.properties.library.RootContainmentsHeight;
 import org.openiaml.model.model.ModelPackage;
 
 /**
@@ -74,53 +54,13 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 
 	public List<IPropertyInvestigator> getInvestigators() {
 		if (investigators == null) {
+			/*
 			investigators = new ArrayList<IPropertyInvestigator>();
 			// initialise
 			
-			investigators.add(new ElementsCount("elements-count", this));
-			investigators.add(new AttributesCount("attributes-count", this));
-			investigators.add(new AttributesCountIgnoreDefault("attributes-count-no-default", this));
-			// investigators.add(new ReferencesCount("references-count", this));
-			// investigators.add(new ReferencesCountIgnoreEmpty("references-count-no-empty", this));
-			investigators.add(new ReferencesSum("references-sum", this));
-			// investigators.add(new ContainmentsCount("containments-count", this));
-			// investigators.add(new ContainmentsCountIgnoreEmpty("containments-count-no-empty", this));
-			investigators.add(new ContainmentsSum("containments-sum", this));
-			investigators.add(new ReferencesWithoutContainmentsSum("references-without-containments-sum", this));
-			investigators.add(new DistinctTypes("distinct-types", this));
-			// investigators.add(new SupertypesCount("supertype-count", this));
-			investigators.add(new DistinctSupertypes("distinct-supertypes", this));
-			investigators.add(new DistinctAttributeValues("distinct-attribute-values", this));
-			investigators.add(new DistinctAttributeValueStrings("distinct-attribute-value-strings", this));
-			// investigators.add(new DistinctReferences("distinct-references", this));
-			// investigators.add(new DistinctContainments("distinct-containments", this));
-			investigators.add(new MaxDegreeAttributes("max-degree-attributes", this));
-			investigators.add(new MaxDegreeReferences("max-degree-references", this));
-			investigators.add(new MaxDegreeContainments("max-degree-containments", this));
-			investigators.add(new MinDegreeAttributes("min-degree-attributes", this));
-			investigators.add(new MinDegreeReferences("min-degree-references", this));
-			investigators.add(new MinDegreeContainments("min-degree-containments", this));
-			investigators.add(new MaxInheritanceHeight("max-inheritance-height", this));
-			if (isIncludeComplexChecks()) {
-				investigators.add(new ReferencesRadius("references-radius", this));
-				investigators.add(new ReferencesDiameter("references-diameter", this));
-				// investigators.add(new ContainmentsRadius("containments-radius", this));
-				// investigators.add(new ContainmentsDiameter("containments-diameter", this));
-				/*
-				investigators.add(new CountTypes("wires", this, WireEdge.class));
-				investigators.add(new CountTypes("visible-things", this, VisibleThing.class));
-				investigators.add(new CountTypes("events", this, EventTrigger.class));
-				investigators.add(new CountTypes("operations", this, Operation.class));
-				investigators.add(new CountTypes("conditions", this, Condition.class));
-				investigators.add(new CountTypes("execution-edges", this, ExecutionEdge.class));
-				investigators.add(new CountTypes("data-flow-edges", this, DataFlowEdge.class));
-				investigators.add(new CountTypes("properties", this, ApplicationElementProperty.class));
-				investigators.add(new CountTypes("nodes", this, ActivityNode.class));
-				investigators.add(new CountTypes("pages", this, Page.class));
-				*/
-				investigators.add(new ReferencesCycles("cycles", this));
-				investigators.add(new RootContainmentsHeight("children-height", this));
-			}
+			investigators.add(new SupertypesCount(this));
+			*/
+			investigators = EMFPropertiesLibrary.getAllEMFProperties(this);
 		}
 		return investigators;
 	}

@@ -21,7 +21,11 @@ public class ContainmentsCount extends IterateOverAll {
 	public ContainmentsCount(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
-
+	
+	public ContainmentsCount(IEMFElementSelector selector) {
+		this(ContainmentsCount.class.getSimpleName(), selector);
+	}
+	
 	@Override
 	public int get(EObject obj) {
 		int result = 0;

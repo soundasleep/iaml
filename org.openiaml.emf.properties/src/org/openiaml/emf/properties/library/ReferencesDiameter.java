@@ -34,6 +34,10 @@ public class ReferencesDiameter extends IterateOverAll {
 	public ReferencesDiameter(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ReferencesDiameter(IEMFElementSelector selector) {
+		this(ReferencesDiameter.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

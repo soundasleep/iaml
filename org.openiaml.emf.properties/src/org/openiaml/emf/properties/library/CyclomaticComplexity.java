@@ -19,6 +19,10 @@ public class CyclomaticComplexity extends DefaultPropertyInvestigator {
 	public CyclomaticComplexity(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public CyclomaticComplexity(IEMFElementSelector selector) {
+		this(CyclomaticComplexity.class.getSimpleName(), selector);
+	}
 
 	public Object evaluate(EObject root) {
 		// nodes
@@ -27,6 +31,6 @@ public class CyclomaticComplexity extends DefaultPropertyInvestigator {
 		// edges
 		ReferencesSum edges = new ReferencesSum(this.getName(), this.getSelector());
 
-		return ((Long) nodes.evaluate(root)) - ((Long) edges.evaluate(root)) + (2 * 1);
+		return ((Integer) nodes.evaluate(root)) - ((Integer) edges.evaluate(root)) + (2 * 1);
 	}
 }

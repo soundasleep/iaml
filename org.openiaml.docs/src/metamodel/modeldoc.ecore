@@ -33,8 +33,10 @@
         eType="#//Constraint" containment="true" eOpposite="#//Constraint/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1"
         eType="#//ModelExtension" containment="true" eOpposite="#//ModelExtension/containingClass"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="graphicalRepresentations"
-        upperBound="-1" eType="#//GraphicalRepresentation" containment="true" eOpposite="#//GraphicalRepresentation/containingClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="icon" eType="#//GraphicalRepresentation"
+        containment="true" eOpposite="#//GraphicalRepresentation/containingClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gmfEditor" eType="#//GraphicalRepresentation"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="examples" upperBound="-1"
         eType="#//Example" containment="true" eOpposite="#//Example/containingClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ModelDocumentation"
@@ -68,7 +70,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GraphicalRepresentation" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" eType="#//EMFClass"
-        eOpposite="#//EMFClass/graphicalRepresentations"/>
+        eOpposite="#//EMFClass/icon"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InferenceSemantic" eSuperTypes="#//Semantic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -225,13 +225,22 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_CLASS__EXTENSIONS = 12;
 
 	/**
-	 * The feature id for the '<em><b>Graphical Representations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Icon</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__GRAPHICAL_REPRESENTATIONS = 13;
+	int EMF_CLASS__ICON = 13;
+
+	/**
+	 * The feature id for the '<em><b>Gmf Editor</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__GMF_EDITOR = 14;
 
 	/**
 	 * The feature id for the '<em><b>Examples</b></em>' containment reference list.
@@ -240,7 +249,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__EXAMPLES = 14;
+	int EMF_CLASS__EXAMPLES = 15;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -249,7 +258,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__PARENT = 15;
+	int EMF_CLASS__PARENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -258,7 +267,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__ATTRIBUTES = 16;
+	int EMF_CLASS__ATTRIBUTES = 17;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' containment reference list.
@@ -267,7 +276,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__REFERENCES = 17;
+	int EMF_CLASS__REFERENCES = 18;
 
 	/**
 	 * The feature id for the '<em><b>Additional Documentation</b></em>' containment reference list.
@@ -276,7 +285,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS__ADDITIONAL_DOCUMENTATION = 18;
+	int EMF_CLASS__ADDITIONAL_DOCUMENTATION = 19;
 
 	/**
 	 * The number of structural features of the '<em>EMF Class</em>' class.
@@ -285,7 +294,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS_FEATURE_COUNT = 19;
+	int EMF_CLASS_FEATURE_COUNT = 20;
 
 
 	/**
@@ -1905,15 +1914,26 @@ public interface ModeldocPackage extends EPackage {
 	EReference getEMFClass_Extensions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getGraphicalRepresentations <em>Graphical Representations</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.openiaml.docs.modeldoc.EMFClass#getIcon <em>Icon</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Graphical Representations</em>'.
-	 * @see org.openiaml.docs.modeldoc.EMFClass#getGraphicalRepresentations()
+	 * @return the meta object for the containment reference '<em>Icon</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getIcon()
 	 * @see #getEMFClass()
 	 * @generated
 	 */
-	EReference getEMFClass_GraphicalRepresentations();
+	EReference getEMFClass_Icon();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.docs.modeldoc.EMFClass#getGmfEditor <em>Gmf Editor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Gmf Editor</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getGmfEditor()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EReference getEMFClass_GmfEditor();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getExamples <em>Examples</em>}'.
@@ -3252,12 +3272,20 @@ public interface ModeldocPackage extends EPackage {
 		EReference EMF_CLASS__EXTENSIONS = eINSTANCE.getEMFClass_Extensions();
 
 		/**
-		 * The meta object literal for the '<em><b>Graphical Representations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Icon</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EMF_CLASS__GRAPHICAL_REPRESENTATIONS = eINSTANCE.getEMFClass_GraphicalRepresentations();
+		EReference EMF_CLASS__ICON = eINSTANCE.getEMFClass_Icon();
+
+		/**
+		 * The meta object literal for the '<em><b>Gmf Editor</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_CLASS__GMF_EDITOR = eINSTANCE.getEMFClass_GmfEditor();
 
 		/**
 		 * The meta object literal for the '<em><b>Examples</b></em>' containment reference list feature.

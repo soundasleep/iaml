@@ -99,6 +99,9 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 	protected void loadTestCaseSemantics(final ModeldocFactory factory,
 			final ModelDocumentation root, File folder, String plugin, String pkg) throws IOException {
 		
+		if (!folder.exists())
+			throw new RuntimeException(folder + " does not exist");
+		
 		// for every java in this folder,
 		String[] files = folder.list();
 		for (String file : files) {

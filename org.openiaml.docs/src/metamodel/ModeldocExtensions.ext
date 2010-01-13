@@ -41,10 +41,11 @@ String getString(modeldoc::JavadocTextElement this) :
 	value;
 	
 /**
- * Converts 'foo.bar.baz' into 'foo/bar/baz'
+ * Converts 'foo.bar.baz' into 'foo/bar/baz'.
+ * If package is the empty string '', returns '.'.
  */
 getPackage(String this) :
-	replaceAll("\\.", "/");
+	this == "" ? "." : replaceAll("\\.", "/");
 
 /** 
  * a hack way to create backtrace-able errors

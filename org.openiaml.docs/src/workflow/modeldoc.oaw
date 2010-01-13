@@ -28,7 +28,7 @@
 	<component class="org.openarchitectureware.xpand2.Generator">
 		<metaModel idRef="mm"/>
 		<expand
-			value="template::Template::main FOR model" />
+			value="template::ModeldocTemplate::main FOR model" />
 		<outlet path="${src-gen}" >
 			<postprocessor class="org.openiaml.docs.generation.codegen.IACleanerBeautifier"/>
 		</outlet>

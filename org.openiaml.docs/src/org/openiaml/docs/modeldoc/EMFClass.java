@@ -31,7 +31,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getImplementationNotes <em>Implementation Notes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getExtensions <em>Extensions</em>}</li>
- *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getIcon <em>Icon</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getGmfEditor <em>Gmf Editor</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getExamples <em>Examples</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getParent <em>Parent</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAttributes <em>Attributes</em>}</li>
@@ -310,22 +311,58 @@ public interface EMFClass extends EObject {
 	EList<ModelExtension> getExtensions();
 
 	/**
-	 * Returns the value of the '<em><b>Graphical Representations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.docs.modeldoc.GraphicalRepresentation}.
+	 * Returns the value of the '<em><b>Icon</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.openiaml.docs.modeldoc.GraphicalRepresentation#getContainingClass <em>Containing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Graphical Representations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Icon</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Graphical Representations</em>' containment reference list.
-	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_GraphicalRepresentations()
+	 * @return the value of the '<em>Icon</em>' containment reference.
+	 * @see #setIcon(GraphicalRepresentation)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Icon()
 	 * @see org.openiaml.docs.modeldoc.GraphicalRepresentation#getContainingClass
 	 * @model opposite="containingClass" containment="true"
 	 * @generated
 	 */
-	EList<GraphicalRepresentation> getGraphicalRepresentations();
+	GraphicalRepresentation getIcon();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#getIcon <em>Icon</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Icon</em>' containment reference.
+	 * @see #getIcon()
+	 * @generated
+	 */
+	void setIcon(GraphicalRepresentation value);
+
+	/**
+	 * Returns the value of the '<em><b>Gmf Editor</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Gmf Editor</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Gmf Editor</em>' containment reference.
+	 * @see #setGmfEditor(GraphicalRepresentation)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_GmfEditor()
+	 * @model containment="true"
+	 * @generated
+	 */
+	GraphicalRepresentation getGmfEditor();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#getGmfEditor <em>Gmf Editor</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Gmf Editor</em>' containment reference.
+	 * @see #getGmfEditor()
+	 * @generated
+	 */
+	void setGmfEditor(GraphicalRepresentation value);
 
 	/**
 	 * Returns the value of the '<em><b>Examples</b></em>' containment reference list.

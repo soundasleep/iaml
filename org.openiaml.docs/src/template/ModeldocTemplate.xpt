@@ -28,9 +28,11 @@
 «ENDDEFINE»
 
 «DEFINE getIcon FOR modeldoc::EMFClass»
-	«FOREACH graphicalRepresentations.reference.typeSelect(modeldoc::FileReference) AS fr»
-		<img src="«EXPAND ClassTemplate::viewSource FOR this»«fr.plugin»/«getPackage(fr.package)»/«fr.name»">
-	«ENDFOREACH»
+	«IF icon != null»		
+		«FOREACH {icon}.reference.typeSelect(modeldoc::FileReference) AS fr»
+			<img src="«EXPAND ClassTemplate::viewSource FOR this»«fr.plugin»/«getPackage(fr.package)»/«fr.name»">	
+		«ENDFOREACH»
+	«ENDIF»
 «ENDDEFINE»
 
 /** 

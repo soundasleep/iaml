@@ -5,7 +5,7 @@
 «DEFINE examples FOR modeldoc::ModelDocumentation»
 	«FILE "output/examples.html"»
 	
-«EXPAND Template::header("List of examples", "examples")»
+«EXPAND ModeldocTemplate::header("List of examples", "examples")»
 
 <div class="navigation">
 <a href="index.html">Model Elements</a>
@@ -24,7 +24,7 @@
 «FOREACH classes.sortBy(c|c.name) AS cls»
 	«IF !cls.examples.isEmpty»
 		<li class="example class «IF cls.abstract»abstract«ENDIF» «IF cls.abstract»interface«ENDIF»">
-		<a href="«fileName(cls)»" class="icon_image">«EXPAND Template::getIcon FOR cls»</a>
+		<a href="«fileName(cls)»" class="icon_image">«EXPAND ModeldocTemplate::getIcon FOR cls»</a>
 		<a href="«fileName(cls)»">«cls.name»</a>
 		
 		<ul>
@@ -45,7 +45,7 @@
 «ENDFOREACH»
 </ul>
 
-«EXPAND Template::footer»
+«EXPAND ModeldocTemplate::footer»
 
 	«ENDFILE»
 «ENDDEFINE»

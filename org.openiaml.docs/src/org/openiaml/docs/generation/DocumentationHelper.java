@@ -172,4 +172,16 @@ public abstract class DocumentationHelper implements ILoader {
 
 	}
 	
+	/**
+	 * Is the given filename an image?
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	public boolean isImage(String filename) {
+		String f = filename.toLowerCase();
+		return f.endsWith(".png") || f.endsWith(".gif") || f.endsWith(".jpg")
+			|| f.endsWith(".ico");
+	}
+	
 }

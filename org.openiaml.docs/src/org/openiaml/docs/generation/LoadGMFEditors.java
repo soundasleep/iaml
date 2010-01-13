@@ -12,10 +12,12 @@ import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 
 /**
+ * Load the graphical representations (exported from the GMF editor)
+ * 
  * @author jmwright
  *
  */
-public class LoadIcons extends DocumentationHelper implements ILoader {
+public class LoadGMFEditors extends DocumentationHelper implements ILoader {
 	
 	private File iconBase;
 
@@ -28,15 +30,14 @@ public class LoadIcons extends DocumentationHelper implements ILoader {
 	 * @param plugin
 	 * @param packageBase
 	 */
-	public LoadIcons(File iconBase, String plugin, String packageBase) {
+	public LoadGMFEditors(File iconBase, String plugin, String packageBase) {
 		super();
 		this.iconBase = iconBase;
 		this.plugin = plugin;
 		this.packageBase = packageBase;
-
+		
 		if (!iconBase.exists())
 			throw new RuntimeException(iconBase + " does not exist");
-
 	}
 
 	/**
@@ -63,7 +64,7 @@ public class LoadIcons extends DocumentationHelper implements ILoader {
 					// add a GraphicalReference
 					GraphicalRepresentation gr = factory.createGraphicalRepresentation();
 					gr.setReference(fr);
-					cls.setIcon(gr);
+					cls.setGmfEditor(gr);
 				
 					// stop searching
 					break;

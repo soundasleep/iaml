@@ -4,6 +4,7 @@
 package org.openiaml.model.diagram.custom.helpers;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -26,15 +27,7 @@ import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart;
-import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
-import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
-import org.openiaml.model.diagram.part.IamlVisualIDRegistry;
-import org.openiaml.model.diagram.part.Messages;
 
 /**
  * Contains a map of all IAML diagrams. We can use this to open
@@ -42,54 +35,141 @@ import org.openiaml.model.diagram.part.Messages;
  * or <code>.iaml_operation_diagram</code>) without having to
  * refer to the diagram code directly.
  * 
+ * <p>TODO unless this is used by end-user code, this should be moved
+ * into a development-only plugin; currently it is only used by modeldoc
+ * and diagram tests.
+ * 
  * @author jmwright
  *
  */
 public class DiagramRegistry {
+	
+	/**
+	 * Contains all of the necessary information for a given 
+	 * diagram editor.
+	 * 
+	 */
+	private abstract static class IamlDiagramRegistryOptions {
 
+		public String modelId;
+		public int visualId;
+		public PreferencesHint prefHint;
+		public Map saveOptions;
+		public String initMessage;
+		public String errorMessage;
+
+		public IamlDiagramRegistryOptions(String modelId, int visualId,
+				PreferencesHint prefHint, Map saveOptions,
+				String initMessage,
+				String errorMessage) {
+			this.modelId = modelId;
+			this.visualId = visualId;
+			this.prefHint = prefHint;
+			this.saveOptions = saveOptions;
+			this.initMessage = initMessage;
+			this.errorMessage = errorMessage;
+		}
+
+		public abstract int getDiagramVisualID(IFile modelFile, EObject modelRoot);
+
+		/**
+		 * Open the given diagram resource.
+		 * @throws PartInitException 
+		 */
+		public abstract void openDiagram(Resource diagramResource) throws PartInitException;
+		
+	}
+	
+	/**
+	 * Initialise all of the editors.
+	 * 
+	 * @return
+	 */
+	protected static Map<String,IamlDiagramRegistryOptions> getEditors() {
+		Map<String,IamlDiagramRegistryOptions> editors = new HashMap<String,IamlDiagramRegistryOptions>();
+		
+		editors.put("iaml", new IamlDiagramRegistryOptions(
+				org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart.MODEL_ID,
+				org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+				org.openiaml.model.diagram.part.IamlDiagramEditorUtil.getSaveOptions(),
+				org.openiaml.model.diagram.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
+				org.openiaml.model.diagram.part.Messages.IamlNewDiagramFileWizard_IncorrectRootError) {
+
+					@Override
+					public void openDiagram(Resource diagramResource) throws PartInitException {						
+						org.openiaml.model.diagram.part.IamlDiagramEditorUtil.openDiagram(diagramResource);
+					}
+					
+					@Override
+					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
+						return org.openiaml.model.diagram.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
+					}
+			
+		});
+
+		editors.put("iaml_operation", new IamlDiagramRegistryOptions(
+				org.openiaml.model.diagram.operation.edit.parts.CompositeOperationEditPart.MODEL_ID,
+				org.openiaml.model.diagram.operation.edit.parts.CompositeOperationEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.operation.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+				org.openiaml.model.diagram.operation.part.IamlDiagramEditorUtil.getSaveOptions(),
+				org.openiaml.model.diagram.operation.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
+				org.openiaml.model.diagram.operation.part.Messages.IamlNewDiagramFileWizard_IncorrectRootError) {
+
+					@Override
+					public void openDiagram(Resource diagramResource) throws PartInitException {						
+						org.openiaml.model.diagram.operation.part.IamlDiagramEditorUtil.openDiagram(diagramResource);
+					}
+					
+					@Override
+					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
+						return org.openiaml.model.diagram.operation.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
+					}
+			
+		});
+
+		return editors;		
+	}
+	
 	/**
 	 * Initialise a model file from a source file.
 	 * The {@link IFile#getFileExtension() model file extension} is used to select the
 	 * appropriate editor.
-	 *  
-	 * TODO Copied from <code>org.openiaml.model.tests.eclipse.InitializeDiagramTestCase</code> - it should be placed into a separate project!!
-	 *
+	 * 
+	 * @see #getEditors()
 	 * @see IFile#getFileExtension()
 	 * @param modelFile must exist
 	 * @param diagramFile must not exist yet
-	 * @throws ExecutionException 
+	 * @throws DiagramRegistryException if no editor could be found for the given file
 	 * @throws IOException 
+	 * @throws ExecutionException 
 	 * @throws PartInitException 
 	 */
-	public static void initializeModelFile(IFile modelFile, IFile diagramFile) throws DiagramRegistryException, ExecutionException, IOException, PartInitException {
+	public static void initializeModelFile(IFile modelFile, IFile diagramFile) throws DiagramRegistryException, PartInitException, ExecutionException, IOException {
+		
+		// find the appropriate editor
+		IamlDiagramRegistryOptions opt = getEditors().get(modelFile.getFileExtension());
+		if (opt == null)
+			throw new DiagramRegistryException("Could not find editor for file extension: " + modelFile.getFileExtension());
 
 		// pass the appropriate arguments
 		Resource diagramResource = initializeModelFile(
 				modelFile,
 				diagramFile,
-				InternetApplicationEditPart.MODEL_ID,
-				InternetApplicationEditPart.VISUAL_ID,
-				IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
-				IamlDiagramEditorUtil.getSaveOptions(),
-				Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
-				Messages.IamlNewDiagramFileWizard_IncorrectRootError
+				opt
 		);
 		
-		IamlDiagramEditorUtil.openDiagram(diagramResource);
+		opt.openDiagram(diagramResource);
 		
-	}
-	
-	protected static int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
-		return IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
 	}
 	
 	/**
 	 * Initialise the diagram file, and return the loaded resource (before it is opened)
-	 * @param iamlNewDiagramFileWizardIncorrectRootError 
+	 * @param errorMessage 
 	 * @param  
 	 */
 	protected static Resource initializeModelFile(final IFile modelFile, final IFile diagramFile,
-			final String model_id, final int visual_id, final PreferencesHint prefHint, Map saveOptions, String initMessage, final String errorMessage) throws DiagramRegistryException, ExecutionException, IOException, PartInitException {
+			final IamlDiagramRegistryOptions options) throws DiagramRegistryException, ExecutionException, IOException, PartInitException {
 		
 		if (!modelFile.exists())
 			throw new IllegalArgumentException("Model file " + modelFile + " does not exist");
@@ -113,28 +193,28 @@ public class DiagramRegistry {
 		
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
 				myEditingDomain,
-				initMessage,
+				options.initMessage,
 				affectedFiles) {
 
 			protected CommandResult doExecuteWithResult(
 					IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
-				int diagramVID = getDiagramVisualID(modelFile, modelRoot);
-				if (diagramVID != visual_id) {
+				int diagramVID = options.getDiagramVisualID(modelFile, modelRoot);
+				if (diagramVID != options.visualId) {
 					return CommandResult
-							.newErrorCommandResult(errorMessage);
+							.newErrorCommandResult(options.errorMessage);
 				}
 				Diagram diagram = ViewService.createDiagram(
 						modelRoot,
-						model_id,
-						prefHint);
+						options.modelId,
+						options.prefHint);
 				diagramResource.getContents().add(diagram);
 				return CommandResult.newOKCommandResult();
 			}
 		};
 		OperationHistoryFactory.getOperationHistory().execute(command,
 				new NullProgressMonitor(), null);
-		diagramResource.save(saveOptions);
+		diagramResource.save(options.saveOptions);
 		
 		return diagramResource;
 		

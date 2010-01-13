@@ -15,6 +15,10 @@ public class ContainmentsDiameter extends ReferencesDiameter {
 	public ContainmentsDiameter(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ContainmentsDiameter(IEMFElementSelector selector) {
+		this(ContainmentsDiameter.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public boolean ignoreReference(EReference ref) {

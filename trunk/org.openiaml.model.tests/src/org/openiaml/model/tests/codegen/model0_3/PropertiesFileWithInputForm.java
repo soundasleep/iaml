@@ -10,6 +10,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.tests.CodegenTestCase;
 import org.openiaml.model.tests.EmfToDot;
+import org.openiaml.model.tests.ModelTestCaseWithProperties;
 
 /**
  * Test properties files that are wrapped with inputforms (or not)
@@ -17,8 +18,8 @@ import org.openiaml.model.tests.EmfToDot;
  * @author jmwright
  *
  */
-public class PropertiesFileWithInputForm extends CodegenTestCase {
-
+public class PropertiesFileWithInputForm extends ModelTestCaseWithProperties {
+	
 	/**
 	 * TODO Exports the initial model, and the inferred model, into DOT format. 
 	 * 

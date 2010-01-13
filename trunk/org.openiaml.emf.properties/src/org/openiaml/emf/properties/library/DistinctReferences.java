@@ -26,6 +26,10 @@ public class DistinctReferences extends IterateOverAll {
 	public DistinctReferences(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public DistinctReferences(IEMFElementSelector selector) {
+		this(DistinctReferences.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

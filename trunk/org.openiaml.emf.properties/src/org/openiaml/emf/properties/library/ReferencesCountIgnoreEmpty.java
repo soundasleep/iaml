@@ -23,6 +23,10 @@ public class ReferencesCountIgnoreEmpty extends IterateOverAll {
 		super(name, selector);
 	}
 
+	public ReferencesCountIgnoreEmpty(IEMFElementSelector selector) {
+		this(ReferencesCountIgnoreEmpty.class.getSimpleName(), selector);
+	}
+	
 	@Override
 	public int get(EObject obj) {
 		int result = 0;

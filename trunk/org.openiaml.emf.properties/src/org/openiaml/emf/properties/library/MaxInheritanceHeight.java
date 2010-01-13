@@ -21,6 +21,10 @@ public class MaxInheritanceHeight extends IterateOverAll {
 	public MaxInheritanceHeight(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public MaxInheritanceHeight(IEMFElementSelector selector) {
+		this(MaxInheritanceHeight.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

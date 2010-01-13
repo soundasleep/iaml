@@ -24,6 +24,10 @@ public class MaxDegreeReferences extends IterateOverAll {
 	public MaxDegreeReferences(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public MaxDegreeReferences(IEMFElementSelector selector) {
+		this(MaxDegreeReferences.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

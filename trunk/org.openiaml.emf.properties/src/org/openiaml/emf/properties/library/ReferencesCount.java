@@ -22,6 +22,10 @@ public class ReferencesCount extends IterateOverAll {
 	public ReferencesCount(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ReferencesCount(IEMFElementSelector selector) {
+		this(ReferencesCount.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public int get(EObject obj) {

@@ -21,6 +21,10 @@ public class ContainmentsSum extends IterateOverAll {
 	public ContainmentsSum(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ContainmentsSum(IEMFElementSelector selector) {
+		this(ContainmentsSum.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public int get(EObject obj) {

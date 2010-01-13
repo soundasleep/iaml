@@ -23,6 +23,10 @@ public class MinDegreeAttributes extends IterateOverAll {
 	public MinDegreeAttributes(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public MinDegreeAttributes(IEMFElementSelector selector) {
+		this(MinDegreeAttributes.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

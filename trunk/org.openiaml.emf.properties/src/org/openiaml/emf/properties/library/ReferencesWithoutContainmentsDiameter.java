@@ -15,6 +15,10 @@ public class ReferencesWithoutContainmentsDiameter extends ReferencesDiameter {
 	public ReferencesWithoutContainmentsDiameter(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ReferencesWithoutContainmentsDiameter(IEMFElementSelector selector) {
+		this(ReferencesWithoutContainmentsDiameter.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public boolean ignoreReference(EReference ref) {

@@ -23,6 +23,10 @@ public class MaxDegreeAttributes extends IterateOverAll {
 	public MaxDegreeAttributes(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public MaxDegreeAttributes(IEMFElementSelector selector) {
+		this(MaxDegreeAttributes.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

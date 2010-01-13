@@ -29,6 +29,10 @@ public class DistinctAttributeValueStrings extends IterateOverAll {
 	public DistinctAttributeValueStrings(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public DistinctAttributeValueStrings(IEMFElementSelector selector) {
+		this(DistinctAttributeValueStrings.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public Object evaluate(EObject root) {

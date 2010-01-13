@@ -22,6 +22,10 @@ public class ReferencesSum extends IterateOverAll {
 	public ReferencesSum(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ReferencesSum(IEMFElementSelector selector) {
+		this(ReferencesSum.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public int get(EObject obj) {

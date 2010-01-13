@@ -21,6 +21,10 @@ public class ContainmentsCountIgnoreEmpty extends IterateOverAll {
 	public ContainmentsCountIgnoreEmpty(String name, IEMFElementSelector selector) {
 		super(name, selector);
 	}
+	
+	public ContainmentsCountIgnoreEmpty(IEMFElementSelector selector) {
+		this(ContainmentsCountIgnoreEmpty.class.getSimpleName(), selector);
+	}
 
 	@Override
 	public int get(EObject obj) {

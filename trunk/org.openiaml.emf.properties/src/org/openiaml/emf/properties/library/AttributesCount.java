@@ -22,6 +22,10 @@ public class AttributesCount extends IterateOverAll {
 		super(name, selector);
 	}
 
+	public AttributesCount(IEMFElementSelector selector) {
+		this(AttributesCount.class.getSimpleName(), selector);
+	}
+
 	@Override
 	public int get(EObject obj) {
 		int result = 0;

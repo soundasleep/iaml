@@ -48,6 +48,7 @@ public class ExportIAMLImagesJob extends Job {
 	public ExportIAMLImagesJob(IProject project) {
 		super("Export IAML element images");
 		this.project = project;
+		setUser(true);		// we are a user job, so we should get some feedback
 	}
 
 	/**
@@ -111,19 +112,27 @@ public class ExportIAMLImagesJob extends Job {
 	}
 
 	/**
-	 * @param classes
-	 * @param project
-	 * @param monitor
-	 * @return
-	 * @throws CoreException 
+	 * For the given class: Try and find a corresponding model file; 
+	 * initialise the diagram file and try to open it; export the
+	 * root image (and <em>only</em> the root); and then delete the diagram file.
+	 * 
+	 * @see DiagramRegistry#initializeModelFile(IFile, IFile)
+	 * @see #exportDiagramThenClose(EClass, DiagramDocumentEditor, IProgressMonitor)
 	 */
 	protected IStatus doExport(List<EClass> classes, IProgressMonitor monitor) throws CoreException {
 		
-		// TODO still do monitor logic
+		// count of images exported
+		int exported = 0;
+		
 		for (EClass cls : classes) {
+			monitor.beginTask("Exporting class " + cls.getName(), 105);
+			
+			monitor.subTask("Finding file for class " + cls.getName());
 			IFile file = getFileFor(cls);
 			if (getFileFor(cls) == null)	
 				continue;		// skip
+			
+			monitor.worked(10);
 			
 			// try initialising the diagram
 			IFile diagram = null;
@@ -133,6 +142,7 @@ public class ExportIAMLImagesJob extends Job {
 					break;
 			}
 			
+			monitor.subTask("Initialising diagram " + diagram.getName());
 			try {
 				// get the diagram registry to open the diagram
 				DiagramRegistry.initializeModelFile(file, diagram);
@@ -145,8 +155,10 @@ public class ExportIAMLImagesJob extends Job {
 			} catch (IOException e) {
 				throw new RuntimeException(e);	// TODO replace with caught exception
 			}
+			monitor.worked(50);
 			
 			// the diagram should now be opened
+			monitor.subTask("Exporting root image");
 			
 			// get the active workbench editor part
 			// based on IamlDiagramEditorUtil#openDiagram()
@@ -155,13 +167,30 @@ public class ExportIAMLImagesJob extends Job {
 			DiagramDocumentEditor editor = (DiagramDocumentEditor) page.getActiveEditor();
 			
 			// export only one image
-			exportDiagramThenClose(cls, editor, monitor);
+			exportDiagramThenClose(cls, editor, new SubProgressMonitor(monitor, 40));
+			
+			// finally, delete the diagram file
+			monitor.subTask("Deleting diagram file");
+			diagram.delete(true, new SubProgressMonitor(monitor, 5));
+			monitor.done();
+			
+			exported++;
 
 		}
+		
+		// done
+		if (exported == 0) {
+			// we didn't export any! throw a warning
+			return new Status(Status.WARNING, DocToolsPlugin.PLUGIN_ID, "Did not export any root element images");
+		}
 
-		throw new UnsupportedOperationException("doExport() not implemented yet");
+		return Status.OK_STATUS;
 	}
 	
+	/**
+	 * For the currently open editor: export the image to PNG; then try and 
+	 * force the editor closed (if supported).
+	 */
 	protected void exportDiagramThenClose(EClass cls, DiagramDocumentEditor editor, IProgressMonitor monitor) throws CoreException {
 		DiagramEditPart part = editor.getDiagramEditPart();
 		IPath destination = generateImageDestination(cls);

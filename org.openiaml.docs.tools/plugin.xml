@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+	<!-- .iaml file extensions -->
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.docs.tools.id1"
+            objectClass="org.eclipse.core.resources.IProject">
+
+         <menu
+               id="org.openiaml.docs.tools.menu1"
+               path="additions"
+               label="&amp;IAML Modeldoc Tools">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.docs.tools.ExportIAMLElementImagesAction"
+               id="org.openiaml.docs.tools.export"
+               label="&amp;Export IAML Element Images"
+               menubarPath="org.openiaml.docs.tools.menu1/group">
+         </action>
+
+      </objectContribution>                    
+
+	</extension>
+
+</plugin>

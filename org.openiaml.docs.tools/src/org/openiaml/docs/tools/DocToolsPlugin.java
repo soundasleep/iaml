@@ -1,4 +1,5 @@
-package org.openiaml.gmf.tools;
+package org.openiaml.docs.tools;
+
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
@@ -8,18 +9,18 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class GmfToolsPlugin extends Plugin {
+public class DocToolsPlugin extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.openiaml.gmf.tools";
+	public static final String PLUGIN_ID = "org.openiaml.docs.tools";
 
 	// The shared instance
-	private static GmfToolsPlugin plugin;
+	private static DocToolsPlugin plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public GmfToolsPlugin() {
+	public DocToolsPlugin() {
 	}
 
 	/*
@@ -47,7 +48,7 @@ public class GmfToolsPlugin extends Plugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static GmfToolsPlugin getInstance() {
+	public static DocToolsPlugin getInstance() {
 		return plugin;
 	}
 
@@ -60,7 +61,7 @@ public class GmfToolsPlugin extends Plugin {
 			error = throwable.getMessage();
 		}
 		getLog().log(
-				new Status(IStatus.ERROR, GmfToolsPlugin.PLUGIN_ID,
+				new Status(IStatus.ERROR, DocToolsPlugin.PLUGIN_ID,
 						IStatus.OK, error, throwable));
 	}
 
@@ -73,8 +74,8 @@ public class GmfToolsPlugin extends Plugin {
 			message = throwable.getMessage();
 		}
 		getLog().log(
-				new Status(IStatus.INFO, GmfToolsPlugin.PLUGIN_ID,
+				new Status(IStatus.INFO, DocToolsPlugin.PLUGIN_ID,
 						IStatus.OK, message, throwable));
 	}
-	
+
 }

@@ -56,7 +56,8 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getImplementationNotes <em>Implementation Notes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getExtensions <em>Extensions</em>}</li>
- *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getGraphicalRepresentations <em>Graphical Representations</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getIcon <em>Icon</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getGmfEditor <em>Gmf Editor</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getExamples <em>Examples</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAttributes <em>Attributes</em>}</li>
@@ -213,14 +214,23 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 */
 	protected EList<ModelExtension> extensions;
 	/**
-	 * The cached value of the '{@link #getGraphicalRepresentations() <em>Graphical Representations</em>}' containment reference list.
+	 * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGraphicalRepresentations()
+	 * @see #getIcon()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<GraphicalRepresentation> graphicalRepresentations;
+	protected GraphicalRepresentation icon;
+	/**
+	 * The cached value of the '{@link #getGmfEditor() <em>Gmf Editor</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGmfEditor()
+	 * @generated
+	 * @ordered
+	 */
+	protected GraphicalRepresentation gmfEditor;
 	/**
 	 * The cached value of the '{@link #getExamples() <em>Examples</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -535,11 +545,85 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<GraphicalRepresentation> getGraphicalRepresentations() {
-		if (graphicalRepresentations == null) {
-			graphicalRepresentations = new EObjectContainmentWithInverseEList<GraphicalRepresentation>(GraphicalRepresentation.class, this, ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS, ModeldocPackage.GRAPHICAL_REPRESENTATION__CONTAINING_CLASS);
+	public GraphicalRepresentation getIcon() {
+		return icon;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetIcon(GraphicalRepresentation newIcon, NotificationChain msgs) {
+		GraphicalRepresentation oldIcon = icon;
+		icon = newIcon;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__ICON, oldIcon, newIcon);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return graphicalRepresentations;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIcon(GraphicalRepresentation newIcon) {
+		if (newIcon != icon) {
+			NotificationChain msgs = null;
+			if (icon != null)
+				msgs = ((InternalEObject)icon).eInverseRemove(this, ModeldocPackage.GRAPHICAL_REPRESENTATION__CONTAINING_CLASS, GraphicalRepresentation.class, msgs);
+			if (newIcon != null)
+				msgs = ((InternalEObject)newIcon).eInverseAdd(this, ModeldocPackage.GRAPHICAL_REPRESENTATION__CONTAINING_CLASS, GraphicalRepresentation.class, msgs);
+			msgs = basicSetIcon(newIcon, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__ICON, newIcon, newIcon));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GraphicalRepresentation getGmfEditor() {
+		return gmfEditor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetGmfEditor(GraphicalRepresentation newGmfEditor, NotificationChain msgs) {
+		GraphicalRepresentation oldGmfEditor = gmfEditor;
+		gmfEditor = newGmfEditor;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__GMF_EDITOR, oldGmfEditor, newGmfEditor);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGmfEditor(GraphicalRepresentation newGmfEditor) {
+		if (newGmfEditor != gmfEditor) {
+			NotificationChain msgs = null;
+			if (gmfEditor != null)
+				msgs = ((InternalEObject)gmfEditor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_CLASS__GMF_EDITOR, null, msgs);
+			if (newGmfEditor != null)
+				msgs = ((InternalEObject)newGmfEditor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_CLASS__GMF_EDITOR, null, msgs);
+			msgs = basicSetGmfEditor(newGmfEditor, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__GMF_EDITOR, newGmfEditor, newGmfEditor));
 	}
 
 	/**
@@ -666,8 +750,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtensions()).basicAdd(otherEnd, msgs);
-			case ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGraphicalRepresentations()).basicAdd(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__ICON:
+				if (icon != null)
+					msgs = ((InternalEObject)icon).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_CLASS__ICON, null, msgs);
+				return basicSetIcon((GraphicalRepresentation)otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__EXAMPLES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExamples()).basicAdd(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__PARENT:
@@ -706,8 +792,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
 				return ((InternalEList<?>)getExtensions()).basicRemove(otherEnd, msgs);
-			case ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS:
-				return ((InternalEList<?>)getGraphicalRepresentations()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__ICON:
+				return basicSetIcon(null, msgs);
+			case ModeldocPackage.EMF_CLASS__GMF_EDITOR:
+				return basicSetGmfEditor(null, msgs);
 			case ModeldocPackage.EMF_CLASS__EXAMPLES:
 				return ((InternalEList<?>)getExamples()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__PARENT:
@@ -772,8 +860,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return getConstraints();
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
 				return getExtensions();
-			case ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS:
-				return getGraphicalRepresentations();
+			case ModeldocPackage.EMF_CLASS__ICON:
+				return getIcon();
+			case ModeldocPackage.EMF_CLASS__GMF_EDITOR:
+				return getGmfEditor();
 			case ModeldocPackage.EMF_CLASS__EXAMPLES:
 				return getExamples();
 			case ModeldocPackage.EMF_CLASS__PARENT:
@@ -843,9 +933,11 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				getExtensions().clear();
 				getExtensions().addAll((Collection<? extends ModelExtension>)newValue);
 				return;
-			case ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS:
-				getGraphicalRepresentations().clear();
-				getGraphicalRepresentations().addAll((Collection<? extends GraphicalRepresentation>)newValue);
+			case ModeldocPackage.EMF_CLASS__ICON:
+				setIcon((GraphicalRepresentation)newValue);
+				return;
+			case ModeldocPackage.EMF_CLASS__GMF_EDITOR:
+				setGmfEditor((GraphicalRepresentation)newValue);
 				return;
 			case ModeldocPackage.EMF_CLASS__EXAMPLES:
 				getExamples().clear();
@@ -917,8 +1009,11 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
 				getExtensions().clear();
 				return;
-			case ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS:
-				getGraphicalRepresentations().clear();
+			case ModeldocPackage.EMF_CLASS__ICON:
+				setIcon((GraphicalRepresentation)null);
+				return;
+			case ModeldocPackage.EMF_CLASS__GMF_EDITOR:
+				setGmfEditor((GraphicalRepresentation)null);
 				return;
 			case ModeldocPackage.EMF_CLASS__EXAMPLES:
 				getExamples().clear();
@@ -973,8 +1068,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return constraints != null && !constraints.isEmpty();
 			case ModeldocPackage.EMF_CLASS__EXTENSIONS:
 				return extensions != null && !extensions.isEmpty();
-			case ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS:
-				return graphicalRepresentations != null && !graphicalRepresentations.isEmpty();
+			case ModeldocPackage.EMF_CLASS__ICON:
+				return icon != null;
+			case ModeldocPackage.EMF_CLASS__GMF_EDITOR:
+				return gmfEditor != null;
 			case ModeldocPackage.EMF_CLASS__EXAMPLES:
 				return examples != null && !examples.isEmpty();
 			case ModeldocPackage.EMF_CLASS__PARENT:

@@ -4,16 +4,24 @@
 
 «DEFINE class(modeldoc::ModelDocumentation root) FOR modeldoc::EMFClass»
 	«FILE "output/" + fileName()»
-		«EXPAND Template::header(name, "summary")»
+		«EXPAND ModeldocTemplate::header(name, "summary")»
 
 		<div class="navigation">
 		<a href="index.html">&lt; Back to list</a>
 		</div>
 		
 		<div class="intro">
+		<div class="gmfeditor">
+		«IF gmfEditor != null»		
+			«FOREACH {gmfEditor}.reference.typeSelect(modeldoc::FileReference) AS fr»
+				<img src="«EXPAND ClassTemplate::viewSource FOR this»«fr.plugin»/«getPackage(fr.package)»/«fr.name»">	
+			«ENDFOREACH»
+		«ENDIF»
+		</div>		
+		
 		<h1>
 		<span class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">
-		«EXPAND Template::getIcon»
+		«EXPAND ModeldocTemplate::getIcon»
 		«name»
 		</span>
 		
@@ -50,6 +58,8 @@
 		</div>
 		</p>
 		«ENDIF»
+		
+		<div id="intro_end"></div>
 		</div>
 		
 		«IF !examples.union(getInheritedExamples(this)).isEmpty»
@@ -222,11 +232,11 @@
 			«ENDIF»
 		</div>
 		
-		«EXPAND Template::footer»
+		«EXPAND ModeldocTemplate::footer»
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE supertypes FOR modeldoc::EMFClass-»<span class="class_link"><a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«EXPAND Template::getIcon»</a> <a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a></span>«ENDDEFINE»
+«DEFINE supertypes FOR modeldoc::EMFClass-»<span class="class_link"><a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«EXPAND ModeldocTemplate::getIcon»</a> <a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a></span>«ENDDEFINE»
 
 «DEFINE example(Boolean local) FOR modeldoc::Example»
 	<li>

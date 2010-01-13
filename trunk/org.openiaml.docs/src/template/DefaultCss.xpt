@@ -101,6 +101,9 @@ div.intro h1 small { font-size: 0.6em; }
 div.intro h1 small a { text-decoration: none; }
 div.intro h1 small a:hover { text-decoration: underline; }
 
+div.intro div.gmfeditor img { border: 1px solid #ccc; float: right; }
+div.intro div#intro_end { clear: right; }
+
 body#summary .subtype_list { padding-left: 2em; margin-top: .5em; line-height: 1.4em; }
 
 body#examples li.example { margin-bottom: 1em; }

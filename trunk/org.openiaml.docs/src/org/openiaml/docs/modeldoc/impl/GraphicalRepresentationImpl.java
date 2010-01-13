@@ -82,7 +82,7 @@ public class GraphicalRepresentationImpl extends SemanticImpl implements Graphic
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newContainingClass != null)
-				msgs = ((InternalEObject)newContainingClass).eInverseAdd(this, ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS, EMFClass.class, msgs);
+				msgs = ((InternalEObject)newContainingClass).eInverseAdd(this, ModeldocPackage.EMF_CLASS__ICON, EMFClass.class, msgs);
 			msgs = basicSetContainingClass(newContainingClass, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -129,7 +129,7 @@ public class GraphicalRepresentationImpl extends SemanticImpl implements Graphic
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ModeldocPackage.GRAPHICAL_REPRESENTATION__CONTAINING_CLASS:
-				return eInternalContainer().eInverseRemove(this, ModeldocPackage.EMF_CLASS__GRAPHICAL_REPRESENTATIONS, EMFClass.class, msgs);
+				return eInternalContainer().eInverseRemove(this, ModeldocPackage.EMF_CLASS__ICON, EMFClass.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

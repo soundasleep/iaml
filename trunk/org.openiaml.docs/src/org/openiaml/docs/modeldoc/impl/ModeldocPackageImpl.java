@@ -444,7 +444,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_GraphicalRepresentations() {
+	public EReference getEMFClass_Icon() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -453,7 +453,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Examples() {
+	public EReference getEMFClass_GmfEditor() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -462,7 +462,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Parent() {
+	public EReference getEMFClass_Examples() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -471,7 +471,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Attributes() {
+	public EReference getEMFClass_Parent() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(16);
 	}
 
@@ -480,7 +480,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_References() {
+	public EReference getEMFClass_Attributes() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(17);
 	}
 
@@ -489,8 +489,17 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_AdditionalDocumentation() {
+	public EReference getEMFClass_References() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFClass_AdditionalDocumentation() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(19);
 	}
 
 	/**
@@ -1484,7 +1493,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfClassEClass, EMF_CLASS__IMPLEMENTATION_NOTES);
 		createEReference(emfClassEClass, EMF_CLASS__CONSTRAINTS);
 		createEReference(emfClassEClass, EMF_CLASS__EXTENSIONS);
-		createEReference(emfClassEClass, EMF_CLASS__GRAPHICAL_REPRESENTATIONS);
+		createEReference(emfClassEClass, EMF_CLASS__ICON);
+		createEReference(emfClassEClass, EMF_CLASS__GMF_EDITOR);
 		createEReference(emfClassEClass, EMF_CLASS__EXAMPLES);
 		createEReference(emfClassEClass, EMF_CLASS__PARENT);
 		createEReference(emfClassEClass, EMF_CLASS__ATTRIBUTES);
@@ -1699,7 +1709,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFClass_ImplementationNotes(), this.getImplementationNote(), this.getImplementationNote_ContainingClass(), "implementationNotes", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Constraints(), this.getConstraint(), this.getConstraint_ContainingClass(), "constraints", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Extensions(), this.getModelExtension(), this.getModelExtension_ContainingClass(), "extensions", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEMFClass_GraphicalRepresentations(), this.getGraphicalRepresentation(), this.getGraphicalRepresentation_ContainingClass(), "graphicalRepresentations", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFClass_Icon(), this.getGraphicalRepresentation(), this.getGraphicalRepresentation_ContainingClass(), "icon", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFClass_GmfEditor(), this.getGraphicalRepresentation(), null, "gmfEditor", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Examples(), this.getExample(), this.getExample_ContainingClass(), "examples", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Parent(), this.getModelDocumentation(), this.getModelDocumentation_Classes(), "parent", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Attributes(), this.getEMFAttribute(), this.getEMFAttribute_ContainingType(), "attributes", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1725,7 +1736,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getOperationalSemantic_ContainingClass(), this.getEMFClass(), this.getEMFClass_OperationalSemantics(), "containingClass", null, 0, 1, OperationalSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(graphicalRepresentationEClass, GraphicalRepresentation.class, "GraphicalRepresentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGraphicalRepresentation_ContainingClass(), this.getEMFClass(), this.getEMFClass_GraphicalRepresentations(), "containingClass", null, 0, 1, GraphicalRepresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGraphicalRepresentation_ContainingClass(), this.getEMFClass(), this.getEMFClass_Icon(), "containingClass", null, 0, 1, GraphicalRepresentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inferenceSemanticEClass, InferenceSemantic.class, "InferenceSemantic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInferenceSemantic_Category(), ecorePackage.getEString(), "category", null, 0, 1, InferenceSemantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

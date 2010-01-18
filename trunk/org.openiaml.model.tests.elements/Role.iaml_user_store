@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml.users:UserStore xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.wires="http://openiaml.org/model/wires" id="users.1263fd37a2e.172">
-  <children xsi:type="iaml.users:Role" id="users.1263fd37a2e.176" name="Role name" outEdges="wires.1263fd37a0f.5f6 wires.1263fd37a0f.5fd wires.1263fd37a0f.603">
+  <children xsi:type="iaml.users:Role" id="users.1263fd37a2e.176" name="Role name" outEdges="wires.1263fd37a0f.5f6 wires.1263fd37a0f.5fd wires.1263fd37a0f.603 wires.12640c2a1be.d8">
     <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1263fd37a0f.5f6" from="users.1263fd37a2e.176" name="Wire name">
       <to xsi:type="iaml:DomainObjectInstance" href="NewInstanceWire.iaml_visual#model.1263fd37982.c20"/>
     </wires>
@@ -11,6 +11,12 @@
       <to xsi:type="iaml.components:AccessControlHandler" href="ConstraintWire.iaml_visual#components.1263fd37a1e.c9"/>
       <wires xsi:type="iaml.wires:ConstraintWire" id="wires.1263fd37a0f.605" from="wires.1263fd37a0f.603">
         <to xsi:type="iaml.wires:RequiresWire" href="Permission.iaml_user_store#wires.1263fd37a0f.604"/>
+      </wires>
+    </wires>
+    <wires xsi:type="iaml.wires:RequiresWire" id="wires.12640c2a1be.d8" from="users.1263fd37a2e.176" outEdges="wires.12640c2a1be.db">
+      <to xsi:type="iaml.components:AccessControlHandler" href="ConstraintWire.iaml_visual#components.1263fd37a1e.c9"/>
+      <wires xsi:type="iaml.wires:ConstraintWire" id="wires.12640c2a1be.db" from="wires.12640c2a1be.d8" type="OR">
+        <to xsi:type="iaml.wires:RequiresWire" href="Permission.iaml_user_store#wires.12640c2a1be.da"/>
       </wires>
     </wires>
   </children>

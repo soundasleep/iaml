@@ -1,0 +1,22 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE examplesList FOR modeldoc::ModelDocumentation»
+	«FILE "output/examplesList.txt"»
+		«FOREACH classes.examples.exampleModel.typeSelect(modeldoc::ModelReference).toSet() AS example»
+			«EXPAND exampleDirectReference FOR example»
+		«ENDFOREACH»
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE exampleDirectReference FOR modeldoc::ModelReference»
+«getPackage(package)»/«name».iaml
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

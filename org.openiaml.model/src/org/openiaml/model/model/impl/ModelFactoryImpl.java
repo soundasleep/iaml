@@ -13,14 +13,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.DataFlowEdge;
-import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
@@ -33,15 +31,12 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
-import org.openiaml.model.model.VisitorAgent;
-import org.openiaml.model.model.WireEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,11 +82,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ModelPackage.WIRE_EDGE: return createWireEdge();
 			case ModelPackage.EVENT_TRIGGER: return createEventTrigger();
 			case ModelPackage.DOMAIN_OBJECT: return createDomainObject();
 			case ModelPackage.DOMAIN_ATTRIBUTE: return createDomainAttribute();
-			case ModelPackage.ACTIVITY_NODE: return createActivityNode();
 			case ModelPackage.PARAMETER: return createParameter();
 			case ModelPackage.PRIMITIVE_OPERATION: return createPrimitiveOperation();
 			case ModelPackage.COMPOSITE_OPERATION: return createCompositeOperation();
@@ -106,27 +99,13 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.EXECUTION_EDGE: return createExecutionEdge();
 			case ModelPackage.CONDITIONAL_EDGE: return createConditionalEdge();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET: return createDynamicApplicationElementSet();
-			case ModelPackage.DERIVED_VIEW: return createDerivedView();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE: return createDomainObjectInstance();
-			case ModelPackage.PAGE_REQUEST: return createPageRequest();
-			case ModelPackage.VISITOR_AGENT: return createVisitorAgent();
 			case ModelPackage.COMPOSITE_CONDITION: return createCompositeCondition();
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE: return createDomainAttributeInstance();
 			case ModelPackage.QUERY_PARAMETER: return createQueryParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public WireEdge createWireEdge() {
-		WireEdgeImpl wireEdge = new WireEdgeImpl();
-		generateID(wireEdge);
-		return wireEdge;
 	}
 
 	/**
@@ -160,17 +139,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		DomainAttributeImpl domainAttribute = new DomainAttributeImpl();
 		generateID(domainAttribute);
 		return domainAttribute;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public ActivityNode createActivityNode() {
-		ActivityNodeImpl activityNode = new ActivityNodeImpl();
-		generateID(activityNode);
-		return activityNode;
 	}
 
 	/**
@@ -332,43 +300,10 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public DerivedView createDerivedView() {
-		DerivedViewImpl derivedView = new DerivedViewImpl();
-		generateID(derivedView);
-		return derivedView;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
 	public DomainObjectInstance createDomainObjectInstance() {
 		DomainObjectInstanceImpl domainObjectInstance = new DomainObjectInstanceImpl();
 		generateID(domainObjectInstance);
 		return domainObjectInstance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public PageRequest createPageRequest() {
-		PageRequestImpl pageRequest = new PageRequestImpl();
-		generateID(pageRequest);
-		return pageRequest;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public VisitorAgent createVisitorAgent() {
-		VisitorAgentImpl visitorAgent = new VisitorAgentImpl();
-		generateID(visitorAgent);
-		return visitorAgent;
 	}
 
 	/**

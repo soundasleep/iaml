@@ -140,7 +140,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSession_Agents() {
+	public EReference getSession_Children() {
 		return (EReference)sessionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -149,7 +149,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSession_Children() {
+	public EReference getSession_Properties() {
 		return (EReference)sessionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -158,17 +158,8 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSession_Properties() {
-		return (EReference)sessionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getSession_Values() {
-		return (EReference)sessionEClass.getEStructuralFeatures().get(3);
+		return (EReference)sessionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -200,7 +191,6 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		// Create classes and their features
 		sessionEClass = createEClass(SESSION);
-		createEReference(sessionEClass, SESSION__AGENTS);
 		createEReference(sessionEClass, SESSION__CHILDREN);
 		createEReference(sessionEClass, SESSION__PROPERTIES);
 		createEReference(sessionEClass, SESSION__VALUES);
@@ -248,7 +238,6 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSession_Agents(), theModelPackage.getVisitorAgent(), null, "agents", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSession_Children(), theModelPackage.getApplicationElement(), null, "children", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSession_Properties(), theModelPackage.getApplicationElementProperty(), null, "properties", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSession_Values(), theModelPackage.getStaticValue(), null, "values", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -281,7 +270,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		  (sessionEClass, 
 		   source, 
 		   new String[] {
-			 "changed", "0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination"
+			 "changed", "0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination\r\n0.4.2 removed \'agents\' reference"
 		   });			
 		addAnnotation
 		  (getSession_Children(), 

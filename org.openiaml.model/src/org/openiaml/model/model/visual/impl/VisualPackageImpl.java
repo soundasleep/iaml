@@ -23,7 +23,6 @@ import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
 import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.users.impl.UsersPackageImpl;
 import org.openiaml.model.model.visual.Button;
-import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -66,13 +65,6 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * @generated
 	 */
 	private EClass buttonEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass frameEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -208,15 +200,6 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFrame() {
-		return frameEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public VisualFactory getVisualFactory() {
 		return (VisualFactory)getEFactoryInstance();
 	}
@@ -248,8 +231,6 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		inputTextFieldEClass = createEClass(INPUT_TEXT_FIELD);
 
 		buttonEClass = createEClass(BUTTON);
-
-		frameEClass = createEClass(FRAME);
 	}
 
 	/**
@@ -288,8 +269,6 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		inputFormEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		inputTextFieldEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
-		frameEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
-		frameEClass.getESuperTypes().add(theModelPackage.getScope());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -300,8 +279,6 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		initEClass(inputTextFieldEClass, InputTextField.class, "InputTextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(buttonEClass, Button.class, "Button", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(frameEClass, Frame.class, "Frame", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -330,13 +307,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
-		   });			
-		addAnnotation
-		  (frameEClass, 
-		   source, 
-		   new String[] {
-			 "added", "0.2"
-		   });
+		   });	
 	}
 
 	/**
@@ -370,7 +341,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a clickable button to the user."
-		   });	
+		   });
 	}
 
 } //VisualPackageImpl

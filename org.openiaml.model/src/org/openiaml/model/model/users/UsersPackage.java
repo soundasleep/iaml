@@ -188,15 +188,6 @@ public interface UsersPackage extends EPackage {
 	int USER_STORE__PROPERTIES = ModelPackage.DOMAIN_STORE__PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Views</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USER_STORE__VIEWS = ModelPackage.DOMAIN_STORE__VIEWS;
-
-	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

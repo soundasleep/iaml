@@ -26,7 +26,6 @@ import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.users.impl.UsersPackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
-import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ConstraintTypes;
@@ -40,7 +39,6 @@ import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
-import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresFactory;
@@ -94,20 +92,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	private EClass setWireEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass showWireEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass commitWireEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -387,24 +371,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getShowWire() {
-		return showWireEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getCommitWire() {
-		return commitWireEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getNavigateWire() {
 		return navigateWireEClass;
 	}
@@ -556,10 +522,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		setWireEClass = createEClass(SET_WIRE);
 
-		showWireEClass = createEClass(SHOW_WIRE);
-
-		commitWireEClass = createEClass(COMMIT_WIRE);
-
 		navigateWireEClass = createEClass(NAVIGATE_WIRE);
 
 		selectWireEClass = createEClass(SELECT_WIRE);
@@ -628,8 +590,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		parameterWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		setWireEClass.getESuperTypes().add(this.getCompositeWire());
 		setWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
-		showWireEClass.getESuperTypes().add(this.getCompositeWire());
-		commitWireEClass.getESuperTypes().add(this.getCompositeWire());
 		navigateWireEClass.getESuperTypes().add(this.getCompositeWire());
 		selectWireEClass.getESuperTypes().add(this.getCompositeWire());
 		selectWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
@@ -645,7 +605,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		providesWireEClass.getESuperTypes().add(this.getSingleWire());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(singleWireEClass, SingleWire.class, "SingleWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(singleWireEClass, SingleWire.class, "SingleWire", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(compositeWireEClass, CompositeWire.class, "CompositeWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeWire_Children(), theModelPackage.getApplicationElement(), null, "children", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -664,10 +624,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEAttribute(getParameterWire_ParameterName(), ecorePackage.getEString(), "parameterName", null, 0, 1, ParameterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setWireEClass, SetWire.class, "SetWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(showWireEClass, ShowWire.class, "ShowWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(commitWireEClass, CommitWire.class, "CommitWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(navigateWireEClass, NavigateWire.class, "NavigateWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -713,7 +669,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (singleWireEClass, 
 		   source, 
 		   new String[] {
-			 "comment", "why do we have SingleWire at all? (following a design pattern?)"
+			 "comment", "why do we have SingleWire at all? (following a design pattern?)",
+			 "changed", "0.4.2 to abstract"
 		   });		
 		addAnnotation
 		  (compositeWireEClass, 
@@ -749,19 +706,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   new String[] {
 			 "added", "0.2"
 		   });			
-		addAnnotation
-		  (showWireEClass, 
-		   source, 
-		   new String[] {
-			 "added", "0.2"
-		   });		
-		addAnnotation
-		  (commitWireEClass, 
-		   source, 
-		   new String[] {
-			 "added", "0.2",
-			 "comment", "\"Commit\" is the same as \"Update\", isn\'t it?"
-		   });		
 		addAnnotation
 		  (navigateWireEClass, 
 		   source, 
@@ -850,7 +794,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "When the source element changes, the target element will be updated (but not vice versa)."
-		   });					
+		   });			
 		addAnnotation
 		  (navigateWireEClass, 
 		   source, 

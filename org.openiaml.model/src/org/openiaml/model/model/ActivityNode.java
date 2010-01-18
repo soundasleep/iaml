@@ -14,7 +14,8 @@ package org.openiaml.model.model;
  *
  *
  * @see org.openiaml.model.model.ModelPackage#getActivityNode()
- * @model
+ * @model abstract="true"
+ *        annotation="http://openiaml.org/comment changed='0.4.2 to abstract'"
  * @generated
  */
 public interface ActivityNode extends GeneratedElement {

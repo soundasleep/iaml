@@ -10,9 +10,12 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WireEdge" eSuperTypes="#//GeneratedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="WireEdge" abstract="true" eSuperTypes="#//GeneratedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents some higher-level relationship between two components."/>
+    </eAnnotations>
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="changed" value="0.4.2 to abstract"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//WireEdgesSource"
         eOpposite="#//WireEdgesSource/outEdges"/>
@@ -66,7 +69,11 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" eSuperTypes="#//GeneratedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" abstract="true" eSuperTypes="#//GeneratedElement">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="changed" value="0.4.2 to abstract"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireEdgeDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//DataFlowEdgesSource">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents some type of executable step, which may contain logic flows, data flows or other operations."/>
@@ -195,7 +202,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//ContainsConditions #//GeneratesElements">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="editor" value="org.openiaml.model.diagram.domain_store"/>
-      <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
+      <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute&#xD;&#xA;0.4.2 removed 'views' reference"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Stores many instances of {@link DomainObject DomainObjects} in some storage device."/>
@@ -204,12 +211,6 @@
         eType="#//DomainObject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ApplicationElementProperty" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
-        eType="#//DerivedView">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttribute" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
@@ -313,14 +314,6 @@
         eType="#//GeneratedElement" eOpposite="#//GeneratedElement/generatedBy"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DerivedView" eSuperTypes="#//ApplicationElement #//ContainsWires">
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="added" value="0.2"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//DomainAttribute"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainObjectInstance" eSuperTypes="#//ApplicationElement #//ContainsWires">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.2"/>
@@ -341,24 +334,6 @@
         <details key="added" value="0.3"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PageRequest">
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="added" value="0.2"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//ApplicationElementProperty">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="i.e. queryString parameters"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VisitorAgent">
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="added" value="0.2"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//ApplicationElementProperty"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements">
     <eAnnotations source="http://openiaml.org/comment">
@@ -453,16 +428,12 @@
         <details key="documentation" value="Represents a clickable button to the user."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//VisibleThing #//Scope">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="wires" nsURI="http://openiaml.org/model/wires" nsPrefix="iaml.wires">
-    <eClassifiers xsi:type="ecore:EClass" name="SingleWire" eSuperTypes="#//WireEdge">
+    <eClassifiers xsi:type="ecore:EClass" name="SingleWire" abstract="true" eSuperTypes="#//WireEdge">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="why do we have SingleWire at all? (following a design pattern?)"/>
+        <details key="changed" value="0.4.2 to abstract"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//WireEdge #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions">
@@ -520,17 +491,6 @@
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="When the source element changes, the target element will be updated (but not vice versa)."/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ShowWire" eSuperTypes="#//wires/CompositeWire">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CommitWire" eSuperTypes="#//wires/CompositeWire">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-        <details key="comment" value="&quot;Commit&quot; is the same as &quot;Update&quot;, isn't it?"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NavigateWire" eSuperTypes="#//wires/CompositeWire">
@@ -691,13 +651,11 @@
     </eAnnotations>
     <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination #//ContainsConditions">
       <eAnnotations source="http://openiaml.org/comment">
-        <details key="changed" value="0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination"/>
+        <details key="changed" value="0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination&#xD;&#xA;0.4.2 removed 'agents' reference"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents a user session; contained data is normally not accessible by other users."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
-          eType="#//VisitorAgent" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
           eType="#//ApplicationElement" containment="true">
         <eAnnotations source="http://openiaml.org/comment">

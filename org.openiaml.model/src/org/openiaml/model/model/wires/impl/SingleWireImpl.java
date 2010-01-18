@@ -20,7 +20,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *
  * @generated
  */
-public class SingleWireImpl extends WireEdgeImpl implements SingleWire {
+public abstract class SingleWireImpl extends WireEdgeImpl implements SingleWire {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

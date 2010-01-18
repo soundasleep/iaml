@@ -25,7 +25,6 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
-import org.openiaml.model.model.DerivedView;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
@@ -42,7 +41,6 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.PageRequest;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
@@ -51,7 +49,6 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
-import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -486,23 +483,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.DERIVED_VIEW: {
-				DerivedView derivedView = (DerivedView)theEObject;
-				T result = caseDerivedView(derivedView);
-				if (result == null) result = caseApplicationElement(derivedView);
-				if (result == null) result = caseContainsOperations(derivedView);
-				if (result == null) result = caseNamedElement(derivedView);
-				if (result == null) result = caseContainsEventTriggers(derivedView);
-				if (result == null) result = caseWireEdgesSource(derivedView);
-				if (result == null) result = caseWireEdgeDestination(derivedView);
-				if (result == null) result = caseGeneratesElements(derivedView);
-				if (result == null) result = caseContainsConditions(derivedView);
-				if (result == null) result = caseGeneratedElement(derivedView);
-				if (result == null) result = caseShouldntContainWires(derivedView);
-				if (result == null) result = caseContainsWires(derivedView);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE: {
 				DomainObjectInstance domainObjectInstance = (DomainObjectInstance)theEObject;
 				T result = caseDomainObjectInstance(domainObjectInstance);
@@ -517,18 +497,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseGeneratedElement(domainObjectInstance);
 				if (result == null) result = caseShouldntContainWires(domainObjectInstance);
 				if (result == null) result = caseContainsWires(domainObjectInstance);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.PAGE_REQUEST: {
-				PageRequest pageRequest = (PageRequest)theEObject;
-				T result = casePageRequest(pageRequest);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.VISITOR_AGENT: {
-				VisitorAgent visitorAgent = (VisitorAgent)theEObject;
-				T result = caseVisitorAgent(visitorAgent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1117,21 +1085,6 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Derived View</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Derived View</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDerivedView(DerivedView object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Domain Object Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1143,36 +1096,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseDomainObjectInstance(DomainObjectInstance object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Page Request</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Page Request</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePageRequest(PageRequest object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitor Agent</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitor Agent</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVisitorAgent(VisitorAgent object) {
 		return null;
 	}
 

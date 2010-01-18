@@ -19,7 +19,6 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ConstraintWire;
@@ -32,7 +31,6 @@ import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
-import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -180,32 +178,6 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseGeneratesElements(setWire);
 				if (result == null) result = caseContainsConditions(setWire);
 				if (result == null) result = caseGeneratedElement(setWire);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case WiresPackage.SHOW_WIRE: {
-				ShowWire showWire = (ShowWire)theEObject;
-				T result = caseShowWire(showWire);
-				if (result == null) result = caseCompositeWire(showWire);
-				if (result == null) result = caseWireEdge(showWire);
-				if (result == null) result = caseNamedElement(showWire);
-				if (result == null) result = caseContainsWires(showWire);
-				if (result == null) result = caseGeneratesElements(showWire);
-				if (result == null) result = caseContainsConditions(showWire);
-				if (result == null) result = caseGeneratedElement(showWire);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case WiresPackage.COMMIT_WIRE: {
-				CommitWire commitWire = (CommitWire)theEObject;
-				T result = caseCommitWire(commitWire);
-				if (result == null) result = caseCompositeWire(commitWire);
-				if (result == null) result = caseWireEdge(commitWire);
-				if (result == null) result = caseNamedElement(commitWire);
-				if (result == null) result = caseContainsWires(commitWire);
-				if (result == null) result = caseGeneratesElements(commitWire);
-				if (result == null) result = caseContainsConditions(commitWire);
-				if (result == null) result = caseGeneratedElement(commitWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -395,36 +367,6 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseSetWire(SetWire object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Show Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Show Wire</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseShowWire(ShowWire object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Commit Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Commit Wire</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCommitWire(CommitWire object) {
 		return null;
 	}
 

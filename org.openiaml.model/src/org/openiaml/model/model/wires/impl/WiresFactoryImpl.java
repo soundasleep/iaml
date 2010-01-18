@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
-import org.openiaml.model.model.wires.CommitWire;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ConstraintTypes;
@@ -29,7 +28,6 @@ import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
-import org.openiaml.model.model.wires.ShowWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresFactory;
@@ -79,14 +77,11 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case WiresPackage.SINGLE_WIRE: return createSingleWire();
 			case WiresPackage.COMPOSITE_WIRE: return createCompositeWire();
 			case WiresPackage.SYNC_WIRE: return createSyncWire();
 			case WiresPackage.RUN_INSTANCE_WIRE: return createRunInstanceWire();
 			case WiresPackage.PARAMETER_WIRE: return createParameterWire();
 			case WiresPackage.SET_WIRE: return createSetWire();
-			case WiresPackage.SHOW_WIRE: return createShowWire();
-			case WiresPackage.COMMIT_WIRE: return createCommitWire();
 			case WiresPackage.NAVIGATE_WIRE: return createNavigateWire();
 			case WiresPackage.SELECT_WIRE: return createSelectWire();
 			case WiresPackage.CONDITION_WIRE: return createConditionWire();
@@ -128,17 +123,6 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public SingleWire createSingleWire() {
-		SingleWireImpl singleWire = new SingleWireImpl();
-		generateID(singleWire);
-		return singleWire;
 	}
 
 	/**
@@ -194,28 +178,6 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 		SetWireImpl setWire = new SetWireImpl();
 		generateID(setWire);
 		return setWire;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public ShowWire createShowWire() {
-		ShowWireImpl showWire = new ShowWireImpl();
-		generateID(showWire);
-		return showWire;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public CommitWire createCommitWire() {
-		CommitWireImpl commitWire = new CommitWireImpl();
-		generateID(commitWire);
-		return commitWire;
 	}
 
 	/**

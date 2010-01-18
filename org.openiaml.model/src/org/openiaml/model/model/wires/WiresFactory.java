@@ -26,15 +26,6 @@ public interface WiresFactory extends EFactory {
 	WiresFactory eINSTANCE = org.openiaml.model.model.wires.impl.WiresFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Single Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Single Wire</em>'.
-	 * @generated
-	 */
-	SingleWire createSingleWire();
-
-	/**
 	 * Returns a new object of class '<em>Composite Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,24 +69,6 @@ public interface WiresFactory extends EFactory {
 	 * @generated
 	 */
 	SetWire createSetWire();
-
-	/**
-	 * Returns a new object of class '<em>Show Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Show Wire</em>'.
-	 * @generated
-	 */
-	ShowWire createShowWire();
-
-	/**
-	 * Returns a new object of class '<em>Commit Wire</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Commit Wire</em>'.
-	 * @generated
-	 */
-	CommitWire createCommitWire();
 
 	/**
 	 * Returns a new object of class '<em>Navigate Wire</em>'.

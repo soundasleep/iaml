@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.visual.Button;
-import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -70,7 +69,6 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 			case VisualPackage.INPUT_FORM: return createInputForm();
 			case VisualPackage.INPUT_TEXT_FIELD: return createInputTextField();
 			case VisualPackage.BUTTON: return createButton();
-			case VisualPackage.FRAME: return createFrame();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -118,17 +116,6 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 		ButtonImpl button = new ButtonImpl();
 		generateID(button);
 		return button;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Frame createFrame() {
-		FrameImpl frame = new FrameImpl();
-		generateID(frame);
-		return frame;
 	}
 
 	/**

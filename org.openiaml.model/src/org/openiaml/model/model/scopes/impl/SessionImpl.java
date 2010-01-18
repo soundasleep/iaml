@@ -33,7 +33,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
@@ -60,7 +59,6 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConditions <em>Conditions</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getAgents <em>Agents</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getValues <em>Values</em>}</li>
@@ -249,16 +247,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EList<Condition> conditions;
-
-	/**
-	 * The cached value of the '{@link #getAgents() <em>Agents</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAgents()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<VisitorAgent> agents;
 
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
@@ -551,18 +539,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VisitorAgent> getAgents() {
-		if (agents == null) {
-			agents = new EObjectContainmentEList<VisitorAgent>(VisitorAgent.class, this, ScopesPackage.SESSION__AGENTS);
-		}
-		return agents;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -603,8 +579,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
-			case ScopesPackage.SESSION__AGENTS:
-				return ((InternalEList<?>)getAgents()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__PROPERTIES:
@@ -649,8 +623,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getInEdges();
 			case ScopesPackage.SESSION__CONDITIONS:
 				return getConditions();
-			case ScopesPackage.SESSION__AGENTS:
-				return getAgents();
 			case ScopesPackage.SESSION__CHILDREN:
 				return getChildren();
 			case ScopesPackage.SESSION__PROPERTIES:
@@ -717,10 +689,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getConditions().clear();
 				getConditions().addAll((Collection<? extends Condition>)newValue);
 				return;
-			case ScopesPackage.SESSION__AGENTS:
-				getAgents().clear();
-				getAgents().addAll((Collection<? extends VisitorAgent>)newValue);
-				return;
 			case ScopesPackage.SESSION__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends ApplicationElement>)newValue);
@@ -784,9 +752,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__CONDITIONS:
 				getConditions().clear();
 				return;
-			case ScopesPackage.SESSION__AGENTS:
-				getAgents().clear();
-				return;
 			case ScopesPackage.SESSION__CHILDREN:
 				getChildren().clear();
 				return;
@@ -834,8 +799,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return inEdges != null && !inEdges.isEmpty();
 			case ScopesPackage.SESSION__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
-			case ScopesPackage.SESSION__AGENTS:
-				return agents != null && !agents.isEmpty();
 			case ScopesPackage.SESSION__CHILDREN:
 				return children != null && !children.isEmpty();
 			case ScopesPackage.SESSION__PROPERTIES:

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1263fd37982.be9">
+  <children xsi:type="iaml.visual:InputForm" id="visual.1263fd379ff.7da" name="form name"/>
+</iaml:VisibleThing>

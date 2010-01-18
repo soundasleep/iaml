@@ -101,7 +101,7 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	protected void initializeModelFile(IFile modelFile, IFile diagramFile) throws Exception {
 		
 		// we now ask the DiagramRegistry to initialise the diagram for us (and open it)
-		DiagramRegistry.initializeModelFile(modelFile, diagramFile);
+		DiagramRegistry.initializeModelFile(modelFile, diagramFile, true);
 		
 	}
 

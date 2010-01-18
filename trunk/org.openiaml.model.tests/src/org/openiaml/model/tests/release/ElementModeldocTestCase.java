@@ -5,6 +5,7 @@ package org.openiaml.model.tests.release;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
+import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.wires.WiresPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.tests.model.ModelTestCase;
 
@@ -23,6 +26,24 @@ import org.openiaml.model.tests.model.ModelTestCase;
  *
  */
 public class ElementModeldocTestCase extends XmlTestCase {
+	
+	/**
+	 * TODO Ignored classes for diagram element images (elements which can
+	 * be instantiated, but have not been designed to be).
+	 * 
+	 * For example, .iaml_wire describes a CompositeWire, but there is no way
+	 * to create a new CompositeWire. The alternative is to create many different
+	 * editors for each supertype, e.g. SyncWire, RunInstanceWire, ...
+	 * 
+	 * GMF cannot have diagram editors for abstract classes, so CompositeWire
+	 * cannot be abstract.
+	 */
+	protected List<EClass> IGNORED_CLASSES = Arrays.asList(
+			ModelPackage.eINSTANCE.getApplicationElement(),
+			ModelPackage.eINSTANCE.getVisibleThing(),
+			WiresPackage.eINSTANCE.getCompositeWire(),
+			ModelPackage.eINSTANCE.getInternetApplication()
+	);
 	
 	/**
 	 * Check that all non-abstract, non-interface classes in the model
@@ -45,6 +66,10 @@ public class ElementModeldocTestCase extends XmlTestCase {
 					
 					// ignore interface classes
 					if (cls.isInterface())
+						continue;
+					
+					// ignored classes
+					if (IGNORED_CLASSES.contains(cls))
 						continue;
 					
 					// check that a .png file exists

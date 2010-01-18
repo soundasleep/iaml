@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.c17">
+  <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1263fd37a0f.5f3" id="model.1263fd37982.c1a" name="Operation"/>
+  <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.1263fd37a0f.5f4" id="model.1263fd37982.c1b" name="Condition">
+    <wires xsi:type="iaml.wires:ConditionWire" id="wires.1263fd37a0f.5f4" from="model.1263fd37982.c1b" to="wires.1263fd37a0f.5f3" name="Condition Wire name"/>
+  </conditions>
+  <children xsi:type="iaml.visual:Button" id="visual.1263fd379ff.7e9" name="Button" outEdges="wires.1263fd37a0f.5f3">
+    <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1263fd37a0f.5f3" from="visual.1263fd379ff.7e9" to="model.1263fd37982.c1a" name="click" inEdges="wires.1263fd37a0f.5f4"/>
+  </children>
+</iaml:VisibleThing>

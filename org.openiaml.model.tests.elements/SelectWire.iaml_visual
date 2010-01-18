@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.c3f">
+  <children xsi:type="iaml:DomainObject" id="model.1263fd37982.c42" name="DomainObject" outEdges="wires.1263fd37a0f.60d">
+    <wires xsi:type="iaml.wires:SelectWire" id="wires.1263fd37a0f.60d" from="model.1263fd37982.c42" to="model.1263fd37982.c43" name="Wire name" query="Query"/>
+  </children>
+  <children xsi:type="iaml:DomainObjectInstance" id="model.1263fd37982.c43" name="DomainObjectInstance" inEdges="wires.1263fd37a0f.60d"/>
+</iaml:VisibleThing>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.users:UserStore xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.wires="http://openiaml.org/model/wires" id="users.1263fd37a2e.177">
+  <permissions id="users.1263fd37a2e.17a" name="Permission name" outEdges="wires.1263fd37a0f.604">
+    <wires xsi:type="iaml.wires:RequiresWire" id="wires.1263fd37a0f.604" from="users.1263fd37a2e.17a">
+      <to xsi:type="iaml.components:AccessControlHandler" href="ConstraintWire.iaml_visual#components.1263fd37a1e.c9"/>
+      <inEdges href="Role.iaml_user_store#wires.1263fd37a0f.605"/>
+    </wires>
+  </permissions>
+</iaml.users:UserStore>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml="http://openiaml.org/model0.4" id="model.1263fd37982.ba7">
+  <parameters id="model.1263fd37982.baa" name="parameter name"/>
+</iaml:CompositeOperation>

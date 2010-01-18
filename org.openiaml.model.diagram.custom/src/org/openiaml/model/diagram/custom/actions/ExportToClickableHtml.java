@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -148,9 +149,11 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	 *  <li>Find if any exported image parts correspond to the target element</li>
 	 *  <li>If so, write out a clickable map region corresponding to the target HTML</li>
 	 * </ol>
+	 * 
+	 * @param container the container to place the exported images and HTML into, or <code>null</code> to place in the same container as <code>targetDiagram</code>
 	 */
 	@Override
-	public void doExport(IFile targetDiagram, IProgressMonitor monitor)
+	public void doExport(IFile targetDiagram, IContainer container, IProgressMonitor monitor)
 			throws ExportImageException {
 		
 		monitor.beginTask("Exporting to HTML", 105);
@@ -162,13 +165,16 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		partEObjectMap = new HashMap<DiagramEditPart,EObject>();
 		
 		// do parent
-		super.doExport(targetDiagram, new SubProgressMonitor(monitor, 70));
+		super.doExport(targetDiagram, container, new SubProgressMonitor(monitor, 70));
 		
 		IProgressMonitor finalMonitor = new SubProgressMonitor(monitor, 30);
 		finalMonitor.beginTask("Writing HTML files", partDestinationMap.size() * 2);
 		
 		// get all image parts
 		for (DiagramEditPart root : partDestinationMap.keySet()) {
+			if (monitor.isCanceled())
+				return;
+			
 			IPath destination = partDestinationMap.get(root);
 			IPath htmlDestination = getHTMLDestinationFor(destination);
 			EObject resolved = partEObjectMap.get(root);
@@ -210,15 +216,18 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	
 	/**
 	 * We want to place all generated files into a new folder.
+	 * 
+	 * @param container the container to place images into
 	 * @throws ExportImageException 
 	 */
 	@Override
-	protected IPath generateImageDestination() throws ExportImageException {
+	protected IPath generateImageDestination(IContainer container) throws ExportImageException {
 
 		// get default
-		IPath source = super.generateImageDestination();
+		IPath source = super.generateImageDestination(container);
 		
 		// does the folder exist?
+		// get the folder name from the diagram, e.g. Foo.iaml_diagram -> "Foo"
 		String newFolderName = targetDiagram.getFullPath().removeFileExtension().lastSegment();
 		
 		IPath targetFolder = source.removeLastSegments(1).append(newFolderName).addTrailingSeparator();

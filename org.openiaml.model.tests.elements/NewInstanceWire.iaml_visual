@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" id="model.1263fd37982.c1c">
-  <children xsi:type="iaml:DomainObjectInstance" id="model.1263fd37982.c20" name="New User">
-    <inEdges href="Role.iaml_user_store#wires.1263fd37a0f.5f6"/>
+<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.c1c">
+  <children xsi:type="iaml:DomainObjectInstance" id="model.1263fd37982.c20" name="New Instance" inEdges="wires.12640c2a1be.f1"/>
+  <children xsi:type="iaml:DomainObject" id="model.12640c2a095.56a" name="Domain Object" outEdges="wires.12640c2a1be.f1">
+    <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.12640c2a1be.f1" from="model.12640c2a095.56a" to="model.1263fd37982.c20" name="Wire Name"/>
   </children>
 </iaml:VisibleThing>

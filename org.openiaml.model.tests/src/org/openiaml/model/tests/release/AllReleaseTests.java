@@ -30,6 +30,7 @@ public class AllReleaseTests {
         suite.addTestSuite(LicenceTest.class);
         suite.addTestSuite(RuntimeVersionTestCase.class);
         suite.addTestSuite(ExportDependencyGraph.class);
+        suite.addTestSuite(ElementModeldocTestCase.class);
 		//$JUnit-END$
         return suite; 
    }

@@ -108,6 +108,46 @@ public class DiagramRegistry {
 			
 		});
 
+		editors.put("iaml_domain_object", new IamlDiagramRegistryOptions(
+				org.openiaml.model.diagram.domain_object.edit.parts.DomainObjectEditPart.MODEL_ID,
+				org.openiaml.model.diagram.domain_object.edit.parts.DomainObjectEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.domain_object.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+				org.openiaml.model.diagram.domain_object.part.IamlDiagramEditorUtil.getSaveOptions(),
+				org.openiaml.model.diagram.domain_object.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
+				org.openiaml.model.diagram.domain_object.part.Messages.IamlNewDiagramFileWizard_IncorrectRootError) {
+
+					@Override
+					public void openDiagram(Resource diagramResource) throws PartInitException {						
+						org.openiaml.model.diagram.domain_object.part.IamlDiagramEditorUtil.openDiagram(diagramResource);
+					}
+					
+					@Override
+					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
+						return org.openiaml.model.diagram.domain_object.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
+					}
+			
+		});
+		
+		editors.put("iaml_domain_store", new IamlDiagramRegistryOptions(
+				org.openiaml.model.diagram.domain_store.edit.parts.DomainStoreEditPart.MODEL_ID,
+				org.openiaml.model.diagram.domain_store.edit.parts.DomainStoreEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.domain_store.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+				org.openiaml.model.diagram.domain_store.part.IamlDiagramEditorUtil.getSaveOptions(),
+				org.openiaml.model.diagram.domain_store.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
+				org.openiaml.model.diagram.domain_store.part.Messages.IamlNewDiagramFileWizard_IncorrectRootError) {
+
+					@Override
+					public void openDiagram(Resource diagramResource) throws PartInitException {						
+						org.openiaml.model.diagram.domain_store.part.IamlDiagramEditorUtil.openDiagram(diagramResource);
+					}
+					
+					@Override
+					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
+						return org.openiaml.model.diagram.domain_store.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
+					}
+			
+		});
+		
 		editors.put("iaml_operation", new IamlDiagramRegistryOptions(
 				org.openiaml.model.diagram.operation.edit.parts.CompositeOperationEditPart.MODEL_ID,
 				org.openiaml.model.diagram.operation.edit.parts.CompositeOperationEditPart.VISUAL_ID,
@@ -124,6 +164,46 @@ public class DiagramRegistry {
 					@Override
 					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
 						return org.openiaml.model.diagram.operation.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
+					}
+			
+		});
+		
+		editors.put("iaml_user_store", new IamlDiagramRegistryOptions(
+				org.openiaml.model.diagram.user_store.edit.parts.UserStoreEditPart.MODEL_ID,
+				org.openiaml.model.diagram.user_store.edit.parts.UserStoreEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.user_store.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+				org.openiaml.model.diagram.user_store.part.IamlDiagramEditorUtil.getSaveOptions(),
+				org.openiaml.model.diagram.user_store.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
+				org.openiaml.model.diagram.user_store.part.Messages.IamlNewDiagramFileWizard_IncorrectRootError) {
+
+					@Override
+					public void openDiagram(Resource diagramResource) throws PartInitException {						
+						org.openiaml.model.diagram.user_store.part.IamlDiagramEditorUtil.openDiagram(diagramResource);
+					}
+					
+					@Override
+					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
+						return org.openiaml.model.diagram.user_store.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
+					}
+			
+		});
+		
+		editors.put("iaml_visual", new IamlDiagramRegistryOptions(
+				org.openiaml.model.diagram.visual.edit.parts.VisibleThingEditPart.MODEL_ID,
+				org.openiaml.model.diagram.visual.edit.parts.VisibleThingEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.visual.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+				org.openiaml.model.diagram.visual.part.IamlDiagramEditorUtil.getSaveOptions(),
+				org.openiaml.model.diagram.visual.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
+				org.openiaml.model.diagram.visual.part.Messages.IamlNewDiagramFileWizard_IncorrectRootError) {
+
+					@Override
+					public void openDiagram(Resource diagramResource) throws PartInitException {						
+						org.openiaml.model.diagram.visual.part.IamlDiagramEditorUtil.openDiagram(diagramResource);
+					}
+					
+					@Override
+					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
+						return org.openiaml.model.diagram.visual.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
 					}
 			
 		});

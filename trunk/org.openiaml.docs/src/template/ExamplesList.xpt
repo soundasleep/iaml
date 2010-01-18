@@ -3,15 +3,15 @@
 «EXTENSION metamodel::ModeldocExtensions»
 
 «DEFINE examplesList FOR modeldoc::ModelDocumentation»
-	«FILE "output/examplesList.txt"»
-		«FOREACH classes.examples.exampleModel.typeSelect(modeldoc::ModelReference).toSet() AS example»
-			«EXPAND exampleDirectReference FOR example»
-		«ENDFOREACH»
-	«ENDFILE»
+«FILE "output/examplesList.txt"-»
+«FOREACH classes.examples.exampleModel.typeSelect(modeldoc::ModelReference).toSet() AS example-»
+«EXPAND exampleDirectReference FOR example-»
+«ENDFOREACH-»
+«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE exampleDirectReference FOR modeldoc::ModelReference»
-«getPackage(package)»/«name».iaml
+«DEFINE exampleDirectReference FOR modeldoc::ModelReference-»
+«getPackage(package)»/«name».iaml«"\n"-»
 «ENDDEFINE»
 
 /** 

@@ -3,13 +3,11 @@
  */
 package org.openiaml.docs.tools;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -19,7 +17,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -30,15 +27,15 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
+import org.openiaml.docs.tools.InitialiseDiagram.InitializeDiagramException;
 import org.openiaml.model.diagram.custom.helpers.DiagramRegistry;
-import org.openiaml.model.diagram.custom.helpers.DiagramRegistry.DiagramRegistryException;
 import org.openiaml.model.model.ModelPackage;
 
 /**
  * @author jmwright
  *
  */
-public class ExportIAMLImagesJob extends Job {
+public class ExportIAMLImagesJob extends AbstractIAMLDocJob {
 
 	// the package we will search for (we can change this if necessary)
 	private EPackage rootPackage = ModelPackage.eINSTANCE;
@@ -54,6 +51,7 @@ public class ExportIAMLImagesJob extends Job {
 	/**
 	 * Do the actual work.
 	 */
+	@Override
 	protected IStatus runActual(IProgressMonitor monitor) throws CoreException {
 		// new task
 		monitor.beginTask(this.getName(), 100);
@@ -134,28 +132,13 @@ public class ExportIAMLImagesJob extends Job {
 			
 			monitor.worked(10);
 			
-			// try initialising the diagram
-			IFile diagram = null;
-			for (int i = 0; i < 100; i++) {
-				diagram = project.getFile(file.getName() + "_diagram" + (i == 0 ? "" : i));
-				if (!diagram.exists())
-					break;
-			}
-			
-			monitor.subTask("Initialising diagram " + diagram.getName());
+			InitialiseDiagram init = new InitialiseDiagram();
+			IFile diagram;
 			try {
-				// get the diagram registry to open the diagram
-				DiagramRegistry.initializeModelFile(file, diagram);
-			} catch (RuntimeException e) {
-				throw new RuntimeException(e);	// TODO replace with caught exception
-			} catch (ExecutionException e) {
-				throw new RuntimeException(e);	// TODO replace with caught exception
-			} catch (DiagramRegistryException e) {
-				throw new RuntimeException(e);	// TODO replace with caught exception
-			} catch (IOException e) {
-				throw new RuntimeException(e);	// TODO replace with caught exception
+				diagram = init.initialize(project, file, true /* open new diagram */, new SubProgressMonitor(monitor, 50));
+			} catch (InitializeDiagramException e) {
+				return errorStatus(e);
 			}
-			monitor.worked(50);
 			
 			// the diagram should now be opened
 			monitor.subTask("Exporting root image");
@@ -319,14 +302,6 @@ public class ExportIAMLImagesJob extends Job {
 		}
 		
 		return result;
-	}
-
-	/**
-	 * @param string
-	 * @return
-	 */
-	private IStatus errorStatus(String message) {
-		return new Status(IStatus.ERROR, DocToolsPlugin.PLUGIN_ID, message);
 	}
 	
 }

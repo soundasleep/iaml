@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -31,8 +32,10 @@ import org.openiaml.model.custom.actions.ProgressEnabledUIAction;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 
 /**
- * Export all of the images in a model diagram to multiple image files
+ * Export all of the images in a model diagram to multiple image files.
+ * This does not create clickable HTML.
  * 
+ * @see ExportToClickableHtml
  * @author jmwright
  *
  */
@@ -78,7 +81,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	@Override
 	public IStatus execute(IFile individual, IProgressMonitor monitor) {
 		try {
-			doExport(individual, monitor);
+			doExport(individual, null, monitor);
 			return Status.OK_STATUS;
 		} catch (ExportImageException e) {
 			return errorStatus("Export image exception: " + e.getMessage(), e);
@@ -93,10 +96,16 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	 * 
 	 * @param targetDiagram
 	 * @param monitor 
+	 * @param container the container to place the exported images and HTML into, or <code>null</code> to place in the same container as <code>targetDiagram</code>
 	 * @throws ExportImageException if anything went wrong
 	 */
-	public void doExport(IFile targetDiagram, IProgressMonitor monitor) throws ExportImageException {
+	public void doExport(IFile targetDiagram, IContainer container, IProgressMonitor monitor) throws ExportImageException {
 		diagramFile = targetDiagram;
+		
+		// if the container is null, use the container of the diagram file
+		if (container == null) {
+			container = targetDiagram.getParent();
+		}
 		
 		try {
 			monitor.beginTask("Loading target diagram " + targetDiagram.getName(), getMaxImages() + 2);
@@ -119,7 +128,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 			
 			// export all of the images
 			imagesSaved = 0;
-			recurseExportDiagram(editor, monitor);
+			recurseExportDiagram(editor, container, monitor);
 			
 			// only once we return are we actually done
 			monitor.done();
@@ -166,12 +175,18 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	 * @param monitor2
 	 * 
 	 * @param part
+	 * @param container the container to place the exported images into; cannot be null
 	 * @throws CoreException 
 	 * @throws ExportImageException 
 	 */
-	protected void recurseExportDiagram(DiagramDocumentEditor editor, IProgressMonitor monitor) throws CoreException, ExportImageException {
+	protected void recurseExportDiagram(DiagramDocumentEditor editor, IContainer container, IProgressMonitor monitor) throws CoreException, ExportImageException {
+		assert(container != null);
+		
+		if (monitor.isCanceled())
+			return;
+		
 		DiagramEditPart part = editor.getDiagramEditPart();
-		IPath destination = generateImageDestination();
+		IPath destination = generateImageDestination(container);
 		
 		// save this image if there is something in it
 		if (part.getChildren().size() > 0) {
@@ -186,6 +201,9 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 		
 		// get children
 		for (Object obj : part.getChildren()) {
+			if (monitor.isCanceled())
+				break;
+			
 			if (shouldHalt(imagesSaved)) {
 				break;		// halt
 			}			
@@ -203,7 +221,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 					}
 					
 					// export this diagram editor
-					recurseExportDiagram(newEd, monitor);
+					recurseExportDiagram(newEd, container, monitor);
 
 				}
 			}
@@ -249,17 +267,18 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	/**
 	 * Generate an image destination that shouldn't exist.
 	 * 
+	 * @param container the container to write the image to
 	 * @return
 	 * @throws ExportImageException 
 	 */
-	protected IPath generateImageDestination() throws ExportImageException {
-		IPath container = diagramFile.getLocation().removeLastSegments(1);
+	protected IPath generateImageDestination(IContainer container) throws ExportImageException {
+		IPath ct = container.getLocation();
 		String extension = diagramFile.getFileExtension();
 		String fileName = diagramFile.getName();
 		String append = imagesSaved == 0 ? "" : "-" + imagesSaved;
 		String newFileName = fileName.substring(0, fileName.length() - extension.length() - 1) + append + ".png"; 
 
-		IPath destination = container.append(newFileName);
+		IPath destination = ct.append(newFileName);
 		
 		return destination;
 	}

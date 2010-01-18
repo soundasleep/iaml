@@ -11,25 +11,28 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
 /**
- * Export out IAML images. In particular:
+ * Export out IAML example models. In particular:
  * 
  * <ol>
- * 	<li>Check that the incoming project has a *.iaml* file for some IAML model object
- * 	<li>Go over all IAML model objects that are not abstract or interfaces
- *  <li>Search for some file in the root <code>object_name.iaml*</code>
+ *  <li>Check that an "<code>examples</code>" project is open and accessible
+ *  <li>Search for an "<code>examplesList.txt</code>" in the root of this folder
+ *  <li>Load this file and get only unique models
+ *  <li>Check that each model exists in the project
+ *  <li>For each test model:
+ *  <ol>
  *  <li>Try initialising the diagram
  *  <li>Try opening this diagram
- *  <li>Try exporting this image out to <code>object_name.png</code>
+ *  <li>Try exporting all of the content to the "<code>examples</code>" project
  *  <li>Delete initialised diagram
  * </ol>
  * 
  * @author jmwright
  *
  */
-public class ExportIAMLElementImagesAction implements IObjectActionDelegate {
+public class ExportIAMLExamplesAction implements IObjectActionDelegate {
 	
 	private List<IProject> selection;
-
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
@@ -37,7 +40,7 @@ public class ExportIAMLElementImagesAction implements IObjectActionDelegate {
 	public void run(final IAction action) {
 
 		for (IProject project : selection) {
-			ExportIAMLImagesJob job = new ExportIAMLImagesJob(project);
+			ExportIAMLExamplesJob job = new ExportIAMLExamplesJob(project);
 			job.schedule();
 		}
 		

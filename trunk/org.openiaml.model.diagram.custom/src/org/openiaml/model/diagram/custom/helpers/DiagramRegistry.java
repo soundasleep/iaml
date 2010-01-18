@@ -140,12 +140,13 @@ public class DiagramRegistry {
 	 * @see IFile#getFileExtension()
 	 * @param modelFile must exist
 	 * @param diagramFile must not exist yet
+	 * @param open should the new diagram file be opened?
 	 * @throws DiagramRegistryException if no editor could be found for the given file
 	 * @throws IOException 
 	 * @throws ExecutionException 
 	 * @throws PartInitException 
 	 */
-	public static void initializeModelFile(IFile modelFile, IFile diagramFile) throws DiagramRegistryException, PartInitException, ExecutionException, IOException {
+	public static void initializeModelFile(IFile modelFile, IFile diagramFile, boolean open) throws DiagramRegistryException, PartInitException, ExecutionException, IOException {
 		
 		// find the appropriate editor
 		IamlDiagramRegistryOptions opt = getEditors().get(modelFile.getFileExtension());
@@ -159,14 +160,15 @@ public class DiagramRegistry {
 				opt
 		);
 		
-		opt.openDiagram(diagramResource);
+		if (open) {
+			opt.openDiagram(diagramResource);
+		}
 		
 	}
 	
 	/**
-	 * Initialise the diagram file, and return the loaded resource (before it is opened)
-	 * @param errorMessage 
-	 * @param  
+	 * Initialise the diagram file, and return the loaded resource (before it is opened).
+	 * Does not open the diagram file.
 	 */
 	protected static Resource initializeModelFile(final IFile modelFile, final IFile diagramFile,
 			final IamlDiagramRegistryOptions options) throws DiagramRegistryException, ExecutionException, IOException, PartInitException {

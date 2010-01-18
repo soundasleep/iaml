@@ -25,7 +25,6 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.visual.Button;
-import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -102,10 +101,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseButton(Button object) {
 				return createButtonAdapter();
-			}
-			@Override
-			public Adapter caseFrame(Frame object) {
-				return createFrameAdapter();
 			}
 			@Override
 			public Adapter caseContainsOperations(ContainsOperations object) {
@@ -236,20 +231,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createButtonAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.visual.Frame <em>Frame</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.visual.Frame
-	 * @generated
-	 */
-	public Adapter createFrameAdapter() {
 		return null;
 	}
 

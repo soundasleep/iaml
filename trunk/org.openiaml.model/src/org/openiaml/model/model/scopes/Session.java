@@ -16,7 +16,6 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.VisitorAgent;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 
@@ -32,7 +31,6 @@ import org.openiaml.model.model.WireEdgesSource;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.openiaml.model.model.scopes.Session#getAgents <em>Agents</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.Session#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.Session#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.Session#getValues <em>Values</em>}</li>
@@ -40,26 +38,10 @@ import org.openiaml.model.model.WireEdgesSource;
  * </p>
  *
  * @see org.openiaml.model.model.scopes.ScopesPackage#getSession()
- * @model annotation="http://openiaml.org/comment changed='0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination'"
+ * @model annotation="http://openiaml.org/comment changed='0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination\r\n0.4.2 removed \'agents\' reference'"
  * @generated
  */
 public interface Session extends NamedElement, ContainsOperations, Scope, ContainsWires, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination, ContainsConditions {
-	/**
-	 * Returns the value of the '<em><b>Agents</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.VisitorAgent}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Agents</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Agents</em>' containment reference list.
-	 * @see org.openiaml.model.model.scopes.ScopesPackage#getSession_Agents()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<VisitorAgent> getAgents();
-
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElement}.

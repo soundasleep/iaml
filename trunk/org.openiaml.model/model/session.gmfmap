@@ -637,32 +637,6 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/ShowWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( ShowWire )"/>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="iaml.gmfgraph#ShowWireName"/>
-      <features
-          href="iaml.ecore#//NamedElement/name"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.7"/>
-    <diagramLink
-        href="iaml.gmfgraph#ShowWire"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
-  </links>
-  <links>
-    <domainMetaElement
         href="iaml.ecore#//wires/NavigateWire"/>
     <domainSpecialization
         body="self.oclIsTypeOf( NavigateWire )"/>
@@ -680,32 +654,6 @@
         href="session.gmftool#//@palette/@tools.3/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#NavigateWire"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="iaml.ecore#//wires/CommitWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( CommitWire )"/>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="iaml.gmfgraph#CommitWireName"/>
-      <features
-          href="iaml.ecore#//NamedElement/name"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.8"/>
-    <diagramLink
-        href="iaml.gmfgraph#CommitWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//WireEdge/from"/>
@@ -755,7 +703,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.9"/>
+        href="session.gmftool#//@palette/@tools.3/@tools.7"/>
     <diagramLink
         href="iaml.gmfgraph#NewInstanceWire"/>
     <sourceMetaFeature

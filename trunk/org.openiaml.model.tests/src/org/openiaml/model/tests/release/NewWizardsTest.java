@@ -21,11 +21,11 @@ public class NewWizardsTest extends XmlTestCase {
 	public static final String DIAGRAM_PREFIX = "org.openiaml.model.diagram.";
 	
 	public void testNewWizards() throws Exception {		
-		// we only want the Wire editor to not show
-		checkNewWizard("org.openiaml.model.diagram.wire");
+		// we don't mind if the wire editor shows 
+		// checkNewWizard("org.openiaml.model.diagram.wire");
 	}
 
-	private void checkNewWizard(String plugin) throws Exception {
+	protected void checkNewWizard(String plugin) throws Exception {
 		String pluginXml = PluginsTestCase.PLUGIN_ROOT + plugin + "/plugin.xml";
 		File f = new File(pluginXml);
 		assertTrue("plugin " + plugin + ": " + f + " exists", f.exists());

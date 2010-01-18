@@ -26,15 +26,6 @@ public interface ModelFactory extends EFactory {
 	ModelFactory eINSTANCE = org.openiaml.model.model.impl.ModelFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Wire Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Wire Edge</em>'.
-	 * @generated
-	 */
-	WireEdge createWireEdge();
-
-	/**
 	 * Returns a new object of class '<em>Event Trigger</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,15 +51,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	DomainAttribute createDomainAttribute();
-
-	/**
-	 * Returns a new object of class '<em>Activity Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Activity Node</em>'.
-	 * @generated
-	 */
-	ActivityNode createActivityNode();
 
 	/**
 	 * Returns a new object of class '<em>Parameter</em>'.
@@ -197,15 +179,6 @@ public interface ModelFactory extends EFactory {
 	DynamicApplicationElementSet createDynamicApplicationElementSet();
 
 	/**
-	 * Returns a new object of class '<em>Derived View</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Derived View</em>'.
-	 * @generated
-	 */
-	DerivedView createDerivedView();
-
-	/**
 	 * Returns a new object of class '<em>Domain Object Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -213,24 +186,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	DomainObjectInstance createDomainObjectInstance();
-
-	/**
-	 * Returns a new object of class '<em>Page Request</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Page Request</em>'.
-	 * @generated
-	 */
-	PageRequest createPageRequest();
-
-	/**
-	 * Returns a new object of class '<em>Visitor Agent</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Visitor Agent</em>'.
-	 * @generated
-	 */
-	VisitorAgent createVisitorAgent();
 
 	/**
 	 * Returns a new object of class '<em>Composite Condition</em>'.

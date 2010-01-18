@@ -25,7 +25,8 @@ package org.openiaml.model.model;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getWireEdge()
- * @model
+ * @model abstract="true"
+ *        annotation="http://openiaml.org/comment changed='0.4.2 to abstract'"
  * @generated
  */
 public interface WireEdge extends GeneratedElement {

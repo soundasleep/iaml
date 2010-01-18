@@ -29,7 +29,6 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * <ul>
  *   <li>{@link org.openiaml.model.model.DomainStore#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainStore#getProperties <em>Properties</em>}</li>
- *   <li>{@link org.openiaml.model.model.DomainStore#getViews <em>Views</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainStore#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainStore#getFile <em>File</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainStore#getType <em>Type</em>}</li>
@@ -37,7 +36,7 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getDomainStore()
- * @model annotation="http://openiaml.org/comment editor='org.openiaml.model.diagram.domain_store' changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute'"
+ * @model annotation="http://openiaml.org/comment editor='org.openiaml.model.diagram.domain_store' changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute\r\n0.4.2 removed \'views\' reference'"
  * @generated
  */
 public interface DomainStore extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, ContainsConditions, GeneratesElements {
@@ -73,22 +72,6 @@ public interface DomainStore extends ContainsOperations, ContainsEventTriggers, 
 	 * @generated
 	 */
 	EList<ApplicationElementProperty> getProperties();
-
-	/**
-	 * Returns the value of the '<em><b>Views</b></em>' reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.DerivedView}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Views</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Views</em>' reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getDomainStore_Views()
-	 * @model annotation="http://openiaml.org/comment added='0.2'"
-	 * @generated
-	 */
-	EList<DerivedView> getViews();
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

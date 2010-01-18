@@ -25,7 +25,6 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.visual.Button;
-import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Page;
@@ -182,26 +181,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case VisualPackage.FRAME: {
-				Frame frame = (Frame)theEObject;
-				T result = caseFrame(frame);
-				if (result == null) result = caseVisibleThing(frame);
-				if (result == null) result = caseScope(frame);
-				if (result == null) result = caseApplicationElementContainer(frame);
-				if (result == null) result = caseApplicationElement(frame);
-				if (result == null) result = caseContainsOperations(frame);
-				if (result == null) result = caseNamedElement(frame);
-				if (result == null) result = caseContainsEventTriggers(frame);
-				if (result == null) result = caseWireEdgesSource(frame);
-				if (result == null) result = caseWireEdgeDestination(frame);
-				if (result == null) result = caseGeneratesElements(frame);
-				if (result == null) result = caseContainsConditions(frame);
-				if (result == null) result = caseGeneratedElement(frame);
-				if (result == null) result = caseShouldntContainWires(frame);
-				if (result == null) result = caseContainsWires(frame);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -263,21 +242,6 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseButton(Button object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Frame</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Frame</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFrame(Frame object) {
 		return null;
 	}
 

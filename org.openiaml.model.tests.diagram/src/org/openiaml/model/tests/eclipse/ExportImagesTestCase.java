@@ -44,7 +44,7 @@ public class ExportImagesTestCase extends EclipseTestCaseHelper {
 
 		// do the export action
 		ExportImagePartsAction act = new ExportImagePartsAction();
-		act.doExport(targetDiagram, new NullProgressMonitor());
+		act.doExport(targetDiagram, null, new NullProgressMonitor());
 		
 		assertExists(target1);
 		assertExists(target2);

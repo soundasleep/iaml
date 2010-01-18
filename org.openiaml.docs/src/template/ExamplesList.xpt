@@ -11,7 +11,7 @@
 «ENDDEFINE»
 
 «DEFINE exampleDirectReference FOR modeldoc::ModelReference-»
-«getPackage(package)»/«name».iaml«"\n"-»
+src/«getPackage(package)»/«name».iaml«"\n"-»
 «ENDDEFINE»
 
 /** 

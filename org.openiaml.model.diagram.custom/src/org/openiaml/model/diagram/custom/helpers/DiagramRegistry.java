@@ -108,6 +108,26 @@ public class DiagramRegistry {
 			
 		});
 
+		editors.put("iaml_condition", new IamlDiagramRegistryOptions(
+				org.openiaml.model.diagram.condition.edit.parts.CompositeConditionEditPart.MODEL_ID,
+				org.openiaml.model.diagram.condition.edit.parts.CompositeConditionEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.condition.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+				org.openiaml.model.diagram.condition.part.IamlDiagramEditorUtil.getSaveOptions(),
+				org.openiaml.model.diagram.condition.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
+				org.openiaml.model.diagram.condition.part.Messages.IamlNewDiagramFileWizard_IncorrectRootError) {
+
+					@Override
+					public void openDiagram(Resource diagramResource) throws PartInitException {						
+						org.openiaml.model.diagram.condition.part.IamlDiagramEditorUtil.openDiagram(diagramResource);
+					}
+					
+					@Override
+					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
+						return org.openiaml.model.diagram.condition.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
+					}
+			
+		});
+
 		editors.put("iaml_domain_object", new IamlDiagramRegistryOptions(
 				org.openiaml.model.diagram.domain_object.edit.parts.DomainObjectEditPart.MODEL_ID,
 				org.openiaml.model.diagram.domain_object.edit.parts.DomainObjectEditPart.VISUAL_ID,

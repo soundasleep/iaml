@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.sosy_lab.crocopat.cli.tests;
+package it.itc.irst.nusmv.cli;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,14 +14,14 @@ import org.osgi.framework.BundleContext;
  * @author jmwright
  *
  */
-public class CrocopatCliTestsPlugin extends Plugin {
+public class NusmvCliPlugin extends Plugin {
 	
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.sosy_lab.crocopat.cli.tests";
+	public static final String PLUGIN_ID = "it.itc.irst.nusmv.cli";
 
-	private static CrocopatCliTestsPlugin instance;
+	private static NusmvCliPlugin instance;
 	
-	public static CrocopatCliTestsPlugin getInstance() {
+	public static NusmvCliPlugin getInstance() {
 		return instance;
 	}
 	
@@ -30,7 +30,7 @@ public class CrocopatCliTestsPlugin extends Plugin {
 	 * 
 	 * @deprecated Only the Eclipse framework should use this; see {@link #getInstance()}. 
 	 */
-	public CrocopatCliTestsPlugin() {
+	public NusmvCliPlugin() {
 		super();
 		instance = this;
 	}

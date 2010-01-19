@@ -28,7 +28,7 @@ public class NuSMVTestCase extends TestCase {
 
 	public void testNormalOperationLoop() throws Exception {
 		
-		EObject model = loadModelDirectly("models/DecisionOperationLoop.iaml");
+		EObject model = loadModelDirectly("models/NormalOperationLoop.iaml");
 		assertNotNull(model);
 		
 		VerificationEngine engine = new VerificationEngine(true);

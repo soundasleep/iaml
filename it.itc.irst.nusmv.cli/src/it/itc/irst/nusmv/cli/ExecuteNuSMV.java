@@ -41,6 +41,21 @@ public class ExecuteNuSMV {
 	}
 	
 	/**
+	 * TODO put into NuSMVStdErrException top-level type
+	 * 
+	 * @param errors
+	 * @return
+	 */
+	public static String getErrorsMessage(List<String> errors) {
+		String s = "";
+		for (int i = 0; i < 10 && i < errors.size(); i++) {
+			if (i != 0) s += "\n";
+			s += errors.get(i);
+		}
+		return s;
+	}
+	
+	/**
 	 * An exception occured while executing NuSMV; that is,
 	 * something was written to stderr.
 	 * 
@@ -55,7 +70,7 @@ public class ExecuteNuSMV {
 		 * @param errors A non-empty list of error strings.
 		 */
 		public NuSMVStdErrException(List<String> errors) {
-			super(errors.size() + " error(s), first: '" + errors.get(0) + "'");
+			super(errors.size() + " error(s), first 10: '" + getErrorsMessage(errors) + "'");
 			this.errors = errors;
 		}
 
@@ -190,6 +205,7 @@ public class ExecuteNuSMV {
 		File smvFile = File.createTempFile("temp", ".smv");
 		writeFile(smv, smvFile);
 		smv.close();
+		System.out.println(smvFile);
 		
 		String[] command = new String[] {
 			getNuSMVCommand(),
@@ -209,11 +225,23 @@ public class ExecuteNuSMV {
 		List<String> errors = convertBytesToStrings(stderr.toByteArray());
 		
 		if (!errors.isEmpty()) {
-			throw new NuSMVStdErrException(errors);
+			// print out stderr
+			for (String s : errors) {
+				System.err.println(s);
+			}
+			
+			// only throw the errors if we have an actual error
+			for (String s : errors) {
+				if (s.contains("ERROR") || s.contains("SEVERE")) {
+					throw new NuSMVStdErrException(errors);
+				}
+			}
+			
+			// this allows us to ignore warnings
 		}
 		
 		// did we get no errors, but an incorrect exit code?
-		if (exit != 0) {
+		if (exit != 0 && errors.isEmpty() /* ignore warnings */) {
 			throw new NuSMVException("Expected return value '0', got: " + exit);
 		}
 		

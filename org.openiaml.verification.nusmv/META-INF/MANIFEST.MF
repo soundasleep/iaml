@@ -9,8 +9,11 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="3.5.0",
  it.itc.irst.nusmv.cli;bundle-version="0.1.0",
  org.eclipse.core.runtime;bundle-version="3.5.0",
  org.eclipse.emf.ecore;bundle-version="2.5.0",
+ org.openarchitectureware.core.expressions;bundle-version="4.3.1",
  org.openarchitectureware.workflow;bundle-version="4.3.1",
  org.openarchitectureware.core.workflow;bundle-version="4.3.1",
- org.openarchitectureware.core.xpand2;bundle-version="4.3.1"
+ org.openarchitectureware.core.xpand2;bundle-version="4.3.1",
+ org.openarchitectureware.emftools;bundle-version="4.3.1"
 Bundle-Activator: org.openiaml.verification.nusmv.VerificationNuSMVPlugin
 Bundle-ActivationPolicy: lazy
+Export-Package: org.openiaml.verification.nusmv

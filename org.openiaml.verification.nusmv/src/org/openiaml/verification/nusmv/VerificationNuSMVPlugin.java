@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.verification.crocopat;
+package org.openiaml.verification.nusmv;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,14 +14,14 @@ import org.osgi.framework.BundleContext;
  * @author jmwright
  *
  */
-public class VerificationCrocopatPlugin extends Plugin {
+public class VerificationNuSMVPlugin extends Plugin {
 	
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.openiaml.verification.crocopat";
+	public static final String PLUGIN_ID = "org.openiaml.verification.nusmv";
 
-	private static VerificationCrocopatPlugin instance;
+	private static VerificationNuSMVPlugin instance;
 	
-	public static VerificationCrocopatPlugin getInstance() {
+	public static VerificationNuSMVPlugin getInstance() {
 		return instance;
 	}
 	
@@ -30,7 +30,7 @@ public class VerificationCrocopatPlugin extends Plugin {
 	 * 
 	 * @deprecated Only the Eclipse framework should use this; see {@link #getInstance()}. 
 	 */
-	public VerificationCrocopatPlugin() {
+	public VerificationNuSMVPlugin() {
 		super();
 		instance = this;
 	}

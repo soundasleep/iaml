@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: NuSMV Verification
+Bundle-SymbolicName: org.openiaml.verification.nusmv;singleton:=true
+Bundle-Version: 0.4.2.qualifier
+Bundle-Vendor: www.openiaml.org
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.core.resources;bundle-version="3.5.0",
+ it.itc.irst.nusmv.cli;bundle-version="0.1.0",
+ org.eclipse.core.runtime;bundle-version="3.5.0",
+ org.eclipse.emf.ecore;bundle-version="2.5.0",
+ org.openarchitectureware.workflow;bundle-version="4.3.1",
+ org.openarchitectureware.core.workflow;bundle-version="4.3.1",
+ org.openarchitectureware.core.xpand2;bundle-version="4.3.1"
+Bundle-Activator: org.openiaml.verification.nusmv.VerificationNuSMVPlugin
+Bundle-ActivationPolicy: lazy

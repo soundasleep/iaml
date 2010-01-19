@@ -1,0 +1,4 @@
+-- checks for infinite loops
+
+LTLSPEC
+  G ((!(operation_start != null -> !(F operation_end != null))) U operation_start = null)

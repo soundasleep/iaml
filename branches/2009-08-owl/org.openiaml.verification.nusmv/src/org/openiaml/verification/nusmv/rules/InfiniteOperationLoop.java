@@ -37,7 +37,7 @@ public class InfiniteOperationLoop extends EclipseVerificationRule {
 	 */
 	@Override
 	public String getVerificationRuleFile() {
-		return "rules/loop.smv";
+		return "src/rules/loop.smv";
 	}
 
 	/* (non-Javadoc)

@@ -166,6 +166,9 @@ public abstract class EclipseVerificationRule implements VerificationRule {
 	public URL getResolvedFile(String filename) throws IOException {
 		URL file = getBundle().getEntry(filename);
 		
+		if (file == null)
+			throw new NullPointerException("Could not resolve filename '" + filename + "' in bundle '" + getBundle() + "'");
+		
 		return FileLocator.resolve(file);
 	}
 

@@ -1,0 +1,308 @@
+«IMPORT iaml»
+
+«EXTENSION metamodel::LoopExtensions»
+
+«DEFINE main FOR model::InternetApplication»
+	«FILE "output/check.smv"»
+
+«LET eAllContents.typeSelect(model::operations::StartNode) AS startNodes»
+«LET eAllContents.typeSelect(model::operations::FinishNode) AS finishNodes»
+«LET eAllContents.typeSelect(model::operations::CancelNode) AS cancelNodes»
+«LET eAllContents.typeSelect(model::ActivityNode) AS allNodes»
+«LET eAllContents.typeSelect(model::visual::Page) AS allPages»
+«LET eAllContents.typeSelect(model::Operation) AS allOperations»
+«LET eAllContents.typeSelect(model::visual::Button) AS allButtons»
+
+MODULE main
+
+VAR
+	operation_start : { null 
+		«FOREACH startNodes AS n»
+			, «safeName(n)»
+		«ENDFOREACH» };
+
+	operation_end : { null
+		-- finish nodes
+		«FOREACH finishNodes AS n»
+			, «safeName(n)»
+		«ENDFOREACH»
+		-- cancel nodes
+		«FOREACH cancelNodes AS n»
+			, «safeName(n)»
+		«ENDFOREACH»
+		};
+	
+	current_step : { null
+		-- nodes
+		«FOREACH allNodes AS n»
+			, «safeName(n)»
+		«ENDFOREACH»
+		-- operations
+		«FOREACH allOperations AS n»
+			, «safeName(n)»
+		«ENDFOREACH» 
+		};
+	
+	in_operation : boolean;
+	
+	current_page : { 
+		«FOREACH allPages AS p SEPARATOR ", "»
+			«safeName(p)»
+		«ENDFOREACH»
+	};
+		
+	-- all buttons on all pages
+	«FOREACH allButtons AS b»
+	click_«safeName(b)» : boolean;
+	«ENDFOREACH»
+
+ASSIGN
+	init(operation_start) := null;
+	init(operation_end) := null;
+	init(current_step) := null;
+	init(in_operation) := 0;
+	
+	-- current_page is chosen by nusmv
+	-- click_button is chosen by nusmv
+	
+	-- operation flow
+	next(current_step) := case
+		-- if we are in an operation
+		in_operation = 1 : case
+			-- nodes
+			«EXPAND operationStep FOREACH allNodes»
+			-- operations
+			«EXPAND operationStep FOREACH allOperations»
+		1 : null;
+		esac;
+		
+		-- or an operation needs to start
+		-- are we in a page?
+		«EXPAND stepPage FOREACH allPages»
+		
+		-- otherwise, none
+		1 : null;
+	esac;
+	
+	-- are we now within an operation?
+	next(in_operation) := case
+		-- have we finished operations?
+		in_operation = 1 : case
+			-- finish nodes
+			«EXPAND inOperationEnd FOREACH finishNodes»
+			-- cancel nodes
+			«EXPAND inOperationEnd FOREACH cancelNodes»
+			1 : 1;
+		esac;
+		
+		-- are we in a page?
+		«EXPAND inOperationPage FOREACH allPages»
+		
+		-- we weren't in an operation to begin with
+		in_operation = 0 : 0;
+	esac;
+	
+	next(operation_start) := case
+		-- if we are in an operation, keep operation start
+		in_operation = 1 : case
+			-- have we finished the operation?
+			operation_end != null : null;
+			
+			1 : operation_start;
+		esac;
+		
+		-- or if we are in a page, operations can start if we click buttons
+		«EXPAND operationStartPage FOREACH allPages»
+		
+		-- otherwise, the operation has not started
+		1 : null;
+	esac;
+	
+	next(operation_end) := case
+		-- only specify operation_end when the flow has ended
+		in_operation = 1 : case
+			«EXPAND operationEnd FOREACH allNodes»
+			1 : null;
+		esac;
+		1 : null;
+	esac;
+
+	-- prevent random changes of the current page between states
+	next(current_page) := case
+		«EXPAND keepCurrentPage FOREACH allPages»
+	esac;
+
+«ENDLET»
+«ENDLET»
+«ENDLET»
+«ENDLET»
+«ENDLET»
+«ENDLET»
+«ENDLET»
+
+	«ENDFILE»
+«ENDDEFINE»
+
+/**
+ * Steps between operation nodes.
+ */
+«DEFINE operationStep FOR model::ActivityNode»
+	current_step = «safeName()» : «EXPAND nextOperationStep FOR this»;
+«ENDDEFINE»
+«DEFINE operationStep FOR model::Operation»
+	current_step = «safeName()» : «EXPAND nextOperationStep FOR this»;
+«ENDDEFINE»
+
+«DEFINE nextOperationStep FOR model::ActivityNode»
+	«EXPAND exception FOR throwException("Cannot expand generic activity node: " + this)»
+«ENDDEFINE»
+«DEFINE nextOperationStep FOR model::Operation»
+	«EXPAND exception FOR throwException("Cannot expand generic operation: " + this)»
+«ENDDEFINE»
+
+«DEFINE nextOperationStep FOR model::operations::StartNode»
+	«IF outExecutions.size > 0»
+	«safeName(outExecutions.first().to)»
+	«ELSE»
+	null -- goes nowhere
+	«ENDIF»
+«ENDDEFINE»
+«DEFINE nextOperationStep FOR model::operations::FinishNode»
+	null
+«ENDDEFINE»
+«DEFINE nextOperationStep FOR model::operations::CancelNode»
+	null
+«ENDDEFINE»
+«DEFINE nextOperationStep FOR model::operations::Arithmetic»
+	null -- should never be called
+«ENDDEFINE»
+«DEFINE nextOperationStep FOR model::PrimitiveOperation»
+	«REM»TODO can a primitive operation have multiple outgoing edges?«ENDREM»
+	«IF outExecutions.size > 0»
+	«safeName(outExecutions.first().to)»
+	«ELSE»
+	null -- goes nowhere
+	«ENDIF»
+«ENDDEFINE»
+«DEFINE nextOperationStep FOR model::CompositeOperation»
+	«REM»TODO can a primitive operation have multiple outgoing edges?«ENDREM»
+	«IF outExecutions.size > 0»
+	«safeName(outExecutions.first().to)»
+	«ELSE»
+	null -- goes nowhere
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * We are in a page, and we have clicked a button
+ */
+«DEFINE stepPage FOR model::visual::Page»
+	current_page = «safeName()» : case
+		«EXPAND stepPageButton FOREACH allButtonsOnPage(this)»
+		1 : null;
+	esac;
+«ENDDEFINE»
+
+«DEFINE stepPageButton FOR model::visual::Button»
+	click_«safeName()» = 1 : 
+		«LET outEdges.typeSelect(model::wires::RunInstanceWire)
+			.select(w|w.name == "click" || w.name == "onClick")
+			.select(w|
+				w.to != null &&
+				model::CompositeOperation.isInstance(w.to) && 
+				!((model::CompositeOperation) w.to).nodes.typeSelect(model::operations::StartNode).isEmpty ) AS outRun»
+				
+			«IF outRun.size > 1»«EXPAND exception FOR throwException("Too many outgoing click edges for button: " + this)»«ENDIF»
+			«safeName(((model::CompositeOperation) outRun.first().to).nodes.typeSelect(model::operations::StartNode).first())»
+		«ENDLET» ;
+«ENDDEFINE»
+
+/**
+ * Getting out of in_operation
+ */
+«DEFINE inOperationEnd FOR model::operations::FinishNode»
+		current_step = «safeName()» : 0;
+«ENDDEFINE»
+«DEFINE inOperationEnd FOR model::operations::CancelNode»
+		current_step = «safeName()» : 0;
+«ENDDEFINE»
+
+/**
+ * Getting into in_operation
+ */
+«DEFINE inOperationPage FOR model::visual::Page»
+	current_page = «safeName()» : case
+		«EXPAND inOperationPageButton FOREACH allButtonsOnPage(this)»
+		1 : 0;
+	esac;
+«ENDDEFINE»
+
+«DEFINE inOperationPageButton FOR model::visual::Button»
+	click_«safeName()» = 1 : 
+		«LET outEdges.typeSelect(model::wires::RunInstanceWire)
+			.select(w|w.name == "click" || w.name == "onClick")
+			.select(w|
+				w.to != null &&
+				model::CompositeOperation.isInstance(w.to) && 
+				!((model::CompositeOperation) w.to).nodes.typeSelect(model::operations::StartNode).isEmpty ) AS outRun»
+				
+			«IF outRun.size > 1»«EXPAND exception FOR throwException("Too many outgoing click edges for button: " + this)»«ENDIF»
+			1
+		«ENDLET» ;
+«ENDDEFINE»
+
+/**
+ * Starting an operation by clicking a button
+ */
+«DEFINE operationStartPage FOR model::visual::Page»
+	current_page = «safeName()» : case
+		«EXPAND operationStartPageButton FOREACH allButtonsOnPage(this)»
+		1 : null;
+	esac;
+«ENDDEFINE»
+
+«DEFINE operationStartPageButton FOR model::visual::Button»
+	click_«safeName()» = 1 : 
+		«LET outEdges.typeSelect(model::wires::RunInstanceWire)
+			.select(w|w.name == "click" || w.name == "onClick")
+			.select(w|
+				w.to != null &&
+				model::CompositeOperation.isInstance(w.to) && 
+				!((model::CompositeOperation) w.to).nodes.typeSelect(model::operations::StartNode).isEmpty ) AS outRun»
+				
+			«IF outRun.size > 1»«EXPAND exception FOR throwException("Too many outgoing click edges for button: " + this)»«ENDIF»
+			«safeName(((model::CompositeOperation) outRun.first().to).nodes.typeSelect(model::operations::StartNode).first())»
+		«ENDLET» ;
+«ENDDEFINE»
+
+/**
+ * Ending an operation by getting to the end
+ */
+«DEFINE operationEnd FOR model::ActivityNode»
+		current_step = «safeName()» : null; -- no way to finish from here
+«ENDDEFINE»
+«DEFINE operationEnd FOR model::ExecutionEdgesSource»
+		current_step = «safeName()» : 
+			«IF !outExecutions.to.typeSelect(model::operations::FinishNode).isEmpty»
+				«safeName(outExecutions.to.typeSelect(model::operations::FinishNode).first())»
+			«ELSEIF !outExecutions.to.typeSelect(model::operations::CancelNode).isEmpty»
+				«safeName(outExecutions.to.typeSelect(model::operations::CancelNode).first())»
+			«ELSE»
+				null
+			«ENDIF»;
+«ENDDEFINE»
+
+/**
+ * Prevent random switching out of current_page
+ * TODO make it so we can navigate without having to click buttons, etc
+ */
+«DEFINE keepCurrentPage FOR model::visual::Page»
+	current_page = «safeName()» : «safeName()»;
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

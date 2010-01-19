@@ -1,43 +1,36 @@
 import iaml;
 
-model::InternetApplication parent(model::ApplicationElement this) :
-	eContainer;
+safeName(model::GeneratedElement this) :
+	if (id == null) then
+		throwException("Cannot get the safeName of an element with no ID: " + this)
+	else
+		safeNameString(id);
 
-isOperation(emf::EObject this) :
-	false;
-	
-isOperation(model::Operation this) :
-	true;
-	
-isRunInstanceWire(emf::EObject this) :
-	false;
-	
-isRunInstanceWire(model::wires::RunInstanceWire this) :
-	true;
-	
-model::visual::Page containingPage(model::visual::Page element) :
-	element;
-	
-model::visual::Page containingPage(model::NamedElement element) :
-	containingPage(element.eContainer);
+safeName(emf::EObject this) :
+	throwException("Cannot get the safeName of an EObject: " + this);
 
-/* default for any EObject */
-model::visual::Page containingPage(emf::EObject element) :
-	null;
-model::visual::Page containingPage(Void void) :
-	null;
+safeNameString(String s) :
+	s.replaceAll("[^A-Za-z0-9]", "_");
+
+escapeString(String s) :
+	s.replaceAll("[\"]", "\\\"");
+
+/**
+ * Get all of the buttons on a particular page.
+ */
+allButtonsOnPage(model::visual::Page this) :
+	eAllContents.typeSelect(model::visual::Button);
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540
+ * to use: «EXPAND exception FOR throwException("Your message goes here")»
+ * AND add this anywhere in your template file: (very important)
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»
+   
+ */
+String throwException(String message) :
+	JAVA org.openiaml.verification.nusmv.oaw.OAWGenerator.throwException(java.lang.String);
 	
-isAccessibleOnPage(model::visual::Page page, model::wires::CompositeWire wire) :
-	containingPage(wire.from) == page ||
-	containingPage(wire.to) == page;
-
-isAccessibleOnPage(model::visual::Page page, model::wires::SingleWire wire) :
-	containingPage(wire.from) == page ||
-	containingPage(wire.to) == page;
-
-isAccessibleOnPage(model::visual::Page page, model::NamedElement element) :
-	containingPage(element) == page;
-
-isAccessibleOnPage(model::visual::Page page, emf::EObject element) :
-	false;
-

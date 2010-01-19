@@ -29,6 +29,20 @@ import org.openiaml.verification.nusmv.rules.InfiniteOperationLoop;
  */
 public class VerificationEngine {
 	
+	private List<String> log = new ArrayList<String>();
+	private boolean shouldLog;
+	
+	public VerificationEngine() {
+		this(false);
+	}
+	
+	/**
+	 * @param shouldLog add logs of verification to {@link #getLog()}.
+	 */
+	public VerificationEngine(boolean shouldLog) {
+		this.shouldLog = shouldLog;
+	}
+	
 	/**
 	 * Get all the verification rules to check against.
 	 * TODO make this into an extensible method using Eclipse framework
@@ -39,6 +53,10 @@ public class VerificationEngine {
 		List<VerificationRule> list = new ArrayList<VerificationRule>();
 		list.add(new InfiniteOperationLoop());
 		return list;
+	}
+	
+	public List<String> getLog() {
+		return this.log;
 	}
 	
 	/**
@@ -57,6 +75,10 @@ public class VerificationEngine {
 		
 		List<VerificationRule> rules = getVerificationRules();
 		monitor.beginTask("Verifying against " + rules.size() + " rules", rules.size() * 4);
+		
+		if (rules.isEmpty()) {
+			return new Status(Status.WARNING, VerificationNuSMVPlugin.PLUGIN_ID, "No rules found: " + violations.size());
+		}
 		
 		// for each rule, verify it
 		for (VerificationRule rule : getVerificationRules()) {
@@ -77,6 +99,12 @@ public class VerificationEngine {
 				List<String> output = exec.execute( new SequenceInputStream(modelStream, ruleStream) );
 				monitor.worked(1);
 				
+				// add to log?
+				if (shouldLog) {
+					log.add("Executing rule " + rule + "...");
+					log.addAll(output);
+				}
+				
 				monitor.subTask("Parsing SMV results for results");
 				List<NuSMVViolation> violations = parseViolations(output);
 				this.violations.addAll(violations);
@@ -91,7 +119,7 @@ public class VerificationEngine {
 		}
 		
 		// was successful?
-		if (violations.isEmpty()) {
+		if (!violations.isEmpty()) {
 			return new Status(Status.WARNING, VerificationNuSMVPlugin.PLUGIN_ID, "Violations found: " + violations.size());
 		}
 		

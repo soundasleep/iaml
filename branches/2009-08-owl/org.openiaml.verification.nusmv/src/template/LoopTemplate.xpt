@@ -45,9 +45,10 @@ VAR
 	
 	in_operation : boolean;
 	
-	current_page : { 
-		«FOREACH allPages AS p SEPARATOR ", "»
-			«safeName(p)»
+	current_page : {
+		null 
+		«FOREACH allPages AS p»
+			, «safeName(p)»
 		«ENDFOREACH»
 	};
 		
@@ -121,7 +122,10 @@ ASSIGN
 	next(operation_end) := case
 		-- only specify operation_end when the flow has ended
 		in_operation = 1 : case
-			«EXPAND operationEnd FOREACH allNodes»
+			-- nodes
+			«EXPAND operationEnd FOREACH allNodes»			
+			-- operations
+			«EXPAND operationEnd FOREACH allOperations»			
 			1 : null;
 		esac;
 		1 : null;
@@ -130,6 +134,7 @@ ASSIGN
 	-- prevent random changes of the current page between states
 	next(current_page) := case
 		«EXPAND keepCurrentPage FOREACH allPages»
+		current_page = null : null ;
 	esac;
 
 «ENDLET»
@@ -278,8 +283,8 @@ ASSIGN
 /**
  * Ending an operation by getting to the end
  */
-«DEFINE operationEnd FOR model::ActivityNode»
-		current_step = «safeName()» : null; -- no way to finish from here
+«DEFINE operationEnd FOR emf::EObject»
+		current_step = «safeName()» : null; -- no way to finish from nameless node
 «ENDDEFINE»
 «DEFINE operationEnd FOR model::ExecutionEdgesSource»
 		current_step = «safeName()» : 
@@ -288,7 +293,7 @@ ASSIGN
 			«ELSEIF !outExecutions.to.typeSelect(model::operations::CancelNode).isEmpty»
 				«safeName(outExecutions.to.typeSelect(model::operations::CancelNode).first())»
 			«ELSE»
-				null
+				null -- goes nowhere
 			«ENDIF»;
 «ENDDEFINE»
 

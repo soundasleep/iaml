@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Crocopat: Java CLI Adapter Tests
+Bundle-SymbolicName: it.itc.irst.nusmv.cli.tests;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: www.openiaml.org
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",
+ it.itc.irst.nusmv.cli;bundle-version="0.1.0",
+ org.junit
+Bundle-Activator: it.itc.irst.nusmv.cli.tests.NuSMVCliTestsPlugin

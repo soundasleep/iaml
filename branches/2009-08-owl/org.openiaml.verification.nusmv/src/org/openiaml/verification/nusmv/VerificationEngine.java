@@ -153,7 +153,7 @@ public class VerificationEngine {
 		
 		List<NuSMVViolation> violations = new ArrayList<NuSMVViolation>();
 		for (int i = 0; i < results.size(); i++) {
-			String s = results.get(i);
+			String s = results.get(i).replace("\r", "");
 			
 			// expected format: "-- as demonstrated by the following execution sequence"
 			if (s.trim().equals("-- as demonstrated by the following execution sequence")) {

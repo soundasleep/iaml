@@ -29,11 +29,19 @@ public class ExecuteNuSMV {
 	 */
 	public class NuSMVException extends Exception {
 
+		private List<String> errors;
+
 		/**
+		 * @param errors 
 		 * @param errors A non-empty list of error strings.
 		 */
-		public NuSMVException(String message) {
+		public NuSMVException(String message, List<String> errors) {
 			super(message);
+			this.errors = errors;
+		}
+		
+		public List<String> getErrors() {
+			return errors;
 		}
 
 		private static final long serialVersionUID = 1L;
@@ -63,19 +71,12 @@ public class ExecuteNuSMV {
 	 *
 	 */
 	public class NuSMVStdErrException extends NuSMVException {
-
-		private List<String> errors;
 		
 		/**
 		 * @param errors A non-empty list of error strings.
 		 */
 		public NuSMVStdErrException(List<String> errors) {
-			super(errors.size() + " error(s), first 10: '" + getErrorsMessage(errors) + "'");
-			this.errors = errors;
-		}
-
-		public List<String> getErrors() {
-			return errors;
+			super(errors.size() + " error(s), first 10: '" + getErrorsMessage(errors) + "'", errors);
 		}
 
 		private static final long serialVersionUID = 1L;
@@ -242,7 +243,7 @@ public class ExecuteNuSMV {
 		
 		// did we get no errors, but an incorrect exit code?
 		if (exit != 0 && errors.isEmpty() /* ignore warnings */) {
-			throw new NuSMVException("Expected return value '0', got: " + exit);
+			throw new NuSMVException("Expected return value '0', got: " + exit, errors);
 		}
 		
 		return output;
@@ -260,10 +261,14 @@ public class ExecuteNuSMV {
 
 		int j = 0;
 		for (int i = 0; i < bytes.length; i++) {
+			if (bytes[i] == '\r') {
+				// ignore
+				continue;
+			}
 			if (bytes[i] == '\n') {
 				if (i != j) {
 					// append to list
-					resultList.add(new String(bytes, j, i-j));
+					resultList.add(new String(bytes, j, i-j).replace("\r", ""));
 				}
 				j = i + 1;
 			}
@@ -271,7 +276,7 @@ public class ExecuteNuSMV {
 		
 		// add the last result
 		if (j < bytes.length) {
-			resultList.add(new String(bytes, j, bytes.length-j));
+			resultList.add(new String(bytes, j, bytes.length-j).replace("\r", ""));
 		}
 		
 		return resultList;

@@ -28,6 +28,13 @@ VAR
 		«ENDFOREACH»
 	};
 	
+	-- allowing NuSMV to select pages at random
+	browse_to_page : {
+		«FOREACH allPages AS p SEPARATOR ", "»
+			«safeName(p)»
+		«ENDFOREACH»
+	};
+	
 	-- all buttons on all pages
 	«FOREACH allButtons AS b»
 	click_«safeName(b)» : boolean;
@@ -51,6 +58,10 @@ ASSIGN
 	-- current_page is chosen by nusmv
 	-- click_button is chosen by nusmv
 	
+	«REM»
+	TODO I think the current implementation supports clicking two buttons
+	simultaneously, and executing these two operations simultaneously.
+	«ENDREM»
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
 		next(run_«safeName(operation)») := case
 			-- already running
@@ -61,19 +72,34 @@ ASSIGN
 				-- still running
 				1 : 1;
 			esac;
+			
+			-- executed by accessing a page
+			«REM»
+			«REM»an access operation can be executed many times while in the
+			same page (as long as it isn't currently being run); this is the same as reloading the page«ENDREM»
+			operation_running = 0 : case
+				«FOREACH allPages AS p»
+					«IF p.eventTriggers.select(e|e.name == "access" || e.name == "onAccess")
+							.outEdges.typeSelect(model::wires::RunInstanceWire).to.contains(operation)»
+						browse_to_page = «safeName(p)» : 1;
+					«ENDIF»
+				«ENDFOREACH»
 		
-			-- prevent additional operations from running simultaneously from user input
-			«FOREACH allButtons AS b»
-				«REM»button -> run[onClick] -> operation«ENDREM»
-				«IF !b.outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.name == "click" || w.name == "onClick").select(w|w.to == operation).isEmpty»				
-				click_«safeName(b)» = 1 : 1;
-				«ENDIF»
-				«REM»button -> event[onClick] -> run -> operation«ENDREM»
-				«IF !b.eventTriggers.select(e|e.name == "click" || e.name == "onClick").outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.to == operation).isEmpty»				
-				click_«safeName(b)» = 1 : 1;
-				«ENDIF»
-				«REM»TODO button -> event -> run -> operation«ENDREM»
-			«ENDFOREACH»
+				-- executed by clicking a button
+				«FOREACH allButtons AS b»
+					«REM»button -> run[onClick] -> operation«ENDREM»
+					«IF !b.outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.name == "click" || w.name == "onClick").select(w|w.to == operation).isEmpty»				
+					click_«safeName(b)» = 1 : 1;
+					«ENDIF»
+					«REM»button -> event[onClick] -> run -> operation«ENDREM»
+					«IF !b.eventTriggers.select(e|e.name == "click" || e.name == "onClick").outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.to == operation).isEmpty»				
+					click_«safeName(b)» = 1 : 1;
+					«ENDIF»
+					«REM»TODO button -> event -> run -> operation«ENDREM»
+				«ENDFOREACH»
+			
+				1 : run_«safeName(operation)»;	-- don't change it	
+			esac;
 			
 			-- should not be running
 			1 : 0;
@@ -100,6 +126,20 @@ ASSIGN
 		running_«safeName(operation)».finished = 1 : 1;
 	«ENDFOREACH»
 		1 : 0;
+	esac;
+	
+	-- browsing to a new page
+	next(current_page) := case
+		«REM»
+		cannot change pages if an operation is running.
+		NOTE this is a design assumption: when an operation is running, the user may not browse to another page
+		«ENDREM»
+		operation_running = 1 : current_page;
+		-- browse to another page chosen by NuSMV
+		«FOREACH allPages AS p SEPARATOR ", "»
+			browse_to_page = «safeName(p)» : «safeName(p)»;
+		«ENDFOREACH»
+		1 : current_page;
 	esac;
 
 FAIRNESS

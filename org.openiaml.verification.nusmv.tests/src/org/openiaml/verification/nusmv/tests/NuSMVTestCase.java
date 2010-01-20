@@ -106,6 +106,30 @@ public class NuSMVTestCase extends TestCase {
 		// TODO: check that the violation is correct
 	}
 
+	public void testAccessOperationLoop() throws Exception {
+		assertValid("models/AccessOperationLoop.iaml", 0);
+
+		// TODO: check that the violation is correct
+	}
+	
+	public void testAccessOperationLoopInfinite() throws Exception {
+		assertValid("models/AccessOperationLoopInfinite.iaml", 1);
+
+		// TODO: check that the violation is correct
+	}
+
+	public void testOperationCallOperationLoop() throws Exception {
+		assertValid("models/OperationCallOperationLoop.iaml", 0);
+
+		// TODO: check that the violation is correct
+	}
+	
+	public void testOperationCallOperationLoopInfinite() throws Exception {
+		assertValid("models/OperationCallOperationLoopInfinite.iaml", 1);
+
+		// TODO: check that the violation is correct
+	}
+
 	/**
 	 * Print out the log of the given engine to stdout.
 	 * 

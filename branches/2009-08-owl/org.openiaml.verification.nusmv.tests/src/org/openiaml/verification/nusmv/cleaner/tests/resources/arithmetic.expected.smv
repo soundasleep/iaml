@@ -7,7 +7,7 @@ VAR
 
 ASSIGN
   init (a) := 0;
-  next (a) := (1 + 1 - (1 * 1) / (1 * 1)) mod 1;
+  next (a) := (1 + 1 - (1 * 1) | (1 & 1) / (1 * 1)) mod 1;
 
 LTLSPEC
   -- comment

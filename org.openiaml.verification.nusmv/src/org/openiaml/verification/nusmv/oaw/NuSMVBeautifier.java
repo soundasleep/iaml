@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.io.StringWriter;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -123,6 +122,7 @@ public class NuSMVBeautifier implements org.openarchitectureware.xpand2.output.P
 				
 				// a comment
 				writer.write('-');
+				writer.enableWordwrap(false);	// disable wordwrap for comment
 				while ((c = reader.read()) != -1) {
 					if (c == '\r')
 						continue;
@@ -133,7 +133,19 @@ public class NuSMVBeautifier implements org.openarchitectureware.xpand2.output.P
 					if (c == '\n')
 						break;
 				}
+				writer.enableWordwrap(true);	// re-enable wordwrap for comment
+			} else if (c == 'p' && !Character.isJavaIdentifierPart(prev) && reader.has(7) && reader.readAhead(6).equals("rocess") && !Character.isJavaIdentifierPart(reader.readAhead(7).charAt(6))) {
+				// 'process' keyword
+				writer.write(c);
+				writer.write(reader.read(6));
+				writer.write(' ');
+				prev = ' ';
 			} else if (c == 'M' && reader.has(6) && reader.readAhead(5).equals("ODULE")) {
+				// multiple modules will reduce the indent, since MODULE
+				// does not have an ending statement
+				if (writer.getIndentSize() != 0)
+					writer.indentDecrease();
+				
 				// MODULE
 				writer.newLine();
 				writer.write(c);
@@ -158,6 +170,19 @@ public class NuSMVBeautifier implements org.openarchitectureware.xpand2.output.P
 				writer.newLine();
 				writer.write(c);
 				writer.write(reader.read(5));
+				writer.newLine();
+				
+				// indent
+				writer.indentIncrease();
+				c = ' ';
+			} else if (c == 'F' && reader.has(8) && reader.readAhead(7).equals("AIRNESS")) {
+				// unindent
+				writer.indentDecrease();
+				
+				// ASSIGN
+				writer.newLine();
+				writer.write(c);
+				writer.write(reader.read(7));
 				writer.newLine();
 				
 				// indent

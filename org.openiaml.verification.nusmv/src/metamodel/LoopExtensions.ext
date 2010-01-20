@@ -33,6 +33,9 @@ getFailFlow(model::ExecutionEdgesSource this) :
 getPassFlow(model::ExecutionEdgesSource this) :
 	outExecutions.reject(e | getFailFlow(this).contains(e)) ;
 
+selectStartNode(model::CompositeOperation this) :
+	nodes.typeSelect(model::operations::StartNode).first() ;
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

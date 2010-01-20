@@ -3,49 +3,24 @@
 «EXTENSION metamodel::LoopExtensions»
 
 «DEFINE main FOR model::InternetApplication»
-	«FILE "output/check.smv"»
+	«FILE "output/check.smv"»	
 
-«LET eAllContents.typeSelect(model::operations::StartNode) AS startNodes»
-«LET eAllContents.typeSelect(model::operations::FinishNode) AS finishNodes»
-«LET eAllContents.typeSelect(model::operations::CancelNode) AS cancelNodes»
-«LET eAllContents.typeSelect(model::ActivityNode) AS allNodes»
+-- definitions for each CompositeOperation
+«EXPAND operationContents FOREACH eAllContents.typeSelect(model::CompositeOperation)»
+
+-- main module
 «LET eAllContents.typeSelect(model::visual::Page) AS allPages»
-«LET eAllContents.typeSelect(model::Operation) AS allOperations»
 «LET eAllContents.typeSelect(model::visual::Button) AS allButtons»
-«LET eAllContents.typeSelect(model::TemporaryVariable) AS allTemporaryVariables»
 
 MODULE main
 
 VAR
-	operation_start : { null 
-		«FOREACH startNodes AS n»
-			, «safeName(n)»
-		«ENDFOREACH» };
+	-- possible running operations
+	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
+		running_«safeName(operation)» : process operation_«safeName(operation)»(run_«safeName(operation)»);
+		run_«safeName(operation)» : boolean;
+	«ENDFOREACH»
 
-	operation_end : { null
-		-- finish nodes
-		«FOREACH finishNodes AS n»
-			, «safeName(n)»
-		«ENDFOREACH»
-		-- cancel nodes
-		«FOREACH cancelNodes AS n»
-			, «safeName(n)»
-		«ENDFOREACH»
-		};
-	
-	current_step : { null
-		-- nodes
-		«FOREACH allNodes AS n»
-			, «safeName(n)»
-		«ENDFOREACH»
-		-- operations
-		«FOREACH allOperations AS n»
-			, «safeName(n)»
-		«ENDFOREACH» 
-		};
-	
-	in_operation : boolean;
-	
 	current_page : {
 		null 
 		«FOREACH allPages AS p»
@@ -53,112 +28,202 @@ VAR
 		«ENDFOREACH»
 	};
 	
-	-- temporary variables
-	«FOREACH allTemporaryVariables AS v»
-		«safeName(v)» : 0..«maximumIntegerSize()»;
-	«ENDFOREACH»
-		
 	-- all buttons on all pages
 	«FOREACH allButtons AS b»
 	click_«safeName(b)» : boolean;
+	«ENDFOREACH»
+
+	-- value overflow
+	value_overflow : boolean;
+	
+	operation_running : boolean;
+	operation_finished : boolean;
+
+ASSIGN
+	init(value_overflow) := 0;
+	init(operation_running) := 0;
+	init(operation_finished) := 0;
+	
+	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
+		init(run_«safeName(operation)») := 0;
+	«ENDFOREACH»
+
+	-- current_page is chosen by nusmv
+	-- click_button is chosen by nusmv
+	
+	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
+		next(run_«safeName(operation)») := case
+			-- already running
+			run_«safeName(operation)» = 1 : case 
+				-- operation finished?
+				running_«safeName(operation)».finished = 1 : 0;
+				
+				-- still running
+				1 : 1;
+			esac;
+		
+			-- prevent additional operations from running simultaneously from user input
+			«FOREACH allButtons AS b»
+				«REM»button -> run -> operation«ENDREM»
+				«IF !b.outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.name == "click" || w.name == "onClick").select(w|w.to == operation).isEmpty»				
+				click_«safeName(b)» = 1 : 1;
+				«ENDIF»
+				«REM»TODO button -> event -> run -> operation«ENDREM»
+			«ENDFOREACH»
+			
+			-- should not be running
+			1 : 0;
+		esac;
+	«ENDFOREACH»
+	
+	next(value_overflow) := case
+		«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
+			running_«safeName(operation)».value_overflow = 1 : 1;
+		«ENDFOREACH»
+		1 : value_overflow;
+	esac;
+
+	next(operation_running) := case
+	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
+		running_«safeName(operation)».finished = 1 : 0;
+		run_«safeName(operation)» = 1 : 1;
+	«ENDFOREACH»
+		1 : 0;
+	esac;
+	
+	next(operation_finished) := case
+	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
+		running_«safeName(operation)».finished = 1 : 1;
+	«ENDFOREACH»
+		1 : 0;
+	esac;
+
+FAIRNESS
+  running
+
+«ENDLET»
+«ENDLET»
+	
+	«ENDFILE»
+«ENDDEFINE»
+	
+«DEFINE operationContents FOR model::CompositeOperation»
+MODULE operation_«safeName()»(flag)
+
+«LET eAllContents.typeSelect(model::operations::StartNode) AS startNodes»
+«LET eAllContents.typeSelect(model::operations::FinishNode) AS finishNodes»
+«LET eAllContents.typeSelect(model::operations::CancelNode) AS cancelNodes»
+«LET eAllContents.typeSelect(model::ActivityNode) AS allNodes»
+«LET eAllContents.typeSelect(model::Operation) AS allOperations»
+«LET eAllContents.typeSelect(model::TemporaryVariable) AS allTemporaryVariables»
+
+VAR
+	-- has the operation completed?
+	finished : boolean;
+
+	-- current operation step
+	current_step : {
+		null 
+		«REM»nodes«ENDREM»
+		«FOREACH allNodes AS n»
+			, «safeName(n)»
+		«ENDFOREACH»
+		«REM»operations«ENDREM»
+		«FOREACH allOperations AS n»
+			, «safeName(n)»
+		«ENDFOREACH» 
+	};
+	
+	-- temporary variables
+	«FOREACH allTemporaryVariables AS v»
+		«safeName(v)» : 0..«maximumIntegerSize()»;
 	«ENDFOREACH»
 	
 	-- value overflow
 	value_overflow : boolean;
 
 ASSIGN
-	init(operation_start) := null;
-	init(operation_end) := null;
+	init(finished) := 0;
 	init(current_step) := null;
-	init(in_operation) := 0;
-	init(value_overflow) := 0;
 	
-	-- current_page is chosen by nusmv
-	-- click_button is chosen by nusmv
+	next(finished) := case
+		-- currently running
+		flag = 1 : case
+			«FOREACH finishNodes AS n»
+				current_step = «safeName(n)» : 1;
+			«ENDFOREACH»
+			«FOREACH cancelNodes AS n»
+				current_step = «safeName(n)» : 1;
+			«ENDFOREACH»
+
+			1 : finished;
+		esac;
+		
+		-- operation isn't running
+		1 : 0;
+	esac;
 	
-	-- changes to temporary variables
-	«EXPAND nextTemporaryVariable FOREACH allTemporaryVariables»
+	next(current_step) := case
+		-- operation hasn't started yet
+		current_step = null : case
+			flag = 1 : «safeName(selectStartNode())»;
+			1 : null;
+		esac;
+		
+		-- operation is running
+		«FOREACH allNodes.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
+			current_step = «safeName(n)» :
+				«EXPAND nextStep FOR n»;
+		«ENDFOREACH»
+		«FOREACH allOperations.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
+			current_step = «safeName(n)» :
+				«EXPAND nextStep FOR n»;
+		«ENDFOREACH»
+		
+		-- operation is running, but shouldn't be
+		1 : null;
+	esac;
 	
-	-- checks for integer overflow
+	«FOREACH allTemporaryVariables AS v»
+		next(«safeName(v)») := case
+			-- is operation running?
+			flag = 1 : case
+			
+				-- are we on a step which modifies it?
+				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
+						.select(n|n.outFlows.to.contains(v)) AS n»
+					current_step = «safeName(n)» : («EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
+				«ENDFOREACH»	
+				
+				-- otherwise, it remains the same
+				1 : «safeName(v)»;
+			esac;
+			
+			1 : 0;
+		esac;
+	«ENDFOREACH»
+	
+	-- check for value overflow
 	next(value_overflow) := case
-		-- prevent disabling the check
-		value_overflow = 1 : 1;
-	
-		«EXPAND valueOverflowChecks FOREACH allTemporaryVariables»
+		flag = 1 : case
+			«FOREACH allTemporaryVariables AS v»
+				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
+						.select(n|n.outFlows.to.contains(v)) AS n»
+					current_step = «safeName(n)» : case
+						(«EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») = («EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1» : 0;
+						-- if they are not equal, then we have overflowed
+						1 : 1;
+					esac;
+				«ENDFOREACH»
+			«ENDFOREACH»
+			1 : value_overflow;
+		esac;
 		
 		1 : value_overflow;
 	esac;
-	
-	-- operation flow
-	next(current_step) := case
-		-- if we are in an operation
-		in_operation = 1 : case
-			-- nodes
-			«EXPAND operationStep(false) FOREACH allNodes»
-			-- operations
-			«EXPAND operationStep(false) FOREACH allOperations»
-		1 : null;
-		esac;
-		
-		-- or an operation needs to start
-		-- are we in a page?
-		«EXPAND stepPage FOREACH allPages»
-		
-		-- otherwise, none
-		1 : null;
-	esac;
-	
-	-- are we now within an operation?
-	next(in_operation) := case
-		-- have we finished operations?
-		in_operation = 1 : case
-			-- finish nodes
-			«EXPAND inOperationEnd FOREACH finishNodes»
-			-- cancel nodes
-			«EXPAND inOperationEnd FOREACH cancelNodes»
-			1 : 1;
-		esac;
-		
-		-- are we in a page?
-		«EXPAND inOperationPage FOREACH allPages»
-		
-		-- we weren't in an operation to begin with
-		in_operation = 0 : 0;
-	esac;
-	
-	next(operation_start) := case
-		-- if we are in an operation, keep operation start
-		in_operation = 1 : case
-			-- have we finished the operation?
-			operation_end != null : null;
-			
-			1 : operation_start;
-		esac;
-		
-		-- or if we are in a page, operations can start if we click buttons
-		«EXPAND operationStartPage FOREACH allPages»
-		
-		-- otherwise, the operation has not started
-		1 : null;
-	esac;
-	
-	next(operation_end) := case
-		-- only specify operation_end when the flow has ended
-		in_operation = 1 : case
-			-- nodes
-			«EXPAND operationEnd FOREACH allNodes»			
-			-- operations
-			«EXPAND operationEnd FOREACH allOperations»			
-			1 : null;
-		esac;
-		1 : null;
-	esac;
 
-	-- prevent random changes of the current page between states
-	next(current_page) := case
-		«EXPAND keepCurrentPage FOREACH allPages»
-		current_page = null : null ;
-	esac;
+FAIRNESS
+  running
 
 «ENDLET»
 «ENDLET»
@@ -166,10 +231,28 @@ ASSIGN
 «ENDLET»
 «ENDLET»
 «ENDLET»
-«ENDLET»
-«ENDLET»
 
-	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE nextStep FOR model::ExecutionEdgesSource»
+	«safeName(outExecutions.to.first())»
+«ENDDEFINE»
+
+«DEFINE nextStep FOR model::operations::DecisionOperation»
+	«IF name == "equal?" || name == "equals?"»
+		«IF getPassFlow().to.size != 1 || getFailFlow().to.size != 1»
+		«safeName(outExecutions.to.first())»
+		«ELSE»
+		case
+			«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " = "» 
+				: «safeName(getPassFlow(this).to.first())»;
+				 
+			1 : «safeName(getFailFlow(this).to.first())»;
+		esac
+		«ENDIF»
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown decision operation: " + this)»
+	«ENDIF»
 «ENDDEFINE»
 
 /**

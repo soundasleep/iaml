@@ -1,5 +1,10 @@
--- checks for infinite loops
+
+ -- checks for infinite loops
 
 LTLSPEC
-  G ((!(operation_start != null -> !(F operation_end != null))) U operation_start = null) & G (value_overflow = 0)
+  G ((!(operation_running = 1 -> !(F operation_finished = 1))) U operation_running = 0)
+  --G ((!(operation_running = 1 -> operation_running = 0)) U operation_running = 0)
+  -- missing: value overflow
+
+  -- G ((!(operation_start != null -> !(F operation_end != null))) U operation_start = null) & G (value_overflow = 0)
  

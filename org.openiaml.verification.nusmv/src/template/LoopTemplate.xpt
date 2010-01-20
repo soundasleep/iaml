@@ -181,6 +181,8 @@ VAR
 		«ENDFOREACH» 
 	};
 	
+	«REM»TODO split/join paths can not currently support operation calls«ENDREM»
+	
 	-- value overflow
 	value_overflow : boolean;
 
@@ -299,6 +301,12 @@ VAR
 		split_«safeName(split)» : process split_«safeName(split)»(run_split_«safeName(split)»«FOREACH variables AS v», «safeName(v)»«ENDFOREACH»);
 	«ENDFOREACH»
 	
+	-- operation calls
+	«FOREACH nodes.typeSelect(model::operations::OperationCallNode).outEdges.typeSelect(model::wires::RunInstanceWire).to AS call»
+		run_call_«safeName(call)» : boolean;
+		call_«safeName(call)» : process operation_«safeName(call)»(run_call_«safeName(call)»«REM»operation calls have their own variable instances«ENDREM»);
+	«ENDFOREACH»
+	
 	-- value overflow
 	value_overflow : boolean;
 
@@ -367,6 +375,7 @@ ASSIGN
 		esac;
 	«ENDFOREACH»
 	
+	-- split nodes
 	«FOREACH nodes.typeSelect(model::operations::SplitNode) AS split»
 		«FOREACH split.outExecutions.to AS target»
 		next(run_split_«safeName(target)») := case
@@ -375,7 +384,17 @@ ASSIGN
 		esac;
 		«ENDFOREACH»
 	«ENDFOREACH»
-	
+
+	-- operation calls
+	«FOREACH nodes.typeSelect(model::operations::OperationCallNode) AS call»
+		«FOREACH call.outEdges.typeSelect(model::wires::RunInstanceWire).to AS target»
+		next(run_call_«safeName(target)») := case
+			current_step = «safeName(call)» : 1;
+			1 : 0;
+		esac;
+		«ENDFOREACH»
+	«ENDFOREACH»
+		
 	-- check for value overflow
 	next(value_overflow) := case
 		flag = 1 : case
@@ -433,6 +452,16 @@ FAIRNESS
 	case 
 		«FOREACH outExecutions.to AS split SEPARATOR " & "»
 			split_«safeName(split)».finished
+		«ENDFOREACH» : «safeName(outExecutions.to.first())»;
+		1 : current_step;
+	esac
+«ENDDEFINE»
+
+«DEFINE nextStep FOR model::operations::OperationCallNode»
+	-- wait for operation call to complete; then we can resume
+	case 
+		«FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).to AS call SEPARATOR " & "»
+			call_«safeName(call)».finished
 		«ENDFOREACH» : «safeName(outExecutions.to.first())»;
 		1 : current_step;
 	esac

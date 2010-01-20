@@ -13,7 +13,9 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="3.5.0",
  org.openarchitectureware.workflow;bundle-version="4.3.1",
  org.openarchitectureware.core.workflow;bundle-version="4.3.1",
  org.openarchitectureware.core.xpand2;bundle-version="4.3.1",
- org.openarchitectureware.emftools;bundle-version="4.3.1"
+ org.openarchitectureware.emftools;bundle-version="4.3.1",
+ org.openiaml.iacleaner;bundle-version="0.3.0"
 Bundle-Activator: org.openiaml.verification.nusmv.VerificationNuSMVPlugin
 Bundle-ActivationPolicy: lazy
-Export-Package: org.openiaml.verification.nusmv
+Export-Package: org.openiaml.verification.nusmv,
+ org.openiaml.verification.nusmv.oaw

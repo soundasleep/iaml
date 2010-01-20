@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1264a3c92ec.56">
+  <children xsi:type="iaml.visual:Page" id="index" name="Home">
+    <children xsi:type="iaml.visual:Button" id="visual.1264a3c934a.18" name="Click Button">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1264a3c934a.7" id="model.1264a3c92ec.79" name="split operation">
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1a" name="do nothing" inExecutions="model.1264a90e726.1e" outExecutions="model.1264a90e726.23"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1b" name="do nothing 2" inExecutions="model.1264a90e726.1f" outExecutions="model.1264a90e726.20"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1c" name="a bit longer" inExecutions="model.1264a90e726.20" outExecutions="model.1264a90e726.22"/>
+        <nodes xsi:type="iaml.operations:StartNode" id="operations.1264a90eab1.1" outExecutions="model.1264a90e726.1d"/>
+        <nodes xsi:type="iaml.operations:FinishNode" id="operations.1264a90eab1.b" inExecutions="model.1264a90e726.24"/>
+        <nodes xsi:type="iaml.operations:SplitNode" id="operations.1264a90eab1.c" outExecutions="model.1264a90e726.1e model.1264a90e726.1f" inExecutions="model.1264a90e726.1d"/>
+        <nodes xsi:type="iaml.operations:JoinNode" id="operations.1264a90eab1.d" outExecutions="model.1264a90e726.24" inExecutions="model.1264a90e726.22 model.1264a90e726.23"/>
+        <executionEdges id="model.1264a90e726.1d" from="operations.1264a90eab1.1" to="operations.1264a90eab1.c"/>
+        <executionEdges id="model.1264a90e726.1e" from="operations.1264a90eab1.c" to="model.1264a90e726.1a"/>
+        <executionEdges id="model.1264a90e726.1f" from="operations.1264a90eab1.c" to="model.1264a90e726.1b"/>
+        <executionEdges id="model.1264a90e726.20" from="model.1264a90e726.1b" to="model.1264a90e726.1c"/>
+        <executionEdges id="model.1264a90e726.22" from="model.1264a90e726.1c" to="operations.1264a90eab1.d"/>
+        <executionEdges id="model.1264a90e726.23" from="model.1264a90e726.1a" to="operations.1264a90eab1.d"/>
+        <executionEdges id="model.1264a90e726.24" from="operations.1264a90eab1.d" to="operations.1264a90eab1.b"/>
+      </operations>
+      <eventTriggers id="model.1264a3c92ec.70" name="click" outEdges="wires.1264a3c934a.7">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1264a3c934a.7" from="model.1264a3c92ec.70" to="model.1264a3c92ec.79" name="run"/>
+      </eventTriggers>
+    </children>
+  </children>
+</iaml:InternetApplication>

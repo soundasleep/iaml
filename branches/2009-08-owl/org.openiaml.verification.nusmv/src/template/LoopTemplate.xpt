@@ -12,6 +12,7 @@
 «LET eAllContents.typeSelect(model::visual::Page) AS allPages»
 «LET eAllContents.typeSelect(model::Operation) AS allOperations»
 «LET eAllContents.typeSelect(model::visual::Button) AS allButtons»
+«LET eAllContents.typeSelect(model::TemporaryVariable) AS allTemporaryVariables»
 
 MODULE main
 
@@ -51,29 +52,51 @@ VAR
 			, «safeName(p)»
 		«ENDFOREACH»
 	};
+	
+	-- temporary variables
+	«FOREACH allTemporaryVariables AS v»
+		«safeName(v)» : 0..«maximumIntegerSize()»;
+	«ENDFOREACH»
 		
 	-- all buttons on all pages
 	«FOREACH allButtons AS b»
 	click_«safeName(b)» : boolean;
 	«ENDFOREACH»
+	
+	-- value overflow
+	value_overflow : boolean;
 
 ASSIGN
 	init(operation_start) := null;
 	init(operation_end) := null;
 	init(current_step) := null;
 	init(in_operation) := 0;
+	init(value_overflow) := 0;
 	
 	-- current_page is chosen by nusmv
 	-- click_button is chosen by nusmv
+	
+	-- changes to temporary variables
+	«EXPAND nextTemporaryVariable FOREACH allTemporaryVariables»
+	
+	-- checks for integer overflow
+	next(value_overflow) := case
+		-- prevent disabling the check
+		value_overflow = 1 : 1;
+	
+		«EXPAND valueOverflowChecks FOREACH allTemporaryVariables»
+		
+		1 : value_overflow;
+	esac;
 	
 	-- operation flow
 	next(current_step) := case
 		-- if we are in an operation
 		in_operation = 1 : case
 			-- nodes
-			«EXPAND operationStep FOREACH allNodes»
+			«EXPAND operationStep(false) FOREACH allNodes»
 			-- operations
-			«EXPAND operationStep FOREACH allOperations»
+			«EXPAND operationStep(false) FOREACH allOperations»
 		1 : null;
 		esac;
 		
@@ -144,57 +167,191 @@ ASSIGN
 «ENDLET»
 «ENDLET»
 «ENDLET»
+«ENDLET»
 
 	«ENDFILE»
 «ENDDEFINE»
 
 /**
- * Steps between operation nodes.
+ * Changes to temporary variables.
  */
-«DEFINE operationStep FOR model::ActivityNode»
-	current_step = «safeName()» : «EXPAND nextOperationStep FOR this»;
-«ENDDEFINE»
-«DEFINE operationStep FOR model::Operation»
-	current_step = «safeName()» : «EXPAND nextOperationStep FOR this»;
+«DEFINE nextTemporaryVariable FOR model::TemporaryVariable»
+next(«safeName()») := case
+	in_operation = 1 : case
+		-- start of operations
+		current_step = «safeName(eContainer)» : 0; -- init
+
+		-- incoming flows
+		«FOREACH inFlows.from.typeSelect(model::PrimitiveOperation).select(o | o.name == "set" || o.name == "setValue") AS set»
+		current_step = «safeName(set)» :
+			-- work out the incoming variable
+			«IF set.inFlows.from.size != 1»
+				«EXPAND exception FOR throwException("Too many incoming data flows for: " + this)»
+			«ENDIF»
+			(«EXPAND getTemporaryVariableValue FOR set.inFlows.from.first()»)
+			mod «maximumIntegerSize() + 1» -- prevent integer overflow
+			;
+		«ENDFOREACH»
+
+		1 : «safeName()»;
+	esac;	
+	
+	-- otherwise, leave it as it is
+	1 : «safeName()»;
+esac;
 «ENDDEFINE»
 
-«DEFINE nextOperationStep FOR model::ActivityNode»
+«DEFINE valueOverflowChecks FOR model::TemporaryVariable»
+	in_operation = 1 : case
+		-- start of operations
+		current_step = «safeName(eContainer)» : value_overflow; -- init
+
+		-- incoming flows
+		«FOREACH inFlows.from.typeSelect(model::PrimitiveOperation).select(o | o.name == "set" || o.name == "setValue") AS set»
+		current_step = «safeName(set)» :
+			-- work out the incoming variable
+			«IF set.inFlows.from.size != 1»
+				«EXPAND exception FOR throwException("Too many incoming data flows for: " + this)»
+			«ENDIF»
+			«REM»emulation of a ? b : c«ENDREM»
+			case 
+				-- if (a) = (a mod limit) then we have not overflown
+				(«EXPAND getTemporaryVariableValue FOR set.inFlows.from.first()»)
+				=
+				(«EXPAND getTemporaryVariableValue FOR set.inFlows.from.first()»)
+				mod «maximumIntegerSize() + 1» : value_overflow;
+				-- otherwise, we have
+				1 : 1;
+			esac;
+		«ENDFOREACH»
+
+		1 : value_overflow;
+	esac;	
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::DataFlowEdgesSource»
+	«EXPAND exception FOR throwException("Unknown data flow source: " + this)»
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::operations::Arithmetic»
+	«IF operationType.toString() == "ADD"»
+		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " + "»
+	«ELSEIF operationType.toString() == "SUBTRACT"»
+		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " - "»
+	«ELSEIF operationType.toString() == "MULTIPLY"»
+		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " * "»
+	«ELSEIF operationType.toString() == "DIVIDE"»
+		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " / "»
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown arithmetic type: " + operationType + " for " + this)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::TemporaryVariable»
+	«safeName(this)»
+	-- another temporary variable
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::StaticValue»
+	«value» 
+	-- static value
+«ENDDEFINE»
+
+/**
+ * Steps between operation nodes.
+ */
+«DEFINE operationStep(boolean lookingForEnd) FOR emf::EObject»
+	«EXPAND exception FOR throwException("Unexpected operation step: " + this)»
+«ENDDEFINE»
+«DEFINE operationStep(boolean lookingForEnd) FOR model::ActivityNode»
+	current_step = «safeName()» : «EXPAND nextOperationStep(lookingForEnd) FOR this»;
+«ENDDEFINE»
+«DEFINE operationStep(boolean lookingForEnd) FOR model::Operation»
+	current_step = «safeName()» : «EXPAND nextOperationStep(lookingForEnd) FOR this»;
+«ENDDEFINE»
+
+/**
+ * lookingForEnd = true:
+ *  if (finishNode or cancelNode) [id of node];
+ *  else [null];
+ * lookingForEnd = false:
+ *  [id of node];
+ */
+«DEFINE stepOrEnd(boolean lookingForEnd) FOR model::ExecutionEdgeDestination»
+	«IF lookingForEnd»
+		«IF model::operations::CancelNode.isInstance(this) ||
+			model::operations::FinishNode.isInstance(this)»
+			«safeName()»
+		«ELSE»
+			null
+		«ENDIF»
+	«ELSE»
+		«safeName()»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::ActivityNode»
 	«EXPAND exception FOR throwException("Cannot expand generic activity node: " + this)»
 «ENDDEFINE»
-«DEFINE nextOperationStep FOR model::Operation»
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::Operation»
 	«EXPAND exception FOR throwException("Cannot expand generic operation: " + this)»
 «ENDDEFINE»
 
-«DEFINE nextOperationStep FOR model::operations::StartNode»
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::operations::StartNode»
 	«IF outExecutions.size > 0»
-	«safeName(outExecutions.first().to)»
+		«EXPAND stepOrEnd(lookingForEnd) FOR outExecutions.first().to»
 	«ELSE»
 	null -- goes nowhere
 	«ENDIF»
 «ENDDEFINE»
-«DEFINE nextOperationStep FOR model::operations::FinishNode»
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::operations::FinishNode»
 	null
 «ENDDEFINE»
-«DEFINE nextOperationStep FOR model::operations::CancelNode»
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::operations::CancelNode»
 	null
 «ENDDEFINE»
-«DEFINE nextOperationStep FOR model::operations::Arithmetic»
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::operations::Arithmetic»
 	null -- should never be called
 «ENDDEFINE»
-«DEFINE nextOperationStep FOR model::PrimitiveOperation»
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::PrimitiveOperation»
 	«REM»TODO can a primitive operation have multiple outgoing edges?«ENDREM»
 	«IF outExecutions.size > 0»
-	«safeName(outExecutions.first().to)»
+		«EXPAND stepOrEnd(lookingForEnd) FOR outExecutions.first().to»
 	«ELSE»
 	null -- goes nowhere
 	«ENDIF»
 «ENDDEFINE»
-«DEFINE nextOperationStep FOR model::CompositeOperation»
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::CompositeOperation»
 	«REM»TODO can a primitive operation have multiple outgoing edges?«ENDREM»
 	«IF outExecutions.size > 0»
-	«safeName(outExecutions.first().to)»
+		«EXPAND stepOrEnd(lookingForEnd) FOR outExecutions.first().to»
 	«ELSE»
 	null -- goes nowhere
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE nextOperationStep(boolean lookingForEnd) FOR model::operations::DecisionOperation»
+	«IF name=="equal" || name=="equal?"»
+		«IF getPassFlow().isEmpty || getFailFlow().isEmpty || inFlows.size < 2»
+		-- there are no different pass/fail conditions
+			
+			«IF outExecutions.size > 0»
+				«EXPAND stepOrEnd(lookingForEnd) FOR outExecutions.first().to»
+			«ELSE»
+			null -- goes nowhere
+			«ENDIF»
+		
+		«ELSEIF inFlows.size > 2»
+			«EXPAND exception FOR throwException("Too many inflows for decision operation: " + inFlows.size + " : " + this)»
+		«ELSE»
+		case
+			«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " = "»
+				: «EXPAND stepOrEnd(lookingForEnd) FOR getPassFlow().first().to»;
+			1 : «EXPAND stepOrEnd(lookingForEnd) FOR getFailFlow().first().to»;
+		esac
+		«ENDIF»
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown decision operation: " + this)»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -287,14 +444,7 @@ ASSIGN
 		current_step = «safeName()» : null; -- no way to finish from nameless node
 «ENDDEFINE»
 «DEFINE operationEnd FOR model::ExecutionEdgesSource»
-		current_step = «safeName()» : 
-			«IF !outExecutions.to.typeSelect(model::operations::FinishNode).isEmpty»
-				«safeName(outExecutions.to.typeSelect(model::operations::FinishNode).first())»
-			«ELSEIF !outExecutions.to.typeSelect(model::operations::CancelNode).isEmpty»
-				«safeName(outExecutions.to.typeSelect(model::operations::CancelNode).first())»
-			«ELSE»
-				null -- goes nowhere
-			«ENDIF»;
+	«EXPAND operationStep(true) FOR this»
 «ENDDEFINE»
 
 /**

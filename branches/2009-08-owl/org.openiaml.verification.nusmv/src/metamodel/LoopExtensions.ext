@@ -15,11 +15,23 @@ safeNameString(String s) :
 escapeString(String s) :
 	s.replaceAll("[\"]", "\\\"");
 
+/** 0 ... <max size> */
+maximumIntegerSize() : 15;
+
 /**
  * Get all of the buttons on a particular page.
  */
 allButtonsOnPage(model::visual::Page this) :
 	eAllContents.typeSelect(model::visual::Button);
+
+/** get all failing edges */
+getFailFlow(model::ExecutionEdgesSource this) :
+	outExecutions.select(e | e.name.toLowerCase().startsWith("f") 
+		|| e.name.toLowerCase().startsWith("n"));
+
+/** get all passing edges */
+getPassFlow(model::ExecutionEdgesSource this) :
+	outExecutions.reject(e | getFailFlow(this).contains(e)) ;
 
 /** 
  * a hack way to create backtrace-able errors

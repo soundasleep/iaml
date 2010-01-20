@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1264a3c92ec.56">
+  <children xsi:type="iaml.visual:Page" id="index" name="Home">
+    <children xsi:type="iaml.visual:Button" id="visual.1264a3c934a.18" name="Click Button">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1264a3c934a.7" id="model.1264a3c92ec.79" name="split operation">
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1a" name="do nothing" inExecutions="model.1264a90e726.1e" outExecutions="model.1264a90e726.23"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1b" name="do nothing 2" inExecutions="model.1264a90e726.1f model.1264a90e726.99" outExecutions="model.1264a90e726.20"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1c" name="a bit longer" inExecutions="model.1264a90e726.20" outExecutions="model.1264a90e726.22"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.98" name="go back to the start" inExecutions="model.1264a90e726.15f" outExecutions="model.1264a90e726.99"/>
+        <operations xsi:type="iaml.operations:DecisionOperation" id="operations.1264a90eab1.56" name="equal?" inFlows="model.1264a90e726.15a model.1264a90e726.15c" inExecutions="model.1264a90e726.22" outExecutions="model.1264a90e726.15e model.1264a90e726.15f"/>
+        <nodes xsi:type="iaml.operations:StartNode" id="operations.1264a90eab1.1" outExecutions="model.1264a90e726.1d"/>
+        <nodes xsi:type="iaml.operations:FinishNode" id="operations.1264a90eab1.b" inExecutions="model.1264a90e726.24"/>
+        <nodes xsi:type="iaml.operations:SplitNode" id="operations.1264a90eab1.c" outExecutions="model.1264a90e726.1e model.1264a90e726.1f" inExecutions="model.1264a90e726.1d"/>
+        <nodes xsi:type="iaml.operations:JoinNode" id="operations.1264a90eab1.d" outExecutions="model.1264a90e726.24" inExecutions="model.1264a90e726.23 model.1264a90e726.15e"/>
+        <dataEdges id="model.1264a90e726.15a" from="model.1264a90e726.158" to="operations.1264a90eab1.56"/>
+        <dataEdges id="model.1264a90e726.15c" from="model.1264a90e726.159" to="operations.1264a90eab1.56"/>
+        <executionEdges id="model.1264a90e726.1d" from="operations.1264a90eab1.1" to="operations.1264a90eab1.c"/>
+        <executionEdges id="model.1264a90e726.1e" from="operations.1264a90eab1.c" to="model.1264a90e726.1a"/>
+        <executionEdges id="model.1264a90e726.1f" from="operations.1264a90eab1.c" to="model.1264a90e726.1b"/>
+        <executionEdges id="model.1264a90e726.20" from="model.1264a90e726.1b" to="model.1264a90e726.1c"/>
+        <executionEdges id="model.1264a90e726.22" from="model.1264a90e726.1c" to="operations.1264a90eab1.56"/>
+        <executionEdges id="model.1264a90e726.23" from="model.1264a90e726.1a" to="operations.1264a90eab1.d"/>
+        <executionEdges id="model.1264a90e726.24" from="operations.1264a90eab1.d" to="operations.1264a90eab1.b"/>
+        <executionEdges id="model.1264a90e726.99" from="model.1264a90e726.98" to="model.1264a90e726.1b"/>
+        <executionEdges id="model.1264a90e726.15e" name="y" from="operations.1264a90eab1.56" to="operations.1264a90eab1.d"/>
+        <executionEdges id="model.1264a90e726.15f" name="n" from="operations.1264a90eab1.56" to="model.1264a90e726.98"/>
+        <variables id="model.1264a90e726.158" name="variable" outFlows="model.1264a90e726.15a"/>
+        <values id="model.1264a90e726.159" name="four" outFlows="model.1264a90e726.15c" value="4"/>
+      </operations>
+      <eventTriggers id="model.1264a3c92ec.70" name="click" outEdges="wires.1264a3c934a.7">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1264a3c934a.7" from="model.1264a3c92ec.70" to="model.1264a3c92ec.79" name="run"/>
+      </eventTriggers>
+    </children>
+  </children>
+</iaml:InternetApplication>

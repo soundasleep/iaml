@@ -22,9 +22,9 @@
 		<!-- more than one popup extension is displayed in reverse order:
 		     a documented bug of eclipse -->
          <action
-               class="org.openiaml.model.custom.actions.VerificationWithCrocopatAction"
-               id="org.openiaml.model.diagram.custom2.action5"
-               label="&amp;Verify with Crocopat"
+               class="org.openiaml.model.custom.actions.VerificationWithNuSMVAction"
+               id="org.openiaml.model.diagram.custom2.action6"
+               label="&amp;Verify with NuSMV"
                menubarPath="org.openiaml.model.diagram.custom.menu2/group">
          </action>
 
@@ -33,9 +33,6 @@
 	</extension>
 
 	<!-- add the crocopat verification service -->	
-   <extension point="org.eclipse.ui.startup">
-      <startup class="org.openiaml.model.verification.Startup"/>
-   </extension>
 	
 	
 </plugin>

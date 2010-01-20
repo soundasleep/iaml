@@ -269,6 +269,8 @@ public class NuSMVBeautifier implements org.openarchitectureware.xpand2.output.P
 			|| (prev == '+')
 			|| (prev == '-' && reader.readAhead() != '>')
 			|| (prev == '*')
+			|| (prev == '&')
+			|| (prev == '|')
 			|| (prev == '/')
 			|| (prev == ',') 
 			|| (prev == '=')
@@ -286,7 +288,7 @@ public class NuSMVBeautifier implements org.openarchitectureware.xpand2.output.P
 		return (c == '(' && writer.previous() != '(' && writer.previous() != '!') 
 			|| (c == '!' && writer.previous() != '(') 
 			|| (writer.previous() != '(' && 
-					(c == '+' || c == '-' || c == '*' || c == '/' 
+					(c == '+' || c == '-' || c == '*' || c == '/' || c == '&' || c == '|'
 						|| (c == 'm' && reader.has(3) && reader.readAhead(2).equals("od") && !Character.isJavaIdentifierPart(reader.readAhead(3).charAt(2)))))
 			|| (inLTL && isLTLOperator(c) && writer.previous() != '(' && writer.previous() != '!')
 			|| (c == ':') 

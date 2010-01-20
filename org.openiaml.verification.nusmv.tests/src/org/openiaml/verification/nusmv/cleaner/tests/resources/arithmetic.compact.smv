@@ -6,9 +6,8 @@ VAR
   a : boolean;
 
 ASSIGN
-  init (a) := 0;
-  next (a) := (1 + 1 - (1 * 1) / (1 * 1)) mod 1;
-
+init(a) := 0;
+next(a) := (1+1-(1*1)|(1&1)/(1*1)) mod 1;
 LTLSPEC
   -- comment
   G ((!(operation_start != null -> !(F operation_end != null))) U operation_start

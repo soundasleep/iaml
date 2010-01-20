@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: NuSMV Integration Tests
 Bundle-SymbolicName: org.openiaml.verification.nusmv.tests;singleton:=true
 Bundle-Version: 0.4.2.qualifier
-Export-Package: org.openiaml.verification.crocopat.tests
+Export-Package: org.openiaml.verification.nusmv.tests
 Require-Bundle: org.junit,
  org.openiaml.verification.nusmv;bundle-version="0.4.2",
  org.eclipse.core.runtime;bundle-version="3.5.0",

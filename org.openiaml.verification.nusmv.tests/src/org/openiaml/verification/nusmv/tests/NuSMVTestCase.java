@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.verification.crocopat.tests;
+package org.openiaml.verification.nusmv.tests;
 
 import java.util.List;
 

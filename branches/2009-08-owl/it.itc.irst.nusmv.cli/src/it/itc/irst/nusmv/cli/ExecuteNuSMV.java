@@ -233,7 +233,7 @@ public class ExecuteNuSMV {
 			
 			// only throw the errors if we have an actual error
 			for (String s : errors) {
-				if (s.contains("ERROR") || s.contains("SEVERE")) {
+				if (s.contains("ERROR") || s.contains("SEVERE") || s.contains("Parser error") || s.contains("syntax error") || s.contains("terminated by a signal")) {
 					throw new NuSMVStdErrException(errors);
 				}
 			}

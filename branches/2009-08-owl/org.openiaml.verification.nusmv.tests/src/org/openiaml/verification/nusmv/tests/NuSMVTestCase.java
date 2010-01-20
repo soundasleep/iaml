@@ -82,6 +82,30 @@ public class NuSMVTestCase extends TestCase {
 		// TODO: check that the violation is correct
 	}
 
+	public void testSplitOperation() throws Exception {
+		assertValid("models/SplitOperation.iaml", 0);
+
+		// TODO: check that the violation is correct
+	}
+	
+	public void testSplitOperationInfinite() throws Exception {
+		assertValid("models/SplitOperationInfinite.iaml", 1);
+
+		// TODO: check that the violation is correct
+	}
+
+	public void testSplitOperationDecision() throws Exception {
+		assertValid("models/SplitOperationDecision.iaml", 0);
+
+		// TODO: check that the violation is correct
+	}
+	
+	public void testSplitOperationDecisionInfinite() throws Exception {
+		assertValid("models/SplitOperationDecisionInfinite.iaml", 1);
+
+		// TODO: check that the violation is correct
+	}
+
 	/**
 	 * Print out the log of the given engine to stdout.
 	 * 

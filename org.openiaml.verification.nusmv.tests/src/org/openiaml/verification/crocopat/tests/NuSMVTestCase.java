@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openiaml.verification.nusmv.NuSMVViolation;
 import org.openiaml.verification.nusmv.VerificationEngine;
+import org.openiaml.verification.nusmv.VerificationException;
 
 /**
  * @author jmwright
@@ -25,10 +26,17 @@ import org.openiaml.verification.nusmv.VerificationEngine;
 public class NuSMVTestCase extends TestCase {
 	
 	// prepare IAML package (so it may be loaded by EMF)
-
-	public void testNormalOperationLoop() throws Exception {
-		
-		EObject model = loadModelDirectly("models/NormalOperationLoop.iaml");
+	
+	/**
+	 * Test the given model file for NuSMV validation.
+	 * 
+	 * @param modelFile the model file to load
+	 * @param violations the violations to expect
+	 * @return a list of the violations found
+	 * @throws VerificationException 
+	 */
+	protected List<NuSMVViolation> assertValid(String modelFile, int violationsSize) throws VerificationException {
+		EObject model = loadModelDirectly(modelFile);
 		assertNotNull(model);
 		
 		VerificationEngine engine = new VerificationEngine(true);
@@ -36,37 +44,42 @@ public class NuSMVTestCase extends TestCase {
 		
 		List<NuSMVViolation> violations = engine.getViolations();
 		try {
-			assertTrue("status was not OK: " + status, status.isOK());
+			if (violationsSize == 0) {
+				assertTrue("status was not OK: " + status, status.isOK());
+			} else {
+				assertFalse("status was OK: " + status, status.isOK());
+			}
 			assertNotNull(violations);
-			assertEquals("Unexpected violations: " + violations, 0, violations.size());
+			assertEquals("Unexpected violations: " + violations, violationsSize, violations.size());
 		} catch (AssertionFailedError e) {
 			printViolations(violations);
 			printLog(engine);
 			throw e;
 		}
+		
+		return violations;
+	}
+
+	public void testNormalOperationLoop() throws Exception {		
+		assertValid("models/NormalOperationLoop.iaml", 0);
 	}
 
 	public void testInfiniteOperationLoop() throws Exception {
-		
-		EObject model = loadModelDirectly("models/InfiniteOperationLoop.iaml");
-		assertNotNull(model);
-		
-		VerificationEngine engine = new VerificationEngine(true);
-		IStatus status = engine.verify(model, new NullProgressMonitor());
-		
-		List<NuSMVViolation> violations = engine.getViolations();
-		try {
-			assertFalse("status was OK: " + status, status.isOK());
-			assertNotNull(violations);
-			assertEquals("Unexpected violations: " + violations, 1, violations.size());
-		} catch (AssertionFailedError e) {
-			printViolations(violations);
-			printLog(engine);
-			throw e;
-		}
-		
+		assertValid("models/InfiniteOperationLoop.iaml", 1);
+
 		// TODO: check that the violation is correct
-		
+	}
+
+	public void testDecisionOperationLoop() throws Exception {
+		assertValid("models/DecisionOperationLoop.iaml", 0);
+
+		// TODO: check that the violation is correct
+	}
+	
+	public void testDecisionOperationLoopInfinite() throws Exception {
+		assertValid("models/DecisionOperationLoopInfinite.iaml", 1);
+
+		// TODO: check that the violation is correct
 	}
 
 	/**

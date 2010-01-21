@@ -21,19 +21,21 @@ VAR
 		run_«safeName(operation)» : boolean;
 	«ENDFOREACH»
 
-	current_page : {
-		null 
-		«FOREACH allPages AS p»
-			, «safeName(p)»
-		«ENDFOREACH»
-	};
+	«IF !allPages.isEmpty»
+		current_page : {
+			null 
+			«FOREACH allPages AS p»
+				, «safeName(p)»
+			«ENDFOREACH»
+		};
 	
-	-- allowing NuSMV to select pages at random
-	browse_to_page : {
-		«FOREACH allPages AS p SEPARATOR ", "»
-			«safeName(p)»
-		«ENDFOREACH»
-	};
+		-- allowing NuSMV to select pages at random
+		browse_to_page : {
+			«FOREACH allPages AS p SEPARATOR ", "»
+				«safeName(p)»
+			«ENDFOREACH»
+		};
+	«ENDIF»
 	
 	-- all buttons on all pages
 	«FOREACH allButtons AS b»
@@ -128,22 +130,27 @@ ASSIGN
 		1 : 0;
 	esac;
 	
-	-- browsing to a new page
-	next(current_page) := case
-		«REM»
-		cannot change pages if an operation is running.
-		NOTE this is a design assumption: when an operation is running, the user may not browse to another page
-		«ENDREM»
-		operation_running = 1 : current_page;
-		-- browse to another page chosen by NuSMV
-		«FOREACH allPages AS p SEPARATOR ", "»
-			browse_to_page = «safeName(p)» : «safeName(p)»;
-		«ENDFOREACH»
-		1 : current_page;
-	esac;
+	«IF !allPages.isEmpty»
+		-- browsing to a new page
+		next(current_page) := case
+			«REM»
+			cannot change pages if an operation is running.
+			NOTE this is a design assumption: when an operation is running, the user may not browse to another page
+			«ENDREM»
+			operation_running = 1 : current_page;
+			-- browse to another page chosen by NuSMV
+			«FOREACH allPages AS p»
+				browse_to_page = «safeName(p)» : «safeName(p)»;
+			«ENDFOREACH»
+			1 : current_page;
+		esac;
+	«ENDIF»
 
+«REM»if we only have 'main' module, we cannot have FAIRNESS«ENDREM»
+«IF !eAllContents.typeSelect(model::CompositeOperation).isEmpty»
 FAIRNESS
   running
+«ENDIF»
 
 «ENDLET»
 «ENDLET»
@@ -278,6 +285,7 @@ VAR
 	finished : boolean;
 
 	-- current operation step
+	«IF !allNodes.isEmpty || !allOperations.isEmpty»
 	current_step : {
 		null 
 		«REM»nodes«ENDREM»
@@ -289,6 +297,7 @@ VAR
 			, «safeName(n)»
 		«ENDFOREACH» 
 	};
+	«ENDIF»
 	
 	-- temporary variables
 	«FOREACH allTemporaryVariables AS v»
@@ -335,10 +344,13 @@ ASSIGN
 		1 : 0;
 	esac;
 	
+	«IF !allNodes.isEmpty || !allOperations.isEmpty»
 	next(current_step) := case
 		-- operation hasn't started yet
 		current_step = null : case
+			«IF selectStartNode() != null»
 			flag = 1 : «safeName(selectStartNode())»;
+			«ENDIF»
 			1 : null;
 		esac;
 		
@@ -355,6 +367,7 @@ ASSIGN
 		-- operation is running, but shouldn't be
 		1 : null;
 	esac;
+	«ENDIF»
 	
 	«FOREACH allTemporaryVariables AS v»
 		next(«safeName(v)») := case

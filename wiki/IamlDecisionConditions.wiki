@@ -25,18 +25,4 @@ Decision conditions have a fixed semantics and cannot be changed (without modify
 
 This condition will be *true* if the incoming data flow variable has been set, *false* if not. For example, incoming properties stored within a session that have not been modified will return *false*. It only accepts incoming [ApplicationElementProperty]s.
 
-==equal?==
-
-This condition will be *true* if *all* incoming [DataFlow]s have the same value.
-
-==true?==
-
-This condition will be *true* if *all* incoming [DataFlow]s can be considered true:
-
-  * boolean true (although types aren't implemented yet)
-  * "true"
-  * any string not equal to "0", "" or "false"
-  * a non-zero integer
-  * any floating-point number not equal to 0.0
-
-This is similiar to the [http://nz2.php.net/manual/en/language.types.boolean.php conversion of booleans in PHP].
+  _Also see [IamlPrimitiveOperations Primitive Operations], which can generally be used interchangably with a Composite Operation.

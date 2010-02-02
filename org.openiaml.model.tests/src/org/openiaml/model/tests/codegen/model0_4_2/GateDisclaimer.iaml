@@ -16,7 +16,7 @@
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1268c991bee.33" from="model.1268c991b90.33" to="model.1268c991b90.3f" name="run"/>
     </eventTriggers>
     <children xsi:type="iaml.visual:Button" id="visual.1268c991bee.74" name="continue" outEdges="wires.1268c991bee.4a">
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.1268c991bee.4a" from="visual.1268c991bee.74" to="//@sessions.0/@gate" name="onClick"/>
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.1268c991bee.4a" from="visual.1268c991bee.74" to="gate" name="onClick"/>
     </children>
   </children>
   <children xsi:type="iaml.visual:Page" id="visual.1268c991bee.cc" name="List of Pages">
@@ -31,11 +31,11 @@
     </children>
   </children>
   <sessions id="scopes.1268c90cae0.1" name="Disclaimed Section">
-    <gate name="Display Disclaimer" outEdges="wires.1268c90ca34.3" inEdges="wires.1268c991bee.a wires.1268c991bee.4a">
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.1268c90ca34.3" from="//@sessions.0/@gate" to="visual.1268c90c93a.a" name="navigate"/>
+    <gate name="Display Disclaimer" outEdges="wires.1268c90ca34.3" inEdges="wires.1268c991bee.a wires.1268c991bee.4a" id="gate">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.1268c90ca34.3" from="gate" to="visual.1268c90c93a.a" name="navigate"/>
     </gate>
     <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.1268c991bee.a" id="model.1268c991b90.12" name="disclaimer viewed?">
-      <wires xsi:type="iaml.wires:ConditionWire" id="wires.1268c991bee.a" from="model.1268c991b90.12" to="//@sessions.0/@gate" name="condition"/>
+      <wires xsi:type="iaml.wires:ConditionWire" id="wires.1268c991bee.a" from="model.1268c991b90.12" to="gate" name="condition"/>
     </conditions>
     <children xsi:type="iaml.visual:Page" id="visual.1268c90c93a.11" name="Page 1" inEdges="wires.1268c991bee.88"/>
     <children xsi:type="iaml.visual:Page" id="visual.1268c991bee.b4" name="Page 2" inEdges="wires.1268c991bee.89"/>

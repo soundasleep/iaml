@@ -1,0 +1,216 @@
+#created on: 4/11/2008
+package org.openiaml.model.drools.rules.login_handler
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+rule "Create 'Continue' button for Pages connected with 'first' NavigateWire"
+	when
+		gate : Gate ( )
+		target : Page ( )
+		nav : NavigateWire ( from == gate, to == target, name == "first" ) 
+		not (Button ( eContainer == target, name == "Continue" ))
+		not (NavigateWire ( to == gate ))
+	
+	then
+		Button button = handler.generatedButton(gate, target);
+		handler.setName(button, "Continue");
+		queue.add(button, drools);
+
+end
+
+rule "Connect 'click' on 'Continue' button to resume Gate"
+	when
+		gate : Gate ( )
+		target : Page ( )
+		nav : NavigateWire ( from == gate, to == target, name == "first" ) 
+		button : Button ( eContainer == target, name == "Continue" )
+		
+		click : EventTrigger ( eContainer == button, name == "click" )
+		
+		not (NavigateWire ( from == click, to == gate ))
+	
+	then
+		NavigateWire wire = handler.generatedNavigateWire(gate, target, click, gate);
+		handler.setName(wire, "resume");
+		queue.add(wire, drools);
+
+end
+
+rule "Create '<gate> flag' property when Gate is connected by 'first'"
+	when
+		session : Session ( )
+		gate : Gate ( eContainer == session )
+		
+		wire : NavigateWire ( from == gate, name == "first" )
+		
+		not (ApplicationElementProperty ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
+	
+	then
+		ApplicationElementProperty prop = handler.generatedApplicationElementProperty(gate, session);
+		handler.setName(prop, gate.getName() + " flag");
+		handler.setValue(prop, ModelPackage.eINSTANCE.getApplicationElementProperty_DefaultValue(), "false");
+		queue.add(prop, drools);
+	
+end
+
+rule "Create 'set flag' operation for Pages connected with 'first' NavigateWire"
+	when
+		gate : Gate ( )
+		target : Page ( )
+		nav : NavigateWire ( from == gate, to == target, name == "first" )
+		button : Button ( eContainer == target, name == "Continue" )
+		
+		not (CompositeOperation ( eContainer == target, name == "Set gate flag" ))
+		
+	then
+		CompositeOperation op = handler.generatedCompositeOperation(gate, target);
+		handler.setName(op, "Set gate flag");
+		queue.add(op, drools);
+
+end
+
+rule "Connect 'access' event with 'set flag' operation"
+	when
+		gate : Gate ( )
+		target : Page ( )
+		nav : NavigateWire ( from == gate, to == target, name == "first" )
+		button : Button ( eContainer == target, name == "Continue" )
+		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
+		access : EventTrigger ( eContainer == target, name == "access" )
+		
+		not (RunInstanceWire ( from == access, to == op ))
+		
+	then
+		RunInstanceWire run = handler.generatedRunInstanceWire(gate, target, access, op);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+
+end
+
+/**
+ * TODO perhaps all Scopes should also be able to contain Properties
+ */
+rule "Create contents of 'set flag' operation"
+	when
+		session : Session ( )
+		gate : Gate ( eContainer == session )
+		target : Page ( )
+		nav : NavigateWire ( from == gate, to == target, name == "first" )
+		button : Button ( eContainer == target, name == "Continue" )
+		property : ApplicationElementProperty ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
+		
+		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
+		
+		not (StartNode ( eContainer == op ))
+		
+	then
+		StartNode start = handler.generatedStartNode(gate, op);
+		FinishNode finish = handler.generatedFinishNode(gate, op);
+		PrimitiveOperation set = handler.generatedPrimitiveOperation(gate, op);
+		handler.setName(set, "setPropertyToValue");
+		StaticValue value = handler.generatedStaticValue(gate, op);
+		handler.setName(value, "true");
+		handler.setValue(value, "true");
+		
+		queue.add(start, drools);
+		queue.add(finish, drools);
+		queue.add(set, drools);
+		
+		ExecutionEdge e1 = handler.generatedExecutionEdge(gate, op, start, set);
+		ExecutionEdge e2 = handler.generatedExecutionEdge(gate, op, set, finish);
+		DataFlowEdge d1 = handler.generatedDataFlowEdge(gate, op, value, set);
+		DataFlowEdge d2 = handler.generatedDataFlowEdge(gate, op, set, property);
+		
+		queue.add(e1, drools);
+		queue.add(e2, drools);
+		queue.add(d1, drools);
+		queue.add(d2, drools);
+
+end
+
+rule "Create condition 'check <gate>'"
+	when
+		session : Session ( )
+		gate : Gate ( eContainer == session )
+		wire : NavigateWire ( from == gate, name == "first" )
+		
+		not ( Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
+	
+	then
+		CompositeCondition cond = handler.generatedCompositeCondition(gate, session);
+		handler.setName(cond, "check " + gate.getName());
+		queue.add(cond, drools);
+
+end
+
+rule "Connect condition 'check <gate>' with gate"
+	when
+		session : Session ( )
+		gate : Gate ( eContainer == session )
+		wire : NavigateWire ( from == gate, name == "first" )
+		
+		cond : Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
+		
+		not ( ConditionWire ( from == cond, to == gate ))
+	
+	then
+		ConditionWire cw = handler.generatedConditionWire(gate, session, cond, gate);
+		handler.setName(cw, "condition");
+		queue.add(cw, drools);
+
+end
+
+rule "Create contents of 'check <gate>' condition"
+	when
+		session : Session ( )
+		gate : Gate ( eContainer == session )
+		wire : NavigateWire ( from == gate, name == "first" )
+		property : ApplicationElementProperty ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
+		
+		cond : CompositeCondition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
+		cw : ConditionWire ( from == cond, to == gate )
+		
+		not ( StartNode ( eContainer == cond ))
+	
+	then
+		StartNode start = handler.generatedStartNode(gate, cond);
+		FinishNode finish = handler.generatedFinishNode(gate, cond);
+		CancelNode cancel = handler.generatedCancelNode(gate, cond);
+		DecisionOperation cmp = handler.generatedDecisionOperation(gate, cond);
+		handler.setName(cmp, "true?");
+		
+		queue.add(start, drools);
+		queue.add(finish, drools);
+		queue.add(cancel, drools);
+		queue.add(cmp, drools);
+		
+		ExecutionEdge e1 = handler.generatedExecutionEdge(gate, cond, start, cmp);
+		ExecutionEdge e2 = handler.generatedExecutionEdge(gate, cond, cmp, finish);
+		handler.setName(e2, "y");
+		ExecutionEdge e3 = handler.generatedExecutionEdge(gate, cond, cmp, cancel);
+		handler.setName(e3, "n");
+		DataFlowEdge d1 = handler.generatedDataFlowEdge(gate, cond, property, cmp);
+		
+		queue.add(e1, drools);
+		queue.add(e2, drools);
+		queue.add(e3, drools);
+		queue.add(d1, drools);
+
+end
+

@@ -18,18 +18,6 @@ global EcoreCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create 'access' event for all pages"
-	when
-		page : Page( )
-		not (EventTrigger (eContainer == page, name=="access" ))
-					
-	then
-		EventTrigger access = handler.generatedEventTrigger(page, page);
-		handler.setName(access, "access");
-		queue.add(access, drools);
-		
-end
-
 rule "Create 'init' event for Sessions"
 	when
 		session : Session( overridden == false )

@@ -155,6 +155,7 @@ context model::PrimitiveOperation ERROR "A 'set' PrimitiveOperation cannot set a
 context model::PrimitiveOperation ERROR "A 'setPropertyToValue' PrimitiveOperation cannot set a TemporaryVariable: use 'set'" :
 	name != "setPropertyToValue" || outFlows.to.typeSelect(model::TemporaryVariable).size == 0;
 	
-context model::components::Gate ERROR "A Gate needs to have at least one incoming Condition, or it will never permit access" :
-	inEdges.typeSelect(model::wires::ConditionWire).size >= 1;
+context model::components::Gate ERROR "A Gate needs to have at least one incoming Condition, or one outgoing 'first' wire, or it will never permit access" :
+	inEdges.typeSelect(model::wires::ConditionWire).size >= 1
+	|| outEdges.typeSelect(model::NamedElement).exists(w | w.name == "first");
 	

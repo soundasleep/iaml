@@ -7,16 +7,20 @@ import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * Testing the 'set' PrimitiveOperation with a StaticValue.
+ * Demonstrating the use of Gate to prevent access to a
+ * Scope without first viewing a disclaimer page.
  * 
  * @author jmwright
- * @example PrimitiveOperation,StaticValue,CompositeOperation,ApplicationElementProperty
- * 		Setting a {@model InputTextField text field} {@model ApplicationElementProperty value}
- * 		to a {@model StaticValue static value}. 
- * @operational PrimitiveOperation
- * 		If a {@model PrimitiveOperation} is named 'setPropertyToValue', it will
- * 		set the {@model ApplicationElementProperty target destination} to the value
- * 		of its {@model DataFlowEdge incoming edge}.
+ * @example Gate 
+ * 		Using a {@model Gate} to prevent access to a {@model Scope} without
+ * 		first viewing a disclaimer {@model Page}.
+ * @operational Gate
+ * 		If a {@model Page} is contained within a {@model Session} that contains
+ * 		a {@model Gate}, any incoming {@model Condition Conditions} on that Gate 
+ * 		must first be satisfied in order to proceed.
+ * @operational Gate,NavigateWire
+ *		A {@model NavigateWire} may be used to resume {@model Page} access
+ *		previously limited by a {@model Gate}. 		
  */
 public class GateDisclaimer extends CodegenTestCase {
 	

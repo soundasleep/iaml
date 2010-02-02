@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.ShouldntContainWires;
@@ -43,6 +44,8 @@ import org.openiaml.model.model.components.Gate;
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#isOverridden <em>Overridden</em>}</li>
  * </ul>
  * </p>
  *
@@ -168,6 +171,36 @@ public class GateImpl extends EObjectImpl implements Gate {
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -325,6 +358,39 @@ public class GateImpl extends EObjectImpl implements Gate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<GeneratedElement> getGeneratedElements() {
+		if (generatedElements == null) {
+			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, ComponentsPackage.GATE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
+		}
+		return generatedElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverridden(boolean newOverridden) {
+		boolean oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ComponentsPackage.GATE__OVERRIDDEN, oldOverridden, overridden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -335,6 +401,8 @@ public class GateImpl extends EObjectImpl implements Gate {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
 			case ComponentsPackage.GATE__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ComponentsPackage.GATE__GENERATED_ELEMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -355,6 +423,8 @@ public class GateImpl extends EObjectImpl implements Gate {
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ComponentsPackage.GATE__GENERATED_ELEMENTS:
+				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -383,6 +453,10 @@ public class GateImpl extends EObjectImpl implements Gate {
 				return getOutEdges();
 			case ComponentsPackage.GATE__IN_EDGES:
 				return getInEdges();
+			case ComponentsPackage.GATE__GENERATED_ELEMENTS:
+				return getGeneratedElements();
+			case ComponentsPackage.GATE__OVERRIDDEN:
+				return isOverridden();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -424,6 +498,13 @@ public class GateImpl extends EObjectImpl implements Gate {
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case ComponentsPackage.GATE__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
+				return;
+			case ComponentsPackage.GATE__OVERRIDDEN:
+				setOverridden((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -460,6 +541,12 @@ public class GateImpl extends EObjectImpl implements Gate {
 			case ComponentsPackage.GATE__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case ComponentsPackage.GATE__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				return;
+			case ComponentsPackage.GATE__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -488,6 +575,10 @@ public class GateImpl extends EObjectImpl implements Gate {
 				return outEdges != null && !outEdges.isEmpty();
 			case ComponentsPackage.GATE__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case ComponentsPackage.GATE__GENERATED_ELEMENTS:
+				return generatedElements != null && !generatedElements.isEmpty();
+			case ComponentsPackage.GATE__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -519,6 +610,13 @@ public class GateImpl extends EObjectImpl implements Gate {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (derivedFeatureID) {
 				case ComponentsPackage.GATE__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GeneratesElements.class) {
+			switch (derivedFeatureID) {
+				case ComponentsPackage.GATE__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case ComponentsPackage.GATE__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
 				default: return -1;
 			}
 		}
@@ -555,6 +653,13 @@ public class GateImpl extends EObjectImpl implements Gate {
 				default: return -1;
 			}
 		}
+		if (baseClass == GeneratesElements.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ComponentsPackage.GATE__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ComponentsPackage.GATE__OVERRIDDEN;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -576,6 +681,8 @@ public class GateImpl extends EObjectImpl implements Gate {
 		result.append(generatedRule);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", overridden: ");
+		result.append(overridden);
 		result.append(')');
 		return result.toString();
 	}

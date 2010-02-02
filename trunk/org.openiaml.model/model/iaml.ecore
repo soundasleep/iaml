@@ -702,7 +702,7 @@
         <details key="documentation" value="When placed into a {@link Page} or {@link Session}, enforces that all access contains the {@link Role roles} and {@link Permission permissions} provided by incoming {@link RequiresWire}."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Gate" eSuperTypes="#//NamedElement #//GeneratedElement #//WireEdgesSource #//WireEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="Gate" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination #//GeneratedElement #//GeneratesElements">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must first execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition can execute}, then access to this {@link Scope} is denied until such time the {@link Condition} is now true."/>
       </eAnnotations>

@@ -65,7 +65,19 @@ Part of a domain object instance. Returns true if the current instance actually 
 
   _TODO: Incomplete documentation._
 
-Returns true if the incoming parameters are all equal.
+Returns true if all incoming parameters have the same value.
+
+==true?==
+
+Returns true if all incoming parameters can be considered true:
+
+  * boolean true (although types aren't implemented yet)
+  * "true"
+  * any string not equal to "0", "" or "false"
+  * a non-zero integer
+  * any floating-point number not equal to 0.0
+
+This is similiar to the [http://nz2.php.net/manual/en/language.types.boolean.php conversion of booleans in PHP].
 
 ==add role==
 

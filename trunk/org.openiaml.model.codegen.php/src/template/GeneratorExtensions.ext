@@ -387,6 +387,26 @@ model::operations::JoinNode findFinalJoinNode(model::ExecutionEdgesSource this) 
 model::operations::JoinNode findFinalJoinNode(model::operations::JoinNode this) :
 	this;
 
+/**
+ * Get all necessary gates for the given scope, in order that they
+ * need to be applied.
+ */
+List[model::components::Gate] getPageGates(model::visual::Page this) :
+	getPageGates(eContainer);
+
+List[model::components::Gate] getPageGates(model::scopes::Session this) :
+	if gate == null then
+		getPageGates(eContainer)
+	else
+		getPageGates(eContainer).toSet().add( gate );
+
+List[model::components::Gate] getPageGates(emf::EObject this) :
+	{};
+
+/** Get all possible resume targets for this gate. */
+getResumeTargets(model::components::Gate this) :
+	eContainer.eContents.typeSelect(model::visual::Page);
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

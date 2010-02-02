@@ -2,6 +2,9 @@
 
 /**
  * The flow of execution within an condition.
+ *
+ * TODO the implementation of Conditions is still in a single-threaded way;
+ * we need to use the stack-based implementation (i.e. from CompositeOperation).
  */
 «EXTENSION template::GeneratorExtensions»
 
@@ -25,7 +28,51 @@
  
 /* an edge that is the end (both StartNode and FinishNode also fall into this) */
 «DEFINE conditionFlowStep(Boolean php, model::visual::Page currentPage) FOR model::ExecutionEdgeDestination-»
+	«EXPAND exception FOR throwException("Unexpected node in CompositeCondition: " + this)»
 	// do nothing «this-»
+«ENDDEFINE»
+
+/* expand the definition of an operation, assumed to be called as part of an existing function call */
+«DEFINE conditionFlowStep(Boolean php, model::visual::Page currentPage) FOR model::operations::DecisionOperation-»
+	«REM»compare operations«ENDREM»
+	if (
+	«IF name == "equal?"-»
+		«REM»check all inflow targets are identical«ENDREM»
+		«IF php»
+			«EXPAND template::operations::Contents::equalDecisionOperationSource(php, currentPage) FOREACH inFlows SEPARATOR " == "»
+		«ELSE»
+			is_array_equal(new Array(«EXPAND template::operations::Contents::equalDecisionOperationSource(php, currentPage) FOREACH inFlows SEPARATOR ", "»))
+		«ENDIF»
+	«ELSEIF name == "true?"-»
+		«REM»check all inflow targets are identical«ENDREM»
+		«IF php»
+			«EXPAND template::operations::Contents::trueDecisionOperationSource(php, currentPage) FOREACH inFlows SEPARATOR " == "»
+		«ELSE»
+			is_array_true(new Array(«EXPAND template::operations::Contents::trueDecisionOperationSource(php, currentPage) FOREACH inFlows SEPARATOR ", "»))
+		«ENDIF»
+	«ELSE»
+		«REM»??? who knows«ENDREM»
+		«EXPAND exception FOR throwException("Unknown decision operation to expand '" + name + ": " + this)»
+	«ENDIF»
+	) {
+		// passes
+		«IF hasPassFlow(this)»
+			«FOREACH getPassFlows() AS e-»
+				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
+			«ENDFOREACH»
+		«ELSE»
+			// no pass flow
+		«ENDIF»
+	} else {
+		// fails
+		«IF hasFailFlow(this)»
+			«FOREACH getFailFlows() AS e-»
+				«EXPAND conditionFlowStep(php, currentPage) FOR e.to-»
+			«ENDFOREACH»
+		«ELSE»
+			// no fail flow
+		«ENDIF»
+	}
 «ENDDEFINE»
 
 /**

@@ -96,25 +96,72 @@
 «ENDDEFINE»
 
 /**
- * NavigateWire: browse to a new page
+ * NavigateWire: browse to a new destination.
+ * We need to switch on the target, because we could navigate to many different types
+ * of new destinations?
  */
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::NavigateWire»
+	«EXPAND navigateTo(php, inStoreDb, currentPage, this) FOR to» 
+«ENDDEFINE»
+
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Page currentPage, model::wires::NavigateWire wire) FOR model::WireEdgeDestination»
+	«EXPAND exception FOR throwException("Unknown NavigateWire destination: " + this)»
+«ENDDEFINE»
+
+/**
+ * Resuming navigation to a Gate.
+ */
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Page currentPage, model::wires::NavigateWire wire) FOR model::components::Gate»
 	«IF php»
-		«IF model::visual::Page.isInstance(to)»
-		/* prevent infinite loops on the current page */
-		if ("«((model::visual::Page) to).id»" != CURRENT_PAGE) {
-		«ELSE»
-		if (true) {
-		«ENDIF»
+		/* navigating back to resume a gate */
+		// get the resume ID
+		«EXPAND template::scopes::Gate::getResumeTarget('resume')»
+		if (!$resume) {
+			// nowhere to resume; select somewhere random
+			«EXPAND template::scopes::Gate::getAnyTarget('resume')»
+		}
+		
+		if ($resume != CURRENT_PAGE) {
 			// navigate to another page
-			$url = "«safeName(to)».php";
+			$url = "$resume.php";
+			log_message("Resuming to '$url'");
+			header("Location: $url");
+			die;
+		}
+	«ELSE»
+		var url = "<?php
+			/* navigating back to resume a gate */
+			// get the resume ID
+			«EXPAND template::scopes::Gate::getResumeTarget('resume')»
+			if (!$resume) {
+				// nowhere to resume; select somewhere random
+				«EXPAND template::scopes::Gate::getAnyTarget('resume')»
+			}
+			
+			echo $resume;
+		?>.php";
+		debug("Resuming to '" + url + "'");
+		window.location = url;
+		ajaxIncrement();	// prevent other events from executing		
+	«ENDIF»
+«ENDDEFINE» 
+
+/**
+ * Navigate to a page.
+ */
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Page currentPage, model::wires::NavigateWire wire) FOR model::visual::Page»
+	«IF php»
+		/* prevent infinite loops on the current page */
+		if ("«id-»" != CURRENT_PAGE) {
+			// navigate to another page
+			$url = "«safeName()».php";
 			log_message("Redirecting to '$url'");
 			header("Location: $url");
 			die;
 		}
 	«ELSE»
 		// navigating to a new page
-		var url = "«safeName(to)».php";
+		var url = "«safeName()».php";
 		debug("Redirecting to '" + url + "'");
 		window.location = url;
 		ajaxIncrement();	// prevent other events from executing

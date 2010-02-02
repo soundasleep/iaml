@@ -1,0 +1,65 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE runGate(model::visual::Page currentPage) FOR model::components::Gate-»
+/* gate '«safeName()»' */
+
+/* expand conditions */
+if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "»)) {
+	// condition failed
+	
+	// save the current page, for resuming
+	$resume = "«safeName(currentPage)»";
+	«IF containingSession(this) != null»
+		$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»"] = $resume;
+	«ELSE»
+		set_application_value("«safeNameString(id)»", $resume);
+	«ENDIF»
+	
+	// execute any wires
+	«EXPAND template::events::Page::runGateWires(currentPage) FOR this»
+}
+
+«ENDDEFINE»
+
+/**
+ * If we have been asked to navigate to the given Gate,
+ * where should we resume?
+ *
+ * Should set '$arg' to the new page ID, or empty if the resume is not set.
+ */
+«DEFINE getResumeTarget(String arg) FOR model::components::Gate»
+	«IF containingSession(this) != null»
+		$«arg-» = $_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»"];
+	«ELSE»
+		$«arg-» = get_application_value("«safeNameString(id)»");
+	«ENDIF»
+
+	// check that this is a valid value for this resume
+	$is_valid = false;
+	«FOREACH getResumeTargets(this) AS target»
+		if ($«arg-» == "«safeName(target)»")
+			$is_valid = true;  
+	«ENDFOREACH»
+	if (!$is_valid)
+		$«arg-» = "";	// reset
+«ENDDEFINE»
+
+/**
+ * Find _any_ target for the Gate (i.e. the resume has not been set)
+ */
+«DEFINE getAnyTarget(String arg) FOR model::components::Gate»
+	«IF getResumeTargets(this).isEmpty»
+		«EXPAND exception FOR throwException("Gate '" + this + "' did not have any possible resume targets")»
+	«ENDIF»
+	$«arg-» = "«safeName(getResumeTargets(this).first())»"; 
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»
+

@@ -149,8 +149,11 @@ context model::operations::Arithmetic ERROR "Arithmetic must have at least one i
 	inFlows.size > 0;
 
 context model::PrimitiveOperation ERROR "A 'set' PrimitiveOperation cannot set an ApplicationElementProperty: use 'setPropertyToValue'" :
-	name != "set" || outEdges.to.typeSelect(model::ApplicationElementProperty).size == 0;
+	name != "set" || outFlows.to.typeSelect(model::ApplicationElementProperty).size == 0;
 
 context model::PrimitiveOperation ERROR "A 'setPropertyToValue' PrimitiveOperation cannot set a TemporaryVariable: use 'set'" :
-	name != "setPropertyToValue" || outEdges.to.typeSelect(model::TemporaryVariable).size == 0;
+	name != "setPropertyToValue" || outFlows.to.typeSelect(model::TemporaryVariable).size == 0;
+	
+context model::components::Gate ERROR "A Gate needs to have at least one incoming Condition, or it will never permit access" :
+	inEdges.typeSelect(model::wires::ConditionWire).size >= 1;
 	

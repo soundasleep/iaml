@@ -69,6 +69,22 @@ public class GateDisclaimer extends CodegenTestCase {
 	}
 	
 	/**
+	 * If we get interrupted, we can resume from where the gate threw us off.
+	 * 
+	 * @throws Exception
+	 */
+	public void testDisclaimerResume() throws Exception {
+		
+		beginAtSitemapThenPage("Page 2", "Disclaimer Page");
+		assertTitleEquals("Disclaimer Page");
+		
+		// click on the 'resume' button
+		clickButtonWithText("continue");
+		assertTitleEquals("Page 2");
+		
+	}
+	
+	/**
 	 * Visiting the disclaimer is limited to only the session.
 	 * 
 	 * @throws Exception

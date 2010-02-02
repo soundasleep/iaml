@@ -180,6 +180,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * use {@link #gotoSitemapThenPage(IFile, String)}.
 	 * </p>
 	 * 
+	 * <p>TODO this should return a new type, ISitemap or likewise</p>
+	 * 
 	 * @see #beginAtSitemapThenPage(IFile, String, String)
 	 * @param pageTitle the page title to select from the sitemap
 	 * @return the location of the sitemap file

@@ -129,10 +129,11 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Gate createGate() {
 		GateImpl gate = new GateImpl();
+		generateID(gate);
 		return gate;
 	}
 

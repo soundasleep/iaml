@@ -17,6 +17,20 @@ global EcoreCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+# @inference Button A {@model Button} contains an {@model EventTrigger} named 'click'. 
+rule "Create 'click' event trigger for button"
+	when
+		f : Button( overridden == false )
+		not (EventTrigger( eContainer == f, name=="click" ))
+			
+	then
+
+		EventTrigger event = handler.generatedEventTrigger(f, f);
+		handler.setName(event, "click");
+		queue.add(event, drools);
+		
+end
+
 # @inference InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'edit'. 
 rule "Create 'edit' event trigger for input text field"
 	when
@@ -55,5 +69,21 @@ rule "Create 'access' event trigger for input text field"
 		EventTrigger event = handler.generatedEventTrigger(f, f);
 		handler.setName(event, "access");
 		queue.add(event, drools);
+		
+end
+
+/**
+ * @inference Page
+ *    A {@model Page} contains an {@model EventTrigger} named 'access'.
+ */
+rule "Create 'access' event for all pages"
+	when
+		page : Page( )
+		not (EventTrigger (eContainer == page, name=="access" ))
+					
+	then
+		EventTrigger access = handler.generatedEventTrigger(page, page);
+		handler.setName(access, "access");
+		queue.add(access, drools);
 		
 end

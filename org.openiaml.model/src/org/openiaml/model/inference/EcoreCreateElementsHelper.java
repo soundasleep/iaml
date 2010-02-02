@@ -14,6 +14,8 @@ import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
+import org.openiaml.model.model.DataFlowEdgeDestination;
+import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
@@ -21,6 +23,8 @@ import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
+import org.openiaml.model.model.ExecutionEdgeDestination;
+import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.InternetApplication;
@@ -253,21 +257,49 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 
+	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, CompositeOperation container, DataFlowEdgesSource from, DataFlowEdgeDestination to) throws InferenceException {
+		DataFlowEdge edge = generatedDataFlowEdge(by, container);
+		setFrom(edge, from);
+		setTo(edge, to);
+		return edge;
+	}
+	
 	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		ExecutionEdge edge = (ExecutionEdge) createElement( container, ModelPackage.eINSTANCE.getExecutionEdge(), ModelPackage.eINSTANCE.getCompositeOperation_ExecutionEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
 
+	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, CompositeOperation container, ExecutionEdgesSource from, ExecutionEdgeDestination to) throws InferenceException {
+		ExecutionEdge edge = generatedExecutionEdge(by, container);
+		setFrom(edge, from);
+		setTo(edge, to);
+		return edge;
+	}
+	
 	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, CompositeCondition container) throws InferenceException {
 		DataFlowEdge edge = (DataFlowEdge) createElement( container, ModelPackage.eINSTANCE.getDataFlowEdge(), ModelPackage.eINSTANCE.getCompositeCondition_DataEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
 
+	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, CompositeCondition container, DataFlowEdgesSource from, DataFlowEdgeDestination to) throws InferenceException {
+		DataFlowEdge edge = generatedDataFlowEdge(by, container);
+		setFrom(edge, from);
+		setTo(edge, to);
+		return edge;
+	}
+
 	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, CompositeCondition container) throws InferenceException {
 		ExecutionEdge edge = (ExecutionEdge) createElement( container, ModelPackage.eINSTANCE.getExecutionEdge(), ModelPackage.eINSTANCE.getCompositeCondition_ExecutionEdges() );
 		setGeneratedBy(edge, by);
+		return edge;
+	}
+
+	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, CompositeCondition container, ExecutionEdgesSource from, ExecutionEdgeDestination to) throws InferenceException {
+		ExecutionEdge edge = generatedExecutionEdge(by, container);
+		setFrom(edge, from);
+		setTo(edge, to);
 		return edge;
 	}
 	
@@ -475,6 +507,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getNamedElement_Name(), value);
 	}
 
+	public void setValue(StaticValue element, String value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getStaticValue_Value(), value);
+	}
+	
 	public void setFrom(DataFlowEdge element, EObject value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getDataFlowEdge_From(), value);
 	}

@@ -35,12 +35,14 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.AccessControlHandler;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
@@ -463,6 +465,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
+	 * Gate.
+	 *
+	 * @return The element found
+	 */
+	public Gate assertHasGate(Scope root, String string) throws JaxenException {
+		return (Gate) queryOne(root, "iaml:gate[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
 	 * Page.
 	 *
 	 * @return The element found
@@ -870,6 +882,30 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 				if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
 					if (result != null) {
 						fail("Found more than one execution edge from '" + from + "' to '" + to + "'. First = '" + result + ", second = '" + e + "'");
+					}
+					result = e;
+				}
+			}
+		}
+		assertNotNull("Did not find an ExecutionEdge from '" + from + "' to '" + to + "'", result);
+		return result;
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional ExecutionEdge between
+	 * the given elements, and only with the given name.
+	 *
+	 * @return The element found
+	 */
+	public ExecutionEdge assertHasExecutionEdge(EObject container, ExecutionEdgesSource from, ExecutionEdgeDestination to, String name) throws JaxenException {
+		ExecutionEdge result = null;
+		List<?> wires = query(container, "//iaml:executionEdges");
+		for (Object o : wires) {
+			if (o instanceof ExecutionEdge) {
+				ExecutionEdge e = (ExecutionEdge) o;
+				if (from.equals(e.getFrom()) && to.equals(e.getTo()) && name.equals(e.getName())) {
+					if (result != null) {
+						fail("Found more than one execution edge from '" + from + "' to '" + to + "' with name '" + name + "'. First = '" + result + ", second = '" + e + "'");
 					}
 					result = e;
 				}

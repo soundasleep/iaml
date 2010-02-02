@@ -362,10 +362,10 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsOperations(internetApplication);
 				if (result == null) result = caseContainsEventTriggers(internetApplication);
 				if (result == null) result = caseNamedElement(internetApplication);
-				if (result == null) result = caseContainsWires(internetApplication);
 				if (result == null) result = caseScope(internetApplication);
 				if (result == null) result = caseContainsConditions(internetApplication);
 				if (result == null) result = caseGeneratedElement(internetApplication);
+				if (result == null) result = caseContainsWires(internetApplication);
 				if (result == null) result = caseGeneratesElements(internetApplication);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -504,6 +504,7 @@ public class ModelSwitch<T> {
 				Scope scope = (Scope)theEObject;
 				T result = caseScope(scope);
 				if (result == null) result = caseGeneratesElements(scope);
+				if (result == null) result = caseContainsWires(scope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

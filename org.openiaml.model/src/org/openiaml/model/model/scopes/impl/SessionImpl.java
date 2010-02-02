@@ -36,6 +36,7 @@ import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
@@ -55,6 +56,7 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getGate <em>Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInEdges <em>In Edges</em>}</li>
@@ -207,6 +209,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EList<WireEdge> wires;
+
+	/**
+	 * The cached value of the '{@link #getGate() <em>Gate</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Gate gate;
 
 	/**
 	 * The cached value of the '{@link #getEventTriggers() <em>Event Triggers</em>}' containment reference list.
@@ -410,6 +422,49 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Gate getGate() {
+		return gate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetGate(Gate newGate, NotificationChain msgs) {
+		Gate oldGate = gate;
+		gate = newGate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__GATE, oldGate, newGate);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGate(Gate newGate) {
+		if (newGate != gate) {
+			NotificationChain msgs = null;
+			if (gate != null)
+				msgs = ((InternalEObject)gate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__GATE, null, msgs);
+			if (newGate != null)
+				msgs = ((InternalEObject)newGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__GATE, null, msgs);
+			msgs = basicSetGate(newGate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__GATE, newGate, newGate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<EventTrigger> getEventTriggers() {
 		if (eventTriggers == null) {
 			eventTriggers = new EObjectContainmentEList<EventTrigger>(EventTrigger.class, this, ScopesPackage.SESSION__EVENT_TRIGGERS);
@@ -571,6 +626,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__GATE:
+				return basicSetGate(null, msgs);
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -615,6 +672,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return isOverridden();
 			case ScopesPackage.SESSION__WIRES:
 				return getWires();
+			case ScopesPackage.SESSION__GATE:
+				return getGate();
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				return getEventTriggers();
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -672,6 +731,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
+			case ScopesPackage.SESSION__GATE:
+				setGate((Gate)newValue);
 				return;
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				getEventTriggers().clear();
@@ -740,6 +802,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__WIRES:
 				getWires().clear();
 				return;
+			case ScopesPackage.SESSION__GATE:
+				setGate((Gate)null);
+				return;
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				getEventTriggers().clear();
 				return;
@@ -791,6 +856,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case ScopesPackage.SESSION__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ScopesPackage.SESSION__GATE:
+				return gate != null;
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				return eventTriggers != null && !eventTriggers.isEmpty();
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -829,14 +896,15 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
-		if (baseClass == Scope.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ScopesPackage.SESSION__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == Scope.class) {
+			switch (derivedFeatureID) {
+				case ScopesPackage.SESSION__GATE: return ModelPackage.SCOPE__GATE;
 				default: return -1;
 			}
 		}
@@ -892,14 +960,15 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
-		if (baseClass == Scope.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ScopesPackage.SESSION__WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == Scope.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.SCOPE__GATE: return ScopesPackage.SESSION__GATE;
 				default: return -1;
 			}
 		}

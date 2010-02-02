@@ -1235,6 +1235,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getScope_Gate() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCondition() {
 		return conditionEClass;
 	}
@@ -1506,6 +1515,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__AUTOSAVE);
 
 		scopeEClass = createEClass(SCOPE);
+		createEReference(scopeEClass, SCOPE__GATE);
 
 		conditionEClass = createEClass(CONDITION);
 
@@ -1643,6 +1653,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getContainsWires());
 		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
+		scopeEClass.getESuperTypes().add(this.getContainsWires());
 		conditionEClass.getESuperTypes().add(this.getWireEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getNamedElement());
@@ -1777,7 +1788,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getDomainObjectInstance_StrQuery(), ecorePackage.getEString(), "strQuery", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainObjectInstance_Autosave(), ecorePackage.getEBoolean(), "autosave", "true", 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(scopeEClass, Scope.class, "Scope", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScope_Gate(), theComponentsPackage.getGate(), null, "gate", null, 0, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1991,7 +2003,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (scopeEClass, 
 		   source, 
 		   new String[] {
-			 "changed", "0.4: \'domainObjects\', \'domainViews\', \'domainInstances\' references removed"
+			 "changed", "0.4: \'domainObjects\', \'domainViews\', \'domainInstances\' references removed\r\n0.4.2: no longer abstract; added \'gate\' reference"
 		   });		
 		addAnnotation
 		  (conditionEClass, 

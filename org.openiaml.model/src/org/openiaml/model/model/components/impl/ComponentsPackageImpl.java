@@ -15,6 +15,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.domain.DomainPackage;
@@ -51,6 +52,13 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 * @generated
 	 */
 	private EClass accessControlHandlerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass gateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,6 +183,15 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getGate() {
+		return gateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getLoginHandlerTypes() {
 		return loginHandlerTypesEEnum;
 	}
@@ -211,6 +228,8 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		createEAttribute(loginHandlerEClass, LOGIN_HANDLER__TYPE);
 
 		accessControlHandlerEClass = createEClass(ACCESS_CONTROL_HANDLER);
+
+		gateEClass = createEClass(GATE);
 
 		// Create enums
 		loginHandlerTypesEEnum = createEEnum(LOGIN_HANDLER_TYPES);
@@ -251,12 +270,18 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		loginHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElementContainer());
 		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		gateEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		gateEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
+		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
+		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(loginHandlerEClass, LoginHandler.class, "LoginHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLoginHandler_Type(), this.getLoginHandlerTypes(), "type", null, 1, 1, LoginHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accessControlHandlerEClass, AccessControlHandler.class, "AccessControlHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(gateEClass, Gate.class, "Gate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(loginHandlerTypesEEnum, LoginHandlerTypes.class, "LoginHandlerTypes");
@@ -290,7 +315,13 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		   source, 
 		   new String[] {
 			 "added", "0.4"
-		   });	
+		   });				
+		addAnnotation
+		  (gateEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4.2"
+		   });
 	}
 
 	/**
@@ -312,7 +343,13 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		   source, 
 		   new String[] {
 			 "documentation", "When placed into a {@link Page} or {@link Session}, enforces that all access contains the {@link Role roles} and {@link Permission permissions} provided by incoming {@link RequiresWire}."
-		   });
+		   });		
+		addAnnotation
+		  (gateEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must first execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition can execute}, then access to this {@link Scope} is denied until such time the {@link Condition} is now true."
+		   });	
 	}
 
 } //ComponentsPackageImpl

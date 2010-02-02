@@ -505,6 +505,31 @@
           href="iaml.gmfgraph#UserInstance"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//Scope/gate"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//components/Gate"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#GateName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#GateParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="session.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#Gate"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

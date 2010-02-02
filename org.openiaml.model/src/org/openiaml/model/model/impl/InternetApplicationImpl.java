@@ -34,6 +34,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -53,6 +54,7 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGate <em>Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
@@ -214,6 +216,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getGate() <em>Gate</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Gate gate;
 
 	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
@@ -474,6 +486,49 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Gate getGate() {
+		return gate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetGate(Gate newGate, NotificationChain msgs) {
+		Gate oldGate = gate;
+		gate = newGate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.INTERNET_APPLICATION__GATE, oldGate, newGate);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGate(Gate newGate) {
+		if (newGate != gate) {
+			NotificationChain msgs = null;
+			if (gate != null)
+				msgs = ((InternalEObject)gate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.INTERNET_APPLICATION__GATE, null, msgs);
+			if (newGate != null)
+				msgs = ((InternalEObject)newGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.INTERNET_APPLICATION__GATE, null, msgs);
+			msgs = basicSetGate(newGate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.INTERNET_APPLICATION__GATE, newGate, newGate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Condition> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.INTERNET_APPLICATION__CONDITIONS);
@@ -585,6 +640,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__GATE:
+				return basicSetGate(null, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
@@ -627,6 +684,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getGeneratedElements();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				return isOverridden();
+			case ModelPackage.INTERNET_APPLICATION__GATE:
+				return getGate();
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return getConditions();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
@@ -686,6 +745,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__GATE:
+				setGate((Gate)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				getConditions().clear();
@@ -752,6 +814,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
+			case ModelPackage.INTERNET_APPLICATION__GATE:
+				setGate((Gate)null);
+				return;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				getConditions().clear();
 				return;
@@ -802,6 +867,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case ModelPackage.INTERNET_APPLICATION__GATE:
+				return gate != null;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
@@ -861,6 +928,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
+				case ModelPackage.INTERNET_APPLICATION__GATE: return ModelPackage.SCOPE__GATE;
 				default: return -1;
 			}
 		}
@@ -916,6 +984,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
+				case ModelPackage.SCOPE__GATE: return ModelPackage.INTERNET_APPLICATION__GATE;
 				default: return -1;
 			}
 		}

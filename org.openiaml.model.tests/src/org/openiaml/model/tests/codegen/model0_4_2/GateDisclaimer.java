@@ -142,7 +142,7 @@ public class GateDisclaimer extends CodegenTestCase {
 		gotoSitemapThenPage(sitemap, "List of Pages");
 		clickButtonWithText("page 3");
 		
-		assertTitleEquals("page 3");
+		assertTitleEquals("Page 3");
 		
 	}
 	

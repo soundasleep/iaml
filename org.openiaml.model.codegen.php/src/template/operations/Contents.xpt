@@ -37,6 +37,13 @@
 		«ELSE»
 			is_array_equal(new Array(«EXPAND equalDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR ", "»))
 		«ENDIF»
+	«ELSEIF name == "true?"-»
+		«REM»check all inflow targets are identical«ENDREM»
+		«IF php»
+			«EXPAND trueDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR " == "»
+		«ELSE»
+			is_array_true(new Array(«EXPAND trueDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR ", "»))
+		«ENDIF»
 	«ELSE»
 		«REM»??? who knows«ENDREM»
 		«EXPAND exception FOR throwException("Unknown decision operation to expand '" + name + ": " + this)»
@@ -109,6 +116,14 @@
  */
 «DEFINE equalDecisionOperationSource(Boolean php, model::visual::Page container) FOR model::DataFlowEdge-»
 	«EXPAND DataFlow::dataSource(php, container) FOR from-»
+«ENDDEFINE»
+
+/**
+ * Get all the inflows for a DecisionOperation[equal], which are
+ * then compared for equality.
+ */
+«DEFINE trueDecisionOperationSource(Boolean php, model::visual::Page container) FOR model::DataFlowEdge-»
+	make_into_boolean(«EXPAND DataFlow::dataSource(php, container) FOR from-»)
 «ENDDEFINE»
 
 /**

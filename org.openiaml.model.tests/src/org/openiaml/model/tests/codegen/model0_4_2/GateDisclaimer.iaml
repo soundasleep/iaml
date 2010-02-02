@@ -35,7 +35,7 @@
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.1268c90ca34.3" from="gate" to="visual.1268c90c93a.a" name="navigate"/>
     </gate>
     <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.1268c991bee.a" id="model.1268c991b90.12" name="disclaimer viewed?">
-      <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.1268cdc3e6e.13" name="true?" outExecutions="model.1268cdc3de1.84 model.1268cdc3de1.85" inExecutions="model.1268cdc3de1.82" inFlows="model.1268cdc3de1.80"/>
+      <operations xsi:type="iaml.operations:DecisionOperation" id="operations.1268cdc3e6e.13" name="true?" outExecutions="model.1268cdc3de1.84 model.1268cdc3de1.85" inExecutions="model.1268cdc3de1.82" inFlows="model.1268cdc3de1.80"/>
       <wires xsi:type="iaml.wires:ConditionWire" id="wires.1268c991bee.a" from="model.1268c991b90.12" to="gate" name="condition"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1268cdc3e6e.11" outExecutions="model.1268cdc3de1.82"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1268cdc3e6e.1a" inExecutions="model.1268cdc3de1.84"/>

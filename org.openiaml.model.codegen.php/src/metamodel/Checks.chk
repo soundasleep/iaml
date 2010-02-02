@@ -143,7 +143,8 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 		name == "new" || name == "exists?" ||
 		name == "equal?" || name == "add role" ||
 		name == "add permission" || name == "remove role" ||
-		name == "remove permission" || name == "check permissions");
+		name == "remove permission" || name == "check permissions" ||
+		name == "true?");
 
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;

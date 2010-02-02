@@ -12,5 +12,13 @@
 	)
 «ENDDEFINE»
 
+«DEFINE callCondition(Boolean php, model::components::Gate gate, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::ConditionWire»
+	/* ConditionWire: «this-» */
+	condition_«conditionName(from)»(
+		«REM»NOTE the 'gate' parameter is lost!«ENDREM»
+		«EXPAND template::operations::Parameters::callParameter(php, null, inStoreDb, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+	)
+«ENDDEFINE»
+
 «DEFINE exception FOR Object»
 «ENDDEFINE»

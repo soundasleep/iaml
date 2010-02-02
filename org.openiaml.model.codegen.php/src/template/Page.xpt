@@ -6,6 +6,9 @@
 «DEFINE expandPage FOR model::ApplicationElement-»
 «ENDDEFINE»
 
+/**
+ * @implementation {@link Gate Gates} are of a lower priority in execution than {@link EventTrigger EventTriggers}.
+ */
 «DEFINE expandPage FOR model::visual::Page-»
 	«FILE "output/"+safeNameString(id)+".php"-»
 <?php
@@ -68,6 +71,9 @@ define("CURRENT_PAGE", "«id»");
 // run any event triggers for this page
 // exceptions are now covered by the exception handlers above
 «EXPAND template::events::Page::runPageEvents(this) FOREACH eventTriggers-»
+
+// run any gates connected to the containing scope(s)
+«EXPAND template::scopes::Gate::runGate(this) FOREACH getPageGates(this)-»
 
 // expand any operations (both in this page and in any surrounding scopes)
 «EXPAND template::operations::Definitions::operationDefinitions(this, true) FOR getRoot()-»		

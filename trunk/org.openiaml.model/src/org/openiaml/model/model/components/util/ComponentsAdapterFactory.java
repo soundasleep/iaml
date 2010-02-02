@@ -24,6 +24,7 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 
 /**
@@ -89,6 +90,10 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAccessControlHandler(AccessControlHandler object) {
 				return createAccessControlHandlerAdapter();
+			}
+			@Override
+			public Adapter caseGate(Gate object) {
+				return createGateAdapter();
 			}
 			@Override
 			public Adapter caseContainsOperations(ContainsOperations object) {
@@ -183,6 +188,20 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAccessControlHandlerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.components.Gate <em>Gate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.components.Gate
+	 * @generated
+	 */
+	public Adapter createGateAdapter() {
 		return null;
 	}
 

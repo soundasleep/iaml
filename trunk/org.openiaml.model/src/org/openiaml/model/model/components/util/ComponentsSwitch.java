@@ -24,6 +24,7 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 
 /**
@@ -136,6 +137,18 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ComponentsPackage.GATE: {
+				Gate gate = (Gate)theEObject;
+				T result = caseGate(gate);
+				if (result == null) result = caseNamedElement(gate);
+				if (result == null) result = caseWireEdgesSource(gate);
+				if (result == null) result = caseWireEdgeDestination(gate);
+				if (result == null) result = caseGeneratedElement(gate);
+				if (result == null) result = caseShouldntContainWires(gate);
+				if (result == null) result = caseContainsWires(gate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -167,6 +180,21 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseAccessControlHandler(AccessControlHandler object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Gate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Gate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGate(Gate object) {
 		return null;
 	}
 

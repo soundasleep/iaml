@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Visual"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2019,2020,2040"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2019,2020,2040,2041"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004,4005,4007,4009,4010,4011,4012"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Visual"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2019,2020,2040"/>
+            <method name="getType()" value="2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2019,2020,2040,2041"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003,4004,4005,4007,4009,4010,4011,4012"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5037,5038,5039,5040,5041,5042,5043,5044,5045,5046,5047,5048,5049,5050,5051,5052,5053,5054,5055,5056,5057,5058,5059,5060,5061,5062,5063,5064,5065,5066,5067,5068,5033,5034,5069,5070"/>
+            <method name="getType()" value="5037,5038,5039,5040,5041,5042,5043,5044,5045,5046,5047,5048,5049,5050,5051,5052,5053,5054,5055,5056,5057,5058,5059,5060,5061,5062,5063,5064,5065,5066,5067,5068,5033,5034,5069,5070,5071,5072"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -284,7 +284,8 @@
          <object class="org.openiaml.model.diagram.visual.edit.parts.PermissionEditPart" id="Permission_2019"/>
          <object class="org.openiaml.model.diagram.visual.edit.parts.RoleEditPart" id="Role_2020"/>
          <object class="org.openiaml.model.diagram.visual.edit.parts.UserInstanceEditPart" id="UserInstance_2040"/>
-         <context elements="VisibleThing_1000,EventTrigger_2022,CompositeOperation_2023,PrimitiveOperation_2024,DomainObject_2025,DomainAttribute_2026,ApplicationElementProperty_2027,Page_2028,InputForm_2029,InputTextField_2030,StaticValue_2031,Session_2032,LoginHandler_2033,CompositeCondition_2034,DomainObjectInstance_2035,DomainAttributeInstance_2036,Button_2037,QueryParameter_2038,AccessControlHandler_2039,Permission_2019,Role_2020,UserInstance_2040"/>
+         <object class="org.openiaml.model.diagram.visual.edit.parts.GateEditPart" id="Gate_2041"/>
+         <context elements="VisibleThing_1000,EventTrigger_2022,CompositeOperation_2023,PrimitiveOperation_2024,DomainObject_2025,DomainAttribute_2026,ApplicationElementProperty_2027,Page_2028,InputForm_2029,InputTextField_2030,StaticValue_2031,Session_2032,LoginHandler_2033,CompositeCondition_2034,DomainObjectInstance_2035,DomainAttributeInstance_2036,Button_2037,QueryParameter_2038,AccessControlHandler_2039,Permission_2019,Role_2020,UserInstance_2040,Gate_2041"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -307,7 +308,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.visual.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2019,2020,2040"/>
+            <method name="getType()" value="2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2019,2020,2040,2041"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -535,6 +536,16 @@
             <param name="semanticHint" value="2040"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/components">
+         <metamodelType
+               id="org.openiaml.model.diagram.visual.Gate_2041"
+               name="%metatype.name.Gate_2041"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Gate"
+               edithelper="org.openiaml.model.diagram.visual.edit.helpers.GateEditHelper">
+            <param name="semanticHint" value="2041"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_4001"
@@ -669,6 +680,7 @@
          <elementType ref="org.openiaml.model.diagram.visual.Permission_2019"/>
          <elementType ref="org.openiaml.model.diagram.visual.Role_2020"/>
          <elementType ref="org.openiaml.model.diagram.visual.UserInstance_2040"/>
+         <elementType ref="org.openiaml.model.diagram.visual.Gate_2041"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterWire_4003"/>

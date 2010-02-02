@@ -1551,6 +1551,45 @@
       <accessors
           figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="GateFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="GateFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="159"
+            green="187"
+            blue="211"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="GateNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="GateParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.58/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.58/@actualFigure/@children.1"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1669,6 +1708,9 @@
   <nodes
       name="Arithmetic"
       figure="ArithmeticFigure"/>
+  <nodes
+      name="Gate"
+      figure="GateFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2044,4 +2086,13 @@
       figure="ExecutionEdgeFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.14/@accessors.0"/>
+  <labels
+      name="GateName"
+      figure="GateFigure"
+      accessor="//@figures.0/@descriptors.58/@accessors.0"/>
+  <labels
+      name="GateParentName"
+      figure="GateFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.58/@accessors.1"/>
 </gmfgraph:Canvas>

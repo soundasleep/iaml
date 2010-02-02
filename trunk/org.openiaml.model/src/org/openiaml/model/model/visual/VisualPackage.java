@@ -232,13 +232,22 @@ public interface VisualPackage extends EPackage {
 	int PAGE__PARAMETERS = ModelPackage.VISIBLE_THING__PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Gate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__GATE = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE__URL = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+	int PAGE__URL = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Page</em>' class.
@@ -247,7 +256,7 @@ public interface VisualPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 1;
+	int PAGE_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.visual.impl.InputFormImpl <em>Input Form</em>}' class.

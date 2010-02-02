@@ -7,8 +7,13 @@
 package org.openiaml.model.model.visual.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Scope;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.impl.VisibleThingImpl;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
@@ -20,6 +25,7 @@ import org.openiaml.model.model.visual.VisualPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.openiaml.model.model.visual.impl.PageImpl#getGate <em>Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.visual.impl.PageImpl#getUrl <em>Url</em>}</li>
  * </ul>
  * </p>
@@ -27,6 +33,16 @@ import org.openiaml.model.model.visual.VisualPackage;
  * @generated
  */
 public class PageImpl extends VisibleThingImpl implements Page {
+	/**
+	 * The cached value of the '{@link #getGate() <em>Gate</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Gate gate;
+
 	/**
 	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -71,6 +87,49 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Gate getGate() {
+		return gate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetGate(Gate newGate, NotificationChain msgs) {
+		Gate oldGate = gate;
+		gate = newGate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VisualPackage.PAGE__GATE, oldGate, newGate);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGate(Gate newGate) {
+		if (newGate != gate) {
+			NotificationChain msgs = null;
+			if (gate != null)
+				msgs = ((InternalEObject)gate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VisualPackage.PAGE__GATE, null, msgs);
+			if (newGate != null)
+				msgs = ((InternalEObject)newGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VisualPackage.PAGE__GATE, null, msgs);
+			msgs = basicSetGate(newGate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VisualPackage.PAGE__GATE, newGate, newGate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getUrl() {
 		return url;
 	}
@@ -93,8 +152,24 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case VisualPackage.PAGE__GATE:
+				return basicSetGate(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case VisualPackage.PAGE__GATE:
+				return getGate();
 			case VisualPackage.PAGE__URL:
 				return getUrl();
 		}
@@ -109,6 +184,9 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case VisualPackage.PAGE__GATE:
+				setGate((Gate)newValue);
+				return;
 			case VisualPackage.PAGE__URL:
 				setUrl((String)newValue);
 				return;
@@ -124,6 +202,9 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case VisualPackage.PAGE__GATE:
+				setGate((Gate)null);
+				return;
 			case VisualPackage.PAGE__URL:
 				setUrl(URL_EDEFAULT);
 				return;
@@ -139,10 +220,44 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case VisualPackage.PAGE__GATE:
+				return gate != null;
 			case VisualPackage.PAGE__URL:
 				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Scope.class) {
+			switch (derivedFeatureID) {
+				case VisualPackage.PAGE__GATE: return ModelPackage.SCOPE__GATE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Scope.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.SCOPE__GATE: return VisualPackage.PAGE__GATE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

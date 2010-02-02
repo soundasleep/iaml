@@ -18,6 +18,7 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 
@@ -67,6 +68,7 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 		switch (eClass.getClassifierID()) {
 			case ComponentsPackage.LOGIN_HANDLER: return createLoginHandler();
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER: return createAccessControlHandler();
+			case ComponentsPackage.GATE: return createGate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -122,6 +124,16 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 		AccessControlHandlerImpl accessControlHandler = new AccessControlHandlerImpl();
 		generateID(accessControlHandler);
 		return accessControlHandler;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Gate createGate() {
+		GateImpl gate = new GateImpl();
+		return gate;
 	}
 
 	/**

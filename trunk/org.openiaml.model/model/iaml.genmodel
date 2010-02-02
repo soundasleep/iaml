@@ -121,7 +121,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainObjectInstance/strQuery"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainObjectInstance/autosave"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//Scope"/>
+    <genClasses image="false" ecoreClass="iaml.ecore#//Scope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/gate"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Condition"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeCondition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/nodes"/>
@@ -229,6 +231,7 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//components/LoginHandler/type"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//components/AccessControlHandler"/>
+      <genClasses ecoreClass="iaml.ecore#//components/Gate"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Domain" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//domain">

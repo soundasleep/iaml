@@ -1659,13 +1659,22 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_OPERATION__OVERRIDDEN = PRIMITIVE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Gate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__GATE = PRIMITIVE_OPERATION_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__CONDITIONS = PRIMITIVE_OPERATION_FEATURE_COUNT + 3;
+	int COMPOSITE_OPERATION__CONDITIONS = PRIMITIVE_OPERATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -1674,7 +1683,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__NODES = PRIMITIVE_OPERATION_FEATURE_COUNT + 4;
+	int COMPOSITE_OPERATION__NODES = PRIMITIVE_OPERATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Data Edges</b></em>' containment reference list.
@@ -1683,7 +1692,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__DATA_EDGES = PRIMITIVE_OPERATION_FEATURE_COUNT + 5;
+	int COMPOSITE_OPERATION__DATA_EDGES = PRIMITIVE_OPERATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Execution Edges</b></em>' containment reference list.
@@ -1692,7 +1701,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__EXECUTION_EDGES = PRIMITIVE_OPERATION_FEATURE_COUNT + 6;
+	int COMPOSITE_OPERATION__EXECUTION_EDGES = PRIMITIVE_OPERATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -1701,7 +1710,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__VARIABLES = PRIMITIVE_OPERATION_FEATURE_COUNT + 7;
+	int COMPOSITE_OPERATION__VARIABLES = PRIMITIVE_OPERATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1710,7 +1719,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION__VALUES = PRIMITIVE_OPERATION_FEATURE_COUNT + 8;
+	int COMPOSITE_OPERATION__VALUES = PRIMITIVE_OPERATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Composite Operation</em>' class.
@@ -1719,7 +1728,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_OPERATION_FEATURE_COUNT = PRIMITIVE_OPERATION_FEATURE_COUNT + 9;
+	int COMPOSITE_OPERATION_FEATURE_COUNT = PRIMITIVE_OPERATION_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -2334,13 +2343,22 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Gate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__GATE = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int INTERNET_APPLICATION__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -2349,7 +2367,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2358,7 +2376,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Domain Stores</b></em>' containment reference list.
@@ -2367,7 +2385,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Runtime Url</b></em>' attribute.
@@ -2376,7 +2394,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
+	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Sessions</b></em>' containment reference list.
@@ -2385,7 +2403,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__SESSIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
+	int INTERNET_APPLICATION__SESSIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
@@ -2394,7 +2412,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3312,13 +3330,31 @@ public interface ModelPackage extends EPackage {
 	int SCOPE__OVERRIDDEN = GENERATES_ELEMENTS__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__WIRES = GENERATES_ELEMENTS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Gate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 0;
+	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 2;
 
 
 	/**
@@ -4809,6 +4845,17 @@ public interface ModelPackage extends EPackage {
 	EClass getScope();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Scope#getGate <em>Gate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Gate</em>'.
+	 * @see org.openiaml.model.model.Scope#getGate()
+	 * @see #getScope()
+	 * @generated
+	 */
+	EReference getScope_Gate();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.Condition <em>Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5746,6 +5793,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCOPE = eINSTANCE.getScope();
+
+		/**
+		 * The meta object literal for the '<em><b>Gate</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPE__GATE = eINSTANCE.getScope_Gate();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ConditionImpl <em>Condition</em>}' class.

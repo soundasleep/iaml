@@ -34,6 +34,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
@@ -100,6 +101,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.CONDITIONAL_EDGE: return createConditionalEdge();
 			case ModelPackage.DYNAMIC_APPLICATION_ELEMENT_SET: return createDynamicApplicationElementSet();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE: return createDomainObjectInstance();
+			case ModelPackage.SCOPE: return createScope();
 			case ModelPackage.COMPOSITE_CONDITION: return createCompositeCondition();
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE: return createDomainAttributeInstance();
 			case ModelPackage.QUERY_PARAMETER: return createQueryParameter();
@@ -304,6 +306,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		DomainObjectInstanceImpl domainObjectInstance = new DomainObjectInstanceImpl();
 		generateID(domainObjectInstance);
 		return domainObjectInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Scope createScope() {
+		ScopeImpl scope = new ScopeImpl();
+		return scope;
 	}
 
 	/**

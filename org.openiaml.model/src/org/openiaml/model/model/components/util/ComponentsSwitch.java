@@ -143,6 +143,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseNamedElement(gate);
 				if (result == null) result = caseWireEdgesSource(gate);
 				if (result == null) result = caseWireEdgeDestination(gate);
+				if (result == null) result = caseGeneratesElements(gate);
 				if (result == null) result = caseGeneratedElement(gate);
 				if (result == null) result = caseShouldntContainWires(gate);
 				if (result == null) result = caseContainsWires(gate);

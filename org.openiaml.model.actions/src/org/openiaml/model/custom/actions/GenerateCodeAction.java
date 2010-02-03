@@ -1,8 +1,5 @@
 package org.openiaml.model.custom.actions;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -160,29 +157,7 @@ public class GenerateCodeAction extends IamlFileAction {
 		
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-		
-		// output the temporary changed model to an external file
-		// so we can do code generation
-		IFile tempFile = null;
-		for (int i = 0; i < 1000; i++) {
-			tempFile = o.getProject().getFile("temp-iaml-gen" + i + ".iaml");
-			if (!tempFile.exists()) {
-				break;
-			}
-		}
 
-		if (tempFile == null || tempFile.exists()) {
-			return new Status(Status.ERROR, PLUGIN_ID, "Could not create temporary file.");
-		}
-		
-		// create a temporary file to output to
-		File tempJavaFile = File.createTempFile("temp-iaml", ".iaml");
-		Map<?,?> options = resourceSet.getLoadOptions();
-		resource.save(new FileOutputStream(tempJavaFile), options);
-		
-		// now load it in as an IFile
-		tempFile.create(new FileInputStream(tempJavaFile), true, new SubProgressMonitor(monitor, 5));
-		
 		// does a properties file exist?
 		// (used to define the location of runtime libraries)
 		IFile properties = null;
@@ -204,16 +179,11 @@ public class GenerateCodeAction extends IamlFileAction {
 
 		// create code generator instance
 		ICodeGenerator codegen = new OawCodeGeneratorWithRuntime();
-		IStatus status = codegen.generateCode(tempFile, new SubProgressMonitor(monitor, 50), runtimeProperties);
+		IStatus status = codegen.generateCode(model, o.getProject(), new SubProgressMonitor(monitor, 50), runtimeProperties);
 
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 
-		// now delete the generated model file
-		// TODO this would probably go well in a finally block
-		tempFile.delete(false, monitor);
-		tempJavaFile.delete();
-		
 		// finished
 		monitor.done();
 		

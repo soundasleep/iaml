@@ -5,9 +5,10 @@ package org.openiaml.model.codegen;
 
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * Defines an interface for a code generator.
@@ -19,7 +20,7 @@ public interface ICodeGenerator {
 
 	/**
 	 * <p>
-	 * Generate code for a certain model file into a certain output directory.
+	 * Generate code for a certain model into a certain output directory.
 	 * </p>
 	 * 
 	 * <p>
@@ -32,11 +33,13 @@ public interface ICodeGenerator {
 	 * </ul>
 	 * </p> 
 	 * 
-	 * @param modelFile
+	 * @param model the (already loaded) model in memory
+	 * @param srcGen project to generate into (and refresh after generation)
 	 * @param outputDir
 	 * @param runtimeProperties a map of properties.
 	 */
-	public IStatus generateCode(IFile modelFile, 
+	public IStatus generateCode(EObject model,
+			IProject srcGen,
 			IProgressMonitor monitor,
 			Map<String,String> runtimeProperties);
 	

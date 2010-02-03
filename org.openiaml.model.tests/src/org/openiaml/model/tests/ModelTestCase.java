@@ -36,7 +36,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.openiaml.model.codegen.ICodeGenerator;
+import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.codegen.ICodeGeneratorInMemory;
 import org.openiaml.model.codegen.php.CustomOAWLog;
 import org.openiaml.model.codegen.php.IACleanerBeautifier;
 import org.openiaml.model.codegen.php.OawCodeGeneratorWithRuntime;
@@ -197,7 +198,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @param inputFile
 	 * @throws Throwable if it did not succeed
 	 */
-	protected void doTransform(Class<?> cacheClass, String inputFile) throws Exception {
+	protected void doTransform(Class<?> cacheClass, EObject model) throws Exception {
 		if (codegenCache.containsKey(cacheClass) && projectCache.containsKey(cacheClass)) {
 			logTimed("codegen: loading from cache");
 			
@@ -207,7 +208,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		} else {
 			// codegen manually
 			logTimed("codegen: doing actual codegen");
-			doTransformActual(inputFile);
+			doTransformActual(model);
 			
 			// update cache
 			logTimed("codegen: updating cache");
@@ -270,8 +271,8 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @param inputFile
 	 * @throws Throwable if it did not succeed
 	 */
-	protected void doTransformActual(String inputFile) throws Exception {
-		transformStatus = doTransform(inputFile, getProjectName(), monitor);
+	protected void doTransformActual(EObject model) throws Exception {
+		transformStatus = doTransform(model, getProject(), monitor);
 		if (!transformStatus.isOK()) {
 			String firstMessage = null;
 			for (IStatus s : transformStatus.getChildren()) {
@@ -295,33 +296,12 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * Transform a model file into some code generated output. This currently contains the logic on
 	 * which code generation solution to use.
 	 */
-	protected IStatus doTransform(String filename, String outputDir, IProgressMonitor monitor) throws IOException, URISyntaxException, CoreException {
+	protected IStatus doTransform(EObject model, IProject project, IProgressMonitor monitor) throws IOException, URISyntaxException, CoreException {
 		// which transform to use?
 		// return doTransformJET(filename, outputDir, monitor);
-		return doTransformOAW(filename, outputDir, monitor);
+		return doTransformOAWWorkflow(model, project, monitor);
 	}
 	
-	/**
-	 * Set up transformation for openArchitectureWare. In particular, copies the model file from the
-	 * development platform to the runtime platform, because we cannot refer to models
-	 * external to the runtime platform (all model inputs are prefixed with 'platform:/resource/').
-	 */
-	protected IStatus doTransformOAW(String filename, String outputDir, IProgressMonitor monitor) throws FileNotFoundException, CoreException {
-		// we can't use platform:/ resource, because we are trying to refer to a resource
-		// that doesn't exist in this platform.
-		// so we need to copy it to our local platform and execute it from there
-		String tempName = "temp.iaml";
-		IFile file = project.getFile(tempName);		// create file in the project
-		
-		FileInputStream fis = new FileInputStream(filename);
-		file.create(fis, true, monitor);		// copy file
-		
-		assertTrue(file.exists());		// file should now exist
-		
-		// now we can do the transform
-		return doTransformOAWWorkflow(file, monitor);
-	}
-
 	public class HaltProgressMonitor extends NullProgressMonitor {
 		@Override
 		public void setCanceled(boolean cancelled) {
@@ -398,7 +378,8 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * 
 	 * TODO refactor into CodegenTestCase
 	 */
-	protected IStatus doTransformOAWWorkflow(IFile filename,
+	protected IStatus doTransformOAWWorkflow(EObject model, 
+			IProject project,
 			IProgressMonitor monitor) throws CoreException {
 		
 		// enable tracing cache
@@ -411,8 +392,8 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 			// create some properties
 			Map<String,String> runtimeProperties = getRuntimeProperties();
 			
-			ICodeGenerator runner = new OawCodeGeneratorWithRuntime();
-			IStatus status = runner.generateCode(filename, monitor, runtimeProperties);
+			ICodeGeneratorInMemory runner = new OawCodeGeneratorWithRuntime();
+			IStatus status = runner.generateCode(model, project, monitor, runtimeProperties);
 			
 			if (!status.isOK()) {
 				// bail early

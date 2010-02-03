@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -22,6 +23,7 @@ import org.jaxen.JaxenException;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
 import org.openiaml.model.codegen.ICodeGenerator;
+import org.openiaml.model.codegen.ICodeGeneratorInMemory;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
@@ -33,7 +35,7 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  * @author jmwright
  *
  */
-public class OawCodeGenerator implements ICodeGenerator {
+public class OawCodeGenerator implements ICodeGenerator, ICodeGeneratorInMemory {
 	
 	public static final String PLUGIN_ID = "org.openiaml.model.codegen.php"; 
 	
@@ -152,6 +154,17 @@ public class OawCodeGenerator implements ICodeGenerator {
 	}
 
 	/**
+	 * Returns '100'.
+	 * 
+	 * @see #guessNumberOfFilesToCreate(IFile)
+	 * @param model
+	 * @return
+	 */
+	protected int guessNumberOfFilesToCreate(EObject model) {
+		return 100;
+	}
+
+	/**
 	 * <p>
 	 * Construct a RuntimeException with the given message, and throw it.
 	 * Useful in templates, as we can get a stack trace to problems, rather
@@ -265,5 +278,94 @@ public class OawCodeGenerator implements ICodeGenerator {
 		// TODO make into a real Exception
 		throw new RuntimeException("Cannot resolve Dynamic Set for set query: " + set.getQuery() + " (set=" + set + ")");
 	}
+
+	/**
+	 * TODO this method is a direct copy of {@link #generateCode(IFile, IProgressMonitor, Map)}. 
+	 * 
+	 * @see org.openiaml.model.codegen.ICodeGeneratorInMemory#generateCode(org.eclipse.emf.ecore.EObject, org.eclipse.core.runtime.IProgressMonitor, java.util.Map)
+	 */
+	@Override
+	public IStatus generateCode(EObject model, IProject project, IProgressMonitor monitor,
+			Map<String, String> runtimeProperties) {
+			
+		// reset exception-key map
+		resetKeyToExceptionMap();
+		
+		// we need to guess how many files this method will create,
+		// so we can try and have some sort of progress monitor.
+		int filesToCreate = guessNumberOfFilesToCreate(model);
+		
+		monitor.beginTask("Generating code from in-memory model", filesToCreate * 2);
+		
+		/*
+		 * We have to do some magic to enable OAW logging to go through
+		 * our own class. We have to provide this information to 
+		 * commons.logging directly.
+		 * 
+		 * Based on http://oaw-forum.itemis.de/forum/viewtopic.php?forum=1&showtopic=1486 (german)
+		 */
+		ClassLoader oldcl = Thread.currentThread().getContextClassLoader();
+		
+		try {
+			// to enable custom logging
+			Thread.currentThread().setContextClassLoader(OawCodeGenerator.class.getClassLoader());
+			CustomOAWLog.registerToLogFactory();
+			
+			// notify the logger of our monitor, so we can keep track
+			// of created files
+			CustomOAWLog.setMonitor(monitor);
+			
+			String wfFile = "src/workflow/runtime-memory.oaw";
+			Map<String,String> properties = new HashMap<String,String>();
+			properties.put("src-gen", project.getLocation().toString());	// have to get absolute filename for output dir
+			properties.put("config_runtime", runtimeProperties.get("config_runtime"));
+			properties.put("config_web", runtimeProperties.get("config_web"));
+			properties.put("debug", Boolean.toString(Boolean.parseBoolean(runtimeProperties.get("debug"))));
+			
+			Map<String,Object> slotContents = new HashMap<String,Object>();
+
+			// load the model into the static slot
+			CurrentModel.setCurrentModel(model);
+			
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+
+			try {
+				IACleanerBeautifier.setMonitor(monitor);
+				executeWorkflow(wfFile, monitor, properties, slotContents);
+			} catch (OperationCanceledException e) {
+				// monitor was cancelled; OK
+			} finally {
+				IACleanerBeautifier.setMonitor(null);
+			}
+
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+
+			// refresh output folder
+			try {
+				project.refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, filesToCreate));
+			} catch (CoreException e) {
+				return new Status(Status.WARNING, PLUGIN_ID, "Could not refresh local project", e);
+			}
+			
+			if (CustomOAWLog.hasErrors()) {
+				return CustomOAWLog.getErrors();
+			}
+			return Status.OK_STATUS;
+		} finally {
+			// reset the classloader/log
+			Thread.currentThread().setContextClassLoader(oldcl);
+			CustomOAWLog.unregisterFromLogFactory();
+			
+			// remove the loaded model
+			CurrentModel.setCurrentModel(null);
+			
+			// the monitor is done
+			monitor.done();
+		}
+
+	}
+
 	
 }

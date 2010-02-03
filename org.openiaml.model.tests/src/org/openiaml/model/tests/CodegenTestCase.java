@@ -3,9 +3,6 @@
  */
 package org.openiaml.model.tests;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,8 +15,7 @@ import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.openiaml.model.codegen.php.CustomOAWLog;
-import org.openiaml.model.codegen.php.CustomOAWLog.LogExtender;
+import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.InternetApplication;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -67,7 +63,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	protected InternetApplication loadAndCodegen(Class<?> modelFile, boolean logRuleSource) throws Exception {
 		InternetApplication root = loadAndInfer(modelFile, logRuleSource);
-		doCodegen(modelFile);
+		doCodegen(modelFile, root);
 		return root;
 	}
 
@@ -94,7 +90,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	protected InternetApplication loadAndCodegen(Class<?> testClass, String modelFile, boolean logRuleSource) throws Exception {
 		InternetApplication root = loadAndInfer(modelFile, logRuleSource);
-		doCodegen(testClass);
+		doCodegen(testClass, root);
 		return root;
 	}
 	
@@ -103,9 +99,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * do code generation with {@link #doTransform(String)}.
 	 * @throws Exception 
 	 */
-	protected void doCodegen(Class<?> testClass) throws Exception {
-		// write out this inferred model for reference
-		String outModel = getInferredModel().getAbsolutePath();
+	protected void doCodegen(Class<?> testClass, EObject model) throws Exception {
 
 		if (!isSetup) {
 			// TODO remove this in the future
@@ -113,7 +107,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw new RuntimeException("This test case should have called setUp() already [this creates the project]");
 			// super.setUp();		// create project
 		}
-		doTransform(testClass, outModel);	// output to project
+		doTransform(testClass, model);	// output to project
 	}
 	
 	/**
@@ -446,6 +440,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param string
 	 */
 	public void gotoSitemapWithProblem(IFile sitemap, String pageText) throws Exception {
+		logTimed("web: gotoSitemapWithProblem");
+		
 		// we can't goto the sitemap if we haven't begun the session yet
 		// (sanity check)
 		if (!hasBegun)
@@ -477,6 +473,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageText + "'");
 		}
 
+		logTimed("web: gotoSitemapWithProblem complete");
 	}
 	
 	/**
@@ -519,7 +516,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @return
 	 */
 	protected String getLabelIDForText(String text) {
+		logTimed("internal: get label ID for text");
 		IElement element = getElementByXPath("//label[contains(normalize-space(text()), normalize-space('" + text + "'))]");
+		logTimed("internal: get label ID for text complete");
 		return element.getAttribute("id");
 	}
 	
@@ -534,7 +533,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @return
 	 */
 	protected String getLabelIDForText(String text, String notText) {
+		logTimed("internal: get label ID for text (2)");
 		IElement element = getElementByXPath("//label[contains(normalize-space(text()), normalize-space('" + text + "')) and not(contains(normalize-space(text()), normalize-space('" + notText + "')))]");
+		logTimed("internal: get label ID for text (2) complete");
 		return element.getAttribute("id");
 	}
 	
@@ -734,6 +735,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	@Override
 	public void clickLinkWithText(String linkText) {
+		logTimed("web: clicking link with text");
 		try {
 			super.clickLinkWithText(linkText);
 		} catch (FailingHttpStatusCodeException f) {
@@ -750,6 +752,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			}
 			throw e; 
 		}
+		logTimed("web: clicking link with text complete");
 	}
 	
 	/**
@@ -760,10 +763,12 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Also prints out the current source code.
 	 */
 	public void throwDebugInformation(Throwable e) {
+		logTimed("internal: throwing debug information");
 		// print out the source code
 		System.out.println(getTester().getPageSource());
 		System.out.println(getElementById("debug").getTextContent());
 		// throw out any response text too
+		logTimed("internal: throwing debug information complete");
 		throw new RuntimeException("Response = '" + getElementById("response").getTextContent() + "' Debug='" + getElementById("debug").getTextContent() + "'", e);
 		
 	}
@@ -773,6 +778,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	@Override
 	public void submit() {
+		logTimed("web: submitting form");
 		try {
 			waitForAjax(); // TODO remove this check; we shouldn't have to wait for ajax
 		} catch (Exception e) {
@@ -784,6 +790,14 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
+		logTimed("web: submit complete");
+	}
+	
+	@Override
+	public void setLabeledFormElementField(String id, String value) {
+		logTimed("web: set labeled form");
+		super.setLabeledFormElementField(id, value);
+		logTimed("web: set labeled form complete");
 	}
 	
 }

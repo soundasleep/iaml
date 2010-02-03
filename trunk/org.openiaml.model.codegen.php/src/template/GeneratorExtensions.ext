@@ -166,6 +166,10 @@ hasFailFlow(model::operations::DecisionOperation this) :
 	getFailFlows(this).size > 0; 
 hasPassFlow(model::operations::DecisionOperation this) :
 	getPassFlows(this).size > 0;
+hasFailFlow(model::operations::DecisionCondition this) :
+	getFailFlows(this).size > 0; 
+hasPassFlow(model::operations::DecisionCondition this) :
+	getPassFlows(this).size > 0;
 
 isFailFlow(model::ExecutionEdge e) :
 	e.name != null && (e.name.toLowerCase().startsWith("n") || e.name.toLowerCase().startsWith("f"));

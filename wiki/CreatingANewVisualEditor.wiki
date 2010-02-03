@@ -25,14 +25,14 @@ In this example, consider we are making a new editor "user_store", for UserStore
     * _Gen Diagram_
       * _Validation Decorators_ to "true"
       * _Validation Enabled_ to "true"
-      * _Contains Shortcuts To_ and _Shortcuts Provided For_ to all domain file extensions in the model (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/PluginsTestCase.java?r=1006&spec=svn1006#181 PluginsTestCase])
+      * _Contains Shortcuts To_ and _Shortcuts Provided For_ to all domain file extensions in the model (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/PluginsTestCase.java?r=1006&spec=svn1006#181 PluginsTestCase]) (automatically replaced)
     * _Gen Plugin_
       * _ID_ to "org.openiaml.model.diagram.user_store"
-      * _Name_ to "Iaml Plugin (User Store)"
+      * _Name_ to "Iaml Diagram Plugin (User Store)"
       * _Provider_ to "www.openiaml.org"
-      * _Version_ to the latest version (e.g. "0.3.1")
-    * You will still need to add _OpenDiagramBehaviors_ to any elements that require it (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/GmfGenTestCase.java?r=1006#329 GmfGenTestCase])
+      * _Version_ to the latest version (e.g. "0.3.1") (automatically replaced)
+    * You will still need to add _OpenDiagramBehaviors_ to any elements that require it (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/GmfGenTestCase.java?r=1006#329 GmfGenTestCase]) (automatically replaced)
   # Add the new plugin to the release test cases:
     * [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/PluginsTestCase.java?r=1006&spec=svn1006#30 PluginsTestCase.GMFGENS]
     * [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/PluginsTestCase.java?r=1006&spec=svn1006#47 PluginsTestCase.PLUGINS]
-  # Generate the plug-in code and execute the Release test cases
+  # Generate the plug-in code and execute the Release test cases twice (once to replace broken values; a second time to test)

@@ -90,6 +90,7 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 				throw new RuntimeException("Could not insert an element '" + elementType.getName() + "' into feature '" + feature.getName() + "' of " + feature.getEContainingClass().getName() + ": " + e, e);
 			}
 		} else {
+			// TODO what if containerFeature is not many?
 			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + feature);
 		}
 
@@ -134,6 +135,7 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 				throw new RuntimeException("Could not insert a relationship '" + elementType.getName() + "' into container feature '" + containerFeature.getName() + "' of " + containerFeature.getEContainingClass().getName() + ": " + e, e);
 			}
 		} else {
+			// TODO what if containerFeature is not many?
 			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + containerFeature);
 		}
 
@@ -168,11 +170,23 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 		List<EStructuralFeature> containedFeature = new ArrayList<EStructuralFeature>();
 		
 		for (EReference containment : object.eClass().getEAllContainments()) {
-			EList<EObject> contains = (EList<EObject>) object.eGet(containment);
-			for (EObject c : contains) {
-				containedElement.add(c);
-				containedContainer.add(object);
-				containedFeature.add(containment);
+			if (!containment.isMany()) {
+				// if the containment is singular, then eGet may return null if the reference is empty 
+				Object c = object.eGet(containment);
+				if (c != null && c instanceof EObject) {				
+					containedElement.add((EObject) c);
+					containedContainer.add(object);
+					containedFeature.add(containment);
+				}
+			} else {
+				List<?> contains = (List<?>) object.eGet(containment);
+				for (Object c : contains) {
+					if (c instanceof EObject) {
+						containedElement.add((EObject) c);
+						containedContainer.add(object);
+						containedFeature.add(containment);
+					}
+				}
 			}
 		}
 		
@@ -181,8 +195,9 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 			deleteElement(containedElement.get(i), containedContainer.get(i), containedFeature.get(i));
 		}
 		
+		// TODO what if containerFeature is not many?
 		if (containerFeature.isMany()) {
-			// assume feature is list: http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
+			// may assume feature is list: http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
 			EList<Object> containerList = (EList<Object>) container.eGet(containerFeature, false);
 			
 			if (!containerList.contains(object)) {

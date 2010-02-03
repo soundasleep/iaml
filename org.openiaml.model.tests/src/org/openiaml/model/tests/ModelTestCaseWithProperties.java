@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.tests.ModelInferenceTestCase.IModelReloader;
 
 /**
  * <p>Extends {@link ModelTestCase} to also check for EMF properties on the

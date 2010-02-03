@@ -1,5 +1,5 @@
 #created on: 4/11/2008
-package org.openiaml.model.drools.rules.login_handler
+package org.openiaml.model.drools.rules.gate
 
 #list any import classes here.
 import org.openiaml.model.drools.*;
@@ -52,7 +52,7 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 
 end
 
-rule "Create '<gate> flag' property when Gate is connected by 'first'"
+rule "Create '(gate) flag' property when Gate is connected by 'first'"
 	when
 		session : Session ( )
 		gate : Gate ( eContainer == session )
@@ -144,7 +144,7 @@ rule "Create contents of 'set flag' operation"
 
 end
 
-rule "Create condition 'check <gate>'"
+rule "Create condition 'check (gate)'"
 	when
 		session : Session ( )
 		gate : Gate ( eContainer == session )
@@ -159,7 +159,7 @@ rule "Create condition 'check <gate>'"
 
 end
 
-rule "Connect condition 'check <gate>' with gate"
+rule "Connect condition 'check (gate)' with gate"
 	when
 		session : Session ( )
 		gate : Gate ( eContainer == session )
@@ -176,7 +176,7 @@ rule "Connect condition 'check <gate>' with gate"
 
 end
 
-rule "Create contents of 'check <gate>' condition"
+rule "Create contents of 'check (gate)' condition"
 	when
 		session : Session ( )
 		gate : Gate ( eContainer == session )

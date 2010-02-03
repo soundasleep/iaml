@@ -252,6 +252,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @throws Exception
 	 */
 	protected InternetApplication infer(InternetApplication root, boolean logRuleSource, IModelReloader reloader) throws Exception {
+		
 		// we now try to do inference
 		Resource resource = root.eResource();
 		assertNotNull(resource);
@@ -281,6 +282,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 */
 	protected InternetApplication loadAndInfer(final Class<?> loadClass, final boolean logRuleSource) throws Exception {
 		if (!inferCache.containsKey(loadClass)) {
+			logTimed("infer: loading model");
+			
 			// reload
 			InternetApplication root = loadDirectly(loadClass, logRuleSource);
 			
@@ -301,17 +304,22 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 				}
 				
 			});
+
+			logTimed("infer: performing inference");
 			ce.create(root, logRuleSource, monitor);
 	
 			// write out this inferred model for reference
+			logTimed("infer: writing out inferred model");
 			inferredModel = saveInferredModel(resource);
 			
 			// put this model down in the cache
+			logTimed("infer: saving to cache");
 			inferCache.put(loadClass, inferredModel);
 			
 			// save a copy in the model cache
 			modelCache.put(loadClass, root);
 			
+			logTimed("infer: inference complete");
 			return root;
 		} else {
 			// load it from the given file - it will be inferred already
@@ -352,12 +360,17 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * Assumes that it will only contain one element (and tests this with JUnit).
 	 */
 	protected static EObject loadModelDirectly(String filename) {
+		logTimed("emf: loading model");
+		
 		ResourceSet resourceSet = new ResourceSetImpl();
 		URI uri = URI.createFileURI(filename);
 		Resource resource = resourceSet.getResource(uri, true);
 		assertNotNull(resource);
 		assertEquals("there should only be one contents in the model file", 1, resource.getContents().size());
-		return resource.getContents().get(0);
+		EObject model = resource.getContents().get(0);
+		
+		logTimed("emf: after loading model");
+		return model;
 	}
 
 	/**

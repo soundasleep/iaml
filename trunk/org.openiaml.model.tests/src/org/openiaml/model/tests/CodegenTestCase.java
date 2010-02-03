@@ -3,6 +3,9 @@
  */
 package org.openiaml.model.tests;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,6 +18,8 @@ import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.openiaml.model.codegen.php.CustomOAWLog;
+import org.openiaml.model.codegen.php.CustomOAWLog.LogExtender;
 import org.openiaml.model.model.InternetApplication;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -116,6 +121,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+		logTimed("web: navigation complete");
+		
 		// remove reference to InternetApplication
 		if (root != null) {
 			root = null;
@@ -136,10 +143,13 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected void waitForAjax() throws Exception {
+		logTimed("web: waiting for ajax");
+		
 		// sleep a little bit first, so ajax calls can continue
 		if (hasLoaded) {
 			if (!hasElementById("ajax_monitor")) {
 				// can't find it (perhaps it wasn't generated on this page); bail
+				logTimed("web: ajax monitor wasn't loaded");
 				return;
 			} else {
 				int cycles = 0;
@@ -164,6 +174,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 				
 			}
 		}
+		
+		logTimed("web: ajax wait complete");
 		
 	}
 	
@@ -331,6 +343,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param query query string to append to the end of the destination, or null if none
 	 */ 
 	public void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle, String query) throws Exception {
+		logTimed("web: beginAtSitemapThenPage");
 		waitForAjax();
 
 		beginAt(sitemap.getProjectRelativePath().toString());
@@ -356,6 +369,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
 			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageTitle + "'");
 		}
+		
+		logTimed("web: beginAtSitemapThenPage complete");
 	}
 
 	/**
@@ -387,6 +402,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param expected the expected page title on the new page, if different from the page text link
 	 */ 
 	protected void gotoSitemapThenPage(IFile sitemap, String pageText, String expectedTitle) throws Exception {
+		logTimed("web: gotoSitemapThenPage");
+		
 		// we can't goto the sitemap if we haven't begun the session yet
 		// (sanity check)
 		if (!hasBegun)
@@ -418,6 +435,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageText + "'");
 		}
 
+		logTimed("web: gotoSitemapThenPage complete");
 	}
 
 	/**

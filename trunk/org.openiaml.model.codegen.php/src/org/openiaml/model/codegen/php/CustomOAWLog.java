@@ -148,6 +148,35 @@ public class CustomOAWLog extends SimpleLog implements Log, Serializable {
 			// a new file is being created
 			monitor.subTask("Creating file " + file + "...");			
 		}
+		
+		// extended?
+		if (extended != null) {
+			extended.log(type, message, t);
+		}
+	}
+	
+	/**
+	 * Allows the CustomOAWLog to be extended. 
+	 * 
+	 * @author jmwright
+	 * @see #registerLogExtender()
+	 */
+	public static interface LogExtender {
+		/**
+		 * Log the given message.
+		 */
+		public void log(int type, Object message, Throwable t);
+	}
+	
+	private static LogExtender extended = null;
+	
+	/**
+	 * Allows the custom OAW log to be extended.
+	 * 
+	 * @param extended
+	 */
+	public static void setLogExtender(LogExtender extended) {
+		CustomOAWLog.extended = extended;
 	}
 
 	/**

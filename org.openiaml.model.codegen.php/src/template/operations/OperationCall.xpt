@@ -124,7 +124,7 @@
 		if ($resume != CURRENT_PAGE) {
 			// navigate to another page
 			$url = "$resume.php";
-			log_message("Resuming to '$url'");
+			log_message("[resume] Resuming to '$url'");
 			header("Location: $url");
 			die;
 		}
@@ -140,7 +140,7 @@
 			
 			echo $resume;
 		?>.php";
-		debug("Resuming to '" + url + "'");
+		debug("[resume] Resuming to '" + url + "'");
 		window.location = url;
 		ajaxIncrement();	// prevent other events from executing		
 	«ENDIF»
@@ -155,14 +155,14 @@
 		if ("«id-»" != CURRENT_PAGE) {
 			// navigate to another page
 			$url = "«safeName()».php";
-			log_message("Redirecting to '$url'");
+			log_message("[redirect] Redirecting to '$url'");
 			header("Location: $url");
 			die;
 		}
 	«ELSE»
 		// navigating to a new page
 		var url = "«safeName()».php";
-		debug("Redirecting to '" + url + "'");
+		debug("[redirect] Redirecting to '" + url + "'");
 		window.location = url;
 		ajaxIncrement();	// prevent other events from executing
 	«ENDIF»

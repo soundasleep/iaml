@@ -395,14 +395,14 @@
 			«ENDIF»
 				// navigate to another page
 				$url = "«safeName(to)».php";
-				log_message("Redirecting to '$url'");
+				log_message("[redirect] Redirecting to '$url'");
 				header("Location: $url");
 				die;
 			}
 		«ELSE»
 			// navigate to another page
 			var url = "«safeName(to)».php";
-			debug("Redirecting to '" + url + "'");
+			debug("[redirect] Redirecting to '" + url + "'");
 			window.location = url;
 			ajaxIncrement();	// prevent other events from executing
 		«ENDIF»

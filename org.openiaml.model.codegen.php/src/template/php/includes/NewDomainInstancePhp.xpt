@@ -44,7 +44,7 @@ try {
 } catch (IamlRuntimeException $e) {
 	// redirect to the exception page
 	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
-	log_message(print_r($e, true));
+	log_message("[exception] " . print_r($e, true));
 	log_message("[update exception handler] Redirecting to '$url' (fail)");
 
 	log_message("redirect " 

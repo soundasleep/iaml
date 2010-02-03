@@ -238,7 +238,8 @@
 
 	/* Does the DomainObjectInstance '«id»' exist? */
 	function exists_object_instance_«safeName()»() {
-		return get_object_instance_«safeName()»(0) !== 0;
+		/* return get_object_instance_«safeName()»(0) !== 0; */
+		return has_object_instance_«safeName()»();
 	}
 
 	«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»

@@ -114,7 +114,7 @@ for ($i = 0; $i < count($log); $i++) {
 		$pos = strpos($key, "]");
 		$message = substr($key, $pos + 1);
 		$key = substr($key, 0, $pos);
-		$keys[$key] = true;
+		$found_keys[$key] = true;
 	}
 
   $formatted = format_message($message);
@@ -157,7 +157,7 @@ function toggle_display(key) {
 
 <ul id="toggle_display">
 <?php
-foreach ($keys as $key => $found) { ?>
+foreach ($found_keys as $key => $found) { ?>
 	<li><a onClick="toggle_display('<?php echo $key; ?>')"><?php echo $key; ?></li>
 <?php } ?>
 </ul>

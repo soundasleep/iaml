@@ -33,9 +33,9 @@
 	«IF name == "equal?"-»
 		«REM»check all inflow targets are identical«ENDREM»
 		«IF php»
-			«EXPAND equalDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR " == "»
+			«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR " == "»
 		«ELSE»
-			is_array_equal(new Array(«EXPAND equalDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR ", "»))
+			is_array_equal(new Array(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ", "»))
 		«ENDIF»
 	«ELSEIF name == "true?"-»
 		«REM»check all inflow targets are identical«ENDREM»
@@ -48,6 +48,41 @@
 		«REM»??? who knows«ENDREM»
 		«EXPAND exception FOR throwException("Unknown decision operation to expand '" + name + ": " + this)»
 	«ENDIF»
+	) {
+		// passes
+		«IF hasPassFlow(this)»
+			«FOREACH getPassFlows() AS e-»
+				«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+			«ENDFOREACH»
+		«ELSE»
+			// no pass flow
+		«ENDIF»
+	} else {
+		// fails
+		«IF hasFailFlow(this)»
+			«FOREACH getFailFlows() AS e-»
+				«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+			«ENDFOREACH»
+		«ELSE»
+			// no fail flow
+		«ENDIF»
+	}
+«ENDDEFINE»
+
+/* primitive DecisionConditions */
+«DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::DecisionCondition-»
+	«REM»compare operations«ENDREM»
+	if (
+		«IF name=="xpathMatch"»
+			xpathMatch(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ","»)
+		«ELSEIF name=="emailAddress"»
+			emailAddressMatch(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ","»)
+		«ELSEIF name=="is set?"»
+			«EXPAND DataFlow::isSet(php, container) FOREACH inFlows.from SEPARATOR " && "»
+		«ELSE»
+			«REM»unknown condition«ENDREM»
+			«EXPAND exception FOR throwException("Unknown DecisionCondition '" + name + "': " + this)»
+		«ENDIF»
 	) {
 		// passes
 		«IF hasPassFlow(this)»
@@ -110,13 +145,10 @@
  * Specific operation templates.
  */
  
-/**
- * Get all the inflows for a DecisionOperation[equal], which are
- * then compared for equality.
- */
-«DEFINE equalDecisionOperationSource(Boolean php, model::visual::Page container) FOR model::DataFlowEdge-»
+«DEFINE getDataValue(Boolean php, model::visual::Page container) FOR model::DataFlowEdge-»
 	«EXPAND DataFlow::dataSource(php, container) FOR from-»
 «ENDDEFINE»
+
 
 /**
  * Get all the inflows for a DecisionOperation[equal], which are

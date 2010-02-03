@@ -10,6 +10,7 @@
  
 require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+require("update_client_cache.php");
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 
@@ -27,5 +28,6 @@ $function_name();
 
 // output any instructions
 echo "ok";
+echo_necessary_update_callbacks();
 
 «ENDDEFINE»

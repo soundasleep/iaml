@@ -310,26 +310,38 @@
 		
 	«ENDREM»
 	«IF !php && model::DomainObjectInstance.isInstance(outEdges.typeSelect(model::wires::RunInstanceWire).first().to.eContainer)»
-		// function call_remote_event(container, operation_name, arg0, arg1, function_queue = false) {
-		// TODO not sure if this old function_queue is still being used. it doesn't look like it is.
-		var old_function_queue_«safeName()» = function_queue;
+
 		var function_queue = function(response) {
 		 	if (response == "ok") {
 				«REM»continue expanding following operations (if any)«ENDREM»
 				«FOREACH getPassFlows() AS e-»
 					«EXPAND addStack(start, php) FOR e»
 				«ENDFOREACH»
-				old_function_queue_«safeName()»();
 		 	} else {
 				«REM»continue expanding following operations (if any)«ENDREM»
 				«FOREACH getFailFlows() AS e-»
 					«EXPAND addStack(start, php) FOR e»
 				«ENDFOREACH»
-				old_function_queue_«safeName()»();
 			}
 		};
-		function_queue_queued = true;
-		«EXPAND OperationCall::callRemoteOperation(php, false, container) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
+		
+		«FOREACH outEdges.typeSelect(model::wires::RunInstanceWire) AS run»
+			«IF model::PrimitiveOperation.isInstance(run.to) && ((model::PrimitiveOperation) run.to).name == "exists?"»
+				/**
+				 * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (usually 'exists?') 
+				 * and we are in a condition, we can't wait for an async result. In this case, we use
+				 * cached operation results (stored in Javascript) which can be updated through
+				 * callbacks, etc.
+				 */
+				if (cached_result_«safeName(run.to)»()) {
+					function_queue("ok");
+				} else {
+					function_queue("not ok");
+				}
+			«ELSE»
+				«EXPAND OperationCall::callRemoteOperation(php, false, container) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»
+			«ENDIF»
+		«ENDFOREACH»
 	«ELSE»
 		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
 		«EXPAND OperationCall::callOperation(php, false, container) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)-»

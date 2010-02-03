@@ -411,6 +411,16 @@ List[model::components::Gate] getPageGates(emf::EObject this) :
 getResumeTargets(model::components::Gate this) :
 	eContainer.eContents.typeSelect(model::visual::Page);
 
+/**
+ * Get all operations which the server needs to keep track of, and 
+ * the client needs to be updated.
+ * <strong>All of these operations need to be consequence-free.</strong>
+ */
+List[model::Operation] getClientSideCacheOperations(model::InternetApplication this) :
+	eAllContents.typeSelect(model::PrimitiveOperation)
+		.select(o | model::DomainObjectInstance.isInstance(o.eContainer))
+		.select(o | o.name == "exists?");
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

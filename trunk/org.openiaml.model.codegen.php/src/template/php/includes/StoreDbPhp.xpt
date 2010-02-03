@@ -10,6 +10,7 @@
  
 require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+require("update_client_cache.php");
 
 require("create_database.php");	// init db if necessary
 require("properties_file.php");	// properties loading code
@@ -104,6 +105,7 @@ log_message("store_db.php: adding attribute_id=$attribute_id, arg0=$arg0 into db
 
 log_message("done");
 echo "ok";
+echo_necessary_update_callbacks();
 
 «ENDDEFINE»
 

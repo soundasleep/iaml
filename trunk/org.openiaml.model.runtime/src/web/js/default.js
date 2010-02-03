@@ -80,8 +80,10 @@ function store_event(page_id, event_name, arg0) {
 /**
  * We refactor the queued functionality so that _any_ remote call
  * will be queued up properly.
+ *
+ * Update 0.4.2: will <em>always</em> execute instructions
  */
-function execute_queued_url(url, counter, function_queue, allow_instructions) {
+function execute_queued_url(url, counter, function_queue) {
 	store_event_function = function() {
 		counterIncrement(counter);
 		debug("creating ajax request to url: " + url);
@@ -104,7 +106,7 @@ function execute_queued_url(url, counter, function_queue, allow_instructions) {
 		      	}
 		      	
 		      	// are there any instructions in here?
-		      	if (allow_instructions) {
+		      	if (true /* 0.4.2: always allow instructions */ || allow_instructions) {
 		      		debug('executing instructions');
 		      		var inst_list = response.split("\n");
 		      		for (var i = 0; i < inst_list.length; i++) {
@@ -250,60 +252,60 @@ function next_store_event() {
 /* save directly to database (only one attribute) */
 function store_db(attribute_id, arg0) {
 	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
-	execute_queued_url(url, 'store_db', false, false);
+	execute_queued_url(url, 'store_db', false);
 }
 
 /* save a session variable (only one attribute) */
 function set_session(id, arg0, function_queue) {
 	var url = 'set_session.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
-	execute_queued_url(url, 'set_session', function_queue, false);
+	execute_queued_url(url, 'set_session', function_queue);
 }
 
 /* save a server variable (only one attribute) */
 function set_application_value(id, arg0, function_queue) {
 	var url = 'set_application_value.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
-	execute_queued_url(url, 'set_application_value', function_queue, true /* allow instructions */);
+	execute_queued_url(url, 'set_application_value', function_queue);
 }
 
 /* save a domain instance variable */
 function set_domain_attribute(id, arg0, function_queue) {
 	var url = 'set_domain_attribute.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
-	execute_queued_url(url, 'set_domain_attribute', function_queue, false);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_new_domain_instance(id, function_queue) {
 	var url = 'new_domain_instance.php?id=' + escape(id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'new_domain_instance', function_queue, true /* allow instructions */);
+	execute_queued_url(url, 'new_domain_instance', function_queue);
 }
 
 function save_queued_store_domain_attribute(id, function_queue) {
 	var url = 'save_queued_attribute.php?id=' + escape(id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'queued_store_attribute', function_queue, true /* allow instructions */);
+	execute_queued_url(url, 'queued_store_attribute', function_queue);
 }
 
 function save_queued_store_domain_object(id, function_queue) {
 	var url = 'save_queued_store_domain_object.php?id=' + escape(id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'queued_store_object', function_queue, true /* allow instructions */);
+	execute_queued_url(url, 'queued_store_object', function_queue);
 }
 
 function queued_add_role(role_id, instance_id, function_queue) {
 	var url = 'add_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'set_domain_attribute', function_queue, true /* allow instructions */);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_add_permission(permission_id, instance_id, function_queue) {
 	var url = 'add_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'set_domain_attribute', function_queue, true /* allow instructions */);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_remove_role(role_id, instance_id, function_queue) {
 	var url = 'remove_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'set_domain_attribute', function_queue, true /* allow instructions */);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_remove_permission(permission_id, instance_id, function_queue) {
 	var url = 'remove_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
-	execute_queued_url(url, 'set_domain_attribute', function_queue, true /* allow instructions */);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 /* call a remote operation (only one attribute) */
@@ -313,7 +315,7 @@ function call_remote_event(container, operation_name, arg0, arg1, function_queue
 		+ '&operation_name=' + escape(operation_name)
 		+ '&arg0=' + escape(arg0)
 		+ '&arg1=' + escape(arg1);
-	execute_queued_url(url, 'remote_event', function_queue, false);
+	execute_queued_url(url, 'remote_event', function_queue);
 }
 
 var debug_message_saved = "";

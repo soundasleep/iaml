@@ -413,7 +413,7 @@ function get_sid() {
 function default_exception_handler($e) {
 	// no fail handler has caught me yet
 	$url = "exception.php?fail=" . urlencode($e->getMessage()) . "&type=" . urlencode(get_class($e)) . "&trace=" . urlencode($e->getTraceAsString());
-	log_message(print_r($e, true));
+	log_message("[exception] " . print_r($e, true));
 	log_message("[default exception handler] Redirecting to '$url' (fail)");
 	header("Location: $url");
 	die;

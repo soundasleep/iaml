@@ -6,6 +6,9 @@
  * A static script to view the PHP log.
  */
 «DEFINE viewLog FOR model::InternetApplication-»
+<?php 
+require("config.php");		// runtime library configuration 
+?>
 <html>
 <head>
 	<title>View PHP Log</title>
@@ -18,7 +21,24 @@
 		disabled-table.log td.sid { display: none; }
 		table.array { border: 1px solid #999; background: #eee; margin: 5px; }
 		a { color: #13a; }
+
+		#toggle_display {
+			position: absolute;
+			top: 1em;
+			right: 1em;
+			background: #abc;
+			width: 50%;
+			border: 1px solid #666;
+			padding: 2px;
+			margin: 0;
+		}
+		#toggle_display ul, #toggle_display li {
+			display: inline; border: 0; margin: 0; padding: 0;
+		}
+		#toggle_display a { background: #cde; cursor: pointer; }
+		#toggle_display a:hover { background: #edc; }
 	</style>
+	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
 </head>
 <a href="php.log">source</a>
 
@@ -63,6 +83,7 @@ function format_message($str) {
 $log = file("php.log");
 
 $found_sids = array();
+$found_keys = array();
 for ($i = 0; $i < count($log); $i++) {
   $line = $log[$i];
 
@@ -86,6 +107,16 @@ for ($i = 0; $i < count($log); $i++) {
 	  }
   }
 
+	// does it start with a [key]?
+   	$key = false;
+   	if (preg_match("#^\[[ a-z]+\]#im", $message)) {
+		$key = substr($message, 1);
+		$pos = strpos($key, "]");
+		$message = substr($key, $pos + 1);
+		$key = substr($key, 0, $pos);
+		$keys[$key] = true;
+	}
+
   $formatted = format_message($message);
 
   // convert sid to a unique color
@@ -101,12 +132,12 @@ for ($i = 0; $i < count($log); $i++) {
   }
 
 ?>
-<tr class="<?php echo $sid; ?>">
+<tr class="<?php echo "$sid $key"; ?>">
 	<td style="background: <?php echo $sid_color; ?>" class="date"><?php echo $date; ?></td>
 	<td style="background: <?php echo $sid_color; ?>" class="time"><?php echo $time; ?></td>
 	<td style="background: <?php echo $sid_color; ?>" class="rid"><?php echo $rid; ?></td>
 	<td style="background: <?php echo $sid_color; ?>" class="sid"><?php echo $sid; ?></td>
-	<td style="background: <?php echo $sid_color; ?>" class="message"><?php echo $formatted; ?></td>
+	<td style="background: <?php echo $sid_color; ?>" class="message"><b><?php echo $key; ?></b> <?php echo $formatted; ?></td>
 </tr>
 <?php
 
@@ -114,4 +145,20 @@ for ($i = 0; $i < count($log); $i++) {
 
 ?>
 </table>
+
+<script language="Javascript" type="application/javascript">
+function toggle_display(key) {
+	var args = document.getElementsByClassName(key);
+	for (var i = 0; i < args.length; i++) {
+		args[i].style.display = !(args[i].style.display == "none") ? "none" : "";
+	}
+}
+</script>
+
+<ul id="toggle_display">
+<?php
+foreach ($keys as $key => $found) { ?>
+	<li><a onClick="toggle_display('<?php echo $key; ?>')"><?php echo $key; ?></li>
+<?php } ?>
+</ul>
 «ENDDEFINE»

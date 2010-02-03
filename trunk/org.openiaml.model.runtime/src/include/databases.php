@@ -36,8 +36,8 @@ class DatabaseQuery {
 	 */
 	public function fetchFirst($query, $args) {
 		
-		log_message("[query] $query");
-		log_message("[args] " . $this->debugString($args));
+		log_message("[database query] $query");
+		log_message("[database args] " . $this->debugString($args));
 
 		$rs = $this->db->prepare($query) 
 			or $this->throwDbError($this->db, "Could not prepare fetchFirst query '$query'", $args);
@@ -67,8 +67,8 @@ class DatabaseQuery {
 	 */
 	public function fetch($query, $args) {
 		
-		log_message("[query] $query");
-		log_message("[args] " . $this->debugString($args));
+		log_message("[database query] $query");
+		log_message("[database args] " . $this->debugString($args));
 		
 		$rs = $this->db->prepare($query) 
 			or $this->throwDbError($this->db, "Could not prepare fetch query '$query'", $args);
@@ -94,8 +94,8 @@ class DatabaseQuery {
 	 */
 	public function execute($query, $args) {
 		
-		log_message("[query] $query");
-		log_message("[args] " . $this->debugString($args));
+		log_message("[database query] $query");
+		log_message("[database args] " . $this->debugString($args));
 		
 		$rs = $this->db->prepare($query) 
 			or $this->throwDbError($this->db, "Could not prepare single query '$query'", $args);
@@ -142,7 +142,7 @@ class DatabaseQuery {
  * none can be found.
  */
 function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args) {
-	log_message("Evaluate select wire: source_id = $source_id, source_class = $source_class, query = $query"); 
+	log_message("[select wire] Evaluate select wire: source_id = $source_id, source_class = $source_class, query = $query"); 
 
 	// get all joins
 	global $compose_domain_joins_done_already;
@@ -153,7 +153,7 @@ function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args
 		. implode(" ", $joins)
 		. " WHERE $query";
 	
-	log_message("Evaluate select wire: Composed query: " . preg_replace("/[ \r\n\t]+/im", " ", $joined_query));
+	log_message("[select wire] Evaluate select wire: Composed query: " . preg_replace("/[ \r\n\t]+/im", " ", $joined_query));
 		
 	$db_query = new DatabaseQuery($db_name);
 	$row = $db_query->fetchFirst($joined_query, $args);

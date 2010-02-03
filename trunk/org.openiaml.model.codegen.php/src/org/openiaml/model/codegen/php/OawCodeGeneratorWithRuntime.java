@@ -7,13 +7,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.runtime.IFileCopyListener;
 import org.openiaml.model.runtime.IamlRuntimeLibrariesPlugin;
 
@@ -79,7 +79,8 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator implements IFi
 	}
 	
 	@Override
-	public IStatus generateCode(IFile file, IProgressMonitor monitor,
+	public IStatus generateCode(EObject model, IProject project, 
+			IProgressMonitor monitor,
 			Map<String, String> runtimeProperties) {
 		
 		// prepare
@@ -89,9 +90,9 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator implements IFi
 			return Status.CANCEL_STATUS;
 
 		// generate like normal
-		IStatus result = super.generateCode(file, new SubProgressMonitor(monitor, 90), runtimeProperties);
+		IStatus result = super.generateCode(model, project, new SubProgressMonitor(monitor, 90), runtimeProperties);
 		
-		return postpare(monitor, runtimeProperties, file.getProject(), result);
+		return postpare(monitor, runtimeProperties, project, result);
 		
 	}
 

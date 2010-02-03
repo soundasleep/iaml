@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -38,89 +37,7 @@ import ca.ecliptical.emf.xpath.EMFXPath;
 public class OawCodeGenerator implements ICodeGenerator, ICodeGeneratorInMemory {
 	
 	public static final String PLUGIN_ID = "org.openiaml.model.codegen.php"; 
-	
-	/**
-	 * Generate code for a given model file into a given output directory.
-	 * Does NOT deal with inference.
-	 * 
-	 */
-	public IStatus generateCode(IFile file, IProgressMonitor monitor, 
-			Map<String,String> runtimeProperties) {
 		
-		// reset exception-key map
-		resetKeyToExceptionMap();
-		
-		// we need to guess how many files this method will create,
-		// so we can try and have some sort of progress monitor.
-		int filesToCreate = guessNumberOfFilesToCreate(file);
-		
-		monitor.beginTask("Generating code from '" + file.getName() + "'", filesToCreate * 2);
-		
-		/*
-		 * We have to do some magic to enable OAW logging to go through
-		 * our own class. We have to provide this information to 
-		 * commons.logging directly.
-		 * 
-		 * Based on http://oaw-forum.itemis.de/forum/viewtopic.php?forum=1&showtopic=1486 (german)
-		 */
-		ClassLoader oldcl = Thread.currentThread().getContextClassLoader();
-		
-		try {
-			// to enable custom logging
-			Thread.currentThread().setContextClassLoader(OawCodeGenerator.class.getClassLoader());
-			CustomOAWLog.registerToLogFactory();
-			
-			// notify the logger of our monitor, so we can keep track
-			// of created files
-			CustomOAWLog.setMonitor(monitor);
-			
-			String wfFile = "src/workflow/runtime.oaw";
-			Map<String,String> properties = new HashMap<String,String>();
-			properties.put("model", file.getFullPath().toString());
-			properties.put("src-gen", file.getProject().getLocation().toString());	// have to get absolute filename for output dir
-			properties.put("config_runtime", runtimeProperties.get("config_runtime"));
-			properties.put("config_web", runtimeProperties.get("config_web"));
-			properties.put("debug", Boolean.toString(Boolean.parseBoolean(runtimeProperties.get("debug"))));
-			
-			Map<String,Object> slotContents = new HashMap<String,Object>();
-
-			if (monitor.isCanceled())
-				return Status.CANCEL_STATUS;
-
-			try {
-				IACleanerBeautifier.setMonitor(monitor);
-				executeWorkflow(wfFile, monitor, properties, slotContents);
-			} catch (OperationCanceledException e) {
-				// monitor was cancelled; OK
-			} finally {
-				IACleanerBeautifier.setMonitor(null);
-			}
-
-			if (monitor.isCanceled())
-				return Status.CANCEL_STATUS;
-
-			// refresh output folder
-			try {
-				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, filesToCreate));
-			} catch (CoreException e) {
-				return new Status(Status.WARNING, PLUGIN_ID, "Could not refresh local project", e);
-			}
-			
-			if (CustomOAWLog.hasErrors()) {
-				return CustomOAWLog.getErrors();
-			}
-			return Status.OK_STATUS;
-		} finally {
-			// reset the classloader/log
-			Thread.currentThread().setContextClassLoader(oldcl);
-			CustomOAWLog.unregisterFromLogFactory();
-			
-			// the monitor is done
-			monitor.done();
-		}
-			
-	}
-	
 	/**
 	 * <p>Execute the workflow in the given workflow file.
 	 * By default, this creates a new {@link WorkflowRunner} and then
@@ -139,24 +56,13 @@ public class OawCodeGenerator implements ICodeGenerator, ICodeGeneratorInMemory 
 				new ProgressMonitorAdapter(monitor), properties, slotContents);
 		
 	}
-	
-	/**
-	 * Guess how many files we are going to create. 
-	 * Unfortunately without loading the IFile directly I'm not
-	 * sure this can be reliably determined, so we will just
-	 * guess '100'.
-	 * 
-	 * @param file
-	 * @return
-	 */
-	protected int guessNumberOfFilesToCreate(IFile file) {
-		return 100;
-	}
 
 	/**
-	 * Returns '100'.
+	 * Guess how many files we are going to create.
+	 * We will just guess '100'.
 	 * 
-	 * @see #guessNumberOfFilesToCreate(IFile)
+	 * <p>TODO perhaps we could estimate the number of files from the size of the already-loaded model? 
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -279,9 +185,7 @@ public class OawCodeGenerator implements ICodeGenerator, ICodeGeneratorInMemory 
 		throw new RuntimeException("Cannot resolve Dynamic Set for set query: " + set.getQuery() + " (set=" + set + ")");
 	}
 
-	/**
-	 * TODO this method is a direct copy of {@link #generateCode(IFile, IProgressMonitor, Map)}. 
-	 * 
+	/*
 	 * @see org.openiaml.model.codegen.ICodeGeneratorInMemory#generateCode(org.eclipse.emf.ecore.EObject, org.eclipse.core.runtime.IProgressMonitor, java.util.Map)
 	 */
 	@Override
